@@ -1,0 +1,429 @@
+fr ¦ hr ¦ sl
+=invité ¦ gost|gosta|gostiju ¦ gost|gosta|gostje|gostov
+=descendant vivant ¦ živući potomak|živuća potomka|živućih potomaka ¦ živ potomec|živa potomca|živi potomci|živih potomcev
+=conjoint ¦ bračni drug|bračna druga|bračnih drugova ¦ zakonec|zakonca|zakonci|zakoncev
+=fiche confidentielle ¦ povjerljivi zapis|povjerljiva zapisa|povjerljivih zapisa ¦ zaupni zapis|zaupna zapisa|zaupni zapisi|zaupnih zapisov
+=invité trouvé ¦ pronađeni gost|pronađena gosta|pronađenih gostiju ¦ najden gost|najdena gosta|najdeni gostje|najdenih gostov
+=nouvel invité ¦ novi gost|nova gosta|novih gostiju ¦ nov gost|nova gosta|novi gostje|novih gostov
+=invitée ¦ pozvana|pozvane|pozvanih ¦ povabljena|povabljeni|povabljene|povabljenih
+=invité déjà là ¦ gost je već tu|gosta su već tu|gostiju je već tu ¦ gost je že tu|gosta sta že tu|gostje so že tu|gostov je že tu
+=colonne ¦ stupac|stupca|stupaca ¦ stolpec|stolpca|stolpci|stolpcev
+=invité ajouté ¦ dodani gost|dodana gosta|dodanih gostiju ¦ dodan gost|dodana gosta|dodani gostje|dodanih gostov
+=invité complété ¦ dopunjeni gost|dopunjena gosta|dopunjenih gostiju ¦ dopolnjen gost|dopolnjena gosta|dopolnjeni gostje|dopolnjenih gostov
+=foyer ¦ kućanstvo|kućanstva|kućanstava ¦ gospodinjstvo|gospodinjstvi|gospodinjstva|gospodinjstev
+=avec adresse ¦ s adresom|s adresom|s adresom ¦ z naslovom|z naslovom|z naslovom|z naslovom
+=avec courriel ¦ s e-poštom|s e-poštom|s e-poštom ¦ z e-pošto|z e-pošto|z e-pošto|z e-pošto
+=badge ¦ bedž|bedža|bedževa ¦ priponka|priponki|priponke|priponk
+=présent ¦ prisutan|prisutna|prisutnih ¦ prisoten|prisotna|prisotni|prisotnih
+=personne attendue ¦ očekivana osoba|očekivane osobe|očekivanih osoba ¦ pričakovana oseba|pričakovani osebi|pričakovane osebe|pričakovanih oseb
+=table ¦ stol|stola|stolova ¦ miza|mizi|mize|miz
+=personne placée ¦ smještena osoba|smještene osobe|smještenih osoba ¦ posedena oseba|posedeni osebi|posedene osebe|posedenih oseb
+=photo ajoutée ¦ dodana fotografija|dodane fotografije|dodanih fotografija ¦ dodana fotografija|dodani fotografiji|dodane fotografije|dodanih fotografij
+=personne présente ¦ prisutna osoba|prisutne osobe|prisutnih osoba ¦ prisotna oseba|prisotni osebi|prisotne osebe|prisotnih oseb
+Sans réponse ¦ Bez odgovora ¦ Brez odgovora
+👥 Invités ¦ 👥 Gosti ¦ 👥 Gostje
+✉️ Invitations ¦ ✉️ Pozivnice ¦ ✉️ Vabila
+🏷 Badges ¦ 🏷 Bedževi ¦ 🏷 Priponke
+🌳 Grand arbre ¦ 🌳 Veliko stablo ¦ 🌳 Veliko drevo
+📅 Jour J ¦ 📅 Veliki dan ¦ 📅 Veliki dan
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Okupi potomke jednog pretka: gosti, pozivnice, bedževi, veliko stablo, veliki dan. ¦ Zberi potomce enega prednika: gostje, vabila, priponke, veliko drevo, veliki dan.
+＋ Nouvelle cousinade ¦ ＋ Novo obiteljsko okupljanje ¦ ＋ Novo družinsko srečanje
+Nouvelle cousinade ¦ Novo obiteljsko okupljanje ¦ Novo družinsko srečanje
+Lecture des cousinades… ¦ Učitavanje obiteljskih okupljanja… ¦ Nalaganje družinskih srečanj…
+Aucune cousinade pour l’instant ¦ Još nema obiteljskih okupljanja ¦ Še ni družinskih srečanj
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Odaberi pretka (ili par): aplikacija pronalazi njegove živuće potomke, granu po granu, i priprema popis gostiju. ¦ Izberi prednika (ali par): aplikacija poišče njegove žive potomce, vejo za vejo, in pripravi seznam gostov.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Traži… (npr. Martin, 2026, Tulle) ¦ Išči… (npr. Martin, 2026, Tulle)
+{n} oui ¦ {n} da ¦ {n} da
+{n} sans réponse ¦ {n} bez odgovora ¦ {n} brez odgovora
+Aucune cousinade ne correspond. ¦ Nijedno obiteljsko okupljanje ne odgovara. ¦ Nobeno družinsko srečanje se ne ujema.
+Renommer la cousinade ¦ Preimenuj obiteljsko okupljanje ¦ Preimenuj družinsko srečanje
+Cousinade renommée. ¦ Obiteljsko okupljanje preimenovano. ¦ Družinsko srečanje preimenovano.
+Cousinade supprimée : « {name} » ¦ Obiteljsko okupljanje izbrisano: „{name}” ¦ Družinsko srečanje izbrisano: »{name}«
+Modifier la cousinade ¦ Uredi obiteljsko okupljanje ¦ Uredi družinsko srečanje
+L’ancêtre dont on réunit les descendants ¦ Predak čije potomke okupljamo ¦ Prednik, čigar potomce zbiramo
+Avec son conjoint (le couple) — facultatif ¦ S bračnim drugom (par) — neobavezno ¦ Z zakoncem (par) — neobvezno
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Samo djeca para. Prazno: sva djeca pretka. ¦ Samo otroci para. Prazno: vsi otroci prednika.
+Nom de la cousinade ¦ Naziv obiteljskog okupljanja ¦ Ime družinskega srečanja
+Personne de référence pour les liens de parenté ¦ Referentna osoba za rodbinske veze ¦ Referenčna oseba za sorodstvene vezi
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Svaki gost dobit će svoju vezu s njom („bratić u drugom koljenu od …”). Najčešće ti. ¦ Vsak gost bo dobil svojo vez z njo (»bratranec v drugem kolenu od …«). Najpogosteje ti.
+Inviter aussi les conjoints des descendants ¦ Pozovi i bračne drugove potomaka ¦ Povabi tudi zakonce potomcev
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Povjerljivi zapisi nikad se ne prikazuju. Adrese živućih ostaju u ovom projektu. ¦ 🔒 Zaupni zapisi se nikoli ne prikažejo. Naslovi živih ostanejo v tem projektu.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Odaberi pretka: aplikacija traži njegove živuće potomke. ¦ Izberi prednika: aplikacija poišče njegove žive potomce.
+Recherche des descendants vivants… ¦ Traženje živućih potomaka… ¦ Iskanje živih potomcev…
+{who} dans {branches}, et {spouses}. ¦ {who} ({branches}), i {spouses}. ¦ {who} ({branches}) in {spouses}.
+{who} dans {branches}. ¦ {who} ({branches}). ¦ {who} ({branches}).
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} bez zabilježene smrti, rođeno prije manje od 100 godina: označeno „živ?”. ¦ {n} brez zapisane smrti, rojeno pred manj kot 100 leti: označeno »živ?«.
+{n} laissées de côté. ¦ Izostavljeno: {n}. ¦ Izpuščeno: {n}.
+{n} laissée de côté. ¦ Izostavljeno: {n}. ¦ Izpuščeno: {n}.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Odaberi pretka čije potomke okupljamo. ¦ Izberi prednika, čigar potomce zbiramo.
+Cousinade créée : {n}. ¦ Obiteljsko okupljanje stvoreno: {n}. ¦ Družinsko srečanje ustvarjeno: {n}.
+Cousinade enregistrée : {n}. ¦ Obiteljsko okupljanje spremljeno: {n}. ¦ Družinsko srečanje shranjeno: {n}.
+Cousinade enregistrée. ¦ Obiteljsko okupljanje spremljeno. ¦ Družinsko srečanje shranjeno.
+Lecture de la cousinade… ¦ Učitavanje obiteljskog okupljanja… ¦ Nalaganje družinskega srečanja…
+← Toutes les cousinades ¦ ← Sva obiteljska okupljanja ¦ ← Vsa družinska srečanja
+↻ Chercher les nouveaux descendants ¦ ↻ Traži nove potomke ¦ ↻ Poišči nove potomce
+Chercher les nouveaux descendants ¦ Traži nove potomke ¦ Poišči nove potomce
+↗ Fiche de l’ancêtre ¦ ↗ Zapis pretka ¦ ↗ Zapis prednika
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ Više se ne prikazuje: {n} — zapis je postao povjerljiv (ili je izbrisan). ¦ Ne prikazuje se več: {n} — zapis je postal zaupen (ali je bil izbrisan).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ Više se ne prikazuje: {n} — zapis je postao povjerljiv (ili je izbrisan). ¦ Ne prikazuje se več: {n} — zapis je postal zaupen (ali je bil izbrisan).
+la personne de référence ¦ referentna osoba ¦ referenčna oseba
+Liens de parenté avec ¦ Rodbinske veze s ¦ Sorodstvene vezi z
+＋ Ajouter un invité ¦ ＋ Dodaj gosta ¦ ＋ Dodaj gosta
+⤒ Importer une liste… ¦ ⤒ Uvezi popis… ¦ ⤒ Uvozi seznam…
+Aucun invité pour l’instant ¦ Još nema gostiju ¦ Še ni gostov
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Nije pronađen nijedan živući potomak. Dodaj goste ručno, uvezi popis ili dopuni stablo pa „↻ Traži nove potomke”. ¦ Ni najdenega nobenega živega potomca. Dodaj goste ročno, uvozi seznam ali dopolni drevo in nato »↻ Poišči nove potomce«.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Traži… (npr. Martin, Brive, vegetarijanac) ¦ Išči… (npr. Martin, Brive, vegetarijanec)
+Invités (cochés) ¦ Pozvani (označeni) ¦ Povabljeni (označeni)
+Pas invités ¦ Nisu pozvani ¦ Niso povabljeni
+Seulement « vivant ? » ¦ Samo „živ?” ¦ Samo »živ?«
+Par branche et par foyer ¦ Po grani i kućanstvu ¦ Po veji in gospodinjstvu
+Par génération ¦ Po generaciji ¦ Po rodu
+Par réponse ¦ Po odgovoru ¦ Po odgovoru
+{n} · {inv} en tout ¦ {n} · ukupno {inv} ¦ {n} · skupaj {inv}
+Aucun invité ne correspond. ¦ Nijedan gost ne odgovara. ¦ Noben gost se ne ujema.
+Pas invité ¦ Nije pozvan ¦ Ni povabljen
+Invité (coché) ¦ Pozvan (označeno) ¦ Povabljen (označeno)
+Régime ¦ Prehrana ¦ Prehrana
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Ništa nije zabilježeno o smrti, rođena prije manje od 100 godina: provjeri prije pozivanja ¦ O smrti ni zapisano nič, rojena pred manj kot 100 leti: preveri pred vabljenjem
+Sans fiche ¦ Bez zapisa ¦ Brez zapisa
+Pas d’adresse ¦ Nema adrese ¦ Ni naslova
+Nombre de personnes ¦ Broj osoba ¦ Število oseb
+{name} est invitée. ¦ {name} je pozvana. ¦ {name} je povabljena.
+{name} est invité. ¦ {name} je pozvan. ¦ {name} je povabljen.
+{name} n’est plus invitée. ¦ {name} više nije pozvana. ¦ {name} ni več povabljena.
+{name} n’est plus invité. ¦ {name} više nije pozvan. ¦ {name} ni več povabljen.
+Réponse de {name} : {answer}. ¦ Odgovor ({name}): {answer}. ¦ Odgovor ({name}): {answer}.
+Inviter les {n} affichées ¦ Pozovi prikazane ({n}) ¦ Povabi prikazane ({n})
+{n} invitées. ¦ Pozvano: {n}. ¦ Povabljeno: {n}.
+{n} invitée. ¦ Pozvano: {n}. ¦ Povabljeno: {n}.
+Ne plus inviter les personnes affichées ¦ Više ne pozivaj prikazane osobe ¦ Ne vabi več prikazanih oseb
+{n} retirées des invitations. ¦ Uklonjeno iz pozivnica: {n}. ¦ Odstranjeno iz vabil: {n}.
+{n} retirée des invitations. ¦ Uklonjeno iz pozivnica: {n}. ¦ Odstranjeno iz vabil: {n}.
+Tableau des invités (CSV)… ¦ Tablica gostiju (CSV)… ¦ Tabela gostov (CSV)…
+Imprimer la liste des invités… ¦ Ispiši popis gostiju… ¦ Natisni seznam gostov…
+Écrire un courriel ¦ Napiši e-poruku ¦ Napiši e-pošto
+Retirer de la liste ¦ Ukloni s popisa ¦ Odstrani s seznama
+🗑 Retirer de la liste ¦ 🗑 Ukloni s popisa ¦ 🗑 Odstrani s seznama
+{name} retirée de la liste. ¦ {name} uklonjena s popisa. ¦ {name} odstranjena s seznama.
+{name} retiré de la liste. ¦ {name} uklonjen s popisa. ¦ {name} odstranjen s seznama.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Nema novih živućih potomaka: popis je ažuran. ¦ Ni novih živih potomcev: seznam je posodobljen.
+{n} ajoutés. ¦ Dodano: {n}. ¦ Dodano: {n}.
+{n} ajouté. ¦ Dodano: {n}. ¦ Dodano: {n}.
+Son propre foyer ¦ Vlastito kućanstvo ¦ Lastno gospodinjstvo
+Garder son foyer ¦ Zadrži kućanstvo ¦ Obdrži gospodinjstvo
+🎉 COUSINADE · INVITÉ ¦ 🎉 OBITELJSKO OKUPLJANJE · GOST ¦ 🎉 DRUŽINSKO SREČANJE · GOST
+🎉 COUSINADE ¦ 🎉 OBITELJSKO OKUPLJANJE ¦ 🎉 DRUŽINSKO SREČANJE
+Nouvel invité ¦ Novi gost ¦ Nov gost
+Une fiche de ta généalogie (facultatif) ¦ Zapis iz tvojeg rodoslovlja (neobavezno) ¦ Zapis iz tvojega rodoslovja (neobvezno)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Inače napiši ime i prezime ispod. ¦ Sicer spodaj napiši ime in priimek.
+Foyer (une invitation par foyer) ¦ Kućanstvo (jedna pozivnica po kućanstvu) ¦ Gospodinjstvo (eno vabilo na gospodinjstvo)
+12 rue des Écoles ¦ 12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Prehrana, alergije ¦ Prehrana, alergije
+végétarien, sans gluten… ¦ vegetarijanac, bez glutena… ¦ vegetarijanec, brez glutena…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Stavi adresu, e-poštu i telefon i u imenik živućih (njegov zapis) ¦ Shrani naslov, e-pošto in telefon tudi v imenik živih (njegov zapis)
+Décoché : seulement dans cette cousinade. ¦ Neoznačeno: samo u ovom obiteljskom okupljanju. ¦ Neoznačeno: samo v tem družinskem srečanju.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Napiši barem ime ili prezime (ili odaberi zapis). ¦ Napiši vsaj ime ali priimek (ali izberi zapis).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Ova e-adresa nije ispravnog oblika (primjer: ime.prezime@primjer.hr). ¦ Ta e-poštni naslov nima pravilne oblike (primer: ime.priimek@primer.si).
+Invité ajouté. ¦ Gost dodan. ¦ Gost dodan.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Spremljeno, i u imenik živućih. ¦ Shranjeno, tudi v imenik živih.
+Le lecteur de tableaux n’est pas chargé. ¦ Čitač tablica nije učitan. ¦ Bralnik tabel ni naložen.
+Importer une liste d’invités ¦ Uvezi popis gostiju ¦ Uvozi seznam gostov
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Tablica s retkom naslova: Ime, Prezime, E-pošta, Telefon, Adresa, Poštanski broj, Grad, Odgovor (da / ne / možda), Broj, Prehrana, Bilješka. ¦ Tabela z vrstico naslovov: Ime, Priimek, E-pošta, Telefon, Naslov, Poštna številka, Kraj, Odgovor (da / ne / morda), Število, Prehrana, Opomba.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Ne nalazim ni ime ni prezime: prvi redak mora sadržavati naslove stupaca (Ime, Prezime, E-pošta…). ¦ Ne najdem ne imena ne priimka: prva vrstica mora vsebovati naslove stolpcev (Ime, Priimek, E-pošta…).
+{n} (coordonnées et réponse complétées) ¦ {n} (kontakti i odgovor dopunjeni) ¦ {n} (kontakti in odgovor dopolnjeni)
+{n} non reconnues : laissées de côté. ¦ Nije prepoznato: {n}, izostavljeno. ¦ Ni prepoznano: {n}, izpuščeno.
+{n} non reconnue : laissée de côté. ¦ Nije prepoznato: {n}, izostavljeno. ¦ Ni prepoznano: {n}, izpuščeno.
+⤓ Exporter le tableau des invités ¦ ⤓ Izvezi tablicu gostiju ¦ ⤓ Izvozi tabelo gostov
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ CSV datoteka (proračunska tablica) s gostima, njihovom granom, rodbinskom vezom i odgovorom. ¦ Datoteka CSV (preglednica) z gosti, njihovo vejo, sorodstveno vezjo in odgovorom.
+Avec les adresses, courriels et téléphones ¦ S adresama, e-adresama i telefonima ¦ Z naslovi, e-poštnimi naslovi in telefoni
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 To su podaci o živućim osobama: dijeli ovu datoteku samo s organizatorima. ¦ 🔒 To so podatki o živih osebah: to datoteko deli samo z organizatorji.
+Seulement les invités cochés ¦ Samo označeni gosti ¦ Samo označeni gostje
+Lien avec l’ancêtre ¦ Veza s pretkom ¦ Vez s prednikom
+Lien avec la référence ¦ Veza s referentnom osobom ¦ Vez z referenčno osebo
+Tableau exporté, avec les coordonnées. ¦ Tablica izvezena, s kontaktima. ¦ Tabela izvožena, s kontakti.
+Tableau exporté, sans les coordonnées. ¦ Tablica izvezena, bez kontakata. ¦ Tabela izvožena, brez kontaktov.
+Invités — {name} ¦ Gosti — {name} ¦ Gostje — {name}
+Liste des invités ¦ Popis gostiju ¦ Seznam gostov
+Les invités cochés ¦ Označeni gosti ¦ Označeni gostje
+Ceux qui viennent ¦ Oni koji dolaze ¦ Tisti, ki pridejo
+Avec les coordonnées ¦ S kontaktima ¦ S kontakti
+Le texte de l’invitation ¦ Tekst pozivnice ¦ Besedilo vabila
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Jedna pozivnica po kućanstvu. Ove se riječi zamjenjuju same: ¦ Eno vabilo na gospodinjstvo. Te besede se zamenjajo same:
+Répondre avant le ¦ Odgovori do ¦ Odgovori do
+Contact pour répondre ¦ Kontakt za odgovor ¦ Kontakt za odgovor
+Objet du courriel ¦ Predmet e-poruke ¦ Zadeva e-pošte
+🖨 Imprimer les invitations… ¦ 🖨 Ispiši pozivnice… ¦ 🖨 Natisni vabila…
+📝 Dans le traitement de texte ¦ 📝 U obradi teksta ¦ 📝 V urejanju besedil
+📁 Copie dans les médias ¦ 📁 Kopija u medijima ¦ 📁 Kopija v medijih
+{n} à inviter ¦ Za pozvati: {n} ¦ Za povabiti: {n}
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Jedna e-poruka svima (u skrivenoj kopiji) ¦ ✉️ Eno sporočilo vsem (v skriti kopiji)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Otvara se tvoj program za e-poštu s gotovim tekstom: aplikacija ništa ne šalje. ¦ Odpre se tvoj poštni program s pripravljenim besedilom: aplikacija ne pošlje ničesar.
+✉️ Courriel prêt ¦ ✉️ E-poruka spremna ¦ ✉️ Sporočilo pripravljeno
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Nijedan gost nije označen: označi goste na kartici „👥 Gosti”. ¦ Noben gost ni označen: označi goste na zavihku »👥 Gostje«.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Nema kućanstava za pozvati: najprije označi goste. ¦ Ni gospodinjstev za vabilo: najprej označi goste.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Adresa kućanstva gore desno (omotnica s prozorčićem) ¦ Naslov gospodinjstva zgoraj desno (kuverta z okencem)
+Le traitement de texte n’est pas chargé. ¦ Obrada teksta nije učitana. ¦ Urejanje besedil ni naloženo.
+Les faire-part ne sont pas chargés. ¦ Obavijesti nisu učitane. ¦ Obvestila niso naložena.
+Tous les descendants de {name} ¦ Svi potomci – {name} ¦ Vsi potomci – {name}
+Réponse avant le {date} ¦ Odgovor do {date} ¦ Odgovor do {date}
+Envoi vers les médias indisponible. ¦ Slanje u medije nije dostupno. ¦ Pošiljanje v medije ni na voljo.
+Une copie de l’invitation est rangée dans les médias. ¦ Kopija pozivnice spremljena je u medije. ¦ Kopija vabila je shranjena v medijih.
+Copie non rangée dans les médias : {err} ¦ Kopija nije spremljena u medije: {err} ¦ Kopija ni shranjena v medije: {err}
+Le lien écrit sous le nom ¦ Veza napisana ispod imena ¦ Vez, zapisana pod imenom
+Avec l’ancêtre ¦ S pretkom ¦ S prednikom
+Avec la référence ¦ S referentnom osobom ¦ Z referenčno osebo
+Pour qui ¦ Za koga ¦ Za koga
+Invités cochés ¦ Označeni gosti ¦ Označeni gostje
+Qui viennent ¦ Koji dolaze ¦ Ki pridejo
+Présents ¦ Prisutni ¦ Prisotni
+Par page A4 ¦ Po stranici A4 ¦ Na stran A4
+Petite photo (si la fiche en a une) ¦ Mala fotografija (ako je zapis ima) ¦ Majhna fotografija (če jo zapis ima)
+QR code (nom, branche et lien, lu par un téléphone) ¦ QR kod (ime, grana i veza, čita ga telefon) ¦ QR koda (ime, veja in vez, prebere jo telefon)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Svaka grana ima svoju boju (promijeni je na kartici „📊 Brojke”). ¦ Vsaka veja ima svojo barvo (spremeniš jo na zavihku »📊 Številke«).
+Personne à qui faire un badge. ¦ Nema nikoga za koga bi se napravio bedž. ¦ Ni nikogar, za katerega bi naredili priponko.
+L’arbre décoratif n’est pas chargé. ¦ Ukrasno stablo nije učitano. ¦ Okrasno drevo ni naloženo.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Svi potomci – {name}, u velikom formatu, jedna boja po grani, za izložiti na dan obiteljskog okupljanja. Crtež se zatim otvara da sve doradiš, pa „⤓ Izvezi” (PDF za tiskaru, s rubom za obrezivanje i oznakama reza, PNG, SVG…). ¦ Vsi potomci – {name}, v velikem formatu, ena barva na vejo, za razstavo na dan družinskega srečanja. Risba se nato odpre, da vse dodelaš, nato »⤓ Izvozi« (PDF za tiskarno, z dodatkom za porezavo in oznakami za rez, PNG, SVG…).
+l’ancêtre ¦ predak ¦ prednik
+Les conjoints sous chaque nom ¦ Bračni drugovi ispod svakog imena ¦ Zakonci pod vsakim imenom
+Une place pour coller les photos du jour (à côté des vivants) ¦ Mjesto za lijepljenje fotografija s okupljanja (pokraj živućih) ¦ Prostor za lepljenje fotografij s srečanja (ob živih)
+🌳 Fabriquer le grand arbre ¦ 🌳 Napravi veliko stablo ¦ 🌳 Naredi veliko drevo
+Fabrication du grand arbre… ¦ Izrada velikog stabla… ¦ Izdelava velikega drevesa…
+Aucune descendance pour cet ancêtre. ¦ Ovaj predak nema potomaka. ¦ Ta prednik nima potomcev.
+Cet ancêtre est confidentiel. ¦ Ovaj je predak povjerljiv. ¦ Ta prednik je zaupen.
+Photos du jour ¦ Fotografije s okupljanja ¦ Fotografije s srečanja
+✅ Présence ¦ ✅ Prisutnost ¦ ✅ Prisotnost
+{here} sur {n} ¦ {here} od {n} ¦ {here} od {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Ispiši popis prisutnih… ¦ 🖨 Natisni seznam prisotnih…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Još nitko nije rekao da: odgovori se bilježe u „👥 Gosti”. ¦ Še nihče ni rekel da: odgovori se zapisujejo v »👥 Gostje«.
+{name} est là. ¦ {name} je ovdje. ¦ {name} je tukaj.
+{name} n’est plus notée présente. ¦ {name} više nije označena kao prisutna. ¦ {name} ni več označena kot prisotna.
+{name} n’est plus noté présent. ¦ {name} više nije označen kao prisutan. ¦ {name} ni več označen kot prisoten.
+Présence — {name} ¦ Prisutnost — {name} ¦ Prisotnost — {name}
+{name} — présence ¦ {name} — prisutnost ¦ {name} — prisotnost
+Liste de présence ¦ Popis prisutnih ¦ Seznam prisotnih
+Places par table ¦ Mjesta po stolu ¦ Mest za mizo
+Compter aussi les « peut-être » ¦ Računaj i „možda” ¦ Upoštevaj tudi »morda«
+Les petites branches partagent une table ¦ Male grane dijele stol ¦ Majhne veje si delijo mizo
+✨ Faire le plan par branche ¦ ✨ Napravi raspored sjedenja po granama ¦ ✨ Naredi sedežni red po vejah
+🖨 Imprimer le plan… ¦ 🖨 Ispiši raspored sjedenja… ¦ 🖨 Natisni sedežni red…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Kućanstvo se nikad ne razdvaja. Promijeni stol osobe u njezinu polju; ↶ Poništi poništava raspored. ¦ Gospodinjstvo se nikoli ne razdeli. Mizo osebe spremeniš v njenem polju; ↶ Razveljavi razveljavi sedežni red.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Još nema rasporeda sjedenja: zabilježi odgovore, pa „✨ Napravi raspored sjedenja po granama”. ¦ Sedežnega reda še ni: zapiši odgovore, nato »✨ Naredi sedežni red po vejah«.
+{name} va à la table {no}. ¦ {name} ide za stol {no}. ¦ {name} gre za mizo {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Još nitko ne dolazi: najprije zabilježi odgovore „Da”. ¦ Še nihče ne pride: najprej zapiši odgovore »Da«.
+＋ Ajouter des photos… ¦ ＋ Dodaj fotografije… ¦ ＋ Dodaj fotografije…
+Retirer de l’album ¦ Ukloni iz albuma ¦ Odstrani iz albuma
+L’album est vide ¦ Album je prazan ¦ Album je prazen
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Fotografije s okupljanja: uvezi ih s računala ili ih odaberi u medijima. ¦ Fotografije s srečanja: uvozi jih z računalnika ali jih izberi med mediji.
+＋ Ajouter des photos ¦ ＋ Dodaj fotografije ¦ ＋ Dodaj fotografije
+Les photos de la cousinade ¦ Fotografije obiteljskog okupljanja ¦ Fotografije družinskega srečanja
+Ajouter à l’album ¦ Dodaj u album ¦ Dodaj v album
+{n} à l’album. ¦ U album: {n}. ¦ V album: {n}.
+Photo retirée de l’album (elle reste dans les médias). ¦ Fotografija uklonjena iz albuma (ostaje u medijima). ¦ Fotografija odstranjena iz albuma (ostane med mediji).
+invités ¦ gosti ¦ gostje
+oui ¦ da ¦ da
+peut-être ¦ možda ¦ morda
+non ¦ ne ¦ ne
+sans réponse ¦ bez odgovora ¦ brez odgovora
+personnes attendues ¦ očekivane osobe ¦ pričakovane osebe
+Par branche ¦ Po grani ¦ Po veji
+Invités ¦ Gosti ¦ Gostje
+Réponses ¦ Odgovori ¦ Odgovori
+Couleur de la branche {name} ¦ Boja grane {name} ¦ Barva veje {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} da, {maybe} možda, {no} ne, {wait} bez odgovora ¦ {yes} da, {maybe} morda, {no} ne, {wait} brez odgovora
+Régimes et allergies (de ceux qui viennent) ¦ Prehrana i alergije (onih koji dolaze) ¦ Prehrana in alergije (tistih, ki pridejo)
+Le jour J : {n}. ¦ Na veliki dan: {n}. ¦ Na veliki dan: {n}.
+Couleur de la branche enregistrée. ¦ Boja grane spremljena. ¦ Barva veje shranjena.
+Organiser une cousinade… ¦ Organiziraj obiteljsko okupljanje… ¦ Organiziraj družinsko srečanje…
+Descendants de {name} · {n} ¦ Potomci – {name} · {n} ¦ Potomci – {name} · {n}
+=passage dans les médias ¦ spominjanje u medijima|spominjanja u medijima|spominjanja u medijima ¦ omemba v medijih|omembi v medijih|omembe v medijih|omemb v medijih
+passages dans les médias ¦ spominjanja u medijima ¦ omembe v medijih
+1980 et après ¦ 1980. i kasnije ¦ 1980 in pozneje
+avant 1900 ¦ prije 1900. ¦ pred letom 1900
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Dodaj datoteku MP3, M4A, WAV, AIFF ili OGG na zapis, sustavnu pretragu, istragu… (ili je povuci ovamo) i pojavit će se ovdje. ¦ Dodaj datoteko MP3, M4A, WAV, AIFF ali OGG k zapisu, sistematičnemu iskanju, preiskavi… (ali jo povleci sem) in prikazala se bo tukaj.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Dodaj datoteku MP4, MOV ili WEBM na zapis, sustavnu pretragu, istragu… (ili je povuci ovamo) i pojavit će se ovdje. ¦ Dodaj datoteko MP4, MOV ali WEBM k zapisu, sistematičnemu iskanju, preiskavi… (ali jo povleci sem) in prikazala se bo tukaj.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Dodaj razglednicu: sliku prednje strane, stražnje strane, pa prikazano mjesto da je pronađeš na Karti. ¦ Dodaj razglednico: sliko sprednje strani, zadnje strani, nato prikazani kraj, da jo najdeš na Zemljevidu.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Dodaj ih na zapis osobe (blok 🛂 Putovnice) ili u ✨ Blago → Putovnice, gdje možeš uvesti i prijepis. ¦ Dodaj jih na zapis osebe (blok 🛂 Potni listi) ali v ✨ Zakladi → Potni listi, kjer lahko uvoziš tudi izpis.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Zapali jednu u ✨ Blago → Zapali svijeću. ¦ Prižgi jo v ✨ Zakladi → Prižgi svečo.
+Amérique du Nord ¦ Sjeverna Amerika ¦ Severna Amerika
+Assembler et retoucher des sons ¦ Sastavljaj i dorađuj zvukove ¦ Sestavljaj in dodelaj zvoke
+Aucun acte pour l’instant ¦ Još nema matičnih zapisa ¦ Še ni matičnih vpisov
+Aucun dossier de preuve ¦ Nema dosjea dokaza ¦ Ni dosjejev dokazov
+Aucun lieu dans l’arbre pour l’instant ¦ Još nema mjesta u stablu ¦ V drevesu še ni krajev
+Aucun livret pour l’instant ¦ Još nema knjižica ¦ Še ni knjižic
+Aucun nom indexé pour l’instant ¦ Još nema indeksiranih imena ¦ Še ni indeksiranih imen
+Aucun partage pour l’instant ¦ Još nema dijeljenja ¦ Še ni deljenj
+Aucun passage dans les médias pour l’instant ¦ Još nema spominjanja u medijima ¦ Še ni omemb v medijih
+Aucun passeport pour l’instant ¦ Još nema putovnica ¦ Še ni potnih listov
+Aucun projet de montage pour l’instant ¦ Još nema projekata montaže ¦ Še ni projektov montaže
+Aucun questionnaire pour l’instant ¦ Još nema upitnika ¦ Še ni vprašalnikov
+Aucun rattachement pour l’instant ¦ Još nema pripadnosti župama ¦ Še ni pripadnosti župnijam
+Aucun recueil pour l’instant ¦ Još nema zbirki ¦ Še ni zbirk
+Aucun son pour l’instant ¦ Još nema zvukova ¦ Še ni zvokov
+Aucune annonce pour l’instant ¦ Još nema oglasa ¦ Še ni oglasov
+Aucune bougie au registre ¦ Nema svijeća u knjizi ¦ V knjigi ni sveč
+Aucune carte d’électeur pour l’instant ¦ Još nema biračkih iskaznica ¦ Še ni volilnih izkaznic
+Aucune carte postale pour l’instant ¦ Još nema razglednica ¦ Še ni razglednic
+Aucune création ni carrière pour l’instant ¦ Još nema djela ni karijere ¦ Še ni del ne kariere
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Nema zahtjeva: otvori fotografiju i klikni „📤 Pitaj tko je to”. ¦ Ni prošenj: odpri fotografijo in klikni »📤 Vprašaj, kdo je to«.
+Aucune demande pour l’instant ¦ Još nema zahtjeva ¦ Še ni prošenj
+Aucune gazette pour l’instant ¦ Još nema glasnika ¦ Še ni glasil
+Aucune image de lieu pour l’instant ¦ Još nema slika mjesta ¦ Še ni slik krajev
+Aucune langue notée pour l’instant ¦ Još nije zabilježen nijedan jezik ¦ Zapisan ni še noben jezik
+Aucune lettre pour l’instant ¦ Još nema pisama ¦ Še ni pisem
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Još nema kuća: „＋ Nova kuća”. ¦ Še ni hiš: »＋ Nova hiša«.
+Aucune personne n’a encore de profil ¦ Još nitko nema profil ¦ Še nihče nima profila
+Aucune règle pour l’instant ¦ Još nema pravila ¦ Še ni pravil
+Aucune récompense pour l’instant ¦ Još nema nagrada ¦ Še ni nagrad
+Aucune transcription d’acte pour l’instant ¦ Još nema prijepisa matičnih zapisa ¦ Še ni prepisov matičnih vpisov
+Aucune vidéo pour l’instant ¦ Još nema videozapisa ¦ Še ni videoposnetkov
+Auteur, réalisation ¦ Autor, režija ¦ Avtor, režija
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Bravo! Pomoćnik može tražiti dalje (do 12 generacija). ¦ Bravo! Pomočnik lahko išče dlje (do 12 rodov).
+Carte du droit de vote ¦ Karta prava glasa ¦ Zemljevid volilne pravice
+Cette liste est cachée ¦ Ovaj je popis skriven ¦ Ta seznam je skrit
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Ono što ovdje bilježiš prati matične zapise: to nije pravni savjet. ¦ Kar tukaj zapišeš, sledi matičnim vpisom: to ni pravni nasvet.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ To su privatni podaci: najprije ih prikaži u Postavkama. ¦ To so zasebni podatki: najprej jih prikaži v Nastavitvah.
+Chercher un nom, une commune… ¦ Traži ime, općinu… ¦ Išči ime, občino…
+Chercher un projet… (nom, photo, détails) ¦ Traži projekt… (naziv, fotografija, pojedinosti) ¦ Išči projekt… (ime, fotografija, podrobnosti)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Traži upitnik… (npr. Anne, rat, Marie) ¦ Išči vprašalnik… (npr. Anne, vojna, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Traži kartu… (npr. Bretagne, 1978, Lucie) ¦ Išči zemljevid… (npr. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Traži kuću… (naziv, mjesto, razdoblje, osoba, popis stanovništva) ¦ Išči hišo… (ime, kraj, obdobje, oseba, popis prebivalstva)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Traži osobu… (npr. Martin, gradonačelnik, sportaš) ¦ Išči osebo… (npr. Martin, župan, športnik)
+Chercher… (commune, cote, année, service d’archives) ¦ Traži… (općina, signatura, godina, arhiv) ¦ Išči… (občina, signatura, leto, arhiv)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Traži… (općina, sekcija, broj, toponim, vlasnik) ¦ Išči… (občina, sekcija, številka, ledinsko ime, lastnik)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Traži… (osoba, imovina, bilježnik, mjesto, signatura) ¦ Išči… (oseba, premoženje, notar, kraj, signatura)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Traži… (naslov, autor, mjesto, spomenuto ime, što se vidi, bilješke) ¦ Išči… (naslov, avtor, kraj, omenjeno ime, kaj se vidi, opombe)
+Chercher… (titre, lieu) ¦ Traži… (naslov, mjesto) ¦ Išči… (naslov, kraj)
+Chercher… (titre, personne, lieu, année) ¦ Traži… (naslov, osoba, mjesto, godina) ¦ Išči… (naslov, oseba, kraj, leto)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Traži… (naslov, tekst, osoba, mjesto, signatura) ¦ Išči… (naslov, besedilo, oseba, kraj, signatura)
+Choisir la personne, puis la sorte de fiche ¦ Odaberi osobu, pa vrstu zapisa ¦ Izberi osebo, nato vrsto zapisa
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Odaberi stupce („⚙️ Prikazana polja”, kartica „Popis”) ¦ Izberi stolpce (»⚙️ Prikazana polja«, zavihek »Seznam«)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Odaberi osobu, pa označi što je bila (umjetnik, sportaš, izabrani dužnosnik…) ¦ Izberi osebo, nato označi, kaj je bila (umetnik, športnik, izvoljeni predstavnik…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Odaberi početnu osobu (Sosa 1) i dodaj njezine roditelje. ¦ Izberi izhodiščno osebo (Sosa 1) in dodaj njene starše.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Odaberi osobu, pa vrstu zapisa: sprema se na njezinu stranicu i pojavljuje se ovdje. ¦ Izberi osebo, nato vrsto zapisa: shrani se na njeno stran in se prikaže tukaj.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Odaberi sliku matičnog zapisa (krštenje, vjenčanje, pokop…) i prepiši ga pokraj nje. ¦ Izberi sliko matičnega vpisa (krst, poroka, pokop…) in ga prepiši ob njej.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Klikni na zemlju da vidiš njezine datume (i švicarske kantone, kanadske pokrajine…). ¦ Klikni na državo, da vidiš njene datume (in švicarske kantone, kanadske province…).
+Clubs et équipes, résultats, records, saisons. ¦ Klubovi i momčadi, rezultati, rekordi, sezone. ¦ Klubi in ekipe, rezultati, rekordi, sezone.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Počni s „＋ Broj”, „＋ Knjiga” ili „＋ Dokumentarac”, na vrhu stranice. ¦ Začni z »＋ Številka«, »＋ Knjiga« ali »＋ Dokumentarec« na vrhu strani.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Započni jedan: pojavit će se ovdje s ostalima da ga kasnije ponovno otvoriš. ¦ Začni enega: prikazal se bo tukaj z drugimi, da ga pozneje znova odpreš.
+Commune, section, numéro ¦ Općina, sekcija, broj ¦ Občina, sekcija, številka
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Najprije stvori svoj tip („＋ Stvori vlastiti tip…” u „＋ Novo djelo”), pa njegove zapise. ¦ Najprej ustvari svoj tip (»＋ Ustvari lasten tip…« v »＋ Novo delo«), nato njegove zapise.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Stvori zbirku (matica, popis, bilježnica…), pa dodaj svoje fotografije: svaka fotografija postaje stranica. ¦ Ustvari zbirko (matična knjiga, seznam, zvezek…), nato dodaj svoje fotografije: vsaka fotografija postane stran.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Stvori kartu, pa dodaj fotografije iz aplikacije ili ih uvezi: one s GPS koordinatama smještaju se same. ¦ Ustvari zemljevid, nato dodaj fotografije iz aplikacije ali jih uvozi: tiste s koordinatami GPS se postavijo same.
+Créer ce jour-là ¦ Stvori na taj dan ¦ Ustvari na ta dan
+Date (récent d’abord) ¦ Datum (najnovije prvo) ¦ Datum (najnovejše najprej)
+Date de l’acte ¦ Datum matičnog zapisa ¦ Datum matičnega vpisa
+Date pour les femmes ¦ Datum za žene ¦ Datum za ženske
+Date pour les hommes ¦ Datum za muškarce ¦ Datum za moške
+Décennie ¦ Desetljeće ¦ Desetletje
+Siècle ¦ Stoljeće ¦ Stoletje
+Précédent ¦ Prethodno ¦ Prejšnje
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Dodaju se na zapis osobe (blok Biračke iskaznice). ¦ Dodajo se na zapis osebe (blok Volilne izkaznice).
+Ensuite par ¦ Zatim po ¦ Nato po
+Grouper par catégorie ¦ Grupiraj po kategoriji ¦ Združi po kategoriji
+Héritages et successions ¦ Nasljedstva i ostavine ¦ Dediščine in zapuščine
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ U stablu trebaju datumi: rođenje, vjenčanje, smrt… ¦ Drevo potrebuje datume: rojstvo, poroko, smrt…
+Index des noms ¦ Kazalo imena ¦ Kazalo imen
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Izumi i njihovi patenti, otkrića (vrsta, komet, nalazište…), znanstvene publikacije. ¦ Izumi in njihovi patenti, odkritja (vrsta, komet, najdišče…), znanstvene objave.
+La liste « Palmarès » ¦ Popis „Nagrade” ¦ Seznam »Nagrade«
+La liste « Revue de presse » ¦ Popis „Pregled tiska” ¦ Seznam »Pregled tiska«
+Palmarès ¦ Nagrade ¦ Nagrade
+🏆 Palmarès ¦ 🏆 Nagrade ¦ 🏆 Nagrade
+Langue des actes et des documents ¦ Jezik matičnih zapisa i dokumenata ¦ Jezik matičnih vpisov in dokumentov
+Le cercle autour des ancêtres ¦ Krug oko predaka ¦ Krog okoli prednikov
+Le plus de fiches ¦ Najviše zapisa ¦ Največ zapisov
+Le plus de photos ¦ Najviše fotografija ¦ Največ fotografij
+Le plus de profils ¦ Najviše profila ¦ Največ profilov
+Les autres listes ¦ Ostali popisi ¦ Drugi seznami
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Mjesta dolaze iz rođenja, vjenčanja i smrti u stablu. ¦ Kraji izhajajo iz rojstev, porok in smrti v drevesu.
+Les plus grandes ¦ Najveće ¦ Največje
+Lettres aux descendants ¦ Pisma potomcima ¦ Pisma potomcem
+L’ordre des outils, et ceux qu’on montre ¦ Redoslijed alata i koji se prikazuju ¦ Vrstni red orodij in katera so prikazana
+Marquer dans les transcriptions ¦ Označi u prijepisima ¦ Označi v prepisih
+Mes annonces et courriers ¦ Moji oglasi i pisma ¦ Moji oglasi in pisma
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Stavi prikazano u projekt Radionice ¦ Prikazano dodaj v projekt Delavnice
+Modifiés récemment ¦ Nedavno uređeno ¦ Nedavno urejeno
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Montiraj videozapise: isječci, naslovi, pretapanja, umetci, glazba ¦ Montiraj videoposnetke: izseki, napisi, prehodi, prekrivanja, glasba
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Skladbe, albumi i ploče, snimke, koncerti, turneje, djela klasične glazbe. ¦ Skladbe, albumi in plošče, posnetki, koncerti, turneje, dela resne glasbe.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Zabilježi kojoj je župi pripadao svaki zaselak ili selo prije Francuske revolucije. ¦ Zapiši, kateri župniji je pripadal vsak zaselek ali vas pred francosko revolucijo.
+Numéro, tome, épisode ¦ Broj, svezak, epizoda ¦ Številka, zvezek, epizoda
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Ili „📷 Pročitaj snimku zaslona pravila” da se popune sama. ¦ Ali »📷 Preberi posnetek zaslona pravil«, da se izpolnijo sama.
+Où j’en suis ¦ Dokle sam stigao/stigla ¦ Kje sem
+Par commune ¦ Po općini ¦ Po občini
+Par date de l’œuvre ¦ Po datumu djela ¦ Po datumu dela
+Par date, récentes d’abord ¦ Po datumu, najnovije prvo ¦ Po datumu, najnovejše najprej
+Par personne ¦ Po osobi ¦ Po osebi
+Par période ¦ Po razdoblju ¦ Po obdobju
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Podijeli granu u ✨ Blago → Podijeli granu (na neko vrijeme). ¦ Deli vejo v ✨ Zakladi → Deli vejo (za nekaj časa).
+Pas encore de lignée ¦ Još nema loze ¦ Še ni rodovne linije
+Passeport des lieux ¦ Putovnica mjesta ¦ Potni list krajev
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Slike, crteži, grafike, skulpture i odljevi, fotografije, plakati, izložbe… ¦ Slike, risbe, grafike, kipi in odlitki, fotografije, plakati, razstave…
+Plus anciens ¦ Najstarije ¦ Najstarejše
+Priorité d’achat ¦ Prioritet kupnje ¦ Prednost nakupa
+Précisions ¦ Pojedinosti ¦ Podrobnosti
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Razvrstaj zapise po vrsti, s podnaslovom za svaku ¦ Razvrsti zapise po vrsti, s podnaslovom za vsako
+Ranger par sorte ¦ Razvrstaj po vrsti ¦ Razvrsti po vrsti
+Revenir sur un son en cours de travail ¦ Vrati se na zvuk na kojem radiš ¦ Vrni se k zvoku, na katerem delaš
+Revue, collection, série ¦ Časopis, zbirka, serija ¦ Revija, zbirka, serija
+＋ Revue, collection, série ¦ ＋ Časopis, zbirka, serija ¦ ＋ Revija, zbirka, serija
+Rien ne manque sur 5 générations ¦ Ništa ne nedostaje u 5 generacija ¦ V 5 rodovih nič ne manjka
+Règles des journaux ¦ Pravila novina ¦ Pravila časopisov
+Région, puis pays ¦ Regija, pa zemlja ¦ Regija, nato država
+Pays (A → Z) ¦ Zemlja (A → Z) ¦ Država (A → Z)
+Tous les pays, dans l’ordre que tu veux ¦ Sve zemlje, redoslijedom koji želiš ¦ Vse države, v vrstnem redu, ki ga želiš
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ Datoteka .ics za otvaranje u tvom kalendaru (Apple, Google, Outlook…) ¦ Datoteka .ics, ki jo odpreš v svojem koledarju (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Zvuk iz baze ili s računala, za obradu i spremanje kao projekt ¦ Zvok iz baze ali z računalnika, za obdelavo in shranjevanje kot projekt
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Zapis okuplja tekst, slike, osobe, karte i popise o jednoj temi. ¦ Zapis združuje besedilo, slike, osebe, zemljevide in sezname o eni temi.
+Voir qui pouvait voter en ¦ Pogledaj tko je mogao glasati ¦ Poglej, kdo je lahko volil leta
+pas de date ¦ bez datuma ¦ brez datuma
+Écart ¦ Razlika ¦ Razlika
+↔ Écart ¦ ↔ Razlika ¦ ↔ Razlika
+Écart hommes / femmes ¦ Razlika muškarci / žene ¦ Razlika moški / ženske
+Écoles, études et apprentissages, diplômes, établissements. ¦ Škole, studij i naukovanje, diplome, ustanove. ¦ Šole, študij in vajeništvo, diplome, ustanove.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Napiši svoj oglas i odmah vidi koliko će stajati prema pravilima novina. ¦ Napiši svoj oglas in takoj poglej, koliko bo stal po pravilih časopisa.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Napiši svoj oglas, odmah vidi koliko će stajati prema pravilima novina i prati što se s njim događa. ¦ Napiši svoj oglas, takoj poglej, koliko bo stal po pravilih časopisa, in spremljaj, kaj se z njim dogaja.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Napiši jedno u ✨ Blago → Pisma potomcima: „za Léin 18. rođendan”, „2050.”. ¦ Napiši eno v ✨ Zakladi → Pisma potomcem: »za Léin 18. rojstni dan«, »leta 2050«.
+↗ Ouvrir dans Recherche ¦ ↗ Otvori u Istraživanju ¦ ↗ Odpri v Raziskovanju
+⚙️ Ouvrir les Réglages ¦ ⚙️ Otvori Postavke ¦ ⚙️ Odpri Nastavitve
+⚙️ Ranger les outils ¦ ⚙️ Posloži alate ¦ ⚙️ Razporedi orodja
+✅ Tâches de l’Atelier ¦ ✅ Zadaci Radionice ¦ ✅ Naloge Delavnice
+✉️ Courriers envoyés ¦ ✉️ Poslana pisma ¦ ✉️ Poslana pisma
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Otvori pisma u ✨ Blagu ¦ ✉️ Odpri pisma v ✨ Zakladih
+✝️ Décès, sépultures ¦ ✝️ Smrti, pokopi ¦ ✝️ Smrti, pokopi
+👶 Naissances, baptêmes ¦ 👶 Rođenja, krštenja ¦ 👶 Rojstva, krsti
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Što se može preuzeti (licencije) ¦ ❓ Kaj je mogoče prevzeti (licence)
+❓ Comment noter un héritage ? ¦ ❓ Kako zabilježiti nasljedstvo? ¦ ❓ Kako zapišem dediščino?
+⤒ Importer des relevés ¦ ⤒ Uvezi indekse zapisa ¦ ⤒ Uvozi indekse vpisov
+⤒ Importer les réponses ¦ ⤒ Uvezi odgovore ¦ ⤒ Uvozi odgovore
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Izvezi obljetnice (.ics) ¦ ⤓ Izvozi obletnice (.ics)
+＋ Ajouter une image ¦ ＋ Dodaj sliku ¦ ＋ Dodaj sliko
+＋ Ajouter une parcelle ¦ ＋ Dodaj česticu ¦ ＋ Dodaj parcelo
+＋ Annonce ou courrier ¦ ＋ Oglas ili pismo ¦ ＋ Oglas ali pismo
+＋ Nouveau dossier de preuve ¦ ＋ Novi dosje dokaza ¦ ＋ Nov dosje dokazov
+＋ Nouveau livret ¦ ＋ Nova knjižica ¦ ＋ Nova knjižica
+＋ Nouveau montage ¦ ＋ Nova montaža ¦ ＋ Nova montaža
+＋ Nouveau passage dans les médias ¦ ＋ Novo spominjanje u medijima ¦ ＋ Nova omemba v medijih
+＋ Nouveau passeport ¦ ＋ Nova putovnica ¦ ＋ Nov potni list
+＋ Nouveau projet son ¦ ＋ Novi zvučni projekt ¦ ＋ Nov zvočni projekt
+＋ Nouveau questionnaire ¦ ＋ Novi upitnik ¦ ＋ Nov vprašalnik
+＋ Nouveau recueil ¦ ＋ Nova zbirka ¦ ＋ Nova zbirka
+＋ Nouvelle carte ¦ ＋ Nova karta ¦ ＋ Nov zemljevid
+＋ Nouvelle carte postale ¦ ＋ Nova razglednica ¦ ＋ Nova razglednica
+＋ Nouvelle demande… ¦ ＋ Novi zahtjev… ¦ ＋ Nova prošnja…
+＋ Nouvelle maison ¦ ＋ Nova kuća ¦ ＋ Nova hiša
+＋ Nouvelle transcription ¦ ＋ Novi prijepis ¦ ＋ Nov prepis
+＋ Règles d’un journal ¦ ＋ Pravila novina ¦ ＋ Pravila časopisa
+＋ Épisode ¦ ＋ Epizoda ¦ ＋ Epizoda
+🌍 Le droit de vote dans le monde ¦ 🌍 Pravo glasa u svijetu ¦ 🌍 Volilna pravica po svetu
+📂 Projets son ¦ 📂 Zvučni projekti ¦ 📂 Zvočni projekti
+📚 Vers l’Atelier ¦ 📚 U Radionicu ¦ 📚 V Delavnico
+📷 Lire une capture des règles ¦ 📷 Pročitaj snimku zaslona pravila ¦ 📷 Preberi posnetek zaslona pravil
+🔍 Ouvrir l’assistant ¦ 🔍 Otvori pomoćnika ¦ 🔍 Odpri pomočnika
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Otvori pomoćnika „Što nedostaje?” ¦ 🔍 Odpri pomočnika »Kaj manjka?«
+🔍 Qui est sur cette photo ? ¦ 🔍 Tko je na ovoj fotografiji? ¦ 🔍 Kdo je na tej fotografiji?
+🔍 Rappels d’enquête ¦ 🔍 Podsjetnici istrage ¦ 🔍 Opomniki preiskave
+🔗 Partager une branche ¦ 🔗 Podijeli granu ¦ 🔗 Deli vejo
+🕯️ Allumer une bougie ¦ 🕯️ Zapali svijeću ¦ 🕯️ Prižgi svečo
+🖼️ Tous les médias ¦ 🖼️ Svi mediji ¦ 🖼️ Vsi mediji
+🗺 Toutes mes cartes ¦ 🗺 Sve moje karte ¦ 🗺 Vsi moji zemljevidi
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Otvori u ✨ Blagu ¦ 🛂 Odpri v ✨ Zakladih
+🛡 Les règles ¦ 🛡 Pravila ¦ 🛡 Pravila

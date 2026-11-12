@@ -1199,3 +1199,823 @@ Relier aux pistes ¦ Poveži s tragovima ¦ Poveži s sledmi
 Aucun média dans ce dossier. ¦ Nema medija u ovoj mapi. ¦ V tej mapi ni medijev.
 Aucun média évalué. ¦ Nema ocijenjenog medija. ¦ Ni ocenjenega medija.
 L’enquête, ses pistes et son journal seront supprimés. Les personnes de la généalogie ne sont pas supprimées. ¦ Istraga, njezini tragovi i dnevnik bit će izbrisani. Osobe iz rodoslovlja ne brišu se. ¦ Preiskava, njene sledi in dnevnik bodo izbrisani. Osebe iz rodoslovja se ne izbrišejo.
+Supprimer cette enquête ? ¦ Izbrisati ovu istragu? ¦ Izbrišem to preiskavo?
+Supprimer l’enquête ¦ Izbriši istragu ¦ Izbriši preiskavo
+Piste supprimée ¦ Trag izbrisan ¦ Sled izbrisana
+Retirer ce média de cette piste ? ¦ Ukloniti ovaj medij s ovog traga? ¦ Odstranim ta medij s te sledi?
+à faire ¦ za napraviti ¦ za narediti
+à revoir ¦ za provjeru ¦ za pregled
+priorité ¦ prioritet ¦ prednost
+plus tard ¦ kasnije ¦ pozneje
+Déjà dans le suivi des dépouillements ¦ Već je u praćenju indeksa zapisa ¦ Že v spremljanju indeksov vpisov
+sans période ¦ bez razdoblja ¦ brez obdobja
+🔍 Chercher sur SocFace ↗ ¦ 🔍 Traži na SocFace ↗ ¦ 🔍 Išči na SocFace ↗
+Sur internet ¦ Na internetu ¦ Na internetu
+Noté dans le Journal des recherches ; importe ensuite le CSV pour avoir le foyer ¦ Zabilježeno u Dnevniku istraživanja; zatim uvezi CSV da dobiješ kućanstvo ¦ Zapisano v Dnevnik raziskovanja; nato uvozi CSV, da dobiš gospodinjstvo
+Noté dans le Journal des recherches : « Rien trouvé » ¦ Zabilježeno u Dnevniku istraživanja: „Ništa nije pronađeno” ¦ Zapisano v Dnevnik raziskovanja: »Nič najdeno«
+✓ Trouvé ¦ ✓ Pronađeno ¦ ✓ Najdeno
+Pas trouvé ¦ Nije pronađeno ¦ Ni najdeno
+⤒ Importer… ¦ ⤒ Uvezi… ¦ ⤒ Uvozi…
+📌 Au suivi ¦ 📌 U praćenje ¦ 📌 V spremljanje
+Une lettre toute prête pour demander cet acte (mairie, archives…) ¦ Gotovo pismo za traženje ovog matičnog zapisa (općina, arhiv…) ¦ Pripravljeno pismo za zahtevo tega matičnega vpisa (občina, arhiv…)
+📮 Demander l’acte ¦ 📮 Zatraži matični zapis ¦ 📮 Zahtevaj matični vpis
+📇 Tables décennales : ¦ 📇 Desetogodišnja kazala: ¦ 📇 Desetletna kazala:
+Déjà cherché : ¦ Već traženo: ¦ Že iskano:
+Lieu inconnu ¦ Nepoznato mjesto ¦ Neznan kraj
+🌐 Trouver le site des archives ¦ 🌐 Pronađi web-stranicu arhiva ¦ 🌐 Poišči spletno stran arhiva
+Rien avec ces filtres. ¦ Ništa s ovim filtrima. ¦ S temi filtri ni ničesar.
+Rien ne manque dans les générations regardées : bravo ! Regarde plus loin (générations) ou complète la lignée. ¦ U pregledanim generacijama ništa ne nedostaje: bravo! Pogledaj dalje (generacije) ili dopuni lozu. ¦ V pregledanih rodovih nič ne manjka: bravo! Poglej dlje (rodovi) ali dopolni rodovno linijo.
+RECHERCHE · QUE MANQUE-T-IL ? ¦ ISTRAŽIVANJE · ŠTO NEDOSTAJE? ¦ RAZISKOVANJE · KAJ MANJKA?
+Les actes à chercher ¦ Matični zapisi za traženje ¦ Matični vpisi za iskanje
+Les actes à chercher pour la lignée de {name} ¦ Matični zapisi za traženje za lozu osobe {name} ¦ Matični vpisi za iskanje za linijo osebe {name}
+{searches} pour {ancestors} ancêtres sur {gens} générations, chez {services}. ¦ {searches} za pretke ({ancestors}) kroz generacije ({gens}), u: {services}. ¦ {searches} za prednike ({ancestors}) v rodovih ({gens}), pri: {services}.
+Les plus proches générations d’abord : leurs actes sont les plus faciles à trouver, et chacun ouvre la porte du suivant. ¦ Najprije najbliže generacije: njihove je zapise najlakše pronaći, a svaki otvara vrata sljedećem. ¦ Najprej najbližji rodovi: njihove vpise je najlažje najti in vsak odpre vrata naslednjemu.
+services d’archives ¦ arhivske službe ¦ arhivske službe
+🖨 Imprimer pour aller aux archives ¦ 🖨 Ispiši za odlazak u arhiv ¦ 🖨 Natisni za obisk arhiva
+Ranger par ¦ Grupiraj po ¦ Razvrsti po
+Service d’archives ¦ Arhivska služba ¦ Arhivska služba
+Ancêtre ¦ Predak ¦ Prednik
+Sorte d’acte ¦ Vrsta matičnog zapisa ¦ Vrsta matičnega vpisa
+Nom, commune, département… ¦ Ime, općina, departman… ¦ Ime, občina, departma…
+Ajouté au suivi : Recherche → Dépouillement d’archive. ¦ Dodano u praćenje: Istraživanje → Indeks zapisa arhiva. ¦ Dodano v spremljanje: Raziskovanje → Indeks vpisov arhiva.
+à {place} ¦ u {place} ¦ v {place}
+(lieu inconnu) ¦ (nepoznato mjesto) ¦ (neznan kraj)
+Trouvé : recensement de {year} noté dans le Journal des recherches ¦ Pronađeno: popis stanovništva iz {year}. zabilježen u Dnevniku istraživanja ¦ Najdeno: popis prebivalstva iz leta {year} zapisan v Dnevnik raziskovanja
+Pas trouvé : noté dans le Journal des recherches ¦ Nije pronađeno: zabilježeno u Dnevniku istraživanja ¦ Ni najdeno: zapisano v Dnevnik raziskovanja
+Courriers en attente ¦ Pisma koja čekaju odgovor ¦ Pisma, ki čakajo na odgovor
+Pistes et hypothèses ¦ Tragovi i hipoteze ¦ Sledi in domneve
+À chercher (Que manque-t-il ?) ¦ Za traženje (Što nedostaje?) ¦ Za iskanje (Kaj manjka?)
+Fait cette semaine ¦ Napravljeno ovaj tjedan ¦ Narejeno ta teden
+En retard ¦ Kasni ¦ Zamuja
+Cette semaine ¦ Ovaj tjedan ¦ Ta teden
+Quand tu as le temps ¦ Kad budeš imao/imala vremena ¦ Ko boš imel/imela čas
+Ouvrir le lien ¦ Otvori poveznicu ¦ Odpri povezavo
+C’est fait ¦ Gotovo je ¦ Narejeno
+Tout est fait pour cette semaine, bravo ! Profite-en pour avancer une recherche. ¦ Sve je gotovo za ovaj tjedan, bravo! Iskoristi priliku i unaprijedi neko istraživanje. ¦ Za ta teden je vse narejeno, bravo! Izkoristi priložnost in napreduj pri kakem iskanju.
+💡 Voir ce qui manque ¦ 💡 Pogledaj što nedostaje ¦ 💡 Poglej, kaj manjka
+Ta semaine de recherche n’a pas pu être lue. Réessaie dans un instant. ¦ Tvoj tjedan istraživanja nije se mogao učitati. Pokušaj ponovno za trenutak. ¦ Tvojega tedna raziskovanja ni bilo mogoče naložiti. Poskusi znova čez trenutek.
+choses reportées ¦ odgođene stvari ¦ odložene stvari
+Par urgence ¦ Po hitnosti ¦ Po nujnosti
+Par sorte ¦ Po vrsti ¦ Po vrsti
+Ce qu’on montre, dans cet ordre ¦ Što se prikazuje, ovim redom ¦ Kaj se prikaže, v tem vrstnem redu
+Décoche ce que tu ne veux pas voir ; ⠿ ou Alt + ↑ / ↓ pour changer l’ordre. ¦ Odznači ono što ne želiš vidjeti; ⠿ ili Alt + ↑ / ↓ za promjenu redoslijeda. ¦ Odznači, česar ne želiš videti; ⠿ ali Alt + ↑ / ↓ za spremembo vrstnega reda.
+Réglages de « Ma semaine de recherche » remis comme au départ. ¦ Postavke „Moj tjedan istraživanja” vraćene na početno. ¦ Nastavitve »Moj teden raziskovanja« ponastavljene na začetno.
+TABLEAU DE BORD · EN GRAND ¦ NADZORNA PLOČA · U VELIKOM ¦ NADZORNA PLOŠČA · V VELIKEM
+Ta semaine… ¦ Tvoj tjedan… ¦ Tvoj teden…
+à demain ¦ do sutra ¦ do jutri
+à la semaine prochaine ¦ do sljedećeg tjedna ¦ do naslednjega tedna
+À demain ¦ Do sutra ¦ Do jutri
+À la semaine prochaine ¦ Do sljedećeg tjedna ¦ Do naslednjega tedna
+{n} en retard ¦ Kasni: {n} ¦ Zamuja: {n}
+{n} cette semaine ¦ Ovaj tjedan: {n} ¦ Ta teden: {n}
+{n} quand tu as le temps ¦ Kad budeš imao/imala vremena: {n} ¦ Ko boš imel/imela čas: {n}
+⏭ {n} : elles reviendront le jour dit. ¦ ⏭ {n}: vratit će se na zadani dan. ¦ ⏭ {n}: vrnile se bodo na določeni dan.
+⏭ Reporté à demain : « {title} » ¦ ⏭ Odgođeno do sutra: „{title}” ¦ ⏭ Odloženo do jutri: »{title}«
+⏭ Reporté à la semaine prochaine : « {title} » ¦ ⏭ Odgođeno do sljedećeg tjedna: „{title}” ¦ ⏭ Odloženo do naslednjega tedna: »{title}«
+« {title} » n’est plus reporté ¦ „{title}” više nije odgođeno ¦ »{title}« ni več odloženo
+Reporter ¦ Odgodi ¦ Odloži
+Adresse vérifiée ¦ Adresa provjerena ¦ Naslov preverjen
+Forme de l’adresse vue sur le site ¦ Oblik adrese provjeren na stranici ¦ Oblika naslova, preverjena na strani
+Vérifiée en partie ¦ Djelomično provjerena ¦ Delno preverjen
+La forme de l’adresse est connue, mais pas tous ses paramètres ¦ Oblik adrese je poznat, ali ne i svi njezini parametri ¦ Oblika naslova je znana, vsi njegovi parametri pa ne
+Adresse non vérifiée ¦ Adresa nije provjerena ¦ Naslov ni preverjen
+Construite d’après la forme connue du site : si elle ne marche plus, change-la dans « ⚙️ Adresses des sites » ¦ Sastavljena prema poznatom obliku stranice: ako više ne radi, promijeni je u „⚙️ Adrese stranica” ¦ Sestavljen po znani obliki strani: če ne deluje več, ga spremeni v »⚙️ Naslovi strani«
+Un site que tu as ajouté ¦ Stranica koju si dodao/dodala ¦ Stran, ki si jo dodal/dodala
+Ce site demande un abonnement ou des crédits pour voir les documents ¦ Ova stranica traži pretplatu ili kredite za pregled dokumenata ¦ Ta stran zahteva naročnino ali kredite za ogled dokumentov
+En partie payant ¦ Djelomično plaćeno ¦ Delno plačljivo
+Gratuit, sauf une partie qui demande un abonnement ¦ Besplatno, osim dijela koji traži pretplatu ¦ Brezplačno, razen dela, ki zahteva naročnino
+Gratuit en bibliothèque ¦ Besplatno u knjižnici ¦ Brezplačno v knjižnici
+Gratuit seulement sur les ordinateurs d’une bibliothèque ou des archives ¦ Besplatno samo na računalima knjižnice ili arhiva ¦ Brezplačno samo na računalnikih knjižnice ali arhiva
+Indique son unité (régiment…) dans « Plus de précisions » pour trouver le journal de marche. ¦ Navedi njegovu postrojbu (pukovniju…) u „Više pojedinosti” da pronađeš ratni dnevnik. ¦ Navedi njegovo enoto (polk…) v »Več podrobnosti«, da najdeš vojni dnevnik.
+Choisis le département dans « Plus de précisions » pour ouvrir le site de ses archives. ¦ Odaberi departman u „Više pojedinosti” da otvoriš stranicu njegova arhiva. ¦ Izberi departma v »Več podrobnosti«, da odpreš stran njegovega arhiva.
+Indique le département dans « Plus de précisions ». ¦ Navedi departman u „Više pojedinosti”. ¦ Navedi departma v »Več podrobnosti«.
+Indique au moins un nom. ¦ Navedi barem jedno ime. ¦ Navedi vsaj eno ime.
+Il faut son identifiant FamilySearch (écrit sur sa fiche). ¦ Potreban je njegov FamilySearch identifikator (upisan na zapisu). ¦ Potreben je njegov identifikator FamilySearch (zapisan na zapisu).
+Écris son port d’attache dans « Plus de précisions ». ¦ Upiši njegovu matičnu luku u „Više pojedinosti”. ¦ Vpiši njegovo matično pristanišče v »Več podrobnosti«.
+Écris le nom du photographe dans « Plus de précisions ». ¦ Upiši ime fotografa u „Više pojedinosti”. ¦ Vpiši ime fotografa v »Več podrobnosti«.
+Écris au moins un nom ou un lieu. ¦ Upiši barem ime ili mjesto. ¦ Vpiši vsaj ime ali kraj.
+Écris au moins un nom. ¦ Upiši barem jedno ime. ¦ Vpiši vsaj eno ime.
+Le site demande de créer un compte (gratuit) pour voir les résultats ¦ Stranica traži da otvoriš (besplatni) račun za pregled rezultata ¦ Stran zahteva, da ustvariš (brezplačen) račun za ogled rezultatov
+Ton sobre : ce qui vient de ce site n’entre jamais dans un jeu ¦ Suzdržan ton: ono što dolazi s ove stranice nikad ne ulazi u igru ¦ Zadržan ton: kar pride s te strani, nikoli ne gre v igro
+Ta région ¦ Tvoja regija ¦ Tvoja regija
+⤒ Importer ce que tu as trouvé sur ce site ¦ ⤒ Uvezi ono što si pronašao/pronašla na ovoj stranici ¦ ⤒ Uvozi, kar si našel/našla na tej strani
+🎯 Pour cette recherche ¦ 🎯 Za ovo traženje ¦ 🎯 Za to iskanje
+Cette rubrique ¦ Ovaj odjeljak ¦ Ta razdelek
+📍 Pour ce lieu ¦ 📍 Za ovo mjesto ¦ 📍 Za ta kraj
+🎯 Pour sa fiche ¦ 🎯 Za njegov zapis ¦ 🎯 Za njegov zapis
+👤 Pour sa fiche ¦ 👤 Za njegov zapis ¦ 👤 Za njegov zapis
+🏺 Pour cet objet ¦ 🏺 Za ovaj predmet ¦ 🏺 Za ta predmet
+🏠 Pour cette maison ¦ 🏠 Za ovu kuću ¦ 🏠 Za to hišo
+ARCHIVES EN LIGNE ¦ ARHIVI NA INTERNETU ¦ SPLETNI ARHIVI
+🔍 Chercher dans les archives en ligne ¦ 🔍 Traži u arhivima na internetu ¦ 🔍 Išči v spletnih arhivih
+Ce que la fiche sait… ¦ Što zapis zna… ¦ Kaj zapis ve…
+⚙️ Adresses des sites ¦ ⚙️ Adrese stranica ¦ ⚙️ Naslovi strani
+Les sites payants demandent un abonnement ou des crédits : la recherche y est souvent possible sans payer, pas la lecture des documents. Essaie d’abord les sites gratuits. ¦ Plaćene stranice traže pretplatu ili kredite: pretraživanje je često moguće besplatno, ali ne i čitanje dokumenata. Najprije pokušaj besplatne stranice. ¦ Plačljive strani zahtevajo naročnino ali kredite: iskanje je pogosto mogoče brezplačno, branje dokumentov pa ne. Najprej poskusi brezplačne strani.
+Aucun site ici. ¦ Ovdje nema stranica. ¦ Tukaj ni strani.
+Aucun site. ¦ Nema stranica. ¦ Ni strani.
+Aucun site pour « {q} ». ¦ Nema stranice za „{q}”. ¦ Ni strani za »{q}«.
+Vérifie l’orthographe, ou choisis « Tout ». ¦ Provjeri pravopis ili odaberi „Sve”. ¦ Preveri črkovanje ali izberi »Vse«.
+Choisis « Tout », ou décoche « Gratuites seulement ». ¦ Odaberi „Sve” ili odznači „Samo besplatne”. ¦ Izberi »Vse« ali odznači »Samo brezplačne«.
+sites hors de son époque ¦ stranice izvan njegova doba ¦ strani zunaj njegovega obdobja
+Les montrer ¦ Prikaži ih ¦ Prikaži jih
+Cacher les sites hors de son époque ¦ Sakrij stranice izvan njegova doba ¦ Skrij strani zunaj njegovega obdobja
+sites payants cachés ¦ skrivene plaćene stranice ¦ skrite plačljive strani
+{n} par « Gratuites seulement ». ¦ {n} zbog „Samo besplatne”. ¦ {n} zaradi »Samo brezplačne«.
+Gratuites seulement ¦ Samo besplatne ¦ Samo brezplačne
+Pour : ¦ Za: ¦ Za:
+De l’année ¦ Od godine ¦ Od leta
+à l’année ¦ do godine ¦ do leta
+Plus de précisions (né en, département, unité, port, canton…) ¦ Više pojedinosti (rođen/rođena, departman, postrojba, luka, kanton…) ¦ Več podrobnosti (rojen/rojena, departma, enota, pristanišče, kanton…)
+Plus de précisions ¦ Više pojedinosti ¦ Več podrobnosti
+Né(e) en ¦ Rođen(a) godine ¦ Rojen(a) leta
+Unité (régiment…) ¦ Postrojba (pukovnija…) ¦ Enota (polk…)
+152e régiment d’infanterie ¦ 152. pješačka pukovnija ¦ 152. pehotni polk
+Port d’attache (marins) ¦ Matična luka (pomorci) ¦ Matično pristanišče (mornarji)
+Saint-Malo, Fécamp, Sète… ¦ Saint-Malo, Fécamp, Sète… ¦ Saint-Malo, Fécamp, Sète…
+Ce que tu cherches (patrimoine) ¦ Što tražiš (baština) ¦ Kaj iščeš (dediščina)
+église Saint-Martin, cloche, retable… ¦ crkva Saint-Martin, zvono, oltarna pala… ¦ cerkev Saint-Martin, zvon, oltarna slika…
+Photographe (au dos de la carte) ¦ Fotograf (na poleđini kartice) ¦ Fotograf (na hrbtni strani kartice)
+Nadar, Disdéri… ¦ Nadar, Disdéri… ¦ Nadar, Disdéri…
+Chercher un site… (Italie, notaires, Gallica, payant…) ¦ Traži stranicu… (Italija, javni bilježnici, Gallica, plaćeno…) ¦ Išči stran… (Italija, notarji, Gallica, plačljivo…)
+Chercher un site ¦ Traži stranicu ¦ Išči stran
+Pays de la zone ¦ Zemlje područja ¦ Države območja
+Thèmes ¦ Teme ¦ Teme
+Tous les pays ({n}) ¦ Sve zemlje ({n}) ¦ Vse države ({n})
+Tous les thèmes ({n}) ¦ Sve teme ({n}) ¦ Vse teme ({n})
+Cet import n’est pas disponible ici. ¦ Ovaj uvoz ovdje nije dostupan. ¦ Ta uvoz tukaj ni na voljo.
+Lien de la fiche, de l’acte ou de l’article ¦ Poveznica zapisa, matičnog zapisa ili članka ¦ Povezava zapisa, matičnega vpisa ali članka
+Copie l’adresse dans la barre de ton navigateur : l’app reconnaît le site (Gallica, Mémoire des hommes, FamilySearch, IdRef, Archives Portal Europe…) et ouvre le bon import. ¦ Kopiraj adresu iz trake preglednika: aplikacija prepoznaje stranicu (Gallica, Mémoire des hommes, FamilySearch, IdRef, Archives Portal Europe…) i otvara pravi uvoz. ¦ Kopiraj naslov iz vrstice brskalnika: aplikacija prepozna stran (Gallica, Mémoire des hommes, FamilySearch, IdRef, Archives Portal Europe…) in odpre pravi uvoz.
+Importer avec ¦ Uvezi pomoću ¦ Uvozi z
+Texte de la fiche (facultatif) ¦ Tekst zapisa (nije obavezno) ¦ Besedilo zapisa (neobvezno)
+Pas de lien ? Colle seulement le texte copié sur la page : la sorte de fiche est reconnue quand c’est possible. ¦ Nemaš poveznicu? Samo zalijepi tekst kopiran sa stranice: vrsta zapisa prepoznaje se kad je moguće. ¦ Nimaš povezave? Samo prilepi besedilo, kopirano s strani: vrsta zapisa se prepozna, kadar je mogoče.
+⚠️ Site pas reconnu : choisis l’import ci-dessous. ¦ ⚠️ Stranica nije prepoznata: odaberi uvoz ispod. ¦ ⚠️ Stran ni prepoznana: izberi uvoz spodaj.
+⚠️ Colle une adresse qui commence par https:// ¦ ⚠️ Zalijepi adresu koja počinje s https:// ¦ ⚠️ Prilepi naslov, ki se začne s https://
+Colle une adresse qui commence par https:// ¦ Zalijepi adresu koja počinje s https:// ¦ Prilepi naslov, ki se začne s https://
+Colle le lien de la fiche (ou son texte, plus bas). ¦ Zalijepi poveznicu zapisa (ili njegov tekst, niže). ¦ Prilepi povezavo zapisa (ali njegovo besedilo, spodaj).
+Montrer ce site dans la fenêtre de recherche ¦ Prikaži ovu stranicu u prozoru pretraživanja ¦ Prikaži to stran v oknu iskanja
+📒 Mon cercle généalogique, par département ¦ 📒 Moje rodoslovno društvo, po departmanu ¦ 📒 Moje rodoslovno društvo, po departmajih
+Le n° du département puis l’adresse du site de son cercle (ses relevés). Une ligne par département. ¦ Broj departmana pa adresa stranice njegova društva (njegovi indeksi). Jedan redak po departmanu. ¦ Številka departmaja in nato naslov strani njegovega društva (njegovi indeksi). Ena vrstica na departma.
+Adresse du cercle ¦ Adresa društva ¦ Naslov društva
+⭐ Mes sites ¦ ⭐ Moje stranice ¦ ⭐ Moje strani
+Ajoute ici le site d’une association, d’une bibliothèque ou d’un relevé que tu connais. ¦ Ovdje dodaj stranicu udruge, knjižnice ili indeksa koji poznaješ. ¦ Tukaj dodaj stran društva, knjižnice ali indeksa, ki ga poznaš.
+Cercle généalogique du Finistère ¦ Cercle généalogique du Finistère ¦ Cercle généalogique du Finistère
+ARCHIVES EN LIGNE · RÉGLAGES ¦ ARHIVI NA INTERNETU · POSTAVKE ¦ SPLETNI ARHIVI · NASTAVITVE
+Chercher un site… (Italie, FreeBMD, cheminots, payant…) ¦ Traži stranicu… (Italija, FreeBMD, željezničari, plaćeno…) ¦ Išči stran… (Italija, FreeBMD, železničarji, plačljivo…)
+Adresse d’un site ¦ Adresa stranice ¦ Naslov strani
+Donne un nom au site. ¦ Daj stranici ime. ¦ Daj strani ime.
+L’adresse doit commencer par https:// (ou http://), sans espace. ¦ Adresa mora počinjati s https:// (ili http://), bez razmaka. ¦ Naslov se mora začeti s https:// (ali http://), brez presledkov.
+Site retiré de « Mes sites » ¦ Stranica uklonjena iz „Moje stranice” ¦ Stran odstranjena iz »Moje strani«
+Site retiré. ¦ Stranica uklonjena. ¦ Stran odstranjena.
+Tous les sites d’archives en ligne, nom et années déjà remplis : Mémoire des hommes, Gallica, FamilySearch, archives d’Europe… ¦ Sve stranice arhiva na internetu, s već upisanim imenom i godinama: Mémoire des hommes, Gallica, FamilySearch, europski arhivi… ¦ Vse strani spletnih arhivov, z že vpisanim imenom in leti: Mémoire des hommes, Gallica, FamilySearch, evropski arhivi…
+🔍 Archives en ligne… ¦ 🔍 Arhivi na internetu… ¦ 🔍 Spletni arhivi…
+Colle le lien d’une fiche trouvée : l’app reconnaît le site et ouvre le bon import ¦ Zalijepi poveznicu pronađenog zapisa: aplikacija prepoznaje stranicu i otvara pravi uvoz ¦ Prilepi povezavo najdenega zapisa: aplikacija prepozna stran in odpre pravi uvoz
+Les sites les plus utiles pour cette personne, et pourquoi ¦ Najkorisnije stranice za ovu osobu, i zašto ¦ Najkoristnejše strani za to osebo in zakaj
+« {text} » est copié : colle-le dans la case du site ¦ „{text}” je kopirano: zalijepi u polje stranice ¦ »{text}« je kopirano: prilepi v polje strani
+« {text} » est copié : colle-le dans la case du site. ¦ „{text}” je kopirano: zalijepi u polje stranice. ¦ »{text}« je kopirano: prilepi v polje strani.
+Écris « {text} » dans la case du site. ¦ Upiši „{text}” u polje stranice. ¦ Vpiši »{text}« v polje strani.
+Importer ce que tu as trouvé sur {site} ¦ Uvezi ono što si pronašao/pronašla na {site} ¦ Uvozi, kar si našel/našla na {site}
+Si la page ne trouve rien : ¦ Ako stranica ništa ne pronađe: ¦ Če stran ne najde ničesar:
+chercher avec Google dans ce site ↗ ¦ traži Googleom na ovoj stranici ↗ ¦ išči z Googlom na tej strani ↗
+Données ouvertes : ¦ Otvoreni podaci: ¦ Odprti podatki:
+⤓ les résultats en JSON ¦ ⤓ rezultati u JSON-u ¦ ⤓ rezultati v JSON
+— enregistre le fichier, puis « ⤒ Importer ce que tu as trouvé ». ¦ — spremi datoteku, zatim „⤒ Uvezi ono što si pronašao/pronašla”. ¦ — shrani datoteko, nato »⤒ Uvozi, kar si našel/našla«.
+aucun ¦ nijedan ¦ noben
+aussi dans « Chercher sur internet » ¦ također u „Traži na internetu” ¦ tudi v »Išči na internetu«
+Site « {name} » ajouté : il est aussi dans « Chercher sur internet ». ¦ Stranica „{name}” dodana: nalazi se i u „Traži na internetu”. ¦ Stran »{name}« dodana: je tudi v »Išči na internetu«.
+🎖 Mémoire des hommes, Léonore, registre matricule, presse ancienne ¦ 🎖 Mémoire des hommes, Léonore, vojni matični list, stari tisak ¦ 🎖 Mémoire des hommes, Léonore, vojaški matični list, stari tisk
+🏛 Naturalisation, notaire, colonies, marin, déportation, Journal officiel, annuaire, patrimoine ¦ 🏛 Naturalizacija, javni bilježnik, kolonije, pomorac, deportacija, Službeni list, imenik, baština ¦ 🏛 Naturalizacija, notar, kolonije, mornar, deportacija, Uradni list, imenik, dediščina
+🌍 Prisonnier 14-18, élu, brevet, thèse, acte d’Italie, d’Espagne…, FreeBMD, Open Archives ¦ 🌍 Zarobljenik 1914.–1918., izabrani dužnosnik, patent, disertacija, matični zapisi iz Italije, Španjolske…, FreeBMD, Open Archives ¦ 🌍 Ujetnik 1914–1918, izvoljeni funkcionar, patent, disertacija, matični vpisi iz Italije, Španije…, FreeBMD, Open Archives
+🗿 Monument aux morts, tombe, acte d’Europe, presse étrangère ¦ 🗿 Spomenik palima, grob, europski matični zapisi, strani tisak ¦ 🗿 Spomenik padlim, grob, evropski matični vpisi, tuji tisk
+🌳 FamilySearch, WikiTree, Québec, passagers, Sainte-Hélène, Maitron, mémoriaux ¦ 🌳 FamilySearch, WikiTree, Québec, putnici, Sveta Helena, Maitron, spomen-obilježja ¦ 🌳 FamilySearch, WikiTree, Québec, potniki, Sveta Helena, Maitron, spominska obeležja
+📚 Bibliothèque, auteur, HisKi, Old Bailey, notaire de Paris ¦ 📚 Knjižnica, autor, HisKi, Old Bailey, pariški javni bilježnik ¦ 📚 Knjižnica, avtor, HisKi, Old Bailey, pariški notar
+🇪🇺 Archives d’Europe, Juste, enfant assisté, monument, cadastre ¦ 🇪🇺 Europski arhivi, Pravednik, nahoče, spomenik, katastar ¦ 🇪🇺 Evropski arhivi, Pravičnik, najdenček, spomenik, kataster
+Europe ¦ Europa ¦ Evropa
+Amériques ¦ Amerike ¦ Amerike
+Monde ¦ Svijet ¦ Svet
+France ¦ Francuska ¦ Francija
+Italie ¦ Italija ¦ Italija
+Espagne ¦ Španjolska ¦ Španija
+Portugal ¦ Portugal ¦ Portugalska
+Allemagne ¦ Njemačka ¦ Nemčija
+Belgique ¦ Belgija ¦ Belgija
+Suisse ¦ Švicarska ¦ Švica
+Luxembourg ¦ Luksemburg ¦ Luksemburg
+Pays-Bas ¦ Nizozemska ¦ Nizozemska
+Royaume-Uni ¦ Ujedinjeno Kraljevstvo ¦ Združeno kraljestvo
+Irlande ¦ Irska ¦ Irska
+Canada ¦ Kanada ¦ Kanada
+Pologne ¦ Poljska ¦ Poljska
+Russie ¦ Rusija ¦ Rusija
+Ukraine ¦ Ukrajina ¦ Ukrajina
+Norvège ¦ Norveška ¦ Norveška
+Suède ¦ Švedska ¦ Švedska
+Danemark ¦ Danska ¦ Danska
+Finlande ¦ Finska ¦ Finska
+Tchéquie ¦ Češka ¦ Češka
+Slovaquie ¦ Slovačka ¦ Slovaška
+Autriche ¦ Austrija ¦ Avstrija
+Hongrie ¦ Mađarska ¦ Madžarska
+Algérie ¦ Alžir ¦ Alžirija
+Maroc ¦ Maroko ¦ Maroko
+Tunisie ¦ Tunis ¦ Tunizija
+Sénégal ¦ Senegal ¦ Senegal
+Indochine ¦ Indokina ¦ Indokina
+Nouvelle-Calédonie ¦ Nova Kaledonija ¦ Nova Kaledonija
+Guyane ¦ Francuska Gvajana ¦ Francoska Gvajana
+La Réunion ¦ Réunion ¦ Réunion
+Guadeloupe ¦ Guadeloupe ¦ Guadeloupe
+Martinique ¦ Martinique ¦ Martinik
+Madagascar ¦ Madagaskar ¦ Madagaskar
+Australie ¦ Australija ¦ Avstralija
+Argentine ¦ Argentina ¦ Argentina
+Brésil ¦ Brazil ¦ Brazilija
+Lituanie ¦ Litva ¦ Litva
+Lettonie ¦ Latvija ¦ Latvija
+Roumanie ¦ Rumunjska ¦ Romunija
+États-Unis ¦ Sjedinjene Američke Države ¦ Združene države Amerike
+Israël ¦ Izrael ¦ Izrael
+Nouvelle-Zélande ¦ Novi Zeland ¦ Nova Zelandija
+Soldats et guerres ¦ Vojnici i ratovi ¦ Vojaki in vojne
+Décorations ¦ Odlikovanja ¦ Odlikovanja
+Mémoire (déportés, fusillés, Justes) ¦ Sjećanje (deportirani, strijeljani, Pravednici) ¦ Spomin (deportiranci, ustreljeni, Pravičniki)
+État civil et registres ¦ Matične knjige i registri ¦ Matične knjige in registri
+Arbres et grandes bases ¦ Stabla i velike baze ¦ Drevesa in velike baze
+Émigration et outre-mer ¦ Iseljavanje i prekomorski krajevi ¦ Izseljevanje in čezmorski kraji
+Notaires et justice ¦ Javni bilježnici i pravosuđe ¦ Notarji in sodstvo
+Métiers, élus, savants ¦ Zanimanja, izabrani dužnosnici, učenjaci ¦ Poklici, izvoljeni funkcionarji, učenjaki
+Presse et Journal officiel ¦ Tisak i Službeni list ¦ Tisk in Uradni list
+Livres, bibliothèques, auteurs ¦ Knjige, knjižnice, autori ¦ Knjige, knjižnice, avtorji
+Cimetières et monuments ¦ Groblja i spomenici ¦ Pokopališča in spomeniki
+Lieux, cartes, patrimoine ¦ Mjesta, karte, baština ¦ Kraji, zemljevidi, dediščina
+Enfants assistés ¦ Nahočad ¦ Najdenčki
+🕯 Maitron des fusillés 1940-1944 ¦ 🕯 Maitron strijeljanih 1940.–1944. ¦ 🕯 Maitron ustreljenih 1940–1944
+📷 Le photographe dans l’annuaire ¦ 📷 Fotograf u imeniku ¦ 📷 Fotograf v imeniku
+Un site que tu as ajouté. ¦ Stranica koju si dodao/dodala. ¦ Stran, ki si jo dodal/dodala.
+🧳 Émigration ¦ 🧳 Iseljavanje ¦ 🧳 Izseljevanje
+⚕ Médecin, polytechnicien ¦ ⚕ Liječnik, diplomant politehnike ¦ ⚕ Zdravnik, diplomant politehnike
+🏛 Élu ¦ 🏛 Izabrani dužnosnik ¦ 🏛 Izvoljeni funkcionar
+📍 Ce lieu ¦ 📍 Ovo mjesto ¦ 📍 Ta kraj
+🏆 Récompenses ¦ 🏆 Nagrade ¦ 🏆 Nagrade
+SERVICE D’ARCHIVES ¦ ARHIVSKA SLUŽBA ¦ ARHIVSKA SLUŽBA
+Nouveau service d’archives ¦ Nova arhivska služba ¦ Nova arhivska služba
+Partir des Archives départementales de… ¦ Kreni od departmanskog arhiva… ¦ Začni pri departmajskem arhivu…
+(facultatif : remplit le nom, le sigle et le site) ¦ (nije obavezno: ispunjava naziv, kraticu i stranicu) ¦ (neobvezno: izpolni ime, kratico in stran)
+— choisir un département — ¦ — odaberi departman — ¦ — izberi departma —
+Nom du service ¦ Naziv službe ¦ Ime službe
+Archives départementales de la Corrèze ¦ Archives départementales de la Corrèze ¦ Archives départementales de la Corrèze
+Sigle ¦ Kratica ¦ Kratica
+Autres noms ¦ Drugi nazivi ¦ Druga imena
+(comme tu l’écris dans tes recherches) ¦ (kako to pišeš u svojim istraživanjima) ¦ (kot to pišeš v svojih raziskavah)
+(si c’est en France) ¦ (ako je u Francuskoj) ¦ (če je v Franciji)
+Du mardi au vendredi, 9 h – 17 h ; réservation des documents la veille… ¦ Od utorka do petka, 9 – 17 h; rezervacija dokumenata dan ranije… ¦ Od torka do petka, 9 – 17 h; rezervacija dokumentov dan prej…
+Recherche en ligne ¦ Pretraživanje na internetu ¦ Spletno iskanje
+Séries ¦ Serije ¦ Serije
+(une par ligne : « 3 E — Notaires », « 4 E — État civil », « 2 Mi — Microfilms ») ¦ (jedna po retku: „3 E — Notaires”, „4 E — État civil”, „2 Mi — Microfilms”) ¦ (ena na vrstico: »3 E — Notaires«, »4 E — État civil«, »2 Mi — Microfilms«)
+(ceux que tu as pu écrire dans tes dépouillements, séparés par des virgules : tout ce qui y a été consulté s’affichera sur la fiche) ¦ (oni koje si možda upisao/upisala u svojim indeksima, odvojeni zarezima: sve što je ondje pregledano prikazat će se na zapisu) ¦ (tista, ki si jih morda vpisal/vpisala v svoje indekse, ločena z vejicami: vse, kar je bilo tam pregledano, bo prikazano na zapisu)
+AD Corrèze, Archives de Tulle ¦ AD Corrèze, Archives de Tulle ¦ AD Corrèze, Archives de Tulle
+Salle de lecture, carte de lecteur, appareil photo autorisé… ¦ Čitaonica, iskaznica korisnika, fotoaparat dopušten… ¦ Čitalnica, izkaznica uporabnika, fotoaparat dovoljen…
+En ligne : ¦ Na internetu: ¦ Na spletu:
+Donne le nom du service d’archives. ¦ Navedi naziv arhivske službe. ¦ Navedi ime arhivske službe.
+Service « {name} » créé. ¦ Služba „{name}” stvorena. ¦ Služba »{name}« ustvarjena.
+Service « {name} » supprimé ¦ Služba „{name}” izbrisana ¦ Služba »{name}« izbrisana
+{n} chez eux ¦ Kod njih: {n} ¦ Pri njih: {n}
+Rien de consulté pour l’instant ¦ Zasad ništa pregledano ¦ Zaenkrat nič pregledano
+trouvées ¦ pronađene ¦ najdene
+trouvés ¦ pronađeni ¦ najdeni
+Consulté ¦ Pregledano ¦ Pregledano
+Tes services d’archives, avec leur adresse, leurs horaires, leur site, leurs séries, et tout ce que tu y as déjà consulté. ¦ Tvoje arhivske službe, s adresom, radnim vremenom, stranicom, serijama i svime što si ondje već pregledao/pregledala. ¦ Tvoje arhivske službe, z naslovom, urnikom, spletno stranjo, serijami in vsem, kar si tam že pregledal/pregledala.
+＋ Nouveau service ¦ ＋ Nova služba ¦ ＋ Nova služba
+🗄️ Visites d’archives ¦ 🗄️ Posjeti arhivima ¦ 🗄️ Obiski arhivov
+Chargement des services… ¦ Učitavanje službi… ¦ Nalaganje služb…
+Ces services sont écrits dans tes recherches sans avoir encore de fiche : ¦ Ove su službe upisane u tvojim istraživanjima, ali još nemaju zapis: ¦ Te službe so zapisane v tvojih raziskavah, a še nimajo zapisa:
+Ce service est écrit dans tes recherches sans avoir encore de fiche : ¦ Ova je služba upisana u tvojim istraživanjima, ali još nema zapis: ¦ Ta služba je zapisana v tvojih raziskavah, a še nima zapisa:
+Chercher… (nom, sigle, ville, série) ¦ Traži… (naziv, kratica, grad, serija) ¦ Išči… (ime, kratica, mesto, serija)
+Déjà consultés ¦ Već pregledane ¦ Že pregledane
+Déjà consultés ({n}) ¦ Već pregledane ({n}) ¦ Že pregledane ({n})
+Rien de consulté ¦ Ništa pregledano ¦ Nič pregledano
+Rien de consulté ({n}) ¦ Ništa pregledano ({n}) ¦ Nič pregledano ({n})
+Consultés le plus récemment ¦ Najnovije pregledane ¦ Nazadnje pregledane
+Les plus consultés ¦ Najčešće pregledane ¦ Najpogosteje pregledane
+Ajoute les archives où tu cherches (départementales, municipales, notaires…) : leur adresse, leurs horaires, leurs séries, et tout ce que tu y as consulté s’affichera sur leur fiche. ¦ Dodaj arhive u kojima tražiš (departmanski, gradski, javnobilježnički…): njihova adresa, radno vrijeme, serije i sve što si ondje pregledao/pregledala prikazat će se na njihovu zapisu. ¦ Dodaj arhive, v katerih iščeš (departmajske, mestne, notarske…): njihov naslov, urnik, serije in vse, kar si tam pregledal/pregledala, bo prikazano na njihovem zapisu.
+Rien ne correspond ¦ Ništa ne odgovara ¦ Nič se ne ujema
+Enlève un filtre, ou cherche autrement (un sigle, une ville). ¦ Ukloni filtar ili traži drukčije (kratica, grad). ¦ Odstrani filter ali išči drugače (kratica, mesto).
+Rien trouvé ¦ Ništa nije pronađeno ¦ Nič najdeno
+En partie ¦ Djelomično ¦ Delno
+Pas consulté ¦ Nije pregledano ¦ Ni pregledano
+Chargement de la fiche… ¦ Učitavanje zapisa… ¦ Nalaganje zapisa…
+← Tous les services ¦ ← Sve službe ¦ ← Vse službe
+📍 Où et quand ¦ 📍 Gdje i kada ¦ 📍 Kje in kdaj
+Site du service ¦ Stranica službe ¦ Spletna stran službe
+Registres et fonds en ligne ¦ Matice i fondovi na internetu ¦ Matične knjige in fondi na spletu
+Rien de noté : ajoute l’adresse, les horaires et le site. ¦ Ništa nije zabilježeno: dodaj adresu, radno vrijeme i stranicu. ¦ Nič ni zapisano: dodaj naslov, urnik in spletno stran.
+🗂 Séries ¦ 🗂 Serije ¦ 🗂 Serije
+Série ¦ Serija ¦ Serija
+Ce que c’est ¦ Što je to ¦ Kaj je to
+Sans série ¦ Bez serije ¦ Brez serije
+Sans série ({n}) ¦ Bez serije ({n}) ¦ Brez serije ({n})
+Aucune série notée : écris-les sur la fiche (« 3 E — Notaires »), ou elles viendront des cotes de tes recherches. ¦ Nijedna serija nije zabilježena: upiši ih na zapis („3 E — Notaires”) ili će doći iz signatura tvojih istraživanja. ¦ Nobena serija ni zapisana: vpiši jih na zapis (»3 E — Notaires«) ali pa bodo prišle iz signatur tvojih raziskav.
+✓ Déjà consulté chez eux ¦ ✓ Već pregledano kod njih ¦ ✓ Že pregledano pri njih
+nom écrit ¦ upisani naziv ¦ zapisano ime
+Aucune source reliée : choisis ce service dans la fenêtre d’une source (« 🏛 Service d’archives »). ¦ Nema povezanog izvora: odaberi ovu službu u prozoru izvora („🏛 Arhivska služba”). ¦ Ni povezanega vira: izberi to službo v oknu vira (»🏛 Arhivska služba«).
+Aucun média relié : choisis ce service dans la fenêtre d’un média. ¦ Nema povezanog medija: odaberi ovu službu u prozoru medija. ¦ Ni povezanega medija: izberi to službo v oknu medija.
+Aucune visite préparée chez eux. ¦ Kod njih nije pripremljen nijedan posjet. ¦ Pri njih ni pripravljen noben obisk.
+Rien dans cette série. ¦ Ništa u ovoj seriji. ¦ V tej seriji ni ničesar.
+Faite ¦ Obavljeno ¦ Opravljeno
+🏛 Service d’archives ¦ 🏛 Arhivska služba ¦ 🏛 Arhivska služba
+Tout ce qui vient de ce service se retrouve sur sa fiche (Listes → Services d’archives), rangé par série. ¦ Sve što dolazi iz ove službe nalazi se na njezinu zapisu (Popisi → Arhivske službe), razvrstano po serijama. ¦ Vse, kar pride iz te službe, je na njenem zapisu (Seznami → Arhivske službe), razvrščeno po serijah.
+vue dans une cote ¦ viđeno u signaturi ¦ videno v signaturi
+cote sans série reconnue ¦ signatura bez prepoznate serije ¦ signatura brez prepoznane serije
+série {s} ¦ serija {s} ¦ serija {s}
+cote {c} ¦ signatura {c} ¦ signatura {c}
+prévue le {date} ¦ planirano za {date} ¦ načrtovano za {date}
+Rien de consulté chez eux pour l’instant. Les dépouillements, visites faites et demandes dont le service est « {name} » (ou un de ses autres noms) s’affichent ici. ¦ Zasad ništa pregledano kod njih. Ovdje se prikazuju indeksi zapisa, obavljeni posjeti i zahtjevi čija je služba „{name}” (ili neki od njezinih drugih naziva). ¦ Pri njih zaenkrat nič pregledano. Tukaj so prikazani indeksi vpisov, opravljeni obiski in zahteve, katerih služba je »{name}« (ali eno od njenih drugih imen).
+Résolu ¦ Riješeno ¦ Rešeno
+Abandonné ¦ Napušteno ¦ Opuščeno
+ses deux parents ¦ oba roditelja ¦ oba starša
+rien (marqué à la main) ¦ ništa (označeno ručno) ¦ nič (označeno ročno)
+{service} — état civil et registres paroissiaux ¦ {service} — matične knjige i župne matice ¦ {service} — matične knjige in župnijske matične knjige
+Archives du département ¦ Arhiv departmana ¦ Arhiv departmaja
+Naissance inconnue : les registres de {place}, en ligne, autour de {year} ¦ Rođenje nepoznato: matice za {place}, na internetu, oko {year}. ¦ Rojstvo neznano: matične knjige za {place}, na spletu, okoli leta {year}
+Naissance inconnue : les registres de {place}, en ligne ¦ Rođenje nepoznato: matice za {place}, na internetu ¦ Rojstvo neznano: matične knjige za {place}, na spletu
+Parents inconnus : son acte de mariage à {place} donne le nom de ses parents ¦ Roditelji nepoznati: njegov zapis o vjenčanju u {place} navodi imena roditelja ¦ Starši neznani: njegov vpis poroke v {place} navaja imena staršev
+Parents inconnus : son acte de naissance à {place} donne le nom de ses parents ¦ Roditelji nepoznati: njegov zapis o rođenju u {place} navodi imena roditelja ¦ Starši neznani: njegov rojstni vpis v {place} navaja imena staršev
+Décès inconnu : les registres de {place} ¦ Smrt nepoznata: matice za {place} ¦ Smrt neznana: matične knjige za {place}
+Elle a vécu à {place} : l’état civil et les registres paroissiaux en ligne ¦ Živjela je u {place}: matične knjige i župne matice na internetu ¦ Živela je v {place}: matične knjige in župnijske matične knjige na spletu
+Il a vécu à {place} : l’état civil et les registres paroissiaux en ligne ¦ Živio je u {place}: matične knjige i župne matice na internetu ¦ Živel je v {place}: matične knjige in župnijske matične knjige na spletu
+S’ouvre dans ton navigateur, avec son nom déjà rempli ¦ Otvara se u tvom pregledniku, s već upisanim imenom ¦ Odpre se v tvojem brskalniku, z že vpisanim imenom
+Noter dans le Journal des recherches ce que ça a donné ¦ Zabilježi u Dnevnik istraživanja što je to dalo ¦ Zapiši v Dnevnik raziskovanja, kaj je to dalo
+✓ Déjà cherché ¦ ✓ Već traženo ¦ ✓ Že iskano
+🔍 Déjà cherché ¦ 🔍 Već traženo ¦ 🔍 Že iskano
+✓ {result} sur {site} : noté dans le Journal des recherches ¦ ✓ {result} na {site}: zabilježeno u Dnevniku istraživanja ¦ ✓ {result} na {site}: zapisano v Dnevnik raziskovanja
+＋ Piste ajoutée : « Chercher sur {site} » (nouvelle enquête « Où chercher ? ») ¦ ＋ Trag dodan: „Traži na {site}” (nova istraga „Gdje tražiti?”) ¦ ＋ Sled dodana: »Išči na {site}« (nova preiskava »Kje iskati?«)
+＋ Piste ajoutée : « Chercher sur {site} » ¦ ＋ Trag dodan: „Traži na {site}” ¦ ＋ Sled dodana: »Išči na {site}«
+« {text} » est copié : colle-le dans la case de recherche du site ({key}). ¦ „{text}” je kopirano: zalijepi u polje za pretraživanje stranice ({key}). ¦ »{text}« je kopirano: prilepi v iskalno polje strani ({key}).
+Ce que ça a donné ¦ Što je to dalo ¦ Kaj je to dalo
+Chercher sur ce site ¦ Traži na ovoj stranici ¦ Išči na tej strani
+En faire une piste ¦ Napravi od toga trag ¦ Naredi iz tega sled
+Copier l’adresse ¦ Kopiraj adresu ¦ Kopiraj naslov
+Adresse copiée. ¦ Adresa kopirana. ¦ Naslov kopiran.
+Je cherche les bons sites… ¦ Tražim prave stranice… ¦ Iščem prave strani…
+Les sites les plus utiles pour {name}, d’après ses lieux, ses dates et ce qui manque. Chaque site s’ouvre dans ton navigateur, son nom déjà rempli. ¦ Najkorisnije stranice za osobu {name}, prema njezinim mjestima, datumima i onome što nedostaje. Svaka se stranica otvara u tvom pregledniku, s već upisanim imenom. ¦ Najkoristnejše strani za osebo {name}, glede na njene kraje, datume in to, kar manjka. Vsaka stran se odpre v tvojem brskalniku, z že vpisanim imenom.
+Voir les {n} autres propositions ↓ ¦ Pogledaj ostale prijedloge ({n}) ↓ ¦ Poglej ostale predloge ({n}) ↓
+Toutes les propositions, et celles déjà cherchées ¦ Svi prijedlozi, i oni već traženi ¦ Vsi predlogi, tudi že iskani
+Ajoute un lieu ou une date : les propositions s’affinent. ¦ Dodaj mjesto ili datum: prijedlozi postaju precizniji. ¦ Dodaj kraj ali datum: predlogi postanejo natančnejši.
+sites déjà cherchés ¦ već pretražene stranice ¦ že preiskane strani
+Cache les sites payants (le même réglage que dans « Archives en ligne ») ¦ Skriva plaćene stranice (ista postavka kao u „Arhivi na internetu”) ¦ Skrije plačljive strani (ista nastavitev kot v »Spletni arhivi«)
+Où chercher ? ¦ Gdje tražiti? ¦ Kje iskati?
+Pour qui ? ¦ Za koga? ¦ Za koga?
+Choisis une personne ¦ Odaberi osobu ¦ Izberi osebo
+Ses lieux, ses dates et ce qui manque décident des sites proposés. ¦ Njezina mjesta, datumi i ono što nedostaje određuju predložene stranice. ¦ Njeni kraji, datumi in to, kar manjka, določajo predlagane strani.
+Ce qui compte pour choisir ¦ Što je važno za odabir ¦ Kaj šteje pri izbiri
+🧱 Ne plus bloquer ici ¦ 🧱 Više ne zapinjem ovdje ¦ 🧱 Tu se ne zatikam več
+🧱 Je bloque ici ¦ 🧱 Ovdje zapinjem ¦ 🧱 Tu se zatikam
+Ne plus bloquer ici ¦ Više ne zapinjem ovdje ¦ Tu se ne zatikam več
+Je bloque ici (mur de brique) ¦ Ovdje zapinjem (mrtva točka) ¦ Tu se zatikam (slepa ulica)
+Aucun site écarté. ¦ Nijedna stranica nije isključena. ¦ Nobena stran ni izključena.
+Rien n’a encore été noté pour cette personne. ¦ Za ovu osobu još ništa nije zabilježeno. ¦ Za to osebo še ni nič zapisano.
+Après une recherche, « ✓ Déjà cherché » la note dans le Journal des recherches. ¦ Nakon pretraživanja „✓ Već traženo” bilježi ga u Dnevnik istraživanja. ¦ Po iskanju ga »✓ Že iskano« zapiše v Dnevnik raziskovanja.
+Proposés ({n}) ¦ Predložene ({n}) ¦ Predlagane ({n})
+✓ Déjà cherchés ({n}) ¦ ✓ Već tražene ({n}) ¦ ✓ Že iskane ({n})
+Écartés ({n}) ¦ Isključene ({n}) ¦ Izključene ({n})
+Aucun site à proposer. ¦ Nema stranice za predložiti. ¦ Ni strani za predlog.
+{n} : décoche « Gratuites seulement ». ¦ {n}: odznači „Samo besplatne”. ¦ {n}: odznači »Samo brezplačne«.
+sites payants sont cachés ¦ plaćene stranice su skrivene ¦ plačljive strani so skrite
+Ajoute un lieu ou une date sur la fiche. ¦ Dodaj mjesto ili datum na zapis. ¦ Dodaj kraj ali datum na zapis.
+pistes d’enquête ¦ tragovi istrage ¦ sledi preiskave
+Piste d’enquête ¦ Trag istrage ¦ Sled preiskave
+Pistes d’enquête ¦ Tragovi istrage ¦ Sledi preiskave
+🧱 {name} : ajoutée aux murs de brique ¦ 🧱 {name}: dodano među mrtve točke ¦ 🧱 {name}: dodano med slepe ulice
+🧱 {name} : ne bloque plus ici ¦ 🧱 {name}: ovdje više ne zapinje ¦ 🧱 {name}: tu se ne zatika več
+🎉 Bravo ! Le mur de {name} est tombé : une génération de plus à découvrir. ¦ 🎉 Bravo! Mrtva točka osobe {name} je probijena: još jedna generacija za otkriti. ¦ 🎉 Bravo! Slepa ulica osebe {name} je prebita: še en rod za odkrivanje.
+🎉 Bravo ! Le mur de {name} est tombé : ses parents sont maintenant dans ta base. ¦ 🎉 Bravo! Mrtva točka osobe {name} je probijena: njezini su roditelji sada u tvojoj bazi. ¦ 🎉 Bravo! Slepa ulica osebe {name} je prebita: njeni starši so zdaj v tvoji bazi.
+Je cherche les murs… ¦ Tražim mrtve točke… ¦ Iščem slepe ulice…
+Sur qui bloques-tu ? ¦ Na kome zapinješ? ¦ Pri kom se zatikaš?
+Chercher un nom… (ex. Martin, Naves) ¦ Traži ime… (npr. Martin, Naves) ¦ Išči ime… (npr. Martin, Naves)
+Les deux parents ¦ Oba roditelja ¦ Oba starša
+Le père ¦ Otac ¦ Oče
+La mère ¦ Majka ¦ Mati
+🧱 À la main ¦ 🧱 Ručno ¦ 🧱 Ročno
+Génération, puis Sosa ¦ Generacija, zatim Sosa broj ¦ Rod, nato Sosa številka
+Plus récents ¦ Najnovije ¦ Najnovejše
+Hors lignée ¦ Izvan izravne loze ¦ Zunaj neposredne linije
+Aucun mur ne correspond ¦ Nijedna mrtva točka ne odgovara ¦ Nobena slepa ulica se ne ujema
+Retire un filtre ou change la recherche. ¦ Ukloni filtar ili promijeni pretraživanje. ¦ Odstrani filter ali spremeni iskanje.
+Aucun mur de brique ¦ Nema mrtvih točaka ¦ Ni slepih ulic
+Tous tes ancêtres connus ont leurs deux parents. Si tu bloques quelque part, marque-le « 🧱 Je bloque ici ». ¦ Svi tvoji poznati preci imaju oba roditelja. Ako negdje zapinješ, označi to s „🧱 Ovdje zapinjem”. ¦ Vsi tvoji znani predniki imajo oba starša. Če se kje zatikaš, to označi z »🧱 Tu se zatikam«.
+Je rassemble ce que tu sais… ¦ Prikupljam ono što znaš… ¦ Zbiram, kar veš…
+à explorer en priorité ¦ istražiti prioritetno ¦ raziskati prednostno
+à explorer ¦ za istražiti ¦ za raziskati
+prometteuse ¦ obećavajući ¦ obetavna
+explorée ¦ istražen ¦ raziskana
+fermée ¦ zatvoren ¦ zaprta
+Rien de noté pour l’instant. ¦ Zasad ništa nije zabilježeno. ¦ Zaenkrat nič zapisano.
+🌍 À essayer ¦ 🌍 Za isprobati ¦ 🌍 Za preizkus
+Tous les sites proposés ont été cherchés. ¦ Sve predložene stranice su pretražene. ¦ Vse predlagane strani so preiskane.
+💡 Indices dans ta base ¦ 💡 Tragovi u tvojoj bazi ¦ 💡 Namigi v tvoji bazi
+Pas d’homonyme, de témoin ni de voisin repéré. ¦ Nije pronađen nijedan imenjak, svjedok ni susjed. ¦ Ni najdenega soimenjaka, priče ali soseda.
+Ce que tu sais, ce que tu soupçonnes, où tu as déjà regardé… ¦ Što znaš, što sumnjaš, gdje si već tražio/tražila… ¦ Kaj veš, kaj sumiš, kje si že iskal/iskala…
+Gardée toute seule. ¦ Sprema se automatski. ¦ Shrani se samodejno.
+Les murs de brique n’ont pas pu être lus. ¦ Mrtve točke nisu se mogle učitati. ¦ Slepih ulic ni bilo mogoče naložiti.
+résolus ¦ riješene ¦ rešene
+Tous tes murs sont tombés, bravo ! ¦ Sve su tvoje mrtve točke probijene, bravo! ¦ Vse tvoje slepe ulice so prebite, bravo!
+Aucun mur de brique : tes ancêtres connus ont leurs parents. ¦ Nema mrtvih točaka: tvoji poznati preci imaju svoje roditelje. ¦ Ni slepih ulic: tvoji znani predniki imajo svoje starše.
+Génération {n} ¦ Generacija {n} ¦ Rod {n}
+{n} en cours ¦ U tijeku: {n} ¦ V teku: {n}
+Voir les {n} autres ↓ ¦ Pogledaj ostale ({n}) ↓ ¦ Poglej ostale ({n}) ↓
+⚖️ Hypothèses ¦ ⚖️ Hipoteze ¦ ⚖️ Domneve
+soldat ¦ vojnik ¦ vojak
+mort pour la France ¦ poginuo za Francusku ¦ padel za Francijo
+prisonnier de guerre ¦ ratni zarobljenik ¦ vojni ujetnik
+marin ¦ pomorac ¦ mornar
+émigré ¦ iseljenik ¦ izseljenec
+notaire ¦ javni bilježnik ¦ notar
+héritage, testament ¦ nasljedstvo, oporuka ¦ dediščina, oporoka
+déporté ¦ deportiran ¦ deportiran
+fusillé ¦ strijeljan ¦ ustreljen
+résistant ¦ pripadnik pokreta otpora ¦ pripadnik odporniškega gibanja
+enfant placé ¦ dijete u udomiteljstvu ¦ rejenec
+noblesse ¦ plemstvo ¦ plemstvo
+protestant ¦ protestant ¦ protestant
+famille juive ¦ židovska obitelj ¦ judovska družina
+cheminot ¦ željezničar ¦ železničar
+gendarme, policier ¦ žandar, policajac ¦ žandar, policist
+élu ¦ izabrani dužnosnik ¦ izvoljeni funkcionar
+médecin ¦ liječnik ¦ zdravnik
+photographe ¦ fotograf ¦ fotograf
+religieux ¦ redovnik ili svećenik ¦ duhovnik ali redovnik
+ouvrier ¦ radnik ¦ delavec
+inventeur, savant ¦ izumitelj, učenjak ¦ izumitelj, učenjak
+artiste ¦ umjetnik ¦ umetnik
+naissance inconnue ¦ rođenje nepoznato ¦ rojstvo neznano
+décès inconnu ¦ smrt nepoznata ¦ smrt neznana
+parents inconnus ¦ roditelji nepoznati ¦ starši neznani
+père inconnu ¦ otac nepoznat ¦ oče neznan
+mère inconnue ¦ majka nepoznata ¦ mati neznana
+mariage inconnu ¦ vjenčanje nepoznato ¦ poroka neznana
+en {dept} ¦ u {dept} ¦ v {dept}
+en {country} ¦ u {country} ¦ v {country}
+de {place} ¦ iz {place} ¦ iz {place}
+vers ¦ oko ¦ okoli
+ou ¦ ili ¦ ali
+Née vers {year} ¦ Rođena oko {year}. ¦ Rojena okoli leta {year}
+Né vers {year} ¦ Rođen oko {year}. ¦ Rojen okoli leta {year}
+Née en {year} ¦ Rođena {year}. ¦ Rojena leta {year}
+Né en {year} ¦ Rođen {year}. ¦ Rojen leta {year}
+Écosse ¦ Škotska ¦ Škotska
+{born} : elle a fait la guerre de 14 ¦ {born}: sudjelovala je u Prvom svjetskom ratu ¦ {born}: sodelovala je v prvi svetovni vojni
+{born} : il a fait la guerre de 14 ¦ {born}: sudjelovao je u Prvom svjetskom ratu ¦ {born}: sodeloval je v prvi svetovni vojni
+{born} : elle a sans doute fait la guerre de 14 ¦ {born}: vjerojatno je sudjelovala u Prvom svjetskom ratu ¦ {born}: verjetno je sodelovala v prvi svetovni vojni
+{born} : il a sans doute fait la guerre de 14 ¦ {born}: vjerojatno je sudjelovao u Prvom svjetskom ratu ¦ {born}: verjetno je sodeloval v prvi svetovni vojni
+{born} : elle avait l’âge d’être mobilisé en 1939-1945 ¦ {born}: 1939.–1945. bila je u dobi za mobilizaciju ¦ {born}: v letih 1939–1945 je bila v starosti za mobilizacijo
+{born} : il avait l’âge d’être mobilisé en 1939-1945 ¦ {born}: 1939.–1945. bio je u dobi za mobilizaciju ¦ {born}: v letih 1939–1945 je bil v starosti za mobilizacijo
+Les arbres et relevés des généalogistes français : quelqu’un a peut-être déjà trouvé ses parents ¦ Stabla i indeksi francuskih rodoslovaca: netko je možda već pronašao njegove roditelje ¦ Drevesa in indeksi francoskih rodoslovcev: morda je kdo že našel njegove starše
+Des millions d’arbres et de relevés : quelqu’un a peut-être déjà cherché ¦ Milijuni stabala i indeksa: netko je možda već tražio ¦ Milijoni dreves in indeksov: morda je kdo že iskal
+Actes indexés du monde entier, gratuits ({list}) ¦ Indeksirani matični zapisi iz cijelog svijeta, besplatno ({list}) ¦ Indeksirani matični vpisi z vsega sveta, brezplačno ({list})
+Actes indexés gratuits (un compte gratuit est demandé) ¦ Besplatni indeksirani matični zapisi (traži se besplatni račun) ¦ Brezplačni indeksirani matični vpisi (potreben je brezplačen račun)
+Les registres filmés {of} (catalogue FamilySearch) ¦ Snimljene matice {of} (katalog FamilySearch) ¦ Posnete matične knjige {of} (katalog FamilySearch)
+Les registres filmés de ses communes (catalogue FamilySearch) ¦ Snimljene matice njegovih općina (katalog FamilySearch) ¦ Posnete matične knjige njegovih občin (katalog FamilySearch)
+Décès en {year} : le fichier des décès de l’INSEE (depuis 1970) ¦ Smrt {year}.: datoteka smrti INSEE-a (od 1970.) ¦ Smrt leta {year}: datoteka smrti INSEE (od leta 1970)
+{born} : si elle est morte après 1970, son décès est dans le fichier de l’INSEE ¦ {born}: ako je umrla nakon 1970., njezina je smrt u datoteci INSEE-a ¦ {born}: če je umrla po letu 1970, je njena smrt v datoteki INSEE
+{born} : s’il est mort après 1970, son décès est dans le fichier de l’INSEE ¦ {born}: ako je umro nakon 1970., njegova je smrt u datoteci INSEE-a ¦ {born}: če je umrl po letu 1970, je njegova smrt v datoteki INSEE
+Tombes photographiées par des bénévoles ¦ Grobovi koje su fotografirali volonteri ¦ Grobovi, ki so jih fotografirali prostovoljci
+Le journal de marche de son régiment : où il était, jour après jour ¦ Ratni dnevnik njegove pukovnije: gdje je bio, dan za danom ¦ Vojni dnevnik njegovega polka: kje je bil, dan za dnem
+{born} : sa fiche matricule (classe {year}) dit sa taille, son métier, ses adresses et ses parents ¦ {born}: njegov vojni matični list (godište {year}.) navodi visinu, zanimanje, adrese i roditelje ¦ {born}: njegov vojaški matični list (letnik {year}) navaja višino, poklic, naslove in starše
+Les dossiers de la Légion d’honneur (morts avant 1977) ¦ Spisi Legije časti (umrli prije 1977.) ¦ Spisi legije časti (umrli pred letom 1977)
+{born} : un soldat de Napoléon a peut-être reçu la médaille de Sainte-Hélène ¦ {born}: Napoleonov vojnik možda je dobio medalju Svete Helene ¦ {born}: Napoleonov vojak je morda prejel medaljo Svete Helene
+{born} : elle avait l’âge de faire la guerre de 1870 ¦ {born}: bila je u dobi za rat 1870. ¦ {born}: bila je v starosti za vojno leta 1870
+{born} : il avait l’âge de faire la guerre de 1870 ¦ {born}: bio je u dobi za rat 1870. ¦ {born}: bil je v starosti za vojno leta 1870
+Un marin : l’inscription maritime suit chaque embarquement ¦ Pomorac: pomorski upisnik prati svako ukrcavanje ¦ Mornar: pomorski register beleži vsako vkrcanje
+Un marin : l’inscription maritime de son port (quartier maritime) ¦ Pomorac: pomorski upisnik njegove luke (pomorski okrug) ¦ Mornar: pomorski register njegovega pristanišča (pomorsko okrožje)
+Partie en Amérique : les listes de passagers d’Ellis Island (1892-1924) ¦ Otišla u Ameriku: popisi putnika s Ellis Islanda (1892.–1924.) ¦ Odšla v Ameriko: seznami potnikov z Ellis Islanda (1892–1924)
+Parti en Amérique : les listes de passagers d’Ellis Island (1892-1924) ¦ Otišao u Ameriku: popisi putnika s Ellis Islanda (1892.–1924.) ¦ Odšel v Ameriko: seznami potnikov z Ellis Islanda (1892–1924)
+Elle a vécu aux États-Unis : les arrivées à Ellis Island (1892-1924) ¦ Živjela je u Sjedinjenim Državama: dolasci na Ellis Island (1892.–1924.) ¦ Živela je v Združenih državah: prihodi na Ellis Island (1892–1924)
+Il a vécu aux États-Unis : les arrivées à Ellis Island (1892-1924) ¦ Živio je u Sjedinjenim Državama: dolasci na Ellis Island (1892.–1924.) ¦ Živel je v Združenih državah: prihodi na Ellis Island (1892–1924)
+Arrivées à New York avant Ellis Island (1820-1892) ¦ Dolasci u New York prije Ellis Islanda (1820.–1892.) ¦ Prihodi v New York pred Ellis Islandom (1820–1892)
+Venu d’ailleurs : les décrets de naturalisation (1883-1930) ¦ Došao odnekud drugdje: dekreti o naturalizaciji (1883.–1930.) ¦ Prišel od drugod: odloki o naturalizaciji (1883–1930)
+Il a vécu à Paris : les actes de ses notaires (contrats de mariage, inventaires, testaments) ¦ Živio je u Parizu: isprave njegovih javnih bilježnika (bračni ugovori, inventari, oporuke) ¦ Živel je v Parizu: listine njegovih notarjev (poročne pogodbe, inventarji, oporoke)
+Un héritage, un testament : le Minutier central des notaires de Paris ¦ Nasljedstvo, oporuka: Središnji arhiv pariških javnih bilježnika (Minutier central) ¦ Dediščina, oporoka: osrednji arhiv pariških notarjev (Minutier central)
+Sa fiche dit une déportation : les noms des victimes de la Shoah ¦ Njegov zapis navodi deportaciju: imena žrtava Holokausta ¦ Njegov zapis navaja deportacijo: imena žrtev holokavsta
+Les archives des persécutions nazies (déportés, travailleurs forcés, personnes déplacées) ¦ Arhivi nacističkih progona (deportirani, prisilni radnici, raseljene osobe) ¦ Arhivi nacističnega preganjanja (deportiranci, prisilni delavci, razseljene osebe)
+Le Mémorial de la Shoah : les noms des déportés de France ¦ Mémorial de la Shoah: imena deportiranih iz Francuske ¦ Mémorial de la Shoah: imena deportiranih iz Francije
+Le livre-mémorial des déportés de France ¦ Spomen-knjiga deportiranih iz Francuske ¦ Spominska knjiga deportiranih iz Francije
+Le Maitron des fusillés et exécutés (1940-1944) ¦ Maitron strijeljanih i pogubljenih (1940.–1944.) ¦ Maitron ustreljenih in usmrčenih (1940–1944)
+Elle a vécu {where} : l’état civil des anciennes colonies (ANOM) ¦ Živjela je {where}: matične knjige bivših kolonija (ANOM) ¦ Živela je {where}: matične knjige nekdanjih kolonij (ANOM)
+Il a vécu {where} : l’état civil des anciennes colonies (ANOM) ¦ Živio je {where}: matične knjige bivših kolonija (ANOM) ¦ Živel je {where}: matične knjige nekdanjih kolonij (ANOM)
+Une famille protestante : les registres des réfugiés huguenots ¦ Protestantska obitelj: matice hugenotskih izbjeglica ¦ Protestantska družina: matične knjige hugenotskih beguncev
+Il a vécu à Paris : l’état civil reconstitué (avant 1860) ¦ Živio je u Parizu: rekonstruirane matične knjige (prije 1860.) ¦ Živel je v Parizu: obnovljene matične knjige (pred letom 1860)
+Elle a vécu en France entre 1836 et 1936 : les recensements nominatifs (SocFace) ¦ Živjela je u Francuskoj između 1836. i 1936.: poimenični popisi stanovništva (SocFace) ¦ Živela je v Franciji med letoma 1836 in 1936: poimenski popisi prebivalstva (SocFace)
+Il a vécu en France entre 1836 et 1936 : les recensements nominatifs (SocFace) ¦ Živio je u Francuskoj između 1836. i 1936.: poimenični popisi stanovništva (SocFace) ¦ Živel je v Franciji med letoma 1836 in 1936: poimenski popisi prebivalstva (SocFace)
+Elle a vécu en Italie : l’état civil italien numérisé (Antenati) ¦ Živjela je u Italiji: digitalizirane talijanske matične knjige (Antenati) ¦ Živela je v Italiji: digitalizirane italijanske matične knjige (Antenati)
+Il a vécu en Italie : l’état civil italien numérisé (Antenati) ¦ Živio je u Italiji: digitalizirane talijanske matične knjige (Antenati) ¦ Živel je v Italiji: digitalizirane italijanske matične knjige (Antenati)
+Les bénévoles du cercle généalogique {of} relèvent les actes de leurs communes ¦ Volonteri rodoslovnog društva {of} indeksiraju matične zapise svojih općina ¦ Prostovoljci rodoslovnega društva {of} indeksirajo matične vpise svojih občin
+Les bénévoles du cercle généalogique du département relèvent les actes de leurs communes ¦ Volonteri rodoslovnog društva departmana indeksiraju matične zapise svojih općina ¦ Prostovoljci rodoslovnega društva departmaja indeksirajo matične vpise svojih občin
+Le mode d’emploi des archives du pays ou de la région (FamilySearch Wiki) ¦ Vodič kroz arhive zemlje ili regije (FamilySearch Wiki) ¦ Vodnik po arhivih države ali regije (FamilySearch Wiki)
+Où vivaient les {name} entre 1891 et 1990 : pour trouver d’où vient la famille ¦ Gdje su živjeli {name} između 1891. i 1990.: da pronađeš odakle obitelj potječe ¦ Kje so živeli {name} med letoma 1891 in 1990: da najdeš, od kod izvira družina
+Où vivaient les gens de ce nom entre 1891 et 1990 : pour trouver d’où vient la famille ¦ Gdje su živjeli ljudi s tim prezimenom između 1891. i 1990.: da pronađeš odakle obitelj potječe ¦ Kje so živeli ljudje s tem priimkom med letoma 1891 in 1990: da najdeš, od kod izvira družina
+Elle a vécu {where} ¦ Živjela je {where} ¦ Živela je {where}
+Il a vécu {where} ¦ Živio je {where} ¦ Živel je {where}
+pas de lieu {where} ¦ nema mjesta {where} ¦ ni kraja {where}
+pas de lieu dans ces pays ¦ nema mjesta u tim zemljama ¦ ni kraja v teh državah
+sa vie ({life}) n’est pas dans les années du site ({from}–{to}) ¦ njegov život ({life}) nije unutar godina stranice ({from}–{to}) ¦ njegovo življenje ({life}) ni znotraj let strani ({from}–{to})
+Ses années ({life}) sont dans celles du site ({from}–{to}) ¦ Njegove godine ({life}) su unutar godina stranice ({from}–{to}) ¦ Njegova leta ({life}) so znotraj let strani ({from}–{to})
+née en {year}, hors des années {from}–{to} ¦ rođena {year}., izvan godina {from}–{to} ¦ rojena leta {year}, zunaj let {from}–{to}
+né en {year}, hors des années {from}–{to} ¦ rođen {year}., izvan godina {from}–{to} ¦ rojen leta {year}, zunaj let {from}–{to}
+pour les hommes ¦ za muškarce ¦ za moške
+pour les femmes ¦ za žene ¦ za ženske
+Sa fiche dit : {what} ¦ Njegov zapis kaže: {what} ¦ Njegov zapis pravi: {what}
+seulement {list} ¦ samo {list} ¦ samo {list}
+Sa fiche a une émigration ¦ Njegov zapis ima iseljenje ¦ Njegov zapis ima izselitev
+Sa fiche a une immigration ¦ Njegov zapis ima useljenje ¦ Njegov zapis ima priselitev
+Sa fiche a une naturalisation ¦ Njegov zapis ima naturalizaciju ¦ Njegov zapis ima naturalizacijo
+Sa fiche a un testament ¦ Njegov zapis ima oporuku ¦ Njegov zapis ima oporoko
+Sa fiche a une succession ¦ Njegov zapis ima ostavinu ¦ Njegov zapis ima zapuščino
+Sa fiche a un acte notarié ¦ Njegov zapis ima javnobilježničku ispravu ¦ Njegov zapis ima notarsko listino
+Sa fiche a un contrat de mariage ¦ Njegov zapis ima bračni ugovor ¦ Njegov zapis ima poročno pogodbo
+Sa fiche a l’événement {tag} ¦ Njegov zapis ima događaj {tag} ¦ Njegov zapis ima dogodek {tag}
+née hors de France ({country}) ¦ rođena izvan Francuske ({country}) ¦ rojena zunaj Francije ({country})
+né hors de France ({country}) ¦ rođen izvan Francuske ({country}) ¦ rojen zunaj Francije ({country})
+pas de lieu qui convient ¦ nema prikladnog mjesta ¦ ni primernega kraja
+Une bibliothèque de sa région ¦ Knjižnica u njegovoj regiji ¦ Knjižnica v njegovi regiji
+pas dans sa région ¦ nije u njegovoj regiji ¦ ni v njegovi regiji
+(et {list}) ¦ (i {list}) ¦ (in {list})
+Utile surtout pour {list} ¦ Korisno uglavnom za {list} ¦ Koristno predvsem za {list}
+Utile surtout pour un autre cas ¦ Korisno uglavnom za neki drugi slučaj ¦ Koristno predvsem za drug primer
+Un site général, à essayer ¦ Opća stranica, vrijedi pokušati ¦ Splošna stran, vredno poskusiti
+peu utile pour cette fiche ¦ malo korisno za ovaj zapis ¦ malo koristno za ta zapis
+Dépouillement ¦ Indeks zapisa ¦ Indeks vpisov
+Visite faite ¦ Obavljen posjet ¦ Opravljen obisk
+Visites faites ¦ Obavljeni posjeti ¦ Opravljeni obiski
+— pas encore noté — ¦ — još nije zabilježeno — ¦ — še ni zapisano —
+Déjà dans ton suivi : ¦ Već u tvom praćenju: ¦ Že v tvojem spremljanju:
+(relevé) ¦ (zabilježeno) ¦ (zapisano)
+lignes exportées en CSV. ¦ redaka izvezeno u CSV. ¦ vrstic izvoženih v CSV.
+Tout ce que tu as déjà cherché, du plus récent au plus ancien : pour ne pas chercher deux fois au même endroit. ¦ Sve što si već tražio/tražila, od najnovijeg do najstarijeg: da ne tražiš dvaput na istom mjestu. ¦ Vse, kar si že iskal/iskala, od najnovejšega do najstarejšega: da ne iščeš dvakrat na istem mestu.
+Un compte rendu des recherches montrées (avec les filtres), dans le traitement de texte ¦ Izvješće o prikazanim pretraživanjima (s filtrima), u obradi teksta ¦ Poročilo o prikazanih iskanjih (s filtri), v urejanju besedil
+Chargement du journal… ¦ Učitavanje dnevnika… ¦ Nalaganje dnevnika…
+Résultat pas noté ¦ Rezultat nije zabilježen ¦ Rezultat ni zapisan
+Pas encore noté ({n}) ¦ Još nije zabilježeno ({n}) ¦ Še ni zapisano ({n})
+Tous les services ¦ Sve službe ¦ Vse službe
+Toutes les communes ¦ Sve općine ¦ Vse občine
+Chercher… (cote, commune, service, nom) ¦ Traži… (signatura, općina, služba, ime) ¦ Išči… (signatura, občina, služba, ime)
+Note tes dépouillements, tes visites d’archives (« ✓ Fait le … »), tes pistes d’enquête et tes battues : tout s’affichera ici, du plus récent au plus ancien. ¦ Bilježi svoje indekse zapisa, posjete arhivima („✓ Obavljeno …”), tragove istrage i sustavne pretrage: sve će se prikazati ovdje, od najnovijeg do najstarijeg. ¦ Zapisuj svoje indekse vpisov, obiske arhivov (»✓ Opravljeno …«), sledi preiskav in sistematična iskanja: vse bo prikazano tukaj, od najnovejšega do najstarejšega.
+Enlève un filtre, ou cherche autrement (une cote, une commune, un nom). ¦ Ukloni filtar ili traži drukčije (signatura, općina, ime). ¦ Odstrani filter ali išči drugače (signatura, občina, ime).
+Tout le journal des recherches, filtré sur cette personne ¦ Cijeli dnevnik istraživanja, filtriran na ovu osobu ¦ Celoten dnevnik raziskovanja, filtriran na to osebo
+Rien de cherché pour cette personne pour l’instant. ¦ Za ovu osobu zasad ništa nije traženo. ¦ Za to osebo zaenkrat ni bilo nič iskano.
+🔍 Déjà cherché (journal des recherches) ¦ 🔍 Već traženo (dnevnik istraživanja) ¦ 🔍 Že iskano (dnevnik raziskovanja)
+relevée dans ce registre ¦ zabilježena u ovoj matici ¦ zapisana v tej matični knjigi
+cherchée ¦ tražena ¦ iskana
+Voir les {n} recherches dans le journal → ¦ Pogledaj pretraživanja u dnevniku ({n}) → ¦ Poglej iskanja v dnevniku ({n}) →
+=adresse à toi ¦ tvoja adresa|tvoje adrese|tvojih adresa ¦ tvoj naslov|tvoja naslova|tvoji naslovi|tvojih naslovov
+=affiché ¦ prikazan|prikazana|prikazanih ¦ prikazan|prikazana|prikazani|prikazanih
+=annotation ¦ bilješka|bilješke|bilježaka ¦ opomba|opombi|opombe|opomb
+=autre chose ¦ druga stvar|druge stvari|drugih stvari ¦ druga stvar|drugi stvari|druge stvari|drugih stvari
+=autre disponible ¦ još dostupan|još dostupna|još dostupnih ¦ še na voljo|še na voljo|še na voljo|še na voljo
+=battue ¦ sustavna pretraga|sustavne pretrage|sustavnih pretraga ¦ sistematično iskanje|sistematični iskanji|sistematična iskanja|sistematičnih iskanj
+=chargée ¦ učitana|učitane|učitanih ¦ naložena|naloženi|naložene|naloženih
+=chose reportée ¦ odgođena stvar|odgođene stvari|odgođenih stvari ¦ odložena stvar|odloženi stvari|odložene stvari|odloženih stvari
+=citation ¦ citat|citata|citata ¦ citat|citata|citati|citatov
+=commune ajoutée ¦ dodana općina|dodane općine|dodanih općina ¦ dodana občina|dodani občini|dodane občine|dodanih občin
+=commune retirée ¦ uklonjena općina|uklonjene općine|uklonjenih općina ¦ odstranjena občina|odstranjeni občini|odstranjene občine|odstranjenih občin
+=commune voisine incluse ¦ uključena susjedna općina|uključene susjedne općine|uključenih susjednih općina ¦ vključena sosednja občina|vključeni sosednji občini|vključene sosednje občine|vključenih sosednjih občin
+=cote ¦ signatura|signature|signatura ¦ signatura|signaturi|signature|signatur
+=cote consultée ¦ pregledana signatura|pregledane signature|pregledanih signatura ¦ pregledana signatura|pregledani signaturi|pregledane signature|pregledanih signatur
+=cote ou registre déjà suivis dans cette sélection. ¦ signatura ili matica već praćena u ovom odabiru.|signature ili matice već praćene u ovom odabiru.|signatura ili matica već praćenih u ovom odabiru. ¦ signatura ali matična knjiga, že spremljana v tem izboru.|signaturi ali matični knjigi, že spremljani v tem izboru.|signature ali matične knjige, že spremljane v tem izboru.|signatur ali matičnih knjig, že spremljanih v tem izboru.
+=dossier ¦ mapa|mape|mapa ¦ mapa|mapi|mape|map
+=décès importé ¦ uvezena smrt|uvezene smrti|uvezenih smrti ¦ uvožena smrt|uvoženi smrti|uvožene smrti|uvoženih smrti
+=département ¦ departman|departmana|departmana ¦ departma|departmaja|departmaji|departmajev
+=dépouillement importé ¦ uvezen indeks zapisa|uvezena indeksa zapisa|uvezenih indeksa zapisa ¦ uvožen indeks vpisov|uvožena indeksa vpisov|uvoženi indeksi vpisov|uvoženih indeksov vpisov
+=entrée ¦ stavka|stavke|stavki ¦ vnos|vnosa|vnosi|vnosov
+=entrée affichée ¦ prikazana stavka|prikazane stavke|prikazanih stavki ¦ prikazan vnos|prikazana vnosa|prikazani vnosi|prikazanih vnosov
+=feuille ¦ list|lista|listova ¦ list|lista|listi|listov
+=fiche retirée ¦ uklonjen zapis|uklonjena zapisa|uklonjenih zapisa ¦ odstranjen zapis|odstranjena zapisa|odstranjeni zapisi|odstranjenih zapisov
+=fichier importé ¦ uvezena datoteka|uvezene datoteke|uvezenih datoteka ¦ uvožena datoteka|uvoženi datoteki|uvožene datoteke|uvoženih datotek
+=fichier joint ¦ priložena datoteka|priložene datoteke|priloženih datoteka ¦ priložena datoteka|priloženi datoteki|priložene datoteke|priloženih datotek
+=lien ¦ poveznica|poveznice|poveznica ¦ povezava|povezavi|povezave|povezav
+=lien affiché ¦ prikazana poveznica|prikazane poveznice|prikazanih poveznica ¦ prikazana povezava|prikazani povezavi|prikazane povezave|prikazanih povezav
+=lien de voisinage ¦ susjedska veza|susjedske veze|susjedskih veza ¦ sosedska vez|sosedski vezi|sosedske vezi|sosedskih vezi
+=lieu trouvé ¦ pronađeno mjesto|pronađena mjesta|pronađenih mjesta ¦ najden kraj|najdena kraja|najdeni kraji|najdenih krajev
+=ligne affichée ¦ prikazan redak|prikazana retka|prikazanih redaka ¦ prikazana vrstica|prikazani vrstici|prikazane vrstice|prikazanih vrstic
+=ligne chargée ¦ učitan redak|učitana retka|učitanih redaka ¦ naložena vrstica|naloženi vrstici|naložene vrstice|naloženih vrstic
+=ligne exportée en CSV. ¦ redak izvezen u CSV.|retka izvezena u CSV.|redaka izvezeno u CSV. ¦ vrstica izvožena v CSV.|vrstici izvoženi v CSV.|vrstice izvožene v CSV.|vrstic izvoženih v CSV.
+=ligne ignorée ¦ preskočen redak|preskočena retka|preskočenih redaka ¦ preskočena vrstica|preskočeni vrstici|preskočene vrstice|preskočenih vrstic
+=ligne importée ¦ uvezen redak|uvezena retka|uvezenih redaka ¦ uvožena vrstica|uvoženi vrstici|uvožene vrstice|uvoženih vrstic
+=masqué ¦ skriven|skrivena|skrivenih ¦ skrit|skrita|skriti|skritih
+=masquée ¦ skrivena|skrivene|skrivenih ¦ skrita|skriti|skrite|skritih
+=média ajouté ¦ dodan medij|dodana medija|dodanih medija ¦ dodan medij|dodana medija|dodani mediji|dodanih medijev
+=média trouvé ¦ pronađen medij|pronađena medija|pronađenih medija ¦ najden medij|najdena medija|najdeni mediji|najdenih medijev
+=occurrence ¦ pojavljivanje|pojavljivanja|pojavljivanja ¦ pojavitev|pojavitvi|pojavitve|pojavitev
+=page / vue ¦ stranica / snimka|stranice / snimke|stranica / snimaka ¦ stran / posnetek|strani / posnetka|strani / posnetki|strani / posnetkov
+=page détaillée ¦ detaljna stranica|detaljne stranice|detaljnih stranica ¦ podrobna stran|podrobni strani|podrobne strani|podrobnih strani
+=pays ¦ zemlja|zemlje|zemalja ¦ država|državi|države|držav
+=personne importée ¦ uvezena osoba|uvezene osobe|uvezenih osoba ¦ uvožena oseba|uvoženi osebi|uvožene osebe|uvoženih oseb
+=personne relevée ¦ zabilježena osoba|zabilježene osobe|zabilježenih osoba ¦ zapisana oseba|zapisani osebi|zapisane osebe|zapisanih oseb
+=personne repérée, classée par nombre d’occurrences. ¦ pronađena osoba, poredana po broju pojavljivanja.|pronađene osobe, poredane po broju pojavljivanja.|pronađenih osoba, poredanih po broju pojavljivanja. ¦ najdena oseba, razvrščena po številu pojavitev.|najdeni osebi, razvrščeni po številu pojavitev.|najdene osebe, razvrščene po številu pojavitev.|najdenih oseb, razvrščenih po številu pojavitev.
+=piste ¦ trag|traga|tragova ¦ sled|sledi|sledi|sledi
+=piste d’enquête ¦ trag istrage|traga istrage|tragova istrage ¦ sled preiskave|sledi preiskave|sledi preiskave|sledi preiskave
+=plan à moi ¦ moj plan|moja plana|mojih planova ¦ moj načrt|moja načrta|moji načrti|mojih načrtov
+=recherche ¦ pretraživanje|pretraživanja|pretraživanja ¦ iskanje|iskanji|iskanja|iskanj
+=recherche faite ¦ obavljeno pretraživanje|obavljena pretraživanja|obavljenih pretraživanja ¦ opravljeno iskanje|opravljeni iskanji|opravljena iskanja|opravljenih iskanj
+=référence ¦ referenca|reference|referenci ¦ referenca|referenci|reference|referenc
+=résolu ¦ riješen|riješena|riješenih ¦ rešen|rešena|rešeni|rešenih
+=résultat ¦ rezultat|rezultata|rezultata ¦ rezultat|rezultata|rezultati|rezultatov
+=service ¦ služba|službe|službi ¦ služba|službi|službe|služb
+=service d’archives ¦ arhivska služba|arhivske službe|arhivskih službi ¦ arhivska služba|arhivski službi|arhivske službe|arhivskih služb
+=site déjà cherché ¦ već pretražena stranica|već pretražene stranice|već pretraženih stranica ¦ že preiskana stran|že preiskani strani|že preiskane strani|že preiskanih strani
+=site hors de son époque ¦ stranica izvan njegova doba|stranice izvan njegova doba|stranica izvan njegova doba ¦ stran zunaj njegovega obdobja|strani zunaj njegovega obdobja|strani zunaj njegovega obdobja|strani zunaj njegovega obdobja
+=site payant caché ¦ skrivena plaćena stranica|skrivene plaćene stranice|skrivenih plaćenih stranica ¦ skrita plačljiva stran|skriti plačljivi strani|skrite plačljive strani|skritih plačljivih strani
+=site payant est caché ¦ plaćena stranica je skrivena|plaćene stranice su skrivene|plaćenih stranica je skriveno ¦ plačljiva stran je skrita|plačljivi strani sta skriti|plačljive strani so skrite|plačljivih strani je skritih
+=site trouvé ¦ pronađena stranica|pronađene stranice|pronađenih stranica ¦ najdena stran|najdeni strani|najdene strani|najdenih strani
+=sorte d’élément ajoutée aux réglages de l’Atelier. ¦ vrsta stavke dodana u postavke Radionice.|vrste stavki dodane u postavke Radionice.|vrsta stavki dodano u postavke Radionice. ¦ vrsta elementa dodana v nastavitve Delavnice.|vrsti elementov dodani v nastavitve Delavnice.|vrste elementov dodane v nastavitve Delavnice.|vrst elementov dodanih v nastavitve Delavnice.
+=sorte à moi ¦ moja vrsta|moje vrste|mojih vrsta ¦ moja vrsta|moji vrsti|moje vrste|mojih vrst
+=sous-dossier ¦ podmapa|podmape|podmapa ¦ podmapa|podmapi|podmape|podmap
+=suivi ¦ praćenje|praćenja|praćenja ¦ spremljanje|spremljanji|spremljanja|spremljanj
+=trouvé ¦ pronađen|pronađena|pronađenih ¦ najden|najdena|najdeni|najdenih
+=trouvée ¦ pronađena|pronađene|pronađenih ¦ najdena|najdeni|najdene|najdenih
+=tâche à faire ¦ zadatak za napraviti|zadatka za napraviti|zadataka za napraviti ¦ opravilo za narediti|opravili za narediti|opravila za narediti|opravil za narediti
+=visite ¦ posjet|posjeta|posjeta ¦ obisk|obiska|obiski|obiskov
+=vue à moi ¦ moj prikaz|moja prikaza|mojih prikaza ¦ moj pogled|moja pogleda|moji pogledi|mojih pogledov
+=élément choisi ¦ odabrana stavka|odabrane stavke|odabranih stavki ¦ izbran element|izbrana elementa|izbrani elementi|izbranih elementov
+=élément à toi gardé ¦ tvoja zadržana stavka|tvoje zadržane stavke|tvojih zadržanih stavki ¦ tvoj ohranjen element|tvoja ohranjena elementa|tvoji ohranjeni elementi|tvojih ohranjenih elementov
+Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »). ¦ Pomiči gore i dolje, promijeni emoji ili naziv, sakrij ono što ne koristiš (Koš uvijek ostaje). <b>Tvoj prikaz</b> grupira stavke prema tvojim kriterijima (npr. „📕 Za čitanje”: reference za čitanje; „🖼 Gravure”: slike i reference „gravura”). ¦ Premikaj gor in dol, spremeni emoji ali ime, skrij, česar ne uporabljaš (Koš vedno ostane). <b>Tvoj pogled</b> združi elemente po tvojih merilih (npr. »📕 Za branje«: reference za branje; »🖼 Gravure«: slike in reference »gravura«).
+L’ordre du menu « ＋ Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…). ¦ Redoslijed izbornika „＋ Dodaj” i „Sve vrste”. Skrivena vrsta više se ne nudi, ali ono što već postoji ostaje vidljivo. <b>Tvoja vlastita vrsta</b> ima polja koja želiš (npr. „🎞 Ploča za laternu”: tema, proizvođač, dimenzije, stanje, mjesto čuvanja…). ¦ Vrstni red menija »＋ Dodaj« in »Vse vrste«. Skrita vrsta se ne ponuja več, kar že obstaja, pa ostane vidno. <b>Tvoja lastna vrsta</b> ima polja, ki jih želiš (npr. »🎞 Diapozitiv za laterno«: tema, izdelovalec, mere, stanje, kraj hrambe…).
+<b>Une sorte d’élément</b> s’ajoute dans un projet avec « ＋ Ajouter », comme une référence ou une note, avec <b>tes champs</b> : texte court ou long, lien internet, date, nombre, liste de choix, case à cocher, personne de ta base, lieu sur la carte. Elle apparaît aussi dans « Toutes les sortes ». ¦ <b>Vrsta stavke</b> dodaje se u projekt s „＋ Dodaj”, kao referenca ili bilješka, s <b>tvojim poljima</b>: kratki ili dugi tekst, internetska poveznica, datum, broj, popis izbora, potvrdni okvir, osoba iz tvoje baze, mjesto na karti. Pojavljuje se i u „Sve vrste”. ¦ <b>Vrsta elementa</b> se v projekt doda z »＋ Dodaj«, kot referenca ali opomba, s <b>tvojimi polji</b>: kratko ali dolgo besedilo, spletna povezava, datum, število, seznam izbir, potrditveno polje, oseba iz tvoje baze, kraj na zemljevidu. Prikaže se tudi v »Vse vrste«.
+Clique sur un critère pour l’ajouter, puis règle-le. Range-les avec ↑ ↓ ; « pas » garde tout <i>sauf</i> ce critère. Sans critère : tout le projet. ¦ Klikni kriterij da ga dodaš, zatim ga podesi. Poredaj ih s ↑ ↓; „ne” zadržava sve <i>osim</i> tog kriterija. Bez kriterija: cijeli projekt. ¦ Klikni merilo, da ga dodaš, nato ga nastavi. Razvrsti jih z ↑ ↓; »ne« obdrži vse <i>razen</i> tega merila. Brez meril: celoten projekt.
+L’élément reste <b>vivant</b> : il montre toujours ce qu’il y a dans le logiciel, et « ↗ Ouvrir » y mène. ¦ Stavka ostaje <b>živa</b>: uvijek prikazuje ono što je u aplikaciji, a „↗ Otvori” vodi onamo. ¦ Element ostane <b>živ</b>: vedno prikazuje, kar je v aplikaciji, in »↗ Odpri« vodi tja.
+Tout logiciel de bibliographie : <b>BibTeX</b> (.bib) ou <b>RIS</b> (.ris). ¦ Bilo koji bibliografski program: <b>BibTeX</b> (.bib) ili <b>RIS</b> (.ris). ¦ Kateri koli bibliografski program: <b>BibTeX</b> (.bib) ali <b>RIS</b> (.ris).
+Plan de « {name} » ¦ Plan „{name}” ¦ Načrt »{name}«
+Tu veux plutôt <b>une nouvelle sorte d’élément</b>, avec tes champs à remplir (texte libre, lien internet, date, personne, lieu…) ? ¦ Želiš li radije <b>novu vrstu stavke</b>, s vlastitim poljima za ispunjavanje (slobodni tekst, internetska poveznica, datum, osoba, mjesto…)? ¦ Bi raje <b>novo vrsto elementa</b>, z lastnimi polji za izpolnjevanje (prosto besedilo, spletna povezava, datum, oseba, kraj…)?
+Créer une sorte d’élément à la place → ¦ Umjesto toga stvori vrstu stavke → ¦ Namesto tega ustvari vrsto elementa →
+<b>Une vue est un filtre</b> : une entrée du menu de gauche qui montre les éléments du projet répondant à tes critères (ex. « 📕 À lire »). Elle n’a pas de champs à remplir. ¦ <b>Prikaz je filtar</b>: stavka lijevog izbornika koja prikazuje stavke projekta što odgovaraju tvojim kriterijima (npr. „📕 Za čitanje”). Nema polja za ispunjavanje. ¦ <b>Pogled je filter</b>: vnos v levem meniju, ki prikaže elemente projekta, ki ustrezajo tvojim merilom (npr. »📕 Za branje«). Nima polj za izpolnjevanje.
+personnes repérées, classées par nombre d’occurrences. ¦ pronađenih osoba, poredanih po broju pojavljivanja. ¦ najdenih oseb, razvrščenih po številu pojavitev.
+événements ¦ događaji ¦ dogodki
+références ¦ reference ¦ reference
+Archives départementales — ¦ Departmanski arhiv — ¦ Departmajski arhiv —
+Ce qu’il reste à faire, avec une date. ¦ Što još treba napraviti, s datumom. ¦ Kar je še treba narediti, z datumom.
+Prépare un formulaire standardisé à joindre au courrier, puis imprime-le quand il est prêt. ¦ Pripremi standardizirani obrazac za prilaganje pismu, zatim ga ispiši kad bude spreman. ¦ Pripravi standardiziran obrazec, ki ga priložiš pismu, nato ga natisni, ko bo pripravljen.
+Google Photos (archive Takeout), Apple Photos ou tout dossier de photos : date, lieu, description, mots-clés et personnes nommées repris (lieux et personnes à confirmer) ¦ Google Photos (arhiva Takeout), Apple Photos ili bilo koja mapa s fotografijama: preuzimaju se datum, mjesto, opis, ključne riječi i imenovane osobe (mjesta i osobe za potvrdu) ¦ Google Photos (arhiv Takeout), Apple Photos ali katera koli mapa s fotografijami: prevzamejo se datum, kraj, opis, ključne besede in imenovane osebe (kraji in osebe za potrditev)
+Retrouver une photo dans la base à partir d’une autre (de la base ou de ton ordinateur), même recadrée ou zoomée ¦ Pronađi fotografiju u bazi prema drugoj (iz baze ili s tvog računala), čak i obrezanoj ili uvećanoj ¦ Poišči fotografijo v bazi po drugi (iz baze ali s tvojega računalnika), tudi obrezani ali povečani
+Deux portraits côte à côte, en fondu ou en rideau, yeux alignés : chercher une ressemblance ¦ Dva portreta jedan uz drugi, s pretapanjem ili zavjesom, s poravnatim očima: traži sličnost ¦ Dva portreta drug ob drugem, s prelivanjem ali zaveso, z poravnanimi očmi: išči podobnost
+⤒ Importer des photos ¦ ⤒ Uvezi fotografije ¦ ⤒ Uvozi fotografije
+⤒ Importer des coordonnées (KML, GeoJSON) ¦ ⤒ Uvezi koordinate (KML, GeoJSON) ¦ ⤒ Uvozi koordinate (KML, GeoJSON)
+Afficher tous les éléments ¦ Prikaži sve stavke ¦ Prikaži vse elemente
+Masquer tous les éléments ¦ Sakrij sve stavke ¦ Skrij vse elemente
+Document à consulter ¦ Dokument za pregled ¦ Dokument za pregled
+Cote à préciser ¦ Signaturu treba navesti ¦ Signaturo je treba navesti
+Ajoute les cotes à consulter pendant cette visite. ¦ Dodaj signature za pregled tijekom ovog posjeta. ¦ Dodaj signature za pregled med tem obiskom.
+Centre à préciser ¦ Arhiv treba navesti ¦ Arhiv je treba navesti
+Changer la date de la visite, ou la remettre « à faire » ¦ Promijeni datum posjeta ili ga vrati na „za napraviti” ¦ Spremeni datum obiska ali ga vrni na »za narediti«
+Prépare une feuille de mission par centre d’archives à partir des cotes déjà suivies, ou ajoute une cote libre. ¦ Pripremi radni list za svaki arhiv iz signatura koje već pratiš ili dodaj slobodnu signaturu. ¦ Pripravi delovni list za vsak arhiv iz signatur, ki jih že spremljaš, ali dodaj prosto signaturo.
+Les horaires et périodes de fermeture sont à vérifier auprès du centre avant le départ, notamment pour les fermetures estivales d’août. ¦ Radno vrijeme i razdoblja zatvaranja provjeri s arhivom prije polaska, posebno ljetna zatvaranja u kolovozu. ¦ Urnik in obdobja zaprtja preveri pri arhivu pred odhodom, zlasti poletna zaprtja avgusta.
+Aucune feuille de mission pour l’instant ¦ Zasad nema radnih listova ¦ Zaenkrat ni delovnih listov
+Crée une visite pour réunir les cotes à consulter. ¦ Stvori posjet da okupiš signature za pregled. ¦ Ustvari obisk, da zbereš signature za pregled.
+Dépouillement créé et relié à la cote. ¦ Indeks zapisa stvoren i povezan sa signaturom. ¦ Indeks vpisov ustvarjen in povezan s signaturo.
+Remettre la visite « à faire » ¦ Vrati posjet na „za napraviti” ¦ Vrni obisk na »za narediti«
+La visite est de nouveau « à faire ». ¦ Posjet je ponovno „za napraviti”. ¦ Obisk je spet »za narediti«.
+Ex. fermeture estivale à vérifier en août ¦ Npr. provjeriti ljetno zatvaranje u kolovozu ¦ Npr. preveriti poletno zaprtje avgusta
+Ajouter une cote ¦ Dodaj signaturu ¦ Dodaj signaturo
+Ajouter la cote ¦ Dodaj signaturu ¦ Dodaj signaturo
+Cotes à consulter ¦ Signature za pregled ¦ Signature za pregled
+Le lien sera ajouté à cette liste locale. ¦ Poveznica će se dodati na ovaj lokalni popis. ¦ Povezava bo dodana na ta lokalni seznam.
+Inscription à vérifier ¦ Upis treba provjeriti ¦ Vpis je treba preveriti
+Lien direct à compléter ¦ Izravnu poveznicu treba dopuniti ¦ Neposredno povezavo je treba dopolniti
+Indique au moins une référence ou un document à reproduire. ¦ Navedi barem jednu referencu ili dokument za presliku. ¦ Navedi vsaj eno referenco ali dokument za kopijo.
+Service destinataire à compléter ¦ Službu primatelja treba dopuniti ¦ Službo prejemnika je treba dopolniti
+Formulaire à joindre à votre demande de reproduction. ¦ Obrazac za prilaganje tvom zahtjevu za presliku. ¦ Obrazec, ki ga priložiš svoji zahtevi za kopijo.
+Implexe : cette personne est ton ancêtre par plusieurs lignées, elle a donc plusieurs numéros Sosa. C’est normal (souvent des cousins qui se sont mariés) : ce n’est pas un doublon, il n’y a rien à fusionner. ¦ Implex (ponovljeni preci): ova je osoba tvoj predak po nekoliko loza, pa ima nekoliko Sosa brojeva. To je normalno (često su se vjenčali rođaci): nije duplikat, nema se što spajati. ¦ Implex (ponovljeni predniki): ta oseba je tvoj prednik po več linijah, zato ima več Sosa številk. To je normalno (pogosto so se poročili bratranci in sestrične): ni dvojnik, nič ni treba združiti.
+Réglage changé : « Types de recherche » ¦ Postavka promijenjena: „Vrste pretraživanja” ¦ Nastavitev spremenjena: »Vrste iskanja«
+🔍 Que manque-t-il ? (actes à chercher, où et dans quelle série) ¦ 🔍 Što nedostaje? (matični zapisi za traženje, gdje i u kojoj seriji) ¦ 🔍 Kaj manjka? (matični vpisi za iskanje, kje in v kateri seriji)
+🌍 Où chercher ? (les sites à consulter pour une personne) ¦ 🌍 Gdje tražiti? (stranice za pregled za osobu) ¦ 🌍 Kje iskati? (strani za pregled za osebo)
+＋ Ajouter un dépouillement ¦ ＋ Dodaj indeks zapisa ¦ ＋ Dodaj indeks vpisov
+Aucune personne ne correspond à cette recherche. ¦ Nijedna osoba ne odgovara ovom pretraživanju. ¦ Temu iskanju ne ustreza nobena oseba.
+Période, type d’acte et références à vérifier. ¦ Razdoblje, vrsta matičnog zapisa i reference za provjeru. ¦ Obdobje, vrsta matičnega vpisa in reference za preverjanje.
+Ajouter le dépouillement ¦ Dodaj indeks zapisa ¦ Dodaj indeks vpisov
+(pour qui tu as ouvert ce registre — à part des personnes relevées dedans) ¦ (za koga si otvorio/otvorila ovu maticu — odvojeno od osoba zabilježenih u njoj) ¦ (za koga si odprl/odprla to matično knjigo — ločeno od oseb, zapisanih v njej)
+Aucune page détaillée pour l’instant ¦ Zasad nema detaljne stranice ¦ Zaenkrat ni podrobne strani
+Médias non rattachés à une page ¦ Mediji nepovezani sa stranicom ¦ Mediji, ki niso povezani s stranjo
+⤒ Importer des relevés (Nimègue…) ¦ ⤒ Uvezi indekse (Nimègue…) ¦ ⤒ Uvozi indekse (Nimègue…)
+📜 En pages (Listes) ¦ 📜 Po stranicama (Popisi) ¦ 📜 Po straneh (Seznami)
+Actes à commander ¦ Matični zapisi za naručiti ¦ Matični vpisi za naročilo
+Ajouter une page / vue ¦ Dodaj stranicu / snimku ¦ Dodaj stran / posnetek
+Ajouter une personne après l’enregistrement ¦ Dodaj osobu nakon spremanja ¦ Dodaj osebo po shranjevanju
+Ajouter un média après l’enregistrement ¦ Dodaj medij nakon spremanja ¦ Dodaj medij po shranjevanju
+Ajouter la page ¦ Dodaj stranicu ¦ Dodaj stran
+Actes à commander ou consulter ¦ Matični zapisi za naručiti ili pregledati ¦ Matični vpisi za naročilo ali pregled
+Liste de travail indépendante pour les actes à commander, consulter en salle ou faire reproduire. ¦ Zaseban radni popis matičnih zapisa za naručiti, pregledati u čitaonici ili dati preslikati. ¦ Ločen delovni seznam matičnih vpisov za naročilo, pregled v čitalnici ali kopiranje.
+Aucun acte à commander ou consulter. ¦ Nema matičnih zapisa za naručiti ili pregledati. ¦ Ni matičnih vpisov za naročilo ali pregled.
+Acte ajouté à la liste. ¦ Matični zapis dodan na popis. ¦ Matični vpis dodan na seznam.
+Transcription ligne à ligne ¦ Prijepis redak po redak ¦ Prepis vrstico za vrstico
+Choisis une image pour relier la transcription à une zone. ¦ Odaberi sliku da povežeš prijepis s područjem. ¦ Izberi sliko, da povežeš prepis z območjem.
+Ajouter la ligne ¦ Dodaj redak ¦ Dodaj vrstico
+Aucune ligne relevée pour l’instant ¦ Zasad nema zabilježenih redaka ¦ Zaenkrat ni zapisanih vrstic
+Ajouter une personne - page ¦ Dodaj osobu - stranica ¦ Dodaj osebo - stran
+Ajouter une personne relevée ¦ Dodaj zabilježenu osobu ¦ Dodaj zapisano osebo
+Ajouter comme ¦ Dodaj kao ¦ Dodaj kot
+Relier à une personne existante ¦ Poveži s postojećom osobom ¦ Poveži z obstoječo osebo
+Hypothèse, rapprochement, à vérifier… ¦ Hipoteza, povezivanje, za provjeru… ¦ Domneva, povezava, za preverjanje…
+Non rattaché à une page ¦ Nije povezano sa stranicom ¦ Ni povezano s stranjo
+Ajouter un média ¦ Dodaj medij ¦ Dodaj medij
+Ajouter le média ¦ Dodaj medij ¦ Dodaj medij
+lieux trouvés ¦ pronađena mjesta ¦ najdeni kraji
+médias trouvés ¦ pronađeni mediji ¦ najdeni mediji
+tâches à faire ¦ zadaci za napraviti ¦ opravila za narediti
+vues à moi ¦ moji prikazi ¦ moji pogledi
+sortes à moi ¦ moje vrste ¦ moje vrste
+plans à moi ¦ moji planovi ¦ moji načrti
+éléments à toi gardés ¦ tvoje zadržane stavke ¦ tvoji ohranjeni elementi
+adresses à toi ¦ tvoje adrese ¦ tvoji naslovi
+sites trouvés ¦ pronađene stranice ¦ najdene strani
+Données à jour jusqu'en {year}. ¦ Podaci ažurirani do {year}. ¦ Podatki posodobljeni do leta {year}.
+Sélectionne un ou plusieurs fichiers du fichier des personnes décédées (CSV, TXT ou ZIP contenant un CSV/TXT). Chaque fichier vient s'ajouter à la base existante, rien n'est écrasé. Un même fichier déjà importé est détecté et une confirmation te sera demandée avant de le réimporter. ¦ Odaberi jednu ili više datoteka iz datoteke preminulih osoba (CSV, TXT ili ZIP koji sadrži CSV/TXT). Svaka se datoteka dodaje postojećoj bazi, ništa se ne prepisuje. Već uvezena datoteka prepoznaje se i prije ponovnog uvoza tražit će se tvoja potvrda. ¦ Izberi eno ali več datotek iz datoteke umrlih oseb (CSV, TXT ali ZIP, ki vsebuje CSV/TXT). Vsaka datoteka se doda obstoječi bazi, nič se ne prepiše. Že uvožena datoteka se prepozna in pred ponovnim uvozom boš moral/morala potrditi.
+Aucune personne ne correspond à ces critères. ¦ Nijedna osoba ne odgovara ovim kriterijima. ¦ Tem merilom ne ustreza nobena oseba.
+Vérifier chaque jour à l’ouverture de l’app et importer tout seul les nouveaux fichiers ¦ Provjeravaj svaki dan pri otvaranju aplikacije i automatski uvezi nove datoteke ¦ Vsak dan ob odprtju aplikacije preveri in samodejno uvozi nove datoteke
+Aucun import pour l’instant ¦ Zasad nema uvoza ¦ Zaenkrat ni uvozov
+Aucun événement ne correspond à cette sélection. ¦ Nijedan događaj ne odgovara ovom odabiru. ¦ Temu izboru ne ustreza noben dogodek.
+📕 à lire ¦ 📕 za čitanje ¦ 📕 za branje
+{n} (PDF…) à rajouter à la main ¦ {n} (PDF…) za ručno dodavanje ¦ {n} (PDF…) za ročno dodajanje
+⤒ Importer un projet (Zotero…) ¦ ⤒ Uvezi projekt (Zotero…) ¦ ⤒ Uvozi projekt (Zotero…)
+Qui étaient les montreurs d’optique ? D’où venaient-ils, quelles images montraient-ils, à quels publics ? ¦ Tko su bili prikazivači optičkih slika? Odakle su dolazili, koje su slike prikazivali i kojoj publici? ¦ Kdo so bili prikazovalci optičnih slik? Od kod so prišli, katere slike so kazali in kakšnemu občinstvu?
+Relié à d’autres éléments ¦ Povezano s drugim stavkama ¦ Povezano z drugimi elementi
+Rien ne correspond à ta recherche. ¦ Ništa ne odgovara tvom pretraživanju. ¦ Tvojemu iskanju nič ne ustreza.
+Le projet est vide : choisis un dossier à gauche, puis « ＋ Ajouter ». ¦ Projekt je prazan: odaberi mapu lijevo, zatim „＋ Dodaj”. ¦ Projekt je prazen: izberi mapo na levi, nato »＋ Dodaj«.
+Aucun lieu placé : ajoute un « Lieu » ou un lieu à une date. ¦ Nijedno mjesto nije postavljeno: dodaj „Mjesto” ili mjesto uz datum. ¦ Noben kraj ni postavljen: dodaj »Kraj« ali kraj k datumu.
+Mettre à la corbeille ¦ Premjesti u koš ¦ Premakni v koš
+☑️ Case à cocher ¦ ☑️ Potvrdni okvir ¦ ☑️ Potrditveno polje
+Ajouter un élément du logiciel ¦ Dodaj stavku iz aplikacije ¦ Dodaj element iz aplikacije
+(↗ Ouvrir mène à ce bloc) ¦ (↗ Otvori vodi do ovog bloka) ¦ (↗ Odpri vodi do tega bloka)
+Vue d’optique : la place Saint-Marc à Venise ¦ Optička slika: Trg svetog Marka u Veneciji ¦ Optična slika: Markov trg v Benetkah
+— à la racine du projet — ¦ — u korijenu projekta — ¦ — v korenu projekta —
+Les dossiers dans l’ordre, avec leurs notes, brouillons, citations et références : à ouvrir dans un traitement de texte ¦ Mape redom, s bilješkama, nacrtima, citatima i referencama: za otvaranje u programu za obradu teksta ¦ Mape po vrsti, z opombami, osnutki, citati in referencami: za odpiranje v urejevalniku besedil
+Avec de vrais titres de chapitres : s’ouvre dans Word, Pages, LibreOffice ; prêt à mettre en page ¦ Sa stvarnim naslovima poglavlja: otvara se u Wordu, Pagesu, LibreOfficeu; spremno za prijelom ¦ S pravimi naslovi poglavij: odpre se v Wordu, Pages, LibreOfficu; pripravljeno za postavitev
+Le plan et les textes, mis en page, avec la bibliographie à la fin ¦ Plan i tekstovi, prelomljeni, s bibliografijom na kraju ¦ Načrt in besedila, postavljeni, z bibliografijo na koncu
+Les dossiers de ce projet seront proposés à la création d’un nouveau projet ¦ Mape ovog projekta bit će ponuđene pri stvaranju novog projekta ¦ Mape tega projekta bodo ponujene ob ustvarjanju novega projekta
+{name} — éléments ¦ {name} — stavke ¦ {name} — elementi
+Mis à la corbeille (on peut l’en sortir). ¦ Premješteno u koš (može se vratiti). ¦ Premaknjeno v koš (lahko se vrne).
+Étiquette à ajouter aux éléments choisis : ¦ Oznaka koju treba dodati odabranim stavkama: ¦ Oznaka, ki jo dodaš izbranim elementom:
+Copie impossible : sélectionne le texte à la main. ¦ Kopiranje nije moguće: označi tekst ručno. ¦ Kopiranje ni mogoče: označi besedilo ročno.
+Plan enregistré : il est proposé à la création d’un projet (Réglages → Atelier pour le renommer). ¦ Plan spremljen: nudi se pri stvaranju projekta (Postavke → Radionica za preimenovanje). ¦ Načrt shranjen: ponudi se ob ustvarjanju projekta (Nastavitve → Delavnica za preimenovanje).
+Faire {what} à moi à partir de celle-ci, pour la modifier (l’originale ne change pas) ¦ Napravi od ove vlastitu kopiju ({what}) da je urediš (izvornik se ne mijenja) ¦ Iz tega naredi lastno kopijo ({what}), da jo urediš (izvirnik se ne spremeni)
+Garde tous ces réglages (menu, sortes d’éléments, dossiers, plans) sous un nom, pour y revenir plus tard, ou les envoyer à quelqu’un : il les importe ici. Les projets et leurs éléments ne sont pas dedans. ¦ Spremi sve ove postavke (izbornik, vrste stavki, mape, planovi) pod jednim imenom, da im se kasnije vratiš ili ih pošalješ nekome: on ih uvozi ovdje. Projekti i njihove stavke nisu uključeni. ¦ Shrani vse te nastavitve (meni, vrste elementov, mape, načrti) pod enim imenom, da se k njim pozneje vrneš ali jih pošlješ komu: ta jih uvozi tukaj. Projekti in njihovi elementi niso vključeni.
+Garder mes éléments ¦ Zadrži moje stavke ¦ Ohrani moje elemente
+rien à régler ¦ nema se što podešavati ¦ ni kaj nastaviti
+Copie à modifier ¦ Kopija za uređivanje ¦ Kopija za urejanje
+Une enquête rassemble les pistes, médias et notes d’une question à résoudre. ¦ Istraga okuplja tragove, medije i bilješke o pitanju koje treba riješiti. ¦ Preiskava zbira sledi, medije in opombe o vprašanju, ki ga je treba rešiti.
+La France est toujours disponible. Ajoute les pays utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre des frontières. Certains pays sont téléchargés la première fois qu’on les coche (il faut alors internet), puis restent sur l’ordinateur. ¦ Francuska je uvijek dostupna. Dodaj zemlje korisne za tvoja istraživanja: njihove općine, nekadašnje općine i susjedne općine s obje strane granica. Neke se zemlje preuzimaju kad ih prvi put označiš (tada treba internet), a zatim ostaju na računalu. ¦ Francija je vedno na voljo. Dodaj države, koristne za tvoje raziskave: njihove občine, nekdanje občine in sosednje občine na obeh straneh meja. Nekatere države se prenesejo, ko jih prvič označiš (takrat potrebuješ internet), nato ostanejo na računalniku.
+Nom à chercher ¦ Ime za traženje ¦ Ime za iskanje
+Aucune piste pour l’instant ¦ Zasad nema tragova ¦ Zaenkrat ni sledi
+＋ Ajouter une piste ¦ ＋ Dodaj trag ¦ ＋ Dodaj sled
+Relier tout ou partie d’un recueil (registre, liste photographiée…) à ce dossier ¦ Poveži cijelu zbirku ili njezin dio (matica, fotografirani popis…) s ovom mapom ¦ Poveži celotno zbirko ali njen del (matična knjiga, fotografiran seznam…) s to mapo
+Le média reste dans l’enquête, il n’est plus lié à cette piste. ¦ Medij ostaje u istrazi, ali više nije povezan s ovim tragom. ¦ Medij ostane v preiskavi, a ni več povezan s to sledjo.
+L’événement reste dans la généalogie, il n’est plus lié à cette piste. ¦ Događaj ostaje u rodoslovlju, ali više nije povezan s ovim tragom. ¦ Dogodek ostane v rodoslovju, a ni več povezan s to sledjo.
+Ajouter une ligne « à faire » dans Recherche → Dépouillement d’archive ¦ Dodaj redak „za napraviti” u Istraživanje → Indeks zapisa arhiva ¦ Dodaj vrstico »za narediti« v Raziskovanje → Indeks vpisov arhiva
+Je regarde ce qui manque à la lignée… ¦ Gledam što nedostaje u lozi… ¦ Preverjam, kaj manjka v liniji…
+Les trous à combler, pour aller aux archives ¦ Praznine koje treba popuniti, za odlazak u arhiv ¦ Vrzeli, ki jih je treba zapolniti, za obisk arhiva
+Reporter à demain ou à la semaine prochaine ¦ Odgodi do sutra ili do sljedećeg tjedna ¦ Odloži do jutri ali do naslednjega tedna
+Rien d’urgent : ta semaine est libre. Ajoute un rappel ou regarde ce qui manque à ton arbre. ¦ Ništa hitno: tvoj je tjedan slobodan. Dodaj podsjetnik ili pogledaj što nedostaje u tvom stablu. ¦ Nič nujnega: tvoj teden je prost. Dodaj opomnik ali poglej, kaj manjka v tvojem drevesu.
+Ce qu’il y a à faire, le plus urgent d’abord. ✓ quand c’est fait, ⏭ pour reporter : « ↶ Annuler » en bas à gauche si tu te trompes. ¦ Ono što treba napraviti, najhitnije prvo. ✓ kad je gotovo, ⏭ za odgodu: „↶ Poništi” dolje lijevo ako pogriješiš. ¦ Kar je treba narediti, najprej najnujnejše. ✓ ko je narejeno, ⏭ za odlog: »↶ Razveljavi« spodaj levo, če se zmotiš.
+« {title} » remis à faire ¦ „{title}” vraćeno na „za napraviti” ¦ »{title}« vrnjeno na »za narediti«
+Reporter à demain ¦ Odgodi do sutra ¦ Odloži do jutri
+Reporter à la semaine prochaine ¦ Odgodi do sljedećeg tjedna ¦ Odloži do naslednjega tedna
+Adresse à toi ¦ Tvoja adresa ¦ Tvoj naslov
+Adresse à toi pour {site} ¦ Tvoja adresa za {site} ¦ Tvoj naslov za {site}
+⤒ Importer ce que tu as trouvé ▾ ¦ ⤒ Uvezi ono što si pronašao/pronašla ▾ ¦ ⤒ Uvozi, kar si našel/našla ▾
+⤒ Importer ce que tu as trouvé ¦ ⤒ Uvezi ono što si pronašao/pronašla ¦ ⤒ Uvozi, kar si našel/našla
+Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée. ¦ Ova je osoba možda živa: ova pretraživanja ostaju u tvom pregledniku, ništa se ne dijeli. Misli na njezinu privatnost. ¦ Ta oseba je morda živa: ta iskanja ostanejo v tvojem brskalniku, nič se ne deli. Misli na njeno zasebnost.
+Chaque recherche s’ouvre dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans l’adresse, et ne se connecte jamais à ces sites. ¦ Svako se pretraživanje otvara u tvom pregledniku. Aplikacija ne šalje ništa osim onoga što vidiš u adresi i nikad se ne povezuje s tim stranicama. ¦ Vsako iskanje se odpre v tvojem brskalniku. Aplikacija ne pošlje ničesar drugega kot to, kar vidiš v naslovu, in se s temi stranmi nikoli ne poveže.
+Ce qu’on lit sur ces sites est à vérifier : homonymes, fautes de lecture. Ensuite, enregistre le document (image, PDF, page) ou copie son lien, et fais « ⤒ Importer ce que tu as trouvé ». ¦ Ono što pročitaš na tim stranicama treba provjeriti: imenjaci, pogreške u čitanju. Zatim spremi dokument (sliku, PDF, stranicu) ili kopiraj njegovu poveznicu i upotrijebi „⤒ Uvezi ono što si pronašao/pronašla”. ¦ Kar prebereš na teh straneh, je treba preveriti: soimenjaki, napake pri branju. Nato shrani dokument (sliko, PDF, stran) ali kopiraj njegovo povezavo in uporabi »⤒ Uvozi, kar si našel/našla«.
+Mets {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} ou {à} à la place de ce que tu cherches. ¦ Stavi {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} ili {à} umjesto onoga što tražiš. ¦ Vstavi {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} ali {à} namesto tega, kar iščeš.
+＋ Ajouter mon site ¦ ＋ Dodaj moju stranicu ¦ ＋ Dodaj mojo stran
+Gratuites seulement (les sites payants restent à la fin quand on décoche) ¦ Samo besplatne (plaćene stranice ostaju na kraju kad odznačiš) ¦ Samo brezplačne (plačljive strani ostanejo na koncu, ko odznačiš)
+Aucun site à proposer pour cette fiche. ¦ Nema stranice za predložiti za ovaj zapis. ¦ Za ta zapis ni strani za predlog.
+Pour une personne, les sites à consulter, les plus utiles d’abord : d’après ses lieux, son époque, son métier ou sa vie (soldat, marin, émigré…) et ce qui manque. Chaque site s’ouvre dans ton navigateur avec son nom déjà rempli ; note ensuite ce que ça a donné. ¦ Za osobu, stranice za pregled, najkorisnije prvo: prema njezinim mjestima, dobu, zanimanju ili životu (vojnik, pomorac, iseljenik…) i onome što nedostaje. Svaka se stranica otvara u tvom pregledniku s već upisanim imenom; zatim zabilježi što je to dalo. ¦ Za osebo strani za pregled, najprej najkoristnejše: glede na njene kraje, obdobje, poklic ali življenje (vojak, mornar, izseljenec…) in to, kar manjka. Vsaka stran se odpre v tvojem brskalniku z že vpisanim imenom; nato zapiši, kaj je to dalo.
+Les ancêtres où tu bloques : un parent ou les deux manquent, ou tu l’as marqué « 🧱 Je bloque ici ». Pour chacun : ce qui a déjà été cherché, les sites à essayer, les indices de ta base. ¦ Preci na kojima zapinješ: nedostaje jedan ili oba roditelja, ili si ga označio/označila s „🧱 Ovdje zapinjem”. Za svakoga: što je već traženo, stranice za isprobati, tragovi iz tvoje baze. ¦ Predniki, pri katerih se zatikaš: manjka eden ali oba starša ali pa si ga označil/označila z »🧱 Tu se zatikam«. Za vsakega: kaj je že iskano, strani za preizkus, namigi iz tvoje baze.
+＋ Ajouter un mur… ¦ ＋ Dodaj mrtvu točku… ¦ ＋ Dodaj slepo ulico…
+Marqués à la main ¦ Označeno ručno ¦ Označeno ročno
+🧱 Je bloque ici (marqué à la main) ¦ 🧱 Ovdje zapinjem (označeno ručno) ¦ 🧱 Tu se zatikam (označeno ročno)
+Où : à préciser ¦ Gdje: treba navesti ¦ Kje: je treba navesti
+⤓ Exporter en CSV ¦ ⤓ Izvezi u CSV ¦ ⤓ Izvozi v CSV
+Rien de cherché pour l’instant ¦ Zasad ništa nije traženo ¦ Zaenkrat nič iskano
+Prendre un livre à la bibliothèque ¦ Posudi knjigu u knjižnici ¦ Izposodi si knjigo v knjižnici
+Rendre le livre à la bibliothèque ¦ Vrati knjigu u knjižnicu ¦ Vrni knjigo v knjižnico
+Continuer la recherche sur internet ¦ Nastavi pretraživanje na internetu ¦ Nadaljuj iskanje na internetu
+Se rendre à des archives ¦ Otići u arhiv ¦ Obiskati arhiv
+Se rendre à un endroit ¦ Otići na neko mjesto ¦ Obiskati kraj
+Afrique du Sud ¦ Južnoafrička Republika ¦ Južnoafriška republika
+L’INSEE publie un fichier par année (depuis 1970), puis un par mois pour l’année en cours. Quand le fichier de l’année sort, il remplace ceux des mois : l’app retire alors les mois déjà importés pour éviter les doublons. Les fichiers sont gros (60 à 150 Mo par année) : l’import peut prendre quelques minutes. ¦ INSEE objavljuje jednu datoteku po godini (od 1970.), zatim jednu po mjesecu za tekuću godinu. Kad izađe godišnja datoteka, ona zamjenjuje mjesečne: aplikacija tada uklanja već uvezene mjesece da izbjegne duplikate. Datoteke su velike (60 do 150 MB po godini): uvoz može potrajati nekoliko minuta. ¦ INSEE objavi eno datoteko na leto (od leta 1970), nato eno na mesec za tekoče leto. Ko izide letna datoteka, nadomesti mesečne: aplikacija takrat odstrani že uvožene mesece, da se izogne dvojnikom. Datoteke so velike (60 do 150 MB na leto): uvoz lahko traja nekaj minut.
+Aide : {text} ¦ Pomoć: {text} ¦ Pomoč: {text}
+Garde les actes passés quelques jours avant ou après la date précise (par exemple 30 jours) : un baptême et une naissance déclarée plus tard se retrouvent ensemble. ¦ Zadržava matične zapise sastavljene nekoliko dana prije ili poslije točnog datuma (na primjer 30 dana): krštenje i kasnije prijavljeno rođenje nađu se zajedno. ¦ Obdrži matične vpise, sestavljene nekaj dni pred natančnim datumom ali po njem (na primer 30 dni): krst in pozneje prijavljeno rojstvo se znajdeta skupaj.
+0 km : seulement la commune choisie. En montant le curseur, les communes voisines (jusqu’à 50 km) comptent aussi : utile pour retrouver des témoins ou voisins qui revenaient souvent. ¦ 0 km: samo odabrana općina. Pomicanjem klizača računaju se i susjedne općine (do 50 km): korisno za pronalaženje svjedoka ili susjeda koji su se često vraćali. ¦ 0 km: samo izbrana občina. S premikom drsnika štejejo tudi sosednje občine (do 50 km): koristno za iskanje prič ali sosedov, ki so se pogosto vračali.
+Masquer, montrer, ranger les colonnes ¦ Sakrij, prikaži, poredaj stupce ¦ Skrij, prikaži, razvrsti stolpce
+La liste telle qu’elle est affichée (mêmes colonnes, mêmes filtres) : dans le tableur ou en CSV ¦ Popis kako je prikazan (isti stupci, isti filtri): u proračunskoj tablici ili kao CSV ¦ Seznam, kot je prikazan (isti stolpci, isti filtri): v preglednici ali kot CSV
+📮 Actes à demander à la mairie ¦ 📮 Matični zapisi za zatražiti od općine ¦ 📮 Matični vpisi, ki jih zahtevaš na občini
+Les actes de moins de 100 ans ne sont en général pas en ligne : il faut les demander à la mairie. Naissances et mariages de moins de 75 ans : copie intégrale réservée à la personne, ses ascendants, descendants et conjoint (sinon extrait sans filiation). Décès : communicables à tous. ¦ Matični zapisi mlađi od 100 godina obično nisu na internetu: treba ih zatražiti od općine. Rođenja i vjenčanja mlađa od 75 godina: cjelovita preslika samo za osobu, njezine pretke, potomke i bračnog druga (inače izvadak bez podataka o roditeljima). Smrti: dostupne svima. ¦ Matični vpisi, mlajši od 100 let, običajno niso na spletu: zahtevati jih je treba na občini. Rojstva in poroke, mlajše od 75 let: celotna kopija samo za osebo, njene prednike, potomce in zakonca (sicer izpisek brez podatkov o starših). Smrti: dostopne vsem.
+Montrer aussi ceux que j’ai déjà (copie, source) ou déjà demandés ¦ Prikaži i one koje već imam (preslika, izvor) ili sam ih već zatražio/zatražila ¦ Prikaži tudi tiste, ki jih že imam (kopija, vir) ali sem jih že zahteval/zahtevala
+Aucun acte récent à demander. ¦ Nema nedavnih matičnih zapisa za zatražiti. ¦ Ni nedavnih matičnih vpisov za zahtevo.
+Une lettre toute prête pour demander un acte (mairie, archives, Nantes…) ¦ Gotovo pismo za traženje matičnog zapisa (općina, arhiv, Nantes…) ¦ Pripravljeno pismo za zahtevo matičnega vpisa (občina, arhiv, Nantes…)
+📮 Demander un acte ¦ 📮 Zatraži matični zapis ¦ 📮 Zahtevaj matični vpis
+Payant : abonnement pour voir la plupart des documents ¦ Plaćeno: pretplata za pregled većine dokumenata ¦ Plačljivo: naročnina za ogled večine dokumentov
+Gratuit en partie ; certains journaux et la lecture complète demandent un abonnement ¦ Djelomično besplatno; neke novine i potpuno čitanje traže pretplatu ¦ Delno brezplačno; nekateri časopisi in celotno branje zahtevajo naročnino
+Gratuit ; une partie (Premium) est payante ¦ Besplatno; jedan dio (Premium) se plaća ¦ Brezplačno; en del (Premium) je plačljiv
+FamilySearch — catalogue (registres filmés d’un lieu) ¦ FamilySearch — katalog (snimljene matice nekog mjesta) ¦ FamilySearch — katalog (posnete matične knjige kraja)
+Antenati — recherche par nom (Italie) ¦ Antenati — pretraživanje po imenu (Italija) ¦ Antenati — iskanje po imenu (Italija)
+Même adresse que le bouton « WikiTree » de l’app. Avec un identifiant WikiTree (« Durand-1234 »), la fiche s’ouvre directement. ¦ Ista adresa kao gumb „WikiTree” u aplikaciji. S WikiTree identifikatorom („Durand-1234”) zapis se otvara izravno. ¦ Isti naslov kot gumb »WikiTree« v aplikaciji. Z identifikatorjem WikiTree (»Durand-1234«) se zapis odpre neposredno.
+Même adresse que le bouton « WikiTree » de l’app. ¦ Ista adresa kao gumb „WikiTree” u aplikaciji. ¦ Isti naslov kot gumb »WikiTree« v aplikaciji.
