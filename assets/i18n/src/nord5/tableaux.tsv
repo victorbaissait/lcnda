@@ -1199,3 +1199,2403 @@ Selon le rôle ¦ Prema ulozi ¦ Glede na vlogo
 Légère ¦ Lagani ¦ Lahka
 Normale ¦ Normalni ¦ Običajna
 Demi-grasse ¦ Polupodebljani ¦ Polkrepka
+Grasse ¦ Podebljano ¦ Krepko
+Extra-grasse ¦ Vrlo podebljano ¦ Zelo krepko
+Noire ¦ Crno ¦ Črno
+bouton|<b>G</b> ¦ <b>B</b> ¦ <b>K</b>
+bouton|<i>I</i> ¦ <i>I</i> ¦ <i>L</i>
+bouton|<u>S</u> ¦ <u>U</u> ¦ <u>P</u>
+bouton|<s>B</s> ¦ <s>S</s> ¦ <s>P</s>
+Gras (⌘B) ¦ Podebljano (⌘B) ¦ Krepko (⌘B)
+Italique (⌘I) ¦ Kurziv (⌘I) ¦ Ležeče (⌘I)
+Souligné (⌘U) ¦ Podcrtano (⌘U) ¦ Podčrtano (⌘U)
+Exposant (1<sup>er</sup>) ¦ Eksponent (x<sup>2</sup>) ¦ Nadpisano (x<sup>2</sup>)
+Retrait (sous-liste) ¦ Uvlaka (podpopis) ¦ Zamik (podseznam)
+Moins de retrait ¦ Manja uvlaka ¦ Manjši zamik
+En haut de la zone ¦ Na vrhu zone ¦ Na vrhu območja
+Au milieu de la zone ¦ U sredini zone ¦ Na sredini območja
+En bas de la zone ¦ Na dnu zone ¦ Na dnu območja
+Couleur d’accent du thème ¦ Naglasna boja teme ¦ Poudarjena barva teme
+Texte dans la forme ¦ Tekst u obliku ¦ Besedilo v obliki
+Couleur (fond et bordure) ¦ Boja (ispuna i obrub) ¦ Barva (polnilo in obroba)
+Bordure ¦ Obrub ¦ Obroba
+Points ¦ Točke ¦ Točke
+Coins ¦ Kutovi ¦ Vogali
+Forme sans fond. ¦ Oblik bez ispune. ¦ Oblika brez polnila.
+Pas de fond (∅). ¦ Bez ispune (∅). ¦ Brez polnila (∅).
+Pas de bordure (∅). ¦ Bez obruba (∅). ¦ Brez obrobe (∅).
+🖼️ Changer l’image… ¦ 🖼️ Promijeni sliku… ¦ 🖼️ Zamenjaj sliko…
+🖼️ Choisir l’image… ¦ 🖼️ Odaberi sliku… ¦ 🖼️ Izberi sliko…
+🖼 En fond de diapositive ¦ 🖼 Kao pozadina slajda ¦ 🖼 Kot ozadje prosojnice
+Cadrage ¦ Kadriranje ¦ Kadriranje
+Remplir (rogner) ¦ Ispuni (obreži) ¦ Zapolni (obreži)
+Photo entière ¦ Cijela fotografija ¦ Cela fotografija
+Étirer ¦ Rastegni ¦ Raztegni
+Masque (forme) ¦ Maska (oblik) ¦ Maska (oblika)
+La photo est découpée dans cette forme : rond, arrondi, étoile, cœur… sans toucher à la photo d’origine. ¦ Fotografija je izrezana u ovom obliku: krug, zaobljeno, zvijezda, srce… bez diranja izvorne fotografije. ¦ Fotografija je izrezana v to obliko: krog, zaobljeno, zvezda, srce… brez spreminjanja izvirne fotografije.
+Zoom (rogner) ¦ Zum (obreži) ¦ Povečava (obreži)
+Agrandit la photo dans son cadre ; « Cadrer ↔ ↕ » choisit ensuite quelle partie on voit. ¦ Povećava fotografiju u okviru; „Kadriraj ↔ ↕” zatim bira koji se dio vidi. ¦ Poveča fotografijo v okvirju; »Kadriraj ↔ ↕« nato izbere, kateri del se vidi.
+Cadrer ↔ ¦ Kadriraj ↔ ¦ Kadriraj ↔
+Cadrer ↕ ¦ Kadriraj ↕ ¦ Kadriraj ↕
+🎚️ Retouche ¦ 🎚️ Retuširanje ¦ 🎚️ Retuširanje
+Épaisseur du cadre ¦ Debljina okvira ¦ Debelina okvirja
+Au bout ¦ Na kraju ¦ Na koncu
+Aux deux bouts ¦ Na oba kraja ¦ Na obeh koncih
+Le tableur en grand : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Proračunska tablica u velikom: formule, sortiranje, lijepljenje iz Excela… zatim „✓ Spremi i vrati se” ¦ Preglednica v velikem: formule, razvrščanje, lepljenje iz Excela… nato »✓ Shrani in se vrni«
+Le tableur en grand, préparé « Catégorie + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Proračunska tablica u velikom, pripremljena kao „Kategorija + serije”: formule, sortiranje, lijepljenje iz Excela… zatim „✓ Spremi i vrati se” ¦ Preglednica v velikem, pripravljena kot »Kategorija + serije«: formule, razvrščanje, lepljenje iz Excela… nato »✓ Shrani in se vrni«
+＋ Ligne ¦ ＋ Redak ¦ ＋ Vrstica
+− Ligne ¦ − Redak ¦ − Vrstica
+＋ Colonne ¦ ＋ Stupac ¦ ＋ Stolpec
+− Colonne ¦ − Stupac ¦ − Stolpec
+Première ligne en en-tête ¦ Prvi redak kao zaglavlje ¦ Prva vrstica kot glava
+En-tête : fond ¦ Zaglavlje: pozadina ¦ Glava: ozadje
+En-tête : texte ¦ Zaglavlje: tekst ¦ Glava: besedilo
+Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur) ¦ Sadržaj (jedan redak po retku tablice, ćelije odvojene s „;” ili tabulatorom — lijepi se iz proračunske tablice) ¦ Vsebina (ena vrstica na vrsto, celice ločene z »;« ali tabulatorjem — prilepi se iz preglednice)
+Ou ici, en secours (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Ili ovdje, kao rezerva (1. redak: Kategorija ; Serija 1 ; Serija 2…) ¦ Ali tukaj, kot rezerva (1. vrstica: Kategorija ; Serija 1 ; Serija 2…)
+Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Brojke (1. redak: Kategorija ; Serija 1 ; Serija 2…) ¦ Številke (1. vrstica: Kategorija ; Serija 1 ; Serija 2…)
+Vives ¦ Žive ¦ Žive
+Pastel ¦ Pastelne ¦ Pastelne
+Terre ¦ Zemljane ¦ Zemeljske
+Gris ¦ Sive ¦ Sive
+Selon la sorte ¦ Prema vrsti ¦ Glede na vrsto
+🪪 La fiche ¦ 🪪 Zapis ¦ 🪪 Zapis
+🖼️ Le portrait ¦ 🖼️ Portret ¦ 🖼️ Portret
+🌳 Petit arbre ¦ 🌳 Malo stablo ¦ 🌳 Majhno drevo
+🔄 Relire la fiche ¦ 🔄 Ponovno pročitaj zapis ¦ 🔄 Znova preberi zapis
+🎬 Changer… ¦ 🎬 Promijeni… ¦ 🎬 Zamenjaj…
+Lecture automatique ¦ Automatska reprodukcija ¦ Samodejno predvajanje
+En boucle ¦ U petlji ¦ V zanki
+Sans le son ¦ Bez zvuka ¦ Brez zvoka
+Boutons de lecture visibles ¦ Vidljivi gumbi za reprodukciju ¦ Vidni gumbi za predvajanje
+Commencer à ¦ Počni od ¦ Začni pri
+Effets (ombre et opacité) ¦ Efekti (sjena i neprozirnost) ¦ Učinki (senca in prekrivnost)
+Chemin ¦ Putanja ¦ Pot
+Attendre ¦ Čekaj ¦ Počakaj
+× Retirer ¦ × Ukloni ¦ × Odstrani
+Transition ¦ Prijelaz ¦ Prehod
+Effet (en arrivant sur cette diapositive) ¦ Efekt (pri dolasku na ovaj slajd) ¦ Učinek (ob prihodu na to prosojnico)
+L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux. ¦ Efekt se izvodi pri prelasku s prethodnog slajda na ovaj. „Čarobno pomicanje” klizi objekte prisutne na oba. ¦ Učinek se predvaja ob prehodu s prejšnje prosojnice na to. »Čarobni premik« premakne predmete, ki so na obeh.
+▶ Aperçu ¦ ▶ Pregled ¦ ▶ Predogled
+Pour toutes les diapositives ¦ Za sve slajdove ¦ Za vse prosojnice
+Animations de l’objet choisi ¦ Animacije odabranog objekta ¦ Animacije izbranega predmeta
+＋ Entrée ¦ ＋ Ulaz ¦ ＋ Vstop
+＋ Sortie ¦ ＋ Izlaz ¦ ＋ Izstop
+Ordre des animations ¦ Redoslijed animacija ¦ Vrstni red animacij
+⬅ Sortie ¦ ⬅ Izlaz ¦ ⬅ Izstop
+➡ Entrée ¦ ➡ Ulaz ¦ ➡ Vstop
+▶ Aperçu des animations ¦ ▶ Pregled animacija ¦ ▶ Predogled animacij
+Disposition (place les titres, textes, photos) ¦ Raspored (smješta naslove, tekstove, fotografije) ¦ Postavitev (namesti naslove, besedila, fotografije)
+Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place. ¦ Gotov plan (naslov, naslov i tekst, fotografija preko cijele stranice…): već napisani tekstovi se zadržavaju i mijenjaju mjesto. ¦ Pripravljena zasnova (naslov, naslov in besedilo, fotografija čez celo stran…): že napisana besedila ostanejo in se premaknejo.
+Celui du thème ¦ Ona iz teme ¦ Tista iz teme
+Dégradé rond ¦ Kružni prijelaz boja ¦ Krožni preliv
+Couleur autour de l’image ¦ Boja oko slike ¦ Barva okoli slike
+Entière ¦ Cijela ¦ Cela
+Ce fond pour toutes les diapositives ¦ Ova pozadina za sve slajdove ¦ To ozadje za vse prosojnice
+Durée — lecture seule et vidéo ¦ Trajanje — samostalna reprodukcija i video ¦ Trajanje — samodejno predvajanje in video
+Le temps passé sur cette diapositive quand la présentation avance toute seule et dans la vidéo exportée. ¦ Vrijeme provedeno na ovom slajdu kad prezentacija napreduje sama i u izvezenom videu. ¦ Čas na tej prosojnici, ko predstavitev teče sama, in v izvoženem videu.
+Passer toute seule à la suivante (après la durée) ¦ Sam prijeđi na sljedeći (nakon trajanja) ¦ Samodejno pojdi na naslednjo (po izteku trajanja)
+Sauter cette diapositive à la lecture ¦ Preskoči ovaj slajd pri reprodukciji ¦ Preskoči to prosojnico pri predvajanju
+Titre de la section (un groupe de diapositives qui commence ici) ¦ Naslov odjeljka (skupina slajdova koja počinje ovdje) ¦ Naslov razdelka (skupina prosojnic, ki se začne tukaj)
+ex. Les années de guerre ¦ npr. Ratne godine ¦ npr. Vojna leta
+Vers le devant ¦ Prema naprijed ¦ Naprej
+Vers le fond ¦ Prema pozadini ¦ Nazaj
+Couleurs et polices ¦ Boje i fontovi ¦ Barve in pisave
+Accent ¦ Naglasak ¦ Poudarek
+Format des diapositives ¦ Format slajdova ¦ Oblika prosojnic
+Largeur (points) ¦ Širina (točke) ¦ Širina (točke)
+Hauteur (points) ¦ Visina (točke) ¦ Višina (točke)
+Changer… ¦ Promijeni… ¦ Zamenjaj…
+🎵 Une musique pendant la lecture… ¦ 🎵 Glazba tijekom reprodukcije… ¦ 🎵 Glasba med predvajanjem…
+Recommencer au début à la fin (borne, exposition) ¦ Na kraju počni ispočetka (kiosk, izložba) ¦ Na koncu začni znova (kiosk, razstava)
+Remplissage et bordure ¦ Ispuna i obrub ¦ Polnilo in obroba
+Ombre et opacité ¦ Sjena i neprozirnost ¦ Senca in prekrivnost
+T Une zone de texte ¦ T Tekstni okvir ¦ T Polje z besedilom
+🖼️ Une photo des médias ou de l’ordinateur ¦ 🖼️ Fotografija iz medija ili s računala ¦ 🖼️ Fotografija iz medijev ali z računalnika
+📊 Un graphique (colonnes, camembert, courbe…) ¦ 📊 Grafikon (stupci, tortni, krivulja…) ¦ 📊 Graf (stolpci, tortni, krivulja…)
+🎬 Une vidéo ou un son des médias ¦ 🎬 Video ili zvuk iz medija ¦ 🎬 Video ali zvok iz medijev
+⊞ Grouper (⌘G) — ⇧⌘G pour dissocier ¦ ⊞ Grupiraj (⌘G) — ⇧⌘G za razgrupiranje ¦ ⊞ Združi (⌘G) — ⇧⌘G za razdružitev
+⊟ Dissocier (⇧⌘G) ¦ ⊟ Razgrupiraj (⇧⌘G) ¦ ⊟ Razdruži (⇧⌘G)
+🔒 Verrouiller / déverrouiller (⌘L) ¦ 🔒 Zaključaj / otključaj (⌘L) ¦ 🔒 Zakleni / odkleni (⌘L)
+▶ Lire en plein écran depuis le début (⌥⌘↩) ¦ ▶ Reproduciraj preko cijelog zaslona od početka (⌥⌘↩) ¦ ▶ Predvajaj v celozaslonskem načinu od začetka (⌥⌘↩)
+⏵ Lire depuis cette diapositive (⌘↩) ¦ ⏵ Reproduciraj od ovog slajda (⌘↩) ¦ ⏵ Predvajaj od te prosojnice (⌘↩)
+🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ 🎤 Cijeli zaslon + prozor izlagača (bilješke, sljedeći, štoperica) ¦ 🎤 Celozaslonski način + okno predavatelja (opombe, naslednja, štoparica)
+⤓ Exporter (PDF, PNG, vidéo, fichier) ¦ ⤓ Izvezi (PDF, PNG, video, datoteka) ¦ ⤓ Izvozi (PDF, PNG, video, datoteka)
+⧉ Dupliquer la diapositive (pour un déplacement magique) ¦ ⧉ Dupliciraj slajd (za čarobno pomicanje) ¦ ⧉ Podvoji prosojnico (za čarobni premik)
+👁 Sauter / ne plus sauter à la lecture ¦ 👁 Preskoči / ne preskači pri reprodukciji ¦ 👁 Preskoči / ne preskakuj pri predvajanju
+§ Commencer une section (un groupe de diapositives) ici ¦ § Ovdje počni odjeljak (skupinu slajdova) ¦ § Tukaj začni razdelek (skupino prosojnic)
+🗑 Supprimer la diapositive ¦ 🗑 Izbriši slajd ¦ 🗑 Izbriši prosojnico
+‹ Diapositive précédente (Page précédente) ¦ ‹ Prethodni slajd (Page Up) ¦ ‹ Prejšnja prosojnica (Page Up)
+› Diapositive suivante (Page suivante) ¦ › Sljedeći slajd (Page Down) ¦ › Naslednja prosojnica (Page Down)
+=élément copié ¦ kopirana stavka|kopirane stavke|kopiranih stavki ¦ kopiran element|kopirana elementa|kopirani elementi|kopiranih elementov
+=coude ¦ pregib|pregiba|pregiba ¦ pregib|pregiba|pregibi|pregibov
+=dessin choisi ¦ odabrani crtež|odabrana crteža|odabranih crteža ¦ izbrana risba|izbrani risbi|izbrane risbe|izbranih risb
+=association ¦ veza|veze|veza ¦ povezava|povezavi|povezave|povezav
+=élément absent ici ¦ stavka koja ovdje nedostaje|stavke koje ovdje nedostaju|stavki koje ovdje nedostaju ¦ element, ki tu manjka|elementa, ki tu manjkata|elementi, ki tu manjkajo|elementov, ki tu manjkajo
+=confirmée ¦ potvrđena|potvrđene|potvrđenih ¦ potrjena|potrjeni|potrjene|potrjenih
+=fausse ¦ lažna|lažne|lažnih ¦ napačna|napačni|napačne|napačnih
+=note posée ¦ postavljena bilješka|postavljene bilješke|postavljenih bilježaka ¦ postavljena opomba|postavljeni opombi|postavljene opombe|postavljenih opomb
+=animation ¦ animacija|animacije|animacija ¦ animacija|animaciji|animacije|animacij
+=sautée ¦ preskočena|preskočene|preskočenih ¦ preskočena|preskočeni|preskočene|preskočenih
+=diapositive ajoutée ¦ dodani slajd|dodana slajda|dodanih slajdova ¦ dodana prosojnica|dodani prosojnici|dodane prosojnice|dodanih prosojnic
+=image illisible laissée ¦ izostavljena nečitljiva slika|izostavljene nečitljive slike|izostavljenih nečitljivih slika ¦ izpuščena neberljiva slika|izpuščeni neberljivi sliki|izpuščene neberljive slike|izpuščenih neberljivih slik
+=image reprise ¦ preuzeta slika|preuzete slike|preuzetih slika ¦ prevzeta slika|prevzeti sliki|prevzete slike|prevzetih slik
+=diapositive importée ¦ uvezeni slajd|uvezena slajda|uvezenih slajdova ¦ uvožena prosojnica|uvoženi prosojnici|uvožene prosojnice|uvoženih prosojnic
+Arrondi par défaut des éléments arrondis ¦ Zadano zaobljenje zaobljenih elemenata ¦ Privzeta zaobljenost zaobljenih elementov
+Formules ¦ Formule ¦ Formule
+Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille. ¦ Počinje s <code>=</code>: <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (dob), <code>="texte"</code>. Zalijepi dio proračunske tablice (Excel, Numbers) u ćeliju: rasporedit će se u mrežu. ¦ Začne se z <code>=</code>: <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (starost), <code>="texte"</code>. Prilepi kos preglednice (Excel, Numbers) v celico: razporedi se v mrežo.
+⏺ Vidéo ¦ ⏺ Video ¦ ⏺ Video
+Hexagone ¦ Šesterokut ¦ Šestkotnik
+Bulle ¦ Oblačić ¦ Oblaček
+Cœur ¦ Srce ¦ Srce
+⧉ Copie ¦ ⧉ Kopija ¦ ⧉ Kopija
+forme|Rectangle ¦ Pravokutnik ¦ Pravokotnik
+forme|Rectangle arrondi ¦ Zaobljeni pravokutnik ¦ Zaobljen pravokotnik
+forme|Ovale ¦ Oval ¦ Oval
+forme|Triangle ¦ Trokut ¦ Trikotnik
+forme|Triangle rectangle ¦ Pravokutni trokut ¦ Pravokotni trikotnik
+forme|Losange ¦ Romb ¦ Romb
+forme|Pentagone ¦ Peterokut ¦ Petkotnik
+forme|Hexagone ¦ Šesterokut ¦ Šestkotnik
+forme|Étoile ¦ Zvijezda ¦ Zvezda
+forme|Bulle ¦ Oblačić ¦ Oblaček
+forme|Nuage ¦ Oblak ¦ Oblak
+forme|Flèche ¦ Strelica ¦ Puščica
+forme|Double flèche ¦ Dvostruka strelica ¦ Dvojna puščica
+forme|Étiquette ¦ Etiketa ¦ Etiketa
+forme|Parallélogramme ¦ Paralelogram ¦ Paralelogram
+forme|Trapèze ¦ Trapez ¦ Trapez
+forme|Losange plat ¦ Plosnati romb ¦ Sploščen romb
+forme|Pilule ¦ Pilula ¦ Tableta
+forme|Cylindre ¦ Valjak ¦ Valj
+forme|Cube ¦ Kocka ¦ Kocka
+forme|Pavé ¦ Kvadar ¦ Kvader
+forme|Pyramide ¦ Piramida ¦ Piramida
+forme|Cône ¦ Stožac ¦ Stožec
+forme|Tétraèdre ¦ Tetraedar ¦ Tetraeder
+forme|Heptagone ¦ Sedmerokut ¦ Sedemkotnik
+forme|Octogone ¦ Osmerokut ¦ Osemkotnik
+forme|Décagone ¦ Deseterokut ¦ Desetkotnik
+forme|Dodécagone ¦ Dvanaesterokut ¦ Dvanajstkotnik
+forme|Anneau ¦ Prsten ¦ Kolobar
+forme|Demi-cercle ¦ Polukrug ¦ Polkrog
+forme|Quart de cercle ¦ Četvrtina kruga ¦ Četrt kroga
+forme|Cadre ¦ Okvir ¦ Okvir
+forme|Équerre ¦ Kutnik ¦ Kotnik
+forme|Chevron ¦ Ševron ¦ Ševron
+forme|Sablier ¦ Pješčani sat ¦ Peščena ura
+forme|forme ¦ oblik ¦ oblika
+forme|Arche ¦ Luk ¦ Lok
+forme|Flèche à gauche ¦ Strelica lijevo ¦ Puščica levo
+forme|Flèche en haut ¦ Strelica gore ¦ Puščica gor
+forme|Flèche en bas ¦ Strelica dolje ¦ Puščica dol
+forme|Double flèche verticale ¦ Dvostruka okomita strelica ¦ Dvojna navpična puščica
+forme|Quatre directions ¦ Četiri smjera ¦ Štiri smeri
+forme|Flèche à encoche ¦ Strelica s urezom ¦ Puščica z zarezo
+forme|Flèche courbe ¦ Zakrivljena strelica ¦ Ukrivljena puščica
+forme|Demi-tour ¦ Polukružni okret ¦ Polkrožni obrat
+forme|Flèche fine ¦ Tanka strelica ¦ Tanka puščica
+forme|Pavé flèche ¦ Blok sa strelicom ¦ Blok s puščico
+forme|Flèche ronde ¦ Kružna strelica ¦ Krožna puščica
+forme|Bulle ronde ¦ Okrugli oblačić ¦ Okrogel oblaček
+forme|Encadré ¦ Uokvireni tekst ¦ Okvirček
+forme|Pensée ¦ Misao ¦ Misel
+forme|Cri ¦ Uzvik ¦ Vzklik
+forme|gauche ¦ lijevo ¦ levo
+forme|Bulle carrée ¦ Četvrtasti oblačić ¦ Oglat oblaček
+forme|Étoile à {x} branches ¦ Zvijezda s {x} krakova ¦ Zvezda z {x} kraki
+forme|Éclat ¦ Prasak ¦ Izbruh
+forme|Sceau ¦ Pečat ¦ Pečat
+forme|Rose des vents ¦ Ruža vjetrova ¦ Vetrovnica
+forme|Ruban ¦ Vrpca ¦ Trak
+forme|Médaille ¦ Medalja ¦ Medalja
+forme|Écu ¦ Štit ¦ Ščit
+forme|Bannière ¦ Transparent ¦ Pasica
+forme|Cocarde ¦ Kokarda ¦ Kokarda
+forme|Cœur ¦ Srce ¦ Srce
+forme|Coche ¦ Kvačica ¦ Kljukica
+forme|Croix ¦ Križ ¦ Križ
+forme|Plus ¦ Plus ¦ Plus
+forme|Moins ¦ Minus ¦ Minus
+forme|Lune ¦ Mjesec ¦ Luna
+forme|Éclair ¦ Munja ¦ Strela
+forme|Goutte ¦ Kap ¦ Kapljica
+forme|Repère ¦ Oznaka mjesta ¦ Oznaka mesta
+forme|Drapeau ¦ Zastava ¦ Zastava
+forme|Point d’interrogation ¦ Upitnik ¦ Vprašaj
+forme|Point d’exclamation ¦ Uskličnik ¦ Klicaj
+forme|Information ¦ Informacija ¦ Informacija
+forme|Infini ¦ Beskonačnost ¦ Neskončnost
+forme|Soleil ¦ Sunce ¦ Sonce
+forme|Signe ¦ Znak ¦ Znak
+forme|Arbre ¦ Stablo ¦ Drevo
+forme|Chêne ¦ Hrast ¦ Hrast
+forme|Alliances ¦ Vjenčani prstenovi ¦ Poročna prstana
+forme|Couronne ¦ Kruna ¦ Krona
+forme|Tombe ¦ Grob ¦ Grob
+forme|Berceau ¦ Kolijevka ¦ Zibelka
+forme|Parchemin ¦ Pergament ¦ Pergament
+forme|Plume ¦ Pero ¦ Pero
+forme|Livre ¦ Knjiga ¦ Knjiga
+forme|Lettre ¦ Pismo ¦ Pismo
+forme|Bougie ¦ Svijeća ¦ Sveča
+forme|Cachet de cire ¦ Voštani pečat ¦ Voščeni pečat
+forme|Fleur de lys ¦ Ljiljan ¦ Lilija
+forme|Branche ¦ Grana ¦ Veja
+forme|Personne ¦ Osoba ¦ Oseba
+forme|Femme ¦ Žena ¦ Ženska
+forme|Couple ¦ Par ¦ Par
+forme|Famille ¦ Obitelj ¦ Družina
+forme|Enfant ¦ Dijete ¦ Otrok
+forme|Portrait ¦ Portret ¦ Portret
+forme|médaillon ¦ medaljon ¦ medaljon
+forme|Soldat ¦ Vojnik ¦ Vojak
+forme|Maison ¦ Kuća ¦ Hiša
+forme|Église ¦ Crkva ¦ Cerkev
+forme|Château ¦ Dvorac ¦ Grad
+forme|Mairie ¦ Općinska zgrada ¦ Občinska hiša
+forme|Moulin ¦ Mlin ¦ Mlin
+forme|Bateau ¦ Brod ¦ Ladja
+forme|Usine ¦ Tvornica ¦ Tovarna
+forme|Montagne ¦ Planina ¦ Gora
+forme|Pont ¦ Most ¦ Most
+forme|Clé ¦ Ključ ¦ Ključ
+forme|Lampe ¦ Svjetiljka ¦ Svetilka
+forme|Chaise ¦ Stolica ¦ Stol
+forme|Horloge ¦ Sat ¦ Ura
+forme|Lunettes ¦ Naočale ¦ Očala
+forme|Parapluie ¦ Kišobran ¦ Dežnik
+forme|Ampoule ¦ Žarulja ¦ Žarnica
+forme|Loupe ¦ Povećalo ¦ Povečevalno steklo
+forme|Cadeau ¦ Poklon ¦ Darilo
+forme|Tasse ¦ Šalica ¦ Skodelica
+forme|Appareil photo ¦ Fotoaparat ¦ Fotoaparat
+forme|Téléphone ¦ Telefon ¦ Telefon
+forme|Crayon ¦ Olovka ¦ Svinčnik
+forme|Sac ¦ Torba ¦ Torba
+forme|Valise ¦ Kovčeg ¦ Kovček
+forme|Chapeau ¦ Šešir ¦ Klobuk
+forme|Cloche ¦ Zvono ¦ Zvon
+forme|Ancre ¦ Sidro ¦ Sidro
+forme|Feuille ¦ List ¦ List
+forme|Fleur ¦ Cvijet ¦ Cvet
+forme|Sapin ¦ Jela ¦ Jelka
+forme|Vague ¦ Val ¦ Val
+forme|Poisson ¦ Riba ¦ Riba
+forme|Oiseau ¦ Ptica ¦ Ptica
+forme|Flocon ¦ Pahuljica ¦ Snežinka
+forme|Pomme ¦ Jabuka ¦ Jabolko
+forme|Champignon ¦ Gljiva ¦ Goba
+forme|Patte ¦ Šapa ¦ Taca
+forme|Anneau fin ¦ Tanki prsten ¦ Tanek kolobar
+forme|Anneau épais ¦ Debeli prsten ¦ Debel kolobar
+forme|Deux anneaux ¦ Dva prstena ¦ Dva kolobarja
+forme|Cadre fin ¦ Tanki okvir ¦ Tanek okvir
+forme|Cadre arrondi ¦ Zaobljeni okvir ¦ Zaobljen okvir
+forme|Médaillon ¦ Medaljon ¦ Medaljon
+forme|Ovale vertical ¦ Okomiti oval ¦ Pokončen oval
+forme|Ovale horizontal ¦ Vodoravni oval ¦ Ležeč oval
+forme|Croissant fin ¦ Tanki polumjesec ¦ Tanek polmesec
+forme|Goutte inversée ¦ Obrnuta kap ¦ Obrnjena kapljica
+forme|Deux cœurs ¦ Dva srca ¦ Dve srci
+forme|Croix grecque ¦ Grčki križ ¦ Grški križ
+forme|Croix de Malte ¦ Malteški križ ¦ Malteški križ
+forme|Croix de Lorraine ¦ Lotarinški križ ¦ Lotarinški križ
+forme|Croix orthodoxe ¦ Pravoslavni križ ¦ Pravoslavni križ
+forme|Bannière ondulée ¦ Valoviti transparent ¦ Valovita pasica
+forme|Phylactère ¦ Svitak s natpisom ¦ Napisni trak
+forme|Étiquette ronde ¦ Okrugla etiketa ¦ Okrogla etiketa
+forme|Bulle ovale ¦ Ovalni oblačić ¦ Ovalni oblaček
+forme|droite ¦ desno ¦ desno
+forme|Petite pensée ¦ Mala misao ¦ Majhna misel
+forme|Quart de disque ¦ Četvrtina kruga ¦ Četrt kroga
+forme|Tiers de disque ¦ Trećina kruga ¦ Tretjina kroga
+forme|Demi-disque ¦ Polukrug ¦ Polkrog
+forme|Deux tiers de disque ¦ Dvije trećine kruga ¦ Dve tretjini kroga
+forme|Trois quarts de disque ¦ Tri četvrtine kruga ¦ Tri četrtine kroga
+forme|Camembert ¦ Tortni grafikon ¦ Tortni graf
+forme|Polygone à {x} côtés ¦ Mnogokut sa {x} stranica ¦ Mnogokotnik z {x} stranicami
+forme|Étoile fine à {x} branches ¦ Tanka zvijezda s {x} krakova ¦ Tanka zvezda z {x} kraki
+forme|Étoile ronde à {x} branches ¦ Okrugla zvijezda s {x} krakova ¦ Okrogla zvezda z {x} kraki
+forme|Quart d’anneau ¦ Četvrtina prstena ¦ Četrt kolobarja
+forme|Demi-anneau ¦ Polovica prstena ¦ Polovica kolobarja
+forme|Trois quarts d’anneau ¦ Tri četvrtine prstena ¦ Tri četrtine kolobarja
+forme|Arbre généalogique ¦ Obiteljsko stablo ¦ Družinsko drevo
+forme|Arborescence ¦ Hijerarhija ¦ Drevesna struktura
+forme|Organigramme ¦ Organigram ¦ Organigram
+forme|Liens ¦ Veze ¦ Povezave
+forme|Groupe de personnes ¦ Skupina ljudi ¦ Skupina ljudi
+forme|Homme et femme ¦ Muškarac i žena ¦ Moški in ženska
+forme|Parents et enfant ¦ Roditelji i dijete ¦ Starša in otrok
+forme|Deux femmes ¦ Dvije žene ¦ Dve ženski
+forme|Deux hommes ¦ Dva muškarca ¦ Dva moška
+forme|Mère et fille ¦ Majka i kći ¦ Mati in hči
+forme|Père et fils ¦ Otac i sin ¦ Oče in sin
+forme|Mère et fils ¦ Majka i sin ¦ Mati in sin
+forme|Père et fille ¦ Otac i kći ¦ Oče in hči
+forme|Visage de bébé ¦ Lice bebe ¦ Obraz dojenčka
+forme|Bébé ¦ Beba ¦ Dojenček
+forme|Landau ¦ Dječja kolica ¦ Otroški voziček
+forme|Biberon ¦ Bočica ¦ Steklenička
+forme|Femme enceinte ¦ Trudnica ¦ Nosečnica
+forme|Bague ¦ Prsten ¦ Prstan
+forme|Cœurs ¦ Srca ¦ Srca
+forme|Foyer ¦ Dom ¦ Dom
+forme|Personne aimée ¦ Voljena osoba ¦ Ljubljena oseba
+forme|Main et cœur ¦ Ruka i srce ¦ Roka in srce
+forme|Symbole masculin ¦ Muški simbol ¦ Moški simbol
+forme|Symbole féminin ¦ Ženski simbol ¦ Ženski simbol
+forme|Symbole couple ¦ Simbol para ¦ Simbol para
+forme|Pierre tombale ¦ Nadgrobni spomenik ¦ Nagrobnik
+forme|Cercueil ¦ Lijes ¦ Krsta
+forme|Tulipe ¦ Tulipan ¦ Tulipan
+forme|Coquelicot ¦ Mak ¦ Mak
+forme|Croix latine ¦ Latinski križ ¦ Latinski križ
+forme|Croix celtique ¦ Keltski križ ¦ Keltski križ
+forme|Bible ¦ Biblija ¦ Biblija
+forme|Certificat ¦ Potvrda ¦ Potrdilo
+forme|Parchemin écrit ¦ Ispisani pergament ¦ Popisan pergament
+forme|Plume à encre ¦ Pero s tintom ¦ Pero s črnilom
+forme|Tampon ¦ Žig ¦ Žig
+forme|Passeport ¦ Putovnica ¦ Potni list
+forme|Carte d’identité ¦ Osobna iskaznica ¦ Osebna izkaznica
+forme|Carte et loupe ¦ Karta i povećalo ¦ Zemljevid in povečevalno steklo
+forme|Document cherché ¦ Traženi dokument ¦ Iskani dokument
+forme|Frise du temps ¦ Vremenska crta ¦ Časovnica
+forme|Histoire ¦ Povijest ¦ Zgodovina
+forme|Diaphragme ¦ Blenda ¦ Zaslonka
+forme|Cadre photo ¦ Okvir za fotografiju ¦ Okvir za fotografijo
+forme|Miroir ovale ¦ Ovalno ogledalo ¦ Ovalno ogledalo
+forme|Blason couronné ¦ Okrunjeni grb ¦ Kronani grb
+forme|Tour ¦ Toranj ¦ Stolp
+forme|Père et enfant ¦ Otac i dijete ¦ Oče in otrok
+forme|Deux mères et enfant ¦ Dvije majke i dijete ¦ Dve materi in otrok
+forme|Deux pères et enfant ¦ Dva oca i dijete ¦ Dva očeta in otrok
+forme|Amour maternel ¦ Majčinska ljubav ¦ Materinska ljubezen
+forme|Mère qui allaite ¦ Majka koja doji ¦ Mati, ki doji
+forme|Poussette ¦ Kolica ¦ Voziček
+forme|Table à langer ¦ Stol za previjanje ¦ Previjalna miza
+forme|contour ¦ obris ¦ obris
+forme|Adulte et enfant ¦ Odrasla osoba i dijete ¦ Odrasel in otrok
+forme|rond ¦ okruglo ¦ okroglo
+forme|Tuteur ¦ Skrbnik ¦ Skrbnik
+forme|Deux personnes ¦ Dvije osobe ¦ Dve osebi
+forme|Maison familiale ¦ Obiteljska kuća ¦ Družinska hiša
+forme|Registre de personnes ¦ Registar osoba ¦ Register oseb
+forme|Date d’une personne ¦ Datum osobe ¦ Datum osebe
+forme|Fiche individuelle ¦ Osobni zapis ¦ Osebni zapis
+forme|Dossier de personne ¦ Mapa osobe ¦ Mapa osebe
+forme|Acte certifié ¦ Ovjerena isprava ¦ Overjena listina
+forme|Cœur dans un carré ¦ Srce u kvadratu ¦ Srce v kvadratu
+forme|Cœur rond ¦ Okruglo srce ¦ Okroglo srce
+forme|Livre de famille ¦ Obiteljska knjiga ¦ Družinska knjiga
+forme|variante ¦ varijanta ¦ različica
+forme|Symbole non binaire ¦ Nebinarni simbol ¦ Nebinarni simbol
+forme|Taille d’un homme ¦ Visina čovjeka ¦ Višina človeka
+forme|Album photo ¦ Foto album ¦ Fotoalbum
+forme|Photos ¦ Fotografije ¦ Fotografije
+forme|Photo instantanée ¦ Instant fotografija ¦ Polaroidna fotografija
+forme|Portrait photo ¦ Portretna fotografija ¦ Portretna fotografija
+forme|Dossier de photos ¦ Mapa fotografija ¦ Mapa fotografij
+forme|Frise ¦ Vremenska crta ¦ Časovni trak
+forme|Frise commentée ¦ Vremenska crta s komentarima ¦ Časovni trak s komentarji
+forme|Diagramme chronologique ¦ Kronološki dijagram ¦ Kronološki diagram
+forme|Arbre en blocs ¦ Stablo u blokovima ¦ Drevo v blokih
+forme|Relation un à plusieurs ¦ Veza jedan prema više ¦ Razmerje ena proti več
+forme|Relation un à un ¦ Veza jedan prema jedan ¦ Razmerje ena proti ena
+forme|Couronne ronde ¦ Okrugli vijenac ¦ Okrogel venec
+forme|Blason à l’épée ¦ Grb s mačem ¦ Grb z mečem
+forme|Blason à la croix ¦ Grb s križem ¦ Grb s križem
+forme|Écu parti ¦ Okomito podijeljeni štit ¦ Navpično deljen ščit
+forme|Croix de Bolnissi ¦ Bolnisijski križ ¦ Bolnisijski križ
+forme|Crâne ¦ Lubanja ¦ Lobanja
+forme|Parchemin et clé ¦ Pergament i ključ ¦ Pergament in ključ
+forme|Sceau rond ¦ Okrugli pečat ¦ Okrogel pečat
+forme|Coffre au trésor ¦ Škrinja s blagom ¦ Skrinja z zakladom
+forme|Coffre-fort ¦ Sef ¦ Sef
+forme|Coffre-fort carré ¦ Četvrtasti sef ¦ Kvadratni sef
+forme|Poignée de main ¦ Rukovanje ¦ Stisk rok
+forme|Miroir rectangulaire ¦ Pravokutno ogledalo ¦ Pravokotno ogledalo
+forme|Homme ¦ Muškarac ¦ Moški
+forme|Personne âgée ¦ Starija osoba ¦ Starejša oseba
+forme|Bras levés ¦ Podignute ruke ¦ Dvignjene roke
+forme|Salut ¦ Pozdrav ¦ Pozdrav
+forme|Fauteuil roulant ¦ Invalidska kolica ¦ Invalidski voziček
+forme|Marcheur ¦ Šetač ¦ Sprehajalec
+forme|Coureur ¦ Trkač ¦ Tekač
+forme|Instituteur ¦ Učitelj ¦ Učitelj
+forme|Silhouette ¦ Silueta ¦ Silhueta
+forme|Homme en cravate ¦ Muškarac s kravatom ¦ Moški s kravato
+forme|Cow-boy ¦ Kauboj ¦ Kavboj
+forme|Ouvrier ¦ Radnik ¦ Delavec
+forme|Chapeau et cravate ¦ Šešir i kravata ¦ Klobuk in kravata
+forme|Insigne de police ¦ Policijska značka ¦ Policijska značka
+forme|Visage d’homme ¦ Muško lice ¦ Moški obraz
+forme|Visage de femme ¦ Žensko lice ¦ Ženski obraz
+forme|Profil d’homme ¦ Muški profil ¦ Moški profil
+forme|Profil de femme ¦ Ženski profil ¦ Ženski profil
+forme|Moustache ¦ Brkovi ¦ Brki
+forme|Main qui salue ¦ Ruka koja maše ¦ Roka, ki maha
+forme|Main ¦ Ruka ¦ Roka
+forme|Mains jointes ¦ Sklopljene ruke ¦ Sklenjene roke
+forme|Empreinte de pied ¦ Otisak stopala ¦ Odtis stopala
+forme|File de personnes ¦ Red ljudi ¦ Vrsta ljudi
+forme|Bras baissés ¦ Spuštene ruke ¦ Spuščene roke
+forme|Danseuse ¦ Plesačica ¦ Plesalka
+forme|Personne non binaire ¦ Nebinarna osoba ¦ Nebinarna oseba
+forme|Personne en trottinette ¦ Osoba na romobilu ¦ Oseba na skiroju
+forme|Personne au déambulateur ¦ Osoba s hodalicom ¦ Oseba s hodulo
+forme|Personne à canne blanche ¦ Osoba s bijelim štapom ¦ Oseba z belo palico
+forme|Présentation au tableau ¦ Izlaganje na ploči ¦ Predstavitev na tabli
+forme|Foule ¦ Mnoštvo ¦ Množica
+forme|Groupe ¦ Skupina ¦ Skupina
+forme|Silhouette ronde ¦ Okrugla silueta ¦ Okrogla silhueta
+forme|Silhouette encadrée ¦ Uokvirena silueta ¦ Uokvirjena silhueta
+forme|Portraits ¦ Portreti ¦ Portreti
+forme|Femme d’affaires ¦ Poslovna žena ¦ Poslovna ženska
+forme|Orateur ¦ Govornik ¦ Govornik
+forme|Personne qui parle ¦ Osoba koja govori ¦ Oseba, ki govori
+forme|Écolier ¦ Učenik ¦ Šolar
+forme|Personne blessée ¦ Ozlijeđena osoba ¦ Poškodovana oseba
+forme|Personne remarquable ¦ Istaknuta osoba ¦ Izjemna oseba
+forme|Personne inconnue ¦ Nepoznata osoba ¦ Neznana oseba
+forme|Recherche de personne ¦ Traženje osobe ¦ Iskanje osebe
+forme|Ajouter une personne ¦ Dodaj osobu ¦ Dodaj osebo
+forme|Musicien ¦ Glazbenik ¦ Glasbenik
+forme|Départ d’une personne ¦ Odlazak osobe ¦ Odhod osebe
+forme|Arrivée d’une personne ¦ Dolazak osobe ¦ Prihod osebe
+forme|Détails de la personne ¦ Pojedinosti o osobi ¦ Podrobnosti o osebi
+forme|Homme élégant ¦ Elegantan muškarac ¦ Eleganten moški
+forme|Femme élégante ¦ Elegantna žena ¦ Elegantna ženska
+forme|Masque de protection ¦ Zaštitna maska ¦ Zaščitna maska
+forme|Tête ¦ Glava ¦ Glava
+forme|Pensée amoureuse ¦ Zaljubljena misao ¦ Zaljubljena misel
+forme|Idée en tête ¦ Ideja u glavi ¦ Ideja v glavi
+forme|Question en tête ¦ Pitanje u glavi ¦ Vprašanje v glavi
+forme|Main gauche ¦ Lijeva ruka ¦ Leva roka
+forme|Paume gauche ¦ Lijevi dlan ¦ Leva dlan
+forme|Paume droite ¦ Desni dlan ¦ Desna dlan
+forme|Applaudissements ¦ Pljesak ¦ Aplavz
+forme|D’accord ¦ U redu ¦ V redu
+forme|main ¦ ruka ¦ roka
+forme|Victoire ¦ Pobjeda ¦ Zmaga
+forme|Index levé ¦ Podignuti kažiprst ¦ Dvignjen kazalec
+forme|Index vers la droite ¦ Kažiprst udesno ¦ Kazalec v desno
+forme|Main tendue ¦ Ispružena ruka ¦ Iztegnjena roka
+forme|Lavage des mains ¦ Pranje ruku ¦ Umivanje rok
+forme|Main et pièce ¦ Ruka i kovanica ¦ Roka in kovanec
+forme|Biceps ¦ Biceps ¦ Biceps
+forme|Langue des signes ¦ Znakovni jezik ¦ Znakovni jezik
+forme|Empreintes de pas ¦ Otisci stopala ¦ Stopinje
+forme|Méditation ¦ Meditacija ¦ Meditacija
+forme|Yoga ¦ Joga ¦ Joga
+forme|Promeneur au parc ¦ Šetač u parku ¦ Sprehajalec v parku
+forme|Voleur ¦ Lopov ¦ Tat
+forme|Ninja ¦ Nindža ¦ Nindža
+forme|Incognito ¦ Inkognito ¦ Inkognito
+forme|Pirate ¦ Gusar ¦ Pirat
+forme|Médecin ¦ Liječnik ¦ Zdravnik
+forme|Chien ¦ Pas ¦ Pes
+forme|Chien de profil ¦ Pas iz profila ¦ Pes iz profila
+forme|Chien guide ¦ Pas vodič ¦ Pes vodnik
+forme|Chat ¦ Mačka ¦ Mačka
+forme|Cheval ¦ Konj ¦ Konj
+forme|Cheval au galop ¦ Konj u galopu ¦ Konj v galopu
+forme|Cavalier ¦ Jahač ¦ Jezdec
+forme|Fer à cheval ¦ Potkova ¦ Podkev
+forme|Vache ¦ Krava ¦ Krava
+forme|Cochon ¦ Svinja ¦ Prašič
+forme|Mouton ¦ Ovca ¦ Ovca
+forme|Lapin ¦ Zec ¦ Zajec
+forme|Rongeur ¦ Glodavac ¦ Glodalec
+forme|Éléphant ¦ Slon ¦ Slon
+forme|Kangourou ¦ Klokan ¦ Kenguru
+forme|Koala ¦ Koala ¦ Koala
+forme|Panda ¦ Panda ¦ Panda
+forme|Manchot ¦ Pingvin ¦ Pingvin
+forme|Chouette ¦ Sova ¦ Sova
+forme|Canard ¦ Patka ¦ Raca
+forme|Dinde ¦ Purica ¦ Puran
+forme|Œuf ¦ Jaje ¦ Jajce
+forme|Dauphin ¦ Dupin ¦ Delfin
+forme|Aileron de requin ¦ Peraja morskog psa ¦ Plavut morskega psa
+forme|Méduse ¦ Meduza ¦ Meduza
+forme|Escargot ¦ Puž ¦ Polž
+forme|Papillon ¦ Leptir ¦ Metulj
+forme|Abeille ¦ Pčela ¦ Čebela
+forme|Coccinelle ¦ Bubamara ¦ Pikapolonica
+forme|Araignée ¦ Pauk ¦ Pajek
+forme|Insecte ¦ Kukac ¦ Žuželka
+forme|Serpent ¦ Zmija ¦ Kača
+forme|Tortue ¦ Kornjača ¦ Želva
+forme|Tortue terrestre ¦ Kopnena kornjača ¦ Kopenska želva
+forme|Licorne ¦ Jednorog ¦ Samorog
+forme|Os ¦ Kost ¦ Kost
+forme|Âne ¦ Magarac ¦ Osel
+forme|Chauve-souris ¦ Šišmiš ¦ Netopir
+forme|Toile d’araignée ¦ Paukova mreža ¦ Pajkova mreža
+forme|Requin ¦ Morski pas ¦ Morski pes
+forme|Abeille et fleur ¦ Pčela i cvijet ¦ Čebela in cvet
+forme|Apiculteur ¦ Pčelar ¦ Čebelar
+forme|Bocal à poisson ¦ Akvarij ¦ Akvarij
+forme|Araignée au fil ¦ Pauk na niti ¦ Pajek na niti
+forme|Cheval rapide ¦ Brzi konj ¦ Hiter konj
+forme|Chien interdit ¦ Zabranjeno za pse ¦ Prepovedano za pse
+forme|Os barré ¦ Prekrižena kost ¦ Prečrtana kost
+forme|Arbre feuillu ¦ Listopadno stablo ¦ Listnato drevo
+forme|Conifère ¦ Četinjača ¦ Iglavec
+forme|Palmier ¦ Palma ¦ Palma
+forme|Cactus ¦ Kaktus ¦ Kaktus
+forme|Pousse ¦ Klica ¦ Poganjek
+forme|Graine ¦ Sjeme ¦ Seme
+forme|Feuille d’érable ¦ Javorov list ¦ Javorjev list
+forme|Trèfle ¦ Djetelina ¦ Detelja
+forme|Fleur et pollen ¦ Cvijet i pelud ¦ Cvet in cvetni prah
+forme|Herbe ¦ Trava ¦ Trava
+forme|Épi de blé ¦ Klas pšenice ¦ Pšenični klas
+forme|Maïs ¦ Kukuruz ¦ Koruza
+forme|Cerises ¦ Trešnje ¦ Češnje
+forme|Raisin ¦ Grožđe ¦ Grozdje
+forme|Poire ¦ Kruška ¦ Hruška
+forme|Pastèque ¦ Lubenica ¦ Lubenica
+forme|Carotte ¦ Mrkva ¦ Korenje
+forme|Relief ¦ Reljef ¦ Relief
+forme|Montagnes ¦ Planine ¦ Gore
+forme|Volcan ¦ Vulkan ¦ Vulkan
+forme|Île ¦ Otok ¦ Otok
+forme|Vagues ¦ Valovi ¦ Valovi
+forme|Eau ¦ Voda ¦ Voda
+forme|Feu ¦ Vatra ¦ Ogenj
+forme|Terre ¦ Zemlja ¦ Zemlja
+forme|Globe ¦ Globus ¦ Globus
+forme|Boussole ¦ Kompas ¦ Kompas
+forme|Carte ¦ Karta ¦ Zemljevid
+forme|Hameau ¦ Zaselak ¦ Zaselek
+forme|Forêt ¦ Šuma ¦ Gozd
+forme|Bosquet ¦ Šumarak ¦ Gozdiček
+forme|Ruche ¦ Košnica ¦ Panj
+forme|Incendie de forêt ¦ Šumski požar ¦ Gozdni požar
+forme|Semis ¦ Sjetva ¦ Setev
+forme|Feuille ronde ¦ Okrugli list ¦ Okrogel list
+forme|Ananas ¦ Ananas ¦ Ananas
+forme|Houblon ¦ Hmelj ¦ Hmelj
+forme|Chanvre ¦ Konoplja ¦ Konoplja
+forme|Compost ¦ Kompost ¦ Kompost
+forme|Fleur de lotus ¦ Lotosov cvijet ¦ Lotosov cvet
+forme|Champs ¦ Polja ¦ Polja
+forme|Parcelles ¦ Čestice ¦ Parcele
+forme|Parcelle ronde ¦ Okrugla čestica ¦ Okrogla parcela
+forme|Parcelle repérée ¦ Označena čestica ¦ Označena parcela
+forme|Sillons horizontaux ¦ Vodoravne brazde ¦ Vodoravne brazde
+forme|Glissement de terrain ¦ Klizište ¦ Zemeljski plaz
+forme|Cascade ¦ Slap ¦ Slap
+forme|Raz-de-marée ¦ Plimni val ¦ Plimski val
+forme|Marée montante ¦ Plima ¦ Plima
+forme|Humidité ¦ Vlaga ¦ Vlaga
+forme|Puits ¦ Bunar ¦ Vodnjak
+forme|Pompe à eau ¦ Pumpa za vodu ¦ Vodna črpalka
+forme|Fleur stylisée ¦ Stilizirani cvijet ¦ Stiliziran cvet
+forme|Légende de carte ¦ Legenda karte ¦ Legenda zemljevida
+forme|Lieu ¦ Mjesto ¦ Kraj
+forme|rayon ¦ polumjer ¦ polmer
+forme|Plusieurs lieux ¦ Više mjesta ¦ Več krajev
+forme|Distance entre lieux ¦ Udaljenost između mjesta ¦ Razdalja med kraji
+forme|Lieu d’une personne ¦ Mjesto osobe ¦ Kraj osebe
+forme|Lieu important ¦ Važno mjesto ¦ Pomemben kraj
+forme|Lieu inconnu ¦ Nepoznato mjesto ¦ Neznan kraj
+forme|Position GPS ¦ GPS položaj ¦ Položaj GPS
+forme|Viseur ¦ Nišan ¦ Merek
+forme|Latitude ¦ Geografska širina ¦ Zemljepisna širina
+forme|Longitude ¦ Geografska dužina ¦ Zemljepisna dolžina
+forme|Sommet ¦ Vrh ¦ Vrh
+forme|Montée ¦ Uspon ¦ Vzpon
+forme|Pente montante ¦ Uzlazna padina ¦ Naraščajoče pobočje
+forme|Rivage ¦ Obala ¦ Obala
+forme|Plage ¦ Plaža ¦ Plaža
+forme|Tunnel de culture ¦ Plastenik ¦ Rastlinjak
+forme|Ferme et silo ¦ Farma i silos ¦ Kmetija in silos
+forme|Silo ¦ Silos ¦ Silos
+forme|Clôture électrique ¦ Električna ograda ¦ Električna ograja
+forme|Arrosoir ¦ Kanta za zalijevanje ¦ Zalivalka
+forme|Arroseur ¦ Prskalica ¦ Škropilnik
+forme|Râteau ¦ Grablje ¦ Grablje
+forme|Fourche à foin ¦ Vile za sijeno ¦ Vile za seno
+forme|Faucille ¦ Srp ¦ Srp
+forme|Tondeuse ¦ Kosilica ¦ Kosilnica
+forme|Nuit ¦ Noć ¦ Noč
+forme|Éclaircies ¦ Djelomično sunčano ¦ Delno jasno
+forme|Nuageux ¦ Oblačno ¦ Oblačno
+forme|Pluie ¦ Kiša ¦ Dež
+forme|Averse ¦ Pljusak ¦ Ploha
+forme|Neige ¦ Snijeg ¦ Sneg
+forme|Orage ¦ Grmljavinsko nevrijeme ¦ Nevihta
+forme|Vent ¦ Vjetar ¦ Veter
+forme|Brouillard ¦ Magla ¦ Megla
+forme|Grêle ¦ Tuča ¦ Toča
+forme|Coucher de soleil ¦ Zalazak sunca ¦ Sončni zahod
+forme|Thermomètre ¦ Termometar ¦ Termometer
+forme|Croissant de lune ¦ Polumjesec ¦ Lunin krajec
+forme|Pleine lune ¦ Pun mjesec ¦ Polna luna
+forme|Étoile filante ¦ Zvijezda padalica ¦ Zvezdni utrinek
+forme|Scintillement ¦ Svjetlucanje ¦ Iskrenje
+forme|Ouragan ¦ Uragan ¦ Orkan
+forme|Tornade ¦ Tornado ¦ Tornado
+forme|Tempête de sable ¦ Pješčana oluja ¦ Peščeni vihar
+forme|Brume ¦ Sumaglica ¦ Meglica
+forme|Orage pluvieux ¦ Grmljavina s kišom ¦ Nevihta z dežjem
+forme|Orage et éclaircies ¦ Grmljavina i razvedravanje ¦ Nevihta in razjasnitve
+forme|Averses et éclaircies ¦ Pljuskovi i razvedravanje ¦ Plohe in razjasnitve
+forme|Neige et éclaircies ¦ Snijeg i razvedravanje ¦ Sneg in razjasnitve
+forme|Pluie et neige ¦ Kiša i snijeg ¦ Dež in sneg
+forme|Fortes chutes de neige ¦ Jako sniježenje ¦ Močno sneženje
+forme|Neige mêlée de pluie ¦ Susnježica ¦ Dež s snegom
+forme|Nuit nuageuse ¦ Oblačna noć ¦ Oblačna noč
+forme|Vent fort ¦ Jak vjetar ¦ Močan veter
+forme|Lever du soleil ¦ Izlazak sunca ¦ Sončni vzhod
+forme|Coucher du soleil ¦ Zalazak sunca ¦ Sončni zahod
+forme|Coucher de lune ¦ Zalazak mjeseca ¦ Lunin zahod
+forme|Canicule ¦ Žega ¦ Pripeka
+forme|Nuages ¦ Oblaci ¦ Oblaki
+forme|Vague de chaleur ¦ Toplinski val ¦ Vročinski val
+forme|Arc-en-ciel ¦ Duga ¦ Mavrica
+forme|Aurore boréale ¦ Polarna svjetlost ¦ Severni sij
+forme|Nouvelle lune ¦ Mlađak ¦ Mlaj
+forme|Premier quartier ¦ Prva četvrt ¦ Prvi krajec
+forme|Dernier quartier ¦ Posljednja četvrt ¦ Zadnji krajec
+forme|Lune décroissante ¦ Mjesec u opadanju ¦ Pojemajoča luna
+forme|Lune gibbeuse décroissante ¦ Opadajući izbočeni mjesec ¦ Pojemajoča izbočena luna
+forme|Lune gibbeuse croissante ¦ Rastući izbočeni mjesec ¦ Naraščajoča izbočena luna
+forme|Jour et nuit ¦ Dan i noć ¦ Dan in noč
+forme|Soleil radieux ¦ Blistavo sunce ¦ Žareče sonce
+forme|Heure solaire ¦ Sunčano vrijeme ¦ Sončni čas
+forme|Soleil et flocon ¦ Sunce i pahuljica ¦ Sonce in snežinka
+forme|Chaleur ¦ Vrućina ¦ Vročina
+forme|Dégel ¦ Otapanje ¦ Odjuga
+forme|Grand froid ¦ Velika hladnoća ¦ Huda zima
+forme|Bonhomme de neige ¦ Snjegović ¦ Snežak
+forme|Température élevée ¦ Visoka temperatura ¦ Visoka temperatura
+forme|Température basse ¦ Niska temperatura ¦ Nizka temperatura
+forme|Degrés Celsius ¦ Celzijevi stupnjevi ¦ Stopinje Celzija
+forme|Parasol ¦ Suncobran ¦ Senčnik
+forme|Manche à air ¦ Vjetrokaz ¦ Vetrna vreča
+forme|Fumée ¦ Dim ¦ Dim
+forme|Inondation ¦ Poplava ¦ Poplava
+forme|Tranche de pain ¦ Kriška kruha ¦ Rezina kruha
+forme|Baguette ¦ Baguette ¦ Bageta
+forme|Croissant ¦ Kroasan ¦ Rogljiček
+forme|Fromage ¦ Sir ¦ Sir
+forme|Gâteau ¦ Torta ¦ Torta
+forme|Gâteau d’anniversaire ¦ Rođendanska torta ¦ Rojstnodnevna torta
+forme|Petit gâteau ¦ Kolačić ¦ Kolaček
+forme|Biscuit ¦ Keks ¦ Piškot
+forme|Bonbon ¦ Bombon ¦ Bonbon
+forme|Glace ¦ Sladoled ¦ Sladoled
+forme|Pizza ¦ Pizza ¦ Pica
+forme|Cuisse de poulet ¦ Pileći batak ¦ Piščančje bedro
+forme|Œuf au plat ¦ Jaje na oko ¦ Jajce na oko
+forme|Tasse de café ¦ Šalica kave ¦ Skodelica kave
+forme|Tasse de thé ¦ Šalica čaja ¦ Skodelica čaja
+forme|Bouilloire ¦ Kuhalo za vodu ¦ Grelnik vode
+forme|Marmite ¦ Lonac ¦ Lonec
+forme|Couverts ¦ Pribor za jelo ¦ Jedilni pribor
+forme|Toque ¦ Kuharska kapa ¦ Kuharska kapa
+forme|Verre de vin ¦ Čaša vina ¦ Kozarec vina
+forme|Bouteille de vin ¦ Boca vina ¦ Steklenica vina
+forme|Chope ¦ Krigla ¦ Vrč
+forme|Cocktail ¦ Koktel ¦ Koktajl
+forme|Bière ¦ Pivo ¦ Pivo
+forme|Gobelet ¦ Čaša ¦ Lonček
+forme|Agrume ¦ Agrum ¦ Citrus
+forme|Cacahuète ¦ Kikiriki ¦ Arašid
+forme|Nouilles ¦ Rezanci ¦ Rezanci
+forme|Hamburger ¦ Hamburger ¦ Hamburger
+forme|Repas ¦ Obrok ¦ Obrok
+forme|Pièce montée ¦ Svadbena torta ¦ Poročna torta
+forme|Sucre d’orge ¦ Lizalica ¦ Lizika
+forme|Muffin ¦ Muffin ¦ Mafin
+forme|Bretzel ¦ Perec ¦ Preste
+forme|Frites ¦ Pomfrit ¦ Pomfrit
+forme|Hot-dog ¦ Hot dog ¦ Hot dog
+forme|Steak ¦ Odrezak ¦ Zrezek
+forme|Dinde rôtie ¦ Pečena purica ¦ Pečen puran
+forme|Restauration ¦ Ugostiteljstvo ¦ Gostinstvo
+forme|Plat à emporter ¦ Hrana za van ¦ Hrana za s seboj
+forme|Halal ¦ Halal ¦ Halal
+forme|Casher ¦ Košer ¦ Košer
+forme|Taco ¦ Taco ¦ Taco
+forme|Pâtes ¦ Tjestenina ¦ Testenine
+forme|Bol de riz ¦ Zdjela riže ¦ Skleda riža
+forme|Saucisse ¦ Kobasica ¦ Klobasa
+forme|Poireau ¦ Poriluk ¦ Por
+forme|Piment fort ¦ Ljuta paprika ¦ Pekoča paprika
+forme|Piment doux ¦ Slatka paprika ¦ Sladka paprika
+forme|Pop-corn ¦ Kokice ¦ Pokovka
+forme|Glace à l’eau ¦ Ledena lizalica ¦ Lučka
+forme|Nutrition ¦ Prehrana ¦ Prehrana
+forme|Bol ¦ Zdjela ¦ Skleda
+forme|Saladier ¦ Zdjela za salatu ¦ Skleda za solato
+forme|Casserole ¦ Lonac s drškom ¦ Kozica
+forme|Casserole et cuillère ¦ Lonac i žlica ¦ Kozica in žlica
+forme|Poêle ¦ Tava ¦ Ponev
+forme|Couverts croisés ¦ Prekriženi pribor ¦ Prekrižan pribor
+forme|Fourchette ¦ Vilica ¦ Vilica
+forme|Cuillère ¦ Žlica ¦ Žlica
+forme|Cuillère de sucre ¦ Žlica šećera ¦ Žlica sladkorja
+forme|Salière ¦ Solnica ¦ Solnica
+forme|Sauce soja ¦ Soja umak ¦ Sojina omaka
+forme|Café à emporter ¦ Kava za van ¦ Kava za s seboj
+forme|Cafetière ¦ Aparat za kavu ¦ Kavni aparat
+forme|Bouilloire fumante ¦ Kuhalo koje se puši ¦ Kadeč se grelnik
+forme|Verre d’eau ¦ Čaša vode ¦ Kozarec vode
+forme|Flûte à champagne ¦ Čaša za šampanjac ¦ Kozarec za šampanjec
+forme|Verre tulipe ¦ Čaša tulipan ¦ Kozarec tulipan
+forme|Pinte ¦ Pinta ¦ Pinta
+forme|Fragile ¦ Lomljivo ¦ Krhko
+forme|Bouteille de soda ¦ Boca gaziranog pića ¦ Steklenica gazirane pijače
+forme|Flacon ¦ Bočica ¦ Stekleničica
+forme|Spiritueux ¦ Žestoko piće ¦ Žgane pijače
+forme|Tonneau de bière ¦ Bačva piva ¦ Sod piva
+forme|Tonneau ¦ Bačva ¦ Sod
+forme|Mixeur ¦ Mikser ¦ Mešalnik
+forme|Barbecue ¦ Roštilj ¦ Žar
+forme|Œuf de Pâques ¦ Uskrsno jaje ¦ Velikonočno jajce
+forme|Maison et immeuble ¦ Kuća i zgrada ¦ Hiša in blok
+forme|Porte ¦ Vrata ¦ Vrata
+forme|Porte ouverte ¦ Otvorena vrata ¦ Odprta vrata
+forme|Fenêtre ¦ Prozor ¦ Okno
+forme|Escalier ¦ Stubište ¦ Stopnice
+forme|Cheminée ¦ Kamin ¦ Kamin
+forme|Canapé ¦ Kauč ¦ Kavč
+forme|Lit ¦ Krevet ¦ Postelja
+forme|Lit double ¦ Bračni krevet ¦ Zakonska postelja
+forme|Fauteuil ¦ Naslonjač ¦ Naslanjač
+forme|Table ¦ Stol ¦ Miza
+forme|Armoire ¦ Ormar ¦ Omara
+forme|Lampe de bureau ¦ Stolna svjetiljka ¦ Namizna svetilka
+forme|Lustre ¦ Luster ¦ Lestenec
+forme|Clé ancienne ¦ Stari ključ ¦ Star ključ
+forme|Cadenas ¦ Lokot ¦ Ključavnica
+forme|Cadenas ouvert ¦ Otvoreni lokot ¦ Odprta ključavnica
+forme|Pendule ¦ Zidni sat ¦ Stenska ura
+forme|Réveil ¦ Budilica ¦ Budilka
+forme|Ballon de fête ¦ Balon za zabavu ¦ Balon
+forme|Fête ¦ Zabava ¦ Zabava
+forme|Ours en peluche ¦ Plišani medvjedić ¦ Plišasti medvedek
+forme|Brique de jeu ¦ Kockica za igru ¦ Kocka za igro
+forme|Cintre ¦ Vješalica ¦ Obešalnik
+forme|Fer à repasser ¦ Glačalo ¦ Likalnik
+forme|Machine à laver ¦ Perilica rublja ¦ Pralni stroj
+forme|Aiguille ¦ Igla ¦ Igla
+forme|Balai ¦ Metla ¦ Metla
+forme|Seau ¦ Kanta ¦ Vedro
+forme|Boîte aux lettres ¦ Poštanski sandučić ¦ Poštni nabiralnik
+forme|Téléphone ancien ¦ Stari telefon ¦ Star telefon
+forme|Radio ¦ Radio ¦ Radio
+forme|Télévision ancienne ¦ Stari televizor ¦ Star televizor
+forme|Machine à écrire ¦ Pisaći stroj ¦ Pisalni stroj
+forme|Projecteur ¦ Projektor ¦ Projektor
+forme|Pellicule ¦ Filmska vrpca ¦ Filmski trak
+forme|Film ¦ Film ¦ Film
+forme|Cassette ¦ Kazeta ¦ Kaseta
+forme|Tourne-disque ¦ Gramofon ¦ Gramofon
+forme|Disque ¦ Ploča ¦ Plošča
+forme|Maison ronde ¦ Okrugla kuća ¦ Okrogla hiša
+forme|Toit ¦ Krov ¦ Streha
+forme|Maison éclairée ¦ Osvijetljena kuća ¦ Razsvetljena hiša
+forme|Quitter la maison ¦ Izlazak iz kuće ¦ Odhod od doma
+forme|Entrer à la maison ¦ Ulazak u kuću ¦ Prihod domov
+forme|Changement de maison ¦ Selidba ¦ Selitev
+forme|Adresse ¦ Adresa ¦ Naslov
+forme|Porte fermée ¦ Zatvorena vrata ¦ Zaprta vrata
+forme|Porte coulissante ¦ Klizna vrata ¦ Drsna vrata
+forme|Porte coulissante ouverte ¦ Otvorena klizna vrata ¦ Odprta drsna vrata
+forme|Sonnette ¦ Zvono na vratima ¦ Hišni zvonec
+forme|Fenêtre ouverte ¦ Otvoreni prozor ¦ Odprto okno
+forme|Fenêtre fermée ¦ Zatvoreni prozor ¦ Zaprto okno
+forme|Balcon ¦ Balkon ¦ Balkon
+forme|Store banne ¦ Tenda ¦ Markiza
+forme|Escalier montant ¦ Stubište prema gore ¦ Stopnice navzgor
+forme|Escalier descendant ¦ Stubište prema dolje ¦ Stopnice navzdol
+forme|Ascenseur ¦ Dizalo ¦ Dvigalo
+forme|Escalator ¦ Pokretne stepenice ¦ Tekoče stopnice
+forme|Échelle ¦ Ljestve ¦ Lestev
+forme|Garage ¦ Garaža ¦ Garaža
+forme|Garage ouvert ¦ Otvorena garaža ¦ Odprta garaža
+forme|Fauteuil club ¦ Klupski naslonjač ¦ Klubski naslanjač
+forme|Grand lit ¦ Veliki krevet ¦ Velika postelja
+forme|Lit deux places ¦ Krevet za dvoje ¦ Postelja za dva
+forme|Lit simple ¦ Krevet za jednu osobu ¦ Enojna postelja
+forme|Lits superposés ¦ Krevet na kat ¦ Pograd
+forme|Chaise d’écolier ¦ Školska stolica ¦ Šolski stol
+forme|Bureau ¦ Radni stol ¦ Pisalna miza
+forme|Commode ¦ Komoda ¦ Predalnik
+forme|Buffet ¦ Kredenac ¦ Kredenca
+forme|Plan de travail ¦ Radna ploča ¦ Delovni pult
+forme|Portemanteau ¦ Vješalica za kapute ¦ Stojalo za plašče
+forme|Casier ¦ Pretinac ¦ Omarica
+forme|Tabouret ¦ Tabure ¦ Taburet
+forme|Banc ¦ Klupa ¦ Klop
+forme|Banc à dossier ¦ Klupa s naslonom ¦ Klop z naslonjalom
+forme|Tapis ¦ Tepih ¦ Preproga
+forme|Lampadaire ¦ Podna svjetiljka ¦ Stoječa svetilka
+forme|Grand lustre ¦ Veliki luster ¦ Velik lestenec
+forme|Applique murale ¦ Zidna svjetiljka ¦ Stenska svetilka
+forme|Lanterne murale ¦ Zidni fenjer ¦ Stenska svetilka (lanterna)
+forme|Réverbère ¦ Ulična svjetiljka ¦ Cestna svetilka
+forme|Lampe à huile ¦ Uljanica ¦ Oljenka
+forme|Guirlande lumineuse ¦ Svjetlosna girlanda ¦ Svetlobna girlanda
+forme|Idée ¦ Ideja ¦ Zamisel
+forme|Chandelier ¦ Svijećnjak ¦ Svečnik
+forme|Chandelier allumé ¦ Upaljeni svijećnjak ¦ Prižgan svečnik
+forme|Radiateur ¦ Radijator ¦ Radiator
+forme|Cuisinière ¦ Štednjak ¦ Štedilnik
+forme|Four à micro-ondes ¦ Mikrovalna pećnica ¦ Mikrovalovna pečica
+forme|Réfrigérateur ¦ Hladnjak ¦ Hladilnik
+forme|Lave-vaisselle ¦ Perilica posuđa ¦ Pomivalni stroj
+forme|Aspirateur ¦ Usisavač ¦ Sesalnik
+forme|Planche à repasser ¦ Daska za glačanje ¦ Likalna deska
+forme|Robinet ¦ Slavina ¦ Pipa
+forme|Douche ¦ Tuš ¦ Prha
+forme|Baignoire ¦ Kada ¦ Kad
+forme|Toilettes ¦ Zahod ¦ Stranišče
+forme|Ventilateur ¦ Ventilator ¦ Ventilator
+forme|Trousseau de clés ¦ Svežanj ključeva ¦ Šop ključev
+forme|Cloche qui sonne ¦ Zvono koje zvoni ¦ Zvoneč zvon
+forme|Midi ¦ Podne ¦ Poldne
+forme|Sablier vide ¦ Prazan pješčani sat ¦ Prazna peščena ura
+forme|Sablier plein ¦ Pun pješčani sat ¦ Polna peščena ura
+forme|Cadeau ouvert ¦ Otvoreni poklon ¦ Odprto darilo
+forme|Boîte aux lettres ouverte ¦ Otvoreni poštanski sandučić ¦ Odprt poštni nabiralnik
+forme|Vaporisateur ¦ Raspršivač ¦ Razpršilnik
+forme|Poubelle ¦ Kanta za smeće ¦ Koš za smeti
+forme|Panier ¦ Košara ¦ Košara
+forme|Colis ¦ Paket ¦ Paket
+forme|Diable ¦ Ručna kolica ¦ Ročni voziček
+forme|Caméra ancienne ¦ Stara kamera ¦ Stara kamera
+forme|Radio FM ¦ FM radio ¦ Radio FM
+forme|Antenne radio ¦ Radio antena ¦ Radijska antena
+forme|Radiocassette ¦ Radiokazetofon ¦ Radiokasetofon
+forme|Cassette vidéo ¦ Videokazeta ¦ Videokaseta
+forme|Disque compact ¦ CD ¦ CD
+forme|Lecteur de disques ¦ CD uređaj ¦ Predvajalnik plošč
+forme|Télécopieur ¦ Telefaks ¦ Telefaks
+forme|Télévision ¦ Televizor ¦ Televizor
+forme|Ordinateur ancien ¦ Staro računalo ¦ Star računalnik
+forme|Disquette ¦ Disketa ¦ Disketa
+forme|Calculatrice ¦ Kalkulator ¦ Kalkulator
+forme|Boulier ¦ Abakus ¦ Abakus
+forme|Cheminée éteinte ¦ Ugašeni kamin ¦ Ugasnjen kamin
+forme|Volet roulant ¦ Rolete ¦ Rolete
+forme|Volet roulant ouvert ¦ Otvorene rolete ¦ Odprte rolete
+forme|Ventilateur de plafond ¦ Stropni ventilator ¦ Stropni ventilator
+forme|Sèche-linge ¦ Sušilica rublja ¦ Sušilni stroj
+forme|Grille-pain ¦ Toster ¦ Opekač
+forme|Bain à remous ¦ Hidromasažna kada ¦ Masažna kad
+forme|Chauffe-eau ¦ Bojler ¦ Bojler
+forme|Climatiseur ¦ Klima-uređaj ¦ Klimatska naprava
+forme|Caméscope ¦ Videokamera ¦ Videokamera
+forme|Bobine de film ¦ Filmska rola ¦ Filmski kolut
+forme|Écran de projection ¦ Projekcijsko platno ¦ Projekcijsko platno
+forme|Talkie-walkie ¦ Voki-toki ¦ Voki-toki
+forme|Téléphone de bureau ¦ Uredski telefon ¦ Namizni telefon
+forme|Trois heures ¦ Tri sata ¦ Tri ure
+forme|Six heures ¦ Šest sati ¦ Šest ur
+forme|Neuf heures ¦ Devet sati ¦ Devet ur
+forme|Sablier écoulé ¦ Istekao pješčani sat ¦ Iztekla peščena ura
+forme|Lampes ¦ Svjetiljke ¦ Svetilke
+forme|Lampadaire torchère ¦ Podna svjetiljka s reflektorom ¦ Stoječa svetilka z odbojnikom
+forme|Carton ouvert ¦ Otvorena kutija ¦ Odprta škatla
+forme|T-shirt ¦ Majica ¦ Majica
+forme|Chemise ¦ Košulja ¦ Srajca
+forme|Chapeau feutre ¦ Filcani šešir ¦ Klobučevinast klobuk
+forme|Chapeau rond ¦ Polucilindar ¦ Polcilinder
+forme|Cravate ¦ Kravata ¦ Kravata
+forme|Nœud papillon ¦ Leptir-mašna ¦ Metuljček
+forme|Chaussure de ville ¦ Gradska cipela ¦ Mestni čevelj
+forme|Escarpin ¦ Salonka ¦ Salonar
+forme|Basket ¦ Tenisica ¦ Superga
+forme|Chausson de danse ¦ Baletna papučica ¦ Baletni copat
+forme|Lunettes de soleil ¦ Sunčane naočale ¦ Sončna očala
+forme|Diamant ¦ Dijamant ¦ Diamant
+forme|Collier ¦ Ogrlica ¦ Ogrlica
+forme|Montre ¦ Ručni sat ¦ Ročna ura
+forme|Sac à main ¦ Ručna torbica ¦ Ročna torbica
+forme|Portefeuille ¦ Novčanik ¦ Denarnica
+forme|Parapluie fermé ¦ Zatvoreni kišobran ¦ Zaprt dežnik
+forme|Ciseaux ¦ Škare ¦ Škarje
+forme|Rouge à lèvres ¦ Ruž za usne ¦ Šminka
+forme|Sac à dos ¦ Ruksak ¦ Nahrbtnik
+forme|Mallette ¦ Aktovka ¦ Aktovka
+forme|Lingerie ¦ Donje rublje ¦ Perilo
+forme|Sous-vêtement ¦ Gaće ¦ Spodnjice
+forme|Couche ¦ Pelena ¦ Plenica
+forme|Chapeau de magicien ¦ Mađioničarski šešir ¦ Čarovniški klobuk
+forme|Chaussure à crampons ¦ Kopačka ¦ Čevelj s čepi
+forme|Chaussette de Noël ¦ Božićna čarapa ¦ Božična nogavica
+forme|Portefeuille plié ¦ Presavijeni novčanik ¦ Zložena denarnica
+forme|Pochette de voyage ¦ Putna torbica ¦ Potovalna torbica
+forme|Bagage cabine ¦ Ručna prtljaga ¦ Ročna prtljaga
+forme|Bagage en soute ¦ Predana prtljaga ¦ Oddana prtljaga
+forme|Sac étiqueté ¦ Torba s privjeskom ¦ Torba z obeskom
+forme|Mallette professionnelle ¦ Poslovna aktovka ¦ Poslovna aktovka
+forme|Sèche-cheveux ¦ Sušilo za kosu ¦ Sušilnik za lase
+forme|Rasoir de sûreté ¦ Brijač ¦ Brivnik
+forme|Lame de rasoir ¦ Žilet ¦ Britvica
+forme|Lotion ¦ Losion ¦ Losjon
+forme|Loup ¦ Maska za oči ¦ Krinka
+forme|Masques de théâtre ¦ Kazališne maske ¦ Gledališki maski
+forme|Masque de Guy Fawkes ¦ Maska Guya Fawkesa ¦ Maska Guya Fawkesa
+forme|Voiture ¦ Automobil ¦ Avtomobil
+forme|Voiture de profil ¦ Automobil iz profila ¦ Avtomobil iz profila
+forme|Cabriolet ¦ Kabriolet ¦ Kabriolet
+forme|Break ¦ Karavan ¦ Karavan
+forme|Camionnette ¦ Kombi ¦ Kombi
+forme|Camion ¦ Kamion ¦ Tovornjak
+forme|Fourgon ¦ Dostavno vozilo ¦ Dostavno vozilo
+forme|Autobus ¦ Autobus ¦ Avtobus
+forme|Autocar ¦ Turistički autobus ¦ Turistični avtobus
+forme|Train ¦ Vlak ¦ Vlak
+forme|Locomotive ¦ Lokomotiva ¦ Lokomotiva
+forme|Tramway ¦ Tramvaj ¦ Tramvaj
+forme|Métro ¦ Podzemna željeznica ¦ Podzemna železnica
+forme|Tracteur ¦ Traktor ¦ Traktor
+forme|Vélo ¦ Bicikl ¦ Kolo
+forme|Moto ¦ Motocikl ¦ Motor
+forme|Trottinette ¦ Romobil ¦ Skiro
+forme|Voilier ¦ Jedrilica ¦ Jadrnica
+forme|Paquebot ¦ Prekooceanski brod ¦ Čezoceanka
+forme|Gouvernail ¦ Kormilo ¦ Krmilo
+forme|Avion ¦ Zrakoplov ¦ Letalo
+forme|Décollage ¦ Polijetanje ¦ Vzlet
+forme|Montgolfière ¦ Balon na vrući zrak ¦ Balon na vroč zrak
+forme|Fusée ¦ Raketa ¦ Raketa
+forme|Fusée au départ ¦ Raketa pri lansiranju ¦ Raketa ob izstrelitvi
+forme|Caravane ¦ Kamp-prikolica ¦ Počitniška prikolica
+forme|Camping-car ¦ Kamper ¦ Avtodom
+forme|Station-service ¦ Benzinska postaja ¦ Bencinski servis
+forme|Feu tricolore ¦ Semafor ¦ Semafor
+forme|Panneau de direction ¦ Putokaz ¦ Smerokaz
+forme|Route ¦ Cesta ¦ Cesta
+forme|Itinéraire ¦ Ruta ¦ Pot
+forme|Brouette ¦ Tačke ¦ Samokolnica
+forme|Volant ¦ Upravljač ¦ Volan
+forme|Voiture de dos ¦ Automobil straga ¦ Avtomobil od zadaj
+forme|Voiture compacte ¦ Mali automobil ¦ Majhen avtomobil
+forme|Voiture de sport ¦ Sportski automobil ¦ Športni avtomobil
+forme|Limousine ¦ Limuzina ¦ Limuzina
+forme|Voiture électrique ¦ Električni automobil ¦ Električni avtomobil
+forme|Siège auto ¦ Autosjedalica ¦ Avtosedež
+forme|Siège enfant ¦ Dječja sjedalica ¦ Otroški sedež
+forme|Lavage auto ¦ Autopraonica ¦ Avtopralnica
+forme|Garagiste ¦ Automehaničar ¦ Avtomehanik
+forme|Taxi ¦ Taksi ¦ Taksi
+forme|Jeepney ¦ Jeepney ¦ Jeepney
+forme|Camion de livraison ¦ Dostavni kamion ¦ Dostavni tovornjak
+forme|Livraison rapide ¦ Brza dostava ¦ Hitra dostava
+forme|Semi-remorque ¦ Tegljač s poluprikolicom ¦ Vlačilec s polpriklopnikom
+forme|Camion plateau ¦ Kamion s platformom ¦ Tovornjak s ploščadjo
+forme|Camion-citerne ¦ Autocisterna ¦ Avtocisterna
+forme|Dépanneuse ¦ Vučna služba ¦ Vlečno vozilo
+forme|Benne ¦ Kiper ¦ Prekucnik
+forme|Minibus ¦ Minibus ¦ Minibus
+forme|Bus scolaire ¦ Školski autobus ¦ Šolski avtobus
+forme|Bus à impériale ¦ Autobus na kat ¦ Dvonadstropni avtobus
+forme|Arrêt de bus ¦ Autobusna stanica ¦ Avtobusna postaja
+forme|Train et voiture ¦ Vlak i automobil ¦ Vlak in avtomobil
+forme|Train et bus ¦ Vlak i autobus ¦ Vlak in avtobus
+forme|Voiture de voyageurs ¦ Putnički vagon ¦ Potniški vagon
+forme|Fourgon de queue ¦ Zadnji vagon ¦ Zadnji vagon
+forme|Tramway de profil ¦ Tramvaj iz profila ¦ Tramvaj iz profila
+forme|souterrain ¦ podzemni ¦ podzemni
+forme|Télécabine ¦ Kabinska žičara ¦ Kabinska žičnica
+forme|Vélo à panier ¦ Bicikl s košarom ¦ Kolo s košaro
+forme|Vélo cargo ¦ Teretni bicikl ¦ Tovorno kolo
+forme|Vélo électrique ¦ Električni bicikl ¦ Električno kolo
+forme|Grand-bi ¦ Visoki bicikl ¦ Visoko kolo
+forme|Cyclomoteur ¦ Moped ¦ Moped
+forme|Trottinette électrique ¦ Električni romobil ¦ Električni skiro
+forme|Pousse-pousse ¦ Riksa ¦ Rikša
+forme|Monocycle ¦ Monocikl ¦ Monocikel
+forme|Quad ¦ Četverocikl ¦ Štirikolesnik
+forme|Motoneige ¦ Motorne sanjke ¦ Motorne sani
+forme|Chariot élévateur ¦ Viličar ¦ Viličar
+forme|Pelleteuse ¦ Bager ¦ Bager
+forme|Bulldozer ¦ Buldožer ¦ Buldožer
+forme|Grue ¦ Dizalica ¦ Žerjav
+forme|Portique ¦ Portalna dizalica ¦ Portalni žerjav
+forme|Atterrissage ¦ Slijetanje ¦ Pristanek
+forme|Aéroport ¦ Zračna luka ¦ Letališče
+forme|Hélicoptère ¦ Helikopter ¦ Helikopter
+forme|Drone ¦ Dron ¦ Dron
+forme|Parachute ¦ Padobran ¦ Padalo
+forme|Parapente ¦ Paraglajder ¦ Jadralno padalo
+forme|Soucoupe volante ¦ Leteći tanjur ¦ Leteči krožnik
+forme|Satellite ¦ Satelit ¦ Satelit
+forme|Station spatiale ¦ Svemirska postaja ¦ Vesoljska postaja
+forme|Sous-marin ¦ Podmornica ¦ Podmornica
+forme|Naufrage ¦ Brodolom ¦ Brodolom
+forme|Bouée de sauvetage ¦ Pojas za spašavanje ¦ Rešilni obroč
+forme|Rame ¦ Veslo ¦ Veslo
+forme|Jetée ¦ Gat ¦ Pomol
+forme|Grue portuaire ¦ Lučka dizalica ¦ Pristaniški žerjav
+forme|Kayak ¦ Kajak ¦ Kajak
+forme|Aviron ¦ Veslanje ¦ Veslanje
+forme|Avion et voiture ¦ Zrakoplov i automobil ¦ Letalo in avtomobil
+forme|Avion et train ¦ Zrakoplov i vlak ¦ Letalo in vlak
+forme|Autoroute ¦ Autocesta ¦ Avtocesta
+forme|Route droite ¦ Ravna cesta ¦ Ravna cesta
+forme|Itinéraires ¦ Rute ¦ Poti
+forme|Tunnel ¦ Tunel ¦ Predor
+forme|Barrière ¦ Rampa ¦ Zapornica
+forme|Tourniquet ¦ Okretište ¦ Vrtljiva prehodna ovira
+forme|Cône de signalisation ¦ Prometni čunj ¦ Prometni stožec
+forme|Panneau attention ¦ Znak upozorenja ¦ Opozorilni znak
+forme|Cédez le passage ¦ Obavezno zaustavljanje ¦ Prednost
+forme|Poteau indicateur ¦ Smjerokazni stup ¦ Kažipot
+forme|Panneau à vendre ¦ Natpis „Na prodaju” ¦ Tabla »Naprodaj«
+forme|Directions ¦ Smjerovi ¦ Smeri
+forme|Parking ¦ Parkiralište ¦ Parkirišče
+forme|Borne de recharge ¦ Punionica ¦ Polnilnica
+forme|Carburant ¦ Gorivo ¦ Gorivo
+forme|Pneu ¦ Guma ¦ Pnevmatika
+forme|Moteur ¦ Motor ¦ Motor
+forme|Ceinture de sécurité ¦ Sigurnosni pojas ¦ Varnostni pas
+forme|Compteur de vitesse ¦ Brzinomjer ¦ Merilnik hitrosti
+forme|Correspondance ¦ Presjedanje ¦ Prestop
+forme|Accessibilité ¦ Pristupačnost ¦ Dostopnost
+forme|Maison moderne ¦ Moderna kuća ¦ Moderna hiša
+forme|Immeuble ¦ Stambena zgrada ¦ Stanovanjski blok
+forme|Ville ¦ Grad ¦ Mesto
+forme|Bâtiment ¦ Zgrada ¦ Stavba
+forme|Hôpital ¦ Bolnica ¦ Bolnišnica
+forme|École ¦ Škola ¦ Šola
+forme|toque ¦ akademska kapa ¦ akademska kapa
+forme|Hôtel de ville ¦ Gradska vijećnica ¦ Mestna hiša
+forme|Banque ¦ Banka ¦ Banka
+forme|Boutique ¦ Dućan ¦ Trgovinica
+forme|Commerce ¦ Trgovina ¦ Trgovina
+forme|Entrepôt ¦ Skladište ¦ Skladišče
+forme|Grange ¦ Štala ¦ Skedenj
+forme|Serre ¦ Staklenik ¦ Rastlinjak
+forme|Clôture ¦ Ograda ¦ Ograja
+forme|Portail ¦ Kapija ¦ Vhodna vrata
+forme|Tente ¦ Šator ¦ Šotor
+forme|Phare ¦ Svjetionik ¦ Svetilnik
+forme|Phare allumé ¦ Upaljeni svjetionik ¦ Prižgan svetilnik
+forme|Mosquée ¦ Džamija ¦ Mošeja
+forme|Synagogue ¦ Sinagoga ¦ Sinagoga
+forme|Temple ¦ Hram ¦ Tempelj
+forme|Pagode ¦ Pagoda ¦ Pagoda
+forme|Stade ¦ Stadion ¦ Stadion
+forme|Théâtre ¦ Kazalište ¦ Gledališče
+forme|Fontaine ¦ Fontana ¦ Vodnjak
+forme|Colonne ¦ Stup ¦ Steber
+forme|Mur ¦ Zid ¦ Zid
+forme|Éolienne ¦ Vjetroelektrana ¦ Vetrnica
+forme|Tour de guet ¦ Promatračnica ¦ Opazovalni stolp
+forme|Commissariat ¦ Policijska postaja ¦ Policijska postaja
+forme|Poste ¦ Pošta ¦ Pošta
+forme|Drapeau à damier ¦ Zastava sa šahovnicom ¦ Šahovnična zastava
+forme|Immeuble repéré ¦ Označena zgrada ¦ Označena stavba
+forme|Changer de ville ¦ Promijeni grad ¦ Zamenjaj mesto
+forme|Changer de bâtiment ¦ Promijeni zgradu ¦ Zamenjaj stavbo
+forme|Bibliothèque ¦ Knjižnica ¦ Knjižnica
+forme|bâtiment ¦ zgrada ¦ stavba
+forme|Rayonnages ¦ Police ¦ Police
+forme|Commerce ouvert {x} h ¦ Trgovina otvorena {x} h ¦ Trgovina odprta {x} h
+forme|Hôpital repéré ¦ Označena bolnica ¦ Označena bolnišnica
+forme|Panneau d’hôpital ¦ Znak za bolnicu ¦ Znak za bolnišnico
+forme|Terrain de football ¦ Nogometno igralište ¦ Nogometno igrišče
+forme|Terrain de base-ball ¦ Bejzbolsko igralište ¦ Igrišče za bejzbol
+forme|Poste de secours ¦ Postaja prve pomoći ¦ Postaja prve pomoči
+forme|Tour Eiffel ¦ Eiffelov toranj ¦ Eifflov stolp
+forme|Grande roue ¦ Panoramski kotač ¦ Panoramsko kolo
+forme|Yourte ¦ Jurta ¦ Jurta
+forme|Chalet ¦ Planinska kuća ¦ Koča
+forme|Feu de camp ¦ Logorska vatra ¦ Taborni ogenj
+forme|Piscine ¦ Bazen ¦ Bazen
+forme|Caserne de pompiers ¦ Vatrogasna postaja ¦ Gasilski dom
+forme|Panneau d’affichage ¦ Oglasna ploča ¦ Oglasna deska
+forme|Panneau d’annonces ¦ Ploča s obavijestima ¦ Deska z obvestili
+forme|Podium ¦ Postolje ¦ Zmagovalni oder
+forme|Mur en flammes ¦ Zid u plamenu ¦ Zid v plamenih
+forme|Portail ouvert ¦ Otvorena kapija ¦ Odprta vhodna vrata
+forme|Réservoir ¦ Spremnik ¦ Rezervoar
+forme|Pylône électrique ¦ Dalekovodni stup ¦ Daljnovodni steber
+forme|Turbine ¦ Turbina ¦ Turbina
+forme|Panneau solaire ¦ Solarna ploča ¦ Sončna plošča
+forme|Grand panneau solaire ¦ Velika solarna ploča ¦ Velika sončna plošča
+forme|Barrage ¦ Brana ¦ Jez
+forme|Explosion nucléaire ¦ Nuklearna eksplozija ¦ Jedrska eksplozija
+forme|Marteau ¦ Čekić ¦ Kladivo
+forme|Outils ¦ Alati ¦ Orodja
+forme|Clé à molette ¦ Podesivi ključ ¦ Nastavljivi ključ
+forme|Tournevis ¦ Odvijač ¦ Izvijač
+forme|Lame de scie ¦ List pile ¦ List žage
+forme|Scie ¦ Pila ¦ Žaga
+forme|Hache ¦ Sjekira ¦ Sekira
+forme|Pelle ¦ Lopata ¦ Lopata
+forme|Pioche ¦ Kramp ¦ Kramp
+forme|Enclume ¦ Nakovanj ¦ Nakovalo
+forme|Clou ¦ Čavao ¦ Žebelj
+forme|Boîte à outils ¦ Kutija za alat ¦ Škatla za orodje
+forme|Règle ¦ Ravnalo ¦ Ravnilo
+forme|Crayon et règle ¦ Olovka i ravnalo ¦ Svinčnik in ravnilo
+forme|Rouleau de peinture ¦ Valjak za boju ¦ Valjček za barvo
+forme|Pinceau ¦ Kist ¦ Čopič
+forme|Palette de peintre ¦ Slikarska paleta ¦ Slikarska paleta
+forme|Stéthoscope ¦ Stetoskop ¦ Stetoskop
+forme|Trousse médicale ¦ Medicinska torba ¦ Zdravniška torba
+forme|Balance ¦ Vaga ¦ Tehtnica
+forme|Marteau de juge ¦ Sudački čekić ¦ Sodniško kladivce
+forme|Billets ¦ Novčanice ¦ Bankovci
+forme|Euro ¦ Euro ¦ Evro
+forme|Caisse ¦ Blagajna ¦ Blagajna
+forme|Microscope ¦ Mikroskop ¦ Mikroskop
+forme|Fiole ¦ Epruveta ¦ Epruveta
+forme|Livre d’école ¦ Školska knjiga ¦ Šolska knjiga
+forme|Camion de pompiers ¦ Vatrogasno vozilo ¦ Gasilsko vozilo
+forme|Imprimante ¦ Pisač ¦ Tiskalnik
+forme|Casque de chantier ¦ Zaštitna kaciga ¦ Zaščitna čelada
+forme|Mine ¦ Rudnik ¦ Rudnik
+forme|Bidon d’huile ¦ Kanistar ulja ¦ Ročka olja
+forme|Couteau ¦ Nož ¦ Nož
+forme|Outils croisés ¦ Prekriženi alati ¦ Prekrižana orodja
+forme|Marteau et tournevis ¦ Čekić i odvijač ¦ Kladivo in izvijač
+forme|Marteau et faucille ¦ Srp i čekić ¦ Srp in kladivo
+forme|Clé à tube ¦ Nasadni ključ ¦ Nasadni ključ
+forme|Pince ¦ Kliješta ¦ Klešče
+forme|Scie circulaire ¦ Kružna pila ¦ Krožna žaga
+forme|Cutter ¦ Skalpel nož ¦ Olfa nož
+forme|Équerre et compas ¦ Kutnik i šestar ¦ Kotnik in šestilo
+forme|Compas ¦ Šestar ¦ Šestilo
+forme|Mètre ruban ¦ Mjerna vrpca ¦ Merilni trak
+forme|Niveau à bulle ¦ Libela ¦ Libela
+forme|Vis à tête plate ¦ Vijak s ravnom glavom ¦ Vijak z ploščato glavo
+forme|Vis à tête ronde ¦ Vijak s okruglom glavom ¦ Vijak z okroglo glavo
+forme|Boulon ¦ Svornjak ¦ Svornik
+forme|Écrou ¦ Matica ¦ Matica
+forme|Rivet ¦ Zakovica ¦ Zakovica
+forme|Fer à souder ¦ Lemilo ¦ Spajkalnik
+forme|Bêche ¦ Ašov ¦ Štihača
+forme|Hache de guerre ¦ Bojna sjekira ¦ Bojna sekira
+forme|Crayon à papier ¦ Grafitna olovka ¦ Grafitni svinčnik
+forme|Bombe de peinture ¦ Sprej s bojom ¦ Barva v razpršilu
+forme|Pot de peinture ¦ Limenka boje ¦ Lonček barve
+forme|Pipette ¦ Pipeta ¦ Pipeta
+forme|Dessin ¦ Crtež ¦ Risba
+forme|Plume de dessin ¦ Pero za crtanje ¦ Risalno pero
+forme|Balance de cuisine ¦ Kuhinjska vaga ¦ Kuhinjska tehtnica
+forme|Balance déséquilibrée ¦ Neuravnotežena vaga ¦ Neuravnotežena tehtnica
+forme|Pèse-personne ¦ Osobna vaga ¦ Osebna tehtnica
+forme|Poids ¦ Uteg ¦ Utež
+forme|Lingots d’or ¦ Zlatne poluge ¦ Zlate palice
+forme|Liasses de billets ¦ Svežnjevi novčanica ¦ Šopi bankovcev
+forme|Tirelire ¦ Kasica prasica ¦ Hranilnik
+forme|Livre sterling ¦ Funta sterlinga ¦ Funt šterling
+forme|Franc ¦ Franak ¦ Frank
+forme|Yen ¦ Jen ¦ Jen
+forme|Rouble ¦ Rubalj ¦ Rubelj
+forme|Roupie indienne ¦ Indijska rupija ¦ Indijska rupija
+forme|Chéquier ¦ Čekovna knjižica ¦ Čekovna knjižica
+forme|Carte bancaire ¦ Bankovna kartica ¦ Bančna kartica
+forme|Chariot de courses ¦ Kolica za kupnju ¦ Nakupovalni voziček
+forme|Sac de courses ¦ Vrećica za kupovinu ¦ Nakupovalna vrečka
+forme|Soldes ¦ Rasprodaja ¦ Razprodaja
+forme|Reçu ¦ Račun ¦ Račun
+forme|Télescope ¦ Teleskop ¦ Teleskop
+forme|Bécher ¦ Laboratorijska čaša ¦ Čaša
+forme|Ballon de chimie ¦ Tikvica ¦ Bučka
+forme|Éprouvette ¦ Epruveta ¦ Epruveta
+forme|Atome ¦ Atom ¦ Atom
+forme|Molécule ¦ Molekula ¦ Molekula
+forme|Tableau périodique ¦ Periodni sustav ¦ Periodni sistem
+forme|Lunettes de protection ¦ Zaštitne naočale ¦ Zaščitna očala
+forme|Menottes ¦ Lisice ¦ Lisice
+forme|Extincteur ¦ Aparat za gašenje požara ¦ Gasilni aparat
+forme|Bouche d’incendie ¦ Hidrant ¦ Hidrant
+forme|Pupitre ¦ Govornica ¦ Govorniški pult
+forme|Présentation ¦ Prezentacija ¦ Predstavitev
+forme|Présentation projetée ¦ Projicirana prezentacija ¦ Projicirana predstavitev
+forme|Courrier ¦ Pošta ¦ Pošta
+forme|Musique ¦ Glazba ¦ Glasba
+forme|Note de musique ¦ Nota ¦ Nota
+forme|Clé de sol ¦ Violinski ključ ¦ Violinski ključ
+forme|Piano ¦ Klavir ¦ Klavir
+forme|Guitare ¦ Gitara ¦ Kitara
+forme|Violon ¦ Violina ¦ Violina
+forme|Trompette ¦ Truba ¦ Trobenta
+forme|Saxophone ¦ Saksofon ¦ Saksofon
+forme|Clairon ¦ Rog ¦ Signalni rog
+forme|Micro ancien ¦ Stari mikrofon ¦ Star mikrofon
+forme|Casque audio ¦ Slušalice ¦ Slušalke
+forme|Roi ¦ Kralj ¦ Kralj
+forme|échecs ¦ šah ¦ šah
+forme|Dame ¦ Dama ¦ Dama
+forme|Fou ¦ Lovac ¦ Tekač
+forme|Pion ¦ Pješak ¦ Kmet
+forme|Cartes à jouer ¦ Igraće karte ¦ Igralne karte
+forme|cartes ¦ karte ¦ karte
+forme|Pique ¦ Pik ¦ Pik
+forme|Carreau ¦ Karo ¦ Karo
+forme|Dé ¦ Kocka ¦ Kocka
+forme|Puzzle ¦ Slagalica ¦ Sestavljanka
+forme|Cerf-volant ¦ Zmaj ¦ Zmaj
+forme|Ballon de football ¦ Nogometna lopta ¦ Nogometna žoga
+forme|Ballon de basket ¦ Košarkaška lopta ¦ Košarkarska žoga
+forme|Tennis ¦ Tenis ¦ Tenis
+forme|Ballon de rugby ¦ Ragbi lopta ¦ Žoga za ragbi
+forme|Cycliste ¦ Biciklist ¦ Kolesar
+forme|Nageur ¦ Plivač ¦ Plavalec
+forme|Skieur ¦ Skijaš ¦ Smučar
+forme|Coupe ¦ Pehar ¦ Pokal
+forme|Trophée ¦ Trofej ¦ Trofeja
+forme|Ticket ¦ Ulaznica ¦ Vstopnica
+forme|Clap de cinéma ¦ Filmska klapa ¦ Filmska klapa
+forme|Nuancier ¦ Paleta boja ¦ Vzorčnik barv
+forme|Livre ouvert ¦ Otvorena knjiga ¦ Odprta knjiga
+forme|Manette ¦ Upravljač za igre ¦ Igralni plošček
+forme|Guitare électrique ¦ Električna gitara ¦ Električna kitara
+forme|Médiator ¦ Trzalica ¦ Trzalica
+forme|Ocarina ¦ Okarina ¦ Okarina
+forme|instrument ¦ instrument ¦ inštrument
+forme|Métronome ¦ Metronom ¦ Metronom
+forme|Microphone ¦ Mikrofon ¦ Mikrofon
+forme|Amplificateur ¦ Pojačalo ¦ Ojačevalnik
+forme|Enceinte ¦ Zvučnik ¦ Zvočnik
+forme|Partition encadrée ¦ Uokvirena partitura ¦ Uokvirjena partitura
+forme|Croche ¦ Osminka ¦ Osminka
+forme|Blanche ¦ Polovinka ¦ Polovinka
+forme|Noire ¦ Četvrtinka ¦ Četrtinka
+forme|Double croche ¦ Šesnaestinka ¦ Šestnajstinka
+forme|Ronde ¦ Cijela nota ¦ Celinka
+forme|Clé de fa ¦ Bas ključ ¦ Basovski ključ
+forme|Clé d’ut ¦ C ključ ¦ C-ključ
+forme|Dièse ¦ Povisilica ¦ Višaj
+forme|musique ¦ glazba ¦ glasba
+forme|Bémol ¦ Snizilica ¦ Nižaj
+forme|Bécarre ¦ Razrješilica ¦ Razvezaj
+forme|Pause ¦ Cijela stanka ¦ Celinska pavza
+forme|Demi-pause ¦ Polovinska stanka ¦ Polovinska pavza
+forme|Soupir ¦ Četvrtinska stanka ¦ Četrtinska pavza
+forme|Demi-soupir ¦ Osminska stanka ¦ Osminska pavza
+forme|Recueil de chansons ¦ Pjesmarica ¦ Pesmarica
+forme|Écouteurs ¦ Slušalice za uši ¦ Ušesne slušalke
+forme|Danse de salon ¦ Društveni ples ¦ Družabni ples
+forme|Billet ¦ Karta ¦ Vozovnica
+forme|Jeu de cartes ¦ Špil karata ¦ Komplet kart
+forme|Carte de cœur ¦ Karta herc ¦ Karta srce
+forme|Carte de pique ¦ Karta pik ¦ Karta pik
+forme|Carte de trèfle ¦ Karta tref ¦ Karta križ
+forme|Carte de carreau ¦ Karta karo ¦ Karta karo
+forme|Jeton de poker ¦ Poker žeton ¦ Žeton za poker
+forme|Machine à sous ¦ Automat za igre na sreću ¦ Igralni avtomat
+forme|Dés ¦ Kocke ¦ Kocke
+forme|Dé à vingt faces ¦ Kocka s dvadeset strana ¦ Dvajsetstrana kocka
+forme|Damier ¦ Ploča za dame ¦ Plošča za damo
+forme|Pièce de puzzle et cœur ¦ Dio slagalice i srce ¦ Košček sestavljanke in srce
+forme|Tangram ¦ Tangram ¦ Tangram
+forme|Moulin à vent ¦ Vjetrenjača ¦ Mlin na veter
+forme|jouet ¦ igračka ¦ igrača
+forme|Bascule ¦ Klackalica ¦ Gugalnica
+forme|jeu ¦ igra ¦ igra
+forme|Toboggan ¦ Tobogan ¦ Tobogan
+forme|Boule de cristal ¦ Kristalna kugla ¦ Kristalna krogla
+forme|Baguette magique ¦ Čarobni štapić ¦ Čarobna paličica
+forme|Feu d’artifice ¦ Vatromet ¦ Ognjemet
+forme|Bowling ¦ Kuglanje ¦ Kegljanje
+forme|Billard ¦ Biljar ¦ Biljard
+forme|Triangle de billard ¦ Trokut za biljar ¦ Trikotnik za biljard
+forme|Golf ¦ Golf ¦ Golf
+forme|Balle de base-ball ¦ Bejzbolska loptica ¦ Žogica za bejzbol
+forme|Batte de base-ball ¦ Bejzbolska palica ¦ Palica za bejzbol
+forme|Panier de basket ¦ Košarkaški koš ¦ Košarkarski koš
+forme|Ballon de volley ¦ Odbojkaška lopta ¦ Odbojkarska žoga
+forme|Ballon de football américain ¦ Lopta za američki nogomet ¦ Žoga za ameriški nogomet
+forme|Casque de football américain ¦ Kaciga za američki nogomet ¦ Čelada za ameriški nogomet
+forme|Balle de tennis ¦ Teniska loptica ¦ Teniška žogica
+forme|Badminton ¦ Badminton ¦ Badminton
+forme|Tennis de table ¦ Stolni tenis ¦ Namizni tenis
+forme|Crosses de hockey ¦ Hokejaške palice ¦ Hokejske palice
+forme|Handball ¦ Rukomet ¦ Rokomet
+forme|Polo ¦ Polo ¦ Polo
+forme|Curling ¦ Curling ¦ Curling
+forme|Arc et flèche ¦ Luk i strijela ¦ Lok in puščica
+forme|Flèche dans la cible ¦ Strijela u meti ¦ Puščica v tarči
+forme|Cible de tir ¦ Streljačka meta ¦ Strelska tarča
+forme|Escrime ¦ Mačevanje ¦ Sabljanje
+forme|Karaté ¦ Karate ¦ Karate
+forme|Gant de boxe ¦ Boksačka rukavica ¦ Boksarska rokavica
+forme|Gymnastique ¦ Gimnastika ¦ Gimnastika
+forme|Haltérophile ¦ Dizač utega ¦ Dvigovalec uteži
+forme|Haltère ¦ Uteg ¦ Utež
+forme|Corde à sauter ¦ Vijača ¦ Kolebnica
+forme|Sprinteur ¦ Sprinter ¦ Šprinter
+forme|Randonneur ¦ Planinar ¦ Pohodnik
+forme|Ski de fond ¦ Skijaško trčanje ¦ Tek na smučeh
+forme|Ski nautique ¦ Skijanje na vodi ¦ Smučanje na vodi
+forme|Planche à neige ¦ Snowboard ¦ Deska za sneg
+forme|Raquettes à neige ¦ Krplje ¦ Krplje
+forme|Luge ¦ Sanjke ¦ Sani
+forme|Patin à glace ¦ Klizaljka ¦ Drsalka
+forme|Patin à roulettes ¦ Koturaljka ¦ Kotalka
+forme|Roller en ligne ¦ Rolera ¦ Rolar
+forme|Planche à roulettes ¦ Skejtbord ¦ Rolka
+forme|Skateur ¦ Skejter ¦ Rolkar
+forme|Surfeur ¦ Surfer ¦ Deskar
+forme|Plongeur ¦ Ronilac ¦ Potapljač
+forme|Plongée sous-marine ¦ Ronjenje ¦ Potapljanje
+forme|Masque de plongée ¦ Ronilačka maska ¦ Potapljaška maska
+forme|Tuba ¦ Disalica ¦ Dihalka
+forme|Casque de course ¦ Trkaća kaciga ¦ Dirkaška čelada
+forme|Sifflet ¦ Zviždaljka ¦ Piščalka
+forme|Tableau des scores ¦ Semafor rezultata ¦ Semafor
+forme|Médaille d’or ¦ Zlatna medalja ¦ Zlata medalja
+forme|Trophée brisé ¦ Slomljeni trofej ¦ Zlomljena trofeja
+forme|Tournoi ¦ Turnir ¦ Turnir
+forme|Flambeau ¦ Baklja ¦ Bakla
+forme|Jumelles ¦ Dalekozor ¦ Daljnogled
+forme|Panorama ¦ Panorama ¦ Panorama
+forme|un ¦ jedan ¦ ena
+forme|deux ¦ dva ¦ dva
+forme|trois ¦ tri ¦ tri
+forme|quatre ¦ četiri ¦ štiri
+forme|six ¦ šest ¦ šest
+forme|cinéma ¦ kino ¦ kino
+forme|Médaille d’argent ¦ Srebrna medalja ¦ Srebrna medalja
+forme|Médaille de bronze ¦ Brončana medalja ¦ Bronasta medalja
+forme|Cricket ¦ Kriket ¦ Kriket
+forme|Liste de chansons ¦ Popis pjesama ¦ Seznam pesmi
+forme|Étoile de David ¦ Davidova zvijezda ¦ Davidova zvezda
+forme|Ménorah ¦ Menora ¦ Menora
+forme|Croissant et étoile ¦ Polumjesec i zvijezda ¦ Polmesec in zvezda
+forme|Om ¦ Om ¦ Om
+forme|Roue du dharma ¦ Kotač dharme ¦ Kolo dharme
+forme|Yin et yang ¦ Jin i jang ¦ Jin in jang
+forme|Paix ¦ Mir ¦ Mir
+forme|Cœur brisé ¦ Slomljeno srce ¦ Strto srce
+forme|Éternité ¦ Vječnost ¦ Večnost
+forme|Khanda ¦ Khanda ¦ Khanda
+forme|Ménorah allumée ¦ Upaljena menora ¦ Prižgana menora
+forme|Hexagramme ¦ Heksagram ¦ Heksagram
+forme|Boule de Noël ¦ Božićna kugla ¦ Božična krogla
+forme|Halloween ¦ Noć vještica ¦ Noč čarovnic
+forme|Citrouille ¦ Bundeva ¦ Buča
+forme|Document ¦ Dokument ¦ Dokument
+forme|Documents ¦ Dokumenti ¦ Dokumenti
+forme|Note écrite ¦ Pisana bilješka ¦ Pisni zapisek
+forme|Livres ¦ Knjige ¦ Knjige
+forme|Carnet ¦ Bilježnica ¦ Beležnica
+forme|Journal ¦ Novine ¦ Časopis
+forme|Gazette ¦ Glasnik ¦ Glasnik
+forme|Lettre {x} ¦ Slovo {x} ¦ Črka {x}
+forme|Timbre ¦ Poštanska marka ¦ Poštna znamka
+forme|Archives ¦ Arhiv ¦ Arhiv
+forme|Dossier ¦ Mapa ¦ Mapa
+forme|Dossier ouvert ¦ Otvorena mapa ¦ Odprta mapa
+forme|Presse-papiers ¦ Međuspremnik ¦ Odložišče
+forme|Calendrier ¦ Kalendar ¦ Koledar
+forme|Date heureuse ¦ Sretan datum ¦ Srečen datum
+forme|Date importante ¦ Važan datum ¦ Pomemben datum
+forme|Stylo ¦ Kemijska olovka ¦ Pisalo
+forme|Stylo-plume ¦ Nalivpero ¦ Nalivno pero
+forme|Signature ¦ Potpis ¦ Podpis
+forme|Guillemet ¦ Navodnik ¦ Narekovaj
+forme|Marque-page ¦ Straničnik ¦ Zaznamek
+forme|Punaise ¦ Pribadača ¦ Risalni žebljiček
+forme|Trombone ¦ Spajalica ¦ Sponka
+forme|Post-it ¦ Samoljepljivi listić ¦ Samolepilni listek
+forme|Bulle de message ¦ Oblačić poruke ¦ Oblaček sporočila
+forme|Discussion ¦ Razgovor ¦ Pogovor
+forme|Traduction ¦ Prijevod ¦ Prevod
+forme|Alphabet ¦ Abeceda ¦ Abeceda
+forme|Document à modifier ¦ Dokument za uređivanje ¦ Dokument za urejanje
+forme|Document signé ¦ Potpisani dokument ¦ Podpisan dokument
+forme|Classeur à tiroirs ¦ Ormar s ladicama ¦ Predalnik za spise
+forme|Document douteux ¦ Sumnjiv dokument ¦ Dvomljiv dokument
+forme|Document daté ¦ Datirani dokument ¦ Datiran dokument
+forme|Document important ¦ Važan dokument ¦ Pomemben dokument
+forme|Document lié ¦ Povezani dokument ¦ Povezan dokument
+forme|Partition ¦ Partitura ¦ Partitura
+forme|Dossiers ¦ Mape ¦ Mape
+forme|Dossier de la maison ¦ Mapa kuće ¦ Mapa hiše
+forme|Dossier favori ¦ Omiljena mapa ¦ Priljubljena mapa
+forme|Dossier important ¦ Važna mapa ¦ Pomembna mapa
+forme|Dossier de textes ¦ Mapa s tekstovima ¦ Mapa z besedili
+forme|Recherche de dossier ¦ Pretraga mape ¦ Iskanje po mapi
+forme|Dossier daté ¦ Datirana mapa ¦ Datirana mapa
+forme|Dossier mystère ¦ Tajanstvena mapa ¦ Skrivnostna mapa
+forme|Recherche aux archives ¦ Istraživanje u arhivu ¦ Raziskovanje v arhivu
+forme|Archive précieuse ¦ Dragocjeni arhivski dokument ¦ Dragocen arhivski dokument
+forme|Livre ouvert vierge ¦ Prazna otvorena knjiga ¦ Prazna odprta knjiga
+forme|pages ¦ stranice ¦ strani
+forme|Abécédaire ¦ Početnica ¦ Abecednik
+forme|Recherche dans un livre ¦ Pretraga u knjizi ¦ Iskanje v knjigi
+forme|Livre daté ¦ Datirana knjiga ¦ Datirana knjiga
+forme|Livre et repère ¦ Knjiga i oznaka ¦ Knjiga in zaznamek
+forme|Livre en écriture ¦ Knjiga u pisanju ¦ Knjiga v nastajanju
+forme|Marque-pages ¦ Straničnici ¦ Zaznamki
+forme|Carnets ¦ Bilježnice ¦ Beležnice
+forme|Lettres ¦ Pisma ¦ Pisma
+forme|Bulletin ¦ Bilten ¦ Bilten
+forme|Presse-papiers vide ¦ Prazan međuspremnik ¦ Prazno odložišče
+forme|Liste sur presse-papiers ¦ Popis na podlozi za pisanje ¦ Seznam na podlogi za pisanje
+forme|Fiche de personne ¦ Zapis osobe ¦ Zapis osebe
+forme|Liste validée ¦ Potvrđeni popis ¦ Potrjen seznam
+forme|Calendrier vierge ¦ Prazan kalendar ¦ Prazen koledar
+forme|Mois ¦ Mjesec ¦ Mesec
+forme|Aujourd’hui ¦ Danas ¦ Danes
+forme|Période ¦ Razdoblje ¦ Obdobje
+forme|Agenda ¦ Rokovnik ¦ Rokovnik
+forme|Date et heure ¦ Datum i vrijeme ¦ Datum in čas
+forme|Date inconnue ¦ Nepoznat datum ¦ Neznan datum
+forme|Date incertaine ¦ Nesiguran datum ¦ Negotov datum
+forme|Date confirmée ¦ Potvrđen datum ¦ Potrjen datum
+forme|Date de début ¦ Datum početka ¦ Datum začetka
+forme|Date de fin ¦ Datum završetka ¦ Datum konca
+forme|Notes ¦ Bilješke ¦ Zapiski
+forme|Écrire une note ¦ Napiši bilješku ¦ Napiši zapisek
+forme|Autocollant ¦ Naljepnica ¦ Nalepka
+forme|Notes écrites ¦ Pisane bilješke ¦ Pisni zapiski
+forme|Pièce jointe ¦ Privitak ¦ Priloga
+forme|Étiquettes ¦ Oznake ¦ Oznake
+forme|Étiquette écrite ¦ Pisana oznaka ¦ Pisna oznaka
+forme|Étiquette favorite ¦ Omiljena oznaka ¦ Priljubljena oznaka
+forme|Message écrit ¦ Pisana poruka ¦ Pisno sporočilo
+forme|Question ¦ Pitanje ¦ Vprašanje
+forme|Conversation ¦ Razgovor ¦ Pogovor
+forme|Commentaire ¦ Komentar ¦ Komentar
+forme|Commentaire écrit ¦ Pisani komentar ¦ Pisni komentar
+forme|Citation ¦ Citat ¦ Citat
+forme|Commentaires ¦ Komentari ¦ Komentarji
+forme|Témoignage ¦ Svjedočanstvo ¦ Pričevanje
+forme|Bulle de pensée ¦ Oblačić misli ¦ Oblaček misli
+forme|Guillemet fermant ¦ Zatvarajući navodnik ¦ Zaključni narekovaj
+forme|Alphabet latin ¦ Latinično pismo ¦ Latinica
+forme|Alphabet grec ¦ Grčki alfabet ¦ Grška abeceda
+forme|Alphabet cyrillique ¦ Ćirilica ¦ Cirilica
+forme|Alphabet hébreu ¦ Hebrejsko pismo ¦ Hebrejska abeceda
+forme|Alphabet arabe ¦ Arapsko pismo ¦ Arabska pisava
+forme|Idéogramme ¦ Ideogram ¦ Ideogram
+forme|Braille ¦ Brailleovo pismo ¦ Braillova pisava
+forme|stylo ¦ olovka ¦ pisalo
+forme|Signature écrite ¦ Vlastoručni potpis ¦ Lastnoročni podpis
+forme|Crayon encadré ¦ Uokvirena olovka ¦ Uokvirjen svinčnik
+forme|Gomme ¦ Gumica ¦ Radirka
+forme|Carte de visite ¦ Posjetnica ¦ Vizitka
+forme|Carte nominative ¦ Kartica s imenom ¦ Kartica z imenom
+forme|Répertoire ¦ Adresar ¦ Adresar
+forme|Fichier rotatif ¦ Rotacijski kartotečni ormarić ¦ Vrtljiva kartoteka
+forme|Passeport biométrique ¦ Biometrijska putovnica ¦ Biometrični potni list
+forme|Licence ¦ Dozvola ¦ Licenca
+forme|Bulletin de vote ¦ Glasački listić ¦ Glasovnica
+forme|Vote ¦ Glasanje ¦ Glasovanje
+forme|Liste à puces ¦ Popis s grafičkim oznakama ¦ Seznam z oznakami
+forme|Liste numérotée ¦ Numerirani popis ¦ Oštevilčen seznam
+forme|Tableau ¦ Tablica ¦ Tabela
+forme|Scanner ¦ Skener ¦ Optični bralnik
+forme|Copie ¦ Kopija ¦ Kopija
+forme|Semaine ¦ Tjedan ¦ Teden
+forme|Fin de semaine ¦ Vikend ¦ Vikend
+forme|Enveloppe ¦ Omotnica ¦ Ovojnica
+forme|Réponse ¦ Odgovor ¦ Odgovor
+forme|Texte long ¦ Dugi tekst ¦ Dolgo besedilo
+forme|Battement de cœur ¦ Otkucaj srca ¦ Srčni utrip
+forme|Pansement ¦ Flaster ¦ Obliž
+forme|Croix médicale ¦ Medicinski križ ¦ Medicinski križ
+forme|Ambulance ¦ Hitna pomoć ¦ Reševalno vozilo
+forme|Dent ¦ Zub ¦ Zob
+forme|Cerveau ¦ Mozak ¦ Možgani
+forme|Poumons ¦ Pluća ¦ Pljuča
+forme|Estomac ¦ Želudac ¦ Želodec
+forme|Œil ¦ Oko ¦ Oko
+forme|Oreille ¦ Uho ¦ Uho
+forme|Virus ¦ Virus ¦ Virus
+forme|Bactérie ¦ Bakterija ¦ Bakterija
+forme|ADN ¦ DNK ¦ DNK
+forme|Mortier ¦ Avan ¦ Možnar
+forme|Tête de mort ¦ Mrtvačka glava ¦ Mrtvaška glava
+forme|Défibrillateur ¦ Defibrilator ¦ Defibrilator
+forme|Pouls ¦ Puls ¦ Utrip
+forme|Pilules ¦ Tablete ¦ Tablete
+forme|Médicament ¦ Lijek ¦ Zdravilo
+forme|Ordonnance ¦ Recept ¦ Recept
+forme|Perfusion ¦ Infuzija ¦ Infuzija
+forme|Poche de sang ¦ Vrećica krvi ¦ Vrečka krvi
+forme|Diabète ¦ Dijabetes ¦ Sladkorna bolezen
+forme|Allergie ¦ Alergija ¦ Alergija
+forme|Radiographie ¦ Rendgenska snimka ¦ Rentgenski posnetek
+forme|Scanner du crâne ¦ Snimka glave ¦ Slikanje glave
+forme|Brosse à dents ¦ Četkica za zube ¦ Zobna ščetka
+forme|Brosse à dents et dentifrice ¦ Četkica i pasta za zube ¦ Zobna ščetka in zobna pasta
+forme|Surdité ¦ Gluhoća ¦ Gluhost
+forme|Œil fermé ¦ Zatvoreno oko ¦ Zaprto oko
+forme|Cécité ¦ Sljepoća ¦ Slepota
+forme|Dossier médical ¦ Medicinska dokumentacija ¦ Zdravstveni karton
+forme|Reproduction ¦ Razmnožavanje ¦ Razmnoževanje
+forme|Malade ¦ Bolesnik ¦ Bolnik
+forme|Fièvre ¦ Groznica ¦ Vročina
+forme|Mortier et pilon ¦ Avan i tučak ¦ Možnar in pestič
+forme|Potion de soin ¦ Ljekoviti napitak ¦ Zdravilni napoj
+forme|Poison ¦ Otrov ¦ Strup
+forme|Boucle auditive ¦ Induktivna petlja ¦ Indukcijska zanka
+forme|Tache de liquide ¦ Mrlja tekućine ¦ Madež tekočine
+forme|Cœur arrêté ¦ Zaustavljeno srce ¦ Ustavljeno srce
+forme|Véhicule sanitaire ¦ Sanitetsko vozilo ¦ Sanitetno vozilo
+forme|Étoile ronde ¦ Okrugla zvijezda ¦ Okrogla zvezda
+forme|Demi-cœur ¦ Pola srca ¦ Pol srca
+forme|Pouce levé ¦ Palac gore ¦ Palec gor
+forme|Pouce baissé ¦ Palac dolje ¦ Palec dol
+forme|Validé ¦ Odobreno ¦ Odobreno
+forme|Refusé ¦ Odbijeno ¦ Zavrnjeno
+forme|Plus rond ¦ Okrugli plus ¦ Okrogel plus
+forme|Moins rond ¦ Okrugli minus ¦ Okrogel minus
+forme|Question ronde ¦ Okruglo pitanje ¦ Okroglo vprašanje
+forme|Attention ¦ Pažnja ¦ Pozor
+forme|Alerte ¦ Upozorenje ¦ Opozorilo
+forme|Stop ¦ Stop ¦ Stop
+forme|Info ronde ¦ Okrugla informacija ¦ Okrogla informacija
+forme|Bouclier ¦ Štit ¦ Ščit
+forme|Bouclier validé ¦ Potvrđeni štit ¦ Potrjen ščit
+forme|Recyclage ¦ Recikliranje ¦ Recikliranje
+forme|Copyright ¦ Autorsko pravo ¦ Avtorske pravice
+forme|Arobase ¦ Znak @ ¦ Afna
+forme|Pourcentage ¦ Postotak ¦ Odstotek
+forme|Dollar ¦ Dolar ¦ Dolar
+forme|Pi ¦ Pi ¦ Pi
+forme|Somme ¦ Zbroj ¦ Vsota
+forme|Danger biologique ¦ Biološka opasnost ¦ Biološka nevarnost
+forme|Radioactif ¦ Radioaktivno ¦ Radioaktivno
+forme|Content ¦ Zadovoljan ¦ Zadovoljen
+forme|Triste ¦ Tužan ¦ Žalosten
+forme|Neutre ¦ Neutralan ¦ Nevtralen
+forme|Ravi ¦ Oduševljen ¦ Navdušen
+forme|Pleure ¦ Plače ¦ Joka
+forme|Fâché ¦ Ljut ¦ Jezen
+forme|Clin d’œil ¦ Namigivanje ¦ Pomežik
+forme|Bisou ¦ Poljubac ¦ Poljub
+forme|Fantôme ¦ Duh ¦ Duh
+forme|Robot ¦ Robot ¦ Robot
+forme|Hexagones ¦ Šesterokuti ¦ Šestkotniki
+forme|Cible ¦ Meta ¦ Tarča
+forme|Mille ¦ Središte mete ¦ Središče tarče
+forme|Engrenage ¦ Zupčanik ¦ Zobnik
+forme|Aimant ¦ Magnet ¦ Magnet
+forme|Ondes ¦ Valovi ¦ Valovi
+forme|Bluetooth ¦ Bluetooth ¦ Bluetooth
+forme|Fanion ¦ Zastavica ¦ Zastavica
+forme|Récompense ¦ Nagrada ¦ Nagrada
+forme|Chiffre {x} ¦ Znamenka {x} ¦ Števka {x}
+forme|Demi-étoile ¦ Pola zvijezde ¦ Pol zvezde
+forme|Étoile souriante ¦ Nasmiješena zvijezda ¦ Nasmejana zvezda
+forme|Étoile encadrée ¦ Uokvirena zvijezda ¦ Uokvirjena zvezda
+forme|Décagramme ¦ Dekagram ¦ Dekagram
+forme|Octogramme ¦ Oktagram ¦ Oktagram
+forme|Sceau validé ¦ Potvrđeni pečat ¦ Potrjen pečat
+forme|Pour et contre ¦ Za i protiv ¦ Za in proti
+forme|Coche épaisse ¦ Debela kvačica ¦ Debela kljukica
+forme|Double coche ¦ Dvostruka kvačica ¦ Dvojna kljukica
+forme|Croix de refus ¦ Križić odbijanja ¦ Križec zavrnitve
+forme|Croix épaisse ¦ Debeli križić ¦ Debel križec
+forme|Interdit octogonal ¦ Osmerokutna zabrana ¦ Osmerokotna prepoved
+forme|Plus épais ¦ Debeli plus ¦ Debel plus
+forme|Moins épais ¦ Debeli minus ¦ Debel minus
+forme|Plus ou moins ¦ Plus-minus ¦ Plus-minus
+forme|Égal ¦ Jednako ¦ Enako
+forme|Question en losange ¦ Pitanje u rombu ¦ Vprašanje v rombu
+forme|Alerte en losange ¦ Upozorenje u rombu ¦ Opozorilo v rombu
+forme|Interdit ¦ Zabranjeno ¦ Prepovedano
+forme|Sens interdit ¦ Zabrana ulaska ¦ Prepovedan vstop
+forme|Demi-bouclier ¦ Pola štita ¦ Pol ščita
+forme|Bouclier étoilé ¦ Štit sa zvijezdom ¦ Ščit z zvezdo
+forme|Esperluette ¦ Znak & ¦ Znak &
+forme|Astérisque ¦ Zvjezdica ¦ Zvezdica
+forme|Oméga ¦ Omega ¦ Omega
+forme|Chiffre romain I ¦ Rimski broj I ¦ Rimska številka I
+forme|Chiffre romain II ¦ Rimski broj II ¦ Rimska številka II
+forme|Chiffre romain III ¦ Rimski broj III ¦ Rimska številka III
+forme|Chiffre romain IV ¦ Rimski broj IV ¦ Rimska številka IV
+forme|Chiffre romain V ¦ Rimski broj V ¦ Rimska številka V
+forme|Chiffre romain VI ¦ Rimski broj VI ¦ Rimska številka VI
+forme|Chiffre romain VII ¦ Rimski broj VII ¦ Rimska številka VII
+forme|Chiffre romain VIII ¦ Rimski broj VIII ¦ Rimska številka VIII
+forme|Chiffre romain IX ¦ Rimski broj IX ¦ Rimska številka IX
+forme|Chiffre romain X ¦ Rimski broj X ¦ Rimska številka X
+forme|Bâton ¦ Crtica za brojanje ¦ Črtica za štetje
+forme|Bâtons ¦ Crtice za brojanje ¦ Črtice za štetje
+forme|cinq ¦ pet ¦ pet
+forme|Bélier ¦ Ovan ¦ Oven
+forme|zodiaque ¦ zodijak ¦ zodiak
+forme|Taureau ¦ Bik ¦ Bik
+forme|Gémeaux ¦ Blizanci ¦ Dvojčka
+forme|Cancer ¦ Rak ¦ Rak
+forme|Lion ¦ Lav ¦ Lev
+forme|Vierge ¦ Djevica ¦ Devica
+forme|Scorpion ¦ Škorpion ¦ Škorpijon
+forme|Sagittaire ¦ Strijelac ¦ Strelec
+forme|Capricorne ¦ Jarac ¦ Kozorog
+forme|Verseau ¦ Vodenjak ¦ Vodnar
+forme|Poissons ¦ Ribe ¦ Ribi
+forme|Visage souriant ¦ Nasmiješeno lice ¦ Nasmejan obraz
+forme|Visage décontracté ¦ Opušteno lice ¦ Sproščen obraz
+forme|Perplexe ¦ Zbunjen ¦ Zmeden
+forme|Visage évanoui ¦ Onesviješteno lice ¦ Omedlel obraz
+forme|Diablotin ¦ Vražićak ¦ Hudobček
+forme|Mort de rire ¦ Umire od smijeha ¦ Umira od smeha
+forme|Extraterrestre ¦ Izvanzemaljac ¦ Nezemljan
+forme|Pentagramme ¦ Pentagram ¦ Pentagram
+forme|Losange plein ¦ Puni romb ¦ Poln romb
+forme|Losange moyen ¦ Srednji romb ¦ Srednji romb
+forme|Disque plein ¦ Puni krug ¦ Poln krog
+forme|Cercle ¦ Kružnica ¦ Krožnica
+forme|Moitié de disque ¦ Polukrug ¦ Polkrog
+forme|Petit disque ¦ Mali krug ¦ Majhen krog
+forme|Disques ¦ Krugovi ¦ Krogi
+forme|Ellipse ¦ Elipsa ¦ Elipsa
+forme|Carré ¦ Kvadrat ¦ Kvadrat
+forme|Carré arrondi ¦ Zaobljeni kvadrat ¦ Zaobljen kvadrat
+forme|Petit carré ¦ Mali kvadrat ¦ Majhen kvadrat
+forme|Triangle pointe en bas ¦ Trokut prema dolje ¦ Trikotnik navzdol
+forme|Sphère ¦ Kugla ¦ Krogla
+forme|Formes ¦ Oblici ¦ Oblike
+forme|Case pleine ¦ Puni kvadratić ¦ Polno polje
+forme|Case vide ¦ Prazni kvadratić ¦ Prazno polje
+forme|Case cochée ¦ Označeni kvadratić ¦ Označeno polje
+forme|Pastille ¦ Točkica ¦ Pika
+forme|Pastille cochée ¦ Označena točkica ¦ Označena pika
+forme|Points de suspension ¦ Tri točke ¦ Tropičje
+forme|Points verticaux ¦ Okomite točke ¦ Navpične pike
+forme|Grille de points ¦ Mreža točaka ¦ Mreža pik
+forme|Trois points en triangle ¦ Tri točke u trokutu ¦ Tri pike v trikotniku
+forme|Quadrillage ¦ Mreža ¦ Mreža
+forme|Goutte bicolore ¦ Dvobojna kap ¦ Dvobarvna kapljica
+forme|Bombe ¦ Bomba ¦ Bomba
+forme|Épée ¦ Mač ¦ Meč
+forme|Épées croisées ¦ Prekriženi mačevi ¦ Prekrižana meča
+forme|Lance ¦ Koplje ¦ Kopje
+forme|Masse d’armes ¦ Buzdovan ¦ Bat
+forme|Couteau de combat ¦ Borbeni nož ¦ Bojni nož
+forme|Étoile de ninja ¦ Nindža zvijezda ¦ Nindža zvezdica
+forme|Boomerang ¦ Bumerang ¦ Bumerang
+forme|Pistolet ¦ Pištolj ¦ Pištola
+forme|Munitions ¦ Streljivo ¦ Strelivo
+forme|Char d’assaut ¦ Tenk ¦ Tank
+forme|Lien ¦ Poveznica ¦ Povezava
+forme|Maillon ¦ Karika ¦ Člen verige
+forme|Empreinte digitale ¦ Otisak prsta ¦ Prstni odtis
+forme|Drapeau à hampe ¦ Zastava na koplju ¦ Zastava na drogu
+forme|Marque déposée ¦ Registrirani žig ¦ Registrirana znamka
+forme|Marque commerciale ¦ Žig ¦ Blagovna znamka
+forme|Supérieur à ¦ Veće od ¦ Večje od
+forme|Inférieur à ¦ Manje od ¦ Manjše od
+forme|Multiplication ¦ Množenje ¦ Množenje
+forme|Division ¦ Dijeljenje ¦ Deljenje
+forme|Lien rompu ¦ Prekinuta poveznica ¦ Prekinjena povezava
+forme|Sommeil ¦ Spavanje ¦ Spanje
+forme|Flèche épaisse droite ¦ Debela strelica desno ¦ Debela puščica desno
+forme|Flèche épaisse gauche ¦ Debela strelica lijevo ¦ Debela puščica levo
+forme|Flèche épaisse haut ¦ Debela strelica gore ¦ Debela puščica gor
+forme|Flèche épaisse bas ¦ Debela strelica dolje ¦ Debela puščica dol
+forme|Flèche en coin ¦ Kutna strelica ¦ Kotna puščica
+forme|Flèche pleine ¦ Puna strelica ¦ Polna puščica
+forme|Flèche dans un rond ¦ Strelica u krugu ¦ Puščica v krogu
+forme|Double flèche épaisse ¦ Debela dvostruka strelica ¦ Debela dvojna puščica
+forme|Toutes directions ¦ Svi smjerovi ¦ Vse smeri
+forme|Agrandir ¦ Povećaj ¦ Razširi
+forme|Rassembler ¦ Skupi ¦ Strni
+forme|Double chevron ¦ Dvostruki šiljak ¦ Dvojni šiljek
+forme|Triple chevron ¦ Trostruki šiljak ¦ Trojni šiljek
+forme|Retour en U ¦ Povratak u obliku slova U ¦ Vrnitev v obliki črke U
+forme|Flèche montante ¦ Strelica prema gore ¦ Naraščajoča puščica
+forme|Flèche descendante ¦ Strelica prema dolje ¦ Padajoča puščica
+forme|Retour en haut ¦ Natrag na vrh ¦ Nazaj na vrh
+forme|Rotation ¦ Rotacija ¦ Vrtenje
+forme|Rotation inverse ¦ Obrnuta rotacija ¦ Obratno vrtenje
+forme|Revenir ¦ Vrati se ¦ Vrni se
+forme|Recharger ¦ Ponovno učitaj ¦ Znova naloži
+forme|Synchroniser ¦ Sinkroniziraj ¦ Sinhroniziraj
+forme|Échange ¦ Zamjena ¦ Zamenjava
+forme|Échange vertical ¦ Okomita zamjena ¦ Navpična zamenjava
+forme|Séparation ¦ Razdvajanje ¦ Razcep
+forme|Réunion ¦ Spajanje ¦ Združitev
+forme|Embranchement ¦ Račvanje ¦ Razcepišče
+forme|Fourche ¦ Vilica ¦ Vilice
+forme|Bifurcation ¦ Bifurkacija ¦ Bifurkacija
+forme|Décision ¦ Odluka ¦ Odločitev
+forme|Mélange ¦ Miješanje ¦ Mešanje
+forme|Transfert ¦ Prijenos ¦ Prenos
+forme|Suivant ¦ Sljedeće ¦ Naslednje
+forme|Lecture ¦ Reprodukcija ¦ Predvajanje
+forme|Avance rapide ¦ Brzo naprijed ¦ Hitro naprej
+forme|Pointe à droite ¦ Šiljak udesno ¦ Konica v desno
+forme|Navigation ¦ Navigacija ¦ Navigacija
+forme|Flèche haut ¦ Strelica gore ¦ Puščica gor
+forme|Flèche bas ¦ Strelica dolje ¦ Puščica dol
+forme|Flèche gauche ¦ Strelica lijevo ¦ Puščica levo
+forme|Flèche droite ¦ Strelica desno ¦ Puščica desno
+forme|Flèche haut gauche ¦ Strelica gore lijevo ¦ Puščica gor levo
+forme|Flèche haut droite ¦ Strelica gore desno ¦ Puščica gor desno
+forme|Flèche bas gauche ¦ Strelica dolje lijevo ¦ Puščica dol levo
+forme|Flèche bas droite ¦ Strelica dolje desno ¦ Puščica dol desno
+forme|Flèche pleine haut ¦ Puna strelica gore ¦ Polna puščica gor
+forme|Flèche pleine bas ¦ Puna strelica dolje ¦ Polna puščica dol
+forme|Flèche pleine gauche ¦ Puna strelica lijevo ¦ Polna puščica levo
+forme|Flèche pleine haut gauche ¦ Puna strelica gore lijevo ¦ Polna puščica gor levo
+forme|Flèche pleine haut droite ¦ Puna strelica gore desno ¦ Polna puščica gor desno
+forme|Flèche pleine bas gauche ¦ Puna strelica dolje lijevo ¦ Polna puščica dol levo
+forme|Flèche pleine bas droite ¦ Puna strelica dolje desno ¦ Polna puščica dol desno
+forme|Flèche gauche dans un rond ¦ Strelica lijevo u krugu ¦ Puščica levo v krogu
+forme|Flèche haut dans un rond ¦ Strelica gore u krugu ¦ Puščica gor v krogu
+forme|Flèche bas dans un rond ¦ Strelica dolje u krugu ¦ Puščica dol v krogu
+forme|Double flèche verticale fine ¦ Tanka okomita dvostruka strelica ¦ Tanka navpična dvojna puščica
+forme|Double flèche diagonale ¦ Dijagonalna dvostruka strelica ¦ Diagonalna dvojna puščica
+forme|Double flèche diagonale inverse ¦ Obrnuta dijagonalna dvostruka strelica ¦ Obratna diagonalna dvojna puščica
+forme|Flèche coudée haut gauche ¦ Savijena strelica gore lijevo ¦ Upognjena puščica gor levo
+forme|Flèche coudée haut droite ¦ Savijena strelica gore desno ¦ Upognjena puščica gor desno
+forme|Flèche coudée bas gauche ¦ Savijena strelica dolje lijevo ¦ Upognjena puščica dol levo
+forme|Flèche coudée bas droite ¦ Savijena strelica dolje desno ¦ Upognjena puščica dol desno
+forme|Flèche coudée vers le bas ¦ Savijena strelica prema dolje ¦ Upognjena puščica navzdol
+forme|Demi-tour à gauche ¦ Polukružno lijevo ¦ Polkrožno levo
+forme|Demi-tour à droite ¦ Polukružno desno ¦ Polkrožno desno
+forme|Réduire ¦ Smanji ¦ Pomanjšaj
+forme|Étendre ¦ Proširi ¦ Raztegni
+forme|Rapprocher ¦ Približi ¦ Približaj
+forme|Écarter ¦ Razmakni ¦ Razmakni
+forme|Va-et-vient ¦ Naprijed-natrag ¦ Sem in tja
+forme|Flèche d’archer ¦ Strijela strijelca ¦ Lokostrelčeva puščica
+forme|Chevron haut ¦ Šiljak gore ¦ Šiljek gor
+forme|Chevron bas ¦ Šiljak dolje ¦ Šiljek dol
+forme|Chevron gauche ¦ Šiljak lijevo ¦ Šiljek levo
+forme|Chevron droite ¦ Šiljak desno ¦ Šiljek desno
+forme|Double chevron haut ¦ Dvostruki šiljak gore ¦ Dvojni šiljek gor
+forme|Double chevron bas ¦ Dvostruki šiljak dolje ¦ Dvojni šiljek dol
+forme|Double chevron gauche ¦ Dvostruki šiljak lijevo ¦ Dvojni šiljek levo
+forme|Pointe en haut ¦ Vrh gore ¦ Konica gor
+forme|Pointe en bas ¦ Vrh dolje ¦ Konica dol
+forme|Pointe à gauche ¦ Vrh lijevo ¦ Konica levo
+forme|Échange fin ¦ Tanka zamjena ¦ Tanka zamenjava
+forme|Échange vertical fin ¦ Tanka okomita zamjena ¦ Tanka navpična zamenjava
+forme|Hausse ¦ Rast ¦ Rast
+forme|Baisse ¦ Pad ¦ Padec
+forme|Stable ¦ Stabilno ¦ Stabilno
+forme|Annuler ¦ Poništi ¦ Razveljavi
+forme|Rétablir ¦ Ponovi ¦ Uveljavi
+forme|Répondre ¦ Odgovori ¦ Odgovori
+forme|Partager ¦ Podijeli ¦ Deli
+forme|Actualiser ¦ Osvježi ¦ Osveži
+forme|Cycle ¦ Ciklus ¦ Cikel
+forme|Répéter ¦ Ponavljaj ¦ Ponavljaj
+forme|Rotation complète ¦ Puni okret ¦ Poln obrat
+forme|Orbite ¦ Orbita ¦ Orbita
+forme|Rotation à gauche ¦ Okretanje ulijevo ¦ Vrtenje v levo
+forme|Rotation à droite ¦ Okretanje udesno ¦ Vrtenje v desno
+forme|Mélanger ¦ Promiješaj ¦ Premešaj
+forme|Flèche sortante ¦ Izlazna strelica ¦ Izhodna puščica
+forme|Flèche entrante ¦ Ulazna strelica ¦ Vhodna puščica
+forme|Sous-niveau à droite ¦ Podrazina desno ¦ Podraven desno
+forme|Sous-niveau à gauche ¦ Podrazina lijevo ¦ Podraven levo
+forme|Fusion ¦ Spajanje ¦ Združitev
+forme|Étape ¦ Korak ¦ Korak
+forme|Fusionner ¦ Spoji ¦ Združi
+forme|Segment ¦ Segment ¦ Segment
+forme|Détour ¦ Obilazak ¦ Ovinek
+forme|Connexion ¦ Prijava ¦ Prijava
+forme|Entrée ¦ Ulaz ¦ Vhod
+forme|Sortie ¦ Izlaz ¦ Izhod
+forme|Sortie de secours ¦ Izlaz u nuždi ¦ Zasilni izhod
+forme|Précédent ¦ Prethodno ¦ Prejšnje
+forme|Lecture ronde ¦ Okrugla reprodukcija ¦ Okroglo predvajanje
+forme|Position actuelle ¦ Trenutačni položaj ¦ Trenutni položaj
+forme|Main pointeur ¦ Ruka koja pokazuje ¦ Kazalna roka
+forme|Plein écran ¦ Cijeli zaslon ¦ Celozaslonski način
+forme|Flèche haut ronde ¦ Okrugla strelica gore ¦ Okrogla puščica gor
+forme|Flèche bas ronde ¦ Okrugla strelica dolje ¦ Okrogla puščica dol
+forme|Flèche gauche ronde ¦ Okrugla strelica lijevo ¦ Okrogla puščica levo
+forme|Flèche droite ronde ¦ Okrugla strelica desno ¦ Okrogla puščica desno
+forme|Chevron gauche rond ¦ Okrugli šiljak lijevo ¦ Okrogel šiljek levo
+forme|Chevron droite rond ¦ Okrugli šiljak desno ¦ Okrogel šiljek desno
+forme|Rejouer ¦ Ponovi reprodukciju ¦ Predvajaj znova
+forme|Renouvellement ¦ Obnova ¦ Obnova
+forme|Télécharger ¦ Preuzmi ¦ Prenesi
+forme|Envoyer ¦ Pošalji ¦ Pošlji
+forme|Importer ¦ Uvezi ¦ Uvozi
+forme|Exporter ¦ Izvezi ¦ Izvozi
+forme|Arrêt ¦ Zaustavi ¦ Ustavi
+forme|piste ¦ zapis ¦ posnetek
+forme|Retour rapide ¦ Brzo natrag ¦ Hitro nazaj
+forme|Enregistrement ¦ Snimanje ¦ Snemanje
+forme|Gland ¦ Žir ¦ Želod
+forme|trait fin ¦ tanka crta ¦ tanka črta
+forme|plein ¦ puno ¦ polno
+forme|Carnet d’adresses ¦ Adresar ¦ Imenik naslovov
+forme|Répertoire à onglets ¦ Adresar s karticama ¦ Imenik z zavihki
+forme|Tour de contrôle ¦ Kontrolni toranj ¦ Kontrolni stolp
+forme|Avion en vol ¦ Zrakoplov u letu ¦ Letalo v letu
+forme|Avion qui atterrit ¦ Zrakoplov koji slijeće ¦ Letalo, ki pristaja
+forme|Avion qui décolle ¦ Zrakoplov koji polijeće ¦ Letalo, ki vzleta
+forme|Avion au sol ¦ Zrakoplov na tlu ¦ Letalo na tleh
+forme|Avion penché ¦ Nagnuti zrakoplov ¦ Nagnjeno letalo
+forme|Ancre simple ¦ Jednostavno sidro ¦ Preprosto sidro
+forme|Angle ¦ Kut ¦ Kot
+forme|boîte ¦ kutija ¦ škatla
+forme|Flèche en arc vers la gauche ¦ Lučna strelica ulijevo ¦ Ločna puščica v levo
+forme|Flèche en arc vers la droite ¦ Lučna strelica udesno ¦ Ločna puščica v desno
+forme|Double flèche courbée ¦ Zakrivljena dvostruka strelica ¦ Ukrivljena dvojna puščica
+forme|haut ¦ gore ¦ gor
+forme|Flèche courbée ¦ Zakrivljena strelica ¦ Ukrivljena puščica
+forme|bas ¦ dolje ¦ dol
+forme|Flèche ronde vers le bas ¦ Okrugla strelica prema dolje ¦ Okrogla puščica navzdol
+forme|Flèche ronde vers le bas à gauche ¦ Okrugla strelica dolje lijevo ¦ Okrogla puščica dol levo
+forme|Flèche ronde vers le bas à droite ¦ Okrugla strelica dolje desno ¦ Okrogla puščica dol desno
+forme|Flèche ronde vers la gauche ¦ Okrugla strelica ulijevo ¦ Okrogla puščica v levo
+forme|Flèche ronde vers la droite ¦ Okrugla strelica udesno ¦ Okrogla puščica v desno
+forme|Flèche ronde vers le haut ¦ Okrugla strelica prema gore ¦ Okrogla puščica navzgor
+forme|Flèche ronde vers le haut à gauche ¦ Okrugla strelica gore lijevo ¦ Okrogla puščica gor levo
+forme|Flèche ronde vers le haut à droite ¦ Okrugla strelica gore desno ¦ Okrogla puščica gor desno
+forme|Flèche tournante ¦ Kružna strelica ¦ Krožna puščica
+forme|sens des aiguilles ¦ u smjeru kazaljke na satu ¦ v smeri urinega kazalca
+forme|sens inverse ¦ suprotno od kazaljke na satu ¦ v nasprotni smeri urinega kazalca
+forme|Flèche vers le bas ¦ Strelica prema dolje ¦ Puščica navzdol
+forme|Flèche vers le bas à gauche ¦ Strelica dolje lijevo ¦ Puščica dol levo
+forme|Flèche vers le bas à droite ¦ Strelica dolje desno ¦ Puščica dol desno
+forme|Flèche en équerre ¦ Pravokutna strelica ¦ Pravokotna puščica
+forme|Flèche en équerre vers la gauche ¦ Pravokutna strelica ulijevo ¦ Pravokotna puščica v levo
+forme|Flèche en équerre vers la droite ¦ Pravokutna strelica udesno ¦ Pravokotna puščica v desno
+forme|Grosse flèche vers le bas ¦ Velika strelica prema dolje ¦ Velika puščica navzdol
+forme|Grosse flèche vers la gauche ¦ Velika strelica ulijevo ¦ Velika puščica v levo
+forme|Grosse flèche à un trait vers le bas ¦ Velika strelica s crtom prema dolje ¦ Velika puščica s črto navzdol
+forme|Grosse flèche à un trait vers la gauche ¦ Velika strelica s crtom ulijevo ¦ Velika puščica s črto v levo
+forme|Grosse flèche à un trait vers la droite ¦ Velika strelica s crtom udesno ¦ Velika puščica s črto v desno
+forme|Grosse flèche à un trait vers le haut ¦ Velika strelica s crtom prema gore ¦ Velika puščica s črto navzgor
+forme|Grosse flèche à traits vers le bas ¦ Velika strelica s crtama prema dolje ¦ Velika puščica s črtami navzdol
+forme|Grosse flèche à traits vers la gauche ¦ Velika strelica s crtama ulijevo ¦ Velika puščica s črtami v levo
+forme|Grosse flèche à traits vers la droite ¦ Velika strelica s crtama udesno ¦ Velika puščica s črtami v desno
+forme|Grosse flèche à traits vers le haut ¦ Velika strelica s crtama prema gore ¦ Velika puščica s črtami navzgor
+forme|Grosse flèche vers la droite ¦ Velika strelica udesno ¦ Velika puščica v desno
+forme|Grosse flèche vers le haut ¦ Velika strelica prema gore ¦ Velika puščica navzgor
+forme|Flèche vers la gauche ¦ Strelica ulijevo ¦ Puščica v levo
+forme|Flèche jusqu’au trait vers le bas ¦ Strelica do crte prema dolje ¦ Puščica do črte navzdol
+forme|Flèche jusqu’au trait vers le bas à gauche ¦ Strelica do crte dolje lijevo ¦ Puščica do črte dol levo
+forme|Flèche jusqu’au trait vers le bas à droite ¦ Strelica do crte dolje desno ¦ Puščica do črte dol desno
+forme|Flèche jusqu’au trait vers la gauche ¦ Strelica do crte ulijevo ¦ Puščica do črte v levo
+forme|Flèche jusqu’au trait vers la droite ¦ Strelica do crte udesno ¦ Puščica do črte v desno
+forme|Flèche jusqu’au trait vers le haut ¦ Strelica do crte prema gore ¦ Puščica do črte navzgor
+forme|Flèche jusqu’au trait vers le haut à gauche ¦ Strelica do crte gore lijevo ¦ Puščica do črte gor levo
+forme|Flèche jusqu’au trait vers le haut à droite ¦ Strelica do crte gore desno ¦ Puščica do črte gor desno
+forme|Flèche vers la droite ¦ Strelica udesno ¦ Puščica v desno
+forme|Flèche carrée vers le bas ¦ Četvrtasta strelica prema dolje ¦ Oglata puščica navzdol
+forme|Flèche carrée vers le bas à gauche ¦ Četvrtasta strelica dolje lijevo ¦ Oglata puščica dol levo
+forme|Flèche carrée vers le bas à droite ¦ Četvrtasta strelica dolje desno ¦ Oglata puščica dol desno
+forme|Flèche carrée vers la gauche ¦ Četvrtasta strelica ulijevo ¦ Oglata puščica v levo
+forme|Flèche carrée vers la droite ¦ Četvrtasta strelica udesno ¦ Oglata puščica v desno
+forme|Flèche carrée vers le haut ¦ Četvrtasta strelica prema gore ¦ Oglata puščica navzgor
+forme|Flèche carrée vers le haut à gauche ¦ Četvrtasta strelica gore lijevo ¦ Oglata puščica gor levo
+forme|Flèche carrée vers le haut à droite ¦ Četvrtasta strelica gore desno ¦ Oglata puščica gor desno
+forme|Flèche en U ¦ Strelica u obliku slova U ¦ Puščica v obliki črke U
+forme|Flèche vers le haut ¦ Strelica prema gore ¦ Puščica navzgor
+forme|Flèche vers le haut à gauche ¦ Strelica gore lijevo ¦ Puščica gor levo
+forme|Flèche vers le haut à droite ¦ Strelica gore desno ¦ Puščica gor desno
+forme|Flèches tournantes ¦ Kružne strelice ¦ Krožne puščice
+forme|Flèches haut et bas ¦ Strelice gore i dolje ¦ Puščici gor in dol
+forme|Flèches gauche et droite ¦ Strelice lijevo i desno ¦ Puščici levo in desno
+forme|écartées ¦ razmaknute ¦ razmaknjeni
+forme|Flèches vers le centre ¦ Strelice prema središtu ¦ Puščice proti središču
+forme|4 côtés ¦ 4 strane ¦ 4 strani
+forme|Flèches vers un trait ¦ Strelice prema crti ¦ Puščice proti črti
+forme|debout ¦ uspravno ¦ pokončno
+forme|couché ¦ položeno ¦ ležeče
+forme|Flèches qui se rejoignent ¦ Strelice koje se spajaju ¦ Puščice, ki se stikajo
+forme|Flèches vers l’extérieur ¦ Strelice prema van ¦ Puščice navzven
+forme|Flèches qui s’écartent d’un trait ¦ Strelice koje se udaljavaju od crte ¦ Puščice, ki se oddaljujejo od črte
+forme|Flèches qui se séparent ¦ Strelice koje se razilaze ¦ Puščice, ki se razhajajo
+forme|Article ¦ Članak ¦ Članek
+forme|Article illustré ¦ Ilustrirani članak ¦ Ilustriran članek
+forme|Bâton d’Asclépios ¦ Asklepijev štap ¦ Asklepijeva palica
+forme|Avocat ¦ Avokado ¦ Avokado
+forme|fruit ¦ voće ¦ sadje
+forme|Sac simple ¦ Jednostavna torba ¦ Preprosta torba
+forme|Ballon de baudruche ¦ Balon ¦ Balon
+forme|Pansements ¦ Flasteri ¦ Obliži
+forme|Code-barres ¦ Crtični kod ¦ Črtna koda
+forme|Barrière de chantier ¦ Građevinska ograda ¦ Gradbena ograja
+forme|Casquette ¦ Šilterica ¦ Kapa s šiltom
+forme|Casque de base-ball ¦ Bejzbolska kaciga ¦ Čelada za bejzbol
+forme|Pile chargée ¦ Puna baterija ¦ Polna baterija
+forme|Pile vide ¦ Prazna baterija ¦ Prazna baterija
+forme|Ballon de plage ¦ Lopta za plažu ¦ Žoga za na plažo
+forme|Bonnet ¦ Kapa ¦ Kapa
+forme|Bouteille de bière ¦ Boca piva ¦ Steklenica piva
+forme|Chope de bière ¦ Krigla piva ¦ Vrček piva
+forme|Clochette ¦ Zvonce ¦ Zvonček
+forme|Clochette qui sonne ¦ Zvonce koje zvoni ¦ Zvonček, ki zvoni
+forme|Ceinture ¦ Remen ¦ Pas
+forme|Plan d’architecte ¦ Arhitektonski nacrt ¦ Arhitekturni načrt
+forme|Livre avec marque-page ¦ Knjiga sa straničnikom ¦ Knjiga z zaznamkom
+forme|Livre ouvert écrit ¦ Otvorena ispisana knjiga ¦ Odprta popisana knjiga
+forme|Livre de la personne ¦ Knjiga osobe ¦ Knjiga osebe
+forme|Marque-page simple ¦ Jednostavni straničnik ¦ Preprost zaznamek
+forme|Marque-pages simples ¦ Jednostavni straničnici ¦ Preprosti zaznamki
+forme|Botte ¦ Čizma ¦ Škorenj
+forme|Boules ¦ Boćanje ¦ Balinanje
+forme|pétanque ¦ petanka ¦ petanka
+forme|Bol de nourriture ¦ Zdjela s hranom ¦ Skleda s hrano
+forme|Bol fumant ¦ Zdjela koja se puši ¦ Kadeča se skleda
+forme|Boule de bowling ¦ Kugla za kuglanje ¦ Kegljaška krogla
+forme|Verre de cognac ¦ Čaša za konjak ¦ Kozarec za konjak
+forme|Pain ¦ Kruh ¦ Kruh
+forme|Mallette en métal ¦ Metalni kovčeg ¦ Kovinski kovček
+forme|Scarabée ¦ Kornjaš ¦ Hrošč
+forme|Immeuble d’appartements ¦ Stambena zgrada ¦ Stanovanjski blok
+forme|Bureaux ¦ Uredi ¦ Pisarne
+forme|Immeubles ¦ Zgrade ¦ Stavbe
+forme|Téléphérique ¦ Žičara ¦ Žičnica
+forme|Calendrier coché ¦ Označeni kalendar ¦ Označen koledar
+forme|Calendrier avec un jour ¦ Kalendar s danom ¦ Koledar z dnevom
+forme|Calendrier avec des jours ¦ Kalendar s danima ¦ Koledar z dnevi
+forme|Calendrier avec un cœur ¦ Kalendar sa srcem ¦ Koledar s srcem
+forme|Calendrier avec une étoile ¦ Kalendar sa zvijezdom ¦ Koledar z zvezdo
+forme|Calendrier barré ¦ Prekriženi kalendar ¦ Prečrtan koledar
+forme|Sonnette de comptoir ¦ Zvono na pultu ¦ Namizni zvonec
+forme|Appareil photo plus ¦ Fotoaparat plus ¦ Fotoaparat plus
+forme|Appareil photo tourner ¦ Okretanje fotoaparata ¦ Vrtenje fotoaparata
+forme|Appareil photo barré ¦ Prekriženi fotoaparat ¦ Prečrtan fotoaparat
+forme|Batterie de voiture ¦ Akumulator ¦ Avtomobilski akumulator
+forme|Voiture simple ¦ Jednostavni automobil ¦ Preprost avtomobil
+forme|Porte-cartes ¦ Držač kartica ¦ Etui za kartice
+forme|Cartes ¦ Karte ¦ Karte
+forme|Trois cartes ¦ Tri karte ¦ Tri karte
+forme|Double chevron rond vers le bas ¦ Okrugli dvostruki šiljak prema dolje ¦ Okrogel dvojni šiljek navzdol
+forme|Double chevron rond vers la gauche ¦ Okrugli dvostruki šiljak ulijevo ¦ Okrogel dvojni šiljek v levo
+forme|Double chevron rond vers la droite ¦ Okrugli dvostruki šiljak udesno ¦ Okrogel dvojni šiljek v desno
+forme|Double chevron rond vers le haut ¦ Okrugli dvostruki šiljak prema gore ¦ Okrogel dvojni šiljek navzgor
+forme|Chevron rond vers le bas ¦ Okrugli šiljak prema dolje ¦ Okrogel šiljek navzdol
+forme|Chevron rond vers la gauche ¦ Okrugli šiljak ulijevo ¦ Okrogel šiljek v levo
+forme|Chevron rond vers la droite ¦ Okrugli šiljak udesno ¦ Okrogel šiljek v desno
+forme|Chevron rond vers le haut ¦ Okrugli šiljak prema gore ¦ Okrogel šiljek navzgor
+forme|Chevrons haut et bas ¦ Šiljci gore i dolje ¦ Šiljka gor in dol
+forme|Double chevron vers le bas ¦ Dvostruki šiljak prema dolje ¦ Dvojni šiljek navzdol
+forme|Double chevron vers la gauche ¦ Dvostruki šiljak ulijevo ¦ Dvojni šiljek v levo
+forme|Double chevron vers la droite ¦ Dvostruki šiljak udesno ¦ Dvojni šiljek v desno
+forme|Double chevron vers le haut ¦ Dvostruki šiljak prema gore ¦ Dvojni šiljek navzgor
+forme|Chevron vers le bas ¦ Šiljak prema dolje ¦ Šiljek navzdol
+forme|Chevron vers la gauche ¦ Šiljak ulijevo ¦ Šiljek v levo
+forme|Chevron jusqu’au trait vers le bas ¦ Šiljak do crte prema dolje ¦ Šiljek do črte navzdol
+forme|Chevron jusqu’au trait vers la gauche ¦ Šiljak do crte ulijevo ¦ Šiljek do črte v levo
+forme|Chevron jusqu’au trait vers la droite ¦ Šiljak do crte udesno ¦ Šiljek do črte v desno
+forme|Chevron jusqu’au trait vers le haut ¦ Šiljak do crte prema gore ¦ Šiljek do črte navzgor
+forme|Chevron vers la droite ¦ Šiljak udesno ¦ Šiljek v desno
+forme|Chevron vers le haut ¦ Šiljak prema gore ¦ Šiljek navzgor
+forme|Caisse enregistreuse ¦ Blagajna ¦ Blagajna
+forme|Cassette audio ¦ Audiokaseta ¦ Avdiokaseta
+forme|Tour de château ¦ Toranj dvorca ¦ Grajski stolp
+forme|Diplôme ¦ Diploma ¦ Diploma
+forme|Tableau noir ¦ Školska ploča ¦ Šolska tabla
+forme|Tableau noir simple ¦ Jednostavna školska ploča ¦ Preprosta šolska tabla
+forme|Instituteur au tableau ¦ Učitelj pred pločom ¦ Učitelj pred tablo
+forme|Champagne ¦ Šampanjac ¦ Šampanjec
+forme|Graphique en barres ¦ Stupčasti grafikon ¦ Stolpčni graf
+forme|Courbe ¦ Linijski grafikon ¦ Črtni graf
+forme|Bulle centrée ¦ Centrirani oblačić ¦ Sredinski oblaček
+forme|points ¦ točke ¦ pike
+forme|texte ¦ tekst ¦ besedilo
+forme|Bulle goutte ¦ Oblačić u obliku kapi ¦ Oblaček v obliki kapljice
+forme|Deux bulles ¦ Dva oblačića ¦ Dva oblačka
+forme|Coche ronde ¦ Okrugla kvačica ¦ Okrogla kljukica
+forme|Grosse coche ¦ Velika kvačica ¦ Velika kljukica
+forme|Case cochée débordante ¦ Prepunjeni označeni kvadratić ¦ Prepolno označeno polje
+forme|Trinquer ¦ Nazdravljanje ¦ Nazdravljanje
+forme|Toque de cuisinier ¦ Kuharska kapa ¦ Kuharska kapa
+forme|Cercle en pointillés ¦ Isprekidani krug ¦ Črtkan krog
+forme|Demi-cercle plein ¦ Puni polukrug ¦ Poln polkrog
+forme|Demi-cercle penché ¦ Nagnuti polukrug ¦ Nagnjen polkrog
+forme|Cercle ouvert ¦ Otvoreni krug ¦ Odprt krog
+forme|Quatre cercles ¦ Četiri kruga ¦ Štirje krogi
+forme|Trois cercles ¦ Tri kruga ¦ Trije krogi
+forme|Trois cercles et un plus ¦ Tri kruga i plus ¦ Trije krogi in plus
+forme|Porte-bloc ¦ Podloga s kvačicom ¦ Podloga s sponko
+forme|Porte-bloc écrit ¦ Ispisana podloga s kvačicom ¦ Popisana podloga s sponko
+forme|après-midi ¦ poslijepodne ¦ popoldne
+forme|Horloge en avant ¦ Sat unaprijed ¦ Ura naprej
+forme|Compte à rebours ¦ Odbrojavanje ¦ Odštevanje
+forme|Horloge en arrière ¦ Sat unatrag ¦ Ura nazaj
+forme|Heure de la personne ¦ Vrijeme osobe ¦ Čas osebe
+forme|Nuage flèche en bas ¦ Oblak sa strelicom dolje ¦ Oblak s puščico navzdol
+forme|Nuage flèche en haut ¦ Oblak sa strelicom gore ¦ Oblak s puščico navzgor
+forme|Nuage coché ¦ Oblak s kvačicom ¦ Oblak s kljukico
+forme|Éclaircie ¦ Razvedravanje ¦ Razjasnitev
+forme|Nuage attention ¦ Oblak s upozorenjem ¦ Oblak z opozorilom
+forme|Nuage barré ¦ Prekriženi oblak ¦ Prečrtan oblak
+forme|Trèfle à quatre feuilles ¦ Djetelina s četiri lista ¦ Štiriperesna deteljica
+forme|Grain de café ¦ Zrno kave ¦ Kavno zrno
+forme|Pièce de monnaie ¦ Kovanica ¦ Kovanec
+forme|tranche ¦ rub ¦ rob
+forme|Pièces de monnaie ¦ Kovanice ¦ Kovanci
+forme|Confettis ¦ Konfeti ¦ Konfeti
+forme|Terrain de basket ¦ Košarkaško igralište ¦ Košarkarsko igrišče
+forme|Chapeau de cow-boy ¦ Kaubojski šešir ¦ Kavbojski klobuk
+forme|oiseau ¦ ptica ¦ ptica
+forme|Grue de chantier ¦ Građevinska dizalica ¦ Gradbeni žerjav
+forme|Viseur simple ¦ Jednostavni nišan ¦ Preprost namerilni križ
+forme|Couronne à la croix ¦ Kruna s križem ¦ Krona s križem
+forme|Couronne simple ¦ Jednostavna kruna ¦ Preprosta krona
+forme|meuble ¦ namještaj ¦ pohištvo
+forme|Ordinateur ¦ Računalo ¦ Računalnik
+forme|Tablette ¦ Tablet ¦ Tablica
+forme|Quatre losanges ¦ Četiri romba ¦ Štirje rombi
+forme|Robe ¦ Haljina ¦ Obleka
+forme|Goutte à moitié ¦ Pola kapi ¦ Pol kapljice
+forme|Goutte simple ¦ Jednostavna kap ¦ Preprosta kapljica
+forme|Œuf fêlé ¦ Napuklo jaje ¦ Počeno jajce
+forme|Enveloppe ouverte ¦ Otvorena omotnica ¦ Odprta ovojnica
+forme|Enveloppe simple ¦ Jednostavna omotnica ¦ Preprosta ovojnica
+forme|Enveloppe simple ouverte ¦ Jednostavna otvorena omotnica ¦ Preprosta odprta ovojnica
+forme|Escalier roulant ¦ Pokretne stepenice ¦ Tekoče stopnice
+forme|descente ¦ silazak ¦ spust
+forme|montée ¦ uspon ¦ vzpon
+forme|Examen ¦ Ispit ¦ Izpit
+forme|Deux yeux ¦ Dva oka ¦ Dve očesi
+forme|Masque de soin ¦ Maska za lice ¦ Maska za obraz
+forme|Ferme ¦ Farma ¦ Kmetija
+forme|Fichier ¦ Datoteka ¦ Datoteka
+forme|Fichier d’archives ¦ Arhivska datoteka ¦ Arhivska datoteka
+forme|Fichier son ¦ Zvučna datoteka ¦ Zvočna datoteka
+forme|Fichier image ¦ Slikovna datoteka ¦ Slikovna datoteka
+forme|Chercher dans un document ¦ Traži u dokumentu ¦ Išči v dokumentu
+forme|Fichier PDF ¦ PDF datoteka ¦ Datoteka PDF
+forme|Document écrit ¦ Pisani dokument ¦ Pisni dokument
+forme|Fichier vidéo ¦ Video datoteka ¦ Videodatoteka
+forme|Fichier compressé ¦ Komprimirana datoteka ¦ Stisnjena datoteka
+forme|Fichiers ¦ Datoteke ¦ Datoteke
+forme|Scénario ¦ Scenarij ¦ Scenarij
+forme|Empreinte digitale simple ¦ Jednostavni otisak prsta ¦ Preprost prstni odtis
+forme|Flamme ¦ Plamen ¦ Plamen
+forme|Croix de secours ¦ Križ prve pomoći ¦ Križ prve pomoči
+forme|Trousse de secours ¦ Kutija prve pomoći ¦ Komplet prve pomoči
+forme|Poisson simple ¦ Jednostavna riba ¦ Preprosta riba
+forme|Fanion plié ¦ Presavijena zastavica ¦ Prepognjena zastavica
+forme|drapeau ¦ zastava ¦ zastava
+forme|Flamme vive ¦ Jak plamen ¦ Živ plamen
+forme|Lampe de poche ¦ Džepna svjetiljka ¦ Žepna svetilka
+forme|dos ¦ leđa ¦ hrbet
+forme|Flèche de parcours ¦ Strelica rute ¦ Puščica poti
+forme|Lotus ¦ Lotos ¦ Lotos
+forme|Dossier simple ¦ Jednostavna mapa ¦ Preprosta mapa
+forme|Dossier de la personne ¦ Mapa osobe ¦ Mapa osebe
+forme|Dossier à l’étoile ¦ Mapa sa zvijezdom ¦ Mapa z zvezdo
+forme|Dossier personnel ¦ Osobna mapa ¦ Osebna mapa
+forme|Fourchette et couteau ¦ Vilica i nož ¦ Vilica in nož
+forme|Coins de cadre ¦ Kutovi okvira ¦ Vogali okvirja
+forme|Bidon d’essence ¦ Kanistar za benzin ¦ Posoda za bencin
+forme|Pompe à essence ¦ Benzinska pumpa ¦ Bencinska črpalka
+forme|Jauge ¦ Mjerač ¦ Merilnik
+forme|Engrenage fin ¦ Tanki zupčanik ¦ Tanek zobnik
+forme|Engrenage à six dents ¦ Zupčanik sa šest zubaca ¦ Zobnik s šestimi zobmi
+forme|Symbole femme ¦ Simbol žene ¦ Simbol ženske
+forme|Symbole intersexe ¦ Interspolni simbol ¦ Interspolni simbol
+forme|Symbole homme ¦ Simbol muškarca ¦ Simbol moškega
+forme|Symbole neutre ¦ Neutralni simbol ¦ Nevtralni simbol
+forme|Symbole transgenre ¦ Transrodni simbol ¦ Transspolni simbol
+forme|Europe ¦ Europa ¦ Evropa
+forme|Afrique ¦ Afrika ¦ Afrika
+forme|Amériques ¦ Amerike ¦ Amerike
+forme|Globe simple ¦ Jednostavni globus ¦ Preprost globus
+forme|Globe terrestre sur pied ¦ Globus na postolju ¦ Globus na stojalu
+forme|Lunettes de natation ¦ Plivaće naočale ¦ Plavalna očala
+forme|Toque de diplômé ¦ Kapa za diplomu ¦ Diplomska kapa
+forme|Épis de blé ¦ Klasje pšenice ¦ Pšenični klasi
+forme|Réseau de points ¦ Mreža točaka ¦ Omrežje pik
+forme|Grille de quatre ¦ Mreža od četiri ¦ Mreža štirih
+forme|Grille de neuf ¦ Mreža od devet ¦ Mreža devetih
+forme|Main et pièces ¦ Ruka i kovanice ¦ Roka in kovanci
+forme|Main et œil ¦ Ruka i oko ¦ Roka in oko
+forme|Poing ¦ Šaka ¦ Pest
+forme|Main qui attrape ¦ Ruka koja hvata ¦ Roka, ki zgrabi
+forme|Paume ¦ Dlan ¦ Dlan
+forme|Signe de paix ¦ Znak mira ¦ Znak miru
+forme|Main qui montre ¦ Ruka koja pokazuje ¦ Roka, ki kaže
+forme|Savon liquide ¦ Tekući sapun ¦ Tekoče milo
+forme|Sac à main simple ¦ Jednostavna ručna torbica ¦ Preprosta ročna torbica
+forme|Phares ¦ Prednja svjetla ¦ Žarometi
+forme|Casque micro ¦ Slušalice s mikrofonom ¦ Slušalke z mikrofonom
+forme|Cœur droit ¦ Uspravno srce ¦ Pokončno srce
+forme|Cœur droit brisé ¦ Uspravno slomljeno srce ¦ Pokončno strto srce
+forme|Surligneur ¦ Marker ¦ Označevalnik
+forme|Hockey ¦ Hokej ¦ Hokej
+forme|Sweat à capuche ¦ Majica s kapuljačom ¦ Pulover s kapuco
+forme|début ¦ početak ¦ začetek
+forme|fin ¦ kraj ¦ konec
+forme|milieu ¦ sredina ¦ sredina
+forme|Sablier simple ¦ Jednostavni pješčani sat ¦ Preprosta peščena ura
+forme|Maison au trait ¦ Obrisana kuća ¦ Obrisna hiša
+forme|Maison simple ¦ Jednostavna kuća ¦ Preprosta hiša
+forme|Badge ¦ Značka ¦ Značka
+forme|Image ¦ Slika ¦ Slika
+forme|Images ¦ Slike ¦ Slike
+forme|Facture ¦ Račun ¦ Račun
+forme|Bocal ¦ Staklenka ¦ Kozarec za vlaganje
+forme|Bocal étiqueté ¦ Staklenka s etiketom ¦ Kozarec z nalepko
+forme|Jeep ¦ Džip ¦ Džip
+forme|Clavier ¦ Tipkovnica ¦ Tipkovnica
+forme|Trou de serrure ¦ Ključanica ¦ Ključavnica
+forme|Échelle simple ¦ Jednostavne ljestve ¦ Preprosta lestev
+forme|Suspension ¦ Viseća svjetiljka ¦ Viseča svetilka
+forme|Ordinateur portable ¦ Prijenosno računalo ¦ Prenosni računalnik
+forme|Bouée ¦ Pojas za spašavanje ¦ Rešilni obroč
+forme|Ampoule à filament ¦ Žarulja sa žarnom niti ¦ Žarnica z nitko
+forme|Liste ¦ Popis ¦ Seznam
+forme|Liste de favoris ¦ Popis omiljenih ¦ Seznam priljubljenih
+forme|Cadenas fermé ¦ Zaključani lokot ¦ Zaklenjena ključavnica
+forme|Cadenas à clé ¦ Lokot s ključem ¦ Ključavnica s ključem
+forme|Casiers ¦ Ormarići ¦ Omarice
+forme|Aimant droit ¦ Ravni magnet ¦ Paličasti magnet
+forme|Repère sur la carte ¦ Oznaka na karti ¦ Oznaka na zemljevidu
+forme|Repère et zone ¦ Oznaka i područje ¦ Oznaka in območje
+forme|Repère au sol ¦ Oznaka na tlu ¦ Oznaka na tleh
+forme|Carte dépliée ¦ Rasklopljena karta ¦ Razgrnjen zemljevid
+forme|Masque joyeux ¦ Vesela maska ¦ Vesela maska
+forme|Masque triste ¦ Tužna maska ¦ Žalostna maska
+forme|Médaille militaire ¦ Vojna medalja ¦ Vojaška medalja
+forme|Porte-voix ¦ Megafon ¦ Megafon
+forme|Porte-voix simple ¦ Jednostavni megafon ¦ Preprost megafon
+forme|Météore ¦ Meteor ¦ Meteor
+forme|Micro ¦ Mikrofon ¦ Mikrofon
+forme|Micro de scène ¦ Mikrofon za pozornicu ¦ Odrski mikrofon
+forme|Moins carré ¦ Četvrtasti minus ¦ Kvadratni minus
+forme|Billet ondulé ¦ Valovita novčanica ¦ Valovit bankovec
+forme|Écran ¦ Zaslon ¦ Zaslon
+forme|Lune et étoiles ¦ Mjesec i zvijezde ¦ Luna in zvezde
+forme|Mobylette ¦ Moped ¦ Moped
+forme|de face ¦ sprijeda ¦ od spredaj
+forme|Souris ¦ Miš ¦ Miška
+forme|ordinateur ¦ računalo ¦ računalnik
+forme|Note simple ¦ Jednostavna nota ¦ Preprosta nota
+forme|Notes de musique ¦ Glazbene note ¦ Glasbene note
+forme|Notes moins ¦ Note minus ¦ Note minus
+forme|Notes plus ¦ Note plus ¦ Note plus
+forme|Notes simples ¦ Jednostavne note ¦ Preproste note
+forme|Flèche de navigation ¦ Navigacijska strelica ¦ Navigacijska puščica
+forme|Aiguille à coudre ¦ Igla za šivanje ¦ Šivanka
+forme|Coupure de presse ¦ Novinski isječak ¦ Časopisni izrezek
+forme|Note ¦ Bilješka ¦ Zapisek
+forme|Note vierge ¦ Prazna bilješka ¦ Prazen zapisek
+forme|Note et crayon ¦ Bilješka i olovka ¦ Zapisek in svinčnik
+forme|Bloc-notes ¦ Blok za bilješke ¦ Beležka
+forme|Fauteuil de bureau ¦ Uredska stolica ¦ Pisarniški stol
+forme|Onigiri ¦ Onigiri ¦ Onigiri
+forme|Orange ¦ Naranča ¦ Pomaranča
+forme|Tranche d’orange ¦ Kriška naranče ¦ Rezina pomaranče
+forme|Four ¦ Pećnica ¦ Pečica
+forme|Brosse de peintre ¦ Slikarski kist ¦ Slikarski čopič
+forme|Palette ¦ Paleta ¦ Paleta
+forme|Pantalon ¦ Hlače ¦ Hlače
+forme|Avion en papier ¦ Papirnati avion ¦ Papirnato letalo
+forme|Avion en papier penché ¦ Nagnuti papirnati avion ¦ Nagnjeno papirnato letalo
+forme|Trombone couché ¦ Položena spajalica ¦ Ležeča sponka
+forme|Pied-de-mouche ¦ Znak odlomka ¦ Znak za odstavek
+forme|Parc ¦ Park ¦ Park
+forme|Chemin ¦ Staza ¦ Pot
+forme|Empreinte de patte ¦ Otisak šape ¦ Odtis tačke
+forme|Symbole de paix ¦ Simbol mira ¦ Simbol miru
+forme|Plume de stylo ¦ Pero nalivpera ¦ Peresna konica
+forme|Crayon simple ¦ Jednostavna olovka ¦ Preprost svinčnik
+forme|Poivron ¦ Paprika ¦ Paprika
+forme|Personne bras ouverts ¦ Osoba raširenih ruku ¦ Oseba z razprtimi rokami
+forme|Personne simple ¦ Jednostavna osoba ¦ Preprosta oseba
+forme|Personne dans un rond ¦ Osoba u krugu ¦ Oseba v krogu
+forme|Surfeur des neiges ¦ Snowboarder ¦ Deskar na snegu
+forme|Tai-chi ¦ Tai chi ¦ Tai chi
+forme|Lanceur ¦ Bacač ¦ Metalec
+forme|Téléphone qui sonne ¦ Telefon koji zvoni ¦ Telefon, ki zvoni
+forme|Clavier de piano ¦ Klavijatura ¦ Klaviatura
+forme|Table de pique-nique ¦ Stol za piknik ¦ Miza za piknik
+forme|Verre à bière ¦ Čaša za pivo ¦ Kozarec za pivo
+forme|Pipe ¦ Lula ¦ Pipa
+forme|Planète ¦ Planet ¦ Planet
+forme|Lecture-pause ¦ Reprodukcija/pauza ¦ Predvajaj/premor
+forme|Liste de lecture ¦ Popis za reprodukciju ¦ Seznam predvajanja
+forme|Prise électrique ¦ Utičnica ¦ Vtičnica
+forme|Fiches électriques ¦ Električni utikači ¦ Električni vtiči
+forme|Plus carré ¦ Četvrtasti plus ¦ Kvadratni plus
+forme|Jeton de jeu ¦ Žeton za igru ¦ Igralni žeton
+forme|Voiture de police ¦ Policijski automobil ¦ Policijski avto
+forme|Polygone ¦ Mnogokut ¦ Mnogokotnik
+forme|Plante en pot ¦ Biljka u tegli ¦ Lončnica
+forme|Marche-arrêt ¦ Uključi/isključi ¦ Vklop/izklop
+forme|Tableau de présentation ¦ Ploča za prezentacije ¦ Predstavitvena tabla
+forme|Punaise simple ¦ Jednostavna pribadača ¦ Preprost žebljiček
+forme|Pièce de puzzle ¦ Dio slagalice ¦ Košček sestavljanke
+forme|Guillemets ¦ Navodnici ¦ Narekovaji
+forme|Raquette ¦ Reket ¦ Lopar
+forme|Poste de radio ¦ Radioprijemnik ¦ Radijski sprejemnik
+forme|Arc-en-ciel et nuage ¦ Duga i oblak ¦ Mavrica in oblak
+forme|Enregistrer ¦ Spremi ¦ Shrani
+forme|Rectangle en pointillés ¦ Isprekidani pravokutnik ¦ Črtkan pravokotnik
+forme|Fusée au décollage ¦ Raketa pri polijetanju ¦ Raketa ob izstrelitvi
+forme|Sceau dentelé ¦ Nazubljeni pečat ¦ Nazobčan pečat
+forme|Siège ¦ Sjedalo ¦ Sedež
+forme|grosse flèche ¦ velika strelica ¦ velika puščica
+forme|Écu simple ¦ Jednostavni grb ¦ Preprost grb
+forme|Écu coché ¦ Grb s kvačicom ¦ Grb s kljukico
+forme|Écu écartelé ¦ Četvoreni grb ¦ Četrtinjen grb
+forme|Écu au chevron ¦ Grb sa šiljkom ¦ Grb s šiljkom
+forme|Écu à la croix ¦ Grb s križem ¦ Grb s križem
+forme|Écu à la barre ¦ Grb s lijevom kosom gredom ¦ Grb z levo poševno prečko
+forme|Écu à l’étoile ¦ Grb sa zvijezdom ¦ Grb z zvezdo
+forme|Écu au point d’exclamation ¦ Grb s uskličnikom ¦ Grb s klicajem
+forme|Conteneur ¦ Kontejner ¦ Zabojnik
+forme|Chemise pliée ¦ Presavijena košulja ¦ Zložena srajca
+forme|Sac de courses ouvert ¦ Otvorena vrećica za kupovinu ¦ Odprta nakupovalna vrečka
+forme|Chariot simple ¦ Jednostavna kolica ¦ Preprost voziček
+forme|Crevette ¦ Kozica ¦ Kozica
+forme|Sigma ¦ Sigma ¦ Sigma
+forme|Panneau indicateur ¦ Putokaz ¦ Kažipot
+forme|Gyrophare ¦ Rotirajuće svjetlo ¦ Utripajoča luč
+forme|Diaporama ¦ Dijaprojekcija ¦ Diaprojekcija
+forme|Visage en colère ¦ Ljutito lice ¦ Jezen obraz
+forme|Visage sans expression ¦ Bezizražajno lice ¦ Brezizrazen obraz
+forme|Visage blasé ¦ Ravnodušno lice ¦ Naveličan obraz
+forme|Visage qui fond ¦ Lice koje se topi ¦ Topeči se obraz
+forme|Visage nerveux ¦ Nervozno lice ¦ Živčen obraz
+forme|Visage triste ¦ Tužno lice ¦ Žalosten obraz
+forme|Visage KO ¦ Nokautirano lice ¦ Knokavtiran obraz
+forme|chaussure ¦ cipela ¦ čevelj
+forme|Basket en marche ¦ Tenisica u hodu ¦ Superga v hoji
+forme|Flocon de neige ¦ Pahuljica ¦ Snežinka
+forme|Ballon de foot ¦ Nogometna lopta ¦ Nogometna žoga
+forme|Chaussette ¦ Čarapa ¦ Nogavica
+forme|Étincelle ¦ Iskra ¦ Iskra
+forme|Haut-parleur ¦ Zvučnik ¦ Zvočnik
+forme|Spirale ¦ Spirala ¦ Spirala
+forme|Carré à moitié ¦ Pola kvadrata ¦ Pol kvadrata
+forme|Quatre carrés ¦ Četiri kvadrata ¦ Štirje kvadrati
+forme|Étoile à quatre branches ¦ Četverokraka zvijezda ¦ Štirikraka zvezda
+forme|Marches ¦ Stube ¦ Stopnice
+forme|carré ¦ kvadrat ¦ kvadrat
+forme|Stratégie ¦ Strategija ¦ Strategija
+forme|Élève ¦ Učenik ¦ Učenec
+forme|Valise à roulettes ¦ Kovčeg s kotačićima ¦ Kovček na kolesih
+forme|Valise simple ¦ Jednostavni kovčeg ¦ Preprost kovček
+forme|Soleil voilé ¦ Sunce iza oblaka ¦ Zastrto sonce
+forme|Lever de soleil ¦ Izlazak sunca ¦ Sončni vzhod
+forme|Seringue ¦ Štrcaljka ¦ Injekcijska brizga
+forme|Tee-shirt ¦ Majica kratkih rukava ¦ Majica s kratkimi rokavi
+forme|grille ¦ mreža ¦ mreža
+forme|Étiquette en chevron ¦ Oznaka sa šiljkom ¦ Oznaka s šiljkom
+forme|Étiquette simple ¦ Jednostavna oznaka ¦ Preprosta oznaka
+forme|Sachet de thé ¦ Vrećica čaja ¦ Čajna vrečka
+forme|Thermomètre froid ¦ Hladan termometar ¦ Hladen termometer
+forme|Thermomètre chaud ¦ Vruć termometar ¦ Vroč termometer
+forme|Thermomètre simple ¦ Jednostavni termometar ¦ Preprost termometer
+forme|Pouce en bas ¦ Palac prema dolje ¦ Palec navzdol
+forme|Pouce en haut ¦ Palac prema gore ¦ Palec navzgor
+forme|Billet d’entrée ¦ Ulaznica ¦ Vstopnica
+forme|Chronomètre ¦ Štoperica ¦ Štoparica
+forme|Pot à pourboires ¦ Posuda za napojnice ¦ Kozarec za napitnine
+forme|Tipi ¦ Tipi ¦ Tipi
+forme|Cabas ¦ Platnena torba ¦ Platnena torba
+forme|Cabas simple ¦ Jednostavna platnena torba ¦ Preprosta platnena torba
+forme|Serviette ¦ Ručnik ¦ Brisača
+forme|Cône de chantier ¦ Prometni čunj ¦ Prometni stožec
+forme|Panneau routier ¦ Prometni znak ¦ Prometni znak
+forme|Train régional ¦ Regionalni vlak ¦ Regionalni vlak
+forme|Train simple ¦ Jednostavni vlak ¦ Preprost vlak
+forme|Traduire ¦ Prevedi ¦ Prevedi
+forme|Poubelle simple ¦ Jednostavna kanta za smeće ¦ Preprost koš za smeti
+forme|Plateau ¦ Pladanj ¦ Pladenj
+forme|Courbe qui baisse ¦ Krivulja koja pada ¦ Padajoča krivulja
+forme|Courbe qui monte ¦ Krivulja koja raste ¦ Naraščajoča krivulja
+forme|Triangle en pointillés ¦ Isprekidani trokut ¦ Črtkan trikotnik
+forme|chariot ¦ kolica ¦ voziček
+forme|Chariot à bagages ¦ Kolica za prtljagu ¦ Voziček za prtljago
+forme|Parapluie simple ¦ Jednostavni kišobran ¦ Preprost dežnik
+forme|buste ¦ poprsje ¦ doprsni kip
+forme|Personne vérifiée ¦ Provjerena osoba ¦ Preverjena oseba
+forme|Personne moins ¦ Osoba minus ¦ Oseba minus
+forme|Personne plus ¦ Osoba plus ¦ Oseba plus
+forme|Liste de personnes ¦ Popis osoba ¦ Seznam oseb
+forme|Personne dans un carré ¦ Osoba u kvadratu ¦ Oseba v kvadratu
+forme|Quatre personnes ¦ Četiri osobe ¦ Štiri osebe
+forme|Trois personnes ¦ Tri osobe ¦ Tri osebe
+forme|Vidéo ¦ Video ¦ Video
+forme|Caméra ¦ Videokamera ¦ Videokamera
+forme|Disque vinyle ¦ Gramofonska ploča ¦ Vinilna plošča
+forme|Mur de briques ¦ Zid od opeke ¦ Opečni zid
+forme|triangle ¦ trokut ¦ trikotnik
+forme|losange ¦ romb ¦ romb
+forme|octogone ¦ osmerokut ¦ osemkotnik
+forme|Onde ¦ Val ¦ Val
+forme|Son ¦ Zvuk ¦ Zvok
+forme|onde ¦ val ¦ val
+forme|Fauteuil roulant en mouvement ¦ Invalidska kolica u pokretu ¦ Invalidski voziček v gibanju
+forme|Wi-Fi ¦ Wi-Fi ¦ Wi-Fi
+forme|Clé plate ¦ Viljuškasti ključ ¦ Viličasti ključ
+forme|Pelote de laine ¦ Klupko vune ¦ Klobčič volne
+forme|seule ¦ sama ¦ sama
+forme|seul ¦ sam ¦ sam
+forme|Lettre {x} minuscule ¦ Malo slovo {x} ¦ Mala črka {x}
+forme|Point ¦ Točka ¦ Pika
+forme|Virgule ¦ Zarez ¦ Vejica
+forme|Point-virgule ¦ Točka sa zarezom ¦ Podpičje
+forme|Deux-points ¦ Dvotočka ¦ Dvopičje
+forme|Point d’exclamation renversé ¦ Obrnuti uskličnik ¦ Obrnjen klicaj
+forme|Point d’interrogation renversé ¦ Obrnuti upitnik ¦ Obrnjen vprašaj
+forme|Apostrophe ¦ Apostrof ¦ Opuščaj
+forme|Guillemet droit ¦ Ravni navodnik ¦ Raven narekovaj
+forme|Guillemet ouvrant ¦ Otvarajući navodnik ¦ Začetni narekovaj
+forme|Parenthèse ouvrante ¦ Otvorena zagrada ¦ Uklepaj
+forme|Parenthèse fermante ¦ Zatvorena zagrada ¦ Zaklepaj
+forme|Crochet ouvrant ¦ Otvorena uglata zagrada ¦ Oglati uklepaj
+forme|Crochet fermant ¦ Zatvorena uglata zagrada ¦ Oglati zaklepaj
+forme|Trait d’union ¦ Spojnica ¦ Vezaj
+forme|Tiret ¦ Crtica ¦ Pomišljaj
+forme|et ¦ i ¦ in
+forme|numéro ¦ broj ¦ številka
+forme|Pour cent ¦ Posto ¦ Odstotek
+forme|naissance ¦ rođenje ¦ rojstvo
+forme|Barre oblique ¦ Kosa crta ¦ Poševnica
+forme|Paragraphe ¦ Znak paragrafa ¦ Znak za člen
+forme|Degré ¦ Stupanj ¦ Stopinja
+forme|naissance ° ¦ rođenje ° ¦ rojstvo °
+forme|décès † ¦ smrt † ¦ smrt †
+forme|Double croix ¦ Dvostruki križ ¦ Dvojni križ
+forme|Numéro ¦ Znak broja ¦ Znak za številko
+forme|Nombre {x} ¦ Broj {x} ¦ Število {x}
+forme|Signe de naissance ¦ Znak rođenja ¦ Znak rojstva
+forme|Étoile de naissance ¦ Zvijezda rođenja ¦ Zvezda rojstva
+forme|Croix de décès ¦ Križ smrti ¦ Križ smrti
+forme|Signe du mariage ¦ Znak vjenčanja ¦ Znak poroke
+forme|Signe du divorce ¦ Znak razvoda ¦ Znak ločitve
+forme|Union libre ¦ Izvanbračna zajednica ¦ Zunajzakonska skupnost
+forme|mariage ¦ vjenčanje ¦ poroka
+forme|inhumation ¦ pokop ¦ pokop
+forme|Urne ¦ Urna ¦ Žara
+forme|crémation ¦ kremacija ¦ upepelitev
+forme|mort au combat ¦ poginuo u borbi ¦ padel v boju
+forme|Fleuron ¦ Floron ¦ Floron
+forme|vers la gauche ¦ ulijevo ¦ v levo
+forme|Feuille de vigne ¦ List vinove loze ¦ Vinski list
+forme|ornement ¦ ukras ¦ okrasek
+forme|Croix ombrée ¦ Zasjenjeni križ ¦ Senčen križ
+forme|Croix à contour ¦ Obrisani križ ¦ Obrisni križ
+forme|Chrisme ¦ Kristov monogram ¦ Kristusov monogram
+forme|Croix de Jérusalem ¦ Jeruzalemski križ ¦ Jeruzalemski križ
+forme|Ankh ¦ Ankh ¦ Ankh
+forme|croix ansée ¦ križ s ušicom ¦ križ z ušesom
+forme|Symbole de Farsi ¦ Simbol farsija ¦ Simbol farsija
+forme|Croix pattée à contour ¦ Obrisani tapasti križ ¦ Obrisni tacasti križ
+forme|Croix grecque épaisse ¦ Debeli grčki križ ¦ Debel grški križ
+forme|Croix à centre ouvert ¦ Križ s otvorenim središtem ¦ Križ z odprtim središčem
+forme|Croix à centre rond ¦ Križ s okruglim središtem ¦ Križ z okroglim središčem
+forme|Reine ¦ Kraljica ¦ Kraljica
+forme|Marteau et pic ¦ Čekić i pijuk ¦ Kladivo in kramp
+forme|justice ¦ pravda ¦ pravica
+forme|Bâton d’Esculape ¦ Eskulapov štap ¦ Eskulapova palica
+forme|Alambic ¦ Alembik ¦ Alembik
+forme|Roue dentée ¦ Zupčanik ¦ Zobato kolo
+forme|Caducée d’Hermès ¦ Hermesov kaducej ¦ Hermesov kadicej
+forme|Caducée ¦ Kaducej ¦ Kadicej
+forme|Main qui écrit ¦ Ruka koja piše ¦ Roka, ki piše
+forme|note ¦ nota ¦ nota
+forme|Deux croches ¦ Dvije osminke ¦ Dve osminki
+forme|Doubles croches ¦ Šesnaestinke ¦ Šestnajstinke
+forme|Dé un ¦ Kocka jedan ¦ Kocka ena
+forme|Dé deux ¦ Kocka dva ¦ Kocka dva
