@@ -4881,6 +4881,8 @@ html.ms-open .lc-i18n-banner{display:none} /* 🧓 mode simple : pas de petite c
 .lc-lang-field select{font-size:15px}
 .install-lang{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:0 0 12px;font-weight:700}
 .install-lang select{font:inherit;font-weight:400;padding:4px 6px}
+.install-lang [data-lc-lang-slot]{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.lc-lang-quick{display:inline-flex;gap:6px}
 /* ═════ 🐞 Bandeau « Quelque chose n'a pas marché » (app-signaler.js) : même style que celui des langues, au-dessus de lui s'il est là ═════ */
 .lc-err-banner{position:fixed;right:16px;bottom:16px;z-index:61;display:flex;align-items:center;gap:8px;max-width:min(520px,calc(100vw - 32px));box-sizing:border-box;padding:8px 8px 8px 12px;background:var(--paper,#fff);color:var(--ink,#111);border:1.5px solid var(--blue,#0066cc);box-shadow:0 4px 18px rgba(0,0,0,.14);font-size:13px;line-height:1.35}
 .lc-err-banner-ico{font-size:16px;flex:none}

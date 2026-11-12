@@ -63,7 +63,7 @@
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 27; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 28; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -73,7 +73,14 @@
     /* ═════ Lire la langue ═════ */
     function storedLang() {
         if (!hasDom) return 'fr';
-        try { const v = localStorage.getItem(KEY); return isCode(v) ? v : 'fr'; } catch (_) {} // le cookie seulement sans localStorage
+        try {
+            const v = localStorage.getItem(KEY);
+            if (isCode(v)) return v;
+            // 🌐 tout premier lancement : la langue de l'ordinateur, devinée par le serveur (lib/i18n.php, i18n_detect_lang), gardée comme un choix
+            const g = window.LCNDA_I18N_FIRST;
+            if (isCode(g) && g !== 'fr') { localStorage.setItem(KEY, g); return g; }
+            return 'fr';
+        } catch (_) {} // le cookie seulement sans localStorage
         try { const m = document.cookie.match(/(?:^|;\s*)lcnda_lang=([a-z]{2})/); if (m && isCode(m[1])) return m[1]; } catch (_) {}
         return 'fr';
     }
@@ -408,8 +415,15 @@
     if (hasDom) {
         applyHtml();
         // un menu des langues posé dans la page (écran du premier lancement : <span data-lc-lang-slot>) ; tout menu [data-lc-lang-pick] change la langue
-        const slots = () => document.querySelectorAll('[data-lc-lang-slot]:not([data-done])').forEach(el => { el.dataset.done = '1'; el.innerHTML = selectHtml('data-lc-lang-pick aria-label="Langue · Language"'); });
-        document.addEventListener('change', e => { const s = e.target && e.target.closest && e.target.closest('select[data-lc-lang-pick]'); if (s) setLang(s.value); });
+        // + deux boutons tout simples « Français » et « English » (pour qui ne trouve pas sa langue dans le menu)
+        const quick = () => ['fr', 'en'].map(c => `<button type="button" class="button small ${c === lang ? '' : 'secondary'}" data-lc-lang-quick="${c}" aria-pressed="${c === lang}">${info(c).flag} ${info(c).name}</button>`).join('');
+        const slots = () => document.querySelectorAll('[data-lc-lang-slot]:not([data-done])').forEach(el => { el.dataset.done = '1'; el.innerHTML = selectHtml('data-lc-lang-pick aria-label="Langue · Language"') + `<span class="lc-lang-quick">${quick()}</span>`; });
+        const syncSlots = () => document.querySelectorAll('[data-lc-lang-slot][data-done]').forEach(el => {
+            const s = el.querySelector('select[data-lc-lang-pick]'); if (s && s.value !== lang) s.value = lang;
+            const q = el.querySelector('.lc-lang-quick'); if (q) q.innerHTML = quick();
+        });
+        document.addEventListener('change', e => { const s = e.target && e.target.closest && e.target.closest('select[data-lc-lang-pick]'); if (s) { setLang(s.value); syncSlots(); } });
+        document.addEventListener('click', e => { const b = e.target && e.target.closest && e.target.closest('[data-lc-lang-quick]'); if (b) { setLang(b.dataset.lcLangQuick); syncSlots(); } });
         slots();
         const start = () => {
             slots();
