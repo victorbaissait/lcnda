@@ -2174,7 +2174,7 @@
      * on ouvre la FAQ ou une bulle « En savoir plus (FAQ) → ». Chaque question y a un repère tiré de sa question française
      * (faqId) : les liens data-help-faq et UI.openFaq('…') qui citent la question française la retrouvent dans toutes les langues.
      * Une question ou une réponse pas encore traduite reste en français. */
-    const FAQ_I18N_V = 6; // monter avec VERSION de scripts/build-faq-i18n.js
+    const FAQ_I18N_V = 7; // monter avec VERSION de scripts/build-faq-i18n.js
     const faqI18n = () => window.LCNDA_I18N;
     const tt = (s, v) => (faqI18n() ? faqI18n().t(s, v) : s);
     const faqLang = () => faqI18n()?.lang || 'fr';
@@ -2227,6 +2227,8 @@
         ro: 'si sau un o de la in din pe cu fara pentru ca care ce cum cine unde cand este sunt e fi a al ai ale lui ei eu tu el ea noi voi ma mi meu mea mei mele tau ta tai tale se sa nu da daca pot poti vreau trebuie fac face fel aplicatie aplicatia app lcnda program lucru genealogie baza',
         fi: 'ja tai on ovat ei en et se ne ole olla oli voi voin voit voinko miten mita mika mitka kuka miksi milloin missa mihin minne mina minun minua sina sinun sinua han me te he tama tuo nama etta jos kun niin kuin myos vain kanssa ilman haluan haluaisin pitaa pitaisi tehda teen teet tapa sovellus app lcnda ohjelma asia sukututkimus tietokanta',
         hu: 'a az es vagy egy de hogy is nem van vannak volt lesz lehet hogyan mit mi mely melyik ki kit miert mikor hol en te o ti ok engem teged nekem neked ez azt ezt ha akkor mert mint meg csak sem igen kell szeretnek szeretnem tudok tudom csinal csinalni csinalok modja modon app lcnda program alkalmazas dolog csaladfakutatas adatbazis',
+        hr: 'i a ili u na za od do s sa iz po bez je su biti bio bila sam si smo ste kako sto sta koji koja koje tko zasto kada kad gdje ja me mi moj moja moje ti te tvoj tvoja tvoje to taj ta ovo ovaj se ne da ako li mogu mozes moze zelim trebam treba napraviti raditi radim nacin aplikacija app lcnda program stvar rodoslovlje genealogija baza',
+        sl: 'in ali v na za od do s z iz po brez je so biti bil bila sem si smo ste kako kaj kateri katera katero kdo zakaj kdaj kje jaz me mi moj moja moje ti te tvoj tvoja tvoje to ta ten tega se ne da ce lahko morem moras zelim moram treba narediti delati delam nacin aplikacija app lcnda program stvar rodoslovje genealogija baza',
     }).map(([k, v]) => [k, new Set(v.split(' '))]));
     const FAQ_SYN = {photo: 'image media scan document', image: 'photo media', media: 'photo image document', scan: 'photo document numeriser', pdf: 'imprimer livre exporter', imprimer: 'pdf livre', livre: 'livret pdf imprimer',
         supprimer: 'effacer enlever retirer', effacer: 'supprimer', ancetre: 'sosa lignee aieul', sosa: 'ancetre lignee cujus', cujus: 'sosa depart', arbre: 'genealogie diagramme ascendant', carte: 'lieu plan',
@@ -2253,12 +2255,14 @@
         ro: {fotografie: 'foto imagine media scanare', foto: 'fotografie imagine', pdf: 'tipareste carte exporta', tipareste: 'pdf carte', carte: 'pdf tipareste', sterge: 'scoate elimina', scoate: 'sterge', copie: 'siguranta salvare backup', stramos: 'sosa', arbore: 'genealogie diagrama', harta: 'loc', grafic: 'statistica diagrama', importa: 'gedcom heredis gramps ancestry myheritage', exporta: 'pdf csv', eroare: 'verificare', sunet: 'audio inregistrare', casatorie: 'nunta cununie', nunta: 'casatorie', cauta: 'gaseste', gaseste: 'cauta'},
         fi: {valokuva: 'kuva media skannaus', kuva: 'valokuva', pdf: 'tulosta kirja vienti', tulosta: 'pdf kirja', kirja: 'pdf tulosta', poista: 'pyyhi', pyyhi: 'poista', varmuuskopio: 'kopio tallenna backup', esivanhempi: 'sosa', puu: 'sukupuu kaavio', sukupuu: 'puu', kartta: 'paikka', kaavio: 'tilasto', tuonti: 'gedcom heredis gramps ancestry myheritage', vienti: 'pdf csv', virhe: 'tarkista', aani: 'audio aanitys', vihkiminen: 'avioliitto haat', avioliitto: 'vihkiminen', etsi: 'hae', hae: 'etsi'},
         hu: {fenykep: 'foto kep media szkenneles', kep: 'fenykep foto', pdf: 'nyomtatas konyv exportalas', nyomtatas: 'pdf konyv', konyv: 'pdf nyomtatas', torles: 'eltavolitas', torol: 'eltavolit', mentes: 'masolat biztonsagi backup', os: 'sosa felmeno', felmeno: 'os sosa', fa: 'csaladfa diagram', csaladfa: 'fa', terkep: 'hely', diagram: 'statisztika grafikon', importalas: 'gedcom heredis gramps ancestry myheritage', exportalas: 'pdf csv', hiba: 'ellenorzes', hang: 'audio felvetel', hazassag: 'eskuvo', eskuvo: 'hazassag', keres: 'kereses talal', talal: 'keres'},
+        hr: {fotografija: 'foto slika medij skeniranje', foto: 'fotografija slika', slika: 'foto fotografija', pdf: 'ispis knjiga izvoz', ispis: 'pdf knjiga', knjiga: 'pdf ispis', izbrisi: 'ukloni obrisi', ukloni: 'izbrisi', sigurnosna: 'kopija spremi backup', predak: 'sosa', stablo: 'rodoslovno dijagram', karta: 'mjesto', grafikon: 'statistika dijagram', uvoz: 'gedcom heredis gramps ancestry myheritage', izvoz: 'pdf csv', greska: 'provjera', zvuk: 'audio snimka', vjencanje: 'brak', brak: 'vjencanje', trazi: 'pronadi', pronadi: 'trazi'},
+        sl: {fotografija: 'foto slika medij skeniranje', foto: 'fotografija slika', slika: 'foto fotografija', pdf: 'tiskanje knjiga izvoz', tiskanje: 'pdf knjiga', knjiga: 'pdf tiskanje', izbrisi: 'odstrani', odstrani: 'izbrisi', varnostna: 'kopija shrani backup', prednik: 'sosa', drevo: 'rodovnik diagram', rodovnik: 'drevo', zemljevid: 'kraj', graf: 'statistika diagram', uvoz: 'gedcom heredis gramps ancestry myheritage', izvoz: 'pdf csv', napaka: 'preverjanje', zvok: 'audio posnetek', poroka: 'zakon', zakon: 'poroka', isci: 'najdi', najdi: 'isci'},
     };
     // les synonymes vont dans les deux sens, et se retrouvent aussi au pluriel ou sous une autre forme du mot
     const faqBoth = map => Object.entries({...map}).forEach(([k, v]) => v.split(' ').forEach(x => { map[x] = [...new Set(`${map[x] || ''} ${k}`.trim().split(' '))].join(' '); }));
     faqBoth(FAQ_SYN); Object.values(FAQ_SYN_L).forEach(faqBoth);
     const faqSyn = (w, L = 'fr') => { const M = L === 'fr' ? FAQ_SYN : (FAQ_SYN_L[L] || {}); return M[w] || M[w.replace(/s$/, '')] || M[w.replace(/(es|s|x)$/, 'e')] || M[w.replace(/er$/, 'e')] || ''; };
-    const faqFold = t => String(t || '').toLowerCase().replace(/ł/g, 'l').replace(/ß/g, 'ss').replace(/ø/g, 'o').replace(/æ/g, 'ae').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
+    const faqFold = t => String(t || '').toLowerCase().replace(/ł/g, 'l').replace(/ß/g, 'ss').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
     const FAQ_STEM = {
         fr: w => (w.length > 4 ? w.replace(/(ements|ement|ations|ation|ees|es|s|x|e)$/, '') : w.replace(/s$/, '')),
         en: w => (w.length > 4 ? w.replace(/(ings|ing|ed|es|s)$/, '') : w.replace(/s$/, '')),
@@ -2276,6 +2280,8 @@
         ro: w => (w.length > 4 ? w.replace(/(urilor|ilor|elor|ului|uri|ile|ele|lor|ul|le|ii|ei|a|e|i|u)$/, '') : w),
         fi: w => (w.length > 4 ? w.replace(/(issa|ista|illa|ilta|ille|iden|ien|jen|ihin|ssa|sta|lla|lta|lle|ksi|een|ja|ta|na|t|n|a)$/, '') : w),
         hu: w => (w.length > 4 ? w.replace(/(oknak|eknek|akat|okat|eket|nak|nek|ban|ben|bol|rol|tol|hoz|hez|val|vel|ak|ok|ek|at|et|ot|t|k)$/, '') : w),
+        hr: w => (w.length > 4 ? w.replace(/(ovima|evima|ama|ima|om|em|og|eg|oj|ih|im|a|e|i|o|u)$/, '') : w),
+        sl: w => (w.length > 4 ? w.replace(/(ami|ih|om|em|ov|ev|a|e|i|o|u)$/, '') : w),
     };
     const faqStem = (w, L = 'fr') => (FAQ_STEM[L] || FAQ_STEM.fr)(w);
     // un mot composé (« faire-part ») reste entier dans la question ; dans les textes, il compte entier et en morceaux

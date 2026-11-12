@@ -1,0 +1,238 @@
+fr ¦ hr ¦ sl
+# ═════ zone « reste4 » : croate (hr) et slovène (sl) ═════
+Mesures anciennes par région ¦ Stare mjere po regijama ¦ Stare mere po pokrajinah
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Mjere su se razlikovale od pokrajine do pokrajine, ponekad i od sela do sela. Odaberi regiju, vrijednost i jedinicu: aplikacija daje protuvrijednost u metrima, arima ili litrama te u drugim mjerama tog mjesta. ¦ Mere so se razlikovale od pokrajine do pokrajine, včasih celo od vasi do vasi. Izberi pokrajino, vrednost in enoto: aplikacija poda ustreznico v metrih, arih ali litrih ter v drugih merah kraja.
+Région / ville ¦ Regija / grad ¦ Pokrajina / mesto
+Entre une valeur. ¦ Unesi vrijednost. ¦ Vnesi vrednost.
+Longueurs ¦ Duljine ¦ Dolžine
+Grains (matières sèches) ¦ Žito (suhe tvari) ¦ Žito (suhe snovi)
+Liquides (vin, cidre, huile) ¦ Tekućine (vino, jabukovača, ulje) ¦ Tekočine (vino, jabolčnik, olje)
+kilomètre ¦ kilometar ¦ kilometer
+mètre carré ¦ kvadratni metar ¦ kvadratni meter
+are ¦ ar ¦ ar
+hectare ¦ hektar ¦ hektar
+litre ¦ litra ¦ liter
+hectolitre ¦ hektolitar ¦ hektoliter
+Paris, Île-de-France (mesures du roi) ¦ Pariz, Île-de-France (kraljevske mjere) ¦ Pariz, Île-de-France (kraljeve mere)
+Lyon, Lyonnais ¦ Lyon, Lyonnais ¦ Lyon, Lyonnais
+Bretagne (Rennes) ¦ Bretanja (Rennes) ¦ Bretanja (Rennes)
+Normandie (Rouen) ¦ Normandija (Rouen) ¦ Normandija (Rouen)
+Bourgogne (Dijon, Beaune) ¦ Burgundija (Dijon, Beaune) ¦ Burgundija (Dijon, Beaune)
+Provence (Marseille) ¦ Provansa (Marseille) ¦ Provansa (Marseille)
+Lorraine (Nancy) ¦ Lorena (Nancy) ¦ Lorena (Nancy)
+Alsace (Strasbourg) ¦ Alzas (Strasbourg) ¦ Alzacija (Strasbourg)
+Flandre (Lille) ¦ Flandrija (Lille) ¦ Flandrija (Lille)
+très variable ¦ vrlo promjenjivo ¦ zelo različno
+très variable d’une ville à l’autre ¦ vrlo promjenjivo od grada do grada ¦ zelo različno od mesta do mesta
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ vrlo promjenjivo (od 1 500 do 3 000 m² ovisno o mjestu) ¦ zelo različno (od 1 500 do 3 000 m² glede na kraj)
+de 45 à 50 litres selon le lieu ¦ od 45 do 50 litara ovisno o mjestu ¦ od 45 do 50 litrov glede na kraj
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈: približna vrijednost ili vrijednost koja se razlikovala od grada do grada. Izvori: zakon od 19. frimairea godine VIII (pied du roi, toise) i „Tables de comparaison entre les mesures anciennes et celles qui les remplacent” objavljene za svaki departman (godina X – 1812.). Za određenu općinu potraži tablicu svog departmana u departmanskom arhivu. ¦ ≈: približna vrednost ali vrednost, ki se je razlikovala od mesta do mesta. Viri: zakon z dne 19. frimairja leta VIII (pied du roi, toise) in »Tables de comparaison entre les mesures anciennes et celles qui les remplacent«, objavljene za vsak departma (leto X – 1812). Za določeno občino poišči tabelo svojega departmaja v departmajskem arhivu.
+Âge ↔ date de naissance ¦ Dob ↔ datum rođenja ¦ Starost ↔ datum rojstva
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ Zapisi često navode dob umjesto datuma rođenja. „32 godine u trenutku smrti 12/03/1790” → rođen između dva datuma. Ili obrnuto: točna dob na neki datum. ¦ Vpisi pogosto navajajo starost namesto datuma rojstva. »32 let ob smrti 12/03/1790« → rojen med dvema datumoma. Ali obratno: točna starost na določen datum.
+exact (ans révolus) ¦ točno (navršene godine) ¦ točno (dopolnjena leta)
+« environ » (± 2 ans) ¦ „otprilike” (± 2 godine) ¦ »približno« (± 2 leti)
+arrondi (± 5 ans) ¦ zaokruženo (± 5 godina) ¦ zaokroženo (± 5 let)
+très vague (± 10 ans) ¦ vrlo neodređeno (± 10 godina) ¦ zelo nedoločno (± 10 let)
+À la date de ¦ Na datum ¦ Na datum
+Entre un âge et la date de l’acte. ¦ Unesi dob i datum zapisa. ¦ Vnesi starost in datum vpisa.
+Âge le ¦ Dob na dan ¦ Starost na dan
+Entre une date de naissance et une autre date. ¦ Unesi datum rođenja i drugi datum. ¦ Vnesi datum rojstva in drug datum.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Datum nije prepoznat: napiši na primjer 12/03/1790, 03/1790 ili 1790. ¦ Datum ni prepoznan: napiši na primer 12/03/1790, 03/1790 ali 1790.
+Naissance entre le {from} et le {to} ¦ Rođenje između {from} i {to} ¦ Rojstvo med {from} in {to}
+soit vers {when} (entre {lo} et {hi} révolus) ¦ tj. oko {when} (između navršenih {lo} i {hi}) ¦ tj. okoli {when} (med dopolnjenimi {lo} in {hi})
+soit vers {when} ¦ tj. oko {when} ¦ tj. okoli {when}
+Date non reconnue : écris par exemple 13/03/1757. ¦ Datum nije prepoznat: napiši na primjer 13/03/1757. ¦ Datum ni prepoznan: napiši na primer 13/03/1757.
+La seconde date est avant la naissance. ¦ Drugi datum je prije rođenja. ¦ Drugi datum je pred rojstvom.
+soit {days} de vie ¦ tj. {days} života ¦ tj. {days} življenja
+Entre {min} et {max} ¦ Između {min} i {max} ¦ Med {min} in {max}
+Une des dates est incomplète. ¦ Jedan od datuma je nepotpun. ¦ Eden od datumov je nepopoln.
+Écart entre deux dates ¦ Razmak između dva datuma ¦ Razmik med dvema datumoma
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ Koliko je vremena prošlo između dva zapisa? Godine, mjeseci, dani, ukupan broj dana i tjedana. Nepotpun datum („03/1790”, „1802”) daje najmanji i najveći razmak. ¦ Koliko časa je minilo med dvema vpisoma? Leta, meseci, dnevi, skupno število dni in tednov. Nepopoln datum (»03/1790«, »1802«) poda najmanjši in največji razmik.
+9 novembre 1799 ¦ 09/11/1799 ¦ 09/11/1799
+Entre deux dates. ¦ Unesi dva datuma. ¦ Vnesi dva datuma.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Datum nije prepoznat: napiši na primjer 14/07/1789, 07/1789 ili 1789. ¦ Datum ni prepoznan: napiši na primer 14/07/1789, 07/1789 ali 1789.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (drugi datum je stariji: razmak se računa unatrag) ¦ (drugi datum je starejši: razmik se šteje nazaj)
+{weeks} et {days} ¦ {weeks} i {days} ¦ {weeks} in {days}
+Du {a} au {b} : une date est incomplète. ¦ Od {a} do {b}: jedan datum je nepotpun. ¦ Od {a} do {b}: en datum je nepopoln.
+=semaine ¦ tjedan|tjedna|tjedana ¦ teden|tedna|tedni|tednov
+Jour de la semaine ¦ Dan u tjednu ¦ Dan v tednu
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ Koji je dan u tjednu bio neki datum? Prije 1582. vrijedi julijanski kalendar: odaberi običaj. ¦ Kateri dan v tednu je bil določen datum? Pred letom 1582 velja julijanski koledar: izberi rabo.
+France (julien jusqu’au 9 déc. 1582) ¦ Francuska (julijanski do 9. pros. 1582.) ¦ Francija (julijanski do 9. dec. 1582)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Rim (julijanski do 4. list. 1582.) ¦ Rim (julijanski do 4. okt. 1582)
+Toujours grégorien ¦ Uvijek gregorijanski ¦ Vedno gregorijanski
+Toujours julien ¦ Uvijek julijanski ¦ Vedno julijanski
+Indices pour la recherche (baptêmes, mariages…) ¦ Tragovi za istraživanje (krštenja, vjenčanja…) ¦ Namigi za raziskovanje (krsti, poroke…)
+Entre une date complète. ¦ Unesi potpun datum. ¦ Vnesi popoln datum.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ Potreban je potpun datum: dan, mjesec i godina (npr. 14/07/1789). ¦ Potreben je popoln datum: dan, mesec in leto (npr. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Ovaj dan nije postojao u Francuskoj: nakon 9. prosinca 1582. slijedio je 20. prosinca. ¦ Ta dan v Franciji ni obstajal: 9. decembru 1582 je sledil 20. december.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Ovaj dan nije postojao u Rimu: nakon 4. listopada 1582. slijedio je 15. listopada. ¦ Ta dan v Rimu ni obstajal: 4. oktobru 1582 je sledil 15. oktober.
+soit le {date} dans le calendrier grégorien ¦ tj. {date} po gregorijanskom kalendaru ¦ tj. {date} po gregorijanskem koledarju
+soit le {date} dans le calendrier julien ¦ tj. {date} po julijanskom kalendaru ¦ tj. {date} po julijanskem koledarju
+C’était un {day} ¦ Bio je to dan: {day} ¦ Bil je dan: {day}
+julien ¦ julijanski ¦ julijanski
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ Dan Gospodnji: mnogo krštenja (često na dan rođenja ili dan poslije); vjenčanja rijetka. ¦ Gospodov dan: veliko krstov (pogosto na dan rojstva ali naslednji dan); poroke redke.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Uobičajen dan vjenčanja na selu u doba Staroga režima. ¦ Običajen dan za poroke na podeželju v času starega režima.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Omiljeni dan vjenčanja u mnogim župama u doba Staroga režima. ¦ Najljubši dan za poroke v mnogih župnijah v času starega režima.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ Posni dan u nekim biskupijama: vjenčanja rjeđa. ¦ Postni dan v nekaterih škofijah: poroke redkejše.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Običan dan; blagdani Uzašašća i Tijelova. ¦ Navaden dan; praznika vnebohoda in sv. Rešnjega telesa.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Posni dan (spomen na Muku): izbjegavalo se vjenčati tog dana. ¦ Postni dan (spomin na trpljenje): na ta dan so se izogibali porokam.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ Posni dan do 18. stoljeća u mnogim biskupijama; u 19. stoljeću čest dan građanskih vjenčanja. ¦ Postni dan do 18. stoletja v mnogih škofijah; v 19. stoletju pogost dan civilnih porok.
+Saint du jour et fêtes mobiles ¦ Svetac dana i pomični blagdani ¦ Svetnik dneva in premični prazniki
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Pomični blagdani ovise o Uskrsu. Svetac dana pomaže razumjeti ime: često se davalo ime sveca s dana rođenja ili krštenja. ¦ Premični prazniki so odvisni od velike noči. Svetnik dneva pomaga razumeti ime: pogosto so dali ime svetnika z dneva rojstva ali krsta.
+Comput ¦ Komput ¦ Komput
+auto (julien avant 1583) ¦ auto (julijanski prije 1583.) ¦ samodejno (julijanski pred 1583)
+date|Mois ¦ Mjesec ¦ Mesec
+Entre une année entre 400 et 2400. ¦ Unesi godinu između 400 i 2400. ¦ Vnesi leto med 400 in 2400.
+Dates dans le calendrier julien. ¦ Datumi po julijanskom kalendaru. ¦ Datumi po julijanskem koledarju.
+Ce jour n’existe pas. ¦ Taj dan ne postoji. ¦ Ta dan ne obstaja.
+Dans ta base, nés ou baptisés ce jour : ¦ U tvojoj bazi, rođeni ili kršteni tog dana: ¦ V tvoji bazi, rojeni ali krščeni na ta dan:
+porte le prénom du saint du jour ¦ nosi ime sveca dana ¦ nosi ime svetnika dneva
+Saint du jour indisponible. ¦ Svetac dana nije dostupan. ¦ Svetnik dneva ni na voljo.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Sveci: uobičajeni kalendar francuskih almanaha (onaj iz widgeta „Ime i svetac dana”); mijenjao se ovisno o razdoblju i biskupiji. ¦ Svetniki: običajni koledar francoskih almanahov (tisti iz gradnika »Ime in svetnik dneva«); spreminjal se je glede na obdobje in škofijo.
+dimanche, début du temps de la Septuagésime ¦ nedjelja, početak vremena Sedamdesetnice ¦ nedelja, začetek predpostnega časa (septuagezima)
+dimanche ¦ nedjelja ¦ nedelja
+dimanche gras ¦ pokladna nedjelja ¦ pustna nedelja
+veille des Cendres, fin du carnaval ¦ dan prije Pepelnice, kraj karnevala ¦ dan pred pepelnico, konec pusta
+début du Carême : plus de mariages jusqu’à Pâques ¦ početak korizme: nema vjenčanja do Uskrsa ¦ začetek posta: do velike noči ni več porok
+dimanche des Brandons ¦ nedjelja krijesova (Brandons) ¦ nedelja kresov (Brandons)
+jeudi ¦ četvrtak ¦ četrtek
+Pâques fleuries ¦ Cvjetnica ¦ Cvetna nedelja
+baptêmes solennels ¦ svečana krštenja ¦ slovesni krsti
+dimanche, fin du temps pascal des mariages interdits ¦ nedjelja, kraj uskrsnog razdoblja bez vjenčanja ¦ nedelja, konec velikonočnega časa brez porok
+lundi, processions dans les champs ¦ ponedjeljak, procesije po poljima ¦ ponedeljek, procesije po poljih
+jeudi (fêtée le dimanche suivant après 1802) ¦ četvrtak (nakon 1802. slavi se sljedeće nedjelje) ¦ četrtek (po letu 1802 praznovan naslednjo nedeljo)
+vendredi ¦ petak ¦ petek
+Heures canoniques ¦ Kanonski časovi ¦ Kanonske ure
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ Zapisi ponekad navode vrijeme „u doba večernje” ili „nakon velike mise”. Crkveni časovi pratili su sunce: dan je bio podijeljen na 12 sati, duljih ljeti nego zimi. ¦ Vpisi včasih navajajo čas »ob večernicah« ali »po veliki maši«. Cerkvene ure so sledile soncu: dan je bil razdeljen na 12 ur, daljših poleti kot pozimi.
+(équinoxe) ¦ (ekvinocij) ¦ (enakonočje)
+(jours les plus longs) ¦ (najdulji dani) ¦ (najdaljši dnevi)
+(jours les plus courts) ¦ (najkraći dani) ¦ (najkrajši dnevi)
+vers {time} ¦ oko {time} ¦ okoli {time}
+{winter} en hiver, {summer} en été ¦ {winter} zimi, {summer} ljeti ¦ {winter} pozimi, {summer} poleti
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ Napiši navod na francuskom („à l’heure de vêpres”, „après complies”…) ili pročitaj tablicu. ¦ Napiši navedbo v francoščini (»à l’heure de vêpres«, »après complies«…) ali preberi tabelo.
+{hour} en {month} : {time} ¦ {hour} u mjesecu {month}: {time} ¦ {hour} v mesecu {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ između {dec} u prosincu i {jun} u lipnju ¦ med {dec} decembra in {jun} junija
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Sat nije prepoznat: matines, laudes, prime, tierce, sexte, none, vêpres, complies ili angélus. ¦ Ura ni prepoznana: matines, laudes, prime, tierce, sexte, none, vêpres, complies ali angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ noćna služba (u župama se često pjevala večer prije ili u ranu zoru) ¦ nočna molitev (v župnijah pogosto peta prejšnji večer ali zgodaj zjutraj)
+à l’aube, avant le lever du soleil ¦ u zoru, prije izlaska sunca ¦ ob zori, pred sončnim vzhodom
+6e heure, midi ¦ 6. sat, podne ¦ 6. ura, poldne
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ u suton (nedjeljom, u župi, često već od ranog poslijepodneva) ¦ ob mraku (ob nedeljah v župniji pogosto že od zgodnjega popoldneva)
+à la nuit, avant le coucher ¦ noću, prije spavanja ¦ ponoči, pred spanjem
+cloche du matin, de midi et du soir ¦ jutarnje, podnevno i večernje zvono ¦ jutranji, opoldanski in večerni zvon
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Sunčevo vrijeme (podne = sunce u najvišoj točki), izračunato za središnju Francusku; službeno vrijeme postoji tek od 1891. Stvarna vremena razlikovala su se od župe do župe i od samostana do samostana. ¦ Sončni čas (poldne = sonce v najvišji točki), izračunan za osrednjo Francijo; uradni čas obstaja šele od leta 1891. Dejanski časi so se razlikovali od župnije do župnije in od samostana do samostana.
+Monnaies étrangères anciennes ¦ Stari strani novci ¦ Stari tuji kovanci
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ U ugovorima i inventarima nalaze se pistole, dukati, florini ili pijastri. Njihova vrijednost u livres tournois, obračunskom novcu kraljevstva, ovisno o razdoblju. ¦ V pogodbah in inventarjih najdemo pistole, dukate, florinte ali piastre. Njihova vrednost v livres tournois, obračunskem denarju kraljestva, glede na obdobje.
+Monnaie ¦ Novac ¦ Kovanec
+XVIIe siècle (1640-1700) ¦ 17. stoljeće (1640.-1700.) ¦ 17. stoletje (1640-1700)
+XVIIIe siècle (1726-1789) ¦ 18. stoljeće (1726.-1789.) ¦ 18. stoletje (1726-1789)
+Toutes les monnaies à cette époque ¦ Svi novci u tom razdoblju ¦ Vsi kovanci v tem obdobju
+soit ≈ {n} livres ¦ tj. ≈ {n} livres ¦ tj. ≈ {n} livres
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Ovaj novac u to vrijeme nije bio u optjecaju u Francuskoj. ¦ Ta kovanec v tistem času v Franciji ni bil v obtoku.
+Louis d’or (France) ¦ Louis d’or (Francuska) ¦ Louis d’or (Francija)
+Écu d’or au soleil (France) ¦ Écu d’or au soleil (Francuska) ¦ Écu d’or au soleil (Francija)
+Écu blanc ou louis d’argent (France) ¦ Écu blanc ili srebrni louis (Francuska) ¦ Écu blanc ali srebrni louis (Francija)
+Pistole (Espagne, Italie) ¦ Pistola (Španjolska, Italija) ¦ Pistola (Španija, Italija)
+Ducat d’or (Venise, Hollande, Empire) ¦ Zlatni dukat (Venecija, Nizozemska, Carstvo) ¦ Zlati dukat (Benetke, Nizozemska, cesarstvo)
+Florin de Hollande (gulden) ¦ Nizozemski florin (gulden) ¦ Nizozemski florint (gulden)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Rajnski gulden ili florin (Njemačka, Alzas, Švicarska) ¦ Renski gulden ali florint (Nemčija, Alzacija, Švica)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Taler, riksdaler (Carstvo, Saska, Pruska) ¦ Tolar, riksdalar (cesarstvo, Saška, Prusija)
+Piastre ou réal de huit (Espagne) ¦ Pijastar ili real od osam (Španjolska) ¦ Piaster ali real za osem (Španija)
+Livre sterling (Angleterre) ¦ Funta sterlinga (Engleska) ¦ Funt šterling (Anglija)
+Livre de Lorraine ¦ Lotarinški livre ¦ Lorenski livre
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ uveden 1640. u vrijednosti 10 livres; 24 livres od 1726. do Revolucije ¦ uveden leta 1640 za 10 livres; 24 livres od leta 1726 do revolucije
+plus frappé après 1640 ¦ ne kuje se više nakon 1640. ¦ po letu 1640 ni bil več kovan
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 3 livres 1641.; veliki écu od 6 livres (i mali écu od 3 livres) u 18. stoljeću ¦ 3 livres leta 1641; veliki écu za 6 livres (in mali écu za 3 livres) v 18. stoletju
+souvent une monnaie de compte valant 10 livres ¦ često obračunski novac vrijedan 10 livres ¦ pogosto obračunski denar v vrednosti 10 livres
+« piastre gourde » des colonies ¦ kolonijalni „piastre gourde” ¦ kolonialni »piastre gourde«
+monnaie de compte, d’après le cours du change ¦ obračunski novac, prema tečaju ¦ obračunski denar, po menjalnem tečaju
+15 sols 6 deniers tournois ¦ 15 sols 6 deniers tournois ¦ 15 sols 6 deniers tournois
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Približne vrijednosti (≈), prema monetarnim uredbama od Luja XIII. do Luja XVI., težini čistog zlata ili srebra u kovanicama i tečaju u Parizu (Savary, „Dictionnaire universel de commerce”). Tečajevi su se često mijenjali, osobito od 1689. do 1726.: ovo je samo red veličine. ¦ Približne vrednosti (≈), po denarnih odlokih od Ludvika XIII. do Ludvika XVI., teži čistega zlata ali srebra v kovancih in menjalnem tečaju v Parizu (Savary, »Dictionnaire universel de commerce«). Tečaji so se pogosto spreminjali, zlasti od 1689 do 1726: to je le red velikosti.
+Calculateur de générations ¦ Kalkulator generacija ¦ Kalkulator rodov
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ Koliko je generacija između dvije godine? U prosjeku 25 do 33 godine po generaciji: oko 30 godina po muškoj liniji, 27 godina po ženskoj. ¦ Koliko rodov je med dvema letoma? V povprečju 25 do 33 let na rod: približno 30 let po moški liniji, 27 let po ženski.
+Année (ta naissance) ¦ Godina (tvoje rođenje) ¦ Leto (tvoje rojstvo)
+Année (l’ancêtre) ¦ Godina (predak) ¦ Leto (prednik)
+Entre deux années. ¦ Unesi dvije godine. ¦ Vnesi dve leti.
+Générations en arrière ¦ Generacija unatrag ¦ Rodov nazaj
+Depuis l’année ¦ Od godine ¦ Od leta
+Entre deux années différentes. ¦ Unesi dvije različite godine. ¦ Vnesi dve različni leti.
+Environ {min} à {max} générations ¦ Otprilike {min} do {max} generacija ¦ Približno {min} do {max} rodov
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: ≈ {male} generacija po muškoj liniji (30 godina), ≈ {female} po ženskoj liniji (27 godina) ¦ {years}: ≈ {male} rodov po moški liniji (30 let), ≈ {female} po ženski liniji (27 let)
+Entre un nombre de générations (1 à 40) et une année. ¦ Unesi broj generacija (1 do 40) i godinu. ¦ Vnesi število rodov (1 do 40) in leto.
+ancêtres de la génération {n} ¦ preci generacije {n} ¦ predniki rodu {n}
+{gens} en arrière → nés vers {from}–{to} ¦ {gens} unatrag → rođeni oko {from}–{to} ¦ {gens} nazaj → rojeni okoli {from}–{to}
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ ≈ {male} po muškoj liniji, ≈ {female} po ženskoj liniji ¦ ≈ {male} po moški liniji, ≈ {female} po ženski liniji
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ {at} {label} u teoriji (Sosa {from} do {to}); ukupno {total} predaka do te generacije ¦ {at} {label} v teoriji (Sosa {from} do {to}); skupno {total} prednikov do tega rodu
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ U teoriji se broj predaka udvostručuje sa svakom generacijom; u praksi ih je manje jer su se rođaci međusobno vjenčavali (implex). ¦ V teoriji se število prednikov z vsakim rodom podvoji; v praksi jih je manj, ker so se sorodniki poročali med seboj (implex).
+le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754
+/Documents/Scans généalogie ¦ /Dokumenti/Rodoslovni skenovi ¦ /Dokumenti/Rodoslovni skeni
+Saint-Martin de Brive ¦ Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ Župa osnovana 1792.; vidi i kapelu… ¦ Župnija ustanovljena leta 1792; glej tudi kapelo…
+Religion et noblesse ¦ Vjera i plemstvo ¦ Vera in plemstvo
+Travail et société ¦ Rad i društvo ¦ Delo in družba
+Voyages et lieux ¦ Putovanja i mjesta ¦ Potovanja in kraji
+Temps et nature ¦ Vrijeme i priroda ¦ Čas in narava
+Formes et repères ¦ Oblici i oznake ¦ Oblike in oznake
+Artistique ¦ Umjetničko ¦ Umetniško
+Voyages ¦ Putovanja ¦ Potovanja
+Tous les emojis ¦ Svi emojiji ¦ Vsi emodžiji
+Autres emojis ¦ Ostali emojiji ¦ Drugi emodžiji
+Choisir un fond ¦ Odaberi pozadinu ¦ Izberi ozadje
+Choisir un fond… ¦ Odaberi pozadinu… ¦ Izberi ozadje…
+Choisir un fond de carte ¦ Odaberi podlogu karte ¦ Izberi podlago zemljevida
+Choisir une icône… ¦ Odaberi ikonu… ¦ Izberi ikono…
+Aucune icône ¦ Bez ikone ¦ Brez ikone
+Aucun fond ¦ Bez pozadine ¦ Brez ozadja
+choisir ¦ odabir ¦ izbira
+valider ¦ potvrdi ¦ potrdi
+fermer ¦ zatvori ¦ zapri
+Chercher une icône ¦ Traži ikonu ¦ Išči ikono
+Chercher un fond ¦ Traži pozadinu ¦ Išči ozadje
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Traži pozadinu… (npr. Cassini, reljef, 1850) ¦ Išči ozadje… (npr. Cassini, relief, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Traži… (na francuskom, npr. coeur, bateau, chien) ¦ Išči… (v francoščini, npr. coeur, bateau, chien)
+Chercher… (ex. église, mariage, étoile) ¦ Traži… (npr. crkva, vjenčanje, zvijezda) ¦ Išči… (npr. cerkev, poroka, zvezda)
+Utiliser « {x} » ¦ Koristi „{x}” ¦ Uporabi »{x}«
+1 icône pour « {q} » ¦ 1 ikona za „{q}” ¦ 1 ikona za »{q}«
+{n} icônes pour « {q} » ¦ Ikona za „{q}”: {n} ¦ Ikon za »{q}«: {n}
+1 fond pour « {q} » ¦ 1 pozadina za „{q}” ¦ 1 ozadje za »{q}«
+{n} fonds pour « {q} » ¦ Pozadina za „{q}”: {n} ¦ Ozadij za »{q}«: {n}
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ Ništa za „{q}”. Provjeri pravopis ili pokušaj s drugom riječi. ¦ Nič za »{q}«. Preveri črkovanje ali poskusi z drugo besedo.
+Retirer l’icône ¦ Ukloni ikonu ¦ Odstrani ikono
+Retirer le fond ¦ Ukloni pozadinu ¦ Odstrani ozadje
+Allemand et alsacien ¦ Njemački i alzaški ¦ Nemščina in alzaščina
+Néerlandais / flamand ¦ Nizozemski / flamanski ¦ Nizozemščina / flamščina
+Croate / serbe en lettres latines ¦ Hrvatski / srpski latinicom ¦ Hrvaščina / srbščina v latinici
+Slovène ¦ Slovenski ¦ Slovenščina
+Gaélique irlandais ¦ Irski gaelski ¦ Irska gelščina
+Biélorusse ¦ Bjeloruski ¦ Beloruščina
+Serbe en cyrillique ¦ Srpski ćirilicom ¦ Srbščina v cirilici
+Hébreu ¦ Hebrejski ¦ Hebrejščina
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Datumi po gregorijanskom kalendaru. Dob u starim zapisima često je približna: „oko 40 godina” može značiti 35 ili 45. ¦ Datumi po gregorijanskem koledarju. Starost v starih vpisih je pogosto približna: »okoli 40 let« lahko pomeni 35 ali 45.
+Changer dans l’onglet Personnes ¦ Promijeni u kartici Osobe ¦ Spremeni v zavihku Osebe
+Mode de chronologie parallèle ¦ Način paralelne vremenske crte ¦ Način vzporedne časovnice
+Les événements sans année restent sur les fiches. ¦ Događaji bez godine ostaju na zapisima. ¦ Dogodki brez leta ostanejo na zapisih.
+Modifier la frise historique ¦ Uredi povijesnu vremensku crtu ¦ Uredi zgodovinsko časovnico
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Veliki događaji isporučeni s aplikacijom i tvoji (lokalna povijest) ¦ Veliki dogodki, priloženi aplikaciji, in tvoji (krajevna zgodovina)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Mediji i arhivski predmeti iz tvoje baze, kao osobe: popis lijevo (A → Ž ili u 📁 mapama), zapis desno. ¦ Mediji in arhivsko gradivo iz tvoje baze, kot osebe: seznam levo (A → Ž ali v 📁 mapah), zapis desno.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Mape blaga (preimenovati ih, stvoriti, obrisati, odabrati što ide u njih), redoslijed, što se prikazuje (trenutno: {n}) ¦ Mape zakladov (jih preimenovati, ustvariti, izbrisati, izbrati, kaj gre vanje), vrstni red, kaj se prikaže (trenutno: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Mape blaga (preimenovati ih, stvoriti, obrisati, odabrati što ide u njih), redoslijed, što se prikazuje ¦ Mape zakladov (jih preimenovati, ustvariti, izbrisati, izbrati, kaj gre vanje), vrstni red, kaj se prikaže
+Me le rappeler (la veille, une semaine avant…) ¦ Podsjeti me (dan prije, tjedan dana prije…) ¦ Opomni me (dan prej, teden dni prej…)
+choses à vérifier ¦ stvari za provjeru ¦ stvari za preverjanje
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Za pokazivanje stabla nekome tko se ne snalazi s računalom: vrlo veliki gumbi, samo stablo, fotografije i zapisi, i ništa što se može slučajno promijeniti. ¦ Za prikaz drevesa nekomu, ki mu računalnik ni domač: zelo veliki gumbi, samo drevo, fotografije in zapisi, in nič, kar bi se dalo pomotoma spremeniti.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Nema pretpostavke: pitanje za razriješiti („rođen u Navesu ili u Tulleu?”), s dokazima za i protiv. ¦ Ni domneve: vprašanje za razrešitev (»rojen v Navesu ali v Tullu?«), z dokazi za in proti.
+Détaillée ¦ Detaljno ¦ Podrobno
+Ce qu’on inclut ¦ Što se uključuje ¦ Kaj se vključi
+Texte de l’app ¦ Tekst aplikacije ¦ Besedilo aplikacije
+Regénérer ¦ Ponovno generiraj ¦ Znova ustvari
+Une journée… ¦ Jedan dan… ¦ En dan…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Ponovno napiši tekst prema zapisu i vidi što se promijenilo ¦ Znova napiši besedilo po zapisu in poglej, kaj se je spremenilo
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ Kratka priča o jednom danu iz njegova života: dob, obitelj, selo, zanimanje, kalendar, vrijeme, kontekst ¦ Kratka zgodba o enem dnevu iz njegovega življenja: starost, družina, vas, poklic, koledar, vreme, okoliščine
+Ajouter un événement local ¦ Dodaj lokalni događaj ¦ Dodaj krajevni dogodek
+Rien dans cette sorte pendant sa vie. ¦ Ništa od te vrste tijekom njegova života. ¦ Nič te vrste v njegovem življenju.
+Voir toute la liste et ses sources ¦ Pogledaj cijeli popis i njegove izvore ¦ Poglej ves seznam in njegove vire
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ Proslava, poplava, požar u selu… vezano uz općinu ¦ Praznik, poplava, požar v vasi… vezano na občino
+Sortes d’événements ¦ Vrste događaja ¦ Vrste dogodkov
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Članak, radijski intervju, televizijska emisija, obavijest o rođenju ili osmrtnica, objavljena fotografija… ¦ Članek, radijski intervju, televizijska oddaja, obvestilo o rojstvu ali osmrtnica, objavljena fotografija…
+Ajouter un passage ¦ Dodaj pojavljivanje ¦ Dodaj nastop
+La revue de presse de cette personne ¦ Pregled tiska ove osobe ¦ Pregled tiska te osebe
+Modifier l’identifiant Wikidata ¦ Uredi Wikidata identifikator ¦ Uredi identifikator Wikidata
+Plus de détails ¦ Više detalja ¦ Več podrobnosti

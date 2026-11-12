@@ -1,0 +1,422 @@
+fr ¦ hr ¦ sl
+# ═════ zone « composants » : croate (hr) et slovène (sl) ═════
+Enregistrer ¦ Spremi ¦ Shrani
+Annuler ¦ Odustani ¦ Prekliči
+Fermer ¦ Zatvori ¦ Zapri
+Supprimer ¦ Izbriši ¦ Izbriši
+Retirer ¦ Ukloni ¦ Odstrani
+Modifier ¦ Uredi ¦ Uredi
+Créer ¦ Stvori ¦ Ustvari
+Ajouter ¦ Dodaj ¦ Dodaj
+Relier ¦ Poveži ¦ Poveži
+↺ Remettre comme au départ ¦ ↺ Vrati na početno ¦ ↺ Ponastavi na začetno
+Remettre comme au départ ¦ Vrati na početno ¦ Ponastavi na začetno
+↶ Annuler ¦ ↶ Poništi ¦ ↶ Razveljavi
+↷ Rétablir ¦ ↷ Ponovi ¦ ↷ Uveljavi
+Rétablir ¦ Ponovi ¦ Uveljavi
+Continuer ¦ Nastavi ¦ Nadaljuj
+Réessayer ¦ Pokušaj ponovno ¦ Poskusi znova
+Ouvrir ¦ Otvori ¦ Odpri
+↗ Ouvrir ¦ ↗ Otvori ¦ ↗ Odpri
+Renommer ¦ Preimenuj ¦ Preimenuj
+Dupliquer ¦ Udvostruči ¦ Podvoji
+Remplacer ¦ Zamijeni ¦ Zamenjaj
+Choisir ¦ Odaberi ¦ Izberi
+Choisir… ¦ Odaberi… ¦ Izberi…
+Changer ¦ Promijeni ¦ Spremeni
+Exporter ¦ Izvezi ¦ Izvozi
+Importer ¦ Uvezi ¦ Uvozi
+Imprimer ¦ Ispiši ¦ Natisni
+🖨 Imprimer ¦ 🖨 Ispiši ¦ 🖨 Natisni
+💾 Enregistrer ¦ 💾 Spremi ¦ 💾 Shrani
+⤒ Importer ¦ ⤒ Uvezi ¦ ⤒ Uvozi
+⤓ Exporter ▾ ¦ ⤓ Izvezi ▾ ¦ ⤓ Izvozi ▾
+📋 Copier ¦ 📋 Kopiraj ¦ 📋 Kopiraj
+✓ Enregistré ¦ ✓ Spremljeno ¦ ✓ Shranjeno
+Enregistré ¦ Spremljeno ¦ Shranjeno
+Enregistrement… ¦ Spremanje… ¦ Shranjevanje…
+⚠️ Pas enregistré ¦ ⚠️ Nije spremljeno ¦ ⚠️ Ni shranjeno
+• modifié ¦ • izmijenjeno ¦ • spremenjeno
+Plein écran ¦ Cijeli zaslon ¦ Celoten zaslon
+Plus d’actions ¦ Više radnji ¦ Več dejanj
+Aide ¦ Pomoć ¦ Pomoč
+Aide : ¦ Pomoć: ¦ Pomoč:
+En savoir plus (FAQ) → ¦ Saznaj više (FAQ) → ¦ Več o tem (FAQ) →
+Clique pour lire la suite ¦ Klikni za nastavak ¦ Klikni za nadaljevanje
+Retour ¦ Natrag ¦ Nazaj
+← Retour ¦ ← Natrag ¦ ← Nazaj
+Oui ¦ Da ¦ Da
+Non ¦ Ne ¦ Ne
+Aucune ¦ Nijedna ¦ Nobena
+Aucun ¦ Nijedan ¦ Noben
+Tous ¦ Svi ¦ Vsi
+Toutes ¦ Sve ¦ Vse
+Tout ¦ Sve ¦ Vse
+Tout voir ¦ Pogledaj sve ¦ Poglej vse
+Voir tout ¦ Pogledaj sve ¦ Poglej vse
+Toutes ({n}) ¦ Sve ({n}) ¦ Vse ({n})
+Tout ({n}) ¦ Sve ({n}) ¦ Vse ({n})
+Rien pour l’instant ¦ Zasad ništa ¦ Za zdaj nič
+Rien ¦ Ništa ¦ Nič
+Sans titre ¦ Bez naslova ¦ Brez naslova
+Échap ¦ Esc ¦ Esc
+Entrée ¦ Enter ¦ Enter
+Début ¦ Home ¦ Home
+retour arrière ¦ backspace ¦ vračalka
+⚠️ ATTENTION ¦ ⚠️ PAŽNJA ¦ ⚠️ POZOR
+CONFIRMER ¦ POTVRDI ¦ POTRDI
+Es-tu sûr ? ¦ Jesi li siguran/sigurna? ¦ Si prepričan/prepričana?
+Confirmer ¦ Potvrdi ¦ Potrdi
+Impossible d’annuler : {err} ¦ Poništavanje nije uspjelo: {err} ¦ Razveljavitev ni uspela: {err}
+Impossible de rétablir : {err} ¦ Ponavljanje nije uspjelo: {err} ¦ Uveljavitev ni uspela: {err}
+Déjà remis : rien à annuler de plus. ¦ Već vraćeno: nema više ništa za poništiti. ¦ Že obnovljeno: ničesar več ni za razveljaviti.
+↶ Annulé : {what} ¦ ↶ Poništeno: {what} ¦ ↶ Razveljavljeno: {what}
+↶ Annulé : « {what} » ¦ ↶ Poništeno: „{what}” ¦ ↶ Razveljavljeno: »{what}«
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Nema veze s LCNDA: ništa nije izgubljeno, pokušaj ponovno. ¦ Ni povezave z LCNDA: nič ni izgubljeno, poskusi znova.
+Réponse illisible du serveur ¦ Nečitljiv odgovor poslužitelja ¦ Neberljiv odgovor strežnika
+Réponse illisible du serveur. ¦ Nečitljiv odgovor poslužitelja. ¦ Neberljiv odgovor strežnika.
+Erreur du serveur. ¦ Pogreška poslužitelja. ¦ Napaka strežnika.
+Réglage changé ¦ Postavka promijenjena ¦ Nastavitev spremenjena
+Réglage changé : « {what} » ¦ Postavka promijenjena: „{what}” ¦ Nastavitev spremenjena: »{what}«
+Réglages remis comme au départ ¦ Postavke vraćene na početno ¦ Nastavitve ponastavljene na začetno
+Chargement… ¦ Učitavanje… ¦ Nalaganje…
+Chargement de la base… ¦ Učitavanje baze… ¦ Nalaganje baze…
+Ouverture de la généalogie… ¦ Otvaranje rodoslovlja… ¦ Odpiranje rodoslovja…
+Chercher ¦ Traži ¦ Išči
+Chercher… ¦ Traži… ¦ Išči…
+Rechercher ¦ Pretraži ¦ Poišči
+Vider la case (Échap) ¦ Isprazni polje (Esc) ¦ Izprazni polje (Esc)
+Vider la case ¦ Isprazni polje ¦ Izprazni polje
+Touche « / » : aller dans la case de recherche ¦ Tipka „/”: idi u polje za pretraživanje ¦ Tipka »/«: pojdi v iskalno polje
+Filtrer ¦ Filtriraj ¦ Filtriraj
+Filtrer ▾ ¦ Filtriraj ▾ ¦ Filtriraj ▾
+Tout effacer ¦ Obriši sve ¦ Počisti vse
+Retirer ce filtre ¦ Ukloni ovaj filtar ¦ Odstrani ta filter
+Trier ¦ Poredaj ¦ Razvrsti
+Trier : ¦ Poredaj: ¦ Razvrsti:
+Les plus récents ¦ Najnoviji prvo ¦ Najnovejši najprej
+Les plus anciens ¦ Najstariji prvo ¦ Najstarejši najprej
+Les plus récentes ¦ Najnovije prvo ¦ Najnovejše najprej
+Les plus anciennes ¦ Najstarije prvo ¦ Najstarejše najprej
+Nom A → Z ¦ Naziv A → Ž ¦ Ime A → Ž
+Nom Z → A ¦ Naziv Ž → A ¦ Ime Ž → A
+Liste ¦ Popis ¦ Seznam
+Fiches ¦ Zapisi ¦ Kartice
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Kao popis: jedan redak po stavci (sličica, naziv, detalji, datum) ¦ Kot seznam: ena vrstica na element (sličica, ime, podrobnosti, datum)
+En fiches : une carte par élément, avec une grande vignette ¦ Kao zapisi: jedna kartica po stavci, s velikom sličicom ¦ Kot kartice: ena kartica na element, z veliko sličico
+Affichage des {what} ¦ Prikaz: {what} ¦ Prikaz: {what}
+Voir le suivant ↓ ¦ Pogledaj sljedeći ↓ ¦ Poglej naslednjega ↓
+Voir la suivante ↓ ¦ Pogledaj sljedeću ↓ ¦ Poglej naslednjo ↓
+Voir les {n} suivants ↓ ¦ Pogledaj sljedećih {n} ↓ ¦ Poglej naslednjih {n} ↓
+Voir les {n} suivantes ↓ ¦ Pogledaj sljedećih {n} ↓ ¦ Poglej naslednjih {n} ↓
+{n} éléments ¦ Stavki: {n} ¦ Elementov: {n}
+=élément ¦ stavka|stavke|stavki ¦ element|elementa|elementi|elementov
+éléments ¦ stavke ¦ elementi
+=personne ¦ osoba|osobe|osoba ¦ oseba|osebi|osebe|oseb
+=animal ¦ životinja|životinje|životinja ¦ žival|živali|živali|živali
+=fiche ¦ zapis|zapisa|zapisa ¦ zapis|zapisa|zapisi|zapisov
+=lieu ¦ mjesto|mjesta|mjesta ¦ kraj|kraja|kraji|krajev
+=commune ¦ općina|općine|općina ¦ občina|občini|občine|občin
+=ville ¦ grad|grada|gradova ¦ mesto|mesti|mesta|mest
+=chose ¦ stvar|stvari|stvari ¦ stvar|stvari|stvari|stvari
+=caractère ¦ znak|znaka|znakova ¦ znak|znaka|znaki|znakov
+=page ¦ stranica|stranice|stranica ¦ stran|strani|strani|strani
+=document ¦ dokument|dokumenta|dokumenata ¦ dokument|dokumenta|dokumenti|dokumentov
+=média ¦ medij|medija|medija ¦ medij|medija|mediji|medijev
+=source ¦ izvor|izvora|izvora ¦ vir|vira|viri|virov
+=événement ¦ događaj|događaja|događaja ¦ dogodek|dogodka|dogodki|dogodkov
+=étiquette ¦ oznaka|oznake|oznaka ¦ oznaka|oznaki|oznake|oznak
+=enquête ¦ istraga|istrage|istraga ¦ preiskava|preiskavi|preiskave|preiskav
+=modification ¦ izmjena|izmjene|izmjena ¦ sprememba|spremembi|spremembe|sprememb
+=famille ¦ obitelj|obitelji|obitelji ¦ družina|družini|družine|družin
+=génération ¦ generacija|generacije|generacija ¦ rod|rodova|rodovi|rodov
+=réglage ¦ postavka|postavke|postavki ¦ nastavitev|nastavitvi|nastavitve|nastavitev
+=erreur captée ¦ zabilježena pogreška|zabilježene pogreške|zabilježenih pogrešaka ¦ zabeležena napaka|zabeleženi napaki|zabeležene napake|zabeleženih napak
+=jour ¦ dan|dana|dana ¦ dan|dneva|dnevi|dni
+=type ¦ vrsta|vrste|vrsta ¦ vrsta|vrsti|vrste|vrst
+=branche ¦ grana|grane|grana ¦ veja|veji|veje|vej
+=doublon possible ¦ mogući duplikat|moguća duplikata|mogućih duplikata ¦ možni dvojnik|možna dvojnika|možni dvojniki|možnih dvojnikov
+=chose à vérifier ¦ stvar za provjeru|stvari za provjeru|stvari za provjeru ¦ stvar za preverjanje|stvari za preverjanje|stvari za preverjanje|stvari za preverjanje
+=album ¦ album|albuma|albuma ¦ album|albuma|albumi|albumov
+=chanson ¦ pjesma|pjesme|pjesama ¦ pesem|pesmi|pesmi|pesmi
+=titre ¦ naslov|naslova|naslova ¦ naslov|naslova|naslovi|naslovov
+Nom, prénom… (2 lettres suffisent) ¦ Prezime, ime… (dovoljna su 2 slova) ¦ Priimek, ime… (dovolj sta 2 črki)
+Ville, village, paroisse… ¦ Grad, selo, župa… ¦ Mesto, vas, župnija…
+＋ Ajouter une personne… ¦ ＋ Dodaj osobu… ¦ ＋ Dodaj osebo…
+＋ Ajouter un lieu… ¦ ＋ Dodaj mjesto… ¦ ＋ Dodaj kraj…
+＋ Ajouter une source… ¦ ＋ Dodaj izvor… ¦ ＋ Dodaj vir…
+＋ Ajouter un média… ¦ ＋ Dodaj medij… ¦ ＋ Dodaj medij…
+＋ Ajouter une enquête… ¦ ＋ Dodaj istragu… ¦ ＋ Dodaj preiskavo…
+＋ Ajouter une étiquette… ¦ ＋ Dodaj oznaku… ¦ ＋ Dodaj oznako…
+＋ Ajouter un événement… ¦ ＋ Dodaj događaj… ¦ ＋ Dodaj dogodek…
+＋ Ajouter un animal… ¦ ＋ Dodaj životinju… ¦ ＋ Dodaj žival…
+＋ Ajouter… ¦ ＋ Dodaj… ¦ ＋ Dodaj…
+↗ Fiche ¦ ↗ Zapis ¦ ↗ Zapis
+↗ Lieu ¦ ↗ Mjesto ¦ ↗ Kraj
+Aucune fiche ¦ Nema zapisa ¦ Ni zapisa
+Aucun lieu ¦ Nema mjesta ¦ Ni kraja
+Aucune source ¦ Nema izvora ¦ Ni vira
+Aucun média ¦ Nema medija ¦ Ni medija
+Aucune enquête ¦ Nema istrage ¦ Ni preiskave
+Aucune étiquette ¦ Nema oznake ¦ Ni oznake
+Aucun événement ¦ Nema događaja ¦ Ni dogodka
+Aucun animal ¦ Nema životinje ¦ Ni živali
+Créer la fiche ¦ Stvori zapis ¦ Ustvari zapis
+Créer le lieu ¦ Stvori mjesto ¦ Ustvari kraj
+Créer une fiche ¦ Stvori zapis ¦ Ustvari zapis
+＋ Créer sa fiche ¦ ＋ Stvori njegov zapis ¦ ＋ Ustvari njegov zapis
+👤 Personnes ¦ 👤 Osobe ¦ 👤 Osebe
+📍 Lieux ¦ 📍 Mjesta ¦ 📍 Kraji
+📚 Sources ¦ 📚 Izvori ¦ 📚 Viri
+🖼 Médias ¦ 🖼 Mediji ¦ 🖼 Mediji
+🔍 Enquêtes ¦ 🔍 Istrage ¦ 🔍 Preiskave
+🏷 Étiquettes ¦ 🏷 Oznake ¦ 🏷 Oznake
+📅 Événements ¦ 📅 Događaji ¦ 📅 Dogodki
+🐾 Animaux ¦ 🐾 Životinje ¦ 🐾 Živali
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Zadrži tekst „{q}” bez zapisa ¦ ✎ Obdrži besedilo »{q}« brez zapisa
+🗺 Choisir sur la carte ¦ 🗺 Odaberi na karti ¦ 🗺 Izberi na zemljevidu
+{what} de ta base ¦ {what} iz tvoje baze ¦ {what} iz tvoje baze
+{what} de France ¦ {what} iz Francuske ¦ {what} iz Francije
+{what} du monde ¦ {what} iz svijeta ¦ {what} iz sveta
+300 villes du monde et plus ¦ Više od 300 gradova svijeta ¦ Več kot 300 mest sveta
+{what} trouvés ¦ Pronađeno: {what} ¦ Najdeno: {what}
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} za „{q}”. Provjeri pravopis ¦ {none} za »{q}«. Preveri črkovanje
+{none} pour l’instant ¦ {none} zasad ¦ {none} za zdaj
+, ou : ¦ , ili: ¦ , ali:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab prelazi s filtra na filtar ¦ ↹ Tab preklaplja med filtri
+↑ ↓ Entrée ¦ ↑ ↓ Enter ¦ ↑ ↓ Enter
+… la liste défile ¦ … popis se pomiče ¦ … seznam se pomika
+⭐ Personne principale ¦ ⭐ Glavna osoba ¦ ⭐ Glavna oseba
+Autres personnes principales ¦ Ostale glavne osobe ¦ Druge glavne osebe
+Personnes principales ¦ Glavne osobe ¦ Glavne osebe
+Personnes secondaires ¦ Sporedne osobe ¦ Stranske osebe
+au cœur de la recherche ¦ u središtu istraživanja ¦ v središču raziskovanja
+témoins, voisins, parrains, pistes… ¦ svjedoci, susjedi, kumovi, tragovi… ¦ priče, sosedje, botri, sledi…
+Choisir la personne principale… ¦ Odaberi glavnu osobu… ¦ Izberi glavno osebo…
+＋ Ajouter une personne principale… ¦ ＋ Dodaj glavnu osobu… ¦ ＋ Dodaj glavno osebo…
+＋ Ajouter une personne secondaire… ¦ ＋ Dodaj sporednu osobu… ¦ ＋ Dodaj stransko osebo…
+Changer le rôle ¦ Promijeni ulogu ¦ Spremeni vlogo
+Donner un rôle (facultatif) ¦ Dodijeli ulogu (neobavezno) ¦ Dodeli vlogo (neobvezno)
+rôle ▾ ¦ uloga ▾ ¦ vloga ▾
+Rôle libre ¦ Slobodna uloga ¦ Prosta vloga
+Retirer le rôle ¦ Ukloni ulogu ¦ Odstrani vlogo
+Passer en secondaire ¦ Premjesti u sporedne ¦ Premakni med stranske
+Passer en principale ¦ Premjesti u glavne ¦ Premakni med glavne
+Autre mot… (Entrée) ¦ Druga riječ… (Enter) ¦ Druga beseda… (Enter)
+témoin ¦ svjedok ¦ priča
+déclarant ¦ prijavitelj ¦ prijavitelj
+parrain ¦ kum ¦ boter
+marraine ¦ kuma ¦ botra
+voisin ¦ susjed ¦ sosed
+employeur ¦ poslodavac ¦ delodajalec
+officier ¦ matičar ¦ matičar
+épouse ¦ supruga ¦ žena
+époux ¦ suprug ¦ mož
+sans fiche ¦ bez zapisa ¦ brez zapisa
+Personne sans fiche : clic pour créer sa fiche ¦ Osoba bez zapisa: klikni za stvaranje zapisa ¦ Oseba brez zapisa: klikni, da ustvariš zapis
+Ouvrir la fiche ¦ Otvori zapis ¦ Odpri zapis
+Voir sur la carte ¦ Pogledaj na karti ¦ Poglej na zemljevidu
+Aucune personne choisie ¦ Nije odabrana nijedna osoba ¦ Nobena oseba ni izbrana
+Choisir des personnes ¦ Odaberi osobe ¦ Izberi osebe
+Choisir une personne ¦ Odaberi osobu ¦ Izberi osebo
+Choisir des lieux ¦ Odaberi mjesta ¦ Izberi kraje
+Choisir un lieu ¦ Odaberi mjesto ¦ Izberi kraj
+Carte : clique l’endroit du lieu ¦ Karta: klikni gdje se mjesto nalazi ¦ Zemljevid: klikni, kje je kraj
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Klikni mjesto na karti (povuci za pomicanje, kotačić za zumiranje). ¦ Klikni kraj na zemljevidu (povleci za premikanje, kolešček za povečavo).
+＋ Créer un lieu ici ¦ ＋ Stvori mjesto ovdje ¦ ＋ Ustvari kraj tukaj
+Nom du lieu ¦ Naziv mjesta ¦ Ime kraja
+Lieux proches… ¦ Obližnja mjesta… ¦ Bližnji kraji…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Nema poznatog mjesta u blizini: stvori ga ispod. ¦ V bližini ni znanega kraja: ustvari ga spodaj.
+Donne un nom au lieu. ¦ Daj mjestu naziv. ¦ Daj kraju ime.
+Dézoomer ¦ Smanji ¦ Pomanjšaj
+Lieu impossible à ajouter ¦ Mjesto nije moguće dodati ¦ Kraja ni mogoče dodati
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Najprije stvori zapis u Osobama, a zatim ga odaberi ovdje. ¦ Najprej ustvari zapis v Osebah, nato ga izberi tukaj.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Najprije je stvori u alatu, a zatim je odaberi ovdje. ¦ Najprej jo ustvari v orodju, nato jo izberi tukaj.
+Personne ¦ Osoba ¦ Oseba
+Lieu ¦ Mjesto ¦ Kraj
+À corriger. ¦ Za ispravak. ¦ Za popravek.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>Za ispravak: {what}</b> prije spremanja. ¦ <b>Za popravek: {what}</b> pred shranjevanjem.
+Coche cette case pour continuer. ¦ Označi ovaj okvir za nastavak. ¦ Označi to polje za nadaljevanje.
+Choisis une des possibilités. ¦ Odaberi jednu od mogućnosti. ¦ Izberi eno od možnosti.
+Choisis un fichier. ¦ Odaberi datoteku. ¦ Izberi datoteko.
+Choisis dans la liste. ¦ Odaberi s popisa. ¦ Izberi s seznama.
+Ce champ est à remplir. ¦ Ovo polje treba ispuniti. ¦ To polje je treba izpolniti.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Napiši broj (na primjer 12 ili 3,5). ¦ Napiši število (na primer 12 ali 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Nije shvaćeno: provjeri što je napisano. ¦ Ni razumljeno: preveri, kaj je napisano.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Napiši potpunu adresu e-pošte (ime@primjer.hr). ¦ Napiši popoln e-poštni naslov (ime@primer.si).
+Écris une adresse web complète (https://…). ¦ Napiši potpunu web-adresu (https://…). ¦ Napiši popoln spletni naslov (https://…).
+Ce n’est pas au bon format. ¦ Nije u ispravnom obliku. ¦ Ni v pravi obliki.
+Au moins {x}. ¦ Najmanje {x}. ¦ Najmanj {x}.
+Au plus {x}. ¦ Najviše {x}. ¦ Največ {x}.
+Au moins {x} (là : {y}). ¦ Najmanje {x} (sada: {y}). ¦ Najmanj {x} (zdaj: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Ova vrijednost ovdje nije dopuštena: uzmi okrugli broj. ¦ Ta vrednost tukaj ni dovoljena: uporabi okroglo število.
+Donne un nom à ces réglages. ¦ Daj naziv ovim postavkama. ¦ Daj ime tem nastavitvam.
+Choisir une couleur ¦ Odaberi boju ¦ Izberi barvo
+Couleurs de l’app ¦ Boje aplikacije ¦ Barve aplikacije
+Récentes ¦ Nedavne ¦ Nedavne
+Choisir une autre couleur ¦ Odaberi drugu boju ¦ Izberi drugo barvo
+Prendre une couleur n’importe où dans la fenêtre ¦ Uzmi boju bilo gdje u prozoru ¦ Vzemi barvo kjer koli v oknu
+Code de la couleur ¦ Kod boje ¦ Koda barve
+Remettre la couleur d’avant ¦ Vrati prethodnu boju ¦ Vrni prejšnjo barvo
+Double-clic : revenir à la valeur de départ ¦ Dvoklik: povratak na početnu vrijednost ¦ Dvoklik: vrnitev na začetno vrednost
+Choisir une police ¦ Odaberi font ¦ Izberi pisavo
+Chercher une police… ¦ Traži font… ¦ Išči pisavo…
+Les polices de l’ordinateur… ¦ Fontovi računala… ¦ Pisave računalnika…
+Aucune police pour « {q} ». ¦ Nema fonta za „{q}”. ¦ Ni pisave za »{q}«.
+Lecture des polices… ¦ Čitanje fontova… ¦ Branje pisav…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Pogledaj sve fontove računala ¦ 🔓 Poglej vse pisave računalnika
+Le navigateur te demandera la permission. ¦ Preglednik će te pitati za dopuštenje. ¦ Brskalnik te bo prosil za dovoljenje.
+CONSEILLÉE ¦ PREPORUČENO ¦ PRIPOROČENO
+RÉCENTE ¦ NEDAVNO ¦ NEDAVNO
+DE L’APP ¦ IZ APLIKACIJE ¦ IZ APLIKACIJE
+TAPÉE ¦ UPISANO ¦ VTIPKANO
+Réglages enregistrés ¦ Spremljene postavke ¦ Shranjene nastavitve
+Nom de ces réglages ¦ Naziv ovih postavki ¦ Ime teh nastavitev
+Nom du réglage ¦ Naziv postavke ¦ Ime nastavitve
+Aucun réglage enregistré pour l’instant. ¦ Zasad nema spremljenih postavki. ¦ Za zdaj ni shranjenih nastavitev.
+＋ Enregistrer les réglages actuels ¦ ＋ Spremi trenutne postavke ¦ ＋ Shrani trenutne nastavitve
+Un réglage « {name} » existe déjà. ¦ Postavka „{name}” već postoji. ¦ Nastavitev »{name}« že obstaja.
+Le remplacer ? ¦ Zamijeniti je? ¦ Jo zamenjam?
+Réglages gardés sous « {name} ». ¦ Postavke spremljene pod nazivom „{name}”. ¦ Nastavitve shranjene pod imenom »{name}«.
+Remplacer par les réglages actuels ¦ Zamijeni trenutnim postavkama ¦ Zamenjaj s trenutnimi nastavitvami
+Remplacer « {name} » par les réglages actuels ? ¦ Zamijeniti „{name}” trenutnim postavkama? ¦ Zamenjam »{name}« s trenutnimi nastavitvami?
+Réglage mis à jour. ¦ Postavka ažurirana. ¦ Nastavitev posodobljena.
+Réglages « {name} » appliqués. ¦ Postavke „{name}” primijenjene. ¦ Nastavitve »{name}« uporabljene.
+Exporter (fichier .json) ¦ Izvezi (datoteka .json) ¦ Izvozi (datoteka .json)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Zamijeni, preimenuj, udvostruči, izvezi, izbriši ¦ Zamenjaj, preimenuj, podvoji, izvozi, izbriši
+Exporter (PDF, image, impression…) ¦ Izvezi (PDF, slika, ispis…) ¦ Izvozi (PDF, slika, tiskanje…)
+⤓ Exporter en {fmt} ¦ ⤓ Izvezi kao {fmt} ¦ ⤓ Izvozi kot {fmt}
+Nom du fichier ¦ Naziv datoteke ¦ Ime datoteke
+Qualité ¦ Kvaliteta ¦ Kakovost
+Fond perdu et traits de coupe (imprimeur) ¦ Prijelaz i oznake za rezanje (tiskara) ¦ Porezni rob in rezalne oznake (tiskarna)
+Ranger aussi une copie dans les médias ¦ Spremi i kopiju u medije ¦ Shrani tudi kopijo med medije
+Aperçu ¦ Pregled ¦ Predogled
+Aperçu… ¦ Pregled… ¦ Predogled…
+Pas d’aperçu ¦ Nema pregleda ¦ Ni predogleda
+Format du papier ¦ Format papira ¦ Velikost papirja
+Ce qu’on imprime ¦ Što se ispisuje ¦ Kaj se natisne
+Pages à imprimer ¦ Stranice za ispis ¦ Strani za tiskanje
+Celle affichée ¦ Prikazana ¦ Prikazana
+Page précédente ¦ Prethodna stranica ¦ Prejšnja stran
+Page suivante ¦ Sljedeća stranica ¦ Naslednja stran
+Aperçu de l’impression ¦ Pregled ispisa ¦ Predogled tiskanja
+Exemplaires ¦ Primjerci ¦ Izvodi
+Portrait ¦ Uspravno ¦ Pokončno
+Paysage ¦ Položeno ¦ Ležeče
+L’écran affiché ¦ Prikazani zaslon ¦ Prikazani zaslon
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ U prozoru koji se otvori odaberi „Spremi kao PDF” kao pisač. ¦ V oknu, ki se odpre, izberi »Shrani kot PDF« kot tiskalnik.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ U prozoru za ispis odaberi „Spremi kao PDF”. ¦ V oknu za tiskanje izberi »Shrani kot PDF«.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ UVOZ · KORAK 1 OD 3 ¦ UVOZ · KORAK 1 OD 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ UVOZ · KORAK {n} OD 3 ¦ UVOZ · KORAK {n} OD 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Povuci datoteku ovamo, zalijepi je (⌘V) ili je odaberi na računalu ¦ 📁 Povleci datoteko sem, jo prilepi (⌘V) ali jo izberi v računalniku
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Povuci datoteke ovamo, zalijepi ih (⌘V) ili ih odaberi na računalu ¦ 📁 Povleci datoteke sem, jih prilepi (⌘V) ali jih izberi v računalniku
+Lecture du fichier… ¦ Čitanje datoteke… ¦ Branje datoteke…
+Ce fichier ne peut pas être importé : {err} ¦ Ova se datoteka ne može uvesti: {err} ¦ Te datoteke ni mogoče uvoziti: {err}
+Voilà ce qui va entrer : {sum}. ¦ Evo što će ući: {sum}. ¦ To bo vneseno: {sum}.
+⤒ Importer {what} ¦ ⤒ Uvezi {what} ¦ ⤒ Uvozi {what}
+{what} importés. ¦ Uvezeno: {what}. ¦ Uvoženo: {what}.
+Import terminé. ¦ Uvoz završen. ¦ Uvoz končan.
+Impossible d’importer : {err} ¦ Uvoz nije uspio: {err} ¦ Uvoz ni uspel: {err}
+Importer un fichier ¦ Uvezi datoteku ¦ Uvozi datoteko
+⤒ Importer un fichier… ¦ ⤒ Uvezi datoteku… ¦ ⤒ Uvozi datoteko…
+Ce type de fichier n’est pas accepté ici. ¦ Ova vrsta datoteke ovdje nije prihvaćena. ¦ Ta vrsta datoteke tukaj ni sprejeta.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Ulazi u medije aplikacije i postavlja se u alat. ¦ Vstopi med medije aplikacije in se postavi v orodje.
+📁 Choisir un fichier ¦ 📁 Odaberi datoteku ¦ 📁 Izberi datoteko
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Ova datoteka .json je oštećena: ne može se pročitati. ¦ Ta datoteka .json je poškodovana: ni je mogoče prebrati.
+Ajuster à la fenêtre ¦ Prilagodi prozoru ¦ Prilagodi oknu
+Zoom arrière ¦ Smanji ¦ Pomanjšaj
+Zoom avant ¦ Povećaj ¦ Povečaj
+Règles ¦ Ravnala ¦ Ravnila
+Règles : montrer ou cacher ¦ Ravnala: prikaži ili sakrij ¦ Ravnila: prikaži ali skrij
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Privlačenje: objekti se lijepe jedni za druge i za mrežu (Alt za isključivanje pri povlačenju) ¦ Pripenjanje: predmeti se prilepijo drug na drugega in na mrežo (Alt za izklop med vlečenjem)
+Les autres façons d’enregistrer ¦ Drugi načini spremanja ¦ Drugi načini shranjevanja
+Ranger, montrer ou cacher les boutons ¦ Posloži, prikaži ili sakrij gumbe ¦ Uredi, prikaži ali skrij gumbe
+Compris ¦ Shvaćeno ¦ Razumljeno
+Choisir sur un calendrier ¦ Odaberi u kalendaru ¦ Izberi v koledarju
+Durée ¦ Trajanje ¦ Trajanje
+aujourd’hui ¦ danas ¦ danes
+aujourd’hui à {h} ¦ danas u {h} ¦ danes ob {h}
+hier ¦ jučer ¦ včeraj
+hier à {h} ¦ jučer u {h} ¦ včeraj ob {h}
+{day} à {h} ¦ {day} u {h} ¦ {day} ob {h}
+Modifié ¦ Izmijenjeno ¦ Spremenjeno
+Créé ¦ Stvoreno ¦ Ustvarjeno
+Ajouté ¦ Dodano ¦ Dodano
+Aucune battue ¦ Nema sustavne pretrage ¦ Ni sistematičnega iskanja
+Aucune maison ¦ Nema kuće ¦ Ni hiše
+Aucune revue ¦ Nema časopisa ¦ Ni revije
+Aucun employeur ¦ Nema poslodavca ¦ Ni delodajalca
+Aucun recensement ¦ Nema popisa ¦ Ni popisa
+🎨 Œuvres ¦ 🎨 Djela ¦ 🎨 Dela
+Chercher un graphique… (ex. naissances, camembert) ¦ Traži grafikon… (npr. rođenja, tortni) ¦ Išči graf… (npr. rojstva, tortni)
+Aucun graphique ¦ Nema grafikona ¦ Ni grafa
+Créer le graphique ¦ Stvori grafikon ¦ Ustvari graf
+Nouveau graphique ¦ Novi grafikon ¦ Nov graf
+Aucun projet ¦ Nema projekta ¦ Ni projekta
+Aucun tableau ¦ Nema ploče ¦ Ni table
+Aucune mise en page ¦ Nema prijeloma ¦ Ni postavitve
+📐 Mises en page ¦ 📐 Prijelomi ¦ 📐 Postavitve
+Aucun diagramme ¦ Nema dijagrama ¦ Ni diagrama
+Aucune carte ¦ Nema karte ¦ Ni zemljevida
+Aucune transcription ¦ Nema prijepisa ¦ Ni prepisa
+Aucune carte de photos ¦ Nema karte fotografija ¦ Ni zemljevida fotografij
+Aucun classeur ¦ Nema radne knjige ¦ Ni delovnega zvezka
+Aucun document ¦ Nema dokumenta ¦ Ni dokumenta
+Aucune parcelle ¦ Nema čestice ¦ Ni parcele
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Naziv predmeta, vrsta… (dovoljna su 2 slova) ¦ Ime predmeta, vrsta… (dovolj sta 2 črki)
+Aucun objet de famille ¦ Nema obiteljskog predmeta ¦ Ni družinskega predmeta
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Ime pokojnika, bilježnik, godina… (dovoljna su 2 slova) ¦ Ime pokojnika, notar, leto… (dovolj sta 2 črki)
+Aucun inventaire après décès ¦ Nema ostavinskog inventara ¦ Ni zapuščinskega inventarja
+⚖️ Inventaires après décès ¦ ⚖️ Ostavinski inventari ¦ ⚖️ Zapuščinski inventarji
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Ime, vrsta, kod prstena, čip… (dovoljna su 2 slova) ¦ Ime, vrsta, koda obročka, čip… (dovolj sta 2 črki)
+Nom du site… (2 lettres suffisent) ¦ Naziv lokacije… (dovoljna su 2 slova) ¦ Ime lokacije… (dovolj sta 2 črki)
+Aucun site ¦ Nema lokacije ¦ Ni lokacije
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Naziv skupine, čopora… (dovoljna su 2 slova) ¦ Ime skupine, tropa… (dovolj sta 2 črki)
+Aucun groupe ¦ Nema skupine ¦ Ni skupine
+👥 Groupes d’animaux ¦ 👥 Skupine životinja ¦ 👥 Skupine živali
+Maladie, cause de décès… (2 lettres suffisent) ¦ Bolest, uzrok smrti… (dovoljna su 2 slova) ¦ Bolezen, vzrok smrti… (dovolj sta 2 črki)
+＋ Choisir une maladie… ¦ ＋ Odaberi bolest… ¦ ＋ Izberi bolezen…
+Aucune maladie notée ¦ Nije zabilježena nijedna bolest ¦ Zabeležena ni nobena bolezen
+🩺 Santé ¦ 🩺 Zdravlje ¦ 🩺 Zdravje
+Chercher une de mes cartes… ¦ Traži jednu od mojih karata… ¦ Išči enega od mojih zemljevidov…
+＋ Choisir une carte… ¦ ＋ Odaberi kartu… ¦ ＋ Izberi zemljevid…
+Nom de la branche… ¦ Naziv grane… ¦ Ime veje…
+＋ Choisir une branche… ¦ ＋ Odaberi granu… ¦ ＋ Izberi vejo…
+Aucune branche ¦ Nema grane ¦ Ni veje
+Nom d’une de mes couches… ¦ Naziv jednog od mojih slojeva… ¦ Ime ene od mojih plasti…
+＋ Choisir une couche… ¦ ＋ Odaberi sloj… ¦ ＋ Izberi plast…
+Aucune couche dessinée ¦ Nema nacrtanog sloja ¦ Ni narisane plasti
+Commune, cote, année… (2 lettres suffisent) ¦ Općina, signatura, godina… (dovoljna su 2 slova) ¦ Občina, signatura, leto… (dovolj sta 2 črki)
+🔗 Relier un dépouillement… ¦ 🔗 Poveži indeks zapisa… ¦ 🔗 Poveži indeks vpisov…
+Aucun dépouillement ¦ Nema indeksa zapisa ¦ Ni indeksa vpisov
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Prezime, ime kontakta… (dovoljna su 2 slova) ¦ Priimek, ime stika… (dovolj sta 2 črki)
+Aucun contact ¦ Nema kontakta ¦ Ni stika
+Chercher une de mes listes… ¦ Traži jedan od mojih popisa… ¦ Išči enega od mojih seznamov…
+Aucune liste ¦ Nema popisa ¦ Ni seznama
+Événement, personne, année… (2 lettres suffisent) ¦ Događaj, osoba, godina… (dovoljna su 2 slova) ¦ Dogodek, oseba, leto… (dovolj sta 2 črki)
+Aucun service d’archives ¦ Nema arhivske službe ¦ Ni arhivske službe
+Créer le service ¦ Stvori službu ¦ Ustvari službo
+🏛 Services d’archives ¦ 🏛 Arhivske službe ¦ 🏛 Arhivske službe
+Source, page, nom de la personne citée… ¦ Izvor, stranica, ime navedene osobe… ¦ Vir, stran, ime navedene osebe…
+＋ Choisir une citation… ¦ ＋ Odaberi navod… ¦ ＋ Izberi navedek…
+Aucune citation ¦ Nema navoda ¦ Ni navedka
+— une seule ¦ — samo jedna ¦ — samo ena
+＋ Ajouter une maison… ¦ ＋ Dodaj kuću… ¦ ＋ Dodaj hišo…
+＋ Ajouter une fiche… ¦ ＋ Dodaj zapis… ¦ ＋ Dodaj zapis…
+＋ Ajouter un document… ¦ ＋ Dodaj dokument… ¦ ＋ Dodaj dokument…
+＋ Ajouter une carte… ¦ ＋ Dodaj kartu… ¦ ＋ Dodaj zemljevid…
+＋ Ajouter un groupe… ¦ ＋ Dodaj skupinu… ¦ ＋ Dodaj skupino…
+＋ Ajouter un contact… ¦ ＋ Dodaj kontakt… ¦ ＋ Dodaj stik…
+＋ Ajouter une liste… ¦ ＋ Dodaj popis… ¦ ＋ Dodaj seznam…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Ova postavka uzima ono što je sada na zaslonu. ¦ Ta nastavitev vzame, kar je zdaj na zaslonu.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Stara verzija ove postavke više se neće čuvati. ¦ Stara različica te nastavitve ne bo več shranjena.
+Le nom devient modifiable sur la ligne. ¦ Naziv se može urediti u retku. ¦ Ime je mogoče urediti v vrstici.
+Une copie, à modifier sans toucher à l’original. ¦ Kopija koju možeš mijenjati bez diranja izvornika. ¦ Kopija, ki jo lahko spreminjaš, ne da bi se dotaknil izvirnika.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Da je sačuvaš ili otvoriš na drugom računalu. ¦ Da jo shraniš ali odpreš na drugem računalniku.
+On peut encore l’annuler juste après. ¦ Odmah nakon toga još se može poništiti. ¦ Takoj zatem jo je še mogoče razveljaviti.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Datoteka lcnda-reglage-….json izvezena ovdje ili na drugom računalu ¦ Datoteka lcnda-reglage-….json, izvožena tukaj ali na drugem računalniku
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Ovaj preglednik ne daje popis fontova: evo uobičajenih fontova pronađenih na računalu. Za neki drugi upiši njegov točan naziv. ¦ Ta brskalnik ne poda seznama pisav: tu so običajne pisave, najdene v računalniku. Za drugo vtipkaj njeno točno ime.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Popis fontova nije se mogao pročitati. Pokušaj ponovno. ¦ Seznama pisav ni bilo mogoče prebrati. Poskusi znova.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Drugi format s popisa ili slobodni format (čuva se u „Moji formati”) ¦ Druga velikost s seznama ali prosta velikost (shranjena v »Moje velikosti«)
+Un exemplaire au moins. ¦ Najmanje jedan primjerak. ¦ Vsaj en izvod.
+{n} exemplaires au plus. ¦ Najviše {n} primjeraka. ¦ Največ {n} izvodov.

@@ -746,6 +746,92 @@ Les exemples de dates restent en français (la lecture des dates C4 est françai
 | ordinateur | tietokone | számítógép |
 | Traduction faite par une IA | Tekoälyn tekemä käännös | MI által készített fordítás |
 
+## Langues ajoutées ensuite : croate (hr) et slovène (sl)
+
+Fichiers à part : `assets/i18n/src/nord5/<zone>.tsv` (1re ligne `fr ¦ hr ¦ sl`, même clé que `<zone>.tsv`).
+On traduit **depuis le français** (`node scripts/i18n-todo.js hr,sl <zone>` montre l’anglais et l’allemand, plus le tchèque,
+langue slave déjà traduite, en aide pour les deux).
+Ton : on tutoie (*ti*) — croate : impératif 2e personne du singulier (« Odaberi », « Klikni », « Pokušaj ponovno » ; boutons :
+« Spremi », « Izbriši », « Dodaj ») ; slovène : impératif 2e personne du singulier (« Izberi », « Klikni », « Poskusi znova » ;
+boutons : « Shrani », « Izbriši », « Dodaj »). Quand le passé de la 1re personne dépend du genre, on écrit les deux formes
+(« kliknuo/kliknula », « kliknil/kliknila ») ; sinon on tourne la phrase. Guillemets : croate „…”, slovène »…«.
+Pluriels : croate `one|few|other` (`osoba|osobe|osoba` → « 1 osoba », « 3 osobe », « 5 osoba », « 21 osoba », « 22 osobe ») ;
+slovène `one|two|few|other` (`oseba|osebi|osebe|oseb` → « 1 oseba », « 2 osebi », « 3 osebe », « 5 oseb », « 101 oseba »).
+Un nombre dans une phrase sans pluriel (« {n} éléments ») s’écrit plutôt « Stavki: {n} » / « Elementov: {n} » pour ne pas
+casser l’accord. « UI » (*umjetna inteligencija* / *umetna inteligenca*) pour l’IA. Années en croate avec le point ordinal
+(« 1582. »). Les exemples de dates restent lisibles par la lecture française (C4) : « 12/03/1790 », jamais un mois croate ou slovène.
+En croate, *kartica* = onglet : une fiche est donc un *zapis* (aussi en slovène, où l’onglet est un *zavihek*) ; seul l’affichage
+« Liste | Fiches » dit « Popis | Zapisi » (hr) et « Seznam | Kartice » (sl).
+
+| Français | Hrvatski | Slovenščina |
+|---|---|---|
+| Sosa (numéro Sosa) | Sosa broj | Sosa številka |
+| SOSA (liste) | SOSA | SOSA |
+| fiche (d’une personne) | zapis | zapis |
+| 📒 Fiches (sujets) | 📒 Zapisi | 📒 Zapisi |
+| généalogie (la base de la personne) | rodoslovlje | rodoslovje |
+| acte | matični zapis (isprava) | matični vpis (listina) |
+| état civil / registre paroissial | matične knjige / župna matica | matične knjige / župnijska matična knjiga |
+| baptême / naissance | krštenje / rođenje | krst / rojstvo |
+| mariage | vjenčanje (brak) | poroka (zakon) |
+| décès / sépulture | smrt / pokop | smrt / pokop |
+| parrain / marraine | kum / kuma | boter / botra |
+| témoin / déclarant | svjedok / prijavitelj | priča / prijavitelj |
+| ascendants / descendants | preci / potomci | predniki / potomci |
+| arbre des ascendants / descendants | stablo predaka / stablo potomaka | drevo prednikov / drevo potomcev |
+| branche | grana | veja |
+| génération | generacija | rod |
+| implexe | implex (ponovljeni preci) | implex (ponovljeni predniki) |
+| recensement | popis stanovništva | popis prebivalstva |
+| inventaire après décès | ostavinski inventar | zapuščinski inventar |
+| dépouillement | indeks zapisa | indeks vpisov |
+| cote (d’archive) | signatura | signatura |
+| mur de brique | mrtva točka | slepa ulica |
+| cousinade | obiteljsko okupljanje | družinsko srečanje |
+| commune / ville / village | općina / grad / selo | občina / mesto / vas |
+| catalogue raisonné | kritički katalog djela | kritični katalog del |
+| Tableau de bord | Nadzorna ploča | Nadzorna plošča |
+| widget | widget | gradnik |
+| Personnes | Osobe | Osebe |
+| Graphiques / Diagrammes | Grafikoni / Dijagrami | Grafi / Diagrami |
+| Carte | Karta | Zemljevid |
+| Listes | Popisi | Seznami |
+| Chronologie | Vremenska crta | Časovnica |
+| Recherche | Istraživanje | Raziskovanje |
+| Enquêtes | Istrage | Preiskave |
+| Trésors | Blago | Zakladi |
+| Réglages | Postavke | Nastavitve |
+| Apparence | Izgled | Videz |
+| Médias | Mediji | Mediji |
+| Source | Izvor | Vir |
+| Étiquette | Oznaka | Oznaka |
+| Battue | Sustavna pretraga | Sistematično iskanje |
+| Mode simple | Jednostavni način | Preprosti način |
+| Mode consultation | Način pregledavanja | Način ogleda |
+| Sauvegarde | Sigurnosna kopija | Varnostna kopija |
+| Enregistrer / ✓ Enregistré | Spremi / ✓ Spremljeno | Shrani / ✓ Shranjeno |
+| Annuler (bouton) | Odustani | Prekliči |
+| ↶ Annuler / ↷ Rétablir | ↶ Poništi / ↷ Ponovi | ↶ Razveljavi / ↷ Uveljavi |
+| Fermer | Zatvori | Zapri |
+| Supprimer | Izbriši | Izbriši |
+| Retirer (détacher) | Ukloni | Odstrani |
+| Modifier | Uredi | Uredi |
+| Créer / Ajouter | Stvori / Dodaj | Ustvari / Dodaj |
+| Relier | Poveži | Poveži |
+| ↺ Remettre comme au départ | ↺ Vrati na početno | ↺ Ponastavi na začetno |
+| Réessayer | Pokušaj ponovno | Poskusi znova |
+| ⤒ Importer / ⤓ Exporter | ⤒ Uvezi / ⤓ Izvezi | ⤒ Uvozi / ⤓ Izvozi |
+| 🖨 Imprimer | 🖨 Ispiši | 🖨 Natisni |
+| Chercher / Filtrer ▾ / Trier : | Traži / Filtriraj ▾ / Poredaj: | Išči / Filtriraj ▾ / Razvrsti: |
+| ✓ Compris : | ✓ Shvaćeno: | ✓ Razumljeno: |
+| Aimanter | Privlačenje | Pripenjanje |
+| Liste \| Fiches (affichage) | Popis \| Zapisi | Seznam \| Kartice |
+| onglet | kartica | zavihek |
+| Tableur / Traitement de texte | Proračunska tablica / Obrada teksta | Preglednica / Urejanje besedil |
+| Mise en page | Prijelom | Postavitev |
+| ordinateur | računalo | računalnik |
+| Traduction faite par une IA | Prijevod je napravila umjetna inteligencija | Prevod je naredila umetna inteligenca |
+
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 
 | Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |

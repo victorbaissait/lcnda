@@ -1,0 +1,111 @@
+fr ¦ hr ¦ sl
+# ═════ zone « premier » : croate (hr) et slovène (sl) ═════
+INSTALLATION ¦ POSTAVLJANJE ¦ NAMESTITEV
+La base généalogique doit être importée. ¦ Potrebno je uvesti rodoslovnu bazu. ¦ Treba je uvoziti rodoslovno bazo.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Odaberi kako početi: uvezi postojeću datoteku ili stvori prvu osobu i kreni od prazne baze. ¦ Izberi, kako začeti: uvozi obstoječo datoteko ali ustvari prvo osebo in začni s prazno bazo.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, i iz Ancestryja, MyHeritagea, Geneaneta), Gramps (.gramps ili paket .gpkg s fotografijama), Hérédis (.hmw ili .heredis), MacFamilyTree (.mftpkg), baza LCNDA (.db) ili potpuna sigurnosna kopija LCNDA (.zip, baza + mediji). Datoteke JSON i CSV se analiziraju, ali se još ne uvoze. ¦ GEDCOM (.ged, tudi iz Ancestryja, MyHeritagea, Geneaneta), Gramps (.gramps ali paket .gpkg s fotografijami), Hérédis (.hmw ali .heredis), MacFamilyTree (.mftpkg), baza LCNDA (.db) ali popolna varnostna kopija LCNDA (.zip, baza + mediji). Datoteke JSON in CSV se analizirajo, a se še ne uvozijo.
+Fichier ¦ Datoteka ¦ Datoteka
+Créer une première personne ¦ Stvori prvu osobu ¦ Ustvari prvo osebo
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Pokreće praznu bazu s prvim zapisom, koji kasnije dopuniš. ¦ Začne prazno bazo s prvim zapisom, ki ga dopolniš pozneje.
+Prénom ¦ Ime ¦ Ime
+Nom ¦ Prezime ¦ Priimek
+Créer et ouvrir la base ¦ Stvori i otvori bazu ¦ Ustvari in odpri bazo
+Je veux faire autre chose ▾ ¦ Želim nešto drugo ▾ ¦ Želim nekaj drugega ▾
+▴ Replier ¦ ▴ Sklopi ¦ ▴ Strni
+Qu’est-ce que tu veux faire avec l’app ? ¦ Što želiš raditi s aplikacijom? ¦ Kaj želiš početi z aplikacijo?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Odaberi ono što ti odgovara: aplikacija se otvara s pravim karticama i pravim prvim zaslonom. Sve možeš kasnije promijeniti. ¦ Izberi, kar ti ustreza: aplikacija se odpre s pravimi zavihki in pravim prvim zaslonom. Vse lahko pozneje spremeniš.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Tvoja obitelj, tvoji preci, njihovi zapisi i fotografije. ¦ Tvoja družina, tvoji predniki, njihovi vpisi in fotografije.
+Une lignée d’animaux ¦ Loza životinja ¦ Rodovnik živali
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Uzgoj, rodovnik tvojih pasa, mačaka, konja… ¦ Vzreja, rodovnik tvojih psov, mačk, konj…
+Recenser des animaux ¦ Popisivanje životinja ¦ Popis živali
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Praćenje životinja: prstenovanje, čipovi, opažanja, putanje. ¦ Spremljanje živali: obročkanje, čipi, opazovanja, poti.
+L’histoire d’une maison ou d’un village ¦ Povijest kuće ili sela ¦ Zgodovina hiše ali vasi
+Maison ou village ¦ Kuća ili selo ¦ Hiša ali vas
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Tko je gdje živio, iz generacije u generaciju, prostoriju po prostoriju. ¦ Kdo je kje živel, iz roda v rod, prostor za prostorom.
+Le catalogue d’un artiste ou d’une collection ¦ Katalog umjetnika ili zbirke ¦ Katalog umetnika ali zbirke
+Artiste ou collection ¦ Umjetnik ili zbirka ¦ Umetnik ali zbirka
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Njegova djela, izložbe, kritički katalog djela. ¦ Njegova dela, razstave, kritični katalog del.
+Un fonds d’archives ou un musée familial ¦ Arhivski fond ili obiteljski muzej ¦ Arhivski fond ali družinski muzej
+Archives ou musée ¦ Arhiv ili muzej ¦ Arhiv ali muzej
+Des photos, des lettres, des objets à classer et à décrire. ¦ Fotografije, pisma, predmeti za razvrstavanje i opisivanje. ¦ Fotografije, pisma, predmeti za razvrščanje in opisovanje.
+L’étude d’un nom de famille ¦ Proučavanje prezimena ¦ Preučevanje priimka
+Un nom de famille ¦ Prezime ¦ Priimek
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Svi nositelji prezimena, njegove inačice, odakle potječu. ¦ Vsi nosilci priimka, njegove različice, od kod izvirajo.
+L’histoire d’une entreprise ou d’une association ¦ Povijest poduzeća ili udruge ¦ Zgodovina podjetja ali društva
+Entreprise ou association ¦ Poduzeće ili udruga ¦ Podjetje ali društvo
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Njegova mjesta, čelnici, zaposlenici ili članovi. ¦ Njegovi kraji, vodilni, zaposleni ali člani.
+Transmettre des souvenirs ¦ Prenošenje uspomena ¦ Prenos spominov
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Pisma za kasnije otvaranje, recepti, pjesme, uspomene koje ostavljaš. ¦ Pisma za poznejše odpiranje, recepti, pesmi, spomini, ki jih pustiš.
+Ce qui change ¦ Što se mijenja ¦ Kaj se spremeni
+Commencer avec une base vide ¦ Počni s praznom bazom ¦ Začni s prazno bazo
+🧪 Essayer avec une base d’exemple ¦ 🧪 Isprobaj s primjerom baze ¦ 🧪 Preizkusi z vzorčno bazo
+🧪 Base d’exemple ¦ 🧪 Primjer baze ¦ 🧪 Vzorčna baza
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Izmišljena obitelj za isprobavanje aplikacije: tvoje rodoslovlje ostaje netaknuto. ¦ Izmišljena družina za preizkus aplikacije: tvoje rodoslovje ostane nedotaknjeno.
+Revenir à ma généalogie ¦ Natrag na moje rodoslovlje ¦ Nazaj na moje rodoslovje
+Repartir d’une base vide ¦ Počni ispočetka s praznom bazom ¦ Začni znova s prazno bazo
+Ou bien : ¦ Ili: ¦ Ali pa:
+🐾 Créer le premier animal ¦ 🐾 Stvori prvu životinju ¦ 🐾 Ustvari prvo žival
+Créer le premier animal ¦ Stvori prvu životinju ¦ Ustvari prvo žival
+Espèce ¦ Vrsta ¦ Vrsta
+Création de la base… ¦ Stvaranje baze… ¦ Ustvarjanje baze…
+Préparation de la base d’exemple… ¦ Priprema primjera baze… ¦ Pripravljanje vzorčne baze…
+✓ Base créée ¦ ✓ Baza stvorena ¦ ✓ Baza ustvarjena
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Ništa nije konačno: Postavke → Izgled → „🧭 Namjena aplikacije”. ¦ ℹ️ Nič ni dokončno: Nastavitve → Videz → »🧭 Namen aplikacije«.
+🧭 Usage de l’app ¦ 🧭 Namjena aplikacije ¦ 🧭 Namen aplikacije
+🧭 Revoir le premier lancement ¦ 🧭 Ponovno pogledaj prvo pokretanje ¦ 🧭 Znova poglej prvi zagon
+Premier écran à l’ouverture ¦ Prvi zaslon pri otvaranju ¦ Prvi zaslon ob odprtju
+Le dernier écran ouvert (comme avant) ¦ Posljednji otvoreni zaslon (kao prije) ¦ Zadnji odprti zaslon (kot prej)
+Usage enregistré. ¦ Namjena spremljena. ¦ Namen shranjen.
+(la page va se recharger) ¦ (stranica će se ponovno učitati) ¦ (stran se bo znova naložila)
+Langue · Language ¦ Jezik · Language ¦ Jezik · Language
+Une petite visite ? ¦ Kratki obilazak? ¦ Kratek ogled?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ U {n} koraka aplikacija ti pokazuje gdje stvoriti zapis, dodati roditelja, fotografiju, događaj, napraviti sigurnosnu kopiju i pronaći pomoć. Traje dvije minute. ¦ V {n} korakih ti aplikacija pokaže, kje ustvariš zapis, dodaš starša, fotografijo, dogodek, narediš varnostno kopijo in najdeš pomoč. Traja dve minuti.
+▶ Commencer ¦ ▶ Započni ¦ ▶ Začni
+Plus tard ¦ Kasnije ¦ Pozneje
+Ne plus proposer ¦ Ne nudi više ¦ Ne ponujaj več
+Passer la visite ¦ Preskoči obilazak ¦ Preskoči ogled
+← Précédent ¦ ← Prethodno ¦ ← Nazaj
+Suivant → ¦ Sljedeće → ¦ Naprej →
+✓ Terminer ¦ ✓ Završi ¦ ✓ Končaj
+Étape {i} sur {n} ¦ Korak {i} od {n} ¦ Korak {i} od {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Vođeni obilazak, korak {i} od {n}: {what} ¦ Voden ogled, korak {i} od {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Možeš kliknuti zaokruženi gumb da to stvarno napraviš ili samo nastaviti dalje. ¦ Lahko klikneš obkroženi gumb in to zares narediš ali pa samo nadaljuješ.
+Ajouter un parent ¦ Dodaj roditelja ¦ Dodaj starša
+Ajouter une photo ¦ Dodaj fotografiju ¦ Dodaj fotografijo
+Un événement et son lieu ¦ Događaj i njegovo mjesto ¦ Dogodek in njegov kraj
+Faire une sauvegarde ¦ Napravi sigurnosnu kopiju ¦ Naredi varnostno kopijo
+Les Réglages et l’aide ¦ Postavke i pomoć ¦ Nastavitve in pomoč
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Svaka osoba ima svoj zapis. Ovaj gumb stvara novi: ime, prezime i krenuli smo. ¦ Vsaka oseba ima svoj zapis. Ta gumb ustvari novega: ime, priimek in gremo.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Na zapisu „＋” kod „Roditelji” povezuje oca ili majku: odaberi postojeći zapis ili ga stvori. Tako se gradi stablo. ¦ Na zapisu »＋« pri »Starša« poveže očeta ali mater: izberi obstoječi zapis ali ga ustvari. Tako raste drevo.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Ovdje zapisu dodaješ fotografije i isprave: uzmi ih iz svojih medija ili ih povuci s računala. ¦ Tukaj zapisu dodaš fotografije in listine: vzemi jih iz svojih medijev ali jih povleci iz računalnika.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Rođenje, vjenčanje, smrt… Dodaj događaj s datumom i mjestom: upiši prva slova mjesta, aplikacija će ga pronaći. ¦ Rojstvo, poroka, smrt… Dodaj dogodek z datumom in krajem: vtipkaj prve črke kraja, aplikacija ga najde.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ S vremena na vrijeme napravi sigurnosnu kopiju: ta datoteka čuva cijelo tvoje rodoslovlje i fotografije. Spremi je na USB stick ili drugi disk. ¦ Občasno naredi varnostno kopijo: ta datoteka hrani celotno tvoje rodoslovje in fotografije. Shrani jo na ključek USB ali drug disk.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Ovdje se sve podešava: izgled, uvoz, sigurnosne kopije… U Postavkama stranica „FAQ / vodič” odgovara na tvoja pitanja; tamo možeš i ponovno pokrenuti ovaj obilazak. ¦ Tukaj se vse nastavi: videz, uvoz, varnostne kopije… V Nastavitvah stran »FAQ / vodič« odgovarja na tvoja vprašanja; tam lahko tudi znova zaženeš ta ogled.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Obilazak završen. Za ponovni pregled: Postavke → FAQ / vodič → „▶ Ponovno pokreni vođeni obilazak”. ¦ ✓ Ogled končan. Za ponoven ogled: Nastavitve → FAQ / vodič → »▶ Znova zaženi voden ogled«.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Vođeni obilazak zatvoren. Pronaći ćeš ga u Postavke → FAQ / vodič. ¦ Voden ogled zaprt. Najdeš ga v Nastavitve → FAQ / vodič.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Nudi se kratki vođeni obilazak aplikacije. Započni, kasnije ili ne nudi više. ¦ Na voljo je kratek voden ogled aplikacije. Začni, pozneje ali ne ponujaj več.
+Rien à montrer sur cet écran pour l’instant. ¦ Na ovom zaslonu zasad nema ništa za prikaz. ¦ Na tem zaslonu za zdaj ni ničesar za prikaz.
+Pas de visite guidée en mode consultation. ¦ U načinu pregledavanja nema vođenog obilaska. ¦ V načinu ogleda ni vodenega ogleda.
+La visite guidée n’est pas possible ici. ¦ Vođeni obilazak ovdje nije moguć. ¦ Voden ogled tukaj ni mogoč.
+🐞 Signaler un problème ¦ 🐞 Prijavi problem ¦ 🐞 Prijavi težavo
+AIDE ¦ POMOĆ ¦ POMOČ
+Ce qui s’est passé ¦ Što se dogodilo ¦ Kaj se je zgodilo
+Ce que j’attendais ¦ Što sam očekivao/očekivala ¦ Kaj sem pričakoval/pričakovala
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Piši svojim riječima. Izbjegavaj imena svoje obitelji ako ne želiš da ih netko pročita. ¦ Piši s svojimi besedami. Izogibaj se imenom svoje družine, če ne želiš, da jih kdo prebere.
+Joindre le rapport technique ¦ Priloži tehničko izvješće ¦ Priloži tehnično poročilo
+Joindre le rapport technique ({x}) ¦ Priloži tehničko izvješće ({x}) ¦ Priloži tehnično poročilo ({x})
+aucune erreur captée ¦ nije zabilježena nijedna pogreška ¦ zabeležena ni nobena napaka
+Rapport technique ¦ Tehničko izvješće ¦ Tehnično poročilo
+🗑 Vider le journal ¦ 🗑 Isprazni dnevnik ¦ 🗑 Izprazni dnevnik
+Vider le journal des erreurs captées sur cet ordinateur ¦ Isprazni dnevnik pogrešaka zabilježenih na ovom računalu ¦ Izprazni dnevnik napak, zabeleženih na tem računalniku
+✉️ Écrire un e-mail ¦ ✉️ Napiši e-poruku ¦ ✉️ Napiši e-pošto
+Ouvrir une demande sur GitHub ¦ Otvori zahtjev na GitHubu ¦ Odpri zahtevek na GitHubu
+Journal des erreurs vidé ¦ Dnevnik pogrešaka ispražnjen ¦ Dnevnik napak izpraznjen
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Poruka kopirana: zalijepi je gdje želiš (e-pošta, forum, GitHub). ¦ ✓ Sporočilo kopirano: prilepi ga, kamor želiš (e-pošta, forum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Kopiranje nije uspjelo: označi tekst i kopiraj ga ručno. ¦ Kopiranje ni uspelo: označi besedilo in ga kopiraj ročno.
+Dis en quelques mots ce qui s’est passé. ¦ Reci u nekoliko riječi što se dogodilo. ¦ Povej v nekaj besedah, kaj se je zgodilo.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Npr.: kliknuo/kliknula sam „Spremi” u zapisu i prozor je ostao siv. ¦ Npr.: v zapisu sem kliknil/kliknila »Shrani« in okno je ostalo sivo.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Npr.: da se zapis spremi i prozor zatvori. ¦ Npr.: da se zapis shrani in okno zapre.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Za pisanje e-poruke umjesto otvaranja zahtjeva na GitHubu: postavi adresu u Postavke → „🔄 Ažuriranja”. ¦ Če želiš namesto zahtevka na GitHubu napisati e-pošto: nastavi naslov v Nastavitve → »🔄 Posodobitve«.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Primjer baze je izmišljena obitelj (5 generacija, nacrtane fotografije iz tog doba) spremljena zasebno u „Moja rodoslovlja”: tvoje rodoslovlje nikad se ne dira. ¦ Vzorčna baza je izmišljena družina (5 rodov, narisane fotografije iz tistega časa), shranjena posebej v »Moja rodoslovja«: tvojega rodoslovja se nikoli ne dotakne.
+Aucun fichier choisi ¦ Nije odabrana nijedna datoteka ¦ Nobena datoteka ni izbrana

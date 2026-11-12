@@ -1,0 +1,48 @@
+fr ¦ hr ¦ sl
+# ═════ zone « montage » : croate (hr) et slovène (sl) ═════
+Boutons des pistes : petits ¦ Gumbi traka: mali ¦ Gumbi sledi: majhni
+Boutons des pistes : grands ¦ Gumbi traka: veliki ¦ Gumbi sledi: veliki
+Les boutons des pistes ont déjà cette taille. ¦ Gumbi traka već su te veličine. ¦ Gumbi sledi so že te velikosti.
+Petits ¦ Mali ¦ Majhni
+Moyens (départ) ¦ Srednji (početno) ¦ Srednji (začetno)
+Grands ¦ Veliki ¦ Veliki
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Premjesti ovaj odjeljak: povuci ručku ili Alt + ↑ / ↓ ¦ Premakni ta razdelek: povleci ročico ali Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Odjeljci desne ploče: ↺ Vrati na početno ¦ Razdelki desne plošče: ↺ Ponastavi na začetno
+Sections du panneau de droite remises comme au départ ¦ Odjeljci desne ploče vraćeni na početno ¦ Razdelki desne plošče ponastavljeni na začetno
+Les sections du panneau de droite sont déjà comme au départ. ¦ Odjeljci desne ploče već su kao na početku. ¦ Razdelki desne plošče so že kot na začetku.
+Taille et place ¦ Veličina i položaj ¦ Velikost in položaj
+Durée, taille et place ¦ Trajanje, veličina i položaj ¦ Trajanje, velikost in položaj
+Couleurs de cette vidéo ¦ Boje ovog videa ¦ Barve tega videa
+Rotation et fondus ¦ Rotacija i pretapanja ¦ Vrtenje in prelivi
+Volume et effets ¦ Glasnoća i efekti ¦ Glasnost in učinki
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Boje i efekt starog filma ovog isječka vraćaju se na početno ¦ Barve in učinek starega filma tega odseka se vrnejo na začetno
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Boje i efekt starog filma cijelog filma vraćaju se na početno ¦ Barve in učinek starega filma celotnega filma se vrnejo na začetno
+Couleurs remises comme au départ ¦ Boje vraćene na početno ¦ Barve ponastavljene na začetno
+Le son de tout le film revient comme au départ (volume, effets) ¦ Zvuk cijelog filma vraća se na početno (glasnoća, efekti) ¦ Zvok celotnega filma se vrne na začetno (glasnost, učinki)
+Son du film remis comme au départ ¦ Zvuk filma vraćen na početno ¦ Zvok filma ponastavljen na začetno
+Texte remis comme au départ ¦ Tekst vraćen na početno ¦ Besedilo ponastavljeno na začetno
+Volume dans le temps ¦ Glasnoća kroz vrijeme ¦ Glasnost skozi čas
+Poser des points sur le morceau ¦ Postavi točke na isječak ¦ Postavi točke na odsek
+Point à la tête de lecture ¦ Točka na glavi za reprodukciju ¦ Točka na predvajalni glavi
+Effacer la courbe ¦ Obriši krivulju ¦ Izbriši krivuljo
+Courbe du volume effacée ¦ Krivulja glasnoće obrisana ¦ Krivulja glasnosti izbrisana
+Volume : {n} % ¦ Glasnoća: {n} % ¦ Glasnost: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Točke na krivulji: {n}. Srednja crta = glasnoća podešena gore; pri vrhu do dvostruko glasnije. ¦ Točke na krivulji: {n}. Srednja črta = glasnost, nastavljena zgoraj; na vrhu do dvakrat glasneje.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Još nema krivulje: glasnoća ostaje ista od početka do kraja (s pretapanjima). ¦ Krivulje še ni: glasnost ostane enaka od začetka do konca (s prelivi).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Na odabranom isječku, na vremenskoj crti: klik postavlja točku, povlačenjem je pomičeš (gore: glasnije, dolje: tiše), dvoklik je uklanja. ¦ Na izbranem odseku, na časovnici: klik postavi točko, s povlekom jo premakneš (gor: glasneje, dol: tiše), dvoklik jo odstrani.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Klikni na isječak na vremenskoj crti da postaviš točku; povuci točku da je pomakneš; dvoklik da je ukloniš. ¦ ✎ Klikni na odsek na časovnici, da postaviš točko; povleci točko, da jo premakneš; dvoklik, da jo odstraniš.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Ujednačenija glasnoća (tihi dijelovi rastu, glasni se stišavaju) ¦ Bolj enakomerna glasnost (tihi deli se okrepijo, glasni utišajo)
+Lieu de la réverbération ¦ Prostor odjeka ¦ Prostor odmeva
+Une grande salle ¦ Velika dvorana ¦ Velika dvorana
+Une église ¦ Crkva ¦ Cerkev
+Une cave ¦ Podrum ¦ Klet
+Gauche ↔ droite ¦ Lijevo ↔ desno ¦ Levo ↔ desno
+Police et couleur ¦ Font i boja ¦ Pisava in barva
+italique ¦ kurziv ¦ ležeče
+Contour et ombre ¦ Obrub i sjena ¦ Obroba in senca
+autour des lettres ¦ oko slova ¦ okoli črk
+Force de l’ombre ¦ Jačina sjene ¦ Moč sence
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Uključi „sjena” (Font i boja) da podesiš sjenu. ¦ Vklopi »senca« (Pisava in barva), da nastaviš senco.
+Bandeau derrière le texte ¦ Traka iza teksta ¦ Pas za besedilom
+Opacité du bandeau ¦ Neprozirnost trake ¦ Prekrivnost pasu
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Uključi „traka” (Font i boja): obojena pozadina iza teksta, više ili manje prozirna, s ravnim ili zaobljenim kutovima. ¦ Vklopi »pas« (Pisava in barva): barvno ozadje za besedilom, bolj ali manj prosojno, z ravnimi ali zaobljenimi vogali.
