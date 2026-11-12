@@ -361,3 +361,1203 @@ Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’anima
 Carré 👁＋ en premier dans la grille des boutons ¦ Kvadrat 👁＋ prvi u mreži gumba ¦ Kvadrat 👁＋ prvi v mreži gumbov
 en bas à droite de la fiche ¦ dolje desno u zapisu ¦ spodaj desno v zapisu
 Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01). ¦ Kvadrat slijedi i „Redoslijed i vidljivost gumba” iznad (redak 01). ¦ Kvadrat sledi tudi »Vrstni red in vidnost gumbov« zgoraj (vrstica 01).
+=élément retiré ¦ uklonjena stavka|uklonjene stavke|uklonjenih stavki ¦ odstranjen element|odstranjena elementa|odstranjeni elementi|odstranjenih elementov
+=heure ¦ sat|sata|sati ¦ ura|uri|ure|ur
+=généalogie ¦ rodoslovlje|rodoslovlja|rodoslovlja ¦ rodoslovje|rodoslovji|rodoslovja|rodoslovij
+=changement ¦ promjena|promjene|promjena ¦ sprememba|spremembi|spremembe|sprememb
+=paquet ¦ paket|paketa|paketa ¦ paket|paketa|paketi|paketov
+=chose changée des deux côtés ¦ stavka promijenjena na obje strane|stavke promijenjene na obje strane|stavki promijenjenih na obje strane ¦ stvar, spremenjena na obeh straneh|stvari, spremenjeni na obeh straneh|stvari, spremenjene na obeh straneh|stvari, spremenjenih na obeh straneh
+=changement reçu ¦ primljena promjena|primljene promjene|primljenih promjena ¦ prejeta sprememba|prejeti spremembi|prejete spremembe|prejetih sprememb
+=changement envoyé ¦ poslana promjena|poslane promjene|poslanih promjena ¦ poslana sprememba|poslani spremembi|poslane spremembe|poslanih sprememb
+=corrigée ¦ ispravljena|ispravljene|ispravljenih ¦ popravljena|popravljeni|popravljene|popravljenih
+=écartée ¦ odbačena|odbačene|odbačenih ¦ izločena|izločeni|izločene|izločenih
+=document traité ¦ obrađeni dokument|obrađena dokumenta|obrađenih dokumenata ¦ obdelan dokument|obdelana dokumenta|obdelani dokumenti|obdelanih dokumentov
+=erreur ¦ pogreška|pogreške|pogrešaka ¦ napaka|napaki|napake|napak
+=nom corrigé ¦ ispravljeno ime|ispravljena imena|ispravljenih imena ¦ popravljeno ime|popravljeni imeni|popravljena imena|popravljenih imen
+=document sélectionné ¦ odabrani dokument|odabrana dokumenta|odabranih dokumenata ¦ izbran dokument|izbrana dokumenta|izbrani dokumenti|izbranih dokumentov
+=photo ¦ fotografija|fotografije|fotografija ¦ fotografija|fotografiji|fotografije|fotografij
+=souvenir ¦ uspomena|uspomene|uspomena ¦ spomin|spomina|spomini|spominov
+=bonne réponse ¦ točan odgovor|točna odgovora|točnih odgovora ¦ pravilen odgovor|pravilna odgovora|pravilni odgovori|pravilnih odgovorov
+=chiffre tapé ¦ upisana znamenka|upisane znamenke|upisanih znamenki ¦ vtipkana števka|vtipkani števki|vtipkane števke|vtipkanih števk
+=an ¦ godina|godine|godina ¦ leto|leti|leta|let
+=raccourci ¦ prečac|prečaca|prečaca ¦ bližnjica|bližnjici|bližnjice|bližnjic
+=forme ¦ oblik|oblika|oblika ¦ oblika|obliki|oblike|oblik
+=chemin gardé ¦ zadržana putanja|zadržane putanje|zadržanih putanja ¦ ohranjena pot|ohranjeni poti|ohranjene poti|ohranjenih poti
+=famille vide ¦ prazna obitelj|prazne obitelji|praznih obitelji ¦ prazna družina|prazni družini|prazne družine|praznih družin
+=famille vide supprimée ¦ izbrisana prazna obitelj|izbrisane prazne obitelji|izbrisanih praznih obitelji ¦ izbrisana prazna družina|izbrisani prazni družini|izbrisane prazne družine|izbrisanih praznih družin
+=ligne exportée ¦ izvezeni redak|izvezena retka|izvezenih redaka ¦ izvožena vrstica|izvoženi vrstici|izvožene vrstice|izvoženih vrstic
+=autre élément ¦ druga stavka|druge stavke|drugih stavki ¦ drug element|druga elementa|drugi elementi|drugih elementov
+=fiche trouvée ¦ pronađeni zapis|pronađena zapisa|pronađenih zapisa ¦ najden zapis|najdena zapisa|najdeni zapisi|najdenih zapisov
+=hypothèse ¦ hipoteza|hipoteze|hipoteza ¦ hipoteza|hipotezi|hipoteze|hipotez
+=média enregistré ¦ spremljeni medij|spremljena medija|spremljenih medija ¦ shranjen medij|shranjena medija|shranjeni mediji|shranjenih medijev
+=fichier présent ¦ prisutna datoteka|prisutne datoteke|prisutnih datoteka ¦ prisotna datoteka|prisotni datoteki|prisotne datoteke|prisotnih datotek
+=lien familial impossible ignoré ¦ preskočena nemoguća obiteljska veza|preskočene nemoguće obiteljske veze|preskočenih nemogućih obiteljskih veza ¦ preskočena nemogoča družinska vez|preskočeni nemogoči družinski vezi|preskočene nemogoče družinske vezi|preskočenih nemogočih družinskih vezi
+=média introuvable ¦ medij nije pronađen|medija nisu pronađena|medija nije pronađeno ¦ manjkajoč medij|manjkajoča medija|manjkajoči mediji|manjkajočih medijev
+=mois ¦ mjesec|mjeseca|mjeseci ¦ mesec|meseca|meseci|mesecev
+=minute ¦ minuta|minute|minuta ¦ minuta|minuti|minute|minut
+=seconde ¦ sekunda|sekunde|sekundi ¦ sekunda|sekundi|sekunde|sekund
+=ligne ¦ redak|retka|redaka ¦ vrstica|vrstici|vrstice|vrstic
+=cadre ¦ okvir|okvira|okvira ¦ okvir|okvirja|okvirji|okvirjev
+=copie ¦ kopija|kopije|kopija ¦ kopija|kopiji|kopije|kopij
+Ressemblance {n} % ¦ Sličnost {n} % ¦ Podobnost {n} %
+Score {n}/110 ¦ Rezultat {n}/110 ¦ Rezultat {n}/110
+Naissances : {a} / {b} ¦ Rođenja: {a} / {b} ¦ Rojstva: {a} / {b}
+Décès : {a} / {b} ¦ Smrti: {a} / {b} ¦ Smrti: {a} / {b}
+Fusionner la fiche #{a} dans la fiche #{b} ? ¦ Spojiti zapis #{a} u zapis #{b}? ¦ Združim zapis #{a} v zapis #{b}?
+Lancer sur {n} ¦ Pokreni na: {n} ¦ Zaženi na: {n}
+{n} avec succès. ¦ Uspješno: {n}. ¦ Uspešno: {n}.
+{n} sera concernée. Confirmer pour {action} ? ¦ Obuhvaćeno: {n}. Potvrditi za {action}? ¦ Zajeto: {n}. Potrdiš za {action}?
+{n} seront concernées. Confirmer pour {action} ? ¦ Obuhvaćeno: {n}. Potvrditi za {action}? ¦ Zajeto: {n}. Potrdiš za {action}?
+corriger le nom inscrit en conservant une variante ¦ ispraviti upisano ime i zadržati inačicu ¦ popraviti vpisano ime in ohraniti različico
+rattacher au groupe ¦ povezati sa skupinom ¦ povezati s skupino
+{n} et ancien nom conservé. ¦ {n} i staro ime zadržano. ¦ {n} in staro ime ohranjeno.
+{n} et anciens noms conservés. ¦ {n} i stara imena zadržana. ¦ {n} in stara imena ohranjena.
+{n} rattachée au groupe. ¦ {n} povezano sa skupinom. ¦ {n} povezano s skupino.
+{n} rattachées au groupe. ¦ {n} povezano sa skupinom. ¦ {n} povezano s skupino.
+Couleur de « {name} » ¦ Boja „{name}” ¦ Barva »{name}«
+Pictogramme de « {name} » ¦ Ikona „{name}” ¦ Ikona »{name}«
+Supprimer le type « {name} » ? ¦ Izbrisati vrstu „{name}”? ¦ Izbrišem vrsto »{name}«?
+Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré. ¦ Uvoz „{name}” poništen: sve što je dodao je uklonjeno. ¦ Uvoz »{name}« razveljavljen: vse, kar je dodal, je odstranjeno.
+Supprimer définitivement la base « {name} » ? ¦ Trajno izbrisati bazu „{name}”? ¦ Trajno izbrišem bazo »{name}«?
+Convertir {n} Deed en Décès ? ¦ Pretvoriti {n} Deed u Smrt? ¦ Pretvorim {n} Deed v Smrt?
+Le texte sur « {name} » ¦ Tekst o „{name}” ¦ Besedilo o »{name}«
+Les photos de {name} ¦ Fotografije: {name} ¦ Fotografije: {name}
+{x} de {who} (lien) ¦ {x} – {who} ¦ {x} – {who}
+C’est toi ¦ To si ti ¦ To si ti
+c’est toi ¦ to si ti ¦ to si ti
+C’est toi ! ¦ To si ti! ¦ To si ti!
+C’est {rel}. ¦ To je {rel}. ¦ To je {rel}.
+Bonjour {name} ! ¦ Bok, {name}! ¦ Živjo, {name}!
+Bonjour ! ¦ Bok! ¦ Živjo!
+Bonjour {name}. Touche un gros bouton : {list}. ¦ Bok, {name}. Dodirni veliki gumb: {list}. ¦ Živjo, {name}. Dotakni se velikega gumba: {list}.
+Bonjour. Touche un gros bouton : {list}. ¦ Bok. Dodirni veliki gumb: {list}. ¦ Živjo. Dotakni se velikega gumba: {list}.
+Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »… ¦ Bok, {name}! Aplikacija će reći „tvoja majka”, „tvoj unuk”… ¦ Živjo, {name}! Aplikacija bo rekla »tvoja mama«, »tvoj vnuk« …
+D’accord. L’app ne dira pas les liens de famille. ¦ U redu. Aplikacija neće govoriti obiteljske veze. ¦ V redu. Aplikacija ne bo navajala družinskih vezi.
+⚠️ {what} (caché sur la tablette) ¦ ⚠️ {what} (skriveno na tabletu) ¦ ⚠️ {what} (skrito na tablici)
+{n} aujourd’hui ¦ Danas: {n} ¦ Danes: {n}
+Ce n’est pas {name} ? ¦ Nisi {name}? ¦ Nisi {name}?
+Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée ¦ Izlaz iz jednostavnog načina: drži prst pritisnut {n} sekundi ili drži tipku Enter ¦ Izhod iz preprostega načina: drži prst pritisnjen {n} sekund ali drži tipko Enter
+garde le doigt appuyé {n} s ¦ drži prst pritisnut {n} s ¦ drži prst pritisnjen {n} s
+Garde le doigt appuyé {n} secondes ¦ Drži prst pritisnut {n} sekundi ¦ Drži prst pritisnjen {n} sekund
+Vers les parents ¦ Prema roditeljima ¦ K staršem
+Vers les enfants ¦ Prema djeci ¦ K otrokom
+l’aîné ¦ najstariji ¦ najstarejši
+l’aînée ¦ najstarija ¦ najstarejša
+Regarder les {n} ¦ Pogledaj ({n}) ¦ Poglej ({n})
+{a} sur {b} ¦ {a} od {b} ¦ {a} od {b}
+vers {y} (date) ¦ oko {y} ¦ okoli {y}
+en {date} (année) ¦ {date}. ¦ leta {date}
+en {date} (mois) ¦ u {date} ¦ {date}
+le {date} (jour) ¦ {date} ¦ {date}
+à {place} (lieu) ¦ u mjestu {place} ¦ v kraju {place}
+{name} fait partie de la famille. ¦ {name} je dio obitelji. ¦ {name} je del družine.
+{name} est né {details}. ¦ {name} je rođen {details}. ¦ {name} se je rodil {details}.
+{name} est née {details}. ¦ {name} je rođena {details}. ¦ {name} se je rodila {details}.
+{name} a été baptisé {details}. ¦ {name} je kršten {details}. ¦ {name} je bil krščen {details}.
+{name} a été baptisée {details}. ¦ {name} je krštena {details}. ¦ {name} je bila krščena {details}.
+Il ¦ On ¦ On
+Elle ¦ Ona ¦ Ona
+C’est la fille de {names}. ¦ Ona je kći: {names}. ¦ Je hči: {names}.
+C’est le fils de {names}. ¦ On je sin: {names}. ¦ Je sin: {names}.
+C’est l’enfant de {names}. ¦ To je dijete: {names}. ¦ To je otrok: {names}.
+Il était {job}. ¦ Bio je {job}. ¦ Bil je {job}.
+Elle était {job}. ¦ Bila je {job}. ¦ Bila je {job}.
+Il a été {job}. ¦ Radio je kao {job}. ¦ Delal je kot {job}.
+Elle a été {job}. ¦ Radila je kao {job}. ¦ Delala je kot {job}.
+Il est {job}. ¦ On je {job}. ¦ Je {job}.
+Elle est {job}. ¦ Ona je {job}. ¦ Je {job}.
+Il s’est marié avec {name} {details}. ¦ Oženio se s: {name} {details}. ¦ Poročil se je z: {name} {details}.
+Elle s’est mariée avec {name} {details}. ¦ Udala se za: {name} {details}. ¦ Poročila se je z: {name} {details}.
+Il s’est marié avec {name}. ¦ Oženio se s: {name}. ¦ Poročil se je z: {name}.
+Elle s’est mariée avec {name}. ¦ Udala se za: {name}. ¦ Poročila se je z: {name}.
+Il a vécu avec {name}. ¦ Živio je s: {name}. ¦ Živel je z: {name}.
+Elle a vécu avec {name}. ¦ Živjela je s: {name}. ¦ Živela je z: {name}.
+Ils ont eu une fille, {name}. ¦ Imali su kćer, {name}. ¦ Imela sta hčer, {name}.
+Ils ont eu un fils, {name}. ¦ Imali su sina, {name}. ¦ Imela sta sina, {name}.
+Ils ont eu un enfant, {name}. ¦ Imali su dijete, {name}. ¦ Imela sta otroka, {name}.
+Ils ont eu {n} enfants : {names}. ¦ Djeca ({n}): {names}. ¦ Otroci ({n}): {names}.
+Aujourd’hui, il a {age}. ¦ Danas ima {age}. ¦ Danes je star {age}.
+Aujourd’hui, elle a {age}. ¦ Danas ima {age}. ¦ Danes je stara {age}.
+Il est décédé {details}, à {age}. ¦ Umro je {details}, u dobi od {age}. ¦ Umrl je {details}, star {age}.
+Elle est décédée {details}, à {age}. ¦ Umrla je {details}, u dobi od {age}. ¦ Umrla je {details}, stara {age}.
+Il est décédé {details}. ¦ Umro je {details}. ¦ Umrl je {details}.
+Elle est décédée {details}. ¦ Umrla je {details}. ¦ Umrla je {details}.
+né en {y} ¦ rođen {y}. ¦ rojen leta {y}
+née en {y} ¦ rođena {y}. ¦ rojena leta {y}
+mort en {y} ¦ umro {y}. ¦ umrl leta {y}
+morte en {y} ¦ umrla {y}. ¦ umrla leta {y}
+de {a} à {b} ¦ od {a} do {b} ¦ od {a} do {b}
+Toucher pour la mettre au milieu. ¦ Dodirni da je staviš u sredinu. ¦ Dotakni se, da jo postaviš v sredino.
+Toucher pour voir sa fiche. ¦ Dodirni da vidiš zapis. ¦ Dotakni se, da vidiš zapis.
+Les prénoms en « {x} » ¦ Imena na „{x}” ¦ Imena na »{x}«
+Personne ne s’appelle « {q} ». Vérifie l’orthographe. ¦ Nitko se ne zove „{q}”. Provjeri pravopis. ¦ Nihče ni »{q}«. Preveri črkovanje.
+Pas d’anniversaire aujourd’hui. ¦ Danas nema rođendana. ¦ Danes ni rojstnega dne.
+Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt. ¦ Danas nema rođendana. Evo što uskoro dolazi. ¦ Danes ni rojstnega dne. Tukaj je, kaj prihaja kmalu.
+📷 Des photos prises en {month} ¦ 📷 Fotografije snimljene u mjesecu: {month} ¦ 📷 Fotografije, posnete v mesecu: {month}
+La famille de {name} ¦ Obitelj: {name} ¦ Družina: {name}
+Aujourd’hui ! ¦ Danas! ¦ Danes!
+Demain ¦ Sutra ¦ Jutri
+Dans {n} jours ¦ Za {n} dana ¦ Čez {n} dni
+{n} depuis le début ¦ {n} od početka ¦ {n} od začetka
+Ce n’est pas {name}. Essaie encore ! ¦ To nije {name}. Pokušaj ponovno! ¦ To ni {name}. Poskusi znova!
+Ce n’est pas ça. Essaie encore ! ¦ Nije to. Pokušaj ponovno! ¦ Ni to. Poskusi znova!
+C’est {part} ¦ To je {part} ¦ To je {part}
+le matin ¦ jutro ¦ jutro
+l’après-midi ¦ poslijepodne ¦ popoldne
+le soir ¦ večer ¦ večer
+{n} sur 4 ¦ {n} od 4 ¦ {n} od 4
+⚠️ {what} pour qu’il apparaisse ¦ ⚠️ {what} da bi se pojavilo ¦ ⚠️ {what}, da se prikaže
+Modifier « {name} » ¦ Uredi „{name}” ¦ Uredi »{name}«
+Dupliquer « {name} » ¦ Dupliciraj „{name}” ¦ Podvoji »{name}«
+Retirer « {name} » ¦ Ukloni „{name}” ¦ Odstrani »{name}«
+Monter « {name} » ¦ Pomakni „{name}” gore ¦ Premakni »{name}« gor
+Descendre « {name} » ¦ Pomakni „{name}” dolje ¦ Premakni »{name}« dol
+Montrer « {name} » ¦ Prikaži „{name}” ¦ Prikaži »{name}«
+Afficher « {name} » ¦ Prikaži „{name}” ¦ Prikaži »{name}«
+cadres ajoutés au plus. ¦ dodanih okvira najviše. ¦ dodanih okvirjev največ.
+Côté {branch} ¦ Strana: {branch} ¦ Stran: {branch}
+Remettre « {name} » dans le mode simple ¦ Vrati „{name}” u jednostavni način ¦ Vrni »{name}« v preprosti način
+Photo ¦ Fotografija ¦ Fotografija
+{n} s par photo ¦ {n} s po fotografiji ¦ {n} s na fotografijo
+cadre après {n} min ¦ okvir za fotografije nakon {n} min ¦ fotookvir po {n} min
+sans cadre photo ¦ bez okvira za fotografije ¦ brez fotookvirja
+Chiffre {n} du code ¦ Znamenka {n} koda ¦ Števka {n} kode
+Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Što će {name} vidjeti na tabletu. Jednostavni način <b>ne dopušta ni uređivanje ni brisanje</b>: nema skrivenog izbornika ni desnog klika. ¦ Kar bo {name} videl/videla na tablici. Preprosti način <b>ne dovoli ne urejanja ne brisanja</b>: ni skritega menija ne desnega klika.
+Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Što će osoba vidjeti na tabletu. Jednostavni način <b>ne dopušta ni uređivanje ni brisanje</b>: nema skrivenog izbornika ni desnog klika. ¦ Kar bo oseba videla na tablici. Preprosti način <b>ne dovoli ne urejanja ne brisanja</b>: ni skritega menija ne desnega klika.
+Réglage « {name} » supprimé ¦ Postavka „{name}” izbrisana ¦ Nastavitev »{name}« izbrisana
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ Postavka „{name}” uvezena: klikni „Primijeni” da je upotrijebiš. ¦ Nastavitev »{name}« uvožena: klikni »Uporabi«, da jo uporabiš.
+Maison choisie : « {name} ». ¦ Odabrana kuća: „{name}”. ¦ Izbrana hiša: »{name}«.
+Maison ¦ Kuća ¦ Hiša
+Adresse copiée : {url} ¦ Adresa kopirana: {url} ¦ Naslov kopiran: {url}
+ ou  ¦ ili ¦ ali
+Seulement avec {what}. ¦ Samo s: {what}. ¦ Samo z: {what}.
+{what} remis comme au départ ¦ {what} vraćeno na početno ¦ {what} ponastavljeno na začetno
+activé ¦ uključeno ¦ vklopljeno
+désactivé ¦ isključeno ¦ izklopljeno
+Style des fiches : {name}. ¦ Stil zapisa: {name}. ¦ Slog zapisov: {name}.
+Style des fiches : {name} (retouché). ¦ Stil zapisa: {name} (prilagođeno). ¦ Slog zapisov: {name} (prilagojeno).
+ton {x} (lien) ¦ tvoj {x} ¦ tvoj {x}
+ta {x} (lien) ¦ tvoja {x} ¦ tvoja {x}
+le {x} (lien) ¦ {x} ¦ {x}
+la {x} (lien) ¦ {x} ¦ {x}
+la femme de {who} {name} (lien) ¦ žena od {who} {name} ¦ žena od {who} {name}
+le mari de {who} {name} (lien) ¦ muž od {who} {name} ¦ mož od {who} {name}
+le conjoint de {who} {name} (lien) ¦ partner od {who} {name} ¦ partner od {who} {name}
+lien|mère ¦ majka ¦ mama
+lien|père ¦ otac ¦ oče
+lien|parent ¦ roditelj ¦ starš
+lien|grand-mère ¦ baka ¦ babica
+lien|grand-père ¦ djed ¦ dedek
+lien|arrière-grand-mère ¦ prabaka ¦ prababica
+lien|arrière-grand-père ¦ pradjed ¦ pradedek
+lien|arrière-arrière-grand-mère ¦ praprabaka ¦ praprababica
+lien|arrière-arrière-grand-père ¦ prapradjed ¦ prapradedek
+lien|fille ¦ kći ¦ hči
+lien|fils ¦ sin ¦ sin
+lien|enfant ¦ dijete ¦ otrok
+lien|petite-fille ¦ unuka ¦ vnukinja
+lien|petit-fils ¦ unuk ¦ vnuk
+lien|arrière-petite-fille ¦ praunuka ¦ pravnukinja
+lien|arrière-petit-fils ¦ praunuk ¦ pravnuk
+lien|arrière-arrière-petite-fille ¦ prapraunuka ¦ prapravnukinja
+lien|arrière-arrière-petit-fils ¦ prapraunuk ¦ prapravnuk
+lien|sœur ¦ sestra ¦ sestra
+lien|frère ¦ brat ¦ brat
+lien|tante ¦ teta ¦ teta
+lien|oncle ¦ ujak ¦ stric
+lien|grand-tante ¦ prateta ¦ prateta
+lien|grand-oncle ¦ praujak ¦ prastric
+lien|arrière-grand-tante ¦ praprateta ¦ praprateta
+lien|arrière-grand-oncle ¦ prapraujak ¦ praprastric
+lien|arrière-arrière-grand-tante ¦ prapraprateta ¦ prapraprateta
+lien|arrière-arrière-grand-oncle ¦ praprapraujak ¦ prapraprastric
+lien|nièce ¦ nećakinja ¦ nečakinja
+lien|neveu ¦ nećak ¦ nečak
+lien|petite-nièce ¦ pranećakinja ¦ pranečakinja
+lien|petit-neveu ¦ pranećak ¦ pranečak
+lien|arrière-petite-nièce ¦ prapranećakinja ¦ prapranečakinja
+lien|arrière-petit-neveu ¦ prapranećak ¦ prapranečak
+lien|arrière-arrière-petite-nièce ¦ praprapranećakinja ¦ praprapranečakinja
+lien|arrière-arrière-petit-neveu ¦ praprapranećak ¦ praprapranečak
+lien|cousin germain ¦ prvi bratić ¦ prvi bratranec
+lien|cousine germaine ¦ prva sestrična ¦ prva sestrična
+lien|cousin issu de germains ¦ drugi bratić ¦ drugi bratranec
+lien|cousine issue de germains ¦ druga sestrična ¦ druga sestrična
+lien|cousin éloigné ¦ daljnji bratić ¦ daljni bratranec
+lien|cousine éloignée ¦ daljnja sestrična ¦ daljna sestrična
+lien|cousin ¦ bratić ¦ bratranec
+lien|cousine ¦ sestrična ¦ sestrična
+lien|femme ¦ žena ¦ žena
+lien|mari ¦ muž ¦ mož
+lien|conjoint ¦ partner ¦ partner
+lien|belle-mère ¦ svekrva/punica ¦ tašča
+lien|beau-père ¦ svekar/punac ¦ tast
+lien|belle-fille ¦ snaha ¦ snaha
+lien|gendre ¦ zet ¦ zet
+lien|beau-fils ¦ pastorak ¦ pastorek
+lien|belle-sœur ¦ šogorica ¦ svakinja
+lien|beau-frère ¦ šogor ¦ svak
+⚙️ Gérer les formes ({n}) ¦ ⚙️ Upravljaj oblicima ({n}) ¦ ⚙️ Upravljaj oblike ({n})
+Forme « {name} » supprimée ¦ Oblik „{name}” izbrisan ¦ Oblika »{name}« izbrisana
+Forme « {name} » importée : elle est dans le menu « Forme des avatars ». ¦ Oblik „{name}” uvezen: nalazi se u izborniku „Oblik avatara”. ¦ Oblika »{name}« uvožena: je v meniju »Oblika avatarjev«.
+Aucune forme pour « {q} ». Essaie un autre mot (cœur, arbre, étoile, croix…). ¦ Nema oblika za „{q}”. Pokušaj s drugom riječi (srce, stablo, zvijezda, križ…). ¦ Ni oblike za »{q}«. Poskusi z drugo besedo (srce, drevo, zvezda, križ …).
+{n} points au plus. ¦ Najviše {n} točaka. ¦ Največ {n} točk.
+{what} (scripts, textes, images, styles…) ¦ {what} (skripte, tekstovi, slike, stilovi…) ¦ {what} (skripte, besedila, slike, slogi …)
+Forme « {name} » enregistrée. ¦ Oblik „{name}” spremljen. ¦ Oblika »{name}« shranjena.
+Forme « {name} » créée : elle est dans le menu « Forme des avatars » (✎ Mes formes). ¦ Oblik „{name}” stvoren: nalazi se u izborniku „Oblik avatara” (✎ Moji oblici). ¦ Oblika »{name}« ustvarjena: je v meniju »Oblika avatarjev« (✎ Moje oblike).
+Ce qu’ouvre « {name} » ¦ Što otvara „{name}” ¦ Kaj odpre »{name}«
+Ouvre la fenêtre « ＋ Nouvelle personne » (ou un nouvel animal sur la page des animaux). Caché au départ. ¦ Otvara prozor „＋ Nova osoba” (ili novu životinju na stranici životinja). Skriveno na početku. ¦ Odpre okno »＋ Nova oseba« (ali novo žival na strani živali). Na začetku skrito.
+Raccourci : Enquêtes, sur cet onglet. Caché au départ. ¦ Prečac: Istrage, na ovoj kartici. Skriveno na početku. ¦ Bližnjica: Preiskave, na tem zavihku. Na začetku skrito.
+Raccourci : Listes → 🛠️ Outils de modification, sur cet outil. Caché au départ. ¦ Prečac: Popisi → 🛠️ Alati za uređivanje, na ovom alatu. Skriveno na početku. ¦ Bližnjica: Seznami → 🛠️ Orodja za urejanje, na tem orodju. Na začetku skrito.
+Forme : « {name} » ¦ Oblik: „{name}” ¦ Oblika: »{name}«
+Portraits : « {name} » ¦ Portreti: „{name}” ¦ Portreti: »{name}«
+Colonne de gauche : partir de « {name} » ¦ Lijevi stupac: kreni od „{name}” ¦ Levi stolpec: začni iz »{name}«
+Contrôlé {when} ¦ Provjereno {when} ¦ Preverjeno {when}
+Lieu corrigé : {name} ({what}) ¦ Mjesto ispravljeno: {name} ({what}) ¦ Kraj popravljen: {name} ({what})
+La bonne commune pour « {name} » ¦ Prava općina za „{name}” ¦ Prava občina za »{name}«
+Exception gardée : {what} ¦ Iznimka zadržana: {what} ¦ Izjema ohranjena: {what}
+Signalée de nouveau : {what} ¦ Ponovno prijavljeno: {what} ¦ Znova označeno: {what}
+Alerte {i} sur {n} ¦ Upozorenje {i} od {n} ¦ Opozorilo {i} od {n}
+{n} plus tard ¦ {n} kasnije ¦ {n} pozneje
+Date enregistrée : {date} ¦ Datum spremljen: {date} ¦ Datum shranjen: {date}
+✓ Alerte réglée ({date}) ¦ ✓ Upozorenje riješeno ({date}) ¦ ✓ Opozorilo rešeno ({date})
+Bandeau sur la fiche : {what} ¦ Traka na zapisu: {what} ¦ Pasica na zapisu: {what}
+{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas) ¦ {a} od {b} zapisa nema nijedno upozorenje (iznimke se ne broje) ¦ {a} od {b} zapisov nima nobenega opozorila (izjeme se ne štejejo)
+{n} ans ¦ Godina: {n} ¦ Let: {n}
+{n} mois ¦ Mjeseci: {n} ¦ Mesecev: {n}
+Supprimer les {n} familles vides ¦ Izbriši prazne obitelji ({n}) ¦ Izbriši prazne družine ({n})
+Supprimer les {n} familles vides ? ¦ Izbrisati prazne obitelji ({n})? ¦ Izbrišem prazne družine ({n})?
+Me le signaler à nouveau si une de ces dates change ¦ Ponovno mi to prijavi ako se neki od ovih datuma promijeni ¦ Znova mi to sporoči, če se kateri od teh datumov spremeni
+Me le signaler à nouveau si une de ces coordonnées change ¦ Ponovno mi to prijavi ako se neka od ovih koordinata promijeni ¦ Znova mi to sporoči, če se katera od teh koordinat spremeni
+Déjà pris par {os} ou le menu de l’application : « {what} ». ¦ Već zauzeto u {os} ili izborniku aplikacije: „{what}”. ¦ Že zasedeno v {os} ali meniju aplikacije: »{what}«.
+Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche. ¦ Već zauzeto u aplikaciji (čak i kad je alat otvoren): „{what}”. Najprije to promijeni u Tipkovničkim prečacima ako želiš ovu tipku. ¦ Že zasedeno v aplikaciji (tudi ko je orodje odprto): »{what}«. Najprej to spremeni v Bližnjicah na tipkovnici, če želiš to tipko.
+Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant. ¦ U ovom alatu ova tipka već služi za „{what}”: tvoj prečac ima prednost. ¦ V tem orodju ta tipka že služi za »{what}«: tvoja bližnjica bo imela prednost.
+La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose. ¦ Početna tipka ({key}) više neće raditi ovu radnju: slobodna je za nešto drugo. ¦ Začetna tipka ({key}) tega dejanja ne bo več izvajala: prosta je za kaj drugega.
+Déjà donné à « {what} » : il lui sera retiré. ¦ Već dodijeljeno za „{what}”: tamo će se ukloniti. ¦ Že dodeljeno za »{what}«: tam bo odstranjeno.
+Sans {key}, il ne marchera qu’en dehors des cases de texte. ¦ Bez {key} radit će samo izvan tekstnih polja. ¦ Brez {key} bo delovala samo zunaj besedilnih polj.
+NOUVEAU RACCOURCI ¦ NOVI PREČAC ¦ NOVA BLIŽNJICA
+Nouveau raccourci : {key} ¦ Novi prečac: {key} ¦ Nova bližnjica: {key}
+Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte. ¦ Dodijeli tipku bilo kojoj naredbi alata (izbornicima, alatima, gumbima). {os} i izbornik aplikacije imaju prednost: tipka koju oni koriste se odbija. Tvoj prečac ima prednost pred tipkom alata. Bez {key} radi samo izvan tekstnih polja. ¦ Dodeli tipko kateremu koli ukazu orodja (menijem, orodjem, gumbom). {os} in meni aplikacije imajo prednost: tipka, ki jo uporabljajo, je zavrnjena. Tvoja bližnjica ima prednost pred tipko orodja. Brez {key} deluje samo zunaj besedilnih polj.
+{n} à toi ¦ Tvojih: {n} ¦ Tvojih: {n}
+{a} et {n} autres personnes ¦ {a} i drugi ({n}) ¦ {a} in drugi ({n})
+Sinon, on lira : « {text} » ¦ Inače će se pročitati: „{text}” ¦ Sicer se bo prebralo: »{text}«
+Dicter dans ce champ ({key}) ¦ Diktiraj u ovo polje ({key}) ¦ Nareki v to polje ({key})
+Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter) ¦ Diktiraj: govori, tekst se piše na mjestu pokazivača ({key}, Esc za zaustavljanje) ¦ Nareki: govori, besedilo se piše pri kazalcu ({key}, Esc za ustavitev)
+Voici un message : il reste {n} secondes environ. ¦ Evo poruke: ostalo je otprilike {n} s. ¦ Tukaj je sporočilo: ostalo je približno {n} s.
+toutes les {n} ¦ svakih {n} ¦ vsakih {n}
+chaque jour ¦ svaki dan ¦ vsak dan
+chaque semaine ¦ svaki tjedan ¦ vsak teden
+Dernière sauvegarde : <b>{when}</b> ¦ Zadnja sigurnosna kopija: <b>{when}</b> ¦ Zadnja varnostna kopija: <b>{when}</b>
+Dernière sauvegarde : <b>jamais</b> ¦ Zadnja sigurnosna kopija: <b>nikad</b> ¦ Zadnja varnostna kopija: <b>nikoli</b>
+rien n’avait changé ¦ ništa se nije promijenilo ¦ nič se ni spremenilo
+dès maintenant ¦ odmah ¦ takoj
+Prochaine : {when} ({freq}). ¦ Sljedeća: {when} ({freq}). ¦ Naslednja: {when} ({freq}).
+Prochaine : {when} ({freq}, et à la fermeture). ¦ Sljedeća: {when} ({freq}, i pri zatvaranju). ¦ Naslednja: {when} ({freq} in ob zapiranju).
+Dernier essai raté : {error} ¦ Zadnji pokušaj nije uspio: {error} ¦ Zadnji poskus ni uspel: {error}
+Rien n’est bloqué : continue à travailler. ¦ Ništa nije blokirano: nastavi raditi. ¦ Nič ni blokirano: kar delaj naprej.
+Toutes mes généalogies ({n}) ¦ Sva moja rodoslovlja ({n}) ¦ Vsa moja rodoslovja ({n})
+Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Vratiti rodoslovlje na odabranu kopiju ({when})? Sve što si napravio/napravila od tada bit će zamijenjeno. Trenutna baza najprije se čuva u sigurnosnim kopijama („prije vraćanja”) da joj se možeš vratiti. ¦ Povrnem rodoslovje na izbrano kopijo ({when})? Vse, kar si naredil/naredila od takrat, bo zamenjano. Trenutna baza se najprej shrani med varnostne kopije (»pred obnovitvijo«), da se lahko vrneš nanjo.
+Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Vratiti rodoslovlje na odabranu kopiju? Sve što si napravio/napravila od tada bit će zamijenjeno. Trenutna baza najprije se čuva u sigurnosnim kopijama („prije vraćanja”) da joj se možeš vratiti. ¦ Povrnem rodoslovje na izbrano kopijo? Vse, kar si naredil/naredila od takrat, bo zamenjano. Trenutna baza se najprej shrani med varnostne kopije (»pred obnovitvijo«), da se lahko vrneš nanjo.
+✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}. ¦ ✓ Rodoslovlje vraćeno iz kopije ({n}). Staro je sačuvano: {file}. ¦ ✓ Rodoslovje povrnjeno iz kopije ({n}). Staro je shranjeno: {file}.
+✓ Sauvegarde faite et vérifiée ({n}) : {size}. ¦ ✓ Sigurnosna kopija napravljena i provjerena ({n}): {size}. ¦ ✓ Varnostna kopija narejena in preverjena ({n}): {size}.
+✓ Sauvegarde faite et vérifiée : {size}. ¦ ✓ Sigurnosna kopija napravljena i provjerena: {size}. ¦ ✓ Varnostna kopija narejena in preverjena: {size}.
+Supprimée sur cet ordinateur, modifiée sur « {name} ». ¦ Izbrisano na ovom računalu, promijenjeno na „{name}”. ¦ Izbrisano na tem računalniku, spremenjeno na »{name}«.
+Modifiée ici, supprimée sur « {name} ». ¦ Promijenjeno ovdje, izbrisano na „{name}”. ¦ Spremenjeno tukaj, izbrisano na »{name}«.
+modifiée des deux côtés ¦ promijenjeno na obje strane ¦ spremenjeno na obeh straneh
+Sur « {name} » ¦ Na „{name}” ¦ Na »{name}«
+<b>{n}</b> à envoyer ¦ Za slanje: <b>{n}</b> ¦ Za pošiljanje: <b>{n}</b>
+<b>{n}</b> à recevoir ¦ Za primanje: <b>{n}</b> ¦ Za prejem: <b>{n}</b>
+Rien à envoyer ¦ Ništa za slanje ¦ Nič za pošiljanje
+Rien à recevoir ¦ Ništa za primanje ¦ Nič za prejem
+Dernière synchronisation : {when} ¦ Zadnja sinkronizacija: {when} ¦ Zadnja sinhronizacija: {when}
+jamais ¦ nikad ¦ nikoli
+⚠️ {n} : choisis ¦ ⚠️ {n}: odaberi ¦ ⚠️ {n}: izberi
+rien de nouveau ¦ ništa novo ¦ nič novega
+{n} de « {from} » ¦ {n} od „{from}” ¦ {n} od »{from}«
+Déjà à jour ¦ Već ažurno ¦ Že posodobljeno
+⚠️ {n} : à toi de choisir. ¦ ⚠️ {n}: ti odaberi. ¦ ⚠️ {n}: izberi ti.
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}). ¦ Ovo rodoslovlje već je otvoreno na računalu <b>„{name}”</b> (od {when}). ¦ To rodoslovje je že odprto na računalniku <b>»{name}«</b> (od {when}).
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>. ¦ Ovo rodoslovlje već je otvoreno na računalu <b>„{name}”</b>. ¦ To rodoslovje je že odprto na računalniku <b>»{name}«</b>.
+Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer). ¦ Ipak otvoriti? Učini to samo ako je „{name}” isključeno ili je aplikacija tamo zatvorena (inače se datoteka može oštetiti). ¦ Vseeno odprem? To naredi samo, če je »{name}« izklopljen ali je aplikacija tam zaprta (sicer se datoteka lahko poškoduje).
+Télécharger LCNDA {v} ¦ Preuzmi LCNDA {v} ¦ Prenesi LCNDA {v}
+{a} sur {b}… ¦ {a} od {b}… ¦ {a} od {b} …
+Plus de message pour la version {v} ¦ Nema više poruka za verziju {v} ¦ Ni več sporočil za različico {v}
+🔄 Une nouvelle version {v} est disponible. ¦ 🔄 Dostupna je nova verzija {v}. ¦ 🔄 Na voljo je nova različica {v}.
+regardé {when} ¦ provjereno {when} ¦ preverjeno {when}
+« 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ „🔍 Provjeri ažuriranja” provjerava odmah. ¦ »🔍 Preveri posodobitve« preveri takoj.
+Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ Još nije provjereno na ovom računalu. „🔍 Provjeri ažuriranja” provjerava odmah. ¦ Na tem računalniku še ni preverjeno. »🔍 Preveri posodobitve« preveri takoj.
+Tu as la dernière version publiée ({v}){when}. ¦ Imaš najnoviju objavljenu verziju ({v}){when}. ¦ Imaš najnovejšo objavljeno različico ({v}){when}.
+Une nouvelle version {v} est disponible (tu as la {cur}). ¦ Dostupna je nova verzija {v} (ti imaš {cur}). ¦ Na voljo je nova različica {v} (ti imaš {cur}).
+Tu as choisi de ne plus être prévenu pour la {v}{when}. ¦ Odabrao/odabrala si da više ne dobivaš obavijesti za {v}{when}. ¦ Izbral/izbrala si, da te za {v} ne obveščamo več{when}.
+Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse. ¦ Ova postavka dolazi iz drugog alata („{name}”): ne ide u preglednik. ¦ Ta nastavitev prihaja iz drugega orodja (»{name}«): ne gre v pregledovalnik.
+Réglage « {name} » mis. ¦ Postavka „{name}” primijenjena. ¦ Nastavitev »{name}« uporabljena.
+Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste. ¦ Poredaj s ↑ ↓, označi što se prikazuje u stupcu, u skupinama ili u jednom popisu. ¦ Razvrsti z ↑ ↓, označi, kaj se prikaže v stolpcu, v skupinah ali na enem seznamu.
+Range avec ↑ ↓, en groupes ou en une seule liste. ¦ Poredaj s ↑ ↓, u skupinama ili u jednom popisu. ¦ Razvrsti z ↑ ↓, v skupinah ali na enem seznamu.
+Réordonner les listes ¦ Promijeni redoslijed popisa ¦ Spremeni vrstni red seznamov
+Réordonner les pages ¦ Promijeni redoslijed stranica ¦ Spremeni vrstni red strani
+Réordonner les {what} ¦ Promijeni redoslijed: {what} ¦ Spremeni vrstni red: {what}
+Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer. ¦ Poredaj s ↑ ↓, označi što se prikazuje, u skupinama ili u jednom popisu. Zatim Spremi. ¦ Razvrsti z ↑ ↓, označi, kaj se prikaže, v skupinah ali na enem seznamu. Nato Shrani.
+Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer. ¦ Poredaj s ↑ ↓, u skupinama ili u jednom popisu. Zatim Spremi. ¦ Razvrsti z ↑ ↓, v skupinah ali na enem seznamu. Nato Shrani.
+Garde au moins une liste visible. ¦ Ostavi barem jedan popis vidljiv. ¦ Pusti vsaj en seznam viden.
+Garde au moins une page visible. ¦ Ostavi barem jednu stranicu vidljivu. ¦ Pusti vsaj eno stran vidno.
+(CC BY 4.0) ; collectivités locales d’Australie : © ¦ (CC BY 4.0); lokalne samouprave Australije: © ¦ (CC BY 4.0); lokalne skupnosti Avstralije: ©
+(OGL v3) ; paroisses civiles d’Irlande : © ¦ (OGL v3); civilne župe Irske: © ¦ (OGL v3); civilne župnije Irske: ©
+(William & Mary geoLab), d’après leurs sources (gouvernements, OCHA, Banque mondiale, GRID3…), licences ouvertes indiquées pays par pays dans le fichier de chaque pays (domaine public, CC BY, CC BY IGO, ODbL, CC BY-SA pour le Togo et Taïwan). ¦ (William & Mary geoLab), prema njihovim izvorima (vlade, OCHA, Svjetska banka, GRID3…), otvorene licence navedene za svaku zemlju u datoteci te zemlje (javno dobro, CC BY, CC BY IGO, ODbL, CC BY-SA za Togo i Tajvan). ¦ (William & Mary geoLab), po njihovih virih (vlade, OCHA, Svetovna banka, GRID3 …), odprte licence, navedene za vsako državo v njeni datoteki (javna last, CC BY, CC BY IGO, ODbL, CC BY-SA za Togo in Tajvan).
+(auto = comme l’app) ¦ (auto = kao aplikacija) ¦ (samodejno = kot aplikacija)
+(avec ou sans accents). Ex. : ¦ (s naglascima ili bez njih). Npr.: ¦ (z naglasi ali brez njih). Npr.:
+(domaine public) ; paroisses d’Angleterre et du pays de Galles : © ¦ (javno dobro); župe Engleske i Walesa: © ¦ (javna last); župnije Anglije in Walesa: ©
+(familles qu’on ouvre et referme) ¦ (obitelji koje se otvaraju i zatvaraju) ¦ (družine, ki se odpirajo in zapirajo)
+(hors des cases de texte) ¦ (izvan tekstnih polja) ¦ (zunaj besedilnih polj)
+(jusqu’à 32 px). ¦ (do 32 px). ¦ (do 32 px).
+(style « Onglets en haut ») ¦ (stil „Kartice na vrhu”) ¦ (slog »Zavihki na vrhu«)
+(un petit fichier, par e-mail par exemple). ¦ (mala datoteka, na primjer e-poštom). ¦ (majhna datoteka, na primer po e-pošti).
+), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. ¦ ), govori i tekst se piše na mjestu pokazivača. Za interpunkciju reci „virgule”, „point”, „point d’interrogation”, „deux points”, „à la ligne” ili „nouveau paragraphe” (glasovne naredbe na francuskom). ¦ ), govori in besedilo se piše pri kazalcu. Za ločila reci »virgule«, »point«, »point d’interrogation«, »deux points«, »à la ligne« ali »nouveau paragraphe« (glasovni ukazi v francoščini).
+). Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ ). Podešava se oblikom zaglavlja, niže na ovoj stranici. ¦ ). Nastavi se z obliko glave, niže na tej strani.
+, contient des données OS © Crown copyright (OGL v3) ; paroisses civiles d’Écosse : © ¦ , sadrži podatke OS © Crown copyright (OGL v3); civilne župe Škotske: © ¦ , vsebuje podatke OS © Crown copyright (OGL v3); civilne župnije Škotske: ©
+, données sous licence ¦ , podaci pod licencom ¦ , podatki pod licenco
+, même dans un tableau large avec beaucoup de colonnes. ¦ , čak i u širokoj tablici s mnogo stupaca. ¦ , tudi v široki tabeli z veliko stolpci.
+. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ . Nijedan zapis se ne briše: osobe ostaju tamo, čak i kad je kartica skrivena. Možeš ih uključiti nekoliko: njihove se kartice zbrajaju. ¦ . Noben zapis se ne izbriše: osebe ostanejo tam, tudi ko je zavihek skrit. Vklopiš jih lahko več: njihovi zavihki se seštejejo.
+. Double-clic sur un curseur : valeur de départ. ¦ . Dvostruki klik na klizač: početna vrijednost. ¦ . Dvoklik na drsnik: začetna vrednost.
+. Même licence pour les communes d’Amérique du Sud, du Moyen-Orient, d’Asie et d’une partie de l’Afrique. ¦ . Ista licenca za općine Južne Amerike, Bliskog istoka, Azije i dijela Afrike. ¦ . Ista licenca za občine Južne Amerike, Bližnjega vzhoda, Azije in dela Afrike.
+12/03/1790, mars 1790 ou 1790 ¦ 12/03/1790, mars 1790 ili 1790 ¦ 12/03/1790, mars 1790 ali 1790
+1re heure du jour, au lever du soleil ¦ 1. sat dana, pri izlasku sunca ¦ 1. ura dneva, ob sončnem vzhodu
+3e heure, milieu de la matinée (heure de la grand-messe) ¦ 3. sat, sredina prijepodneva (vrijeme velike mise) ¦ 3. ura, sredina dopoldneva (čas velike maše)
+9e heure, milieu de l’après-midi ¦ 9. sat, sredina poslijepodneva ¦ 9. ura, sredina popoldneva
+256 ancêtres de la génération 8 en théorie (Sosa 256 à 511) ; 510 ancêtres en tout jusqu’à cette génération ¦ U teoriji 256 predaka u 8. generaciji (Sosa 256 do 511); ukupno 510 predaka do te generacije ¦ V teoriji 256 prednikov v 8. rodu (Sosa 256 do 511); skupaj 510 prednikov do tega rodu
+4 générations ¦ 4 generacije ¦ 4 rodovi
+5 générations ¦ 5 generacija ¦ 5 rodov
+6 générations ¦ 6 generacija ¦ 6 rodov
+6 secondes (de départ) ¦ 6 sekundi (početno) ¦ 6 sekund (začetno)
+4 tailles seulement : 22 px (dans une ligne), 34 px (listes, menu de choix), 48 px (arbre, vignettes), 88 px (fiche). ¦ Samo 4 veličine: 22 px (u retku), 34 px (popisi, izbornik odabira), 48 px (stablo, sličice), 88 px (zapis). ¦ Samo 4 velikosti: 22 px (v vrstici), 34 px (seznami, meni za izbiro), 48 px (drevo, sličice), 88 px (zapis).
+: boutons et barres d’outils au trait, rubriques et contenus en émoji (💍 conjoints, 🎂 anniversaires…). ¦ : obrisne ikone za gumbe i alatne trake, emoji za rubrike i sadržaje (💍 supružnici, 🎂 rođendani…). ¦ : obrisne ikone za gumbe in orodne vrstice, emodžiji za rubrike in vsebine (💍 zakonci, 🎂 rojstni dnevi …).
+: chaque bouton est une vraie « touche » encadrée, avec son ombre. ¦ : svaki gumb je prava uokvirena „tipka” sa sjenom. ¦ : vsak gumb je prava uokvirjena »tipka« s senco.
+: coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence. ¦ : gotovo ravni kutovi, tanke linije, lagana tekstura papira iza stranica. Za krem pozadinu odaberi predložak „Arhivski papir” u Izgledu. ¦ : skoraj ravni koti, tanke črte, rahla papirna tekstura za stranmi. Za kremno ozadje izberi predlogo »Arhivski papir« v Videzu.
+: comme un registre, on voit beaucoup de lignes. ¦ : kao u matičnoj knjizi, vidi se mnogo redaka. ¦ : kot v matični knjigi, vidiš veliko vrstic.
+: des émojis en couleur, faciles à reconnaître. ¦ : emoji u boji, lako prepoznatljivi. ¦ : barvni emodžiji, lahko prepoznavni.
+: grand nom très lisible, outils toujours à droite. ¦ : veliko, vrlo čitljivo ime, alati uvijek desno. ¦ : veliko, zelo berljivo ime, orodja vedno desno.
+: le style « néo-brutal » que tu connais, net et très lisible. ¦ : „neobrutalni” stil koji poznaješ, jasan i vrlo čitljiv. ¦ : »neobrutalni« slog, ki ga poznaš, jasen in zelo berljiv.
+: les autres restent visibles mais plus légers. ¦ : ostali ostaju vidljivi, ali blaži. ¦ : drugi ostanejo vidni, a bolj bledi.
+: les lignes sont hautes, on ne se trompe pas de ligne. ¦ : redci su visoki, ne možeš pogriješiti redak. ¦ : vrstice so visoke, ne zgrešiš vrstice.
+: l’équilibre actuel entre place et lisibilité. ¦ : trenutna ravnoteža između prostora i čitljivosti. ¦ : trenutno ravnovesje med prostorom in berljivostjo.
+: nom, prénoms, naissance, décès rangés dans des cases fixes. ¦ : prezime, imena, rođenje, smrt u fiksnim poljima. ¦ : priimek, imena, rojstvo, smrt v stalnih poljih.
+: parfait pour les longues listes et les petits écrans. ¦ : savršeno za duge popise i male zaslone. ¦ : odlično za dolge sezname in majhne zaslone.
+: rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures. ¦ : ništa ne strši, važan je samo sadržaj. Idealno za ispis ili snimke zaslona. ¦ : nič ne štrli, šteje le vsebina. Idealno za tiskanje ali posnetke zaslona.
+: toutes les icônes ont le même trait et prennent la couleur du texte (aussi en mode sombre). ¦ : sve ikone imaju istu liniju i preuzimaju boju teksta (i u tamnom načinu). ¦ : vse ikone imajo enako črto in prevzamejo barvo besedila (tudi v temnem načinu).
+: traits dans les Listes, cartes encadrées dans la colonne Personnes. ¦ : linije u Popisima, uokvirene kartice u stupcu Osobe. ¦ : črte v Seznamih, uokvirjene kartice v stolpcu Osebe.
+: traits fins et pâles, coins ronds, ombres floues comme sur un téléphone. ¦ : tanke blijede linije, zaobljeni kutovi, meke sjene kao na telefonu. ¦ : tanke blede črte, zaobljeni koti, mehke sence kot na telefonu.
+: une clé USB, ou un dossier iCloud Drive, Dropbox, OneDrive… L’app n’utilise aucun service en ligne et n’a pas besoin de serveur : chaque ordinateur garde sa base et dépose ses changements dans ce dossier ; l’autre les reprend. ¦ : USB stick ili mapa iCloud Drive, Dropbox, OneDrive… Aplikacija ne koristi nijednu mrežnu uslugu i ne treba poslužitelj: svako računalo čuva svoju bazu i odlaže svoje promjene u tu mapu; drugo ih preuzima. ¦ : ključek USB ali mapa iCloud Drive, Dropbox, OneDrive … Aplikacija ne uporablja nobene spletne storitve in ne potrebuje strežnika: vsak računalnik hrani svojo bazo in odloži svoje spremembe v to mapo; drugi jih prevzame.
+: une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil. ¦ : velika fotografija (kuća, obitelj, selo) i okrugli portret preko nje, kao profil. ¦ : velika fotografija (hiša, družina, vas) in okrogel portret čez njo, kot profil.
+: « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol. ¦ : „Odustani”, „Uredi” postaju riječi u boji, podcrtane pri prelasku mišem. ¦ : »Prekliči«, »Uredi« postanejo barvne besede, podčrtane ob premiku miške.
+: « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa. ¦ : „Rođena … u …, umrla …”, ovalni portret u sepiji, Sosa pečat. ¦ : »Rojena … v …, umrla …«, ovalni portret v sepiji, žig Sosa.
+; des Pays-Bas : © ¦ ; Nizozemske: © ¦ ; Nizozemske: ©
+; du Québec : © ¦ ; Quebeca: © ¦ ; Quebeca: ©
+; noms traduits en français. Les autres formes sont dessinées pour l’application. ¦ ; nazivi prevedeni na francuski. Ostali oblici nacrtani su za aplikaciju. ¦ ; imena prevedena v francoščino. Druge oblike so narisane za aplikacijo.
+Accents et esprits (s’ajoutent à la lettre avant le curseur) ¦ Naglasci i spiritusi (dodaju se slovu ispred pokazivača) ¦ Naglasi in spiritusi (dodajo se črki pred kazalcem)
+Accents é è ê, et ç, œ, æ. ¦ Naglasci é è ê te ç, œ, æ. ¦ Naglasi é è ê ter ç, œ, æ.
+Actes et documents ¦ Matični zapisi i dokumenti ¦ Matični vpisi in dokumenti
+Affichage des événements ¦ Prikaz događaja ¦ Prikaz dogodkov
+Afficher ce bouton ¦ Prikaži ovaj gumb ¦ Prikaži ta gumb
+Afficher cette catégorie ¦ Prikaži ovu kategoriju ¦ Prikaži to kategorijo
+Afficher dans la fiche ¦ Prikaži u zapisu ¦ Prikaži v zapisu
+Afficher dans le menu ¦ Prikaži u izborniku ¦ Prikaži v meniju
+Afficher la liste des raccourcis ¦ Prikaži popis prečaca ¦ Prikaži seznam bližnjic
+Afficher le cadre (défaut) ¦ Prikaži okvir (zadano) ¦ Prikaži okvir (privzeto)
+Afficher seulement si renseigné ¦ Prikaži samo ako je ispunjeno ¦ Prikaži samo, če je izpolnjeno
+Affiché : clique pour le cacher ¦ Prikazano: klikni da sakriješ ¦ Prikazano: klikni, da skriješ
+Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas. ¦ Utječe na unutarnje margine i razmak između blokova. 100 % = kao prije. „Veličina slova” u Izgledu ostaje zasebno i zbraja se; lijevi stupac postavljen na „Zbijeno” (kartica Stupac) zadržava svoju veličinu: Gustoća ga ne dira. ¦ Vpliva na notranje robove in razmik med bloki. 100 % = kot prej. »Velikost pisave« v Videzu ostane ločena in se prišteje; levi stolpec, nastavljen na »Zgoščeno« (zavihek Stolpec), ohrani svojo velikost: Gostota se ga ne dotakne.
+Agrandit et aère le texte. Les outils en plein écran gardent leur taille pour que leurs réglages restent à leur place. ¦ Povećava tekst i daje mu više zraka. Alati preko cijelog zaslona zadržavaju svoju veličinu da njihove postavke ostanu na mjestu. ¦ Poveča besedilo in mu da več zraka. Orodja čez cel zaslon ohranijo svojo velikost, da njihove nastavitve ostanejo na mestu.
+Aide : Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Pomoć: Što radiš s aplikacijom: njezine kartice i prvi zaslon. Nijedan zapis se ne briše. ¦ Pomoč: Kaj počneš z aplikacijo: njeni zavihki in prvi zaslon. Noben zapis se ne izbriše.
+Aide : Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Pomoć: Odaberi vrstu sljepoće za boje: aplikacija ispravlja boje da ih bolje razlikuješ. Male točkice pokazuju kako se te boje vide. ¦ Pomoč: Izberi vrsto barvne slepote: aplikacija popravi barve, da jih bolje ločiš. Majhne pike kažejo, kako se te barve vidijo.
+Aide : La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Pomoć: Oblik malih numeriranih kvadrata blokova i inicijala na zapisima. Dodaj svoje oblike (biblioteka ploča, nacrtani poligon, uvezeni SVG), poredaj popis izbornika „Oblik avatara”, sakrij one koje ne koristiš. ¦ Pomoč: Oblika majhnih oštevilčenih kvadratkov blokov in začetnic na zapisih. Dodaj svoje oblike (knjižnica tabel, narisan mnogokotnik, uvožen SVG), uredi seznam menija »Oblika avatarjev«, skrij tiste, ki jih ne uporabljaš.
+(CC BY 4.0) ; de Slovénie : © ¦ (CC BY 4.0); Slovenije: © ¦ (CC BY 4.0); Slovenije: ©
+3 fiches trouvées ¦ Pronađena su 3 zapisa ¦ Najdeni so 3 zapisi
+Aide des touches ¦ Pomoć za tipke ¦ Pomoč za tipke
+Anniversaires et souvenirs ¦ Rođendani i uspomene ¦ Rojstni dnevi in spomini
+Année ¦ Godina ¦ Leto
+Année de naissance lue par SocFace ¦ Godina rođenja koju je očitao SocFace ¦ Leto rojstva, ki ga je prebral SocFace
+Aperçu vivant ¦ Živi pregled ¦ Živi predogled
+Appeler quelqu’un ¦ Nazovi nekoga ¦ Pokliči nekoga
+Arial, comme d’habitude. ¦ Arial, kao i obično. ¦ Arial, kot običajno.
+Arrondi des coins ¦ Zaobljenost kutova ¦ Zaobljenost kotov
+Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible. ¦ Atkinson Hyperlegible: napravljen za slabovidne (slova koja se ne brkaju: I l 1, O 0). Uvijek dostupan. ¦ Atkinson Hyperlegible: narejena za slabovidne (črke, ki se ne zamenjujejo: I l 1, O 0). Vedno na voljo.
+Atkinson Hyperlegible, texte 30 px, très gros boutons ¦ Atkinson Hyperlegible, tekst 30 px, vrlo veliki gumbi ¦ Atkinson Hyperlegible, besedilo 30 px, zelo veliki gumbi
+Au démarrage, une fois par jour au plus. Seule une demande « quelle est la dernière version ? » part vers GitHub : aucune donnée de ta généalogie, aucun identifiant. Rien n’est installé tout seul. ¦ Pri pokretanju, najviše jednom dnevno. Prema GitHubu ide samo upit „koja je najnovija verzija?”: nikakvi podaci iz tvog rodoslovlja, nikakav identifikator. Ništa se ne instalira samo. ¦ Ob zagonu, največ enkrat na dan. Na GitHub gre samo poizvedba »katera je najnovejša različica?«: nobenih podatkov iz tvojega rodoslovja, nobenega identifikatorja. Nič se ne namesti samo.
+Aucun fichier média manquant. ¦ Nema nedostajućih medijskih datoteka. ¦ Ni manjkajočih medijskih datotek.
+Aucune modification pour ce filtre. ¦ Nema promjena za ovaj filtar. ¦ Ni sprememb za ta filter.
+Aucune ombre ¦ Bez sjene ¦ Brez sence
+Aucune voix française trouvée ¦ Nije pronađen francuski glas ¦ Ni najdenega francoskega glasu
+Aujourd’hui, pas de portrait dans les cases de l’arbre. ¦ Danas nema portreta u poljima stabla. ¦ Danes ni portretov v poljih drevesa.
+Aussi : ⇧ + Entrée dans la recherche rapide. ¦ Također: ⇧ + Enter u brzoj pretrazi. ¦ Tudi: ⇧ + Enter v hitrem iskanju.
+Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ. ¦ Također u Postavke → Pristupačnost → 🧓 Jednostavni način („Prikaži gumb”). Skriveno na početku. ¦ Tudi v Nastavitve → Dostopnost → 🧓 Preprosti način (»Prikaži gumb«). Na začetku skrito.
+Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »). ¦ Također u postavkama kalkulatora („Gumb 🧮 u gornjoj traci”). ¦ Tudi v nastavitvah kalkulatorja (»Gumb 🧮 v zgornji vrstici«).
+Avec les médias (photos, actes, sons…) ¦ S medijima (fotografije, matični zapisi, zvukovi…) ¦ Z mediji (fotografije, matični vpisi, zvoki …)
+Avec les pastilles ¦ S oznakama ¦ Z značkami
+Aérée ¦ Prozračno ¦ Zračno
+Bande d’actions rapides ¦ Traka brzih radnji ¦ Pas hitrih dejanj
+Baptême loin de la naissance ¦ Krštenje daleko od rođenja ¦ Krst daleč od rojstva
+Baptême tardif (avant 1900) ¦ Kasno krštenje (prije 1900.) ¦ Pozen krst (pred 1900)
+Barre de côté ¦ Bočna traka ¦ Stranska vrstica
+Bleu et jaune affaiblis. ¦ Oslabljene plava i žuta. ¦ Oslabljeni modra in rumena.
+Bouton bleu « ＋ Observation » au-dessus de la grille ¦ Plavi gumb „＋ Opažanje” iznad mreže ¦ Moder gumb »＋ Opažanje« nad mrežo
+Boutons carrés ¦ Četvrtasti gumbi ¦ Kvadratni gumbi
+Boutons des pistes : plus grands ¦ Gumbi traka: veći ¦ Gumbi sledi: večji
+Boutons des pistes : plus petits ¦ Gumbi traka: manji ¦ Gumbi sledi: manjši
+Boutons des pistes : taille de départ ¦ Gumbi traka: početna veličina ¦ Gumbi sledi: začetna velikost
+Boutons encadrés ¦ Uokvireni gumbi ¦ Uokvirjeni gumbi
+Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Skriva napredne ili rijetko korištene alate: DNK, usporedbu, životinje, podijeljeni zaslon, novi prozor, postavke nadzorne ploče, brisanje / zaključavanje zapisa, povijest, napredne filtre karte… ¦ Skrije napredna ali redko uporabljena orodja: DNK, primerjavo, živali, razdeljen zaslon, novo okno, nastavitve nadzorne plošče, brisanje / zaklepanje zapisa, zgodovino, napredne filtre zemljevida …
+Caché ¦ Skriveno ¦ Skrito
+Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Skriveno: jednostavni način otvara se odavde ili preko widgeta nadzorne ploče. ¦ Skrito: preprosti način se odpre od tu ali prek gradnika nadzorne plošče.
+Calendrier de cette date ¦ Kalendar ovog datuma ¦ Koledar tega datuma
+Calendrier républicain ¦ Republikanski kalendar ¦ Republikanski koledar
+Calendrier source ¦ Izvorni kalendar ¦ Izvorni koledar
+Calendrier utilisé par défaut dans les champs de date ¦ Zadani kalendar u poljima datuma ¦ Privzeti koledar v datumskih poljih
+Carré arrondi ¦ Zaobljeni kvadrat ¦ Zaobljen kvadrat
+Carré droit ¦ Ravni kvadrat ¦ Raven kvadrat
+Carré penché (défaut) ¦ Nagnuti kvadrat (zadano) ¦ Nagnjen kvadrat (privzeto)
+Carrés numérotés ¦ Numerirani kvadrati ¦ Oštevilčeni kvadrati
+Cartes avec repère ¦ Kartice s oznakom ¦ Kartice z oznako
+Cartes espacées ¦ Razmaknute kartice ¦ Razmaknjene kartice
+Cases de l’arbre ¦ Polja stabla ¦ Polja drevesa
+Ce n’est pas une erreur ¦ Ovo nije pogreška ¦ To ni napaka
+Ce que tu as réglé dans « ♿ Toute l’app » (daltonisme, contraste, taille du texte, mouvements, voix) s’applique aussi au mode simple. Pour un réglage différent, choisis « Propre au mode simple ». ¦ Ono što si podesio/podesila u „♿ Cijela aplikacija” (sljepoća za boje, kontrast, veličina teksta, pokreti, glas) vrijedi i za jednostavni način. Za drukčiju postavku odaberi „Posebno za jednostavni način”. ¦ Kar si nastavil/nastavila v »♿ Cela aplikacija« (barvna slepota, kontrast, velikost besedila, gibanje, glas), velja tudi za preprosti način. Za drugačno nastavitev izberi »Posebej za preprosti način«.
+Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi. ¦ Ono što se čini nemogućim ili vrlo rijetkim u tvojim zapisima: često tipfeler, imenjak ili pogrešni roditelji. Ništa se ne mijenja bez tebe. ¦ Kar se zdi nemogoče ali zelo redko v tvojih zapisih: pogosto tipkarska napaka, soimenjak ali napačni starši. Nič se ne spremeni brez tebe.
+Ce qu’on montre ¦ Što se prikazuje ¦ Kaj se prikaže
+Celle de l’app ¦ Ona iz aplikacije ¦ Iz aplikacije
+Celle du thème ¦ Ona iz teme ¦ Iz teme
+Cette personne était… (ses profils) ¦ Ova osoba bila je… (njezini profili) ¦ Ta oseba je bila … (njeni profili)
+Ceux qui arrivent ¦ Uskoro ¦ Kmalu
+Champs œuvre ¦ Polja djela ¦ Polja dela
+Changer la couleur ¦ Promijeni boju ¦ Spremeni barvo
+Changer le pictogramme ¦ Promijeni ikonu ¦ Spremeni ikono
+Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages… ¦ Svaki se odabir vidi: klikni, pregled slijedi. Za alate Grafikoni, Karta, Istrage, Istraživanje, Osobe, Popisi, Postavke… ¦ Vsaka izbira se vidi: klikni, predogled sledi. Za orodja Grafi, Zemljevid, Preiskave, Raziskovanje, Osebe, Seznami, Nastavitve …
+Chaque fiche est un objet ¦ Svaki zapis je objekt ¦ Vsak zapis je predmet
+Chaque gros bouton garde sa couleur partout : on se repère sans lire. ¦ Svaki veliki gumb zadržava svoju boju posvuda: snalaziš se bez čitanja. ¦ Vsak velik gumb ohrani svojo barvo povsod: znajdeš se brez branja.
+Chercher quelqu’un par son nom ¦ Pronađi nekoga po imenu ¦ Poišči nekoga po imenu
+Chercher une commande… ¦ Traži naredbu… ¦ Išči ukaz …
+Chercher… (nom, contrôle, lieu) ¦ Traži… (ime, provjera, mjesto) ¦ Išči … (ime, preverjanje, kraj)
+Choisir une voix propre au mode simple ¦ Odaberi glas samo za jednostavni način ¦ Izberi glas samo za preprosti način
+Clair ou sombre ¦ Svijetlo ili tamno ¦ Svetlo ali temno
+Clavier et souris ¦ Tipkovnica i miš ¦ Tipkovnica in miška
+Comme le prototype ¦ Kao prototip ¦ Kot prototip
+Comme le reste ¦ Kao ostalo ¦ Kot ostalo
+Comme les blocs (réglage A1) ¦ Kao blokovi (postavka A1) ¦ Kot bloki (nastavitev A1)
+Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via ¦ Općine Belgije: IGN-NGI (Belgijski nacionalni geografski institut), otvorena licenca, preko ¦ Občine Belgije: IGN-NGI (Belgijski nacionalni geografski inštitut), odprta licenca, prek
+Communes de Tchéquie : RÚIAN © ¦ Općine Češke: RÚIAN © ¦ Občine Češke: RÚIAN ©
+Communes d’Allemagne : VG250 © ¦ Općine Njemačke: VG250 © ¦ Občine Nemčije: VG250 ©
+Communes d’Autriche : © ¦ Općine Austrije: © ¦ Občine Avstrije: ©
+Communes d’Espagne : © ¦ Općine Španjolske: © ¦ Občine Španije: ©
+Communes d’Italie : confini amministrativi © ¦ Općine Italije: confini amministrativi © ¦ Občine Italije: confini amministrativi ©
+Compact et clair ¦ Zbijeno i jasno ¦ Zgoščeno in jasno
+Comparer les GEDCOM ¦ Usporedi GEDCOM datoteke ¦ Primerjaj datoteke GEDCOM
+Comtés des États-Unis : ¦ Okruzi Sjedinjenih Država: ¦ Okrožja Združenih držav:
+Contour bien visible autour de l’élément choisi au clavier ¦ Jasno vidljiv obrub oko elementa odabranog tipkovnicom ¦ Jasno viden obris okoli elementa, izbranega s tipkovnico
+Contours des communes : IGN, Admin Express, via ¦ Granice općina: IGN, Admin Express, preko ¦ Meje občin: IGN, Admin Express, prek
+Contraste élevé ¦ Visoki kontrast ¦ Visok kontrast
+Contrôle ¦ Provjera ¦ Preverjanje
+Convertir une date ¦ Pretvori datum ¦ Pretvori datum
+Correspondance (lettres, cartes) ¦ Dopisivanje (pisma, razglednice) ¦ Dopisovanje (pisma, razglednice)
+Couleur du bord ¦ Boja ruba ¦ Barva roba
+Couleur du genre, fond plein (lettres blanches) ¦ Boja spola, puna pozadina (bijela slova) ¦ Barva spola, polno ozadje (bele črke)
+Couleur du genre, fond pâle (lettres de couleur) ¦ Boja spola, blijeda pozadina (slova u boji) ¦ Barva spola, bledo ozadje (barvne črke)
+Couleur principale pâle avec un trait ¦ Blijeda glavna boja s linijom ¦ Bleda glavna barva s črto
+Couleurs et daltonisme ¦ Boje i sljepoća za boje ¦ Barve in barvna slepota
+Couleurs seulement affaiblies (léger) ¦ Boje samo oslabljene (blago) ¦ Barve samo oslabljene (blago)
+Créer / modifier une branche ¦ Stvori / uredi granu ¦ Ustvari / uredi vejo
+Créer / modifier une étiquette ¦ Stvori / uredi oznaku ¦ Ustvari / uredi oznako
+Créer le type ¦ Stvori vrstu ¦ Ustvari vrsto
+Créer un type ¦ Stvori vrstu ¦ Ustvari vrsto
+Créer une copie de test ¦ Stvori probnu kopiju ¦ Ustvari preizkusno kopijo
+Créer une forme ¦ Stvori oblik ¦ Ustvari obliko
+DENSITÉ ¦ GUSTOĆA ¦ GOSTOTA
+Dans la barre au-dessus ¦ U traci iznad ¦ V vrstici zgoraj
+Dans un navigateur ¦ U pregledniku ¦ V brskalniku
+Demander aussi un code ¦ Traži i kod ¦ Zahtevaj tudi kodo
+Demander « Qui regarde ? » ¦ Pitaj „Tko gleda?” ¦ Vprašaj »Kdo gleda?«
+Densité ¦ Gustoća ¦ Gostota
+Des photos au hasard ¦ Nasumične fotografije ¦ Naključne fotografije
+Des photos choisies ¦ Odabrane fotografije ¦ Izbrane fotografije
+Dessin au trait ¦ Crtež linijom ¦ Črtna risba
+Deutéranomalie ¦ Deuteranomalija ¦ Devteranomalija
+Deutéranopie ¦ Deuteranopija ¦ Devteranopija
+Deux façons de faire selon l’endroit. ¦ Dva načina, ovisno o mjestu. ¦ Dva načina, odvisno od mesta.
+Diaporama et cadre photo ¦ Dijaprojekcija i okvir za fotografije ¦ Diaprojekcija in fotookvir
+Dictée vocale ¦ Glasovno diktiranje ¦ Glasovni nareki
+Dictée vocale dans les champs texte ¦ Glasovno diktiranje u tekstnim poljima ¦ Glasovni nareki v besedilnih poljih
+Données géographiques ¦ Geografski podaci ¦ Geografski podatki
+Dossier des copies ¦ Mapa kopija ¦ Mapa kopij
+Dossier partagé ¦ Dijeljena mapa ¦ Skupna mapa
+Double-clic : 320 px, la valeur de départ. ¦ Dvostruki klik: 320 px, početna vrijednost. ¦ Dvoklik: 320 px, začetna vrednost.
+Douces et floues ¦ Meke i zamućene ¦ Mehke in zabrisane
+Duplique la base ouverte pour essayer un import ou une fusion sans modifier l’original. Les médias restent partagés : ne les supprime pas depuis la copie si tu veux préserver l’original. ¦ Duplicira otvorenu bazu da isprobaš uvoz ili spajanje bez mijenjanja izvornika. Mediji ostaju zajednički: ne briši ih iz kopije ako želiš sačuvati izvornik. ¦ Podvoji odprto bazo, da preizkusiš uvoz ali združevanje brez spreminjanja izvirnika. Mediji ostanejo skupni: ne briši jih iz kopije, če želiš ohraniti izvirnik.
+Durée de chaque photo ¦ Trajanje svake fotografije ¦ Trajanje vsake fotografije
+Durée de l’appui long ¦ Trajanje dugog pritiska ¦ Trajanje dolgega pritiska
+Décrire les images ¦ Opiši slike ¦ Opiši slike
+Défilement ¦ Pomicanje ¦ Pomikanje
+Délai après la mort du père ¦ Razmak nakon očeve smrti ¦ Razmik po očetovi smrti
+Effacer le groupe (son contenu va dans le groupe d’à côté) ¦ Izbriši skupinu (njezin sadržaj ide u susjednu skupinu) ¦ Izbriši skupino (njena vsebina gre v sosednjo skupino)
+En bas de la colonne ¦ Na dnu stupca ¦ Na dnu stolpca
+En bas de la colonne des badges ¦ Na dnu stupca oznaka ¦ Na dnu stolpca značk
+En bas de l’en-tête ¦ Na dnu zaglavlja ¦ Na dnu glave
+En diaporama ¦ Kao dijaprojekcija ¦ Kot diaprojekcija
+En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe. ¦ Na francuskom. Ne u poljima za pretragu, datumima, brojevima ni lozinkama. ¦ V francoščini. Ne v iskalnih poljih, datumih, številkah ali geslih.
+En grand, avec sa légende ¦ Veliko, s opisom ¦ Veliko, z opisom
+En très grand ¦ Vrlo veliko ¦ Zelo veliko
+En-tête actuel ¦ Trenutno zaglavlje ¦ Trenutna glava
+En-tête de la fiche ¦ Zaglavlje zapisa ¦ Glava zapisa
+En-têtes ¦ Zaglavlja ¦ Glave
+Enlever l’élément choisi ¦ Ukloni odabrani element ¦ Odstrani izbrani element
+Enregistrer la branche ¦ Spremi granu ¦ Shrani vejo
+Enregistrer le projet sous un autre nom… ¦ Spremi projekt pod drugim imenom… ¦ Shrani projekt pod drugim imenom …
+Ensembles prêts ¦ Gotovi skupovi ¦ Pripravljeni nabori
+Entre une date complète pour convertir. ¦ Unesi potpuni datum za pretvorbu. ¦ Vnesi celoten datum za pretvorbo.
+Espace dans les blocs ¦ Prostor u blokovima ¦ Prostor v blokih
+Espace entre les boutons ¦ Razmak između gumba ¦ Razmik med gumbi
+Espace entre les cadres ¦ Razmak između okvira ¦ Razmik med okvirji
+Espace entre les lettres ¦ Razmak između slova ¦ Razmik med črkami
+Espace entre les mots ¦ Razmak između riječi ¦ Razmik med besedami
+Essaie ici ¦ Isprobaj ovdje ¦ Preizkusi tukaj
+FICHES ANIMAUX ¦ ZAPISI ŽIVOTINJA ¦ ZAPISI ŽIVALI
+FICHES PERSONNES ET ANIMAUX ¦ ZAPISI OSOBA I ŽIVOTINJA ¦ ZAPISI OSEB IN ŽIVALI
+Fiche d’une personne ¦ Zapis osobe ¦ Zapis osebe
+Fiche · 88 px ¦ Zapis · 88 px ¦ Zapis · 88 px
+Fiches personnes ¦ Zapisi osoba ¦ Zapisi oseb
+Fichiers médias ¦ Medijske datoteke ¦ Medijske datoteke
+Fond crème, police de livre, doux pour les yeux ¦ Krem pozadina, knjiški font, ugodno za oči ¦ Kremno ozadje, knjižna pisava, prijetno za oči
+Fond pâle (comme avant) ¦ Blijeda pozadina (kao prije) ¦ Bledo ozadje (kot prej)
+Force de la correction ¦ Jačina ispravka ¦ Moč popravka
+Forme de l’en-tête ¦ Oblik zaglavlja ¦ Oblika glave
+Forme des boutons ¦ Oblik gumba ¦ Oblika gumbov
+Forme des listes ¦ Oblik popisa ¦ Oblika seznamov
+Français ¦ Francuski ¦ Francoščina
+Fratrie étalée ¦ Razvučena braća i sestre ¦ Razpotegnjeni bratje in sestre
+GEDCOM de référence ¦ Referentni GEDCOM ¦ Referenčni GEDCOM
+Garder les dernières ¦ Zadrži posljednje ¦ Ohrani zadnje
+Gouvernement du Québec ¦ Vlada Quebeca ¦ Vlada Quebeca
+Gravité ¦ Ozbiljnost ¦ Resnost
+Grosse flèche de souris ¦ Veliki pokazivač miša ¦ Velik kazalec miške
+Grégorien ¦ Gregorijanski ¦ Gregorijanski
+Hauteur des boutons ¦ Visina gumba ¦ Višina gumbov
+Hauteur des cadres ¦ Visina okvira ¦ Višina okvirjev
+Hauteur des lignes ¦ Visina redaka ¦ Višina vrstic
+Hauteur du bandeau ¦ Visina trake ¦ Višina pasice
+ICÔNES ¦ IKONE ¦ IKONE
+Ici : choisis le dossier. L’app y pose une copie de départ ( ¦ Ovdje: odaberi mapu. Aplikacija u nju stavlja početnu kopiju ( ¦ Tukaj: izberi mapo. Aplikacija vanjo postavi začetno kopijo (
+Icône + nom ¦ Ikona + naziv ¦ Ikona + ime
+Icône au-dessus ¦ Ikona iznad ¦ Ikona zgoraj
+Icônes ¦ Ikone ¦ Ikone
+Ignorée dans une case de texte ; réglable dans Raccourcis clavier. ¦ Zanemaruje se u tekstnom polju; podešava se u Tipkovničkim prečacima. ¦ V besedilnem polju se prezre; nastavi se v Bližnjicah na tipkovnici.
+Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici. ¦ Čuvaju se s tvojim rodoslovljem: svaki tablet ili računalo kreće odavde. ¦ Shranjeni so s tvojim rodoslovjem: vsaka tablica ali računalnik začne od tu.
+Intégrité SQLite : ¦ Cjelovitost SQLite: ¦ Celovitost SQLite:
+Jamais testé ¦ Nikad testirano ¦ Nikoli preizkušeno
+Je ne suis pas dans l’arbre ¦ Nisam u stablu ¦ Nisem v drevesu
+La forme ¦ Oblik ¦ Oblika
+La maison ¦ Kuća ¦ Hiša
+La personne de départ ¦ Početna osoba ¦ Začetna oseba
+La photo de chaque case : plus grande, on se reconnaît plus vite. ¦ Fotografija u svakom polju: veća, brže se prepoznaješ. ¦ Fotografija v vsakem polju: večja, hitreje se prepoznaš.
+Largeur de la colonne ¦ Širina stupca ¦ Širina stolpca
+Le bouton principal ressort ¦ Glavni gumb se ističe ¦ Glavni gumb izstopa
+Le cadre du haut ¦ Gornji okvir ¦ Zgornji okvir
+Le carré de la fiche, partout ¦ Kvadrat zapisa, posvuda ¦ Kvadrat zapisa, povsod
+Le dessin de la colonne ¦ Izgled stupca ¦ Videz stolpca
+Le gris peut se confondre avec une ligne choisie si l’écran est pâle. ¦ Siva se može pomiješati s odabranim retkom ako je zaslon blijed. ¦ Sivo lahko zamenjaš z izbrano vrstico, če je zaslon bled.
+Le meilleur des deux ¦ Najbolje od oboje ¦ Najboljše od obojega
+Le mode simple ¦ Jednostavni način ¦ Preprosti način
+Le nom est moins grand ; un style plus « administratif ». ¦ Ime je manje; „administrativniji” stil. ¦ Ime je manjše; bolj »uraden« slog.
+Le plus discret ¦ Najdiskretnije ¦ Najbolj diskretno
+Le plus épuré ¦ Najčišće ¦ Najbolj čisto
+Le portrait ¦ Portret ¦ Portret
+Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales. ¦ Krug ili kvadrat koji prikazuje osobu: njezine boje, fotografiju, inicijale. ¦ Krog ali kvadrat, ki prikazuje osebo: njene barve, fotografijo, začetnice.
+Le rouge est peu visible (paraît sombre, se confond avec le vert). ¦ Crvena se slabo vidi (izgleda tamno, brka se sa zelenom). ¦ Rdeča je slabo vidna (videti je temna, meša se z zeleno).
+Le rouge prévient avant de cliquer : on ne supprime pas une fiche par erreur. ¦ Crvena upozorava prije klika: zapis se ne briše greškom. ¦ Rdeča opozori pred klikom: zapisa ne izbrišeš pomotoma.
+Le site propose seulement des candidats. La fusion déplace les données vers la fiche gardée puis supprime l’autre fiche. ¦ Stranica samo predlaže kandidate. Spajanje premješta podatke u zadržani zapis, a zatim briše drugi zapis. ¦ Stran samo predlaga kandidate. Združevanje premakne podatke v ohranjeni zapis in nato izbriše drugi zapis.
+Le sépia est plus doux pour les yeux fatigués ; le sombre n’éblouit pas le soir. ¦ Sepija je blaža za umorne oči; tamno ne zasljepljuje navečer. ¦ Sepija je nežnejša za utrujene oči; temno zvečer ne slepi.
+Le texte des boutons principaux ¦ Tekst glavnih gumba ¦ Besedilo glavnih gumbov
+Lecteur d’écran ¦ Čitač zaslona ¦ Bralnik zaslona
+Les anniversaires ¦ Rođendani ¦ Rojstni dnevi
+Les blocs se détachent un peu moins du fond. ¦ Blokovi se malo manje ističu od pozadine. ¦ Bloki malo manj izstopajo iz ozadja.
+Les couleurs de l’app, sans changement. ¦ Boje aplikacije, bez promjene. ¦ Barve aplikacije, brez spremembe.
+Les dates seules (comme avant) ¦ Samo datumi (kao prije) ¦ Samo datumi (kot prej)
+Les deux ¦ Oboje ¦ Oboje
+Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ Zapisi označeni kao „povjerljivi” nikad se ne prikazuju. ¦ Zapisi, označeni kot »zaupni«, niso nikoli prikazani.
+Les gros boutons ¦ Veliki gumbi ¦ Veliki gumbi
+Les modifications effectuées depuis ce site sont enregistrées ici. ¦ Promjene napravljene s ove stranice bilježe se ovdje. ¦ Spremembe, narejene s te strani, so zabeležene tukaj.
+Les personnes ¦ Osobe ¦ Osebe
+Les photos ¦ Fotografije ¦ Fotografije
+Les réglages du prototype que tu as aimé ¦ Postavke prototipa koji ti se svidio ¦ Nastavitve prototipa, ki ti je bil všeč
+Lettres d’origine ¦ Izvorna slova ¦ Izvirne črke
+Lien « 🧩 Cette personne était… » ¦ Poveznica „🧩 Ova osoba bila je…” ¦ Povezava »🧩 Ta oseba je bila …«
+Liens toujours soulignés ¦ Poveznice uvijek podcrtane ¦ Povezave vedno podčrtane
+Lier au mode Artiste : masqué pour les personnes non artistes ¦ Veži uz način Umjetnik: skriveno za osobe koje nisu umjetnici ¦ Veži na način Umetnik: skrito za osebe, ki niso umetniki
+Lieux et souvenirs ¦ Mjesta i uspomene ¦ Kraji in spomini
+Lire les légendes des photos dans le diaporama ¦ Čitaj opise fotografija u dijaprojekciji ¦ Beri opise fotografij v diaprojekciji
+Lire l’histoire dès qu’on ouvre une fiche ¦ Čitaj priču čim se otvori zapis ¦ Beri zgodbo, takoj ko se odpre zapis
+Liste aérée ¦ Prozračan popis ¦ Zračen seznam
+Liste continue ¦ Neprekinuti popis ¦ Neprekinjen seznam
+Liste · 34 px ¦ Popis · 34 px ¦ Seznam · 34 px
+Listes et arbre ¦ Popisi i stablo ¦ Seznami in drevo
+Longévité 🔴 ¦ Dugovječnost 🔴 ¦ Dolgoživost 🔴
+Longévité 🟠 ¦ Dugovječnost 🟠 ¦ Dolgoživost 🟠
+L’ambiance des archives ¦ Ugođaj arhiva ¦ Vzdušje arhivov
+L’app dit alors les noms, sans « ta mère » ni « ton petit-fils ». ¦ Aplikacija tada govori imena, bez „tvoja majka” ili „tvoj unuk”. ¦ Aplikacija takrat pove imena, brez »tvoja mama« ali »tvoj vnuk«.
+L’arbre ¦ Stablo ¦ Drevo
+L’heure et la date ¦ Vrijeme i datum ¦ Ura in datum
+L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune). ¦ Sjena izgleda kao „tipka koja se pritišće”. Slijedi opći stil (oštra, meka ili nikakva). ¦ Senca je videti kot »tipka, ki jo pritisneš«. Sledi splošnemu slogu (ostra, mehka ali brez).
+Masquer tout le cadre ¦ Sakrij cijeli okvir ¦ Skrij cel okvir
+Mettre les espacements conseillés pour la dyslexie ¦ Primijeni razmake preporučene za disleksiju ¦ Uporabi razmike, priporočene za disleksijo
+Mode consultation (la famille regarde sans rien modifier) ¦ Način pregledavanja (obitelj gleda bez ikakvih promjena) ¦ Način ogleda (družina gleda, ne da bi kaj spreminjala)
+Modifier ce cadre ¦ Uredi ovaj okvir ¦ Uredi ta okvir
+Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot. ¦ Manje gumba, manje oklijevanja: zadrži samo ono što osoba voli gledati. Dodani okvir može izravno otvoriti zapis osobe, njezine fotografije ili kratku poruku. ¦ Manj gumbov, manj obotavljanja: ohrani samo to, kar oseba rada gleda. Dodan okvir lahko neposredno odpre zapis osebe, njene fotografije ali kratko sporočilo.
+Moins de choses visibles d’un coup ; plus de défilement. ¦ Manje stvari vidljivo odjednom; više pomicanja. ¦ Manj stvari vidnih naenkrat; več pomikanja.
+Moins de lignes visibles ; plus de défilement. ¦ Manje vidljivih redaka; više pomicanja. ¦ Manj vidnih vrstic; več pomikanja.
+Moins de place pour les boutons ; plus décoratif que pratique. ¦ Manje mjesta za gumbe; više ukrasno nego praktično. ¦ Manj prostora za gumbe; bolj okrasno kot praktično.
+Montre l’écran comme le voit une personne daltonienne, pour vérifier qu’un document reste lisible avant de l’envoyer ou de l’imprimer. Rien n’est modifié. ¦ Prikazuje zaslon kako ga vidi osoba sa sljepoćom za boje, da provjeriš ostaje li dokument čitljiv prije slanja ili ispisa. Ništa se ne mijenja. ¦ Prikaže zaslon, kot ga vidi barvno slepa oseba, da preveriš, ali dokument ostane berljiv, preden ga pošlješ ali natisneš. Nič se ne spremeni.
+Montrer la photo de la fiche quand elle existe ¦ Prikaži fotografiju zapisa kad postoji ¦ Prikaži fotografijo zapisa, če obstaja
+Montrer les boutons « 🔊 Écouter » ¦ Prikaži gumbe „🔊 Slušaj” ¦ Prikaži gumbe »🔊 Poslušaj«
+Médias et transcriptions ¦ Mediji i transkripcije ¦ Mediji in prepisi
+Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer. ¦ Nikad ne stavljaj samu datoteku baze u iCloud ili Dropbox da je otvaraš s obje strane: aplikacija to odbija (zaključavanje) jer bi se mogla oštetiti. ¦ Datoteke baze same nikoli ne shranjuj v iCloud ali Dropbox, da bi jo odpiral/odpirala na obeh straneh: aplikacija to zavrne (zaklep), ker bi se lahko poškodovala.
+Net et régulier ¦ Čisto i ujednačeno ¦ Čisto in enakomerno
+Norvégien ¦ Norveški ¦ Norveščina
+Nouveau GEDCOM ¦ Novi GEDCOM ¦ Nov GEDCOM
+Nouvelle étiquette ¦ Nova oznaka ¦ Nova oznaka
+Numéros ¦ Brojevi ¦ Številke
+Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste ¦ Uzastopni brojevi (01, 02, 03…), iste kartice posvuda (ikona + naziv), „Popis | Zapisi” u traci iznad popisa ¦ Zaporedne številke (01, 02, 03 …), enaki zavihki povsod (ikona + ime), »Seznam | Kartice« v vrstici nad seznamom
+N’importe quel autre lieu peut être saisi librement. ¦ Bilo koje drugo mjesto može se slobodno upisati. ¦ Kateri koli drug kraj lahko vpišeš prosto.
+On suit la ligne sans se tromper ¦ Pratiš redak bez pogreške ¦ Vrstici slediš brez napake
+Onglets du haut ¦ Gornje kartice ¦ Zgornji zavihki
+Ordre des pages des Réglages ¦ Redoslijed stranica Postavki ¦ Vrstni red strani Nastavitev
+Ordre et visibilité des boutons ¦ Redoslijed i vidljivost gumba ¦ Vrstni red in vidnost gumbov
+Ordre et visibilité des éléments de l’en-tête ¦ Redoslijed i vidljivost elemenata zaglavlja ¦ Vrstni red in vidnost elementov glave
+Par défaut ¦ Zadano ¦ Privzeto
+Par ligne ¦ Po retku ¦ Na vrstico
+Pareil que l’app ¦ Isto kao aplikacija ¦ Enako kot aplikacija
+Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou ¦ Govori umjesto tipkanja: mali 🎤 pojavljuje se u tekstnom polju u koje pišeš. Klikni na njega (ili ¦ Govori namesto tipkanja: majhen 🎤 se prikaže v besedilnem polju, v katero pišeš. Klikni nanj (ali
+Pas de numéros ¦ Bez brojeva ¦ Brez številk
+Pas vérifiée ¦ Nije provjereno ¦ Ni preverjeno
+Pastille sous le nom ¦ Oznaka ispod imena ¦ Značka pod imenom
+Persan (hégirien solaire) ¦ Perzijski (solarni hidžretski) ¦ Perzijski (sončni hidžri)
+Personne qui regarde ¦ Osoba koja gleda ¦ Oseba, ki gleda
+Personnes identifiées ¦ Prepoznate osobe ¦ Prepoznane osebe
+Personnes vivantes ¦ Žive osobe ¦ Žive osebe
+Petit écran ¦ Mali zaslon ¦ Majhen zaslon
+Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Može se pomiješati s poveznicom; treba se malo naviknuti. ¦ Lahko ga zamenjaš s povezavo; treba se je malo navaditi.
+Photo de la personne ¦ Fotografija osobe ¦ Fotografija osebe
+Photo des cases de l’arbre ¦ Fotografija u poljima stabla ¦ Fotografija v poljih drevesa
+Photos retirées ¦ Uklonjene fotografije ¦ Odstranjene fotografije
+Pictogrammes des tableaux ¦ Piktogrami ploča ¦ Piktogrami tabel
+Place de ＋ Nouvelle observation ¦ Položaj ＋ Novo opažanje ¦ Položaj ＋ Novo opažanje
+Plus calme pour les yeux ¦ Mirnije za oči ¦ Bolj umirjeno za oči
+Plus discret que « Comme avant » : les blocs se détachent un peu moins. ¦ Diskretnije od „Kao prije”: blokovi se malo manje ističu. ¦ Bolj diskretno kot »Kot prej«: bloki malo manj izstopajo.
+Plus d’actions (menu ⋯) ¦ Više radnji (izbornik ⋯) ¦ Več dejanj (meni ⋯)
+Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Više prostora: rjeđe pogodiš susjedni gumb. ¦ Več prostora: redkeje zadeneš sosednji gumb.
+Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Veće se vide izdaleka; s manjima alatne trake zauzimaju manje mjesta. ¦ Večje se vidijo od daleč; z manjšimi orodne vrstice zavzamejo manj prostora.
+Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Više: fotografija se bolje vidi; niže: zapis počinje ranije. Samo za traku s fotografijom. ¦ Višje: fotografija se bolje vidi; nižje: zapis se začne prej. Samo za pasico s fotografijo.
+Police des cadres ¦ Font okvira ¦ Pisava okvirjev
+Portée ¦ Doseg ¦ Obseg
+Pour la dyslexie : choisis celle qui te va ¦ Za disleksiju: odaberi onaj koji ti odgovara ¦ Za disleksijo: izberi tisto, ki ti ustreza
+Pour quitter ¦ Za izlaz ¦ Za izhod
+Pour tout le monde ¦ Za sve ¦ Za vse
+Pratique pour apprendre l’app : plus besoin de passer la souris pour savoir ce que fait chaque bouton. Prend un peu plus de place. ¦ Praktično za učenje aplikacije: ne trebaš prelaziti mišem da saznaš što radi koji gumb. Zauzima malo više mjesta. ¦ Priročno za učenje aplikacije: ni ti treba premikati miške, da izveš, kaj naredi kateri gumb. Zavzame malo več prostora.
+Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence). ¦ Zauzima visinu; bez fotografije traka preuzima glavnu boju (Izgled). ¦ Zavzame višino; brez fotografije pasica prevzame glavno barvo (Videz).
+Proposer dans le menu ¦ Ponudi u izborniku ¦ Ponudi v meniju
+Prénom + nom (JM) ¦ Ime + prezime (JM) ¦ Ime + priimek (JM)
+Prénom seulement ¦ Samo ime ¦ Samo ime
+Présentation (Keynote) ¦ Prezentacija (Keynote) ¦ Predstavitev (Keynote)
+Quand il y a beaucoup de boutons, on ne voit plus lequel est important. ¦ Kad ima mnogo gumba, više se ne vidi koji je važan. ¦ Ko je gumbov veliko, ne vidiš več, kateri je pomemben.
+Quand personne ne touche, lancer le diaporama ¦ Kad ga nitko ne dira, pokreni dijaprojekciju ¦ Ko se ga nihče ne dotika, zaženi diaprojekcijo
+Quand plusieurs personnes se servent de la même tablette. ¦ Kad se istim tabletom služi više osoba. ¦ Ko isto tablico uporablja več oseb.
+Quelqu’un d’autre de la famille ¦ Netko drugi iz obitelji ¦ Nekdo drug iz družine
+Qui est-ce ? ¦ Tko je to? ¦ Kdo je to?
+Qui regarde ¦ Tko gleda ¦ Kdo gleda
+Qui regarde ? ¦ Tko gleda? ¦ Kdo gleda?
+Qui regarde l’arbre ? ¦ Tko gleda stablo? ¦ Kdo gleda drevo?
+Qui se suivent ¦ Uzastopni ¦ Zaporedne
+Quitter le mode simple ¦ Izađi iz jednostavnog načina ¦ Zapusti preprosti način
+Rattaché à ¦ Povezano s ¦ Povezano z
+Recherche et enquêtes ¦ Istraživanje i istrage ¦ Raziskovanje in preiskave
+Reculer le morceau → ¦ Pomakni dio unatrag → ¦ Premakni del nazaj →
+Remettre un réglage exporté (fichier .json) ¦ Vrati izvezenu postavku (datoteka .json) ¦ Obnovi izvoženo nastavitev (datoteka .json)
+Ressemblance des doublons ¦ Sličnost duplikata ¦ Podobnost dvojnikov
+Rien ne bouge ¦ Ništa se ne mijenja ¦ Nič se ne spremeni
+Récit d’une vie (diaporama tout fait) ¦ Priča o životu (gotova dijaprojekcija) ¦ Življenjska zgodba (pripravljena diaprojekcija)
+Réduire les mouvements ¦ Smanji pokrete ¦ Zmanjšaj gibanje
+Réglages de base ¦ Osnovne postavke ¦ Osnovne nastavitve
+Réglages et export ¦ Postavke i izvoz ¦ Nastavitve in izvoz
+Républicain ¦ Republikanski ¦ Republikanski
+Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Bez boje ponekad treba sekunda više da ih prepoznaš. ¦ Brez barve včasih potrebuješ sekundo več, da jih prepoznaš.
+Se lit comme un acte ¦ Čita se kao matični zapis ¦ Bere se kot matični vpis
+Ses photos, ceux qui y sont nés ¦ Njegove fotografije, oni koji su tamo rođeni ¦ Njegove fotografije, tisti, ki so se tam rodili
+Signatures identifiées ¦ Prepoznati potpisi ¦ Prepoznani podpisi
+Son rapide ¦ Brzi zvuk ¦ Hitri zvok
+Sortie et démarrage ¦ Izlaz i pokretanje ¦ Izhod in zagon
+Sous la souris ¦ Ispod miša ¦ Pod miško
+Sous le nom ¦ Ispod imena ¦ Pod imenom
+Sous À vérifier, Hors généalogie, Artiste. ¦ Ispod Za provjeru, Izvan rodoslovlja, Umjetnik. ¦ Pod Za preverjanje, Zunaj rodoslovja, Umetnik.
+Sous-titres toujours affichés ¦ Titlovi uvijek prikazani ¦ Podnapisi vedno prikazani
+Studio son ¦ Zvučni studio ¦ Zvočni studio
+Style des entrées ¦ Stil stavki ¦ Slog vnosov
+Style des fiches ¦ Stil zapisa ¦ Slog zapisov
+Style « acte ancien » ¦ Stil „stari matični zapis” ¦ Slog »star matični vpis«
+Style « carte d’identité » ¦ Stil „osobna iskaznica” ¦ Slog »osebna izkaznica«
+Suit l’accessibilité de l’app ¦ Slijedi pristupačnost aplikacije ¦ Sledi dostopnosti aplikacije
+Sur 1 colonne ¦ U 1 stupcu ¦ V 1 stolpcu
+Sur 2 colonnes ¦ U 2 stupca ¦ V 2 stolpcih
+Sur 2 lignes (défaut) ¦ U 2 retka (zadano) ¦ V 2 vrsticah (privzeto)
+Sur cet appareil ¦ Na ovom uređaju ¦ Na tej napravi
+Sur l’autre ordinateur : ouvre ¦ Na drugom računalu: otvori ¦ Na drugem računalniku: odpri
+Sur un grand écran, l’œil peut sauter de ligne. ¦ Na velikom zaslonu oko može preskočiti redak. ¦ Na velikem zaslonu lahko oko preskoči vrstico.
+Sur un petit portable, il faut souvent faire défiler. ¦ Na malom prijenosniku često treba pomicati. ¦ Na majhnem prenosniku je pogosto treba pomikati.
+Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés. ¦ Na telefonu je gornja traka sklopljena: ti gumbi se tamo ne prikazuju. ¦ Na telefonu je zgornja vrstica zložena: ti gumbi tam niso prikazani.
+Suédois ¦ Švedski ¦ Švedščina
+Sépia doux ¦ Blaga sepija ¦ Nežna sepija
+Ta version ¦ Tvoja verzija ¦ Tvoja različica
+Taille des entrées ¦ Veličina stavki ¦ Velikost vnosov
+Taille des icônes ¦ Veličina ikona ¦ Velikost ikon
+Taille des initiales ¦ Veličina inicijala ¦ Velikost začetnic
+Taille du texte ¦ Veličina teksta ¦ Velikost besedila
+Taille du titre des cadres ¦ Veličina naslova okvira ¦ Velikost naslova okvirjev
+Tchèque ¦ Češki ¦ Češčina
+Tes réglages d’accessibilité valent aussi ici ¦ Tvoje postavke pristupačnosti vrijede i ovdje ¦ Tvoje nastavitve dostopnosti veljajo tudi tukaj
+Tester cette sauvegarde ¦ Testiraj ovu sigurnosnu kopiju ¦ Preizkusi to varnostno kopijo
+Texte et traits ¦ Tekst i linije ¦ Besedilo in črte
+Thème et couleurs → Taille typographique ¦ Tema i boje → Veličina slova ¦ Tema in barve → Velikost pisave
+Ton prénom ¦ Tvoje ime ¦ Tvoje ime
+Touche O pour une nouvelle observation ¦ Tipka O za novo opažanje ¦ Tipka O za novo opažanje
+Touche de l’outil ¦ Tipka alata ¦ Tipka orodja
+Touche ta photo. L’app dira ensuite « ta mère », « ton petit-fils »… ¦ Dodirni svoju fotografiju. Aplikacija će zatim reći „tvoja majka”, „tvoj unuk”… ¦ Dotakni se svoje fotografije. Aplikacija bo nato rekla »tvoja mama«, »tvoj vnuk« …
+Touche un gros bouton pour commencer. ¦ Dodirni veliki gumb za početak. ¦ Za začetek se dotakni velikega gumba.
+Touches déjà prévues dans cet outil ¦ Tipke već predviđene u ovom alatu ¦ Tipke, že določene v tem orodju
+Toujours proposée (la forme de départ) ¦ Uvijek ponuđen (početni oblik) ¦ Vedno ponujena (začetna oblika)
+Tous, dans l’ordre d’origine ¦ Sve, izvornim redoslijedom ¦ Vse, v izvirnem vrstnem redu
+Tout désélectionner ¦ Poništi sve odabire ¦ Prekliči vse izbire
+Tout d’un coup d’œil ¦ Sve na prvi pogled ¦ Vse na prvi pogled
+Tout le monde ¦ Svi ¦ Vsi
+Tout seul ¦ Automatski ¦ Samodejno
+Tout sélectionner ¦ Odaberi sve ¦ Izberi vse
+Toute l’app ¦ Cijela aplikacija ¦ Cela aplikacija
+Toutes les ¦ Svakih ¦ Vsakih
+Toutes les … heures ¦ Svakih … sati ¦ Vsakih … ur
+Traits entre les lignes ¦ Linije između redaka ¦ Črte med vrsticami
+Trois par ligne ¦ Tri po retku ¦ Tri na vrstico
+Très grande (56 px) ¦ Vrlo velika (56 px) ¦ Zelo velika (56 px)
+Très lisible ¦ Vrlo čitljivo ¦ Zelo berljivo
+Très petite (30 px) ¦ Vrlo mala (30 px) ¦ Zelo majhna (30 px)
+Un album ¦ Album ¦ Album
+Un appui long ne se fait pas par hasard : on ne sort pas par erreur. ¦ Dugi pritisak ne događa se slučajno: ne izlaziš greškom. ¦ Dolg pritisk se ne zgodi po naključju: ne izstopiš pomotoma.
+Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul. ¦ Crni rub slaže se s blokovima aplikacije (svi imaju crnu liniju od 2 px); bez ruba je lakše. Na najmanjim portretima rub se sam stanji. ¦ Črn rob se ujema z bloki aplikacije (vsi imajo 2 px črno črto); brez roba je lažje. Na najmanjših portretih se rob sam stanjša.
+Un bouton carré 🧩, dans la colonne des boutons ¦ Četvrtasti gumb 🧩, u stupcu gumba ¦ Kvadraten gumb 🧩, v stolpcu gumbov
+Un bouton qui ne répond pas, un écran bizarre, un message d’erreur ? Décris-le : un rapport technique (sans aucune donnée de ta généalogie) est préparé, tu le relis, puis tu l’envoies par GitHub ou par e-mail. ¦ Gumb koji ne reagira, čudan zaslon, poruka o pogrešci? Opiši to: priprema se tehničko izvješće (bez ikakvih podataka iz tvog rodoslovlja), pregledaš ga, zatim ga šalješ preko GitHuba ili e-poštom. ¦ Gumb, ki se ne odziva, čuden zaslon, sporočilo o napaki? Opiši: pripravi se tehnično poročilo (brez kakršnih koli podatkov iz tvojega rodoslovja), pregledaš ga in ga pošlješ prek GitHuba ali po e-pošti.
+Un doigt qui tremble touche facilement un bouton de 72 px ou plus (64 px au moins). ¦ Prst koji drhti lako pogodi gumb od 72 px ili više (najmanje 64 px). ¦ Tresoč prst zlahka zadene gumb velikosti 72 px ali več (vsaj 64 px).
+Un film de famille ¦ Obiteljski film ¦ Družinski film
+Un lieu de famille ¦ Obiteljsko mjesto ¦ Družinski kraj
+Un mot de la famille ¦ Poruka od obitelji ¦ Sporočilo družine
+Un petit jeu avec les portraits ¦ Mala igra s portretima ¦ Majhna igra s portreti
+Un petit portrait au début de chaque ligne ¦ Mali portret na početku svakog retka ¦ Majhen portret na začetku vsake vrstice
+Un peu grande (46 px) ¦ Malo veća (46 px) ¦ Nekoliko večja (46 px)
+Un peu moins « cliquable » au premier regard. ¦ Na prvi pogled malo manje „klikabilno”. ¦ Na prvi pogled malo manj »klikljivo«.
+Un peu petite (38 px) ¦ Malo manja (38 px) ¦ Nekoliko manjša (38 px)
+Un peu « bureau » : moins de caractère que les autres. ¦ Malo „uredski”: manje karaktera od ostalih. ¦ Malo »pisarniško«: manj značaja kot drugi.
+Un son, une chanson ¦ Zvuk, pjesma ¦ Zvok, pesem
+Un trait épais ressemble aux traits noirs de l’app ; un trait fin fait plus élégant. Seulement pour les icônes au trait. ¦ Debela linija nalikuje crnim linijama aplikacije; tanka linija je elegantnija. Samo za obrisne ikone. ¦ Debela črta je podobna črnim črtam aplikacije; tanka črta je bolj elegantna. Samo za obrisne ikone.
+Une copie de ta généalogie, faite toute seule, vérifiée, rangée dans le dossier de ton choix. ¦ Kopija tvog rodoslovlja, napravljena automatski, provjerena, spremljena u mapu po tvom izboru. ¦ Kopija tvojega rodoslovja, narejena samodejno, preverjena, shranjena v mapo po tvoji izbiri.
+Une copie quand tu quittes l’app (ou fermes l’onglet), seulement si quelque chose a changé. ¦ Kopija kad izađeš iz aplikacije (ili zatvoriš karticu), samo ako se nešto promijenilo. ¦ Kopija, ko zapustiš aplikacijo (ali zapreš zavihek), samo če se je kaj spremenilo.
+Une grande colonne ¦ Jedan veliki stupac ¦ En velik stolpec
+Une grande partie des formes des tableaux (animaux, métiers, maison, transports, météo, santé…) vient de ¦ Velik dio oblika ploča (životinje, zanimanja, kuća, prijevoz, vrijeme, zdravlje…) dolazi od ¦ Velik del oblik tabel (živali, poklici, hiša, prevoz, vreme, zdravje …) prihaja iz
+Une ombre sous les boutons ¦ Sjena ispod gumba ¦ Senca pod gumbi
+Une photo ¦ Fotografija ¦ Fotografija
+Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence). ¦ Fotografija oživljava zapis. Bez nje inicijali zauzimaju njezino mjesto (traka preuzima glavnu boju Izgleda). ¦ Fotografija oživi zapis. Brez nje njeno mesto zavzamejo začetnice (pasica prevzame glavno barvo Videza).
+Une phrase écoutée se comprend même quand on lit mal. ¦ Izgovorena rečenica razumije se i kad se slabo čita. ¦ Slišan stavek razumeš, tudi če slabo bereš.
+Une seule couleur pour tous (comme la fiche) ¦ Jedna boja za sve (kao zapis) ¦ Ena barva za vse (kot zapis)
+Une seule lettre, celle du nom (M) ¦ Jedno slovo, ono prezimena (M) ¦ Ena črka, tista iz priimka (M)
+Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur. ¦ Korisno kad se i unuče igra s tabletom. To nije prava zaštita: samo sprječava izlazak greškom. ¦ Uporabno, ko se s tablico igra tudi vnuk ali vnukinja. To ni prava zaščita: le prepreči izhod po pomoti.
+Utiliser la personne affichée ¦ Koristi prikazanu osobu ¦ Uporabi prikazano osebo
+Verrouiller / déverrouiller ¦ Zaključaj / otključaj ¦ Zakleni / odkleni
+Vert affaibli (le plus courant de tous). ¦ Oslabljena zelena (najčešća od svih). ¦ Oslabljena zelena (najpogostejša od vseh).
+Vitesse de la voix ¦ Brzina glasa ¦ Hitrost glasu
+Voir l’aperçu ¦ Prikaži pregled ¦ Prikaži predogled
+Voix française de l’appareil ¦ Francuski glas uređaja ¦ Francoski glas naprave
+Vu la dernière fois (fiches d’animaux) ¦ Zadnji put viđeno (zapisi životinja) ¦ Nazadnje videno (zapisi živali)
+Zoom de départ ¦ Početno povećanje ¦ Začetna povečava
+arrête la lecture. ¦ zaustavlja čitanje. ¦ ustavi branje.
+au-delà de ¦ iznad ¦ nad
+carré photo, grand nom ¦ četvrtasta fotografija, veliko ime ¦ kvadratna fotografija, veliko ime
+champs rangés, photo d’identité ¦ uređena polja, fotografija za osobnu ¦ urejena polja, fotografija za izkaznico
+chaque ligne dans son cadre ¦ svaki redak u svom okviru ¦ vsaka vrstica v svojem okvirju
+chaque liste garde le sien ¦ svaki popis zadržava svoj ¦ vsak seznam ohrani svojega
+chaque outil le sien ¦ svaki alat svoj ¦ vsako orodje svojega
+coins arrondis, ombres légères ¦ zaobljeni kutovi, lagane sjene ¦ zaobljeni koti, rahle sence
+dans LCNDA (écran de démarrage → Importer un fichier, ou une nouvelle généalogie vide), puis ici même, choisis le même dossier. ¦ u LCNDA (početni zaslon → Uvezi datoteku ili novo prazno rodoslovlje), a zatim upravo ovdje odaberi istu mapu. ¦ v LCNDA (začetni zaslon → Uvozi datoteko ali novo prazno rodoslovje), nato prav tukaj izberi isto mapo.
+de départ ¦ početno ¦ začetno
+dossier partagé ¦ dijeljena mapa ¦ skupna mapa
+du nom ¦ imena ¦ imena
+décédé ¦ preminuo ¦ umrl
+décédée ¦ preminula ¦ umrla
+ex. Dimensions, Technique, Lieu de conservation ¦ npr. Dimenzije, Tehnika, Mjesto čuvanja ¦ npr. Mere, Tehnika, Kraj hrambe
+icônes fines, une seule couleur ¦ tanke ikone, jedna boja ¦ tanke ikone, ena barva
+impossible au-delà de ¦ nemoguće iznad ¦ nemogoče nad
+juste au-dessus de la liste ¦ odmah iznad popisa ¦ tik nad seznamom
+la Densité ne s’y ajoute pas ¦ Gustoća se tome ne dodaje ¦ Gostota se temu ne prišteje
+la liste des projets ¦ popis projekata ¦ seznam projektov
+le numéro dans un carré ¦ broj u kvadratu ¦ številka v kvadratu
+là où il était ¦ tamo gdje je bio ¦ tam, kjer je bil
+l’entrée choisie dépasse ¦ odabrana stavka strši ¦ izbrani vnos štrli
+on passe par le bloc « 👁 Observations » ¦ koristi blok „👁 Opažanja” ¦ uporabi blok »👁 Opažanja«
+papier, phrase d’état civil ¦ papir, rečenica iz matičnih knjiga ¦ papir, stavek iz matičnih knjig
+par défaut ¦ zadano ¦ privzeto
+plus d’espace ¦ više prostora ¦ več prostora
+plus d’espace partout ¦ više prostora posvuda ¦ več prostora povsod
+règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ podešava sve odjednom; zatim možeš promijeniti svaki redak (prikazuje se „prilagođeno”). ¦ nastavi vse naenkrat; nato lahko spremeniš vsako vrstico (prikaže se »prilagojeno«).
+sans icône ¦ bez ikone ¦ brez ikone
+se règle dans ¦ podešava se u ¦ nastavi se v
+serré, plus de lignes ¦ zbijeno, više redaka ¦ zgoščeno, več vrstic
+sous l’en-tête de la fiche, replié ¦ ispod zaglavlja zapisa, sklopljeno ¦ pod glavo zapisa, zloženo
+sur une ligne ¦ u jednom retku ¦ v eni vrstici
+taille du texte ¦ veličina teksta ¦ velikost besedila
+tout dans un cadre ¦ sve u jednom okviru ¦ vse v enem okvirju
+tout reste comme avant ¦ sve ostaje kao prije ¦ vse ostane kot prej
+trait pour agir, émoji pour les rubriques ¦ linija za radnje, emoji za rubrike ¦ črta za dejanja, emodži za rubrike
+traits fins, grain du papier ¦ tanke linije, tekstura papira ¦ tanke črte, papirna tekstura
+traits épais, ombres franches ¦ debele linije, oštre sjene ¦ debele črte, ostre sence
+un seul cadre, lignes fines ¦ jedan okvir, tanki redci ¦ en okvir, tanke vrstice
+un trait fin, fond transparent ¦ tanka linija, prozirna pozadina ¦ tanka črta, prozorno ozadje
+« Calendrier de cette date » ¦ „Kalendar ovog datuma” ¦ »Koledar tega datuma«
+« Liste | Fiches » ¦ „Popis | Zapisi” ¦ »Seznam | Kartice«
+« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias. ¦ „Ukloni” skriva fotografiju samo iz jednostavnog načina: ostaje u tvojim medijima. ¦ »Odstrani« skrije fotografijo samo v preprostem načinu: ostane med tvojimi mediji.
+« ＋ Nouvelle observation · vu il y a 2 j » ¦ „＋ Novo opažanje · viđeno prije 2 d” ¦ »＋ Novo opažanje · videno pred 2 d«
+À chaque ouverture ¦ Pri svakom otvaranju ¦ Ob vsakem odpiranju
+À droite, les unes sous les autres (comme avant) ¦ Desno, jedno ispod drugog (kao prije) ¦ Desno, eno pod drugim (kot prej)
+À vérifier, branche maternelle, acte illisible… ¦ Za provjeru, majčina grana, nečitljiv matični zapis… ¦ Za preverjanje, materina veja, neberljiv matični vpis …
+À écouter ¦ Za slušanje ¦ Za poslušanje
+Âge de la mère 🔴 ¦ Dob majke 🔴 ¦ Starost matere 🔴
+Âge de la mère 🟠 ¦ Dob majke 🟠 ¦ Starost matere 🟠
+Âge du père 🔴 ¦ Dob oca 🔴 ¦ Starost očeta 🔴
+Âge du père 🟠 ¦ Dob oca 🟠 ¦ Starost očeta 🟠
+Âge minimum au mariage ¦ Minimalna dob pri vjenčanju ¦ Najnižja starost ob poroki
+Ère ¦ Era ¦ Doba
+Ère d’Espagne ¦ Španjolska era ¦ Španska doba
+Écart entre deux naissances ¦ Razmak između dva rođenja ¦ Razmik med dvema rojstvoma
+Écouter ¦ Slušaj ¦ Poslušaj
+Édition ¦ Uređivanje ¦ Urejanje
+Émojis ¦ Emoji ¦ Emodžiji
+Énorme (62 px) ¦ Golema (62 px) ¦ Ogromna (62 px)
+Épaisseur des traits ¦ Debljina linija ¦ Debelina črt
+Épaisseur du trait ¦ Debljina linije ¦ Debelina črte
+Éteint : seulement la pastille « Vu hier ». ¦ Isključeno: samo oznaka „Viđeno jučer”. ¦ Izklopljeno: samo značka »Videno včeraj«.
+Éthiopien ¦ Etiopski ¦ Etiopski
+Étoile ¦ Zvijezda ¦ Zvezda
+à vérifier au-delà de ¦ za provjeru iznad ¦ za preverjanje nad
+← Avancer le morceau ¦ ← Pomakni dio naprijed ¦ ← Premakni del naprej
+↗ Voir les versions publiées ¦ ↗ Pogledaj objavljene verzije ¦ ↗ Poglej objavljene različice
+↺ Remettre seulement les groupes ¦ ↺ Vrati na početno samo skupine ¦ ↺ Ponastavi na začetno samo skupine
+↻ Relancer le contrôle ¦ ↻ Ponovno pokreni provjeru ¦ ↻ Znova zaženi preverjanje
+▶ Ouvrir le mode simple ¦ ▶ Otvori jednostavni način ¦ ▶ Odpri preprosti način
+♿ Voir les réglages de toute l’app ¦ ♿ Pogledaj postavke cijele aplikacije ¦ ♿ Poglej nastavitve cele aplikacije
+⤓ Exporter ce réglage ¦ ⤓ Izvezi ovu postavku ¦ ⤓ Izvozi to nastavitev
+＋ Créer une forme… ¦ ＋ Stvori oblik… ¦ ＋ Ustvari obliko …
+＋ Nouvelle branche ¦ ＋ Nova grana ¦ ＋ Nova veja
+＋ Nouvelle forme… ¦ ＋ Novi oblik… ¦ ＋ Nova oblika …
+＋ Nouvelle observation (fiches d’animaux) ¦ ＋ Novo opažanje (zapisi životinja) ¦ ＋ Novo opažanje (zapisi živali)
+＋ Nouvelle étiquette ¦ ＋ Nova oznaka ¦ ＋ Nova oznaka
+🌳 L’arbre ¦ 🌳 Stablo ¦ 🌳 Drevo
+🎂 Âges ¦ 🎂 Dob ¦ 🎂 Starosti
+🎤 Dictée vocale ¦ 🎤 Glasovno diktiranje ¦ 🎤 Glasovni nareki
+🎯 Élément choisi ¦ 🎯 Odabrani element ¦ 🎯 Izbrani element
+👁 Aperçu : le même réglage partout ¦ 👁 Pregled: ista postavka posvuda ¦ 👁 Predogled: ista nastavitev povsod
+👁 Aperçu vivant ¦ 👁 Živi pregled ¦ 👁 Živi predogled
+👁 Essayer ici ¦ 👁 Isprobaj ovdje ¦ 👁 Preizkusi tukaj
+👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque ¦ 👁＋ Opažanje · 🩺＋ Zdravlje · 📍 GPS trag · 🔖 Oznaka ¦ 👁＋ Opažanje · 🩺＋ Zdravje · 📍 Sled GPS · 🔖 Oznaka
+👤 Sur la fiche ¦ 👤 Na zapisu ¦ 👤 Na zapisu
+👥 Les personnes ¦ 👥 Osobe ¦ 👥 Osebe
+📊 Moyennes de la famille ¦ 📊 Obiteljski prosjeci ¦ 📊 Družinska povprečja
+📜 Sépia ¦ 📜 Sepija ¦ 📜 Sepija
+📦 Quoi ¦ 📦 Što ¦ 📦 Kaj
+📷 Les photos ¦ 📷 Fotografije ¦ 📷 Fotografije
+🔗 Relier ce dossier ¦ 🔗 Poveži ovu mapu ¦ 🔗 Poveži to mapo
+🔴 moins de ¦ 🔴 manje od ¦ 🔴 manj kot
+🔴 naissance plus tard que ¦ 🔴 rođenje kasnije od ¦ 🔴 rojstvo pozneje kot
+🔷 Formes des avatars ¦ 🔷 Oblici avatara ¦ 🔷 Oblike avatarjev
+🖨 Imprimer la liste ¦ 🖨 Ispiši popis ¦ 🖨 Natisni seznam
+🗂 Les copies ¦ 🗂 Kopije ¦ 🗂 Kopije
+🗑 Enlever l’élément choisi ¦ 🗑 Ukloni odabrani element ¦ 🗑 Odstrani izbrani element
+🟠 au-delà de ¦ 🟠 iznad ¦ 🟠 nad
+🟡 au-delà de ¦ 🟡 iznad ¦ 🟡 nad
+🟡 plus de ¦ 🟡 više od ¦ 🟡 več kot
+🟡 écart de plus de ¦ 🟡 razmak veći od ¦ 🟡 razmik večji od
+🦮 Lecteur d’écran ¦ 🦮 Čitač zaslona ¦ 🦮 Bralnik zaslona
+🪙 Convertisseur d’autrefois ¦ 🪙 Pretvarač starih mjera ¦ 🪙 Pretvornik nekdanjih enot
+C’est ton anniversaire ! ¦ Danas ti je rođendan! ¦ Danes imaš rojstni dan!
+{name} a {n} ans aujourd’hui ! ¦ {name} danas puni {n}! ¦ {name} danes praznuje {n}. rojstni dan!
+Il est né {details}. ¦ Rođen je {details}. ¦ Rodil se je {details}.
+Elle est née {details}. ¦ Rođena je {details}. ¦ Rodila se je {details}.
+{a} et {b} se sont mariés il y a {n} ans ¦ {a} i {b} vjenčali su se prije {n} god. ¦ {a} in {b} sta se poročila pred {n} leti
+{name} aurait eu {n} ans aujourd’hui ¦ {name} bi danas napunio/napunila {n} ¦ {name} bi danes dopolnil/dopolnila {n} let
+On se souvient de {name} ¦ Sjećamo se: {name} ¦ Spominjamo se: {name}
+Elle nous a quittés {details}, il y a {n} ans. ¦ Napustila nas je {details}, prije {n} god. ¦ Zapustila nas je {details}, pred {n} leti.
+Il nous a quittés {details}, il y a {n} ans. ¦ Napustio nas je {details}, prije {n} god. ¦ Zapustil nas je {details}, pred {n} leti.
+ton anniversaire ¦ tvoj rođendan ¦ tvoj rojstni dan
+Elle aurait eu {n} ans ¦ Napunila bi {n} ¦ Dopolnila bi {n} let
+Il aurait eu {n} ans ¦ Napunio bi {n} ¦ Dopolnil bi {n} let
+Tu auras {n} ans ¦ Napunit ćeš {n} ¦ Dopolnil/dopolnila boš {n} let
+Elle aura {n} ans ¦ Napunit će {n} ¦ Dopolnila bo {n} let
+Il aura {n} ans ¦ Napunit će {n} ¦ Dopolnil bo {n} let
+Mariés ici ¦ Vjenčani ovdje ¦ Poročeni tukaj
+Né·es ici ¦ Rođeni ovdje ¦ Rojeni tukaj
+Mort·es ici ¦ Umrli ovdje ¦ Umrli tukaj
+Bravo ! C’est {name} ({rel}). ¦ Bravo! To je {name} ({rel}). ¦ Bravo! To je {name} ({rel}).
+Bravo ! C’est {name}. ¦ Bravo! To je {name}. ¦ Bravo! To je {name}.
+toi ¦ ti ¦ ti
+Avec toi ({n}) ¦ S tobom ({n}) ¦ S teboj ({n})
+Ses photos ({n}) ¦ Fotografije ({n}) ¦ Fotografije ({n})
+Sur la photo : {names}. ¦ Na fotografiji: {names}. ¦ Na fotografiji: {names}.
+=personne trouvée ¦ pronađena osoba|pronađene osobe|pronađenih osoba ¦ najdena oseba|najdeni osebi|najdene osebe|najdenih oseb
+Icône du gros bouton ¦ Ikona velikog gumba ¦ Ikona velikega gumba
+Un cadre ¦ Okvir ¦ Okvir
+Écris le mot ¦ Napiši poruku ¦ Napiši sporočilo
+Choisis la maison ¦ Odaberi kuću ¦ Izberi hišo
+Choisis la personne ¦ Odaberi osobu ¦ Izberi osebo
+Choisis la photo ¦ Odaberi fotografiju ¦ Izberi fotografijo
+Choisis les photos ¦ Odaberi fotografije ¦ Izberi fotografije
+Choisis le film ¦ Odaberi film ¦ Izberi film
+Choisis le son ¦ Odaberi zvuk ¦ Izberi zvok
+Choisis le lieu ¦ Odaberi mjesto ¦ Izberi kraj
+Écris le numéro ¦ Napiši broj ¦ Napiši številko
+Sa fiche ¦ Njegov/njezin zapis ¦ Njegov/njen zapis
+Un mot ¦ Poruka ¦ Sporočilo
+Un film ¦ Film ¦ Film
+Un lieu ¦ Mjesto ¦ Kraj
+Un instant… ¦ Trenutak… ¦ Trenutek …
+Sans prénom ¦ Bez imena ¦ Brez imena
+Un instant, on prépare l’arbre… ¦ Trenutak, pripremamo stablo… ¦ Trenutek, pripravljamo drevo …
+Un instant, on construit la maison… ¦ Trenutak, gradimo kuću… ¦ Trenutek, gradimo hišo …
+La maison n’a pas pu être montrée. ¦ Kuću nije bilo moguće prikazati. ¦ Hiše ni bilo mogoče prikazati.
+Monter d’un étage ¦ Kat gore ¦ Nadstropje višje
+Descendre d’un étage ¦ Kat dolje ¦ Nadstropje nižje
+Voir toute la maison ¦ Pogledaj cijelu kuću ¦ Poglej celo hišo
+Plus près ¦ Bliže ¦ Bliže
+Plus loin ¦ Dalje ¦ Dlje
+La visite ¦ Obilazak ¦ Ogled
+Étage ¦ Kat ¦ Nadstropje
+Il se passe quelque chose aujourd’hui ! ¦ Danas se nešto događa! ¦ Danes se nekaj dogaja!
+Continue… encore un peu ¦ Nastavi… još malo ¦ Nadaljuj … še malo
+On ne connaît pas encore ses parents ¦ Roditelji još nisu poznati ¦ Starši še niso znani
+Voir sa fiche ¦ Pogledaj zapis ¦ Poglej zapis
+Pas d’enfants connus ¦ Nema poznate djece ¦ Ni znanih otrok
+Plus gros ¦ Veće ¦ Večje
+Plus de monde ¦ Više osoba ¦ Več oseb
+Photo d’avant ¦ Prethodna fotografija ¦ Prejšnja fotografija
+Cacher les noms ¦ Sakrij imena ¦ Skrij imena
+Qui est là ? ¦ Tko je tu? ¦ Kdo je tu?
+Arrêter le défilement ¦ Zaustavi prikaz ¦ Ustavi predvajanje
+Défilement tout seul ¦ Automatski prikaz ¦ Samodejno predvajanje
+Ses maris ¦ Njezini muževi ¦ Njeni možje
+Son mari ¦ Njezin muž ¦ Njen mož
+Ses femmes ¦ Njegove žene ¦ Njegove žene
+Sa femme ¦ Njegova žena ¦ Njegova žena
+Son conjoint ¦ Partner ¦ Partner
+Sa sœur ¦ Sestra ¦ Sestra
+Son frère ¦ Brat ¦ Brat
+Ses frères et sœurs ¦ Braća i sestre ¦ Bratje in sestre
+Écouter son histoire ¦ Poslušaj priču ¦ Poslušaj zgodbo
+Voir dans l’arbre ¦ Pogledaj u stablu ¦ Poglej v drevesu
+Ses parents ¦ Roditelji ¦ Starši
+Son parent ¦ Roditelj ¦ Starš
+Ses enfants ¦ Djeca ¦ Otroci
+Son enfant ¦ Dijete ¦ Otrok
+Par famille ¦ Po obitelji ¦ Po družini
+Par prénom ¦ Po imenu ¦ Po imenu
+La famille d’aujourd’hui ¦ Današnja obitelj ¦ Današnja družina
+Touche la première lettre du prénom. ¦ Dodirni prvo slovo imena. ¦ Dotakni se prve črke imena.
+Touche la personne qui regarde. ¦ Dodirni osobu koja gleda. ¦ Dotakni se osebe, ki gleda.
+Tape un prénom ou un nom ¦ Upiši ime ili prezime ¦ Vpiši ime ali priimek
+Effacer une lettre ¦ Izbriši slovo ¦ Izbriši črko
+J’écoute… ¦ Slušam… ¦ Poslušam …
+Je n’ai pas bien entendu. Réessaie, ou utilise le clavier. ¦ Nisam dobro čuo. Pokušaj ponovno ili koristi tipkovnicu. ¦ Nisem dobro slišal. Poskusi znova ali uporabi tipkovnico.
+La dictée n’a pas marché. Utilise le clavier. ¦ Diktiranje nije uspjelo. Koristi tipkovnicu. ¦ Nareki niso uspeli. Uporabi tipkovnico.
+Voir la photo ¦ Pogledaj fotografiju ¦ Poglej fotografijo
+🎈 Bientôt ¦ 🎈 Uskoro ¦ 🎈 Kmalu
+Dis d’abord qui regarde : l’app montrera ta famille. ¦ Najprije reci tko gleda: aplikacija će prikazati tvoju obitelj. ¦ Najprej povej, kdo gleda: aplikacija bo prikazala tvojo družino.
+Tes conjoints ¦ Tvoji partneri ¦ Tvoji partnerji
+Ta femme ¦ Tvoja žena ¦ Tvoja žena
+Ton mari ¦ Tvoj muž ¦ Tvoj mož
+Tes parents ¦ Tvoji roditelji ¦ Tvoji starši
+Tes grands-parents ¦ Tvoji djedovi i bake ¦ Tvoji stari starši
+Tes enfants ¦ Tvoja djeca ¦ Tvoji otroci
+Tes petits-enfants ¦ Tvoji unuci ¦ Tvoji vnuki
+Tes arrière-petits-enfants ¦ Tvoji praunuci ¦ Tvoji pravnuki
+Personne n’est encore relié dans l’arbre. ¦ Još nitko nije povezan u stablu. ¦ V drevesu še nihče ni povezan.
+Ton anniversaire ¦ Tvoj rođendan ¦ Tvoj rojstni dan
+Les anniversaires qui arrivent ¦ Nadolazeći rođendani ¦ Prihajajoči rojstni dnevi
+Pas de date de naissance connue pour l’instant. ¦ Zasad nema poznatog datuma rođenja. ¦ Zaenkrat ni znanega datuma rojstva.
+Voir les photos ¦ Pogledaj fotografije ¦ Poglej fotografije
+Il faut au moins trois portraits pour jouer. ¦ Za igru trebaju najmanje tri portreta. ¦ Za igro potrebuješ vsaj tri portrete.
+Un autre portrait ¦ Drugi portret ¦ Drug portret
+Écouter l’heure ¦ Poslušaj koliko je sati ¦ Poslušaj, koliko je ura
+Écouter le numéro ¦ Poslušaj broj ¦ Poslušaj številko
+Tape le code pour quitter ¦ Upiši kod za izlaz ¦ Vpiši kodo za izhod
+Arrêter ¦ Zaustavi ¦ Ustavi
+Les gros boutons : avancer, reculer, tourner. On passe par les portes. ¦ Veliki gumbi: naprijed, natrag, okreni se. Prolaziš kroz vrata. ¦ Veliki gumbi: naprej, nazaj, obrni se. Greš skozi vrata.
+On voit déjà le plus de monde possible. ¦ Već se vidi što više osoba. ¦ Vidiš že čim več oseb.
+Pas de frère ou de sœur après. ¦ Nema brata ili sestre poslije. ¦ Za tem ni brata ali sestre.
+Pas de frère ou de sœur avant. ¦ Nema brata ili sestre prije. ¦ Pred tem ni brata ali sestre.
+Mode simple quitté. Tu retrouves l’app normale. ¦ Izašao/izašla si iz jednostavnog načina. Vraćen/vraćena si u običnu aplikaciju. ¦ Preprosti način je zaprt. Spet si v običajni aplikaciji.
+Première fois : vérifie ces réglages, puis « ▶ Ouvrir le mode simple ». ¦ Prvi put: provjeri ove postavke, zatim „▶ Otvori jednostavni način”. ¦ Prvič: preveri te nastavitve, nato »▶ Odpri preprosti način«.
+▶ Démarrer le mode simple ¦ ▶ Pokreni jednostavni način ¦ ▶ Zaženi preprosti način
+⚙️ Préparer ¦ ⚙️ Pripremi ¦ ⚙️ Pripravi
+Ta couleur ¦ Tvoja boja ¦ Tvoja barva
+La personne ¦ Osoba ¦ Oseba
+⚠️ Pas encore de photo de cette personne : le cadre est caché ¦ ⚠️ Još nema fotografije ove osobe: okvir je skriven ¦ ⚠️ Te osebe še ni na fotografiji: okvir je skrit
+Écrite toute seule (nombre de photos, souvenirs du jour) ¦ Napisano automatski (broj fotografija, uspomene dana) ¦ Napisano samodejno (število fotografij, spomini dneva)
+Le mot ¦ Poruka ¦ Sporočilo
+Icône du cadre ¦ Ikona okvira ¦ Ikona okvirja
+↺ Remettre ce cadre comme au départ ¦ ↺ Vrati ovaj okvir na početno ¦ ↺ Ponastavi ta okvir na začetno
+Retirer ce cadre ¦ Ukloni ovaj okvir ¦ Odstrani ta okvir
+La photo ¦ Fotografija ¦ Fotografija
+Le film ¦ Film ¦ Film
+Le son ¦ Zvuk ¦ Zvok
+Le lieu ¦ Mjesto ¦ Kraj
+Choisis un lieu… ¦ Odaberi mjesto… ¦ Izberi kraj …
+Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos). ¦ Zasad nema mjesta u stablu (rođenja, vjenčanja, fotografije). ¦ Zaenkrat v drevesu ni krajev (rojstva, poroke, fotografije).
+Le numéro ¦ Broj ¦ Številka
+Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…). ¦ Prikazuje obitelj osobe koja gleda (roditelje, djecu, unuke…). ¦ Prikaže družino osebe, ki gleda (starše, otroke, vnuke …).
+Les anniversaires des vivants, du plus proche au plus lointain. ¦ Rođendani živih, od najbližeg do najdaljeg. ¦ Rojstni dnevi živih, od najbližjega do najbolj oddaljenega.
+Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits. ¦ Jedan portret, tri imena: treba pronaći pravo. Trebaju najmanje tri portreta. ¦ En portret, tri imena: najdi pravo. Potrebni so vsaj trije portreti.
+Toutes les photos, dans le désordre. ¦ Sve fotografije, nasumičnim redom. ¦ Vse fotografije, v naključnem vrstnem redu.
+Propre au mode simple ¦ Posebno za jednostavni način ¦ Posebej za preprosti način
+✕ Fermer l’essai ¦ ✕ Zatvori probu ¦ ✕ Zapri preizkus
+Daltonisme propre au mode simple ¦ Sljepoća za boje samo za jednostavni način ¦ Barvna slepota samo za preprosti način
+Contraste fort dans le mode simple ¦ Visoki kontrast u jednostavnom načinu ¦ Visok kontrast v preprostem načinu
+Moins d’animations dans le mode simple ¦ Manje animacija u jednostavnom načinu ¦ Manj animacij v preprostem načinu
+✓ Appliqué ¦ ✓ Primijenjeno ¦ ✓ Uporabljeno
+Personne de l’arbre ¦ Osoba iz stabla ¦ Oseba iz drevesa
+Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras. ¦ Visoki kontrast je uključen: ovdje odabrane boje vratit će se kad ga isključiš. ¦ Visok kontrast je vklopljen: tukaj izbrane barve se vrnejo, ko ga izklopiš.
+✓ très lisible ¦ ✓ vrlo čitljivo ¦ ✓ zelo berljivo
+Jamais moins de 22 px. ¦ Nikad manje od 22 px. ¦ Nikoli manj kot 22 px.
+Comme l’app ¦ Kao aplikacija ¦ Kot aplikacija
+↺ Remettre la disposition comme au départ ¦ ↺ Vrati raspored na početno ¦ ↺ Ponastavi postavitev na začetno
+ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement. ¦ ℹ️ „Način privatnosti” aplikacije je uključen: žive osobe prikazuju se samo imenom. ¦ ℹ️ »Način zasebnosti« aplikacije je vklopljen: žive osebe so prikazane samo z imenom.
+Les branches apparaîtront quand l’arbre sera lu. ¦ Grane će se pojaviti kad se stablo učita. ¦ Veje se bodo prikazale, ko bo drevo prebrano.
+Remettre dans le mode simple ¦ Vrati u jednostavni način ¦ Vrni v preprosti način
+🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer. ¦ 🔒 Kod je spremljen (čuva se skriven, čak i od aplikacije). Upiši 4 znamenke da ga promijeniš. ¦ 🔒 Koda je shranjena (skrita, tudi pred aplikacijo). Vpiši 4 števke, da jo spremeniš.
+Coupé : cet appareil garde ses propres réglages du mode simple. ¦ Isključeno: ovaj uređaj zadržava vlastite postavke jednostavnog načina. ¦ Izklopljeno: ta naprava ohrani svoje nastavitve preprostega načina.
+⚠️ À corriger ¦ ⚠️ Za ispravak ¦ ⚠️ Za popravek
+⚠️ Pas assez lisible ¦ ⚠️ Nedovoljno čitljivo ¦ ⚠️ Premalo berljivo
+Essai fermé : c’est ainsi qu’on quitte le mode simple. ¦ Proba zatvorena: ovako se izlazi iz jednostavnog načina. ¦ Preizkus zaprt: tako zapustiš preprosti način.
+La photo du gros bouton ¦ Fotografija velikog gumba ¦ Fotografija velikega gumba
+Les photos du gros bouton ¦ Fotografije velikog gumba ¦ Fotografije velikega gumba
+Le film du gros bouton ¦ Film velikog gumba ¦ Film velikega gumba
+Le son du gros bouton ¦ Zvuk velikog gumba ¦ Zvok velikega gumba
+La police des gros boutons ¦ Font velikih gumba ¦ Pisava velikih gumbov
+La police du mode simple ¦ Font jednostavnog načina ¦ Pisava preprostega načina
+Il faut garder au moins un gros bouton. ¦ Treba zadržati barem jedan veliki gumb. ¦ Ohraniti moraš vsaj en velik gumb.
+Code de sortie enregistré (gardé caché). ¦ Izlazni kod spremljen (čuva se skriven). ¦ Izhodna koda shranjena (skrita).
+Retour à l’écran d’avant ¦ Natrag na prethodni zaslon ¦ Nazaj na prejšnji zaslon
+Âges ¦ Dob ¦ Starosti
+Lieux mal placés ¦ Pogrešno smještena mjesta ¦ Napačno postavljeni kraji
+Baptême loin ¦ Daleko krštenje ¦ Oddaljen krst
+Lieux contradictoires ¦ Proturječna mjesta ¦ Protislovni kraji
+une mauvaise année de décès (1862 au lieu de 1882 ?), ou un homonyme pris pour le père. Regarde l’acte de décès du père. ¦ pogrešna godina smrti (1862 umjesto 1882?) ili imenjak uzet za oca. Pogledaj matični zapis o očevoj smrti. ¦ napačno leto smrti (1862 namesto 1882?) ali soimenjak, zamenjan za očeta. Poglej očetov mrliški vpis.
+une erreur de date, ou la mère confondue avec une homonyme (une tante, une cousine). Regarde l’acte de naissance de l’enfant. ¦ pogreška u datumu ili majka zamijenjena s imenjakinjom (teta, sestrična). Pogledaj matični zapis o rođenju djeteta. ¦ napaka v datumu ali mati, zamenjana s soimenjakinjo (teta, sestrična). Poglej otrokov rojstni vpis.
+une génération confondue (la grand-mère prise pour la mère), ou une année mal lue. ¦ zamijenjena generacija (baka uzeta za majku) ili pogrešno pročitana godina. ¦ zamenjan rod (babica, vzeta za mater) ali napačno prebrano leto.
+une génération sautée, ou une année mal lue. ¦ preskočena generacija ili pogrešno pročitana godina. ¦ preskočen rod ali napačno prebrano leto.
+une mauvaise date de décès, ou le mariage d’un homonyme. ¦ pogrešan datum smrti ili vjenčanje imenjaka. ¦ napačen datum smrti ali poroka soimenjaka.
+deux dates inversées, ou une année mal recopiée. ¦ dva zamijenjena datuma ili pogrešno prepisana godina. ¦ dva zamenjana datuma ali napačno prepisano leto.
+un chiffre mal lu (31 au lieu de 21) ou un mois mal recopié. ¦ pogrešno pročitana znamenka (31 umjesto 21) ili pogrešno prepisan mjesec. ¦ napačno prebrana števka (31 namesto 21) ali napačno prepisan mesec.
+la naissance d’un parent prise pour la sienne, ou un homonyme. ¦ rođenje roditelja uzeto za njegovo/njezino ili imenjak. ¦ rojstvo starša, vzeto za njegovo/njeno, ali soimenjak.
+des jumeaux mal datés, ou un enfant rattaché aux mauvais parents. ¦ pogrešno datirani blizanci ili dijete povezano s pogrešnim roditeljima. ¦ napačno datirana dvojčka ali otrok, povezan z napačnimi starši.
+la même personne saisie deux fois : compare les deux fiches avant de les fusionner. ¦ ista osoba upisana dvaput: usporedi dva zapisa prije spajanja. ¦ ista oseba, vnesena dvakrat: primerjaj zapisa, preden ju združiš.
+une commune homonyme d’un autre département, ou des coordonnées inversées. ¦ istoimena općina iz drugog departmana ili zamijenjene koordinate. ¦ istoimenska občina iz drugega departmaja ali zamenjane koordinate.
+deux homonymes confondus dans une seule fiche. ¦ dva imenjaka spojena u jedan zapis. ¦ dva soimenjaka, združena v en zapis.
+une commune homonyme d’un autre département. ¦ istoimena općina iz drugog departmana. ¦ istoimenska občina iz drugega departmaja.
+les deux dates inversées. ¦ dva zamijenjena datuma. ¦ zamenjana datuma.
+un tiret tapé par erreur devant l’année. ¦ crtica upisana greškom ispred godine. ¦ pomišljaj, po pomoti vpisan pred letnico.
+un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas. ¦ imenjak uzet za supružnika ili zapis povezan jednu generaciju previsoko ili prenisko. ¦ soimenjak, vzet za zakonca, ali zapis, povezan en rod previsoko ali prenizko.
+un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement. ¦ znamenka koju je stroj pogrešno pročitao (1/7, 3/8, 5/6) ili dob koju je obitelj nasumce navela: pogledaj sliku popisa stanovništva. ¦ števka, ki jo je stroj napačno prebral (1/7, 3/8, 5/6), ali starost, ki jo je družina navedla na pamet: poglej sliko popisa prebivalstva.
+un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement. ¦ pogrešno pročitan ili skraćen naziv općine („St” za Saint): pogledaj sliku popisa stanovništva. ¦ napačno prebrano ali okrajšano ime občine (»St« za Saint): poglej sliko popisa prebivalstva.
+la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement. ¦ pogrešno pročitano polje spola ili druga osoba iz kućanstva: pogledaj sliku popisa stanovništva. ¦ napačno prebrano polje spola ali druga oseba iz gospodinjstva: poglej sliko popisa prebivalstva.
+un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement. ¦ pogrešno pročitan odnos (sin / kći), pogrešno podijeljeno kućanstvo ili zapis koji još nije povezan: pogledaj sliku popisa stanovništva. ¦ napačno prebrano sorodstvo (sin / hči), napačno razdeljeno gospodinjstvo ali zapis, ki še ni povezan: poglej sliko popisa prebivalstva.
+J’ai vérifié dans l’acte : c’est bien ça ¦ Provjerio/provjerila sam u matičnom zapisu: točno je ¦ Preveril/preverila sem v matičnem vpisu: drži
+La date est approximative (« vers… ») ¦ Datum je približan („oko…”) ¦ Datum je približen (»okoli …«)
+Ce sont deux personnes différentes ¦ To su dvije različite osobe ¦ To sta dve različni osebi
+Le lieu est juste ¦ Mjesto je točno ¦ Kraj je pravilen
+J’ai regardé l’image : ma fiche est juste, SocFace a mal lu ¦ Pogledao/pogledala sam sliku: moj zapis je točan, SocFace je pogrešno pročitao ¦ Pogledal/pogledala sem sliko: moj zapis je pravilen, SocFace je napačno prebral
+Ce n’est pas la même personne (homonyme) ¦ To nije ista osoba (imenjak) ¦ To ni ista oseba (soimenjak)
+L’âge déclaré au recensement était approximatif ¦ Dob navedena u popisu stanovništva bila je približna ¦ Starost, navedena v popisu prebivalstva, je bila približna
+Personne sans nom ¦ Osoba bez imena ¦ Oseba brez imena
+Dates changées ¦ Promijenjeni datumi ¦ Spremenjeni datumi
+Écartée ¦ Odbačeno ¦ Izločeno
+Plus d’alerte ¦ Nema više upozorenja ¦ Ni več opozorila
+Le contrôle ne trouve plus ce problème ¦ Provjera više ne pronalazi ovaj problem ¦ Preverjanje te težave ne najde več
+Pas une erreur ¦ Nije pogreška ¦ Ni napaka
+Toute la base ¦ Cijela baza ¦ Cela baza
+Mes ancêtres (Sosa) ¦ Moji preci (Sosa) ¦ Moji predniki (Sosa)
+Tous les lieux ¦ Sva mjesta ¦ Vsi kraji
+Aucune alerte écartée ¦ Nema odbačenih upozorenja ¦ Ni izločenih opozoril
+Rien avec ces filtres ¦ Ništa s ovim filtrima ¦ Nič s temi filtri
+Retire un filtre pour revoir les autres alertes. ¦ Ukloni filtar da ponovno vidiš ostala upozorenja. ¦ Odstrani filter, da spet vidiš druga opozorila.
+Aucune incohérence trouvée dans tes fiches. Bravo ! ¦ U tvojim zapisima nije pronađena nijedna nedosljednost. Bravo! ¦ V tvojih zapisih ni bilo najdenih nedoslednosti. Bravo!
+Ouvre l’événement dans la fiche pour corriger sa date. ¦ Otvori događaj u zapisu da ispraviš njegov datum. ¦ Odpri dogodek v zapisu, da popraviš njegov datum.
+PLACER SUR LA CARTE ¦ POSTAVI NA KARTU ¦ POSTAVI NA ZEMLJEVID
+Choisis la commune : ses coordonnées seront reprises ¦ Odaberi općinu: preuzet će se njezine koordinate ¦ Izberi občino: prevzete bodo njene koordinate
+Ce lieu n’a pas de coordonnées : choisis une commune de la liste. ¦ Ovo mjesto nema koordinate: odaberi općinu s popisa. ¦ Ta kraj nima koordinat: izberi občino s seznama.
+CONTRÔLE DE LA BASE ¦ PROVJERA BAZE ¦ PREVERJANJE BAZE
+Ta raison ¦ Tvoj razlog ¦ Tvoj razlog
+Ne plus signaler ¦ Ne prijavljuj više ¦ Ne označuj več
+Écris ta raison, ou choisis-en une. ¦ Napiši svoj razlog ili odaberi jedan. ¦ Napiši svoj razlog ali izberi enega.
+Détail ¦ Pojedinosti ¦ Podrobnosti
+Fermer (Échap) ¦ Zatvori (Esc) ¦ Zapri (Esc)
+La famille ¦ Obitelj ¦ Družina
+Contrôle impossible pour l’instant. ¦ Provjera zasad nije moguća. ¦ Preverjanje zaenkrat ni mogoče.
+des fiches sans alerte ¦ zapisa bez upozorenja ¦ zapisov brez opozorila
+Tout voir dans « ✅ Contrôle de la base » → ¦ Pogledaj sve u „✅ Provjera baze” → ¦ Poglej vse v »✅ Preverjanje baze« →
+Moyennes de la famille ¦ Obiteljski prosjeci ¦ Družinska povprečja
+Âge au mariage des hommes ¦ Dob muškaraca pri vjenčanju ¦ Starost moških ob poroki
+des femmes ¦ žena ¦ žensk
+Écart entre naissances ¦ Razmak između rođenja ¦ Razmik med rojstvi
+Pas assez de dates ¦ Nedovoljno datuma ¦ Premalo datumov
+: ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant. ¦ : ni supružnika, ni djeteta, ni događaja, ni bilješke, ni medija, ni izvora (često ostaci starog programa ili uvoza). Neposredno prije radi se sigurnosna kopija baze. ¦ : ne zakonca ne otroka ne dogodka ne opombe ne medija ne vira (pogosto ostanki starega programa ali uvoza). Tik pred tem se naredi varnostna kopija baze.
+Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant. ¦ Ne sadrže nikakve podatke. Neposredno prije radi se sigurnosna kopija baze. ¦ Ne vsebujejo nobenih podatkov. Tik pred tem se naredi varnostna kopija baze.
+Familles vides ¦ Prazne obitelji ¦ Prazne družine
+Supprimer la famille vide ¦ Izbriši praznu obitelj ¦ Izbriši prazno družino
+Supprimer la famille vide ? ¦ Izbrisati praznu obitelj? ¦ Izbrišem prazno družino?
+Supprimer les familles vides ¦ Izbriši prazne obitelji ¦ Izbriši prazne družine
+À la fermeture ¦ Pri zatvaranju ¦ Ob zapiranju
+À la main ¦ Ručno ¦ Ročno
+Avant une restauration ou une fusion ¦ Prije vraćanja ili spajanja ¦ Pred obnovitvijo ali združevanjem
+Automatique ¦ Automatski ¦ Samodejno
+Avant une mise à jour ¦ Prije ažuriranja ¦ Pred posodobitvijo
+Jamais tout seul (seulement à la main) ¦ Nikad automatski (samo ručno) ¦ Nikoli samodejno (samo ročno)
+Chaque jour ¦ Svaki dan ¦ Vsak dan
+Chaque semaine ¦ Svaki tjedan ¦ Vsak teden
+Vérifiée ¦ Provjereno ¦ Preverjeno
+Échec ¦ Neuspjeh ¦ Neuspeh
+Dossier absent ¦ Mapa nedostaje ¦ Mapa manjka
+La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous. ¦ Automatska sigurnosna kopija je isključena: odaberi „Svaki dan” ispod. ¦ Samodejna varnostna kopija je izklopljena: spodaj izberi »Vsak dan«.
+Prochaine : à la fermeture de l’app (si quelque chose a changé). ¦ Sljedeća: pri zatvaranju aplikacije (ako se nešto promijenilo). ¦ Naslednja: ob zapiranju aplikacije (če se je kaj spremenilo).
+Aucune copie dans ce dossier pour l’instant. ¦ Zasad nema kopije u ovoj mapi. ¦ V tej mapi zaenkrat ni kopije.
+Abîmée ¦ Oštećeno ¦ Poškodovano
+⚠️ Dossier introuvable pour l’instant (clé débranchée ?). ¦ ⚠️ Mapa zasad nije pronađena (USB stick isključen?). ¦ ⚠️ Mape zaenkrat ni mogoče najti (ključek USB izklopljen?).
+Dossier trouvé ¦ Mapa pronađena ¦ Mapa najdena
+Dossier synchronisé en ligne ¦ Mapa sinkronizirana na mreži ¦ Mapa, sinhronizirana v oblaku
+Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre. ¦ Svaka u svojoj podmapi, da se međusobno ne brišu. ¦ Vsaka v svoji podmapi, da se med seboj ne izbrišejo.
+Avec les médias ¦ S medijima ¦ Z mediji
+Toutes mes généalogies ¦ Sva moja rodoslovlja ¦ Vsa moja rodoslovja
+État indisponible. ¦ Stanje nije dostupno. ¦ Stanje ni na voljo.
+Dossier introuvable (clé débranchée ?). Rien n’est bloqué. ¦ Mapa nije pronađena (USB stick isključen?). Ništa nije blokirano. ¦ Mape ni mogoče najti (ključek USB izklopljen?). Nič ni blokirano.
+Éteinte : rien ne se fait tout seul. ¦ Isključeno: ništa se ne radi automatski. ¦ Izklopljeno: nič se ne zgodi samodejno.
+⚙️ Régler ¦ ⚙️ Podesi ¦ ⚙️ Nastavi
+Lieu (texte) ¦ Mjesto (tekst) ¦ Kraj (besedilo)
+Sorte d’événement ¦ Vrsta događaja ¦ Vrsta dogodka
+Posée sur ¦ Postavljeno na ¦ Postavljeno na
+l’autre ordinateur ¦ drugo računalo ¦ drug računalnik
+À choisir ¦ Za odabir ¦ Za izbiro
+Sur cet ordinateur ¦ Na ovom računalu ¦ Na tem računalniku
+Garder la mienne ¦ Zadrži moju ¦ Ohrani mojo
+Prendre l’autre ¦ Uzmi drugu ¦ Vzemi drugo
+Garder les deux ¦ Zadrži obje ¦ Ohrani obe
+Dossier branché ¦ Mapa povezana ¦ Mapa povezana
+💻 L’autre : ¦ 💻 Drugo: ¦ 💻 Drugi:
+L’autre ordinateur n’est pas encore passé par ce dossier. ¦ Drugo računalo još nije koristilo ovu mapu. ¦ Drugi računalnik te mape še ni uporabil.
+Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Mapa zasad nije pronađena (USB stick isključen?). Ništa nije izgubljeno: tvoje promjene otići će sljedeći put. ¦ Mape zaenkrat ni mogoče najti (ključek USB izklopljen?). Nič ni izgubljeno: tvoje spremembe bodo poslane naslednjič.
+Paquets mis de côté ¦ Paketi stavljeni na stranu ¦ Odloženi paketi
+Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement. ¦ Poništio/poništila si njihovo spajanje: više se ne preuzimaju automatski. „Pregledaj” za odabir promjenu po promjenu. ¦ Razveljavil/razveljavila si njihovo združitev: ne prevzemajo se več samodejno. »Preglej« za izbiro sprememba za spremembo.
+Revoir ¦ Pregledaj ¦ Preglej
+Dernières fusions ¦ Posljednja spajanja ¦ Zadnje združitve
