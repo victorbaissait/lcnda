@@ -1,0 +1,1201 @@
+fr ¦ hr ¦ sl
+Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe ¦ Igra guske / Zmije i ljestve / Čovječe, ne ljuti se / Slagalica / Labirint ¦ Igra gosi / Kače in lestve / Človek, ne jezi se / Sestavljanka / Labirint
+Jeu de l’oie ¦ Igra guske ¦ Igra gosi
+Serpents et échelles ¦ Zmije i ljestve ¦ Kače in lestve
+Petits chevaux ¦ Čovječe, ne ljuti se ¦ Človek, ne jezi se
+🧩 Puzzle ¦ 🧩 Slagalica ¦ 🧩 Sestavljanka
+Puzzle ¦ Slagalica ¦ Sestavljanka
+🌀 Labyrinthe ¦ 🌀 Labirint ¦ 🌀 Labirint
+Labyrinthe ¦ Labirint ¦ Labirint
+🕵️ Qui est-ce ? des ancêtres ¦ 🕵️ Tko je to? s precima ¦ 🕵️ Kdo je to? s predniki
+🃏 Memory des portraits ¦ 🃏 Memory s portretima ¦ 🃏 Spomin s portreti
+📅 La bonne date ¦ 📅 Pravi datum ¦ 📅 Pravi datum
+❌ Morpion à règles libres ¦ ❌ Križić-kružić sa slobodnim pravilima ¦ ❌ Križci in krožci s prostimi pravili
+⚓ Bataille navale ¦ ⚓ Potapanje brodova ¦ ⚓ Potapljanje ladij
+🔌 Les câbles (Netwalk) ¦ 🔌 Kabeli (Netwalk) ¦ 🔌 Kabli (Netwalk)
+🂠 Patiences (jeux de cartes) ¦ 🂠 Pasijansi (kartaške igre) ¦ 🂠 Pasjanse (igre s kartami)
+🂡 Jeux de cartes à plusieurs ¦ 🂡 Kartaške igre za više igrača ¦ 🂡 Igre s kartami za več igralcev
+♟️ Échecs ¦ ♟️ Šah ¦ ♟️ Šah
+⛀ Dames ¦ ⛀ Dama ¦ ⛀ Dama
+🁫 Dominos ¦ 🁫 Domino ¦ 🁫 Domine
+🎲 Yams ¦ 🎲 Yams ¦ 🎲 Yams
+Dames ¦ Dama ¦ Dama
+Dominos ¦ Domino ¦ Domine
+Yams ¦ Yams ¦ Yams
+jeu|Nouvelle partie ¦ Nova igra ¦ Nova igra
+jeu|Échelle ¦ Ljestve ¦ Lestev
+Oie ¦ Guska ¦ Gos
+Pont ¦ Most ¦ Most
+Auberge ¦ Gostionica ¦ Gostilna
+Prison ¦ Zatvor ¦ Zapor
+Mort ¦ Smrt ¦ Smrt
+Serpent ¦ Zmija ¦ Kača
+Case spéciale ¦ Posebno polje ¦ Posebno polje
+Avance ¦ Naprijed ¦ Naprej
+cet événement ¦ ovaj događaj ¦ ta dogodek
+Jaune ¦ Žuta ¦ Rumena
+Violet ¦ Ljubičasta ¦ Vijolična
+Orange ¦ Narančasta ¦ Oranžna
+Rose ¦ Ružičasta ¦ Rožnata
+Turquoise ¦ Tirkizna ¦ Turkizna
+Marron ¦ Smeđa ¦ Rjava
+réponse avant le lancer ¦ odgovor prije bacanja ¦ odgovor pred metom
+une bonne réponse donne un seul lancer bonus ¦ točan odgovor daje samo jedno dodatno bacanje ¦ pravilen odgovor da le en dodatni met
+réponse pour rejouer ¦ odgovor za ponovno bacanje ¦ odgovor za ponovni met
+Bonne réponse : lancez les dés. ¦ Točan odgovor: baci kockice. ¦ Pravilen odgovor: vrzi kocke.
+Bonne réponse : un seul lancer bonus. ¦ Točan odgovor: samo jedno dodatno bacanje. ¦ Pravilen odgovor: le en dodatni met.
+Bonne réponse : vous rejouez. ¦ Točan odgovor: igraš ponovno. ¦ Pravilen odgovor: igraš znova.
+Branche {name} ¦ Grana {name} ¦ Veja {name}
+Liste {name} ¦ Popis {name} ¦ Seznam {name}
+Toute la généalogie ¦ Cijelo rodoslovlje ¦ Celotno rodoslovje
+Qui correspond à la date de <strong>{event}</strong> : <strong>{date}</strong> ? ¦ Tko odgovara datumu <strong>{event}</strong>: <strong>{date}</strong>? ¦ Kdo ustreza datumu <strong>{event}</strong>: <strong>{date}</strong>?
+Quelle est la date de <strong>{event}</strong> de <strong>{who}</strong> ? ¦ Koji je datum <strong>{event}</strong> osobe <strong>{who}</strong>? ¦ Kateri je datum <strong>{event}</strong> osebe <strong>{who}</strong>?
+ÉCURIE ¦ STAJA ¦ HLEV
+{name} · cheval {n} ¦ {name} · konj {n} ¦ {name} · konj {n}
+ARRIVÉE ¦ CILJ ¦ CILJ
+Case {n} ¦ Polje {n} ¦ Polje {n}
+SERPENTS &<br>ÉCHELLES ¦ ZMIJE I<br>LJESTVE ¦ KAČE IN<br>LESTVE
+JEU<br>DE L’OIE ¦ IGRA<br>GUSKE ¦ IGRA<br>GOSI
+Suivez les flèches ¦ Prati strelice ¦ Sledi puščicam
+DÉPART ¦ START ¦ START
+{what} vers la case {n} ¦ {what} prema polju {n} ¦ {what} na polje {n}
+CASE ¦ POLJE ¦ POLJE
+=arrivée ¦ na cilju|na cilju|na cilju ¦ na cilju|na cilju|na cilju|na cilju
+{stable} à l’écurie · {done} ¦ {stable} u staji · {done} ¦ {stable} v hlevu · {done}
+Le lancer bonus est terminé : au joueur suivant. ¦ Dodatno bacanje je završeno: na redu je sljedeći igrač. ¦ Dodatni met je končan: na vrsti je naslednji igralec.
+Une bonne réponse donne un seul lancer bonus. ¦ Točan odgovor daje samo jedno dodatno bacanje. ¦ Pravilen odgovor da le en dodatni met.
+Répondez pour rejouer. ¦ Odgovori da igraš ponovno. ¦ Odgovori, da igraš znova.
+{name} sort de l’écurie, case 1. ¦ {name} izlazi iz staje, polje 1. ¦ {name} pride iz hleva, polje 1.
+{name} avance jusqu’à la case {n}. ¦ {name} ide naprijed do polja {n}. ¦ {name} gre naprej do polja {n}.
+{names} retournent à l’écurie. ¦ {names} vraćaju se u staju. ¦ {names} se vrnejo v hlev.
+{names} retourne à l’écurie. ¦ {names} vraća se u staju. ¦ {names} se vrne v hlev.
+{name} amène ses quatre chevaux à l’arrivée. ¦ {name} dovodi sva četiri konja na cilj. ¦ {name} pripelje vse štiri konje na cilj.
+Oie : rejouez. ¦ Guska: igraj ponovno. ¦ Gos: igraj znova.
+{what} : un tour est passé. ¦ {what}: jedan krug se preskače. ¦ {what}: en krog se izpusti.
+{what} : retour au départ. ¦ {what}: povratak na start. ¦ {what}: vrnitev na start.
+{what} : case {n}. ¦ {what}: polje {n}. ¦ {what}: polje {n}.
+Tour de {name} ¦ Na redu je {name} ¦ Na vrsti je {name}
+Partie terminée ¦ Igra je završena ¦ Igra je končana
+Cases choisies ¦ Odabrana polja ¦ Izbrana polja
+Avancer, reculer ou retour au départ. ¦ Naprijed, natrag ili povratak na start. ¦ Naprej, nazaj ali vrnitev na start.
+Case ¦ Polje ¦ Polje
+Effet ¦ Učinak ¦ Učinek
+Avancer vers… ¦ Naprijed do… ¦ Naprej do…
+Revenir à… ¦ Natrag na… ¦ Nazaj na…
+Retour au départ ¦ Povratak na start ¦ Vrnitev na start
+Destination ¦ Odredište ¦ Cilj premika
+Case {n} · départ ¦ Polje {n} · start ¦ Polje {n} · start
+Case {n} · retour {to} ¦ Polje {n} · natrag na {to} ¦ Polje {n} · nazaj na {to}
+Case {n} · avance {to} ¦ Polje {n} · naprijed na {to} ¦ Polje {n} · naprej na {to}
+Aucune case ajoutée. ¦ Nije dodano nijedno polje. ¦ Ni dodanega nobenega polja.
+TABLE DE JEU · NOIR & BLANC ¦ IGRAĆI STOL · CRNO-BIJELO ¦ IGRALNA MIZA · ČRNO-BELO
+Crée une partie de 2 à 6 joueurs. Elle est conservée dans ce navigateur, même après actualisation. ¦ Stvori igru za 2 do 6 igrača. Čuva se u ovom pregledniku, čak i nakon osvježavanja. ¦ Ustvari igro za 2 do 6 igralcev. Ohrani se v tem brskalniku, tudi po osvežitvi.
+Nom de la partie ¦ Naziv igre ¦ Ime igre
+Partie du {date} ¦ Igra od {date} ¦ Igra z dne {date}
+Nombre de cases ¦ Broj polja ¦ Število polj
+Dés ¦ Kockice ¦ Kocke
+2 dés ¦ 2 kockice ¦ 2 kocki
+3 dés ¦ 3 kockice ¦ 3 kocke
+{n} dés ¦ Kockica: {n} ¦ Kock: {n}
+Questions ¦ Pitanja ¦ Vprašanja
+Bonne réponse pour lancer les dés ¦ Točan odgovor za bacanje kockica ¦ Pravilen odgovor za met kock
+Lancer puis bonne réponse pour rejouer ¦ Baci pa točan odgovor za ponovno igranje ¦ Met in nato pravilen odgovor za ponovno igro
+Lancer puis une seule bonne réponse = un lancer bonus ¦ Baci pa samo jedan točan odgovor = jedno dodatno bacanje ¦ Met in nato le en pravilen odgovor = en dodatni met
+Périmètre des questions ¦ Opseg pitanja ¦ Obseg vprašanj
+Une branche / un patronyme ¦ Grana / prezime ¦ Veja / priimek
+Personnes choisies ¦ Odabrane osobe ¦ Izbrane osebe
+=personne choisie ¦ odabrana osoba|odabrane osobe|odabranih osoba ¦ izbrana oseba|izbrani osebi|izbrane osebe|izbranih oseb
+Liste : {name} ({n}) ¦ Popis: {name} ({n}) ¦ Seznam: {name} ({n})
+Branche / patronyme ¦ Grana / prezime ¦ Veja / priimek
+Ex : Dupont ¦ Npr.: Dupont ¦ Npr.: Dupont
+Joueurs ¦ Igrači ¦ Igralci
+Joueur {n} ¦ Igrač {n} ¦ Igralec {n}
+Joueur {n} (facultatif) ¦ Igrač {n} (neobavezno) ¦ Igralec {n} (neobvezno)
+Personnalisée… ¦ Prilagođena… ¦ Po meri…
+Couleur personnalisée du joueur {n} ¦ Prilagođena boja igrača {n} ¦ Barva po meri za igralca {n}
+Enregistrer cette sélection comme liste ¦ Spremi ovaj odabir kao popis ¦ Shrani ta izbor kot seznam
+Nom de la liste ¦ Naziv popisa ¦ Ime seznama
+Ex : Ascendance maternelle ¦ Npr.: Majčini preci ¦ Npr.: Materini predniki
+Règles classiques incluses : oies tous les 6, pont, auberge, puits, labyrinthe, prison et mort. ¦ Uključena klasična pravila: guske svakih 6 polja, most, gostionica, bunar, labirint, zatvor i smrt. ¦ Vključena klasična pravila: gosi na vsakih 6 polj, most, gostilna, vodnjak, labirint, zapor in smrt.
+Règles incluses : les échelles et serpents mènent directement à la case indiquée. ¦ Uključena pravila: ljestve i zmije vode izravno na navedeno polje. ¦ Vključena pravila: lestve in kače vodijo neposredno na navedeno polje.
+Règles Petits chevaux : 56 cases, 2 à 4 joueurs, quatre chevaux chacun, couleurs au choix. ¦ Pravila igre Čovječe, ne ljuti se: 56 polja, 2 do 4 igrača, svaki po četiri konja, boje po izboru. ¦ Pravila igre Človek, ne jezi se: 56 polj, 2 do 4 igralci, vsak po štiri konje, barve po izbiri.
+Démarrer la partie ¦ Započni igru ¦ Začni igro
+case {n} ¦ polje {n} ¦ polje {n}
+passe {n} tour ¦ preskače krugova: {n} ¦ izpusti krogov: {n}
+Cheval {n} · écurie → case {to} ¦ Konj {n} · staja → polje {to} ¦ Konj {n} · hlev → polje {to}
+Cheval {n} · case {from} → case {to} ¦ Konj {n} · polje {from} → polje {to} ¦ Konj {n} · polje {from} → polje {to}
+{name} a gagné. ¦ {name} je pobijedio/pobijedila. ¦ {name} je zmagal/zmagala.
+La partie est terminée. ¦ Igra je završena. ¦ Igra je končana.
+Quel cheval veux-tu déplacer ? ¦ Kojeg konja želiš pomaknuti? ¦ Katerega konja želiš premakniti?
+Lancer {n} dés ¦ Baci kockice: {n} ¦ Vrzi kocke: {n}
+Question pour {name} ¦ Pitanje za {name} ¦ Vprašanje za {name}
+Question pour jouer ¦ Pitanje za igranje ¦ Vprašanje za igro
+PARTIE EN COURS · {scope} ¦ IGRA U TIJEKU · {scope} ¦ IGRA V TEKU · {scope}
+Règles du plateau ¦ Pravila ploče ¦ Pravila igralne plošče
+Aucune partie pour l’instant ¦ Zasad nema igara ¦ Zaenkrat ni iger
+« ＋ Nouvelle partie » juste au-dessus pour lancer la première. ¦ „＋ Nova igra” odmah iznad za pokretanje prve. ¦ »＋ Nova igra« tik zgoraj, da začneš prvo.
+Maximum : 5 parties et 30 puzzles en cours, 10 labyrinthes, 10 parties des autres jeux. ¦ Najviše: 5 igara i 30 slagalica u tijeku, 10 labirinata, 10 igara ostalih vrsta. ¦ Največ: 5 iger in 30 sestavljank v teku, 10 labirintov, 10 iger drugih vrst.
+Maximum : 5 parties et 30 puzzles en cours, 10 labyrinthes. ¦ Najviše: 5 igara i 30 slagalica u tijeku, 10 labirinata. ¦ Največ: 5 iger in 30 sestavljank v teku, 10 labirintov.
+Maximum : 5 parties et 30 puzzles en cours, 10 parties des autres jeux. ¦ Najviše: 5 igara i 30 slagalica u tijeku, 10 igara ostalih vrsta. ¦ Največ: 5 iger in 30 sestavljank v teku, 10 iger drugih vrst.
+Maximum : 5 parties et 30 puzzles en cours. ¦ Najviše: 5 igara i 30 slagalica u tijeku. ¦ Največ: 5 iger in 30 sestavljank v teku.
+Maximum : 5 parties sauvegardées. ¦ Najviše: 5 spremljenih igara. ¦ Največ: 5 shranjenih iger.
+Lancez les dés pour commencer. ¦ Baci kockice za početak. ¦ Vrzi kocke za začetek.
+Les 5 emplacements sont utilisés : supprime une partie pour en créer une autre. ¦ Svih 5 mjesta je zauzeto: izbriši jednu igru da stvoriš drugu. ¦ Vseh 5 mest je zasedenih: izbriši eno igro, da ustvariš drugo.
+Jeu ¦ Igra ¦ Igra
+Supprime une partie avant d’en créer une autre. ¦ Izbriši jednu igru prije nego što stvoriš drugu. ¦ Izbriši eno igro, preden ustvariš drugo.
+Il faut au moins deux joueurs. ¦ Potrebna su barem dva igrača. ¦ Potrebna sta vsaj dva igralca.
+Chaque joueur doit avoir une couleur différente. ¦ Svaki igrač mora imati drugu boju. ¦ Vsak igralec mora imeti drugo barvo.
+Aucun SOSA n’est calculé. ¦ Nije izračunat nijedan SOSA broj. ¦ Izračunana ni nobena številka SOSA.
+Indique une branche ou un patronyme. ¦ Upiši granu ili prezime. ¦ Vpiši vejo ali priimek.
+Répondez à la question pour commencer. ¦ Odgovori na pitanje za početak. ¦ Odgovori na vprašanje za začetek.
+La partie et sa progression seront supprimées. ¦ Igra i njezin napredak bit će izbrisani. ¦ Igra in njen napredek bosta izbrisana.
+Supprimer la partie ¦ Izbriši igru ¦ Izbriši igro
+Choisissez la bonne réponse. ¦ Odaberi točan odgovor. ¦ Izberi pravilen odgovor.
+Aucune question exploitable : lancez les dés. ¦ Nema upotrebljivog pitanja: baci kockice. ¦ Ni uporabnega vprašanja: vrzi kocke.
+Question indisponible : vous pouvez lancer les dés. ¦ Pitanje nije dostupno: možeš baciti kockice. ¦ Vprašanje ni na voljo: lahko vržeš kocke.
+inconnue ¦ nepoznato ¦ neznano
+Mauvaise réponse. La bonne réponse était : {answer}. {name} passe la main. ¦ Netočan odgovor. Točan odgovor bio je: {answer}. {name} predaje potez. ¦ Napačen odgovor. Pravilen odgovor je bil: {answer}. {name} preda potezo.
+{name} ne peut déplacer aucun cheval. ¦ {name} ne može pomaknuti nijednog konja. ¦ {name} ne more premakniti nobenega konja.
+{name} a plusieurs chevaux à déplacer. ¦ {name} ima više konja za pomicanje. ¦ {name} lahko premakne več konjev.
+{name} atteint la dernière case. ¦ {name} stiže na posljednje polje. ¦ {name} pride na zadnje polje.
+{name} avance de {n}. ¦ {name} ide naprijed za {n}. ¦ {name} gre naprej za {n}.
+{n} cases ¦ Polja: {n} ¦ Polj: {n}
+jeu|arrivée ¦ cilj ¦ cilj
+Plus de place dans ce navigateur pour garder la partie. ¦ U ovom pregledniku više nema mjesta za čuvanje igre. ¦ V tem brskalniku ni več prostora za shranjevanje igre.
+Données illisibles. ¦ Nečitljivi podaci. ¦ Neberljivi podatki.
+Les ancêtres de {name} ¦ Preci osobe {name} ¦ Predniki osebe {name}
+Les ancêtres de la personne choisie ¦ Preci odabrane osobe ¦ Predniki izbrane osebe
+TABLE DE JEU · {what} ¦ IGRAĆI STOL · {what} ¦ IGRALNA MIZA · {what}
+La partie se garde dans ce navigateur. ¦ Igra se čuva u ovom pregledniku. ¦ Igra se shrani v tem brskalniku.
+Les {n} parties de ces jeux sont gardées : supprimes-en une pour en commencer une autre. ¦ Spremljeno je {n} igara ovih vrsta: izbriši jednu da započneš drugu. ¦ Shranjenih iger teh vrst: {n}. Izbriši eno, da začneš drugo.
+Les personnes du jeu ¦ Osobe u igri ¦ Osebe v igri
+Une génération ¦ Jedna generacija ¦ En rod
+Les ancêtres d’une personne ¦ Preci jedne osobe ¦ Predniki ene osebe
+Les personnes vivantes et les fiches confidentielles ne sont jamais dans les jeux. ¦ Žive osobe i povjerljivi zapisi nikad nisu u igrama. ¦ Žive osebe in zaupni zapisi niso nikoli v igrah.
+Les joueurs ¦ Igrači ¦ Igralci
+{a} à {b} ¦ {a} do {b} ¦ {a} do {b}
+Ajouter un joueur ¦ Dodaj igrača ¦ Dodaj igralca
+Commencer la partie ¦ Započni igru ¦ Začni igro
+Retirer ce joueur ¦ Ukloni ovog igrača ¦ Odstrani tega igralca
+{what} pour ce jeu · sans les vivants ni les fiches confidentielles. ¦ {what} za ovu igru · bez živih i bez povjerljivih zapisa. ¦ {what} za to igro · brez živih in brez zaupnih zapisov.
+Génération (1 = parents, 2 = grands-parents…) ¦ Generacija (1 = roditelji, 2 = djedovi i bake…) ¦ Rod (1 = starši, 2 = stari starši…)
+les réglages de ce jeu ({name}) ¦ postavke ove igre ({name}) ¦ nastavitve te igre ({name})
+Réglage « {name} » supprimé. ¦ Postavka „{name}” izbrisana. ¦ Nastavitev »{name}« izbrisana.
+« {name} » appliqué. ¦ „{name}” primijenjeno. ¦ »{name}« uporabljeno.
+Supprime une partie avant d’en commencer une autre. ¦ Izbriši jednu igru prije nego što započneš drugu. ¦ Izbriši eno igro, preden začneš drugo.
+Choisis la personne dont on prend les ancêtres. ¦ Odaberi osobu čiji se preci uzimaju. ¦ Izberi osebo, katere prednike vzamemo.
+Donne un nom à ce joueur. ¦ Daj ime ovom igraču. ¦ Daj ime temu igralcu.
+Donne un nom à chaque joueur. ¦ Daj ime svakom igraču. ¦ Daj ime vsakemu igralcu.
+{game} du {date} ¦ {game} od {date} ¦ {game} z dne {date}
+Une nouvelle partie avec les mêmes réglages ¦ Nova igra s istim postavkama ¦ Nova igra z enakimi nastavitvami
+Rejouer ¦ Igraj ponovno ¦ Igraj znova
+« {name} » est supprimée. ¦ „{name}” je izbrisana. ¦ »{name}« je izbrisana.
+Cette partie ne peut pas s’ouvrir : {err} ¦ Ova se igra ne može otvoriti: {err} ¦ Te igre ni mogoče odpreti: {err}
+Reprendre cette partie ¦ Nastavi ovu igru ¦ Nadaljuj to igro
+terminée ¦ završena ¦ končana
+Les règles ¦ Pravila ¦ Pravila
+Ex : La partie du dimanche ¦ Npr.: Nedjeljna igra ¦ Npr.: Nedeljska igra
+Qui est-ce ? des ancêtres ¦ Tko je to? s precima ¦ Kdo je to? s predniki
+QUI EST-CE ? ¦ TKO JE TO? ¦ KDO JE TO?
+=ancêtre ¦ predak|pretka|predaka ¦ prednik|prednika|predniki|prednikov
+Un ancêtre est caché parmi les portraits : pose des questions (« Née avant 1800 ? », « Laboureur ? », « Du côté de ton père ? ») et trouve-le avec le moins de questions possible. ¦ Jedan predak skriven je među portretima: postavljaj pitanja („Rođena prije 1800.?”, „Ratar?”, „S očeve strane?”) i pronađi ga s što manje pitanja. ¦ Med portreti je skrit prednik: postavljaj vprašanja (»Rojena pred 1800?«, »Kmet?«, »Z očetove strani?«) in ga najdi s čim manj vprašanji.
+Les portraits qui ne collent plus avec les réponses se grisent tout seuls. Une mauvaise proposition compte 2 questions. ¦ Portreti koji više ne odgovaraju odgovorima sami posive. Pogrešan prijedlog vrijedi kao 2 pitanja. ¦ Portreti, ki se ne ujemajo več z odgovori, sami posivijo. Napačen predlog šteje za 2 vprašanji.
+Pour les enfants ¦ Za djecu ¦ Za otroke
+9 portraits, l’app cache l’ancêtre ¦ 9 portreta, aplikacija skriva pretka ¦ 9 portretov, aplikacija skrije prednika
+Duel à deux ¦ Dvoboj u dvoje ¦ Dvoboj v dvoje
+20 portraits, chacun cache un ancêtre à l’autre ¦ 20 portreta, svaki igrač skriva pretka drugome ¦ 20 portretov, vsak drugemu skrije prednika
+Grand plateau ¦ Velika ploča ¦ Velika plošča
+30 portraits de toute la généalogie ¦ 30 portreta iz cijelog rodoslovlja ¦ 30 portretov iz celotnega rodoslovja
+À deux, l’ancêtre caché est ¦ U dvoje, skriveni predak je ¦ V dvoje je skriti prednik
+🎲 tiré au hasard ¦ 🎲 izvučen nasumično ¦ 🎲 izžreban naključno
+🤫 choisi par l’autre joueur ¦ 🤫 odabran od drugog igrača ¦ 🤫 izbran od drugega igralca
+Avec un seul joueur, l’app cache toujours l’ancêtre. Ajoute un 2ᵉ joueur pour un duel. ¦ S jednim igračem aplikacija uvijek skriva pretka. Dodaj 2. igrača za dvoboj. ¦ Z enim igralcem aplikacija vedno skrije prednika. Dodaj 2. igralca za dvoboj.
+Nombre de portraits sur le plateau ¦ Broj portreta na ploči ¦ Število portretov na plošči
+Il faut au moins 4 personnes (sans les vivants ni les fiches confidentielles) dans cet ensemble. Choisis « Toute la généalogie » ou une autre génération. ¦ U ovom skupu potrebne su barem 4 osobe (bez živih i bez povjerljivih zapisa). Odaberi „Cijelo rodoslovlje” ili drugu generaciju. ¦ V tem naboru so potrebne vsaj 4 osebe (brez živih in brez zaupnih zapisov). Izberi »Celotno rodoslovje« ali drug rod.
+À toi de jouer ¦ Ti si na redu ¦ Ti si na vrsti
+🏁 {name} a gagné ! ¦ 🏁 {name} je pobijedio/pobijedila! ¦ 🏁 {name} je zmagal/zmagala!
+🏁 Trouvé ! ¦ 🏁 Pronađeno! ¦ 🏁 Najdeno!
+🏁 Partie terminée ¦ 🏁 Igra završena ¦ 🏁 Igra končana
+Au tour de {name} ¦ Na redu je {name} ¦ Na vrsti je {name}
+=portrait encore possible ¦ još mogući portret|još moguća portreta|još mogućih portreta ¦ še mogoč portret|še mogoča portreta|še mogoči portreti|še mogočih portretov
+Les portraits ¦ Portreti ¦ Portreti
+{name} (écarté) ¦ {name} (isključen) ¦ {name} (izločen)
+{n} raté ¦ Promašaja: {n} ¦ Zgrešenih: {n}
+Clique sur le portrait que tu proposes ¦ Klikni na portret koji predlažeš ¦ Klikni na portret, ki ga predlagaš
+Je propose une réponse ¦ Predlažem odgovor ¦ Predlagam odgovor
+Pose une question ¦ Postavi pitanje ¦ Postavi vprašanje
+Chercher… (née, laboureur, Auch) ¦ Traži… (rođena, ratar, Auch) ¦ Išči… (rojena, kmet, Auch)
+Chercher une question ¦ Traži pitanje ¦ Išči vprašanje
+Plus de question utile : propose ta réponse ! ¦ Nema više korisnih pitanja: predloži svoj odgovor! ¦ Ni več koristnih vprašanj: predlagaj svoj odgovor!
+Clique sur un portrait pour l’écarter toi-même (ou le remettre). ¦ Klikni na portret da ga sam/sama isključiš (ili vratiš). ¦ Klikni na portret, da ga sam/sama izločiš (ali vrneš).
+Questions déjà posées ({n}) ¦ Već postavljena pitanja ({n}) ¦ Že postavljena vprašanja ({n})
+jeu|oui ¦ da ¦ da
+jeu|non ¦ ne ¦ ne
+jeu|inconnu ¦ nepoznato ¦ neznano
+jeu|Qui ¦ Tko ¦ Kdo
+jeu|Quand ¦ Kada ¦ Kdaj
+jeu|Où ¦ Gdje ¦ Kje
+jeu|Métier ¦ Zanimanje ¦ Poklic
+jeu|Famille ¦ Obitelj ¦ Družina
+jeu|Nom ¦ Prezime ¦ Priimek
+L’ancêtre caché pour {name} ¦ Skriveni predak za {name} ¦ Skriti prednik za {name}
+L’ancêtre caché ¦ Skriveni predak ¦ Skriti prednik
+née à {town} ¦ rođena u {town} ¦ rojena v {town}
+{name} a trouvé en {what} ! ¦ {name} je pronašao/pronašla rješenje: {what}! ¦ {name} je našel/našla rešitev: {what}!
+Trouvé en {what} ! ¦ Pronađeno: {what}! ¦ Najdeno: {what}!
+{a} choisit l’ancêtre que {b} devra trouver ¦ {a} bira pretka kojeg će {b} morati pronaći ¦ {a} izbere prednika, ki ga bo moral/morala najti {b}
+{a} : choisis en secret l’ancêtre que {b} devra trouver. {b}, ne regarde pas ! ¦ {a}: tajno odaberi pretka kojeg će {b} morati pronaći. {b}, ne gledaj! ¦ {a}: na skrivaj izberi prednika, ki ga bo moral/morala najti {b}. {b}, ne glej!
+Cacher {name} ¦ Sakrij {name} ¦ Skrij {name}
+C’est caché. Au suivant ! ¦ Skriveno je. Sljedeći! ¦ Skrito je. Naslednji!
+C’est caché : la partie commence. ¦ Skriveno je: igra počinje. ¦ Skrito je: igra se začne.
+🎉 C’est bien {name} ! ¦ 🎉 To je doista {name}! ¦ 🎉 To je res {name}!
+Proposition : {name} ¦ Prijedlog: {name} ¦ Predlog: {name}
+Raté : ce n’est pas ce portrait. ¦ Promašaj: nije ovaj portret. ¦ Zgrešeno: ni ta portret.
+Est-ce une femme ? ¦ Je li to žena? ¦ Je to ženska?
+A-t-on son portrait (une photo) ? ¦ Imamo li njezin portret (fotografiju)? ¦ Ali imamo njen portret (fotografijo)?
+Cette personne est-elle née avant {year} ? ¦ Je li ta osoba rođena prije {year}? ¦ Je bila ta oseba rojena pred {year}?
+A-t-elle vécu plus de {n} ans ? ¦ Je li živjela više od {n} godina? ¦ Je živela več kot {n} let?
+Est-elle née à {town} ? ¦ Je li rođena u {town}? ¦ Je bila rojena v {town}?
+Est-elle morte à {town} ? ¦ Je li umrla u {town}? ¦ Je umrla v {town}?
+Était-elle {job} ? ¦ Je li bila {job}? ¦ Je bila {job}?
+Est-ce du côté de ton père ? ¦ Je li s očeve strane? ¦ Je z očetove strani?
+Est-ce un parent ? ¦ Je li to roditelj? ¦ Je to starš?
+Est-ce un grand-parent ? ¦ Je li to djed ili baka? ¦ Je to stari starš?
+Est-ce un arrière-grand-parent ? ¦ Je li to pradjed ili prabaka? ¦ Je to prastarš?
+Est-ce un ancêtre de la génération {n} ? ¦ Je li to predak iz generacije {n}? ¦ Je to prednik iz rodu {n}?
+Son nom commence-t-il par {letter} ? ¦ Počinje li prezime slovom {letter}? ¦ Se priimek začne s črko {letter}?
+un grand-parent ¦ djed ili baka ¦ stari starš
+un arrière-grand-parent ¦ pradjed ili prabaka ¦ prastarš
+un ancêtre de la génération {n} ¦ predak iz generacije {n} ¦ prednik iz rodu {n}
+Naissance de {name} ¦ Rođenje osobe {name} ¦ Rojstvo osebe {name}
+Décès de {name} ¦ Smrt osobe {name} ¦ Smrt osebe {name}
+Mariage de {a} et {b} ¦ Vjenčanje osoba {a} i {b} ¦ Poroka oseb {a} in {b}
+Mariage de {name} ¦ Vjenčanje osobe {name} ¦ Poroka osebe {name}
+Memory des portraits ¦ Memory s portretima ¦ Spomin s portreti
+Memory ¦ Memory ¦ Spomin
+MEMORY ¦ MEMORY ¦ SPOMIN
+=paire possible ¦ mogući par|moguća para|mogućih parova ¦ mogoč par|mogoča para|mogoči pari|mogočih parov
+Retourne deux cartes à la fois et retrouve les paires : un portrait et son nom, une personne et son village, son métier ou son année de naissance. ¦ Okreni dvije karte odjednom i pronađi parove: portret i ime, osobu i njezino selo, zanimanje ili godinu rođenja. ¦ Obrni dve karti hkrati in poišči pare: portret in ime, osebo in njeno vas, poklic ali leto rojstva.
+Une paire trouvée : la carte reste visible et le même joueur rejoue. ¦ Pronađen par: karta ostaje vidljiva i isti igrač igra ponovno. ¦ Najden par: karta ostane vidna in isti igralec igra znova.
+🖼 Portrait ↔ nom ¦ 🖼 Portret ↔ ime ¦ 🖼 Portret ↔ ime
+📍 Personne ↔ village ¦ 📍 Osoba ↔ selo ¦ 📍 Oseba ↔ vas
+🛠 Personne ↔ métier ¦ 🛠 Osoba ↔ zanimanje ¦ 🛠 Oseba ↔ poklic
+📅 Personne ↔ année ¦ 📅 Osoba ↔ godina ¦ 📅 Oseba ↔ leto
+Portrait ↔ nom ¦ Portret ↔ ime ¦ Portret ↔ ime
+Personne ↔ village de naissance ¦ Osoba ↔ selo rođenja ¦ Oseba ↔ rojstna vas
+Personne ↔ métier ¦ Osoba ↔ zanimanje ¦ Oseba ↔ poklic
+Personne ↔ année de naissance ¦ Osoba ↔ godina rođenja ¦ Oseba ↔ leto rojstva
+Petit memory ¦ Mali memory ¦ Mali spomin
+6 paires portrait ↔ nom ¦ 6 parova portret ↔ ime ¦ 6 parov portret ↔ ime
+Les villages ¦ Sela ¦ Vasi
+10 paires personne ↔ village ¦ 10 parova osoba ↔ selo ¦ 10 parov oseba ↔ vas
+Grand memory ¦ Veliki memory ¦ Veliki spomin
+18 paires de toute la généalogie ¦ 18 parova iz cijelog rodoslovlja ¦ 18 parov iz celotnega rodoslovja
+Les paires ¦ Parovi ¦ Pari
+Nombre de paires ¦ Broj parova ¦ Število parov
+Pas assez de personnes avec un village de naissance dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ U ovom skupu nema dovoljno osoba sa selom rođenja (potrebna su barem 3 različita para). Odaberi veći skup ili drugu vrstu parova. ¦ V tem naboru ni dovolj oseb z rojstno vasjo (potrebni so vsaj 3 različni pari). Izberi večji nabor ali drugo vrsto parov.
+Pas assez de personnes avec un métier dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ U ovom skupu nema dovoljno osoba sa zanimanjem (potrebna su barem 3 različita para). Odaberi veći skup ili drugu vrstu parova. ¦ V tem naboru ni dovolj oseb s poklicem (potrebni so vsaj 3 različni pari). Izberi večji nabor ali drugo vrsto parov.
+Pas assez de personnes avec une année de naissance dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ U ovom skupu nema dovoljno osoba s godinom rođenja (potrebna su barem 3 različita para). Odaberi veći skup ili drugu vrstu parova. ¦ V tem naboru ni dovolj oseb z letom rojstva (potrebni so vsaj 3 različni pari). Izberi večji nabor ali drugo vrsto parov.
+Pas assez de personnes dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ U ovom skupu nema dovoljno osoba (potrebna su barem 3 različita para). Odaberi veći skup ili drugu vrstu parova. ¦ V tem naboru ni dovolj oseb (potrebni so vsaj 3 različni pari). Izberi večji nabor ali drugo vrsto parov.
+{a} / {b} paires ¦ Parovi: {a} / {b} ¦ Pari: {a} / {b}
+📍 village ¦ 📍 selo ¦ 📍 vas
+🛠 métier ¦ 🛠 zanimanje ¦ 🛠 poklic
+📅 née en ¦ 📅 rođena ¦ 📅 rojena leta
+=paire ¦ par|para|parova ¦ par|para|pari|parov
+=coup ¦ potez|poteza|poteza ¦ poteza|potezi|poteze|potez
+au tour de {name} ¦ na redu je {name} ¦ na vrsti je {name}
+Les cartes ¦ Karte ¦ Karte
+Carte retournée ¦ Okrenuta karta ¦ Obrnjena karta
+Retourne une deuxième carte. ¦ Okreni drugu kartu. ¦ Obrni drugo karto.
+Retourne deux cartes. ¦ Okreni dvije karte. ¦ Obrni dve karti.
+Clavier : flèches pour bouger, Entrée ou Espace pour retourner. ¦ Tipkovnica: strelice za pomicanje, Enter ili razmaknica za okretanje. ¦ Tipkovnica: puščice za premikanje, Enter ali preslednica za obračanje.
+Égalité : {names} ! ¦ Neriješeno: {names}! ¦ Neodločeno: {names}!
+{name} gagne ! ¦ {name} pobjeđuje! ¦ {name} zmaga!
+Toutes les paires ! ¦ Svi parovi! ¦ Vsi pari!
+{moves} en {time}. ¦ {moves} za {time}. ¦ {moves} v {time}.
+La bonne date ¦ Pravi datum ¦ Pravi datum
+LA BONNE DATE ¦ PRAVI DATUM ¦ PRAVI DATUM
+Pose chaque événement de la famille à sa place sur la frise, de la plus ancienne à la plus récente : naissances, mariages, décès, et si tu veux des dates de l’histoire de France. ¦ Postavi svaki obiteljski događaj na njegovo mjesto na vremenskoj crti, od najstarijeg do najnovijeg: rođenja, vjenčanja, smrti i, ako želiš, datume iz povijesti Francuske. ¦ Postavi vsak družinski dogodek na njegovo mesto na časovnici, od najstarejšega do najnovejšega: rojstva, poroke, smrti in, če želiš, datume iz zgodovine Francije.
+Juste : la carte reste et tu marques un point. Faux : elle se range à sa vraie place et tu perds une vie. ¦ Točno: karta ostaje i dobivaš bod. Netočno: odlazi na svoje pravo mjesto i gubiš život. ¦ Pravilno: karta ostane in dobiš točko. Napačno: gre na svoje pravo mesto in izgubiš življenje.
+5 ans ¦ 5 godina ¦ 5 let
+10 ans ¦ 10 godina ¦ 10 let
+25 ans ¦ 25 godina ¦ 25 let
+👶 Naissances ¦ 👶 Rođenja ¦ 👶 Rojstva
+💍 Mariages ¦ 💍 Vjenčanja ¦ 💍 Poroke
+✝ Décès ¦ ✝ Smrti ¦ ✝ Smrti
+Facile ¦ Lako ¦ Lahko
+8 cartes, au moins 25 ans d’écart ¦ 8 karata, razmak barem 25 godina ¦ 8 kart, razmik vsaj 25 let
+Avec l’histoire ¦ S poviješću ¦ Z zgodovino
+La famille et les grandes dates de France ¦ Obitelj i veliki datumi Francuske ¦ Družina in veliki datumi Francije
+Champion ¦ Prvak ¦ Prvak
+25 cartes, dates proches, 1 vie ¦ 25 karata, bliski datumi, 1 život ¦ 25 kart, bližnji datumi, 1 življenje
+📜 Ajouter des dates de l’histoire de France (Révolution, guerres, école obligatoire…) ¦ 📜 Dodaj datume iz povijesti Francuske (Revolucija, ratovi, obvezna škola…) ¦ 📜 Dodaj datume iz zgodovine Francije (revolucija, vojne, obvezna šola…)
+Écart minimum entre deux cartes ¦ Najmanji razmak između dviju karata ¦ Najmanjši razmik med dvema kartama
+Nombre de cartes ¦ Broj karata ¦ Število kart
+Vies par joueur (0 = sans vies, on compte les points) ¦ Životi po igraču (0 = bez života, broje se bodovi) ¦ Življenja na igralca (0 = brez življenj, štejejo se točke)
+Garde au moins une sorte d’événement. ¦ Ostavi barem jednu vrstu događaja. ¦ Pusti vsaj eno vrsto dogodka.
+Pas assez d’événements datés avec ces réglages (il en faut au moins 5). Ajoute les dates de l’histoire, un écart plus petit ou un ensemble plus grand. ¦ S ovim postavkama nema dovoljno datiranih događaja (potrebno ih je barem 5). Dodaj povijesne datume, manji razmak ili veći skup. ¦ S temi nastavitvami ni dovolj datiranih dogodkov (potrebnih je vsaj 5). Dodaj zgodovinske datume, manjši razmik ali večji nabor.
+{a} / {b} cartes ¦ Karte: {a} / {b} ¦ Karte: {a} / {b}
+{what} sur {n} ¦ {what} od {n} ¦ {what} od {n}
+Poser ici, avant tout ¦ Postavi ovdje, prije svega ¦ Postavi sem, pred vse
+Poser ici, après tout ¦ Postavi ovdje, nakon svega ¦ Postavi sem, za vse
+Poser ici, entre « {a} » et « {b} » ¦ Postavi ovdje, između „{a}” i „{b}” ¦ Postavi sem, med »{a}« in »{b}«
+Ici ¦ Ovdje ¦ Sem
+{name}, pose cette carte : ¦ {name}, postavi ovu kartu: ¦ {name}, postavi to karto:
+Pose cette carte à sa place : ¦ Postavi ovu kartu na njezino mjesto: ¦ Postavi to karto na njeno mesto:
+Glisse-la sur « ⬇ Ici », ou clique (Tab puis Entrée) sur la bonne place. ¦ Povuci je na „⬇ Ovdje” ili klikni (Tab pa Enter) na pravo mjesto. ¦ Povleci jo na »⬇ Sem« ali klikni (Tab in nato Enter) na pravo mesto.
+plus de vie ¦ nema više života ¦ ni več življenj
+✓ Bien placé ! ¦ ✓ Dobro postavljeno! ¦ ✓ Pravilno postavljeno!
+✗ Pas tout à fait ¦ ✗ Ne baš ¦ ✗ Ne čisto
+La frise, de la plus ancienne à la plus récente ¦ Vremenska crta, od najstarijeg do najnovijeg ¦ Časovnica, od najstarejšega do najnovejšega
+plus ancien ¦ starije ¦ starejše
+plus récent ¦ novije ¦ novejše
+{what} sur la frise. ¦ {what} na vremenskoj crti. ¦ {what} na časovnici.
+=carte posée ¦ postavljena karta|postavljene karte|postavljenih karata ¦ položena karta|položeni karti|položene karte|položenih kart
+=carte ¦ karta|karte|karata ¦ karta|karti|karte|kart
+Bataille de Marignan ¦ Bitka kod Marignana ¦ Bitka pri Marignanu
+Ordonnance de Villers-Cotterêts : les curés tiennent les registres en français ¦ Ordonanca iz Villers-Cotterêtsa: župnici vode matice na francuskom ¦ Odlok iz Villers-Cotterêtsa: župniki vodijo matične knjige v francoščini
+Massacre de la Saint-Barthélemy ¦ Bartolomejska noć ¦ Šentjernejska noč
+Édit de Nantes ¦ Nantski edikt ¦ Nantski edikt
+Assassinat d’Henri IV ¦ Ubojstvo Henrika IV. ¦ Umor Henrika IV.
+Louis XIV devient roi ¦ Luj XIV. postaje kralj ¦ Ludvik XIV. postane kralj
+Ordonnance de Saint-Germain-en-Laye : registres en double ¦ Ordonanca iz Saint-Germain-en-Layea: matice u dva primjerka ¦ Odlok iz Saint-Germain-en-Layea: matične knjige v dveh izvodih
+Révocation de l’édit de Nantes ¦ Opoziv Nantskog edikta ¦ Preklic Nantskega edikta
+Le « Grand Hiver » ¦ „Velika zima” ¦ »Velika zima«
+Mort de Louis XIV ¦ Smrt Luja XIV. ¦ Smrt Ludvika XIV.
+Début de la guerre de Sept Ans ¦ Početak Sedmogodišnjeg rata ¦ Začetek sedemletne vojne
+Prise de la Bastille ¦ Pad Bastille ¦ Napad na Bastiljo
+L’état civil est confié aux mairies ¦ Matične knjige povjerene su općinama ¦ Matične knjige so zaupane občinam
+Napoléon Ier, empereur ¦ Napoleon I., car ¦ Napoleon I., cesar
+Bataille de Waterloo ¦ Bitka kod Waterlooa ¦ Bitka pri Waterlooju
+Révolution de Juillet ¦ Srpanjska revolucija ¦ Julijska revolucija
+Grande épidémie de choléra ¦ Velika epidemija kolere ¦ Velika epidemija kolere
+Suffrage universel masculin, fin de l’esclavage ¦ Opće muško pravo glasa, ukidanje ropstva ¦ Splošna moška volilna pravica, odprava suženjstva
+Second Empire ¦ Drugo Carstvo ¦ Drugo cesarstvo
+Nouvelle épidémie de choléra ¦ Nova epidemija kolere ¦ Nova epidemija kolere
+Guerre franco-prussienne ¦ Francusko-pruski rat ¦ Francosko-pruska vojna
+La Commune de Paris ¦ Pariška komuna ¦ Pariška komuna
+École gratuite, laïque et obligatoire ¦ Besplatna, svjetovna i obvezna škola ¦ Brezplačna, laična in obvezna šola
+Tour Eiffel ¦ Eiffelov toranj ¦ Eifflov stolp
+Séparation des Églises et de l’État ¦ Odvajanje Crkve od države ¦ Ločitev Cerkve od države
+Début de la Première Guerre mondiale ¦ Početak Prvog svjetskog rata ¦ Začetek prve svetovne vojne
+Armistice du 11 novembre ¦ Primirje od 11. studenoga ¦ Premirje 11. novembra
+Grippe espagnole ¦ Španjolska gripa ¦ Španska gripa
+Premiers congés payés ¦ Prvi plaćeni godišnji odmori ¦ Prvi plačani dopusti
+Début de la Seconde Guerre mondiale ¦ Početak Drugog svjetskog rata ¦ Začetek druge svetovne vojne
+Droit de vote des femmes ¦ Pravo glasa za žene ¦ Volilna pravica žensk
+Fin de la Seconde Guerre mondiale ¦ Kraj Drugog svjetskog rata ¦ Konec druge svetovne vojne
+Ve République ¦ Peta Republika ¦ Peta republika
+Mai 68 ¦ Svibanj 68. ¦ Maj 68
+Premiers pas sur la Lune ¦ Prvi koraci na Mjesecu ¦ Prvi koraki na Luni
+Abolition de la peine de mort ¦ Ukidanje smrtne kazne ¦ Odprava smrtne kazni
+L’euro en pièces et billets ¦ Euro u kovanicama i novčanicama ¦ Evro v kovancih in bankovcih
+Morpion à règles libres ¦ Križić-kružić sa slobodnim pravilima ¦ Križci in krožci s prostimi pravili
+Morpion ¦ Križić-kružić ¦ Križci in krožci
+MORPION ¦ KRIŽIĆ-KRUŽIĆ ¦ KRIŽCI IN KROŽCI
+Aligne tes symboles avant les autres : choisis la taille de la grille, combien à la suite, le nombre de joueurs et vos symboles (ou le portrait d’un ancêtre). ¦ Poravnaj svoje simbole prije ostalih: odaberi veličinu mreže, koliko zaredom, broj igrača i vaše simbole (ili portret pretka). ¦ Poravnaj svoje simbole pred drugimi: izberi velikost mreže, koliko zapored, število igralcev in vaše simbole (ali portret prednika).
+Le premier qui aligne le nombre demandé (en ligne, en colonne et, si on veut, en diagonale) gagne la manche. ¦ Prvi koji poreda traženi broj (u retku, stupcu i, ako se želi, dijagonalno) osvaja rundu. ¦ Prvi, ki poravna zahtevano število (v vrstici, stolpcu in po želji diagonalno), dobi rundo.
+Ex : Le grand tournoi ¦ Npr.: Veliki turnir ¦ Npr.: Veliki turnir
+La grille et les règles ¦ Mreža i pravila ¦ Mreža in pravila
+🙂 Une personne ¦ 🙂 Osoba ¦ 🙂 Oseba
+🤖 Ordinateur (simple) ¦ 🤖 Računalo (jednostavno) ¦ 🤖 Računalnik (preprosto)
+🤖 Ordinateur (moyen) ¦ 🤖 Računalo (srednje) ¦ 🤖 Računalnik (srednje)
+Morpion classique ¦ Klasični križić-kružić ¦ Klasični križci in krožci
+3×3, aligner 3 ¦ 3×3, poredaj 3 ¦ 3×3, poravnaj 3
+Puissance 4 ¦ Četiri u nizu ¦ Štiri v vrsto
+6 lignes × 7 colonnes, gravité, aligner 4 ¦ 6 redaka × 7 stupaca, gravitacija, poredaj 4 ¦ 6 vrstic × 7 stolpcev, težnost, poravnaj 4
+Cinq à la suite ¦ Pet zaredom ¦ Pet zapored
+15×15, aligner 5 ¦ 15×15, poredaj 5 ¦ 15×15, poravnaj 5
+Grille sans fin ¦ Beskonačna mreža ¦ Neskončna mreža
+Commence en 5×5 et s’agrandit, aligner 5 ¦ Počinje s 5×5 i povećava se, poredaj 5 ¦ Začne s 5×5 in se povečuje, poravnaj 5
+Jusqu’à remplir la grille ¦ Dok se mreža ne popuni ¦ Dokler se mreža ne zapolni
+10×10, on compte les alignements de 4 ¦ 10×10, broje se nizovi od 4 ¦ 10×10, štejejo se vrste po 4
+⬇ Gravité (les pions tombent, comme au « puissance 4 ») ¦ ⬇ Gravitacija (žetoni padaju, kao u igri „četiri u nizu”) ¦ ⬇ Težnost (žetoni padajo, kot pri igri »štiri v vrsto«)
+↗ Les diagonales comptent ¦ ↗ Dijagonale se računaju ¦ ↗ Diagonale štejejo
+⤢ La grille s’agrandit quand on joue au bord (sans la gravité) ¦ ⤢ Mreža se povećava kad se igra na rubu (bez gravitacije) ¦ ⤢ Mreža se poveča, ko igraš ob robu (brez težnosti)
+🧮 Jouer jusqu’à remplir la grille : chaque alignement compte un point (une suite deux fois plus longue en vaut deux), le plus de points gagne ¦ 🧮 Igraj dok se mreža ne popuni: svaki niz donosi bod (dvostruko duži niz vrijedi dva), pobjeđuje tko ima najviše bodova ¦ 🧮 Igraj, dokler se mreža ne zapolni: vsaka vrsta prinese točko (dvakrat daljša vrsta velja dve), zmaga, kdor ima največ točk
+Combien à la suite pour gagner ¦ Koliko zaredom za pobjedu ¦ Koliko zapored za zmago
+à la suite ¦ zaredom ¦ zapored
+lignes ¦ redaka ¦ vrstic
+colonnes ¦ stupaca ¦ stolpcev
+Symbole ¦ Simbol ¦ Simbol
+Une lettre… ¦ Slovo… ¦ Črka…
+Le portrait d’un ancêtre… ¦ Portret pretka… ¦ Portret prednika…
+Qui joue ¦ Tko igra ¦ Kdo igra
+Il faut au moins une personne pour jouer (sinon les ordinateurs jouent tout seuls). ¦ Za igru je potrebna barem jedna osoba (inače računala igraju sama). ¦ Za igro je potrebna vsaj ena oseba (sicer računalniki igrajo sami).
+Choisis l’ancêtre de chaque joueur qui a le symbole « portrait ». ¦ Odaberi pretka za svakog igrača koji ima simbol „portret”. ¦ Izberi prednika za vsakega igralca, ki ima simbol »portret«.
+Deux joueurs ont le même symbole : choisis-en un différent pour chacun. ¦ Dva igrača imaju isti simbol: odaberi drugačiji za svakoga. ¦ Dva igralca imata enak simbol: izberi drugačnega za vsakega.
+Manche en cours ¦ Runda u tijeku ¦ Runda v teku
+Manche {n} ¦ Runda {n} ¦ Runda {n}
+aligner {n} ¦ poredaj {n} ¦ poravnaj {n}
+gravité ¦ gravitacija ¦ težnost
+sans diagonales ¦ bez dijagonala ¦ brez diagonal
+grille qui s’agrandit ¦ mreža koja se povećava ¦ mreža, ki se povečuje
+jusqu’à remplir la grille ¦ dok se mreža ne popuni ¦ dokler se mreža ne zapolni
+La grille ¦ Mreža ¦ Mreža
+Ligne {r}, colonne {c} : {name} ¦ Redak {r}, stupac {c}: {name} ¦ Vrstica {r}, stolpec {c}: {name}
+Ligne {r}, colonne {c} ¦ Redak {r}, stupac {c} ¦ Vrstica {r}, stolpec {c}
+=manche gagnée ¦ dobivena runda|dobivene runde|dobivenih rundi ¦ dobljena runda|dobljeni rundi|dobljene runde|dobljenih rund
+🎉 {name} gagne la manche avec {pts} ! ¦ 🎉 {name} osvaja rundu s {pts}! ¦ 🎉 {name} dobi rundo s {pts}!
+🎉 {name} gagne la manche ! ¦ 🎉 {name} osvaja rundu! ¦ 🎉 {name} dobi rundo!
+🤝 Égalité : la grille est pleine, même nombre de points. ¦ 🤝 Neriješeno: mreža je puna, isti broj bodova. ¦ 🤝 Neodločeno: mreža je polna, enako število točk.
+🤝 Match nul : la grille est pleine. ¦ 🤝 Neriješeno: mreža je puna. ¦ 🤝 Neodločeno: mreža je polna.
+À {name} de jouer (l’ordinateur réfléchit…). ¦ Na redu je {name} (računalo razmišlja…). ¦ Na vrsti je {name} (računalnik razmišlja…).
+À {name} de jouer. ¦ Na redu je {name}. ¦ Na vrsti je {name}.
+« ↻ Rejouer » en haut : une nouvelle manche, les scores de la soirée sont gardés. ¦ „↻ Igraj ponovno” gore: nova runda, rezultati večeri ostaju sačuvani. ¦ »↻ Igraj znova« zgoraj: nova runda, rezultati večera se ohranijo.
+Annuler le dernier coup ¦ Poništi posljednji potez ¦ Razveljavi zadnjo potezo
+Clavier : flèches puis Entrée. Avec la gravité, une case de la colonne suffit : le pion tombe. ¦ Tipkovnica: strelice pa Enter. S gravitacijom dovoljno je polje u stupcu: žeton pada. ¦ Tipkovnica: puščice in nato Enter. S težnostjo zadošča polje v stolpcu: žeton pade.
+Clavier : flèches puis Entrée. ¦ Tipkovnica: strelice pa Enter. ¦ Tipkovnica: puščice in nato Enter.
+{name} a gagné ¦ {name} je pobijedio/pobijedila ¦ {name} je zmagal/zmagala
+{name} a gagné ({pts}) ¦ {name} je pobijedio/pobijedila ({pts}) ¦ {name} je zmagal/zmagala ({pts})
+Égalité ¦ Neriješeno ¦ Neodločeno
+Match nul ¦ Neriješen ishod ¦ Neodločen izid
+Bataille navale ¦ Potapanje brodova ¦ Potapljanje ladij
+BATAILLE NAVALE ¦ POTAPANJE BRODOVA ¦ POTAPLJANJE LADIJ
+Coule la flotte de l’autre avant qu’il ne coule la tienne : contre l’ordinateur, ou à deux sur le même écran. Les navires peuvent porter le nom de tes ancêtres. ¦ Potopi flotu protivnika prije nego što on potopi tvoju: protiv računala ili u dvoje na istom zaslonu. Brodovi mogu nositi imena tvojih predaka. ¦ Potopi nasprotnikovo floto, preden on potopi tvojo: proti računalniku ali v dvoje na istem zaslonu. Ladje lahko nosijo imena tvojih prednikov.
+Un clic sur la grille de l’adversaire pour tirer : « à l’eau », « touché » ou « coulé ». Le premier qui coule toute la flotte gagne. ¦ Klik na protivnikovu mrežu za pucanje: „promašaj”, „pogodak” ili „potopljen”. Pobjeđuje prvi koji potopi cijelu flotu. ¦ Klik na nasprotnikovo mrežo za strel: »v vodo«, »zadetek« ali »potopljena«. Zmaga, kdor prvi potopi celotno floto.
+Ex : La revanche de Mamie ¦ Npr.: Bakina osveta ¦ Npr.: Babičino maščevanje
+La mer et la flotte ¦ More i flota ¦ Morje in flota
+🤖 Ordinateur (malin) ¦ 🤖 Računalo (lukavo) ¦ 🤖 Računalnik (zvit)
+Porte-avions ¦ Nosač zrakoplova ¦ Letalonosilka
+Croiseur ¦ Krstarica ¦ Križarka
+Frégate ¦ Fregata ¦ Fregata
+Sous-marin ¦ Podmornica ¦ Podmornica
+Navire ¦ Brod ¦ Ladja
+=navire ¦ brod|broda|brodova ¦ ladja|ladji|ladje|ladij
+=navire coulé ¦ potopljen brod|potopljena broda|potopljenih brodova ¦ potopljena ladja|potopljeni ladji|potopljene ladje|potopljenih ladij
+Petite mer ¦ Malo more ¦ Majhno morje
+7×7, petite flotte ¦ 7×7, mala flota ¦ 7×7, majhna flota
+Bataille classique ¦ Klasična bitka ¦ Klasična bitka
+10×10, 5 navires ¦ 10×10, 5 brodova ¦ 10×10, 5 ladij
+Grande escadre ¦ Velika eskadra ¦ Velika eskadra
+14×14, 7 navires ¦ 14×14, 7 brodova ¦ 14×14, 7 ladij
+En rafale ¦ Rafalno ¦ V rafalu
+10×10, on rejoue quand on touche ¦ 10×10, igra se ponovno nakon pogotka ¦ 10×10, po zadetku igraš znova
+La flotte ne tient pas dans cette grille : prends une grille plus grande ou une flotte plus petite. ¦ Flota ne stane u ovu mrežu: uzmi veću mrežu ili manju flotu. ¦ Flota ne gre v to mrežo: vzemi večjo mrežo ali manjšo floto.
+La flotte ¦ Flota ¦ Flota
+Petite (4 navires) ¦ Mala (4 broda) ¦ Majhna (4 ladje)
+Classique (5) ¦ Klasična (5) ¦ Klasična (5)
+Grande (7) ¦ Velika (7) ¦ Velika (7)
+🎯 On rejoue quand on touche ¦ 🎯 Nakon pogotka igra se ponovno ¦ 🎯 Po zadetku igraš znova
+⚓ Les navires portent le nom d’ancêtres ¦ ⚓ Brodovi nose imena predaka ¦ ⚓ Ladje nosijo imena prednikov
+Taille de la mer ¦ Veličina mora ¦ Velikost morja
+cases de côté ¦ polja po stranici ¦ polj na stranico
+Il faut au moins une personne pour jouer. ¦ Za igru je potrebna barem jedna osoba. ¦ Za igro je potrebna vsaj ena oseba.
+le {name} ¦ {name} ¦ {name}
+Bataille en cours ¦ Bitka u tijeku ¦ Bitka v teku
+à l’eau ¦ promašaj ¦ v vodo
+touché ¦ pogodak ¦ zadetek
+touché ! ¦ pogodak! ¦ zadetek!
+coulé ¦ potopljen ¦ potopljena
+coulé : {ship} ({kind}) ¦ potopljen: {ship} ({kind}) ¦ potopljena: {ship} ({kind})
+on rejoue quand on touche ¦ nakon pogotka igra se ponovno ¦ po zadetku igraš znova
+{a}, à toi : que {b} détourne les yeux. ¦ {a}, ti si na redu: neka {b} skrene pogled. ¦ {a}, ti si na vrsti: {b} naj pogleda stran.
+Je suis {name} : voir ma mer ¦ Ja sam {name}: prikaži moje more ¦ Sem {name}: pokaži moje morje
+La mer de {name} ¦ More igrača {name} ¦ Morje igralca {name}
+Ta flotte ({name}) ¦ Tvoja flota ({name}) ¦ Tvoja flota ({name})
+Ta flotte ¦ Tvoja flota ¦ Tvoja flota
+🎉 {name} a coulé toute la flotte ! ¦ 🎉 {name} je potopio/potopila cijelu flotu! ¦ 🎉 {name} je potopil/potopila celotno floto!
+À toi de tirer, {a} : clique sur la mer de {b}. ¦ Ti pucaš, {a}: klikni na more igrača {b}. ¦ Ti streljaš, {a}: klikni na morje igralca {b}.
+{name} vise… ¦ {name} cilja… ¦ {name} meri…
+« ↻ Rejouer » en haut : une nouvelle manche, les scores sont gardés. ¦ „↻ Igraj ponovno” gore: nova runda, rezultati ostaju sačuvani. ¦ »↻ Igraj znova« zgoraj: nova runda, rezultati se ohranijo.
+{name} a gagné en {n} tirs ¦ {name} je pobijedio/pobijedila, broj hitaca: {n} ¦ {name} je zmagal/zmagala, število strelov: {n}
+Câbles ¦ Kabeli ¦ Kabli
+Les câbles ¦ Kabeli ¦ Kabli
+LES CÂBLES ¦ KABELI ¦ KABLI
+Tourne les bouts de câble pour relier tous les postes au serveur, sans câble dans le vide. Avec ou sans bords qui se rejoignent. ¦ Okreći dijelove kabela da povežeš sva računala s poslužiteljem, bez kabela u prazno. S rubovima koji se spajaju ili bez njih. ¦ Vrti kose kablov, da povežeš vse postaje s strežnikom, brez kabla v prazno. Z robovi, ki se stikajo, ali brez njih.
+Clic : tourner d’un quart de tour (clic droit ou Maj : dans l’autre sens). Alt+clic ou le mode 🔒 : verrouiller une case sûre. ¦ Klik: okreni za četvrt kruga (desni klik ili Shift: u drugom smjeru). Alt+klik ili način 🔒: zaključaj sigurno polje. ¦ Klik: zavrti za četrt obrata (desni klik ali Shift: v drugo smer). Alt+klik ali način 🔒: zakleni zanesljivo polje.
+Ex : Le réseau de la famille ¦ Npr.: Obiteljska mreža ¦ Npr.: Družinsko omrežje
+Le réseau ¦ Mreža ¦ Omrežje
+Débutant ¦ Početnik ¦ Začetnik
+Expert : bords qui se rejoignent ¦ Stručnjak: rubovi koji se spajaju ¦ Strokovnjak: robovi, ki se stikajo
+9×9, un câble peut passer d’un bord à l’autre ¦ 9×9, kabel može prijeći s jednog ruba na drugi ¦ 9×9, kabel lahko preide z enega roba na drugega
+Géant ¦ Divovski ¦ Velikanski
+13×13, bords qui se rejoignent ¦ 13×13, rubovi koji se spajaju ¦ 13×13, robovi, ki se stikajo
+🔁 Les bords se rejoignent (un câble qui sort à droite revient à gauche, en haut revient en bas) ¦ 🔁 Rubovi se spajaju (kabel koji izlazi desno vraća se lijevo, gore se vraća dolje) ¦ 🔁 Robovi se stikajo (kabel, ki izstopi desno, se vrne levo, zgoraj se vrne spodaj)
+👪 Les postes portent le nom d’ancêtres ¦ 👪 Računala nose imena predaka ¦ 👪 Postaje nosijo imena prednikov
+Réseau à relier ¦ Mreža za povezivanje ¦ Omrežje za povezovanje
+bords qui se rejoignent ¦ rubovi koji se spajaju ¦ robovi, ki se stikajo
+Le serveur ¦ Poslužitelj ¦ Strežnik
+Case {r}, {c} (serveur) ¦ Polje {r}, {c} (poslužitelj) ¦ Polje {r}, {c} (strežnik)
+Case {r}, {c} (poste) ¦ Polje {r}, {c} (računalo) ¦ Polje {r}, {c} (postaja)
+Case {r}, {c} ¦ Polje {r}, {c} ¦ Polje {r}, {c}
+, reliée ¦ , povezano ¦ , povezano
+🎉 Tout est relié en {moves} et {time} ! ¦ 🎉 Sve je povezano: {moves}, {time}! ¦ 🎉 Vse je povezano: {moves}, {time}!
+{a} / {b} cases reliées ¦ Povezana polja: {a} / {b} ¦ Povezana polja: {a} / {b}
+=bout dans le vide ¦ slobodan kraj|slobodna kraja|slobodnih krajeva ¦ prost konec|prosta konca|prosti konci|prostih koncev
+record {moves}, {time} ¦ rekord {moves}, {time} ¦ rekord {moves}, {time}
+Mode verrou (actif) ¦ Način zaključavanja (uključen) ¦ Način zaklepanja (vklopljen)
+Mode verrou ¦ Način zaključavanja ¦ Način zaklepanja
+Les bords se rejoignent : un câble qui sort d’un côté continue de l’autre côté. ¦ Rubovi se spajaju: kabel koji izlazi s jedne strane nastavlja s druge strane. ¦ Robovi se stikajo: kabel, ki izstopi na eni strani, se nadaljuje na drugi.
+=ancêtre relié ¦ povezani predak|povezana pretka|povezanih predaka ¦ povezan prednik|povezana prednika|povezani predniki|povezanih prednikov
+Case verrouillée (Alt+clic pour la déverrouiller). ¦ Zaključano polje (Alt+klik za otključavanje). ¦ Zaklenjeno polje (Alt+klik za odklepanje).
+Relié en {n} coups ¦ Povezano, broj poteza: {n} ¦ Povezano, število potez: {n}
+🤖 Ordinateur facile ¦ 🤖 Računalo lako ¦ 🤖 Računalnik lahko
+🤖 Ordinateur moyen ¦ 🤖 Računalo srednje ¦ 🤖 Računalnik srednje
+🤖 Ordinateur difficile ¦ 🤖 Računalo teško ¦ 🤖 Računalnik težko
+niveau|facile ¦ lako ¦ lahko
+niveau|moyen ¦ srednje ¦ srednje
+niveau|difficile ¦ teško ¦ težko
+Difficile ¦ Teško ¦ Težko
+=victoire ¦ pobjeda|pobjede|pobjeda ¦ zmaga|zmagi|zmage|zmag
+=nulle ¦ remi|remija|remija ¦ remi|remija|remiji|remijev
+=défaite ¦ poraz|poraza|poraza ¦ poraz|poraza|porazi|porazov
+record : {what} ¦ rekord: {what} ¦ rekord: {what}
+{what} : ¦ {what}: ¦ {what}:
+LES RÈGLES ¦ PRAVILA ¦ PRAVILA
+La partie ¦ Igra ¦ Igra
+Le temps de la partie (sans les pauses) ¦ Vrijeme igre (bez pauza) ¦ Čas igre (brez premorov)
+Un conseil (touche H) ¦ Savjet (tipka H) ¦ Nasvet (tipka H)
+Reprendre (Échap) ¦ Nastavi (Esc) ¦ Nadaljuj (Esc)
+Pause (Échap) ¦ Pauza (Esc) ¦ Premor (Esc)
+Reprendre ¦ Nastavi ¦ Nadaljuj
+Pause ¦ Pauza ¦ Premor
+Les règles de {name} ¦ Pravila igre {name} ¦ Pravila igre {name}
+Les règles de ce jeu ¦ Pravila ove igre ¦ Pravila te igre
+Le chrono est arrêté. Échap ou le bouton pour reprendre. ¦ Štoperica je zaustavljena. Esc ili gumb za nastavak. ¦ Štoparica je ustavljena. Esc ali gumb za nadaljevanje.
+Les règles : {name} ¦ Pravila: {name} ¦ Pravila: {name}
+ÉCHECS ¦ ŠAH ¦ ŠAH
+Le jeu d’échecs avec toutes ses règles : à deux sur le même écran ou contre l’ordinateur (facile, moyen ou difficile), pendule si tu veux. ¦ Šah sa svim pravilima: u dvoje na istom zaslonu ili protiv računala (lako, srednje ili teško), sa satom ako želiš. ¦ Šah z vsemi pravili: v dvoje na istem zaslonu ali proti računalniku (lahko, srednje ali težko), z uro, če želiš.
+Les blancs commencent. Clique une pièce puis sa case (ou glisse-la). Les règles complètes sont dans le « ? » de la partie. ¦ Bijeli počinju. Klikni figuru pa njezino polje (ili je povuci). Potpuna pravila nalaze se u „?” igre. ¦ Beli začne. Klikni figuro in nato njeno polje (ali jo povleci). Popolna pravila so v »?« igre.
+Ex : La revanche de Papi ¦ Npr.: Djedova osveta ¦ Npr.: Dedkovo maščevanje
+Partie tranquille ¦ Mirna igra ¦ Mirna igra
+Sans pendule, 3 conseils ¦ Bez sata, 3 savjeta ¦ Brez ure, 3 nasveti
+Partie longue ¦ Duga igra ¦ Dolga igra
+30 minutes chacun ¦ 30 minuta svaki ¦ 30 minut vsak
+Partie rapide ¦ Brza igra ¦ Hitra igra
+15 minutes chacun, + 10 secondes par coup ¦ 15 minuta svaki, + 10 sekundi po potezu ¦ 15 minut vsak, + 10 sekund na potezo
+Blitz ¦ Blitz ¦ Blitz
+5 minutes chacun, + 2 secondes par coup ¦ 5 minuta svaki, + 2 sekunde po potezu ¦ 5 minut vsak, + 2 sekundi na potezo
+Chaque joueur a 16 pièces. Les blancs commencent. On gagne en <b>mettant le roi adverse échec et mat</b> : il est attaqué et ne peut plus s’échapper. ¦ Svaki igrač ima 16 figura. Bijeli počinju. Pobjeđuje se <b>matiranjem protivničkog kralja</b>: napadnut je i više ne može pobjeći. ¦ Vsak igralec ima 16 figur. Beli začne. Zmagaš, ko <b>nasprotnemu kralju daš mat</b>: napaden je in ne more več pobegniti.
+<b>Roi ♚</b> : une case dans tous les sens. <b>Dame ♛</b> : autant de cases qu’on veut, en ligne, en colonne et en diagonale. <b>Tour ♜</b> : en ligne et en colonne. <b>Fou ♝</b> : en diagonale. <b>Cavalier ♞</b> : en « L », il saute par-dessus les pièces. <b>Pion ♟</b> : avance d’une case (deux au premier coup), prend en diagonale. ¦ <b>Kralj ♚</b>: jedno polje u svim smjerovima. <b>Dama ♛</b>: koliko god polja, po retku, stupcu i dijagonali. <b>Top ♜</b>: po retku i stupcu. <b>Lovac ♝</b>: dijagonalno. <b>Skakač ♞</b>: u obliku „L”, preskače figure. <b>Pješak ♟</b>: ide jedno polje naprijed (dva u prvom potezu), uzima dijagonalno. ¦ <b>Kralj ♚</b>: eno polje v vse smeri. <b>Dama ♛</b>: poljubno število polj, po vrstici, stolpcu in diagonali. <b>Trdnjava ♜</b>: po vrstici in stolpcu. <b>Tekač ♝</b>: diagonalno. <b>Skakač ♞</b>: v obliki »L«, preskoči figure. <b>Kmet ♟</b>: gre eno polje naprej (dve pri prvi potezi), jemlje diagonalno.
+<b>Roque</b> : le roi va de deux cases vers une tour, la tour passe de l’autre côté. Impossible si le roi ou cette tour ont déjà bougé, si le roi est en échec, ou s’il passe ou arrive sur une case attaquée. ¦ <b>Rokada</b>: kralj ide dva polja prema topu, top prelazi na drugu stranu. Nije moguća ako su se kralj ili taj top već pomaknuli, ako je kralj u šahu ili ako prelazi preko napadnutog polja ili na njega dolazi. ¦ <b>Rokada</b>: kralj gre dve polji proti trdnjavi, trdnjava preide na drugo stran. Ni mogoča, če sta se kralj ali ta trdnjava že premaknila, če je kralj v šahu ali če gre čez napadeno polje ali pristane na njem.
+<b>Prise en passant</b> : un pion qui avance de deux cases à côté d’un pion adverse peut être pris comme s’il n’avait avancé que d’une case, mais seulement au coup suivant. ¦ <b>Uzimanje u prolazu</b>: pješak koji ide dva polja naprijed pokraj protivničkog pješaka može biti uzet kao da je išao samo jedno polje, ali samo u sljedećem potezu. ¦ <b>Jemanje mimogrede</b>: kmeta, ki gre dve polji naprej poleg nasprotnikovega kmeta, je mogoče vzeti, kot da bi šel le eno polje, a samo v naslednji potezi.
+<b>Promotion</b> : un pion qui arrive au bout devient la pièce qu’on choisit (dame, tour, fou ou cavalier). ¦ <b>Promocija</b>: pješak koji stigne do kraja postaje figura po izboru (dama, top, lovac ili skakač). ¦ <b>Promocija</b>: kmet, ki pride do konca, postane figura po izbiri (dama, trdnjava, tekač ali skakač).
+<b>Pat</b> : celui qui doit jouer n’est pas en échec mais n’a aucun coup possible : partie nulle. ¦ <b>Pat</b>: igrač koji je na potezu nije u šahu, ali nema mogućeg poteza: remi. ¦ <b>Pat</b>: igralec, ki je na potezi, ni v šahu, a nima nobene možne poteze: remi.
+<b>Autres nulles</b> : la même position trois fois ; 50 coups de chaque côté sans prise ni pion avancé ; plus assez de pièces pour mater (roi seul, roi et fou, roi et cavalier…). ¦ <b>Ostali remiji</b>: ista pozicija tri puta; 50 poteza sa svake strane bez uzimanja i bez pomaknutog pješaka; premalo figura za mat (sam kralj, kralj i lovac, kralj i skakač…). ¦ <b>Drugi remiji</b>: ista pozicija trikrat; 50 potez na vsaki strani brez jemanja in brez premika kmeta; premalo figur za mat (sam kralj, kralj in tekač, kralj in skakač…).
+<b>Pendule</b> (si on l’a choisie) : chacun a son temps ; celui dont le temps tombe à zéro perd (nulle si l’autre ne peut plus mater). ¦ <b>Sat</b> (ako je odabran): svatko ima svoje vrijeme; onaj kojemu vrijeme padne na nulu gubi (remi ako drugi više ne može matirati). ¦ <b>Ura</b> (če je izbrana): vsak ima svoj čas; kdor mu čas pade na nič, izgubi (remi, če drugi ne more več dati mata).
+<b>Notation</b> : R roi, D dame, T tour, F fou, C cavalier ; « x » une prise, « + » échec, « # » mat, « O-O » petit roque, « O-O-O » grand roque. ¦ <b>Notacija</b>: R kralj, D dama, T top, F lovac, C skakač; „x” uzimanje, „+” šah, „#” mat, „O-O” mala rokada, „O-O-O” velika rokada. ¦ <b>Notacija</b>: R kralj, D dama, T trdnjava, F tekač, C skakač; »x« jemanje, »+« šah, »#« mat, »O-O« mala rokada, »O-O-O« velika rokada.
+<b>Jouer</b> : clique (ou touche) une pièce puis sa case, ou glisse-la. Au clavier : flèches, Entrée pour prendre la pièce puis Entrée sur sa case. ↶ (⌘Z) défait un coup, 💡 (H) montre un bon coup, Échap met en pause. ¦ <b>Igranje</b>: klikni (ili dodirni) figuru pa njezino polje ili je povuci. Tipkovnicom: strelice, Enter za uzimanje figure pa Enter na njezinom polju. ↶ (⌘Z) poništava potez, 💡 (H) pokazuje dobar potez, Esc pauzira. ¦ <b>Igranje</b>: klikni (ali se dotakni) figure in nato njenega polja ali jo povleci. S tipkovnico: puščice, Enter, da primeš figuro, nato Enter na njenem polju. ↶ (⌘Z) razveljavi potezo, 💡 (H) pokaže dobro potezo, Esc ustavi igro.
+La pendule ¦ Sat ¦ Ura
+pendule|Sans ¦ Bez ¦ Brez
+Ajout par coup ¦ Dodatak po potezu ¦ Dodatek na potezo
+Conseils ¦ Savjeti ¦ Nasveti
+👪 Les pièces portent le nom d’ancêtres (le roi, la dame, puis les autres) ¦ 👪 Figure nose imena predaka (kralj, dama, zatim ostale) ¦ 👪 Figure nosijo imena prednikov (kralj, dama, nato druge)
+• Montrer les cases où la pièce peut aller ¦ • Prikaži polja na koja figura može ići ¦ • Pokaži polja, na katera lahko gre figura
+Blancs ¦ Bijeli ¦ Beli
+Noirs ¦ Crni ¦ Črni
+blancs ¦ bijeli ¦ beli
+noirs ¦ crni ¦ črni
+Partie en cours ¦ Igra u tijeku ¦ Igra v teku
+Retourner le plateau ¦ Okreni ploču ¦ Obrni ploščo
+Copier les coups ¦ Kopiraj poteze ¦ Kopiraj poteze
+La partie en notation, à coller ailleurs ¦ Igra u notaciji, za lijepljenje drugdje ¦ Igra v notaciji, za lepljenje drugam
+Proposer la nulle ¦ Ponudi remi ¦ Ponudi remi
+Nulle d’un commun accord ¦ Remi sporazumom ¦ Remi po dogovoru
+Abandonner ¦ Predaj se ¦ Predaj se
+{name} a gagné ({why}) ¦ {name} je pobijedio/pobijedila ({why}) ¦ {name} je zmagal/zmagala ({why})
+Nulle ({why}) ¦ Remi ({why}) ¦ Remi ({why})
+mat en {n} coups ¦ mat u potezima: {n} ¦ mat v potezah: {n}
+🏆 Nouveau record ! ¦ 🏆 Novi rekord! ¦ 🏆 Nov rekord!
+Aux blancs ¦ Na potezu bijeli ¦ Na potezi beli
+Aux noirs ¦ Na potezu crni ¦ Na potezi črni
+échec ¦ šah ¦ šah
+Coups copiés. ¦ Potezi kopirani. ¦ Poteze kopirane.
+🤖 L’ordinateur refuse la nulle : il croit encore pouvoir gagner. ¦ 🤖 Računalo odbija remi: misli da još može pobijediti. ¦ 🤖 Računalnik zavrača remi: misli, da lahko še zmaga.
+{name} abandonne : la partie est perdue. ¦ {name} se predaje: igra je izgubljena. ¦ {name} se preda: igra je izgubljena.
+Abandonner la partie ? ¦ Predati igru? ¦ Predam igro?
+Abandonner la partie ¦ Predaj igru ¦ Predaj igro
+Partie {n} ¦ Igra {n} ¦ Igra {n}
+pendule {m} min + {s} s ¦ sat {m} min + {s} s ¦ ura {m} min + {s} s
+pendule {m} min ¦ sat {m} min ¦ ura {m} min
+sans pendule ¦ bez sata ¦ brez ure
+{a} (blancs) contre {b} (noirs) ¦ {a} (bijeli) protiv {b} (crni) ¦ {a} (beli) proti {b} (črni)
+ (coup possible) ¦ (mogući potez) ¦ (možna poteza)
+Le temps qui reste ¦ Preostalo vrijeme ¦ Preostali čas
+{name} gagne : {why} ! ¦ {name} pobjeđuje: {why}! ¦ {name} zmaga: {why}!
+À {name} de jouer (l’ordinateur réfléchit…) ¦ Na redu je {name} (računalo razmišlja…) ¦ Na vrsti je {name} (računalnik razmišlja…)
+À {name} de jouer ¦ Na redu je {name} ¦ Na vrsti je {name}
+Échec ! ¦ Šah! ¦ Šah!
+Pièces prises ¦ Uzete figure ¦ Vzete figure
+L’échiquier ¦ Šahovska ploča ¦ Šahovnica
+Promotion ¦ Promocija ¦ Promocija
+<b>Ton pion arrive au bout :</b> choisis ce qu’il devient. ¦ <b>Tvoj je pješak stigao do kraja:</b> odaberi što će postati. ¦ <b>Tvoj kmet je prišel do konca:</b> izberi, kaj postane.
+{a} prend {b}. ¦ {a} uzima {b}. ¦ {a} vzame {b}.
+Les coups joués ¦ Odigrani potezi ¦ Odigrane poteze
+« ↻ Rejouer » en haut : une revanche, les couleurs changent. ¦ „↻ Igraj ponovno” gore: revanš, boje se mijenjaju. ¦ »↻ Igraj znova« zgoraj: revanša, barvi se zamenjata.
+Contre l’ordinateur {level} ¦ Protiv računala {level} ¦ Proti računalniku {level}
+Clic ou toucher : la pièce, puis sa case (ou glisse-la). Clavier : flèches, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Klik ili dodir: figura, zatim njezino polje (ili je povuci). Tipkovnica: strelice, Enter. ⌘Z poništava, H savjet, Esc pauza. ¦ Klik ali dotik: figura, nato njeno polje (ali jo povleci). Tipkovnica: puščice, Enter. ⌘Z razveljavi, H nasvet, Esc premor.
+échec et mat ¦ šah-mat ¦ šah mat
+pat (plus de coup possible sans être en échec) ¦ pat (nema više mogućeg poteza bez ulaska u šah) ¦ pat (ni več možne poteze, ne da bi bil v šahu)
+Pat (plus de coup possible sans être en échec) ¦ Pat (nema više mogućeg poteza bez ulaska u šah) ¦ Pat (ni več možne poteze, ne da bi bil v šahu)
+nulle par triple répétition ¦ remi trostrukim ponavljanjem ¦ remi s trikratno ponovitvijo
+Nulle : par triple répétition ¦ Remi: trostrukim ponavljanjem ¦ Remi: s trikratno ponovitvijo
+nulle : 50 coups sans prise ni pion avancé ¦ remi: 50 poteza bez uzimanja i bez pomaknutog pješaka ¦ remi: 50 potez brez jemanja in brez premika kmeta
+Nulle : 50 coups sans prise ni pion avancé ¦ Remi: 50 poteza bez uzimanja i bez pomaknutog pješaka ¦ Remi: 50 potez brez jemanja in brez premika kmeta
+nulle : plus assez de pièces pour mater ¦ remi: premalo figura za mat ¦ remi: premalo figur za mat
+Nulle : plus assez de pièces pour mater ¦ Remi: premalo figura za mat ¦ Remi: premalo figur za mat
+temps écoulé ¦ vrijeme je isteklo ¦ čas je potekel
+Temps écoulé ¦ Vrijeme je isteklo ¦ Čas je potekel
+abandon ¦ predaja ¦ predaja
+nulle d’un commun accord ¦ remi sporazumom ¦ remi po dogovoru
+Nulle : d’un commun accord ¦ Remi: sporazumom ¦ Remi: po dogovoru
+roi blanc ¦ bijeli kralj ¦ beli kralj
+roi noir ¦ crni kralj ¦ črni kralj
+dame blanc ¦ bijela dama ¦ bela dama
+dame noir ¦ crna dama ¦ črna dama
+tour blanc ¦ bijeli top ¦ bela trdnjava
+tour noir ¦ crni top ¦ črna trdnjava
+fou blanc ¦ bijeli lovac ¦ beli tekač
+fou noir ¦ crni lovac ¦ črni tekač
+cavalier blanc ¦ bijeli skakač ¦ beli skakač
+cavalier noir ¦ crni skakač ¦ črni skakač
+pion blanc ¦ bijeli pješak ¦ beli kmet
+pion noir ¦ crni pješak ¦ črni kmet
+echecs|Roi ¦ Kralj ¦ Kralj
+echecs|Dame ¦ Dama ¦ Dama
+echecs|Tour ¦ Top ¦ Trdnjava
+echecs|Fou ¦ Lovac ¦ Tekač
+echecs|Cavalier ¦ Skakač ¦ Skakač
+echecs|Pion ¦ Pješak ¦ Kmet
+DAMES ¦ DAMA ¦ DAMA
+Le jeu de dames : règles internationales sur 10 × 10 (prise majoritaire, dames volantes) ou dames anglaises sur 8 × 8. À deux ou contre l’ordinateur. ¦ Igra dama: međunarodna pravila na 10 × 10 (obvezno najveće uzimanje, leteće dame) ili engleska dama na 8 × 8. U dvoje ili protiv računala. ¦ Igra dama: mednarodna pravila na 10 × 10 (obvezno največje jemanje, leteče dame) ali angleška dama na 8 × 8. V dvoje ali proti računalniku.
+Prendre est obligatoire. Les règles complètes sont dans le « ? » de la partie. ¦ Uzimanje je obvezno. Potpuna pravila nalaze se u „?” igre. ¦ Jemanje je obvezno. Popolna pravila so v »?« igre.
+Ex : Le tournoi du dimanche ¦ Npr.: Nedjeljni turnir ¦ Npr.: Nedeljski turnir
+Le damier et les règles ¦ Ploča i pravila ¦ Igralna plošča in pravila
+Dames internationales ¦ Međunarodna dama ¦ Mednarodna dama
+10 × 10, prise majoritaire, dames volantes ¦ 10 × 10, obvezno najveće uzimanje, leteće dame ¦ 10 × 10, obvezno največje jemanje, leteče dame
+Dames anglaises ¦ Engleska dama ¦ Angleška dama
+8 × 8, dames d’une case, prise en avant ¦ 8 × 8, dame za jedno polje, uzimanje naprijed ¦ 8 × 8, dame za eno polje, jemanje naprej
+Petit damier ¦ Mala ploča ¦ Majhna plošča
+8 × 8 avec les règles internationales ¦ 8 × 8 s međunarodnim pravilima ¦ 8 × 8 z mednarodnimi pravili
+Internationales (10 × 10) ¦ Međunarodna (10 × 10) ¦ Mednarodna (10 × 10)
+8 × 8 internationales ¦ 8 × 8 međunarodna ¦ 8 × 8 mednarodna
+Anglaises (8 × 8) ¦ Engleska (8 × 8) ¦ Angleška (8 × 8)
+Internationales sur 8 × 8 (brésiliennes) ¦ Međunarodna na 8 × 8 (brazilska) ¦ Mednarodna na 8 × 8 (brazilska)
+Anglaises (8 × 8, checkers) ¦ Engleska (8 × 8, checkers) ¦ Angleška (8 × 8, checkers)
+On joue sur les cases foncées. Les pions avancent en diagonale, d’une case, vers l’autre camp. Les noirs commencent. ¦ Igra se na tamnim poljima. Kameni idu dijagonalno, jedno polje, prema drugoj strani. Crni počinju. ¦ Igra se na temnih poljih. Kamni gredo diagonalno, za eno polje, proti drugi strani. Črni začne.
+On joue sur les cases foncées. Les pions avancent en diagonale, d’une case, vers l’autre camp. Les blancs commencent. ¦ Igra se na tamnim poljima. Kameni idu dijagonalno, jedno polje, prema drugoj strani. Bijeli počinju. ¦ Igra se na temnih poljih. Kamni gredo diagonalno, za eno polje, proti drugi strani. Beli začne.
+<b>Prendre</b> : on saute par-dessus une pièce adverse qui touche la sienne, si la case derrière est libre ; on peut enchaîner plusieurs sauts (une <b>rafle</b>). <b>Prendre est obligatoire.</b> ¦ <b>Uzimanje</b>: preskače se protivnička figura koja dodiruje tvoju ako je polje iza nje slobodno; može se nadovezati više skokova (<b>višestruko uzimanje</b>). <b>Uzimanje je obvezno.</b> ¦ <b>Jemanje</b>: preskočiš nasprotnikovo figuro, ki se dotika tvoje, če je polje za njo prosto; lahko nadaljuješ z več skoki (<b>zaporedno jemanje</b>). <b>Jemanje je obvezno.</b>
+Les pions prennent <b>seulement en avant</b>. On peut choisir la prise, mais une rafle commencée se joue jusqu’au bout. ¦ Kameni uzimaju <b>samo naprijed</b>. Uzimanje se može birati, ali započeto višestruko uzimanje igra se do kraja. ¦ Kamni jemljejo <b>samo naprej</b>. Jemanje lahko izbereš, a začeto zaporedno jemanje se odigra do konca.
+Un pion qui arrive sur la dernière ligne devient <b>dame</b> (le coup s’arrête là). La dame avance et recule <b>d’une case</b>. ¦ Kamen koji stigne na posljednji red postaje <b>dama</b> (potez tu završava). Dama ide naprijed i natrag <b>za jedno polje</b>. ¦ Kamen, ki pride v zadnjo vrsto, postane <b>dama</b> (poteza se tam konča). Dama gre naprej in nazaj <b>za eno polje</b>.
+<b>Nulle</b> : la même position trois fois, ou 40 coups chacun sans prise ni pion avancé. ¦ <b>Remi</b>: ista pozicija tri puta ili 40 poteza svaki bez uzimanja i bez pomaknutog kamena. ¦ <b>Remi</b>: ista pozicija trikrat ali 40 potez vsak brez jemanja in brez premika kamna.
+Les pions prennent <b>en avant et en arrière</b>. <b>Prise majoritaire</b> : il faut choisir la rafle qui prend le plus de pièces (une dame compte comme un pion). ¦ Kameni uzimaju <b>naprijed i natrag</b>. <b>Obvezno najveće uzimanje</b>: treba odabrati višestruko uzimanje koje uzima najviše figura (dama se računa kao kamen). ¦ Kamni jemljejo <b>naprej in nazaj</b>. <b>Obvezno največje jemanje</b>: izbrati moraš zaporedno jemanje, ki vzame največ figur (dama šteje kot kamen).
+Pendant une rafle, les pièces prises restent sur le plateau jusqu’à la fin du coup : on ne peut pas sauter deux fois la même. ¦ Tijekom višestrukog uzimanja uzete figure ostaju na ploči do kraja poteza: istu se ne može preskočiti dvaput. ¦ Med zaporednim jemanjem ostanejo vzete figure na plošči do konca poteze: iste ne moreš preskočiti dvakrat.
+Un pion devient <b>dame</b> s’il <b>termine</b> son coup sur la dernière ligne (s’il ne fait qu’y passer pendant une rafle, il reste pion). ¦ Kamen postaje <b>dama</b> ako <b>završi</b> potez na posljednjem redu (ako njime samo prođe tijekom višestrukog uzimanja, ostaje kamen). ¦ Kamen postane <b>dama</b>, če <b>konča</b> potezo v zadnji vrsti (če gre skozi njo le med zaporednim jemanjem, ostane kamen).
+La <b>dame vole</b> : elle glisse d’autant de cases qu’elle veut en diagonale, prend à distance et peut s’arrêter sur n’importe quelle case libre derrière la pièce prise. ¦ <b>Dama leti</b>: klizi koliko god polja želi dijagonalno, uzima na daljinu i može stati na bilo koje slobodno polje iza uzete figure. ¦ <b>Dama leti</b>: drsi poljubno število polj diagonalno, jemlje na daljavo in se lahko ustavi na katerem koli prostem polju za vzeto figuro.
+<b>Nulle</b> : la même position trois fois, ou 25 coups chacun en ne bougeant que des dames, sans prise. ¦ <b>Remi</b>: ista pozicija tri puta ili 25 poteza svaki samo damama, bez uzimanja. ¦ <b>Remi</b>: ista pozicija trikrat ali 25 potez vsak samo z damami, brez jemanja.
+<b>On perd</b> quand on n’a plus de pièce ou plus de coup possible. ¦ <b>Gubi se</b> kad više nemaš figura ili mogućih poteza. ¦ <b>Izgubiš</b>, ko nimaš več figur ali možnih potez.
+<b>Notation</b> : les cases foncées sont numérotées de 1 (en haut à gauche) à {n} ; « 32-28 » un déplacement, « 28x19 » une prise. ¦ <b>Notacija</b>: tamna polja numerirana su od 1 (gore lijevo) do {n}; „32-28” pomak, „28x19” uzimanje. ¦ <b>Notacija</b>: temna polja so oštevilčena od 1 (zgoraj levo) do {n}; »32-28« premik, »28x19« jemanje.
+<b>Jouer</b> : touche un pion puis sa case d’arrivée (ou glisse-le). Pour une rafle à plusieurs chemins, touche les cases une à une. Clavier : flèches, Entrée. ↶ (⌘Z) défait, 💡 (H) un conseil, Échap pause. ¦ <b>Igranje</b>: dodirni kamen pa njegovo odredišno polje (ili ga povuci). Za višestruko uzimanje s više putova dodiruj polja jedno po jedno. Tipkovnica: strelice, Enter. ↶ (⌘Z) poništava, 💡 (H) savjet, Esc pauza. ¦ <b>Igranje</b>: dotakni se kamna in nato ciljnega polja (ali ga povleci). Za zaporedno jemanje z več potmi se dotikaj polj enega za drugim. Tipkovnica: puščice, Enter. ↶ (⌘Z) razveljavi, 💡 (H) nasvet, Esc premor.
+👪 Les pions portent le nom d’ancêtres ¦ 👪 Kameni nose imena predaka ¦ 👪 Kamni nosijo imena prednikov
+• Montrer les cases où le pion peut aller ¦ • Prikaži polja na koja kamen može ići ¦ • Pokaži polja, na katera lahko gre kamen
+⬇ Commence (en bas) ¦ ⬇ Počinje (dolje) ¦ ⬇ Začne (spodaj)
+⬆ En haut ¦ ⬆ Gore ¦ ⬆ Zgoraj
+Retourner le damier ¦ Okreni ploču ¦ Obrni ploščo
+Partie nulle ¦ Remi ¦ Remi
+gagné en {n} coups ¦ pobjeda, broj poteza: {n} ¦ zmaga, število potez: {n}
+{a} ({ca}) contre {b} ({cb}) ¦ {a} ({ca}) protiv {b} ({cb}) ¦ {a} ({ca}) proti {b} ({cb})
+ (case possible) ¦ (moguće polje) ¦ (možno polje)
+{name} gagne ({why}) ! ¦ {name} pobjeđuje ({why})! ¦ {name} zmaga ({why})!
+prise obligatoire ({n} pièces) ¦ obvezno uzimanje (figura: {n}) ¦ obvezno jemanje (figur: {n})
+prise obligatoire ¦ obvezno uzimanje ¦ obvezno jemanje
+Le damier ¦ Ploča za damu ¦ Plošča za damo
+La rafle continue : touche la case suivante (ou la dernière case pour revenir en arrière). ¦ Višestruko uzimanje se nastavlja: dodirni sljedeće polje (ili posljednje polje za povratak). ¦ Zaporedno jemanje se nadaljuje: dotakni se naslednjega polja (ali zadnjega polja za vrnitev).
+« ↻ Rejouer » en haut : une revanche, on change de côté. ¦ „↻ Igraj ponovno” gore: revanš, strane se mijenjaju. ¦ »↻ Igraj znova« zgoraj: revanša, strani se zamenjata.
+Touche un pion puis sa case (ou glisse-le). Clavier : flèches, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Dodirni kamen pa njegovo polje (ili ga povuci). Tipkovnica: strelice, Enter. ⌘Z poništava, H savjet, Esc pauza. ¦ Dotakni se kamna in nato njegovega polja (ali ga povleci). Tipkovnica: puščice, Enter. ⌘Z razveljavi, H nasvet, Esc premor.
+Plusieurs rafles mènent ici : touche les cases une à une. ¦ Ovamo vodi više višestrukih uzimanja: dodiruj polja jedno po jedno. ¦ Sem vodi več zaporednih jemanj: dotikaj se polj enega za drugim.
+Une prise est obligatoire (celle qui prend le plus de pièces). ¦ Uzimanje je obvezno (ono koje uzima najviše figura). ¦ Jemanje je obvezno (tisto, ki vzame največ figur).
+Une prise est obligatoire. ¦ Uzimanje je obvezno. ¦ Jemanje je obvezno.
+Ce pion ne peut pas bouger. ¦ Ovaj se kamen ne može pomaknuti. ¦ Ta kamen se ne more premakniti.
+{list} sont pris. ¦ Uzeti su: {list}. ¦ Vzeti so: {list}.
+{list} est pris. ¦ Uzet je: {list}. ¦ Vzet je: {list}.
+la dame {name} ¦ dama {name} ¦ dama {name}
+le pion {name} ¦ kamen {name} ¦ kamen {name}
+=pion ¦ kamen|kamena|kamena ¦ kamen|kamna|kamni|kamnov
+=dame ¦ dama|dame|dama ¦ dama|dami|dame|dam
+plus aucune pièce ¦ nema više nijedne figure ¦ ni več nobene figure
+plus aucun coup possible ¦ nema više mogućih poteza ¦ ni več možnih potez
+nulle : la même position trois fois ¦ remi: ista pozicija tri puta ¦ remi: ista pozicija trikrat
+Nulle : la même position trois fois ¦ Remi: ista pozicija tri puta ¦ Remi: ista pozicija trikrat
+nulle : trop de coups de dames sans prise ¦ remi: previše poteza damama bez uzimanja ¦ remi: preveč potez z damami brez jemanja
+Nulle : trop de coups de dames sans prise ¦ Remi: previše poteza damama bez uzimanja ¦ Remi: preveč potez z damami brez jemanja
+dames|pion blanc ¦ bijeli kamen ¦ beli kamen
+dames|pion noir ¦ crni kamen ¦ črni kamen
+dames|dame blanc ¦ bijela dama ¦ bela dama
+dames|dame noir ¦ crna dama ¦ črna dama
+dames|Dame ¦ Dama ¦ Dama
+dames|Pion ¦ Kamen ¦ Kamen
+DOMINOS ¦ DOMINO ¦ DOMINE
+Les dominos double-six, avec ou sans pioche : contre 1 à 3 ordinateurs, ou entre vous sur le même écran. Le comptage se fait tout seul. ¦ Domino dupla šestica, sa zalihom ili bez nje: protiv 1 do 3 računala ili međusobno na istom zaslonu. Bodovanje se radi samo. ¦ Domine dvojna šestica, z zalogo ali brez: proti 1 do 3 računalnikom ali med vami na istem zaslonu. Točke se štejejo samodejno.
+Pose un domino qui a le même nombre qu’un bout de la chaîne. Les règles complètes sont dans le « ? » de la partie. ¦ Postavi domino koji ima isti broj kao jedan kraj lanca. Potpuna pravila nalaze se u „?” igre. ¦ Položi domino, ki ima enako število kot en konec verige. Popolna pravila so v »?« igre.
+Ex : Les dominos de Mémé ¦ Npr.: Bakin domino ¦ Npr.: Babičine domine
+Avec pioche, en 100 points ¦ Sa zalihom, do 100 bodova ¦ Z zalogo, do 100 točk
+La partie la plus courante ¦ Najčešća igra ¦ Najpogostejša igra
+En 100 points ¦ Do 100 bodova ¦ Do 100 točk
+Une seule manche ¦ Samo jedna runda ¦ Samo ena runda
+Un jeu de <b>28 dominos</b>, de 0-0 (blanc-blanc) à 6-6 (double-six). À deux, chacun reçoit 7 dominos ; à trois ou quatre, 6. Le reste forme la <b>pioche</b>. ¦ Komplet od <b>28 domina</b>, od 0-0 (prazno-prazno) do 6-6 (dupla šestica). U dvoje svatko dobiva 7 domina; u troje ili četvero 6. Ostatak čini <b>zalihu</b>. ¦ Komplet <b>28 domin</b>, od 0-0 (prazno-prazno) do 6-6 (dvojna šestica). V dvoje vsak dobi 7 domin; v troje ali štirje 6. Ostanek tvori <b>zalogo</b>.
+À la première manche, celui qui a le <b>plus gros double</b> le pose pour commencer (s’il n’y a pas de double, le plus gros domino). Ensuite, c’est le gagnant de la manche d’avant qui commence. ¦ U prvoj rundi onaj koji ima <b>najveći dupli</b> postavlja ga za početak (ako nema duplih, najveći domino). Zatim počinje pobjednik prethodne runde. ¦ V prvi rundi tisti, ki ima <b>največjo dvojno</b>, jo položi za začetek (če ni dvojnih, največjo domino). Nato začne zmagovalec prejšnje runde.
+Chacun son tour, on pose un domino qui a le <b>même nombre</b> qu’un des deux bouts de la chaîne. ¦ Svatko redom postavlja domino koji ima <b>isti broj</b> kao jedan od dvaju krajeva lanca. ¦ Vsak po vrsti položi domino, ki ima <b>enako število</b> kot eden od obeh koncev verige.
+Si on ne peut pas jouer : <b>avec pioche</b>, on pioche jusqu’à pouvoir jouer (pioche vide : on passe) ; <b>sans pioche</b>, on passe (« on boude »). ¦ Ako ne možeš igrati: <b>sa zalihom</b> vučeš dok ne možeš igrati (prazna zaliha: preskačeš); <b>bez zalihe</b> preskačeš potez. ¦ Če ne moreš igrati: <b>z zalogo</b> vlečeš, dokler ne moreš igrati (prazna zaloga: izpustiš); <b>brez zaloge</b> izpustiš potezo.
+La manche s’arrête quand quelqu’un pose son dernier domino (« Domino ! »), ou quand plus personne ne peut jouer (partie <b>bloquée</b> : celui qui a le moins de points en main gagne). ¦ Runda završava kad netko postavi svoj posljednji domino („Domino!”) ili kad više nitko ne može igrati (<b>blokirana</b> igra: pobjeđuje onaj s najmanje bodova u ruci). ¦ Runda se konča, ko nekdo položi svojo zadnjo domino (»Domino!«) ali ko nihče več ne more igrati (<b>blokirana</b> igra: zmaga tisti z najmanj točkami v roki).
+<b>Comptage</b> : le gagnant de la manche marque les points (le total des points noirs) qui restent dans les mains des autres. Le premier qui atteint le score choisi gagne la partie. ¦ <b>Bodovanje</b>: pobjednik runde dobiva bodove (zbroj točkica) koji ostaju u rukama ostalih. Pobjeđuje prvi koji dosegne odabrani rezultat. ¦ <b>Točkovanje</b>: zmagovalec runde dobi točke (vsoto pik), ki ostanejo v rokah drugih. Zmaga, kdor prvi doseže izbrani rezultat.
+<b>Jouer</b> : touche un domino de ta main ; s’il va des deux côtés, touche ensuite le bout de la chaîne (◀ ou ▶). Clavier : flèches dans ta main, Entrée. ↶ (⌘Z) défait, 💡 (H) un conseil, Échap pause. ¦ <b>Igranje</b>: dodirni domino iz svoje ruke; ako pristaje na obje strane, zatim dodirni kraj lanca (◀ ili ▶). Tipkovnica: strelice u ruci, Enter. ↶ (⌘Z) poništava, 💡 (H) savjet, Esc pauza. ¦ <b>Igranje</b>: dotakni se domine v svoji roki; če ustreza na obeh straneh, se nato dotakni konca verige (◀ ali ▶). Tipkovnica: puščice v roki, Enter. ↶ (⌘Z) razveljavi, 💡 (H) nasvet, Esc premor.
+La pioche ¦ Zaliha ¦ Zaloga
+Avec pioche ¦ Sa zalihom ¦ Z zalogo
+Sans pioche (on boude) ¦ Bez zalihe (preskače se) ¦ Brez zaloge (izpustiš potezo)
+La partie se joue ¦ Igra se ¦ Igra se igra
+En une manche ¦ U jednoj rundi ¦ V eni rundi
+En {n} points ¦ Do {n} bodova ¦ Do {n} točk
+👪 Les ordinateurs portent le nom d’ancêtres ¦ 👪 Računala nose imena predaka ¦ 👪 Računalniki nosijo imena prednikov
+La partie s’arrête ici, comptée perdue. ¦ Igra tu završava i računa se kao izgubljena. ¦ Igra se tu konča in šteje kot izgubljena.
+{n} points en une manche ¦ {n} bodova u jednoj rundi ¦ {n} točk v eni rundi
+🏆 Nouveau record : ta plus grosse manche ! ¦ 🏆 Novi rekord: tvoja najveća runda! ¦ 🏆 Nov rekord: tvoja največja runda!
+Manche {n} finie ¦ Runda {n} završena ¦ Runda {n} končana
+Poser ici ¦ Postavi ovdje ¦ Položi sem
+Pose ton domino ici ¦ Postavi svoj domino ovdje ¦ Položi svojo domino sem
+{name} commence avec le double {tile} (pas de double : le plus gros domino). ¦ {name} počinje s duplim {tile} (nema duplih: najveći domino). ¦ {name} začne z dvojno {tile} (ni dvojnih: največja domina).
+{name} commence avec le double {tile}. ¦ {name} počinje s duplim {tile}. ¦ {name} začne z dvojno {tile}.
+La chaîne est vide. ¦ Lanac je prazan. ¦ Veriga je prazna.
+Poser au bout gauche ({n}) ¦ Postavi na lijevi kraj ({n}) ¦ Položi na levi konec ({n})
+Bout gauche ¦ Lijevi kraj ¦ Levi konec
+Poser au bout droit ({n}) ¦ Postavi na desni kraj ({n}) ¦ Položi na desni konec ({n})
+Bout droit ¦ Desni kraj ¦ Desni konec
+avec pioche ¦ sa zalihom ¦ z zalogo
+sans pioche ¦ bez zalihe ¦ brez zaloge
+en {n} points ¦ do {n} bodova ¦ do {n} točk
+une seule manche ¦ samo jedna runda ¦ samo ena runda
+=joueur ¦ igrač|igrača|igrača ¦ igralec|igralca|igralci|igralcev
+{name}, à toi : que les autres détournent les yeux. ¦ {name}, ti si na redu: neka ostali skrenu pogled. ¦ {name}, ti si na vrsti: drugi naj pogledajo stran.
+Je suis {name} : voir mes dominos ¦ Ja sam {name}: prikaži moje domine ¦ Sem {name}: pokaži moje domine
+🔒 Partie bloquée : {name} gagne la manche et marque {pts}. ¦ 🔒 Igra blokirana: {name} osvaja rundu i dobiva {pts}. ¦ 🔒 Igra blokirana: {name} dobi rundo in {pts}.
+🁫 Domino ! {name} gagne la manche et marque {pts}. ¦ 🁫 Domino! {name} osvaja rundu i dobiva {pts}. ¦ 🁫 Domino! {name} dobi rundo in {pts}.
+🔒 Partie bloquée : {name} gagne la manche. ¦ 🔒 Igra blokirana: {name} osvaja rundu. ¦ 🔒 Igra blokirana: {name} dobi rundo.
+🁫 Domino ! {name} gagne la manche. ¦ 🁫 Domino! {name} osvaja rundu. ¦ 🁫 Domino! {name} dobi rundo.
+🔒 Partie bloquée, égalité : personne ne marque. ¦ 🔒 Igra blokirana, neriješeno: nitko ne dobiva bodove. ¦ 🔒 Igra blokirana, neodločeno: nihče ne dobi točk.
+Joueur ¦ Igrač ¦ Igralec
+En main ¦ U ruci ¦ V roki
+{name} gagne la partie avec {pts} ! ¦ {name} pobjeđuje u igri s {pts}! ¦ {name} zmaga v igri s {pts}!
+Égalité. ¦ Neriješeno. ¦ Neodločeno.
+« ↻ Rejouer » en haut : une nouvelle partie. ¦ „↻ Igraj ponovno” gore: nova igra. ¦ »↻ Igraj znova« zgoraj: nova igra.
+Manche suivante ¦ Sljedeća runda ¦ Naslednja runda
+Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne. ¦ Ovaj domino pristaje na obje strane: dodirni ◀ ili ▶ na lancu. ¦ Ta domina ustreza na obeh straneh: dotakni se ◀ ali ▶ na verigi.
+À toi, {name} : pose un domino. ¦ Ti si na redu, {name}: postavi domino. ¦ Ti si na vrsti, {name}: položi domino.
+Tu ne peux pas jouer : pioche. ¦ Ne možeš igrati: vuci. ¦ Ne moreš igrati: vleci.
+Tu ne peux pas jouer : passe ton tour. ¦ Ne možeš igrati: preskoči potez. ¦ Ne moreš igrati: izpusti potezo.
+{name} réfléchit… ¦ {name} razmišlja… ¦ {name} razmišlja…
+Pioche : {what} ¦ Zaliha: {what} ¦ Zaloga: {what}
+Sans pioche ¦ Bez zalihe ¦ Brez zaloge
+=domino ¦ domino|domina|domina ¦ domina|domini|domine|domin
+Les dominos de {name} ¦ Domine igrača {name} ¦ Domine igralca {name}
+Tes dominos ¦ Tvoje domine ¦ Tvoje domine
+{pts} en main ¦ {pts} u ruci ¦ {pts} v roki
+Ta main ¦ Tvoja ruka ¦ Tvoja roka
+Domino {tile}, jouable ¦ Domino {tile}, može se igrati ¦ Domina {tile}, igrljiva
+Domino {tile} ¦ Domino {tile} ¦ Domina {tile}
+Piocher ¦ Vuci ¦ Vleci
+Passer mon tour ¦ Preskoči potez ¦ Izpusti potezo
+Manche finie ¦ Runda završena ¦ Runda končana
+Le score (en {n}) ¦ Rezultat (do {n}) ¦ Rezultat (do {n})
+Le score ¦ Rezultat ¦ Rezultat
+Touche un domino jouable (encadré), puis ◀ ou ▶ s’il va des deux côtés. Clavier : ← → dans ta main, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Dodirni domino koji se može igrati (uokviren), zatim ◀ ili ▶ ako pristaje na obje strane. Tipkovnica: ← → u ruci, Enter. ⌘Z poništava, H savjet, Esc pauza. ¦ Dotakni se domine, ki jo lahko igraš (uokvirjena), nato ◀ ali ▶, če ustreza na obeh straneh. Tipkovnica: ← → v roki, Enter. ⌘Z razveljavi, H nasvet, Esc premor.
+Ce domino ne va sur aucun bout de la chaîne. ¦ Ovaj domino ne pristaje ni na jedan kraj lanca. ¦ Ta domina ne ustreza nobenemu koncu verige.
+YAMS ¦ YAMS ¦ YAMS
+Yahtzee ¦ Yahtzee ¦ Yahtzee
+Le Yams (Yahtzee) : 5 dés, 3 lancers et la feuille de marque complète avec la prime. Seul, à plusieurs sur le même écran ou contre l’ordinateur. ¦ Yams (Yahtzee): 5 kockica, 3 bacanja i potpuni bodovni list s bonusom. Sam, s više igrača na istom zaslonu ili protiv računala. ¦ Yams (Yahtzee): 5 kock, 3 meti in popoln točkovni list z nagrado. Sam, z več igralci na istem zaslonu ali proti računalniku.
+Lance, garde les dés qui t’intéressent, relance deux fois au plus, puis remplis une case. Les règles complètes sont dans le « ? » de la partie. ¦ Baci, zadrži kockice koje te zanimaju, ponovno baci najviše dvaput, zatim ispuni polje. Potpuna pravila nalaze se u „?” igre. ¦ Vrzi, obdrži kocke, ki te zanimajo, vrzi znova največ dvakrat, nato izpolni polje. Popolna pravila so v »?« igre.
+Ex : Le Yams de Noël ¦ Npr.: Božićni Yams ¦ Npr.: Božični Yams
+La feuille ¦ Bodovni list ¦ Točkovni list
+Yams à la française ¦ Yams na francuski način ¦ Yams po francosko
+Brelan et carré : les dés pareils ¦ Tris i poker: iste kockice ¦ Tris in poker: enake kocke
+Yahtzee (américain) ¦ Yahtzee (američki) ¦ Yahtzee (ameriški)
+Brelan et carré : la somme des 5 dés, joker ¦ Tris i poker: zbroj 5 kockica, džoker ¦ Tris in poker: vsota 5 kock, džoker
+yams|As (les 1) ¦ Jedinice (1) ¦ Enice (1)
+yams|Les 2 ¦ Dvojke ¦ Dvojke
+yams|Les 3 ¦ Trojke ¦ Trojke
+yams|Les 4 ¦ Četvorke ¦ Štirice
+yams|Les 5 ¦ Petice ¦ Petice
+yams|Les 6 ¦ Šestice ¦ Šestice
+yams|Brelan ¦ Tris ¦ Tris
+yams|Carré ¦ Poker ¦ Poker
+yams|Full ¦ Full ¦ Full house
+yams|Petite suite ¦ Mala skala ¦ Mala lestvica
+yams|Grande suite ¦ Velika skala ¦ Velika lestvica
+yams|Yams ¦ Yams ¦ Yams
+yams|Chance ¦ Šansa ¦ Šansa
+La somme des 1 ¦ Zbroj jedinica ¦ Vsota enic
+La somme des 2 ¦ Zbroj dvojki ¦ Vsota dvojk
+La somme des 3 ¦ Zbroj trojki ¦ Vsota trojk
+La somme des 4 ¦ Zbroj četvorki ¦ Vsota štiric
+La somme des 5 ¦ Zbroj petica ¦ Vsota petic
+La somme des 6 ¦ Zbroj šestica ¦ Vsota šestic
+3 dés pareils : 3 × leur valeur ¦ 3 iste kockice: 3 × njihova vrijednost ¦ 3 enake kocke: 3 × njihova vrednost
+4 dés pareils : 4 × leur valeur ¦ 4 iste kockice: 4 × njihova vrijednost ¦ 4 enake kocke: 4 × njihova vrednost
+3 pareils + 2 pareils : 25 ¦ 3 iste + 2 iste: 25 ¦ 3 enake + 2 enaki: 25
+4 dés qui se suivent : 30 ¦ 4 uzastopne kockice: 30 ¦ 4 zaporedne kocke: 30
+5 dés qui se suivent : 40 ¦ 5 uzastopnih kockica: 40 ¦ 5 zaporednih kock: 40
+5 dés pareils : 50 ¦ 5 istih kockica: 50 ¦ 5 enakih kock: 50
+La somme des 5 dés ¦ Zbroj 5 kockica ¦ Vsota 5 kock
+3 dés pareils : la somme des 5 dés ¦ 3 iste kockice: zbroj 5 kockica ¦ 3 enake kocke: vsota 5 kock
+4 dés pareils : la somme des 5 dés ¦ 4 iste kockice: zbroj 5 kockica ¦ 4 enake kocke: vsota 5 kock
+5 dés pareils : 50 (un autre : 100 de prime) ¦ 5 istih kockica: 50 (svaki sljedeći: 100 bonusa) ¦ 5 enakih kock: 50 (vsak naslednji: 100 nagrade)
+Chacun son tour, on lance <b>5 dés</b>. On peut relancer <b>deux fois</b> : avant chaque relance, on garde les dés qu’on veut (touche un dé pour le garder, il passe en bleu). ¦ Svatko redom baca <b>5 kockica</b>. Može se ponovno baciti <b>dvaput</b>: prije svakog ponovnog bacanja zadržavaš kockice koje želiš (dodirni kockicu da je zadržiš, postaje plava). ¦ Vsak po vrsti vrže <b>5 kock</b>. Znova lahko vržeš <b>dvakrat</b>: pred vsakim ponovnim metom obdržiš kocke, ki jih želiš (dotakni se kocke, da jo obdržiš, postane modra).
+Après le dernier lancer (ou avant, si on est content), on <b>inscrit son résultat dans une case libre</b> de sa colonne. Chaque case ne sert qu’une fois ; si rien ne va, on met 0 dans une case. La partie finit quand les 13 cases sont remplies : le plus gros total gagne. ¦ Nakon posljednjeg bacanja (ili prije, ako si zadovoljan/zadovoljna) <b>upisuješ rezultat u slobodno polje</b> svog stupca. Svako se polje koristi samo jednom; ako ništa ne odgovara, upisuješ 0 u jedno polje. Igra završava kad je svih 13 polja ispunjeno: pobjeđuje najveći zbroj. ¦ Po zadnjem metu (ali prej, če si zadovoljen/zadovoljna) <b>vpišeš rezultat v prosto polje</b> svojega stolpca. Vsako polje se uporabi le enkrat; če nič ne ustreza, vpišeš 0 v eno polje. Igra se konča, ko je vseh 13 polj izpolnjenih: zmaga največji seštevek.
+<b>Prime</b> : si les cases du haut (1 à 6) font <b>63 points ou plus</b> (par exemple trois dés de chaque chiffre), on gagne <b>35 points</b> de plus. ¦ <b>Bonus</b>: ako gornja polja (1 do 6) daju <b>63 boda ili više</b> (na primjer tri kockice svakog broja), dobivaš još <b>35 bodova</b>. ¦ <b>Nagrada</b>: če zgornja polja (1 do 6) dajo <b>63 točk ali več</b> (na primer tri kocke vsake številke), dobiš še <b>35 točk</b>.
+<b>Yahtzee de plus</b> : si la case Yams contient déjà 50, chaque nouveau Yahtzee rapporte 100 points de prime ; il doit aller dans la case du haut de son chiffre si elle est libre, sinon il peut servir de Full, de Petite ou de Grande suite au maximum (« joker »). ¦ <b>Dodatni Yahtzee</b>: ako polje Yams već sadrži 50, svaki novi Yahtzee donosi 100 bodova bonusa; mora ići u gornje polje svog broja ako je slobodno, inače može najviše poslužiti kao Full, Mala ili Velika skala („džoker”). ¦ <b>Dodatni Yahtzee</b>: če polje Yams že vsebuje 50, vsak nov Yahtzee prinese 100 točk nagrade; iti mora v zgornje polje svoje številke, če je prosto, sicer lahko največ služi kot Full house, Mala ali Velika lestvica (»džoker«).
+<b>Jouer</b> : « 🎲 Lancer » (ou la touche L), touche les dés à garder (ou les touches 1 à 5), puis touche une case de ta colonne. Clavier : flèches dans la feuille, Entrée. ↶ (⌘Z) défait la dernière case remplie, 💡 (H) un conseil, Échap pause. ¦ <b>Igranje</b>: „🎲 Baci” (ili tipka L), dodirni kockice koje zadržavaš (ili tipke 1 do 5), zatim dodirni polje u svom stupcu. Tipkovnica: strelice na listu, Enter. ↶ (⌘Z) poništava posljednje ispunjeno polje, 💡 (H) savjet, Esc pauza. ¦ <b>Igranje</b>: »🎲 Vrzi« (ali tipka L), dotakni se kock, ki jih obdržiš (ali tipke 1 do 5), nato se dotakni polja v svojem stolpcu. Tipkovnica: puščice na listu, Enter. ↶ (⌘Z) razveljavi zadnje izpolnjeno polje, 💡 (H) nasvet, Esc premor.
+La feuille de marque ¦ Bodovni list ¦ Točkovni list
+Française (Yams) ¦ Francuski (Yams) ¦ Francoski (Yams)
+Américaine (Yahtzee) ¦ Američki (Yahtzee) ¦ Ameriški (Yahtzee)
+(+ {n} de prime Yahtzee !) ¦ (+ {n} bonusa za Yahtzee!) ¦ (+ {n} nagrade za Yahtzee!)
+Tour {n} sur 13 ¦ Krug {n} od 13 ¦ Krog {n} od 13
+{name} gagne ({n}) ¦ {name} pobjeđuje ({n}) ¦ {name} zmaga ({n})
+Égalité ({n}) ¦ Neriješeno ({n}) ¦ Neodločeno ({n})
+{n} points ({name}) ¦ Bodovi: {n} ({name}) ¦ Točke: {n} ({name})
+🏆 Nouveau record : {n} points ! ¦ 🏆 Novi rekord: {n} bodova! ¦ 🏆 Nov rekord: {n} točk!
+Lance les dés pour commencer ton tour. ¦ Baci kockice da započneš svoj krug. ¦ Vrzi kocke, da začneš svoj krog.
+Garde tout : mets-le dans « {box} » ({pts}). ¦ Zadrži sve: upiši u „{box}” ({pts}). ¦ Obdrži vse: vpiši v »{box}« ({pts}).
+Garde {dice} et relance le reste. ¦ Zadrži {dice} i ponovno baci ostale. ¦ Obdrži {dice} in znova vrzi ostale.
+Relance tous les dés. ¦ Ponovno baci sve kockice. ¦ Znova vrzi vse kocke.
+Mets-le dans « {box} » ({pts}). ¦ Upiši u „{box}” ({pts}). ¦ Vpiši v »{box}« ({pts}).
+Total du haut ¦ Zbroj gore ¦ Seštevek zgoraj
+Prime (63 → 35) ¦ Bonus (63 → 35) ¦ Nagrada (63 → 35)
+il manque {n} ¦ nedostaje {n} ¦ manjka {n}
+Prime Yahtzee ¦ Bonus za Yahtzee ¦ Nagrada za Yahtzee
+Dé {i} : {v} ¦ Kockica {i}: {v} ¦ Kocka {i}: {v}
+Dé {i} : {v}, gardé ¦ Kockica {i}: {v}, zadržana ¦ Kocka {i}: {v}, obdržana
+gardé ¦ zadržana ¦ obdržana
+{name} gagne avec {pts} ! ¦ {name} pobjeđuje s {pts}! ¦ {name} zmaga s {pts}!
+Égalité à {pts} ! ¦ Neriješeno s {pts}! ¦ Neodločeno s {pts}!
+{name} : garde des dés et relance ({n} encore), ou remplis une case. ¦ {name}: zadrži kockice i ponovno baci (još {n}) ili ispuni polje. ¦ {name}: obdrži kocke in vrzi znova (še {n}) ali izpolni polje.
+{name} : remplis une case de ta colonne. ¦ {name}: ispuni polje u svom stupcu. ¦ {name}: izpolni polje v svojem stolpcu.
+À {name} : lance les dés. ¦ Na redu je {name}: baci kockice. ¦ Na vrsti je {name}: vrzi kocke.
+{name} joue… ¦ {name} igra… ¦ {name} igra…
+Les dés ¦ Kockice ¦ Kocke
+Relancer ¦ Baci ponovno ¦ Vrzi znova
+Lancer ¦ Baci ¦ Vrzi
+=lancer ¦ bacanje|bacanja|bacanja ¦ met|meta|meti|metov
+=lancer restant ¦ preostalo bacanje|preostala bacanja|preostalih bacanja ¦ preostali met|preostala meta|preostali meti|preostalih metov
+=partie gagnée ¦ dobivena igra|dobivene igre|dobivenih igara ¦ dobljena igra|dobljeni igri|dobljene igre|dobljenih iger
+« ↻ Rejouer » en haut : une nouvelle partie, le compte des victoires est gardé. ¦ „↻ Igraj ponovno” gore: nova igra, broj pobjeda ostaje sačuvan. ¦ »↻ Igraj znova« zgoraj: nova igra, število zmag se ohrani.
+« 🎲 Lancer » (L), touche les dés à garder (1 à 5), puis une case de ta colonne. ⌘Z défait la dernière case, H un conseil, Échap pause. ¦ „🎲 Baci” (L), dodirni kockice koje zadržavaš (1 do 5), zatim polje u svom stupcu. ⌘Z poništava posljednje polje, H savjet, Esc pauza. ¦ »🎲 Vrzi« (L), dotakni se kock, ki jih obdržiš (1 do 5), nato polja v svojem stolpcu. ⌘Z razveljavi zadnje polje, H nasvet, Esc premor.
+Soif ¦ Žeđ ¦ Žeja
+Faim ¦ Glad ¦ Lakota
+Sommeil ¦ San ¦ Spanje
+Hygiène ¦ Higijena ¦ Higiena
+Toilettes ¦ Zahod ¦ Stranišče
+Eau potable ¦ Pitka voda ¦ Pitna voda
+Eau de pluie (à filtrer) ¦ Kišnica (treba je filtrirati) ¦ Deževnica (treba jo je filtrirati)
+Plantes ¦ Biljke ¦ Rastline
+Nourriture ¦ Hrana ¦ Hrana
+rations ¦ obroci ¦ obroki
+Essence ¦ Benzin ¦ Bencin
+Clous et vis ¦ Čavli i vijci ¦ Žeblji in vijaki
+Corde ¦ Uže ¦ Vrv
+Colle ¦ Ljepilo ¦ Lepilo
+Plastique ¦ Plastika ¦ Plastika
+Caoutchouc ¦ Guma ¦ Guma
+Fil de cuivre ¦ Bakrena žica ¦ Bakrena žica
+Composants électroniques ¦ Elektroničke komponente ¦ Elektronske komponente
+Piles et batteries ¦ Baterije i akumulatori ¦ Baterije in akumulatorji
+Charbon ¦ Ugljen ¦ Premog
+Fil à tisser ¦ Pređa za tkanje ¦ Preja za tkanje
+Blé ¦ Pšenica ¦ Pšenica
+Farine ¦ Brašno ¦ Moka
+Vêtements chauds ¦ Topla odjeća ¦ Topla oblačila
+Grille-pain cassé ¦ Pokvaren toster ¦ Pokvarjen opekač kruha
+Vieille radio en panne ¦ Stari pokvareni radio ¦ Star pokvarjen radio
+Télévision cassée ¦ Pokvaren televizor ¦ Pokvarjen televizor
+Ordinateur hors d’usage ¦ Neupotrebljivo računalo ¦ Neuporaben računalnik
+Vieux téléphone ¦ Stari telefon ¦ Star telefon
+Aspirateur ¦ Usisavač ¦ Sesalnik
+Rouleau de câbles abîmés ¦ Kolut oštećenih kabela ¦ Kolut poškodovanih kablov
+Batterie de voiture usée ¦ Istrošeni auto-akumulator ¦ Izrabljen avtomobilski akumulator
+Vélo rouillé ¦ Zahrđali bicikl ¦ Zarjavelo kolo
+Pneu crevé ¦ Probušena guma ¦ Preluknjana pnevmatika
+Chaise cassée ¦ Slomljena stolica ¦ Zlomljen stol
+Palette en bois ¦ Drvena paleta ¦ Lesena paleta
+Vieux matelas ¦ Stari madrac ¦ Stara vzmetnica
+Rideaux déchirés ¦ Poderane zavjese ¦ Strgane zavese
+Parapluie cassé ¦ Slomljeni kišobran ¦ Zlomljen dežnik
+Caisse de bouteilles vides ¦ Gajba praznih boca ¦ Zaboj praznih steklenic
+Bocaux ébréchés ¦ Okrhnute staklenke ¦ Okrušeni kozarci
+Jouets en plastique ¦ Plastične igračke ¦ Plastične igrače
+Casserole trouée ¦ Probušeni lonac ¦ Preluknjana kozica
+Boîtes de conserve vides ¦ Prazne konzerve ¦ Prazne konzerve
+Seau percé ¦ Probušena kanta ¦ Preluknjano vedro
+Machine à coudre bloquée ¦ Zaglavljeni šivaći stroj ¦ Zataknjen šivalni stroj
+Montre arrêtée ¦ Zaustavljeni sat ¦ Ustavljena ura
+Réveil cassé ¦ Pokvarena budilica ¦ Pokvarjena budilka
+Tuyau d’arrosage fendu ¦ Napuknuto crijevo za zalijevanje ¦ Razpokana cev za zalivanje
+Filet de pêche emmêlé ¦ Zapetljana ribarska mreža ¦ Zapletena ribiška mreža
+Tuiles et gravats ¦ Crijep i šuta ¦ Strešniki in ruševine
+Vieux cartable ¦ Stara školska torba ¦ Stara šolska torba
+Pots de colle à moitié secs ¦ Napola osušene posude ljepila ¦ Napol posušeni lončki lepila
+Boîte de vis mélangées ¦ Kutija izmiješanih vijaka ¦ Škatla pomešanih vijakov
+Barbecue rouillé ¦ Zahrđali roštilj ¦ Zarjavel žar
+Réfrigérateur mort ¦ Mrtvi hladnjak ¦ Mrtev hladilnik
+Sèche-cheveux grillé ¦ Pregorjelo sušilo za kosu ¦ Pregorel sušilnik za lase
+Guitare sans manche ¦ Gitara bez vrata ¦ Kitara brez vratu
+Panneau de signalisation ¦ Prometni znak ¦ Prometni znak
+Fenêtre arrachée ¦ Iščupani prozor ¦ Iztrgano okno
+Tonneau défoncé ¦ Razbijena bačva ¦ Razbit sod
+Rouet cassé ¦ Slomljeni kolovrat ¦ Zlomljen kolovrat
+Chaudron percé ¦ Probušeni kotao ¦ Preluknjan kotel
+Lanterne brisée ¦ Razbijena svjetiljka ¦ Razbita svetilka
+Vieux sabots ¦ Stare klompe ¦ Stare cokle
+Roue de charrette ¦ Kotač kola ¦ Kolo voza
+Harnais usé ¦ Istrošena orma ¦ Izrabljena konjska oprema
+Radio ¦ Radio ¦ Radio
+Parler avec ceux qui sont partis en ville (il faut de l’électricité). ¦ Razgovaraj s onima koji su otišli u grad (potrebna je struja). ¦ Pogovarjaj se s tistimi, ki so odšli v mesto (potrebna je elektrika).
+Fait l’électricité avec l’essence (¼ L par heure). ¦ Proizvodi struju od benzina (¼ L na sat). ¦ Proizvaja elektriko iz bencina (¼ L na uro).
+On y construit les objets dont on a le plan (il faut de l’électricité). ¦ Ovdje se izrađuju predmeti za koje imaš nacrt (potrebna je struja). ¦ Tu se izdelujejo predmeti, za katere imaš načrt (potrebna je elektrika).
+Le crieur et la gazette ¦ Telal i novine ¦ Klicar in časopis
+Un gamin du quartier porte les nouvelles de ceux qui sont dehors ; le crieur annonce le marché. ¦ Dječak iz susjedstva donosi vijesti od onih koji su vani; telal najavljuje tržnicu. ¦ Deček iz soseske prinaša novice od tistih, ki so zunaj; klicar oznanja tržnico.
+La cheminée ¦ Kamin ¦ Kamin
+Elle chauffe l’abri l’hiver (du bois) et on y cuit les plats. On s’éclaire à la chandelle. ¦ Zimi grije sklonište (drva) i na njemu se kuha. Svijetli se svijećom. ¦ Pozimi greje zaklonišče (drva) in na njem se kuha. Svetimo si s svečo.
+Sans toilettes, on se soulage dans un coin : l’hygiène en prend un coup. ¦ Bez zahoda olakšava se u kutu: higijena trpi. ¦ Brez stranišča se olajšaš v kotu: higiena trpi.
+Une douche : 3 L d’eau et de l’électricité pour la pompe. ¦ Tuš: 3 L vode i struja za pumpu. ¦ Prha: 3 L vode in elektrika za črpalko.
++30 rations de place. ¦ +30 obroka mjesta. ¦ +30 obrokov prostora.
+On dort deux fois mieux dans un lit (un dormeur par lit). ¦ U krevetu se spava dvostruko bolje (jedan spavač po krevetu). ¦ V postelji se spi dvakrat bolje (en spavec na posteljo).
+Étagères ¦ Police ¦ Police
++10 de place pour chaque réserve. ¦ +10 mjesta za svaku zalihu. ¦ +10 prostora za vsako zalogo.
+Stockage ¦ Skladište ¦ Skladišče
++25 de place pour chaque réserve. ¦ +25 mjesta za svaku zalihu. ¦ +25 prostora za vsako zalogo.
+Cuve d’eau de pluie ¦ Spremnik za kišnicu ¦ Rezervoar za deževnico
++30 L de place pour l’eau de pluie ; quand il pleut, elle se remplit toute seule (+2 L par heure). À passer au filtre avant de la boire. ¦ +30 L mjesta za kišnicu; kad pada kiša, sam se puni (+2 L na sat). Treba je profiltrirati prije pijenja. ¦ +30 L prostora za deževnico; ko dežuje, se napolni sam (+2 L na uro). Pred pitjem jo je treba prefiltrirati.
+Citerne ¦ Cisterna ¦ Cisterna
++60 L d’eau de place. ¦ +60 L mjesta za vodu. ¦ +60 L prostora za vodo.
+Filtre à eau ¦ Filtar za vodu ¦ Filter za vodo
+Sable, charbon de bois et tissu : rend l’eau de pluie potable (3 L par heure). Il faut 1 tissu tous les 30 L pour le nettoyer. ¦ Pijesak, drveni ugljen i tkanina: kišnicu čini pitkom (3 L na sat). Za čišćenje treba 1 tkanina na svakih 30 L. ¦ Pesek, oglje in blago: deževnico naredi pitno (3 L na uro). Za čiščenje je potrebno 1 blago na vsakih 30 L.
+Quand on n’a rien à faire, on joue : le moral remonte. ¦ Kad nema posla, igra se: raspoloženje raste. ¦ Ko ni dela, se igramo: razpoloženje se dvigne.
+Porte renforcée ¦ Ojačana vrata ¦ Ojačana vrata
+Les pillards ont bien plus de mal à entrer. ¦ Pljačkašima je mnogo teže ući. ¦ Roparji veliko težje vstopijo.
+Pièges dans l’entrée ¦ Zamke na ulazu ¦ Pasti na vhodu
+Des surprises pour qui force la trappe. ¦ Iznenađenja za onoga tko provali kroz otvor. ¦ Presenečenja za tistega, ki vlomi skozi loputo.
+L’hiver, il chauffe le bunker (1 bois toutes les 4 heures). Sans lui, on a froid : on dort mal et le moral baisse. ¦ Zimi grije bunker (1 drvo svaka 4 sata). Bez njega je hladno: loše se spava i raspoloženje pada. ¦ Pozimi greje bunker (1 poleno vsake 4 ure). Brez njega je mraz: slabo se spi in razpoloženje pade.
+Dynamo à pédales ¦ Dinamo na pedale ¦ Dinamo na pedala
+Quelqu’un pédale (travail « Pédaler ») : de l’électricité sans essence, mais on se fatigue. ¦ Netko okreće pedale (posao „Okretanje pedala”): struja bez benzina, ali se umara. ¦ Nekdo poganja pedala (delo »Poganjanje pedal«): elektrika brez bencina, a utrudi se.
+Pour accueillir un bébé (sans berceau, pas de naissance au bunker). ¦ Za prihvat bebe (bez kolijevke nema rođenja u bunkeru). ¦ Za sprejem dojenčka (brez zibelke ni rojstva v bunkerju).
+Tourne-disque ¦ Gramofon ¦ Gramofon
+De la musique (il faut de l’électricité) : le moral remonte deux fois plus vite qu’avec les jeux. ¦ Glazba (potrebna je struja): raspoloženje raste dvostruko brže nego s igrama. ¦ Glasba (potrebna je elektrika): razpoloženje se dviga dvakrat hitreje kot z igrami.
+Panneau solaire ¦ Solarna ploča ¦ Sončna plošča
+De l’électricité le jour, quand il ne pleut pas. ¦ Struja danju, kad ne pada kiša. ¦ Elektrika podnevi, ko ne dežuje.
+Petite éolienne ¦ Mala vjetroelektrana ¦ Majhna vetrnica
+De l’électricité quand il y a du vent. ¦ Struja kad puše vjetar. ¦ Elektrika, ko piha veter.
+Récupérateur de pluie ¦ Sakupljač kišnice ¦ Zbiralnik deževnice
+La pluie remplit l’eau trois fois plus vite (bidons du toit et cuves). ¦ Kiša puni vodu tri puta brže (bačve na krovu i spremnici). ¦ Dež napolni vodo trikrat hitreje (posode na strehi in rezervoarji).
+Potager sous lampe ¦ Vrt pod lampom ¦ Vrt pod svetilko
+Une ration toutes les 8 h (deux avec un bon jardinier), avec 1 L d’eau et de l’électricité ; et des plantes pour les remèdes. ¦ Jedan obrok svakih 8 h (dva s dobrim vrtlarom), uz 1 L vode i struju; i biljke za lijekove. ¦ En obrok vsakih 8 h (dva z dobrim vrtnarjem), z 1 L vode in elektriko; in rastline za zdravila.
+Infirmerie ¦ Ambulanta ¦ Ambulanta
+La santé remonte deux fois plus vite. ¦ Zdravlje raste dvostruko brže. ¦ Zdravje se dviga dvakrat hitreje.
+Groupe économe ¦ Štedljivi agregat ¦ Varčen agregat
+L’électricité coûte moitié moins d’essence. ¦ Struja troši upola manje benzina. ¦ Elektrika porabi pol manj bencina.
+Pour démonter le bric-à-brac : deux fois plus vite, et sans abîmer les pièces (un composant de plus, parfois). ¦ Za rastavljanje starudije: dvostruko brže i bez oštećenja dijelova (ponekad jedna komponenta više). ¦ Za razstavljanje krame: dvakrat hitreje in brez poškodb delov (včasih ena komponenta več).
+Débarras ¦ Spremište ¦ Shramba
++20 places pour le bric-à-brac à démonter. ¦ +20 mjesta za starudiju za rastavljanje. ¦ +20 mest za kramo za razstavljanje.
+Boîtes à composants ¦ Kutije za komponente ¦ Škatle za komponente
+De la place en plus pour tous les composants. ¦ Dodatno mjesto za sve komponente. ¦ Dodaten prostor za vse komponente.
+Barricade ¦ Barikada ¦ Barikada
+Des planches clouées en travers de l’entrée. ¦ Daske zakucane poprijeko preko ulaza. ¦ Deske, pribite počez čez vhod.
+Une toilette rapide de temps en temps : l’hygiène baisse moins vite (et un peu d’eau de pluie). ¦ Brzo pranje s vremena na vrijeme: higijena pada sporije (i malo kišnice). ¦ Hitro umivanje od časa do časa: higiena pada počasneje (in malo deževnice).
+Coin lecture ¦ Kutak za čitanje ¦ Bralni kotiček
+Des livres et un fauteuil : le moral remonte, sans électricité. ¦ Knjige i naslonjač: raspoloženje raste, bez struje. ¦ Knjige in naslanjač: razpoloženje se dvigne, brez elektrike.
+L’arbre de famille au mur ¦ Obiteljsko stablo na zidu ¦ Družinsko drevo na steni
+L’arbre peint au mur, avec les noms de tous : le moral s’use moins vite. ¦ Stablo naslikano na zidu, s imenima svih: raspoloženje se sporije troši. ¦ Drevo, naslikano na steni, z imeni vseh: razpoloženje se počasneje izrablja.
+Bac à compost ¦ Kompostište ¦ Kompostnik
+Les épluchures deviennent du terreau : 1 plante toutes les 12 h. ¦ Ljuske postaju zemlja: 1 biljka svakih 12 h. ¦ Olupki postanejo prst: 1 rastlina vsakih 12 h.
+Guitare ¦ Gitara ¦ Kitara
+Quelqu’un joue le soir : le moral remonte presque autant qu’avec la musique, sans électricité. ¦ Netko svira navečer: raspoloženje raste gotovo kao uz glazbu, bez struje. ¦ Nekdo zvečer igra: razpoloženje se dvigne skoraj tako kot z glasbo, brez elektrike.
+On se défoule : le moral remonte. ¦ Ispuhuje se: raspoloženje raste. ¦ Sprostimo se: razpoloženje se dvigne.
+Télévision et cassettes ¦ Televizor i kazete ¦ Televizor in kasete
+Des films d’avant (il faut de l’électricité) : le moral remonte très vite. ¦ Filmovi iz prošlosti (potrebna je struja): raspoloženje raste vrlo brzo. ¦ Filmi od nekoč (potrebna je elektrika): razpoloženje se dvigne zelo hitro.
+Regarder les poissons calme tout le monde (il faut de l’électricité pour la pompe). ¦ Gledanje riba smiruje sve (potrebna je struja za pumpu). ¦ Gledanje rib pomiri vse (potrebna je elektrika za črpalko).
+Banc de batteries ¦ Baterijska banka ¦ Baterijska banka
+Garde l’électricité en réserve (8 h) : quand il n’y a ni soleil, ni vent, ni essence, le bunker reste éclairé. ¦ Čuva struju u rezervi (8 h): kad nema ni sunca, ni vjetra, ni benzina, bunker ostaje osvijetljen. ¦ Hrani elektriko v rezervi (8 h): ko ni ne sonca ne vetra ne bencina, ostane bunker osvetljen.
+Ampoules économes ¦ Štedne žarulje ¦ Varčne žarnice
+L’électricité coûte un quart d’essence en moins. ¦ Struja troši četvrtinu benzina manje. ¦ Elektrika porabi četrtino bencina manj.
+Chaudière à charbon ¦ Kotao na ugljen ¦ Kotel na premog
+L’hiver, elle chauffe avec du charbon (¼ toutes les heures) quand le poêle n’a plus de bois. ¦ Zimi grije ugljenom (¼ svaki sat) kad u peći više nema drva. ¦ Pozimi greje s premogom (¼ vsako uro), ko v peči ni več drv.
+Ventilateur du conduit ¦ Ventilator u oknu ¦ Ventilator v jašku
+L’air s’encrasse moins vite (il faut de l’électricité). ¦ Zrak se sporije zagađuje (potrebna je struja). ¦ Zrak se počasneje onesnaži (potrebna je elektrika).
+Filtre à air au charbon ¦ Zračni filtar s ugljenom ¦ Zračni filter z ogljem
+L’air reste bon bien plus longtemps (il faut de l’électricité). ¦ Zrak ostaje dobar mnogo dulje (potrebna je struja). ¦ Zrak ostane dober veliko dlje (potrebna je elektrika).
+Serre sous verrière ¦ Staklenik pod krovnim prozorom ¦ Rastlinjak pod steklenim stropom
+Sous le puits de lumière : 1 ration et 1 plante toutes les 12 h, sans électricité (de l’eau de pluie pour arroser). ¦ Ispod svjetlarnika: 1 obrok i 1 biljka svakih 12 h, bez struje (kišnica za zalijevanje). ¦ Pod svetlobnim jaškom: 1 obrok in 1 rastlina vsakih 12 h, brez elektrike (deževnica za zalivanje).
+Champignonnière ¦ Uzgajalište gljiva ¦ Gojišče gob
+Dans le noir, sur du bois mouillé : 1 ration toutes les 12 h, sans électricité. ¦ U mraku, na mokrom drvu: 1 obrok svakih 12 h, bez struje. ¦ V temi, na mokrem lesu: 1 obrok vsakih 12 h, brez elektrike.
+3 rations par jour s’il y a 1 plante pour les nourrir. ¦ 3 obroka dnevno ako ima 1 biljka za njihovu hranu. ¦ 3 obroki na dan, če je 1 rastlina za njihovo hrano.
+Des œufs : 1 ration toutes les 12 h (un peu de plantes pour le grain). ¦ Jaja: 1 obrok svakih 12 h (malo biljaka za zrnje). ¦ Jajca: 1 obrok vsakih 12 h (malo rastlin za zrnje).
+Bouilleur d’eau ¦ Kuhalo za vodu ¦ Kotel za vrenje vode
+Fait bouillir l’eau de pluie au feu de bois : 2 L d’eau potable par heure, sans tissu ni électricité. ¦ Kuha kišnicu na vatri od drva: 2 L pitke vode na sat, bez tkanine i struje. ¦ Prekuha deževnico na ognju na drva: 2 L pitne vode na uro, brez blaga in elektrike.
+Petit laboratoire ¦ Mali laboratorij ¦ Majhen laboratorij
+Des plantes, on tire des médicaments : 1 toutes les 12 h (il faut de l’électricité). ¦ Iz biljaka se dobivaju lijekovi: 1 svakih 12 h (potrebna je struja). ¦ Iz rastlin pridobivamo zdravila: 1 vsakih 12 h (potrebna je elektrika).
+Fourneau de cuisine ¦ Kuhinjski štednjak ¦ Kuhinjski štedilnik
+Une bonne cuisine fait durer les réserves : 2 rations de plus par jour avec 1 plante (deux fois plus avec un cuisinier). ¦ Dobra kuhinja produžuje zalihe: 2 obroka više dnevno uz 1 biljku (dvostruko više s kuharom). ¦ Dobra kuhinja podaljša zaloge: 2 obroka več na dan z 1 rastlino (dvakrat več s kuharjem).
+Coin couture ¦ Kutak za šivanje ¦ Šiviljski kotiček
+Des sacs plastique tressés : 1 tissu et 1 corde toutes les 12 h. ¦ Pletene plastične vrećice: 1 tkanina i 1 uže svakih 12 h. ¦ Pletene plastične vrečke: 1 blago in 1 vrv vsakih 12 h.
+Petite forge ¦ Mala kovačnica ¦ Majhna kovačnica
+Démonter va plus vite ; et avec du charbon, on forge des clous (3 toutes les 8 h). ¦ Rastavljanje ide brže; a s ugljenom se kuju čavli (3 svakih 8 h). ¦ Razstavljanje gre hitreje; s premogom pa se kujejo žeblji (3 vsakih 8 h).
+Lit d’infirmerie ¦ Bolnički krevet ¦ Bolniška postelja
+Les malades guérissent plus vite. ¦ Bolesnici brže ozdravljaju. ¦ Bolniki hitreje okrevajo.
+Périscope ¦ Periskop ¦ Periskop
+On voit qui frappe à la trappe avant d’ouvrir : bien plus dur de nous surprendre. ¦ Vidi se tko kuca na otvor prije otvaranja: mnogo nas je teže iznenaditi. ¦ Vidimo, kdo trka na loputo, preden odpremo: veliko težje nas je presenetiti.
+Alarme de la trappe ¦ Alarm na otvoru ¦ Alarm na loputi
+Un fil tendu et une sonnerie : personne n’entre sans qu’on le sache. ¦ Napeta žica i zvono: nitko ne ulazi a da se ne zna. ¦ Napeta žica in zvonec: nihče ne vstopi, ne da bi vedeli.
+Talkies-walkies ¦ Voki-toki ¦ Voki-toki
+On entend ceux qui sont dehors même sans électricité au bunker. ¦ Čuju se oni vani čak i bez struje u bunkeru. ¦ Slišimo tiste zunaj, tudi brez elektrike v bunkerju.
+Grande carte de la ville ¦ Velika karta grada ¦ Velik zemljevid mesta
+Une fois finie : tous les lieux de la ville sont marqués, même ceux où personne n’est allé. ¦ Kad je gotova: sva mjesta u gradu su označena, čak i ona gdje nitko nije bio. ¦ Ko je dokončan: vsi kraji v mestu so označeni, tudi tisti, kamor ni šel nihče.
+Vélo réparé ¦ Popravljeni bicikl ¦ Popravljeno kolo
+On va et on revient en ville bien plus vite. ¦ Odlazi se u grad i vraća mnogo brže. ¦ V mesto gremo in se vrnemo veliko hitreje.
+On rapporte 10 de plus à chaque sortie. ¦ Pri svakom izlasku donosi se 10 više. ¦ Ob vsakem odhodu prinesemo 10 več.
+Sacs à dos cousus ¦ Sašiveni ruksaci ¦ Sešiti nahrbtniki
+Des sacs solides pour chacun : on rapporte 4 de plus à chaque sortie. ¦ Čvrste torbe za svakoga: pri svakom izlasku donosi se 4 više. ¦ Trpežne torbe za vsakogar: ob vsakem odhodu prinesemo 4 več.
+Hotte en osier ¦ Pletena košara za leđa ¦ Pleten koš za na hrbet
+Sur le dos, comme les vendangeurs : on rapporte 6 de plus. ¦ Na leđima, kao berači grožđa: donosi se 6 više. ¦ Na hrbtu, kot trgači grozdja: prinesemo 6 več.
+On rapporte 8 de plus à chaque sortie. ¦ Pri svakom izlasku donosi se 8 više. ¦ Ob vsakem odhodu prinesemo 8 več.
+Remorque de vélo ¦ Prikolica za bicikl ¦ Prikolica za kolo
+Accrochée au vélo réparé : on rapporte 15 de plus (sans vélo, elle ne sert à rien). ¦ Zakačena za popravljeni bicikl: donosi se 15 više (bez bicikla je beskorisna). ¦ Pripeta na popravljeno kolo: prinesemo 15 več (brez kolesa je neuporabna).
+Garde-manger frais ¦ Hladna smočnica ¦ Hladna shramba za živila
++50 rations et +15 plantes de place. ¦ +50 obroka i +15 biljaka mjesta. ¦ +50 obrokov in +15 rastlin prostora.
+Bidons d’essence ¦ Kanistri za benzin ¦ Kanistri za bencin
++40 L d’essence de place. ¦ +40 L mjesta za benzin. ¦ +40 L prostora za bencin.
+Pièges à rats ¦ Zamke za štakore ¦ Pasti za podgane
+Les rats et les cafards reculent : ils mangent bien moins de réserves. ¦ Štakori i žohari se povlače: jedu mnogo manje zaliha. ¦ Podgane in ščurki se umaknejo: pojedo veliko manj zalog.
+Bocaux hermétiques ¦ Hermetičke staklenke ¦ Nepredušni kozarci
+Les réserves bien fermées : les nuisibles en mangent deux fois moins. ¦ Dobro zatvorene zalihe: štetnici ih jedu upola manje. ¦ Dobro zaprte zaloge: škodljivci jih pojedo pol manj.
+Extincteur ¦ Aparat za gašenje ¦ Gasilni aparat
+Un départ de feu est éteint tout de suite (option « incendies »). ¦ Početni požar odmah se gasi (opcija „požari”). ¦ Začetni požar se takoj pogasi (možnost »požari«).
+Coin des bêtes ¦ Kutak za životinje ¦ Kotiček za živali
+Une niche, un panier, un perchoir : les animaux restent, et ça fait plaisir à tout le monde. ¦ Kućica, košara, prečka: životinje ostaju, a to sve veseli. ¦ Pasja uta, košara, gred: živali ostanejo, in to razveseli vse.
+Des fibres de plantes, on file : 2 fils toutes les 8 h (1 plante). ¦ Od biljnih vlakana prede se: 2 niti svakih 8 h (1 biljka). ¦ Iz rastlinskih vlaken predemo: 2 niti vsakih 8 h (1 rastlina).
+Du fil, on tisse : 2 tissus toutes les 12 h (3 fils). ¦ Od niti se tka: 2 tkanine svakih 12 h (3 niti). ¦ Iz niti tkemo: 2 blagi vsakih 12 h (3 niti).
+Coin du tailleur ¦ Krojački kutak ¦ Krojaški kotiček
+Des vêtements chauds (2 tissus et 1 fil par jour) : l’hiver, le froid fait bien moins de mal. ¦ Topla odjeća (2 tkanine i 1 nit dnevno): zimi hladnoća šteti mnogo manje. ¦ Topla oblačila (2 blagi in 1 nit na dan): pozimi mraz škodi veliko manj.
+Champ sous verrière ¦ Polje pod krovnim prozorom ¦ Njiva pod steklenim stropom
+Du blé sous le puits de lumière : 2 toutes les 12 h, le jour (1 L d’eau de pluie). ¦ Pšenica ispod svjetlarnika: 2 svakih 12 h, danju (1 L kišnice). ¦ Pšenica pod svetlobnim jaškom: 2 vsakih 12 h, podnevi (1 L deževnice).
+Moulin à bras ¦ Ručni mlin ¦ Ročni mlin
+Le blé devient farine : 2 toutes les 6 h. ¦ Pšenica postaje brašno: 2 svakih 6 h. ¦ Pšenica postane moka: 2 vsakih 6 h.
+Du pain : 4 rations toutes les 12 h (2 farines et un peu de bois). ¦ Kruh: 4 obroka svakih 12 h (2 brašna i malo drva). ¦ Kruh: 4 obroki vsakih 12 h (2 moki in malo drv).
+Armoire à pharmacie ¦ Ormarić s lijekovima ¦ Omarica z zdravili
++15 médicaments et +15 plantes de place. ¦ +15 lijekova i +15 biljaka mjesta. ¦ +15 zdravil in +15 rastlin prostora.
+Puits creusé ¦ Iskopani bunar ¦ Izkopan vodnjak
+L’eau de la nappe : 1 L toutes les 2 h, même sans pluie (à filtrer avant de la boire). ¦ Podzemna voda: 1 L svaka 2 h, čak i bez kiše (filtrirati prije pijenja). ¦ Podtalnica: 1 L vsaki 2 h, tudi brez dežja (pred pitjem filtrirati).
+Fumoir ¦ Pušnica ¦ Sušilnica
+On fume et on sèche ce qu’on a : 1,5 ration toutes les 12 h (1 plante, un peu de bois). ¦ Dimi se i suši što se ima: 1,5 obroka svakih 12 h (1 biljka, malo drva). ¦ Prekadimo in posušimo, kar imamo: 1,5 obroka vsakih 12 h (1 rastlina, malo drv).
+Du miel : 1 ration par jour, et de quoi soigner (le miel sur les plaies). Le bourdonnement fait du bien. ¦ Med: 1 obrok dnevno i nešto za liječenje (med na rane). Zujanje godi. ¦ Med: 1 obrok na dan in nekaj za zdravljenje (med na rane). Brenčanje dobro de.
+Pressoir à fruits ¦ Preša za voće ¦ Stiskalnica za sadje
+Du jus et de la compote : 1 ration et 1 L à boire toutes les 12 h (2 plantes). ¦ Sok i kompot: 1 obrok i 1 L za piće svakih 12 h (2 biljke). ¦ Sok in kompot: 1 obrok in 1 L pijače vsakih 12 h (2 rastlini).
+Édredons de plume ¦ Perjanice ¦ Pernice
+L’hiver, on a moins froid (comme avec des vêtements chauds), et on dort mieux. ¦ Zimi je manje hladno (kao s toplom odjećom) i bolje se spava. ¦ Pozimi je manj mraz (kot s toplimi oblačili) in bolje se spi.
+Lanternes à huile ¦ Uljne svjetiljke ¦ Oljenke
+On y voit clair même sans électricité : le moral tient mieux. ¦ Vidi se jasno i bez struje: raspoloženje se bolje drži. ¦ Vidimo jasno tudi brez elektrike: razpoloženje se bolje drži.
+Le tic-tac rassure : on dort mieux, on garde le fil des jours. ¦ Tik-tak umiruje: bolje se spava, prati se tijek dana. ¦ Tiktakanje pomirja: bolje se spi, sledimo dnevom.
+On danse dans la cave : le moral remonte plus vite qu’avec la musique du tourne-disque, sans électricité. ¦ Pleše se u podrumu: raspoloženje raste brže nego uz glazbu s gramofona, bez struje. ¦ V kleti plešemo: razpoloženje se dvigne hitreje kot z glasbo z gramofona, brez elektrike.
+Jeu d’échecs ¦ Šah ¦ Šah
+De longues parties le soir : le moral remonte, sans électricité. ¦ Duge partije navečer: raspoloženje raste, bez struje. ¦ Dolge partije zvečer: razpoloženje se dvigne, brez elektrike.
+Jardin de simples ¦ Vrt ljekovitog bilja ¦ Vrt zdravilnih zelišč
+Sauge, thym, camomille : 1 plante toutes les 12 h (un peu d’eau de pluie), pour les remèdes. ¦ Kadulja, timijan, kamilica: 1 biljka svakih 12 h (malo kišnice), za lijekove. ¦ Žajbelj, timijan, kamilica: 1 rastlina vsakih 12 h (malo deževnice), za zdravila.
+Pharmacie de grand-mère ¦ Bakina ljekarna ¦ Babičina lekarna
+Des bocaux d’onguents et de tisanes : les malades guérissent plus vite. ¦ Staklenke masti i čajeva: bolesnici brže ozdravljaju. ¦ Kozarci mazil in čajev: bolniki hitreje okrevajo.
+Gouttières ¦ Oluci ¦ Žlebovi
+Le toit renvoie l’eau vers les bidons : +1,5 L par heure quand il pleut. ¦ Krov odvodi vodu u bačve: +1,5 L na sat kad pada kiša. ¦ Streha odvaja vodo v posode: +1,5 L na uro, ko dežuje.
+Fosse piégée ¦ Jama-zamka ¦ Jama past
+Un trou couvert de branches devant la trappe : les pillards y tombent. ¦ Rupa prekrivena granama ispred otvora: pljačkaši u nju padaju. ¦ Luknja, pokrita z vejami, pred loputo: roparji padejo vanjo.
+Meurtrières et arbalète ¦ Puškarnice i samostrel ¦ Strelne line in samostrel
+On tire sans ouvrir : les pillards reculent. ¦ Puca se bez otvaranja: pljačkaši se povlače. ¦ Streljamo, ne da bi odprli: roparji se umaknejo.
+Brancard et attelles ¦ Nosila i udlage ¦ Nosila in opornice
+Les blessés sont bien installés : ils guérissent plus vite. ¦ Ranjenici su dobro smješteni: brže ozdravljaju. ¦ Ranjenci so dobro nameščeni: hitreje okrevajo.
+Boussole et carnet de route ¦ Kompas i putna bilježnica ¦ Kompas in potni zvezek
+Les raccourcis notés au fil des sorties : on va et on revient plus vite. ¦ Prečaci zapisani tijekom izlazaka: odlazi se i vraća brže. ¦ Bližnjice, zapisane med odhodi: gremo in se vrnemo hitreje.
+Traîneau ¦ Saonice ¦ Sani
+On tire la charge derrière soi : on rapporte 7 de plus à chaque sortie. ¦ Teret se vuče za sobom: pri svakom izlasku donosi se 7 više. ¦ Tovor vlečemo za seboj: ob vsakem odhodu prinesemo 7 več.
+Nasses et filets ¦ Vrše i mreže ¦ Vrše in mreže
+Posées dans le canal : 2 rations de poisson par jour. ¦ Postavljene u kanalu: 2 obroka ribe dnevno. ¦ Nastavljene v kanalu: 2 obroka rib na dan.
+Le linge propre : l’hygiène baisse moins vite. ¦ Čisto rublje: higijena pada sporije. ¦ Čisto perilo: higiena pada počasneje.
+Des pigeons voyageurs : on a des nouvelles de ceux qui sont dehors, même sans électricité. ¦ Golubovi pismonoše: stižu vijesti od onih vani, čak i bez struje. ¦ Golobi pismonoše: dobimo novice od tistih zunaj, tudi brez elektrike.
+Cave à vin ¦ Vinski podrum ¦ Vinska klet
+Un petit verre les soirs de fête : le moral tient bien mieux. ¦ Čašica u svečane večeri: raspoloženje se mnogo bolje drži. ¦ Kozarček ob prazničnih večerih: razpoloženje se veliko bolje drži.
+Four solaire ¦ Solarna pećnica ¦ Sončna peč
+Sous le puits de lumière : on cuit les plats sans bois (pour les recettes). ¦ Ispod svjetlarnika: jela se kuhaju bez drva (za recepte). ¦ Pod svetlobnim jaškom: jedi kuhamo brez drv (za recepte).
+Malle à bretelles ¦ Kovčeg s naramenicama ¦ Kovček z naramnicami
+Sur le dos de chacun, en plus du reste : +3 à porter. ¦ Na leđima svakoga, uz ostalo: +3 za nošenje. ¦ Na hrbtu vsakogar, poleg drugega: +3 za nošenje.
+Bâts et sangles ¦ Samari i remenje ¦ Tovorna sedla in jermeni
+Sur chaque âne : +5 de charge. Sans bête de bât, ils ne servent à rien. ¦ Na svakom magarcu: +5 tereta. Bez tovarne životinje beskorisni su. ¦ Na vsakem oslu: +5 tovora. Brez tovorne živali so neuporabni.
+Vélo cargo (triporteur) ¦ Teretni bicikl (tricikl) ¦ Tovorno kolo (tricikel)
+Un vélo avec une grande caisse : +14. Mauvais dans la boue et la neige. ¦ Bicikl s velikim sandukom: +14. Loš u blatu i snijegu. ¦ Kolo z velikim zabojem: +14. Slabo v blatu in snegu.
+Caddie de supermarché ¦ Kolica iz supermarketa ¦ Nakupovalni voziček
++9 sur la route ; presque rien sur les chemins, la boue ou la neige. S’use vite. ¦ +9 na cesti; gotovo ništa na putovima, u blatu ili snijegu. Brzo se troše. ¦ +9 na cesti; skoraj nič na poteh, v blatu ali snegu. Hitro se obrabi.
+Poussette renforcée ¦ Ojačana dječja kolica ¦ Ojačan otroški voziček
++6, plutôt sur la route. S’use vite. ¦ +6, uglavnom na cesti. Brzo se troše. ¦ +6, predvsem na cesti. Hitro se obrabi.
+Carriole attelée ¦ Upregnuta kola ¦ Vprežni voz
+La plus grosse charge (+25), tirée par un cheval (il faut un cheval). ¦ Najveći teret (+25), vuče ga konj (potreban je konj). ¦ Največji tovor (+25), vleče ga konj (potreben je konj).
+Barque ¦ Čamac ¦ Čoln
+Seulement sur l’eau : +20 dans les rues inondées et au bord des rivières, rien ailleurs. ¦ Samo na vodi: +20 na poplavljenim ulicama i uz rijeke, drugdje ništa. ¦ Samo na vodi: +20 na poplavljenih ulicah in ob rekah, drugje nič.
+Chariot de mine ¦ Rudarska kolica ¦ Rudniški voziček
+Une fois les rails posés vers un lieu proche (4 cases au plus) : on y va deux fois plus vite et on en rapporte 30 de plus. ¦ Kad su tračnice postavljene do obližnjeg mjesta (najviše 4 polja): ide se dvostruko brže i donosi se 30 više. ¦ Ko so tračnice položene do bližnjega kraja (največ 4 polja): tja gremo dvakrat hitreje in prinesemo 30 več.
+Petite turbine hydraulique ¦ Mala vodena turbina ¦ Majhna vodna turbina
+Quand il pleut, l’eau qui ruisselle dans le conduit fait de l’électricité. ¦ Kad pada kiša, voda koja teče kroz okno proizvodi struju. ¦ Ko dežuje, voda, ki teče po jašku, proizvaja elektriko.
+Pelle ¦ Lopata ¦ Lopata
+creuser deux fois plus vite ¦ kopati dvostruko brže ¦ kopati dvakrat hitreje
+Scie ¦ Pila ¦ Žaga
+construire plus vite ¦ graditi brže ¦ graditi hitreje
+Clé à molette ¦ Francuski ključ ¦ Francoski ključ
+obligatoire pour certains plans ¦ obavezan za neke nacrte ¦ obvezen za nekatere načrte
+Grand sac ¦ Velika torba ¦ Velika torba
+rapporter deux fois plus ¦ donijeti dvostruko više ¦ prinesti dvakrat več
+Lampe torche ¦ Džepna svjetiljka ¦ Žepna svetilka
+marcher de nuit aussi vite que de jour ¦ hodati noću jednako brzo kao danju ¦ hoditi ponoči enako hitro kot podnevi
+Supermarché ¦ Supermarket ¦ Supermarket
+Station-service ¦ Benzinska postaja ¦ Bencinska črpalka
+Quincaillerie ¦ Željezarija ¦ Železnina
+Menuiserie ¦ Stolarija ¦ Mizarstvo
+Pharmacie ¦ Ljekarna ¦ Lekarna
+Maison abandonnée ¦ Napuštena kuća ¦ Zapuščena hiša
+Décharge ¦ Odlagalište ¦ Odlagališče
+Magasin d’électroménager ¦ Trgovina kućanskih aparata ¦ Trgovina z gospodinjskimi aparati
+Droguerie ¦ Drogerija ¦ Drogerija
+Usine abandonnée ¦ Napuštena tvornica ¦ Zapuščena tovarna
+Ferme ¦ Seosko gospodarstvo ¦ Kmetija
+Gare ¦ Kolodvor ¦ Železniška postaja
+Port de pêche ¦ Ribarska luka ¦ Ribiško pristanišče
+Hôpital ¦ Bolnica ¦ Bolnišnica
+Construire ¦ Gradnja ¦ Gradnja
+Soigner ¦ Liječenje ¦ Zdravljenje
+Cultiver ¦ Uzgoj ¦ Pridelovanje
+Cuisiner ¦ Kuhanje ¦ Kuhanje
+Fouiller ¦ Pretraživanje ¦ Brskanje
+Défendre ¦ Obrana ¦ Obramba
+Raconter ¦ Pripovijedanje ¦ Pripovedovanje
+Été ¦ Ljeto ¦ Poletje
+Automne ¦ Jesen ¦ Jesen
+Hiver ¦ Zima ¦ Zima
+on construit 20 % plus vite ¦ gradi se 20 % brže ¦ gradimo 20 % hitreje
+les histoires du soir font plus de bien ¦ večernje priče više pomažu ¦ večerne zgodbe bolj pomagajo
+le moral baisse moins vite ¦ raspoloženje sporije pada ¦ razpoloženje pada počasneje
++3 tissu, et on dort mieux ¦ +3 tkanine i bolje se spava ¦ +3 blaga in bolje se spi
+les repas nourrissent davantage ¦ obroci više hrane ¦ obroki bolj nasitijo
+le moral de départ est meilleur ¦ početno raspoloženje je bolje ¦ začetno razpoloženje je boljše
+l’histoire du loup qui avait peur du noir ¦ priča o vuku koji se bojao mraka ¦ zgodba o volku, ki se je bal teme
+la légende de la dame blanche du moulin ¦ legenda o bijeloj gospi iz mlina ¦ legenda o beli gospe iz mlina
+le jour où l’oncle a vendu la vache deux fois ¦ dan kad je ujak dvaput prodao kravu ¦ dan, ko je stric dvakrat prodal kravo
+la grande crue, quand l’eau est montée jusqu’à l’église ¦ velika poplava, kad je voda došla do crkve ¦ velika poplava, ko je voda segla do cerkve
+le bal du 14 juillet où tout le monde s’est rencontré ¦ ples 14. srpnja na kojem su se svi upoznali ¦ ples 14. julija, kjer so se vsi spoznali
+la recette perdue du gâteau de la grand-mère ¦ izgubljeni recept bakina kolača ¦ izgubljeni recept babičinega kolača
+Courageux·se ¦ Hrabar/hrabra ¦ Pogumen/pogumna
+se défend mieux, se blesse moins dehors ¦ bolje se brani, manje se ozljeđuje vani ¦ se bolje brani, se zunaj manj poškoduje
+Peureux·se ¦ Plašljiv/plašljiva ¦ Plašen/plašna
+se défend moins bien, le moral chute quand on frappe à la trappe ¦ lošije se brani, raspoloženje pada kad netko kuca na otvor ¦ se slabše brani, razpoloženje pade, ko nekdo potrka na loputo
+Gourmand·e ¦ Proždrljiv/proždrljiva ¦ Požrešen/požrešna
+a faim plus vite, mais un repas lui remonte le moral ¦ brže ogladni, ali obrok mu podiže raspoloženje ¦ hitreje postane lačen, a obrok mu dvigne razpoloženje
+Bricoleur·se ¦ Majstor/majstorica ¦ Mojster/mojstrica
+construit et répare plus vite ¦ brže gradi i popravlja ¦ hitreje gradi in popravlja
+Optimiste ¦ Optimist/optimistkinja ¦ Optimist/optimistka
+le moral baisse deux fois moins vite ¦ raspoloženje pada upola sporije ¦ razpoloženje pada pol počasneje
+Ronchon·ne ¦ Gunđalo ¦ Godrnjač/godrnjavka
+le moral baisse plus vite, se fâche facilement ¦ raspoloženje brže pada, lako se naljuti ¦ razpoloženje pada hitreje, hitro se razjezi
+Gros·se dormeur·se ¦ Pospanko/pospanka ¦ Zaspanec/zaspanka
+a besoin de plus de sommeil ¦ treba više sna ¦ potrebuje več spanja
+Sociable ¦ Društven/društvena ¦ Družaben/družabna
+se fait vite des amis ¦ brzo stječe prijatelje ¦ hitro dobi prijatelje
