@@ -1,0 +1,1013 @@
+fr ¦ lt ¦ lv ¦ et
+TABLEUR · BASE ¦ SKAIČIUOKLĖ · BAZĖ ¦ IZKLĀJLAPA · DATUBĀZE ¦ TABELARVUTUS · ANDMEBAAS
+⤒ Remplir depuis l’app ¦ ⤒ Užpildyti iš programėlės ¦ ⤒ Aizpildīt no lietotnes ¦ ⤒ Täida rakendusest
+1 · Ce qu’on prend ¦ 1 · Ką imame ¦ 1 · Ko ņemam ¦ 1 · Mida võtame
+(comme l’export pour partager) ¦ (kaip eksportas dalijimuisi) ¦ (kā eksports kopīgošanai) ¦ (nagu jagamiseks eksport)
+2 · Les colonnes ¦ 2 · Stulpeliai ¦ 2 · Kolonnas ¦ 2 · Veerud
+(glisse ⠿ pour ranger) ¦ (tempk ⠿, kad sutvarkytum) ¦ (velc ⠿, lai pārkārtotu) ¦ (lohista ⠿ järjestamiseks)
+＋ Une colonne tirée des données ¦ ＋ Stulpelis iš duomenų ¦ ＋ Kolonna no datiem ¦ ＋ Veerg andmetest
+3 · Aperçu ¦ 3 · Peržiūra ¦ 3 · Priekšskatījums ¦ 3 · Eelvaade
+🔗 Tenir à jour ¦ 🔗 Nuolat atnaujinti ¦ 🔗 Uzturēt aktuālu ¦ 🔗 Hoia ajakohasena
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — eilutės keičiasi, kai keičiasi bazė (atidarant arba su ↻). Tavo dešinėje pridėti stulpeliai (formulės, pastabos) lieka tinkamoje eilutėje. ¦ — rindas mainās, kad mainās datubāze (atverot vai ar ↻). Tavas pa labi pievienotās kolonnas (formulas, piezīmes) paliek pareizajā rindā. ¦ — read muutuvad, kui andmebaas muutub (avamisel või ↻-ga). Sinu paremale lisatud veerud (valemid, märkused) jäävad õigele reale.
+Où : ¦ Kur: ¦ Kur: ¦ Kuhu:
+à la même place (remplace la plage liée) ¦ toje pačioje vietoje (pakeičia susietą sritį) ¦ tajā pašā vietā (aizstāj saistīto diapazonu) ¦ samasse kohta (asendab lingitud vahemiku)
+à partir de A1 dans une nouvelle feuille ¦ nuo A1 naujame lape ¦ no A1 jaunā lapā ¦ alates A1-st uuel lehel
+à partir de {cell} dans cette feuille ¦ nuo {cell} šiame lape ¦ no {cell} šajā lapā ¦ alates {cell}-st sellel lehel
+⤒ Remplir ¦ ⤒ Užpildyti ¦ ⤒ Aizpildīt ¦ ⤒ Täida
+Commune ¦ Komuna ¦ Komūna ¦ Kommuun
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Įrašų rodyklių dar nėra: Sąrašai → 📜 Įrašų rodyklės. ¦ Ierakstu rādītāju vēl nav: Saraksti → 📜 Ierakstu rādītāji. ¦ Kirjete registreid veel pole: Loendid → 📜 Kirjete registrid.
+Statistique ¦ Statistika ¦ Statistika ¦ Statistika
+Hommes et femmes à part ¦ Vyrai ir moterys atskirai ¦ Vīrieši un sievietes atsevišķi ¦ Mehed ja naised eraldi
+Pas encore de liste à toi : Listes → Mes listes. ¦ Savo sąrašų dar neturi: Sąrašai → Mano sąrašai. ¦ Tev vēl nav savu sarakstu: Saraksti → Mani saraksti. ¦ Sul pole veel oma loendeid: Loendid → Minu loendid.
+Hommes ¦ Vyrai ¦ Vīrieši ¦ Mehed
+Femmes ¦ Moterys ¦ Sievietes ¦ Naised
+Inconnu ¦ Nežinoma ¦ Nezināms ¦ Teadmata
+Lignée ¦ Linija ¦ Līnija ¦ Liin
+Né(e) à ¦ Gimęs (-usi) ¦ Dzimis(-usi) ¦ Sündinud
+Nés à partir de ¦ Gimę nuo ¦ Dzimuši no ¦ Sündinud alates
+Nés jusqu’à ¦ Gimę iki ¦ Dzimuši līdz ¦ Sündinud kuni
+Nés avant ¦ Gimę prieš ¦ Dzimuši pirms ¦ Sündinud enne
+Sorte ¦ Rūšis ¦ Veids ¦ Liik
+Chercher… (nom, prénom) ¦ Ieškoti… (pavardė, vardas) ¦ Meklēt… (uzvārds, vārds) ¦ Otsi… (perekonnanimi, eesnimi)
+Chercher… (nom, sorte, lieu) ¦ Ieškoti… (pavadinimas, rūšis, vieta) ¦ Meklēt… (nosaukums, veids, vieta) ¦ Otsi… (nimi, liik, koht)
+👤 personne ¦ 👤 asmuo ¦ 👤 persona ¦ 👤 isik
+📍 lieu ¦ 📍 vieta ¦ 📍 vieta ¦ 📍 koht
+📅 date d’acte ¦ 📅 dokumento data ¦ 📅 dokumenta datums ¦ 📅 dokumendi kuupäev
+nombre ¦ skaičius ¦ skaitlis ¦ arv
+Monter ¦ Aukštyn ¦ Uz augšu ¦ Üles
+Descendre ¦ Žemyn ¦ Uz leju ¦ Alla
+Retirer la colonne ¦ Pašalinti stulpelį ¦ Noņemt kolonnu ¦ Eemalda veerg
+Aucune colonne : ajoute-en une. ¦ Stulpelių nėra: pridėk bent vieną. ¦ Nav kolonnu: pievieno kādu. ¦ Veerge pole: lisa üks.
+Lecture de la base… ¦ Skaitoma bazė… ¦ Nolasa datubāzi… ¦ Loen andmebaasi…
+Lecture… ¦ Skaitoma… ¦ Nolasa… ¦ Loen…
+({shown} premières lignes sur {n}) ¦ (pirmosios {shown} eilutės iš {n}) ¦ (pirmās {shown} rindas no {n}) ¦ (esimesed {shown} rida {n}-st)
+Rien ne correspond : change les filtres. ¦ Nieko neatitinka: pakeisk filtrus. ¦ Nekas neatbilst: maini filtrus. ¦ Midagi ei vasta: muuda filtreid.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} praleista (gyvi asmenys ar konfidencialios kortelės). ¦ {n} izlaistas (dzīvas personas vai konfidenciālas kartītes). ¦ {n} kõrvale jäetud (elavad isikud või konfidentsiaalsed kaardid).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Imamos tik pirmosios {n} eilučių: patikslink filtrus. ¦ Tiek ņemtas tikai pirmās {n} rindas: precizē filtrus. ¦ Võetakse ainult esimesed {n} rida: täpsusta filtreid.
+⤒ Remplir {n} ¦ ⤒ Užpildyti {n} ¦ ⤒ Aizpildīt {n} ¦ ⤒ Täida {n}
+Toutes les colonnes sont déjà là. ¦ Visi stulpeliai jau yra. ¦ Visas kolonnas jau ir. ¦ Kõik veerud on juba olemas.
+Une colonne tirée des données ¦ Stulpelis iš duomenų ¦ Kolonna no datiem ¦ Veerg andmetest
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Šis lapas nesusietas su baze: Duomenys → „⤒ Užpildyti iš programėlės…“. ¦ Šī lapa nav sasaistīta ar datubāzi: Dati → „⤒ Aizpildīt no lietotnes…“. ¦ See leht pole andmebaasiga seotud: Andmed → „⤒ Täida rakendusest…“.
+Impossible de relire la base : {error} ¦ Nepavyko iš naujo nuskaityti bazės: {error} ¦ Neizdevās atkārtoti nolasīt datubāzi: {error} ¦ Andmebaasi uuesti lugemine ebaõnnestus: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Jau atnaujinta: bazėje niekas nepasikeitė. ¦ 🔗 Jau aktuāls: datubāzē nekas nav mainījies. ¦ 🔗 Juba ajakohane: andmebaasis pole midagi muutunud.
+{n} de plus ¦ {n} daugiau ¦ par {n} vairāk ¦ {n} rohkem
+{n} de moins ¦ {n} mažiau ¦ par {n} mazāk ¦ {n} vähem
+valeurs mises à jour ¦ reikšmės atnaujintos ¦ vērtības atjauninātas ¦ väärtused uuendatud
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 „{name}“ nuskaityta iš naujo: {what} ({lost}) ¦ 🔗 „{name}“ nolasīta atkārtoti: {what} ({lost}) ¦ 🔗 „{name}“ uuesti loetud: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 „{name}“ nuskaityta iš naujo: {what} ¦ 🔗 „{name}“ nolasīta atkārtoti: {what} ¦ 🔗 „{name}“ uuesti loetud: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Surašymo išrašas</b> · tų metų stulpeliai: ¦ <b>Tautas skaitīšanas izraksts</b> · gada kolonnas: ¦ <b>Rahvaloenduse väljavõte</b> · aasta veerud:
+Année du recensement ¦ Surašymo metai ¦ Tautas skaitīšanas gads ¦ Rahvaloenduse aasta
+📤 Envoyer vers la base… ¦ 📤 Siųsti į bazę… ¦ 📤 Sūtīt uz datubāzi… ¦ 📤 Saada andmebaasi…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Nuolat atnaujinama: <b>{what}</b> · {n} · nuskaityta {when} ¦ 🔗 Tiek uzturēta aktuāla: <b>{what}</b> · {n} · nolasīta {when} ¦ 🔗 Hoitakse ajakohasena: <b>{what}</b> · {n} · loetud {when}
+la base ¦ bazė ¦ datubāze ¦ andmebaas
+Relire depuis la base ¦ Nuskaityti iš bazės iš naujo ¦ Atkārtoti nolasīt no datubāzes ¦ Loe andmebaasist uuesti
+↻ Relire ¦ ↻ Nuskaityti iš naujo ¦ ↻ Nolasīt vēlreiz ¦ ↻ Loe uuesti
+Changer la source ou les colonnes… ¦ Keisti šaltinį ar stulpelius… ¦ Mainīt avotu vai kolonnas… ¦ Muuda allikat või veerge…
+Envoyer vers la base… ¦ Siųsti į bazę… ¦ Sūtīt uz datubāzi… ¦ Saada andmebaasi…
+Ne plus tenir à jour (garder les valeurs) ¦ Nebeatnaujinti (išlaikyti reikšmes) ¦ Vairs neuzturēt aktuālu (paturēt vērtības) ¦ Ära enam ajakohasta (jäta väärtused alles)
+« {name} » n’est plus tenue à jour ¦ „{name}“ nebeatnaujinama ¦ „{name}“ vairs netiek uzturēta aktuāla ¦ „{name}“ ei ole enam ajakohastatav
+Relevé : colonnes de {year} ¦ Išrašas: {year} m. stulpeliai ¦ Izraksts: {year}. gada kolonnas ¦ Väljavõte: aasta {year} veerud
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Peržiūros režimas: nieko negalima siųsti į bazę. ¦ Skatīšanās režīms: neko nevar sūtīt uz datubāzi. ¦ Vaatamisrežiim: andmebaasi ei saa midagi saata.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Pasirink siunčiamą lentelę (jos antraščių eilutę ir eilutes), tada bandyk dar kartą. ¦ Atlasi sūtāmo tabulu (tās virsrakstu rindu un rindas), tad mēģini vēlreiz. ¦ Vali saadetav tabel (selle päiserida ja read), siis proovi uuesti.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Siųsti į bazę — {name}, eilutės nuo {from} iki {to} ¦ 📤 Sūtīt uz datubāzi — {name}, rindas no {from} līdz {to} ¦ 📤 Saada andmebaasi — {name}, read {from} kuni {to}
+1. Les colonnes ¦ 1. Stulpeliai ¦ 1. Kolonnas ¦ 1. Veerud
+2. Voilà ce qui va entrer ¦ 2. Štai kas pateks ¦ 2. Lūk, kas tiks ievadīts ¦ 2. See läheb sisse
+3. Envoyer ¦ 3. Siųsti ¦ 3. Sūtīt ¦ 3. Saada
+Voir ce qui va entrer ¦ Žiūrėti, kas pateks ¦ Skatīt, kas tiks ievadīts ¦ Vaata, mis sisse läheb
+Ce que ça crée : ¦ Kas bus sukurta: ¦ Kas tiks izveidots: ¦ Mis luuakse:
+Colonne ¦ Stulpelis ¦ Kolonna ¦ Veerg
+Exemple ¦ Pavyzdys ¦ Piemērs ¦ Näide
+Va dans ¦ Patenka į ¦ Nonāk ¦ Läheb
+(sans titre) ¦ (be pavadinimo) ¦ (bez nosaukuma) ¦ (pealkirjata)
+Champ pour la colonne {col} ¦ Laukas stulpeliui {col} ¦ Lauks kolonnai {col} ¦ Väli veeru {col} jaoks
+Colonnes : {list} ¦ Stulpeliai: {list} ¦ Kolonnas: {list} ¦ Veerud: {list}
+aucune pour l’instant ¦ kol kas nėra ¦ pagaidām nav ¦ praegu pole
+Déjà dans la base ¦ Jau yra bazėje ¦ Jau ir datubāzē ¦ Juba andmebaasis
+Problème ¦ Problema ¦ Problēma ¦ Probleem
+Laissée de côté ¦ Praleista ¦ Izlaista ¦ Kõrvale jäetud
+📤 Créer {n} ¦ 📤 Sukurti {n} ¦ 📤 Izveidot {n} ¦ 📤 Loo {n}
+📤 Rien de nouveau ¦ 📤 Nieko naujo ¦ 📤 Nekā jauna ¦ 📤 Midagi uut pole
+📤 Créer {n} et en relier {m} ¦ 📤 Sukurti {n} ir susieti {m} ¦ 📤 Izveidot {n} un sasaistīt {m} ¦ 📤 Loo {n} ja seo {m}
+📤 Relier {m} ¦ 📤 Susieti {m} ¦ 📤 Sasaistīt {m} ¦ 📤 Seo {m}
+📤 Envoyer ¦ 📤 Siųsti ¦ 📤 Sūtīt ¦ 📤 Saada
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Pasirink bent vieną siunčiamą stulpelį (pavyzdžiui, pavardę). ¦ Izvēlies vismaz vienu sūtāmo kolonnu (piemēram, uzvārdu). ¦ Vali vähemalt üks saadetav veerg (näiteks nimi).
+Choisis au moins une colonne. ¦ Pasirink bent vieną stulpelį. ¦ Izvēlies vismaz vienu kolonnu. ¦ Vali vähemalt üks veerg.
+Donne l’année du recensement. ¦ Nurodyk surašymo metus. ¦ Norādi tautas skaitīšanas gadu. ¦ Sisesta rahvaloenduse aasta.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Reikia stulpelio pavardei (arba „Pavardė ir vardas“). ¦ Vajadzīga kolonna uzvārdam (vai „Uzvārds un vārds“). ¦ Vaja on veergu nime jaoks (või „Nimi ja eesnimi“).
+Il faut une colonne pour le nom. ¦ Reikia stulpelio pavardei. ¦ Vajadzīga kolonna uzvārdam. ¦ Vaja on veergu nime jaoks.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Pasirink stulpelį, kuriame nurodyta įvykio rūšis (Krikštas, Mirtis…). ¦ Izvēlies kolonnu, kurā norādīts notikuma veids (Kristības, Nāve…). ¦ Vali veerg, mis näitab sündmuse liiki (Ristimine, Surm…).
+Il manque la sorte d’événement. ¦ Trūksta įvykio rūšies. ¦ Trūkst notikuma veida. ¦ Sündmuse liik puudub.
+Ces lignes sont vides. ¦ Šios eilutės tuščios. ¦ Šīs rindas ir tukšas. ¦ Need read on tühjad.
+Je compare avec ta base… ¦ Lyginu su tavo baze… ¦ Salīdzinu ar tavu datubāzi… ¦ Võrdlen sinu andmebaasiga…
+Comparaison… ¦ Lyginama… ¦ Salīdzina… ¦ Võrdlen…
+Choisir la fiche de la ligne {row} ¦ Pasirinkti kortelę eilutei {row} ¦ Izvēlēties kartīti rindai {row} ¦ Vali kaart reale {row}
+choisis ▾ ¦ pasirink ▾ ¦ izvēlies ▾ ¦ vali ▾
+Relier à {name} ({meta}) ¦ Susieti su {name} ({meta}) ¦ Sasaistīt ar {name} ({meta}) ¦ Seo isikuga {name} ({meta})
+Laisser de côté ¦ Praleisti ¦ Izlaist ¦ Jäta kõrvale
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Kai kurios eilutės panašios į kelias korteles: pasirink tinkamą (kitaip jos bus praleistos). ¦ Dažas rindas līdzinās vairākām kartītēm: izvēlies pareizo (citādi tās tiks izlaistas). ¦ Mõned read sarnanevad mitme kaardiga: vali õige (muidu jäetakse need kõrvale).
+Ligne ¦ Eilutė ¦ Rinda ¦ Rida
+Ce qui va se passer ¦ Kas įvyks ¦ Kas notiks ¦ Mis juhtub
+Impossible d’envoyer : {error} ¦ Nepavyko išsiųsti: {error} ¦ Neizdevās nosūtīt: {error} ¦ Saatmine ebaõnnestus: {error}
+contient « {text} » : compté comme {n} ¦ turi „{text}“: laikoma {n} ¦ satur „{text}“: ieskaitīts kā {n} ¦ sisaldab „{text}“: arvestatud kui {n}
+contient l’erreur « {text} » : laissée vide ¦ turi klaidą „{text}“: palikta tuščia ¦ satur kļūdu „{text}“: atstāts tukšs ¦ sisaldab viga „{text}“: jäetud tühjaks
+« {text} » n’est pas un nombre : laissé vide ¦ „{text}“ nėra skaičius: palikta tuščia ¦ „{text}“ nav skaitlis: atstāts tukšs ¦ „{text}“ pole arv: jäetud tühjaks
+à trouver ¦ reikia rasti ¦ jāatrod ¦ leida
+L’éditeur de diagrammes n’est pas chargé. ¦ Schemų rengyklė neįkelta. ¦ Shēmu redaktors nav ielādēts. ¦ Diagrammiredaktor pole laaditud.
+L’éditeur de graphiques n’est pas chargé. ¦ Diagramų rengyklė neįkelta. ¦ Diagrammu redaktors nav ielādēts. ¦ Graafikuredaktor pole laaditud.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Diagrama „{name}“ pridėta į Mano diagramos (Diagramos, prietaisų skydelis…). ¦ Diagramma „{name}“ pievienota Manām diagrammām (Diagrammas, informācijas panelis…). ¦ Graafik „{name}“ lisati Minu graafikutesse (Graafikud, töölaud…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Naršyklė neleidžia čia kopijuoti: pažymėk sritį ir paspausk {key}. ¦ Pārlūks šeit neļauj kopēt: atlasi diapazonu un nospied {key}. ¦ Brauser ei luba siin kopeerida: vali vahemik ja vajuta {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Nukopijuota: lentoje (Tyrimai → 🧩 Lentos) įklijuok ({key}): tai taps ▦ Skaičiuoklės objektu su formulėmis. ¦ Nokopēts: tāfelē (Izpētes → 🧩 Tāfeles) ielīmē to ({key}): tas kļūs par ▦ Izklājlapas objektu kopā ar formulām. ¦ Kopeeritud: tahvlil (Uurimused → 🧩 Tahvlid) kleebi see ({key}): sellest saab ▦ Tabelarvutuse objekt koos valemitega.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Nukopijuota: rinkinio puslapyje spustelėk lentelės langelį ir įklijuok ({key}). ¦ Nokopēts: krājuma lapā noklikšķini uz tabulas šūnas un ielīmē ({key}). ¦ Kopeeritud: kogumiku lehel klõpsa tabeli lahtrit ja kleebi ({key}).
+La présentation n’est pas chargée. ¦ Pristatymas neįkeltas. ¦ Prezentācija nav ielādēta. ¦ Esitlus pole laaditud.
+… et {n} ¦ … ir {n} ¦ … un {n} ¦ … ja {n}
+Colonnes attendues : {list} ¦ Laukiami stulpeliai: {list} ¦ Gaidāmās kolonnas: {list} ¦ Oodatavad veerud: {list}
+(une ou plusieurs) ¦ (vienas ar keli) ¦ (viena vai vairākas) ¦ (üks või mitu)
+(facultatif) ¦ (neprivaloma) ¦ (neobligāti) ¦ (valikuline)
+Les données de « {name} » ¦ „{name}“ duomenys ¦ „{name}“ dati ¦ „{name}“ andmed
+l’outil ¦ įrankis ¦ rīks ¦ tööriist
+{name} (données) ¦ {name} (duomenys) ¦ {name} (dati) ¦ {name} (andmed)
+Renvoyer les données là d’où elles viennent ¦ Grąžinti duomenis ten, iš kur jie atėjo ¦ Nosūtīt datus atpakaļ, no kurienes tie nāk ¦ Saada andmed tagasi sinna, kust need tulid
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Formulės, rūšiavimas, įklijavimas iš Excel… „Failas → Išsaugoti kopiją…“ taip pat išsaugo šį sąsiuvinį Skaičiuoklėje. ¦ Formulas, kārtošana, ielīmēšana no Excel… „Fails → Saglabāt kopiju…“ arī saglabā šo darbgrāmatu Izklājlapā. ¦ Valemid, sorteerimine, Excelist kleepimine… „Fail → Salvesta koopia…“ hoiab selle töövihiku ka Tabelarvutuses.
+Rien à ouvrir : la liste est vide. ¦ Nėra ką atidaryti: sąrašas tuščias. ¦ Nav ko atvērt: saraksts ir tukšs. ¦ Pole midagi avada: loend on tühi.
+🧾 Tableur ¦ 🧾 Skaičiuoklė ¦ 🧾 Izklājlapa ¦ 🧾 Tabelarvutus
+ouvrir dans le tableur ¦ atidaryti skaičiuoklėje ¦ atvērt izklājlapā ¦ ava tabelarvutuses
+🧾 Ouvrir dans le tableur ¦ 🧾 Atidaryti skaičiuoklėje ¦ 🧾 Atvērt izklājlapā ¦ 🧾 Ava tabelarvutuses
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Lapas tuščias: įrašyk ar įklijuok lentelę, tada ją pasirink. ¦ Lapa ir tukša: ieraksti vai ielīmē tabulu, tad atlasi to. ¦ Leht on tühi: kirjuta või kleebi tabel, siis vali see.
+TABLEUR · PRÉPARER POUR… ¦ SKAIČIUOKLĖ · PARUOŠTI… ¦ IZKLĀJLAPA · SAGATAVOT… ¦ TABELARVUTUS · VALMISTA ETTE…
+🎯 Préparer pour… ({range}) ¦ 🎯 Paruošti… ({range}) ¦ 🎯 Sagatavot… ({range}) ¦ 🎯 Valmista ette… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Skaičiuoklė žino, ko tikisi kiekviena programėlės vieta: pasirink, kur keliauja šie duomenys. Ji patikrina srities <b>{range}</b> stulpelius ir sutvarko juos kaip reikia. ¦ Izklājlapa zina, ko gaida katra lietotnes vieta: izvēlies, kur nonāks šie dati. Tā pārbauda diapazona <b>{range}</b> kolonnas un sakārto tās, kā vajag. ¦ Tabelarvutus teab, mida iga rakenduse osa ootab: vali, kuhu need andmed lähevad. See kontrollib vahemiku <b>{range}</b> veerud ja paigutab need õigesti.
+Dessin ¦ Piešinys ¦ Zīmējums ¦ Joonis
+▦ Un tableau ¦ ▦ Lentelė ¦ ▦ Tabula ¦ ▦ Tabel
+Il faut une colonne de chiffres ¦ Reikia skaičių stulpelio ¦ Vajadzīga skaitļu kolonna ¦ Vaja on arvude veergu
+📊 Un graphique ¦ 📊 Diagrama ¦ 📊 Diagramma ¦ 📊 Graafik
+Dans la plage ¦ Srityje ¦ Diapazonā ¦ Vahemikus
+, une ou plusieurs ¦ , vienas ar keli ¦ , viena vai vairākas ¦ , üks või mitu
+, facultatif ¦ , neprivaloma ¦ , neobligāti ¦ , valikuline
+Voir la cellule ¦ Žiūrėti langelį ¦ Skatīt šūnu ¦ Vaata lahtrit
+… et {n} à vérifier. ¦ … ir dar {n} patikrinti. ¦ … un vēl {n} jāpārbauda. ¦ … ja veel {n} kontrollida.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Trūksta stulpelio: pridėk jį į sritį arba pasirink kitą sritį. ¦ Trūkst kolonnas: pievieno to diapazonam vai izvēlies citu diapazonu. ¦ Üks veerg puudub: lisa see vahemikku või vali teine vahemik.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Išlaikyti ryšį: schema seka skaičiuoklę (atnaujinama, kai sritis keičiasi) ¦ Saglabāt saiti: shēma seko izklājlapai (atjaunināta, kad diapazons mainās) ¦ Hoia seos: diagramm järgib tabelarvutust (uueneb, kui vahemik muutub)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Išlaikyti ryšį: schema seka skaičiuoklę (atnaujinama, kai sritis keičiasi) — sąsiuvinis bus išsaugotas Skaičiuoklėje ¦ Saglabāt saiti: shēma seko izklājlapai (atjaunināta, kad diapazons mainās) — darbgrāmata tiks saglabāta Izklājlapā ¦ Hoia seos: diagramm järgib tabelarvutust (uueneb, kui vahemik muutub) — töövihik salvestatakse Tabelarvutusse
+← Autre endroit ¦ ← Kita vieta ¦ ← Cita vieta ¦ ← Muu koht
+La première ligne donne les titres ¦ Pirmoje eilutėje – antraštės ¦ Pirmajā rindā ir virsraksti ¦ Esimeses reas on pealkirjad
+Pas d’aperçu. ¦ Peržiūros nėra. ¦ Priekšskatījuma nav. ¦ Eelvaadet pole.
+🎤 Créer la présentation ¦ 🎤 Sukurti pristatymą ¦ 🎤 Izveidot prezentāciju ¦ 🎤 Loo esitlus
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Pataisyk langelį, tada vėl atidaryk „🎯 Paruošti…“. ¦ Izlabo šūnu, tad atkal atver „🎯 Sagatavot…“. ¦ Paranda lahter, siis ava uuesti „🎯 Valmista ette…“.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Šie duomenys grįžta į savo įrankį: schema sudaroma iš kopijos (be ryšio). ¦ Šie dati atgriežas savā rīkā: shēma veidota no kopijas (bez saites). ¦ Need andmed lähevad tagasi oma tööriista: diagramm tehakse koopiast (seoseta).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Pasirink sritį su skaičiais (pavyzdžiui: Dešimtmetis, Vyrai, Moterys). ¦ Atlasi diapazonu ar skaitļiem (piemēram: Desmitgade, Vīrieši, Sievietes). ¦ Vali arvudega vahemik (näiteks: Kümnend, Mehed, Naised).
+Tous les types de diagrammes… ¦ Visi schemų tipai… ¦ Visi shēmu veidi… ¦ Kõik diagrammitüübid…
+Conseillés pour {range} ¦ Siūlomi sričiai {range} ¦ Ieteicamie diapazonam {range} ¦ Soovitatud vahemikule {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Duomenys: „{name}“ ! {range} ¦ 🔗 Dati: „{name}“ ! {range} ¦ 🔗 Andmed: „{name}“ ! {range}
+Classeur ¦ Sąsiuvinis ¦ Darbgrāmata ¦ Töövihik
+(feuille « {name} ») ¦ (lapas „{name}“) ¦ (lapa „{name}“) ¦ (leht „{name}“)
+tenu à jour ¦ nuolat atnaujinamas ¦ uzturēts aktuāls ¦ ajakohasena hoitud
+Les figer ¦ Užfiksuoti juos ¦ Iesaldēt tos ¦ Külmuta need
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Sąsiuvinis nerastas (ištrintas?): piešinys išlaiko paskutinius nuskaitytus skaičius. ¦ ⚠️ Darbgrāmata nav atrasta (dzēsta?): zīmējums patur pēdējos nolasītos skaitļus. ¦ ⚠️ Töövihikut ei leitud (kustutatud?): joonis hoiab viimati loetud arve.
+TABLEUR ¦ SKAIČIUOKLĖ ¦ IZKLĀJLAPA ¦ TABELARVUTUS
+Nom du classeur… ¦ Sąsiuvinio pavadinimas… ¦ Darbgrāmatas nosaukums… ¦ Töövihiku nimi…
+Plage illisible : écris par exemple A1:C12. ¦ Neįskaitoma sritis: parašyk, pavyzdžiui, A1:C12. ¦ Nesalasāms diapazons: ieraksti, piemēram, A1:C12. ¦ Loetamatu vahemik: kirjuta näiteks A1:C12.
+Feuille ¦ Lapas ¦ Lapa ¦ Leht
+Plage ¦ Sritis ¦ Diapazons ¦ Vahemik
+Copier une fois (les chiffres ne bougent plus) ¦ Nukopijuoti vieną kartą (skaičiai nebesikeičia) ¦ Kopēt vienreiz (skaitļi vairs nemainās) ¦ Kopeeri üks kord (arvud enam ei muutu)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Išlaikyti ryšį: schema seka sąsiuvinį (nuolat atnaujinama) ¦ Saglabāt saiti: shēma seko darbgrāmatai (uzturēta aktuāla) ¦ Hoia seos: diagramm järgib töövihikut (ajakohasena)
+Lecture du classeur… ¦ Skaitomas sąsiuvinis… ¦ Nolasa darbgrāmatu… ¦ Loen töövihikut…
+Choisis un classeur. ¦ Pasirink sąsiuvinį. ¦ Izvēlies darbgrāmatu. ¦ Vali töövihik.
+Écris une plage, par exemple A1:C12. ¦ Parašyk sritį, pavyzdžiui, A1:C12. ¦ Ieraksti diapazonu, piemēram, A1:C12. ¦ Kirjuta vahemik, näiteks A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Įrašyk norimą rezultatą pirmame stulpelio langelyje (pavyzdžiui, „Jean D.“), tada vėl paleisk ✨ Momentinį užpildymą. ¦ Ieraksti vēlamo rezultātu kolonnas pirmajā šūnā (piemēram, „Jean D.“), tad atkal palaid ✨ Zibensaizpildi. ¦ Kirjuta soovitud tulemus veeru esimesse lahtrisse (näiteks „Jean D.“), siis käivita uuesti ✨ Välktäide.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Nerandu taisyklės, tinkančios visiems pavyzdžiams: parašyk dar vieną arba paprastesnį. ¦ Neatrodu noteikumu, kas der visiem piemēriem: ieraksti vēl vienu vai vienkāršāku. ¦ Ma ei leia reeglit, mis sobiks kõigile näidetele: kirjuta veel üks või lihtsam.
+Rien à remplir : la colonne est déjà pleine. ¦ Nėra ką užpildyti: stulpelis jau pilnas. ¦ Nav ko aizpildīt: kolonna jau ir pilna. ¦ Pole midagi täita: veerg on juba täis.
+{what} de {col} ¦ {what} iš {col} ¦ {what} no {col} ¦ {what} veerust {col}
+{what} n°{n} de {col} ¦ {what} nr. {n} iš {col} ¦ {what} nr. {n} no {col} ¦ {what} nr {n} veerust {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} nr. {n} nuo {col} pabaigos ¦ {what} nr. {n} no {col} beigām ¦ {what} nr {n} veeru {col} lõpust
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (taisyklė: {rule}). ↶, kad anuliuotum. ¦ ✨ {n} (noteikums: {rule}). ↶, lai atsauktu. ¦ ✨ {n} (reegel: {rule}). ↶ tagasivõtmiseks.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Pasirink lentelę su antraščių eilute ir duomenų eilutėmis. ¦ Atlasi tabulu ar virsrakstu rindu un datu rindām. ¦ Vali tabel, millel on päiserida ja andmeread.
+Colonne {col} ¦ Stulpelis {col} ¦ Kolonna {col} ¦ Veerg {col}
+DONNÉES ¦ DUOMENYS ¦ DATI ¦ ANDMED
+Σ Sous-totaux ¦ Σ Tarpinės sumos ¦ Σ Starpsummas ¦ Σ Vahesummad
+Créer les sous-totaux ¦ Sukurti tarpines sumas ¦ Izveidot starpsummas ¦ Loo vahesummad
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Pagal <b>{range}</b>. Naujas lapas: eilutės sugrupuotos, po kiekviena grupe suma (formulės), tada bendra suma. „⊟ Struktūra“ (meniu Duomenys) suskleidžia detales. ¦ No <b>{range}</b>. Jauna lapa: rindas sagrupētas, zem katras grupas kopsumma (formulas), tad kopējā summa. „⊟ Struktūra“ (izvēlne Dati) sakļauj detaļas. ¦ Vahemikust <b>{range}</b>. Uus leht: read rühmitatud, iga rühma all summa (valemid), siis üldsumma. „⊟ Liigendus“ (menüü Andmed) ahendab üksikasjad.
+À chaque changement de ¦ Kaskart pasikeitus ¦ Pie katras maiņas ¦ Iga muutuse korral veerus
+Calcul ¦ Skaičiavimas ¦ Aprēķins ¦ Arvutus
+Sur les colonnes ¦ Stulpeliams ¦ Kolonnām ¦ Veergudel
+Coche au moins une colonne à calculer. ¦ Pažymėk bent vieną skaičiuojamą stulpelį. ¦ Atzīmē vismaz vienu aprēķināmo kolonnu. ¦ Märgi vähemalt üks arvutatav veerg.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. „⊟ Struktūra“ (meniu Duomenys) suskleidžia detales. ¦ Σ {n}. „⊟ Struktūra“ (izvēlne Dati) sakļauj detaļas. ¦ Σ {n}. „⊟ Liigendus“ (menüü Andmed) ahendab üksikasjad.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Šiame lape nėra tarpinių sumų: pirma Duomenys → Σ Tarpinės sumos…. ¦ Šajā lapā nav starpsummu: vispirms Dati → Σ Starpsummas…. ¦ Sellel lehel pole vahesummasid: esmalt Andmed → Σ Vahesummad….
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Detalės suskleistos: liko tik sumos. ¦ ⊟ Detaļas sakļautas: palikušas tikai kopsummas. ¦ ⊟ Üksikasjad ahendatud: alles on ainult summad.
+⊞ Détail déplié. ¦ ⊞ Detalės išskleistos. ¦ ⊞ Detaļas izvērstas. ¦ ⊞ Üksikasjad laiendatud.
+🎯 Valeur cible ¦ 🎯 Tikslo siekimas ¦ 🎯 Mērķa vērtība ¦ 🎯 Sihtväärtus
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Programėlė bando reikšmes „keičiamame langelyje“, kol formulė duoda norimą rezultatą. Pvz.: kelerių metų jis vedė, kad amžiaus skirtumas būtų 7 metai? ¦ Lietotne izmēģina vērtības „maināmajā šūnā“, līdz formula dod vēlamo rezultātu. Piem.: cik gadu vecs viņš apprecējās, lai vecuma starpība būtu 7 gadi? ¦ Rakendus proovib „muudetavas lahtris“ väärtusi, kuni valem annab soovitud tulemuse. Nt: mis vanuses ta abiellus, et vanusevahe oleks 7 aastat?
+La formule de la case ¦ Langelio formulė ¦ Šūnas formula ¦ Lahtri valem
+Doit donner ¦ Turi duoti ¦ Jādod ¦ Peab andma
+En changeant la case ¦ Keičiant langelį ¦ Mainot šūnu ¦ Muutes lahtrit
+Écris une adresse de case (ex. C5, B2). ¦ Parašyk langelio adresą (pvz., C5, B2). ¦ Ieraksti šūnas adresi (piem., C5, B2). ¦ Kirjuta lahtri aadress (nt C5, B2).
+Écris le résultat voulu. ¦ Parašyk norimą rezultatą. ¦ Ieraksti vēlamo rezultātu. ¦ Kirjuta soovitud tulemus.
+La première case doit contenir une formule. ¦ Pirmajame langelyje turi būti formulė. ¦ Pirmajā šūnā jābūt formulai. ¦ Esimeses lahtris peab olema valem.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Reikšmė nerasta: galbūt formulė nepriklauso nuo šio langelio arba negali pasiekti šio rezultato. ¦ Vērtība nav atrasta: varbūt formula nav atkarīga no šīs šūnas vai nevar sasniegt šo rezultātu. ¦ Väärtust ei leitud: valem ei pruugi sellest lahtrist sõltuda või ei saa seda tulemust saavutada.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: formulė duoda {target}. ↶, kad anuliuotum. ¦ 🎯 {cell} = {value}: formula dod {target}. ↶, lai atsauktu. ¦ 🎯 {cell} = {value}: valem annab {target}. ↶ tagasivõtmiseks.
+INSERTION ¦ ĮTERPIMAS ¦ IEVIETOŠANA ¦ LISAMINE
+📈 Mini-graphique ¦ 📈 Mini diagrama ¦ 📈 Minidiagramma ¦ 📈 Minigraafik
+Poser ¦ Įterpti ¦ Ievietot ¦ Lisa
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Maža diagrama langelyje, sekanti skaičius. Pasirinkus kelias eilutes: po diagramą kiekvienai eilutei (sritis slenka žemyn kartu). ¦ Neliela diagramma šūnā, kas seko skaitļiem. Atlasot vairākas rindas: pa diagrammai katrai rindai (diapazons pārvietojas līdzi uz leju). ¦ Väike graafik lahtris, mis järgib arve. Mitu rida valitud: üks graafik rea kohta (vahemik liigub nendega alla).
+Les nombres (plage de la 1re ligne) ¦ Skaičiai (1-osios eilutės sritis) ¦ Skaitļi (1. rindas diapazons) ¦ Arvud (1. rea vahemik)
+Gagné / perdu ¦ Laimėta / pralaimėta ¦ Uzvarēts / zaudēts ¦ Võit / kaotus
+Couleur ¦ Spalva ¦ Krāsa ¦ Värv
+Écris une plage, par exemple B2:F2. ¦ Parašyk sritį, pavyzdžiui, B2:F2. ¦ Ieraksti diapazonu, piemēram, B2:F2. ¦ Kirjuta vahemik, näiteks B2:F2.
+🧮 Solveur ¦ 🧮 Sprendiklis ¦ 🧮 Risinātājs ¦ 🧮 Lahendaja
+Résoudre ¦ Spręsti ¦ Atrisināt ¦ Lahenda
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Kaip tikslo siekimas, bet keičiant kelis langelius vienu metu, su sąlygomis. Pvz.: padalyti palikimą trims šakoms, kad kiekviena gautų bent 1 000 €, o skirtumas būtų kuo mažesnis. ¦ Kā mērķa vērtība, bet mainot vairākas šūnas vienlaikus, ar nosacījumiem. Piem.: sadalīt mantojumu starp trim atzariem, lai katrs saņemtu vismaz 1 000 € un starpība būtu pēc iespējas mazāka. ¦ Nagu sihtväärtus, aga muutes mitut lahtrit korraga, tingimustega. Nt: jaga pärand kolme haru vahel nii, et igaüks saaks vähemalt 1 000 € ja vahe oleks võimalikult väike.
+La formule (case objectif) ¦ Formulė (tikslo langelis) ¦ Formula (mērķa šūna) ¦ Valem (sihtlahter)
+Doit être ¦ Turi būti ¦ Jābūt ¦ Peab olema
+la plus grande possible ¦ kuo didesnė ¦ pēc iespējas lielākai ¦ võimalikult suur
+la plus petite possible ¦ kuo mažesnė ¦ pēc iespējas mazākai ¦ võimalikult väike
+égale à… ¦ lygi… ¦ vienādai ar… ¦ võrdne…
+Valeur (si « égale à ») ¦ Reikšmė (jei „lygi“) ¦ Vērtība (ja „vienādai ar“) ¦ Väärtus (kui „võrdne“)
+En changeant les cases ¦ Keičiant langelius ¦ Mainot šūnas ¦ Muutes lahtreid
+B2:B4 ou B2;C3 ¦ B2:B4 arba B2;C3 ¦ B2:B4 vai B2;C3 ¦ B2:B4 või B2;C3
+Conditions (une par ligne : {examples}) ¦ Sąlygos (po vieną eilutėje: {examples}) ¦ Nosacījumi (pa vienam rindā: {examples}) ¦ Tingimused (üks rea kohta: {examples})
+Nombres entiers seulement ¦ Tik sveikieji skaičiai ¦ Tikai veseli skaitļi ¦ Ainult täisarvud
+La case objectif doit contenir une formule (ex. D5). ¦ Tikslo langelyje turi būti formulė (pvz., D5). ¦ Mērķa šūnā jābūt formulai (piem., D5). ¦ Sihtlahtris peab olema valem (nt D5).
+Trente cases à changer au plus. ¦ Daugiausia trisdešimt keičiamų langelių. ¦ Ne vairāk kā trīsdesmit maināmās šūnas. ¦ Kõige rohkem kolmkümmend muudetavat lahtrit.
+Écris les cases à changer (ex. B2:B4). ¦ Parašyk keičiamus langelius (pvz., B2:B4). ¦ Ieraksti maināmās šūnas (piem., B2:B4). ¦ Kirjuta muudetavad lahtrid (nt B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Neįskaitoma sąlyga: „{text}“ (pvz., B2 >= 0). ¦ Nesalasāms nosacījums: „{text}“ (piem., B2 >= 0). ¦ Loetamatu tingimus: „{text}“ (nt B2 >= 0).
+Écris la valeur voulue. ¦ Parašyk norimą reikšmę. ¦ Ieraksti vēlamo vērtību. ¦ Kirjuta soovitud väärtus.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Nėra sprendimo, tenkinančio visas sąlygas (patikrink jas arba pakeisk pradžią). ¦ Nav risinājuma, kas atbilst visiem nosacījumiem (pārbaudi tos vai maini sākumpunktu). ¦ Kõigile tingimustele vastavat lahendust pole (kontrolli neid või muuda lähtepunkti).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Rasta: {cell} = {value} ({n}). ↶, kad anuliuotum. ¦ 🧮 Atrasts: {cell} = {value} ({n}). ↶, lai atsauktu. ¦ 🧮 Leitud: {cell} = {value} ({n}). ↶ tagasivõtmiseks.
+📋 Tableau de scénarios ¦ 📋 Scenarijų lentelė ¦ 📋 Scenāriju tabula ¦ 📋 Stsenaariumide tabel
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ O jei šis langelis būtų 20, 25, 30…? Lentelė rodo, ką duoda formulės kiekvienai reikšmei. Ji dedama nuo pasirinkto langelio ({cell}); daugiau niekas nesikeičia. ¦ Un ja šī šūna būtu 20, 25, 30…? Tabula rāda, ko formulas dod katrai vērtībai. Tā tiek novietota, sākot no atlasītās šūnas ({cell}); nekas cits nemainās. ¦ Mis siis, kui see lahter oleks 20, 25, 30…? Tabel näitab, mida valemid iga väärtuse korral annavad. See pannakse alates valitud lahtrist ({cell}); midagi muud ei muutu.
+La case qui change ¦ Kintantis langelis ¦ Šūna, kas mainās ¦ Muutuv lahter
+Ses valeurs (séparées par « ; », ou une plage) ¦ Jo reikšmės (atskirtos „;“ arba sritis) ¦ Tās vērtības (atdalītas ar „;“ vai diapazons) ¦ Selle väärtused (eraldatud „;“-ga või vahemik)
+20;25;30 ou A10:A15 ¦ 20;25;30 arba A10:A15 ¦ 20;25;30 vai A10:A15 ¦ 20;25;30 või A10:A15
+Les formules à suivre ¦ Stebimos formulės ¦ Formulas, kam sekot ¦ Jälgitavad valemid
+Écris la case qui change (ex. B2). ¦ Parašyk kintantį langelį (pvz., B2). ¦ Ieraksti šūnu, kas mainās (piem., B2). ¦ Kirjuta muutuv lahter (nt B2).
+Écris au moins une formule (ex. C5). ¦ Parašyk bent vieną formulę (pvz., C5). ¦ Ieraksti vismaz vienu formulu (piem., C5). ¦ Kirjuta vähemalt üks valem (nt C5).
+Écris des valeurs (500 au plus). ¦ Parašyk reikšmes (daugiausia 500). ¦ Ieraksti vērtības (ne vairāk kā 500). ¦ Kirjuta väärtused (kõige rohkem 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (fiksuotos reikšmės: pakartok, jei duomenys pasikeis). ¦ 📋 {n} (fiksētas vērtības: atkārto, ja dati mainās). ¦ 📋 {n} (fikseeritud väärtused: tee uuesti, kui andmed muutuvad).
+Rien n’a été enregistré. ¦ Nieko neįrašyta. ¦ Nekas nav ierakstīts. ¦ Midagi ei salvestatud.
+⏺ Nommer l’action ¦ ⏺ Pavadinti veiksmą ¦ ⏺ Nosaukt darbību ¦ ⏺ Anna toimingule nimi
+Mon action ¦ Mano veiksmas ¦ Mana darbība ¦ Minu toiming
+Garder ¦ Išlaikyti ¦ Paturēt ¦ Jäta alles
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Veiksmas „{name}“ išlaikytas: Duomenys → ▶ Įrašyti veiksmai. ¦ ⏺ Darbība „{name}“ paturēta: Dati → ▶ Ierakstītās darbības. ¦ ⏺ Toiming „{name}“ alles jäetud: Andmed → ▶ Salvestatud toimingud.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Įrašoma: atlik savo veiksmus (meniu, mygtukai, formatai), tada Duomenys → ⏹ Sustabdyti įrašymą. ¦ ⏺ Ierakstīšana: veic savas darbības (izvēlnes, pogas, formāti), tad Dati → ⏹ Apturēt ierakstīšanu. ¦ ⏺ Salvestamine: tee oma toimingud (menüüd, nupud, vormingud), siis Andmed → ⏹ Lõpeta salvestamine.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Įrašytų veiksmų nėra: Duomenys → ⏺ Įrašyti veiksmą. ¦ Nav ierakstītu darbību: Dati → ⏺ Ierakstīt darbību. ¦ Salvestatud toiminguid pole: Andmed → ⏺ Salvesta toiming.
+▶ Actions enregistrées ¦ ▶ Įrašyti veiksmai ¦ ▶ Ierakstītās darbības ¦ ▶ Salvestatud toimingud
+Elles se refont sur la sélection du moment. ¦ Jie pakartojami dabartiniame pasirinkime. ¦ Tās tiek atkārtotas pašreizējā atlasē. ¦ Need korratakse praegusel valikul.
+▶ Refaire ¦ ▶ Pakartoti ¦ ▶ Atkārtot ¦ ▶ Korda
+▶ « {name} » refaite. ¦ ▶ „{name}“ pakartotas. ¦ ▶ „{name}“ atkārtota. ¦ ▶ „{name}“ korratud.
+Colonne {n} ¦ Stulpelis {n} ¦ Kolonna {n} ¦ Veerg {n}
+{what} de « {col} » ¦ {what} iš „{col}“ ¦ {what} no „{col}“ ¦ {what} veerust „{col}“
+Lignes ¦ Eilutės ¦ Rindas ¦ Read
+Total ¦ Iš viso ¦ Kopā ¦ Kokku
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · pagal „{rows}“ ir „{cols}“ — iš {src} ¦ {title} · pēc „{rows}“ un „{cols}“ — no {src} ¦ {title} · „{rows}“ ja „{cols}“ järgi — allikast {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · pagal „{rows}“ — iš {src} ¦ {title} · pēc „{rows}“ — no {src} ¦ {title} · „{rows}“ järgi — allikast {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Pasirink sritį su antraščių eilute ir duomenų eilutėmis (pavyzdžiui: Pavardė, Komuna, Metai, Amžius). ¦ Atlasi diapazonu ar virsrakstu rindu un datu rindām (piemēram: Vārds, Komūna, Gads, Vecums). ¦ Vali vahemik, millel on päiserida ja andmeread (näiteks: Nimi, Kommuun, Aasta, Vanus).
+🔀 Tableau croisé dynamique ¦ 🔀 Suvestinė lentelė ¦ 🔀 Rakurstabula ¦ 🔀 Liigendtabel
+Créer le tableau croisé ¦ Sukurti suvestinę lentelę ¦ Izveidot rakurstabulu ¦ Loo liigendtabel
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Pagal <b>{range}</b> ({n}). Rezultatas patenka į naują lapą; „↻ Atnaujinti suvestinę lentelę“ (meniu Duomenys) jį sukuria iš naujo, jei duomenys pasikeičia. ¦ No <b>{range}</b> ({n}). Rezultāts nonāk jaunā lapā; „↻ Atsvaidzināt rakurstabulu“ (izvēlne Dati) to izveido no jauna, ja dati mainās. ¦ Vahemikust <b>{range}</b> ({n}). Tulemus läheb uuele lehele; „↻ Värskenda liigendtabelit“ (menüü Andmed) teeb selle uuesti, kui andmed muutuvad.
+En lignes ¦ Eilutėse ¦ Rindās ¦ Ridadena
+En colonnes (facultatif) ¦ Stulpeliuose (neprivaloma) ¦ Kolonnās (neobligāti) ¦ Veergudena (valikuline)
+— rien — ¦ — nieko — ¦ — nekas — ¦ — mitte midagi —
+Sur la colonne ¦ Stulpeliui ¦ Kolonnai ¦ Veerul
+— (compter les lignes) — ¦ — (skaičiuoti eilutes) — ¦ — (skaitīt rindas) — ¦ — (loe ridu) —
+Totaux ¦ Sumos ¦ Kopsummas ¦ Summad
+Aperçu : {rows} × {cols} ¦ Peržiūra: {rows} × {cols} ¦ Priekšskatījums: {rows} × {cols} ¦ Eelvaade: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Suvestinė lentelė sukurta: {rows} × {cols}. Duomenys → „↻ Atnaujinti suvestinę lentelę“, kad sukurtum iš naujo. ¦ Rakurstabula izveidota: {rows} × {cols}. Dati → „↻ Atsvaidzināt rakurstabulu“, lai to izveidotu no jauna. ¦ Liigendtabel loodud: {rows} × {cols}. Andmed → „↻ Värskenda liigendtabelit“, et see uuesti teha.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Šis lapas nėra suvestinė lentelė: eik į jos lapą „TCD …“. ¦ Šī lapa nav rakurstabula: dodies uz tās lapu „TCD …“. ¦ See leht pole liigendtabel: mine selle lehele „TCD …“.
+La feuille des données n’existe plus. ¦ Duomenų lapo nebėra. ¦ Datu lapa vairs nepastāv. ¦ Andmeleht ei ole enam olemas.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Suvestinė lentelė atnaujinta ({rows} × {cols}). ¦ Rakurstabula atsvaidzināta ({rows} × {cols}). ¦ Liigendtabel värskendatud ({rows} × {cols}).
+Graphique vivant ¦ Gyva diagrama ¦ Dzīvā diagramma ¦ Elav graafik
+Type de graphique ¦ Diagramos tipas ¦ Diagrammas veids ¦ Graafiku tüüp
+En faire un diagramme lié à la plage ¦ Paversti ją su sritimi susieta schema ¦ Padarīt to par shēmu, kas saistīta ar diapazonu ¦ Tee sellest vahemikuga seotud diagramm
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Pasirink langelius su skaičiais (ir jų pavadinimais kairėje ar viršuje): diagrama nupiešiama čia. ¦ Atlasi šūnas ar skaitļiem (un to nosaukumiem pa kreisi vai augšā): diagramma tiek uzzīmēta šeit. ¦ Vali arvudega lahtrid (ja nende nimed vasakul või üleval): graafik joonistatakse siia.
+Plage {range} · suit la sélection ¦ Sritis {range} · seka pasirinkimą ¦ Diapazons {range} · seko atlasei ¦ Vahemik {range} · järgib valikut
+Le moteur du tableur n’est pas chargé. ¦ Skaičiuoklės variklis neįkeltas. ¦ Izklājlapas dzinējs nav ielādēts. ¦ Tabelarvutuse mootor pole laaditud.
+Mon classeur ¦ Mano sąsiuvinis ¦ Mana darbgrāmata ¦ Minu töövihik
+Rien à rétablir. ¦ Nėra ką grąžinti. ¦ Nav ko atcelt atsaukšanu. ¦ Pole midagi uuesti teha.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ po to buvo kitų pakeitimų: naudok ↶ ({key}) ¦ pēc tam bija citas izmaiņas: izmanto ↶ ({key}) ¦ pärast tulid muud muudatused: kasuta ↶ ({key})
+Barre d’outils · {group} ¦ Įrankių juosta · {group} ¦ Rīkjosla · {group} ¦ Tööriistariba · {group}
+Barre d’outils ¦ Įrankių juosta ¦ Rīkjosla ¦ Tööriistariba
+Police et gras ¦ Šriftas ir pusjuodis ¦ Fonts un treknraksts ¦ Font ja paks kiri
+Police (E5) ¦ Šriftas (E5) ¦ Fonts (E5) ¦ Font (E5)
+Police ¦ Šriftas ¦ Fonts ¦ Font
+Gras ¦ Pusjuodis ¦ Treknraksts ¦ Paks
+Italique ¦ Kursyvas ¦ Slīpraksts ¦ Kursiiv
+Souligné ¦ Pabrauktas ¦ Pasvītrots ¦ Allajoonitud
+Renvoi à la ligne ¦ Teksto laužymas ¦ Teksta aplaušana ¦ Murra tekst
+Fusionner / séparer ¦ Sulieti / atskirti ¦ Sapludināt / atdalīt ¦ Ühenda / eralda
+Aligner à gauche ¦ Lygiuoti kairėje ¦ Līdzināt pa kreisi ¦ Joonda vasakule
+Centrer ¦ Centruoti ¦ Centrēt ¦ Joonda keskele
+Aligner à droite ¦ Lygiuoti dešinėje ¦ Līdzināt pa labi ¦ Joonda paremale
+Couleurs (C2) ¦ Spalvos (C2) ¦ Krāsas (C2) ¦ Värvid (C2)
+Couleur du texte ¦ Teksto spalva ¦ Teksta krāsa ¦ Teksti värv
+Format de cellule ¦ Langelio formatas ¦ Šūnas formāts ¦ Lahtri vorming
+Format de la cellule ¦ Langelio formatas ¦ Šūnas formāts ¦ Lahtri vorming
+Une décimale de moins ¦ Vienu dešimtainiu ženklu mažiau ¦ Par vienu decimālzīmi mazāk ¦ Üks kümnendkoht vähem
+Une décimale de plus ¦ Vienu dešimtainiu ženklu daugiau ¦ Par vienu decimālzīmi vairāk ¦ Üks kümnendkoht rohkem
+Bordures ¦ Kraštinės ¦ Apmales ¦ Äärised
+Bordures : tout ¦ Kraštinės: visos ¦ Apmales: visas ¦ Äärised: kõik
+Bordures : contour ¦ Kraštinės: išorinės ¦ Apmales: ārējās ¦ Äärised: välimised
+Bordure du bas ¦ Apatinė kraštinė ¦ Apakšējā apmale ¦ Alumine ääris
+Sans bordure ¦ Be kraštinių ¦ Bez apmalēm ¦ Ääriseta
+Graphique ¦ Diagrama ¦ Diagramma ¦ Graafik
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Schema su pasirinkimo skaičiais: šiai sričiai siūlomi tipai ¦ Shēma ar atlases skaitļiem: šim diapazonam ieteicamie veidi ¦ Diagramm valiku arvudega: sellele vahemikule soovitatud tüübid
+Choisir une fonction ¦ Pasirinkti funkciją ¦ Izvēlēties funkciju ¦ Vali funktsioon
+Fonction ¦ Funkcija ¦ Funkcija ¦ Funktsioon
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, spausdinimas ¦ XLSX, ODS, CSV, TSV, JSON, PDF, druka ¦ XLSX, ODS, CSV, TSV, JSON, PDF, printimine
+✓ Enregistrer et revenir ¦ ✓ Išsaugoti ir grįžti ¦ ✓ Saglabāt un atgriezties ¦ ✓ Salvesta ja mine tagasi
+Plein écran (⛶) ¦ Visas ekranas (⛶) ¦ Pilnekrāns (⛶) ¦ Täisekraan (⛶)
+Données d’un autre outil ¦ Kito įrankio duomenys ¦ Cita rīka dati ¦ Teise tööriista andmed
+Adresse (tape D12 ou un nom pour y aller) ¦ Adresas (įvesk D12 ar pavadinimą, kad ten nueitum) ¦ Adrese (ieraksti D12 vai nosaukumu, lai tur nokļūtu) ¦ Aadress (kirjuta D12 või nimi, et sinna minna)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Įvesk adresą (D12, B2:C9) ar pavadinimą, kad ten nueitum ¦ Ieraksti adresi (D12, B2:C9) vai nosaukumu, lai tur nokļūtu ¦ Kirjuta aadress (D12, B2:C9) või nimi, et sinna minna
+Contenu ou formule de la cellule ¦ Langelio turinys ar formulė ¦ Šūnas saturs vai formula ¦ Lahtri sisu või valem
+Feuille de calcul ¦ Skaičiuoklės lapas ¦ Darblapa ¦ Tööleht
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Skaičiuoklės lapas: rašyk, kad įrašytum į pasirinktą langelį ¦ Darblapa: raksti, lai ierakstītu atlasītajā šūnā ¦ Tööleht: kirjuta, et sisestada valitud lahtrisse
+Écrire dans la cellule ¦ Rašyti į langelį ¦ Rakstīt šūnā ¦ Kirjuta lahtrisse
+Panneau de droite ¦ Dešinysis skydelis ¦ Labais panelis ¦ Parem paneel
+Feuilles ¦ Lapai ¦ Lapas ¦ Lehed
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Spustelėk, kad pasirinktum, kas čia rodoma (suma, vidurkis…) ¦ Noklikšķini, lai izvēlētos, ko šeit rādīt (summa, vidējais…) ¦ Klõpsa, et valida, mida siin näidatakse (summa, keskmine…)
+Enregistrer une copie dans le Tableur… ¦ Išsaugoti kopiją Skaičiuoklėje… ¦ Saglabāt kopiju Izklājlapā… ¦ Salvesta koopia Tabelarvutusse…
+Enregistrer une copie… ¦ Išsaugoti kopiją… ¦ Saglabāt kopiju… ¦ Salvesta koopia…
+Enregistrer comme modèle… ¦ Išsaugoti kaip šabloną… ¦ Saglabāt kā veidni… ¦ Salvesta mallina…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Eksportuoti (XLSX, ODS, CSV, PDF…)… ¦ Eksportēt (XLSX, ODS, CSV, PDF…)… ¦ Ekspordi (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Lapas „{name}“ ¦ Lapa „{name}“ ¦ Leht „{name}“
+Pas encore relié à une fiche ¦ Dar nesusieta su kortele ¦ Vēl nav sasaistīts ar kartīti ¦ Pole veel kaardiga seotud
+Tire pour recopier ou continuer une suite ¦ Tempk, kad nukopijuotum ar tęstum seką ¦ Velc, lai kopētu vai turpinātu virkni ¦ Lohista kopeerimiseks või jada jätkamiseks
+« {text} » n’est pas dans la liste : {list} ¦ „{text}“ nėra sąraše: {list} ¦ „{text}“ nav sarakstā: {list} ¦ „{text}“ pole loendis: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Reikia skaičiaus nuo {min} iki {max}. ¦ Vajadzīgs skaitlis no {min} līdz {max}. ¦ Vaja on arvu vahemikus {min} kuni {max}.
+Il faut un nombre d’au moins {min}. ¦ Reikia skaičiaus, ne mažesnio nei {min}. ¦ Vajadzīgs skaitlis, ne mazāks par {min}. ¦ Vaja on arvu, mis on vähemalt {min}.
+Il faut un nombre et au plus {max}. ¦ Reikia skaičiaus, ne didesnio nei {max}. ¦ Vajadzīgs skaitlis, ne lielāks par {max}. ¦ Vaja on arvu, mis on kõige rohkem {max}.
+Il faut un nombre. ¦ Reikia skaičiaus. ¦ Vajadzīgs skaitlis. ¦ Vaja on arvu.
+Je ne comprends pas cette date ({why}). ¦ Nesuprantu šios datos ({why}). ¦ Nesaprotu šo datumu ({why}). ¦ Ma ei saa sellest kuupäevast aru ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ pavyzdžiai: 7 mai 1925, vers 1784, an II ¦ piemēri: 7 mai 1925, vers 1784, an II ¦ näited: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = užbaigti ¦ Tab = pabeigt ¦ Tab = lõpeta
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Suprasta kaip dokumento data: <b>{date}</b> (apytikslė: skaičiavimai rodys ≈) ¦ ✓ Saprasts kā dokumenta datums: <b>{date}</b> (aptuvens: aprēķini rādīs ≈) ¦ ✓ Aru saadud dokumendi kuupäevana: <b>{date}</b> (ligikaudne: arvutused näitavad ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Suprasta kaip dokumento data: <b>{date}</b> ¦ ✓ Saprasts kā dokumenta datums: <b>{date}</b> ¦ ✓ Aru saadud dokumendi kuupäevana: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Tekstas ar skaičius. Pradėk nuo <b>=</b>, kad skaičiuotum. ¦ Teksts vai skaitlis. Sāc ar <b>=</b>, lai aprēķinātu. ¦ Tekst või arv. Arvutamiseks alusta märgiga <b>=</b>.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Formulė: spustelėk arba tempk per langelius, kad juos įterptum, arba įvesk funkcijos pavadinimą (prancūziškai ar angliškai). <kbd>F4</kbd>: $A$1. ¦ ƒ Formula: noklikšķini vai velc pāri šūnām, lai tās ievietotu, vai ieraksti funkcijas nosaukumu (franciski vai angliski). <kbd>F4</kbd>: $A$1. ¦ ƒ Valem: klõpsa või lohista üle lahtrite, et need lisada, või kirjuta funktsiooni nimi (prantsuse või inglise keeles). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Pataisyti į {name} ¦ Labot uz {name} ¦ Paranda: {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Apytikslis rezultatas: viena iš datų apytikslė („vers“, „avant“, „an …“ be dienos). ¦ Aptuvens rezultāts: viens no datumiem ir aptuvens („vers“, „avant“, „an …“ bez dienas). ¦ Ligikaudne tulemus: üks kuupäevadest on ligikaudne („vers“, „avant“, „an …“ ilma päevata).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ „{text}“: nei adresas (D12, B2:C9), nei sąsiuvinio pavadinimas. ¦ „{text}“: ne adrese (D12, B2:C9), ne darbgrāmatas nosaukums. ¦ „{text}“: pole aadress (D12, B2:C9) ega töövihiku nimi.
+Pas de feuille « {name} ». ¦ Lapo „{name}“ nėra. ¦ Lapas „{name}“ nav. ¦ Lehte „{name}“ pole.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Naudok {key} lentelėje (naršyklė neleidžia mygtukui rašyti į iškarpinę). ¦ Izmanto {key} režģī (pārlūks neļauj pogai rakstīt starpliktuvē). ¦ Kasuta ruudustikus {key} (brauser ei luba nupul lõikelauale kirjutada).
+En pixels (6 à 72) : ¦ Pikseliais (nuo 6 iki 72): ¦ Pikseļos (no 6 līdz 72): ¦ Pikslites (6 kuni 72):
+Lignes masquées (Format → Tout remontrer) ¦ Paslėptos eilutės (Formatas → Vėl rodyti viską) ¦ Paslēptas rindas (Formāts → Rādīt visu atkal) ¦ Peidetud read (Vorming → Näita kõike uuesti)
+Colonnes masquées (Format → Tout remontrer) ¦ Paslėpti stulpeliai (Formatas → Vėl rodyti viską) ¦ Paslēptas kolonnas (Formāts → Rādīt visu atkal) ¦ Peidetud veerud (Vorming → Näita kõike uuesti)
+Trier A → Z (sur la colonne choisie) ¦ Rūšiuoti A → Z (pagal pasirinktą stulpelį) ¦ Kārtot A → Z (pēc atlasītās kolonnas) ¦ Sorteeri A → Z (valitud veeru järgi)
+Trier Z → A ¦ Rūšiuoti Z → A ¦ Kārtot Z → A ¦ Sorteeri Z → A
+Trier sur plusieurs colonnes… ¦ Rūšiuoti pagal kelis stulpelius… ¦ Kārtot pēc vairākām kolonnām… ¦ Sorteeri mitme veeru järgi…
+Espaces en trop retirés. ¦ Pertekliniai tarpai pašalinti. ¦ Liekās atstarpes noņemtas. ¦ Üleliigsed tühikud eemaldatud.
+Rien à retirer. ¦ Nėra ką pašalinti. ¦ Nav ko noņemt. ¦ Pole midagi eemaldada.
+Police des cellules ¦ Langelių šriftas ¦ Šūnu fonts ¦ Lahtrite font
+Cette police a un nom que le tableur ne sait pas garder. ¦ Šio šrifto pavadinimo skaičiuoklė negali išsaugoti. ¦ Šī fonta nosaukumu izklājlapa nevar saglabāt. ¦ Selle fondi nime ei oska tabelarvutus säilitada.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Dydis nuo 6 iki 72 px („{value}“ netinka). ¦ Izmērs no 6 līdz 72 px („{value}“ neder). ¦ Suurus 6 kuni 72 px („{value}“ ei sobi).
+Une taille entre 6 et 72 px. ¦ Dydis nuo 6 iki 72 px. ¦ Izmērs no 6 līdz 72 px. ¦ Suurus 6 kuni 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Pirma pasirink kelis langelius suliejimui. ¦ Vispirms atlasi vairākas šūnas sapludināšanai. ¦ Vali esmalt mitu lahtrit ühendamiseks.
+Cases fusionnées : {n} ¦ Sulieti langeliai: {n} ¦ Sapludinātas šūnas: {n} ¦ Ühendatud lahtreid: {n}
+Largeur de colonne ¦ Stulpelio plotis ¦ Kolonnas platums ¦ Veeru laius
+Hauteur de ligne ¦ Eilutės aukštis ¦ Rindas augstums ¦ Rea kõrgus
+En pixels (16 à 1200) : ¦ Pikseliais (nuo 16 iki 1200): ¦ Pikseļos (no 16 līdz 1200): ¦ Pikslites (16 kuni 1200):
+En pixels (12 à 600) : ¦ Pikseliais (nuo 12 iki 600): ¦ Pikseļos (no 12 līdz 600): ¦ Pikslites (12 kuni 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Pavadinimas prasideda raide, be tarpų (pvz., Total, Ages_1836). ¦ Nosaukums sākas ar burtu, bez atstarpēm (piem., Total, Ages_1836). ¦ Nimi algab tähega, ilma tühikuteta (nt Total, Ages_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Pavadinimas „{name}“ = {ref}: formulėje įvesk =SOMME({name}). ¦ Nosaukums „{name}“ = {ref}: formulā ieraksti =SOMME({name}). ¦ Nimi „{name}“ = {ref}: kirjuta valemisse =SOMME({name}).
+Nom pour la plage ¦ Srities pavadinimas ¦ Diapazona nosaukums ¦ Vahemiku nimi
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Pavadinimas sričiai {ref} (kad rašytum =SOMME(Total) vietoj =SOMME(D2:D40)): ¦ Nosaukums diapazonam {ref} (lai rakstītu =SOMME(Total), nevis =SOMME(D2:D40)): ¦ Nimi vahemikule {ref} (et kirjutada =SOMME(Total), mitte =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Pastaba apie {cell} ¦ 💬 Piezīme par {cell} ¦ 💬 Märkus lahtrile {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Pastaba rodoma užvedus pelę ant langelio (mažas oranžinis kampas). Tuščia = jokios pastabos. ¦ Piezīme parādās, uzvirzot peli uz šūnas (mazs oranžs stūrītis). Tukšs = nav piezīmes. ¦ Märkus ilmub, kui hiir on lahtri kohal (väike oranž nurk). Tühi = märkust pole.
+⌨️ Raccourcis du tableur ¦ ⌨️ Skaičiuoklės spartieji klavišai ¦ ⌨️ Izklājlapas īsinājumtaustiņi ¦ ⌨️ Tabelarvutuse kiirklahvid
+Raccourcis indisponibles. ¦ Spartieji klavišai negalimi. ¦ Īsinājumtaustiņi nav pieejami. ¦ Kiirklahvid pole saadaval.
+⚙️ Réglages du tableur ¦ ⚙️ Skaičiuoklės nustatymai ¦ ⚙️ Izklājlapas iestatījumi ¦ ⚙️ Tabelarvutuse seaded
+Après la touche Entrée, aller ¦ Po Enter klavišo eiti ¦ Pēc taustiņa Enter doties ¦ Pärast Enter-klahvi mine
+vers le bas ¦ žemyn ¦ uz leju ¦ alla
+vers la droite (saisie de relevés en ligne) ¦ į dešinę (išrašų įvedimas eilutėmis) ¦ pa labi (izrakstu ievade pa rindām) ¦ paremale (väljavõtete sisestamine ridade kaupa)
+Séparateur des fichiers CSV ¦ CSV failų skyriklis ¦ CSV failu atdalītājs ¦ CSV-failide eraldaja
+point-virgule « ; » (Excel en français) ¦ kabliataškis „;“ (prancūziškas Excel) ¦ semikols „;“ (Excel franču valodā) ¦ semikoolon „;“ (prantsuskeelne Excel)
+virgule « , » ¦ kablelis „,“ ¦ komats „,“ ¦ koma „,“
+tabulation ¦ tabuliacija ¦ tabulācija ¦ tabulaator
+Largeur des colonnes d’une feuille neuve ¦ Naujo lapo stulpelių plotis ¦ Jaunas lapas kolonnu platums ¦ Uue lehe veergude laius
+Dans la barre du bas, pour les cellules choisies ¦ Apatinėje juostoje, pasirinktiems langeliams ¦ Apakšējā joslā, atlasītajām šūnām ¦ Alumisel ribal, valitud lahtrite jaoks
+Réglages du tableur ¦ Skaičiuoklės nustatymai ¦ Izklājlapas iestatījumi ¦ Tabelarvutuse seaded
+Trop de lignes ou de colonnes d’un coup. ¦ Per daug eilučių ar stulpelių vienu metu. ¦ Pārāk daudz rindu vai kolonnu uzreiz. ¦ Liiga palju ridu või veerge korraga.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Surūšiuota {dir} pagal stulpelį {col} (1-oji eilutė – antraštės). ¦ Sakārtots {dir} pēc kolonnas {col} (1. rinda ir virsraksti). ¦ Sorteeritud {dir} veeru {col} järgi (1. rida on pealkirjad).
+Trié {dir} sur la colonne {col}. ¦ Surūšiuota {dir} pagal stulpelį {col}. ¦ Sakārtots {dir} pēc kolonnas {col}. ¦ Sorteeritud {dir} veeru {col} järgi.
+A → Z (croissant) ¦ A → Z (didėjančiai) ¦ A → Z (augošā secībā) ¦ A → Z (kasvavalt)
+Z → A (décroissant) ¦ Z → A (mažėjančiai) ¦ Z → A (dilstošā secībā) ¦ Z → A (kahanevalt)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Sritis {range} · dokumentų datos („vers 1784“, „an II“) rikiuojamos pagal savo datą. ¦ Diapazons {range} · dokumentu datumi („vers 1784“, „an II“) tiek kārtoti pēc sava datuma. ¦ Vahemik {range} · dokumentide kuupäevad („vers 1784“, „an II“) sorteeritakse oma kuupäeva järgi.
+La première ligne, ce sont les titres ¦ Pirmoji eilutė – antraštės ¦ Pirmā rinda ir virsraksti ¦ Esimene rida on pealkirjad
+Puis par ¦ Tada pagal ¦ Tad pēc ¦ Seejärel
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Pasirink lentelę su antraščių eilute ir eilutėmis po ja. ¦ Atlasi tabulu ar virsrakstu rindu un rindām zem tās. ¦ Vali tabel, millel on päiserida ja selle all read.
+(vide) ¦ (tuščia) ¦ (tukšs) ¦ (tühi)
+Chercher dans le tableau… (nom, métier) ¦ Ieškoti lentelėje… (pavardė, profesija) ¦ Meklēt tabulā… (vārds, nodarbošanās) ¦ Otsi tabelist… (nimi, amet)
+{n} sur {total} ¦ {n} iš {total} ¦ {n} no {total} ¦ {n} / {total}
+Supprimer les doublons ¦ Ištrinti dublikatus ¦ Dzēst dublikātus ¦ Kustuta duplikaadid
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Sritis {range} · 1-oji eilutė – antraštės. Lieka pirmoji kiekvienos grupės eilutė. ¦ Diapazons {range} · 1. rinda ir virsraksti. Paliek katras grupas pirmā rinda. ¦ Vahemik {range} · 1. rida on pealkirjad. Iga rühma esimene rida jääb alles.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Sritis {range}. Lieka pirmoji kiekvienos grupės eilutė. ¦ Diapazons {range}. Paliek katras grupas pirmā rinda. ¦ Vahemik {range}. Iga rühma esimene rida jääb alles.
+Compare les colonnes : ¦ Lyginti stulpelius: ¦ Salīdzināt kolonnas: ¦ Võrdle veerge:
+{n} en double (lignes {rows}). ¦ Pasikartojančių: {n} (eilutės {rows}). ¦ Dublikāti: {n} (rindas {rows}). ¦ Duplikaate: {n} (read {rows}).
+{n} en double (ligne {rows}). ¦ Pasikartojančių: {n} (eilutė {rows}). ¦ Dublikāti: {n} (rinda {rows}). ¦ Duplikaate: {n} (rida {rows}).
+Aucune ligne en double. ¦ Pasikartojančių eilučių nėra. ¦ Nav dublētu rindu. ¦ Korduvaid ridu pole.
+Supprimer {n} ¦ Ištrinti {n} ¦ Dzēst {n} ¦ Kustuta {n}
+Coche au moins une colonne. ¦ Pažymėk bent vieną stulpelį. ¦ Atzīmē vismaz vienu kolonnu. ¦ Märgi vähemalt üks veerg.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Pasirink teksto langelius stulpelyje (pvz., „MARTIN Jean, 34 ans, laboureur“). ¦ Atlasi teksta šūnas kolonnā (piem., „MARTIN Jean, 34 ans, laboureur“). ¦ Vali tekstilahtrid veerus (nt „MARTIN Jean, 34 ans, laboureur“).
+Convertir le texte en colonnes ¦ Konvertuoti tekstą į stulpelius ¦ Pārvērst tekstu kolonnās ¦ Teisenda tekst veergudeks
+Convertir ¦ Konvertuoti ¦ Pārvērst ¦ Teisenda
+Couper à : ¦ Skaidyti ties: ¦ Dalīt pie: ¦ Tükelda kohas:
+« 34 ans » devient 34 ¦ „34 ans“ tampa 34 ¦ „34 ans“ kļūst par 34 ¦ „34 ans“ muutub arvuks 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Didžiosiomis raidėmis parašyta pavardė tampa atskiru stulpeliu („MARTIN Jean“ → MARTIN | Jean) ¦ Ar lielajiem burtiem rakstītais uzvārds kļūst par atsevišķu kolonnu („MARTIN Jean“ → MARTIN | Jean) ¦ Suurtähtedega perekonnanimi muutub eraldi veeruks („MARTIN Jean“ → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Dalys patenka į stulpelį {col} ir tolesnius (kas ten yra, pakeičiama; ↶, kad grįžtum). ¦ Daļas nonāk kolonnā {col} un nākamajās (tur esošais tiek aizstāts; ↶, lai atgrieztos). ¦ Tükid lähevad veergu {col} ja järgmistesse (seal olev asendatakse; ↶ tagasiminekuks).
+Validation des données ¦ Duomenų tikrinimas ¦ Datu validācija ¦ Andmete valideerimine
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Sričiai {range}: ką galima rašyti į šiuos langelius. ¦ Diapazonam {range}: ko var rakstīt šajās šūnās. ¦ Vahemikule {range}: mida neisse lahtritesse kirjutada saab.
+Autoriser ¦ Leisti ¦ Atļaut ¦ Luba
+Une liste de choix (menu ▾) ¦ Pasirinkimų sąrašas (meniu ▾) ¦ Izvēļu saraksts (izvēlne ▾) ¦ Valikute loend (menüü ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Asmuo iš bazės (pasirinkimo meniu) ¦ 👤 Persona no datubāzes (izvēles izvēlne) ¦ 👤 Isik andmebaasist (valikumenüü)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Vieta iš bazės (pasirinkimo meniu) ¦ 📍 Vieta no datubāzes (izvēles izvēlne) ¦ 📍 Koht andmebaasist (valikumenüü)
+Un nombre entre… ¦ Skaičius tarp… ¦ Skaitlis starp… ¦ Arv vahemikus…
+Une date d’acte (vers 1784, an II…) ¦ Dokumento data (vers 1784, an II…) ¦ Dokumenta datums (vers 1784, an II…) ¦ Dokumendi kuupäev (vers 1784, an II…)
+Les choix (un par ligne) ¦ Pasirinkimai (po vieną eilutėje) ¦ Izvēles (pa vienai rindā) ¦ Valikud (üks rea kohta)
+Entre ¦ Tarp ¦ Starp ¦ Vahemikus
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Leisti ir laisvą tekstą (be kortelės ar ne iš sąrašo) ¦ Atļaut arī brīvu tekstu (bez kartītes vai ārpus saraksta) ¦ Luba ka vaba teksti (kaardita või loendiväliselt)
+Écris au moins un choix. ¦ Parašyk bent vieną pasirinkimą. ¦ Ieraksti vismaz vienu izvēli. ¦ Kirjuta vähemalt üks valik.
+FORMAT ¦ FORMATAS ¦ FORMĀTS ¦ VORMING
+Mise en forme conditionnelle ¦ Sąlyginis formatavimas ¦ Nosacījumformatēšana ¦ Tingimusvormindus
+Ajouter la règle ¦ Pridėti taisyklę ¦ Pievienot noteikumu ¦ Lisa reegel
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Spalva, kai to reikalauja reikšmė: klaida ar keista reikšmė iškart krenta į akis. ¦ Krāsa, kad to prasa vērtība: kļūda vai dīvaina vērtība uzreiz duras acīs. ¦ Värv, kui väärtus seda nõuab: viga või kummaline väärtus torkab kohe silma.
+Prêtes à l’emploi : ¦ Paruoštos naudoti: ¦ Gatavi lietošanai: ¦ Kasutusvalmis:
+« âge > 100 ans » ¦ „amžius > 100 metų“ ¦ „vecums > 100 gadi“ ¦ „vanus > 100 aastat“
+« date impossible » ¦ „neįmanoma data“ ¦ „neiespējams datums“ ¦ „võimatu kuupäev“
+« doublons » ¦ „dublikatai“ ¦ „dublikāti“ ¦ „duplikaadid“
+« barres » ¦ „juostos“ ¦ „joslas“ ¦ „ribad“
+Si la valeur ¦ Jei reikšmė ¦ Ja vērtība ¦ Kui väärtus
+alors ¦ tada ¦ tad ¦ siis
+en gras ¦ pusjuodžiu šriftu ¦ treknrakstā ¦ paksus kirjas
+Une plage comme D2:D40. ¦ Sritis, pvz., D2:D40. ¦ Diapazons, piem., D2:D40. ¦ Vahemik, nt D2:D40.
+Écris un nombre. ¦ Parašyk skaičių. ¦ Ieraksti skaitli. ¦ Kirjuta arv.
+ÉDITION ¦ TAISYMAS ¦ REDIĢĒŠANA ¦ MUUTMINE
+🔍 Rechercher et remplacer ¦ 🔍 Ieškoti ir pakeisti ¦ 🔍 Meklēt un aizstāt ¦ 🔍 Otsi ja asenda
+Remplacer tout ¦ Pakeisti viską ¦ Aizstāt visu ¦ Asenda kõik
+Remplacer par ¦ Pakeisti į ¦ Aizstāt ar ¦ Asenda järgmisega
+Dans toutes les feuilles ¦ Visuose lapuose ¦ Visās lapās ¦ Kõigil lehtedel
+Respecter les capitales ¦ Skirti didžiąsias raides ¦ Ievērot reģistru ¦ Erista suurtähti
+Chercher le suivant ¦ Ieškoti kito ¦ Meklēt nākamo ¦ Otsi järgmist
+Trouvé en {cell} ¦ Rasta langelyje {cell} ¦ Atrasts šūnā {cell} ¦ Leitud lahtrist {cell}
+Écris ce qu’il faut chercher. ¦ Parašyk, ko ieškoti. ¦ Ieraksti, ko meklēt. ¦ Kirjuta, mida otsida.
+Aucune fonction ne correspond. ¦ Jokia funkcija neatitinka. ¦ Neviena funkcija neatbilst. ¦ Ükski funktsioon ei sobi.
+ƒ Choisir une fonction ¦ ƒ Pasirinkti funkciją ¦ ƒ Izvēlēties funkciju ¦ ƒ Vali funktsioon
+Chercher… (âge, somme, recherche) ¦ Ieškoti… (amžius, suma, paieška) ¦ Meklēt… (vecums, summa, uzmeklēšana) ¦ Otsi… (vanus, summa, otsing)
+Le menu de choix n’est pas chargé. ¦ Pasirinkimo meniu neįkeltas. ¦ Izvēles izvēlne nav ielādēta. ¦ Valikumenüü pole laaditud.
+📍 Un lieu pour {cell} ¦ 📍 Vieta langeliui {cell} ¦ 📍 Vieta šūnai {cell} ¦ 📍 Koht lahtrile {cell}
+👤 Une personne pour {cell} ¦ 👤 Asmuo langeliui {cell} ¦ 👤 Persona šūnai {cell} ¦ 👤 Isik lahtrile {cell}
+📍 Lieu de la base ¦ 📍 Vieta iš bazės ¦ 📍 Vieta no datubāzes ¦ 📍 Koht andmebaasist
+auto ¦ auto ¦ auto ¦ auto
+Décimales ¦ Dešimtainiai ženklai ¦ Decimālzīmes ¦ Kümnendkohad
+✓ « {text} » est comprise (≈) ¦ ✓ „{text}“ suprasta (≈) ¦ ✓ „{text}“ saprasts (≈) ¦ ✓ „{text}“ on aru saadud (≈)
+✓ « {text} » est comprise ¦ ✓ „{text}“ suprasta ¦ ✓ „{text}“ saprasts ¦ ✓ „{text}“ on aru saadud
+Noir ¦ Juoda ¦ Melns ¦ Must
+Contour ¦ Kontūras ¦ Kontūra ¦ Kontuur
+Retirer la règle ¦ Pašalinti taisyklę ¦ Noņemt noteikumu ¦ Eemalda reegel
+Aucune règle sur cette feuille. ¦ Šiame lape taisyklių nėra. ¦ Šajā lapā nav noteikumu. ¦ Sellel lehel reegleid pole.
+＋ Ajouter une règle… ¦ ＋ Pridėti taisyklę… ¦ ＋ Pievienot noteikumu… ¦ ＋ Lisa reegel…
+Une liste : {list} ¦ Sąrašas: {list} ¦ Saraksts: {list} ¦ Loend: {list}
+👤 Une personne de la base ¦ 👤 Asmuo iš bazės ¦ 👤 Persona no datubāzes ¦ 👤 Isik andmebaasist
+📍 Un lieu de la base ¦ 📍 Vieta iš bazės ¦ 📍 Vieta no datubāzes ¦ 📍 Koht andmebaasist
+Un nombre ¦ Skaičius ¦ Skaitlis ¦ Arv
+Une date d’acte ¦ Dokumento data ¦ Dokumenta datums ¦ Dokumendi kuupäev
+Garder le texte ¦ Išlaikyti tekstą ¦ Paturēt tekstu ¦ Jäta tekst alles
+Pas de validation ici. ¦ Čia tikrinimo nėra. ¦ Šeit nav validācijas. ¦ Siin valideerimist pole.
+Validation des données… ¦ Duomenų tikrinimas… ¦ Datu validācija… ¦ Andmete valideerimine…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Pirma išsaugok sąsiuvinį (💾), tada atidaryk kortelę. ¦ Vispirms saglabā darbgrāmatu (💾), tad atver kartīti. ¦ Salvesta esmalt töövihik (💾), siis ava kaart.
+{name} : lieu n° {id} de ta base. ¦ {name}: tavo bazės vieta nr. {id}. ¦ {name}: tavas datubāzes vieta nr. {id}. ¦ {name}: sinu andmebaasi koht nr {id}.
+Règle « {range} » retirée ¦ Taisyklė „{range}“ pašalinta ¦ Noteikums „{range}“ noņemts ¦ Reegel „{range}“ eemaldatud
+Police (E5) : {font} ¦ Šriftas (E5): {font} ¦ Fonts (E5): {font} ¦ Font (E5): {font}
+celle de départ ¦ pradinis ¦ sākotnējais ¦ algne
+Panneau de droite : montrer ¦ Dešinysis skydelis: rodyti ¦ Labais panelis: rādīt ¦ Parem paneel: näita
+Panneau de droite : cacher ¦ Dešinysis skydelis: slėpti ¦ Labais panelis: paslēpt ¦ Parem paneel: peida
+Double-clic : renommer · clic droit : plus d’actions ¦ Dukart spustelėk: pervadinti · dešiniuoju pelės mygtuku: daugiau veiksmų ¦ Dubultklikšķis: pārdēvēt · labais klikšķis: vairāk darbību ¦ Topeltklõps: nimeta ümber · paremklõps: rohkem toiminguid
+Ajouter une feuille ¦ Pridėti lapą ¦ Pievienot lapu ¦ Lisa leht
+Feuille {n} ¦ Lapas {n} ¦ Lapa {n} ¦ Leht {n}
+Renommer la feuille ¦ Pervadinti lapą ¦ Pārdēvēt lapu ¦ Nimeta leht ümber
+Un classeur garde au moins une feuille. ¦ Sąsiuvinyje lieka bent vienas lapas. ¦ Darbgrāmatā paliek vismaz viena lapa. ¦ Töövihikus jääb alles vähemalt üks leht.
+Feuille « {name} » supprimée ¦ Lapas „{name}“ ištrintas ¦ Lapa „{name}“ dzēsta ¦ Leht „{name}“ kustutatud
+Couleur de l’onglet… ¦ Kortelės spalva… ¦ Cilnes krāsa… ¦ Vahekaardi värv…
+Déplacer à gauche ¦ Perkelti į kairę ¦ Pārvietot pa kreisi ¦ Liiguta vasakule
+Déplacer à droite ¦ Perkelti į dešinę ¦ Pārvietot pa labi ¦ Liiguta paremale
+Somme <b>{v}</b> ¦ Suma <b>{v}</b> ¦ Summa <b>{v}</b> ¦ Summa <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Vidurkis <b>{v}</b> ¦ Vidējais <b>{v}</b> ¦ Keskmine <b>{v}</b>
+Nb <b>{v}</b> ¦ Kiekis <b>{v}</b> ¦ Skaits <b>{v}</b> ¦ Arv <b>{v}</b>
+Min <b>{v}</b> ¦ Min. <b>{v}</b> ¦ Min. <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Maks. <b>{v}</b> ¦ Maks. <b>{v}</b> ¦ Max <b>{v}</b>
+Dans la barre d’état ¦ Būsenos juostoje ¦ Statusa joslā ¦ Olekuribal
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Naudok {key}: naršyklė neleidžia meniu rašyti į iškarpinę. ¦ Izmanto {key}: pārlūks neļauj izvēlnei rakstīt starpliktuvē. ¦ Kasuta {key}: brauser ei luba menüül lõikelauale kirjutada.
+Sélection trop grande pour le presse-papiers. ¦ Pasirinkimas per didelis iškarpinei. ¦ Atlase ir pārāk liela starpliktuvei. ¦ Valik on lõikelaua jaoks liiga suur.
+Coupé : choisis où coller, puis {key}. ¦ Iškirpta: pasirink, kur įklijuoti, tada {key}. ¦ Izgriezts: izvēlies, kur ielīmēt, tad {key}. ¦ Lõigatud: vali, kuhu kleepida, siis {key}.
+Utilise {key} dans la grille pour coller. ¦ Naudok {key} lentelėje, kad įklijuotum. ¦ Izmanto {key} režģī, lai ielīmētu. ¦ Kleepimiseks kasuta ruudustikus {key}.
+Trop de cellules à coller. ¦ Per daug langelių įklijuoti. ¦ Pārāk daudz šūnu ielīmēšanai. ¦ Liiga palju lahtreid kleepimiseks.
+{n} (avec le gras et les couleurs). ¦ {n} (su pusjuodžiu šriftu ir spalvomis). ¦ {n} (ar treknrakstu un krāsām). ¦ {n} (koos paksu kirja ja värvidega).
+Série {n} ¦ Seka {n} ¦ Sērija {n} ¦ Seeria {n}
+Colonnes groupées ¦ Sugrupuoti stulpeliai ¦ Grupētas kolonnas ¦ Rühmitatud tulbad
+Barres horizontales ¦ Horizontalios juostos ¦ Horizontālas joslas ¦ Horisontaalsed ribad
+TSV (tabulations) ¦ TSV (tabuliacijos) ¦ TSV (tabulācijas) ¦ TSV (tabulaatorid)
+⤒ Importer un tableau ¦ ⤒ Importuoti lentelę ¦ ⤒ Importēt tabulu ¦ ⤒ Impordi tabel
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Atspėtas skyriklis: {sep} · Koduotė: {enc} ¦ Uzminētais atdalītājs: {sep} · Kodējums: {enc} ¦ Arvatud eraldaja: {sep} · Kodeering: {enc}
+point-virgule (;) ¦ kabliataškis (;) ¦ semikols (;) ¦ semikoolon (;)
+virgule (,) ¦ kablelis (,) ¦ komats (,) ¦ koma (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Diakritiniai ženklai teisingi: „{list}“. ¦ ✓ Diakritiskās zīmes pareizas: „{list}“. ¦ ✓ Täpitähed õiged: „{list}“.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> lapuose {sheets} ¦ <b>{rows}</b> lapās {sheets} ¦ <b>{rows}</b> lehtedel {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV ir TSV: atidarytas lapas. Kiti: visas sąsiuvinis. Langelis, prasidedantis „=“, CSV faile apsaugotas (jokių įslaptintų formulių). ¦ CSV un TSV: atvērtā lapa. Pārējie: visa darbgrāmata. Šūna, kas sākas ar „=“, CSV failā ir aizsargāta (nekādu iepludinātu formulu). ¦ CSV ja TSV: avatud leht. Teised: kogu töövihik. „=“-ga algav lahter on CSV-s kaitstud (ei mingit sissepoetud valemit).
+tout tableur ¦ bet kuri skaičiuoklė ¦ jebkura izklājlapa ¦ iga tabelarvutus
+tabulations ¦ tabuliacijos ¦ tabulācijas ¦ tabulaatorid
+données ¦ duomenys ¦ dati ¦ andmed
+à lire ¦ skaitymui ¦ lasīšanai ¦ lugemiseks
+💾 Fichier de l’outil ¦ 💾 Įrankio failas ¦ 💾 Rīka fails ¦ 💾 Tööriista fail
+Exporté : {name} ¦ Eksportuota: {name} ¦ Eksportēts: {name} ¦ Eksporditud: {name}
+(feuille vide) ¦ (tuščias lapas) ¦ (tukša lapa) ¦ (tühi leht)
+Toutes les feuilles ¦ Visi lapai ¦ Visas lapas ¦ Kõik lehed
+Quadrillage ¦ Tinklelio linijos ¦ Režģa līnijas ¦ Ruudustikujooned
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Išsaugota: Sąrašai → Redagavimo įrankiai → 🧾 Skaičiuoklė. ¦ Saglabāts: Saraksti → Rediģēšanas rīki → 🧾 Izklājlapa. ¦ Salvestatud: Loendid → Muutmistööriistad → 🧾 Tabelarvutus.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Šablonas „{name}“ išsaugotas (Pradėti nuo šablono → Mano šablonai). ¦ Veidne „{name}“ saglabāta (Sākt no veidnes → Manas veidnes). ¦ Mall „{name}“ salvestatud (Alusta mallist → Minu mallid).
+Copie « {name} » enregistrée. ¦ Kopija „{name}“ išsaugota. ¦ Kopija „{name}“ saglabāta. ¦ Koopia „{name}“ salvestatud.
+Ce classeur ¦ Šis sąsiuvinis ¦ Šī darbgrāmata ¦ See töövihik
+Impossible d’enregistrer : {error} ¦ Nepavyko išsaugoti: {error} ¦ Neizdevās saglabāt: {error} ¦ Salvestamine ebaõnnestus: {error}
+Enregistrer comme modèle ¦ Išsaugoti kaip šabloną ¦ Saglabāt kā veidni ¦ Salvesta mallina
+Enregistrer une copie ¦ Išsaugoti kopiją ¦ Saglabāt kopiju ¦ Salvesta koopia
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Šablono pavadinimas (duomenys lieka: išvalyk juos prieš tai, jei nori tuščio šablono): ¦ Veidnes nosaukums (dati paliek: iztīri tos iepriekš, ja vēlies tukšu veidni): ¦ Malli nimi (andmed jäävad alles: tühjenda need enne, kui tahad tühja malli):
+Le nom de la copie : ¦ Kopijos pavadinimas: ¦ Kopijas nosaukums: ¦ Koopia nimi:
+{name} (copie) ¦ {name} (kopija) ¦ {name} (kopija) ¦ {name} (koopia)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Pakeitimai, atlikti po paskutinio išsaugojimo, bus prarasti. ¦ Izmaiņas, kas veiktas kopš pēdējās saglabāšanas, tiks zaudētas. ¦ Pärast viimast salvestamist tehtud muudatused lähevad kaotsi.
+📋 Partir d’un modèle ¦ 📋 Pradėti nuo šablono ¦ 📋 Sākt no veidnes ¦ 📋 Alusta mallist
+Mes modèles ¦ Mano šablonai ¦ Manas veidnes ¦ Minu mallid
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Savo šablonų dar neturi: sąsiuvinyje Failas → „Išsaugoti kaip šabloną…“. ¦ Tev vēl nav savu veidņu: darbgrāmatā Fails → „Saglabāt kā veidni…“. ¦ Sul pole veel oma malle: töövihikus Fail → „Salvesta mallina…“.
+séparateur « {sep} » ¦ skyriklis „{sep}“ ¦ atdalītājs „{sep}“ ¦ eraldaja „{sep}“
+Classeur importé ¦ Importuotas sąsiuvinis ¦ Importētā darbgrāmata ¦ Imporditud töövihik
+Classeur « {name} » créé ({rows}) ¦ Sąsiuvinis „{name}“ sukurtas ({rows}) ¦ Darbgrāmata „{name}“ izveidota ({rows}) ¦ Töövihik „{name}“ loodud ({rows})
+classeur ¦ sąsiuvinis ¦ darbgrāmata ¦ töövihik
+＋ Nouveau classeur ¦ ＋ Naujas sąsiuvinis ¦ ＋ Jauna darbgrāmata ¦ ＋ Uus töövihik
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Surašymo išrašas, parapijos registras, tyrimų biudžetas, laiškų sekimas… ¦ Tautas skaitīšanas izraksts, draudzes reģistrs, pētniecības budžets, vēstuļu uzskaite… ¦ Rahvaloenduse väljavõte, kihelkonnaregister, uurimise eelarve, kirjade jälgimine…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Dalijai iš nulio: {ref} tuščias arba lygus 0. Patarimas: =SI.ERREUR(…;"") palieka langelį tuščią. ¦ Tu dali ar nulli: {ref} ir tukšs vai vienāds ar 0. Padoms: =SI.ERREUR(…;"") atstāj šūnu tukšu. ¦ Jagad nulliga: {ref} on tühi või võrdub 0-ga. Nõuanne: =SI.ERREUR(…;"") jätab lahtri tühjaks.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Dalijai iš nulio: {why}. Patarimas: =SI.ERREUR(…;"") palieka langelį tuščią. ¦ Tu dali ar nulli: {why}. Padoms: =SI.ERREUR(…;"") atstāj šūnu tukšu. ¦ Jagad nulliga: {why}. Nõuanne: =SI.ERREUR(…;"") jätab lahtri tühjaks.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Dalijai iš nulio. Patarimas: =SI.ERREUR(…;"") palieka langelį tuščią. ¦ Tu dali ar nulli. Padoms: =SI.ERREUR(…;"") atstāj šūnu tukšu. ¦ Jagad nulliga. Nõuanne: =SI.ERREUR(…;"") jätab lahtri tühjaks.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Nežinau „{name}“. Ar turėjai omenyje {sugg}? ¦ Nezinu „{name}“. Vai domāji {sugg}? ¦ Ma ei tea „{name}“. Kas mõtlesid {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Nežinau „{name}“. Įvesk pirmąsias raides: atsidarys funkcijų sąrašas. ¦ Nezinu „{name}“. Ieraksti pirmos burtus: atvērsies funkciju saraksts. ¦ Ma ei tea „{name}“. Kirjuta esimesed tähed: avaneb funktsioonide loend.
+Un nom inconnu dans la formule. ¦ Formulėje nežinomas pavadinimas. ¦ Formulā nezināms nosaukums. ¦ Valemis on tundmatu nimi.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ „{text}“ nėra skaičius (langelis {cell}): su juo negalima skaičiuoti. ¦ „{text}“ nav skaitlis (šūna {cell}): ar to nevar rēķināt. ¦ „{text}“ pole arv (lahter {cell}): sellega ei saa arvutada.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ „{text}“ nėra skaičius: su juo negalima skaičiuoti. ¦ „{text}“ nav skaitlis: ar to nevar rēķināt. ¦ „{text}“ pole arv: sellega ei saa arvutada.
+Une valeur ne convient pas ¦ Reikšmė netinka ¦ Vērtība neder ¦ Väärtus ei sobi
+{what} (cellule {cell}). ¦ {what} (langelis {cell}). ¦ {what} (šūna {cell}). ¦ {what} (lahter {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Formulė rodo į tai, ko nėra: {what}. ¦ Formula norāda uz kaut ko, kas nepastāv: {what}. ¦ Valem viitab millelegi, mida pole olemas: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Formulė rodo į ištrintą langelį. ¦ Formula norāda uz dzēstu šūnu. ¦ Valem viitab kustutatud lahtrile.
+Valeur introuvable ¦ Reikšmė nerasta ¦ Vērtība nav atrasta ¦ Väärtust ei leitud
+La recherche ¦ Paieška ¦ Uzmeklēšana ¦ Otsing
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} nerado „{what}“ srityje {where}. ¦ {fn} neatrada „{what}“ diapazonā {where}. ¦ {fn} ei leidnud „{what}“ vahemikust {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} nerado „{what}“. ¦ {fn} neatrada „{what}“. ¦ {fn} ei leidnud „{what}“.
+{path} : la formule tourne en rond. ¦ {path}: formulė sukasi ratu. ¦ {path}: formula griežas pa apli. ¦ {path}: valem käib ringiratast.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Formulei reikia savęs pačios: ji sukasi ratu. ¦ Formulai vajadzīga pati sevi: tā griežas pa apli. ¦ Valem vajab iseennast: see käib ringiratast.
+« {text} » : {why}. ¦ „{text}“: {why}. ¦ „{text}“: {why}. ¦ „{text}“: {why}.
+cette date ¦ šios datos ¦ šo datumu ¦ seda kuupäeva
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nesuprantu {what} („{text}“). Pavyzdžiai: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nesaprotu {what} („{text}“). Piemēri: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ma ei saa aru: {what} („{text}“). Näited: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nesuprantu {what}. Pavyzdžiai: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Nesaprotu {what}. Piemēri: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ma ei saa aru: {what}. Näited: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Nesuprantu formulės ties „{near}“: {why}. ¦ Nesaprotu formulu pie „{near}“: {why}. ¦ Ma ei saa valemist aru koha „{near}“ juures: {why}.
+Je ne comprends pas la formule : {why}. ¦ Nesuprantu formulės: {why}. ¦ Nesaprotu formulu: {why}. ¦ Ma ei saa valemist aru: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nesuprantu formulės ties „{near}“: patikrink skliaustus, kabutes ir „;“. ¦ Nesaprotu formulu pie „{near}“: pārbaudi iekavas, pēdiņas un „;“. ¦ Ma ei saa valemist aru koha „{near}“ juures: kontrolli sulge, jutumärke ja „;“.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Nesuprantu formulės: patikrink skliaustus, kabutes ir „;“. ¦ Nesaprotu formulu: pārbaudi iekavas, pēdiņas un „;“. ¦ Ma ei saa valemist aru: kontrolli sulge, jutumärke ja „;“.
+Nombre impossible ¦ Neįmanomas skaičius ¦ Neiespējams skaitlis ¦ Võimatu arv
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Rezultatui reikia {size} žemyn ir į dešinę, bet {cell} nėra tuščias: išvalyk jį, kad matytum visą rezultatą. ¦ Rezultātam vajag {size} uz leju un pa labi, bet {cell} nav tukša: iztīri to, lai redzētu visu rezultātu. ¦ Tulemus vajab {size} alla ja paremale, kuid {cell} pole tühi: tühjenda see, et näha kogu tulemust.
+plusieurs cases ¦ kelių langelių ¦ vairākas šūnas ¦ mitut lahtrit
+une case ¦ vieno langelio ¦ vienu šūnu ¦ üht lahtrit
+Trop gros pour être calculé : {why}. ¦ Per didelis, kad būtų apskaičiuotas: {why}. ¦ Pārāk liels, lai aprēķinātu: {why}. ¦ Liiga suur arvutamiseks: {why}.
+réduis la plage ¦ sumažink sritį ¦ samazini diapazonu ¦ vähenda vahemikku
+Erreur dans la formule. ¦ Klaida formulėje. ¦ Kļūda formulā. ¦ Viga valemis.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Patarimas: =SI.ERREUR(A4/B4;"") ¦ Padoms: =SI.ERREUR(A4/B4;"") ¦ Nõuanne: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ failas atmestas: jame yra XML deklaracijų (DOCTYPE ar ENTITY), kurių biuro dokumentas nenaudoja ¦ fails noraidīts: tas satur XML deklarācijas (DOCTYPE vai ENTITY), ko biroja dokuments neizmanto ¦ fail tagasi lükatud: see sisaldab XML-deklaratsioone (DOCTYPE või ENTITY), mida kontoridokument ei kasuta
+fichier XML abîmé ¦ sugadintas XML failas ¦ bojāts XML fails ¦ rikutud XML-fail
+fichier refusé : trop d’éléments ¦ failas atmestas: per daug elementų ¦ fails noraidīts: pārāk daudz elementu ¦ fail tagasi lükatud: liiga palju elemente
+fichier refusé : XML trop imbriqué ¦ failas atmestas: XML per giliai įdėtas ¦ fails noraidīts: XML ir pārāk dziļi ligzdots ¦ fail tagasi lükatud: XML on liiga sügavalt pesastatud
+fichier trop gros (plus de {n} Mo) ¦ failas per didelis (daugiau nei {n} MB) ¦ fails ir pārāk liels (vairāk nekā {n} MB) ¦ fail on liiga suur (üle {n} MB)
+ce n’est pas un fichier zip valide ¦ tai nėra tinkamas zip failas ¦ tas nav derīgs zip fails ¦ see pole kehtiv zip-fail
+fichier refusé : trop d’éléments dans le zip ¦ failas atmestas: per daug elementų zip faile ¦ fails noraidīts: pārāk daudz elementu zip failā ¦ fail tagasi lükatud: zip-failis on liiga palju üksusi
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ užšifruotas failas: pirma atidaryk jį savo skaičiuoklėje ir išsaugok be slaptažodžio ¦ šifrēts fails: vispirms atver to savā izklājlapas programmā un saglabā bez paroles ¦ krüpteeritud fail: ava see esmalt oma tabelarvutusprogrammis ja salvesta ilma paroolita
+fichier zip abîmé ¦ sugadintas zip failas ¦ bojāts zip fails ¦ rikutud zip-fail
+fichier refusé : trop gros une fois décompressé ¦ failas atmestas: per didelis išskleidus ¦ fails noraidīts: pārāk liels pēc atarhivēšanas ¦ fail tagasi lükatud: lahtipakituna liiga suur
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ failas atmestas: išskleistas jis tampa gerokai per didelis (zip bomba) ¦ fails noraidīts: atarhivējot tas kļūst daudz par lielu (zip bumba) ¦ fail tagasi lükatud: lahti pakkides muutub see kaugelt liiga suureks (zip-pomm)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ ši naršyklė nemoka atidaryti zip failų (atnaujink ją) ¦ šis pārlūks neprot atvērt zip failus (atjaunini to) ¦ see brauser ei oska zip-faile avada (uuenda seda)
+compression inconnue dans le fichier ¦ nežinomas glaudinimas faile ¦ nezināma saspiešana failā ¦ tundmatu tihendus failis
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ tai nėra Excel failas (.xlsx): trūksta xl/workbook.xml ¦ tas nav Excel fails (.xlsx): trūkst xl/workbook.xml ¦ see pole Exceli fail (.xlsx): xl/workbook.xml puudub
+fichier refusé : trop de feuilles ¦ failas atmestas: per daug lapų ¦ fails noraidīts: pārāk daudz lapu ¦ fail tagasi lükatud: liiga palju lehti
+fichier refusé : trop de cellules ¦ failas atmestas: per daug langelių ¦ fails noraidīts: pārāk daudz šūnu ¦ fail tagasi lükatud: liiga palju lahtreid
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ tai nėra LibreOffice failas (.ods): trūksta content.xml ¦ tas nav LibreOffice fails (.ods): trūkst content.xml ¦ see pole LibreOffice'i fail (.ods): content.xml puudub
+ce fichier n’est pas un JSON valide ¦ šis failas nėra tinkamas JSON ¦ šis fails nav derīgs JSON ¦ see fail pole kehtiv JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ šiame JSON nerandu lentelės (reikia eilučių ar objektų sąrašo) ¦ šajā JSON neatrodu tabulu (vajadzīgs rindu vai objektu saraksts) ¦ ma ei leia selles JSON-is tabelit (vaja on ridade või objektide loendit)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ seni Excel failai (.xls) neskaitomi: atidaryk jį Excel ar LibreOffice ir išsaugok kaip .xlsx ¦ vecie Excel faili (.xls) netiek lasīti: atver to Excel vai LibreOffice un saglabā kā .xlsx ¦ vanu Exceli faile (.xls) ei loeta: ava see Excelis või LibreOffice'is ja salvesta .xlsx-ina
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ šis suglaudintas failas nėra nei .xlsx, nei .ods ¦ šis saspiestais fails nav ne .xlsx, ne .ods ¦ see tihendatud fail pole .xlsx ega .ods
+Nombre 0,00 ¦ Skaičius 0,00 ¦ Skaitlis 0,00 ¦ Arv 0,00
+Nombre entier ¦ Sveikasis skaičius ¦ Vesels skaitlis ¦ Täisarv
+Monnaie (€) ¦ Valiuta (€) ¦ Valūta (€) ¦ Valuuta (€)
+Pourcentage ¦ Procentai ¦ Procenti ¦ Protsent
+Date courte ¦ Trumpa data ¦ Īss datums ¦ Lühike kuupäev
+Date d’acte ¦ Dokumento data ¦ Dokumenta datums ¦ Dokumendi kuupäev
+Texte ¦ Tekstas ¦ Teksts ¦ Tekst
+Relevé de recensement ¦ Surašymo išrašas ¦ Tautas skaitīšanas izraksts ¦ Rahvaloenduse väljavõte
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ tų metų stulpeliai · namų ūkiai · apskaičiuota „Gimęs apie“ ¦ gada kolonnas · mājsaimniecības · aprēķināts „Dzimis ap“ ¦ aasta veerud · leibkonnad · arvutatud „Sündinud umbes“
+Registre paroissial ¦ Parapijos registras ¦ Draudzes reģistrs ¦ Kihelkonnaregister
+baptêmes, mariages, sépultures ¦ krikštai, santuokos, laidojimai ¦ kristības, laulības, apbedīšanas ¦ ristimised, laulatused, matused
+Budget de la recherche ¦ Tyrimų biudžetas ¦ Pētniecības budžets ¦ Uurimise eelarve
+actes, déplacements, abonnements ¦ dokumentai, kelionės, prenumeratos ¦ dokumenti, braucieni, abonementi ¦ dokumendid, sõidud, tellimused
+Suivi des courriers ¦ Laiškų sekimas ¦ Vēstuļu uzskaite ¦ Kirjade jälgimine
+envoyé, relancé, réponse ¦ išsiųsta, priminta, atsakymas ¦ nosūtīts, atgādināts, atbilde ¦ saadetud, meelde tuletatud, vastus
+Arbre en tableau ¦ Medis lentele ¦ Koks tabulā ¦ Puu tabelina
+Sosa, génération, côté, âge ¦ Sosa, karta, pusė, amžius ¦ Sosa, paaudze, puse, vecums ¦ Sosa, põlvkond, pool, vanus
+objets, prix, total en livres ¦ daiktai, kainos, suma livres ¦ priekšmeti, cenas, kopsumma livres ¦ esemed, hinnad, summa livres'ides
+Registre matricule ¦ Karinis registras ¦ Militārais reģistrs ¦ Väeteenistusregister
+classe, signalement, campagnes ¦ šaukimo metai, asmens aprašas, kampanijos ¦ iesaukuma gads, apraksts, kampaņas ¦ kutsealiste klass, isikukirjeldus, sõjakäigud
+📋 Partir d’un modèle… ¦ 📋 Pradėti nuo šablono… ¦ 📋 Sākt no veidnes… ¦ 📋 Alusta mallist…
+⤒ Importer un tableau… ¦ ⤒ Importuoti lentelę… ¦ ⤒ Importēt tabulu… ¦ ⤒ Impordi tabel…
+⤓ Exporter… ¦ ⤓ Eksportuoti… ¦ ⤓ Eksportēt… ¦ ⤓ Ekspordi…
+🖨 Imprimer… ¦ 🖨 Spausdinti… ¦ 🖨 Drukāt… ¦ 🖨 Prindi…
+⚙️ Réglages du tableur… ¦ ⚙️ Skaičiuoklės nustatymai… ¦ ⚙️ Izklājlapas iestatījumi… ¦ ⚙️ Tabelarvutuse seaded…
+Insertion ¦ Įterpimas ¦ Ievietošana ¦ Lisamine
+Coller les valeurs seulement ¦ Įklijuoti tik reikšmes ¦ Ielīmēt tikai vērtības ¦ Kleebi ainult väärtused
+Effacer le contenu ¦ Išvalyti turinį ¦ Notīrīt saturu ¦ Tühjenda sisu
+Effacer tout (contenu et mise en forme) ¦ Išvalyti viską (turinį ir formatavimą) ¦ Notīrīt visu (saturu un formatējumu) ¦ Tühjenda kõik (sisu ja vormindus)
+Recopier vers le bas ¦ Užpildyti žemyn ¦ Aizpildīt uz leju ¦ Täida allapoole
+Recopier vers la droite ¦ Užpildyti į dešinę ¦ Aizpildīt pa labi ¦ Täida paremale
+🔍 Rechercher et remplacer… ¦ 🔍 Ieškoti ir pakeisti… ¦ 🔍 Meklēt un aizstāt… ¦ 🔍 Otsi ja asenda…
+Ligne au-dessus ¦ Eilutė viršuje ¦ Rinda virs ¦ Rida üles
+Ligne en dessous ¦ Eilutė apačioje ¦ Rinda zem ¦ Rida alla
+＋ Nouvelle feuille ¦ ＋ Naujas lapas ¦ ＋ Jauna lapa ¦ ＋ Uus leht
+ƒ Fonction… ¦ ƒ Funkcija… ¦ ƒ Funkcija… ¦ ƒ Funktsioon…
+Σ Somme automatique ¦ Σ Automatinė suma ¦ Σ Automātiskā summa ¦ Σ Automaatsumma
+📅 Date du jour ¦ 📅 Šiandienos data ¦ 📅 Šodienas datums ¦ 📅 Tänane kuupäev
+Nom pour la plage… ¦ Srities pavadinimas… ¦ Diapazona nosaukums… ¦ Vahemiku nimi…
+💬 Note sur la cellule… ¦ 💬 Pastaba apie langelį… ¦ 💬 Piezīme par šūnu… ¦ 💬 Lahtri märkus…
+📊 Graphique depuis la sélection ¦ 📊 Diagrama iš pasirinkimo ¦ 📊 Diagramma no atlases ¦ 📊 Graafik valikust
+Barré ¦ Perbrauktas ¦ Pārsvītrots ¦ Läbikriipsutatud
+Aa Police… ¦ Aa Šriftas… ¦ Aa Fonts… ¦ Aa Font…
+Taille du texte… ¦ Teksto dydis… ¦ Teksta izmērs… ¦ Teksti suurus…
+↵ Renvoi à la ligne ¦ ↵ Teksto laužymas ¦ ↵ Teksta aplaušana ¦ ↵ Murra tekst
+⊞ Fusionner / séparer ¦ ⊞ Sulieti / atskirti ¦ ⊞ Sapludināt / atdalīt ¦ ⊞ Ühenda / eralda
+▦ Bordures : tout ¦ ▦ Kraštinės: visos ¦ ▦ Apmales: visas ¦ ▦ Äärised: kõik
+▭ Bordures : contour ¦ ▭ Kraštinės: išorinės ¦ ▭ Apmales: ārējās ¦ ▭ Äärised: välimised
+▁ Bordure du bas ¦ ▁ Apatinė kraštinė ¦ ▁ Apakšējā apmale ¦ ▁ Alumine ääris
+Largeur de colonne… ¦ Stulpelio plotis… ¦ Kolonnas platums… ¦ Veeru laius…
+Hauteur de ligne… ¦ Eilutės aukštis… ¦ Rindas augstums… ¦ Rea kõrgus…
+Ajuster la largeur au contenu ¦ Pritaikyti plotį turiniui ¦ Pielāgot platumu saturam ¦ Sobita laius sisuga
+Masquer les lignes ¦ Slėpti eilutes ¦ Paslēpt rindas ¦ Peida read
+Masquer les colonnes ¦ Slėpti stulpelius ¦ Paslēpt kolonnas ¦ Peida veerud
+Tout remontrer ¦ Vėl rodyti viską ¦ Rādīt visu atkal ¦ Näita kõike uuesti
+Mise en forme conditionnelle… ¦ Sąlyginis formatavimas… ¦ Nosacījumformatēšana… ¦ Tingimusvormindus…
+Une ligne sur deux ¦ Kas antra eilutė ¦ Katra otrā rinda ¦ Iga teine rida
+Effacer la mise en forme ¦ Išvalyti formatavimą ¦ Notīrīt formatējumu ¦ Tühjenda vormindus
+↕ Trier A → Z ¦ ↕ Rūšiuoti A → Z ¦ ↕ Kārtot A → Z ¦ ↕ Sorteeri A → Z
+↕ Trier Z → A ¦ ↕ Rūšiuoti Z → A ¦ ↕ Kārtot Z → A ¦ ↕ Sorteeri Z → A
+⚲ Filtrer ¦ ⚲ Filtruoti ¦ ⚲ Filtrēt ¦ ⚲ Filtreeri
+Supprimer les doublons… ¦ Ištrinti dublikatus… ¦ Dzēst dublikātus… ¦ Kustuta duplikaadid…
+Convertir le texte en colonnes… ¦ Konvertuoti tekstą į stulpelius… ¦ Pārvērst tekstu kolonnās… ¦ Teisenda tekst veergudeks…
+Retirer les espaces en trop ¦ Pašalinti perteklinius tarpus ¦ Noņemt liekās atstarpes ¦ Eemalda üleliigsed tühikud
+Figer la 1re ligne ¦ Užfiksuoti 1-ąją eilutę ¦ Iesaldēt 1. rindu ¦ Külmuta 1. rida
+Figer la 1re colonne ¦ Užfiksuoti 1-ąjį stulpelį ¦ Iesaldēt 1. kolonnu ¦ Külmuta 1. veerg
+Figer jusqu’à la cellule choisie ¦ Užfiksuoti iki pasirinkto langelio ¦ Iesaldēt līdz atlasītajai šūnai ¦ Külmuta kuni valitud lahtrini
+Libérer les volets ¦ Atlaisvinti sritis ¦ Atsaldēt rūtis ¦ Vabasta paanid
+Montrer les formules ¦ Rodyti formules ¦ Rādīt formulas ¦ Näita valemeid
+⤢ Ajuster à la fenêtre ¦ ⤢ Pritaikyti langui ¦ ⤢ Pielāgot logam ¦ ⤢ Sobita aknaga
+100 % (taille réelle) ¦ 100 % (tikrasis dydis) ¦ 100 % (īstais izmērs) ¦ 100% (tegelik suurus)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Skaičiuoklės spartieji klavišai… ¦ ⌨️ Izklājlapas īsinājumtaustiņi… ¦ ⌨️ Tabelarvutuse kiirklahvid…
+Rechercher et remplacer ¦ Ieškoti ir pakeisti ¦ Meklēt un aizstāt ¦ Otsi ja asenda
+Filtrer (barre de recherche et filtres au-dessus) ¦ Filtruoti (paieškos juosta ir filtrai viršuje) ¦ Filtrēt (meklēšanas josla un filtri augšā) ¦ Filtreeri (otsinguriba ja filtrid üleval)
+Trier la plage ¦ Rūšiuoti sritį ¦ Kārtot diapazonu ¦ Sorteeri vahemik
+Somme, moyenne, nombre… ¦ Suma, vidurkis, kiekis… ¦ Summa, vidējais, skaits… ¦ Summa, keskmine, arv…
+Une personne de la base dans la cellule ¦ Asmuo iš bazės langelyje ¦ Persona no datubāzes šūnā ¦ Isik andmebaasist lahtris
+Un lieu de la base dans la cellule ¦ Vieta iš bazės langelyje ¦ Vieta no datubāzes šūnā ¦ Koht andmebaasist lahtris
+Note sur la cellule ¦ Pastaba apie langelį ¦ Piezīme par šūnu ¦ Lahtri märkus
+Graphique avec les chiffres de la sélection ¦ Diagrama su pasirinkimo skaičiais ¦ Diagramma ar atlases skaitļiem ¦ Graafik valiku arvudega
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Rašyk, kad įvestum · = skaičiuoti · dukart spustelėk, kad redaguotum · dešiniuoju pelės mygtuku – veiksmai · tempk mažą kvadratėlį, kad nukopijuotum ¦ Raksti, lai ievadītu · = aprēķinam · dubultklikšķis rediģēšanai · labais klikšķis darbībām · velc mazo kvadrātiņu, lai kopētu ¦ Kirjuta sisestamiseks · = arvutamiseks · topeltklõps muutmiseks · paremklõps toimingute jaoks · lohista väikest ruutu kopeerimiseks
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter patvirtina · Tab: langelis dešinėje · Esc atšaukia · rašydamas formulę spustelėk arba tempk per langelius, kad juos įterptum ¦ Enter apstiprina · Tab: šūna pa labi · Esc atceļ · rakstot formulu, noklikšķini vai velc pāri šūnām, lai tās ievietotu ¦ Enter kinnitab · Tab: lahter paremal · Esc tühistab · valemi kirjutamisel klõpsa või lohista üle lahtrite, et need lisada
+Σ Somme ¦ Σ Suma ¦ Σ Summa ¦ Σ Summa
+Nombre ¦ Kiekis ¦ Skaits ¦ Arv
+Minimum ¦ Minimumas ¦ Minimums ¦ Miinimum
+Maximum ¦ Maksimumas ¦ Maksimums ¦ Maksimum
+Somme ¦ Suma ¦ Summa ¦ Summa
+Panneau de droite ouvert ¦ Dešinysis skydelis atidarytas ¦ Labais panelis atvērts ¦ Parem paneel avatud
+, virgule ¦ , kablelis ¦ , komats ¦ , koma
+; point-virgule ¦ ; kabliataškis ¦ ; semikols ¦ ; semikoolon
+espace ¦ tarpas ¦ atstarpe ¦ tühik
+Autre… ¦ Kita… ¦ Cits… ¦ Muu…
+plus grande que ¦ didesnė už ¦ lielāka par ¦ suurem kui
+plus petite que ¦ mažesnė už ¦ mazāka par ¦ väiksem kui
+au moins ¦ ne mažesnė kaip ¦ vismaz ¦ vähemalt
+au plus ¦ ne didesnė kaip ¦ ne vairāk kā ¦ kõige rohkem
+égale à ¦ lygi ¦ vienāda ar ¦ võrdne
+différente de ¦ skiriasi nuo ¦ atšķiras no ¦ erineb
+entre ¦ tarp ¦ starp ¦ vahemikus
+contient le texte ¦ turi tekstą ¦ satur tekstu ¦ sisaldab teksti
+est vide ¦ tuščia ¦ ir tukša ¦ on tühi
+n’est pas vide ¦ netuščia ¦ nav tukša ¦ pole tühi
+est en double ¦ pasikartoja ¦ ir dublikāts ¦ on duplikaat
+est une date impossible ¦ yra neįmanoma data ¦ ir neiespējams datums ¦ on võimatu kuupäev
+barres dans la cellule ¦ juostos langelyje ¦ joslas šūnā ¦ ribad lahtris
+fond jaune ¦ geltonas fonas ¦ dzeltens fons ¦ kollane taust
+fond rouge ¦ raudonas fonas ¦ sarkans fons ¦ punane taust
+fond vert ¦ žalias fonas ¦ zaļš fons ¦ roheline taust
+fond bleu ¦ mėlynas fonas ¦ zils fons ¦ sinine taust
+fond orange ¦ oranžinis fonas ¦ oranžs fons ¦ oranž taust
+fond violet ¦ violetinis fonas ¦ violets fons ¦ lilla taust
+règle|plus grande que ¦ didesnė už ¦ lielāka par ¦ suurem kui
+règle|plus petite que ¦ mažesnė už ¦ mazāka par ¦ väiksem kui
+règle|au moins ¦ ne mažesnė kaip ¦ vismaz ¦ vähemalt
+règle|au plus ¦ ne didesnė kaip ¦ ne vairāk kā ¦ kõige rohkem
+règle|égale à ¦ lygi ¦ vienāda ar ¦ võrdne
+règle|différente de ¦ skiriasi nuo ¦ atšķiras no ¦ erineb
+règle|entre ¦ tarp ¦ starp ¦ vahemikus
+règle|contient ¦ turi ¦ satur ¦ sisaldab
+règle|vide ¦ tuščia ¦ tukša ¦ tühi
+règle|pas vide ¦ netuščia ¦ nav tukša ¦ pole tühi
+règle|en double ¦ pasikartoja ¦ dublikāts ¦ duplikaat
+règle|date impossible ¦ neįmanoma data ¦ neiespējams datums ¦ võimatu kuupäev
+règle|barres ¦ juostos ¦ joslas ¦ ribad
+Cellule ¦ Langelis ¦ Šūna ¦ Lahter
+Nombre et date ¦ Skaičius ir data ¦ Skaitlis un datums ¦ Arv ja kuupäev
+Couleur et bordures ¦ Spalva ir kraštinės ¦ Krāsa un apmales ¦ Värv ja äärised
+Validation ¦ Tikrinimas ¦ Validācija ¦ Valideerimine
+Adresse ¦ Adresas ¦ Adrese ¦ Aadress
+Valeur ¦ Reikšmė ¦ Vērtība ¦ Väärtus
+Formule ¦ Formulė ¦ Formula ¦ Valem
+Autorise ¦ Leidžia ¦ Atļauj ¦ Lubab
+Sinon ¦ Kitaip ¦ Citādi ¦ Muidu
+Insérer une ligne au-dessus ¦ Įterpti eilutę viršuje ¦ Ievietot rindu virs ¦ Lisa rida üles
+Insérer une ligne en dessous ¦ Įterpti eilutę apačioje ¦ Ievietot rindu zem ¦ Lisa rida alla
+Insérer une colonne à gauche ¦ Įterpti stulpelį kairėje ¦ Ievietot kolonnu pa kreisi ¦ Lisa veerg vasakule
+Insérer une colonne à droite ¦ Įterpti stulpelį dešinėje ¦ Ievietot kolonnu pa labi ¦ Lisa veerg paremale
+Trier A → Z ¦ Rūšiuoti A → Z ¦ Kārtot A → Z ¦ Sorteeri A → Z
+Retirer le filtre ¦ Pašalinti filtrą ¦ Noņemt filtru ¦ Eemalda filter
+Note… ¦ Pastaba… ¦ Piezīme… ¦ Märkus…
+Ajuster la largeur ¦ Pritaikyti plotį ¦ Pielāgot platumu ¦ Sobita laius
+Supprimer les lignes ¦ Ištrinti eilutes ¦ Dzēst rindas ¦ Kustuta read
+Supprimer les colonnes ¦ Ištrinti stulpelius ¦ Dzēst kolonnas ¦ Kustuta veerud
+Windows (vieil Excel) ¦ Windows (senas Excel) ¦ Windows (vecais Excel) ¦ Windows (vana Excel)
+👤 Des fiches ¦ 👤 Kortelės ¦ 👤 Kartītes ¦ 👤 Kaardid
+🏠 Un recensement (foyers) ¦ 🏠 Surašymas (namų ūkiai) ¦ 🏠 Tautas skaitīšana (mājsaimniecības) ¦ 🏠 Rahvaloendus (leibkonnad)
+📅 Des événements ¦ 📅 Įvykiai ¦ 📅 Notikumi ¦ 📅 Sündmused
+— ne pas envoyer — ¦ — nesiųsti — ¦ — nesūtīt — ¦ — ära saada —
+Nom et prénom ¦ Pavardė ir vardas ¦ Uzvārds un vārds ¦ Perekonnanimi ja eesnimi
+Sexe ¦ Lytis ¦ Dzimums ¦ Sugu
+Naissance (date ou année) ¦ Gimimas (data ar metai) ¦ Dzimšana (datums vai gads) ¦ Sünd (kuupäev või aasta)
+Décès (date) ¦ Mirtis (data) ¦ Nāve (datums) ¦ Surm (kuupäev)
+N° de foyer (ménage) ¦ Namų ūkio nr. ¦ Mājsaimniecības nr. ¦ Leibkonna nr
+N° de maison ¦ Namo nr. ¦ Mājas nr. ¦ Maja nr
+Rue, quartier ¦ Gatvė, kvartalas ¦ Iela, kvartāls ¦ Tänav, linnaosa
+Patron, employeur ¦ Šeimininkas, darbdavys ¦ Saimnieks, darba devējs ¦ Peremees, tööandja
+Situation (marié, veuf…) ¦ Padėtis (vedęs, našlys…) ¦ Stāvoklis (precējies, atraitnis…) ¦ Perekonnaseis (abielus, lesk…)
+Observations, notes ¦ Pastabos ¦ Piezīmes ¦ Märkused
+Sorte d’événement (acte) ¦ Įvykio rūšis (dokumentas) ¦ Notikuma veids (dokuments) ¦ Sündmuse liik (dokument)
+Date de l’événement ¦ Įvykio data ¦ Notikuma datums ¦ Sündmuse kuupäev
+Lieu de l’événement ¦ Įvykio vieta ¦ Notikuma vieta ¦ Sündmuse koht
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ tų metų stulpeliai (1836 → 1936) · namų ūkiai · 📤 į bazę ¦ gada kolonnas (1836 → 1936) · mājsaimniecības · 📤 uz datubāzi ¦ aasta veerud (1836 → 1936) · leibkonnad · 📤 andmebaasi
+⤒ Remplir depuis l’app… ¦ ⤒ Užpildyti iš programėlės… ¦ ⤒ Aizpildīt no lietotnes… ¦ ⤒ Täida rakendusest…
+↻ Relire depuis la base ¦ ↻ Nuskaityti iš bazės iš naujo ¦ ↻ Atkārtoti nolasīt no datubāzes ¦ ↻ Loe andmebaasist uuesti
+catégorie + séries ¦ kategorija + serijos ¦ kategorija + sērijas ¦ kategooria + seeriad
+📊 Créer le diagramme ¦ 📊 Sukurti schemą ¦ 📊 Izveidot shēmu ¦ 📊 Loo diagramm
+Un graphique ¦ Diagrama ¦ Diagramma ¦ Graafik
+📈 Créer le graphique ¦ 📈 Sukurti diagramą ¦ 📈 Izveidot diagrammu ¦ 📈 Loo graafik
+objet ▦ Tableur ¦ ▦ Skaičiuoklės objektas ¦ ▦ Izklājlapas objekts ¦ ▦ Tabelarvutuse objekt
+📋 Copier pour un tableau ¦ 📋 Kopijuoti lentai ¦ 📋 Kopēt tāfelei ¦ 📋 Kopeeri tahvli jaoks
+Un recueil ¦ Rinkinys ¦ Krājums ¦ Kogumik
+tableur d’une page ¦ skaičiuoklė puslapyje ¦ izklājlapa lapā ¦ tabelarvutus lehel
+📋 Copier pour un recueil ¦ 📋 Kopijuoti rinkiniui ¦ 📋 Kopēt krājumam ¦ 📋 Kopeeri kogumiku jaoks
+tableau ou graphique ¦ lentelė ar diagrama ¦ tabula vai diagramma ¦ tabel või graafik
+Ce que le diagramme attend ¦ Ko tikisi schema ¦ Ko gaida shēma ¦ Mida diagramm ootab
+Ce que le graphique attend ¦ Ko tikisi diagrama ¦ Ko gaida diagramma ¦ Mida graafik ootab
+Ce que le tableau attend ¦ Ko tikisi lenta ¦ Ko gaida tāfele ¦ Mida tahvel ootab
+Ce que le recueil attend ¦ Ko tikisi rinkinys ¦ Ko gaida krājums ¦ Mida kogumik ootab
+Pyramide des âges ¦ Amžiaus piramidė ¦ Vecuma piramīda ¦ Vanusepüramiid
+Courbes ¦ Kreivės ¦ Līknes ¦ Jooned
+Radar ¦ Radaras ¦ Radars ¦ Radar
+Barres groupées ¦ Sugrupuotos juostos ¦ Grupētas joslas ¦ Rühmitatud tulbad
+Camembert (une seule série) ¦ Skritulinė (tik viena serija) ¦ Sektoru (tikai viena sērija) ¦ Sektordiagramm (ainult üks seeria)
+Rectangles proportionnels ¦ Proporciniai stačiakampiai ¦ Proporcionāli taisnstūri ¦ Puukaart
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Paruošti… (schema, diagrama, pristatymas…) ¦ 🎯 Sagatavot… (shēma, diagramma, prezentācija…) ¦ 🎯 Valmista ette… (diagramm, graafik, esitlus…)
+initiale ¦ inicialas ¦ iniciālis ¦ initsiaal
+MAJUSCULES ¦ DIDŽIOSIOS ¦ LIELIE BURTI ¦ SUURTÄHED
+minuscules ¦ mažosios ¦ mazie burti ¦ väiketähed
+Capitale ¦ Pirma didžioji ¦ Ar lielo sākumburtu ¦ Suur algustäht
+Plus petit ¦ Mažiausias ¦ Mazākais ¦ Väikseim
+Plus grand ¦ Didžiausias ¦ Lielākais ¦ Suurim
+✨ Remplissage instantané ¦ ✨ Momentinis užpildymas ¦ ✨ Zibensaizpilde ¦ ✨ Välktäide
+Σ Sous-totaux… ¦ Σ Tarpinės sumos… ¦ Σ Starpsummas… ¦ Σ Vahesummad…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Struktūra: suskleisti / išskleisti detales ¦ ⊟ Struktūra: sakļaut / izvērst detaļas ¦ ⊟ Liigendus: ahenda / laienda üksikasjad
+🎯 Valeur cible… ¦ 🎯 Tikslo siekimas… ¦ 🎯 Mērķa vērtība… ¦ 🎯 Sihtväärtus…
+🧮 Solveur… ¦ 🧮 Sprendiklis… ¦ 🧮 Risinātājs… ¦ 🧮 Lahendaja…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Scenarijų lentelė (o jei…)… ¦ 📋 Scenāriju tabula (un ja…)… ¦ 📋 Stsenaariumide tabel (mis siis, kui…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Įrašyti veiksmą / ⏹ sustabdyti ¦ ⏺ Ierakstīt darbību / ⏹ apturēt ¦ ⏺ Salvesta toiming / ⏹ peata
+▶ Actions enregistrées… ¦ ▶ Įrašyti veiksmai… ¦ ▶ Ierakstītās darbības… ¦ ▶ Salvestatud toimingud…
+📈 Mini-graphique… ¦ 📈 Mini diagrama… ¦ 📈 Minidiagramma… ¦ 📈 Minigraafik…
+Nombre de lignes ¦ Eilučių skaičius ¦ Rindu skaits ¦ Ridade arv
+Nombre de valeurs différentes ¦ Skirtingų reikšmių skaičius ¦ Dažādo vērtību skaits ¦ Erinevate väärtuste arv
+En % de la ligne ¦ % nuo eilutės ¦ % no rindas ¦ % reast
+En % de la colonne ¦ % nuo stulpelio ¦ % no kolonnas ¦ % veerust
+En % du tout ¦ % nuo visumos ¦ % no kopējā ¦ % kogusummast
+🔀 Tableau croisé dynamique… ¦ 🔀 Suvestinė lentelė… ¦ 🔀 Rakurstabula… ¦ 🔀 Liigendtabel…
+↻ Actualiser le tableau croisé ¦ ↻ Atnaujinti suvestinę lentelę ¦ ↻ Atsvaidzināt rakurstabulu ¦ ↻ Värskenda liigendtabelit
+📊 Graphique vivant (suit la sélection) ¦ 📊 Gyva diagrama (seka pasirinkimą) ¦ 📊 Dzīvā diagramma (seko atlasei) ¦ 📊 Elav graafik (järgib valikut)
+📊 Graphique vivant ¦ 📊 Gyva diagrama ¦ 📊 Dzīvā diagramma ¦ 📊 Elav graafik
+Vide ¦ Tuščia ¦ Tukšs ¦ Tühi
+⛔ Formule en erreur ¦ ⛔ Formulė su klaida ¦ ⛔ Formula ar kļūdu ¦ ⛔ Veaga valem
+ƒ Formule ¦ ƒ Formulė ¦ ƒ Formula ¦ ƒ Valem
+VRAI / FAUX ¦ VRAI / FAUX ¦ VRAI / FAUX ¦ VRAI / FAUX
+⚠️ Date impossible ¦ ⚠️ Neįmanoma data ¦ ⚠️ Neiespējams datums ¦ ⚠️ Võimatu kuupäev
+📅 Date d’acte ¦ 📅 Dokumento data ¦ 📅 Dokumenta datums ¦ 📅 Dokumendi kuupäev
+Conditions ¦ Sąlygos ¦ Nosacījumi ¦ Tingimused
+Logique ¦ Logika ¦ Loģika ¦ Loogika
+Conjoint ¦ Sutuoktinis ¦ Laulātais ¦ Abikaasa
+Parents ¦ Tėvai ¦ Vecāki ¦ Vanemad
+N° de fiche ¦ Kortelės nr. ¦ Kartītes nr. ¦ Kaardi nr
+Date ¦ Data ¦ Datums ¦ Kuupäev
+Personne(s) ¦ Asmuo (-enys) ¦ Persona(-s) ¦ Isik(ud)
+Description ¦ Aprašymas ¦ Apraksts ¦ Kirjeldus
+N° d’événement ¦ Įvykio nr. ¦ Notikuma nr. ¦ Sündmuse nr
+Foyer ¦ Namų ūkis ¦ Mājsaimniecība ¦ Leibkond
+Employeur ¦ Darbdavys ¦ Darba devējs ¦ Tööandja
+Situation ¦ Padėtis ¦ Stāvoklis ¦ Perekonnaseis
+Rue ¦ Gatvė ¦ Iela ¦ Tänav
+N° ¦ Nr. ¦ Nr. ¦ Nr
+Adresse entière ¦ Visas adresas ¦ Pilna adrese ¦ Täielik aadress
+Deuxième prénom ¦ Antrasis vardas ¦ Otrais vārds ¦ Teine eesnimi
+Titre ¦ Titulas ¦ Tituls ¦ Tiitel
+Suffixe ¦ Priesaga ¦ Piedēklis ¦ Järelliide
+FamilySearch ¦ FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Fizinis aprašymas ¦ Fiziskais apraksts ¦ Välimuse kirjeldus
+Teint ¦ Veido spalva ¦ Sejas krāsa ¦ Jume
+Origine ¦ Kilmė ¦ Izcelsme ¦ Päritolu
+Vivant ? ¦ Gyvas? ¦ Dzīvs? ¦ Elus?
+Modifié le ¦ Pakeista ¦ Mainīts ¦ Muudetud
+Cause ¦ Priežastis ¦ Cēlonis ¦ Põhjus
+Autorité ¦ Institucija ¦ Iestāde ¦ Asutus
+Confiance ¦ Patikimumas ¦ Ticamība ¦ Usaldusväärsus
+Date convertie ¦ Konvertuota data ¦ Konvertēts datums ¦ Teisendatud kuupäev
+Autre date ¦ Kita data ¦ Cits datums ¦ Muu kuupäev
+Informations en plus ¦ Papildoma informacija ¦ Papildu informācija ¦ Lisateave
+Calendrier ¦ Kalendorius ¦ Kalendārs ¦ Kalender
+Relevés de dépouillement ¦ Įrašų rodyklių išrašai ¦ Ierakstu rādītāju izraksti ¦ Kirjete registrite väljavõtted
+Noms de famille ¦ Pavardės ¦ Uzvārdi ¦ Perekonnanimed
+Âges au décès ¦ Amžius mirties metu ¦ Vecums nāves brīdī ¦ Vanus surma hetkel
+Décès par siècle ¦ Mirtys pagal šimtmečius ¦ Nāves pa gadsimtiem ¦ Surmad sajandite kaupa
+Communes de naissance ¦ Gimimo komunos ¦ Dzimšanas komūnas ¦ Sünnikommuunid
+Départements de naissance ¦ Gimimo departamentai ¦ Dzimšanas departamenti ¦ Sünnidepartemangud
+Naissances par mois ¦ Gimimai pagal mėnesius ¦ Dzimšanas pa mēnešiem ¦ Sünnid kuude kaupa
+Personnes par génération ¦ Asmenys pagal kartas ¦ Personas pa paaudzēm ¦ Isikud põlvkondade kaupa
+Additionne des nombres ou des plages. ¦ Sudeda skaičius ar sritis. ¦ Saskaita skaitļus vai diapazonus. ¦ Liidab arve või vahemikke.
+La moyenne des nombres. ¦ Skaičių vidurkis. ¦ Skaitļu vidējais. ¦ Arvude keskmine.
+Le plus petit nombre. ¦ Mažiausias skaičius. ¦ Mazākais skaitlis. ¦ Väikseim arv.
+Le plus grand nombre. ¦ Didžiausias skaičius. ¦ Lielākais skaitlis. ¦ Suurim arv.
+Compte les cellules qui contiennent un nombre. ¦ Suskaičiuoja langelius su skaičiumi. ¦ Saskaita šūnas, kurās ir skaitlis. ¦ Loendab lahtrid, milles on arv.
+Compte les cellules qui ne sont pas vides. ¦ Suskaičiuoja netuščius langelius. ¦ Saskaita šūnas, kas nav tukšas. ¦ Loendab lahtrid, mis pole tühjad.
+Compte les cellules vides. ¦ Suskaičiuoja tuščius langelius. ¦ Saskaita tukšās šūnas. ¦ Loendab tühjad lahtrid.
+Multiplie des nombres. ¦ Sudaugina skaičius. ¦ Sareizina skaitļus. ¦ Korrutab arve.
+Arrondit au plus proche. ¦ Apvalina iki artimiausio. ¦ Noapaļo līdz tuvākajam. ¦ Ümardab lähimani.
+Arrondit vers zéro. ¦ Apvalina link nulio. ¦ Noapaļo virzienā uz nulli. ¦ Ümardab nulli suunas.
+Arrondit en s’éloignant de zéro. ¦ Apvalina tolyn nuo nulio. ¦ Noapaļo prom no nulles. ¦ Ümardab nullist eemale.
+La partie entière (arrondi vers le bas). ¦ Sveikoji dalis (apvalinta žemyn). ¦ Veselā daļa (noapaļota uz leju). ¦ Täisosa (ümardatud alla).
+Le nombre sans son signe. ¦ Skaičius be ženklo. ¦ Skaitlis bez zīmes. ¦ Arv ilma märgita.
+Le reste d’une division. ¦ Dalybos liekana. ¦ Dalījuma atlikums. ¦ Jagamise jääk.
+Un nombre élevé à une puissance. ¦ Skaičius, pakeltas laipsniu. ¦ Skaitlis kāpinājumā. ¦ Astmesse tõstetud arv.
+La racine carrée. ¦ Kvadratinė šaknis. ¦ Kvadrātsakne. ¦ Ruutjuur.
+La valeur du milieu. ¦ Vidurinė reikšmė. ¦ Vidējā vērtība (mediāna). ¦ Keskmine väärtus (mediaan).
+L’écart type (sur un échantillon). ¦ Standartinis nuokrypis (imties). ¦ Standartnovirze (izlasei). ¦ Standardhälve (valimi põhjal).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Skaičiaus vieta sąraše (1 = didžiausias; tvarka 1 = pirma mažiausias). ¦ Skaitļa vieta sarakstā (1 = lielākais; secība 1 = vispirms mazākais). ¦ Arvu koht loendis (1 = suurim; järjestus 1 = väikseim enne).
+La k-ième plus grande valeur. ¦ k-oji didžiausia reikšmė. ¦ k-tā lielākā vērtība. ¦ k-s suurim väärtus.
+La k-ième plus petite valeur. ¦ k-oji mažiausia reikšmė. ¦ k-tā mazākā vērtība. ¦ k-s väikseim väärtus.
+Une valeur si le test est vrai, une autre sinon. ¦ Viena reikšmė, jei sąlyga teisinga, kita – jei ne. ¦ Viena vērtība, ja pārbaude ir patiesa, cita – ja nav. ¦ Üks väärtus, kui test on tõene, muidu teine.
+La valeur du premier test vrai. ¦ Pirmosios teisingos sąlygos reikšmė. ¦ Pirmās patiesās pārbaudes vērtība. ¦ Esimese tõese testi väärtus.
+La valeur, ou autre chose s’il y a une erreur. ¦ Reikšmė arba kas kita, jei yra klaida. ¦ Vērtība vai kas cits, ja ir kļūda. ¦ Väärtus või midagi muud, kui on viga.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Reikšmė arba kas kita, jei ji nerasta (#N/A). ¦ Vērtība vai kas cits, ja tā nav atrasta (#N/A). ¦ Väärtus või midagi muud, kui seda ei leita (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (tiesa), jei visos sąlygos teisingos. ¦ VRAI (patiess), ja visas pārbaudes ir patiesas. ¦ VRAI (tõene), kui kõik testid on tõesed.
+VRAI si au moins un test est vrai. ¦ VRAI (tiesa), jei bent viena sąlyga teisinga. ¦ VRAI (patiess), ja vismaz viena pārbaude ir patiesa. ¦ VRAI (tõene), kui vähemalt üks test on tõene.
+La valeur VRAI (comme le mot VRAI). ¦ Reikšmė VRAI (tiesa), kaip žodis VRAI. ¦ Vērtība VRAI (patiess), kā vārds VRAI. ¦ Väärtus VRAI (tõene), nagu sõna VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ Reikšmė FAUX (netiesa), kaip žodis FAUX. ¦ Vērtība FAUX (aplams), kā vārds FAUX. ¦ Väärtus FAUX (väär), nagu sõna FAUX.
+Inverse un test. ¦ Apverčia sąlygą. ¦ Apgriež pārbaudi. ¦ Pöörab testi ümber.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Suskaičiuoja langelius, atitinkančius sąlygą (">60", "laboureur", "lab*"). ¦ Saskaita šūnas, kas atbilst nosacījumam (">60", "laboureur", "lab*"). ¦ Loendab lahtrid, mis vastavad tingimusele (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Suskaičiuoja eilutes, atitinkančias visas sąlygas. ¦ Saskaita rindas, kas atbilst visiem nosacījumiem. ¦ Loendab read, mis vastavad kõigile tingimustele.
+Additionne les cellules qui remplissent une condition. ¦ Sudeda langelius, atitinkančius sąlygą. ¦ Saskaita šūnas, kas atbilst nosacījumam. ¦ Liidab lahtrid, mis vastavad tingimusele.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Sudeda eilutes, atitinkančias visas sąlygas. ¦ Saskaita rindas, kas atbilst visiem nosacījumiem. ¦ Liidab read, mis vastavad kõigile tingimustele.
+La moyenne des cellules qui remplissent une condition. ¦ Sąlygą atitinkančių langelių vidurkis. ¦ Nosacījumam atbilstošo šūnu vidējais. ¦ Tingimusele vastavate lahtrite keskmine.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Ieško lentelės 1-ajame stulpelyje ir grąžina kito stulpelio reikšmę. ¦ Meklē tabulas 1. kolonnā un atgriež citas kolonnas vērtību. ¦ Otsib tabeli 1. veerust ja tagastab teise veeru väärtuse.
+Cherche dans la 1re ligne d’un tableau. ¦ Ieško lentelės 1-ojoje eilutėje. ¦ Meklē tabulas 1. rindā. ¦ Otsib tabeli 1. reast.
+Cherche une valeur et rend celle d’à côté. ¦ Ieško reikšmės ir grąžina gretimą. ¦ Meklē vērtību un atgriež blakus esošo. ¦ Otsib väärtust ja tagastab kõrvaloleva.
+La valeur à une ligne et une colonne de la plage. ¦ Reikšmė srities eilutės ir stulpelio sankirtoje. ¦ Vērtība diapazona rindas un kolonnas krustpunktā. ¦ Väärtus vahemiku rea ja veeru ristumiskohas.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Reikšmės padėtis srityje (tipas 0 = tiksliai). ¦ Vērtības pozīcija diapazonā (tips 0 = precīzi). ¦ Väärtuse asukoht vahemikus (tüüp 0 = täpselt).
+La n-ième valeur de la liste. ¦ n-oji sąrašo reikšmė. ¦ Saraksta n-tā vērtība. ¦ Loendi n-s väärtus.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Reikšmės be dublikatų (išsilieja į žemiau esančius langelius). ¦ Vērtības bez dublikātiem (izplūst uz šūnām zemāk). ¦ Väärtused ilma duplikaatideta (valgub allolevatesse lahtritesse).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Surūšiuota sritis (tvarka 1 = didėjančiai, -1 = mažėjančiai). ¦ Sakārtots diapazons (secība 1 = augoši, -1 = dilstoši). ¦ Sorteeritud vahemik (järjestus 1 = kasvavalt, -1 = kahanevalt).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Srities eilutės, atitinkančios sąlygą (pvz., =FILTRE(A2:C9; C2:C9>30)). ¦ Diapazona rindas, kas atbilst nosacījumam (piem., =FILTRE(A2:C9; C2:C9>30)). ¦ Vahemiku read, mis vastavad tingimusele (nt =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Sujungia tekstus vieną po kito. ¦ Savieno tekstus vienu aiz otra. ¦ Ühendab tekstid järjest.
+Met des textes bout à bout avec un séparateur. ¦ Sujungia tekstus su skyrikliu. ¦ Savieno tekstus ar atdalītāju. ¦ Ühendab tekstid eraldajaga.
+Les premiers caractères. ¦ Pirmieji simboliai. ¦ Pirmās rakstzīmes. ¦ Esimesed märgid.
+Les derniers caractères. ¦ Paskutiniai simboliai. ¦ Pēdējās rakstzīmes. ¦ Viimased märgid.
+Un morceau au milieu d’un texte. ¦ Teksto vidurio dalis. ¦ Fragments no teksta vidus. ¦ Tükk teksti keskelt.
+Le nombre de caractères. ¦ Simbolių skaičius. ¦ Rakstzīmju skaits. ¦ Märkide arv.
+En capitales. ¦ Didžiosiomis raidėmis. ¦ Ar lielajiem burtiem. ¦ Suurtähtedega.
+En minuscules. ¦ Mažosiomis raidėmis. ¦ Ar mazajiem burtiem. ¦ Väiketähtedega.
+Une capitale au début de chaque mot. ¦ Didžioji raidė kiekvieno žodžio pradžioje. ¦ Lielais burts katra vārda sākumā. ¦ Suur täht iga sõna alguses.
+Retire les espaces en trop. ¦ Pašalina perteklinius tarpus. ¦ Noņem liekās atstarpes. ¦ Eemaldab üleliigsed tühikud.
+Remplace un morceau de texte. ¦ Pakeičia teksto dalį. ¦ Aizstāj teksta daļu. ¦ Asendab tekstitüki.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Teksto padėtis kitame tekste (neskiriant didžiųjų raidžių). ¦ Teksta pozīcija citā tekstā (neņemot vērā reģistru). ¦ Teksti asukoht teises tekstis (suurtähti arvestamata).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Skaičius ar data, užrašyti pagal formatą ("0,00", "0 %", "jj/mm/aaaa"). ¦ Skaitlis vai datums, rakstīts ar formātu ("0,00", "0 %", "jj/mm/aaaa"). ¦ Vormingu järgi kirjutatud arv või kuupäev ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Tekste užrašytas skaičius. ¦ Tekstā rakstītais skaitlis. ¦ Tekstis kirjutatud arv.
+Fabrique une date. ¦ Sudaro datą. ¦ Izveido datumu. ¦ Koostab kuupäeva.
+L’année d’une date (date d’acte comprise). ¦ Datos metai (suprantamos ir dokumentų datos). ¦ Datuma gads (saprot arī dokumentu datumus). ¦ Kuupäeva aasta (ka dokumendikuupäevad on arusaadavad).
+Le mois d’une date (1 à 12). ¦ Datos mėnuo (nuo 1 iki 12). ¦ Datuma mēnesis (no 1 līdz 12). ¦ Kuupäeva kuu (1 kuni 12).
+Le jour du mois. ¦ Mėnesio diena. ¦ Mēneša diena. ¦ Kuupäev kuus.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Savaitės diena (tipas 1: 1 = sekmadienis; tipas 2: 1 = pirmadienis … 7 = sekmadienis; tipas 3: 0 = pirmadienis). ¦ Nedēļas diena (tips 1: 1 = svētdiena; tips 2: 1 = pirmdiena … 7 = svētdiena; tips 3: 0 = pirmdiena). ¦ Nädalapäev (tüüp 1: 1 = pühapäev; tüüp 2: 1 = esmaspäev … 7 = pühapäev; tüüp 3: 0 = esmaspäev).
+La date du jour. ¦ Šiandienos data. ¦ Šodienas datums. ¦ Tänane kuupäev.
+La date et l’heure. ¦ Data ir laikas. ¦ Datums un laiks. ¦ Kuupäev ja kellaaeg.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Skirtumas tarp dviejų datų metais, mėnesiais ar dienomis („AM“: mėnesiai be metų, „MJ“: dienos be mėnesių, „AJ“: dienos be metų; suprantami ir Excel „Y“, „D“, „YM“, „MD“, „YD“). ¦ Starpība starp diviem datumiem gados, mēnešos vai dienās („AM“: mēneši papildus gadiem, „MJ“: dienas papildus mēnešiem, „AJ“: dienas papildus gadiem; saprot arī Excel „Y“, „D“, „YM“, „MD“, „YD“). ¦ Vahe kahe kuupäeva vahel aastates, kuudes või päevades („AM“: kuud lisaks aastatele, „MJ“: päevad lisaks kuudele, „AJ“: päevad lisaks aastatele; ka Exceli „Y“, „D“, „YM“, „MD“, „YD“ on arusaadavad).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Amžius tarp dviejų dokumentų datų (suprantama „vers 1784“, „an II“); „≈“, jei data apytikslė. Vienetas: „ans“, „mois“ arba „jours“. ¦ Vecums starp diviem dokumentu datumiem (saprot „vers 1784“, „an II“); „≈“, ja datums ir aptuvens. Vienība: „ans“, „mois“ vai „jours“. ¦ Vanus kahe dokumendikuupäeva vahel („vers 1784“, „an II“ on arusaadavad); „≈“, kui kuupäev on ligikaudne. Ühik: „ans“, „mois“ või „jours“.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Dokumento tekste rasti metai, net respublikiniai („baptisé le 3 frimaire an XII“ → 1803). ¦ Gads, kas atrasts dokumenta tekstā, pat republikas („baptisé le 3 frimaire an XII“ → 1803). ¦ Dokumendi tekstist leitud aasta, isegi vabariiklik („baptisé le 3 frimaire an XII“ → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Suprasta data, tvarkingai užrašyta (kaip datos laukų „✓ Suprasta:“). ¦ Saprastais datums, glīti uzrakstīts (kā datuma lauku „✓ Saprasts:“). ¦ Arusaadud kuupäev korrektselt kirjutatuna (nagu kuupäevaväljade „✓ Aru saadud:“).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ „jour“, „mois“, „année“, „vers“, „avant“, „après“ arba „entre“. ¦ „jour“, „mois“, „année“, „vers“, „avant“, „après“ vai „entre“. ¦ „jour“, „mois“, „année“, „vers“, „avant“, „après“ või „entre“.
+La date dans le calendrier républicain. ¦ Data pagal respublikinį kalendorių. ¦ Datums republikas kalendārā. ¦ Kuupäev vabariiklikus kalendris.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Sosa numerio karta (1 = tu, 2 ir 3 = tavo tėvai…). ¦ Sosa numura paaudze (1 = tu, 2 un 3 = tavi vecāki…). ¦ Sosa numbri põlvkond (1 = sina, 2 ja 3 = sinu vanemad…).
+Le numéro Sosa du père (2 × n). ¦ Tėvo Sosa numeris (2 × n). ¦ Tēva Sosa numurs (2 × n). ¦ Isa Sosa number (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Motinos Sosa numeris (2 × n + 1). ¦ Mātes Sosa numurs (2 × n + 1). ¦ Ema Sosa number (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ „paternel“ arba „maternel“ (Sosa 1 pusė). ¦ „paternel“ vai „maternel“ (Sosa 1 puse). ¦ „paternel“ või „maternel“ (Sosa 1 pool).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Maža diagrama langelyje: "courbe" (kreivė), "barres" (juostos) arba "gagné" (virš ar po nuliu). ¦ Neliela diagramma šūnā: "courbe" (līkne), "barres" (joslas) vai "gagné" (virs vai zem nulles). ¦ Väike graafik lahtris: "courbe" (joon), "barres" (tulbad) või "gagné" (üle või alla nulli).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Suteikia reikšmei pavadinimą, kad ją naudotum skaičiavime. ¦ Piešķir vērtībai nosaukumu, lai to izmantotu aprēķinā. ¦ Annab väärtusele nime, et seda arvutuses kasutada.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Nedidelė savo funkcija, naudojama LET, MAP, PAR.LIGNE… ¦ Neliela paša funkcija, ko izmantot LET, MAP, PAR.LIGNE… ¦ Väike oma funktsioon, kasutamiseks LET-is, MAP-is, PAR.LIGNE-s…
+Applique la LAMBDA à chaque case de la plage. ¦ Pritaiko LAMBDA kiekvienam srities langeliui. ¦ Piemēro LAMBDA katrai diapazona šūnai. ¦ Rakendab LAMBDA iga vahemiku lahtri suhtes.
+Un résultat par ligne de la plage. ¦ Vienas rezultatas kiekvienai srities eilutei. ¦ Viens rezultāts katrai diapazona rindai. ¦ Üks tulemus vahemiku rea kohta.
+Un résultat par colonne de la plage. ¦ Vienas rezultatas kiekvienam srities stulpeliui. ¦ Viens rezultāts katrai diapazona kolonnai. ¦ Üks tulemus vahemiku veeru kohta.
+Cumule les cases une à une (un total qui avance). ¦ Kaupia langelius po vieną (augantis bendras rezultatas). ¦ Uzkrāj šūnas pa vienai (augoša kopsumma). ¦ Kogub lahtreid ükshaaval (jooksev summa).
+Comme REDUCE, avec chaque étape du total. ¦ Kaip REDUCE, su kiekvienu sumos žingsniu. ¦ Kā REDUCE, ar katru kopsummas soli. ¦ Nagu REDUCE, iga summa sammuga.
+=ligne laissée ¦ praleista eilutė|praleistos eilutės|praleistų eilučių ¦ izlaistas rindas|izlaista rinda|izlaistas rindas ¦ välja jäetud rida|välja jäetud rida
+=ligne remplie depuis l’app (tenue à jour) ¦ eilutė užpildyta iš programėlės (nuolat atnaujinama)|eilutės užpildytos iš programėlės (nuolat atnaujinamos)|eilučių užpildyta iš programėlės (nuolat atnaujinama) ¦ rindas aizpildītas no lietotnes (uzturētas aktuālas)|rinda aizpildīta no lietotnes (uzturēta aktuāla)|rindas aizpildītas no lietotnes (uzturētas aktuālas) ¦ rakendusest täidetud rida (ajakohasena)|rakendusest täidetud rida (ajakohasena)
+=ligne remplie depuis l’app ¦ eilutė užpildyta iš programėlės|eilutės užpildytos iš programėlės|eilučių užpildyta iš programėlės ¦ rindas aizpildītas no lietotnes|rinda aizpildīta no lietotnes|rindas aizpildītas no lietotnes ¦ rakendusest täidetud rida|rakendusest täidetud rida
+=ligne à toi sans fiche : retirée ¦ tavo eilutė be kortelės: pašalinta|tavo eilutės be kortelės: pašalintos|tavo eilučių be kortelės: pašalinta ¦ tavas rindas bez kartītes: noņemtas|tava rinda bez kartītes: noņemta|tavas rindas bez kartītes: noņemtas ¦ sinu kaardita rida: eemaldatud|sinu kaardita rida: eemaldatud
+=nouvelle fiche ¦ nauja kortelė|naujos kortelės|naujų kortelių ¦ jaunas kartītes|jauna kartīte|jaunas kartītes ¦ uus kaart|uut kaarti
+=reliée ¦ susieta|susietos|susietų ¦ sasaistītas|sasaistīta|sasaistītas ¦ seotud|seotud
+=laissée ¦ praleista|praleistos|praleistų ¦ izlaistas|izlaista|izlaistas ¦ kõrvale jäetud|kõrvale jäetud
+=autre ligne ¦ kita eilutė|kitos eilutės|kitų eilučių ¦ citas rindas|cita rinda|citas rindas ¦ muu rida|muud rida
+=case ¦ langelis|langeliai|langelių ¦ šūnas|šūna|šūnas ¦ lahter|lahtrit
+=autre case ¦ kitas langelis|kiti langeliai|kitų langelių ¦ citas šūnas|cita šūna|citas šūnas ¦ muu lahter|muud lahtrit
+=case remplie ¦ užpildytas langelis|užpildyti langeliai|užpildytų langelių ¦ aizpildītas šūnas|aizpildīta šūna|aizpildītas šūnas ¦ täidetud lahter|täidetud lahtrit
+=groupe ¦ grupė|grupės|grupių ¦ grupas|grupa|grupas ¦ rühm|rühma
+=case changée ¦ pakeistas langelis|pakeisti langeliai|pakeistų langelių ¦ mainītas šūnas|mainīta šūna|mainītas šūnas ¦ muudetud lahter|muudetud lahtrit
+=scénario calculé ¦ apskaičiuotas scenarijus|apskaičiuoti scenarijai|apskaičiuotų scenarijų ¦ aprēķināti scenāriji|aprēķināts scenārijs|aprēķināti scenāriji ¦ arvutatud stsenaarium|arvutatud stsenaariumi
+=commande ¦ komanda|komandos|komandų ¦ komandas|komanda|komandas ¦ käsk|käsku
+=fonction ¦ funkcija|funkcijos|funkcijų ¦ funkcijas|funkcija|funkcijas ¦ funktsioon|funktsiooni
+=valeur en plus de la première retirée ¦ pašalinta reikšmė be pirmosios|pašalintos reikšmės be pirmosios|pašalintų reikšmių be pirmosios ¦ noņemtas vērtības papildus pirmajai|noņemta vērtība papildus pirmajai|noņemtas vērtības papildus pirmajai ¦ eemaldatud väärtus peale esimese|eemaldatud väärtust peale esimese
+=ligne supprimée ¦ ištrinta eilutė|ištrintos eilutės|ištrintų eilučių ¦ dzēstas rindas|dzēsta rinda|dzēstas rindas ¦ kustutatud rida|kustutatud rida
+=colonne supprimée ¦ ištrintas stulpelis|ištrinti stulpeliai|ištrintų stulpelių ¦ dzēstas kolonnas|dzēsta kolonna|dzēstas kolonnas ¦ kustutatud veerg|kustutatud veergu
+=ligne en double supprimée ¦ ištrinta pasikartojanti eilutė|ištrintos pasikartojančios eilutės|ištrintų pasikartojančių eilučių ¦ dzēstas dublētas rindas|dzēsta dublēta rinda|dzēstas dublētas rindas ¦ kustutatud korduv rida|kustutatud korduvat rida
+=ligne coupée en colonnes ¦ eilutė suskaidyta į stulpelius|eilutės suskaidytos į stulpelius|eilučių suskaidyta į stulpelius ¦ rindas sadalītas kolonnās|rinda sadalīta kolonnās|rindas sadalītas kolonnās ¦ veergudeks tükeldatud rida|veergudeks tükeldatud rida
+=case modifiée ¦ pakeistas langelis|pakeisti langeliai|pakeistų langelių ¦ mainītas šūnas|mainīta šūna|mainītas šūnas ¦ muudetud lahter|muudetud lahtrit
+=cellule ¦ langelis|langeliai|langelių ¦ šūnas|šūna|šūnas ¦ lahter|lahtrit
+=cellule copiée ¦ nukopijuotas langelis|nukopijuoti langeliai|nukopijuotų langelių ¦ nokopētas šūnas|nokopēta šūna|nokopētas šūnas ¦ kopeeritud lahter|kopeeritud lahtrit
+=feuille importée ¦ importuotas lapas|importuoti lapai|importuotų lapų ¦ importētas lapas|importēta lapa|importētas lapas ¦ imporditud leht|imporditud lehte
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ data ¦ datums ¦ kuupäev
+le début ¦ pradžia ¦ sākums ¦ algus
+la fin ¦ pabaiga ¦ beigas ¦ lõpp
+il manque un guillemet « " » à la fin d’un texte ¦ teksto pabaigoje trūksta kabutės „"“ ¦ teksta beigās trūkst pēdiņas „"“ ¦ teksti lõpus puudub jutumärk „"“
+il manque une apostrophe à la fin du nom de feuille ¦ lapo pavadinimo pabaigoje trūksta apostrofo ¦ lapas nosaukuma beigās trūkst apostrofa ¦ lehe nime lõpus puudub ülakoma
+après le nom de la feuille, il faut « ! » puis la cellule ¦ po lapo pavadinimo reikia „!“, tada langelio ¦ pēc lapas nosaukuma vajag „!“ un tad šūnu ¦ lehe nime järel on vaja „!“ ja siis lahtrit
+la formule s’arrête trop tôt ¦ formulė baigiasi per anksti ¦ formula beidzas pārāk agri ¦ valem lõpeb liiga vara
+il manque une parenthèse « ) » ¦ trūksta skliausto „)“ ¦ trūkst iekavas „)“ ¦ puudub sulg „)“
+une parenthèse « ) » de trop ¦ vienas perteklinis skliaustas „)“ ¦ viena lieka iekava „)“ ¦ üks üleliigne sulg „)“
+un « ; » à une place inattendue ¦ „;“ netikėtoje vietoje ¦ „;“ negaidītā vietā ¦ „;“ ootamatus kohas
+un numéro Sosa est un nombre entier qui commence à 1 ¦ Sosa numeris yra sveikasis skaičius, prasidedantis nuo 1 ¦ Sosa numurs ir vesels skaitlis, kas sākas ar 1 ¦ Sosa number on täisarv, mis algab 1-st
+il n’y a aucun nombre dans la plage ¦ srityje nėra jokio skaičiaus ¦ diapazonā nav neviena skaitļa ¦ vahemikus pole ühtegi arvu
+le diviseur de MOD vaut 0 ¦ MOD daliklis lygus 0 ¦ MOD dalītājs ir 0 ¦ MOD-i jagaja on 0
+pas de racine carrée d’un nombre négatif ¦ nėra neigiamo skaičiaus kvadratinės šaknies ¦ negatīvam skaitlim nav kvadrātsaknes ¦ negatiivsest arvust ruutjuurt ei saa
+aucun nombre ¦ nėra skaičiaus ¦ nav skaitļa ¦ arvu pole
+il faut au moins deux nombres ¦ reikia bent dviejų skaičių ¦ vajadzīgi vismaz divi skaitļi ¦ vaja on vähemalt kahte arvu
+aucun test n’est vrai ¦ nė viena sąlyga nėra teisinga ¦ neviena pārbaude nav patiesa ¦ ükski test pole tõene
+les plages n’ont pas la même taille ¦ sritys nevienodo dydžio ¦ diapazoni nav vienāda izmēra ¦ vahemikud pole sama suured
+aucune cellule ne remplit la condition ¦ joks langelis neatitinka sąlygos ¦ neviena šūna neatbilst nosacījumam ¦ ükski lahter ei vasta tingimusele
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ 2-oji dalis turi būti sritis, pavyzdžiui, A2:C40 ¦ 2. daļai jābūt diapazonam, piemēram, A2:C40 ¦ 2. osa peab olema vahemik, näiteks A2:C40
+le 2e morceau doit être une plage ¦ 2-oji dalis turi būti sritis ¦ 2. daļai jābūt diapazonam ¦ 2. osa peab olema vahemik
+la plage est vide ¦ sritis tuščia ¦ diapazons ir tukšs ¦ vahemik on tühi
+la condition doit avoir autant de lignes que la plage ¦ sąlygoje turi būti tiek pat eilučių, kiek srityje ¦ nosacījumā jābūt tikpat rindām kā diapazonā ¦ tingimuses peab olema sama palju ridu kui vahemikus
+aucune ligne ne remplit la condition ¦ jokia eilutė neatitinka sąlygos ¦ neviena rinda neatbilst nosacījumam ¦ ükski rida ei vasta tingimusele
+le début compte à partir de 1 ¦ pradžia skaičiuojama nuo 1 ¦ sākums tiek skaitīts no 1 ¦ algus loetakse 1-st
+cette date n’a pas de mois ¦ ši data neturi mėnesio ¦ šim datumam nav mēneša ¦ sellel kuupäeval pole kuud
+cette date n’a pas de jour ¦ ši data neturi dienos ¦ šim datumam nav dienas ¦ sellel kuupäeval pole päeva
+il faut le jour ¦ reikia dienos ¦ vajadzīga diena ¦ päev on vajalik
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ JOURSEM tipas nuo 1 iki 3 (arba nuo 11 iki 17) ¦ JOURSEM tips ir no 1 līdz 3 (vai no 11 līdz 17) ¦ JOURSEM-i tüüp on 1 kuni 3 (või 11 kuni 17)
+la fin est avant le début ¦ pabaiga yra prieš pradžią ¦ beigas ir pirms sākuma ¦ lõpp on enne algust
+la seconde date est avant la première ¦ antroji data yra prieš pirmąją ¦ otrais datums ir pirms pirmā ¦ teine kuupäev on enne esimest
+il faut une date au jour près ¦ reikia dienos tikslumo datos ¦ vajadzīgs datums ar precizitāti līdz dienai ¦ vaja on päevatäpsusega kuupäeva
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ respublikinis kalendorius galioja nuo 1792 m. rugsėjo 22 d. iki 1805 m. ¦ republikas kalendārs darbojas no 1792. gada 22. septembra līdz 1805. gadam ¦ vabariiklik kalender kehtib 22. septembrist 1792 kuni 1805
+il faut des nombres dans la plage ¦ srityje reikia skaičių ¦ diapazonā vajag skaitļus ¦ vahemikus on vaja arve
+il faut une LAMBDA(…) ¦ reikia LAMBDA(…) ¦ vajadzīga LAMBDA(…) ¦ vaja on LAMBDA(…)
+trop de LAMBDA imbriquées ¦ per daug įdėtų LAMBDA ¦ pārāk daudz ligzdotu LAMBDA ¦ liiga palju pesastatud LAMBDA-sid
+des paires « nom; valeur » puis le calcul ¦ poros „pavadinimas; reikšmė“, tada skaičiavimas ¦ pāri „nosaukums; vērtība“, tad aprēķins ¦ paarid „nimi; väärtus“, siis arvutus
+un nom (lettres) avant chaque valeur ¦ pavadinimas (raidės) prieš kiekvieną reikšmę ¦ nosaukums (burti) pirms katras vērtības ¦ nimi (tähed) iga väärtuse ees
+il faut au moins le calcul ¦ reikia bent skaičiavimo ¦ vajadzīgs vismaz aprēķins ¦ vaja on vähemalt arvutust
+les paramètres sont des noms ¦ parametrai yra pavadinimai ¦ parametri ir nosaukumi ¦ parameetrid on nimed
+le calcul n’a pas de résultat ¦ skaičiavimas neturi rezultato ¦ aprēķinam nav rezultāta ¦ arvutusel pole tulemust
+le résultat est trop grand pour être calculé ¦ rezultatas per didelis, kad būtų apskaičiuotas ¦ rezultāts ir pārāk liels, lai to aprēķinātu ¦ tulemus on arvutamiseks liiga suur
+une feuille supprimée ¦ ištrintas lapas ¦ dzēsta lapa ¦ kustutatud leht
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ visa sritis netelpa į vieną langelį: naudok SOMME(…), INDEX(…)… ¦ viss diapazons neietilpst vienā šūnā: izmanto SOMME(…), INDEX(…)… ¦ terve vahemik ei mahu ühte lahtrisse: kasuta SOMME(…), INDEX(…)…
+puissance impossible ¦ neįmanomas laipsnis ¦ neiespējama pakāpe ¦ võimatu aste
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ viena LAMBDA neduoda reikšmės: naudok ją LET, MAP… ¦ LAMBDA viena pati nedod vērtību: izmanto to LET, MAP… ¦ LAMBDA üksi väärtust ei anna: kasuta seda LET-is, MAP-is…
+la formule est trop longue ¦ formulė per ilga ¦ formula ir pārāk gara ¦ valem on liiga pikk
+la formule est trop imbriquée ¦ formulė per giliai įdėta ¦ formula ir pārāk dziļi ligzdota ¦ valem on liiga sügavalt pesastatud
+trop de morceaux dans une fonction ¦ per daug dalių funkcijoje ¦ pārāk daudz daļu funkcijā ¦ funktsioonis on liiga palju osi
+la formule demande trop de calculs ¦ formulei reikia per daug skaičiavimų ¦ formulai vajag pārāk daudz aprēķinu ¦ valem nõuab liiga palju arvutusi
+le résultat est trop grand ¦ rezultatas per didelis ¦ rezultāts ir pārāk liels ¦ tulemus on liiga suur
+la plage est trop grande ¦ sritis per didelė ¦ diapazons ir pārāk liels ¦ vahemik on liiga suur
+le fichier a trop de cellules ¦ faile per daug langelių ¦ failā ir pārāk daudz šūnu ¦ failis on liiga palju lahtreid

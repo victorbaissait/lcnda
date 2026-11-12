@@ -1,0 +1,429 @@
+fr ¦ lt ¦ lv ¦ et
+=invité ¦ svečias|svečiai|svečių ¦ viesi|viesis|viesi ¦ külaline|külalist
+=descendant vivant ¦ gyvas palikuonis|gyvi palikuonys|gyvų palikuonių ¦ dzīvi pēcnācēji|dzīvs pēcnācējs|dzīvi pēcnācēji ¦ elav järeltulija|elavat järeltulijat
+=conjoint ¦ sutuoktinis|sutuoktiniai|sutuoktinių ¦ laulātie|laulātais|laulātie ¦ abikaasa|abikaasat
+=fiche confidentielle ¦ konfidenciali kortelė|konfidencialios kortelės|konfidencialių kortelių ¦ konfidenciālas kartītes|konfidenciāla kartīte|konfidenciālas kartītes ¦ konfidentsiaalne kaart|konfidentsiaalset kaarti
+=invité trouvé ¦ rastas svečias|rasti svečiai|rasta svečių ¦ atrasti viesi|atrasts viesis|atrasti viesi ¦ külaline leitud|külalist leitud
+=nouvel invité ¦ naujas svečias|nauji svečiai|naujų svečių ¦ jauni viesi|jauns viesis|jauni viesi ¦ uus külaline|uut külalist
+=invitée ¦ pakviestas|pakviesti|pakviestų ¦ uzaicināti|uzaicināts|uzaicināti ¦ kutsutud|kutsutud
+=invité déjà là ¦ svečias jau sąraše|svečiai jau sąraše|svečių jau sąraše ¦ viesi jau sarakstā|viesis jau sarakstā|viesi jau sarakstā ¦ külaline on juba nimekirjas|külalist on juba nimekirjas
+=colonne ¦ stulpelis|stulpeliai|stulpelių ¦ kolonnas|kolonna|kolonnas ¦ veerg|veergu
+=invité ajouté ¦ pridėtas svečias|pridėti svečiai|pridėta svečių ¦ pievienoti viesi|pievienots viesis|pievienoti viesi ¦ külaline lisatud|külalist lisatud
+=invité complété ¦ papildytas svečias|papildyti svečiai|papildyta svečių ¦ papildināti viesi|papildināts viesis|papildināti viesi ¦ külaline täiendatud|külalist täiendatud
+=foyer ¦ namų ūkis|namų ūkiai|namų ūkių ¦ mājsaimniecības|mājsaimniecība|mājsaimniecības ¦ leibkond|leibkonda
+=avec adresse ¦ su adresu|su adresu|su adresu ¦ ar adresi|ar adresi|ar adresi ¦ aadressiga|aadressiga
+=avec courriel ¦ su el. paštu|su el. paštu|su el. paštu ¦ ar e-pastu|ar e-pastu|ar e-pastu ¦ e-postiga|e-postiga
+=badge ¦ ženklelis|ženkleliai|ženklelių ¦ vārda kartes|vārda karte|vārda kartes ¦ nimesilt|nimesilti
+=présent ¦ dalyvauja|dalyvauja|dalyvauja ¦ klātesoši|klātesošs|klātesoši ¦ kohal|kohal
+=personne attendue ¦ laukiamas asmuo|laukiami asmenys|laukiamų asmenų ¦ gaidītas personas|gaidīta persona|gaidītas personas ¦ oodatav isik|oodatavat isikut
+=table ¦ stalas|stalai|stalų ¦ galdi|galds|galdi ¦ laud|lauda
+=personne placée ¦ pasodintas asmuo|pasodinti asmenys|pasodintų asmenų ¦ apsēdinātas personas|apsēdināta persona|apsēdinātas personas ¦ paigutatud isik|paigutatud isikut
+=photo ajoutée ¦ pridėta nuotrauka|pridėtos nuotraukos|pridėta nuotraukų ¦ pievienoti fotoattēli|pievienots fotoattēls|pievienoti fotoattēli ¦ foto lisatud|fotot lisatud
+=personne présente ¦ dalyvaujantis asmuo|dalyvaujantys asmenys|dalyvaujančių asmenų ¦ klātesošas personas|klātesoša persona|klātesošas personas ¦ kohalolev isik|kohalolevat isikut
+Sans réponse ¦ Be atsakymo ¦ Bez atbildes ¦ Vastuseta
+👥 Invités ¦ 👥 Svečiai ¦ 👥 Viesi ¦ 👥 Külalised
+✉️ Invitations ¦ ✉️ Kvietimai ¦ ✉️ Ielūgumi ¦ ✉️ Kutsed
+🏷 Badges ¦ 🏷 Ženkleliai ¦ 🏷 Vārda kartes ¦ 🏷 Nimesildid
+🌳 Grand arbre ¦ 🌳 Didelis medis ¦ 🌳 Lielais koks ¦ 🌳 Suur sugupuu
+📅 Jour J ¦ 📅 Didžioji diena ¦ 📅 Lielā diena ¦ 📅 Suur päev
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Suburk protėvio palikuonis: svečiai, kvietimai, ženkleliai, didelis medis, didžioji diena. ¦ Saved kopā senča pēcnācējus: viesi, ielūgumi, vārda kartes, lielais koks, lielā diena. ¦ Kogu esivanema järeltulijad kokku: külalised, kutsed, nimesildid, suur sugupuu, suur päev.
+＋ Nouvelle cousinade ¦ ＋ Naujas giminės susitikimas ¦ ＋ Jauns dzimtas salidojums ¦ ＋ Uus suguvõsa kokkutulek
+Nouvelle cousinade ¦ Naujas giminės susitikimas ¦ Jauns dzimtas salidojums ¦ Uus suguvõsa kokkutulek
+Lecture des cousinades… ¦ Įkeliami giminės susitikimai… ¦ Ielādē dzimtas salidojumus… ¦ Suguvõsa kokkutulekute laadimine…
+Aucune cousinade pour l’instant ¦ Kol kas nėra giminės susitikimų ¦ Pagaidām nav neviena dzimtas salidojuma ¦ Suguvõsa kokkutulekuid veel pole
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Pasirink protėvį (arba porą): programėlė suras jo gyvus palikuonis, šaką po šakos, ir paruoš svečių sąrašą. ¦ Izvēlies senci (vai pāri): lietotne atradīs viņa dzīvos pēcnācējus, atzaru pa atzaram, un sagatavos viesu sarakstu. ¦ Vali esivanem (või paar): rakendus leiab tema elavad järeltulijad haru haaval ja koostab külaliste nimekirja.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Ieškoti… (pvz., Martin, 2026, Tulle) ¦ Meklēt… (piem., Martin, 2026, Tulle) ¦ Otsi… (nt Martin, 2026, Tulle)
+{n} oui ¦ Taip: {n} ¦ Jā: {n} ¦ Jah: {n}
+{n} sans réponse ¦ Be atsakymo: {n} ¦ Bez atbildes: {n} ¦ Vastuseta: {n}
+Aucune cousinade ne correspond. ¦ Joks giminės susitikimas neatitinka. ¦ Neviens dzimtas salidojums neatbilst. ¦ Ükski suguvõsa kokkutulek ei vasta.
+Renommer la cousinade ¦ Pervadinti giminės susitikimą ¦ Pārdēvēt dzimtas salidojumu ¦ Nimeta suguvõsa kokkutulek ümber
+Cousinade renommée. ¦ Giminės susitikimas pervadintas. ¦ Dzimtas salidojums pārdēvēts. ¦ Suguvõsa kokkutulek nimetati ümber.
+Cousinade supprimée : « {name} » ¦ Giminės susitikimas ištrintas: „{name}“ ¦ Dzimtas salidojums dzēsts: „{name}“ ¦ Suguvõsa kokkutulek kustutatud: „{name}“
+Modifier la cousinade ¦ Redaguoti giminės susitikimą ¦ Rediģēt dzimtas salidojumu ¦ Muuda suguvõsa kokkutulekut
+L’ancêtre dont on réunit les descendants ¦ Protėvis, kurio palikuonys susitinka ¦ Sencis, kura pēcnācēji pulcējas ¦ Esivanem, kelle järeltulijad kokku tulevad
+Avec son conjoint (le couple) — facultatif ¦ Su sutuoktiniu (pora) — neprivaloma ¦ Ar laulāto (pāris) — nav obligāti ¦ Koos abikaasaga (paar) — valikuline
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Tik poros vaikai. Tuščia: visi protėvio vaikai. ¦ Tikai pāra bērni. Tukšs: visi senča bērni. ¦ Ainult paari lapsed. Tühi: kõik esivanema lapsed.
+Nom de la cousinade ¦ Giminės susitikimo pavadinimas ¦ Dzimtas salidojuma nosaukums ¦ Suguvõsa kokkutuleku nimi
+Personne de référence pour les liens de parenté ¦ Atskaitos asmuo giminystės ryšiams ¦ Atskaites persona radniecības saitēm ¦ Sugulussuhete lähteisik
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Kiekvienas svečias turės savo ryšį su juo („antros eilės pusbrolis …“). Dažniausiai tai tu. ¦ Katram viesim būs sava radniecība ar šo personu („… otrās pakāpes brālēns“). Visbiežāk tas esi tu. ¦ Iga külalise juures näidatakse sugulus selle isikuga („… teise astme nõbu“). Enamasti oled see sina.
+Inviter aussi les conjoints des descendants ¦ Kviesti ir palikuonių sutuoktinius ¦ Uzaicināt arī pēcnācēju laulātos ¦ Kutsu ka järeltulijate abikaasad
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Konfidencialios kortelės niekada nerodomos. Gyvųjų adresai lieka šiame projekte. ¦ 🔒 Konfidenciālās kartītes nekad netiek rādītas. Dzīvo cilvēku adreses paliek šajā projektā. ¦ 🔒 Konfidentsiaalseid kaarte ei näidata kunagi. Elavate aadressid jäävad sellesse projekti.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Pasirink protėvį: programėlė ieško jo gyvų palikuonių. ¦ Izvēlies senci: lietotne meklē viņa dzīvos pēcnācējus. ¦ Vali esivanem: rakendus otsib tema elavaid järeltulijaid.
+Recherche des descendants vivants… ¦ Ieškoma gyvų palikuonių… ¦ Meklē dzīvos pēcnācējus… ¦ Elavate järeltulijate otsimine…
+{who} dans {branches}, et {spouses}. ¦ {who}: {branches}, ir {spouses}. ¦ {who}: {branches}, un {spouses}. ¦ {who}: {branches}, ja {spouses}.
+{who} dans {branches}. ¦ {who}: {branches}. ¦ {who}: {branches}. ¦ {who}: {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ Be įrašytos mirties, gimę mažiau nei prieš 100 metų: {n}, pažymėti „gyvas?“. ¦ Bez reģistrētas nāves, dzimuši pirms mazāk nekā 100 gadiem: {n}, atzīmēti „dzīvs?“. ¦ Märkimata surmaga, sündinud vähem kui 100 aastat tagasi: {n}, märgitud „elus?“.
+{n} laissées de côté. ¦ Praleista: {n}. ¦ Izlaisti: {n}. ¦ Välja jäetud: {n}.
+{n} laissée de côté. ¦ Praleista: {n}. ¦ Izlaisti: {n}. ¦ Välja jäetud: {n}.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Pasirink protėvį, kurio palikuonys susitiks. ¦ Izvēlies senci, kura pēcnācēji pulcēsies. ¦ Vali esivanem, kelle järeltulijad kokku tulevad.
+Cousinade créée : {n}. ¦ Giminės susitikimas sukurtas: {n}. ¦ Dzimtas salidojums izveidots: {n}. ¦ Suguvõsa kokkutulek loodud: {n}.
+Cousinade enregistrée : {n}. ¦ Giminės susitikimas išsaugotas: {n}. ¦ Dzimtas salidojums saglabāts: {n}. ¦ Suguvõsa kokkutulek salvestatud: {n}.
+Cousinade enregistrée. ¦ Giminės susitikimas išsaugotas. ¦ Dzimtas salidojums saglabāts. ¦ Suguvõsa kokkutulek salvestatud.
+Lecture de la cousinade… ¦ Įkeliamas giminės susitikimas… ¦ Ielādē dzimtas salidojumu… ¦ Suguvõsa kokkutuleku laadimine…
+← Toutes les cousinades ¦ ← Visi giminės susitikimai ¦ ← Visi dzimtas salidojumi ¦ ← Kõik suguvõsa kokkutulekud
+↻ Chercher les nouveaux descendants ¦ ↻ Ieškoti naujų palikuonių ¦ ↻ Meklēt jaunus pēcnācējus ¦ ↻ Otsi uusi järeltulijaid
+Chercher les nouveaux descendants ¦ Ieškoti naujų palikuonių ¦ Meklēt jaunus pēcnācējus ¦ Otsi uusi järeltulijaid
+↗ Fiche de l’ancêtre ¦ ↗ Protėvio kortelė ¦ ↗ Senča kartīte ¦ ↗ Esivanema kaart
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ Nebesimato: {n}. Jų kortelė tapo konfidenciali (arba buvo ištrinta). ¦ Vairs neparādās: {n}. Viņu kartīte kļuvusi konfidenciāla (vai ir dzēsta). ¦ Enam ei näidata: {n}. Kaart muutus konfidentsiaalseks (või kustutati).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ Nebesimato: {n}. Kortelė tapo konfidenciali (arba buvo ištrinta). ¦ Vairs neparādās: {n}. Kartīte kļuvusi konfidenciāla (vai ir dzēsta). ¦ Enam ei näidata: {n}. Kaart muutus konfidentsiaalseks (või kustutati).
+la personne de référence ¦ atskaitos asmuo ¦ atskaites persona ¦ lähteisik
+Liens de parenté avec ¦ Giminystės ryšiai su ¦ Radniecība ar ¦ Sugulus isikuga
+＋ Ajouter un invité ¦ ＋ Pridėti svečią ¦ ＋ Pievienot viesi ¦ ＋ Lisa külaline
+⤒ Importer une liste… ¦ ⤒ Importuoti sąrašą… ¦ ⤒ Importēt sarakstu… ¦ ⤒ Impordi nimekiri…
+Aucun invité pour l’instant ¦ Kol kas nėra svečių ¦ Pagaidām nav viesu ¦ Külalisi veel pole
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Gyvų palikuonių nerasta. Pridėk svečius ranka, importuok sąrašą arba papildyk medį ir tada „↻ Ieškoti naujų palikuonių“. ¦ Dzīvi pēcnācēji nav atrasti. Pievieno viesus ar roku, importē sarakstu vai papildini koku un tad „↻ Meklēt jaunus pēcnācējus“. ¦ Elavaid järeltulijaid ei leitud. Lisa külalised käsitsi, impordi nimekiri või täienda sugupuud ja vali siis „↻ Otsi uusi järeltulijaid“.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Ieškoti… (pvz., Martin, Brive, vegetaras) ¦ Meklēt… (piem., Martin, Brive, veģetārietis) ¦ Otsi… (nt Martin, Brive, taimetoitlane)
+Invités (cochés) ¦ Pakviesti (pažymėti) ¦ Uzaicinātie (atzīmēti) ¦ Kutsutud (märgitud)
+Pas invités ¦ Nepakviesti ¦ Nav uzaicināti ¦ Kutsumata
+Seulement « vivant ? » ¦ Tik „gyvas?“ ¦ Tikai „dzīvs?“ ¦ Ainult „elus?“
+Par branche et par foyer ¦ Pagal šaką ir namų ūkį ¦ Pēc atzara un mājsaimniecības ¦ Haru ja leibkonna kaupa
+Par génération ¦ Pagal kartą ¦ Pēc paaudzes ¦ Põlvkonna kaupa
+Par réponse ¦ Pagal atsakymą ¦ Pēc atbildes ¦ Vastuse järgi
+{n} · {inv} en tout ¦ {n} · iš viso {inv} ¦ {n} · kopā {inv} ¦ {n} · kokku {inv}
+Aucun invité ne correspond. ¦ Joks svečias neatitinka. ¦ Neviens viesis neatbilst. ¦ Ükski külaline ei vasta.
+Pas invité ¦ Nepakviestas ¦ Nav uzaicināts ¦ Kutsumata
+Invité (coché) ¦ Pakviestas (pažymėtas) ¦ Uzaicināts (atzīmēts) ¦ Kutsutud (märgitud)
+Régime ¦ Mityba ¦ Uzturs ¦ Toitumine
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Apie mirtį nieko neįrašyta, gimė mažiau nei prieš 100 metų: patikrink prieš kviesdamas ¦ Par nāvi nekas nav reģistrēts, dzimusi pirms mazāk nekā 100 gadiem: pārbaudi pirms uzaicināšanas ¦ Surma kohta pole midagi märgitud, sündinud vähem kui 100 aastat tagasi: kontrolli enne kutsumist
+Sans fiche ¦ Be kortelės ¦ Bez kartītes ¦ Kaardita
+Pas d’adresse ¦ Nėra adreso ¦ Nav adreses ¦ Aadress puudub
+Nombre de personnes ¦ Asmenų skaičius ¦ Personu skaits ¦ Isikute arv
+{name} est invitée. ¦ {name} pakviesta. ¦ {name} ir uzaicināta. ¦ {name} on kutsutud.
+{name} est invité. ¦ {name} pakviestas. ¦ {name} ir uzaicināts. ¦ {name} on kutsutud.
+{name} n’est plus invitée. ¦ {name} nebekviečiama. ¦ {name} vairs nav uzaicināta. ¦ {name} ei ole enam kutsutud.
+{name} n’est plus invité. ¦ {name} nebekviečiamas. ¦ {name} vairs nav uzaicināts. ¦ {name} ei ole enam kutsutud.
+Réponse de {name} : {answer}. ¦ {name} atsakymas: {answer}. ¦ {name} atbilde: {answer}. ¦ Vastus – {name}: {answer}.
+Inviter les {n} affichées ¦ Pakviesti rodomus ({n}) ¦ Uzaicināt redzamos ({n}) ¦ Kutsu näidatud ({n})
+{n} invitées. ¦ Pakviesta: {n}. ¦ Uzaicināti: {n}. ¦ Kutsutud: {n}.
+{n} invitée. ¦ Pakviesta: {n}. ¦ Uzaicināti: {n}. ¦ Kutsutud: {n}.
+Ne plus inviter les personnes affichées ¦ Nebekviesti rodomų asmenų ¦ Vairs neaicināt redzamās personas ¦ Ära enam kutsu näidatud isikuid
+{n} retirées des invitations. ¦ Pašalinta iš kvietimų: {n}. ¦ Noņemti no ielūgumiem: {n}. ¦ Kutsetest eemaldatud: {n}.
+{n} retirée des invitations. ¦ Pašalinta iš kvietimų: {n}. ¦ Noņemti no ielūgumiem: {n}. ¦ Kutsetest eemaldatud: {n}.
+Tableau des invités (CSV)… ¦ Svečių lentelė (CSV)… ¦ Viesu tabula (CSV)… ¦ Külaliste tabel (CSV)…
+Imprimer la liste des invités… ¦ Spausdinti svečių sąrašą… ¦ Drukāt viesu sarakstu… ¦ Prindi külaliste nimekiri…
+Écrire un courriel ¦ Rašyti el. laišką ¦ Rakstīt e-pastu ¦ Kirjuta e-kiri
+Retirer de la liste ¦ Pašalinti iš sąrašo ¦ Noņemt no saraksta ¦ Eemalda nimekirjast
+🗑 Retirer de la liste ¦ 🗑 Pašalinti iš sąrašo ¦ 🗑 Noņemt no saraksta ¦ 🗑 Eemalda nimekirjast
+{name} retirée de la liste. ¦ {name} pašalinta iš sąrašo. ¦ {name} noņemta no saraksta. ¦ {name} eemaldati nimekirjast.
+{name} retiré de la liste. ¦ {name} pašalintas iš sąrašo. ¦ {name} noņemts no saraksta. ¦ {name} eemaldati nimekirjast.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Naujų gyvų palikuonių nėra: sąrašas atnaujintas. ¦ Jaunu dzīvu pēcnācēju nav: saraksts ir aktuāls. ¦ Uusi elavaid järeltulijaid pole: nimekiri on ajakohane.
+{n} ajoutés. ¦ Pridėta: {n}. ¦ Pievienoti: {n}. ¦ Lisatud: {n}.
+{n} ajouté. ¦ Pridėta: {n}. ¦ Pievienoti: {n}. ¦ Lisatud: {n}.
+Son propre foyer ¦ Savas namų ūkis ¦ Sava mājsaimniecība ¦ Oma leibkond
+Garder son foyer ¦ Palikti savo namų ūkį ¦ Paturēt savu mājsaimniecību ¦ Jäta oma leibkond
+🎉 COUSINADE · INVITÉ ¦ 🎉 GIMINĖS SUSITIKIMAS · SVEČIAS ¦ 🎉 DZIMTAS SALIDOJUMS · VIESIS ¦ 🎉 SUGUVÕSA KOKKUTULEK · KÜLALINE
+🎉 COUSINADE ¦ 🎉 GIMINĖS SUSITIKIMAS ¦ 🎉 DZIMTAS SALIDOJUMS ¦ 🎉 SUGUVÕSA KOKKUTULEK
+Nouvel invité ¦ Naujas svečias ¦ Jauns viesis ¦ Uus külaline
+Une fiche de ta généalogie (facultatif) ¦ Tavo genealogijos kortelė (neprivaloma) ¦ Kartīte no tavas ģenealoģijas (nav obligāti) ¦ Kaart sinu sugupuust (valikuline)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Kitu atveju žemiau įrašyk vardą ir pavardę. ¦ Pretējā gadījumā zemāk ieraksti vārdu un uzvārdu. ¦ Muidu kirjuta allpool eesnimi ja perekonnanimi.
+Foyer (une invitation par foyer) ¦ Namų ūkis (vienas kvietimas namų ūkiui) ¦ Mājsaimniecība (viens ielūgums uz mājsaimniecību) ¦ Leibkond (üks kutse leibkonna kohta)
+12 rue des Écoles ¦ 12 rue des Écoles ¦ 12 rue des Écoles ¦ 12 rue des Écoles
+Régime, allergies ¦ Mityba, alergijos ¦ Uzturs, alerģijas ¦ Toitumine, allergiad
+végétarien, sans gluten… ¦ vegetaras, be glitimo… ¦ veģetārietis, bez glutēna… ¦ taimetoitlane, gluteenivaba…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Įrašyti adresą, el. paštą ir telefoną ir į gyvųjų adresyną (jo kortelę) ¦ Ierakstīt adresi, e-pastu un tālruni arī dzīvo cilvēku katalogā (viņa kartītē) ¦ Lisa aadress, e-post ja telefon ka elavate kataloogi (tema kaardile)
+Décoché : seulement dans cette cousinade. ¦ Nepažymėta: tik šiame giminės susitikime. ¦ Neatzīmēts: tikai šajā dzimtas salidojumā. ¦ Märkimata: ainult selles suguvõsa kokkutulekus.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Įrašyk bent vardą arba pavardę (arba pasirink kortelę). ¦ Ieraksti vismaz vārdu vai uzvārdu (vai izvēlies kartīti). ¦ Kirjuta vähemalt eesnimi või perekonnanimi (või vali kaart).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Šio el. pašto adreso forma netinkama (pavyzdys: vardas.pavarde@pavyzdys.lt). ¦ Šīs e-pasta adreses forma nav pareiza (piemērs: vards.uzvards@piemers.lv). ¦ See e-posti aadress pole õiges vormis (näide: eesnimi.perenimi@naide.ee).
+Invité ajouté. ¦ Svečias pridėtas. ¦ Viesis pievienots. ¦ Külaline lisatud.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Išsaugota, taip pat ir gyvųjų adresyne. ¦ Saglabāts, arī dzīvo cilvēku katalogā. ¦ Salvestatud, ka elavate kataloogis.
+Le lecteur de tableaux n’est pas chargé. ¦ Lentelių skaitytuvas neįkeltas. ¦ Tabulu lasītājs nav ielādēts. ¦ Tabelite lugeja pole laaditud.
+Importer une liste d’invités ¦ Importuoti svečių sąrašą ¦ Importēt viesu sarakstu ¦ Impordi külaliste nimekiri
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Lentelė su antraščių eilute: Vardas, Pavardė, El. paštas, Telefonas, Adresas, Pašto kodas, Miestas, Atsakymas (taip / ne / galbūt), Skaičius, Mityba, Pastaba. ¦ Tabula ar virsrakstu rindu: Vārds, Uzvārds, E-pasts, Tālrunis, Adrese, Pasta indekss, Pilsēta, Atbilde (jā / nē / varbūt), Skaits, Uzturs, Piezīme. ¦ Tabel päisereaga: Eesnimi, Perekonnanimi, E-post, Telefon, Aadress, Postiindeks, Linn, Vastus (jah / ei / võib-olla), Arv, Toitumine, Märkus.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Nerandu nei vardo, nei pavardės: pirmoje eilutėje turi būti stulpelių pavadinimai (Vardas, Pavardė, El. paštas…). ¦ Neatrodu ne vārdu, ne uzvārdu: pirmajā rindā jābūt kolonnu nosaukumiem (Vārds, Uzvārds, E-pasts…). ¦ Ei leia eesnime ega perekonnanime: esimesel real peavad olema veergude pealkirjad (Eesnimi, Perekonnanimi, E-post…).
+{n} (coordonnées et réponse complétées) ¦ {n} (kontaktai ir atsakymas papildyti) ¦ {n} (kontaktinformācija un atbilde papildināta) ¦ {n} (kontaktandmed ja vastus täiendatud)
+{n} non reconnues : laissées de côté. ¦ Neatpažinta: {n}, praleista. ¦ Neatpazīti: {n}, izlaisti. ¦ Tuvastamata: {n}, välja jäetud.
+{n} non reconnue : laissée de côté. ¦ Neatpažinta: {n}, praleista. ¦ Neatpazīti: {n}, izlaisti. ¦ Tuvastamata: {n}, välja jäetud.
+⤓ Exporter le tableau des invités ¦ ⤓ Eksportuoti svečių lentelę ¦ ⤓ Eksportēt viesu tabulu ¦ ⤓ Ekspordi külaliste tabel
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ CSV failas (skaičiuoklei) su svečiais, jų šaka, giminystės ryšiu ir atsakymu. ¦ CSV fails (izklājlapai) ar viesiem, viņu atzaru, radniecību un atbildi. ¦ CSV-fail (tabelarvutuse jaoks) külaliste, nende haru, suguluse ja vastusega.
+Avec les adresses, courriels et téléphones ¦ Su adresais, el. paštais ir telefonais ¦ Ar adresēm, e-pastiem un tālruņiem ¦ Koos aadresside, e-postide ja telefonidega
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Tai gyvų žmonių duomenys: dalinkis šiuo failu tik su organizatoriais. ¦ 🔒 Tie ir dzīvu cilvēku dati: kopīgo šo failu tikai ar organizatoriem. ¦ 🔒 Need on elavate inimeste andmed: jaga seda faili ainult korraldajatega.
+Seulement les invités cochés ¦ Tik pažymėti svečiai ¦ Tikai atzīmētie viesi ¦ Ainult märgitud külalised
+Lien avec l’ancêtre ¦ Ryšys su protėviu ¦ Radniecība ar senci ¦ Sugulus esivanemaga
+Lien avec la référence ¦ Ryšys su atskaitos asmeniu ¦ Radniecība ar atskaites personu ¦ Sugulus lähteisikuga
+Tableau exporté, avec les coordonnées. ¦ Lentelė eksportuota su kontaktais. ¦ Tabula eksportēta ar kontaktinformāciju. ¦ Tabel eksporditud koos kontaktandmetega.
+Tableau exporté, sans les coordonnées. ¦ Lentelė eksportuota be kontaktų. ¦ Tabula eksportēta bez kontaktinformācijas. ¦ Tabel eksporditud ilma kontaktandmeteta.
+Invités — {name} ¦ Svečiai — {name} ¦ Viesi — {name} ¦ Külalised — {name}
+Liste des invités ¦ Svečių sąrašas ¦ Viesu saraksts ¦ Külaliste nimekiri
+Les invités cochés ¦ Pažymėti svečiai ¦ Atzīmētie viesi ¦ Märgitud külalised
+Ceux qui viennent ¦ Tie, kurie atvyksta ¦ Tie, kas ieradīsies ¦ Need, kes tulevad
+Avec les coordonnées ¦ Su kontaktais ¦ Ar kontaktinformāciju ¦ Koos kontaktandmetega
+Le texte de l’invitation ¦ Kvietimo tekstas ¦ Ielūguma teksts ¦ Kutse tekst
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Vienas kvietimas namų ūkiui. Šie žodžiai pakeičiami automatiškai: ¦ Viens ielūgums uz mājsaimniecību. Šie vārdi tiek aizstāti automātiski: ¦ Üks kutse leibkonna kohta. Need sõnad asendatakse automaatselt:
+Répondre avant le ¦ Atsakyti iki ¦ Atbildēt līdz ¦ Vasta hiljemalt
+Contact pour répondre ¦ Kontaktas atsakymams ¦ Kontaktpersona atbildēm ¦ Kontakt vastamiseks
+Objet du courriel ¦ El. laiško tema ¦ E-pasta temats ¦ E-kirja teema
+🖨 Imprimer les invitations… ¦ 🖨 Spausdinti kvietimus… ¦ 🖨 Drukāt ielūgumus… ¦ 🖨 Prindi kutsed…
+📝 Dans le traitement de texte ¦ 📝 Teksto rengyklėje ¦ 📝 Teksta apstrādē ¦ 📝 Tekstitöötluses
+📁 Copie dans les médias ¦ 📁 Kopija medijoje ¦ 📁 Kopija medijos ¦ 📁 Koopia meediasse
+{n} à inviter ¦ Kviestinų: {n} ¦ Jāuzaicina: {n} ¦ Kutsuda: {n}
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Vienas el. laiškas visiems (slaptoji kopija) ¦ ✉️ Viens e-pasts visiem (slēptā kopija) ¦ ✉️ Üks e-kiri kõigile (pimekoopiana)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Tavo el. pašto programa atsidaro su paruoštu tekstu: programėlė nieko nesiunčia. ¦ Tava e-pasta programma atveras ar gatavu tekstu: lietotne neko nesūta. ¦ Sinu e-postiprogramm avaneb valmis tekstiga: rakendus ei saada midagi.
+✉️ Courriel prêt ¦ ✉️ El. laiškas paruoštas ¦ ✉️ E-pasts gatavs ¦ ✉️ E-kiri valmis
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Nepažymėtas nė vienas svečias: pažymėk svečius kortelėje „👥 Svečiai“. ¦ Neviens viesis nav atzīmēts: atzīmē viesus cilnē „👥 Viesi“. ¦ Ühtegi külalist pole märgitud: märgi külalised vahekaardil „👥 Külalised“.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Nėra namų ūkių kviesti: pirmiausia pažymėk svečius. ¦ Nav mājsaimniecību, ko uzaicināt: vispirms atzīmē viesus. ¦ Pole leibkondi, keda kutsuda: märgi kõigepealt külalised.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Namų ūkio adresas viršuje dešinėje (vokas su langeliu) ¦ Mājsaimniecības adrese augšā labajā pusē (aploksne ar lodziņu) ¦ Leibkonna aadress üleval paremal (aknaga ümbrik)
+Le traitement de texte n’est pas chargé. ¦ Teksto rengyklė neįkelta. ¦ Teksta apstrāde nav ielādēta. ¦ Tekstitöötlus pole laaditud.
+Les faire-part ne sont pas chargés. ¦ Pranešimai neįkelti. ¦ Paziņojumi nav ielādēti. ¦ Teadaanded pole laaditud.
+Tous les descendants de {name} ¦ Visi palikuonys: {name} ¦ Visi pēcnācēji: {name} ¦ Kõik järeltulijad: {name}
+Réponse avant le {date} ¦ Atsakyti iki {date} ¦ Atbildēt līdz {date} ¦ Vastata hiljemalt {date}
+Envoi vers les médias indisponible. ¦ Siuntimas į mediją negalimas. ¦ Sūtīšana uz medijiem nav pieejama. ¦ Meediasse saatmine pole saadaval.
+Une copie de l’invitation est rangée dans les médias. ¦ Kvietimo kopija išsaugota medijoje. ¦ Ielūguma kopija saglabāta medijos. ¦ Kutse koopia on meediasse salvestatud.
+Copie non rangée dans les médias : {err} ¦ Kopija neišsaugota medijoje: {err} ¦ Kopija nav saglabāta medijos: {err} ¦ Koopiat ei salvestatud meediasse: {err}
+Le lien écrit sous le nom ¦ Ryšys, užrašytas po vardu ¦ Radniecība, kas rakstīta zem vārda ¦ Nime alla kirjutatud sugulus
+Avec l’ancêtre ¦ Su protėviu ¦ Ar senci ¦ Esivanemaga
+Avec la référence ¦ Su atskaitos asmeniu ¦ Ar atskaites personu ¦ Lähteisikuga
+Pour qui ¦ Kam ¦ Kam ¦ Kellele
+Invités cochés ¦ Pažymėti svečiai ¦ Atzīmētie viesi ¦ Märgitud külalised
+Qui viennent ¦ Atvykstantys ¦ Ieradīsies ¦ Tulijad
+Présents ¦ Dalyvaujantys ¦ Klātesošie ¦ Kohalolijad
+Par page A4 ¦ A4 puslapyje ¦ Uz A4 lapas ¦ A4 lehe kohta
+Petite photo (si la fiche en a une) ¦ Maža nuotrauka (jei kortelė ją turi) ¦ Mazs fotoattēls (ja kartītē tāds ir) ¦ Väike foto (kui kaardil see on)
+QR code (nom, branche et lien, lu par un téléphone) ¦ QR kodas (vardas, šaka ir ryšys, nuskaitomas telefonu) ¦ QR kods (vārds, atzars un radniecība, nolasāms ar tālruni) ¦ QR-kood (nimi, haru ja sugulus, loetav telefoniga)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Kiekviena šaka turi savo spalvą (pakeisk ją kortelėje „📊 Skaičiai“). ¦ Katram atzaram ir sava krāsa (maini to cilnē „📊 Skaitļi“). ¦ Igal harul on oma värv (muuda seda vahekaardil „📊 Arvud“).
+Personne à qui faire un badge. ¦ Nėra kam daryti ženklelio. ¦ Nav neviena, kam izveidot vārda karti. ¦ Pole kellelegi nimesilti teha.
+L’arbre décoratif n’est pas chargé. ¦ Dekoratyvinis medis neįkeltas. ¦ Dekoratīvais koks nav ielādēts. ¦ Dekoratiivne sugupuu pole laaditud.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Visi {name} palikuonys, dideliu formatu, viena spalva kiekvienai šakai, kad galėtum pakabinti giminės susitikimo dieną. Tada piešinys atsidaro, kad viską pataisytum, o paskui „⤓ Eksportuoti“ (PDF spaustuvei su užlaida ir pjovimo žymėmis, PNG, SVG…). ¦ Visi {name} pēcnācēji, lielā formātā, katram atzaram sava krāsa, lai izliktu dzimtas salidojuma dienā. Pēc tam zīmējums atveras, lai visu pielabotu, un tad „⤓ Eksportēt“ (PDF tipogrāfijai ar pārlaidi un griešanas zīmēm, PNG, SVG…). ¦ Kõik isiku {name} järeltulijad suurelt, igal harul oma värv, et need suguvõsa kokkutuleku päeval üles panna. Seejärel avaneb joonis kõige viimistlemiseks ja siis „⤓ Ekspordi“ (PDF trükikojale lõikevaru ja lõikemärkidega, PNG, SVG…).
+l’ancêtre ¦ protėvis ¦ sencis ¦ esivanem
+Les conjoints sous chaque nom ¦ Sutuoktiniai po kiekvienu vardu ¦ Laulātie zem katra vārda ¦ Abikaasad iga nime all
+Une place pour coller les photos du jour (à côté des vivants) ¦ Vieta dienos nuotraukoms priklijuoti (šalia gyvųjų) ¦ Vieta dienas fotoattēlu pielīmēšanai (blakus dzīvajiem) ¦ Koht päeva fotode kleepimiseks (elavate kõrval)
+🌳 Fabriquer le grand arbre ¦ 🌳 Sukurti didelį medį ¦ 🌳 Izveidot lielo koku ¦ 🌳 Tee suur sugupuu
+Fabrication du grand arbre… ¦ Kuriamas didelis medis… ¦ Veido lielo koku… ¦ Suure sugupuu tegemine…
+Aucune descendance pour cet ancêtre. ¦ Šis protėvis neturi palikuonių. ¦ Šim sencim nav pēcnācēju. ¦ Sellel esivanemal pole järeltulijaid.
+Cet ancêtre est confidentiel. ¦ Šis protėvis konfidencialus. ¦ Šis sencis ir konfidenciāls. ¦ See esivanem on konfidentsiaalne.
+Photos du jour ¦ Dienos nuotraukos ¦ Dienas fotoattēli ¦ Päeva fotod
+✅ Présence ¦ ✅ Dalyvavimas ¦ ✅ Klātbūtne ¦ ✅ Kohalolek
+{here} sur {n} ¦ {here} iš {n} ¦ {here} no {n} ¦ {here}/{n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Spausdinti dalyvių sąrašą… ¦ 🖨 Drukāt klātesošo sarakstu… ¦ 🖨 Prindi kohalolekunimekiri…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Dar niekas nepasakė „taip“: atsakymai žymimi skiltyje „👥 Svečiai“. ¦ Neviens vēl nav teicis „jā“: atbildes atzīmē sadaļā „👥 Viesi“. ¦ Keegi pole veel „jah“ öelnud: vastused märgitakse jaotises „👥 Külalised“.
+{name} est là. ¦ {name} atvyko. ¦ {name} ir klāt. ¦ {name} on kohal.
+{name} n’est plus notée présente. ¦ {name} nebepažymėta kaip dalyvaujanti. ¦ {name} vairs nav atzīmēta kā klātesoša. ¦ {name} pole enam kohalolijaks märgitud.
+{name} n’est plus noté présent. ¦ {name} nebepažymėtas kaip dalyvaujantis. ¦ {name} vairs nav atzīmēts kā klātesošs. ¦ {name} pole enam kohalolijaks märgitud.
+Présence — {name} ¦ Dalyvavimas — {name} ¦ Klātbūtne — {name} ¦ Kohalolek — {name}
+{name} — présence ¦ {name} — dalyvavimas ¦ {name} — klātbūtne ¦ {name} — kohalolek
+Liste de présence ¦ Dalyvių sąrašas ¦ Klātesošo saraksts ¦ Kohalolekunimekiri
+Places par table ¦ Vietų prie stalo ¦ Vietas pie galda ¦ Kohti laua kohta
+Compter aussi les « peut-être » ¦ Skaičiuoti ir „galbūt“ ¦ Skaitīt arī „varbūt“ ¦ Arvesta ka „võib-olla“
+Les petites branches partagent une table ¦ Mažos šakos dalijasi stalu ¦ Mazi atzari dala galdu ¦ Väikesed harud jagavad lauda
+✨ Faire le plan par branche ¦ ✨ Sudaryti planą pagal šakas ¦ ✨ Izveidot plānu pēc atzariem ¦ ✨ Tee istumiskord harude kaupa
+🖨 Imprimer le plan… ¦ 🖨 Spausdinti planą… ¦ 🖨 Drukāt plānu… ¦ 🖨 Prindi istumiskord…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Namų ūkis niekada neišskiriamas. Pakeisk asmens stalą jo langelyje; ↶ Anuliuoti atšaukia planą. ¦ Mājsaimniecība nekad netiek sadalīta. Maini personas galdu tās lodziņā; ↶ Atsaukt atceļ plānu. ¦ Leibkonda ei lahutata kunagi. Muuda isiku lauda tema lahtris; ↶ Võta tagasi tühistab istumiskorra.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Stalų plano dar nėra: pažymėk atsakymus, tada „✨ Sudaryti planą pagal šakas“. ¦ Galdu plāna vēl nav: atzīmē atbildes, tad „✨ Izveidot plānu pēc atzariem“. ¦ Istumiskorda veel pole: märgi vastused ja vali siis „✨ Tee istumiskord harude kaupa“.
+{name} va à la table {no}. ¦ {name} sėda prie {no} stalo. ¦ {name} sēž pie galda nr. {no}. ¦ {name} istub lauas nr {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Dar niekas neatvyksta: pirmiausia pažymėk atsakymus „Taip“. ¦ Vēl neviens neieradīsies: vispirms atzīmē atbildes „Jā“. ¦ Keegi veel ei tule: märgi kõigepealt „Jah“-vastused.
+＋ Ajouter des photos… ¦ ＋ Pridėti nuotraukų… ¦ ＋ Pievienot fotoattēlus… ¦ ＋ Lisa fotosid…
+Retirer de l’album ¦ Pašalinti iš albumo ¦ Noņemt no albuma ¦ Eemalda albumist
+L’album est vide ¦ Albumas tuščias ¦ Albums ir tukšs ¦ Album on tühi
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Dienos nuotraukos: importuok jas iš kompiuterio arba pasirink medijoje. ¦ Dienas fotoattēli: importē tos no datora vai izvēlies medijos. ¦ Päeva fotod: impordi need arvutist või vali meediast.
+＋ Ajouter des photos ¦ ＋ Pridėti nuotraukų ¦ ＋ Pievienot fotoattēlus ¦ ＋ Lisa fotosid
+Les photos de la cousinade ¦ Giminės susitikimo nuotraukos ¦ Dzimtas salidojuma fotoattēli ¦ Suguvõsa kokkutuleku fotod
+Ajouter à l’album ¦ Pridėti į albumą ¦ Pievienot albumam ¦ Lisa albumisse
+{n} à l’album. ¦ {n} į albumą. ¦ {n} albumā. ¦ {n} albumisse.
+Photo retirée de l’album (elle reste dans les médias). ¦ Nuotrauka pašalinta iš albumo (ji lieka medijoje). ¦ Fotoattēls noņemts no albuma (tas paliek medijos). ¦ Foto eemaldati albumist (see jääb meediasse).
+invités ¦ svečiai ¦ viesi ¦ külalised
+oui ¦ taip ¦ jā ¦ jah
+peut-être ¦ galbūt ¦ varbūt ¦ võib-olla
+non ¦ ne ¦ nē ¦ ei
+sans réponse ¦ be atsakymo ¦ bez atbildes ¦ vastuseta
+personnes attendues ¦ laukiami asmenys ¦ gaidītās personas ¦ oodatavad isikud
+Par branche ¦ Pagal šaką ¦ Pēc atzara ¦ Harude kaupa
+Invités ¦ Svečiai ¦ Viesi ¦ Külalised
+Réponses ¦ Atsakymai ¦ Atbildes ¦ Vastused
+Couleur de la branche {name} ¦ Šakos {name} spalva ¦ Atzara {name} krāsa ¦ Haru {name} värv
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ taip: {yes}, galbūt: {maybe}, ne: {no}, be atsakymo: {wait} ¦ jā: {yes}, varbūt: {maybe}, nē: {no}, bez atbildes: {wait} ¦ jah: {yes}, võib-olla: {maybe}, ei: {no}, vastuseta: {wait}
+Régimes et allergies (de ceux qui viennent) ¦ Mityba ir alergijos (atvykstančiųjų) ¦ Uzturs un alerģijas (to, kas ieradīsies) ¦ Toitumine ja allergiad (tulijatel)
+Le jour J : {n}. ¦ Didžiąją dieną: {n}. ¦ Lielajā dienā: {n}. ¦ Suurel päeval: {n}.
+Couleur de la branche enregistrée. ¦ Šakos spalva išsaugota. ¦ Atzara krāsa saglabāta. ¦ Haru värv salvestatud.
+Organiser une cousinade… ¦ Organizuoti giminės susitikimą… ¦ Organizēt dzimtas salidojumu… ¦ Korralda suguvõsa kokkutulek…
+Descendants de {name} · {n} ¦ Palikuonys: {name} · {n} ¦ Pēcnācēji: {name} · {n} ¦ Järeltulijad: {name} · {n}
+=passage dans les médias ¦ pasirodymas žiniasklaidoje|pasirodymai žiniasklaidoje|pasirodymų žiniasklaidoje ¦ parādīšanās medijos|parādīšanās medijos|parādīšanās medijos ¦ meediaesinemine|meediaesinemist
+passages dans les médias ¦ pasirodymai žiniasklaidoje ¦ parādīšanās medijos ¦ meediaesinemised
+1980 et après ¦ 1980 m. ir vėliau ¦ 1980. gads un vēlāk ¦ 1980 ja hiljem
+avant 1900 ¦ iki 1900 m. ¦ pirms 1900. gada ¦ enne 1900. aastat
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Pridėk MP3, M4A, WAV, AIFF ar OGG failą prie kortelės, šukavimo, tyrimo… (arba nutempk jį čia) ir jis atsiras čia. ¦ Pievieno MP3, M4A, WAV, AIFF vai OGG failu kartītei, ķemmēšanai, izpētei… (vai ievelc to šeit), un tas parādīsies šeit. ¦ Lisa MP3-, M4A-, WAV-, AIFF- või OGG-fail kaardile, läbikammile, uurimusele… (või lohista see siia) ja see ilmub siia.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Pridėk MP4, MOV ar WEBM failą prie kortelės, šukavimo, tyrimo… (arba nutempk jį čia) ir vaizdo įrašas atsiras čia. ¦ Pievieno MP4, MOV vai WEBM failu kartītei, ķemmēšanai, izpētei… (vai ievelc to šeit), un video parādīsies šeit. ¦ Lisa MP4-, MOV- või WEBM-fail kaardile, läbikammile, uurimusele… (või lohista see siia) ja video ilmub siia.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Pridėk atviruką: vaizdo pusės paveikslėlį, nugarėlės paveikslėlį, tada parodytą vietą, kad rastum jį Žemėlapyje. ¦ Pievieno pastkarti: skata attēlu, aizmugures attēlu, tad parādīto vietu, lai to atrastu Kartē. ¦ Lisa postkaart: vaate pilt, tagakülje pilt ja siis kujutatud koht, et see Kaardilt üles leida.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Pridėk juos asmens kortelėje (blokas 🛂 Pasai) arba skiltyje ✨ Lobiai → Pasai, kur taip pat gali importuoti sąrašą. ¦ Pievieno tās personas kartītē (bloks 🛂 Pases) vai sadaļā ✨ Dārgumi → Pases, kur var arī importēt sarakstu. ¦ Lisa need isiku kaardile (plokk 🛂 Passid) või jaotisesse ✨ Aarded → Passid, kus saad ka nimekirja importida.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Uždek vieną skiltyje ✨ Lobiai → Uždegti žvakę. ¦ Iededz vienu sadaļā ✨ Dārgumi → Iedegt sveci. ¦ Süüta üks jaotises ✨ Aarded → Süüta küünal.
+Amérique du Nord ¦ Šiaurės Amerika ¦ Ziemeļamerika ¦ Põhja-Ameerika
+Assembler et retoucher des sons ¦ Sujungti ir taisyti garsus ¦ Salikt kopā un pielabot skaņas ¦ Pane helid kokku ja viimistle neid
+Aucun acte pour l’instant ¦ Kol kas nėra dokumentų ¦ Pagaidām nav dokumentu ¦ Dokumente veel pole
+Aucun dossier de preuve ¦ Nėra įrodymų bylų ¦ Nav pierādījumu mapju ¦ Tõendikaustu pole
+Aucun lieu dans l’arbre pour l’instant ¦ Medyje kol kas nėra vietų ¦ Kokā pagaidām nav vietu ¦ Sugupuus pole veel kohti
+Aucun livret pour l’instant ¦ Kol kas nėra knygelių ¦ Pagaidām nav bukletu ¦ Vihikuid veel pole
+Aucun nom indexé pour l’instant ¦ Kol kas nėra indeksuotų vardų ¦ Pagaidām nav indeksētu vārdu ¦ Indekseeritud nimesid veel pole
+Aucun partage pour l’instant ¦ Kol kas niekuo nesidalinta ¦ Pagaidām nekas nav kopīgots ¦ Jagamisi veel pole
+Aucun passage dans les médias pour l’instant ¦ Kol kas nėra pasirodymų žiniasklaidoje ¦ Pagaidām nav parādīšanās medijos ¦ Meediaesinemisi veel pole
+Aucun passeport pour l’instant ¦ Kol kas nėra pasų ¦ Pagaidām nav pasu ¦ Passe veel pole
+Aucun projet de montage pour l’instant ¦ Kol kas nėra montažo projektų ¦ Pagaidām nav montāžas projektu ¦ Montaažiprojekte veel pole
+Aucun questionnaire pour l’instant ¦ Kol kas nėra klausimynų ¦ Pagaidām nav anketu ¦ Küsimustikke veel pole
+Aucun rattachement pour l’instant ¦ Kol kas nėra priklausymų parapijoms ¦ Pagaidām nav piederību draudzēm ¦ Kihelkonnaseoseid veel pole
+Aucun recueil pour l’instant ¦ Kol kas nėra rinkinių ¦ Pagaidām nav krājumu ¦ Kogumikke veel pole
+Aucun son pour l’instant ¦ Kol kas nėra garsų ¦ Pagaidām nav skaņu ¦ Helisid veel pole
+Aucune annonce pour l’instant ¦ Kol kas nėra skelbimų ¦ Pagaidām nav sludinājumu ¦ Kuulutusi veel pole
+Aucune bougie au registre ¦ Registre nėra žvakių ¦ Reģistrā nav sveču ¦ Registris pole küünlaid
+Aucune carte d’électeur pour l’instant ¦ Kol kas nėra rinkėjo kortelių ¦ Pagaidām nav vēlētāju karšu ¦ Valijakaarte veel pole
+Aucune carte postale pour l’instant ¦ Kol kas nėra atvirukų ¦ Pagaidām nav pastkaršu ¦ Postkaarte veel pole
+Aucune création ni carrière pour l’instant ¦ Kol kas nėra nei kūrinių, nei karjerų ¦ Pagaidām nav ne darbu, ne karjeru ¦ Teoseid ega karjääre veel pole
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Nėra prašymų: atidaryk nuotrauką ir spustelėk „📤 Paklausti, kas tai“. ¦ Nav pieprasījumu: atver fotoattēlu un noklikšķini „📤 Pajautāt, kas tas ir“. ¦ Päringuid pole: ava foto ja klõpsa „📤 Küsi, kes see on“.
+Aucune demande pour l’instant ¦ Kol kas nėra prašymų ¦ Pagaidām nav pieprasījumu ¦ Päringuid veel pole
+Aucune gazette pour l’instant ¦ Kol kas nėra laikraštėlių ¦ Pagaidām nav avīžu ¦ Lehti veel pole
+Aucune image de lieu pour l’instant ¦ Kol kas nėra vietų vaizdų ¦ Pagaidām nav vietu attēlu ¦ Kohtade pilte veel pole
+Aucune langue notée pour l’instant ¦ Kol kas neįrašyta jokių kalbų ¦ Pagaidām nav atzīmēta neviena valoda ¦ Keeli pole veel märgitud
+Aucune lettre pour l’instant ¦ Kol kas nėra laiškų ¦ Pagaidām nav vēstuļu ¦ Kirju veel pole
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Kol kas nėra namų: „＋ Naujas namas“. ¦ Pagaidām nav māju: „＋ Jauna māja“. ¦ Maju veel pole: „＋ Uus maja“.
+Aucune personne n’a encore de profil ¦ Dar niekas neturi profilio ¦ Vēl nevienam nav profila ¦ Kellelgi pole veel profiili
+Aucune règle pour l’instant ¦ Kol kas nėra taisyklių ¦ Pagaidām nav noteikumu ¦ Reegleid veel pole
+Aucune récompense pour l’instant ¦ Kol kas nėra apdovanojimų ¦ Pagaidām nav apbalvojumu ¦ Auhindu veel pole
+Aucune transcription d’acte pour l’instant ¦ Kol kas nėra dokumentų transkripcijų ¦ Pagaidām nav dokumentu transkripciju ¦ Dokumentide transkriptsioone veel pole
+Aucune vidéo pour l’instant ¦ Kol kas nėra vaizdo įrašų ¦ Pagaidām nav video ¦ Videoid veel pole
+Auteur, réalisation ¦ Autorius, režisūra ¦ Autors, režija ¦ Autor, lavastus
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Puiku! Asistentas gali ieškoti toliau (iki 12 kartų). ¦ Lieliski! Palīgs var meklēt tālāk (līdz 12 paaudzēm). ¦ Tubli! Abiline saab otsida kaugemale (kuni 12 põlvkonda).
+Carte du droit de vote ¦ Balsavimo teisės žemėlapis ¦ Balsstiesību karte ¦ Valimisõiguse kaart
+Cette liste est cachée ¦ Šis sąrašas paslėptas ¦ Šis saraksts ir paslēpts ¦ See loend on peidetud
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Tai, ką čia užrašai, atkartoja dokumentus: tai nėra teisinis patarimas. ¦ Tas, ko šeit pieraksti, atkārto dokumentus: tas nav juridisks padoms. ¦ See, mida siia märgid, järgib dokumente: see pole õigusnõuanne.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Tai privati informacija: pirmiausia įjunk jos rodymą Nustatymuose. ¦ Tā ir privāta informācija: vispirms ieslēdz tās rādīšanu Iestatījumos. ¦ See on privaatne teave: luba selle näitamine kõigepealt Seadetes.
+Chercher un nom, une commune… ¦ Ieškoti vardo, komunos… ¦ Meklēt vārdu, komūnu… ¦ Otsi nime, kommuuni…
+Chercher un projet… (nom, photo, détails) ¦ Ieškoti projekto… (pavadinimas, nuotrauka, detalės) ¦ Meklēt projektu… (nosaukums, fotoattēls, detaļas) ¦ Otsi projekti… (nimi, foto, üksikasjad)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Ieškoti klausimyno… (pvz., Anne, karas, Marie) ¦ Meklēt anketu… (piem., Anne, karš, Marie) ¦ Otsi küsimustikku… (nt Anne, sõda, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Ieškoti žemėlapio… (pvz., Bretagne, 1978, Lucie) ¦ Meklēt karti… (piem., Bretagne, 1978, Lucie) ¦ Otsi kaarti… (nt Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Ieškoti namo… (pavadinimas, vieta, laikotarpis, asmuo, surašymas) ¦ Meklēt māju… (nosaukums, vieta, laikmets, persona, tautas skaitīšana) ¦ Otsi maja… (nimi, koht, ajastu, isik, rahvaloendus)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Ieškoti asmens… (pvz., Martin, meras, sportininkas) ¦ Meklēt personu… (piem., Martin, mērs, sportists) ¦ Otsi isikut… (nt Martin, linnapea, sportlane)
+Chercher… (commune, cote, année, service d’archives) ¦ Ieškoti… (komuna, šifras, metai, archyvas) ¦ Meklēt… (komūna, šifrs, gads, arhīvs) ¦ Otsi… (kommuun, säilikutähis, aasta, arhiiv)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Ieškoti… (komuna, sekcija, numeris, vietovė, savininkas) ¦ Meklēt… (komūna, sekcija, numurs, vietvārds, īpašnieks) ¦ Otsi… (kommuun, sektsioon, number, paik, omanik)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Ieškoti… (asmuo, turtas, notaras, vieta, šifras) ¦ Meklēt… (persona, īpašums, notārs, vieta, šifrs) ¦ Otsi… (isik, vara, notar, koht, säilikutähis)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Ieškoti… (pavadinimas, autorius, vieta, minimas vardas, kas matyti, pastabos) ¦ Meklēt… (nosaukums, autors, vieta, minētais vārds, kas redzams, piezīmes) ¦ Otsi… (pealkiri, autor, koht, mainitud nimi, mis on näha, märkused)
+Chercher… (titre, lieu) ¦ Ieškoti… (pavadinimas, vieta) ¦ Meklēt… (nosaukums, vieta) ¦ Otsi… (pealkiri, koht)
+Chercher… (titre, personne, lieu, année) ¦ Ieškoti… (pavadinimas, asmuo, vieta, metai) ¦ Meklēt… (nosaukums, persona, vieta, gads) ¦ Otsi… (pealkiri, isik, koht, aasta)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Ieškoti… (pavadinimas, tekstas, asmuo, vieta, šifras) ¦ Meklēt… (nosaukums, teksts, persona, vieta, šifrs) ¦ Otsi… (pealkiri, tekst, isik, koht, säilikutähis)
+Choisir la personne, puis la sorte de fiche ¦ Pasirinkti asmenį, tada kortelės rūšį ¦ Izvēlēties personu, tad kartītes veidu ¦ Vali isik, siis kaardi liik
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Pasirinkti stulpelius („⚙️ Rodomi laukai“, kortelė „Sąrašas“) ¦ Izvēlēties kolonnas („⚙️ Rādītie lauki“, cilne „Saraksts“) ¦ Vali veerud („⚙️ Kuvatavad väljad“, vahekaart „Loend“)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Pasirinkti asmenį, tada pažymėti, kuo jis buvo (menininkas, sportininkas, išrinktas atstovas…) ¦ Izvēlēties personu, tad atzīmēt, kas viņš bija (mākslinieks, sportists, ievēlēta amatpersona…) ¦ Vali isik ja märgi siis, kes ta oli (kunstnik, sportlane, valitud esindaja…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Pasirink pradinį asmenį (Sosa 1) ir pridėk jo tėvus. ¦ Izvēlies sākuma personu (Sosa 1) un pievieno viņas vecākus. ¦ Vali lähteisik (Sosa 1) ja lisa tema vanemad.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Pasirink asmenį, tada kortelės rūšį: ji atsidurs jo puslapyje ir atsiras čia. ¦ Izvēlies personu, tad kartītes veidu: tā nonāks viņas lapā un parādīsies šeit. ¦ Vali isik ja siis kaardi liik: see paigutub tema lehele ja ilmub siia.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Pasirink dokumento vaizdą (krikštas, santuoka, laidojimas…) ir perrašyk jį šalia. ¦ Izvēlies dokumenta attēlu (kristības, laulība, apbedīšana…) un pārraksti to blakus. ¦ Vali dokumendi pilt (ristimine, abielu, matmine…) ja transkribeeri see kõrvale.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Spustelėk šalį, kad pamatytum jos datas (taip pat Šveicarijos kantonus, Kanados provincijas…). ¦ Noklikšķini uz valsts, lai redzētu tās datumus (arī Šveices kantonus, Kanādas provinces…). ¦ Klõpsa riigil, et näha selle kuupäevi (ka Šveitsi kantoneid, Kanada provintse…).
+Clubs et équipes, résultats, records, saisons. ¦ Klubai ir komandos, rezultatai, rekordai, sezonai. ¦ Klubi un komandas, rezultāti, rekordi, sezonas. ¦ Klubid ja võistkonnad, tulemused, rekordid, hooajad.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Pradėk nuo „＋ Numeris“, „＋ Knyga“ arba „＋ Dokumentinis filmas“ puslapio viršuje. ¦ Sāc ar „＋ Numurs“, „＋ Grāmata“ vai „＋ Dokumentālā filma“ lapas augšā. ¦ Alusta lehe ülaosast: „＋ Number“, „＋ Raamat“ või „＋ Dokumentaal“.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Pradėk vieną: jis atsiras čia kartu su kitais, kad vėliau galėtum vėl jį atidaryti. ¦ Sāc vienu: tas parādīsies šeit kopā ar citiem, lai vēlāk to varētu atkal atvērt. ¦ Alusta üht: see ilmub siia koos teistega, et saaksid selle hiljem uuesti avada.
+Commune, section, numéro ¦ Komuna, sekcija, numeris ¦ Komūna, sekcija, numurs ¦ Kommuun, sektsioon, number
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Pirmiausia sukurk savo tipą („＋ Sukurti savo tipą…“ skiltyje „＋ Naujas kūrinys“), tada jo korteles. ¦ Vispirms izveido savu tipu („＋ Izveidot savu tipu…“ sadaļā „＋ Jauns darbs“), tad tā kartītes. ¦ Loo kõigepealt oma tüüp („＋ Loo oma tüüp…“ jaotises „＋ Uus teos“), siis selle kaardid.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Sukurk rinkinį (registrą, sąrašą, sąsiuvinį…), tada pridėk savo nuotraukas: kiekviena nuotrauka tampa puslapiu. ¦ Izveido krājumu (reģistru, sarakstu, burtnīcu…), tad pievieno savus fotoattēlus: katrs fotoattēls kļūst par lapu. ¦ Loo kogumik (register, nimekiri, vihik…) ja lisa siis oma fotod: igast fotost saab leht.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Sukurk žemėlapį, tada pridėk nuotraukų iš programėlės arba jas importuok: tos, kurios turi GPS koordinates, atsistoja į vietą pačios. ¦ Izveido karti, tad pievieno fotoattēlus no lietotnes vai importē tos: tie, kuriem ir GPS koordinātas, novietojas paši. ¦ Loo kaart ja lisa siis fotosid rakendusest või impordi need: GPS-koordinaatidega fotod paigutuvad ise.
+Créer ce jour-là ¦ Sukurti tą dieną ¦ Izveidot tajā dienā ¦ Loo sellele päevale
+Date (récent d’abord) ¦ Data (naujausi pirmiau) ¦ Datums (jaunākie vispirms) ¦ Kuupäev (uuemad enne)
+Date de l’acte ¦ Dokumento data ¦ Dokumenta datums ¦ Dokumendi kuupäev
+Date pour les femmes ¦ Data moterims ¦ Datums sievietēm ¦ Kuupäev naistele
+Date pour les hommes ¦ Data vyrams ¦ Datums vīriešiem ¦ Kuupäev meestele
+Décennie ¦ Dešimtmetis ¦ Desmitgade ¦ Kümnend
+Siècle ¦ Amžius ¦ Gadsimts ¦ Sajand
+Précédent ¦ Ankstesnis ¦ Iepriekšējais ¦ Eelmine
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Jos pridedamos asmens kortelėje (blokas Rinkėjo kortelės). ¦ Tās pievieno personas kartītē (bloks Vēlētāju kartes). ¦ Need lisatakse isiku kaardile (plokk Valijakaardid).
+Ensuite par ¦ Tada pagal ¦ Tad pēc ¦ Seejärel
+Grouper par catégorie ¦ Grupuoti pagal kategoriją ¦ Grupēt pēc kategorijas ¦ Rühmita kategooria järgi
+Héritages et successions ¦ Palikimai ir paveldėjimai ¦ Mantojumi un mantošana ¦ Pärandid ja pärimised
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Medyje reikia datų: gimimo, santuokos, mirties… ¦ Kokā vajag datumus: dzimšanu, laulību, nāvi… ¦ Sugupuus on vaja kuupäevi: sünd, abielu, surm…
+Index des noms ¦ Vardų rodyklė ¦ Vārdu rādītājs ¦ Nimeregister
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Išradimai ir jų patentai, atradimai (rūšis, kometa, radimvietė…), moksliniai leidiniai. ¦ Izgudrojumi un to patenti, atklājumi (suga, komēta, atradne…), zinātniskas publikācijas. ¦ Leiutised ja nende patendid, avastused (liik, komeet, leiukoht…), teaduspublikatsioonid.
+La liste « Palmarès » ¦ Sąrašas „Apdovanojimai“ ¦ Saraksts „Apbalvojumi“ ¦ Loend „Auhinnad“
+La liste « Revue de presse » ¦ Sąrašas „Spaudos apžvalga“ ¦ Saraksts „Preses apskats“ ¦ Loend „Pressiülevaade“
+Palmarès ¦ Apdovanojimai ¦ Apbalvojumi ¦ Auhinnad
+🏆 Palmarès ¦ 🏆 Apdovanojimai ¦ 🏆 Apbalvojumi ¦ 🏆 Auhinnad
+Langue des actes et des documents ¦ Dokumentų ir raštų kalba ¦ Dokumentu un rakstu valoda ¦ Dokumentide ja kirjade keel
+Le cercle autour des ancêtres ¦ Ratas aplink protėvius ¦ Aplis ap senčiem ¦ Ring esivanemate ümber
+Le plus de fiches ¦ Daugiausia kortelių ¦ Visvairāk kartīšu ¦ Kõige rohkem kaarte
+Le plus de photos ¦ Daugiausia nuotraukų ¦ Visvairāk fotoattēlu ¦ Kõige rohkem fotosid
+Le plus de profils ¦ Daugiausia profilių ¦ Visvairāk profilu ¦ Kõige rohkem profiile
+Les autres listes ¦ Kiti sąrašai ¦ Citi saraksti ¦ Teised loendid
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Vietos paimtos iš medžio gimimų, santuokų ir mirčių. ¦ Vietas ņemtas no koka dzimšanām, laulībām un nāvēm. ¦ Kohad tulevad sugupuu sündidest, abieludest ja surmadest.
+Les plus grandes ¦ Didžiausi pirmiau ¦ Lielākie vispirms ¦ Suurimad enne
+Lettres aux descendants ¦ Laiškai palikuonims ¦ Vēstules pēcnācējiem ¦ Kirjad järeltulijatele
+L’ordre des outils, et ceux qu’on montre ¦ Įrankių tvarka ir kurie rodomi ¦ Rīku secība un kuri tiek rādīti ¦ Tööriistade järjekord ja need, mida näidatakse
+Marquer dans les transcriptions ¦ Pažymėti transkripcijose ¦ Atzīmēt transkripcijās ¦ Märgi transkriptsioonidesse
+Mes annonces et courriers ¦ Mano skelbimai ir laiškai ¦ Mani sludinājumi un vēstules ¦ Minu kuulutused ja kirjad
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Perkelti tai, kas rodoma, į Dirbtuvės projektą ¦ Ievietot redzamo Darbnīcas projektā ¦ Pane näidatu Töökoja projekti
+Modifiés récemment ¦ Neseniai redaguoti ¦ Nesen rediģēti ¦ Hiljuti muudetud
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Montuoti vaizdo įrašus: fragmentai, titrai, perėjimai, įterpiniai, muzika ¦ Montēt video: fragmenti, titri, pārejas, uzklājumi, mūzika ¦ Monteeri videoid: klipid, tiitrid, sujumised, ülekatted, muusika
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Kūriniai, albumai ir plokštelės, įrašai, koncertai, turai, klasikinės muzikos kūriniai. ¦ Dziesmas, albumi un ieraksti, ierakstījumi, koncerti, turnejas, klasiskās mūzikas darbi. ¦ Lood, albumid ja plaadid, salvestised, kontserdid, turneed, klassikalise muusika teosed.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Užrašyk, kuriai parapijai priklausė kiekvienas viensėdis ar kaimas iki Prancūzijos revoliucijos. ¦ Pieraksti, kurai draudzei piederēja katra viensēta vai ciems pirms Francijas revolūcijas. ¦ Märgi, millisesse kihelkonda kuulus iga asum või küla enne Prantsuse revolutsiooni.
+Numéro, tome, épisode ¦ Numeris, tomas, serija ¦ Numurs, sējums, sērija ¦ Number, köide, osa
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Arba „📷 Nuskaityti taisyklių ekrano kopiją“, kad jos užsipildytų pačios. ¦ Vai „📷 Nolasīt noteikumu ekrānuzņēmumu“, lai tie aizpildītos paši. ¦ Või „📷 Loe reeglite kuvatõmmist“, et need ise täituksid.
+Où j’en suis ¦ Kur aš esu ¦ Kur es esmu ¦ Kus ma olen
+Par commune ¦ Pagal komuną ¦ Pēc komūnas ¦ Kommuunide kaupa
+Par date de l’œuvre ¦ Pagal kūrinio datą ¦ Pēc darba datuma ¦ Teose kuupäeva järgi
+Par date, récentes d’abord ¦ Pagal datą, naujausi pirmiau ¦ Pēc datuma, jaunākie vispirms ¦ Kuupäeva järgi, uuemad enne
+Par personne ¦ Pagal asmenį ¦ Pēc personas ¦ Isikute kaupa
+Par période ¦ Pagal laikotarpį ¦ Pēc perioda ¦ Perioodide kaupa
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Pasidalink šaka skiltyje ✨ Lobiai → Pasidalinti šaka (laikinai). ¦ Kopīgo atzaru sadaļā ✨ Dārgumi → Kopīgot atzaru (uz laiku). ¦ Jaga haru jaotises ✨ Aarded → Jaga haru (ajutiselt).
+Pas encore de lignée ¦ Kol kas nėra linijos ¦ Pagaidām nav līnijas ¦ Liini veel pole
+Passeport des lieux ¦ Vietų pasas ¦ Vietu pase ¦ Kohtade pass
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Paveikslai, piešiniai, graviūros, skulptūros ir liejiniai, fotografijos, plakatai, parodos… ¦ Gleznas, zīmējumi, gravīras, skulptūras un lējumi, fotogrāfijas, plakāti, izstādes… ¦ Maalid, joonistused, gravüürid, skulptuurid ja valandid, fotod, plakatid, näitused…
+Plus anciens ¦ Seniausi ¦ Vecākie ¦ Vanimad
+Priorité d’achat ¦ Pirkimo prioritetas ¦ Pirkuma prioritāte ¦ Ostu prioriteet
+Précisions ¦ Patikslinimai ¦ Precizējumi ¦ Täpsustused
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Rūšiuoti korteles pagal rūšį, kiekvienai su paantrašte ¦ Kārtot kartītes pēc veida, katram ar starpvirsrakstu ¦ Järjesta kaardid liigi järgi, igaühele vahepealkiri
+Ranger par sorte ¦ Rūšiuoti pagal rūšį ¦ Kārtot pēc veida ¦ Järjesta liigi järgi
+Revenir sur un son en cours de travail ¦ Grįžti prie garso, su kuriuo dirbama ¦ Atgriezties pie skaņas, pie kuras strādā ¦ Naase pooleliolevale helile
+Revue, collection, série ¦ Žurnalas, kolekcija, serija ¦ Žurnāls, kolekcija, sērija ¦ Ajakiri, kogumik, sari
+＋ Revue, collection, série ¦ ＋ Žurnalas, kolekcija, serija ¦ ＋ Žurnāls, kolekcija, sērija ¦ ＋ Ajakiri, kogumik, sari
+Rien ne manque sur 5 générations ¦ Per 5 kartas nieko netrūksta ¦ 5 paaudzēs nekā netrūkst ¦ 5 põlvkonna ulatuses ei puudu midagi
+Règles des journaux ¦ Laikraščių taisyklės ¦ Laikrakstu noteikumi ¦ Ajalehtede reeglid
+Région, puis pays ¦ Regionas, tada šalis ¦ Reģions, tad valsts ¦ Piirkond, siis riik
+Pays (A → Z) ¦ Šalis (A → Ž) ¦ Valsts (A → Ž) ¦ Riik (A → Ü)
+Tous les pays, dans l’ordre que tu veux ¦ Visos šalys tavo norima tvarka ¦ Visas valstis tevis vēlamajā secībā ¦ Kõik riigid sinu soovitud järjekorras
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ .ics failas, kurį atidarysi savo kalendoriuje (Apple, Google, Outlook…) ¦ .ics fails, ko atvērt savā kalendārā (Apple, Google, Outlook…) ¦ .ics-fail, mida avada oma kalendris (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Garsas iš bazės arba kompiuterio, kurį galima apdoroti ir išsaugoti kaip projektą ¦ Skaņa no datubāzes vai datora, ko apstrādāt un saglabāt kā projektu ¦ Heli andmebaasist või arvutist, mida töödelda ja projektina hoida
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Užrašas surenka tekstą, vaizdus, asmenis, žemėlapius ir sąrašus viena tema. ¦ Piezīme apvieno tekstu, attēlus, personas, kartes un sarakstus par vienu tēmu. ¦ Märge koondab ühe teema kohta teksti, pilte, isikuid, kaarte ja loendeid.
+Voir qui pouvait voter en ¦ Pažiūrėti, kas galėjo balsuoti ¦ Skatīt, kas varēja balsot ¦ Vaata, kes said hääletada aastal
+pas de date ¦ nėra datos ¦ nav datuma ¦ kuupäev puudub
+Écart ¦ Skirtumas ¦ Atšķirība ¦ Vahe
+↔ Écart ¦ ↔ Skirtumas ¦ ↔ Atšķirība ¦ ↔ Vahe
+Écart hommes / femmes ¦ Vyrų ir moterų skirtumas ¦ Vīriešu un sieviešu atšķirība ¦ Meeste ja naiste vahe
+Écoles, études et apprentissages, diplômes, établissements. ¦ Mokyklos, studijos ir mokymasis amato, diplomai, įstaigos. ¦ Skolas, studijas un mācekļa gaitas, diplomi, iestādes. ¦ Koolid, õpingud ja õpipoisiaeg, diplomid, õppeasutused.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Parašyk savo skelbimą ir iškart pamatyk, kiek jis kainuos pagal laikraščio taisykles. ¦ Uzraksti savu sludinājumu un uzreiz redzi, cik tas maksās pēc laikraksta noteikumiem. ¦ Kirjuta oma kuulutus ja näe kohe, kui palju see ajalehe reeglite järgi maksab.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Parašyk savo skelbimą, iškart pamatyk, kiek jis kainuos pagal laikraščio taisykles, ir sek, kas su juo vyksta. ¦ Uzraksti savu sludinājumu, uzreiz redzi, cik tas maksās pēc laikraksta noteikumiem, un seko, kas ar to notiek. ¦ Kirjuta oma kuulutus, näe kohe, kui palju see ajalehe reeglite järgi maksab, ja jälgi, mis sellest saab.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Parašyk vieną skiltyje ✨ Lobiai → Laiškai palikuonims: „Léa 18-ojo gimtadienio proga“, „2050 m.“. ¦ Uzraksti vienu sadaļā ✨ Dārgumi → Vēstules pēcnācējiem: „Lea 18. dzimšanas dienā“, „2050. gadā“. ¦ Kirjuta üks jaotises ✨ Aarded → Kirjad järeltulijatele: „Léa 18. sünnipäevaks“, „aastal 2050“.
+↗ Ouvrir dans Recherche ¦ ↗ Atidaryti Tyrimuose ¦ ↗ Atvērt Pētniecībā ¦ ↗ Ava Uurimises
+⚙️ Ouvrir les Réglages ¦ ⚙️ Atidaryti Nustatymus ¦ ⚙️ Atvērt Iestatījumus ¦ ⚙️ Ava Seaded
+⚙️ Ranger les outils ¦ ⚙️ Tvarkyti įrankius ¦ ⚙️ Sakārtot rīkus ¦ ⚙️ Järjesta tööriistad
+✅ Tâches de l’Atelier ¦ ✅ Dirbtuvės užduotys ¦ ✅ Darbnīcas uzdevumi ¦ ✅ Töökoja ülesanded
+✉️ Courriers envoyés ¦ ✉️ Išsiųsti laiškai ¦ ✉️ Nosūtītās vēstules ¦ ✉️ Saadetud kirjad
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Atidaryti laiškus skiltyje ✨ Lobiai ¦ ✉️ Atvērt vēstules sadaļā ✨ Dārgumi ¦ ✉️ Ava kirjad jaotises ✨ Aarded
+✝️ Décès, sépultures ¦ ✝️ Mirtys, laidojimai ¦ ✝️ Nāves, apbedīšanas ¦ ✝️ Surmad, matused
+👶 Naissances, baptêmes ¦ 👶 Gimimai, krikštai ¦ 👶 Dzimšanas, kristības ¦ 👶 Sünnid, ristimised
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Ką galima parsisiųsti (licencijos) ¦ ❓ Ko var iegūt (licences) ¦ ❓ Mida saab alla laadida (litsentsid)
+❓ Comment noter un héritage ? ¦ ❓ Kaip užrašyti palikimą? ¦ ❓ Kā pierakstīt mantojumu? ¦ ❓ Kuidas pärandit märkida?
+⤒ Importer des relevés ¦ ⤒ Importuoti įrašų rodykles ¦ ⤒ Importēt ierakstu rādītājus ¦ ⤒ Impordi kirjete registrid
+⤒ Importer les réponses ¦ ⤒ Importuoti atsakymus ¦ ⤒ Importēt atbildes ¦ ⤒ Impordi vastused
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Eksportuoti sukaktis (.ics) ¦ ⤓ Eksportēt jubilejas (.ics) ¦ ⤓ Ekspordi tähtpäevad (.ics)
+＋ Ajouter une image ¦ ＋ Pridėti vaizdą ¦ ＋ Pievienot attēlu ¦ ＋ Lisa pilt
+＋ Ajouter une parcelle ¦ ＋ Pridėti sklypą ¦ ＋ Pievienot zemes gabalu ¦ ＋ Lisa maatükk
+＋ Annonce ou courrier ¦ ＋ Skelbimas arba laiškas ¦ ＋ Sludinājums vai vēstule ¦ ＋ Kuulutus või kiri
+＋ Nouveau dossier de preuve ¦ ＋ Nauja įrodymų byla ¦ ＋ Jauna pierādījumu mape ¦ ＋ Uus tõendikaust
+＋ Nouveau livret ¦ ＋ Nauja knygelė ¦ ＋ Jauns buklets ¦ ＋ Uus vihik
+＋ Nouveau montage ¦ ＋ Naujas montažas ¦ ＋ Jauna montāža ¦ ＋ Uus montaaž
+＋ Nouveau passage dans les médias ¦ ＋ Naujas pasirodymas žiniasklaidoje ¦ ＋ Jauna parādīšanās medijos ¦ ＋ Uus meediaesinemine
+＋ Nouveau passeport ¦ ＋ Naujas pasas ¦ ＋ Jauna pase ¦ ＋ Uus pass
+＋ Nouveau projet son ¦ ＋ Naujas garso projektas ¦ ＋ Jauns skaņas projekts ¦ ＋ Uus heliprojekt
+＋ Nouveau questionnaire ¦ ＋ Naujas klausimynas ¦ ＋ Jauna anketa ¦ ＋ Uus küsimustik
+＋ Nouveau recueil ¦ ＋ Naujas rinkinys ¦ ＋ Jauns krājums ¦ ＋ Uus kogumik
+＋ Nouvelle carte ¦ ＋ Naujas žemėlapis ¦ ＋ Jauna karte ¦ ＋ Uus kaart
+＋ Nouvelle carte postale ¦ ＋ Naujas atvirukas ¦ ＋ Jauna pastkarte ¦ ＋ Uus postkaart
+＋ Nouvelle demande… ¦ ＋ Naujas prašymas… ¦ ＋ Jauns pieprasījums… ¦ ＋ Uus päring…
+＋ Nouvelle maison ¦ ＋ Naujas namas ¦ ＋ Jauna māja ¦ ＋ Uus maja
+＋ Nouvelle transcription ¦ ＋ Nauja transkripcija ¦ ＋ Jauna transkripcija ¦ ＋ Uus transkriptsioon
+＋ Règles d’un journal ¦ ＋ Laikraščio taisyklės ¦ ＋ Laikraksta noteikumi ¦ ＋ Ajalehe reeglid
+＋ Épisode ¦ ＋ Serija ¦ ＋ Sērija ¦ ＋ Osa
+🌍 Le droit de vote dans le monde ¦ 🌍 Balsavimo teisė pasaulyje ¦ 🌍 Balsstiesības pasaulē ¦ 🌍 Valimisõigus maailmas
+📂 Projets son ¦ 📂 Garso projektai ¦ 📂 Skaņas projekti ¦ 📂 Heliprojektid
+📚 Vers l’Atelier ¦ 📚 Į Dirbtuvę ¦ 📚 Uz Darbnīcu ¦ 📚 Töökotta
+📷 Lire une capture des règles ¦ 📷 Nuskaityti taisyklių ekrano kopiją ¦ 📷 Nolasīt noteikumu ekrānuzņēmumu ¦ 📷 Loe reeglite kuvatõmmist
+🔍 Ouvrir l’assistant ¦ 🔍 Atidaryti asistentą ¦ 🔍 Atvērt palīgu ¦ 🔍 Ava abiline
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Atidaryti asistentą „Ko trūksta?“ ¦ 🔍 Atvērt palīgu „Kā trūkst?“ ¦ 🔍 Ava abiline „Mis puudub?“
+🔍 Qui est sur cette photo ? ¦ 🔍 Kas yra šioje nuotraukoje? ¦ 🔍 Kas ir šajā fotoattēlā? ¦ 🔍 Kes on sellel fotol?
+🔍 Rappels d’enquête ¦ 🔍 Tyrimų priminimai ¦ 🔍 Izpēšu atgādinājumi ¦ 🔍 Uurimuste meeldetuletused
+🔗 Partager une branche ¦ 🔗 Pasidalinti šaka ¦ 🔗 Kopīgot atzaru ¦ 🔗 Jaga haru
+🕯️ Allumer une bougie ¦ 🕯️ Uždegti žvakę ¦ 🕯️ Iedegt sveci ¦ 🕯️ Süüta küünal
+🖼️ Tous les médias ¦ 🖼️ Visa medija ¦ 🖼️ Visi mediji ¦ 🖼️ Kogu meedia
+🗺 Toutes mes cartes ¦ 🗺 Visi mano žemėlapiai ¦ 🗺 Visas manas kartes ¦ 🗺 Kõik minu kaardid
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Atidaryti skiltyje ✨ Lobiai ¦ 🛂 Atvērt sadaļā ✨ Dārgumi ¦ 🛂 Ava jaotises ✨ Aarded
+🛡 Les règles ¦ 🛡 Taisyklės ¦ 🛡 Noteikumi ¦ 🛡 Reeglid

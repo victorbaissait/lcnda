@@ -1,0 +1,710 @@
+fr ¦ lt ¦ lv ¦ et
+=grappe ¦ klasteris|klasteriai|klasterių ¦ klasteri|klasteris|klasteri ¦ klaster|klastrit
+=chevauchement ¦ persidengimas|persidengimai|persidengimų ¦ pārklāšanās|pārklāšanās|pārklāšanās ¦ kattuvus|kattuvust
+adn|Nom ¦ Vardas ¦ Vārds ¦ Nimi
+Test ¦ Testas ¦ Tests ¦ Test
+Segments ¦ Segmentai ¦ Segmenti ¦ Segmendid
+Groupes ¦ Grupės ¦ Grupas ¦ Rühmad
+Paternel ¦ Tėvo pusė ¦ Tēva puse ¦ Isapoolne
+Maternel ¦ Motinos pusė ¦ Mātes puse ¦ Emapoolne
+Pas de réponse ¦ Atsakymo nėra ¦ Nav atbildes ¦ Vastust pole
+ADN-X ¦ X-DNR ¦ X-DNS ¦ X-DNA
+ADN-Y ¦ Y-DNR ¦ Y-DNS ¦ Y-DNA
+ADNmt ¦ mtDNR ¦ mtDNS ¦ mtDNA
+Autosomal (atDNA) ¦ Autosominė (atDNR) ¦ Autosomālā (atDNS) ¦ Autosomaalne (atDNA)
+ADN mitochondrial ¦ Mitochondrinė DNR ¦ Mitohondriālā DNS ¦ Mitokondriaalne DNA
+Demi-oncle, demi-tante ¦ Pusdėdė, pusteta ¦ Pustēvocis, pustante ¦ Poolonu, pooltädi
+vous ¦ tu ¦ tu ¦ sina
+grands-parents ¦ seneliai ¦ vecvecāki ¦ vanavanemad
+arrière-arrière-grands-parents (4e génération) ¦ proproseneliai (4-oji karta) ¦ vecvecvecvecāki (4. paaudze) ¦ vanavanavanavanemad (4. põlvkond)
+5e génération ¦ 5-oji karta ¦ 5. paaudze ¦ 5. põlvkond
+6e génération ¦ 6-oji karta ¦ 6. paaudze ¦ 6. põlvkond
+7e génération ¦ 7-oji karta ¦ 7. paaudze ¦ 7. põlvkond
+8e génération ¦ 8-oji karta ¦ 8. paaudze ¦ 8. põlvkond
+Relation proposée ¦ Siūlomas ryšys ¦ Ieteiktā radniecība ¦ Pakutud sugulus
+Correspondances en commun ¦ Bendri atitikmenys ¦ Kopīgās atbilstības ¦ Ühised vasted
+Taille de l’arbre ¦ Medžio dydis ¦ Dzimtas koka lielums ¦ Sugupuu suurus
+Arbre (adresse) ¦ Medis (adresas) ¦ Dzimtas koks (adrese) ¦ Sugupuu (aadress)
+Contact ¦ Kontaktas ¦ Kontakts ¦ Kontakt
+cM sur le X ¦ cM X chromosomoje ¦ cM X hromosomā ¦ cM X-kromosoomil
+Pays ¦ Šalis ¦ Valsts ¦ Riik
+Fiche sur le site (adresse) ¦ Kortelė svetainėje (adresas) ¦ Kartīte vietnē (adrese) ¦ Kaart veebilehel (aadress)
+Identifiant chez la société ¦ Identifikatorius bendrovėje ¦ Identifikators uzņēmumā ¦ Tunnus ettevõttes
+Haplogroupe Y ¦ Y haplogrupė ¦ Y haplogrupa ¦ Y-haplorühm
+Haplogroupe mt ¦ mt haplogrupė ¦ mt haplogrupa ¦ mt-haplorühm
+Haplogroupe mitochondrial ¦ Mitochondrinė haplogrupė ¦ Mitohondriālā haplogrupa ¦ Mitokondriaalne haplorühm
+% d’ADN partagé ¦ Bendros DNR % ¦ % kopīgās DNS ¦ % jagatud DNA-st
+Grappe (Genetic Affairs) ¦ Klasteris (Genetic Affairs) ¦ Klasteris (Genetic Affairs) ¦ Klaster (Genetic Affairs)
+Nom de la correspondance ¦ Atitikmens vardas ¦ Atbilstības vārds ¦ Vaste nimi
+Chromosome ¦ Chromosoma ¦ Hromosoma ¦ Kromosoom
+SNP ¦ SNP ¦ SNP ¦ SNP
+Groupe ou ancêtre ¦ Grupė arba protėvis ¦ Grupa vai sencis ¦ Rühm või esivanem
+n° {n} ¦ Nr. {n} ¦ Nr. {n} ¦ nr {n}
+{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable. ¦ {n} iš {total}. Spustelėk vardą: atsidarys jo kortelė (cM, bendras protėvis, medis, sekimas). Skaičiuoklė pasiūlo labiausiai tikėtiną ryšį. ¦ {n} no {total}. Noklikšķini uz vārda: atvērsies tā kartīte (cM, kopīgais sencis, dzimtas koks, sekošana). Kalkulators iesaka visticamāko radniecību. ¦ {n} / {total}. Klõpsa nimel: avaneb selle kaart (cM, ühine esivanem, sugupuu, jälgimine). Kalkulaator pakub kõige tõenäolisema suguluse.
+Supprimer {n} correspondances et leurs segments ? ¦ Ištrinti atitikmenis ({n}) ir jų segmentus? ¦ Dzēst atbilstības ({n}) un to segmentus? ¦ Kas kustutada vasted ({n}) ja nende segmendid?
+Supprimer cette correspondance et ses segments ? ¦ Ištrinti šį atitikmenį ir jo segmentus? ¦ Dzēst šo atbilstību un tās segmentus? ¦ Kas kustutada see vaste ja selle segmendid?
+Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test. ¦ Centimorganas (cM) matuoja jūsų bendrą DNR: apie 3 400 cM su vienu iš tėvų, 850 su pirmos eilės pusbroliu ar pussesere, 200 su antros eilės. Perrašyk skaičių, kurį pateikia testo svetainė. ¦ Centimorgāns (cM) mēra jūsu kopīgo DNS: aptuveni 3 400 cM ar vienu no vecākiem, 850 ar brālēnu vai māsīcu, 200 ar otrās pakāpes brālēnu vai māsīcu. Pārraksti skaitli, ko norāda testa vietne. ¦ Sentimorgan (cM) mõõdab teie ühist DNA-d: umbes 3 400 cM vanemaga, 850 esimese astme nõbuga, 200 teise astme nõbuga. Kirjuta üle testi veebilehel antud arv.
+Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens. ¦ Ilgas bendras DNR gabalas (daugiau nei 20 cM) dažnai rodo artimą ir patikimą giminystę; daug mažų gabalų gali būti paveldėti iš labai senų protėvių. ¦ Garš kopīgs DNS gabals (vairāk nekā 20 cM) bieži norāda uz tuvu un drošu radniecību; daudz mazu gabaliņu var nākt no ļoti seniem senčiem. ¦ Pikk ühine DNA-lõik (üle 20 cM) näitab sageli lähedast ja kindlat sugulust; palju väikesi lõike võivad pärineda väga vanadelt esivanematelt.
+Relation probable ({cm} cM, {pct} %) ¦ Tikėtinas ryšys ({cm} cM, {pct} %) ¦ Iespējamā radniecība ({cm} cM, {pct} %) ¦ Tõenäoline sugulus ({cm} cM, {pct} %)
+fichier de <b>{name}</b> ¦ failas <b>{name}</b> ¦ fails <b>{name}</b> ¦ fail <b>{name}</b>
+{n} de {tool} : chacune devient un groupe (« {tool} 1 »…), retrouvé dans « 🗂️ Groupes ». ¦ {tool}: {n} – kiekvienas tampa grupe („{tool} 1“…), ją rasi skiltyje „🗂️ Grupės“. ¦ {tool}: {n} — katrs kļūst par grupu („{tool} 1“…), atrodama sadaļā „🗂️ Grupas“. ¦ {tool}: {n} – igaüks muutub rühmaks („{tool} 1“…), leiad need jaotisest „🗂️ Rühmad“.
+⤓ {file} : {n} pour DNA Painter. ¦ ⤓ {file}: {n} skirta DNA Painter. ¦ ⤓ {file}: {n} priekš DNA Painter. ¦ ⤓ {file}: {n} DNA Painteri jaoks.
+Branche Martin (Bretagne) ¦ Martin šaka (Bretanė) ¦ Martin atzars (Bretaņa) ¦ Martini haru (Bretagne)
+Supprimer le groupe « {name} » ? (les correspondances restent) ¦ Ištrinti grupę „{name}“? (atitikmenys lieka) ¦ Dzēst grupu „{name}“? (atbilstības paliek) ¦ Kas kustutada rühm „{name}“? (vasted jäävad alles)
+{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages) ¦ {n} tarp {lo} ir {hi} cM (ribos – ⚙️ Nustatymuose) ¦ {n} starp {lo} un {hi} cM (robežas — ⚙️ Iestatījumos) ¦ {n} vahemikus {lo}–{hi} cM (piirid ⚙️ Seadetes)
+{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages) ¦ {n} tarp {lo} ir {hi} cM šiam testui (ribos – ⚙️ Nustatymuose) ¦ {n} starp {lo} un {hi} cM šim testam (robežas — ⚙️ Iestatījumos) ¦ {n} vahemikus {lo}–{hi} cM selle testi jaoks (piirid ⚙️ Seadetes)
+{base} ; {n} sans « correspondances en commun » notées, donc ignorées. ¦ {base}; {n} be pažymėtų „bendrų atitikmenų“, todėl praleisti. ¦ {base}; {n} bez atzīmētām „kopīgajām atbilstībām“, tāpēc izlaistas. ¦ {base}; {n} ilma märgitud „ühiste vasteteta“, seega jäeti välja.
+Créer {n} avec ces couleurs ¦ Sukurti {n} su šiomis spalvomis ¦ Izveidot {n} ar šīm krāsām ¦ Loo {n} nende värvidega
+Créé par la méthode de Leeds autour de {name} ({cm} cM). ¦ Sukurta Leedso metodu aplink {name} ({cm} cM). ¦ Izveidots ar Līdsas metodi ap {name} ({cm} cM). ¦ Loodud Leedsi meetodil {name} ümber ({cm} cM).
+masculin|inconnu ¦ nežinomas ¦ nezināms ¦ teadmata
+Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit. ¦ Grupės (klasteriai) suburia atitikmenis, kurie sutampa tarpusavyje: kiekviena grupė dažnai turi tą pačią protėvių porą. Palik nuo 30 iki 600 cM, kad išvengtum per artimų giminaičių ir triukšmo. ¦ Grupas (klasteri) apvieno atbilstības, kas savstarpēji sakrīt: katrai grupai bieži ir viens un tas pats senču pāris. Atstāj no 30 līdz 600 cM, lai izvairītos no pārāk tuviem radiniekiem un trokšņa. ¦ Rühmad (klastrid) koondavad vasteid, mis on omavahel seotud: igal rühmal on sageli sama esivanemapaar. Jäta vahemikuks 30 kuni 600 cM, et vältida liiga lähedasi sugulasi ja müra.
+{n} entre {lo} et {hi} cM ; {shared} avec des correspondances en commun, {links} de segments. Les très proches parents (au-delà de {hi} cM) sont écartés : ils correspondent à tout le monde. ¦ {n} tarp {lo} ir {hi} cM; {shared} su bendrais atitikmenimis, {links} pagal segmentus. Labai artimi giminaičiai (virš {hi} cM) atmetami: jie sutampa su visais. ¦ {n} starp {lo} un {hi} cM; {shared} ar kopīgām atbilstībām, {links} pēc segmentiem. Ļoti tuvi radinieki (virs {hi} cM) ir izslēgti: tie sakrīt ar visiem. ¦ {n} vahemikus {lo}–{hi} cM; {shared} ühiste vastetega, {links} segmentide järgi. Väga lähedased sugulased (üle {hi} cM) jäetakse välja: nad on vasted kõigiga.
+Grappe {n} ¦ Klasteris {n} ¦ Klasteris {n} ¦ Klaster {n}
+{n} correspondances · {lo}–{hi} cM · liens {pct} % ¦ Atitikmenų: {n} · {lo}–{hi} cM · ryšiai {pct} % ¦ Atbilstības: {n} · {lo}–{hi} cM · saites {pct} % ¦ Vasteid: {n} · {lo}–{hi} cM · seosed {pct} %
+Ancêtre commun encore inconnu (côté {side}) : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Bendras protėvis dar nežinomas ({side} pusė): įdėk vieną iš šių atitikmenų į medį (susieta kortelė) arba pridėk jo pavardes. ¦ Kopīgais sencis vēl nav zināms ({side} puse): ievieto kādu no šīm atbilstībām dzimtas kokā (saistītā kartīte) vai pievieno tās uzvārdus. ¦ Ühine esivanem pole veel teada ({side} pool): paiguta üks neist vastetest sugupuusse (seotud kaart) või lisa tema perekonnanimed.
+Ancêtre commun encore inconnu : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Bendras protėvis dar nežinomas: įdėk vieną iš šių atitikmenų į medį (susieta kortelė) arba pridėk jo pavardes. ¦ Kopīgais sencis vēl nav zināms: ievieto kādu no šīm atbilstībām dzimtas kokā (saistītā kartīte) vai pievieno tās uzvārdus. ¦ Ühine esivanem pole veel teada: paiguta üks neist vastetest sugupuusse (seotud kaart) või lisa tema perekonnanimed.
+Groupe automatique : {n} correspondances qui se correspondent entre elles. ¦ Automatinė grupė: atitikmenys, sutampantys tarpusavyje ({n}). ¦ Automātiska grupa: atbilstības, kas savstarpēji sakrīt ({n}). ¦ Automaatne rühm: omavahel seotud vasted ({n}).
+{n} groupes créés ou mis à jour. ¦ Sukurta arba atnaujinta grupių: {n}. ¦ Izveidotas vai atjauninātas grupas: {n}. ¦ Loodud või uuendatud rühmi: {n}.
+{n} groupe créé ou mis à jour. ¦ Sukurta arba atnaujinta grupių: {n}. ¦ Izveidotas vai atjauninātas grupas: {n}. ¦ Loodud või uuendatud rühmi: {n}.
+noms : {list} ¦ pavardės: {list} ¦ uzvārdi: {list} ¦ nimed: {list}
+lieux : {list} ¦ vietos: {list} ¦ vietas: {list} ¦ kohad: {list}
+grappe {n} ¦ klasteris {n} ¦ klasteris {n} ¦ klaster {n}
+plus long segment {cm} cM ¦ ilgiausias segmentas {cm} cM ¦ garākais segments {cm} cM ¦ pikim segment {cm} cM
+À {pct} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille. ¦ {pct} % tikimybe tai tiesioginės linijos giminystė (tėvas ar motina, senelis, prosenelis): pirmiausia pažiūrėk į artimą šeimą. ¦ Ar {pct} % varbūtību tā ir tiešās līnijas radniecība (vecāks, vecvecāks, vecvecvecāks): vispirms paskaties savā tuvākajā ģimenē. ¦ {pct} % tõenäosusega on see otseliini sugulus (vanem, vanavanem, vanavanavanem): vaata kõigepealt oma lähisugulasi.
+Dans la <b>grappe {n}</b>. ¦ <b>Klasteryje {n}</b>. ¦ <b>Klasterī {n}</b>. ¦ <b>Klastris {n}</b>.
+Dans la <b>grappe {n}</b> — ancêtres communs de la grappe : {couple}. ¦ <b>Klasteryje {n}</b> — bendri klasterio protėviai: {couple}. ¦ <b>Klasterī {n}</b> — klastera kopīgie senči: {couple}. ¦ <b>Klastris {n}</b> — klastri ühised esivanemad: {couple}.
+Dans la <b>grappe {n}</b> — ancêtres probables de la grappe : {couple}. ¦ <b>Klasteryje {n}</b> — tikėtini klasterio protėviai: {couple}. ¦ <b>Klasterī {n}</b> — klastera iespējamie senči: {couple}. ¦ <b>Klastris {n}</b> — klastri tõenäolised esivanemad: {couple}.
+🎯 Déjà placée dans l’arbre : ancêtres communs {couple}. ¦ 🎯 Jau įdėta į medį: bendri protėviai {couple}. ¦ 🎯 Jau ievietota dzimtas kokā: kopīgie senči {couple}. ¦ 🎯 Juba sugupuusse paigutatud: ühised esivanemad {couple}.
+{couple} (probable) ¦ {couple} (tikėtina) ¦ {couple} (iespējams) ¦ {couple} (tõenäoline)
+{name} — chr {c} : {a}–{b} Mb, {cm} cM ¦ {name} — chr {c}: {a}–{b} Mb, {cm} cM ¦ {name} — chr {c}: {a}–{b} Mb, {cm} cM ¦ {name} — chr {c}: {a}–{b} Mb, {cm} cM
+{pct} % de l’ADN (sur {total} cM) ¦ {pct} % DNR (iš {total} cM) ¦ {pct} % DNS (no {total} cM) ¦ {pct} % DNA-st ({total} cM-st)
+Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est. ¦ Norint gilintis (išoriniai įrankiai, anglų k.): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogamija (izoliuoti kaimai, uždaros bendruomenės) ir implexas padidina cM: tada ryšys atrodo artimesnis, nei yra iš tikrųjų. ¦ Lai uzzinātu vairāk (ārēji rīki, angļu valodā): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogāmija (izolēti ciemi, slēgtas kopienas) un implekss palielina cM: tad radniecība šķiet tuvāka, nekā tā ir. ¦ Edasi uurimiseks (välised tööriistad, inglise keeles): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Endogaamia (eraldatud külad, suletud kogukonnad) ja implex suurendavad cM-e: siis tundub sugulus lähedasem, kui see on.
+Les « origines ethniques » données par les sociétés : des <b>estimations</b>, qui changent d’une société à l’autre et d’une mise à jour à l’autre. Elles ne remplacent pas les registres. ¦ Bendrovių pateikiama „etninė kilmė“: tai <b>įverčiai</b>, kurie skiriasi priklausomai nuo bendrovės ir atnaujinimo. Jie nepakeičia metrikų knygų. ¦ Uzņēmumu sniegtā „etniskā izcelsme“: tie ir <b>aprēķini</b>, kas mainās no uzņēmuma uz uzņēmumu un no atjauninājuma uz atjauninājumu. Tie neaizstāj metriku grāmatas. ¦ Ettevõtete antud „etniline päritolu“: need on <b>hinnangud</b>, mis muutuvad ettevõtteti ja uuenduseti. Need ei asenda meetrikaraamatuid.
+Couleur « {name} » ¦ Spalva „{name}“ ¦ Krāsa „{name}“ ¦ Värv „{name}“
+👥 Correspondance ADN « {name} » : <b>{cm} cM</b> ¦ 👥 DNR atitikmuo „{name}“: <b>{cm} cM</b> ¦ 👥 DNS atbilstība „{name}“: <b>{cm} cM</b> ¦ 👥 DNA-vaste „{name}“: <b>{cm} cM</b>
+ancêtre commun : {name} ¦ bendras protėvis: {name} ¦ kopīgais sencis: {name} ¦ ühine esivanem: {name}
+Code civil, article 16-10 (examen des caractéristiques génétiques : seulement à des fins médicales ou de recherche scientifique, avec consentement écrit) ¦ Code civil, article 16-10 (genetinių savybių tyrimas: tik medicinos ar mokslinių tyrimų tikslais, gavus rašytinį sutikimą) ¦ Code civil, article 16-10 (ģenētisko īpašību pārbaude: tikai medicīniskiem vai zinātniskās pētniecības mērķiem, ar rakstisku piekrišanu) ¦ Code civil, article 16-10 (geneetiliste omaduste uuring: ainult meditsiinilisel või teadusuuringute eesmärgil, kirjaliku nõusolekuga)
+Code pénal, article 226-28-1 (demander un examen génétique hors des cas prévus par la loi : 3 750 € d’amende) ¦ Code pénal, article 226-28-1 (genetinio tyrimo prašymas ne įstatymo numatytais atvejais: 3 750 € bauda) ¦ Code pénal, article 226-28-1 (ģenētiskās pārbaudes pieprasīšana ārpus likumā paredzētajiem gadījumiem: 3 750 € naudas sods) ¦ Code pénal, article 226-28-1 (geneetilise uuringu taotlemine väljaspool seaduses ettenähtud juhtumeid: 3 750 € trahv)
+Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (nouvelle rédaction de l’article 16-10) ¦ Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, 16 straipsnis (nauja 16-10 straipsnio redakcija) ¦ Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, 16. pants (16-10. panta jaunā redakcija) ¦ Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, artikkel 16 (artikli 16-10 uus sõnastus)
+Code civil sur Légifrance (articles 16-10 à 16-13 : examen génétique, empreintes génétiques, filiation) ¦ Code civil Légifrance svetainėje (16-10–16-13 straipsniai: genetinis tyrimas, genetiniai pirštų atspaudai, kilmė) ¦ Code civil vietnē Légifrance (16-10.–16-13. pants: ģenētiskā pārbaude, ģenētiskie nospiedumi, izcelšanās) ¦ Code civil Légifrance'is (artiklid 16-10 kuni 16-13: geneetiline uuring, geneetilised sõrmejäljed, põlvnemine)
+Code pénal sur Légifrance (articles 226-25 à 226-30) ¦ Code pénal Légifrance svetainėje (226-25–226-30 straipsniai) ¦ Code pénal vietnē Légifrance (226-25.–226-30. pants) ¦ Code pénal Légifrance'is (artiklid 226-25 kuni 226-30)
+Code de la santé publique sur Légifrance (articles L1131-1 et suivants : examens génétiques) ¦ Code de la santé publique Légifrance svetainėje (L1131-1 ir tolesni straipsniai: genetiniai tyrimai) ¦ Code de la santé publique vietnē Légifrance (L1131-1. pants un turpmākie: ģenētiskās pārbaudes) ¦ Code de la santé publique Légifrance'is (artikkel L1131-1 ja järgmised: geneetilised uuringud)
+CNIL : les données génétiques sont des données « sensibles » (RGPD, article 9) ¦ CNIL: genetiniai duomenys yra „jautrūs“ duomenys (BDAR, 9 straipsnis) ¦ CNIL: ģenētiskie dati ir „sensitīvi“ dati (VDAR, 9. pants) ¦ CNIL: geneetilised andmed on „delikaatsed“ andmed (IKÜM, artikkel 9)
+Personne : mets « À contacter » dans le suivi d’une correspondance. ¦ Nėra nė vieno: atitikmens sekime nurodyk „Susisiekti“. ¦ Neviena: atbilstības sekošanā norādi „Jāsazinās“. ¦ Mitte kedagi: märgi vaste jälgimises „Võtta ühendust“.
+J’ai lu cette mise en garde (elle ne s’affichera plus en haut des autres pages). ¦ Perskaičiau šį įspėjimą (jis nebebus rodomas kitų puslapių viršuje). ¦ Esmu izlasījis šo brīdinājumu (tas vairs netiks rādīts citu lapu augšā). ¦ Lugesin selle hoiatuse läbi (seda ei näidata enam teiste lehtede ülaosas).
+La mise en garde reviendra en haut des pages. ¦ Įspėjimas vėl bus rodomas puslapių viršuje. ¦ Brīdinājums atkal būs redzams lapu augšā. ¦ Hoiatus ilmub taas lehtede ülaossa.
+Modifier le test ¦ Redaguoti testą ¦ Rediģēt testu ¦ Muuda testi
+Société / origine ¦ Bendrovė / kilmė ¦ Uzņēmums / izcelsme ¦ Ettevõte / päritolu
+Géré par ¦ Tvarko ¦ Pārvalda ¦ Haldaja
+Fichier brut (où il est rangé) ¦ Neapdorotas failas (kur jis laikomas) ¦ Neapstrādātais fails (kur tas glabājas) ¦ Toorfail (kus seda hoitakse)
+(qui a accepté quoi, cadre médical ou de recherche, pays…) ¦ (kas su kuo sutiko, medicininė ar mokslinių tyrimų sistema, šalis…) ¦ (kurš kam piekrita, medicīnisks vai pētniecības konteksts, valsts…) ¦ (kes millega nõustus, meditsiiniline või teadusuuringute raamistik, riik…)
+(une ligne par région : « Bretagne ; 42 ») ¦ (viena eilutė kiekvienam regionui: „Bretagne ; 42“) ¦ (viena rinda katram reģionam: „Bretagne ; 42“) ¦ (üks rida piirkonna kohta: „Bretagne ; 42“)
+Supprimer ce test, ses correspondances et ses segments ? ¦ Ištrinti šį testą, jo atitikmenis ir segmentus? ¦ Dzēst šo testu, tā atbilstības un segmentus? ¦ Kas kustutada see test, selle vasted ja segmendid?
+Supprimer le test ¦ Ištrinti testą ¦ Dzēst testu ¦ Kustuta test
+Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs. ¦ Vienas testas vienam asmeniui ir bendrovei: tipas, haplogrupės, numatoma kilmė, žymenys. ¦ Viens tests katrai personai un uzņēmumam: veids, haplogrupas, aplēstā izcelsme, marķieri. ¦ Üks test isiku ja ettevõtte kohta: tüüp, haplorühmad, hinnanguline päritolu, markerid.
+Aucun test ADN pour l’instant ¦ Kol kas DNR testų nėra ¦ Pagaidām nav neviena DNS testa ¦ DNA-teste veel pole
+Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances. ¦ Pridėk savo testą (Ancestry, MyHeritage, 23andMe…), kad jame sudėtum savo atitikmenis. ¦ Pievieno savu testu (Ancestry, MyHeritage, 23andMe…), lai tajā sakārtotu savas atbilstības. ¦ Lisa oma test (Ancestry, MyHeritage, 23andMe…), et sinna oma vasted koondada.
+⤒ Importer (CSV) ¦ ⤒ Importuoti (CSV) ¦ ⤒ Importēt (CSV) ¦ ⤒ Impordi (CSV)
+Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent. ¦ Pirma pridėk testą skiltyje „🧬 Mano testai“: atitikmenys susiejami su juo. ¦ Vispirms pievieno testu sadaļā „🧬 Mani testi“: atbilstības tiek piesaistītas tam. ¦ Lisa kõigepealt test jaotises „🧬 Minu testid“: vasted seotakse sellega.
+Nom, nom de famille, lieu, note… ¦ Vardas, pavardė, vieta, pastaba… ¦ Vārds, uzvārds, vieta, piezīme… ¦ Nimi, perekonnanimi, koht, märkus…
+cM min ¦ cM min. ¦ cM min. ¦ cM min
+cM max ¦ cM maks. ¦ cM maks. ¦ cM max
+Ajouter au groupe… ¦ Pridėti į grupę… ¦ Pievienot grupai… ¦ Lisa rühma…
+Retirer du groupe… ¦ Pašalinti iš grupės… ¦ Noņemt no grupas… ¦ Eemalda rühmast…
+Aucune correspondance pour ces filtres. ¦ Pagal šiuos filtrus atitikmenų nėra. ¦ Šiem filtriem nav nevienas atbilstības. ¦ Nende filtritega vasteid pole.
+cM : les plus nombreux ¦ cM: daugiausia ¦ cM: visvairāk ¦ cM: kõige rohkem
+cM : les moins nombreux ¦ cM: mažiausia ¦ cM: vismazāk ¦ cM: kõige vähem
+Nom : A → Z ¦ Vardas: A → Z ¦ Vārds: A → Z ¦ Nimi: A → Z
+Nom : Z → A ¦ Vardas: Z → A ¦ Vārds: Z → A ¦ Nimi: Z → A
+Segments : les plus nombreux ¦ Segmentai: daugiausia ¦ Segmenti: visvairāk ¦ Segmendid: kõige rohkem
+Les plus récemment modifiées ¦ Neseniausiai redaguoti ¦ Nesen rediģētās ¦ Viimati muudetud
+Les plus anciennement modifiées ¦ Seniausiai redaguoti ¦ Senāk rediģētās ¦ Kõige varem muudetud
+Supprimer les correspondances ¦ Ištrinti atitikmenis ¦ Dzēst atbilstības ¦ Kustuta vasted
+Nom (tel que sur le site) ¦ Vardas (kaip svetainėje) ¦ Vārds (kā vietnē) ¦ Nimi (nagu veebilehel)
+Relation proposée par la société ¦ Bendrovės siūlomas ryšys ¦ Uzņēmuma ieteiktā radniecība ¦ Ettevõtte pakutud sugulus
+Ancêtre(s) commun(s) (MRCA) ¦ Bendras (-i) protėvis (-iai) (MRCA) ¦ Kopīgais(-ie) sencis(-či) (MRCA) ¦ Ühine esivanem või esivanemad (MRCA)
+Jean Martin et Marie Durand ¦ Jean Martin ir Marie Durand ¦ Jean Martin un Marie Durand ¦ Jean Martin ja Marie Durand
+Étoiles (0 à 5) ¦ Žvaigždutės (0–5) ¦ Zvaigznes (0–5) ¦ Tärnid (0–5)
+Aucun groupe (« 🗂️ Groupes »). ¦ Grupių nėra („🗂️ Grupės“). ¦ Nav grupu („🗂️ Grupas“). ¦ Rühmi pole („🗂️ Rühmad“).
+Noms de famille en commun ¦ Bendros pavardės ¦ Kopīgie uzvārdi ¦ Ühised perekonnanimed
+Lieux en commun ¦ Bendros vietos ¦ Kopīgās vietas ¦ Ühised kohad
+Arbre en ligne (adresse) ¦ Internetinis medis (adresas) ¦ Tiešsaistes dzimtas koks (adrese) ¦ Veebis olev sugupuu (aadress)
+Taille de son arbre ¦ Jo medžio dydis ¦ Viņa dzimtas koka lielums ¦ Tema sugupuu suurus
+(une par ligne ou séparées par ; — sert à la méthode de Leeds) ¦ (po vieną eilutėje arba atskirtos ; — naudojama Leedso metodui) ¦ (pa vienai rindā vai atdalītas ar ; — izmanto Līdsas metodei) ¦ (üks rea kohta või eraldatud ;-ga — kasutatakse Leedsi meetodis)
+Supprimer la correspondance ¦ Ištrinti atitikmenį ¦ Dzēst atbilstību ¦ Kustuta vaste
+CSV de la société ¦ Bendrovės CSV ¦ Uzņēmuma CSV ¦ Ettevõtte CSV
+Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) ou par un outil (DNA Painter, Genetic Affairs : AutoCluster, AutoTree) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé. ¦ CSV failas, eksportuotas bendrovės (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) arba įrankio (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): atitikmenų sąrašas arba segmentai. Stulpeliai atpažįstami automatiškai. Neapdorotas DNR failas (tavo SNP) niekada neimportuojamas. ¦ CSV fails, ko eksportējis uzņēmums (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) vai rīks (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): atbilstību saraksts vai segmenti. Kolonnas tiek atpazītas automātiski. Neapstrādāts DNS fails (tavi SNP) nekad netiek importēts. ¦ Ettevõtte (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) või tööriista (DNA Painter, Genetic Affairs: AutoCluster, AutoTree) eksporditud CSV-fail: vastete loend või segmendid. Veerud tuvastatakse automaatselt. DNA toorfaili (sinu SNP-sid) ei impordita kunagi.
+Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.) ¦ Suspaustas failas: pirma atidaryk jį kompiuteryje ir pasirink jame esantį .csv failą. (Neapdorotas DNR failas niekada neimportuojamas.) ¦ Saspiests fails: vispirms atver to datorā un izvēlies tajā esošo .csv failu. (Neapstrādāts DNS fails nekad netiek importēts.) ¦ Pakitud fail: ava see kõigepealt arvutis ja vali selles olev .csv-fail. (DNA toorfaili ei impordita kunagi.)
+C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient. ¦ Tai suspaustas failas (.zip): pirma jį atidaryk ir pasirink jame esantį .csv. ¦ Tas ir saspiests fails (.zip): vispirms atver to un izvēlies tajā esošo .csv. ¦ See on pakitud fail (.zip): ava see kõigepealt ja vali selles olev .csv.
+Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments). ¦ Stulpeliai neatpažinti: reikia bent vardo ir cM (atitikmenims) arba chromosomos, pradžios ir pabaigos (segmentams). ¦ Kolonnas nav atpazītas: vajadzīgs vismaz vārds un cM (atbilstībām) vai hromosoma, sākums un beigas (segmentiem). ¦ Veerge ei tuvastatud: vaja on vähemalt nime ja cM-e (vasted) või kromosoomi, algust ja lõppu (segmendid).
+Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés. ¦ Jau esantis atitikmuo (tas pats vardas, tas pats testas) atnaujinamas: tavo pastabos, grupės, sekimas ir susieta kortelė išsaugomi. ¦ Jau esoša atbilstība (tas pats vārds, tas pats tests) tiek atjaunināta: tavas piezīmes, grupas, sekošana un saistītā kartīte tiek saglabātas. ¦ Juba olemasolev vaste (sama nimi, sama test) uuendatakse: sinu märkmed, rühmad, jälgimine ja seotud kaart säilivad.
+Remplacer tous les segments de ce test ¦ Pakeisti visus šio testo segmentus ¦ Aizstāt visus šī testa segmentus ¦ Asenda kõik selle testi segmendid
+Choisis au moins la colonne du nom (« Colonnes reconnues »). ¦ Pasirink bent vardo stulpelį („Atpažinti stulpeliai“). ¦ Izvēlies vismaz vārda kolonnu („Atpazītās kolonnas“). ¦ Vali vähemalt nime veerg („Tuvastatud veerud“).
+Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »). ¦ Pasirink chromosomos, pradžios ir pabaigos stulpelius („Atpažinti stulpeliai“). ¦ Izvēlies hromosomas, sākuma un beigu kolonnas („Atpazītās kolonnas“). ¦ Vali kromosoomi, alguse ja lõpu veerud („Tuvastatud veerud“).
+Ce test n’a pas encore de segments à exporter : importe-les d’abord (⤒ Importer des segments). ¦ Šis testas dar neturi segmentų eksportui: pirma juos importuok (⤒ Importuoti segmentus). ¦ Šim testam vēl nav segmentu, ko eksportēt: vispirms importē tos (⤒ Importēt segmentus). ¦ Sellel testil pole veel segmente, mida eksportida: impordi need kõigepealt (⤒ Impordi segmendid).
+Modifier le groupe ¦ Redaguoti grupę ¦ Rediģēt grupu ¦ Muuda rühma
+Couple d’ancêtres supposé ¦ Tariama protėvių pora ¦ Pieņemamais senču pāris ¦ Oletatav esivanemapaar
+Supprimer le groupe ¦ Ištrinti grupę ¦ Dzēst grupu ¦ Kustuta rühm
+Groupes et méthode de Leeds ¦ Grupės ir Leedso metodas ¦ Grupas un Līdsas metode ¦ Rühmad ja Leedsi meetod
+Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ». ¦ Surūšiuok atitikmenis pagal šakas. Leedso metodas sugrupuoja 2-os ir 3-ios eilės pusbrolius ir pusseseres (≈ 90–400 cM), kurie sutampa tarpusavyje: kiekviena grupė dažnai rodo į vieną iš tavo 8 prosenelių… jei pažymėjai jų „bendrus atitikmenis“. ¦ Sakārto savas atbilstības pa atzariem. Līdsas metode grupē 2. un 3. pakāpes brālēnus un māsīcas (≈ 90 līdz 400 cM), kas savstarpēji sakrīt: katra grupa bieži norāda uz vienu no taviem 8 vecvecvecākiem… ja vien esi atzīmējis viņu „kopīgās atbilstības“. ¦ Sorteeri oma vasted harude kaupa. Leedsi meetod rühmitab 2. ja 3. astme nõod (≈ 90 kuni 400 cM), kes on omavahel vasted: iga rühm osutab sageli ühele sinu 8 vanavanavanemast… kui oled märkinud nende „ühised vasted“.
+Aucun groupe pour l’instant ¦ Kol kas grupių nėra ¦ Pagaidām nav grupu ¦ Rühmi veel pole
+Méthode de Leeds automatique ¦ Automatinis Leedso metodas ¦ Automātiskā Līdsas metode ¦ Automaatne Leedsi meetod
+Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »). ¦ Kol kas grupių nerasta: atidaryk artimus atitikmenis ir užpildyk „Bendri atitikmenys“ (arba importuok stulpelį „Shared matches“). ¦ Pagaidām nav atrasta neviena grupa: atver tuvākās atbilstības un aizpildi „Kopīgās atbilstības“ (vai importē kolonnu „Shared matches“). ¦ Rühmi pole veel leitud: ava oma lähedased vasted ja täida „Ühised vasted“ (või impordi veerg „Shared matches“).
+Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome. ¦ Tarpusavyje sutampantys atitikmenys sudaro klasterius: kiekvienas klasteris paprastai kilęs iš tos pačios protėvių poros. Skaičiuojant naudojami pažymėti ar importuoti „bendri atitikmenys“ ir toje pačioje chromosomoje persidengiantys segmentai. ¦ Savstarpēji sakrītošās atbilstības veido klasterus: katrs klasteris parasti cēlies no viena senču pāra. Aprēķinā izmanto atzīmētās vai importētās „kopīgās atbilstības“ un segmentus, kas pārklājas vienā hromosomā. ¦ Omavahel seotud vasted moodustavad klastrid: iga klaster põlvneb tavaliselt samast esivanemapaarist. Arvutus kasutab märgitud või imporditud „ühiseid vasteid“ ja samal kromosoomil kattuvaid segmente.
+(ou mettre à jour ceux déjà créés) ¦ (arba atnaujinti jau sukurtas) ¦ (vai atjaunināt jau izveidotās) ¦ (või uuenda juba loodud)
+Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes). ¦ Kol kas klasterių nėra: reikia „bendrų atitikmenų“ (atitikmens kortelėje arba importuojant stulpelį „Shared matches“) arba segmentų (🧩 Chromosomos). ¦ Pagaidām nav klasteru: vajadzīgas „kopīgās atbilstības“ (atbilstības kartītē vai kolonna „Shared matches“ importā) vai segmenti (🧩 Hromosomas). ¦ Klastreid veel pole: vaja on „ühiseid vasteid“ (vaste kaardil või veerg „Shared matches“ impordil) või segmente (🧩 Kromosoomid).
+Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve. ¦ Atitikmeniui (arba cM skaičiui) – galimi ryšiai ir tavo medžio protėvių poros, per kurias jis tikriausiai kilęs, nuo labiausiai iki mažiausiai tikėtinų. Remiamasi cM (Shared cM Project), puse, bendromis pavardėmis ir vietomis, klasteriu ir amžiumi: tai užuomina, kurią reikia patikrinti, o ne įrodymas. ¦ Atbilstībai (vai cM skaitam) — iespējamās radniecības un tava dzimtas koka senču pāri, no kuriem tā, visticamāk, cēlusies, no visticamākā līdz vismazāk ticamajam. Pamatā ir cM (Shared cM Project), puse, kopīgie uzvārdi un vietas, klasteris un vecums: tas ir pavediens, kas jāpārbauda, nevis pierādījums. ¦ Vaste (või cM-arvu) jaoks võimalikud sugulused ja sinu sugupuu esivanemapaarid, kelle kaudu see tõenäoliselt põlvneb, tõenäolisemast vähem tõenäoliseni. Aluseks on cM-id (Shared cM Project), pool, ühised nimed ja kohad, klaster ja vanus: see on kontrollimist vajav vihje, mitte kunagi tõend.
+Placer un cousin dans l’arbre ¦ Įdėti pusbrolį į medį ¦ Ievietot brālēnu dzimtas kokā ¦ Paiguta nõbu sugupuusse
+— ou les cM à la main ci-dessous — ¦ — arba cM ranka žemiau — ¦ — vai cM ar roku zemāk — ¦ — või cM käsitsi allpool —
+Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement. ¦ Šis testas nesusietas su jokia kortele: susiek jį su testuotu asmeniu (🧬 Mano testai), kad medį būtų galima naudoti išdėstymui. ¦ Šis tests nav sasaistīts ne ar vienu kartīti: sasaisti to ar testēto personu (🧬 Mani testi), lai dzimtas koku varētu izmantot izvietošanai. ¦ See test pole seotud ühegi kaardiga: seo see testitud isikuga (🧬 Minu testid), et sugupuud saaks paigutamiseks kasutada.
+Lecture de l’arbre… ¦ Skaitomas medis… ¦ Lasa dzimtas koku… ¦ Loen sugupuud…
+Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée). ¦ Toliau: ieškok šios poros palikuonių („Palikuonys“ skiltyje Diagramos), palygink su atitikmens medžiu ir užsirašyk kortelėje (Bendras protėvis, Susieta kortelė). ¦ Pēc tam: meklē šī pāra pēcnācējus („Pēcnācēji“ sadaļā Diagrammas), salīdzini ar atbilstības dzimtas koku un pieraksti to kartītē (Kopīgais sencis, Saistītā kartīte). ¦ Seejärel: otsi selle paari järeltulijaid („Järeltulijad“ jaotises Graafikud), võrdle vaste sugupuuga ja märgi see kaardile (Ühine esivanem, Seotud kaart).
+Indices ¦ Užuominos ¦ Norādes ¦ Vihjed
+Retenir ¦ Įsiminti ¦ Atzīmēt ¦ Jäta meelde
+Noté dans la correspondance (Ancêtre commun, côté). ¦ Pažymėta atitikmenyje (Bendras protėvis, pusė). ¦ Atzīmēts atbilstībā (Kopīgais sencis, puse). ¦ Märgitud vastele (Ühine esivanem, pool).
+Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment). ¦ „Chromosomų naršyklė“: kur kiekvienas atitikmuo dalijasi DNR su tavimi. Persidengiantys segmentai galbūt kilę iš to paties protėvio (trianguliacija – reikia patvirtinti: kiekvienas taip pat turi sutapti su kitu šiame segmente). ¦ „Hromosomu pārlūks“: kur katrai atbilstībai ar tevi ir kopīga DNS. Segmenti, kas pārklājas, varbūt nāk no viena senča (triangulācija — jāapstiprina: katram jāsakrīt arī ar otru šajā segmentā). ¦ „Kromosoomibrauser“: kus iga vaste jagab sinuga DNA-d. Kattuvad segmendid võivad pärineda samalt esivanemalt (trianguleerimine — vajab kinnitamist: igaüks peab sellel segmendil ka teisega kattuma).
+Le fichier CSV que DNA Painter sait lire (« Paint a new match » → importer) ¦ CSV failas, kurį moka skaityti DNA Painter („Paint a new match“ → importuoti) ¦ CSV fails, ko prot nolasīt DNA Painter („Paint a new match“ → importēt) ¦ CSV-fail, mida DNA Painter oskab lugeda („Paint a new match“ → impordi)
+⤒ Importer des segments (CSV) ¦ ⤒ Importuoti segmentus (CSV) ¦ ⤒ Importēt segmentus (CSV) ¦ ⤒ Impordi segmendid (CSV)
+⤓ Exporter pour DNA Painter ¦ ⤓ Eksportuoti į DNA Painter ¦ ⤓ Eksportēt uz DNA Painter ¦ ⤓ Ekspordi DNA Painteri jaoks
+Segment ¦ Segmentas ¦ Segments ¦ Segment
+Chevauchements (triangulation possible) ¦ Persidengimai (galima trianguliacija) ¦ Pārklāšanās (iespējama triangulācija) ¦ Kattuvused (võimalik trianguleerimine)
+Chr ¦ Chr ¦ Chr ¦ Chr
+De (Mb) ¦ Nuo (Mb) ¦ No (Mb) ¦ Alates (Mb)
+À (Mb) ¦ Iki (Mb) ¦ Līdz (Mb) ¦ Kuni (Mb)
+Correspondance 1 ¦ Atitikmuo 1 ¦ Atbilstība 1 ¦ Vaste 1
+Correspondance 2 ¦ Atitikmuo 2 ¦ Atbilstība 2 ¦ Vaste 2
+Aucun pour l’instant. ¦ Kol kas nėra. ¦ Pagaidām nav. ¦ Veel pole.
+Segment refusé : vérifie le chromosome, et que la fin est après le début. ¦ Segmentas atmestas: patikrink chromosomą ir ar pabaiga yra po pradžios. ¦ Segments noraidīts: pārbaudi hromosomu un to, vai beigas ir pēc sākuma. ¦ Segment lükati tagasi: kontrolli kromosoomi ja et lõpp oleks pärast algust.
+Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations. ¦ Kiek bendrų centimorganų kokiam ryšiui? Orientacinės vertės pagal Shared cM Project (Blaine Bettinger, 4 versija, 2020): vidurkis ir intervalas, stebėti tūkstančiuose realių atvejų. Ta pati vertė gali tikti keliems ryšiams. ¦ Cik kopīgu centimorgānu kādai radniecībai? Orientējošas vērtības pēc Shared cM Project (Blaine Bettinger, 4. versija, 2020): vidējais un diapazons, kas novērots tūkstošos reālu gadījumu. Viena un tā pati vērtība var atbilst vairākām radniecībām. ¦ Kui palju jagatud sentimorgane millise suguluse puhul? Suunavad väärtused Shared cM Projecti järgi (Blaine Bettinger, versioon 4, 2020): tuhandetel tegelikel juhtudel täheldatud keskmine ja vahemik. Sama väärtus võib sobida mitmele sugulusele.
+Ex. 230 ¦ Pvz., 230 ¦ Piem., 230 ¦ Nt 230
+Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau). ¦ Šiai vertei žinomo ryšio nėra (virš 3 720 cM – tai tu pats arba identiškas dvynys). ¦ Šai vērtībai nav zināmas radniecības (virs 3 720 cM — tas esi tu pats vai identisks dvīnis). ¦ Selle väärtuse jaoks pole teadaolevat sugulust (üle 3 720 cM on see sa ise või identne kaksik).
+Tableau de référence ¦ Palyginimo lentelė ¦ Atsauces tabula ¦ Võrdlustabel
+Fourchette ¦ Intervalas ¦ Diapazons ¦ Vahemik
+D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X. ¦ Pagal tavo medį: iš ko asmuo gavo Y-DNR (tėvo tėvo tėvas…), mitochondrinę DNR (motinos motina…) ir X-DNR. Naudinga norint žinoti, ką testuoti, ir skaityti haplogrupę ar atitikmenį X chromosomoje. ¦ Pēc tava dzimtas koka: no kā personai nāk Y-DNS (tēva tēva tēvs…), mitohondriālā DNS (mātes māte…) un X-DNS. Noderīgi, lai zinātu, ko testēt, un lai lasītu haplogrupu vai atbilstību X hromosomā. ¦ Sinu sugupuu põhjal: kellelt pärineb isiku Y-DNA (isa isa isa…), mitokondriaalne DNA (ema ema…) ja X-DNA. Kasulik, et teada, keda testida, ning haplorühma või X-kromosoomi vaste lugemiseks.
+Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent. ¦ Y-DNR turi tik vyrai. Moteris neturi Y-DNR: ją turi jos tėvas, broliai arba tos pačios pavardės pusbrolis. ¦ Y-DNS ir tikai vīriešiem. Sievietei nav Y-DNS: to nes viņas tēvs, brāļi vai tā paša uzvārda brālēns. ¦ Y-DNA on ainult meestel. Naisel Y-DNA-d pole: seda kannavad tema isa, vennad või sama nimega nõbu.
+Pas de père connu dans l’arbre. ¦ Medyje nežinomas tėvas. ¦ Dzimtas kokā tēvs nav zināms. ¦ Sugupuus pole isa teada.
+Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester. ¦ Visi šie vyrai turi (beveik) tą pačią Y chromosomą: gyvas šios linijos vyras gali ją ištestuoti. ¦ Visiem šiem vīriešiem ir (gandrīz) vienāda Y hromosoma: dzīvs šīs līnijas vīrietis var to testēt. ¦ Kõigil neil meestel on (peaaegu) sama Y-kromosoom: selle liini elav mees saab seda testida.
+Pas de mère connue dans l’arbre. ¦ Medyje nežinoma motina. ¦ Dzimtas kokā māte nav zināma. ¦ Sugupuus pole ema teada.
+Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour. ¦ Motinos ją perduoda visiems savo vaikams; toliau ją perduoda tik dukterys. ¦ To nodod mātes visiem saviem bērniem; tālāk to nodod tikai meitas. ¦ Emad annavad selle edasi kõigile oma lastele; edasi annavad selle ainult tütred.
+Un homme reçoit son X de sa mère seulement. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Vyras X gauna tik iš motinos. Tėvas perduoda tik tą X, kurį gavo iš savo motinos: todėl kai kurie protėviai negalėjo perduoti X. {n}: ¦ Vīrietis X saņem tikai no mātes. Tēvs nodod tikai to X, ko saņēmis no savas mātes: tāpēc daži senči nevar būt nodevuši X. {n}: ¦ Mees saab X-i ainult emalt. Isa annab edasi ainult X-i, mille ta sai oma emalt: seega mõned esivanemad ei saa olla X-i andnud. {n}:
+Une femme reçoit un X de chaque parent. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Moteris gauna po vieną X iš kiekvieno iš tėvų. Tėvas perduoda tik tą X, kurį gavo iš savo motinos: todėl kai kurie protėviai negalėjo perduoti X. {n}: ¦ Sieviete saņem pa vienam X no katra no vecākiem. Tēvs nodod tikai to X, ko saņēmis no savas mātes: tāpēc daži senči nevar būt nodevuši X. {n}: ¦ Naine saab ühe X-i kummaltki vanemalt. Isa annab edasi ainult X-i, mille ta sai oma emalt: seega mõned esivanemad ei saa olla X-i andnud. {n}:
+Aucune estimation : ajoute-les dans un test (« 🧬 Mes tests » → Origines estimées). ¦ Įverčių nėra: pridėk juos teste („🧬 Mano testai“ → Numatoma kilmė). ¦ Nav aprēķinu: pievieno tos testā („🧬 Mani testi“ → Aplēstā izcelsme). ¦ Hinnanguid pole: lisa need testile („🧬 Minu testid“ → Hinnanguline päritolu).
+Ce que montre l’onglet, dans l’ordre voulu, et comment. ¦ Ką rodo kortelė, norima tvarka, ir kaip. ¦ Ko rāda cilne, vēlamajā secībā, un kā. ¦ Mida vahekaart näitab, soovitud järjekorras, ja kuidas.
+Rubriques de la colonne de gauche ¦ Kairiojo stulpelio skyriai ¦ Kreisās kolonnas sadaļas ¦ Vasaku veeru jaotised
+Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée). ¦ Pažymėk, ką nori matyti; ↑ ↓ tvarkai (arba tempk rankenėlę). ¦ Atzīmē, ko vēlies redzēt; ↑ ↓ secībai (vai velc rokturi). ¦ Märgi, mida tahad näha; ↑ ↓ järjekorraks (või lohista pidet).
+Ne montrer que les correspondances d’au moins ¦ Rodyti tik atitikmenis, kurių bent ¦ Rādīt tikai atbilstības ar vismaz ¦ Näita ainult vasteid, millel on vähemalt
+Lignes affichées à la fois ¦ Vienu metu rodomos eilutės ¦ Vienlaikus rādītās rindas ¦ Korraga näidatavad read
+Méthode de Leeds : de ¦ Leedso metodas: nuo ¦ Līdsas metode: no ¦ Leedsi meetod: alates
+Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Bendras cM skaičius % skaičiavimui (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Kopējais cM skaits % aprēķinam (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ cM-ide koguarv %-de jaoks (6 800 Ancestry/MyHeritage, 7 400 23andMe)
+Sauvegarde de l’onglet ¦ Kortelės atsarginė kopija ¦ Cilnes rezerves kopija ¦ Vahekaardi varukoopia
+Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part. ¦ Testai, atitikmenys, segmentai ir grupės yra bazėje (ir jos atsarginėse kopijose). Juos taip pat gali eksportuoti atskirai. ¦ Testi, atbilstības, segmenti un grupas ir datubāzē (un tās rezerves kopijās). Tos var arī eksportēt atsevišķi. ¦ Testid, vasted, segmendid ja rühmad on andmebaasis (ja selle varukoopiates). Sa võid need ka eraldi eksportida.
+Fait. ¦ Atlikta. ¦ Paveikts. ¦ Tehtud.
+C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes. ¦ Tai neapdorotas DNR failas (tavo SNP, t. y. tavo genomas raidė po raidės): jis niekada neimportuojamas. Saugodama tavo ir tavo šeimos privatumą ir todėl, kad Prancūzijoje genetinis testas ne medicinos ar mokslinių tyrimų tikslais yra draudžiamas, programėlė saugo tik atitikmenų ir segmentų sąrašus. Verčiau eksportuok iš bendrovės atitikmenų sąrašą (matches) arba chromosomų naršyklę. ¦ Tas ir neapstrādāts DNS fails (tavi SNP, t. i., tavs genoms burtu pa burtam): tas nekad netiek importēts. Tavas un tavas ģimenes privātuma dēļ un tāpēc, ka Francijā ģenētiskais tests ārpus medicīniska vai pētniecības konteksta ir aizliegts, lietotne glabā tikai atbilstību un segmentu sarakstus. Labāk eksportē no uzņēmuma atbilstību sarakstu (matches) vai hromosomu pārlūku. ¦ See on DNA toorfail (sinu SNP-d ehk sinu genoom täht-tähelt): seda ei impordita kunagi. Sinu ja su pere privaatsuse huvides ning kuna Prantsusmaal on geneetiline test väljaspool meditsiinilist või teadusuuringute raamistikku keelatud, hoiab rakendus ainult vastete ja segmentide loendeid. Ekspordi ettevõttest pigem vastete loend (matches) või kromosoomibrauser.
+=analysée ¦ išanalizuota|išanalizuotos|išanalizuotų ¦ analizēti|analizēts|analizēti ¦ analüüsitud|analüüsitud
+=visage à nommer ¦ neįvardytas veidas|neįvardyti veidai|neįvardytų veidų ¦ nenosauktas sejas|nenosaukta seja|nenosauktas sejas ¦ nimetamata nägu|nimetamata nägu
+=photo restante ¦ likusi nuotrauka|likusios nuotraukos|likusių nuotraukų ¦ atlikušie fotoattēli|atlikušais fotoattēls|atlikušie fotoattēli ¦ allesjäänud foto|allesjäänud fotot
+=photo sautée ¦ praleista nuotrauka|praleistos nuotraukos|praleistų nuotraukų ¦ izlaisti fotoattēli|izlaists fotoattēls|izlaisti fotoattēli ¦ vahele jäetud foto|vahele jäetud fotot
+=visage ignoré ¦ ignoruotas veidas|ignoruoti veidai|ignoruotų veidų ¦ ignorētas sejas|ignorēta seja|ignorētas sejas ¦ eiratud nägu|eiratud nägu
+Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé). ¦ Nepavyko įkelti atpažinimo modelio (pirmą kartą reikia interneto ryšio, arba pakeistas failas atmestas). ¦ Neizdevās ielādēt atpazīšanas modeli (pirmo reizi vajadzīgs interneta savienojums, vai mainīts fails tika noraidīts). ¦ Tuvastusmudelit ei õnnestunud laadida (esimesel korral on vaja internetiühendust või lükati muudetud fail tagasi).
+Bibliothèque… ¦ Biblioteka… ¦ Bibliotēka… ¦ Teek…
+Bibliothèque illisible. ¦ Biblioteka neįskaitoma. ¦ Bibliotēka nav nolasāma. ¦ Teeki ei saa lugeda.
+Bibliothèque de reconnaissance indisponible. ¦ Atpažinimo biblioteka nepasiekiama. ¦ Atpazīšanas bibliotēka nav pieejama. ¦ Tuvastusteek pole saadaval.
+Repérage des visages… ¦ Ieškoma veidų… ¦ Meklē sejas… ¦ Otsin nägusid…
+Points du visage… ¦ Veido taškai… ¦ Sejas punkti… ¦ Näopunktid…
+Empreintes des visages… ¦ Veidų atspaudai… ¦ Seju nospiedumi… ¦ Näojäljendid…
+Analyse arrêtée. ¦ Analizė sustabdyta. ¦ Analīze apturēta. ¦ Analüüs peatatud.
+Fil de calcul impossible : {err} ¦ Skaičiavimo gija negalima: {err} ¦ Aprēķina pavediens nav iespējams: {err} ¦ Arvutuslõim pole võimalik: {err}
+Le modèle met trop de temps à se charger. ¦ Modelis kraunasi per ilgai. ¦ Modelis ielādējas pārāk ilgi. ¦ Mudeli laadimine võtab liiga kaua.
+le calcul a planté ¦ skaičiavimas užstrigo ¦ aprēķins avarēja ¦ arvutus jooksis kokku
+Fil de calcul en erreur. ¦ Skaičiavimo gijos klaida. ¦ Aprēķina pavediena kļūda. ¦ Arvutuslõimes tekkis viga.
+Calcul sur la page (plus lent)… ¦ Skaičiuojama puslapyje (lėčiau)… ¦ Aprēķins lapā (lēnāk)… ¦ Arvutan lehel (aeglasem)…
+Redémarrage du calcul… ¦ Skaičiavimas paleidžiamas iš naujo… ¦ Aprēķins tiek restartēts… ¦ Käivitan arvutuse uuesti…
+trop longue à analyser (plus de {n} s) ¦ per ilgai analizuoti (daugiau nei {n} s) ¦ pārāk ilgi analizējama (vairāk nekā {n} s) ¦ liiga pikk analüüsida (üle {n} s)
+Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur. ¦ 1 žingsnis: programėlė suranda veidus pasirinktose nuotraukose. 2 žingsnis: ji pasiūlo vardą pagal jau atpažintus veidus. Viskas skaičiuojama šiame kompiuteryje. ¦ 1. solis: lietotne atrod sejas izvēlētajos fotoattēlos. 2. solis: tā iesaka vārdu pēc jau identificētajām sejām. Viss tiek aprēķināts šajā datorā. ¦ 1. samm: rakendus leiab valitud fotodelt näod. 2. samm: see pakub nime juba tuvastatud nägude põhjal. Kõik arvutatakse selles arvutis.
+MÉDIAS · VISAGES ¦ MEDIJA · VEIDAI ¦ MEDIJI · SEJAS ¦ MEEDIA · NÄOD
+Visages ¦ Veidai ¦ Sejas ¦ Näod
+Chargement des photos… ¦ Kraunamos nuotraukos… ¦ Ielādē fotoattēlus… ¦ Laadin fotosid…
+≈ {time} sur cet ordinateur ¦ ≈ {time} šiame kompiuteryje ¦ ≈ {time} šajā datorā ¦ ≈ {time} selles arvutis
+environ 1 à 3 s par photo, selon l’ordinateur ¦ maždaug 1–3 s vienai nuotraukai, priklausomai nuo kompiuterio ¦ aptuveni 1–3 s vienam fotoattēlam, atkarībā no datora ¦ umbes 1–3 s foto kohta, sõltuvalt arvutist
+<b>{n}</b> identifiés ¦ Atpažinta: <b>{n}</b> ¦ Identificētas: <b>{n}</b> ¦ Tuvastatud: <b>{n}</b>
+<b>{n}</b> identifié ¦ Atpažinta: <b>{n}</b> ¦ Identificētas: <b>{n}</b> ¦ Tuvastatud: <b>{n}</b>
+{n} identifiés ¦ Atpažinta: {n} ¦ Identificētas: {n} ¦ Tuvastatud: {n}
+{n} identifié ¦ Atpažinta: {n} ¦ Identificētas: {n} ¦ Tuvastatud: {n}
+① Trouver les visages ¦ ① Rasti veidus ¦ ① Atrast sejas ¦ ① Leia näod
+② Qui est-ce ? ¦ ② Kas tai? ¦ ② Kas tas ir? ¦ ② Kes see on?
+Les {n} plus récentes ¦ Naujausios ({n}) ¦ Jaunākie ({n}) ¦ Uusimad ({n})
+{n} à analyser ¦ Analizuoti: {n} ¦ Analizējami: {n} ¦ Analüüsida: {n}
+<b>Analyse en pause</b> : {n} sur {total} ({what}). ¦ <b>Analizė pristabdyta</b>: {n} iš {total} ({what}). ¦ <b>Analīze pauzēta</b>: {n} no {total} ({what}). ¦ <b>Analüüs on peatatud</b>: {n} / {total} ({what}).
+analyse|Abandonner ¦ Atsisakyti ¦ Pārtraukt ¦ Loobu
+Quelles photos analyser ? ¦ Kurias nuotraukas analizuoti? ¦ Kurus fotoattēlus analizēt? ¦ Milliseid fotosid analüüsida?
+Sauter les photos déjà analysées ¦ Praleisti jau analizuotas nuotraukas ¦ Izlaist jau analizētos fotoattēlus ¦ Jäta juba analüüsitud fotod vahele
+Analyser {n} ¦ Analizuoti ({n}) ¦ Analizēt ({n}) ¦ Analüüsi ({n})
+Rien à analyser ici ¦ Čia nėra ką analizuoti ¦ Šeit nav ko analizēt ¦ Siin pole midagi analüüsida
+↻ Réessayer {n} ¦ ↻ Bandyti dar kartą ({n}) ¦ ↻ Mēģināt vēlreiz ({n}) ¦ ↻ Proovi uuesti ({n})
+Photos avec des visages à nommer ¦ Nuotraukos su veidais, kuriuos reikia įvardyti ¦ Fotoattēli ar sejām, kas jānosauc ¦ Fotod nimetamata nägudega
+Ouvrir {name} ¦ Atidaryti {name} ¦ Atvērt {name} ¦ Ava {name}
+détection simple ¦ paprastas aptikimas ¦ vienkārša noteikšana ¦ lihtne tuvastus
+Ouvrir et identifier ¦ Atidaryti ir atpažinti ¦ Atvērt un identificēt ¦ Ava ja tuvasta
+Tous les visages trouvés ont un nom ou ont été ignorés. 👍 ¦ Visi rasti veidai turi vardą arba buvo ignoruoti. 👍 ¦ Visām atrastajām sejām ir vārds vai tās ir ignorētas. 👍 ¦ Kõigil leitud nägudel on nimi või need on eiratud. 👍
+Lance une analyse : les photos où l’app trouve des visages apparaîtront ici. ¦ Paleisk analizę: nuotraukos, kuriose programėlė randa veidų, atsiras čia. ¦ Palaid analīzi: fotoattēli, kuros lietotne atrod sejas, parādīsies šeit. ¦ Käivita analüüs: fotod, millelt rakendus nägusid leiab, ilmuvad siia.
+entre 1900 et 1950, vers 1925, 1960… ¦ entre 1900 et 1950, vers 1925, 1960… ¦ entre 1900 et 1950, vers 1925, 1960… ¦ entre 1900 et 1950, vers 1925, 1960…
+Les photos marquées avec des visages ¦ Nuotraukos su pažymėtais veidais ¦ Fotoattēli ar iezīmētām sejām ¦ Märgitud nägudega fotod
+photo de la personne, portrait d’une fiche, visages déjà identifiés, étiquette « portrait » ou « visage » ¦ asmens nuotrauka, kortelės portretas, jau atpažinti veidai, žyma „portrait“ arba „visage“ ¦ personas fotoattēls, kartītes portrets, jau identificētās sejas, birka „portrait“ vai „visage“ ¦ isiku foto, kaardi portree, juba tuvastatud näod, silt „portrait“ või „visage“
+Les photos affichées dans la liste Médias ¦ Nuotraukos, rodomos Medijų sąraše ¦ Fotoattēli, kas redzami mediju sarakstā ¦ Meedialoendis näidatud fotod
+avec ta recherche et tes filtres actuels ¦ su dabartine paieška ir filtrais ¦ ar pašreizējo meklēšanu un filtriem ¦ praeguse otsingu ja filtritega
+Les photos d’une personne ¦ Asmens nuotraukos ¦ Personas fotoattēli ¦ Isiku fotod
+rattachées à sa fiche ou où elle est identifiée ¦ susietos su jo kortele arba kuriose jis atpažintas ¦ piesaistīti tās kartītei vai kuros tā ir identificēta ¦ seotud tema kaardiga või millel ta on tuvastatud
+Les photos d’une étiquette ¦ Žymos nuotraukos ¦ Birkas fotoattēli ¦ Sildi fotod
+Un album ou un dossier ¦ Albumas arba aplankas ¦ Albums vai mape ¦ Album või kaust
+Une période ¦ Laikotarpis ¦ Periods ¦ Ajavahemik
+d’après la date de la photo, sinon sa date d’ajout ¦ pagal nuotraukos datą, kitaip – pagal jos pridėjimo datą ¦ pēc fotoattēla datuma, citādi — pēc pievienošanas datuma ¦ foto kuupäeva järgi, muidu lisamise kuupäeva järgi
+les dernières ajoutées ¦ paskutinės pridėtos ¦ pēdējie pievienotie ¦ viimati lisatud
+Toutes les photos ¦ Visos nuotraukos ¦ Visi fotoattēli ¦ Kõik fotod
+peut être long : tu peux mettre en pause et reprendre plus tard ¦ gali užtrukti: gali pristabdyti ir tęsti vėliau ¦ var ilgt: vari pauzēt un turpināt vēlāk ¦ võib võtta kaua: saad peatada ja hiljem jätkata
+En attendant, nomme les inconnus regroupés (👥). ¦ Kol kas įvardyk sugrupuotus nežinomuosius (👥). ¦ Pa to laiku nosauc sagrupētos nezināmos (👥). ¦ Seni nimeta rühmitatud tundmatud (👥).
+Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ¦ Kad gautum pasiūlymų: atidaryk kelias nuotraukas ir atpažink veidus ranka (peržiūros lango mygtukas „Atpažinti“ arba „Atidaryti ir atpažinti“ ① žingsnyje), bent kartą kiekvienam asmeniui. ¦ Lai saņemtu ieteikumus: atver dažus fotoattēlus un identificē sejas ar roku (skatītāja poga „Identificēt“ vai „Atvērt un identificēt“ ① solī), vismaz reizi katrai personai. ¦ Ettepanekute saamiseks: ava mõned fotod ja tuvasta näod käsitsi (vaaturi nupp „Tuvasta“ või „Ava ja tuvasta“ sammus ①), vähemalt korra iga isiku kohta.
+Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. ¦ Kol kas veidų nerasta. Pradėk nuo ① žingsnio: pasirink kelias nuotraukas ir paleisk analizę. ¦ Pagaidām nav atrasta neviena seja. Sāc ar ① soli: izvēlies dažus fotoattēlus un palaid analīzi. ¦ Nägusid pole veel leitud. Alusta sammust ①: vali mõned fotod ja käivita analüüs.
+💡 Propositions ¦ 💡 Pasiūlymai ¦ 💡 Ieteikumi ¦ 💡 Ettepanekud
+👥 Inconnus regroupés ¦ 👥 Sugrupuoti nežinomieji ¦ 👥 Sagrupētie nezināmie ¦ 👥 Rühmitatud tundmatud
+❔ Autres inconnus ¦ ❔ Kiti nežinomieji ¦ ❔ Citi nezināmie ¦ ❔ Muud tundmatud
+✓ Identifiés ¦ ✓ Atpažinti ¦ ✓ Identificētie ¦ ✓ Tuvastatud
+✓ Accepter les {n} très probables ¦ ✓ Priimti labai tikėtinus ({n}) ¦ ✓ Pieņemt ļoti iespējamos ({n}) ¦ ✓ Nõustu väga tõenäolistega ({n})
+visage|probable ¦ tikėtina ¦ iespējams ¦ tõenäoline
+ressemblance {pct} % ¦ panašumas {pct} % ¦ līdzība {pct} % ¦ sarnasus {pct} %
+ou {name} ? ¦ ar {name}? ¦ vai {name}? ¦ või {name}?
+✓ Oui ¦ ✓ Taip ¦ ✓ Jā ¦ ✓ Jah
+Quelqu’un d’autre… ¦ Kažkas kitas… ¦ Kāds cits… ¦ Keegi teine…
+Pas un visage, ou personne à ne pas nommer ¦ Ne veidas arba asmuo, kurio nereikia įvardyti ¦ Nav seja vai persona, kuru nevajag nosaukt ¦ Pole nägu või isik, keda ei tohi nimetada
+Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main. ¦ Kol kas pasiūlymų nėra: analizuok daugiau nuotraukų arba atpažink daugiau veidų ranka. ¦ Pagaidām nav ieteikumu: analizē vairāk fotoattēlu vai identificē vairāk seju ar roku. ¦ Ettepanekuid veel pole: analüüsi rohkem fotosid või tuvasta rohkem nägusid käsitsi.
+<b>{n} visages</b> qui se ressemblent, sur {p} photos. ¦ Panašūs veidai: <b>{n}</b>, nuotraukų: {p}. ¦ Līdzīgas sejas: <b>{n}</b>, fotoattēlos: {p}. ¦ Sarnaseid nägusid: <b>{n}</b>, fotodel: {p}.
+Nommer… ¦ Įvardyti… ¦ Nosaukt… ¦ Nimeta…
+Demander à la famille ¦ Paklausti šeimos ¦ Pajautāt ģimenei ¦ Küsi perelt
+Personne n’est encore identifié. ¦ Dar niekas neatpažintas. ¦ Neviens vēl nav identificēts. ¦ Kedagi pole veel tuvastatud.
+⏸ En pause (la photo en cours se termine) ¦ ⏸ Pristabdyta (dabartinė nuotrauka baigiama) ¦ ⏸ Pauzēts (pašreizējais fotoattēls tiek pabeigts) ¦ ⏸ Peatatud (praegune foto lõpetatakse)
+{s} s par photo · reste ≈ {left} ¦ {s} s vienai nuotraukai · liko ≈ {left} ¦ {s} s vienam fotoattēlam · atlicis ≈ {left} ¦ {s} s foto kohta · jäänud ≈ {left}
+vitesse : on mesure… ¦ greitis: matuojama… ¦ ātrums: mēra… ¦ kiirus: mõõdan…
+■ Arrêter ¦ ■ Sustabdyti ¦ ■ Apturēt ¦ ■ Peata
+Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent. ¦ Skaičiuojama puslapyje (atskira gija nepasileido): šiek tiek lėčiau. ¦ Aprēķins lapā (atsevišķais pavediens nevarēja startēt): nedaudz lēnāk. ¦ Arvutan lehel (eraldi lõim ei käivitunud): veidi aeglasem.
+Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom. ¦ Atpažinimo modelis nepasiekiamas ({why}). Paprastas naršyklės aptikimas: veidai randami, bet vardai nesiūlomi. ¦ Atpazīšanas modelis nav pieejams ({why}). Vienkārša pārlūka noteikšana: sejas tiek atrastas, bet vārdi netiek ieteikti. ¦ Tuvastusmudel pole saadaval ({why}). Brauseri lihtne tuvastus: näod leitakse, kuid nime ei pakuta.
+Chargement du modèle… ¦ Kraunamas modelis… ¦ Ielādē modeli… ¦ Laadin mudelit…
+Chargement du modèle : {step} ¦ Kraunamas modelis: {step} ¦ Ielādē modeli: {step} ¦ Laadin mudelit: {step}
+■ Analyse arrêtée : {n}{more}. ¦ ■ Analizė sustabdyta: {n}{more}. ¦ ■ Analīze apturēta: {n}{more}. ¦ ■ Analüüs peatatud: {n}{more}.
+✓ Analyse finie : {n}{more}. ¦ ✓ Analizė baigta: {n}{more}. ¦ ✓ Analīze pabeigta: {n}{more}. ¦ ✓ Analüüs lõpetatud: {n}{more}.
+Il reste {n} : « ▶ Reprendre » quand tu veux. ¦ {n}: „▶ Tęsti“, kai norėsi. ¦ {n}: „▶ Turpināt“, kad vēlies. ¦ {n}: „▶ Jätka“, kui soovid.
+■ Analyse arrêtée. ¦ ■ Analizė sustabdyta. ¦ ■ Analīze apturēta. ¦ ■ Analüüs peatatud.
+{n} : tu pourras reprendre. ¦ {n}: galėsi tęsti. ¦ {n}: varēsi turpināt. ¦ {n}: saad hiljem jätkata.
+Visage ignoré ¦ Veidas ignoruotas ¦ Seja ignorēta ¦ Nägu eiratud
+photos de {name} ¦ nuotraukos: {name} ¦ fotoattēli: {name} ¦ fotod: {name}
+photos sautées ¦ praleistos nuotraukos ¦ izlaistie fotoattēli ¦ vahele jäetud fotod
+Identifié : {name} ¦ Atpažinta: {name} ¦ Identificēts: {name} ¦ Tuvastatud: {name}
+{n} (certitude « probable ») ¦ {n} (tikrumas „tikėtina“) ¦ {n} (ticamība „iespējams“) ¦ {n} (kindlus „tõenäoline“)
+Qui est-ce ? ({n} visages) ¦ Kas tai? (veidų: {n}) ¦ Kas tas ir? (sejas: {n}) ¦ Kes see on? (nägusid: {n})
+Certitude ¦ Tikrumas ¦ Ticamība ¦ Kindlus
+Certaine ¦ Tikra ¦ Droša ¦ Kindel
+Possible ¦ Galima ¦ Iespējama ¦ Võimalik
+Choisis… ¦ Pasirink… ¦ Izvēlies… ¦ Vali…
+Hier et aujourd’hui ¦ Vakar ir šiandien ¦ Vakar un šodien ¦ Eile ja täna
+Nom de la comparaison ¦ Palyginimo pavadinimas ¦ Salīdzinājuma nosaukums ¦ Võrdluse nimi
+Enregistrer la comparaison (reliée aux deux photos et aux personnes) ¦ Išsaugoti palyginimą (susietą su abiem nuotraukomis ir asmenimis) ¦ Saglabāt salīdzinājumu (sasaistītu ar abiem fotoattēliem un personām) ¦ Salvesta võrdlus (seotud mõlema foto ja isikutega)
+A — l’image ancienne ¦ A — senasis vaizdas ¦ A — senais attēls ¦ A — vana pilt
+B — la photo d’aujourd’hui ¦ B — šiandienos nuotrauka ¦ B — šodienas fotoattēls ¦ B — tänane foto
+Photo A ¦ Nuotrauka A ¦ Fotoattēls A ¦ Foto A
+Photo B ¦ Nuotrauka B ¦ Fotoattēls B ¦ Foto B
+La photo A ¦ Nuotrauka A ¦ Fotoattēls A ¦ Foto A
+La photo B ¦ Nuotrauka B ¦ Fotoattēls B ¦ Foto B
+la photo A ¦ nuotrauka A ¦ fotoattēls A ¦ foto A
+La photo « {name} » n’a pas pu être ouverte. ¦ Nuotraukos „{name}“ nepavyko atidaryti. ¦ Fotoattēlu „{name}“ neizdevās atvērt. ¦ Fotot „{name}“ ei õnnestunud avada.
+Choisis la photo B à droite → ¦ Pasirink nuotrauką B dešinėje → ¦ Izvēlies fotoattēlu B labajā pusē → ¦ Vali paremalt foto B →
+Choisis la photo A à droite → ¦ Pasirink nuotrauką A dešinėje → ¦ Izvēlies fotoattēlu A labajā pusē → ¦ Vali paremalt foto A →
+Clique <b>{what}</b> (à ta gauche sur l’écran). ¦ Spustelėk: <b>{what}</b> (ekrane tavo kairėje). ¦ Noklikšķini: <b>{what}</b> (ekrānā pa kreisi no tevis). ¦ Klõpsa: <b>{what}</b> (ekraanil sinust vasakul).
+Échap pour arrêter. ¦ Esc – sustabdyti. ¦ Esc — apturēt. ¦ Esc peatab.
+Clique sur la photo <b>{side}</b> : {what}. ¦ Spustelėk nuotrauką <b>{side}</b>: {what}. ¦ Noklikšķini uz fotoattēla <b>{side}</b>: {what}. ¦ Klõpsa fotol <b>{side}</b>: {what}.
+Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics. ¦ Nuotraukoje {side} veidų nerasta: pažymėk akis dviem spustelėjimais. ¦ Fotoattēlā {side} nav atrasta neviena seja: iezīmē acis ar diviem klikšķiem. ¦ Fotolt {side} ei leitud nägu: märgi silmad kahe klõpsuga.
+Le modèle de visages n’a pas pu être chargé. ¦ Nepavyko įkelti veidų modelio. ¦ Neizdevās ielādēt seju modeli. ¦ Näomudelit ei õnnestunud laadida.
+Pose les yeux en deux clics par photo. ¦ Pažymėk akis dviem spustelėjimais kiekvienoje nuotraukoje. ¦ Iezīmē acis ar diviem klikšķiem katrā fotoattēlā. ¦ Märgi igal fotol silmad kahe klõpsuga.
+Pas encore de ressemblance calculée pour ces deux photos. ¦ Šioms dviem nuotraukoms panašumas dar neapskaičiuotas. ¦ Šiem diviem fotoattēliem līdzība vēl nav aprēķināta. ¦ Nende kahe foto sarnasust pole veel arvutatud.
+« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias). ¦ „✨ Rasti akis automatiškai“ jį apskaičiuoja (veidų modelis šiame kompiuteryje), arba paleisk <b>👤 Veidai</b> šioms nuotraukoms (Sąrašai → Medija). ¦ „✨ Atrast acis automātiski“ to aprēķina (seju modelis šajā datorā), vai palaid <b>👤 Sejas</b> šiem fotoattēliem (Saraksti → Mediji). ¦ „✨ Leia silmad ise“ arvutab selle (näomudel selles arvutis) või käivita nende fotode jaoks <b>👤 Näod</b> (Loendid → Meedia).
+Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes. ¦ Apskaičiuota veidų modeliu, šiame kompiuteryje ({from}). Amžius, šviesa, kampas ir nuotraukų kokybė labai keičia rezultatą; šeimos panašumas (tėvai, brolis, sesuo) taip pat gali duoti didelį panašumą. Reikia patvirtinti dokumentais. ¦ Aprēķināts ar seju modeli šajā datorā ({from}). Vecums, apgaismojums, leņķis un fotoattēlu kvalitāte stipri maina rezultātu; ģimenes līdzība (vecāks, brālis, māsa) arī var dot lielu līdzību. Jāapstiprina ar dokumentiem. ¦ Arvutatud näomudeliga selles arvutis ({from}). Vanus, valgus, nurk ja fotode kvaliteet muudavad tulemust palju; perekondlik sarnasus (vanem, vend, õde) võib samuti anda suure sarnasuse. Kinnita dokumentidega.
+visages repérés à l’instant ¦ veidai rasti ką tik ¦ sejas atrastas tikko ¦ näod leiti just praegu
+visages trouvés par 👤 Visages ¦ veidai rasti per 👤 Veidai ¦ sejas atrastas ar 👤 Sejas ¦ näod leidis 👤 Näod
+Rideau ¦ Užuolaida ¦ Aizkars ¦ Kardin
+Part de B ¦ B dalis ¦ B daļa ¦ B osa
+La photo B, à poser à côté de « {name} ». ¦ Nuotrauka B, dedama šalia „{name}“. ¦ Fotoattēls B, ko novietot blakus „{name}“. ¦ Foto B, mis pannakse „{name}“ kõrvale.
+Une photo de cette personne ; ensuite, la photo à comparer. ¦ Šio asmens nuotrauka; tada – nuotrauka palyginimui. ¦ Šīs personas fotoattēls; pēc tam — fotoattēls salīdzināšanai. ¦ Selle isiku foto; seejärel võrreldav foto.
+Comparer deux photos (ressemblance, même personne à deux âges…) ¦ Palyginti dvi nuotraukas (panašumas, tas pats asmuo dviejų amžių…) ¦ Salīdzināt divus fotoattēlus (līdzība, viena persona divos vecumos…) ¦ Võrdle kahte fotot (sarnasus, sama isik kahes vanuses…)
+Ressemblance très forte — ce n’est pas une preuve ¦ Labai didelis panašumas — tai ne įrodymas ¦ Ļoti liela līdzība — tas nav pierādījums ¦ Väga suur sarnasus — see pole tõend
+Ressemblance forte — ce n’est pas une preuve ¦ Didelis panašumas — tai ne įrodymas ¦ Liela līdzība — tas nav pierādījums ¦ Suur sarnasus — see pole tõend
+Ressemblance moyenne — ce n’est pas une preuve ¦ Vidutinis panašumas — tai ne įrodymas ¦ Vidēja līdzība — tas nav pierādījums ¦ Keskmine sarnasus — see pole tõend
+Ressemblance faible — ce n’est pas une preuve ¦ Mažas panašumas — tai ne įrodymas ¦ Maza līdzība — tas nav pierādījums ¦ Väike sarnasus — see pole tõend
+Affichage des deux photos ¦ Dviejų nuotraukų rodymas ¦ Divu fotoattēlu attēlojums ¦ Kahe foto kuvamine
+Zoomer et déplacer les deux photos ensemble ¦ Didinti ir stumdyti abi nuotraukas kartu ¦ Tuvināt un pārvietot abus fotoattēlus kopā ¦ Suumi ja liiguta mõlemat fotot koos
+Zoomer ¦ Didinti ¦ Tuvināt ¦ Suumi
+Toute la photo ¦ Visa nuotrauka ¦ Viss fotoattēls ¦ Kogu foto
+Toute la photo (double-clic) ¦ Visa nuotrauka (dukart spustelėti) ¦ Viss fotoattēls (dubultklikšķis) ¦ Kogu foto (topeltklõps)
+Les deux photos : molette pour zoomer, glisser pour déplacer, double-clic pour revoir toute la photo ¦ Abi nuotraukos: ratukas – didinti, tempti – stumdyti, dukart spustelėti – vėl matyti visą nuotrauką ¦ Abi fotoattēli: ritenītis — tuvināt, vilkt — pārvietot, dubultklikšķis — atkal redzēt visu fotoattēlu ¦ Mõlemad fotod: hiireratas suumib, lohistamine liigutab, topeltklõps näitab taas kogu fotot
+Les deux photos ¦ Abi nuotraukos ¦ Abi fotoattēli ¦ Mõlemad fotod
+Mettre A à la place de B et B à la place de A ¦ Sukeisti A ir B vietomis ¦ Samainīt A un B vietām ¦ Vaheta A ja B kohad
+⇄ Échanger A et B ¦ ⇄ Sukeisti A ir B ¦ ⇄ Samainīt A un B ¦ ⇄ Vaheta A ja B
+Caler la photo d’aujourd’hui ¦ Sulygiuoti šiandienos nuotrauką ¦ Pielāgot šodienas fotoattēlu ¦ Joonda tänane foto
+Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille. ¦ Spustelėk du tuos pačius orientyrus kiekvienoje nuotraukoje (varpinės viršūnę, stogo kampą…): šiandienos nuotrauka pasukama ir padaroma tokio pat dydžio. ¦ Noklikšķini uz diviem vienādiem orientieriem katrā fotoattēlā (zvanu torņa virsotne, jumta stūris…): šodienas fotoattēls tiek pagriezts un padarīts tikpat liels. ¦ Klõpsa igal fotol kahel samal orientiiril (kellatorni tipp, katusenurk…): tänast fotot pööratakse ja see tehakse sama suureks.
+Deux clics sur la photo A, puis les deux mêmes repères sur la photo B ¦ Du spustelėjimai nuotraukoje A, tada tie patys du orientyrai nuotraukoje B ¦ Divi klikšķi fotoattēlā A, pēc tam tie paši divi orientieri fotoattēlā B ¦ Kaks klõpsu fotol A, siis samad kaks orientiiri fotol B
+📌 Poser 2 repères par photo ¦ 📌 Pažymėti 2 orientyrus kiekvienoje nuotraukoje ¦ 📌 Iezīmēt 2 orientierus katrā fotoattēlā ¦ 📌 Märgi igale fotole 2 orientiiri
+Caler sur les repères ¦ Sulygiuoti pagal orientyrus ¦ Pielāgot pēc orientieriem ¦ Joonda orientiiride järgi
+✕ Retirer les repères ¦ ✕ Pašalinti orientyrus ¦ ✕ Noņemt orientierus ¦ ✕ Eemalda orientiirid
+Ajuster à la main ¦ Pritaikyti ranka ¦ Pielāgot ar roku ¦ Kohanda käsitsi
+Glisser sur l’image déplace seulement la photo d’aujourd’hui ¦ Tempiant per vaizdą stumdoma tik šiandienos nuotrauka ¦ Vilkšana pa attēlu pārvieto tikai šodienas fotoattēlu ¦ Pildil lohistamine liigutab ainult tänast fotot
+Glisser déplace la photo B ¦ Tempiant stumdoma nuotrauka B ¦ Vilkšana pārvieto fotoattēlu B ¦ Lohistamine liigutab fotot B
+Les yeux (alignement) ¦ Akys (lygiavimas) ¦ Acis (līdzināšana) ¦ Silmad (joondus)
+Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste. ¦ Abu veidai padaromi vienodo dydžio, akys – tame pačiame aukštyje: palyginimas daug tikslesnis. ¦ Abas sejas tiek padarītas vienādā lielumā, acis — vienā augstumā: salīdzinājums ir daudz precīzāks. ¦ Mõlemad näod tehakse sama suureks, silmad samale kõrgusele: võrdlus on palju täpsem.
+✨ Repérer les yeux tout seul ¦ ✨ Rasti akis automatiškai ¦ ✨ Atrast acis automātiski ¦ ✨ Leia silmad ise
+Clique l’œil gauche puis l’œil droit sur chaque photo ¦ Spustelėk kairę akį, tada dešinę akį kiekvienoje nuotraukoje ¦ Noklikšķini uz kreisās acs, tad uz labās acs katrā fotoattēlā ¦ Klõpsa igal fotol vasakut ja siis paremat silma
+👁 Poser les yeux (2 clics par photo) ¦ 👁 Pažymėti akis (2 spustelėjimai nuotraukai) ¦ 👁 Iezīmēt acis (2 klikšķi katram fotoattēlam) ¦ 👁 Märgi silmad (2 klõpsu foto kohta)
+Aligner sur les yeux ¦ Sulygiuoti pagal akis ¦ Līdzināt pēc acīm ¦ Joonda silmade järgi
+✕ Retirer les yeux posés ¦ ✕ Pašalinti pažymėtas akis ¦ ✕ Noņemt iezīmētās acis ¦ ✕ Eemalda märgitud silmad
+Prises sur les deux photos ; ajoute ou retire qui tu veux. ¦ Paimti iš abiejų nuotraukų; pridėk arba pašalink, ką nori. ¦ Ņemti no abiem fotoattēliem; pievieno vai noņem, ko vēlies. ¦ Võetud mõlemalt fotolt; lisa või eemalda, keda tahad.
+Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé… ¦ Ką pastebi: nosies, ausų forma, plaukų linija, apgamas, tariamas amžius… ¦ Ko tu pamani: deguna, ausu forma, matu līnija, dzimumzīme, šķietamais vecums… ¦ Mida märkad: nina, kõrvade kuju, juuksepiir, sünnimärk, oletatav vanus…
+Fondu : part de la photo B ; rideau : place du rideau ¦ Perėjimas: nuotraukos B dalis; užuolaida: užuolaidos vieta ¦ Pāreja: fotoattēla B daļa; aizkars: aizkara vieta ¦ Sulandus: foto B osa; kardin: kardina asukoht
+Choisis une photo (image). ¦ Pasirink nuotrauką (vaizdą). ¦ Izvēlies fotoattēlu (attēlu). ¦ Vali foto (pilt).
+C’est déjà l’autre photo : choisis-en une autre. ¦ Tai jau kita nuotrauka: pasirink kitą. ¦ Tas jau ir otrs fotoattēls: izvēlies citu. ¦ See on juba teine foto: vali mõni muu.
+Choisis les deux photos à comparer ¦ Pasirink dvi nuotraukas palyginimui ¦ Izvēlies divus fotoattēlus salīdzināšanai ¦ Vali kaks võrreldavat fotot
+Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes… ¦ Du portretai: tas pats asmuo dviejų amžių, du asmenys, kurie, manoma, yra giminės… ¦ Divi portreti: viena persona divos vecumos, divas personas, kuras uzskata par radiniekiem… ¦ Kaks portreed: sama isik kahes vanuses, kaks inimest, keda peetakse sugulasteks…
+🖼 Choisir la photo A ¦ 🖼 Pasirinkti nuotrauką A ¦ 🖼 Izvēlēties fotoattēlu A ¦ 🖼 Vali foto A
+Pose d’abord deux repères sur chaque photo (📌). ¦ Pirma pažymėk po du orientyrus kiekvienoje nuotraukoje (📌). ¦ Vispirms iezīmē divus orientierus katrā fotoattēlā (📌). ¦ Märgi kõigepealt igale fotole kaks orientiiri (📌).
+Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo). ¦ Pirma pažymėk akis abiejose nuotraukose (✨ automatiškai arba 👁 dviem spustelėjimais nuotraukoje). ¦ Vispirms iezīmē acis abos fotoattēlos (✨ automātiski vai 👁 ar diviem klikšķiem katrā fotoattēlā). ¦ Märgi kõigepealt silmad mõlemal fotol (✨ ise või 👁 kaks klõpsu foto kohta).
+le repère 1 sur l’image ancienne (A) ¦ 1 orientyras senajame vaizde (A) ¦ 1. orientieris senajā attēlā (A) ¦ orientiir 1 vanal pildil (A)
+le repère 2 sur l’image ancienne (A) ¦ 2 orientyras senajame vaizde (A) ¦ 2. orientieris senajā attēlā (A) ¦ orientiir 2 vanal pildil (A)
+le même repère 1 sur la photo d’aujourd’hui (B) ¦ tas pats 1 orientyras šiandienos nuotraukoje (B) ¦ tas pats 1. orientieris šodienas fotoattēlā (B) ¦ sama orientiir 1 tänasel fotol (B)
+le même repère 2 sur la photo d’aujourd’hui (B) ¦ tas pats 2 orientyras šiandienos nuotraukoje (B) ¦ tas pats 2. orientieris šodienas fotoattēlā (B) ¦ sama orientiir 2 tänasel fotol (B)
+l’œil de gauche de la photo A ¦ kairė nuotraukos A akis ¦ fotoattēla A kreisā acs ¦ foto A vasak silm
+l’œil de droite de la photo A ¦ dešinė nuotraukos A akis ¦ fotoattēla A labā acs ¦ foto A parem silm
+l’œil de gauche de la photo B ¦ kairė nuotraukos B akis ¦ fotoattēla B kreisā acs ¦ foto B vasak silm
+l’œil de droite de la photo B ¦ dešinė nuotraukos B akis ¦ fotoattēla B labā acs ¦ foto B parem silm
+Choisis d’abord les deux photos. ¦ Pirma pasirink abi nuotraukas. ¦ Vispirms izvēlies abus fotoattēlus. ¦ Vali kõigepealt mõlemad fotod.
+Repères non posés : rien n’a changé. ¦ Orientyrai nepažymėti: niekas nepasikeitė. ¦ Orientieri nav iezīmēti: nekas nav mainījies. ¦ Orientiire pole märgitud: midagi ei muutunud.
+Yeux non posés : rien n’a changé. ¦ Akys nepažymėtos: niekas nepasikeitė. ¦ Acis nav iezīmētas: nekas nav mainījies. ¦ Silmi pole märgitud: midagi ei muutunud.
+Repères posés : la photo d’aujourd’hui est calée sur l’ancienne. ¦ Orientyrai pažymėti: šiandienos nuotrauka sulygiuota su senąja. ¦ Orientieri iezīmēti: šodienas fotoattēls pielāgots senajam. ¦ Orientiirid märgitud: tänane foto on vanaga joondatud.
+Yeux posés : les deux visages sont alignés. ¦ Akys pažymėtos: abu veidai sulygiuoti. ¦ Acis iezīmētas: abas sejas ir nolīdzinātas. ¦ Silmad märgitud: mõlemad näod on joondatud.
+Le modèle de visages n’est pas disponible ici : pose les yeux en deux clics par photo. ¦ Veidų modelis čia nepasiekiamas: pažymėk akis dviem spustelėjimais kiekvienoje nuotraukoje. ¦ Seju modelis šeit nav pieejams: iezīmē acis ar diviem klikšķiem katrā fotoattēlā. ¦ Näomudel pole siin saadaval: märgi igal fotol silmad kahe klõpsuga.
+Le modèle de visages (≈ 13 Mo, sur cet ordinateur seulement) se charge une fois, au premier clic. ¦ Veidų modelis (≈ 13 MB, tik šiame kompiuteryje) įkeliamas vieną kartą, po pirmo spustelėjimo. ¦ Seju modelis (≈ 13 MB, tikai šajā datorā) tiek ielādēts vienreiz, pēc pirmā klikšķa. ¦ Näomudel (≈ 13 MB, ainult selles arvutis) laaditakse üks kord, esimesel klõpsul.
+Visages trouvés : les yeux sont alignés. ¦ Veidai rasti: akys sulygiuotos. ¦ Sejas atrastas: acis nolīdzinātas. ¦ Näod leitud: silmad on joondatud.
+Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo. ¦ Nepavyko įkelti veidų modelio (pirmą kartą reikia interneto): pažymėk akis dviem spustelėjimais kiekvienoje nuotraukoje. ¦ Neizdevās ielādēt seju modeli (pirmo reizi vajadzīgs internets): iezīmē acis ar diviem klikšķiem katrā fotoattēlā. ¦ Näomudelit ei õnnestunud laadida (esimesel korral on vaja internetti): märgi igal fotol silmad kahe klõpsuga.
+Choisis les deux photos. ¦ Pasirink abi nuotraukas. ¦ Izvēlies abus fotoattēlus. ¦ Vali mõlemad fotod.
+Choisis les deux photos avant d’enregistrer. ¦ Prieš išsaugodamas pasirink abi nuotraukas. ¦ Pirms saglabāšanas izvēlies abus fotoattēlus. ¦ Vali enne salvestamist mõlemad fotod.
+Les derniers changements de la comparaison ne sont pas enregistrés. ¦ Paskutiniai palyginimo pakeitimai neišsaugoti. ¦ Pēdējās salīdzinājuma izmaiņas nav saglabātas. ¦ Võrdluse viimased muudatused pole salvestatud.
+C’est la même photo : choisis-en une autre. ¦ Tai ta pati nuotrauka: pasirink kitą. ¦ Tas ir tas pats fotoattēls: izvēlies citu. ¦ See on sama foto: vali mõni muu.
+comparaison de photos ¦ nuotraukų palyginimas ¦ fotoattēlu salīdzinājums ¦ fotode võrdlus
+Deux photos ¦ Dvi nuotraukos ¦ Divi fotoattēli ¦ Kaks fotot
+=autre déplacement ¦ kita kelionė|kitos kelionės|kitų kelionių ¦ citi pārvietojumi|cits pārvietojums|citi pārvietojumi ¦ muu teekond|muud teekonda
+=déplacement ¦ kelionė|kelionės|kelionių ¦ pārvietojumi|pārvietojums|pārvietojumi ¦ teekond|teekonda
+=personne vivante ou confidentielle ¦ gyvas ar konfidencialus asmuo|gyvi ar konfidencialūs asmenys|gyvų ar konfidencialių asmenų ¦ dzīvas vai konfidenciālas personas|dzīva vai konfidenciāla persona|dzīvas vai konfidenciālas personas ¦ elav või konfidentsiaalne isik|elavat või konfidentsiaalset isikut
+=lieu de la famille ¦ šeimos vieta|šeimos vietos|šeimos vietų ¦ ģimenes vietas|ģimenes vieta|ģimenes vietas ¦ suguvõsa koht|suguvõsa kohta
+=couche importée ¦ importuotas sluoksnis|importuoti sluoksniai|importuotų sluoksnių ¦ importēti slāņi|importēts slānis|importēti slāņi ¦ imporditud kiht|imporditud kihti
+=couche ¦ sluoksnis|sluoksniai|sluoksnių ¦ slāņi|slānis|slāņi ¦ kiht|kihti
+{n} jours ({w} semaines) ¦ {n} d. ({w} sav.) ¦ {n} d. ({w} ned.) ¦ {n} päeva ({w} nädalat)
+Il faut environ {dur} pour aller de {from} à {to} ({how}, ≈ {what}). ¦ Kelionė {from} → {to} trunka maždaug {dur} ({how}, ≈ {what}). ¦ Ceļš {from} → {to} aizņem aptuveni {dur} ({how}, ≈ {what}). ¦ Teekond {from} → {to} võtab umbes {dur} ({how}, ≈ {what}).
+Il faut environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ {year} m. kelionė {from} → {to} trunka maždaug {dur} ({how}, ≈ {what}). ¦ {year}. gadā ceļš {from} → {to} aizņem aptuveni {dur} ({how}, ≈ {what}). ¦ Aastal {year} võtab teekond {from} → {to} umbes {dur} ({how}, ≈ {what}).
+Il fallait environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ {year} m. kelionė {from} → {to} trukdavo maždaug {dur} ({how}, ≈ {what}). ¦ {year}. gadā ceļš {from} → {to} aizņēma aptuveni {dur} ({how}, ≈ {what}). ¦ Aastal {year} võttis teekond {from} → {to} umbes {dur} ({how}, ≈ {what}).
+{km} sur l’eau ¦ {km} vandeniu ¦ {km} pa ūdeni ¦ {km} veeteed
+{km} de voie ¦ {km} geležinkeliu ¦ {km} pa dzelzceļu ¦ {km} raudteed
+{km} de route ¦ {km} keliu ¦ {km} pa ceļu ¦ {km} maanteed
+À pied ¦ Pėsčiomis ¦ Kājām ¦ Jalgsi
+à pied ¦ pėsčiomis ¦ kājām ¦ jalgsi
+À cheval ¦ Raiti ¦ Jāšus ¦ Ratsa
+à cheval ¦ raiti ¦ jāšus ¦ ratsa
+En diligence ¦ Diližansu ¦ Ar diližansu ¦ Postitõllaga
+en diligence ¦ diližansu ¦ ar diližansu ¦ postitõllaga
+Bateau (rivière) ¦ Laivas (upė) ¦ Laiva (upe) ¦ Paat (jõgi)
+en bateau sur la rivière ¦ laivu upe ¦ ar laivu pa upi ¦ paadiga mööda jõge
+Bateau (mer) ¦ Laivas (jūra) ¦ Kuģis (jūra) ¦ Laev (meri)
+en bateau ¦ laivu ¦ ar kuģi ¦ laevaga
+En train ¦ Traukiniu ¦ Ar vilcienu ¦ Rongiga
+en train ¦ traukiniu ¦ ar vilcienu ¦ rongiga
+4 à 5 km/h, 8 heures de marche par jour ¦ 4–5 km/h, 8 valandos ėjimo per dieną ¦ 4–5 km/h, 8 stundas iešanas dienā ¦ 4–5 km/h, 8 tundi kõndimist päevas
+au pas et au trot, en ménageant sa monture (un courrier qui change de cheval aux relais va deux fois plus loin) ¦ žingsniu ir risčia, tausojant žirgą (kurjeris, keičiantis žirgus pašto stotyse, nukeliauja dvigubai toliau) ¦ soļos un riksī, saudzējot zirgu (kurjers, kas maina zirgus pasta stacijās, nobrauc divreiz tālāk) ¦ sammu ja traavi, hobust säästes (postijaamades hobust vahetav kuller jõuab kaks korda kaugemale)
+coches puis diligences et malles-poste ; on roule de plus en plus la nuit ¦ karietos, vėliau diližansai ir pašto karietos; vis dažniau važiuojama ir naktį ¦ karietes, pēc tam diližansi un pasta karietes; arvien biežāk brauc arī naktī ¦ tõllad, hiljem postitõllad ja postivankrid; üha sagedamini sõidetakse ka öösel
+coche d’eau, halage, puis bateaux à vapeur ¦ upiniai keleiviniai laivai, vilkimas nuo kranto, vėliau garlaiviai ¦ upju pasažieru laivas, vilkšana no krasta, pēc tam tvaikoņi ¦ jõepraamid, vedamine kaldalt, hiljem aurulaevad
+à la voile jusque vers 1840, puis à la vapeur ¦ burėmis iki maždaug 1840 m., vėliau garu ¦ ar burām līdz aptuveni 1840. gadam, pēc tam ar tvaiku ¦ purjedega umbes 1840. aastani, siis auruga
+selon les lignes ouvertes : grandes lignes de 1840 à 1860, petites lignes jusque vers 1910 ¦ pagal atidarytas linijas: magistralinės linijos 1840–1860 m., vietinės – iki maždaug 1910 m. ¦ atkarībā no atvērtajām līnijām: maģistrālās līnijas no 1840. līdz 1860. gadam, vietējās līnijas līdz aptuveni 1910. gadam ¦ avatud liinide järgi: põhiliinid aastatel 1840–1860, kohalikud liinid umbes 1910. aastani
+par la route ¦ keliu ¦ pa ceļu ¦ maanteed mööda
+par la rivière ¦ upe ¦ pa upi ¦ jõge mööda
+par la mer ¦ jūra ¦ pa jūru ¦ meritsi
+par le rail ¦ geležinkeliu ¦ pa dzelzceļu ¦ raudteed mööda
+Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) et « L’identité de la France » (1986) : à pied, 30 à 40 km par jour ; à cheval, 50 à 60 km par jour pour un voyageur qui garde sa monture. ¦ Fernand Braudel, „Civilisation matérielle, économie et capitalisme“ (1979) ir „L’identité de la France“ (1986): pėsčiomis – 30–40 km per dieną; raiti – 50–60 km per dieną keliautojui, kuris keliauja tuo pačiu žirgu. ¦ Fernand Braudel, „Civilisation matérielle, économie et capitalisme“ (1979) un „L’identité de la France“ (1986): kājām — 30 līdz 40 km dienā; jāšus — 50 līdz 60 km dienā ceļotājam, kurš paliek ar savu zirgu. ¦ Fernand Braudel, „Civilisation matérielle, économie et capitalisme“ (1979) ja „L’identité de la France“ (1986): jalgsi 30–40 km päevas; ratsa 50–60 km päevas reisijal, kes sõidab sama hobusega.
+Règlements militaires (XVIIIᵉ–XIXᵉ s.) : l’étape ordinaire d’une troupe à pied est de 24 à 28 km par jour ; un marcheur seul fait davantage. ¦ Kariniai reglamentai (XVIII–XIX a.): įprastas pėsčiųjų kariuomenės dienos žygis – 24–28 km; vienas keliautojas nueina daugiau. ¦ Militārie reglamenti (18.–19. gs.): kājnieku vienības parastais dienas gājiens ir 24 līdz 28 km; viens gājējs noiet vairāk. ¦ Sõjaväemäärustikud (18.–19. sajand): jalaväeüksuse tavaline päevamarss on 24–28 km; üksik matkaja läbib rohkem.
+Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, et « Atlas de la Révolution française », t. 1 « Routes et communications » (1987) : les temps de parcours depuis Paris sont presque divisés par deux entre 1765 et 1780 (turgotines). ¦ Guy Arbellot, „La grande mutation des routes de France au milieu du XVIIIᵉ siècle“, Annales ESC, 1973, ir „Atlas de la Révolution française“, t. 1 „Routes et communications“ (1987): kelionės iš Paryžiaus trukmė 1765–1780 m. sumažėjo beveik perpus (turgotinos). ¦ Guy Arbellot, „La grande mutation des routes de France au milieu du XVIIIᵉ siècle“, Annales ESC, 1973, un „Atlas de la Révolution française“, 1. sēj. „Routes et communications“ (1987): ceļojuma laiks no Parīzes no 1765. līdz 1780. gadam samazinās gandrīz uz pusi (turgotīnes). ¦ Guy Arbellot, „La grande mutation des routes de France au milieu du XVIIIᵉ siècle“, Annales ESC, 1973, ja „Atlas de la Révolution française“, kd 1 „Routes et communications“ (1987): sõiduajad Pariisist vähenesid aastatel 1765–1780 peaaegu poole võrra (turgotiinid).
+Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995) : diligences des Messageries roulant jour et nuit vers 1830, malles-poste à près de 10 km/h vers 1845. ¦ Christophe Studeny, „L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle“ (Gallimard, 1995): Messageries diližansai, važiuojantys dieną ir naktį apie 1830 m., pašto karietos – beveik 10 km/h apie 1845 m. ¦ Christophe Studeny, „L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle“ (Gallimard, 1995): Messageries diližansi, kas brauc dienu un nakti ap 1830. gadu, pasta karietes ar gandrīz 10 km/h ap 1845. gadu. ¦ Christophe Studeny, „L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle“ (Gallimard, 1995): Messageries' postitõllad, mis sõitsid päeval ja öösel umbes 1830. aastal, postivankrid ligi 10 km/h umbes 1845. aastal.
+François Caron, « Histoire des chemins de fer en France », t. 1 (1997) : première ligne de voyageurs en 1837 (Paris – Saint-Germain), grandes lignes ouvertes de 1840 à 1860, environ 40 km/h de moyenne arrêts compris vers 1860. ¦ François Caron, „Histoire des chemins de fer en France“, t. 1 (1997): pirmoji keleivinė linija 1837 m. (Paryžius – Saint-Germain), magistralinės linijos atidarytos 1840–1860 m., apie 1860 m. vidutiniškai apie 40 km/h įskaitant sustojimus. ¦ François Caron, „Histoire des chemins de fer en France“, 1. sēj. (1997): pirmā pasažieru līnija 1837. gadā (Parīze – Saint-Germain), maģistrālās līnijas atvērtas no 1840. līdz 1860. gadam, ap 1860. gadu vidēji aptuveni 40 km/h, ieskaitot pieturas. ¦ François Caron, „Histoire des chemins de fer en France“, kd 1 (1997): esimene reisijateliin 1837. aastal (Pariis – Saint-Germain), põhiliinid avati aastatel 1840–1860, umbes 1860. aastal keskmiselt umbes 40 km/h koos peatustega.
+Traversées de l’Atlantique Nord : 30 à 45 jours à la voile ; 12 à 14 jours en vapeur vers 1860 ; 6 à 7 jours vers 1900 ; 4 à 5 jours pour les grands paquebots des années 1930. ¦ Šiaurės Atlanto perplaukimai: 30–45 dienos burėmis; 12–14 dienų garlaiviu apie 1860 m.; 6–7 dienos apie 1900 m.; 4–5 dienos didiesiems 4-ojo dešimtmečio laineriams. ¦ Ziemeļatlantijas šķērsojumi: 30 līdz 45 dienas ar burām; 12 līdz 14 dienas ar tvaikoni ap 1860. gadu; 6 līdz 7 dienas ap 1900. gadu; 4 līdz 5 dienas lielajiem 20. gs. 30. gadu laineriem. ¦ Põhja-Atlandi ületused: 30–45 päeva purjedega; 12–14 päeva aurulaevaga umbes 1860. aastal; 6–7 päeva umbes 1900. aastal; 4–5 päeva 1930. aastate suurtel ookeanilaevadel.
+Coches d’eau et halage : 20 à 40 km par jour en remontant, davantage en descendant ; premiers bateaux à vapeur sur la Saône et le Rhône vers 1830. ¦ Upiniai keleiviniai laivai ir vilkimas nuo kranto: 20–40 km per dieną prieš srovę, daugiau pasroviui; pirmieji garlaiviai Sonoje ir Ronoje apie 1830 m. ¦ Upju pasažieru laivas un vilkšana no krasta: 20 līdz 40 km dienā pret straumi, vairāk pa straumi; pirmie tvaikoņi uz Sonas un Ronas ap 1830. gadu. ¦ Jõepraamid ja vedamine kaldalt: 20–40 km päevas vastuvoolu, rohkem pärivoolu; esimesed aurulaevad Saône'il ja Rhône'il umbes 1830. aastal.
+réglé ¦ nustatyta ¦ iestatīts ¦ seatud
+Vitesse réglée par toi ¦ Greitį nustatei tu ¦ Ātrumu iestatīji tu ¦ Kiiruse seadsid sina
+Pas avant {year} ¦ Ne anksčiau nei {year} m. ¦ Ne agrāk kā {year}. gadā ¦ Mitte enne aastat {year}
+km/j ¦ km/d. ¦ km/d. ¦ km/p
+{name} : kilomètres par jour ¦ {name}: kilometrai per dieną ¦ {name}: kilometri dienā ¦ {name}: kilomeetrit päevas
+Détour {how} ¦ Aplinkkelis {how} ¦ Līkums {how} ¦ Kõrvalekalle {how}
+Vitesses de trajet enregistrées ¦ Kelionės greičiai išsaugoti ¦ Ceļojuma ātrumi saglabāti ¦ Teekonna kiirused salvestatud
+Vitesses remises comme au départ ¦ Greičiai atkurti į pradinius ¦ Ātrumi atjaunoti uz sākotnējiem ¦ Kiirused taastati algseks
+Tulle, Brive… ¦ Tulle, Brive… ¦ Tulle, Brive… ¦ Tulle, Brive…
+Paris… ¦ Paris… ¦ Paris… ¦ Paris…
+Un des deux lieux n’a pas de position sur la carte ({name}) : place-le d’abord. ¦ Viena iš dviejų vietų neturi padėties žemėlapyje ({name}): pirma ją pažymėk. ¦ Vienai no divām vietām nav pozīcijas kartē ({name}): vispirms to novieto. ¦ Ühel kahest kohast pole kaardil asukohta ({name}): paiguta see kõigepealt.
+À vol d’oiseau : <b>{km}</b> ¦ Tiesia linija: <b>{km}</b> ¦ Taisnā līnijā: <b>{km}</b> ¦ Linnulennult: <b>{km}</b>
+Je relis ses événements… ¦ Perskaitau jo įvykius… ¦ Pārlasu viņa notikumus… ¦ Loen tema sündmusi…
+Au total, environ <b>{km}</b> à vol d’oiseau d’un lieu de vie à l’autre ({n}). ¦ Iš viso maždaug <b>{km}</b> tiesia linija nuo vienos gyvenamosios vietos iki kitos ({n}). ¦ Kopā aptuveni <b>{km}</b> taisnā līnijā no vienas dzīvesvietas uz otru ({n}). ¦ Kokku umbes <b>{km}</b> linnulennult ühest elukohast teise ({n}).
+Distance parcourue ¦ Nukeliautas atstumas ¦ Veiktais attālums ¦ Läbitud vahemaa
+Par jour ¦ Per dieną ¦ Dienā ¦ Päevas
+⚙️ Vitesses et sources ¦ ⚙️ Greičiai ir šaltiniai ¦ ⚙️ Ātrumi un avoti ¦ ⚙️ Kiirused ja allikad
+Les vitesses suivent l’époque (ordres de grandeur pour la France et l’Europe de l’Ouest). Écris une autre distance par jour pour un moyen ; vide = selon l’époque. ¦ Greičiai priklauso nuo epochos (Prancūzijos ir Vakarų Europos dydžių eilės). Įrašyk kitą atstumą per dieną kuriai nors keliavimo būdui; tuščia – pagal epochą. ¦ Ātrumi atbilst laikmetam (lieluma kārtas Francijai un Rietumeiropai). Ieraksti citu attālumu dienā kādam pārvietošanās veidam; tukšs — pēc laikmeta. ¦ Kiirused järgivad ajastut (suurusjärgud Prantsusmaa ja Lääne-Euroopa jaoks). Kirjuta mõne liikumisviisi jaoks muu päevane vahemaa; tühi = ajastu järgi.
+Le détour : la route n’est jamais droite. 1,25 = 25 % de plus que la distance à vol d’oiseau. ¦ Aplinkkelis: kelias niekada nebūna tiesus. 1,25 = 25 % daugiau nei atstumas tiesia linija. ¦ Līkums: ceļš nekad nav taisns. 1,25 = par 25 % vairāk nekā attālums taisnā līnijā. ¦ Kõrvalekalle: tee pole kunagi sirge. 1,25 = 25 % rohkem kui linnulennuline vahemaa.
+📍 Entre deux lieux ¦ 📍 Tarp dviejų vietų ¦ 📍 Starp divām vietām ¦ 📍 Kahe koha vahel
+👤 Le long d’une vie ¦ 👤 Per visą gyvenimą ¦ 👤 Visas dzīves garumā ¦ 👤 Kogu elu jooksul
+Année du voyage ¦ Kelionės metai ¦ Ceļojuma gads ¦ Reisi aasta
+Distances et temps de trajet ¦ Atstumai ir kelionės trukmė ¦ Attālumi un ceļā pavadītais laiks ¦ Vahemaad ja sõiduajad
+Distances et temps de trajet… ¦ Atstumai ir kelionės trukmė… ¦ Attālumi un ceļā pavadītais laiks… ¦ Vahemaad ja sõiduajad…
+Choisis le lieu de départ et le lieu d’arrivée ¦ Pasirink išvykimo ir atvykimo vietas ¦ Izvēlies sākuma un galamērķa vietu ¦ Vali lähte- ja sihtkoht
+Choisis une personne pour suivre ses déplacements ¦ Pasirink asmenį, kad sektum jo keliones ¦ Izvēlies personu, lai sekotu tās pārvietojumiem ¦ Vali isik, et jälgida tema teekondi
+Pas de déplacement : il faut au moins deux lieux placés sur la carte ¦ Kelionių nėra: reikia bent dviejų žemėlapyje pažymėtų vietų ¦ Nav pārvietojumu: vajadzīgas vismaz divas kartē atzīmētas vietas ¦ Teekondi pole: vaja on vähemalt kaht kaardile paigutatud kohta
+Pas de déplacement entre deux lieux placés ¦ Nėra kelionės tarp dviejų pažymėtų vietų ¦ Nav pārvietojuma starp divām atzīmētām vietām ¦ Kahe paigutatud koha vahel pole teekonda
+🧭 Ses déplacements ¦ 🧭 Jo kelionės ¦ 🧭 Viņa pārvietojumi ¦ 🧭 Tema teekonnad
+🧭 Calculer un trajet… ¦ 🧭 Apskaičiuoti maršrutą… ¦ 🧭 Aprēķināt maršrutu… ¦ 🧭 Arvuta teekond…
+📜 Ancienne (parchemin) ¦ 📜 Sena (pergamentas) ¦ 📜 Sena (pergaments) ¦ 📜 Vana (pärgament)
+🎖 État-major (XIXᵉ) ¦ 🎖 Generalinio štabo (XIX a.) ¦ 🎖 Ģenerālštāba (19. gs.) ¦ 🎖 Kindralstaabi (19. saj.)
+🌙 Bleu nuit et or ¦ 🌙 Nakties mėlyna ir auksas ¦ 🌙 Nakts zils un zelts ¦ 🌙 Öösinine ja kuld
+🎯 Autour des lieux ¦ 🎯 Aplink vietas ¦ 🎯 Ap vietām ¦ 🎯 Kohtade ümber
+CARTE · À IMPRIMER ¦ ŽEMĖLAPIS · SPAUSDINTI ¦ KARTE · DRUKĀŠANAI ¦ KAART · PRINTIMISEKS
+Grande carte à imprimer ¦ Didelis spausdinamas žemėlapis ¦ Liela karte drukāšanai ¦ Suur prinditav kaart
+Grande carte à imprimer… ¦ Didelis spausdinamas žemėlapis… ¦ Liela karte drukāšanai… ¦ Suur prinditav kaart…
+Grande carte ¦ Didelis žemėlapis ¦ Liela karte ¦ Suur kaart
+Cartouche ¦ Kartušas ¦ Kartušs ¦ Kartušš
+Les BORIE ¦ BORIE šeima ¦ BORIE dzimta ¦ BORIE suguvõsa
+Ce qu’on met dessus ¦ Kas dedama ant jo ¦ Ko uz tās liek ¦ Mida sinna peale panna
+● Lieux de naissance ¦ ● Gimimo vietos ¦ ● Dzimšanas vietas ¦ ● Sünnikohad
+◆ Lieux de mariage ¦ ◆ Santuokos vietos ¦ ◆ Laulības vietas ¦ ◆ Abiellumiskohad
+✝ Lieux de décès ¦ ✝ Mirties vietos ¦ ✝ Nāves vietas ¦ ✝ Surmakohad
+Migrations (naissance → décès) ¦ Migracijos (gimimas → mirtis) ¦ Migrācijas (dzimšana → nāve) ¦ Rändamised (sünd → surm)
+➜ Migrations (naissance → décès) ¦ ➜ Migracijos (gimimas → mirtis) ¦ ➜ Migrācijas (dzimšana → nāve) ¦ ➜ Rändamised (sünd → surm)
+👤 Portraits en médaillon ¦ 👤 Portretai medalionuose ¦ 👤 Portreti medaljonos ¦ 👤 Portreed medaljonides
+Une branche (ses ancêtres seulement) ¦ Viena šaka (tik jos protėviai) ¦ Viens atzars (tikai tā senči) ¦ Üks haru (ainult selle esivanemad)
+Toute la famille ¦ Visa šeima ¦ Visa ģimene ¦ Kogu suguvõsa
+Habillage ¦ Apipavidalinimas ¦ Noformējums ¦ Kujundus
+Cartouche (titre, famille, dates) ¦ Kartušas (pavadinimas, šeima, datos) ¦ Kartušs (nosaukums, ģimene, datumi) ¦ Kartušš (pealkiri, suguvõsa, kuupäevad)
+Jamais de personne vivante ni de fiche confidentielle sur cette carte. Le fond est dessiné par l’app (Natural Earth, IGN), sans tuiles d’Internet : il reste net à toutes les tailles. ¦ Šiame žemėlapyje niekada nėra gyvų asmenų ar konfidencialių kortelių. Foną piešia programėlė (Natural Earth, IGN), be interneto plytelių: jis lieka ryškus bet kokio dydžio. ¦ Šajā kartē nekad nav dzīvu personu vai konfidenciālu kartīšu. Fonu zīmē lietotne (Natural Earth, IGN), bez interneta flīzēm: tas paliek ass jebkurā izmērā. ¦ Sellel kaardil pole kunagi elavaid isikuid ega konfidentsiaalseid kaarte. Tausta joonistab rakendus (Natural Earth, IGN) ilma internetipaanideta: see jääb teravaks igas suuruses.
+Les {name} ¦ {name} šeima ¦ {name} dzimta ¦ {name} suguvõsa
+Notre famille ¦ Mūsų šeima ¦ Mūsu ģimene ¦ Meie suguvõsa
+Les lieux de la famille ¦ Šeimos vietos ¦ Ģimenes vietas ¦ Suguvõsa kohad
+Fond : {src} ¦ Fonas: {src} ¦ Fons: {src} ¦ Taust: {src}
+Natural Earth (domaine public) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (viešoji sritis) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (publiskais īpašums) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (avalik omand) · IGN Admin Express (Licence Ouverte)
+Natural Earth (domaine public) ¦ Natural Earth (viešoji sritis) ¦ Natural Earth (publiskais īpašums) ¦ Natural Earth (avalik omand)
+dessin impossible ¦ nepavyko nupiešti ¦ zīmēšana nav iespējama ¦ joonistamine pole võimalik
+image trop grande pour ce navigateur ¦ vaizdas per didelis šiai naršyklei ¦ attēls ir pārāk liels šai pārlūkprogrammai ¦ pilt on selle brauseri jaoks liiga suur
+{n} laissées de côté ¦ Praleista: {n} ¦ Izlaistas: {n} ¦ Välja jäetud: {n}
+{n} laissée de côté ¦ Praleista: {n} ¦ Izlaistas: {n} ¦ Välja jäetud: {n}
+image : jusqu’à {w} × {h} px ({dpi} ppp) ¦ vaizdas: iki {w} × {h} px ({dpi} dpi) ¦ attēls: līdz {w} × {h} px ({dpi} dpi) ¦ pilt: kuni {w} × {h} px ({dpi} dpi)
+Aucun lieu placé sur la carte pour ces choix : place les lieux de la famille (fiche du lieu → position) ou coche d’autres événements. ¦ Pagal šiuos pasirinkimus žemėlapyje nepažymėta jokia vieta: pažymėk šeimos vietas (vietos kortelė → padėtis) arba pažymėk kitus įvykius. ¦ Šīm izvēlēm kartē nav atzīmēta neviena vieta: novieto ģimenes vietas (vietas kartīte → pozīcija) vai atzīmē citus notikumus. ¦ Nende valikute jaoks pole kaardile paigutatud ühtki kohta: paiguta suguvõsa kohad (koha kaart → asukoht) või märgi muud sündmused.
+Qualité ramenée à {dpi} ppp (taille de l’affiche, mémoire du navigateur). ¦ Kokybė sumažinta iki {dpi} dpi (plakato dydis, naršyklės atmintis). ¦ Kvalitāte samazināta līdz {dpi} dpi (plakāta izmērs, pārlūka atmiņa). ¦ Kvaliteet vähendati {dpi} dpi-ni (plakati suurus, brauseri mälu).
+{paper}, prêt pour l’imprimeur ¦ {paper}, paruošta spaustuvei ¦ {paper}, gatavs tipogrāfijai ¦ {paper}, trükikojaks valmis
+haute définition ¦ didelė raiška ¦ augsta izšķirtspēja ¦ kõrge eraldusvõime
+📍 Lieux de la famille en épingles ¦ 📍 Šeimos vietos smeigtukais ¦ 📍 Ģimenes vietas ar spraudītēm ¦ 📍 Suguvõsa kohad nööpnõeltena
+Glisse pour tourner, molette pour zoomer. Au clavier : ← → pour tourner, ↑ ↓ pour pencher, + et − pour zoomer, 0 pour revenir. ¦ Tempk, kad pasuktum, ratuku – didink. Klaviatūra: ← → pasukti, ↑ ↓ pakreipti, + ir − didinti, 0 grįžti. ¦ Velc, lai pagrieztu, ar ritenīti tuvini. Ar tastatūru: ← → pagriezt, ↑ ↓ sasvērt, + un − tuvināt, 0 atgriezties. ¦ Lohista pööramiseks, hiirerattaga suumi. Klaviatuuriga: ← → pööramiseks, ↑ ↓ kallutamiseks, + ja − suumimiseks, 0 tagasi.
+Relief en 3D ¦ Reljefas 3D ¦ Reljefs 3D ¦ Reljeef 3D-s
+Relief 3D ¦ 3D reljefas ¦ 3D reljefs ¦ 3D-reljeef
+Relief 3D… ¦ 3D reljefas… ¦ 3D reljefs… ¦ 3D-reljeef…
+CARTE · RELIEF ¦ ŽEMĖLAPIS · RELJEFAS ¦ KARTE · RELJEFS ¦ KAART · RELJEEF
+Exagération du relief ¦ Reljefo išryškinimas ¦ Reljefa pastiprinājums ¦ Reljeefi liialdus
+Choisis le lieu du centre (un lieu placé sur la carte) ¦ Pasirink centro vietą (žemėlapyje pažymėtą vietą) ¦ Izvēlies centra vietu (kartē atzīmētu vietu) ¦ Vali keskpunkti koht (kaardile paigutatud koht)
+Je lis les altitudes… ¦ Skaitau aukščius… ¦ Lasu augstumus… ¦ Loen kõrgusi…
+La carte du relief n’est pas installée : elle vient avec la Météo d’autrefois (Réglages → 🌦 Météo d’autrefois). ¦ Reljefo žemėlapis neįdiegtas: jis pateikiamas kartu su Praeities orais (Nustatymai → 🌦 Praeities orai). ¦ Reljefa karte nav instalēta: tā nāk kopā ar Senajiem laikapstākļiem (Iestatījumi → 🌦 Senie laikapstākļi). ¦ Reljeefikaart pole paigaldatud: see tuleb koos Mineviku ilmaga (Seaded → 🌦 Mineviku ilm).
+Pas d’altitude pour cette zone : la carte du relief couvre {n} pays ({list}). ¦ Šiai zonai aukščių nėra: reljefo žemėlapis apima šalių: {n} ({list}). ¦ Šai zonai nav augstumu: reljefa karte aptver valstis: {n} ({list}). ¦ Selle ala kohta kõrgusi pole: reljeefikaart katab riike: {n} ({list}).
+Pas d’altitude pour cette zone : la carte du relief couvre seulement quelques pays. ¦ Šiai zonai aukščių nėra: reljefo žemėlapis apima tik kelias šalis. ¦ Šai zonai nav augstumu: reljefa karte aptver tikai dažas valstis. ¦ Selle ala kohta kõrgusi pole: reljeefikaart katab ainult mõnda riiki.
+{km} de côté ¦ kraštinė {km} ¦ mala {km} ¦ külg {km}
+Altitudes : {min} m à {max} m ¦ Aukščiai: nuo {min} m iki {max} m ¦ Augstumi: no {min} m līdz {max} m ¦ Kõrgused: {min} m kuni {max} m
+{pct} % sans altitude (mer ou hors de la carte) ¦ {pct} % be aukščio (jūra arba už žemėlapio ribų) ¦ {pct} % bez augstuma (jūra vai ārpus kartes) ¦ {pct} % ilma kõrguseta (meri või kaardist väljas)
+{n} dans la zone ¦ Zonoje: {n} ¦ Zonā: {n} ¦ Alas: {n}
+Altitudes : Copernicus DEM GLO-90 (grille de 30″), © DLR / Airbus, Copernicus. ¦ Aukščiai: Copernicus DEM GLO-90 (30″ tinklelis), © DLR / Airbus, Copernicus. ¦ Augstumi: Copernicus DEM GLO-90 (30″ režģis), © DLR / Airbus, Copernicus. ¦ Kõrgused: Copernicus DEM GLO-90 (30″ ruudustik), © DLR / Airbus, Copernicus.
+Le moteur 3D ne se charge pas. ¦ 3D variklis neįsikrauna. ¦ 3D dzinējs neielādējas. ¦ 3D-mootor ei laadi.
+Ce navigateur ne sait pas dessiner en 3D (WebGL éteint). ¦ Ši naršyklė nemoka piešti 3D (WebGL išjungtas). ¦ Šī pārlūkprogramma neprot zīmēt 3D (WebGL izslēgts). ¦ See brauser ei oska 3D-s joonistada (WebGL on välja lülitatud).
+Ma couche ¦ Mano sluoksnis ¦ Mans slānis ¦ Minu kiht
+Mes couches ¦ Mano sluoksniai ¦ Mani slāņi ¦ Minu kihid
+Mes couches (dessiner) ¦ Mano sluoksniai (piešti) ¦ Mani slāņi (zīmēt) ¦ Minu kihid (joonista)
+Cacher mes couches ¦ Slėpti mano sluoksnius ¦ Paslēpt manus slāņus ¦ Peida minu kihid
+Clique sur la carte pour poser le point. Échap pour arrêter. ¦ Spustelėk žemėlapį, kad padėtum tašką. Esc – sustabdyti. ¦ Noklikšķini uz kartes, lai novietotu punktu. Esc — apturēt. ¦ Klõpsa kaardil punkti panemiseks. Esc peatab.
+Clique point par point. ¦ Spustelėk taškas po taško. ¦ Klikšķini punktu pa punktam. ¦ Klõpsa punkt punkti haaval.
+Entrée ou double-clic pour finir, ⌫ pour retirer le dernier, Échap pour arrêter. ¦ Enter arba dukart spustelėk – baigti, ⌫ – pašalinti paskutinį, Esc – sustabdyti. ¦ Enter vai dubultklikšķis — pabeigt, ⌫ — noņemt pēdējo, Esc — apturēt. ¦ Enter või topeltklõps lõpetab, ⌫ eemaldab viimase, Esc peatab.
+Couleur de la couche ¦ Sluoksnio spalva ¦ Slāņa krāsa ¦ Kihi värv
+Dessiner dans cette couche ¦ Piešti šiame sluoksnyje ¦ Zīmēt šajā slānī ¦ Joonista sellele kihile
+Aucune couche pour l’instant ¦ Kol kas sluoksnių nėra ¦ Pagaidām nav slāņu ¦ Kihte veel pole
+Importer des couches ¦ Importuoti sluoksnius ¦ Importēt slāņus ¦ Impordi kihid
+GeoJSON ou KML ¦ GeoJSON arba KML ¦ GeoJSON vai KML ¦ GeoJSON või KML
+Aucune forme lisible dans ce fichier. ¦ Šiame faile nėra nuskaitomų formų. ¦ Šajā failā nav nolasāmu formu. ¦ Selles failis pole loetavaid kujundeid.
+⬠ Nom de la zone ¦ ⬠ Zonos pavadinimas ¦ ⬠ Zonas nosaukums ¦ ⬠ Ala nimi
+〰 Nom de l’itinéraire ¦ 〰 Maršruto pavadinimas ¦ 〰 Maršruta nosaukums ¦ 〰 Teekonna nimi
+Facultatif. ¦ Neprivaloma. ¦ Nav obligāti. ¦ Valikuline.
+Les terres de la famille ¦ Šeimos žemės ¦ Dzimtas zemes ¦ Suguvõsa maad
+Le chemin de l’école ¦ Kelias į mokyklą ¦ Ceļš uz skolu ¦ Koolitee
+📝 La note ¦ 📝 Pastaba ¦ 📝 Piezīme ¦ 📝 Märkus
+📍 Nom du point ¦ 📍 Taško pavadinimas ¦ 📍 Punkta nosaukums ¦ 📍 Punkti nimi
+Ce que tu veux noter à cet endroit. ¦ Ką nori užsirašyti šioje vietoje. ¦ Ko vēlies pierakstīt šajā vietā. ¦ Mida tahad selle koha kohta märkida.
+Ici se trouvait le moulin ¦ Čia stovėjo malūnas ¦ Šeit atradās dzirnavas ¦ Siin asus veski
+〰 Itinéraire ¦ 〰 Maršrutas ¦ 〰 Maršruts ¦ 〰 Teekond
+⬠ Zone ¦ ⬠ Zona ¦ ⬠ Zona ¦ ⬠ Ala
+📍 Point ¦ 📍 Taškas ¦ 📍 Punkts ¦ 📍 Punkt
+📝 Note ¦ 📝 Pastaba ¦ 📝 Piezīme ¦ 📝 Märkus
+Zone ajoutée à « {name} » ¦ Zona pridėta į „{name}“ ¦ Zona pievienota slānim „{name}“ ¦ Ala lisatud kihile „{name}“
+Itinéraire ajouté à « {name} » ¦ Maršrutas pridėtas į „{name}“ ¦ Maršruts pievienots slānim „{name}“ ¦ Teekond lisatud kihile „{name}“
+Note ajoutée à « {name} » ¦ Pastaba pridėta į „{name}“ ¦ Piezīme pievienota slānim „{name}“ ¦ Märkus lisatud kihile „{name}“
+Point ajouté à « {name} » ¦ Taškas pridėtas į „{name}“ ¦ Punkts pievienots slānim „{name}“ ¦ Punkt lisatud kihile „{name}“
+{dur} aujourd’hui ¦ {dur} šiandien ¦ {dur} šodien ¦ {dur} tänapäeval
+« {name} » supprimé de la couche ¦ „{name}“ ištrintas iš sluoksnio ¦ „{name}“ dzēsts no slāņa ¦ „{name}“ kustutati kihilt
+« {name} » modifié ¦ „{name}“ pakeistas ¦ „{name}“ mainīts ¦ „{name}“ muudetud
+« Aucune » = la couleur de la couche ¦ „Jokia“ = sluoksnio spalva ¦ „Nav“ = slāņa krāsa ¦ „Puudub“ = kihi värv
+MES COUCHES ¦ MANO SLUOKSNIAI ¦ MANI SLĀŅI ¦ MINU KIHID
+Renommer la couche ¦ Pervadinti sluoksnį ¦ Pārdēvēt slāni ¦ Nimeta kiht ümber
+Couche renommée « {name} » ¦ Sluoksnis pervadintas „{name}“ ¦ Slānis pārdēvēts par „{name}“ ¦ Kiht nimetati ümber: „{name}“
+Exporter en GeoJSON ¦ Eksportuoti GeoJSON formatu ¦ Eksportēt GeoJSON formātā ¦ Ekspordi GeoJSON-vormingus
+Exporter en KML ¦ Eksportuoti KML formatu ¦ Eksportēt KML formātā ¦ Ekspordi KML-vormingus
+Supprimer la couche ¦ Ištrinti sluoksnį ¦ Dzēst slāni ¦ Kustuta kiht
+Couche « {name} » supprimée ¦ Sluoksnis „{name}“ ištrintas ¦ Slānis „{name}“ dzēsts ¦ Kiht „{name}“ kustutatud
+Couleur de la couche changée ¦ Sluoksnio spalva pakeista ¦ Slāņa krāsa mainīta ¦ Kihi värv muudetud
+Couche « {name} » créée ¦ Sluoksnis „{name}“ sukurtas ¦ Slānis „{name}“ izveidots ¦ Kiht „{name}“ loodud
+Toutes en GeoJSON ¦ Visi GeoJSON formatu ¦ Visi GeoJSON formātā ¦ Kõik GeoJSON-vormingus
+Toutes en KML ¦ Visi KML formatu ¦ Visi KML formātā ¦ Kõik KML-vormingus
+Zone ¦ Zona ¦ Zona ¦ Ala
+{n} Ko ¦ {n} KB ¦ {n} KB ¦ {n} KB
+Fond à comparer ¦ Palyginimo fonas ¦ Salīdzināmais fons ¦ Võrreldav taust
+Façon de comparer ¦ Palyginimo būdas ¦ Salīdzināšanas veids ¦ Võrdlemise viis
+▏ Trait ¦ ▏ Linija ¦ ▏ Līnija ¦ ▏ Joon
+◐ Transparence ¦ ◐ Skaidrumas ¦ ◐ Caurspīdīgums ¦ ◐ Läbipaistvus
+Transparence du fond à comparer ¦ Palyginimo fono skaidrumas ¦ Salīdzināmā fona caurspīdīgums ¦ Võrreldava tausta läbipaistvus
+Transparence en % ¦ Skaidrumas % ¦ Caurspīdīgums % ¦ Läbipaistvus %
+Trait de comparaison : glisse-le, ou flèches gauche et droite ¦ Palyginimo linija: tempk ją arba naudok rodykles kairėn ir dešinėn ¦ Salīdzināšanas līnija: velc to vai izmanto bultiņas pa kreisi un pa labi ¦ Võrdlusjoon: lohista seda või kasuta vasak- ja paremnoolt
+(approximatif) ¦ (apytiksliai) ¦ (aptuveni) ¦ (ligikaudne)
+Frontières ¦ Sienos ¦ Robežas ¦ Piirid
+🏛 Province : {name} ¦ 🏛 Provincija: {name} ¦ 🏛 Province: {name} ¦ 🏛 Provints: {name}
+🏛 Département de 1790 : {name} ¦ 🏛 1790 m. departamentas: {name} ¦ 🏛 1790. gada departaments: {name} ¦ 🏛 1790. aasta departemang: {name}
+Tracé approximatif, d’après les départements d’aujourd’hui ({list}). ¦ Apytikslis kontūras pagal dabartinius departamentus ({list}). ¦ Aptuvena kontūra pēc mūsdienu departamentiem ({list}). ¦ Ligikaudne piirjoon tänapäevaste departemangude järgi ({list}).
+Tracé approximatif, d’après les départements d’aujourd’hui. ¦ Apytikslis kontūras pagal dabartinius departamentus. ¦ Aptuvena kontūra pēc mūsdienu departamentiem. ¦ Ligikaudne piirjoon tänapäevaste departemangude järgi.
+🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes). ¦ 🏚 Išnykusios komunos: atsisiųsk vieną kartą (Nustatymai → 🏛 Senosios sienos). ¦ 🏚 Izzudušās komūnas: lejupielādē vienreiz (Iestatījumi → 🏛 Senās robežas). ¦ 🏚 Kadunud kommuunid: laadi üks kord alla (Seaded → 🏛 Vanad piirid).
+🏚 Zoome sur une région pour voir les communes disparues. ¦ 🏚 Priartink regioną, kad pamatytum išnykusias komunas. ¦ 🏚 Tuvini reģionu, lai redzētu izzudušās komūnas. ¦ 🏚 Suumi piirkonda, et näha kadunud kommuune.
+Pas français en 1789 : royaume de Sardaigne (français en 1860). L’ouest (Grasse) était en Provence. ¦ 1789 m. nebuvo prancūziškas: Sardinijos karalystė (prancūziškas nuo 1860 m.). Vakarinė dalis (Grasse) priklausė Provansui. ¦ 1789. gadā nebija Francijas: Sardīnijas karaliste (Francijas kopš 1860. gada). Rietumu daļa (Grasse) piederēja Provansai. ¦ 1789. aastal polnud Prantsuse oma: Sardiinia kuningriik (Prantsuse oma alates 1860). Lääneosa (Grasse) kuulus Provence'i.
+Pas française en 1789 : royaume de Sardaigne (française en 1860). ¦ 1789 m. nebuvo prancūziška: Sardinijos karalystė (prancūziška nuo 1860 m.). ¦ 1789. gadā nebija Francijas: Sardīnijas karaliste (Francijas kopš 1860. gada). ¦ 1789. aastal polnud Prantsuse oma: Sardiinia kuningriik (Prantsuse oma alates 1860).
+Pas français en 1789 : Avignon et le Comtat appartenaient au pape (réunis en 1791). ¦ 1789 m. nebuvo prancūziškas: Avinjonas ir Komtatas priklausė popiežiui (prijungti 1791 m.). ¦ 1789. gadā nebija Francijas: Aviņona un Komtā piederēja pāvestam (pievienotas 1791. gadā). ¦ 1789. aastal polnud Prantsuse oma: Avignon ja Comtat kuulusid paavstile (liideti 1791).
+Mulhouse était une république alliée des Suisses (réunie en 1798). ¦ Mulhouse buvo šveicarų sąjungininkė respublika (prijungta 1798 m.). ¦ Mulhouse bija ar šveiciešiem sabiedrota republika (pievienota 1798. gadā). ¦ Mulhouse oli šveitslaste liitlasvabariik (liideti 1798).
+Montbéliard appartenait au Wurtemberg (réuni en 1793). ¦ Montbéliard priklausė Viurtembergui (prijungtas 1793 m.). ¦ Montbéliard piederēja Virtembergai (pievienots 1793. gadā). ¦ Montbéliard kuulus Württembergile (liideti 1793).
+Coupé en Rhône et Loire en 1793. ¦ 1793 m. padalytas į Rhône ir Loire. ¦ 1793. gadā sadalīts Rhône un Loire. ¦ 1793 jagati Rhône'iks ja Loire'iks.
+Le département de Paris (puis de la Seine, 1795). ¦ Paryžiaus departamentas (vėliau Senos, 1795 m.). ¦ Parīzes departaments (vēlāk Sēnas, 1795). ¦ Pariisi departemang (hiljem Seine, 1795).
+Partagé en 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Padalytas 1968 m. (Yvelines, Essonne, Val-d’Oise…). ¦ Sadalīts 1968. gadā (Yvelines, Essonne, Val-d’Oise…). ¦ Jagati 1968 (Yvelines, Essonne, Val-d’Oise…).
+Le Tarn-et-Garonne n’existe qu’en 1808 (pris au Lot surtout, et à 5 départements voisins) : ici rangé avec le Lot. ¦ Tarn-et-Garonne atsirado tik 1808 m. (daugiausia iš Lot ir 5 kaimyninių departamentų): čia priskirtas Lot. ¦ Tarn-et-Garonne pastāv tikai kopš 1808. gada (galvenokārt no Lot un 5 kaimiņu departamentiem): šeit pievienots Lot. ¦ Tarn-et-Garonne tekkis alles 1808 (peamiselt Lot'st ja 5 naaberdepartemangust): siin arvatud Lot' alla.
+Un seul département en 1790 (coupé en deux de 1793 à 1811, puis en 1976). ¦ 1790 m. vienas departamentas (padalytas į du 1793–1811 m., vėliau 1976 m.). ¦ 1790. gadā viens departaments (sadalīts divos no 1793. līdz 1811. gadam, vēlāk 1976. gadā). ¦ 1790 üks departemang (jagatud kaheks 1793–1811, seejärel 1976).
+Devenu Maine-et-Loire en 1791. ¦ 1791 m. tapo Maine-et-Loire. ¦ 1791. gadā kļuva par Maine-et-Loire. ¦ 1791 sai nimeks Maine-et-Loire.
+Limites changées en 1871 (Meurthe-et-Moselle). ¦ Ribos pakeistos 1871 m. (Meurthe-et-Moselle). ¦ Robežas mainītas 1871. gadā (Meurthe-et-Moselle). ¦ Piire muudeti 1871 (Meurthe-et-Moselle).
+Limites changées en 1871. ¦ Ribos pakeistos 1871 m. ¦ Robežas mainītas 1871. gadā. ¦ Piire muudeti 1871.
+Belfort en faisait partie jusqu’en 1871. ¦ Belfort jam priklausė iki 1871 m. ¦ Belfort bija tā daļa līdz 1871. gadam. ¦ Belfort kuulus selle juurde kuni 1871.
+Devenu Alpes-de-Haute-Provence en 1970. ¦ 1970 m. tapo Alpes-de-Haute-Provence. ¦ 1970. gadā kļuva par Alpes-de-Haute-Provence. ¦ 1970 sai nimeks Alpes-de-Haute-Provence.
+Comté de Nice (royaume de Sardaigne) : pas français en 1790 ¦ Nicos grafystė (Sardinijos karalystė): 1790 m. nebuvo prancūziška ¦ Nicas grāfiste (Sardīnijas karaliste): 1790. gadā nebija Francijas ¦ Nizza krahvkond (Sardiinia kuningriik): 1790 polnud Prantsuse oma
+Savoie (royaume de Sardaigne) : pas française en 1790 ¦ Savoja (Sardinijos karalystė): 1790 m. nebuvo prancūziška ¦ Savoja (Sardīnijas karaliste): 1790. gadā nebija Francijas ¦ Savoia (Sardiinia kuningriik): 1790 polnud Prantsuse oma
+Avignon et Comtat Venaissin (au pape) : réunis en 1791 ¦ Avinjonas ir Comtat Venaissin (popiežiaus): prijungti 1791 m. ¦ Aviņona un Comtat Venaissin (pāvesta): pievienotas 1791. gadā ¦ Avignon ja Comtat Venaissin (paavsti valdused): liideti 1791
+Pas en France en 1790. ¦ 1790 m. nebuvo Prancūzijoje. ¦ 1790. gadā nebija Francijā. ¦ 1790 polnud Prantsusmaal.
+réunie en commune nouvelle ¦ sujungta į naują komuną ¦ apvienota jaunā komūnā ¦ liidetud uude kommuuni
+Réglages · Cartes ¦ Nustatymai · Žemėlapiai ¦ Iestatījumi · Kartes ¦ Seaded · Kaardid
+Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »). ¦ Provincijos, 1790 m. departamentai ir išnykusios komunos Žemėlapyje (mygtukas „🏛 Sienos“). ¦ Provinces, 1790. gada departamenti un izzudušās komūnas Kartē (poga „🏛 Robežas“). ¦ Provintsid, 1790. aasta departemangud ja kadunud kommuunid Kaardil (nupp „🏛 Piirid“).
+↗ Voir sur la Carte ¦ ↗ Žiūrėti Žemėlapyje ¦ ↗ Skatīt Kartē ¦ ↗ Vaata Kaardil
+🏛 Provinces (≈ 1789) et départements de 1790 ¦ 🏛 Provincijos (≈ 1789) ir 1790 m. departamentai ¦ 🏛 Provinces (≈ 1789) un 1790. gada departamenti ¦ 🏛 Provintsid (≈ 1789) ja 1790. aasta departemangud
+Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée. ¦ Pateikiami su programėle: nieko nereikia atsisiųsti. Tai <b>apytiksliai</b> kontūrai, sudaryti pagal dabartinius departamentus (kiekvienas departamentas priskirtas provincijai, kuri apima didžiausią jo dalį). Laisvo ir oficialaus tikrųjų jų ribų šaltinio nerasta. ¦ Nāk kopā ar lietotni: nekas nav jālejupielādē. Tās ir <b>aptuvenas</b> kontūras, veidotas pēc mūsdienu departamentiem (katrs departaments pievienots provincei, kas aptver tā lielāko daļu). Nav atrasts neviens brīvs un oficiāls to īsto robežu avots. ¦ Tulevad rakendusega kaasa: midagi pole vaja alla laadida. Need on <b>ligikaudsed</b> piirjooned, mis on tehtud tänapäevaste departemangude järgi (iga departemang on arvatud provintsi alla, mis katab selle suurima osa). Nende tegelike piiride vaba ja ametlikku allikat ei leitud.
+{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when} ¦ {size} ({bytes} baitų) · sha256 kontrolinė suma {hash}… · patikrinta: {when} ¦ {size} ({bytes} baiti) · sha256 nospiedums {hash}… · pārbaudīts: {when} ¦ {size} ({bytes} baiti) · sha256-räsi {hash}… · kontrollitud: {when}
+taille inconnue ¦ dydis nežinomas ¦ izmērs nav zināms ¦ suurus teadmata
+enfants ¦ vaikai ¦ bērni ¦ lapsed
+Grand-parent ¦ Senelis ar senelė ¦ Vecvecāks ¦ Vanavanem
+Parrain ou marraine ¦ Krikštatėvis ar krikštamotė ¦ Krusttēvs vai krustmāte ¦ Ristiisa või ristiema
+Frère ou sœur mort avant ¦ Anksčiau miręs brolis ar sesuo ¦ Agrāk miris brālis vai māsa ¦ Varem surnud vend või õde
+Choisi à la main ¦ Pasirinkta ranka ¦ Izvēlēts ar roku ¦ Valitud käsitsi
+choisi à la main ¦ pasirinkta ranka ¦ izvēlēts ar roku ¦ valitud käsitsi
+vérifié ¦ patikrinta ¦ pārbaudīts ¦ kontrollitud
+Corrigé ou confirmé à la main ¦ Pataisyta arba patvirtinta ranka ¦ Labots vai apstiprināts ar roku ¦ Parandatud või kinnitatud käsitsi
+Indice de confiance : {n} sur 100 ¦ Patikimumo indeksas: {n} iš 100 ¦ Ticamības indekss: {n} no 100 ¦ Usaldusväärsus: {n} / 100
+Ma branche paternelle ¦ Mano tėvo šaka ¦ Mans tēva atzars ¦ Minu isapoolne haru
+Ma branche maternelle ¦ Mano motinos šaka ¦ Mans mātes atzars ¦ Minu emapoolne haru
+D’où vient le prénom, par époque ¦ Iš kur kilęs vardas, pagal epochą ¦ No kurienes nāk vārds, pa laikmetiem ¦ Kust eesnimi pärineb, ajastute kaupa
+Enfants qui portent le prénom de leur parrain ou marraine ¦ Vaikai, gavę krikštatėvio ar krikštamotės vardą ¦ Bērni, kuriem ir krusttēva vai krustmātes vārds ¦ Lapsed, kes kannavad ristiisa või ristiema nime
+% des enfants qui ont un parrain ou une marraine notés ¦ % vaikų, kurių krikštatėvis ar krikštamotė užrašyti ¦ % bērnu, kuriem ir pierakstīts krusttēvs vai krustmāte ¦ % lastest, kellel on ristiisa või ristiema märgitud
+Tous les prénoms ¦ Visi vardai ¦ Visi vārdi ¦ Kõik eesnimed
+Pour chaque enfant, d’où vient probablement son prénom : parrain, marraine, grand-parent, frère ou sœur mort avant (prénom « relevé »), oncle, tante, saint du jour. Chaque piste a sa règle et un indice de confiance ; tu peux la corriger sur la fiche ou ici avec ⋯. Sans les personnes en vie ni les fiches confidentielles. ¦ Kiekvienam vaikui – iš kur greičiausiai kilęs jo vardas: krikštatėvis, krikštamotė, senelis ar senelė, anksčiau miręs brolis ar sesuo („perimtas“ vardas), dėdė, teta, dienos šventasis. Kiekviena užuomina turi savo taisyklę ir patikimumo indeksą; ją gali pataisyti kortelėje arba čia su ⋯. Be gyvų asmenų ir konfidencialių kortelių. ¦ Katram bērnam — no kurienes, visticamāk, nāk viņa vārds: krusttēvs, krustmāte, vecvecāks, agrāk miris brālis vai māsa („pārņemts“ vārds), tēvocis, tante, dienas svētais. Katram pavedienam ir savs noteikums un ticamības indekss; vari to labot kartītē vai šeit ar ⋯. Bez dzīvām personām un konfidenciālām kartītēm. ¦ Iga lapse kohta, kust tema eesnimi tõenäoliselt pärineb: ristiisa, ristiema, vanavanem, varem surnud vend või õde („üle võetud“ nimi), onu, tädi, päeva pühak. Igal vihjel on oma reegel ja usaldusväärsus; saad seda parandada kaardil või siin ⋯ abil. Ilma elavate isikute ja konfidentsiaalsete kaartideta.
+prénoms expliqués sur {n} ¦ paaiškinti vardai iš {n} ¦ izskaidroti vārdi no {n} ¦ seletatud eesnime {n}-st
+prénom expliqué sur {n} ¦ paaiškintas vardas iš {n} ¦ izskaidrots vārds no {n} ¦ seletatud eesnimi {n}-st
+des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total}) ¦ vaikų, kurių krikštatėvis ar krikštamotė užrašyti, gavo jo vardą ({n} iš {total}) ¦ bērnu, kuriem pierakstīts krusttēvs vai krustmāte, nes viņa vārdu ({n} no {total}) ¦ lastest, kellel on ristiisa või ristiema märgitud, kannab tema nime ({n} / {total})
+🌳 Les flèches de transmission ¦ 🌳 Perdavimo rodyklės ¦ 🌳 Nodošanas bultas ¦ 🌳 Edasiandmise nooled
+Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche. ¦ Viena eilutė kiekvienam vardui, metai skersai: kiekviena rodyklė eina nuo perduodančio asmens prie vaiko. Spustelėk apskritimą, kad atidarytum kortelę. ¦ Viena rinda katram vārdam, gadi šķērsām: katra bulta iet no personas, kas nodod, pie bērna. Noklikšķini uz apļa, lai atvērtu kartīti. ¦ Üks rida eesnime kohta, aastad risti: iga nool läheb edasiandjalt lapsele. Klõpsa ringil kaardi avamiseks.
+Chaque enfant ¦ Kiekvienas vaikas ¦ Katrs bērns ¦ Iga laps
+Prénom reçu de ¦ Vardą gavo iš ¦ Vārdu saņēmis no ¦ Nime sai
+La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres. ¦ Sąraše daugiausia vaikų: {n} (pirmiausia dažniausiai perduodami vardai); viršuje esantys skaičiai apima visus. Pasirink vardą, kad pamatytum kitus. ¦ Sarakstā bērnu ne vairāk kā: {n} (vispirms visbiežāk nodotie vārdi); augšējie skaitļi ietver visus. Izvēlies vārdu, lai redzētu pārējos. ¦ Loend lõpeb {n} lapsega (kõige sagedamini edasi antud eesnimed enne); ülemised arvud hõlmavad kõiki. Vali eesnimi, et näha teisi.
+Aucun enfant prénommé {name} ¦ Nėra vaiko, vardu {name} ¦ Nav neviena bērna ar vārdu {name} ¦ Pole ühtki last nimega {name}
+Rien à comparer pour l’instant ¦ Kol kas nėra ką palyginti ¦ Pagaidām nav ko salīdzināt ¦ Veel pole midagi võrrelda
+Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême). ¦ Reikia vaikų, susietų su tėvais (arba krikštatėvių ir krikštamočių, užrašytų kaip gimimo ar krikšto liudytojai „krikštatėvis“, „krikštamotė“). ¦ Vajadzīgi bērni, kas sasaistīti ar vecākiem (vai krusttēvi un krustmātes, kas pierakstīti kā dzimšanas vai kristību liecinieki „krusttēvs“, „krustmāte“). ¦ Vaja on vanematega seotud lapsi (või ristivanemaid, kes on märgitud sünni või ristimise tunnistajateks „ristiisa“, „ristiema“).
+Les plus sûrs d’abord ¦ Pirmiausia patikimiausi ¦ Vispirms drošākie ¦ Kõige kindlamad enne
+Les moins sûrs d’abord ¦ Pirmiausia mažiausiai patikimi ¦ Vispirms mazāk drošie ¦ Kõige ebakindlamad enne
+Aucune transmission entre deux fiches datées (le saint du jour n’a pas de flèche). ¦ Nėra perdavimo tarp dviejų datuotų kortelių (dienos šventasis neturi rodyklės). ¦ Nav nodošanas starp divām datētām kartītēm (dienas svētajam nav bultas). ¦ Kahe dateeritud kaardi vahel pole edasiandmist (päeva pühakul pole noolt).
+{name} ({year}) : ouvrir la fiche ¦ {name} ({year}): atidaryti kortelę ¦ {name} ({year}): atvērt kartīti ¦ {name} ({year}): ava kaart
+Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul. ¦ Dažniausiai perduodami vardai ({n}); pasirink vardą lauke „Vardas“, kad matytum jį vieną. ¦ Visbiežāk nodotie vārdi ({n}); izvēlies vārdu laukā „Vārds“, lai redzētu tikai to. ¦ Kõige sagedamini edasi antud eesnimed ({n}); vali eesnimi väljal „Eesnimi“, et näha ainult seda.
+Flèches de transmission des prénoms ¦ Vardų perdavimo rodyklės ¦ Vārdu nodošanas bultas ¦ Eesnimede edasiandmise nooled
+C’est bien ça ¦ Taip, tai tas ¦ Jā, tieši tā ¦ Just nii
+Garder cette piste comme sûre ¦ Laikyti šią užuominą patikima ¦ Uzskatīt šo pavedienu par drošu ¦ Pea seda vihjet kindlaks
+Prénom reçu de {name} : confirmé. ¦ Vardas gautas iš {name}: patvirtinta. ¦ Vārds saņemts no {name}: apstiprināts. ¦ Nimi saadud: {name} — kinnitatud.
+Ce n’est pas ça ¦ Ne tai ¦ Nav tā ¦ Pole see
+Écarter cette piste ¦ Atmesti šią užuominą ¦ Noraidīt šo pavedienu ¦ Lükka see vihje tagasi
+Piste écartée. ¦ Užuomina atmesta. ¦ Pavediens noraidīts. ¦ Vihje tagasi lükatud.
+Plutôt : {who} ¦ Veikiau: {who} ¦ Drīzāk: {who} ¦ Pigem: {who}
+Prénom reçu de {name}. ¦ Vardas gautas iš {name}. ¦ Vārds saņemts no {name}. ¦ Nimi saadud: {name}.
+Celle dont il ou elle tient son prénom ¦ Asmuo, iš kurio jis ar ji gavo vardą ¦ Persona, no kuras viņš vai viņa saņēma vārdu ¦ Isik, kellelt ta oma nime sai
+De qui tient-il son prénom ? ¦ Iš ko jis gavo vardą? ¦ No kā viņš saņēma vārdu? ¦ Kellelt ta oma nime sai?
+la personne choisie ¦ pasirinktas asmuo ¦ izvēlētā persona ¦ valitud isik
+Oublier les corrections à la main ¦ Pamiršti rankinius pataisymus ¦ Aizmirst manuālos labojumus ¦ Unusta käsitsi parandused
+Corrections oubliées : le calcul de l’app revient. ¦ Pataisymai pamiršti: grįžta programėlės skaičiavimas. ¦ Labojumi aizmirsti: atgriežas lietotnes aprēķins. ¦ Parandused unustatud: rakenduse arvutus tuleb tagasi.
+Voir la transmission de ce prénom ¦ Žiūrėti šio vardo perdavimą ¦ Skatīt šī vārda nodošanu ¦ Vaata selle eesnime edasiandmist
+Prénom reçu de… ¦ Vardas gautas iš… ¦ Vārds saņemts no… ¦ Nimi saadud…
+saint du jour : ¦ dienos šventasis: ¦ dienas svētais: ¦ päeva pühak:
+Prénom reçu de {who} ¦ Vardas gautas iš {who} ¦ Vārds saņemts no {who} ¦ Nimi saadud: {who}
+indice {n} sur 100 ¦ indeksas {n} iš 100 ¦ indekss {n} no 100 ¦ indeks {n} / 100
+Ta famille ¦ Tavo šeima ¦ Tava ģimene ¦ Sinu suguvõsa
+France ≈ ¦ Prancūzija ≈ ¦ Francija ≈ ¦ Prantsusmaa ≈
+personnes {who} ¦ asmenys {who} ¦ personas {who} ¦ isikud {who}
+pas de données ¦ duomenų nėra ¦ nav datu ¦ andmed puuduvad
+Moins de 10 : à lire avec prudence ¦ Mažiau nei 10: vertinti atsargiai ¦ Mazāk nekā 10: lasīt piesardzīgi ¦ Alla 10: loe ettevaatlikult
+Aucune époque dans cette période ¦ Šiame laikotarpyje nėra epochos ¦ Šajā periodā nav neviena laikmeta ¦ Selles ajavahemikus pole ühtki ajastut
+Les repères français vont de 1686 à 1999 : élargis la période. ¦ Prancūzijos atskaitos duomenys apima 1686–1999 m.: išplėsk laikotarpį. ¦ Francijas atskaites dati aptver 1686.–1999. gadu: paplašini periodu. ¦ Prantsusmaa võrdlusandmed hõlmavad aastaid 1686–1999: laienda ajavahemikku.
+Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles. ¦ Tavo šeimos vidurkiai šalia tos pačios epochos Prancūzijos vidurkių (≈ – dydžių eilės su šaltiniu). Šeimoje būna keliasdešimt dokumentų: palyginimas skaitytinas apytiksliai. Be gyvų asmenų ir konfidencialių kortelių. ¦ Tavas ģimenes vidējie rādītāji blakus tā paša laikmeta Francijas vidējiem (≈ — lieluma kārtas ar avotu). Ģimenei ir daži desmiti dokumentu: salīdzinājums lasāms aptuveni. Bez dzīvām personām un konfidenciālām kartītēm. ¦ Sinu suguvõsa keskmised sama ajastu Prantsusmaa keskmiste kõrval (≈ — suurusjärgud koos allikaga). Suguvõsal on mõnikümmend dokumenti: võrdlust loe üldjoontes. Ilma elavate isikute ja konfidentsiaalsete kaartideta.
+📚 D’où viennent les chiffres de la France ¦ 📚 Iš kur Prancūzijos skaičiai ¦ 📚 No kurienes nāk Francijas skaitļi ¦ 📚 Kust pärinevad Prantsusmaa arvud
+TA FAMILLE ET LA FRANCE ¦ TAVO ŠEIMA IR PRANCŪZIJA ¦ TAVA ĢIMENE UN FRANCIJA ¦ SINU SUGUVÕSA JA PRANTSUSMAA
+Lecture impossible. ¦ Nepavyko perskaityti. ¦ Nolasīt nav iespējams. ¦ Lugeda pole võimalik.
+Simple ¦ Paprasta ¦ Vienkāršs ¦ Lihtne
+Scientifique ¦ Mokslinė ¦ Zinātniskais ¦ Teaduslik
+Ruban ¦ Juosta ¦ Lente ¦ Lint
+RUBAN ¦ JUOSTA ¦ LENTE ¦ LINT
+chiffres ¦ skaitmenys ¦ cipari ¦ numbrid
+ex. mariage-1925 ¦ pvz., santuoka-1925 ¦ piem., laulība-1925 ¦ nt abielu-1925
+Janv. ¦ Saus. ¦ Janv. ¦ Jaan.
+Juil. ¦ Liep. ¦ Jūl. ¦ Juuli
+Sept. ¦ Rugs. ¦ Sept. ¦ Sept.
+Oct. ¦ Spal. ¦ Okt. ¦ Okt.
+Nov. ¦ Lapkr. ¦ Nov. ¦ Nov.
+Archive ¦ Archyvas ¦ Arhīvs ¦ Arhiiv
+{n} vie à raconter : {list} ¦ Gyvenimų papasakoti: {n} — {list} ¦ Stāstāmās dzīves: {n} — {list} ¦ Jutustatavaid elusid: {n} — {list}
+JEU ¦ ŽAIDIMAS ¦ SPĒLE ¦ MÄNG
+côté ¦ pusė ¦ puse ¦ pool
+Comparer avec… ¦ Palyginti su… ¦ Salīdzināt ar… ¦ Võrdle…
+Choisir la personne… ¦ Pasirinkti asmenį… ¦ Izvēlēties personu… ¦ Vali isik…
+Âge moyen au premier mariage ¦ Vidutinis amžius per pirmąją santuoką ¦ Vidējais vecums pirmajā laulībā ¦ Keskmine vanus esimesel abiellumisel
+L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues). ¦ Kiekvieno sutuoktinio amžius per pirmąją santuoką (žinomos gimimo ir santuokos datos). ¦ Katra laulātā vecums pirmajā laulībā (zināms dzimšanas un laulības datums). ¦ Iga abikaasa vanus esimesel abiellumisel (sünni- ja abiellumiskuupäev teada).
+Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros. ¦ Žinomų vaikų skaičius poroms, susituokusioms per laikotarpį (poros, turinčios bent vieną vaiką tavo bazėje). Prancūzijoje: vaikų skaičius vienai moteriai (gimstamumo rodiklis), lyginamas tik apytiksliai. ¦ Zināmo bērnu skaits pāriem, kas apprecējušies šajā periodā (pāri, kuriem tavā datubāzē ir vismaz viens bērns). Francijā: bērnu skaits uz vienu sievieti (dzimstības rādītājs), salīdzināms tikai aptuveni. ¦ Teadaolevate laste arv ajavahemikul abiellunud paaridel (paarid, kellel on sinu andmebaasis vähemalt üks laps). Prantsusmaal: laste arv naise kohta (sündimuskordaja), mis on võrreldav ainult üldjoontes.
+baby-boom (1946-1964) ¦ kūdikių bumas (1946-1964) ¦ bēbīšu bums (1946-1964) ¦ beebibuum (1946-1964)
+Mortalité infantile (morts avant 1 an) ¦ Kūdikių mirtingumas (mirę iki 1 m.) ¦ Zīdaiņu mirstība (miruši līdz 1 gada vecumam) ¦ Imikusuremus (surnud enne 1. eluaastat)
+Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas. ¦ Iš 1 000 per laikotarpį gimusių vaikų, kurių mirtis žinoma (arba kurie išgyveno), kiek mirė iki 1 metų. Mirusių kūdikių medžiuose dažnai trūksta: šeimos skaičius dažnai per mažas. ¦ No 1 000 šajā periodā dzimušiem bērniem, kuru nāve ir zināma (vai kuri izdzīvoja), cik nomira līdz 1 gada vecumam. Mirušo zīdaiņu dzimtas kokos bieži trūkst: ģimenes skaitlis bieži ir par zemu. ¦ 1 000 ajavahemikul sündinud lapse kohta, kelle surm on teada (või kes jäid ellu), mitu suri enne 1. eluaastat. Surnud imikud puuduvad sugupuudes sageli: suguvõsa arv on sageli liiga madal.
+Espérance de vie à la naissance ¦ Vidutinė tikėtina gyvenimo trukmė gimus ¦ Paredzamais mūža ilgums dzimšanas brīdī ¦ Oodatav eluiga sünnihetkel
+L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut. ¦ Vidutinis per laikotarpį gimusių asmenų mirties amžius (žinomas gimimas ir mirtis). Mirusių kūdikių medžiuose dažnai trūksta: šeimos skaičius dažnai per didelis. ¦ Šajā periodā dzimušo personu vidējais nāves vecums (zināma dzimšana un nāve). Mirušo zīdaiņu dzimtas kokos bieži trūkst: ģimenes skaitlis bieži ir par augstu. ¦ Ajavahemikul sündinud isikute keskmine surmavanus (sünd ja surm teada). Surnud imikud puuduvad sugupuudes sageli: suguvõsa arv on sageli liiga kõrge.
+Savoir signer son acte de mariage ¦ Mokėjo pasirašyti savo santuokos dokumentą ¦ Prata parakstīt savu laulības dokumentu ¦ Oskas oma abielukandele alla kirjutada
+La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour. ¦ Jaunikių ir nuotakų, pasirašiusių savo santuokos dokumentą, dalis (santuokų langelis „pasirašė“). Prancūzijoje: išmatuota nurodytais metais; tavo šeima: aplinkiniais metais. ¦ Līgavaiņu un līgavu daļa, kas parakstīja savu laulības dokumentu (laulību lodziņš „parakstījās“). Francijā: mērīts norādītajos gados; tava ģimene: tuvākajos gados. ¦ Abielukandele alla kirjutanud peigmeeste ja pruutide osakaal (abielude lahter „kirjutas alla“). Prantsusmaal: mõõdetud näidatud aastatel; sinu suguvõsa: lähedastel aastatel.
+Part des métiers de la terre (agriculture, forêt) ¦ Žemės darbų profesijų dalis (žemės ūkis, miškai) ¦ Zemes darbu profesiju daļa (lauksaimniecība, mežs) ¦ Maatööga seotud ametite osakaal (põllumajandus, mets)
+Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Tarp šeimos asmenų, kurie tuo metu buvo darbingo amžiaus (20–60 m.) ir kurių profesija atpažinta, – žemės ir miškų profesijų dalis (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ No ģimenes personām, kas tajā laikā bija darbspējīgā vecumā (20–60 gadi) un kuru profesija ir atpazīta, — zemes un meža profesiju daļa (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Suguvõsa isikute seas, kes olid sel ajal tööeas (20–60 aastat) ja kelle amet on tuvastatud, maa- ja metsatööga seotud ametite osakaal (laboureur, cultivateur, journalier agricole, bûcheron…).
+Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France. ¦ Suapvalintos dydžių eilės, visada su „≈“ priekyje. Intervalas, kai tyrimai pateikia šiek tiek skirtingus skaičius pagal imtį ar metus. Skaičius, dėl kurio nebuvo tikrumo, neįrašytas: geriau tuščias langelis nei išgalvotas skaičius. Šeimos vidurkiai (keliasdešimt dokumentų) su visos Prancūzijos vidurkiais lyginami tik apytiksliai. ¦ Noapaļotas lieluma kārtas, vienmēr ar „≈“ priekšā. Diapazons, ja pētījumi dod nedaudz atšķirīgus skaitļus atkarībā no izlases vai gadiem. Skaitlis, par kuru nebija pārliecības, nav ierakstīts: labāk tukšs lodziņš nekā izdomāts skaitlis. Ģimenes vidējie rādītāji (daži desmiti dokumentu) ar visas Francijas rādītājiem salīdzināmi tikai aptuveni. ¦ Ümardatud suurusjärgud, alati „≈“-ga. Vahemik, kui uuringud annavad valimi või aastate järgi veidi erinevaid arve. Arvu, milles polnud kindlust, pole lisatud: parem tühi lahter kui väljamõeldud arv. Suguvõsa keskmisi (mõnikümmend dokumenti) saab kogu Prantsusmaa omadega võrrelda ainult üldjoontes.
+nées entre 1846 et 1886 ¦ gimusios 1846–1886 m. ¦ dzimušas no 1846. līdz 1886. gadam ¦ sündinud aastatel 1846–1886
+{type} publiée par {from} ¦ {type}, paskelbė {from} ¦ {type}, publicējis {from} ¦ {type}, avaldaja {from}
+LCNDA (fichiers livrés avec l’app) ¦ LCNDA (failai, pateikiami su programėle) ¦ LCNDA (faili, kas nāk kopā ar lietotni) ¦ LCNDA (rakendusega kaasas olevad failid)
+Événements survenus aux communes depuis 1943 (INSEE) ¦ Komunų įvykiai nuo 1943 m. (INSEE) ¦ Notikumi komūnās kopš 1943. gada (INSEE) ¦ Kommuunide sündmused alates 1943 (INSEE)
+Communes depuis 1943 (INSEE) ¦ Komunos nuo 1943 m. (INSEE) ¦ Komūnas kopš 1943. gada (INSEE) ¦ Kommuunid alates 1943 (INSEE)
