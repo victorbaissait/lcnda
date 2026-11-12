@@ -6,11 +6,12 @@
  *   t('Fiche', {ctx: 'onglet'})            → clé « onglet|Fiche » quand un même mot se traduit autrement (repli : « Fiche »)
  *   plural(3, 'personne')                  → « 3 personnes » / « 3 people » / « 3 osoby » (Intl.PluralRules, 0 et 1 au singulier en français)
  *   fmtNumber(1234.5), fmtDate(date, opts) → Intl selon la langue (jamais pour les dates généalogiques : elles suivent C4)
- * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr), fabriqués par scripts/i18n-build.js depuis
+ * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb), fabriqués par scripts/i18n-build.js depuis
  * assets/i18n/src/*.tsv (et assets/i18n/src/nord/*.tsv pour cs, sv, da ; assets/i18n/src/nord2/*.tsv pour sk, nb ;
  * assets/i18n/src/nord3/*.tsv pour ro ; assets/i18n/src/nord4/*.tsv pour fi, hu ;
  * assets/i18n/src/nord5/*.tsv pour hr, sl ; assets/i18n/src/nord6/*.tsv pour lt, lv, et ;
- * assets/i18n/src/nord7/*.tsv pour is ; assets/i18n/src/nord8/*.tsv pour tr).
+ * assets/i18n/src/nord7/*.tsv pour is ; assets/i18n/src/nord8/*.tsv pour tr ;
+ * assets/i18n/src/nord9/*.tsv pour lb).
  * Valeur = texte, ou formes de pluriel {zero, one, two, few, many, other}.
  *
  * En français, RIEN ne change : t() rend le texte tel quel, plural() est celui d'avant, aucune page n'est retouchée.
@@ -49,10 +50,12 @@
         {code: 'et', name: 'Eesti', flag: '🇪🇪', locale: 'et-EE'},
         {code: 'is', name: 'Íslenska', flag: '🇮🇸', locale: 'is-IS'},
         {code: 'tr', name: 'Türkçe', flag: '🇹🇷', locale: 'tr-TR'},
+        // luxembourgeois : beaucoup de navigateurs n’ont pas ses dates et ses nombres (Intl) → repli sur l’allemand du Luxembourg, puis le français du Luxembourg
+        {code: 'lb', name: 'Lëtzebuergesch', flag: '🇱🇺', locale: 'lb-LU', intlFallback: ['de-LU', 'fr-LU']},
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 22; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 23; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -67,7 +70,22 @@
         return 'fr';
     }
     const info = c => LANGS.find(l => l.code === c) || LANGS[0];
-    const locale = () => info(lang).locale;
+    /** la locale donnée à Intl (dates, nombres, pluriels) : celle de la langue, sinon son repli si le navigateur ne la connaît pas (lb-LU → de-LU → fr-LU) */
+    const intlCache = new Map();
+    function intlLocale(code) {
+        const l = info(code);
+        if (!l.intlFallback) return l.locale;
+        if (!intlCache.has(code)) {
+            let pick = l.locale;
+            try {
+                const ok = x => Intl.DateTimeFormat.supportedLocalesOf([x]).length > 0 && Intl.NumberFormat.supportedLocalesOf([x]).length > 0;
+                if (!ok(l.locale)) pick = l.intlFallback.find(ok) || l.intlFallback[0];
+            } catch (_) { pick = l.intlFallback[0]; }
+            intlCache.set(code, pick);
+        }
+        return intlCache.get(code);
+    }
+    const locale = () => intlLocale(lang);
 
     /* ═════ Charger un dictionnaire ═════ */
     function compile(d) {
@@ -114,7 +132,7 @@
     /* ═════ t() ═════ */
     const pluralRules = new Map();
     function category(n, code = lang) {
-        if (!pluralRules.has(code)) { try { pluralRules.set(code, new Intl.PluralRules(info(code).locale)); } catch (_) { pluralRules.set(code, null); } }
+        if (!pluralRules.has(code)) { try { pluralRules.set(code, new Intl.PluralRules(intlLocale(code))); } catch (_) { pluralRules.set(code, null); } }
         const r = pluralRules.get(code);
         if (!r) return Math.abs(n) === 1 ? 'one' : 'other';
         return r.select(Math.abs(Number(n) || 0));
@@ -354,7 +372,7 @@
     }
     function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])); }
 
-    /** menu des 23 langues (nom dans sa langue + drapeau + code) */
+    /** menu des 24 langues (nom dans sa langue + drapeau + code) */
     function selectHtml(attrs = '') {
         return `<select ${attrs} data-i18n-off>${LANGS.map(l => `<option value="${l.code}" ${l.code === lang ? 'selected' : ''}>${l.flag} ${l.name} (${l.code.toUpperCase()})</option>`).join('')}</select>`;
     }
@@ -379,7 +397,7 @@
 
     return {
         LANGS, CODES, KEY, COOKIE, AI_NOTE, VERSION,
-        get lang() { return lang; }, getLang: () => lang, storedLang, locale, info,
+        get lang() { return lang; }, getLang: () => lang, storedLang, locale, intlLocale, info,
         t, has, plural, frPlural, category, fmtNumber, fmtDate, fmtTime,
         setLang, provide, load, translateText, translate: walk, revert,
         banner, setBannerClosed, bannerClosed, report, selectHtml,

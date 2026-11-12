@@ -3,7 +3,7 @@
 À suivre pour toute traduction de LCNDA (mode d’emploi : `docs/I18N.md`). Un mot de l’app se traduit **toujours de la
 même façon** dans une langue. Ton : on tutoie partout (en : *you* ; es : *tú* ; de : *du* ; it : *tu* ; pt : *tu* ;
 pl : *ty* ; nl : *je* ; cs : *ty* ; sv : *du* ; da : *du*). Phrases courtes et simples, comme en français.
-Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål ont leur propre section à la fin (« Langues ajoutées ensuite »).
+Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål (et les langues suivantes, jusqu’au turc et au luxembourgeois) ont leur propre section à la fin (« Langues ajoutées ensuite »).
 
 ## Généalogie
 
@@ -1111,6 +1111,103 @@ sujets) : *📒 Not kartları* ; « Personne » : *kişi* (« Personnes » : *Ki
 | app | uygulama |
 | FAQ | SSS (Sık sorulan sorular) |
 | Traduction faite par une IA | Çeviriyi bir yapay zekâ yaptı |
+
+## Langue ajoutée ensuite : luxembourgeois (lb)
+
+Fichiers à part : `assets/i18n/src/nord9/<zone>.tsv` (1re ligne `fr ¦ lb`, même clé que `<zone>.tsv`).
+On traduit **depuis le français** (`node scripts/i18n-todo.js lb <zone>` montre l’anglais et l’allemand en aide ; l’allemand
+est la langue proche, mais on ne recopie pas sa tournure : le luxembourgeois garde beaucoup de mots français de tous les
+jours — *Fiche*, *Dossier*, *Fichier*, *Ecran*, *Affichage*, *Entretien*).
+Orthographe officielle (réforme de 2019) : ë, é, ä, ou, äi, ue, ie… toujours écrits ; la recherche de la FAQ les ramène à e, e,
+a. **Règle du n** (*Eifeler Regel*) : le n (ou nn) final tombe devant une consonne, sauf devant n, d, t, z, h et une
+voyelle : « de Mann » / « den Apel », « e Feeler » / « en Evenement », « mat de Kanner » / « mat den Elteren »,
+« Dir kënnt » ; on la suit dans les phrases (« d’Lëscht vun de Spueren », « an d’Recherche »).
+Ton : on tutoie (*du*), phrases courtes et simples : impératif 2e personne du singulier (« Wiel », « Klick », « Zéi »,
+« Gëff … an », « Probéier nach eng Kéier », « Kontrolléier d’Schreifweis ») ; boutons et entrées de menu à l’infinitif,
+comme en allemand (« Späicheren », « Läschen », « Derbäisetzen », « Zoumaachen »). Guillemets „…“ (ouvrant en bas,
+fermant “ en haut). Les mots cités des actes et les exemples de dates restent en français (« 12 mars 1790 », « à l’heure
+de vêpres », « né le »…), lisibles par la lecture C4.
+**Pluriels — ordre des formes dans les `.tsv`** : `one|other` (`FORMS.def` dans `scripts/i18n-build.js`) : 1 → « one »,
+tout le reste (0, 2, 21, 1,5…) → « other », comme l’allemand : `Persoun|Persounen`, `Dag|Deeg`, `Woch|Wochen`,
+`Fiche|Fichen`, `Plaz|Plazen`. Un adjectif s’accorde dans les deux formes (`méiglechen Doublon|méiglech Doublonen`).
+Dates et nombres : `lb-LU` quand le navigateur le connaît, sinon `de-LU` puis `fr-LU` (`intlLocale`, `app-i18n.js`).
+« Fiche » d’une personne : *Fiche* (« Persounefiche » ; affichage « Liste | Fiches » : *Lëscht | Fichen*) ; « 📒 Fiches »
+(notes de sujets) : *📒 Notizfichen* ; « Personne » : *Persoun* (« Personnes » : *Persounen*).
+
+| Français | Lëtzebuergesch |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | Fiche (Persounefiche) |
+| 📒 Fiches (sujets) | 📒 Notizfichen |
+| généalogie (la base de la personne) | Genealogie (deng Genealogie) |
+| base (de données) | Datebank |
+| acte | Akt |
+| baptême / naissance | Daf / Gebuert |
+| mariage | Bestietnes |
+| décès | Doud |
+| parrain / marraine | Pätter / Gotta |
+| témoin / déclarant | Zeien / Deklarant |
+| ascendants / descendants | Virfahren / Nokommen |
+| ancêtre | Virfahr |
+| branche | Zweig |
+| génération | Generatioun |
+| implexe | Implex |
+| recensement | Vollekszielung |
+| inventaire après décès | Inventaire nom Doud |
+| dépouillement | Auszuch (Auszich) |
+| cote (d’archive) | Archivnummer |
+| mur de brique | Sakgaass |
+| cousinade | Familljentreffen |
+| commune / ville / village | Gemeng / Stad / Duerf |
+| paroisse | Par |
+| lieu | Plaz |
+| catalogue raisonné | Wierkverzeechnes |
+| Tableau de bord | Dashboard |
+| widget | Widget (Widgeten) |
+| Personnes | Persounen |
+| Graphiques / Diagrammes | Grafiken / Diagrammer |
+| Carte | Kaart |
+| Listes | Lëschten |
+| Chronologie | Chronologie |
+| Recherche | Recherche |
+| Enquêtes | Ënnersichungen |
+| Trésors | Schätz |
+| Réglages | Astellungen |
+| Apparence | Ausgesinn |
+| Médias | Medien |
+| Source | Quell |
+| Étiquette | Etikett |
+| Battue | Sichaktioun |
+| Mode simple | Einfache Modus |
+| Mode consultation | Liesmodus |
+| Sauvegarde | Backup |
+| Enregistrer / ✓ Enregistré | Späicheren / ✓ Gespäichert |
+| Annuler (bouton) | Ofbriechen |
+| ↶ Annuler / ↷ Rétablir | ↶ Réckgängeg / ↷ Widderhuelen |
+| Fermer | Zoumaachen |
+| Supprimer | Läschen |
+| Retirer (détacher) | Ewechhuelen |
+| Modifier | Änneren |
+| Créer / Ajouter | Erstellen / Derbäisetzen |
+| Relier | Verbannen |
+| ↺ Remettre comme au départ | ↺ Zrécksetzen wéi am Ufank |
+| Réessayer | Nees probéieren |
+| ⤒ Importer / ⤓ Exporter | ⤒ Importéieren / ⤓ Exportéieren |
+| 🖨 Imprimer | 🖨 Drécken |
+| Chercher / Filtrer ▾ / Trier : | Sichen / Filteren ▾ / Zortéieren: |
+| ✓ Compris : | ✓ Verstanen: |
+| Aimanter | Aschnappen |
+| Liste \| Fiches (affichage) | Lëscht \| Fichen |
+| onglet | Reiter |
+| écran | Ecran |
+| fichier / dossier | Fichier / Dossier |
+| bouton | Knäppchen (Knäppercher) |
+| Tableur / Traitement de texte | Tabelle / Textveraarbechtung |
+| Mise en page | Säitegestaltung |
+| ordinateur | Computer |
+| app | App |
+| FAQ | FAQ (Heefeg Froen) |
+| Traduction faite par une IA | Iwwersetzung vun enger KI |
 
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 

@@ -4,13 +4,13 @@ declare(strict_types=1);
  * 🌐 Traduction côté serveur (même dictionnaire que assets/js/app-i18n.js ; mode d'emploi : docs/I18N.md).
  *
  *  - i18n_lang() : la langue de la page — en-tête « X-LCNDA-Lang » envoyé par app.js (api()), sinon le cookie lcnda_lang ;
- *    toujours une des 23 langues (fr par défaut).
+ *    toujours une des 24 langues (fr par défaut).
  *  - i18n_t('Texte français', ['n' => 3]) : le texte dans cette langue, sinon le français (variables {x} remplacées).
  *  - json_response() passe le message « error » par i18n_t() : un message d'erreur connu arrive traduit ; en français,
  *    rien ne change.
  */
 
-const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr'];
+const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb'];
 
 function i18n_lang(): string
 {
@@ -46,7 +46,7 @@ function i18n_t(string $text, array $vars = [], string $ctx = ''): string
             $n = isset($vars['n']) && is_numeric($vars['n']) ? (float) $vars['n'] : 1.0;
             // roumain : 1 → one ; 0, 2 à 19 (et 101 à 119…) → few ; 20 et plus → other (« 20 de persoane »), comme Intl.PluralRules('ro')
             $few = i18n_lang() === 'ro' && $n != 1.0 && ($n == 0.0 || floor($n) != $n || (fmod($n, 100.0) >= 1 && fmod($n, 100.0) <= 19));
-            // finnois, hongrois, estonien et turc : 1 → one, sinon other (hongrois et turc : le nom reste au singulier après un nombre, « 5 személy », « 5 kişi »)
+            // finnois, hongrois, estonien, turc et luxembourgeois : 1 → one, sinon other (hongrois et turc : le nom reste au singulier après un nombre, « 5 személy », « 5 kişi »)
             $cat = i18n_plural_cat(i18n_lang(), $n); // croate, slovène, lituanien, letton, islandais : leur propre règle (les autres langues ne changent pas)
             if ($cat !== null) { $v = $v[$cat] ?? $v['other'] ?? $v['one'] ?? null; }
             else { $v = ($few ? ($v['few'] ?? null) : null) ?? ($n == 1.0 ? ($v['one'] ?? null) : null) ?? $v['other'] ?? $v['many'] ?? $v['one'] ?? null; } // un mot au pluriel lu tout seul : la forme « un »

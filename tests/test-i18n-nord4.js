@@ -22,7 +22,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
     const B = require('../scripts/i18n-build.js');
     const F = require('../scripts/build-faq-i18n.js');
     await t('fi et hu déclarés partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(14, 16), NEW); assert.equal(I.CODES.length, 23);
+        assert.deepEqual(I.CODES.slice(14, 16), NEW); assert.equal(I.CODES.length, 24);
         assert.deepEqual([I.info('fi').name, I.info('fi').flag, I.info('fi').locale], ['Suomi', '🇫🇮', 'fi-FI']);
         assert.deepEqual([I.info('hu').name, I.info('hu').flag, I.info('hu').locale], ['Magyar', '🇭🇺', 'hu-HU']);
         assert.ok(/const I18N_LANGS = \[[^\]]*'nb', 'ro', 'fi', 'hu'(, '[a-z]{2}')*\];/.test(fs.readFileSync(path.join(root, 'lib/i18n.php'), 'utf8')));

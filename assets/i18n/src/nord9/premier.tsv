@@ -1,0 +1,111 @@
+fr ¦ lb
+# ═════ zone « premier » : luxembourgeois (lb) ═════
+INSTALLATION ¦ INSTALLATIOUN
+La base généalogique doit être importée. ¦ Déi genealogesch Datebank muss importéiert ginn.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Wiel, wéi s du ufänks: e Fichier importéieren, deen et schonn gëtt, oder eng éischt Persoun erstellen, fir mat enger eidel Datebank unzefänken.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, och vun Ancestry, MyHeritage, Geneanet), Gramps (.gramps oder .gpkg-Pak mat de Fotoen), Hérédis (.hmw oder .heredis), MacFamilyTree (.mftpkg), LCNDA-Datebank (.db) oder komplette LCNDA-Backup (.zip, Datebank + Medien). JSON- a CSV-Fichiere ginn analyséiert, awer nach net importéiert.
+Fichier ¦ Fichier
+Créer une première personne ¦ Eng éischt Persoun erstellen
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Mécht eng eidel Datebank mat enger éischter Fiche, déi s du duerno ergänze kanns.
+Prénom ¦ Virnumm
+Nom ¦ Numm
+Créer et ouvrir la base ¦ D’Datebank erstellen an opmaachen
+Je veux faire autre chose ▾ ¦ Ech wëll eppes anescht maachen ▾
+▴ Replier ¦ ▴ Zouklappen
+Qu’est-ce que tu veux faire avec l’app ? ¦ Wat wëlls du mat der App maachen?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Wiel dat, wat zu dir passt: d’App geet mat de passende Reiteren an dem passenden éischten Ecran op. Duerno kanns du alles änneren.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Deng Famill, deng Virfahren, hir Akten an hir Fotoen.
+Une lignée d’animaux ¦ Eng Déierelinn
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Eng Zucht, de Pedigree vun denge Hënn, Kazen, Päerd…
+Recenser des animaux ¦ Déieren erfaassen
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Déiere verfollegen: Beréngung, Chippen, Observatiounen, Weeër.
+L’histoire d’une maison ou d’un village ¦ D’Geschicht vun engem Haus oder engem Duerf
+Maison ou village ¦ Haus oder Duerf
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Wien wou gelieft huet, vu Generatioun zu Generatioun, Zëmmer fir Zëmmer.
+Le catalogue d’un artiste ou d’une collection ¦ De Katalog vun engem Kënschtler oder enger Sammlung
+Artiste ou collection ¦ Kënschtler oder Sammlung
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Seng Wierker, seng Ausstellungen, säi Wierkverzeechnes.
+Un fonds d’archives ou un musée familial ¦ E Bestand vun Archiven oder e Familljemusée
+Archives ou musée ¦ Archiven oder Musée
+Des photos, des lettres, des objets à classer et à décrire. ¦ Fotoen, Bréiwer, Objeten, fir ze klasséieren an ze beschreiwen.
+L’étude d’un nom de famille ¦ D’Studie vun engem Familljennumm
+Un nom de famille ¦ E Familljennumm
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ All d’Leit mat engem Numm, seng Varianten, wou se hierkommen.
+L’histoire d’une entreprise ou d’une association ¦ D’Geschicht vun enger Firma oder engem Veräin
+Entreprise ou association ¦ Firma oder Veräin
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Hir Plazen, hir Direktioun, hir Salariéen oder hir Memberen.
+Transmettre des souvenirs ¦ Erënnerunge weiderginn
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Bréiwer, déi méi spéit opgemaach ginn, Rezepter, Lidder, Erënnerungen, fir ze hannerloossen.
+Ce qui change ¦ Wat sech ännert
+Commencer avec une base vide ¦ Mat enger eidel Datebank ufänken
+🧪 Essayer avec une base d’exemple ¦ 🧪 Mat enger Beispill-Datebank probéieren
+🧪 Base d’exemple ¦ 🧪 Beispill-Datebank
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Eng erfonnte Famill, fir d’App ze probéieren: deng Genealogie gëtt net beréiert.
+Revenir à ma généalogie ¦ Zréck op meng Genealogie
+Repartir d’une base vide ¦ Nei mat enger eidel Datebank ufänken
+Ou bien : ¦ Oder:
+🐾 Créer le premier animal ¦ 🐾 Dat éischt Déier erstellen
+Créer le premier animal ¦ Dat éischt Déier erstellen
+Espèce ¦ Aart
+Création de la base… ¦ D’Datebank gëtt erstallt…
+Préparation de la base d’exemple… ¦ D’Beispill-Datebank gëtt preparéiert…
+✓ Base créée ¦ ✓ Datebank erstallt
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Näischt ass definitiv: Astellungen → Ausgesinn → „🧭 Notzung vun der App“.
+🧭 Usage de l’app ¦ 🧭 Notzung vun der App
+🧭 Revoir le premier lancement ¦ 🧭 Den éischte Start nach eng Kéier weisen
+Premier écran à l’ouverture ¦ Éischten Ecran beim Opmaachen
+Le dernier écran ouvert (comme avant) ¦ De leschten Ecran, deen op war (wéi virdrun)
+Usage enregistré. ¦ Notzung gespäichert.
+(la page va se recharger) ¦ (d’Säit gëtt nei gelueden)
+Langue · Language ¦ Sprooch · Language
+Une petite visite ? ¦ E klengen Tour?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ An {n} Etappe weist d’App dir, wou s du eng Fiche erstells, en Elterendeel, eng Foto, en Evenement derbäisetz, e Backup méchs an d’Hëllef fënns. Dat dauert zwou Minutten.
+▶ Commencer ¦ ▶ Ufänken
+Plus tard ¦ Méi spéit
+Ne plus proposer ¦ Net méi ubidden
+Passer la visite ¦ Den Tour iwwersprangen
+← Précédent ¦ ← Zréck
+Suivant → ¦ Weider →
+✓ Terminer ¦ ✓ Fäerdeg
+Étape {i} sur {n} ¦ Etapp {i} vun {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Guidéierten Tour, Etapp {i} vun {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Du kanns op de Knäppchen, deen ëmrumm ass, klicken, fir et wierklech ze maachen, oder einfach weidergoen.
+Ajouter un parent ¦ En Elterendeel derbäisetzen
+Ajouter une photo ¦ Eng Foto derbäisetzen
+Un événement et son lieu ¦ En Evenement a seng Plaz
+Faire une sauvegarde ¦ E Backup maachen
+Les Réglages et l’aide ¦ D’Astellungen an d’Hëllef
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ All Persoun huet hir Fiche. Dëse Knäppche mécht eng: e Virnumm, en Numm, an et geet lass.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Op enger Fiche verbënnt de „＋“ bei „Elteren“ e Papp oder eng Mamm: wiel eng Fiche, déi et schonn gëtt, oder erstell se. Esou wiisst de Stammbam.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Hei setz du Fotoen an Akten op d’Fiche: huel se aus denge Medien, oder zéi se vum Computer heihinner.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Gebuert, Bestietnes, Doud… Setz en Evenement mat sengem Datum a senger Plaz derbäi: tipp déi éischt Buschtawe vun der Gemeng, d’App fënnt se.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Maach vun Zäit zu Zäit e Backup: dëse Fichier hält deng ganz Genealogie an deng Fotoen. Leeë en op en USB-Stick oder eng aner Disk.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Hei stells du alles an: Ausgesinn, Import, Backupen… An den Astellunge beäntwert d’Säit „FAQ / Tuto“ deng Froen; do kanns du och dësen Tour nei starten.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Tour fäerdeg. Fir en nach eng Kéier ze gesinn: Astellungen → FAQ / Tuto → „▶ De guidéierten Tour nei starten“.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Guidéierten Tour zougemaach. Du fënns en erëm an Astellungen → FAQ / Tuto.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ E klenge guidéierten Tour duerch d’App gëtt ugebueden. Ufänken, méi spéit, oder net méi ubidden.
+Rien à montrer sur cet écran pour l’instant. ¦ Fir de Moment ass op dësem Ecran näischt ze weisen.
+Pas de visite guidée en mode consultation. ¦ Kee guidéierten Tour am Liesmodus.
+La visite guidée n’est pas possible ici. ¦ De guidéierten Tour ass hei net méiglech.
+🐞 Signaler un problème ¦ 🐞 E Problem mellen
+AIDE ¦ HËLLEF
+Ce qui s’est passé ¦ Wat geschitt ass
+Ce que j’attendais ¦ Wat ech erwaart hunn
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Schreif et mat denge Wierder. Loss d’Nimm vun denger Famill ewech, wann s du net wëlls, datt se gelies ginn.
+Joindre le rapport technique ¦ Den technesche Rapport bäifügen
+Joindre le rapport technique ({x}) ¦ Den technesche Rapport bäifügen ({x})
+aucune erreur captée ¦ kee Feeler opgefaang
+Rapport technique ¦ Technesche Rapport
+🗑 Vider le journal ¦ 🗑 De Journal eidel maachen
+Vider le journal des erreurs captées sur cet ordinateur ¦ De Journal vun de Feeler, déi op dësem Computer opgefaang goufen, eidel maachen
+✉️ Écrire un e-mail ¦ ✉️ En E-Mail schreiwen
+Ouvrir une demande sur GitHub ¦ Eng Ufro op GitHub opmaachen
+Journal des erreurs vidé ¦ Journal vun de Feeler eidel gemaach
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Message kopéiert: péch en, wou s du wëlls (E-Mail, Forum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ D’Kopéieren huet net geklappt: markéier den Text a kopéier en mat der Hand.
+Dis en quelques mots ce qui s’est passé. ¦ So an e puer Wierder, wat geschitt ass.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Z. B.: ech hunn op der Fiche op „Späicheren“ geklickt, an d’Fënster ass gro bliwwen.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Z. B.: datt d’Fiche gespäichert gëtt an d’Fënster zougeet.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Fir en E-Mail ze schreiwen amplaz eng Ufro op GitHub opzemaachen: stell eng Adress an Astellungen → „🔄 Updates“ an.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ D’Beispill-Datebank ass eng erfonnte Famill (5 Generatiounen, gezeechent al Fotoen), extra ofgeluecht an „Meng Genealogien“: deng Genealogie gëtt ni beréiert.
+Aucun fichier choisi ¦ Kee Fichier gewielt
