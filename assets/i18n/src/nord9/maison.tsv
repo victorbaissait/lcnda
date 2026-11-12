@@ -1,0 +1,2121 @@
+fr ¦ lb
+Rez-de-chaussée ¦ Rez-de-chaussée
+Cave ¦ Keller
+1er étage ¦ 1. Stack
+{level}e étage ¦ {level}. Stack
+Maison de famille ¦ Familljenhaus
+Époque sans nom ¦ Epoch ouni Numm
+Barre du haut ¦ Bar uewen
+Barre de la vue 3D ¦ Bar vun der 3D-Usiicht
+Vues dessus / face / côté ¦ Usiichten uewen / vir / vun der Säit
+Revêtement sur {what} de mur ¦ Belag op {what} Mauer
+=face ¦ Säit|Säiten
+=mur ¦ Mauer|Maueren
+=étage ¦ Stack|Stäck
+=trait ¦ Strich|Stricher
+=objet trouvé ¦ fonnten Objet|fonnt Objeten
+Aucune pièce tracée ¦ Kee Raum gezeechent
+Pièces et surfaces ¦ Raim a Flächen
+Plan du ¦ Plang vum
+double hauteur (vide au-dessus) ¦ duebel Héicht (uewendriwwer op)
+trémie de l’escalier ¦ Trapenaussparung
+escalier (plancher fermé) ¦ Trap (Buedem zou)
+VIDE ¦ OPPEN
+vide sur {name} ¦ op iwwer {name}
+maison|Vide ¦ Oppene Raum
+sans plancher ¦ ouni Buedem
+m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Manner wéi 1,80 m ënnert der Daachschréi
+🕰 Fantôme : {name} ¦ 🕰 Geescht: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · Pfeil {arrow}
+{len} pour fermer en rectangle ¦ {len} fir als Rechteck zouzemaachen
+départ (clic : fermer) ¦ Start (Klick: zoumaachen)
+maison|départ ¦ Start
+Posé sous l’étage « {name} ». ¦ Ënnert de Stack „{name}“ gesat.
+📐 {area} m² au sol ¦ 📐 {area} m² Buedem
+{area} m² au sol ¦ {area} m² Buedem
+{carrez} m² loi Carrez ¦ {carrez} m² no dem Carrez-Gesetz
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² no dem Carrez-Gesetz (Héicht ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (do wou ee stoe kann: 1,80 m a méi, um Plang schrafféiert)
+Habitant : {role} — ouvrir la fiche ¦ Bewunner: {role} — d’Fiche opmaachen
+Habitant — ouvrir la fiche ¦ Bewunner — d’Fiche opmaachen
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Mam Raum „{room}“ verbonnen — d’Fiche opmaachen
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — Epoch: {era} — d’Fiche opmaachen, wou en drop ass
+{label} — ouvrir la fiche où il est ¦ {label} — d’Fiche opmaachen, wou en drop ass
+🏷 Les souvenirs de la maison ¦ 🏷 D’Erënnerunge vum Haus
+Aller à « {where} » et voir le souvenir ¦ Op „{where}“ goen an d’Erënnerung kucken
+Soleil calculé pour {place} ({lat}° N). ¦ Sonn fir {place} ({lat}° N) berechent.
+le lieu de la maison ¦ d’Plaz vum Haus
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ D’Plaz vum Haus huet keng Koordinaten: Sonn fir d’Mëtt vu Frankräich berechent.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Nuets ginn déi gesate Luuchten un (3D-Usiicht → ☀️ Liicht).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Fir unzefänken: ⬚ <b>zéi e Raum</b> (seng Maueren entstinn eleng), oder ▬ zeechen d’Maueren eng no der anerer. ▨ En <b>oppene Raum</b> (Mezzanine, duebel Héicht) gëtt um Stack driwwer gezeechent. Duerno 🚪 Dieren an 🪟 Fënsteren (ee Klick op eng Mauer), an d’<b>Miwwelen</b> (Reiter dobäi).
+{area} m² habitables ¦ {area} m² Wunnfläch
+Face côté {rooms} ¦ Säit op {rooms}
+Face extérieure (façade) ¦ Baussesäit (Fassad)
+Les murs de « {name} » ¦ D’Maueren vun „{name}“
+la pièce ¦ de Raum
+Les murs de toutes les pièces de cet étage ¦ D’Maueren vun alle Raim op dësem Stack
+Toutes les façades de cet étage ¦ All d’Fassaden op dësem Stack
+Les murs de toutes les pièces de la maison (tous les étages) ¦ D’Maueren vun alle Raim vum Haus (all d’Stäck)
+Toutes les façades de la maison (tous les étages) ¦ All d’Fassade vum Haus (all d’Stäck)
+Vide sur « {room} » ({floor}). ¦ Op iwwer „{room}“ ({floor}).
+Vide sur l’étage « {floor} ». ¦ Op iwwer de Stack „{floor}“.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Dat ass deen ënneschte Stack: dësen oppene Raum geet op näischt.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} insgesamt · Ëmfang {p}
+La face de {walls} tournée vers la pièce. ¦ D’Säit vun {walls}, déi op de Raum weist.
+Années de {name} ¦ Joere vun {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Héicht: déi vum Stack + de Buedem ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} Stuf vun {rise} cm, Optrëtt {going} cm · 2 h + g = {sum} cm|{n} Stufe vun {rise} cm, Optrëtt {going} cm · 2 h + g = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ De Buedem driwwer opmaachen („{name}“)
+Ouvrir le plancher au-dessus ¦ De Buedem driwwer opmaachen
+posé sur « {name} » : il le suit ¦ op „{name}“ gesat: e follegt him
+un objet ¦ en Objet
+Georgia (de départ) ¦ Georgia (Standard)
+État d’origine ¦ Ursprénglechen Zoustand
+Époque modifiée ¦ Epoch geännert
+Nouvelle époque : {name} ¦ Nei Epoch: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Epochen ewechgeholl (de Plang „{name}“ bleift, ouni Datum)
+Époque « {name} » supprimée avec son plan ¦ Epoch „{name}“ mat hirem Plang geläscht
+{name} est déjà rattaché. ¦ {name} ass schonn dru verbonnen.
+🏠 un habitant y est ¦ 🏠 e Bewunner ass do
+Posé sur « {name} » ¦ Op „{name}“ gesat
+Posé au sol ¦ Um Buedem gesat
+Pièce {n} ¦ Raum {n}
+Pièce de {area} m² ¦ Raum vun {area} m²
+Vide sur {name} ¦ Op iwwer {name}
+Mezzanine ¦ Mezzanine
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Mezzanine gesat (Stack „Mezzanine“ derbäigesat): op iwwer {room}, Gelänner an Trap.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Mezzanine um Stack „{floor}“ gesat: op iwwer {room}, Gelänner an Trap.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm ass ze kuerz: fir Meter, schreif „{typed} m“.
+{name} posé ¦ {name} gesat
+{msg} — et maintenant le deuxième point. ¦ {msg} — an elo den zweete Punkt.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ Op Moossstab: déi gewielte Längt moosst {len}. Duerno „✏️ D’Maueren duerchpausen“ (Reiter Stack).
+Plan ancien redressé ({deg}°) ¦ Ale Plang riichtgesat ({deg}°)
+Souvenir ¦ Erënnerung
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Eng Erënnerung mat „{name}“ verbannen
+Un souvenir pour « {name} » ¦ Eng Erënnerung fir „{name}“
+✍ Un récit pour « {name} » ¦ ✍ Eng Geschicht fir „{name}“
+👤 Une personne liée à « {name} » ¦ 👤 Eng Persoun, déi mat „{name}“ verbonnen ass
+Ce qui s’y est passé ¦ Wat do geschitt ass
+Réglage « {name} » appliqué ¦ Astellung „{name}“ ugewannt
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Dës Astellung gehéiert zu engem aneren Tool („{tool}“): importéier se an dat Tool, net an d’Haus.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ Eng Astellung heescht schonn „{name}“. Numm vun der importéierter Astellung:
+{lines} et {texts}. ¦ {lines} an {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ All Strich gëtt eng Mauer; e zouenen Ëmress op enger Ebeen „pièce / room“ gëtt e Raum, nom Text benannt, deen dran ass.
+Pas repris : {what}. ¦ Net iwwerholl: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Dëse Stack ({name}), zousätzlech zu deem, wat schonn do ass
+{walls}, {rooms} et {texts} importés. ¦ {walls}, {rooms} an {texts} importéiert.
+🔁 Répéter cette fenêtre ¦ 🔁 Dës Fënster widderhuelen
+🔁 Répéter cette porte ¦ 🔁 Dës Dier widderhuelen
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Kopien laanscht déiselwecht Mauer, bis op hiert anert Enn (Mauer vun {len}).
+🔁 Répéter « {name} » ¦ 🔁 „{name}“ widderhuelen
+{name} (à {len}) ¦ {name} ({len} ewech)
+{copies} de « {name} ». ¦ {copies} vun „{name}“.
+Vue 3D ¦ 3D-Usiicht
+Au-dessus : {name} ¦ Driwwer: {name}
+En dessous : {name} (cave, sous-sol) ¦ Drënner: {name} (Keller, Ënnergeschoss)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ D’Maueren vun „{name}“ iwwerhuelen (a seng Fënsteren)
+{name} ajouté ¦ {name} derbäigesat
+Étages ¦ Stäck
+{name} (murs repris) ¦ {name} (Maueren iwwerholl)
+Étage « {name} » supprimé ¦ Stack „{name}“ geläscht
+Maison de {place} ¦ Haus zu {place}
+✓ Toit retiré ¦ ✓ Daach ewechgeholl
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Daach derbäigesat: et gesäit een et vun „{name}“, dem ieweschte Stack
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Daach derbäigesat: et läit op de Maueren (nach keng Maueren)
+✓ Toit ajouté ¦ ✓ Daach derbäigesat
+Arrêt {n} de la visite guidée ¦ Statioun {n} vun der Féierung
+{label} — ouvrir la fiche ¦ {label} — d’Fiche opmaachen
+Habitant ¦ Bewunner
+{label} — époque : {era} ¦ {label} — Epoch: {era}
+{what} sur {total} ¦ {what} vun {total}
+Supprimer la maison « {name} » ? ¦ D’Haus „{name}“ läschen?
+Supprimer la maison ¦ D’Haus läschen
+🕰 époque : {name} ¦ 🕰 Epoch: {name}
+aucune époque choisie ¦ keng Epoch gewielt
+mètres ¦ Meter
+centimètres ¦ Zentimeter
+millimètres ¦ Millimeter
+pieds ¦ Fouss
+toises (1,949 m) ¦ toises (1,949 m)
+pieds du roi (32,48 cm) ¦ pieds du roi (32,48 cm)
+aunes de Paris (1,188 m) ¦ aunes de Paris (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ perches de Paris (18 pieds, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ perches royales (22 pieds, 7,146 m)
+pas (environ 75 cm) ¦ Schrëtt (ongeféier 75 cm)
+Plâtre blanc ¦ Wäisse Gips
+Enduit à la chaux ¦ Kalkbotz
+Pierre apparente ¦ Siichtbare Steen
+Brique ¦ Bréck
+Colombage (pans de bois) ¦ Fachwierk
+Lambris de bois ¦ Holzverkleedung
+Papier peint ¦ Tapéit
+Carrelage ¦ Plättercher
+Béton ¦ Beton
+Torchis ¦ Lehmfachwierk
+Enduit, crépi ¦ Botz, Rauputz
+Pierre de taille ¦ Haustee
+Papier peint à rayures ¦ Gesträifte Tapéit
+Papier peint à fleurs ¦ Tapéit mat Blummen
+Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parkett
+Parquet à bâtons rompus ¦ Fëschgrätparkett
+Tomettes ¦ Terrakottaplättercher
+Carreaux de ciment ¦ Zementplättercher
+Damier noir et blanc ¦ Schwaarz-wäisst Schachbriet
+Dalles de pierre ¦ Steeplacken
+Terre battue ¦ Gestampte Lehm
+Moquette, tapis ¦ Teppechbuedem, Teppech
+Herbe (extérieur) ¦ Gras (dobaussen)
+Gravier, cour ¦ Kies, Haff
+Bois clair (hêtre, pin) ¦ Hellt Holz (Bich, Dänn)
+Chêne ¦ Eech
+Noyer ¦ Nossbam
+Merisier ¦ Kiischtebam
+Bois foncé (ébène, bois ciré) ¦ Donkelt Holz (Ebenholz, gewichst Holz)
+Bois peint ¦ Gemoolt Holz
+Métal, acier ¦ Metall, Stol
+Fonte, fer forgé ¦ Goss, Schmiddeisen
+Laiton, bronze, doré ¦ Messing, Bronze, vergëllt
+Zinc, fer-blanc ¦ Zénk, Blech
+Pierre ¦ Steen
+Marbre ¦ Marmer
+Grès, terre cuite ¦ Steegut, Terrakotta
+Faïence, porcelaine, émail ¦ Fayence, Porzeläin, Email
+Tissu ¦ Stoff
+Velours ¦ Samett
+Cuir ¦ Lieder
+Osier, rotin ¦ Wied, Rattan
+Paille ¦ Stréi
+Verre ¦ Glas
+Sans pieds ¦ Ouni Féiss
+Pieds droits ¦ Riicht Féiss
+Pieds tournés ¦ Gedréint Féiss
+Pieds boules (miches) ¦ Kugelféiss
+Patins ¦ Kufen
+Roulettes ¦ Rieder
+Barreaux de bois ¦ Holzstiewercher
+Métal (barreaux fins) ¦ Metall (fein Stiewercher)
+Muret plein ¦ Voll Mauerchen
+Métiers, ferme ¦ Beruffer, Bauerenhaff
+Extérieur ¦ Dobaussen
+sa chambre ¦ seng Schlofkummer
+né ici ¦ hei gebuer
+née ici ¦ hei gebuer
+y a vécu ¦ huet hei gelieft
+y est mort ¦ ass hei gestuerwen
+y est morte ¦ ass hei gestuerwen
+les parents ¦ d’Elteren
+les enfants ¦ d’Kanner
+locataire ¦ Locataire
+fermier ¦ Bauer (Pächter)
+domestique ¦ Déngschtbuet
+servante ¦ Déngschtmeedchen
+valet ¦ Knecht
+nourrice ¦ Ziichmamm
+pensionnaire ¦ Pensionär
+atelier ¦ Atelier
+boutique ¦ Geschäft
+Nom de la maison ¦ Numm vum Haus
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Astellunge vum Aschnappen: Gitter, Ecken, Wénkelen, Präzisioun an 💾 gespäichert Astellungen
+Réglages de l’aimant ¦ Astellunge vum Aschnappen
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 E ale Plang, e Kadaster, fir duerchzepausen…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ En Objet als Bild (Usiicht vun uewen)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 En 3D-Objet (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 En Haus (Fichier .json)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 En DXF-Plang (AutoCAD, LibreCAD, Architekt, Notaire)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ De Plang (PNG, JPG, PDF, SVG, Drock), d’3D-Usiicht, de Fichier vum Haus
+Choisir, déplacer ¦ Wielen, réckelen
+Déplacer la vue, ou barre d’espace ¦ D’Usiicht réckelen, oder Leertast
+Pièce rectangulaire, murs compris : glisser ¦ Rechteckege Raum mat Maueren: zéien
+Vide, trémie, double hauteur : glisser, sans murs ¦ Oppene Raum, Trapenaussparung, duebel Héicht: zéien, ouni Maueren
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Mauer: ee Klick pro Eck, Duebelklick oder Enter fir opzehalen
+Pièce de forme libre, sans murs : un clic par coin ¦ Raum a fräier Form, ouni Maueren: ee Klick pro Eck
+Porte : clic sur un mur ¦ Dier: Klick op eng Mauer
+Fenêtre : clic sur un mur ¦ Fënster: Klick op eng Mauer
+Cote, mesure : deux clics ¦ Mooss, Miessung: zwee Klicken
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Etikett mat Pfeil: ee Klick op de Punkt, ee Klick do, wou geschriwwe gëtt
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Eng aner Epoch vum Haus als Geescht (déi vun der Ebeen 🕰, soss déi Epoch virdrun): ganz duerchsichteg Maueren, gepunkte Kanten
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Zwee Klicken op d’Haus: d’Distanz (an d’Héicht tëscht deenen zwee Punkten)
+Tous les étages ¦ All d’Stäck
+Murs coupés (voir dedans) ¦ Geschnidde Maueren (dra kucken)
+Murs coupés ¦ Geschnidde Maueren
+🕰 Autre époque ¦ 🕰 Aner Epoch
+Vue de dessus ¦ Usiicht vun uewen
+Vue de face ¦ Usiicht vu vir
+Vue de côté ¦ Usiicht vun der Säit
+Dessus ¦ Uewen
+Face ¦ Vir
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ D’Sonn no Auerzäit, Datum a Plaz; nuets d’Luuchten
+Visiter la maison à hauteur d’yeux ¦ D’Haus an Aenhéicht besichen
+☀️ Lumière ¦ ☀️ Liicht
+🚶 Visiter ¦ 🚶 Besichen
+📏 Mesurer ¦ 📏 Moossen
+Plan 2D ¦ 2D-Plang
+Toit ¦ Daach
+Cotes ¦ Moossen
+Mobilier ¦ Miwwelen
+Propriétés de l’élément choisi ¦ Eegeschafte vum gewielten Element
+Mobilier : meubles, portes, fenêtres à poser ¦ Miwwelen: Miwwelstécker, Dieren, Fënsteren fir ze setzen
+L’étage affiché : niveaux, hauteur, sol ¦ De gewise Stack: Niveauen, Héicht, Buedem
+La maison : nom, époque, réglages généraux ¦ D’Haus: Numm, Epoch, allgemeng Astellungen
+la maison est fermée ¦ d’Haus ass zou
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ et goufen duerno nach aner Ännerungen: benotz ↶ an der Bar uewen
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Aschnappen: Gitter, Ecken a Mëtte vun de Maueren, Wénkelen (Alt fir ouni)
+{walls} ajouté depuis {when} ¦ {walls} derbäikomm zënter {when}
+{walls} ajoutés depuis {when} ¦ {walls} derbäikomm zënter {when}
+{walls} disparu depuis {when} ¦ {walls} verschwonnen zënter {when}
+{walls} disparus depuis {when} ¦ {walls} verschwonnen zënter {when}
+{walls} plus là en {when} ¦ {walls} {when} net méi do
+{walls} ajouté en {when} ¦ {walls} {when} derbäikomm
+{walls} ajoutés en {when} ¦ {walls} {when} derbäikomm
+={n} souvenir : clic pour voir ¦ {n} Erënnerung: klick fir ze kucken|{n} Erënnerungen: klick fir ze kucken
+={n} souvenirs : clic pour voir ¦ {n} Erënnerung: klick fir ze kucken|{n} Erënnerungen: klick fir ze kucken
+Glisser : la pointe de la flèche ¦ Zéien: d’Spëtzt vum Pfeil
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ En anere Stack, oder dee selwechte Stack an enger anerer Epoch, duerchsichteg kucken
+Calque d’un autre étage ou d’une autre époque ¦ Ebeen vun engem anere Stack oder enger anerer Epoch
+Calque d’un autre étage ou d’une époque ¦ Ebeen vun engem anere Stack oder enger Epoch
+👻 Calque : non ¦ 👻 Ebeen: keng
+👻 Dessous ¦ 👻 Drënner
+👻 Dessus ¦ 👻 Driwwer
+👻 Les deux ¦ 👻 Allebéid
+🕰 Époque d’avant ¦ 🕰 Epoch virdrun
+🕰 Époque d’après ¦ 🕰 Epoch duerno
+🕰 Choisir une époque… ¦ 🕰 Eng Epoch wielen…
+Ajouter un étage ou une cave ¦ E Stack oder e Keller derbäisetzen
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ D’Stäck: verwalten, derbäisetzen, duplizéieren, läschen
+Plus d’actions sur les étages ¦ Méi Aktiounen op de Stäck
+Chercher : lit, poêle, rouet… ¦ Sichen: Bett, Uewen, Spannrad…
+Mes objets ¦ Meng Objeten
+Aucun objet importé pour l’instant ¦ Nach keen importéierten Objet
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ „⤒ Importéieren“ (uewen) en 3D-Fichier (OBJ, STL, glTF, GLB) oder e Bild.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Klick op en Objet: e kënnt an d’Mëtt vun der Usiicht; zéi en duerno op seng Plaz (R oder de ronne Grëff fir ze dréinen).
+Nom de l’étage ¦ Numm vum Stack
+Épaisseur des nouveaux murs ¦ Déckt vun den neie Maueren
+Épaisseur des planchers ¦ Déckt vun de Biedemer
+Pas de la grille ¦ Schrëtt vum Gitter
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Dëse Stack duplizéieren (Maueren)
+Supprimer l’étage ¦ De Stack läschen
+Cotes des murs ¦ Mooss vun de Maueren
+Cotes d’ensemble ¦ Gesamtmoossen
+Tableau des pièces sur le plan ¦ Tabell vun de Raim um Plang
+Cartouche (nom, lieu, époque, étage) ¦ Schrëftfeld (Numm, Plaz, Epoch, Stack)
+Affichage sombre (dessin technique) ¦ Donkel Affichage (technesch Zeechnung)
+Plafond (visite 3D) ¦ Plafong (3D-Besuch)
+Aucun (ouvert) ¦ Keen (op)
+Plafond uni ¦ Glate Plafong
+Poutres apparentes ¦ Siichtbar Balken
+Couleur du plafond ¦ Faarf vum Plafong
+Légende : ― ajouté · ┄ disparu ¦ Legend: ― derbäikomm · ┄ verschwonnen
+Transparence du calque ¦ Duerchsichtegkeet vun der Ebeen
+📐 Plan ancien, cadastre ¦ 📐 Ale Plang, Kadaster
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ En napoleonesche Kadaster, en ale Plang, eng Skizz: lee se als Hannergrond, bréng se op de Moossstab, a paus dann d’Maueren driwwer duerch.
+🖼 Choisir l’image… ¦ 🖼 D’Bild wielen…
+Le mettre sous cet étage ¦ Ënnert dëse Stack setzen
+Visible ¦ Siichtbar
+🔒 Verrouillé ¦ 🔒 Gespaart
+📏 Mettre à l’échelle ¦ 📏 Op de Moossstab bréngen
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Zwee Klicken laanscht eng Mauer vum Bild: si gëtt riicht (horizontal oder vertikal)
+✓ Fin du décalque ¦ ✓ Duerchpausen ophalen
+✏️ Décalquer les murs ¦ ✏️ D’Maueren duerchpausen
+🖼 Changer d’image… ¦ 🖼 D’Bild wiesselen…
+🏠 Combles (sous le toit) ¦ 🏠 Späicher (ënnert dem Daach)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Fir den ieweschte Stack, ënnert engem schréien Daach (Reiter Stack → 🏠 Daach): de Plafong follegt dann der Schréi, an d’Plafongshéicht ass iwwerall um Plang ze liesen.
+Combles : le plafond suit la pente du toit ¦ Späicher: de Plafong follegt der Daachschréi
+Hauteur des murs sous le toit ¦ Héicht vun de Maueren ënnert dem Daach
+🏠 Toit (vue 3D) ¦ 🏠 Daach (3D-Usiicht)
+Un toit sur l’étage le plus haut ¦ En Daach op dem ieweschte Stack
+Deux pans (pignons) ¦ Zwou Säiten (Giebelen)
+Quatre pans (croupes) ¦ Véier Säiten (Walmdaach)
+Pavillon (pointe) ¦ Zeltdaach (Spëtzt)
+Un pan (appentis) ¦ Eng Säit (Pultdaach)
+Mansardé ¦ Mansardendaach
+Plat (toit-terrasse) ¦ Flaach (Daachterrass)
+Faîtage ¦ Fierscht
+Dans la longueur ¦ Der Längt no
+Dans la largeur ¦ Der Breet no
+Est – ouest ¦ Osten – Westen
+Nord – sud ¦ Norden – Süden
+Débord ¦ Iwwerstand
+Couverture ¦ Daachbedeckung
+Tuiles canal ¦ Huelzillen
+Tuiles plates ¦ Flaach Zillen
+Tuiles vernissées ¦ Glaséiert Zillen
+Ardoises ¦ Leeën
+Lauzes (pierre) ¦ Steeplacken (lauzes)
+Chaume ¦ Stréidaach
+Zinc ¦ Zénk
+Bac acier ¦ Stolblech
+Pignons, acrotères ¦ Giebelen, Attiken
+Acrotère (toit plat) ¦ Attika (flaacht Daach)
+Une cheminée ¦ E Kamäin
+Place de la cheminée ¦ Plaz vum Kamäin
+Gouttières et descentes ¦ Kéilen an Ofloufréier
+Un toit par aile (maison en L, en T, en U) ¦ En Daach pro Flillek (Haus an L, T oder U)
+Verrières, lanterneaux et édicules ¦ Glasdaacher, Liichtkuppelen an Daachopbauten
+Fenêtres de toit et lucarnes ¦ Daachfënsteren a Gauben
+🪟 Verrière ¦ 🪟 Glasdaach
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Daachopbau (Ausgang op d’Daach)
+🔆 Lanterneau ¦ 🔆 Liichtkuppel
+🪟 Fenêtre de toit ¦ 🪟 Daachfënster
+🏠 Lucarne ¦ 🏠 Gaub
+🏚 Chien-assis ¦ 🏚 Schleppgaub
+Lucarne ¦ Gaub
+Aile ¦ Flillek
+Arrière ¦ Hannen
+En travers ¦ Quer
+Vers l’égout ¦ Zur Kéil hin
+Profondeur ¦ Déift
+＋ Verrière ¦ ＋ Glasdaach
+＋ Édicule ¦ ＋ Daachopbau
+＋ Lanterneau ¦ ＋ Liichtkuppel
+＋ Fenêtre de toit ¦ ＋ Daachfënster
+＋ Lucarne ¦ ＋ Gaub
+＋ Chien-assis ¦ ＋ Schleppgaub
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Nach näischt: setz Bewunner a Vollekszielungen derbäi (méi ënnen).
+📍 Lieu et époque ¦ 📍 Plaz an Epoch
+Époque (en quelques mots) ¦ Epoch (an e puer Wierder)
+Aucun souvenir posé pour l’instant ¦ Nach keng Erënnerung gesat
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Klick op e Miwwelstéck oder e Raum, dann „🔗 Eng Erënnerung verbannen“: eng Foto, eng Geschicht, eng Persoun, eng Familljenerënnerung.
+☀️ Orientation et lumière ¦ ☀️ Orientéierung a Liicht
+Nord du plan ¦ Norde vum Plang
+Heure ¦ Auerzäit
+Jour ¦ Dag
+Jour de l’année ¦ Dag vum Joer
+Hauteur des yeux pour la visite ¦ Aenhéicht fir de Besuch
+👥 Les habitants ¦ 👥 D’Bewunner
+rôle, années (né ici, 1880–1920…) ¦ Roll, Joeren (hei gebuer, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ E Bewunner derbäisetzen…
+📋 Les recensements ¦ 📋 D’Vollekszielungen
+Ouvrir la fiche où est ce recensement ¦ D’Fiche opmaachen, wou dës Vollekszielung drop ass
+L’époque de la maison qui correspond à ce recensement ¦ D’Epoch vum Haus, déi zu dëser Vollekszielung passt
+— époque — ¦ — Epoch —
+Aucun recensement rattaché. ¦ Keng Vollekszielung verbonnen.
+＋ Ajouter un recensement… ¦ ＋ Eng Vollekszielung derbäisetzen…
+🕰 Les époques ¦ 🕰 D’Epochen
+Montrer la maison à cette époque ¦ D’Haus an dëser Epoch weisen
+Renommer, changer la date, rattacher à un recensement ¦ Ëmbenennen, den Datum änneren, mat enger Vollekszielung verbannen
+Supprimer cette époque ¦ Dës Epoch läschen
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ D’Haus huet sech mat der Zäit geännert? Erstell eng Epoch pro Joer oder Datum (1850, 1900, 1936…), all mat hirem eegene Plang: du gesäis et sech entwéckelen, an all Epoch kann un eng Vollekszielung verbonne ginn.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Nei Epoch (Kopie vun dëser)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Nei Epoch (Kopie vun dëser)…
+▶ Voir évoluer ¦ ▶ D’Entwécklung kucken
+⏹ Arrêter ¦ ⏹ Ophalen
+📖 Histoire de la maison ¦ 📖 Geschicht vum Haus
+Histoire de la maison ¦ Geschicht vum Haus
+Construite par…, agrandie en…, vendue en… ¦ Gebaut vun…, vergréissert…, verkaaft…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Klick op eng Mauer, e Raum, e Miwwelstéck: seng Astellunge kommen heihin (Material, Faarf, Gréisst, Numm, Erënnerungen). Rad: zoomen; Leertast: d’Usiicht réckelen; Alt: ouni Aschnappen.
+Cet étage ¦ Dëse Stack
+={n} pièce ¦ {n} Raum|{n} Raim
+={n} pièces ¦ {n} Raum|{n} Raim
+={n} étage ¦ {n} Stack|{n} Stäck
+={n} étages ¦ {n} Stack|{n} Stäck
+={n} habitant ¦ {n} Bewunner|{n} Bewunner
+={n} habitants ¦ {n} Bewunner|{n} Bewunner
+={n} époque ¦ {n} Epoch|{n} Epochen
+={n} époques ¦ {n} Epoch|{n} Epochen
+={n} arrêt ¦ {n} Statioun|{n} Statiounen
+={n} arrêts ¦ {n} Statioun|{n} Statiounen
+={n} modèle ¦ {n} Modell|{n} Modeller
+={n} modèles ¦ {n} Modell|{n} Modeller
+={n} recensement rattaché ¦ {n} verbonne Vollekszielung|{n} verbonne Vollekszielungen
+={n} recensements rattachés ¦ {n} verbonne Vollekszielung|{n} verbonne Vollekszielungen
+={n} habitant ajouté depuis le recensement. ¦ {n} Bewunner aus der Vollekszielung derbäigesat.|{n} Bewunner aus der Vollekszielung derbäigesat.
+={n} habitants ajoutés depuis le recensement. ¦ {n} Bewunner aus der Vollekszielung derbäigesat.|{n} Bewunner aus der Vollekszielung derbäigesat.
+={n} trémie ouverte ¦ {n} Trapenaussparung opgemaach|{n} Trapenaussparungen opgemaach
+={n} trémies ouvertes ¦ {n} Trapenaussparung opgemaach|{n} Trapenaussparungen opgemaach
+={n} étage supprimé ¦ {n} Stack geläscht|{n} Stäck geläscht
+={n} étages supprimés ¦ {n} Stack geläscht|{n} Stäck geläscht
+={n} copie seulement : le mur est trop court pour plus. ¦ Just {n} Kopie: d’Mauer ass ze kuerz fir méi.|Just {n} Kopien: d’Mauer ass ze kuerz fir méi.
+={n} copies seulement : le mur est trop court pour plus. ¦ Just {n} Kopie: d’Mauer ass ze kuerz fir méi.|Just {n} Kopien: d’Mauer ass ze kuerz fir méi.
+={n} lampe allumée ¦ {n} Luucht un|{n} Luuchten un
+={n} lampes allumées ¦ {n} Luucht un|{n} Luuchten un
+={n} refusé : {list} ¦ {n} refuséiert: {list}|{n} refuséiert: {list}
+={n} refusés : {list} ¦ {n} refuséiert: {list}|{n} refuséiert: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} Bild: zéi et an d’🎬 Montage, fir e Film dovun ze maachen (mat den Texter als Off-Stëmm).|✓ {n} Biller: zéi se an d’🎬 Montage, fir e Film dovun ze maachen (mat den Texter als Off-Stëmm).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} Bild: zéi et an d’🎬 Montage, fir e Film dovun ze maachen (mat den Texter als Off-Stëmm).|✓ {n} Biller: zéi se an d’🎬 Montage, fir e Film dovun ze maachen (mat den Texter als Off-Stëmm).
+🔗 Relier un souvenir… ¦ 🔗 Eng Erënnerung verbannen…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Wénkel (°, 0 = no riets, 90 = no uewen)
+Début X ¦ Ufank X
+Début Y ¦ Ufank Y
+Fin X ¦ Enn X
+Fin Y ¦ Enn Y
+Hauteur (cm, vide = celle de l’étage) ¦ Héicht (cm, eidel = déi vum Stack)
+⌒ Courbure (flèche) ¦ ⌒ Kréimung (Pfeil)
+✂ Couper en deux ¦ ✂ An zwee schneiden
+Revêtement ¦ Belag
+Pareil pour : ¦ D’selwecht fir:
+tout l’étage ¦ de ganze Stack
+toute la maison ¦ dat ganzt Haus
+Couleur et texture ¦ Faarf an Textur
+Taille du motif ¦ Gréisst vum Muster
+Allège (cm du sol) ¦ Bréischtung (cm vum Buedem)
+Position sur le mur ¦ Positioun op der Mauer
+Du début du mur ¦ Vum Ufank vun der Mauer
+Jusqu’à la fin ¦ Bis zum Enn
+🚪 Genre et ouverture ¦ 🚪 Aart an Ëffnung
+Porte ¦ Dier
+Porte double ¦ Duebeldier
+Porte d’entrée ¦ Hausdier
+Passage, arche ¦ Duerchgang, Bou
+Porte de grange ¦ Scheierpaart
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Eng Rei Fënsteren (oder Dieren) laanscht d’Mauer
+🔁 Répéter… ¦ 🔁 Widderhuelen…
+↔ Sens d’ouverture ¦ ↔ Ëffnungsrichtung
+▨ Plancher : plein ou vide ¦ ▨ Buedem: voll oder op
+Pas de plancher : vide sur l’étage du dessous ¦ Kee Buedem: op iwwer dem Stack drënner
+Garde-corps ¦ Gelänner
+Garde-corps autour ¦ Gelänner ronderëm
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Setzt de Stack driwwer derbäi, wann e feelt, eng Mezzanine iwwer en Deel vun dësem Raum, den oppene Raum iwwer de Rescht, säi Gelänner an d’Trap
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Mezzanine op dëse Raum op
+Mezzanine ouverte ¦ Oppe Mezzanine
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 D’Maueren an d’Miwwele follegen dem Raum
+🧱 Murs de la pièce ¦ 🧱 Maueren vum Raum
+Sol ¦ Buedem
+Salle commune ¦ Stuff
+Chambre des parents ¦ Schlofkummer vun den Elteren
+Chambre des enfants ¦ Kannerzëmmer
+Salle à manger ¦ Iesszëmmer
+Grenier ¦ Späicher
+Cellier ¦ Viirotskummer
+Étable ¦ Stall
+Grange ¦ Scheier
+Fournil ¦ Bakes
+Boutique ¦ Geschäft
+Couloir ¦ Gank
+Cour ¦ Haff
+Jardin ¦ Gaart
+Potager ¦ Geméisgaart
+Basse-cour ¦ Hénnerhaff
+🕯 Souvenirs de la pièce ¦ 🕯 Erënnerunge vum Raum
+La chambre où est née Marie en 1890 ; la veillée… ¦ D’Kummer, wou d’Marie 1890 gebuer ass; d’Owender beieneen…
+Les personnes de la pièce ¦ D’Persoune vum Raum
+Leurs années dans cette pièce ¦ Hir Joeren an dësem Raum
+années : 1890 – 1925 ¦ Joeren: 1890 – 1925
+🪜 Escalier ¦ 🪜 Trap
+✓ confortable (60 à 66 cm) ¦ ✓ bequem (60 bis 66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ e bësse steil: maach d’Trap méi laang oder wiel eng gedréinten Trap
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ ganz laang Stufen: maach d’Trap méi kuerz
+Quart tournant ¦ Véierteldréiung
+Vers la gauche ¦ No lénks
+Vers la droite ¦ No riets
+Le haut devient le bas ¦ Uewen gëtt ënnen
+⇅ Inverser le sens de montée ¦ ⇅ D’Richtung vum Opgoen ëmdréinen
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Kee Stack driwwer: setz en derbäi mat ＋ uewen.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Fir Haiser, déi virdru gezeechent goufen: all Trap mécht de Buedem vum Stack driwwer op
+Ouvrir les trémies de tous les escaliers ¦ D’Trapenaussparunge vun alle Trapen opmaachen
+Du sol ¦ Vum Buedem
+Les prochains objets de ce modèle seront posés à cette taille ¦ Déi nächst Objete vun dësem Modell ginn an dëser Gréisst gesat
+💾 Garder pour ce modèle ¦ 💾 Fir dëse Modell halen
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Op dat Miwwelstéck drënner setzen (Dësch, Kommod, Kamäin…)
+⬆ Sur l’objet dessous ¦ ⬆ Op den Objet drënner
+⬇ Au sol ¦ ⬇ Um Buedem
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Méi Kopien op eemol: an enger Rei, an engem Gitter oder an engem Krees ronderëm en Objet (6 Still ronderëm en Dësch)
+Pieds ¦ Féiss
+Pieds, poignées, filets, ferrures ¦ Féiss, Grëffer, Leeschten, Beschléi
+Sans deuxième couleur ¦ Ouni zweet Faarf
+Époque, style ¦ Epoch, Stil
+Effets : pieds et détails ¦ Effeten: Féiss an Detailer
+🏷 Souvenirs de cet objet ¦ 🏷 Erënnerunge vun dësem Objet
+Son histoire (objet de famille) ¦ Seng Geschicht (Familljestéck)
+Flèche vers un point ¦ Pfeil op e Punkt
+Couleur de la flèche ¦ Faarf vum Pfeil
+Police de départ ¦ Standardschrëft
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Versioune vum Haus no Joeren oder Datumen: kucken, wéi et sech entwéckelt, eng Epoch mat enger Vollekszielung verbannen
+🕰 Époques ¦ 🕰 Epochen
+L’époque d’avant ¦ D’Epoch virdrun
+L’époque montrée (plan 2D et vue 3D) ¦ D’gewisen Epoch (2D-Plang an 3D-Usiicht)
+L’époque d’après ¦ D’Epoch duerno
+⋯ Gérer les époques… ¦ ⋯ D’Epochen verwalten…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ D’Entwécklung kucken: d’Epochen eng no der anerer
+MAISON · ÉPOQUES ¦ HAUS · EPOCHEN
+MAISON ¦ HAUS
+Créer l’époque ¦ D’Epoch erstellen
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ D’Haus, sou wéi et elo gezeechent ass, gëtt déi éischt Epoch: gëff hir en Numm an en Datum. Déi nei Epoch fänkt mat enger Kopie un, déi s du dann änners (e Raum derbäi, eng Mauer ofgerappt, aner Miwwelen…).
+La maison dessinée maintenant ¦ D’Haus, sou wéi et elo gezeechent ass
+Année ou date ¦ Joer oder Datum
+La nouvelle époque ¦ Déi nei Epoch
+ex. Après l’agrandissement ¦ z. B. No der Vergréisserung
+Rattachée au recensement ¦ Mat der Vollekszielung verbonnen
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Fir se mat enger Vollekszielung ze verbannen: Reiter Haus → „📋 D’Vollekszielungen“ → ＋ Eng Vollekszielung.
+Donne un nom ou une date à cette époque. ¦ Gëff dëser Epoch en Numm oder en Datum.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Nei Epoch erstallt (Kopie): änner dat, wat anescht war. „‹ ›“ uewen, fir vun enger Epoch op déi aner ze goen.
+Époque supprimée ¦ Epoch geläscht
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Erstell mindestens zwou Epochen (＋ Nei Epoch), fir d’Haus sech entwéckelen ze gesinn.
+＋ Un recensement ¦ ＋ Eng Vollekszielung
+Recensements à rattacher ¦ Vollekszielunge fir ze verbannen
+Ajouter aussi les personnes du foyer comme habitants ¦ D’Persoune vum Stot och als Bewunner derbäisetzen
+À l’époque ¦ An der Epoch
+Choisis au moins un recensement. ¦ Wiel mindestens eng Vollekszielung.
+Clique sur un mur. ¦ Klick op eng Mauer.
+Une étiquette à flèche ¦ Eng Etikett mat Pfeil
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ D’Notiz (z. B. „Duebelvitrage 1978 agebaut“, „Hei war de Pëtz“)
+Étiquette à flèche ¦ Etikett mat Pfeil
+Un texte sur le plan ¦ En Text um Plang
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Den Text fir ze schreiwen (Numm vun engem Raum, enger Plaz, eng Bemierkung…)
+Mur modifié ¦ Mauer geännert
+Pièce modifiée ¦ Raum geännert
+Flèche déplacée ¦ Pfeil geréckelt
+Objet tourné ¦ Objet gedréint
+Plan ancien déplacé ¦ Ale Plang geréckelt
+Une pièce d’au moins 50 cm de côté. ¦ E Raum vu mindestens 50 cm pro Säit.
+Un vide d’au moins 40 cm de côté. ¦ En oppene Raum vu mindestens 40 cm pro Säit.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Dësen oppene Raum ass um ënneschte Stack: e geet op näischt. Fir eng Mezzanine zeechen den oppene Raum um Stack driwwer.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Wiel fir d’éischt de Raum (d’Stuff) um Plang.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ De Raum ass e bësse kleng fir eng Mezzanine (mindestens 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Klick: wielen · zéien: réckelen · Grëffer: eng Mauer verlängeren, e Raum verformen · ⌫: läschen
+Glisser pour déplacer la vue ¦ Zéien, fir d’Usiicht ze réckelen
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Zéi diagonal: e rechteckege Raum mat senge véier Maueren (d’Fläch gëtt gewisen)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Zéi diagonal: en oppene Raum ouni Buedem (Mezzanine, duebel Héicht, Trapenaussparung); e Gelänner gëtt eleng laanscht d’Kante gesat, déi keng Mauer hunn
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Ee Klick pro Eck (Aschnappen: Gitter, Ecken, riets Wénkelen; Alt: fräi) · Duebelklick oder Enter: ophalen · Klick op den 1. Punkt: zoumaachen (an de Raum erstellen)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ E Raum a fräier Form (ouni Maueren): ee Klick pro Eck, Duebelklick fir opzehalen
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Klick op eng Mauer: eng Dier (zéi se duerno laanscht d’Mauer)
+Clic sur un mur : une fenêtre ¦ Klick op eng Mauer: eng Fënster
+Deux clics : une cote (la distance s’affiche) ¦ Zwee Klicken: e Mooss (d’Distanz gëtt gewisen)
+Clic : écrire un texte sur le plan ¦ Klick: en Text op de Plang schreiwen
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Klick op de Punkt fir ze weisen (de Pëtz, eng Fënster…), dann do, wou d’Notiz hikënnt
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ Breet x Déift (z. B. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ Längt (cm, oder 3,5 m) dann @Wénkel ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Schreif Breet x Déift: 420 x 350 (cm) oder 4,2 x 3,5 m (mindestens 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Klick fir d’éischt de Startpunkt um Plang, tipp dann d’Längt.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Längt net verstanen: 350, 3,5 m, oder 350 @ 90 fir de Wénkel.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Wénkel net verstanen (a Grad: 0 no riets, 90 no uewen).
+Grille ¦ Gitter
+Coins des murs et des pièces ¦ Ecke vun de Maueren an de Raim
+Milieu des murs ¦ Mëtt vun de Maueren
+Le long des murs (au cm) ¦ Laanscht d’Maueren (op de cm)
+Alignements (lignes de rappel) ¦ Ausriichtungen (Hëllefslinnen)
+Pas des angles ¦ Schrëtt vun de Wénkelen
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: keen Aschnappen (op de mm genau) · ⇧: Wénkele vu 45° · Feiler: dat Gewielt ëm 1 cm verréckelen (⇧: ëm ee Schrëtt vum Gitter) · beim Zeechnen tipp d’Längt mat der Tastatur.
+Décalé ¦ Verréckelt
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Et brauch een en OBJ-, STL-, GLB- oder glTF-Fichier.
+Lecture du modèle… ¦ De Modell gëtt gelies…
+Objet importé ¦ Objet importéiert
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ 3D-Objet importéiert: en ass och a Miwwelen → „Meng Objeten“, fir all d’Haiser.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Objet gesat (Usiicht vun uewen): stell seng richteg Gréisst an den Eegeschaften an.
+Envoi de l’image dans les médias… ¦ D’Bild gëtt an d’Medie geschéckt…
+MAISON · PLAN ANCIEN ¦ HAUS · ALE PLANG
+Le plan à calquer ¦ De Plang fir duerchzepausen
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ En napoleonesche Kadaster, en ale Plang, eng Skizz… „📁 Importéieren“ hëlt een um Computer (en kënnt an d’Medien).
+Poser ce plan ¦ Dëse Plang setzen
+Cette image ne peut pas servir de plan. ¦ Dëst Bild kann net als Plang déngen.
+Plan ancien posé ¦ Ale Plang gesat
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Klick déi zwee Enner vun enger bekannter Längt um ale Plang (eng Mauer, de gezeechente Moossstab)
+Les deux points sont trop proches. ¦ Déi zwee Punkte sinn ze no beieneen.
+📏 Mettre le plan à l’échelle ¦ 📏 De Plang op de Moossstab bréngen
+Mettre à l’échelle ¦ Op de Moossstab bréngen
+Quelle est la vraie longueur entre ces deux points ? ¦ Wéi laang ass et wierklech tëscht dësen zwee Punkten?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Den napoleonesche Kadaster ass dacks am 1/2500 oder 1/1250; al Pläng rechnen an toises (6 pieds, 1,949 m) an a pieds du roi (32,48 cm): schreif d’Zuel, d’Ëmrechnung geschitt eleng.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Schreif eng Längt, zum Beispill 12 oder 3,5.
+Plan ancien mis à l’échelle ¦ Ale Plang op de Moossstab bruecht
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Klick zwee Punkte laanscht eng Mauer vum ale Plang: si gëtt riicht
+Ce mur est déjà droit. ¦ Dës Mauer ass schonn riicht.
+↻ Redresser ¦ ↻ Riichtsetzen
+✥ Déplacer ¦ ✥ Réckelen
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Duerchpausen: ee Klick pro Mauereck, laanscht den ale Plang · Duebelklick oder Enter fir eng Mauer ofzeschléissen · ⬚ fir e ganze Raum
+Photo, document ¦ Foto, Dokument
+Récit ¦ Geschicht
+Souvenir de famille ¦ Familljenerënnerung
+Objet de famille ¦ Familljestéck
+Voir ce souvenir ¦ Dës Erënnerung kucken
+Retirer ce souvenir (sans le supprimer de la base) ¦ Dës Erënnerung ewechhuelen (ouni se aus der Datebank ze läschen)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Keng Erënnerung verbonnen: eng Foto, eng Geschicht, eng Persoun…
+Aucun souvenir ne correspond. ¦ Keng Erënnerung passt.
+Aucun souvenir de famille pour l’instant ¦ Nach keng Familljenerënnerung
+Essaie un autre mot. ¦ Probéier en anert Wuert.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Lëschten → Familljegedächtnes (Rezepter, Ausdréck, Lidder…) oder Familljestécker.
+MAISON · SOUVENIRS ¦ HAUS · ERËNNERUNGEN
+📜 Un souvenir de famille ¦ 📜 Eng Familljenerënnerung
+Chercher… (recette, montre, surnom) ¦ Sichen… (Rezept, Auer, Spëtznumm)
+Chercher un souvenir ¦ Eng Erënnerung sichen
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Wiel fir d’éischt e Miwwelstéck, en Objet oder e Raum.
+🖼 Une photo, un document ¦ 🖼 Eng Foto, en Dokument
+pris dans les médias (ou importé depuis l’ordinateur) ¦ aus de Medien (oder vum Computer importéiert)
+✍ Un récit ¦ ✍ Eng Geschicht
+ce qui s’est passé ici, ce qu’on en raconte ¦ wat hei geschitt ass, wat ee sech doriwwer erzielt
+👤 Une personne ¦ 👤 Eng Persoun
+qui a vécu ici, qui s’en servait ¦ déi hei gelieft huet, déi et benotzt huet
+une recette, une expression, un objet de famille… ¦ e Rezept, en Ausdrock, e Familljestéck…
+ex. La veillée de Noël 1912 ¦ z. B. De Chrëschtowend 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Wat hei geschitt ass, wat ee sech doriwwer erzielt…
+Le récit ¦ D’Geschicht
+Écris un titre ou un récit. ¦ Schreif en Titel oder eng Geschicht.
+Souvenir rattaché ¦ Erënnerung verbonnen
+Ce média n’existe plus. ¦ Dëst Medium gëtt et net méi.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Dat net gespäichert Haus geet verluer (fir d’éischt 💾).
+Ouvrir la fiche ? ¦ D’Fiche opmaachen?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ d’Aschnappen, d’Gitter, d’Déckt vun de Maueren, d’Aenhéicht an d’Liicht
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Fichier prett: en gëtt an 🧲 Aschnappen → „⤒ Importéieren“ importéiert.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Dëse Fichier ass net liesbar (et brauch een e .json-Fichier mat Astellungen).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Dëse Fichier ass keng LCNDA-Astellung (⤓ Eng Astellung exportéieren, an engem Tool).
+Le plan de cet étage est vide. ¦ De Plang vun dësem Stack ass eidel.
+le plan de l’étage ¦ de Plang vum Stack
+le plan, plus léger ¦ de Plang, méi liicht
+le plan sur une page A4 ¦ de Plang op enger A4-Säit
+le plan, en dessin ¦ de Plang, als Zeechnung
+le plan, tout de suite ¦ de Plang, direkt
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ de Plang vum Stack fir AutoCAD, LibreCAD… (Ebeenen, a cm)
+image de la vue 3D ¦ Bild vun der 3D-Usiicht
+🧊 Vue 3D ¦ 🧊 3D-Usiicht
+💾 Fichier de la maison ¦ 💾 Fichier vum Haus
+à réimporter (⤒ Importer) ¦ fir nees ze importéieren (⤒ Importéieren)
+Ce fichier DXF n’est pas lisible. ¦ Dësen DXF-Fichier ass net liesbar.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ Kee Strich an dësem DXF fonnt (en „binären“ DXF kann net gelies ginn: späicher en als Text-DXF, ASCII).
+MAISON · IMPORT DXF ¦ HAUS · DXF-IMPORT
+Importer le plan ¦ De Plang importéieren
+Unité du dessin ¦ Eenheet vun der Zeechnung
+Épaisseur des murs ¦ Déckt vun de Maueren
+Où le mettre ¦ Wouhinner domat
+Un nouvel étage ¦ En neie Stack
+Calques à prendre ¦ Ebeene fir ze huelen
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ E Plang, deen vun hei exportéiert gouf: seng Maueren ginn no hirer Achs iwwerholl (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ En Architekteplang zeechent dacks all Mauer mat zwee Stricher: hal eng kleng Déckt, oder hol den Haken bei den Ebeene vu Miwwelen, Moossen a Schraffuren ewech.
+Coche au moins un calque. ¦ Wiel mindestens eng Ebeen.
+Rien à reprendre dans ces calques. ¦ Näischt fir aus dësen Ebeenen ze huelen.
+Plan importé ¦ Importéierte Plang
+Plan DXF importé ¦ DXF-Plang importéiert
+Nombre en tout ¦ Zuel am Ganzen
+Espace entre deux ¦ Ofstand tëscht zwee
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Keng Plaz op dëser Mauer: manner Ofstand, oder réckel déi éischt Richtung Ufank vun der Mauer.
+Répété ¦ Widderholl
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Wiel fir d’éischt en Objet, eng Dier oder eng Fënster.
+En ligne ¦ An enger Rei
+En grille (rangées) ¦ An engem Gitter (Reien)
+En cercle (autour d’un objet) ¦ An engem Krees (ronderëm en Objet)
+Sens (en ligne) ¦ Richtung (an enger Rei)
+→ vers la droite ¦ → no riets
+↓ vers le bas ¦ ↓ no ënnen
+← vers la gauche ¦ ← no lénks
+↑ vers le haut ¦ ↑ no uewen
+Par rangée (en grille) ¦ Pro Rei (Gitter)
+Autour de (en cercle) ¦ Ronderëm (Krees)
+Un point, au rayon ci-dessous ¦ E Punkt, mam Radius hei drënner
+Rayon (si autour d’un point) ¦ Radius (wann ronderëm e Punkt)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ Am Krees: setz fir d’éischt een eenzegen Objet (e Stull) op seng Plaz ronderëm den Dësch, wiel en, a widderhuel dann: d’Kopien ginn ronderëm den Dësch a kucken dohinner, wéi deen éischten.
+Ce fichier n’est pas lisible. ¦ Dëse Fichier ass net liesbar.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Dëse Fichier ass keen LCNDA-Haus (⤓ Exportéieren → 💾 Fichier vum Haus).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ De Plang, deen hei gezeechent ass, gëtt duerch dee vum Fichier ersat (↶ fir zréckzegoen).
+Remplacer le plan par celui du fichier ? ¦ De Plang duerch dee vum Fichier ersetzen?
+Remplacer le plan ¦ De Plang ersetzen
+Maison importée ¦ Haus importéiert
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Lee e Bild, en 3D-Objet (OBJ, STL, glTF, GLB) oder e Fichier vun engem Haus hei of.
+📁 Que faire de cette image ? ¦ 📁 Wat soll mat dësem Bild geschéien?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 D’Bild fir dëst Gemälde, dëse Kader
+posée sur l’objet choisi, en 2D et en 3D ¦ op de gewielten Objet gesat, an 2D an an 3D
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 E ale Plang, e Kadaster, fir duerchzepausen
+posé en fond, à mettre à l’échelle ¦ als Hannergrond gesat, fir op de Moossstab ze bréngen
+🖼 Un objet vu de dessus ¦ 🖼 En Objet vun uewen gesinn
+posé sur le plan comme un meuble ¦ wéi e Miwwelstéck op de Plang gesat
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Eng Erënnerung fir dat Gewielt
+rattaché au meuble ou à la pièce ¦ mam Miwwelstéck oder dem Raum verbonnen
+Construction de la maison en 3D… ¦ D’Haus gëtt an 3D opgebaut…
+Vue 3D indisponible. ¦ 3D-Usiicht net disponibel.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Zéien: dréinen · Rietsklick oder ⇧ zéien: réckelen · Rad: méi no · ☀️ Liicht: Auerzäit a Joreszäit · 🚶 Besichen: Z Q S D oder Feiler · ✦: eng Erënnerung
+Les dernières modifications de la maison seront perdues. ¦ Déi lescht Ännerungen um Haus ginn verluer.
+Fermer sans enregistrer la maison ? ¦ Zoumaachen, ouni d’Haus ze späicheren?
+Supprimé ¦ Geläscht
+Dupliqué ¦ Duplizéiert
+Sens de l’escalier ¦ Richtung vun der Trap
+Tous les escaliers ouvrent déjà le plancher. ¦ All d’Trape maachen de Buedem schonn op.
+Verrière ajoutée ¦ Glasdaach derbäigesat
+Édicule ajouté ¦ Daachopbau derbäigesat
+Lanterneau ajouté ¦ Liichtkuppel derbäigesat
+Fenêtre de toit ajoutée ¦ Daachfënster derbäigesat
+Lucarne ajoutée ¦ Gaub derbäigesat
+Chien-assis ajouté ¦ Schleppgaub derbäigesat
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Si ass an der 3D-Usiicht ze gesinn, mam Daach.
+Retiré du toit ¦ Vum Daach ewechgeholl
+Fenêtre de toit ou lucarne retirée ¦ Daachfënster oder Gaub ewechgeholl
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Näischt ënnert dësem Objet: zéi en fir d’éischt iwwer dat Miwwelstéck (en Dësch, eng Kommod…).
+Taille hors limites (de 1 cm à 50 m). ¦ Gréisst ausserhalb vun de Grenzen (vun 1 cm bis 50 m).
+Agrandi ¦ Vergréissert
+Réduit ¦ Verklengert
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Gréisst fir dëse Modell gehal: déi nächst ginn esou gesat wéi dësen.
+Sens d’ouverture ¦ Ëffnungsrichtung
+Côté d’ouverture ¦ Säit vun der Ëffnung
+Mur coupé ¦ Mauer gedeelt
+＋ Un étage ¦ ＋ E Stack
+Hauteur sous plafond ¦ Plafongshéicht
+Gérer les étages… ¦ D’Stäck verwalten…
+Renommer, hauteur sous plafond, supprimer ¦ Ëmbenennen, Plafongshéicht, läschen
+Ajouter un étage… ¦ E Stack derbäisetzen…
+Les étages ¦ D’Stäck
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ Vun uewen no ënnen. Benenn ëm, änner d’Héicht, oder läsch e Stack (mat allem, wat drop ass).
+Niveau ¦ Niveau
+Il faut au moins un étage. ¦ Et brauch ee mindestens ee Stack.
+{names} supprimés avec ce qu’ils contenaient ¦ {names} mat hirem Inhalt geläscht
+{names} supprimé avec ce qu’il contenait ¦ {names} mat sengem Inhalt geläscht
+Étage supprimé ¦ Stack geläscht
+Étage renommé ¦ Stack ëmbenannt
+Renommer l’étage ¦ De Stack ëmbenennen
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Zéi den ale Plang (op enger eidler Plaz vum Plang); klick nach eng Kéier op „✥ Réckelen“ fir opzehalen.
+Plan ancien retiré ¦ Ale Plang ewechgeholl
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Ale Plang aus dem Hannergrond ewechgeholl (d’Bild bleift an de Medien)
+Plan ancien sous cet étage ¦ Ale Plang ënnert dësem Stack
+Plan ancien ¦ Ale Plang
+Plan ancien verrouillé ¦ Ale Plang gespaart
+Plan ancien déverrouillé ¦ Ale Plang fräigeschalt
+Un habitant de la maison ¦ E Bewunner vum Haus
+Habitant ajouté ¦ Bewunner derbäigesat
+Habitant retiré ¦ Bewunner ewechgeholl
+Une personne liée à cette pièce ¦ Eng Persoun, déi mat dësem Raum verbonnen ass
+Personne liée à la pièce ¦ Persoun mam Raum verbonnen
+Le plan est vide. ¦ De Plang ass eidel.
+Fenêtre bloquée. ¦ Fënster blockéiert.
+Ce recensement n’est relié à aucune fiche. ¦ Dës Vollekszielung ass mat kenger Fiche verbonnen.
+Recensement retiré ¦ Vollekszielung ewechgeholl
+Personne retirée ¦ Persoun ewechgeholl
+Souvenir retiré ¦ Erënnerung ewechgeholl
+Légende des époques ¦ Legend vun den Epochen
+Personnes de la pièce ¦ Persoune vum Raum
+Flèche ajoutée ¦ Pfeil derbäigesat
+Flèche retirée ¦ Pfeil ewechgeholl
+Lumière ¦ Liicht
+Années de la personne ¦ Joere vun der Persoun
+Recensement rattaché à l’époque ¦ Vollekszielung mat der Epoch verbonnen
+Revêtement du mur ¦ Belag vun der Mauer
+Murs de la pièce ¦ Maueren vum Raum
+Autre époque en 3D ¦ Aner Epoch an 3D
+📍 Un arrêt de la visite guidée ¦ 📍 Eng Statioun vun der Féierung
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Wat hei gesot gëtt (bei der Féierung haart virgelies):
+Ici, la salle commune : on y veillait l’hiver… ¦ Hei d’Stuff: do souz een am Wanter owes beieneen…
+Ajouter l’arrêt ¦ D’Statioun derbäisetzen
+MAISON · PHOTO D’ÉPOQUE ¦ HAUS · FOTO VUN DER EPOCH
+La photo prise d’ici ¦ D’Foto, déi vun hei aus gemaach gouf
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Déi al Foto, déi op dëser Plaz an an dës Richtung gemaach gouf: du kanns se mam Haus vergläichen (Schieber Fréier ⟷ Haut).
+Poser la photo ¦ D’Foto setzen
+Cette image ne peut pas servir ici. ¦ Dëst Bild kann hei net benotzt ginn.
+Photo d’époque ¦ Foto vun der Epoch
+Photo d’époque posée ¦ Foto vun der Epoch gesat
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Den Norde vum Plang: klick fir en anzestellen (☀️ Orientéierung a Liicht)
+Aucune maison ne correspond. ¦ Keen Haus passt.
+Époques ¦ Epochen
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Mérimée-Notiz (Patrimoine)…
+🏠 Maisons ¦ 🏠 Haiser
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ D’Pläng vun de Familljenhaiser, an 2D an an 3D: hir Raim, hir Miwwelen, hir Bewunner, hir Vollekszielungen, hir Epochen an hir Erënnerungen.
+Renommer la maison ¦ D’Haus ëmbenennen
+Ouvrir la maison ¦ D’Haus opmaachen
+↗ Ouvrir la maison ¦ ↗ D’Haus opmaachen
+Cette maison est déjà rattachée. ¦ Dëst Haus ass schonn verbonnen.
+🏠 Maison ¦ 🏠 Haus
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Späicher fir d’éischt d’Vollekszielung: duerno kanns du d’Haus domat verbannen, wou de Stot gewunnt huet (an d’Epoch vum Haus).
+Détacher la maison de ce recensement ¦ D’Haus vun dëser Vollekszielung ewechhuelen
+Relier une maison : nom, lieu… ¦ En Haus verbannen: Numm, Plaz…
+Époque de la maison ¦ Epoch vum Haus
+Dessiner la maison de ce foyer ¦ D’Haus vun dësem Stot zeechnen
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Direkt verbonnen (ouni op „Späicheren“ ze waarden). Am Haus: Reiter Haus → „📋 D’Vollekszielungen“.
+— époque de la maison — ¦ — Epoch vum Haus —
+Le recensement a des changements non enregistrés. ¦ D’Vollekszielung huet net gespäichert Ännerungen.
+Ouvrir la maison quand même ? ¦ D’Haus trotzdeem opmaachen?
+Maison détachée du recensement. ¦ Haus vun der Vollekszielung ewechgeholl.
+Choisis une maison. ¦ Wiel en Haus.
+Maison rattachée au recensement. ¦ Haus mat der Vollekszielung verbonnen.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ D’Längt an d’Breet vum ganze Stack, ënnert dem Plang a lénks dovun (zousätzlech zu de Moossen vun all Mauer).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Eng Tabell riets vum Plang: all Raum a seng Fläch, an d’Total. Se aktualiséiert sech eleng a geet mam Plang mat (Bild, PDF, Drock).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ De Kader ënnen riets op richtege Pläng: den Numm vum Haus, d’Plaz, d’Epoch, de Stack an den Datum vum Dag.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ De Plang hell op donkelem Hannergrond, wéi an engem Programm fir technesch Zeechnungen. Just um Ecran: Biller, PDFen an Drécker bleiwen op wäissem Hannergrond.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ De Stack drënner (oder driwwer) schéngt duerch dësen duerch: praktesch, fir d’Maueren vum 1. Stack genee iwwer déi vum Rez-de-chaussée ze setzen. 🕰 Eng aner Epoch: dee selwechte Stack, sou wéi e war (oder wäert sinn), a Sepia.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Klick déi zwee Enner vun enger bekannter Längt um Bild (eng Mauer, de Moossstab vum Plang), a gëff dann hir richteg Längt un: a Meter, oder an alen toises a pieds (eleng ëmgerechent).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ De Plafong follegt der Daachschréi (3D-Usiicht, Schnëtt, Besuch); d’Fläch „Carrez-Gesetz“ zielt just do, wou d’Héicht mindestens 1,80 m ass.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Déi déif Mauer ënnert der Schréi (de „Kniestack“): 0, wann d’Daach um Buedem ufänkt, dacks 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ Fir en Haus an L, T oder U: een Daach pro Flillek, mat der selwechter Neigung; d’Kéilen (do wou zwee Daacher zesummekommen) entstinn eleng. D’Flilleke follegen de Raim vum ieweschte Stack.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Dréint de Plang par rapport zum Norden: 0° = den ieweschte Rand vum Plang ass am Norden, 90° = den ieweschte Rand vum Plang weist no Osten. D’Sonn an d’Schiete vun der 3D-Usiicht follegen.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ D’Héicht vun dengen Ae beim Besuch (🚶 Besichen, 3D-Usiicht): 1,60 m fir en Erwuessenen, 1 m fir wéi e Kand ze gesinn.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ D’Héicht vun dengen Aen am Haus: 1,60 m fir en Erwuessenen, 1 m fir wéi e Kand ze gesinn.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Wéi wäit d’Mëtt vun der Mauer vun der riichter Linn ofwäicht: + op eng Säit, − op déi aner; 0 = eng riicht Mauer. Fir e ronnen Tuerm, eng Apsis, eng gebuede Mauer.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Mécht d’Muster (Bréck, Steng, Tapéit) op dëser Mauer méi grouss oder méi kleng: 100 % = richteg Gréisst.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ D’Héicht vum ënneschte Rand vun der Fënster iwwer dem Buedem (dacks 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Eng Zon ouni Buedem: ee gesäit de Stack drënner (Mezzanine, Stuff mat duebeler Héicht, Trapenhaus). An 3D ass de Buedem op, a beim Besuch kann een do net goen.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Eleng laanscht d’Kante vum oppene Raum gesat, déi keng Mauer beréieren (an op gelooss, wou eng Trap ukënnt).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Wann ee mam Raum réckelt, ginn seng Maueren (mat Dieren a Fënsteren), seng Miwwelen a seng Texter mat. ⇧ beim Zéien: just de Raum.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ D’Héicht fir eropzegoen: déi vum Stack plus d’Déckt vum Buedem (am Reiter Haus agestallt). Hol den Haken ewech, fir se an „Héicht“ mat der Hand festzeleeën.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Mécht de Buedem vum Stack driwwer iwwer der Trap op (d’Trapenaussparung), mat engem Gelänner ronderëm, ausser op der Säit, wou een ukënnt.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ D’Héicht vum ënneschte Rand vum Objet iwwer dem Buedem: 0 fir e Miwwelstéck um Buedem, 140 fir eng Auer, déi un der Mauer hänkt.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Mécht den Objet méi grouss oder méi kleng an hält seng Proportiounen: praktesch fir en importéierte Modell, deen ze kleng oder ze grouss ukomm ass.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ E Pfeil vum Text op e Punkt vum Plang (de Pëtz, eng Fënster, e Kamäin…). Zéi de roude Grëff, fir en ze riichten.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Wann d’Aschnappe vun de Wénkelen un ass, riicht sech eng gezeechent Mauer op Wénkele vun dësem Schrëtt aus: 90° = just riets Wénkelen, 45° = och d’Diagonalen, 15° = méi fein.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Zéi: d’Haus hëlt d’Epoch, déi dem Joer am noosten ass (virdrun oder gläich).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Dréint de Plang par rapport zum Norden: 0° = den ieweschte Rand vum Plang ass am Norden, 90° = den ieweschte Rand weist no Osten. D’Schiete follegen.
+Licence : {x} ¦ Lizenz: {x}
+Auteur : {x} ¦ Auteur: {x}
+Source : {x} ¦ Quell: {x}
+🕰 ancien ¦ 🕰 al
+Forme « {name} » ¦ Form „{name}“
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, {h} cm héich, {elev} cm iwwer dem Buedem
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, {h} cm héich
+{name} (à moi) ¦ {name} (vu mir)
+Comme « {name} » ¦ Wéi „{name}“
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Den Objet „{name}“ aus der Bibliothéik läschen?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ „{name}“ ass an „{cat}“: klick drop, fir en ze setzen.
+Supprimer « {name} » de « Mes objets » ? ¦ „{name}“ aus „Meng Objeten“ läschen?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ <b>Fräi</b> 3D-Modeller (CC0: ëffentlechen Domän, ouni Konditioune benotzbar) fir an deng Haiser ze setzen. Si kommen a <b>Miwwelen → „Meng Objeten“</b>, mat hirer Lizenz, hirem Auteur an hirer Quell.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Modeller vun {ph} (Powered by Poly Haven) — Lizenz {cc0}. Den Download geet iwwer däin Server (ongeféier 1 bis 10 MB pro Modell, mat Texturen).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Lued fir d’éischt e <b>CC0</b>-Pack op der Säit vu sengem Auteur erof (e .zip-Fichier), a wiel en dann hei: du wiels d’Modeller, déi s du behale wëlls (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} (déi {n} am meeschten erofgelueden vun {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ „{name}“ ass a Miwwelen → „Meng Objeten“ (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Lizenz am Pack fonnt
+Mesure et vignettes… ¦ Miessung a Miniaturen…
+{models} dans « Mes objets ». ¦ {models} a „Meng Objeten“.
+Renommer, ranger, voir la licence, supprimer ¦ Ëmbenennen, sortéieren, d’Lizenz kucken, läschen
+Modifier ou supprimer cet objet ¦ Dësen Objet änneren oder läschen
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Näischt passt. ＋ Erstell den Objet, oder sich en an der 📦 Online-Bibliothéik.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Hei: d’Objeten, déi s du erstells (＋ En Objet erstellen), déi aus der 📦 Online-Bibliothéik erofgelueden, an déi importéiert 3D-Fichieren (⤒ Importéieren, uewen).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Näischt Aales an dëser Kategorie (hol den Haken bei „🕰 Just al“ ewech).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Keen Objet an dëser Kategorie gewisen (⚙️ Sortéieren, fir der nees ze weisen).
+Chercher… lit, lampe, piano, vache, salon… ¦ Sichen… Bett, Luucht, Piano, Kou, Salon…
+Chercher un objet ¦ En Objet sichen
+Un objet à toi : nom, taille, couleur, forme, image ¦ En Objet vun dir: Numm, Gréisst, Faarf, Form, Bild
+Des modèles 3D libres de droit (CC0) à télécharger ¦ Fräi 3D-Modeller (CC0) fir erofzelueden
+Montrer, cacher, ranger les catégories et les objets ¦ D’Kategorien an d’Objete weisen, verstoppen, sortéieren
+Ne montrer que le mobilier et les objets d’autrefois ¦ Just d’Miwwelen an Objete vu fréier weisen
+＋ Créer un objet ¦ ＋ En Objet erstellen
+📦 Bibliothèque en ligne ¦ 📦 Online-Bibliothéik
+⚙️ Ranger ¦ ⚙️ Sortéieren
+🕰 Ancien seulement ¦ 🕰 Just al
+Ovale ¦ Oval
+Triangle ¦ Dräieck
+En L ¦ An L
+Lit simple ¦ Eenzelbett
+Lit clos ¦ Schaafbett
+Meuble à portes ¦ Schaf mat Dieren
+Banc-coffre à dossier ¦ Këschtebänk mat Récklehn
+Horloge ¦ Auer
+Cheminée à manteau ¦ Kamäin mat Mantel
+Cheminée à manteau (hotte) ¦ Kamäin mat Mantel (Hotte)
+Poêle ¦ Uewen
+Cuisinière ¦ Kachmaschinn
+Évier ¦ Spullstee
+Lavabo, toilette ¦ Lavabo, Wäschdësch
+Maie, pétrin ¦ Bakmull
+Broc et cuvette ¦ Kan a Wäschschossel
+Fontaine ¦ Fontain
+Baratte ¦ Botterfaass
+Lampe ¦ Luucht
+Bougeoir ¦ Käerzestänner
+Chenets ¦ Feierbock
+Fer à repasser ¦ Strickeisen
+Banc d’école ¦ Schoulbank
+Miroir, cadre au mur ¦ Spigel, Kader un der Mauer
+Statue ¦ Statu
+Animal ¦ Déier
+Cabane ¦ Hütt
+Cône, tipi ¦ Kegel, Tipi
+Bloc (boîte pleine) ¦ Block (voll Këscht)
+Cylindre ¦ Zylinder
+Bassine, baquet (ouvert) ¦ Becken, Tubbi (op)
+Table (plateau et 4 pieds) ¦ Dësch (Plack a 4 Féiss)
+Table ovale ¦ Ovalen Dësch
+Caisson sur pieds ¦ Këscht op Féiss
+Comptoir, plan de travail ¦ Comptoir, Aarbechtsplack
+Buffet deux-corps, vaisselier ¦ Buffet an zwee Deeler, Geschierschaf
+Vitrine ¦ Vitrine
+Armoire (corniche) ¦ Kleederschaf (Corniche)
+Commode à tiroirs ¦ Kommod mat Tirangen
+Coffre à couvercle ¦ Këscht mat Deckel
+Étagère ouverte ¦ Oppent Regal
+Lit ¦ Bett
+Poêle rond (Godin) ¦ Ronnen Uewen (Godin)
+Crémaillère et chaudron ¦ Kesselhaken a Kessel
+Baignoire sur pieds ¦ Badewan op Féiss
+Lavabo sur colonne ¦ Lavabo op enger Säul
+Fontaine sur support ¦ Fontain op engem Stänner
+Baratte à piston ¦ Stampbotterfaass
+Lampe à pétrole ¦ Pëtrolslucht
+Bougeoir, chandelier ¦ Käerzestänner, Liichter
+Poste TSF ¦ Radiosapparat
+Phonographe ¦ Phonograph
+Machine à coudre à pédale ¦ Nähmaschinn mat Pedal
+Banc d’école à pupitre ¦ Schoulbank mat Pult
+Pressoir, presse ¦ Press
+Miroir ¦ Spigel
+Cadre au mur ¦ Kader un der Mauer
+Statue sur socle ¦ Statu op engem Sockel
+Plante en pot ¦ Planz am Dëppen
+Boule ¦ Kugel
+Cône ¦ Kegel
+Cabane (toit) ¦ Hütt (Daach)
+À plat (tapis) ¦ Flaach (Teppech)
+Plateau avec l’image dessus ¦ Plack mat dem Bild drop
+MAISON · MOBILIER ¦ HAUS · MIWWELEN
+MAISON · MES OBJETS ¦ HAUS · MENG OBJETEN
+Créer l’objet ¦ Den Objet erstellen
+Partir d’un objet existant (facultatif) ¦ Vun engem existéierenden Objet ausgoen (fakultativ)
+— un objet vide — ¦ — en eidelen Objet —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ z. B. Kleederschaf vun der Bomi, Press vun der Millen…
+Nouvelle catégorie… ¦ Nei Kategorie…
+ex. Grenier ¦ z. B. Späicher
+Vu de dessus (2D) ¦ Vun uewe gesinn (2D)
+En volume (3D) ¦ Am Volume (3D)
+2ᵉ couleur (pieds, poignées, filets) ¦ 2. Faarf (Féiss, Grëffer, Leeschten)
+2ᵉ couleur ¦ 2. Faarf
+Une deuxième couleur ¦ Eng zweet Faarf
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Um Buedem (0), op engem Dësch (75), un der Mauer opgehaangen (140)…
+Tourné de ¦ Gedréint ëm
+Image vue de dessus (facultatif) ¦ Bild vun uewe gesinn (fakultativ)
+🖼️ Une photo des médias… ¦ 🖼️ Eng Foto aus de Medien…
+Retirer l’image ¦ D’Bild ewechhuelen
+Note (souvenir, provenance) ¦ Notiz (Erënnerung, Hierkonft)
+Aperçu en 3D ¦ Virschau an 3D
+⏳ Mesure… ¦ ⏳ Miessung…
+Une photo de l’objet (vue de dessus) ¦ Eng Foto vum Objet (Usiicht vun uewen)
+L’image se pose sur le plan, à la taille de l’objet. ¦ D’Bild gëtt op de Plang gesat, an der Gréisst vum Objet.
+Ceux déjà posés dans les maisons restent. ¦ Déi, déi schonn an den Haiser stinn, bleiwen.
+Donne un nom à la nouvelle catégorie. ¦ Gëff der neier Kategorie en Numm.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Objet geännert (déi, déi schonn gesat sinn, behalen hir al Form).
+Montrer aussi dans la catégorie ¦ Och an der Kategorie weisen
+— seulement dans « Mes objets » — ¦ — just a „Meng Objeten“ —
+« Mes objets » seulement ¦ Just „Meng Objeten“
+Licence ¦ Lizenz
+non précisée (fichier importé) ¦ net uginn (importéierte Fichier)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ Den 3D-Fichier gëtt geläscht: do, wou en gesat ass, gëtt e nees eng einfach Këscht.
+Aucun objet. ¦ Keen Objet.
+⚙️ Ranger le mobilier ¦ ⚙️ D’Miwwele sortéieren
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Wiel, wat s du gesi wëlls, a sortéier mat ↑ ↓: d’Kategorien, dann d’Objete vun all Kategorie.
+Objets de ¦ Objete vun
+Mobilier remis comme au départ. ¦ Miwwelen zréckgesat wéi am Ufank.
+Garde au moins une catégorie. ¦ Hal mindestens eng Kategorie.
+Kenney — tous les packs 3D ¦ Kenney — all d’3D-Packs
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — Filter „CC0“
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Online-Bibliothéik (fräi)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Sichen (op Franséisch oder Englesch): Stull, Faass, Luucht, Vas…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (online)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ En ZIP-Pack (Kenney, Quaternius…)
+Ranger aussi dans ¦ Och aleeën an
+Chargement de la liste… ¦ D’Lëscht gëtt gelueden…
+Recherche… ¦ Sichen…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Den ZIP-Fichier wielen…
+Voir sur Poly Haven ¦ Op Poly Haven kucken
+Aucun modèle ne correspond. ¦ Kee Modell passt.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Ouni Internet kanns du ëmmer nach en ZIP-Pack importéieren, deen s du schonn erofgelueden hues (Reiter dobäi), oder ＋ deng eegen Objeten erstellen.
+Un téléchargement est en cours… ¦ En Download leeft…
+⏳ Téléchargement… ¦ ⏳ Download…
+✓ Dans « Mes objets » ¦ ✓ A „Meng Objeten“
+Envoi et lecture du pack… ¦ De Pack gëtt geschéckt a gelies…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Schécken net méiglech (Fichier ze grouss fir de Server?).
+Envoi impossible. ¦ Schécken net méiglech.
+Image impossible. ¦ Bild net méiglech.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ Kee Lizenzfichier am Pack: kontrolléier op der Säit vum Auteur, ob e wierklech fräi ass.
+Auteur, source ¦ Auteur, Quell
+Adresse du pack (facultatif) ¦ Adress vum Pack (fakultativ)
+⤒ Importer les modèles cochés ¦ ⤒ Déi gewielte Modeller importéieren
+Coche au moins un modèle. ¦ Wiel mindestens ee Modell.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Gëff d’Lizenz vum Pack un (zum Beispill CC0 1.0).
+Surface (m²) ¦ Fläch (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Carrez-Gesetz ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ Mindesthéicht (cm)
+Hauteur maxi (cm) ¦ Maximalhéicht (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Eng Mauer vu manner wéi 5 cm (een Duebelklick ze vill?)
+« {name} » n’a pas de porte ¦ „{name}“ huet keng Dier
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Trap e bësse steil: {n} Stuf vun {rise} cm, Optrëtt {going} cm (2 h + g = {sum} cm)|Trap e bësse steil: {n} Stufe vun {rise} cm, Optrëtt {going} cm (2 h + g = {sum} cm)
+Un escalier sans étage au-dessus ¦ Eng Trap ouni Stack driwwer
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ D’Trap mécht de Buedem vun „{name}“ net op (Eegeschaften → „De Buedem driwwer opmaachen“)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ En oppene Raum um ënneschte Stack: e geet op näischt
+Des pièces sans aucun mur ¦ Raim ganz ouni Maueren
+maison|Mur ¦ Mauer
+maison|Ouverture ¦ Ëffnung
+maison|Combles ¦ Späicher
+maison|Pièce ¦ Raum
+maison|Escalier ¦ Trap
+maison|Étage ¦ Stack
+Mur ¦ Mauer
+Escalier ¦ Trap
+Combles ¦ Späicher
+Plans ¦ Pläng
+▶ Visite guidée ¦ ▶ Féierung
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Besuch just fir ze kucken, ouni d’App opgemaach. Maus oder Fanger fir ze dréinen, Rad fir ze zoomen, „🚶 Besichen“ fir ze goen (Z Q S D oder Feiler).
+📐 Surfaces ¦ 📐 Flächen
+Surfaces ¦ Flächen
+⚠️ Vérifier le plan ¦ ⚠️ De Plang kontrolléieren
+🗺 Visite guidée ¦ 🗺 Féierung
+aucun arrêt ¦ keng Statioun
+📷 Photos d’époque ¦ 📷 Fotoe vun der Epoch
+🏘 Le hameau ¦ 🏘 Den Weiler
+cette maison seule ¦ just dëst Haus
+foyer n° {n} ¦ Stot Nr. {n}
+{a} à {b} m ¦ {a} bis {b} m
+un clic : aller à l’endroit ¦ ee Klick: op d’Plaz goen
+{name} — coupe ¦ {name} — Schnëtt
+Texte de l’arrêt {n} ¦ Text vun der Statioun {n}
+Texte de l’arrêt ¦ Text vun der Statioun
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ De Video als {fmt} exportéieren
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: d’Kamera gleeft vun enger zur anerer, an den Text vun all Statioun gëtt als Ënnertitel gewisen. De Video gëtt an Echtzäit gemaach (ongeféier {s} Sekonnen): looss d’Fënster op.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Eng Fënster ass op enger Mauer, déi et net méi gëtt
+Une porte est posée sur un mur qui n’existe plus ¦ Eng Dier ass op enger Mauer, déi et net méi gëtt
+Une fenêtre est plus large que son mur ¦ Eng Fënster ass méi breet wéi hir Mauer
+Une porte est plus large que son mur ¦ Eng Dier ass méi breet wéi hir Mauer
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Eng Fënster geet iwwer de Plafong eraus ({top} cm fir {wall} cm Mauer): de Buedem schneit se of
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Eng Dier geet iwwer de Plafong eraus ({top} cm fir {wall} cm Mauer): de Buedem schneit se of
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Eng Fënster geet op dëser Plaz ënnert d’Daachschréi
+Une porte passe sous la pente du toit à cet endroit ¦ Eng Dier geet op dëser Plaz ënnert d’Daachschréi
+🧰 Outils de la maison ¦ 🧰 Tools vum Haus
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ D’Tabell vun de Flächen, an der 🧾 Tabelle opgemaach
+Clique deux points sur le plan : la ligne de coupe ¦ Klick zwee Punkten um Plang: d’Schnëttlinn
+📐 Surfaces par pièce ¦ 📐 Flächen pro Raum
+✂ Tracer la ligne de coupe ¦ ✂ D’Schnëttlinn zeechnen
+✂ Voir la coupe ¦ ✂ De Schnëtt kucken
+🕰 L’année ¦ 🕰 D’Joer
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Wärend s du d’Joer zéis, bleift d’Epoch virdrun a Sepia gepunkt ze gesinn
+👻 Voir l’époque d’avant en fantôme ¦ 👻 D’Epoch virdrun als Geescht weisen
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ D’Féierung als fäerdege Video: et gleeft vun enger Statioun zur anerer, mam Text als Ënnertitel
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ E Bild pro Statioun an d’Texter, an engem .zip-Fichier: fir an d’🎬 Montage ze zéien
+✎ Les arrêts ¦ ✎ D’Statiounen
+🎬 Vidéo de la visite… ¦ 🎬 Video vum Besuch…
+⤓ Images de la visite ¦ ⤓ Biller vum Besuch
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ D’Statiounen an d’Fotoe ginn beim Besuch gesat (🚶 Besichen, 3D-Usiicht)
+＋ Arrêt, 📷 photo… ¦ ＋ Statioun, 📷 Foto…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ En .html-Fichier fir ze schécken: d’Haus an 3D a seng Pläng, ouni d’App, just fir ze kucken (ouni Persounen an Erënnerungen)
+🏘 Bâtiments du terrain… ¦ 🏘 Gebaier um Terrain…
+📤 Partager la visite ¦ 📤 De Besuch deelen
+Aucune pièce dessinée. ¦ Kee Raum gezeechent.
+Toute la maison ¦ Dat ganzt Haus
+Loi Carrez ¦ Carrez-Gesetz
+Surface ¦ Fläch
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Carrez-Gesetz: et zielen just d’Deeler, wou ee stoe kann (Plafongshéicht vu mindestens 1,80 m, Späicher abegraff). Oppe Raim an Trape zielen net.
+Le Tableur n’est pas prêt. ¦ D’Tabelle ass net prett.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Näischt ze mellen: Dieren, Fënsteren, Trapen a Raim passen zesummen.
+✓ Rien à signaler. ¦ ✓ Näischt ze mellen.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Klick déi zwee Enner vun der Schnëttlinn um Plang
+Ligne de coupe ¦ Schnëttlinn
+Trace d’abord la ligne de coupe sur le plan. ¦ Zeechen fir d’éischt d’Schnëttlinn um Plang.
+✂ Coupe de la maison ¦ ✂ Schnëtt vum Haus
+⤓ Exporter en SVG ¦ ⤓ Als SVG exportéieren
+⤓ Exporter en PNG ¦ ⤓ Als PNG exportéieren
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Maach d’3D-Usiicht op, dann „🚶 Besichen“: ënnen am Besuch setzt „📍 Statioun hei“ eng Statioun (mat engem Text, deen haart virgelies gëtt) an „📷 Foto vun der Epoch hei“ setzt eng Foto, déi vun dëser Plaz aus gemaach gouf.
+🗺 Les arrêts de la visite guidée ¦ 🗺 D’Statioune vun der Féierung
+Arrêt retiré ¦ Statioun ewechgeholl
+Arrêts rangés ¦ Statiounen nei sortéiert
+Impossible de faire les images. ¦ D’Biller konnten net gemaach ginn.
+Une image par arrêt… ¦ E Bild pro Statioun…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Setz fir d’éischt Statiounen: 3D-Usiicht → 🚶 Besichen → 📍 Statioun hei.
+🎬 La vidéo de la visite guidée ¦ 🎬 De Video vun der Féierung
+Paysage 1280 × 720 (écran) ¦ Landschaft 1280 × 720 (Ecran)
+Carré 1080 × 1080 (messageries) ¦ Quadrat 1080 × 1080 (Messageriën)
+Titre au début ¦ Titel am Ufank
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Dëse Browser kann keng Videoen ophuelen: benotz „⤓ Biller vum Besuch“.
+🔴 Enregistrement de la visite… ¦ 🔴 De Besuch gëtt opgeholl…
+fenêtre des médias indisponible ¦ Fënster vun de Medien net disponibel
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Video exportéiert, an eng Kopie an de Medie gespäichert.
+✓ Vidéo exportée. ¦ ✓ Video exportéiert.
+Photo retirée ¦ Foto ewechgeholl
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Fichier prett: schéck en, e gëtt mat engem Duebelklick an engem Browser opgemaach, ouni d’App.
+Retirer du terrain ¦ Vum Terrain ewechhuelen
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Den Weiler: d’Gebaier um Terrain
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ De Bauerenhaff, d’Scheier, de Bakuewen, de Pëtz, d’Nopeschhaiser: all eenzelt ass en Haus aus der Lëscht „🏠 Familljenhaiser“, hei dernieft gesat (an 3D a gepunkt um Plang).
+＋ Ajouter un bâtiment ¦ ＋ E Gebai derbäisetzen
+N° de foyer au recensement (facultatif) ¦ Nr. vum Stot an der Vollekszielung (fakultativ)
+Bâtiment ajouté ¦ Gebai derbäigesat
+Bâtiment déplacé ¦ Gebai geréckelt
+Bâtiment retiré ¦ Gebai ewechgeholl
+Soleil à {deg}° de haut, au {dir} ¦ Sonn op {deg}° Héicht, am {dir}
+boussole|nord ¦ Norden
+boussole|nord-est ¦ Nordosten
+boussole|est ¦ Osten
+boussole|sud-est ¦ Südosten
+boussole|sud ¦ Süden
+boussole|sud-ouest ¦ Südwesten
+boussole|ouest ¦ Westen
+boussole|nord-ouest ¦ Nordwesten
+🌙 Nuit ¦ 🌙 Nuecht
+Crépuscule ¦ Dämmerung
+(pose une lampe pour éclairer) ¦ (setz eng Luucht fir Liicht)
+nuit polaire ¦ Polarnuecht
+soleil de minuit ¦ Mëtternuechtssonn
+lever {rise}, coucher {set} ¦ Sonnenopgang {rise}, Sonnenënnergang {set}
+France (lieu de la maison inconnu) ¦ Frankräich (Plaz vum Haus onbekannt)
+au sol {len} ¦ um Buedem {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Statioun {n} vun {total}
+🪜 Un escalier : ¦ 🪜 Eng Trap:
+⬆ Monter (E) ¦ ⬆ Eropgoen (E)
+⬇ Descendre (C) ¦ ⬇ Erofgoen (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Dësen glTF benotzt separat Fichieren: exportéier en léiwer als GLB (een eenzege Fichier).
+Format 3D inconnu. ¦ Onbekannt 3D-Format.
+✦ Les souvenirs de la pièce ¦ ✦ D’Erënnerunge vum Raum
+☀️ Lumière du jour ¦ ☀️ Dagesliicht
+Le soleil passe d’une heure à l’autre ¦ D’Sonn geet vun enger Stonn op déi aner
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ Zu dëser Auerzäit, vum 1. Januar bis den 31. Dezember: d’Schiete ginn am Wanter méi laang
+▶ Voir la journée ¦ ▶ Den Dag kucken
+▶ Voir l’année ¦ ▶ D’Joer kucken
+❄️ Hiver ¦ ❄️ Wanter
+🌱 Printemps ¦ 🌱 Fréijoer
+☀️ Été ¦ ☀️ Summer
+🍂 Automne ¦ 🍂 Hierscht
+📅 Aujourd’hui ¦ 📅 Haut
+Ombres portées ¦ Schiet
+🚶 Visite ¦ 🚶 Besuch
+Monter à l’étage du dessus (E ou Page ↑) ¦ Op de Stack driwwer eropgoen (E oder Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Op de Stack drënner erofgoen (C oder Page ↓)
+Yeux à ¦ Aen op
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Eng Statioun vun der Féierung, hei, an déi Richtung kuckend (mat engem Text, deen haart virgelies gëtt)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Eng al Foto, déi vun dëser Plaz aus an dës Richtung gemaach gouf: ee vergläicht se mam Haus vun haut
+📍 Arrêt ici ¦ 📍 Statioun hei
+📷 Photo d’époque ici ¦ 📷 Foto vun der Epoch hei
+Petite carte : clic pour t’y rendre ¦ Kleng Kaart: klick fir dohinner ze goen
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ Z Q S D, W A S D oder Feiler: goen · Shift: lafen · d’Maus kuckt ronderëm · Esc: d’Maus fräiginn
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ De Krees ënne lénks: goen · op der Usiicht zéien: kucken · ✦: drécken, fir d’Erënnerung ze gesinn
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ Z Q S D, W A S D oder Feiler: goen · Klick op d’Usiicht: mat der Maus kucken · ✦: klick, fir d’Erënnerung ze gesinn · Esc: erausgoen
+✋ Arrêter la visite ¦ ✋ De Besuch ophalen
+Autrefois ¦ Fréier
+Autrefois ou aujourd’hui ¦ Fréier oder haut
+Arrêt suivant ¦ Nächst Statioun
+Arrêter la visite guidée ¦ D’Féierung ophalen
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Setz fir d’éischt Statiounen (🚶 Besichen → 📍 Statioun hei).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Dëse Browser kann keng Videoen ophuelen.
+Remettre la vue comme au départ ¦ D’Usiicht zrécksetzen wéi am Ufank
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ D’Bild vum Medium Nr. {n} gëtt et net: eng neutral Leinwand ersetzt et.
+Cadre {n} : une image ¦ Kader {n}: e Bild
+Cadre {n} : vide ¦ Kader {n}: eidel
+Image du cadre {n} ¦ Bild vum Kader {n}
+Prise dans les médias ¦ Aus de Medien
+L’image de « {name} » ¦ D’Bild vun „{name}“
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Op „{name}“ ofleeën (Kader {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Op „{name}“ ofleeën
+Remplir (recadrer) ¦ Ausfëllen (zouschneiden)
+Ajuster (toute l’image) ¦ Upassen (dat ganzt Bild)
+Centrer (taille réelle) ¦ Zentréieren (richteg Gréisst)
+Pas d’image. ¦ Kee Bild.
+Image introuvable ¦ Bild net fonnt
+Le cadre ¦ De Kader
+MAISON · IMAGE ¦ HAUS · BILD
+Poser cette image ¦ Dëst Bild setzen
+Ou un souvenir de cet objet : ¦ Oder eng Erënnerung vun dësem Objet:
+La rattacher aussi aux souvenirs de cet objet ¦ Et och mat den Erënnerunge vun dësem Objet verbannen
+🏷 Garder aussi comme souvenir ¦ 🏷 Och als Erënnerung halen
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Dëst Bild gëtt et net an de Medien: eng neutral Leinwand ersetzt et. Wiel en anert.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Virschau: zéi fir d’Bild ze réckelen, Rad fir ze zoomen
+Glisse pour déplacer l’image · molette pour zoomer ¦ Zéi fir d’Bild ze réckelen · Rad fir ze zoomen
+Dans le cadre ¦ Am Kader
+Remettre l’image au centre, sans zoom ¦ D’Bild nees an d’Mëtt setzen, ouni Zoom
+↺ Recadrage de départ ¦ ↺ Ufanksausschnëtt
+Recadrage de départ ¦ Ufanksausschnëtt
+Sa couleur ¦ Seng Faarf
+Passe-partout ¦ Passe-partout
+🖼 Images des cadres ¦ 🖼 Biller vun de Kaderen
+🖼 Image ¦ 🖼 Bild
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Du kanns och e Bild vum Computer op den Objet zéien, am Plang oder an der 3D-Usiicht: et kënnt an d’Medien.
+Image posée ¦ Bild gesat
+Image retirée ¦ Bild ewechgeholl
+Import de l’image… ¦ D’Bild gëtt importéiert…
+Image déposée sur l’objet ¦ Bild op den Objet ofgeluecht
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ D’Bild ass an de Medie gespäichert an op den Objet gesat.
+Image prise dans les souvenirs ¦ Bild aus den Erënnerungen
+Image tournée ¦ Bild gedréint
+Image réglée ¦ Bild ugepasst
+Image recadrée ¦ Bild nei ausgeschnidden
+Image zoomée ¦ Bild gezoomt
+Cote ¦ Mooss
+Hauteur (cm) ¦ Héicht (cm)
+Contenu ¦ Inhalt
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Dréit de Plang par rapport zum Norden: 0° = uewen um Plang ass Norden, 90° = uewen um Plang kuckt no Osten. D’Sonn an d’Schiete ginn nach.
+Lit d’une personne ¦ Eenzelbett
+Chambre ¦ Schlofkummer
+Lit double ¦ Duebelbett
+Lit clos (breton) ¦ Zouene Bett (bretonesch)
+Berceau ¦ Wéi
+Lit d’enfant ¦ Kannerbett
+Table de chevet ¦ Nuetsdësch
+Commode ¦ Kommod
+Coiffeuse ¦ Schminkdësch
+Prie-Dieu ¦ Bietstull
+Religion, souvenirs ¦ Relioun, Erënnerungen
+Table ¦ Dësch
+Séjour ¦ Wunnzëmmer
+Table ronde ¦ Ronnen Dësch
+Chaise ¦ Stull
+Fauteuil ¦ Fotell
+Canapé ¦ Kanapee
+Banc ¦ Bänk
+Buffet ¦ Buffet
+Vaisselier ¦ Geschier-Schaf
+Horloge comtoise ¦ Comtoise-Auer
+Piano droit ¦ Klavier
+Bibliothèque ¦ Bicherschaf
+Cheminée ¦ Kamäin
+Poêle à bois ¦ Holzuewen
+Tapis ¦ Teppech
+Lampadaire ¦ Stoluucht
+Plante ¦ Planz
+Poste de radio (TSF) ¦ Radio (TSF)
+Cuisinière à bois ¦ Holzkichenuewen
+Cuisine ¦ Kichen
+Évier en pierre ¦ Steeschbidden
+Pétrin ¦ Bakmold
+Garde-manger ¦ Spénkeschaf
+Réfrigérateur ¦ Frigo
+Plan de travail ¦ Aarbechtsplack
+Baignoire ¦ Buedbidden
+Salle d’eau ¦ Buedzëmmer
+Douche ¦ Dusch
+WC ¦ WC
+Lavabo ¦ Lavabo
+Table de toilette (broc et cuvette) ¦ Wäschdësch (Krug a Becken)
+Armoire ¦ Kleederschaf
+Rangement ¦ Rangement
+Coffre ¦ Këscht
+Étagère ¦ Regal
+Rouet ¦ Spannrad
+Métiers, atelier ¦ Beruffer, Atelier
+Métier à tisser ¦ Weefstull
+Établi ¦ Wierkbänk
+Tonneau ¦ Faass
+Machine à coudre ¦ Nähmaschinn
+Enclume ¦ Amboss
+Mangeoire, crèche ¦ Krëpp, Fudderkrëpp
+Ferme, animaux ¦ Bauerenhaff, Déieren
+Charrette ¦ Kar
+Puits ¦ Pëtz
+Jardin, extérieur ¦ Gaart, dobaussen
+Arbre ¦ Bam
+Voiture ¦ Auto
+Banc de jardin ¦ Gaardebänk
+Escalier droit ¦ Riicht Trap
+Structure ¦ Struktur
+Escalier tournant ¦ Dréitrap
+Poteau, pilier ¦ Pfoschten, Pfeiler
+Placard ¦ Wandschaf
+Lit bateau (Empire) ¦ Schëffbett (Empire)
+Lit Louis-Philippe ¦ Louis-Philippe-Bett
+Lit à baldaquin ¦ Himmelbett
+Lit en fer forgé ¦ Schmiddeisebett
+Grand lit (160) ¦ Grousst Bett (160)
+Paillasse (lit de paille) ¦ Strosak (Strobett)
+Armoire normande ¦ Normannesche Schaf
+Armoire à glace ¦ Spigelschaf
+Chiffonnier, semainier ¦ Chiffonnier, Semainier
+Table de nuit à marbre ¦ Nuetsdësch mat Marber
+Lampe de chevet ¦ Nuetsluucht
+Pot de chambre ¦ Nuetspott
+Paravent ¦ Paravent
+Psyché (miroir sur pied) ¦ Psyché (Stospigel)
+Fauteuil Voltaire ¦ Voltaire-Fotell
+Banquette de pied de lit ¦ Bänkchen um Fousseen vum Bett
+Descente de lit ¦ Bettvirlag
+Dressing ¦ Dressing
+Chaise paillée ¦ Strostull
+Coffre de mariage ¦ Hochzäitskëscht
+Malle-cabine ¦ Schëffskoffer
+Table de toilette à miroir ¦ Wäschdësch mat Spigel
+Chaufferette, bassinoire ¦ Fousswiermer, Bettwiermer
+Cheminée de chambre ¦ Kamäin an der Schlofkummer
+Table ovale à rallonges ¦ Ovalen Ausziehdësch
+Table de ferme ¦ Bauerendësch
+Table basse ¦ Salonsdësch
+Guéridon ¦ Guéridon
+Bergère ¦ Bergère
+Fauteuil à bascule ¦ Schaukelstull
+Canapé trois places ¦ Dräiplaze-Kanapee
+Méridienne ¦ Méridienne
+Pouf ¦ Pouf
+Pendule de cheminée ¦ Kamäinsauer
+Grande cheminée à manteau ¦ Grousse Kamäin mat Mantel
+Poêle en faïence ¦ Kacheluewen
+Meuble TV ¦ Fernsehmiwwel
+Gramophone ¦ Grammophon
+Harmonium ¦ Harmonium
+Piano à queue ¦ Fligel
+Lustre ¦ Lüster
+Tapis rond ¦ Ronnen Teppech
+Bibliothèque vitrée ¦ Bicherschaf mat Glas
+Chaise cannée ¦ Stull mat Rouer
+Jardinière ¦ Blummebac
+Cage à oiseaux ¦ Vullekeefeg
+Aquarium ¦ Aquarium
+Console ¦ Konsol
+Bonheur-du-jour ¦ Bonheur-du-jour
+Canapé-lit, clic-clac ¦ Bettkanapee, Klickklack
+Potager (fourneau maçonné) ¦ Gemauerten Hiert (Potager)
+Âtre avec crémaillère ¦ Feierstell mat Kesselhal
+Four encastrable ¦ Abauuewen
+Plaques de cuisson ¦ Kachplacken
+Lave-vaisselle ¦ Spullmaschinn
+Congélateur coffre ¦ Déifkillkëscht
+Glacière (armoire à glace) ¦ Äisschaf
+Évier double ¦ Duebelt Spullbecken
+Îlot central ¦ Kichenzentralblock
+Plan de travail en L ¦ Aarbechtsplack an L
+Hotte ¦ Damphotte
+Meuble haut ¦ Uewerschaf
+Meuble bas ¦ Ënnerschaf
+Tabouret ¦ Hocker
+Table de cuisine ¦ Kichendësch
+Panetière ¦ Broutschaf
+Billot de boucher ¦ Metzlerblock
+Seau, cruche ¦ Eemer, Krug
+Saloir, jarre ¦ Salzfaass, Steekrug
+Micro-ondes ¦ Mikrowell
+Cuisinière à gaz ¦ Gasuewen
+Chaudron ¦ Kessel
+Moulin à café ¦ Kaffismillen
+Réfrigérateur américain ¦ Amerikanesche Frigo
+Égouttoir, vaisselier mural ¦ Ofdrëpper, Geschierregal un der Mauer
+Baignoire sabot ¦ Sëtzbuedbidden
+Baignoire sur pieds (fonte) ¦ Buedbidden op Féiss (Goss)
+Cuvier, baquet ¦ Bottchen, Zuwwer
+Bidet ¦ Bidet
+Double vasque ¦ Duebelt Lavabo
+Douche à l’italienne ¦ Bodemgläich Dusch
+Machine à laver ¦ Wäschmaschinn
+Sèche-linge ¦ Wäschtrockner
+Chauffe-eau, ballon ¦ Waasserkessel, Boiler
+Radiateur ¦ Heizkierper
+Sèche-serviettes ¦ Handdochheizung
+Meuble vasque ¦ Lavabosmiwwel
+Miroir de salle de bains ¦ Buedzëmmerspigel
+WC à la turque ¦ Hock-WC
+Chaise percée ¦ Nuetsstull
+Lessiveuse ¦ Wäschkessel
+Étendoir à linge ¦ Wäschständer
+Panier à linge ¦ Wäschkuerf
+Colonne de rangement ¦ Héije Rangementsschaf
+WC suspendu ¦ Hänke-WC
+Bac à douche ¦ Duschbecken
+Malle de voyage ¦ Reeskoffer
+Bahut ¦ Bahut
+Buffet deux corps ¦ Opsatzbuffet
+Enfilade ¦ Sideboard (Enfilade)
+Confiturier ¦ Confiturier
+Étagère métallique ¦ Metallregal
+Penderie, portant ¦ Kleederstaang, Kleederständer
+Portemanteau ¦ Garderobe
+Meuble à cases ¦ Fächerregal
+Placard mural ¦ Wandschaf
+Meuble à chaussures ¦ Schongschaf
+Casier à bouteilles ¦ Fläschegestell
+Pile de cartons ¦ Koup Kartongen
+Cantine militaire ¦ Militärkëscht
+Armoire à linge ¦ Wäschschaf
+Porte-parapluies ¦ Prabbelständer
+Meuble d’entrée ¦ Entréesmiwwel
+Vestiaire métallique ¦ Metallspind
+Commode basse ¦ Niddreg Kommod
+Coffre à bois ¦ Holzkëscht
+Secrétaire à abattant ¦ Sekretär mat Klapp
+Bureau plat (ministre) ¦ Schreifdësch (Minister)
+Bureau à cylindre ¦ Rollschreifdësch
+Fauteuil de bureau ¦ Bürosstull mat Lounen
+Chaise de bureau en bois ¦ Holzbürosstull
+Cartonnier ¦ Cartonnier
+Classeur à tiroirs ¦ Schublaadeschaf
+Ordinateur (écran) ¦ Computer (Ecran)
+Imprimante, scanner ¦ Drécker, Scanner
+Globe terrestre ¦ Globus
+Coffre-fort ¦ Coffre-fort
+Lampe de bureau ¦ Bürosluucht
+Bibliothèque murale ¦ Bicherregal un der Mauer
+Table à dessin ¦ Zeechendësch
+Boîtes d’archives ¦ Archivkëschten
+Téléphone mural (ancien) ¦ Wandtelefon (al)
+Tableau noir, tableau blanc ¦ Tafel, wäiss Tafel
+Bureau moderne ¦ Modernen Schreifdësch
+Caisson à tiroirs ¦ Schublaadecontainer
+Fauteuil club ¦ Clubfotell
+Berceau en osier ¦ Wéi aus Wid
+Lit à barreaux ¦ Gitterbett
+Lits superposés ¦ Stackbett
+Table à langer ¦ Wéckeldësch
+Coffre à jouets ¦ Spillsaachekëscht
+Cheval à bascule ¦ Schaukelpäerd
+Parc ¦ Laafgitter
+Chaise haute ¦ Kannerstull
+Pupitre d’écolier ¦ Schoulpult
+Landau ¦ Kannerwon
+Maison de poupée ¦ Poppenhaus
+Tipi ¦ Tipi
+Petite table ¦ Klengen Dësch
+Petite chaise ¦ Klenge Stull
+Tapis de jeu ¦ Spillteppech
+Ours en peluche ¦ Teddybier
+Bibliothèque basse ¦ Niddregt Bicherregal
+Trotteur, porteur ¦ Laaflernwon, Rutschauto
+Crucifix ¦ Kräiz
+Bénitier ¦ Weiwaasserkessel
+Petit autel, oratoire ¦ Klengen Altor, Hauskapell
+Statue de la Vierge ¦ Muttergottesstatu
+Chandelier, cierge ¦ Käerzestänner, Käerz
+Portrait de famille ¦ Familljeportrait
+Photo de mariage encadrée ¦ Agerummt Hochzäitsfoto
+Arbre généalogique encadré ¦ Agerummte Stammbam
+Globe de mariée ¦ Brautglas (Globe de mariée)
+Cadre de médailles ¦ Rumm mat Medaillen
+Bible familiale sur lutrin ¦ Familljebibel um Pult
+Coffret à souvenirs ¦ Erënnerungskëschtchen
+Vitrine à souvenirs ¦ Vitrinn mat Erënnerungen
+Lampe à huile ¦ Ueleglucht
+Buste sur colonne ¦ Büst op enger Säul
+Icône, image pieuse ¦ Ikon, frommt Bild
+Pile d’albums de famille ¦ Koup Familljenalben
+Plaque commémorative ¦ Gedenkplack
+Malle aux souvenirs ¦ Koffer mat Erënnerungen
+Croix de bois au mur ¦ Holzkräiz un der Mauer
+Retable, armoire d’église ¦ Altorbild, Kierchenschaf
+Forge (foyer) ¦ Schmëdd (Feierstell)
+Soufflet de forge ¦ Schmëddblosbalg
+Tour à bois ¦ Drechselbank
+Presse à imprimer ¦ Dréckpress
+Meule à aiguiser ¦ Schläifsteen
+Cuve de vigneron ¦ Wënzerbidden
+Pressoir à vin ¦ Wäipress
+Alambic ¦ Brennkolben
+Comptoir de boutique ¦ Buttekstheek
+Balance à bascule ¦ Dezimalwo
+Caisse enregistreuse ¦ Keess
+Étalage de magasin ¦ Buttekstalage
+Fauteuil de barbier ¦ Coiffeursstull
+Établi de cordonnier ¦ Schongmächerbänk
+Chevalet de peintre ¦ Molerstaffelei
+Carreau de dentellière ¦ Klëppelkësse
+Four de boulanger ¦ Bäckeruewen
+Barrique ¦ Barrique
+Meule de moulin ¦ Millesteen
+Chevalet de scieur ¦ Seebock
+Établi de menuisier ¦ Schräinerbänk
+Panneau à outils ¦ Geschirwand
+Vache ¦ Kou
+Cheval ¦ Päerd
+Âne ¦ Iesel
+Cochon ¦ Schwäin
+Mouton ¦ Schof
+Chèvre ¦ Geess
+Poule ¦ Héngel
+Chien ¦ Hond
+Chat ¦ Kaz
+Clapier à lapins ¦ Kanéngchesstall
+Poulailler ¦ Hénkestall
+Niche ¦ Hondshaischen
+Stalle, box d’écurie ¦ Stall, Päerdsbox
+Abreuvoir ¦ Dränk
+Râtelier à foin ¦ Heeraf
+Meule de foin ¦ Heeschouwer
+Botte de paille ¦ Strobal
+Charrue ¦ Plou
+Herse ¦ Eet
+Tracteur ancien ¦ Alen Trakter
+Brouette ¦ Schubkar
+Baratte à beurre ¦ Botterfaass
+Ruche ¦ Bäistack
+Coffre à grain ¦ Fruuchtkëscht
+Bidon à lait ¦ Mëllechkan
+Tombereau ¦ Kipkar
+Arbre fruitier ¦ Uebstbam
+Sapin, conifère ¦ Tann, Nolebam
+Haie ¦ Heck
+Buisson, arbuste ¦ Strauch, Bëschelchen
+Massif de fleurs ¦ Blummebeet
+Potager (planches) ¦ Geméisgaart (Beeter)
+Mare, bassin ¦ Weier, Basseng
+Lavoir ¦ Wäschbuer
+Four à pain ¦ Broutuewen
+Pompe à bras ¦ Handpompel
+Croix de chemin, calvaire ¦ Weekräiz, Kalvarie
+Pierre tombale ¦ Grafsteen
+Table de jardin ¦ Gaardendësch
+Chaise de jardin ¦ Gaardestull
+Transat, chaise longue ¦ Liegestull
+Parasol ¦ Parasol
+Barbecue ¦ Barbecue
+Balançoire ¦ Schaukel
+Toboggan ¦ Rutschban
+Pergola, tonnelle ¦ Pergola, Laf
+Clôture, barrière ¦ Zonk, Barrière
+Portail ¦ Paort
+Muret de pierre ¦ Klengt Steemäierchen
+Bicyclette ¦ Vëlo
+Cabane de jardin ¦ Gaardenhaischen
+Serre ¦ Treibhaus
+Tas de bois ¦ Holzstouss
+Bouleau, arbre fin ¦ Bierk, dënne Bam
+Banc de pierre ¦ Steebänk
+Escalier en colimaçon ¦ Wendeltrap
+Échelle de meunier ¦ Millerleeder
+Colonne ronde ¦ Ronn Säul
+Poutre apparente ¦ Siichtbare Balken
+Trappe de cave ¦ Kellerklapp
+Marche, seuil ¦ Trap, Schwell
+Garde-corps, rampe ¦ Gelänner, Leenen
+Conduit de cheminée ¦ Kamäinsrouer
+Verrière, cloison vitrée ¦ Glasdaach, Glaswand
+Radiateur en fonte ¦ Gosseisen-Heizkierper
+Chaudière ¦ Heizkessel
+Pilier de pierre ¦ Steepfeiler
+Estrade, palier ¦ Podest, Trapepodest
+Muret, demi-cloison ¦ Mäierchen, hallef Trennwand
+Niche, alcôve ¦ Nisch, Alkov
+Bonnetière (armoire à une porte) ¦ Bonnetière (Schaf mat enger Dier)
+Armoire de mariage (de dot) ¦ Hochzäitsschaf (Aussteier)
+Lit clos à portes coulissantes ¦ Zouene Bett mat Schiebdieren
+Lit-armoire, lit clos d’angle ¦ Schafbett, zouene Bett am Eck
+Lit d’alcôve à rideaux ¦ Alkovbett mat Gardinnen
+Berceau ancien en bois (à bascule) ¦ Al hëlze Wéi (Schaukelwéi)
+Berceau à capote en osier ¦ Wéi aus Wid mat Daach
+Bassinoire en cuivre (à long manche) ¦ Kofferen Bettwiermer (mat laangem Stil)
+Table de toilette à marbre ¦ Wäschdësch mat Marber
+Cuvette et broc en faïence ¦ Becken a Krug aus Fayence
+Commode galbée (Louis XV) ¦ Geschwonge Kommod (Louis XV)
+Bougeoir de chevet ¦ Käerzestänner um Nuetsdësch
+Chaufferette à braises ¦ Fousswiermer mat Glout
+Malle en osier ¦ Koffer aus Wid
+Horloge comtoise à ventre (violonée) ¦ Comtoise-Auer mat Bauch (violonée)
+Horloge comtoise peinte ¦ Gemolt Comtoise-Auer
+Horloge de parquet (régulateur) ¦ Stoauer (Regulator)
+Buffet bas à deux portes ¦ Niddregt Buffet mat zwou Dieren
+Vaisselier breton ¦ Bretonescht Geschier-Schaf
+Vaisselier normand ¦ Normannescht Geschier-Schaf
+Banc-coffre à dossier (archebanc) ¦ Këschtebänk mat Lount (Archebanc)
+Banc-coffre de lit clos ¦ Këschtebänk vum zouene Bett
+Chaise paillée à barreaux ¦ Strostull mat Sprossen
+Fauteuil paillé (de grand-mère) ¦ Strofotell (vun der Bomi)
+Table à volets ¦ Klappdësch
+Table de ferme en chêne (à tiroir) ¦ Bauerendësch aus Eech (mat Schublat)
+Lampe tempête ¦ Stuermluucht
+Chandelier, bougeoir ¦ Käerzestänner, Liichter
+Suspension à pétrole ¦ Pëtrolshänkluucht
+Poste TSF à lampes ¦ TSF-Radio mat Réieren
+Phonographe à pavillon ¦ Phonograph mat Trichter
+Poêle Godin (fonte émaillée) ¦ Godin-Uewen (emailléiert Goss)
+Poêle à bois en fonte (cloche) ¦ Gosseisen-Holzuewen (Klack)
+Chenets (la paire) ¦ Feierbéck (d’Paar)
+Cheminée à manteau (à hotte) ¦ Kamäin mat Mantel (mat Hotte)
+Cheminée de pierre à linteau de bois ¦ Steekamäin mat Holzsturz
+Cantou (coin du feu) ¦ Cantou (Eck beim Feier)
+Bergère Louis XVI ¦ Bergère Louis XVI
+Fauteuil crapaud ¦ Fauteuil crapaud
+Sellette (porte-plante) ¦ Planzesockel
+Portrait des ancêtres (ovale) ¦ Portrait vun de Virfahren (oval)
+Maie (pétrin sur pieds) ¦ Bakmold op Féiss (Maie)
+Maie-coffre à couvercle ¦ Bakmold-Këscht mat Deckel
+Huche à pain ¦ Broutkëscht
+Cuisinière à bois en fonte (à barre de laiton) ¦ Gosseisen-Holzkichenuewen (mat Messingstaang)
+Cuisinière émaillée bois et charbon ¦ Emailléierten Uewen fir Holz a Kuel
+Potager carrelé (fourneau à braises) ¦ Geplättelte Potager (Glouthiert)
+Évier taillé dans la pierre ¦ Spullbecken aus Steen gehaen
+Évier en grès émaillé ¦ Spullbecken aus emailléiertem Steegutt
+Fontaine en cuivre sur son support ¦ Kofferbrunn op sengem Stänner
+Fontaine en grès ¦ Steegutt-Brunn
+Saloir en grès ¦ Salzfaass aus Steegutt
+Saloir en bois (coffre à sel) ¦ Salzfaass aus Holz (Salzkëscht)
+Garde-manger grillagé (mural) ¦ Spénkeschaf mat Gitter (un der Mauer)
+Buffet de cuisine (années 1930-1950) ¦ Kichebuffet (1930-1950)
+Moulin à café mural ¦ Kaffismillen un der Mauer
+Fer à repasser en fonte ¦ Gosseisen-Strickeisen
+Marmite en fonte ¦ Gosseisen-Dëppen
+Cruche, pichet en grès ¦ Krug, Steegutt-Kann
+Tue-mouches en verre (piège à mouches) ¦ Glas-Méckefal
+Balance Roberval et ses poids ¦ Roberval-Wo mat senge Gewiichter
+Glacière en bois doublée de zinc ¦ Hëlzen Äiskëscht mat Zénk
+Tub (grand bassin en zinc) ¦ Tub (grousst Zénkbecken)
+Baquet de lessive en bois ¦ Hëlze Wäschbidden
+Lessiveuse à champignon ¦ Wäschkessel mat Pilz
+Baignoire en zinc ¦ Zénk-Buedbidden
+Lave-mains en fonte émaillée ¦ Handwäschbecken aus emailléierter Goss
+Planche à laver ¦ Wäschbriet
+Buffet deux-corps vitré ¦ Opsatzbuffet mat Glas
+Buffet deux-corps normand ¦ Normannescht Opsatzbuffet
+Armoire lorraine ¦ Lothringer Schaf
+Armoire bressane ¦ Schaf aus der Bresse
+Coffre de mariage sculpté ¦ Geschnëtzt Hochzäitskëscht
+Malle bombée de voyage ¦ Gewölbte Reeskoffer
+Coffre à linge à pentures de fer ¦ Wäschkëscht mat Eisebänner
+Panetière provençale (murale) ¦ Provenzalescht Broutschaf (un der Mauer)
+Étagère à cuivres ¦ Regal fir Kofferdëppen
+Bureau de pente (dos d’âne) ¦ Pultschreifdësch (Ieselsréck)
+Scriban (pente et vitrine) ¦ Scriban (Pult a Vitrinn)
+Écritoire, encrier et plumier ¦ Schreibzeug, Tëntefaass a Fiederdous
+Lampe bouillotte ¦ Bouillotte-Luucht
+Banc d’école à pupitre (deux places) ¦ Schoulbänk mat Pult (zwou Plazen)
+Pupitre d’écolier à abattant ¦ Schoulpult mat Klapp
+Ardoise d’écolier ¦ Schiefertafel
+Cheval de bois ¦ Hëlzent Päerd
+Poupée de porcelaine ¦ Porzeläinspopp
+Chaise d’enfant paillée ¦ Kannerstull aus Stro
+Trotteur d’enfant en bois ¦ Hëlze Laaflernwon
+Prie-Dieu sculpté ¦ Geschnëtzte Bietstull
+Bénitier de chambre en faïence ¦ Weiwaasserkessel aus Fayence fir d’Schlofkummer
+Crucifix de chevet (Christ en bronze) ¦ Kräiz um Nuetsdësch (Christus aus Bronze)
+Globe de mariée sur son socle ¦ Brautglas op sengem Sockel
+Statuette de saint ¦ Hellegestatuett
+Image de communion encadrée ¦ Agerummt Kommiounsbild
+Couronne de perles (mortuaire) ¦ Perlekranz (fir den Doudegen)
+Rouet flamand (à fuseau) ¦ Flämescht Spannrad (mat Spindel)
+Grand rouet à laine ¦ Grousst Spannrad fir Woll
+Métier à tisser à bras ¦ Handweefstull
+Métier à tapisserie (vertical) ¦ Tapisserie-Weefstull (vertikal)
+Dévidoir à écheveaux ¦ Hasbel
+Machine à coudre à pédale (Singer) ¦ Nähmaschinn mat Pedal (Singer)
+Machine à coudre à main ¦ Handnähmaschinn
+Mannequin de couturière ¦ Schneiderpopp
+Fourneau à fers de repasseuse ¦ Uewen fir Strickeisen
+Banc de sabotier ¦ Holzschongmächerbänk
+Presse à fromage ¦ Kéispress
+Baratte à piston en bois ¦ Hëlze Stousbotterfaass
+Baratte-tonneau à manivelle ¦ Botterfaass mat Kurbel
+Écrémeuse ¦ Entrahmer
+Joug de bœufs ¦ Ochsejoch
+Outils (fourche, faux, râteau) ¦ Geschir (Gaffel, Seess, Rech)
+Pressoir à pommes (cidre) ¦ Äppelpress (Cidre)
+Charreton à bras ¦ Handkar
+Ruche en paille (panier) ¦ Stro-Bäistack (Kuerf)
+Puits à margelle et petit toit ¦ Pëtz mat Rand a klengem Daach
+Pompe à eau en fonte et son auge ¦ Gosseisen-Waasserpompel mat hirem Trog
+Auge en pierre ¦ Steentrog
+Banc à laver (de lavoir) ¦ Wäschbänk (vum Wäschbuer)
+Canapé moderne trois places ¦ Modernt Dräiplaze-Kanapee
+Canapé deux places ¦ Zweeplaze-Kanapee
+Canapé d’angle ¦ Eckkanapee
+Canapé Chesterfield (capitonné) ¦ Chesterfield-Kanapee (gepolstert)
+Fauteuil scandinave ¦ Skandinavesche Fotell
+Fauteuil suspendu (œuf) ¦ Hängefotell (Ee)
+Pouf poire ¦ Sëtzsak
+Pouf capitonné ¦ Gepolsterte Pouf
+Repose-pieds ¦ Foussstütz
+Table basse en verre ¦ Salonsdësch aus Glas
+Bout de canapé ¦ Säitendësch fir de Kanapee
+Bibliothèque garnie de livres ¦ Bicherschaf voller Bicher
+Meuble à disques vinyles ¦ Miwwel fir Vinylplacken
+Cheminée moderne à insert ¦ Moderne Kamäin mat Insert
+Poêle à granulés ¦ Pelletsuewen
+Porte-revues ¦ Zäitschrëftenhalter
+Table d’échecs ¦ Schachdësch
+Billard ¦ Billard
+Pare-feu de cheminée ¦ Kamäinsschierm
+Panier à bûches ¦ Holzkuerf
+Table de salle à manger (8 couverts) ¦ Iessdësch (8 Gedecker)
+Table dressée pour un repas de famille ¦ Gedeckten Dësch fir e Familljeniessen
+Table ronde à pied central ¦ Ronnen Dësch mat Mëttelfouss
+Table à rallonges ouverte ¦ Opgezunnen Ausziehdësch
+Chaise à barreaux (bistrot) ¦ Sprossestull (Bistro)
+Chaise rembourrée ¦ Gepolsterte Stull
+Chaise scandinave ¦ Skandinavesche Stull
+Chaise médaillon (Louis XVI) ¦ Medaillonstull (Louis XVI)
+Buffet scandinave sur pieds ¦ Skandinavescht Buffet op Féiss
+Vitrine à vaisselle ¦ Geschier-Vitrinn
+Banc de table ¦ Dëschbänk
+Desserte, chariot de service ¦ Servéierwon
+Candélabre à cinq branches ¦ Fënnefarmege Käerzeliichter
+Coupe de fruits ¦ Uebstschossel
+Bouquet dans un vase ¦ Bouquet an enger Vas
+Piano de cuisson ¦ Kachzentral (Piano de cuisson)
+Colonne de cuisine (four et micro-ondes) ¦ Kichenhéichschaf (Uewen a Mikrowell)
+Évier timbre d’office (céramique) ¦ Keramikspullbecken (Office)
+Suspension à casseroles ¦ Hänkstaang fir Dëppen
+Poubelle à pédale ¦ Pedalsdreckskëscht
+Étagère à épices et bocaux ¦ Regal fir Gewierzer a Glieser
+Desserte à roulettes de cuisine ¦ Kichen-Servéierwon mat Rieder
+Mange-debout ¦ Stoendësch
+Tabouret de bar ¦ Bar-Hocker
+Table en formica (années 60) ¦ Formica-Dësch (60er Joren)
+Chaise en formica (années 60) ¦ Formica-Stull (60er Joren)
+Pots d’herbes aromatiques ¦ Dëppe mat Kraider
+Échelle à pain (suspendue) ¦ Broutleeder (hänkend)
+Lit double moderne (140) ¦ Modernt Duebelbett (140)
+Lit king size (180) ¦ King-Size-Bett (180)
+Lit simple moderne (90) ¦ Modernt Eenzelbett (90)
+Lit mezzanine avec bureau ¦ Héichbett mat Schreifdësch
+Futon, lit bas ¦ Futon, niddregt Bett
+Table de chevet moderne ¦ Modernen Nuetsdësch
+Armoire à portes coulissantes (miroir) ¦ Schaf mat Schiebdieren (Spigel)
+Coiffeuse moderne à miroir rond ¦ Moderne Schminkdësch mat ronnem Spigel
+Valet de chambre ¦ Kleederstänner (Valet)
+Lit de fer à barreaux ¦ Eisebett mat Gitter
+Chaise de nourrice (basse) ¦ Ammestull (niddreg)
+Baignoire d’angle ¦ Eckbuedbidden
+Baignoire îlot (moderne) ¦ Fräistoend Buedbidden (modern)
+Cabine de douche ¦ Duschkabinn
+Porte-serviettes sur pied ¦ Handdochstänner
+Pèse-personne ¦ Persounewo
+Vasque à poser sur plan en bois ¦ Opsatzbecken op Holzplack
+WC à réservoir ¦ WC mat Spullkëscht
+WC à chasse d’eau haute (à chaîne) ¦ WC mat héijer Spullkëscht (mat Kette)
+Armoire à pharmacie murale ¦ Apdikteschaf un der Mauer
+Colonne lave-linge et sèche-linge ¦ Wäschmaschinn an Trockner openee
+Buanderie ¦ Wäschkummer
+Planche à repasser et son fer ¦ Strickbriet an Eisen
+Bac à laver (évier de buanderie) ¦ Wäschbecken (vun der Wäschkummer)
+Balai, seau et serpillière ¦ Biesem, Eemer a Feidel
+Étagère à linge plié ¦ Regal fir gefaalt Wäsch
+Corbeille à linge en osier ¦ Wäschkuerf aus Wid
+Séchoir à linge (accordéon) ¦ Wäschständer (Akkordeon)
+Aspirateur traîneau ¦ Bodemstaubsauger
+Aspirateur balai ¦ Stilstaubsauger
+Essoreuse à rouleaux (ancienne) ¦ Wäschmangel (al)
+Machine à laver à manivelle (ancienne) ¦ Wäschmaschinn mat Kurbel (al)
+Patère murale et manteaux ¦ Kleederhaken un der Mauer mat Mäntel
+Vestiaire d’entrée à miroir (ancien) ¦ Entréesgarderobe mat Spigel (al)
+Banc à chaussures ¦ Schongbänk
+Console et miroir d’entrée ¦ Konsol a Spigel an der Entrée
+Paillasson ¦ Fousstapp
+Boîte à clés murale ¦ Schlësselkëscht un der Mauer
+Boîte aux lettres sur pied ¦ Bréifkëscht op engem Fouss
+Ordinateur portable ¦ Laptop
+Ordinateur de bureau (écran, tour, clavier) ¦ Desktop-Computer (Ecran, Tower, Tastatur)
+Minitel ¦ Minitel
+Téléphone à cadran ¦ Wielscheiwentelefon
+Échelle de bibliothèque ¦ Bibliothéiksleeder
+Tableau en liège (pense-bête) ¦ Pinnwand aus Kuerk (Erënnerungszettel)
+Corbeille à papier ¦ Pabeierkuerf
+Bureau assis-debout ¦ Sëtz-Stoe-Schreifdësch
+Rayonnage d’archives (généalogie) ¦ Archivregal (Genealogie)
+Circuit de train électrique ¦ Elektresch Eisebunn
+Cubes empilés ¦ Openee gestapelt Klötzer
+Tricycle ¦ Dräirad
+Cuisine pour enfant (dînette) ¦ Kannerkichen (Dînette)
+Théâtre de marionnettes (castelet) ¦ Marionettentheater (Castelet)
+Ballon ¦ Ball
+Trottinette ¦ Trottinette
+Baby-foot ¦ Kickerdësch
+Luge en bois ¦ Hëlze Schlitt
+Lit de fer d’enfant ¦ Kanner-Eisebett
+Lampadaire à abat-jour ¦ Stoluucht mat Luuchteschierm
+Luminaires ¦ Luuchten
+Lampadaire arc ¦ Bou-Stoluucht
+Lampadaire trépied ¦ Stoluucht mat dräi Been
+Lampe de salon (pied boule) ¦ Salonsluucht (Kugelfouss)
+Lampe de banquier (verte) ¦ Bankerluucht (gréng)
+Lampe d’architecte ¦ Architekteluucht
+Suspension de cuisine ¦ Kichen-Hänkluucht
+Suspension à trois globes ¦ Hänkluucht mat dräi Kugelen
+Lustre à pampilles ¦ Kristallüster
+Suspension boule en papier ¦ Pabeierkugel-Hänkluucht
+Applique murale ¦ Wandluucht
+Rail de spots ¦ Spot-Schinn
+Lanterne ¦ Laterne
+Bougies (groupe) ¦ Käerzen (Grupp)
+Guirlande lumineuse ¦ Luuchtegirlande
+Lampe Tiffany (vitrail) ¦ Tiffany-Luucht (Glasfënster)
+Lampe à lave ¦ Lavaluucht
+Lampe champignon ¦ Pilzluucht
+Réverbère (lampadaire de jardin) ¦ Stroosseluucht (Gaardeluucht)
+Lampe Pigeon ¦ Pigeon-Luucht
+Mur de cadres photo ¦ Mauer mat Fotosrummen
+Cadre photo à poser ¦ Fotosrumm zum Stellen
+Tableau : paysage ¦ Bild: Landschaft
+Tableau : marine ¦ Bild: Mier
+Tableau abstrait ¦ Abstrakt Bild
+Tableau : nature morte ¦ Bild: Stillliewen
+Carte ancienne encadrée ¦ Agerummt al Kaart
+Papillons encadrés ¦ Agerummte Päiperleken
+Miroir rond ¦ Ronne Spigel
+Miroir soleil ¦ Sonnespigel
+Grand miroir doré (trumeau) ¦ Grousse vergëllte Spigel (Trumeau)
+Tapis persan ¦ Perser Teppech
+Tapis berbère ¦ Berberteppech
+Tapis kilim ¦ Kelim-Teppech
+Tapis de couloir ¦ Gangteppech
+Tapis à poils longs ¦ Héichfloorteppech
+Rideaux sur tringle ¦ Gardinnen op enger Staang
+Ficus en pot ¦ Ficus am Dëppen
+Monstera (grandes feuilles) ¦ Monstera (grouss Blieder)
+Cactus en pot ¦ Kaktus am Dëppen
+Palmier d’intérieur (kentia) ¦ Zëmmerpalm (Kentia)
+Bambou en bac ¦ Bambus am Bac
+Orchidée ¦ Orchidee
+Fougère en pot ¦ Fier am Dëppen
+Grand vase de sol (branches) ¦ Grouss Buedemvas (Äscht)
+Horloge murale ¦ Wandauer
+Horloge à coucou ¦ Kuckucksauer
+Horloge œil-de-bœuf ¦ Ochsenaug-Auer
+Sculpture moderne sur socle ¦ Modern Skulptur op engem Sockel
+Maquette de voilier ¦ Seegelschëffsmodell
+Coupe, trophée ¦ Coupe, Trophée
+Bocal à poisson rouge ¦ Goldfëschglas
+Réfrigérateur rétro (années 50) ¦ Retro-Frigo (50er Joren)
+Électroménager ¦ Haushaltsapparater
+Réfrigérateur combiné moderne ¦ Moderne Frigo mat Déifkillfach
+Congélateur armoire ¦ Déifkillschaf
+Cave à vin réfrigérée ¦ Wäikillschaf
+Grille-pain ¦ Toaster
+Bouilloire ¦ Waasserkacher
+Machine à café expresso ¦ Espressomaschinn
+Robot pâtissier ¦ Kichemaschinn
+Téléviseur des années 60 (à pieds) ¦ Fernseh aus de 60er Joren (op Féiss)
+Chaîne hi-fi et enceintes ¦ Hi-Fi-Anlag a Lautsprecher
+Enceinte colonne ¦ Stoe-Lautsprecher
+Platine vinyle ¦ Placksespiller
+Radiocassette (années 80) ¦ Radiorecorder (80er Joren)
+Console de jeux et manettes ¦ Spillkonsol a Controller
+Ventilateur sur pied ¦ Stoventilator
+Radiateur bain d’huile ¦ Uelegradiator
+Poêle à pétrole ¦ Pëtrolsuewen
+Aspirateur robot ¦ Staubsaugerroboter
+Climatiseur mural ¦ Klimaanlag un der Mauer
+Guitare sur son support ¦ Gittar op hirem Stänner
+Musique ¦ Musek
+Guitare électrique et ampli ¦ E-Gittar a Verstärker
+Violon sur son support ¦ Gei op hirem Stänner
+Violoncelle ¦ Cello
+Contrebasse ¦ Kontrabass
+Harpe ¦ Harf
+Batterie ¦ Batterie
+Clavier électronique sur pied ¦ Keyboard op engem Stänner
+Pupitre à musique ¦ Notepult
+Tuba ¦ Tuba
+Djembé ¦ Djembé
+Clavecin ¦ Cembalo
+Vielle à roue ¦ Drieleier
+Juke-box ¦ Jukebox
+Orgue de Barbarie ¦ Dréiuergel
+Moto ¦ Moto
+Garage ¦ Garage
+Mobylette (cyclomoteur) ¦ Mobylette (Moped)
+Servante d’atelier ¦ Werkstattwon
+Établi et panneau à outils ¦ Wierkbänk a Geschirwand
+Rayonnage métallique et caisses ¦ Metallregal a Këschten
+Perceuse à colonne ¦ Säulebuermaschinn
+Scie sur table ¦ Dëschséi
+Jerrican ¦ Jerrycan
+Pile de pneus ¦ Koup Pneuen
+Escabeau ¦ Trapeleeder
+Remorque ¦ Unhänger
+Kayak ¦ Kajak
+Table de ping-pong ¦ Ping-Pong-Dësch
+Tondeuse à gazon ¦ Rasemäier
+Tracteur tondeuse ¦ Rasemäiertrakter
+Trampoline ¦ Trampolin
+Piscine hors-sol ¦ Opstell-Schwämm
+Piscine creusée ¦ Agegruewe Schwämm
+Spa (jacuzzi) ¦ Spa (Jacuzzi)
+Hamac sur support ¦ Hängematt op engem Gestell
+Balancelle de jardin ¦ Gaardeschaukel
+Kiosque, gloriette ¦ Pavillon, Gloriette
+Salon de jardin bistrot ¦ Bistro-Gaardemiwwel
+Barbecue boule ¦ Kugelgrill
+Brasero ¦ Feierschuel
+Bac à sable ¦ Sandkëscht
+Nichoir sur poteau ¦ Nistkëscht op engem Pfosten
+Composteur ¦ Kompost
+Récupérateur d’eau de pluie ¦ Reewaasserbehälter
+Nain de jardin ¦ Gaardenzwerg
+Cadran solaire ¦ Sonnenauer
+Pots de fleurs ¦ Blummendëppen
+Olivier en pot ¦ Olivebam am Dëppen
+Carré potager surélevé ¦ Héichbeet
+Dévidoir à tuyau d’arrosage ¦ Schlauchtrommel
+Arrosoir ¦ Gießkan
+Étendoir parapluie ¦ Wäschspinn
+Petit pont de jardin ¦ Klengt Gaardebréck
+Mât et drapeau ¦ Mast a Fändel
+Roue de charrette (décor) ¦ Karrad (Deko)
+Tarare (vanneuse à grain) ¦ Wannmillen (Tarare)
+Égrenoir à maïs ¦ Mais-Rebbler
+Hache-paille ¦ Hächselmaschinn
+Selle sur chevalet ¦ Suedel op engem Bock
+Faucheuse à cheval ¦ Päerdsmeemaschinn
+Rouleau agricole en pierre ¦ Steewalz
+Palanche et ses deux seaux ¦ Draagjoch mat zwee Eemeren
+Tonneaux sur leur chantier ¦ Fässer op hirem Lager
+Tabouret de traite et seau ¦ Mellekhocker an Eemer
+Sacs de grain ¦ Fruuchtsäck
+Éolienne de pompage (ancienne) ¦ Pompelwandrad (al)
+Pigeonnier ¦ Dauwenhaus
+Épouvantail ¦ Vullescheier
+Encoignure (meuble d’angle) ¦ Eckschaf
+Placard à portes coulissantes ¦ Wandschaf mat Schiebdieren
+Étagère à chaussures ¦ Schongregal
+Coin des icônes (« beau coin » orthodoxe) ¦ Ikoneneck („schéinen Eck“ orthodox)
+Veilleuse d’icône (lampada) ¦ Ikonenliicht (Lampada)
+Croix orthodoxe murale ¦ Orthodoxt Kräiz un der Mauer
+Croix murale sans Christ (protestante) ¦ Kräiz ouni Christus un der Mauer (protestantesch)
+Grande Bible ouverte sur pupitre ¦ Grouss oppe Bibel um Pult
+Image du Sacré-Cœur encadrée ¦ Agerummt Hellegt-Häerz-Bild
+Ex-voto (plaque de remerciement) ¦ Ex-voto (Dankplack)
+Couronne de l’Avent ¦ Adventskranz
+Crèche de Noël ¦ Krëppchen
+Chapelet accroché (rosaire) ¦ Opgehaange Rousekranz
+Ménorah (chandelier à sept branches) ¦ Menora (siwenarmege Liichter)
+Hanoukia (chandelier à neuf branches) ¦ Chanukkia (néngarmege Liichter)
+Chandeliers de shabbat (paire) ¦ Schabbat-Liichter (Paar)
+Mézouza (au montant de la porte) ¦ Mesusa (um Dierpfoschten)
+Étoile de David murale ¦ Davidsstär un der Mauer
+Mizrah (plaque tournée vers Jérusalem) ¦ Misrach (Plack Richtung Jerusalem)
+Armoire de la Torah (aron, avec son rideau) ¦ Thoraschräin (Aron, mat sengem Virhang)
+Pupitre de lecture (bimah) ¦ Liespult (Bima)
+Coupe de kiddouch et plateau ¦ Kiddusch-Becher an Teller
+Plat du séder (Pessah) ¦ Sederteller (Pessach)
+Châle de prière (talit) sur son cintre ¦ Gebietsmantel (Tallit) op sengem Bügel
+Tirelire de tsedaka ¦ Zedaka-Spuerbüchs
+Tapis de prière ¦ Gebietsteppech
+Porte-Coran pliant (rahle) ¦ Klappbare Koranstänner (Rahle)
+Croissant et étoile muraux ¦ Hallefmound a Stär un der Mauer
+Calligraphie encadrée (Bismillah) ¦ Agerummt Kalligraphie (Bismillah)
+Chapelet (misbaha) sur sa coupelle ¦ Gebietskette (Misbaha) op hirem Schësselchen
+Lanterne du ramadan (fanous) ¦ Ramadan-Laterne (Fanous)
+Niche de prière murale (mihrab décoratif) ¦ Gebietsnisch un der Mauer (dekorativen Mihrab)
+Coran sur l’étagère du haut ¦ Koran um iewechste Regal
+Brûleur d’encens (mabkhara) ¦ Räucherfaass (Mabkhara)
+Bouddha assis ¦ Sëtzende Buddha
+Grand Bouddha de jardin ¦ Grousse Gaardebuddha
+Autel bouddhique (butsudan) ¦ Buddhisteschen Altor (Butsudan)
+Stupa miniature (chorten) ¦ Mini-Stupa (Chörten)
+Moulin à prières ¦ Gebietsmillen
+Drapeaux de prière (guirlande) ¦ Gebietsfändelen (Girlande)
+Thangka (peinture sur rouleau) ¦ Thangka (Rollbild)
+Roue du dharma murale ¦ Dharma-Rad un der Mauer
+Bol chantant sur coussin ¦ Klangschuel op engem Këssen
+Gong sur portique ¦ Gong op engem Gestell
+Coussin de méditation (zafu et zabuton) ¦ Meditatiounskëssen (Zafu an Zabuton)
+Brûle-parfum et bâtons d’encens ¦ Räucherfaass a Räucherstäbercher
+Temple de maison (mandir) ¦ Hausdempel (Mandir)
+Statue de Ganesh ¦ Ganesha-Statu
+Nataraja (Shiva dansant) ¦ Nataraja (danzende Shiva)
+Om mural ¦ Om un der Mauer
+Lampe à huile (diya) ¦ Ueleglucht (Diya)
+Pot de tulsi (basilic sacré) ¦ Tulsi-Dëppen (hellegt Basilikum)
+Rangoli (motif coloré au sol) ¦ Rangoli (faarwegt Muster um Buedem)
+Cloche de puja ¦ Puja-Klack
+Guirlande de fleurs (œillets d’Inde) ¦ Blummegirlande (Studentenblummen)
+Khanda mural ¦ Khanda un der Mauer
+Palki Sahib (dais du Guru Granth Sahib) ¦ Palki Sahib (Baldachin vum Guru Granth Sahib)
+Manji Sahib (petit lit du livre saint) ¦ Manji Sahib (klengt Bett vum hellege Buch)
+Kamidana (autel shinto mural) ¦ Kamidana (Shinto-Altor un der Mauer)
+Torii de jardin ¦ Gaarde-Torii
+Lanterne de pierre (tōrō) ¦ Steelaterne (Tōrō)
+Corde sacrée (shimenawa) ¦ Hellegt Seel (Shimenawa)
+Autel des ancêtres ¦ Virfahrenaltor
+Tablettes des ancêtres ¦ Virfahrentafelen
+Brûle-parfum tripode (bronze) ¦ Dräibeenegt Räucherfaass (Bronze)
+Yin et yang mural ¦ Yin a Yang un der Mauer
+Lanterne rouge en papier ¦ Rout Pabeierlaterne
+Vase à feu sacré (afrinagan) ¦ Vas fir dat hellegt Feier (Afrinagan)
+Coin mémoire (photo, bougie, fleurs) ¦ Erënnerungseck (Foto, Käerz, Blummen)
+Urne funéraire ¦ Urn
+Cadre de deuil (photo et ruban noir) ¦ Trauerrumm (Foto a schwaarzt Bändchen)
+Bougie du souvenir ¦ Erënnerungskäerz
+Boîte à lettres d’amour (correspondance) ¦ Bréifkëscht mat Léiftbréiwer (Korrespondenz)
+Vitrine à médailles et souvenirs militaires ¦ Vitrinn mat Medaillen a militäreschen Erënnerungen
+Lave-linge à hublot ¦ Frontlader-Wäschmaschinn
+Lave-linge à ouverture par le dessus ¦ Toplader-Wäschmaschinn
+Lave-vaisselle compact (à poser) ¦ Kompakt Spullmaschinn (zum Stellen)
+Four à micro-ondes ¦ Mikrowellenuewen
+Mini-four ¦ Mini-Uewen
+Four encastrable sous le plan ¦ Abauuewen ënner der Aarbechtsplack
+Plaque à induction ¦ Induktiounsplack
+Table de cuisson au gaz (4 feux) ¦ Gaskachfeld (4 Flamen)
+Plancha électrique ¦ Elektresch Plancha
+Appareil à raclette ¦ Raclette-Apparat
+Hotte aspirante murale ¦ Damphotte un der Mauer
+Hotte îlot (suspendue) ¦ Inselhotte (hänkend)
+Cuiseur à riz ¦ Räiskacher
+Mijoteuse ¦ Schmuerdëppen
+Autocuiseur (cocotte-minute) ¦ Dampdrockdëppen
+Friteuse ¦ Fritteuse
+Friteuse sans huile ¦ Heissluft-Fritteuse
+Machine à pain ¦ Broutbakmaschinn
+Gaufrier ¦ Waffeleisen
+Blender ¦ Blender
+Centrifugeuse (presse-fruits) ¦ Entsafter
+Robot multifonction ¦ Multifunktiouns-Kichemaschinn
+Cafetière à filtre ¦ Filterkaffismaschinn
+Machine à café à capsules ¦ Kapsel-Kaffismaschinn
+Bouilloire émaillée ¦ Emailléierte Waasserkessel
+Mini-réfrigérateur ¦ Mini-Frigo
+Téléviseur écran plat sur pied ¦ Flaachbildschierm-Fernseh op engem Fouss
+Grand téléviseur au mur ¦ Grousse Fernseh un der Mauer
+Écran de projection ¦ Projektiounsleinwand
+Vidéoprojecteur ¦ Beamer
+Barre de son ¦ Soundbar
+Magnétoscope (VHS) ¦ Videorecorder (VHS)
+Lecteur DVD / Blu-ray ¦ DVD- / Blu-ray-Spiller
+Box internet ¦ Internetbox
+Poste de radio TSF ¦ TSF-Radio
+Transistor ¦ Transistorradio
+Téléphone sans fil et sa base ¦ Schnurlosen Telefon mat senger Statioun
+Nettoyeur vapeur (balai) ¦ Dampbesem
+Centrale vapeur ¦ Dampbiegelstatioun
+Déshumidificateur ¦ Loftentfiichter
+Purificateur d’air ¦ Loftreiniger
+Ventilateur colonne ¦ Säulventilator
+Chauffe-eau (ballon d’eau chaude) ¦ Boiler (Waarmwaasserbehälter)
+Chaudière murale ¦ Wandheizkessel
+Radiateur électrique mural ¦ Elektreschen Heizkierper un der Mauer
+Machine à coudre électrique ¦ Elektresch Nähmaschinn
+Fauteuil de bureau à roulettes ¦ Bürosstull mat Rieder
+Siège ergonomique (dossier filet) ¦ Ergonomesche Stull (Netzlount)
+Fauteuil de direction en cuir ¦ Chefsessel aus Lieder
+Bureau informatique ¦ Computerschreifdësch
+Grand bureau (plateau 180 cm) ¦ Grousse Schreifdësch (Plack 180 cm)
+Table à dessin inclinable ¦ Kippbare Zeechendësch
+Caisson à tiroirs à roulettes ¦ Schublaadecontainer mat Rieder
+Classeur métallique à tiroirs ¦ Metallschublaadeschaf
+Armoire à rideaux ¦ Rolladeschaf
+Meuble à plans ¦ Plangschaf
+Fichier à fiches en bois ¦ Hëlze Karteikëscht
+Étagère de classeurs ¦ Ordnerregal
+Imprimante ¦ Drécker
+Imprimante multifonction (scanner) ¦ Multifunktiounsdrécker (Scanner)
+Photocopieur ¦ Fotokopéierer
+Scanner à plat ¦ Flaachbettscanner
+Écran d’ordinateur ¦ Computerecran
+Deux écrans côte à côte ¦ Zwee Ecranen nieneneen
+Ordinateur tout-en-un ¦ All-in-One-Computer
+Globe sur pied ¦ Globus op engem Fouss
+Tableau blanc ¦ Wäiss Tafel
+Destructeur de documents ¦ Pabeierschredder
+Trieur à courrier ¦ Bréifsortéierer
+Plante de bureau ¦ Bürosplanz
+Lampe de bureau LED ¦ LED-Bürosluucht
+Repose-pieds de bureau ¦ Bürosfoussstütz
+Fontaine à eau ¦ Waasserspender
+Voiture citadine ¦ Stadauto
+Voiture familiale (break) ¦ Familljenauto (Break)
+Camionnette ¦ Camionnette
+2 CV ¦ 2 CV
+Renault 4 L ¦ Renault 4 L
+Traction avant ¦ Traction avant
+Caravane ¦ Wunnwon
+Vélo ¦ Vëlo
+Vélo électrique ¦ Elektresche Vëlo
+Vélo d’enfant ¦ Kannervëlo
+Vélo ancien (de facteur) ¦ Ale Vëlo (vum Bréifdréier)
+Râtelier à vélos ¦ Vëlosständer
+Scooter ¦ Scooter
+Panneau à outils mural ¦ Geschirwand un der Mauer
+Armoire métallique d’atelier ¦ Metallschaf fir d’Atelier
+Étagère de garage en bois ¦ Hëlze Garageregal
+Établi pliant ¦ Klappbar Wierkbänk
+Scie à onglet ¦ Gehrungssée
+Poste à souder ¦ Schweessapparat
+Nettoyeur haute pression ¦ Héichdrockreiniger
+Groupe électrogène ¦ Stroumgenerator
+Aspirateur d’atelier ¦ Atelier-Staubsauger
+Cric rouleur ¦ Rangéierwon (Cric)
+Borne de recharge (voiture électrique) ¦ Luedstatioun (Elektroauto)
+Échelle d’appui ¦ Uleeleeder
+Réfrigérateur de garage ¦ Garage-Frigo
+Congélateur coffre de garage ¦ Déifkillkëscht an der Garage
+Poubelles de tri (conteneurs) ¦ Dreckskëschte fir ze sortéieren (Container)
+Canoë ¦ Kanu
+Planche de surf ¦ Surfbrett
+Réglette d’atelier ¦ Atelier-Luuchteleescht
+Plafonnier rond ¦ Ronn Plafongsluucht
+Plafonnier Art déco ¦ Art-déco-Plafongsluucht
+Dalle LED ¦ LED-Panel
+Lustre à bras ¦ Lüster mat Äerm
+Lustre en fer forgé (à bougies) ¦ Schmiddeiselüster (mat Käerzen)
+Lustre roue de charrette ¦ Karrad-Lüster
+Réglette lumineuse ¦ Luuchteleescht
+Néon décoratif (enseigne) ¦ Dekorativ Neonsluucht (Schëld)
+Bandeau LED ¦ LED-Band
+Lampadaire vasque (halogène) ¦ Fluterstoluucht (Halogen)
+Lampadaire vasque Art déco ¦ Art-déco-Fluterstoluucht
+Lampadaire liseuse ¦ Lieserstoluucht
+Lampe à abat-jour plissé ¦ Luucht mat plissiertem Schierm
+Lampe globe en opaline ¦ Opalglas-Kugelluucht
+Lampe de sel ¦ Salzluucht
+Veilleuse d’enfant ¦ Kanner-Nuetsliicht
+Lampe de lecture articulée ¦ Gelenkt Liesluucht
+Lampe à carbure (de mineur) ¦ Karbidluucht (vum Minnenaarbechter)
+Bougeoir à main ¦ Handkäerzestänner
+Applique double ¦ Duebel Wandluucht
+Applique de salle de bain ¦ Buedzëmmer-Wandluucht
+Suspension industrielle ¦ Industrie-Hänkluucht
+Ampoule nue (filament) ¦ Bléisst Bir (Filament)
+Suspension en rotin ¦ Rattan-Hänkluucht
+Boule à facettes ¦ Discokugel
+Projecteur extérieur ¦ Baussestrahler
+Borne lumineuse de jardin ¦ Gaardeluuchtpoller
+Balise solaire de jardin ¦ Solar-Gaardeluucht
+maison|Genre ¦ Zort
+maison|Avant ¦ Front
+maison|Poser ¦ Stellen
+maison|Angles ¦ Wénkelen
+maison|Écurie ¦ Päerdsstall
+maison|Croix ¦ Kräiz
+couleur|aucune ¦ keng

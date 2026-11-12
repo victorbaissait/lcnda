@@ -1,0 +1,1013 @@
+fr ¦ lb
+TABLEUR · BASE ¦ TABELLE · DATEBANK
+⤒ Remplir depuis l’app ¦ ⤒ Aus der App ausfëllen
+1 · Ce qu’on prend ¦ 1 · Wat ee séilt
+(comme l’export pour partager) ¦ (wéi den Export fir ze deelen)
+2 · Les colonnes ¦ 2 · D’Kolonnen
+(glisse ⠿ pour ranger) ¦ (zéi ⠿ fir ze sortéieren)
+＋ Une colonne tirée des données ¦ ＋ Eng Kolonn aus den Donnéeën
+3 · Aperçu ¦ 3 · Iwwerbléck
+🔗 Tenir à jour ¦ 🔗 Aktuell halen
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — d’Zeilen änneren sech, wann d’Datebank sech ännert (beim Opmaachen, oder mat ↻). Deng derbäigesate Kolonnen op der rietser Säit (Formelen, Notizen) bleiwen op der richteger Zeil.
+Où : ¦ Wou:
+à la même place (remplace la plage liée) ¦ op der selwechter Plaz (ersetzt de verbonnene Beräich)
+à partir de A1 dans une nouvelle feuille ¦ vun A1 un an engem neie Blat
+à partir de {cell} dans cette feuille ¦ vun {cell} un an dësem Blat
+⤒ Remplir ¦ ⤒ Ausfëllen
+Commune ¦ Gemeng
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Nach keen Auszuch: Lëschten → 📜 Auszich.
+Statistique ¦ Statistik
+Hommes et femmes à part ¦ Männer a Fraen getrennt
+Pas encore de liste à toi : Listes → Mes listes. ¦ Nach keng eege Lëscht: Lëschten → Meng Lëschten.
+Hommes ¦ Männer
+Femmes ¦ Fraen
+Inconnu ¦ Onbekannt
+Lignée ¦ Linn
+Né(e) à ¦ Gebuer zu
+Nés à partir de ¦ Gebuer vun
+Nés jusqu’à ¦ Gebuer bis
+Nés avant ¦ Gebuer virun
+Sorte ¦ Zort
+Chercher… (nom, prénom) ¦ Sichen… (Numm, Virnumm)
+Chercher… (nom, sorte, lieu) ¦ Sichen… (Numm, Zort, Plaz)
+👤 personne ¦ 👤 Persoun
+📍 lieu ¦ 📍 Plaz
+📅 date d’acte ¦ 📅 Datum vum Akt
+nombre ¦ Zuel
+Monter ¦ No uewen
+Descendre ¦ No ënnen
+Retirer la colonne ¦ Kolonn ewechhuelen
+Aucune colonne : ajoute-en une. ¦ Keng Kolonn: setz eng derbäi.
+Lecture de la base… ¦ D’Datebank gëtt gelies…
+Lecture… ¦ Liesen…
+({shown} premières lignes sur {n}) ¦ (déi éischt {shown} Zeilen vun {n})
+Rien ne correspond : change les filtres. ¦ Näischt passt: änner d’Filteren.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} op der Säit (lieweg Persounen oder vertraulech Fichen).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Nëmmen déi éischt {n} Zeilen ginn iwwerholl: man d’Filtere méi genau.
+⤒ Remplir {n} ¦ ⤒ {n} ausfëllen
+Toutes les colonnes sont déjà là. ¦ All d’Kolonne sinn schonn do.
+Une colonne tirée des données ¦ Eng Kolonn aus den Donnéeën
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Dëst Blat ass net mat der Datebank verbonnen: Donnéeën → „⤒ Aus der App ausfëllen…“.
+Impossible de relire la base : {error} ¦ D’Datebank konnt net nei gelies ginn: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Schonn aktuell: an der Datebank huet sech näischt geännert.
+{n} de plus ¦ {n} méi
+{n} de moins ¦ {n} manner
+valeurs mises à jour ¦ Wäerter aktualiséiert
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 „{name}“ nei gelies: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 „{name}“ nei gelies: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Auszuch vun der Vollekszielung</b> · d’Kolonne vum Joer:
+Année du recensement ¦ Joer vun der Vollekszielung
+📤 Envoyer vers la base… ¦ 📤 An d’Datebank schécken…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Aktuell gehalen: <b>{what}</b> · {n} · nei gelies {when}
+la base ¦ d’Datebank
+Relire depuis la base ¦ Aus der Datebank nei liesen
+↻ Relire ¦ ↻ Nei liesen
+Changer la source ou les colonnes… ¦ D’Quell oder d’Kolonnen änneren…
+Envoyer vers la base… ¦ An d’Datebank schécken…
+Ne plus tenir à jour (garder les valeurs) ¦ Net méi aktuell halen (d’Wäerter behalen)
+« {name} » n’est plus tenue à jour ¦ „{name}“ gëtt net méi aktuell gehalen
+Relevé : colonnes de {year} ¦ Auszuch: Kolonne vun {year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Liesmodus: näischt kann an d’Datebank geschéckt ginn.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Wiel d’Tabell, déi geschéckt soll ginn (hir Titelzeil an hir Zeilen), a fänk dann nach eng Kéier un.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 An d’Datebank schécken — {name}, Zeilen {from} bis {to}
+1. Les colonnes ¦ 1. D’Kolonnen
+2. Voilà ce qui va entrer ¦ 2. Dat heiten kënnt eran
+3. Envoyer ¦ 3. Schécken
+Voir ce qui va entrer ¦ Kucken, wat erakënnt
+Ce que ça crée : ¦ Wat dat erstellt:
+Colonne ¦ Kolonn
+Exemple ¦ Beispill
+Va dans ¦ Geet an
+(sans titre) ¦ (ouni Titel)
+Champ pour la colonne {col} ¦ Feld fir d’Kolonn {col}
+Colonnes : {list} ¦ Kolonnen: {list}
+aucune pour l’instant ¦ fir de Moment keng
+Déjà dans la base ¦ Schonn an der Datebank
+Problème ¦ Problem
+Laissée de côté ¦ Op der Säit gelooss
+📤 Créer {n} ¦ 📤 {n} erstellen
+📤 Rien de nouveau ¦ 📤 Näischt Neies
+📤 Créer {n} et en relier {m} ¦ 📤 {n} erstellen an {m} verbannen
+📤 Relier {m} ¦ 📤 {m} verbannen
+📤 Envoyer ¦ 📤 Schécken
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Wiel mindestens eng Kolonn fir ze schécken (zum Beispill den Numm).
+Choisis au moins une colonne. ¦ Wiel mindestens eng Kolonn.
+Donne l’année du recensement. ¦ Gëff d’Joer vun der Vollekszielung un.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Et brauch eng Kolonn fir den Numm (oder „Numm a Virnumm“).
+Il faut une colonne pour le nom. ¦ Et brauch eng Kolonn fir den Numm.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Wiel d’Kolonn, déi d’Zort vum Evenement seet (Daf, Doud…).
+Il manque la sorte d’événement. ¦ D’Zort vum Evenement feelt.
+Ces lignes sont vides. ¦ Dës Zeile sinn eidel.
+Je compare avec ta base… ¦ Ech vergläiche mat denger Datebank…
+Comparaison… ¦ Vergläichen…
+Choisir la fiche de la ligne {row} ¦ D’Fiche fir d’Zeil {row} wielen
+choisis ▾ ¦ wielen ▾
+Relier à {name} ({meta}) ¦ Mat {name} verbannen ({meta})
+Laisser de côté ¦ Op der Säit loossen
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ E puer Zeile gläiche méi Fichen: wiel déi richteg (soss gi se op der Säit gelooss).
+Ligne ¦ Zeil
+Ce qui va se passer ¦ Wat geschitt
+Impossible d’envoyer : {error} ¦ Schécken net méiglech: {error}
+contient « {text} » : compté comme {n} ¦ enthält „{text}“: als {n} gezielt
+contient l’erreur « {text} » : laissée vide ¦ enthält de Feeler „{text}“: eidel gelooss
+« {text} » n’est pas un nombre : laissé vide ¦ „{text}“ ass keng Zuel: eidel gelooss
+à trouver ¦ ze fannen
+L’éditeur de diagrammes n’est pas chargé. ¦ Den Diagrammeditor ass net gelueden.
+L’éditeur de graphiques n’est pas chargé. ¦ De Grafikeditor ass net gelueden.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Grafik „{name}“ bei Meng Grafiken derbäigesat (Grafiken, Dashboard…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ De Browser léisst hei net kopéieren: wiel de Beräich a maach {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Kopéiert: an engem Tableau (Ënnersichungen → 🧩 Tableauen) paste et ({key}): et gëtt en ▦ Tabellen-Objet, mat de Formelen.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Kopéiert: op enger Säit vun enger Sammlung, klick op eng Zell vun der Tabell a paste ({key}).
+La présentation n’est pas chargée. ¦ D’Presentatioun ass net gelueden.
+… et {n} ¦ … an {n}
+Colonnes attendues : {list} ¦ Erwaart Kolonnen: {list}
+(une ou plusieurs) ¦ (eng oder méi)
+(facultatif) ¦ (fakultativ)
+Les données de « {name} » ¦ D’Donnéeë vun „{name}“
+l’outil ¦ den Outil
+{name} (données) ¦ {name} (Donnéeën)
+Renvoyer les données là d’où elles viennent ¦ D’Donnéeën dohinner zréckschécken, wou se hierkommen
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Formelen, Zortéieren, aus Excel pasten… „Fichier → Eng Kopie späicheren…“ behält dëse Classeur och an der Tabelle.
+Rien à ouvrir : la liste est vide. ¦ Näischt opzemaachen: d’Lëscht ass eidel.
+🧾 Tableur ¦ 🧾 Tabelle
+ouvrir dans le tableur ¦ an der Tabelle opmaachen
+🧾 Ouvrir dans le tableur ¦ 🧾 An der Tabelle opmaachen
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ D’Blat ass eidel: schreif oder paste eng Tabell, a wiel se dann.
+TABLEUR · PRÉPARER POUR… ¦ TABELLE · PREPARÉIERE FIR…
+🎯 Préparer pour… ({range}) ¦ 🎯 Preparéiere fir… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ D’Tabelle weess, wat all Plaz an der App erwaart: wiel, wou dës Donnéeë higinn. Si kontrolléiert d’Kolonne vum Beräich <b>{range}</b> a setzt se richteg zesummen.
+Dessin ¦ Zeechnung
+▦ Un tableau ¦ ▦ Eng Tabell
+Il faut une colonne de chiffres ¦ Et brauch eng Kolonn mat Zuelen
+📊 Un graphique ¦ 📊 Eng Grafik
+Dans la plage ¦ Am Beräich
+, une ou plusieurs ¦ , eng oder méi
+, facultatif ¦ , fakultativ
+Voir la cellule ¦ D’Zell kucken
+… et {n} à vérifier. ¦ … an {n} ze kontrolléieren.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Et feelt eng Kolonn: setz se am Beräich derbäi, oder wiel en anere Beräich.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Verbindung behalen: den Diagramm follegt der Tabelle (aktualiséiert, wann de Beräich sech ännert)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Verbindung behalen: den Diagramm follegt der Tabelle (aktualiséiert, wann de Beräich sech ännert) — de Classeur gëtt an der Tabelle gespäichert
+← Autre endroit ¦ ← Aner Plaz
+La première ligne donne les titres ¦ Déi éischt Zeil gëtt d’Titelen
+Pas d’aperçu. ¦ Keen Iwwerbléck.
+🎤 Créer la présentation ¦ 🎤 D’Presentatioun erstellen
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Korrigéier d’Zell, a maach dann „🎯 Preparéiere fir…“ nees op.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Dës Donnéeë ginn zréck an hiren Outil: den Diagramm gëtt aus enger Kopie gemaach (keng Verbindung).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Wiel e Beräich mat Zuelen (zum Beispill: Joerzéngt, Männer, Fraen).
+Tous les types de diagrammes… ¦ All Zorte vun Diagrammer…
+Conseillés pour {range} ¦ Recommandéiert fir {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Donnéeën: „{name}“ ! {range}
+Classeur ¦ Classeur
+(feuille « {name} ») ¦ (Blat „{name}“)
+tenu à jour ¦ aktuell gehalen
+Les figer ¦ Se fixéieren
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Classeur net fonnt (geläscht?): d’Zeechnung behält déi lescht gelieszen Zuelen.
+TABLEUR ¦ TABELLE
+Nom du classeur… ¦ Numm vum Classeur…
+Plage illisible : écris par exemple A1:C12. ¦ Beräich net liesbar: schreif zum Beispill A1:C12.
+Feuille ¦ Blat
+Plage ¦ Beräich
+Copier une fois (les chiffres ne bougent plus) ¦ Eemol kopéieren (d’Zuelen änneren sech net méi)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Verbindung behalen: den Diagramm follegt dem Classeur (aktuell gehalen)
+Lecture du classeur… ¦ De Classeur gëtt gelies…
+Choisis un classeur. ¦ Wiel e Classeur.
+Écris une plage, par exemple A1:C12. ¦ Schreif e Beräich, zum Beispill A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Schreif dat gewënschte Resultat an déi éischt Zell vun der Kolonn (zum Beispill „Jean D.“), a start dann nach eng Kéier ✨ Direkt ausfëllen.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Ech fannen keng Regel, déi fir all d’Beispiller geet: schreif nach eent, oder e méi einfacht.
+Rien à remplir : la colonne est déjà pleine. ¦ Näischt auszefëllen: d’Kolonn ass scho voll.
+{what} de {col} ¦ {what} vun {col}
+{what} n°{n} de {col} ¦ {what} Nr. {n} vun {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} Nr. {n} vum Enn vun {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (Regel: {rule}). ↶ fir réckgängeg ze maachen.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Wiel eng Tabell mat enger Titelzeil an Zeile mat Donnéeën.
+Colonne {col} ¦ Kolonn {col}
+DONNÉES ¦ DONNÉEËN
+Σ Sous-totaux ¦ Σ Zwëschentotalen
+Créer les sous-totaux ¦ D’Zwëschentotalen erstellen
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ No <b>{range}</b>. En neit Blat: d’Zeilen no Grupp zortéiert, en Total ënner all Grupp (Formelen), dann den Total vun allem. „⊟ Plang“ (Menü Donnéeën) klappt den Detail zou.
+À chaque changement de ¦ Bei all Ännerung vun
+Calcul ¦ Berechnung
+Sur les colonnes ¦ Op de Kolonnen
+Coche au moins une colonne à calculer. ¦ Kräiz mindestens eng Kolonn un, déi berechent soll ginn.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. „⊟ Plang“ (Menü Donnéeën) klappt den Detail zou.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Dëst Blat huet keng Zwëschentotalen: als éischt Donnéeën → Σ Zwëschentotalen….
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Detail zougeklappt: nëmmen d’Totale bleiwen.
+⊞ Détail déplié. ¦ ⊞ Detail opgeklappt.
+🎯 Valeur cible ¦ 🎯 Zilwäert
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ D’App probéiert Wäerter an „der Zell, déi geännert gëtt“, bis d’Formel dat gewënschte Resultat gëtt. Bsp.: Mat wéi engem Alter huet hie bestuet, fir datt den Altersënnerscheed 7 Joer ass?
+La formule de la case ¦ D’Formel vun der Zell
+Doit donner ¦ Muss ginn
+En changeant la case ¦ Andeems d’Zell geännert gëtt
+Écris une adresse de case (ex. C5, B2). ¦ Schreif eng Zelladress (Bsp. C5, B2).
+Écris le résultat voulu. ¦ Schreif dat gewënschte Resultat.
+La première case doit contenir une formule. ¦ Déi éischt Zell muss eng Formel enthalen.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Kee Wäert fonnt: d’Formel hänkt vläicht net vun dëser Zell of, oder kann dëst Resultat net erreechen.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: d’Formel gëtt {target}. ↶ fir réckgängeg ze maachen.
+INSERTION ¦ ASETZEN
+📈 Mini-graphique ¦ 📈 Mini-Grafik
+Poser ¦ Asetzen
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Eng kleng Grafik an der Zell, déi den Zuele follegt. Méi Zeile gewielt: eng Grafik pro Zeil (de Beräich geet mat hinnen erof).
+Les nombres (plage de la 1re ligne) ¦ D’Zuelen (Beräich vun der 1. Zeil)
+Gagné / perdu ¦ Gewonnen / verluer
+Couleur ¦ Faarf
+Écris une plage, par exemple B2:F2. ¦ Schreif e Beräich, zum Beispill B2:F2.
+🧮 Solveur ¦ 🧮 Solver
+Résoudre ¦ Léisen
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Wéi den Zilwäert, mä mat méi Zellen op eemol ze änneren, mat Konditiounen. Bsp.: eng Ierfschaft op dräi Zweeg opdeelen, sou datt jidderee mindestens 1 000 € kritt an den Ënnerscheed sou kleng wéi méiglech ass.
+La formule (case objectif) ¦ D’Formel (Zilzell)
+Doit être ¦ Muss sinn
+la plus grande possible ¦ sou grouss wéi méiglech
+la plus petite possible ¦ sou kleng wéi méiglech
+égale à… ¦ gläich wéi…
+Valeur (si « égale à ») ¦ Wäert (wann „gläich wéi“)
+En changeant les cases ¦ Andeems d’Zellen geännert ginn
+B2:B4 ou B2;C3 ¦ B2:B4 oder B2;C3
+Conditions (une par ligne : {examples}) ¦ Konditiounen (eng pro Zeil: {examples})
+Nombres entiers seulement ¦ Nëmme ganz Zuelen
+La case objectif doit contenir une formule (ex. D5). ¦ D’Zilzell muss eng Formel enthalen (Bsp. D5).
+Trente cases à changer au plus. ¦ Héchstens drësseg Zellen ze änneren.
+Écris les cases à changer (ex. B2:B4). ¦ Schreif d’Zellen, déi geännert solle ginn (Bsp. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Konditioun net liesbar: „{text}“ (Bsp. B2 >= 0).
+Écris la valeur voulue. ¦ Schreif de gewënschte Wäert.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Keng Léisung, déi all d’Konditiounen erfëllt (kontrolléier se, oder änner den Ufank).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Fonnt: {cell} = {value} ({n}). ↶ fir réckgängeg ze maachen.
+📋 Tableau de scénarios ¦ 📋 Szenariotabell
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ A wann dës Zell 20, 25, 30… wär? D’Tabell weist, wat d’Formele fir all Wäert ginn. Si gëtt vun der gewielter Zell ({cell}) un agesat; soss ännert sech näischt.
+La case qui change ¦ D’Zell, déi sech ännert
+Ses valeurs (séparées par « ; », ou une plage) ¦ Hir Wäerter (getrennt mat „;“, oder e Beräich)
+20;25;30 ou A10:A15 ¦ 20;25;30 oder A10:A15
+Les formules à suivre ¦ D’Formelen, déi ee verfollegt
+Écris la case qui change (ex. B2). ¦ Schreif d’Zell, déi sech ännert (Bsp. B2).
+Écris au moins une formule (ex. C5). ¦ Schreif mindestens eng Formel (Bsp. C5).
+Écris des valeurs (500 au plus). ¦ Schreif Wäerter (héchstens 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (fix Wäerter: maach et nach eng Kéier, wann d’Donnéeë sech änneren).
+Rien n’a été enregistré. ¦ Et gouf näischt opgeholl.
+⏺ Nommer l’action ¦ ⏺ D’Aktioun benennen
+Mon action ¦ Meng Aktioun
+Garder ¦ Behalen
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Aktioun „{name}“ behalen: Donnéeën → ▶ Opgeholl Aktiounen.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Opnam: maach deng Handgrëffer (Menüen, Knäppercher, Formater), dann Donnéeën → ⏹ Opnam stoppen.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Keng opgeholl Aktioun: Donnéeën → ⏺ Eng Aktioun ophuelen.
+▶ Actions enregistrées ¦ ▶ Opgeholl Aktiounen
+Elles se refont sur la sélection du moment. ¦ Si ginn op der aktueller Auswiel nees gemaach.
+▶ Refaire ¦ ▶ Nees maachen
+▶ « {name} » refaite. ¦ ▶ „{name}“ nees gemaach.
+Colonne {n} ¦ Kolonn {n}
+{what} de « {col} » ¦ {what} vun „{col}“
+Lignes ¦ Zeilen
+Total ¦ Total
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · no „{rows}“ an „{cols}“ — no {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · no „{rows}“ — no {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Wiel e Beräich mat enger Titelzeil an Zeile mat Donnéeën (zum Beispill: Numm, Gemeng, Joer, Alter).
+🔀 Tableau croisé dynamique ¦ 🔀 Pivottabell
+Créer le tableau croisé ¦ D’Pivottabell erstellen
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ No <b>{range}</b> ({n}). D’Resultat kënnt an en neit Blat; „↻ D’Pivottabell aktualiséieren“ (Menü Donnéeën) mécht se nei, wann d’Donnéeë sech änneren.
+En lignes ¦ Als Zeilen
+En colonnes (facultatif) ¦ Als Kolonnen (fakultativ)
+— rien — ¦ — näischt —
+Sur la colonne ¦ Op der Kolonn
+— (compter les lignes) — ¦ — (d’Zeilen zielen) —
+Totaux ¦ Totalen
+Aperçu : {rows} × {cols} ¦ Iwwerbléck: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Pivottabell erstallt: {rows} × {cols}. Donnéeën → „↻ D’Pivottabell aktualiséieren“, fir se nei ze maachen.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Dëst Blat ass keng Pivottabell: gëff op säi Blat „TCD …“.
+La feuille des données n’existe plus. ¦ D’Blat mat den Donnéeën gëtt et net méi.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Pivottabell aktualiséiert ({rows} × {cols}).
+Graphique vivant ¦ Lieweg Grafik
+Type de graphique ¦ Zort vu Grafik
+En faire un diagramme lié à la plage ¦ En Diagramm draus maachen, dee mam Beräich verbonnen ass
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Wiel Zelle mat Zuelen (an hiren Nimm lénks oder uewen): d’Grafik gëtt hei gezeechent.
+Plage {range} · suit la sélection ¦ Beräich {range} · follegt der Auswiel
+Le moteur du tableur n’est pas chargé. ¦ De Motor vun der Tabelle ass net gelueden.
+Mon classeur ¦ Mäi Classeur
+Rien à rétablir. ¦ Näischt ze widderhuelen.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ et koumen nach aner Ännerungen duerno: benotz ↶ ({key})
+Barre d’outils · {group} ¦ Toolbar · {group}
+Barre d’outils ¦ Toolbar
+Police et gras ¦ Schrëft a fett
+Police (E5) ¦ Schrëft (E5)
+Police ¦ Schrëft
+Gras ¦ Fett
+Italique ¦ Kursiv
+Souligné ¦ Ënnerstrach
+Renvoi à la ligne ¦ Zeilenëmbroch
+Fusionner / séparer ¦ Fusionéieren / trennen
+Aligner à gauche ¦ Lénks ausriichten
+Centrer ¦ Zentréieren
+Aligner à droite ¦ Riets ausriichten
+Couleurs (C2) ¦ Faarwen (C2)
+Couleur du texte ¦ Faarf vum Text
+Format de cellule ¦ Zellformat
+Format de la cellule ¦ Format vun der Zell
+Une décimale de moins ¦ Eng Dezimal manner
+Une décimale de plus ¦ Eng Dezimal méi
+Bordures ¦ Rummen
+Bordures : tout ¦ Rummen: alles
+Bordures : contour ¦ Rummen: Kontur
+Bordure du bas ¦ Rumm ënnen
+Sans bordure ¦ Ouni Rumm
+Graphique ¦ Grafik
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ En Diagramm mat den Zuele vun der Auswiel: déi recommandéiert Zorte fir dëse Beräich
+Choisir une fonction ¦ Eng Funktioun wielen
+Fonction ¦ Funktioun
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, Drécken
+✓ Enregistrer et revenir ¦ ✓ Späicheren an zréckgoen
+Plein écran (⛶) ¦ Vollbild (⛶)
+Données d’un autre outil ¦ Donnéeë vun engem aneren Outil
+Adresse (tape D12 ou un nom pour y aller) ¦ Adress (tipp D12 oder en Numm, fir dohin ze goen)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Tipp eng Adress (D12, B2:C9) oder en Numm, fir dohin ze goen
+Contenu ou formule de la cellule ¦ Inhalt oder Formel vun der Zell
+Feuille de calcul ¦ Rechenblat
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Rechenblat: tipp, fir an déi gewielten Zell ze schreiwen
+Écrire dans la cellule ¦ An d’Zell schreiwen
+Panneau de droite ¦ Rietse Panneau
+Feuilles ¦ Blieder
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Klick, fir ze wielen, wat een hei gesäit (Zomm, Duerchschnëtt…)
+Enregistrer une copie dans le Tableur… ¦ Eng Kopie an der Tabelle späicheren…
+Enregistrer une copie… ¦ Eng Kopie späicheren…
+Enregistrer comme modèle… ¦ Als Modell späicheren…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Exportéieren (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Blat „{name}“
+Pas encore relié à une fiche ¦ Nach net mat enger Fiche verbonnen
+Tire pour recopier ou continuer une suite ¦ Zéi, fir ze kopéieren oder eng Serie weiderzeféieren
+« {text} » n’est pas dans la liste : {list} ¦ „{text}“ ass net an der Lëscht: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Et brauch eng Zuel vu mindestens {min} an héchstens {max}.
+Il faut un nombre d’au moins {min}. ¦ Et brauch eng Zuel vu mindestens {min}.
+Il faut un nombre et au plus {max}. ¦ Et brauch eng Zuel vun héchstens {max}.
+Il faut un nombre. ¦ Et brauch eng Zuel.
+Je ne comprends pas cette date ({why}). ¦ Ech verstinn dësen Datum net ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ Beispiller: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = ergänzen
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Verstane wéi en Datum vun engem Akt: <b>{date}</b> (ongeféier: d’Berechnunge weisen ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Verstane wéi en Datum vun engem Akt: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Text oder Zuel. Fänk mat <b>=</b> un, fir ze rechnen.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Formel: klick oder zéi iwwer Zellen, fir se anzesetzen, oder tipp den Numm vun enger Funktioun (op Franséisch oder op Englesch). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ An {name} korrigéieren
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Ongeféiert Resultat: ee vun den Datumen ass ongeféier („vers“, „avant“, „an …“ ouni Dag).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ „{text}“: weder eng Adress (D12, B2:C9) nach en Numm aus dem Classeur.
+Pas de feuille « {name} ». ¦ Kee Blat „{name}“.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Benotz {key} am Gitter (de Browser léisst kee Knäppchen an d’Tëschenoflag schreiwen).
+En pixels (6 à 72) : ¦ A Pixel (6 bis 72):
+Lignes masquées (Format → Tout remontrer) ¦ Verstoppt Zeilen (Format → Alles nees weisen)
+Colonnes masquées (Format → Tout remontrer) ¦ Verstoppt Kolonnen (Format → Alles nees weisen)
+Trier A → Z (sur la colonne choisie) ¦ A → Z zortéieren (op der gewielter Kolonn)
+Trier Z → A ¦ Z → A zortéieren
+Trier sur plusieurs colonnes… ¦ No méi Kolonnen zortéieren…
+Espaces en trop retirés. ¦ Iwwerflësseg Espacen ewechgeholl.
+Rien à retirer. ¦ Näischt ewechzehuelen.
+Police des cellules ¦ Schrëft vun den Zellen
+Cette police a un nom que le tableur ne sait pas garder. ¦ Dës Schrëft huet en Numm, deen d’Tabelle net behale kann.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Eng Gréisst tëscht 6 a 72 px („{value}“ geet net).
+Une taille entre 6 et 72 px. ¦ Eng Gréisst tëscht 6 a 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Wiel fir d’éischt méi Zellen, déi fusionéiert solle ginn.
+Cases fusionnées : {n} ¦ Zelle fusionéiert: {n}
+Largeur de colonne ¦ Breet vun der Kolonn
+Hauteur de ligne ¦ Héicht vun der Zeil
+En pixels (16 à 1200) : ¦ A Pixel (16 bis 1200):
+En pixels (12 à 600) : ¦ A Pixel (12 bis 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ En Numm fänkt mat engem Buschtaf un, ouni Espace (Bsp. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Numm „{name}“ = {ref}: tipp =SOMME({name}) an eng Formel.
+Nom pour la plage ¦ Numm fir de Beräich
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ En Numm fir {ref} (fir =SOMME(Total) amplaz =SOMME(D2:D40) ze schreiwen):
+💬 Note sur {cell} ¦ 💬 Notiz op {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ D’Notiz gëtt ugewisen, wann een iwwer d’Zell fiert (en orange Eck). Eidel = keng Notiz.
+⌨️ Raccourcis du tableur ¦ ⌨️ Ofkierzunge vun der Tabelle
+Raccourcis indisponibles. ¦ Ofkierzungen net disponibel.
+⚙️ Réglages du tableur ¦ ⚙️ Astellunge vun der Tabelle
+Après la touche Entrée, aller ¦ No der Entrée-Tast goen
+vers le bas ¦ no ënnen
+vers la droite (saisie de relevés en ligne) ¦ no riets (Auszich Zeil fir Zeil aginn)
+Séparateur des fichiers CSV ¦ Trennzeechen vun de CSV-Fichieren
+point-virgule « ; » (Excel en français) ¦ Semikolon „;“ (Excel op Franséisch)
+virgule « , » ¦ Komma „,“
+tabulation ¦ Tabulatioun
+Largeur des colonnes d’une feuille neuve ¦ Breet vun de Kolonnen an engem neie Blat
+Dans la barre du bas, pour les cellules choisies ¦ An der Leescht ënnen, fir déi gewielten Zellen
+Réglages du tableur ¦ Astellunge vun der Tabelle
+Trop de lignes ou de colonnes d’un coup. ¦ Ze vill Zeilen oder Kolonnen op eemol.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ {dir} zortéiert op der Kolonn {col} (déi 1. Zeil sinn d’Titelen).
+Trié {dir} sur la colonne {col}. ¦ {dir} zortéiert op der Kolonn {col}.
+A → Z (croissant) ¦ A → Z (eropgoend)
+Z → A (décroissant) ¦ Z → A (erofgoend)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Beräich {range} · d’Datume vun Akten („vers 1784“, „an II“) ginn no hirem Datum zortéiert.
+La première ligne, ce sont les titres ¦ Déi éischt Zeil sinn d’Titelen
+Puis par ¦ Duerno no
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Wiel eng Tabell mat enger Titelzeil an Zeilen drënner.
+(vide) ¦ (eidel)
+Chercher dans le tableau… (nom, métier) ¦ An der Tabell sichen… (Numm, Beruff)
+{n} sur {total} ¦ {n} vun {total}
+Supprimer les doublons ¦ Doublonen läschen
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Beräich {range} · déi 1. Zeil sinn d’Titelen. Déi éischt Zeil vun all Grupp bleift.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Beräich {range}. Déi éischt Zeil vun all Grupp bleift.
+Compare les colonnes : ¦ Vergläich d’Kolonnen:
+{n} en double (lignes {rows}). ¦ {n} duebel (Zeilen {rows}).
+{n} en double (ligne {rows}). ¦ {n} duebel (Zeil {rows}).
+Aucune ligne en double. ¦ Keng duebel Zeil.
+Supprimer {n} ¦ {n} läschen
+Coche au moins une colonne. ¦ Kräiz mindestens eng Kolonn un.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Wiel Textzellen an enger Kolonn (Bsp. „MARTIN Jean, 34 ans, laboureur“).
+Convertir le texte en colonnes ¦ Text a Kolonnen ëmwandelen
+Convertir ¦ Ëmwandelen
+Couper à : ¦ Trennen bei:
+« 34 ans » devient 34 ¦ „34 ans“ gëtt 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ De Familljennumm a grousse Buschtawen gëtt eng eege Kolonn („MARTIN Jean“ → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ D’Stécker kommen an d’Kolonn {col} an déi nächst (wat do steet, gëtt ersat; ↶ fir zréckzegoen).
+Validation des données ¦ Validatioun vun den Donnéeën
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Fir {range}: wat een an dës Zelle schreiwe kann.
+Autoriser ¦ Erlaben
+Une liste de choix (menu ▾) ¦ Eng Lëscht mat Choixen (Menü ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Eng Persoun aus der Datebank (Auswielmenü)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Eng Plaz aus der Datebank (Auswielmenü)
+Un nombre entre… ¦ Eng Zuel tëscht…
+Une date d’acte (vers 1784, an II…) ¦ En Datum vun engem Akt (vers 1784, an II…)
+Les choix (un par ligne) ¦ D’Choixen (een pro Zeil)
+Entre ¦ Tëscht
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Och e fräien Text behalen (ouni Fiche, oder net an der Lëscht)
+Écris au moins un choix. ¦ Schreif mindestens ee Choix.
+FORMAT ¦ FORMAT
+Mise en forme conditionnelle ¦ Bedéngt Formatéierung
+Ajouter la règle ¦ D’Regel derbäisetzen
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Eng Faarf, wann de Wäert et verlaangt: de Feeler oder de komesche Wäert fält direkt op.
+Prêtes à l’emploi : ¦ Fäerdeg fir ze benotzen:
+« âge > 100 ans » ¦ „Alter > 100 Joer“
+« date impossible » ¦ „onméiglechen Datum“
+« doublons » ¦ „Doublonen“
+« barres » ¦ „Balken“
+Si la valeur ¦ Wann de Wäert
+alors ¦ dann
+en gras ¦ fett
+Une plage comme D2:D40. ¦ E Beräich wéi D2:D40.
+Écris un nombre. ¦ Schreif eng Zuel.
+ÉDITION ¦ BEARBECHTEN
+🔍 Rechercher et remplacer ¦ 🔍 Sichen an ersetzen
+Remplacer tout ¦ Alles ersetzen
+Remplacer par ¦ Ersetzen duerch
+Dans toutes les feuilles ¦ An alle Blieder
+Respecter les capitales ¦ Grouss- a Klengschreiwung respektéieren
+Chercher le suivant ¦ Dat Nächst sichen
+Trouvé en {cell} ¦ Fonnt an {cell}
+Écris ce qu’il faut chercher. ¦ Schreif, wat gesicht soll ginn.
+Aucune fonction ne correspond. ¦ Keng Funktioun passt.
+ƒ Choisir une fonction ¦ ƒ Eng Funktioun wielen
+Chercher… (âge, somme, recherche) ¦ Sichen… (Alter, Zomm, Sich)
+Le menu de choix n’est pas chargé. ¦ Den Auswielmenü ass net gelueden.
+📍 Un lieu pour {cell} ¦ 📍 Eng Plaz fir {cell}
+👤 Une personne pour {cell} ¦ 👤 Eng Persoun fir {cell}
+📍 Lieu de la base ¦ 📍 Plaz aus der Datebank
+auto ¦ auto
+Décimales ¦ Dezimalen
+✓ « {text} » est comprise (≈) ¦ ✓ „{text}“ ass verstanen (≈)
+✓ « {text} » est comprise ¦ ✓ „{text}“ ass verstanen
+Noir ¦ Schwaarz
+Contour ¦ Kontur
+Retirer la règle ¦ D’Regel ewechhuelen
+Aucune règle sur cette feuille. ¦ Keng Regel op dësem Blat.
+＋ Ajouter une règle… ¦ ＋ Eng Regel derbäisetzen…
+Une liste : {list} ¦ Eng Lëscht: {list}
+👤 Une personne de la base ¦ 👤 Eng Persoun aus der Datebank
+📍 Un lieu de la base ¦ 📍 Eng Plaz aus der Datebank
+Un nombre ¦ Eng Zuel
+Une date d’acte ¦ En Datum vun engem Akt
+Garder le texte ¦ Den Text behalen
+Pas de validation ici. ¦ Hei gëtt et keng Validatioun.
+Validation des données… ¦ Validatioun vun den Donnéeën…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Späicher fir d’éischt de Classeur (💾), a maach dann d’Fiche op.
+{name} : lieu n° {id} de ta base. ¦ {name}: Plaz Nr. {id} an denger Datebank.
+Règle « {range} » retirée ¦ Regel „{range}“ ewechgeholl
+Police (E5) : {font} ¦ Schrëft (E5): {font}
+celle de départ ¦ déi vum Ufank
+Panneau de droite : montrer ¦ Rietse Panneau: weisen
+Panneau de droite : cacher ¦ Rietse Panneau: verstoppen
+Double-clic : renommer · clic droit : plus d’actions ¦ Duebelklick: ëmbenennen · Rietsklick: méi Aktiounen
+Ajouter une feuille ¦ E Blat derbäisetzen
+Feuille {n} ¦ Blat {n}
+Renommer la feuille ¦ D’Blat ëmbenennen
+Un classeur garde au moins une feuille. ¦ E Classeur behält mindestens ee Blat.
+Feuille « {name} » supprimée ¦ Blat „{name}“ geläscht
+Couleur de l’onglet… ¦ Faarf vum Reiter…
+Déplacer à gauche ¦ No lénks réckelen
+Déplacer à droite ¦ No riets réckelen
+Somme <b>{v}</b> ¦ Zomm <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Duerchschnëtt <b>{v}</b>
+Nb <b>{v}</b> ¦ Unz. <b>{v}</b>
+Min <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Max <b>{v}</b>
+Dans la barre d’état ¦ An der Statusleescht
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Benotz {key}: de Browser léisst kee Menü an d’Tëschenoflag schreiwen.
+Sélection trop grande pour le presse-papiers. ¦ Auswiel ze grouss fir d’Tëschenoflag.
+Coupé : choisis où coller, puis {key}. ¦ Ausgeschnidden: wiel, wou s de et paste wëlls, dann {key}.
+Utilise {key} dans la grille pour coller. ¦ Benotz {key} am Gitter, fir ze pasten.
+Trop de cellules à coller. ¦ Ze vill Zellen ze pasten.
+{n} (avec le gras et les couleurs). ¦ {n} (mat fett an de Faarwen).
+Série {n} ¦ Serie {n}
+Colonnes groupées ¦ Gruppéiert Kolonnen
+Barres horizontales ¦ Horizontal Balken
+TSV (tabulations) ¦ TSV (Tabulatiounen)
+⤒ Importer un tableau ¦ ⤒ Eng Tabell importéieren
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Trennzeechen erroden: {sep} · Kodéierung: {enc}
+point-virgule (;) ¦ Semikolon (;)
+virgule (,) ¦ Komma (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Akzenter korrekt: „{list}“.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> an {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV an TSV: dat oppent Blat. Déi aner: de ganze Classeur. Eng Zell, déi mat „=“ ufänkt, ass an engem CSV geschützt (keng ageschmuggelt Formel).
+tout tableur ¦ all Tabellen-Programm
+tabulations ¦ Tabulatiounen
+données ¦ Donnéeën
+à lire ¦ ze liesen
+💾 Fichier de l’outil ¦ 💾 Fichier vum Outil
+Exporté : {name} ¦ Exportéiert: {name}
+(feuille vide) ¦ (eidelt Blat)
+Toutes les feuilles ¦ All d’Blieder
+Quadrillage ¦ Gitterlinnen
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Ofgeluecht an Lëschten → Outile fir z’änneren → 🧾 Tabelle.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Modell „{name}“ gespäichert (Vun engem Modell ufänken → Meng Modeller).
+Copie « {name} » enregistrée. ¦ Kopie „{name}“ gespäichert.
+Ce classeur ¦ Dëse Classeur
+Impossible d’enregistrer : {error} ¦ Späicheren net méiglech: {error}
+Enregistrer comme modèle ¦ Als Modell späicheren
+Enregistrer une copie ¦ Eng Kopie späicheren
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Den Numm vum Modell (d’Donnéeë bleiwen: maach se virdrun eidel, wann s de e leere Modell wëlls):
+Le nom de la copie : ¦ Den Numm vun der Kopie:
+{name} (copie) ¦ {name} (Kopie)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ D’Ännerungen zënter dem leschte Späicheren ginn verluer.
+📋 Partir d’un modèle ¦ 📋 Vun engem Modell ufänken
+Mes modèles ¦ Meng Modeller
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Nach keen eegene Modell: an engem Classeur, Fichier → „Als Modell späicheren…“.
+séparateur « {sep} » ¦ Trennzeechen „{sep}“
+Classeur importé ¦ Importéierte Classeur
+Classeur « {name} » créé ({rows}) ¦ Classeur „{name}“ erstallt ({rows})
+classeur ¦ Classeur
+＋ Nouveau classeur ¦ ＋ Neie Classeur
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Auszuch vun der Vollekszielung, Parregëster, Budget vun der Recherche, Suivi vun de Bréiwer…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Du deels duerch null: {ref} ass eidel oder ass 0. Tipp: =SI.ERREUR(…;"") léisst d’Zell eidel.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Du deels duerch null: {why}. Tipp: =SI.ERREUR(…;"") léisst d’Zell eidel.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Du deels duerch null. Tipp: =SI.ERREUR(…;"") léisst d’Zell eidel.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Ech kennen „{name}“ net. Wollts du {sugg} soen?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Ech kennen „{name}“ net. Tipp déi éischt Buschtawen: d’Lëscht vun de Funktioune geet op.
+Un nom inconnu dans la formule. ¦ En onbekannten Numm an der Formel.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ „{text}“ ass keng Zuel (Zell {cell}): domat kann ee net rechnen.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ „{text}“ ass keng Zuel: domat kann ee net rechnen.
+Une valeur ne convient pas ¦ E Wäert passt net
+{what} (cellule {cell}). ¦ {what} (Zell {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ D’Formel weist op eppes, wat et net gëtt: {what}.
+La formule montre une cellule qui a été supprimée. ¦ D’Formel weist op eng Zell, déi geläscht gouf.
+Valeur introuvable ¦ Wäert net fonnt
+La recherche ¦ D’Sich
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} huet „{what}“ net an {where} fonnt.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} huet „{what}“ net fonnt.
+{path} : la formule tourne en rond. ¦ {path}: d’Formel dréint sech am Krees.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ D’Formel brauch sech selwer: si dréint sech am Krees.
+« {text} » : {why}. ¦ „{text}“: {why}.
+cette date ¦ dësen Datum
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ech verstinn {what} net („{text}“). Beispiller: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Ech verstinn {what} net. Beispiller: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Ech verstinn d’Formel bei „{near}“ net: {why}.
+Je ne comprends pas la formule : {why}. ¦ Ech verstinn d’Formel net: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Ech verstinn d’Formel bei „{near}“ net: kontrolléier d’Klameren, d’Gänseféisercher an d’„;“.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Ech verstinn d’Formel net: kontrolléier d’Klameren, d’Gänseféisercher an d’„;“.
+Nombre impossible ¦ Onméiglech Zuel
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ D’Resultat brauch {size} no ënnen an no riets, mä {cell} ass net eidel: maach se eidel, fir dat ganzt Resultat ze gesinn.
+plusieurs cases ¦ méi Zellen
+une case ¦ eng Zell
+Trop gros pour être calculé : {why}. ¦ Ze grouss fir berechent ze ginn: {why}.
+réduis la plage ¦ maach de Beräich méi kleng
+Erreur dans la formule. ¦ Feeler an der Formel.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Tipp: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ Fichier refuséiert: en enthält XML-Deklaratiounen (DOCTYPE oder ENTITY), déi e Büro-Dokument net benotzt
+fichier XML abîmé ¦ beschiedegte XML-Fichier
+fichier refusé : trop d’éléments ¦ Fichier refuséiert: ze vill Elementer
+fichier refusé : XML trop imbriqué ¦ Fichier refuséiert: XML ze déif verschachtelt
+fichier trop gros (plus de {n} Mo) ¦ Fichier ze grouss (méi wéi {n} MB)
+ce n’est pas un fichier zip valide ¦ dat ass kee gültege Zip-Fichier
+fichier refusé : trop d’éléments dans le zip ¦ Fichier refuséiert: ze vill Elementer am Zip
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ verschlësselte Fichier: maach en als éischt a sengem Tabellen-Programm op a späicher en ouni Passwuert
+fichier zip abîmé ¦ beschiedegten Zip-Fichier
+fichier refusé : trop gros une fois décompressé ¦ Fichier refuséiert: ze grouss, wann en ausgepaakt ass
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ Fichier refuséiert: en ass ausgepaakt vill ze grouss (Zip-Bomm)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ dëse Browser kann Zip-Fichieren net opmaachen (aktualiséier en)
+compression inconnue dans le fichier ¦ onbekannt Kompressioun am Fichier
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ dat ass keen Excel-Fichier (.xlsx): xl/workbook.xml feelt
+fichier refusé : trop de feuilles ¦ Fichier refuséiert: ze vill Blieder
+fichier refusé : trop de cellules ¦ Fichier refuséiert: ze vill Zellen
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ dat ass keen LibreOffice-Fichier (.ods): content.xml feelt
+ce fichier n’est pas un JSON valide ¦ dëse Fichier ass kee gültege JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ ech fannen keng Tabell an dësem JSON (et brauch eng Lëscht vun Zeilen oder Objeten)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ al Excel-Fichieren (.xls) ginn net gelies: maach en an Excel oder LibreOffice op a späicher en als .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ dëse kompriméierte Fichier ass weder en .xlsx nach en .ods
+Nombre 0,00 ¦ Zuel 0,00
+Nombre entier ¦ Ganz Zuel
+Monnaie (€) ¦ Wärung (€)
+Pourcentage ¦ Prozentsaz
+Date courte ¦ Kuerzen Datum
+Date d’acte ¦ Datum vum Akt
+Texte ¦ Text
+Relevé de recensement ¦ Auszuch vun der Vollekszielung
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ Kolonne vum Joer · Stéit · „Gebuer ëm“ berechent
+Registre paroissial ¦ Parregëster
+baptêmes, mariages, sépultures ¦ Daf, Bestietnesser, Begriefnisser
+Budget de la recherche ¦ Budget vun der Recherche
+actes, déplacements, abonnements ¦ Akten, Reesen, Abonnementer
+Suivi des courriers ¦ Suivi vun de Bréiwer
+envoyé, relancé, réponse ¦ geschéckt, nogefrot, Äntwert
+Arbre en tableau ¦ Stammbam als Tabell
+Sosa, génération, côté, âge ¦ Sosa, Generatioun, Säit, Alter
+objets, prix, total en livres ¦ Objeten, Präisser, Total a livres
+Registre matricule ¦ Militärregëster
+classe, signalement, campagnes ¦ Klass, Personnebeschreiwung, Campagnen
+📋 Partir d’un modèle… ¦ 📋 Vun engem Modell ufänken…
+⤒ Importer un tableau… ¦ ⤒ Eng Tabell importéieren…
+⤓ Exporter… ¦ ⤓ Exportéieren…
+🖨 Imprimer… ¦ 🖨 Drécken…
+⚙️ Réglages du tableur… ¦ ⚙️ Astellunge vun der Tabelle…
+Insertion ¦ Asetzen
+Coller les valeurs seulement ¦ Nëmmen d’Wäerter pasten
+Effacer le contenu ¦ Inhalt läschen
+Effacer tout (contenu et mise en forme) ¦ Alles läschen (Inhalt a Formatéierung)
+Recopier vers le bas ¦ No ënnen kopéieren
+Recopier vers la droite ¦ No riets kopéieren
+🔍 Rechercher et remplacer… ¦ 🔍 Sichen an ersetzen…
+Ligne au-dessus ¦ Zeil driwwer
+Ligne en dessous ¦ Zeil drënner
+＋ Nouvelle feuille ¦ ＋ Neit Blat
+ƒ Fonction… ¦ ƒ Funktioun…
+Σ Somme automatique ¦ Σ Automatesch Zomm
+📅 Date du jour ¦ 📅 Datum vun haut
+Nom pour la plage… ¦ Numm fir de Beräich…
+💬 Note sur la cellule… ¦ 💬 Notiz op der Zell…
+📊 Graphique depuis la sélection ¦ 📊 Grafik aus der Auswiel
+Barré ¦ Duerchgestrach
+Aa Police… ¦ Aa Schrëft…
+Taille du texte… ¦ Gréisst vum Text…
+↵ Renvoi à la ligne ¦ ↵ Zeilenëmbroch
+⊞ Fusionner / séparer ¦ ⊞ Fusionéieren / trennen
+▦ Bordures : tout ¦ ▦ Rummen: alles
+▭ Bordures : contour ¦ ▭ Rummen: Kontur
+▁ Bordure du bas ¦ ▁ Rumm ënnen
+Largeur de colonne… ¦ Breet vun der Kolonn…
+Hauteur de ligne… ¦ Héicht vun der Zeil…
+Ajuster la largeur au contenu ¦ D’Breet un den Inhalt upassen
+Masquer les lignes ¦ Zeile verstoppen
+Masquer les colonnes ¦ Kolonne verstoppen
+Tout remontrer ¦ Alles nees weisen
+Mise en forme conditionnelle… ¦ Bedéngt Formatéierung…
+Une ligne sur deux ¦ All zweet Zeil
+Effacer la mise en forme ¦ Formatéierung läschen
+↕ Trier A → Z ¦ ↕ A → Z zortéieren
+↕ Trier Z → A ¦ ↕ Z → A zortéieren
+⚲ Filtrer ¦ ⚲ Filteren
+Supprimer les doublons… ¦ Doublonen läschen…
+Convertir le texte en colonnes… ¦ Text a Kolonnen ëmwandelen…
+Retirer les espaces en trop ¦ Iwwerflësseg Espacen ewechhuelen
+Figer la 1re ligne ¦ Déi 1. Zeil fixéieren
+Figer la 1re colonne ¦ Déi 1. Kolonn fixéieren
+Figer jusqu’à la cellule choisie ¦ Bis bei déi gewielt Zell fixéieren
+Libérer les volets ¦ Fixéierung ophiewen
+Montrer les formules ¦ Formele weisen
+⤢ Ajuster à la fenêtre ¦ ⤢ Un d’Fënster upassen
+100 % (taille réelle) ¦ 100 % (richteg Gréisst)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Ofkierzunge vun der Tabelle…
+Rechercher et remplacer ¦ Sichen an ersetzen
+Filtrer (barre de recherche et filtres au-dessus) ¦ Filteren (Sichleescht a Filteren driwwer)
+Trier la plage ¦ De Beräich zortéieren
+Somme, moyenne, nombre… ¦ Zomm, Duerchschnëtt, Unzuel…
+Une personne de la base dans la cellule ¦ Eng Persoun aus der Datebank an der Zell
+Un lieu de la base dans la cellule ¦ Eng Plaz aus der Datebank an der Zell
+Note sur la cellule ¦ Notiz op der Zell
+Graphique avec les chiffres de la sélection ¦ Grafik mat den Zuele vun der Auswiel
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Tipp fir ze schreiwen · = fir ze rechnen · Duebelklick fir z’änneren · Rietsklick fir d’Aktiounen · zéi dat klengt Quadrat fir ze kopéieren
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Entrée bestätegt · Tab: Zell op der rietser Säit · Esc brécht of · während enger Formel klick oder zéi iwwer Zellen, fir se anzesetzen
+Σ Somme ¦ Σ Zomm
+Nombre ¦ Unzuel
+Minimum ¦ Minimum
+Maximum ¦ Maximum
+Somme ¦ Zomm
+Panneau de droite ouvert ¦ Rietse Panneau op
+, virgule ¦ , Komma
+; point-virgule ¦ ; Semikolon
+espace ¦ Espace
+Autre… ¦ Aner…
+plus grande que ¦ méi grouss wéi
+plus petite que ¦ méi kleng wéi
+au moins ¦ mindestens
+au plus ¦ héchstens
+égale à ¦ gläich wéi
+différente de ¦ anescht wéi
+entre ¦ tëscht
+contient le texte ¦ enthält den Text
+est vide ¦ ass eidel
+n’est pas vide ¦ ass net eidel
+est en double ¦ ass duebel
+est une date impossible ¦ ass en onméiglechen Datum
+barres dans la cellule ¦ Balken an der Zell
+fond jaune ¦ gielen Hannergrond
+fond rouge ¦ rouden Hannergrond
+fond vert ¦ gréngen Hannergrond
+fond bleu ¦ bloen Hannergrond
+fond orange ¦ orangen Hannergrond
+fond violet ¦ moven Hannergrond
+règle|plus grande que ¦ méi grouss wéi
+règle|plus petite que ¦ méi kleng wéi
+règle|au moins ¦ mindestens
+règle|au plus ¦ héchstens
+règle|égale à ¦ gläich wéi
+règle|différente de ¦ anescht wéi
+règle|entre ¦ tëscht
+règle|contient ¦ enthält
+règle|vide ¦ eidel
+règle|pas vide ¦ net eidel
+règle|en double ¦ duebel
+règle|date impossible ¦ onméiglechen Datum
+règle|barres ¦ Balken
+Cellule ¦ Zell
+Nombre et date ¦ Zuel an Datum
+Couleur et bordures ¦ Faarf a Rummen
+Validation ¦ Validatioun
+Adresse ¦ Adress
+Valeur ¦ Wäert
+Formule ¦ Formel
+Autorise ¦ Erlaabt
+Sinon ¦ Soss
+Insérer une ligne au-dessus ¦ Eng Zeil driwwer asetzen
+Insérer une ligne en dessous ¦ Eng Zeil drënner asetzen
+Insérer une colonne à gauche ¦ Eng Kolonn lénks asetzen
+Insérer une colonne à droite ¦ Eng Kolonn riets asetzen
+Trier A → Z ¦ A → Z zortéieren
+Retirer le filtre ¦ De Filter ewechhuelen
+Note… ¦ Notiz…
+Ajuster la largeur ¦ D’Breet upassen
+Supprimer les lignes ¦ D’Zeilen läschen
+Supprimer les colonnes ¦ D’Kolonne läschen
+Windows (vieil Excel) ¦ Windows (aalt Excel)
+👤 Des fiches ¦ 👤 Fichen
+🏠 Un recensement (foyers) ¦ 🏠 Eng Vollekszielung (Stéit)
+📅 Des événements ¦ 📅 Evenementer
+— ne pas envoyer — ¦ — net schécken —
+Nom et prénom ¦ Numm a Virnumm
+Sexe ¦ Geschlecht
+Naissance (date ou année) ¦ Gebuert (Datum oder Joer)
+Décès (date) ¦ Doud (Datum)
+N° de foyer (ménage) ¦ Nr. vum Stot (Haushalt)
+N° de maison ¦ Hausnummer
+Rue, quartier ¦ Strooss, Quartier
+Patron, employeur ¦ Patron, Patron vun der Aarbecht
+Situation (marié, veuf…) ¦ Situatioun (bestuet, Witmann…)
+Observations, notes ¦ Bemierkungen, Notizen
+Sorte d’événement (acte) ¦ Zort vum Evenement (Akt)
+Date de l’événement ¦ Datum vum Evenement
+Lieu de l’événement ¦ Plaz vum Evenement
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ Kolonne vum Joer (1836 → 1936) · Stéit · 📤 an d’Datebank
+⤒ Remplir depuis l’app… ¦ ⤒ Aus der App ausfëllen…
+↻ Relire depuis la base ¦ ↻ Aus der Datebank nei liesen
+catégorie + séries ¦ Kategorie + Serien
+📊 Créer le diagramme ¦ 📊 Den Diagramm erstellen
+Un graphique ¦ Eng Grafik
+📈 Créer le graphique ¦ 📈 D’Grafik erstellen
+objet ▦ Tableur ¦ ▦ Tabellen-Objet
+📋 Copier pour un tableau ¦ 📋 Fir en Tableau kopéieren
+Un recueil ¦ Eng Sammlung
+tableur d’une page ¦ Tabelle op enger Säit
+📋 Copier pour un recueil ¦ 📋 Fir eng Sammlung kopéieren
+tableau ou graphique ¦ Tabell oder Grafik
+Ce que le diagramme attend ¦ Wat den Diagramm erwaart
+Ce que le graphique attend ¦ Wat d’Grafik erwaart
+Ce que le tableau attend ¦ Wat den Tableau erwaart
+Ce que le recueil attend ¦ Wat d’Sammlung erwaart
+Pyramide des âges ¦ Alterspyramid
+Courbes ¦ Kurven
+Radar ¦ Radar
+Barres groupées ¦ Gruppéiert Balken
+Camembert (une seule série) ¦ Kuch (nëmmen eng Serie)
+Rectangles proportionnels ¦ Proportional Rechtecker
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Preparéiere fir… (Diagramm, Grafik, Presentatioun…)
+initiale ¦ Initial
+MAJUSCULES ¦ GROUSS BUSCHTAWEN
+minuscules ¦ kleng Buschtawen
+Capitale ¦ Grouss am Ufank
+Plus petit ¦ Dat Klengst
+Plus grand ¦ Dat Gréisst
+✨ Remplissage instantané ¦ ✨ Direkt ausfëllen
+Σ Sous-totaux… ¦ Σ Zwëschentotalen…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Plang: den Detail zou- / opklappen
+🎯 Valeur cible… ¦ 🎯 Zilwäert…
+🧮 Solveur… ¦ 🧮 Solver…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Szenariotabell (a wann…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Eng Aktioun ophuelen / ⏹ stoppen
+▶ Actions enregistrées… ¦ ▶ Opgeholl Aktiounen…
+📈 Mini-graphique… ¦ 📈 Mini-Grafik…
+Nombre de lignes ¦ Zuel vun den Zeilen
+Nombre de valeurs différentes ¦ Zuel vun de verschiddene Wäerter
+En % de la ligne ¦ A % vun der Zeil
+En % de la colonne ¦ A % vun der Kolonn
+En % du tout ¦ A % vum Ganzen
+🔀 Tableau croisé dynamique… ¦ 🔀 Pivottabell…
+↻ Actualiser le tableau croisé ¦ ↻ D’Pivottabell aktualiséieren
+📊 Graphique vivant (suit la sélection) ¦ 📊 Lieweg Grafik (follegt der Auswiel)
+📊 Graphique vivant ¦ 📊 Lieweg Grafik
+Vide ¦ Eidel
+⛔ Formule en erreur ¦ ⛔ Formel mat Feeler
+ƒ Formule ¦ ƒ Formel
+VRAI / FAUX ¦ WAR / FALSCH
+⚠️ Date impossible ¦ ⚠️ Onméiglechen Datum
+📅 Date d’acte ¦ 📅 Datum vum Akt
+Conditions ¦ Konditiounen
+Logique ¦ Logik
+Conjoint ¦ Partner
+Parents ¦ Elteren
+N° de fiche ¦ Nr. vun der Fiche
+Date ¦ Datum
+Personne(s) ¦ Persoun(en)
+Description ¦ Beschreiwung
+N° d’événement ¦ Nr. vum Evenement
+Foyer ¦ Stot
+Employeur ¦ Patron
+Situation ¦ Situatioun
+Rue ¦ Strooss
+N° ¦ Nr.
+Adresse entière ¦ Ganz Adress
+Deuxième prénom ¦ Zweete Virnumm
+Titre ¦ Titel
+Suffixe ¦ Suffix
+FamilySearch ¦ FamilySearch
+Description physique ¦ Kierperlech Beschreiwung
+Teint ¦ Teint
+Origine ¦ Hierkonft
+Vivant ? ¦ Lieweg?
+Modifié le ¦ Geännert den
+Cause ¦ Ursaach
+Autorité ¦ Autoritéit
+Confiance ¦ Vertrauen
+Date convertie ¦ Ëmgerechent Datum
+Autre date ¦ Aneren Datum
+Informations en plus ¦ Zousätzlech Informatiounen
+Calendrier ¦ Kalenner
+Relevés de dépouillement ¦ Auszich vun Akten
+Noms de famille ¦ Familljennimm
+Âges au décès ¦ Alter beim Doud
+Décès par siècle ¦ Doudesfäll pro Joerhonnert
+Communes de naissance ¦ Gebuertsgemengen
+Départements de naissance ¦ Gebuertsdépartementer
+Naissances par mois ¦ Gebuerten pro Mount
+Personnes par génération ¦ Persounen pro Generatioun
+Additionne des nombres ou des plages. ¦ Rechent Zuelen oder Beräicher zesummen.
+La moyenne des nombres. ¦ Den Duerchschnëtt vun den Zuelen.
+Le plus petit nombre. ¦ Déi klengst Zuel.
+Le plus grand nombre. ¦ Déi gréisst Zuel.
+Compte les cellules qui contiennent un nombre. ¦ Zielt d’Zellen, déi eng Zuel enthalen.
+Compte les cellules qui ne sont pas vides. ¦ Zielt d’Zellen, déi net eidel sinn.
+Compte les cellules vides. ¦ Zielt déi eidel Zellen.
+Multiplie des nombres. ¦ Multiplizéiert Zuelen.
+Arrondit au plus proche. ¦ Rount op dat Noosten.
+Arrondit vers zéro. ¦ Rount Richtung null.
+Arrondit en s’éloignant de zéro. ¦ Rount vun null ewech.
+La partie entière (arrondi vers le bas). ¦ Den ganzen Deel (erof gerount).
+Le nombre sans son signe. ¦ D’Zuel ouni hiert Zeechen.
+Le reste d’une division. ¦ De Rescht vun enger Divisioun.
+Un nombre élevé à une puissance. ¦ Eng Zuel hoch eng Potenz.
+La racine carrée. ¦ D’Quadratwuerzel.
+La valeur du milieu. ¦ De Wäert an der Mëtt.
+L’écart type (sur un échantillon). ¦ D’Standardofwäichung (vun enger Stéchprouf).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ D’Plaz vun enger Zuel an enger Lëscht (1 = déi gréisst; Uerdnung 1 = déi klengst als éischt).
+La k-ième plus grande valeur. ¦ De k-te gréisste Wäert.
+La k-ième plus petite valeur. ¦ De k-te klengste Wäert.
+Une valeur si le test est vrai, une autre sinon. ¦ E Wäert, wann den Test wouer ass, soss en aneren.
+La valeur du premier test vrai. ¦ De Wäert vum éischte wouren Test.
+La valeur, ou autre chose s’il y a une erreur. ¦ De Wäert, oder eppes anescht, wann et e Feeler gëtt.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ De Wäert, oder eppes anescht, wann en net fonnt gëtt (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (wouer), wann all d’Tester wouer sinn.
+VRAI si au moins un test est vrai. ¦ VRAI (wouer), wann op d’mannst een Test wouer ass.
+La valeur VRAI (comme le mot VRAI). ¦ De Wäert VRAI (wouer), wéi d’Wuert VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ De Wäert FAUX (falsch), wéi d’Wuert FAUX.
+Inverse un test. ¦ Dréint en Test ëm.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Zielt d’Zellen, déi eng Konditioun erfëllen (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Zielt d’Zeilen, déi all d’Konditiounen erfëllen.
+Additionne les cellules qui remplissent une condition. ¦ Rechent d’Zellen zesummen, déi eng Konditioun erfëllen.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Rechent d’Zeilen zesummen, déi all d’Konditiounen erfëllen.
+La moyenne des cellules qui remplissent une condition. ¦ Den Duerchschnëtt vun den Zellen, déi eng Konditioun erfëllen.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Sicht an der 1. Kolonn vun enger Tabell a gëtt de Wäert vun enger anerer Kolonn zréck.
+Cherche dans la 1re ligne d’un tableau. ¦ Sicht an der 1. Zeil vun enger Tabell.
+Cherche une valeur et rend celle d’à côté. ¦ Sicht e Wäert a gëtt dee vu nieft him zréck.
+La valeur à une ligne et une colonne de la plage. ¦ De Wäert bei enger Zeil an enger Kolonn vum Beräich.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ D’Positioun vun engem Wäert an engem Beräich (Typ 0 = genau).
+La n-ième valeur de la liste. ¦ Den n-te Wäert vun der Lëscht.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ D’Wäerter ouni Doublonen (leeft an d’Zellen drënner iwwer).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ De zortéierte Beräich (Uerdnung 1 = eropgoend, -1 = erofgoend).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ D’Zeile vum Beräich, déi d’Konditioun erfëllen (Bsp. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Setzt Texter hannereneen.
+Met des textes bout à bout avec un séparateur. ¦ Setzt Texter mat engem Trennzeechen hannereneen.
+Les premiers caractères. ¦ Déi éischt Zeechen.
+Les derniers caractères. ¦ Déi lescht Zeechen.
+Un morceau au milieu d’un texte. ¦ E Stéck aus der Mëtt vun engem Text.
+Le nombre de caractères. ¦ D’Zuel vun den Zeechen.
+En capitales. ¦ A grousse Buschtawen.
+En minuscules. ¦ A klenge Buschtawen.
+Une capitale au début de chaque mot. ¦ E grousse Buschtaf am Ufank vun all Wuert.
+Retire les espaces en trop. ¦ Hëlt iwwerflësseg Espacen ewech.
+Remplace un morceau de texte. ¦ Ersetzt e Stéck Text.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ D’Positioun vun engem Text an engem aneren (ouni op grouss Buschtawen ze kucken).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Eng Zuel oder en Datum, mat engem Format geschriwwen ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ D’Zuel, déi an engem Text geschriwwen ass.
+Fabrique une date. ¦ Mécht en Datum.
+L’année d’une date (date d’acte comprise). ¦ D’Joer vun engem Datum (Datum vun Akten mat abegraff).
+Le mois d’une date (1 à 12). ¦ De Mount vun engem Datum (1 bis 12).
+Le jour du mois. ¦ Den Dag vum Mount.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Den Dag vun der Woch (Typ 1: 1 = Sonndeg; Typ 2: 1 = Méindeg … 7 = Sonndeg; Typ 3: 0 = Méindeg).
+La date du jour. ¦ Den Datum vun haut.
+La date et l’heure. ¦ Den Datum an d’Zäit.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Den Ënnerscheed tëscht zwee Datumen, a Joer, Méint oder Deeg („AM“: Méint iwwer d’Joer eraus, „MJ“: Deeg iwwer d’Méint eraus, „AJ“: Deeg iwwer d’Joer eraus; „Y“, „D“, „YM“, „MD“, „YD“ vun Excel ginn och verstanen).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Den Alter tëscht zwee Datume vun Akten („vers 1784“, „an II“ ginn verstanen); „≈“, wann en Datum ongeféier ass. Eenheet: „ans“, „mois“ oder „jours“.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ D’Joer, dat an engem Akttext fonnt gëtt, och republikanesch („baptisé le 3 frimaire an XII“ → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ De verstanenen Datum, propper geschriwwen (wéi „✓ Verstanen:“ vun den Datumsfelder).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ „jour“, „mois“, „année“, „vers“, „avant“, „après“ oder „entre“.
+La date dans le calendrier républicain. ¦ Den Datum am republikanesche Kalenner.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ D’Generatioun vun enger Sosa-Nummer (1 = du, 2 an 3 = deng Elteren…).
+Le numéro Sosa du père (2 × n). ¦ D’Sosa-Nummer vum Papp (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ D’Sosa-Nummer vun der Mamm (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ „paternel“ oder „maternel“ (d’Säit vum Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Eng kleng Grafik an der Zell: "courbe" (Kurv), "barres" (Balken) oder "gagné" (iwwer oder ënner null).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Gëtt engem Wäert en Numm, fir en an der Berechnung ze benotzen.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Eng kleng eege Funktioun, fir an LET, MAP, PAR.LIGNE… ze benotzen.
+Applique la LAMBDA à chaque case de la plage. ¦ Wënnt d’LAMBDA op all Zell vum Beräich un.
+Un résultat par ligne de la plage. ¦ E Resultat pro Zeil vum Beräich.
+Un résultat par colonne de la plage. ¦ E Resultat pro Kolonn vum Beräich.
+Cumule les cases une à une (un total qui avance). ¦ Summéiert d’Zellen eng no der anerer (en Total, dee weidergeet).
+Comme REDUCE, avec chaque étape du total. ¦ Wéi REDUCE, mat all Schrëtt vum Total.
+=ligne laissée ¦ Zeil op der Säit gelooss|Zeilen op der Säit gelooss
+=ligne remplie depuis l’app (tenue à jour) ¦ Zeil aus der App ausgefëllt (aktuell gehalen)|Zeilen aus der App ausgefëllt (aktuell gehalen)
+=ligne remplie depuis l’app ¦ Zeil aus der App ausgefëllt|Zeilen aus der App ausgefëllt
+=ligne à toi sans fiche : retirée ¦ eege Zeil ouni Fiche: ewechgeholl|eege Zeilen ouni Fiche: ewechgeholl
+=nouvelle fiche ¦ nei Fiche|nei Fichen
+=reliée ¦ verbonnen|verbonnen
+=laissée ¦ op der Säit gelooss|op der Säit gelooss
+=autre ligne ¦ aner Zeil|aner Zeilen
+=case ¦ Zell|Zellen
+=autre case ¦ aner Zell|aner Zellen
+=case remplie ¦ Zell ausgefëllt|Zellen ausgefëllt
+=groupe ¦ Grupp|Gruppen
+=case changée ¦ Zell geännert|Zelle geännert
+=scénario calculé ¦ Szenario berechent|Szenarie berechent
+=commande ¦ Befeel|Befeeler
+=fonction ¦ Funktioun|Funktiounen
+=valeur en plus de la première retirée ¦ Wäert nieft dem éischten ewechgeholl|Wäerter nieft dem éischten ewechgeholl
+=ligne supprimée ¦ Zeil geläscht|Zeile geläscht
+=colonne supprimée ¦ Kolonn geläscht|Kolonne geläscht
+=ligne en double supprimée ¦ duebel Zeil geläscht|duebel Zeile geläscht
+=ligne coupée en colonnes ¦ Zeil a Kolonnen opgedeelt|Zeilen a Kolonnen opgedeelt
+=case modifiée ¦ Zell geännert|Zelle geännert
+=cellule ¦ Zell|Zellen
+=cellule copiée ¦ Zell kopéiert|Zelle kopéiert
+=feuille importée ¦ Blat importéiert|Blieder importéiert
+{sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ den Datum
+le début ¦ den Ufank
+la fin ¦ d’Enn
+il manque un guillemet « " » à la fin d’un texte ¦ et feelt e Gänseféisschen „"“ um Enn vun engem Text
+il manque une apostrophe à la fin du nom de feuille ¦ et feelt en Apostroph um Enn vum Numm vum Blat
+après le nom de la feuille, il faut « ! » puis la cellule ¦ nom Numm vum Blat brauch et „!“ an dann d’Zell
+la formule s’arrête trop tôt ¦ d’Formel hält ze fréi op
+il manque une parenthèse « ) » ¦ et feelt eng Klamer „)“
+une parenthèse « ) » de trop ¦ eng Klamer „)“ ze vill
+un « ; » à une place inattendue ¦ en „;“ op enger onerwaarter Plaz
+un numéro Sosa est un nombre entier qui commence à 1 ¦ eng Sosa-Nummer ass eng ganz Zuel, déi bei 1 ufänkt
+il n’y a aucun nombre dans la plage ¦ et gëtt keng Zuel am Beräich
+le diviseur de MOD vaut 0 ¦ den Divisor vu MOD ass 0
+pas de racine carrée d’un nombre négatif ¦ keng Quadratwuerzel vun enger negativer Zuel
+aucun nombre ¦ keng Zuel
+il faut au moins deux nombres ¦ et brauch mindestens zwou Zuelen
+aucun test n’est vrai ¦ keen Test ass wouer
+les plages n’ont pas la même taille ¦ d’Beräicher sinn net gläich grouss
+aucune cellule ne remplit la condition ¦ keng Zell erfëllt d’Konditioun
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ dat 2. Stéck muss e Beräich sinn, zum Beispill A2:C40
+le 2e morceau doit être une plage ¦ dat 2. Stéck muss e Beräich sinn
+la plage est vide ¦ de Beräich ass eidel
+la condition doit avoir autant de lignes que la plage ¦ d’Konditioun muss esouvill Zeilen hu wéi de Beräich
+aucune ligne ne remplit la condition ¦ keng Zeil erfëllt d’Konditioun
+le début compte à partir de 1 ¦ den Ufank zielt vun 1 un
+cette date n’a pas de mois ¦ dësen Datum huet kee Mount
+cette date n’a pas de jour ¦ dësen Datum huet keen Dag
+il faut le jour ¦ et brauch den Dag
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ den Typ vu JOURSEM geet vun 1 bis 3 (oder 11 bis 17)
+la fin est avant le début ¦ d’Enn ass virum Ufank
+la seconde date est avant la première ¦ den zweeten Datum ass virum éischten
+il faut une date au jour près ¦ et brauch en Datum op den Dag genau
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ de republikanesche Kalenner geet vum 22. September 1792 bis 1805
+il faut des nombres dans la plage ¦ et brauch Zuelen am Beräich
+il faut une LAMBDA(…) ¦ et brauch eng LAMBDA(…)
+trop de LAMBDA imbriquées ¦ ze vill verschachtelt LAMBDAen
+des paires « nom; valeur » puis le calcul ¦ Puere „Numm; Wäert“, dann d’Berechnung
+un nom (lettres) avant chaque valeur ¦ en Numm (Buschtawen) virun all Wäert
+il faut au moins le calcul ¦ et brauch mindestens d’Berechnung
+les paramètres sont des noms ¦ d’Parameter sinn Nimm
+le calcul n’a pas de résultat ¦ d’Berechnung huet kee Resultat
+le résultat est trop grand pour être calculé ¦ d’Resultat ass ze grouss fir berechent ze ginn
+une feuille supprimée ¦ e geläscht Blat
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ e ganze Beräich passt net an eng Zell: benotz SOMME(…), INDEX(…)…
+puissance impossible ¦ onméiglech Potenz
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ eng LAMBDA eleng gëtt kee Wäert: benotz se an LET, MAP…
+la formule est trop longue ¦ d’Formel ass ze laang
+la formule est trop imbriquée ¦ d’Formel ass ze déif verschachtelt
+trop de morceaux dans une fonction ¦ ze vill Stécker an enger Funktioun
+la formule demande trop de calculs ¦ d’Formel brauch ze vill Berechnungen
+le résultat est trop grand ¦ d’Resultat ass ze grouss
+la plage est trop grande ¦ de Beräich ass ze grouss
+le fichier a trop de cellules ¦ de Fichier huet ze vill Zellen

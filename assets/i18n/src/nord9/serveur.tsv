@@ -1,0 +1,1616 @@
+fr ¦ lb
+Action inconnue ¦ Onbekannt Aktioun
+Action inconnue. ¦ Onbekannt Aktioun.
+Demande inconnue. ¦ Onbekannt Ufro.
+Fichier non reçu. ¦ Fichier net ukomm.
+Personne introuvable ¦ Persoun net fonnt
+Personne introuvable. ¦ Persoun net fonnt.
+Source introuvable. ¦ Quell net fonnt.
+Version introuvable. ¦ Versioun net fonnt.
+ID manquant ¦ ID feelt
+POST requis ¦ POST erfuerdert
+Refusé. ¦ Refuséiert.
+Mot de passe incorrect. ¦ Falscht Passwuert.
+ZIP illisible. ¦ ZIP net liesbar.
+Export impossible : l’extension PHP zip manque. ¦ Export net méiglech: d’PHP-Extensioun zip feelt.
+Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page. ¦ Eng aner Genealogie gouf an enger anerer Fënster opgemaach: lued d’Säit nei.
+Session expirée, ou une autre généalogie a été ouverte entre-temps (autre fenêtre) : recharge la page. ¦ Sessioun ofgelaf, oder eng aner Genealogie gouf an der Tëschenzäit opgemaach (aner Fënster): lued d’Säit nei.
+L’enregistrement n’a pas pu se faire (une donnée reçue n’a pas la forme attendue). Rien n’a été modifié. Réessaie ; si ça recommence, recharge la page et signale-le. ¦ D’Späichere war net méiglech (eng Donnée, déi ukomm ass, huet net déi erwaart Form). Näischt gouf geännert. Probéier nach eng Kéier; wann et nees geschitt, lued d’Säit nei a mell et.
+Mode consultation : pas de copie de la base vers un autre dossier. ¦ Liesmodus: keng Kopie vun der Datebank an en aneren Dossier.
+{n} jour ¦ {n} Dag
+{n} jours ¦ {n} Deeg
+{n} an ¦ {n} Joer
+Date qui n’existe pas : « {date} » ¦ Datum, deen et net gëtt: „{date}“
+{event} le « {date} » : ce jour n’existe pas dans le calendrier julien. ¦ {event} den „{date}“: dësen Dag gëtt et am julianesche Kalenner net.
+{event} le « {date} » : ce jour n’existe pas dans le calendrier grégorien. ¦ {event} den „{date}“: dësen Dag gëtt et am gregoriaanesche Kalenner net.
+Date trop longue ({n} signes) ¦ Datum ze laang ({n} Zeechen)
+{event} : « {text}… » — une note a sans doute été collée dans la case de la date. ¦ {event}: „{text}…“ — wahrscheinlech gouf eng Notiz an d’Feld vum Datum gepecht.
+Dates à l’envers : « {date} » ¦ Datumer verkéiert: „{date}“
+{event} : la première année ({a}) vient après la seconde ({b}). Sans doute « entre {b} et {a} ». ¦ {event}: dat éischt Joer ({a}) kënnt nom zweeten ({b}). Wahrscheinlech „entre {b} et {a}“.
+Date « {date} » lue comme l’an {y} ¦ Datum „{date}“ gelies als d’Joer {y}
+{event} : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année. ¦ {event}: e Minuszeechen virum Joer. Fir en Datum virum Christus, schreif „5 av. J.-C.“; soss verbesser d’Joer.
+Décès avant la naissance ¦ Doud virun der Gebuert
+Naissance {b} · décès {d} ¦ Gebuert {b} · Doud {d}
+Décès ({d}) avant sa naissance ({b}) ¦ Doud ({d}) virun der Gebuert ({b})
+inhumation ¦ Begriefnes
+baptême ¦ Daf
+Mort à {n} ans ¦ Gestuerwe mat {n} Joer
+Morte à {n} ans ¦ Gestuerwe mat {n} Joer
+Mort(e) à {n} ans ¦ Gestuerwe mat {n} Joer
+Naissance {b} · décès {d} (seuil : {n} ans) ¦ Gebuert {b} · Doud {d} (Schwell: {n} Joer)
+Très peu de gens dépassent {a} ans ; au-delà de {b} ans, c’est presque toujours une erreur. ¦ Ganz wéineg Leit gi méi al wéi {a} Joer; iwwer {b} Joer ass et bal ëmmer e Feeler.
+Naissance dans le futur ¦ Gebuert an der Zukunft
+Naissance {b} ¦ Gebuert {b}
+Dates de naissance contradictoires ¦ Gebuertsdatumer, déi sech widderspriechen
+Dates de décès contradictoires ¦ Doudesdatumer, déi sech widderspriechen
+Inhumation avant le décès ¦ Begriefnes virum Doud
+Décès {d} · inhumation {i} ¦ Doud {d} · Begriefnes {i}
+Inhumation {span} après le décès ¦ Begriefnes {span} nom Doud
+Décès {d} · inhumation {i} (seuil : {n} jours) ¦ Doud {d} · Begriefnes {i} (Schwell: {n} Deeg)
+Baptême {span} après la naissance ¦ Daf {span} no der Gebuert
+Naissance {b} · baptême {t} (seuil : {n} jours) ¦ Gebuert {b} · Daf {t} (Schwell: {n} Deeg)
+{event} avant la naissance ¦ {event} virun der Gebuert
+{event} {date} · naissance {b} ¦ {event} {date} · Gebuert {b}
+{event} après le décès ¦ {event} nom Doud
+{event} {date} · décès {d} ¦ {event} {date} · Doud {d}
+Marié après son décès ¦ Bestuet no sengem Doud
+Mariée après son décès ¦ Bestuet no hirem Doud
+Marié(e) après son décès ¦ Bestuet no sengem/hirem Doud
+Mariage {m} · décès {d} ¦ Bestietnes {m} · Doud {d}
+Marié le {m}, après sa mort ¦ Bestuet den {m}, no sengem Doud
+Mariée le {m}, après sa mort ¦ Bestuet den {m}, no hirem Doud
+Marié(e) le {m}, après sa mort ¦ Bestuet den {m}, no sengem/hirem Doud
+Mariage avant la naissance ¦ Bestietnes virun der Gebuert
+Mariage {m} · naissance {b} ¦ Bestietnes {m} · Gebuert {b}
+Marié à {n} ans ¦ Bestuet mat {n} Joer
+Mariée à {n} ans ¦ Bestuet mat {n} Joer
+Marié(e) à {n} ans ¦ Bestuet mat {n} Joer
+Mariage {m} · naissance {b} (seuil : {n} ans) ¦ Bestietnes {m} · Gebuert {b} (Schwell: {n} Joer)
+Avant {n} ans, un mariage est presque impossible. ¦ Virun {n} Joer ass e Bestietnes bal onméiglech.
+Mère née après son enfant ¦ Mamm no hirem Kand gebuer
+Père né après son enfant ¦ Papp no sengem Kand gebuer
+Parent né après son enfant ¦ Elterendeel no sengem Kand gebuer
+Naissance de {child} {cb} · mère née {pb} ¦ Gebuert vun {child} {cb} · Mamm gebuer {pb}
+Naissance de {child} {cb} · père né {pb} ¦ Gebuert vun {child} {cb} · Papp gebuer {pb}
+Naissance de {child} {cb} · parent né {pb} ¦ Gebuert vun {child} {cb} · Elterendeel gebuer {pb}
+Née après son enfant {child} ({cb}) ¦ No hirem Kand {child} gebuer ({cb})
+Né après son enfant {child} ({cb}) ¦ No sengem Kand {child} gebuer ({cb})
+Sa mère est née après sa naissance ({pb}) ¦ Seng/Hir Mamm ass no senger/hirer Gebuert gebuer ({pb})
+Son père est né après sa naissance ({pb}) ¦ Säi/Hire Papp ass no senger/hirer Gebuert gebuer ({pb})
+Son parent est né après sa naissance ({pb}) ¦ Säin/Hiren Elterendeel ass no senger/hirer Gebuert gebuer ({pb})
+naiss. {name} ¦ Geb. {name}
+décès {name} ¦ Doud {name}
+Mère de {n} ans à la naissance ¦ Mamm mat {n} Joer bei der Gebuert
+Père de {n} ans à la naissance ¦ Papp mat {n} Joer bei der Gebuert
+Parent de {n} ans à la naissance ¦ Elterendeel mat {n} Joer bei der Gebuert
+Mère de {n} an à la naissance ¦ Mamm mat {n} Joer bei der Gebuert
+Père de {n} an à la naissance ¦ Papp mat {n} Joer bei der Gebuert
+Parent de {n} an à la naissance ¦ Elterendeel mat {n} Joer bei der Gebuert
+Naissance {cb} · mère née {pb} (seuil : {n} ans) ¦ Gebuert {cb} · Mamm gebuer {pb} (Schwell: {n} Joer)
+Naissance {cb} · père né {pb} (seuil : {n} ans) ¦ Gebuert {cb} · Papp gebuer {pb} (Schwell: {n} Joer)
+Naissance {cb} · parent né {pb} (seuil : {n} ans) ¦ Gebuert {cb} · Elterendeel gebuer {pb} (Schwell: {n} Joer)
+Mère de {child} à {n} ans ¦ Mamm vun {child} mat {n} Joer
+Père de {child} à {n} ans ¦ Papp vun {child} mat {n} Joer
+Parent de {child} à {n} ans ¦ Elterendeel vun {child} mat {n} Joer
+Sa mère n’avait que {n} ans à sa naissance ¦ Seng/Hir Mamm war bei senger/hirer Gebuert eréischt {n} Joer al
+Son père n’avait que {n} ans à sa naissance ¦ Säi/Hire Papp war bei senger/hirer Gebuert eréischt {n} Joer al
+Son parent n’avait que {n} ans à sa naissance ¦ Säin/Hiren Elterendeel war bei senger/hirer Gebuert eréischt {n} Joer al
+Sa mère avait {n} ans à sa naissance ¦ Seng/Hir Mamm war bei senger/hirer Gebuert {n} Joer al
+Son père avait {n} ans à sa naissance ¦ Säi/Hire Papp war bei senger/hirer Gebuert {n} Joer al
+Une naissance après {a} ans est presque impossible ; à partir de {b} ans, c’est à vérifier. ¦ Eng Gebuert no {a} Joer ass bal onméiglech; vu {b} Joer un ass et ze kontrolléieren.
+Naissance {cb} · décès de la mère {pd} ¦ Gebuert {cb} · Doud vun der Mamm {pd}
+Naissance {cb} · décès du père {pd} (seuil : {n} jours) ¦ Gebuert {cb} · Doud vum Papp {pd} (Schwell: {n} Deeg)
+Naissance {cb} · décès du parent {pd} (seuil : {n} jours) ¦ Gebuert {cb} · Doud vum Elterendeel {pd} (Schwell: {n} Deeg)
+Un enfant ne peut pas naître après la mort de sa mère. ¦ E Kand ka net nom Doud vu senger Mamm gebuer ginn.
+Un enfant naît au plus 9 à 10 mois après la mort du père (seuil : {n} jours). ¦ E Kand gëtt héchstens 9 bis 10 Méint nom Doud vum Papp gebuer (Schwell: {n} Deeg).
+Né {span} après la mort de sa mère ¦ {span} nom Doud vu senger Mamm gebuer
+Né {span} après la mort de son père ¦ {span} nom Doud vu sengem Papp gebuer
+Né {span} après la mort de son parent ¦ {span} nom Doud vu sengem Elterendeel gebuer
+Née {span} après la mort de sa mère ¦ {span} nom Doud vun hirer Mamm gebuer
+Née {span} après la mort de son père ¦ {span} nom Doud vun hirem Papp gebuer
+Née {span} après la mort de son parent ¦ {span} nom Doud vun hirem Elterendeel gebuer
+Né(e) {span} après la mort de sa mère ¦ {span} nom Doud vu senger/hirer Mamm gebuer
+Né(e) {span} après la mort de son père ¦ {span} nom Doud vu sengem/hirem Papp gebuer
+Né(e) {span} après la mort de son parent ¦ {span} nom Doud vu sengem/hirem Elterendeel gebuer
+Né après la mort de sa mère ¦ Nom Doud vu senger Mamm gebuer
+Né après la mort de son père ¦ Nom Doud vu sengem Papp gebuer
+Né après la mort de son parent ¦ Nom Doud vu sengem Elterendeel gebuer
+Née après la mort de sa mère ¦ Nom Doud vun hirer Mamm gebuer
+Née après la mort de son père ¦ Nom Doud vun hirem Papp gebuer
+Née après la mort de son parent ¦ Nom Doud vun hirem Elterendeel gebuer
+Né(e) après la mort de sa mère ¦ Nom Doud vu senger/hirer Mamm gebuer
+Né(e) après la mort de son père ¦ Nom Doud vu sengem/hirem Papp gebuer
+Né(e) après la mort de son parent ¦ Nom Doud vu sengem/hirem Elterendeel gebuer
+Son fils {child} naît {span} après sa mort ¦ Säi/Hire Jong {child} gëtt {span} no sengem/hirem Doud gebuer
+Son fils {child} naît après sa mort ¦ Säi/Hire Jong {child} gëtt no sengem/hirem Doud gebuer
+Sa fille {child} naît {span} après sa mort ¦ Seng/Hir Duechter {child} gëtt {span} no sengem/hirem Doud gebuer
+Sa fille {child} naît après sa mort ¦ Seng/Hir Duechter {child} gëtt no sengem/hirem Doud gebuer
+Son enfant {child} naît {span} après sa mort ¦ Säi/Hiert Kand {child} gëtt {span} no sengem/hirem Doud gebuer
+Son enfant {child} naît après sa mort ¦ Säi/Hiert Kand {child} gëtt no sengem/hirem Doud gebuer
+Seulement {n} mois après son frère ¦ Just {n} Méint no sengem/hirem Brudder
+Seulement {n} mois après sa sœur ¦ Just {n} Méint no senger/hirer Schwëster
+Seulement {n} mois après son aîné ¦ Just {n} Méint no sengem/hirem ale Geschwëster
+Naissances {a} et {b} (seuil : {n} mois) ¦ Gebuerten {a} an {b} (Schwell: {n} Méint)
+Deux enfants de la même mère naissent au moins 8 à 9 mois l’un après l’autre (sauf jumeaux). ¦ Zwee Kanner vun der selwechter Mamm gi mindestens 8 bis 9 Méint auserneen gebuer (ausser Zwillingen).
+Deux enfants la même année ¦ Zwee Kanner am selwechte Joer
+{a} et {b} : naissance en {y} (jumeaux, doublon ou date approximative ?) ¦ {a} an {b}: gebuer am Joer {y} (Zwillingen, Doublon oder ongeféieren Datum?)
+Né bien avant le mariage des parents ¦ Gebuer laang virum Bestietnes vun den Elteren
+Née bien avant le mariage des parents ¦ Gebuer laang virum Bestietnes vun den Elteren
+Né(e) bien avant le mariage des parents ¦ Gebuer laang virum Bestietnes vun den Elteren
+Naissance {b} · mariage {m} ¦ Gebuert {b} · Bestietnes {m}
+Fratrie étalée sur {n} ans ¦ Geschwëster iwwer {n} Joer verdeelt
+Aîné(e) {a} {ad}, cadet(te) {b} {bd} (seuil : {n} ans) : deux générations mélangées ? ¦ Eelst {a} {ad}, Jéngst {b} {bd} (Schwell: {n} Joer): zwou Generatiounen duerchernee?
+Rattaché à {n} familles de parents ¦ Mat {n} Elterefamillen verbonnen
+Rattachée à {n} familles de parents ¦ Mat {n} Elterefamillen verbonnen
+Cela peut être voulu (adoption, famille recomposée) ou être une erreur. ¦ Dat kann esou gewollt sinn (Adoptioun, Patchworkfamill) oder e Feeler sinn.
+Famille n° {n} sans conjoint ¦ Famill Nr. {n} ouni Partner
+Enfants : {names} : il manque le père et la mère. ¦ Kanner: {names}: de Papp an d’Mamm feelen.
+Un mariage, sans les époux : il manque le père et la mère. ¦ E Bestietnes ouni d’Bestuete: de Papp an d’Mamm feelen.
+Sosa {n} notée femme ¦ Sosa {n} als Fra agedroen
+Sosa {n} noté homme ¦ Sosa {n} als Mann agedroen
+Un Sosa pair est un père : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ E graden Sosa ass e Papp: d’Geschlecht vun der Fiche, oder hir Plaz am Bam, ass ze kontrolléieren.
+Un Sosa impair est une mère : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ En ongraden Sosa ass eng Mamm: d’Geschlecht vun der Fiche, oder hir Plaz am Bam, ass ze kontrolléieren.
+Sosa {s} : {n} ans pour {k} générations ¦ Sosa {s}: {n} Joer fir {k} Generatiounen
+Né(e) {b}, son descendant Sosa {s} {d} : une génération en trop (homonyme pris pour son père) ? ¦ Gebuer {b}, säin Nokomme Sosa {s} {d}: eng Generatioun ze vill (Namensvetter fir de Papp gehal)?
+Né(e) {b}, son descendant Sosa {s} {d} : une génération oubliée ? ¦ Gebuer {b}, säin Nokomme Sosa {s} {d}: eng vergiess Generatioun?
+même nom ¦ selwechte Familljennumm
+même prénom ¦ selwechte Virnumm
+prénom proche ¦ ähnleche Virnumm
+même sexe ¦ selwecht Geschlecht
+sexe ¦ Geschlecht
+même naissance ¦ selwecht Gebuert
+nés à {n} an près ¦ gebuer bis op {n} Joer genee
+nés la même année ¦ am selwechte Joer gebuer
+nés {a} / {b} ¦ gebuer {a} / {b}
+même décès ¦ selwechten Doud
+morts {a} / {b} ¦ gestuerwen {a} / {b}
+mêmes parents ¦ selwecht Elteren
+parents ¦ Elteren
+même conjoint ¦ selwechte Partner
+autres conjoints ¦ aner Partner
+nés au même endroit ¦ op der selwechter Plaz gebuer
+nés à {n} km ¦ {n} km auserneen gebuer
+né {b} / mort {d} ¦ gebuer {b} / gestuerwen {d}
+né {b} ¦ gebuer {b}
+né ? / mort {d} ¦ gebuer ? / gestuerwen {d}
+né ? ¦ gebuer ?
+Ressemble à la fiche n° {n} ({pct} %) ¦ Gesäit aus wéi d’Fiche Nr. {n} ({pct} %)
+kin|sa mère ¦ seng Mamm
+kin|son père ¦ säi Papp
+kin|son parent ¦ säin Elterendeel
+kin|sa grand-mère ¦ seng Bomi
+kin|son grand-père ¦ säi Bopi
+kin|son grand-parent ¦ säi Grousselterendeel
+kin|son ancêtre ({n} générations) ¦ säi Virfahr ({n} Generatiounen)
+kin|sa fille ¦ seng Duechter
+kin|son fils ¦ säi Jong
+kin|son enfant ¦ säi Kand
+kin|sa petite-fille ¦ seng Enkelin
+kin|son petit-fils ¦ säin Enkel
+kin|son petit-enfant ¦ säin Enkelkand
+kin|son descendant ({n} générations) ¦ säin Nokomm ({n} Generatiounen)
+{name} marié à {kin} ¦ {name} bestuet mat {kin}
+{name} mariée à {kin} ¦ {name} bestuet mat {kin}
+{name} marié(e) à {kin} ¦ {name} bestuet mat {kin}
+{name} est {kin} et aussi son conjoint (famille n° {n}) : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus. ¦ {name} ass {kin} an och säi Partner (Famill Nr. {n}): eng Fiche, déi mat der falscher Generatioun verbonnen ass, oder zwee Namensvetteren, déi verwiesselt goufen.
+Animal noté conjoint d’une personne : {name} ¦ Déier als Partner vun enger Persoun agedroen: {name}
+Animal noté parent d’une personne : {name} ¦ Déier als Elterendeel vun enger Persoun agedroen: {name}
+Animal noté enfant d’une personne : {name} ¦ Déier als Kand vun enger Persoun agedroen: {name}
+Famille n° {n} : {animals} avec {people}. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint. ¦ Famill Nr. {n}: {animals} mat {people}. En Déier gëtt a senger Fiche mat sengem Meeschter verbonnen (Proprietär), net als Elterendeel oder Partner.
+{n} événement à cet endroit ¦ {n} Evenement op dëser Plaz
+{n} événements à cet endroit ¦ {n} Evenementer op dëser Plaz
+À {km} km en {n} jours ¦ {km} km a {n} Deeg
+À {km} km en {n} jour ¦ {km} km an {n} Dag
+À {km} km en moins d’un jour ¦ {km} km a manner wéi engem Dag
+{a} {ad} à {ap} · {b} {bd} à {bp} (au plus ≈ {n} km par jour à cette époque) ¦ {a} {ad} zu {ap} · {b} {bd} zu {bp} (héchstens ≈ {n} km den Dag zu där Zäit)
+Une même personne ne peut pas être à deux endroits aussi éloignés en si peu de temps : souvent deux homonymes confondus dans une seule fiche. ¦ Déi selwecht Persoun ka net an esou kuerzer Zäit op zwou Plazen esou wäit auserneen sinn: dacks sinn zwee Namensvetteren an enger eenzeger Fiche verwiesselt.
+Lieux de naissance contradictoires ¦ Gebuertsplazen, déi sech widderspriechen
+Lieux de décès contradictoires ¦ Doudesplazen, déi sech widderspriechen
+Baptême à {n} km du lieu de naissance ¦ Daf {n} km vun der Gebuertsplaz
+Naissance à {b} · baptême à {t} (seuil : {n} km). Souvent : une commune homonyme. ¦ Gebuert zu {b} · Daf zu {t} (Schwell: {n} km). Dacks: eng Gemeng mam selwechten Numm.
+Coordonnées 0, 0 (en plein océan, au large de l’Afrique) ¦ Koordinaten 0, 0 (matzen am Ozean, virun Afrika)
+Hors de {country} alors que le pays indiqué est {country} ¦ Baussent {country}, obwuel dat ugi Land {country} ass
+Latitude et longitude probablement inversées ¦ Breet a Längt wahrscheinlech vertosch
+Inverser latitude et longitude ¦ Breet a Längt vertauschen
+Longitude probablement de mauvais signe (est / ouest) ¦ Längt wahrscheinlech mam falsche Virzeechen (Osten / Westen)
+Corriger le signe de la longitude ¦ D’Virzeeche vun der Längt verbesseren
+Une autre commune « {name} » est beaucoup plus près du reste de la famille ({a} km au lieu de {b} km) : département {dep} ¦ Eng aner Gemeng „{name}“ ass vill méi no beim Rescht vun der Famill ({a} km amplaz {b} km): Departement {dep}
+Prendre la commune du département {dep} ¦ D’Gemeng aus dem Departement {dep} huelen
+À {n} km du reste de la famille ¦ {n} km vum Rescht vun der Famill
+la commune ¦ d’Gemeng
+Commence par les tables décennales (un index alphabétique par décennie), puis le registre de l’année trouvée. ¦ Fänk mat den Zéngjoerestabellen un (en alphabeteschen Index pro Joerzéngt), dann d’Register vum fonnte Joer.
+Registres paroissiaux (BMS) ¦ Parregëster (BMS)
+Les baptêmes de la paroisse de {commune} (collection communale, série E dépôt ou GG ; ou celle du greffe). Le baptême suit la naissance de 0 à 3 jours. ¦ D’Dafe vun der Par {commune} (Exemplaire vun der Gemeng, Serie E dépôt oder GG; oder dat vum Greffe). D’Daf ass 0 bis 3 Deeg no der Gebuert.
+État civil — naissances ¦ Zivilstand — Gebuerten
+Les registres de naissances de {commune}. {td} ¦ D’Gebuertsregëster vun {commune}. {td}
+Mairie ¦ Gemengenhaus
+Un acte de naissance de moins de 75 ans n’est pas en ligne : copie intégrale à demander à la mairie (avec la preuve de ta filiation). ¦ E Gebuertsakt, dee manner wéi 75 Joer al ass, ass net online: frot d’Gemeng no enger kompletter Kopie (mam Beweis vun denger Ofstamung).
+Les mariages de la paroisse de {commune}, d’ordinaire celle de l’épouse ; regarde aussi les bans dans la paroisse de l’époux. ¦ D’Bestietnesser vun der Par {commune}, normalerweis där vun der Braut; kuck och d’Opgeboter an der Par vum Bräitchem.
+État civil — mariages ¦ Zivilstand — Bestietnesser
+Les registres de mariages de {commune} (commune de l’épouse le plus souvent). {td} Les publications de bans sont parfois dans un registre à part. ¦ D’Bestietnesregëster vun {commune} (meeschtens d’Gemeng vun der Braut). {td} D’Opgeboter sinn heiansdo an engem separate Regëster.
+Notaires (série E) et contrôle des actes (2 C) ¦ Notairen (Serie E) a Kontroll vun den Akten (2 C)
+Minutes notariales (série 3 E) ¦ Notairesakten (Serie 3 E)
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Le registre du contrôle des actes (série 2 C) donne le notaire et la date. ¦ De Bestietneskontrakt, bei engem Notaire e puer Deeg oder Wochen virdrun ënnerschriwwen; zënter 1850 seet de Bestietnesakt, ob et ee gëtt, a bei wéi engem Notaire. D’Regëster vun der Kontroll vun den Akten (Serie 2 C) gëtt den Notaire an den Datum un.
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Les registres de l’enregistrement (série 3 Q, actes civils publics) le retrouvent aussi. ¦ De Bestietneskontrakt, bei engem Notaire e puer Deeg oder Wochen virdrun ënnerschriwwen; zënter 1850 seet de Bestietnesakt, ob et ee gëtt, a bei wéi engem Notaire. D’Regëster vun der Enregistrement (Serie 3 Q, ëffentlech Zivilakten) fannen en och.
+Un acte de mariage de moins de 75 ans n’est pas en ligne : copie à demander à la mairie. ¦ E Bestietnesakt, dee manner wéi 75 Joer al ass, ass net online: frot d’Gemeng no enger Kopie.
+Les sépultures de la paroisse de {commune} (inhumation le lendemain du décès, en général). ¦ D’Begriefnesser vun der Par {commune} (d’Begriefnes ass normalerweis den Dag nom Doud).
+État civil — décès ¦ Zivilstand — Doudesfäll
+Les décès de {commune}, mais aussi de la commune d’un enfant chez qui la personne a pu finir sa vie, ou de l’hospice voisin. {td} ¦ D’Doudesfäll vun {commune}, awer och vun der Gemeng vun engem Kand, bei deem d’Persoun hiert Liewen ofgeschloss kann hunn, oder vum Hospice an der Noperschaft. {td}
+Enregistrement (série 3 Q) ¦ Enregistrement (Serie 3 Q)
+Les tables des successions et absences du bureau de l’enregistrement du canton : la date et le lieu du décès, les héritiers, parfois les biens. ¦ D’Tabellen vun den Ierfschaften an Absenzen vum Enregistrementsbüro vum Kanton: Datum a Plaz vum Doud, d’Ierwen, heiansdo d’Gidder.
+Pour un homme mort entre 1914 et 1921 : la base des « morts pour la France » (ministère des Armées). ¦ Fir e Mann, deen tëscht 1914 an 1921 gestuerwen ass: d’Datebank vun de „Morts pour la France“ (franséischt Arméeministère).
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de baptême. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Säi Bestietnesakt nennt seng Elteren (a seet, ob se nach liewen); soss säin Dafakt. Virun 1792 nennen d’Bestietnesakten dacks d’Elteren, net ëmmer.
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de naissance. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Säi Bestietnesakt nennt seng Elteren (a seet, ob se nach liewen); soss säi Gebuertsakt. Virun 1792 nennen d’Bestietnesakten dacks d’Elteren, net ëmmer.
+Recensements (série 6 M), à partir de 1836 ¦ Vollekszielungen (Serie 6 M), vun 1836 un
+La famille sous le même toit, avec les âges : pour trouver la commune et l’année de naissance. ¦ D’Famill ënner engem Daach, mat den Alter: fir d’Gemeng an d’Gebuertsjoer ze fannen.
+Recensements (série 6 M) ¦ Vollekszielungen (Serie 6 M)
+Les listes nominatives de {commune}, tous les 5 ans de 1836 à 1936 (avec l’âge, le métier, toute la maisonnée) ; beaucoup sont en ligne. Dans une grande ville, il faut l’adresse (rue). ¦ D’Nimmlëschte vun {commune}, all 5 Joer vun 1836 bis 1936 (mam Alter, dem Beruff, dem ganzen Haushalt); vill si online. An enger grousser Stad brauchs du d’Adress (Strooss).
+Recrutement militaire (série 1 R) ¦ Militäresch Rekrutéierung (Serie 1 R)
+Le registre matricule de sa classe (année de naissance + 20), au bureau de recrutement du département où il habitait à 20 ans : signalement (taille, yeux, cheveux), adresses successives, campagnes, blessures. Index alphabétique par classe. ¦ D’Matrikelregëster vu senger Klass (Gebuertsjoer + 20), am Rekrutéierungsbüro vum Departement, wou hie mat 20 Joer gewunnt huet: Personebeschreiwung (Gréisst, An, Hoer), successiv Adressen, Campagnen, Blessuren. Alphabeteschen Index pro Klass.
+Les tables des successions et absences puis les registres des mutations après décès, au bureau de l’enregistrement du canton du décès : héritiers, biens, valeur. Souvent dans les 6 mois après le décès. ¦ D’Tabellen vun den Ierfschaften an Absenzen, dann d’Regëster vun den Iwwerdroungen nom Doud, am Enregistrementsbüro vum Kanton vum Doud: Ierwen, Gidder, Wäert. Dacks bannent 6 Méint nom Doud.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. ¦ De Bestietneskontrakt beim Notaire vum Duerf oder vum Kanton, kuerz virum Bestietnes: d’Dot, d’Zeien, déi grouss Famill.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. L’acte de mariage (après 1850) dit s’il y a un contrat et chez quel notaire. ¦ De Bestietneskontrakt beim Notaire vum Duerf oder vum Kanton, kuerz virum Bestietnes: d’Dot, d’Zeien, déi grouss Famill. De Bestietnesakt (no 1850) seet, ob et e Kontrakt gëtt a bei wéi engem Notaire.
+Hors de France : les registres sont aux archives de la région ou de la paroisse ; FamilySearch en a numérisé beaucoup. ¦ Baussent Frankräich: d’Regëster sinn an den Archive vun der Regioun oder vun der Par; FamilySearch huet der vill digitaliséiert.
+Les Archives nationales d’outre-mer gardent les doubles des registres (état civil en ligne). ¦ D’Archives nationales d’outre-mer halen d’Duplikater vun de Regëster (Zivilstand online).
+État civil reconstitué ¦ Rekonstituéierten Zivilstand
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans les fichiers de l’état civil reconstitué (Archives de Paris). ¦ De Paräisser Zivilstand vu virun 1860 ass 1871 verbrannt: sich an de Fichiere vum rekonstituéierten Zivilstand (Archives de Paris).
+vivante aux recensements de {a} à {b} ({n}) ¦ lieweg bei de Vollekszielunge vun {a} bis {b} ({n})
+vivant aux recensements de {a} à {b} ({n}) ¦ lieweg bei de Vollekszielunge vun {a} bis {b} ({n})
+vivante aux recensements de {years} ¦ lieweg bei de Vollekszielunge vun {years}
+vivant aux recensements de {years} ¦ lieweg bei de Vollekszielunge vun {years}
+classe {c} (né en {y}) ¦ Klass {c} (gebuer {y})
+décès en {y} ¦ Doud {y}
+mariage en {y} ¦ Bestietnes {y}
+enfant né en {y} ¦ Kand gebuer {y}
+enfant né en {y} ; souvent dans la paroisse de l’épouse ¦ Kand gebuer {y}; dacks an der Par vun der Braut
+dernière mention en {y} ¦ lescht Erwähnung {y}
+née vers {y} ¦ gebuer ëm {y}
+né vers {y} ¦ gebuer ëm {y}
+son acte de mariage ({y}) nomme ses parents ¦ säi Bestietnesakt ({y}) nennt seng Elteren
+son acte de baptême ({y}) nomme ses parents ¦ säin Dafakt ({y}) nennt seng Elteren
+Même nom, née {n} ans avant à {place} : sa mère ? ¦ Selwechten Numm, {n} Joer virdru gebuer zu {place}: seng Mamm?
+Même nom, né {n} ans avant à {place} : son père ? ¦ Selwechten Numm, {n} Joer virdru gebuer zu {place}: säi Papp?
+Même nom, née {n} ans avant : sa mère ? ¦ Selwechten Numm, {n} Joer virdru gebuer: seng Mamm?
+Même nom, né {n} ans avant : son père ? ¦ Selwechten Numm, {n} Joer virdru gebuer: säi Papp?
+Même nom, née en {y} à {place} : un frère, une sœur, un cousin ? ¦ Selwechten Numm, gebuer {y} zu {place}: e Brudder, eng Schwëster, e Koseng?
+Même nom, né en {y} à {place} : un frère, une sœur, un cousin ? ¦ Selwechten Numm, gebuer {y} zu {place}: e Brudder, eng Schwëster, e Koseng?
+Même nom, née en {y} : un frère, une sœur, un cousin ? ¦ Selwechten Numm, gebuer {y}: e Brudder, eng Schwëster, e Koseng?
+Même nom, né en {y} : un frère, une sœur, un cousin ? ¦ Selwechten Numm, gebuer {y}: e Brudder, eng Schwëster, e Koseng?
+Même nom, même lieu (née en {y}) ¦ Selwechten Numm, selwecht Plaz (gebuer {y})
+Même nom, même lieu (né en {y}) ¦ Selwechten Numm, selwecht Plaz (gebuer {y})
+Même nom, même lieu ¦ Selwechten Numm, selwecht Plaz
+{act} de {y} ¦ {act} vun {y}
+même nom : de la famille ? ¦ selwechten Numm: vun der Famill?
+souvent un proche ¦ dacks e Familljemember
+Quelqu’un ¦ Een
+Dans le même foyer en {y} à {place}{pos} : un parent âgé, un beau-parent ? ¦ Am selwechten Haushalt {y} zu {place}{pos}: en alen Elterendeel, e Schwéierelterendeel?
+Dans le même foyer en {y}{pos} : un parent âgé, un beau-parent ? ¦ Am selwechten Haushalt {y}{pos}: en alen Elterendeel, e Schwéierelterendeel?
+Correspondance ADN{details} : son arbre a peut-être la suite ¦ ADN-Match{details}: säi Bam huet vläicht déi nächst Etapp
+🧩 Mur de la semaine ¦ 🧩 Sakgaass vun der Woch
+Mur de brique : {name} — chercher ses deux parents ¦ Sakgaass: {name} — seng zwee Elteren sichen
+Mur de brique : {name} — chercher son père ¦ Sakgaass: {name} — de Papp sichen
+Mur de brique : {name} — chercher sa mère ¦ Sakgaass: {name} — d’Mamm sichen
+Mur de brique : {name} — chercher ce qui manque ¦ Sakgaass: {name} — sichen, wat feelt
+génération {n} ¦ Generatioun {n}
+🌍 Où chercher ? te propose les sites à consulter ¦ 🌍 Wou sichen? proposéiert dir d’Säiten, déi s du kucke kanns
+Piste faite ¦ Spuer gemaach
+Commune inconnue : choisis la commune du dépouillement (avec son code INSEE) dans Recherche. ¦ Onbekannt Gemeng: wiel d’Gemeng vum Auszuch (mat hirem INSEE-Code) an der Recherche.
+Département inconnu. ¦ Onbekannt Departement.
+Téléchargement impossible : PHP n’a pas l’extension curl. ¦ Eroflueden net méiglech: PHP huet d’Extensioun curl net.
+Le fichier des adresses du département n’est pas encore téléchargé. ¦ De Fichier mat den Adresse vum Departement ass nach net erofgelueden.
+Fichier des adresses illisible. ¦ Fichier mat den Adressen net liesbar.
+Indique l’ancien nom de la rue. ¦ Gëff den ale Numm vun der Strooss un.
+Les services d’archives ne sont pas encore prêts : relance l’app. ¦ D’Archivsservicer sinn nach net prett: start d’App nei.
+Cette suppression n’a pas été trouvée dans le journal. ¦ Dës Läschung gouf am Journal net fonnt.
+Ce service existe déjà. ¦ Dëse Service gëtt et schonn.
+Artiste introuvable : cette fiche n’existe pas, ou plus (supprimée ?). ¦ Kënschtler net fonnt: dës Fiche gëtt et net, oder net méi (geläscht?).
+Sorte de fiche inconnue. ¦ Onbekannt Zort vu Fiche.
+Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue. ¦ Dës Fiche ass net als „Kënschtler“ ugekräizt: kräiz „Kënschtler“ op der Fiche un (Fiche änneren), ier s du e Stéck aus dem Katalog do ofleeës.
+Élément trop volumineux. ¦ Element ze grouss.
+Élément introuvable : il a peut-être été supprimé ou rangé chez un autre artiste. ¦ Element net fonnt: et gouf vläicht geläscht oder bei engem anere Kënschtler ofgeluecht.
+Élément introuvable : il a peut-être déjà été supprimé. ¦ Element net fonnt: et gouf vläicht scho geläscht.
+Rangement impossible : un des éléments n’existe plus (recharge le catalogue). ¦ Zortéieren net méiglech: ee vun den Elementer gëtt et net méi (lued de Katalog nei).
+Rien à remettre. ¦ Näischt zréckzesetzen.
+La fiche de la personne n’existe plus : impossible de remettre cet élément. ¦ D’Fiche vun der Persoun gëtt et net méi: dëst Element kann net zréckgesat ginn.
+Donne un nom à cette sorte de fiche. ¦ Gëff dëser Zort vu Fiche en Numm.
+Cette sorte a trop de réglages. ¦ Dës Zort huet ze vill Astellungen.
+Des fiches de cette sorte existent encore : supprime-les d’abord. ¦ Et gëtt nach Fichen vun dëser Zort: läsch se éischt.
+Réglage inconnu. ¦ Onbekannt Astellung.
+Réglages trop volumineux. ¦ Astellungen ze grouss.
+Import impossible : PHP n’a pas l’extension curl. ¦ Import net méiglech: PHP huet d’Extensioun curl net.
+Le site demande de patienter (trop de demandes) : réessaie dans une minute. ¦ De Site freet dech ze waarden (ze vill Ufroen): probéier an enger Minutt nach eng Kéier.
+Le site refuse la demande : une clé ou un jeton est nécessaire (ou il n’est pas bon). ¦ De Site refuséiert d’Ufro: e Schlëssel oder en Token ass néideg (oder en ass net richteg).
+Rien trouvé à cette adresse (identifiant inconnu). ¦ Näischt op dëser Adress fonnt (onbekannten Identifiant).
+Réponse illisible du site. ¦ Äntwert vum Site net liesbar.
+La recherche par nom sur Discogs demande un jeton personnel (gratuit : discogs.com → Paramètres → Développeurs). Sans jeton, colle l’adresse d’un artiste, d’un album ou d’un disque. ¦ D’Sich no Numm op Discogs brauch e perséinlechen Token (gratis: discogs.com → Astellungen → Entwéckler). Ouni Token, peech d’Adress vun engem Kënschtler, engem Album oder enger Plack.
+Ce n’est pas une image (JPEG, PNG, WebP ou GIF). ¦ Dat ass kee Bild (JPEG, PNG, WebP oder GIF).
+Image refusée : seules les images de Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb et Apple sont rapatriées. ¦ Bild refuséiert: just Biller vun Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb an Apple ginn erofgelueden.
+Trop de redirections. ¦ Ze vill Weiderleedungen.
+Donne un titre au projet. ¦ Gëff dem Projet en Titel.
+Ce dossier n’est pas dans ce projet. ¦ Dësen Dossier ass net an dësem Projet.
+Un dossier ne peut pas aller dans lui-même ni dans un de ses sous-dossiers. ¦ En Dossier ka weder a sech selwer nach an ee vu sengen Ënnerdossieren.
+Donne un nom au dossier. ¦ Gëff dem Dossier en Numm.
+Élément introuvable. ¦ Element net fonnt.
+Donne un titre à cet élément. ¦ Gëff dësem Element en Titel.
+Rien de reconnu : le fichier doit être un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ou RIS (.ris). ¦ Näischt erkannt: de Fichier muss en Export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) oder RIS (.ris) sinn.
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un export de bibliographie n’utilise pas. ¦ Fichier refuséiert: en enthält XML-Deklaratiounen (DOCTYPE oder ENTITY), déi en Export vun enger Bibliographie net benotzt.
+Donne un nom au projet. ¦ Gëff dem Projet en Numm.
+Projet trop gros (4 Mo au plus pour les réglages). ¦ Projet ze grouss (héchstens 4 MB fir d’Astellungen).
+Réglages du projet illisibles. ¦ Astellunge vum Projet net liesbar.
+Ce média n’est pas un son. ¦ Dëse Medium ass keen Toun.
+Ce fichier n’est pas une version de ce son. ¦ Dëse Fichier ass keng Versioun vun dësem Toun.
+Trop de zones (500 au plus). ¦ Ze vill Zonen (héchstens 500).
+Le mot de passe doit faire au moins 8 caractères. ¦ D’Passwuert muss mindestens 8 Zeeche laang sinn.
+Le chiffrement des sauvegardes n’est pas disponible sur cet ordinateur. ¦ D’Verschlësselung vun de Backuppen ass op dësem Computer net disponibel.
+Impossible de créer le dossier temporaire de la sauvegarde. ¦ Den temporären Dossier vum Backup konnt net erstallt ginn.
+Impossible de créer l’archive. ¦ D’Archiv konnt net erstallt ginn.
+Écriture de l’archive impossible. ¦ D’Archiv konnt net geschriwwe ginn.
+Ce fichier n’est pas une base SQLite lisible. ¦ Dëse Fichier ass keng liesbar SQLite-Datebank.
+Cette base vient d’une version plus récente de l’application : mets LCNDA à jour pour l’ouvrir. ¦ Dës Datebank kënnt vun enger méi neier Versioun vun der App: aktualiséier LCNDA, fir se opzemaachen.
+Une généalogie est déjà ouverte : elle ne sera pas remplacée. Ouvre ce fichier sur l’écran de démarrage d’une installation vide. ¦ Eng Genealogie ass schonn op: si gëtt net ersat. Maach dëse Fichier um Startecran vun enger eidler Installatioun op.
+Impossible de créer le dossier de la base. ¦ Den Dossier vun der Datebank konnt net erstallt ginn.
+Lecture de la base impossible dans l’archive. ¦ D’Datebank konnt am Archiv net gelies ginn.
+Impossible d’enregistrer le fichier reçu. ¦ De kritte Fichier konnt net gespäichert ginn.
+Impossible de créer le dossier des médias. ¦ Den Dossier vun de Medie konnt net erstallt ginn.
+Impossible de remplacer la base vide. ¦ Déi eidel Datebank konnt net ersat ginn.
+Impossible de mettre la base en place. ¦ D’Datebank konnt net agesat ginn.
+Import par chemin réservé à l’application de bureau. ¦ Import iwwer e Pfad ass just fir d’Desktop-App.
+Ce dossier n’est ni un paquet MacFamilyTree (.mftpkg), ni un fichier Hérédis (.hmw). ¦ Dësen Dossier ass weder e MacFamilyTree-Pak (.mftpkg) nach en Hérédis-Fichier (.hmw).
+« Une journée dans la vie » est faite pour les personnes. ¦ „En Dag am Liewen“ ass fir Persoune gemaach.
+Cette fiche n’est pas montrée en mode consultation. ¦ Dës Fiche gëtt am Liesmodus net gewisen.
+Cet événement n’est pas dans la vie de cette personne. ¦ Dësen Evenement ass net am Liewe vun dëser Persoun.
+Cet événement n’a pas de date : choisis-en un autre, ou écris une date. ¦ Dësen Evenement huet keen Datum: wiel en aneren, oder schreif en Datum.
+Choisis un événement de sa vie, ou écris une date. ¦ Wiel en Evenement aus sengem Liewen, oder schreif en Datum.
+Je ne comprends pas cette date (exemples : 7 mai 1925, vers 1784, 12 thermidor an II). ¦ Ech verstinn dësen Datum net (Beispiller: 7 mai 1925, vers 1784, 12 thermidor an II).
+Personne introuvable : choisis d’abord à qui se rattache cette fiche. ¦ Persoun net fonnt: wiel als éischt, zu wiem dës Fiche gehéiert.
+Fiche verrouillée. Déverrouille-la avant de modifier ou supprimer cette personne. ¦ Fiche gespaart. Maach se op, ier s du dës Persoun änners oder läschs.
+Fiche introuvable : elle a peut-être été supprimée. ¦ Fiche net fonnt: si gouf vläicht geläscht.
+Fiche introuvable : elle a peut-être déjà été supprimée. ¦ Fiche net fonnt: si gouf vläicht scho geläscht.
+Ce tableau a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Dës Tabell gouf an enger anerer Fënster geännert, zënter dass du se opgemaach hues.
+Instantané introuvable. ¦ Momentopnam net fonnt.
+Donne un nom à l’instantané. ¦ Gëff der Momentopnam en Numm.
+La base locale n'a pas encore été importée. ¦ Déi lokal Datebank gouf nach net importéiert.
+Parcelle introuvable (supprimée ?). ¦ Parzell net fonnt (geläscht?).
+Lien de sorte inconnue. ¦ Link vun enger onbekannter Zort.
+La section s’écrit avec 1 ou 2 lettres ou chiffres (ex. « AB », « B », « 0A »). ¦ D’Sektioun gëtt mat 1 oder 2 Buschtawen oder Zifferen geschriwwen (z. B. „AB“, „B“, „0A“).
+Le numéro de parcelle est un nombre de 1 à 9999. ¦ D’Parzellennummer ass eng Zuel vun 1 bis 9999.
+Code de commune (INSEE) inconnu : 5 chiffres, ex. 19272. ¦ Onbekannte Gemengecode (INSEE): 5 Zifferen, z. B. 19272.
+Donne au moins la section et le numéro de la parcelle (ou un lieu-dit). ¦ Gëff mindestens d’Sektioun an d’Nummer vun der Parzell un (oder e Flouernumm).
+La surface est un nombre de mètres carrés. ¦ D’Fläch ass eng Zuel a Quadratmeter.
+Parcelle introuvable (déjà supprimée ?). ¦ Parzell net fonnt (scho geläscht?).
+Cette fiche n’existe pas (supprimée ?). ¦ Dës Fiche gëtt et net (geläscht?).
+Beaucoup de demandes au cadastre en une minute : attends un petit moment et réessaie. ¦ Vill Ufroen um Kadaster an enger Minutt: waart e Moment a probéier nach eng Kéier.
+Le cadastre en ligne ne répond pas pour l’instant. ¦ De Kadaster online äntwert de Moment net.
+Le cadastre en ligne ne répond pas (pas d’Internet ?). Tu peux remplir la parcelle à la main. ¦ De Kadaster online äntwert net (keen Internet?). Du kanns d’Parzell vun Hand ausfëllen.
+Recherche impossible : PHP n’a pas l’extension curl. ¦ Sich net méiglech: PHP huet d’Extensioun curl net.
+La réponse du service est trop grosse : précise la recherche (section et numéro). ¦ D’Äntwert vum Service ass ze grouss: präziséier d’Sich (Sektioun an Nummer).
+Choisis d’abord une commune de France (avec son code INSEE). ¦ Wiel als éischt eng franséisch Gemeng (mat hirem INSEE-Code).
+Point de la carte incompris. ¦ Punkt op der Kaart net verstanen.
+Écris la section (1 ou 2 lettres, ex. « AB » ou « B »). ¦ Schreif d’Sektioun (1 oder 2 Buschtawen, z. B. „AB“ oder „B“).
+Il faut une parcelle avec sa commune, sa section et son numéro. ¦ Et brauch eng Parzell mat hirer Gemeng, hirer Sektioun an hirer Nummer.
+Les ventes (DVF) n’ont pas pu être lues : pas d’Internet, ou service indisponible. ¦ D’Verkeef (DVF) konnten net gelies ginn: keen Internet, oder de Service ass net disponibel.
+Demande de carte inconnue. ¦ Onbekannt Kaartenufro.
+Opération de carte inconnue. ¦ Onbekannt Kaartenoperatioun.
+Action de carte inconnue. ¦ Onbekannt Kaartenaktioun.
+Zone illisible : il faut un sud, un ouest, un nord et un est. ¦ Zon net liesbar: et brauch e Süden, e Westen, en Norden an en Osten.
+Carte trop longue à décrire. ¦ Kaart ze laang fir ze beschreiwen.
+Adresse refusée. ¦ Adress refuséiert.
+Fichier impossible à écrire. ¦ Fichier kann net geschriwwe ginn.
+Fichier trop gros : ce n’est pas celui attendu. ¦ Fichier ze grouss: et ass net deen, deen erwaart gouf.
+Dossier des frontières impossible à créer. ¦ Dossier vun de Grenzen kann net erstallt ginn.
+Aucune commune ancienne lue dans ces fichiers : rien n’a été installé. ¦ Keng al Gemeng an dëse Fichieren gelies: näischt gouf installéiert.
+Fichier impossible à ranger. ¦ Fichier kann net ofgeluecht ginn.
+Choisis un nom de famille. ¦ Wiel e Familljennumm.
+Rien à citer : choisis une source. ¦ Näischt ze zitéieren: wiel eng Quell.
+Donne un nom à l’objet (ex. « Horloge comtoise »). ¦ Gëff dem Objet en Numm (z. B. „Horloge comtoise“).
+Donne un titre (ex. « La tarte aux pommes de mémé »). ¦ Gëff en Titel (z. B. „Dem Bomi seng Äppeltaart“).
+Lieu introuvable (les adresses ont peut-être changé). ¦ Plaz net fonnt (d’Adresse hu sech vläicht geännert).
+Donne un nom (ex. « Salon de généalogie de Paris »). ¦ Gëff en Numm (z. B. „Genealogiesalon zu Paräis“).
+Réglages illisibles. ¦ Astellungen net liesbar.
+Événement introuvable. ¦ Evenement net fonnt.
+Donnée incorrecte : un texte est attendu. ¦ Falsch Donnée: en Text gëtt erwaart.
+Opération inconnue. ¦ Onbekannt Operatioun.
+Choisis l’ancêtre (ou le couple) dont on réunit les descendants. ¦ Wiel de Virfahr (oder d’Koppel), deem seng Nokommen zesummekomm ginn.
+Invité introuvable. ¦ Gaascht net fonnt.
+Réponse inconnue. ¦ Onbekannt Äntwert.
+Le nombre de personnes va de 0 à 99. ¦ D’Zuel vu Persoune geet vun 0 bis 99.
+SocFace lit « née en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „née en {sf}“, deng Fiche seet {p} — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « né en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „né en {sf}“, deng Fiche seet {p} — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « née vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „née vers {sf}“, deng Fiche seet {p} — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « né vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „né vers {sf}“, deng Fiche seet {p} — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « née à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „née à {sf}“, deng Fiche seet {p} — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « né à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „né à {sf}“, deng Fiche seet {p} — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « femme », ta fiche dit homme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „Fra“, deng Fiche seet Mann — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « homme », ta fiche dit femme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „Mann“, deng Fiche seet Fra — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « {role} » du chef de ménage, ta fiche dit enfant — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „{role}“ vum Chef vum Haushalt, deng Fiche seet Kand — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « {role} » du chef de ménage, ta fiche dit conjoint — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „{role}“ vum Chef vum Haushalt, deng Fiche seet Partner — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « {role} » du chef de ménage, ta fiche dit parent — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „{role}“ vum Chef vum Haushalt, deng Fiche seet Elterendeel — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « {role} » du chef de ménage, ta fiche ne les relie pas — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „{role}“ vum Chef vum Haushalt, deng Fiche verbënnt se net — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+SocFace lit « {role} » du chef de ménage, ta fiche dit rien — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace liest „{role}“ vum Chef vum Haushalt, deng Fiche seet näischt — d’KI huet sech vläicht verlies: kontrolléier um Bild.
+vivante en {y}, à {place} vers {y} d’après un événement de la même année ¦ lieweg {y}, zu {place} ëm {y} no engem Evenement aus dem selwechte Joer
+vivant en {y}, à {place} vers {y} d’après un événement de la même année ¦ lieweg {y}, zu {place} ëm {y} no engem Evenement aus dem selwechte Joer
+vivante en {y}, à {place} vers {y} d’après un événement proche ¦ lieweg {y}, zu {place} ëm {y} no engem Evenement aus där Zäit
+vivant en {y}, à {place} vers {y} d’après un événement proche ¦ lieweg {y}, zu {place} ëm {y} no engem Evenement aus där Zäit
+Recensement de {y} à {place} (SocFace) : {what} ¦ Vollekszielung vun {y} zu {place} (SocFace): {what}
+Recensement de {y} (SocFace) : {what} ¦ Vollekszielung vun {y} (SocFace): {what}
+socface|année de naissance ¦ Gebuertsjoer
+socface|lieu de naissance ¦ Gebuertsplaz
+socface|genre ¦ Geschlecht
+socface|lien de parenté ¦ Verwandtschaft
+{text} (foyer coché « Vérifié sur l’image ») ¦ {text} (Haushalt ugekräizt „Um Bild kontrolléiert“)
+Le numéro de table va de 1 à 500. ¦ D’Dëschnummer geet vun 1 bis 500.
+Donne au moins un prénom ou un nom. ¦ Gëff mindestens e Virnumm oder en Numm un.
+Cette fiche est introuvable (ou confidentielle). ¦ Dës Fiche gëtt et net (oder se ass vertraulech).
+Cette personne est déjà dans la liste des invités. ¦ Dës Persoun ass schonn op der Lëscht vun de Gäscht.
+Aucun invité. ¦ Kee Gaascht.
+Aucune ligne à importer. ¦ Keng Zeil ze importéieren.
+Réglage trop long. ¦ Astellung ze laang.
+Mode consultation : les cousinades (adresses des vivants) ne se montrent pas. ¦ Liesmodus: d’Familljentreffen (Adresse vu Liewegen) ginn net gewisen.
+Choisis l’ancêtre. ¦ Wiel de Virfahr.
+Donnée inconnue. ¦ Onbekannt Donnée.
+Données inconnues. ¦ Onbekannt Donnéeën.
+Diagramme trop gros (plus de 1,5 Mo de données). ¦ Diagramm ze grouss (iwwer 1,5 MB Donnéeën).
+Indique le numéro de la page (ou de la vue). ¦ Gëff d’Nummer vun der Säit (oder vum Bild) un.
+Choisis la personne testée (ou donne un nom au test). ¦ Wiel déi getest Persoun (oder gëff dem Test en Numm).
+Choisis d’abord le test (kit) auquel rattacher les correspondances. ¦ Wiel als éischt den Test (Kit), mat deem d’Matches verbonne ginn.
+Donne le nom de la correspondance. ¦ Gëff den Numm vum Match un.
+Ce fichier ressemble à un fichier ADN brut (des SNP « rs… ») : il n’est jamais importé, par prudence pour la vie privée et la loi française. Importe plutôt la liste des correspondances ou des segments. ¦ Dëse Fichier gesäit aus wéi e roude ADN-Fichier (SNPen „rs…“): e gëtt ni importéiert, aus Virsiicht fir d’Privatsphär a wéinst dem franséische Gesetz. Importéier léiwer d’Lëscht vun de Matches oder vun de Segmenter.
+Coche au moins une sorte d’anniversaire. ¦ Kräiz mindestens eng Zort vu Joresdag un.
+Coche au moins une sorte de contacts. ¦ Kräiz mindestens eng Zort vu Kontakter un.
+Aucun contact à exporter : ton répertoire, tes services d’archives et tes cousins ADN sont vides. ¦ Keng Kontakter ze exportéieren: däin Adressbuch, deng Archivsservicer an deng ADN-Koseng sinn eidel.
+Aucune personne n°1 (Sosa) : choisis-la d’abord (Réglages → Apparence). ¦ Keng Persoun Nr. 1 (Sosa): wiel se als éischt (Astellungen → Ausgesinn).
+Choisis la personne de la branche. ¦ Wiel d’Persoun vum Zweig.
+Aucune personne à exporter. ¦ Keng Persoun ze exportéieren.
+Création du fichier ZIP impossible. ¦ Den ZIP-Fichier konnt net erstallt ginn.
+Donne un nom à l’employeur. ¦ Gëff dem Patron en Numm.
+La base d’exemple a déjà des fiches. ¦ D’Beispilldatebank huet schonn Fichen.
+Dossier des médias impossible à créer. ¦ Dossier vun de Medie kann net erstallt ginn.
+Copie d’une image d’exemple impossible. ¦ E Beispillbild konnt net kopéiert ginn.
+Les médias font plus de 4 Go : le paquet serait trop gros. Fais plutôt une branche (une personne et ses ancêtres), ou une sauvegarde complète. ¦ D’Medie sinn iwwer 4 GB: de Pak wier ze grouss. Maach léiwer en Zweig (eng Persoun an hir Virfahren), oder e komplette Backup.
+Pas assez de place libre sur l’ordinateur pour fabriquer ce paquet. ¦ Net genuch fräi Plaz um Computer, fir dëse Pak ze maachen.
+Le paquet GedZip n’a pas pu être fabriqué. ¦ De GedZip-Pak konnt net gemaach ginn.
+Le paquet GedZip n’a pas pu être écrit. ¦ De GedZip-Pak konnt net geschriwwe ginn.
+Le paquet Gramps n’a pas pu être fabriqué. ¦ De Gramps-Pak konnt net gemaach ginn.
+Contrôle : le nom d’une personne cachée restait dans la copie. Rien n’a été fabriqué. ¦ Kontroll: den Numm vun enger verstoppter Persoun war nach an der Kopie. Näischt gouf gemaach.
+Contrôle : une personne vivante avait encore des renseignements. Rien n’a été fabriqué. ¦ Kontroll: eng lieweg Persoun hat nach Informatiounen. Näischt gouf gemaach.
+Une des personnes choisies pour les branches n’existe plus. ¦ Eng vun de Persounen, déi fir d’Zweiger gewielt goufen, gëtt et net méi.
+Impossible de préparer le fichier. ¦ De Fichier konnt net virbereet ginn.
+Lecture du fichier GEDCOM impossible ¦ De GEDCOM-Fichier konnt net gelies ginn
+Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé. ¦ Dëse Fichier ass kee GEDCOM: weder eng Persoun nach en „HEAD“-Kapp fonnt.
+Graphique illisible (trop de champs). ¦ Grafik net liesbar (ze vill Felder).
+Graphique illisible (trop imbriqué). ¦ Grafik net liesbar (ze déif verschachtelt).
+Sorte de graphique inconnue. ¦ Onbekannt Zort vu Grafik.
+Graphique trop gros pour être enregistré (2 Mo au plus). ¦ Grafik ze grouss fir ze späicheren (héchstens 2 MB).
+Liste de graphiques illisible. ¦ Lëscht vun de Grafiken net liesbar.
+Vignette refusée. ¦ Miniatur refuséiert.
+Opération inconnue sur les graphiques. ¦ Onbekannt Operatioun op de Grafiken.
+Action inconnue sur les graphiques. ¦ Onbekannt Aktioun op de Grafiken.
+Fichier Hérédis introuvable. ¦ Hérédis-Fichier net fonnt.
+Aucun fichier .heredis dans ce dossier Hérédis. ¦ Kee .heredis-Fichier an dësem Hérédis-Dossier.
+Ce fichier n’est pas un fichier Hérédis lisible (Hérédis 2019 ou plus récent). ¦ Dëse Fichier ass keen liesbaren Hérédis-Fichier (Hérédis 2019 oder méi nei).
+Média introuvable ¦ Medium net fonnt
+Donne un nom aux armoiries (ex. « Armes de la famille de Montferrand »). ¦ Gëff dem Wope en Numm (z. B. „Wope vun der Famill de Montferrand“).
+Donne un nom au circuit (ex. « Sur les traces des Dupont en Corrèze »). ¦ Gëff dem Circuit en Numm (z. B. „Op de Spuere vun den Dupont an der Corrèze“).
+Étape introuvable ¦ Etapp net fonnt
+Choisis au moins une personne (ou une branche) pour préparer le circuit. ¦ Wiel mindestens eng Persoun (oder en Zweig), fir de Circuit virzebereeden.
+Donne un titre au document (ex. « Livret de famille Dupont-Martin »). ¦ Gëff dem Dokument en Titel (z. B. „Familljebuch Dupont-Martin“).
+Donne un nom à la carte (ex. « Cadastre napoléonien de Saint-Yrieix, 1834 »). ¦ Gëff der Kaart en Numm (z. B. „Cadastre napoléonien de Saint-Yrieix, 1834“).
+Indique au moins un critère. ¦ Gëff mindestens ee Critère un.
+Donne un nom à la recherche (ex. « Les Dupont du Nord avant 1800 »). ¦ Gëff der Sich en Numm (z. B. „D’Dupont aus dem Nord virun 1800“).
+Décompresse d’abord le fichier ZIP, puis importe le fichier CSV. ¦ Pak den ZIP-Fichier als éischt aus, dann importéier de CSV-Fichier.
+dossier introuvable (disque ou clé débranché ?) ¦ Dossier net fonnt (Disk oder USB-Stick ofgekoppelt?)
+dossier non accessible en écriture ¦ Am Dossier ka net geschriwwe ginn
+impossible de créer le sous-dossier de cette généalogie ¦ den Ënnerdossier vun dëser Genealogie konnt net erstallt ginn
+Aucun dossier hors de l’ordinateur n’est réglé. ¦ Keen Dossier baussent dem Computer ass agestallt.
+Je n’ai pas compris la date ou l’âge de la question, alors je ne liste pas tout. Exemples : « Qui est né le 7 mai 1950 ? », « nés en 1924 », « nés en l’an II », « nés un 15 brumaire », « morts à 70 ans », « morts avant leur naissance ». ¦ Ech hunn den Datum oder den Alter vun der Fro net verstanen, dofir lëschten ech net alles op. Beispiller (op Franséisch): « Qui est né le 7 mai 1950 ? », « nés en 1924 », « nés en l’an II », « nés un 15 brumaire », « morts à 70 ans », « morts avant leur naissance ».
+Je n’ai pas compris la question. Exemples : « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ». ¦ Ech hunn d’Fro net verstanen. Beispiller (op Franséisch): « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ».
+Indique la langue. ¦ Gëff d’Sprooch un.
+Acte introuvable (ou de plus de 100 ans : il est sans doute en ligne aux archives). ¦ Akt net fonnt (oder méi al wéi 100 Joer: e steet wahrscheinlech online an den Archiven).
+Cet acte est déjà ouvert au public. ¦ Dësen Akt ass schonn ëffentlech zougänglech.
+Cette copie demande Argon2id, que le PHP de cet ordinateur ne connaît pas : ouvre-la sur un Mac ou sous Linux. ¦ Dës Kopie brauch Argon2id, dat de PHP vun dësem Computer net kennt: maach se op engem Mac oder ënner Linux op.
+Copie chiffrée abîmée. ¦ Verschlësselt Kopie beschiedegt.
+Écriture impossible (disque plein ?) : la copie n’a pas été faite. ¦ Schreiwen net méiglech (Disk voll?): d’Kopie gouf net gemaach.
+Fichier temporaire impossible à créer. ¦ Temporäre Fichier kann net erstallt ginn.
+Lecture de la base impossible. ¦ D’Datebank konnt net gelies ginn.
+Ce fichier n’est pas une copie chiffrée LCNDA. ¦ Dëse Fichier ass keng verschlësselt LCNDA-Kopie.
+Copie chiffrée incomplète. ¦ Verschlësselt Kopie onvollstänneg.
+Mot de passe incorrect, ou fichier abîmé. ¦ Falscht Passwuert, oder beschiedegte Fichier.
+Fichier de sortie impossible à créer. ¦ Ausgabfichier kann net erstallt ginn.
+Choisis un mot de passe d’au moins 12 caractères, par exemple une phrase de quelques mots (à garder précieusement : sans lui, la copie est illisible, même pour toi). ¦ Wiel e Passwuert vu mindestens 12 Zeechen, zum Beispill e Saz vun e puer Wierder (gutt ophalen: ouni et ass d’Kopie net liesbar, och net fir dech).
+Ce fichier n’a pas la taille d’une copie chiffrée LCNDA. ¦ Dëse Fichier huet net d’Gréisst vun enger verschlësselter LCNDA-Kopie.
+Impossible de ranger la copie. ¦ D’Kopie konnt net ofgeluecht ginn.
+La copie déchiffrée n’est pas une base lisible. ¦ Déi entschlësselt Kopie ass keng liesbar Datebank.
+Rien à harmoniser. ¦ Näischt ze harmoniséieren.
+Cette harmonisation ne peut pas être annulée. ¦ Dës Harmoniséierung kann net réckgängeg gemaach ginn.
+Coordonnées invalides. ¦ Ongëlteg Koordinaten.
+Donne un nom au bloc. ¦ Gëff dem Block en Numm.
+Ajoute au moins un champ. ¦ Setz mindestens ee Feld derbäi.
+Ce fichier n’est pas un bloc LCNDA. ¦ Dëse Fichier ass kee LCNDA-Block.
+Cette fiche n’appartient pas à ce bloc. ¦ Dës Fiche gehéiert net zu dësem Block.
+Mode consultation : rien ne peut être modifié. Pour en sortir, clique sur « Quitter la consultation » et donne le mot de passe. ¦ Liesmodus: näischt kann geännert ginn. Fir erauszekommen, klick op „Liesmodus verloossen“ a gëff d’Passwuert an.
+Choisis un mot de passe d’au moins 4 caractères. ¦ Wiel e Passwuert vu mindestens 4 Zeechen.
+Impossible d’activer le mode consultation (dossier des données en lecture seule ?). ¦ De Liesmodus konnt net ageschalt ginn (Dateendossier just liesbar?).
+Choisis le lieu (hameau, village) dans les suggestions. ¦ Wiel d’Plaz (Weiler, Duerf) aus de Virschléi.
+Indique la paroisse (ex. « Saint-Martin de Brive »). ¦ Gëff d’Par un (z. B. „Saint-Martin de Brive“).
+Indique le nom. ¦ Gëff den Numm un.
+Indique ton prénom (il apparaît dans les paquets que tu envoies). ¦ Gëff däi Virnumm un (en erschéngt an de Päck, déi s du schécks).
+Le travail à deux n’est pas commencé sur cette base. ¦ D’Zesummeschaffen zu zwee ass op dëser Datebank net ugefaang.
+Aucune modification depuis le dernier paquet. ¦ Keng Ännerung zënter dem leschte Pak.
+Paquet introuvable : recharge-le. ¦ Pak net fonnt: lued en nei.
+Paquet illisible : recharge-le. ¦ Pak net liesbar: lued en nei.
+Cette demande doit être un envoi. ¦ Dës Ufro muss eng Sendung sinn.
+Donne un nom à l’objet. ¦ Gëff dem Objet en Numm.
+Image refusée : une image PNG, JPEG ou WebP de moins de 300 Ko. ¦ Bild refuséiert: e PNG-, JPEG- oder WebP-Bild ënner 300 KB.
+Modèle trop gros (30 Mo au plus) ou vide. ¦ Modell ze grouss (héchstens 30 MB) oder eidel.
+Adresse refusée (seules les adresses de la bibliothèque en ligne sont permises). ¦ Adress refuséiert (just Adresse vun der Online-Bibliothéik sinn erlaabt).
+Fichier trop gros pour être téléchargé. ¦ Fichier ze grouss fir erofzelueden.
+La bibliothèque en ligne ne répond pas : vérifie la connexion à internet (ou réessaie plus tard). ¦ D’Online-Bibliothéik äntwert net: kontrolléier d’Internetverbindung (oder probéier méi spéit nach eng Kéier).
+La bibliothèque demande de patienter (trop de demandes) : réessaie dans une minute. ¦ D’Bibliothéik freet dech ze waarden (ze vill Ufroen): probéier an enger Minutt nach eng Kéier.
+Modèle introuvable dans la bibliothèque. ¦ Modell net an der Bibliothéik fonnt.
+Réponse illisible de la bibliothèque en ligne. ¦ Äntwert vun der Online-Bibliothéik net liesbar.
+Identifiant de modèle incorrect. ¦ Falschen Identifiant vum Modell.
+Ce n’est pas un modèle 3D. ¦ Dat ass kee 3D-Modell.
+Ce modèle n’existe pas en glTF. ¦ Dëse Modell gëtt et net a glTF.
+Modèle trop lourd (plus de 40 Mo avec ses textures). ¦ Modell ze schwéier (iwwer 40 MB mat senge Texturen).
+Modèle trop compliqué (trop de fichiers). ¦ Modell ze komplizéiert (ze vill Fichieren).
+Fichier abîmé pendant le téléchargement (empreinte différente) : réessaie. ¦ Fichier beim Eroflueden beschiedegt (aneren Ofdrock): probéier nach eng Kéier.
+Modèle trop lourd. ¦ Modell ze schwéier.
+Ce glTF est illisible. ¦ Dëse glTF ass net liesbar.
+Données intégrées illisibles. ¦ Integréiert Donnéeën net liesbar.
+Chemin de fichier refusé dans le modèle. ¦ Fichierspfad am Modell refuséiert.
+Une texture du modèle n’est pas une image PNG, JPEG ou WebP. ¦ Eng Textur vum Modell ass kee PNG-, JPEG- oder WebP-Bild.
+Modèle trop gros (30 Mo au plus). ¦ Modell ze grouss (héchstens 30 MB).
+Conversion du modèle impossible. ¦ De Modell konnt net ëmgewandelt ginn.
+Le pack n’est plus là : renvoie le fichier ZIP. ¦ De Pack ass net méi do: schéck den ZIP-Fichier nach eng Kéier.
+PHP n’a pas l’extension zip : impossible d’ouvrir un pack. ¦ PHP huet d’Extensioun zip net: e Pack kann net opgemaach ginn.
+Aucun fichier ZIP reçu (ou trop gros pour le serveur). ¦ Keen ZIP-Fichier ukomm (oder ze grouss fir de Server).
+Ce fichier n’est pas un ZIP. ¦ Dëse Fichier ass keen ZIP.
+Aucun modèle 3D (GLB, glTF, OBJ, STL) dans ce ZIP. ¦ Kee 3D-Modell (GLB, glTF, OBJ, STL) an dësem ZIP.
+Choisis au moins un modèle. ¦ Wiel mindestens ee Modell.
+Indique la licence du pack (CC0, domaine public…). ¦ Gëff d’Lizenz vum Pack un (CC0, ëffentlechen Domän…).
+Rien à rattacher. ¦ Näischt ze verbannen.
+Plan trop lourd (6 Mo au plus) : un plan scanné plus petit ? ¦ Plang ze schwéier (héchstens 6 MB): e méi klenge gescannte Plang?
+Le plan contient un contenu refusé. ¦ De Plang huet en Inhalt, deen net erlaabt ass.
+Aucun fichier reçu. ¦ Kee Fichier ukomm.
+Formats 3D acceptés : OBJ, STL, GLB, glTF (et MTL pour les couleurs d’un OBJ). ¦ Akzeptéiert 3D-Formater: OBJ, STL, GLB, glTF (an MTL fir d’Faarwen vun engem OBJ).
+Fichier plus gros que prévu : refusé. ¦ Fichier méi grouss wéi virgesinn: refuséiert.
+Écriture impossible dans le dossier des données. ¦ Am Dateendossier ka net geschriwwe ginn.
+Téléchargement interrompu : réessaie. ¦ Eroflueden ënnerbrach: probéier nach eng Kéier.
+Dossier hors des données de la reconnaissance d’écriture : rien n’est effacé. ¦ Dossier baussent den Donnéeë vun der Schrëfterkennung: näischt gëtt geläscht.
+Ce modèle ne se télécharge pas tout seul : ajoute son fichier à la main. ¦ Dëse Modell gëtt net vu sech selwer erofgelueden: setz säi Fichier vun Hand derbäi.
+Une installation est en cours : attends qu’elle finisse. ¦ Eng Installatioun leeft: waart, bis se fäerdeg ass.
+Nom de modèle refusé. ¦ Numm vum Modell refuséiert.
+Impossible de déplacer le modèle. ¦ De Modell konnt net verréckelt ginn.
+Il faut un fichier de modèle Kraken (.mlmodel). ¦ Et brauch e Kraken-Modellfichier (.mlmodel).
+Ce fichier est trop petit pour être un modèle. ¦ Dëse Fichier ass ze kleng fir e Modell ze sinn.
+Impossible de ranger le modèle. ¦ De Modell konnt net ofgeluecht ginn.
+Deux lectures sont déjà en cours : attends qu’une se termine. ¦ Zwou Liesunge lafe schonn: waart, bis eng fäerdeg ass.
+Choisis d’abord l’image de l’acte. ¦ Wiel als éischt d’Bild vum Akt.
+La lecture d’écriture marche seulement sur les images. ¦ D’Liese vun der Handschrëft geet just op Biller.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR). ¦ D’Liese vun der Handschrëft ass nach net installéiert: Astellungen → Schrëfterkennung (HTR).
+Modèle inconnu. ¦ Onbekannte Modell.
+Ce modèle d’écriture n’est pas installé : Réglages → Reconnaissance d’écriture (HTR), étape ②. ¦ Dëse Schrëftmodell ass net installéiert: Astellungen → Schrëfterkennung (HTR), Etapp ②.
+Image améliorée trop lourde. ¦ Verbessert Bild ze schwéier.
+Image améliorée illisible. ¦ Verbessert Bild net liesbar.
+Image améliorée trop grande. ¦ Verbessert Bild ze grouss.
+Nom de fichier média invalide. ¦ Ongëltegen Numm vum Mediefichier.
+Fichier média introuvable. ¦ Mediefichier net fonnt.
+Cette image ne peut pas être lue (format). ¦ Dëst Bild kann net gelies ginn (Format).
+Copie de l’image impossible. ¦ D’Bild konnt net kopéiert ginn.
+Hypothèse introuvable. ¦ Hypothees net fonnt.
+La comparaison des hypothèses n’est pas encore prête : relance l’app. ¦ De Vergläich vun den Hypotheesen ass nach net prett: start d’App nei.
+Réponse introuvable. ¦ Äntwert net fonnt.
+Lieu introuvable : choisis-le dans la liste. ¦ Plaz net fonnt: wiel se aus der Lëscht.
+Donne un nom à cette réponse (ex. « Naves »). ¦ Gëff dëser Äntwert en Numm (z. B. „Naves“).
+Huit réponses au plus : retires-en une avant d’en ajouter. ¦ Héchstens aacht Äntwerten: huel eng ewech, ier s du eng derbäisetz.
+C’est la réponse retenue : reviens d’abord sur la conclusion (↶). ¦ Dat ass déi gewielt Äntwert: maach als éischt d’Konklusioun réckgängeg (↶).
+Choisis une source, un média ou un dépouillement, ou écris la preuve. ¦ Wiel eng Quell, e Medium oder en Auszuch, oder schreif de Beweis.
+Sorte de preuve inconnue. ¦ Onbekannt Zort vu Beweis.
+Cet élément n’existe pas (ou plus) dans la base. ¦ Dëst Element gëtt et net (oder net méi) an der Datebank.
+Soixante preuves au plus pour une hypothèse. ¦ Héchstens siechzeg Beweiser fir eng Hypothees.
+Cette preuve est déjà dans la colonne. ¦ Dëse Beweis ass schonn an der Spalt.
+Cette réponse existe déjà. ¦ Dës Äntwert gëtt et schonn.
+Cette preuve existe déjà. ¦ Dëse Beweis gëtt et schonn.
+La réponse de cette preuve a été retirée. ¦ D’Äntwert vun dësem Beweis gouf ewechgeholl.
+Choisis une des réponses de cette hypothèse. ¦ Wiel eng vun den Äntwerte vun dëser Hypothees.
+Cette hypothèse est déjà conclue : reviens d’abord sur la conclusion (↶). ¦ Dës Hypothees ass scho ofgeschloss: maach als éischt d’Konklusioun réckgängeg (↶).
+Cette réponse n’a pas de lieu : choisis le lieu (📍) avant de la retenir. ¦ Dës Äntwert huet keng Plaz: wiel d’Plaz (📍), ier s du se behäls.
+Cette réponse n’a pas de date : écris-la avant de la retenir. ¦ Dës Äntwert huet keen Datum: schreif en, ier s du se behäls.
+Il n’y a pas de conclusion à défaire. ¦ Et gëtt keng Konklusioun réckgängeg ze maachen.
+L’événement a été modifié depuis la conclusion : remets-le à la main si besoin. ¦ Den Evenement gouf zënter der Konklusioun geännert: setz en, wann néideg, vun Hand zréck.
+Version des empreintes incorrecte. ¦ Falsch Versioun vun den Ofdréck.
+Donnée incorrecte (« items ») : une liste est attendue. ¦ Falsch Donnée („items“): eng Lëscht gëtt erwaart.
+Trop d’empreintes envoyées d’un coup. ¦ Ze vill Ofdréck op eemol geschéckt.
+Donnée incorrecte (« paires »). ¦ Falsch Donnée („paires“).
+Choisis ce qu’on fait des autres photos : corbeille ou versions. ¦ Wiel, wat mat den anere Fotoe geschitt: Dreckskëscht oder Versiounen.
+La photo à garder est introuvable. ¦ D’Foto, déi bleiwe soll, gëtt net fonnt.
+Choisis au moins une photo à fusionner avec celle qu’on garde. ¦ Wiel mindestens eng Foto, déi mat där behalener zesummegefouert gëtt.
+Trop de photos dans ce groupe : fusionne-les en plusieurs fois. ¦ Ze vill Fotoen an dësem Grupp: féier se a méi Etappen zesummen.
+Une des photos du groupe est introuvable (déjà fusionnée ?). ¦ Eng vun de Fotoe vum Grupp gëtt net fonnt (scho zesummegefouert?).
+Cette fusion est déjà annulée. ¦ Dës Fusioun ass scho réckgängeg gemaach.
+La photo écartée n’a pas été trouvée dans le journal. ¦ D’Foto, déi op d’Säit geluecht gouf, gouf am Journal net fonnt.
+Action inconnue sur les images semblables. ¦ Onbekannt Aktioun op ähnleche Biller.
+C’est une sauvegarde de RootsMagic (.rmbackup) : ouvre-la dans RootsMagic (Fichier → Restaurer), puis importe ici le fichier .rmtree. ¦ Dat ass e Backup vu RootsMagic (.rmbackup): maach en a RootsMagic op (Fichier → Restaurer), dann importéier hei de .rmtree-Fichier.
+C’est une base GeneWeb (.gwb), illisible hors de GeneWeb. Dans GeneWeb, fais « gwu » (ou exporte la base en .gw) puis importe ici le fichier .gw. ¦ Dat ass eng GeneWeb-Datebank (.gwb), déi baussent GeneWeb net liesbar ass. A GeneWeb, maach „gwu“ (oder exportéier d’Datebank als .gw), dann importéier hei de .gw-Fichier.
+Le paquet GEDCOM-X (.gedx) n’est pas encore lu : importe plutôt le fichier GEDCOM-X en JSON ou en XML (ou un GEDCOM). ¦ De GEDCOM-X-Pak (.gedx) gëtt nach net gelies: importéier léiwer de GEDCOM-X-Fichier als JSON oder XML (oder e GEDCOM).
+Ce fichier RootsMagic est trop gros (plus de 1 Go). ¦ Dëse RootsMagic-Fichier ass ze grouss (iwwer 1 GB).
+Ce fichier n’est pas une base RootsMagic lisible (il est abîmé, ou ce n’est pas un .rmtree). ¦ Dëse Fichier ass keng liesbar RootsMagic-Datebank (e gouf beschiedegt, oder et ass keen .rmtree).
+Ce fichier RootsMagic est abîmé : il ne s’ouvre pas. ¦ Dëse RootsMagic-Fichier ass beschiedegt: e geet net op.
+Ce fichier RootsMagic est abîmé : une table ne se lit pas. ¦ Dëse RootsMagic-Fichier ass beschiedegt: eng Tabell léisst sech net liesen.
+Ce fichier GEDCOM-X contient un « DOCTYPE » ou des « ENTITY » XML : il est refusé par prudence. ¦ Dëse GEDCOM-X-Fichier enthält en XML-„DOCTYPE“ oder XML-„ENTITY“: e gëtt aus Virsiicht refuséiert.
+Le XML de ce fichier GEDCOM-X est abîmé (ou ce n’est pas du GEDCOM-X). ¦ D’XML vun dësem GEDCOM-X-Fichier ass beschiedegt (oder et ass kee GEDCOM-X).
+Ce fichier GEDCOM-X est trop gros (plus de 300 Mo). ¦ Dëse GEDCOM-X-Fichier ass ze grouss (iwwer 300 MB).
+Le JSON de ce fichier GEDCOM-X est abîmé : il ne peut pas être lu. ¦ D’JSON vun dësem GEDCOM-X-Fichier ass beschiedegt: e kann net gelies ginn.
+Ce fichier n’est pas du GEDCOM-X. ¦ Dëse Fichier ass kee GEDCOM-X.
+Ce fichier GeneWeb est trop gros (plus de 300 Mo). ¦ Dëse GeneWeb-Fichier ass ze grouss (iwwer 300 MB).
+Ce fichier n’est pas un fichier texte GeneWeb (.gw) : il contient des données binaires. Une base GeneWeb (.gwb) ne se lit pas : dans GeneWeb, fais « gwu » (ou « Exporter en .gw ») puis importe ce fichier. ¦ Dëse Fichier ass keen GeneWeb-Textfichier (.gw): en enthält binär Donnéeën. Eng GeneWeb-Datebank (.gwb) ka net gelies ginn: a GeneWeb, maach „gwu“ (oder „Als .gw exportéieren“), dann importéier dëse Fichier.
+Ce fichier GeneWeb a trop de lignes. ¦ Dëse GeneWeb-Fichier huet ze vill Zeilen.
+Ce fichier n’est pas un fichier GeneWeb (.gw) : aucun bloc « fam », « pevt » ou « notes » trouvé. ¦ Dëse Fichier ass keen GeneWeb-Fichier (.gw): kee Block „fam“, „pevt“ oder „notes“ fonnt.
+Lecture du fichier Gramps impossible. ¦ De Gramps-Fichier konnt net gelies ginn.
+Ce fichier Gramps compressé est abîmé. ¦ Dëse kompriméierte Gramps-Fichier ass beschiedegt.
+Ce fichier contient des « ENTITY » XML : il est refusé par prudence. ¦ Dëse Fichier enthält XML-„ENTITY“: e gëtt aus Virsiicht refuséiert.
+Ce fichier contient un « DOCTYPE » XML inattendu : il est refusé par prudence. ¦ Dëse Fichier enthält en onerwaarten XML-„DOCTYPE“: e gëtt aus Virsiicht refuséiert.
+Ce fichier n’est pas un fichier Gramps (balise « database » absente). ¦ Dëse Fichier ass keen Gramps-Fichier (Tag „database“ feelt).
+Le XML de ce fichier Gramps est abîmé : il ne peut pas être lu. ¦ D’XML vun dësem Gramps-Fichier ass beschiedegt: e kann net gelies ginn.
+Impossible d’ouvrir le paquet Gramps (.gpkg). ¦ De Gramps-Pak (.gpkg) konnt net opgemaach ginn.
+Ce paquet Gramps contient trop de fichiers : il n’est pas ouvert. ¦ Dëse Gramps-Pak enthält ze vill Fichieren: e gëtt net opgemaach.
+Ce paquet Gramps est trop gros une fois ouvert pour la place libre de l’ordinateur. ¦ Dëse Gramps-Pak ass, wann e bis opgemaach ass, ze grouss fir déi fräi Plaz um Computer.
+Ce paquet Gramps est anormal (beaucoup trop gros une fois ouvert) : il n’est pas ouvert. ¦ Dëse Gramps-Pak ass net normal (vill ze grouss, wann e bis opgemaach ass): e gëtt net opgemaach.
+Dossier temporaire impossible à créer. ¦ Temporären Dossier kann net erstallt ginn.
+Fichier temporaire impossible à écrire. ¦ Temporäre Fichier kann net geschriwwe ginn.
+Ce paquet Gramps est incomplet (fichier coupé). ¦ Dëse Gramps-Pak ass onvollstänneg (Fichier ofgeschnidden).
+Aucun fichier « data.gramps » dans ce paquet : ce n’est pas un paquet Gramps. ¦ Kee Fichier „data.gramps“ an dësem Pak: et ass kee Gramps-Pak.
+Ce format n’est pas un arbre : choisis un fichier GEDCOM (.ged), Gramps (.gramps, .gpkg), GedZip (.zip), Hérédis (.heredis) ou MacFamilyTree (.mftpkg). ¦ Dëse Format ass kee Bam: wiel e GEDCOM- (.ged), Gramps- (.gramps, .gpkg), GedZip- (.zip), Hérédis- (.heredis) oder MacFamilyTree-Fichier (.mftpkg).
+C’est une sauvegarde complète de LCNDA : elle remplacerait toute ta base. Ouvre-la plutôt depuis Réglages → Sauvegarde. ¦ Dat ass e komplette Backup vun LCNDA: en ersetzt deng ganz Datebank. Maach en léiwer iwwer Astellungen → Backup op.
+Cette archive .zip est abîmée. ¦ Dëst .zip-Archiv ass beschiedegt.
+Ni fichier GEDCOM, ni Hérédis, ni MacFamilyTree dans cette archive. ¦ Weder GEDCOM-, nach Hérédis-, nach MacFamilyTree-Fichier an dësem Archiv.
+Le fichier n’a pas pu être gardé pour l’import. ¦ De Fichier konnt fir den Import net gehale ginn.
+Fichier à importer introuvable : recommence. ¦ Fichier fir ze importéieren net fonnt: fänk nach eng Kéier un.
+Le fichier à importer a été oublié (plus d’un jour) : recommence. ¦ De Fichier fir ze importéieren ass vergiess ginn (méi wéi en Dag): fänk nach eng Kéier un.
+Annulation impossible : cet import a déjà été annulé ou oublié. ¦ Réckgängeg maachen net méiglech: dësen Import gouf scho réckgängeg gemaach oder vergiess.
+Des fiches importées ont déjà été reliées à d’autres : l’import ne peut plus être annulé d’un coup. ¦ Importéiert Fichen sinn scho mat aneren verbonnen: den Import kann net méi op eemol réckgängeg gemaach ginn.
+Aucun acte reçu. ¦ Keen Akt ukomm.
+Aucun acte lisible dans ce fichier : vérifie le choix des colonnes. ¦ Keen liesbaren Akt an dësem Fichier: kontrolléier d’Wiel vun de Spalten.
+Annulation impossible : ce n’est pas un import de relevés. ¦ Réckgängeg maachen net méiglech: dat ass keen Import vun Auszich.
+Aucune personne dans ce tableau : choisis au moins la colonne du nom ou du prénom. ¦ Keng Persoun an dëser Tabell: wiel mindestens d’Spalt vum Numm oder vum Virnumm.
+Aucune source à exporter. ¦ Keng Quell ze exportéieren.
+Ce fichier n’est ni du RIS (.ris) ni du BibTeX (.bib). ¦ Dëse Fichier ass weder RIS (.ris) nach BibTeX (.bib).
+Aucune référence reconnue dans ce fichier. ¦ Keng Referenz an dësem Fichier erkannt.
+Fichier GeoJSON abîmé : il ne peut pas être lu. ¦ GeoJSON-Fichier beschiedegt: e kann net gelies ginn.
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un fichier KML n’utilise pas. ¦ Fichier refuséiert: en enthält XML-Deklaratiounen (DOCTYPE oder ENTITY), déi e KML-Fichier net benotzt.
+Fichier KML abîmé : il ne peut pas être lu. ¦ KML-Fichier beschiedegt: e kann net gelies ginn.
+Ce fichier XML n’est pas un KML (Google Earth). ¦ Dësen XML-Fichier ass kee KML (Google Earth).
+Ce fichier n’est ni un KML (Google Earth) ni un GeoJSON. ¦ Dëse Fichier ass weder e KML (Google Earth) nach e GeoJSON.
+Aucun lieu avec des coordonnées dans ce fichier. ¦ Keng Plaz mat Koordinaten an dësem Fichier.
+Trop de lieux d’un coup. ¦ Ze vill Plazen op eemol.
+Aucune ligne cochée : rien à faire. ¦ Keng Zeil ugekräizt: näischt ze maachen.
+Adresse refusée : seuls les fichiers de data.gouv.fr sont téléchargés. ¦ Adress refuséiert: just Fichiere vun data.gouv.fr ginn erofgelueden.
+Création du fichier temporaire impossible. ¦ Den temporäre Fichier konnt net erstallt ginn.
+Ce fichier n’est pas un fichier des décès de l’INSEE. ¦ Dëse Fichier ass keen Doudesfallfichier vum INSEE.
+Donne un nom au document. ¦ Gëff dem Dokument en Numm.
+Trop de pages (2 000 au plus). ¦ Ze vill Säiten (héchstens 2 000).
+Document trop lourd (24 Mo au plus) : utilise des photos de la base plutôt que des photos importées, ou des photos plus petites. ¦ Dokument ze schwéier (héchstens 24 MB): benotz léiwer Fotoen aus der Datebank amplaz vun importéierten, oder méi kleng Fotoen.
+Ce document a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Dëst Dokument gouf an enger anerer Fënster geännert, zënter dass du et opgemaach hues.
+Impossible de créer le dossier des traitements par lot. ¦ Den Dossier fir d’Stapelveraarbechtunge konnt net erstallt ginn.
+Lot inconnu ou trop ancien : recommence le traitement. ¦ Onbekannte oder ze ale Stapel: fänk d’Veraarbechtung nach eng Kéier un.
+Ce lot est trop grand. ¦ Dëse Stapel ass ze grouss.
+Impossible de ranger le fichier dans les médias. ¦ De Fichier konnt net an de Medien ofgeluecht ginn.
+Média introuvable (il a peut-être été supprimé entre-temps). ¦ Medium net fonnt (e gouf vläicht an der Tëschenzäit geläscht).
+Ce fichier n’est pas encore dans les médias. ¦ Dëse Fichier ass nach net an de Medien.
+Fiche verrouillée : on n’y relie pas de nouveau média. Déverrouille-la d’abord. ¦ Fiche gespaart: et gëtt keen neie Medium domat verbonnen. Maach se als éischt op.
+Nom du fichier manquant. ¦ Numm vum Fichier feelt.
+Ce lot a déjà été annulé, ou il est trop ancien. ¦ Dëse Stapel gouf scho réckgängeg gemaach, oder en ass ze al.
+Analyse expirée : envoie de nouveau le fichier. ¦ Analys ofgelaf: schéck de Fichier nach eng Kéier.
+Choisis un fichier GEDCOM (.ged) ou Gramps (.gramps, .gpkg). ¦ Wiel e GEDCOM- (.ged) oder Gramps-Fichier (.gramps, .gpkg).
+Impossible de créer le dossier de sauvegarde. ¦ Den Dossier fir de Backup konnt net erstallt ginn.
+La base doit d’abord être mise à jour (structure n° 64). ¦ D’Datebank muss als éischt aktualiséiert ginn (Struktur Nr. 64).
+Coordonnées impossibles. ¦ Onméiglech Koordinaten.
+Dossier des données météo impossible à créer. ¦ Dossier fir d’Wiederdonnéeën kann net erstallt ginn.
+Ce fichier est trop petit pour être un pack météo. ¦ Dëse Fichier ass ze kleng fir e Wiederpack ze sinn.
+Ce fichier est trop gros pour être un pack météo (16 Go au plus). ¦ Dëse Fichier ass ze grouss fir e Wiederpack ze sinn (héchstens 16 GB).
+Envoi inconnu ou expiré : recommence l’import. ¦ Onbekannten oder ofgelafen Upload: fänk den Import nach eng Kéier un.
+Morceau du fichier hors de place : recommence l’import. ¦ Stéck vum Fichier op der falscher Plaz: fänk den Import nach eng Kéier un.
+Le fichier envoyé dépasse la taille annoncée : recommence l’import. ¦ De geschéckte Fichier ass méi grouss wéi déi ugekënnegt Gréisst: fänk den Import nach eng Kéier un.
+Ce n’est pas un pack météo de LCNDA (fichier .lcmeteo). ¦ Dat ass kee Wiederpack vun LCNDA (.lcmeteo-Fichier).
+En-tête du pack abîmé. ¦ Kapp vum Pack beschiedegt.
+Le fichier est incomplet (téléchargement interrompu ?) : rien n’a été installé. ¦ De Fichier ass onvollstänneg (Eroflueden ënnerbrach?): näischt gouf installéiert.
+Le fichier est abîmé (empreinte différente) : rien n’a été installé. ¦ De Fichier ass beschiedegt (aneren Ofdrock): näischt gouf installéiert.
+Le pack ne peut pas être lu : rien n’a été installé. ¦ De Pack kann net gelies ginn: näischt gouf installéiert.
+Pack impossible à ranger. ¦ Pack kann net ofgeluecht ginn.
+Sorte de pack inconnue. ¦ Onbekannt Zort vu Pack.
+Ce pack n’est pas dans le dossier des données (le socle livré avec l’app ne se supprime pas). ¦ Dëse Pack ass net am Dateendossier (de Basispack, deen mat der App kënnt, gëtt net geläscht).
+Pack impossible à retirer. ¦ Pack kann net ewechgeholl ginn.
+Un autre pack de cette sorte a été importé entre-temps. ¦ An der Tëschenzäit gouf en anere Pack vun dëser Zort importéiert.
+Action météo inconnue. ¦ Onbekannt Wiederaktioun.
+Métier introuvable. ¦ Beruff net fonnt.
+la structure de la base ne se stabilise pas après 5 passages ¦ d’Struktur vun der Datebank stabiliséiert sech net no 5 Duerchgäng
+Donne un titre à l’événement. ¦ Gëff dem Evenement en Titel.
+Donne l’année de l’événement (entre 1000 et 2100). ¦ Gëff d’Joer vum Evenement un (tëscht 1000 an 2100).
+L’année de fin doit venir après celle du début. ¦ D’Joer vum Enn muss nom Joer vum Ufank kommen.
+Choisis la commune de l’événement. ¦ Wiel d’Gemeng vum Evenement.
+L’adresse du lien doit commencer par http:// ou https://. ¦ D’Adress vum Link muss mat http:// oder https:// ufänken.
+Trop de rushes dans le projet (500 au plus). ¦ Ze vill Rushes am Projet (héchstens 500).
+Un rush du projet n’est pas un média de la base. ¦ E Rush vum Projet ass kee Medium aus der Datebank.
+Impossible de créer le dossier du musée. ¦ Den Dossier vum Musée konnt net erstallt ginn.
+Musée introuvable. ¦ Musée net fonnt.
+Un musée reçu ne se modifie pas. ¦ E kritte Musée kann net geännert ginn.
+Ordre impossible : éléments de salles différentes. ¦ Reiefolleg net méiglech: Elementer aus verschiddene Säll.
+Impossible de ranger le fichier. ¦ De Fichier konnt net ofgeluecht ginn.
+Ce musée n’a pas de livre d’or. ¦ Dëse Musée huet kee Gäschtebuch.
+Il faut un nom et un message. ¦ Et brauch en Numm an e Message.
+Seul un musée reçu peut être supprimé ; le tien se vide salle par salle. ¦ Just e kritte Musée ka geläscht ginn; däin eegene gëtt Sall fir Sall eidel gemaach.
+Ce fichier n’est pas un musée LCNDA (.lcnda-musee.zip). ¦ Dëse Fichier ass kee LCNDA-Musée (.lcnda-musee.zip).
+Ce fichier n’est pas un musée LCNDA. ¦ Dëse Fichier ass kee LCNDA-Musée.
+Donne un nom à la liste. ¦ Gëff der Lëscht en Numm.
+Ajoute au moins une colonne à remplir. ¦ Setz mindestens eng Spalt zum Ausfëllen derbäi.
+Ajoute au moins un champ au formulaire. ¦ Setz mindestens ee Feld an de Formulaire derbäi.
+Ce fichier n’est pas une liste LCNDA. ¦ Dëse Fichier ass keng LCNDA-Lëscht.
+Cette fiche n’est pas dans cette liste. ¦ Dës Fiche ass net an dëser Lëscht.
+Document introuvable : il n’existe pas, ou plus. ¦ Dokument net fonnt: et gëtt et net, oder net méi.
+Intitulé obligatoire. ¦ Titel obligatoresch.
+Donne le nom de la revue. ¦ Gëff den Numm vun der Zäitschrëft un.
+Revue, collection ou série introuvable. ¦ Zäitschrëft, Kollektioun oder Serie net fonnt.
+Choisis la revue de ce numéro. ¦ Wiel d’Zäitschrëft vun dëser Nummer.
+Numéro introuvable. ¦ Nummer net fonnt.
+Donne un titre (quelques mots suffisent). ¦ Gëff en Titel (e puer Wierder ginn duer).
+Donne un nom à ces règles (le journal, la rubrique). ¦ Gëff dëse Reegelen en Numm (d’Zeitung, d’Rubrik).
+Règles introuvables. ¦ Reegelen net fonnt.
+Boucle dans le pedigree : un animal ne peut pas être son propre ancêtre. ¦ Schleef am Pedigree: en Déier ka net säin eegene Virfahr sinn.
+Le père et la mère sont le même animal. ¦ De Papp an d’Mamm sinn dat selwecht Déier.
+Cet animal existe déjà. ¦ Dëst Déier gëtt et schonn.
+Cette suppression est trop ancienne : elle ne contient pas de quoi rendre l’animal. ¦ Dës Läschung ass ze al: si enthält net genuch, fir d’Déier zréckzebréngen.
+Donne un titre à la demande. ¦ Gëff der Ufro en Titel.
+Choisis au moins une photo (une image JPEG, PNG, GIF ou WebP). ¦ Wiel mindestens eng Foto (e JPEG-, PNG-, GIF- oder WebP-Bild).
+Choisis au moins un visage à faire reconnaître (ou trace-le sur la photo). ¦ Wiel mindestens ee Gesiicht, dat erkannt soll ginn (oder zeechen et op der Foto).
+Fichier de réponses manquant. ¦ Äntwertfichier feelt.
+Ce fichier n’est pas un fichier de réponses (il est illisible). ¦ Dëse Fichier ass keen Äntwertfichier (en ass net liesbar).
+Ce fichier n’est pas un fichier de réponses de « Qui est sur cette photo ? ». ¦ Dëse Fichier ass keen Äntwertfichier vu „Wien ass op dëser Foto?“.
+Version de fichier de réponses inconnue. ¦ Onbekannt Versioun vum Äntwertfichier.
+Fichier de réponses refusé : identifiant incorrect. ¦ Äntwertfichier refuséiert: falschen Identifiant.
+Ce fichier répond à une demande qui n’est pas dans cette généalogie. ¦ Dëse Fichier äntwert op eng Ufro, déi net an dëser Genealogie ass.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de cette demande (somme de contrôle). ¦ Äntwertfichier refuséiert: e passt zu kenger geschéckter Versioun vun dëser Ufro (Kontrollsumm).
+Fichier de réponses refusé : la liste des réponses manque. ¦ Äntwertfichier refuséiert: d’Lëscht vun den Äntwerte feelt.
+Fichier de réponses refusé : plus de réponses que de visages. ¦ Äntwertfichier refuséiert: méi Äntwerte wéi Gesiichter.
+Fichier de réponses refusé : une réponse est mal formée. ¦ Äntwertfichier refuséiert: eng Äntwert ass falsch opgebaut.
+Fichier de réponses refusé : une réponse contient des données inattendues. ¦ Äntwertfichier refuséiert: eng Äntwert enthält onerwaart Donnéeën.
+Fichier de réponses refusé : visage inconnu. ¦ Äntwertfichier refuséiert: onbekannt Gesiicht.
+Fichier de réponses refusé : deux réponses pour le même visage. ¦ Äntwertfichier refuséiert: zwou Äntwerte fir dat selwecht Gesiicht.
+Fichier de réponses refusé : nom proposé inconnu. ¦ Äntwertfichier refuséiert: onbekannte proposéierten Numm.
+Ces réponses ont déjà été importées. ¦ Dës Äntwerte goufe scho importéiert.
+Aucune réponse à importer dans ce fichier. ¦ Keng Äntwerten an dësem Fichier ze importéieren.
+Rien à annuler. ¦ Näischt réckgängeg ze maachen.
+Donnée incorrecte (« personnes ») : une liste est attendue. ¦ Falsch Donnée („personnes“): eng Lëscht gëtt erwaart.
+La base n’est pas encore à jour : relance l’app. ¦ D’Datebank ass nach net aktuell: start d’App nei.
+Choisis deux photos de tes médias. ¦ Wiel zwou Fotoen aus denge Medien.
+Choisis deux photos différentes. ¦ Wiel zwou verschidde Fotoen.
+Donne un nom à la comparaison. ¦ Gëff dem Vergläich en Numm.
+Opération inconnue sur les comparaisons de photos. ¦ Onbekannt Operatioun op de Fotovergläicher.
+Action inconnue sur les comparaisons de photos. ¦ Onbekannt Aktioun op de Fotovergläicher.
+Enquête introuvable. ¦ Ënnersichung net fonnt.
+Carte de photos introuvable dans cette généalogie. ¦ Fotokaart an dëser Genealogie net fonnt.
+Période incomprise : écris par exemple « été 2023 » → « juillet 2023 », « 1950 », « entre 1950 et 1960 ». ¦ Period net verstanen: schreif zum Beispill „été 2023“ → „juillet 2023“, „1950“, „entre 1950 et 1960“.
+Photo introuvable sur cette carte (retirée entre-temps ?). ¦ Foto op dëser Kaart net fonnt (an der Tëschenzäit ewechgeholl?).
+Date incomprise : écris par exemple « 14 juillet 2023 », « vers 1950 », « entre 1880 et 1885 ». ¦ Datum net verstanen: schreif zum Beispill „14 juillet 2023“, „vers 1950“, „entre 1880 et 1885“.
+Fiche verrouillée : déverrouille-la avant d’y rattacher ou d’en détacher une photo. ¦ Fiche gespaart: maach se op, ier s du eng Foto domat verbënns oder dovun ewechhuels.
+Cette photo n’a pas de position GPS d’origine. ¦ Dës Foto huet keng ursprénglech GPS-Positioun.
+200 fichiers au plus à la fois. ¦ Héchstens 200 Fichieren op eemol.
+Opération inconnue sur les cartes de photos. ¦ Onbekannt Operatioun op de Fotokaarten.
+Action inconnue sur les cartes de photos. ¦ Onbekannt Aktioun op de Fotokaarten.
+Carte de photos illisible. ¦ Fotokaart net liesbar.
+Ville introuvable dans la liste des villes du monde. ¦ Stad net an der Lëscht vun de Stied vun der Welt fonnt.
+La zone dessinée n’est pas lisible. ¦ Déi gezeechent Zon ass net liesbar.
+Le cercle doit avoir un centre et un rayon entre 5 m et 50 km. ¦ De Krees brauch e Mëttelpunkt an e Radius tëscht 5 m a 50 km.
+Un sommet de la zone n’est pas lisible. ¦ En Eck vun der Zon ass net liesbar.
+Un sommet de la zone n’a pas de coordonnées valides. ¦ En Eck vun der Zon huet keng gëlteg Koordinaten.
+Une zone a besoin d’au moins 3 points différents. ¦ Eng Zon brauch mindestens 3 verschidde Punkten.
+La zone est toute plate : ses points sont alignés. ¦ D’Zon ass ganz flaach: hir Punkte leien op enger Linn.
+Sorte de zone inconnue (cercle ou polygone). ¦ Onbekannt Zort vun Zon (Krees oder Polygon).
+Ce média n’est pas une image. ¦ Dëse Medium ass kee Bild.
+Cette image n’existe plus dans les Médias. ¦ Dëst Bild gëtt et net méi an de Medien.
+Choisis une image (photo, carte postale, gravure, plan). ¦ Wiel e Bild (Foto, Postkaart, Gravur, Plang).
+La photo d’aujourd’hui doit être une autre image. ¦ D’Foto vun haut muss en anert Bild sinn.
+Ce lieu n’existe plus dans la base. ¦ Dës Plaz gëtt et net méi an der Datebank.
+Le point précis a besoin de la latitude et de la longitude. ¦ De genaue Punkt brauch d’Breet an d’Längt.
+Donne au moins un lieu, un point sur la carte ou une zone. ¦ Gëff mindestens eng Plaz, e Punkt op der Kaart oder eng Zon un.
+Choisis où demander de l’aide (entraide ou petite annonce). ¦ Wiel, wou s du no Hëllef frees (géigesäiteg Hëllef oder Kleenannonce).
+Qui a répondu ? Donne un nom ou un pseudo. ¦ Wien huet geäntwert? Gëff en Numm oder e Pseudo un.
+Opération inconnue sur les images de lieux. ¦ Onbekannt Operatioun op de Biller vu Plazen.
+Action inconnue sur les images de lieux. ¦ Onbekannt Aktioun op de Biller vu Plazen.
+Cette personne n’existe plus dans la base. ¦ Dës Persoun gëtt et net méi an der Datebank.
+Choisis l’image du recto. ¦ Wiel d’Bild vun der Virsäit.
+L’image du verso n’existe plus. ¦ D’Bild vun der Récksäit gëtt et net méi.
+Le recto et le verso doivent être deux images différentes. ¦ Virsäit a Récksäit mussen zwee verschidde Biller sinn.
+Cette image a déjà sa fiche de carte postale. ¦ Dëst Bild huet schonn hir Postkaartefiche.
+Le verso choisi appartient déjà à une autre carte postale. ¦ Déi gewielte Récksäit gehéiert schonn zu enger anerer Postkaart.
+L’image du recto a été supprimée entre-temps : la carte ne peut pas revenir. ¦ D’Bild vun der Virsäit gouf an der Tëschenzäit geläscht: d’Kaart kann net zréckkommen.
+Opération inconnue sur les cartes postales. ¦ Onbekannt Operatioun op de Postkaarten.
+Action inconnue sur les cartes postales. ¦ Onbekannt Aktioun op de Postkaarten.
+Cette généalogie a déjà des données : rien n’a été changé. ¦ Dës Genealogie huet schonn Donnéeën: näischt gouf geännert.
+Donne un nom à ton animal. ¦ Gëff dengem Déier en Numm.
+La base d’exemple est déjà ouverte. ¦ D’Beispilldatebank ass schonn op.
+Ce n’est pas la base d’exemple : rien n’a été fait. ¦ Dat ass net d’Beispilldatebank: näischt gouf gemaach.
+Ce n’est pas la base d’exemple. ¦ Dat ass net d’Beispilldatebank.
+Numéro de fiche de mauvaise forme. ¦ Fichenummer an der falscher Form.
+Cette fiche n’existe pas. ¦ Dës Fiche gëtt et net.
+La personne choisie n’existe pas. ¦ Déi gewielt Persoun gëtt et net.
+Choisis une autre personne que l’enfant. ¦ Wiel eng aner Persoun wéi d’Kand.
+Choisis la personne dont il tient son prénom. ¦ Wiel d’Persoun, no där et säi Virnumm huet.
+Les dossiers de preuve ne sont pas encore prêts : relance l’app. ¦ D’Beweisdossieren sinn nach net prett: start d’App nei.
+Dossier de preuve introuvable. ¦ Beweisdossier net fonnt.
+Choisis la personne du dossier. ¦ Wiel d’Persoun vum Dossier.
+Choisis une autre personne. ¦ Wiel eng aner Persoun.
+Cet événement n’est pas sur la fiche de cette personne. ¦ Dësen Evenement ass net op der Fiche vun dëser Persoun.
+Ce dossier est déjà supprimé. ¦ Dësen Dossier ass scho geläscht.
+Ligne du dossier introuvable. ¦ Zeil vum Dossier net fonnt.
+La source ou la citation choisie n’existe plus. ¦ Déi gewielt Quell oder dat gewielt Zitat gëtt et net méi.
+Ce lien parent-enfant n’existe pas. ¦ Dëse Link Elterendeel–Kand gëtt et net.
+Donne un nom à ce profil. ¦ Gëff dësem Profil en Numm.
+Ce profil a trop de réglages. ¦ Dëse Profil huet ze vill Astellungen.
+Partie de puzzle inconnue. ¦ Onbekannt Puzzlespill.
+Image du puzzle absente. ¦ Bild vum Puzzle feelt.
+Image du puzzle refusée. ¦ Bild vum Puzzle refuséiert.
+Taille d’image du puzzle invalide. ¦ Ongëlteg Bildgréisst vum Puzzle.
+Partie de puzzle illisible. ¦ Puzzlespill net liesbar.
+Nombre de pièces invalide (4 à 1000). ¦ Ongëlteg Zuel vu Stécker (4 bis 1000).
+On ne peut pas changer le nombre de pièces d’une partie commencée. ¦ D’Zuel vu Stécker vun engem ugefaangene Spill kann net geännert ginn.
+Pièces du puzzle illisibles. ¦ Stécker vum Puzzle net liesbar.
+Pièces du puzzle abîmées (order). ¦ Stécker vum Puzzle beschiedegt (order).
+Partie de puzzle introuvable dans cette généalogie. ¦ Puzzlespill an dëser Genealogie net fonnt.
+Pièces du puzzle absentes. ¦ Stécker vum Puzzle feelen.
+Partie trop grosse pour être enregistrée (2 Mo au plus). ¦ Spill ze grouss fir ze späicheren (héchstens 2 MB).
+Opération de puzzle inconnue. ¦ Onbekannt Puzzleoperatioun.
+Action de puzzle inconnue. ¦ Onbekannt Puzzleaktioun.
+Date incorrecte : écris-la comme le calendrier la propose. ¦ Falschen Datum: schreif en esou, wéi de Kalenner e proposéiert.
+Liste de questions incorrecte. ¦ Falsch Lëscht vu Froen.
+Donne un titre au questionnaire. ¦ Gëff dem Questionnaire en Titel.
+Ce contact n’est plus dans le Répertoire des vivants. ¦ Dëse Kontakt ass net méi am Adressbuch vun de Liewegen.
+État inconnu. ¦ Onbekannte Status.
+Réponse collée incorrecte. ¦ Agepecht Äntwert falsch.
+Ce fichier n’est pas un fichier de réponses de « Questions aux proches ». ¦ Dëse Fichier ass keen Äntwertfichier vu „Froen un d’Familljememberen“.
+Ce fichier répond à un questionnaire qui n’est pas dans cette généalogie. ¦ Dëse Fichier äntwert op e Questionnaire, deen net an dëser Genealogie ass.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de ce questionnaire (somme de contrôle). ¦ Äntwertfichier refuséiert: e passt zu kenger geschéckter Versioun vun dësem Questionnaire (Kontrollsumm).
+Trop de réponses dans ce fichier. ¦ Ze vill Äntwerten an dësem Fichier.
+Fichier de réponses refusé : numéro de question incorrect. ¦ Äntwertfichier refuséiert: falsch Nummer vun der Fro.
+Fichier de réponses refusé : une question doit être un texte. ¦ Äntwertfichier refuséiert: eng Fro muss en Text sinn.
+Écris la question. ¦ Schreif d’Fro.
+500 questions à toi au plus. ¦ Héchstens 500 eege Froen.
+Opération inconnue sur les questionnaires. ¦ Onbekannt Operatioun op de Questionnairen.
+Action inconnue sur les questionnaires. ¦ Onbekannt Aktioun op de Questionnairen.
+Donne un nom au recueil. ¦ Gëff dem Recueil en Numm.
+Choisis une image pour la couverture. ¦ Wiel e Bild fir den Deckel.
+Donne un nom à la version (ex. « Photos 2015 »). ¦ Gëff der Versioun en Numm (z. B. „Fotoen 2015“).
+Un recueil garde au moins une version. ¦ E Recueil behält mindestens eng Versioun.
+Choisis la version où ranger ces photos. ¦ Wiel d’Versioun, an där dës Fotoen ofgeluecht ginn.
+Cette photo n’est pas sur cette page. ¦ Dës Foto ass net op dëser Säit.
+Cette page est dans un autre recueil. ¦ Dës Säit ass an engem anere Recueil.
+Version du recueil introuvable. ¦ Versioun vum Recueil net fonnt.
+Le média n’existe plus. ¦ De Medium gëtt et net méi.
+Choisis à quoi rattacher le recueil. ¦ Wiel, mat wat de Recueil verbonne gëtt.
+Page d’un autre recueil. ¦ Säit vun engem anere Recueil.
+Recherche de battue introuvable. ¦ Sichaktioun net fonnt.
+Choisis où rattacher l’image. ¦ Wiel, mat wat d’Bild verbonne gëtt.
+Pays inconnu du catalogue. ¦ Land net am Katalog.
+Dossier de téléchargement impossible à créer. ¦ Dossier fir d’Eroflueden kann net erstallt ginn.
+Données de ce pays introuvables. ¦ Donnéeë vun dësem Land net fonnt.
+La France ne peut pas être retirée. ¦ Frankräich kann net ewechgeholl ginn.
+Des battues utilisent des communes de ce pays : retire-les d’abord de ces battues (rien n’a été supprimé). ¦ Sichaktioune benotze Gemengen aus dësem Land: huel se als éischt aus dëse Sichaktiounen eraus (näischt gouf geläscht).
+Personne ou sens de la branche manquant. ¦ Persoun oder Richtung vum Zweig feelt.
+Feuille de mission introuvable. ¦ Missiounsblat net fonnt.
+Date de visite invalide. ¦ Ongëltegen Datum vum Besuch.
+Cote de visite introuvable. ¦ Archivnummer vum Besuch net fonnt.
+La photo de départ n’est plus dans les médias. ¦ D’Startfoto ass net méi an de Medien.
+Masque illisible dans le projet. ¦ Maske am Projet net liesbar.
+Projet trop lourd (40 Mo au plus) : retire des sélections ou des masques. ¦ Projet ze schwéier (héchstens 40 MB): huel Auswielen oder Masken ewech.
+Choisis d’abord la personne du centre. ¦ Wiel als éischt d’Persoun an der Mëtt.
+Personne introuvable : choisis d’abord à qui se rattache cette information. ¦ Persoun net fonnt: wiel als éischt, zu wiem dës Informatioun gehéiert.
+Fiche verrouillée. Déverrouille-la avant de la modifier. ¦ Fiche gespaart. Maach se op, ier s du se änners.
+Cette information n’existe plus : elle a peut-être été supprimée. ¦ Dës Informatioun gëtt et net méi: si gouf vläicht geläscht.
+Trop de lignes de santé (50 000 au plus). ¦ Ze vill Gesondheetszeilen (héchstens 50 000).
+Cette information a déjà été supprimée. ¦ Dës Informatioun gouf scho geläscht.
+Impossible d’enregistrer les réglages de la sauvegarde. ¦ D’Astellunge vum Backup konnten net gespäichert ginn.
+Écris le chemin complet du dossier (par exemple /Volumes/MaCle/LCNDA ou ~/Dropbox/LCNDA). ¦ Schreif de komplette Pfad vum Dossier (zum Beispill /Volumes/MengStick/LCNDA oder ~/Dropbox/LCNDA).
+impossible de nommer la copie ¦ d’Kopie konnt keen Numm kréien
+Une sauvegarde est déjà en cours. ¦ E Backup leeft schonn.
+Impossible de lire la copie. ¦ D’Kopie konnt net gelies ginn.
+Impossible de créer le dossier des sauvegardes. ¦ Den Dossier vun de Backuppe konnt net erstallt ginn.
+Impossible de remplacer la base (est-elle ouverte ailleurs ?). ¦ D’Datebank konnt net ersat ginn (ass se soss anzwousch op?).
+Impossible de mettre la copie en place. ¦ D’Kopie konnt net agesat ginn.
+Identifiant ORCID incorrect : 16 chiffres par groupes de 4 (ex. 0000-0002-1825-0097). ¦ Falschen ORCID-Identifiant: 16 Zifferen a Gruppe vu 4 (z. B. 0000-0002-1825-0097).
+Écris le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL. ¦ Schreif den Numm vum Auteur (z. B. Anne Martin) oder säin HAL-Identifiant.
+Les recensements SocFace ne sont pas installés. ¦ D’SocFace-Vollekszielunge sinn net installéiert.
+Demande de remplissage de mauvaise forme. ¦ Ufro fir auszefëllen an der falscher Form.
+Demande de remplissage illisible. ¦ Ufro fir auszefëllen net liesbar.
+Liste de fiches de mauvaise forme. ¦ Lëscht vu Fichen an der falscher Form.
+Je ne sais pas prendre cela dans la base. ¦ Ech weess net, wéi ech dat aus der Datebank huelen.
+Choisis un dépouillement. ¦ Wiel en Auszuch.
+Ce dépouillement n’existe plus. ¦ Dësen Auszuch gëtt et net méi.
+Choisis une de tes listes. ¦ Wiel eng vun denge Lëschten.
+Il n’y a pas de lignes à envoyer. ¦ Et gëtt keng Zeilen ze schécken.
+Donnée incorrecte dans une ligne. ¦ Falsch Donnée an enger Zeil.
+Je ne sais pas envoyer cela vers la base. ¦ Ech weess net, wéi ech dat an d’Datebank schécken.
+Donne l’année du recensement (par exemple 1836). ¦ Gëff d’Joer vun der Vollekszielung un (zum Beispill 1836).
+Rien à envoyer : toutes les lignes sont laissées de côté. ¦ Näischt ze schécken: all d’Zeile sinn op d’Säit geluecht.
+Jeton d’annulation de mauvaise forme. ¦ Token fir réckgängeg ze maachen an der falscher Form.
+Cet envoi est introuvable. ¦ Dës Sendung gëtt net fonnt.
+Cet envoi a déjà été annulé. ¦ Dës Sendung gouf scho réckgängeg gemaach.
+La dernière modification a changé entre-temps : rien n’a été annulé. ¦ Déi lescht Ännerung huet sech an der Tëschenzäit geännert: näischt gouf réckgängeg gemaach.
+Rien à importer. ¦ Näischt ze importéieren.
+Trop de ménages d’un coup (400 au plus) : coupe le fichier. ¦ Ze vill Haushalter op eemol (héchstens 400): deel de Fichier.
+Rien à importer : aucun ménage avec une année de recensement. ¦ Näischt ze importéieren: keen Haushalt mat engem Joer vun enger Vollekszielung.
+Cet import est déjà annulé, ou introuvable. ¦ Dësen Import gouf scho réckgängeg gemaach, oder e gëtt net fonnt.
+Ici, on range une image (JPG, PNG, WebP, GIF), un PDF ou un texte (.txt). ¦ Hei kanns du e Bild (JPG, PNG, WebP, GIF), e PDF oder en Text (.txt) ofleeën.
+Choisis d’abord la fiche à qui ce document se rapporte. ¦ Wiel als éischt d’Fiche, op déi sech dëst Dokument bezitt.
+Il faut un fichier, un lien ou au moins le texte du document. ¦ Et brauch e Fichier, e Link oder mindestens den Text vum Dokument.
+Données de l’import illisibles. ¦ Donnéeë vum Import net liesbar.
+Cet ajout ne correspond pas à ce document. ¦ Dës Ergänzung passt net zu dësem Dokument.
+Il faut un fichier, un lien, le texte du document ou au moins une ligne à ajouter. ¦ Et brauch e Fichier, e Link, den Text vum Dokument oder mindestens eng Zeil fir derbäizesetzen.
+Choisis d’abord la commune. ¦ Wiel als éischt d’Gemeng.
+Choisis le lieu (ou la fiche) que ce document complète. ¦ Wiel d’Plaz (oder d’Fiche), déi dëst Dokument ergänzt.
+Impossible d’enregistrer l’image retouchée. ¦ Dat retouchéiert Bild konnt net gespäichert ginn.
+Seuls les images, les sons et les vidéos se modifient. ¦ Just Biller, Téin a Videoe kënne geännert ginn.
+Le fichier de cette version n’est plus dans le dossier des médias. ¦ De Fichier vun dëser Versioun ass net méi am Dossier vun de Medien.
+Donne un nom à la version. ¦ Gëff der Versioun en Numm.
+L’original ne se supprime pas. ¦ D’Original gëtt net geläscht.
+L’original n’est plus dans le dossier des médias : affiche d’abord une autre version. ¦ D’Original ass net méi am Dossier vun de Medien: weis als éischt eng aner Versioun.
+Acte introuvable (supprimé ?). ¦ Akt net fonnt (geläscht?).
+Sorte de bien inconnue. ¦ Onbekannt Zort vu Gutt.
+La valeur d’un bien est un nombre (ex. 1200). ¦ De Wäert vun engem Gutt ass eng Zuel (z. B. 1200).
+Donne au moins le défunt (ou le donateur), un héritier ou un bien. ¦ Gëff mindestens de Verstuerwenen (oder de Schenker), en Ierwen oder e Gutt un.
+Acte introuvable (déjà supprimé ?). ¦ Akt net fonnt (scho geläscht?).
+Acte introuvable (rien à remettre). ¦ Akt net fonnt (näischt zréckzesetzen).
+Mode consultation : pas de partage. ¦ Liesmodus: keen Deelen.
+Un numéro de puce n’a que des chiffres (15 en général). ¦ Eng Chipnummer huet just Zifferen (meeschtens 15).
+Rien à supprimer. ¦ Näischt ze läschen.
+Déjà supprimé. ¦ Scho geläscht.
+Trop de points d’un coup (5 000 au plus par envoi). ¦ Ze vill Punkten op eemol (héchstens 5 000 pro Sendung).
+Trop d’animaux d’un coup (5 000 au plus). ¦ Ze vill Déieren op eemol (héchstens 5 000).
+Fichier trop gros : trop de points GPS (500 000 au plus). ¦ Fichier ze grouss: ze vill GPS-Punkten (héchstens 500 000).
+Fichier trop gros : trop de lignes. ¦ Fichier ze grouss: ze vill Zeilen.
+Écris le chemin complet du dossier partagé (par exemple /Volumes/MaCle ou ~/Dropbox). ¦ Schreif de komplette Pfad vum gedeelten Dossier (zum Beispill /Volumes/MengStick oder ~/Dropbox).
+Impossible de créer le rangement dans le dossier partagé. ¦ D’Ofloo am gedeelten Dossier konnt net erstallt ginn.
+Impossible d’écrire la copie de départ. ¦ D’Startkopie konnt net geschriwwe ginn.
+Impossible d’écrire dans le dossier partagé. ¦ Am gedeelten Dossier ka net geschriwwe ginn.
+Choisis d’abord le dossier partagé. ¦ Wiel als éischt de gedeelten Dossier.
+Aucun dossier partagé n’est choisi sur cet ordinateur. ¦ Op dësem Computer ass kee gedeelten Dossier gewielt.
+Cette fusion est déjà annulée, ou introuvable. ¦ Dës Fusioun gouf scho réckgängeg gemaach, oder se gëtt net fonnt.
+Paquet introuvable dans le dossier partagé. ¦ Pak am gedeelten Dossier net fonnt.
+Ce conflit est déjà réglé. ¦ Dëse Konflikt ass scho geléist.
+« Garder les deux » marche pour une note. ¦ „Allebéid behalen“ geet fir eng Notiz.
+La fiche est verrouillée : déverrouille-la d’abord. ¦ D’Fiche ass gespaart: maach se als éischt op.
+Ce conflit n’est pas réglé. ¦ Dëse Konflikt ass net geléist.
+Document trop lourd : partage-le en plusieurs documents. ¦ Dokument ze schwéier: deel et a méi Dokumenter op.
+Document trop lourd (plus de 30 Mo) : range les images dans les médias, ou partage-le en plusieurs documents. ¦ Dokument ze schwéier (iwwer 30 MB): leeë d’Biller an de Medien of, oder deel et a méi Dokumenter op.
+Ce document a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Dëst Dokument gouf soss anzwousch geännert (aneren Reiter oder aner Fënster), zënter dass du et opgemaach hues.
+Document introuvable : enregistre-le d’abord. ¦ Dokument net fonnt: späicher et als éischt.
+Fichier manquant ou trop lourd (plus de 30 Mo). ¦ Fichier feelt oder ass ze schwéier (iwwer 30 MB).
+Donne un titre à la fiche. ¦ Gëff der Fiche en Titel.
+Image de l’acte introuvable. ¦ Bild vum Akt net fonnt.
+Zones ou personnes de l’acte illisibles : rien n’a été changé. ¦ Zonen oder Persoune vum Akt net liesbar: näischt gouf geännert.
+Les Trésors ne sont pas encore prêts sur cette base. ¦ D’Schätz sinn op dëser Datebank nach net prett.
+Média ou fiche introuvable. ¦ Medium oder Fiche net fonnt.
+Dessin trop lourd (plus de 8 Mo) : retire des images importées. ¦ Zeechnung ze schwéier (iwwer 8 MB): huel importéiert Biller ewech.
+Cadre de carte invalide. ¦ Ongëltege Kaarterumm.
+Réponse de Wikipédia illisible. ¦ Äntwert vu Wikipedia net liesbar.
+Une page est trop lourde (plus de 2 Mo) : range les images dans les médias, ou partage-la en deux pages. ¦ Eng Säit ass ze schwéier (iwwer 2 MB): leeë d’Biller an de Medien of, oder deel se an zwou Säiten op.
+Les fichiers en plus sont trop lourds (8 Mo en tout au plus). ¦ D’zousätzlech Fichiere sinn ze schwéier (héchstens 8 MB am Ganzen).
+La feuille de styles ou le script est trop lourd (600 ko au plus). ¦ D’Stylesheet oder de Skript ass ze schwéier (héchstens 600 KB).
+Site trop lourd (plus de 20 Mo) : range les images dans les médias plutôt que dans les pages. ¦ Site ze schwéier (iwwer 20 MB): leeë d’Biller léiwer an de Medien of wéi an de Säiten.
+Ce site a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Dëse Site gouf soss anzwousch geännert (aneren Reiter oder aner Fënster), zënter dass du en opgemaach hues.
+Site introuvable : enregistre-le d’abord. ¦ Site net fonnt: späicher en als éischt.
+PHP est introuvable pour exécuter la page (indique son chemin dans la variable GENEALOGY_PHP). ¦ PHP gëtt net fonnt, fir d’Säit auszeféieren (gëff säi Pfad an der Variabel GENEALOGY_PHP un).
+Impossible de préparer le dossier d’exécution. ¦ Den Dossier fir d’Ausféierung konnt net virbereet ginn.
+PHP n’a pas pu être lancé pour exécuter la page. ¦ PHP konnt net gestart ginn, fir d’Säit auszeféieren.
+Impossible de garder l’aperçu en direct. ¦ D’Live-Virschau konnt net gehale ginn.
+Aperçu expiré. ¦ Virschau ofgelaf.
+Impossible de garder les réglages de publication (dossier des données en lecture seule ?). ¦ D’Astellunge fir d’Verëffentlechung konnten net gehale ginn (Dateendossier just liesbar?).
+Le service demande de patienter (trop de demandes) : réessaie dans une minute. ¦ De Service freet dech ze waarden (ze vill Ufroen): probéier an enger Minutt nach eng Kéier.
+Le nom du serveur FTP n’est pas bon (exemple : ftp.mon-hebergeur.fr). ¦ Den Numm vum FTP-Server ass net richteg (Beispill: ftp.mon-hebergeur.fr).
+Dossier du site incorrect. ¦ Falschen Dossier vum Site.
+Donne le mot de passe FTP. ¦ Gëff d’FTP-Passwuert un.
+Trop de fichiers pour une publication. ¦ Ze vill Fichiere fir eng Verëffentlechung.
+Le site est trop lourd pour être publié d’un coup (plus de 50 Mo). ¦ De Site ass ze schwéier, fir op eemol verëffentlecht ze ginn (iwwer 50 MB).
+Impossible de préparer le site. ¦ De Site konnt net virbereet ginn.
+Réponse de Netlify illisible. ¦ Äntwert vun Netlify net liesbar.
+Netlify n’a pas pu recevoir le site. ¦ Netlify konnt de Site net kréien.
+Réponse de GitHub illisible. ¦ Äntwert vu GitHub net liesbar.
+Le dépôt GitHub doit s’écrire « nom » ou « compte/nom ». ¦ De GitHub-Depot muss als „numm“ oder „kont/numm“ geschriwwe ginn.
+Le FTP sécurisé n’est pas disponible avec ce PHP (curl sans FTPS). ¦ Dat séchert FTP ass mat dësem PHP net disponibel (curl ouni FTPS).
+Donne d’abord le serveur, l’identifiant et le mot de passe FTP. ¦ Gëff als éischt den FTP-Server, den Identifiant an d’Passwuert un.
+Le serveur FTP ne répond pas : vérifie son nom et ta connexion. ¦ De FTP-Server äntwert net: kontrolléier säin Numm an deng Verbindung.
+Le serveur FTP refuse l’identifiant ou le mot de passe. ¦ De FTP-Server refuséiert den Identifiant oder d’Passwuert.
+Le serveur FTP n’a pas de connexion chiffrée valable (TLS) : par sûreté, rien n’est envoyé en clair. ¦ De FTP-Server huet keng gëlteg verschlësselt Verbindung (TLS): aus Sécherheet gëtt näischt onverschlësselt geschéckt.
+Un identifiant Wikidata commence par Q suivi de chiffres (« Q7186 »). ¦ E Wikidata-Identifiant fänkt mat Q un, gefollegt vun Zifferen („Q7186“).
+Coche au moins une chose à ajouter. ¦ Kräiz mindestens eng Saach zum Derbäisetzen un.
+Classeur trop grand : plus de 2 millions de cellules. ¦ Classeur ze grouss: iwwer 2 Millioune Zellen.
+Classeur trop lourd (plus de 40 Mo) : partage-le en plusieurs classeurs. ¦ Classeur ze schwéier (iwwer 40 MB): deel en a méi Classeuren op.
+Ce classeur a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Dëse Classeur gouf an enger anerer Fënster geännert, zënter dass du en opgemaach hues.
+Base SQLite introuvable ou non autorisée. ¦ SQLite-Datebank net fonnt oder net erlaabt.
+Impossible de créer le dossier de configuration. ¦ Den Dossier fir d’Konfiguratioun konnt net erstallt ginn.
+Impossible de supprimer la base active. ¦ Déi aktiv Datebank kann net geläscht ginn.
+Réglages invalides. ¦ Ongëlteg Astellungen.
+Un réglage est trop volumineux. ¦ Eng Astellung ass ze grouss.
+Impossible d’enregistrer les défauts du site. ¦ D’Standardastellunge vum Site konnten net gespäichert ginn.
+Import ZIP impossible : l'extension PHP ZipArchive n'est pas disponible. ¦ ZIP-Import net méiglech: d’PHP-Extensioun ZipArchive ass net disponibel.
+Aucun fichier .csv ou .txt trouvé dans le ZIP ¦ Kee .csv- oder .txt-Fichier am ZIP fonnt
+Lecture du fichier INSEE dans le ZIP impossible ¦ Den INSEE-Fichier am ZIP konnt net gelies ginn
+Création du fichier temporaire impossible ¦ Den temporäre Fichier konnt net erstallt ginn
+Écriture du fichier temporaire impossible ¦ Den temporäre Fichier konnt net geschriwwe ginn
+Lecture du fichier impossible ¦ De Fichier konnt net gelies ginn
+Colonnes non reconnues : ce fichier ne ressemble pas au fichier des personnes décédées de l'INSEE (colonnes attendues, avec ou sans en-tête : nom, prenom (ou nomprenom combiné), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces). ¦ Spalten net erkannt: dëse Fichier gesäit net aus wéi den INSEE-Fichier vun de verstuerwene Persounen (erwaart Spalten, mat oder ouni Kapp: nom, prenom (oder kombinéiert nomprenom), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces).
+Impossible d’enregistrer la liste des généalogies. ¦ D’Lëscht vun de Genealogien konnt net gespäichert ginn.
+Donne un nom à la nouvelle généalogie. ¦ Gëff der neier Genealogie en Numm.
+Impossible de créer le dossier de la généalogie. ¦ Den Dossier vun der Genealogie konnt net erstallt ginn.
+Généalogie introuvable. ¦ Genealogie net fonnt.
+Le nom ne peut pas être vide. ¦ Den Numm kann net eidel sinn.
+La généalogie principale ne peut pas être mise de côté. ¦ D’Haaptgenealogie kann net op d’Säit geluecht ginn.
+Ouvre d’abord une autre généalogie. ¦ Maach als éischt eng aner Genealogie op.
+Impossible de créer le dossier des généalogies mises de côté. ¦ Den Dossier fir d’Genealogien, déi op d’Säit geluecht sinn, konnt net erstallt ginn.
+Impossible de déplacer le dossier de la généalogie. ¦ Den Dossier vun der Genealogie konnt net verréckelt ginn.
+Seules les quinze dernières suppressions sont restaurables. ¦ Just déi lescht fofzéng Läschunge kënnen zréckgeholl ginn.
+Cette suppression ne peut pas être restaurée proprement. ¦ Dës Läschung kann net propper zréckgeholl ginn.
+Type de restauration non pris en charge. ¦ Dës Zort vu Restauratioun gëtt net ënnerstëtzt.
+Événement introuvable dans le snapshot. ¦ Evenement net am Snapshot fonnt.
+Cet événement existe déjà. ¦ Dësen Evenement gëtt et schonn.
+La personne liée à cet événement n’existe plus. ¦ D’Persoun, déi mat dësem Evenement verbonnen ass, gëtt et net méi.
+La famille liée à cet événement n’existe plus. ¦ D’Famill, déi mat dësem Evenement verbonnen ass, gëtt et net méi.
+Média introuvable dans le snapshot. ¦ Medium net am Snapshot fonnt.
+Ce média existe déjà. ¦ Dëse Medium gëtt et schonn.
+Un rattachement du média n’existe plus. ¦ Eng Verbindung vum Medium gëtt et net méi.
+Note introuvable dans le snapshot. ¦ Notiz net am Snapshot fonnt.
+Cette note existe déjà. ¦ Dës Notiz gëtt et schonn.
+Le rattachement de la note n’existe plus. ¦ D’Verbindung vun der Notiz gëtt et net méi.
+Source introuvable dans le snapshot. ¦ Quell net am Snapshot fonnt.
+Un rattachement de la source n’existe plus. ¦ Eng Verbindung vun der Quell gëtt et net méi.
+Cette source existe déjà. ¦ Dës Quell gëtt et schonn.
+La source liée à cette citation n’existe plus. ¦ D’Quell, déi mat dësem Zitat verbonnen ass, gëtt et net méi.
+Battue introuvable dans le snapshot. ¦ Sichaktioun net am Snapshot fonnt.
+Cette battue existe déjà. ¦ Dës Sichaktioun gëtt et schonn.
+La commune de départ n’existe plus. ¦ D’Startgemeng gëtt et net méi.
+Annotation de battue introuvable dans le snapshot. ¦ Notiz vun der Sichaktioun net am Snapshot fonnt.
+Cette annotation existe déjà. ¦ Dës Notiz gëtt et schonn.
+La battue liée à cette annotation n’existe plus. ¦ D’Sichaktioun, déi mat dëser Notiz verbonnen ass, gëtt et net méi.
+Commune liée introuvable dans le snapshot. ¦ Verbonne Gemeng net am Snapshot fonnt.
+Cette commune liée existe déjà. ¦ Dës verbonne Gemeng gëtt et schonn.
+La battue liée à cette commune n’existe plus. ¦ D’Sichaktioun, déi mat dëser Gemeng verbonnen ass, gëtt et net méi.
+Enquête introuvable dans le snapshot. ¦ Ënnersichung net am Snapshot fonnt.
+Cette enquête existe déjà. ¦ Dës Ënnersichung gëtt et schonn.
+La personne principale de l’enquête n’existe plus. ¦ D’Haaptpersoun vun der Ënnersichung gëtt et net méi.
+Piste introuvable dans le snapshot. ¦ Spuer net am Snapshot fonnt.
+Cette piste existe déjà. ¦ Dës Spuer gëtt et schonn.
+L’enquête liée à cette piste n’existe plus. ¦ D’Ënnersichung, déi mat dëser Spuer verbonnen ass, gëtt et net méi.
+Média d’enquête introuvable dans le snapshot. ¦ Medium vun der Ënnersichung net am Snapshot fonnt.
+Ce média d’enquête existe déjà. ¦ Dëse Medium vun der Ënnersichung gëtt et schonn.
+L’enquête liée à ce média n’existe plus. ¦ D’Ënnersichung, déi mat dësem Medium verbonnen ass, gëtt et net méi.
+Le média lié n’existe plus. ¦ De verbonnene Medium gëtt et net méi.
+Impossible de créer le fichier temporaire d’export. ¦ Den temporären Exportfichier konnt net erstallt ginn.
+Fichier de base introuvable ¦ Datebankfichier net fonnt
+Impossible de créer le dossier des bases de test. ¦ Den Dossier vun den Testdatebanke konnt net erstallt ginn.
+Impossible de créer la copie temporaire de restauration. ¦ Déi temporär Kopie fir d’Restauratioun konnt net erstallt ginn.
+Média ou fichier manquant. ¦ Medium oder Fichier feelt.
+Le fichier choisi n’existe pas dans le dossier media. ¦ De gewielte Fichier gëtt et am Dossier media net.
+Base ou sauvegarde de comparaison introuvable. ¦ Datebank oder Backup fir de Vergläich net fonnt.
+Source de comparaison manquante. ¦ Quell fir de Vergläich feelt.
+Impossible d'ouvrir le paquet .mftpkg (format inattendu) ¦ De Pak .mftpkg konnt net opgemaach ginn (onerwaarte Format)
+Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet. ¦ Archivformat net erkannt: weder GEDCOM-Fichier (.ged), nach MacFamilyTree-Datebank (‘database’), nach Hérédis-Fichier (.heredis) am Pak.
+Cette archive contient trop de fichiers : elle n’est pas ouverte. ¦ Dëst Archiv enthält ze vill Fichieren: et gëtt net opgemaach.
+Cette archive est trop grosse une fois ouverte pour la place libre de l’ordinateur. ¦ Dëst Archiv ass, wann et bis opgemaach ass, ze grouss fir déi fräi Plaz um Computer.
+Impossible de créer un dossier temporaire pour l'extraction ¦ Keen temporären Dossier fir d’Extraktioun konnt erstallt ginn
+Base MacFamilyTree introuvable dans le paquet (fichier 'database' absent). ¦ MacFamilyTree-Datebank net am Pak fonnt (Fichier ‘database’ feelt).
+Le nom du type est obligatoire ¦ Den Numm vum Typ ass obligatoresch
+Événement manquant ¦ Evenement feelt
+Événement introuvable ¦ Evenement net fonnt
+Coordonnées manquantes ¦ Koordinate feelen
+Enquête introuvable ¦ Ënnersichung net fonnt
+Indique le centre d’archives à visiter. ¦ Gëff d’Archivzentrum un, dat s du besiche wëlls.
+URL générale du centre invalide. ¦ Ongëlteg allgemeng URL vum Zentrum.
+URL d’information du centre invalide. ¦ Ongëlteg Informatiouns-URL vum Zentrum.
+Dépouillement d’archive introuvable. ¦ Archivauszuch net fonnt.
+Indique une cote à consulter. ¦ Gëff eng Archivnummer zum Consultéieren un.
+Dépouillement introuvable ¦ Auszuch net fonnt
+Indique la lacune constatée. ¦ Gëff d’Lück un, déi s du fonnt hues.
+Indique l’acte ou le document à consulter. ¦ Gëff den Akt oder d’Dokument zum Consultéieren un.
+Ce média n’est pas lié au dépouillement. ¦ Dëse Medium ass net mam Auszuch verbonnen.
+Indique le texte de la ligne. ¦ Gëff den Text vun der Zeil un.
+Ajoute au moins une ligne avant de créer une version. ¦ Setz mindestens eng Zeil derbäi, ier s du eng Versioun erstells.
+Dépouillement manquant ¦ Auszuch feelt
+Média ou dépouillement manquant ¦ Medium oder Auszuch feelt
+Choisis une personne existante ¦ Wiel eng Persoun, déi et gëtt
+Indique un prénom ou un nom pour créer la personne ¦ Gëff e Virnumm oder en Numm un, fir d’Persoun ze erstellen
+Indique au moins un prénom ou un nom relevé ¦ Gëff mindestens ee fonnte Virnumm oder Numm un
+Personne relevée introuvable ¦ Opgeholl Persoun net fonnt
+Action d’écriture inconnue ¦ Onbekannt Schreifaktioun
+Nom d’étiquette obligatoire. ¦ Numm vun der Etikett obligatoresch.
+Étiquette introuvable. ¦ Etikett net fonnt.
+Cible d’étiquette invalide. ¦ Ongëltegt Zil vun der Etikett.
+Portée non prise en charge ¦ Beräich net ënnerstëtzt
+Relation incomplète ¦ Onvollstänneg Relatioun
+Une personne ne peut pas être liée à elle-même ¦ Eng Persoun ka net mat sech selwer verbonne ginn
+Impossible : une personne et un animal ne peuvent pas être parents ou conjoints l’un de l’autre. ¦ Onméiglech: eng Persoun an en Déier kënnen net Elteren oder Partner vuneneen sinn.
+Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant). ¦ Onméiglech: dës Persoun wier gläichzäiteg Virfahr an Nokomm vun där anerer. Kontrolléier d’Richtung vum Link (Elterendeel oder Kand).
+Événement lié introuvable pour cette personne. ¦ Verbonnenen Evenement fir dës Persoun net fonnt.
+Hypothèse introuvable ¦ Hypothees net fonnt
+Année de recensement invalide ¦ Ongëltegt Joer vun der Vollekszielung
+Personne liée introuvable ¦ Verbonne Persoun net fonnt
+Nom du membre obligatoire ¦ Numm vum Member obligatoresch
+Cette personne est déjà le membre principal de ce foyer : modifie plutôt sa ligne. ¦ Dës Persoun ass schonn den Haaptmember vun dësem Haushalt: änner léiwer hir Zeil.
+Le membre principal se modifie depuis le recensement, il ne se retire pas ici. ¦ Den Haaptmember gëtt vun der Vollekszielung aus geännert, hei gëtt en net ewechgeholl.
+Type de rattachement invalide ¦ Ongëlteg Zort vu Verbindung
+Référence ou personne manquante ¦ Referenz oder Persoun feelt
+Cet événement n’est pas lié à cette personne ¦ Dësen Evenement ass net mat dëser Persoun verbonnen
+Cette sépulture n’est pas liée à cette personne ¦ Dëst Graf ass net mat dëser Persoun verbonnen
+Choisis au moins un média ¦ Wiel mindestens ee Medium
+Aucun nouveau média à lier ¦ Keen neie Medium fir ze verbannen
+Ce recensement n’est pas lié à cette personne ¦ Dës Vollekszielung ass net mat dëser Persoun verbonnen
+Entrée introuvable ¦ Androung net fonnt
+Fusion impossible : on ne fusionne pas une personne avec un animal. ¦ Fusioun net méiglech: eng Persoun gëtt net mat engem Déier zesummegefouert.
+Type Décès introuvable ¦ Typ Doud net fonnt
+Personne et titre de l’enquête obligatoires ¦ Persoun an Titel vun der Ënnersichung obligatoresch
+Enquête manquante ¦ Ënnersichung feelt
+Un suivi de registre choisi n’existe plus. ¦ E gewielte Suivi vun engem Regëster gëtt et net méi.
+Lien de suivi invalide. ¦ Ongëltege Suivi-Link.
+Enquête et intitulé obligatoires ¦ Ënnersichung an Titel obligatoresch
+Cette piste n’a pas de rappel. ¦ Dës Spuer huet keng Erënnerung.
+Date du rappel obligatoire. ¦ Datum vun der Erënnerung obligatoresch.
+Titre du rappel obligatoire. ¦ Titel vun der Erënnerung obligatoresch.
+Titre de budget obligatoire. ¦ Titel vum Budget obligatoresch.
+Ligne de budget introuvable. ¦ Budgetszeil net fonnt.
+Ligne de budget manquante. ¦ Budgetszeil feelt.
+Le destinataire (mairie, archives, greffe…) est obligatoire. ¦ Den Empfänger (Gemeng, Archiven, Greffe…) ass obligatoresch.
+L’objet du courrier est obligatoire. ¦ De Sujet vum Bréif ass obligatoresch.
+La personne liée est introuvable. ¦ Déi verbonne Persoun gëtt net fonnt.
+Titre et commune de départ obligatoires. ¦ Titel a Startgemeng obligatoresch.
+Commune de départ introuvable dans les contours. ¦ Startgemeng net an de Konturen fonnt.
+Commune liée manquante. ¦ Verbonne Gemeng feelt.
+Commune liée introuvable. ¦ Verbonne Gemeng net fonnt.
+Commune liée invalide. ¦ Ongëlteg verbonne Gemeng.
+Dossier introuvable pour cette enquête. ¦ Dossier fir dës Ënnersichung net fonnt.
+Média évalué introuvable ¦ Bewäertte Medium net fonnt
+Média d’enquête manquant. ¦ Medium vun der Ënnersichung feelt.
+Média d’enquête introuvable. ¦ Medium vun der Ënnersichung net fonnt.
+Paramètres manquants ¦ Parameter feelen
+Événement invalide. ¦ Ongëltegen Evenement.
+Donne un nom au dossier ¦ Gëff dem Dossier en Numm
+Choisis au moins un média à déplacer ¦ Wiel mindestens ee Medium fir ze verréckelen
+Dossier de destination invalide ¦ Ongëltegen Zildossier
+Statut invalide : choisis Vivant, Décédé ou Inconnu. ¦ Ongëltege Status: wiel Lieweg, Verstuerwen oder Onbekannt.
+Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version). ¦ Dës Fiche gouf an enger anerer Fënster geännert, zënter dass du se opgemaach hues: lued se nei, fir d’Ännerungen ze gesinn (deng Ännerunge sinn net verluer: si bleiwen an dëser Fënster; kopéier se, ier s du nei lueds, oder wiel „Trotzdem späicheren“, fir déi aner Versioun z’ersetzen).
+Cette suppression est trop ancienne : elle ne contient pas de quoi restaurer la fiche. ¦ Dës Läschung ass ze al: si enthält net genuch, fir d’Fiche zréckzesetzen.
+Cette fiche existe déjà. ¦ Dës Fiche gëtt et schonn.
+Personne introuvable : la fiche a peut-être été supprimée. ¦ Persoun net fonnt: d’Fiche gouf vläicht geläscht.
+Cette image source n’est pas liée à la fiche. ¦ Dëst Quellebild ass net mat der Fiche verbonnen.
+Média de preuve introuvable ¦ Beweismedium net fonnt
+Famille ou type d’événement manquant ¦ Famill oder Zort vun Evenement feelt
+Personne ou type d’événement manquant ¦ Persoun oder Zort vun Evenement feelt
+Type d’événement introuvable : choisis-en un dans la liste. ¦ Zort vun Evenement net fonnt: wiel eng aus der Lëscht.
+Événement ou type manquant ¦ Evenement oder Zort feelt
+Personne ou nom de la fiche manquant ¦ Persoun oder Numm vun der Fiche feelt
+Choisis l’événement à sourcer ¦ Wiel den Evenement, deen eng Quell kritt
+Média manquant ¦ Medium feelt
+Rotation disponible uniquement pour les images. ¦ Dréinen ass just fir Biller disponibel.
+Rotation impossible : l’extension PHP GD n’est pas disponible. ¦ Dréinen net méiglech: d’PHP-Extensioun GD ass net disponibel.
+Format image non pris en charge pour la rotation. ¦ Bildformat fir d’Dréinen net ënnerstëtzt.
+Impossible de lire l’image. ¦ D’Bild konnt net gelies ginn.
+Impossible d’enregistrer l’image tournée. ¦ Dat gedréint Bild konnt net gespäichert ginn.
+Modèle HTR inconnu ¦ Onbekannten HTR-Modell
+La reconnaissance manuscrite est disponible uniquement sur les images. ¦ D’Handschrëfterkennung ass just op Biller disponibel.
+Image améliorée : écriture impossible. ¦ Verbessert Bild: konnt net geschriwwe ginn.
+La reconnaissance d’écriture n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois). ¦ D’Schrëfterkennung ass nach net installéiert: Astellungen → Schrëfterkennung (HTR) → „Installéieren“ (just eng Kéier).
+Impossible de lancer le service HTR local. ¦ De lokalen HTR-Service konnt net gestart ginn.
+Cette image n’est pas rattachée à la personne ¦ Dëst Bild ass net mat der Persoun verbonnen
+Ordre des médias manquant ¦ Reiefolleg vun de Medie feelt
+Type de média invalide. ¦ Ongëlteg Zort vu Medium.
+Référence ou personne manquante. ¦ Referenz oder Persoun feelt.
+Cet événement n’est pas lié à cette personne. ¦ Dëst Evenement ass net mat dëser Persoun verbonnen.
+Choisis au moins deux médias pour créer un document groupé. ¦ Wiel mindestens zwee Medien, fir e gruppéiert Dokument z’erstellen.
+Un des médias choisis n’est pas lié à cet élément. ¦ Ee vun de gewielte Medien ass net mat dësem Element verbonnen.
+Document groupé manquant. ¦ Gruppéiert Dokument feelt.
+Document groupé introuvable. ¦ Gruppéiert Dokument net fonnt.
+Ordre des médias manquant. ¦ Reiefolleg vun de Medien feelt.
+Nom de branche obligatoire. ¦ Den Numm vum Zweig ass obligatoresch.
+Nom de vue obligatoire ¦ Den Numm vun der Usiicht ass obligatoresch
+Le terme est requis ¦ De Begrëff ass obligatoresch
+Sépulture introuvable ¦ Graf net fonnt
+Cette personne est déjà rattachée à une sépulture ¦ Dës Persoun ass schonn un e Graf verbonnen
+Sépulture manquante ¦ Graf feelt
+Cette personne est déjà rattachée à une autre sépulture ¦ Dës Persoun ass schonn un en anert Graf verbonnen
+Cette personne est déjà associée à cette sépulture ¦ Dës Persoun ass schonn un dëst Graf verbonnen
+Référence manquante ¦ Referenz feelt
+Cette personne n’est pas rattachée à cette sépulture ¦ Dës Persoun ass net un dëst Graf verbonnen
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Déi lescht Persoun kann net ewechgeholl ginn: läsch d’Graf, wann et néideg ass
+Ce média n’est pas accessible depuis cette fiche ¦ Dëse Medium ass vun dëser Fiche aus net erreechbar
+Ce rattachement existe déjà ¦ Dës Verbindung gëtt et schonn
+Données manquantes ¦ Donnéeë feelen
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Déi lescht Verbindung kann net ewechgeholl ginn — läsch de Medium, wann s du e ganz ewechhuele wëlls
+Méthode refusée ¦ Method refuséiert
+Personne, annotation de battue ou dépouillement manquant ¦ Persoun, Notiz vun der Sichaktioun oder Auszuch feelt
+Aucun fichier reçu ¦ Kee Fichier ukomm
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ Eng Postkaart mat Recto/Verso muss genee zwee Biller hunn: Recto, dann Verso.
+Dossier d’enquête introuvable. ¦ Dossier vun der Ënnersichung net fonnt.
+Annotation de battue introuvable. ¦ Notiz vun der Sichaktioun net fonnt.
+Choisis le type de l’événement à créer. ¦ Wiel d’Aart vum Evenement, dat s du erstelle wëlls.
+Ce recensement n’est pas rattaché à cette personne. ¦ Dës Vollekszielung ass net mat dëser Persoun verbonnen.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Kee Fichier ukomm: wiel e nach eng Kéier.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ Eng Postkaart mat Recto/Verso dierf nëmmen zwee Biller hunn.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Dëse Fichier schéngt schonn importéiert ze sinn („{file}“ den {date}, {n} Linn(en)). Bestäteg, wann s de en trotzdeem importéiere wëlls.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Fiche gespaart ({name}). Maach se op, éier s du dëst Koppel änners.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Fusioun net méiglech: {a} an {b} sinn e Koppel. Zwee Partner sinn net déi selwecht Persoun.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Fusioun net méiglech: {a} ass e Virfahr vun {b}. E Virfahr a säin Nokomme sinn net déi selwecht Persoun.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Dës Parzell ass schonn an denger Lëscht (Fiche Nr. {n}): maach déi op, amplaz eng zweet z’erstellen.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ Du hues schonn {n} Fotokaarten: läsch eng, fir eng aner z’erstellen.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ Déi {n} ugefaange Puzzle gi gehalen: maach een fäerdeg oder läsch een, fir en neien unzefänken.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ Déi {n} Grafiken a Widgete gi gehalen: läsch eng, fir eng nei z’erstellen.
+Le champ « {label} » est obligatoire. ¦ D’Feld „{label}“ ass obligatoresch.
+Le champ « {label} » est à remplir. ¦ D’Feld „{label}“ muss ausgefëllt ginn.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ „{name}“ ass e Weibchen: et kann net de Papp sinn.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ „{name}“ ass e Männchen: et kann net d’Mamm sinn.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Dossier net fonnt: {dir} (USB-Stick oder Disk ausgestach?). De Backup gëtt gemaach, soubal en erëm do ass.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Dossier net fonnt: {dir} (USB-Stick ausgestach?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Gedeelten Dossier net fonnt: {dir} (USB-Stick ausgestach?). Näischt ass verluer: deng Ännerunge ginn dat nächst Kéier fort.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Dës Genealogie ass schonn um Computer „{name}“ op. Maach se do fir d’éischt zou: zwee Computeren, déi an dee selwechte Fichier schreiwen, kënnen e futti maachen.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Dës Aart Fichier kënnt net an d’Medien (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Dës Aart Fichier kënnt net an d’Medien (ouni Extensioun).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Den Inhalt vum Fichier passt net zu senger Extensioun (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Net genuch Plaz op der Disk, fir dëse Backup opzemaachen (et brauch ongeféier {n} MB fräi).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Net genuch Plaz op der Disk, fir de komplette Backup virzebereeden (et brauch ongeféier {n} MB fräi).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ Dësen Dossier huet schonn {n} Linnen: maach en aneren op.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Wiel d’Fiche vun der Persoun fir d’Gesiicht {n} (oder „Méi spéit“).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Wiel déi betraffe Persoun fir den Zeienaussoen „{q}“.
+La page {n} existe déjà. ¦ D’Säit {n} gëtt et schonn.
+Cette date est avant sa naissance ({date}) ¦ Dësen Datum ass virun hirer Gebuert ({date})
+Cette date est après son décès ({date}) ¦ Dësen Datum ass no hirem Doud ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ De genauen Datum vun der Gebuert vu(n) {name} ass net bekannt.
+Commune inconnue. ¦ Onbekannt Gemeng.
+Adresse inconnue. ¦ Onbekannt Adress.
+Position impossible. ¦ Onméiglech Positioun.
+Service d’archives introuvable. ¦ Archivdéngscht net fonnt.
+Adresse e-mail invalide. ¦ Ongëlteg E-Mail-Adress.
+Cette fiche n’existe plus. ¦ Dës Fiche gëtt et net méi.
+Fiche introuvable. ¦ Fiche net fonnt.
+Fiche introuvable ¦ Fiche net fonnt
+Profil inconnu. ¦ Onbekannte Profil.
+Sorte inconnue. ¦ Onbekannt Aart.
+Sorte introuvable. ¦ Aart net fonnt.
+Demande Discogs inconnue. ¦ Onbekannt Discogs-Ufro.
+Demande MusicBrainz inconnue. ¦ Onbekannt MusicBrainz-Ufro.
+Demande Open Library inconnue. ¦ Onbekannt Open-Library-Ufro.
+Demande Wikidata inconnue. ¦ Onbekannt Wikidata-Ufro.
+Demande TMDb inconnue. ¦ Onbekannt TMDb-Ufro.
+Demande iTunes inconnue. ¦ Onbekannt iTunes-Ufro.
+Source d’import inconnue. ¦ Onbekannt Importquell.
+Impossible d’enregistrer l’image. ¦ D’Bild konnt net gespäichert ginn.
+Image illisible. ¦ Bild net liesbar.
+Image trop lourde (15 Mo au plus). ¦ Bild ze schwéier (maximal 15 MB).
+Projet introuvable. ¦ Projet net fonnt.
+Dossier introuvable. ¦ Dossier net fonnt.
+Dossier introuvable ¦ Dossier net fonnt
+Fichier trop gros. ¦ Fichier ze grouss.
+Fichier Zotero RDF illisible. ¦ Zotero-RDF-Fichier net liesbar.
+Fichier JSON illisible. ¦ JSON-Fichier net liesbar.
+Fichier EndNote XML illisible. ¦ EndNote-XML-Fichier net liesbar.
+Son introuvable. ¦ Toun net fonnt.
+Zones illisibles. ¦ Zonen net liesbar.
+Transcription illisible. ¦ Transkriptioun net liesbar.
+Transcription trop longue (5 000 lignes au plus). ¦ Transkriptioun ze laang (maximal 5 000 Linnen).
+Cette base ne contient aucune personne. ¦ An dëser Datebank ass keng Persoun.
+Impossible d’ouvrir l’archive. ¦ D’Archiv konnt net opgemaach ginn.
+Aucune base (.db) dans cette archive. ¦ Keng Datebank (.db) an dësem Archiv.
+Fichier introuvable ou illisible. ¦ Fichier net fonnt oder net liesbar.
+Fiche trop volumineuse. ¦ Fiche ze grouss.
+Tableau introuvable. ¦ Tableau net fonnt.
+Tableau trop lourd : retire quelques dessins. ¦ Tableau ze schwéier: huel e puer Zeechnungen ewech.
+Tableau parent introuvable. ¦ Iwwergeuerdenten Tableau net fonnt.
+Parcelle introuvable. ¦ Parzell net fonnt.
+Lieu introuvable. ¦ Plaz net fonnt.
+Couche illisible. ¦ Schicht net liesbar.
+Couche trop lourde (8 Mo au plus). ¦ Schicht ze schwéier (maximal 8 MB).
+Couche introuvable. ¦ Schicht net fonnt.
+Carte illisible. ¦ Kaart net liesbar.
+Fichier d’essai introuvable. ¦ Testfichier net fonnt.
+Copie impossible. ¦ Kopie net méiglech.
+Fichier illisible. ¦ Fichier net liesbar.
+Citation introuvable. ¦ Zitat net fonnt.
+Citation introuvable ¦ Zitat net fonnt
+Objet introuvable ¦ Objet net fonnt
+Objet introuvable. ¦ Objet net fonnt.
+Souvenir introuvable ¦ Andenken net fonnt
+Type inconnu ¦ Onbekannt Aart
+Adresse invalide ¦ Ongëlteg Adress
+Salon introuvable ¦ Salon net fonnt
+Alerte inconnue. ¦ Onbekannten Alarm.
+Texte illisible. ¦ Text net liesbar.
+Date d’envoi incorrecte. ¦ Falscht Schéckdatum.
+Courrier introuvable. ¦ Bréif net fonnt.
+Cousinade introuvable. ¦ Familljentreffen net fonnt.
+Champ inconnu. ¦ Onbekannt Feld.
+Champ inconnu ¦ Onbekannt Feld
+Valeur hors limites. ¦ Wäert ausserhalb vun de Grenzen.
+Liste inconnue. ¦ Onbekannt Lëscht.
+Widget inconnu. ¦ Onbekannte Widget.
+Ensemble inconnu. ¦ Onbekannt Ensembel.
+Choisis au moins 2 ensembles. ¦ Wiel mindestens 2 Ensemblen.
+Choisis au moins deux personnes. ¦ Wiel mindestens zwou Persounen.
+Choisis deux personnes. ¦ Wiel zwou Persounen.
+Diagramme introuvable. ¦ Diagramm net fonnt.
+Foyer inconnu. ¦ Onbekannte Stot.
+Test introuvable. ¦ Test net fonnt.
+Correspondance introuvable. ¦ Iwwereneestëmmung net fonnt.
+Groupe introuvable. ¦ Grupp net fonnt.
+Format d’export inconnu. ¦ Onbekannte Format fir den Export.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Export net méiglech: d’PHP-Extensioun ZipArchive feelt op dësem Computer.
+Fichier temporaire impossible. ¦ Temporäre Fichier net méiglech.
+Employeur sans nom. ¦ Patron ouni Numm.
+Photo introuvable. ¦ Foto net fonnt.
+Visage introuvable. ¦ Gesiicht net fonnt.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ ePub net méiglech: d’PHP-Extensioun ZipArchive feelt.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Dokument net méiglech: d’PHP-Extensioun ZipArchive feelt.
+Livret introuvable. ¦ Broschür net fonnt.
+Graphique inconnu (identifiant invalide). ¦ Onbekannt Grafik (ongëltegen Identifiant).
+Graphique illisible. ¦ Grafik net liesbar.
+Graphique illisible (champ inconnu). ¦ Grafik net liesbar (onbekannt Feld).
+Graphique illisible (parties). ¦ Grafik net liesbar (Deeler).
+Graphique introuvable. ¦ Grafik net fonnt.
+Lien impossible ¦ Verbindung net méiglech
+Voyage introuvable ¦ Rees net fonnt
+Placement introuvable ¦ Placement net fonnt
+Armoiries introuvables ¦ Wope net fonnt
+Circuit introuvable ¦ Rondrees net fonnt
+Ligne introuvable ¦ Linn net fonnt
+Ligne introuvable. ¦ Linn net fonnt.
+Circuit manquant ¦ Rondrees feelt
+Aucun fichier CSV dans ce ZIP. ¦ Kee CSV-Fichier an dësem ZIP.
+Aucune ligne utilisable dans ce fichier. ¦ Keng brauchbar Linn an dësem Fichier.
+Acte ou document manquant ¦ Akt oder Dokument feelt
+Chiffrement impossible. ¦ Verschlësselung net méiglech.
+Copie introuvable ¦ Kopie net fonnt
+Copie introuvable. ¦ Kopie net fonnt.
+Harmonisation introuvable. ¦ Harmoniséierung net fonnt.
+Bloc introuvable ¦ Block net fonnt
+Nom manquant. ¦ Numm feelt.
+Enregistrement impossible. ¦ Späicheren net méiglech.
+Source inconnue. ¦ Onbekannt Quell.
+Pack inconnu. ¦ Onbekannte Pak.
+Pack trop gros (150 Mo au plus). ¦ Pak ze grouss (maximal 150 MB).
+GLB illisible. ¦ GLB net liesbar.
+OBJ illisible. ¦ OBJ net liesbar.
+Maison introuvable. ¦ Haus net fonnt.
+Recensement introuvable. ¦ Vollekszielung net fonnt.
+Recensement introuvable ¦ Vollekszielung net fonnt
+Fichier 3D trop gros (30 Mo au plus). ¦ 3D-Fichier ze grouss (maximal 30 MB).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Installatiounsprogramm net fonnt (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Onbekannt Installatiounsufro.
+Lecture inconnue. ¦ Onbekannt Liesung.
+Lecture inconnue (ou trop ancienne). ¦ Onbekannt Liesung (oder ze al).
+Preuve introuvable. ¦ Beweis net fonnt.
+Preuve introuvable ¦ Beweis net fonnt
+Empreinte d’image incorrecte. ¦ Falsche Fangerofdrock vum Bild.
+Empreinte d’image incorrecte (couleurs). ¦ Falsche Fangerofdrock vum Bild (Faarwen).
+Empreinte d’image incorrecte (points). ¦ Falsche Fangerofdrock vum Bild (Punkten).
+Fusion impossible ici. ¦ Fusioun hei net méiglech.
+Fusion inconnue. ¦ Onbekannt Fusioun.
+Fusion introuvable. ¦ Fusioun net fonnt.
+Fusion impossible ¦ Fusioun net méiglech
+Annulation impossible ici. ¦ Réckgängeg maachen ass hei net méiglech.
+Fichier RootsMagic introuvable. ¦ RootsMagic-Fichier net fonnt.
+Aucune personne dans ce fichier GEDCOM-X. ¦ Keng Persoun an dësem GEDCOM-X-Fichier.
+Annulation impossible : import inconnu. ¦ Réckgängeg maachen net méiglech: onbekannten Import.
+Fichier trop gros (20 Mo au plus). ¦ Fichier ze grouss (maximal 20 MB).
+Aucun point dans ce GeoJSON. ¦ Kee Punkt an dësem GeoJSON.
+Document introuvable. ¦ Dokument net fonnt.
+Document illisible. ¦ Dokument net liesbar.
+Cette action s’envoie en POST. ¦ Dës Aktioun gëtt per POST geschéckt.
+Lot inconnu. ¦ Onbekannte Lot.
+Fichier vide. ¦ Eidele Fichier.
+Fichier vide ¦ Eidele Fichier
+Sortie inconnue. ¦ Onbekannten Output.
+Analyse introuvable. ¦ Analys net fonnt.
+Altitude impossible : entre −450 et 8 900 m. ¦ Onméiglech Héicht: tëscht −450 an 8 900 m.
+Envoi inconnu. ¦ Onbekannte Versand.
+Projet illisible. ¦ Projet net liesbar.
+Rush illisible. ¦ Rush net liesbar.
+Projet trop lourd (4 Mo au plus). ¦ Projet ze schwéier (maximal 4 MB).
+Salle introuvable. ¦ Sall net fonnt.
+Fichier trop lourd. ¦ Fichier ze schwéier.
+Salle ou œuvre introuvable. ¦ Sall oder Wierk net fonnt.
+Import impossible : l’extension PHP zip manque. ¦ Import net méiglech: d’PHP-Extensioun zip feelt.
+Liste introuvable. ¦ Lëscht net fonnt.
+Ligne invalide. ¦ Ongëlteg Linn.
+Cette liste n’existe plus. ¦ Dës Lëscht gëtt et net méi.
+Personne manquante. ¦ Persoun feelt.
+Personne manquante ¦ Persoun feelt
+Adresse Internet invalide ¦ Ongëlteg Internetadress
+Adresse Internet invalide. ¦ Ongëlteg Internetadress.
+Statut inconnu. ¦ Onbekannte Status.
+Revue introuvable. ¦ Zäitschrëft net fonnt.
+Article introuvable. ¦ Artikel net fonnt.
+Quoi supprimer ? ¦ Wat soll geläscht ginn?
+Annonce introuvable. ¦ Annonce net fonnt.
+Animal introuvable. ¦ Déier net fonnt.
+Demande introuvable. ¦ Ufro net fonnt.
+Visage incorrect. ¦ Falscht Gesiicht.
+Choix incorrect. ¦ Falsch Wiel.
+Comparaison introuvable. ¦ Vergläich net fonnt.
+Image introuvable. ¦ Bild net fonnt.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Breedegrad tëscht -90 an 90, Längegrad tëscht -180 an 180.
+Cette demande d’entraide n’existe plus. ¦ Dës Hëllefsufro gëtt et net méi.
+Cette annonce n’existe plus. ¦ Dës Annonce gëtt et net méi.
+Carte postale introuvable. ¦ Postkaart net fonnt.
+Choix inconnu. ¦ Onbekannt Wiel.
+Niveau inconnu. ¦ Onbekannten Niveau.
+Seuls tes propres profils se modifient ici. ¦ Hei kanns du nëmmen deng eege Profiller änneren.
+Seuls tes propres profils se suppriment. ¦ Du kanns nëmmen deng eege Profiller läschen.
+Profil introuvable. ¦ Profil net fonnt.
+Questionnaire introuvable. ¦ Questionnaire net fonnt.
+Question incorrecte. ¦ Falsch Fro.
+Choix incorrects. ¦ Falsch Wiel.
+Question introuvable. ¦ Fro net fonnt.
+Recueil introuvable. ¦ Sammlung net fonnt.
+Aucune photo. ¦ Keng Foto.
+Page introuvable. ¦ Säit net fonnt.
+Rattachement inconnu. ¦ Onbekannt Verbindung.
+Bloc inconnu. ¦ Onbekannte Block.
+Village introuvable. ¦ Duerf net fonnt.
+Pays non disponible. ¦ Land net disponibel.
+Branche introuvable ¦ Zweig net fonnt
+Branche introuvable. ¦ Zweig net fonnt.
+Import indisponible. ¦ Import net disponibel.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ Keen DOI erkannt: e fänkt mat „10.“ un (z. B. 10.1038/251123a0), oder setz d’Adress https://doi.org/… an
+Source inconnue (DOI, ORCID ou HAL). ¦ Onbekannt Quell (DOI, ORCID oder HAL).
+Ligne inconnue. ¦ Onbekannt Linn.
+Report inconnu. ¦ Onbekannt Verschiebung.
+Rappel introuvable. ¦ Erënnerung net fonnt.
+Piste introuvable. ¦ Spuer net fonnt.
+Statistique inconnue. ¦ Onbekannt Statistik.
+Ligne illisible. ¦ Linn net liesbar.
+Diaporama introuvable. ¦ Diashow net fonnt.
+Diaporama trop lourd. ¦ Diashow ze schwéier.
+Foyer SocFace introuvable. ¦ SocFace-Stot net fonnt.
+Ligne SocFace introuvable. ¦ SocFace-Linn net fonnt.
+Sorte d’import inconnue. ¦ Onbekannt Aart vun Import.
+Import inconnu. ¦ Onbekannten Import.
+Ce lieu n’existe plus. ¦ Dës Plaz gëtt et net méi.
+L’original garde son nom. ¦ D’Original behält säin Numm.
+Bien inconnu. ¦ Onbekannte Gutt.
+Acte introuvable. ¦ Akt net fonnt.
+Site introuvable. ¦ Site net fonnt.
+Marque introuvable. ¦ Mark net fonnt.
+Observation introuvable. ¦ Observatioun net fonnt.
+Comptage introuvable. ¦ Zielung net fonnt.
+Appartenance introuvable. ¦ Zougehéieregkeet net fonnt.
+Import introuvable. ¦ Import net fonnt.
+Import introuvable ¦ Import net fonnt
+Fichier trop gros : trop d’observations. ¦ Fichier ze grouss: ze vill Observatiounen.
+Conflit illisible. ¦ Konflikt net liesbar.
+Document illisible : il manque son texte. ¦ Dokument net liesbar: säin Text feelt.
+Partie illisible. ¦ Deel net liesbar.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Dokument ze schwéier: deel seng Reiteren op e puer Dokumenter op.
+Version trop lourde. ¦ Versioun ze schwéier.
+Transcription introuvable. ¦ Transkriptioun net fonnt.
+Dessin introuvable. ¦ Zeechnung net fonnt.
+Commune introuvable. ¦ Gemeng net fonnt.
+Site illisible : il manque ses pages. ¦ Site net liesbar: seng Säite feelen.
+Page illisible. ¦ Säit net liesbar.
+Service inconnu. ¦ Onbekannten Déngscht.
+Adresse non permise. ¦ Adress net erlaabt.
+Publication impossible : l’extension PHP curl manque. ¦ Publizéieren net méiglech: d’PHP-Extensioun curl feelt.
+Donne l’identifiant FTP. ¦ Gëff den FTP-Benotzernumm an.
+Colle d’abord ton jeton Netlify. ¦ Setz fir d’éischt däin Netlify-Token an.
+Colle d’abord ton jeton GitHub. ¦ Setz fir d’éischt däin GitHub-Token an.
+Identifiant Wikidata incorrect. ¦ Falsch Wikidata-ID.
+Classeur illisible : il manque ses feuilles. ¦ Classeur net liesbar: seng Blieder feelen.
+Feuille illisible. ¦ Blat net liesbar.
+Classeur introuvable. ¦ Classeur net fonnt.
+Import manquant ¦ Import feelt
+Archive ZIP illisible ¦ ZIP-Archiv net liesbar
+Modification introuvable. ¦ Ännerung net fonnt.
+Sauvegarde introuvable. ¦ Backup net fonnt.
+Lecture impossible ¦ Liesen net méiglech
+JSON invalide ou non-objet ¦ Ongëltegen JSON oder keen Objet
+Impossible d'ouvrir l'archive (format inattendu) ¦ D’Archiv konnt net opgemaach ginn (onerwaarte Format)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ D’GedZip-Archiv konnt net opgemaach ginn (onerwaarte Format)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ GEDCOM-Fichier (.ged) net am Archiv fonnt.
+Type introuvable ¦ Aart net fonnt
+Identifiant manquant ¦ Identifiant feelt
+Battue introuvable ¦ Sichaktioun net fonnt
+Battue introuvable. ¦ Sichaktioun net fonnt.
+Lacune introuvable. ¦ Lück net fonnt.
+Lien direct vers l’archive invalide. ¦ Ongëltegen direkte Link op d’Archiv.
+Mention familiale invalide ¦ Ongëlteg Familljenerwähnung
+Titre obligatoire ¦ Titel ass obligatoresch
+Recensement manquant ¦ Vollekszielung feelt
+Membre manquant ¦ Member feelt
+Membre introuvable ¦ Member net fonnt
+Dossier militaire invalide ¦ Ongëltegen Militärdossier
+Recensement ou personne manquante ¦ Vollekszielung oder Persoun feelt
+Journal introuvable ¦ Journal net fonnt
+Confirmation requise ¦ Bestätegung néideg
+Piste manquante. ¦ Spuer feelt.
+Rappel manquant. ¦ Erënnerung feelt.
+Courrier manquant. ¦ Bréif feelt.
+Contact introuvable. ¦ Kontakt net fonnt.
+Contact manquant. ¦ Kontakt feelt.
+Battue manquante. ¦ Sichaktioun feelt.
+Battue, commune et nom obligatoires. ¦ Sichaktioun, Gemeng an Numm sinn obligatoresch.
+Battue et commune obligatoires. ¦ Sichaktioun a Gemeng sinn obligatoresch.
+Annotation manquante. ¦ Notiz feelt.
+Annotation introuvable. ¦ Notiz net fonnt.
+Dossier parent invalide ¦ Ongëltegen iwwergeuerdenten Dossier
+Dossier manquant ¦ Dossier feelt
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Ongëltegt Geschlecht: wiel Mann, Fra, Net binär oder Onbekannt.
+Variante manquante ¦ Variant feelt
+Variante introuvable ¦ Variant net fonnt
+Famille introuvable ¦ Famill net fonnt
+Fiche en ligne introuvable ¦ Online-Fiche net fonnt
+Fiche en ligne manquante ¦ Online-Fiche feelt
+Personne ou contenu manquant ¦ Persoun oder Inhalt feelt
+Note ou contenu manquant ¦ Notiz oder Inhalt feelt
+Note introuvable ¦ Notiz net fonnt
+Note manquante ¦ Notiz feelt
+Personne et titre obligatoires ¦ Persoun an Titel sinn obligatoresch
+Source et titre obligatoires ¦ Quell an Titel sinn obligatoresch
+Source introuvable ¦ Quell net fonnt
+Source manquante ¦ Quell feelt
+Rotation impossible. ¦ Rotatioun net méiglech.
+Script HTR local introuvable. ¦ Lokaalt HTR-Skript net fonnt.
+Fiche individuelle invalide. ¦ Ongëlteg individuell Fiche.
+Alerte manquante ¦ Alarm feelt
+Patronyme et groupe obligatoires ¦ Familljennumm a Grupp sinn obligatoresch
+Personne racine introuvable. ¦ Ausgangspersoun net fonnt.
+Vue introuvable ¦ Usiicht net fonnt
+Cible manquante ¦ Zil feelt
+Identification manquante ¦ Identifikatioun feelt
+Identification introuvable ¦ Identifikatioun net fonnt
+Objet ou souvenir manquant ¦ Objet oder Andenken feelt
+À faire le {date} ¦ Ze maachen den {date}
+Avant le {date} ¦ Virum {date}
+Après le {date} ¦ Nom {date}
+Rappel libre ¦ Fräi Erënnerung
+Enquête « {title} » ¦ Ënnersichung „{title}“
+Pas encore envoyé ¦ Nach net geschéckt
+Envoyé aujourd’hui ¦ Haut geschéckt
+Réponse attendue depuis {n} jours ¦ Äntwert erwaart zënter {n} Deeg
+Réponse attendue depuis {n} jour ¦ Äntwert erwaart zënter {n} Dag
+relance prévue le {date} : à relancer ¦ Nofro geplangt den {date}: nofroen
+relance le {date} ¦ Nofro den {date}
+Visite ¦ Besuch
+Prévue le {date} : note-la comme faite ¦ Geplangt den {date}: markéier e als gemaach
+Le {date} ¦ Den {date}
+{n} cotes à consulter ¦ {n} Archivnummeren ze konsultéieren
+{n} cote à consulter ¦ {n} Archivnummer ze konsultéieren
+Piste ¦ Spuer
+À explorer ¦ Ze ënnersichen
+Hypothèse : {title} ¦ Hypothees: {title}
+Hypothèse : sans titre ¦ Hypothees: ouni Titel
+confiance faible ¦ schwaacht Vertrauen
+confiance moyenne ¦ mëttelt Vertrauen
+confiance forte ¦ staarkt Vertrauen
+Vu ¦ Gesinn
+Recensement de {y} à {place} : chercher sur SocFace ¦ Vollekszielung vun {y} zu {place}: op SocFace sichen
+Recensement de {y} : chercher sur SocFace ¦ Vollekszielung vun {y}: op SocFace sichen
+Cherché sur SocFace ¦ Op SocFace gesicht
+{act} : {name}, chercher à {place} ¦ {act}: {name}, zu {place} sichen
+{act} : {name} ¦ {act}: {name}
+acte|Parents ¦ Elteren
+acte|Contrat de mariage ¦ Bestietneskontrakt
+acte|Succession ¦ Ierfschaft
+acte|Registre matricule ¦ Matrikelregëster
+Foyer de {name} ¦ Stot vu(n) {name}
+{n} personnes ¦ {n} Persounen
+{n} personne ¦ {n} Persoun
+Demande d’entraide ¦ Hëllefsufro
+Une réponse t’attend ¦ Eng Äntwert waart op dech
+Brouillon à publier ¦ Entworf ze publizéieren
+Publiée il y a {n} jours ¦ Viru(n) {n} Deeg publizéiert
+Publiée il y a {n} jour ¦ Viru(n) {n} Dag publizéiert
+Rappel fait ¦ Erënnerung erleedegt
+Demande résolue ¦ Ufro geléist
+Piste explorée ¦ Spuer ënnersicht
+Hypothèse revue ¦ Hypothees iwwerpréift
+Recherche faite ¦ Recherche gemaach
+Alerte revue ¦ Alarm iwwerpréift
+Piste du mur faite ¦ Spuer vun der Sakgaass gemaach
+Lien vérifié ¦ Verbindung iwwerpréift
+🛡 Lien à consolider ¦ 🛡 Verbindung ze festegen
+Lien à consolider : {child}, le fils de {parent} ¦ Verbindung ze festegen: {child}, de Jong vu(n) {parent}
+Lien à consolider : {child}, la fille de {parent} ¦ Verbindung ze festegen: {child}, d’Duechter vu(n) {parent}
+Lien à consolider : {child}, l’enfant de {parent} ¦ Verbindung ze festegen: {child}, d’Kand vu(n) {parent}
+cherche l’acte de naissance ou de baptême qui le nomme ¦ sich den Akt vun der Gebuert oder vun der Daf, deen d’Persoun nennt

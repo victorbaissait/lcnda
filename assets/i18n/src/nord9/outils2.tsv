@@ -1,0 +1,1607 @@
+fr ¦ lb
+son importé ¦ importéierten Toun
+⚠ fichier de travail introuvable ¦ ⚠ Aarbechtsfichier net fonnt
+Une vieille cassette ou un dictaphone : souffle, bourdonnement, voix, volume, début et fin, pas à pas ¦ Eng al Kassett oder en Diktafon: Rauschen, Brummen, Stëmm, Lautstäerkt, Ufank an Enn, Schrëtt fir Schrëtt
+Sauver une vieille cassette ¦ Eng al Kassett retten
+Une lettre lue, un souvenir raconté : le son entre dans les médias puis s’ouvre dans le Studio son ¦ E virgeliesene Bréif, eng erzielt Erënnerung: den Toun kënnt an d’Medien a geet dann am Tounstudio op
+Un son de la base, nettoyé en deux minutes ¦ En Toun aus der Datebank, an zwou Minutte gebotzt
+Son rapide… ¦ Séieren Toun…
+⚠ photo de départ introuvable ¦ ⚠ Ausgangsfoto net fonnt
+Une image vide (blanche, transparente ou d’une couleur), à la taille voulue, pour dessiner, écrire ou assembler des calques ¦ En eidelt Bild (wäiss, transparent oder an enger Faarf), an der gewënschter Gréisst, fir ze zeechnen, ze schreiwen oder Schichten zesummenzesetzen
+Canevas vide ¦ Eidele Canevas
+Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas ¦ Eng al beschiedegt Foto: riichten, Faarwen, Flecken, Rëss, Gesiichter, Faarwen derbäisetzen, Schrëtt fir Schrëtt
+Restaurer une vieille photo ¦ Eng al Foto restauréieren
+Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait ¦ D’Portrait vu méi Fichen am selwechte Format ausgeschnidden (Aen op der selwechter Héicht), dann als Portrait benotzt
+Portraits d’identité ¦ Passfotoen
+Nouveau blason ¦ Neit Wope
+Blason ¦ Wope
+Livre vide ¦ Eidelt Buch
+Ouvrir l’atelier ¦ D’Atelier opmaachen
+OUTILS DE MODIFICATION ¦ WERKZEUGER FIR Z’ÄNNEREN
+Ranger les outils ¦ D’Werkzeuger sortéieren
+Range les onglets avec la poignée ⠿ (ou Alt + ↑ / ↓) et décoche ceux que tu ne veux pas voir. ¦ Sortéier d’Reiter mam Grëff ⠿ (oder Alt + ↑ / ↓) a kräiz déi of, déi s de net gesi wëlls.
+Garde au moins un outil : coche celui que tu veux voir. ¦ Behal op mannst ee Werkzeug: kräiz deen un, deen s de gesi wëlls.
+Garde au moins un outil. ¦ Behal op mannst ee Werkzeug.
+{shown} sur {n} ¦ {shown} vun {n}
+Aucun projet pour « {q} » ¦ Kee Projet fir „{q}“
+Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails). ¦ Kontrolléier d’Schreifweis, oder sich en anert Wuert (Numm, Foto, Detailer).
+Effacer la recherche ¦ D’Sich läschen
+Aucun projet de {what} pour l’instant ¦ Fir de Moment kee Projet vun {what}
+projet|montage ¦ Montage
+projet|son ¦ Toun
+projet|retouche ¦ Retusch
+projet|dessin ¦ Zeechnung
+projet|livre ¦ Buch
+projet|tableau ¦ Tabell
+projet|cousinade ¦ Familljentreffen
+projet|maison ¦ Haus
+projet|traitement par lot ¦ Stapelveraarbechtung
+projet|comparaison de photos ¦ Fotovergläich
+projet|site ¦ Site
+projet|présentation ou de diaporama ¦ Presentatioun oder Diashow
+projet|document ¦ Dokument
+projet|transcription ¦ Transkriptioun
+projet|faire-part ¦ Faire-part
+projet|carte ¦ Kaart
+projet|signature ou sceau ¦ Ënnerschrëft oder Sigel
+projet|arbre ¦ Bam
+Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet. ¦ D’Projete vun de Werkzeuger vun der App: wiel e Werkzeug, a maach dann e Projet op, sich, sortéier, benenn ëm oder fänk een un.
+Une calculette flottante (simple, scientifique, courbes, mesures anciennes, dates des actes), qui reste ouverte au-dessus de l’app ¦ E schwiewende Rechner (einfach, wëssenschaftlech, Kurven, al Moossen, Datume vun den Akten), deen iwwer der App opbleift
+projets ¦ Projeten
+Projet renommé. ¦ Projet ëmbenannt.
+Les photos, vidéos et sons restent dans les Médias. ¦ D’Fotoen, Videoen an Téin bleiwen an de Medien.
+=projet ¦ Projet|Projeten
+＋ Nouvelle retouche ¦ ＋ Nei Retusch
+＋ Nouveau dessin ¦ ＋ Nei Zeechnung
+＋ Nouveau livre ¦ ＋ Neit Buch
+＋ Nouveau traitement ¦ ＋ Nei Veraarbechtung
+＋ Nouvelle comparaison ¦ ＋ Neie Vergläich
+Ce calcul est trop long : je m’arrête là. ¦ Dës Rechnung ass ze laang: ech halen hei op.
+Essaie avec des nombres plus petits ou moins d’étapes. ¦ Probéier mat méi klengen Zuelen oder manner Schrëtt.
+Division par zéro : on ne peut pas diviser par 0. ¦ Divisioun duerch null: et kann een net duerch 0 deelen.
+Nombre trop grand pour être calculé. ¦ Zuel ze grouss fir ze rechnen.
+Liste trop longue (plus de {list} nombres). ¦ Lëscht ze laang (méi wéi {list} Zuelen).
+Matrice trop grande (au plus {mat} × {mat2}). ¦ Matrix ze grouss (héchstens {mat} × {mat2}).
+{what} : il faut des nombres ici{x}. ¦ {what}: hei brauch et Zuelen{x}.
+(« {text} » est un résultat écrit en mots) ¦ („{text}“ ass e Resultat, dat a Wierder geschriwwen ass)
+Les deux listes n’ont pas la même longueur ({n} et {n2}). ¦ Déi zwou Lëschten sinn net gläich laang ({n} an {n2}).
+On ne peut pas ajouter un nombre et une matrice. ¦ Et kann een eng Zuel an eng Matrix net addéieren.
+Pour multiplier chaque case, utilise « × ». ¦ Fir all Feld ze multiplizéieren, benotz „×“.
+Les deux matrices n’ont pas la même taille ({r} × {c} et {r2} × {c2}). ¦ Déi zwou Matricen hunn net déi selwecht Gréisst ({r} × {c} an {r2} × {c2}).
+Signe moins ¦ Minuszeechen
+Addition ¦ Additioun
+Multiplication ¦ Multiplikatioun
+Division ¦ Divisioun
+Produit impossible : la 1re matrice a {cols}, la 2e a {rows}. ¦ Produit net méiglech: déi 1. Matrix huet {cols}, déi 2. huet {rows}.
+Pour multiplier deux matrices, il faut autant de colonnes dans la 1re que de lignes dans la 2e. ¦ Fir zwou Matricen ze multiplizéieren, brauch déi 1. esou vill Kolonnen, wéi déi 2. Reien huet.
+Produit impossible : la matrice a {c} colonnes et la liste {n} nombres. ¦ Produit net méiglech: d’Matrix huet {c} Kolonnen an d’Lëscht {n} Zuelen.
+ln(0) n’existe pas (il part vers −∞). ¦ ln(0) gëtt et net (et geet géint −∞).
+Une matrice ne peut être élevée qu’à une puissance entière. ¦ Eng Matrix kann nëmme mat enger ganzer Zuel potenzéiert ginn.
+Seule une matrice carrée peut être élevée à une puissance. ¦ Nëmmen eng quadratesch Matrix ka potenzéiert ginn.
+Puissance trop grande pour une matrice. ¦ Potenz ze grouss fir eng Matrix.
+Division par zéro : 0 ne peut pas être élevé à une puissance négative. ¦ Divisioun duerch null: 0 kann net mat enger negativer Potenz potenzéiert ginn.
+Ce calcul n’a pas de résultat. ¦ Dës Rechnung huet kee Resultat.
+{what} : il faut un nombre réel (sans i). ¦ {what}: et brauch eng reell Zuel (ouni i).
+{what} : il faut un nombre entier. ¦ {what}: et brauch eng ganz Zuel.
+{what} : il faut une matrice, par exemple [[1 ; 2] ; [3 ; 4]]. ¦ {what}: et brauch eng Matrix, zum Beispill [[1 ; 2] ; [3 ; 4]].
+Déterminant ¦ Determinant
+Le déterminant demande une matrice carrée (celle-ci fait {r} × {c}). ¦ Den Determinant brauch eng quadratesch Matrix (dës huet {r} × {c}).
+Inverse ¦ Invers
+Seule une matrice carrée a un inverse (celle-ci fait {r} × {c}). ¦ Nëmmen eng quadratesch Matrix huet eng Invers (dës huet {r} × {c}).
+Cette matrice n’a pas d’inverse (son déterminant vaut 0). ¦ Dës Matrix huet keng Invers (hiren Determinant ass 0).
+Transposée ¦ Transponéiert
+Ce système n’a aucune solution (les équations se contredisent). ¦ Dëse System huet keng Léisung (d’Equatioune widderspriechen sech).
+Ce système a une infinité de solutions (des équations disent la même chose). ¦ Dëse System huet onendlech vill Léisungen (Equatioune soen dat selwecht).
+Ce nombre est trop dur à décomposer. ¦ Dës Zuel ass ze schwéier ze zerleeën.
+Ce nombre est trop grand pour être décomposé (au plus 30 chiffres). ¦ Dës Zuel ass ze grouss fir zerluecht ze ginn (héchstens 30 Zifferen).
+{n} n’a pas de facteur premier. ¦ {n} huet kee Primfaktor.
+{x} est un nombre premier. ¦ {x} ass eng Primzuel.
+Factorielle trop grande : au plus {fact}!. ¦ Fakultéit ze grouss: héchstens {fact}!.
+Factorielle ¦ Fakultéit
+La factorielle n’existe pas pour un entier négatif. ¦ D’Fakultéit gëtt et net fir eng negativ ganz Zuel.
+n! = 1 × 2 × … × n, pour n = 0, 1, 2… ¦ n! = 1 × 2 × … × n, fir n = 0, 1, 2…
+Changement de base ¦ Basiswiessel
+La base va de 2 à 36. ¦ D’Basis geet vun 2 bis 36.
+{n} écrit en base {b} ¦ {n} an der Basis {b} geschriwwen
+(à retaper : {x}{pre}{x2}) ¦ (nees anzetippen: {x}{pre}{x2})
+{what} : la liste est vide. ¦ {what}: d’Lëscht ass eidel.
+L’écart-type d’un échantillon demande au moins 2 nombres. ¦ D’Standardofwäichung vun enger Stéchprouf brauch op mannst 2 Zuelen.
+Ce calcul n’a pas de résultat fini. ¦ Dës Rechnung huet kee endlecht Resultat.
+Calcul trop long (plus de {input} signes). ¦ Rechnung ze laang (méi wéi {input} Zeechen).
+« {x} » n’est pas un nombre en base {base}. ¦ „{x}“ ass keng Zuel an der Basis {base}.
+Je ne comprends pas le signe « {c} ». ¦ Ech verstinn d’Zeechen „{c}“ net.
+Les signes compris : + − × ÷ ^ ! % ( ) [ ] ; = et les noms des fonctions. ¦ Déi verstanen Zeechen: + − × ÷ ^ ! % ( ) [ ] ; = an d’Nimm vun de Funktiounen.
+Tape un calcul. ¦ Tipp eng Rechnung an.
+Trop de parenthèses imbriquées. ¦ Ze vill verschachtelt Klameren.
+Il manque un nombre après « {x} ». ¦ No „{x}“ feelt eng Zuel.
+Il manque un nombre à la fin. ¦ Um Enn feelt eng Zuel.
+Il manque un nombre après « {x} », avant « ) ». ¦ No „{x}“, virun „)“, feelt eng Zuel.
+Il y a une parenthèse fermante « ) » de trop, ou il manque un nombre avant elle. ¦ Et ass eng zouen Klamer „)“ ze vill, oder virun hir feelt eng Zuel.
+Il manque un nombre avant « {x} ». ¦ Virun „{x}“ feelt eng Zuel.
+Le signe « {v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18). ¦ D’Zeechen „{v}“ trennt d’Zuele vun enger Funktioun, wéi pgcd(12 ; 18).
+Pour un nombre à virgule, colle la virgule aux chiffres : 2,5. ¦ Fir eng Kommazuel, schreif d’Komma direkt bei d’Zifferen: 2,5.
+Je ne comprends pas « {raw} » ici. ¦ Ech verstinn „{raw}“ hei net.
+Il manque un signe entre « {raw} » et « {raw2} ». ¦ Tëscht „{raw}“ an „{raw2}“ feelt en Zeechen.
+Par exemple « × » ou « + ». ¦ Zum Beispill „ד oder „+“.
+Il manque une parenthèse fermante « ) » après {name}(…). ¦ No {name}(…) feelt eng zouen Klamer „)“.
+Ajoute « ) » à la fin. ¦ Setz „)“ um Enn derbäi.
+Je ne comprends pas « {raw} » dans {name}(…). ¦ Ech verstinn „{raw}“ an {name}(…) net.
+Les parenthèses sont vides. ¦ D’Klameren sinn eidel.
+Le signe « ; » sépare les nombres d’une fonction, comme pgcd(12 ; 18) — il n’a pas sa place ici. ¦ D’Zeechen „;“ trennt d’Zuele vun enger Funktioun, wéi pgcd(12 ; 18) — et huet hei näischt verluer.
+Il manque une parenthèse fermante « ) ». ¦ Et feelt eng zouen Klamer „)“.
+Il manque un crochet fermant « ] ». ¦ Et feelt eng zouen eckeg Klamer „]“.
+Je ne comprends pas « {raw} » dans la liste. ¦ Ech verstinn „{raw}“ an der Lëscht net.
+Une liste s’écrit [1 ; 2 ; 3]. ¦ Eng Lëscht schreift een esou: [1 ; 2 ; 3].
+Il manque la barre fermante « | » de la valeur absolue. ¦ Et feelt de Schlussstréch „|“ vum absolute Wäert.
+Il manque le nombre de {x}. ¦ D’Zuel vun {x} feelt.
+Par exemple {name}(30). ¦ Zum Beispill {name}(30).
+Il y a une parenthèse fermante « ) » de trop. ¦ Et ass eng zouen Klamer „)“ ze vill.
+Retire-la, ou ajoute « ( » avant. ¦ Huel se ewech, oder setz „(“ virdrun.
+Il y a un crochet fermant « ] » de trop. ¦ Et ass eng zouen eckeg Klamer „]“ ze vill.
+Il manque un signe avant « {raw} ». ¦ Virun „{raw}“ feelt en Zeechen.
+Une équation ne peut pas contenir un autre signe « = ». ¦ Eng Equatioun kann keent anert Zeechen „=“ hunn.
+Je ne sais comparer avec « = » que des nombres. ¦ Mat „=“ kann ech just Zuele vergläichen.
+Je ne comprends pas ce calcul. ¦ Ech verstinn dës Rechnung net.
+L’infini (∞) n’est pas un nombre : je ne peux pas calculer avec. ¦ D’Onendlech (∞) ass keng Zuel: ech ka net domat rechnen.
+Il n’y a pas encore de résultat précédent (ans). ¦ Et gëtt nach kee viregt Resultat (ans).
+{n} est une fonction : écris {n2}(…) avec son nombre entre parenthèses. ¦ {n} ass eng Funktioun: schreif {n2}(…) mat hirer Zuel tëscht Klameren.
+La lettre « {n} » n’a pas de valeur. ¦ De Buschtaf „{n}“ huet kee Wäert.
+Pour une équation, ajoute « = … » (x² = 4) ; pour une courbe, ouvre l’onglet 📈 Courbes. ¦ Fir eng Equatioun, setz „= …“ derbäi (x² = 4); fir eng Kurv, maach de Reiter 📈 Kurven op.
+Je ne connais pas « {n} ». ¦ Ech kennen „{n}“ net.
+Voulais-tu dire « {s} » ? ¦ Wollts de „{s}“ soen?
+La liste des fonctions est dans le mode 🧪 Scientifique (rubriques en haut des touches). ¦ D’Lëscht vun de Funktiounen ass am Modus 🧪 Wëssenschaftlech (Rubriken uewen iwwer den Tasten).
+Je ne connais pas la fonction « {name} ». ¦ Ech kennen d’Funktioun „{name}“ net.
+au moins {n} ¦ op mannst {n}
+{min} à {max} nombres ¦ {min} bis {max} Zuelen
+, séparés par « ; » ¦ , mat „;“ getrennt
+La virgule sert aux nombres à virgule (2,5) : sépare les nombres avec « ; », par exemple {x}. ¦ D’Komma ass fir Kommazuelen (2,5): trenn d’Zuele mat „;“, zum Beispill {x}.
+Par exemple : {ex} ¦ Zum Beispill: {ex}
+Je résous les équations jusqu’au degré 4. ¦ Ech léisen Equatiounen bis zum 4. Grad.
+Plusieurs lettres inconnues ({x}) : pour un système, écris toutes les équations dans resoudre(… ; …). ¦ Méi onbekannt Buschtawen ({x}): fir e System, schreif all d’Equatiounen an resoudre(… ; …).
+Aucune solution ¦ Keng Léisung
+Toujours vrai : tout nombre {name} convient. ¦ Ëmmer richteg: all Zuel {name} passt.
+(l’égalité est toujours fausse) ¦ (d’Gläichheet ass ëmmer falsch)
+entre {x} et {x2} ¦ tëscht {x} an {x2}
+, solutions entre {x} et {x2} ¦ , Léisungen tëscht {x} an {x2}
+entre {a} et {b} ¦ tëscht {a} an {b}
+Solutions cherchées entre {a} et {b}{x}. ¦ Léisunge gesicht tëscht {a} an {b}{x}.
+(valeurs approchées) ¦ (ongeféier Wäerter)
+Ce système n’a pas d’inconnue (x, y, z…). ¦ Dëse System huet keng Onbekannt (x, y, z…).
+Je résous les systèmes jusqu’à 6 inconnues. ¦ Ech léise Systemer bis zu 6 Onbekannten.
+Ce système n’est pas du premier degré : je sais résoudre les systèmes où les inconnues ne sont ni multipliées entre elles, ni au carré. ¦ Dëse System ass net vum éischte Grad: ech kann Systemer léisen, wou d’Onbekannten net mateneen multiplizéiert an net am Quadrat sinn.
+Système de {eq} à {unk}. ¦ System vun {eq} mat {unk}.
+Équation du 1er degré{x2}. ¦ Equatioun vum 1. Grad{x2}.
+Équation du {x}e degré{x2}. ¦ Equatioun vum {x}. Grad{x2}.
+=nb|équation ¦ Equatioun|Equatiounen
+=nb|inconnue ¦ Onbekannt|Onbekannten
+=nb|colonne ¦ Kolonn|Kolonnen
+=nb|ligne ¦ Rei|Reien
+=nb|nombre ¦ Zuel|Zuelen
+=nb|jour ¦ Dag|Deeg
+=nb|semaine ¦ Woch|Wochen
+=nb|an ¦ Joer|Joer
+=nb|mois ¦ Mount|Méint
+La dérivée n’existe pas en {name} = {x}. ¦ D’Ofleedung gëtt et net bei {name} = {x}.
+Les bornes de l’intégrale doivent être des nombres. ¦ D’Grenze vum Integral mussen Zuele sinn.
+L’intégrale ne converge pas (la fonction part à l’infini entre les bornes). ¦ D’Integral konvergéiert net (d’Funktioun geet tëscht de Grenzen an d’Onendlech).
+Trop de termes (au plus {sum}). ¦ Ze vill Termer (héchstens {sum}).
+Sinus (dans l’unité d’angle choisie) ¦ Sinus (an der gewielter Wénkeleenheet)
+Cosinus ¦ Kosinus
+Tangente ¦ Tangens
+tan({x}{x2}) n’existe pas (le cosinus vaut 0). ¦ tan({x}{x2}) gëtt et net (de Kosinus ass 0).
+Cette tangente n’existe pas (le cosinus vaut 0). ¦ Dësen Tangens gëtt et net (de Kosinus ass 0).
+{nm}(…) demande un nombre entre −1 et 1. ¦ {nm}(…) brauch eng Zuel tëscht −1 an 1.
+Arc sinus (angle dont le sinus vaut x) ¦ Arkussinus (Wénkel, deem säi Sinus x ass)
+Arc cosinus ¦ Arkuskosinus
+Arc tangente ¦ Arkustangens
+Angle du point (x ; y) : atan2(y ; x) ¦ Wénkel vum Punkt (x ; y): atan2(y ; x)
+Sinus hyperbolique ¦ Hyperbolesche Sinus
+Cosinus hyperbolique ¦ Hyperbolesche Kosinus
+Tangente hyperbolique ¦ Hyperbolescher Tangens
+Argument sinus hyperbolique ¦ Area-Sinus hyperbolicus
+Argument cosinus hyperbolique ¦ Area-Kosinus hyperbolicus
+Argument tangente hyperbolique ¦ Area-Tangens hyperbolicus
+Le logarithme demande un nombre plus grand que 0. ¦ De Logarithmus brauch eng Zuel méi grouss wéi 0.
+Logarithme népérien (base e) ¦ Natierleche Logarithmus (Basis e)
+Logarithme décimal ; log(x ; b) en base b ¦ Dezimale Logarithmus; log(x ; b) an der Basis b
+La base d’un logarithme ne peut pas valoir 1. ¦ D’Basis vun engem Logarithmus kann net 1 sinn.
+Logarithme en base 2 ¦ Logarithmus an der Basis 2
+Exponentielle : e puissance x ¦ Exponentialfunktioun: e hoch x
+Racine carrée ; racine(x ; n) : racine n-ième ¦ Quadratwuerzel; racine(x ; n): n-t Wuerzel
+Racine cubique ¦ Kubikwuerzel
+Racine 4e ¦ 4. Wuerzel
+Racine n-ième : root(x ; n) ¦ n-t Wuerzel: root(x ; n)
+Racine ¦ Wuerzel
+La racine 0-ième n’existe pas. ¦ D’0-t Wuerzel gëtt et net.
+Valeur absolue (ou module d’un complexe) : |x| ¦ Absolute Wäert (oder Betrag vun enger komplexer Zuel): |x|
+Factorielle : n! = 1 × 2 × … × n ¦ Fakultéit: n! = 1 × 2 × … × n
+Fonction Γ : Γ(n) = (n − 1)! ¦ Γ-Funktioun: Γ(n) = (n − 1)!
+Partie réelle ¦ Reellen Deel
+Partie imaginaire ¦ Imaginären Deel
+Module |z| = √(a² + b²) ¦ Betrag |z| = √(a² + b²)
+Argument (angle) d’un complexe ¦ Argument (Wénkel) vun enger komplexer Zuel
+L’argument de 0 n’existe pas. ¦ D’Argument vun 0 gëtt et net.
+Conjugué : a − bi ¦ Konjugéiert: a − bi
+Arrondi (au plus proche) ; arrondi(x ; n) avec n chiffres après la virgule ¦ Gerënnt (op dat Noosten); arrondi(x ; n) mat n Zifferen hannert dem Komma
+Partie entière (vers le bas) ¦ Ganzzuelegen Deel (no ënnen)
+Arrondi vers le haut ¦ No uewe gerënnt
+Coupe les chiffres après la virgule (vers 0) ¦ Schneit d’Zifferen hannert dem Komma of (Richtung 0)
+Tronque ¦ Ofschneiden
+Écrit un nombre à virgule en fraction ¦ Schreift eng Kommazuel als Bruch
+Je ne trouve pas de fraction simple pour ce nombre. ¦ Ech fannen keen einfache Bruch fir dës Zuel.
+Écrit le nombre en décimal ¦ Schreift d’Zuel als Dezimalzuel
+Signe : −1, 0 ou 1 ¦ Zeechen: −1, 0 oder 1
+Signe ¦ Zeechen
+Reste de la division : 17 mod 5 ¦ Rescht vun der Divisioun: 17 mod 5
+Quotient entier ¦ Ganzzuelege Quotient
+Plus grand commun diviseur ¦ Gréissten gemeinsamen Deeler
+Plus petit commun multiple ¦ Klengst gemeinsamt Villfacht
+Combinaisons : C(n ; k) façons de choisir k parmi n ¦ Kombinatiounen: C(n ; k) Méiglechkeeten, k aus n ze wielen
+Arrangements : A(n ; k) (l’ordre compte) ¦ Variatiounen: A(n ; k) (d’Reiefolleg zielt)
+Est-ce un nombre premier ? ¦ Ass dat eng Primzuel?
+Oui, {n} est premier ✓ ¦ Jo, {n} ass eng Primzuel ✓
+Non, {n} n’est pas premier ¦ Nee, {n} ass keng Primzuel
+Décomposition en facteurs premiers ¦ Primfaktorzerleeung
+Le nombre premier suivant ¦ Déi nächst Primzuel
+Écrit un entier en binaire (base 2) ¦ Schreift eng ganz Zuel binär (Basis 2)
+Écrit un entier en octal (base 8) ¦ Schreift eng ganz Zuel oktal (Basis 8)
+Écrit un entier en hexadécimal (base 16) ¦ Schreift eng ganz Zuel hexadezimal (Basis 16)
+Écrit un entier dans une base de 2 à 36 ¦ Schreift eng ganz Zuel an enger Basis vun 2 bis 36
+calc|Moyenne ¦ Duerchschnëtt
+Médiane (la valeur du milieu) ¦ Median (de Wäert an der Mëtt)
+Variance (de la population) ¦ Varianz (vun der Populatioun)
+Variance ¦ Varianz
+Écart-type σ (de la population, comme au lycée) ¦ Standardofwäichung σ (vun der Populatioun, wéi am Lycée)
+Écart-type ¦ Standardofwäichung
+Écart-type d’un échantillon (divisé par n − 1) ¦ Standardofwäichung vun enger Stéchprouf (gedeelt duerch n − 1)
+Somme d’une liste ; somme(k² ; k ; 1 ; 10) : somme d’une suite ¦ Zomm vun enger Lëscht; somme(k² ; k ; 1 ; 10): Zomm vun enger Suite
+Produit d’une liste ; produit(k ; k ; 1 ; 5) ¦ Produit vun enger Lëscht; produit(k ; k ; 1 ; 5)
+Le plus petit ¦ De klengsten
+Le plus grand ¦ De gréissten
+Étendue : max − min ¦ Spannbreet: max − min
+calc|Étendue ¦ Spannbreet
+1er quartile ¦ 1. Quartil
+Quartile ¦ Quartil
+3e quartile ¦ 3. Quartil
+Combien de nombres dans la liste ¦ Wéi vill Zuelen an der Lëscht
+Effectif ¦ Unzuel
+Range la liste du plus petit au plus grand ¦ Sortéiert d’Lëscht vum klengsten zum gréissten
+Tri ¦ Sortéieren
+Déterminant d’une matrice carrée ¦ Determinant vun enger quadratescher Matrix
+Matrice inverse ¦ Invers Matrix
+Transposée (lignes ↔ colonnes) ¦ Transponéiert (Reien ↔ Kolonnen)
+Trace : somme de la diagonale ¦ Spur: Zomm vun der Diagonal
+Trace ¦ Spur
+La trace demande une matrice carrée. ¦ D’Spur brauch eng quadratesch Matrix.
+Matrice identité n × n ¦ Eenheetsmatrix n × n
+La taille va de 1 à {mat}. ¦ D’Gréisst geet vun 1 bis {mat}.
+Rang d’une matrice ¦ Rang vun enger Matrix
+Rang ¦ Rang
+Résout A·X = B (matrice A, liste B) ¦ Léist A·X = B (Matrix A, Lëscht B)
+La matrice a {r} lignes et la liste {n} nombres : il en faut autant. ¦ D’Matrix huet {r} Reien an d’Lëscht {n} Zuelen: et brauch der gläich vill.
+Le système doit avoir autant d’équations que d’inconnues. ¦ De System muss esou vill Equatioune wéi Onbekannten hunn.
+Résout une équation (jusqu’au 4e degré exactement, ou approchée) ou un système ¦ Léist eng Equatioun (bis zum 4. Grad genee, oder ongeféier) oder e System
+Écris l’équation dans resoudre(…), par exemple resoudre(x^2 = 4). ¦ Schreif d’Equatioun an resoudre(…), zum Beispill resoudre(x^2 = 4).
+Intervalle ¦ Intervall
+resoudre(équation ; lettre ; début ; fin) : je n’ai pas compris les nombres en plus. ¦ resoudre(Equatioun ; Buschtaf ; Ufank ; Enn): ech hunn déi zousätzlech Zuelen net verstanen.
+Racines d’un polynôme : ses coefficients, du plus haut degré au plus bas ¦ Wuerzele vun engem Polynom: seng Koeffizienten, vum héchsten zum niddregste Grad
+Nombre dérivé de f en a : derivee(f(x) ; a) ¦ Ofleedung vu f bei a: derivee(f(x) ; a)
+calc|Dérivée ¦ Ofleedung
+Intégrale de f entre a et b : integrale(f(x) ; a ; b) ¦ Integral vu f tëscht a a b: integrale(f(x) ; a ; b)
+Intégrale ¦ Integral
+Valeur approchée de la limite en a ¦ Ongeféiere Wäert vun der Limite bei a
+Je ne trouve pas de limite (à gauche et à droite ce n’est pas pareil, ou ça part à l’infini). ¦ Ech fannen keng Limite (lénks a riets ass et net d’selwecht, oder et geet an d’Onendlech).
+pas un nombre ¦ keng Zuel
+longueur ¦ Längt
+surface ¦ Fläch
+volume ¦ Volumen
+poids ¦ Gewiicht
+monnaie ¦ Suen
+durée ¦ Dauer
+température ¦ Temperatur
+valeur approchée : la mesure changeait d’un lieu à l’autre ¦ ongeféiere Wäert: d’Mooss war vu Plaz zu Plaz anescht
+mesure de {region} ¦ Mooss vu(n) {region}
+valeur approchée ¦ ongeféiere Wäert
+Le calendrier républicain n’est pas chargé. ¦ De republikanesche Kalenner ass net gelueden.
+Le calendrier républicain n’a servi que du 22 septembre 1792 (1er vendémiaire an I) au 31 décembre 1805. ¦ De republikanesche Kalenner gouf just vum 22. September 1792 (1er vendémiaire an I) bis den 31. Dezember 1805 benotzt.
+Cette date est hors du calendrier républicain. ¦ Dësen Datum ass ausserhalb vum republikanesche Kalenner.
+date approchée ¦ ongeféieren Datum
+Le calcul des écarts de dates n’est pas chargé. ¦ D’Berechnung vun den Ofstänn tëscht Datumer ass net gelueden.
+Je ne sais pas calculer l’écart entre ces deux dates. ¦ Ech weess net, wéi een den Ofstand tëscht dësen zwee Datume rechent.
+soit {days} ({weeks}) ¦ also {days} ({weeks})
+la 2e date est la plus ancienne ¦ den 2. Datum ass deen eelsten
+du {from} au {to} ¦ vum {from} bis den {to}
+{n} environ ¦ ongeféier {n}
+entre {years} et {x} ¦ tëscht {years} an {x}
+une date n’est pas complète (jour, mois et année) : de {x} à {x2} ¦ en Datum ass net komplett (Dag, Mount a Joer): vun {x} bis {x2}
+Je ne comprends pas la date « {x} ». ¦ Ech verstinn den Datum „{x}“ net.
+Écris-la comme dans un acte : 7 mai 1925, 14/07/1789, 3 frimaire an XII. ¦ Schreif en esou wéi an engem Akt: 7 mai 1925, 14/07/1789, 3 frimaire an XII.
+Il faut une date complète (jour, mois, année). ¦ Et brauch e komplett Datum (Dag, Mount, Joer).
+« {x} » est une mesure de {label} : choisis cette région dans ⚙️ Réglages → Mesures anciennes. ¦ „{x}“ ass e Mooss vu(n) {label}: wiel dës Regioun an ⚙️ Astellungen → Al Moossen.
+Je ne connais pas l’unité « {right} ». ¦ Ech kennen d’Eenheet „{right}“ net.
+Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique. ¦ Déi verstanen Eenheete sinn an der Rubrik „Eenheeten“ vum Modus 🧪 Wëssenschaftlech.
+On ne peut pas convertir une {x} en {x2} ({right}). ¦ Et kann een eng {x} net an eng {x2} ëmrechnen ({right}).
+Je ne connais pas l’unité de « {left} ». ¦ Ech kennen d’Eenheet vu „{left}“ net.
+angle en {x} : passe en RAD pour calculer avec π ¦ Wénkel an {x}: wiessel op RAD, fir mat π ze rechnen
+degrés ¦ Grad
+grades ¦ Gon
+Ce calcul est trop gros pour être fait. ¦ Dës Rechnung ass ze grouss, fir gemaach ze ginn.
+La lettre « {x} » n’a pas de valeur : une courbe s’écrit avec x seulement, par exemple sin(x). ¦ De Buschtaf „{x}“ huet kee Wäert: eng Kurv schreift een nëmme mat x, zum Beispill sin(x).
+Écris seulement la formule de y, par exemple x^2 − 1 (sans « = »). ¦ Schreif just d’Formel vun y, zum Beispill x^2 − 1 (ouni „=“).
+Trigonométrie ¦ Trigonometrie
+Hyperboliques ¦ Hyperbolesch
+Logarithmes et exponentielle ¦ Logarithmen an Exponentialfunktioun
+Puissances et racines ¦ Potenzen a Wuerzelen
+Nombres complexes ¦ Komplex Zuelen
+Arithmétique et arrondis ¦ Arithmetik a Rënnen
+Bases (binaire, hexadécimal…) ¦ Basen (binär, hexadezimal…)
+Matrices ¦ Matricen
+Équations ¦ Equatiounen
+Dérivées et intégrales ¦ Ofleedungen an Integraler
+Degrés (un tour = 360°) ¦ Grad (eng Tour = 360°)
+Radians (un tour = 2π) ¦ Radianten (eng Tour = 2π)
+Grades (un tour = 400 gr) ¦ Gon (eng Tour = 400 gr)
+Fonctions ¦ Funktiounen
+Sinus ¦ Sinus
+Au carré ¦ Am Quadrat
+Puissance ¦ Potenz
+Racine carrée ¦ Quadratwuerzel
+Arc sinus ¦ Arkussinus
+Au cube ¦ Hoch dräi
+Logarithme népérien ¦ Natierleche Logarithmus
+Exponentielle ¦ Exponentialfunktioun
+Valeur absolue ¦ Absolute Wäert
+Pi = 3,14159… ¦ Pi = 3,14159…
+Nombre d’or = 1,61803… ¦ Gëllene Schnëtt = 1,61803…
+Puissance de 10 ¦ Zéngerpotenz
+Reste de la division ¦ Rescht vun der Divisioun
+Pour cent (200 + 10 % = 220) ¦ Prozent (200 + 10 % = 220)
+Degrés, même en mode RAD ¦ Grad, och am Modus RAD
+Sépare les nombres d’une fonction ¦ Trennt d’Zuele vun enger Funktioun
+Le résultat précédent ¦ Dat viregt Resultat
+Complexes ¦ Komplex
+Module |z| ¦ Betrag |z|
+Argument (angle) ¦ Argument (Wénkel)
+Conjugué ¦ Konjugéiert
+Écris un complexe a + bi : (3 + 4i) × 2, √(−9), i^2. ¦ Schreif eng komplex Zuel a + bi: (3 + 4i) × 2, √(−9), i^2.
+Arithmétique ¦ Arithmetik
+Combinaisons : C(n ; k) ¦ Kombinatiounen: C(n ; k)
+Arrangements : A(n ; k) ¦ Variatiounen: A(n ; k)
+Arrondi à 2 chiffres après la virgule ¦ Op 2 Zifferen hannert dem Komma gerënnt
+Partie entière ¦ Ganzzuelegen Deel
+En fraction ¦ Als Bruch
+En nombre à virgule ¦ Als Kommazuel
+Bases ¦ Basen
+En binaire ¦ Binär
+En octal ¦ Oktal
+En hexadécimal ¦ Hexadezimal
+Dans une base de 2 à 36 ¦ An enger Basis vun 2 bis 36
+Un nombre binaire : 0b1010 ¦ Eng binär Zuel: 0b1010
+Un nombre hexadécimal : 0xFF ¦ Eng hexadezimal Zuel: 0xFF
+Une liste : [12 ; 15 ; 9] ¦ Eng Lëscht: [12 ; 15 ; 9]
+Sépare les nombres ¦ Trennt d’Zuelen
+Écart-type (population) ¦ Standardofwäichung (Populatioun)
+Écart-type d’un échantillon ¦ Standardofwäichung vun enger Stéchprouf
+Mets tes nombres entre crochets, séparés par « ; ». ¦ Setz deng Zuelen tëscht eckeg Klameren, mat „;“ getrennt.
+Écrire une matrice dans une grille ¦ Eng Matrix an engem Gitter schreiwen
+Une matrice : [[1 ; 2] ; [3 ; 4]] ¦ Eng Matrix: [[1 ; 2] ; [3 ; 4]]
+Matrice identité ¦ Eenheetsmatrix
+Produit de deux matrices ¦ Produit vun zwou Matricen
+Une matrice = des lignes entre crochets : [[1 ; 2] ; [3 ; 4]]. ¦ Eng Matrix = Reien tëscht eckege Klameren: [[1 ; 2] ; [3 ; 4]].
+Le signe égal d’une équation ¦ D’Gläichheetszeeche vun enger Equatioun
+Résout une équation ou un système ¦ Léist eng Equatioun oder e System
+Racines d’un polynôme : ses coefficients ¦ Wuerzele vun engem Polynom: seng Koeffizienten
+Système A·X = B ¦ System A·X = B
+Tape l’équation avec « = » : la calculette la résout (jusqu’au 4e degré exactement). ¦ Tipp d’Equatioun mat „=“ an: de Rechner léist se (bis zum 4. Grad genee).
+Analyse ¦ Analys
+Nombre dérivé : derivee(f(x) ; a) ¦ Ofleedung: derivee(f(x) ; a)
+Intégrale : integrale(f(x) ; a ; b) ¦ Integral: integrale(f(x) ; a ; b)
+Limite : limite(f(x) ; a) ¦ Limite: limite(f(x) ; a)
+Somme d’une suite ¦ Zomm vun enger Suite
+Les dérivées, intégrales et limites se calculent en radians. ¦ D’Ofleedungen, Integraler a Limitte ginn a Radiante gerechent.
+Unités ¦ Eenheeten
+Écris « 3 toises en m » ; les mesures anciennes suivent la région choisie dans ⚙️. ¦ Schreif „3 toises en m“; déi al Moosse riichte sech no der Regioun, déi an ⚙️ gewielt ass.
+Les dates s’écrivent comme dans un acte (C4) : 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII. ¦ D’Datume schreift een esou wéi an engem Akt (C4): 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII.
+Tout effacer (Échap) ¦ Alles läschen (Échap)
+Effacer le dernier signe ¦ Dat lescht Zeeche läschen
+Pour cent ¦ Prozent
+Changer le signe ¦ D’Zeeche wiesselen
+Calculer (Entrée) ¦ Rechnen (Entrée)
+Glisser pour déplacer la calculette ¦ Zéien, fir de Rechner ze réckelen
+Mode de la calculette ¦ Modus vum Rechner
+Grosses touches, ruban, mémoire ¦ Grouss Tasten, Papierstreifen, Späicher
+Fonctions, complexes, matrices, équations, unités, dates ¦ Funktiounen, komplex Zuelen, Matricen, Equatiounen, Eenheeten, Datumer
+Tracer des courbes y = f(x) ¦ Kurven y = f(x) zeechnen
+Réglages de la calculette ¦ Astellunge vum Rechner
+Fermer la calculette ¦ De Rechner zoumaachen
+Vider le ruban (on peut l’annuler juste après) ¦ De Papierstreifen eidel maachen (et kann een dat direkt duerno réckgängeg maachen)
+Calculs déjà faits : un clic reprend le résultat ¦ Rechnungen, déi scho gemaach sinn: e Klick iwwerhëlt d’Resultat
+Calcul à faire ¦ Rechnung, déi ze maachen ass
+Tape un calcul… ¦ Tipp eng Rechnung an…
+Copier le résultat ¦ D’Resultat kopéieren
+Effacer la mémoire ¦ De Späicher läschen
+Reprendre le nombre gardé en mémoire ¦ D’Zuel aus dem Späicher iwwerhuelen
+Ajouter le résultat à la mémoire ¦ D’Resultat zum Späicher derbäisetzen
+Retirer le résultat de la mémoire ¦ D’Resultat vum Späicher ofzéien
+Unité des angles ¦ Eenheet vun de Wénkelen
+Ajouter une courbe ¦ Eng Kurv derbäisetzen
+Exporter l’image du graphique (PNG) ¦ D’Bild vun der Grafik exportéieren (PNG)
+Exporter en PNG ¦ Als PNG exportéieren
+Graphique des courbes ¦ Grafik vun de Kurven
+Glisse pour te déplacer · molette pour zoomer · survole une courbe pour lire ses valeurs · x en radians. ¦ Zéi, fir dech ze réckelen · Rad fir ze zoomen · fuer iwwer eng Kurv, fir hir Wäerter ze liesen · x a Radianten.
+Glisser pour agrandir ou réduire ¦ Zéien, fir ze vergréisseren oder ze verklengeren
+Point décimal ¦ Dezimalpunkt
+Par exemple 12 × 3,5, ou 1/3 + 1/6. ¦ Zum Beispill 12 × 3,5, oder 1/3 + 1/6.
+Reprendre ce résultat dans le calcul ¦ Dëst Resultat an d’Rechnung iwwerhuelen
+Reprendre ce calcul pour le modifier ¦ Dës Rechnung iwwerhuelen, fir se z’änneren
+Reprendre ce calcul ¦ Dës Rechnung iwwerhuelen
+Copier ce résultat ¦ Dëst Resultat kopéieren
+Tes calculs s’écriront ici. ¦ Deng Rechnunge kommen hei hin.
+Ruban de la calculette vidé ¦ Papierstreifen vum Rechner eidel gemaach
+Résultat copié ¦ Resultat kopéiert
+Il n’y a pas encore de résultat à copier. ¦ Et gëtt nach kee Resultat fir ze kopéieren.
+La copie n’a pas marché : choisis le résultat et copie-le à la main. ¦ D’Kopéieren huet net geklappt: wiel d’Resultat a kopéier et mat der Hand.
+Nombre gardé en mémoire ¦ Zuel am Späicher
+Calcule d’abord un nombre à garder en mémoire. ¦ Rechen als éischt eng Zuel, fir se am Späicher ze halen.
+Ajouter au calcul ¦ An d’Rechnung derbäisetzen
+Mesures anciennes : {label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Réglages → Calendrier / mesures. ¦ Al Moossen: {label} (an ⚙️ z’änneren). Fir d’Moossen a Suen aus anere Regiounen: Astellungen → Kalenner / Moossen.
+Âge ou écart entre deux dates ¦ Alter oder Ofstand tëscht zwee Datumer
+Calculer l’écart ¦ Den Ofstand rechnen
+Calendrier républicain ↔ grégorien ¦ Republikanesche Kalenner ↔ gregorianesche Kalenner
+3 frimaire an XII ou 14/07/1794 ¦ 3 frimaire an XII oder 14/07/1794
+Retirer cette courbe ¦ Dës Kurv ewechhuelen
+Aucune courbe. ¦ Keng Kurv.
+Revenir à la vue de départ ¦ Zréck op d’Usiicht vum Ufank
+Image « {name} » téléchargée. ¦ Bild „{name}“ erofgelueden.
+Ce résultat ne se reprend pas dans un calcul (c’est un texte). ¦ Dëst Resultat kann net an eng Rechnung iwwerholl ginn (et ass en Text).
+Courbe retirée. ¦ Kurv ewechgeholl.
+Écris la première date. ¦ Schreif den éischten Datum.
+Écris la deuxième date. ¦ Schreif den zweeten Datum.
+Écris une date. ¦ Schreif en Datum.
+{d} en grégorien ¦ {d} am gregorianesche Kalenner
+{d} en républicain ¦ {d} am republikanesche Kalenner
+Comme l’app (clair ou sombre) ¦ Wéi d’App (hell oder däischter)
+Chiffres affichés ¦ Ugewisen Zifferen
+Séparateur décimal ¦ Dezimaltrenner
+Virgule : 2,5 (et « ; » entre les nombres) ¦ Komma: 2,5 (an „;“ tëscht den Zuelen)
+Point : 2.5 (et « , » ou « ; » entre les nombres) ¦ Punkt: 2.5 (an „,“ oder „;“ tëscht den Zuelen)
+Fractions exactes quand c’est possible (1/3 au lieu de 0,333…) ¦ Genee Brëch, wann et geet (1/3 amplaz 0,333…)
+Fractions exactes ¦ Genee Brëch
+Bouton 🧮 dans la barre du haut ¦ Knäppchen 🧮 an der Leescht uewen
+La calculette s’ouvre aussi avec {x} (à changer dans Réglages → Raccourcis). Sa place parmi les boutons du haut : Réglages → Apparence → « Boutons en haut à droite ». ¦ De Rechner geet och mat {x} op (z’änneren an Astellungen → Ofkierzungen). Seng Plaz ënnert de Knäppercher uewen: Astellungen → Ausgesinn → „Knäppercher uewe riets“.
+Réglage de la calculette ¦ Astellung vum Rechner
+les réglages de la calculette (thème, mode, angle, précision) ¦ d’Astellunge vum Rechner (Thema, Modus, Wénkel, Präzisioun)
+Réglage « {nom} » importé : clique « Appliquer » pour t’en servir. ¦ Astellung „{nom}“ importéiert: klick op „Uwenden“, fir se ze benotzen.
+La calculette n’est pas encore chargée. Réessaie dans un instant. ¦ De Rechner ass nach net gelueden. Probéier et an engem Moment nach eng Kéier.
+Ouvrir la calculette ¦ De Rechner opmaachen
+CALCULETTE ¦ RECHNER
+Mesures anciennes ¦ Al Moossen
+date|De ¦ Vun
+date|À ¦ Bis
+=calcul ¦ Rechnung|Rechnungen
+Français + latin ¦ Franséisch + Latäin
+Titre de l’acte (ex. Baptême de Jean Martin, 1790) ¦ Titel vum Akt (z. B. Daf vum Jean Martin, 1790)
+Genre d’acte ¦ Aart vun Akt
+Source (AD, cote, vue) ¦ Quell (AD, Archivnummer, Vue)
+Archives, cote, numéro de vue ¦ Archiven, Archivnummer, Nummer vun der Vue
+Où en est cette transcription (pour la liste « Transcriptions d’actes ») ¦ Wéi wäit dës Transkriptioun ass (fir d’Lëscht „Transkriptioune vun Akten“)
+Le texte (.txt), l’impression ou un PDF (image + texte) ¦ Den Text (.txt), den Ausdrock oder e PDF (Bild + Text)
+Exporter ▾ ¦ Exportéieren ▾
+Plus ▾ ¦ Méi ▾
+Déplacer l’image, ou barre d’espace ¦ D’Bild réckelen, oder Espacetast
+Déplacer l’image ¦ D’Bild réckelen
+Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés) ¦ E Beräich zeechnen: wiel e Passage am Text, an zeechen dann säi Rechteck op d’Bild (déi zwee bleiwe verbonnen)
+Dessiner une zone ¦ E Beräich zeechnen
+Loupe qui suit la souris (la molette change le grossissement) ¦ Lupp, déi der Maus nogeet (d’Rad ännert d’Vergréisserung)
+Tourner l’image de 90° ¦ D’Bild ëm 90° dréinen
+Tourner de 90° ¦ Ëm 90° dréinen
+Choisir l’image de l’acte (base ou ordinateur) ¦ D’Bild vum Akt wielen (Datebank oder Computer)
+Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur). ¦ Wiel d’Bild vum Akt: „🖼️ Bild…“ (eng Foto aus der Datebank, oder e Fichier vum Computer).
+Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne) ¦ E gedréckten oder getippten Text liesen (leet och d’Beräicher Linn fir Linn)
+Lire (imprimé) ¦ Liesen (gedréckt)
+Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire. ¦ D’Handschrëft liesen: déi ganz Säit, oder just de gewielte Beräich (▭). Den Text gëtt Linn fir Linn proposéiert, fir nach eng Kéier ze liesen.
+Lire l’acte ¦ Den Akt liesen
+Arrêter la lecture ¦ D’Liesen ofbriechen
+Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue ¦ Sprooch vum Text: déngt fir dat automatescht Liesen, an „📜 Lieshëllef“ geet an dëser Sprooch op
+Un modèle d’acte à compléter ¦ E Modell vun engem Akt fir auszefëllen
+Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher ¦ D’Latäin vun de Registeren, d’Ofkierzungen, déi al Buschtawen (ſ, ꝑ…) an Übungen: wiel als éischt e Wuert am Text, fir et ze sichen
+Aide à la lecture ¦ Lieshëllef
+Repérer les noms, dates, lieux et métiers ¦ D’Nimm, Datumer, Plazen a Beruffer erkennen
+Repérer ¦ Erkennen
+Mettre le texte dans le média ¦ Den Text an de Medium setzen
+Copier le texte ¦ Den Text kopéieren
+La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine ¦ D’Liesen (gedréckt an handgeschriwwen) an den Export huelen d’Bild mat den Astellungen „Besser gesinn“ (Kontrast, Schäerft, Kanal, Schwell…), soss d’Originalbild
+Lire et exporter l’image améliorée ¦ D’verbessert Bild liesen an exportéieren
+Insérer {c} ¦ {c} asetzen
+La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés. ¦ D’Transkriptioun, Linn fir Linn wéi um Akt. Wiel e Passage, an zeechen dann säi Beräich op d’Bild (▭ Beräich): déi zwee bleiwe verbonnen.
+Elles étaient posées pour l’ancienne image. ¦ Si goufe fir dat aalt Bild gesat.
+Garder les zones déjà posées ? ¦ D’Beräicher behalen, déi scho gesat sinn?
+Garder les zones ¦ D’Beräicher behalen
+Les retirer ¦ Se ewechhuelen
+L’image est dans les Médias et devient l’image de l’acte. ¦ D’Bild ass an de Medien a gëtt d’Bild vum Akt.
+Largeur (l’image prend toute la largeur, le mieux pour lire) ¦ Breet (d’Bild hëlt déi ganz Breet, am beschten fir ze liesen)
+Taille réelle (100 %) ¦ Richteg Gréisst (100 %)
+« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent. ¦ „Besser gesinn“: dëst Bild konnt net virbereet ginn (ze grouss oder beschiedegt); just Kontrast, Hellegkeet, Negativ a Gro ginn ugewannt.
+Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent. ¦ Dëse Browser kann dës Astellungen net rechnen: just Kontrast, Hellegkeet, Negativ a Gro ginn ugewannt.
+Image de l’acte illisible. ¦ Bild vum Akt net liesbar.
+Zone non reliée ¦ Beräich net verbonnen
+— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches) ¦ — zéi, fir en ze réckelen, zéi un engem Grëff, fir seng Gréisst z’änneren (Feiler, Shift + Feiler)
+Tirer pour redimensionner ¦ Zéien, fir d’Gréisst z’änneren
+pas encore reliée au texte ¦ nach net mam Text verbonnen
+Relier cette zone au passage choisi dans le texte ¦ Dëse Beräich mam gewielte Passage am Text verbannen
+Au passage choisi ¦ Mam gewielte Passage
+Lire l’écriture à la main dans cette zone seulement ¦ D’Handschrëft just an dësem Beräich liesen
+Lire cette zone ¦ Dëse Beräich liesen
+Supprimer la zone (Suppr) — « ↶ Annuler » la remet ¦ De Beräich läschen (Suppr) — „↶ Réckgängeg“ setzt en zréck
+Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille ¦ Zéi de Beräich, fir en ze réckelen, zéi un engem vun den 8 Grëffer, fir seng Gréisst z’änneren
+glisser · poignées · flèches · Maj + flèches · ⌘Z ¦ zéien · Grëffer · Feiler · Shift + Feiler · ⌘Z
+Rétabli ¦ Widderhuelt
+Annulé ¦ Réckgängeg gemaach
+Zone supprimée ¦ Beräich geläscht
+Zone déplacée (⌘Z pour annuler) ¦ Beräich geréckelt (⌘Z fir réckgängeg ze maachen)
+Zone redimensionnée (⌘Z pour annuler) ¦ Gréisst vum Beräich geännert (⌘Z fir réckgängeg ze maachen)
+Zone reliée au passage choisi ¦ Beräich mam gewielte Passage verbonnen
+Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi » ¦ Beräich gesat: wiel säi Passage am Text, an dann „🔗 Mam gewielte Passage“
+Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir ¦ Zéi, fir d’Bild ze réckelen (oder Espacetast) · Rad: zoomen · Klick op e Beräich: en auswielen
+Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés ¦ Wiel e Passage am Text, an zeechen dann säi Rechteck op d’Bild: déi zwee bleiwe verbonnen
+Pas encore d’image ¦ Nach kee Bild
+Personnes de l’acte ¦ Persounen aus dem Akt
+Rôle dans l’acte ¦ Roll am Akt
+— rôle — ¦ — Roll —
+role|sujet ¦ Sujet
+role|parent ¦ Elterendeel
+role|conjoint ¦ Partner
+role|conjoint défunt ¦ verstuerwene Partner
+role|défunt ¦ Verstuerwenen
+role|parrain ¦ Pätter
+role|marraine ¦ Gotta
+role|témoin ¦ Zeien
+role|déclarant ¦ Deklarant
+role|officiant ¦ Zelebrant
+role|officier ¦ Beamten
+role|notaire ¦ Notär
+role|autre ¦ aner
+fiche n° {person_id} ¦ Fiche Nr. {person_id}
+Fiche… ¦ Fiche…
+Noms repérés ¦ Erkannt Nimm
+tout garder ¦ alles behalen
+Garder et relier à cette fiche ¦ Behalen a mat dëser Fiche verbannen
+Garder dans les personnes de l’acte ¦ An de Persounen aus dem Akt behalen
+Ouvrir dans 📜 Aide à la lecture ¦ An 📜 Lieshëllef opmaachen
+« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent. ¦ „🧭 Erkennen“ sicht am Text d’Nimm (an hir Roll: Pätter, Zeien, Jong vu…), d’Datumer (och ausgeschriwwen, oder am republikanesche Kalenner), d’Plazen an d’Beruffer, a proposéiert d’Fiche vun denger Datebank, déi hinne gläichen.
+Relier « {name} » à une fiche ¦ „{name}“ mat enger Fiche verbannen
+Choisis une fiche. ¦ Wiel eng Fiche.
+Personne gardée et reliée à sa fiche. ¦ Persoun behalen a mat hirer Fiche verbonnen.
+La transcription non enregistrée sera perdue (💾 d’abord). ¦ Déi net gespäichert Transkriptioun geet verluer (als éischt 💾).
+« Mieux voir » : cette image n’a pas pu être préparée. ¦ „Besser gesinn“: dëst Bild konnt net virbereet ginn.
+Chargement du lecteur… ¦ De Lieser gëtt gelueden…
+Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »). ¦ Keen Text op dësem Bild gelies (probéier de Kontrast, oder „Liesen (handgeschriwwen)“).
+Texte lu (à relire) ¦ Geliesenen Text (nach eng Kéier ze liesen)
+Texte lu et zones posées ligne par ligne : relis et corrige. ¦ Text gelies a Beräicher Linn fir Linn gesat: lies nach eng Kéier a verbesser.
+Lecture arrêtée ¦ Liesen ofgebrach
+Une lecture est déjà en cours. ¦ Et gëtt schonn eppes gelies.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout). ¦ D’Liese vun der Handschrëft ass nach net installéiert: Astellungen → Handschrëfterkennung (HTR) (eng eenzeg Kéier, den Assistent erkläert alles).
+Lecture de la zone… ¦ De Beräich gëtt gelies…
+Lecture de l’acte… ¦ Den Akt gëtt gelies…
+Lecture de la zone ¦ Liese vum Beräich
+Lecture de l’acte ¦ Liese vum Akt
+La lecture n’a pas abouti. ¦ D’Liesen huet net geklappt.
+Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée. ¦ Keng Schreiflinn fonnt: probéier „🎚️ Besser gesinn“ (Kontrast), oder e méi enge Beräich.
+Sûr à {x} % — clique pour le corriger ¦ Zu {x} % sécher — klick, fir et ze verbesseren
+LECTURE AUTOMATIQUE · À RELIRE ¦ AUTOMATESCHT LIESEN · NACH ENG KÉIER ZE LIESEN
+Le texte lu, ligne par ligne ¦ De geliesenen Text, Linn fir Linn
+Mettre {x} dans le texte ¦ {x} an den Text setzen
+les {n} lignes ¦ déi {n} Linnen
+mots peu sûrs ¦ onsécher Wierder
+=mot peu sûr ¦ onsécher Wuert|onsécher Wierder
+(sûrs à moins de {x} %) ¦ (zu manner wéi {x} % sécher)
+aucun mot peu sûr ¦ keen onsécher Wuert
+Relire avec ce modèle ¦ Mat dësem Modell nach eng Kéier liesen
+Garder cette ligne ¦ Dës Linn behalen
+Ligne {x} sur l’image ¦ Linn {x} um Bild
+pas d’image pour cette ligne ¦ kee Bild fir dës Linn
+Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « {x} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux. ¦ Verbesser direkt an de Linnen (klick op e markéiert Wuert, fir et z’ersetzen) · Entrée: nächst Linn · kräiz eng Linn of, fir se ewechzeloossen. Gelies vu „{x}“, op dësem Computer. Duerno sicht „🧭 Erkennen“ eleng d’Nimm, Datumer a Plazen.
+Lectures à vérifier ¦ Liesungen ze iwwerpréiwen
+Utiliser « {value} » ¦ „{value}“ benotzen
+Aucune ligne gardée. ¦ Keng Linn behalen.
+Lu automatiquement (sûr à {x} %) ¦ Automatesch gelies (zu {x} % sécher)
+{x} (à relire) ¦ {x} (nach eng Kéier ze liesen)
+Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite. ¦ Text an d’Transkriptioun gesat, Beräicher Linn fir Linn gesat; Nimm, Datumer a Plazen riets erkannt.
+Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias. ¦ Klick op d’Bild vum Akt. E Bild vum Computer gëtt bei d’Medien derbäigesat.
+Enregistré, et le texte est dans la transcription du média. ¦ Gespäichert, an den Text ass an der Transkriptioun vum Medium.
+Image + texte côte à côte ¦ Bild + Text nieftenee
+Image améliorée ¦ Verbessert Bild
+Choisis d’abord un passage dans le texte. ¦ Wiel als éischt e Passage am Text.
+Il n’y a pas d’image de la base. ¦ Et gëtt kee Bild aus der Datebank.
+Loupe : la molette change le grossissement ¦ Lupp: d’Rad ännert d’Vergréisserung
+Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture. ¦ Astellunge vum Bild fir dësen Akt behalen: si kommen nees, wann en dat nächst Mol opgemaach gëtt.
+L’image est déjà d’origine ¦ D’Bild ass schonn am Original
+Image remise d’origine ¦ Bild zréck am Original
+L’aide à la lecture n’est pas chargée. ¦ D’Lieshëllef ass net gelueden.
+Pas de modèle pour ce genre d’acte. ¦ Kee Modell fir dës Aart vun Akt.
+Le texte déjà écrit est gardé. ¦ Den Text, dee scho geschriwwen ass, gëtt behalen.
+Ajouter le modèle à la fin du texte ? ¦ De Modell um Enn vum Text derbäisetzen?
+Ajouter le modèle ¦ De Modell derbäisetzen
+avec l’image de l’acte ¦ mam Bild vum Akt
+le texte seul (.txt) ¦ just den Text (.txt)
+image + texte (« Enregistrer en PDF ») ¦ Bild + Text („Als PDF späicheren“)
+Les dernières modifications de la transcription seront perdues. ¦ Déi lescht Ännerunge vun der Transkriptioun ginn verluer.
+Fermer sans enregistrer la transcription ? ¦ Zoumaachen, ouni d’Transkriptioun ze späicheren?
+Exporter (texte, PDF, imprimer)… ¦ Exportéieren (Text, PDF, drécken)…
+Image de l’acte… ¦ Bild vum Akt…
+Modèle d’acte ¦ Modell vun engem Akt
+Repérer les noms, dates, lieux ¦ D’Nimm, Datumer, Plazen erkennen
+Lire l’acte (écriture à la main) ¦ Den Akt liesen (Handschrëft)
+Aide à la lecture… ¦ Lieshëllef…
+Toute la largeur (pour lire) ¦ Déi ganz Breet (fir ze liesen)
+Image d’origine ¦ Originalbild
+Toute la transcription, en grand (et les actes transcrits dans l’outil) ¦ Déi ganz Transkriptioun, grouss (an d’Akten, déi am Werkzeug transkribéiert goufen)
+Lire en entier ¦ Ganz liesen
+Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates) ¦ D’Werkzeug Transkriptioun vun Akten op dësem Bild opmaachen (Beräicher, Nimm, Datumer)
+Nouvelle ¦ Nei
+Transcrire dans l’outil ¦ Am Werkzeug transkribéieren
+Ouvrir dans Transcription d’actes ¦ An der Transkriptioun vun Akten opmaachen
+Aucun acte transcrit dans l’outil pour cette image. ¦ Keen Akt fir dëst Bild am Werkzeug transkribéiert.
+Rien d’écrit pour l’instant dans la visionneuse. ¦ Fir de Moment näischt am Viewer geschriwwen.
+Personnes : ¦ Persounen:
+Le calcul de l’image s’est arrêté (image trop grande ?). ¦ D’Berechnung vum Bild huet opgehalen (Bild ze grouss?).
+Calcul impossible ici. ¦ Berechnung hei net méiglech.
+Outil fermé. ¦ Werkzeug zougemaach.
+Faire ressortir l’encre ¦ D’Tënt ervirhiewen
+{label} — double-clic : valeur de départ ¦ {label} — Duebelklick: Wäert vum Ufank
+Netteté (et son rayon) ¦ Schäerft (an hire Radius)
+Canal de couleur ¦ Faarfkanal
+Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu ¦ Een eenzege Kanal: d’Eisegallustënt kënnt dacks besser um Rout oder um Blo eraus
+Toutes les couleurs ¦ All d’Faarwen
+Effacer le fond ¦ Den Hannergrond läschen
+Jaunissement et taches : le papier redevient blanc, l’encre reste ¦ Gielfierwung a Flecken: d’Pabeier gëtt nees wäiss, d’Tënt bleift
+Seuil noir et blanc ¦ Schwarz-wäiss-Schwell
+Redresser (au degré près) ¦ Riichten (op de Grad genee)
+Négatif : encre claire sur fond sombre ¦ Negativ: hell Tënt op donkelem Hannergrond
+Retourner l’image : pour lire un texte vu par transparence (le verso) ¦ D’Bild ëmdréinen: fir en Text ze liesen, deen een duerch d’Pabeier gesäit (d’Récksäit)
+Retenir pour cet acte ¦ Fir dësen Akt behalen
+Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture ¦ Dës Astellunge vum Bild ginn mam Akt gespäichert a kommen nees, wann en dat nächst Mol opgemaach gëtt
+Remettre l’image d’origine (tous les réglages de l’image à zéro) ¦ D’Originalbild zrécksetzen (all d’Astellunge vum Bild op null)
+Plus de place pour garder ce réglage. ¦ Keng Plaz méi, fir dës Astellung ze halen.
+Les autres réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Déi aner Astellunge vum Bild: lokale Kontrast, Schäerft, Kanal, Schwell, Niveauen, riichten…
+Écran étroit : les réglages sont rangés dans « 🎚️ Mieux voir » ¦ Schmuelen Ecran: d’Astellunge sinn an „🎚️ Besser gesinn“
+Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Réglages → Montage, retouche, mise en page et son) ¦ D’Knäppercher vun dëser Leescht sortéieren, weisen oder verstoppen; Disposition A oder B (och an Astellungen → Montage, Retusch, Säitegestaltung an Toun)
+Personnaliser la barre ¦ D’Leescht upassen
+Montrer dans la barre ¦ An der Leescht weisen
+Où va {label} ¦ Wou {label} hikënnt
+Dans la barre, ou dans le panneau « 🎚️ Mieux voir » ¦ An d’Leescht, oder an de Panneau „🎚️ Besser gesinn“
+Dans la barre ¦ An der Leescht
+Dans « Mieux voir » ¦ An „Besser gesinn“
+Disposition de la barre ¦ Disposition vun der Leescht
+Tous les réglages dans la barre ; elle passe à la ligne s’il le faut ¦ All d’Astellungen an der Leescht; se geet an eng nei Zeil, wann et néideg ass
+A · Tout dans la barre ¦ A · Alles an der Leescht
+Une barre courte ; les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Eng kuerz Leescht; déi aner Astellungen am Panneau „🎚️ Besser gesinn“, an dräi Rubriken opgedeelt
+B · Barre courte + « 🎚️ Mieux voir » ¦ B · Kuerz Leescht + „🎚️ Besser gesinn“
+Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite. ¦ Kräiz un, wat gewise gëtt (👁), sortéier mat ↑ ↓ (oder andeems de ⠿ zéis){x}. Direkt gespäichert; dat opgemaacht Werkzeug follegt direkt.
+, et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir » ¦ , a wiel, wat an d’Leescht oder an de Panneau „🎚️ Besser gesinn“ kënnt
+cette barre (disposition, ordre, boutons montrés) ¦ dës Leescht (Disposition, Reiefolleg, gewise Knäppercher)
+Réglages « {nom} » importés : « Appliquer » pour les utiliser. ¦ Astellungen „{nom}“ importéiert: „Uwenden“, fir se ze benotzen.
+Barre de la transcription remise comme au départ ¦ Leescht vun der Transkriptioun zréckgesat wéi am Ufank
+Barre de la transcription ¦ Leescht vun der Transkriptioun
+={n} réglages actifs dans « Mieux voir » ¦ {n} Astellung aktiv an „Besser gesinn“|{n} Astellungen aktiv an „Besser gesinn“
+{n} réglage actif dans « Mieux voir » ¦ {n} Astellung aktiv an „Besser gesinn“
+={n} éléments repérés ¦ {n} Element erkannt|{n} Elementer erkannt
+{n} élément repéré ¦ {n} Element erkannt
+={n} lignes lues (à relire) ¦ {n} Linn gelies (nach eng Kéier ze liesen)|{n} Linne gelies (nach eng Kéier ze liesen)
+{n} ligne lue (à relire) ¦ {n} Linn gelies (nach eng Kéier ze liesen)
+Nouvelle transcription ¦ Nei Transkriptioun
+le tilde remplace un m ou un n ¦ d’Tilde ersetzt en m oder en n
+æ = ae ¦ æ = ae
+& = et ¦ & = et
+7bre = septembre, 8bre = octobre, 9bre = novembre, Xbre = décembre ¦ 7bre = September, 8bre = Oktober, 9bre = November, Xbre = Dezember
+« {s} » est une abréviation de « {exp} » ¦ „{s}“ ass eng Ofkierzung vu „{exp}“
+on lit « {x} » ¦ et liest een „{x}“
+« u » et « n » ont les mêmes jambages ¦ „u“ an „n“ hunn déi selwecht Grondstrécher
+« m » et « rn » se ressemblent ¦ „m“ an „rn“ gesinn sech ähnlech
+« m » et « nn » ont le même nombre de jambages ¦ „m“ an „nn“ hunn déi selwecht Zuel vu Grondstrécher
+« m » et « in » ont le même nombre de jambages ¦ „m“ an „in“ hunn déi selwecht Zuel vu Grondstrécher
+« n » et « ri » se ressemblent ¦ „n“ an „ri“ gesinn sech ähnlech
+« u » et « ii » se ressemblent ¦ „u“ an „ii“ gesinn sech ähnlech
+« a » et « o » se confondent quand la boucle est fermée ¦ „a“ an „o“ verwiesselt een, wann d’Schleef zou ass
+« e » et « c » se confondent quand la boucle est petite ¦ „e“ an „c“ verwiesselt een, wann d’Schleef kleng ass
+« i » sans point ressemble à « l » ¦ en „i“ ouni Punkt gesäit aus wéi en „l“
+« i » et « t » sans barre se confondent ¦ „i“ an „t“ ouni Querstréch verwiesselt een
+« l » et « t » sans barre se confondent ¦ „l“ an „t“ ouni Querstréch verwiesselt een
+le s long « ſ » ressemble à « f » ¦ dat laangt s „ſ“ gesäit aus wéi en „f“
+« v » et « r » se confondent ¦ „v“ an „r“ verwiesselt een
+« cl » collé ressemble à « d » ¦ „cl“ zesumme gesäit aus wéi en „d“
+« h » et « b » se confondent ¦ „h“ an „b“ verwiesselt een
+« h » et « k » se confondent ¦ „h“ an „k“ verwiesselt een
+les majuscules anciennes « S » et « L » se ressemblent ¦ déi al Groussbuschtawen „S“ an „L“ gesinn sech ähnlech
+les majuscules anciennes « I » et « J » sont la même lettre ¦ déi al Groussbuschtawen „I“ an „J“ sinn dee selwechte Buschtaf
+les majuscules anciennes « T » et « F » se ressemblent ¦ déi al Groussbuschtawen „T“ an „F“ gesinn sech ähnlech
+« g » et « q » se confondent ¦ „g“ an „q“ verwiesselt een
+« y » et « g » se confondent ¦ „y“ an „g“ verwiesselt een
+« e » et « o » se confondent ¦ „e“ an „o“ verwiesselt een
+« o » ouvert ressemble à « u » ¦ en oppent „o“ gesäit aus wéi en „u“
+« c » et « o » se confondent ¦ „c“ an „o“ verwiesselt een
+« {x} » lu au lieu de « {y} » : {x2} ¦ „{x}“ gelies amplaz „{y}“: {x2}
+« {p} » lu au lieu de « {q} » : {x} ¦ „{p}“ gelies amplaz „{q}“: {x}
+« {y} » oublié à la lecture ¦ „{y}“ beim Liese vergiess
+« {x} » en trop ¦ „{x}“ ze vill
+« {x} » lu au lieu de « {y} » ¦ „{x}“ gelies amplaz „{y}“
+« {x} » lu au lieu de « {r} » ¦ „{x}“ gelies amplaz „{r}“
+« {x} » veut dire « idem » : la même chose qu’à la ligne au-dessus. ¦ „{x}“ heescht „idem“: dat selwecht wéi an der Linn driwwer.
+la valeur de la ligne {x} ¦ de Wäert vun der Linn {x}
+« {role} » est la nationalité ¦ „{role}“ ass d’Nationalitéit
+« {occupation} » est le lien avec le chef ¦ „{occupation}“ ass d’Relatioun zum Haushaltsvirstand
+« {employer} » est sans doute la profession ¦ „{employer}“ ass bestëmmt de Beruff
+Colonnes décalées : « {role} » dans la case du lien ressemble à la nationalité{x}. Remets chaque valeur dans sa colonne. ¦ Verschoben Kolonnen: „{role}“ am Feld vun der Relatioun gesäit aus wéi d’Nationalitéit{x}. Setz all Wäert nees a seng Kolonn.
+, et « {occupation} » dans la case de la profession est un lien de parenté ¦ , an „{occupation}“ am Feld vum Beruff ass eng Familljerelatioun
+« {occupation} » dans la case de la profession est un lien de parenté : la colonne a glissé. ¦ „{occupation}“ am Feld vum Beruff ass eng Familljerelatioun: d’Kolonn ass verrutscht.
+c’est le lien avec le chef ¦ dat ass d’Relatioun zum Haushaltsvirstand
+la case suivante est sans doute la profession ¦ dat nächst Feld ass bestëmmt de Beruff
+« {civil_status} » dans la case de l’état civil est un lien de parenté : mal rangé. ¦ „{civil_status}“ am Feld vum Zivilstand ass eng Familljerelatioun: falsch zougeuerdnet.
+« {civil_status} » veut dire « veuve » (ou « veuf ») : abréviation non développée. ¦ „{civil_status}“ heescht „veuve“ (oder „veuf“): Ofkierzung net ausgeschriwwen.
+« {x} » devant le nom veut dire « veuve » : le nom est « {x2} ». ¦ „{x}“ virum Numm heescht „veuve“: den Numm ass „{x2}“.
+le nom sans « veuve » ¦ den Numm ouni „veuve“
+« {x} » = veuve ¦ „{x}“ = veuve
+« {v} » est sans doute « {joined} » mal lu (lettres qui se ressemblent). ¦ „{v}“ ass bestëmmt falsch gelies „{joined}“ (Buschtawen, déi sech ähnlech gesinn).
+forme connue la plus proche ¦ noosten bekannt Form
+« {u} » ressemble à « {x} » ¦ „{u}“ gesäit aus wéi „{x}“
+« {v} » ne ressemble à aucun métier connu : lecture sans doute illisible, regarde l’image. ¦ „{v}“ gläicht kengem bekannte Beruff: bestëmmt net liesbar, kuck d’Bild.
+Employeur « {employer} » : lecture douteuse, regarde l’image. ¦ Patron „{employer}“: zweifelhaft Liesung, kuck d’Bild.
+(non développée par la lecture automatique). ¦ (net vum automatesche Liesen ausgeschriwwen).
+« {first} » ressemble à une profession : la colonne a pu être décalée. ¦ „{first}“ gesäit aus wéi e Beruff: d’Kolonn ka verschoben sinn.
+« {last} » est aussi le nom d’une commune : la colonne du lieu a pu glisser dans celle du nom. ¦ „{last}“ ass och den Numm vun enger Gemeng: d’Kolonn vun der Plaz ka bei déi vum Numm verrutscht sinn.
+Le mari s’appelle « {last} », l’épouse « {last2} » : au recensement, l’épouse est en général inscrite sous le nom du mari (lettres mal lues ?). ¦ De Mann heescht „{last}“, d’Fra „{last2}“: bei der Vollekszielung ass d’Fra normalerweis ënner dem Numm vum Mann ageschriwwen (falsch geliese Buschtawen?).
+le nom du chef du ménage ¦ den Numm vum Haushaltsvirstand
+Le chef du ménage s’appelle « {last} » : {x}. ¦ Den Haushaltsvirstand heescht „{last}“: {x}.
+Le chef du ménage s’appelle « {last} », ici « {last2} » : les membres d’un ménage portent en général le même nom (lettres mal lues ?). ¦ Den Haushaltsvirstand heescht „{last}“, hei „{last2}“: d’Membere vun engem Haushalt droen normalerweis deeselwechten Numm (falsch geliese Buschtawen?).
+« {last} » n’est pas dans ta base, mais {x} oui : {x2}. ¦ „{last}“ ass net an denger Datebank, mee {x} jo: {x2}.
+Prénom peu courant « {w} » : {x} ? ({x2}) ¦ Rare Virnumm „{w}“: {x}? ({x2})
+la forme lue {x} fois sur la page ¦ d’Form, déi {x} Mol op der Säit gelies gouf
+la commune connue la plus proche ¦ déi noosten bekannt Gemeng
+« {commune} » : sur la même page, ce lieu est lu « {best} » {x}{x2} — sans doute le même lieu mal lu. ¦ „{commune}“: op der selwechter Säit gëtt dës Plaz „{best}“ gelies {x}{x2} — bestëmmt déi selwecht Plaz, falsch gelies.
+aussi ¦ och
+commune connue ¦ bekannt Gemeng
+Commune inconnue « {birth_place} » : peut-être {x} (à vérifier, plusieurs choix possibles). ¦ Onbekannt Gemeng „{birth_place}“: vläicht {x} (ze iwwerpréiwen, méi Méiglechkeeten).
+Âge illisible « {age} ». ¦ Alter net liesbar „{age}“.
+{age} ans en {year} veut dire né vers {x}, pas {by} : un des deux chiffres a été mal lu. ¦ {age} Joer am Joer {year} heescht gebuer ëm {x}, net {by}: eng vun den zwou Zuelen ass falsch gelies ginn.
+{age} ans : âge très rare, un chiffre a pu être mal lu. ¦ {age} Joer: ganz rare Alter, eng Ziffer ka falsch gelies gi sinn.
+{role} de {age} ans pour un chef de {chefAge} ans : impossible, un âge a pu être mal lu. ¦ {role} vun {age} Joer bei engem Haushaltsvirstand vun {chefAge} Joer: onméiglech, en Alter ka falsch gelies gi sinn.
+{role} de {age} ans : impossible, un chiffre a été mal lu. ¦ {role} vun {age} Joer: onméiglech, eng Ziffer ass falsch gelies ginn.
+{x} ans d’écart entre les époux : c’est rare, vérifie les âges. ¦ {x} Joer Ënnerscheed tëscht de Bestuetten: dat ass rar, kontrolléier den Alter.
+Lien avec le chef de ménage vide : la case a pu être sautée. ¦ Relatioun zum Haushaltsvirstand eidel: d’Feld ka sinn iwwersprong ginn.
+Née en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Gebuer am Joer {by}, no der Vollekszielung vun {year}: eng Ziffer ass falsch gelies ginn.
+Né en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Gebuer am Joer {by}, no der Vollekszielung vun {year}: eng Ziffer ass falsch gelies ginn.
+{role} de {age} ans, plus âgée que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role} vun {age} Joer, méi al wéi den Haushaltsvirstand ({chefAge} Joer): en Alter ka falsch gelies gi sinn.
+{role} de {age} ans, plus âgé que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role} vun {age} Joer, méi al wéi den Haushaltsvirstand ({chefAge} Joer): en Alter ka falsch gelies gi sinn.
+Au recensement de {year}, née vers {ob} ; ici vers {mine}. ¦ Bei der Vollekszielung vun {year} gebuer ëm {ob}; hei ëm {mine}.
+Au recensement de {year}, né vers {ob} ; ici vers {mine}. ¦ Bei der Vollekszielung vun {year} gebuer ëm {ob}; hei ëm {mine}.
+« {role} » pour « {x} », un prénom {x2} : le lien ou le prénom a été mal lu. ¦ „{role}“ fir „{x}“, e Virnumm {x2}: d’Relatioun oder de Virnumm ass falsch gelies ginn.
+de femme ¦ vun enger Fra
+d’homme ¦ vun engem Mann
+« {role} » pour {x} : le lien ou le genre a été mal lu. ¦ „{role}“ fir {x}: d’Relatioun oder d’Geschlecht ass falsch gelies ginn.
+une femme ¦ eng Fra
+un homme ¦ e Mann
+le lien qui va avec le genre ¦ d’Relatioun, déi zum Geschlecht passt
+« {role} » d’un chef de ménage {x} : le lien ou le genre a été mal lu. ¦ „{role}“ bei engem Haushaltsvirstand ({x}): d’Relatioun oder d’Geschlecht ass falsch gelies ginn.
+« {last} » et « {x} » dans le même ménage : sans doute le même nom mal lu. ¦ „{last}“ an „{x}“ am selwechten Haushalt: bestëmmt deeselwechten Numm, falsch gelies.
+lu {x} fois dans le ménage ¦ {x} Mol am Haushalt gelies
+le nom d’un autre membre du ménage ¦ den Numm vun engem anere Member vum Haushalt
+Deux « chef » dans le même ménage : deux ménages ont pu être mis ensemble, ou le lien a été mal lu. ¦ Zwee „chef“ am selwechten Haushalt: zwee Haushalter kënnen zesummegeluecht gi sinn, oder d’Relatioun ass falsch gelies ginn.
+Même nom, même prénom que la ligne {x} : la même personne lue deux fois ? ¦ Selwechten Numm, selwechte Virnumm wéi d’Linn {x}: déi selwecht Persoun zweemol gelies?
+Ce ménage commence en haut d’une page sans chef : c’est sans doute la suite du ménage de la page d’avant (ménage coupé au changement de page). ¦ Dësen Haushalt fänkt uewen op enger Säit ouni Haushaltsvirstand un: et ass bestëmmt d’Suite vum Haushalt vun der Säit virdrun (Haushalt beim Säitewiessel gedeelt).
+Ce ménage n’a pas de chef : il a pu être coupé en deux (changement de page) ou mal découpé. ¦ Dësen Haushalt huet keen Haushaltsvirstand: e ka just an zwee gedeelt gi sinn (Säitewiessel) oder falsch ausgeschnidde ginn.
+{role} « {last} » dans le ménage de {last2}, mais le ménage d’avant s’appelle {last3} : rattaché au mauvais ménage ? ¦ {role} „{last}“ am Haushalt vu(n) {last2}, mee den Haushalt virdrun heescht {last3}: dem falschen Haushalt zougeuerdnet?
+« {w} » ressemble à {x} : {x2} ¦ „{w}“ gesäit aus wéi {x}: {x2}
+Copié. ¦ Kopéiert.
+Un nombre en lettres ou en chiffres ¦ Eng Zuel a Buschtawen oder an Zifferen
+Écris « {x} » ou « 1852 ». ¦ Schreif „{x}“ oder „1852“.
+Un nombre entre 1 et 999 999. ¦ Eng Zuel tëscht 1 an 999 999.
+Ce ne sont pas des lettres-nombres connues (exemples : {x}). ¦ Dat sinn keng bekannt Zuelebuschtawen (Beispiller: {x}).
+L’alphabet ({n} lettres) ¦ D’Alphabet ({n} Buschtawen)
+Sources : {x}. ¦ Quellen: {x}.
+L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?). ¦ D’Lieshëllef konnt net gelueden ginn (Fichier app-aide-lecture.js feelt?).
+Chercher… ex. vve, feu, filius, ſ, cult., d° ¦ Sichen… z. B. vve, feu, filius, ſ, cult., d°
+Chercher dans l’aide à la lecture ¦ An der Lieshëllef sichen
+Toutes les langues ¦ All d’Sproochen
+Moins de langues ¦ Manner Sproochen
+Rien pour « {q} »{x}. Vérifie l’orthographe, cherche un morceau du mot (« vv », « legit »…), ou choisis « Toutes les langues ». ¦ Näischt fir „{q}“{x}. Kontrolléier d’Schreifweis, sich e Stéck vum Wuert („vv“, „legit“…), oder wiel „All d’Sproochen“.
+en {lang} ¦ op {lang}
+Rien dans cette rubrique. ¦ Näischt an dëser Rubrik.
+mots et formules ¦ Wierder a Formelen
+Repris de {src} ¦ Iwwerholl vu(n) {src}
+Copier « {t} » ¦ „{t}“ kopéieren
+Aucune lettre pour « {q} ». Essaie « s long », « r rond », « u n », « ligature », « kurrent ». ¦ Kee Buschtaf fir „{q}“. Probéier „s long“, „r rond“, „u n“, „Ligatur“, „Kurrent“.
+Pas encore de lettres dessinées pour cette langue : elle s’écrit comme le français. Regarde ses mots dans 🔍 Dictionnaire. ¦ Nach keng gezeechent Buschtawe fir dës Sprooch: si gëtt wéi d’Franséischt geschriwwen. Kuck hir Wierder am 🔍 Wierderbuch.
+on voit ¦ et gesäit een
+à ne pas confondre ¦ net ze verwiesselen
+Pas encore d’exercice dans cette langue : choisis « Toutes les langues ». ¦ Nach keng Übung an dëser Sprooch: wiel „All d’Sproochen“.
+Textes modèles écrits pour l’app, sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950). ¦ Modelltexter, fir d’App geschriwwen, nom Modell vun de Registere vun där Zäit (authentesch Formelen, Beispillpersounen, all laang virun 1950 gebuer).
+Aucun exercice pour « {q} ». ¦ Keng Übung fir „{q}“.
+Tous les exercices ¦ All d’Übungen
+Le texte comme sur le registre ¦ Den Text wéi am Register
+Ta lecture ¦ Deng Liesung
+(développe les abréviations : « par. » → paroisse) ¦ (schreif d’Ofkierzungen aus: „par.“ → paroisse)
+Écris ici ce que tu lis, mot après mot… ¦ Schreif hei, wat s de liess, Wuert fir Wuert…
+exercice|Un indice ¦ En Hiweis
+Voir la solution ¦ D’Léisung weisen
+{miss} à revoir ¦ {miss} nach eng Kéier ze kucken
+bravo ! ¦ bravo!
+{extra} en trop ¦ {extra} ze vill
+oublié ¦ vergiess
+en trop ¦ ze vill
+— passe la souris sur un mot à revoir pour l’explication. ¦ — fuer mat der Maus iwwer e Wuert, dat s de nach eng Kéier kucke solls, fir d’Erklärung.
+Ce mot n’est pas dans le texte ¦ Dëst Wuert ass net am Text
+On lit « {exp} » ¦ Et liest een „{exp}“
+Écris d’abord ta lecture du texte. ¦ Schreif als éischt deng Liesung vum Text.
+La fenêtre n’est pas encore prête : réessaie dans un instant. ¦ D’Fënster ass nach net prett: probéier et an engem Moment nach eng Kéier.
+AIDE · LECTURE DES ACTES ¦ HËLLEF · LIESE VUN AKTEN
+Aide à la lecture des actes anciens ¦ Hëllef beim Liese vun alen Akten
+Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?). ¦ De Konverter konnt net gelueden ginn (Fichier app-autrefois-engine.js feelt?).
+La mesure ¦ D’Mooss
+Région, ville ¦ Regioun, Stad
+Les mesures changeaient d’une province à l’autre : choisis celle de l’acte. ¦ D’Moosse ware vu Provënz zu Provënz anescht: wiel déi vum Akt.
+La date (républicaine ou de tous les jours) ¦ Den Datum (republikanesch oder normal)
+Tout est calculé ici, sans internet. Argent : {x} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes. ¦ Alles gëtt hei gerechent, ouni Internet. Suen: {x} ab 1901; virdrun eng Gréissenuerdnung. D’Resultater sinn Uhaltspunkten (≈), keng genee Wäerter.
+(année républicaine) ¦ (republikanescht Joer)
+une année d’aujourd’hui ou d’avant (jusqu’à 2025) ¦ e Joer vun haut oder vu fréier (bis 2025)
+une année entre 1300 et 2025 (exemples : 1780, an X, 1955) ¦ e Joer tëscht 1300 an 2025 (Beispiller: 1780, an X, 1955)
+Écris une somme et son année : « 300 livres » en « 1780 ». ¦ Schreif eng Zomm an hiert Joer: „300 livres“ am Joer „1780“.
+Écris aussi l’année de la somme. ¦ Schreif och d’Joer vun der Zomm.
+Corrige la case marquée ⚠️ ci-dessus. ¦ Verbesser dat Feld, dat uewen mat ⚠️ markéiert ass.
+{label} en {y} {x} d’aujourd’hui ({x2}) ¦ {label} am Joer {y} {x} vun haut ({x2})
+indice des prix de l’INSEE ¦ Präisindex vum INSEE
+ordre de grandeur ¦ Gréissenuerdnung
+Ordre de grandeur ¦ Gréissenuerdnung
+Dans la monnaie de {y} ¦ An de Sue vun {y}
+Le calcul, pas à pas ¦ D’Berechnung, Schrëtt fir Schrëtt
+(mesure de {fromRegion}) ¦ (Mooss vu(n) {fromRegion})
+Écris une mesure : « 3 arpents », « 12 toises 3 pieds », « 2 boisseaux »… ou « 1,5 ha » pour l’inverse. ¦ Schreif e Mooss: „3 arpents“, „12 toises 3 pieds“, „2 boisseaux“… oder „1,5 ha“ fir ëmgedréint.
+Valeur approchée ¦ Ongeféiere Wäert
+Dans les autres mesures de la région ¦ An den anere Moosse vun der Regioun
+La même mesure ailleurs (pour 1) ¦ Datselwecht Mooss soss anzwousch (fir 1)
+Écris une date républicaine (« 12 thermidor an II ») ou de tous les jours (« 14 juillet 1794 ») : la conversion se fait dans les deux sens. ¦ Schreif e republikaneschen Datum („12 thermidor an II“) oder en normalen Datum („14 juillet 1794“): d’Ëmrechnung geet an zwou Richtungen.
+Dans notre calendrier ¦ An eisem Kalenner
+Dans le calendrier républicain ¦ Am republikanesche Kalenner
+{decade} (jour {x} de la décade) ¦ {decade} (Dag {x} vun der Dekad)
+L’an {x} mois par mois ¦ D’Joer {x} Mount fir Mount
+={n} formes de lettres · trait dessiné à la main, comme dans les registres ¦ {n} Buschtafform · mat der Hand gezeechent, wéi an de Registeren|{n} Buschtafforme · mat der Hand gezeechent, wéi an de Registeren
+{n} forme de lettres · trait dessiné à la main, comme dans les registres ¦ {n} Buschtafform · mat der Hand gezeechent, wéi an de Registeren
+={n} exercices · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} Übung · lies den Text wéi am Register, schreif deng Liesung (Ofkierzungen ausgeschriwwen), an dann „✓ Verbesseren“|{n} Übungen · lies den Text wéi am Register, schreif deng Liesung (Ofkierzungen ausgeschriwwen), an dann „✓ Verbesseren“
+{n} exercice · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} Übung · lies den Text wéi am Register, schreif deng Liesung (Ofkierzungen ausgeschriwwen), an dann „✓ Verbesseren“
+={ok} mots justes sur {total} ({score} %) ¦ {ok} richtegt Wuert vun {total} ({score} %)|{ok} richteg Wierder vun {total} ({score} %)
+{ok} mot juste sur {total} ({score} %) ¦ {ok} richtegt Wuert vun {total} ({score} %)
+Plus de place pour enregistrer cette recette. ¦ Keng Plaz méi, fir dëst Rezept ze späicheren.
+aucune action ¦ keng Aktioun
+nouvelle version ¦ nei Versioun
+copie dans les médias ¦ Kopie an de Medien
+« {name} » : fichier introuvable dans le dossier des médias ¦ „{name}“: Fichier net am Dossier vun de Medie fonnt
+le navigateur n’a pas pu écrire l’image ¦ de Browser konnt d’Bild net schreiwen
+qualité baissée à {x} % pour tenir dans {x2} Ko ¦ Qualitéit op {x} % erofgesat, fir ënner {x2} Ko ze bleiwen
+image réduite à {width} × {height} px pour tenir dans {x} Ko ¦ Bild op {width} × {height} px verklengert, fir ënner {x} Ko ze bleiwen
+{x} : plus lourd que {x2} Ko ¦ {x}: méi schwéier wéi {x2} Ko
+le moteur du son n’est pas chargé ¦ de Motor vum Toun ass net gelueden
+Ne pas tourner ¦ Net dréinen
+¼ de tour à droite ¦ ¼ Tour no riets
+¼ de tour à gauche ¦ ¼ Tour no lénks
+Modèle du nom ¦ Modell vum Numm
+Ajouter au modèle ¦ Zum Modell derbäisetzen
+Ajouter {t} au modèle ¦ {t} zum Modell derbäisetzen
+Séquence sur ¦ Sequenz op
+Comme tapé ¦ Wéi getippt
+Une Majuscule Par Mot ¦ E Groussbuschtaf Pro Wuert
+Garder les espaces ¦ D’Espacen halen
+Des tirets (-) ¦ Bindestréch (-)
+Des soulignés (_) ¦ Ënnerstréch (_)
+Sans accents (é → e) ¦ Ouni Akzenter (é → e)
+Changer aussi le titre dans les médias ¦ Och den Titel an de Medien änneren
+Le plus grand côté ¦ Déi längste Säit
+La largeur ¦ D’Breet
+La hauteur ¦ D’Héicht
+Un cadre largeur × hauteur ¦ E Kader Breet × Héicht
+Un pourcentage ¦ E Prozentsaz
+Plus grand côté ¦ Längste Säit
+Garder les proportions ¦ D’Proportiounen halen
+Ne pas agrandir les petites images ¦ Kleng Biller net vergréisseren
+Couper les bords ¦ D’Ränner ofschneiden
+Recadrer au format ¦ Op d’Format zouschneiden
+Sépia (photo ancienne) ¦ Sepia (al Foto)
+Taille (de la largeur) ¦ Gréisst (vun der Breet)
+AVIF (récent, très léger) ¦ AVIF (nei, ganz liicht)
+Poids au plus (0 = pas de limite) ¦ Héchstens esou schwéier (0 = keng Limitt)
+JPG, WebP et AVIF. Pour un PNG, le poids baisse en réduisant l’image. ¦ JPG, WebP an AVIF. Bei engem PNG gëtt et méi liicht, wann d’Bild verklengert gëtt.
+L’appareil, la date de prise, la position GPS, les mots-clés… sont effacés. Pour un JPG ou un PNG sans autre retouche : sans perte (l’image ne change pas). ¦ Den Apparat, den Datum vun der Opnam, d’GPS-Positioun, d’Schlësselwierder… ginn geläscht. Bei engem JPG oder PNG ouni aner Retusch: ouni Verloscht (d’Bild ännert sech net).
+Étiquettes à ajouter ¦ Etiketten, déi derbäikommen
+Relier à une personne ¦ Mat enger Persoun verbannen
+Fiche n° {person} ¦ Fiche Nr. {person}
+Seulement pour ce qui va dans la base (nouvelle version ou copie), pas pour un ZIP. ¦ Just fir dat, wat an d’Datebank kënnt (nei Versioun oder Kopie), net fir en ZIP.
+Nom du PDF ¦ Numm vum PDF
+A4 (l’image centrée) ¦ A4 (d’Bild zentréiert)
+À la taille de chaque image ¦ An der Gréisst vun all Bild
+Garder aussi chaque image à part ¦ Och all Bild eenzel halen
+Glisse pour ranger (ou Alt + ↑ / ↓) ¦ Zéi, fir ze sortéieren (oder Alt + ↑ / ↓)
+Ranger « {label} » (Alt + flèche haut ou bas) ¦ „{label}“ sortéieren (Alt + Feil no uewen oder no ënnen)
+Déplier les réglages ¦ D’Astellungen opklappen
+Replier les réglages ¦ D’Astellungen zouklappen
+Éteindre cette étape (elle reste dans la chaîne) ¦ Dëse Schrëtt ausschalten (e bleift an der Kette)
+Rallumer cette étape ¦ Dëse Schrëtt nees uschalten
+Étape active ¦ Aktive Schrëtt
+Retirer de la chaîne ¦ Aus der Kette ewechhuelen
+Le moteur des traitements par lot n’est pas chargé : recharge la page. ¦ De Motor vun der Stapelveraarbechtung ass net gelueden: lued d’Säit nei.
+Les fichiers ¦ D’Fichieren
+Photos, documents, classeurs et sons de la base : filtres, recherche, plusieurs à la fois ¦ Fotoen, Dokumenter, Tabellen an Téin aus der Datebank: Filteren, Sich, méi gläichzäiteg
+Choisir dans les médias… ¦ An de Medie wielen…
+Fichiers du lot ¦ Fichiere vum Stapel
+Les actions ¦ D’Aktiounen
+Ajouter une action ▾ ¦ Eng Aktioun derbäisetzen ▾
+Voilà ce qui va se passer ¦ Dat hei geschitt
+Le résultat ¦ D’Resultat
+Nouvelle version du média ¦ Nei Versioun vum Medium
+l’original reste dans ses versions ¦ d’Original bleift a senge Versiounen
+Copie dans les médias ¦ Kopie an de Medien
+reliée aux mêmes fiches ¦ mat de selwechte Fiche verbonnen
+Un ZIP à télécharger ¦ En ZIP fir erofzelueden
+rien ne change dans la base ¦ an der Datebank ännert sech näischt
+Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons. ¦ Biller, Dokumenter (Word, LibreOffice, RTF, Markdown, Text, Websäit, PDF), Tabellen (Excel, LibreOffice, CSV) an Téin.
+{name} (prêt) ¦ {name} (prett)
+Recettes enregistrées ¦ Gespäichert Rezepter
+cette chaîne d’actions et la sortie ¦ dës Kette vun Aktiounen an d’Resultat
+Recette « {name} » appliquée. ¦ Rezept „{name}“ ugewannt.
+Une recette prête ne se remplace pas : enregistre-la sous un autre nom. ¦ E fäerdegt Rezept kann net ersat ginn: späicher et ënner engem aneren Numm.
+Une recette prête ne se supprime pas. ¦ E fäerdegt Rezept kann net geläscht ginn.
+Recette « {name} » supprimée ¦ Rezept „{name}“ geläscht
+Ce fichier n’est pas une recette LCNDA. ¦ Dëse Fichier ass kee Rezept vu LCNDA.
+Ce fichier n’est pas une recette des traitements par lot. ¦ Dëse Fichier ass kee Rezept vun der Stapelveraarbechtung.
+Recette importée ¦ Rezept importéiert
+Retirer du lot ¦ Aus dem Stapel ewechhuelen
+Retirer « {name} » du lot ¦ „{name}“ aus dem Stapel ewechhuelen
+Aucun fichier pour l’instant ¦ Fir de Moment kee Fichier
+500 fichiers au plus par lot : {x} de côté. ¦ Héchstens 500 Fichieren pro Stapel: {x} op der Säit gelooss.
+Aucune action : ajoute-en une ¦ Keng Aktioun: setz eng derbäi
+Ajouter une action ¦ Eng Aktioun derbäisetzen
+Lancer sur {x} ¦ Op {x} starten
+Choisis d’abord des fichiers : chaque changement s’affichera ici avant de lancer. ¦ Wiel als éischt Fichieren: all Ännerung gëtt hei ugewisen, ier et lassgeet.
+Nouvelle version ¦ Nei Versioun
+Titre et liens ¦ Titel a Linken
+Nouveau média ¦ Neie Medium
+Dans le ZIP ¦ Am ZIP
+Dans le PDF ¦ Am PDF
+Rien ne change ¦ Näischt ännert sech
+Laissé de côté ¦ Op der Säit gelooss
+à la taille des images ¦ an der Gréisst vun de Biller
+, dans le ZIP ¦ , am ZIP
+, rangé dans les médias ¦ , an de Medien ofgeluecht
+position GPS dans la photo ¦ GPS-Positioun an der Foto
+Lecture des fichiers… ({waiting}) ¦ D’Fichiere ginn gelies… ({waiting})
+On commence… ¦ Et geet lass…
+copie rangée ¦ Kopie ofgeluecht
+rangé dans les médias ¦ an de Medien ofgeluecht
+titre et liens ¦ Titel a Linken
+le fabricant de PDF n’est pas chargé ¦ den PDF-Maker ass net gelueden
+Le ZIP… ¦ Den ZIP…
+traitement-par-lot-{x}.zip ¦ traitement-par-lot-{x}.zip
+Le lot ¦ De Stapel
+(arrêté) ¦ (ofgebrach)
+{what} · ⤓ le ZIP est téléchargé. ¦ {what} · ⤓ den ZIP ass erofgelueden.
+{what} · rangé dans les médias. ¦ {what} · an de Medien ofgeluecht.
+Traitement par lot : {what} ¦ Stapelveraarbechtung: {what}
+{what} · ⤓ ZIP téléchargé. ¦ {what} · ⤓ ZIP erofgelueden.
+TRAITEMENTS PAR LOT ¦ STAPELVERAARBECHTUNG
+Les fichiers à traiter ¦ D’Fichieren, déi veraarbecht ginn
+Action « {x} » retirée ¦ Aktioun „{x}“ ewechgeholl
+traitement par lot ¦ Stapelveraarbechtung
+Nouveau traitement ¦ Nei Veraarbechtung
+1 600 px au plus, JPG 82 %, sans la position GPS : prêtes à envoyer ou à mettre en ligne ¦ Héchstens 1 600 px, JPG 82 %, ouni d’GPS-Positioun: prett fir ze schécken oder online ze setzen
+Photos pour le web ¦ Fotoe fir de Web
+photo-001, photo-002… (et le titre dans les médias) ¦ photo-001, photo-002… (an den Titel an de Medien)
+Renommer en séquence ¦ An der Rei ëmbenennen
+Des scans ou des photos d’actes réunis dans un seul PDF, une page par image ¦ Scannen oder Fotoe vun Akten an engem eenzege PDF, eng Säit pro Bild
+Scans en PDF ¦ Scannen als PDF
+=change ¦ ännert sech|ännere sech
+={files} traités ¦ {files} veraarbecht|{files} veraarbecht
+{files} traité ¦ {files} veraarbecht
+={files} retirés du lot ¦ {files} aus dem Stapel ewechgeholl|{files} aus dem Stapel ewechgeholl
+{files} retiré du lot ¦ {files} aus dem Stapel ewechgeholl
+Garder le format ¦ D’Format halen
+Un nom fixe, une séquence 001, 002…, la date, le titre, la personne ou le lieu. ¦ E feste Numm, eng Sequenz 001, 002…, den Datum, den Titel, d’Persoun oder d’Plaz.
+Plus grand côté, largeur, hauteur, cadre ou pourcentage. ¦ Längste Säit, Breet, Héicht, Kader oder Prozentsaz.
+Couper les bords, recadrer au format voulu (centré), tourner d’un quart de tour, retourner. ¦ D’Ränner ofschneiden, op dat gewënschte Format zouschneiden (zentréiert), ëm eng Véierelsdréiung dréinen, ëmdréinen.
+Gris ou sépia. ¦ Gro oder Sepia.
+Un texte posé dans un coin, au milieu ou répété. ¦ En Text an engem Eck, an der Mëtt oder widderholl.
+Changer de format ¦ D’Format wiesselen
+Images, documents, classeurs et sons : chacun vers un format de sa sorte. ¦ Biller, Dokumenter, Tabellen an Téin: all an e Format vu senger Aart.
+Qualité et poids ¦ Qualitéit a Gréisst
+Qualité JPG / WebP / AVIF et un poids à ne pas dépasser. ¦ Qualitéit JPG / WebP / AVIF an eng Gréisst, déi net iwwerschratt gëtt.
+Effacer les métadonnées ¦ D’Metadonnéeë läschen
+Appareil, date de prise, position GPS… : effacés (sans perte pour un JPG ou un PNG). ¦ Apparat, Datum vun der Opnam, GPS-Positioun…: geläscht (ouni Verloscht bei engem JPG oder PNG).
+Étiquettes et personne ¦ Etiketten a Persoun
+Ajouter des étiquettes, relier à une personne (dans la base seulement). ¦ Etiketten derbäisetzen, mat enger Persoun verbannen (just an der Datebank).
+Assembler en un PDF ¦ An ee PDF zesummesetzen
+Toutes les images dans un seul PDF, une page par image. ¦ All d’Biller an engem eenzege PDF, eng Säit pro Bild.
+Ne pas recadrer ¦ Net zouschneiden
+Répété en biais ¦ Schréi widderholl
+Nom d’origine ¦ Originalnumm
+1 600 px au plus, JPG 82 %, sans GPS ¦ Héchstens 1 600 px, JPG 82 %, ouni GPS
+les images dans un seul PDF A4 ¦ d’Biller an engem eenzegen A4-PDF
+carré 1:1, 400 px, JPG ¦ quadratesch 1:1, 400 px, JPG
+Partager sans la position GPS ¦ Ouni d’GPS-Positioun deelen
+métadonnées effacées ¦ Metadonnéeë geläscht
+Documents en Word ¦ Dokumenter als Word
+tous en .docx ¦ all als .docx
+Classeurs en CSV ¦ Tabellen als CSV
+la 1re feuille en CSV ¦ dat 1. Blat als CSV
+{x} : pas pour un {x2} ¦ {x}: net fir en {x2}
+{x} : rien à changer ¦ {x}: näischt z’änneren
+Ton navigateur ne sait pas écrire l’AVIF : WebP à la place ¦ Däi Browser kann keen AVIF schreiwen: amplaz WebP
+{x} ne s’écrit pas ici : PNG à la place ¦ {x} kann hei net geschriwwe ginn: amplaz PNG
+Un GIF n’a pas de position GPS à effacer ¦ E GIF huet keng GPS-Positioun fir ze läschen
+PNG : le poids baisse en réduisant la taille de l’image ¦ PNG: et gëtt méi liicht, wann d’Bild verklengert gëtt
+CSV : seulement la 1re feuille, sans mise en forme ¦ CSV: just dat 1. Blat, ouni Formatéierung
+{x} : le texte seul, sans images ni mise en forme ¦ {x}: just den Text, ouni Biller an ouni Formatéierung
+PDF : en lecture seule (seulement renommé, étiqueté ou relié) ¦ PDF: just ze liesen (nëmmen ëmbenannt, etikettéiert oder verbonnen)
+{x} : seulement renommé, étiqueté ou relié ¦ {x}: nëmmen ëmbenannt, etikettéiert oder verbonnen
+Étiquettes et personne : seulement dans la base (pas dans un ZIP) ¦ Etiketten a Persoun: just an der Datebank (net an engem ZIP)
+Venu de l’ordinateur : rangé comme nouveau média ¦ Vum Computer: als neie Medium ofgeluecht
+« Assembler en un PDF » : aucune image dans le lot ¦ „An ee PDF zesummesetzen“: kee Bild am Stapel
+Une action en double : seule la dernière carte compte pour « Renommer » et « Changer de format » ¦ Eng Aktioun duebel: just déi lescht Kaart zielt fir „Ëmbenennen“ an „D’Format wiesselen“
+plus grand côté {long} px ¦ längste Säit {long} px
+tête en bas ¦ op de Kapp gestallt
+rien à faire ¦ näischt ze maachen
+sépia ¦ Sepia
+rien ne change ¦ näischt ännert sech
+Ko au plus ¦ Ko héchstens
+rien de choisi ¦ näischt gewielt
+.{ext} ne se range pas dans les médias : ⤓ ZIP seulement ¦ .{ext} kann net an de Medien ofgeluecht ginn: just ⤓ ZIP
+Ouvrir la fiche Employeurs ¦ D’Fiche Patronen opmaachen
+Fiche Employeurs ¦ Fiche Patronen
+Revues et magazines ¦ Revuen a Magazinnen
+Nouvelle fiche Employeurs : « {title} ». ¦ Nei Fiche Patronen: „{title}“.
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger cette {x2} ? ¦ D’Fiche vu(n) {name} ass nach net „{icon} {label}“ ugekräizt. Ukräizen, fir dës {x2} do ofzeleeën?
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger ce {x2} ? ¦ D’Fiche vu(n) {name} ass nach net „{icon} {label}“ ugekräizt. Ukräizen, fir dëse {x2} do ofzeleeën?
+Cocher « {label} » ? ¦ „{label}“ ukräizen?
+Cocher « {label} » ¦ „{label}“ ukräizen
+Tchécoslovaquie ¦ Tschechoslowakei
+Brevet européen ¦ Europäesche Patent
+déposé ¦ ugemellt
+en examen ¦ an der Préiwung
+délivré ¦ erdeelt
+en vigueur ¦ a Kraaft
+tombé (domaine public) ¦ ofgelaf (ëffentlech Domän)
+expiré ¦ ofgelaf
+abandonné ¦ opginn
+annulé ¦ annuléiert
+idée, croquis ¦ Iddi, Skizz
+breveté ¦ patentéiert
+fabriqué, vendu ¦ hiergestallt, verkaaft
+on ne sait pas ¦ mir wëssen et net
+donné ¦ verschenkt
+cassé ¦ futti
+détruit ¦ zerstéiert
+antériorité opposée ¦ Virveröffentlechung entgéintgehalen
+contrefaçon ¦ Fälschung
+action en nullité ¦ Nullitéitsklo
+procès ¦ Prozess
+gagné ¦ gewonnen
+brevet refusé ¦ Patent refuséiert
+invention dérivée ¦ ofgeleet Erfindung
+perfectionnement de ¦ Verbesserung vu(n)
+issue de la découverte ¦ aus der Entdeckung entstanen
+a mené à ¦ huet gefouert zu
+fabriquée sous forme de ¦ hiergestallt als
+publiée dans ¦ publizéiert an
+liée à ¦ verbonne mat
+Figure du brevet ¦ Figur vum Patent
+Objet fabriqué ¦ Hiergestallten Objet
+Publicité, notice ¦ Reklamm, Notiz
+tombé ¦ ofgelaf
+Annuités ¦ Joresgebüren
+Publié ¦ Publizéiert
+Cité par ¦ Zitéiert vun
+brevet ultérieur ¦ spéidere Patent
+brevets ultérieurs ¦ spéider Patenter
+Voir en ligne ¦ Online kucken
+Ajouter un brevet ¦ E Patent derbäisetzen
+Délivrance ¦ Erdeelung
+Déposant ¦ Umelder
+Fabriqués ¦ Hiergestallt
+(aussi dans « 🏆 Concours et récompenses » de la personne) ¦ (och an „🏆 Concoursen an Auszeechnungen“ vun der Persoun)
+conçu en {dt} ¦ entworf am Joer {dt}
+conçu le {dt} ¦ entworf den {dt}
+conçu {dt} ¦ entworf {dt}
+L’invention ¦ D’Erfindung
+Nom de l’invention ¦ Numm vun der Erfindung
+Première idée ¦ Éischt Iddi
+Où l’idée est notée ¦ Wou d’Iddi notéiert ass
+D’après, inspirée de ¦ No, inspiréiert vu(n)
+Carnet, plan (média) ¦ Carnet, Plang (Medium)
+Figures du brevet, prototypes, objets fabriqués ¦ Figure vum Patent, Prototyppen, hiergestallten Objeten
+Un inventeur ¦ En Erfinder
+Un brevet ¦ E Patent
+Titre du brevet ¦ Titel vum Patent
+Revendications (une par ligne) ¦ Usprochen (een pro Linn)
+Publié (BOPI…) ¦ Publizéiert (BOPI…)
+Famille de brevets ¦ Patentfamill
+Pièce (brevet complet, 4 p.…) ¦ Stéck (komplett Patent, 4 S.…)
+Adresse en ligne ¦ Online-Adress
+Un prototype ¦ E Prototyp
+Présenté ¦ Presentéiert
+Licences et exploitation ¦ Lizenzen an Exploitatioun
+Antériorités et procès ¦ Virveröffentlechungen a Prozesser
+Une antériorité, un procès ¦ Eng Virveröffentlechung, e Prozess
+Objets fabriqués ¦ Hiergestallten Objeten
+Un objet ¦ En Objet
+Modèle, objet ¦ Modell, Objet
+Fiche de l’exemplaire ¦ Fiche vum Exemplar
+Note sur les objets ¦ Notiz iwwer d’Objeten
+Inventions et découvertes liées ¦ Verbonnen Erfindungen an Entdeckungen
+Liées ¦ Verbonnen
+ex. sécateur, FR 1 054 321, Lépine, 1952 ¦ z. B. sécateur, FR 1 054 321, Lépine, 1952
+Breveté en ¦ Patentéiert an
+Avec au moins un brevet ¦ Mat op mannst engem Patent
+Brevet encore en vigueur ¦ Patent nach a Kraaft
+Exploitée (licence) ¦ Exploitéiert (Lizenz)
+Le plus de brevets ¦ Am meeschte Patenter
+Espèce nouvelle (plante) ¦ Nei Aart (Planz)
+Espèce nouvelle (animal) ¦ Nei Aart (Déier)
+Comète ¦ Koméit
+Astéroïde, petite planète ¦ Asteroid, klenge Planéit
+Étoile, exoplanète, galaxie ¦ Stär, Exoplanéit, Galaxis
+Gène ¦ Gen
+Molécule, élément chimique ¦ Molekül, chemescht Element
+Minéral ¦ Mineral
+Site archéologique ¦ Archeologesch Site
+Épave ¦ Wrack
+Manuscrit, archive, trésor ¦ Manuskript, Archiv, Schatz
+Loi, théorème, méthode ¦ Gesetz, Theorem, Method
+Source, gisement ¦ Quell, Lagerstätt
+Lieu (col, lac, île, sommet…) ¦ Plaz (Pass, Séi, Insel, Spëtzt…)
+Autre découverte ¦ Aner Entdeckung
+espèce, sous-espèce, variété ¦ Aart, Ënneraart, Varietéit
+Holotype (spécimen type) ¦ Holotyp (Typexemplar)
+N° de collection ¦ Sammlungsnummer
+Désignation ¦ Bezeechnung
+Éclat (magnitude) ¦ Hellegkeet (Magnitud)
+Système cristallin ¦ Kristallsystem
+Localité type ¦ Typlokalitéit
+Objets trouvés ¦ Fonnten Objeten
+Musée, dépôt ¦ Musée, Depot
+Développement, profondeur ¦ Längt, Déift
+Ornée, remplissage ¦ Dekoréiert, Fëllung
+Objets remontés ¦ Eropgeholl Objeten
+Fonds, bibliothèque ¦ Bestand, Bibliothéik
+Énoncé ¦ Formuléierung
+Preuve, démonstration ¦ Beweis, Demonstratioun
+Débit, réserve ¦ Duerchfloss, Reserv
+Sorte (col, lac, île…) ¦ Aart (Pass, Séi, Insel…)
+Quoi exactement ¦ Wat genee
+Ces champs changent avec la « Sorte » : comète (désignation, orbite, observatoire), gène (organisme, chromosome, n° GenBank), site archéologique (période, fouilles, musée), fossile (âge, couche, gisement)… ¦ Dës Felder änneren no der „Aart“: Koméit (Bezeechnung, Ëmlafbunn, Observatoire), Gen (Organismus, Chromosom, GenBank-Nr.), archeologesch Site (Period, Ausgruewungen, Musée), Fossil (Alter, Schicht, Lagerstätt)…
+publié ¦ publizéiert
+accepté ¦ ugeholl
+rétrogradé (sous-espèce…) ¦ zréckgestuft (Ënneraart…)
+en attente ¦ an der Waard
+contestée ¦ contestéiert
+rétrogradée ¦ zréckgestuft
+réfutée ¦ widderluecht
+priorité contestée ¦ Prioritéit contestéiert
+critiquée ¦ kritiséiert
+Première description ¦ Éischt Beschreiwung
+Révision ¦ Revisioun
+découverte en même temps que ¦ gläichzäiteg entdeckt mat
+nommée d’après ¦ benannt no
+fabriquée ¦ hiergestallt
+Lieu, station ¦ Plaz, Statioun
+Ce lieu n’a pas encore ses coordonnées (fiche du lieu, ou « Coordonnées » ici). ¦ Dës Plaz huet nach keng Koordinaten (Fiche vun der Plaz, oder „Koordinaten“ hei).
+Nommée d’après ¦ Benannt no
+Liens possibles : « publiée dans », « a mené à », « confirme », « contredit », « découverte en même temps que », « nommée d’après ». ¦ Méiglech Linken: „publizéiert an“, „huet gefouert zu“, „bestätegt“, „widdersprécht“, „gläichzäiteg entdeckt mat“, „benannt no“.
+Découvertes ¦ Entdeckungen
+La découverte ¦ D’Entdeckung
+Nom de la découverte ¦ Numm vun der Entdeckung
+Découvreurs ¦ Entdecker
+Un découvreur ¦ En Entdecker
+a trouvé la plante, a décrit l’espèce… ¦ huet d’Planz fonnt, huet d’Aart beschriwwen…
+découvreur ¦ Entdecker
+Spécimen type ¦ Typexemplar
+Reconnue ou contestée ¦ Unerkannt oder ëmstridden
+Auteur et année du nom ¦ Auteur a Joer vum Numm
+En l’honneur de ¦ Zu Éiere vun
+nommée en son honneur ¦ zu senger oder hirer Éier benannt
+Pourquoi ce nom ¦ Firwat dësen Numm
+Statut du nom ¦ Status vum Numm
+Précision du statut ¦ Detailer zum Status
+Spécimen, lieu, planche, étiquette ¦ Exemplar, Plaz, Tafel, Etikett
+Les images de la découverte ¦ D’Biller vun der Entdeckung
+Lieu de la découverte ¦ Plaz vun der Entdeckung
+Endroit précis ¦ Genee Plaz
+Publication (fiche ou texte) ¦ Publikatioun (Fiche oder Text)
+Reconnaissance et controverses ¦ Unerkennung a Kontroversen
+Liens entre découvertes et inventions ¦ Verbindungen tëscht Entdeckungen an Erfindungen
+ex. ophrys, comète, Laguenne, 1956 ¦ z. B. Ophrys, Koméit, Laguenne, 1956
+Porte le nom de quelqu’un ¦ Dréit den Numm vun engem
+Article de revue ¦ Artikel an enger Zäitschrëft
+Communication, congrès ¦ Virtrag, Kongress
+Chapitre de livre ¦ Buchkapitel
+La publication ¦ D’Publikatioun
+Auteurs (dans l’ordre) ¦ Auteuren (an der Reiefolleg)
+rôle (facultatif) : dernier auteur, correspondant… ¦ Roll (fakultativ): leschten Auteur, Korrespondenzauteur…
+Éditeur, congrès ¦ Verlag, Kongress
+PDF, tiré à part ¦ PDF, Separatdrock
+Découvertes et inventions ¦ Entdeckungen an Erfindungen
+Fiches liées ¦ Verbonne Fichen
+Avec un DOI ¦ Mat engem DOI
+Avec le PDF ¦ Mam PDF
+Les plus citées ¦ Déi am meeschten zitéiert
+=famille de brevets ¦ Patentfamill|Patentfamillen
+=autre brevet détaillé ¦ aneren detailléierte Patent|aner detailléiert Patenter
+=brevet ¦ Patent|Patenter
+=prototype ¦ Prototyp|Prototypen
+élève, stagiaire ¦ Schüler, Stagiaire
+maître, patron ¦ Meeschter, Betreier
+conférence invitée ¦ Gaaschtvirtrag
+congrès ¦ Kongress
+séjour de recherche ¦ Fuerschungsopenthalt
+espèce ¦ Aart
+astéroïde ¦ Asteroid
+minéral ¦ Mineral
+école, lycée ¦ Schoul, Lycée
+laboratoire, bâtiment ¦ Labo, Gebai
+carnets de laboratoire ¦ Laboheften
+carnets de terrain ¦ Terrainsheften
+notes de cours ¦ Coursnotizen
+Profil de scientifique ¦ Wëssenschaftlerprofil
+Profils de scientifique ¦ Wëssenschaftlerprofiler
+Le scientifique ¦ De Wëssenschaftler
+Sujets de recherche ¦ Fuerschungsthemen
+Plus haut diplôme ¦ Héchsten Diplom
+Publications en tout ¦ Publikatiounen am Ganzen
+(si toutes ne sont pas notées ici) ¦ (wann net all hei agedroe sinn)
+Citations en tout ¦ Zitatiounen am Ganzen
+Directeur de thèse ¦ Theesdirekter
+codirecteur de thèse ¦ Theeskodirekter
+Un membre du jury ¦ E Member vun der Jury
+président, rapporteur… ¦ President, Rapporteur…
+jury de thèse ¦ Theesjury
+Laboratoires et postes ¦ Laboratoiren a Posten
+Filiation académique ¦ Akademesch Filiatioun
+Un maître ¦ E Meeschter
+Pour elle, lui ¦ Fir si, fir hien
+Élèves, doctorants ¦ Schüler, Doktoranden
+Un élève ¦ E Schüler
+Thèse en ¦ Thees an
+Doctorants en tout ¦ Doktoranden am Ganzen
+Un collaborateur ¦ E Mataarbechter
+Missions et conférences ¦ Missiounen a Konferenzen
+Missions · conférences ¦ Missiounen · Konferenzen
+Une mission, une conférence ¦ Eng Missioun, eng Konferenz
+Expédition ¦ Expeditioun
+Académies, sociétés, distinctions ¦ Akademien, Gesellschaften, Auszeechnungen
+Académies, sociétés ¦ Akademien, Gesellschaften
+Une académie, une société ¦ Eng Akademie, eng Gesellschaft
+Académie, société ¦ Akademie, Gesellschaft
+Une distinction ¦ Eng Auszeechnung
+Porte son nom ¦ Dréit säin Numm
+Une chose à son nom ¦ Eppes, dat säin Numm dréit
+Fiche de la découverte ¦ Fiche vun der Entdeckung
+Carnets de laboratoire ¦ Laboheften
+Des carnets ¦ Heften
+Un financement ¦ Eng Finanzéierung
+Récit de carrière ¦ Karriärgeschicht
+Profil d’inventeur ¦ Erfinnerprofil
+Profils d’inventeur ¦ Erfinnerprofiler
+L’inventeur ¦ Den Erfinner
+Lieu de l’atelier ¦ Plaz vum Atelier
+Associations d’inventeurs ¦ Erfinnerveräiner
+thèse, postes, publications, élèves, académies, missions, nommages, découvertes ¦ Thees, Posten, Publikatiounen, Schüler, Akademien, Missiounen, Nimm, Entdeckungen
+découverte ¦ Entdeckung
+inventions, brevets pays par pays, prototypes, licences, objets fabriqués, concours ¦ Erfindungen, Patenter Land fir Land, Prototypen, Lizenzen, hiergestallten Objeten, Concoursen
+expéditions sur la carte, membres, premières, collectes, récits, toponymes, sociétés ¦ Expeditiounen op der Kaart, Memberen, Éischtleeschtungen, Sammlungen, Berichter, Plazennimm, Gesellschaften
+Disciplines et domaines ¦ Disziplinnen a Beräicher
+Disciplines, sujets, ORCID, IdRef… : « … » pour les écrire. ¦ Disziplinnen, Themen, ORCID, IdRef…: „…“ fir se ze schreiwen.
+Titre, date, université, directeur, jury : « … » pour l’écrire. ¦ Titel, Datum, Universitéit, Direkter, Jury: „…“ fir et ze schreiwen.
+les institutions sont des fiches Employeurs ¦ d’Institutioune si Fiche vun den Employeuren
+Aucun poste noté. ¦ Kee Posten agedroen.
+… et {x} de plus (« Tout voir »). ¦ … an nach {x} („Alles weisen“).
+Aucune publication pour l’instant : importe-les par DOI, ORCID ou HAL, ou écris-les une par une. ¦ Nach keng Publikatioun: importéier se per DOI, ORCID oder HAL, oder schreif se eng no där anerer.
+Importer (DOI, ORCID, HAL) ¦ Importéieren (DOI, ORCID, HAL)
+Aucune invention pour l’instant. ¦ Nach keng Erfindung.
+Nouvelle invention ¦ Nei Erfindung
+Aucune découverte pour l’instant. ¦ Nach keng Entdeckung.
+Nouvelle découverte ¦ Nei Entdeckung
+son directeur de thèse ¦ säin Theesdirekter
+l’a eu(e) pour élève ¦ hat hien oder si als Schüler
+Son directeur de thèse, ses maîtres, ses élèves : « … » pour les écrire. Les fiches de la base qui la, le citent comme directeur de thèse s’ajoutent toutes seules. ¦ Säin Theesdirekter, seng Meeschteren, seng Schüler: „…“ fir se ze schreiwen. D’Fichen aus der Datebank, déi si oder hien als Theesdirekter nennen, kommen eleng derbäi.
+maîtres de ¦ Meeschtere vun
+directeur de thèse de ¦ Theesdirekter vun
+thèse {x} ¦ Thees {x}
+{x} de thèse de ({ns}) ¦ {x} vun der Thees vun ({ns})
+Les co-auteurs de ses publications s’ajoutent tout seuls. ¦ D’Koauteure vu senge Publikatioune kommen eleng derbäi.
+Aucun financement noté. ¦ Keng Finanzéierung agedroen.
+conférence ¦ Konferenz
+séjour ¦ Openthalt
+Missions, terrains, conférences invitées : « … » pour les écrire. ¦ Missiounen, Terrainsaarbechten, Gaaschtvirträg: „…“ fir se ze schreiwen.
+Académies, distinctions ¦ Akademien, Auszeechnungen
+Aucune académie notée. ¦ Keng Akademie agedroen.
+nommée par {other} ¦ benannt vun {other}
+Espèces, astéroïdes, rues, prix à son nom : « … » pour les écrire. Les découvertes de la base « en l’honneur de » cette personne s’ajoutent toutes seules. ¦ Aarten, Asteroiden, Stroossen, Präisser, déi säin Numm droen: „…“ fir se ze schreiwen. D’Entdeckungen aus der Datebank „zu Éiere vun“ dëser Persoun kommen eleng derbäi.
+Carnets de laboratoire ou de terrain : « … » pour les noter (les scans vont dans les médias). ¦ Labo- oder Terrainsheften: „…“ fir se opzeschreiwen (d’Scane kommen an d’Medien).
+« … » pour l’écrire. ¦ „…“ fir et ze schreiwen.
+L’inventeur et son atelier ¦ Den Erfinner a säin Atelier
+Métier, atelier, domaines : « … » pour les écrire. ¦ Beruff, Atelier, Beräicher: „…“ fir se ze schreiwen.
+Tous ses brevets ¦ All seng Patenter
+Aucun brevet : sur la fiche d’une invention, « 📜 Brevets » → une ligne par pays. ¦ Kee Patent: op der Fiche vun enger Erfindung, „📜 Patenter“ → eng Linn pro Land.
+Aucune licence notée. ¦ Keng Lizenz agedroen.
+Concours d’inventeurs ¦ Erfinnerconcoursen
+Concours Lépine, foires, expositions : sur la fiche de chaque invention. ¦ Concours Lépine, Foiren, Ausstellungen: op der Fiche vun all Erfindung.
+Aucun objet noté. ¦ Keen Objet agedroen.
+Importer les publications de {name} ¦ D’Publikatioune vun {name} importéieren
+Importer les publications cochées ¦ Déi ugekräizt Publikatiounen importéieren
+Ne pas reprendre celles qui sont déjà là (même DOI ou même titre) ¦ Déi net nach eng Kéier huelen, déi schonn do sinn (selwechten DOI oder selwechten Titel)
+Relier {name} comme auteur quand son nom y est ¦ {name} als Auteur verbannen, wann säin Numm drasteet
+Compléter par Crossref (auteurs, pages, citations) quand il y a un DOI ¦ Mat Crossref ergänzen (Auteuren, Säiten, Zitatiounen), wann et en DOI gëtt
+Colle un ou plusieurs DOI (un par ligne), ou leurs adresses https://doi.org/… : titre, revue, auteurs, pages et citations viennent de Crossref. ¦ Pech een oder méi DOIen an (een pro Linn), oder hir Adressen https://doi.org/…: Titel, Zäitschrëft, Auteuren, Säiten an Zitatioune kommen vu Crossref.
+L’identifiant ORCID (16 chiffres, ex. 0000-0002-1825-0097) ou l’adresse orcid.org/… : toute la liste des travaux déclarés. ¦ Den ORCID-Identifiant (16 Zifferen, z. B. 0000-0002-1825-0097) oder d’Adress orcid.org/…: déi ganz Lëscht vun den ugemellten Aarbechten.
+Le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL (idHal, ex. anne-martin) : les dépôts de l’archive ouverte HAL. ¦ Den Numm vum Auteur (z. B. Anne Martin) oder säin HAL-Identifiant (idHal, z. B. anne-martin): d’Depote vum oppenen Archiv HAL.
+Écris d’abord ce qu’il faut chercher. ¦ Schreif fir d’éischt, wat gesicht soll ginn.
+Coche les publications à importer. ¦ Kräiz d’Publikatiounen un, déi importéiert solle ginn.
+expédition ¦ Expeditioun
+Ouvrir sa page ¦ Seng Säit opmaachen
+=publication ¦ Publikatioun|Publikatiounen
+=invention ¦ Erfindung|Erfindungen
+=discovery ¦ Entdeckung|Entdeckungen
+=doctorant ¦ Doktorand|Doktoranden
+=expédition ¦ Expeditioun|Expeditiounen
+=élève ¦ Schüler|Schüler
+=mission ¦ Missioun|Missiounen
+=cours ¦ Cours|Coursen
+=publication importée ¦ importéiert Publikatioun|importéiert Publikatiounen
+=membre ¦ Member|Memberen
+géographique, cartographie ¦ geographesch, Kartographie
+maritime, océanographique ¦ maritim, ozeanographesch
+spéléologie ¦ Héielefuerschung
+archéologique ¦ archeologesch
+aérienne ¦ an der Loft
+raid, traversée ¦ Raid, Duerchquerung
+Conférences ¦ Konferenzen
+Radio, télévision ¦ Radio, Fernseh
+nom donné, non officiel ¦ vergi Numm, net offiziell
+disparu, remplacé ¦ verschwonnen, ersat
+Ajouter une étape ¦ Eng Etapp derbäisetzen
+Les lieux de l’itinéraire n’ont pas encore leurs coordonnées (fiche du lieu, ou colonne « Coordonnées »). ¦ D’Plaze vum Itinéraire hunn nach keng Koordinaten (Fiche vun der Plaz, oder Kolonn „Koordinaten“).
+L’expédition ¦ D’Expeditioun
+Nom de l’expédition ¦ Numm vun der Expeditioun
+Coordonnées (si le lieu n’en a pas) ¦ Koordinaten (wann d’Plaz keng huet)
+Une première ¦ Eng Éischtleeschtung
+Un membre ¦ E Member
+chef, médecin, botaniste, guide… ¦ Chef, Dokter, Botaniker, Guide…
+Un moyen ¦ E Mëttel
+Véhicule, animaux, matériel ¦ Gefier, Déieren, Material
+Un carnet, des photos… ¦ E Carnet, Fotoen…
+Collectes — où elles sont aujourd’hui ¦ Sammlungen — wou se haut sinn
+Une collecte ¦ Eng Sammlung
+Où aujourd’hui ¦ Wou haut
+Un incident ¦ En Incident
+Les photos de l’expédition ¦ D’Fotoe vun der Expeditioun
+Récits et conférences ¦ Berichter a Konferenzen
+Un récit, des conférences ¦ E Bericht, Konferenzen
+Fiche (livre…) ¦ Fiche (Buch…)
+Cartes tracées ¦ Gezeechent Kaarten
+Toponymes donnés ¦ Vergi Plazennimm
+Un nom donné ¦ E vergienen Numm
+Passée par ¦ Passéiert duerch
+Avec une première ¦ Mat enger Éischtleeschtung
+Profil d’explorateur ¦ Entdeckerprofil
+Profils d’explorateur ¦ Entdeckerprofiler
+L’explorateur ¦ Den Entdecker
+Régions parcourues ¦ Duerchreest Regiounen
+Sociétés ¦ Gesellschaften
+Une société ¦ Eng Gesellschaft
+Société, club ¦ Gesellschaft, Club
+Lieux à son nom ¦ Plazen, déi säin Numm droen
+Un lieu à son nom ¦ Eng Plaz, déi säin Numm dréit
+Des conférences ¦ Konferenzen
+Récit de vie ¦ Liewensgeschicht
+Aucune expédition pour l’instant. ¦ Nach keng Expeditioun.
+Nouvelle expédition ¦ Nei Expeditioun
+Carte de toutes ses expéditions ¦ Kaart vun all sengen Expeditiounen
+Aucun itinéraire : sur la fiche d’une expédition, « 🗺 Itinéraire » → une ligne par étape. ¦ Keen Itinéraire: op der Fiche vun enger Expeditioun, „🗺 Itinéraire“ → eng Linn pro Etapp.
+Frise des expéditions ¦ Zäitstrahl vun den Expeditiounen
+Les expéditions sans date n’ont pas de place sur la frise. ¦ Expeditiounen ouni Datum hu keng Plaz um Zäitstrahl.
+Aucune première notée. ¦ Keng Éischtleeschtung agedroen.
+Toponymes donnés ou à son nom ¦ Plazennimm, déi hie ginn huet oder déi säin Numm droen
+Noms donnés ¦ Vergi Nimm
+À son nom ¦ Mat sengem Numm
+Aucun nom de lieu noté. ¦ Kee Plazennumm agedroen.
+Collectes et où elles sont ¦ Sammlungen a wou se sinn
+Aucune collecte notée. ¦ Keng Sammlung agedroen.
+Aucun récit noté. ¦ Kee Bericht agedroen.
+Sociétés et distinctions ¦ Gesellschaften an Auszeechnungen
+Société de géographie, Explorers Club, médailles… : « … » pour les écrire. ¦ Société de géographie, Explorers Club, Medaillen…: „…“ fir se ze schreiwen.
+Compagnons d’expédition ¦ Expeditiounsbegleeder
+Personne d’autre noté dans ses expéditions. ¦ Keen aneren a sengen Expeditiounen agedroen.
+Découverte ¦ Entdeckung
+<strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé. ¦ <strong>Liesmodus</strong>: kuck dir d’Genealogie a Rou un, näischt kann geännert oder geläscht ginn.
+Quitter la consultation ¦ Liesmodus verloossen
+Quitter le mode consultation (mot de passe) ¦ Liesmodus verloossen (Passwuert)
+Encore une fois ¦ Nach eng Kéier
+Les deux mots de passe sont différents. ¦ Déi zwee Passwierder sinn ënnerschiddlech.
+Donne le mot de passe choisi en entrant dans ce mode. ¦ Gëff d’Passwuert an, dat s du beim Wiessel an dëse Modus gewielt hues.
+Mode consultation terminé. ¦ Liesmodus ofgeschloss.
+Passer en mode consultation ¦ An de Liesmodus wiesselen
+La famille pourra parcourir ta généalogie sur cet ordinateur sans rien pouvoir modifier ni supprimer. <b>Choisis un mot de passe</b> : il sera demandé pour sortir de ce mode. (Oublié ? Supprime le fichier <code>consultation.json</code> du dossier des données.) ¦ D’Famill ka sech deng Genealogie op dësem Computer ukucken, ouni eppes kënnen z’änneren oder ze läschen. <b>Wiel e Passwuert</b>: et gëtt gefrot, fir aus dësem Modus erauszegoen. (Vergiess? Läsch de Fichier <code>consultation.json</code> am Dossier vun den Donnéeën.)
+Mode consultation activé. ¦ Liesmodus ageschalt.
+Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »). ¦ Keng Feier erkannt (et brauch den Numm vun der Feier an d’Joer, op Franséisch, z. B. „le jour de la Pentecôte 1754“).
+(calendrier julien, en usage en France avant décembre 1582 ; soit le {gregorian} dans le calendrier grégorien) ¦ (julianesche Kalenner, a Frankräich bis Dezember 1582 am Gebrauch; dat ass den {gregorian} am gregorianesche Kalenner)
+Pâques {x} : {easter}. ¦ Ouschteren {x}: {easter}.
+Écrit : « {original} ». ¦ Geschriwwen: „{original}“.
+Fêtes religieuses → date exacte ¦ Reliéis Feierdeeg → genauen Datum
+Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite). ¦ D’Paschtéier hu dacks „le jour de la Pentecôte 1754“, „le lendemain de la Saint-Martin“, „le lundi après la Saint-Martin 1650“ oder „trois jours avant Pâques 1702“ geschriwwen. Schreif d’Ernimmung (op Franséisch): d’App rechent de richtegen Datum aus (Ouschteren no der julianescher Komputistik virun 1583, duerno no der gregorianescher).
+Mention de l’acte ¦ Ernimmung am Akt
+Toutes les fêtes mobiles d’une année (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…) : cadre « Saint du jour et fêtes mobiles ». ¦ All bewegelech Feierdeeg vun engem Joer (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…): Kader „Hellegen vum Dag a bewegelech Feierdeeg“.
+Utiliser cette date ¦ Dësen Datum benotzen
+Date écrite dans l’acte : « {original} » ¦ Datum, wéi en am Akt steet: „{original}“
+Date calculée d’après « {original} »{x}. ¦ Datum ausgerechent no „{original}“{x}.
+(mention gardée dans la description) ¦ (Ernimmung an der Beschreiwung behalen)
+{x} par le dossier Scans : à identifier dans les médias. ¦ {x} iwwer den Dossier Scans: an de Medien z’identifizéieren.
+Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une. ¦ Wiel en Dossier op dengem Computer. All Fichier, deen do ukënnt (vum Scanner, vum Telefon oder iwwer AirDrop), kënnt vun eleng an d’App, bei d’Medien, déi nach z’identifizéiere sinn. Du muss deng Archivfotoen net méi eng no där anerer importéieren.
+Dossier surveillé ¦ Iwwerwaachten Dossier
+Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte) ¦ Dësen Dossier iwwerwaachen (all 20 Sekonnen, soulaang d’App op ass)
+Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA » ¦ Importéiert Fichieren an den Ënnerdossier „Importés dans LCNDA“ réckelen
+Formats : JPEG, PNG, WebP, GIF, PDF{x}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois. ¦ Formater: JPEG, PNG, WebP, GIF, PDF{x}. Tipp: en Dossier nëmme fir Scanen (AirDrop leet alles an „Downloads“, wou vun allem dra läit). Dee selwechte Fichier gëtt ni zweemol importéiert.
+, et HEIC (iPhone) ou TIFF, convertis en JPEG ¦ , an HEIC (iPhone) oder TIFF, an JPEG ëmgewandelt
+(les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible ») ¦ (d’HEIC-Fotoe vum iPhone an d’TIFFe kënnen op dësem Computer net ëmgewandelt ginn: stell den iPhone op „Am kompatibelsten“)
+Vérifier maintenant ¦ Elo kontrolléieren
+{x} · {x2} en tout ¦ {x} · {x2} am Ganzen
+Rien en attente ¦ Näischt am Waarden
+dossier introuvable (disque débranché ?) ¦ Dossier net fonnt (Disk ofgekoppelt?)
+Derniers arrivés ¦ Lescht ukomm
+Voir les médias à identifier ¦ D’Medien weisen, déi z’identifizéiere sinn
+Rien d’arrivé pour l’instant ¦ Nach näischt ukomm
+Dossier surveillé. ¦ Dossier gëtt iwwerwaacht.
+Surveillé ¦ Iwwerwaacht
+Pas surveillé ¦ Net iwwerwaacht
+Avant {until}, chercher dans les registres de la paroisse de ¦ Virun {until} an de Registere sichen vun der Par
+Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne. ¦ Vill Weiler an Dierfer hunn zu der Nopeschpar gehéiert: d’Daf, Bestietnesser a Begriefnesser vu virun der Revolutioun sinn dann an de Registere vun enger anerer Gemeng. Schreif dës Zougehéieregkeeten op, sou wéi s du se fënns: d’App weist et bei den Evenementer vun de Fichen, bei de Sichaktiounen an an den Online-Registeren.
+Modifier le rattachement ¦ Zougehéieregkeet änneren
+Nouveau rattachement ¦ Nei Zougehéieregkeet
+Lieu (hameau, village, commune actuelle) ¦ Plaz (Weiler, Duerf, haiteg Gemeng)
+Dépendait de la paroisse de ¦ Huet gehéiert zu der Par
+Nom de la paroisse (tel que dans les registres) ¦ Numm vun der Par (wéi an de Registeren)
+Note, source ¦ Notiz, Quell
+Chercher… (lieu, paroisse, note) ¦ Sichen… (Plaz, Par, Notiz)
+Avec des événements concernés ({withEv}) ¦ Mat betraffenen Evenementer ({withEv})
+Avec des événements concernés ¦ Mat betraffenen Evenementer
+Jusqu’en (année) ¦ Bis (Joer)
+Événements concernés ¦ Betraffen Evenementer
+Modifier ce rattachement ¦ Dës Zougehéieregkeet änneren
+Supprimer ce rattachement ¦ Dës Zougehéieregkeet läschen
+Aucun rattachement ne correspond ¦ Keng Zougehéieregkeet passt
+Supprimer ce rattachement ? ¦ Dës Zougehéieregkeet läschen?
+Supprimer le rattachement ¦ D’Zougehéieregkeet läschen
+Rattachement enregistré. ¦ Zougehéieregkeet gespäichert.
+Les témoins, voisins, curés, parrains qui n’ont pas de fiche. Par exemple : « Pierre Martin, tisserand, apparaît dans 7 actes entre 1781 et 1803 ». Ce cercle (famille, amis, voisins) débloque souvent une recherche. ¦ D’Zeien, Noperen, Paschtéier, Pätter a Gotten, déi keng Fiche hunn. Zum Beispill: „Pierre Martin, Weber, kënnt tëscht 1781 an 1803 a 7 Akte vir“. Dëse Krees (Famill, Frënn, Noperen) bréngt eng Recherche dacks weider.
+Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app. ¦ Maach „An den Transkriptioune markéieren“ op: wiel en Numm am Text vun engem Akt aus, oder akzeptéier d’Nimm, déi d’App fonnt huet.
+Aucune transcription pour l’instant ¦ Nach keng Transkriptioun
+Transcris d’abord un acte : visionneuse des médias → transcription. ¦ Transkribéier fir d’éischt en Akt: Medienkuker → Transkriptioun.
+Chercher… (nom, métier, lieu) ¦ Sichen… (Numm, Beruff, Plaz)
+Lieu : ¦ Plaz:
+Avec une fiche ¦ Mat enger Fiche
+Le plus de mentions ¦ Am meeschten Ernimmungen
+Chercher… (titre, texte, cote) ¦ Sichen… (Titel, Text, Archivnummer)
+Noms marqués ¦ Markéiert Nimm
+Aucun nom marqué ¦ Keen Numm markéiert
+Au moins un nom marqué ¦ Mindestens ee markéierten Numm
+{x} — apparaît dans ¦ {x} — kënnt vir an
+entre {from} et {to} ¦ tëscht {from} an {to}
+Fiche : {x} ¦ Fiche: {x}
+Les {n} mentions ¦ Déi {n} Ernimmungen
+nom marqué ¦ markéierten Numm
+noms marqués ¦ markéiert Nimm
+aucun nom ¦ keen Numm
+Début de la transcription ¦ Ufank vun der Transkriptioun
+Aucun nom ne correspond ¦ Keen Numm passt
+Aucune transcription ne correspond ¦ Keng Transkriptioun passt
+NOMS CITÉS ¦ GENANNT NIMM
+Sélectionne un nom dans le texte avec la souris : un bouton « Ajouter » apparaît. ¦ Wiel mat der Maus en Numm am Text aus: e Knäppchen „Derbäisetzen“ erschéngt.
+Noms marqués ({n}) ¦ Markéiert Nimm ({n})
+Noms repérés par l’app ¦ Nimm, déi d’App fonnt huet
+À vérifier : la détection automatique n’est pas parfaite. ¦ Ze kontrolléieren: déi automatesch Erkennung ass net perfekt.
+Ajouter… ¦ Derbäisetzen…
+Ajouter ce nom ¦ Dësen Numm derbäisetzen
+NOM CITÉ ¦ GENANNTEN NUMM
+Ajouter au cercle ¦ Zum Krees derbäisetzen
+Demeurant à… ¦ Wunnhaft zu…
+C’est quelqu’un de la base ? ¦ Ass et een aus der Datebank?
+Nom ajouté au cercle. ¦ Numm zum Krees derbäigesat.
+à appliquer ¦ unzewenden
+tu as aussi modifié ¦ du hues et och geännert
+déjà identique ¦ schonn identesch
+absent chez toi ¦ feelt bei dir
+Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé). ¦ Du an e Koseng, jidderee op sengem Computer, un der selwechter Genealogie. D’App tauscht „Ännerungspäck“ aus: du kriss seng, du akzeptéiers oder refuséiers all Ännerung. Deel ni d’Datebank selwer iwwer iCloud oder Dropbox (Gefor vun engem futtisse Fichier).
+Comment ça marche ¦ Wéi et funktionéiert
+<b>Commencer</b> ici : chaque fiche reçoit un identifiant commun. ¦ <b>Ufänken</b> hei: all Fiche kritt e gemeinsamen Identifiant.
+Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db). ¦ Gëff <b>eng Kopie vun denger Datebank</b> dengem Koseng (Knäppchen hei ënnendrënner): hie mécht se a sengem LCNDA op (Astellungen → Import → eng .db-Datebank opmaachen).
+Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple). ¦ Duerno schafft jiddereen op senger Säit a schéckt vun Zäit zu Zäit <b>e Pak mat sengen Ännerungen</b> (e klenge Fichier, zum Beispill per E-Mail).
+À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant. ¦ Beim Empfang <b>akzeptéiers oder refuséiers</b> du all Ännerung. Virdru gëtt eng Sécherheetskopie gemaach.
+Ton prénom (ex. Victor) ¦ Däi Virnumm (z. B. Victor)
+Commencer le travail à deux ¦ Zu zwee schaffen ufänken
+Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes, sources et citations, fiches des médias et leurs liens. Les fichiers des photos et des scans voyagent seulement avec 🔄 Deux ordinateurs (dossier partagé). ¦ Wat ausgetosch gëtt: Fichen, Partnerschaften, Elteren-Kand-Verbindungen, Evenementer, Plazen, Notizen, Quellen an Zitater, Medienfichen an hir Verbindungen. D’Fichiere vun de Fotoen an de Scane reese just mat 🔄 Zwee Computeren (gedeelten Dossier).
+depuis le dernier paquet. ¦ zënter dem leschte Pak.
+Préparer le paquet ¦ De Pak preparéieren
+Copie de la base pour un cousin ¦ Kopie vun der Datebank fir e Koseng
+Le paquet est un fichier « .lcnda-changes.json » à envoyer à ton cousin. Une fois préparé, ces modifications ne seront plus remises dans le paquet suivant : garde-le jusqu’à ce qu’il l’ait reçu. ¦ De Pak ass e Fichier „.lcnda-changes.json“, deen s du dengem Koseng schécks. Wann e preparéiert ass, kommen dës Ännerungen net méi an den nächste Pak: behal en, bis hien en kritt huet.
+Je signe mes paquets ¦ Ech ënnerschreiwe meng Päck
+Recevoir un paquet ¦ E Pak kréien
+Lire le paquet ¦ De Pak liesen
+Paquets échangés ¦ Ausgetosch Päck
+envoyé ¦ geschéckt
+reçu ¦ kritt
+({accepted_count}/{change_count} acceptés) ¦ ({accepted_count}/{change_count} akzeptéiert)
+Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin. ¦ Zu zwee schaffen ass ugefaangen. Gëff elo dengem Koseng eng Kopie vun denger Datebank.
+Aucun changement coché. ¦ Keng Ännerung ugekräizt.
+Appliquer {x} ? Une copie de sécurité de ta base est faite avant. ¦ {x} uwenden? Virdru gëtt eng Sécherheetskopie vun denger Datebank gemaach.
+Appliquer les changements ¦ D’Ännerungen uwenden
+; {x} (fiche verrouillée) ¦ ; {x} (Fiche gespaart)
+Paquet de {x} ¦ Pak vun {x}
+Ce paquet a déjà été reçu une fois. ¦ Dëse Pak gouf schonn eng Kéier empfaangen.
+, dont {x} déjà identiques chez toi (ignorés) ¦ , dovun {x} schonn identesch bei dir (ignoréiert)
+Tout cocher / décocher ¦ Alles ukräizen / ofkräizen
+Rien de nouveau. ¦ Näischt Neies.
+Appliquer les changements cochés ¦ Déi ugekräizt Ännerungen uwenden
+=fichier arrivé ¦ ukomme Fichier|ukomm Fichieren
+=fichier en attente ¦ waardende Fichier|waardend Fichieren
+=rattachement ¦ Zougehéieregkeet|Zougehéieregkeeten
+=changement appliqué ¦ ugewannt Ännerung|ugewannt Ännerungen
+=changement ignoré ¦ ignoréiert Ännerung|ignoréiert Ännerungen
+Une langue ¦ Eng Sprooch
+Quelle langue ? ¦ Wéi eng Sprooch?
+Cyrillique et grec ¦ Kyrillesch a Griichesch
+Aucune langue. ¦ Keng Sprooch.
+Sous chaque lettre : sa translittération ({x}). ¦ Ënner all Buschtaf: seng Transliteratioun ({x}).
+L’alphabet ¦ D’Alphabet
+lettres à accents ou propres à la langue ¦ Buschtawe mat Akzent oder déi der Sprooch eegen sinn
+Lettres à accents et lettres spéciales ¦ Buschtawe mat Akzent a speziell Buschtawen
+Aucune : cette langue n’a pas de lettres à accents. ¦ Keng: dës Sprooch huet keng Buschtawe mat Akzent.
+Seulement dans les mots et les noms étrangers : ¦ Just a friemme Wierder an Nimm:
+Lettres anciennes et abréviations des actes ¦ Al Buschtawen an Ofkierzungen aus den Akten
+Comment la reconnaître ¦ Wéi een se erkennt
+Mots fréquents dans les actes : ¦ Heefeg Wierder an den Akten:
+très probable ¦ ganz wahrscheinlech
+Tape une lettre (ł, ő, ж, ω…) ou un mot entier de l’acte : les langues possibles s’affichent, les plus probables d’abord. ¦ Tipp e Buschtaf (ł, ő, ж, ω…) oder e ganzt Wuert aus dem Akt: déi méiglech Sprooche ginn ugewisen, déi wahrscheinlechst fir d’éischt.
+Tape des lettres : les chiffres, les espaces et la ponctuation ne comptent pas. ¦ Tipp Buschtawen: Zifferen, Espacen a Punktuatioun zielen net.
+Ce caractère n’est dans aucune des langues de la liste. ¦ Dëst Zeechen ass a kenger vun de Sprooche vun der Lëscht.
+Aucune langue de la liste n’a tous ces caractères ensemble : regarde lettre par lettre ci-dessous. ¦ Keng Sprooch vun der Lëscht huet all dës Zeechen zesummen: kuck hei ënnendrënner Buschtaf fir Buschtaf.
+— que des lettres simples (a à z) : tape une lettre à accent ou un mot entier pour départager. ¦ — just einfach Buschtawen (a bis z): tipp e Buschtaf mat Akzent oder e ganzt Wuert, fir ze entscheeden.
+{x} : seulement dans cette langue ¦ {x}: just an dëser Sprooch
+mot des actes : « {x} » ¦ Wuert aus den Akten: „{x}“
+Lettre par lettre ¦ Buschtaf fir Buschtaf
+ce caractère n’est dans aucune des langues de la liste ¦ dëst Zeechen ass a kenger vun de Sprooche vun der Lëscht
+lettre simple : dans {x} en lettres latines ¦ einfache Buschtaf: an {x} a laténgesche Buschtawen
+Majuscules (cliquer encore pour revenir aux minuscules) ¦ Groussbuschtawen (nach eng Kéier klicken, fir zréck op déi kleng Buschtawen)
+Alphabets et langues des actes ¦ Alphabeten a Sprooche vun den Akten
+Pour lire un acte écrit dans une autre langue : l’alphabet de chaque langue, ses lettres à accents, les lettres anciennes, et comment la reconnaître. ¦ Fir en Akt ze liesen, deen an enger anerer Sprooch geschriwwen ass: d’Alphabet vun all Sprooch, hir Buschtawe mat Akzent, déi al Buschtawen, a wéi een se erkennt.
+Lettres ou mot de l’acte ¦ Buschtawen oder Wuert aus dem Akt
+Chercher… (ł, ő, ж, ω, natus, урожденный) ¦ Sichen… (ł, ő, ж, ω, natus, урожденный)
+Clique sur les lettres, ou tape ici ¦ Klick op d’Buschtawen, oder tipp hei
+Effacer la dernière lettre ¦ De leschte Buschtaf läschen
+Cyrillique en ¦ Kyrillesch als
+français courant ¦ gängegt Franséisch
+biélorusse ¦ Wäissrussesch
+En lettres latines : ¦ A laténgesche Buschtawen:
+cyrillique en ISO 9 ¦ Kyrillesch als ISO 9
+lu comme du {x} ¦ gelies wéi {x}
+Clique d’abord sur une lettre grecque, puis sur l’accent ou l’esprit. ¦ Klick fir d’éischt op e griichesche Buschtaf, duerno op den Akzent oder de Spiritus.
+Texte vidé ¦ Text geläscht
+Texte vidé. ¦ Text geläscht.
+Rien à copier : clique d’abord sur des lettres. ¦ Näischt ze kopéieren: klick fir d’éischt op Buschtawen.
+Texte copié : colle-le où tu veux (⌘V). ¦ Text kopéiert: pech en an, wou s du wëlls (⌘V).
+Copie impossible : sélectionne le texte et fais ⌘C. ¦ Kopéieren net méiglech: wiel den Text aus a maach ⌘C.
+=lettre ¦ Buschtaf|Buschtawen
+=langue possible ¦ méiglech Sprooch|méiglech Sproochen
+=langue ¦ Sprooch|Sproochen
+La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms. ¦ D’Liese vun enger Handschrëft (HTR), op dësem Computer: den Text gëtt Linn fir Linn nieft dem Bild proposéiert, onsécher Wierder sinn ënnerstrach. Si gëtt eng Kéier an den Astellungen installéiert. Lies ëmmer no: si mécht Feeler bei den Nimm.
+Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches. ¦ Sicht am Text no Nimm (mat hirer Roll: Pätter, Zeien…), Datumen (och a Buschtawe geschriwwen oder am republikanesche Kalenner), Plazen a Beruffer, fir se mat de Fichen ze verbannen.
+Mots des actes ¦ Wierder aus den Akten
+Abréviations ¦ Ofkierzungen
+Mois ¦ Méint
+Nombres et âges ¦ Zuelen an Alter
+Parenté ¦ Verwandtschaft
+Vieux mots ¦ Al Wierder
+Décès, sépulture ¦ Doud, Begriefnes
+Notaire ¦ Notaire

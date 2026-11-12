@@ -1,0 +1,3818 @@
+fr ¦ lb
+piste|Confirmée ¦ Bestätegt
+piste|Fausse ¦ Falsch
+Fiche #{id} ¦ Fiche #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Tableau gespaart: 🔒 uewen, fir en opzespären.
+H ou Espace ¦ H oder Espace
+Formes ¦ Formen
+Dessin à main levée ¦ Fräihandzeechnung
+Gomme ¦ Gummi
+{owner} : {name} ¦ {owner}: {name}
+Tableau libre ¦ Fräien Tableau
+changer ¦ änneren
+Police du thème ¦ Schrëft vum Thema
+PDF · double-clic pour l’ouvrir ¦ PDF · Duebelklick, fir en opzemaachen
+Dossier ¦ Dossier
+double-clic pour ouvrir ¦ Duebelklick fir opzemaachen
+Recueil ¦ Sammlung
+Recueil · double-clic pour l’ouvrir ¦ Sammlung · Duebelklick, fir se opzemaachen
+Frise ¦ Zäitlinn
+Chargement de la frise… ¦ D’Zäitlinn gëtt gelueden…
+Cadre ¦ Rumm
+Chargement du widget… ¦ De Widget gëtt gelueden…
+Écran de l’app · double-clic pour l’ouvrir ¦ Ecran vun der App · Duebelklick, fir en opzemaachen
+mort à {age} ¦ gestuerwen mat {age}
+Choisis la personne à droite. ¦ Wiel d’Persoun riets.
+Choisir ce groupe ¦ Dës Grupp auswielen
+Groupe {n} ¦ Grupp {n}
+le tableau est fermé ¦ den Tableau ass zou
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ duerno goufen et nach aner Ännerungen: benotz ↶ an der Leescht vum Tableau
+Ce tableau ¦ Dësen Tableau
+Choisir le pinceau ¦ Bengel auswielen
+Dureté du bord : 100 % net, moins = flou ¦ Häert vum Rand: 100 % schaarf, manner = verschwommen
+Les gommes n’effacent que les dessins à main levée. ¦ D’Gummien läschen nëmmen d’Fräihandzeechnungen.
+Clique où écrire. ¦ Klick do, wou s du schreiwe wëlls.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Zéi e Strich; op en Element geluecht, hänkt en sech drun.
+Un lien tout prêt : légende, couleur et style ¦ E fäerdege Link: Legend, Faarf a Stil
+lien|libre ¦ fräi
+Pointes ¦ Spëtzten
+Pointes de la même couleur que le trait ¦ Spëtzten an der selwechter Faarf wéi de Strich
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Zéi e Feil vun engem Element op en anert: e follegt hinnen.
+Toutes les formes, et créer la sienne ¦ All d’Formen, an eng eege maachen
+Toutes les formes ¦ All d’Formen
+Nom;Année;Lieu ¦ Numm;Joer;Plaz
+Tableau repris du tableur. ¦ Tableau aus der Tabell iwwerholl.
+{n}. Choisis un élément pour le régler. ¦ {n}. Wiel en Element, fir et anzestellen.
+Réglages de la légende ¦ Astellunge vun der Legend
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Zell <strong>{a}</strong> bis <strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Zell <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Klick op eng Zell, fir se auszewielen
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + Klick: e puer · Duebelklick: schreiwen
+Simple note ¦ Einfach Notiz
+Lieux de… ¦ Plaze vu(n)…
+Enlever ce repère ¦ Dës Markéierung ewechhuelen
+Enlever : {n} ¦ Ewechhuelen: {n}
+Aucune forme. ¦ Keng Form.
+🧩 À partir d’une forme ¦ 🧩 Vun enger Form aus
+Comment tracer avec la plume ¦ Wéi ee mat der Fieder zeechent
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Klick</strong>: en Eckpunkt (riichte Strich).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Klicken an zéien</strong>: e ronne Punkt; zéi, fir d’Kurv anzestellen.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>Klick op den éischte Punkt</strong> (giel): d’Form gëtt zougemaach.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Zéi e Punkt, fir en ze <strong>réckelen</strong>; zéi e Grëff (rouden Ronn), fir ze <strong>béien</strong>; mat <kbd>⌥</kbd> / <kbd>Alt</kbd> ginn déi zwee Grëffer onofhängeg.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + Klick op e Punkt: Eck ↔ rond; <strong>Duebelklick</strong>: e läschen.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ Eng zougemaache Form, an dann eng nei Linn dobannen: e <strong>Lach</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ {n} um Tableau: all Strich gëtt e gefëllten Deel vun der Form.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Wiel fir d’éischt eng oder e puer Fräihandzeechnungen um Tableau (Tool ✍︎), a komm dann heihinner zréck.
+Nom de la forme ¦ Numm vun der Form
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Dës Zeechnung ass ze detailléiert, fir eng Form ze ginn: huel eng méi einfach Zeechnung (oder manner Sträichen).
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Form „{name}“ erstallt: se ass a „Meng Formen“.
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Dëse Browser liest d’Schrëften vum Computer net: tipp den Numm vun der Schrëft (oder maach Lëschten an Astellungen → Tableauen).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ {n} vum Computer gelies: hir genau Schrëftstäerkte ginn ugebueden (an „Aa All d’Schrëften…“ weist se all).
+Lecture des polices refusée : {error} ¦ Liese vun de Schrëfte refuséiert: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Dëse Fichier ass keen exportéierten Tableau.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Dëse Fichier ass keen aus der App exportéierten Tableau.
+Import : vérification des fiches et médias… ¦ Import: d’Fichen an d’Medie gi kontrolléiert…
+Média absent ici : {name} ¦ Medium hei net do: {name}
+{name} (fiche absente ici) ¦ {name} (Fiche hei net do)
+{name} (absent ici) ¦ {name} (hei net do)
+{name} (dossier non importé) ¦ {name} (Dossier net importéiert)
+Tableau importé ¦ Tableau importéiert
+Associations reprises. ¦ Verbindungen iwwerholl.
+{n} sur {total} reprises (les autres visent une autre base). ¦ {n} vun {total} iwwerholl (déi aner weisen op eng aner Datebank).
+Les associations visent une autre base : non reprises. ¦ D’Verbindunge weisen op eng aner Datebank: net iwwerholl.
+Import des photos : {n} / {total}… ¦ Import vun de Fotoen: {n} / {total}…
+Média non importé : {name} ¦ Medium net importéiert: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Tableau importéiert. {n} (Fiche, Medium, Sammlung oder Dossier) goufen zu Notizen.
+Une adresse qui commence par https:// ¦ Eng Adress, déi mat https:// ufänkt
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Wiel en Ecran (fir eng Fiche oder eng Gemeng, gëff iwwer „Eng Fiche“ oder den Editeur vun de Widgeten).
+Ne plus associer ¦ Net méi verbannen
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Den Tableau behält säi Rangement ({where}); en erschéngt zousätzlech do, wou s du e verbënns (op der Fiche vun der Persoun, an der Ënnersichung…).
+rangement|libre ¦ fräi
+(aucun pour l’instant) ¦ (fir de Moment keen)
+Choisis à quoi associer le tableau. ¦ Wiel, mat wat den Tableau verbonne gëtt.
+Déjà associé. ¦ Scho verbonnen.
+Tableau associé. ¦ Tableau verbonnen.
+le tableau à l’écran ¦ den Tableau um Ecran
+Pas d’image pour cet instantané. ¦ Kee Bild fir dës Momentopnam.
+📸 Prendre un instantané ¦ 📸 Eng Momentopnam maachen
+Un nom (facultatif) : ¦ En Numm (fräiwëlleg):
+avant la visite aux archives ¦ virum Besuch an den Archiven
+Instantané pris. ¦ Momentopnam gemaach.
+↺ Revenir à cet état ¦ ↺ Zréck op dësen Zoustand
+⧉ En faire un tableau ¦ ⧉ E Tableau draus maachen
+Aucun instantané pour l’instant ¦ Fir de Moment keng Momentopnam
+Versions automatiques ({n}) ¦ Automatesch Versiounen ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ maximal eng pro Aarbechtsdag, déi lescht 30 ginn ofgehalen
+Nom du nouveau tableau ¦ Numm vum neien Tableau
+même rangement ({where}) et mêmes associations ¦ selwechte Rangement ({where}) a selwecht Verbindungen
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Den Inhalt vun der Momentopnam gëtt an e separaten Tableau kopéiert; d’Original ännert sech net. D’Dossieren dran bleiwen déi vum Original.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ De ganzen aktuellen Inhalt gëtt an e separaten Tableau kopéiert; d’Original ännert sech net. D’Dossieren dran bleiwen déi vum Original.
+Nouveau tableau créé. ¦ Neien Tableau erstallt.
+État du tableau changé. ¦ Zoustand vum Tableau geännert.
+(avec photos) ¦ (mat Fotoen)
+(sélection) ¦ (Auswiel)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Fichier vum Tableau gespäichert ({size}): „＋ Derbäisetzen → Tableau importéieren“ mécht en erëm op.
+{n} Mo ¦ {n} MB
+{n} ko ¦ {n} kB
+Préparation… ¦ Virbereedung…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ Bild net méiglech (e Bild vun engem anere Site verhënnert et, oder den Tableau ass ze grouss)
+Une copie de l’image est rangée dans les médias. ¦ Eng Kopie vum Bild ass an de Medien ofgeluecht.
+Copie dans les médias impossible : {error} ¦ Kopie an d’Medien net méiglech: {error}
+💾 Fichier léger ¦ 💾 Liichte Fichier
+sans les photos : petit, pour garder une copie ¦ ouni d’Fotoen: kleng, fir eng Kopie ze halen
+💾 Fichier complet ¦ 💾 Komplette Fichier
+avec {n} : pour une autre base ¦ mat {n}: fir eng aner Datebank
+pareil : pas de photo de l’app ¦ d’selwecht: keng Foto vun der App
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Den Tableau exportéieren… (PDF, Bild, Drock, Fichier)
+⤓ Exporter la sélection en image… ¦ ⤓ D’Auswiel als Bild exportéieren…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ E Modell draus maachen (fir déi nei Tableauen)
+Ajuster à la sélection ¦ Un d’Auswiel upassen
+Adapter le contenu à la fenêtre ¦ Den Inhalt un d’Fënster upassen
+Pour répartir, choisis au moins trois éléments. ¦ Fir ze verdeelen, wiel mindestens dräi Elementer.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ {todo} ze kontrolléieren · {ok} · {no} — Klick: op déi nächst ze kontrolléiere goen
+Plus rien à vérifier : bravo ! ¦ Näischt méi ze kontrolléieren: bravo!
+Question ¦ Fro
+Idée ¦ Iddi
+Source ? ¦ Quell?
+Important ¦ Wichteg
+Réglé ¦ Erleedegt
+Pas encore de commentaire sur cet élément. ¦ Nach kee Kommentar zu dësem Element.
+(sans mot) ¦ (ouni Wuert)
+＋ un autre mot… ¦ ＋ en anert Wuert…
+Retirer ce mot ¦ Dëst Wuert ewechhuelen
+Écris un commentaire ou choisis un mot. ¦ Schreif e Kommentar oder wiel e Wuert.
+La personne de la frise ¦ D’Persoun vun der Zäitlinn
+Les lieux de… ¦ D’Plaze vu(n)…
+Repère « {name} » posé. ¦ Markéierung „{name}“ gesat.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Dës Ënnersichung ass net iwwer eng Persoun: wiel eng aner.
+Aucun lieu avec ses coordonnées. ¦ Keng Plaz mat hire Koordinaten.
+Enquête n° {n} ¦ Ënnersichung Nr. {n}
+Choisis la personne (ou « seulement mes repères »). ¦ Wiel d’Persoun (oder „nëmme meng Markéierungen“).
+Les lieux de {name} ¦ D’Plaze vu(n) {name}
+Arbre : lecture des fiches… ¦ Bam: d’Fiche gi gelies…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Bam gesat: {n}. All Kaart bleift mat hirer Fiche verbonnen (Duebelklick, fir se opzemaachen).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Bam gesat: {n} (Limit erreecht). All Kaart bleift mat hirer Fiche verbonnen (Duebelklick, fir se opzemaachen).
+Pas de micro disponible ici. ¦ Hei ass kee Mikro disponibel.
+Titre du mémo ¦ Titel vum Memo
+Mémo du {date} ¦ Memo vum {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Den Toun gëtt mat dësem Tableau ofgeluecht (an an de Medie vun der App).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Mikro refuséiert: erlaab en an den Astellunge vum Computer.
+Arrête d’abord l’enregistrement. ¦ Stopp fir d’éischt d’Opnam.
+Enregistre d’abord ton mémo. ¦ Späicher fir d’éischt däi Memo.
+Mémo vocal ¦ Stëmmmemo
+{n}, en colonnes (un bout de tableur). ¦ {n}, a Kolonnen (e Stéck Tabell).
+Mon modèle ¦ Mäi Modell
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Modell ze schwéier, fir gehalen ze ginn (Forme vun engem Bild?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Modell „{name}“ gespäichert: en ass an „Neien Tableau“.
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Ebeen „{name}“ geläscht (hir Elementer bleiwen op der Haaptebeen)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Ebeen geläscht (hir Elementer bleiwen op der Haaptebeen)
+▶ Lancer la présentation ({n}) ¦ ▶ D’Presentatioun starten ({n})
+▶ Lancer la présentation ¦ ▶ D’Presentatioun starten
+＋ La vue actuelle comme étape ¦ ＋ Déi aktuell Usiicht als Etapp
+＋ La sélection comme étape ¦ ＋ D’Auswiel als Etapp
+＋ Une étape par cadre ¦ ＋ Eng Etapp pro Rumm
+☰ Les étapes (renommer, ordre…) ¦ ☰ D’Etappen (ëmbenennen, Reiefolleg…)
+▶ Les étapes de la présentation ¦ ▶ D’Etappe vun der Presentatioun
+Étape {n} ¦ Etapp {n}
+{n} dans la présentation. ¦ {n} an der Presentatioun.
+Aucune étape. ¦ Keng Etapp.
+Étape remplacée par la vue actuelle. ¦ Etapp duerch déi aktuell Usiicht ersat.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Setz fir d’éischt Etappen derbäi (▶ Presentéieren → ＋ Déi aktuell Usiicht als Etapp) oder Rummen.
+Étape d’avant ¦ Virech Etapp
+Étape suivante ¦ Nächst Etapp
+→ ou Espace ¦ → oder Espace
+Quitter ¦ Verloossen
+Remplacer par la vue actuelle ¦ Duerch déi aktuell Usiicht ersetzen
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ Den Tableau „{name}“ an all seng Dossieren läschen? D’Fotoen, d’Téin an d’Fichen, déi drop leien, bleiwen an der App.
+sans titre ¦ ouni Titel
+Tableau et dossiers supprimés. ¦ Tableau an Dossieren geläscht.
+Tableau supprimé. ¦ Tableau geläscht.
+Ce qu’on sait ¦ Wat mir wëssen
+Sources à voir ¦ Quellen ze kucken
+Idée centrale ¦ Zentral Iddi
+Branche {n} ¦ Zweig {n}
+Date {n} ¦ Datum {n}
+Arbre à la main ¦ Bam mat der Hand
+Enfant ¦ Kand
+Une toile libre. ¦ Eng fräi Leinwand.
+Mur d’indices ¦ Mauer vun Indicen
+Fond de liège, une question au centre, des notes autour. ¦ Kuerkhannergrond, eng Fro an der Mëtt, Notizen ronderëm.
+Carte mentale ¦ Mind-Map
+Une idée au centre, des branches. ¦ Eng Iddi an der Mëtt, Zweiger.
+Une flèche du temps et des repères. ¦ E Feil vun der Zäit a Markéierungen.
+Des cases pour une famille, à relier. ¦ Felder fir eng Famill, fir ze verbannen.
+Nouveau tableau ¦ Neien Tableau
+Qui est le père de Marie ? ¦ Wien ass de Papp vum Marie?
+Piste 1, les témoins… ¦ Spuer 1, d’Zeien…
+Pour commencer ¦ Fir unzefänken
+Pour faire tes propres modèles : dans un tableau, ⤓ Exporter → ⭐ En faire un modèle. ¦ Fir deng eege Modeller ze maachen: an engem Tableau, ⤓ Exportéieren → ⭐ E Modell draus maachen.
+Supprimer ce modèle ¦ Dëse Modell läschen
+Modèle « {name} » supprimé ¦ Modell „{name}“ geläscht
+Tableau sans titre ¦ Tableau ouni Titel
+Modèle introuvable. ¦ Modell net fonnt.
+Libre ¦ Fräi
+Supprimer ce tableau ¦ Dësen Tableau läschen
+Chercher… (titre, partie) ¦ Sichen… (Titel, Deel)
+Rechercher un tableau ¦ En Tableau sichen
+({n} prometteuses) ¦ ({n} villverspriechend)
+{what} : {value} ¦ {what}: {value}
+{col} : les plus récents ¦ {col}: déi neist
+{col} : les plus anciens ¦ {col}: déi eelst
+{col} : du plus grand au plus petit ¦ {col}: vum gréissten zum klengsten
+{col} : du plus petit au plus grand ¦ {col}: vum klengsten zum gréissten
+{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ {help} E Klick op en Titel mécht en op; e Klick op eng Kolonn zortéiert.
+Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ E Klick op en Titel mécht en op; e Klick op eng Kolonn zortéiert.
+Rien ne correspond à ta recherche ¦ Näischt passt zu denger Sich
+Les tableaux se créent dans Enquêtes → Tableaux. ¦ D’Tableaue ginn an Ënnersichungen → Tableauen erstallt.
+Partie ¦ Deel
+Communes faites ¦ Gemenge gemaach
+Archivé ¦ Archivéiert
+Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres. ¦ All d’Tableauen: déi vun den Ënnersichungen, de Sichaktiounen, de Projeten, an déi fräi Tableauen.
+Les projets de l’Atelier de recherche, avec leur état et leur échéance. ¦ D’Projete vum Rechercheatelier, mat hirem Zoustand an hirer Deadline.
+Toutes les enquêtes, avec leurs pistes et leurs tableaux. ¦ All d’Ënnersichungen, mat hire Spueren an hiren Tableauen.
+Toutes les battues, commune par commune. ¦ All d’Sichaktiounen, Gemeng fir Gemeng.
+Chercher un tableau… (titre, enquête, battue) ¦ En Tableau sichen… (Titel, Ënnersichung, Sichaktioun)
+Chercher une battue… (titre, commune, personne) ¦ Eng Sichaktioun sichen… (Titel, Gemeng, Persoun)
+Chercher un projet… (titre, sorte) ¦ E Projet sichen… (Titel, Aart)
+Chercher une enquête… (titre, personne) ¦ Eng Ënnersichung sichen… (Titel, Persoun)
+Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier. ¦ Eng fräi Leinwand, wéi eng grouss Kuerkpinnwand: do leet een Notizen, Formen, Feiler, Zeechnungen, Fotoen, Téin, PDFen, Fichen, Ecrane vun der App drop… All Tableau kann fräi sinn oder an enger Ënnersichung, enger Sichaktioun oder engem Projet vum Atelier ofgeluecht ginn.
+Aucun tableau ici. ¦ Hei ass keen Tableau.
+Aucun tableau pour l’instant ¦ Fir de Moment keen Tableau
+Vide, mur d’indices, carte mentale, frise… ¦ Eidel, Mauer vun Indicen, Mind-Map, Zäitlinn…
+Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches… ¦ Fräi Leinwänn fir ze sichen, ze verbannen, ze weisen: Notizen, Feiler, Fotoen, Téin, Fichen…
+Dans une enquête ¦ An enger Ënnersichung
+Dans l’Atelier ¦ Am Atelier
+＋ Nouveau tableau ici ¦ ＋ Neien Tableau hei
+Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun). ¦ E fräien Tableau fir dës Recherche: Notizen, Feiler, Fotoen, Fichen… Du kanns der e puer maachen (all een en „Deel“).
+enquêtes ¦ Ënnersichungen
+TABLEAU ¦ TABLEAU
+TABLEAUX ¦ TABLEAUEN
+Ranger le tableau ¦ Den Tableau ofleeën
+Ranger ¦ Ofleeën
+Laquelle ¦ Wéieng
+(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…) ¦ (fräiwëlleg: fir e puer Tableauen ze hunn, „Spuer 1“, „D’Zeien“…)
+(facultatif : piste 1, les témoins, la branche paternelle…) ¦ (fräiwëlleg: Spuer 1, d’Zeien, de Papps Zweig…)
+(aucune) ¦ (keng)
+▭ Rectangle ¦ ▭ Rechteck
+▢ Arrondi ¦ ▢ Ofgerount
+◯ Ovale ¦ ◯ Oval
+△ Triangle ¦ △ Dräieck
+☆ Étoile ¦ ☆ Stär
+⬡ Hexagone ¦ ⬡ Sechseck
+💬 Bulle ¦ 💬 Spriechblos
+☁ Nuage ¦ ☁ Wollek
+pinceau|Stylo ¦ Bic
+pinceau|Monoligne ¦ Monolinn
+pinceau|Marqueur ¦ Marker
+pinceau|Crayon ¦ Bläistëft
+pinceau|Pastel ¦ Pastell
+pinceau|Stylo-plume ¦ Fëllfieder
+pinceau|Calame ¦ Kalam
+pinceau|Pinceau ¦ Bengel
+pinceau|Aquarelle ¦ Aquarell
+pinceau|Remplissage ¦ Fëllung
+pinceau|Surligneur ¦ Textmarker
+pinceau|Craie ¦ Kräid
+pinceau|Néon ¦ Neon
+pinceau|Aérographe ¦ Airbrush
+pinceau|Pointillé ¦ Punktéiert
+Néon ¦ Neon
+Pointillé ¦ Punktéiert
+trait|— droit ¦ — riicht
+trait|⌒ courbe ¦ ⌒ gebéit
+trait|⌐ coudé ¦ ⌐ gekniet
+trait|∿ vague ¦ ∿ Well
+trait|⩘ zigzag ¦ ⩘ Zickzack
+trait|⤳ contourne les éléments ¦ ⤳ geet ëm d’Elementer ronderëm
+⌐ coudé ¦ ⌐ gekniet
+⤳ contourne les éléments ¦ ⤳ geet ëm d’Elementer ronderëm
+fond|Fond à points ¦ Hannergrond mat Punkten
+fond|Quadrillé ¦ Karéiert
+fond|Lignes ¦ Linnen
+fond|Uni ¦ Eenfaarweg
+fond|Papier ¦ Pabeier
+fond|Liège ¦ Kuerk
+fond|Sombre ¦ Däischter
+fond|Couleur à choisir… ¦ Faarf auswielen…
+Fond à points ¦ Hannergrond mat Punkten
+Liège ¦ Kuerk
+Couleur à choisir… ¦ Faarf auswielen…
+Motif sur la couleur ¦ Muster op der Faarf
+motif|sans motif ¦ ouni Muster
+motif|points ¦ Punkten
+motif|quadrillé ¦ karéiert
+motif|lignes ¦ Linnen
+quadrillé ¦ karéiert
+Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau ¦ Momentopnamen: den Zoustand vum Tableau festhalen, dohinner zréckgoen, en neien Tableau draus maachen
+📸 Instantanés ¦ 📸 Momentopnamen
+Créer un nouveau tableau à partir de celui-ci ¦ En neien Tableau vun dësem aus erstellen
+PDF, image PNG ou JPG, impression, fichier du tableau, modèle ¦ PDF, PNG- oder JPG-Bild, Drock, Fichier vum Tableau, Modell
+Les pistes à vérifier : clic pour aller à la suivante ¦ D’Spueren ze kontrolléieren: Klick, fir op déi nächst ze goen
+Chercher dans le tableau ¦ Am Tableau sichen
+Grille aimantée et guides d’alignement ¦ Gitter zum Aschnappen an Ausriichtungshëllefen
+Mini-carte du tableau (montrer ou cacher) ¦ Mini-Kaart vum Tableau (weisen oder verstoppen)
+Présenter : un parcours d’étapes ¦ Presentéieren: e Parcours vun Etappen
+▶ Présenter ¦ ▶ Presentéieren
+Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés ¦ Astellunge vun den Tableauen: Disposition, Reiefolleg vun den Tools, Knäppercher gewisen oder verstoppt
+Verrouiller ou déverrouiller tout le tableau ¦ De ganzen Tableau spären oder opspären
+Supprimer ce tableau (et ses dossiers) ¦ Dësen Tableau läschen (a seng Dossieren)
+Revenir aux tableaux ¦ Zréck bei d’Tableauen
+Titre du tableau ¦ Titel vum Tableau
+État du tableau ¦ Zoustand vum Tableau
+● En cours ¦ ● Amgaang
+⏸ En pause ¦ ⏸ Paus
+✓ Terminé ¦ ✓ Fäerdeg
+Enregistrer maintenant (le tableau s’enregistre aussi tout seul) ¦ Elo späicheren (den Tableau späichert sech och eleng)
+Ajouter un fichier, un média, une fiche, un écran de l’app… ¦ E Fichier, e Medium, eng Fiche, en Ecran vun der App derbäisetzen…
+Zoom : ajuster à la sélection, adapter à la fenêtre… ¦ Zoom: un d’Auswiel upassen, un d’Fënster upassen…
+Montrer ce qui est groupé ¦ Weisen, wat gruppéiert ass
+Lâche ici : images, sons, vidéos, PDF… ¦ Hei lassloossen: Biller, Téin, Videoen, PDFen…
+Un tableau vide. ¦ En eidelen Tableau.
+Choisis un outil à gauche, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire. ¦ Wiel e Tool lénks, oder zéi Fotoen, Téin, PDFen heihinner… „＋ Derbäisetzen“ leet eng Fiche, en Ecran vun der App, e Widget, eng Sammlung, en Etikett oder en Dossier drop. Duebelklick fir ze schreiwen.
+Revenir à la police du thème ¦ Zréck op d’Schrëft vum Thema
+Aimanter : grille aimantée et guides d’alignement ¦ Aschnappen: Gitter zum Aschnappen an Ausriichtungshëllefen
+Choisis à droite une personne, une famille ou une enquête, ou pose des repères. ¦ Wiel riets eng Persoun, eng Famill oder eng Ënnersichung, oder setz Markéierungen.
+Glisser pour plier · double-clic pour enlever ce coude ¦ Zéien fir ze béien · Duebelklick, fir dësen Eck ewechzehuelen
+Glisser pour ajouter un coude ¦ Zéien, fir en Eck derbäizesetzen
+Modifié… ¦ Geännert…
+Enregistré ✓ ¦ Gespäichert ✓
+⚠ Modifié dans une autre fenêtre ¦ ⚠ An enger anerer Fënster geännert
+Envoi des fichiers… ¦ D’Fichiere gi geschéckt…
+efface seulement ce que tu touches ¦ läscht nëmmen dat, wat s du beréiers
+🩹 Gomme fine ¦ 🩹 Feine Gummi
+🧽 Gomme à traits ¦ 🧽 Strichgummi
+enlève le trait entier ¦ hëlt de ganze Strich ewech
+Autre couleur pour les notes ¦ Aner Faarf fir d’Notizen
+Tire une flèche d’un élément à un autre : elle les suit quand on les déplace. ¦ Zéi e Feil vun engem Element op en anert: e follegt hinnen, wann een se réckelt.
+Clique où poser le tableur. ¦ Klick do, wou d’Tabell hikomme soll.
+Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer. ¦ Zéi, fir dech ze beweegen; Mausrad oder zwee Fangeren och; ⌘ + Mausrad fir ze zoomen.
+Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir. ¦ Klick: auswielen · ⇧ + Klick: derbäisetzen · ⌥ / Alt + zéien: duplizéieren · an den eidele Raum zéien: e puer auswielen · Duebelklick: schreiwen oder opmaachen.
+Les groupes sont montrés. ¦ D’Gruppe gi gewisen.
+Groupes cachés. ¦ Gruppen verstoppt.
+Fond du cadre ¦ Hannergrond vum Rumm
+Bord du cadre ¦ Rand vum Rumm
+Épaisseur du bord ¦ Déckt vum Rand
+Marge dans le cadre ¦ Marge am Rumm
+Arrondi du cadre ¦ Ofrondung vum Rumm
+Position le long du trait ¦ Positioun laanscht de Strich
+sur le trait ¦ um Strich
+au-dessus ¦ driwwer
+en dessous ¦ drënner
+Écart avec le trait ¦ Ofstand zum Strich
+suivre l’angle du trait ¦ dem Wénkel vum Strich nogoen
+Fond du tableau ¦ Hannergrond vum Tableau
+⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web. ¦ ⌘Z réckgängeg · ⌘D duplizéieren · ⌘G gruppéieren (⇧ fir opzeléisen) · ⌘L spären · ] [ no vir / no hannen · Feiler fir ze drécken · Espace fir dech ze beweegen · ⌘ + Mausrad fir ze zoomen · e Bild oder eng Internetadress apechen.
+Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux. ¦ Faarwen, Formen, Schrëften, Gréissten, Reiefolleg vun de Menüen: Astellungen → Tableauen.
+Puces et numéros ¦ Punkten an Nummeren
+• Puce ¦ • Punkt
+1. Nombres ¦ 1. Zuelen
+I. Chiffres romains ¦ I. Réimesch Zifferen
+a. Lettres ¦ a. Buschtawen
+A. Lettres capitales ¦ A. Grouss Buschtawen
+– Tiret ¦ – Strich
+☐ Cases à cocher ¦ ☐ Këschtercher zum Ukräizen
+Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur). ¦ Déi genau Schrëftstäerkte vun der Schrëft: 🖥 hei ënnendrënner (Schrëfte vum Computer).
+Lire les graisses exactes des polices de l’ordinateur ¦ Déi genau Schrëftstäerkte vun de Schrëfte vum Computer liesen
+Couleur des pointes ¦ Faarf vun de Spëtzten
+même couleur que le trait ¦ selwecht Faarf wéi de Strich
+(comme le trait) ¦ (wéi de Strich)
+Pointe au début ¦ Spëtzt um Ufank
+Pointe à la fin ¦ Spëtzt um Enn
+Taille des pointes ¦ Gréisst vun de Spëtzten
+Forme du trait ¦ Form vum Strich
+frère de, a écrit à… ¦ Brudder vu(n), huet geschriwwen un…
+＋ ligne ¦ ＋ Linn
+＋ colonne ¦ ＋ Kolonn
+− ligne ¦ − Linn
+− colonne ¦ − Kolonn
+Ajouter une ligne dessous ¦ Eng Linn drënner derbäisetzen
+Enlever la ligne ¦ D’Linn ewechhuelen
+Ajouter une colonne à droite ¦ Eng Kolonn riets derbäisetzen
+Enlever la colonne ¦ D’Kolonn ewechhuelen
+Fusionner les cellules choisies ¦ Déi gewielten Zellen zesummeleeën
+⊞ Fusionner ¦ ⊞ Zesummeleeën
+Séparer les cellules ¦ D’Zellen trennen
+⊟ Séparer ¦ ⊟ Trennen
+Colonne plus étroite ¦ Méi schmuel Kolonn
+Colonne plus large ¦ Méi breet Kolonn
+Vider la cellule ¦ D’Zell eidel maachen
+⌫ vider ¦ ⌫ eidel maachen
+Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir » ¦ D’Tabell a grouss: méi Funktiounen, Zortéieren, Filteren, Excel… dann „✓ Späicheren an zréckgoen“
+Télécharger en CSV (Excel, Numbers…) ¦ Als CSV eroflueden (Excel, Numbers…)
+première ligne en titre ¦ éischt Linn als Titel
+première colonne en titre ¦ éischt Kolonn als Titel
+une ligne sur deux teintée ¦ all zweet Linn ugefierft
+Fond des titres ¦ Hannergrond vun den Titelen
+Fond de la cellule (les cellules choisies) ¦ Hannergrond vun der Zell (déi gewielten Zellen)
+Fond de la cellule ¦ Hannergrond vun der Zell
+aperçu vivant dans le tableau ¦ lieweg Virschau am Tableau
+La fiche montre ¦ D’Fiche weist
+Lu dans la fiche à chaque ouverture du tableau : si la fiche change, la carte suit. ¦ All Kéier, wann den Tableau opgemaach gëtt, an der Fiche gelies: wann d’Fiche sech ännert, follegt d’Kaart.
+de la personne, son couple et ses enfants ¦ vun der Persoun, hirem Koppel an hire Kanner
+👤 Changer de personne ¦ 👤 Persoun wiesselen
+aucune fiche (seulement mes repères) ¦ keng Fiche (nëmme meng Markéierungen)
+une personne et sa famille ¦ eng Persoun an hir Famill
+la personne d’une enquête ¦ d’Persoun vun enger Ënnersichung
+👤 Choisir la personne ¦ 👤 D’Persoun auswielen
+Une commune, un lieu… ¦ Eng Gemeng, eng Plaz…
+relier les lieux dans l’ordre (le parcours) ¦ d’Plazen an der Reiefolleg verbannen (de Parcours)
+Poser un repère ¦ Eng Markéierung setzen
+Lien tout prêt ¦ Fäerdege Link
+Glisse un « ＋ » sur le trait pour le plier en plusieurs segments. ¦ Zéi e „＋“ op de Strich, fir en a verschidde Stécker ze béien.
+Aligner ¦ Ausriichten
+Centrés (de gauche à droite) ¦ Zentréiert (vu lénks no riets)
+Centrés (de haut en bas) ¦ Zentréiert (vun uewen no ënnen)
+Même écart de gauche à droite ¦ Selwechten Ofstand vu lénks no riets
+Même écart de haut en bas ¦ Selwechten Ofstand vun uewen no ënnen
+Même largeur que le premier choisi ¦ Selwecht Breet wéi dat éischt gewielt
+Même hauteur que le premier choisi ¦ Selwecht Héicht wéi dat éischt gewielt
+Répartir ¦ Verdeelen
+⇹ en largeur ¦ ⇹ an der Breet
+⇳ en hauteur ¦ ⇳ an der Héicht
+═ même largeur ¦ ═ selwecht Breet
+‖ même hauteur ¦ ‖ selwecht Héicht
+🔓 Déverrouiller ¦ 🔓 Opspären
+🔒 Verrouiller ¦ 🔒 Spären
+⧉ Grouper ¦ ⧉ Gruppéieren
+Dégrouper ¦ Gruppéierung ophiewen
+Faire de ce dessin une forme à toi (réutilisable) ¦ Aus dëser Zeechnung eng eege Form maachen (erëm ze benotzen)
+✏️ En faire une forme ¦ ✏️ Eng Form draus maachen
+Devant ¦ No vir
+Derrière ¦ No hannen
+Image du web ¦ Bild aus dem Internet
+Lien web ¦ Internetlink
+Frise vivante ¦ Lieweg Zäitlinn
+Rechercher une forme ¦ Eng Form sichen
+Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer) ¦ Eng Form aus enger anerer erstellen (dréinen, rotéieren, zéien, derbäisetzen, duerchlächeren)
+＋ Créer une forme ¦ ＋ Eng Form erstellen
+✒️ Plume (tracé) ¦ ✒️ Fieder (Linn)
+✍︎ À partir de mon dessin ¦ ✍︎ Vu menger Zeechnung aus
+🖼 À partir d’une image ¦ 🖼 Vun engem Bild aus
+Fermer le tracé en cours ¦ Déi aktuell Linn zoumaachen
+Commencer un autre tracé (un trou s’il est dans la forme) ¦ Eng aner Linn ufänken (e Lach, wann se an der Form ass)
+Supprimer le point choisi ¦ De gewielte Punkt läschen
+Annuler le dernier point ¦ De leschte Punkt réckgängeg maachen
+◯ Fermer ¦ ◯ Zoumaachen
+＋ Nouveau tracé ¦ ＋ Nei Linn
+✕ Point ¦ ✕ Punkt
+Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme. ¦ E PNG-Bild mat engem duerchsichtegen Hannergrond gëtt seng Silhouette. Soss kräiz un: wat däischter ass, gëtt d’Form.
+le sombre devient la forme (images sans transparence) ¦ dat Däischtert gëtt d’Form (Biller ouni Transparenz)
+Choisis d’abord un dessin sur le tableau. ¦ Wiel fir d’éischt eng Zeechnung um Tableau.
+Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »). ¦ Maach d’Form zou: mindestens dräi Punkten, dann e Klick op den éischten (oder „◯ Zoumaachen“).
+Ajouter au tableau ¦ Op den Tableau derbäisetzen
+📎 Des fichiers ¦ 📎 Fichieren
+📁 Choisir des fichiers ¦ 📁 Fichieren auswielen
+Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image). ¦ Biller, GIFen, Téin, Videoen, PDFen (oder zéi se op den Tableau, oder setz e Bild an).
+🖼 Un média de l’app ¦ 🖼 E Medium vun der App
+Un média de l’app ¦ E Medium vun der App
+Poser sur le tableau ¦ Op den Tableau leeën
+Choisir une image, un son, une vidéo… ¦ E Bild, en Toun, e Video auswielen…
+🌐 D’ailleurs ¦ 🌐 Vun anzwousch
+Adresse d’une image ou d’un site ¦ Adress vun engem Bild oder engem Site
+👤 Une fiche ¦ 👤 Eng Fiche
+Poser la fiche ¦ D’Fiche leeën
+📺 Un écran de l’app ¦ 📺 En Ecran vun der App
+Une liste, un diagramme, une statistique, la carte, un village, une de tes listes… ¦ Eng Lëscht, en Diagramm, eng Statistik, d’Kaart, en Duerf, eng vun denge Lëschten…
+avec l’aperçu vivant ¦ mat der liewege Virschau
+Poser l’écran ¦ Den Ecran leeën
+✨ Un de mes widgets ¦ ✨ Ee vu menge Widgeten
+Poser le widget ¦ De Widget leeën
+Crée d’abord un widget (Réglages → Éditeur de widgets). ¦ Erstell fir d’éischt e Widget (Astellungen → Editeur vun de Widgeten).
+Titre du recueil ¦ Titel vun der Sammlung
+📚 Un recueil ¦ 📚 Eng Sammlung
+🏷 Une étiquette ¦ 🏷 En Etikett
+ou un mot à toi ¦ oder en eegent Wuert
+Nom du dossier ¦ Numm vum Dossier
+Poser ce mot ¦ Dëst Wuert leeën
+▦ Un tableur ¦ ▦ Eng Tabell
+Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers. ¦ E Gitter zum Ausfëllen, mat Formelen (=SOMME…); do kann een e Stéck Excel oder Numbers apechen.
+Poser un tableur ¦ Eng Tabell leeën
+📁 Un dossier ¦ 📁 En Dossier
+Un tableau dans le tableau : double-clic pour y entrer. ¦ En Tableau am Tableau: Duebelklick, fir eranzegoen.
+Créer le dossier ¦ Den Dossier erstellen
+🌳 Un arbre automatique ¦ 🌳 En automatesche Bam
+Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches. ¦ Eng Persoun, an hir Elteren, Grousselteren oder Kanner als Fiche geluecht, mat Feiler verbonnen.
+ses ancêtres ¦ hir Virfahren
+ses descendants ¦ hir Nokommen
+sa famille proche ¦ hir no Famill
+avec les conjoints ¦ mat de Partner
+flèches (sinon des traits) ¦ Feiler (soss Sträicher)
+Poser l’arbre ¦ De Bam leeën
+🗓 Une frise vivante ¦ 🗓 Eng lieweg Zäitlinn
+Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche. ¦ D’Evenementer vun enger Persoun (oder vun hirer Famill) eleng op eng Zäitlinn gesat; se follegt der Fiche.
+Poser la frise ¦ D’Zäitlinn leeën
+🗺 Une carte ¦ 🗺 Eng Kaart
+Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères. ¦ D’Plaze vun enger Persoun, vun hirer Famill oder vun enger Ënnersichung; du kanns deng Markéierungen drop setzen.
+Nom de la personne (facultatif) ¦ Numm vun der Persoun (fräiwëlleg)
+la personne et sa famille ¦ d’Persoun an hir Famill
+personne : seulement mes repères ¦ Persoun: nëmme meng Markéierungen
+Poser la carte ¦ D’Kaart leeën
+▭ Un cadre ¦ ▭ E Rumm
+Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier. ¦ Eng Zon mat engem Numm („Papps Zweig“, „Quellen ze kucken“): wat dran ass, beweegt sech mat hir; ee kann se zesummeklappen.
+Nom du cadre ¦ Numm vum Rumm
+Poser le cadre ¦ De Rumm leeën
+🎙 Un mémo vocal ¦ 🎙 E Stëmmmemo
+Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus. ¦ Huel deng Stëmm hei op: den Toun gëtt mam Tableau ofgeluecht an drop gesat.
+🎙 Enregistrer ¦ 🎙 Ophuelen
+🎙 Mémo vocal ¦ 🎙 Stëmmmemo
+Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau. ¦ E Fichier „.lcnda-tableau.json“ (⤓ Exportéieren → Liichte oder komplette Fichier): e gëtt en neien Tableau.
+Tableau verrouillé : clic pour le déverrouiller ¦ Tableau gespaart: Klick, fir en opzespären
+Verrouiller tout le tableau ¦ De ganzen Tableau spären
+Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge. ¦ Tableau gespaart: ee ka kucken an opmaachen, wat dran ass, näischt beweegt sech.
+Tableau déverrouillé. ¦ Tableau opgespaart.
+Un projet de l’Atelier ¦ E Projet vum Atelier
+Un lieu (sa commune) ¦ Eng Plaz (hir Gemeng)
+Un média (photo, acte, son…) ¦ E Medium (Foto, Akt, Toun…)
+Une famille (un couple) ¦ Eng Famill (e Koppel)
+Un événement ¦ En Evenement
+Un animal ¦ En Déier
+Un autre tableau ¦ En aneren Tableau
+Relier ce tableau à une personne, une enquête (ou une de ses parties), une battue… ¦ Dësen Tableau mat enger Persoun, enger Ënnersichung (oder engem vun hiren Deeler), enger Sichaktioun… verbannen
+🔗 Relier… ¦ 🔗 Verbannen…
+Relier ce tableau ¦ Dësen Tableau verbannen
+À quoi ¦ Mat wat
+Nouveau tableau depuis un instantané ¦ Neien Tableau vun enger Momentopnam aus
+Nouveau tableau à partir de celui-ci ¦ Neien Tableau vun dësem aus
+Grille aimantée : les éléments s’alignent sur la grille et sur les autres (⌥ / Alt en glissant pour s’en passer). ¦ Gitter zum Aschnappen: d’Elementer riichte sech um Gitter an un deenen aneren aus (⌥ / Alt beim Zéien, fir ouni ze schaffen).
+Grille aimantée enlevée. ¦ Gitter zum Aschnappen ewechgeholl.
+frère de ¦ Brudder vu(n)
+sœur de ¦ Schwëster vu(n)
+époux de ¦ Mann vu(n)
+épouse de ¦ Fra vu(n)
+père de ¦ Papp vu(n)
+mère de ¦ Mamm vu(n)
+fils de ¦ Jong vu(n)
+fille de ¦ Duechter vu(n)
+cousin de ¦ Cousin vu(n)
+cousine de ¦ Cousine vu(n)
+parrain de ¦ Pätter vu(n)
+marraine de ¦ Gotta vu(n)
+témoin de ¦ Zeie vu(n)
+voisin de ¦ Noper vu(n)
+a travaillé pour ¦ huet geschafft fir
+a écrit à ¦ huet geschriwwen un
+même personne ? ¦ selwecht Persoun?
+💬 Commentaires ¦ 💬 Kommentarer
+Ton mot (ex. « Piste », « Archives ») ¦ Däi Wuert (z. B. „Spuer“, „Archiven“)
+Les mots proposés pour les bulles (tu en ajoutes avec « ＋ un autre mot… »). ¦ D’Wierder, déi fir d’Spriechblosen ugebuede ginn (du sets der derbäi mat „＋ en anert Wuert…“).
+Les lignes et les colonnes gardées, avec les formules possibles. ¦ D’Linnen an d’Kolonne behalen, mat de méigleche Formelen.
+🗒 Une note par ligne ¦ 🗒 Eng Notiz pro Linn
+Chaque ligne devient une note, rangées en grille. ¦ All Linn gëtt eng Notiz, an engem Gitter arrangéiert.
+🗂 Une note par ligne du tableur ¦ 🗂 Eng Notiz pro Linn vun der Tabell
+Les colonnes d’une ligne dans la même note. ¦ D’Kolonne vun enger Linn an der selwechter Notiz.
+T Un seul texte ¦ T Een eenzegen Text
+Tout le texte collé, d’un bloc. ¦ De ganzen agepechten Text, an engem Block.
+grouper ce qui est posé ¦ gruppéieren, wat geluecht ass
+⭐ En faire un modèle ¦ ⭐ E Modell draus maachen
+Enregistrer le modèle ¦ De Modell späicheren
+Nom du modèle ¦ Numm vum Modell
+Pour une enquête sur un enfant trouvé… ¦ Fir eng Ënnersichung iwwer e fonnt Kand…
+Décris-le ¦ Beschreif en
+seulement la sélection ¦ nëmmen d’Auswiel
+sans les textes (garder les cases vides, les titres des cadres restent) ¦ ouni d’Texter (d’Felder eidel loossen, d’Titele vun de Rumme bleiwen)
+Il apparaît dans « Nouveau tableau », avec les modèles de l’app. Les fiches, photos et sons posés sont gardés tels quels (ils pointent vers ta base). ¦ E steet an „Neien Tableau“, mat de Modeller vun der App. D’Fichen, Fotoen an Téin, déi drop leien, gi gehale wéi se sinn (se weisen op deng Datebank).
+Calque principal ¦ Haaptebeen
+Les nouveaux éléments vont sur ce calque ¦ Déi nei Elementer kommen op dës Ebeen
+Choisir ce qu’il contient ¦ Auswielen, wat dran ass
+Supprimer le calque (ses éléments vont sur le calque principal) ¦ D’Ebeen läschen (hir Elementer kommen op d’Haaptebeen)
+Mettre la sélection sur le calque choisi ¦ D’Auswiel op déi gewielt Ebeen setzen
+Un calque caché ne s’affiche pas (ni dans les images exportées) ; verrouillé, on ne peut plus le choisir ni le bouger. ¦ Eng verstoppt Ebeen gëtt net gewisen (och net an den exportéierte Biller); gespaart, kann een se net méi auswielen nach réckelen.
+Y aller ¦ Dohi goen
+⟳ vue ¦ ⟳ Usiicht
+Chercher un mot, un nom… ¦ E Wuert, en Numm sichen…
+Mini-carte ¦ Mini-Kaart
+Glisser pour déplacer la mini-carte ¦ Zéien, fir d’Mini-Kaart ze réckelen
+Cacher la mini-carte ¦ D’Mini-Kaart verstoppen
+Pour tous les jours ¦ Fir all Dag
+Écritures anciennes ¦ Al Schrëften
+Trop lourd pour être gardé (retire des formes faites d’une image). ¦ Ze schwéier, fir gehalen ze ginn (huel Forme vun engem Bild ewech).
+Réglages trop lourds pour être gardés (retire des formes faites d’une image). ¦ Astellungen ze schwéier, fir gehalen ze ginn (huel Forme vun engem Bild ewech).
+Choisis une forme de départ. ¦ Wiel eng Ausgangsform.
+Forme trop détaillée : retire des formes ajoutées. ¦ Form ze detailléiert: huel derbäigesate Formen ewech.
+Choisis une forme ou trace la pointe. ¦ Wiel eng Form oder zeechen d’Spëtzt.
+Cette forme est trop détaillée pour une pointe. ¦ Dës Form ass ze detailléiert fir eng Spëtzt.
+les réglages des tableaux sont fermés ¦ d’Astellunge vun den Tableauen sinn zou
+Montrer / cacher ¦ Weisen / verstoppen
+Déjà dans l’accès rapide ¦ Schonn am Schnellzougrëff
+Ajouter à l’accès rapide ¦ An de Schnellzougrëff derbäisetzen
+La reprendre dans le dessin vectoriel (plume, points, Pathfinder…) ¦ Se an der Vektorzeechnung erëmhuelen (Fieder, Punkten, Pathfinder…)
+Supprimer cette forme ¦ Dës Form läschen
+Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ». ¦ Fir de Moment keng: an engem Tableau, Tool Formen → „＋ Eng Form erstellen“.
+Supprimer la liste ¦ D’Lëscht läschen
+Pas encore de pinceau à toi. ¦ Nach keen eegene Bengel.
+tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus) ¦ all d’Astellunge vun den Tableauen (Faarwen, Spëtzten, Formen, Schrëften, Gréissten, Tabell, Bengelen, Menüen)
+Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder). ¦ D’Astellungen „{name}“ iwwerhuelen? Déi aktuell Astellunge ginn ersat (späicher se fir d’éischt ënner engem Numm, wann s de se behale wëlls).
+Reprendre ces réglages ¦ Dës Astellungen iwwerhuelen
+Reprendre les réglages ¦ D’Astellungen iwwerhuelen
+Réglages enregistrés sous « {name} » (et utilisés dès maintenant). ¦ Astellungen ënner „{name}“ gespäichert (a vun elo u benotzt).
+Réglages « {name} » importés : « Appliquer » pour t’en servir. ¦ Astellungen „{name}“ importéiert: „Uwenden“, fir se ze benotzen.
+Palette « {name} » retirée ¦ Palett „{name}“ ewechgeholl
+Pointe « {name} » créée : elle est dans la liste. ¦ Spëtzt „{name}“ erstallt: se ass an der Lëscht.
+Pointe retirée (les traits qui l’utilisent prennent un triangle) ¦ Spëtzt ewechgeholl (d’Sträicher, déi se benotzen, kréien en Dräieck)
+⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer). ¦ ⚡ „{name}“ ass schonn am Schnellzougrëff (uewen an dësem Reiter; ✕ drop, fir se erauszehuelen).
+⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ». ¦ ⚡ „{name}“ an de Schnellzougrëff derbäigesat: se ass uewen an dësem Reiter, an an der Leescht vum Tool Formen. Vergiess „Späicheren“ net.
+Chargement des formes… ¦ D’Forme gi gelueden…
+📚 Réessayer de charger les formes ¦ 📚 D’Formen nees probéieren ze lueden
+Les formes n’ont pas pu être chargées. Réessaie. ¦ D’Forme konnten net geluede ginn. Probéier nach eng Kéier.
+Forme retirée (les tableaux qui l’utilisent la gardent) ¦ Form ewechgeholl (d’Tableauen, déi se benotzen, behale se)
+Ma liste ¦ Meng Lëscht
+Liste de polices retirée ¦ Lëscht vu Schrëften ewechgeholl
+Ajouter une police à la liste ¦ Eng Schrëft an d’Lëscht derbäisetzen
+« {font} » ajoutée à « {list} ». ¦ „{font}“ an „{list}“ derbäigesat.
+Toutes les polices ¦ All d’Schrëften
+Élémentaire ¦ Elementar
+Géométrie ¦ Geometrie
+Bulles ¦ Spriechblosen
+Étoiles et badges ¦ Stären a Badgen
+Croyances et mémoire ¦ Glawen an Erënnerung
+Écrits et documents ¦ Schrëften an Dokumenter
+Lieux et bâtiments ¦ Plazen a Gebaier
+Maison et objets ¦ Haus an Objeten
+Vêtements et parures ¦ Kleeder a Bijouen
+Métiers et outils ¦ Beruffer a Geschir
+Transports et voyages ¦ Transport a Reesen
+Nature ¦ Natur
+Météo et ciel ¦ Wieder an Himmel
+Cuisine et repas ¦ Kiche an Iessen
+Musique, jeux et sport ¦ Musek, Spiller a Sport
+Santé et corps ¦ Gesondheet a Kierper
+Objets ¦ Objeten
+Mes formes ¦ Meng Formen
+Lettres et chiffres ¦ Buschtawen an Zifferen
+Armoiries et héraldique ¦ Wope an Heraldik
+Cadres et bordures ¦ Rummen a Bordüren
+Émotions ¦ Emotiounen
+Drapeaux ¦ Fändelen
+Écrans et appareils ¦ Ecranen an Apparater
+Argent et commerce ¦ Geld an Handel
+Fond des formes, étiquettes, dossiers ¦ Hannergrond vun de Formen, Etiketten, Dossieren
+Bord des formes et contour des médias ¦ Rand vun de Formen a Kontur vun de Medien
+Couleur du texte, des traits et flèches ¦ Faarf vum Text, vun de Sträicher a Feiler
+Légendes des traits : texte ¦ Legende vun de Sträicher: Text
+Légendes des traits : fond du cadre ¦ Legende vun de Sträicher: Hannergrond vum Rumm
+Légendes des traits : bord du cadre ¦ Legende vun de Sträicher: Rand vum Rumm
+⤓ Exporter / imprimer ¦ ⤓ Exportéieren / drécken
+⛶ Plein écran ¦ ⛶ Vollbild
+❓ Pistes à vérifier (compteur) ¦ ❓ Spueren ze kontrolléieren (Zieler)
+🔍 Chercher dans le tableau ¦ 🔍 Am Tableau sichen
+🧲 Grille aimantée ¦ 🧲 Gitter zum Aschnappen
+🗺 Mini-carte ¦ 🗺 Mini-Kaart
+⚙️ Réglages des tableaux ¦ ⚙️ Astellunge vun den Tableauen
+🗑 Supprimer ¦ 🗑 Läschen
+✕ Fermer ¦ ✕ Zoumaachen
+Bord / contour ¦ Rand / Kontur
+Couleur du texte ou du trait ¦ Faarf vum Text oder vum Strich
+Épaisseur et style du trait ¦ Déckt a Stil vum Strich
+Arrondi ¦ Ofrondung
+Taille et style du texte ¦ Gréisst a Stil vum Text
+Pointes des flèches ¦ Spëtzte vun de Feiler
+Forme du trait et légende ¦ Form vum Strich a Legend
+Pinceau ¦ Bengel
+Titre, étiquette, adresse ¦ Titel, Etikett, Adress
+Fiche : ce qu’elle montre ¦ Fiche: wat se weist
+Piste : à vérifier, confirmée, fausse ¦ Spuer: ze kontrolléieren, bestätegt, falsch
+Carte et repères ¦ Kaart a Markéierungen
+Liens tout prêts (frère de…) ¦ Fäerdeg Linken (Brudder vu(n)…)
+Boutons (dupliquer, verrouiller…) ¦ Knäppercher (duplizéieren, spären…)
+Des fichiers ¦ Fichieren
+D’ailleurs (web) ¦ Vun anzwousch (Internet)
+Une fiche ¦ Eng Fiche
+Un écran de l’app ¦ En Ecran vun der App
+Un de mes widgets ¦ Ee vu menge Widgeten
+Un tableur ¦ Eng Tabell
+Un dossier ¦ En Dossier
+Un arbre automatique ¦ En automatesche Bam
+Une frise vivante ¦ Eng lieweg Zäitlinn
+Une carte ¦ Eng Kaart
+Un cadre (section) ¦ E Rumm (Sektioun)
+Un mémo vocal ¦ E Stëmmmemo
+Importer un tableau ¦ En Tableau importéieren
+Gras, italique ¦ Fett, kursiv
+Suivre l’angle du trait ¦ Dem Wénkel vum Strich nogoen
+pointe|aucune ¦ keng
+pointe|▶ triangle ¦ ▶ Dräieck
+pointe|➤ flèche fine ¦ ➤ feine Feil
+pointe|› ouverte ¦ › oppen
+pointe|⏩ double ¦ ⏩ duebel
+pointe|◣ demi-flèche ¦ ◣ hallwe Feil
+pointe|● rond ¦ ● ronn
+pointe|○ rond vide ¦ ○ eidele Krees
+pointe|• point ¦ • Punkt
+pointe|■ carré ¦ ■ Quadrat
+pointe|□ carré vide ¦ □ eidel Quadrat
+pointe|◆ losange ¦ ◆ Raut
+pointe|◇ losange vide ¦ ◇ eidel Raut
+pointe|| barre ¦ | Bar
+pointe|⋔ patte d’oie ¦ ⋔ Gänsfouss
+pointe|» plumes ¦ » Fiederen
+pointe|▷ triangle vide ¦ ▷ eidelen Dräieck
+pointe|⟶ flèche longue ¦ ⟶ laange Feil
+pointe|» double chevron ¦ » duebele Chevron
+pointe|✕ croix ¦ ✕ Kräiz
+pointe|＋ plus ¦ ＋ plus
+pointe|★ étoile ¦ ★ Stär
+pointe|♥ cœur ¦ ♥ Häerz
+pointe|‖ un (deux barres) ¦ ‖ een (zwou Baren)
+pointe|⋲ plusieurs (pied de corbeau) ¦ ⋲ e puer (Kroufouss)
+pointe|◗ demi-rond ¦ ◗ hallwe Krees
+Chercher une forme (cœur, maison, chien…) ¦ Eng Form sichen (Häerz, Haus, Hond…)
+＋ ajouter (réunir) ¦ ＋ derbäisetzen (vereenegen)
+⭕ percer (trou) ¦ ⭕ duerchlächeren (Lach)
+miroir ¦ Spigel
+Créer une forme à partir d’une autre ¦ Eng Form aus enger anerer erstellen
+1. La forme de départ ¦ 1. D’Ausgangsform
+2. La transformer ¦ 2. Se ëmwandelen
+3. Lui ajouter d’autres formes, ou y percer un trou ¦ 3. Aner Forme bäisetzen, oder e Lach drasetzen
+＋ Ajouter une forme ¦ ＋ Eng Form derbäisetzen
+Nom de la nouvelle forme ¦ Numm vun der neier Form
+Elle ira dans « Mes formes », et dans l’accès rapide. ¦ Se kënnt an „Meng Formen“, an an de Schnellzougrëff.
+Fermer la forme ¦ D’Form zoumaachen
+Point ¦ Punkt
+RÉGLAGES DES TABLEAUX ¦ ASTELLUNGE VUN DEN TABLEAUEN
+FORMES ¦ FORMEN
+Créer une pointe ¦ Eng Spëtzt erstellen
+Créer la pointe ¦ D’Spëtzt erstellen
+Chercher une forme (flèche, cœur, étoile…) ¦ Eng Form sichen (Feil, Häerz, Stär…)
+⬠ À partir d’une forme ¦ ⬠ Vun enger Form aus
+✒️ Tracée à la plume ¦ ✒️ Mat der Fieder gezeechent
+Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer. ¦ Zeechen d’Spëtzt no riets gedréint (→): Klick fir en Eck, klicken an zéie fir eng Ofrondung, Klick op den éischte Punkt fir zouzemaachen.
+Accrochée ¦ Ugehaangen
+par la pointe (au bout du trait) ¦ un der Spëtzt (um Enn vum Strich)
+presque au bout ¦ bal um Enn
+par le milieu ¦ an der Mëtt
+par l’arrière ¦ hannen
+Trace la pointe (au moins trois points, puis ferme-la). ¦ Zeechen d’Spëtzt (mindestens dräi Punkten, dann zoumaachen).
+Choisis une forme. ¦ Wiel eng Form.
+＋ cette couleur ¦ ＋ dës Faarf
+＋ transparent ¦ ＋ duerchsichteg
+Sans couleur ¦ Ouni Faarf
+🎨 Couleurs ¦ 🎨 Faarwen
+➤ Pointes ¦ ➤ Spëtzten
+⬠ Formes ¦ ⬠ Formen
+🔤 Polices ¦ 🔤 Schrëften
+📏 Tailles et arrondi ¦ 📏 Gréissten an Ofrondung
+▦ Tableur ¦ ▦ Tabell
+🖌 Pinceaux ¦ 🖌 Bengelen
+☰ Menus et options ¦ ☰ Menüen an Optiounen
+Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux. ¦ D’Faarwen, déi an den Tableauen ugebuede ginn, Kategorie fir Kategorie, an der gewënschter Reiefolleg (zéi eng Faarfplack, oder ‹ ›). De Wieler „aner Faarf“ bleift ëmmer do. Du kanns e puer Paletten hunn an déi fir d’Tableauen auswielen.
+Palette utilisée ¦ Benotzt Palett
+Nom de la palette ¦ Numm vun der Palett
+＋ Nouvelle palette ¦ ＋ Nei Palett
+Partir d’un modèle… ¦ Vun engem Modell ausgoen…
+Supprimer la palette ¦ D’Palett läschen
+Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume. ¦ D’Spëtzten, déi fir d’Sträicher an d’Feiler ugebuede ginn, an der gewënschter Reiefolleg; huel den Haken ewech bei deenen, déi s du net gesi wëlls. „＋ Eng Spëtzt erstellen“: vun enger Form aus (egal wéi eng vun de Formen, oder eng vun dengen) oder mat der Fieder gezeechent.
+Pointe au début, par défaut ¦ Spëtzt um Ufank, als Standard
+Pointe à la fin, par défaut (outil Flèche) ¦ Spëtzt um Enn, als Standard (Tool Feil)
+＋ Créer une pointe ¦ ＋ Eng Spëtzt erstellen
+Supprimer cette pointe ¦ Dës Spëtzt läschen
+Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes. ¦ D’Kategorië vu Formen an hir Formen, an der gewënschter Reiefolleg; huel den Haken ewech bei deem, wat s du net gesi wëlls. „Schnellzougrëff“: d’Formen, déi direkt an der Leescht vum Tool Formen ugebuede ginn.
+✒️ Dessiner une nouvelle forme (dessin vectoriel) ¦ ✒️ Eng nei Form zeechnen (Vektorzeechnung)
+ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG… ¦ oder ✒️ op enger Form hei ënnendrënner, fir se erëmzehuelen: Fieder, Punkten a Grëffer, Pathfinder, SVG-Import…
+📚 Montrer aussi les 2 900 formes de la grande bibliothèque ¦ 📚 Och déi 2 900 Forme vun der grousser Bibliothéik weisen
+lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide) ¦ Buschtawen an Zifferen, Wopen, Rummen, Etiketten, Fändelen, Symboler… (se sinn ëmmer an der Bibliothéik vun den Tableauen; hei, fir se ze verstoppen, ze arrangéieren oder an de Schnellzougrëff ze setzen)
+Accès rapide ¦ Schnellzougrëff
+Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle. ¦ Zéi eng Form (oder ‹ ›), fir d’Reiefolleg z’änneren; ⚡ op enger Form hei ënnendrënner setzt se heihinner; ✏️ erstellt eng Form vun hir aus.
+Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police). ¦ Deng eege Lëschte vu Schrëften, déi beim Auswiele vun der Schrëft vun engem Text ugebuede ginn. „All d’Schrëften“ mécht déi gemeinsam Lëscht op (Schrëfte vun der App a vum Computer, all eenzel a senger Schrëft geschriwwen).
+Aa Toutes les polices… ¦ Aa All d’Schrëften…
+＋ Nouvelle liste ¦ ＋ Nei Lëscht
+＋ Ajouter une police… ¦ ＋ Eng Schrëft derbäisetzen…
+De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage. ¦ Vu wéi enger Gréisst bis wéi enger Gréisst d’Schiebere ginn (Déckt vun de Sträicher an de Konturen: vun 0,5 bis 500 px; Text: bis 500 px). D’Agabfeld nieft dem Schieber hëlt ëmmer de ganze Beräich un.
+Épaisseur mini ¦ Mindestdéckt
+Épaisseur maxi ¦ Maximal Déckt
+Texte mini ¦ Mindesttext
+Texte maxi ¦ Maximalen Text
+Arrondi par défaut ¦ Standard-Ofrondung
+Comment est un tableur quand tu le poses dans un tableau. ¦ Wéi eng Tabell ausgesäit, wann s du se an en Tableau sets.
+Titres des colonnes, séparés par ; ¦ Titele vun de Kolonnen, getrennt mat ;
+Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux. ¦ Deng eege Bengelen: en Ausgangsbengel, eng Déckt, eng Deckkraaft, eng <strong>Häert</strong> (100 % = schaarfe Rand; méi niddreg = verschwommene Rand, wéi am Photoshop), eng Faarf, wann s de wëlls. Se stinn uewen am Menü vun de Bengelen.
+Mon pinceau ¦ Mäi Bengel
+Imposer une couleur ¦ Eng Faarf virschreiwen
+plein ¦ voll
+tirets ¦ Strécher
+longs tirets ¦ laang Strécher
+points ¦ Punkten
+tiret-point ¦ Strech-Punkt
+＋ Nouveau pinceau ¦ ＋ Neie Bengel
+La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓. ¦ D’Plaz vun all Deel, dann d’Reiefolleg vun allem, wat een an engem Tableau gesäit; huel den Haken ewech fir ze verstoppen. Zéi d’Linnen, oder ↑ ↓.
+🧭 Disposition du tableau ¦ 🧭 Disposition vum Tableau
+à gauche (en colonne) ¦ lénks (als Kolonn)
+à droite (en colonne) ¦ riets (als Kolonn)
+Réglages (texte, forme, trait…) ¦ Astellungen (Text, Form, Strich…)
+cachés (plus de place) ¦ verstoppt (méi Plaz)
+Taille des boutons ¦ Gréisst vun de Knäppercher
+petits ¦ kleng
+normaux ¦ normal
+grands ¦ grouss
+En-tête (titre, propriétaire, état) ¦ Kappzeil (Titel, Besëtzer, Zoustand)
+complet ¦ komplett
+compact (une ligne) ¦ kompakt (eng Linn)
+Outils (barre du haut) ¦ Tools (Leescht uewen)
+Boutons de l’en-tête ¦ Knäppercher vun der Kappzeil
+↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher. ¦ ↶ ↷ bleiwen nieft dem Numm; ⚙️ Personnaliséieren, ⤓ Exportéieren, ⛶ an × bleiwe riets, an dëser Reiefolleg (wéi an allen Editeuren): hei kanns du se nëmme weisen oder verstoppen.
+Réglages à droite (texte, forme, trait…) ¦ Astellunge riets (Text, Form, Strich…)
+Menu « ＋ Ajouter » ¦ Menü „＋ Derbäisetzen“
+Réglages d’une légende de trait ¦ Astellunge vun enger Legend vun engem Strich
+Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs. ¦ An „Astellunge vun der Legend“ (wiel e Strich). D’Faarwen, déi ugebuede ginn: Reiter 🎨 Faarwen.
+Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus. ¦ Wat d’Tableauen ubidden (Ënnersichungen → Tableauen): Faarwen, Spëtzten, Formen, Schrëften, Gréissten, Tabell, Bengelen, an d’Reiefolleg vun de Menüen.
+Bibliothèque de formes ¦ Bibliothéik vu Formen
+Chercher une forme… (arbre, croix, É, drapeau) ¦ Eng Form sichen… (Bam, Kräiz, É, Fändel)
+Chercher une forme… ¦ Eng Form sichen…
+Chargement de toutes les formes… ¦ All d’Forme gi gelueden…
+Les formes en plus n’ont pas pu être chargées. ¦ Déi zousätzlech Forme konnten net geluede ginn.
+⛔ Les formes en plus n’ont pas pu être chargées. ¦ ⛔ Déi zousätzlech Forme konnten net geluede ginn.
+Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…). ¦ Keng Form fir „{q}“. Probéier en anert Wuert (Haus, Kräiz, Buschtaf, Fändel…).
+Aucune forme dans cette catégorie. ¦ Keng Form an dëser Kategorie.
+{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher ¦ {n} · ↑ ↓ ← → fir auszewielen, Enter fir ze huelen, / fir ze sichen
+Formes (flèches pour choisir, Entrée pour prendre) ¦ Formen (Feiler fir auszewielen, Enter fir ze huelen)
+Large (16:9) ¦ Breet (16:9)
+Standard (4:3) ¦ Standard (4:3)
+Vertical (téléphone) ¦ Vertikal (Telefon)
+Sur mesure… ¦ No Mooss…
+Comme l’application ¦ Wéi d’App
+Ardoise ¦ Schifer
+Parchemin ¦ Pergament
+Aurore ¦ Mueresrued
+Tableau noir ¦ Schwaarz Tafel
+Titre et texte ¦ Titel an Text
+Titre et photo ¦ Titel a Foto
+Photo pleine page ¦ Foto iwwer déi ganz Säit
+Photo et texte ¦ Foto an Text
+Deux colonnes ¦ Zwou Kolonnen
+Section ¦ Sektioun
+Chiffre clé ¦ Schlësselzuel
+Double-clique pour écrire ¦ Duebelklick fir ze schreiwen
+Légende de la photo ¦ Legend vun der Foto
+« Une phrase qui compte » ¦ „E Saz, deen zielt“
+Triangle rectangle ¦ Riichtwénklegen Dräieck
+Pentagone ¦ Fënnefeck
+Octogone ¦ Aachteck
+Double flèche ¦ Duebele Feil
+Chevron ¦ Chevron
+Ligne fléchée ¦ Linn mat Feil
+Aucun (rectangle) ¦ Keen (Rechteck)
+Coins arrondis ¦ Ofgerount Ecken
+Cercle / ovale ¦ Krees / Oval
+Arche (portrait ancien) ¦ Bou (aalt Portrait)
+Dissoudre ¦ Opléisen
+Fondu par le noir ¦ Iwwerblendung iwwer Schwaarz
+Glisser par-dessus ¦ Driwwer zéien
+Révéler ¦ Opdecken
+Balayage ¦ Wëschen
+Échanger ¦ Wiesselen
+Retourner ¦ Ëmdréinen
+Cube ¦ Wierfel
+Déplacement magique ¦ Magesch Bewegung
+Apparition ¦ Erschéngen
+Fondu ¦ Iwwerblendung
+Arrivée (glisser) ¦ Arrivée (zéien)
+Rebond ¦ Sprong
+Chute ¦ Fall
+Machine à écrire (textes) ¦ Schreifmaschinn (Texter)
+Trajectoire (déplacement) ¦ Bunn (Bewegung)
+depuis la gauche ¦ vu lénks
+depuis la droite ¦ vu riets
+depuis le haut ¦ vun uewen
+depuis le bas ¦ vun ënnen
+Au clic ¦ Beim Klick
+Avec la précédente ¦ Mat der viregter
+Après la précédente ¦ No der viregter
+Liaison ¦ Verbindung
+liaison|Droite ¦ Riicht
+liaison|En équerre ¦ Am rechte Wénkel
+liaison|Courbe ¦ Kurv
+Flèche au bout ¦ Feil um Enn
+Flèches aux deux bouts ¦ Feiler un deenen zwee Enden
+Sans flèche ¦ Ouni Feil
+Union (les deux réunies) ¦ Vereenegung (déi zwou zesummen)
+Soustraire (la 1re moins la 2e) ¦ Ofzéien (déi 1. minus déi 2.)
+Intersection (ce qu’elles ont en commun) ¦ Schnëttmengen (wat se gemeinsam hunn)
+Choisis une personne (à droite, onglet Format) ¦ Wiel eng Persoun (riets, Reiter Format)
+Aucun événement daté ¦ Keen datéiert Evenement
+Double-clique pour choisir une image ¦ Duebelklick, fir e Bild auszewielen
+Aucune diapositive à montrer (toutes sont sautées ?). ¦ Keng Diapositiv ze weisen (sinn all iwwersprong?).
+Touches ¦ Tasten
+<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter ¦ <kbd>→</kbd> <kbd>Espace</kbd> <kbd>Klick</kbd> nächst · <kbd>←</kbd> viregt · <kbd>Pos1</kbd> <kbd>Enn</kbd> · eng Nummer an dann <kbd>Enter</kbd>: op d’Diapositiv goen · <kbd>B</kbd> schwaarzen Ecran · <kbd>W</kbd> wäissen Ecran · <kbd>L</kbd> Laserpointer · <kbd>P</kbd> Presentateur · <kbd>Esc</kbd> verloossen
+Précédente (←) ¦ Viregt (←)
+Suivante (→ ou espace) ¦ Nächst (→ oder Espace)
+Fenêtre du présentateur : notes, suivante, chronomètre (P) ¦ Fënster vum Presentateur: Notizen, nächst, Stoppauer (P)
+Pointeur laser (L) ¦ Laserpointer (L)
+Les touches (?) ¦ D’Tasten (?)
+Quitter (Échap) ¦ Verloossen (Esc)
+Fin de la présentation — clic ou → pour quitter ¦ Enn vun der Presentatioun — Klick oder → fir ze verloossen
+Encore {n} sur cette diapositive ¦ Nach {n} op dëser Diapositiv
+présentation|Fin ¦ Enn
+Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive). ¦ Keng Notize fir dës Diapositiv (Reiter 📝 Notizen ënner der Diapositiv).
+La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page. ¦ D’Fënster vum Presentateur gouf blockéiert: erlaab Pop-up-Fënstere fir dës Säit.
+Présentateur ¦ Presentateur
+Arrêter / reprendre le chronomètre ¦ D’Stoppauer stoppen / weiderlafe loossen
+Remettre le chronomètre à zéro ¦ D’Stoppauer op null setzen
+Heure : ¦ Auerzäit:
+Ensuite ¦ Duerno
+‹ Précédente ¦ ‹ Viregt
+Suivante › ¦ Nächst ›
+Écran noir ¦ Schwaarzen Ecran
+Écran blanc ¦ Wäissen Ecran
+Touches : → ← espace, B, W, Échap ¦ Tasten: → ← Espace, B, W, Esc
+Terminer ¦ Ofschléissen
+Diapositive précédente ¦ Viregt Diapositiv
+Diapositive suivante ¦ Nächst Diapositiv
+Quitter la présentation ¦ D’Presentatioun verloossen
+PRÉSENTATION ¦ PRESENTATIOUN
+La personne affichée en ce moment, ou × pour en chercher une autre. ¦ D’Persoun, déi elo gewise gëtt, oder × fir eng aner ze sichen.
+Une vidéo ou un son ¦ E Video oder en Toun
+La fenêtre des médias n’est pas encore prête. Réessaie dans un instant. ¦ D’Fënster vun de Medien ass nach net prett. Probéier et an engem Moment nach eng Kéier.
+Police de l’ordinateur ¦ Schrëft vum Computer
+Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) : ¦ Dëse Browser kann d’Schrëften net oplëschten: tipp de genauen Numm vun enger installéierter Schrëft (z. B. Garamond):
+L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre. ¦ De Computer huet keng Schrëft ginn: tipp hiren Numm an der Fënster.
+Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre. ¦ D’Schrëfte vum Computer kënnen hei net gelies ginn: tipp den Numm vun enger Schrëft an der Fënster.
+🖥 Choisir une police ¦ 🖥 Eng Schrëft auswielen
+Pour les titres ¦ Fir d’Titelen
+Pour les textes ¦ Fir d’Texter
+Pour le texte choisi ¦ Fir de gewielten Text
+Chercher une police, ou taper son nom… ¦ Eng Schrëft sichen, oder hiren Numm tippen…
+{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va. ¦ {n} vun dësem Computer, dann déi vun der App. Klick op eng Schrëft, a so dann, wou se hikënnt.
+Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va. ¦ D’Schrëfte vun der App; eng aner installéiert Schrëft: tipp hire genauen Numm an dann Enter. Klick op eng Schrëft, a so dann, wou se hikënnt.
+Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle. ¦ Keng Schrëft „{q}“ an der Lëscht: Enter, fir se esou ze huelen.
+Portez ce vieux whisky au juge blond qui fume ¦ Franz jäizt am komplett verwahrlosten Taxi quer duerch Bayern
+Choisis une police ¦ Wiel eng Schrëft
+Clique d’abord sur une police. ¦ Klick fir d’éischt op eng Schrëft.
+Ma présentation ¦ Meng Presentatioun
+⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)… ¦ ⤒ Importéieren (PowerPoint, OpenDocument, PDF, Biller, Text, JSON)…
+🖨 PDF / imprimer (une diapositive par page) ¦ 🖨 PDF / drécken (eng Diapositiv pro Säit)
+🖨 PDF avec les notes de l’orateur ¦ 🖨 PDF mat de Notize vum Riedner
+🖼️ Cette diapositive en PNG ¦ 🖼️ Dës Diapositiv als PNG
+🗂️ Toutes les diapositives en PNG (.zip) ¦ 🗂️ All d’Diapositiven als PNG (.zip)
+⏺ Vidéo (WebM) ¦ ⏺ Video (WebM)
+⤓ Fichier de la présentation (.json) ¦ ⤓ Fichier vun der Presentatioun (.json)
+Nom de la présentation ¦ Numm vun der Presentatioun
+Annuler / rétablir ¦ Réckgängeg / widderhuelen
+↶ Annuler (⌘Z) ¦ ↶ Réckgängeg (⌘Z)
+↷ Rétablir (⇧⌘Z) ¦ ↷ Widderhuelen (⇧⌘Z)
+Insérer (barre du haut) ¦ Asetzen (Leescht uewen)
+Une zone de texte ¦ Eng Textzon
+◆ Formes ¦ ◆ Formen
+Une forme ¦ Eng Form
+Une photo des médias ou de l’ordinateur ¦ Eng Foto aus de Medien oder vum Computer
+Un graphique (colonnes, camembert, courbe…) ¦ Eng Grafik (Kolonnen, Kuch, Kurv…)
+👤 Généalogie (fiche, portrait, arbre, frise) ¦ 👤 Genealogie (Fiche, Portrait, Bam, Zäitlinn)
+La généalogie : une personne de la base ¦ D’Genealogie: eng Persoun aus der Datebank
+🪪 Fiche d’une personne ¦ 🪪 Fiche vun enger Persoun
+🖼️ Portrait d’une personne ¦ 🖼️ Portrait vun enger Persoun
+🌳 Petit arbre (parents, couple, enfants) ¦ 🌳 Klenge Bam (Elteren, Koppel, Kanner)
+🗓️ Frise de sa vie ¦ 🗓️ Zäitlinn vun hirem Liewen
+Vidéo / son ¦ Video / Toun
+Une vidéo ou un son des médias ¦ E Video oder en Toun aus de Medien
+Disposer (barre du haut) ¦ Arrangéieren (Leescht uewen)
+⇤⇥ Aligner et répartir ¦ ⇤⇥ Ausriichten a verdeelen
+⇤ À gauche ¦ ⇤ Lénks
+↔ Au centre ¦ ↔ An der Mëtt
+⇥ À droite ¦ ⇥ Riets
+⤒ En haut ¦ ⤒ Uewen
+↕ Au milieu ¦ ↕ An der Mëtt
+⤓ En bas ¦ ⤓ Ënnen
+⟷ Répartir horizontalement ¦ ⟷ Horizontal verdeelen
+⟷ Répartir verticalement ¦ ⟷ Vertikal verdeelen
+⧉ Ordre (devant, derrière) ¦ ⧉ Reiefolleg (no vir, no hannen)
+Devant, derrière ¦ No vir, no hannen
+Tout devant (⇧⌘]) ¦ Ganz no vir (⇧⌘])
+Avancer (⌘]) ¦ No vir réckelen (⌘])
+Reculer (⌘[) ¦ No hanne réckelen (⌘[)
+Tout derrière (⇧⌘[) ¦ Ganz no hannen (⇧⌘[)
+Grouper (⌘G) — ⇧⌘G pour dissocier ¦ Gruppéieren (⌘G) — ⇧⌘G fir opzeléisen
+Dissocier ¦ Opléisen
+Dissocier (⇧⌘G) ¦ Opléisen (⇧⌘G)
+Verrouiller / déverrouiller (⌘L) ¦ Spären / opspären (⌘L)
+Relier deux objets par un trait qui les suit (choisis-en deux) ¦ Zwee Objete mat engem Strich verbannen, deen hinne follegt (wiel der zwee)
+Fusionner deux formes : union, soustraction, intersection ¦ Zwou Forme fusionéieren: Vereenegung, Ofzéien, Schnëttmengen
+Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque ¦ Master vun den Diapositiven: déi gewielten Objeten op all d’Diapositive setzen, oder de Master änneren
+Lire en plein écran depuis le début (⌥⌘↩) ¦ Am Vollbild vun Ufank u spillen (⌥⌘↩)
+D’ici ¦ Vun hei aus
+Lire depuis cette diapositive (⌘↩) ¦ Vun dëser Diapositiv u spillen (⌘↩)
+Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ Vollbild + Fënster vum Presentateur (Notizen, nächst, Stoppauer)
+PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON ¦ PowerPoint, OpenDocument, PDF, Biller, Markdown, Text, JSON
+Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne ¦ Geschicht vun engem Liewen: fäerdeg Diapositiven aus der Fiche vun enger Persoun
+PDF, impression, images, vidéo, fichier de la présentation ¦ PDF, Drock, Biller, Video, Fichier vun der Presentatioun
+Une forme (les autres : menu ◆ Forme en haut) ¦ Eng Form (déi aner: Menü ◆ Form uewen)
+Une image (médias ou ordinateur) ¦ E Bild (Medien oder Computer)
+La fiche d’une personne ¦ D’Fiche vun enger Persoun
+Présentateur : plein écran, notes, chronomètre ¦ Presentateur: Vollbild, Notizen, Stoppauer
+Diapositives (au-dessus de la liste) ¦ Diapositiven (iwwer der Lëscht)
+Nouvelle diapositive ¦ Nei Diapositiv
+＋ Diapositive ¦ ＋ Diapositiv
+▾ Choisir la disposition ¦ ▾ D’Disposition auswielen
+Choisir la disposition ¦ D’Disposition auswielen
+Dupliquer la diapositive (pour un déplacement magique) ¦ D’Diapositiv duplizéieren (fir eng magesch Bewegung)
+Sauter / ne plus sauter à la lecture ¦ Beim Spillen iwwersprangen / net méi iwwersprangen
+Commencer une section (un groupe de diapositives) ici ¦ Hei eng Sektioun ufänken (eng Grupp vun Diapositiven)
+Supprimer la diapositive ¦ D’Diapositiv läschen
+Diapositive précédente (Page précédente) ¦ Viregt Diapositiv (Säit no uewen)
+Diapositive suivante (Page suivante) ¦ Nächst Diapositiv (Säit no ënnen)
+Ajuster ¦ Upassen
+Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ D’Objete schnappen un de Ränner, der Mëtt an deenen aneren Objeten an (⌘ beim Zéien: ouni Magnéit)
+Notes de l’orateur ¦ Notize vum Riedner
+📝 Notes ¦ 📝 Notizen
+Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)… ¦ Notize vum Riedner: wat s du zu dëser Diapositiv soe wëlls (nëmmen an der Fënster vum Presentateur ze gesinn, an am PDF mat Notizen)…
+Onglets de l’inspecteur (à droite) ¦ Reitere vum Inspekter (riets)
+Format de l’objet choisi ¦ Format vum gewielten Objet
+Animer ¦ Animéieren
+Transition et animations ¦ Iwwergang an Animatiounen
+Diapo ¦ Dia
+La diapositive : disposition, fond, durée, notes ¦ D’Diapositiv: Disposition, Hannergrond, Dauer, Notizen
+Les objets de la diapositive (devant, derrière, cacher, verrouiller) ¦ D’Objete vun der Diapositiv (no vir, no hannen, verstoppen, spären)
+Thème, polices, format, musique ¦ Thema, Schrëften, Format, Musek
+Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner ¦ Klick: en Objet auswielen (⇧: nach een) · Duebelklick: dra schreiwen · zéien: réckelen · Grëffer: vergréisseren · Ronn: dréinen
+Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Aschnappen: d’Objete schnappen un de Ränner, der Mëtt an deenen aneren Objeten an (⌘ beim Zéien: ouni Magnéit)
+Replier / déplier la section ¦ D’Sektioun zesummeklappen / opklappen
+Sautée à la lecture ¦ Beim Spillen iwwersprong
+Animations ¦ Animatiounen
+Transition : {name} ¦ Iwwergang: {name}
+Tourner (⇧ : de 15° en 15°) ¦ Dréinen (⇧: vu 15° op 15°)
+Choisis une zone de texte. ¦ Wiel eng Textzon.
+Le petit arbre de quelle personne ? ¦ De klenge Bam vu wéi enger Persoun?
+La frise de la vie de qui ? ¦ D’Zäitlinn vum Liewe vu wiem?
+Lecture de la fiche… ¦ D’Fiche gëtt gelies…
+Changer la vidéo ou le son ¦ De Video oder den Toun wiesselen
+Choisis un ou plusieurs objets. ¦ Wiel een oder e puer Objeten.
+Choisis au moins trois objets pour les répartir. ¦ Wiel mindestens dräi Objeten, fir se ze verdeelen.
+Choisis au moins deux objets à grouper. ¦ Wiel mindestens zwee Objeten, fir se ze gruppéieren.
+Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces. ¦ Wiel zwee Objeten (⇧ Klick): e Strich verbënnt se, a follegt hinnen, wann s du se réckels.
+Choisis deux formes (⇧ clic) à fusionner. ¦ Wiel zwou Formen (⇧ Klick) fir ze fusionéieren.
+⊕ Fusionner deux formes ¦ ⊕ Zwou Forme fusionéieren
+La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme. ¦ Déi 1. Form ass déi ënnen. Déi zwou bleiwen an der neier Form gehalen.
+Comment ¦ Wéi
+🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier. ¦ 🗂 Op all den Diapositiven (Master). An engem Text gëtt „{a}“ d’Nummer vun der Diapositiv an „{b}“ hir Zuel. 🗂 ouni eppes auszewielen: en änneren.
+Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives. ¦ De Master ass eidel: wiel Objeten (Logo, Fousszeil, Nummer „{a}“…) an dann 🗂, fir se op all d’Diapositiven ze setzen.
+🗂 Masque des diapositives ¦ 🗂 Master vun den Diapositiven
+{n} sur toutes les diapositives. ¦ {n} op allen Diapositiven.
+Que faire ¦ Wat maachen
+Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre) ¦ Se op dës Diapositiv zréckhuelen, fir se z’änneren (dann 🗂, fir se zréckzesetzen)
+Remontrer le masque sur cette diapositive ¦ De Master op dëser Diapositiv erëm weisen
+Ne pas montrer le masque sur cette diapositive ¦ De Master op dëser Diapositiv net weisen
+Vider le masque ¦ De Master eidel maachen
+Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer). ¦ Diapositiv duplizéiert: réckel d’Objeten a wiel dann den Iwwergang „Magesch Bewegung“ (Reiter ✨ Animéieren).
+Aucune couleur ¦ Keng Faarf
+Choisir la police (recherche, récentes, polices de l’ordinateur) ¦ D’Schrëft auswielen (Sich, rezent, Schrëfte vum Computer)
+{what} (sur la diapositive) ¦ {what} (op der Diapositiv)
+Les réglages vont au texte sélectionné (sinon à tout le texte). ¦ D’Astellunge ginn op de gewielten Text (soss op de ganzen Text).
+Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné. ¦ Duebelklick an den Text, fir en ze schreiwen; d’Astellunge ginn op de ganzen Text, oder op de gewielte Stéck.
+Le trait suit les deux objets quand on les déplace. ¦ De Strich follegt deenen zwee Objeten, wann een se réckelt.
+Double-clic sur une case du tableau pour l’écrire directement. ¦ Duebelklick op e Feld vun der Tabell, fir direkt dran ze schreiwen.
+Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour. ¦ Wat gewise gëtt, kënnt vun der Fiche (nach eng Kéier gelies den {date}): d’Presentatioun leeft och ouni d’Datebank. „D’Fiche nees liesen“ aktualiséiert se.
+(groupe) ¦ (Grupp)
+Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier. ¦ Wiel en Objet op der Diapositiv (Klick) oder setz een an (Leescht uewen). ⇧ Klick: e puer auswielen; iwwer den Hannergrond zéien: e Rechteck fir auszewielen; Duebelklick: an en Text schreiwen, e Bild wiesselen; ⌥ beim Zéien: kopéieren.
+Inspecteur : sections de « Format » ¦ Inspekter: Sektioune vu „Format“
+Inspecteur : sections de « Animer » ¦ Inspekter: Sektioune vun „Animéieren“
+Inspecteur : sections de « Diapositive » ¦ Inspekter: Sektioune vun „Diapositiv“
+Inspecteur : « Objets » ¦ Inspekter: „Objeten“
+Inspecteur : sections de « Document » ¦ Inspekter: Sektioune vun „Dokument“
+C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle. ¦ Dat ass déi éischt Diapositiv: hiren Iwwergang gëtt nëmme gespillt, wann d’Ofspillen an enger Schleef nees ufänkt.
+✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent. ¦ ✨ D’Objeten, déi op der Diapositiv virdrun an op dëser sinn (Diapositiv duplizéiert mat ⧉, oder Objete mam selwechten Numm), rutschen, gi méi grouss an dréine sech vun enger Plaz op déi aner; déi aner erschéngen oder verschwannen.
+Aucune : il est là dès l’arrivée de la diapositive. ¦ Keng: en ass do, soubal d’Diapositiv kënnt.
+Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul. ¦ Wiel en Objet op der Diapositiv, fir en erschéngen (Agang) oder verschwannen (Ausgang) ze loossen, beim Klick oder eleng.
+Pas encore d’animation sur cette diapositive. ¦ Nach keng Animatioun op dëser Diapositiv.
+Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé. ¦ D’Disposition wiesselen setzt d’Objeten „Titel“, „Text“, „Foto“ nei; wat s du geschriwwen hues, bleift.
+Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)… ¦ Wat s du zu dëser Diapositiv soe wëlls (an der Fënster vum Presentateur ze gesinn)…
+Objets de la diapositive ¦ Objete vun der Diapositiv
+Objets (le premier est devant) ¦ Objeten (dat éischt ass vir)
+Dans un groupe ¦ An enger Grupp
+Aucun objet sur cette diapositive pour l’instant ¦ Fir de Moment keen Objet op dëser Diapositiv
+Insère un texte, une image… avec la barre du haut. ¦ Setz en Text, e Bild… mat der Leescht uewen an.
+Celle du thème ({font}) ¦ Déi vum Thema ({font})
+{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble. ¦ {w} × {h} Punkten. Wann s du de Format wiesselts, ginn d’Objeten zesumme vergréissert oder verklengert.
+{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives). ¦ {n}, dovun {skipped} · {time} beim eleng Ofspillen (Dauer vun den Diapositiven).
+{n} · {time} en lecture toute seule (durées des diapositives). ¦ {n} · {time} beim eleng Ofspillen (Dauer vun den Diapositiven).
+Il n’y a pas de diapositive avant celle-ci. ¦ Et gëtt keng Diapositiv virun dëser.
+Choisis d’abord un effet de transition. ¦ Wiel fir d’éischt en Iwwergangseffekt.
+Les dernières modifications de la présentation seront perdues. ¦ Déi lescht Ännerunge vun der Presentatioun ginn verluer.
+Fermer sans enregistrer la présentation ? ¦ Zoumaachen, ouni d’Presentatioun ze späicheren?
+une diapositive par page (« Enregistrer en PDF ») ¦ eng Diapositiv pro Säit („Als PDF späicheren“)
+📝 PDF + notes ¦ 📝 PDF + Notizen
+avec les notes de l’orateur ¦ mat de Notize vum Riedner
+🗂 Toutes en PNG ¦ 🗂 All als PNG
+un fichier .zip ¦ e .zip-Fichier
+WebM, avec la musique ¦ WebM, mat der Musek
+aperçu, pages, notes ¦ Virschau, Säiten, Notizen
+pour la rouvrir ou la partager ¦ fir se nees opzemaachen oder ze deelen
+Le diaporama n’est pas chargé. ¦ D’Diashow ass net gelueden.
+Ajouter le récit ¦ D’Geschicht derbäisetzen
+Rien à raconter pour cette personne. ¦ Näischt ze verzielen iwwer dës Persoun.
+{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama. ¦ {n}: all Text kënnt vun der Fiche. Déi animéiert Kaarte bleiwen an der Diashow.
+Titre de la section qui commence à cette diapositive (vide : pas de section) : ¦ Titel vun der Sektioun, déi bei dëser Diapositiv ufänkt (eidel: keng Sektioun):
+Police « {font} » pour le texte choisi. ¦ Schrëft „{font}“ fir de gewielten Text.
+Police « {font} » pour les titres. ¦ Schrëft „{font}“ fir d’Titelen.
+Police « {font} » pour les textes. ¦ Schrëft „{font}“ fir d’Texter.
+L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive). ¦ D’Bild ass elo den Hannergrond vun der Diapositiv (Reiter 🖼 Diapositiv).
+Cette transition va maintenant à toutes les diapositives. ¦ Dësen Iwwergang gëllt elo fir all d’Diapositiven.
+L’image du fond ¦ D’Bild vum Hannergrond
+Ce fond va maintenant à toutes les diapositives. ¦ Dësen Hannergrond gëllt elo fir all d’Diapositiven.
+Une musique pendant la lecture ¦ Musek beim Ofspillen
+Choisis un son (MP3, M4A, WAV…). ¦ Wiel en Toun (MP3, M4A, WAV…).
+{name} : ni une image, ni une vidéo, ni un son. ¦ {name}: weder e Bild, nach e Video, nach en Toun.
+Diapositive copiée : ⌘V pour la coller. ¦ Diapositiv kopéiert: ⌘V, fir se anzepechen.
+ce n’est pas un fichier zip valide (pptx, odp) ¦ dat ass kee gëltege Zip-Fichier (pptx, odp)
+un élément du fichier est trop gros ¦ en Element vum Fichier ass ze grouss
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) ¦ Fichier refuséiert: en enthält XML-Deklaratiounen (DOCTYPE oder ENTITY)
+XML illisible dans le fichier ¦ Net liesbaren XML am Fichier
+ce n’est pas une présentation PowerPoint (.pptx) ¦ dat ass keng PowerPoint-Presentatioun (.pptx)
+aucune diapositive trouvée ¦ keng Diapositiv fonnt
+{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté. ¦ {n} an engem Format, deen de Browser net liest (EMF, WMF…), goufen op der Säit gelooss.
+ce n’est pas un fichier OpenDocument (.odp) ¦ dat ass keen OpenDocument-Fichier (.odp)
+{n} de côté. ¦ {n} op der Säit gelooss.
+ce n’est pas un PDF ¦ dat ass keen PDF
+aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait ¦ an dësem PDF gouf kee Bild (Scan, Foto) fonnt. Säin Text a seng Zeechnunge kënnen hei net gelies ginn: exportéier en éischter als Biller, oder als PowerPoint aus dem Programm, deen en gemaach huet
+PDF : {n} ; le texte et les dessins du PDF ne sont pas lus. ¦ PDF: {n}; den Text an d’Zeechnunge vum PDF ginn net gelies.
+Carte du diaporama : le trajet animé reste dans le diaporama. ¦ Kaart vun der Diashow: déi animéiert Rees bleift an der Diashow.
+ce n’est pas une présentation de l’app ¦ dat ass keng Presentatioun vun der App
+{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici. ¦ {name}: Keynote hält seng Fichieren an engem zouene Format. A Keynote: Ablage → Exportéieren an → PowerPoint (oder PDF, oder Biller), an importéier dann dëse Fichier hei.
+{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx. ¦ {name}: dat alt PowerPoint-Format (virun 2007) kann hei net gelies ginn; maach en op a späicher en als .pptx.
+fichier trop gros (400 Mo au plus) ¦ Fichier ze grouss (maximal 400 MB)
+{name} : format non reconnu. ¦ {name}: Format net erkannt.
+{name} : rien à importer. ¦ {name}: näischt z’importéieren.
+IMPORT ¦ IMPORT
+Rien n’a été importé ¦ Et gouf näischt importéiert
+Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée) ¦ Déi aktuell Diapositiven ersetzen (soss: no der gewisener Diapositiv derbäigesat)
+<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions. ¦ <b>PowerPoint (.pptx)</b> an <b>OpenDocument / LibreOffice Impress (.odp)</b>: all Diapositiv mat hiren Texter (op hirer Plaz, Gréisst, fett, Faarf, Lëschten), hire Biller, hiren einfache Formen, hiren Tabellen, hire Grafiken, hiren Notizen an hiren Iwwergäng.
+<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici. ¦ <b>Keynote (.key)</b>: dem Apple säi Format ass zou. A Keynote: Ablage → Exportéieren an → <b>PowerPoint</b> (oder PDF, oder Biller), an importéier dann dëse Fichier hei.
+<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images. ¦ <b>PDF</b>: d’Biller, déi dran sinn (Scans, Fotoen), gi Diapositiven, eng pro Bild. Den Text an d’Zeechnunge vun engem PDF kënnen hei net gelies ginn: fir eng Presentatioun, exportéier se éischter als PowerPoint oder als Biller.
+<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image. ¦ <b>Biller</b> (JPG, PNG, WEBP, GIF, BMP…), e puer op eemol: eng Diapositiv „Foto iwwer déi ganz Säit“ pro Bild.
+<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive. ¦ <b>Markdown (.md) oder Text (.txt)</b>: „# Titel“ fänkt eng Diapositiv un, „-“ mécht e Punkt, „---“ trennt zwou Diapositiven, „>“ en Zitat, „Notes:“ d’Notize vum Riedner. En einfachen Text: ee Paragraf pro Diapositiv.
+<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app. ¦ <b>JSON</b>: eng Presentatioun (oder eng Diashow), déi vun der App exportéiert gouf.
+Aucune diapositive à imprimer. ¦ Keng Diapositiv ze drécken.
+Diapositive ¦ Diapositiv
+Pas de notes. ¦ Keng Notizen.
+{name} — présentation ¦ {name} — Presentatioun
+Les diapositives ¦ D’Diapositiven
+Les diapositives avec les notes du présentateur ¦ D’Diapositive mat de Notize vum Presentateur
+Les notes seules (texte) ¦ Nëmmen d’Notizen (Text)
+Diapositives par page ¦ Diapositive pro Säit
+Numéros des diapositives ¦ Nummere vun den Diapositiven
+Les diapositives masquées aussi ¦ Och déi verstoppten Diapositiven
+aucune diapositive ¦ keng Diapositiv
+Préparation de {n} images… ¦ {n} Biller gi virbereet…
+Préparation de l’image… ¦ D’Bild gëtt virbereet…
+ce navigateur ne sait pas enregistrer de vidéo ¦ dëse Browser kann kee Video ophuelen
+La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. ¦ De Video spillt d’ganz Presentatioun nach eng Kéier of ({time}, Dauer aus dem Reiter 🖼 Diapositiv) an hëlt se op. Looss d’Fënster op.
+Fabriquer la vidéo ? ¦ De Video maachen?
+Fabriquer la vidéo ¦ De Video maachen
+Préparation : {n} / {total} ¦ Virbereedung: {n} / {total}
+Vidéo : {n} % ¦ Video: {n} %
+Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement. ¦ Video gestoppt: d’Presentatioun gouf während der Opnam zougemaach.
+la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur ¦ de Video ass eidel: d’Opnam konnt an dësem Browser net gemaach ginn
+La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur. ¦ De Video ass eidel: d’Opnam konnt an dësem Browser net gemaach ginn.
+Vidéo téléchargée et rangée dans les Médias. ¦ Video erofgelueden an an de Medien ofgeluecht.
+Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger. ¦ Du kanns en an d’Medie vun der App derbäisetzen, oder en nëmmen eroflueden.
+Vidéo prête ¦ Video prett
+Ajouter aux Médias ¦ An d’Medien derbäisetzen
+Télécharger seulement ¦ Nëmmen eroflueden
+Vidéo ajoutée aux Médias. ¦ Video an d’Medien derbäigesat.
+Vidéo impossible : {error} ¦ Video net méiglech: {error}
+NOUVELLE PRÉSENTATION ¦ NEI PRESENTATIOUN
+🎤 Choisis un thème ¦ 🎤 Wiel en Thema
+Créer la présentation ¦ D’Presentatioun erstellen
+Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ». ¦ D’Thema, d’Faarwen, d’Schrëften an de Format kann een duerno änneren (Reiter ⚙️ Dokument). Fir vun engem PowerPoint, engem OpenDocument, engem PDF oder vu Fotoen auszegoen: „⤒ Importéieren“.
+⤒ Importer une présentation ¦ ⤒ Eng Presentatioun importéieren
+Thème au départ ¦ Thema am Ufank
+Format au départ ¦ Format am Ufank
+Transition des nouvelles diapositives ¦ Iwwergang vun den neien Diapositiven
+Disposition de « ＋ Diapositive » ¦ Disposition vu „＋ Diapositiv“
+Aimanter les objets (guides) ¦ D’Objeten aschnappen (Hëllefslinnen)
+Couleur du pointeur laser ¦ Faarf vum Laserpointer
+↺ Réglages de départ ¦ ↺ Astellunge vum Ufank
+Réglages de départ. ¦ Astellunge vum Ufank.
+Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier. ¦ D’Knäppercher uewen, d’Reiteren an d’Sektioune vum Inspekter ginn an „Knäppercher an Optiounen“ (Editeur 🎤 Presentatioun) arrangéiert, gewisen oder verstoppt, mat hiren Tastekombinatiounen.
+{name} (présentation) ¦ {name} (Presentatioun)
+Diaporama ¦ Diashow
+Nom (pour le déplacement magique) ¦ Numm (fir déi magesch Bewegung)
+⇋ Miroir ¦ ⇋ Spigel
+⇵ Miroir ¦ ⇵ Spigel
+Retourner de gauche à droite ¦ Vu lénks no riets ëmdréinen
+Retourner de haut en bas ¦ Vun uewen no ënnen ëmdréinen
+⤢ Proportions de la photo ¦ ⤢ Proportioune vun der Foto
+Tout devant ¦ Ganz no vir
+Tout derrière ¦ Ganz no hannen
+Grouper (⌘G) ¦ Gruppéieren (⌘G)
+Déverrouiller (⌘L) ¦ Opspären (⌘L)
+Verrouiller (⌘L) ¦ Spären (⌘L)
+Dupliquer (⌘D) ¦ Duplizéieren (⌘D)
+Supprimer (⌫) ¦ Läschen (⌫)
+Selon le rôle ¦ No der Roll
+Légère ¦ Liicht
+Normale ¦ Normal
+Demi-grasse ¦ Hallef fett
+Grasse ¦ Fett
+Extra-grasse ¦ Extrafett
+Noire ¦ Schwaarz
+bouton|<b>G</b> ¦ <b>F</b>
+bouton|<i>I</i> ¦ <i>K</i>
+bouton|<u>S</u> ¦ <u>U</u>
+bouton|<s>B</s> ¦ <s>D</s>
+Gras (⌘B) ¦ Fett (⌘B)
+Italique (⌘I) ¦ Kursiv (⌘I)
+Souligné (⌘U) ¦ Ënnerstrach (⌘U)
+Exposant (1<sup>er</sup>) ¦ Héichgestallt (1<sup>en</sup>)
+Retrait (sous-liste) ¦ Aréckung (Ënnerlëscht)
+Moins de retrait ¦ Manner Aréckung
+En haut de la zone ¦ Uewen an der Zon
+Au milieu de la zone ¦ An der Mëtt vun der Zon
+En bas de la zone ¦ Ënnen an der Zon
+Couleur d’accent du thème ¦ Akzentfaarf vum Thema
+Texte dans la forme ¦ Text an der Form
+Couleur (fond et bordure) ¦ Faarf (Hannergrond a Rand)
+Bordure ¦ Rand
+Points ¦ Punkten
+Coins ¦ Ecken
+Forme sans fond. ¦ Form ouni Hannergrond.
+Pas de fond (∅). ¦ Keen Hannergrond (∅).
+Pas de bordure (∅). ¦ Kee Rand (∅).
+🖼️ Changer l’image… ¦ 🖼️ D'Bild wiesselen…
+🖼️ Choisir l’image… ¦ 🖼️ D'Bild wielen…
+🖼 En fond de diapositive ¦ 🖼 Als Hannergrond vun der Folie
+Cadrage ¦ Ausschnëtt
+Remplir (rogner) ¦ Ausfëllen (ofschneiden)
+Photo entière ¦ Ganz Foto
+Étirer ¦ Zéien
+Masque (forme) ¦ Mask (Form)
+La photo est découpée dans cette forme : rond, arrondi, étoile, cœur… sans toucher à la photo d’origine. ¦ D'Foto gëtt an dëser Form ausgeschnidden: ronn, ofgerënnt, Stär, Häerz… ouni d'Original-Foto unzepaken.
+Zoom (rogner) ¦ Zoom (ofschneiden)
+Agrandit la photo dans son cadre ; « Cadrer ↔ ↕ » choisit ensuite quelle partie on voit. ¦ Vergréissert d'Foto an hirem Kader; „Ausschneiden ↔ ↕“ wielt duerno, wéi een Deel ze gesinn ass.
+Cadrer ↔ ¦ Ausschneiden ↔
+Cadrer ↕ ¦ Ausschneiden ↕
+🎚️ Retouche ¦ 🎚️ Retouche
+Épaisseur du cadre ¦ Déckt vum Kader
+Au bout ¦ Um Enn
+Aux deux bouts ¦ Un deenen zwee Enden
+Le tableur en grand : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ D'Tabelle a grouss: Formelen, Zortéieren, aus Excel apechen… duerno „✓ Späicheren a zréck“
+Le tableur en grand, préparé « Catégorie + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ D'Tabelle a grouss, preparéiert als „Kategorie + Serien“: Formelen, Zortéieren, aus Excel apechen… duerno „✓ Späicheren a zréck“
+＋ Ligne ¦ ＋ Linn
+− Ligne ¦ − Linn
+＋ Colonne ¦ ＋ Kolonn
+− Colonne ¦ − Kolonn
+Première ligne en en-tête ¦ Éischt Linn als Kappzeil
+En-tête : fond ¦ Kappzeil: Hannergrond
+En-tête : texte ¦ Kappzeil: Text
+Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur) ¦ Inhalt (eng Linn pro Rei, Zellen getrennt duerch „;“ oder en Tab — gëtt aus enger Tabelle agepecht)
+Ou ici, en secours (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Oder hei, als Reserve (1. Linn: Kategorie ; Serie 1 ; Serie 2…)
+Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ D'Zuelen (1. Linn: Kategorie ; Serie 1 ; Serie 2…)
+Vives ¦ Kräfteg
+Pastel ¦ Pastell
+Terre ¦ Äerd
+Gris ¦ Gro
+Selon la sorte ¦ No der Zort
+🪪 La fiche ¦ 🪪 D'Fiche
+🖼️ Le portrait ¦ 🖼️ De Portrait
+🌳 Petit arbre ¦ 🌳 Klenge Stammbam
+🔄 Relire la fiche ¦ 🔄 D'Fiche nei liesen
+🎬 Changer… ¦ 🎬 Wiesselen…
+Lecture automatique ¦ Automatesch ofspillen
+En boucle ¦ An enger Schleef
+Sans le son ¦ Ouni Toun
+Boutons de lecture visibles ¦ Knäppercher fir ofzespille siichtbar
+Commencer à ¦ Ufänke bei
+Effets (ombre et opacité) ¦ Effekter (Schiet an Deckkraaft)
+Chemin ¦ Wee
+Attendre ¦ Waarden
+× Retirer ¦ × Ewechhuelen
+Transition ¦ Iwwergang
+Effet (en arrivant sur cette diapositive) ¦ Effekt (beim Arrivéieren op dëser Folie)
+L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux. ¦ Den Effekt spillt beim Iwwergank vun der Folie virdrun op dës. „Magesch Beweegung“ léisst d'Objeten, déi op béide sinn, gleiden.
+▶ Aperçu ¦ ▶ Virschau
+Pour toutes les diapositives ¦ Fir all d'Folien
+Animations de l’objet choisi ¦ Animatioune vum gewielten Objet
+＋ Entrée ¦ ＋ Entrée
+＋ Sortie ¦ ＋ Sortie
+Ordre des animations ¦ Reiefolleg vun den Animatiounen
+⬅ Sortie ¦ ⬅ Sortie
+➡ Entrée ¦ ➡ Entrée
+▶ Aperçu des animations ¦ ▶ Virschau vun den Animatiounen
+Disposition (place les titres, textes, photos) ¦ Layout (setzt Titelen, Texter, Fotoen)
+Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place. ¦ E fäerdege Plang (Titel, Titel an Text, Foto op der ganzer Säit…): d'Texter, déi schonn ageschriwwe sinn, bleiwen a kréien eng aner Plaz.
+Celui du thème ¦ Deen vum Thema
+Dégradé rond ¦ Ronne Verlaf
+Couleur autour de l’image ¦ Faarf ronderëm d'Bild
+Entière ¦ Ganz
+Ce fond pour toutes les diapositives ¦ Dësen Hannergrond fir all d'Folien
+Durée — lecture seule et vidéo ¦ Dauer — eegestänneg Oflaf a Video
+Le temps passé sur cette diapositive quand la présentation avance toute seule et dans la vidéo exportée. ¦ D'Zäit op dëser Folie, wann d'Presentatioun eleng virugeet an an der exportéierter Video.
+Passer toute seule à la suivante (après la durée) ¦ Eleng op déi nächst goen (no der Dauer)
+Sauter cette diapositive à la lecture ¦ Dës Folie beim Ofspillen iwwersprangen
+Titre de la section (un groupe de diapositives qui commence ici) ¦ Titel vun der Sektioun (e Grupp vu Folien, deen hei ufänkt)
+ex. Les années de guerre ¦ z. B. D'Krichsjoren
+Vers le devant ¦ No vir
+Vers le fond ¦ No hannen
+Couleurs et polices ¦ Faarwen a Schrëften
+Accent ¦ Akzent
+Format des diapositives ¦ Format vun de Folien
+Largeur (points) ¦ Breet (Punkten)
+Hauteur (points) ¦ Héicht (Punkten)
+Changer… ¦ Wiesselen…
+🎵 Une musique pendant la lecture… ¦ 🎵 Eng Musek beim Ofspillen…
+Recommencer au début à la fin (borne, exposition) ¦ Um Enn nees vu vir ufänken (Bourne, Ausstellung)
+Remplissage et bordure ¦ Fëllung a Rand
+Ombre et opacité ¦ Schiet an Deckkraaft
+T Une zone de texte ¦ T Eng Textzon
+🖼️ Une photo des médias ou de l’ordinateur ¦ 🖼️ Eng Foto aus de Medien oder vum Computer
+📊 Un graphique (colonnes, camembert, courbe…) ¦ 📊 Eng Grafik (Säulen, Kuch, Kurv…)
+🎬 Une vidéo ou un son des médias ¦ 🎬 Eng Video oder en Toun aus de Medien
+⊞ Grouper (⌘G) — ⇧⌘G pour dissocier ¦ ⊞ Gruppéieren (⌘G) — ⇧⌘G fir opzeléisen
+⊟ Dissocier (⇧⌘G) ¦ ⊟ Opléisen (⇧⌘G)
+🔒 Verrouiller / déverrouiller (⌘L) ¦ 🔒 Spären / entspären (⌘L)
+▶ Lire en plein écran depuis le début (⌥⌘↩) ¦ ▶ Am Vollbild vun Ufank un ofspillen (⌥⌘↩)
+⏵ Lire depuis cette diapositive (⌘↩) ¦ ⏵ Vun dëser Folie un ofspillen (⌘↩)
+🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ 🎤 Vollbild + Fënster fir de Presentateur (Notizen, nächst Folie, Stoppauer)
+⤓ Exporter (PDF, PNG, vidéo, fichier) ¦ ⤓ Exportéieren (PDF, PNG, Video, Fichier)
+⧉ Dupliquer la diapositive (pour un déplacement magique) ¦ ⧉ D'Folie duplizéieren (fir eng magesch Beweegung)
+👁 Sauter / ne plus sauter à la lecture ¦ 👁 Beim Ofspillen iwwersprangen / net méi iwwersprangen
+§ Commencer une section (un groupe de diapositives) ici ¦ § Hei eng Sektioun (e Grupp vu Folien) ufänken
+🗑 Supprimer la diapositive ¦ 🗑 D'Folie läschen
+‹ Diapositive précédente (Page précédente) ¦ ‹ Virdrun Folie (Bild op)
+› Diapositive suivante (Page suivante) ¦ › Nächst Folie (Bild of)
+=élément copié ¦ Element kopéiert|Elementer kopéiert
+=coude ¦ Knéck|Knécker
+=dessin choisi ¦ Zeechnung gewielt|Zeechnunge gewielt
+=association ¦ Verbindung|Verbindungen
+=élément absent ici ¦ Element, dat hei feelt|Elementer, déi hei feelen
+=confirmée ¦ bestätegt|bestätegt
+=fausse ¦ falsch|falsch
+=note posée ¦ Notiz gesat|Notize gesat
+=animation ¦ Animatioun|Animatiounen
+=sautée ¦ iwwersprongen|iwwersprongen
+=diapositive ajoutée ¦ Folie derbäigesat|Folien derbäigesat
+=image illisible laissée ¦ net liesbart Bild ewechgelooss|net liesbar Biller ewechgelooss
+=image reprise ¦ Bild iwwerholl|Biller iwwerholl
+=diapositive importée ¦ Folie importéiert|Folien importéiert
+Arrondi par défaut des éléments arrondis ¦ Standard-Ofrënnung vun den ofgerënnten Elementer
+Formules ¦ Formelen
+Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille. ¦ Fänk mat <code>=</code> un: <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (Alter), <code>="Text"</code>. Pech e Stéck Tabelle (Excel, Numbers) an eng Zell: et gëtt an d'Gitter agereet.
+⏺ Vidéo ¦ ⏺ Video
+Hexagone ¦ Sechseck
+Bulle ¦ Spriechblos
+Cœur ¦ Häerz
+⧉ Copie ¦ ⧉ Kopie
+forme|Rectangle ¦ Rechteck
+forme|Rectangle arrondi ¦ Ofgerënnt Rechteck
+forme|Ovale ¦ Oval
+forme|Triangle ¦ Dräieck
+forme|Triangle rectangle ¦ Rietwénklegt Dräieck
+forme|Losange ¦ Raut
+forme|Pentagone ¦ Fënnefeck
+forme|Hexagone ¦ Sechseck
+forme|Étoile ¦ Stär
+forme|Bulle ¦ Spriechblos
+forme|Nuage ¦ Wollek
+forme|Flèche ¦ Feil
+forme|Double flèche ¦ Duebelfeil
+forme|Étiquette ¦ Etikett
+forme|Parallélogramme ¦ Parallelogramm
+forme|Trapèze ¦ Trapez
+forme|Losange plat ¦ Flaach Raut
+forme|Pilule ¦ Pëll
+forme|Cylindre ¦ Zylinder
+forme|Cube ¦ Wierfel
+forme|Pavé ¦ Quader
+forme|Pyramide ¦ Pyramid
+forme|Cône ¦ Kegel
+forme|Tétraèdre ¦ Tetraeder
+forme|Heptagone ¦ Siwweneck
+forme|Octogone ¦ Aachteck
+forme|Décagone ¦ Zéngeck
+forme|Dodécagone ¦ Zwieleffeck
+forme|Anneau ¦ Rank
+forme|Demi-cercle ¦ Hallefkrees
+forme|Quart de cercle ¦ Véierelkrees
+forme|Cadre ¦ Kader
+forme|Équerre ¦ Wénkel
+forme|Chevron ¦ Chevron
+forme|Sablier ¦ Sanduhr
+forme|forme ¦ Form
+forme|Arche ¦ Bou
+forme|Flèche à gauche ¦ Feil no lénks
+forme|Flèche en haut ¦ Feil no uewen
+forme|Flèche en bas ¦ Feil no ënnen
+forme|Double flèche verticale ¦ Vertikal Duebelfeil
+forme|Quatre directions ¦ Véier Richtungen
+forme|Flèche à encoche ¦ Feil mat Kerf
+forme|Flèche courbe ¦ Gebuene Feil
+forme|Demi-tour ¦ Kéier
+forme|Flèche fine ¦ Dënne Feil
+forme|Pavé flèche ¦ Feilblock
+forme|Flèche ronde ¦ Ronne Feil
+forme|Bulle ronde ¦ Ronn Spriechblos
+forme|Encadré ¦ Legend
+forme|Pensée ¦ Gedanken
+forme|Cri ¦ Ruff
+forme|gauche ¦ lénks
+forme|Bulle carrée ¦ Véiereckeg Spriechblos
+forme|Étoile à {x} branches ¦ Stär mat {x} Zacken
+forme|Éclat ¦ Explosioun
+forme|Sceau ¦ Sigel
+forme|Rose des vents ¦ Wandrous
+forme|Ruban ¦ Band
+forme|Médaille ¦ Medail
+forme|Écu ¦ Wope
+forme|Bannière ¦ Banner
+forme|Cocarde ¦ Kokard
+forme|Cœur ¦ Häerz
+forme|Coche ¦ Haken
+forme|Croix ¦ Kräiz
+forme|Plus ¦ Plus
+forme|Moins ¦ Minus
+forme|Lune ¦ Mound
+forme|Éclair ¦ Blëtz
+forme|Goutte ¦ Drëps
+forme|Repère ¦ Markéierung
+forme|Drapeau ¦ Fändel
+forme|Point d’interrogation ¦ Froenzeechen
+forme|Point d’exclamation ¦ Ausruffzeechen
+forme|Information ¦ Informatioun
+forme|Infini ¦ Onendlech
+forme|Soleil ¦ Sonn
+forme|Signe ¦ Zeechen
+forme|Arbre ¦ Bam
+forme|Chêne ¦ Eech
+forme|Alliances ¦ Traureng
+forme|Couronne ¦ Kroun
+forme|Tombe ¦ Graf
+forme|Berceau ¦ Wee
+forme|Parchemin ¦ Pergament
+forme|Plume ¦ Fieder
+forme|Livre ¦ Buch
+forme|Lettre ¦ Bréif
+forme|Bougie ¦ Käerz
+forme|Cachet de cire ¦ Wuesssigel
+forme|Fleur de lys ¦ Lilie
+forme|Branche ¦ Äscht
+forme|Personne ¦ Persoun
+forme|Femme ¦ Fra
+forme|Couple ¦ Koppel
+forme|Famille ¦ Famill
+forme|Enfant ¦ Kand
+forme|Portrait ¦ Portrait
+forme|médaillon ¦ Medaillon
+forme|Soldat ¦ Zaldot
+forme|Maison ¦ Haus
+forme|Église ¦ Kierch
+forme|Château ¦ Schlass
+forme|Mairie ¦ Gemengenhaus
+forme|Moulin ¦ Millen
+forme|Bateau ¦ Schëff
+forme|Usine ¦ Fabréck
+forme|Montagne ¦ Bierg
+forme|Pont ¦ Bréck
+forme|Clé ¦ Schlëssel
+forme|Lampe ¦ Luucht
+forme|Chaise ¦ Stull
+forme|Horloge ¦ Auer
+forme|Lunettes ¦ Brëll
+forme|Parapluie ¦ Prabbeli
+forme|Ampoule ¦ Glühbir
+forme|Loupe ¦ Lupp
+forme|Cadeau ¦ Kaddo
+forme|Tasse ¦ Taass
+forme|Appareil photo ¦ Fotoapparat
+forme|Téléphone ¦ Telefon
+forme|Crayon ¦ Bläistëft
+forme|Sac ¦ Sak
+forme|Valise ¦ Valis
+forme|Chapeau ¦ Hutt
+forme|Cloche ¦ Klack
+forme|Ancre ¦ Anker
+forme|Feuille ¦ Blat
+forme|Fleur ¦ Blumm
+forme|Sapin ¦ Dänn
+forme|Vague ¦ Well
+forme|Poisson ¦ Fësch
+forme|Oiseau ¦ Vugel
+forme|Flocon ¦ Schneeflack
+forme|Pomme ¦ Apel
+forme|Champignon ¦ Champignon
+forme|Patte ¦ Patt
+forme|Anneau fin ¦ Dënne Rank
+forme|Anneau épais ¦ Décke Rank
+forme|Deux anneaux ¦ Zwee Réng
+forme|Cadre fin ¦ Dënne Kader
+forme|Cadre arrondi ¦ Ofgerënnte Kader
+forme|Médaillon ¦ Medaillon
+forme|Ovale vertical ¦ Vertikalen Oval
+forme|Ovale horizontal ¦ Horizontalen Oval
+forme|Croissant fin ¦ Dënnen Hallefmound
+forme|Goutte inversée ¦ Ëmgedréinten Drëps
+forme|Deux cœurs ¦ Zwee Häerzer
+forme|Croix grecque ¦ Griichescht Kräiz
+forme|Croix de Malte ¦ Malteserkräiz
+forme|Croix de Lorraine ¦ Lothrénger Kräiz
+forme|Croix orthodoxe ¦ Orthodoxt Kräiz
+forme|Bannière ondulée ¦ Gewellte Banner
+forme|Phylactère ¦ Schrëftband
+forme|Étiquette ronde ¦ Ronn Etikett
+forme|Bulle ovale ¦ Oval Spriechblos
+forme|droite ¦ riets
+forme|Petite pensée ¦ Klenge Gedanken
+forme|Quart de disque ¦ Véierelscheif
+forme|Tiers de disque ¦ Drëttelscheif
+forme|Demi-disque ¦ Hallefscheif
+forme|Deux tiers de disque ¦ Zwee Drëttel Scheif
+forme|Trois quarts de disque ¦ Dräi Véierel Scheif
+forme|Camembert ¦ Kuchendiagramm
+forme|Polygone à {x} côtés ¦ Polygon mat {x} Säiten
+forme|Étoile fine à {x} branches ¦ Dënne Stär mat {x} Zacken
+forme|Étoile ronde à {x} branches ¦ Ronne Stär mat {x} Zacken
+forme|Quart d’anneau ¦ Véierelrank
+forme|Demi-anneau ¦ Hallefrank
+forme|Trois quarts d’anneau ¦ Dräi Véierel Rank
+forme|Arbre généalogique ¦ Stammbam
+forme|Arborescence ¦ Bamstruktur
+forme|Organigramme ¦ Organigramm
+forme|Liens ¦ Verbindungen
+forme|Groupe de personnes ¦ Grupp vu Persounen
+forme|Homme et femme ¦ Mann a Fra
+forme|Parents et enfant ¦ Elteren a Kand
+forme|Deux femmes ¦ Zwou Fraen
+forme|Deux hommes ¦ Zwee Männer
+forme|Mère et fille ¦ Mamm an Duechter
+forme|Père et fils ¦ Papp a Jong
+forme|Mère et fils ¦ Mamm a Jong
+forme|Père et fille ¦ Papp an Duechter
+forme|Visage de bébé ¦ Puppelchersgesiicht
+forme|Bébé ¦ Puppelchen
+forme|Landau ¦ Kannerwon
+forme|Biberon ¦ Schëppchen
+forme|Femme enceinte ¦ Schwanger Fra
+forme|Bague ¦ Rank
+forme|Cœurs ¦ Häerzer
+forme|Foyer ¦ Doheem
+forme|Personne aimée ¦ Léif Persoun
+forme|Main et cœur ¦ Hand an Häerz
+forme|Symbole masculin ¦ Männlecht Symbol
+forme|Symbole féminin ¦ Weiblecht Symbol
+forme|Symbole couple ¦ Koppelsymbol
+forme|Pierre tombale ¦ Grafsteen
+forme|Cercueil ¦ Doudekëscht
+forme|Tulipe ¦ Tulp
+forme|Coquelicot ¦ Klatschrous
+forme|Croix latine ¦ Laténgescht Kräiz
+forme|Croix celtique ¦ Keltescht Kräiz
+forme|Bible ¦ Bibel
+forme|Certificat ¦ Certificat
+forme|Parchemin écrit ¦ Beschriwwent Pergament
+forme|Plume à encre ¦ Tëntefieder
+forme|Tampon ¦ Stempel
+forme|Passeport ¦ Pass
+forme|Carte d’identité ¦ Identitéitskaart
+forme|Carte et loupe ¦ Kaart a Lupp
+forme|Document cherché ¦ Gesichten Dokument
+forme|Frise du temps ¦ Zäitstrahl
+forme|Histoire ¦ Geschicht
+forme|Diaphragme ¦ Blend
+forme|Cadre photo ¦ Fotokader
+forme|Miroir ovale ¦ Ovale Spigel
+forme|Blason couronné ¦ Gekréinte Wope
+forme|Tour ¦ Tuerm
+forme|Père et enfant ¦ Papp a Kand
+forme|Deux mères et enfant ¦ Zwou Mammen a Kand
+forme|Deux pères et enfant ¦ Zwee Pappen a Kand
+forme|Amour maternel ¦ Mammeléift
+forme|Mère qui allaite ¦ Mamm, déi stëllt
+forme|Poussette ¦ Kannerbuggy
+forme|Table à langer ¦ Wéckeldësch
+forme|contour ¦ Kontur
+forme|Adulte et enfant ¦ Erwuessenen a Kand
+forme|rond ¦ ronn
+forme|Tuteur ¦ Tuteur
+forme|Deux personnes ¦ Zwou Persounen
+forme|Maison familiale ¦ Familljenhaus
+forme|Registre de personnes ¦ Register vu Persounen
+forme|Date d’une personne ¦ Datum vun enger Persoun
+forme|Fiche individuelle ¦ Individuell Fiche
+forme|Dossier de personne ¦ Dossier vun enger Persoun
+forme|Acte certifié ¦ Beglaubegten Akt
+forme|Cœur dans un carré ¦ Häerz an engem Quadrat
+forme|Cœur rond ¦ Ronnt Häerz
+forme|Livre de famille ¦ Familljebuch
+forme|variante ¦ Variant
+forme|Symbole non binaire ¦ Net-binärt Symbol
+forme|Taille d’un homme ¦ Gréisst vun engem Mann
+forme|Album photo ¦ Fotoalbum
+forme|Photos ¦ Fotoen
+forme|Photo instantanée ¦ Sofortbild
+forme|Portrait photo ¦ Portraitfoto
+forme|Dossier de photos ¦ Dossier mat Fotoen
+forme|Frise ¦ Zäitstrahl
+forme|Frise commentée ¦ Kommentéierten Zäitstrahl
+forme|Diagramme chronologique ¦ Chronologescht Diagramm
+forme|Arbre en blocs ¦ Stammbam a Blocken
+forme|Relation un à plusieurs ¦ Relatioun een zu ville
+forme|Relation un à un ¦ Relatioun een zu engem
+forme|Couronne ronde ¦ Ronn Kroun
+forme|Blason à l’épée ¦ Wope mam Schwäert
+forme|Blason à la croix ¦ Wope mam Kräiz
+forme|Écu parti ¦ Gespaltene Schëld
+forme|Croix de Bolnissi ¦ Bolnisi-Kräiz
+forme|Crâne ¦ Doudekapp
+forme|Parchemin et clé ¦ Pergament a Schlëssel
+forme|Sceau rond ¦ Ronnt Sigel
+forme|Coffre au trésor ¦ Schatzkëscht
+forme|Coffre-fort ¦ Coffre-fort
+forme|Coffre-fort carré ¦ Véiereckege Coffre-fort
+forme|Poignée de main ¦ Handschlag
+forme|Miroir rectangulaire ¦ Rechteckege Spigel
+forme|Homme ¦ Mann
+forme|Personne âgée ¦ Al Persoun
+forme|Bras levés ¦ Gehuewen Äerm
+forme|Salut ¦ Gréiss
+forme|Fauteuil roulant ¦ Rollstull
+forme|Marcheur ¦ Spadséiergänger
+forme|Coureur ¦ Leefer
+forme|Instituteur ¦ Schoulmeeschter
+forme|Silhouette ¦ Silhouette
+forme|Homme en cravate ¦ Mann mat Krawatt
+forme|Cow-boy ¦ Cowboy
+forme|Ouvrier ¦ Aarbechter
+forme|Chapeau et cravate ¦ Hutt a Krawatt
+forme|Insigne de police ¦ Policebadge
+forme|Visage d’homme ¦ Männergesiicht
+forme|Visage de femme ¦ Fraegesiicht
+forme|Profil d’homme ¦ Männerprofil
+forme|Profil de femme ¦ Fraeprofil
+forme|Moustache ¦ Schnuerres
+forme|Main qui salue ¦ Hand, déi wénkt
+forme|Main ¦ Hand
+forme|Mains jointes ¦ Gefale Hänn
+forme|Empreinte de pied ¦ Foussofdrock
+forme|File de personnes ¦ Rei vu Persounen
+forme|Bras baissés ¦ Erofgeloossen Äerm
+forme|Danseuse ¦ Dänzerin
+forme|Personne non binaire ¦ Net-binär Persoun
+forme|Personne en trottinette ¦ Persoun op engem Trottinett
+forme|Personne au déambulateur ¦ Persoun mat Rollator
+forme|Personne à canne blanche ¦ Persoun mat wäissem Stack
+forme|Présentation au tableau ¦ Presentatioun un der Tafel
+forme|Foule ¦ Mënschemass
+forme|Groupe ¦ Grupp
+forme|Silhouette ronde ¦ Ronn Silhouette
+forme|Silhouette encadrée ¦ Agerummt Silhouette
+forme|Portraits ¦ Portraiten
+forme|Femme d’affaires ¦ Geschäftsfra
+forme|Orateur ¦ Riedner
+forme|Personne qui parle ¦ Persoun, déi schwätzt
+forme|Écolier ¦ Schüler
+forme|Personne blessée ¦ Blesséiert Persoun
+forme|Personne remarquable ¦ Bemierkenswäert Persoun
+forme|Personne inconnue ¦ Onbekannt Persoun
+forme|Recherche de personne ¦ Sich no enger Persoun
+forme|Ajouter une personne ¦ Eng Persoun derbäisetzen
+forme|Musicien ¦ Museker
+forme|Départ d’une personne ¦ Depart vun enger Persoun
+forme|Arrivée d’une personne ¦ Arrivée vun enger Persoun
+forme|Détails de la personne ¦ Detailer vun der Persoun
+forme|Homme élégant ¦ Elegante Mann
+forme|Femme élégante ¦ Elegant Fra
+forme|Masque de protection ¦ Schutzmask
+forme|Tête ¦ Kapp
+forme|Pensée amoureuse ¦ Verléiften Gedanken
+forme|Idée en tête ¦ Iddi am Kapp
+forme|Question en tête ¦ Fro am Kapp
+forme|Main gauche ¦ Lénks Hand
+forme|Paume gauche ¦ Lénks Handfläch
+forme|Paume droite ¦ Riets Handfläch
+forme|Applaudissements ¦ Applaus
+forme|D’accord ¦ Okay
+forme|main ¦ Hand
+forme|Victoire ¦ Victoire
+forme|Index levé ¦ Gehuewen Zeigefanger
+forme|Index vers la droite ¦ Zeigefanger no riets
+forme|Main tendue ¦ Ausgestreckten Hand
+forme|Lavage des mains ¦ Hänn wäschen
+forme|Main et pièce ¦ Hand a Mënz
+forme|Biceps ¦ Biceps
+forme|Langue des signes ¦ Gebäerdesprooch
+forme|Empreintes de pas ¦ Foussspuren
+forme|Méditation ¦ Meditatioun
+forme|Yoga ¦ Yoga
+forme|Promeneur au parc ¦ Spadséiergänger am Park
+forme|Voleur ¦ Déif
+forme|Ninja ¦ Ninja
+forme|Incognito ¦ Inkognito
+forme|Pirate ¦ Pirat
+forme|Médecin ¦ Dokter
+forme|Chien ¦ Hond
+forme|Chien de profil ¦ Hond am Profil
+forme|Chien guide ¦ Blannenhond
+forme|Chat ¦ Kaz
+forme|Cheval ¦ Päerd
+forme|Cheval au galop ¦ Galoppéierend Päerd
+forme|Cavalier ¦ Reider
+forme|Fer à cheval ¦ Houfeisen
+forme|Vache ¦ Kou
+forme|Cochon ¦ Schwäin
+forme|Mouton ¦ Schof
+forme|Lapin ¦ Kanéngchen
+forme|Rongeur ¦ Knabberdéier
+forme|Éléphant ¦ Elefant
+forme|Kangourou ¦ Känguru
+forme|Koala ¦ Koala
+forme|Panda ¦ Panda
+forme|Manchot ¦ Pinguin
+forme|Chouette ¦ Eil
+forme|Canard ¦ Int
+forme|Dinde ¦ Kalkun
+forme|Œuf ¦ Ee
+forme|Dauphin ¦ Delfin
+forme|Aileron de requin ¦ Haifëschflous
+forme|Méduse ¦ Qualle
+forme|Escargot ¦ Schleek
+forme|Papillon ¦ Päiperlek
+forme|Abeille ¦ Bei
+forme|Coccinelle ¦ Härgottsdéierchen
+forme|Araignée ¦ Spann
+forme|Insecte ¦ Insekt
+forme|Serpent ¦ Schlaang
+forme|Tortue ¦ Mieresschildkröt
+forme|Tortue terrestre ¦ Landschildkröt
+forme|Licorne ¦ Eenhuerer
+forme|Os ¦ Schank
+forme|Âne ¦ Iesel
+forme|Chauve-souris ¦ Fliedermaus
+forme|Toile d’araignée ¦ Spanneweef
+forme|Requin ¦ Haifësch
+forme|Abeille et fleur ¦ Bei a Blumm
+forme|Apiculteur ¦ Imker
+forme|Bocal à poisson ¦ Fëschglas
+forme|Araignée au fil ¦ Spann um Fuedem
+forme|Cheval rapide ¦ Séier Päerd
+forme|Chien interdit ¦ Hënn verbueden
+forme|Os barré ¦ Duerchgestrachene Schank
+forme|Arbre feuillu ¦ Laafbam
+forme|Conifère ¦ Nadelbam
+forme|Palmier ¦ Palm
+forme|Cactus ¦ Kaktus
+forme|Pousse ¦ Keim
+forme|Graine ¦ Som
+forme|Feuille d’érable ¦ Ahornblat
+forme|Trèfle ¦ Klee
+forme|Fleur et pollen ¦ Blumm a Pollen
+forme|Herbe ¦ Gras
+forme|Épi de blé ¦ Weessähr
+forme|Maïs ¦ Mais
+forme|Cerises ¦ Kiischten
+forme|Raisin ¦ Drauwen
+forme|Poire ¦ Bir
+forme|Pastèque ¦ Waassermeloun
+forme|Carotte ¦ Muert
+forme|Relief ¦ Relief
+forme|Montagnes ¦ Bierger
+forme|Volcan ¦ Vulkan
+forme|Île ¦ Insel
+forme|Vagues ¦ Wellen
+forme|Eau ¦ Waasser
+forme|Feu ¦ Feier
+forme|Terre ¦ Äerd
+forme|Globe ¦ Globus
+forme|Boussole ¦ Kompass
+forme|Carte ¦ Kaart
+forme|Hameau ¦ Weiler
+forme|Forêt ¦ Bësch
+forme|Bosquet ¦ Bëschelchen
+forme|Ruche ¦ Beiestack
+forme|Incendie de forêt ¦ Bëschbrand
+forme|Semis ¦ Setzlek
+forme|Feuille ronde ¦ Ronnt Blat
+forme|Ananas ¦ Ananas
+forme|Houblon ¦ Hopfen
+forme|Chanvre ¦ Hanf
+forme|Compost ¦ Kompost
+forme|Fleur de lotus ¦ Lotusblumm
+forme|Champs ¦ Felder
+forme|Parcelles ¦ Parzellen
+forme|Parcelle ronde ¦ Ronn Parzell
+forme|Parcelle repérée ¦ Markéiert Parzell
+forme|Sillons horizontaux ¦ Horizontal Fuerchen
+forme|Glissement de terrain ¦ Äerdrutsch
+forme|Cascade ¦ Waasserfall
+forme|Raz-de-marée ¦ Flutwell
+forme|Marée montante ¦ Steigend Flut
+forme|Humidité ¦ Fiichtegkeet
+forme|Puits ¦ Pëtz
+forme|Pompe à eau ¦ Waasserpompel
+forme|Fleur stylisée ¦ Stiliséiert Blumm
+forme|Légende de carte ¦ Legend vun der Kaart
+forme|Lieu ¦ Plaz
+forme|rayon ¦ Radius
+forme|Plusieurs lieux ¦ E puer Plazen
+forme|Distance entre lieux ¦ Distanz tëscht Plazen
+forme|Lieu d’une personne ¦ Plaz vun enger Persoun
+forme|Lieu important ¦ Wichteg Plaz
+forme|Lieu inconnu ¦ Onbekannt Plaz
+forme|Position GPS ¦ GPS-Positioun
+forme|Viseur ¦ Fadenkräiz
+forme|Latitude ¦ Breedegrad
+forme|Longitude ¦ Längegrad
+forme|Sommet ¦ Spëtzt
+forme|Montée ¦ Opstig
+forme|Pente montante ¦ Steigend Steigung
+forme|Rivage ¦ Ufer
+forme|Plage ¦ Plage
+forme|Tunnel de culture ¦ Folientunnel
+forme|Ferme et silo ¦ Bauerenhaff a Silo
+forme|Silo ¦ Silo
+forme|Clôture électrique ¦ Elektresche Zonk
+forme|Arrosoir ¦ Nätzkan
+forme|Arroseur ¦ Rosesprinkler
+forme|Râteau ¦ Riecher
+forme|Fourche à foin ¦ Heegafel
+forme|Faucille ¦ Sichel
+forme|Tondeuse ¦ Rasemäier
+forme|Nuit ¦ Nuecht
+forme|Éclaircies ¦ Opklärungen
+forme|Nuageux ¦ Wollekeg
+forme|Pluie ¦ Reen
+forme|Averse ¦ Schauer
+forme|Neige ¦ Schnéi
+forme|Orage ¦ Donnerwieder
+forme|Vent ¦ Wand
+forme|Brouillard ¦ Niwwel
+forme|Grêle ¦ Hagel
+forme|Coucher de soleil ¦ Sonnenënnergang
+forme|Thermomètre ¦ Thermometer
+forme|Croissant de lune ¦ Hallefmound
+forme|Pleine lune ¦ Vollmound
+forme|Étoile filante ¦ Stäreschnuppe
+forme|Scintillement ¦ Glitzeren
+forme|Ouragan ¦ Hurrikan
+forme|Tornade ¦ Tornado
+forme|Tempête de sable ¦ Sandstuerm
+forme|Brume ¦ Däiz
+forme|Orage pluvieux ¦ Donnerwieder mat Reen
+forme|Orage et éclaircies ¦ Donnerwieder an Opklärungen
+forme|Averses et éclaircies ¦ Schaueren an Opklärungen
+forme|Neige et éclaircies ¦ Schnéi an Opklärungen
+forme|Pluie et neige ¦ Reen a Schnéi
+forme|Fortes chutes de neige ¦ Staarke Schnéifall
+forme|Neige mêlée de pluie ¦ Schnéi mat Reen
+forme|Nuit nuageuse ¦ Wollekeg Nuecht
+forme|Vent fort ¦ Staarke Wand
+forme|Lever du soleil ¦ Sonnenopgang
+forme|Coucher du soleil ¦ Sonnenënnergang
+forme|Coucher de lune ¦ Moundënnergang
+forme|Canicule ¦ Hëtztwell
+forme|Nuages ¦ Wolleken
+forme|Vague de chaleur ¦ Hëtztwell
+forme|Arc-en-ciel ¦ Reebou
+forme|Aurore boréale ¦ Nordliicht
+forme|Nouvelle lune ¦ Neimound
+forme|Premier quartier ¦ Éischt Véierel
+forme|Dernier quartier ¦ Lescht Véierel
+forme|Lune décroissante ¦ Ofhuelende Mound
+forme|Lune gibbeuse décroissante ¦ Ofhuelende Mound, bal voll
+forme|Lune gibbeuse croissante ¦ Zouhuelende Mound, bal voll
+forme|Jour et nuit ¦ Dag an Nuecht
+forme|Soleil radieux ¦ Stralend Sonn
+forme|Heure solaire ¦ Sonnenzäit
+forme|Soleil et flocon ¦ Sonn a Schneeflack
+forme|Chaleur ¦ Hëtzt
+forme|Dégel ¦ Dauwieder
+forme|Grand froid ¦ Grouss Keelt
+forme|Bonhomme de neige ¦ Schnéimann
+forme|Température élevée ¦ Héich Temperatur
+forme|Température basse ¦ Déif Temperatur
+forme|Degrés Celsius ¦ Grad Celsius
+forme|Parasol ¦ Sonneschierm
+forme|Manche à air ¦ Wandsak
+forme|Fumée ¦ Damp
+forme|Inondation ¦ Iwwerschwemmung
+forme|Tranche de pain ¦ Schmier Brout
+forme|Baguette ¦ Baguette
+forme|Croissant ¦ Croissant
+forme|Fromage ¦ Kéis
+forme|Gâteau ¦ Kuch
+forme|Gâteau d’anniversaire ¦ Gebuertsdagskuch
+forme|Petit gâteau ¦ Cupcake
+forme|Biscuit ¦ Bëschkuit
+forme|Bonbon ¦ Zockerstéck
+forme|Glace ¦ Glace
+forme|Pizza ¦ Pizza
+forme|Cuisse de poulet ¦ Poulet-Bitz
+forme|Œuf au plat ¦ Spigelee
+forme|Tasse de café ¦ Taass Kaffi
+forme|Tasse de thé ¦ Taass Téi
+forme|Bouilloire ¦ Waasserkacher
+forme|Marmite ¦ Kachdëppen
+forme|Couverts ¦ Besteck
+forme|Toque ¦ Kachmütz
+forme|Verre de vin ¦ Glas Wäin
+forme|Bouteille de vin ¦ Fläsch Wäin
+forme|Chope ¦ Humpen
+forme|Cocktail ¦ Cocktail
+forme|Bière ¦ Béier
+forme|Gobelet ¦ Becher
+forme|Agrume ¦ Zitrusfruucht
+forme|Cacahuète ¦ Cacahuète
+forme|Nouilles ¦ Nuddelen
+forme|Hamburger ¦ Hamburger
+forme|Repas ¦ Iessen
+forme|Pièce montée ¦ Stäckelkuch
+forme|Sucre d’orge ¦ Zockerstaang
+forme|Muffin ¦ Muffin
+forme|Bretzel ¦ Bretzel
+forme|Frites ¦ Fritten
+forme|Hot-dog ¦ Hot-Dog
+forme|Steak ¦ Steak
+forme|Dinde rôtie ¦ Gebrode Kalkun
+forme|Restauration ¦ Restauratioun
+forme|Plat à emporter ¦ Iessen zum Mathuelen
+forme|Halal ¦ Halal
+forme|Casher ¦ Koscher
+forme|Taco ¦ Taco
+forme|Pâtes ¦ Nuddelen
+forme|Bol de riz ¦ Schossel Rais
+forme|Saucisse ¦ Wurscht
+forme|Poireau ¦ Por
+forme|Piment fort ¦ Schaarf Peperoni
+forme|Piment doux ¦ Séiss Peperoni
+forme|Pop-corn ¦ Popcorn
+forme|Glace à l’eau ¦ Waasserglace
+forme|Nutrition ¦ Ernärung
+forme|Bol ¦ Schossel
+forme|Saladier ¦ Zalotsschossel
+forme|Casserole ¦ Kasseroll
+forme|Casserole et cuillère ¦ Kasseroll a Läffel
+forme|Poêle ¦ Pan
+forme|Couverts croisés ¦ Gekräizt Besteck
+forme|Fourchette ¦ Forschett
+forme|Cuillère ¦ Läffel
+forme|Cuillère de sucre ¦ Läffel Zocker
+forme|Salière ¦ Salzfässchen
+forme|Sauce soja ¦ Sojazooss
+forme|Café à emporter ¦ Kaffi zum Mathuelen
+forme|Cafetière ¦ Kaffiskan
+forme|Bouilloire fumante ¦ Dampende Waasserkacher
+forme|Verre d’eau ¦ Glas Waasser
+forme|Flûte à champagne ¦ Schampesglas
+forme|Verre tulipe ¦ Tulpeglas
+forme|Pinte ¦ Pint
+forme|Fragile ¦ Fragil
+forme|Bouteille de soda ¦ Fläsch Soda
+forme|Flacon ¦ Fläschelchen
+forme|Spiritueux ¦ Spirituosen
+forme|Tonneau de bière ¦ Béierfaass
+forme|Tonneau ¦ Faass
+forme|Mixeur ¦ Mixer
+forme|Barbecue ¦ Barbecue
+forme|Œuf de Pâques ¦ Ouschteree
+forme|Maison et immeuble ¦ Haus a Gebai
+forme|Porte ¦ Dier
+forme|Porte ouverte ¦ Oppen Dier
+forme|Fenêtre ¦ Fënster
+forme|Escalier ¦ Trap
+forme|Cheminée ¦ Kamäin
+forme|Canapé ¦ Canapé
+forme|Lit ¦ Bett
+forme|Lit double ¦ Duebelbett
+forme|Fauteuil ¦ Fotell
+forme|Table ¦ Dësch
+forme|Armoire ¦ Kleederschaf
+forme|Lampe de bureau ¦ Schreifdëschluucht
+forme|Lustre ¦ Lüster
+forme|Clé ancienne ¦ Ale Schlëssel
+forme|Cadenas ¦ Hänkschlass
+forme|Cadenas ouvert ¦ Oppent Hänkschlass
+forme|Pendule ¦ Pendül
+forme|Réveil ¦ Wecker
+forme|Ballon de fête ¦ Fester-Ballon
+forme|Fête ¦ Fest
+forme|Ours en peluche ¦ Teddybier
+forme|Brique de jeu ¦ Spillbauklotz
+forme|Cintre ¦ Kleederbiggel
+forme|Fer à repasser ¦ Stréckeisen
+forme|Machine à laver ¦ Wäschmaschinn
+forme|Aiguille ¦ Nol
+forme|Balai ¦ Biesem
+forme|Seau ¦ Eemer
+forme|Boîte aux lettres ¦ Bréifkëscht
+forme|Téléphone ancien ¦ Alen Telefon
+forme|Radio ¦ Radio
+forme|Télévision ancienne ¦ Ale Fernseh
+forme|Machine à écrire ¦ Schreifmaschinn
+forme|Projecteur ¦ Projekter
+forme|Pellicule ¦ Filmroll
+forme|Film ¦ Film
+forme|Cassette ¦ Kassett
+forme|Tourne-disque ¦ Plackespiller
+forme|Disque ¦ Plack
+forme|Maison ronde ¦ Ronnt Haus
+forme|Toit ¦ Daach
+forme|Maison éclairée ¦ Beliichtent Haus
+forme|Quitter la maison ¦ D'Haus verloossen
+forme|Entrer à la maison ¦ Heemkommen
+forme|Changement de maison ¦ Hausëmzuch
+forme|Adresse ¦ Adress
+forme|Porte fermée ¦ Zou Dier
+forme|Porte coulissante ¦ Schiebedier
+forme|Porte coulissante ouverte ¦ Oppen Schiebedier
+forme|Sonnette ¦ Schell
+forme|Fenêtre ouverte ¦ Oppent Fënster
+forme|Fenêtre fermée ¦ Zout Fënster
+forme|Balcon ¦ Balkon
+forme|Store banne ¦ Markis
+forme|Escalier montant ¦ Trap erop
+forme|Escalier descendant ¦ Trap erof
+forme|Ascenseur ¦ Lift
+forme|Escalator ¦ Rolltrap
+forme|Échelle ¦ Leeder
+forme|Garage ¦ Garage
+forme|Garage ouvert ¦ Oppe Garage
+forme|Fauteuil club ¦ Clubsessel
+forme|Grand lit ¦ Grousst Bett
+forme|Lit deux places ¦ Bett fir zwee
+forme|Lit simple ¦ Eenzelbett
+forme|Lits superposés ¦ Stackbetter
+forme|Chaise d’écolier ¦ Schoulstull
+forme|Bureau ¦ Schreifdësch
+forme|Commode ¦ Kommoud
+forme|Buffet ¦ Buffet
+forme|Plan de travail ¦ Aarbechtsplack
+forme|Portemanteau ¦ Kleederstänner
+forme|Casier ¦ Schléissfach
+forme|Tabouret ¦ Hocker
+forme|Banc ¦ Bänk
+forme|Banc à dossier ¦ Bänk mat Récklehn
+forme|Tapis ¦ Teppech
+forme|Lampadaire ¦ Stoluucht
+forme|Grand lustre ¦ Grousse Lüster
+forme|Applique murale ¦ Wandluucht
+forme|Lanterne murale ¦ Wandlanter
+forme|Réverbère ¦ Stroossluucht
+forme|Lampe à huile ¦ Ueleglanter
+forme|Guirlande lumineuse ¦ Luuchtekette
+forme|Idée ¦ Iddi
+forme|Chandelier ¦ Käerzestänner
+forme|Chandelier allumé ¦ Ugefaange Käerzestänner
+forme|Radiateur ¦ Heizkierper
+forme|Cuisinière ¦ Kachherd
+forme|Four à micro-ondes ¦ Mikrowellenuewen
+forme|Réfrigérateur ¦ Frigo
+forme|Lave-vaisselle ¦ Spullmaschinn
+forme|Aspirateur ¦ Staubsauger
+forme|Planche à repasser ¦ Stréckbriet
+forme|Robinet ¦ Krunn
+forme|Douche ¦ Dusch
+forme|Baignoire ¦ Badewan
+forme|Toilettes ¦ Toilette
+forme|Ventilateur ¦ Ventilator
+forme|Trousseau de clés ¦ Schlësselbond
+forme|Cloche qui sonne ¦ Klack, déi schellt
+forme|Midi ¦ Mëtteg
+forme|Sablier vide ¦ Eidel Sanduhr
+forme|Sablier plein ¦ Voll Sanduhr
+forme|Cadeau ouvert ¦ Oppene Kaddo
+forme|Boîte aux lettres ouverte ¦ Oppe Bréifkëscht
+forme|Vaporisateur ¦ Sprayfläsch
+forme|Poubelle ¦ Dreckskëscht
+forme|Panier ¦ Kuerf
+forme|Colis ¦ Pak
+forme|Diable ¦ Sakkarr
+forme|Caméra ancienne ¦ Al Kamera
+forme|Radio FM ¦ FM-Radio
+forme|Antenne radio ¦ Radioantenn
+forme|Radiocassette ¦ Radiokassettespiller
+forme|Cassette vidéo ¦ Videokassett
+forme|Disque compact ¦ Compact Disc
+forme|Lecteur de disques ¦ Plackespiller
+forme|Télécopieur ¦ Faxmaschinn
+forme|Télévision ¦ Fernseh
+forme|Ordinateur ancien ¦ Alen Computer
+forme|Disquette ¦ Diskett
+forme|Calculatrice ¦ Rechemaschinn
+forme|Boulier ¦ Rechebriet
+forme|Cheminée éteinte ¦ Ausgaangene Kamäin
+forme|Volet roulant ¦ Rollalo
+forme|Volet roulant ouvert ¦ Oppene Rollalo
+forme|Ventilateur de plafond ¦ Plafongsventilator
+forme|Sèche-linge ¦ Wäschdréchent
+forme|Grille-pain ¦ Toaster
+forme|Bain à remous ¦ Whirlpool
+forme|Chauffe-eau ¦ Waasserheizung
+forme|Climatiseur ¦ Klimaanlag
+forme|Caméscope ¦ Camcorder
+forme|Bobine de film ¦ Filmspull
+forme|Écran de projection ¦ Projektiounsleinwand
+forme|Talkie-walkie ¦ Walkie-Talkie
+forme|Téléphone de bureau ¦ Bürostelefon
+forme|Trois heures ¦ Dräi Auer
+forme|Six heures ¦ Sechs Auer
+forme|Neuf heures ¦ Néng Auer
+forme|Sablier écoulé ¦ Ofgelafen Sanduhr
+forme|Lampes ¦ Luuchten
+forme|Lampadaire torchère ¦ Stoluucht no uewen
+forme|Carton ouvert ¦ Oppene Kartong
+forme|T-shirt ¦ T-Shirt
+forme|Chemise ¦ Hiem
+forme|Chapeau feutre ¦ Filzhutt
+forme|Chapeau rond ¦ Melounenhutt
+forme|Cravate ¦ Krawatt
+forme|Nœud papillon ¦ Fliger
+forme|Chaussure de ville ¦ Stadschong
+forme|Escarpin ¦ Pumps
+forme|Basket ¦ Turnschong
+forme|Chausson de danse ¦ Ballettschlapp
+forme|Lunettes de soleil ¦ Sonnebrëll
+forme|Diamant ¦ Diamant
+forme|Collier ¦ Halskette
+forme|Montre ¦ Aueremback
+forme|Sac à main ¦ Handtäsch
+forme|Portefeuille ¦ Portemonnaie
+forme|Parapluie fermé ¦ Zouene Prabbeli
+forme|Ciseaux ¦ Schéier
+forme|Rouge à lèvres ¦ Lëppestëft
+forme|Sac à dos ¦ Rucksak
+forme|Mallette ¦ Aktentäsch
+forme|Lingerie ¦ Lingerie
+forme|Sous-vêtement ¦ Ënnerwäsch
+forme|Couche ¦ Wëndel
+forme|Chapeau de magicien ¦ Zauberhutt
+forme|Chaussure à crampons ¦ Fussballschong
+forme|Chaussette de Noël ¦ Chrëschtdagsstrëmp
+forme|Portefeuille plié ¦ Geklappte Portemonnaie
+forme|Pochette de voyage ¦ Reesetäsch
+forme|Bagage cabine ¦ Handgepäck
+forme|Bagage en soute ¦ Opginn Gepäck
+forme|Sac étiqueté ¦ Etikettéiert Täsch
+forme|Mallette professionnelle ¦ Geschäftskoffer
+forme|Sèche-cheveux ¦ Fön
+forme|Rasoir de sûreté ¦ Rasierhuwwel
+forme|Lame de rasoir ¦ Rasierklapp
+forme|Lotion ¦ Lotioun
+forme|Loup ¦ Lärchen
+forme|Masques de théâtre ¦ Theatermasken
+forme|Masque de Guy Fawkes ¦ Guy-Fawkes-Mask
+forme|Voiture ¦ Auto
+forme|Voiture de profil ¦ Auto am Profil
+forme|Cabriolet ¦ Cabriolet
+forme|Break ¦ Break
+forme|Camionnette ¦ Camionnette
+forme|Camion ¦ Camion
+forme|Fourgon ¦ Fourgon
+forme|Autobus ¦ Bus
+forme|Autocar ¦ Reesbus
+forme|Train ¦ Zuch
+forme|Locomotive ¦ Lokomotiv
+forme|Tramway ¦ Tram
+forme|Métro ¦ Metro
+forme|Tracteur ¦ Trakter
+forme|Vélo ¦ Vëlo
+forme|Moto ¦ Moto
+forme|Trottinette ¦ Trottinett
+forme|Voilier ¦ Segelboot
+forme|Paquebot ¦ Passagéierschëff
+forme|Gouvernail ¦ Steierrad
+forme|Avion ¦ Fliger
+forme|Décollage ¦ Start
+forme|Montgolfière ¦ Heissloftballon
+forme|Fusée ¦ Rakéit
+forme|Fusée au départ ¦ Rakéitestart
+forme|Caravane ¦ Caravan
+forme|Camping-car ¦ Camping-Car
+forme|Station-service ¦ Tankstell
+forme|Feu tricolore ¦ Verkéiersluucht
+forme|Panneau de direction ¦ Richtungsschëld
+forme|Route ¦ Strooss
+forme|Itinéraire ¦ Streck
+forme|Brouette ¦ Schubkar
+forme|Volant ¦ Steierrad
+forme|Voiture de dos ¦ Auto vun hannen
+forme|Voiture compacte ¦ Klengen Auto
+forme|Voiture de sport ¦ Sportsauto
+forme|Limousine ¦ Limousine
+forme|Voiture électrique ¦ Elektroauto
+forme|Siège auto ¦ Autossëtz
+forme|Siège enfant ¦ Kannersëtz
+forme|Lavage auto ¦ Autowäsch
+forme|Garagiste ¦ Mecanicien
+forme|Taxi ¦ Taxi
+forme|Jeepney ¦ Jeepney
+forme|Camion de livraison ¦ Liwwercamion
+forme|Livraison rapide ¦ Express-Liwwerung
+forme|Semi-remorque ¦ Sattelschlepper
+forme|Camion plateau ¦ Plateau-Camion
+forme|Camion-citerne ¦ Tankcamion
+forme|Dépanneuse ¦ Ofschleppwon
+forme|Benne ¦ Kipper
+forme|Minibus ¦ Minibus
+forme|Bus scolaire ¦ Schoulbus
+forme|Bus à impériale ¦ Duebeldecker-Bus
+forme|Arrêt de bus ¦ Busarrêt
+forme|Train et voiture ¦ Zuch an Auto
+forme|Train et bus ¦ Zuch a Bus
+forme|Voiture de voyageurs ¦ Passagéierwon
+forme|Fourgon de queue ¦ Gepäckwon
+forme|Tramway de profil ¦ Tram am Profil
+forme|souterrain ¦ ënnerierdesch
+forme|Télécabine ¦ Seelbunn
+forme|Vélo à panier ¦ Vëlo mat Kuerf
+forme|Vélo cargo ¦ Lastevëlo
+forme|Vélo électrique ¦ Elektrovëlo
+forme|Grand-bi ¦ Héichrad
+forme|Cyclomoteur ¦ Mobylette
+forme|Trottinette électrique ¦ Elektro-Trottinett
+forme|Pousse-pousse ¦ Rikscha
+forme|Monocycle ¦ Eenrad
+forme|Quad ¦ Quad
+forme|Motoneige ¦ Schnéiscooter
+forme|Chariot élévateur ¦ Gabelstapler
+forme|Pelleteuse ¦ Bagger
+forme|Bulldozer ¦ Bulldozer
+forme|Grue ¦ Kran
+forme|Portique ¦ Portalkran
+forme|Atterrissage ¦ Landung
+forme|Aéroport ¦ Fluchhafen
+forme|Hélicoptère ¦ Helikopter
+forme|Drone ¦ Drone
+forme|Parachute ¦ Fallschierm
+forme|Parapente ¦ Gläitschierm
+forme|Soucoupe volante ¦ Fléiend Ënnertas
+forme|Satellite ¦ Satellit
+forme|Station spatiale ¦ Raumstatioun
+forme|Sous-marin ¦ U-Boot
+forme|Naufrage ¦ Schëffbroch
+forme|Bouée de sauvetage ¦ Rettungsrank
+forme|Rame ¦ Rudder
+forme|Jetée ¦ Steeg
+forme|Grue portuaire ¦ Hafekran
+forme|Kayak ¦ Kajak
+forme|Aviron ¦ Rudderen
+forme|Avion et voiture ¦ Fliger an Auto
+forme|Avion et train ¦ Fliger an Zuch
+forme|Autoroute ¦ Autobunn
+forme|Route droite ¦ Riicht Strooss
+forme|Itinéraires ¦ Strecken
+forme|Tunnel ¦ Tunnel
+forme|Barrière ¦ Barrière
+forme|Tourniquet ¦ Dréikräiz
+forme|Cône de signalisation ¦ Leitkegel
+forme|Panneau attention ¦ Warnschëld
+forme|Cédez le passage ¦ Virfaart loossen
+forme|Poteau indicateur ¦ Weeweiser
+forme|Panneau à vendre ¦ Schëld „ze verkafen“
+forme|Directions ¦ Richtungen
+forme|Parking ¦ Parking
+forme|Borne de recharge ¦ Luedstatioun
+forme|Carburant ¦ Brennstoff
+forme|Pneu ¦ Pneu
+forme|Moteur ¦ Motor
+forme|Ceinture de sécurité ¦ Sécherheetsgurt
+forme|Compteur de vitesse ¦ Tachometer
+forme|Correspondance ¦ Ëmsteigen
+forme|Accessibilité ¦ Accessibilitéit
+forme|Maison moderne ¦ Modernt Haus
+forme|Immeuble ¦ Appartementsgebai
+forme|Ville ¦ Stad
+forme|Bâtiment ¦ Gebai
+forme|Hôpital ¦ Spidol
+forme|École ¦ Schoul
+forme|toque ¦ Mutz
+forme|Hôtel de ville ¦ Stadhaus
+forme|Banque ¦ Bank
+forme|Boutique ¦ Buttek
+forme|Commerce ¦ Geschäft
+forme|Entrepôt ¦ Lager
+forme|Grange ¦ Scheier
+forme|Serre ¦ Zärhaus
+forme|Clôture ¦ Zonk
+forme|Portail ¦ Paart
+forme|Tente ¦ Zelt
+forme|Phare ¦ Liichttuerm
+forme|Phare allumé ¦ Beliichten Liichttuerm
+forme|Mosquée ¦ Moschee
+forme|Synagogue ¦ Synagog
+forme|Temple ¦ Tempel
+forme|Pagode ¦ Pagod
+forme|Stade ¦ Stadion
+forme|Théâtre ¦ Theater
+forme|Fontaine ¦ Spréngbuer
+forme|Colonne ¦ Sail
+forme|Mur ¦ Mauer
+forme|Éolienne ¦ Wandrad
+forme|Tour de guet ¦ Wuechttuerm
+forme|Commissariat ¦ Policecommissariat
+forme|Poste ¦ Post
+forme|Drapeau à damier ¦ Zilfändel
+forme|Immeuble repéré ¦ Markéiert Gebai
+forme|Changer de ville ¦ Stad wiesselen
+forme|Changer de bâtiment ¦ Gebai wiesselen
+forme|Bibliothèque ¦ Bibliothéik
+forme|bâtiment ¦ Gebai
+forme|Rayonnages ¦ Regaler
+forme|Commerce ouvert {x} h ¦ Geschäft op {x} h
+forme|Hôpital repéré ¦ Markéiert Spidol
+forme|Panneau d’hôpital ¦ Spidolsschëld
+forme|Terrain de football ¦ Fussballsterrain
+forme|Terrain de base-ball ¦ Baseballterrain
+forme|Poste de secours ¦ Éischt-Hëllef-Posten
+forme|Tour Eiffel ¦ Eiffeltuerm
+forme|Grande roue ¦ Riserad
+forme|Yourte ¦ Jurt
+forme|Chalet ¦ Chalet
+forme|Feu de camp ¦ Lagerfeier
+forme|Piscine ¦ Schwämm
+forme|Caserne de pompiers ¦ Pompjeeskasär
+forme|Panneau d’affichage ¦ Plakatwand
+forme|Panneau d’annonces ¦ Uschlagbriet
+forme|Podium ¦ Podium
+forme|Mur en flammes ¦ Mauer a Flamen
+forme|Portail ouvert ¦ Oppe Paart
+forme|Réservoir ¦ Reservoir
+forme|Pylône électrique ¦ Stroummast
+forme|Turbine ¦ Turbin
+forme|Panneau solaire ¦ Solarpanneau
+forme|Grand panneau solaire ¦ Grousse Solarpanneau
+forme|Barrage ¦ Staudamm
+forme|Explosion nucléaire ¦ Atomexplosioun
+forme|Marteau ¦ Hummer
+forme|Outils ¦ Geschir
+forme|Clé à molette ¦ Rollgabelschlëssel
+forme|Tournevis ¦ Schraufenzéier
+forme|Lame de scie ¦ Seeblat
+forme|Scie ¦ Seeg
+forme|Hache ¦ Axt
+forme|Pelle ¦ Schëpp
+forme|Pioche ¦ Pickel
+forme|Enclume ¦ Amboss
+forme|Clou ¦ Nol
+forme|Boîte à outils ¦ Geschirkëscht
+forme|Règle ¦ Lineal
+forme|Crayon et règle ¦ Bläistëft a Lineal
+forme|Rouleau de peinture ¦ Molerroll
+forme|Pinceau ¦ Pinsel
+forme|Palette de peintre ¦ Molerpalett
+forme|Stéthoscope ¦ Stethoskop
+forme|Trousse médicale ¦ Medezinesch Täsch
+forme|Balance ¦ Wo
+forme|Marteau de juge ¦ Riichterhummer
+forme|Billets ¦ Geldscheiner
+forme|Euro ¦ Euro
+forme|Caisse ¦ Keess
+forme|Microscope ¦ Mikroskop
+forme|Fiole ¦ Fläschelchen
+forme|Livre d’école ¦ Schoulbuch
+forme|Camion de pompiers ¦ Pompjeesauto
+forme|Imprimante ¦ Drécker
+forme|Casque de chantier ¦ Bauhelm
+forme|Mine ¦ Minn
+forme|Bidon d’huile ¦ Uelegkan
+forme|Couteau ¦ Messer
+forme|Outils croisés ¦ Gekräizt Geschir
+forme|Marteau et tournevis ¦ Hummer a Schraufenzéier
+forme|Marteau et faucille ¦ Hummer a Sichel
+forme|Clé à tube ¦ Steckschlëssel
+forme|Pince ¦ Zaang
+forme|Scie circulaire ¦ Kreesseeg
+forme|Cutter ¦ Cutter
+forme|Équerre et compas ¦ Wénkel a Zierkel
+forme|Compas ¦ Zierkel
+forme|Mètre ruban ¦ Metermooss
+forme|Niveau à bulle ¦ Waasserwo
+forme|Vis à tête plate ¦ Flaachkappschrauf
+forme|Vis à tête ronde ¦ Ronnkappschrauf
+forme|Boulon ¦ Bolz
+forme|Écrou ¦ Mudder
+forme|Rivet ¦ Nitt
+forme|Fer à souder ¦ Lötkolben
+forme|Bêche ¦ Spuet
+forme|Hache de guerre ¦ Streidaxt
+forme|Crayon à papier ¦ Bläistëft
+forme|Bombe de peinture ¦ Faarwespray
+forme|Pot de peinture ¦ Faarwendëppen
+forme|Pipette ¦ Pipett
+forme|Dessin ¦ Zeechnung
+forme|Plume de dessin ¦ Zeechefieder
+forme|Balance de cuisine ¦ Kichewo
+forme|Balance déséquilibrée ¦ Wo aus dem Gläichgewiicht
+forme|Pèse-personne ¦ Persounewo
+forme|Poids ¦ Gewiicht
+forme|Lingots d’or ¦ Goldbaren
+forme|Liasses de billets ¦ Bëndele Geldscheiner
+forme|Tirelire ¦ Spuerschwäin
+forme|Livre sterling ¦ Pound Sterling
+forme|Franc ¦ Frang
+forme|Yen ¦ Yen
+forme|Rouble ¦ Rubel
+forme|Roupie indienne ¦ Indesch Rupie
+forme|Chéquier ¦ Scheckbuch
+forme|Carte bancaire ¦ Bankkaart
+forme|Chariot de courses ¦ Akafswon
+forme|Sac de courses ¦ Akafstut
+forme|Soldes ¦ Soldes
+forme|Reçu ¦ Quittung
+forme|Télescope ¦ Teleskop
+forme|Bécher ¦ Becherglas
+forme|Ballon de chimie ¦ Kolbe
+forme|Éprouvette ¦ Reagenzglas
+forme|Atome ¦ Atom
+forme|Molécule ¦ Molekül
+forme|Tableau périodique ¦ Periodesystem
+forme|Lunettes de protection ¦ Schutzbrëll
+forme|Menottes ¦ Handschellen
+forme|Extincteur ¦ Feierläscher
+forme|Bouche d’incendie ¦ Hydrant
+forme|Pupitre ¦ Pult
+forme|Présentation ¦ Presentatioun
+forme|Présentation projetée ¦ Projizéiert Presentatioun
+forme|Courrier ¦ Post
+forme|Musique ¦ Musek
+forme|Note de musique ¦ Musekssnot
+forme|Clé de sol ¦ Violinschlëssel
+forme|Piano ¦ Piano
+forme|Guitare ¦ Gittar
+forme|Violon ¦ Gei
+forme|Trompette ¦ Trompett
+forme|Saxophone ¦ Saxophon
+forme|Clairon ¦ Signalhorn
+forme|Micro ancien ¦ Alen Mikro
+forme|Casque audio ¦ Kopfhörer
+forme|Roi ¦ Kinnek
+forme|échecs ¦ Schach
+forme|Dame ¦ Damm
+forme|Fou ¦ Leefer
+forme|Pion ¦ Bauer
+forme|Cartes à jouer ¦ Spillkaarten
+forme|cartes ¦ Kaarten
+forme|Pique ¦ Schëpp
+forme|Carreau ¦ Rauten
+forme|Dé ¦ Wierfel
+forme|Puzzle ¦ Puzzle
+forme|Cerf-volant ¦ Draach
+forme|Ballon de football ¦ Fussball
+forme|Ballon de basket ¦ Basketball
+forme|Tennis ¦ Tennis
+forme|Ballon de rugby ¦ Rugbyball
+forme|Cycliste ¦ Vëlosfuerer
+forme|Nageur ¦ Schwëmmer
+forme|Skieur ¦ Schifuerer
+forme|Coupe ¦ Coupe
+forme|Trophée ¦ Trophée
+forme|Ticket ¦ Ticket
+forme|Clap de cinéma ¦ Filmklapp
+forme|Nuancier ¦ Faarffächer
+forme|Livre ouvert ¦ Oppent Buch
+forme|Manette ¦ Controller
+forme|Guitare électrique ¦ Elektresch Gittar
+forme|Médiator ¦ Plektrum
+forme|Ocarina ¦ Okarina
+forme|instrument ¦ Instrument
+forme|Métronome ¦ Metronom
+forme|Microphone ¦ Mikrofon
+forme|Amplificateur ¦ Verstärker
+forme|Enceinte ¦ Lautsprecher
+forme|Partition encadrée ¦ Agerummte Partitur
+forme|Croche ¦ Aachtelsnot
+forme|Blanche ¦ Hallef Not
+forme|Noire ¦ Véierelsnot
+forme|Double croche ¦ Siechzéngtelsnot
+forme|Ronde ¦ Ganz Not
+forme|Clé de fa ¦ Bassschlëssel
+forme|Clé d’ut ¦ C-Schlëssel
+forme|Dièse ¦ Kräiz
+forme|musique ¦ Musek
+forme|Bémol ¦ B
+forme|Bécarre ¦ Opléisungszeechen
+forme|Pause ¦ Ganz Paus
+forme|Demi-pause ¦ Hallef Paus
+forme|Soupir ¦ Véierelspaus
+forme|Demi-soupir ¦ Aachtelspaus
+forme|Recueil de chansons ¦ Liddersammlung
+forme|Écouteurs ¦ Ouerstécker
+forme|Danse de salon ¦ Gesellschaftsdanz
+forme|Billet ¦ Geldschäin
+forme|Jeu de cartes ¦ Kaartespill
+forme|Carte de cœur ¦ Häerzkaart
+forme|Carte de pique ¦ Schëppkaart
+forme|Carte de trèfle ¦ Kräizkaart
+forme|Carte de carreau ¦ Rautekaart
+forme|Jeton de poker ¦ Pokerjeton
+forme|Machine à sous ¦ Spillautomat
+forme|Dés ¦ Wierfelen
+forme|Dé à vingt faces ¦ Wierfel mat zwanzeg Säiten
+forme|Damier ¦ Dammbriet
+forme|Pièce de puzzle et cœur ¦ Puzzlestéck an Häerz
+forme|Tangram ¦ Tangram
+forme|Moulin à vent ¦ Wandmillen
+forme|jouet ¦ Spillsaach
+forme|Bascule ¦ Wipp
+forme|jeu ¦ Spill
+forme|Toboggan ¦ Rutschbunn
+forme|Boule de cristal ¦ Kristallkugel
+forme|Baguette magique ¦ Zauberstaf
+forme|Feu d’artifice ¦ Freedefeier
+forme|Bowling ¦ Bowling
+forme|Billard ¦ Billard
+forme|Triangle de billard ¦ Billarddräieck
+forme|Golf ¦ Golf
+forme|Balle de base-ball ¦ Baseball
+forme|Batte de base-ball ¦ Baseballsbengel
+forme|Panier de basket ¦ Basketkuerf
+forme|Ballon de volley ¦ Volleyball
+forme|Ballon de football américain ¦ American Football
+forme|Casque de football américain ¦ American-Football-Helm
+forme|Balle de tennis ¦ Tennisball
+forme|Badminton ¦ Badminton
+forme|Tennis de table ¦ Dëschtennis
+forme|Crosses de hockey ¦ Hockeyschléier
+forme|Handball ¦ Handball
+forme|Polo ¦ Polo
+forme|Curling ¦ Curling
+forme|Arc et flèche ¦ Bou a Feil
+forme|Flèche dans la cible ¦ Feil an der Zilscheif
+forme|Cible de tir ¦ Zilscheif
+forme|Escrime ¦ Fiechten
+forme|Karaté ¦ Karate
+forme|Gant de boxe ¦ Boxhändschen
+forme|Gymnastique ¦ Turnen
+forme|Haltérophile ¦ Gewiichtheber
+forme|Haltère ¦ Hantel
+forme|Corde à sauter ¦ Sprangseel
+forme|Sprinteur ¦ Sprinter
+forme|Randonneur ¦ Wanderer
+forme|Ski de fond ¦ Langlaf
+forme|Ski nautique ¦ Waasserschi
+forme|Planche à neige ¦ Snowboard
+forme|Raquettes à neige ¦ Schnéischong
+forme|Luge ¦ Schlitt
+forme|Patin à glace ¦ Schlittschong
+forme|Patin à roulettes ¦ Rollschong
+forme|Roller en ligne ¦ Inliner
+forme|Planche à roulettes ¦ Skateboard
+forme|Skateur ¦ Skater
+forme|Surfeur ¦ Surfer
+forme|Plongeur ¦ Taucher
+forme|Plongée sous-marine ¦ Tauchen
+forme|Masque de plongée ¦ Tauchermask
+forme|Tuba ¦ Schnorchel
+forme|Casque de course ¦ Rennhelm
+forme|Sifflet ¦ Peif
+forme|Tableau des scores ¦ Tableau vun de Punkten
+forme|Médaille d’or ¦ Goldmedail
+forme|Trophée brisé ¦ Gebrachen Trophée
+forme|Tournoi ¦ Tournoi
+forme|Flambeau ¦ Fakel
+forme|Jumelles ¦ Jumellen
+forme|Panorama ¦ Panorama
+forme|un ¦ een
+forme|deux ¦ zwee
+forme|trois ¦ dräi
+forme|quatre ¦ véier
+forme|six ¦ sechs
+forme|cinéma ¦ Kino
+forme|Médaille d’argent ¦ Sëlwermedail
+forme|Médaille de bronze ¦ Bronzemedail
+forme|Cricket ¦ Cricket
+forme|Liste de chansons ¦ Lidderlëscht
+forme|Étoile de David ¦ Davidstär
+forme|Ménorah ¦ Menora
+forme|Croissant et étoile ¦ Hallefmound a Stär
+forme|Om ¦ Om
+forme|Roue du dharma ¦ Dharma-Rad
+forme|Yin et yang ¦ Yin a Yang
+forme|Paix ¦ Fridden
+forme|Cœur brisé ¦ Gebrachent Häerz
+forme|Éternité ¦ Éiwegkeet
+forme|Khanda ¦ Khanda
+forme|Ménorah allumée ¦ Ugefaange Menora
+forme|Hexagramme ¦ Hexagramm
+forme|Boule de Noël ¦ Chrëschtkugel
+forme|Halloween ¦ Halloween
+forme|Citrouille ¦ Kürbis
+forme|Document ¦ Dokument
+forme|Documents ¦ Dokumenter
+forme|Note écrite ¦ Geschriwwen Notiz
+forme|Livres ¦ Bicher
+forme|Carnet ¦ Heft
+forme|Journal ¦ Zeitung
+forme|Gazette ¦ Gazette
+forme|Lettre {x} ¦ Buschtaf {x}
+forme|Timbre ¦ Timber
+forme|Archives ¦ Archiven
+forme|Dossier ¦ Dossier
+forme|Dossier ouvert ¦ Oppenen Dossier
+forme|Presse-papiers ¦ Klemmbriet
+forme|Calendrier ¦ Kalenner
+forme|Date heureuse ¦ Glécklechen Datum
+forme|Date importante ¦ Wichtegen Datum
+forme|Stylo ¦ Bic
+forme|Stylo-plume ¦ Fëllfieder
+forme|Signature ¦ Ënnerschrëft
+forme|Guillemet ¦ Gänseféisschen
+forme|Marque-page ¦ Buchzeechen
+forme|Punaise ¦ Pinnchen
+forme|Trombone ¦ Bürokllamer
+forme|Post-it ¦ Post-it
+forme|Bulle de message ¦ Messagebubbel
+forme|Discussion ¦ Diskussioun
+forme|Traduction ¦ Iwwersetzung
+forme|Alphabet ¦ Alphabet
+forme|Document à modifier ¦ Dokument fir z'änneren
+forme|Document signé ¦ Ënnerschriwwent Dokument
+forme|Classeur à tiroirs ¦ Schubladeschaf
+forme|Document douteux ¦ Zweifelhaft Dokument
+forme|Document daté ¦ Datéiert Dokument
+forme|Document important ¦ Wichtegt Dokument
+forme|Document lié ¦ Verlinkt Dokument
+forme|Partition ¦ Partitur
+forme|Dossiers ¦ Dossieren
+forme|Dossier de la maison ¦ Dossier vum Haus
+forme|Dossier favori ¦ Favoritten-Dossier
+forme|Dossier important ¦ Wichtegen Dossier
+forme|Dossier de textes ¦ Dossier mat Texter
+forme|Recherche de dossier ¦ Dossier sichen
+forme|Dossier daté ¦ Datéierten Dossier
+forme|Dossier mystère ¦ Mysteriéisen Dossier
+forme|Recherche aux archives ¦ Recherche an den Archiven
+forme|Archive précieuse ¦ Wäertvollt Archiv
+forme|Livre ouvert vierge ¦ Eidelt oppent Buch
+forme|pages ¦ Säiten
+forme|Abécédaire ¦ ABC-Buch
+forme|Recherche dans un livre ¦ An engem Buch sichen
+forme|Livre daté ¦ Datéiert Buch
+forme|Livre et repère ¦ Buch a Markéierung
+forme|Livre en écriture ¦ Buch, dat geschriwwe gëtt
+forme|Marque-pages ¦ Buchzeechen
+forme|Carnets ¦ Hefter
+forme|Lettres ¦ Bréiwer
+forme|Bulletin ¦ Bulletin
+forme|Presse-papiers vide ¦ Eidelt Klemmbriet
+forme|Liste sur presse-papiers ¦ Lëscht um Klemmbriet
+forme|Fiche de personne ¦ Persounefiche
+forme|Liste validée ¦ Validéiert Lëscht
+forme|Calendrier vierge ¦ Eidele Kalenner
+forme|Mois ¦ Mount
+forme|Aujourd’hui ¦ Haut
+forme|Période ¦ Period
+forme|Agenda ¦ Agenda
+forme|Date et heure ¦ Datum an Auerzäit
+forme|Date inconnue ¦ Onbekannten Datum
+forme|Date incertaine ¦ Onsécheren Datum
+forme|Date confirmée ¦ Bestätegten Datum
+forme|Date de début ¦ Ufanksdatum
+forme|Date de fin ¦ Enndatum
+forme|Notes ¦ Notizen
+forme|Écrire une note ¦ Eng Notiz schreiwen
+forme|Autocollant ¦ Autocollant
+forme|Notes écrites ¦ Geschriwwen Notizen
+forme|Pièce jointe ¦ Unhang
+forme|Étiquettes ¦ Etiketten
+forme|Étiquette écrite ¦ Geschriwwen Etikett
+forme|Étiquette favorite ¦ Favoritten-Etikett
+forme|Message écrit ¦ Geschriwwe Message
+forme|Question ¦ Fro
+forme|Conversation ¦ Gespréich
+forme|Commentaire ¦ Kommentar
+forme|Commentaire écrit ¦ Geschriwwene Kommentar
+forme|Citation ¦ Zitat
+forme|Commentaires ¦ Kommentarer
+forme|Témoignage ¦ Zeienaussot
+forme|Bulle de pensée ¦ Gedankebubbel
+forme|Guillemet fermant ¦ Zoumaachend Gänseféisschen
+forme|Alphabet latin ¦ Laténgescht Alphabet
+forme|Alphabet grec ¦ Griichescht Alphabet
+forme|Alphabet cyrillique ¦ Kyrillescht Alphabet
+forme|Alphabet hébreu ¦ Hebräescht Alphabet
+forme|Alphabet arabe ¦ Arabescht Alphabet
+forme|Idéogramme ¦ Ideogramm
+forme|Braille ¦ Braille
+forme|stylo ¦ Bic
+forme|Signature écrite ¦ Geschriwwen Ënnerschrëft
+forme|Crayon encadré ¦ Agerummte Bläistëft
+forme|Gomme ¦ Gummi
+forme|Carte de visite ¦ Visittekaart
+forme|Carte nominative ¦ Nummkaart
+forme|Répertoire ¦ Adressbuch
+forme|Fichier rotatif ¦ Rotatiounskartei
+forme|Passeport biométrique ¦ Biometresche Pass
+forme|Licence ¦ Lizenz
+forme|Bulletin de vote ¦ Wahlziedel
+forme|Vote ¦ Wal
+forme|Liste à puces ¦ Punktlëscht
+forme|Liste numérotée ¦ Nummeréiert Lëscht
+forme|Tableau ¦ Tabell
+forme|Scanner ¦ Scanner
+forme|Copie ¦ Kopie
+forme|Semaine ¦ Woch
+forme|Fin de semaine ¦ Weekend
+forme|Enveloppe ¦ Enveloppe
+forme|Réponse ¦ Äntwert
+forme|Texte long ¦ Laangen Text
+forme|Battement de cœur ¦ Häerzschlag
+forme|Pansement ¦ Plooschter
+forme|Croix médicale ¦ Medezinescht Kräiz
+forme|Ambulance ¦ Ambulanz
+forme|Dent ¦ Zant
+forme|Cerveau ¦ Gehier
+forme|Poumons ¦ Longen
+forme|Estomac ¦ Mo
+forme|Œil ¦ A
+forme|Oreille ¦ Ouer
+forme|Virus ¦ Virus
+forme|Bactérie ¦ Bakterie
+forme|ADN ¦ DNA
+forme|Mortier ¦ Mierscher
+forme|Tête de mort ¦ Doudekapp
+forme|Défibrillateur ¦ Defibrillator
+forme|Pouls ¦ Puls
+forme|Pilules ¦ Pillen
+forme|Médicament ¦ Medikament
+forme|Ordonnance ¦ Rezept
+forme|Perfusion ¦ Infusioun
+forme|Poche de sang ¦ Bluttbeidel
+forme|Diabète ¦ Diabetes
+forme|Allergie ¦ Allergie
+forme|Radiographie ¦ Röntgenbild
+forme|Scanner du crâne ¦ Scanner vum Schädel
+forme|Brosse à dents ¦ Zännbiischt
+forme|Brosse à dents et dentifrice ¦ Zännbiischt an Zännpasta
+forme|Surdité ¦ Daafheet
+forme|Œil fermé ¦ Zouent A
+forme|Cécité ¦ Blannheet
+forme|Dossier médical ¦ Medezineschen Dossier
+forme|Reproduction ¦ Reproduktioun
+forme|Malade ¦ Krank
+forme|Fièvre ¦ Féiwer
+forme|Mortier et pilon ¦ Mierscher a Stéisser
+forme|Potion de soin ¦ Heelpotioun
+forme|Poison ¦ Gëft
+forme|Boucle auditive ¦ Induktiounsschleef
+forme|Tache de liquide ¦ Flëssegkeetsfleck
+forme|Cœur arrêté ¦ Gestoppten Häerz
+forme|Véhicule sanitaire ¦ Krankewon
+forme|Étoile ronde ¦ Ronne Stär
+forme|Demi-cœur ¦ Hallef Häerz
+forme|Pouce levé ¦ Daum erop
+forme|Pouce baissé ¦ Daum erof
+forme|Validé ¦ Validéiert
+forme|Refusé ¦ Refuséiert
+forme|Plus rond ¦ Ronne Plus
+forme|Moins rond ¦ Ronne Minus
+forme|Question ronde ¦ Ronn Fro
+forme|Attention ¦ Opgepasst
+forme|Alerte ¦ Alarm
+forme|Stop ¦ Stop
+forme|Info ronde ¦ Ronn Info
+forme|Bouclier ¦ Schëld
+forme|Bouclier validé ¦ Validéiert Schëld
+forme|Recyclage ¦ Recycling
+forme|Copyright ¦ Copyright
+forme|Arobase ¦ Klameraffen
+forme|Pourcentage ¦ Prozentzeechen
+forme|Dollar ¦ Dollar
+forme|Pi ¦ Pi
+forme|Somme ¦ Zomm
+forme|Danger biologique ¦ Biologesch Gefor
+forme|Radioactif ¦ Radioaktiv
+forme|Content ¦ Zefridden
+forme|Triste ¦ Traureg
+forme|Neutre ¦ Neutral
+forme|Ravi ¦ Begeeschtert
+forme|Pleure ¦ Kräischt
+forme|Fâché ¦ Rosen
+forme|Clin d’œil ¦ Wénken
+forme|Bisou ¦ Bëtzchen
+forme|Fantôme ¦ Spuk
+forme|Robot ¦ Roboter
+forme|Hexagones ¦ Sechsecker
+forme|Cible ¦ Zilscheif
+forme|Mille ¦ Volltreffer
+forme|Engrenage ¦ Zännrad
+forme|Aimant ¦ Magnéit
+forme|Ondes ¦ Wellen
+forme|Bluetooth ¦ Bluetooth
+forme|Fanion ¦ Wimpel
+forme|Récompense ¦ Belounung
+forme|Chiffre {x} ¦ Ziffer {x}
+forme|Demi-étoile ¦ Hallwe Stär
+forme|Étoile souriante ¦ Laachende Stär
+forme|Étoile encadrée ¦ Agerummte Stär
+forme|Décagramme ¦ Dekagramm
+forme|Octogramme ¦ Oktogramm
+forme|Sceau validé ¦ Validéiert Sigel
+forme|Pour et contre ¦ Fir a géint
+forme|Coche épaisse ¦ Décken Haken
+forme|Double coche ¦ Duebelen Haken
+forme|Croix de refus ¦ Refuskräiz
+forme|Croix épaisse ¦ Déckt Kräiz
+forme|Interdit octogonal ¦ Aachteckegt Verbuet
+forme|Plus épais ¦ Décke Plus
+forme|Moins épais ¦ Décke Minus
+forme|Plus ou moins ¦ Plus-Minus
+forme|Égal ¦ Gläich
+forme|Question en losange ¦ Fro an enger Raut
+forme|Alerte en losange ¦ Alarm an enger Raut
+forme|Interdit ¦ Verbuet
+forme|Sens interdit ¦ Agank verbueden
+forme|Demi-bouclier ¦ Hallef Schëld
+forme|Bouclier étoilé ¦ Schëld mat Stären
+forme|Esperluette ¦ Et-Zeechen
+forme|Astérisque ¦ Stärchen
+forme|Oméga ¦ Omega
+forme|Chiffre romain I ¦ Réimesch Zuel I
+forme|Chiffre romain II ¦ Réimesch Zuel II
+forme|Chiffre romain III ¦ Réimesch Zuel III
+forme|Chiffre romain IV ¦ Réimesch Zuel IV
+forme|Chiffre romain V ¦ Réimesch Zuel V
+forme|Chiffre romain VI ¦ Réimesch Zuel VI
+forme|Chiffre romain VII ¦ Réimesch Zuel VII
+forme|Chiffre romain VIII ¦ Réimesch Zuel VIII
+forme|Chiffre romain IX ¦ Réimesch Zuel IX
+forme|Chiffre romain X ¦ Réimesch Zuel X
+forme|Bâton ¦ Staf
+forme|Bâtons ¦ Stief
+forme|cinq ¦ fënnef
+forme|Bélier ¦ Widder
+forme|zodiaque ¦ Déierekrees
+forme|Taureau ¦ Stier
+forme|Gémeaux ¦ Zwillingen
+forme|Cancer ¦ Kriibs
+forme|Lion ¦ Léiw
+forme|Vierge ¦ Jongfra
+forme|Scorpion ¦ Skorpioun
+forme|Sagittaire ¦ Schütz
+forme|Capricorne ¦ Steebock
+forme|Verseau ¦ Waassermann
+forme|Poissons ¦ Fësch
+forme|Visage souriant ¦ Laachend Gesiicht
+forme|Visage décontracté ¦ Entspaant Gesiicht
+forme|Perplexe ¦ Perplex
+forme|Visage évanoui ¦ Ouniuechtegt Gesiicht
+forme|Diablotin ¦ Däiwelchen
+forme|Mort de rire ¦ Dout gelaacht
+forme|Extraterrestre ¦ Ausserierdeschen
+forme|Pentagramme ¦ Pentagramm
+forme|Losange plein ¦ Voll Raut
+forme|Losange moyen ¦ Mëttel Raut
+forme|Disque plein ¦ Voll Scheif
+forme|Cercle ¦ Krees
+forme|Moitié de disque ¦ Hallef Scheif
+forme|Petit disque ¦ Kleng Scheif
+forme|Disques ¦ Scheiwen
+forme|Ellipse ¦ Ellipse
+forme|Carré ¦ Quadrat
+forme|Carré arrondi ¦ Ofgeronnt Quadrat
+forme|Petit carré ¦ Klengt Quadrat
+forme|Triangle pointe en bas ¦ Dräieck mat der Spëtzt no ënnen
+forme|Sphère ¦ Kugel
+forme|Formes ¦ Formen
+forme|Case pleine ¦ Voll Këscht
+forme|Case vide ¦ Eidel Këscht
+forme|Case cochée ¦ Ugekräizt Këscht
+forme|Pastille ¦ Pastill
+forme|Pastille cochée ¦ Ugekräizt Pastill
+forme|Points de suspension ¦ Auslassungspunkten
+forme|Points verticaux ¦ Vertikal Punkten
+forme|Grille de points ¦ Punktgitter
+forme|Trois points en triangle ¦ Dräi Punkten am Dräieck
+forme|Quadrillage ¦ Gitter
+forme|Goutte bicolore ¦ Zweefaarwegen Drëps
+forme|Bombe ¦ Bomm
+forme|Épée ¦ Schwäert
+forme|Épées croisées ¦ Gekräizt Schwäerter
+forme|Lance ¦ Lanz
+forme|Masse d’armes ¦ Streitkolben
+forme|Couteau de combat ¦ Kampfmesser
+forme|Étoile de ninja ¦ Ninjastär
+forme|Boomerang ¦ Bumerang
+forme|Pistolet ¦ Pistoul
+forme|Munitions ¦ Munitioun
+forme|Char d’assaut ¦ Panzer
+forme|Lien ¦ Link
+forme|Maillon ¦ Kettenglidd
+forme|Empreinte digitale ¦ Fangerofdrock
+forme|Drapeau à hampe ¦ Fändel mat Staang
+forme|Marque déposée ¦ Registréiert Mark
+forme|Marque commerciale ¦ Handelsmark
+forme|Supérieur à ¦ Méi grouss wéi
+forme|Inférieur à ¦ Méi kleng wéi
+forme|Multiplication ¦ Multiplikatioun
+forme|Division ¦ Divisioun
+forme|Lien rompu ¦ Gebrachene Link
+forme|Sommeil ¦ Schlof
+forme|Flèche épaisse droite ¦ Décke Feil no riets
+forme|Flèche épaisse gauche ¦ Décke Feil no lénks
+forme|Flèche épaisse haut ¦ Décke Feil no uewen
+forme|Flèche épaisse bas ¦ Décke Feil no ënnen
+forme|Flèche en coin ¦ Feil am Eck
+forme|Flèche pleine ¦ Voll Feil
+forme|Flèche dans un rond ¦ Feil an engem Krees
+forme|Double flèche épaisse ¦ Décken Duebelfeil
+forme|Toutes directions ¦ All Richtungen
+forme|Agrandir ¦ Vergréisseren
+forme|Rassembler ¦ Zesummeféieren
+forme|Double chevron ¦ Duebele Chevron
+forme|Triple chevron ¦ Dräifache Chevron
+forme|Retour en U ¦ U-Kéier
+forme|Flèche montante ¦ Feil, deen eropgeet
+forme|Flèche descendante ¦ Feil, deen erofgeet
+forme|Retour en haut ¦ Zréck no uewen
+forme|Rotation ¦ Rotatioun
+forme|Rotation inverse ¦ Ëmgedréint Rotatioun
+forme|Revenir ¦ Zréckgoen
+forme|Recharger ¦ Nei lueden
+forme|Synchroniser ¦ Synchroniséieren
+forme|Échange ¦ Austausch
+forme|Échange vertical ¦ Vertikalen Austausch
+forme|Séparation ¦ Trennung
+forme|Réunion ¦ Zesummekomm
+forme|Embranchement ¦ Ofzweigung
+forme|Fourche ¦ Gabel
+forme|Bifurcation ¦ Gabelung
+forme|Décision ¦ Decisioun
+forme|Mélange ¦ Mëschung
+forme|Transfert ¦ Transfert
+forme|Suivant ¦ Nächst
+forme|Lecture ¦ Ofspillen
+forme|Avance rapide ¦ Séier no vir
+forme|Pointe à droite ¦ Spëtzt no riets
+forme|Navigation ¦ Navigatioun
+forme|Flèche haut ¦ Feil no uewen
+forme|Flèche bas ¦ Feil no ënnen
+forme|Flèche gauche ¦ Feil no lénks
+forme|Flèche droite ¦ Feil no riets
+forme|Flèche haut gauche ¦ Feil no uewe lénks
+forme|Flèche haut droite ¦ Feil no uewe riets
+forme|Flèche bas gauche ¦ Feil no ënne lénks
+forme|Flèche bas droite ¦ Feil no ënne riets
+forme|Flèche pleine haut ¦ Voll Feil no uewen
+forme|Flèche pleine bas ¦ Voll Feil no ënnen
+forme|Flèche pleine gauche ¦ Voll Feil no lénks
+forme|Flèche pleine haut gauche ¦ Voll Feil no uewe lénks
+forme|Flèche pleine haut droite ¦ Voll Feil no uewe riets
+forme|Flèche pleine bas gauche ¦ Voll Feil no ënne lénks
+forme|Flèche pleine bas droite ¦ Voll Feil no ënne riets
+forme|Flèche gauche dans un rond ¦ Feil no lénks an engem Krees
+forme|Flèche haut dans un rond ¦ Feil no uewen an engem Krees
+forme|Flèche bas dans un rond ¦ Feil no ënnen an engem Krees
+forme|Double flèche verticale fine ¦ Dënnen vertikalen Duebelfeil
+forme|Double flèche diagonale ¦ Diagonalen Duebelfeil
+forme|Double flèche diagonale inverse ¦ Ëmgedréinten diagonalen Duebelfeil
+forme|Flèche coudée haut gauche ¦ Geknécktene Feil no uewe lénks
+forme|Flèche coudée haut droite ¦ Geknécktene Feil no uewe riets
+forme|Flèche coudée bas gauche ¦ Geknécktene Feil no ënne lénks
+forme|Flèche coudée bas droite ¦ Geknécktene Feil no ënne riets
+forme|Flèche coudée vers le bas ¦ Geknécktene Feil no ënnen
+forme|Demi-tour à gauche ¦ Kéier no lénks
+forme|Demi-tour à droite ¦ Kéier no riets
+forme|Réduire ¦ Verklengeren
+forme|Étendre ¦ Ausdeenen
+forme|Rapprocher ¦ Méi no zesummebréngen
+forme|Écarter ¦ Ausernaner zéien
+forme|Va-et-vient ¦ Hin an hier
+forme|Flèche d’archer ¦ Bogeschützfeil
+forme|Chevron haut ¦ Chevron no uewen
+forme|Chevron bas ¦ Chevron no ënnen
+forme|Chevron gauche ¦ Chevron no lénks
+forme|Chevron droite ¦ Chevron no riets
+forme|Double chevron haut ¦ Duebele Chevron no uewen
+forme|Double chevron bas ¦ Duebele Chevron no ënnen
+forme|Double chevron gauche ¦ Duebele Chevron no lénks
+forme|Pointe en haut ¦ Spëtzt no uewen
+forme|Pointe en bas ¦ Spëtzt no ënnen
+forme|Pointe à gauche ¦ Spëtzt no lénks
+forme|Échange fin ¦ Dënnen Austausch
+forme|Échange vertical fin ¦ Dënnen vertikalen Austausch
+forme|Hausse ¦ Héichgoen
+forme|Baisse ¦ Réckgang
+forme|Stable ¦ Stabil
+forme|Annuler ¦ Réckgängeg
+forme|Rétablir ¦ Widderhuelen
+forme|Répondre ¦ Äntweren
+forme|Partager ¦ Deelen
+forme|Actualiser ¦ Aktualiséieren
+forme|Cycle ¦ Zyklus
+forme|Répéter ¦ Widderhuelung
+forme|Rotation complète ¦ Komplett Rotatioun
+forme|Orbite ¦ Ëmlafbunn
+forme|Rotation à gauche ¦ Rotatioun no lénks
+forme|Rotation à droite ¦ Rotatioun no riets
+forme|Mélanger ¦ Mëschen
+forme|Flèche sortante ¦ Feil no baussen
+forme|Flèche entrante ¦ Feil no bannen
+forme|Sous-niveau à droite ¦ Ënnerniveau no riets
+forme|Sous-niveau à gauche ¦ Ënnerniveau no lénks
+forme|Fusion ¦ Fusioun
+forme|Étape ¦ Etapp
+forme|Fusionner ¦ Fusionéieren
+forme|Segment ¦ Segment
+forme|Détour ¦ Ëmwee
+forme|Connexion ¦ Verbindung
+forme|Entrée ¦ Agank
+forme|Sortie ¦ Ausgank
+forme|Sortie de secours ¦ Noutausgank
+forme|Précédent ¦ Virdrun
+forme|Lecture ronde ¦ Ronnt Ofspillen
+forme|Position actuelle ¦ Aktuell Positioun
+forme|Main pointeur ¦ Zeigerhand
+forme|Plein écran ¦ Vollbild
+forme|Flèche haut ronde ¦ Ronne Feil no uewen
+forme|Flèche bas ronde ¦ Ronne Feil no ënnen
+forme|Flèche gauche ronde ¦ Ronne Feil no lénks
+forme|Flèche droite ronde ¦ Ronne Feil no riets
+forme|Chevron gauche rond ¦ Ronne Chevron no lénks
+forme|Chevron droite rond ¦ Ronne Chevron no riets
+forme|Rejouer ¦ Nach eng Kéier spillen
+forme|Renouvellement ¦ Erneierung
+forme|Télécharger ¦ Eroflueden
+forme|Envoyer ¦ Schécken
+forme|Importer ¦ Importéieren
+forme|Exporter ¦ Exportéieren
+forme|Arrêt ¦ Stopp
+forme|piste ¦ Spuer
+forme|Retour rapide ¦ Séier zréck
+forme|Enregistrement ¦ Opnam
+forme|Gland ¦ Eechel
+forme|trait fin ¦ dënnen Trait
+forme|plein ¦ voll
+forme|Carnet d’adresses ¦ Adressbuch
+forme|Répertoire à onglets ¦ Adressbuch mat Reiter
+forme|Tour de contrôle ¦ Kontrolltuerm
+forme|Avion en vol ¦ Fliger am Fluch
+forme|Avion qui atterrit ¦ Fliger, dee landt
+forme|Avion qui décolle ¦ Fliger, deen ofhieft
+forme|Avion au sol ¦ Fliger um Buedem
+forme|Avion penché ¦ Schréie Fliger
+forme|Ancre simple ¦ Einfachen Anker
+forme|Angle ¦ Wénkel
+forme|boîte ¦ Këscht
+forme|Flèche en arc vers la gauche ¦ Bogefeil no lénks
+forme|Flèche en arc vers la droite ¦ Bogefeil no riets
+forme|Double flèche courbée ¦ Gebuedenen Duebelfeil
+forme|haut ¦ uewen
+forme|Flèche courbée ¦ Gebuedene Feil
+forme|bas ¦ ënnen
+forme|Flèche ronde vers le bas ¦ Ronne Feil no ënnen
+forme|Flèche ronde vers le bas à gauche ¦ Ronne Feil no ënne lénks
+forme|Flèche ronde vers le bas à droite ¦ Ronne Feil no ënne riets
+forme|Flèche ronde vers la gauche ¦ Ronne Feil no lénks
+forme|Flèche ronde vers la droite ¦ Ronne Feil no riets
+forme|Flèche ronde vers le haut ¦ Ronne Feil no uewen
+forme|Flèche ronde vers le haut à gauche ¦ Ronne Feil no uewe lénks
+forme|Flèche ronde vers le haut à droite ¦ Ronne Feil no uewe riets
+forme|Flèche tournante ¦ Dréiende Feil
+forme|sens des aiguilles ¦ Auerzeigersënn
+forme|sens inverse ¦ Géint den Auerzeigersënn
+forme|Flèche vers le bas ¦ Feil no ënnen
+forme|Flèche vers le bas à gauche ¦ Feil no ënne lénks
+forme|Flèche vers le bas à droite ¦ Feil no ënne riets
+forme|Flèche en équerre ¦ Wénkelfeil
+forme|Flèche en équerre vers la gauche ¦ Wénkelfeil no lénks
+forme|Flèche en équerre vers la droite ¦ Wénkelfeil no riets
+forme|Grosse flèche vers le bas ¦ Décke Feil no ënnen
+forme|Grosse flèche vers la gauche ¦ Décke Feil no lénks
+forme|Grosse flèche à un trait vers le bas ¦ Décke Feil mat engem Stréch no ënnen
+forme|Grosse flèche à un trait vers la gauche ¦ Décke Feil mat engem Stréch no lénks
+forme|Grosse flèche à un trait vers la droite ¦ Décke Feil mat engem Stréch no riets
+forme|Grosse flèche à un trait vers le haut ¦ Décke Feil mat engem Stréch no uewen
+forme|Grosse flèche à traits vers le bas ¦ Décke Feil mat Sträicher no ënnen
+forme|Grosse flèche à traits vers la gauche ¦ Décke Feil mat Sträicher no lénks
+forme|Grosse flèche à traits vers la droite ¦ Décke Feil mat Sträicher no riets
+forme|Grosse flèche à traits vers le haut ¦ Décke Feil mat Sträicher no uewen
+forme|Grosse flèche vers la droite ¦ Décke Feil no riets
+forme|Grosse flèche vers le haut ¦ Décke Feil no uewen
+forme|Flèche vers la gauche ¦ Feil no lénks
+forme|Flèche jusqu’au trait vers le bas ¦ Feil bis bei de Stréch no ënnen
+forme|Flèche jusqu’au trait vers le bas à gauche ¦ Feil bis bei de Stréch no ënne lénks
+forme|Flèche jusqu’au trait vers le bas à droite ¦ Feil bis bei de Stréch no ënne riets
+forme|Flèche jusqu’au trait vers la gauche ¦ Feil bis bei de Stréch no lénks
+forme|Flèche jusqu’au trait vers la droite ¦ Feil bis bei de Stréch no riets
+forme|Flèche jusqu’au trait vers le haut ¦ Feil bis bei de Stréch no uewen
+forme|Flèche jusqu’au trait vers le haut à gauche ¦ Feil bis bei de Stréch no uewe lénks
+forme|Flèche jusqu’au trait vers le haut à droite ¦ Feil bis bei de Stréch no uewe riets
+forme|Flèche vers la droite ¦ Feil no riets
+forme|Flèche carrée vers le bas ¦ Véiereckege Feil no ënnen
+forme|Flèche carrée vers le bas à gauche ¦ Véiereckege Feil no ënne lénks
+forme|Flèche carrée vers le bas à droite ¦ Véiereckege Feil no ënne riets
+forme|Flèche carrée vers la gauche ¦ Véiereckege Feil no lénks
+forme|Flèche carrée vers la droite ¦ Véiereckege Feil no riets
+forme|Flèche carrée vers le haut ¦ Véiereckege Feil no uewen
+forme|Flèche carrée vers le haut à gauche ¦ Véiereckege Feil no uewe lénks
+forme|Flèche carrée vers le haut à droite ¦ Véiereckege Feil no uewe riets
+forme|Flèche en U ¦ U-Feil
+forme|Flèche vers le haut ¦ Feil no uewen
+forme|Flèche vers le haut à gauche ¦ Feil no uewe lénks
+forme|Flèche vers le haut à droite ¦ Feil no uewe riets
+forme|Flèches tournantes ¦ Dréiend Feiler
+forme|Flèches haut et bas ¦ Feiler no uewen an no ënnen
+forme|Flèches gauche et droite ¦ Feiler no lénks an no riets
+forme|écartées ¦ auserneen
+forme|Flèches vers le centre ¦ Feiler an d'Mëtt
+forme|4 côtés ¦ 4 Säiten
+forme|Flèches vers un trait ¦ Feiler op e Stréch
+forme|debout ¦ stoend
+forme|couché ¦ leiend
+forme|Flèches qui se rejoignent ¦ Feiler, déi zesummekommen
+forme|Flèches vers l’extérieur ¦ Feiler no baussen
+forme|Flèches qui s’écartent d’un trait ¦ Feiler, déi sech vun engem Stréch ewechbeweegen
+forme|Flèches qui se séparent ¦ Feiler, déi sech trennen
+forme|Article ¦ Artikel
+forme|Article illustré ¦ Illustréierten Artikel
+forme|Bâton d’Asclépios ¦ Asklepiosstaf
+forme|Avocat ¦ Avocat
+forme|fruit ¦ Uebst
+forme|Sac simple ¦ Einfachen Tut
+forme|Ballon de baudruche ¦ Loftballon
+forme|Pansements ¦ Plooschteren
+forme|Code-barres ¦ Barcode
+forme|Barrière de chantier ¦ Chantiersbarrière
+forme|Casquette ¦ Kap
+forme|Casque de base-ball ¦ Baseballhelm
+forme|Pile chargée ¦ Geluede Batterie
+forme|Pile vide ¦ Eidel Batterie
+forme|Ballon de plage ¦ Plageball
+forme|Bonnet ¦ Mutz
+forme|Bouteille de bière ¦ Béierfläsch
+forme|Chope de bière ¦ Béierkrou
+forme|Clochette ¦ Klack
+forme|Clochette qui sonne ¦ Klack, déi schellt
+forme|Ceinture ¦ Rimm
+forme|Plan d’architecte ¦ Architektenplang
+forme|Livre avec marque-page ¦ Buch mat Buchzeechen
+forme|Livre ouvert écrit ¦ Oppent geschriwwent Buch
+forme|Livre de la personne ¦ Buch vun der Persoun
+forme|Marque-page simple ¦ Einfacht Buchzeechen
+forme|Marque-pages simples ¦ Einfach Buchzeechen
+forme|Botte ¦ Stiwwel
+forme|Boules ¦ Kugelen
+forme|pétanque ¦ Pétanque
+forme|Bol de nourriture ¦ Iessschossel
+forme|Bol fumant ¦ Dämpend Schossel
+forme|Boule de bowling ¦ Bowlingkugel
+forme|Verre de cognac ¦ Cognacsglas
+forme|Pain ¦ Brout
+forme|Mallette en métal ¦ Metallkoffer
+forme|Scarabée ¦ Kiewerlek
+forme|Immeuble d’appartements ¦ Appartementshaus
+forme|Bureaux ¦ Büroen
+forme|Immeubles ¦ Gebaier
+forme|Téléphérique ¦ Seelbunn
+forme|Calendrier coché ¦ Ugekräizte Kalenner
+forme|Calendrier avec un jour ¦ Kalenner mat engem Dag
+forme|Calendrier avec des jours ¦ Kalenner mat Deeg
+forme|Calendrier avec un cœur ¦ Kalenner mat engem Häerz
+forme|Calendrier avec une étoile ¦ Kalenner mat engem Stär
+forme|Calendrier barré ¦ Duerchgestrachene Kalenner
+forme|Sonnette de comptoir ¦ Theekeklack
+forme|Appareil photo plus ¦ Fotoapparat plus
+forme|Appareil photo tourner ¦ Fotoapparat dréinen
+forme|Appareil photo barré ¦ Duerchgestrachene Fotoapparat
+forme|Batterie de voiture ¦ Autosbatterie
+forme|Voiture simple ¦ Einfachen Auto
+forme|Porte-cartes ¦ Kaartenetui
+forme|Cartes ¦ Kaarten
+forme|Trois cartes ¦ Dräi Kaarten
+forme|Double chevron rond vers le bas ¦ Ronnen duebele Chevron no ënnen
+forme|Double chevron rond vers la gauche ¦ Ronnen duebele Chevron no lénks
+forme|Double chevron rond vers la droite ¦ Ronnen duebele Chevron no riets
+forme|Double chevron rond vers le haut ¦ Ronnen duebele Chevron no uewen
+forme|Chevron rond vers le bas ¦ Ronne Chevron no ënnen
+forme|Chevron rond vers la gauche ¦ Ronne Chevron no lénks
+forme|Chevron rond vers la droite ¦ Ronne Chevron no riets
+forme|Chevron rond vers le haut ¦ Ronne Chevron no uewen
+forme|Chevrons haut et bas ¦ Chevronen no uewen an no ënnen
+forme|Double chevron vers le bas ¦ Duebele Chevron no ënnen
+forme|Double chevron vers la gauche ¦ Duebele Chevron no lénks
+forme|Double chevron vers la droite ¦ Duebele Chevron no riets
+forme|Double chevron vers le haut ¦ Duebele Chevron no uewen
+forme|Chevron vers le bas ¦ Chevron no ënnen
+forme|Chevron vers la gauche ¦ Chevron no lénks
+forme|Chevron jusqu’au trait vers le bas ¦ Chevron bis bei de Stréch no ënnen
+forme|Chevron jusqu’au trait vers la gauche ¦ Chevron bis bei de Stréch no lénks
+forme|Chevron jusqu’au trait vers la droite ¦ Chevron bis bei de Stréch no riets
+forme|Chevron jusqu’au trait vers le haut ¦ Chevron bis bei de Stréch no uewen
+forme|Chevron vers la droite ¦ Chevron no riets
+forme|Chevron vers le haut ¦ Chevron no uewen
+forme|Caisse enregistreuse ¦ Keess
+forme|Cassette audio ¦ Audiokassett
+forme|Tour de château ¦ Schlosstuerm
+forme|Diplôme ¦ Diplom
+forme|Tableau noir ¦ Tafel
+forme|Tableau noir simple ¦ Einfach Tafel
+forme|Instituteur au tableau ¦ Schoulmeeschter un der Tafel
+forme|Champagne ¦ Schampes
+forme|Graphique en barres ¦ Balkendiagramm
+forme|Courbe ¦ Kurv
+forme|Bulle centrée ¦ Zentréiert Bubbel
+forme|points ¦ Punkten
+forme|texte ¦ Text
+forme|Bulle goutte ¦ Drëpsebubbel
+forme|Deux bulles ¦ Zwou Bubbelen
+forme|Coche ronde ¦ Ronnen Haken
+forme|Grosse coche ¦ Décken Haken
+forme|Case cochée débordante ¦ Ugekräizt Këscht, déi iwwerleeft
+forme|Trinquer ¦ Ustoussen
+forme|Toque de cuisinier ¦ Kachmutz
+forme|Cercle en pointillés ¦ Gepunkte Krees
+forme|Demi-cercle plein ¦ Voll Hallefkrees
+forme|Demi-cercle penché ¦ Schréien Hallefkrees
+forme|Cercle ouvert ¦ Oppene Krees
+forme|Quatre cercles ¦ Véier Kreeser
+forme|Trois cercles ¦ Dräi Kreeser
+forme|Trois cercles et un plus ¦ Dräi Kreeser an e Plus
+forme|Porte-bloc ¦ Klemmbriet
+forme|Porte-bloc écrit ¦ Beschriwwent Klemmbriet
+forme|après-midi ¦ Nomëtteg
+forme|Horloge en avant ¦ Auer no vir
+forme|Compte à rebours ¦ Countdown
+forme|Horloge en arrière ¦ Auer no hannen
+forme|Heure de la personne ¦ Auerzäit vun der Persoun
+forme|Nuage flèche en bas ¦ Wollek mat Feil no ënnen
+forme|Nuage flèche en haut ¦ Wollek mat Feil no uewen
+forme|Nuage coché ¦ Ugekräizt Wollek
+forme|Éclaircie ¦ Opklärung
+forme|Nuage attention ¦ Wollek mat Opgepasst
+forme|Nuage barré ¦ Duerchgestrachen Wollek
+forme|Trèfle à quatre feuilles ¦ Véierbliederegt Kléi
+forme|Grain de café ¦ Kaffisbonn
+forme|Pièce de monnaie ¦ Mënz
+forme|tranche ¦ Rand
+forme|Pièces de monnaie ¦ Mënzen
+forme|Confettis ¦ Konfetti
+forme|Terrain de basket ¦ Basketballterrain
+forme|Chapeau de cow-boy ¦ Cowboyhutt
+forme|oiseau ¦ Vugel
+forme|Grue de chantier ¦ Chantierskran
+forme|Viseur simple ¦ Einfachen Zilvisier
+forme|Couronne à la croix ¦ Kroun mam Kräiz
+forme|Couronne simple ¦ Einfach Kroun
+forme|meuble ¦ Miwwel
+forme|Ordinateur ¦ Computer
+forme|Tablette ¦ Tablet
+forme|Quatre losanges ¦ Véier Rauten
+forme|Robe ¦ Kleed
+forme|Goutte à moitié ¦ Hallwen Drëps
+forme|Goutte simple ¦ Einfachen Drëps
+forme|Œuf fêlé ¦ Gesprongent Ee
+forme|Enveloppe ouverte ¦ Oppen Enveloppe
+forme|Enveloppe simple ¦ Einfach Enveloppe
+forme|Enveloppe simple ouverte ¦ Einfach oppen Enveloppe
+forme|Escalier roulant ¦ Rolltrap
+forme|descente ¦ Ofstig
+forme|montée ¦ Opstig
+forme|Examen ¦ Examen
+forme|Deux yeux ¦ Zwee Aen
+forme|Masque de soin ¦ Fleegmask
+forme|Ferme ¦ Bauerenhaff
+forme|Fichier ¦ Fichier
+forme|Fichier d’archives ¦ Archivfichier
+forme|Fichier son ¦ Tounfichier
+forme|Fichier image ¦ Bildfichier
+forme|Chercher dans un document ¦ An engem Dokument sichen
+forme|Fichier PDF ¦ PDF-Fichier
+forme|Document écrit ¦ Geschriwwent Dokument
+forme|Fichier vidéo ¦ Videofichier
+forme|Fichier compressé ¦ Kompriméierte Fichier
+forme|Fichiers ¦ Fichieren
+forme|Scénario ¦ Dréibuch
+forme|Empreinte digitale simple ¦ Einfache Fangerofdrock
+forme|Flamme ¦ Flam
+forme|Croix de secours ¦ Rettungskräiz
+forme|Trousse de secours ¦ Éischt-Hëllef-Këscht
+forme|Poisson simple ¦ Einfache Fësch
+forme|Fanion plié ¦ Gefalte Wimpel
+forme|drapeau ¦ Fändel
+forme|Flamme vive ¦ Lieweg Flam
+forme|Lampe de poche ¦ Täscheluucht
+forme|dos ¦ Réck
+forme|Flèche de parcours ¦ Wee-Feil
+forme|Lotus ¦ Lotus
+forme|Dossier simple ¦ Einfachen Dossier
+forme|Dossier de la personne ¦ Dossier vun der Persoun
+forme|Dossier à l’étoile ¦ Dossier mam Stär
+forme|Dossier personnel ¦ Perséinlechen Dossier
+forme|Fourchette et couteau ¦ Forschett a Messer
+forme|Coins de cadre ¦ Rummecken
+forme|Bidon d’essence ¦ Benzinsbidon
+forme|Pompe à essence ¦ Bensinspompel
+forme|Jauge ¦ Manometer
+forme|Engrenage fin ¦ Dënnt Zännrad
+forme|Engrenage à six dents ¦ Zännrad mat sechs Zänn
+forme|Symbole femme ¦ Symbol Fra
+forme|Symbole intersexe ¦ Symbol intersex
+forme|Symbole homme ¦ Symbol Mann
+forme|Symbole neutre ¦ Neutraalt Symbol
+forme|Symbole transgenre ¦ Symbol transgender
+forme|Europe ¦ Europa
+forme|Afrique ¦ Afrika
+forme|Amériques ¦ Amerikaen
+forme|Globe simple ¦ Einfache Globus
+forme|Globe terrestre sur pied ¦ Globus op engem Fouss
+forme|Lunettes de natation ¦ Schwammbrëll
+forme|Toque de diplômé ¦ Diplomshutt
+forme|Épis de blé ¦ Weessären
+forme|Réseau de points ¦ Punktnetz
+forme|Grille de quatre ¦ Véierergitter
+forme|Grille de neuf ¦ Néngergitter
+forme|Main et pièces ¦ Hand a Mënzen
+forme|Main et œil ¦ Hand an A
+forme|Poing ¦ Fauscht
+forme|Main qui attrape ¦ Hand, déi gräift
+forme|Paume ¦ Handfläch
+forme|Signe de paix ¦ Friddenszeechen
+forme|Main qui montre ¦ Hand, déi weist
+forme|Savon liquide ¦ Flësseg Seef
+forme|Sac à main simple ¦ Einfach Handtäsch
+forme|Phares ¦ Luuchten
+forme|Casque micro ¦ Headset
+forme|Cœur droit ¦ Riicht Häerz
+forme|Cœur droit brisé ¦ Riicht gebrachent Häerz
+forme|Surligneur ¦ Textmarker
+forme|Hockey ¦ Hockey
+forme|Sweat à capuche ¦ Hoodie
+forme|début ¦ Ufank
+forme|fin ¦ Enn
+forme|milieu ¦ Mëtt
+forme|Sablier simple ¦ Einfach Sanduer
+forme|Maison au trait ¦ Haus am Stréch
+forme|Maison simple ¦ Einfacht Haus
+forme|Badge ¦ Badge
+forme|Image ¦ Bild
+forme|Images ¦ Biller
+forme|Facture ¦ Rechnung
+forme|Bocal ¦ Bokal
+forme|Bocal étiqueté ¦ Bokal mat Etikett
+forme|Jeep ¦ Jeep
+forme|Clavier ¦ Tastatur
+forme|Trou de serrure ¦ Schlësselach
+forme|Échelle simple ¦ Einfach Leeder
+forme|Suspension ¦ Hängeluucht
+forme|Ordinateur portable ¦ Laptop
+forme|Bouée ¦ Rettungsrank
+forme|Ampoule à filament ¦ Glousbier mat Fueden
+forme|Liste ¦ Lëscht
+forme|Liste de favoris ¦ Favoritteläscht
+forme|Cadenas fermé ¦ Zouent Hängeschlass
+forme|Cadenas à clé ¦ Hängeschlass mat Schlëssel
+forme|Casiers ¦ Schléissfächer
+forme|Aimant droit ¦ Riichte Magnéit
+forme|Repère sur la carte ¦ Markéierung op der Kaart
+forme|Repère et zone ¦ Markéierung an Zone
+forme|Repère au sol ¦ Markéierung um Buedem
+forme|Carte dépliée ¦ Opgefaalt Kaart
+forme|Masque joyeux ¦ Lëschteg Mask
+forme|Masque triste ¦ Traureg Mask
+forme|Médaille militaire ¦ Militärmedail
+forme|Porte-voix ¦ Megaphon
+forme|Porte-voix simple ¦ Einfache Megaphon
+forme|Météore ¦ Meteor
+forme|Micro ¦ Mikro
+forme|Micro de scène ¦ Bühnemikro
+forme|Moins carré ¦ Véiereckege Minus
+forme|Billet ondulé ¦ Gewellte Geldschäin
+forme|Écran ¦ Ecran
+forme|Lune et étoiles ¦ Mound a Stären
+forme|Mobylette ¦ Mobylette
+forme|de face ¦ vu vir
+forme|Souris ¦ Maus
+forme|ordinateur ¦ Computer
+forme|Note simple ¦ Einfach Not
+forme|Notes de musique ¦ Musekssnoten
+forme|Notes moins ¦ Noten minus
+forme|Notes plus ¦ Noten plus
+forme|Notes simples ¦ Einfach Noten
+forme|Flèche de navigation ¦ Navigatiounsfeil
+forme|Aiguille à coudre ¦ Nitnol
+forme|Coupure de presse ¦ Zeitungsausschnëtt
+forme|Note ¦ Notiz
+forme|Note vierge ¦ Eidel Notiz
+forme|Note et crayon ¦ Notiz a Bläistëft
+forme|Bloc-notes ¦ Notizblock
+forme|Fauteuil de bureau ¦ Bürosstull
+forme|Onigiri ¦ Onigiri
+forme|Orange ¦ Orange
+forme|Tranche d’orange ¦ Orangeschnëtz
+forme|Four ¦ Uewen
+forme|Brosse de peintre ¦ Molerpinsel
+forme|Palette ¦ Palette
+forme|Pantalon ¦ Box
+forme|Avion en papier ¦ Pabeierfliger
+forme|Avion en papier penché ¦ Schréie Pabeierfliger
+forme|Trombone couché ¦ Leiend Bürokllamer
+forme|Pied-de-mouche ¦ Alineazeechen
+forme|Parc ¦ Park
+forme|Chemin ¦ Wee
+forme|Empreinte de patte ¦ Patteofdrock
+forme|Symbole de paix ¦ Friddenssymbol
+forme|Plume de stylo ¦ Fieder vun enger Fëllfieder
+forme|Crayon simple ¦ Einfache Bläistëft
+forme|Poivron ¦ Paprika
+forme|Personne bras ouverts ¦ Persoun mat oppenen Äerm
+forme|Personne simple ¦ Einfach Persoun
+forme|Personne dans un rond ¦ Persoun an engem Krees
+forme|Surfeur des neiges ¦ Snowboarder
+forme|Tai-chi ¦ Tai-Chi
+forme|Lanceur ¦ Werfer
+forme|Téléphone qui sonne ¦ Telefon, deen schellt
+forme|Clavier de piano ¦ Pianostastatur
+forme|Table de pique-nique ¦ Picknickdësch
+forme|Verre à bière ¦ Béierglas
+forme|Pipe ¦ Päif
+forme|Planète ¦ Planéit
+forme|Lecture-pause ¦ Ofspillen-Paus
+forme|Liste de lecture ¦ Playlist
+forme|Prise électrique ¦ Steckdous
+forme|Fiches électriques ¦ Stecker
+forme|Plus carré ¦ Véiereckege Plus
+forme|Jeton de jeu ¦ Spilljeton
+forme|Voiture de police ¦ Policeauto
+forme|Polygone ¦ Polygon
+forme|Plante en pot ¦ Planz am Dëppen
+forme|Marche-arrêt ¦ Un-Aus
+forme|Tableau de présentation ¦ Presentatiounstafel
+forme|Punaise simple ¦ Einfacht Pinnchen
+forme|Pièce de puzzle ¦ Puzzlestéck
+forme|Guillemets ¦ Gänseféisercher
+forme|Raquette ¦ Rakett
+forme|Poste de radio ¦ Radio
+forme|Arc-en-ciel et nuage ¦ Reebou a Wollek
+forme|Enregistrer ¦ Späicheren
+forme|Rectangle en pointillés ¦ Gepunktent Rechteck
+forme|Fusée au décollage ¦ Rakéit beim Start
+forme|Sceau dentelé ¦ Gezackt Sigel
+forme|Siège ¦ Sëtz
+forme|grosse flèche ¦ décke Feil
+forme|Écu simple ¦ Einfacht Schëld
+forme|Écu coché ¦ Ugekräizt Schëld
+forme|Écu écartelé ¦ Gevéiert Schëld
+forme|Écu au chevron ¦ Schëld mat Sparren
+forme|Écu à la croix ¦ Schëld mam Kräiz
+forme|Écu à la barre ¦ Schëld mam Lénksschréibalken
+forme|Écu à l’étoile ¦ Schëld mam Stär
+forme|Écu au point d’exclamation ¦ Schëld mam Ausruffzeechen
+forme|Conteneur ¦ Container
+forme|Chemise pliée ¦ Gefalt Hiem
+forme|Sac de courses ouvert ¦ Oppenen Akafstut
+forme|Chariot simple ¦ Einfache Weenchen
+forme|Crevette ¦ Gaarnel
+forme|Sigma ¦ Sigma
+forme|Panneau indicateur ¦ Wegweiser
+forme|Gyrophare ¦ Blo Luucht
+forme|Diaporama ¦ Diashow
+forme|Visage en colère ¦ Rosent Gesiicht
+forme|Visage sans expression ¦ Gesiicht ouni Ausdrock
+forme|Visage blasé ¦ Blaséiert Gesiicht
+forme|Visage qui fond ¦ Gesiicht, dat schmëlzt
+forme|Visage nerveux ¦ Nervöst Gesiicht
+forme|Visage triste ¦ Trauregt Gesiicht
+forme|Visage KO ¦ K.-o.-Gesiicht
+forme|chaussure ¦ Schong
+forme|Basket en marche ¦ Turnschong am Lafen
+forme|Flocon de neige ¦ Schnéiflack
+forme|Ballon de foot ¦ Fussball
+forme|Chaussette ¦ Strëmp
+forme|Étincelle ¦ Fonk
+forme|Haut-parleur ¦ Lautsprecher
+forme|Spirale ¦ Spiral
+forme|Carré à moitié ¦ Hallef Quadrat
+forme|Quatre carrés ¦ Véier Quadrater
+forme|Étoile à quatre branches ¦ Stär mat véier Spëtzten
+forme|Marches ¦ Trapen
+forme|carré ¦ Quadrat
+forme|Stratégie ¦ Strategie
+forme|Élève ¦ Schüler
+forme|Valise à roulettes ¦ Rollkoffer
+forme|Valise simple ¦ Einfache Koffer
+forme|Soleil voilé ¦ Verschleiert Sonn
+forme|Lever de soleil ¦ Sonnenopgang
+forme|Seringue ¦ Sprëtz
+forme|Tee-shirt ¦ T-Shirt
+forme|grille ¦ Gitter
+forme|Étiquette en chevron ¦ Etikett als Chevron
+forme|Étiquette simple ¦ Einfach Etikett
+forme|Sachet de thé ¦ Téibeidelchen
+forme|Thermomètre froid ¦ Kale Thermometer
+forme|Thermomètre chaud ¦ Waarmen Thermometer
+forme|Thermomètre simple ¦ Einfachen Thermometer
+forme|Pouce en bas ¦ Daum no ënnen
+forme|Pouce en haut ¦ Daum no uewen
+forme|Billet d’entrée ¦ Entréesbillet
+forme|Chronomètre ¦ Stoppuer
+forme|Pot à pourboires ¦ Dréngelddëppen
+forme|Tipi ¦ Tipi
+forme|Cabas ¦ Akafstäsch
+forme|Cabas simple ¦ Einfach Akafstäsch
+forme|Serviette ¦ Handduch
+forme|Cône de chantier ¦ Chantierskegel
+forme|Panneau routier ¦ Verkéiersschëld
+forme|Train régional ¦ Regionalzuch
+forme|Train simple ¦ Einfachen Zuch
+forme|Traduire ¦ Iwwersetzen
+forme|Poubelle simple ¦ Einfach Dreckskëscht
+forme|Plateau ¦ Tablett
+forme|Courbe qui baisse ¦ Kurv, déi erofgeet
+forme|Courbe qui monte ¦ Kurv, déi eropgeet
+forme|Triangle en pointillés ¦ Gepunktent Dräieck
+forme|chariot ¦ Weenchen
+forme|Chariot à bagages ¦ Gepäckweenchen
+forme|Parapluie simple ¦ Einfache Prabbeli
+forme|buste ¦ Buste
+forme|Personne vérifiée ¦ Verifizéiert Persoun
+forme|Personne moins ¦ Persoun minus
+forme|Personne plus ¦ Persoun plus
+forme|Liste de personnes ¦ Lëscht vu Persounen
+forme|Personne dans un carré ¦ Persoun an engem Quadrat
+forme|Quatre personnes ¦ Véier Persounen
+forme|Trois personnes ¦ Dräi Persounen
+forme|Vidéo ¦ Video
+forme|Caméra ¦ Kamera
+forme|Disque vinyle ¦ Vinylplack
+forme|Mur de briques ¦ Bréckemauer
+forme|triangle ¦ Dräieck
+forme|losange ¦ Raut
+forme|octogone ¦ Aachteck
+forme|Onde ¦ Well
+forme|Son ¦ Toun
+forme|onde ¦ Well
+forme|Fauteuil roulant en mouvement ¦ Rollstull a Beweegung
+forme|Wi-Fi ¦ WLAN
+forme|Clé plate ¦ Gabelschlëssel
+forme|Pelote de laine ¦ Woll-Kniwwel
+forme|seule ¦ eleng
+forme|seul ¦ eleng
+forme|Lettre {x} minuscule ¦ Klenge Buschtaf {x}
+forme|Point ¦ Punkt
+forme|Virgule ¦ Komma
+forme|Point-virgule ¦ Semikolon
+forme|Deux-points ¦ Doppelpunkt
+forme|Point d’exclamation renversé ¦ Ëmgedréint Ausruffzeechen
+forme|Point d’interrogation renversé ¦ Ëmgedréint Frozeechen
+forme|Apostrophe ¦ Apostroph
+forme|Guillemet droit ¦ Riicht Gänseféisschen
+forme|Guillemet ouvrant ¦ Opmaachend Gänseféisschen
+forme|Parenthèse ouvrante ¦ Opmaachend Klamer
+forme|Parenthèse fermante ¦ Zoumaachend Klamer
+forme|Crochet ouvrant ¦ Opmaachend eckeg Klamer
+forme|Crochet fermant ¦ Zoumaachend eckeg Klamer
+forme|Trait d’union ¦ Bindestréch
+forme|Tiret ¦ Gedankestréch
+forme|et ¦ an
+forme|numéro ¦ Nummer
+forme|Pour cent ¦ Prozent
+forme|naissance ¦ Gebuert
+forme|Barre oblique ¦ Schréistréch
+forme|Paragraphe ¦ Paragraph
+forme|Degré ¦ Grad
+forme|naissance ° ¦ Gebuert °
+forme|décès † ¦ Doud †
+forme|Double croix ¦ Duebelkräiz
+forme|Numéro ¦ Nummer
+forme|Nombre {x} ¦ Zuel {x}
+forme|Signe de naissance ¦ Gebuertszeechen
+forme|Étoile de naissance ¦ Gebuertsstär
+forme|Croix de décès ¦ Doudeskräiz
+forme|Signe du mariage ¦ Zeeche vum Bestietnes
+forme|Signe du divorce ¦ Zeeche vun der Scheedung
+forme|Union libre ¦ Fräi Unioun
+forme|mariage ¦ Bestietnes
+forme|inhumation ¦ Begriefnes
+forme|Urne ¦ Urn
+forme|crémation ¦ Krematioun
+forme|mort au combat ¦ am Kampf gefall
+forme|Fleuron ¦ Fleuron
+forme|vers la gauche ¦ no lénks
+forme|Feuille de vigne ¦ Wäibliet
+forme|ornement ¦ Ornament
+forme|Croix ombrée ¦ Schattéiert Kräiz
+forme|Croix à contour ¦ Kräiz mat Kontur
+forme|Chrisme ¦ Christusmonogramm
+forme|Croix de Jérusalem ¦ Jerusalemer Kräiz
+forme|Ankh ¦ Ankh
+forme|croix ansée ¦ Henkelkräiz
+forme|Symbole de Farsi ¦ Farsi-Symbol
+forme|Croix pattée à contour ¦ Tatzekräiz mat Kontur
+forme|Croix grecque épaisse ¦ Déckt griichescht Kräiz
+forme|Croix à centre ouvert ¦ Kräiz mat oppener Mëtt
+forme|Croix à centre rond ¦ Kräiz mat ronner Mëtt
+forme|Reine ¦ Kinnigin
+forme|Marteau et pic ¦ Hummer a Pickel
+forme|justice ¦ Justiz
+forme|Bâton d’Esculape ¦ Äskulapstaf
+forme|Alambic ¦ Destillierkolben
+forme|Roue dentée ¦ Zännrad
+forme|Caducée d’Hermès ¦ Hermesstaf
+forme|Caducée ¦ Caduceus
+forme|Main qui écrit ¦ Hand, déi schreift
+forme|note ¦ Not
+forme|Deux croches ¦ Zwou Aachtelsnoten
+forme|Doubles croches ¦ Siechzéngtelsnoten
+forme|Dé un ¦ Wierfel eent
+forme|Dé deux ¦ Wierfel zwee
+forme|Dé trois ¦ Wierfel dräi
+forme|Dé quatre ¦ Wierfel véier
+forme|Dé cinq ¦ Wierfel fënnef
+forme|Dé six ¦ Wierfel sechs
+forme|Comète ¦ Koméit
+forme|Soleil à rayons ¦ Sonn mat Strielen
+forme|Flocon ciselé ¦ Ziseléierte Schneeflack
+forme|Flocon épais ¦ Décke Schneeflack
+forme|Trèfle irlandais ¦ Iresche Kléi
+forme|Fleur à cinq pétales ¦ Blumm mat fënnef Bliederen
+forme|Fleur ornée ¦ Verzéiert Blumm
+forme|Fleur étoilée ¦ Stärblumm
+forme|Fleur à six pétales ¦ Blumm mat sechs Bliederen
+forme|Fleur en goutte ¦ Dreckelblumm
+forme|Étoile pleine ¦ Voll Stär
+forme|Étoile vide ¦ Eidele Stär
+forme|Étoile à quatre pointes ¦ Stär mat véier Spëtzten
+forme|Étoile à contour ¦ Stär mat Kontur
+forme|Étoile dans un rond ¦ Stär an engem Krees
+forme|Étoile à centre ouvert ¦ Stär mat oppenem Zentrum
+forme|Étoile à centre noir ¦ Stär mat schwaarzem Zentrum
+forme|Étoile ombrée ¦ Schaterte Stär
+forme|Étoile en hélice ¦ Propellerstär
+forme|Étoile en relief ¦ Stär am Relief
+forme|Astérisque épais ¦ Déckt Stärchen
+forme|Astérisque à centre ouvert ¦ Stärchen mat oppenem Zentrum
+forme|Astérisque à huit branches ¦ Stärchen mat aacht Strielen
+forme|Étoile à huit branches ¦ Stär mat aacht Spëtzten
+forme|Étoile tourbillon ¦ Wierbelstär
+forme|Étoile à six branches ¦ Stär mat sechs Spëtzten
+forme|Étoile à huit branches fine ¦ Dënnen Stär mat aacht Spëtzten
+forme|Étoile à huit branches épaisse ¦ Décke Stär mat aacht Spëtzten
+forme|Étoile à douze branches ¦ Stär mat zwielef Spëtzten
+forme|Étoile à seize branches ¦ Stär mat siechzéng Spëtzten
+forme|Astérisque en gouttes ¦ Stärchen aus Drëpsen
+forme|Soleil rond ¦ Ronn Sonn
+forme|Trois astérisques ¦ Dräi Stärercher
+forme|Main qui montre à droite ¦ Hand, déi no riets weist
+forme|Main qui montre à gauche ¦ Hand, déi no lénks weist
+forme|Main qui montre en haut ¦ Hand, déi no uewe weist
+forme|Main qui montre en bas ¦ Hand, déi no ënne weist
+forme|deux doigts ¦ zwee Fangeren
+forme|Sourire ¦ Laachen
+forme|Sourire plein ¦ Vollt Laachen
+forme|Tristesse ¦ Trauregkeet
+forme|Cœur penché ¦ Schréit Häerz
+forme|Haute tension ¦ Héichspannung
+forme|Tasse fumante ¦ Dampend Taass
+forme|Source chaude ¦ Waarm Quell
+forme|Coche fine ¦ Dënnen Haken
+forme|Croix tracée ¦ Gezeechent Kräiz
+forme|Croix tracée épaisse ¦ Déckt gezeechent Kräiz
+forme|Losange à quatre pointes ¦ Raut mat véier Spëtzten
+forme|Marque de référence ¦ Referenzzeechen
+forme|Marque ¦ Zeechen
+forme|Plus dans un rond ¦ Plus an engem Krees
+forme|Croix dans un rond ¦ Kräiz an engem Krees
+forme|Point dans un rond ¦ Punkt an engem Krees
+forme|Rond dans un rond ¦ Krees an engem Krees
+forme|Rond à moitié ¦ Hallwe Krees
+forme|Rond au quart ¦ Véierelskrees
+forme|Rond aux trois quarts ¦ Dräivéierelskrees
+forme|astronomie ¦ Astronomie
+forme|Premier croissant ¦ Zouhuelende Mound
+forme|Dernier croissant ¦ Ofhuelende Mound
+forme|Jupiter ¦ Jupiter
+forme|Saturne ¦ Saturn
+forme|Mercure ¦ Merkur
+forme|Écu français ¦ Franséischt Schëld
+forme|Écu ancien ¦ Aalt Schëld
+forme|Écu espagnol ¦ Spuenescht Schëld
+forme|Écu en losange ¦ Rautschëld
+forme|dames ¦ Damen
+forme|Écu ovale ¦ Ovaalt Schëld
+forme|ecclésiastique ¦ kierchlech
+forme|Écu rond ¦ Ronnt Schëld
+forme|Bannière carrée ¦ Véiereckege Banner
+forme|coupé en deux debout ¦ gespalen, an zwee opriicht
+forme|Écu coupé ¦ Gedeelt Schëld
+forme|en deux couché ¦ an zwee, quer
+forme|Écu tranché ¦ Schréigrechts gedeelt Schëld
+forme|en diagonale ¦ diagonal
+forme|Écu taillé ¦ Schréieglénks gedeelt Schëld
+forme|en quatre ¦ a véier
+forme|Écu écartelé en sautoir ¦ Schräggevéierte Schëld
+forme|Écu tiercé en pal ¦ An dräi gespalen Schëld
+forme|trois bandes debout ¦ dräi opriicht Sträifen
+forme|Écu tiercé en fasce ¦ An dräi gedeelt Schëld
+forme|trois bandes couchées ¦ dräi quer Sträifen
+forme|Écu chef ¦ Schëld mat Schildhaapt
+forme|bande en haut ¦ Sträif uewen
+forme|Écu champagne ¦ Schëld mat Schildfouss
+forme|bande en bas ¦ Sträif ënnen
+forme|Écu fasce ¦ Schëld mat Balken
+forme|Écu pal ¦ Schëld mat Paul
+forme|Écu bande ¦ Schëld mat Schréigbalken
+forme|Écu barre ¦ Schëld mat Schréieglénksbalken
+forme|Écu croix ¦ Schëld mat Kräiz
+forme|Écu sautoir ¦ Schëld mat Schréigkräiz
+forme|croix de Saint-André ¦ Andreaskräiz
+forme|Écu chevron ¦ Schëld mat Sparren
+forme|Écu franc-quartier ¦ Schëld mat Fräivéierel
+forme|carré en haut à gauche ¦ Véiereck uewe lénks
+forme|Écu pairle ¦ Schëld mat Gabelkräiz
+forme|en Y ¦ a Form vun engem Y
+forme|Écu burelé ¦ Schëld mat Balken (burelé)
+forme|bandes couchées ¦ quer Sträifen
+forme|Écu palé ¦ Gespaalt Schëld (palé)
+forme|bandes debout ¦ opriicht Sträifen
+forme|Écu échiqueté ¦ Geschacht Schëld
+forme|damier ¦ Dammbriet
+forme|Écu losange ¦ Schëld mat Raut
+forme|en cœur ¦ an der Mëtt
+forme|Écu bordure ¦ Schëld mat Bord
+forme|Couronne de comte ¦ Grofekroun
+forme|perles ¦ Pärelen
+forme|Couronne murale ¦ Mauerkroun
+forme|ville ¦ Stad
+forme|Heaume ¦ Helm
+forme|Lambrequins ¦ Helmdecken
+forme|manteau ¦ Mantel
+forme|Listel ¦ Spruchband
+forme|devise ¦ Devise
+forme|Cadre double ¦ Duebele Rumm
+forme|Cadre épais ¦ Décke Rumm
+forme|Cadre arrondi double ¦ Duebele ronnen Eckrumm
+forme|Médaillon double ¦ Duebel Medaillon
+forme|Cadre rond ¦ Ronne Rumm
+forme|Cadre rond double ¦ Duebele ronne Rumm
+forme|Cadre octogonal ¦ Aachteckege Rumm
+forme|Cadre hexagonal ¦ Sechseckege Rumm
+forme|Cadre en losange ¦ Rautrumm
+forme|Cadre en arche ¦ Bogerumm
+forme|Cadre en ogive ¦ Spëtzbogerumm
+forme|Cartouche à coins rentrants ¦ Kartusch mat ageréckten Ecken
+forme|Cadre à coins coupés ¦ Rumm mat ofgeschniddenen Ecken
+forme|Cadre ticket ¦ Ticketrumm
+forme|Cadre en cœur ¦ Häerzrumm
+forme|Cadre en écu ¦ Schëldrumm
+forme|Cadre festonné ¦ Gewellte Rumm
+forme|Cadre timbre-poste ¦ Timberrumm
+forme|Cadre perlé ¦ Pärelrumm
+forme|Cadre en étoile ¦ Stärerumm
+forme|Cadre sceau dentelé ¦ Gezackte Sigelrumm
+forme|Cadre rosace ¦ Rosetterumm
+forme|Quatre coins ¦ Véier Ecken
+forme|Coins de photo ¦ Fotoecken
+forme|Coins arrondis ornés ¦ Verzéiert ronn Ecken
+forme|Filet ¦ Linn
+forme|Double filet ¦ Duebel Linn
+forme|Ligne de points ¦ Punktlinn
+forme|Frise en vagues ¦ Wellefries
+forme|Frise en zigzag ¦ Zickzackfries
+forme|Frise grecque ¦ Griichesch Fries
+forme|Séparateur orné ¦ Verzéierten Trenner
+forme|Étiquette à trou ¦ Etikett mat Lach
+forme|Étiquette arrondie ¦ Ronnen Etikett
+forme|Étiquette rectangle ¦ Rechteckegen Etikett
+forme|Étiquette à encoches ¦ Etikett mat Kerbelen
+forme|Étiquette flèche ¦ Feiletikett
+forme|Étiquette flèche gauche ¦ Feiletikett no lénks
+forme|Ruban à bouts pliés ¦ Bändchen mat gefalten Enner
+forme|Ruban courbé ¦ Gebuchent Bändchen
+forme|Signet ¦ Lieszeechen
+forme|Fanion triangulaire ¦ Dräieckege Wimpel
+forme|Étiquette ovale ¦ Ovalen Etikett
+forme|Étiquette ovale à bord ¦ Ovalen Etikett mat Rand
+forme|Étiquette à bord ¦ Etikett mat Rand
+forme|Étiquette de prix ¦ Präisetikett
+forme|Pastille festonnée ¦ Gewellte Badge
+forme|Pastille « nouveau » ¦ Badge „nei“
+forme|Rosette à rubans ¦ Rosette mat Bännercher
+forme|Étiquette suspendue ¦ Hängenden Etikett
+forme|Onglet ¦ Reiter
+forme|Cartouche ¦ Kartusch
+forme|Cartouche à bord ¦ Kartusch mat Rand
+forme|Gommette ¦ Pechbild
+forme|Flamme verticale ¦ Vertikale Wimpel
+forme|Étiquette double ¦ Duebelen Etikett
+forme|Drapeau uni ¦ Eefaarwege Fändel
+forme|à colorier ¦ zum Ausmolen
+forme|Drapeau à trois bandes debout ¦ Fändel mat dräi opriichte Sträifen
+forme|Drapeau à bande centrale debout ¦ Fändel mat opriichtem Mëttelsträif
+forme|Drapeau à trois bandes couchées ¦ Fändel mat dräi quere Sträifen
+forme|Drapeau à bande centrale couchée ¦ Fändel mat querem Mëttelsträif
+forme|Drapeau à deux bandes couchées ¦ Fändel mat zwee quere Sträifen
+forme|Drapeau à deux bandes debout ¦ Fändel mat zwee opriichte Sträifen
+forme|Drapeau à croix scandinave ¦ Fändel mat skandinaveschem Kräiz
+forme|Drapeau à croix centrée ¦ Fändel mat zentréiertem Kräiz
+forme|Drapeau à croix droite ¦ Fändel mat graddem Kräiz
+forme|Drapeau à croix en X ¦ Fändel mat Schréigkräiz
+forme|Drapeau à disque ¦ Fändel mat Scheif
+forme|Drapeau au croissant et à l’étoile ¦ Fändel mat Hallefmound a Stär
+forme|Drapeau à l’étoile ¦ Fändel mat Stär
+forme|Drapeau étoilé à rayures ¦ Fändel mat Stären a Sträifen
+forme|Drapeau au triangle ¦ Fändel mat Dräieck
+forme|Drapeau en diagonale ¦ Diagonale Fändel
+forme|Drapeau à canton ¦ Fändel mat Gëschtel
+forme|Drapeau à croix doubles ¦ Fändel mat duebele Kräizer
+forme|Drapeau à bandes et canton ¦ Fändel mat Sträifen a Gëschtel
+forme|Drapeau à queue d’aronde ¦ Fändel mat Schwalbeschwanz
+forme|Drapeau flottant ¦ Fladdernde Fändel
+forme|Drapeau sur mât ¦ Fändel um Mast
+forme|Drapeau tricolore sur mât ¦ Dräifaarwege Fändel um Mast
+forme|Lien parent → un enfant ¦ Link Elteren → ee Kand
+forme|Lien parent → {x} enfants ¦ Link Elteren → {x} Kanner
+forme|Lien de couple ¦ Link vum Koppel
+forme|Couple et enfants ¦ Koppel a Kanner
+forme|Accolade ¦ Geschweeft Klammer
+forme|vers la droite ¦ no riets
+forme|vers le bas ¦ no ënnen
+forme|Branches d’ascendance ¦ Zweiger vun de Virfahren
+forme|Case de personne ¦ Feld fir eng Persoun
+forme|Médaillon de personne ¦ Medaillon fir eng Persoun
+forme|Éventail généalogique ¦ Genealogesche Fächer
+forme|Deux alliances entrelacées ¦ Zwee verschlongen Trauréng
+forme|Arbre et racines ¦ Bam a Wuerzelen
