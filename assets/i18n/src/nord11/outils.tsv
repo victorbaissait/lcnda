@@ -1,0 +1,980 @@
+fr ¦ vi ¦ id
+Génération {g} ¦ Thế hệ {g} ¦ Generasi {g}
+★ ancêtre commun ¦ ★ tổ tiên chung ¦ ★ leluhur bersama
+Comment sont-ils parents ? ¦ Họ có quan hệ họ hàng thế nào? ¦ Bagaimana mereka bersaudara?
+cousins issus de germains aussi par {name} (implexe) ¦ anh chị em họ bậc hai cũng qua {name} (trùng lặp tổ tiên) ¦ sepupu dua kali juga melalui {name} (implex)
+⚠ Lieux sans position : {list} — écris « Nom 48.11, -1.68 » ¦ ⚠ Địa điểm chưa có vị trí: {list} — hãy viết “Tên 48.11, -1.68” ¦ ⚠ Tempat tanpa posisi: {list} — tulis “Nama 48.11, -1.68”
+De la génération {a} à la génération {b}, le centre de la famille s’est déplacé de {km} km. ¦ Từ thế hệ {a} đến thế hệ {b}, trung tâm của gia đình đã dịch chuyển {km} km. ¦ Dari generasi {a} ke generasi {b}, pusat keluarga bergeser {km} km.
+Centre de gravité de {n} générations, {km} km parcourus. ¦ Trọng tâm của {n} thế hệ, đã đi {km} km. ¦ Titik pusat {n} generasi, {km} km ditempuh.
+Centre de gravité de {n} générations. ¦ Trọng tâm của {n} thế hệ. ¦ Titik pusat {n} generasi.
+Ajoute des lieux avec leur génération (ou « Depuis l’app »). ¦ Hãy thêm địa điểm kèm thế hệ của chúng (hoặc “Từ ứng dụng”). ¦ Tambahkan tempat beserta generasinya (atau “Dari aplikasi”).
+Gén. {g} ({max}) ¦ Thế hệ {g} ({max}) ¦ Gen. {g} ({max})
+{found} ancêtres trouvés sur {max} possibles en {n} générations ({pct} %). ¦ Tìm được {found} tổ tiên trên {max} có thể trong {n} thế hệ ({pct} %). ¦ {found} leluhur ditemukan dari {max} yang mungkin dalam {n} generasi ({pct} %).
+Complétude : {pct} % des ancêtres sur {n} générations. ¦ Mức đầy đủ: {pct} % tổ tiên trong {n} thế hệ. ¦ Kelengkapan: {pct} % leluhur dalam {n} generasi.
+… et {n} lignes de plus (« 🖨 Imprimer le tableau » les met toutes) ¦ … và thêm {n} dòng (“🖨 In bảng” sẽ in tất cả) ¦ … dan {n} baris lagi (“🖨 Cetak tabel” memuat semuanya)
+Tableau d’ascendance : {n} ancêtres. ¦ Bảng tổ tiên: {n} tổ tiên. ¦ Tabel leluhur: {n} leluhur.
+Tableau d’ascendance ¦ Bảng tổ tiên ¦ Tabel leluhur
+Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »). ¦ Hãy thêm các kết quả trùng khớp từ {lo} đến {hi} cM cùng các kết quả trùng khớp chung của họ (hoặc “Từ ứng dụng”). ¦ Tambahkan kecocokan dari {lo} sampai {hi} cM beserta kecocokan bersamanya (atau “Dari aplikasi”).
+dates · surtout en {month} ¦ ngày · chủ yếu vào {month} ¦ tanggal · terutama di {month}
+Roue de l’année : {n} dates, surtout en {month}. ¦ Vòng tròn năm: {n} ngày, chủ yếu vào {month}. ¦ Roda tahun: {n} tanggal, terutama di {month}.
+{name} (à gauche) ¦ {name} (bên trái) ¦ {name} (kiri)
+{name} (à droite) ¦ {name} (bên phải) ¦ {name} (kanan)
+Barres et courbe : {n} lignes. ¦ Cột và đường: {n} dòng. ¦ Batang dan garis: {n} baris.
+Sous {v} ¦ Dưới {v} ¦ Di bawah {v}
+Au-dessus de {v} ¦ Trên {v} ¦ Di atas {v}
+Collines empilées : {s} séries sur {n} périodes. ¦ Đồi xếp chồng: {s} chuỗi trên {n} giai đoạn. ¦ Bukit bertumpuk: {s} seri dalam {n} periode.
+Coordonnées parallèles : {n} lignes sur {a} axes. ¦ Toạ độ song song: {n} đường trên {a} trục. ¦ Koordinat paralel: {n} garis pada {a} sumbu.
+Chemin trouvé en {n} étapes. ¦ Đã tìm thấy đường đi qua {n} bước. ¦ Jalur ditemukan dalam {n} langkah.
+Chemin trouvé en 1 étape. ¦ Đã tìm thấy đường đi qua 1 bước. ¦ Jalur ditemukan dalam 1 langkah.
+Aucun ancêtre dont le lieu de naissance a des coordonnées ({n} sans lieu situé). ¦ Không có tổ tiên nào có nơi sinh với toạ độ ({n} người chưa có địa điểm được định vị). ¦ Tidak ada leluhur yang tempat lahirnya berkoordinat ({n} tanpa tempat yang terletak).
+Aucun ancêtre dont le lieu de naissance a des coordonnées. ¦ Không có tổ tiên nào có nơi sinh với toạ độ. ¦ Tidak ada leluhur yang tempat lahirnya berkoordinat.
+Le centre de la famille de {name} ¦ Trung tâm gia đình của {name} ¦ Pusat keluarga {name}
+Les générations de {name} ¦ Các thế hệ của {name} ¦ Generasi-generasi {name}
+{n} lieux de naissance pris dans ta base ({m} sans lieu situé). ¦ {n} nơi sinh lấy từ dữ liệu của bạn ({m} chưa có địa điểm được định vị). ¦ {n} tempat lahir diambil dari basis datamu ({m} tanpa tempat yang terletak).
+{n} lieux de naissance pris dans ta base. ¦ {n} nơi sinh lấy từ dữ liệu của bạn. ¦ {n} tempat lahir diambil dari basis datamu.
+L’arbre de {name} : ce qu’on connaît ¦ Cây của {name}: những gì đã biết ¦ Pohon {name}: yang sudah diketahui
+Tableau d’ascendance de {name} ¦ Bảng tổ tiên của {name} ¦ Tabel leluhur {name}
+{n} ancêtres pris dans ta base (arrêt à 4 096 lignes). ¦ {n} tổ tiên lấy từ dữ liệu của bạn (dừng ở 4 096 dòng). ¦ {n} leluhur diambil dari basis datamu (berhenti di 4.096 baris).
+{n} ancêtres pris dans ta base. ¦ {n} tổ tiên lấy từ dữ liệu của bạn. ¦ {n} leluhur diambil dari basis datamu.
+Aucune naissance ni aucun décès daté. ¦ Không có lần sinh hay mất nào có ngày. ¦ Tidak ada kelahiran atau kematian bertanggal.
+Filles ¦ Con gái ¦ Anak perempuan
+Garçons ¦ Con trai ¦ Anak laki-laki
+{n} noms sur {p} périodes. ¦ {n} tên trên {p} giai đoạn. ¦ {n} nama dalam {p} periode.
+{n} personnes comptées, {y} années. ¦ Đã đếm {n} người, {y} năm. ¦ {n} orang dihitung, {y} tahun.
+Arrière-arrière-grands-parents ¦ Ông bà sơ ¦ Canggah
+Arrière-arrière-arrière-grands-parents ¦ Ông bà kị ¦ Wareng
+Les cartes ne sont pas chargées. ¦ Bản đồ chưa được tải. ¦ Peta belum dimuat.
+Ancêtres connus ¦ Tổ tiên đã biết ¦ Leluhur yang diketahui
+Grand-père paternel ¦ Ông nội ¦ Kakek dari ayah
+Grand-mère paternelle ¦ Bà nội ¦ Nenek dari ayah
+Grand-père maternel ¦ Ông ngoại ¦ Kakek dari ibu
+Grand-mère maternelle ¦ Bà ngoại ¦ Nenek dari ibu
+Fêtes des prénoms ¦ Ngày lễ tên thánh ¦ Hari nama
+Âge au 1er enfant ¦ Tuổi khi có con đầu ¦ Umur saat anak pertama
+Les métiers ¦ Nghề nghiệp ¦ Pekerjaan
+Un titre par génération ¦ Một tiêu đề cho mỗi thế hệ ¦ Satu judul per generasi
+Tous mes tests ¦ Mọi xét nghiệm của tôi ¦ Semua tesku
+Par décennie ¦ Theo thập kỷ ¦ Per dekade
+Par demi-siècle ¦ Theo nửa thế kỷ ¦ Per setengah abad
+Par siècle ¦ Theo thế kỷ ¦ Per abad
+Décès ↔ naissances ¦ Mất ↔ sinh ¦ Kematian ↔ kelahiran
+Périodes ¦ Giai đoạn ¦ Periode
+Personnes au plus ¦ Số người tối đa ¦ Orang paling banyak
+Âge au 1er mariage ¦ Tuổi khi kết hôn lần đầu ¦ Umur saat pernikahan pertama
+Aucune naissance datée. ¦ Không có lần sinh nào có ngày. ¦ Tidak ada kelahiran bertanggal.
+Un dégradé ¦ Một dải chuyển màu ¦ Gradasi
+Une couleur chacune ¦ Mỗi thứ một màu ¦ Satu warna untuk masing-masing
+Lien avec la personne d’avant ¦ Quan hệ với người trước ¦ Hubungan dengan orang sebelumnya
+son époux / épouse ¦ chồng / vợ của người đó ¦ suami / istrinya
+Selon la place ¦ Tuỳ chỗ trống ¦ Tergantung ruang
+En liste, étape par étape ¦ Dạng danh sách, từng bước ¦ Sebagai daftar, langkah demi langkah
+La phrase du lien ¦ Câu mô tả quan hệ ¦ Kalimat hubungan
+Une seule ¦ Chỉ một ¦ Hanya satu
+Sens des flèches ¦ Hướng mũi tên ¦ Arah panah
+Des plus anciens vers toi ¦ Từ người xưa nhất đến bạn ¦ Dari yang tertua ke kamu
+De toi vers les plus anciens ¦ Từ bạn đến người xưa nhất ¦ Dari kamu ke yang tertua
+La trajectoire ¦ Quỹ đạo ¦ Lintasan
+Taille des lieux ¦ Kích thước địa điểm ¦ Ukuran tempat
+La phrase du déplacement ¦ Câu mô tả sự dịch chuyển ¦ Kalimat perpindahan
+Écarter les points d’un même lieu ¦ Tách các điểm cùng một địa điểm ¦ Pisahkan titik di tempat yang sama
+Noms des lieux les plus remplis ¦ Tên các địa điểm đông nhất ¦ Nama tempat yang paling padat
+D’où viennent mes ancêtres ¦ Tổ tiên tôi đến từ đâu ¦ Dari mana leluhurku berasal
+Trouvés ¦ Đã tìm thấy ¦ Ditemukan
+Longueur des barres ¦ Độ dài cột ¦ Panjang batang
+Écrire les % ¦ Ghi phần trăm ¦ Tampilkan %
+Les ancêtres ¦ Tổ tiên ¦ Para leluhur
+Lignes montrées au plus ¦ Số dòng hiện tối đa ¦ Baris yang ditampilkan paling banyak
+Les correspondances ¦ Kết quả trùng khớp ¦ Kecocokan
+ADN partagé ¦ ADN chung ¦ DNA bersama
+Correspondances au plus ¦ Số kết quả trùng khớp tối đa ¦ Kecocokan paling banyak
+Mes cousins ADN, par grand-parent ¦ Anh chị em họ ADN của tôi, theo ông bà ¦ Sepupu DNA-ku, per kakek-nenek
+La courbe = la colonne n° ¦ Đường = cột số ¦ Garis = kolom no.
+Largeur des barres ¦ Độ rộng cột ¦ Lebar batang
+Une colonne autour du centre ¦ Một cột quanh tâm ¦ Satu kolom di sekitar pusat
+Par écart ¦ Theo chênh lệch ¦ Menurut selisih
+Par total ¦ Theo tổng ¦ Menurut total
+Écrire les chiffres ¦ Ghi các con số ¦ Tampilkan angka
+Écart entre les collines ¦ Khoảng cách giữa các đồi ¦ Jarak antar bukit
+À l’envers ¦ Đảo ngược ¦ Terbalik
+Une par série ¦ Mỗi chuỗi một ¦ Satu per seri
+Opacité des lignes ¦ Độ mờ của đường ¦ Opasitas garis
+La marche ¦ Bậc thang ¦ Anak tangga
+Carte des générations : {n} lieux de naissance. ¦ Bản đồ các thế hệ: {n} nơi sinh. ¦ Peta generasi: {n} tempat lahir.
+Génération {g} ({name}) : {found} sur {max} possibles ¦ Thế hệ {g} ({name}): {found} trên {max} có thể ¦ Generasi {g} ({name}): {found} dari {max} yang mungkin
+{n} personnes différentes (implexe) ¦ {n} người khác nhau (trùng lặp tổ tiên) ¦ {n} orang berbeda (implex)
+Méthode de Leeds : {n} groupes de couleur. ¦ Phương pháp Leeds: {n} nhóm màu. ¦ Metode Leeds: {n} kelompok warna.
+{name} : {n} en tout, le plus en {peak} ({v}) ¦ {name}: tổng cộng {n}, nhiều nhất vào {peak} ({v}) ¦ {name}: total {n}, terbanyak di {peak} ({v})
+Courbe en escalier : {n} points. ¦ Đường bậc thang: {n} điểm. ¦ Garis tangga: {n} titik.
+n° de fiche ¦ số hồ sơ ¦ no. profil
+liens de sang par {n} branches (implexe) ¦ quan hệ huyết thống qua {n} nhánh (trùng lặp tổ tiên) ¦ hubungan darah melalui {n} cabang (implex)
+{n} générations prises dans ta base. ¦ {n} thế hệ lấy từ dữ liệu của bạn. ¦ {n} generasi diambil dari basis datamu.
+{n} correspondances prises dans l’onglet ADN. ¦ {n} kết quả trùng khớp lấy từ thẻ ADN. ¦ {n} kecocokan diambil dari tab DNA.
+{n} dates prises dans ta base. ¦ {n} ngày lấy từ dữ liệu của bạn. ¦ {n} tanggal diambil dari basis datamu.
+{n} périodes prises dans ta base. ¦ {n} giai đoạn lấy từ dữ liệu của bạn. ¦ {n} periode diambil dari basis datamu.
+{n} vies prises dans ta base. ¦ {n} cuộc đời lấy từ dữ liệu của bạn. ¦ {n} riwayat hidup diambil dari basis datamu.
+Choisis deux personnes (« Depuis l’app ») ou écris le chemin, une personne par ligne. ¦ Hãy chọn hai người (“Từ ứng dụng”) hoặc viết đường đi, mỗi dòng một người. ¦ Pilih dua orang (“Dari aplikasi”) atau tulis jalurnya, satu orang per baris.
+{gen} : centre de {n} lieux de naissance ¦ {gen}: trung tâm của {n} nơi sinh ¦ {gen}: pusat dari {n} tempat lahir
+{gen} : centre de {n} lieu de naissance ¦ {gen}: trung tâm của {n} nơi sinh ¦ {gen}: pusat dari {n} tempat lahir
+écart moyen {km} km ¦ độ phân tán trung bình {km} km ¦ sebaran rata-rata {km} km
+Ajoute des lieux de naissance avec leur génération (ou « Depuis l’app »). ¦ Hãy thêm nơi sinh kèm thế hệ của chúng (hoặc “Từ ứng dụng”). ¦ Tambahkan tempat lahir beserta generasinya (atau “Dari aplikasi”).
+Ajoute des générations : la génération et le nombre d’ancêtres trouvés. ¦ Hãy thêm thế hệ: thế hệ và số tổ tiên đã tìm thấy. ¦ Tambahkan generasi: generasinya dan jumlah leluhur yang ditemukan.
+Encore à trouver ¦ Còn phải tìm ¦ Masih harus dicari
+Personnes différentes (implexe) ¦ Người khác nhau (trùng lặp tổ tiên) ¦ Orang berbeda (implex)
+Ajoute des ancêtres : leur numéro Sosa et leur nom (ou « Depuis l’app »). ¦ Hãy thêm tổ tiên: số Sosa và tên của họ (hoặc “Từ ứng dụng”). ¦ Tambahkan leluhur: nomor Sosa dan namanya (atau “Dari aplikasi”).
+Ajoute des dates (« 14/07 » ou « 07-14 »), une sorte et un nom (ou « Depuis l’app »). ¦ Hãy thêm ngày (“14/07” hoặc “07-14”), một loại và một tên (hoặc “Từ ứng dụng”). ¦ Tambahkan tanggal (“14/07” atau “07-14”), jenis, dan nama (atau “Dari aplikasi”).
+Il faut au moins deux colonnes de chiffres : des barres à gauche, une courbe à droite. ¦ Cần ít nhất hai cột số: cột bên trái, đường bên phải. ¦ Perlu setidaknya dua kolom angka: batang di kiri, garis di kanan.
+Aucun chiffre dans le tableau. ¦ Không có con số nào trong bảng. ¦ Tidak ada angka di tabel.
+Ajoute des lignes : un nom et deux chiffres (gauche, droite), ou un seul chiffre autour du centre. ¦ Hãy thêm dòng: một tên và hai con số (trái, phải), hoặc một con số quanh tâm. ¦ Tambahkan baris: nama dan dua angka (kiri, kanan), atau satu angka di sekitar pusat.
+Sous le centre ¦ Dưới tâm ¦ Di bawah pusat
+Ajoute des lignes (années, décennies…) et une colonne de chiffres par colline. ¦ Hãy thêm dòng (năm, thập kỷ…) và một cột số cho mỗi đồi. ¦ Tambahkan baris (tahun, dekade…) dan satu kolom angka per bukit.
+Il faut au moins deux colonnes de chiffres (les axes) et une ligne par personne ou par chose. ¦ Cần ít nhất hai cột số (các trục) và mỗi người hoặc mỗi thứ một dòng. ¦ Perlu setidaknya dua kolom angka (sumbu) dan satu baris per orang atau hal.
+Ajoute des lignes : une année (ou un nom) et un chiffre. ¦ Hãy thêm dòng: một năm (hoặc một tên) và một con số. ¦ Tambahkan baris: tahun (atau nama) dan angka.
+🔒 Pour partager : sans les noms des personnes en vie ¦ 🔒 Để chia sẻ: không có tên người còn sống ¦ 🔒 Untuk dibagikan: tanpa nama orang yang masih hidup
+Les ancêtres de la personne de départ ¦ Tổ tiên của người bắt đầu ¦ Leluhur orang awal
+Lecture de ta généalogie… ¦ Đang đọc gia phả của bạn… ¦ Membaca silsilahmu…
+Données prises dans ta base. ¦ Dữ liệu lấy từ cơ sở dữ liệu của bạn. ¦ Data diambil dari basis datamu.
+🔗 Deux personnes de ma base ¦ 🔗 Hai người trong dữ liệu của tôi ¦ 🔗 Dua orang dari basis dataku
+L’app cherche le plus court chemin : on remonte jusqu’à l’ancêtre commun et on redescend ; avec les alliances, elle passe aussi par les époux (beau-frère, cousin de l’épouse…). Un même lien par plusieurs ancêtres (implexe) est signalé. ¦ Ứng dụng tìm đường ngắn nhất: đi lên đến tổ tiên chung rồi đi xuống; với quan hệ thông gia, nó còn đi qua vợ/chồng (anh rể, anh họ của vợ…). Một quan hệ đi qua nhiều tổ tiên (trùng lặp tổ tiên) sẽ được báo. ¦ Aplikasi mencari jalur terpendek: naik sampai leluhur bersama lalu turun; dengan hubungan perkawinan, aplikasi juga melewati pasangan (ipar, sepupu istri…). Hubungan yang sama lewat beberapa leluhur (implex) ditandai.
+Passer aussi par les alliances (époux, épouses) ¦ Cũng đi qua quan hệ thông gia (vợ, chồng) ¦ Juga lewat hubungan perkawinan (suami, istri)
+Trouver le chemin ¦ Tìm đường đi ¦ Cari jalur
+Choisis les deux personnes dans les menus. ¦ Hãy chọn hai người trong các menu. ¦ Pilih dua orang di menu.
+Aucun lien trouvé entre ces deux personnes dans ta base. ¦ Không tìm thấy quan hệ nào giữa hai người này trong dữ liệu của bạn. ¦ Tidak ada hubungan yang ditemukan antara dua orang ini di basis datamu.
+Aucun ancêtre commun : essaie avec les alliances. ¦ Không có tổ tiên chung: hãy thử với quan hệ thông gia. ¦ Tidak ada leluhur bersama: coba dengan hubungan perkawinan.
+🎯 Les lieux de naissance de mes ancêtres ¦ 🎯 Nơi sinh của tổ tiên tôi ¦ 🎯 Tempat lahir leluhurku
+🌈 Les lieux de naissance de mes ancêtres ¦ 🌈 Nơi sinh của tổ tiên tôi ¦ 🌈 Tempat lahir leluhurku
+Chaque ancêtre (numéro Sosa) est placé à son lieu de naissance (ou de baptême), avec sa génération. Les lieux sans coordonnées sont laissés de côté. ¦ Mỗi tổ tiên (số Sosa) được đặt tại nơi sinh (hoặc nơi rửa tội), kèm thế hệ. Các địa điểm không có toạ độ bị bỏ qua. ¦ Setiap leluhur (nomor Sosa) ditempatkan di tempat lahirnya (atau tempat baptis), beserta generasinya. Tempat tanpa koordinat diabaikan.
+🧩 L’ascendance d’une personne ¦ 🧩 Tổ tiên của một người ¦ 🧩 Leluhur seseorang
+Pour chaque génération : les ancêtres possibles (1, 2, 4, 8…), les places trouvées et les personnes différentes (implexe). ¦ Với mỗi thế hệ: số tổ tiên có thể có (1, 2, 4, 8…), số vị trí đã tìm thấy và số người khác nhau (trùng lặp tổ tiên). ¦ Untuk setiap generasi: leluhur yang mungkin (1, 2, 4, 8…), posisi yang ditemukan, dan orang yang berbeda (implex).
+Aucun ancêtre trouvé pour cette personne. ¦ Không tìm thấy tổ tiên nào cho người này. ¦ Tidak ada leluhur yang ditemukan untuk orang ini.
+📜 Les ancêtres d’une personne ¦ 📜 Tổ tiên của một người ¦ 📜 Para leluhur seseorang
+Une ligne par numéro Sosa : nom, naissance, mariage, décès (dates et lieux). Un ancêtre présent plusieurs fois (implexe) renvoie à son premier numéro. ¦ Mỗi số Sosa một dòng: tên, sinh, kết hôn, mất (ngày và nơi). Một tổ tiên xuất hiện nhiều lần (trùng lặp tổ tiên) sẽ trỏ về số đầu tiên của họ. ¦ Satu baris per nomor Sosa: nama, kelahiran, pernikahan, kematian (tanggal dan tempat). Leluhur yang muncul beberapa kali (implex) merujuk ke nomor pertamanya.
+🖨 Imprimer le tableau… ¦ 🖨 In bảng… ¦ 🖨 Cetak tabel…
+Depuis l’onglet ADN : les correspondances d’un test et leurs « correspondances en commun ». La méthode de Leeds range celles de 90 à 400 cM (cousins de 2e et 3e degré) en groupes de couleur, souvent un par grand-parent. ¦ Từ thẻ ADN: các kết quả trùng khớp của một xét nghiệm và “kết quả trùng khớp chung” của chúng. Phương pháp Leeds xếp những kết quả từ 90 đến 400 cM (anh chị em họ bậc 2 và 3) thành các nhóm màu, thường mỗi nhóm ứng với một ông bà. ¦ Dari tab DNA: kecocokan sebuah tes dan “kecocokan bersama”-nya. Metode Leeds mengelompokkan yang 90 sampai 400 cM (sepupu derajat 2 dan 3) ke dalam kelompok warna, sering satu per kakek-nenek.
+Aucune correspondance ADN dans ta base (onglet ADN → Correspondances). ¦ Không có kết quả trùng khớp ADN nào trong dữ liệu của bạn (thẻ ADN → Kết quả trùng khớp). ¦ Tidak ada kecocokan DNA di basis datamu (tab DNA → Kecocokan).
+Il manque les « correspondances en commun » : remplis-les dans l’onglet ADN (ou importe-les). ¦ Thiếu “kết quả trùng khớp chung”: hãy điền trong thẻ ADN (hoặc nhập vào). ¦ “Kecocokan bersama” belum ada: isi di tab DNA (atau impor).
+Méthode de Leeds ¦ Phương pháp Leeds ¦ Metode Leeds
+🎡 Les dates de ma famille ¦ 🎡 Các ngày của gia đình tôi ¦ 🎡 Tanggal-tanggal keluargaku
+Les naissances, mariages et décès datés au jour près, et la fête du prénom de chacun (calendrier des saints). Les fiches confidentielles ne sont jamais prises. ¦ Các lần sinh, kết hôn và mất có ngày chính xác, cùng ngày lễ tên thánh của mỗi người (lịch các thánh). Hồ sơ bảo mật không bao giờ được lấy. ¦ Kelahiran, pernikahan, dan kematian bertanggal tepat, serta hari nama setiap orang (kalender santo). Profil rahasia tidak pernah diambil.
+Les personnes en vie (et leurs mariages) ¦ Người còn sống (và các cuộc hôn nhân của họ) ¦ Orang yang masih hidup (dan pernikahan mereka)
+Coche au moins une sorte de date. ¦ Hãy đánh dấu ít nhất một loại ngày. ¦ Centang setidaknya satu jenis tanggal.
+Aucune date au jour près pour ce choix. ¦ Không có ngày chính xác nào cho lựa chọn này. ¦ Tidak ada tanggal tepat untuk pilihan ini.
+L’année de la famille ¦ Năm của gia đình ¦ Tahun keluarga
+Par quart de siècle ¦ Theo một phần tư thế kỷ ¦ Per seperempat abad
+📊 Naissances et âge au décès ¦ 📊 Sinh và tuổi khi mất ¦ 📊 Kelahiran dan umur saat meninggal
+↔️ Naissances et décès ¦ ↔️ Sinh và mất ¦ ↔️ Kelahiran dan kematian
+Les naissances de chaque période en barres (à gauche), l’âge moyen au décès en courbe (à droite). ¦ Số lần sinh của mỗi giai đoạn dạng cột (bên trái), tuổi trung bình khi mất dạng đường (bên phải). ¦ Kelahiran tiap periode sebagai batang (kiri), umur rata-rata saat meninggal sebagai garis (kanan).
+Les décès à gauche, les naissances à droite, période par période (ou les femmes et les hommes). ¦ Mất ở bên trái, sinh ở bên phải, từng giai đoạn (hoặc phụ nữ và nam giới). ¦ Kematian di kiri, kelahiran di kanan, per periode (atau perempuan dan laki-laki).
+Face à face ¦ Đối diện ¦ Berhadapan
+Naissances : filles ↔ garçons ¦ Sinh: con gái ↔ con trai ¦ Kelahiran: perempuan ↔ laki-laki
+Âge moyen au décès ¦ Tuổi trung bình khi mất ¦ Umur rata-rata saat meninggal
+Naissances et âge moyen au décès ¦ Sinh và tuổi trung bình khi mất ¦ Kelahiran dan umur rata-rata saat meninggal
+Filles et garçons à la naissance ¦ Con gái và con trai lúc sinh ¦ Perempuan dan laki-laki saat lahir
+Décès et naissances ¦ Mất và sinh ¦ Kematian dan kelahiran
+🏔 Les noms de famille au fil du temps ¦ 🏔 Các họ qua thời gian ¦ 🏔 Nama keluarga dari masa ke masa
+Les noms les plus portés : une colline par nom, la hauteur = les naissances de chaque période. ¦ Những họ phổ biến nhất: mỗi họ một ngọn đồi, chiều cao = số lần sinh của mỗi giai đoạn. ¦ Nama yang paling banyak dipakai: satu bukit per nama, tinggi = kelahiran tiap periode.
+Aucune naissance datée avec un nom de famille. ¦ Không có lần sinh nào có ngày kèm họ. ¦ Tidak ada kelahiran bertanggal dengan nama keluarga.
+Les noms de famille au fil du temps ¦ Các họ qua thời gian ¦ Nama keluarga dari masa ke masa
+🧵 Les vies de ma base ¦ 🧵 Những cuộc đời trong dữ liệu của tôi ¦ 🧵 Riwayat hidup di basis dataku
+Pour chaque personne (vies finies seulement) : l’âge au premier mariage, au premier enfant, le nombre d’enfants et l’âge au décès ; une couleur par siècle de naissance. ¦ Với mỗi người (chỉ những đời đã kết thúc): tuổi khi kết hôn lần đầu, khi có con đầu, số con và tuổi khi mất; mỗi thế kỷ sinh một màu. ¦ Untuk setiap orang (hanya hidup yang sudah selesai): umur saat pernikahan pertama, saat anak pertama, jumlah anak, dan umur saat meninggal; satu warna per abad kelahiran.
+Pas assez de vies datées (il faut au moins 3 des 4 chiffres). ¦ Không đủ cuộc đời có ngày (cần ít nhất 3 trong 4 con số). ¦ Riwayat hidup bertanggal tidak cukup (perlu setidaknya 3 dari 4 angka).
+Les vies de la famille ¦ Những cuộc đời của gia đình ¦ Riwayat hidup keluarga
+📶 Combien en vie, année par année ¦ 📶 Bao nhiêu người còn sống, từng năm ¦ 📶 Berapa yang hidup, tahun demi tahun
+Une personne compte de sa naissance à son décès ; décès inconnu : en vie si elle est née il y a moins de 100 ans, sinon jusqu’à 60 ans (comme « Les vivants de l’arbre »). ¦ Một người được tính từ khi sinh đến khi mất; không rõ ngày mất: còn sống nếu sinh chưa đến 100 năm trước, nếu không thì tính đến 60 tuổi (như “Người còn sống trong cây”). ¦ Seseorang dihitung dari lahir sampai meninggal; kematian tidak diketahui: dianggap hidup jika lahir kurang dari 100 tahun lalu, jika tidak sampai umur 60 (seperti “Yang masih hidup di pohon”).
+Personnes en vie ¦ Người còn sống ¦ Orang yang hidup
+Combien de la famille étaient en vie ¦ Bao nhiêu người trong gia đình còn sống ¦ Berapa anggota keluarga yang masih hidup
+Couleurs des générations ¦ Màu các thế hệ ¦ Warna generasi
+Dégradé : la plus proche ¦ Chuyển màu: gần nhất ¦ Gradasi: yang terdekat
+Dégradé : la plus ancienne ¦ Chuyển màu: xưa nhất ¦ Gradasi: yang tertua
+Les ancêtres (lieu de naissance « Nom 48.11, -1.68 » et génération : 2 = parents, 3 = grands-parents…) ¦ Tổ tiên (nơi sinh “Tên 48.11, -1.68” và thế hệ: 2 = cha mẹ, 3 = ông bà…) ¦ Para leluhur (tempat lahir “Nama 48.11, -1.68” dan generasi: 2 = orang tua, 3 = kakek-nenek…)
+Le chemin (une personne par ligne, de la première à la seconde) ¦ Đường đi (mỗi dòng một người, từ người thứ nhất đến người thứ hai) ¦ Jalur (satu orang per baris, dari yang pertama ke yang kedua)
+son père / sa mère (on monte) ¦ cha / mẹ của người đó (đi lên) ¦ ayah / ibunya (naik)
+son enfant (on descend) ¦ con của người đó (đi xuống) ¦ anaknya (turun)
+En V (montée puis descente) ¦ Hình chữ V (lên rồi xuống) ¦ Bentuk V (naik lalu turun)
+Les autres liens (implexe) ¦ Các quan hệ khác (trùng lặp tổ tiên) ¦ Hubungan lain (implex)
+Couleur des cases ¦ Màu ô ¦ Warna kotak
+Cadrer tout seul sur les lieux ¦ Tự căn khung theo các địa điểm ¦ Otomatis sesuaikan dengan tempat
+Montrer chaque lieu (pâle) ¦ Hiện từng địa điểm (nhạt) ¦ Tampilkan tiap tempat (pudar)
+Cercle de l’écart moyen ¦ Vòng tròn độ phân tán trung bình ¦ Lingkaran sebaran rata-rata
+Couleur de la trajectoire ¦ Màu quỹ đạo ¦ Warna lintasan
+Le centre de la famille, génération par génération ¦ Trung tâm gia đình, từng thế hệ ¦ Pusat keluarga, generasi demi generasi
+Nom écrit à partir de … ancêtres ¦ Ghi tên từ … tổ tiên trở lên ¦ Nama ditampilkan mulai … leluhur
+Les générations (1 = la personne) ¦ Các thế hệ (1 = người đó) ¦ Generasi (1 = orang itu)
+Éventail (une case par ancêtre) ¦ Hình quạt (mỗi tổ tiên một ô) ¦ Kipas (satu kotak per leluhur)
+Éventail : générations ¦ Hình quạt: thế hệ ¦ Kipas: generasi
+Toutes pareilles (en %) ¦ Tất cả như nhau (theo %) ¦ Semua sama (dalam %)
+Selon le nombre possible ¦ Theo số có thể có ¦ Menurut jumlah yang mungkin
+Montrer les personnes différentes (implexe) ¦ Hiện số người khác nhau (trùng lặp tổ tiên) ¦ Tampilkan orang yang berbeda (implex)
+Phrase de résumé ¦ Câu tóm tắt ¦ Kalimat ringkasan
+Couleur des connus ¦ Màu cho người đã biết ¦ Warna yang diketahui
+Couleur des manquants ¦ Màu cho người còn thiếu ¦ Warna yang belum ada
+Couleur de l’implexe ¦ Màu trùng lặp tổ tiên ¦ Warna implex
+Ce que je connais de mon arbre ¦ Những gì tôi biết về cây của mình ¦ Yang kuketahui tentang pohonku
+Correspondances en commun (séparées par ;) ¦ Kết quả trùng khớp chung (cách nhau bằng ;) ¦ Kecocokan bersama (dipisahkan dengan ;)
+Groupes de couleur au plus ¦ Số nhóm màu tối đa ¦ Kelompok warna paling banyak
+Noms des groupes (séparés par des virgules) ¦ Tên các nhóm (cách nhau bằng dấu phẩy) ¦ Nama kelompok (dipisahkan dengan koma)
+Noms en haut des colonnes ¦ Tên ở đầu các cột ¦ Nama di atas kolom
+Jour (14/07 ou 07-14) ¦ Ngày (14/07 hoặc 07-14) ¦ Hari (14/07 atau 07-14)
+Le trait « aujourd’hui » ¦ Vạch “hôm nay” ¦ Garis “hari ini”
+Le nombre au centre ¦ Con số ở giữa ¦ Angka di tengah
+Les chiffres (la dernière colonne = la courbe) ¦ Các con số (cột cuối = đường) ¦ Angka-angka (kolom terakhir = garis)
+Nom de l’axe de gauche ¦ Tên trục bên trái ¦ Nama sumbu kiri
+Nom de l’axe de droite ¦ Tên trục bên phải ¦ Nama sumbu kanan
+Unité à gauche ¦ Đơn vị bên trái ¦ Satuan di kiri
+Unité à droite ¦ Đơn vị bên phải ¦ Satuan di kanan
+Axe de droite à partir de zéro ¦ Trục bên phải bắt đầu từ 0 ¦ Sumbu kanan mulai dari nol
+Épaisseur de la courbe ¦ Độ dày của đường ¦ Ketebalan garis
+Points de la courbe ¦ Các điểm của đường ¦ Titik-titik garis
+Écrire les chiffres de la courbe ¦ Ghi các con số của đường ¦ Tampilkan angka pada garis
+Les lignes (1re colonne à gauche, 2e à droite) ¦ Các dòng (cột 1 bên trái, cột 2 bên phải) ¦ Baris-baris (kolom ke-1 di kiri, ke-2 di kanan)
+Deux colonnes face à face ¦ Hai cột đối diện ¦ Dua kolom berhadapan
+Le centre (une colonne) ¦ Tâm (một cột) ¦ Pusat (satu kolom)
+Titre à gauche ¦ Tiêu đề bên trái ¦ Judul kiri
+Titre à droite ¦ Tiêu đề bên phải ¦ Judul kanan
+Couleur à gauche ¦ Màu bên trái ¦ Warna kiri
+Couleur à droite ¦ Màu bên phải ¦ Warna kanan
+Comme dans le tableau ¦ Như trong bảng ¦ Seperti di tabel
+Sur le trait du milieu ¦ Trên vạch giữa ¦ Di garis tengah
+Décès et naissances dans la famille ¦ Mất và sinh trong gia đình ¦ Kematian dan kelahiran dalam keluarga
+Les chiffres (une ligne par période, une colonne par colline) ¦ Các con số (mỗi giai đoạn một dòng, mỗi đồi một cột) ¦ Angka-angka (satu baris per periode, satu kolom per bukit)
+Chaque colline à sa hauteur ¦ Mỗi đồi theo chiều cao riêng ¦ Setiap bukit dengan tingginya sendiri
+Même échelle pour toutes ¦ Cùng một thang cho tất cả ¦ Skala yang sama untuk semua
+Dégradé : première ¦ Chuyển màu: đầu tiên ¦ Gradasi: pertama
+Dégradé : dernière ¦ Chuyển màu: cuối cùng ¦ Gradasi: terakhir
+Écrire le sommet ¦ Ghi đỉnh ¦ Tampilkan puncak
+Les lignes (une par personne ; une colonne par axe) ¦ Các dòng (mỗi người một dòng; mỗi trục một cột) ¦ Baris-baris (satu per orang; satu kolom per sumbu)
+Mettre en avant (un groupe ou un nom) ¦ Làm nổi bật (một nhóm hoặc một tên) ¦ Sorot (kelompok atau nama)
+Les chiffres (une année ou un nom par ligne) ¦ Các con số (mỗi dòng một năm hoặc một tên) ¦ Angka-angka (satu tahun atau nama per baris)
+Après le point ¦ Sau điểm ¦ Setelah titik
+Avant le point ¦ Trước điểm ¦ Sebelum titik
+Remplir dessous (une série) ¦ Tô phía dưới (một chuỗi) ¦ Isi bagian bawah (satu seri)
+Axe à partir de zéro ¦ Trục bắt đầu từ 0 ¦ Sumbu mulai dari nol
+Montrer le plus haut ¦ Hiện giá trị cao nhất ¦ Tampilkan yang tertinggi
+Gén. {g} ¦ Thế hệ {g} ¦ Gen. {g}
+gén. {g} ¦ thế hệ {g} ¦ gen. {g}
+Arbre en frise : {n} vies sur {g} générations, de {from} à {to}. ¦ Cây dạng dòng thời gian: {n} cuộc đời trên {g} thế hệ, từ {from} đến {to}. ¦ Pohon lini masa: {n} riwayat hidup dalam {g} generasi, dari {from} sampai {to}.
+{name} : décès inconnu ¦ {name}: không rõ ngày mất ¦ {name}: kematian tidak diketahui
+{name} ({years}) : {age} ans (en vie) ¦ {name} ({years}): {age} tuổi (còn sống) ¦ {name} ({years}): {age} tahun (masih hidup)
+{name} ({years}) : {age} ans ¦ {name} ({years}): {age} tuổi ¦ {name} ({years}): {age} tahun
+Mariage à {age} ans ({year}) ¦ Kết hôn lúc {age} tuổi ({year}) ¦ Menikah pada umur {age} ({year})
+Naissance d’un enfant à {age} ans ({year}) ¦ Có con lúc {age} tuổi ({year}) ¦ Anak lahir saat umur {age} ({year})
+naissance d’un enfant ¦ sinh một người con ¦ kelahiran anak
+{n} ans et + ¦ {n} tuổi trở lên ¦ {n} tahun ke atas
+{n} personnes en vie ¦ {n} người còn sống ¦ {n} orang masih hidup
+Pyramide des âges en {year} : {n} personnes en vie (sur {total}). ¦ Tháp tuổi năm {year}: {n} người còn sống (trên {total}). ¦ Piramida umur tahun {year}: {n} orang masih hidup (dari {total}).
+Degré {d} ¦ Bậc {d} ¦ Derajat {d}
+Déplier {name} ¦ Mở rộng {name} ¦ Bentangkan {name}
+Plier {name} ¦ Thu gọn {name} ¦ Lipat {name}
+Déplier ({n} personnes) ¦ Mở rộng ({n} người) ¦ Bentangkan ({n} orang)
+Graphe des cousinages : {n} personnes, {l} liens. ¦ Đồ thị họ hàng: {n} người, {l} liên kết. ¦ Graf sepupu: {n} orang, {l} hubungan.
+{a} est {kin} de {b} ¦ {a} là {kin} của {b} ¦ {a} adalah {kin} dari {b}
+(degré {d}) ¦ (bậc {d}) ¦ (derajat {d})
+{a} et {b} : pas de lien trouvé ¦ {a} và {b}: không tìm thấy quan hệ ¦ {a} dan {b}: tidak ada hubungan yang ditemukan
+Degré 1 (parent, enfant) ¦ Bậc 1 (cha mẹ, con) ¦ Derajat 1 (orang tua, anak)
+Degré 2 (frère, grand-parent) ¦ Bậc 2 (anh chị em, ông bà) ¦ Derajat 2 (saudara kandung, kakek-nenek)
+Degré 4 (cousin germain) ¦ Bậc 4 (anh chị em họ) ¦ Derajat 4 (sepupu)
+Matrice de parenté de {n} personnes : {l} liens trouvés. ¦ Ma trận họ hàng của {n} người: tìm thấy {l} liên kết. ¦ Matriks kekerabatan {n} orang: {l} hubungan ditemukan.
+entre à la génération {g} par {who} ¦ xuất hiện ở thế hệ {g} qua {who} ¦ masuk di generasi {g} melalui {who}
+entre à la génération {g} ¦ xuất hiện ở thế hệ {g} ¦ masuk di generasi {g}
+porteurs par génération : {list} ¦ người mang họ theo thế hệ: {list} ¦ penyandang per generasi: {list}
+Entre à la génération {g} ¦ Xuất hiện ở thế hệ {g} ¦ Masuk di generasi {g}
+Arbre des patronymes : {n} noms sur {g} générations. ¦ Cây các họ: {n} họ trên {g} thế hệ. ¦ Pohon nama keluarga: {n} nama dalam {g} generasi.
+Aucun mariage entre ces lieux. ¦ Không có cuộc hôn nhân nào giữa các địa điểm này. ¦ Tidak ada pernikahan antara tempat-tempat ini.
+Diagramme d’accord : {n} lieux, environ {v} {unit}. ¦ Biểu đồ dây cung: {n} địa điểm, khoảng {v} {unit}. ¦ Diagram chord: {n} tempat, sekitar {v} {unit}.
+mariages ¦ cuộc hôn nhân ¦ pernikahan
+Violon : {c} catégories, {n} valeurs. ¦ Biểu đồ violin: {c} danh mục, {n} giá trị. ¦ Biola: {c} kategori, {n} nilai.
+pas encore trouvé ¦ chưa tìm thấy ¦ belum ditemukan
+Quadrillage de {g} générations : {found} ancêtres trouvés sur {total} places ({pct} %). ¦ Lưới {g} thế hệ: tìm thấy {found} tổ tiên trên {total} vị trí ({pct} %). ¦ Kisi {g} generasi: {found} leluhur ditemukan dari {total} posisi ({pct} %).
+Les vies de mes ancêtres ({name}) ¦ Cuộc đời tổ tiên tôi ({name}) ¦ Hidup para leluhurku ({name})
+Les vies de mes ancêtres ¦ Cuộc đời tổ tiên tôi ¦ Hidup para leluhurku
+Aucune naissance ni aucun décès daté à {place}. ¦ Không có lần sinh hay mất nào có ngày ở {place}. ¦ Tidak ada kelahiran atau kematian bertanggal di {place}.
+{n} années prises dans ta base. ¦ {n} năm lấy từ dữ liệu của bạn. ¦ {n} tahun diambil dari basis datamu.
+Qui vivait en … ? ¦ Ai còn sống vào năm …? ¦ Siapa yang hidup pada tahun …?
+Qui vivait en {year} ? ¦ Ai còn sống vào năm {year}? ¦ Siapa yang hidup pada tahun {year}?
+{n} personnes prises dans ta base. ¦ {n} người lấy từ dữ liệu của bạn. ¦ {n} orang diambil dari basis datamu.
+Les cousins de {name} ¦ Anh chị em họ của {name} ¦ Sepupu-sepupu {name}
+{n} personnes prises dans ta base (les 1 500 premières). ¦ {n} người lấy từ dữ liệu của bạn (1 500 người đầu tiên). ¦ {n} orang diambil dari basis datamu (1.500 pertama).
+Les cousinages ¦ Quan hệ họ hàng ¦ Hubungan sepupu
+{n} personnes et {l} liens pris dans ta base. ¦ {n} người và {l} liên kết lấy từ dữ liệu của bạn. ¦ {n} orang dan {l} hubungan diambil dari basis datamu.
+{n} personnes, {l} liens trouvés. ¦ {n} người, tìm thấy {l} liên kết. ¦ {n} orang, {l} hubungan ditemukan.
+Les noms de famille de {name} ¦ Các họ của {name} ¦ Nama-nama keluarga {name}
+{n} noms pris dans ta base. ¦ {n} họ lấy từ dữ liệu của bạn. ¦ {n} nama diambil dari basis datamu.
+Aucun mariage avec des lieux connus. ¦ Không có cuộc hôn nhân nào với địa điểm đã biết. ¦ Tidak ada pernikahan dengan tempat yang diketahui.
+Où l’on venait se marier ¦ Người ta đến đâu để kết hôn ¦ Tempat orang datang untuk menikah
+Mariages entre villages ¦ Hôn nhân giữa các làng ¦ Pernikahan antardesa
+{n} paires de lieux prises dans ta base. ¦ {n} cặp địa điểm lấy từ dữ liệu của bạn. ¦ {n} pasangan tempat diambil dari basis datamu.
+Aucune personne avec les deux dates. ¦ Không có ai có đủ cả hai ngày. ¦ Tidak ada orang dengan kedua tanggal.
+{n} valeurs prises dans ta base. ¦ {n} giá trị lấy từ dữ liệu của bạn. ¦ {n} nilai diambil dari basis datamu.
+{c}e siècle ¦ Thế kỷ {c} ¦ Abad ke-{c}
+Les enfants de {name} ¦ Các con của {name} ¦ Anak-anak {name}
+D’où viennent mes noms ¦ Các họ của tôi đến từ đâu ¦ Dari mana nama keluargaku berasal
+Âge au décès par siècle ¦ Tuổi khi mất theo thế kỷ ¦ Umur saat meninggal per abad
+Âge au décès par sexe ¦ Tuổi khi mất theo giới tính ¦ Umur saat meninggal per jenis kelamin
+Âge au mariage par sexe ¦ Tuổi khi kết hôn theo giới tính ¦ Umur saat menikah per jenis kelamin
+Âge au mariage par siècle ¦ Tuổi khi kết hôn theo thế kỷ ¦ Umur saat menikah per abad
+{name} : ferme l’éditeur et clique à nouveau pour ouvrir sa fiche. ¦ {name}: hãy đóng trình sửa và bấm lại để mở hồ sơ của họ. ¦ {name}: tutup penyunting lalu klik lagi untuk membuka profilnya.
+Ajoute des personnes : un nom, une génération (ou un n° Sosa), une naissance et un décès. ¦ Hãy thêm người: một tên, một thế hệ (hoặc số Sosa), ngày sinh và ngày mất. ¦ Tambahkan orang: nama, generasi (atau no. Sosa), kelahiran, dan kematian.
+Ajoute des années avec leurs naissances et leurs décès. ¦ Hãy thêm các năm kèm số sinh và số mất. ¦ Tambahkan tahun beserta kelahiran dan kematiannya.
+Plus de décès que de naissances ¦ Số mất nhiều hơn số sinh ¦ Lebih banyak kematian daripada kelahiran
+{b} naissances et {d} décès de {from} à {to}, {c} crises marquées. ¦ {b} lần sinh và {d} lần mất từ {from} đến {to}, {c} khủng hoảng được đánh dấu. ¦ {b} kelahiran dan {d} kematian dari {from} sampai {to}, {c} krisis ditandai.
+{b} naissances et {d} décès de {from} à {to}, {c} crise marquée. ¦ {b} lần sinh và {d} lần mất từ {from} đến {to}, {c} khủng hoảng được đánh dấu. ¦ {b} kelahiran dan {d} kematian dari {from} sampai {to}, {c} krisis ditandai.
+Ajoute les enfants : un nom, une naissance, un décès (et leurs mariages, leurs enfants). ¦ Hãy thêm các con: một tên, ngày sinh, ngày mất (và hôn nhân, con cái của họ). ¦ Tambahkan anak-anak: nama, kelahiran, kematian (serta pernikahan dan anak mereka).
+Ajoute des personnes (naissance, décès, sexe) ou prends celles de ta base (« Depuis l’app »). ¦ Hãy thêm người (sinh, mất, giới tính) hoặc lấy những người trong dữ liệu của bạn (“Từ ứng dụng”). ¦ Tambahkan orang (kelahiran, kematian, jenis kelamin) atau ambil dari basis datamu (“Dari aplikasi”).
+Issus d’issus de germains ¦ Anh chị em họ bậc ba ¦ Sepupu tiga kali
+Ligne directe ¦ Dòng trực hệ ¦ Garis langsung
+Oncles, tantes, neveux ¦ Chú bác, cô dì, cháu ¦ Paman, bibi, keponakan
+Cousins germains ¦ Anh chị em họ ¦ Sepupu
+Cousins issus de germains ¦ Anh chị em họ bậc hai ¦ Sepupu dua kali
+Sans lien de sang ¦ Không cùng huyết thống ¦ Tanpa hubungan darah
+Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien. ¦ Hãy thêm người: một tên, người ở trên (để trống nếu là đỉnh), các năm, quan hệ. ¦ Tambahkan orang: nama, orang di atasnya (kosong untuk puncak), tahun, hubungan.
+Arbre en accordéon : {n} personnes, {r} sommets. ¦ Cây dạng đàn xếp: {n} người, {r} đỉnh. ¦ Pohon akordeon: {n} orang, {r} puncak.
+Arbre en accordéon : {n} personnes, {r} sommet. ¦ Cây dạng đàn xếp: {n} người, {r} đỉnh. ¦ Pohon akordeon: {n} orang, {r} puncak.
+parente|arrière-grand-père ¦ cụ ông ¦ kakek buyut
+parente|grand-père ¦ ông ¦ kakek
+parente|père ¦ cha ¦ ayah
+parente|moi ¦ tôi ¦ aku
+parente|sœur ¦ chị/em gái ¦ saudara perempuan
+parente|frère ¦ anh/em trai ¦ saudara laki-laki
+parente|tante ¦ cô/dì ¦ bibi
+parente|oncle ¦ chú/bác ¦ paman
+parente|cousin germain ¦ anh/em họ ¦ sepupu
+parente|cousine germaine ¦ chị/em họ ¦ sepupu
+parente|grand-oncle ¦ ông chú/ông bác ¦ kakek paman
+parente|cousin germain de mon père ¦ anh/em họ của cha tôi ¦ sepupu ayahku
+parente|cousin issu de germains ¦ anh/em họ bậc hai ¦ sepupu dua kali
+parente|cousine issue de germains ¦ chị/em họ bậc hai ¦ sepupu dua kali
+parente|fils ¦ con trai ¦ anak laki-laki
+parente|fille ¦ con gái ¦ anak perempuan
+parente|petit-fils ¦ cháu trai ¦ cucu laki-laki
+parente|petite-fille ¦ cháu gái ¦ cucu perempuan
+parente|arrière-petit-fils ¦ chắt trai ¦ cicit laki-laki
+parente|neveu ¦ cháu trai (con anh chị em) ¦ keponakan laki-laki
+parente|petit-neveu ¦ cháu họ ¦ cucu keponakan
+parente|parent ¦ họ hàng ¦ kerabat
+parente|frères et sœurs ¦ anh chị em ruột ¦ saudara kandung
+parente|cousins germains ¦ anh chị em họ ¦ sepupu
+parente|cousins issus de germains ¦ anh chị em họ bậc hai ¦ sepupu dua kali
+parente|cousins issus d’issus de germains ¦ anh chị em họ bậc ba ¦ sepupu tiga kali
+parente|parent et enfant ¦ cha mẹ và con ¦ orang tua dan anak
+parente|oncle ou tante et neveu ou nièce ¦ chú bác hoặc cô dì và cháu ¦ paman atau bibi dan keponakan
+parente|à la mode de Bretagne ¦ “kiểu Bretagne” (quan hệ kép) ¦ “gaya Bretagne” (hubungan ganda)
+parente|époux ¦ vợ chồng ¦ suami istri
+Ajoute des liens : deux personnes et leur lien (cousins germains…), ou prends-les dans ta base. ¦ Hãy thêm quan hệ: hai người và quan hệ của họ (anh chị em họ…), hoặc lấy trong dữ liệu của bạn. ¦ Tambahkan hubungan: dua orang dan hubungan mereka (sepupu…), atau ambil dari basis datamu.
+Ajoute au moins deux personnes, puis ce que chacune est pour l’autre (ou prends-les dans ta base). ¦ Hãy thêm ít nhất hai người, rồi mỗi người là gì đối với người kia (hoặc lấy trong dữ liệu của bạn). ¦ Tambahkan setidaknya dua orang, lalu apa hubungan masing-masing bagi yang lain (atau ambil dari basis datamu).
+Ajoute des noms : le nom, le nom d’où il vient (vide pour le premier), la génération où il entre. ¦ Hãy thêm họ: tên họ, họ gốc của nó (để trống cho họ đầu tiên), thế hệ mà nó xuất hiện. ¦ Tambahkan nama: nama keluarganya, nama asalnya (kosong untuk yang pertama), generasi tempat nama itu masuk.
+Ajoute des paires de lieux et combien de mariages les relient. ¦ Hãy thêm các cặp địa điểm và số cuộc hôn nhân nối chúng. ¦ Tambahkan pasangan tempat dan berapa pernikahan yang menghubungkannya.
+Ajoute des valeurs : une catégorie (siècle, sexe…) et un chiffre par ligne. ¦ Hãy thêm giá trị: một danh mục (thế kỷ, giới tính…) và một con số mỗi dòng. ¦ Tambahkan nilai: satu kategori (abad, jenis kelamin…) dan satu angka per baris.
+{name} : {n} valeurs, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: {n} giá trị, trung vị {med}, một nửa nằm giữa {q1} và {q3}, từ {min} đến {max} ¦ {name}: {n} nilai, median {med}, separuh di antara {q1} dan {q3}, dari {min} sampai {max}
+{name} : {n} valeur, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: {n} giá trị, trung vị {med}, một nửa nằm giữa {q1} và {q3}, từ {min} đến {max} ¦ {name}: {n} nilai, median {med}, separuh di antara {q1} dan {q3}, dari {min} sampai {max}
+Nom seulement ¦ Chỉ có tên ¦ Hanya nama
+Une date ¦ Một ngày ¦ Satu tanggal
+Dates et lieux ¦ Ngày và địa điểm ¦ Tanggal dan tempat
+Sourcé ¦ Có nguồn ¦ Bersumber
+Ajoute des ancêtres : un n° Sosa, un nom et une valeur (ou prends-les dans ta base). ¦ Hãy thêm tổ tiên: số Sosa, tên và một giá trị (hoặc lấy trong dữ liệu của bạn). ¦ Tambahkan leluhur: no. Sosa, nama, dan nilai (atau ambil dari basis datamu).
+🧬 Mes ancêtres, génération par génération ¦ 🧬 Tổ tiên của tôi, từng thế hệ ¦ 🧬 Leluhurku, generasi demi generasi
+Chaque ancêtre devient une barre, de sa naissance à son décès ; les générations s’empilent, la couleur montre la branche (paternelle ou maternelle). ¦ Mỗi tổ tiên thành một thanh, từ khi sinh đến khi mất; các thế hệ xếp chồng, màu cho biết nhánh (bên nội hay bên ngoại). ¦ Setiap leluhur menjadi batang, dari lahir sampai meninggal; generasi bertumpuk, warnanya menunjukkan cabang (dari ayah atau dari ibu).
+Aucun ancêtre daté pour cette personne. ¦ Không có tổ tiên nào có ngày cho người này. ¦ Tidak ada leluhur bertanggal untuk orang ini.
+{n} enfants pris dans ta base. ¦ {n} người con lấy từ dữ liệu của bạn. ¦ {n} anak diambil dari basis datamu.
+{n} enfant pris dans ta base. ¦ {n} người con lấy từ dữ liệu của bạn. ¦ {n} anak diambil dari basis datamu.
+📉 Naissances et décès de ma base ¦ 📉 Sinh và mất trong dữ liệu của tôi ¦ 📉 Kelahiran dan kematian di basis dataku
+Compte les naissances (ou baptêmes) et les décès (ou sépultures) de chaque année. Laisse le lieu vide pour toute la base. ¦ Đếm số lần sinh (hoặc rửa tội) và mất (hoặc an táng) mỗi năm. Để trống địa điểm để tính toàn bộ dữ liệu. ¦ Menghitung kelahiran (atau baptis) dan kematian (atau pemakaman) setiap tahun. Kosongkan tempat untuk seluruh basis data.
+Un seul lieu (facultatif) ¦ Một địa điểm duy nhất (không bắt buộc) ¦ Satu tempat saja (opsional)
+Année par année ¦ Từng năm ¦ Tahun demi tahun
+Par 5 ans ¦ Mỗi 5 năm ¦ Per 5 tahun
+Par 10 ans ¦ Mỗi 10 năm ¦ Per 10 tahun
+Naissances et décès ¦ Sinh và mất ¦ Kelahiran dan kematian
+👨‍👩‍👧 Une fratrie de ma base ¦ 👨‍👩‍👧 Một nhóm anh chị em trong dữ liệu của tôi ¦ 👨‍👩‍👧 Satu keluarga saudara dari basis dataku
+Choisis une personne : ses frères et sœurs (ou ses enfants) deviennent des barres sur le même axe des âges, avec leurs mariages et la naissance de leurs enfants. ¦ Hãy chọn một người: anh chị em (hoặc con) của họ thành các thanh trên cùng một trục tuổi, kèm các cuộc hôn nhân và lần sinh con của họ. ¦ Pilih seseorang: saudara (atau anak)-nya menjadi batang pada sumbu umur yang sama, dengan pernikahan dan kelahiran anak mereka.
+Sa fratrie (elle comprise) ¦ Anh chị em của họ (kể cả họ) ¦ Saudara-saudaranya (termasuk dia)
+Personne : aucun enfant trouvé. ¦ Không có: không tìm thấy người con nào. ¦ Tidak ada: tidak ada anak yang ditemukan.
+🔺 Toutes les personnes de ma base ¦ 🔺 Mọi người trong dữ liệu của tôi ¦ 🔺 Semua orang di basis dataku
+Chaque personne née, et pas encore morte, l’année choisie compte dans sa tranche d’âge. Ensuite : le curseur sous le dessin change l’année, ▶ fait défiler le temps. ¦ Mỗi người đã sinh và chưa mất vào năm đã chọn được tính vào nhóm tuổi của họ. Sau đó: thanh trượt dưới hình đổi năm, ▶ cho thời gian chạy. ¦ Setiap orang yang sudah lahir dan belum meninggal pada tahun yang dipilih dihitung dalam kelompok umurnya. Lalu: penggeser di bawah gambar mengubah tahun, ▶ memutar waktu.
+Année de départ ¦ Năm bắt đầu ¦ Tahun awal
+Décès inconnu ¦ Không rõ ngày mất ¦ Kematian tidak diketahui
+Ne pas compter la personne ¦ Không tính người này ¦ Jangan hitung orang ini
+Supposer une vie de 60 ans ¦ Giả định sống 60 năm ¦ Anggap hidup 60 tahun
+Supposer une vie de 80 ans ¦ Giả định sống 80 năm ¦ Anggap hidup 80 tahun
+Aucune personne avec une date de naissance. ¦ Không có ai có ngày sinh. ¦ Tidak ada orang dengan tanggal lahir.
+🪗 Mes ancêtres et leurs descendants ¦ 🪗 Tổ tiên của tôi và con cháu của họ ¦ 🪗 Leluhurku dan keturunan mereka
+Les ancêtres de la personne sur quelques générations, puis tous leurs descendants jusqu’à sa génération : frères et sœurs, oncles, cousins germains, issus de germains… avec le lien de parenté de chacun. ¦ Tổ tiên của người đó qua vài thế hệ, rồi mọi con cháu của họ đến thế hệ của người đó: anh chị em, chú bác, anh chị em họ, anh chị em họ bậc hai… kèm quan hệ họ hàng của từng người. ¦ Leluhur orang itu selama beberapa generasi, lalu semua keturunan mereka sampai generasi orang itu: saudara, paman, sepupu, sepupu dua kali… dengan hubungan kekerabatan masing-masing.
+Pas assez de parents connus pour cette personne. ¦ Không đủ họ hàng đã biết cho người này. ¦ Kerabat yang diketahui untuk orang ini tidak cukup.
+🧶 Les cousins de ma base ¦ 🧶 Anh chị em họ trong dữ liệu của tôi ¦ 🧶 Sepupu di basis dataku
+Choisis des personnes (au moins deux), ou laisse vide : l’app prend la personne de départ et tous ses cousins de la même génération jusqu’à l’ancêtre commun choisi. ¦ Hãy chọn người (ít nhất hai), hoặc để trống: ứng dụng lấy người bắt đầu và mọi anh chị em họ cùng thế hệ đến tổ tiên chung đã chọn. ¦ Pilih orang (setidaknya dua), atau biarkan kosong: aplikasi mengambil orang awal dan semua sepupu segenerasinya sampai leluhur bersama yang dipilih.
+Personnes (facultatif) ¦ Người (không bắt buộc) ¦ Orang (opsional)
+Ancêtre commun jusqu’à ¦ Tổ tiên chung đến tận ¦ Leluhur bersama sampai
+Les plus proches (et de quoi tout relier) ¦ Những người gần nhất (và đủ để nối mọi người) ¦ Yang terdekat (dan cukup untuk menghubungkan semua)
+Aucun lien de parenté trouvé entre ces personnes. ¦ Không tìm thấy quan hệ họ hàng nào giữa những người này. ¦ Tidak ada hubungan kekerabatan yang ditemukan antara orang-orang ini.
+🔢 Des personnes de ma base ¦ 🔢 Những người trong dữ liệu của tôi ¦ 🔢 Orang-orang dari basis dataku
+Choisis jusqu’à 20 personnes : chaque case dit ce que la personne de la colonne est pour celle de la ligne (père, oncle, cousin germain…), et se colore selon la proximité. ¦ Hãy chọn tối đa 20 người: mỗi ô cho biết người ở cột là gì đối với người ở dòng (cha, chú, anh họ…), và tô màu theo độ gần gũi. ¦ Pilih sampai 20 orang: setiap sel menunjukkan apa orang di kolom bagi orang di baris (ayah, paman, sepupu…), diwarnai menurut kedekatan.
+Qui est quoi pour qui ¦ Ai là gì của ai ¦ Siapa apa bagi siapa
+🌳 Les noms de mes ancêtres ¦ 🌳 Họ của tổ tiên tôi ¦ 🌳 Nama keluarga leluhurku
+Chaque nom de famille de l’ascendance : par qui et quand il entre dans l’arbre (une femme et son nom), ses variantes d’écriture regroupées, et combien d’ancêtres le portent à chaque génération. ¦ Mỗi họ trong dòng tổ tiên: qua ai và khi nào nó vào cây (một người phụ nữ và họ của bà), các cách viết khác được gom lại, và bao nhiêu tổ tiên mang họ đó ở mỗi thế hệ. ¦ Setiap nama keluarga dalam garis leluhur: lewat siapa dan kapan masuk ke pohon (seorang perempuan dan namanya), variasi ejaannya dikelompokkan, dan berapa leluhur yang menyandangnya di tiap generasi.
+Aucun nom de famille dans cette ascendance. ¦ Không có họ nào trong dòng tổ tiên này. ¦ Tidak ada nama keluarga dalam garis leluhur ini.
+🎼 Les mariages de ma base ¦ 🎼 Các cuộc hôn nhân trong dữ liệu của tôi ¦ 🎼 Pernikahan di basis dataku
+Chaque mariage relie deux lieux : les lieux de naissance des deux époux, ou le lieu de naissance de chacun et le lieu du mariage. Les lieux les plus fréquents gardent leur nom, les autres vont dans « Autres ». ¦ Mỗi cuộc hôn nhân nối hai địa điểm: nơi sinh của hai vợ chồng, hoặc nơi sinh của mỗi người và nơi kết hôn. Các địa điểm thường gặp nhất giữ tên, những nơi khác vào mục “Khác”. ¦ Setiap pernikahan menghubungkan dua tempat: tempat lahir kedua mempelai, atau tempat lahir masing-masing dan tempat pernikahan. Tempat yang paling sering tetap bernama, yang lain masuk “Lainnya”.
+Le village de l’époux et celui de l’épouse ¦ Làng của chồng và làng của vợ ¦ Desa suami dan desa istri
+Le village de chacun → le lieu du mariage ¦ Làng của mỗi người → nơi kết hôn ¦ Desa masing-masing → tempat pernikahan
+Lieux gardés ¦ Địa điểm được giữ ¦ Tempat yang dipertahankan
+🎻 Des âges de ma base ¦ 🎻 Tuổi trong dữ liệu của tôi ¦ 🎻 Umur dari basis dataku
+Chaque personne donne une valeur (son âge au décès, ou au mariage), rangée dans une catégorie (son siècle, son sexe). ¦ Mỗi người cho một giá trị (tuổi khi mất, hoặc khi kết hôn), xếp vào một danh mục (thế kỷ, giới tính). ¦ Setiap orang memberi satu nilai (umur saat meninggal, atau saat menikah), dikelompokkan ke kategori (abad, jenis kelamin).
+🟩 Mes ancêtres (numéros Sosa) ¦ 🟩 Tổ tiên của tôi (số Sosa) ¦ 🟩 Leluhurku (nomor Sosa)
+Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche. ¦ Mỗi vị trí tổ tiên một ô; ô xám là tổ tiên chưa tìm thấy. Bấm vào một ô (ngoài trình sửa): hồ sơ của người đó. ¦ Satu sel per posisi leluhur; sel abu-abu adalah leluhur yang belum ditemukan. Klik sel (di luar penyunting): profilnya.
+Ce que je sais (nom, dates, lieux, sources) ¦ Những gì tôi biết (tên, ngày, địa điểm, nguồn) ¦ Yang kuketahui (nama, tanggal, tempat, sumber)
+Région de naissance ¦ Vùng nơi sinh ¦ Wilayah kelahiran
+Siècle de naissance ¦ Thế kỷ sinh ¦ Abad kelahiran
+Les personnes (une barre par vie) ¦ Những người (mỗi cuộc đời một thanh) ¦ Orang-orang (satu batang per hidup)
+Génération (vide = d’après le n° Sosa) ¦ Thế hệ (trống = theo số Sosa) ¦ Generasi (kosong = dari no. Sosa)
+Décès (vide = vivant ; ? = inconnu) ¦ Mất (trống = còn sống; ? = không rõ) ¦ Kematian (kosong = masih hidup; ? = tidak diketahui)
+Les événements historiques en fond (facultatif) ¦ Sự kiện lịch sử làm nền (không bắt buộc) ¦ Peristiwa sejarah sebagai latar (opsional)
+Couleur des barres ¦ Màu thanh ¦ Warna batang
+Branche paternelle ou maternelle ¦ Nhánh nội hoặc ngoại ¦ Cabang ayah atau ibu
+Homme ou femme ¦ Nam hoặc nữ ¦ Laki-laki atau perempuan
+Colonne « Groupe » ¦ Cột “Nhóm” ¦ Kolom “Kelompok”
+Serrée (noms dans les barres) ¦ Gọn (tên trong thanh) ¦ Rapat (nama di dalam batang)
+Une ligne par personne (noms à gauche) ¦ Mỗi người một dòng (tên ở bên trái) ¦ Satu baris per orang (nama di kiri)
+Les plus anciennes en haut ¦ Cũ nhất ở trên ¦ Terlama di atas
+Les plus récentes en haut ¦ Mới nhất ở trên ¦ Terbaru di atas
+Noms dans les barres ¦ Tên trong thanh ¦ Nama di dalam batang
+Montrer les événements ¦ Hiện các sự kiện ¦ Tampilkan peristiwa
+Les crises (à changer ou compléter) ¦ Các khủng hoảng (để sửa hoặc bổ sung) ¦ Krisis (untuk diubah atau dilengkapi)
+Fin (vide = une année) ¦ Kết thúc (trống = một năm) ¦ Akhir (kosong = satu tahun)
+Lisser les courbes (moyenne sur … ans) ¦ Làm mượt đường (trung bình trên … năm) ¦ Haluskan garis (rata-rata selama … tahun)
+Montrer les crises ¦ Hiện các khủng hoảng ¦ Tampilkan krisis
+Colorer quand les décès dépassent les naissances ¦ Tô màu khi số mất vượt số sinh ¦ Warnai saat kematian melebihi kelahiran
+Couleur des naissances ¦ Màu cho sinh ¦ Warna kelahiran
+Couleur des décès ¦ Màu cho mất ¦ Warna kematian
+Nom de l’axe des valeurs ¦ Tên trục giá trị ¦ Nama sumbu nilai
+Naissances et décès au village ¦ Sinh và mất trong làng ¦ Kelahiran dan kematian di desa
+Les enfants (dans l’ordre de naissance) ¦ Các con (theo thứ tự sinh) ¦ Anak-anak (menurut urutan lahir)
+Prénom / nom ¦ Tên / họ ¦ Nama depan / nama keluarga
+Décès (vide = vivant ou inconnu) ¦ Mất (trống = còn sống hoặc không rõ) ¦ Kematian (kosong = masih hidup atau tidak diketahui)
+Mariages (dates, séparées par des virgules) ¦ Kết hôn (ngày, cách nhau bằng dấu phẩy) ¦ Pernikahan (tanggal, dipisahkan dengan koma)
+Naissance de ses enfants (dates) ¦ Ngày sinh của các con (ngày) ¦ Kelahiran anak-anaknya (tanggal)
+Les âges (tous partent de 0) ¦ Tuổi (đều bắt đầu từ 0) ¦ Umur (semua mulai dari 0)
+Les années (calendrier) ¦ Năm (lịch) ¦ Tahun (kalender)
+Par date de naissance ¦ Theo ngày sinh ¦ Menurut tanggal lahir
+Les personnes (à la main ; celles de ta base : « Depuis l’app ») ¦ Những người (nhập tay; người trong dữ liệu của bạn: “Từ ứng dụng”) ¦ Orang-orang (manual; yang dari basis datamu: “Dari aplikasi”)
+Année montrée ¦ Năm hiển thị ¦ Tahun yang ditampilkan
+Tranches d’âge ¦ Nhóm tuổi ¦ Kelompok umur
+Dernière tranche à partir de ¦ Nhóm cuối từ ¦ Kelompok terakhir mulai
+Décès inconnu : supposer une vie de … ans (0 = ne pas compter) ¦ Không rõ ngày mất: giả định sống … năm (0 = không tính) ¦ Kematian tidak diketahui: anggap hidup … tahun (0 = jangan hitung)
+Même échelle pour toutes les années (lecture) ¦ Cùng thang cho mọi năm (khi chạy) ¦ Skala yang sama untuk semua tahun (pemutaran)
+Afficher les nombres ¦ Hiện các con số ¦ Tampilkan angka
+Couleur des hommes ¦ Màu cho nam ¦ Warna laki-laki
+Couleur des femmes ¦ Màu cho nữ ¦ Warna perempuan
+Hauteur des barres (px, au total) ¦ Chiều cao thanh (px, tổng cộng) ¦ Tinggi batang (px, total)
+Les personnes (même nom au-dessus = branche) ¦ Những người (cùng tên ở trên = nhánh) ¦ Orang-orang (nama yang sama di atas = cabang)
+Au-dessus (nom ; vide pour le haut) ¦ Ở trên (tên; trống nếu là đỉnh) ¦ Di atas (nama; kosong untuk puncak)
+Lien de parenté ¦ Quan hệ họ hàng ¦ Hubungan kekerabatan
+Degré (couleur) ¦ Bậc (màu) ¦ Derajat (warna)
+Montrer le lien de parenté ¦ Hiện quan hệ họ hàng ¦ Tampilkan hubungan kekerabatan
+Générations ouvertes au départ (0 = toutes) ¦ Số thế hệ mở sẵn lúc đầu (0 = tất cả) ¦ Generasi yang terbuka di awal (0 = semua)
+Décalage d’une génération ¦ Thụt lề mỗi thế hệ ¦ Inden per generasi
+Les liens (deux personnes et leur lien) ¦ Các quan hệ (hai người và quan hệ của họ) ¦ Hubungan (dua orang dan hubungan mereka)
+Les personnes (facultatif : famille pour la couleur) ¦ Những người (không bắt buộc: gia đình để tô màu) ¦ Orang-orang (opsional: keluarga untuk warna)
+Noms des liens sur les traits ¦ Tên quan hệ trên các đường nối ¦ Nama hubungan pada garis
+Si pas trop nombreux (60) ¦ Nếu không quá nhiều (60) ¦ Jika tidak terlalu banyak (60)
+Les cousinages de la famille ¦ Quan hệ họ hàng trong gia đình ¦ Hubungan sepupu dalam keluarga
+Les personnes (lignes et colonnes, 40 au plus) ¦ Những người (dòng và cột, tối đa 40) ¦ Orang-orang (baris dan kolom, paling banyak 40)
+Les cases : ce que B est pour A ¦ Các ô: B là gì đối với A ¦ Sel: apa B bagi A
+Lien (père, cousin germain…) ¦ Quan hệ (cha, anh họ…) ¦ Hubungan (ayah, sepupu…)
+Le lien ¦ Quan hệ ¦ Hubungannya
+Le degré ¦ Bậc ¦ Derajatnya
+Rien (couleurs seules) ¦ Không gì (chỉ màu) ¦ Tidak ada (hanya warna)
+Les noms (d’où vient chacun) ¦ Các họ (mỗi họ đến từ đâu) ¦ Nama-nama (dari mana masing-masing)
+Arrive par (nom ; vide pour le premier) ¦ Đến qua (họ; trống cho họ đầu tiên) ¦ Datang lewat (nama; kosong untuk yang pertama)
+Génération d’entrée ¦ Thế hệ xuất hiện ¦ Generasi masuk
+Porteurs par génération (1,2,4…) ¦ Người mang họ theo thế hệ (1,2,4…) ¦ Penyandang per generasi (1,2,4…)
+Les ancêtres (n° Sosa → valeur) ¦ Tổ tiên (số Sosa → giá trị) ¦ Leluhur (no. Sosa → nilai)
+Valeur (chiffre ou catégorie) ¦ Giá trị (con số hoặc danh mục) ¦ Nilai (angka atau kategori)
+Les catégories et leur couleur (facultatif) ¦ Các danh mục và màu của chúng (không bắt buộc) ¦ Kategori dan warnanya (opsional)
+Une ligne par génération ¦ Mỗi thế hệ một dòng ¦ Satu baris per generasi
+Un carré (cases dans l’ordre des numéros) ¦ Một hình vuông (các ô theo thứ tự số) ¦ Persegi (sel menurut urutan nomor)
+Le nom (si la place le permet) ¦ Tên (nếu đủ chỗ) ¦ Nama (jika muat)
+Le n° Sosa ¦ Số Sosa ¦ No. Sosa
+Le nom et le n° Sosa ¦ Tên và số Sosa ¦ Nama dan no. Sosa
+Un dégradé (chiffres) ¦ Chuyển màu (con số) ¦ Gradasi (angka)
+Une couleur par catégorie ¦ Mỗi danh mục một màu ¦ Satu warna per kategori
+Dégradé : minimum ¦ Chuyển màu: nhỏ nhất ¦ Gradasi: minimum
+Dégradé : maximum ¦ Chuyển màu: lớn nhất ¦ Gradasi: maksimum
+Couleur des ancêtres pas trouvés ¦ Màu tổ tiên chưa tìm thấy ¦ Warna leluhur yang belum ditemukan
+Ce que je sais de mes ancêtres ¦ Những gì tôi biết về tổ tiên của mình ¦ Yang kuketahui tentang leluhurku
+Les paires de lieux ¦ Các cặp địa điểm ¦ Pasangan tempat
+Lieu A ¦ Địa điểm A ¦ Tempat A
+Lieu B ¦ Địa điểm B ¦ Tempat B
+Lieux gardés (les autres : « Autres ») ¦ Địa điểm được giữ (còn lại: “Khác”) ¦ Tempat yang dipertahankan (sisanya: “Lainnya”)
+Mariages dans le même lieu (boucles) ¦ Kết hôn tại cùng một nơi (vòng lặp) ¦ Pernikahan di tempat yang sama (lingkaran)
+Opacité des rubans ¦ Độ mờ của dải ¦ Opasitas pita
+Là où il y a la place ¦ Ở chỗ còn trống ¦ Di tempat yang muat
+Unité (ex. : mariages) ¦ Đơn vị (vd.: cuộc hôn nhân) ¦ Satuan (mis.: pernikahan)
+Les valeurs (une par ligne) ¦ Các giá trị (mỗi dòng một giá trị) ¦ Nilai-nilai (satu per baris)
+Catégorie (siècle, sexe…) ¦ Danh mục (thế kỷ, giới tính…) ¦ Kategori (abad, jenis kelamin…)
+Médiane et quartiles ¦ Trung vị và tứ phân vị ¦ Median dan kuartil
+Écrire la médiane ¦ Ghi trung vị ¦ Tampilkan median
+Par médiane ¦ Theo trung vị ¦ Menurut median
+Unité (ex. : ans) ¦ Đơn vị (vd.: năm) ¦ Satuan (mis.: tahun)
+Nom de l’axe ¦ Tên trục ¦ Nama sumbu
+Faire défiler les années ¦ Cho các năm chạy qua ¦ Putar tahun demi tahun
+=segment ¦ đoạn ¦ segmen
+=correspondance ¦ kết quả trùng khớp ¦ kecocokan
+=valeur ¦ giá trị ¦ nilai
+=couple ¦ cặp ¦ pasangan
+Peint : {p} % côté père · {m} % côté mère ¦ Đã tô: {p} % bên cha · {m} % bên mẹ ¦ Diwarnai: {p} % sisi ayah · {m} % sisi ibu
+Peint : {p} % du génome ¦ Đã tô: {p} % bộ gen ¦ Diwarnai: {p} % genom
+({n} petits segments non montrés) ¦ ({n} đoạn nhỏ không được hiện) ¦ ({n} segmen kecil tidak ditampilkan)
+Chromosome {c} — copie reçue du père ({mb} Mb) ¦ Nhiễm sắc thể {c} — bản nhận từ cha ({mb} Mb) ¦ Kromosom {c} — salinan dari ayah ({mb} Mb)
+Chromosome {c} — copie reçue de la mère ¦ Nhiễm sắc thể {c} — bản nhận từ mẹ ¦ Kromosom {c} — salinan dari ibu
+Chromosome {c} ({mb} Mb) ¦ Nhiễm sắc thể {c} ({mb} Mb) ¦ Kromosom {c} ({mb} Mb)
+chromosome {c} : {a} à {b} Mb ¦ nhiễm sắc thể {c}: {a} đến {b} Mb ¦ kromosom {c}: {a} sampai {b} Mb
+(clic : sa fiche) ¦ (bấm: hồ sơ của họ) ¦ (klik: profilnya)
+(clic : la liste) ¦ (bấm: danh sách) ¦ (klik: daftarnya)
+Côté père ¦ Bên cha ¦ Sisi ayah
+Côté mère ¦ Bên mẹ ¦ Sisi ibu
+Côté inconnu ¦ Không rõ bên nào ¦ Sisi tidak diketahui
+côté père ¦ bên cha ¦ sisi ayah
+côté mère ¦ bên mẹ ¦ sisi ibu
+des deux côtés ¦ cả hai bên ¦ kedua sisi
+côté inconnu ¦ không rõ bên nào ¦ sisi tidak diketahui
+Branche inconnue ¦ Nhánh chưa rõ ¦ Cabang tidak diketahui
+Peinture des chromosomes : {s} de {m} ¦ Tô nhiễm sắc thể: {s} từ {m} ¦ Pewarnaan kromosom: {s} dari {m}
+{p} % du génome côté père et {m} % côté mère ¦ {p} % bộ gen bên cha và {m} % bên mẹ ¦ {p} % genom dari sisi ayah dan {m} % dari sisi ibu
+Peinture des chromosomes — {name} ¦ Tô nhiễm sắc thể — {name} ¦ Pewarnaan kromosom — {name}
+Correspondance {n} ¦ Kết quả trùng khớp {n} ¦ Kecocokan {n}
+parenté connue : {k} ¦ quan hệ đã biết: {k} ¦ hubungan yang diketahui: {k}
+parentés possibles : {k} ¦ quan hệ có thể: {k} ¦ hubungan yang mungkin: {k}
+{rel} : en moyenne {avg} cM, de {min} à {max} cM — {n} de tes correspondances dans cette fourchette ¦ {rel}: trung bình {avg} cM, từ {min} đến {max} cM — {n} kết quả trùng khớp của bạn trong khoảng này ¦ {rel}: rata-rata {avg} cM, dari {min} sampai {max} cM — {n} kecocokanmu dalam rentang ini
+pour {name} : {p} % ¦ cho {name}: {p} % ¦ untuk {name}: {p} %
+{n} correspondances placées ¦ Đã đặt {n} kết quả trùng khớp ¦ {n} kecocokan ditempatkan
+{n} correspondance placée ¦ Đã đặt {n} kết quả trùng khớp ¦ {n} kecocokan ditempatkan
+Règle des cM : {n} sur une échelle logarithmique de {r} parentés (Shared cM Project). ¦ Thước cM: {n} trên thang logarit gồm {r} quan hệ (Shared cM Project). ¦ Penggaris cM: {n} pada skala logaritmik {r} hubungan (Shared cM Project).
+Règle des cM : {n} sur une échelle linéaire de {r} parentés (Shared cM Project). ¦ Thước cM: {n} trên thang tuyến tính gồm {r} quan hệ (Shared cM Project). ¦ Penggaris cM: {n} pada skala linear {r} hubungan (Shared cM Project).
+{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max} ¦ {name}: {n}, trung vị {med}, trung bình {mean}, từ {min} đến {max} ¦ {name}: {n}, median {med}, rata-rata {mean}, dari {min} sampai {max}
+{name} : médiane {v} ¦ {name}: trung vị {v} ¦ {name}: median {v}
+Vagues : {g}, {n} valeurs, de {min} à {max}. ¦ Sóng: {g}, {n} giá trị, từ {min} đến {max}. ¦ Gelombang: {g}, {n} nilai, dari {min} sampai {max}.
+({p} % de {label}, {t} % du tout) ¦ ({p} % của {label}, {t} % của toàn bộ) ¦ ({p} % dari {label}, {t} % dari keseluruhan)
+Mosaïque de {c} colonnes (largeur = part du total {t}) et {s} séries. ¦ Biểu đồ khảm gồm {c} cột (độ rộng = phần của tổng {t}) và {s} chuỗi. ¦ Mozaik {c} kolom (lebar = bagian dari total {t}) dan {s} seri.
+(écart {v}) ¦ (chênh lệch {v}) ¦ (selisih {v})
+Échelle de points : {n} lignes, {s}. ¦ Biểu đồ điểm: {n} dòng, {s}. ¦ Plot titik: {n} baris, {s}.
+(total {v}) ¦ (tổng {v}) ¦ (total {v})
+Rose de Nightingale : {n} parts, {s}, l’aire de chaque part suit le chiffre. ¦ Hoa hồng Nightingale: {n} phần, {s}, diện tích mỗi phần theo con số. ¦ Mawar Nightingale: {n} irisan, {s}, luas tiap irisan mengikuti angkanya.
+Rose de Nightingale : {n} parts, {s}. ¦ Hoa hồng Nightingale: {n} phần, {s}. ¦ Mawar Nightingale: {n} irisan, {s}.
+Même métier que le père : {n} sur {t} ({p} %) ¦ Cùng nghề với cha: {n} trên {t} ({p} %) ¦ Pekerjaan sama dengan ayah: {n} dari {t} ({p} %)
+Père {a} → {kid} {b} : {n} ¦ Cha {a} → {kid} {b}: {n} ¦ Ayah {a} → {kid} {b}: {n}
+{p} % des enfants de {job}, {t} % du tout ¦ {p} % con cái của {job}, {t} % của toàn bộ ¦ {p} % dari anak-anak {job}, {t} % dari keseluruhan
+Père ↓ · {kid} → ¦ Cha ↓ · {kid} → ¦ Ayah ↓ · {kid} →
+Chiffres en % des enfants de chaque métier du père ¦ Con số theo % con cái của mỗi nghề của cha ¦ Angka dalam % anak dari tiap pekerjaan ayah
+Chiffres en % de chaque métier de {kid} ¦ Con số theo % mỗi nghề của {kid} ¦ Angka dalam % tiap pekerjaan {kid}
+Chiffres en % du tout ¦ Con số theo % toàn bộ ¦ Angka dalam % keseluruhan
+Chiffres en nombre ¦ Con số theo số lượng ¦ Angka dalam jumlah
+cadre de couleur : même métier que le père. ¦ khung màu: cùng nghề với cha. ¦ bingkai berwarna: pekerjaan sama dengan ayah.
+Cadre de couleur : même métier que le père. ¦ Khung màu: cùng nghề với cha. ¦ Bingkai berwarna: pekerjaan sama dengan ayah.
+Tableau de mobilité : {t} couples père et {kid}, {n} métiers ; {p} % font le métier du père. ¦ Bảng dịch chuyển nghề: {t} cặp cha và {kid}, {n} nghề; {p} % làm nghề của cha. ¦ Tabel mobilitas: {t} pasangan ayah dan {kid}, {n} pekerjaan; {p} % mengikuti pekerjaan ayah.
+, femmes et hommes ¦ , nữ và nam ¦ , perempuan dan laki-laki
+, par siècle du mariage ¦ , theo thế kỷ kết hôn ¦ , menurut abad pernikahan
+, par siècle de naissance ¦ , theo thế kỷ sinh ¦ , menurut abad kelahiran
+, par siècle ¦ , theo thế kỷ ¦ , menurut abad
+D’après {n} de l’arbre ¦ Dựa trên {n} trong cây ¦ Berdasarkan {n} di pohon
+largeur : le nombre de personnes de la période ; hauteur : la part de chacun ¦ độ rộng: số người của giai đoạn; chiều cao: phần của mỗi bên ¦ lebar: jumlah orang dalam periode; tinggi: bagian masing-masing
+D’après les fiches de l’arbre ¦ Dựa trên các hồ sơ trong cây ¦ Berdasarkan profil di pohon
+femmes et hommes ¦ nữ và nam ¦ perempuan dan laki-laki
+D’après {n} au mois près ¦ Dựa trên {n} chính xác đến tháng ¦ Berdasarkan {n} yang tepat sampai bulan
+D’après {n} père et {kid} dont les deux métiers sont connus ¦ Dựa trên {n} cha và {kid} biết được cả hai nghề ¦ Berdasarkan {n} ayah dan {kid} yang kedua pekerjaannya diketahui
+{n} pris dans l’onglet ADN. ¦ {n} lấy từ thẻ ADN. ¦ {n} diambil dari tab DNA.
+{n} prises dans l’onglet ADN. ¦ {n} lấy từ thẻ ADN. ¦ {n} diambil dari tab DNA.
+(les 300 premières) ¦ (300 mục đầu tiên) ¦ (300 pertama)
+clic : la fiche. ¦ bấm: hồ sơ. ¦ klik: profilnya.
+Cette partie ¦ Phần này ¦ Bagian ini
+{name} : ferme l’éditeur et clique à nouveau pour voir la liste des personnes. ¦ {name}: hãy đóng trình sửa và bấm lại để xem danh sách người. ¦ {name}: tutup penyunting lalu klik lagi untuk melihat daftar orang.
+Aucun segment à montrer (vérifie le chromosome, le début et la fin, ou le minimum de cM). ¦ Không có đoạn nào để hiện (hãy kiểm tra nhiễm sắc thể, điểm đầu và cuối, hoặc cM tối thiểu). ¦ Tidak ada segmen untuk ditampilkan (periksa kromosom, awal dan akhir, atau cM minimum).
+Ajoute des segments : chromosome, début, fin (en Mb ou en paires de bases), cM, correspondance. ¦ Hãy thêm các đoạn: nhiễm sắc thể, đầu, cuối (theo Mb hoặc cặp base), cM, kết quả trùng khớp. ¦ Tambahkan segmen: kromosom, awal, akhir (dalam Mb atau pasangan basa), cM, kecocokan.
+▲ père ▼ mère ¦ ▲ cha ▼ mẹ ¦ ▲ ayah ▼ ibu
+Ajoute tes correspondances (nom, cM) : elles se placent sur la règle. ¦ Hãy thêm các kết quả trùng khớp của bạn (tên, cM): chúng sẽ được đặt lên thước. ¦ Tambahkan kecocokanmu (nama, cM): semuanya ditempatkan di penggaris.
+Ajoute des valeurs avec leur groupe (siècle, sexe, branche…) : une vague par groupe. ¦ Hãy thêm giá trị kèm nhóm (thế kỷ, giới tính, nhánh…): mỗi nhóm một sóng. ¦ Tambahkan nilai dengan kelompoknya (abad, jenis kelamin, cabang…): satu gelombang per kelompok.
+Ajoute des colonnes (lignes du tableau) et leurs parts (séries) : la largeur suit le total. ¦ Hãy thêm các cột (dòng của bảng) và phần của chúng (chuỗi): độ rộng theo tổng. ¦ Tambahkan kolom (baris tabel) dan bagiannya (seri): lebarnya mengikuti total.
+Ajoute des lignes et leurs valeurs (une colonne par série, ex. femmes et hommes). ¦ Hãy thêm các dòng và giá trị của chúng (mỗi chuỗi một cột, vd. nữ và nam). ¦ Tambahkan baris dan nilainya (satu kolom per seri, mis. perempuan dan laki-laki).
+Ajoute des parts (mois, saisons…) et leurs chiffres (une colonne par série). ¦ Hãy thêm các phần (tháng, mùa…) và con số của chúng (mỗi chuỗi một cột). ¦ Tambahkan irisan (bulan, musim…) dan angkanya (satu kolom per seri).
+Ajoute des lignes : métier du père, métier de l’enfant, combien. ¦ Hãy thêm dòng: nghề của cha, nghề của con, bao nhiêu. ¦ Tambahkan baris: pekerjaan ayah, pekerjaan anak, berapa banyak.
+Aucune donnée dans l’arbre pour ce choix (dates manquantes ?). ¦ Không có dữ liệu trong cây cho lựa chọn này (thiếu ngày?). ¦ Tidak ada data di pohon untuk pilihan ini (tanggal hilang?).
+Aucune donnée dans l’arbre pour ce choix. ¦ Không có dữ liệu trong cây cho lựa chọn này. ¦ Tidak ada data di pohon untuk pilihan ini.
+Les métiers de la famille, siècle par siècle ¦ Nghề nghiệp của gia đình, từng thế kỷ ¦ Pekerjaan keluarga, abad demi abad
+Les communes de naissance, siècle par siècle ¦ Các xã nơi sinh, từng thế kỷ ¦ Kota kelahiran, abad demi abad
+Les noms de famille, siècle par siècle ¦ Các họ, từng thế kỷ ¦ Nama keluarga, abad demi abad
+Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix. ¦ Không đủ ngày sinh và ngày mất (hoặc kết hôn) cho lựa chọn này. ¦ Tanggal lahir dan kematian (atau pernikahan) tidak cukup untuk pilihan ini.
+Âge moyen au décès, par siècle de naissance ¦ Tuổi trung bình khi mất, theo thế kỷ sinh ¦ Umur rata-rata saat meninggal, menurut abad kelahiran
+Âge moyen au mariage, par siècle ¦ Tuổi trung bình khi kết hôn, theo thế kỷ ¦ Umur rata-rata saat menikah, menurut abad
+Âge moyen au décès, par commune de naissance ¦ Tuổi trung bình khi mất, theo xã nơi sinh ¦ Umur rata-rata saat meninggal, menurut kota kelahiran
+Âge moyen au décès, par nom de famille ¦ Tuổi trung bình khi mất, theo họ ¦ Umur rata-rata saat meninggal, menurut nama keluarga
+Aucune date au mois près dans l’arbre pour ce choix. ¦ Không có ngày nào chính xác đến tháng trong cây cho lựa chọn này. ¦ Tidak ada tanggal yang tepat sampai bulan di pohon untuk pilihan ini.
+Naissances, mariages et décès, mois par mois ¦ Sinh, kết hôn và mất, từng tháng ¦ Kelahiran, pernikahan, dan kematian, bulan demi bulan
+Les naissances, mois par mois ¦ Sinh, từng tháng ¦ Kelahiran, bulan demi bulan
+Les mariages, mois par mois ¦ Kết hôn, từng tháng ¦ Pernikahan, bulan demi bulan
+Les décès, mois par mois ¦ Mất, từng tháng ¦ Kematian, bulan demi bulan
+Les conceptions (naissance − 9 mois), mois par mois ¦ Thụ thai (sinh − 9 tháng), từng tháng ¦ Pembuahan (kelahiran − 9 bulan), bulan demi bulan
+Aucun couple père / enfant dont les deux métiers sont connus. ¦ Không có cặp cha / con nào biết được cả hai nghề. ¦ Tidak ada pasangan ayah/anak yang kedua pekerjaannya diketahui.
+Métier du père, métier de l’enfant ¦ Nghề của cha, nghề của con ¦ Pekerjaan ayah, pekerjaan anak
+Métier du père, métier du fils ¦ Nghề của cha, nghề của con trai ¦ Pekerjaan ayah, pekerjaan anak laki-laki
+Métier du père, métier de la fille ¦ Nghề của cha, nghề của con gái ¦ Pekerjaan ayah, pekerjaan anak perempuan
+Âge au décès, par siècle de naissance ¦ Tuổi khi mất, theo thế kỷ sinh ¦ Umur saat meninggal, menurut abad kelahiran
+Âge au décès, femmes et hommes ¦ Tuổi khi mất, nữ và nam ¦ Umur saat meninggal, perempuan dan laki-laki
+Âge au mariage, par siècle ¦ Tuổi khi kết hôn, theo thế kỷ ¦ Umur saat menikah, menurut abad
+Âge au mariage, femmes et hommes ¦ Tuổi khi kết hôn, nữ và nam ¦ Umur saat menikah, perempuan dan laki-laki
+Métiers, siècle par siècle ¦ Nghề nghiệp, từng thế kỷ ¦ Pekerjaan, abad demi abad
+Communes de naissance, siècle par siècle ¦ Xã nơi sinh, từng thế kỷ ¦ Kota kelahiran, abad demi abad
+Noms de famille, siècle par siècle ¦ Họ, từng thế kỷ ¦ Nama keluarga, abad demi abad
+Métiers, par 50 ans ¦ Nghề nghiệp, mỗi 50 năm ¦ Pekerjaan, per 50 tahun
+Âge moyen au décès (femmes, hommes), par siècle de naissance ¦ Tuổi trung bình khi mất (nữ, nam), theo thế kỷ sinh ¦ Umur rata-rata saat meninggal (perempuan, laki-laki), menurut abad kelahiran
+Âge moyen au mariage (femmes, hommes), par siècle ¦ Tuổi trung bình khi kết hôn (nữ, nam), theo thế kỷ ¦ Umur rata-rata saat menikah (perempuan, laki-laki), menurut abad
+Naissances, mariages et décès, par mois ¦ Sinh, kết hôn và mất, theo tháng ¦ Kelahiran, pernikahan, dan kematian, per bulan
+Naissances par mois, par siècle ¦ Sinh theo tháng, theo thế kỷ ¦ Kelahiran per bulan, menurut abad
+Conceptions par mois (naissance − 9 mois), par siècle ¦ Thụ thai theo tháng (sinh − 9 tháng), theo thế kỷ ¦ Pembuahan per bulan (kelahiran − 9 bulan), menurut abad
+Mariages par mois, par siècle ¦ Kết hôn theo tháng, theo thế kỷ ¦ Pernikahan per bulan, menurut abad
+Décès par mois, par siècle ¦ Mất theo tháng, theo thế kỷ ¦ Kematian per bulan, menurut abad
+Métier du père → métier du fils ¦ Nghề của cha → nghề của con trai ¦ Pekerjaan ayah → pekerjaan anak laki-laki
+Métier du père → métier de la fille ¦ Nghề của cha → nghề của con gái ¦ Pekerjaan ayah → pekerjaan anak perempuan
+Métier du père → métier de l’enfant (fils et filles) ¦ Nghề của cha → nghề của con (con trai và con gái) ¦ Pekerjaan ayah → pekerjaan anak (laki-laki dan perempuan)
+La personne qui a fait le test… ¦ Người đã làm xét nghiệm… ¦ Orang yang menjalani tes…
+ℹ️ Aucun test ADN dans ta base : ajoute-le dans l’onglet ADN (🧬 Mes tests), ou remplis le tableau à la main. ¦ ℹ️ Chưa có xét nghiệm ADN nào trong dữ liệu của bạn: hãy thêm trong thẻ ADN (🧬 Xét nghiệm của tôi), hoặc điền bảng bằng tay. ¦ ℹ️ Tidak ada tes DNA di basis datamu: tambahkan di tab DNA (🧬 Tes-tesku), atau isi tabel secara manual.
+ℹ️ Cette personne n’a pas de test : voici tous les tests de ta base. ¦ ℹ️ Người này không có xét nghiệm: đây là mọi xét nghiệm trong dữ liệu của bạn. ¦ ℹ️ Orang ini tidak punya tes: ini semua tes di basis datamu.
+Lecture de tes données ADN… ¦ Đang đọc dữ liệu ADN của bạn… ¦ Membaca data DNA-mu…
+Aucun test ADN dans ta base. ¦ Không có xét nghiệm ADN nào trong dữ liệu của bạn. ¦ Tidak ada tes DNA di basis datamu.
+🧬 Les segments d’un test ¦ 🧬 Các đoạn của một xét nghiệm ¦ 🧬 Segmen sebuah tes
+Les segments partagés avec chaque cousin (onglet ADN → 🧩 Chromosomes) sont peints sur ses chromosomes, colorés par branche (les groupes de l’onglet ADN, ou l’ancêtre noté sur le segment). ¦ Các đoạn chung với mỗi người họ (thẻ ADN → 🧩 Nhiễm sắc thể) được tô trên nhiễm sắc thể, màu theo nhánh (các nhóm của thẻ ADN, hoặc tổ tiên ghi trên đoạn). ¦ Segmen yang sama dengan tiap sepupu (tab DNA → 🧩 Kromosom) diwarnai di kromosomnya, menurut cabang (kelompok di tab DNA, atau leluhur yang dicatat pada segmen).
+Segments d’au moins ¦ Các đoạn ít nhất ¦ Segmen minimal
+Ce test n’a pas encore de segments : importe-les dans l’onglet ADN (🧩 Chromosomes → ⤒ Importer des segments). ¦ Xét nghiệm này chưa có đoạn nào: hãy nhập trong thẻ ADN (🧩 Nhiễm sắc thể → ⤒ Nhập các đoạn). ¦ Tes ini belum punya segmen: impor di tab DNA (🧩 Kromosom → ⤒ Impor segmen).
+D’après l’onglet ADN (segments partagés) ¦ Dựa trên thẻ ADN (các đoạn chung) ¦ Berdasarkan tab DNA (segmen bersama)
+📏 Les correspondances d’un test ¦ 📏 Các kết quả trùng khớp của một xét nghiệm ¦ 📏 Kecocokan sebuah tes
+Chaque correspondance se place sur la règle d’après ses cM partagés ; survole un point pour voir les parentés possibles. ¦ Mỗi kết quả trùng khớp được đặt trên thước theo số cM chung; hãy di chuột lên một điểm để xem các quan hệ có thể. ¦ Setiap kecocokan ditempatkan di penggaris menurut cM bersamanya; arahkan tetikus ke titik untuk melihat hubungan yang mungkin.
+Correspondances d’au moins ¦ Kết quả trùng khớp ít nhất ¦ Kecocokan minimal
+Combien au plus ¦ Tối đa bao nhiêu ¦ Paling banyak berapa
+Aucune correspondance avec des cM pour ce test (ou au-dessus du minimum choisi). ¦ Không có kết quả trùng khớp nào có cM cho xét nghiệm này (hoặc trên mức tối thiểu đã chọn). ¦ Tidak ada kecocokan dengan cM untuk tes ini (atau di atas minimum yang dipilih).
+segments partagés, colorés par branche ¦ các đoạn chung, tô màu theo nhánh ¦ segmen bersama, diwarnai menurut cabang
+Mes chromosomes peints ¦ Nhiễm sắc thể của tôi được tô màu ¦ Kromosomku yang diwarnai
+Mes cousins ADN sur la règle des cM ¦ Anh chị em họ ADN của tôi trên thước cM ¦ Sepupu DNA-ku di penggaris cM
+par siècle de naissance ¦ theo thế kỷ sinh ¦ menurut abad kelahiran
+Les métiers, siècle par siècle ¦ Nghề nghiệp, từng thế kỷ ¦ Pekerjaan, abad demi abad
+largeur : nombre de personnes ; hauteur : part du métier ¦ độ rộng: số người; chiều cao: phần của nghề ¦ lebar: jumlah orang; tinggi: bagian pekerjaan
+par commune de naissance, femmes et hommes ¦ theo xã nơi sinh, nữ và nam ¦ menurut kota kelahiran, perempuan dan laki-laki
+Les mois de la vie ¦ Các tháng của cuộc đời ¦ Bulan-bulan kehidupan
+naissances, mariages et décès ¦ sinh, kết hôn và mất ¦ kelahiran, pernikahan, dan kematian
+Les segments partagés (un par ligne) ¦ Các đoạn chung (mỗi dòng một đoạn) ¦ Segmen bersama (satu per baris)
+Chromosome (1 à 22, X) ¦ Nhiễm sắc thể (1 đến 22, X) ¦ Kromosom (1 sampai 22, X)
+Début (Mb ou paires de bases) ¦ Điểm đầu (Mb hoặc cặp base) ¦ Awal (Mb atau pasangan basa)
+Branche (couple d’ancêtres) ¦ Nhánh (cặp tổ tiên) ¦ Cabang (pasangan leluhur)
+Couleur (sinon celle de la branche) ¦ Màu (nếu không thì màu của nhánh) ¦ Warna (jika tidak, warna cabang)
+Les branches et leur couleur (facultatif) ¦ Các nhánh và màu của chúng (không bắt buộc) ¦ Cabang dan warnanya (opsional)
+Deux copies par chromosome (père en haut, mère en bas) ¦ Hai bản cho mỗi nhiễm sắc thể (cha ở trên, mẹ ở dưới) ¦ Dua salinan per kromosom (ayah di atas, ibu di bawah)
+Une seule barre par chromosome ¦ Một thanh duy nhất cho mỗi nhiễm sắc thể ¦ Satu batang per kromosom
+Couleur des segments ¦ Màu của các đoạn ¦ Warna segmen
+Par correspondance ¦ Theo kết quả trùng khớp ¦ Menurut kecocokan
+Par côté (père, mère) ¦ Theo bên (cha, mẹ) ¦ Menurut sisi (ayah, ibu)
+Couleur du côté père ¦ Màu bên cha ¦ Warna sisi ayah
+Couleur du côté mère ¦ Màu bên mẹ ¦ Warna sisi ibu
+Cacher les segments de moins de ¦ Ẩn các đoạn nhỏ hơn ¦ Sembunyikan segmen yang lebih kecil dari
+Épaisseur des chromosomes ¦ Độ dày nhiễm sắc thể ¦ Ketebalan kromosom
+Colonnes (0 = selon la largeur) ¦ Số cột (0 = theo độ rộng) ¦ Kolom (0 = menurut lebar)
+Montrer le chromosome X ¦ Hiện nhiễm sắc thể X ¦ Tampilkan kromosom X
+Noms dans les segments (s’ils tiennent) ¦ Tên trong các đoạn (nếu vừa) ¦ Nama di segmen (jika muat)
+Parenté connue (facultatif) ¦ Quan hệ đã biết (không bắt buộc) ¦ Hubungan yang diketahui (opsional)
+Montrer les parentés possibles de… (un nom) ¦ Hiện các quan hệ có thể của… (một tên) ¦ Tampilkan hubungan yang mungkin dari… (sebuah nama)
+Régulière ¦ Đều ¦ Teratur
+Parentés ¦ Quan hệ ¦ Hubungan
+Les principales ¦ Các quan hệ chính ¦ Yang utama
+Toutes (demi-parentés, générations d’écart…) ¦ Tất cả (nửa họ hàng, cách thế hệ…) ¦ Semua (hubungan tiri, beda generasi…)
+Noms écrits (les plus proches d’abord) ¦ Tên được ghi (gần nhất trước) ¦ Nama yang ditampilkan (terdekat dulu)
+Trait à la moyenne de chaque parenté ¦ Vạch ở mức trung bình của mỗi quan hệ ¦ Garis di rata-rata tiap hubungan
+Couleur des autres points ¦ Màu các điểm khác ¦ Warna titik lain
+Couleur des fourchettes ¦ Màu các khoảng ¦ Warna rentang
+Fin de l’échelle ¦ Cuối thang ¦ Ujung skala
+Les valeurs et leur groupe (une vague par groupe) ¦ Các giá trị và nhóm của chúng (mỗi nhóm một sóng) ¦ Nilai dan kelompoknya (satu gelombang per kelompok)
+Nom (personne…) ¦ Tên (người…) ¦ Nama (orang…)
+Groupe (siècle, sexe…) ¦ Nhóm (thế kỷ, giới tính…) ¦ Kelompok (abad, jenis kelamin…)
+Couleur du groupe ¦ Màu của nhóm ¦ Warna kelompok
+Chevauchement des vagues ¦ Độ chồng của các sóng ¦ Tumpang tindih gelombang
+Écart entre les vagues ¦ Khoảng cách giữa các sóng ¦ Jarak antar gelombang
+Hauteur des vagues ¦ Chiều cao các sóng ¦ Tinggi gelombang
+Chaque vague à sa hauteur ¦ Mỗi sóng theo chiều cao riêng ¦ Setiap gelombang dengan tingginya sendiri
+Selon le nombre de valeurs ¦ Theo số giá trị ¦ Menurut jumlah nilai
+Par nombre de valeurs ¦ Theo số giá trị ¦ Berdasarkan jumlah nilai
+Une par groupe ¦ Mỗi nhóm một ¦ Satu per kelompok
+Dégradé : première couleur ¦ Chuyển màu: màu đầu ¦ Gradasi: warna pertama
+Dégradé : dernière couleur ¦ Chuyển màu: màu cuối ¦ Gradasi: warna terakhir
+Montrer la médiane ¦ Hiện trung vị ¦ Tampilkan median
+Écrire le nombre de valeurs ¦ Ghi số giá trị ¦ Tampilkan jumlah nilai
+Début de l’axe (vide = automatique) ¦ Đầu trục (trống = tự động) ¦ Awal sumbu (kosong = otomatis)
+Fin de l’axe (vide = automatique) ¦ Cuối trục (trống = tự động) ¦ Akhir sumbu (kosong = otomatis)
+Les colonnes (lignes) et leurs parts (séries) ¦ Các cột (dòng) và phần của chúng (chuỗi) ¦ Kolom (baris) dan bagiannya (seri)
+La part en % ¦ Phần theo % ¦ Bagian dalam %
+Le chiffre ¦ Con số ¦ Angkanya
+Part de chaque colonne sous l’axe ¦ Phần của mỗi cột dưới trục ¦ Bagian tiap kolom di bawah sumbu
+Ordre des colonnes ¦ Thứ tự các cột ¦ Urutan kolom
+Les plus larges d’abord ¦ Rộng nhất trước ¦ Terlebar dulu
+Écart entre les colonnes ¦ Khoảng cách giữa các cột ¦ Jarak antar kolom
+Couleur des traits ¦ Màu đường kẻ ¦ Warna garis
+Les lignes et leurs valeurs (une colonne par série) ¦ Các dòng và giá trị của chúng (mỗi chuỗi một cột) ¦ Baris dan nilainya (satu kolom per seri)
+Par écart entre les deux séries ¦ Theo chênh lệch giữa hai chuỗi ¦ Menurut selisih antara dua seri
+Pointillé sur toute la largeur ¦ Chấm chấm suốt chiều rộng ¦ Titik-titik sepanjang lebar
+Entre les points (écart) ¦ Giữa các điểm (chênh lệch) ¦ Di antara titik (selisih)
+Couleur des points (une seule série) ¦ Màu điểm (một chuỗi) ¦ Warna titik (satu seri)
+Écrire la valeur ¦ Ghi giá trị ¦ Tampilkan nilai
+Écrire l’écart (deux séries) ¦ Ghi chênh lệch (hai chuỗi) ¦ Tampilkan selisih (dua seri)
+Mettre en avant (un nom ; les autres pâlissent) ¦ Làm nổi bật (một tên; những tên khác nhạt đi) ¦ Sorot (satu nama; yang lain memudar)
+Les parts (mois, saisons…) et leurs chiffres ¦ Các phần (tháng, mùa…) và con số của chúng ¦ Irisan (bulan, musim…) dan angkanya
+Plusieurs séries ¦ Nhiều chuỗi ¦ Beberapa seri
+Empilées ¦ Xếp chồng ¦ Bertumpuk
+Superposées (comme Florence Nightingale) ¦ Chồng lên nhau (như Florence Nightingale) ¦ Ditumpangkan (seperti Florence Nightingale)
+L’aire suit le chiffre (sinon : la longueur) ¦ Diện tích theo con số (nếu không: độ dài) ¦ Luas mengikuti angka (jika tidak: panjang)
+Départ (degrés, 0 = en haut) ¦ Điểm bắt đầu (độ, 0 = phía trên) ¦ Awal (derajat, 0 = atas)
+Noms des parts ¦ Tên các phần ¦ Nama irisan
+Cercles de l’échelle ¦ Vòng tròn của thang ¦ Lingkaran skala
+Couleur des traits entre les parts ¦ Màu đường giữa các phần ¦ Warna garis antar irisan
+Les couples de métiers ¦ Các cặp nghề ¦ Pasangan pekerjaan
+Métier du père ¦ Nghề của cha ¦ Pekerjaan ayah
+Métier de l’enfant ¦ Nghề của con ¦ Pekerjaan anak
+Regrouper des métiers (facultatif : un mot → une famille de métiers) ¦ Gom nhóm nghề (không bắt buộc: một từ → một nhóm nghề) ¦ Kelompokkan pekerjaan (opsional: satu kata → satu rumpun pekerjaan)
+Métier (ou un morceau du mot) ¦ Nghề (hoặc một phần của từ) ¦ Pekerjaan (atau sebagian kata)
+Famille de métiers ¦ Nhóm nghề ¦ Rumpun pekerjaan
+En % des enfants de chaque métier du père ¦ Theo % con cái của mỗi nghề của cha ¦ Dalam % anak dari tiap pekerjaan ayah
+En % de chaque métier de l’enfant ¦ Theo % mỗi nghề của con ¦ Dalam % tiap pekerjaan anak
+En nombre ¦ Theo số lượng ¦ Dalam jumlah
+Combien de métiers ¦ Bao nhiêu nghề ¦ Berapa pekerjaan
+Regrouper les autres dans « Autres » ¦ Gom phần còn lại vào “Khác” ¦ Kelompokkan sisanya di “Lainnya”
+Les plus fréquents d’abord ¦ Thường gặp nhất trước ¦ Paling sering dulu
+Cadre « même métier que le père » ¦ Khung “cùng nghề với cha” ¦ Bingkai “pekerjaan sama dengan ayah”
+Le mot pour l’enfant (ex. : le fils) ¦ Từ chỉ người con (vd.: con trai) ¦ Kata untuk anak (mis.: anak laki-laki)
+Ces personnes ne sont plus dans la base. ¦ Những người này không còn trong cơ sở dữ liệu. ¦ Orang-orang ini sudah tidak ada di basis data.
+Naissances ¦ Sinh ¦ Kelahiran
+=lignée ¦ dòng dõi ¦ garis keturunan
+=mère ¦ mẹ ¦ ibu
+personne de départ ¦ người bắt đầu ¦ orang awal
+ancêtre ({k} générations) ¦ tổ tiên ({k} thế hệ) ¦ leluhur ({k} generasi)
+descendant ({k} générations) ¦ con cháu ({k} thế hệ) ¦ keturunan ({k} generasi)
+descendante ({k} générations) ¦ con cháu ({k} thế hệ) ¦ keturunan ({k} generasi)
+{k} générations au-dessus ¦ {k} thế hệ ở trên ¦ {k} generasi di atas
+{k} générations en dessous ¦ {k} thế hệ ở dưới ¦ {k} generasi di bawah
+Arrière-arrière-petits-enfants ¦ Chút ¦ Canggah (keturunan)
+Arrière-arrière-arrière-petits-enfants ¦ Chít ¦ Wareng (keturunan)
+parente|mère ¦ mẹ ¦ ibu
+parente|grand-mère ¦ bà ¦ nenek
+parente|grand-parent ¦ ông bà ¦ kakek-nenek
+parente|enfant ¦ con ¦ anak
+parente|petit-enfant ¦ cháu ¦ cucu
+parente|arrière-grand-mère ¦ cụ bà ¦ nenek buyut
+parente|arrière-grand-parent ¦ cụ ¦ buyut
+parente|arrière-arrière-grand-père ¦ kỵ ông ¦ kakek canggah
+parente|arrière-arrière-grand-mère ¦ kỵ bà ¦ nenek canggah
+parente|arrière-arrière-grand-parent ¦ kỵ ¦ canggah
+parente|arrière-arrière-arrière-grand-père ¦ tổ ông đời thứ năm ¦ kakek wareng
+parente|arrière-arrière-arrière-grand-mère ¦ tổ bà đời thứ năm ¦ nenek wareng
+parente|arrière-arrière-arrière-grand-parent ¦ tổ đời thứ năm ¦ wareng
+parente|arrière-petite-fille ¦ chắt gái ¦ cicit perempuan
+parente|arrière-petit-enfant ¦ chắt ¦ cicit
+parente|arrière-arrière-petit-fils ¦ chút trai ¦ canggah laki-laki
+parente|arrière-arrière-petite-fille ¦ chút gái ¦ canggah perempuan
+parente|arrière-arrière-petit-enfant ¦ chút ¦ canggah
+parente|arrière-arrière-arrière-petit-fils ¦ chít trai ¦ wareng laki-laki
+parente|arrière-arrière-arrière-petite-fille ¦ chít gái ¦ wareng perempuan
+parente|arrière-arrière-arrière-petit-enfant ¦ chít ¦ wareng
+{n} générations en vie en même temps : {a} – {b} ¦ {n} thế hệ cùng sống một lúc: {a} – {b} ¦ {n} generasi hidup bersamaan: {a} – {b}
+(en vie) ¦ (còn sống) ¦ (masih hidup)
+(décès inconnu : vie supposée) ¦ (không rõ ngày mất: tuổi thọ giả định) ¦ (kematian tidak diketahui: usia hidup diperkirakan)
+(décès inconnu) ¦ (không rõ ngày mất) ¦ (kematian tidak diketahui)
+{a} ({ra}) a connu {b} ({rb}) pendant {years} ({period}). ¦ {a} ({ra}) đã biết {b} ({rb}) trong {years} ({period}). ¦ {a} ({ra}) mengenal {b} ({rb}) selama {years} ({period}).
+{a} a connu {b} ({k} générations plus tard) pendant {years} ({period}). ¦ {a} đã biết {b} ({k} thế hệ sau) trong {years} ({period}). ¦ {a} mengenal {b} ({k} generasi kemudian) selama {years} ({period}).
+Personne de ces vies ne se chevauche sur {n} générations ou plus. ¦ Không cuộc đời nào trong số này trùng nhau qua {n} thế hệ trở lên. ¦ Tidak ada hidup yang tumpang tindih selama {n} generasi atau lebih.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontres racontées. ¦ Ai đã biết ai: {n} cuộc đời trên {g} thế hệ; kể {s} cuộc gặp. ¦ Siapa mengenal siapa: {n} riwayat hidup dalam {g} generasi; {s} pertemuan diceritakan.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontre racontée. ¦ Ai đã biết ai: {n} cuộc đời trên {g} thế hệ; kể {s} cuộc gặp. ¦ Siapa mengenal siapa: {n} riwayat hidup dalam {g} generasi; {s} pertemuan diceritakan.
+Âge (ans) ¦ Tuổi (năm) ¦ Umur (tahun)
+médiane {n} ans ¦ trung vị {n} tuổi ¦ median {n} tahun
+{name} : la moitié a passé {n} ans ¦ {name}: một nửa sống quá {n} tuổi ¦ {name}: separuh hidup melewati umur {n}
+{name} : {p} % encore en vie à {a} ans ({n}) · {d} entre {a} et {b} ans ¦ {name}: {p} % còn sống ở tuổi {a} ({n}) · {d} mất trong khoảng {a} đến {b} tuổi ¦ {name}: {p} % masih hidup pada umur {a} ({n}) · {d} antara umur {a} dan {b}
+Courbe de survie : {n} personnes en {g} groupes. ¦ Đường sống sót: {n} người trong {g} nhóm. ¦ Kurva kelangsungan hidup: {n} orang dalam {g} kelompok.
+Courbe de survie : {n} personnes en {g} groupe. ¦ Đường sống sót: {n} người trong {g} nhóm. ¦ Kurva kelangsungan hidup: {n} orang dalam {g} kelompok.
+Même métier que la génération d’avant — {list} ¦ Cùng nghề với thế hệ trước — {list} ¦ Pekerjaan sama dengan generasi sebelumnya — {list}
+Métiers sur {n} générations : {l}. ¦ Nghề nghiệp qua {n} thế hệ: {l}. ¦ Pekerjaan selama {n} generasi: {l}.
+{a} et {b} : {d} ¦ {a} và {b}: {d} ¦ {a} dan {b}: {d}
+(né à {p}) ¦ (sinh tại {p}) ¦ (lahir di {p})
+(née à {p}) ¦ (sinh tại {p}) ¦ (lahir di {p})
+même lieu de naissance ¦ cùng nơi sinh ¦ tempat lahir sama
+mariage {y} ¦ kết hôn {y} ¦ pernikahan {y}
+(au-delà du cercle) ¦ (ngoài vòng tròn) ¦ (di luar lingkaran)
+le village de l’époux ¦ làng của chồng ¦ desa suami
+{n} du même lieu ¦ {n} từ cùng một nơi ¦ {n} dari tempat yang sama
+{c} : la moitié des mariages à moins de {km} km ¦ {c}: một nửa số cuộc hôn nhân trong vòng {km} km ¦ {c}: separuh pernikahan dalam jarak {km} km
+Rayon des mariages : {n}, médiane {km} km. ¦ Bán kính hôn nhân: {n}, trung vị {km} km. ¦ Radius pernikahan: {n}, median {km} km.
+Génération {g} : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes ¦ Thế hệ {g}: {t} tổ tiên có thể, tìm thấy {f} vị trí ({p} %), {d} người khác nhau ¦ Generasi {g}: {t} leluhur yang mungkin, {f} posisi ditemukan ({p} %), {d} orang berbeda
+implexe {p} % ¦ trùng lặp tổ tiên {p} % ¦ implex {p} %
+Ancêtres présents plusieurs fois à la génération {g} ¦ Tổ tiên xuất hiện nhiều lần ở thế hệ {g} ¦ Leluhur yang muncul beberapa kali di generasi {g}
+Sur {n} générations : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes (génération par génération) — implexe {i} %. ¦ Trên {n} thế hệ: {t} tổ tiên có thể, tìm thấy {f} vị trí ({p} %), {d} người khác nhau (từng thế hệ) — trùng lặp tổ tiên {i} %. ¦ Selama {n} generasi: {t} leluhur yang mungkin, {f} posisi ditemukan ({p} %), {d} orang berbeda (generasi demi generasi) — implex {i} %.
+Implexe sur {n} générations : {p} %. ¦ Trùng lặp tổ tiên trên {n} thế hệ: {p} %. ¦ Implex selama {n} generasi: {p} %.
+Mariages datés au jour près : {l} pendant le Carême et {a} pendant l’Avent, sur {t} ({p} %). ¦ Hôn nhân có ngày chính xác: {l} trong Mùa Chay và {a} trong Mùa Vọng, trên {t} ({p} %). ¦ Pernikahan bertanggal tepat: {l} selama Prapaskah dan {a} selama Adven, dari {t} ({p} %).
+Conceptions pendant le Carême : {n} sur {t} ({p} % ; {e} % si tout était égal). ¦ Thụ thai trong Mùa Chay: {n} trên {t} ({p} %; {e} % nếu mọi thứ đều nhau). ¦ Pembuahan selama Prapaskah: {n} dari {t} ({p} %; {e} % jika semuanya merata).
+En mars (Carême) : {a} % des {what} ; en décembre (Avent) : {b} % ; {e} % si tout était égal. ¦ Tháng 3 (Mùa Chay): {a} % số {what}; tháng 12 (Mùa Vọng): {b} %; {e} % nếu mọi thứ đều nhau. ¦ Maret (Prapaskah): {a} % dari {what}; Desember (Adven): {b} %; {e} % jika semuanya merata.
+Mois des {a} et des {b} : {x} et {y}. ¦ Các tháng của {a} và {b}: {x} và {y}. ¦ Bulan-bulan {a} dan {b}: {x} dan {y}.
+Mois des {a} : {x}. ¦ Các tháng của {a}: {x}. ¦ Bulan-bulan {a}: {x}.
+nés en {month} ¦ sinh vào {month} ¦ lahir di bulan {month}
+Si {what} étaient répartis également sur l’année (selon le nombre de jours du mois) ¦ Nếu {what} được chia đều trong năm (theo số ngày của tháng) ¦ Jika {what} tersebar merata sepanjang tahun (menurut jumlah hari dalam bulan)
+(naissance inconnue : âges estimés) ¦ (không rõ ngày sinh: tuổi ước tính) ¦ (kelahiran tidak diketahui: umur diperkirakan)
+{name} : née en {y} (mère : {age} ans, estimé) ¦ {name}: sinh năm {y} (mẹ: {age} tuổi, ước tính) ¦ {name}: lahir tahun {y} (ibu: {age} tahun, perkiraan)
+{name} : née en {y} (mère : {age} ans) ¦ {name}: sinh năm {y} (mẹ: {age} tuổi) ¦ {name}: lahir tahun {y} (ibu: {age} tahun)
+{name} : né en {y} (mère : {age} ans, estimé) ¦ {name}: sinh năm {y} (mẹ: {age} tuổi, ước tính) ¦ {name}: lahir tahun {y} (ibu: {age} tahun, perkiraan)
+{name} : né en {y} (mère : {age} ans) ¦ {name}: sinh năm {y} (mẹ: {age} tuổi) ¦ {name}: lahir tahun {y} (ibu: {age} tahun)
+{n} mois entre {a} et {b} ¦ {n} tháng giữa {a} và {b} ¦ {n} bulan antara {a} dan {b}
+le suivant ¦ người kế tiếp ¦ berikutnya
+{k} chez {m} ¦ {k} ở {m} ¦ {k} pada {m}
+écart médian entre deux naissances : {n} mois ¦ khoảng cách trung vị giữa hai lần sinh: {n} tháng ¦ jarak median antara dua kelahiran: {n} bulan
+{p} % morts avant {n} ans. ¦ {p} % mất trước {n} tuổi. ¦ {p} % meninggal sebelum umur {n}.
+Espacement des naissances : {m}, {k}, écart médian {n} mois. ¦ Khoảng cách giữa các lần sinh: {m}, {k}, trung vị {n} tháng. ¦ Jarak kelahiran: {m}, {k}, jarak median {n} bulan.
+Espacement des naissances : {m}, {k}. ¦ Khoảng cách giữa các lần sinh: {m}, {k}. ¦ Jarak kelahiran: {m}, {k}.
+Lieux de vie de {n} : {l}. ¦ Nơi sống của {n}: {l}. ¦ Tempat tinggal {n}: {l}.
+Qui a connu qui autour de {name} ¦ Ai đã biết ai quanh {name} ¦ Siapa mengenal siapa di sekitar {name}
+Survie par {what} ¦ Sống sót theo {what} ¦ Kelangsungan hidup menurut {what}
+{n} personnes prises dans ta base ({u} sans date de décès laissées de côté). ¦ {n} người lấy từ dữ liệu của bạn (bỏ qua {u} người không có ngày mất). ¦ {n} orang diambil dari basis datamu ({u} tanpa tanggal kematian diabaikan).
+{n} lignées prises dans ta base. ¦ {n} dòng dõi lấy từ dữ liệu của bạn. ¦ {n} garis keturunan diambil dari basis datamu.
+Aucun couple dont les deux lieux de naissance ont des coordonnées ({n} couples sans lieu situé). ¦ Không có cặp đôi nào mà cả hai nơi sinh đều có toạ độ ({n} cặp chưa có địa điểm được định vị). ¦ Tidak ada pasangan yang kedua tempat lahirnya berkoordinat ({n} pasangan tanpa tempat yang terletak).
+Aucun couple dont les deux lieux de naissance ont des coordonnées. ¦ Không có cặp đôi nào mà cả hai nơi sinh đều có toạ độ. ¦ Tidak ada pasangan yang kedua tempat lahirnya berkoordinat.
+{n} couples pris dans ta base ({m} sans lieux situés). ¦ {n} cặp đôi lấy từ dữ liệu của bạn ({m} chưa có địa điểm được định vị). ¦ {n} pasangan diambil dari basis datamu ({m} tanpa tempat yang terletak).
+{n} couples pris dans ta base. ¦ {n} cặp đôi lấy từ dữ liệu của bạn. ¦ {n} pasangan diambil dari basis datamu.
+{n} générations prises dans ta base (arrêt à 250 000 places). ¦ {n} thế hệ lấy từ dữ liệu của bạn (dừng ở 250 000 vị trí). ¦ {n} generasi diambil dari basis datamu (berhenti di 250.000 posisi).
+{m} mariages et {c} naissances pris dans ta base. ¦ {m} cuộc hôn nhân và {c} lần sinh lấy từ dữ liệu của bạn. ¦ {m} pernikahan dan {c} kelahiran diambil dari basis datamu.
+Les naissances de {name} ¦ Những lần sinh của {name} ¦ Kelahiran-kelahiran {name}
+{m} et {n} enfants pris dans ta base. ¦ {m} và {n} người con lấy từ dữ liệu của bạn. ¦ {m} dan {n} anak diambil dari basis datamu.
+{n} personnes et {l} lieux pris dans ta base. ¦ {n} người và {l} địa điểm lấy từ dữ liệu của bạn. ¦ {n} orang dan {l} tempat diambil dari basis datamu.
+Combien étaient encore en vie à chaque âge ¦ Bao nhiêu người còn sống ở mỗi độ tuổi ¦ Berapa yang masih hidup di setiap umur
+Métiers de père en fils ¦ Nghề nghiệp cha truyền con nối ¦ Pekerjaan dari ayah ke anak laki-laki
+Mariages et conceptions par mois (Bretagne, XVIIIe s.) ¦ Kết hôn và thụ thai theo tháng (Bretagne, thế kỷ 18) ¦ Pernikahan dan pembuahan per bulan (Bretagne, abad ke-18)
+Les naissances de quatre mères de la famille ¦ Những lần sinh của bốn người mẹ trong gia đình ¦ Kelahiran dari empat ibu dalam keluarga
+Où vivait la famille Martin ¦ Nơi gia đình Martin từng sống ¦ Tempat keluarga Martin tinggal
+ferme l’éditeur pour ouvrir une fiche ¦ hãy đóng trình sửa để mở một hồ sơ ¦ tutup penyunting untuk membuka profil
+un clic ouvre la fiche ¦ một cú nhấp sẽ mở hồ sơ ¦ satu klik membuka profil
+Ajoute des personnes : un nom, la naissance, le décès et la génération (0 = toi, −1 = parents, 1 = enfants…). ¦ Hãy thêm người: một tên, ngày sinh, ngày mất và thế hệ (0 = bạn, −1 = cha mẹ, 1 = con…). ¦ Tambahkan orang: nama, kelahiran, kematian, dan generasi (0 = kamu, −1 = orang tua, 1 = anak…).
+Ajoute des lignes : un groupe (siècle, sexe, branche…), un âge, et « décédé » ou « encore en vie ». ¦ Hãy thêm dòng: một nhóm (thế kỷ, giới tính, nhánh…), một độ tuổi, và “đã mất” hoặc “còn sống”. ¦ Tambahkan baris: kelompok (abad, jenis kelamin, cabang…), umur, dan “meninggal” atau “masih hidup”.
+Aucune personne de la liste n’a une date de naissance et une date de décès. ¦ Không ai trong danh sách có cả ngày sinh lẫn ngày mất. ¦ Tidak ada orang di daftar yang punya tanggal lahir dan tanggal kematian.
+Trisaïeul ¦ Kỵ ông ¦ Kakek canggah
+Trisaïeuls ¦ Kỵ ¦ Canggah
+Arrière-grand-père ¦ Cụ ông ¦ Kakek buyut
+Grand-père ¦ Ông ¦ Kakek
+Ajoute des lignées : le métier de l’ancêtre, puis de son fils, de son petit-fils… et combien de fois. ¦ Hãy thêm dòng dõi: nghề của tổ tiên, rồi của con trai, cháu trai… và bao nhiêu lần. ¦ Tambahkan garis keturunan: pekerjaan leluhur, lalu anak laki-lakinya, cucunya… dan berapa kali.
+Même métier que le père ¦ Cùng nghề với cha ¦ Pekerjaan sama dengan ayah
+Ajoute des mariages : les deux époux, la distance entre leurs lieux de naissance (km) et l’année. ¦ Hãy thêm hôn nhân: hai vợ chồng, khoảng cách giữa hai nơi sinh (km) và năm. ¦ Tambahkan pernikahan: kedua mempelai, jarak antara tempat lahir mereka (km), dan tahunnya.
+Ajoute des générations : le numéro, les places trouvées et les personnes différentes. ¦ Hãy thêm thế hệ: số thứ tự, số vị trí tìm thấy và số người khác nhau. ¦ Tambahkan generasi: nomornya, posisi yang ditemukan, dan orang yang berbeda.
+Ajoute les chiffres de chaque mois (janvier à décembre) : mariages, et conceptions ou naissances. ¦ Hãy thêm con số của mỗi tháng (tháng 1 đến tháng 12): kết hôn, và thụ thai hoặc sinh. ¦ Tambahkan angka tiap bulan (Januari sampai Desember): pernikahan, dan pembuahan atau kelahiran.
+Carême : du mercredi des Cendres (entre le 4 février et le 10 mars) à Pâques (entre le 22 mars et le 25 avril) — l’Église ne mariait pas ¦ Mùa Chay: từ Thứ Tư Lễ Tro (giữa 4 tháng 2 và 10 tháng 3) đến Lễ Phục Sinh (giữa 22 tháng 3 và 25 tháng 4) — Giáo hội không cử hành hôn lễ ¦ Prapaskah: dari Rabu Abu (antara 4 Februari dan 10 Maret) sampai Paskah (antara 22 Maret dan 25 April) — Gereja tidak menikahkan orang
+Avent : du 4e dimanche avant Noël (entre le 27 novembre et le 3 décembre) au 24 décembre — pas de mariage non plus ¦ Mùa Vọng: từ Chủ nhật thứ 4 trước Giáng Sinh (giữa 27 tháng 11 và 3 tháng 12) đến 24 tháng 12 — cũng không có hôn lễ ¦ Adven: dari Minggu ke-4 sebelum Natal (antara 27 November dan 3 Desember) sampai 24 Desember — juga tidak ada pernikahan
+Aucune personne de la liste n’a un mois de naissance. ¦ Không ai trong danh sách có tháng sinh. ¦ Tidak ada orang di daftar yang punya bulan lahir.
+Ajoute des enfants : le nom de la mère, sa naissance, puis chaque enfant et sa date de naissance. ¦ Hãy thêm con: tên người mẹ, ngày sinh của bà, rồi từng người con và ngày sinh của họ. ¦ Tambahkan anak: nama ibu, kelahirannya, lalu setiap anak dan tanggal lahirnya.
+Moins de 15 mois d’écart ¦ Cách nhau dưới 15 tháng ¦ Jarak kurang dari 15 bulan
+Ajoute des lieux : la personne, le lieu, le début et la fin (années ou dates). ¦ Hãy thêm địa điểm: người, địa điểm, bắt đầu và kết thúc (năm hoặc ngày). ¦ Tambahkan tempat: orangnya, tempatnya, awal dan akhir (tahun atau tanggal).
+Les descendants de la personne de départ ¦ Con cháu của người bắt đầu ¦ Keturunan orang awal
+Ses ancêtres et ses descendants, chacun sur sa ligne : l’app cherche ceux qui se sont connus à plusieurs générations d’écart. ¦ Tổ tiên và con cháu của họ, mỗi người một dòng: ứng dụng tìm những người đã biết nhau dù cách nhau nhiều thế hệ. ¦ Leluhur dan keturunannya, masing-masing di barisnya sendiri: aplikasi mencari mereka yang saling mengenal meski berjarak beberapa generasi.
+Pas assez de personnes datées autour de cette personne. ¦ Không đủ người có ngày quanh người này. ¦ Orang bertanggal di sekitar orang ini tidak cukup.
+📉 Les âges de ma base ¦ 📉 Tuổi trong dữ liệu của tôi ¦ 📉 Umur di basis dataku
+L’âge au décès de chacun ; les personnes encore en vie comptent jusqu’à leur âge d’aujourd’hui. Les décès inconnus sont laissés de côté. ¦ Tuổi khi mất của mỗi người; người còn sống được tính đến tuổi hiện nay. Những người không rõ ngày mất bị bỏ qua. ¦ Umur saat meninggal setiap orang; orang yang masih hidup dihitung sampai umurnya sekarang. Kematian yang tidak diketahui diabaikan.
+Génération (ancêtres) ¦ Thế hệ (tổ tiên) ¦ Generasi (leluhur)
+Aucune personne avec une naissance et un décès (ou en vie). ¦ Không có ai có ngày sinh và ngày mất (hoặc còn sống). ¦ Tidak ada orang dengan kelahiran dan kematian (atau masih hidup).
+🔀 Les métiers de ma base ¦ 🔀 Nghề nghiệp trong dữ liệu của tôi ¦ 🔀 Pekerjaan di basis dataku
+Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ». ¦ Mỗi dòng dõi (cha, ông… hoặc cha mẹ) cho một chuỗi nghề; nghề lấy từ hồ sơ hoặc sự kiện “Nghề nghiệp” đầu tiên. ¦ Setiap garis keturunan (ayah, kakek… atau orang tua) memberi jalur pekerjaan; pekerjaan diambil dari profil atau peristiwa “Pekerjaan” pertama.
+Parents → enfants (pères et mères) ¦ Cha mẹ → con (cha và mẹ) ¦ Orang tua → anak (ayah dan ibu)
+Aucune lignée avec au moins deux métiers connus. ¦ Không có dòng dõi nào có ít nhất hai nghề đã biết. ¦ Tidak ada garis keturunan dengan setidaknya dua pekerjaan yang diketahui.
+Aucun métier dans ta base (fiche ou événement « Profession »). ¦ Không có nghề nào trong dữ liệu của bạn (hồ sơ hoặc sự kiện “Nghề nghiệp”). ¦ Tidak ada pekerjaan di basis datamu (profil atau peristiwa “Pekerjaan”).
+Métiers de parents à enfants ¦ Nghề nghiệp từ cha mẹ sang con ¦ Pekerjaan dari orang tua ke anak
+💍 Les couples de ma base ¦ 💍 Các cặp đôi trong dữ liệu của tôi ¦ 💍 Pasangan di basis dataku
+La distance entre les lieux de naissance des deux époux (les lieux ont besoin de leurs coordonnées), et la direction vue depuis le village de l’époux. ¦ Khoảng cách giữa nơi sinh của hai vợ chồng (các địa điểm cần có toạ độ), và hướng nhìn từ làng của người chồng. ¦ Jarak antara tempat lahir kedua mempelai (tempat perlu koordinat), dan arahnya dilihat dari desa suami.
+Génération par génération : les ancêtres possibles (2, 4, 8…), les places trouvées et les personnes différentes (un même ancêtre peut occuper plusieurs places). ¦ Từng thế hệ: số tổ tiên có thể (2, 4, 8…), số vị trí tìm thấy và số người khác nhau (một tổ tiên có thể chiếm nhiều vị trí). ¦ Generasi demi generasi: leluhur yang mungkin (2, 4, 8…), posisi yang ditemukan, dan orang yang berbeda (satu leluhur bisa mengisi beberapa posisi).
+📅 Les mariages et les naissances de ma base ¦ 📅 Hôn nhân và sinh trong dữ liệu của tôi ¦ 📅 Pernikahan dan kelahiran di basis dataku
+Les mariages datés au mois près ; les conceptions = la naissance (ou le baptême) moins 9 mois. Carême et Avent sont comptés au jour près quand la date est complète. ¦ Hôn nhân có ngày chính xác đến tháng; thụ thai = ngày sinh (hoặc rửa tội) trừ 9 tháng. Mùa Chay và Mùa Vọng được tính chính xác đến ngày khi ngày đầy đủ. ¦ Pernikahan bertanggal tepat sampai bulan; pembuahan = kelahiran (atau baptis) dikurangi 9 bulan. Prapaskah dan Adven dihitung tepat sampai hari bila tanggalnya lengkap.
+À (année) ¦ Đến (năm) ¦ Sampai (tahun)
+Aucun mariage ni aucune naissance datés au mois près. ¦ Không có hôn nhân hay lần sinh nào có ngày chính xác đến tháng. ¦ Tidak ada pernikahan atau kelahiran yang bertanggal tepat sampai bulan.
+Mariages et conceptions par mois ¦ Kết hôn và thụ thai theo tháng ¦ Pernikahan dan pembuahan per bulan
+👶 Les mères de ma base ¦ 👶 Những người mẹ trong dữ liệu của tôi ¦ 👶 Para ibu di basis dataku
+Chaque mère sur une ligne, ses enfants à l’âge qu’elle avait à leur naissance, l’écart en mois entre deux naissances et les enfants morts jeunes. ¦ Mỗi người mẹ một dòng, các con đặt ở tuổi của bà khi sinh chúng, khoảng cách theo tháng giữa hai lần sinh và những đứa con mất sớm. ¦ Setiap ibu di satu baris, anak-anaknya pada umur sang ibu saat mereka lahir, jarak dalam bulan antara dua kelahiran, dan anak-anak yang meninggal muda.
+Celles qui ont le plus d’enfants ¦ Những người có nhiều con nhất ¦ Yang anaknya paling banyak
+La mère (pour « une seule mère ») ¦ Người mẹ (cho “một người mẹ duy nhất”) ¦ Ibu (untuk “satu ibu saja”)
+Personne de départ (pour les ancêtres) ¦ Người bắt đầu (cho tổ tiên) ¦ Orang awal (untuk leluhur)
+Combien de mères au plus ¦ Tối đa bao nhiêu người mẹ ¦ Paling banyak berapa ibu
+Choisis la mère dans le menu. ¦ Hãy chọn người mẹ trong menu. ¦ Pilih ibu di menu.
+Aucune mère avec des enfants dans ta base. ¦ Không có người mẹ nào có con trong dữ liệu của bạn. ¦ Tidak ada ibu dengan anak di basis datamu.
+🏘️ Les lieux de vie de ma base ¦ 🏘️ Nơi sống trong dữ liệu của tôi ¦ 🏘️ Tempat tinggal di basis dataku
+Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune. ¦ Với mỗi người, các địa điểm theo thứ tự thời gian: sinh, rửa tội, nơi ở, điều tra dân số, kết hôn, nghề nghiệp, mất… Mỗi xã một màu. ¦ Untuk setiap orang, tempat-tempatnya menurut urutan waktu: kelahiran, baptis, tempat tinggal, sensus, pernikahan, pekerjaan, kematian… Satu warna per kota.
+La personne de départ et ses ancêtres ¦ Người bắt đầu và tổ tiên của họ ¦ Orang awal dan leluhurnya
+Ses parents, elle et ses enfants ¦ Cha mẹ, bản thân và các con ¦ Orang tuanya, dia sendiri, dan anak-anaknya
+Personnes (pour « que je choisis ») ¦ Những người (cho “tôi tự chọn”) ¦ Orang-orang (untuk “yang kupilih”)
+Choisis au moins une personne dans le menu. ¦ Hãy chọn ít nhất một người trong menu. ¦ Pilih setidaknya satu orang di menu.
+Aucun événement avec un lieu pour ces personnes. ¦ Không có sự kiện nào có địa điểm cho những người này. ¦ Tidak ada peristiwa dengan tempat untuk orang-orang ini.
+Les lieux de vie de la famille ¦ Nơi sống của gia đình ¦ Tempat tinggal keluarga
+Les personnes (génération : 0 = la personne de départ, −1 = parents, 1 = enfants…) ¦ Những người (thế hệ: 0 = người bắt đầu, −1 = cha mẹ, 1 = con…) ¦ Orang-orang (generasi: 0 = orang awal, −1 = orang tua, 1 = anak…)
+Vers (son enfant ou parent du côté de la personne de départ) ¦ Hướng về (con hoặc cha mẹ ở phía người bắt đầu) ¦ Ke arah (anak atau orang tua di sisi orang awal)
+Rencontres racontées ¦ Các cuộc gặp được kể ¦ Pertemuan yang diceritakan
+Écart de générations au moins ¦ Cách nhau ít nhất số thế hệ ¦ Selisih generasi minimal
+Montrer quand le plus de générations vivaient ensemble ¦ Hiện thời điểm có nhiều thế hệ cùng sống nhất ¦ Tampilkan saat generasi terbanyak hidup bersamaan
+Noms à gauche ¦ Tên ở bên trái ¦ Nama di kiri
+Âge dans la barre ¦ Tuổi trong thanh ¦ Umur di dalam batang
+Décès inconnu : vie supposée (ans, 0 = non) ¦ Không rõ ngày mất: tuổi thọ giả định (năm, 0 = không) ¦ Kematian tidak diketahui: usia hidup perkiraan (tahun, 0 = tidak)
+Groupe (siècle, sexe, branche…) ¦ Nhóm (thế kỷ, giới tính, nhánh…) ¦ Kelompok (abad, jenis kelamin, cabang…)
+À cet âge ¦ Ở tuổi này ¦ Pada umur ini
+Encore en vie ¦ Vẫn còn sống ¦ Masih hidup
+Montrer l’âge médian (la moitié encore en vie) ¦ Hiện tuổi trung vị (một nửa vẫn còn sống) ¦ Tampilkan umur median (separuh masih hidup)
+Lire la part en vie à l’âge de… ¦ Đọc tỷ lệ còn sống ở tuổi… ¦ Baca persentase yang hidup pada umur…
+Compter les vivants (jusqu’à leur âge d’aujourd’hui) ¦ Tính cả người còn sống (đến tuổi hiện nay) ¦ Hitung yang masih hidup (sampai umurnya sekarang)
+Lignes droites (au lieu des marches) ¦ Đường thẳng (thay vì bậc thang) ¦ Garis lurus (bukan anak tangga)
+Épaisseur des courbes ¦ Độ dày các đường ¦ Ketebalan garis
+Âge au plus (vide = auto) ¦ Tuổi tối đa (trống = tự động) ¦ Umur maksimum (kosong = otomatis)
+Éditeur de graphiques : une courbe par ¦ Trình sửa biểu đồ: mỗi đường một ¦ Penyunting grafik: satu garis per
+Bulles au survol tous les … ans ¦ Bong bóng khi di chuột mỗi … năm ¦ Gelembung saat diarahkan setiap … tahun
+Les lignées (métier à chaque génération, du plus ancien au plus jeune) ¦ Các dòng dõi (nghề ở mỗi thế hệ, từ xưa nhất đến trẻ nhất) ¦ Garis keturunan (pekerjaan di tiap generasi, dari yang tertua ke termuda)
+Génération 1 ¦ Thế hệ 1 ¦ Generasi 1
+Génération 2 ¦ Thế hệ 2 ¦ Generasi 2
+Génération 3 ¦ Thế hệ 3 ¦ Generasi 3
+Génération 4 ¦ Thế hệ 4 ¦ Generasi 4
+Génération 5 ¦ Thế hệ 5 ¦ Generasi 5
+Combien de lignées ¦ Bao nhiêu dòng dõi ¦ Berapa garis keturunan
+Couleur de chaque métier (facultatif) ¦ Màu của mỗi nghề (không bắt buộc) ¦ Warna tiap pekerjaan (opsional)
+Métiers montrés (les autres : « Autres métiers ») ¦ Nghề được hiện (còn lại: “Nghề khác”) ¦ Pekerjaan yang ditampilkan (sisanya: “Pekerjaan lain”)
+Le métier de départ ¦ Nghề ban đầu ¦ Pekerjaan awal
+Vert si le métier est gardé ¦ Xanh lá nếu nghề được giữ ¦ Hijau jika pekerjaan dipertahankan
+Noms des colonnes (séparés par des virgules) ¦ Tên các cột (cách nhau bằng dấu phẩy) ¦ Nama kolom (dipisahkan dengan koma)
+Noms des métiers ¦ Tên các nghề ¦ Nama pekerjaan
+Nombres à côté des noms ¦ Con số cạnh tên ¦ Angka di samping nama
+Phrase « même métier que la génération d’avant » ¦ Câu “cùng nghề với thế hệ trước” ¦ Kalimat “pekerjaan sama dengan generasi sebelumnya”
+Largeur des colonnes ¦ Độ rộng các cột ¦ Lebar kolom
+Espace entre les métiers ¦ Khoảng cách giữa các nghề ¦ Jarak antar pekerjaan
+Nom des métiers inconnus ¦ Tên cho nghề chưa rõ ¦ Nama untuk pekerjaan yang tidak diketahui
+Arrière-grand-père, Grand-père, Père, Fils ¦ Cụ ông, Ông, Cha, Con trai ¦ Kakek buyut, Kakek, Ayah, Anak laki-laki
+Née à ¦ Sinh tại ¦ Lahir di
+Direction (N, NE… ou degrés) ¦ Hướng (B, ĐB… hoặc độ) ¦ Arah (U, TL… atau derajat)
+Couleur de chaque siècle (facultatif) ¦ Màu của mỗi thế kỷ (không bắt buộc) ¦ Warna tiap abad (opsional)
+Siècle (ex. XIXe s.) ¦ Thế kỷ (vd. thế kỷ 19) ¦ Abad (mis. abad ke-19)
+Échelle des distances ¦ Thang khoảng cách ¦ Skala jarak
+Douce (racine carrée) ¦ Mềm (căn bậc hai) ¦ Lembut (akar kuadrat)
+Logarithmique (le proche en grand) ¦ Logarit (gần thì lớn) ¦ Logaritmik (yang dekat tampak besar)
+Cercle extérieur (km, vide = auto) ¦ Vòng ngoài (km, trống = tự động) ¦ Lingkaran luar (km, kosong = otomatis)
+Cercle de la distance médiane de chaque siècle ¦ Vòng khoảng cách trung vị của mỗi thế kỷ ¦ Lingkaran jarak median tiap abad
+Tableau par siècle ¦ Bảng theo thế kỷ ¦ Tabel per abad
+Nom du centre ¦ Tên tâm ¦ Nama pusat
+Les générations ¦ Các thế hệ ¦ Generasi-generasi
+Génération (1 = la personne) ¦ Thế hệ (1 = người đó) ¦ Generasi (1 = orang itu)
+Taux d’implexe à droite ¦ Tỷ lệ trùng lặp tổ tiên ở bên phải ¦ Tingkat implex di kanan
+Couleur des possibles ¦ Màu cho số có thể ¦ Warna yang mungkin
+Couleur des places trouvées ¦ Màu cho vị trí đã tìm thấy ¦ Warna posisi yang ditemukan
+Couleur des personnes différentes ¦ Màu cho người khác nhau ¦ Warna orang yang berbeda
+Les mois (janvier à décembre) ¦ Các tháng (tháng 1 đến tháng 12) ¦ Bulan-bulan (Januari sampai Desember)
+Deux bandeaux (l’un sous l’autre) ¦ Hai dải (dải này dưới dải kia) ¦ Dua pita (satu di bawah yang lain)
+Seulement la première série ¦ Chỉ chuỗi đầu tiên ¦ Hanya seri pertama
+Repérer le Carême et l’Avent ¦ Đánh dấu Mùa Chay và Mùa Vọng ¦ Tandai Prapaskah dan Adven
+Ligne « si tout était égal » (selon les jours du mois) ¦ Đường “nếu mọi thứ đều nhau” (theo số ngày của tháng) ¦ Garis “jika semuanya merata” (menurut jumlah hari dalam bulan)
+Écrire les nombres ¦ Ghi các con số ¦ Tampilkan angka
+Les enfants (une ligne par enfant) ¦ Các con (mỗi con một dòng) ¦ Anak-anak (satu baris per anak)
+Naissance de la mère ¦ Ngày sinh của mẹ ¦ Kelahiran ibu
+Décès de la mère ¦ Ngày mất của mẹ ¦ Kematian ibu
+Naissance de l’enfant ¦ Ngày sinh của con ¦ Kelahiran anak
+Décès de l’enfant ¦ Ngày mất của con ¦ Kematian anak
+L’âge de la mère ¦ Tuổi của mẹ ¦ Umur ibu
+Écarts en mois entre deux naissances ¦ Khoảng cách theo tháng giữa hai lần sinh ¦ Jarak dalam bulan antara dua kelahiran
+Mères au plus ¦ Số người mẹ tối đa ¦ Ibu paling banyak
+Les lieux (une ligne par lieu et par période) ¦ Các địa điểm (mỗi địa điểm và giai đoạn một dòng) ¦ Tempat-tempat (satu baris per tempat dan periode)
+De (année ou date) ¦ Từ (năm hoặc ngày) ¦ Dari (tahun atau tanggal)
+Couleur de chaque lieu (facultatif) ¦ Màu của mỗi địa điểm (không bắt buộc) ¦ Warna tiap tempat (opsional)
+Une couleur par ¦ Một màu cho mỗi ¦ Satu warna per
+Lieux en couleur (les autres en gris) ¦ Địa điểm có màu (những nơi khác màu xám) ¦ Tempat berwarna (sisanya abu-abu)
+Nom du lieu dans la bande ¦ Tên địa điểm trong dải ¦ Nama tempat di pita
+Par date de début ¦ Theo ngày bắt đầu ¦ Menurut tanggal awal
+Épaisseur des bandes ¦ Độ dày các dải ¦ Ketebalan pita
+{n} génération ¦ {n} thế hệ ¦ {n} generasi

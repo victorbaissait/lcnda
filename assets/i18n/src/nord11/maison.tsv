@@ -1,0 +1,2121 @@
+fr ¦ vi ¦ id
+Rez-de-chaussée ¦ Tầng trệt ¦ Lantai dasar
+Cave ¦ Hầm ¦ Ruang bawah tanah
+1er étage ¦ Tầng 1 ¦ Lantai 1
+{level}e étage ¦ Tầng {level} ¦ Lantai {level}
+Maison de famille ¦ Ngôi nhà của gia đình ¦ Rumah keluarga
+Époque sans nom ¦ Thời kỳ chưa đặt tên ¦ Masa tanpa nama
+Barre du haut ¦ Thanh trên cùng ¦ Bilah atas
+Barre de la vue 3D ¦ Thanh của chế độ xem 3D ¦ Bilah tampilan 3D
+Vues dessus / face / côté ¦ Nhìn từ trên / mặt trước / bên cạnh ¦ Tampak atas / depan / samping
+Revêtement sur {what} de mur ¦ Lớp phủ trên {what} tường ¦ Pelapis pada {what} dinding
+=face ¦ mặt ¦ sisi
+=mur ¦ tường ¦ dinding
+=étage ¦ tầng ¦ lantai
+=trait ¦ nét ¦ garis
+=objet trouvé ¦ đồ vật tìm thấy ¦ benda ditemukan
+Aucune pièce tracée ¦ Chưa vẽ phòng nào ¦ Belum ada ruangan yang digambar
+Pièces et surfaces ¦ Phòng và diện tích ¦ Ruangan dan luas
+Plan du ¦ Bản vẽ ngày ¦ Denah tanggal
+double hauteur (vide au-dessus) ¦ cao gấp đôi (thông lên trên) ¦ tinggi ganda (terbuka ke atas)
+trémie de l’escalier ¦ lỗ cầu thang ¦ lubang tangga
+escalier (plancher fermé) ¦ cầu thang (sàn kín) ¦ tangga (lantai tertutup)
+VIDE ¦ THÔNG TẦNG ¦ TERBUKA
+vide sur {name} ¦ thông xuống {name} ¦ terbuka ke {name}
+maison|Vide ¦ Khoảng thông tầng ¦ Ruang terbuka
+sans plancher ¦ không có sàn ¦ tanpa lantai
+m² Carrez ¦ m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Dưới 1,80 m dưới độ dốc mái ¦ Kurang dari 1,80 m di bawah kemiringan atap
+🕰 Fantôme : {name} ¦ 🕰 Bóng mờ: {name} ¦ 🕰 Bayangan: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · độ vồng {arrow} ¦ ⌒ {len} · lengkungan {arrow}
+{len} pour fermer en rectangle ¦ {len} để khép thành hình chữ nhật ¦ {len} untuk menutup jadi persegi panjang
+départ (clic : fermer) ¦ điểm đầu (bấm: khép lại) ¦ awal (klik: tutup)
+maison|départ ¦ điểm đầu ¦ awal
+Posé sous l’étage « {name} ». ¦ Đặt dưới tầng “{name}”. ¦ Diletakkan di bawah lantai “{name}”.
+📐 {area} m² au sol ¦ 📐 {area} m² sàn ¦ 📐 {area} m² lantai
+{area} m² au sol ¦ {area} m² sàn ¦ {area} m² lantai
+{carrez} m² loi Carrez ¦ {carrez} m² theo luật Carrez ¦ {carrez} m² hukum Carrez
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² theo luật Carrez (cao ≥ 1,80 m) ¦ {area} m² hukum Carrez (tinggi ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (chỗ đứng thẳng được: từ 1,80 m trở lên, gạch chéo trên bản vẽ) ¦ (tempat orang bisa berdiri: 1,80 m atau lebih, diarsir di denah)
+Habitant : {role} — ouvrir la fiche ¦ Người ở: {role} — mở hồ sơ ¦ Penghuni: {role} — buka profil
+Habitant — ouvrir la fiche ¦ Người ở — mở hồ sơ ¦ Penghuni — buka profil
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Liên kết với phòng “{room}” — mở hồ sơ ¦ Terhubung ke ruangan “{room}” — buka profil
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — thời kỳ: {era} — mở hồ sơ có nó ¦ {label} — masa: {era} — buka profil tempatnya berada
+{label} — ouvrir la fiche où il est ¦ {label} — mở hồ sơ có nó ¦ {label} — buka profil tempatnya berada
+🏷 Les souvenirs de la maison ¦ 🏷 Kỷ niệm của ngôi nhà ¦ 🏷 Kenangan rumah
+Aller à « {where} » et voir le souvenir ¦ Đi đến “{where}” và xem kỷ niệm ¦ Pergi ke “{where}” dan lihat kenangannya
+Soleil calculé pour {place} ({lat}° N). ¦ Mặt trời được tính cho {place} ({lat}° B). ¦ Matahari dihitung untuk {place} ({lat}° LU).
+le lieu de la maison ¦ địa điểm của ngôi nhà ¦ tempat rumah ini
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Địa điểm của ngôi nhà chưa có toạ độ: mặt trời được tính cho trung tâm nước Pháp. ¦ Tempat rumah ini belum punya koordinat: matahari dihitung untuk pusat Prancis.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Ban đêm, các đèn đã đặt sẽ sáng (Xem 3D → ☀️ Ánh sáng). ¦ Pada malam hari, lampu yang dipasang menyala (Tampilan 3D → ☀️ Cahaya).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Để bắt đầu: ⬚ <b>kéo một phòng</b> (tường tự tạo ra), hoặc ▬ vẽ từng bức tường. ▨ Một <b>khoảng thông tầng</b> (gác lửng, cao gấp đôi) được vẽ ở tầng phía trên. Sau đó 🚪 cửa ra vào và 🪟 cửa sổ (bấm vào một bức tường), và <b>đồ đạc</b> (thẻ bên cạnh). ¦ Untuk memulai: ⬚ <b>seret sebuah ruangan</b> (dindingnya terbentuk sendiri), atau ▬ gambar dinding satu per satu. ▨ Sebuah <b>ruang terbuka</b> (mezanin, tinggi ganda) digambar di lantai atasnya. Lalu 🚪 pintu dan 🪟 jendela (klik pada dinding), dan <b>perabot</b> (tab di sebelahnya).
+{area} m² habitables ¦ {area} m² ở được ¦ {area} m² layak huni
+Face côté {rooms} ¦ Mặt phía {rooms} ¦ Sisi menghadap {rooms}
+Face extérieure (façade) ¦ Mặt ngoài (mặt tiền) ¦ Sisi luar (fasad)
+Les murs de « {name} » ¦ Các bức tường của “{name}” ¦ Dinding “{name}”
+la pièce ¦ phòng ¦ ruangan
+Les murs de toutes les pièces de cet étage ¦ Tường của mọi phòng ở tầng này ¦ Dinding semua ruangan di lantai ini
+Toutes les façades de cet étage ¦ Mọi mặt tiền của tầng này ¦ Semua fasad lantai ini
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Tường của mọi phòng trong nhà (mọi tầng) ¦ Dinding semua ruangan di rumah (semua lantai)
+Toutes les façades de la maison (tous les étages) ¦ Mọi mặt tiền của ngôi nhà (mọi tầng) ¦ Semua fasad rumah (semua lantai)
+Vide sur « {room} » ({floor}). ¦ Thông xuống “{room}” ({floor}). ¦ Terbuka ke “{room}” ({floor}).
+Vide sur l’étage « {floor} ». ¦ Thông xuống tầng “{floor}”. ¦ Terbuka ke lantai “{floor}”.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Đây là tầng thấp nhất: khoảng thông tầng này không thông xuống đâu cả. ¦ ⚠️ Ini lantai paling bawah: ruang terbuka ini tidak mengarah ke mana pun.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} kích thước tổng · chu vi {p} ¦ {w} × {d} ukuran keseluruhan · keliling {p}
+La face de {walls} tournée vers la pièce. ¦ Mặt của {walls} hướng vào phòng. ¦ Sisi {walls} yang menghadap ke ruangan.
+Années de {name} ¦ Các năm của {name} ¦ Tahun-tahun {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Chiều cao: bằng tầng + sàn ({h}) ¦ Tinggi: tinggi lantai + pelat lantai ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} bậc cao {rise} cm, mặt bậc {going} cm · 2 h + g = {sum} cm ¦ {n} anak tangga setinggi {rise} cm, injakan {going} cm · 2 h + g = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Mở sàn phía trên (“{name}”) ¦ Buka lantai di atas (“{name}”)
+Ouvrir le plancher au-dessus ¦ Mở sàn phía trên ¦ Buka lantai di atas
+posé sur « {name} » : il le suit ¦ đặt trên “{name}”: nó đi theo ¦ diletakkan di atas “{name}”: ikut bergerak
+un objet ¦ một đồ vật ¦ sebuah benda
+Georgia (de départ) ¦ Georgia (mặc định) ¦ Georgia (bawaan)
+État d’origine ¦ Tình trạng ban đầu ¦ Keadaan asli
+Époque modifiée ¦ Đã sửa thời kỳ ¦ Masa diubah
+Nouvelle époque : {name} ¦ Thời kỳ mới: {name} ¦ Masa baru: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Đã gỡ các thời kỳ (bản vẽ “{name}” vẫn còn, không có ngày) ¦ Masa dilepas (denah “{name}” tetap ada, tanpa tanggal)
+Époque « {name} » supprimée avec son plan ¦ Đã xoá thời kỳ “{name}” cùng bản vẽ của nó ¦ Masa “{name}” dihapus beserta denahnya
+{name} est déjà rattaché. ¦ {name} đã được liên kết rồi. ¦ {name} sudah terhubung.
+🏠 un habitant y est ¦ 🏠 có người ở đây ¦ 🏠 ada penghuni di sini
+Posé sur « {name} » ¦ Đặt trên “{name}” ¦ Diletakkan di atas “{name}”
+Posé au sol ¦ Đặt trên sàn ¦ Diletakkan di lantai
+Pièce {n} ¦ Phòng {n} ¦ Ruangan {n}
+Pièce de {area} m² ¦ Phòng {area} m² ¦ Ruangan {area} m²
+Vide sur {name} ¦ Thông xuống {name} ¦ Terbuka ke {name}
+Mezzanine ¦ Gác lửng ¦ Mezanin
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Đã đặt gác lửng (đã thêm tầng “Gác lửng”): thông xuống {room}, lan can và cầu thang. ¦ 🏗 Mezanin dipasang (lantai “Mezanin” ditambahkan): terbuka ke {room}, pagar pengaman dan tangga.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Đã đặt gác lửng ở tầng “{floor}”: thông xuống {room}, lan can và cầu thang. ¦ 🏗 Mezanin dipasang di lantai “{floor}”: terbuka ke {room}, pagar pengaman dan tangga.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm là quá ngắn: nếu là mét, hãy viết “{typed} m”. ¦ {len} cm terlalu pendek: untuk meter, tulis “{typed} m”.
+{name} posé ¦ Đã đặt {name} ¦ {name} dipasang
+{msg} — et maintenant le deuxième point. ¦ {msg} — giờ đến điểm thứ hai. ¦ {msg} — sekarang titik kedua.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ Theo tỉ lệ: độ dài đã chọn là {len}. Sau đó “✏️ Đồ lại tường” (thẻ Tầng). ¦ Sesuai skala: panjang yang dipilih adalah {len}. Lalu “✏️ Jiplak dinding” (tab Lantai).
+Plan ancien redressé ({deg}°) ¦ Bản vẽ cũ đã chỉnh thẳng ({deg}°) ¦ Denah lama diluruskan ({deg}°)
+Souvenir ¦ Kỷ niệm ¦ Kenangan
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Liên kết một kỷ niệm với “{name}” ¦ 🔗 Hubungkan kenangan ke “{name}”
+Un souvenir pour « {name} » ¦ Một kỷ niệm cho “{name}” ¦ Kenangan untuk “{name}”
+✍ Un récit pour « {name} » ¦ ✍ Một câu chuyện cho “{name}” ¦ ✍ Kisah untuk “{name}”
+👤 Une personne liée à « {name} » ¦ 👤 Một người liên quan đến “{name}” ¦ 👤 Orang yang terkait dengan “{name}”
+Ce qui s’y est passé ¦ Những gì đã xảy ra ở đó ¦ Apa yang terjadi di sana
+Réglage « {name} » appliqué ¦ Đã áp dụng cài đặt “{name}” ¦ Pengaturan “{name}” diterapkan
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Cài đặt này thuộc về một công cụ khác (“{tool}”): hãy nhập nó vào công cụ đó, không phải vào Ngôi nhà. ¦ Pengaturan ini milik alat lain (“{tool}”): impor ke alat itu, bukan ke Rumah.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ Đã có một cài đặt tên “{name}”. Tên của cài đặt được nhập: ¦ Sudah ada pengaturan bernama “{name}”. Nama pengaturan yang diimpor:
+{lines} et {texts}. ¦ {lines} và {texts}. ¦ {lines} dan {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Mỗi nét trở thành một bức tường; một đường bao khép kín trên lớp “pièce / room” trở thành một phòng, được đặt tên theo chữ nằm bên trong. ¦ Setiap garis menjadi dinding; garis tepi tertutup di lapisan “pièce / room” menjadi ruangan, dinamai sesuai teks di dalamnya.
+Pas repris : {what}. ¦ Không lấy lại: {what}. ¦ Tidak diambil: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Tầng này ({name}), thêm vào những gì đã có ¦ Lantai ini ({name}), sebagai tambahan dari yang sudah ada
+{walls}, {rooms} et {texts} importés. ¦ Đã nhập {walls}, {rooms} và {texts}. ¦ {walls}, {rooms} dan {texts} diimpor.
+🔁 Répéter cette fenêtre ¦ 🔁 Lặp lại cửa sổ này ¦ 🔁 Ulangi jendela ini
+🔁 Répéter cette porte ¦ 🔁 Lặp lại cửa này ¦ 🔁 Ulangi pintu ini
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Các bản sao dọc theo cùng bức tường, về phía đầu kia (tường dài {len}). ¦ Salinan di sepanjang dinding yang sama, ke arah ujung lainnya (dinding {len}).
+🔁 Répéter « {name} » ¦ 🔁 Lặp lại “{name}” ¦ 🔁 Ulangi “{name}”
+{name} (à {len}) ¦ {name} (cách {len}) ¦ {name} (berjarak {len})
+{copies} de « {name} ». ¦ {copies} của “{name}”. ¦ {copies} dari “{name}”.
+Vue 3D ¦ Xem 3D ¦ Tampilan 3D
+Au-dessus : {name} ¦ Phía trên: {name} ¦ Di atas: {name}
+En dessous : {name} (cave, sous-sol) ¦ Phía dưới: {name} (hầm, tầng hầm) ¦ Di bawah: {name} (ruang bawah tanah, basemen)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Lấy lại tường của “{name}” (và cửa sổ của nó) ¦ Ambil dinding dari “{name}” (beserta jendelanya)
+{name} ajouté ¦ Đã thêm {name} ¦ {name} ditambahkan
+Étages ¦ Tầng ¦ Lantai
+{name} (murs repris) ¦ {name} (đã lấy lại tường) ¦ {name} (dinding diambil)
+Étage « {name} » supprimé ¦ Đã xoá tầng “{name}” ¦ Lantai “{name}” dihapus
+Maison de {place} ¦ Nhà ở {place} ¦ Rumah di {place}
+✓ Toit retiré ¦ ✓ Đã gỡ mái ¦ ✓ Atap dilepas
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Đã thêm mái: nhìn thấy từ “{name}”, tầng trên cùng ¦ ✓ Atap ditambahkan: terlihat dari “{name}”, lantai paling atas
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Đã thêm mái: mái đặt lên tường (hiện chưa có tường nào) ¦ ✓ Atap ditambahkan: diletakkan di atas dinding (belum ada dinding)
+✓ Toit ajouté ¦ ✓ Đã thêm mái ¦ ✓ Atap ditambahkan
+Arrêt {n} de la visite guidée ¦ Điểm dừng {n} của chuyến tham quan có hướng dẫn ¦ Perhentian {n} tur berpemandu
+{label} — ouvrir la fiche ¦ {label} — mở hồ sơ ¦ {label} — buka profil
+Habitant ¦ Người ở ¦ Penghuni
+{label} — époque : {era} ¦ {label} — thời kỳ: {era} ¦ {label} — masa: {era}
+{what} sur {total} ¦ {what} trên {total} ¦ {what} dari {total}
+Supprimer la maison « {name} » ? ¦ Xoá ngôi nhà “{name}”? ¦ Hapus rumah “{name}”?
+Supprimer la maison ¦ Xoá ngôi nhà ¦ Hapus rumah
+🕰 époque : {name} ¦ 🕰 thời kỳ: {name} ¦ 🕰 masa: {name}
+aucune époque choisie ¦ chưa chọn thời kỳ nào ¦ belum ada masa yang dipilih
+mètres ¦ mét ¦ meter
+centimètres ¦ xentimét ¦ sentimeter
+millimètres ¦ milimét ¦ milimeter
+pieds ¦ feet ¦ kaki
+toises (1,949 m) ¦ toise (1,949 m) ¦ toise (1,949 m)
+pieds du roi (32,48 cm) ¦ pied du roi (32,48 cm) ¦ pied du roi (32,48 cm)
+aunes de Paris (1,188 m) ¦ aune de Paris (1,188 m) ¦ aune de Paris (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ perche de Paris (18 pied, 5,847 m) ¦ perche de Paris (18 pied, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ perche royale (22 pied, 7,146 m) ¦ perche royale (22 pied, 7,146 m)
+pas (environ 75 cm) ¦ bước chân (khoảng 75 cm) ¦ langkah (sekitar 75 cm)
+Plâtre blanc ¦ Thạch cao trắng ¦ Plester putih
+Enduit à la chaux ¦ Vữa vôi ¦ Plester kapur
+Pierre apparente ¦ Đá để trần ¦ Batu ekspos
+Brique ¦ Gạch ¦ Bata
+Colombage (pans de bois) ¦ Khung gỗ lộ (tường gỗ đan) ¦ Rangka kayu ekspos (dinding kayu)
+Lambris de bois ¦ Ốp gỗ ¦ Panel kayu
+Papier peint ¦ Giấy dán tường ¦ Kertas dinding
+Carrelage ¦ Gạch lát ¦ Ubin
+Béton ¦ Bê tông ¦ Beton
+Torchis ¦ Đất trộn rơm ¦ Tanah liat campur jerami
+Enduit, crépi ¦ Vữa trát, trát sần ¦ Plesteran, plester kasar
+Pierre de taille ¦ Đá đẽo ¦ Batu pahat
+Papier peint à rayures ¦ Giấy dán tường sọc ¦ Kertas dinding bergaris
+Papier peint à fleurs ¦ Giấy dán tường hoa ¦ Kertas dinding bermotif bunga
+Toile de Jouy ¦ Vải Toile de Jouy ¦ Kain Toile de Jouy
+Parquet ¦ Sàn gỗ ¦ Lantai parket
+Parquet à bâtons rompus ¦ Sàn gỗ xương cá ¦ Parket tulang ikan
+Tomettes ¦ Gạch nung lục giác ¦ Ubin terakota segi enam
+Carreaux de ciment ¦ Gạch bông ¦ Ubin semen
+Damier noir et blanc ¦ Ô cờ đen trắng ¦ Kotak catur hitam putih
+Dalles de pierre ¦ Đá lát ¦ Lempeng batu
+Terre battue ¦ Nền đất nện ¦ Lantai tanah padat
+Moquette, tapis ¦ Thảm trải sàn, thảm ¦ Karpet, permadani
+Herbe (extérieur) ¦ Cỏ (bên ngoài) ¦ Rumput (luar)
+Gravier, cour ¦ Sỏi, sân ¦ Kerikil, halaman
+Bois clair (hêtre, pin) ¦ Gỗ sáng màu (sồi dẻ, thông) ¦ Kayu terang (beech, pinus)
+Chêne ¦ Gỗ sồi ¦ Kayu ek
+Noyer ¦ Gỗ óc chó ¦ Kayu walnut
+Merisier ¦ Gỗ anh đào ¦ Kayu ceri
+Bois foncé (ébène, bois ciré) ¦ Gỗ sẫm màu (mun, gỗ đánh sáp) ¦ Kayu gelap (eboni, kayu berlilin)
+Bois peint ¦ Gỗ sơn ¦ Kayu dicat
+Métal, acier ¦ Kim loại, thép ¦ Logam, baja
+Fonte, fer forgé ¦ Gang, sắt rèn ¦ Besi cor, besi tempa
+Laiton, bronze, doré ¦ Đồng thau, đồng, mạ vàng ¦ Kuningan, perunggu, berlapis emas
+Zinc, fer-blanc ¦ Kẽm, sắt tây ¦ Seng, kaleng
+Pierre ¦ Đá ¦ Batu
+Marbre ¦ Cẩm thạch ¦ Marmer
+Grès, terre cuite ¦ Sành, đất nung ¦ Gerabah, terakota
+Faïence, porcelaine, émail ¦ Sành sứ, sứ, men ¦ Keramik, porselen, email
+Tissu ¦ Vải ¦ Kain
+Velours ¦ Nhung ¦ Beludru
+Cuir ¦ Da ¦ Kulit
+Osier, rotin ¦ Mây, song ¦ Anyaman, rotan
+Paille ¦ Rơm ¦ Jerami
+Verre ¦ Kính ¦ Kaca
+Sans pieds ¦ Không chân ¦ Tanpa kaki
+Pieds droits ¦ Chân thẳng ¦ Kaki lurus
+Pieds tournés ¦ Chân tiện ¦ Kaki bubut
+Pieds boules (miches) ¦ Chân tròn (hình bánh) ¦ Kaki bola
+Patins ¦ Chân trượt ¦ Kaki luncur
+Roulettes ¦ Bánh xe ¦ Roda kecil
+Barreaux de bois ¦ Song gỗ ¦ Jeruji kayu
+Métal (barreaux fins) ¦ Kim loại (song mảnh) ¦ Logam (jeruji tipis)
+Muret plein ¦ Tường thấp đặc ¦ Tembok rendah padat
+Métiers, ferme ¦ Nghề nghiệp, nông trại ¦ Pekerjaan, pertanian
+Extérieur ¦ Bên ngoài ¦ Luar
+sa chambre ¦ phòng của người ấy ¦ kamarnya
+né ici ¦ sinh ra ở đây ¦ lahir di sini
+née ici ¦ sinh ra ở đây ¦ lahir di sini
+y a vécu ¦ đã sống ở đây ¦ pernah tinggal di sini
+y est mort ¦ mất ở đây ¦ meninggal di sini
+y est morte ¦ mất ở đây ¦ meninggal di sini
+les parents ¦ cha mẹ ¦ orang tua
+les enfants ¦ các con ¦ anak-anak
+locataire ¦ người thuê nhà ¦ penyewa
+fermier ¦ tá điền ¦ penggarap
+domestique ¦ người giúp việc ¦ pembantu rumah tangga
+servante ¦ người hầu gái ¦ pelayan perempuan
+valet ¦ người hầu ¦ pelayan laki-laki
+nourrice ¦ vú nuôi ¦ inang pengasuh
+pensionnaire ¦ người ở trọ ¦ penghuni kos
+atelier ¦ xưởng ¦ bengkel
+boutique ¦ cửa hàng ¦ toko
+Nom de la maison ¦ Tên ngôi nhà ¦ Nama rumah
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Cài đặt bắt dính: lưới, góc, góc nghiêng, độ chính xác và 💾 cài đặt đã lưu ¦ Pengaturan tempel: kisi, sudut, kemiringan, presisi dan 💾 pengaturan tersimpan
+Réglages de l’aimant ¦ Cài đặt bắt dính ¦ Pengaturan tempel
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Một bản vẽ cũ, một bản địa chính, để đồ lại… ¦ 📐 Denah lama, peta kadaster, untuk dijiplak…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Một đồ vật dạng hình ảnh (nhìn từ trên)… ¦ 🖼️ Benda sebagai gambar (tampak atas)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 Một đồ vật 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 Benda 3D (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 Một ngôi nhà (tệp .json)… ¦ 🏠 Rumah (berkas .json)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 Một bản vẽ DXF (AutoCAD, LibreCAD, kiến trúc sư, công chứng viên)… ¦ 📐 Denah DXF (AutoCAD, LibreCAD, arsitek, notaris)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Bản vẽ (PNG, JPG, PDF, SVG, bản in), chế độ xem 3D, tệp ngôi nhà ¦ Denah (PNG, JPG, PDF, SVG, cetak), tampilan 3D, berkas rumah
+Choisir, déplacer ¦ Chọn, di chuyển ¦ Pilih, pindahkan
+Déplacer la vue, ou barre d’espace ¦ Di chuyển khung nhìn, hoặc phím cách ¦ Geser tampilan, atau tombol spasi
+Pièce rectangulaire, murs compris : glisser ¦ Phòng hình chữ nhật, gồm cả tường: kéo ¦ Ruangan persegi panjang, termasuk dinding: seret
+Vide, trémie, double hauteur : glisser, sans murs ¦ Khoảng thông tầng, lỗ cầu thang, cao gấp đôi: kéo, không có tường ¦ Ruang terbuka, lubang tangga, tinggi ganda: seret, tanpa dinding
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Tường: bấm một lần ở mỗi góc, bấm đúp hoặc Enter để kết thúc ¦ Dinding: satu klik per sudut, klik ganda atau Enter untuk selesai
+Pièce de forme libre, sans murs : un clic par coin ¦ Phòng hình tự do, không có tường: bấm một lần ở mỗi góc ¦ Ruangan bentuk bebas, tanpa dinding: satu klik per sudut
+Porte : clic sur un mur ¦ Cửa ra vào: bấm vào một bức tường ¦ Pintu: klik pada dinding
+Fenêtre : clic sur un mur ¦ Cửa sổ: bấm vào một bức tường ¦ Jendela: klik pada dinding
+Cote, mesure : deux clics ¦ Kích thước, đo: bấm hai lần ¦ Ukuran, pengukuran: dua klik
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Nhãn có mũi tên: bấm vào điểm, rồi bấm vào chỗ để viết ¦ Label berpanah: satu klik pada titik, satu klik di tempat menulis
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Một thời kỳ khác của ngôi nhà dạng bóng mờ (thời kỳ của lớp 🕰, nếu không thì thời kỳ trước): tường rất trong suốt, cạnh nét đứt ¦ Masa lain rumah ini sebagai bayangan (masa dari lapisan 🕰, jika tidak masa sebelumnya): dinding sangat transparan, tepi putus-putus
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Bấm hai lần lên ngôi nhà: khoảng cách (và chênh lệch độ cao giữa hai điểm) ¦ Dua klik pada rumah: jaraknya (dan beda tinggi antara kedua titik)
+Tous les étages ¦ Mọi tầng ¦ Semua lantai
+Murs coupés (voir dedans) ¦ Tường cắt (nhìn vào trong) ¦ Dinding dipotong (lihat ke dalam)
+Murs coupés ¦ Tường cắt ¦ Dinding dipotong
+🕰 Autre époque ¦ 🕰 Thời kỳ khác ¦ 🕰 Masa lain
+Vue de dessus ¦ Nhìn từ trên ¦ Tampak atas
+Vue de face ¦ Nhìn mặt trước ¦ Tampak depan
+Vue de côté ¦ Nhìn bên cạnh ¦ Tampak samping
+Dessus ¦ Trên ¦ Atas
+Face ¦ Trước ¦ Depan
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Mặt trời theo giờ, ngày và địa điểm; ban đêm là đèn ¦ Matahari menurut jam, tanggal dan tempat; pada malam hari, lampu
+Visiter la maison à hauteur d’yeux ¦ Tham quan ngôi nhà ở tầm mắt ¦ Jelajahi rumah setinggi mata
+☀️ Lumière ¦ ☀️ Ánh sáng ¦ ☀️ Cahaya
+🚶 Visiter ¦ 🚶 Tham quan ¦ 🚶 Jelajahi
+📏 Mesurer ¦ 📏 Đo ¦ 📏 Ukur
+Plan 2D ¦ Bản vẽ 2D ¦ Denah 2D
+Toit ¦ Mái ¦ Atap
+Cotes ¦ Kích thước ¦ Ukuran
+Mobilier ¦ Đồ đạc ¦ Perabot
+Propriétés de l’élément choisi ¦ Thuộc tính của phần tử đã chọn ¦ Properti elemen yang dipilih
+Mobilier : meubles, portes, fenêtres à poser ¦ Đồ đạc: bàn ghế, cửa ra vào, cửa sổ để đặt ¦ Perabot: mebel, pintu, jendela untuk dipasang
+L’étage affiché : niveaux, hauteur, sol ¦ Tầng đang hiện: mức, chiều cao, sàn ¦ Lantai yang ditampilkan: level, tinggi, lantai
+La maison : nom, époque, réglages généraux ¦ Ngôi nhà: tên, thời kỳ, cài đặt chung ¦ Rumah: nama, masa, pengaturan umum
+la maison est fermée ¦ ngôi nhà đã đóng ¦ rumah sudah ditutup
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ đã có thay đổi khác sau đó: hãy dùng ↶ ở thanh trên cùng ¦ ada perubahan lain sesudahnya: gunakan ↶ di bilah atas
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Bắt dính: lưới, góc và điểm giữa tường, góc nghiêng (Alt để bỏ qua) ¦ Tempelkan: kisi, sudut dan titik tengah dinding, kemiringan (Alt untuk melewatinya)
+{walls} ajouté depuis {when} ¦ {walls} được thêm từ {when} ¦ {walls} ditambahkan sejak {when}
+{walls} ajoutés depuis {when} ¦ {walls} được thêm từ {when} ¦ {walls} ditambahkan sejak {when}
+{walls} disparu depuis {when} ¦ {walls} biến mất từ {when} ¦ {walls} hilang sejak {when}
+{walls} disparus depuis {when} ¦ {walls} biến mất từ {when} ¦ {walls} hilang sejak {when}
+{walls} plus là en {when} ¦ {walls} không còn vào {when} ¦ {walls} sudah tidak ada pada {when}
+{walls} ajouté en {when} ¦ {walls} được thêm vào {when} ¦ {walls} ditambahkan pada {when}
+{walls} ajoutés en {when} ¦ {walls} được thêm vào {when} ¦ {walls} ditambahkan pada {when}
+={n} souvenir : clic pour voir ¦ {n} kỷ niệm: bấm để xem ¦ {n} kenangan: klik untuk melihat
+={n} souvenirs : clic pour voir ¦ {n} kỷ niệm: bấm để xem ¦ {n} kenangan: klik untuk melihat
+Glisser : la pointe de la flèche ¦ Kéo: đầu mũi tên ¦ Seret: ujung panah
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Xem một tầng khác, hoặc cùng tầng ở thời kỳ khác, dạng trong suốt ¦ Lihat lantai lain, atau lantai yang sama di masa lain, secara transparan
+Calque d’un autre étage ou d’une autre époque ¦ Lớp của một tầng khác hoặc một thời kỳ khác ¦ Lapisan lantai lain atau masa lain
+Calque d’un autre étage ou d’une époque ¦ Lớp của một tầng khác hoặc một thời kỳ ¦ Lapisan lantai lain atau sebuah masa
+👻 Calque : non ¦ 👻 Lớp: không ¦ 👻 Lapisan: tidak
+👻 Dessous ¦ 👻 Bên dưới ¦ 👻 Di bawah
+👻 Dessus ¦ 👻 Bên trên ¦ 👻 Di atas
+👻 Les deux ¦ 👻 Cả hai ¦ 👻 Keduanya
+🕰 Époque d’avant ¦ 🕰 Thời kỳ trước ¦ 🕰 Masa sebelumnya
+🕰 Époque d’après ¦ 🕰 Thời kỳ sau ¦ 🕰 Masa sesudahnya
+🕰 Choisir une époque… ¦ 🕰 Chọn một thời kỳ… ¦ 🕰 Pilih masa…
+Ajouter un étage ou une cave ¦ Thêm một tầng hoặc một hầm ¦ Tambah lantai atau ruang bawah tanah
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Các tầng: quản lý, thêm, nhân bản, xoá ¦ Lantai: kelola, tambah, duplikat, hapus
+Plus d’actions sur les étages ¦ Thêm thao tác với các tầng ¦ Tindakan lain untuk lantai
+Chercher : lit, poêle, rouet… ¦ Tìm: giường, lò sưởi, xa quay sợi… ¦ Cari: tempat tidur, tungku, alat pemintal…
+Mes objets ¦ Đồ vật của tôi ¦ Benda-bendaku
+Aucun objet importé pour l’instant ¦ Chưa nhập đồ vật nào ¦ Belum ada benda yang diimpor
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ “⤒ Nhập” (ở trên) một tệp 3D (OBJ, STL, glTF, GLB) hoặc một hình ảnh. ¦ “⤒ Impor” (di atas) berkas 3D (OBJ, STL, glTF, GLB) atau gambar.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Bấm vào một đồ vật: nó được đặt giữa khung nhìn; sau đó kéo nó về đúng chỗ (R hoặc tay nắm tròn để xoay). ¦ Klik sebuah benda: benda itu diletakkan di tengah tampilan; lalu seret ke tempatnya (R atau pegangan bulat untuk memutar).
+Nom de l’étage ¦ Tên tầng ¦ Nama lantai
+Épaisseur des nouveaux murs ¦ Độ dày của tường mới ¦ Ketebalan dinding baru
+Épaisseur des planchers ¦ Độ dày của sàn ¦ Ketebalan pelat lantai
+Pas de la grille ¦ Bước lưới ¦ Jarak kisi
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Nhân bản tầng này (tường) ¦ ⧉ Duplikat lantai ini (dinding)
+Supprimer l’étage ¦ Xoá tầng ¦ Hapus lantai
+Cotes des murs ¦ Kích thước tường ¦ Ukuran dinding
+Cotes d’ensemble ¦ Kích thước tổng thể ¦ Ukuran keseluruhan
+Tableau des pièces sur le plan ¦ Bảng các phòng trên bản vẽ ¦ Tabel ruangan di denah
+Cartouche (nom, lieu, époque, étage) ¦ Khung tiêu đề (tên, địa điểm, thời kỳ, tầng) ¦ Kotak judul (nama, tempat, masa, lantai)
+Affichage sombre (dessin technique) ¦ Hiển thị tối (bản vẽ kỹ thuật) ¦ Tampilan gelap (gambar teknik)
+Plafond (visite 3D) ¦ Trần (tham quan 3D) ¦ Plafon (tur 3D)
+Aucun (ouvert) ¦ Không có (để trống) ¦ Tidak ada (terbuka)
+Plafond uni ¦ Trần phẳng ¦ Plafon polos
+Poutres apparentes ¦ Dầm lộ ¦ Balok ekspos
+Couleur du plafond ¦ Màu trần ¦ Warna plafon
+Légende : ― ajouté · ┄ disparu ¦ Chú giải: ― đã thêm · ┄ đã mất ¦ Keterangan: ― ditambahkan · ┄ hilang
+Transparence du calque ¦ Độ trong suốt của lớp ¦ Transparansi lapisan
+📐 Plan ancien, cadastre ¦ 📐 Bản vẽ cũ, bản địa chính ¦ 📐 Denah lama, kadaster
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Một bản địa chính thời Napoléon, một bản vẽ cũ, một bản phác: đặt nó làm nền, chỉnh theo tỉ lệ, rồi đồ lại tường lên trên. ¦ Kadaster era Napoleon, denah lama, sketsa: letakkan sebagai latar, sesuaikan skalanya, lalu jiplak dindingnya di atasnya.
+🖼 Choisir l’image… ¦ 🖼 Chọn hình ảnh… ¦ 🖼 Pilih gambar…
+Le mettre sous cet étage ¦ Đặt nó dưới tầng này ¦ Letakkan di bawah lantai ini
+Visible ¦ Hiện ¦ Terlihat
+🔒 Verrouillé ¦ 🔒 Đã khoá ¦ 🔒 Terkunci
+📏 Mettre à l’échelle ¦ 📏 Chỉnh theo tỉ lệ ¦ 📏 Sesuaikan skala
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Bấm hai lần dọc theo một bức tường trong hình: nó sẽ thẳng lại (ngang hoặc dọc) ¦ Dua klik di sepanjang dinding pada gambar: dinding itu jadi lurus (horizontal atau vertikal)
+✓ Fin du décalque ¦ ✓ Kết thúc đồ lại ¦ ✓ Selesai menjiplak
+✏️ Décalquer les murs ¦ ✏️ Đồ lại tường ¦ ✏️ Jiplak dinding
+🖼 Changer d’image… ¦ 🖼 Đổi hình ảnh… ¦ 🖼 Ganti gambar…
+🏠 Combles (sous le toit) ¦ 🏠 Gác mái (dưới mái) ¦ 🏠 Loteng (di bawah atap)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Cho tầng cao nhất, dưới mái dốc (thẻ Tầng → 🏠 Mái): khi đó trần nhà theo độ dốc, và chiều cao trần hiện ở mọi chỗ trên bản vẽ. ¦ Untuk lantai paling atas, di bawah atap miring (tab Lantai → 🏠 Atap): plafon mengikuti kemiringan, dan tinggi plafon terbaca di seluruh denah.
+Combles : le plafond suit la pente du toit ¦ Gác mái: trần theo độ dốc của mái ¦ Loteng: plafon mengikuti kemiringan atap
+Hauteur des murs sous le toit ¦ Chiều cao tường dưới mái ¦ Tinggi dinding di bawah atap
+🏠 Toit (vue 3D) ¦ 🏠 Mái (xem 3D) ¦ 🏠 Atap (tampilan 3D)
+Un toit sur l’étage le plus haut ¦ Một mái trên tầng cao nhất ¦ Atap di lantai paling atas
+Deux pans (pignons) ¦ Hai mái (đầu hồi) ¦ Dua bidang (pelana)
+Quatre pans (croupes) ¦ Bốn mái (mái hông) ¦ Empat bidang (perisai)
+Pavillon (pointe) ¦ Mái chóp ¦ Limas (runcing)
+Un pan (appentis) ¦ Một mái (mái chái) ¦ Satu bidang (sandar)
+Mansardé ¦ Mái Mansard ¦ Mansard
+Plat (toit-terrasse) ¦ Mái bằng (sân thượng) ¦ Datar (atap teras)
+Faîtage ¦ Nóc mái ¦ Bubungan
+Dans la longueur ¦ Theo chiều dài ¦ Memanjang
+Dans la largeur ¦ Theo chiều rộng ¦ Melebar
+Est – ouest ¦ Đông – tây ¦ Timur – barat
+Nord – sud ¦ Bắc – nam ¦ Utara – selatan
+Débord ¦ Phần chìa ra ¦ Tritisan
+Couverture ¦ Vật liệu lợp ¦ Penutup atap
+Tuiles canal ¦ Ngói ống ¦ Genteng kanal
+Tuiles plates ¦ Ngói phẳng ¦ Genteng datar
+Tuiles vernissées ¦ Ngói tráng men ¦ Genteng berglasir
+Ardoises ¦ Đá phiến ¦ Batu sabak
+Lauzes (pierre) ¦ Phiến đá lợp ¦ Lempeng batu
+Chaume ¦ Mái rơm ¦ Ilalang
+Zinc ¦ Kẽm ¦ Seng
+Bac acier ¦ Tôn thép ¦ Lembaran baja
+Pignons, acrotères ¦ Đầu hồi, tường chắn mái ¦ Gevel, dinding pembatas atap
+Acrotère (toit plat) ¦ Tường chắn mái (mái bằng) ¦ Dinding pembatas (atap datar)
+Une cheminée ¦ Một ống khói ¦ Sebuah cerobong
+Place de la cheminée ¦ Vị trí ống khói ¦ Posisi cerobong
+Gouttières et descentes ¦ Máng xối và ống thoát nước ¦ Talang dan pipa turun
+Un toit par aile (maison en L, en T, en U) ¦ Mỗi cánh nhà một mái (nhà hình chữ L, T, U) ¦ Satu atap per sayap (rumah bentuk L, T, U)
+Verrières, lanterneaux et édicules ¦ Mái kính, cửa lấy sáng và chòi mái ¦ Atap kaca, skylight dan rumah tangga atap
+Fenêtres de toit et lucarnes ¦ Cửa sổ mái và cửa sổ nhô ¦ Jendela atap dan jendela dormer
+🪟 Verrière ¦ 🪟 Mái kính ¦ 🪟 Atap kaca
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Chòi mái (lối ra mái) ¦ 🚪 Rumah tangga atap (jalan keluar ke atap)
+🔆 Lanterneau ¦ 🔆 Cửa lấy sáng ¦ 🔆 Skylight
+🪟 Fenêtre de toit ¦ 🪟 Cửa sổ mái ¦ 🪟 Jendela atap
+🏠 Lucarne ¦ 🏠 Cửa sổ nhô ¦ 🏠 Dormer
+🏚 Chien-assis ¦ 🏚 Cửa sổ nhô mái chái ¦ 🏚 Dormer sandar
+Lucarne ¦ Cửa sổ nhô ¦ Dormer
+Aile ¦ Cánh nhà ¦ Sayap
+Arrière ¦ Phía sau ¦ Belakang
+En travers ¦ Nằm ngang ¦ Melintang
+Vers l’égout ¦ Về phía mép mái ¦ Ke arah talang
+Profondeur ¦ Độ sâu ¦ Kedalaman
+＋ Verrière ¦ ＋ Mái kính ¦ ＋ Atap kaca
+＋ Édicule ¦ ＋ Chòi mái ¦ ＋ Rumah tangga atap
+＋ Lanterneau ¦ ＋ Cửa lấy sáng ¦ ＋ Skylight
+＋ Fenêtre de toit ¦ ＋ Cửa sổ mái ¦ ＋ Jendela atap
+＋ Lucarne ¦ ＋ Cửa sổ nhô ¦ ＋ Dormer
+＋ Chien-assis ¦ ＋ Cửa sổ nhô mái chái ¦ ＋ Dormer sandar
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Chưa có gì: hãy thêm người ở và các cuộc điều tra dân số (bên dưới). ¦ Belum ada apa-apa: tambahkan penghuni dan sensus (di bawah).
+📍 Lieu et époque ¦ 📍 Địa điểm và thời kỳ ¦ 📍 Tempat dan masa
+Époque (en quelques mots) ¦ Thời kỳ (vài chữ) ¦ Masa (beberapa kata)
+Aucun souvenir posé pour l’instant ¦ Chưa đặt kỷ niệm nào ¦ Belum ada kenangan yang dipasang
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Bấm vào một đồ đạc hoặc một phòng, rồi “🔗 Liên kết một kỷ niệm”: một bức ảnh, một câu chuyện, một người, một kỷ niệm gia đình. ¦ Klik sebuah perabot atau ruangan, lalu “🔗 Hubungkan kenangan”: foto, kisah, orang, kenangan keluarga.
+☀️ Orientation et lumière ¦ ☀️ Hướng và ánh sáng ¦ ☀️ Arah dan cahaya
+Nord du plan ¦ Hướng bắc của bản vẽ ¦ Utara denah
+Heure ¦ Giờ ¦ Jam
+Jour ¦ Ngày ¦ Hari
+Jour de l’année ¦ Ngày trong năm ¦ Hari dalam setahun
+Hauteur des yeux pour la visite ¦ Tầm mắt khi tham quan ¦ Tinggi mata untuk tur
+👥 Les habitants ¦ 👥 Người ở ¦ 👥 Penghuni
+rôle, années (né ici, 1880–1920…) ¦ vai trò, các năm (sinh ra ở đây, 1880–1920…) ¦ peran, tahun (lahir di sini, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Thêm một người ở… ¦ ＋ Tambah penghuni…
+📋 Les recensements ¦ 📋 Các cuộc điều tra dân số ¦ 📋 Sensus
+Ouvrir la fiche où est ce recensement ¦ Mở hồ sơ có cuộc điều tra dân số này ¦ Buka profil tempat sensus ini berada
+L’époque de la maison qui correspond à ce recensement ¦ Thời kỳ của ngôi nhà ứng với cuộc điều tra dân số này ¦ Masa rumah yang sesuai dengan sensus ini
+— époque — ¦ — thời kỳ — ¦ — masa —
+Aucun recensement rattaché. ¦ Chưa liên kết cuộc điều tra dân số nào. ¦ Belum ada sensus yang terhubung.
+＋ Ajouter un recensement… ¦ ＋ Thêm một cuộc điều tra dân số… ¦ ＋ Tambah sensus…
+🕰 Les époques ¦ 🕰 Các thời kỳ ¦ 🕰 Masa-masa
+Montrer la maison à cette époque ¦ Xem ngôi nhà ở thời kỳ này ¦ Tampilkan rumah pada masa ini
+Renommer, changer la date, rattacher à un recensement ¦ Đổi tên, đổi ngày, liên kết với một cuộc điều tra dân số ¦ Ganti nama, ubah tanggal, hubungkan ke sensus
+Supprimer cette époque ¦ Xoá thời kỳ này ¦ Hapus masa ini
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Ngôi nhà đã thay đổi theo thời gian? Hãy tạo một thời kỳ cho mỗi năm hoặc mỗi mốc (1850, 1900, 1936…), mỗi thời kỳ có bản vẽ riêng: bạn sẽ thấy nó thay đổi, và mỗi thời kỳ có thể liên kết với một cuộc điều tra dân số. ¦ Rumahnya berubah seiring waktu? Buat satu masa per tahun atau tanggal (1850, 1900, 1936…), masing-masing dengan denahnya: kamu akan melihat perubahannya, dan setiap masa bisa dihubungkan ke sensus.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Thời kỳ mới (bản sao của thời kỳ này) ¦ ＋ Masa baru (salinan masa ini)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Thời kỳ mới (bản sao của thời kỳ này)… ¦ ＋ Masa baru (salinan masa ini)…
+▶ Voir évoluer ¦ ▶ Xem thay đổi ¦ ▶ Lihat perubahannya
+⏹ Arrêter ¦ ⏹ Dừng ¦ ⏹ Berhenti
+📖 Histoire de la maison ¦ 📖 Lịch sử ngôi nhà ¦ 📖 Sejarah rumah
+Histoire de la maison ¦ Lịch sử ngôi nhà ¦ Sejarah rumah
+Construite par…, agrandie en…, vendue en… ¦ Được xây bởi…, mở rộng năm…, bán năm… ¦ Dibangun oleh…, diperluas pada…, dijual pada…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Bấm vào một bức tường, một phòng, một đồ đạc: cài đặt của nó hiện ở đây (vật liệu, màu, kích thước, tên, kỷ niệm). Con lăn: phóng to; phím cách: di chuyển khung nhìn; Alt: không bắt dính. ¦ Klik dinding, ruangan, perabot: pengaturannya muncul di sini (bahan, warna, ukuran, nama, kenangan). Roda tetikus: perbesar; spasi: geser tampilan; Alt: tanpa tempel.
+Cet étage ¦ Tầng này ¦ Lantai ini
+={n} pièce ¦ {n} phòng ¦ {n} ruangan
+={n} pièces ¦ {n} phòng ¦ {n} ruangan
+={n} étage ¦ {n} tầng ¦ {n} lantai
+={n} étages ¦ {n} tầng ¦ {n} lantai
+={n} habitant ¦ {n} người ở ¦ {n} penghuni
+={n} habitants ¦ {n} người ở ¦ {n} penghuni
+={n} époque ¦ {n} thời kỳ ¦ {n} masa
+={n} époques ¦ {n} thời kỳ ¦ {n} masa
+={n} arrêt ¦ {n} điểm dừng ¦ {n} perhentian
+={n} arrêts ¦ {n} điểm dừng ¦ {n} perhentian
+={n} modèle ¦ {n} mẫu ¦ {n} model
+={n} modèles ¦ {n} mẫu ¦ {n} model
+={n} recensement rattaché ¦ {n} cuộc điều tra dân số đã liên kết ¦ {n} sensus terhubung
+={n} recensements rattachés ¦ {n} cuộc điều tra dân số đã liên kết ¦ {n} sensus terhubung
+={n} habitant ajouté depuis le recensement. ¦ Đã thêm {n} người ở từ cuộc điều tra dân số. ¦ {n} penghuni ditambahkan dari sensus.
+={n} habitants ajoutés depuis le recensement. ¦ Đã thêm {n} người ở từ cuộc điều tra dân số. ¦ {n} penghuni ditambahkan dari sensus.
+={n} trémie ouverte ¦ {n} lỗ cầu thang đã mở ¦ {n} lubang tangga dibuka
+={n} trémies ouvertes ¦ {n} lỗ cầu thang đã mở ¦ {n} lubang tangga dibuka
+={n} étage supprimé ¦ Đã xoá {n} tầng ¦ {n} lantai dihapus
+={n} étages supprimés ¦ Đã xoá {n} tầng ¦ {n} lantai dihapus
+={n} copie seulement : le mur est trop court pour plus. ¦ Chỉ {n} bản sao: bức tường quá ngắn để thêm nữa. ¦ Hanya {n} salinan: dindingnya terlalu pendek untuk lebih banyak.
+={n} copies seulement : le mur est trop court pour plus. ¦ Chỉ {n} bản sao: bức tường quá ngắn để thêm nữa. ¦ Hanya {n} salinan: dindingnya terlalu pendek untuk lebih banyak.
+={n} lampe allumée ¦ {n} đèn đang sáng ¦ {n} lampu menyala
+={n} lampes allumées ¦ {n} đèn đang sáng ¦ {n} lampu menyala
+={n} refusé : {list} ¦ {n} bị từ chối: {list} ¦ {n} ditolak: {list}
+={n} refusés : {list} ¦ {n} bị từ chối: {list} ¦ {n} ditolak: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} hình ảnh: kéo vào 🎬 Dựng phim để làm thành phim (với các đoạn văn làm lời thuyết minh). ¦ ✓ {n} gambar: seret ke 🎬 Montase untuk membuat film (dengan teks sebagai sulih suara).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} hình ảnh: kéo vào 🎬 Dựng phim để làm thành phim (với các đoạn văn làm lời thuyết minh). ¦ ✓ {n} gambar: seret ke 🎬 Montase untuk membuat film (dengan teks sebagai sulih suara).
+🔗 Relier un souvenir… ¦ 🔗 Liên kết một kỷ niệm… ¦ 🔗 Hubungkan kenangan…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Góc (°, 0 = sang phải, 90 = lên trên) ¦ Sudut (°, 0 = ke kanan, 90 = ke atas)
+Début X ¦ Điểm đầu X ¦ Awal X
+Début Y ¦ Điểm đầu Y ¦ Awal Y
+Fin X ¦ Điểm cuối X ¦ Akhir X
+Fin Y ¦ Điểm cuối Y ¦ Akhir Y
+Hauteur (cm, vide = celle de l’étage) ¦ Chiều cao (cm, để trống = bằng tầng) ¦ Tinggi (cm, kosong = tinggi lantai)
+⌒ Courbure (flèche) ¦ ⌒ Độ cong (độ vồng) ¦ ⌒ Kelengkungan (lengkungan)
+✂ Couper en deux ¦ ✂ Cắt làm đôi ¦ ✂ Potong jadi dua
+Revêtement ¦ Lớp phủ ¦ Pelapis
+Pareil pour : ¦ Giống vậy cho: ¦ Sama untuk:
+tout l’étage ¦ cả tầng ¦ seluruh lantai
+toute la maison ¦ cả ngôi nhà ¦ seluruh rumah
+Couleur et texture ¦ Màu và kết cấu ¦ Warna dan tekstur
+Taille du motif ¦ Kích thước hoa văn ¦ Ukuran motif
+Allège (cm du sol) ¦ Bậu cửa sổ (cm từ sàn) ¦ Ambang jendela (cm dari lantai)
+Position sur le mur ¦ Vị trí trên tường ¦ Posisi pada dinding
+Du début du mur ¦ Từ đầu tường ¦ Dari awal dinding
+Jusqu’à la fin ¦ Đến cuối ¦ Sampai ujung
+🚪 Genre et ouverture ¦ 🚪 Loại và cách mở ¦ 🚪 Jenis dan bukaan
+Porte ¦ Cửa ¦ Pintu
+Porte double ¦ Cửa đôi ¦ Pintu ganda
+Porte d’entrée ¦ Cửa chính ¦ Pintu masuk
+Passage, arche ¦ Lối đi, vòm ¦ Lorong, lengkung
+Porte de grange ¦ Cửa kho thóc ¦ Pintu lumbung
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Một dãy cửa sổ (hoặc cửa) dọc theo tường ¦ Sederet jendela (atau pintu) di sepanjang dinding
+🔁 Répéter… ¦ 🔁 Lặp lại… ¦ 🔁 Ulangi…
+↔ Sens d’ouverture ¦ ↔ Hướng mở ¦ ↔ Arah bukaan
+▨ Plancher : plein ou vide ¦ ▨ Sàn: kín hoặc thông ¦ ▨ Lantai: penuh atau terbuka
+Pas de plancher : vide sur l’étage du dessous ¦ Không có sàn: thông xuống tầng dưới ¦ Tanpa lantai: terbuka ke lantai di bawah
+Garde-corps ¦ Lan can ¦ Pagar pengaman
+Garde-corps autour ¦ Lan can xung quanh ¦ Pagar pengaman di sekeliling
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Thêm tầng phía trên nếu thiếu, một gác lửng trên một phần phòng này, khoảng thông tầng ở phần còn lại, lan can và cầu thang ¦ Menambahkan lantai di atas jika belum ada, mezanin di sebagian ruangan ini, ruang terbuka di sisanya, pagar pengamannya dan tangganya
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Gác lửng nhìn xuống phòng này ¦ 🏗 Mezanin terbuka ke ruangan ini
+Mezzanine ouverte ¦ Gác lửng mở ¦ Mezanin terbuka
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Tường và đồ đạc đi theo phòng ¦ 🔗 Dinding dan perabot ikut ruangan
+🧱 Murs de la pièce ¦ 🧱 Tường của phòng ¦ 🧱 Dinding ruangan
+Sol ¦ Sàn ¦ Lantai
+Salle commune ¦ Phòng chung ¦ Ruang bersama
+Chambre des parents ¦ Phòng của cha mẹ ¦ Kamar orang tua
+Chambre des enfants ¦ Phòng của các con ¦ Kamar anak-anak
+Salle à manger ¦ Phòng ăn ¦ Ruang makan
+Grenier ¦ Gác xép ¦ Loteng
+Cellier ¦ Kho chứa ¦ Gudang
+Étable ¦ Chuồng bò ¦ Kandang
+Grange ¦ Kho thóc ¦ Lumbung
+Fournil ¦ Lò bánh ¦ Ruang roti
+Boutique ¦ Cửa hàng ¦ Toko
+Couloir ¦ Hành lang ¦ Lorong
+Cour ¦ Sân ¦ Halaman
+Jardin ¦ Vườn ¦ Taman
+Potager ¦ Vườn rau ¦ Kebun sayur
+Basse-cour ¦ Sân nuôi gia cầm ¦ Kandang unggas
+🕯 Souvenirs de la pièce ¦ 🕯 Kỷ niệm của căn phòng ¦ 🕯 Kenangan ruangan
+La chambre où est née Marie en 1890 ; la veillée… ¦ Căn phòng nơi Marie ra đời năm 1890; buổi tối quây quần… ¦ Kamar tempat Marie lahir tahun 1890; malam berkumpul…
+Les personnes de la pièce ¦ Những người của căn phòng ¦ Orang-orang di ruangan ini
+Leurs années dans cette pièce ¦ Những năm họ ở trong phòng này ¦ Tahun-tahun mereka di ruangan ini
+années : 1890 – 1925 ¦ các năm: 1890 – 1925 ¦ tahun: 1890 – 1925
+🪜 Escalier ¦ 🪜 Cầu thang ¦ 🪜 Tangga
+✓ confortable (60 à 66 cm) ¦ ✓ thoải mái (60 đến 66 cm) ¦ ✓ nyaman (60 sampai 66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ hơi dốc: hãy kéo dài cầu thang hoặc chọn cầu thang xoay ¦ ⚠️ agak curam: perpanjang tangga atau pilih tangga berbelok
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ bậc rất dài: hãy rút ngắn cầu thang ¦ ⚠️ anak tangga sangat panjang: perpendek tangga
+Quart tournant ¦ Rẽ một phần tư ¦ Belokan seperempat
+Vers la gauche ¦ Sang trái ¦ Ke kiri
+Vers la droite ¦ Sang phải ¦ Ke kanan
+Le haut devient le bas ¦ Đầu trên thành đầu dưới ¦ Atas menjadi bawah
+⇅ Inverser le sens de montée ¦ ⇅ Đảo chiều đi lên ¦ ⇅ Balik arah naik
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Không có tầng phía trên: hãy thêm bằng ＋ ở trên. ¦ Tidak ada lantai di atas: tambahkan dengan ＋ di atas.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Cho những ngôi nhà vẽ trước đây: mỗi cầu thang khoét sàn của tầng phía trên ¦ Untuk rumah yang digambar sebelumnya: setiap tangga melubangi lantai di atasnya
+Ouvrir les trémies de tous les escaliers ¦ Mở lỗ cầu thang cho mọi cầu thang ¦ Buka lubang untuk semua tangga
+Du sol ¦ Từ sàn ¦ Dari lantai
+Les prochains objets de ce modèle seront posés à cette taille ¦ Các đồ vật tiếp theo của mẫu này sẽ được đặt ở kích thước này ¦ Benda berikutnya dari model ini akan dipasang dengan ukuran ini
+💾 Garder pour ce modèle ¦ 💾 Giữ cho mẫu này ¦ 💾 Simpan untuk model ini
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Đặt nó lên đồ đạc bên dưới (bàn, tủ ngăn kéo, lò sưởi…) ¦ Letakkan di atas perabot di bawahnya (meja, lemari laci, perapian…)
+⬆ Sur l’objet dessous ¦ ⬆ Lên đồ vật bên dưới ¦ ⬆ Di atas benda di bawahnya
+⬇ Au sol ¦ ⬇ Xuống sàn ¦ ⬇ Di lantai
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Nhiều bản sao cùng lúc: theo hàng, theo lưới, hoặc theo vòng tròn quanh một đồ vật (6 ghế quanh một bàn) ¦ Beberapa salinan sekaligus: berbaris, berkisi, atau melingkar di sekitar benda (6 kursi di sekitar meja)
+Pieds ¦ Chân ¦ Kaki
+Pieds, poignées, filets, ferrures ¦ Chân, tay nắm, đường viền, phụ kiện kim loại ¦ Kaki, pegangan, list, perkakas logam
+Sans deuxième couleur ¦ Không có màu thứ hai ¦ Tanpa warna kedua
+Époque, style ¦ Thời kỳ, phong cách ¦ Masa, gaya
+Effets : pieds et détails ¦ Hiệu ứng: chân và chi tiết ¦ Efek: kaki dan detail
+🏷 Souvenirs de cet objet ¦ 🏷 Kỷ niệm của đồ vật này ¦ 🏷 Kenangan benda ini
+Son histoire (objet de famille) ¦ Câu chuyện của nó (đồ vật gia đình) ¦ Kisahnya (benda keluarga)
+Flèche vers un point ¦ Mũi tên chỉ vào một điểm ¦ Panah ke sebuah titik
+Couleur de la flèche ¦ Màu mũi tên ¦ Warna panah
+Police de départ ¦ Phông chữ mặc định ¦ Fon bawaan
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Các phiên bản của ngôi nhà theo năm hoặc theo ngày: xem nó thay đổi, liên kết một thời kỳ với một cuộc điều tra dân số ¦ Versi rumah menurut tahun atau tanggal: lihat perubahannya, hubungkan masa ke sensus
+🕰 Époques ¦ 🕰 Thời kỳ ¦ 🕰 Masa
+L’époque d’avant ¦ Thời kỳ trước ¦ Masa sebelumnya
+L’époque montrée (plan 2D et vue 3D) ¦ Thời kỳ đang hiện (bản vẽ 2D và xem 3D) ¦ Masa yang ditampilkan (denah 2D dan tampilan 3D)
+L’époque d’après ¦ Thời kỳ sau ¦ Masa sesudahnya
+⋯ Gérer les époques… ¦ ⋯ Quản lý các thời kỳ… ¦ ⋯ Kelola masa…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Xem thay đổi: lần lượt từng thời kỳ ¦ ▶ Lihat perubahannya: masa satu per satu
+MAISON · ÉPOQUES ¦ NGÔI NHÀ · THỜI KỲ ¦ RUMAH · MASA
+MAISON ¦ NGÔI NHÀ ¦ RUMAH
+Créer l’époque ¦ Tạo thời kỳ ¦ Buat masa
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Ngôi nhà như đang được vẽ bây giờ trở thành thời kỳ đầu tiên: hãy đặt tên và ngày cho nó. Thời kỳ mới bắt đầu từ một bản sao, sau đó bạn sửa (thêm một phòng, phá một bức tường, đồ đạc khác…). ¦ Rumah seperti yang tergambar sekarang menjadi masa pertama: beri nama dan tanggal. Masa baru dimulai dari salinan, lalu kamu ubah (ruangan ditambah, dinding dirobohkan, perabot lain…).
+La maison dessinée maintenant ¦ Ngôi nhà đang được vẽ bây giờ ¦ Rumah yang tergambar sekarang
+Année ou date ¦ Năm hoặc ngày ¦ Tahun atau tanggal
+La nouvelle époque ¦ Thời kỳ mới ¦ Masa baru
+ex. Après l’agrandissement ¦ ví dụ Sau khi mở rộng ¦ mis. Sesudah perluasan
+Rattachée au recensement ¦ Liên kết với cuộc điều tra dân số ¦ Terhubung ke sensus
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Để liên kết với một cuộc điều tra dân số: thẻ Ngôi nhà → “📋 Các cuộc điều tra dân số” → ＋ Một cuộc điều tra dân số. ¦ Untuk menghubungkannya ke sensus: tab Rumah → “📋 Sensus” → ＋ Sebuah sensus.
+Donne un nom ou une date à cette époque. ¦ Hãy đặt tên hoặc ngày cho thời kỳ này. ¦ Beri nama atau tanggal untuk masa ini.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Đã tạo thời kỳ mới (bản sao): hãy sửa những gì khác đi. “‹ ›” ở trên để chuyển giữa các thời kỳ. ¦ Masa baru dibuat (salinan): ubah yang berbeda. “‹ ›” di atas untuk berpindah antarmasa.
+Époque supprimée ¦ Đã xoá thời kỳ ¦ Masa dihapus
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Hãy tạo ít nhất hai thời kỳ (＋ Thời kỳ mới) để xem ngôi nhà thay đổi. ¦ Buat setidaknya dua masa (＋ Masa baru) untuk melihat rumah berubah.
+＋ Un recensement ¦ ＋ Một cuộc điều tra dân số ¦ ＋ Sebuah sensus
+Recensements à rattacher ¦ Các cuộc điều tra dân số để liên kết ¦ Sensus untuk dihubungkan
+Ajouter aussi les personnes du foyer comme habitants ¦ Thêm cả những người trong hộ làm người ở ¦ Tambahkan juga anggota rumah tangga sebagai penghuni
+À l’époque ¦ Vào thời kỳ ¦ Pada masa
+Choisis au moins un recensement. ¦ Hãy chọn ít nhất một cuộc điều tra dân số. ¦ Pilih setidaknya satu sensus.
+Clique sur un mur. ¦ Hãy bấm vào một bức tường. ¦ Klik sebuah dinding.
+Une étiquette à flèche ¦ Một nhãn có mũi tên ¦ Label berpanah
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Ghi chú (ví dụ “Lắp kính hai lớp năm 1978”, “Đây từng là giếng”) ¦ Catatan (mis. “Kaca ganda dipasang tahun 1978”, “Di sini dulu ada sumur”)
+Étiquette à flèche ¦ Nhãn có mũi tên ¦ Label berpanah
+Un texte sur le plan ¦ Một đoạn chữ trên bản vẽ ¦ Teks di denah
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Chữ cần viết (tên phòng, địa điểm, một nhận xét…) ¦ Teks yang ditulis (nama ruangan, tempat, catatan…)
+Mur modifié ¦ Đã sửa tường ¦ Dinding diubah
+Pièce modifiée ¦ Đã sửa phòng ¦ Ruangan diubah
+Flèche déplacée ¦ Đã di chuyển mũi tên ¦ Panah dipindahkan
+Objet tourné ¦ Đã xoay đồ vật ¦ Benda diputar
+Plan ancien déplacé ¦ Đã di chuyển bản vẽ cũ ¦ Denah lama dipindahkan
+Une pièce d’au moins 50 cm de côté. ¦ Một phòng có cạnh ít nhất 50 cm. ¦ Ruangan dengan sisi minimal 50 cm.
+Un vide d’au moins 40 cm de côté. ¦ Một khoảng thông tầng có cạnh ít nhất 40 cm. ¦ Ruang terbuka dengan sisi minimal 40 cm.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Khoảng thông tầng này ở tầng thấp nhất: nó không thông xuống đâu cả. Để làm gác lửng, hãy vẽ khoảng thông tầng ở tầng phía trên. ¦ Ruang terbuka ini ada di lantai paling bawah: tidak mengarah ke mana pun. Untuk mezanin, gambar ruang terbukanya di lantai atas.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Hãy chọn phòng (phòng khách) trên bản vẽ trước. ¦ Pilih dulu ruangannya (ruang keluarga) di denah.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Phòng hơi nhỏ để làm gác lửng (ít nhất 2,5 m × 4 m). ¦ Ruangan agak kecil untuk mezanin (minimal 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Bấm: chọn · kéo: di chuyển · tay nắm: kéo dài tường, biến dạng phòng · ⌫: xoá ¦ Klik: pilih · seret: pindahkan · pegangan: perpanjang dinding, ubah bentuk ruangan · ⌫: hapus
+Glisser pour déplacer la vue ¦ Kéo để di chuyển khung nhìn ¦ Seret untuk menggeser tampilan
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Kéo chéo: một phòng hình chữ nhật với bốn bức tường (diện tích hiện ra) ¦ Seret diagonal: ruangan persegi panjang dengan keempat dindingnya (luasnya ditampilkan)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Kéo chéo: một khoảng không có sàn (gác lửng, cao gấp đôi, lỗ cầu thang); lan can tự đặt dọc theo các cạnh không có tường ¦ Seret diagonal: ruang terbuka tanpa lantai (mezanin, tinggi ganda, lubang tangga); pagar pengaman dipasang sendiri di sepanjang tepi tanpa dinding
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Bấm một lần ở mỗi góc (bắt dính: lưới, góc, góc vuông; Alt: tự do) · bấm đúp hoặc Enter: kết thúc · bấm vào điểm đầu tiên: khép lại (và tạo phòng) ¦ Satu klik per sudut (tempel: kisi, sudut, siku-siku; Alt: bebas) · klik ganda atau Enter: selesai · klik titik pertama: tutup (dan buat ruangan)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ Một phòng hình tự do (không có tường): bấm một lần ở mỗi góc, bấm đúp để kết thúc ¦ Ruangan bentuk bebas (tanpa dinding): satu klik per sudut, klik ganda untuk selesai
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Bấm vào tường: một cửa ra vào (sau đó kéo nó dọc theo tường) ¦ Klik dinding: sebuah pintu (lalu seret di sepanjang dinding)
+Clic sur un mur : une fenêtre ¦ Bấm vào tường: một cửa sổ ¦ Klik dinding: sebuah jendela
+Deux clics : une cote (la distance s’affiche) ¦ Bấm hai lần: một kích thước (khoảng cách hiện ra) ¦ Dua klik: sebuah ukuran (jaraknya ditampilkan)
+Clic : écrire un texte sur le plan ¦ Bấm: viết chữ lên bản vẽ ¦ Klik: tulis teks di denah
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Bấm vào điểm cần chỉ (giếng, cửa sổ…), rồi bấm vào chỗ để viết ghi chú ¦ Klik titik yang ingin ditunjuk (sumur, jendela…), lalu klik tempat menulis catatan
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ rộng x sâu (ví dụ 420 x 350, 4,2 x 3,5 m) ↵ ¦ lebar x dalam (mis. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ độ dài (cm, hoặc 3,5 m) rồi @góc ↵ ¦ panjang (cm, atau 3,5 m) lalu @sudut ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Hãy viết rộng x sâu: 420 x 350 (cm) hoặc 4,2 x 3,5 m (ít nhất 50 cm). ¦ Tulis lebar x dalam: 420 x 350 (cm) atau 4,2 x 3,5 m (minimal 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Hãy bấm điểm đầu trên bản vẽ trước, rồi gõ độ dài. ¦ Klik dulu titik awal di denah, lalu ketik panjangnya.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Không hiểu độ dài: 350, 3,5 m, hoặc 350 @ 90 cho góc. ¦ Panjang tidak dipahami: 350, 3,5 m, atau 350 @ 90 untuk sudutnya.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Không hiểu góc (tính bằng độ: 0 bên phải, 90 phía trên). ¦ Sudut tidak dipahami (dalam derajat: 0 ke kanan, 90 ke atas).
+Grille ¦ Lưới ¦ Kisi
+Coins des murs et des pièces ¦ Góc của tường và phòng ¦ Sudut dinding dan ruangan
+Milieu des murs ¦ Điểm giữa tường ¦ Titik tengah dinding
+Le long des murs (au cm) ¦ Dọc theo tường (từng cm) ¦ Di sepanjang dinding (per cm)
+Alignements (lignes de rappel) ¦ Căn thẳng (đường gióng) ¦ Kesejajaran (garis bantu)
+Pas des angles ¦ Bước góc ¦ Langkah sudut
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: không bắt dính (chính xác đến mm) · ⇧: góc 45° · phím mũi tên: dời phần đã chọn 1 cm (⇧: một bước lưới) · khi đang vẽ, gõ độ dài bằng bàn phím. ¦ Alt: tanpa tempel (presisi mm) · ⇧: sudut 45° · panah: geser yang dipilih 1 cm (⇧: satu langkah kisi) · saat menggambar, ketik panjangnya dengan keyboard.
+Décalé ¦ Đã dời ¦ Digeser
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Cần một tệp OBJ, STL, GLB hoặc glTF. ¦ Perlu berkas OBJ, STL, GLB atau glTF.
+Lecture du modèle… ¦ Đang đọc mẫu… ¦ Membaca model…
+Objet importé ¦ Đã nhập đồ vật ¦ Benda diimpor
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ Đã nhập đồ vật 3D: nó cũng có trong Đồ đạc → “Đồ vật của tôi”, cho mọi ngôi nhà. ¦ Benda 3D diimpor: juga ada di Perabot → “Benda-bendaku”, untuk semua rumah.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Đã đặt đồ vật (nhìn từ trên): hãy chỉnh kích thước thật trong Thuộc tính. ¦ Benda dipasang (tampak atas): atur ukuran sebenarnya di Properti.
+Envoi de l’image dans les médias… ¦ Đang gửi hình ảnh vào tư liệu… ¦ Mengirim gambar ke media…
+MAISON · PLAN ANCIEN ¦ NGÔI NHÀ · BẢN VẼ CŨ ¦ RUMAH · DENAH LAMA
+Le plan à calquer ¦ Bản vẽ để đồ lại ¦ Denah untuk dijiplak
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Một bản địa chính thời Napoléon, một bản vẽ cũ, một bản phác… “📁 Nhập” lấy một tệp từ máy tính (nó được đưa vào tư liệu). ¦ Kadaster era Napoleon, denah lama, sketsa… “📁 Impor” mengambil satu dari komputer (masuk ke media).
+Poser ce plan ¦ Đặt bản vẽ này ¦ Pasang denah ini
+Cette image ne peut pas servir de plan. ¦ Hình ảnh này không dùng làm bản vẽ được. ¦ Gambar ini tidak bisa dipakai sebagai denah.
+Plan ancien posé ¦ Đã đặt bản vẽ cũ ¦ Denah lama dipasang
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Bấm vào hai đầu của một độ dài đã biết trên bản vẽ cũ (một bức tường, thước tỉ lệ được vẽ) ¦ 📏 Klik kedua ujung panjang yang diketahui di denah lama (dinding, skala yang tergambar)
+Les deux points sont trop proches. ¦ Hai điểm quá gần nhau. ¦ Kedua titik terlalu dekat.
+📏 Mettre le plan à l’échelle ¦ 📏 Chỉnh bản vẽ theo tỉ lệ ¦ 📏 Sesuaikan skala denah
+Mettre à l’échelle ¦ Chỉnh theo tỉ lệ ¦ Sesuaikan skala
+Quelle est la vraie longueur entre ces deux points ? ¦ Độ dài thật giữa hai điểm này là bao nhiêu? ¦ Berapa panjang sebenarnya antara kedua titik ini?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Bản địa chính thời Napoléon thường có tỉ lệ 1/2500 hoặc 1/1250; các bản vẽ cũ tính bằng toise (6 pied, 1,949 m) và pied du roi (32,48 cm): hãy viết con số, việc quy đổi sẽ tự làm. ¦ Kadaster era Napoleon biasanya berskala 1/2500 atau 1/1250; denah lama memakai toise (6 pied, 1,949 m) dan pied du roi (32,48 cm): tulis angkanya, konversinya otomatis.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Hãy viết một độ dài, ví dụ 12 hoặc 3,5. ¦ Tulis panjangnya, misalnya 12 atau 3,5.
+Plan ancien mis à l’échelle ¦ Đã chỉnh bản vẽ cũ theo tỉ lệ ¦ Skala denah lama disesuaikan
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Bấm hai điểm dọc theo một bức tường của bản vẽ cũ: nó sẽ thẳng lại ¦ ↻ Klik dua titik di sepanjang dinding denah lama: dinding itu akan jadi lurus
+Ce mur est déjà droit. ¦ Bức tường này đã thẳng rồi. ¦ Dinding ini sudah lurus.
+↻ Redresser ¦ ↻ Chỉnh thẳng ¦ ↻ Luruskan
+✥ Déplacer ¦ ✥ Di chuyển ¦ ✥ Pindahkan
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Đồ lại: bấm một lần ở mỗi góc tường, theo bản vẽ cũ · bấm đúp hoặc Enter để kết thúc một bức tường · ⬚ cho cả một phòng ¦ ✏️ Jiplak: satu klik per sudut dinding, mengikuti denah lama · klik ganda atau Enter untuk menyelesaikan dinding · ⬚ untuk satu ruangan utuh
+Photo, document ¦ Ảnh, giấy tờ ¦ Foto, dokumen
+Récit ¦ Câu chuyện ¦ Kisah
+Souvenir de famille ¦ Kỷ niệm gia đình ¦ Kenangan keluarga
+Objet de famille ¦ Đồ vật gia đình ¦ Benda keluarga
+Voir ce souvenir ¦ Xem kỷ niệm này ¦ Lihat kenangan ini
+Retirer ce souvenir (sans le supprimer de la base) ¦ Gỡ kỷ niệm này (không xoá khỏi cơ sở dữ liệu) ¦ Lepas kenangan ini (tanpa menghapusnya dari basis data)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Chưa liên kết kỷ niệm nào: một bức ảnh, một câu chuyện, một người… ¦ Belum ada kenangan yang terhubung: foto, kisah, orang…
+Aucun souvenir ne correspond. ¦ Không có kỷ niệm nào phù hợp. ¦ Tidak ada kenangan yang cocok.
+Aucun souvenir de famille pour l’instant ¦ Chưa có kỷ niệm gia đình nào ¦ Belum ada kenangan keluarga
+Essaie un autre mot. ¦ Hãy thử từ khác. ¦ Coba kata lain.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Danh sách → Ký ức gia đình (công thức nấu ăn, cách nói, bài hát…) hoặc Đồ vật gia đình. ¦ Daftar → Memori keluarga (resep, ungkapan, lagu…) atau Benda keluarga.
+MAISON · SOUVENIRS ¦ NGÔI NHÀ · KỶ NIỆM ¦ RUMAH · KENANGAN
+📜 Un souvenir de famille ¦ 📜 Một kỷ niệm gia đình ¦ 📜 Kenangan keluarga
+Chercher… (recette, montre, surnom) ¦ Tìm… (công thức, đồng hồ, biệt danh) ¦ Cari… (resep, jam, julukan)
+Chercher un souvenir ¦ Tìm một kỷ niệm ¦ Cari kenangan
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Hãy chọn trước một đồ đạc, một đồ vật hoặc một phòng. ¦ Pilih dulu perabot, benda atau ruangan.
+🖼 Une photo, un document ¦ 🖼 Một bức ảnh, một giấy tờ ¦ 🖼 Foto, dokumen
+pris dans les médias (ou importé depuis l’ordinateur) ¦ lấy từ tư liệu (hoặc nhập từ máy tính) ¦ diambil dari media (atau diimpor dari komputer)
+✍ Un récit ¦ ✍ Một câu chuyện ¦ ✍ Kisah
+ce qui s’est passé ici, ce qu’on en raconte ¦ những gì đã xảy ra ở đây, những gì người ta kể lại ¦ apa yang terjadi di sini, apa yang diceritakan orang
+👤 Une personne ¦ 👤 Một người ¦ 👤 Orang
+qui a vécu ici, qui s’en servait ¦ người đã sống ở đây, người đã dùng nó ¦ yang pernah tinggal di sini, yang memakainya
+une recette, une expression, un objet de famille… ¦ một công thức nấu ăn, một cách nói, một đồ vật gia đình… ¦ resep, ungkapan, benda keluarga…
+ex. La veillée de Noël 1912 ¦ ví dụ Đêm Giáng sinh 1912 ¦ mis. Malam Natal 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Những gì đã xảy ra ở đây, những gì người ta kể lại… ¦ Apa yang terjadi di sini, apa yang diceritakan orang…
+Le récit ¦ Câu chuyện ¦ Kisahnya
+Écris un titre ou un récit. ¦ Hãy viết tiêu đề hoặc câu chuyện. ¦ Tulis judul atau kisahnya.
+Souvenir rattaché ¦ Đã liên kết kỷ niệm ¦ Kenangan terhubung
+Ce média n’existe plus. ¦ Tư liệu này không còn nữa. ¦ Media ini sudah tidak ada.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Ngôi nhà chưa lưu sẽ bị mất (💾 trước). ¦ Rumah yang belum disimpan akan hilang (💾 dulu).
+Ouvrir la fiche ? ¦ Mở hồ sơ? ¦ Buka profil?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ bắt dính, lưới, độ dày tường, tầm mắt và ánh sáng ¦ tempel, kisi, ketebalan dinding, tinggi mata dan cahaya
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Tệp đã sẵn sàng: nhập nó trong 🧲 Bắt dính → “⤒ Nhập”. ¦ Berkas siap: impor di 🧲 Tempelkan → “⤒ Impor”.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Không đọc được tệp này (cần một tệp cài đặt .json). ¦ Berkas ini tidak bisa dibaca (perlu berkas pengaturan .json).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Tệp này không phải là cài đặt LCNDA (⤓ Xuất một cài đặt, trong một công cụ). ¦ Berkas ini bukan pengaturan LCNDA (⤓ Ekspor pengaturan, di sebuah alat).
+Le plan de cet étage est vide. ¦ Bản vẽ của tầng này trống. ¦ Denah lantai ini kosong.
+le plan de l’étage ¦ bản vẽ của tầng ¦ denah lantai
+le plan, plus léger ¦ bản vẽ, nhẹ hơn ¦ denah, lebih ringan
+le plan sur une page A4 ¦ bản vẽ trên một trang A4 ¦ denah di satu halaman A4
+le plan, en dessin ¦ bản vẽ, dạng hình vẽ ¦ denah, sebagai gambar vektor
+le plan, tout de suite ¦ bản vẽ, ngay lập tức ¦ denah, langsung
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ bản vẽ của tầng cho AutoCAD, LibreCAD… (các lớp, tính bằng cm) ¦ denah lantai untuk AutoCAD, LibreCAD… (lapisan, dalam cm)
+image de la vue 3D ¦ hình ảnh của chế độ xem 3D ¦ gambar tampilan 3D
+🧊 Vue 3D ¦ 🧊 Xem 3D ¦ 🧊 Tampilan 3D
+💾 Fichier de la maison ¦ 💾 Tệp ngôi nhà ¦ 💾 Berkas rumah
+à réimporter (⤒ Importer) ¦ để nhập lại (⤒ Nhập) ¦ untuk diimpor ulang (⤒ Impor)
+Ce fichier DXF n’est pas lisible. ¦ Không đọc được tệp DXF này. ¦ Berkas DXF ini tidak bisa dibaca.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ Không tìm thấy nét nào trong DXF này (DXF “nhị phân” không đọc được: hãy lưu nó thành DXF văn bản, ASCII). ¦ Tidak ada garis di DXF ini (DXF “biner” tidak bisa dibaca: simpan sebagai DXF teks, ASCII).
+MAISON · IMPORT DXF ¦ NGÔI NHÀ · NHẬP DXF ¦ RUMAH · IMPOR DXF
+Importer le plan ¦ Nhập bản vẽ ¦ Impor denah
+Unité du dessin ¦ Đơn vị của bản vẽ ¦ Satuan gambar
+Épaisseur des murs ¦ Độ dày tường ¦ Ketebalan dinding
+Où le mettre ¦ Đặt ở đâu ¦ Diletakkan di mana
+Un nouvel étage ¦ Một tầng mới ¦ Lantai baru
+Calques à prendre ¦ Các lớp cần lấy ¦ Lapisan yang diambil
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Một bản vẽ xuất từ đây: tường được lấy lại theo trục (MURS_AXES). ¦ Denah yang diekspor dari sini: dindingnya diambil menurut sumbunya (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Bản vẽ của kiến trúc sư thường vẽ mỗi bức tường bằng hai nét: hãy giữ độ dày nhỏ, hoặc bỏ chọn các lớp đồ đạc, kích thước và gạch chéo. ¦ Denah arsitek sering menggambar setiap dinding dengan dua garis: pakai ketebalan kecil, atau hapus centang lapisan perabot, ukuran dan arsiran.
+Coche au moins un calque. ¦ Hãy chọn ít nhất một lớp. ¦ Centang setidaknya satu lapisan.
+Rien à reprendre dans ces calques. ¦ Không có gì để lấy trong các lớp này. ¦ Tidak ada yang bisa diambil dari lapisan ini.
+Plan importé ¦ Đã nhập bản vẽ ¦ Denah diimpor
+Plan DXF importé ¦ Đã nhập bản vẽ DXF ¦ Denah DXF diimpor
+Nombre en tout ¦ Tổng số ¦ Jumlah total
+Espace entre deux ¦ Khoảng cách giữa hai cái ¦ Jarak antara dua
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Không đủ chỗ trên bức tường này: giảm khoảng cách, hoặc dời cái đầu tiên về đầu tường. ¦ Tidak cukup tempat di dinding ini: kurangi jaraknya, atau geser yang pertama ke awal dinding.
+Répété ¦ Đã lặp lại ¦ Diulang
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Hãy chọn trước một đồ vật, một cửa ra vào hoặc một cửa sổ. ¦ Pilih dulu benda, pintu atau jendela.
+En ligne ¦ Theo hàng ¦ Berbaris
+En grille (rangées) ¦ Theo lưới (nhiều hàng) ¦ Berkisi (beberapa baris)
+En cercle (autour d’un objet) ¦ Theo vòng tròn (quanh một đồ vật) ¦ Melingkar (di sekitar benda)
+Sens (en ligne) ¦ Hướng (theo hàng) ¦ Arah (berbaris)
+→ vers la droite ¦ → sang phải ¦ → ke kanan
+↓ vers le bas ¦ ↓ xuống dưới ¦ ↓ ke bawah
+← vers la gauche ¦ ← sang trái ¦ ← ke kiri
+↑ vers le haut ¦ ↑ lên trên ¦ ↑ ke atas
+Par rangée (en grille) ¦ Mỗi hàng (theo lưới) ¦ Per baris (berkisi)
+Autour de (en cercle) ¦ Quanh (theo vòng tròn) ¦ Di sekitar (melingkar)
+Un point, au rayon ci-dessous ¦ Một điểm, với bán kính bên dưới ¦ Sebuah titik, dengan jari-jari di bawah
+Rayon (si autour d’un point) ¦ Bán kính (nếu quanh một điểm) ¦ Jari-jari (jika di sekitar titik)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ Theo vòng tròn: trước tiên đặt một đồ vật (một chiếc ghế) đúng chỗ quanh bàn, chọn nó, rồi lặp lại: các bản sao xoay quanh bàn và hướng vào bàn, như cái đầu tiên. ¦ Melingkar: pasang dulu satu benda (sebuah kursi) di tempatnya di sekitar meja, pilih, lalu ulangi: salinannya berputar di sekitar meja dan menghadap ke meja, seperti yang pertama.
+Ce fichier n’est pas lisible. ¦ Không đọc được tệp này. ¦ Berkas ini tidak bisa dibaca.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Tệp này không phải là ngôi nhà LCNDA (⤓ Xuất → 💾 Tệp ngôi nhà). ¦ Berkas ini bukan rumah LCNDA (⤓ Ekspor → 💾 Berkas rumah).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Bản vẽ ở đây sẽ được thay bằng bản vẽ trong tệp (↶ để quay lại). ¦ Denah yang digambar di sini akan diganti dengan denah dari berkas (↶ untuk kembali).
+Remplacer le plan par celui du fichier ? ¦ Thay bản vẽ bằng bản vẽ trong tệp? ¦ Ganti denah dengan denah dari berkas?
+Remplacer le plan ¦ Thay bản vẽ ¦ Ganti denah
+Maison importée ¦ Đã nhập ngôi nhà ¦ Rumah diimpor
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Thả vào một hình ảnh, một đồ vật 3D (OBJ, STL, glTF, GLB) hoặc một tệp ngôi nhà. ¦ Letakkan gambar, benda 3D (OBJ, STL, glTF, GLB) atau berkas rumah.
+📁 Que faire de cette image ? ¦ 📁 Làm gì với hình ảnh này? ¦ 📁 Mau diapakan gambar ini?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Hình của bức tranh này, của khung này ¦ 🖼 Gambar untuk lukisan ini, bingkai ini
+posée sur l’objet choisi, en 2D et en 3D ¦ đặt lên đồ vật đã chọn, ở 2D và 3D ¦ dipasang pada benda yang dipilih, dalam 2D dan 3D
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Một bản vẽ cũ, một bản địa chính, để đồ lại ¦ 📐 Denah lama, kadaster, untuk dijiplak
+posé en fond, à mettre à l’échelle ¦ đặt làm nền, để chỉnh theo tỉ lệ ¦ dipasang sebagai latar, untuk disesuaikan skalanya
+🖼 Un objet vu de dessus ¦ 🖼 Một đồ vật nhìn từ trên ¦ 🖼 Benda tampak atas
+posé sur le plan comme un meuble ¦ đặt lên bản vẽ như một đồ đạc ¦ dipasang di denah seperti perabot
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Một kỷ niệm cho thứ đã chọn ¦ 🏷 Kenangan untuk yang dipilih
+rattaché au meuble ou à la pièce ¦ liên kết với đồ đạc hoặc phòng ¦ terhubung ke perabot atau ruangan
+Construction de la maison en 3D… ¦ Đang dựng ngôi nhà 3D… ¦ Membangun rumah 3D…
+Vue 3D indisponible. ¦ Không có chế độ xem 3D. ¦ Tampilan 3D tidak tersedia.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Kéo: xoay · chuột phải hoặc ⇧ kéo: di chuyển · con lăn: lại gần · ☀️ Ánh sáng: giờ và mùa · 🚶 Tham quan: W A S D hoặc phím mũi tên · ✦: một kỷ niệm ¦ Seret: putar · klik kanan atau ⇧ seret: geser · roda tetikus: mendekat · ☀️ Cahaya: jam dan musim · 🚶 Jelajahi: W A S D atau panah · ✦: kenangan
+Les dernières modifications de la maison seront perdues. ¦ Những thay đổi mới nhất của ngôi nhà sẽ bị mất. ¦ Perubahan terakhir pada rumah akan hilang.
+Fermer sans enregistrer la maison ? ¦ Đóng mà không lưu ngôi nhà? ¦ Tutup tanpa menyimpan rumah?
+Supprimé ¦ Đã xoá ¦ Dihapus
+Dupliqué ¦ Đã nhân bản ¦ Diduplikat
+Sens de l’escalier ¦ Hướng cầu thang ¦ Arah tangga
+Tous les escaliers ouvrent déjà le plancher. ¦ Mọi cầu thang đã mở sàn rồi. ¦ Semua tangga sudah membuka lantainya.
+Verrière ajoutée ¦ Đã thêm mái kính ¦ Atap kaca ditambahkan
+Édicule ajouté ¦ Đã thêm chòi mái ¦ Rumah tangga atap ditambahkan
+Lanterneau ajouté ¦ Đã thêm cửa lấy sáng ¦ Skylight ditambahkan
+Fenêtre de toit ajoutée ¦ Đã thêm cửa sổ mái ¦ Jendela atap ditambahkan
+Lucarne ajoutée ¦ Đã thêm cửa sổ nhô ¦ Dormer ditambahkan
+Chien-assis ajouté ¦ Đã thêm cửa sổ nhô mái chái ¦ Dormer sandar ditambahkan
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Nó hiện trong chế độ xem 3D, cùng với mái. ¦ ✓ Terlihat di tampilan 3D, bersama atapnya.
+Retiré du toit ¦ Đã gỡ khỏi mái ¦ Dilepas dari atap
+Fenêtre de toit ou lucarne retirée ¦ Đã gỡ cửa sổ mái hoặc cửa sổ nhô ¦ Jendela atap atau dormer dilepas
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Không có gì dưới đồ vật này: hãy kéo nó lên trên đồ đạc trước (một cái bàn, một tủ ngăn kéo…). ¦ Tidak ada apa-apa di bawah benda ini: seret dulu ke atas perabotnya (meja, lemari laci…).
+Taille hors limites (de 1 cm à 50 m). ¦ Kích thước ngoài giới hạn (từ 1 cm đến 50 m). ¦ Ukuran di luar batas (dari 1 cm sampai 50 m).
+Agrandi ¦ Đã phóng to ¦ Diperbesar
+Réduit ¦ Đã thu nhỏ ¦ Diperkecil
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Đã giữ kích thước cho mẫu này: những cái sau sẽ được đặt giống cái này. ¦ Ukuran disimpan untuk model ini: yang berikutnya akan dipasang seperti ini.
+Sens d’ouverture ¦ Hướng mở ¦ Arah bukaan
+Côté d’ouverture ¦ Phía mở ¦ Sisi bukaan
+Mur coupé ¦ Tường đã cắt ¦ Dinding dipotong
+＋ Un étage ¦ ＋ Một tầng ¦ ＋ Satu lantai
+Hauteur sous plafond ¦ Chiều cao trần ¦ Tinggi plafon
+Gérer les étages… ¦ Quản lý các tầng… ¦ Kelola lantai…
+Renommer, hauteur sous plafond, supprimer ¦ Đổi tên, chiều cao trần, xoá ¦ Ganti nama, tinggi plafon, hapus
+Ajouter un étage… ¦ Thêm một tầng… ¦ Tambah lantai…
+Les étages ¦ Các tầng ¦ Lantai-lantai
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ Từ cao nhất đến thấp nhất. Đổi tên, đổi chiều cao, hoặc xoá một tầng (cùng mọi thứ bên trong). ¦ Dari yang tertinggi ke terendah. Ganti nama, ubah tinggi, atau hapus lantai (beserta semua isinya).
+Niveau ¦ Mức ¦ Level
+Il faut au moins un étage. ¦ Cần ít nhất một tầng. ¦ Perlu setidaknya satu lantai.
+{names} supprimés avec ce qu’ils contenaient ¦ Đã xoá {names} cùng những gì bên trong ¦ {names} dihapus beserta isinya
+{names} supprimé avec ce qu’il contenait ¦ Đã xoá {names} cùng những gì bên trong ¦ {names} dihapus beserta isinya
+Étage supprimé ¦ Đã xoá tầng ¦ Lantai dihapus
+Étage renommé ¦ Đã đổi tên tầng ¦ Nama lantai diganti
+Renommer l’étage ¦ Đổi tên tầng ¦ Ganti nama lantai
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Kéo bản vẽ cũ (trên một chỗ trống của bản vẽ); bấm lại “✥ Di chuyển” để kết thúc. ¦ ✥ Seret denah lama (di tempat kosong pada denah); klik lagi “✥ Pindahkan” untuk selesai.
+Plan ancien retiré ¦ Đã gỡ bản vẽ cũ ¦ Denah lama dilepas
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Đã gỡ bản vẽ cũ khỏi nền (hình ảnh vẫn còn trong tư liệu) ¦ Denah lama dilepas dari latar (gambarnya tetap ada di media)
+Plan ancien sous cet étage ¦ Bản vẽ cũ dưới tầng này ¦ Denah lama di bawah lantai ini
+Plan ancien ¦ Bản vẽ cũ ¦ Denah lama
+Plan ancien verrouillé ¦ Đã khoá bản vẽ cũ ¦ Denah lama dikunci
+Plan ancien déverrouillé ¦ Đã mở khoá bản vẽ cũ ¦ Kunci denah lama dibuka
+Un habitant de la maison ¦ Một người ở trong ngôi nhà ¦ Penghuni rumah
+Habitant ajouté ¦ Đã thêm người ở ¦ Penghuni ditambahkan
+Habitant retiré ¦ Đã gỡ người ở ¦ Penghuni dilepas
+Une personne liée à cette pièce ¦ Một người liên quan đến phòng này ¦ Orang yang terkait dengan ruangan ini
+Personne liée à la pièce ¦ Người liên quan đến phòng ¦ Orang yang terkait dengan ruangan
+Le plan est vide. ¦ Bản vẽ trống. ¦ Denah kosong.
+Fenêtre bloquée. ¦ Cửa sổ bị chặn. ¦ Jendela diblokir.
+Ce recensement n’est relié à aucune fiche. ¦ Cuộc điều tra dân số này không liên kết với hồ sơ nào. ¦ Sensus ini tidak terhubung ke profil mana pun.
+Recensement retiré ¦ Đã gỡ cuộc điều tra dân số ¦ Sensus dilepas
+Personne retirée ¦ Đã gỡ người ¦ Orang dilepas
+Souvenir retiré ¦ Đã gỡ kỷ niệm ¦ Kenangan dilepas
+Légende des époques ¦ Chú giải các thời kỳ ¦ Keterangan masa
+Personnes de la pièce ¦ Những người của phòng ¦ Orang-orang di ruangan
+Flèche ajoutée ¦ Đã thêm mũi tên ¦ Panah ditambahkan
+Flèche retirée ¦ Đã gỡ mũi tên ¦ Panah dilepas
+Lumière ¦ Ánh sáng ¦ Cahaya
+Années de la personne ¦ Các năm của người này ¦ Tahun-tahun orang ini
+Recensement rattaché à l’époque ¦ Cuộc điều tra dân số đã liên kết với thời kỳ ¦ Sensus terhubung ke masa
+Revêtement du mur ¦ Lớp phủ tường ¦ Pelapis dinding
+Murs de la pièce ¦ Tường của phòng ¦ Dinding ruangan
+Autre époque en 3D ¦ Thời kỳ khác ở 3D ¦ Masa lain dalam 3D
+📍 Un arrêt de la visite guidée ¦ 📍 Một điểm dừng của chuyến tham quan có hướng dẫn ¦ 📍 Perhentian tur berpemandu
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Điều được nói ở đây (đọc to trong chuyến tham quan có hướng dẫn): ¦ Yang diceritakan di sini (dibacakan selama tur berpemandu):
+Ici, la salle commune : on y veillait l’hiver… ¦ Đây là phòng chung: mùa đông mọi người quây quần ở đây… ¦ Di sini ruang bersama: di musim dingin orang berkumpul di sini…
+Ajouter l’arrêt ¦ Thêm điểm dừng ¦ Tambahkan perhentian
+MAISON · PHOTO D’ÉPOQUE ¦ NGÔI NHÀ · ẢNH XƯA ¦ RUMAH · FOTO LAMA
+La photo prise d’ici ¦ Bức ảnh chụp từ đây ¦ Foto yang diambil dari sini
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Bức ảnh cũ chụp ở chỗ này, theo hướng này: bạn có thể so sánh nó với ngôi nhà (thanh trượt Ngày xưa ⟷ Hôm nay). ¦ Foto lama yang diambil di tempat ini, ke arah ini: kamu bisa membandingkannya dengan rumah (penggeser Dulu ⟷ Sekarang).
+Poser la photo ¦ Đặt bức ảnh ¦ Pasang foto
+Cette image ne peut pas servir ici. ¦ Hình ảnh này không dùng ở đây được. ¦ Gambar ini tidak bisa dipakai di sini.
+Photo d’époque ¦ Ảnh xưa ¦ Foto lama
+Photo d’époque posée ¦ Đã đặt ảnh xưa ¦ Foto lama dipasang
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Hướng bắc của bản vẽ: bấm để chỉnh (☀️ Hướng và ánh sáng) ¦ Utara denah: klik untuk mengaturnya (☀️ Arah dan cahaya)
+Aucune maison ne correspond. ¦ Không có ngôi nhà nào phù hợp. ¦ Tidak ada rumah yang cocok.
+Époques ¦ Thời kỳ ¦ Masa
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Phiếu Mérimée (di sản)… ¦ 🏰 Catatan Mérimée (cagar budaya)…
+🏠 Maisons ¦ 🏠 Nhà ¦ 🏠 Rumah
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Bản vẽ các ngôi nhà của gia đình, ở 2D và 3D: phòng, đồ đạc, người ở, các cuộc điều tra dân số, các thời kỳ và kỷ niệm. ¦ Denah rumah-rumah keluarga, dalam 2D dan 3D: ruangan, perabot, penghuni, sensus, masa dan kenangannya.
+Renommer la maison ¦ Đổi tên ngôi nhà ¦ Ganti nama rumah
+Ouvrir la maison ¦ Mở ngôi nhà ¦ Buka rumah
+↗ Ouvrir la maison ¦ ↗ Mở ngôi nhà ¦ ↗ Buka rumah
+Cette maison est déjà rattachée. ¦ Ngôi nhà này đã được liên kết rồi. ¦ Rumah ini sudah terhubung.
+🏠 Maison ¦ 🏠 Ngôi nhà ¦ 🏠 Rumah
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Hãy lưu cuộc điều tra dân số trước: sau đó bạn có thể liên kết nó với ngôi nhà nơi hộ đó đã sống (và thời kỳ của ngôi nhà). ¦ Simpan dulu sensusnya: lalu kamu bisa menghubungkannya ke rumah tempat rumah tangga itu tinggal (dan masa rumah tersebut).
+Détacher la maison de ce recensement ¦ Gỡ ngôi nhà khỏi cuộc điều tra dân số này ¦ Lepas rumah dari sensus ini
+Relier une maison : nom, lieu… ¦ Liên kết một ngôi nhà: tên, địa điểm… ¦ Hubungkan rumah: nama, tempat…
+Époque de la maison ¦ Thời kỳ của ngôi nhà ¦ Masa rumah
+Dessiner la maison de ce foyer ¦ Vẽ ngôi nhà của hộ này ¦ Gambar rumah rumah tangga ini
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Liên kết ngay (không cần chờ “Lưu”). Trong ngôi nhà: thẻ Ngôi nhà → “📋 Các cuộc điều tra dân số”. ¦ Langsung terhubung (tanpa menunggu “Simpan”). Di rumah: tab Rumah → “📋 Sensus”.
+— époque de la maison — ¦ — thời kỳ của ngôi nhà — ¦ — masa rumah —
+Le recensement a des changements non enregistrés. ¦ Cuộc điều tra dân số có thay đổi chưa lưu. ¦ Sensus ini punya perubahan yang belum disimpan.
+Ouvrir la maison quand même ? ¦ Vẫn mở ngôi nhà? ¦ Tetap buka rumah?
+Maison détachée du recensement. ¦ Đã gỡ ngôi nhà khỏi cuộc điều tra dân số. ¦ Rumah dilepas dari sensus.
+Choisis une maison. ¦ Hãy chọn một ngôi nhà. ¦ Pilih sebuah rumah.
+Maison rattachée au recensement. ¦ Đã liên kết ngôi nhà với cuộc điều tra dân số. ¦ Rumah terhubung ke sensus.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Chiều dài và chiều rộng của cả tầng, dưới bản vẽ và bên trái (ngoài kích thước của từng bức tường). ¦ Panjang dan lebar seluruh lantai, di bawah denah dan di sebelah kirinya (selain ukuran tiap dinding).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Một bảng đặt bên phải bản vẽ: mỗi phòng và diện tích, cùng tổng số. Nó tự cập nhật và đi cùng bản vẽ (hình ảnh, PDF, bản in). ¦ Tabel di kanan denah: setiap ruangan dan luasnya, serta totalnya. Diperbarui sendiri dan ikut bersama denah (gambar, PDF, cetak).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Khung ở góc dưới bên phải của bản vẽ thật: tên ngôi nhà, địa điểm, thời kỳ, tầng và ngày hôm nay. ¦ Kotak di kanan bawah denah sungguhan: nama rumah, tempat, masa, lantai dan tanggal hari ini.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Bản vẽ màu sáng trên nền tối, như trong phần mềm vẽ kỹ thuật. Chỉ trên màn hình: hình ảnh, PDF và bản in vẫn nền trắng. ¦ Denah terang di latar gelap, seperti di perangkat lunak gambar teknik. Hanya di layar: gambar, PDF dan cetakan tetap berlatar putih.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Tầng dưới (hoặc tầng trên) hiện mờ bên dưới tầng này: tiện để đặt tường tầng 1 ngay trên tường tầng trệt. 🕰 Một thời kỳ khác: cùng tầng này, như nó đã từng (hoặc sẽ) là, màu nâu đỏ. ¦ Lantai di bawah (atau di atas) tampak transparan di bawah lantai ini: praktis untuk memasang dinding lantai 1 tepat di atas dinding lantai dasar. 🕰 Masa lain: lantai yang sama, seperti dulu (atau nanti), berwarna sepia.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Bấm vào hai đầu của một độ dài đã biết trên hình (một bức tường, thước tỉ lệ của bản vẽ), rồi nhập độ dài thật: bằng mét, hoặc bằng toise và pied cũ (tự quy đổi). ¦ Klik kedua ujung panjang yang diketahui pada gambar (dinding, skala denah), lalu masukkan panjang sebenarnya: dalam meter, atau dalam toise dan pied lama (dikonversi otomatis).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Trần theo độ dốc của mái (xem 3D, mặt cắt, tham quan); diện tích “luật Carrez” chỉ tính những chỗ cao ít nhất 1,80 m. ¦ Plafon mengikuti kemiringan atap (tampilan 3D, potongan, tur); luas “hukum Carrez” hanya dihitung di tempat yang tingginya minimal 1,80 m.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Bức tường thấp dưới độ dốc (“tường lửng”): 0 nếu mái bắt đầu từ sàn, thường là 100 cm. ¦ Dinding rendah di bawah kemiringan (“dinding loteng”): 0 jika atap mulai dari lantai, sering 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ Cho ngôi nhà hình chữ L, T hoặc U: mỗi cánh một mái, cùng độ dốc; các khe mái (nơi hai mái gặp nhau) tự tạo ra. Các cánh theo các phòng của tầng trên cùng. ¦ Untuk rumah bentuk L, T atau U: satu atap per sayap, dengan kemiringan sama; jurai dalam (tempat dua atap bertemu) terbentuk sendiri. Sayap mengikuti ruangan lantai paling atas.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Xoay bản vẽ so với hướng bắc: 0° = phía trên bản vẽ là hướng bắc, 90° = phía trên bản vẽ nhìn về hướng đông. Mặt trời và bóng đổ của chế độ xem 3D đi theo. ¦ Putar denah terhadap utara: 0° = bagian atas denah di utara, 90° = bagian atas denah menghadap timur. Matahari dan bayangan tampilan 3D mengikutinya.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Tầm mắt của bạn khi tham quan (🚶 Tham quan, xem 3D): 1,60 m cho người lớn, 1 m để nhìn như trẻ em. ¦ Tinggi matamu saat tur (🚶 Jelajahi, tampilan 3D): 1,60 m untuk orang dewasa, 1 m untuk melihat seperti anak-anak.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Tầm mắt của bạn trong ngôi nhà: 1,60 m cho người lớn, 1 m để nhìn như trẻ em. ¦ Tinggi matamu di dalam rumah: 1,60 m untuk orang dewasa, 1 m untuk melihat seperti anak-anak.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Điểm giữa tường lồi ra khỏi đường thẳng bao nhiêu: + về một phía, − về phía kia; 0 = tường thẳng. Dành cho tháp tròn, gian hậu cung, tường cong. ¦ Seberapa jauh titik tengah dinding keluar dari garis lurus: + ke satu sisi, − ke sisi lain; 0 = dinding lurus. Untuk menara bundar, apsis, dinding lengkung.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Phóng to hoặc thu nhỏ hoa văn (gạch, đá, giấy dán tường) trên bức tường này: 100 % = kích thước thật. ¦ Memperbesar atau memperkecil motif (bata, batu, kertas dinding) di dinding ini: 100 % = ukuran sebenarnya.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Chiều cao từ mép dưới cửa sổ đến sàn (thường 90 cm). ¦ Tinggi bagian bawah jendela dari lantai (biasanya 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Một vùng không có sàn: nhìn thấy tầng dưới (gác lửng, phòng khách cao gấp đôi, lồng cầu thang). Ở 3D sàn bị khoét, và khi tham quan không thể đi lên đó. ¦ Area tanpa lantai: lantai di bawahnya terlihat (mezanin, ruang keluarga tinggi ganda, ruang tangga). Dalam 3D lantainya berlubang, dan saat tur tidak bisa dilewati.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Tự đặt dọc theo các cạnh của khoảng thông tầng không chạm tường (và để hở chỗ cầu thang lên tới). ¦ Dipasang sendiri di sepanjang tepi ruang terbuka yang tidak menyentuh dinding (dan dibiarkan terbuka di tempat tangga tiba).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Khi di chuyển phòng, tường (gồm cả cửa ra vào và cửa sổ), đồ đạc và chữ của nó đi theo. ⇧ khi kéo: chỉ riêng phòng. ¦ Saat ruangan dipindah, dindingnya (termasuk pintu dan jendela), perabot dan teksnya ikut. ⇧ saat menyeret: ruangannya saja.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Chiều cao cần leo: chiều cao tầng cộng độ dày sàn (chỉnh trong thẻ Ngôi nhà). Bỏ chọn để tự đặt trong “Chiều cao”. ¦ Tinggi yang harus didaki: tinggi lantai ditambah tebal pelat lantai (diatur di tab Rumah). Hapus centang untuk mengaturnya sendiri di “Tinggi”.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Khoét sàn của tầng trên phía trên cầu thang (lỗ cầu thang), có lan can xung quanh trừ phía lên tới. ¦ Melubangi lantai di atas tangga (lubang tangga), dengan pagar pengaman di sekelilingnya kecuali di sisi kedatangan.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Chiều cao từ đáy đồ vật đến sàn: 0 cho đồ đạc đặt trên sàn, 140 cho đồng hồ treo tường. ¦ Tinggi bagian bawah benda dari lantai: 0 untuk perabot di lantai, 140 untuk jam yang digantung di dinding.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Phóng to hoặc thu nhỏ đồ vật mà giữ nguyên tỉ lệ: tiện cho mẫu nhập vào bị quá nhỏ hoặc quá lớn. ¦ Memperbesar atau memperkecil benda dengan proporsi tetap: praktis untuk model impor yang terlalu kecil atau terlalu besar.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ Một mũi tên từ chữ đến một điểm trên bản vẽ (giếng, cửa sổ, lò sưởi…). Kéo tay nắm màu đỏ để chỉ hướng. ¦ Panah dari teks ke sebuah titik di denah (sumur, jendela, perapian…). Seret pegangan merah untuk mengarahkannya.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Khi bật bắt dính góc, tường được vẽ sẽ khớp theo bước góc này: 90° = chỉ góc vuông, 45° = cả đường chéo, 15° = mịn hơn. ¦ Saat tempel sudut aktif, dinding yang digambar mengikuti langkah sudut ini: 90° = hanya siku-siku, 45° = juga diagonal, 15° = lebih halus.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Kéo: ngôi nhà lấy thời kỳ gần nhất với năm đó (trước hoặc bằng). ¦ Seret: rumah memakai masa yang paling dekat dengan tahun itu (sebelum atau sama).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Xoay bản vẽ so với hướng bắc: 0° = phía trên bản vẽ là hướng bắc, 90° = phía trên bản vẽ nhìn về hướng đông. Bóng đổ đi theo. ¦ Putar denah terhadap utara: 0° = bagian atas denah di utara, 90° = bagian atas denah menghadap timur. Bayangan mengikutinya.
+Licence : {x} ¦ Giấy phép: {x} ¦ Lisensi: {x}
+Auteur : {x} ¦ Tác giả: {x} ¦ Pembuat: {x}
+Source : {x} ¦ Nguồn: {x} ¦ Sumber: {x}
+🕰 ancien ¦ 🕰 xưa ¦ 🕰 lama
+Forme « {name} » ¦ Hình dạng “{name}” ¦ Bentuk “{name}”
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, cao {h} cm, cách sàn {elev} cm ¦ {w} × {d} cm, tinggi {h} cm, {elev} cm dari lantai
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, cao {h} cm ¦ {w} × {d} cm, tinggi {h} cm
+{name} (à moi) ¦ {name} (của tôi) ¦ {name} (milikku)
+Comme « {name} » ¦ Giống “{name}” ¦ Seperti “{name}”
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Xoá đồ vật “{name}” khỏi thư viện? ¦ Hapus benda “{name}” dari pustaka?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ “{name}” nằm trong “{cat}”: bấm vào để đặt. ¦ “{name}” ada di “{cat}”: klik untuk memasangnya.
+Supprimer « {name} » de « Mes objets » ? ¦ Xoá “{name}” khỏi “Đồ vật của tôi”? ¦ Hapus “{name}” dari “Benda-bendaku”?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ Các mẫu 3D <b>miễn phí bản quyền</b> (CC0: phạm vi công cộng, dùng không điều kiện) để đặt vào các ngôi nhà của bạn. Chúng vào <b>Đồ đạc → “Đồ vật của tôi”</b>, kèm giấy phép, tác giả và nguồn. ¦ Model 3D <b>bebas hak cipta</b> (CC0: domain publik, bisa dipakai tanpa syarat) untuk dipasang di rumah-rumahmu. Model masuk ke <b>Perabot → “Benda-bendaku”</b>, beserta lisensi, pembuat dan sumbernya.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Mẫu do {ph} cung cấp (Powered by Poly Haven) — giấy phép {cc0}. Việc tải về đi qua máy chủ của bạn (khoảng 1 đến 10 MB mỗi mẫu, gồm cả kết cấu). ¦ Model disediakan oleh {ph} (Powered by Poly Haven) — lisensi {cc0}. Unduhan melewati servermu (sekitar 1 sampai 10 MB per model, termasuk tekstur).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Trước tiên hãy tải một gói <b>CC0</b> từ trang web của tác giả (một tệp .zip), rồi chọn nó ở đây: bạn đánh dấu các mẫu muốn giữ (GLB, glTF, OBJ, STL). ¦ Unduh dulu paket <b>CC0</b> dari situs pembuatnya (berkas .zip), lalu pilih di sini: kamu centang model yang ingin disimpan (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} ({n} mẫu được tải nhiều nhất trên {total}) ¦ {models} ({n} yang paling banyak diunduh dari {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ “{name}” có trong Đồ đạc → “Đồ vật của tôi” (CC0, Poly Haven). ¦ “{name}” ada di Perabot → “Benda-bendaku” (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Giấy phép tìm thấy trong gói ¦ Lisensi ditemukan di paket
+Mesure et vignettes… ¦ Đo và ảnh thu nhỏ… ¦ Mengukur dan membuat gambar mini…
+{models} dans « Mes objets ». ¦ {models} trong “Đồ vật của tôi”. ¦ {models} di “Benda-bendaku”.
+Renommer, ranger, voir la licence, supprimer ¦ Đổi tên, sắp xếp, xem giấy phép, xoá ¦ Ganti nama, atur, lihat lisensi, hapus
+Modifier ou supprimer cet objet ¦ Sửa hoặc xoá đồ vật này ¦ Ubah atau hapus benda ini
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Không có gì phù hợp. ＋ Tạo đồ vật, hoặc tìm nó trong 📦 Thư viện trực tuyến. ¦ Tidak ada yang cocok. ＋ Buat bendanya, atau cari di 📦 Pustaka daring.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Ở đây: các đồ vật bạn tạo (＋ Tạo một đồ vật), những đồ vật tải về từ 📦 Thư viện trực tuyến, và các tệp 3D đã nhập (⤒ Nhập, ở trên). ¦ Di sini: benda yang kamu buat (＋ Buat benda), yang diunduh dari 📦 Pustaka daring, dan berkas 3D yang diimpor (⤒ Impor, di atas).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Không có đồ xưa nào trong danh mục này (bỏ chọn “🕰 Chỉ đồ xưa”). ¦ Tidak ada barang lama di kategori ini (hapus centang “🕰 Hanya barang lama”).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Không có đồ vật nào được hiện trong danh mục này (⚙️ Sắp xếp để hiện lại). ¦ Tidak ada benda yang ditampilkan di kategori ini (⚙️ Atur untuk menampilkannya lagi).
+Chercher… lit, lampe, piano, vache, salon… ¦ Tìm… giường, đèn, đàn piano, bò, phòng khách… ¦ Cari… tempat tidur, lampu, piano, sapi, ruang tamu…
+Chercher un objet ¦ Tìm một đồ vật ¦ Cari benda
+Un objet à toi : nom, taille, couleur, forme, image ¦ Một đồ vật của bạn: tên, kích thước, màu, hình dạng, hình ảnh ¦ Benda milikmu: nama, ukuran, warna, bentuk, gambar
+Des modèles 3D libres de droit (CC0) à télécharger ¦ Các mẫu 3D miễn phí bản quyền (CC0) để tải về ¦ Model 3D bebas hak cipta (CC0) untuk diunduh
+Montrer, cacher, ranger les catégories et les objets ¦ Hiện, ẩn, sắp xếp các danh mục và đồ vật ¦ Tampilkan, sembunyikan, atur kategori dan benda
+Ne montrer que le mobilier et les objets d’autrefois ¦ Chỉ hiện đồ đạc và đồ vật ngày xưa ¦ Hanya tampilkan perabot dan benda zaman dulu
+＋ Créer un objet ¦ ＋ Tạo một đồ vật ¦ ＋ Buat benda
+📦 Bibliothèque en ligne ¦ 📦 Thư viện trực tuyến ¦ 📦 Pustaka daring
+⚙️ Ranger ¦ ⚙️ Sắp xếp ¦ ⚙️ Atur
+🕰 Ancien seulement ¦ 🕰 Chỉ đồ xưa ¦ 🕰 Hanya barang lama
+Ovale ¦ Bầu dục ¦ Oval
+Triangle ¦ Tam giác ¦ Segitiga
+En L ¦ Hình chữ L ¦ Bentuk L
+Lit simple ¦ Giường đơn ¦ Tempat tidur tunggal
+Lit clos ¦ Giường kín (có vách) ¦ Tempat tidur tertutup
+Meuble à portes ¦ Tủ có cánh ¦ Lemari berpintu
+Banc-coffre à dossier ¦ Ghế băng có rương và lưng tựa ¦ Bangku peti bersandaran
+Horloge ¦ Đồng hồ ¦ Jam
+Cheminée à manteau ¦ Lò sưởi có bệ ¦ Perapian bermantel
+Cheminée à manteau (hotte) ¦ Lò sưởi có bệ (chụp hút khói) ¦ Perapian bermantel (tudung)
+Poêle ¦ Lò sưởi ¦ Tungku
+Cuisinière ¦ Bếp lò ¦ Kompor
+Évier ¦ Chậu rửa bát ¦ Bak cuci piring
+Lavabo, toilette ¦ Bồn rửa mặt, bàn trang điểm ¦ Wastafel, meja rias
+Maie, pétrin ¦ Thùng nhào bột ¦ Peti adonan roti
+Broc et cuvette ¦ Bình nước và chậu ¦ Kendi dan baskom
+Fontaine ¦ Vòi nước ¦ Pancuran air
+Baratte ¦ Thùng đánh bơ ¦ Pengaduk mentega
+Lampe ¦ Đèn ¦ Lampu
+Bougeoir ¦ Chân nến ¦ Tempat lilin
+Chenets ¦ Giá củi ¦ Penyangga kayu bakar
+Fer à repasser ¦ Bàn là ¦ Setrika
+Banc d’école ¦ Ghế học sinh ¦ Bangku sekolah
+Miroir, cadre au mur ¦ Gương, khung treo tường ¦ Cermin, bingkai di dinding
+Statue ¦ Tượng ¦ Patung
+Animal ¦ Con vật ¦ Hewan
+Cabane ¦ Lán ¦ Gubuk
+Cône, tipi ¦ Hình nón, lều ¦ Kerucut, tipi
+Bloc (boîte pleine) ¦ Khối (hộp đặc) ¦ Balok (kotak padat)
+Cylindre ¦ Hình trụ ¦ Silinder
+Bassine, baquet (ouvert) ¦ Chậu, thùng (để hở) ¦ Baskom, ember (terbuka)
+Table (plateau et 4 pieds) ¦ Bàn (mặt bàn và 4 chân) ¦ Meja (daun meja dan 4 kaki)
+Table ovale ¦ Bàn bầu dục ¦ Meja oval
+Caisson sur pieds ¦ Hộp trên chân ¦ Kotak berkaki
+Comptoir, plan de travail ¦ Quầy, mặt bàn bếp ¦ Konter, meja dapur
+Buffet deux-corps, vaisselier ¦ Tủ hai tầng, tủ chén ¦ Bufet dua tingkat, lemari piring
+Vitrine ¦ Tủ kính ¦ Lemari kaca
+Armoire (corniche) ¦ Tủ quần áo (có gờ) ¦ Lemari pakaian (bermahkota)
+Commode à tiroirs ¦ Tủ ngăn kéo ¦ Lemari laci
+Coffre à couvercle ¦ Rương có nắp ¦ Peti bertutup
+Étagère ouverte ¦ Kệ mở ¦ Rak terbuka
+Lit ¦ Giường ¦ Tempat tidur
+Poêle rond (Godin) ¦ Lò sưởi tròn (Godin) ¦ Tungku bundar (Godin)
+Crémaillère et chaudron ¦ Móc treo nồi và vạc ¦ Gantungan dan kuali
+Baignoire sur pieds ¦ Bồn tắm có chân ¦ Bak mandi berkaki
+Lavabo sur colonne ¦ Bồn rửa mặt có chân trụ ¦ Wastafel bertiang
+Fontaine sur support ¦ Vòi nước trên giá ¦ Pancuran air di atas penyangga
+Baratte à piston ¦ Thùng đánh bơ có pít-tông ¦ Pengaduk mentega berpiston
+Lampe à pétrole ¦ Đèn dầu ¦ Lampu minyak
+Bougeoir, chandelier ¦ Chân nến, giá nến ¦ Tempat lilin, kandil
+Poste TSF ¦ Máy thu thanh TSF ¦ Radio TSF
+Phonographe ¦ Máy hát ¦ Fonograf
+Machine à coudre à pédale ¦ Máy may đạp chân ¦ Mesin jahit injak
+Banc d’école à pupitre ¦ Ghế học sinh có bàn viết ¦ Bangku sekolah bermeja tulis
+Pressoir, presse ¦ Máy ép ¦ Alat pemeras, mesin pres
+Miroir ¦ Gương ¦ Cermin
+Cadre au mur ¦ Khung treo tường ¦ Bingkai di dinding
+Statue sur socle ¦ Tượng trên bệ ¦ Patung di atas alas
+Plante en pot ¦ Cây trong chậu ¦ Tanaman dalam pot
+Boule ¦ Quả cầu ¦ Bola
+Cône ¦ Hình nón ¦ Kerucut
+Cabane (toit) ¦ Lán (có mái) ¦ Gubuk (beratap)
+À plat (tapis) ¦ Phẳng (thảm) ¦ Datar (karpet)
+Plateau avec l’image dessus ¦ Mặt phẳng có hình ở trên ¦ Papan dengan gambar di atasnya
+MAISON · MOBILIER ¦ NGÔI NHÀ · ĐỒ ĐẠC ¦ RUMAH · PERABOT
+MAISON · MES OBJETS ¦ NGÔI NHÀ · ĐỒ VẬT CỦA TÔI ¦ RUMAH · BENDA-BENDAKU
+Créer l’objet ¦ Tạo đồ vật ¦ Buat benda
+Partir d’un objet existant (facultatif) ¦ Bắt đầu từ một đồ vật có sẵn (không bắt buộc) ¦ Mulai dari benda yang sudah ada (opsional)
+— un objet vide — ¦ — một đồ vật trống — ¦ — benda kosong —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ ví dụ Tủ của bà, máy ép của cối xay… ¦ mis. Lemari nenek, alat pemeras di penggilingan…
+Nouvelle catégorie… ¦ Danh mục mới… ¦ Kategori baru…
+ex. Grenier ¦ ví dụ Gác xép ¦ mis. Loteng
+Vu de dessus (2D) ¦ Nhìn từ trên (2D) ¦ Tampak atas (2D)
+En volume (3D) ¦ Khối (3D) ¦ Volume (3D)
+2ᵉ couleur (pieds, poignées, filets) ¦ Màu thứ 2 (chân, tay nắm, đường viền) ¦ Warna ke-2 (kaki, pegangan, list)
+2ᵉ couleur ¦ Màu thứ 2 ¦ Warna ke-2
+Une deuxième couleur ¦ Một màu thứ hai ¦ Warna kedua
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Đặt trên sàn (0), trên bàn (75), treo tường (140)… ¦ Di lantai (0), di atas meja (75), digantung di dinding (140)…
+Tourné de ¦ Xoay ¦ Diputar
+Image vue de dessus (facultatif) ¦ Hình ảnh nhìn từ trên (không bắt buộc) ¦ Gambar tampak atas (opsional)
+🖼️ Une photo des médias… ¦ 🖼️ Một bức ảnh từ tư liệu… ¦ 🖼️ Foto dari media…
+Retirer l’image ¦ Gỡ hình ảnh ¦ Lepas gambar
+Note (souvenir, provenance) ¦ Ghi chú (kỷ niệm, nguồn gốc) ¦ Catatan (kenangan, asal-usul)
+Aperçu en 3D ¦ Xem trước 3D ¦ Pratinjau 3D
+⏳ Mesure… ¦ ⏳ Đang đo… ¦ ⏳ Mengukur…
+Une photo de l’objet (vue de dessus) ¦ Một bức ảnh của đồ vật (nhìn từ trên) ¦ Foto benda (tampak atas)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Hình ảnh được đặt lên bản vẽ, theo kích thước của đồ vật. ¦ Gambar dipasang di denah, seukuran bendanya.
+Ceux déjà posés dans les maisons restent. ¦ Những cái đã đặt trong các ngôi nhà vẫn giữ nguyên. ¦ Yang sudah dipasang di rumah-rumah tetap ada.
+Donne un nom à la nouvelle catégorie. ¦ Hãy đặt tên cho danh mục mới. ¦ Beri nama kategori baru.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Đã sửa đồ vật (những cái đã đặt giữ hình dạng cũ). ¦ Benda diubah (yang sudah dipasang tetap berbentuk lama).
+Montrer aussi dans la catégorie ¦ Cũng hiện trong danh mục ¦ Tampilkan juga di kategori
+— seulement dans « Mes objets » — ¦ — chỉ trong “Đồ vật của tôi” — ¦ — hanya di “Benda-bendaku” —
+« Mes objets » seulement ¦ Chỉ “Đồ vật của tôi” ¦ Hanya “Benda-bendaku”
+Licence ¦ Giấy phép ¦ Lisensi
+non précisée (fichier importé) ¦ không ghi rõ (tệp đã nhập) ¦ tidak disebutkan (berkas impor)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ Tệp 3D đã bị xoá: ở những chỗ đã đặt, nó trở lại thành một hộp đơn giản. ¦ Berkas 3D dihapus: di tempat ia dipasang, ia kembali menjadi kotak biasa.
+Aucun objet. ¦ Không có đồ vật nào. ¦ Tidak ada benda.
+⚙️ Ranger le mobilier ¦ ⚙️ Sắp xếp đồ đạc ¦ ⚙️ Atur perabot
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Đánh dấu những gì bạn muốn thấy và sắp xếp bằng ↑ ↓: các danh mục, rồi các đồ vật trong mỗi danh mục. ¦ Centang yang ingin kamu lihat dan urutkan dengan ↑ ↓: kategori, lalu benda di setiap kategori.
+Objets de ¦ Đồ vật của ¦ Benda di
+Mobilier remis comme au départ. ¦ Đã đặt lại đồ đạc như ban đầu. ¦ Perabot dikembalikan seperti semula.
+Garde au moins une catégorie. ¦ Hãy giữ ít nhất một danh mục. ¦ Simpan setidaknya satu kategori.
+Kenney — tous les packs 3D ¦ Kenney — mọi gói 3D ¦ Kenney — semua paket 3D
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — bộ lọc “CC0” ¦ OpenGameArt — filter “CC0”
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Thư viện trực tuyến (miễn phí bản quyền) ¦ 📦 Pustaka daring (bebas hak cipta)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Tìm (bằng tiếng Pháp hoặc tiếng Anh): ghế, thùng gỗ, đèn, bình… ¦ Cari (dalam bahasa Prancis atau Inggris): kursi, tong, lampu, vas…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (trực tuyến) ¦ 🌐 Poly Haven (daring)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ Một gói ZIP (Kenney, Quaternius…) ¦ 🗜️ Paket ZIP (Kenney, Quaternius…)
+Ranger aussi dans ¦ Cũng xếp vào ¦ Simpan juga di
+Chargement de la liste… ¦ Đang tải danh sách… ¦ Memuat daftar…
+Recherche… ¦ Đang tìm… ¦ Mencari…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Chọn tệp ZIP… ¦ 🗜️ Pilih berkas ZIP…
+Voir sur Poly Haven ¦ Xem trên Poly Haven ¦ Lihat di Poly Haven
+Aucun modèle ne correspond. ¦ Không có mẫu nào phù hợp. ¦ Tidak ada model yang cocok.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Không có internet, bạn vẫn có thể nhập một gói ZIP đã tải về (thẻ bên cạnh), hoặc ＋ tạo đồ vật của bạn. ¦ Tanpa internet, kamu tetap bisa mengimpor paket ZIP yang sudah diunduh (tab di sebelahnya), atau ＋ membuat bendamu sendiri.
+Un téléchargement est en cours… ¦ Đang có một lượt tải về… ¦ Ada unduhan yang sedang berjalan…
+⏳ Téléchargement… ¦ ⏳ Đang tải về… ¦ ⏳ Mengunduh…
+✓ Dans « Mes objets » ¦ ✓ Trong “Đồ vật của tôi” ¦ ✓ Di “Benda-bendaku”
+Envoi et lecture du pack… ¦ Đang gửi và đọc gói… ¦ Mengirim dan membaca paket…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Không gửi được (tệp quá lớn đối với máy chủ?). ¦ Tidak bisa dikirim (berkas terlalu besar untuk server?).
+Envoi impossible. ¦ Không gửi được. ¦ Tidak bisa dikirim.
+Image impossible. ¦ Không tạo được hình ảnh. ¦ Gambar tidak bisa dibuat.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ Không có tệp giấy phép trong gói: hãy kiểm tra trên trang web của tác giả xem nó có thật sự miễn phí bản quyền không. ¦ Tidak ada berkas lisensi di paket: periksa di situs pembuatnya bahwa paket ini memang bebas hak cipta.
+Auteur, source ¦ Tác giả, nguồn ¦ Pembuat, sumber
+Adresse du pack (facultatif) ¦ Địa chỉ của gói (không bắt buộc) ¦ Alamat paket (opsional)
+⤒ Importer les modèles cochés ¦ ⤒ Nhập các mẫu đã đánh dấu ¦ ⤒ Impor model yang dicentang
+Coche au moins un modèle. ¦ Hãy đánh dấu ít nhất một mẫu. ¦ Centang setidaknya satu model.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Hãy cho biết giấy phép của gói (ví dụ CC0 1.0). ¦ Sebutkan lisensi paketnya (misalnya CC0 1.0).
+Surface (m²) ¦ Diện tích (m²) ¦ Luas (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Luật Carrez ≥ 1,80 m (m²) ¦ Hukum Carrez ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ Chiều cao tối thiểu (cm) ¦ Tinggi minimum (cm)
+Hauteur maxi (cm) ¦ Chiều cao tối đa (cm) ¦ Tinggi maksimum (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Một bức tường dưới 5 cm (bấm đúp thừa một lần?) ¦ Dinding kurang dari 5 cm (kelebihan klik ganda?)
+« {name} » n’a pas de porte ¦ “{name}” không có cửa ra vào ¦ “{name}” tidak punya pintu
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Cầu thang hơi dốc: {n} bậc cao {rise} cm, mặt bậc {going} cm (2 h + g = {sum} cm) ¦ Tangga agak curam: {n} anak tangga setinggi {rise} cm, injakan {going} cm (2 h + g = {sum} cm)
+Un escalier sans étage au-dessus ¦ Một cầu thang không có tầng phía trên ¦ Tangga tanpa lantai di atasnya
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Cầu thang không khoét sàn của “{name}” (Thuộc tính → “Mở sàn phía trên”) ¦ Tangga tidak melubangi lantai “{name}” (Properti → “Buka lantai di atas”)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ Một khoảng thông tầng ở tầng thấp nhất: nó không thông xuống đâu cả ¦ Ruang terbuka di lantai paling bawah: tidak mengarah ke mana pun
+Des pièces sans aucun mur ¦ Các phòng không có bức tường nào ¦ Ruangan tanpa dinding sama sekali
+maison|Mur ¦ Tường ¦ Dinding
+maison|Ouverture ¦ Lỗ mở ¦ Bukaan
+maison|Combles ¦ Gác mái ¦ Loteng
+maison|Pièce ¦ Phòng ¦ Ruangan
+maison|Escalier ¦ Cầu thang ¦ Tangga
+maison|Étage ¦ Tầng ¦ Lantai
+Mur ¦ Tường ¦ Dinding
+Escalier ¦ Cầu thang ¦ Tangga
+Combles ¦ Gác mái ¦ Loteng
+Plans ¦ Bản vẽ ¦ Denah
+▶ Visite guidée ¦ ▶ Tham quan có hướng dẫn ¦ ▶ Tur berpemandu
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Tham quan chỉ xem, mở được mà không cần ứng dụng. Chuột hoặc ngón tay để xoay, con lăn để phóng to, “🚶 Tham quan” để đi bộ (W A S D hoặc phím mũi tên). ¦ Tur hanya-lihat, dibuka tanpa aplikasi. Tetikus atau jari untuk memutar, roda untuk memperbesar, “🚶 Jelajahi” untuk berjalan (W A S D atau panah).
+📐 Surfaces ¦ 📐 Diện tích ¦ 📐 Luas
+Surfaces ¦ Diện tích ¦ Luas
+⚠️ Vérifier le plan ¦ ⚠️ Kiểm tra bản vẽ ¦ ⚠️ Periksa denah
+🗺 Visite guidée ¦ 🗺 Tham quan có hướng dẫn ¦ 🗺 Tur berpemandu
+aucun arrêt ¦ không có điểm dừng ¦ tidak ada perhentian
+📷 Photos d’époque ¦ 📷 Ảnh xưa ¦ 📷 Foto lama
+🏘 Le hameau ¦ 🏘 Thôn xóm ¦ 🏘 Dusun
+cette maison seule ¦ chỉ ngôi nhà này ¦ rumah ini saja
+foyer n° {n} ¦ hộ số {n} ¦ rumah tangga no. {n}
+{a} à {b} m ¦ {a} đến {b} m ¦ {a} sampai {b} m
+un clic : aller à l’endroit ¦ một lần bấm: đi đến chỗ đó ¦ satu klik: pergi ke tempat itu
+{name} — coupe ¦ {name} — mặt cắt ¦ {name} — potongan
+Texte de l’arrêt {n} ¦ Nội dung điểm dừng {n} ¦ Teks perhentian {n}
+Texte de l’arrêt ¦ Nội dung điểm dừng ¦ Teks perhentian
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Xuất video dạng {fmt} ¦ ⤓ Ekspor video sebagai {fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: máy quay lướt từ điểm này sang điểm kia, và nội dung của mỗi điểm dừng hiện thành phụ đề. Video được làm theo thời gian thực (khoảng {s} giây): hãy để cửa sổ mở. ¦ {stops}: kamera meluncur dari satu ke yang lain, dan teks setiap perhentian tampil sebagai subtitel. Video dibuat secara langsung (sekitar {s} detik): biarkan jendela tetap terbuka.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Một cửa sổ được đặt trên bức tường không còn nữa ¦ Ada jendela di dinding yang sudah tidak ada
+Une porte est posée sur un mur qui n’existe plus ¦ Một cửa ra vào được đặt trên bức tường không còn nữa ¦ Ada pintu di dinding yang sudah tidak ada
+Une fenêtre est plus large que son mur ¦ Một cửa sổ rộng hơn bức tường của nó ¦ Ada jendela yang lebih lebar dari dindingnya
+Une porte est plus large que son mur ¦ Một cửa ra vào rộng hơn bức tường của nó ¦ Ada pintu yang lebih lebar dari dindingnya
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Một cửa sổ vượt quá trần ({top} cm so với tường {wall} cm): nó bị sàn cắt ¦ Ada jendela yang melewati plafon ({top} cm untuk dinding {wall} cm): terpotong oleh lantai
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Một cửa ra vào vượt quá trần ({top} cm so với tường {wall} cm): nó bị sàn cắt ¦ Ada pintu yang melewati plafon ({top} cm untuk dinding {wall} cm): terpotong oleh lantai
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Một cửa sổ nằm dưới độ dốc mái ở chỗ này ¦ Ada jendela yang berada di bawah kemiringan atap di tempat ini
+Une porte passe sous la pente du toit à cet endroit ¦ Một cửa ra vào nằm dưới độ dốc mái ở chỗ này ¦ Ada pintu yang berada di bawah kemiringan atap di tempat ini
+🧰 Outils de la maison ¦ 🧰 Công cụ của ngôi nhà ¦ 🧰 Alat rumah
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ Bảng diện tích, mở trong 🧾 Bảng tính ¦ Tabel luas, dibuka di 🧾 Spreadsheet
+Clique deux points sur le plan : la ligne de coupe ¦ Bấm hai điểm trên bản vẽ: đường cắt ¦ Klik dua titik di denah: garis potong
+📐 Surfaces par pièce ¦ 📐 Diện tích theo phòng ¦ 📐 Luas per ruangan
+✂ Tracer la ligne de coupe ¦ ✂ Vẽ đường cắt ¦ ✂ Gambar garis potong
+✂ Voir la coupe ¦ ✂ Xem mặt cắt ¦ ✂ Lihat potongan
+🕰 L’année ¦ 🕰 Năm ¦ 🕰 Tahun
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Trong lúc bạn kéo năm, thời kỳ trước vẫn hiện bằng nét đứt màu nâu đỏ ¦ Saat kamu menggeser tahun, masa sebelumnya tetap terlihat dengan garis putus-putus sepia
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Xem thời kỳ trước dạng bóng mờ ¦ 👻 Lihat masa sebelumnya sebagai bayangan
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Chuyến tham quan có hướng dẫn thành video, làm sẵn: lướt từ điểm dừng này sang điểm khác, nội dung thành phụ đề ¦ Tur berpemandu sebagai video, siap jadi: meluncur dari satu perhentian ke yang lain, teks sebagai subtitel
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ Mỗi điểm dừng một hình ảnh cùng các đoạn văn, trong một tệp .zip: để kéo vào 🎬 Dựng phim ¦ Satu gambar per perhentian beserta teksnya, dalam berkas .zip: untuk diseret ke 🎬 Montase
+✎ Les arrêts ¦ ✎ Các điểm dừng ¦ ✎ Perhentian
+🎬 Vidéo de la visite… ¦ 🎬 Video chuyến tham quan… ¦ 🎬 Video tur…
+⤓ Images de la visite ¦ ⤓ Hình ảnh chuyến tham quan ¦ ⤓ Gambar tur
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Điểm dừng và ảnh được đặt trong lúc tham quan (🚶 Tham quan, xem 3D) ¦ Perhentian dan foto dipasang selama tur (🚶 Jelajahi, tampilan 3D)
+＋ Arrêt, 📷 photo… ¦ ＋ Điểm dừng, 📷 ảnh… ¦ ＋ Perhentian, 📷 foto…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ Một tệp .html để gửi đi: ngôi nhà 3D và các bản vẽ, không cần ứng dụng, chỉ xem (không có người và kỷ niệm) ¦ Berkas .html untuk dikirim: rumah 3D dan denahnya, tanpa aplikasi, hanya-lihat (tanpa orang dan kenangan)
+🏘 Bâtiments du terrain… ¦ 🏘 Các công trình trên khu đất… ¦ 🏘 Bangunan di lahan…
+📤 Partager la visite ¦ 📤 Chia sẻ chuyến tham quan ¦ 📤 Bagikan tur
+Aucune pièce dessinée. ¦ Chưa vẽ phòng nào. ¦ Belum ada ruangan yang digambar.
+Toute la maison ¦ Cả ngôi nhà ¦ Seluruh rumah
+Loi Carrez ¦ Luật Carrez ¦ Hukum Carrez
+Surface ¦ Diện tích ¦ Luas
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Luật Carrez: chỉ tính những phần đứng thẳng được (chiều cao trần ít nhất 1,80 m, kể cả gác mái). Khoảng thông tầng và cầu thang không được tính. ¦ Hukum Carrez: hanya bagian tempat orang bisa berdiri yang dihitung (tinggi plafon minimal 1,80 m, termasuk loteng). Ruang terbuka dan tangga tidak dihitung.
+Le Tableur n’est pas prêt. ¦ Bảng tính chưa sẵn sàng. ¦ Spreadsheet belum siap.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Không có gì đáng chú ý: cửa ra vào, cửa sổ, cầu thang và phòng đều hợp lý. ¦ Tidak ada masalah: pintu, jendela, tangga dan ruangan semuanya konsisten.
+✓ Rien à signaler. ¦ ✓ Không có gì đáng chú ý. ¦ ✓ Tidak ada masalah.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Bấm vào hai đầu của đường cắt trên bản vẽ ¦ ✂ Klik kedua ujung garis potong di denah
+Ligne de coupe ¦ Đường cắt ¦ Garis potong
+Trace d’abord la ligne de coupe sur le plan. ¦ Hãy vẽ đường cắt trên bản vẽ trước. ¦ Gambar dulu garis potong di denah.
+✂ Coupe de la maison ¦ ✂ Mặt cắt của ngôi nhà ¦ ✂ Potongan rumah
+⤓ Exporter en SVG ¦ ⤓ Xuất dạng SVG ¦ ⤓ Ekspor sebagai SVG
+⤓ Exporter en PNG ¦ ⤓ Xuất dạng PNG ¦ ⤓ Ekspor sebagai PNG
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Mở chế độ xem 3D, rồi “🚶 Tham quan”: ở dưới cùng của chuyến tham quan, “📍 Dừng ở đây” đặt một điểm dừng (kèm đoạn văn đọc to) và “📷 Ảnh xưa ở đây” đặt một bức ảnh chụp từ chỗ này. ¦ Buka tampilan 3D, lalu “🚶 Jelajahi”: di bagian bawah tur, “📍 Berhenti di sini” memasang perhentian (dengan teks yang dibacakan) dan “📷 Foto lama di sini” memasang foto yang diambil dari tempat ini.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Các điểm dừng của chuyến tham quan có hướng dẫn ¦ 🗺 Perhentian tur berpemandu
+Arrêt retiré ¦ Đã gỡ điểm dừng ¦ Perhentian dilepas
+Arrêts rangés ¦ Đã sắp xếp các điểm dừng ¦ Perhentian diurutkan
+Impossible de faire les images. ¦ Không tạo được hình ảnh. ¦ Gambar tidak bisa dibuat.
+Une image par arrêt… ¦ Mỗi điểm dừng một hình ảnh… ¦ Satu gambar per perhentian…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Hãy đặt điểm dừng trước: xem 3D → 🚶 Tham quan → 📍 Dừng ở đây. ¦ Pasang dulu perhentian: tampilan 3D → 🚶 Jelajahi → 📍 Berhenti di sini.
+🎬 La vidéo de la visite guidée ¦ 🎬 Video chuyến tham quan có hướng dẫn ¦ 🎬 Video tur berpemandu
+Paysage 1280 × 720 (écran) ¦ Ngang 1280 × 720 (màn hình) ¦ Lanskap 1280 × 720 (layar)
+Carré 1080 × 1080 (messageries) ¦ Vuông 1080 × 1080 (ứng dụng nhắn tin) ¦ Persegi 1080 × 1080 (aplikasi pesan)
+Titre au début ¦ Tiêu đề ở đầu ¦ Judul di awal
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Trình duyệt này không ghi được video: hãy dùng “⤓ Hình ảnh chuyến tham quan”. ¦ ⛔ Peramban ini tidak bisa merekam video: pakai “⤓ Gambar tur”.
+🔴 Enregistrement de la visite… ¦ 🔴 Đang ghi chuyến tham quan… ¦ 🔴 Merekam tur…
+fenêtre des médias indisponible ¦ cửa sổ tư liệu không khả dụng ¦ jendela media tidak tersedia
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Đã xuất video, và một bản sao được xếp vào tư liệu. ¦ ✓ Video diekspor, dan salinannya disimpan di media.
+✓ Vidéo exportée. ¦ ✓ Đã xuất video. ¦ ✓ Video diekspor.
+Photo retirée ¦ Đã gỡ ảnh ¦ Foto dilepas
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Tệp đã sẵn sàng: hãy gửi nó đi, nó mở bằng một cú bấm đúp trong trình duyệt, không cần ứng dụng. ¦ Berkas siap: kirimkan, berkas ini terbuka dengan klik ganda di peramban, tanpa aplikasi.
+Retirer du terrain ¦ Gỡ khỏi khu đất ¦ Lepas dari lahan
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Thôn xóm: các công trình trên khu đất ¦ 🏘 Dusun: bangunan di lahan
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Trang trại, kho thóc, lò nướng, giếng, những ngôi nhà bên cạnh: mỗi cái là một ngôi nhà trong danh sách “🏠 Nhà của gia đình”, đặt ở đây bên cạnh (ở 3D và bằng nét đứt trên bản vẽ). ¦ Pertanian, lumbung, tungku, sumur, rumah tetangga: masing-masing adalah rumah dari daftar “🏠 Rumah keluarga”, dipasang di sini di sebelahnya (dalam 3D dan dengan garis putus-putus di denah).
+＋ Ajouter un bâtiment ¦ ＋ Thêm một công trình ¦ ＋ Tambah bangunan
+N° de foyer au recensement (facultatif) ¦ Số hộ trong cuộc điều tra dân số (không bắt buộc) ¦ No. rumah tangga di sensus (opsional)
+Bâtiment ajouté ¦ Đã thêm công trình ¦ Bangunan ditambahkan
+Bâtiment déplacé ¦ Đã di chuyển công trình ¦ Bangunan dipindahkan
+Bâtiment retiré ¦ Đã gỡ công trình ¦ Bangunan dilepas
+Soleil à {deg}° de haut, au {dir} ¦ Mặt trời ở độ cao {deg}°, hướng {dir} ¦ Matahari setinggi {deg}°, di {dir}
+boussole|nord ¦ bắc ¦ utara
+boussole|nord-est ¦ đông bắc ¦ timur laut
+boussole|est ¦ đông ¦ timur
+boussole|sud-est ¦ đông nam ¦ tenggara
+boussole|sud ¦ nam ¦ selatan
+boussole|sud-ouest ¦ tây nam ¦ barat daya
+boussole|ouest ¦ tây ¦ barat
+boussole|nord-ouest ¦ tây bắc ¦ barat laut
+🌙 Nuit ¦ 🌙 Đêm ¦ 🌙 Malam
+Crépuscule ¦ Chạng vạng ¦ Senja
+(pose une lampe pour éclairer) ¦ (hãy đặt một chiếc đèn để chiếu sáng) ¦ (pasang lampu untuk menerangi)
+nuit polaire ¦ đêm địa cực ¦ malam kutub
+soleil de minuit ¦ mặt trời nửa đêm ¦ matahari tengah malam
+lever {rise}, coucher {set} ¦ mọc {rise}, lặn {set} ¦ terbit {rise}, terbenam {set}
+France (lieu de la maison inconnu) ¦ Pháp (không rõ địa điểm ngôi nhà) ¦ Prancis (tempat rumah tidak diketahui)
+au sol {len} ¦ trên mặt đất {len} ¦ di tanah {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Điểm dừng {n} trên {total} ¦ 🗺 Perhentian {n} dari {total}
+🪜 Un escalier : ¦ 🪜 Một cầu thang: ¦ 🪜 Sebuah tangga:
+⬆ Monter (E) ¦ ⬆ Lên (E) ¦ ⬆ Naik (E)
+⬇ Descendre (C) ¦ ⬇ Xuống (C) ¦ ⬇ Turun (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ glTF này dùng các tệp riêng: tốt hơn hãy xuất nó dạng GLB (một tệp duy nhất). ¦ glTF ini memakai berkas terpisah: sebaiknya ekspor sebagai GLB (satu berkas saja).
+Format 3D inconnu. ¦ Định dạng 3D không xác định. ¦ Format 3D tidak dikenal.
+✦ Les souvenirs de la pièce ¦ ✦ Kỷ niệm của căn phòng ¦ ✦ Kenangan ruangan
+☀️ Lumière du jour ¦ ☀️ Ánh sáng ban ngày ¦ ☀️ Cahaya siang
+Le soleil passe d’une heure à l’autre ¦ Mặt trời đi từ giờ này sang giờ khác ¦ Matahari bergerak dari jam ke jam
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ Vào giờ này, từ 1 tháng 1 đến 31 tháng 12: bóng đổ dài hơn vào mùa đông ¦ Pada jam ini, dari 1 Januari sampai 31 Desember: bayangan lebih panjang di musim dingin
+▶ Voir la journée ¦ ▶ Xem cả ngày ¦ ▶ Lihat sepanjang hari
+▶ Voir l’année ¦ ▶ Xem cả năm ¦ ▶ Lihat sepanjang tahun
+❄️ Hiver ¦ ❄️ Mùa đông ¦ ❄️ Musim dingin
+🌱 Printemps ¦ 🌱 Mùa xuân ¦ 🌱 Musim semi
+☀️ Été ¦ ☀️ Mùa hè ¦ ☀️ Musim panas
+🍂 Automne ¦ 🍂 Mùa thu ¦ 🍂 Musim gugur
+📅 Aujourd’hui ¦ 📅 Hôm nay ¦ 📅 Hari ini
+Ombres portées ¦ Bóng đổ ¦ Bayangan
+🚶 Visite ¦ 🚶 Tham quan ¦ 🚶 Jelajahi
+Monter à l’étage du dessus (E ou Page ↑) ¦ Lên tầng trên (E hoặc Page ↑) ¦ Naik ke lantai atas (E atau Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Xuống tầng dưới (C hoặc Page ↓) ¦ Turun ke lantai bawah (C atau Page ↓)
+Yeux à ¦ Mắt ở ¦ Mata di
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Một điểm dừng của chuyến tham quan có hướng dẫn, ở đây, nhìn về phía đó (kèm đoạn văn đọc to) ¦ Perhentian tur berpemandu, di sini, menghadap ke sana (dengan teks yang dibacakan)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Một bức ảnh cũ chụp từ chỗ này, theo hướng này: so sánh nó với ngôi nhà ngày nay ¦ Foto lama yang diambil dari tempat ini, ke arah ini: dibandingkan dengan rumah sekarang
+📍 Arrêt ici ¦ 📍 Dừng ở đây ¦ 📍 Berhenti di sini
+📷 Photo d’époque ici ¦ 📷 Ảnh xưa ở đây ¦ 📷 Foto lama di sini
+Petite carte : clic pour t’y rendre ¦ Bản đồ nhỏ: bấm để đến đó ¦ Peta kecil: klik untuk ke sana
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ W A S D hoặc phím mũi tên: đi · Shift: chạy · chuột: nhìn · Esc: thả chuột ¦ W A S D atau panah: berjalan · Shift: berlari · tetikus: melihat · Esc: lepaskan tetikus
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Vòng tròn ở góc dưới bên trái: đi · vuốt trên khung nhìn: nhìn · ✦: chạm để xem kỷ niệm ¦ Lingkaran di kiri bawah: berjalan · geser di tampilan: melihat · ✦: sentuh untuk melihat kenangan
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ W A S D hoặc phím mũi tên: đi · bấm vào khung nhìn: nhìn bằng chuột · ✦: bấm để xem kỷ niệm · Esc: thoát ¦ W A S D atau panah: berjalan · klik tampilan: melihat dengan tetikus · ✦: klik untuk melihat kenangan · Esc: keluar
+✋ Arrêter la visite ¦ ✋ Dừng tham quan ¦ ✋ Hentikan tur
+Autrefois ¦ Ngày xưa ¦ Dulu
+Autrefois ou aujourd’hui ¦ Ngày xưa hoặc hôm nay ¦ Dulu atau sekarang
+Arrêt suivant ¦ Điểm dừng tiếp theo ¦ Perhentian berikutnya
+Arrêter la visite guidée ¦ Dừng chuyến tham quan có hướng dẫn ¦ Hentikan tur berpemandu
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Hãy đặt điểm dừng trước (🚶 Tham quan → 📍 Dừng ở đây). ¦ Pasang dulu perhentian (🚶 Jelajahi → 📍 Berhenti di sini).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Trình duyệt này không ghi được video. ¦ Peramban ini tidak bisa merekam video.
+Remettre la vue comme au départ ¦ Đặt lại khung nhìn như ban đầu ¦ Kembalikan tampilan seperti semula
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ Không tìm thấy hình ảnh của tư liệu số {n}: một tấm vải trơn thay thế nó. ¦ Gambar media no. {n} tidak ditemukan: kanvas polos menggantikannya.
+Cadre {n} : une image ¦ Khung {n}: một hình ảnh ¦ Bingkai {n}: satu gambar
+Cadre {n} : vide ¦ Khung {n}: trống ¦ Bingkai {n}: kosong
+Image du cadre {n} ¦ Hình ảnh của khung {n} ¦ Gambar bingkai {n}
+Prise dans les médias ¦ Lấy từ tư liệu ¦ Diambil dari media
+L’image de « {name} » ¦ Hình ảnh của “{name}” ¦ Gambar “{name}”
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Thả vào “{name}” (khung {n}) ¦ 🖼 Letakkan di “{name}” (bingkai {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Thả vào “{name}” ¦ 🖼 Letakkan di “{name}”
+Remplir (recadrer) ¦ Lấp đầy (cắt khung) ¦ Isi (potong)
+Ajuster (toute l’image) ¦ Vừa khít (toàn bộ hình) ¦ Sesuaikan (seluruh gambar)
+Centrer (taille réelle) ¦ Căn giữa (kích thước thật) ¦ Tengahkan (ukuran asli)
+Pas d’image. ¦ Không có hình ảnh. ¦ Tidak ada gambar.
+Image introuvable ¦ Không tìm thấy hình ảnh ¦ Gambar tidak ditemukan
+Le cadre ¦ Khung ¦ Bingkai
+MAISON · IMAGE ¦ NGÔI NHÀ · HÌNH ẢNH ¦ RUMAH · GAMBAR
+Poser cette image ¦ Đặt hình ảnh này ¦ Pasang gambar ini
+Ou un souvenir de cet objet : ¦ Hoặc một kỷ niệm của đồ vật này: ¦ Atau kenangan benda ini:
+La rattacher aussi aux souvenirs de cet objet ¦ Cũng liên kết nó với các kỷ niệm của đồ vật này ¦ Hubungkan juga ke kenangan benda ini
+🏷 Garder aussi comme souvenir ¦ 🏷 Cũng giữ làm kỷ niệm ¦ 🏷 Simpan juga sebagai kenangan
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Không tìm thấy hình ảnh này trong tư liệu: một tấm vải trơn thay thế nó. Hãy chọn hình khác. ¦ ⚠️ Gambar ini tidak ditemukan di media: kanvas polos menggantikannya. Pilih yang lain.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Xem trước: kéo để di chuyển hình, con lăn để phóng to ¦ Pratinjau: seret untuk menggeser gambar, roda untuk memperbesar
+Glisse pour déplacer l’image · molette pour zoomer ¦ Kéo để di chuyển hình · con lăn để phóng to ¦ Seret untuk menggeser gambar · roda untuk memperbesar
+Dans le cadre ¦ Trong khung ¦ Di dalam bingkai
+Remettre l’image au centre, sans zoom ¦ Đưa hình về giữa, không phóng to ¦ Kembalikan gambar ke tengah, tanpa zoom
+↺ Recadrage de départ ¦ ↺ Khung cắt ban đầu ¦ ↺ Potongan semula
+Recadrage de départ ¦ Khung cắt ban đầu ¦ Potongan semula
+Sa couleur ¦ Màu của nó ¦ Warnanya
+Passe-partout ¦ Viền lót (passe-partout) ¦ Passe-partout
+🖼 Images des cadres ¦ 🖼 Hình ảnh của các khung ¦ 🖼 Gambar bingkai
+🖼 Image ¦ 🖼 Hình ảnh ¦ 🖼 Gambar
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Bạn cũng có thể kéo một hình ảnh từ máy tính lên đồ vật, trong bản vẽ hoặc trong chế độ xem 3D: nó được đưa vào tư liệu. ¦ 📁 Kamu juga bisa menyeret gambar dari komputer ke benda, di denah atau di tampilan 3D: gambar masuk ke media.
+Image posée ¦ Đã đặt hình ảnh ¦ Gambar dipasang
+Image retirée ¦ Đã gỡ hình ảnh ¦ Gambar dilepas
+Import de l’image… ¦ Đang nhập hình ảnh… ¦ Mengimpor gambar…
+Image déposée sur l’objet ¦ Đã thả hình ảnh lên đồ vật ¦ Gambar diletakkan di benda
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Hình ảnh đã được xếp vào tư liệu và đặt lên đồ vật. ¦ ✓ Gambar disimpan di media dan dipasang di benda.
+Image prise dans les souvenirs ¦ Hình ảnh lấy từ các kỷ niệm ¦ Gambar diambil dari kenangan
+Image tournée ¦ Hình ảnh được xoay ¦ Gambar diputar
+Image réglée ¦ Đã chỉnh hình ¦ Gambar disesuaikan
+Image recadrée ¦ Đã cắt khung lại hình ¦ Gambar dibingkai ulang
+Image zoomée ¦ Đã phóng to hình ¦ Gambar diperbesar
+Cote ¦ Kích thước ¦ Ukuran
+Hauteur (cm) ¦ Chiều cao (cm) ¦ Tinggi (cm)
+Contenu ¦ Nội dung ¦ Isi
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Xoay bản vẽ so với hướng bắc: 0° = phía trên bản vẽ là hướng bắc, 90° = phía trên bản vẽ nhìn về hướng đông. Mặt trời và bóng đổ đi theo. ¦ Memutar denah terhadap utara: 0° = bagian atas denah di utara, 90° = bagian atas denah menghadap timur. Matahari dan bayangan mengikuti.
+Lit d’une personne ¦ Giường đơn ¦ Tempat tidur satu orang
+Chambre ¦ Phòng ngủ ¦ Kamar tidur
+Lit double ¦ Giường đôi ¦ Tempat tidur ganda
+Lit clos (breton) ¦ Giường hộp (kiểu Bretagne) ¦ Tempat tidur kotak (Bretagne)
+Berceau ¦ Nôi ¦ Buaian
+Lit d’enfant ¦ Giường trẻ em ¦ Tempat tidur anak
+Table de chevet ¦ Bàn đầu giường ¦ Meja samping tempat tidur
+Commode ¦ Tủ ngăn kéo ¦ Lemari laci
+Coiffeuse ¦ Bàn trang điểm ¦ Meja rias
+Prie-Dieu ¦ Ghế quỳ cầu nguyện ¦ Bangku doa
+Religion, souvenirs ¦ Tôn giáo, kỷ vật ¦ Agama, kenang-kenangan
+Table ¦ Bàn ¦ Meja
+Séjour ¦ Phòng khách ¦ Ruang keluarga
+Table ronde ¦ Bàn tròn ¦ Meja bundar
+Chaise ¦ Ghế ¦ Kursi
+Fauteuil ¦ Ghế bành ¦ Kursi berlengan
+Canapé ¦ Ghế sofa ¦ Sofa
+Banc ¦ Ghế dài ¦ Bangku
+Buffet ¦ Tủ búp-phê ¦ Bufet
+Vaisselier ¦ Tủ chén bát ¦ Lemari pajang piring
+Horloge comtoise ¦ Đồng hồ Comtoise ¦ Jam Comtoise
+Piano droit ¦ Đàn piano đứng ¦ Piano tegak
+Bibliothèque ¦ Tủ sách ¦ Rak buku
+Cheminée ¦ Lò sưởi ¦ Perapian
+Poêle à bois ¦ Lò đốt củi ¦ Tungku kayu
+Tapis ¦ Thảm ¦ Karpet
+Lampadaire ¦ Đèn cây ¦ Lampu berdiri
+Plante ¦ Cây cảnh ¦ Tanaman
+Poste de radio (TSF) ¦ Máy radio (TSF) ¦ Pesawat radio (TSF)
+Cuisinière à bois ¦ Bếp lò đốt củi ¦ Kompor kayu
+Cuisine ¦ Nhà bếp ¦ Dapur
+Évier en pierre ¦ Bồn rửa bằng đá ¦ Bak cuci batu
+Pétrin ¦ Máng nhào bột ¦ Palung adonan
+Garde-manger ¦ Tủ đựng thức ăn ¦ Lemari makanan
+Réfrigérateur ¦ Tủ lạnh ¦ Kulkas
+Plan de travail ¦ Mặt bàn bếp ¦ Meja kerja dapur
+Baignoire ¦ Bồn tắm ¦ Bak mandi
+Salle d’eau ¦ Phòng tắm ¦ Kamar mandi
+Douche ¦ Vòi sen ¦ Pancuran
+WC ¦ Nhà vệ sinh ¦ Toilet
+Lavabo ¦ Chậu rửa mặt ¦ Wastafel
+Table de toilette (broc et cuvette) ¦ Bàn rửa mặt (bình và chậu) ¦ Meja cuci muka (kendi dan baskom)
+Armoire ¦ Tủ quần áo ¦ Lemari pakaian
+Rangement ¦ Cất trữ ¦ Penyimpanan
+Coffre ¦ Rương ¦ Peti
+Étagère ¦ Kệ ¦ Rak
+Rouet ¦ Xa quay sợi ¦ Roda pemintal
+Métiers, atelier ¦ Nghề nghiệp, xưởng ¦ Pekerjaan, bengkel
+Métier à tisser ¦ Khung cửi ¦ Alat tenun
+Établi ¦ Bàn thợ ¦ Meja kerja
+Tonneau ¦ Thùng gỗ ¦ Tong
+Machine à coudre ¦ Máy may ¦ Mesin jahit
+Enclume ¦ Đe ¦ Landasan tempa
+Mangeoire, crèche ¦ Máng ăn, máng cỏ ¦ Palungan, tempat makan ternak
+Ferme, animaux ¦ Trang trại, gia súc ¦ Pertanian, hewan
+Charrette ¦ Xe bò ¦ Gerobak
+Puits ¦ Giếng ¦ Sumur
+Jardin, extérieur ¦ Vườn, bên ngoài ¦ Kebun, luar ruangan
+Arbre ¦ Cây ¦ Pohon
+Voiture ¦ Xe hơi ¦ Mobil
+Banc de jardin ¦ Ghế vườn ¦ Bangku taman
+Escalier droit ¦ Cầu thang thẳng ¦ Tangga lurus
+Structure ¦ Kết cấu ¦ Struktur
+Escalier tournant ¦ Cầu thang xoay ¦ Tangga putar
+Poteau, pilier ¦ Cột, trụ ¦ Tiang, pilar
+Placard ¦ Tủ âm tường ¦ Lemari tanam
+Lit bateau (Empire) ¦ Giường thuyền (Đế chế) ¦ Tempat tidur perahu (Empire)
+Lit Louis-Philippe ¦ Giường Louis-Philippe ¦ Tempat tidur Louis-Philippe
+Lit à baldaquin ¦ Giường có màn trướng ¦ Tempat tidur berkanopi
+Lit en fer forgé ¦ Giường sắt rèn ¦ Tempat tidur besi tempa
+Grand lit (160) ¦ Giường lớn (160) ¦ Tempat tidur besar (160)
+Paillasse (lit de paille) ¦ Đệm rơm ¦ Kasur jerami
+Armoire normande ¦ Tủ quần áo Normandie ¦ Lemari Normandia
+Armoire à glace ¦ Tủ quần áo có gương ¦ Lemari bercermin
+Chiffonnier, semainier ¦ Tủ ngăn kéo cao, tủ bảy ngăn ¦ Lemari laci tinggi, semainier
+Table de nuit à marbre ¦ Bàn đầu giường mặt đá hoa ¦ Meja samping tempat tidur berpermukaan marmer
+Lampe de chevet ¦ Đèn đầu giường ¦ Lampu tidur
+Pot de chambre ¦ Bô ¦ Pispot
+Paravent ¦ Bình phong ¦ Sekat lipat
+Psyché (miroir sur pied) ¦ Gương đứng ¦ Cermin berdiri
+Fauteuil Voltaire ¦ Ghế bành Voltaire ¦ Kursi berlengan Voltaire
+Banquette de pied de lit ¦ Ghế dài cuối giường ¦ Bangku ujung tempat tidur
+Descente de lit ¦ Thảm cạnh giường ¦ Karpet samping tempat tidur
+Dressing ¦ Phòng thay đồ ¦ Ruang ganti
+Chaise paillée ¦ Ghế đan cói ¦ Kursi anyaman
+Coffre de mariage ¦ Rương cưới ¦ Peti pernikahan
+Malle-cabine ¦ Rương du lịch ¦ Koper kapal
+Table de toilette à miroir ¦ Bàn rửa mặt có gương ¦ Meja cuci muka bercermin
+Chaufferette, bassinoire ¦ Lò sưởi chân, bình làm ấm giường ¦ Penghangat kaki, penghangat ranjang
+Cheminée de chambre ¦ Lò sưởi phòng ngủ ¦ Perapian kamar tidur
+Table ovale à rallonges ¦ Bàn bầu dục kéo dài ¦ Meja oval yang bisa diperpanjang
+Table de ferme ¦ Bàn kiểu nông trại ¦ Meja rumah pertanian
+Table basse ¦ Bàn thấp ¦ Meja kopi
+Guéridon ¦ Bàn tròn một chân ¦ Meja bundar berkaki tunggal
+Bergère ¦ Ghế bành Bergère ¦ Kursi berlengan Bergère
+Fauteuil à bascule ¦ Ghế bập bênh ¦ Kursi goyang
+Canapé trois places ¦ Ghế sofa ba chỗ ¦ Sofa tiga dudukan
+Méridienne ¦ Ghế dài nằm nghỉ ¦ Sofa rebah
+Pouf ¦ Ghế đôn ¦ Puf
+Pendule de cheminée ¦ Đồng hồ để lò sưởi ¦ Jam perapian
+Grande cheminée à manteau ¦ Lò sưởi lớn có chụp ¦ Perapian besar bertudung
+Poêle en faïence ¦ Lò sưởi ốp sứ ¦ Tungku keramik
+Meuble TV ¦ Kệ TV ¦ Meja TV
+Gramophone ¦ Máy hát đĩa ¦ Gramofon
+Harmonium ¦ Đàn harmonium ¦ Harmonium
+Piano à queue ¦ Đàn piano cánh ¦ Piano besar
+Lustre ¦ Đèn chùm ¦ Lampu gantung kristal
+Tapis rond ¦ Thảm tròn ¦ Karpet bundar
+Bibliothèque vitrée ¦ Tủ sách có kính ¦ Rak buku berkaca
+Chaise cannée ¦ Ghế mây ¦ Kursi rotan
+Jardinière ¦ Kệ cây cảnh ¦ Rak tanaman
+Cage à oiseaux ¦ Lồng chim ¦ Sangkar burung
+Aquarium ¦ Bể cá ¦ Akuarium
+Console ¦ Bàn console ¦ Meja konsol
+Bonheur-du-jour ¦ Bàn viết Bonheur-du-jour ¦ Meja tulis Bonheur-du-jour
+Canapé-lit, clic-clac ¦ Sofa giường ¦ Sofa bed
+Potager (fourneau maçonné) ¦ Bếp xây ¦ Tungku masak tembok
+Âtre avec crémaillère ¦ Lò sưởi có móc treo nồi ¦ Tungku dengan pengait panci
+Four encastrable ¦ Lò nướng âm tủ ¦ Oven tanam
+Plaques de cuisson ¦ Bếp nấu ¦ Kompor tanam
+Lave-vaisselle ¦ Máy rửa bát ¦ Mesin cuci piring
+Congélateur coffre ¦ Tủ đông nằm ¦ Freezer peti
+Glacière (armoire à glace) ¦ Thùng đá (tủ ướp đá) ¦ Lemari es balok
+Évier double ¦ Bồn rửa đôi ¦ Bak cuci ganda
+Îlot central ¦ Đảo bếp ¦ Pulau dapur
+Plan de travail en L ¦ Mặt bàn bếp hình chữ L ¦ Meja kerja dapur bentuk L
+Hotte ¦ Máy hút mùi ¦ Tudung asap
+Meuble haut ¦ Tủ treo ¦ Lemari gantung
+Meuble bas ¦ Tủ dưới ¦ Lemari bawah
+Tabouret ¦ Ghế đẩu ¦ Bangku kecil
+Table de cuisine ¦ Bàn bếp ¦ Meja dapur
+Panetière ¦ Tủ đựng bánh mì ¦ Lemari roti
+Billot de boucher ¦ Thớt gỗ của hàng thịt ¦ Talenan tukang daging
+Seau, cruche ¦ Xô, bình ¦ Ember, kendi
+Saloir, jarre ¦ Thùng muối, chum ¦ Tong garam, tempayan
+Micro-ondes ¦ Lò vi sóng ¦ Microwave
+Cuisinière à gaz ¦ Bếp ga ¦ Kompor gas
+Chaudron ¦ Vạc ¦ Kuali besar
+Moulin à café ¦ Cối xay cà phê ¦ Penggiling kopi
+Réfrigérateur américain ¦ Tủ lạnh kiểu Mỹ ¦ Kulkas dua pintu
+Égouttoir, vaisselier mural ¦ Giá úp bát, kệ chén treo tường ¦ Rak piring, lemari piring dinding
+Baignoire sabot ¦ Bồn tắm ngồi ¦ Bak mandi duduk
+Baignoire sur pieds (fonte) ¦ Bồn tắm có chân (gang) ¦ Bak mandi berkaki (besi cor)
+Cuvier, baquet ¦ Chậu giặt, thùng gỗ ¦ Bak cuci, ember kayu
+Bidet ¦ Bồn rửa vệ sinh ¦ Bidet
+Double vasque ¦ Chậu rửa đôi ¦ Wastafel ganda
+Douche à l’italienne ¦ Vòi sen không vách ngăn ¦ Pancuran tanpa bak
+Machine à laver ¦ Máy giặt ¦ Mesin cuci
+Sèche-linge ¦ Máy sấy quần áo ¦ Pengering pakaian
+Chauffe-eau, ballon ¦ Bình nóng lạnh ¦ Pemanas air
+Radiateur ¦ Lò sưởi ¦ Radiator
+Sèche-serviettes ¦ Giá sấy khăn ¦ Rak pengering handuk
+Meuble vasque ¦ Tủ chậu rửa ¦ Lemari wastafel
+Miroir de salle de bains ¦ Gương phòng tắm ¦ Cermin kamar mandi
+WC à la turque ¦ Bồn cầu xổm ¦ Kloset jongkok
+Chaise percée ¦ Ghế bô ¦ Kursi pispot
+Lessiveuse ¦ Nồi luộc quần áo ¦ Ketel pencuci
+Étendoir à linge ¦ Giá phơi quần áo ¦ Jemuran pakaian
+Panier à linge ¦ Giỏ đựng đồ giặt ¦ Keranjang cucian
+Colonne de rangement ¦ Tủ cột đựng đồ ¦ Lemari penyimpanan tinggi
+WC suspendu ¦ Bồn cầu treo tường ¦ Kloset gantung
+Bac à douche ¦ Khay tắm đứng ¦ Alas pancuran
+Malle de voyage ¦ Rương du lịch ¦ Koper perjalanan
+Bahut ¦ Tủ thấp ¦ Bufet rendah
+Buffet deux corps ¦ Tủ búp-phê hai tầng ¦ Bufet dua tingkat
+Enfilade ¦ Tủ búp-phê dài ¦ Bufet panjang
+Confiturier ¦ Tủ đựng mứt ¦ Lemari selai
+Étagère métallique ¦ Kệ kim loại ¦ Rak logam
+Penderie, portant ¦ Giá treo quần áo ¦ Gantungan pakaian
+Portemanteau ¦ Cây treo áo ¦ Tiang gantungan mantel
+Meuble à cases ¦ Kệ ô vuông ¦ Rak kotak-kotak
+Placard mural ¦ Tủ treo tường ¦ Lemari dinding
+Meuble à chaussures ¦ Tủ giày ¦ Lemari sepatu
+Casier à bouteilles ¦ Giá để chai ¦ Rak botol
+Pile de cartons ¦ Chồng thùng các-tông ¦ Tumpukan kardus
+Cantine militaire ¦ Rương quân đội ¦ Peti militer
+Armoire à linge ¦ Tủ đựng đồ vải ¦ Lemari linen
+Porte-parapluies ¦ Ống cắm ô ¦ Tempat payung
+Meuble d’entrée ¦ Tủ lối vào ¦ Lemari lorong masuk
+Vestiaire métallique ¦ Tủ khoá kim loại ¦ Loker logam
+Commode basse ¦ Tủ ngăn kéo thấp ¦ Lemari laci rendah
+Coffre à bois ¦ Thùng đựng củi ¦ Peti kayu bakar
+Secrétaire à abattant ¦ Bàn viết có nắp gập ¦ Meja sekretaris berpintu lipat
+Bureau plat (ministre) ¦ Bàn làm việc phẳng (kiểu bộ trưởng) ¦ Meja kerja datar (gaya menteri)
+Bureau à cylindre ¦ Bàn viết nắp cuộn ¦ Meja tulis bertutup gulung
+Fauteuil de bureau ¦ Ghế văn phòng ¦ Kursi kantor
+Chaise de bureau en bois ¦ Ghế làm việc bằng gỗ ¦ Kursi meja kayu
+Cartonnier ¦ Tủ hồ sơ (hộp) ¦ Lemari arsip (kotak)
+Classeur à tiroirs ¦ Tủ hồ sơ ngăn kéo ¦ Lemari arsip berlaci
+Ordinateur (écran) ¦ Máy tính (màn hình) ¦ Komputer (layar)
+Imprimante, scanner ¦ Máy in, máy quét ¦ Printer, pemindai
+Globe terrestre ¦ Quả địa cầu ¦ Bola dunia
+Coffre-fort ¦ Két sắt ¦ Brankas
+Lampe de bureau ¦ Đèn bàn ¦ Lampu meja
+Bibliothèque murale ¦ Tủ sách treo tường ¦ Rak buku dinding
+Table à dessin ¦ Bàn vẽ ¦ Meja gambar
+Boîtes d’archives ¦ Hộp lưu trữ ¦ Kotak arsip
+Téléphone mural (ancien) ¦ Điện thoại treo tường (cũ) ¦ Telepon dinding (lama)
+Tableau noir, tableau blanc ¦ Bảng đen, bảng trắng ¦ Papan tulis hitam, papan tulis putih
+Bureau moderne ¦ Bàn làm việc hiện đại ¦ Meja kerja modern
+Caisson à tiroirs ¦ Tủ ngăn kéo nhỏ ¦ Unit laci
+Fauteuil club ¦ Ghế bành câu lạc bộ ¦ Kursi klub
+Berceau en osier ¦ Nôi mây ¦ Buaian rotan
+Lit à barreaux ¦ Cũi trẻ em ¦ Boks bayi
+Lits superposés ¦ Giường tầng ¦ Tempat tidur susun
+Table à langer ¦ Bàn thay tã ¦ Meja ganti popok
+Coffre à jouets ¦ Rương đồ chơi ¦ Peti mainan
+Cheval à bascule ¦ Ngựa bập bênh ¦ Kuda goyang
+Parc ¦ Quây cũi ¦ Pagar bermain bayi
+Chaise haute ¦ Ghế ăn cho bé ¦ Kursi makan bayi
+Pupitre d’écolier ¦ Bàn học sinh ¦ Meja sekolah
+Landau ¦ Xe nôi ¦ Kereta bayi
+Maison de poupée ¦ Nhà búp bê ¦ Rumah boneka
+Tipi ¦ Lều tipi ¦ Tenda tipi
+Petite table ¦ Bàn nhỏ ¦ Meja kecil
+Petite chaise ¦ Ghế nhỏ ¦ Kursi kecil
+Tapis de jeu ¦ Thảm chơi ¦ Matras bermain
+Ours en peluche ¦ Gấu bông ¦ Boneka beruang
+Bibliothèque basse ¦ Tủ sách thấp ¦ Rak buku rendah
+Trotteur, porteur ¦ Xe tập đi, xe chòi chân ¦ Baby walker, mainan tunggang
+Crucifix ¦ Thánh giá có tượng Chúa ¦ Salib
+Bénitier ¦ Bình nước thánh ¦ Wadah air suci
+Petit autel, oratoire ¦ Bàn thờ nhỏ, góc cầu nguyện ¦ Altar kecil, tempat doa
+Statue de la Vierge ¦ Tượng Đức Mẹ ¦ Patung Bunda Maria
+Chandelier, cierge ¦ Chân nến, nến nhà thờ ¦ Kandil, lilin gereja
+Portrait de famille ¦ Chân dung gia đình ¦ Potret keluarga
+Photo de mariage encadrée ¦ Ảnh cưới đóng khung ¦ Foto pernikahan berbingkai
+Arbre généalogique encadré ¦ Cây gia phả đóng khung ¦ Pohon silsilah berbingkai
+Globe de mariée ¦ Lồng kính cô dâu ¦ Kubah kaca pengantin
+Cadre de médailles ¦ Khung huân chương ¦ Bingkai medali
+Bible familiale sur lutrin ¦ Kinh Thánh gia đình trên giá đọc ¦ Alkitab keluarga di atas mimbar baca
+Coffret à souvenirs ¦ Hộp kỷ vật ¦ Kotak kenang-kenangan
+Vitrine à souvenirs ¦ Tủ kính kỷ vật ¦ Lemari kaca kenang-kenangan
+Lampe à huile ¦ Đèn dầu ¦ Lampu minyak
+Buste sur colonne ¦ Tượng bán thân trên cột ¦ Patung dada di atas tiang
+Icône, image pieuse ¦ Ảnh thánh, tranh đạo ¦ Ikon, gambar suci
+Pile d’albums de famille ¦ Chồng album gia đình ¦ Tumpukan album keluarga
+Plaque commémorative ¦ Bảng tưởng niệm ¦ Plakat peringatan
+Malle aux souvenirs ¦ Rương kỷ niệm ¦ Peti kenangan
+Croix de bois au mur ¦ Thánh giá gỗ trên tường ¦ Salib kayu di dinding
+Retable, armoire d’église ¦ Bức sau bàn thờ, tủ nhà thờ ¦ Retabel, lemari gereja
+Forge (foyer) ¦ Lò rèn (bếp lửa) ¦ Tempa (tungku)
+Soufflet de forge ¦ Ống bễ lò rèn ¦ Ubub tempa
+Tour à bois ¦ Máy tiện gỗ ¦ Mesin bubut kayu
+Presse à imprimer ¦ Máy in ¦ Mesin cetak
+Meule à aiguiser ¦ Đá mài ¦ Batu asah
+Cuve de vigneron ¦ Thùng ủ rượu vang ¦ Tangki anggur
+Pressoir à vin ¦ Máy ép nho ¦ Pemeras anggur
+Alambic ¦ Nồi chưng cất ¦ Alat penyulingan
+Comptoir de boutique ¦ Quầy hàng ¦ Meja toko
+Balance à bascule ¦ Cân bàn ¦ Timbangan duduk
+Caisse enregistreuse ¦ Máy tính tiền ¦ Mesin kasir
+Étalage de magasin ¦ Kệ trưng bày cửa hàng ¦ Etalase toko
+Fauteuil de barbier ¦ Ghế thợ cắt tóc ¦ Kursi tukang cukur
+Établi de cordonnier ¦ Bàn thợ đóng giày ¦ Meja tukang sepatu
+Chevalet de peintre ¦ Giá vẽ ¦ Kuda-kuda lukis
+Carreau de dentellière ¦ Gối làm ren ¦ Bantal renda
+Four de boulanger ¦ Lò bánh mì ¦ Oven tukang roti
+Barrique ¦ Thùng rượu ¦ Tong anggur
+Meule de moulin ¦ Cối đá xay ¦ Batu gilingan
+Chevalet de scieur ¦ Giá cưa ¦ Kuda-kuda gergaji
+Établi de menuisier ¦ Bàn thợ mộc ¦ Meja kerja tukang kayu
+Panneau à outils ¦ Bảng treo dụng cụ ¦ Papan perkakas
+Vache ¦ Bò ¦ Sapi
+Cheval ¦ Ngựa ¦ Kuda
+Âne ¦ Lừa ¦ Keledai
+Cochon ¦ Lợn ¦ Babi
+Mouton ¦ Cừu ¦ Domba
+Chèvre ¦ Dê ¦ Kambing
+Poule ¦ Gà mái ¦ Ayam betina
+Chien ¦ Chó ¦ Anjing
+Chat ¦ Mèo ¦ Kucing
+Clapier à lapins ¦ Chuồng thỏ ¦ Kandang kelinci
+Poulailler ¦ Chuồng gà ¦ Kandang ayam
+Niche ¦ Chuồng chó ¦ Rumah anjing
+Stalle, box d’écurie ¦ Ngăn chuồng ngựa ¦ Bilik kandang kuda
+Abreuvoir ¦ Máng nước ¦ Palung minum
+Râtelier à foin ¦ Giá cỏ khô ¦ Rak jerami
+Meule de foin ¦ Đống cỏ khô ¦ Tumpukan jerami
+Botte de paille ¦ Bó rơm ¦ Bal jerami
+Charrue ¦ Cày ¦ Bajak
+Herse ¦ Bừa ¦ Garu
+Tracteur ancien ¦ Máy kéo cũ ¦ Traktor tua
+Brouette ¦ Xe cút kít ¦ Gerobak dorong
+Baratte à beurre ¦ Thùng đánh bơ ¦ Pengaduk mentega
+Ruche ¦ Tổ ong ¦ Sarang lebah
+Coffre à grain ¦ Thùng đựng thóc ¦ Peti biji-bijian
+Bidon à lait ¦ Bình đựng sữa ¦ Kaleng susu
+Tombereau ¦ Xe ben kéo ¦ Gerobak jungkit
+Arbre fruitier ¦ Cây ăn quả ¦ Pohon buah
+Sapin, conifère ¦ Cây thông, cây lá kim ¦ Cemara, konifer
+Haie ¦ Hàng rào cây ¦ Pagar tanaman
+Buisson, arbuste ¦ Bụi cây, cây bụi ¦ Semak, perdu
+Massif de fleurs ¦ Bồn hoa ¦ Petak bunga
+Potager (planches) ¦ Vườn rau (luống) ¦ Kebun sayur (bedengan)
+Mare, bassin ¦ Ao, bể nước ¦ Kolam, bak air
+Lavoir ¦ Nhà giặt chung ¦ Tempat cuci umum
+Four à pain ¦ Lò nướng bánh mì ¦ Oven roti
+Pompe à bras ¦ Bơm tay ¦ Pompa tangan
+Croix de chemin, calvaire ¦ Thánh giá ven đường ¦ Salib tepi jalan, kalvari
+Pierre tombale ¦ Bia mộ ¦ Batu nisan
+Table de jardin ¦ Bàn ngoài vườn ¦ Meja taman
+Chaise de jardin ¦ Ghế ngoài vườn ¦ Kursi taman
+Transat, chaise longue ¦ Ghế xếp, ghế nằm ¦ Kursi geladak, kursi santai
+Parasol ¦ Dù che nắng ¦ Payung taman
+Barbecue ¦ Bếp nướng ¦ Panggangan barbekyu
+Balançoire ¦ Xích đu ¦ Ayunan
+Toboggan ¦ Cầu trượt ¦ Perosotan
+Pergola, tonnelle ¦ Giàn hoa, giàn leo ¦ Pergola, punjung
+Clôture, barrière ¦ Hàng rào, rào chắn ¦ Pagar, palang
+Portail ¦ Cổng ¦ Gerbang
+Muret de pierre ¦ Tường đá thấp ¦ Tembok batu rendah
+Bicyclette ¦ Xe đạp ¦ Sepeda
+Cabane de jardin ¦ Chòi vườn ¦ Gudang kebun
+Serre ¦ Nhà kính ¦ Rumah kaca
+Tas de bois ¦ Đống củi ¦ Tumpukan kayu bakar
+Bouleau, arbre fin ¦ Cây bạch dương, cây thân mảnh ¦ Pohon birch, pohon ramping
+Banc de pierre ¦ Ghế đá ¦ Bangku batu
+Escalier en colimaçon ¦ Cầu thang xoắn ốc ¦ Tangga spiral
+Échelle de meunier ¦ Thang dốc ¦ Tangga curam
+Colonne ronde ¦ Cột tròn ¦ Tiang bundar
+Poutre apparente ¦ Dầm lộ ¦ Balok ekspos
+Trappe de cave ¦ Cửa sập hầm ¦ Pintu tingkap ruang bawah tanah
+Marche, seuil ¦ Bậc, ngưỡng cửa ¦ Anak tangga, ambang pintu
+Garde-corps, rampe ¦ Lan can, tay vịn ¦ Pagar pengaman, susuran tangga
+Conduit de cheminée ¦ Ống khói ¦ Saluran cerobong
+Verrière, cloison vitrée ¦ Vách kính ¦ Sekat kaca
+Radiateur en fonte ¦ Lò sưởi gang ¦ Radiator besi cor
+Chaudière ¦ Nồi hơi ¦ Ketel pemanas
+Pilier de pierre ¦ Trụ đá ¦ Pilar batu
+Estrade, palier ¦ Bục, chiếu nghỉ ¦ Panggung, bordes
+Muret, demi-cloison ¦ Tường thấp, vách lửng ¦ Dinding setengah
+Niche, alcôve ¦ Hốc tường, hốc giường ¦ Ceruk, relung
+Bonnetière (armoire à une porte) ¦ Tủ quần áo một cánh ¦ Lemari satu pintu
+Armoire de mariage (de dot) ¦ Tủ quần áo cưới (của hồi môn) ¦ Lemari pernikahan (mas kawin)
+Lit clos à portes coulissantes ¦ Giường hộp có cửa trượt ¦ Tempat tidur kotak berpintu geser
+Lit-armoire, lit clos d’angle ¦ Giường tủ, giường hộp góc ¦ Tempat tidur lemari, tempat tidur kotak sudut
+Lit d’alcôve à rideaux ¦ Giường hốc tường có rèm ¦ Tempat tidur ceruk bertirai
+Berceau ancien en bois (à bascule) ¦ Nôi gỗ cổ (đung đưa) ¦ Buaian kayu kuno (goyang)
+Berceau à capote en osier ¦ Nôi mây có mui ¦ Buaian rotan berkerudung
+Bassinoire en cuivre (à long manche) ¦ Bình làm ấm giường bằng đồng (cán dài) ¦ Penghangat ranjang tembaga (gagang panjang)
+Table de toilette à marbre ¦ Bàn rửa mặt mặt đá hoa ¦ Meja cuci muka berpermukaan marmer
+Cuvette et broc en faïence ¦ Chậu và bình bằng sành ¦ Baskom dan kendi gerabah
+Commode galbée (Louis XV) ¦ Tủ ngăn kéo uốn cong (Louis XV) ¦ Lemari laci cembung (Louis XV)
+Bougeoir de chevet ¦ Chân nến đầu giường ¦ Kandil samping tempat tidur
+Chaufferette à braises ¦ Lò sưởi chân bằng than hồng ¦ Penghangat kaki bara
+Malle en osier ¦ Rương mây ¦ Peti rotan
+Horloge comtoise à ventre (violonée) ¦ Đồng hồ Comtoise thân phình (dáng đàn violon) ¦ Jam Comtoise berpinggang (bentuk biola)
+Horloge comtoise peinte ¦ Đồng hồ Comtoise sơn vẽ ¦ Jam Comtoise dicat
+Horloge de parquet (régulateur) ¦ Đồng hồ đứng (đồng hồ chuẩn) ¦ Jam lantai (regulator)
+Buffet bas à deux portes ¦ Tủ búp-phê thấp hai cánh ¦ Bufet rendah dua pintu
+Vaisselier breton ¦ Tủ chén bát kiểu Bretagne ¦ Lemari pajang piring Bretagne
+Vaisselier normand ¦ Tủ chén bát kiểu Normandie ¦ Lemari pajang piring Normandia
+Banc-coffre à dossier (archebanc) ¦ Ghế dài kiêm rương có tựa (archebanc) ¦ Bangku-peti bersandaran (archebanc)
+Banc-coffre de lit clos ¦ Ghế dài kiêm rương của giường hộp ¦ Bangku-peti tempat tidur kotak
+Chaise paillée à barreaux ¦ Ghế cói tựa thanh ngang ¦ Kursi anyaman bersandaran palang
+Fauteuil paillé (de grand-mère) ¦ Ghế bành cói (của bà) ¦ Kursi berlengan anyaman (milik nenek)
+Table à volets ¦ Bàn có cánh gập ¦ Meja berdaun lipat
+Table de ferme en chêne (à tiroir) ¦ Bàn nông trại gỗ sồi (có ngăn kéo) ¦ Meja pertanian kayu ek (berlaci)
+Lampe tempête ¦ Đèn bão ¦ Lampu badai
+Chandelier, bougeoir ¦ Chân nến ¦ Kandil
+Suspension à pétrole ¦ Đèn dầu treo ¦ Lampu minyak gantung
+Poste TSF à lampes ¦ Máy radio đèn điện tử ¦ Radio tabung
+Phonographe à pavillon ¦ Máy hát loa kèn ¦ Fonograf bercorong
+Poêle Godin (fonte émaillée) ¦ Lò Godin (gang tráng men) ¦ Tungku Godin (besi cor berenamel)
+Poêle à bois en fonte (cloche) ¦ Lò củi bằng gang (hình chuông) ¦ Tungku kayu besi cor (lonceng)
+Chenets (la paire) ¦ Giá đỡ củi (một đôi) ¦ Penyangga kayu bakar (sepasang)
+Cheminée à manteau (à hotte) ¦ Lò sưởi có chụp ¦ Perapian bertudung
+Cheminée de pierre à linteau de bois ¦ Lò sưởi đá có dầm gỗ ¦ Perapian batu berambang kayu
+Cantou (coin du feu) ¦ Góc bếp lửa ¦ Pojok perapian
+Bergère Louis XVI ¦ Ghế bành Bergère Louis XVI ¦ Kursi Bergère Louis XVI
+Fauteuil crapaud ¦ Ghế bành con cóc ¦ Kursi berlengan katak
+Sellette (porte-plante) ¦ Kệ cây cảnh ¦ Penyangga pot tanaman
+Portrait des ancêtres (ovale) ¦ Chân dung tổ tiên (hình bầu dục) ¦ Potret leluhur (oval)
+Maie (pétrin sur pieds) ¦ Máng nhào bột có chân ¦ Palung adonan berkaki
+Maie-coffre à couvercle ¦ Rương nhào bột có nắp ¦ Peti adonan bertutup
+Huche à pain ¦ Thùng đựng bánh mì ¦ Kotak roti
+Cuisinière à bois en fonte (à barre de laiton) ¦ Bếp lò củi bằng gang (thanh đồng thau) ¦ Kompor kayu besi cor (palang kuningan)
+Cuisinière émaillée bois et charbon ¦ Bếp lò tráng men đốt củi và than ¦ Kompor berenamel kayu dan batu bara
+Potager carrelé (fourneau à braises) ¦ Bếp than ốp gạch men ¦ Tungku arang berubin
+Évier taillé dans la pierre ¦ Bồn rửa đục từ đá ¦ Bak cuci pahatan batu
+Évier en grès émaillé ¦ Bồn rửa bằng sành tráng men ¦ Bak cuci stoneware berglasir
+Fontaine en cuivre sur son support ¦ Bình nước bằng đồng trên giá ¦ Wadah air tembaga di atas penyangganya
+Fontaine en grès ¦ Bình nước bằng sành ¦ Wadah air stoneware
+Saloir en grès ¦ Hũ muối bằng sành ¦ Tempayan garam stoneware
+Saloir en bois (coffre à sel) ¦ Thùng muối bằng gỗ (hộp muối) ¦ Peti garam kayu
+Garde-manger grillagé (mural) ¦ Tủ đựng thức ăn có lưới (treo tường) ¦ Lemari makanan berjaring (dinding)
+Buffet de cuisine (années 1930-1950) ¦ Tủ bếp (thập niên 1930-1950) ¦ Lemari dapur (tahun 1930-1950)
+Moulin à café mural ¦ Cối xay cà phê treo tường ¦ Penggiling kopi dinding
+Fer à repasser en fonte ¦ Bàn là bằng gang ¦ Setrika besi cor
+Marmite en fonte ¦ Nồi gang ¦ Panci besi cor
+Cruche, pichet en grès ¦ Bình, ca bằng sành ¦ Kendi, teko stoneware
+Tue-mouches en verre (piège à mouches) ¦ Bẫy ruồi bằng thuỷ tinh ¦ Perangkap lalat kaca
+Balance Roberval et ses poids ¦ Cân Roberval và quả cân ¦ Timbangan Roberval dan anak timbangannya
+Glacière en bois doublée de zinc ¦ Thùng đá bằng gỗ lót kẽm ¦ Lemari es kayu berlapis seng
+Tub (grand bassin en zinc) ¦ Chậu tắm lớn bằng kẽm ¦ Bak seng besar
+Baquet de lessive en bois ¦ Chậu giặt bằng gỗ ¦ Bak cuci kayu
+Lessiveuse à champignon ¦ Nồi luộc quần áo có ống hình nấm ¦ Ketel cuci berpipa jamur
+Baignoire en zinc ¦ Bồn tắm bằng kẽm ¦ Bak mandi seng
+Lave-mains en fonte émaillée ¦ Chậu rửa tay gang tráng men ¦ Wastafel tangan besi cor berenamel
+Planche à laver ¦ Tấm giặt ¦ Papan cuci
+Buffet deux-corps vitré ¦ Tủ búp-phê hai tầng có kính ¦ Bufet dua tingkat berkaca
+Buffet deux-corps normand ¦ Tủ búp-phê hai tầng kiểu Normandie ¦ Bufet dua tingkat Normandia
+Armoire lorraine ¦ Tủ quần áo vùng Lorraine ¦ Lemari Lorraine
+Armoire bressane ¦ Tủ quần áo vùng Bresse ¦ Lemari Bresse
+Coffre de mariage sculpté ¦ Rương cưới chạm khắc ¦ Peti pernikahan berukir
+Malle bombée de voyage ¦ Rương du lịch nắp vồng ¦ Koper perjalanan bertutup cembung
+Coffre à linge à pentures de fer ¦ Rương đựng đồ vải có bản lề sắt ¦ Peti linen berengsel besi
+Panetière provençale (murale) ¦ Tủ bánh mì kiểu Provence (treo tường) ¦ Lemari roti Provence (dinding)
+Étagère à cuivres ¦ Kệ đồ đồng ¦ Rak perabot tembaga
+Bureau de pente (dos d’âne) ¦ Bàn viết mặt dốc ¦ Meja tulis miring
+Scriban (pente et vitrine) ¦ Bàn viết kèm tủ kính ¦ Meja tulis dengan lemari kaca
+Écritoire, encrier et plumier ¦ Bộ viết, lọ mực và hộp bút ¦ Perangkat tulis, tempat tinta, dan kotak pena
+Lampe bouillotte ¦ Đèn bouillotte ¦ Lampu bouillotte
+Banc d’école à pupitre (deux places) ¦ Bàn ghế học sinh (hai chỗ) ¦ Bangku sekolah berpapan tulis (dua tempat)
+Pupitre d’écolier à abattant ¦ Bàn học sinh có nắp lật ¦ Meja sekolah bertutup angkat
+Ardoise d’écolier ¦ Bảng đá học sinh ¦ Batu tulis sekolah
+Cheval de bois ¦ Ngựa gỗ ¦ Kuda kayu
+Poupée de porcelaine ¦ Búp bê sứ ¦ Boneka porselen
+Chaise d’enfant paillée ¦ Ghế cói trẻ em ¦ Kursi anyaman anak
+Trotteur d’enfant en bois ¦ Xe tập đi bằng gỗ ¦ Alat bantu jalan bayi dari kayu
+Prie-Dieu sculpté ¦ Ghế quỳ cầu nguyện chạm khắc ¦ Bangku doa berukir
+Bénitier de chambre en faïence ¦ Bình nước thánh bằng sành trong phòng ngủ ¦ Wadah air suci gerabah untuk kamar tidur
+Crucifix de chevet (Christ en bronze) ¦ Thánh giá đầu giường (tượng Chúa bằng đồng) ¦ Salib samping tempat tidur (Kristus perunggu)
+Globe de mariée sur son socle ¦ Lồng kính cô dâu trên đế ¦ Kubah kaca pengantin di atas alasnya
+Statuette de saint ¦ Tượng thánh nhỏ ¦ Patung kecil orang kudus
+Image de communion encadrée ¦ Ảnh rước lễ đóng khung ¦ Kartu komuni berbingkai
+Couronne de perles (mortuaire) ¦ Vòng hoa cườm (tang lễ) ¦ Karangan manik-manik (duka)
+Rouet flamand (à fuseau) ¦ Xa quay sợi Flanders (có suốt) ¦ Roda pemintal Flandria (berkumparan)
+Grand rouet à laine ¦ Xa quay len lớn ¦ Roda pemintal wol besar
+Métier à tisser à bras ¦ Khung cửi tay ¦ Alat tenun tangan
+Métier à tapisserie (vertical) ¦ Khung dệt thảm (đứng) ¦ Alat tenun permadani (tegak)
+Dévidoir à écheveaux ¦ Guồng quấn sợi ¦ Penggulung benang
+Machine à coudre à pédale (Singer) ¦ Máy may đạp chân (Singer) ¦ Mesin jahit injak (Singer)
+Machine à coudre à main ¦ Máy may quay tay ¦ Mesin jahit engkol tangan
+Mannequin de couturière ¦ Ma-nơ-canh thợ may ¦ Manekin penjahit
+Fourneau à fers de repasseuse ¦ Lò hâm bàn là của thợ là ¦ Tungku setrika tukang setrika
+Banc de sabotier ¦ Bàn thợ làm guốc ¦ Bangku pembuat bakiak
+Presse à fromage ¦ Máy ép phô mai ¦ Alat press keju
+Baratte à piston en bois ¦ Thùng đánh bơ pít-tông bằng gỗ ¦ Pengaduk mentega piston kayu
+Baratte-tonneau à manivelle ¦ Thùng đánh bơ quay tay ¦ Pengaduk mentega tong berengkol
+Écrémeuse ¦ Máy tách kem ¦ Pemisah krim
+Joug de bœufs ¦ Ách bò ¦ Kuk sapi
+Outils (fourche, faux, râteau) ¦ Dụng cụ (chĩa, lưỡi hái, cào) ¦ Perkakas (garpu, sabit, garu)
+Pressoir à pommes (cidre) ¦ Máy ép táo (rượu táo) ¦ Pemeras apel (sari apel)
+Charreton à bras ¦ Xe đẩy tay ¦ Gerobak tangan
+Ruche en paille (panier) ¦ Tổ ong bằng rơm (giỏ) ¦ Sarang lebah jerami (keranjang)
+Puits à margelle et petit toit ¦ Giếng có thành và mái nhỏ ¦ Sumur berbibir dan beratap kecil
+Pompe à eau en fonte et son auge ¦ Bơm nước gang và máng ¦ Pompa air besi cor dan palungnya
+Auge en pierre ¦ Máng đá ¦ Palung batu
+Banc à laver (de lavoir) ¦ Ghế giặt (ở nhà giặt chung) ¦ Bangku cuci (tempat cuci umum)
+Canapé moderne trois places ¦ Ghế sofa hiện đại ba chỗ ¦ Sofa modern tiga dudukan
+Canapé deux places ¦ Ghế sofa hai chỗ ¦ Sofa dua dudukan
+Canapé d’angle ¦ Ghế sofa góc ¦ Sofa sudut
+Canapé Chesterfield (capitonné) ¦ Ghế sofa Chesterfield (bọc nút) ¦ Sofa Chesterfield (berkancing)
+Fauteuil scandinave ¦ Ghế bành kiểu Bắc Âu ¦ Kursi berlengan Skandinavia
+Fauteuil suspendu (œuf) ¦ Ghế treo (hình quả trứng) ¦ Kursi gantung (telur)
+Pouf poire ¦ Ghế lười ¦ Beanbag
+Pouf capitonné ¦ Ghế đôn bọc nút ¦ Puf berkancing
+Repose-pieds ¦ Ghế kê chân ¦ Bangku kaki
+Table basse en verre ¦ Bàn thấp bằng kính ¦ Meja kopi kaca
+Bout de canapé ¦ Bàn đầu sofa ¦ Meja samping sofa
+Bibliothèque garnie de livres ¦ Tủ sách đầy sách ¦ Rak buku penuh buku
+Meuble à disques vinyles ¦ Tủ đựng đĩa than ¦ Lemari piringan hitam
+Cheminée moderne à insert ¦ Lò sưởi hiện đại có buồng đốt ¦ Perapian modern dengan insert
+Poêle à granulés ¦ Lò đốt viên nén ¦ Tungku pelet
+Porte-revues ¦ Giá để báo ¦ Rak majalah
+Table d’échecs ¦ Bàn cờ vua ¦ Meja catur
+Billard ¦ Bàn bi-a ¦ Meja biliar
+Pare-feu de cheminée ¦ Tấm chắn lửa lò sưởi ¦ Tabir perapian
+Panier à bûches ¦ Giỏ đựng củi ¦ Keranjang kayu bakar
+Table de salle à manger (8 couverts) ¦ Bàn ăn (8 chỗ) ¦ Meja makan (8 orang)
+Table dressée pour un repas de famille ¦ Bàn bày sẵn cho bữa cơm gia đình ¦ Meja tertata untuk makan keluarga
+Table ronde à pied central ¦ Bàn tròn chân giữa ¦ Meja bundar berkaki tengah
+Table à rallonges ouverte ¦ Bàn kéo dài đang mở ¦ Meja panjang yang sedang dibentangkan
+Chaise à barreaux (bistrot) ¦ Ghế quán cà phê ¦ Kursi bistro
+Chaise rembourrée ¦ Ghế bọc nệm ¦ Kursi berlapis busa
+Chaise scandinave ¦ Ghế kiểu Bắc Âu ¦ Kursi Skandinavia
+Chaise médaillon (Louis XVI) ¦ Ghế lưng tròn (Louis XVI) ¦ Kursi medali (Louis XVI)
+Buffet scandinave sur pieds ¦ Tủ búp-phê kiểu Bắc Âu có chân ¦ Bufet Skandinavia berkaki
+Vitrine à vaisselle ¦ Tủ kính bát đĩa ¦ Lemari pajang porselen
+Banc de table ¦ Ghế dài bên bàn ¦ Bangku meja
+Desserte, chariot de service ¦ Xe đẩy phục vụ ¦ Troli saji
+Candélabre à cinq branches ¦ Chân nến năm nhánh ¦ Kandelabra lima cabang
+Coupe de fruits ¦ Đĩa hoa quả ¦ Mangkuk buah
+Bouquet dans un vase ¦ Bó hoa trong bình ¦ Buket bunga dalam vas
+Piano de cuisson ¦ Bếp liền lò ¦ Kompor oven besar
+Colonne de cuisine (four et micro-ondes) ¦ Tủ cột nhà bếp (lò nướng và lò vi sóng) ¦ Lemari tinggi dapur (oven dan microwave)
+Évier timbre d’office (céramique) ¦ Bồn rửa sứ kiểu cổ ¦ Bak cuci keramik model kuno
+Suspension à casseroles ¦ Giá treo nồi chảo ¦ Gantungan panci
+Poubelle à pédale ¦ Thùng rác đạp chân ¦ Tempat sampah injak
+Étagère à épices et bocaux ¦ Kệ gia vị và lọ ¦ Rak bumbu dan stoples
+Desserte à roulettes de cuisine ¦ Xe đẩy nhà bếp ¦ Troli dapur
+Mange-debout ¦ Bàn đứng ¦ Meja bar
+Tabouret de bar ¦ Ghế quầy bar ¦ Kursi bar
+Table en formica (années 60) ¦ Bàn formica (thập niên 60) ¦ Meja formika (tahun 60-an)
+Chaise en formica (années 60) ¦ Ghế formica (thập niên 60) ¦ Kursi formika (tahun 60-an)
+Pots d’herbes aromatiques ¦ Chậu rau thơm ¦ Pot tanaman bumbu
+Échelle à pain (suspendue) ¦ Giá treo bánh mì ¦ Rak roti gantung
+Lit double moderne (140) ¦ Giường đôi hiện đại (140) ¦ Tempat tidur ganda modern (140)
+Lit king size (180) ¦ Giường king size (180) ¦ Tempat tidur king size (180)
+Lit simple moderne (90) ¦ Giường đơn hiện đại (90) ¦ Tempat tidur tunggal modern (90)
+Lit mezzanine avec bureau ¦ Giường gác lửng có bàn học ¦ Tempat tidur loteng dengan meja
+Futon, lit bas ¦ Đệm futon, giường thấp ¦ Futon, tempat tidur rendah
+Table de chevet moderne ¦ Bàn đầu giường hiện đại ¦ Meja samping tempat tidur modern
+Armoire à portes coulissantes (miroir) ¦ Tủ quần áo cửa trượt (có gương) ¦ Lemari pintu geser (bercermin)
+Coiffeuse moderne à miroir rond ¦ Bàn trang điểm hiện đại gương tròn ¦ Meja rias modern bercermin bundar
+Valet de chambre ¦ Giá treo quần áo đứng ¦ Gantungan baju berdiri
+Lit de fer à barreaux ¦ Giường sắt có song ¦ Tempat tidur besi berjeruji
+Chaise de nourrice (basse) ¦ Ghế cho con bú (thấp) ¦ Kursi menyusui (rendah)
+Baignoire d’angle ¦ Bồn tắm góc ¦ Bak mandi sudut
+Baignoire îlot (moderne) ¦ Bồn tắm đặt giữa phòng (hiện đại) ¦ Bak mandi berdiri bebas (modern)
+Cabine de douche ¦ Buồng tắm đứng ¦ Bilik pancuran
+Porte-serviettes sur pied ¦ Giá treo khăn đứng ¦ Tiang handuk
+Pèse-personne ¦ Cân sức khoẻ ¦ Timbangan badan
+Vasque à poser sur plan en bois ¦ Chậu rửa đặt trên mặt gỗ ¦ Wastafel di atas meja kayu
+WC à réservoir ¦ Bồn cầu có két nước ¦ Kloset dengan tangki
+WC à chasse d’eau haute (à chaîne) ¦ Bồn cầu két nước cao (có dây kéo) ¦ Kloset bertangki tinggi (dengan rantai)
+Armoire à pharmacie murale ¦ Tủ thuốc treo tường ¦ Kotak obat dinding
+Colonne lave-linge et sèche-linge ¦ Tháp máy giặt và máy sấy ¦ Susunan mesin cuci dan pengering
+Buanderie ¦ Phòng giặt ¦ Ruang cuci
+Planche à repasser et son fer ¦ Bàn là và bàn ủi ¦ Papan setrika dan setrikanya
+Bac à laver (évier de buanderie) ¦ Bồn giặt (bồn phòng giặt) ¦ Bak cuci (ruang cuci)
+Balai, seau et serpillière ¦ Chổi, xô và cây lau nhà ¦ Sapu, ember, dan kain pel
+Étagère à linge plié ¦ Kệ đồ vải đã gấp ¦ Rak linen terlipat
+Corbeille à linge en osier ¦ Giỏ mây đựng đồ giặt ¦ Keranjang cucian rotan
+Séchoir à linge (accordéon) ¦ Giá phơi đồ (gấp xếp) ¦ Jemuran lipat
+Aspirateur traîneau ¦ Máy hút bụi có thân kéo ¦ Penyedot debu tabung
+Aspirateur balai ¦ Máy hút bụi cây ¦ Penyedot debu tongkat
+Essoreuse à rouleaux (ancienne) ¦ Máy vắt trục lăn (cũ) ¦ Pemeras rol (lama)
+Machine à laver à manivelle (ancienne) ¦ Máy giặt quay tay (cũ) ¦ Mesin cuci engkol (lama)
+Patère murale et manteaux ¦ Móc treo tường và áo khoác ¦ Kait dinding dan mantel
+Vestiaire d’entrée à miroir (ancien) ¦ Giá treo lối vào có gương (cũ) ¦ Gantungan lorong bercermin (lama)
+Banc à chaussures ¦ Ghế để giày ¦ Bangku sepatu
+Console et miroir d’entrée ¦ Bàn console và gương lối vào ¦ Meja konsol dan cermin lorong
+Paillasson ¦ Thảm chùi chân ¦ Keset
+Boîte à clés murale ¦ Hộp chìa khoá treo tường ¦ Kotak kunci dinding
+Boîte aux lettres sur pied ¦ Hộp thư có chân ¦ Kotak surat berdiri
+Ordinateur portable ¦ Máy tính xách tay ¦ Laptop
+Ordinateur de bureau (écran, tour, clavier) ¦ Máy tính để bàn (màn hình, thùng máy, bàn phím) ¦ Komputer desktop (layar, CPU, papan ketik)
+Minitel ¦ Minitel ¦ Minitel
+Téléphone à cadran ¦ Điện thoại quay số ¦ Telepon putar
+Échelle de bibliothèque ¦ Thang thư viện ¦ Tangga perpustakaan
+Tableau en liège (pense-bête) ¦ Bảng bần (ghi nhớ) ¦ Papan gabus (catatan)
+Corbeille à papier ¦ Giỏ rác giấy ¦ Keranjang sampah kertas
+Bureau assis-debout ¦ Bàn ngồi-đứng ¦ Meja duduk-berdiri
+Rayonnage d’archives (généalogie) ¦ Kệ lưu trữ (gia phả) ¦ Rak arsip (silsilah)
+Circuit de train électrique ¦ Đường ray tàu điện mô hình ¦ Rangkaian kereta listrik mainan
+Cubes empilés ¦ Khối xếp chồng ¦ Balok bertumpuk
+Tricycle ¦ Xe ba bánh ¦ Sepeda roda tiga
+Cuisine pour enfant (dînette) ¦ Bếp đồ chơi trẻ em ¦ Dapur mainan anak
+Théâtre de marionnettes (castelet) ¦ Sân khấu múa rối ¦ Panggung boneka
+Ballon ¦ Quả bóng ¦ Bola
+Trottinette ¦ Xe trượt scooter ¦ Skuter
+Baby-foot ¦ Bàn bi lắc ¦ Meja sepak bola
+Luge en bois ¦ Xe trượt tuyết bằng gỗ ¦ Kereta luncur kayu
+Lit de fer d’enfant ¦ Giường sắt trẻ em ¦ Tempat tidur besi anak
+Lampadaire à abat-jour ¦ Đèn cây có chụp ¦ Lampu berdiri berkap
+Luminaires ¦ Đèn chiếu sáng ¦ Pencahayaan
+Lampadaire arc ¦ Đèn cây hình vòm ¦ Lampu berdiri lengkung
+Lampadaire trépied ¦ Đèn cây ba chân ¦ Lampu berdiri tripod
+Lampe de salon (pied boule) ¦ Đèn phòng khách (chân hình cầu) ¦ Lampu meja (kaki bola)
+Lampe de banquier (verte) ¦ Đèn ngân hàng (xanh lá) ¦ Lampu bankir (hijau)
+Lampe d’architecte ¦ Đèn kiến trúc sư ¦ Lampu arsitek
+Suspension de cuisine ¦ Đèn treo nhà bếp ¦ Lampu gantung dapur
+Suspension à trois globes ¦ Đèn treo ba bóng tròn ¦ Lampu gantung tiga bola
+Lustre à pampilles ¦ Đèn chùm pha lê ¦ Lampu gantung kristal berjuntai
+Suspension boule en papier ¦ Đèn lồng giấy tròn ¦ Kap lampu bola kertas
+Applique murale ¦ Đèn tường ¦ Lampu dinding
+Rail de spots ¦ Thanh ray đèn rọi ¦ Rel lampu sorot
+Lanterne ¦ Đèn lồng ¦ Lentera
+Bougies (groupe) ¦ Nến (nhóm) ¦ Lilin (kelompok)
+Guirlande lumineuse ¦ Dây đèn trang trí ¦ Lampu untai
+Lampe Tiffany (vitrail) ¦ Đèn Tiffany (kính màu) ¦ Lampu Tiffany (kaca patri)
+Lampe à lave ¦ Đèn dung nham ¦ Lampu lava
+Lampe champignon ¦ Đèn hình nấm ¦ Lampu jamur
+Réverbère (lampadaire de jardin) ¦ Đèn đường (đèn vườn) ¦ Lampu jalan (lampu taman)
+Lampe Pigeon ¦ Đèn Pigeon ¦ Lampu Pigeon
+Mur de cadres photo ¦ Tường khung ảnh ¦ Dinding bingkai foto
+Cadre photo à poser ¦ Khung ảnh để bàn ¦ Bingkai foto berdiri
+Tableau : paysage ¦ Tranh: phong cảnh ¦ Lukisan: pemandangan
+Tableau : marine ¦ Tranh: cảnh biển ¦ Lukisan: pemandangan laut
+Tableau abstrait ¦ Tranh trừu tượng ¦ Lukisan abstrak
+Tableau : nature morte ¦ Tranh: tĩnh vật ¦ Lukisan: alam benda
+Carte ancienne encadrée ¦ Bản đồ cổ đóng khung ¦ Peta kuno berbingkai
+Papillons encadrés ¦ Bướm đóng khung ¦ Kupu-kupu berbingkai
+Miroir rond ¦ Gương tròn ¦ Cermin bundar
+Miroir soleil ¦ Gương mặt trời ¦ Cermin matahari
+Grand miroir doré (trumeau) ¦ Gương lớn mạ vàng (trumeau) ¦ Cermin besar bersepuh emas (trumeau)
+Tapis persan ¦ Thảm Ba Tư ¦ Karpet Persia
+Tapis berbère ¦ Thảm Berber ¦ Karpet Berber
+Tapis kilim ¦ Thảm kilim ¦ Karpet kilim
+Tapis de couloir ¦ Thảm hành lang ¦ Karpet lorong
+Tapis à poils longs ¦ Thảm lông dài ¦ Karpet bulu panjang
+Rideaux sur tringle ¦ Rèm trên thanh treo ¦ Gorden pada rel
+Ficus en pot ¦ Cây đa trong chậu ¦ Ficus dalam pot
+Monstera (grandes feuilles) ¦ Cây trầu bà lá xẻ (lá to) ¦ Monstera (daun besar)
+Cactus en pot ¦ Xương rồng trong chậu ¦ Kaktus dalam pot
+Palmier d’intérieur (kentia) ¦ Cây cọ trong nhà (kentia) ¦ Palem dalam ruangan (kentia)
+Bambou en bac ¦ Tre trong bồn ¦ Bambu dalam pot besar
+Orchidée ¦ Hoa lan ¦ Anggrek
+Fougère en pot ¦ Dương xỉ trong chậu ¦ Pakis dalam pot
+Grand vase de sol (branches) ¦ Bình hoa lớn đặt sàn (cành) ¦ Vas lantai besar (ranting)
+Horloge murale ¦ Đồng hồ treo tường ¦ Jam dinding
+Horloge à coucou ¦ Đồng hồ cúc cu ¦ Jam kukuk
+Horloge œil-de-bœuf ¦ Đồng hồ mắt bò ¦ Jam mata sapi
+Sculpture moderne sur socle ¦ Tượng hiện đại trên bệ ¦ Patung modern di atas alas
+Maquette de voilier ¦ Mô hình thuyền buồm ¦ Model kapal layar
+Coupe, trophée ¦ Cúp, chiến lợi phẩm ¦ Piala, trofi
+Bocal à poisson rouge ¦ Bể cá vàng ¦ Akuarium ikan mas
+Réfrigérateur rétro (années 50) ¦ Tủ lạnh cổ điển (thập niên 50) ¦ Kulkas retro (tahun 50-an)
+Électroménager ¦ Đồ điện gia dụng ¦ Peralatan rumah tangga
+Réfrigérateur combiné moderne ¦ Tủ lạnh kết hợp hiện đại ¦ Kulkas-freezer modern
+Congélateur armoire ¦ Tủ đông đứng ¦ Freezer tegak
+Cave à vin réfrigérée ¦ Tủ ướp rượu vang ¦ Kulkas anggur
+Grille-pain ¦ Máy nướng bánh mì ¦ Pemanggang roti
+Bouilloire ¦ Ấm đun nước ¦ Ketel listrik
+Machine à café expresso ¦ Máy pha cà phê espresso ¦ Mesin espreso
+Robot pâtissier ¦ Máy trộn bột ¦ Mixer berdiri
+Téléviseur des années 60 (à pieds) ¦ Ti vi thập niên 60 (có chân) ¦ Televisi tahun 60-an (berkaki)
+Chaîne hi-fi et enceintes ¦ Dàn âm thanh hi-fi và loa ¦ Sistem hi-fi dan pengeras suara
+Enceinte colonne ¦ Loa đứng ¦ Pengeras suara berdiri
+Platine vinyle ¦ Máy quay đĩa than ¦ Pemutar piringan hitam
+Radiocassette (années 80) ¦ Máy radio cassette (thập niên 80) ¦ Radio kaset (tahun 80-an)
+Console de jeux et manettes ¦ Máy chơi game và tay cầm ¦ Konsol game dan stik
+Ventilateur sur pied ¦ Quạt cây ¦ Kipas angin berdiri
+Radiateur bain d’huile ¦ Máy sưởi dầu ¦ Radiator minyak
+Poêle à pétrole ¦ Lò sưởi dầu hoả ¦ Pemanas minyak tanah
+Aspirateur robot ¦ Robot hút bụi ¦ Robot penyedot debu
+Climatiseur mural ¦ Máy điều hoà treo tường ¦ AC dinding
+Guitare sur son support ¦ Đàn guitar trên giá ¦ Gitar di atas penyangganya
+Musique ¦ Âm nhạc ¦ Musik
+Guitare électrique et ampli ¦ Guitar điện và ampli ¦ Gitar listrik dan ampli
+Violon sur son support ¦ Đàn violon trên giá ¦ Biola di atas penyangganya
+Violoncelle ¦ Đàn cello ¦ Selo
+Contrebasse ¦ Đàn contrebasse ¦ Kontrabas
+Harpe ¦ Đàn hạc ¦ Harpa
+Batterie ¦ Bộ trống ¦ Set drum
+Clavier électronique sur pied ¦ Đàn phím điện tử trên giá ¦ Keyboard di atas penyangga
+Pupitre à musique ¦ Giá nhạc ¦ Stan partitur
+Tuba ¦ Kèn tuba ¦ Tuba
+Djembé ¦ Trống djembe ¦ Djembe
+Clavecin ¦ Đàn clavecin ¦ Harpsikord
+Vielle à roue ¦ Đàn quay tay ¦ Hurdy-gurdy
+Juke-box ¦ Máy hát tự động ¦ Jukebox
+Orgue de Barbarie ¦ Đàn organ quay tay ¦ Organ putar
+Moto ¦ Xe máy ¦ Sepeda motor
+Garage ¦ Nhà để xe ¦ Garasi
+Mobylette (cyclomoteur) ¦ Xe gắn máy ¦ Moped
+Servante d’atelier ¦ Xe đẩy dụng cụ ¦ Troli perkakas
+Établi et panneau à outils ¦ Bàn thợ và bảng treo dụng cụ ¦ Meja kerja dan papan perkakas
+Rayonnage métallique et caisses ¦ Kệ kim loại và thùng ¦ Rak logam dan peti
+Perceuse à colonne ¦ Máy khoan đứng ¦ Bor duduk
+Scie sur table ¦ Máy cưa bàn ¦ Gergaji meja
+Jerrican ¦ Can đựng xăng ¦ Jeriken
+Pile de pneus ¦ Chồng lốp xe ¦ Tumpukan ban
+Escabeau ¦ Thang gấp ¦ Tangga lipat
+Remorque ¦ Rơ-moóc ¦ Trailer gandeng
+Kayak ¦ Thuyền kayak ¦ Kayak
+Table de ping-pong ¦ Bàn bóng bàn ¦ Meja pingpong
+Tondeuse à gazon ¦ Máy cắt cỏ ¦ Mesin pemotong rumput
+Tracteur tondeuse ¦ Máy cắt cỏ ngồi lái ¦ Traktor pemotong rumput
+Trampoline ¦ Bạt nhún ¦ Trampolin
+Piscine hors-sol ¦ Bể bơi nổi ¦ Kolam renang di atas tanah
+Piscine creusée ¦ Bể bơi âm sàn ¦ Kolam renang galian
+Spa (jacuzzi) ¦ Bồn sục (jacuzzi) ¦ Bak air panas (jacuzzi)
+Hamac sur support ¦ Võng có giá đỡ ¦ Hammock dengan penyangga
+Balancelle de jardin ¦ Xích đu ghế vườn ¦ Ayunan kursi taman
+Kiosque, gloriette ¦ Chòi nghỉ, vọng lâu ¦ Gazebo
+Salon de jardin bistrot ¦ Bộ bàn ghế vườn kiểu quán ¦ Set taman bistro
+Barbecue boule ¦ Bếp nướng hình cầu ¦ Panggangan bola
+Brasero ¦ Lò lửa ngoài trời ¦ Tungku api
+Bac à sable ¦ Hố cát ¦ Bak pasir
+Nichoir sur poteau ¦ Hộp tổ chim trên cột ¦ Rumah burung di atas tiang
+Composteur ¦ Thùng ủ phân ¦ Tong kompos
+Récupérateur d’eau de pluie ¦ Thùng hứng nước mưa ¦ Tong penampung air hujan
+Nain de jardin ¦ Tượng chú lùn trong vườn ¦ Kurcaci taman
+Cadran solaire ¦ Đồng hồ mặt trời ¦ Jam matahari
+Pots de fleurs ¦ Chậu hoa ¦ Pot bunga
+Olivier en pot ¦ Cây ô liu trong chậu ¦ Pohon zaitun dalam pot
+Carré potager surélevé ¦ Luống rau nâng cao ¦ Bedengan sayur tinggi
+Dévidoir à tuyau d’arrosage ¦ Cuộn ống tưới ¦ Penggulung selang
+Arrosoir ¦ Bình tưới ¦ Gembor
+Étendoir parapluie ¦ Giá phơi hình ô ¦ Jemuran putar
+Petit pont de jardin ¦ Cầu nhỏ trong vườn ¦ Jembatan taman kecil
+Mât et drapeau ¦ Cột cờ và lá cờ ¦ Tiang dan bendera
+Roue de charrette (décor) ¦ Bánh xe bò (trang trí) ¦ Roda gerobak (hiasan)
+Tarare (vanneuse à grain) ¦ Quạt rê thóc ¦ Mesin penampi
+Égrenoir à maïs ¦ Máy tẽ ngô ¦ Pemipil jagung
+Hache-paille ¦ Máy thái rơm ¦ Pencacah jerami
+Selle sur chevalet ¦ Yên ngựa trên giá ¦ Pelana di atas penyangga
+Faucheuse à cheval ¦ Máy cắt cỏ do ngựa kéo ¦ Mesin pemotong ditarik kuda
+Rouleau agricole en pierre ¦ Trục lăn đồng bằng đá ¦ Penggilas ladang dari batu
+Palanche et ses deux seaux ¦ Đòn gánh và hai thùng ¦ Pikulan dan dua embernya
+Tonneaux sur leur chantier ¦ Thùng rượu trên giá ¦ Tong-tong di atas raknya
+Tabouret de traite et seau ¦ Ghế vắt sữa và xô ¦ Bangku perah dan ember
+Sacs de grain ¦ Bao thóc ¦ Karung biji-bijian
+Éolienne de pompage (ancienne) ¦ Cối xay gió bơm nước (cũ) ¦ Kincir angin pompa (lama)
+Pigeonnier ¦ Chuồng bồ câu ¦ Rumah merpati
+Épouvantail ¦ Bù nhìn ¦ Orang-orangan sawah
+Encoignure (meuble d’angle) ¦ Tủ góc ¦ Lemari sudut
+Placard à portes coulissantes ¦ Tủ âm tường cửa trượt ¦ Lemari pintu geser
+Étagère à chaussures ¦ Kệ giày ¦ Rak sepatu
+Coin des icônes (« beau coin » orthodoxe) ¦ Góc ảnh thánh (“góc đẹp” Chính Thống giáo) ¦ Pojok ikon (“pojok indah” Ortodoks)
+Veilleuse d’icône (lampada) ¦ Đèn thờ ảnh thánh (lampada) ¦ Lampu ikon (lampada)
+Croix orthodoxe murale ¦ Thánh giá Chính Thống giáo treo tường ¦ Salib Ortodoks di dinding
+Croix murale sans Christ (protestante) ¦ Thánh giá treo tường không có tượng Chúa (Tin Lành) ¦ Salib dinding polos (Protestan)
+Grande Bible ouverte sur pupitre ¦ Kinh Thánh lớn mở trên giá đọc ¦ Alkitab besar terbuka di atas mimbar baca
+Image du Sacré-Cœur encadrée ¦ Ảnh Thánh Tâm đóng khung ¦ Gambar Hati Kudus berbingkai
+Ex-voto (plaque de remerciement) ¦ Ex-voto (tấm bảng tạ ơn) ¦ Ex-voto (plakat ucapan syukur)
+Couronne de l’Avent ¦ Vòng hoa Mùa Vọng ¦ Karangan Adven
+Crèche de Noël ¦ Hang đá Giáng sinh ¦ Kandang Natal
+Chapelet accroché (rosaire) ¦ Chuỗi Mân Côi treo ¦ Rosario tergantung
+Ménorah (chandelier à sept branches) ¦ Menorah (chân nến bảy nhánh) ¦ Menora (kandil tujuh cabang)
+Hanoukia (chandelier à neuf branches) ¦ Hanukkiah (chân nến chín nhánh) ¦ Hanukia (kandil sembilan cabang)
+Chandeliers de shabbat (paire) ¦ Chân nến ngày Sabát (một đôi) ¦ Kandil Sabat (sepasang)
+Mézouza (au montant de la porte) ¦ Mezuzah (trên khung cửa) ¦ Mezuzah (di kusen pintu)
+Étoile de David murale ¦ Ngôi sao David treo tường ¦ Bintang Daud di dinding
+Mizrah (plaque tournée vers Jérusalem) ¦ Mizrach (tấm bảng hướng về Jerusalem) ¦ Mizrach (plakat menghadap Yerusalem)
+Armoire de la Torah (aron, avec son rideau) ¦ Tủ Torah (aron, có rèm) ¦ Lemari Taurat (aron, dengan tirainya)
+Pupitre de lecture (bimah) ¦ Bàn đọc kinh (bimah) ¦ Meja baca (bimah)
+Coupe de kiddouch et plateau ¦ Chén kiddush và khay ¦ Cawan kidus dan nampan
+Plat du séder (Pessah) ¦ Đĩa lễ seder (Lễ Vượt Qua) ¦ Piring seder (Paskah Yahudi)
+Châle de prière (talit) sur son cintre ¦ Khăn choàng cầu nguyện (tallit) trên móc ¦ Selendang doa (talit) di gantungannya
+Tirelire de tsedaka ¦ Hộp quyên góp tzedakah ¦ Celengan tzedakah
+Tapis de prière ¦ Thảm cầu nguyện ¦ Sajadah
+Porte-Coran pliant (rahle) ¦ Giá gấp để kinh Qur'an (rahle) ¦ Rehal lipat (rahle)
+Croissant et étoile muraux ¦ Trăng lưỡi liềm và ngôi sao treo tường ¦ Bulan sabit dan bintang di dinding
+Calligraphie encadrée (Bismillah) ¦ Thư pháp đóng khung (Bismillah) ¦ Kaligrafi berbingkai (Bismillah)
+Chapelet (misbaha) sur sa coupelle ¦ Chuỗi hạt (misbaha) trên đĩa nhỏ ¦ Tasbih (misbaha) di cawan kecil
+Lanterne du ramadan (fanous) ¦ Đèn lồng tháng Ramadan (fanous) ¦ Lentera Ramadan (fanous)
+Niche de prière murale (mihrab décoratif) ¦ Hốc cầu nguyện treo tường (mihrab trang trí) ¦ Ceruk salat di dinding (mihrab hiasan)
+Coran sur l’étagère du haut ¦ Kinh Qur'an trên kệ trên cùng ¦ Al-Qur'an di rak paling atas
+Brûleur d’encens (mabkhara) ¦ Lư đốt trầm (mabkhara) ¦ Pembakar dupa (mabkhara)
+Bouddha assis ¦ Tượng Phật ngồi ¦ Buddha duduk
+Grand Bouddha de jardin ¦ Tượng Phật lớn ngoài vườn ¦ Buddha taman besar
+Autel bouddhique (butsudan) ¦ Bàn thờ Phật (butsudan) ¦ Altar Buddha (butsudan)
+Stupa miniature (chorten) ¦ Bảo tháp thu nhỏ (chorten) ¦ Stupa mini (chorten)
+Moulin à prières ¦ Kinh luân ¦ Roda doa
+Drapeaux de prière (guirlande) ¦ Cờ cầu nguyện (dây) ¦ Bendera doa (untaian)
+Thangka (peinture sur rouleau) ¦ Thangka (tranh cuộn) ¦ Thangka (lukisan gulung)
+Roue du dharma murale ¦ Bánh xe Pháp luân treo tường ¦ Roda dharma di dinding
+Bol chantant sur coussin ¦ Chuông xoay trên gối ¦ Mangkuk bernyanyi di atas bantal
+Gong sur portique ¦ Cồng trên giá ¦ Gong di atas penyangga
+Coussin de méditation (zafu et zabuton) ¦ Gối thiền (zafu và zabuton) ¦ Bantal meditasi (zafu dan zabuton)
+Brûle-parfum et bâtons d’encens ¦ Lư hương và nhang ¦ Tempat dupa dan batang dupa
+Temple de maison (mandir) ¦ Điện thờ tại gia (mandir) ¦ Pura rumah (mandir)
+Statue de Ganesh ¦ Tượng Ganesh ¦ Patung Ganesha
+Nataraja (Shiva dansant) ¦ Nataraja (Shiva nhảy múa) ¦ Nataraja (Siwa menari)
+Om mural ¦ Chữ Om treo tường ¦ Simbol Om di dinding
+Lampe à huile (diya) ¦ Đèn dầu (diya) ¦ Pelita (diya)
+Pot de tulsi (basilic sacré) ¦ Chậu tulsi (húng thiêng) ¦ Pot tulsi (kemangi suci)
+Rangoli (motif coloré au sol) ¦ Rangoli (hoa văn màu trên sàn) ¦ Rangoli (pola warna di lantai)
+Cloche de puja ¦ Chuông lễ puja ¦ Lonceng puja
+Guirlande de fleurs (œillets d’Inde) ¦ Vòng hoa (cúc vạn thọ) ¦ Kalung bunga (marigold)
+Khanda mural ¦ Biểu tượng Khanda treo tường ¦ Khanda di dinding
+Palki Sahib (dais du Guru Granth Sahib) ¦ Palki Sahib (lọng che Guru Granth Sahib) ¦ Palki Sahib (kanopi Guru Granth Sahib)
+Manji Sahib (petit lit du livre saint) ¦ Manji Sahib (giường nhỏ của sách thánh) ¦ Manji Sahib (ranjang kecil kitab suci)
+Kamidana (autel shinto mural) ¦ Kamidana (bàn thờ Thần đạo treo tường) ¦ Kamidana (altar Shinto dinding)
+Torii de jardin ¦ Cổng torii trong vườn ¦ Torii taman
+Lanterne de pierre (tōrō) ¦ Đèn lồng đá (tōrō) ¦ Lentera batu (tōrō)
+Corde sacrée (shimenawa) ¦ Dây thiêng (shimenawa) ¦ Tali suci (shimenawa)
+Autel des ancêtres ¦ Bàn thờ tổ tiên ¦ Altar leluhur
+Tablettes des ancêtres ¦ Bài vị tổ tiên ¦ Papan arwah leluhur
+Brûle-parfum tripode (bronze) ¦ Lư hương ba chân (đồng) ¦ Pedupaan berkaki tiga (perunggu)
+Yin et yang mural ¦ Âm dương treo tường ¦ Yin dan yang di dinding
+Lanterne rouge en papier ¦ Đèn lồng giấy đỏ ¦ Lampion kertas merah
+Vase à feu sacré (afrinagan) ¦ Bình lửa thiêng (afrinagan) ¦ Bejana api suci (afrinagan)
+Coin mémoire (photo, bougie, fleurs) ¦ Góc tưởng nhớ (ảnh, nến, hoa) ¦ Pojok kenangan (foto, lilin, bunga)
+Urne funéraire ¦ Hũ tro cốt ¦ Guci abu jenazah
+Cadre de deuil (photo et ruban noir) ¦ Khung tang (ảnh và dải băng đen) ¦ Bingkai duka (foto dan pita hitam)
+Bougie du souvenir ¦ Nến tưởng niệm ¦ Lilin kenangan
+Boîte à lettres d’amour (correspondance) ¦ Hộp thư tình (thư từ) ¦ Kotak surat cinta (korespondensi)
+Vitrine à médailles et souvenirs militaires ¦ Tủ kính huân chương và kỷ vật quân đội ¦ Lemari pajang medali dan kenang-kenangan militer
+Lave-linge à hublot ¦ Máy giặt cửa trước ¦ Mesin cuci bukaan depan
+Lave-linge à ouverture par le dessus ¦ Máy giặt cửa trên ¦ Mesin cuci bukaan atas
+Lave-vaisselle compact (à poser) ¦ Máy rửa bát mini (để bàn) ¦ Mesin cuci piring ringkas (di atas meja)
+Four à micro-ondes ¦ Lò vi sóng ¦ Oven microwave
+Mini-four ¦ Lò nướng mini ¦ Oven mini
+Four encastrable sous le plan ¦ Lò nướng âm dưới mặt bàn ¦ Oven tanam di bawah meja
+Plaque à induction ¦ Bếp từ ¦ Kompor induksi
+Table de cuisson au gaz (4 feux) ¦ Bếp ga (4 bếp) ¦ Kompor gas (4 tungku)
+Plancha électrique ¦ Vỉ nướng điện ¦ Plancha listrik
+Appareil à raclette ¦ Máy nướng raclette ¦ Pemanggang raclette
+Hotte aspirante murale ¦ Máy hút mùi treo tường ¦ Tudung asap dinding
+Hotte îlot (suspendue) ¦ Máy hút mùi đảo (treo) ¦ Tudung asap pulau (gantung)
+Cuiseur à riz ¦ Nồi cơm điện ¦ Penanak nasi
+Mijoteuse ¦ Nồi nấu chậm ¦ Slow cooker
+Autocuiseur (cocotte-minute) ¦ Nồi áp suất ¦ Panci presto
+Friteuse ¦ Nồi chiên ngập dầu ¦ Penggoreng listrik
+Friteuse sans huile ¦ Nồi chiên không dầu ¦ Air fryer
+Machine à pain ¦ Máy làm bánh mì ¦ Mesin pembuat roti
+Gaufrier ¦ Khuôn nướng bánh quế ¦ Cetakan wafel
+Blender ¦ Máy xay sinh tố ¦ Blender
+Centrifugeuse (presse-fruits) ¦ Máy ép trái cây ¦ Juicer
+Robot multifonction ¦ Máy chế biến thực phẩm đa năng ¦ Food processor
+Cafetière à filtre ¦ Máy pha cà phê phin lọc ¦ Mesin kopi saring
+Machine à café à capsules ¦ Máy pha cà phê viên nén ¦ Mesin kopi kapsul
+Bouilloire émaillée ¦ Ấm đun nước tráng men ¦ Ketel berenamel
+Mini-réfrigérateur ¦ Tủ lạnh mini ¦ Kulkas mini
+Téléviseur écran plat sur pied ¦ Ti vi màn hình phẳng có chân ¦ TV layar datar berkaki
+Grand téléviseur au mur ¦ Ti vi lớn treo tường ¦ TV besar di dinding
+Écran de projection ¦ Màn chiếu ¦ Layar proyeksi
+Vidéoprojecteur ¦ Máy chiếu ¦ Proyektor
+Barre de son ¦ Loa thanh ¦ Soundbar
+Magnétoscope (VHS) ¦ Đầu video (VHS) ¦ Perekam video (VHS)
+Lecteur DVD / Blu-ray ¦ Đầu DVD / Blu-ray ¦ Pemutar DVD / Blu-ray
+Box internet ¦ Bộ phát internet ¦ Router internet
+Poste de radio TSF ¦ Máy radio TSF ¦ Pesawat radio TSF
+Transistor ¦ Đài bán dẫn ¦ Radio transistor
+Téléphone sans fil et sa base ¦ Điện thoại không dây và đế ¦ Telepon nirkabel dan dudukannya
+Nettoyeur vapeur (balai) ¦ Cây lau nhà hơi nước ¦ Pel uap
+Centrale vapeur ¦ Bàn là hơi nước có bình ¦ Setrika uap bertangki
+Déshumidificateur ¦ Máy hút ẩm ¦ Penurun kelembapan
+Purificateur d’air ¦ Máy lọc không khí ¦ Pemurni udara
+Ventilateur colonne ¦ Quạt tháp ¦ Kipas menara
+Chauffe-eau (ballon d’eau chaude) ¦ Bình nước nóng ¦ Tabung air panas
+Chaudière murale ¦ Nồi hơi treo tường ¦ Ketel pemanas dinding
+Radiateur électrique mural ¦ Máy sưởi điện treo tường ¦ Pemanas listrik dinding
+Machine à coudre électrique ¦ Máy may điện ¦ Mesin jahit listrik
+Fauteuil de bureau à roulettes ¦ Ghế văn phòng có bánh xe ¦ Kursi kantor beroda
+Siège ergonomique (dossier filet) ¦ Ghế công thái học (lưng lưới) ¦ Kursi ergonomis (sandaran jaring)
+Fauteuil de direction en cuir ¦ Ghế giám đốc bọc da ¦ Kursi direktur kulit
+Bureau informatique ¦ Bàn máy tính ¦ Meja komputer
+Grand bureau (plateau 180 cm) ¦ Bàn làm việc lớn (mặt 180 cm) ¦ Meja kerja besar (permukaan 180 cm)
+Table à dessin inclinable ¦ Bàn vẽ nghiêng được ¦ Meja gambar miring
+Caisson à tiroirs à roulettes ¦ Tủ ngăn kéo có bánh xe ¦ Unit laci beroda
+Classeur métallique à tiroirs ¦ Tủ hồ sơ kim loại có ngăn kéo ¦ Lemari arsip logam berlaci
+Armoire à rideaux ¦ Tủ cửa cuốn ¦ Lemari pintu gulung
+Meuble à plans ¦ Tủ đựng bản vẽ ¦ Lemari gambar
+Fichier à fiches en bois ¦ Hộp phiếu bằng gỗ ¦ Kotak indeks kartu kayu
+Étagère de classeurs ¦ Kệ đựng bìa hồ sơ ¦ Rak map
+Imprimante ¦ Máy in ¦ Printer
+Imprimante multifonction (scanner) ¦ Máy in đa năng (máy quét) ¦ Printer multifungsi (pemindai)
+Photocopieur ¦ Máy photocopy ¦ Mesin fotokopi
+Scanner à plat ¦ Máy quét phẳng ¦ Pemindai datar
+Écran d’ordinateur ¦ Màn hình máy tính ¦ Monitor komputer
+Deux écrans côte à côte ¦ Hai màn hình cạnh nhau ¦ Dua layar berdampingan
+Ordinateur tout-en-un ¦ Máy tính tất cả trong một ¦ Komputer all-in-one
+Globe sur pied ¦ Quả địa cầu có chân ¦ Bola dunia berdiri
+Tableau blanc ¦ Bảng trắng ¦ Papan tulis putih
+Destructeur de documents ¦ Máy huỷ tài liệu ¦ Penghancur kertas
+Trieur à courrier ¦ Khay phân loại thư ¦ Baki surat
+Plante de bureau ¦ Cây để bàn ¦ Tanaman meja
+Lampe de bureau LED ¦ Đèn bàn LED ¦ Lampu meja LED
+Repose-pieds de bureau ¦ Kê chân bàn làm việc ¦ Sandaran kaki meja kerja
+Fontaine à eau ¦ Cây nước nóng lạnh ¦ Dispenser air
+Voiture citadine ¦ Xe ô tô nhỏ đô thị ¦ Mobil kota
+Voiture familiale (break) ¦ Xe gia đình (station wagon) ¦ Mobil keluarga (station wagon)
+Camionnette ¦ Xe tải nhỏ ¦ Mobil van
+2 CV ¦ 2 CV ¦ 2 CV
+Renault 4 L ¦ Renault 4 L ¦ Renault 4 L
+Traction avant ¦ Traction Avant ¦ Traction Avant
+Caravane ¦ Nhà lưu động kéo theo ¦ Karavan
+Vélo ¦ Xe đạp ¦ Sepeda
+Vélo électrique ¦ Xe đạp điện ¦ Sepeda listrik
+Vélo d’enfant ¦ Xe đạp trẻ em ¦ Sepeda anak
+Vélo ancien (de facteur) ¦ Xe đạp cũ (của người đưa thư) ¦ Sepeda lama (tukang pos)
+Râtelier à vélos ¦ Giá để xe đạp ¦ Rak sepeda
+Scooter ¦ Xe tay ga ¦ Skuter motor
+Panneau à outils mural ¦ Bảng treo dụng cụ trên tường ¦ Papan perkakas dinding
+Armoire métallique d’atelier ¦ Tủ kim loại xưởng ¦ Lemari logam bengkel
+Étagère de garage en bois ¦ Kệ gỗ trong nhà để xe ¦ Rak kayu garasi
+Établi pliant ¦ Bàn thợ gấp được ¦ Meja kerja lipat
+Scie à onglet ¦ Máy cưa góc ¦ Gergaji potong miring
+Poste à souder ¦ Máy hàn ¦ Mesin las
+Nettoyeur haute pression ¦ Máy rửa áp lực cao ¦ Mesin cuci bertekanan tinggi
+Groupe électrogène ¦ Máy phát điện ¦ Genset
+Aspirateur d’atelier ¦ Máy hút bụi xưởng ¦ Penyedot debu bengkel
+Cric rouleur ¦ Kích cá sấu ¦ Dongkrak buaya
+Borne de recharge (voiture électrique) ¦ Trạm sạc (xe điện) ¦ Stasiun pengisian (mobil listrik)
+Échelle d’appui ¦ Thang dựa ¦ Tangga sandar
+Réfrigérateur de garage ¦ Tủ lạnh nhà để xe ¦ Kulkas garasi
+Congélateur coffre de garage ¦ Tủ đông nằm trong nhà để xe ¦ Freezer peti garasi
+Poubelles de tri (conteneurs) ¦ Thùng rác phân loại ¦ Tempat sampah pilah
+Canoë ¦ Xuồng canoe ¦ Kano
+Planche de surf ¦ Ván lướt sóng ¦ Papan selancar
+Réglette d’atelier ¦ Đèn tuýp xưởng ¦ Lampu batang bengkel
+Plafonnier rond ¦ Đèn ốp trần tròn ¦ Lampu plafon bundar
+Plafonnier Art déco ¦ Đèn ốp trần Art déco ¦ Lampu plafon Art Deco
+Dalle LED ¦ Tấm đèn LED ¦ Panel LED
+Lustre à bras ¦ Đèn chùm nhiều tay ¦ Lampu gantung bercabang
+Lustre en fer forgé (à bougies) ¦ Đèn chùm sắt rèn (cắm nến) ¦ Lampu gantung besi tempa (lilin)
+Lustre roue de charrette ¦ Đèn chùm bánh xe bò ¦ Lampu gantung roda gerobak
+Réglette lumineuse ¦ Thanh đèn ¦ Batang lampu
+Néon décoratif (enseigne) ¦ Đèn neon trang trí (biển hiệu) ¦ Neon dekoratif (papan nama)
+Bandeau LED ¦ Dải đèn LED ¦ Strip LED
+Lampadaire vasque (halogène) ¦ Đèn cây hắt trần (halogen) ¦ Lampu berdiri sorot atas (halogen)
+Lampadaire vasque Art déco ¦ Đèn cây hắt trần Art déco ¦ Lampu sorot atas Art Deco
+Lampadaire liseuse ¦ Đèn cây đọc sách ¦ Lampu berdiri baca
+Lampe à abat-jour plissé ¦ Đèn chụp xếp nếp ¦ Lampu berkap lipit
+Lampe globe en opaline ¦ Đèn cầu thuỷ tinh mờ ¦ Lampu bola opalin
+Lampe de sel ¦ Đèn đá muối ¦ Lampu garam
+Veilleuse d’enfant ¦ Đèn ngủ trẻ em ¦ Lampu tidur anak
+Lampe de lecture articulée ¦ Đèn đọc sách có khớp ¦ Lampu baca berengsel
+Lampe à carbure (de mineur) ¦ Đèn đất đèn (của thợ mỏ) ¦ Lampu karbit (penambang)
+Bougeoir à main ¦ Chân nến cầm tay ¦ Kandil genggam
+Applique double ¦ Đèn tường đôi ¦ Lampu dinding ganda
+Applique de salle de bain ¦ Đèn tường phòng tắm ¦ Lampu dinding kamar mandi
+Suspension industrielle ¦ Đèn treo công nghiệp ¦ Lampu gantung industrial
+Ampoule nue (filament) ¦ Bóng đèn trần (dây tóc) ¦ Bohlam polos (filamen)
+Suspension en rotin ¦ Đèn treo bằng mây ¦ Lampu gantung rotan
+Boule à facettes ¦ Quả cầu disco ¦ Bola disko
+Projecteur extérieur ¦ Đèn pha ngoài trời ¦ Lampu sorot luar ruangan
+Borne lumineuse de jardin ¦ Đèn trụ sân vườn ¦ Lampu tiang taman
+Balise solaire de jardin ¦ Đèn năng lượng mặt trời sân vườn ¦ Lampu taman tenaga surya
+maison|Genre ¦ Loại ¦ Jenis
+maison|Avant ¦ Phía trước ¦ Depan
+maison|Poser ¦ Đặt ¦ Taruh
+maison|Angles ¦ Góc ¦ Sudut
+maison|Écurie ¦ Chuồng ngựa ¦ Kandang kuda
+maison|Croix ¦ Thập tự ¦ Salib
+couleur|aucune ¦ không có ¦ tidak ada

@@ -1,0 +1,1013 @@
+fr ¦ vi ¦ id
+TABLEUR · BASE ¦ BẢNG TÍNH · CƠ SỞ DỮ LIỆU ¦ SPREADSHEET · BASIS DATA
+⤒ Remplir depuis l’app ¦ ⤒ Điền từ ứng dụng ¦ ⤒ Isi dari aplikasi
+1 · Ce qu’on prend ¦ 1 · Lấy những gì ¦ 1 · Yang diambil
+(comme l’export pour partager) ¦ (giống bản xuất để chia sẻ) ¦ (seperti ekspor untuk berbagi)
+2 · Les colonnes ¦ 2 · Các cột ¦ 2 · Kolom
+(glisse ⠿ pour ranger) ¦ (kéo ⠿ để sắp xếp) ¦ (seret ⠿ untuk mengatur)
+＋ Une colonne tirée des données ¦ ＋ Một cột lấy từ dữ liệu ¦ ＋ Kolom dari data
+3 · Aperçu ¦ 3 · Xem trước ¦ 3 · Pratinjau
+🔗 Tenir à jour ¦ 🔗 Luôn cập nhật ¦ 🔗 Selalu perbarui
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — các dòng thay đổi khi cơ sở dữ liệu thay đổi (khi mở, hoặc bằng ↻). Các cột bạn thêm bên phải (công thức, ghi chú) vẫn ở đúng dòng. ¦ — baris berubah saat basis data berubah (saat dibuka, atau dengan ↻). Kolom yang kamu tambahkan di kanan (rumus, catatan) tetap di baris yang benar.
+Où : ¦ Ở đâu: ¦ Di mana:
+à la même place (remplace la plage liée) ¦ ở cùng chỗ (thay thế vùng đã liên kết) ¦ di tempat yang sama (mengganti rentang yang terhubung)
+à partir de A1 dans une nouvelle feuille ¦ bắt đầu từ A1 trong một trang tính mới ¦ mulai dari A1 di lembar baru
+à partir de {cell} dans cette feuille ¦ bắt đầu từ {cell} trong trang tính này ¦ mulai dari {cell} di lembar ini
+⤒ Remplir ¦ ⤒ Điền ¦ ⤒ Isi
+Commune ¦ Xã ¦ Kota
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Chưa có bảng trích lục nào: Danh sách → 📜 Bảng trích lục. ¦ Belum ada indeks catatan: Daftar → 📜 Indeks catatan.
+Statistique ¦ Thống kê ¦ Statistik
+Hommes et femmes à part ¦ Nam và nữ riêng ¦ Laki-laki dan perempuan terpisah
+Pas encore de liste à toi : Listes → Mes listes. ¦ Bạn chưa có danh sách riêng: Danh sách → Danh sách của tôi. ¦ Belum ada daftar milikmu: Daftar → Daftarku.
+Hommes ¦ Nam ¦ Laki-laki
+Femmes ¦ Nữ ¦ Perempuan
+Inconnu ¦ Không rõ ¦ Tidak diketahui
+Lignée ¦ Dòng dõi ¦ Garis keturunan
+Né(e) à ¦ Sinh tại ¦ Lahir di
+Nés à partir de ¦ Sinh từ ¦ Lahir sejak
+Nés jusqu’à ¦ Sinh đến ¦ Lahir sampai
+Nés avant ¦ Sinh trước ¦ Lahir sebelum
+Sorte ¦ Loại ¦ Jenis
+Chercher… (nom, prénom) ¦ Tìm… (họ, tên) ¦ Cari… (nama keluarga, nama depan)
+Chercher… (nom, sorte, lieu) ¦ Tìm… (tên, loại, địa điểm) ¦ Cari… (nama, jenis, tempat)
+👤 personne ¦ 👤 người ¦ 👤 orang
+📍 lieu ¦ 📍 địa điểm ¦ 📍 tempat
+📅 date d’acte ¦ 📅 ngày giấy tờ ¦ 📅 tanggal akta
+nombre ¦ số ¦ angka
+Monter ¦ Lên ¦ Naikkan
+Descendre ¦ Xuống ¦ Turunkan
+Retirer la colonne ¦ Gỡ cột ¦ Lepas kolom
+Aucune colonne : ajoute-en une. ¦ Không có cột nào: hãy thêm một cột. ¦ Tidak ada kolom: tambahkan satu.
+Lecture de la base… ¦ Đang đọc cơ sở dữ liệu… ¦ Membaca basis data…
+Lecture… ¦ Đang đọc… ¦ Membaca…
+({shown} premières lignes sur {n}) ¦ ({shown} dòng đầu trên {n}) ¦ ({shown} baris pertama dari {n})
+Rien ne correspond : change les filtres. ¦ Không có gì phù hợp: hãy đổi bộ lọc. ¦ Tidak ada yang cocok: ubah filternya.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} bị để riêng (người còn sống hoặc hồ sơ bảo mật). ¦ {n} disisihkan (orang yang masih hidup atau profil rahasia).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Chỉ lấy {n} dòng đầu tiên: hãy thu hẹp bộ lọc. ¦ Hanya {n} baris pertama yang diambil: persempit filternya.
+⤒ Remplir {n} ¦ ⤒ Điền {n} ¦ ⤒ Isi {n}
+Toutes les colonnes sont déjà là. ¦ Đã có đủ tất cả các cột. ¦ Semua kolom sudah ada.
+Une colonne tirée des données ¦ Một cột lấy từ dữ liệu ¦ Kolom dari data
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Trang tính này không liên kết với cơ sở dữ liệu: Dữ liệu → “⤒ Điền từ ứng dụng…”. ¦ Lembar ini tidak terhubung ke basis data: Data → “⤒ Isi dari aplikasi…”.
+Impossible de relire la base : {error} ¦ Không đọc lại được cơ sở dữ liệu: {error} ¦ Basis data tidak bisa dibaca ulang: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Đã cập nhật: không có gì thay đổi trong cơ sở dữ liệu. ¦ 🔗 Sudah terbaru: tidak ada yang berubah di basis data.
+{n} de plus ¦ thêm {n} ¦ {n} lebih banyak
+{n} de moins ¦ bớt {n} ¦ {n} lebih sedikit
+valeurs mises à jour ¦ giá trị đã cập nhật ¦ nilai diperbarui
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 Đã đọc lại “{name}”: {what} ({lost}) ¦ 🔗 “{name}” dibaca ulang: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 Đã đọc lại “{name}”: {what} ¦ 🔗 “{name}” dibaca ulang: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Bản chép điều tra dân số</b> · các cột của năm: ¦ <b>Salinan sensus</b> · kolom tahun itu:
+Année du recensement ¦ Năm điều tra dân số ¦ Tahun sensus
+📤 Envoyer vers la base… ¦ 📤 Gửi vào cơ sở dữ liệu… ¦ 📤 Kirim ke basis data…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Luôn cập nhật: <b>{what}</b> · {n} · đọc lại {when} ¦ 🔗 Selalu diperbarui: <b>{what}</b> · {n} · dibaca ulang {when}
+la base ¦ cơ sở dữ liệu ¦ basis data
+Relire depuis la base ¦ Đọc lại từ cơ sở dữ liệu ¦ Baca ulang dari basis data
+↻ Relire ¦ ↻ Đọc lại ¦ ↻ Baca ulang
+Changer la source ou les colonnes… ¦ Đổi nguồn hoặc các cột… ¦ Ubah sumber atau kolom…
+Envoyer vers la base… ¦ Gửi vào cơ sở dữ liệu… ¦ Kirim ke basis data…
+Ne plus tenir à jour (garder les valeurs) ¦ Ngừng cập nhật (giữ các giá trị) ¦ Berhenti memperbarui (simpan nilainya)
+« {name} » n’est plus tenue à jour ¦ “{name}” không còn được cập nhật ¦ “{name}” tidak lagi diperbarui
+Relevé : colonnes de {year} ¦ Bản chép: các cột của năm {year} ¦ Salinan: kolom tahun {year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Chế độ chỉ xem: không thể gửi gì vào cơ sở dữ liệu. ¦ Mode lihat saja: tidak ada yang bisa dikirim ke basis data.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Hãy chọn bảng cần gửi (dòng tiêu đề và các dòng của nó), rồi làm lại. ¦ Pilih tabel yang akan dikirim (baris judul dan barisnya), lalu coba lagi.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Gửi vào cơ sở dữ liệu — {name}, dòng {from} đến {to} ¦ 📤 Kirim ke basis data — {name}, baris {from} sampai {to}
+1. Les colonnes ¦ 1. Các cột ¦ 1. Kolom
+2. Voilà ce qui va entrer ¦ 2. Đây là những gì sẽ được đưa vào ¦ 2. Inilah yang akan masuk
+3. Envoyer ¦ 3. Gửi ¦ 3. Kirim
+Voir ce qui va entrer ¦ Xem những gì sẽ được đưa vào ¦ Lihat yang akan masuk
+Ce que ça crée : ¦ Những gì sẽ được tạo: ¦ Yang akan dibuat:
+Colonne ¦ Cột ¦ Kolom
+Exemple ¦ Ví dụ ¦ Contoh
+Va dans ¦ Đưa vào ¦ Masuk ke
+(sans titre) ¦ (không có tiêu đề) ¦ (tanpa judul)
+Champ pour la colonne {col} ¦ Trường cho cột {col} ¦ Kolom data untuk kolom {col}
+Colonnes : {list} ¦ Các cột: {list} ¦ Kolom: {list}
+aucune pour l’instant ¦ chưa có ¦ belum ada
+Déjà dans la base ¦ Đã có trong cơ sở dữ liệu ¦ Sudah ada di basis data
+Problème ¦ Vấn đề ¦ Masalah
+Laissée de côté ¦ Để riêng ¦ Disisihkan
+📤 Créer {n} ¦ 📤 Tạo {n} ¦ 📤 Buat {n}
+📤 Rien de nouveau ¦ 📤 Không có gì mới ¦ 📤 Tidak ada yang baru
+📤 Créer {n} et en relier {m} ¦ 📤 Tạo {n} và liên kết {m} ¦ 📤 Buat {n} dan hubungkan {m}
+📤 Relier {m} ¦ 📤 Liên kết {m} ¦ 📤 Hubungkan {m}
+📤 Envoyer ¦ 📤 Gửi ¦ 📤 Kirim
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Hãy chọn ít nhất một cột để gửi (ví dụ: tên). ¦ Pilih setidaknya satu kolom untuk dikirim (misalnya nama).
+Choisis au moins une colonne. ¦ Hãy chọn ít nhất một cột. ¦ Pilih setidaknya satu kolom.
+Donne l’année du recensement. ¦ Hãy nhập năm điều tra dân số. ¦ Isi tahun sensus.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Cần một cột cho tên (hoặc “Họ và tên”). ¦ Perlu kolom untuk nama (atau “Nama dan nama depan”).
+Il faut une colonne pour le nom. ¦ Cần một cột cho tên. ¦ Perlu kolom untuk nama.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Hãy chọn cột cho biết loại sự kiện (Rửa tội, Mất…). ¦ Pilih kolom yang menyebut jenis peristiwa (Baptis, Kematian…).
+Il manque la sorte d’événement. ¦ Thiếu loại sự kiện. ¦ Jenis peristiwa belum ada.
+Ces lignes sont vides. ¦ Các dòng này trống. ¦ Baris-baris ini kosong.
+Je compare avec ta base… ¦ Đang so sánh với cơ sở dữ liệu của bạn… ¦ Membandingkan dengan basis datamu…
+Comparaison… ¦ Đang so sánh… ¦ Membandingkan…
+Choisir la fiche de la ligne {row} ¦ Chọn hồ sơ cho dòng {row} ¦ Pilih profil untuk baris {row}
+choisis ▾ ¦ chọn ▾ ¦ pilih ▾
+Relier à {name} ({meta}) ¦ Liên kết với {name} ({meta}) ¦ Hubungkan ke {name} ({meta})
+Laisser de côté ¦ Để riêng ¦ Sisihkan
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Một số dòng giống nhiều hồ sơ: hãy chọn hồ sơ đúng (nếu không chúng sẽ bị để riêng). ¦ Beberapa baris mirip dengan beberapa profil: pilih yang benar (jika tidak, baris itu disisihkan).
+Ligne ¦ Dòng ¦ Baris
+Ce qui va se passer ¦ Điều sẽ xảy ra ¦ Yang akan terjadi
+Impossible d’envoyer : {error} ¦ Không gửi được: {error} ¦ Tidak bisa mengirim: {error}
+contient « {text} » : compté comme {n} ¦ chứa “{text}”: được tính là {n} ¦ berisi “{text}”: dihitung sebagai {n}
+contient l’erreur « {text} » : laissée vide ¦ chứa lỗi “{text}”: để trống ¦ berisi galat “{text}”: dibiarkan kosong
+« {text} » n’est pas un nombre : laissé vide ¦ “{text}” không phải là số: để trống ¦ “{text}” bukan angka: dibiarkan kosong
+à trouver ¦ cần tìm ¦ perlu dicari
+L’éditeur de diagrammes n’est pas chargé. ¦ Trình chỉnh sửa sơ đồ chưa được tải. ¦ Editor diagram belum dimuat.
+L’éditeur de graphiques n’est pas chargé. ¦ Trình chỉnh sửa biểu đồ chưa được tải. ¦ Editor grafik belum dimuat.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Đã thêm biểu đồ “{name}” vào Biểu đồ của tôi (Biểu đồ, bảng điều khiển…). ¦ Grafik “{name}” ditambahkan ke Grafikku (Grafik, dasbor…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Trình duyệt không cho sao chép ở đây: hãy chọn vùng rồi bấm {key}. ¦ Peramban menolak menyalin di sini: seleksi rentangnya lalu tekan {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Đã sao chép: trong một bảng (Tìm hiểu → 🧩 Bảng), hãy dán ({key}): nó trở thành một đối tượng ▦ Bảng tính, kể cả công thức. ¦ Disalin: di sebuah papan (Penelusuran → 🧩 Papan), tempelkan ({key}): menjadi objek ▦ Spreadsheet, termasuk rumusnya.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Đã sao chép: trong trang của một tuyển tập, bấm vào một ô của bảng rồi dán ({key}). ¦ Disalin: di halaman kumpulan, klik sel tabel lalu tempelkan ({key}).
+La présentation n’est pas chargée. ¦ Bài trình chiếu chưa được tải. ¦ Presentasi belum dimuat.
+… et {n} ¦ … và {n} ¦ … dan {n}
+Colonnes attendues : {list} ¦ Các cột cần có: {list} ¦ Kolom yang diharapkan: {list}
+(une ou plusieurs) ¦ (một hoặc nhiều) ¦ (satu atau lebih)
+(facultatif) ¦ (không bắt buộc) ¦ (opsional)
+Les données de « {name} » ¦ Dữ liệu của “{name}” ¦ Data “{name}”
+l’outil ¦ công cụ ¦ alat
+{name} (données) ¦ {name} (dữ liệu) ¦ {name} (data)
+Renvoyer les données là d’où elles viennent ¦ Gửi dữ liệu về nơi nó đến ¦ Kirim data kembali ke asalnya
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Công thức, sắp xếp, dán từ Excel… “Tệp → Lưu một bản sao…” cũng giữ sổ tính này trong Bảng tính. ¦ Rumus, pengurutan, tempel dari Excel… “Berkas → Simpan salinan…” juga menyimpan buku kerja ini di Spreadsheet.
+Rien à ouvrir : la liste est vide. ¦ Không có gì để mở: danh sách trống. ¦ Tidak ada yang bisa dibuka: daftarnya kosong.
+🧾 Tableur ¦ 🧾 Bảng tính ¦ 🧾 Spreadsheet
+ouvrir dans le tableur ¦ mở trong bảng tính ¦ buka di spreadsheet
+🧾 Ouvrir dans le tableur ¦ 🧾 Mở trong bảng tính ¦ 🧾 Buka di spreadsheet
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Trang tính trống: hãy gõ hoặc dán một bảng, rồi chọn nó. ¦ Lembarnya kosong: ketik atau tempel tabel, lalu seleksi.
+TABLEUR · PRÉPARER POUR… ¦ BẢNG TÍNH · CHUẨN BỊ CHO… ¦ SPREADSHEET · SIAPKAN UNTUK…
+🎯 Préparer pour… ({range}) ¦ 🎯 Chuẩn bị cho… ({range}) ¦ 🎯 Siapkan untuk… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Bảng tính biết mỗi nơi trong ứng dụng cần gì: hãy chọn nơi đưa dữ liệu này. Nó kiểm tra các cột của vùng <b>{range}</b> và sắp xếp chúng cho đúng. ¦ Spreadsheet tahu apa yang dibutuhkan setiap bagian aplikasi: pilih ke mana data ini pergi. Spreadsheet memeriksa kolom rentang <b>{range}</b> dan menyusunnya sesuai kebutuhan.
+Dessin ¦ Hình vẽ ¦ Gambar
+▦ Un tableau ¦ ▦ Một bảng ¦ ▦ Sebuah tabel
+Il faut une colonne de chiffres ¦ Cần một cột số ¦ Perlu kolom angka
+📊 Un graphique ¦ 📊 Một biểu đồ ¦ 📊 Sebuah grafik
+Dans la plage ¦ Trong vùng ¦ Di rentang
+, une ou plusieurs ¦ , một hoặc nhiều ¦ , satu atau lebih
+, facultatif ¦ , không bắt buộc ¦ , opsional
+Voir la cellule ¦ Xem ô ¦ Lihat sel
+… et {n} à vérifier. ¦ … và {n} cần kiểm tra. ¦ … dan {n} perlu dicek.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Thiếu một cột: hãy thêm nó vào vùng, hoặc chọn vùng khác. ¦ Ada kolom yang kurang: tambahkan ke rentang, atau pilih rentang lain.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Giữ liên kết: sơ đồ đi theo bảng tính (cập nhật khi vùng thay đổi) ¦ Pertahankan tautan: diagram mengikuti spreadsheet (diperbarui saat rentang berubah)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Giữ liên kết: sơ đồ đi theo bảng tính (cập nhật khi vùng thay đổi) — sổ tính sẽ được lưu trong Bảng tính ¦ Pertahankan tautan: diagram mengikuti spreadsheet (diperbarui saat rentang berubah) — buku kerja akan disimpan di Spreadsheet
+← Autre endroit ¦ ← Nơi khác ¦ ← Tempat lain
+La première ligne donne les titres ¦ Dòng đầu tiên là tiêu đề ¦ Baris pertama berisi judul
+Pas d’aperçu. ¦ Không có bản xem trước. ¦ Tidak ada pratinjau.
+🎤 Créer la présentation ¦ 🎤 Tạo bài trình chiếu ¦ 🎤 Buat presentasi
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Hãy sửa ô đó, rồi mở lại “🎯 Chuẩn bị cho…”. ¦ Perbaiki selnya, lalu buka lagi “🎯 Siapkan untuk…”.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Dữ liệu này quay về công cụ của nó: sơ đồ được làm từ một bản sao (không có liên kết). ¦ Data ini kembali ke alatnya: diagram dibuat dari salinan (tanpa tautan).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Hãy chọn một vùng có số (ví dụ: Thập niên, Nam, Nữ). ¦ Seleksi rentang berisi angka (misalnya: Dekade, Laki-laki, Perempuan).
+Tous les types de diagrammes… ¦ Tất cả các loại sơ đồ… ¦ Semua jenis diagram…
+Conseillés pour {range} ¦ Gợi ý cho {range} ¦ Disarankan untuk {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Dữ liệu: “{name}” ! {range} ¦ 🔗 Data: “{name}” ! {range}
+Classeur ¦ Sổ tính ¦ Buku kerja
+(feuille « {name} ») ¦ (trang tính “{name}”) ¦ (lembar “{name}”)
+tenu à jour ¦ luôn cập nhật ¦ selalu diperbarui
+Les figer ¦ Cố định chúng ¦ Bekukan
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Không tìm thấy sổ tính (đã bị xoá?): hình vẽ giữ các số liệu đọc được lần cuối. ¦ ⚠️ Buku kerja tidak ditemukan (dihapus?): gambar menyimpan angka terakhir yang dibaca.
+TABLEUR ¦ BẢNG TÍNH ¦ SPREADSHEET
+Nom du classeur… ¦ Tên sổ tính… ¦ Nama buku kerja…
+Plage illisible : écris par exemple A1:C12. ¦ Vùng không đọc được: hãy gõ ví dụ A1:C12. ¦ Rentang tidak terbaca: ketik misalnya A1:C12.
+Feuille ¦ Trang tính ¦ Lembar
+Plage ¦ Vùng ¦ Rentang
+Copier une fois (les chiffres ne bougent plus) ¦ Sao chép một lần (số liệu không thay đổi nữa) ¦ Salin sekali (angkanya tidak berubah lagi)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Giữ liên kết: sơ đồ đi theo sổ tính (luôn cập nhật) ¦ Pertahankan tautan: diagram mengikuti buku kerja (selalu diperbarui)
+Lecture du classeur… ¦ Đang đọc sổ tính… ¦ Membaca buku kerja…
+Choisis un classeur. ¦ Hãy chọn một sổ tính. ¦ Pilih buku kerja.
+Écris une plage, par exemple A1:C12. ¦ Hãy gõ một vùng, ví dụ A1:C12. ¦ Ketik rentang, misalnya A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Hãy gõ kết quả mong muốn vào ô đầu tiên của cột (ví dụ “Jean D.”), rồi chạy lại ✨ Điền nhanh. ¦ Ketik hasil yang kamu inginkan di sel pertama kolom (misalnya “Jean D.”), lalu jalankan lagi ✨ Isi kilat.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Tôi không tìm được quy tắc nào đúng cho mọi ví dụ: hãy gõ thêm một ví dụ, hoặc một ví dụ đơn giản hơn. ¦ Tidak ditemukan aturan yang cocok untuk semua contoh: ketik satu contoh lagi, atau yang lebih sederhana.
+Rien à remplir : la colonne est déjà pleine. ¦ Không có gì để điền: cột đã đầy. ¦ Tidak ada yang perlu diisi: kolomnya sudah penuh.
+{what} de {col} ¦ {what} của {col} ¦ {what} dari {col}
+{what} n°{n} de {col} ¦ {what} số {n} của {col} ¦ {what} no. {n} dari {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} số {n} tính từ cuối {col} ¦ {what} no. {n} dari akhir {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (quy tắc: {rule}). ↶ để hoàn tác. ¦ ✨ {n} (aturan: {rule}). ↶ untuk mengurungkan.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Hãy chọn một bảng có dòng tiêu đề và các dòng dữ liệu. ¦ Seleksi tabel dengan baris judul dan baris data.
+Colonne {col} ¦ Cột {col} ¦ Kolom {col}
+DONNÉES ¦ DỮ LIỆU ¦ DATA
+Σ Sous-totaux ¦ Σ Tổng phụ ¦ Σ Subtotal
+Créer les sous-totaux ¦ Tạo tổng phụ ¦ Buat subtotal
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Từ <b>{range}</b>. Một trang tính mới: các dòng được xếp theo nhóm, một tổng dưới mỗi nhóm (công thức), rồi tổng cộng. “⊟ Dàn ý” (menu Dữ liệu) thu gọn phần chi tiết. ¦ Dari <b>{range}</b>. Lembar baru: baris dikelompokkan, total di bawah setiap grup (rumus), lalu total keseluruhan. “⊟ Kerangka” (menu Data) menciutkan detailnya.
+À chaque changement de ¦ Mỗi khi thay đổi ¦ Setiap perubahan pada
+Calcul ¦ Phép tính ¦ Perhitungan
+Sur les colonnes ¦ Trên các cột ¦ Pada kolom
+Coche au moins une colonne à calculer. ¦ Hãy đánh dấu ít nhất một cột để tính. ¦ Centang setidaknya satu kolom untuk dihitung.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. “⊟ Dàn ý” (menu Dữ liệu) thu gọn phần chi tiết. ¦ Σ {n}. “⊟ Kerangka” (menu Data) menciutkan detailnya.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Trang tính này không có tổng phụ: trước hết hãy vào Dữ liệu → Σ Tổng phụ…. ¦ Lembar ini tidak punya subtotal: Data → Σ Subtotal… dulu.
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Đã thu gọn chi tiết: chỉ còn các tổng. ¦ ⊟ Detail diciutkan: hanya total yang tersisa.
+⊞ Détail déplié. ¦ ⊞ Đã mở rộng chi tiết. ¦ ⊞ Detail dibuka.
+🎯 Valeur cible ¦ 🎯 Tìm giá trị đích ¦ 🎯 Cari nilai target
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Ứng dụng thử các giá trị trong “ô cần thay đổi” cho đến khi công thức cho ra kết quả mong muốn. Ví dụ: ông ấy kết hôn năm bao nhiêu tuổi để chênh lệch tuổi là 7 năm? ¦ Aplikasi mencoba nilai di “sel yang diubah” sampai rumusnya memberi hasil yang kamu inginkan. Mis.: pada umur berapa ia menikah agar selisih umurnya 7 tahun?
+La formule de la case ¦ Công thức của ô ¦ Rumus sel
+Doit donner ¦ Phải cho ra ¦ Harus menghasilkan
+En changeant la case ¦ Bằng cách thay đổi ô ¦ Dengan mengubah sel
+Écris une adresse de case (ex. C5, B2). ¦ Hãy gõ một địa chỉ ô (vd. C5, B2). ¦ Ketik alamat sel (mis. C5, B2).
+Écris le résultat voulu. ¦ Hãy gõ kết quả mong muốn. ¦ Ketik hasil yang kamu inginkan.
+La première case doit contenir une formule. ¦ Ô đầu tiên phải chứa một công thức. ¦ Sel pertama harus berisi rumus.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Không tìm được giá trị: có thể công thức không phụ thuộc vào ô này, hoặc không thể đạt kết quả này. ¦ Nilai tidak ditemukan: mungkin rumusnya tidak bergantung pada sel ini, atau tidak bisa mencapai hasil ini.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: công thức cho ra {target}. ↶ để hoàn tác. ¦ 🎯 {cell} = {value}: rumus menghasilkan {target}. ↶ untuk mengurungkan.
+INSERTION ¦ CHÈN ¦ SISIPKAN
+📈 Mini-graphique ¦ 📈 Biểu đồ mini ¦ 📈 Grafik mini
+Poser ¦ Chèn ¦ Sisipkan
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Một biểu đồ nhỏ trong ô, đi theo các số liệu. Chọn nhiều dòng: mỗi dòng một biểu đồ (vùng dịch xuống theo các dòng). ¦ Grafik kecil di dalam sel yang mengikuti angkanya. Beberapa baris diseleksi: satu grafik per baris (rentangnya ikut turun).
+Les nombres (plage de la 1re ligne) ¦ Các số (vùng của dòng thứ 1) ¦ Angka (rentang baris ke-1)
+Gagné / perdu ¦ Thắng / thua ¦ Menang / kalah
+Couleur ¦ Màu ¦ Warna
+Écris une plage, par exemple B2:F2. ¦ Hãy gõ một vùng, ví dụ B2:F2. ¦ Ketik rentang, misalnya B2:F2.
+🧮 Solveur ¦ 🧮 Bộ giải ¦ 🧮 Pemecah
+Résoudre ¦ Giải ¦ Pecahkan
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Giống tìm giá trị đích, nhưng thay đổi nhiều ô cùng lúc, kèm điều kiện. Ví dụ: chia một khoản thừa kế cho ba nhánh sao cho mỗi nhánh có ít nhất 1 000 € và chênh lệch nhỏ nhất có thể. ¦ Seperti cari nilai target, tetapi mengubah beberapa sel sekaligus, dengan syarat. Mis.: membagi warisan di antara tiga cabang agar masing-masing mendapat setidaknya 1.000 € dan selisihnya sekecil mungkin.
+La formule (case objectif) ¦ Công thức (ô mục tiêu) ¦ Rumus (sel tujuan)
+Doit être ¦ Phải ¦ Harus
+la plus grande possible ¦ lớn nhất có thể ¦ sebesar mungkin
+la plus petite possible ¦ nhỏ nhất có thể ¦ sekecil mungkin
+égale à… ¦ bằng… ¦ sama dengan…
+Valeur (si « égale à ») ¦ Giá trị (nếu chọn “bằng”) ¦ Nilai (jika “sama dengan”)
+En changeant les cases ¦ Bằng cách thay đổi các ô ¦ Dengan mengubah sel
+B2:B4 ou B2;C3 ¦ B2:B4 hoặc B2;C3 ¦ B2:B4 atau B2;C3
+Conditions (une par ligne : {examples}) ¦ Điều kiện (mỗi dòng một điều kiện: {examples}) ¦ Syarat (satu per baris: {examples})
+Nombres entiers seulement ¦ Chỉ số nguyên ¦ Hanya bilangan bulat
+La case objectif doit contenir une formule (ex. D5). ¦ Ô mục tiêu phải chứa một công thức (vd. D5). ¦ Sel tujuan harus berisi rumus (mis. D5).
+Trente cases à changer au plus. ¦ Tối đa ba mươi ô cần thay đổi. ¦ Paling banyak tiga puluh sel yang diubah.
+Écris les cases à changer (ex. B2:B4). ¦ Hãy gõ các ô cần thay đổi (vd. B2:B4). ¦ Ketik sel yang diubah (mis. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Điều kiện không đọc được: “{text}” (vd. B2 >= 0). ¦ Syarat tidak terbaca: “{text}” (mis. B2 >= 0).
+Écris la valeur voulue. ¦ Hãy gõ giá trị mong muốn. ¦ Ketik nilai yang kamu inginkan.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Không có lời giải nào thoả mọi điều kiện (hãy kiểm tra chúng, hoặc đổi điểm xuất phát). ¦ Tidak ada solusi yang memenuhi semua syarat (periksa syaratnya, atau ubah titik awal).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Đã tìm thấy: {cell} = {value} ({n}). ↶ để hoàn tác. ¦ 🧮 Ditemukan: {cell} = {value} ({n}). ↶ untuk mengurungkan.
+📋 Tableau de scénarios ¦ 📋 Bảng kịch bản ¦ 📋 Tabel skenario
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Nếu ô này bằng 20, 25, 30… thì sao? Bảng cho thấy kết quả của các công thức với mỗi giá trị. Bảng được đặt bắt đầu từ ô đã chọn ({cell}); không có gì khác thay đổi. ¦ Bagaimana jika sel ini bernilai 20, 25, 30…? Tabel menunjukkan hasil rumus untuk setiap nilai. Tabel ditempatkan mulai dari sel terpilih ({cell}); tidak ada yang lain berubah.
+La case qui change ¦ Ô thay đổi ¦ Sel yang berubah
+Ses valeurs (séparées par « ; », ou une plage) ¦ Các giá trị của ô (cách nhau bằng “;”, hoặc một vùng) ¦ Nilainya (dipisah dengan “;”, atau sebuah rentang)
+20;25;30 ou A10:A15 ¦ 20;25;30 hoặc A10:A15 ¦ 20;25;30 atau A10:A15
+Les formules à suivre ¦ Các công thức cần theo dõi ¦ Rumus yang dipantau
+Écris la case qui change (ex. B2). ¦ Hãy gõ ô thay đổi (vd. B2). ¦ Ketik sel yang berubah (mis. B2).
+Écris au moins une formule (ex. C5). ¦ Hãy gõ ít nhất một công thức (vd. C5). ¦ Ketik setidaknya satu rumus (mis. C5).
+Écris des valeurs (500 au plus). ¦ Hãy gõ các giá trị (tối đa 500). ¦ Ketik nilainya (paling banyak 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (giá trị cố định: hãy làm lại nếu dữ liệu thay đổi). ¦ 📋 {n} (nilai tetap: ulangi jika datanya berubah).
+Rien n’a été enregistré. ¦ Chưa ghi lại gì. ¦ Tidak ada yang direkam.
+⏺ Nommer l’action ¦ ⏺ Đặt tên thao tác ¦ ⏺ Beri nama aksi
+Mon action ¦ Thao tác của tôi ¦ Aksiku
+Garder ¦ Giữ ¦ Simpan
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Đã giữ thao tác “{name}”: Dữ liệu → ▶ Thao tác đã ghi. ¦ ⏺ Aksi “{name}” disimpan: Data → ▶ Aksi terekam.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Đang ghi: hãy thực hiện các thao tác (menu, nút, định dạng), rồi Dữ liệu → ⏹ Dừng ghi. ¦ ⏺ Merekam: lakukan langkah-langkahmu (menu, tombol, format), lalu Data → ⏹ Hentikan rekaman.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Chưa có thao tác nào được ghi: Dữ liệu → ⏺ Ghi một thao tác. ¦ Belum ada aksi terekam: Data → ⏺ Rekam aksi.
+▶ Actions enregistrées ¦ ▶ Thao tác đã ghi ¦ ▶ Aksi terekam
+Elles se refont sur la sélection du moment. ¦ Chúng được thực hiện lại trên vùng đang chọn. ¦ Aksi diulang pada seleksi saat ini.
+▶ Refaire ¦ ▶ Thực hiện lại ¦ ▶ Ulangi
+▶ « {name} » refaite. ¦ ▶ Đã thực hiện lại “{name}”. ¦ ▶ “{name}” diulang.
+Colonne {n} ¦ Cột {n} ¦ Kolom {n}
+{what} de « {col} » ¦ {what} của “{col}” ¦ {what} dari “{col}”
+Lignes ¦ Dòng ¦ Baris
+Total ¦ Tổng ¦ Total
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · theo “{rows}” và “{cols}” — từ {src} ¦ {title} · menurut “{rows}” dan “{cols}” — dari {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · theo “{rows}” — từ {src} ¦ {title} · menurut “{rows}” — dari {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Hãy chọn một vùng có dòng tiêu đề và các dòng dữ liệu (ví dụ: Tên, Xã, Năm, Tuổi). ¦ Seleksi rentang dengan baris judul dan baris data (misalnya: Nama, Kota, Tahun, Umur).
+🔀 Tableau croisé dynamique ¦ 🔀 Bảng tổng hợp ¦ 🔀 Tabel pivot
+Créer le tableau croisé ¦ Tạo bảng tổng hợp ¦ Buat tabel pivot
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Từ <b>{range}</b> ({n}). Kết quả nằm trong một trang tính mới; “↻ Làm mới bảng tổng hợp” (menu Dữ liệu) làm lại nếu dữ liệu thay đổi. ¦ Dari <b>{range}</b> ({n}). Hasilnya masuk ke lembar baru; “↻ Segarkan tabel pivot” (menu Data) membuatnya ulang jika datanya berubah.
+En lignes ¦ Theo dòng ¦ Sebagai baris
+En colonnes (facultatif) ¦ Theo cột (không bắt buộc) ¦ Sebagai kolom (opsional)
+— rien — ¦ — không có — ¦ — tidak ada —
+Sur la colonne ¦ Trên cột ¦ Pada kolom
+— (compter les lignes) — ¦ — (đếm số dòng) — ¦ — (hitung baris) —
+Totaux ¦ Tổng ¦ Total
+Aperçu : {rows} × {cols} ¦ Xem trước: {rows} × {cols} ¦ Pratinjau: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Đã tạo bảng tổng hợp: {rows} × {cols}. Dữ liệu → “↻ Làm mới bảng tổng hợp” để làm lại. ¦ Tabel pivot dibuat: {rows} × {cols}. Data → “↻ Segarkan tabel pivot” untuk membuatnya ulang.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Trang tính này không phải bảng tổng hợp: hãy vào trang tính “TCD …” của nó. ¦ Lembar ini bukan tabel pivot: buka lembar “TCD …”-nya.
+La feuille des données n’existe plus. ¦ Trang tính dữ liệu không còn nữa. ¦ Lembar data sudah tidak ada.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Đã làm mới bảng tổng hợp ({rows} × {cols}). ¦ Tabel pivot disegarkan ({rows} × {cols}).
+Graphique vivant ¦ Biểu đồ sống ¦ Grafik langsung
+Type de graphique ¦ Loại biểu đồ ¦ Jenis grafik
+En faire un diagramme lié à la plage ¦ Biến thành sơ đồ liên kết với vùng ¦ Jadikan diagram yang terhubung ke rentang
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Hãy chọn các ô có số (và tên của chúng ở bên trái hoặc phía trên): biểu đồ được vẽ ở đây. ¦ Seleksi sel berisi angka (dan namanya di kiri atau di atas): grafik digambar di sini.
+Plage {range} · suit la sélection ¦ Vùng {range} · đi theo vùng chọn ¦ Rentang {range} · mengikuti seleksi
+Le moteur du tableur n’est pas chargé. ¦ Bộ máy bảng tính chưa được tải. ¦ Mesin spreadsheet belum dimuat.
+Mon classeur ¦ Sổ tính của tôi ¦ Buku kerjaku
+Rien à rétablir. ¦ Không có gì để làm lại. ¦ Tidak ada yang bisa diulangi.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ đã có thay đổi khác sau đó: hãy dùng ↶ ({key}) ¦ ada perubahan lain sesudahnya: gunakan ↶ ({key})
+Barre d’outils · {group} ¦ Thanh công cụ · {group} ¦ Bilah alat · {group}
+Barre d’outils ¦ Thanh công cụ ¦ Bilah alat
+Police et gras ¦ Phông chữ và chữ đậm ¦ Fon dan tebal
+Police (E5) ¦ Phông chữ (E5) ¦ Fon (E5)
+Police ¦ Phông chữ ¦ Fon
+Gras ¦ Đậm ¦ Tebal
+Italique ¦ Nghiêng ¦ Miring
+Souligné ¦ Gạch chân ¦ Garis bawah
+Renvoi à la ligne ¦ Xuống dòng tự động ¦ Bungkus teks
+Fusionner / séparer ¦ Gộp / tách ô ¦ Gabung / pisahkan
+Aligner à gauche ¦ Căn trái ¦ Rata kiri
+Centrer ¦ Căn giữa ¦ Rata tengah
+Aligner à droite ¦ Căn phải ¦ Rata kanan
+Couleurs (C2) ¦ Màu (C2) ¦ Warna (C2)
+Couleur du texte ¦ Màu chữ ¦ Warna teks
+Format de cellule ¦ Định dạng ô ¦ Format sel
+Format de la cellule ¦ Định dạng của ô ¦ Format sel
+Une décimale de moins ¦ Bớt một chữ số thập phân ¦ Kurangi satu desimal
+Une décimale de plus ¦ Thêm một chữ số thập phân ¦ Tambah satu desimal
+Bordures ¦ Đường viền ¦ Garis batas
+Bordures : tout ¦ Đường viền: tất cả ¦ Garis batas: semua
+Bordures : contour ¦ Đường viền: bao ngoài ¦ Garis batas: luar
+Bordure du bas ¦ Viền dưới ¦ Garis batas bawah
+Sans bordure ¦ Không viền ¦ Tanpa garis batas
+Graphique ¦ Biểu đồ ¦ Grafik
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Một sơ đồ với các số liệu của vùng chọn: các loại được gợi ý cho vùng này ¦ Diagram dengan angka dari seleksi: jenis yang disarankan untuk rentang ini
+Choisir une fonction ¦ Chọn một hàm ¦ Pilih fungsi
+Fonction ¦ Hàm ¦ Fungsi
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, in ¦ XLSX, ODS, CSV, TSV, JSON, PDF, cetak
+✓ Enregistrer et revenir ¦ ✓ Lưu và quay lại ¦ ✓ Simpan dan kembali
+Plein écran (⛶) ¦ Toàn màn hình (⛶) ¦ Layar penuh (⛶)
+Données d’un autre outil ¦ Dữ liệu từ công cụ khác ¦ Data dari alat lain
+Adresse (tape D12 ou un nom pour y aller) ¦ Địa chỉ (gõ D12 hoặc một tên để đến đó) ¦ Alamat (ketik D12 atau sebuah nama untuk ke sana)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Gõ một địa chỉ (D12, B2:C9) hoặc một tên để đến đó ¦ Ketik alamat (D12, B2:C9) atau nama untuk ke sana
+Contenu ou formule de la cellule ¦ Nội dung hoặc công thức của ô ¦ Isi atau rumus sel
+Feuille de calcul ¦ Trang tính ¦ Lembar kerja
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Trang tính: gõ để viết vào ô đã chọn ¦ Lembar kerja: ketik untuk menulis di sel terpilih
+Écrire dans la cellule ¦ Viết vào ô ¦ Tulis di sel
+Panneau de droite ¦ Bảng bên phải ¦ Panel kanan
+Feuilles ¦ Các trang tính ¦ Lembar
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Bấm để chọn điều được hiển thị ở đây (tổng, trung bình…) ¦ Klik untuk memilih yang ditampilkan di sini (jumlah, rata-rata…)
+Enregistrer une copie dans le Tableur… ¦ Lưu một bản sao vào Bảng tính… ¦ Simpan salinan di Spreadsheet…
+Enregistrer une copie… ¦ Lưu một bản sao… ¦ Simpan salinan…
+Enregistrer comme modèle… ¦ Lưu làm mẫu… ¦ Simpan sebagai templat…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Xuất (XLSX, ODS, CSV, PDF…)… ¦ Ekspor (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Trang tính “{name}” ¦ Lembar “{name}”
+Pas encore relié à une fiche ¦ Chưa liên kết với hồ sơ nào ¦ Belum terhubung ke profil
+Tire pour recopier ou continuer une suite ¦ Kéo để sao chép hoặc tiếp tục một dãy ¦ Seret untuk menyalin atau melanjutkan deret
+« {text} » n’est pas dans la liste : {list} ¦ “{text}” không có trong danh sách: {list} ¦ “{text}” tidak ada di daftar: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Cần một số từ {min} đến {max}. ¦ Perlu angka paling sedikit {min} dan paling banyak {max}.
+Il faut un nombre d’au moins {min}. ¦ Cần một số ít nhất là {min}. ¦ Perlu angka paling sedikit {min}.
+Il faut un nombre et au plus {max}. ¦ Cần một số tối đa là {max}. ¦ Perlu angka paling banyak {max}.
+Il faut un nombre. ¦ Cần một số. ¦ Perlu angka.
+Je ne comprends pas cette date ({why}). ¦ Tôi không hiểu ngày này ({why}). ¦ Tanggal ini tidak dipahami ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ ví dụ: 7 mai 1925, vers 1784, an II ¦ contoh: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = hoàn thành ¦ Tab = lengkapi
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Đã hiểu là ngày giấy tờ: <b>{date}</b> (gần đúng: các phép tính sẽ hiện ≈) ¦ ✓ Dipahami sebagai tanggal akta: <b>{date}</b> (perkiraan: perhitungan akan menampilkan ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Đã hiểu là ngày giấy tờ: <b>{date}</b> ¦ ✓ Dipahami sebagai tanggal akta: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Văn bản hoặc số. Bắt đầu bằng <b>=</b> để tính. ¦ Teks atau angka. Mulai dengan <b>=</b> untuk menghitung.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Công thức: bấm hoặc kéo qua các ô để chèn chúng, hoặc gõ tên một hàm (bằng tiếng Pháp hoặc tiếng Anh). <kbd>F4</kbd>: $A$1. ¦ ƒ Rumus: klik atau seret sel untuk memasukkannya, atau ketik nama fungsi (dalam bahasa Prancis atau Inggris). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Sửa thành {name} ¦ Koreksi menjadi {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Kết quả gần đúng: một trong các ngày là ngày ước chừng (“vers”, “avant”, “an …” không có ngày). ¦ Hasil perkiraan: salah satu tanggal hanya perkiraan (“vers”, “avant”, “an …” tanpa hari).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ “{text}”: không phải địa chỉ (D12, B2:C9), cũng không phải tên trong sổ tính. ¦ “{text}”: bukan alamat (D12, B2:C9) dan bukan nama di buku kerja.
+Pas de feuille « {name} ». ¦ Không có trang tính “{name}”. ¦ Tidak ada lembar “{name}”.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Hãy dùng {key} trong lưới (trình duyệt không cho một nút ghi vào bộ nhớ tạm). ¦ Gunakan {key} di kisi (peramban tidak mengizinkan tombol menulis ke papan klip).
+En pixels (6 à 72) : ¦ Tính bằng điểm ảnh (6 đến 72): ¦ Dalam piksel (6 sampai 72):
+Lignes masquées (Format → Tout remontrer) ¦ Các dòng bị ẩn (Định dạng → Hiện lại tất cả) ¦ Baris tersembunyi (Format → Tampilkan semua lagi)
+Colonnes masquées (Format → Tout remontrer) ¦ Các cột bị ẩn (Định dạng → Hiện lại tất cả) ¦ Kolom tersembunyi (Format → Tampilkan semua lagi)
+Trier A → Z (sur la colonne choisie) ¦ Sắp xếp A → Z (theo cột đã chọn) ¦ Urutkan A → Z (pada kolom terpilih)
+Trier Z → A ¦ Sắp xếp Z → A ¦ Urutkan Z → A
+Trier sur plusieurs colonnes… ¦ Sắp xếp theo nhiều cột… ¦ Urutkan menurut beberapa kolom…
+Espaces en trop retirés. ¦ Đã bỏ khoảng trắng thừa. ¦ Spasi berlebih dihapus.
+Rien à retirer. ¦ Không có gì để bỏ. ¦ Tidak ada yang perlu dihapus.
+Police des cellules ¦ Phông chữ của ô ¦ Fon sel
+Cette police a un nom que le tableur ne sait pas garder. ¦ Phông chữ này có tên mà bảng tính không giữ được. ¦ Fon ini punya nama yang tidak bisa disimpan spreadsheet.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Kích thước từ 6 đến 72 px (“{value}” không hợp lệ). ¦ Ukuran antara 6 dan 72 px (“{value}” tidak bisa).
+Une taille entre 6 et 72 px. ¦ Kích thước từ 6 đến 72 px. ¦ Ukuran antara 6 dan 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Hãy chọn nhiều ô để gộp trước. ¦ Seleksi dulu beberapa sel untuk digabung.
+Cases fusionnées : {n} ¦ Đã gộp ô: {n} ¦ Sel digabung: {n}
+Largeur de colonne ¦ Độ rộng cột ¦ Lebar kolom
+Hauteur de ligne ¦ Chiều cao dòng ¦ Tinggi baris
+En pixels (16 à 1200) : ¦ Tính bằng điểm ảnh (16 đến 1200): ¦ Dalam piksel (16 sampai 1200):
+En pixels (12 à 600) : ¦ Tính bằng điểm ảnh (12 đến 600): ¦ Dalam piksel (12 sampai 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Tên phải bắt đầu bằng một chữ cái, không có khoảng trắng (vd. Total, Âges_1836). ¦ Nama diawali huruf, tanpa spasi (mis. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Tên “{name}” = {ref}: gõ =SOMME({name}) trong một công thức. ¦ Nama “{name}” = {ref}: ketik =SOMME({name}) dalam rumus.
+Nom pour la plage ¦ Tên cho vùng ¦ Nama untuk rentang
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Một tên cho {ref} (để viết =SOMME(Total) thay cho =SOMME(D2:D40)): ¦ Nama untuk {ref} (agar bisa menulis =SOMME(Total) alih-alih =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Ghi chú trên {cell} ¦ 💬 Catatan pada {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Ghi chú hiện ra khi rê chuột lên ô (một góc nhỏ màu cam). Để trống = không có ghi chú. ¦ Catatan muncul saat kursor di atas sel (sudut kecil oranye). Kosong = tanpa catatan.
+⌨️ Raccourcis du tableur ¦ ⌨️ Phím tắt của bảng tính ¦ ⌨️ Pintasan spreadsheet
+Raccourcis indisponibles. ¦ Không có phím tắt. ¦ Pintasan tidak tersedia.
+⚙️ Réglages du tableur ¦ ⚙️ Cài đặt bảng tính ¦ ⚙️ Pengaturan spreadsheet
+Après la touche Entrée, aller ¦ Sau phím Enter, đi ¦ Sesudah tombol Enter, pindah
+vers le bas ¦ xuống dưới ¦ ke bawah
+vers la droite (saisie de relevés en ligne) ¦ sang phải (nhập bản chép theo dòng) ¦ ke kanan (mengetik salinan per baris)
+Séparateur des fichiers CSV ¦ Ký tự phân cách tệp CSV ¦ Pemisah berkas CSV
+point-virgule « ; » (Excel en français) ¦ dấu chấm phẩy “;” (Excel tiếng Pháp) ¦ titik koma “;” (Excel bahasa Prancis)
+virgule « , » ¦ dấu phẩy “,” ¦ koma “,”
+tabulation ¦ tab ¦ tab
+Largeur des colonnes d’une feuille neuve ¦ Độ rộng cột của trang tính mới ¦ Lebar kolom lembar baru
+Dans la barre du bas, pour les cellules choisies ¦ Ở thanh dưới, cho các ô đã chọn ¦ Di bilah bawah, untuk sel terpilih
+Réglages du tableur ¦ Cài đặt bảng tính ¦ Pengaturan spreadsheet
+Trop de lignes ou de colonnes d’un coup. ¦ Quá nhiều dòng hoặc cột cùng lúc. ¦ Terlalu banyak baris atau kolom sekaligus.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Đã sắp xếp {dir} theo cột {col} (dòng thứ 1 là tiêu đề). ¦ Diurutkan {dir} pada kolom {col} (baris ke-1 berisi judul).
+Trié {dir} sur la colonne {col}. ¦ Đã sắp xếp {dir} theo cột {col}. ¦ Diurutkan {dir} pada kolom {col}.
+A → Z (croissant) ¦ A → Z (tăng dần) ¦ A → Z (naik)
+Z → A (décroissant) ¦ Z → A (giảm dần) ¦ Z → A (turun)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Vùng {range} · ngày giấy tờ (“vers 1784”, “an II”) được xếp theo đúng ngày của chúng. ¦ Rentang {range} · tanggal akta (“vers 1784”, “an II”) diurutkan menurut tanggalnya.
+La première ligne, ce sont les titres ¦ Dòng đầu tiên là tiêu đề ¦ Baris pertama berisi judul
+Puis par ¦ Rồi theo ¦ Lalu menurut
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Hãy chọn một bảng có dòng tiêu đề và các dòng bên dưới. ¦ Seleksi tabel dengan baris judul dan baris di bawahnya.
+(vide) ¦ (trống) ¦ (kosong)
+Chercher dans le tableau… (nom, métier) ¦ Tìm trong bảng… (tên, nghề nghiệp) ¦ Cari di tabel… (nama, pekerjaan)
+{n} sur {total} ¦ {n} trên {total} ¦ {n} dari {total}
+Supprimer les doublons ¦ Xoá các dòng trùng ¦ Hapus duplikat
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Vùng {range} · dòng thứ 1 là tiêu đề. Dòng đầu tiên của mỗi nhóm được giữ lại. ¦ Rentang {range} · baris ke-1 berisi judul. Baris pertama setiap grup tetap ada.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Vùng {range}. Dòng đầu tiên của mỗi nhóm được giữ lại. ¦ Rentang {range}. Baris pertama setiap grup tetap ada.
+Compare les colonnes : ¦ So sánh các cột: ¦ Bandingkan kolom:
+{n} en double (lignes {rows}). ¦ {n} bị trùng (dòng {rows}). ¦ {n} duplikat (baris {rows}).
+{n} en double (ligne {rows}). ¦ {n} bị trùng (dòng {rows}). ¦ {n} duplikat (baris {rows}).
+Aucune ligne en double. ¦ Không có dòng nào bị trùng. ¦ Tidak ada baris duplikat.
+Supprimer {n} ¦ Xoá {n} ¦ Hapus {n}
+Coche au moins une colonne. ¦ Hãy đánh dấu ít nhất một cột. ¦ Centang setidaknya satu kolom.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Hãy chọn các ô văn bản trong một cột (vd. “MARTIN Jean, 34 ans, laboureur”). ¦ Seleksi sel teks dalam satu kolom (mis. “MARTIN Jean, 34 ans, laboureur”).
+Convertir le texte en colonnes ¦ Chuyển văn bản thành cột ¦ Ubah teks menjadi kolom
+Convertir ¦ Chuyển ¦ Ubah
+Couper à : ¦ Tách tại: ¦ Pisahkan di:
+« 34 ans » devient 34 ¦ “34 ans” thành 34 ¦ “34 ans” menjadi 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Họ viết hoa thành một cột riêng (“MARTIN Jean” → MARTIN | Jean) ¦ Nama keluarga berhuruf kapital menjadi kolom terpisah (“MARTIN Jean” → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Các phần được đưa vào cột {col} và các cột sau (nội dung đang có sẽ bị thay; ↶ để quay lại). ¦ Potongan-potongannya masuk ke kolom {col} dan kolom berikutnya (isinya akan diganti; ↶ untuk kembali).
+Validation des données ¦ Xác thực dữ liệu ¦ Validasi data
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Cho {range}: những gì có thể gõ vào các ô này. ¦ Untuk {range}: apa yang boleh diketik di sel-sel ini.
+Autoriser ¦ Cho phép ¦ Izinkan
+Une liste de choix (menu ▾) ¦ Một danh sách lựa chọn (menu ▾) ¦ Daftar pilihan (menu ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Một người trong cơ sở dữ liệu (menu chọn) ¦ 👤 Orang dari basis data (menu pilihan)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Một địa điểm trong cơ sở dữ liệu (menu chọn) ¦ 📍 Tempat dari basis data (menu pilihan)
+Un nombre entre… ¦ Một số trong khoảng… ¦ Angka antara…
+Une date d’acte (vers 1784, an II…) ¦ Một ngày giấy tờ (vers 1784, an II…) ¦ Tanggal akta (vers 1784, an II…)
+Les choix (un par ligne) ¦ Các lựa chọn (mỗi dòng một lựa chọn) ¦ Pilihan (satu per baris)
+Entre ¦ Trong khoảng ¦ Antara
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Vẫn giữ cả văn bản tự do (không có hồ sơ, hoặc ngoài danh sách) ¦ Tetap simpan juga teks bebas (tanpa profil, atau di luar daftar)
+Écris au moins un choix. ¦ Hãy gõ ít nhất một lựa chọn. ¦ Ketik setidaknya satu pilihan.
+FORMAT ¦ ĐỊNH DẠNG ¦ FORMAT
+Mise en forme conditionnelle ¦ Định dạng có điều kiện ¦ Format bersyarat
+Ajouter la règle ¦ Thêm quy tắc ¦ Tambah aturan
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Một màu khi giá trị cần đến: lỗi hoặc giá trị lạ sẽ nổi bật ngay. ¦ Warna saat nilainya perlu: kesalahan atau nilai aneh langsung terlihat.
+Prêtes à l’emploi : ¦ Dùng ngay: ¦ Siap pakai:
+« âge > 100 ans » ¦ “tuổi > 100” ¦ “umur > 100 tahun”
+« date impossible » ¦ “ngày không thể có” ¦ “tanggal mustahil”
+« doublons » ¦ “trùng lặp” ¦ “duplikat”
+« barres » ¦ “thanh” ¦ “batang”
+Si la valeur ¦ Nếu giá trị ¦ Jika nilai
+alors ¦ thì ¦ maka
+en gras ¦ in đậm ¦ tebal
+Une plage comme D2:D40. ¦ Một vùng như D2:D40. ¦ Rentang seperti D2:D40.
+Écris un nombre. ¦ Hãy gõ một số. ¦ Ketik angka.
+ÉDITION ¦ CHỈNH SỬA ¦ EDIT
+🔍 Rechercher et remplacer ¦ 🔍 Tìm và thay thế ¦ 🔍 Cari dan ganti
+Remplacer tout ¦ Thay tất cả ¦ Ganti semua
+Remplacer par ¦ Thay bằng ¦ Ganti dengan
+Dans toutes les feuilles ¦ Trong tất cả các trang tính ¦ Di semua lembar
+Respecter les capitales ¦ Phân biệt chữ hoa ¦ Cocokkan huruf besar/kecil
+Chercher le suivant ¦ Tìm tiếp ¦ Cari berikutnya
+Trouvé en {cell} ¦ Tìm thấy ở {cell} ¦ Ditemukan di {cell}
+Écris ce qu’il faut chercher. ¦ Hãy gõ nội dung cần tìm. ¦ Ketik yang ingin dicari.
+Aucune fonction ne correspond. ¦ Không có hàm nào phù hợp. ¦ Tidak ada fungsi yang cocok.
+ƒ Choisir une fonction ¦ ƒ Chọn một hàm ¦ ƒ Pilih fungsi
+Chercher… (âge, somme, recherche) ¦ Tìm… (tuổi, tổng, tra cứu) ¦ Cari… (umur, jumlah, pencarian)
+Le menu de choix n’est pas chargé. ¦ Menu chọn chưa được tải. ¦ Menu pilihan belum dimuat.
+📍 Un lieu pour {cell} ¦ 📍 Một địa điểm cho {cell} ¦ 📍 Tempat untuk {cell}
+👤 Une personne pour {cell} ¦ 👤 Một người cho {cell} ¦ 👤 Orang untuk {cell}
+📍 Lieu de la base ¦ 📍 Địa điểm trong cơ sở dữ liệu ¦ 📍 Tempat dari basis data
+auto ¦ tự động ¦ otomatis
+Décimales ¦ Số thập phân ¦ Desimal
+✓ « {text} » est comprise (≈) ¦ ✓ Đã hiểu “{text}” (≈) ¦ ✓ “{text}” dipahami (≈)
+✓ « {text} » est comprise ¦ ✓ Đã hiểu “{text}” ¦ ✓ “{text}” dipahami
+Noir ¦ Đen ¦ Hitam
+Contour ¦ Viền ¦ Garis tepi
+Retirer la règle ¦ Gỡ quy tắc ¦ Lepas aturan
+Aucune règle sur cette feuille. ¦ Trang tính này không có quy tắc nào. ¦ Tidak ada aturan di lembar ini.
+＋ Ajouter une règle… ¦ ＋ Thêm quy tắc… ¦ ＋ Tambah aturan…
+Une liste : {list} ¦ Một danh sách: {list} ¦ Daftar: {list}
+👤 Une personne de la base ¦ 👤 Một người trong cơ sở dữ liệu ¦ 👤 Orang dari basis data
+📍 Un lieu de la base ¦ 📍 Một địa điểm trong cơ sở dữ liệu ¦ 📍 Tempat dari basis data
+Un nombre ¦ Một số ¦ Angka
+Une date d’acte ¦ Một ngày giấy tờ ¦ Tanggal akta
+Garder le texte ¦ Giữ văn bản ¦ Simpan teks
+Pas de validation ici. ¦ Không có xác thực ở đây. ¦ Tidak ada validasi di sini.
+Validation des données… ¦ Xác thực dữ liệu… ¦ Validasi data…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Hãy lưu sổ tính trước (💾), rồi mở hồ sơ. ¦ Simpan buku kerja dulu (💾), lalu buka profilnya.
+{name} : lieu n° {id} de ta base. ¦ {name}: địa điểm số {id} trong cơ sở dữ liệu của bạn. ¦ {name}: tempat no. {id} di basis datamu.
+Règle « {range} » retirée ¦ Đã gỡ quy tắc “{range}” ¦ Aturan “{range}” dilepas
+Police (E5) : {font} ¦ Phông chữ (E5): {font} ¦ Fon (E5): {font}
+celle de départ ¦ phông ban đầu ¦ yang bawaan
+Panneau de droite : montrer ¦ Bảng bên phải: hiện ¦ Panel kanan: tampilkan
+Panneau de droite : cacher ¦ Bảng bên phải: ẩn ¦ Panel kanan: sembunyikan
+Double-clic : renommer · clic droit : plus d’actions ¦ Bấm đúp: đổi tên · bấm chuột phải: thêm thao tác ¦ Klik ganda: ganti nama · klik kanan: aksi lainnya
+Ajouter une feuille ¦ Thêm một trang tính ¦ Tambah lembar
+Feuille {n} ¦ Trang tính {n} ¦ Lembar {n}
+Renommer la feuille ¦ Đổi tên trang tính ¦ Ganti nama lembar
+Un classeur garde au moins une feuille. ¦ Một sổ tính luôn giữ ít nhất một trang tính. ¦ Buku kerja selalu punya setidaknya satu lembar.
+Feuille « {name} » supprimée ¦ Đã xoá trang tính “{name}” ¦ Lembar “{name}” dihapus
+Couleur de l’onglet… ¦ Màu của thẻ… ¦ Warna tab…
+Déplacer à gauche ¦ Chuyển sang trái ¦ Pindah ke kiri
+Déplacer à droite ¦ Chuyển sang phải ¦ Pindah ke kanan
+Somme <b>{v}</b> ¦ Tổng <b>{v}</b> ¦ Jumlah <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Trung bình <b>{v}</b> ¦ Rata-rata <b>{v}</b>
+Nb <b>{v}</b> ¦ Đếm <b>{v}</b> ¦ Hitungan <b>{v}</b>
+Min <b>{v}</b> ¦ Nhỏ nhất <b>{v}</b> ¦ Min <b>{v}</b>
+Max <b>{v}</b> ¦ Lớn nhất <b>{v}</b> ¦ Maks <b>{v}</b>
+Dans la barre d’état ¦ Trong thanh trạng thái ¦ Di bilah status
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Hãy dùng {key}: trình duyệt không cho một menu ghi vào bộ nhớ tạm. ¦ Gunakan {key}: peramban tidak mengizinkan menu menulis ke papan klip.
+Sélection trop grande pour le presse-papiers. ¦ Vùng chọn quá lớn cho bộ nhớ tạm. ¦ Seleksi terlalu besar untuk papan klip.
+Coupé : choisis où coller, puis {key}. ¦ Đã cắt: hãy chọn nơi dán, rồi bấm {key}. ¦ Dipotong: pilih tempat menempel, lalu {key}.
+Utilise {key} dans la grille pour coller. ¦ Hãy dùng {key} trong lưới để dán. ¦ Gunakan {key} di kisi untuk menempel.
+Trop de cellules à coller. ¦ Quá nhiều ô để dán. ¦ Terlalu banyak sel untuk ditempel.
+{n} (avec le gras et les couleurs). ¦ {n} (kèm chữ đậm và màu). ¦ {n} (dengan tebal dan warna).
+Série {n} ¦ Chuỗi {n} ¦ Seri {n}
+Colonnes groupées ¦ Cột nhóm ¦ Kolom berkelompok
+Barres horizontales ¦ Thanh ngang ¦ Batang horizontal
+TSV (tabulations) ¦ TSV (tab) ¦ TSV (tab)
+⤒ Importer un tableau ¦ ⤒ Nhập một bảng ¦ ⤒ Impor tabel
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Ký tự phân cách đoán được: {sep} · Mã hoá: {enc} ¦ Pemisah yang ditebak: {sep} · Enkoding: {enc}
+point-virgule (;) ¦ dấu chấm phẩy (;) ¦ titik koma (;)
+virgule (,) ¦ dấu phẩy (,) ¦ koma (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Dấu đúng: “{list}”. ¦ ✓ Aksen benar: “{list}”.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> trong {sheets} ¦ <b>{rows}</b> di {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV và TSV: trang tính đang mở. Các định dạng khác: cả sổ tính. Ô bắt đầu bằng “=” được bảo vệ trong tệp CSV (không có công thức lén chèn vào). ¦ CSV dan TSV: lembar yang terbuka. Yang lain: seluruh buku kerja. Sel yang diawali “=” dilindungi di CSV (tidak ada rumus yang diselipkan).
+tout tableur ¦ mọi bảng tính ¦ spreadsheet apa pun
+tabulations ¦ tab ¦ tab
+données ¦ dữ liệu ¦ data
+à lire ¦ để đọc ¦ untuk dibaca
+💾 Fichier de l’outil ¦ 💾 Tệp của công cụ ¦ 💾 Berkas alat
+Exporté : {name} ¦ Đã xuất: {name} ¦ Diekspor: {name}
+(feuille vide) ¦ (trang tính trống) ¦ (lembar kosong)
+Toutes les feuilles ¦ Tất cả các trang tính ¦ Semua lembar
+Quadrillage ¦ Đường lưới ¦ Garis kisi
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Được lưu trong Danh sách → Công cụ chỉnh sửa → 🧾 Bảng tính. ¦ Disimpan di Daftar → Alat penyuntingan → 🧾 Spreadsheet.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Đã lưu mẫu “{name}” (Bắt đầu từ mẫu → Mẫu của tôi). ¦ Templat “{name}” disimpan (Mulai dari templat → Templatku).
+Copie « {name} » enregistrée. ¦ Đã lưu bản sao “{name}”. ¦ Salinan “{name}” disimpan.
+Ce classeur ¦ Sổ tính này ¦ Buku kerja ini
+Impossible d’enregistrer : {error} ¦ Không lưu được: {error} ¦ Tidak bisa menyimpan: {error}
+Enregistrer comme modèle ¦ Lưu làm mẫu ¦ Simpan sebagai templat
+Enregistrer une copie ¦ Lưu một bản sao ¦ Simpan salinan
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Tên mẫu (dữ liệu vẫn được giữ: hãy xoá trước nếu bạn muốn một mẫu trống): ¦ Nama templat (datanya tetap ada: kosongkan dulu jika kamu ingin templat kosong):
+Le nom de la copie : ¦ Tên bản sao: ¦ Nama salinan:
+{name} (copie) ¦ {name} (bản sao) ¦ {name} (salinan)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Các thay đổi từ lần lưu cuối sẽ bị mất. ¦ Perubahan sejak penyimpanan terakhir akan hilang.
+📋 Partir d’un modèle ¦ 📋 Bắt đầu từ mẫu ¦ 📋 Mulai dari templat
+Mes modèles ¦ Mẫu của tôi ¦ Templatku
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Bạn chưa có mẫu riêng: trong một sổ tính, Tệp → “Lưu làm mẫu…”. ¦ Belum ada templat milikmu: di buku kerja, Berkas → “Simpan sebagai templat…”.
+séparateur « {sep} » ¦ ký tự phân cách “{sep}” ¦ pemisah “{sep}”
+Classeur importé ¦ Sổ tính đã nhập ¦ Buku kerja yang diimpor
+Classeur « {name} » créé ({rows}) ¦ Đã tạo sổ tính “{name}” ({rows}) ¦ Buku kerja “{name}” dibuat ({rows})
+classeur ¦ sổ tính ¦ buku kerja
+＋ Nouveau classeur ¦ ＋ Sổ tính mới ¦ ＋ Buku kerja baru
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Bản chép điều tra dân số, sổ giáo xứ, ngân sách nghiên cứu, theo dõi thư từ… ¦ Salinan sensus, register paroki, anggaran riset, pelacakan surat…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Bạn đang chia cho 0: {ref} trống hoặc bằng 0. Mẹo: =SI.ERREUR(…;"") để ô trống. ¦ Kamu membagi dengan nol: {ref} kosong atau bernilai 0. Tips: =SI.ERREUR(…;"") membiarkan sel kosong.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Bạn đang chia cho 0: {why}. Mẹo: =SI.ERREUR(…;"") để ô trống. ¦ Kamu membagi dengan nol: {why}. Tips: =SI.ERREUR(…;"") membiarkan sel kosong.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Bạn đang chia cho 0. Mẹo: =SI.ERREUR(…;"") để ô trống. ¦ Kamu membagi dengan nol. Tips: =SI.ERREUR(…;"") membiarkan sel kosong.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Tôi không biết “{name}”. Có phải ý bạn là {sugg}? ¦ “{name}” tidak dikenal. Maksudmu {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Tôi không biết “{name}”. Hãy gõ vài chữ cái đầu: danh sách hàm sẽ mở ra. ¦ “{name}” tidak dikenal. Ketik huruf-huruf pertamanya: daftar fungsi akan terbuka.
+Un nom inconnu dans la formule. ¦ Một tên không xác định trong công thức. ¦ Ada nama yang tidak dikenal dalam rumus.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ “{text}” không phải là số (ô {cell}): không thể dùng để tính. ¦ “{text}” bukan angka (sel {cell}): tidak bisa dipakai untuk menghitung.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ “{text}” không phải là số: không thể dùng để tính. ¦ “{text}” bukan angka: tidak bisa dipakai untuk menghitung.
+Une valeur ne convient pas ¦ Một giá trị không phù hợp ¦ Ada nilai yang tidak sesuai
+{what} (cellule {cell}). ¦ {what} (ô {cell}). ¦ {what} (sel {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Công thức trỏ tới một thứ không tồn tại: {what}. ¦ Rumus menunjuk ke sesuatu yang tidak ada: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Công thức trỏ tới một ô đã bị xoá. ¦ Rumus menunjuk ke sel yang sudah dihapus.
+Valeur introuvable ¦ Không tìm thấy giá trị ¦ Nilai tidak ditemukan
+La recherche ¦ Phép tra cứu ¦ Pencarian
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} không tìm thấy “{what}” trong {where}. ¦ {fn} tidak menemukan “{what}” di {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} không tìm thấy “{what}”. ¦ {fn} tidak menemukan “{what}”.
+{path} : la formule tourne en rond. ¦ {path}: công thức bị lặp vòng. ¦ {path}: rumusnya berputar-putar.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Công thức cần chính nó: nó bị lặp vòng. ¦ Rumus membutuhkan dirinya sendiri: berputar-putar.
+« {text} » : {why}. ¦ “{text}”: {why}. ¦ “{text}”: {why}.
+cette date ¦ ngày này ¦ tanggal ini
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Tôi không hiểu {what} (“{text}”). Ví dụ: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ {what} tidak dipahami (“{text}”). Contoh: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Tôi không hiểu {what}. Ví dụ: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ {what} tidak dipahami. Contoh: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Tôi không hiểu công thức gần “{near}”: {why}. ¦ Rumus di dekat “{near}” tidak dipahami: {why}.
+Je ne comprends pas la formule : {why}. ¦ Tôi không hiểu công thức: {why}. ¦ Rumus tidak dipahami: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Tôi không hiểu công thức gần “{near}”: hãy kiểm tra dấu ngoặc, dấu nháy và dấu “;”. ¦ Rumus di dekat “{near}” tidak dipahami: periksa tanda kurung, tanda kutip, dan “;”.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Tôi không hiểu công thức: hãy kiểm tra dấu ngoặc, dấu nháy và dấu “;”. ¦ Rumus tidak dipahami: periksa tanda kurung, tanda kutip, dan “;”.
+Nombre impossible ¦ Số không hợp lệ ¦ Angka mustahil
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Kết quả cần {size} xuống dưới và sang phải, nhưng {cell} không trống: hãy làm trống nó để thấy toàn bộ kết quả. ¦ Hasilnya perlu {size} ke bawah dan ke kanan, tetapi {cell} tidak kosong: kosongkan agar seluruh hasil terlihat.
+plusieurs cases ¦ nhiều ô ¦ beberapa sel
+une case ¦ một ô ¦ satu sel
+Trop gros pour être calculé : {why}. ¦ Quá lớn để tính: {why}. ¦ Terlalu besar untuk dihitung: {why}.
+réduis la plage ¦ hãy thu nhỏ vùng ¦ perkecil rentangnya
+Erreur dans la formule. ¦ Lỗi trong công thức. ¦ Galat dalam rumus.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Mẹo: =SI.ERREUR(A4/B4;"") ¦ Tips: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ tệp bị từ chối: nó chứa khai báo XML (DOCTYPE hoặc ENTITY) mà tài liệu văn phòng không dùng ¦ berkas ditolak: berisi deklarasi XML (DOCTYPE atau ENTITY) yang tidak dipakai dokumen kantor
+fichier XML abîmé ¦ tệp XML bị hỏng ¦ berkas XML rusak
+fichier refusé : trop d’éléments ¦ tệp bị từ chối: quá nhiều phần tử ¦ berkas ditolak: terlalu banyak elemen
+fichier refusé : XML trop imbriqué ¦ tệp bị từ chối: XML lồng nhau quá sâu ¦ berkas ditolak: XML bersarang terlalu dalam
+fichier trop gros (plus de {n} Mo) ¦ tệp quá lớn (hơn {n} MB) ¦ berkas terlalu besar (lebih dari {n} MB)
+ce n’est pas un fichier zip valide ¦ đây không phải là tệp zip hợp lệ ¦ ini bukan berkas zip yang valid
+fichier refusé : trop d’éléments dans le zip ¦ tệp bị từ chối: quá nhiều mục trong tệp zip ¦ berkas ditolak: terlalu banyak isi di zip
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ tệp được mã hoá: hãy mở nó trước trong chương trình bảng tính của nó và lưu lại không có mật khẩu ¦ berkas terenkripsi: buka dulu di program spreadsheet-nya dan simpan tanpa kata sandi
+fichier zip abîmé ¦ tệp zip bị hỏng ¦ berkas zip rusak
+fichier refusé : trop gros une fois décompressé ¦ tệp bị từ chối: quá lớn sau khi giải nén ¦ berkas ditolak: terlalu besar setelah diekstrak
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ tệp bị từ chối: nó giải nén ra quá lớn (bom zip) ¦ berkas ditolak: hasil ekstraknya jauh terlalu besar (bom zip)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ trình duyệt này không mở được tệp zip (hãy cập nhật nó) ¦ peramban ini tidak bisa membuka berkas zip (perbarui peramban)
+compression inconnue dans le fichier ¦ kiểu nén không xác định trong tệp ¦ kompresi tidak dikenal dalam berkas
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ đây không phải là tệp Excel (.xlsx): thiếu xl/workbook.xml ¦ ini bukan berkas Excel (.xlsx): xl/workbook.xml tidak ada
+fichier refusé : trop de feuilles ¦ tệp bị từ chối: quá nhiều trang tính ¦ berkas ditolak: terlalu banyak lembar
+fichier refusé : trop de cellules ¦ tệp bị từ chối: quá nhiều ô ¦ berkas ditolak: terlalu banyak sel
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ đây không phải là tệp LibreOffice (.ods): thiếu content.xml ¦ ini bukan berkas LibreOffice (.ods): content.xml tidak ada
+ce fichier n’est pas un JSON valide ¦ tệp này không phải là JSON hợp lệ ¦ berkas ini bukan JSON yang valid
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ tôi không tìm thấy bảng nào trong JSON này (cần một danh sách các dòng hoặc đối tượng) ¦ tidak ada tabel di JSON ini (perlu daftar baris atau objek)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ các tệp Excel cũ (.xls) không đọc được: hãy mở nó trong Excel hoặc LibreOffice và lưu thành .xlsx ¦ berkas Excel lama (.xls) tidak dibaca: buka di Excel atau LibreOffice dan simpan sebagai .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ tệp nén này không phải .xlsx cũng không phải .ods ¦ berkas terkompresi ini bukan .xlsx maupun .ods
+Nombre 0,00 ¦ Số 0,00 ¦ Angka 0,00
+Nombre entier ¦ Số nguyên ¦ Bilangan bulat
+Monnaie (€) ¦ Tiền tệ (€) ¦ Mata uang (€)
+Pourcentage ¦ Phần trăm ¦ Persentase
+Date courte ¦ Ngày ngắn ¦ Tanggal pendek
+Date d’acte ¦ Ngày giấy tờ ¦ Tanggal akta
+Texte ¦ Văn bản ¦ Teks
+Relevé de recensement ¦ Bản chép điều tra dân số ¦ Salinan sensus
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ các cột của năm · hộ gia đình · “Sinh khoảng” được tính ¦ kolom tahun itu · rumah tangga · “Lahir sekitar” dihitung
+Registre paroissial ¦ Sổ giáo xứ ¦ Register paroki
+baptêmes, mariages, sépultures ¦ rửa tội, kết hôn, an táng ¦ baptis, pernikahan, pemakaman
+Budget de la recherche ¦ Ngân sách nghiên cứu ¦ Anggaran riset
+actes, déplacements, abonnements ¦ giấy tờ, đi lại, đăng ký ¦ akta, perjalanan, langganan
+Suivi des courriers ¦ Theo dõi thư từ ¦ Pelacakan surat
+envoyé, relancé, réponse ¦ đã gửi, đã nhắc, trả lời ¦ dikirim, diingatkan, jawaban
+Arbre en tableau ¦ Cây gia phả dạng bảng ¦ Pohon dalam bentuk tabel
+Sosa, génération, côté, âge ¦ Sosa, thế hệ, bên, tuổi ¦ Sosa, generasi, sisi, umur
+objets, prix, total en livres ¦ đồ vật, giá, tổng bằng livre ¦ barang, harga, total dalam livre
+Registre matricule ¦ Sổ quân bạ ¦ Register militer
+classe, signalement, campagnes ¦ khoá, nhận dạng, chiến dịch ¦ angkatan, ciri-ciri, kampanye
+📋 Partir d’un modèle… ¦ 📋 Bắt đầu từ mẫu… ¦ 📋 Mulai dari templat…
+⤒ Importer un tableau… ¦ ⤒ Nhập một bảng… ¦ ⤒ Impor tabel…
+⤓ Exporter… ¦ ⤓ Xuất… ¦ ⤓ Ekspor…
+🖨 Imprimer… ¦ 🖨 In… ¦ 🖨 Cetak…
+⚙️ Réglages du tableur… ¦ ⚙️ Cài đặt bảng tính… ¦ ⚙️ Pengaturan spreadsheet…
+Insertion ¦ Chèn ¦ Sisipkan
+Coller les valeurs seulement ¦ Chỉ dán giá trị ¦ Tempel nilai saja
+Effacer le contenu ¦ Xoá nội dung ¦ Hapus isi
+Effacer tout (contenu et mise en forme) ¦ Xoá tất cả (nội dung và định dạng) ¦ Hapus semua (isi dan format)
+Recopier vers le bas ¦ Sao chép xuống dưới ¦ Isi ke bawah
+Recopier vers la droite ¦ Sao chép sang phải ¦ Isi ke kanan
+🔍 Rechercher et remplacer… ¦ 🔍 Tìm và thay thế… ¦ 🔍 Cari dan ganti…
+Ligne au-dessus ¦ Dòng phía trên ¦ Baris di atas
+Ligne en dessous ¦ Dòng phía dưới ¦ Baris di bawah
+＋ Nouvelle feuille ¦ ＋ Trang tính mới ¦ ＋ Lembar baru
+ƒ Fonction… ¦ ƒ Hàm… ¦ ƒ Fungsi…
+Σ Somme automatique ¦ Σ Tự động tính tổng ¦ Σ Jumlah otomatis
+📅 Date du jour ¦ 📅 Ngày hôm nay ¦ 📅 Tanggal hari ini
+Nom pour la plage… ¦ Tên cho vùng… ¦ Nama untuk rentang…
+💬 Note sur la cellule… ¦ 💬 Ghi chú trên ô… ¦ 💬 Catatan pada sel…
+📊 Graphique depuis la sélection ¦ 📊 Biểu đồ từ vùng chọn ¦ 📊 Grafik dari seleksi
+Barré ¦ Gạch ngang ¦ Coret
+Aa Police… ¦ Aa Phông chữ… ¦ Aa Fon…
+Taille du texte… ¦ Cỡ chữ… ¦ Ukuran teks…
+↵ Renvoi à la ligne ¦ ↵ Xuống dòng tự động ¦ ↵ Bungkus teks
+⊞ Fusionner / séparer ¦ ⊞ Gộp / tách ô ¦ ⊞ Gabung / pisahkan
+▦ Bordures : tout ¦ ▦ Đường viền: tất cả ¦ ▦ Garis batas: semua
+▭ Bordures : contour ¦ ▭ Đường viền: bao ngoài ¦ ▭ Garis batas: luar
+▁ Bordure du bas ¦ ▁ Viền dưới ¦ ▁ Garis batas bawah
+Largeur de colonne… ¦ Độ rộng cột… ¦ Lebar kolom…
+Hauteur de ligne… ¦ Chiều cao dòng… ¦ Tinggi baris…
+Ajuster la largeur au contenu ¦ Khớp độ rộng với nội dung ¦ Sesuaikan lebar dengan isi
+Masquer les lignes ¦ Ẩn dòng ¦ Sembunyikan baris
+Masquer les colonnes ¦ Ẩn cột ¦ Sembunyikan kolom
+Tout remontrer ¦ Hiện lại tất cả ¦ Tampilkan semua lagi
+Mise en forme conditionnelle… ¦ Định dạng có điều kiện… ¦ Format bersyarat…
+Une ligne sur deux ¦ Tô xen kẽ dòng ¦ Baris berselang
+Effacer la mise en forme ¦ Xoá định dạng ¦ Hapus format
+↕ Trier A → Z ¦ ↕ Sắp xếp A → Z ¦ ↕ Urutkan A → Z
+↕ Trier Z → A ¦ ↕ Sắp xếp Z → A ¦ ↕ Urutkan Z → A
+⚲ Filtrer ¦ ⚲ Lọc ¦ ⚲ Saring
+Supprimer les doublons… ¦ Xoá các dòng trùng… ¦ Hapus duplikat…
+Convertir le texte en colonnes… ¦ Chuyển văn bản thành cột… ¦ Ubah teks menjadi kolom…
+Retirer les espaces en trop ¦ Bỏ khoảng trắng thừa ¦ Hapus spasi berlebih
+Figer la 1re ligne ¦ Cố định dòng thứ 1 ¦ Bekukan baris ke-1
+Figer la 1re colonne ¦ Cố định cột thứ 1 ¦ Bekukan kolom ke-1
+Figer jusqu’à la cellule choisie ¦ Cố định đến ô đã chọn ¦ Bekukan sampai sel terpilih
+Libérer les volets ¦ Bỏ cố định ¦ Lepas pembekuan
+Montrer les formules ¦ Hiện công thức ¦ Tampilkan rumus
+⤢ Ajuster à la fenêtre ¦ ⤢ Vừa cửa sổ ¦ ⤢ Sesuaikan dengan jendela
+100 % (taille réelle) ¦ 100 % (kích thước thật) ¦ 100 % (ukuran sebenarnya)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Phím tắt của bảng tính… ¦ ⌨️ Pintasan spreadsheet…
+Rechercher et remplacer ¦ Tìm và thay thế ¦ Cari dan ganti
+Filtrer (barre de recherche et filtres au-dessus) ¦ Lọc (thanh tìm kiếm và bộ lọc ở trên) ¦ Saring (bilah pencarian dan filter di atas)
+Trier la plage ¦ Sắp xếp vùng ¦ Urutkan rentang
+Somme, moyenne, nombre… ¦ Tổng, trung bình, đếm… ¦ Jumlah, rata-rata, hitungan…
+Une personne de la base dans la cellule ¦ Một người trong cơ sở dữ liệu vào ô ¦ Orang dari basis data di sel
+Un lieu de la base dans la cellule ¦ Một địa điểm trong cơ sở dữ liệu vào ô ¦ Tempat dari basis data di sel
+Note sur la cellule ¦ Ghi chú trên ô ¦ Catatan pada sel
+Graphique avec les chiffres de la sélection ¦ Biểu đồ với các số liệu của vùng chọn ¦ Grafik dengan angka dari seleksi
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Gõ để viết · = để tính · bấm đúp để sửa · bấm chuột phải để xem thao tác · kéo ô vuông nhỏ để sao chép ¦ Ketik untuk menulis · = untuk menghitung · klik ganda untuk mengubah · klik kanan untuk aksi · seret kotak kecil untuk menyalin
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter xác nhận · Tab: ô bên phải · Esc huỷ · khi đang gõ công thức, bấm hoặc kéo qua các ô để chèn chúng ¦ Enter mengonfirmasi · Tab: sel di kanan · Esc membatalkan · saat menulis rumus, klik atau seret sel untuk memasukkannya
+Σ Somme ¦ Σ Tổng ¦ Σ Jumlah
+Nombre ¦ Đếm ¦ Hitungan
+Minimum ¦ Nhỏ nhất ¦ Minimum
+Maximum ¦ Lớn nhất ¦ Maksimum
+Somme ¦ Tổng ¦ Jumlah
+Panneau de droite ouvert ¦ Bảng bên phải đang mở ¦ Panel kanan terbuka
+, virgule ¦ , dấu phẩy ¦ , koma
+; point-virgule ¦ ; dấu chấm phẩy ¦ ; titik koma
+espace ¦ khoảng trắng ¦ spasi
+Autre… ¦ Khác… ¦ Lainnya…
+plus grande que ¦ lớn hơn ¦ lebih besar dari
+plus petite que ¦ nhỏ hơn ¦ lebih kecil dari
+au moins ¦ ít nhất ¦ paling sedikit
+au plus ¦ nhiều nhất ¦ paling banyak
+égale à ¦ bằng ¦ sama dengan
+différente de ¦ khác ¦ berbeda dari
+entre ¦ trong khoảng ¦ antara
+contient le texte ¦ chứa văn bản ¦ berisi teks
+est vide ¦ trống ¦ kosong
+n’est pas vide ¦ không trống ¦ tidak kosong
+est en double ¦ bị trùng ¦ duplikat
+est une date impossible ¦ là ngày không thể có ¦ tanggal mustahil
+barres dans la cellule ¦ thanh trong ô ¦ batang di sel
+fond jaune ¦ nền vàng ¦ latar kuning
+fond rouge ¦ nền đỏ ¦ latar merah
+fond vert ¦ nền xanh lá ¦ latar hijau
+fond bleu ¦ nền xanh dương ¦ latar biru
+fond orange ¦ nền cam ¦ latar oranye
+fond violet ¦ nền tím ¦ latar ungu
+règle|plus grande que ¦ lớn hơn ¦ lebih besar dari
+règle|plus petite que ¦ nhỏ hơn ¦ lebih kecil dari
+règle|au moins ¦ ít nhất ¦ paling sedikit
+règle|au plus ¦ nhiều nhất ¦ paling banyak
+règle|égale à ¦ bằng ¦ sama dengan
+règle|différente de ¦ khác ¦ berbeda dari
+règle|entre ¦ trong khoảng ¦ antara
+règle|contient ¦ chứa ¦ berisi
+règle|vide ¦ trống ¦ kosong
+règle|pas vide ¦ không trống ¦ tidak kosong
+règle|en double ¦ trùng lặp ¦ duplikat
+règle|date impossible ¦ ngày không thể có ¦ tanggal mustahil
+règle|barres ¦ thanh ¦ batang
+Cellule ¦ Ô ¦ Sel
+Nombre et date ¦ Số và ngày ¦ Angka dan tanggal
+Couleur et bordures ¦ Màu và đường viền ¦ Warna dan garis batas
+Validation ¦ Xác thực ¦ Validasi
+Adresse ¦ Địa chỉ ¦ Alamat
+Valeur ¦ Giá trị ¦ Nilai
+Formule ¦ Công thức ¦ Rumus
+Autorise ¦ Cho phép ¦ Mengizinkan
+Sinon ¦ Nếu không ¦ Jika tidak
+Insérer une ligne au-dessus ¦ Chèn một dòng phía trên ¦ Sisipkan baris di atas
+Insérer une ligne en dessous ¦ Chèn một dòng phía dưới ¦ Sisipkan baris di bawah
+Insérer une colonne à gauche ¦ Chèn một cột bên trái ¦ Sisipkan kolom di kiri
+Insérer une colonne à droite ¦ Chèn một cột bên phải ¦ Sisipkan kolom di kanan
+Trier A → Z ¦ Sắp xếp A → Z ¦ Urutkan A → Z
+Retirer le filtre ¦ Gỡ bộ lọc ¦ Lepas filter
+Note… ¦ Ghi chú… ¦ Catatan…
+Ajuster la largeur ¦ Khớp độ rộng ¦ Sesuaikan lebar
+Supprimer les lignes ¦ Xoá dòng ¦ Hapus baris
+Supprimer les colonnes ¦ Xoá cột ¦ Hapus kolom
+Windows (vieil Excel) ¦ Windows (Excel cũ) ¦ Windows (Excel lama)
+👤 Des fiches ¦ 👤 Các hồ sơ ¦ 👤 Profil
+🏠 Un recensement (foyers) ¦ 🏠 Một cuộc điều tra dân số (hộ gia đình) ¦ 🏠 Sensus (rumah tangga)
+📅 Des événements ¦ 📅 Các sự kiện ¦ 📅 Peristiwa
+— ne pas envoyer — ¦ — không gửi — ¦ — jangan kirim —
+Nom et prénom ¦ Họ và tên ¦ Nama keluarga dan nama depan
+Sexe ¦ Giới tính ¦ Jenis kelamin
+Naissance (date ou année) ¦ Sinh (ngày hoặc năm) ¦ Kelahiran (tanggal atau tahun)
+Décès (date) ¦ Mất (ngày) ¦ Kematian (tanggal)
+N° de foyer (ménage) ¦ Số hộ ¦ No. rumah tangga
+N° de maison ¦ Số nhà ¦ No. rumah
+Rue, quartier ¦ Đường, khu phố ¦ Jalan, kawasan
+Patron, employeur ¦ Chủ, người thuê làm ¦ Majikan, pemberi kerja
+Situation (marié, veuf…) ¦ Tình trạng (đã kết hôn, goá…) ¦ Status (menikah, janda/duda…)
+Observations, notes ¦ Nhận xét, ghi chú ¦ Keterangan, catatan
+Sorte d’événement (acte) ¦ Loại sự kiện (giấy tờ) ¦ Jenis peristiwa (akta)
+Date de l’événement ¦ Ngày của sự kiện ¦ Tanggal peristiwa
+Lieu de l’événement ¦ Địa điểm của sự kiện ¦ Tempat peristiwa
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ các cột của năm (1836 → 1936) · hộ gia đình · 📤 vào cơ sở dữ liệu ¦ kolom tahun itu (1836 → 1936) · rumah tangga · 📤 ke basis data
+⤒ Remplir depuis l’app… ¦ ⤒ Điền từ ứng dụng… ¦ ⤒ Isi dari aplikasi…
+↻ Relire depuis la base ¦ ↻ Đọc lại từ cơ sở dữ liệu ¦ ↻ Baca ulang dari basis data
+catégorie + séries ¦ danh mục + chuỗi ¦ kategori + seri
+📊 Créer le diagramme ¦ 📊 Tạo sơ đồ ¦ 📊 Buat diagram
+Un graphique ¦ Một biểu đồ ¦ Sebuah grafik
+📈 Créer le graphique ¦ 📈 Tạo biểu đồ ¦ 📈 Buat grafik
+objet ▦ Tableur ¦ đối tượng ▦ Bảng tính ¦ objek ▦ Spreadsheet
+📋 Copier pour un tableau ¦ 📋 Sao chép cho một bảng ¦ 📋 Salin untuk papan
+Un recueil ¦ Một tuyển tập ¦ Sebuah kumpulan
+tableur d’une page ¦ bảng tính trên một trang ¦ spreadsheet di halaman
+📋 Copier pour un recueil ¦ 📋 Sao chép cho một tuyển tập ¦ 📋 Salin untuk kumpulan
+tableau ou graphique ¦ bảng hoặc biểu đồ ¦ tabel atau grafik
+Ce que le diagramme attend ¦ Những gì sơ đồ cần ¦ Yang dibutuhkan diagram
+Ce que le graphique attend ¦ Những gì biểu đồ cần ¦ Yang dibutuhkan grafik
+Ce que le tableau attend ¦ Những gì bảng cần ¦ Yang dibutuhkan papan
+Ce que le recueil attend ¦ Những gì tuyển tập cần ¦ Yang dibutuhkan kumpulan
+Pyramide des âges ¦ Tháp tuổi ¦ Piramida umur
+Courbes ¦ Đường ¦ Garis
+Radar ¦ Radar ¦ Radar
+Barres groupées ¦ Cột nhóm ¦ Batang berkelompok
+Camembert (une seule série) ¦ Biểu đồ tròn (chỉ một chuỗi) ¦ Pai (hanya satu seri)
+Rectangles proportionnels ¦ Hình chữ nhật tỉ lệ ¦ Treemap
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Chuẩn bị cho… (sơ đồ, biểu đồ, bài trình chiếu…) ¦ 🎯 Siapkan untuk… (diagram, grafik, presentasi…)
+initiale ¦ chữ cái đầu ¦ inisial
+MAJUSCULES ¦ CHỮ HOA ¦ HURUF BESAR
+minuscules ¦ chữ thường ¦ huruf kecil
+Capitale ¦ Viết hoa chữ đầu ¦ Kapital awal
+Plus petit ¦ Nhỏ nhất ¦ Terkecil
+Plus grand ¦ Lớn nhất ¦ Terbesar
+✨ Remplissage instantané ¦ ✨ Điền nhanh ¦ ✨ Isi kilat
+Σ Sous-totaux… ¦ Σ Tổng phụ… ¦ Σ Subtotal…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Dàn ý: thu gọn / mở rộng chi tiết ¦ ⊟ Kerangka: ciutkan / buka detail
+🎯 Valeur cible… ¦ 🎯 Tìm giá trị đích… ¦ 🎯 Cari nilai target…
+🧮 Solveur… ¦ 🧮 Bộ giải… ¦ 🧮 Pemecah…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Bảng kịch bản (nếu như…)… ¦ 📋 Tabel skenario (bagaimana jika…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Ghi một thao tác / ⏹ dừng ¦ ⏺ Rekam aksi / ⏹ hentikan
+▶ Actions enregistrées… ¦ ▶ Thao tác đã ghi… ¦ ▶ Aksi terekam…
+📈 Mini-graphique… ¦ 📈 Biểu đồ mini… ¦ 📈 Grafik mini…
+Nombre de lignes ¦ Số dòng ¦ Jumlah baris
+Nombre de valeurs différentes ¦ Số giá trị khác nhau ¦ Jumlah nilai berbeda
+En % de la ligne ¦ Theo % của dòng ¦ Sebagai % baris
+En % de la colonne ¦ Theo % của cột ¦ Sebagai % kolom
+En % du tout ¦ Theo % của tổng ¦ Sebagai % total
+🔀 Tableau croisé dynamique… ¦ 🔀 Bảng tổng hợp… ¦ 🔀 Tabel pivot…
+↻ Actualiser le tableau croisé ¦ ↻ Làm mới bảng tổng hợp ¦ ↻ Segarkan tabel pivot
+📊 Graphique vivant (suit la sélection) ¦ 📊 Biểu đồ sống (đi theo vùng chọn) ¦ 📊 Grafik langsung (mengikuti seleksi)
+📊 Graphique vivant ¦ 📊 Biểu đồ sống ¦ 📊 Grafik langsung
+Vide ¦ Trống ¦ Kosong
+⛔ Formule en erreur ¦ ⛔ Công thức bị lỗi ¦ ⛔ Rumus galat
+ƒ Formule ¦ ƒ Công thức ¦ ƒ Rumus
+VRAI / FAUX ¦ ĐÚNG / SAI ¦ BENAR / SALAH
+⚠️ Date impossible ¦ ⚠️ Ngày không thể có ¦ ⚠️ Tanggal mustahil
+📅 Date d’acte ¦ 📅 Ngày giấy tờ ¦ 📅 Tanggal akta
+Conditions ¦ Điều kiện ¦ Syarat
+Logique ¦ Logic ¦ Logika
+Conjoint ¦ Vợ/chồng ¦ Pasangan
+Parents ¦ Cha mẹ ¦ Orang tua
+N° de fiche ¦ Số hồ sơ ¦ No. profil
+Date ¦ Ngày ¦ Tanggal
+Personne(s) ¦ Người ¦ Orang
+Description ¦ Mô tả ¦ Deskripsi
+N° d’événement ¦ Số sự kiện ¦ No. peristiwa
+Foyer ¦ Hộ gia đình ¦ Rumah tangga
+Employeur ¦ Người thuê làm ¦ Pemberi kerja
+Situation ¦ Tình trạng ¦ Status
+Rue ¦ Đường ¦ Jalan
+N° ¦ Số ¦ No.
+Adresse entière ¦ Địa chỉ đầy đủ ¦ Alamat lengkap
+Deuxième prénom ¦ Tên đệm ¦ Nama tengah
+Titre ¦ Danh hiệu ¦ Gelar
+Suffixe ¦ Hậu tố ¦ Sufiks
+FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Mô tả ngoại hình ¦ Deskripsi fisik
+Teint ¦ Nước da ¦ Warna kulit
+Origine ¦ Nguồn gốc ¦ Asal
+Vivant ? ¦ Còn sống? ¦ Masih hidup?
+Modifié le ¦ Sửa ngày ¦ Diubah pada
+Cause ¦ Nguyên nhân ¦ Penyebab
+Autorité ¦ Cơ quan ¦ Otoritas
+Confiance ¦ Độ tin cậy ¦ Keyakinan
+Date convertie ¦ Ngày đã chuyển đổi ¦ Tanggal yang dikonversi
+Autre date ¦ Ngày khác ¦ Tanggal lain
+Informations en plus ¦ Thông tin thêm ¦ Informasi tambahan
+Calendrier ¦ Lịch ¦ Kalender
+Relevés de dépouillement ¦ Bản chép trích lục ¦ Salinan indeks catatan
+Noms de famille ¦ Họ ¦ Nama keluarga
+Âges au décès ¦ Tuổi khi mất ¦ Umur saat meninggal
+Décès par siècle ¦ Số người mất theo thế kỷ ¦ Kematian per abad
+Communes de naissance ¦ Xã nơi sinh ¦ Kota kelahiran
+Départements de naissance ¦ Tỉnh (département) nơi sinh ¦ Departemen kelahiran
+Naissances par mois ¦ Số ca sinh theo tháng ¦ Kelahiran per bulan
+Personnes par génération ¦ Số người theo thế hệ ¦ Orang per generasi
+Additionne des nombres ou des plages. ¦ Cộng các số hoặc các vùng. ¦ Menjumlahkan angka atau rentang.
+La moyenne des nombres. ¦ Trung bình của các số. ¦ Rata-rata angka.
+Le plus petit nombre. ¦ Số nhỏ nhất. ¦ Angka terkecil.
+Le plus grand nombre. ¦ Số lớn nhất. ¦ Angka terbesar.
+Compte les cellules qui contiennent un nombre. ¦ Đếm các ô có chứa số. ¦ Menghitung sel yang berisi angka.
+Compte les cellules qui ne sont pas vides. ¦ Đếm các ô không trống. ¦ Menghitung sel yang tidak kosong.
+Compte les cellules vides. ¦ Đếm các ô trống. ¦ Menghitung sel kosong.
+Multiplie des nombres. ¦ Nhân các số. ¦ Mengalikan angka.
+Arrondit au plus proche. ¦ Làm tròn đến giá trị gần nhất. ¦ Membulatkan ke yang terdekat.
+Arrondit vers zéro. ¦ Làm tròn về phía 0. ¦ Membulatkan ke arah nol.
+Arrondit en s’éloignant de zéro. ¦ Làm tròn ra xa 0. ¦ Membulatkan menjauhi nol.
+La partie entière (arrondi vers le bas). ¦ Phần nguyên (làm tròn xuống). ¦ Bagian bulat (dibulatkan ke bawah).
+Le nombre sans son signe. ¦ Số không có dấu. ¦ Angka tanpa tandanya.
+Le reste d’une division. ¦ Số dư của phép chia. ¦ Sisa pembagian.
+Un nombre élevé à une puissance. ¦ Một số luỹ thừa. ¦ Angka yang dipangkatkan.
+La racine carrée. ¦ Căn bậc hai. ¦ Akar kuadrat.
+La valeur du milieu. ¦ Giá trị ở giữa. ¦ Nilai tengah.
+L’écart type (sur un échantillon). ¦ Độ lệch chuẩn (trên một mẫu). ¦ Simpangan baku (sampel).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Thứ hạng của một số trong danh sách (1 = lớn nhất; thứ tự 1 = nhỏ nhất trước). ¦ Peringkat angka dalam daftar (1 = terbesar; urutan 1 = terkecil dulu).
+La k-ième plus grande valeur. ¦ Giá trị lớn thứ k. ¦ Nilai terbesar ke-k.
+La k-ième plus petite valeur. ¦ Giá trị nhỏ thứ k. ¦ Nilai terkecil ke-k.
+Une valeur si le test est vrai, une autre sinon. ¦ Một giá trị nếu phép thử đúng, giá trị khác nếu sai. ¦ Satu nilai jika uji benar, nilai lain jika tidak.
+La valeur du premier test vrai. ¦ Giá trị của phép thử đúng đầu tiên. ¦ Nilai dari uji benar yang pertama.
+La valeur, ou autre chose s’il y a une erreur. ¦ Giá trị, hoặc thứ khác nếu có lỗi. ¦ Nilainya, atau yang lain jika ada galat.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Giá trị, hoặc thứ khác nếu không tìm thấy (#N/A). ¦ Nilainya, atau yang lain jika tidak ditemukan (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (đúng) nếu mọi phép thử đều đúng. ¦ VRAI (benar) jika semua uji benar.
+VRAI si au moins un test est vrai. ¦ VRAI (đúng) nếu ít nhất một phép thử đúng. ¦ VRAI (benar) jika setidaknya satu uji benar.
+La valeur VRAI (comme le mot VRAI). ¦ Giá trị VRAI (đúng), giống từ VRAI. ¦ Nilai VRAI (benar), seperti kata VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ Giá trị FAUX (sai), giống từ FAUX. ¦ Nilai FAUX (salah), seperti kata FAUX.
+Inverse un test. ¦ Đảo ngược một phép thử. ¦ Membalik sebuah uji.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Đếm các ô thoả một điều kiện (">60", "laboureur", "lab*"). ¦ Menghitung sel yang memenuhi syarat (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Đếm các dòng thoả mọi điều kiện. ¦ Menghitung baris yang memenuhi semua syarat.
+Additionne les cellules qui remplissent une condition. ¦ Cộng các ô thoả một điều kiện. ¦ Menjumlahkan sel yang memenuhi syarat.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Cộng các dòng thoả mọi điều kiện. ¦ Menjumlahkan baris yang memenuhi semua syarat.
+La moyenne des cellules qui remplissent une condition. ¦ Trung bình của các ô thoả một điều kiện. ¦ Rata-rata sel yang memenuhi syarat.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Tìm trong cột thứ 1 của bảng và trả về giá trị của một cột khác. ¦ Mencari di kolom ke-1 tabel dan mengembalikan nilai kolom lain.
+Cherche dans la 1re ligne d’un tableau. ¦ Tìm trong dòng thứ 1 của bảng. ¦ Mencari di baris ke-1 tabel.
+Cherche une valeur et rend celle d’à côté. ¦ Tìm một giá trị và trả về giá trị bên cạnh. ¦ Mencari nilai dan mengembalikan nilai di sebelahnya.
+La valeur à une ligne et une colonne de la plage. ¦ Giá trị tại một dòng và một cột của vùng. ¦ Nilai pada baris dan kolom rentang.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Vị trí của một giá trị trong vùng (kiểu 0 = chính xác). ¦ Posisi nilai dalam rentang (tipe 0 = persis).
+La n-ième valeur de la liste. ¦ Giá trị thứ n của danh sách. ¦ Nilai ke-n dari daftar.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Các giá trị không trùng lặp (tràn xuống các ô bên dưới). ¦ Nilai tanpa duplikat (meluber ke sel di bawahnya).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Vùng đã sắp xếp (thứ tự 1 = tăng dần, -1 = giảm dần). ¦ Rentang yang diurutkan (urutan 1 = naik, -1 = turun).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Các dòng của vùng thoả điều kiện (vd. =FILTRE(A2:C9; C2:C9>30)). ¦ Baris rentang yang memenuhi syarat (mis. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Nối các đoạn văn bản liền nhau. ¦ Menyambung teks ujung ke ujung.
+Met des textes bout à bout avec un séparateur. ¦ Nối các đoạn văn bản liền nhau với một ký tự phân cách. ¦ Menyambung teks ujung ke ujung dengan pemisah.
+Les premiers caractères. ¦ Các ký tự đầu. ¦ Karakter-karakter pertama.
+Les derniers caractères. ¦ Các ký tự cuối. ¦ Karakter-karakter terakhir.
+Un morceau au milieu d’un texte. ¦ Một đoạn ở giữa văn bản. ¦ Potongan dari tengah teks.
+Le nombre de caractères. ¦ Số ký tự. ¦ Jumlah karakter.
+En capitales. ¦ Viết hoa. ¦ Dalam huruf besar.
+En minuscules. ¦ Viết thường. ¦ Dalam huruf kecil.
+Une capitale au début de chaque mot. ¦ Viết hoa chữ đầu mỗi từ. ¦ Huruf besar di awal setiap kata.
+Retire les espaces en trop. ¦ Bỏ khoảng trắng thừa. ¦ Menghapus spasi berlebih.
+Remplace un morceau de texte. ¦ Thay một đoạn văn bản. ¦ Mengganti potongan teks.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Vị trí của một văn bản trong văn bản khác (không phân biệt chữ hoa). ¦ Posisi teks di dalam teks lain (tanpa memperhatikan huruf besar).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Một số hoặc ngày được viết theo định dạng ("0,00", "0 %", "jj/mm/aaaa"). ¦ Angka atau tanggal yang ditulis dengan format ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Số được viết trong văn bản. ¦ Angka yang tertulis dalam teks.
+Fabrique une date. ¦ Tạo một ngày. ¦ Membuat tanggal.
+L’année d’une date (date d’acte comprise). ¦ Năm của một ngày (hiểu cả ngày giấy tờ). ¦ Tahun dari tanggal (tanggal akta dipahami).
+Le mois d’une date (1 à 12). ¦ Tháng của một ngày (1 đến 12). ¦ Bulan dari tanggal (1 sampai 12).
+Le jour du mois. ¦ Ngày trong tháng. ¦ Hari dalam bulan.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Thứ trong tuần (kiểu 1: 1 = Chủ nhật; kiểu 2: 1 = thứ Hai … 7 = Chủ nhật; kiểu 3: 0 = thứ Hai). ¦ Hari dalam minggu (tipe 1: 1 = Minggu; tipe 2: 1 = Senin … 7 = Minggu; tipe 3: 0 = Senin).
+La date du jour. ¦ Ngày hôm nay. ¦ Tanggal hari ini.
+La date et l’heure. ¦ Ngày và giờ. ¦ Tanggal dan jam.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Khoảng cách giữa hai ngày, tính theo năm, tháng hoặc ngày (“AM”: số tháng ngoài số năm, “MJ”: số ngày ngoài số tháng, “AJ”: số ngày ngoài số năm; hiểu cả “Y”, “D”, “YM”, “MD”, “YD” của Excel). ¦ Selisih antara dua tanggal, dalam tahun, bulan, atau hari (“AM”: bulan di luar tahun, “MJ”: hari di luar bulan, “AJ”: hari di luar tahun; “Y”, “D”, “YM”, “MD”, “YD” dari Excel dipahami).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Tuổi giữa hai ngày giấy tờ (hiểu cả “vers 1784”, “an II”); “≈” nếu một ngày là gần đúng. Đơn vị: “ans”, “mois” hoặc “jours”. ¦ Umur antara dua tanggal akta (“vers 1784”, “an II” dipahami); “≈” jika salah satu tanggal perkiraan. Satuan: “ans”, “mois”, atau “jours”.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Năm tìm thấy trong văn bản giấy tờ, kể cả lịch Cộng hoà (“baptisé le 3 frimaire an XII” → 1803). ¦ Tahun yang ditemukan dalam teks akta, termasuk kalender republik (“baptisé le 3 frimaire an XII” → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Ngày đã hiểu, được viết gọn gàng (giống “✓ Đã hiểu:” của các trường ngày). ¦ Tanggal yang dipahami, ditulis rapi (seperti “✓ Dipahami:” pada kolom tanggal).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ “jour”, “mois”, “année”, “vers”, “avant”, “après” hoặc “entre”. ¦ “jour”, “mois”, “année”, “vers”, “avant”, “après”, atau “entre”.
+La date dans le calendrier républicain. ¦ Ngày theo lịch Cộng hoà Pháp. ¦ Tanggal dalam kalender republik Prancis.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Thế hệ của một số Sosa (1 = bạn, 2 và 3 = cha mẹ bạn…). ¦ Generasi dari nomor Sosa (1 = kamu, 2 dan 3 = orang tuamu…).
+Le numéro Sosa du père (2 × n). ¦ Số Sosa của cha (2 × n). ¦ Nomor Sosa ayah (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Số Sosa của mẹ (2 × n + 1). ¦ Nomor Sosa ibu (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ “paternel” (bên nội) hoặc “maternel” (bên ngoại) (phía của Sosa 1). ¦ “paternel” (pihak ayah) atau “maternel” (pihak ibu) (sisi Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Một biểu đồ nhỏ trong ô: "courbe" (đường), "barres" (cột) hoặc "gagné" (trên hoặc dưới 0). ¦ Grafik kecil di sel: "courbe" (garis), "barres" (batang), atau "gagné" (di atas atau di bawah nol).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Đặt tên cho một giá trị để dùng trong phép tính. ¦ Memberi nama pada nilai untuk dipakai dalam perhitungan.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Một hàm nhỏ của riêng bạn, để dùng trong LET, MAP, PAR.LIGNE… ¦ Fungsi kecil buatanmu sendiri, untuk dipakai di LET, MAP, PAR.LIGNE…
+Applique la LAMBDA à chaque case de la plage. ¦ Áp dụng LAMBDA cho từng ô của vùng. ¦ Menerapkan LAMBDA ke setiap sel rentang.
+Un résultat par ligne de la plage. ¦ Một kết quả cho mỗi dòng của vùng. ¦ Satu hasil per baris rentang.
+Un résultat par colonne de la plage. ¦ Một kết quả cho mỗi cột của vùng. ¦ Satu hasil per kolom rentang.
+Cumule les cases une à une (un total qui avance). ¦ Cộng dồn từng ô một (một tổng chạy dần). ¦ Mengakumulasi sel satu per satu (total berjalan).
+Comme REDUCE, avec chaque étape du total. ¦ Giống REDUCE, kèm từng bước của tổng. ¦ Seperti REDUCE, dengan setiap langkah totalnya.
+=ligne laissée ¦ dòng bị bỏ qua ¦ baris disisihkan
+=ligne remplie depuis l’app (tenue à jour) ¦ dòng được điền từ ứng dụng (luôn cập nhật) ¦ baris diisi dari aplikasi (selalu diperbarui)
+=ligne remplie depuis l’app ¦ dòng được điền từ ứng dụng ¦ baris diisi dari aplikasi
+=ligne à toi sans fiche : retirée ¦ dòng của bạn không có hồ sơ: đã gỡ ¦ barismu tanpa profil: dilepas
+=nouvelle fiche ¦ hồ sơ mới ¦ profil baru
+=reliée ¦ đã liên kết ¦ terhubung
+=laissée ¦ bị bỏ qua ¦ disisihkan
+=autre ligne ¦ dòng khác ¦ baris lain
+=case ¦ ô ¦ sel
+=autre case ¦ ô khác ¦ sel lain
+=case remplie ¦ ô đã điền ¦ sel terisi
+=groupe ¦ nhóm ¦ grup
+=case changée ¦ ô đã thay đổi ¦ sel diubah
+=scénario calculé ¦ kịch bản đã tính ¦ skenario dihitung
+=commande ¦ lệnh ¦ perintah
+=fonction ¦ hàm ¦ fungsi
+=valeur en plus de la première retirée ¦ giá trị ngoài giá trị đầu tiên đã bị bỏ ¦ nilai selain yang pertama dihapus
+=ligne supprimée ¦ dòng đã xoá ¦ baris dihapus
+=colonne supprimée ¦ cột đã xoá ¦ kolom dihapus
+=ligne en double supprimée ¦ dòng trùng đã xoá ¦ baris duplikat dihapus
+=ligne coupée en colonnes ¦ dòng đã tách thành cột ¦ baris dipisah menjadi kolom
+=case modifiée ¦ ô đã sửa ¦ sel diubah
+=cellule ¦ ô ¦ sel
+=cellule copiée ¦ ô đã sao chép ¦ sel disalin
+=feuille importée ¦ trang tính đã nhập ¦ lembar diimpor
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ ngày ¦ tanggal
+le début ¦ điểm bắt đầu ¦ awal
+la fin ¦ điểm kết thúc ¦ akhir
+il manque un guillemet « " » à la fin d’un texte ¦ thiếu dấu nháy kép “"” ở cuối một đoạn văn bản ¦ tanda kutip “"” kurang di akhir teks
+il manque une apostrophe à la fin du nom de feuille ¦ thiếu dấu nháy đơn ở cuối tên trang tính ¦ tanda apostrof kurang di akhir nama lembar
+après le nom de la feuille, il faut « ! » puis la cellule ¦ sau tên trang tính, cần “!” rồi đến ô ¦ sesudah nama lembar, perlu “!” lalu selnya
+la formule s’arrête trop tôt ¦ công thức kết thúc quá sớm ¦ rumus berhenti terlalu cepat
+il manque une parenthèse « ) » ¦ thiếu dấu ngoặc “)” ¦ tanda kurung “)” kurang
+une parenthèse « ) » de trop ¦ thừa một dấu ngoặc “)” ¦ kelebihan satu tanda kurung “)”
+un « ; » à une place inattendue ¦ một dấu “;” ở chỗ không mong đợi ¦ tanda “;” di tempat yang tidak terduga
+un numéro Sosa est un nombre entier qui commence à 1 ¦ số Sosa là một số nguyên bắt đầu từ 1 ¦ nomor Sosa adalah bilangan bulat yang dimulai dari 1
+il n’y a aucun nombre dans la plage ¦ không có số nào trong vùng ¦ tidak ada angka di rentang
+le diviseur de MOD vaut 0 ¦ số chia của MOD bằng 0 ¦ pembagi MOD bernilai 0
+pas de racine carrée d’un nombre négatif ¦ không có căn bậc hai của số âm ¦ tidak ada akar kuadrat dari bilangan negatif
+aucun nombre ¦ không có số nào ¦ tidak ada angka
+il faut au moins deux nombres ¦ cần ít nhất hai số ¦ perlu setidaknya dua angka
+aucun test n’est vrai ¦ không có phép thử nào đúng ¦ tidak ada uji yang benar
+les plages n’ont pas la même taille ¦ các vùng không cùng kích thước ¦ rentangnya tidak sama besar
+aucune cellule ne remplit la condition ¦ không có ô nào thoả điều kiện ¦ tidak ada sel yang memenuhi syarat
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ phần thứ 2 phải là một vùng, ví dụ A2:C40 ¦ bagian ke-2 harus berupa rentang, misalnya A2:C40
+le 2e morceau doit être une plage ¦ phần thứ 2 phải là một vùng ¦ bagian ke-2 harus berupa rentang
+la plage est vide ¦ vùng trống ¦ rentangnya kosong
+la condition doit avoir autant de lignes que la plage ¦ điều kiện phải có số dòng bằng với vùng ¦ syarat harus punya jumlah baris yang sama dengan rentang
+aucune ligne ne remplit la condition ¦ không có dòng nào thoả điều kiện ¦ tidak ada baris yang memenuhi syarat
+le début compte à partir de 1 ¦ điểm bắt đầu được tính từ 1 ¦ awal dihitung mulai dari 1
+cette date n’a pas de mois ¦ ngày này không có tháng ¦ tanggal ini tidak punya bulan
+cette date n’a pas de jour ¦ ngày này không có ngày cụ thể ¦ tanggal ini tidak punya hari
+il faut le jour ¦ cần có ngày ¦ harinya diperlukan
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ kiểu của JOURSEM từ 1 đến 3 (hoặc 11 đến 17) ¦ tipe JOURSEM dari 1 sampai 3 (atau 11 sampai 17)
+la fin est avant le début ¦ điểm kết thúc ở trước điểm bắt đầu ¦ akhir ada sebelum awal
+la seconde date est avant la première ¦ ngày thứ hai ở trước ngày thứ nhất ¦ tanggal kedua ada sebelum yang pertama
+il faut une date au jour près ¦ cần một ngày chính xác đến từng ngày ¦ perlu tanggal yang tepat sampai harinya
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ lịch Cộng hoà kéo dài từ 22 tháng 9 năm 1792 đến 1805 ¦ kalender republik berlaku dari 22 September 1792 sampai 1805
+il faut des nombres dans la plage ¦ vùng cần có số ¦ rentang perlu berisi angka
+il faut une LAMBDA(…) ¦ cần một LAMBDA(…) ¦ perlu LAMBDA(…)
+trop de LAMBDA imbriquées ¦ quá nhiều LAMBDA lồng nhau ¦ terlalu banyak LAMBDA bersarang
+des paires « nom; valeur » puis le calcul ¦ các cặp “tên; giá trị” rồi đến phép tính ¦ pasangan “nama; nilai”, lalu perhitungannya
+un nom (lettres) avant chaque valeur ¦ một tên (chữ cái) trước mỗi giá trị ¦ nama (huruf) sebelum setiap nilai
+il faut au moins le calcul ¦ cần ít nhất phép tính ¦ setidaknya perlu perhitungannya
+les paramètres sont des noms ¦ các tham số là tên ¦ parameternya berupa nama
+le calcul n’a pas de résultat ¦ phép tính không có kết quả ¦ perhitungan tidak punya hasil
+le résultat est trop grand pour être calculé ¦ kết quả quá lớn để tính ¦ hasilnya terlalu besar untuk dihitung
+une feuille supprimée ¦ một trang tính đã bị xoá ¦ lembar yang dihapus
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ cả một vùng không vừa trong một ô: hãy dùng SOMME(…), INDEX(…)… ¦ seluruh rentang tidak muat di satu sel: gunakan SOMME(…), INDEX(…)…
+puissance impossible ¦ luỹ thừa không hợp lệ ¦ pangkat mustahil
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ một LAMBDA đứng riêng không cho giá trị: hãy dùng nó trong LET, MAP… ¦ LAMBDA saja tidak memberi nilai: gunakan di LET, MAP…
+la formule est trop longue ¦ công thức quá dài ¦ rumusnya terlalu panjang
+la formule est trop imbriquée ¦ công thức lồng nhau quá sâu ¦ rumusnya bersarang terlalu dalam
+trop de morceaux dans une fonction ¦ quá nhiều phần trong một hàm ¦ terlalu banyak bagian dalam satu fungsi
+la formule demande trop de calculs ¦ công thức đòi hỏi quá nhiều phép tính ¦ rumusnya butuh terlalu banyak perhitungan
+le résultat est trop grand ¦ kết quả quá lớn ¦ hasilnya terlalu besar
+la plage est trop grande ¦ vùng quá lớn ¦ rentangnya terlalu besar
+le fichier a trop de cellules ¦ tệp có quá nhiều ô ¦ berkas punya terlalu banyak sel

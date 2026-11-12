@@ -1,0 +1,429 @@
+fr ¦ vi ¦ id
+=invité ¦ khách mời ¦ tamu
+=descendant vivant ¦ con cháu còn sống ¦ keturunan yang masih hidup
+=conjoint ¦ vợ/chồng ¦ pasangan
+=fiche confidentielle ¦ hồ sơ bảo mật ¦ profil rahasia
+=invité trouvé ¦ khách mời được tìm thấy ¦ tamu ditemukan
+=nouvel invité ¦ khách mời mới ¦ tamu baru
+=invitée ¦ được mời ¦ diundang
+=invité déjà là ¦ khách mời đã có ¦ tamu sudah ada
+=colonne ¦ cột ¦ kolom
+=invité ajouté ¦ khách mời đã thêm ¦ tamu ditambahkan
+=invité complété ¦ khách mời đã bổ sung ¦ tamu dilengkapi
+=foyer ¦ hộ ¦ rumah tangga
+=avec adresse ¦ có địa chỉ ¦ dengan alamat
+=avec courriel ¦ có email ¦ dengan email
+=badge ¦ thẻ tên ¦ lencana
+=présent ¦ có mặt ¦ hadir
+=personne attendue ¦ người dự kiến đến ¦ orang diharapkan hadir
+=table ¦ bàn ¦ meja
+=personne placée ¦ người đã xếp chỗ ¦ orang mendapat tempat duduk
+=photo ajoutée ¦ ảnh đã thêm ¦ foto ditambahkan
+=personne présente ¦ người có mặt ¦ orang hadir
+Sans réponse ¦ Chưa trả lời ¦ Belum menjawab
+👥 Invités ¦ 👥 Khách mời ¦ 👥 Tamu
+✉️ Invitations ¦ ✉️ Thư mời ¦ ✉️ Undangan
+🏷 Badges ¦ 🏷 Thẻ tên ¦ 🏷 Lencana
+🌳 Grand arbre ¦ 🌳 Cây lớn ¦ 🌳 Pohon besar
+📅 Jour J ¦ 📅 Ngày hội ¦ 📅 Hari H
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Tập hợp con cháu của một tổ tiên: khách mời, thư mời, thẻ tên, cây lớn, ngày hội. ¦ Kumpulkan keturunan seorang leluhur: tamu, undangan, lencana, pohon besar, hari H.
+＋ Nouvelle cousinade ¦ ＋ Họp mặt họ hàng mới ¦ ＋ Reuni keluarga baru
+Nouvelle cousinade ¦ Họp mặt họ hàng mới ¦ Reuni keluarga baru
+Lecture des cousinades… ¦ Đang đọc các buổi họp mặt họ hàng… ¦ Memuat reuni keluarga…
+Aucune cousinade pour l’instant ¦ Chưa có buổi họp mặt họ hàng nào ¦ Belum ada reuni keluarga
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Hãy chọn một tổ tiên (hoặc một cặp vợ chồng): ứng dụng tìm con cháu còn sống của họ, theo từng nhánh, và chuẩn bị danh sách khách mời. ¦ Pilih seorang leluhur (atau pasangan): aplikasi mencari keturunannya yang masih hidup, cabang demi cabang, dan menyiapkan daftar tamu.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Tìm… (vd. Martin, 2026, Tulle) ¦ Cari… (mis. Martin, 2026, Tulle)
+{n} oui ¦ {n} có ¦ {n} ya
+{n} sans réponse ¦ {n} chưa trả lời ¦ {n} belum menjawab
+Aucune cousinade ne correspond. ¦ Không có buổi họp mặt họ hàng nào phù hợp. ¦ Tidak ada reuni keluarga yang cocok.
+Renommer la cousinade ¦ Đổi tên buổi họp mặt họ hàng ¦ Ganti nama reuni keluarga
+Cousinade renommée. ¦ Đã đổi tên buổi họp mặt họ hàng. ¦ Nama reuni keluarga diganti.
+Cousinade supprimée : « {name} » ¦ Đã xoá buổi họp mặt họ hàng: “{name}” ¦ Reuni keluarga dihapus: “{name}”
+Modifier la cousinade ¦ Sửa buổi họp mặt họ hàng ¦ Ubah reuni keluarga
+L’ancêtre dont on réunit les descendants ¦ Tổ tiên mà ta tập hợp con cháu ¦ Leluhur yang keturunannya dikumpulkan
+Avec son conjoint (le couple) — facultatif ¦ Cùng với vợ/chồng (cặp vợ chồng) — không bắt buộc ¦ Bersama pasangannya — opsional
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Chỉ các con của cặp vợ chồng. Để trống: mọi con của tổ tiên. ¦ Hanya anak-anak pasangan itu. Kosong: semua anak leluhur.
+Nom de la cousinade ¦ Tên buổi họp mặt họ hàng ¦ Nama reuni keluarga
+Personne de référence pour les liens de parenté ¦ Người tham chiếu cho quan hệ họ hàng ¦ Orang acuan untuk hubungan kekerabatan
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Mỗi khách mời sẽ có quan hệ với người này (“anh chị em họ đời thứ hai của …”). Thường là bạn. ¦ Setiap tamu akan mendapat hubungannya dengan orang ini (“sepupu dua kali dari …”). Biasanya kamu.
+Inviter aussi les conjoints des descendants ¦ Mời cả vợ/chồng của con cháu ¦ Undang juga pasangan para keturunan
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Hồ sơ bảo mật không bao giờ được hiện. Địa chỉ của người còn sống chỉ nằm trong dự án này. ¦ 🔒 Profil rahasia tidak pernah ditampilkan. Alamat orang yang masih hidup tetap di proyek ini.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Hãy chọn tổ tiên: ứng dụng sẽ tìm con cháu còn sống của họ. ¦ Pilih leluhurnya: aplikasi mencari keturunannya yang masih hidup.
+Recherche des descendants vivants… ¦ Đang tìm con cháu còn sống… ¦ Mencari keturunan yang masih hidup…
+{who} dans {branches}, et {spouses}. ¦ {who} trong {branches}, và {spouses}. ¦ {who} dalam {branches}, dan {spouses}.
+{who} dans {branches}. ¦ {who} trong {branches}. ¦ {who} dalam {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} không ghi ngày mất, sinh cách đây chưa đến 100 năm: được đánh dấu “còn sống?”. ¦ {n} tanpa catatan kematian, lahir kurang dari 100 tahun lalu: ditandai “masih hidup?”.
+{n} laissées de côté. ¦ {n} bị bỏ qua. ¦ {n} dikesampingkan.
+{n} laissée de côté. ¦ {n} bị bỏ qua. ¦ {n} dikesampingkan.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Hãy chọn tổ tiên mà ta tập hợp con cháu. ¦ Pilih leluhur yang keturunannya dikumpulkan.
+Cousinade créée : {n}. ¦ Đã tạo buổi họp mặt họ hàng: {n}. ¦ Reuni keluarga dibuat: {n}.
+Cousinade enregistrée : {n}. ¦ Đã lưu buổi họp mặt họ hàng: {n}. ¦ Reuni keluarga tersimpan: {n}.
+Cousinade enregistrée. ¦ Đã lưu buổi họp mặt họ hàng. ¦ Reuni keluarga tersimpan.
+Lecture de la cousinade… ¦ Đang đọc buổi họp mặt họ hàng… ¦ Memuat reuni keluarga…
+← Toutes les cousinades ¦ ← Mọi buổi họp mặt họ hàng ¦ ← Semua reuni keluarga
+↻ Chercher les nouveaux descendants ¦ ↻ Tìm con cháu mới ¦ ↻ Cari keturunan baru
+Chercher les nouveaux descendants ¦ Tìm con cháu mới ¦ Cari keturunan baru
+↗ Fiche de l’ancêtre ¦ ↗ Hồ sơ của tổ tiên ¦ ↗ Profil leluhur
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} không còn hiện: hồ sơ của họ đã chuyển sang bảo mật (hoặc đã bị xoá). ¦ {n} tidak muncul lagi: profilnya menjadi rahasia (atau sudah dihapus).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} không còn hiện: hồ sơ của người đó đã chuyển sang bảo mật (hoặc đã bị xoá). ¦ {n} tidak muncul lagi: profilnya menjadi rahasia (atau sudah dihapus).
+la personne de référence ¦ người tham chiếu ¦ orang acuan
+Liens de parenté avec ¦ Quan hệ họ hàng với ¦ Hubungan kekerabatan dengan
+＋ Ajouter un invité ¦ ＋ Thêm khách mời ¦ ＋ Tambah tamu
+⤒ Importer une liste… ¦ ⤒ Nhập một danh sách… ¦ ⤒ Impor daftar…
+Aucun invité pour l’instant ¦ Chưa có khách mời nào ¦ Belum ada tamu
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Không tìm thấy con cháu còn sống nào. Hãy thêm khách mời bằng tay, nhập một danh sách, hoặc bổ sung cây rồi bấm “↻ Tìm con cháu mới”. ¦ Tidak ditemukan keturunan yang masih hidup. Tambahkan tamu secara manual, impor daftar, atau lengkapi pohon lalu “↻ Cari keturunan baru”.
+Chercher… (ex. Martin, Brive, végétarien) ¦ Tìm… (vd. Martin, Brive, ăn chay) ¦ Cari… (mis. Martin, Brive, vegetarian)
+Invités (cochés) ¦ Được mời (đã chọn) ¦ Diundang (dicentang)
+Pas invités ¦ Không được mời ¦ Tidak diundang
+Seulement « vivant ? » ¦ Chỉ “còn sống?” ¦ Hanya “masih hidup?”
+Par branche et par foyer ¦ Theo nhánh và theo hộ ¦ Menurut cabang dan rumah tangga
+Par génération ¦ Theo thế hệ ¦ Menurut generasi
+Par réponse ¦ Theo câu trả lời ¦ Menurut jawaban
+{n} · {inv} en tout ¦ {n} · tổng cộng {inv} ¦ {n} · total {inv}
+Aucun invité ne correspond. ¦ Không có khách mời nào phù hợp. ¦ Tidak ada tamu yang cocok.
+Pas invité ¦ Không được mời ¦ Tidak diundang
+Invité (coché) ¦ Được mời (đã chọn) ¦ Diundang (dicentang)
+Régime ¦ Chế độ ăn ¦ Pola makan
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Không ghi gì về việc mất, sinh cách đây chưa đến 100 năm: hãy kiểm tra trước khi mời ¦ Tidak ada catatan kematian, lahir kurang dari 100 tahun lalu: periksa sebelum mengundang
+Sans fiche ¦ Không có hồ sơ ¦ Tanpa profil
+Pas d’adresse ¦ Không có địa chỉ ¦ Tanpa alamat
+Nombre de personnes ¦ Số người ¦ Jumlah orang
+{name} est invitée. ¦ {name} được mời. ¦ {name} diundang.
+{name} est invité. ¦ {name} được mời. ¦ {name} diundang.
+{name} n’est plus invitée. ¦ {name} không còn được mời. ¦ {name} tidak diundang lagi.
+{name} n’est plus invité. ¦ {name} không còn được mời. ¦ {name} tidak diundang lagi.
+Réponse de {name} : {answer}. ¦ Câu trả lời của {name}: {answer}. ¦ Jawaban {name}: {answer}.
+Inviter les {n} affichées ¦ Mời {n} người đang hiện ¦ Undang {n} yang ditampilkan
+{n} invitées. ¦ {n} người được mời. ¦ {n} diundang.
+{n} invitée. ¦ {n} người được mời. ¦ {n} diundang.
+Ne plus inviter les personnes affichées ¦ Thôi mời những người đang hiện ¦ Berhenti mengundang orang yang ditampilkan
+{n} retirées des invitations. ¦ {n} người được gỡ khỏi lời mời. ¦ {n} dilepas dari undangan.
+{n} retirée des invitations. ¦ {n} người được gỡ khỏi lời mời. ¦ {n} dilepas dari undangan.
+Tableau des invités (CSV)… ¦ Bảng khách mời (CSV)… ¦ Tabel tamu (CSV)…
+Imprimer la liste des invités… ¦ In danh sách khách mời… ¦ Cetak daftar tamu…
+Écrire un courriel ¦ Viết email ¦ Tulis email
+Retirer de la liste ¦ Gỡ khỏi danh sách ¦ Lepas dari daftar
+🗑 Retirer de la liste ¦ 🗑 Gỡ khỏi danh sách ¦ 🗑 Lepas dari daftar
+{name} retirée de la liste. ¦ Đã gỡ {name} khỏi danh sách. ¦ {name} dilepas dari daftar.
+{name} retiré de la liste. ¦ Đã gỡ {name} khỏi danh sách. ¦ {name} dilepas dari daftar.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Không có con cháu còn sống mới: danh sách đã được cập nhật. ¦ Tidak ada keturunan hidup yang baru: daftar sudah mutakhir.
+{n} ajoutés. ¦ Đã thêm {n}. ¦ {n} ditambahkan.
+{n} ajouté. ¦ Đã thêm {n}. ¦ {n} ditambahkan.
+Son propre foyer ¦ Hộ riêng của người đó ¦ Rumah tangganya sendiri
+Garder son foyer ¦ Giữ hộ của người đó ¦ Pertahankan rumah tangganya
+🎉 COUSINADE · INVITÉ ¦ 🎉 HỌP MẶT HỌ HÀNG · KHÁCH MỜI ¦ 🎉 REUNI KELUARGA · TAMU
+🎉 COUSINADE ¦ 🎉 HỌP MẶT HỌ HÀNG ¦ 🎉 REUNI KELUARGA
+Nouvel invité ¦ Khách mời mới ¦ Tamu baru
+Une fiche de ta généalogie (facultatif) ¦ Một hồ sơ trong gia phả của bạn (không bắt buộc) ¦ Profil dari silsilahmu (opsional)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Nếu không, hãy ghi tên và họ bên dưới. ¦ Jika tidak, tulis nama depan dan nama keluarga di bawah.
+Foyer (une invitation par foyer) ¦ Hộ (mỗi hộ một thư mời) ¦ Rumah tangga (satu undangan per rumah tangga)
+12 rue des Écoles ¦ 12 rue des Écoles ¦ Jl. Sekolah No. 12
+Régime, allergies ¦ Chế độ ăn, dị ứng ¦ Pola makan, alergi
+végétarien, sans gluten… ¦ ăn chay, không gluten… ¦ vegetarian, bebas gluten…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Đưa cả địa chỉ, email và điện thoại vào danh bạ người còn sống (hồ sơ của họ) ¦ Masukkan juga alamat, email, dan telepon ke direktori orang yang masih hidup (profilnya)
+Décoché : seulement dans cette cousinade. ¦ Bỏ chọn: chỉ trong buổi họp mặt họ hàng này. ¦ Tidak dicentang: hanya di reuni keluarga ini.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Hãy ghi ít nhất một tên hoặc một họ (hoặc chọn một hồ sơ). ¦ Tulis setidaknya nama depan atau nama keluarga (atau pilih profil).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Email này không đúng dạng (ví dụ: ten.ho@vidu.vn). ¦ Email ini tidak berformat benar (contoh: nama.keluarga@contoh.id).
+Invité ajouté. ¦ Đã thêm khách mời. ¦ Tamu ditambahkan.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Đã lưu, và cả trong danh bạ người còn sống. ¦ Tersimpan, juga di direktori orang yang masih hidup.
+Le lecteur de tableaux n’est pas chargé. ¦ Trình đọc bảng chưa được tải. ¦ Pembaca tabel belum dimuat.
+Importer une liste d’invités ¦ Nhập danh sách khách mời ¦ Impor daftar tamu
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Một bảng có một dòng tiêu đề: Tên, Họ, Email, Điện thoại, Địa chỉ, Mã bưu chính, Thành phố, Trả lời (có / không / có thể), Số người, Chế độ ăn, Ghi chú. ¦ Tabel dengan satu baris judul: Nama depan, Nama keluarga, Email, Telepon, Alamat, Kode pos, Kota, Jawaban (ya / tidak / mungkin), Jumlah, Pola makan, Catatan.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Không tìm thấy tên hay họ: dòng đầu tiên phải ghi tiêu đề các cột (Tên, Họ, Email…). ¦ Nama depan maupun nama keluarga tidak ditemukan: baris pertama harus berisi judul kolom (Nama depan, Nama keluarga, Email…).
+{n} (coordonnées et réponse complétées) ¦ {n} (đã bổ sung thông tin liên hệ và câu trả lời) ¦ {n} (kontak dan jawaban dilengkapi)
+{n} non reconnues : laissées de côté. ¦ {n} không nhận ra được: bị bỏ qua. ¦ {n} tidak dikenali: dikesampingkan.
+{n} non reconnue : laissée de côté. ¦ {n} không nhận ra được: bị bỏ qua. ¦ {n} tidak dikenali: dikesampingkan.
+⤓ Exporter le tableau des invités ¦ ⤓ Xuất bảng khách mời ¦ ⤓ Ekspor tabel tamu
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ Một tệp CSV (bảng tính) với các khách mời, nhánh, quan hệ họ hàng và câu trả lời của họ. ¦ Berkas CSV (spreadsheet) berisi tamu, cabangnya, hubungan kekerabatannya, dan jawabannya.
+Avec les adresses, courriels et téléphones ¦ Kèm địa chỉ, email và điện thoại ¦ Dengan alamat, email, dan telepon
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Đây là dữ liệu về người còn sống: chỉ chia sẻ tệp này với những người tổ chức. ¦ 🔒 Ini data orang yang masih hidup: bagikan berkas ini hanya dengan panitia.
+Seulement les invités cochés ¦ Chỉ khách mời đã chọn ¦ Hanya tamu yang dicentang
+Lien avec l’ancêtre ¦ Quan hệ với tổ tiên ¦ Hubungan dengan leluhur
+Lien avec la référence ¦ Quan hệ với người tham chiếu ¦ Hubungan dengan orang acuan
+Tableau exporté, avec les coordonnées. ¦ Đã xuất bảng, kèm thông tin liên hệ. ¦ Tabel diekspor, dengan kontak.
+Tableau exporté, sans les coordonnées. ¦ Đã xuất bảng, không kèm thông tin liên hệ. ¦ Tabel diekspor, tanpa kontak.
+Invités — {name} ¦ Khách mời — {name} ¦ Tamu — {name}
+Liste des invités ¦ Danh sách khách mời ¦ Daftar tamu
+Les invités cochés ¦ Khách mời đã chọn ¦ Tamu yang dicentang
+Ceux qui viennent ¦ Những người sẽ đến ¦ Yang akan datang
+Avec les coordonnées ¦ Kèm thông tin liên hệ ¦ Dengan kontak
+Le texte de l’invitation ¦ Nội dung thư mời ¦ Teks undangan
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Mỗi hộ một thư mời. Những từ này tự được thay thế: ¦ Satu undangan per rumah tangga. Kata-kata ini diganti otomatis:
+Répondre avant le ¦ Trả lời trước ngày ¦ Balas sebelum
+Contact pour répondre ¦ Người liên hệ để trả lời ¦ Kontak untuk membalas
+Objet du courriel ¦ Tiêu đề email ¦ Subjek email
+🖨 Imprimer les invitations… ¦ 🖨 In thư mời… ¦ 🖨 Cetak undangan…
+📝 Dans le traitement de texte ¦ 📝 Trong trình soạn thảo văn bản ¦ 📝 Di pengolah kata
+📁 Copie dans les médias ¦ 📁 Bản sao trong tư liệu ¦ 📁 Salinan di media
+{n} à inviter ¦ {n} cần mời ¦ {n} untuk diundang
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Một email gửi mọi người (bản sao ẩn) ¦ ✉️ Satu email untuk semua (BCC)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Hộp thư của bạn mở ra với nội dung đã sẵn: ứng dụng không gửi gì cả. ¦ Aplikasi emailmu terbuka dengan teks yang sudah siap: aplikasi ini tidak mengirim apa pun.
+✉️ Courriel prêt ¦ ✉️ Email đã sẵn sàng ¦ ✉️ Email siap
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Chưa chọn khách mời nào: hãy chọn khách mời trong thẻ “👥 Khách mời”. ¦ Belum ada tamu yang dicentang: centang tamu di tab “👥 Tamu”.
+Aucun foyer à inviter : coche des invités d’abord. ¦ Không có hộ nào để mời: hãy chọn khách mời trước. ¦ Tidak ada rumah tangga untuk diundang: centang tamu dulu.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Địa chỉ của hộ ở góc trên bên phải (phong bì có cửa sổ) ¦ Alamat rumah tangga di kanan atas (amplop berjendela)
+Le traitement de texte n’est pas chargé. ¦ Trình soạn thảo văn bản chưa được tải. ¦ Pengolah kata belum dimuat.
+Les faire-part ne sont pas chargés. ¦ Thiệp báo tin chưa được tải. ¦ Kartu pengumuman belum dimuat.
+Tous les descendants de {name} ¦ Mọi con cháu của {name} ¦ Semua keturunan {name}
+Réponse avant le {date} ¦ Trả lời trước ngày {date} ¦ Balas sebelum {date}
+Envoi vers les médias indisponible. ¦ Không thể gửi sang tư liệu. ¦ Pengiriman ke media tidak tersedia.
+Une copie de l’invitation est rangée dans les médias. ¦ Một bản sao của thư mời đã được lưu trong tư liệu. ¦ Salinan undangan disimpan di media.
+Copie non rangée dans les médias : {err} ¦ Bản sao chưa được lưu trong tư liệu: {err} ¦ Salinan tidak disimpan di media: {err}
+Le lien écrit sous le nom ¦ Quan hệ ghi dưới tên ¦ Hubungan yang ditulis di bawah nama
+Avec l’ancêtre ¦ Với tổ tiên ¦ Dengan leluhur
+Avec la référence ¦ Với người tham chiếu ¦ Dengan orang acuan
+Pour qui ¦ Cho ai ¦ Untuk siapa
+Invités cochés ¦ Khách mời đã chọn ¦ Tamu yang dicentang
+Qui viennent ¦ Những người sẽ đến ¦ Yang datang
+Présents ¦ Có mặt ¦ Hadir
+Par page A4 ¦ Mỗi trang A4 ¦ Per halaman A4
+Petite photo (si la fiche en a une) ¦ Ảnh nhỏ (nếu hồ sơ có ảnh) ¦ Foto kecil (jika profil punya)
+QR code (nom, branche et lien, lu par un téléphone) ¦ Mã QR (tên, nhánh và quan hệ, đọc bằng điện thoại) ¦ Kode QR (nama, cabang, dan hubungan, dibaca dengan ponsel)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Mỗi nhánh có màu riêng (thẻ “📊 Số liệu” để đổi màu). ¦ Setiap cabang punya warnanya (tab “📊 Angka” untuk mengubahnya).
+Personne à qui faire un badge. ¦ Không có ai để làm thẻ tên. ¦ Tidak ada orang untuk dibuatkan lencana.
+L’arbre décoratif n’est pas chargé. ¦ Cây trang trí chưa được tải. ¦ Pohon dekoratif belum dimuat.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Toàn bộ con cháu của {name}, khổ lớn, mỗi nhánh một màu, để treo vào ngày họp mặt họ hàng. Bản vẽ sau đó mở ra để bạn chỉnh sửa mọi thứ, rồi “⤓ Xuất” (PDF cho nhà in, có lề tràn và dấu cắt, PNG, SVG…). ¦ Seluruh keturunan {name}, ukuran besar, satu warna per cabang, untuk dipajang pada hari reuni keluarga. Gambarnya lalu terbuka agar kamu bisa merapikan semuanya, lalu “⤓ Ekspor” (PDF untuk percetakan, dengan bleed dan tanda potong, PNG, SVG…).
+l’ancêtre ¦ tổ tiên ¦ leluhur
+Les conjoints sous chaque nom ¦ Vợ/chồng dưới mỗi tên ¦ Pasangan di bawah setiap nama
+Une place pour coller les photos du jour (à côté des vivants) ¦ Một chỗ để dán ảnh trong ngày (cạnh người còn sống) ¦ Ruang untuk menempel foto hari itu (di samping yang masih hidup)
+🌳 Fabriquer le grand arbre ¦ 🌳 Làm cây lớn ¦ 🌳 Buat pohon besar
+Fabrication du grand arbre… ¦ Đang làm cây lớn… ¦ Membuat pohon besar…
+Aucune descendance pour cet ancêtre. ¦ Tổ tiên này không có con cháu. ¦ Leluhur ini tidak punya keturunan.
+Cet ancêtre est confidentiel. ¦ Tổ tiên này được bảo mật. ¦ Leluhur ini rahasia.
+Photos du jour ¦ Ảnh trong ngày ¦ Foto hari itu
+✅ Présence ¦ ✅ Điểm danh ¦ ✅ Kehadiran
+{here} sur {n} ¦ {here} trên {n} ¦ {here} dari {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 In danh sách điểm danh… ¦ 🖨 Cetak daftar hadir…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Chưa có ai trả lời có: câu trả lời được ghi trong “👥 Khách mời”. ¦ Belum ada yang menjawab ya: jawaban dicatat di “👥 Tamu”.
+{name} est là. ¦ {name} đã có mặt. ¦ {name} hadir.
+{name} n’est plus notée présente. ¦ {name} không còn được ghi là có mặt. ¦ {name} tidak lagi dicatat hadir.
+{name} n’est plus noté présent. ¦ {name} không còn được ghi là có mặt. ¦ {name} tidak lagi dicatat hadir.
+Présence — {name} ¦ Điểm danh — {name} ¦ Kehadiran — {name}
+{name} — présence ¦ {name} — điểm danh ¦ {name} — kehadiran
+Liste de présence ¦ Danh sách điểm danh ¦ Daftar hadir
+Places par table ¦ Số chỗ mỗi bàn ¦ Kursi per meja
+Compter aussi les « peut-être » ¦ Tính cả những người “có thể” ¦ Hitung juga yang “mungkin”
+Les petites branches partagent une table ¦ Các nhánh nhỏ ngồi chung một bàn ¦ Cabang kecil berbagi meja
+✨ Faire le plan par branche ¦ ✨ Xếp chỗ theo nhánh ¦ ✨ Buat denah menurut cabang
+🖨 Imprimer le plan… ¦ 🖨 In sơ đồ chỗ ngồi… ¦ 🖨 Cetak denah…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Một hộ không bao giờ bị tách ra. Đổi bàn của một người bằng ô của người đó; ↶ Hoàn tác sẽ bỏ sơ đồ. ¦ Satu rumah tangga tidak pernah dipisah. Ubah meja seseorang lewat kotaknya; ↶ Urungkan membatalkan denah.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Chưa có sơ đồ chỗ ngồi: hãy ghi câu trả lời, rồi bấm “✨ Xếp chỗ theo nhánh”. ¦ Belum ada denah tempat duduk: catat jawaban, lalu “✨ Buat denah menurut cabang”.
+{name} va à la table {no}. ¦ {name} ngồi bàn {no}. ¦ {name} duduk di meja {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Chưa có ai đến: hãy ghi các câu trả lời “Có” trước. ¦ Belum ada yang datang: catat dulu jawaban “Ya”.
+＋ Ajouter des photos… ¦ ＋ Thêm ảnh… ¦ ＋ Tambah foto…
+Retirer de l’album ¦ Gỡ khỏi album ¦ Lepas dari album
+L’album est vide ¦ Album đang trống ¦ Album kosong
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Ảnh trong ngày: hãy nhập từ máy tính hoặc chọn trong tư liệu. ¦ Foto hari itu: impor dari komputer atau pilih dari media.
+＋ Ajouter des photos ¦ ＋ Thêm ảnh ¦ ＋ Tambah foto
+Les photos de la cousinade ¦ Ảnh của buổi họp mặt họ hàng ¦ Foto reuni keluarga
+Ajouter à l’album ¦ Thêm vào album ¦ Tambah ke album
+{n} à l’album. ¦ {n} vào album. ¦ {n} ke album.
+Photo retirée de l’album (elle reste dans les médias). ¦ Đã gỡ ảnh khỏi album (ảnh vẫn còn trong tư liệu). ¦ Foto dilepas dari album (tetap ada di media).
+invités ¦ khách mời ¦ tamu
+oui ¦ có ¦ ya
+peut-être ¦ có thể ¦ mungkin
+non ¦ không ¦ tidak
+sans réponse ¦ chưa trả lời ¦ belum menjawab
+personnes attendues ¦ người dự kiến đến ¦ orang diharapkan hadir
+Par branche ¦ Theo nhánh ¦ Menurut cabang
+Invités ¦ Khách mời ¦ Tamu
+Réponses ¦ Câu trả lời ¦ Jawaban
+Couleur de la branche {name} ¦ Màu của nhánh {name} ¦ Warna cabang {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} có, {maybe} có thể, {no} không, {wait} chưa trả lời ¦ {yes} ya, {maybe} mungkin, {no} tidak, {wait} belum menjawab
+Régimes et allergies (de ceux qui viennent) ¦ Chế độ ăn và dị ứng (của những người sẽ đến) ¦ Pola makan dan alergi (dari yang datang)
+Le jour J : {n}. ¦ Ngày hội: {n}. ¦ Hari H: {n}.
+Couleur de la branche enregistrée. ¦ Đã lưu màu của nhánh. ¦ Warna cabang tersimpan.
+Organiser une cousinade… ¦ Tổ chức họp mặt họ hàng… ¦ Atur reuni keluarga…
+Descendants de {name} · {n} ¦ Con cháu của {name} · {n} ¦ Keturunan {name} · {n}
+=passage dans les médias ¦ lần xuất hiện trên truyền thông ¦ penampilan di media
+passages dans les médias ¦ lần xuất hiện trên truyền thông ¦ penampilan di media
+1980 et après ¦ Từ 1980 trở đi ¦ 1980 dan sesudahnya
+avant 1900 ¦ trước 1900 ¦ sebelum 1900
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Hãy thêm một tệp MP3, M4A, WAV, AIFF hoặc OGG vào một hồ sơ, một cuộc tìm kiếm diện rộng, một cuộc tìm hiểu… (hoặc kéo thả vào đây) và nó sẽ xuất hiện ở đây. ¦ Tambahkan berkas MP3, M4A, WAV, AIFF, atau OGG ke profil, penyisiran, penelusuran… (atau seret ke sini) dan berkas itu akan muncul di sini.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Hãy thêm một tệp MP4, MOV hoặc WEBM vào một hồ sơ, một cuộc tìm kiếm diện rộng, một cuộc tìm hiểu… (hoặc kéo thả vào đây) và video sẽ xuất hiện ở đây. ¦ Tambahkan berkas MP4, MOV, atau WEBM ke profil, penyisiran, penelusuran… (atau seret ke sini) dan videonya akan muncul di sini.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Hãy thêm một tấm thiếp: ảnh mặt trước, ảnh mặt sau, rồi địa điểm được chụp để tìm lại nó trên Bản đồ. ¦ Tambahkan kartu: gambar pemandangannya, bagian belakangnya, lalu tempat yang ditampilkan agar bisa ditemukan di Peta.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Hãy thêm chúng vào hồ sơ của một người (khối 🛂 Hộ chiếu) hoặc trong ✨ Báu vật → Hộ chiếu, nơi bạn cũng có thể nhập một bảng trích lục. ¦ Tambahkan di profil seseorang (blok 🛂 Paspor) atau di ✨ Harta → Paspor, tempat kamu juga bisa mengimpor indeks catatan.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Hãy thắp một ngọn nến trong ✨ Báu vật → Thắp một ngọn nến. ¦ Nyalakan satu di ✨ Harta → Nyalakan lilin.
+Amérique du Nord ¦ Bắc Mỹ ¦ Amerika Utara
+Assembler et retoucher des sons ¦ Ghép và chỉnh sửa âm thanh ¦ Gabungkan dan rapikan suara
+Aucun acte pour l’instant ¦ Chưa có giấy tờ nào ¦ Belum ada akta
+Aucun dossier de preuve ¦ Không có hồ sơ chứng minh nào ¦ Tidak ada berkas bukti
+Aucun lieu dans l’arbre pour l’instant ¦ Chưa có địa điểm nào trong cây ¦ Belum ada tempat di pohon
+Aucun livret pour l’instant ¦ Chưa có tập sách nhỏ nào ¦ Belum ada buklet
+Aucun nom indexé pour l’instant ¦ Chưa có tên nào được lập chỉ mục ¦ Belum ada nama yang diindeks
+Aucun partage pour l’instant ¦ Chưa chia sẻ gì ¦ Belum ada yang dibagikan
+Aucun passage dans les médias pour l’instant ¦ Chưa có lần xuất hiện trên truyền thông nào ¦ Belum ada penampilan di media
+Aucun passeport pour l’instant ¦ Chưa có hộ chiếu nào ¦ Belum ada paspor
+Aucun projet de montage pour l’instant ¦ Chưa có dự án dựng phim nào ¦ Belum ada proyek penyuntingan
+Aucun questionnaire pour l’instant ¦ Chưa có bảng câu hỏi nào ¦ Belum ada kuesioner
+Aucun rattachement pour l’instant ¦ Chưa có mối liên kết giáo xứ nào ¦ Belum ada keterkaitan paroki
+Aucun recueil pour l’instant ¦ Chưa có tuyển tập nào ¦ Belum ada kumpulan
+Aucun son pour l’instant ¦ Chưa có âm thanh nào ¦ Belum ada suara
+Aucune annonce pour l’instant ¦ Chưa có tin rao nào ¦ Belum ada iklan
+Aucune bougie au registre ¦ Chưa có ngọn nến nào trong sổ ¦ Belum ada lilin di daftar
+Aucune carte d’électeur pour l’instant ¦ Chưa có thẻ cử tri nào ¦ Belum ada kartu pemilih
+Aucune carte postale pour l’instant ¦ Chưa có bưu thiếp nào ¦ Belum ada kartu pos
+Aucune création ni carrière pour l’instant ¦ Chưa có tác phẩm hay sự nghiệp nào ¦ Belum ada karya atau karier
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Chưa có yêu cầu nào: hãy mở một ảnh và bấm “📤 Hỏi đây là ai”. ¦ Belum ada permintaan: buka foto dan klik “📤 Tanyakan siapa ini”.
+Aucune demande pour l’instant ¦ Chưa có yêu cầu nào ¦ Belum ada permintaan
+Aucune gazette pour l’instant ¦ Chưa có tờ báo nhỏ nào ¦ Belum ada warta
+Aucune image de lieu pour l’instant ¦ Chưa có hình ảnh địa điểm nào ¦ Belum ada gambar tempat
+Aucune langue notée pour l’instant ¦ Chưa ghi ngôn ngữ nào ¦ Belum ada bahasa yang dicatat
+Aucune lettre pour l’instant ¦ Chưa có lá thư nào ¦ Belum ada surat
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Chưa có ngôi nhà nào: “＋ Ngôi nhà mới”. ¦ Belum ada rumah: “＋ Rumah baru”.
+Aucune personne n’a encore de profil ¦ Chưa ai có hồ sơ nghề nghiệp ¦ Belum ada yang punya profil
+Aucune règle pour l’instant ¦ Chưa có quy tắc nào ¦ Belum ada aturan
+Aucune récompense pour l’instant ¦ Chưa có giải thưởng nào ¦ Belum ada penghargaan
+Aucune transcription d’acte pour l’instant ¦ Chưa có bản chép giấy tờ nào ¦ Belum ada transkripsi akta
+Aucune vidéo pour l’instant ¦ Chưa có video nào ¦ Belum ada video
+Auteur, réalisation ¦ Tác giả, đạo diễn ¦ Penulis, sutradara
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Tuyệt vời! Trợ lý có thể tìm xa hơn (đến 12 thế hệ). ¦ Hebat! Asisten bisa mencari lebih jauh (hingga 12 generasi).
+Carte du droit de vote ¦ Bản đồ quyền bầu cử ¦ Peta hak pilih
+Cette liste est cachée ¦ Danh sách này đang bị ẩn ¦ Daftar ini disembunyikan
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Những gì bạn ghi ở đây dựa theo giấy tờ: đây không phải lời khuyên pháp lý. ¦ Yang kamu catat di sini mengikuti akta: ini bukan nasihat hukum.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Đây là thông tin riêng tư: hãy cho hiện trong Cài đặt trước. ¦ Ini informasi pribadi: tampilkan dulu di Pengaturan.
+Chercher un nom, une commune… ¦ Tìm một tên, một xã… ¦ Cari nama, kota…
+Chercher un projet… (nom, photo, détails) ¦ Tìm một dự án… (tên, ảnh, chi tiết) ¦ Cari proyek… (nama, foto, rincian)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Tìm một bảng câu hỏi… (vd. Anne, chiến tranh, Marie) ¦ Cari kuesioner… (mis. Anne, perang, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Tìm một bản đồ… (vd. Bretagne, 1978, Lucie) ¦ Cari peta… (mis. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Tìm một ngôi nhà… (tên, địa điểm, thời kỳ, người, điều tra dân số) ¦ Cari rumah… (nama, tempat, masa, orang, sensus)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Tìm một người… (vd. Martin, thị trưởng, vận động viên) ¦ Cari orang… (mis. Martin, wali kota, atlet)
+Chercher… (commune, cote, année, service d’archives) ¦ Tìm… (xã, ký hiệu lưu trữ, năm, cơ quan lưu trữ) ¦ Cari… (kota, nomor arsip, tahun, lembaga arsip)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Tìm… (xã, khu, số, địa danh, chủ sở hữu) ¦ Cari… (kota, seksi, nomor, nama tempat, pemilik)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Tìm… (người, tài sản, công chứng viên, địa điểm, ký hiệu lưu trữ) ¦ Cari… (orang, harta, notaris, tempat, nomor arsip)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Tìm… (tiêu đề, tác giả, địa điểm, tên được nhắc, những gì thấy được, ghi chú) ¦ Cari… (judul, penulis, tempat, nama yang disebut, yang terlihat, catatan)
+Chercher… (titre, lieu) ¦ Tìm… (tiêu đề, địa điểm) ¦ Cari… (judul, tempat)
+Chercher… (titre, personne, lieu, année) ¦ Tìm… (tiêu đề, người, địa điểm, năm) ¦ Cari… (judul, orang, tempat, tahun)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Tìm… (tiêu đề, văn bản, người, địa điểm, ký hiệu lưu trữ) ¦ Cari… (judul, teks, orang, tempat, nomor arsip)
+Choisir la personne, puis la sorte de fiche ¦ Chọn người, rồi chọn loại mục ¦ Pilih orangnya, lalu jenis entri
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Chọn các cột (“⚙️ Trường hiển thị”, thẻ “Danh sách”) ¦ Pilih kolom (“⚙️ Kolom yang ditampilkan”, tab “Daftar”)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Chọn một người, rồi đánh dấu họ từng là gì (nghệ sĩ, vận động viên, người được bầu…) ¦ Pilih seseorang, lalu centang siapa dia dulu (seniman, atlet, pejabat terpilih…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Hãy chọn người bắt đầu (Sosa 1) và thêm cha mẹ của người đó. ¦ Pilih orang awal (Sosa 1) dan tambahkan orang tuanya.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Hãy chọn người, rồi chọn loại mục: mục sẽ được xếp vào trang của người đó và hiện ở đây. ¦ Pilih orangnya, lalu jenis entri: entri itu masuk ke halamannya dan muncul di sini.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Hãy chọn ảnh của một giấy tờ (rửa tội, kết hôn, an táng…) và chép lại ngay bên cạnh. ¦ Pilih gambar akta (baptis, pernikahan, pemakaman…) dan transkripsikan di sampingnya.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Bấm vào một nước để xem các mốc thời gian (và các bang của Thụy Sĩ, các tỉnh của Canada…). ¦ Klik sebuah negara untuk melihat tanggal-tanggalnya (dan kanton Swiss, provinsi Kanada…).
+Clubs et équipes, résultats, records, saisons. ¦ Câu lạc bộ và đội, kết quả, kỷ lục, mùa giải. ¦ Klub dan tim, hasil, rekor, musim.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Hãy bắt đầu bằng “＋ Số báo”, “＋ Sách” hoặc “＋ Phim tài liệu”, ở đầu trang. ¦ Mulailah dengan “＋ Edisi”, “＋ Buku”, atau “＋ Dokumenter” di bagian atas halaman.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Hãy bắt đầu một cái: nó sẽ xuất hiện ở đây, cùng những cái khác, để mở lại sau. ¦ Mulai satu: nanti muncul di sini bersama yang lain, agar bisa dibuka lagi kemudian.
+Commune, section, numéro ¦ Xã, khu, số ¦ Kota, seksi, nomor
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Hãy tạo loại của bạn trước (“＋ Tạo loại riêng của tôi…” trong “＋ Tác phẩm mới”), rồi các mục của nó. ¦ Buat dulu jenismu (“＋ Buat jenisku sendiri…” di “＋ Karya baru”), lalu entri-entrinya.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Hãy tạo tuyển tập (sổ bộ, danh sách, sổ tay…), rồi thêm ảnh của bạn: mỗi ảnh thành một trang. ¦ Buat kumpulannya (register, daftar, buku catatan…), lalu tambahkan fotomu: setiap foto menjadi satu halaman.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Hãy tạo một bản đồ, rồi thêm ảnh từ ứng dụng hoặc nhập từ máy: những ảnh có tọa độ GPS sẽ tự đặt vào chỗ. ¦ Buat peta, lalu tambahkan foto dari aplikasi atau impor: foto yang punya koordinat GPS menempatkan dirinya sendiri.
+Créer ce jour-là ¦ Tạo vào ngày đó ¦ Buat pada hari itu
+Date (récent d’abord) ¦ Ngày (mới nhất trước) ¦ Tanggal (terbaru dulu)
+Date de l’acte ¦ Ngày của giấy tờ ¦ Tanggal akta
+Date pour les femmes ¦ Ngày cho phụ nữ ¦ Tanggal untuk perempuan
+Date pour les hommes ¦ Ngày cho nam giới ¦ Tanggal untuk laki-laki
+Décennie ¦ Thập niên ¦ Dekade
+Siècle ¦ Thế kỷ ¦ Abad
+Précédent ¦ Trước ¦ Sebelumnya
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Chúng được thêm vào hồ sơ của một người (khối Thẻ cử tri). ¦ Ditambahkan di profil seseorang (blok Kartu pemilih).
+Ensuite par ¦ Rồi theo ¦ Lalu menurut
+Grouper par catégorie ¦ Nhóm theo danh mục ¦ Kelompokkan menurut kategori
+Héritages et successions ¦ Thừa kế và di sản ¦ Warisan dan suksesi
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Cây cần có ngày tháng: một lần sinh, một lần kết hôn, một lần mất… ¦ Pohon perlu tanggal: kelahiran, pernikahan, kematian…
+Index des noms ¦ Chỉ mục tên ¦ Indeks nama
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Phát minh và bằng sáng chế, khám phá (loài, sao chổi, di chỉ…), công bố khoa học. ¦ Penemuan dan patennya, temuan (spesies, komet, situs…), publikasi ilmiah.
+La liste « Palmarès » ¦ Danh sách “Thành tích” ¦ Daftar “Prestasi”
+La liste « Revue de presse » ¦ Danh sách “Điểm báo” ¦ Daftar “Kliping pers”
+Palmarès ¦ Thành tích ¦ Prestasi
+🏆 Palmarès ¦ 🏆 Thành tích ¦ 🏆 Prestasi
+Langue des actes et des documents ¦ Ngôn ngữ của giấy tờ và tài liệu ¦ Bahasa akta dan dokumen
+Le cercle autour des ancêtres ¦ Vòng tròn quanh tổ tiên ¦ Lingkaran di sekitar leluhur
+Le plus de fiches ¦ Nhiều mục nhất ¦ Entri terbanyak
+Le plus de photos ¦ Nhiều ảnh nhất ¦ Foto terbanyak
+Le plus de profils ¦ Nhiều hồ sơ nghề nghiệp nhất ¦ Profil terbanyak
+Les autres listes ¦ Các danh sách khác ¦ Daftar lainnya
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Các địa điểm lấy từ những lần sinh, kết hôn và mất trong cây. ¦ Tempat-tempat berasal dari kelahiran, pernikahan, dan kematian di pohon.
+Les plus grandes ¦ Lớn nhất trước ¦ Terbesar dulu
+Lettres aux descendants ¦ Thư gửi con cháu ¦ Surat untuk keturunan
+L’ordre des outils, et ceux qu’on montre ¦ Thứ tự các công cụ, và những công cụ được hiện ¦ Urutan alat, dan yang ditampilkan
+Marquer dans les transcriptions ¦ Đánh dấu trong bản chép ¦ Tandai di transkripsi
+Mes annonces et courriers ¦ Tin rao và thư từ của tôi ¦ Iklan dan suratku
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Đưa những gì đang hiện vào một dự án của Xưởng ¦ Masukkan yang ditampilkan ke proyek Bengkel
+Modifiés récemment ¦ Sửa gần đây ¦ Baru diubah
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Dựng video: đoạn phim, tiêu đề, chuyển cảnh mờ, lồng hình, nhạc ¦ Sunting video: klip, judul, transisi pudar, sisipan, musik
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Bài hát, album và đĩa, bản thu, buổi hòa nhạc, chuyến lưu diễn, tác phẩm nhạc cổ điển. ¦ Lagu, album dan piringan, rekaman, konser, tur, karya musik klasik.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Ghi lại mỗi xóm hay làng thuộc giáo xứ nào trước Cách mạng Pháp. ¦ Catat setiap dusun atau desa termasuk paroki mana sebelum Revolusi Prancis.
+Numéro, tome, épisode ¦ Số, tập, tập phim ¦ Edisi, jilid, episode
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Hoặc “📷 Đọc ảnh chụp các quy tắc” để tự điền tất cả. ¦ Atau “📷 Baca tangkapan layar aturan” untuk mengisinya otomatis.
+Où j’en suis ¦ Tôi đang ở đâu ¦ Sampai mana aku
+Par commune ¦ Theo xã ¦ Menurut kota
+Par date de l’œuvre ¦ Theo ngày của tác phẩm ¦ Menurut tanggal karya
+Par date, récentes d’abord ¦ Theo ngày, mới nhất trước ¦ Menurut tanggal, terbaru dulu
+Par personne ¦ Theo người ¦ Menurut orang
+Par période ¦ Theo thời kỳ ¦ Menurut periode
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Hãy chia sẻ một nhánh trong ✨ Báu vật → Chia sẻ một nhánh (trong một thời gian). ¦ Bagikan cabang di ✨ Harta → Bagikan cabang (untuk sementara).
+Pas encore de lignée ¦ Chưa có dòng dõi nào ¦ Belum ada garis keturunan
+Passeport des lieux ¦ Hộ chiếu các địa điểm ¦ Paspor tempat
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Tranh vẽ, phác họa, tranh khắc, tượng và bản đúc, ảnh chụp, áp phích, triển lãm… ¦ Lukisan, gambar, grafis cetak, patung dan cetakan cor, foto, poster, pameran…
+Plus anciens ¦ Cũ nhất ¦ Terlama
+Priorité d’achat ¦ Ưu tiên mua ¦ Prioritas pembelian
+Précisions ¦ Chi tiết ¦ Rincian
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Xếp các mục theo loại, mỗi loại có một tiêu đề phụ ¦ Urutkan entri menurut jenis, dengan subjudul untuk masing-masing
+Ranger par sorte ¦ Xếp theo loại ¦ Urutkan menurut jenis
+Revenir sur un son en cours de travail ¦ Quay lại một âm thanh đang làm dở ¦ Kembali ke suara yang sedang dikerjakan
+Revue, collection, série ¦ Tạp chí, tuyển tập, loạt ¦ Majalah, koleksi, seri
+＋ Revue, collection, série ¦ ＋ Tạp chí, tuyển tập, loạt ¦ ＋ Majalah, koleksi, seri
+Rien ne manque sur 5 générations ¦ Không thiếu gì trên 5 thế hệ ¦ Tidak ada yang kurang dalam 5 generasi
+Règles des journaux ¦ Quy tắc của các tờ báo ¦ Aturan surat kabar
+Région, puis pays ¦ Vùng, rồi đến nước ¦ Wilayah, lalu negara
+Pays (A → Z) ¦ Nước (A → Z) ¦ Negara (A → Z)
+Tous les pays, dans l’ordre que tu veux ¦ Mọi nước, theo thứ tự bạn muốn ¦ Semua negara, dalam urutan yang kamu mau
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ Một tệp .ics để mở trong lịch của bạn (Apple, Google, Outlook…) ¦ Berkas .ics untuk dibuka di kalendermu (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Một âm thanh từ cơ sở dữ liệu hoặc từ máy tính, để chỉnh sửa và giữ làm dự án ¦ Suara dari basis data atau komputer, untuk diolah dan disimpan sebagai proyek
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Một phiếu ghi tập hợp văn bản, hình ảnh, người, bản đồ và danh sách về một chủ đề. ¦ Kartu catatan menghimpun teks, gambar, orang, peta, dan daftar tentang satu topik.
+Voir qui pouvait voter en ¦ Xem ai được bầu cử vào năm ¦ Lihat siapa yang boleh memilih pada
+pas de date ¦ không có ngày ¦ tanpa tanggal
+Écart ¦ Chênh lệch ¦ Selisih
+↔ Écart ¦ ↔ Chênh lệch ¦ ↔ Selisih
+Écart hommes / femmes ¦ Chênh lệch nam / nữ ¦ Selisih laki-laki / perempuan
+Écoles, études et apprentissages, diplômes, établissements. ¦ Trường học, học tập và học nghề, bằng cấp, cơ sở đào tạo. ¦ Sekolah, studi dan magang, ijazah, lembaga.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Hãy viết tin rao của bạn và xem ngay nó sẽ tốn bao nhiêu theo quy tắc của tờ báo. ¦ Tulis iklanmu dan langsung lihat berapa biayanya menurut aturan surat kabar.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Hãy viết tin rao của bạn, xem ngay nó sẽ tốn bao nhiêu theo quy tắc của tờ báo, và theo dõi diễn biến của nó. ¦ Tulis iklanmu, langsung lihat berapa biayanya menurut aturan surat kabar, dan ikuti perkembangannya.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Hãy viết một lá trong ✨ Báu vật → Thư gửi con cháu: “nhân sinh nhật 18 tuổi của Léa”, “vào năm 2050”. ¦ Tulis satu di ✨ Harta → Surat untuk keturunan: “untuk ulang tahun ke-18 Léa”, “pada tahun 2050”.
+↗ Ouvrir dans Recherche ¦ ↗ Mở trong Nghiên cứu ¦ ↗ Buka di Riset
+⚙️ Ouvrir les Réglages ¦ ⚙️ Mở Cài đặt ¦ ⚙️ Buka Pengaturan
+⚙️ Ranger les outils ¦ ⚙️ Sắp xếp các công cụ ¦ ⚙️ Atur alat
+✅ Tâches de l’Atelier ¦ ✅ Việc cần làm của Xưởng ¦ ✅ Tugas Bengkel
+✉️ Courriers envoyés ¦ ✉️ Thư đã gửi ¦ ✉️ Surat terkirim
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Mở các lá thư trong ✨ Báu vật ¦ ✉️ Buka surat di ✨ Harta
+✝️ Décès, sépultures ¦ ✝️ Mất, an táng ¦ ✝️ Kematian, pemakaman
+👶 Naissances, baptêmes ¦ 👶 Sinh, rửa tội ¦ 👶 Kelahiran, baptis
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Những gì có thể lấy về (giấy phép) ¦ ❓ Yang bisa diambil (lisensi)
+❓ Comment noter un héritage ? ¦ ❓ Làm sao ghi một khoản thừa kế? ¦ ❓ Bagaimana mencatat warisan?
+⤒ Importer des relevés ¦ ⤒ Nhập bảng trích lục ¦ ⤒ Impor indeks catatan
+⤒ Importer les réponses ¦ ⤒ Nhập các câu trả lời ¦ ⤒ Impor jawaban
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Xuất các ngày kỷ niệm (.ics) ¦ ⤓ Ekspor hari peringatan (.ics)
+＋ Ajouter une image ¦ ＋ Thêm hình ảnh ¦ ＋ Tambah gambar
+＋ Ajouter une parcelle ¦ ＋ Thêm thửa đất ¦ ＋ Tambah bidang tanah
+＋ Annonce ou courrier ¦ ＋ Tin rao hoặc thư ¦ ＋ Iklan atau surat
+＋ Nouveau dossier de preuve ¦ ＋ Hồ sơ chứng minh mới ¦ ＋ Berkas bukti baru
+＋ Nouveau livret ¦ ＋ Tập sách nhỏ mới ¦ ＋ Buklet baru
+＋ Nouveau montage ¦ ＋ Bản dựng mới ¦ ＋ Suntingan baru
+＋ Nouveau passage dans les médias ¦ ＋ Lần xuất hiện trên truyền thông mới ¦ ＋ Penampilan di media baru
+＋ Nouveau passeport ¦ ＋ Hộ chiếu mới ¦ ＋ Paspor baru
+＋ Nouveau projet son ¦ ＋ Dự án âm thanh mới ¦ ＋ Proyek suara baru
+＋ Nouveau questionnaire ¦ ＋ Bảng câu hỏi mới ¦ ＋ Kuesioner baru
+＋ Nouveau recueil ¦ ＋ Tuyển tập mới ¦ ＋ Kumpulan baru
+＋ Nouvelle carte ¦ ＋ Bản đồ mới ¦ ＋ Peta baru
+＋ Nouvelle carte postale ¦ ＋ Bưu thiếp mới ¦ ＋ Kartu pos baru
+＋ Nouvelle demande… ¦ ＋ Yêu cầu mới… ¦ ＋ Permintaan baru…
+＋ Nouvelle maison ¦ ＋ Ngôi nhà mới ¦ ＋ Rumah baru
+＋ Nouvelle transcription ¦ ＋ Bản chép mới ¦ ＋ Transkripsi baru
+＋ Règles d’un journal ¦ ＋ Quy tắc của một tờ báo ¦ ＋ Aturan sebuah surat kabar
+＋ Épisode ¦ ＋ Tập phim ¦ ＋ Episode
+🌍 Le droit de vote dans le monde ¦ 🌍 Quyền bầu cử trên thế giới ¦ 🌍 Hak pilih di dunia
+📂 Projets son ¦ 📂 Dự án âm thanh ¦ 📂 Proyek suara
+📚 Vers l’Atelier ¦ 📚 Sang Xưởng ¦ 📚 Ke Bengkel
+📷 Lire une capture des règles ¦ 📷 Đọc ảnh chụp các quy tắc ¦ 📷 Baca tangkapan layar aturan
+🔍 Ouvrir l’assistant ¦ 🔍 Mở trợ lý ¦ 🔍 Buka asisten
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Mở trợ lý “Còn thiếu gì?” ¦ 🔍 Buka asisten “Apa yang kurang?”
+🔍 Qui est sur cette photo ? ¦ 🔍 Ai có trong ảnh này? ¦ 🔍 Siapa yang ada di foto ini?
+🔍 Rappels d’enquête ¦ 🔍 Lời nhắc cuộc tìm hiểu ¦ 🔍 Pengingat penelusuran
+🔗 Partager une branche ¦ 🔗 Chia sẻ một nhánh ¦ 🔗 Bagikan cabang
+🕯️ Allumer une bougie ¦ 🕯️ Thắp một ngọn nến ¦ 🕯️ Nyalakan lilin
+🖼️ Tous les médias ¦ 🖼️ Mọi tư liệu ¦ 🖼️ Semua media
+🗺 Toutes mes cartes ¦ 🗺 Mọi bản đồ của tôi ¦ 🗺 Semua petaku
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Mở trong ✨ Báu vật ¦ 🛂 Buka di ✨ Harta
+🛡 Les règles ¦ 🛡 Các quy tắc ¦ 🛡 Aturan
