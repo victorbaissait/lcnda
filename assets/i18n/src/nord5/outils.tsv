@@ -1,0 +1,980 @@
+fr ¦ hr ¦ sl
+Génération {g} ¦ Generacija {g} ¦ Rod {g}
+★ ancêtre commun ¦ ★ zajednički predak ¦ ★ skupni prednik
+Comment sont-ils parents ? ¦ Kako su u srodstvu? ¦ Kako sta v sorodu?
+cousins issus de germains aussi par {name} (implexe) ¦ bratići u drugom koljenu i preko {name} (implex) ¦ sestrični v drugem kolenu tudi prek {name} (implex)
+⚠ Lieux sans position : {list} — écris « Nom 48.11, -1.68 » ¦ ⚠ Mjesta bez položaja: {list} — napiši „Naziv 48.11, -1.68” ¦ ⚠ Kraji brez položaja: {list} — napiši »Ime 48.11, -1.68«
+De la génération {a} à la génération {b}, le centre de la famille s’est déplacé de {km} km. ¦ Od generacije {a} do generacije {b} središte obitelji pomaknulo se za {km} km. ¦ Od rodu {a} do rodu {b} se je središče družine premaknilo za {km} km.
+Centre de gravité de {n} générations, {km} km parcourus. ¦ Težište generacija: {n}, prijeđeno {km} km. ¦ Težišče rodov: {n}, prepotovanih {km} km.
+Centre de gravité de {n} générations. ¦ Težište generacija: {n}. ¦ Težišče rodov: {n}.
+Ajoute des lieux avec leur génération (ou « Depuis l’app »). ¦ Dodaj mjesta s njihovom generacijom (ili „Iz aplikacije”). ¦ Dodaj kraje z njihovim rodom (ali »Iz aplikacije«).
+Gén. {g} ({max}) ¦ Gen. {g} ({max}) ¦ Rod {g} ({max})
+{found} ancêtres trouvés sur {max} possibles en {n} générations ({pct} %). ¦ Pronađeno predaka: {found} od {max} mogućih u {n} generacija ({pct} %). ¦ Najdenih prednikov: {found} od {max} možnih v rodovih: {n} ({pct} %).
+Complétude : {pct} % des ancêtres sur {n} générations. ¦ Potpunost: {pct} % predaka kroz {n} generacija. ¦ Popolnost: {pct} % prednikov v rodovih: {n}.
+… et {n} lignes de plus (« 🖨 Imprimer le tableau » les met toutes) ¦ … i još redaka: {n} („🖨 Ispiši tablicu” uključuje sve) ¦ … in še vrstic: {n} (»🖨 Natisni tabelo« vključi vse)
+Tableau d’ascendance : {n} ancêtres. ¦ Tablica predaka: {n} predaka. ¦ Tabela prednikov: prednikov {n}.
+Tableau d’ascendance ¦ Tablica predaka ¦ Tabela prednikov
+Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »). ¦ Dodaj podudaranja od {lo} do {hi} cM sa zajedničkim podudaranjima (ili „Iz aplikacije”). ¦ Dodaj ujemanja od {lo} do {hi} cM s skupnimi ujemanji (ali »Iz aplikacije«).
+dates · surtout en {month} ¦ datumi · najviše u mjesecu {month} ¦ datumi · največ v mesecu {month}
+Roue de l’année : {n} dates, surtout en {month}. ¦ Kotač godine: datuma {n}, najviše u mjesecu {month}. ¦ Kolo leta: datumov {n}, največ v mesecu {month}.
+{name} (à gauche) ¦ {name} (lijevo) ¦ {name} (levo)
+{name} (à droite) ¦ {name} (desno) ¦ {name} (desno)
+Barres et courbe : {n} lignes. ¦ Stupci i krivulja: redaka {n}. ¦ Stolpci in krivulja: vrstic {n}.
+Sous {v} ¦ Ispod {v} ¦ Pod {v}
+Au-dessus de {v} ¦ Iznad {v} ¦ Nad {v}
+Collines empilées : {s} séries sur {n} périodes. ¦ Naslagani brežuljci: nizova {s} kroz razdoblja: {n}. ¦ Naloženi griči: nizov {s}, obdobij {n}.
+Coordonnées parallèles : {n} lignes sur {a} axes. ¦ Paralelne koordinate: linija {n} na osi: {a}. ¦ Vzporedne koordinate: črt {n}, osi {a}.
+Chemin trouvé en {n} étapes. ¦ Put pronađen, koraka: {n}. ¦ Pot najdena, korakov: {n}.
+Chemin trouvé en 1 étape. ¦ Put pronađen u 1 koraku. ¦ Pot najdena v 1 koraku.
+Aucun ancêtre dont le lieu de naissance a des coordonnées ({n} sans lieu situé). ¦ Nema pretka čije mjesto rođenja ima koordinate (bez smještenog mjesta: {n}). ¦ Ni prednika, katerega rojstni kraj ima koordinate (brez umeščenega kraja: {n}).
+Aucun ancêtre dont le lieu de naissance a des coordonnées. ¦ Nema pretka čije mjesto rođenja ima koordinate. ¦ Ni prednika, katerega rojstni kraj ima koordinate.
+Le centre de la famille de {name} ¦ Središte obitelji osobe {name} ¦ Središče družine osebe {name}
+Les générations de {name} ¦ Generacije osobe {name} ¦ Rodovi osebe {name}
+{n} lieux de naissance pris dans ta base ({m} sans lieu situé). ¦ Mjesta rođenja uzeta iz tvoje baze: {n} (bez smještenog mjesta: {m}). ¦ Rojstni kraji iz tvoje baze: {n} (brez umeščenega kraja: {m}).
+{n} lieux de naissance pris dans ta base. ¦ Mjesta rođenja uzeta iz tvoje baze: {n}. ¦ Rojstni kraji iz tvoje baze: {n}.
+L’arbre de {name} : ce qu’on connaît ¦ Stablo osobe {name}: što znamo ¦ Drevo osebe {name}: kaj vemo
+Tableau d’ascendance de {name} ¦ Tablica predaka osobe {name} ¦ Tabela prednikov osebe {name}
+{n} ancêtres pris dans ta base (arrêt à 4 096 lignes). ¦ Preci uzeti iz tvoje baze: {n} (zaustavljeno na 4 096 redaka). ¦ Predniki iz tvoje baze: {n} (ustavljeno pri 4 096 vrsticah).
+{n} ancêtres pris dans ta base. ¦ Preci uzeti iz tvoje baze: {n}. ¦ Predniki iz tvoje baze: {n}.
+Aucune naissance ni aucun décès daté. ¦ Nema datiranog rođenja ni smrti. ¦ Ni datiranega rojstva ne smrti.
+Filles ¦ Djevojčice ¦ Deklice
+Garçons ¦ Dječaci ¦ Dečki
+{n} noms sur {p} périodes. ¦ Imena: {n}, razdoblja: {p}. ¦ Imen: {n}, obdobij: {p}.
+{n} personnes comptées, {y} années. ¦ Prebrojeno osoba: {n}, godina: {y}. ¦ Preštetih oseb: {n}, let: {y}.
+Arrière-arrière-grands-parents ¦ Pra-prabake i pra-pradjedovi ¦ Prapra-stari starši
+Arrière-arrière-arrière-grands-parents ¦ Pra-pra-prabake i pra-pra-pradjedovi ¦ Praprapra-stari starši
+Les cartes ne sont pas chargées. ¦ Karte nisu učitane. ¦ Zemljevidi niso naloženi.
+Ancêtres connus ¦ Poznati preci ¦ Znani predniki
+Grand-père paternel ¦ Djed po ocu ¦ Dedek po očetu
+Grand-mère paternelle ¦ Baka po ocu ¦ Babica po očetu
+Grand-père maternel ¦ Djed po majci ¦ Dedek po materi
+Grand-mère maternelle ¦ Baka po majci ¦ Babica po materi
+Fêtes des prénoms ¦ Imendani ¦ Godovi
+Âge au 1er enfant ¦ Dob kod 1. djeteta ¦ Starost ob 1. otroku
+Les métiers ¦ Zanimanja ¦ Poklici
+Un titre par génération ¦ Jedan naslov po generaciji ¦ En naslov na rod
+Tous mes tests ¦ Svi moji testovi ¦ Vsi moji testi
+Par décennie ¦ Po desetljeću ¦ Po desetletjih
+Par demi-siècle ¦ Po pola stoljeća ¦ Po polstoletjih
+Par siècle ¦ Po stoljeću ¦ Po stoletjih
+Décès ↔ naissances ¦ Smrti ↔ rođenja ¦ Smrti ↔ rojstva
+Périodes ¦ Razdoblja ¦ Obdobja
+Personnes au plus ¦ Najviše osoba ¦ Največ oseb
+Âge au 1er mariage ¦ Dob kod 1. braka ¦ Starost ob 1. poroki
+Aucune naissance datée. ¦ Nema datiranog rođenja. ¦ Ni datiranega rojstva.
+Un dégradé ¦ Prijelaz boja ¦ Barvni prehod
+Une couleur chacune ¦ Svaka svoja boja ¦ Vsaka svojo barvo
+Lien avec la personne d’avant ¦ Veza s prethodnom osobom ¦ Povezava s prejšnjo osebo
+son époux / épouse ¦ njezin muž / njegova žena ¦ zakonec / zakonka
+Selon la place ¦ Ovisno o prostoru ¦ Glede na prostor
+En liste, étape par étape ¦ Kao popis, korak po korak ¦ Kot seznam, korak za korakom
+La phrase du lien ¦ Rečenica o srodstvu ¦ Stavek o sorodstvu
+Une seule ¦ Samo jedna ¦ Samo ena
+Sens des flèches ¦ Smjer strelica ¦ Smer puščic
+Des plus anciens vers toi ¦ Od najstarijih prema tebi ¦ Od najstarejših proti tebi
+De toi vers les plus anciens ¦ Od tebe prema najstarijima ¦ Od tebe proti najstarejšim
+La trajectoire ¦ Putanja ¦ Pot gibanja
+Taille des lieux ¦ Veličina mjesta ¦ Velikost krajev
+La phrase du déplacement ¦ Rečenica o pomaku ¦ Stavek o premiku
+Écarter les points d’un même lieu ¦ Razmakni točke istog mjesta ¦ Razmakni točke istega kraja
+Noms des lieux les plus remplis ¦ Nazivi najpopunjenijih mjesta ¦ Imena najbolj zasedenih krajev
+D’où viennent mes ancêtres ¦ Odakle dolaze moji preci ¦ Od kod prihajajo moji predniki
+Trouvés ¦ Pronađeno ¦ Najdeno
+Longueur des barres ¦ Duljina stupaca ¦ Dolžina stolpcev
+Écrire les % ¦ Prikaži % ¦ Prikaži %
+Les ancêtres ¦ Preci ¦ Predniki
+Lignes montrées au plus ¦ Najviše prikazanih redaka ¦ Največ prikazanih vrstic
+Les correspondances ¦ Podudaranja ¦ Ujemanja
+ADN partagé ¦ Zajednička DNK ¦ Skupna DNK
+Correspondances au plus ¦ Najviše podudaranja ¦ Največ ujemanj
+Mes cousins ADN, par grand-parent ¦ Moji DNK rođaci, po baki i djedu ¦ Moji DNK sorodniki, po starih starših
+La courbe = la colonne n° ¦ Krivulja = stupac br. ¦ Krivulja = stolpec št.
+Largeur des barres ¦ Širina stupaca ¦ Širina stolpcev
+Une colonne autour du centre ¦ Jedan stupac oko središta ¦ En stolpec okoli središča
+Par écart ¦ Po razlici ¦ Po razliki
+Par total ¦ Po ukupnom zbroju ¦ Po skupni vsoti
+Écrire les chiffres ¦ Prikaži brojke ¦ Prikaži številke
+Écart entre les collines ¦ Razmak između brežuljaka ¦ Razmik med griči
+À l’envers ¦ Obrnuto ¦ Obrnjeno
+Une par série ¦ Jedna po nizu ¦ Ena na niz
+Opacité des lignes ¦ Neprozirnost linija ¦ Prekrivnost črt
+La marche ¦ Stepenica ¦ Stopnica
+Carte des générations : {n} lieux de naissance. ¦ Karta generacija: mjesta rođenja: {n}. ¦ Zemljevid rodov: rojstni kraji: {n}.
+Génération {g} ({name}) : {found} sur {max} possibles ¦ Generacija {g} ({name}): {found} od {max} mogućih ¦ Rod {g} ({name}): {found} od {max} možnih
+{n} personnes différentes (implexe) ¦ Različitih osoba: {n} (implex) ¦ Različnih oseb: {n} (implex)
+Méthode de Leeds : {n} groupes de couleur. ¦ Metoda Leeds: skupina boja: {n}. ¦ Metoda Leeds: barvnih skupin: {n}.
+{name} : {n} en tout, le plus en {peak} ({v}) ¦ {name}: ukupno {n}, najviše u {peak} ({v}) ¦ {name}: skupaj {n}, največ v {peak} ({v})
+Courbe en escalier : {n} points. ¦ Stepenasta krivulja: točaka {n}. ¦ Stopničasta krivulja: točk {n}.
+n° de fiche ¦ br. zapisa ¦ št. zapisa
+liens de sang par {n} branches (implexe) ¦ krvne veze kroz grane: {n} (implex) ¦ krvne vezi prek vej: {n} (implex)
+{n} générations prises dans ta base. ¦ Generacije uzete iz tvoje baze: {n}. ¦ Rodovi iz tvoje baze: {n}.
+{n} correspondances prises dans l’onglet ADN. ¦ Podudaranja uzeta iz kartice DNK: {n}. ¦ Ujemanja iz zavihka DNK: {n}.
+{n} dates prises dans ta base. ¦ Datumi uzeti iz tvoje baze: {n}. ¦ Datumi iz tvoje baze: {n}.
+{n} périodes prises dans ta base. ¦ Razdoblja uzeta iz tvoje baze: {n}. ¦ Obdobja iz tvoje baze: {n}.
+{n} vies prises dans ta base. ¦ Životi uzeti iz tvoje baze: {n}. ¦ Življenja iz tvoje baze: {n}.
+Choisis deux personnes (« Depuis l’app ») ou écris le chemin, une personne par ligne. ¦ Odaberi dvije osobe („Iz aplikacije”) ili napiši put, jednu osobu po retku. ¦ Izberi dve osebi (»Iz aplikacije«) ali napiši pot, eno osebo na vrstico.
+{gen} : centre de {n} lieux de naissance ¦ {gen}: središte mjesta rođenja: {n} ¦ {gen}: središče rojstnih krajev: {n}
+{gen} : centre de {n} lieu de naissance ¦ {gen}: središte mjesta rođenja: {n} ¦ {gen}: središče rojstnih krajev: {n}
+écart moyen {km} km ¦ prosječno odstupanje {km} km ¦ povprečni razpon {km} km
+Ajoute des lieux de naissance avec leur génération (ou « Depuis l’app »). ¦ Dodaj mjesta rođenja s njihovom generacijom (ili „Iz aplikacije”). ¦ Dodaj rojstne kraje z njihovim rodom (ali »Iz aplikacije«).
+Ajoute des générations : la génération et le nombre d’ancêtres trouvés. ¦ Dodaj generacije: generaciju i broj pronađenih predaka. ¦ Dodaj rodove: rod in število najdenih prednikov.
+Encore à trouver ¦ Još za pronaći ¦ Še za najti
+Personnes différentes (implexe) ¦ Različite osobe (implex) ¦ Različne osebe (implex)
+Ajoute des ancêtres : leur numéro Sosa et leur nom (ou « Depuis l’app »). ¦ Dodaj pretke: njihov Sosa broj i ime (ili „Iz aplikacije”). ¦ Dodaj prednike: njihovo Sosa številko in ime (ali »Iz aplikacije«).
+Ajoute des dates (« 14/07 » ou « 07-14 »), une sorte et un nom (ou « Depuis l’app »). ¦ Dodaj datume („14/07” ili „07-14”), vrstu i ime (ili „Iz aplikacije”). ¦ Dodaj datume (»14/07« ali »07-14«), vrsto in ime (ali »Iz aplikacije«).
+Il faut au moins deux colonnes de chiffres : des barres à gauche, une courbe à droite. ¦ Trebaju barem dva stupca brojki: stupci lijevo, krivulja desno. ¦ Potrebna sta vsaj dva stolpca številk: stolpci levo, krivulja desno.
+Aucun chiffre dans le tableau. ¦ U tablici nema brojki. ¦ V tabeli ni številk.
+Ajoute des lignes : un nom et deux chiffres (gauche, droite), ou un seul chiffre autour du centre. ¦ Dodaj retke: ime i dvije brojke (lijevo, desno) ili samo jednu brojku oko središta. ¦ Dodaj vrstice: ime in dve številki (levo, desno) ali samo eno številko okoli središča.
+Sous le centre ¦ Ispod središta ¦ Pod središčem
+Ajoute des lignes (années, décennies…) et une colonne de chiffres par colline. ¦ Dodaj retke (godine, desetljeća…) i jedan stupac brojki po brežuljku. ¦ Dodaj vrstice (leta, desetletja…) in en stolpec številk na grič.
+Il faut au moins deux colonnes de chiffres (les axes) et une ligne par personne ou par chose. ¦ Trebaju barem dva stupca brojki (osi) i jedan redak po osobi ili stvari. ¦ Potrebna sta vsaj dva stolpca številk (osi) in ena vrstica na osebo ali stvar.
+Ajoute des lignes : une année (ou un nom) et un chiffre. ¦ Dodaj retke: godinu (ili ime) i brojku. ¦ Dodaj vrstice: leto (ali ime) in številko.
+🔒 Pour partager : sans les noms des personnes en vie ¦ 🔒 Za dijeljenje: bez imena živih osoba ¦ 🔒 Za deljenje: brez imen živih oseb
+Les ancêtres de la personne de départ ¦ Preci početne osobe ¦ Predniki začetne osebe
+Lecture de ta généalogie… ¦ Čitam tvoje rodoslovlje… ¦ Berem tvoje rodoslovje…
+Données prises dans ta base. ¦ Podaci uzeti iz tvoje baze. ¦ Podatki iz tvoje baze.
+🔗 Deux personnes de ma base ¦ 🔗 Dvije osobe iz moje baze ¦ 🔗 Dve osebi iz moje baze
+L’app cherche le plus court chemin : on remonte jusqu’à l’ancêtre commun et on redescend ; avec les alliances, elle passe aussi par les époux (beau-frère, cousin de l’épouse…). Un même lien par plusieurs ancêtres (implexe) est signalé. ¦ Aplikacija traži najkraći put: penje se do zajedničkog pretka i spušta natrag; s tazbinom ide i preko supružnika (šogor, rođak supruge…). Ista veza preko više predaka (implex) se označava. ¦ Aplikacija išče najkrajšo pot: vzpne se do skupnega prednika in spusti nazaj; s svaštvom gre tudi prek zakoncev (svak, bratranec žene…). Ista povezava prek več prednikov (implex) je označena.
+Passer aussi par les alliances (époux, épouses) ¦ Idi i preko tazbine (supružnici) ¦ Pojdi tudi prek svaštva (zakonci)
+Trouver le chemin ¦ Pronađi put ¦ Najdi pot
+Choisis les deux personnes dans les menus. ¦ Odaberi dvije osobe u izbornicima. ¦ Izberi dve osebi v menijih.
+Aucun lien trouvé entre ces deux personnes dans ta base. ¦ U tvojoj bazi nije pronađena veza između ove dvije osobe. ¦ V tvoji bazi ni najdene povezave med tema dvema osebama.
+Aucun ancêtre commun : essaie avec les alliances. ¦ Nema zajedničkog pretka: pokušaj s tazbinom. ¦ Ni skupnega prednika: poskusi s svaštvom.
+🎯 Les lieux de naissance de mes ancêtres ¦ 🎯 Mjesta rođenja mojih predaka ¦ 🎯 Rojstni kraji mojih prednikov
+🌈 Les lieux de naissance de mes ancêtres ¦ 🌈 Mjesta rođenja mojih predaka ¦ 🌈 Rojstni kraji mojih prednikov
+Chaque ancêtre (numéro Sosa) est placé à son lieu de naissance (ou de baptême), avec sa génération. Les lieux sans coordonnées sont laissés de côté. ¦ Svaki predak (Sosa broj) smješten je na mjesto rođenja (ili krštenja), sa svojom generacijom. Mjesta bez koordinata se izostavljaju. ¦ Vsak prednik (Sosa številka) je postavljen v svoj rojstni kraj (ali kraj krsta), s svojim rodom. Kraji brez koordinat so izpuščeni.
+🧩 L’ascendance d’une personne ¦ 🧩 Podrijetlo osobe ¦ 🧩 Poreklo osebe
+Pour chaque génération : les ancêtres possibles (1, 2, 4, 8…), les places trouvées et les personnes différentes (implexe). ¦ Za svaku generaciju: mogući preci (1, 2, 4, 8…), pronađena mjesta i različite osobe (implex). ¦ Za vsak rod: možni predniki (1, 2, 4, 8…), najdena mesta in različne osebe (implex).
+Aucun ancêtre trouvé pour cette personne. ¦ Za ovu osobu nije pronađen nijedan predak. ¦ Za to osebo ni najden noben prednik.
+📜 Les ancêtres d’une personne ¦ 📜 Preci osobe ¦ 📜 Predniki osebe
+Une ligne par numéro Sosa : nom, naissance, mariage, décès (dates et lieux). Un ancêtre présent plusieurs fois (implexe) renvoie à son premier numéro. ¦ Jedan redak po Sosa broju: ime, rođenje, vjenčanje, smrt (datumi i mjesta). Predak koji se pojavljuje više puta (implex) upućuje na svoj prvi broj. ¦ Ena vrstica na Sosa številko: ime, rojstvo, poroka, smrt (datumi in kraji). Prednik, ki se pojavi večkrat (implex), kaže na svojo prvo številko.
+🖨 Imprimer le tableau… ¦ 🖨 Ispiši tablicu… ¦ 🖨 Natisni tabelo…
+Depuis l’onglet ADN : les correspondances d’un test et leurs « correspondances en commun ». La méthode de Leeds range celles de 90 à 400 cM (cousins de 2e et 3e degré) en groupes de couleur, souvent un par grand-parent. ¦ Iz kartice DNK: podudaranja jednog testa i njihova „zajednička podudaranja”. Metoda Leeds razvrstava ona od 90 do 400 cM (rođaci 2. i 3. stupnja) u skupine boja, često po jednu za svaku baku ili djeda. ¦ Iz zavihka DNK: ujemanja enega testa in njihova »skupna ujemanja«. Metoda Leeds razvrsti tista od 90 do 400 cM (sorodniki 2. in 3. kolena) v barvne skupine, pogosto po eno za vsakega starega starša.
+Aucune correspondance ADN dans ta base (onglet ADN → Correspondances). ¦ U tvojoj bazi nema DNK podudaranja (kartica DNK → Podudaranja). ¦ V tvoji bazi ni DNK ujemanj (zavihek DNK → Ujemanja).
+Il manque les « correspondances en commun » : remplis-les dans l’onglet ADN (ou importe-les). ¦ Nedostaju „zajednička podudaranja”: ispuni ih u kartici DNK (ili ih uvezi). ¦ Manjkajo »skupna ujemanja«: izpolni jih v zavihku DNK (ali jih uvozi).
+Méthode de Leeds ¦ Metoda Leeds ¦ Metoda Leeds
+🎡 Les dates de ma famille ¦ 🎡 Datumi moje obitelji ¦ 🎡 Datumi moje družine
+Les naissances, mariages et décès datés au jour près, et la fête du prénom de chacun (calendrier des saints). Les fiches confidentielles ne sont jamais prises. ¦ Rođenja, vjenčanja i smrti datirani na dan, i imendan svakoga (kalendar svetaca). Povjerljivi zapisi nikad se ne uzimaju. ¦ Rojstva, poroke in smrti, datirani na dan, in god vsakogar (koledar svetnikov). Zaupni zapisi niso nikoli upoštevani.
+Les personnes en vie (et leurs mariages) ¦ Žive osobe (i njihova vjenčanja) ¦ Žive osebe (in njihove poroke)
+Coche au moins une sorte de date. ¦ Označi barem jednu vrstu datuma. ¦ Označi vsaj eno vrsto datuma.
+Aucune date au jour près pour ce choix. ¦ Za ovaj odabir nema datuma na dan. ¦ Za ta izbor ni datumov na dan natančno.
+L’année de la famille ¦ Godina obitelji ¦ Leto družine
+Par quart de siècle ¦ Po četvrt stoljeća ¦ Po četrt stoletja
+📊 Naissances et âge au décès ¦ 📊 Rođenja i dob kod smrti ¦ 📊 Rojstva in starost ob smrti
+↔️ Naissances et décès ¦ ↔️ Rođenja i smrti ¦ ↔️ Rojstva in smrti
+Les naissances de chaque période en barres (à gauche), l’âge moyen au décès en courbe (à droite). ¦ Rođenja svakog razdoblja kao stupci (lijevo), prosječna dob kod smrti kao krivulja (desno). ¦ Rojstva vsakega obdobja kot stolpci (levo), povprečna starost ob smrti kot krivulja (desno).
+Les décès à gauche, les naissances à droite, période par période (ou les femmes et les hommes). ¦ Smrti lijevo, rođenja desno, razdoblje po razdoblje (ili žene i muškarci). ¦ Smrti levo, rojstva desno, obdobje za obdobjem (ali ženske in moški).
+Face à face ¦ Licem u lice ¦ Iz oči v oči
+Naissances : filles ↔ garçons ¦ Rođenja: djevojčice ↔ dječaci ¦ Rojstva: deklice ↔ dečki
+Âge moyen au décès ¦ Prosječna dob kod smrti ¦ Povprečna starost ob smrti
+Naissances et âge moyen au décès ¦ Rođenja i prosječna dob kod smrti ¦ Rojstva in povprečna starost ob smrti
+Filles et garçons à la naissance ¦ Djevojčice i dječaci pri rođenju ¦ Deklice in dečki ob rojstvu
+Décès et naissances ¦ Smrti i rođenja ¦ Smrti in rojstva
+🏔 Les noms de famille au fil du temps ¦ 🏔 Prezimena kroz vrijeme ¦ 🏔 Priimki skozi čas
+Les noms les plus portés : une colline par nom, la hauteur = les naissances de chaque période. ¦ Najčešća prezimena: jedan brežuljak po prezimenu, visina = rođenja u svakom razdoblju. ¦ Najpogostejši priimki: en grič na priimek, višina = rojstva v vsakem obdobju.
+Aucune naissance datée avec un nom de famille. ¦ Nema datiranog rođenja s prezimenom. ¦ Ni datiranega rojstva s priimkom.
+Les noms de famille au fil du temps ¦ Prezimena kroz vrijeme ¦ Priimki skozi čas
+🧵 Les vies de ma base ¦ 🧵 Životi u mojoj bazi ¦ 🧵 Življenja v moji bazi
+Pour chaque personne (vies finies seulement) : l’âge au premier mariage, au premier enfant, le nombre d’enfants et l’âge au décès ; une couleur par siècle de naissance. ¦ Za svaku osobu (samo završeni životi): dob kod prvog braka, kod prvog djeteta, broj djece i dob kod smrti; jedna boja po stoljeću rođenja. ¦ Za vsako osebo (samo končana življenja): starost ob prvi poroki, ob prvem otroku, število otrok in starost ob smrti; ena barva na stoletje rojstva.
+Pas assez de vies datées (il faut au moins 3 des 4 chiffres). ¦ Nema dovoljno datiranih života (trebaju barem 3 od 4 brojke). ¦ Premalo datiranih življenj (potrebne so vsaj 3 od 4 številk).
+Les vies de la famille ¦ Životi obitelji ¦ Življenja družine
+📶 Combien en vie, année par année ¦ 📶 Koliko živih, godinu po godinu ¦ 📶 Koliko živih, leto za letom
+Une personne compte de sa naissance à son décès ; décès inconnu : en vie si elle est née il y a moins de 100 ans, sinon jusqu’à 60 ans (comme « Les vivants de l’arbre »). ¦ Osoba se broji od rođenja do smrti; nepoznata smrt: živa ako je rođena prije manje od 100 godina, inače do 60. godine (kao „Živi u stablu”). ¦ Oseba šteje od rojstva do smrti; neznana smrt: živa, če je rojena pred manj kot 100 leti, sicer do 60. leta (kot »Živi v drevesu«).
+Personnes en vie ¦ Žive osobe ¦ Žive osebe
+Combien de la famille étaient en vie ¦ Koliko je članova obitelji bilo živo ¦ Koliko članov družine je bilo živih
+Couleurs des générations ¦ Boje generacija ¦ Barve rodov
+Dégradé : la plus proche ¦ Prijelaz: najbliža ¦ Prehod: najbližji
+Dégradé : la plus ancienne ¦ Prijelaz: najstarija ¦ Prehod: najstarejši
+Les ancêtres (lieu de naissance « Nom 48.11, -1.68 » et génération : 2 = parents, 3 = grands-parents…) ¦ Preci (mjesto rođenja „Naziv 48.11, -1.68” i generacija: 2 = roditelji, 3 = baka i djed…) ¦ Predniki (rojstni kraj »Ime 48.11, -1.68« in rod: 2 = starša, 3 = stari starši…)
+Le chemin (une personne par ligne, de la première à la seconde) ¦ Put (jedna osoba po retku, od prve do druge) ¦ Pot (ena oseba na vrstico, od prve do druge)
+son père / sa mère (on monte) ¦ njegov/njezin otac / majka (penjemo se) ¦ oče / mati (gremo navzgor)
+son enfant (on descend) ¦ njegovo/njezino dijete (spuštamo se) ¦ otrok (gremo navzdol)
+En V (montée puis descente) ¦ U obliku V (uspon pa spust) ¦ V obliki črke V (vzpon, nato spust)
+Les autres liens (implexe) ¦ Ostale veze (implex) ¦ Druge povezave (implex)
+Couleur des cases ¦ Boja polja ¦ Barva polj
+Cadrer tout seul sur les lieux ¦ Automatski uokviri mjesta ¦ Samodejno prilagodi krajem
+Montrer chaque lieu (pâle) ¦ Prikaži svako mjesto (blijedo) ¦ Prikaži vsak kraj (bledo)
+Cercle de l’écart moyen ¦ Krug prosječnog odstupanja ¦ Krog povprečnega razpona
+Couleur de la trajectoire ¦ Boja putanje ¦ Barva poti gibanja
+Le centre de la famille, génération par génération ¦ Središte obitelji, generaciju po generaciju ¦ Središče družine, rod za rodom
+Nom écrit à partir de … ancêtres ¦ Ime prikazano od … predaka ¦ Ime prikazano od … prednikov
+Les générations (1 = la personne) ¦ Generacije (1 = osoba) ¦ Rodovi (1 = oseba)
+Éventail (une case par ancêtre) ¦ Lepeza (jedno polje po pretku) ¦ Pahljača (eno polje na prednika)
+Éventail : générations ¦ Lepeza: generacije ¦ Pahljača: rodovi
+Toutes pareilles (en %) ¦ Sve jednake (u %) ¦ Vse enake (v %)
+Selon le nombre possible ¦ Prema mogućem broju ¦ Glede na možno število
+Montrer les personnes différentes (implexe) ¦ Prikaži različite osobe (implex) ¦ Prikaži različne osebe (implex)
+Phrase de résumé ¦ Rečenica sažetka ¦ Stavek povzetka
+Couleur des connus ¦ Boja poznatih ¦ Barva znanih
+Couleur des manquants ¦ Boja nedostajućih ¦ Barva manjkajočih
+Couleur de l’implexe ¦ Boja implexa ¦ Barva implexa
+Ce que je connais de mon arbre ¦ Što znam o svom stablu ¦ Kaj vem o svojem drevesu
+Correspondances en commun (séparées par ;) ¦ Zajednička podudaranja (odvojena s ;) ¦ Skupna ujemanja (ločena s ;)
+Groupes de couleur au plus ¦ Najviše skupina boja ¦ Največ barvnih skupin
+Noms des groupes (séparés par des virgules) ¦ Nazivi skupina (odvojeni zarezima) ¦ Imena skupin (ločena z vejicami)
+Noms en haut des colonnes ¦ Imena na vrhu stupaca ¦ Imena na vrhu stolpcev
+Jour (14/07 ou 07-14) ¦ Dan (14/07 ili 07-14) ¦ Dan (14/07 ali 07-14)
+Le trait « aujourd’hui » ¦ Crta „danas” ¦ Črta »danes«
+Le nombre au centre ¦ Broj u središtu ¦ Število v središču
+Les chiffres (la dernière colonne = la courbe) ¦ Brojke (zadnji stupac = krivulja) ¦ Številke (zadnji stolpec = krivulja)
+Nom de l’axe de gauche ¦ Naziv lijeve osi ¦ Ime leve osi
+Nom de l’axe de droite ¦ Naziv desne osi ¦ Ime desne osi
+Unité à gauche ¦ Jedinica lijevo ¦ Enota levo
+Unité à droite ¦ Jedinica desno ¦ Enota desno
+Axe de droite à partir de zéro ¦ Desna os od nule ¦ Desna os od nič
+Épaisseur de la courbe ¦ Debljina krivulje ¦ Debelina krivulje
+Points de la courbe ¦ Točke krivulje ¦ Točke krivulje
+Écrire les chiffres de la courbe ¦ Prikaži brojke krivulje ¦ Prikaži številke krivulje
+Les lignes (1re colonne à gauche, 2e à droite) ¦ Retci (1. stupac lijevo, 2. desno) ¦ Vrstice (1. stolpec levo, 2. desno)
+Deux colonnes face à face ¦ Dva stupca licem u lice ¦ Dva stolpca drug proti drugemu
+Le centre (une colonne) ¦ Središte (jedan stupac) ¦ Središče (en stolpec)
+Titre à gauche ¦ Naslov lijevo ¦ Naslov levo
+Titre à droite ¦ Naslov desno ¦ Naslov desno
+Couleur à gauche ¦ Boja lijevo ¦ Barva levo
+Couleur à droite ¦ Boja desno ¦ Barva desno
+Comme dans le tableau ¦ Kao u tablici ¦ Kot v tabeli
+Sur le trait du milieu ¦ Na srednjoj crti ¦ Na srednji črti
+Décès et naissances dans la famille ¦ Smrti i rođenja u obitelji ¦ Smrti in rojstva v družini
+Les chiffres (une ligne par période, une colonne par colline) ¦ Brojke (jedan redak po razdoblju, jedan stupac po brežuljku) ¦ Številke (ena vrstica na obdobje, en stolpec na grič)
+Chaque colline à sa hauteur ¦ Svaki brežuljak na svojoj visini ¦ Vsak grič na svoji višini
+Même échelle pour toutes ¦ Isto mjerilo za sve ¦ Enako merilo za vse
+Dégradé : première ¦ Prijelaz: prvi ¦ Prehod: prvi
+Dégradé : dernière ¦ Prijelaz: zadnji ¦ Prehod: zadnji
+Écrire le sommet ¦ Prikaži vrh ¦ Prikaži vrh
+Les lignes (une par personne ; une colonne par axe) ¦ Retci (jedan po osobi; jedan stupac po osi) ¦ Vrstice (ena na osebo; en stolpec na os)
+Mettre en avant (un groupe ou un nom) ¦ Istakni (skupinu ili ime) ¦ Poudari (skupino ali ime)
+Les chiffres (une année ou un nom par ligne) ¦ Brojke (jedna godina ili ime po retku) ¦ Številke (eno leto ali ime na vrstico)
+Après le point ¦ Nakon točke ¦ Za točko
+Avant le point ¦ Prije točke ¦ Pred točko
+Remplir dessous (une série) ¦ Ispuni ispod (jedan niz) ¦ Zapolni spodaj (en niz)
+Axe à partir de zéro ¦ Os od nule ¦ Os od nič
+Montrer le plus haut ¦ Prikaži najviši ¦ Prikaži najvišjo
+Gén. {g} ¦ Gen. {g} ¦ Rod {g}
+gén. {g} ¦ gen. {g} ¦ rod {g}
+Arbre en frise : {n} vies sur {g} générations, de {from} à {to}. ¦ Stablo na vremenskoj crti: života {n} kroz generacija {g}, od {from} do {to}. ¦ Drevo na časovnici: življenj {n}, rodov {g}, od {from} do {to}.
+{name} : décès inconnu ¦ {name}: smrt nepoznata ¦ {name}: smrt neznana
+{name} ({years}) : {age} ans (en vie) ¦ {name} ({years}): dob {age} (živ/živa) ¦ {name} ({years}): starost {age} (živ/živa)
+{name} ({years}) : {age} ans ¦ {name} ({years}): dob {age} ¦ {name} ({years}): starost {age}
+Mariage à {age} ans ({year}) ¦ Vjenčanje u dobi od {age} ({year}) ¦ Poroka pri starosti {age} ({year})
+Naissance d’un enfant à {age} ans ({year}) ¦ Rođenje djeteta u dobi od {age} ({year}) ¦ Rojstvo otroka pri starosti {age} ({year})
+naissance d’un enfant ¦ rođenje djeteta ¦ rojstvo otroka
+{n} ans et + ¦ {n}+ godina ¦ {n}+ let
+{n} personnes en vie ¦ Živih osoba: {n} ¦ Živih oseb: {n}
+Pyramide des âges en {year} : {n} personnes en vie (sur {total}). ¦ Piramida dobi {year}.: živih osoba {n} (od {total}). ¦ Starostna piramida leta {year}: živih oseb {n} (od {total}).
+Degré {d} ¦ Stupanj {d} ¦ Stopnja {d}
+Déplier {name} ¦ Rasklopi {name} ¦ Razpri {name}
+Plier {name} ¦ Sklopi {name} ¦ Strni {name}
+Déplier ({n} personnes) ¦ Rasklopi (osoba: {n}) ¦ Razpri (oseb: {n})
+Graphe des cousinages : {n} personnes, {l} liens. ¦ Graf rođaka: osoba {n}, veza {l}. ¦ Graf sorodnikov: oseb {n}, povezav {l}.
+{a} est {kin} de {b} ¦ {a} je {kin} osobe {b} ¦ {a} je {kin} osebe {b}
+(degré {d}) ¦ (stupanj {d}) ¦ (stopnja {d})
+{a} et {b} : pas de lien trouvé ¦ {a} i {b}: veza nije pronađena ¦ {a} in {b}: povezava ni najdena
+Degré 1 (parent, enfant) ¦ Stupanj 1 (roditelj, dijete) ¦ Stopnja 1 (starš, otrok)
+Degré 2 (frère, grand-parent) ¦ Stupanj 2 (brat ili sestra, baka ili djed) ¦ Stopnja 2 (brat ali sestra, stari starš)
+Degré 4 (cousin germain) ¦ Stupanj 4 (bratić) ¦ Stopnja 4 (bratranec)
+Matrice de parenté de {n} personnes : {l} liens trouvés. ¦ Matrica srodstva osoba ({n}): pronađeno veza: {l}. ¦ Matrika sorodstva oseb ({n}): najdenih povezav: {l}.
+entre à la génération {g} par {who} ¦ ulazi u generaciji {g} preko {who} ¦ vstopi v rodu {g} prek {who}
+entre à la génération {g} ¦ ulazi u generaciji {g} ¦ vstopi v rodu {g}
+porteurs par génération : {list} ¦ nositelji po generaciji: {list} ¦ nosilci po rodovih: {list}
+Entre à la génération {g} ¦ Ulazi u generaciji {g} ¦ Vstopi v rodu {g}
+Arbre des patronymes : {n} noms sur {g} générations. ¦ Stablo prezimena: prezimena {n} kroz generacija {g}. ¦ Drevo priimkov: priimkov {n}, rodov {g}.
+Aucun mariage entre ces lieux. ¦ Nema vjenčanja između ovih mjesta. ¦ Ni porok med temi kraji.
+Diagramme d’accord : {n} lieux, environ {v} {unit}. ¦ Tetivni dijagram: mjesta {n}, oko {v} {unit}. ¦ Tetivni diagram: krajev {n}, približno {v} {unit}.
+mariages ¦ vjenčanja ¦ poroke
+Violon : {c} catégories, {n} valeurs. ¦ Violina: kategorija {c}, vrijednosti {n}. ¦ Violina: kategorij {c}, vrednosti {n}.
+pas encore trouvé ¦ još nije pronađeno ¦ še ni najdeno
+Quadrillage de {g} générations : {found} ancêtres trouvés sur {total} places ({pct} %). ¦ Mreža generacija ({g}): pronađeno predaka {found} od {total} mjesta ({pct} %). ¦ Mreža rodov ({g}): najdenih prednikov {found} od {total} mest ({pct} %).
+Les vies de mes ancêtres ({name}) ¦ Životi mojih predaka ({name}) ¦ Življenja mojih prednikov ({name})
+Les vies de mes ancêtres ¦ Životi mojih predaka ¦ Življenja mojih prednikov
+Aucune naissance ni aucun décès daté à {place}. ¦ Nema datiranog rođenja ni smrti u mjestu {place}. ¦ Ni datiranega rojstva ne smrti v kraju {place}.
+{n} années prises dans ta base. ¦ Godine uzete iz tvoje baze: {n}. ¦ Leta iz tvoje baze: {n}.
+Qui vivait en … ? ¦ Tko je živio …? ¦ Kdo je živel …?
+Qui vivait en {year} ? ¦ Tko je živio {year}.? ¦ Kdo je živel leta {year}?
+{n} personnes prises dans ta base. ¦ Osobe uzete iz tvoje baze: {n}. ¦ Osebe iz tvoje baze: {n}.
+Les cousins de {name} ¦ Rođaci osobe {name} ¦ Sorodniki osebe {name}
+{n} personnes prises dans ta base (les 1 500 premières). ¦ Osobe uzete iz tvoje baze: {n} (prvih 1 500). ¦ Osebe iz tvoje baze: {n} (prvih 1 500).
+Les cousinages ¦ Rodbinske veze ¦ Sorodstvene povezave
+{n} personnes et {l} liens pris dans ta base. ¦ Osobe ({n}) i veze ({l}) uzete iz tvoje baze. ¦ Osebe ({n}) in povezave ({l}) iz tvoje baze.
+{n} personnes, {l} liens trouvés. ¦ Osoba: {n}, pronađeno veza: {l}. ¦ Oseb: {n}, najdenih povezav: {l}.
+Les noms de famille de {name} ¦ Prezimena osobe {name} ¦ Priimki osebe {name}
+{n} noms pris dans ta base. ¦ Prezimena uzeta iz tvoje baze: {n}. ¦ Priimki iz tvoje baze: {n}.
+Aucun mariage avec des lieux connus. ¦ Nema vjenčanja s poznatim mjestima. ¦ Ni porok z znanimi kraji.
+Où l’on venait se marier ¦ Odakle su se dolazili vjenčati ¦ Od kod so prihajali na poroko
+Mariages entre villages ¦ Vjenčanja između sela ¦ Poroke med vasmi
+{n} paires de lieux prises dans ta base. ¦ Parovi mjesta uzeti iz tvoje baze: {n}. ¦ Pari krajev iz tvoje baze: {n}.
+Aucune personne avec les deux dates. ¦ Nema osobe s oba datuma. ¦ Ni osebe z obema datumoma.
+{n} valeurs prises dans ta base. ¦ Vrijednosti uzete iz tvoje baze: {n}. ¦ Vrednosti iz tvoje baze: {n}.
+{c}e siècle ¦ {c}. stoljeće ¦ {c}. stoletje
+Les enfants de {name} ¦ Djeca osobe {name} ¦ Otroci osebe {name}
+D’où viennent mes noms ¦ Odakle dolaze moja prezimena ¦ Od kod prihajajo moji priimki
+Âge au décès par siècle ¦ Dob kod smrti po stoljeću ¦ Starost ob smrti po stoletjih
+Âge au décès par sexe ¦ Dob kod smrti po spolu ¦ Starost ob smrti po spolu
+Âge au mariage par sexe ¦ Dob kod vjenčanja po spolu ¦ Starost ob poroki po spolu
+Âge au mariage par siècle ¦ Dob kod vjenčanja po stoljeću ¦ Starost ob poroki po stoletjih
+{name} : ferme l’éditeur et clique à nouveau pour ouvrir sa fiche. ¦ {name}: zatvori uređivač i ponovno klikni da otvoriš zapis. ¦ {name}: zapri urejevalnik in znova klikni, da odpreš zapis.
+Ajoute des personnes : un nom, une génération (ou un n° Sosa), une naissance et un décès. ¦ Dodaj osobe: ime, generaciju (ili Sosa broj), rođenje i smrt. ¦ Dodaj osebe: ime, rod (ali Sosa številko), rojstvo in smrt.
+Ajoute des années avec leurs naissances et leurs décès. ¦ Dodaj godine s njihovim rođenjima i smrtima. ¦ Dodaj leta z njihovimi rojstvi in smrtmi.
+Plus de décès que de naissances ¦ Više smrti nego rođenja ¦ Več smrti kot rojstev
+{b} naissances et {d} décès de {from} à {to}, {c} crises marquées. ¦ Rođenja: {b}, smrti: {d} od {from} do {to}, označenih kriza: {c}. ¦ Rojstva: {b}, smrti: {d} od {from} do {to}, označenih kriz: {c}.
+{b} naissances et {d} décès de {from} à {to}, {c} crise marquée. ¦ Rođenja: {b}, smrti: {d} od {from} do {to}, označenih kriza: {c}. ¦ Rojstva: {b}, smrti: {d} od {from} do {to}, označenih kriz: {c}.
+Ajoute les enfants : un nom, une naissance, un décès (et leurs mariages, leurs enfants). ¦ Dodaj djecu: ime, rođenje, smrt (i njihova vjenčanja, njihovu djecu). ¦ Dodaj otroke: ime, rojstvo, smrt (in njihove poroke, njihove otroke).
+Ajoute des personnes (naissance, décès, sexe) ou prends celles de ta base (« Depuis l’app »). ¦ Dodaj osobe (rođenje, smrt, spol) ili uzmi one iz svoje baze („Iz aplikacije”). ¦ Dodaj osebe (rojstvo, smrt, spol) ali vzemi tiste iz svoje baze (»Iz aplikacije«).
+Issus d’issus de germains ¦ Bratići u trećem koljenu ¦ Sorodniki v tretjem kolenu
+Ligne directe ¦ Izravna loza ¦ Neposredna linija
+Oncles, tantes, neveux ¦ Ujaci, strine, nećaci ¦ Strici, tete, nečaki
+Cousins germains ¦ Bratići i sestrične ¦ Bratranci in sestrične
+Cousins issus de germains ¦ Bratići u drugom koljenu ¦ Sorodniki v drugem kolenu
+Sans lien de sang ¦ Bez krvnog srodstva ¦ Brez krvnega sorodstva
+Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien. ¦ Dodaj osobe: ime, osobu iznad (prazno za vrh), godine, vezu. ¦ Dodaj osebe: ime, osebo nad njo (prazno za vrh), leta, povezavo.
+Arbre en accordéon : {n} personnes, {r} sommets. ¦ Harmonika-stablo: osoba {n}, vrhova {r}. ¦ Drevo harmonika: oseb {n}, vrhov {r}.
+Arbre en accordéon : {n} personnes, {r} sommet. ¦ Harmonika-stablo: osoba {n}, vrhova {r}. ¦ Drevo harmonika: oseb {n}, vrhov {r}.
+parente|arrière-grand-père ¦ pradjed ¦ praded
+parente|grand-père ¦ djed ¦ ded
+parente|père ¦ otac ¦ oče
+parente|moi ¦ ja ¦ jaz
+parente|sœur ¦ sestra ¦ sestra
+parente|frère ¦ brat ¦ brat
+parente|tante ¦ teta ¦ teta
+parente|oncle ¦ stric ¦ stric
+parente|cousin germain ¦ bratić ¦ bratranec
+parente|cousine germaine ¦ sestrična ¦ sestrična
+parente|grand-oncle ¦ prastric ¦ prastric
+parente|cousin germain de mon père ¦ očev bratić ¦ očetov bratranec
+parente|cousin issu de germains ¦ bratić u drugom koljenu ¦ bratranec v drugem kolenu
+parente|cousine issue de germains ¦ sestrična u drugom koljenu ¦ sestrična v drugem kolenu
+parente|fils ¦ sin ¦ sin
+parente|fille ¦ kći ¦ hči
+parente|petit-fils ¦ unuk ¦ vnuk
+parente|petite-fille ¦ unuka ¦ vnukinja
+parente|arrière-petit-fils ¦ praunuk ¦ pravnuk
+parente|neveu ¦ nećak ¦ nečak
+parente|petit-neveu ¦ prenećak ¦ pranečak
+parente|parent ¦ rođak ¦ sorodnik
+parente|frères et sœurs ¦ braća i sestre ¦ bratje in sestre
+parente|cousins germains ¦ bratići i sestrične ¦ bratranci in sestrične
+parente|cousins issus de germains ¦ bratići u drugom koljenu ¦ bratranci v drugem kolenu
+parente|cousins issus d’issus de germains ¦ bratići u trećem koljenu ¦ bratranci v tretjem kolenu
+parente|parent et enfant ¦ roditelj i dijete ¦ starš in otrok
+parente|oncle ou tante et neveu ou nièce ¦ stric ili teta i nećak ili nećakinja ¦ stric ali teta in nečak ali nečakinja
+parente|à la mode de Bretagne ¦ „na bretonski način” (dvostruka veza) ¦ »po bretonsko« (dvojna povezava)
+parente|époux ¦ supružnici ¦ zakonca
+Ajoute des liens : deux personnes et leur lien (cousins germains…), ou prends-les dans ta base. ¦ Dodaj veze: dvije osobe i njihovu vezu (bratići…) ili ih uzmi iz svoje baze. ¦ Dodaj povezave: dve osebi in njuno povezavo (bratranca…) ali ju vzemi iz svoje baze.
+Ajoute au moins deux personnes, puis ce que chacune est pour l’autre (ou prends-les dans ta base). ¦ Dodaj barem dvije osobe, zatim što je svaka drugoj (ili ih uzmi iz svoje baze). ¦ Dodaj vsaj dve osebi, nato kaj je vsaka drugi (ali jih vzemi iz svoje baze).
+Ajoute des noms : le nom, le nom d’où il vient (vide pour le premier), la génération où il entre. ¦ Dodaj prezimena: prezime, prezime od kojeg dolazi (prazno za prvo), generaciju u kojoj ulazi. ¦ Dodaj priimke: priimek, priimek, iz katerega izhaja (prazno za prvega), rod, v katerem vstopi.
+Ajoute des paires de lieux et combien de mariages les relient. ¦ Dodaj parove mjesta i koliko ih vjenčanja povezuje. ¦ Dodaj pare krajev in koliko porok ju povezuje.
+Ajoute des valeurs : une catégorie (siècle, sexe…) et un chiffre par ligne. ¦ Dodaj vrijednosti: kategoriju (stoljeće, spol…) i brojku po retku. ¦ Dodaj vrednosti: kategorijo (stoletje, spol…) in številko na vrstico.
+{name} : {n} valeurs, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: vrijednosti {n}, medijan {med}, polovica između {q1} i {q3}, od {min} do {max} ¦ {name}: vrednosti {n}, mediana {med}, polovica med {q1} in {q3}, od {min} do {max}
+{name} : {n} valeur, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: vrijednosti {n}, medijan {med}, polovica između {q1} i {q3}, od {min} do {max} ¦ {name}: vrednosti {n}, mediana {med}, polovica med {q1} in {q3}, od {min} do {max}
+Nom seulement ¦ Samo ime ¦ Samo ime
+Une date ¦ Jedan datum ¦ En datum
+Dates et lieux ¦ Datumi i mjesta ¦ Datumi in kraji
+Sourcé ¦ S izvorom ¦ Z virom
+Ajoute des ancêtres : un n° Sosa, un nom et une valeur (ou prends-les dans ta base). ¦ Dodaj pretke: Sosa broj, ime i vrijednost (ili ih uzmi iz svoje baze). ¦ Dodaj prednike: Sosa številko, ime in vrednost (ali jih vzemi iz svoje baze).
+🧬 Mes ancêtres, génération par génération ¦ 🧬 Moji preci, generaciju po generaciju ¦ 🧬 Moji predniki, rod za rodom
+Chaque ancêtre devient une barre, de sa naissance à son décès ; les générations s’empilent, la couleur montre la branche (paternelle ou maternelle). ¦ Svaki predak postaje stupac, od rođenja do smrti; generacije se slažu jedna na drugu, a boja pokazuje granu (očevu ili majčinu). ¦ Vsak prednik postane stolpec, od rojstva do smrti; rodovi se nalagajo drug na drugega, barva pa kaže vejo (očetovo ali materino).
+Aucun ancêtre daté pour cette personne. ¦ Za ovu osobu nema datiranog pretka. ¦ Za to osebo ni datiranega prednika.
+{n} enfants pris dans ta base. ¦ Djeca uzeta iz tvoje baze: {n}. ¦ Otroci iz tvoje baze: {n}.
+{n} enfant pris dans ta base. ¦ Djeca uzeta iz tvoje baze: {n}. ¦ Otroci iz tvoje baze: {n}.
+📉 Naissances et décès de ma base ¦ 📉 Rođenja i smrti u mojoj bazi ¦ 📉 Rojstva in smrti v moji bazi
+Compte les naissances (ou baptêmes) et les décès (ou sépultures) de chaque année. Laisse le lieu vide pour toute la base. ¦ Broji rođenja (ili krštenja) i smrti (ili pokope) svake godine. Ostavi mjesto prazno za cijelu bazu. ¦ Prešteje rojstva (ali krste) in smrti (ali pokope) vsakega leta. Pusti kraj prazen za celo bazo.
+Un seul lieu (facultatif) ¦ Samo jedno mjesto (neobavezno) ¦ En sam kraj (neobvezno)
+Année par année ¦ Godinu po godinu ¦ Leto za letom
+Par 5 ans ¦ Po 5 godina ¦ Po 5 let
+Par 10 ans ¦ Po 10 godina ¦ Po 10 let
+Naissances et décès ¦ Rođenja i smrti ¦ Rojstva in smrti
+👨‍👩‍👧 Une fratrie de ma base ¦ 👨‍👩‍👧 Braća i sestre iz moje baze ¦ 👨‍👩‍👧 Bratje in sestre iz moje baze
+Choisis une personne : ses frères et sœurs (ou ses enfants) deviennent des barres sur le même axe des âges, avec leurs mariages et la naissance de leurs enfants. ¦ Odaberi osobu: njezina braća i sestre (ili djeca) postaju stupci na istoj osi dobi, s njihovim vjenčanjima i rođenjima njihove djece. ¦ Izberi osebo: njeni bratje in sestre (ali otroci) postanejo stolpci na isti osi starosti, z njihovimi porokami in rojstvi njihovih otrok.
+Sa fratrie (elle comprise) ¦ Braća i sestre (uključujući nju) ¦ Bratje in sestre (vključno z njo)
+Personne : aucun enfant trouvé. ¦ Nitko: nije pronađeno nijedno dijete. ¦ Nihče: ni najdenega otroka.
+🔺 Toutes les personnes de ma base ¦ 🔺 Sve osobe iz moje baze ¦ 🔺 Vse osebe iz moje baze
+Chaque personne née, et pas encore morte, l’année choisie compte dans sa tranche d’âge. Ensuite : le curseur sous le dessin change l’année, ▶ fait défiler le temps. ¦ Svaka osoba rođena, a još ne umrla, u odabranoj godini broji se u svojoj dobnoj skupini. Zatim: klizač ispod crteža mijenja godinu, ▶ pušta vrijeme da teče. ¦ Vsaka oseba, rojena in še ne umrla v izbranem letu, šteje v svoji starostni skupini. Nato: drsnik pod risbo spremeni leto, ▶ predvaja čas.
+Année de départ ¦ Početna godina ¦ Začetno leto
+Décès inconnu ¦ Smrt nepoznata ¦ Smrt neznana
+Ne pas compter la personne ¦ Ne broji osobu ¦ Ne štej osebe
+Supposer une vie de 60 ans ¦ Pretpostavi život od 60 godina ¦ Predpostavi 60 let življenja
+Supposer une vie de 80 ans ¦ Pretpostavi život od 80 godina ¦ Predpostavi 80 let življenja
+Aucune personne avec une date de naissance. ¦ Nema osobe s datumom rođenja. ¦ Ni osebe z datumom rojstva.
+🪗 Mes ancêtres et leurs descendants ¦ 🪗 Moji preci i njihovi potomci ¦ 🪗 Moji predniki in njihovi potomci
+Les ancêtres de la personne sur quelques générations, puis tous leurs descendants jusqu’à sa génération : frères et sœurs, oncles, cousins germains, issus de germains… avec le lien de parenté de chacun. ¦ Preci osobe kroz nekoliko generacija, zatim svi njihovi potomci do njezine generacije: braća i sestre, stričevi, bratići, bratići u drugom koljenu… s rodbinskom vezom svakoga. ¦ Predniki osebe skozi nekaj rodov, nato vsi njihovi potomci do njenega rodu: bratje in sestre, strici, bratranci, bratranci v drugem kolenu … s sorodstveno povezavo vsakega.
+Pas assez de parents connus pour cette personne. ¦ Za ovu osobu nema dovoljno poznatih rođaka. ¦ Za to osebo ni dovolj znanih sorodnikov.
+🧶 Les cousins de ma base ¦ 🧶 Rođaci iz moje baze ¦ 🧶 Sorodniki iz moje baze
+Choisis des personnes (au moins deux), ou laisse vide : l’app prend la personne de départ et tous ses cousins de la même génération jusqu’à l’ancêtre commun choisi. ¦ Odaberi osobe (barem dvije) ili ostavi prazno: aplikacija uzima početnu osobu i sve njezine rođake iste generacije do odabranog zajedničkog pretka. ¦ Izberi osebe (vsaj dve) ali pusti prazno: aplikacija vzame začetno osebo in vse njene sorodnike istega rodu do izbranega skupnega prednika.
+Personnes (facultatif) ¦ Osobe (neobavezno) ¦ Osebe (neobvezno)
+Ancêtre commun jusqu’à ¦ Zajednički predak do ¦ Skupni prednik do
+Les plus proches (et de quoi tout relier) ¦ Najbliži (i dovoljno da se sve poveže) ¦ Najbližji (in dovolj, da se vse poveže)
+Aucun lien de parenté trouvé entre ces personnes. ¦ Između ovih osoba nije pronađena rodbinska veza. ¦ Med temi osebami ni najdene sorodstvene povezave.
+🔢 Des personnes de ma base ¦ 🔢 Osobe iz moje baze ¦ 🔢 Osebe iz moje baze
+Choisis jusqu’à 20 personnes : chaque case dit ce que la personne de la colonne est pour celle de la ligne (père, oncle, cousin germain…), et se colore selon la proximité. ¦ Odaberi do 20 osoba: svako polje kaže što je osoba iz stupca osobi iz retka (otac, stric, bratić…) i boji se prema bliskosti. ¦ Izberi do 20 oseb: vsako polje pove, kaj je oseba iz stolpca osebi iz vrstice (oče, stric, bratranec…), in se obarva glede na bližino.
+Qui est quoi pour qui ¦ Tko je što kome ¦ Kdo je kaj komu
+🌳 Les noms de mes ancêtres ¦ 🌳 Prezimena mojih predaka ¦ 🌳 Priimki mojih prednikov
+Chaque nom de famille de l’ascendance : par qui et quand il entre dans l’arbre (une femme et son nom), ses variantes d’écriture regroupées, et combien d’ancêtres le portent à chaque génération. ¦ Svako prezime u podrijetlu: preko koga i kada ulazi u stablo (žena i njezino prezime), njegove inačice pisanja grupirane, i koliko ga predaka nosi u svakoj generaciji. ¦ Vsak priimek v poreklu: prek koga in kdaj vstopi v drevo (ženska in njen priimek), njegove različice zapisa, združene, in koliko prednikov ga nosi v vsakem rodu.
+Aucun nom de famille dans cette ascendance. ¦ U ovom podrijetlu nema prezimena. ¦ V tem poreklu ni priimka.
+🎼 Les mariages de ma base ¦ 🎼 Vjenčanja u mojoj bazi ¦ 🎼 Poroke v moji bazi
+Chaque mariage relie deux lieux : les lieux de naissance des deux époux, ou le lieu de naissance de chacun et le lieu du mariage. Les lieux les plus fréquents gardent leur nom, les autres vont dans « Autres ». ¦ Svako vjenčanje povezuje dva mjesta: mjesta rođenja oba supružnika ili mjesto rođenja svakoga i mjesto vjenčanja. Najčešća mjesta zadržavaju svoj naziv, ostala idu u „Ostalo”. ¦ Vsaka poroka poveže dva kraja: rojstna kraja obeh zakoncev ali rojstni kraj vsakega in kraj poroke. Najpogostejši kraji obdržijo svoje ime, drugi gredo v »Drugo«.
+Le village de l’époux et celui de l’épouse ¦ Selo muža i selo žene ¦ Vas moža in vas žene
+Le village de chacun → le lieu du mariage ¦ Selo svakoga → mjesto vjenčanja ¦ Vas vsakega → kraj poroke
+Lieux gardés ¦ Zadržana mjesta ¦ Ohranjeni kraji
+🎻 Des âges de ma base ¦ 🎻 Dobi iz moje baze ¦ 🎻 Starosti iz moje baze
+Chaque personne donne une valeur (son âge au décès, ou au mariage), rangée dans une catégorie (son siècle, son sexe). ¦ Svaka osoba daje vrijednost (svoju dob kod smrti ili kod vjenčanja), razvrstanu u kategoriju (stoljeće, spol). ¦ Vsaka oseba da vrednost (starost ob smrti ali ob poroki), razvrščeno v kategorijo (stoletje, spol).
+🟩 Mes ancêtres (numéros Sosa) ¦ 🟩 Moji preci (Sosa brojevi) ¦ 🟩 Moji predniki (Sosa številke)
+Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche. ¦ Jedno polje po mjestu pretka; siva polja su preci koji još nisu pronađeni. Klik na polje (izvan uređivača): njegov zapis. ¦ Eno polje na mesto prednika; siva polja so predniki, ki še niso najdeni. Klik na polje (zunaj urejevalnika): njegov zapis.
+Ce que je sais (nom, dates, lieux, sources) ¦ Što znam (ime, datumi, mjesta, izvori) ¦ Kaj vem (ime, datumi, kraji, viri)
+Région de naissance ¦ Regija rođenja ¦ Regija rojstva
+Siècle de naissance ¦ Stoljeće rođenja ¦ Stoletje rojstva
+Les personnes (une barre par vie) ¦ Osobe (jedan stupac po životu) ¦ Osebe (en stolpec na življenje)
+Génération (vide = d’après le n° Sosa) ¦ Generacija (prazno = prema Sosa broju) ¦ Rod (prazno = po Sosa številki)
+Décès (vide = vivant ; ? = inconnu) ¦ Smrt (prazno = živ; ? = nepoznato) ¦ Smrt (prazno = živ; ? = neznano)
+Les événements historiques en fond (facultatif) ¦ Povijesni događaji u pozadini (neobavezno) ¦ Zgodovinski dogodki v ozadju (neobvezno)
+Couleur des barres ¦ Boja stupaca ¦ Barva stolpcev
+Branche paternelle ou maternelle ¦ Očeva ili majčina grana ¦ Očetova ali materina veja
+Homme ou femme ¦ Muškarac ili žena ¦ Moški ali ženska
+Colonne « Groupe » ¦ Stupac „Skupina” ¦ Stolpec »Skupina«
+Serrée (noms dans les barres) ¦ Zbijeno (imena u stupcima) ¦ Strnjeno (imena v stolpcih)
+Une ligne par personne (noms à gauche) ¦ Jedan redak po osobi (imena lijevo) ¦ Ena vrstica na osebo (imena levo)
+Les plus anciennes en haut ¦ Najstarije gore ¦ Najstarejše zgoraj
+Les plus récentes en haut ¦ Najnovije gore ¦ Najnovejše zgoraj
+Noms dans les barres ¦ Imena u stupcima ¦ Imena v stolpcih
+Montrer les événements ¦ Prikaži događaje ¦ Prikaži dogodke
+Les crises (à changer ou compléter) ¦ Krize (za promjenu ili dopunu) ¦ Krize (za spremembo ali dopolnitev)
+Fin (vide = une année) ¦ Kraj (prazno = jedna godina) ¦ Konec (prazno = eno leto)
+Lisser les courbes (moyenne sur … ans) ¦ Izgladi krivulje (prosjek kroz … godina) ¦ Zgladi krivulje (povprečje prek … let)
+Montrer les crises ¦ Prikaži krize ¦ Prikaži krize
+Colorer quand les décès dépassent les naissances ¦ Oboji kad smrti nadmaše rođenja ¦ Obarvaj, ko smrti presežejo rojstva
+Couleur des naissances ¦ Boja rođenja ¦ Barva rojstev
+Couleur des décès ¦ Boja smrti ¦ Barva smrti
+Nom de l’axe des valeurs ¦ Naziv osi vrijednosti ¦ Ime osi vrednosti
+Naissances et décès au village ¦ Rođenja i smrti u selu ¦ Rojstva in smrti v vasi
+Les enfants (dans l’ordre de naissance) ¦ Djeca (redom rođenja) ¦ Otroci (po vrstnem redu rojstva)
+Prénom / nom ¦ Ime / prezime ¦ Ime / priimek
+Décès (vide = vivant ou inconnu) ¦ Smrt (prazno = živ ili nepoznato) ¦ Smrt (prazno = živ ali neznano)
+Mariages (dates, séparées par des virgules) ¦ Vjenčanja (datumi, odvojeni zarezima) ¦ Poroke (datumi, ločeni z vejicami)
+Naissance de ses enfants (dates) ¦ Rođenja njegove/njezine djece (datumi) ¦ Rojstva otrok (datumi)
+Les âges (tous partent de 0) ¦ Dobi (sve počinju od 0) ¦ Starosti (vse se začnejo pri 0)
+Les années (calendrier) ¦ Godine (kalendar) ¦ Leta (koledar)
+Par date de naissance ¦ Po datumu rođenja ¦ Po datumu rojstva
+Les personnes (à la main ; celles de ta base : « Depuis l’app ») ¦ Osobe (ručno; one iz tvoje baze: „Iz aplikacije”) ¦ Osebe (ročno; tiste iz tvoje baze: »Iz aplikacije«)
+Année montrée ¦ Prikazana godina ¦ Prikazano leto
+Tranches d’âge ¦ Dobne skupine ¦ Starostne skupine
+Dernière tranche à partir de ¦ Zadnja skupina od ¦ Zadnja skupina od
+Décès inconnu : supposer une vie de … ans (0 = ne pas compter) ¦ Nepoznata smrt: pretpostavi život od … godina (0 = ne brojati) ¦ Neznana smrt: predpostavi življenje … let (0 = ne štej)
+Même échelle pour toutes les années (lecture) ¦ Isto mjerilo za sve godine (reprodukcija) ¦ Enako merilo za vsa leta (predvajanje)
+Afficher les nombres ¦ Prikaži brojeve ¦ Prikaži števila
+Couleur des hommes ¦ Boja muškaraca ¦ Barva moških
+Couleur des femmes ¦ Boja žena ¦ Barva žensk
+Hauteur des barres (px, au total) ¦ Visina stupaca (px, ukupno) ¦ Višina stolpcev (px, skupaj)
+Les personnes (même nom au-dessus = branche) ¦ Osobe (isto ime iznad = grana) ¦ Osebe (isto ime zgoraj = veja)
+Au-dessus (nom ; vide pour le haut) ¦ Iznad (ime; prazno za vrh) ¦ Zgoraj (ime; prazno za vrh)
+Lien de parenté ¦ Rodbinska veza ¦ Sorodstvena povezava
+Degré (couleur) ¦ Stupanj (boja) ¦ Stopnja (barva)
+Montrer le lien de parenté ¦ Prikaži rodbinsku vezu ¦ Prikaži sorodstveno povezavo
+Générations ouvertes au départ (0 = toutes) ¦ Generacije otvorene na početku (0 = sve) ¦ Rodovi, odprti na začetku (0 = vsi)
+Décalage d’une génération ¦ Uvlaka po generaciji ¦ Zamik na rod
+Les liens (deux personnes et leur lien) ¦ Veze (dvije osobe i njihova veza) ¦ Povezave (dve osebi in njuna povezava)
+Les personnes (facultatif : famille pour la couleur) ¦ Osobe (neobavezno: obitelj za boju) ¦ Osebe (neobvezno: družina za barvo)
+Noms des liens sur les traits ¦ Nazivi veza na crtama ¦ Imena povezav na črtah
+Si pas trop nombreux (60) ¦ Ako ih nije previše (60) ¦ Če jih ni preveč (60)
+Les cousinages de la famille ¦ Rodbinske veze obitelji ¦ Sorodstvene povezave družine
+Les personnes (lignes et colonnes, 40 au plus) ¦ Osobe (retci i stupci, najviše 40) ¦ Osebe (vrstice in stolpci, največ 40)
+Les cases : ce que B est pour A ¦ Polja: što je B osobi A ¦ Polja: kaj je B osebi A
+Lien (père, cousin germain…) ¦ Veza (otac, bratić…) ¦ Povezava (oče, bratranec…)
+Le lien ¦ Veza ¦ Povezava
+Le degré ¦ Stupanj ¦ Stopnja
+Rien (couleurs seules) ¦ Ništa (samo boje) ¦ Nič (samo barve)
+Les noms (d’où vient chacun) ¦ Prezimena (odakle dolazi svako) ¦ Priimki (od kod izhaja vsak)
+Arrive par (nom ; vide pour le premier) ¦ Dolazi preko (ime; prazno za prvo) ¦ Pride prek (ime; prazno za prvega)
+Génération d’entrée ¦ Generacija ulaska ¦ Rod vstopa
+Porteurs par génération (1,2,4…) ¦ Nositelji po generaciji (1,2,4…) ¦ Nosilci po rodovih (1,2,4…)
+Les ancêtres (n° Sosa → valeur) ¦ Preci (Sosa broj → vrijednost) ¦ Predniki (Sosa številka → vrednost)
+Valeur (chiffre ou catégorie) ¦ Vrijednost (brojka ili kategorija) ¦ Vrednost (številka ali kategorija)
+Les catégories et leur couleur (facultatif) ¦ Kategorije i njihova boja (neobavezno) ¦ Kategorije in njihova barva (neobvezno)
+Une ligne par génération ¦ Jedan redak po generaciji ¦ Ena vrstica na rod
+Un carré (cases dans l’ordre des numéros) ¦ Kvadrat (polja redom brojeva) ¦ Kvadrat (polja po vrstnem redu številk)
+Le nom (si la place le permet) ¦ Ime (ako ima mjesta) ¦ Ime (če je prostor)
+Le n° Sosa ¦ Sosa broj ¦ Sosa številka
+Le nom et le n° Sosa ¦ Ime i Sosa broj ¦ Ime in Sosa številka
+Un dégradé (chiffres) ¦ Prijelaz boja (brojke) ¦ Barvni prehod (številke)
+Une couleur par catégorie ¦ Jedna boja po kategoriji ¦ Ena barva na kategorijo
+Dégradé : minimum ¦ Prijelaz: minimum ¦ Prehod: najmanj
+Dégradé : maximum ¦ Prijelaz: maksimum ¦ Prehod: največ
+Couleur des ancêtres pas trouvés ¦ Boja nepronađenih predaka ¦ Barva nenajdenih prednikov
+Ce que je sais de mes ancêtres ¦ Što znam o svojim precima ¦ Kaj vem o svojih prednikih
+Les paires de lieux ¦ Parovi mjesta ¦ Pari krajev
+Lieu A ¦ Mjesto A ¦ Kraj A
+Lieu B ¦ Mjesto B ¦ Kraj B
+Lieux gardés (les autres : « Autres ») ¦ Zadržana mjesta (ostala: „Ostalo”) ¦ Ohranjeni kraji (drugi: »Drugo«)
+Mariages dans le même lieu (boucles) ¦ Vjenčanja u istom mjestu (petlje) ¦ Poroke v istem kraju (zanke)
+Opacité des rubans ¦ Neprozirnost vrpci ¦ Prekrivnost trakov
+Là où il y a la place ¦ Tamo gdje ima mjesta ¦ Tam, kjer je prostor
+Unité (ex. : mariages) ¦ Jedinica (npr. vjenčanja) ¦ Enota (npr. poroke)
+Les valeurs (une par ligne) ¦ Vrijednosti (jedna po retku) ¦ Vrednosti (ena na vrstico)
+Catégorie (siècle, sexe…) ¦ Kategorija (stoljeće, spol…) ¦ Kategorija (stoletje, spol…)
+Médiane et quartiles ¦ Medijan i kvartili ¦ Mediana in kvartili
+Écrire la médiane ¦ Prikaži medijan ¦ Prikaži mediano
+Par médiane ¦ Po medijanu ¦ Po mediani
+Unité (ex. : ans) ¦ Jedinica (npr. godine) ¦ Enota (npr. leta)
+Nom de l’axe ¦ Naziv osi ¦ Ime osi
+Faire défiler les années ¦ Pusti godine da teku ¦ Predvajaj leta
+=segment ¦ segment|segmenta|segmenata ¦ segment|segmenta|segmenti|segmentov
+=correspondance ¦ podudaranje|podudaranja|podudaranja ¦ ujemanje|ujemanji|ujemanja|ujemanj
+=valeur ¦ vrijednost|vrijednosti|vrijednosti ¦ vrednost|vrednosti|vrednosti|vrednosti
+=couple ¦ par|para|parova ¦ par|para|pari|parov
+Peint : {p} % côté père · {m} % côté mère ¦ Obojeno: {p} % s očeve strane · {m} % s majčine strane ¦ Pobarvano: {p} % po očetovi strani · {m} % po materini strani
+Peint : {p} % du génome ¦ Obojeno: {p} % genoma ¦ Pobarvano: {p} % genoma
+({n} petits segments non montrés) ¦ (neprikazanih malih segmenata: {n}) ¦ (neprikazanih majhnih segmentov: {n})
+Chromosome {c} — copie reçue du père ({mb} Mb) ¦ Kromosom {c} — kopija primljena od oca ({mb} Mb) ¦ Kromosom {c} — kopija, prejeta od očeta ({mb} Mb)
+Chromosome {c} — copie reçue de la mère ¦ Kromosom {c} — kopija primljena od majke ¦ Kromosom {c} — kopija, prejeta od matere
+Chromosome {c} ({mb} Mb) ¦ Kromosom {c} ({mb} Mb) ¦ Kromosom {c} ({mb} Mb)
+chromosome {c} : {a} à {b} Mb ¦ kromosom {c}: od {a} do {b} Mb ¦ kromosom {c}: od {a} do {b} Mb
+(clic : sa fiche) ¦ (klik: njegov zapis) ¦ (klik: njegov zapis)
+(clic : la liste) ¦ (klik: popis) ¦ (klik: seznam)
+Côté père ¦ S očeve strane ¦ Po očetovi strani
+Côté mère ¦ S majčine strane ¦ Po materini strani
+Côté inconnu ¦ Nepoznata strana ¦ Neznana stran
+côté père ¦ s očeve strane ¦ po očetovi strani
+côté mère ¦ s majčine strane ¦ po materini strani
+des deux côtés ¦ s obje strane ¦ po obeh straneh
+côté inconnu ¦ nepoznata strana ¦ neznana stran
+Branche inconnue ¦ Nepoznata grana ¦ Neznana veja
+Peinture des chromosomes : {s} de {m} ¦ Bojanje kromosoma: {s} od {m} ¦ Barvanje kromosomov: {s} od {m}
+{p} % du génome côté père et {m} % côté mère ¦ {p} % genoma s očeve strane i {m} % s majčine ¦ {p} % genoma po očetovi strani in {m} % po materini
+Peinture des chromosomes — {name} ¦ Bojanje kromosoma — {name} ¦ Barvanje kromosomov — {name}
+Correspondance {n} ¦ Podudaranje {n} ¦ Ujemanje {n}
+parenté connue : {k} ¦ poznato srodstvo: {k} ¦ znano sorodstvo: {k}
+parentés possibles : {k} ¦ moguća srodstva: {k} ¦ možna sorodstva: {k}
+{rel} : en moyenne {avg} cM, de {min} à {max} cM — {n} de tes correspondances dans cette fourchette ¦ {rel}: u prosjeku {avg} cM, od {min} do {max} cM — tvojih podudaranja u ovom rasponu: {n} ¦ {rel}: povprečno {avg} cM, od {min} do {max} cM — tvojih ujemanj v tem razponu: {n}
+pour {name} : {p} % ¦ za {name}: {p} % ¦ za {name}: {p} %
+{n} correspondances placées ¦ Smještenih podudaranja: {n} ¦ Umeščenih ujemanj: {n}
+{n} correspondance placée ¦ Smještenih podudaranja: {n} ¦ Umeščenih ujemanj: {n}
+Règle des cM : {n} sur une échelle logarithmique de {r} parentés (Shared cM Project). ¦ Ravnalo cM: {n} na logaritamskoj ljestvici od {r} srodstava (Shared cM Project). ¦ Ravnilo cM: {n} na logaritemski lestvici {r} sorodstev (Shared cM Project).
+Règle des cM : {n} sur une échelle linéaire de {r} parentés (Shared cM Project). ¦ Ravnalo cM: {n} na linearnoj ljestvici od {r} srodstava (Shared cM Project). ¦ Ravnilo cM: {n} na linearni lestvici {r} sorodstev (Shared cM Project).
+{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max} ¦ {name}: {n}, medijan {med}, prosjek {mean}, od {min} do {max} ¦ {name}: {n}, mediana {med}, povprečje {mean}, od {min} do {max}
+{name} : médiane {v} ¦ {name}: medijan {v} ¦ {name}: mediana {v}
+Vagues : {g}, {n} valeurs, de {min} à {max}. ¦ Valovi: {g}, vrijednosti {n}, od {min} do {max}. ¦ Valovi: {g}, vrednosti {n}, od {min} do {max}.
+({p} % de {label}, {t} % du tout) ¦ ({p} % od {label}, {t} % od ukupnog) ¦ ({p} % od {label}, {t} % celote)
+Mosaïque de {c} colonnes (largeur = part du total {t}) et {s} séries. ¦ Mozaik stupaca ({c}) (širina = udio u ukupnom {t}) i nizova ({s}). ¦ Mozaik stolpcev ({c}) (širina = delež celote {t}) in nizov ({s}).
+(écart {v}) ¦ (razlika {v}) ¦ (razlika {v})
+Échelle de points : {n} lignes, {s}. ¦ Točkasti dijagram: redaka {n}, {s}. ¦ Točkovni diagram: vrstic {n}, {s}.
+(total {v}) ¦ (ukupno {v}) ¦ (skupaj {v})
+Rose de Nightingale : {n} parts, {s}, l’aire de chaque part suit le chiffre. ¦ Ruža Nightingale: dijelova {n}, {s}, površina svakog dijela prati brojku. ¦ Roža Nightingale: delov {n}, {s}, ploščina vsakega dela sledi številki.
+Rose de Nightingale : {n} parts, {s}. ¦ Ruža Nightingale: dijelova {n}, {s}. ¦ Roža Nightingale: delov {n}, {s}.
+Même métier que le père : {n} sur {t} ({p} %) ¦ Isto zanimanje kao otac: {n} od {t} ({p} %) ¦ Isti poklic kot oče: {n} od {t} ({p} %)
+Père {a} → {kid} {b} : {n} ¦ Otac {a} → {kid} {b}: {n} ¦ Oče {a} → {kid} {b}: {n}
+{p} % des enfants de {job}, {t} % du tout ¦ {p} % djece zanimanja {job}, {t} % od ukupnog ¦ {p} % otrok poklica {job}, {t} % celote
+Père ↓ · {kid} → ¦ Otac ↓ · {kid} → ¦ Oče ↓ · {kid} →
+Chiffres en % des enfants de chaque métier du père ¦ Brojke u % djece za svako zanimanje oca ¦ Številke v % otrok za vsak poklic očeta
+Chiffres en % de chaque métier de {kid} ¦ Brojke u % za svako zanimanje: {kid} ¦ Številke v % za vsak poklic: {kid}
+Chiffres en % du tout ¦ Brojke u % od ukupnog ¦ Številke v % celote
+Chiffres en nombre ¦ Brojke u broju ¦ Številke v številu
+cadre de couleur : même métier que le père. ¦ obojeni okvir: isto zanimanje kao otac. ¦ barvni okvir: isti poklic kot oče.
+Cadre de couleur : même métier que le père. ¦ Obojeni okvir: isto zanimanje kao otac. ¦ Barvni okvir: isti poklic kot oče.
+Tableau de mobilité : {t} couples père et {kid}, {n} métiers ; {p} % font le métier du père. ¦ Tablica mobilnosti: parova otac i {kid}: {t}, zanimanja: {n}; {p} % ima zanimanje oca. ¦ Tabela mobilnosti: parov oče in {kid}: {t}, poklicev: {n}; {p} % opravlja poklic očeta.
+, femmes et hommes ¦ , žene i muškarci ¦ , ženske in moški
+, par siècle du mariage ¦ , po stoljeću vjenčanja ¦ , po stoletju poroke
+, par siècle de naissance ¦ , po stoljeću rođenja ¦ , po stoletju rojstva
+, par siècle ¦ , po stoljeću ¦ , po stoletju
+D’après {n} de l’arbre ¦ Prema: {n} iz stabla ¦ Na podlagi: {n} iz drevesa
+largeur : le nombre de personnes de la période ; hauteur : la part de chacun ¦ širina: broj osoba u razdoblju; visina: udio svakoga ¦ širina: število oseb v obdobju; višina: delež vsakega
+D’après les fiches de l’arbre ¦ Prema zapisima iz stabla ¦ Na podlagi zapisov iz drevesa
+femmes et hommes ¦ žene i muškarci ¦ ženske in moški
+D’après {n} au mois près ¦ Prema: {n} s točnošću na mjesec ¦ Na podlagi: {n} z natančnostjo na mesec
+D’après {n} père et {kid} dont les deux métiers sont connus ¦ Prema: {n} parova otac i {kid} čija su oba zanimanja poznata ¦ Na podlagi: {n} parov oče in {kid}, katerih oba poklica sta znana
+{n} pris dans l’onglet ADN. ¦ {n} uzeto iz kartice DNK. ¦ {n} iz zavihka DNK.
+{n} prises dans l’onglet ADN. ¦ {n} uzeto iz kartice DNK. ¦ {n} iz zavihka DNK.
+(les 300 premières) ¦ (prvih 300) ¦ (prvih 300)
+clic : la fiche. ¦ klik: zapis. ¦ klik: zapis.
+Cette partie ¦ Ovaj dio ¦ Ta del
+{name} : ferme l’éditeur et clique à nouveau pour voir la liste des personnes. ¦ {name}: zatvori uređivač i ponovno klikni da vidiš popis osoba. ¦ {name}: zapri urejevalnik in znova klikni, da vidiš seznam oseb.
+Aucun segment à montrer (vérifie le chromosome, le début et la fin, ou le minimum de cM). ¦ Nema segmenta za prikaz (provjeri kromosom, početak i kraj ili minimum cM). ¦ Ni segmenta za prikaz (preveri kromosom, začetek in konec ali najmanj cM).
+Ajoute des segments : chromosome, début, fin (en Mb ou en paires de bases), cM, correspondance. ¦ Dodaj segmente: kromosom, početak, kraj (u Mb ili parovima baza), cM, podudaranje. ¦ Dodaj segmente: kromosom, začetek, konec (v Mb ali baznih parih), cM, ujemanje.
+▲ père ▼ mère ¦ ▲ otac ▼ majka ¦ ▲ oče ▼ mati
+Ajoute tes correspondances (nom, cM) : elles se placent sur la règle. ¦ Dodaj svoja podudaranja (ime, cM): smještaju se na ravnalo. ¦ Dodaj svoja ujemanja (ime, cM): postavijo se na ravnilo.
+Ajoute des valeurs avec leur groupe (siècle, sexe, branche…) : une vague par groupe. ¦ Dodaj vrijednosti s njihovom skupinom (stoljeće, spol, grana…): jedan val po skupini. ¦ Dodaj vrednosti z njihovo skupino (stoletje, spol, veja…): en val na skupino.
+Ajoute des colonnes (lignes du tableau) et leurs parts (séries) : la largeur suit le total. ¦ Dodaj stupce (retke tablice) i njihove udjele (nizove): širina prati ukupno. ¦ Dodaj stolpce (vrstice tabele) in njihove deleže (nize): širina sledi skupni vsoti.
+Ajoute des lignes et leurs valeurs (une colonne par série, ex. femmes et hommes). ¦ Dodaj retke i njihove vrijednosti (jedan stupac po nizu, npr. žene i muškarci). ¦ Dodaj vrstice in njihove vrednosti (en stolpec na niz, npr. ženske in moški).
+Ajoute des parts (mois, saisons…) et leurs chiffres (une colonne par série). ¦ Dodaj dijelove (mjeseci, godišnja doba…) i njihove brojke (jedan stupac po nizu). ¦ Dodaj dele (meseci, letni časi…) in njihove številke (en stolpec na niz).
+Ajoute des lignes : métier du père, métier de l’enfant, combien. ¦ Dodaj retke: zanimanje oca, zanimanje djeteta, koliko. ¦ Dodaj vrstice: poklic očeta, poklic otroka, koliko.
+Aucune donnée dans l’arbre pour ce choix (dates manquantes ?). ¦ Nema podataka u stablu za ovaj odabir (nedostaju datumi?). ¦ V drevesu ni podatkov za ta izbor (manjkajo datumi?).
+Aucune donnée dans l’arbre pour ce choix. ¦ Nema podataka u stablu za ovaj odabir. ¦ V drevesu ni podatkov za ta izbor.
+Les métiers de la famille, siècle par siècle ¦ Zanimanja obitelji, stoljeće po stoljeće ¦ Poklici družine, stoletje za stoletjem
+Les communes de naissance, siècle par siècle ¦ Općine rođenja, stoljeće po stoljeće ¦ Rojstne občine, stoletje za stoletjem
+Les noms de famille, siècle par siècle ¦ Prezimena, stoljeće po stoljeće ¦ Priimki, stoletje za stoletjem
+Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix. ¦ Nema dovoljno datuma rođenja i smrti (ili vjenčanja) za ovaj odabir. ¦ Premalo datumov rojstva in smrti (ali poroke) za ta izbor.
+Âge moyen au décès, par siècle de naissance ¦ Prosječna dob kod smrti, po stoljeću rođenja ¦ Povprečna starost ob smrti, po stoletju rojstva
+Âge moyen au mariage, par siècle ¦ Prosječna dob kod vjenčanja, po stoljeću ¦ Povprečna starost ob poroki, po stoletjih
+Âge moyen au décès, par commune de naissance ¦ Prosječna dob kod smrti, po općini rođenja ¦ Povprečna starost ob smrti, po rojstni občini
+Âge moyen au décès, par nom de famille ¦ Prosječna dob kod smrti, po prezimenu ¦ Povprečna starost ob smrti, po priimku
+Aucune date au mois près dans l’arbre pour ce choix. ¦ U stablu nema datuma s točnošću na mjesec za ovaj odabir. ¦ V drevesu ni datuma z natančnostjo na mesec za ta izbor.
+Naissances, mariages et décès, mois par mois ¦ Rođenja, vjenčanja i smrti, mjesec po mjesec ¦ Rojstva, poroke in smrti, mesec za mesecem
+Les naissances, mois par mois ¦ Rođenja, mjesec po mjesec ¦ Rojstva, mesec za mesecem
+Les mariages, mois par mois ¦ Vjenčanja, mjesec po mjesec ¦ Poroke, mesec za mesecem
+Les décès, mois par mois ¦ Smrti, mjesec po mjesec ¦ Smrti, mesec za mesecem
+Les conceptions (naissance − 9 mois), mois par mois ¦ Začeća (rođenje − 9 mjeseci), mjesec po mjesec ¦ Spočetja (rojstvo − 9 mesecev), mesec za mesecem
+Aucun couple père / enfant dont les deux métiers sont connus. ¦ Nema para otac / dijete čija su oba zanimanja poznata. ¦ Ni para oče / otrok, katerega oba poklica sta znana.
+Métier du père, métier de l’enfant ¦ Zanimanje oca, zanimanje djeteta ¦ Poklic očeta, poklic otroka
+Métier du père, métier du fils ¦ Zanimanje oca, zanimanje sina ¦ Poklic očeta, poklic sina
+Métier du père, métier de la fille ¦ Zanimanje oca, zanimanje kćeri ¦ Poklic očeta, poklic hčere
+Âge au décès, par siècle de naissance ¦ Dob kod smrti, po stoljeću rođenja ¦ Starost ob smrti, po stoletju rojstva
+Âge au décès, femmes et hommes ¦ Dob kod smrti, žene i muškarci ¦ Starost ob smrti, ženske in moški
+Âge au mariage, par siècle ¦ Dob kod vjenčanja, po stoljeću ¦ Starost ob poroki, po stoletjih
+Âge au mariage, femmes et hommes ¦ Dob kod vjenčanja, žene i muškarci ¦ Starost ob poroki, ženske in moški
+Métiers, siècle par siècle ¦ Zanimanja, stoljeće po stoljeće ¦ Poklici, stoletje za stoletjem
+Communes de naissance, siècle par siècle ¦ Općine rođenja, stoljeće po stoljeće ¦ Rojstne občine, stoletje za stoletjem
+Noms de famille, siècle par siècle ¦ Prezimena, stoljeće po stoljeće ¦ Priimki, stoletje za stoletjem
+Métiers, par 50 ans ¦ Zanimanja, po 50 godina ¦ Poklici, po 50 let
+Âge moyen au décès (femmes, hommes), par siècle de naissance ¦ Prosječna dob kod smrti (žene, muškarci), po stoljeću rođenja ¦ Povprečna starost ob smrti (ženske, moški), po stoletju rojstva
+Âge moyen au mariage (femmes, hommes), par siècle ¦ Prosječna dob kod vjenčanja (žene, muškarci), po stoljeću ¦ Povprečna starost ob poroki (ženske, moški), po stoletjih
+Naissances, mariages et décès, par mois ¦ Rođenja, vjenčanja i smrti, po mjesecu ¦ Rojstva, poroke in smrti, po mesecih
+Naissances par mois, par siècle ¦ Rođenja po mjesecu, po stoljeću ¦ Rojstva po mesecih, po stoletjih
+Conceptions par mois (naissance − 9 mois), par siècle ¦ Začeća po mjesecu (rođenje − 9 mjeseci), po stoljeću ¦ Spočetja po mesecih (rojstvo − 9 mesecev), po stoletjih
+Mariages par mois, par siècle ¦ Vjenčanja po mjesecu, po stoljeću ¦ Poroke po mesecih, po stoletjih
+Décès par mois, par siècle ¦ Smrti po mjesecu, po stoljeću ¦ Smrti po mesecih, po stoletjih
+Métier du père → métier du fils ¦ Zanimanje oca → zanimanje sina ¦ Poklic očeta → poklic sina
+Métier du père → métier de la fille ¦ Zanimanje oca → zanimanje kćeri ¦ Poklic očeta → poklic hčere
+Métier du père → métier de l’enfant (fils et filles) ¦ Zanimanje oca → zanimanje djeteta (sinovi i kćeri) ¦ Poklic očeta → poklic otroka (sinovi in hčere)
+La personne qui a fait le test… ¦ Osoba koja je napravila test… ¦ Oseba, ki je opravila test…
+ℹ️ Aucun test ADN dans ta base : ajoute-le dans l’onglet ADN (🧬 Mes tests), ou remplis le tableau à la main. ¦ ℹ️ U tvojoj bazi nema DNK testa: dodaj ga u kartici DNK (🧬 Moji testovi) ili ručno ispuni tablicu. ¦ ℹ️ V tvoji bazi ni DNK testa: dodaj ga v zavihku DNK (🧬 Moji testi) ali ročno izpolni tabelo.
+ℹ️ Cette personne n’a pas de test : voici tous les tests de ta base. ¦ ℹ️ Ova osoba nema test: evo svih testova u tvojoj bazi. ¦ ℹ️ Ta oseba nima testa: tukaj so vsi testi v tvoji bazi.
+Lecture de tes données ADN… ¦ Čitam tvoje DNK podatke… ¦ Berem tvoje DNK podatke…
+Aucun test ADN dans ta base. ¦ U tvojoj bazi nema DNK testa. ¦ V tvoji bazi ni DNK testa.
+🧬 Les segments d’un test ¦ 🧬 Segmenti jednog testa ¦ 🧬 Segmenti enega testa
+Les segments partagés avec chaque cousin (onglet ADN → 🧩 Chromosomes) sont peints sur ses chromosomes, colorés par branche (les groupes de l’onglet ADN, ou l’ancêtre noté sur le segment). ¦ Segmenti dijeljeni sa svakim rođakom (kartica DNK → 🧩 Kromosomi) obojeni su na njegovim kromosomima, prema grani (skupine iz kartice DNK ili predak zabilježen na segmentu). ¦ Segmenti, deljeni z vsakim sorodnikom (zavihek DNK → 🧩 Kromosomi), so pobarvani na njegovih kromosomih po veji (skupine iz zavihka DNK ali prednik, zapisan na segmentu).
+Segments d’au moins ¦ Segmenti od najmanje ¦ Segmenti vsaj
+Ce test n’a pas encore de segments : importe-les dans l’onglet ADN (🧩 Chromosomes → ⤒ Importer des segments). ¦ Ovaj test još nema segmenata: uvezi ih u kartici DNK (🧩 Kromosomi → ⤒ Uvezi segmente). ¦ Ta test še nima segmentov: uvozi jih v zavihku DNK (🧩 Kromosomi → ⤒ Uvozi segmente).
+D’après l’onglet ADN (segments partagés) ¦ Prema kartici DNK (dijeljeni segmenti) ¦ Na podlagi zavihka DNK (deljeni segmenti)
+📏 Les correspondances d’un test ¦ 📏 Podudaranja jednog testa ¦ 📏 Ujemanja enega testa
+Chaque correspondance se place sur la règle d’après ses cM partagés ; survole un point pour voir les parentés possibles. ¦ Svako se podudaranje smješta na ravnalo prema dijeljenim cM; prijeđi mišem preko točke da vidiš moguća srodstva. ¦ Vsako ujemanje se postavi na ravnilo glede na deljene cM; z miško pojdi čez točko, da vidiš možna sorodstva.
+Correspondances d’au moins ¦ Podudaranja od najmanje ¦ Ujemanja vsaj
+Combien au plus ¦ Najviše koliko ¦ Največ koliko
+Aucune correspondance avec des cM pour ce test (ou au-dessus du minimum choisi). ¦ Nema podudaranja s cM za ovaj test (ili iznad odabranog minimuma). ¦ Ni ujemanja s cM za ta test (ali nad izbranim minimumom).
+segments partagés, colorés par branche ¦ dijeljeni segmenti, obojeni prema grani ¦ deljeni segmenti, pobarvani po veji
+Mes chromosomes peints ¦ Moji obojeni kromosomi ¦ Moji pobarvani kromosomi
+Mes cousins ADN sur la règle des cM ¦ Moji DNK rođaci na ravnalu cM ¦ Moji DNK sorodniki na ravnilu cM
+par siècle de naissance ¦ po stoljeću rođenja ¦ po stoletju rojstva
+Les métiers, siècle par siècle ¦ Zanimanja, stoljeće po stoljeće ¦ Poklici, stoletje za stoletjem
+largeur : nombre de personnes ; hauteur : part du métier ¦ širina: broj osoba; visina: udio zanimanja ¦ širina: število oseb; višina: delež poklica
+par commune de naissance, femmes et hommes ¦ po općini rođenja, žene i muškarci ¦ po rojstni občini, ženske in moški
+Les mois de la vie ¦ Mjeseci života ¦ Meseci življenja
+naissances, mariages et décès ¦ rođenja, vjenčanja i smrti ¦ rojstva, poroke in smrti
+Les segments partagés (un par ligne) ¦ Dijeljeni segmenti (jedan po retku) ¦ Deljeni segmenti (en na vrstico)
+Chromosome (1 à 22, X) ¦ Kromosom (1 do 22, X) ¦ Kromosom (1 do 22, X)
+Début (Mb ou paires de bases) ¦ Početak (Mb ili parovi baza) ¦ Začetek (Mb ali bazni pari)
+Branche (couple d’ancêtres) ¦ Grana (par predaka) ¦ Veja (par prednikov)
+Couleur (sinon celle de la branche) ¦ Boja (inače boja grane) ¦ Barva (sicer barva veje)
+Les branches et leur couleur (facultatif) ¦ Grane i njihova boja (neobavezno) ¦ Veje in njihova barva (neobvezno)
+Deux copies par chromosome (père en haut, mère en bas) ¦ Dvije kopije po kromosomu (otac gore, majka dolje) ¦ Dve kopiji na kromosom (oče zgoraj, mati spodaj)
+Une seule barre par chromosome ¦ Samo jedan stupac po kromosomu ¦ Samo en stolpec na kromosom
+Couleur des segments ¦ Boja segmenata ¦ Barva segmentov
+Par correspondance ¦ Po podudaranju ¦ Po ujemanju
+Par côté (père, mère) ¦ Po strani (otac, majka) ¦ Po strani (oče, mati)
+Couleur du côté père ¦ Boja očeve strane ¦ Barva očetove strani
+Couleur du côté mère ¦ Boja majčine strane ¦ Barva materine strani
+Cacher les segments de moins de ¦ Sakrij segmente manje od ¦ Skrij segmente, manjše od
+Épaisseur des chromosomes ¦ Debljina kromosoma ¦ Debelina kromosomov
+Colonnes (0 = selon la largeur) ¦ Stupci (0 = prema širini) ¦ Stolpci (0 = glede na širino)
+Montrer le chromosome X ¦ Prikaži kromosom X ¦ Prikaži kromosom X
+Noms dans les segments (s’ils tiennent) ¦ Imena u segmentima (ako stanu) ¦ Imena v segmentih (če se prilegajo)
+Parenté connue (facultatif) ¦ Poznato srodstvo (neobavezno) ¦ Znano sorodstvo (neobvezno)
+Montrer les parentés possibles de… (un nom) ¦ Prikaži moguća srodstva za… (ime) ¦ Prikaži možna sorodstva za… (ime)
+Régulière ¦ Pravilna ¦ Enakomerna
+Parentés ¦ Srodstva ¦ Sorodstva
+Les principales ¦ Glavna ¦ Glavna
+Toutes (demi-parentés, générations d’écart…) ¦ Sva (polusrodstva, razlike u generacijama…) ¦ Vsa (polsorodstva, razlike v rodovih…)
+Noms écrits (les plus proches d’abord) ¦ Prikazana imena (najbliža prva) ¦ Prikazana imena (najbližja najprej)
+Trait à la moyenne de chaque parenté ¦ Crta na prosjeku svakog srodstva ¦ Črta pri povprečju vsakega sorodstva
+Couleur des autres points ¦ Boja ostalih točaka ¦ Barva drugih točk
+Couleur des fourchettes ¦ Boja raspona ¦ Barva razponov
+Fin de l’échelle ¦ Kraj ljestvice ¦ Konec lestvice
+Les valeurs et leur groupe (une vague par groupe) ¦ Vrijednosti i njihova skupina (jedan val po skupini) ¦ Vrednosti in njihova skupina (en val na skupino)
+Nom (personne…) ¦ Ime (osoba…) ¦ Ime (oseba…)
+Groupe (siècle, sexe…) ¦ Skupina (stoljeće, spol…) ¦ Skupina (stoletje, spol…)
+Couleur du groupe ¦ Boja skupine ¦ Barva skupine
+Chevauchement des vagues ¦ Preklapanje valova ¦ Prekrivanje valov
+Écart entre les vagues ¦ Razmak između valova ¦ Razmik med valovi
+Hauteur des vagues ¦ Visina valova ¦ Višina valov
+Chaque vague à sa hauteur ¦ Svaki val na svojoj visini ¦ Vsak val na svoji višini
+Selon le nombre de valeurs ¦ Prema broju vrijednosti ¦ Glede na število vrednosti
+Par nombre de valeurs ¦ Po broju vrijednosti ¦ Po številu vrednosti
+Une par groupe ¦ Jedna po skupini ¦ Ena na skupino
+Dégradé : première couleur ¦ Prijelaz: prva boja ¦ Prehod: prva barva
+Dégradé : dernière couleur ¦ Prijelaz: zadnja boja ¦ Prehod: zadnja barva
+Montrer la médiane ¦ Prikaži medijan ¦ Prikaži mediano
+Écrire le nombre de valeurs ¦ Prikaži broj vrijednosti ¦ Prikaži število vrednosti
+Début de l’axe (vide = automatique) ¦ Početak osi (prazno = automatski) ¦ Začetek osi (prazno = samodejno)
+Fin de l’axe (vide = automatique) ¦ Kraj osi (prazno = automatski) ¦ Konec osi (prazno = samodejno)
+Les colonnes (lignes) et leurs parts (séries) ¦ Stupci (retci) i njihovi udjeli (nizovi) ¦ Stolpci (vrstice) in njihovi deleži (nizi)
+La part en % ¦ Udio u % ¦ Delež v %
+Le chiffre ¦ Brojka ¦ Številka
+Part de chaque colonne sous l’axe ¦ Udio svakog stupca ispod osi ¦ Delež vsakega stolpca pod osjo
+Ordre des colonnes ¦ Redoslijed stupaca ¦ Vrstni red stolpcev
+Les plus larges d’abord ¦ Najširi prvi ¦ Najširši najprej
+Écart entre les colonnes ¦ Razmak između stupaca ¦ Razmik med stolpci
+Couleur des traits ¦ Boja crta ¦ Barva črt
+Les lignes et leurs valeurs (une colonne par série) ¦ Retci i njihove vrijednosti (jedan stupac po nizu) ¦ Vrstice in njihove vrednosti (en stolpec na niz)
+Par écart entre les deux séries ¦ Po razlici između dva niza ¦ Po razliki med nizoma
+Pointillé sur toute la largeur ¦ Točkasto preko cijele širine ¦ Pikčasto čez vso širino
+Entre les points (écart) ¦ Između točaka (razlika) ¦ Med točkami (razlika)
+Couleur des points (une seule série) ¦ Boja točaka (samo jedan niz) ¦ Barva točk (en sam niz)
+Écrire la valeur ¦ Prikaži vrijednost ¦ Prikaži vrednost
+Écrire l’écart (deux séries) ¦ Prikaži razliku (dva niza) ¦ Prikaži razliko (dva niza)
+Mettre en avant (un nom ; les autres pâlissent) ¦ Istakni (ime; ostali blijede) ¦ Poudari (ime; drugi zbledijo)
+Les parts (mois, saisons…) et leurs chiffres ¦ Dijelovi (mjeseci, godišnja doba…) i njihove brojke ¦ Deli (meseci, letni časi…) in njihove številke
+Plusieurs séries ¦ Više nizova ¦ Več nizov
+Empilées ¦ Naslagani ¦ Naloženi
+Superposées (comme Florence Nightingale) ¦ Preklopljeni (kao Florence Nightingale) ¦ Prekrivajoči (kot Florence Nightingale)
+L’aire suit le chiffre (sinon : la longueur) ¦ Površina prati brojku (inače: duljina) ¦ Ploščina sledi številki (sicer: dolžina)
+Départ (degrés, 0 = en haut) ¦ Početak (stupnjevi, 0 = gore) ¦ Začetek (stopinje, 0 = zgoraj)
+Noms des parts ¦ Nazivi dijelova ¦ Imena delov
+Cercles de l’échelle ¦ Krugovi ljestvice ¦ Krogi lestvice
+Couleur des traits entre les parts ¦ Boja crta između dijelova ¦ Barva črt med deli
+Les couples de métiers ¦ Parovi zanimanja ¦ Pari poklicev
+Métier du père ¦ Zanimanje oca ¦ Poklic očeta
+Métier de l’enfant ¦ Zanimanje djeteta ¦ Poklic otroka
+Regrouper des métiers (facultatif : un mot → une famille de métiers) ¦ Grupiraj zanimanja (neobavezno: riječ → skupina zanimanja) ¦ Združi poklice (neobvezno: beseda → skupina poklicev)
+Métier (ou un morceau du mot) ¦ Zanimanje (ili dio riječi) ¦ Poklic (ali del besede)
+Famille de métiers ¦ Skupina zanimanja ¦ Skupina poklicev
+En % des enfants de chaque métier du père ¦ U % djece za svako zanimanje oca ¦ V % otrok za vsak poklic očeta
+En % de chaque métier de l’enfant ¦ U % za svako zanimanje djeteta ¦ V % za vsak poklic otroka
+En nombre ¦ U broju ¦ V številu
+Combien de métiers ¦ Koliko zanimanja ¦ Koliko poklicev
+Regrouper les autres dans « Autres » ¦ Grupiraj ostale pod „Ostalo” ¦ Združi druge pod »Drugo«
+Les plus fréquents d’abord ¦ Najčešći prvi ¦ Najpogostejši najprej
+Cadre « même métier que le père » ¦ Okvir „isto zanimanje kao otac” ¦ Okvir »isti poklic kot oče«
+Le mot pour l’enfant (ex. : le fils) ¦ Riječ za dijete (npr. sin) ¦ Beseda za otroka (npr. sin)
+Ces personnes ne sont plus dans la base. ¦ Ove osobe više nisu u bazi. ¦ Teh oseb ni več v bazi.
+Naissances ¦ Rođenja ¦ Rojstva
+=lignée ¦ loza|loze|loza ¦ linija|liniji|linije|linij
+=mère ¦ majka|majke|majki ¦ mati|materi|matere|mater
+personne de départ ¦ početna osoba ¦ začetna oseba
+ancêtre ({k} générations) ¦ predak ({k} generacija) ¦ prednik (rodov: {k})
+descendant ({k} générations) ¦ potomak ({k} generacija) ¦ potomec (rodov: {k})
+descendante ({k} générations) ¦ potomkinja ({k} generacija) ¦ potomka (rodov: {k})
+{k} générations au-dessus ¦ generacija iznad: {k} ¦ rodov višje: {k}
+{k} générations en dessous ¦ generacija ispod: {k} ¦ rodov nižje: {k}
+Arrière-arrière-petits-enfants ¦ Pra-praunuci ¦ Prapravnuki
+Arrière-arrière-arrière-petits-enfants ¦ Pra-pra-praunuci ¦ Praprapravnuki
+parente|mère ¦ majka ¦ mati
+parente|grand-mère ¦ baka ¦ babica
+parente|grand-parent ¦ djed ili baka ¦ stari starš
+parente|enfant ¦ dijete ¦ otrok
+parente|petit-enfant ¦ unuče ¦ vnuk
+parente|arrière-grand-mère ¦ prabaka ¦ prababica
+parente|arrière-grand-parent ¦ pradjed ili prabaka ¦ prastari starš
+parente|arrière-arrière-grand-père ¦ pra-pradjed ¦ prapraded
+parente|arrière-arrière-grand-mère ¦ pra-prabaka ¦ praprababica
+parente|arrière-arrière-grand-parent ¦ pra-pradjed ili pra-prabaka ¦ praprastari starš
+parente|arrière-arrière-arrière-grand-père ¦ pra-pra-pradjed ¦ praprapraded
+parente|arrière-arrière-arrière-grand-mère ¦ pra-pra-prabaka ¦ prapraprababica
+parente|arrière-arrière-arrière-grand-parent ¦ pra-pra-pradjed ili pra-pra-prabaka ¦ prapraprastari starš
+parente|arrière-petite-fille ¦ praunuka ¦ pravnukinja
+parente|arrière-petit-enfant ¦ praunuče ¦ pravnuk
+parente|arrière-arrière-petit-fils ¦ pra-praunuk ¦ prapravnuk
+parente|arrière-arrière-petite-fille ¦ pra-praunuka ¦ prapravnukinja
+parente|arrière-arrière-petit-enfant ¦ pra-praunuče ¦ prapravnuk
+parente|arrière-arrière-arrière-petit-fils ¦ pra-pra-praunuk ¦ praprapravnuk
+parente|arrière-arrière-arrière-petite-fille ¦ pra-pra-praunuka ¦ praprapravnukinja
+parente|arrière-arrière-arrière-petit-enfant ¦ pra-pra-praunuče ¦ praprapravnuk
+{n} générations en vie en même temps : {a} – {b} ¦ Generacija živih u isto vrijeme: {n}: {a} – {b} ¦ Rodov, živih hkrati: {n}: {a} – {b}
+(en vie) ¦ (živ/živa) ¦ (živ/živa)
+(décès inconnu : vie supposée) ¦ (smrt nepoznata: pretpostavljeni život) ¦ (smrt neznana: predpostavljeno življenje)
+(décès inconnu) ¦ (smrt nepoznata) ¦ (smrt neznana)
+{a} ({ra}) a connu {b} ({rb}) pendant {years} ({period}). ¦ {a} ({ra}) poznavao/poznavala je {b} ({rb}) tijekom {years} ({period}). ¦ {a} ({ra}) je poznal/poznala {b} ({rb}) {years} ({period}).
+{a} a connu {b} ({k} générations plus tard) pendant {years} ({period}). ¦ {a} poznavao/poznavala je {b} ({k} generacija kasnije) tijekom {years} ({period}). ¦ {a} je poznal/poznala {b} (rodov pozneje: {k}) {years} ({period}).
+Personne de ces vies ne se chevauche sur {n} générations ou plus. ¦ Nijedan od ovih života ne preklapa se kroz {n} ili više generacija. ¦ Nobeno od teh življenj se ne prekriva prek {n} ali več rodov.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontres racontées. ¦ Tko je poznavao koga: života {n} kroz generacija {g}; opisanih susreta: {s}. ¦ Kdo je poznal koga: življenj {n}, rodov {g}; opisanih srečanj: {s}.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontre racontée. ¦ Tko je poznavao koga: života {n} kroz generacija {g}; opisanih susreta: {s}. ¦ Kdo je poznal koga: življenj {n}, rodov {g}; opisanih srečanj: {s}.
+Âge (ans) ¦ Dob (godine) ¦ Starost (leta)
+médiane {n} ans ¦ medijan {n} god. ¦ mediana {n} let
+{name} : la moitié a passé {n} ans ¦ {name}: polovica je doživjela {n} god. ¦ {name}: polovica je dočakala {n} let
+{name} : {p} % encore en vie à {a} ans ({n}) · {d} entre {a} et {b} ans ¦ {name}: {p} % još živo s {a} god. ({n}) · {d} između {a} i {b} god. ¦ {name}: {p} % še živih pri {a} letih ({n}) · {d} med {a} in {b} leti
+Courbe de survie : {n} personnes en {g} groupes. ¦ Krivulja preživljenja: osoba {n} u skupina {g}. ¦ Krivulja preživetja: oseb {n}, skupin {g}.
+Courbe de survie : {n} personnes en {g} groupe. ¦ Krivulja preživljenja: osoba {n} u skupina {g}. ¦ Krivulja preživetja: oseb {n}, skupin {g}.
+Même métier que la génération d’avant — {list} ¦ Isto zanimanje kao prethodna generacija — {list} ¦ Isti poklic kot prejšnji rod — {list}
+Métiers sur {n} générations : {l}. ¦ Zanimanja kroz {n} generacija: {l}. ¦ Poklici prek rodov ({n}): {l}.
+{a} et {b} : {d} ¦ {a} i {b}: {d} ¦ {a} in {b}: {d}
+(né à {p}) ¦ (rođen u {p}) ¦ (rojen v {p})
+(née à {p}) ¦ (rođena u {p}) ¦ (rojena v {p})
+même lieu de naissance ¦ isto mjesto rođenja ¦ isti rojstni kraj
+mariage {y} ¦ vjenčanje {y}. ¦ poroka {y}
+(au-delà du cercle) ¦ (izvan kruga) ¦ (zunaj kroga)
+le village de l’époux ¦ selo muža ¦ vas moža
+{n} du même lieu ¦ {n} iz istog mjesta ¦ {n} iz istega kraja
+{c} : la moitié des mariages à moins de {km} km ¦ {c}: polovica vjenčanja na manje od {km} km ¦ {c}: polovica porok na manj kot {km} km
+Rayon des mariages : {n}, médiane {km} km. ¦ Polumjer vjenčanja: {n}, medijan {km} km. ¦ Polmer porok: {n}, mediana {km} km.
+Génération {g} : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes ¦ Generacija {g}: mogućih predaka {t}, pronađenih mjesta {f} ({p} %), različitih osoba {d} ¦ Rod {g}: možnih prednikov {t}, najdenih mest {f} ({p} %), različnih oseb {d}
+implexe {p} % ¦ implex {p} % ¦ implex {p} %
+Ancêtres présents plusieurs fois à la génération {g} ¦ Preci koji se pojavljuju više puta u generaciji {g} ¦ Predniki, ki se večkrat pojavijo v rodu {g}
+Sur {n} générations : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes (génération par génération) — implexe {i} %. ¦ Kroz {n} generacija: mogućih predaka {t}, pronađenih mjesta {f} ({p} %), različitih osoba {d} (generaciju po generaciju) — implex {i} %. ¦ Prek rodov ({n}): možnih prednikov {t}, najdenih mest {f} ({p} %), različnih oseb {d} (rod za rodom) — implex {i} %.
+Implexe sur {n} générations : {p} %. ¦ Implex kroz {n} generacija: {p} %. ¦ Implex prek rodov ({n}): {p} %.
+Mariages datés au jour près : {l} pendant le Carême et {a} pendant l’Avent, sur {t} ({p} %). ¦ Vjenčanja datirana na dan: {l} tijekom korizme i {a} tijekom došašća, od {t} ({p} %). ¦ Poroke, datirane na dan: {l} v postnem času in {a} v adventu, od {t} ({p} %).
+Conceptions pendant le Carême : {n} sur {t} ({p} % ; {e} % si tout était égal). ¦ Začeća tijekom korizme: {n} od {t} ({p} %; {e} % da je sve jednako). ¦ Spočetja v postnem času: {n} od {t} ({p} %; {e} %, če bi bilo vse enako).
+En mars (Carême) : {a} % des {what} ; en décembre (Avent) : {b} % ; {e} % si tout était égal. ¦ U ožujku (korizma): {a} % od {what}; u prosincu (došašće): {b} %; {e} % da je sve jednako. ¦ Marca (postni čas): {a} % od {what}; decembra (advent): {b} %; {e} %, če bi bilo vse enako.
+Mois des {a} et des {b} : {x} et {y}. ¦ Mjeseci za {a} i {b}: {x} i {y}. ¦ Meseci za {a} in {b}: {x} in {y}.
+Mois des {a} : {x}. ¦ Mjeseci za {a}: {x}. ¦ Meseci za {a}: {x}.
+nés en {month} ¦ rođeni u mjesecu {month} ¦ rojeni v mesecu {month}
+Si {what} étaient répartis également sur l’année (selon le nombre de jours du mois) ¦ Kad bi {what} bili jednako raspoređeni kroz godinu (prema broju dana u mjesecu) ¦ Če bi bili {what} enakomerno razporejeni čez leto (glede na število dni v mesecu)
+(naissance inconnue : âges estimés) ¦ (rođenje nepoznato: procijenjene dobi) ¦ (rojstvo neznano: ocenjene starosti)
+{name} : née en {y} (mère : {age} ans, estimé) ¦ {name}: rođena {y}. (majka: {age} god., procjena) ¦ {name}: rojena leta {y} (mati: {age} let, ocena)
+{name} : née en {y} (mère : {age} ans) ¦ {name}: rođena {y}. (majka: {age} god.) ¦ {name}: rojena leta {y} (mati: {age} let)
+{name} : né en {y} (mère : {age} ans, estimé) ¦ {name}: rođen {y}. (majka: {age} god., procjena) ¦ {name}: rojen leta {y} (mati: {age} let, ocena)
+{name} : né en {y} (mère : {age} ans) ¦ {name}: rođen {y}. (majka: {age} god.) ¦ {name}: rojen leta {y} (mati: {age} let)
+{n} mois entre {a} et {b} ¦ Mjeseci između {a} i {b}: {n} ¦ Mesecev med {a} in {b}: {n}
+le suivant ¦ sljedeće ¦ naslednji
+{k} chez {m} ¦ {k} kod {m} ¦ {k} pri {m}
+écart médian entre deux naissances : {n} mois ¦ medijan razmaka između dva rođenja: {n} mj. ¦ mediana razmika med dvema rojstvoma: {n} mes.
+{p} % morts avant {n} ans. ¦ {p} % umrlo prije {n}. godine. ¦ {p} % umrlih pred {n}. letom.
+Espacement des naissances : {m}, {k}, écart médian {n} mois. ¦ Razmak između rođenja: {m}, {k}, medijan razmaka {n} mj. ¦ Razmik med rojstvi: {m}, {k}, mediana razmika {n} mes.
+Espacement des naissances : {m}, {k}. ¦ Razmak između rođenja: {m}, {k}. ¦ Razmik med rojstvi: {m}, {k}.
+Lieux de vie de {n} : {l}. ¦ Mjesta života za {n}: {l}. ¦ Kraji življenja za {n}: {l}.
+Qui a connu qui autour de {name} ¦ Tko je poznavao koga oko osobe {name} ¦ Kdo je poznal koga okoli osebe {name}
+Survie par {what} ¦ Preživljenje po: {what} ¦ Preživetje po: {what}
+{n} personnes prises dans ta base ({u} sans date de décès laissées de côté). ¦ Osobe uzete iz tvoje baze: {n} (izostavljeno bez datuma smrti: {u}). ¦ Osebe iz tvoje baze: {n} (izpuščenih brez datuma smrti: {u}).
+{n} lignées prises dans ta base. ¦ Loze uzete iz tvoje baze: {n}. ¦ Linije iz tvoje baze: {n}.
+Aucun couple dont les deux lieux de naissance ont des coordonnées ({n} couples sans lieu situé). ¦ Nema para čija oba mjesta rođenja imaju koordinate (parova bez smještenog mjesta: {n}). ¦ Ni para, katerega oba rojstna kraja imata koordinate (parov brez umeščenega kraja: {n}).
+Aucun couple dont les deux lieux de naissance ont des coordonnées. ¦ Nema para čija oba mjesta rođenja imaju koordinate. ¦ Ni para, katerega oba rojstna kraja imata koordinate.
+{n} couples pris dans ta base ({m} sans lieux situés). ¦ Parovi uzeti iz tvoje baze: {n} (bez smještenih mjesta: {m}). ¦ Pari iz tvoje baze: {n} (brez umeščenih krajev: {m}).
+{n} couples pris dans ta base. ¦ Parovi uzeti iz tvoje baze: {n}. ¦ Pari iz tvoje baze: {n}.
+{n} générations prises dans ta base (arrêt à 250 000 places). ¦ Generacije uzete iz tvoje baze: {n} (zaustavljeno na 250 000 mjesta). ¦ Rodovi iz tvoje baze: {n} (ustavljeno pri 250 000 mestih).
+{m} mariages et {c} naissances pris dans ta base. ¦ Vjenčanja ({m}) i rođenja ({c}) uzeta iz tvoje baze. ¦ Poroke ({m}) in rojstva ({c}) iz tvoje baze.
+Les naissances de {name} ¦ Rođenja: {name} ¦ Rojstva: {name}
+{m} et {n} enfants pris dans ta base. ¦ {m} i djeca ({n}) uzeti iz tvoje baze. ¦ {m} in otroci ({n}) iz tvoje baze.
+{n} personnes et {l} lieux pris dans ta base. ¦ Osobe ({n}) i mjesta ({l}) uzeti iz tvoje baze. ¦ Osebe ({n}) in kraji ({l}) iz tvoje baze.
+Combien étaient encore en vie à chaque âge ¦ Koliko ih je još bilo živo u svakoj dobi ¦ Koliko jih je bilo še živih pri vsaki starosti
+Métiers de père en fils ¦ Zanimanja s oca na sina ¦ Poklici z očeta na sina
+Mariages et conceptions par mois (Bretagne, XVIIIe s.) ¦ Vjenčanja i začeća po mjesecu (Bretanja, 18. st.) ¦ Poroke in spočetja po mesecih (Bretanja, 18. st.)
+Les naissances de quatre mères de la famille ¦ Rođenja četiriju majki iz obitelji ¦ Rojstva štirih mater iz družine
+Où vivait la famille Martin ¦ Gdje je živjela obitelj Martin ¦ Kje je živela družina Martin
+ferme l’éditeur pour ouvrir une fiche ¦ zatvori uređivač da otvoriš zapis ¦ zapri urejevalnik, da odpreš zapis
+un clic ouvre la fiche ¦ klik otvara zapis ¦ klik odpre zapis
+Ajoute des personnes : un nom, la naissance, le décès et la génération (0 = toi, −1 = parents, 1 = enfants…). ¦ Dodaj osobe: ime, rođenje, smrt i generaciju (0 = ti, −1 = roditelji, 1 = djeca…). ¦ Dodaj osebe: ime, rojstvo, smrt in rod (0 = ti, −1 = starša, 1 = otroci…).
+Ajoute des lignes : un groupe (siècle, sexe, branche…), un âge, et « décédé » ou « encore en vie ». ¦ Dodaj retke: skupinu (stoljeće, spol, grana…), dob i „preminuo” ili „još živ”. ¦ Dodaj vrstice: skupino (stoletje, spol, veja…), starost in »umrl« ali »še živ«.
+Aucune personne de la liste n’a une date de naissance et une date de décès. ¦ Nijedna osoba s popisa nema datum rođenja i datum smrti. ¦ Nobena oseba s seznama nima datuma rojstva in datuma smrti.
+Trisaïeul ¦ Pra-pradjed ¦ Prapraded
+Trisaïeuls ¦ Pra-pradjedovi i pra-prabake ¦ Praprastari starši
+Arrière-grand-père ¦ Pradjed ¦ Praded
+Grand-père ¦ Djed ¦ Ded
+Ajoute des lignées : le métier de l’ancêtre, puis de son fils, de son petit-fils… et combien de fois. ¦ Dodaj loze: zanimanje pretka, zatim njegova sina, unuka… i koliko puta. ¦ Dodaj linije: poklic prednika, nato njegovega sina, vnuka… in kolikokrat.
+Même métier que le père ¦ Isto zanimanje kao otac ¦ Isti poklic kot oče
+Ajoute des mariages : les deux époux, la distance entre leurs lieux de naissance (km) et l’année. ¦ Dodaj vjenčanja: oba supružnika, udaljenost između njihovih mjesta rođenja (km) i godinu. ¦ Dodaj poroke: oba zakonca, razdaljo med njunima rojstnima krajema (km) in leto.
+Ajoute des générations : le numéro, les places trouvées et les personnes différentes. ¦ Dodaj generacije: broj, pronađena mjesta i različite osobe. ¦ Dodaj rodove: številko, najdena mesta in različne osebe.
+Ajoute les chiffres de chaque mois (janvier à décembre) : mariages, et conceptions ou naissances. ¦ Dodaj brojke za svaki mjesec (siječanj do prosinac): vjenčanja te začeća ili rođenja. ¦ Dodaj številke za vsak mesec (januar do december): poroke ter spočetja ali rojstva.
+Carême : du mercredi des Cendres (entre le 4 février et le 10 mars) à Pâques (entre le 22 mars et le 25 avril) — l’Église ne mariait pas ¦ Korizma: od Pepelnice (između 4. veljače i 10. ožujka) do Uskrsa (između 22. ožujka i 25. travnja) — Crkva nije vjenčavala ¦ Postni čas: od pepelnične srede (med 4. februarjem in 10. marcem) do velike noči (med 22. marcem in 25. aprilom) — Cerkev ni poročala
+Avent : du 4e dimanche avant Noël (entre le 27 novembre et le 3 décembre) au 24 décembre — pas de mariage non plus ¦ Došašće: od 4. nedjelje prije Božića (između 27. studenoga i 3. prosinca) do 24. prosinca — ni tada nije bilo vjenčanja ¦ Advent: od 4. nedelje pred božičem (med 27. novembrom in 3. decembrom) do 24. decembra — tudi takrat ni bilo porok
+Aucune personne de la liste n’a un mois de naissance. ¦ Nijedna osoba s popisa nema mjesec rođenja. ¦ Nobena oseba s seznama nima meseca rojstva.
+Ajoute des enfants : le nom de la mère, sa naissance, puis chaque enfant et sa date de naissance. ¦ Dodaj djecu: ime majke, njezino rođenje, zatim svako dijete i njegov datum rođenja. ¦ Dodaj otroke: ime matere, njeno rojstvo, nato vsakega otroka in njegov datum rojstva.
+Moins de 15 mois d’écart ¦ Razmak manji od 15 mjeseci ¦ Razmik manj kot 15 mesecev
+Ajoute des lieux : la personne, le lieu, le début et la fin (années ou dates). ¦ Dodaj mjesta: osobu, mjesto, početak i kraj (godine ili datumi). ¦ Dodaj kraje: osebo, kraj, začetek in konec (leta ali datumi).
+Les descendants de la personne de départ ¦ Potomci početne osobe ¦ Potomci začetne osebe
+Ses ancêtres et ses descendants, chacun sur sa ligne : l’app cherche ceux qui se sont connus à plusieurs générations d’écart. ¦ Njezini preci i potomci, svaki u svom retku: aplikacija traži one koji su se poznavali s razmakom od nekoliko generacija. ¦ Njeni predniki in potomci, vsak v svoji vrstici: aplikacija išče tiste, ki so se poznali z razmikom več rodov.
+Pas assez de personnes datées autour de cette personne. ¦ Nema dovoljno datiranih osoba oko ove osobe. ¦ Okoli te osebe ni dovolj datiranih oseb.
+📉 Les âges de ma base ¦ 📉 Dobi u mojoj bazi ¦ 📉 Starosti v moji bazi
+L’âge au décès de chacun ; les personnes encore en vie comptent jusqu’à leur âge d’aujourd’hui. Les décès inconnus sont laissés de côté. ¦ Dob kod smrti svakoga; osobe koje su još žive broje se do svoje današnje dobi. Nepoznate smrti se izostavljaju. ¦ Starost ob smrti vsakogar; osebe, ki so še žive, štejejo do svoje današnje starosti. Neznane smrti so izpuščene.
+Génération (ancêtres) ¦ Generacija (preci) ¦ Rod (predniki)
+Aucune personne avec une naissance et un décès (ou en vie). ¦ Nema osobe s rođenjem i smrću (ili žive). ¦ Ni osebe z rojstvom in smrtjo (ali žive).
+🔀 Les métiers de ma base ¦ 🔀 Zanimanja u mojoj bazi ¦ 🔀 Poklici v moji bazi
+Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ». ¦ Svaka loza (otac, djed… ili roditelji) daje put zanimanja; zanimanje dolazi iz zapisa ili iz prvog događaja „Zanimanje”. ¦ Vsaka linija (oče, ded… ali starša) da pot poklicev; poklic pride iz zapisa ali iz prvega dogodka »Poklic«.
+Parents → enfants (pères et mères) ¦ Roditelji → djeca (očevi i majke) ¦ Starši → otroci (očetje in matere)
+Aucune lignée avec au moins deux métiers connus. ¦ Nema loze s barem dva poznata zanimanja. ¦ Ni linije z vsaj dvema znanima poklicema.
+Aucun métier dans ta base (fiche ou événement « Profession »). ¦ U tvojoj bazi nema zanimanja (zapis ili događaj „Zanimanje”). ¦ V tvoji bazi ni poklica (zapis ali dogodek »Poklic«).
+Métiers de parents à enfants ¦ Zanimanja s roditelja na djecu ¦ Poklici s staršev na otroke
+💍 Les couples de ma base ¦ 💍 Parovi u mojoj bazi ¦ 💍 Pari v moji bazi
+La distance entre les lieux de naissance des deux époux (les lieux ont besoin de leurs coordonnées), et la direction vue depuis le village de l’époux. ¦ Udaljenost između mjesta rođenja oba supružnika (mjesta trebaju koordinate) i smjer gledano iz sela muža. ¦ Razdalja med rojstnima krajema obeh zakoncev (kraji potrebujejo koordinate) in smer, gledano iz vasi moža.
+Génération par génération : les ancêtres possibles (2, 4, 8…), les places trouvées et les personnes différentes (un même ancêtre peut occuper plusieurs places). ¦ Generaciju po generaciju: mogući preci (2, 4, 8…), pronađena mjesta i različite osobe (isti predak može zauzeti više mjesta). ¦ Rod za rodom: možni predniki (2, 4, 8…), najdena mesta in različne osebe (isti prednik lahko zaseda več mest).
+📅 Les mariages et les naissances de ma base ¦ 📅 Vjenčanja i rođenja u mojoj bazi ¦ 📅 Poroke in rojstva v moji bazi
+Les mariages datés au mois près ; les conceptions = la naissance (ou le baptême) moins 9 mois. Carême et Avent sont comptés au jour près quand la date est complète. ¦ Vjenčanja datirana na mjesec; začeća = rođenje (ili krštenje) minus 9 mjeseci. Korizma i došašće broje se na dan kad je datum potpun. ¦ Poroke, datirane na mesec; spočetja = rojstvo (ali krst) minus 9 mesecev. Postni čas in advent se štejeta na dan, ko je datum popoln.
+À (année) ¦ Do (godina) ¦ Do (leto)
+Aucun mariage ni aucune naissance datés au mois près. ¦ Nema vjenčanja ni rođenja datiranog na mjesec. ¦ Ni poroke ne rojstva, datiranega na mesec.
+Mariages et conceptions par mois ¦ Vjenčanja i začeća po mjesecu ¦ Poroke in spočetja po mesecih
+👶 Les mères de ma base ¦ 👶 Majke u mojoj bazi ¦ 👶 Matere v moji bazi
+Chaque mère sur une ligne, ses enfants à l’âge qu’elle avait à leur naissance, l’écart en mois entre deux naissances et les enfants morts jeunes. ¦ Svaka majka u jednom retku, njezina djeca u dobi koju je imala pri njihovu rođenju, razmak u mjesecima između dva rođenja i djeca umrla mlada. ¦ Vsaka mati v eni vrstici, njeni otroci pri starosti, ki jo je imela ob njihovem rojstvu, razmik v mesecih med dvema rojstvoma in otroci, ki so umrli mladi.
+Celles qui ont le plus d’enfants ¦ One s najviše djece ¦ Tiste z največ otroki
+La mère (pour « une seule mère ») ¦ Majka (za „samo jedna majka”) ¦ Mati (za »samo ena mati«)
+Personne de départ (pour les ancêtres) ¦ Početna osoba (za pretke) ¦ Začetna oseba (za prednike)
+Combien de mères au plus ¦ Najviše koliko majki ¦ Največ koliko mater
+Choisis la mère dans le menu. ¦ Odaberi majku u izborniku. ¦ Izberi mater v meniju.
+Aucune mère avec des enfants dans ta base. ¦ U tvojoj bazi nema majke s djecom. ¦ V tvoji bazi ni matere z otroki.
+🏘️ Les lieux de vie de ma base ¦ 🏘️ Mjesta života u mojoj bazi ¦ 🏘️ Kraji življenja v moji bazi
+Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune. ¦ Za svaku osobu njezina mjesta vremenskim redom: rođenje, krštenje, prebivališta, popisi stanovništva, vjenčanje, zanimanje, smrt… Jedna boja po općini. ¦ Za vsako osebo njeni kraji po časovnem redu: rojstvo, krst, bivališča, popisi prebivalstva, poroka, poklic, smrt… Ena barva na občino.
+La personne de départ et ses ancêtres ¦ Početna osoba i njezini preci ¦ Začetna oseba in njeni predniki
+Ses parents, elle et ses enfants ¦ Njezini roditelji, ona i njezina djeca ¦ Njeni starši, ona in njeni otroci
+Personnes (pour « que je choisis ») ¦ Osobe (za „koje ja odaberem”) ¦ Osebe (za »ki jih izberem«)
+Choisis au moins une personne dans le menu. ¦ Odaberi barem jednu osobu u izborniku. ¦ Izberi vsaj eno osebo v meniju.
+Aucun événement avec un lieu pour ces personnes. ¦ Nema događaja s mjestom za ove osobe. ¦ Za te osebe ni dogodka s krajem.
+Les lieux de vie de la famille ¦ Mjesta života obitelji ¦ Kraji življenja družine
+Les personnes (génération : 0 = la personne de départ, −1 = parents, 1 = enfants…) ¦ Osobe (generacija: 0 = početna osoba, −1 = roditelji, 1 = djeca…) ¦ Osebe (rod: 0 = začetna oseba, −1 = starša, 1 = otroci…)
+Vers (son enfant ou parent du côté de la personne de départ) ¦ Prema (njezino dijete ili roditelj sa strane početne osobe) ¦ Proti (njen otrok ali starš na strani začetne osebe)
+Rencontres racontées ¦ Opisani susreti ¦ Opisana srečanja
+Écart de générations au moins ¦ Razmak u generacijama barem ¦ Razmik v rodovih vsaj
+Montrer quand le plus de générations vivaient ensemble ¦ Prikaži kad je zajedno živjelo najviše generacija ¦ Prikaži, kdaj je hkrati živelo največ rodov
+Noms à gauche ¦ Imena lijevo ¦ Imena levo
+Âge dans la barre ¦ Dob u stupcu ¦ Starost v stolpcu
+Décès inconnu : vie supposée (ans, 0 = non) ¦ Nepoznata smrt: pretpostavljeni život (godine, 0 = ne) ¦ Neznana smrt: predpostavljeno življenje (leta, 0 = ne)
+Groupe (siècle, sexe, branche…) ¦ Skupina (stoljeće, spol, grana…) ¦ Skupina (stoletje, spol, veja…)
+À cet âge ¦ U toj dobi ¦ Pri tej starosti
+Encore en vie ¦ Još živ ¦ Še živ
+Montrer l’âge médian (la moitié encore en vie) ¦ Prikaži medijan dobi (polovica još živa) ¦ Prikaži mediano starosti (polovica še živih)
+Lire la part en vie à l’âge de… ¦ Očitaj udio živih u dobi od… ¦ Odčitaj delež živih pri starosti…
+Compter les vivants (jusqu’à leur âge d’aujourd’hui) ¦ Broji žive (do njihove današnje dobi) ¦ Štej žive (do njihove današnje starosti)
+Lignes droites (au lieu des marches) ¦ Ravne crte (umjesto stepenica) ¦ Ravne črte (namesto stopnic)
+Épaisseur des courbes ¦ Debljina krivulja ¦ Debelina krivulj
+Âge au plus (vide = auto) ¦ Najviša dob (prazno = automatski) ¦ Največja starost (prazno = samodejno)
+Éditeur de graphiques : une courbe par ¦ Uređivač grafikona: jedna krivulja po ¦ Urejevalnik grafov: ena krivulja na
+Bulles au survol tous les … ans ¦ Oblačići pri prelasku mišem svakih … godina ¦ Oblački ob premiku miške vsakih … let
+Les lignées (métier à chaque génération, du plus ancien au plus jeune) ¦ Loze (zanimanje u svakoj generaciji, od najstarijeg do najmlađeg) ¦ Linije (poklic v vsakem rodu, od najstarejšega do najmlajšega)
+Génération 1 ¦ Generacija 1 ¦ Rod 1
+Génération 2 ¦ Generacija 2 ¦ Rod 2
+Génération 3 ¦ Generacija 3 ¦ Rod 3
+Génération 4 ¦ Generacija 4 ¦ Rod 4
+Génération 5 ¦ Generacija 5 ¦ Rod 5
+Combien de lignées ¦ Koliko loza ¦ Koliko linij
+Couleur de chaque métier (facultatif) ¦ Boja svakog zanimanja (neobavezno) ¦ Barva vsakega poklica (neobvezno)
+Métiers montrés (les autres : « Autres métiers ») ¦ Prikazana zanimanja (ostala: „Ostala zanimanja”) ¦ Prikazani poklici (drugi: »Drugi poklici«)
+Le métier de départ ¦ Početno zanimanje ¦ Začetni poklic
+Vert si le métier est gardé ¦ Zeleno ako je zanimanje zadržano ¦ Zeleno, če je poklic ohranjen
+Noms des colonnes (séparés par des virgules) ¦ Nazivi stupaca (odvojeni zarezima) ¦ Imena stolpcev (ločena z vejicami)
+Noms des métiers ¦ Nazivi zanimanja ¦ Imena poklicev
+Nombres à côté des noms ¦ Brojevi pokraj imena ¦ Števila ob imenih
+Phrase « même métier que la génération d’avant » ¦ Rečenica „isto zanimanje kao prethodna generacija” ¦ Stavek »isti poklic kot prejšnji rod«
+Largeur des colonnes ¦ Širina stupaca ¦ Širina stolpcev
+Espace entre les métiers ¦ Razmak između zanimanja ¦ Razmik med poklici
+Nom des métiers inconnus ¦ Naziv za nepoznata zanimanja ¦ Ime za neznane poklice
+Arrière-grand-père, Grand-père, Père, Fils ¦ Pradjed, Djed, Otac, Sin ¦ Praded, Ded, Oče, Sin
+Née à ¦ Rođena u ¦ Rojena v
+Direction (N, NE… ou degrés) ¦ Smjer (N, NE… ili stupnjevi) ¦ Smer (N, NE… ali stopinje)
+Couleur de chaque siècle (facultatif) ¦ Boja svakog stoljeća (neobavezno) ¦ Barva vsakega stoletja (neobvezno)
+Siècle (ex. XIXe s.) ¦ Stoljeće (npr. 19. st.) ¦ Stoletje (npr. 19. st.)
+Échelle des distances ¦ Ljestvica udaljenosti ¦ Lestvica razdalj
+Douce (racine carrée) ¦ Blaga (drugi korijen) ¦ Blaga (kvadratni koren)
+Logarithmique (le proche en grand) ¦ Logaritamska (blisko uveličano) ¦ Logaritemska (bližnje povečano)
+Cercle extérieur (km, vide = auto) ¦ Vanjski krug (km, prazno = automatski) ¦ Zunanji krog (km, prazno = samodejno)
+Cercle de la distance médiane de chaque siècle ¦ Krug medijana udaljenosti za svako stoljeće ¦ Krog mediane razdalje za vsako stoletje
+Tableau par siècle ¦ Tablica po stoljeću ¦ Tabela po stoletjih
+Nom du centre ¦ Naziv središta ¦ Ime središča
+Les générations ¦ Generacije ¦ Rodovi
+Génération (1 = la personne) ¦ Generacija (1 = osoba) ¦ Rod (1 = oseba)
+Taux d’implexe à droite ¦ Stopa implexa desno ¦ Stopnja implexa desno
+Couleur des possibles ¦ Boja mogućih ¦ Barva možnih
+Couleur des places trouvées ¦ Boja pronađenih mjesta ¦ Barva najdenih mest
+Couleur des personnes différentes ¦ Boja različitih osoba ¦ Barva različnih oseb
+Les mois (janvier à décembre) ¦ Mjeseci (siječanj do prosinac) ¦ Meseci (januar do december)
+Deux bandeaux (l’un sous l’autre) ¦ Dvije trake (jedna ispod druge) ¦ Dva traka (eden pod drugim)
+Seulement la première série ¦ Samo prvi niz ¦ Samo prvi niz
+Repérer le Carême et l’Avent ¦ Označi korizmu i došašće ¦ Označi postni čas in advent
+Ligne « si tout était égal » (selon les jours du mois) ¦ Crta „da je sve jednako” (prema danima u mjesecu) ¦ Črta »če bi bilo vse enako« (glede na dni v mesecu)
+Écrire les nombres ¦ Prikaži brojeve ¦ Prikaži števila
+Les enfants (une ligne par enfant) ¦ Djeca (jedan redak po djetetu) ¦ Otroci (ena vrstica na otroka)
+Naissance de la mère ¦ Rođenje majke ¦ Rojstvo matere
+Décès de la mère ¦ Smrt majke ¦ Smrt matere
+Naissance de l’enfant ¦ Rođenje djeteta ¦ Rojstvo otroka
+Décès de l’enfant ¦ Smrt djeteta ¦ Smrt otroka
+L’âge de la mère ¦ Dob majke ¦ Starost matere
+Écarts en mois entre deux naissances ¦ Razmaci u mjesecima između dva rođenja ¦ Razmiki v mesecih med dvema rojstvoma
+Mères au plus ¦ Najviše majki ¦ Največ mater
+Les lieux (une ligne par lieu et par période) ¦ Mjesta (jedan redak po mjestu i razdoblju) ¦ Kraji (ena vrstica na kraj in obdobje)
+De (année ou date) ¦ Od (godina ili datum) ¦ Od (leto ali datum)
+Couleur de chaque lieu (facultatif) ¦ Boja svakog mjesta (neobavezno) ¦ Barva vsakega kraja (neobvezno)
+Une couleur par ¦ Jedna boja po ¦ Ena barva na
+Lieux en couleur (les autres en gris) ¦ Mjesta u boji (ostala sivo) ¦ Kraji v barvi (drugi sivo)
+Nom du lieu dans la bande ¦ Naziv mjesta u traci ¦ Ime kraja v traku
+Par date de début ¦ Po datumu početka ¦ Po datumu začetka
+Épaisseur des bandes ¦ Debljina traka ¦ Debelina trakov
+{n} génération ¦ {n} generacija ¦ {n} rod
