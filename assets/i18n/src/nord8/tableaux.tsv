@@ -1,0 +1,3818 @@
+fr ¦ tr
+piste|Confirmée ¦ Doğrulandı
+piste|Fausse ¦ Yanlış
+Fiche #{id} ¦ Kart #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Pano kilitli: kilidi açmak için üstteki 🔒.
+H ou Espace ¦ H ya da Boşluk
+Formes ¦ Şekiller
+Dessin à main levée ¦ Serbest çizim
+Gomme ¦ Silgi
+{owner} : {name} ¦ {owner}: {name}
+Tableau libre ¦ Serbest pano
+changer ¦ değiştir
+Police du thème ¦ Temanın yazı tipi
+PDF · double-clic pour l’ouvrir ¦ PDF · açmak için çift tıkla
+Dossier ¦ Klasör
+double-clic pour ouvrir ¦ açmak için çift tıkla
+Recueil ¦ Derleme
+Recueil · double-clic pour l’ouvrir ¦ Derleme · açmak için çift tıkla
+Frise ¦ Zaman çizelgesi
+Chargement de la frise… ¦ Zaman çizelgesi yükleniyor…
+Cadre ¦ Çerçeve
+Chargement du widget… ¦ Widget yükleniyor…
+Écran de l’app · double-clic pour l’ouvrir ¦ Uygulama ekranı · açmak için çift tıkla
+mort à {age} ¦ öldüğünde yaşı: {age}
+Choisis la personne à droite. ¦ Sağdan kişiyi seç.
+Choisir ce groupe ¦ Bu grubu seç
+Groupe {n} ¦ Grup {n}
+le tableau est fermé ¦ pano kapalı
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ ardından başka değişiklikler geldi: panonun çubuğundaki ↶ düğmesini kullan
+Ce tableau ¦ Bu pano
+Choisir le pinceau ¦ Fırçayı seç
+Dureté du bord : 100 % net, moins = flou ¦ Kenar sertliği: %100 keskin, daha azı = yumuşak
+Les gommes n’effacent que les dessins à main levée. ¦ Silgiler yalnızca serbest çizimleri siler.
+Clique où écrire. ¦ Yazacağın yere tıkla.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Bir çizgi çek; bir öğenin üstüne bırakılırsa ona tutunur.
+Un lien tout prêt : légende, couleur et style ¦ Hazır bir bağlantı: açıklama, renk ve stil
+lien|libre ¦ serbest
+Pointes ¦ Uçlar
+Pointes de la même couleur que le trait ¦ Uçlar çizgiyle aynı renkte
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Bir öğeden ötekine ok çek: onları izler.
+Toutes les formes, et créer la sienne ¦ Tüm şekiller ve kendininkini yap
+Toutes les formes ¦ Tüm şekiller
+Nom;Année;Lieu ¦ Ad;Yıl;Yer
+Tableau repris du tableur. ¦ Tablo, Tablo aracından geri alındı.
+{n}. Choisis un élément pour le régler. ¦ {n}. Ayarlamak için bir öğe seç.
+Réglages de la légende ¦ Açıklamanın ayarları
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Hücre <strong>{a}</strong> – <strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Hücre <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Seçmek için bir hücreye tıkla
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + tık: birkaç tane · çift tık: yaz
+Simple note ¦ Basit not
+Lieux de… ¦ Yerleri…
+Enlever ce repère ¦ Bu işareti kaldır
+Enlever : {n} ¦ Kaldır: {n}
+Aucune forme. ¦ Şekil yok.
+🧩 À partir d’une forme ¦ 🧩 Bir şekilden
+Comment tracer avec la plume ¦ Kalemle nasıl çizilir
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Tık</strong>: bir köşe noktası (düz çizgi).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Tıkla ve sürükle</strong>: yuvarlak bir nokta; eğriyi ayarlamak için çek.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>İlk noktaya tık</strong> (sarı): şekil kapanır.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Bir noktayı <strong>taşımak</strong> için sürükle; <strong>eğmek</strong> için bir tutamağı (kırmızı nokta) sürükle; <kbd>⌥</kbd> / <kbd>Alt</kbd> ile iki tutamak bağımsız olur.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + bir noktaya tık: köşe ↔ yuvarlak; <strong>çift tık</strong>: noktayı sil.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ Kapalı bir şekil, sonra içinde yeni bir çizim: bir <strong>delik</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ Panoda: {n}. Her çizgi şeklin dolu bir parçası olur.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Önce panoda bir ya da birkaç serbest çizim seç (✍︎ aracı), sonra buraya dön.
+Nom de la forme ¦ Şeklin adı
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Bu çizim şekil olmak için fazla ayrıntılı: daha basit bir çizim (ya da daha az çizgi) kullan.
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Şekil oluşturuldu: “{name}”. “Şekillerim” içinde.
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Bu tarayıcı bilgisayarın yazı tiplerini okuyamıyor: yazı tipinin adını yaz (ya da Ayarlar → Panolar’da listeler yap).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ Bilgisayardan okundu: {n}. Tam kalınlıkları önerilir (“Aa Tüm yazı tipleri…” hepsini gösterir).
+Lecture des polices refusée : {error} ¦ Yazı tiplerini okuma reddedildi: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Bu dosya dışa aktarılmış bir pano değil.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Bu dosya uygulamadan dışa aktarılmış bir pano değil.
+Import : vérification des fiches et médias… ¦ İçe aktarma: kartlar ve medya kontrol ediliyor…
+Média absent ici : {name} ¦ Medya burada yok: {name}
+{name} (fiche absente ici) ¦ {name} (kart burada yok)
+{name} (absent ici) ¦ {name} (burada yok)
+{name} (dossier non importé) ¦ {name} (klasör içe aktarılmadı)
+Tableau importé ¦ İçe aktarılan pano
+Associations reprises. ¦ Bağlantılar korundu.
+{n} sur {total} reprises (les autres visent une autre base). ¦ {n} / {total} korundu (diğerleri başka bir veritabanını gösteriyor).
+Les associations visent une autre base : non reprises. ¦ Bağlantılar başka bir veritabanını gösteriyor: korunmadı.
+Import des photos : {n} / {total}… ¦ Fotoğraflar içe aktarılıyor: {n} / {total}…
+Média non importé : {name} ¦ Medya içe aktarılmadı: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Pano içe aktarıldı. Nota dönüşenler (kart, medya, derleme ya da klasör): {n}.
+Une adresse qui commence par https:// ¦ https:// ile başlayan bir adres
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Bir ekran seç (bir kart ya da yerleşim yeri için “Bir kart”ı ya da Widget düzenleyicisini kullan).
+Ne plus associer ¦ Bağlantıyı kaldır
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Pano yerini korur ({where}); ayrıca onu bağladığın her yerde görünür (kişinin kartında, incelemede…).
+rangement|libre ¦ serbest
+(aucun pour l’instant) ¦ (şimdilik yok)
+Choisis à quoi associer le tableau. ¦ Panoyu neye bağlayacağını seç.
+Déjà associé. ¦ Zaten bağlı.
+Tableau associé. ¦ Pano bağlandı.
+le tableau à l’écran ¦ ekrandaki pano
+Pas d’image pour cet instantané. ¦ Bu anlık görüntü için resim yok.
+📸 Prendre un instantané ¦ 📸 Anlık görüntü al
+Un nom (facultatif) : ¦ Bir ad (isteğe bağlı):
+avant la visite aux archives ¦ arşiv ziyaretinden önce
+Instantané pris. ¦ Anlık görüntü alındı.
+↺ Revenir à cet état ¦ ↺ Bu duruma dön
+⧉ En faire un tableau ¦ ⧉ Bundan bir pano yap
+Aucun instantané pour l’instant ¦ Henüz anlık görüntü yok
+Versions automatiques ({n}) ¦ Otomatik sürümler ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ çalışılan gün başına en fazla bir tane, son 30 tanesi saklanır
+Nom du nouveau tableau ¦ Yeni panonun adı
+même rangement ({where}) et mêmes associations ¦ aynı yer ({where}) ve aynı bağlantılar
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Anlık görüntünün içeriği ayrı bir panoya kopyalanır; aslı değişmez. İçine konan klasörler aslınınkiler olarak kalır.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Şimdiki içeriğin tümü ayrı bir panoya kopyalanır; aslı değişmez. İçine konan klasörler aslınınkiler olarak kalır.
+Nouveau tableau créé. ¦ Yeni pano oluşturuldu.
+État du tableau changé. ¦ Panonun durumu değişti.
+(avec photos) ¦ (fotoğraflarla)
+(sélection) ¦ (seçim)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Pano dosyası kaydedildi ({size}): “＋ Ekle → Bir panoyu içe aktar” onu yeniden açar.
+{n} Mo ¦ {n} MB
+{n} ko ¦ {n} KB
+Préparation… ¦ Hazırlanıyor…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ resim yapılamıyor (başka bir siteden gelen bir resim engelliyor ya da pano çok büyük)
+Une copie de l’image est rangée dans les médias. ¦ Resmin bir kopyası medyaya konuldu.
+Copie dans les médias impossible : {error} ¦ Medyaya kopyalanamadı: {error}
+💾 Fichier léger ¦ 💾 Hafif dosya
+sans les photos : petit, pour garder une copie ¦ fotoğraflar olmadan: küçük, bir kopya saklamak için
+💾 Fichier complet ¦ 💾 Tam dosya
+avec {n} : pour une autre base ¦ şununla: {n}. Başka bir veritabanı için
+pareil : pas de photo de l’app ¦ aynı: uygulamadan fotoğraf yok
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Panoyu dışa aktar… (PDF, resim, yazdırma, dosya)
+⤓ Exporter la sélection en image… ¦ ⤓ Seçimi resim olarak dışa aktar…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ Bundan bir şablon yap (yeni panolar için)
+Ajuster à la sélection ¦ Seçime sığdır
+Adapter le contenu à la fenêtre ¦ İçeriği pencereye sığdır
+Pour répartir, choisis au moins trois éléments. ¦ Dağıtmak için en az üç öğe seç.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ Kontrol edilecek: {todo} · {ok} · {no} — tık: kontrol edilecek bir sonrakine git
+Plus rien à vérifier : bravo ! ¦ Kontrol edilecek bir şey kalmadı: aferin!
+Question ¦ Soru
+Idée ¦ Fikir
+Source ? ¦ Kaynak?
+Important ¦ Önemli
+Réglé ¦ Çözüldü
+Pas encore de commentaire sur cet élément. ¦ Bu öğe hakkında henüz yorum yok.
+(sans mot) ¦ (kelimesiz)
+＋ un autre mot… ¦ ＋ başka bir kelime…
+Retirer ce mot ¦ Bu kelimeyi çıkar
+Écris un commentaire ou choisis un mot. ¦ Bir yorum yaz ya da bir kelime seç.
+La personne de la frise ¦ Zaman çizelgesinin kişisi
+Les lieux de… ¦ Yerleri…
+Repère « {name} » posé. ¦ İşaret konuldu: “{name}”.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Bu inceleme bir kişiyle ilgili değil: başka birini seç.
+Aucun lieu avec ses coordonnées. ¦ Koordinatları olan yer yok.
+Enquête n° {n} ¦ İnceleme no. {n}
+Choisis la personne (ou « seulement mes repères »). ¦ Kişiyi seç (ya da “yalnızca işaretlerim”).
+Les lieux de {name} ¦ Yerleri: {name}
+Arbre : lecture des fiches… ¦ Ağaç: kartlar okunuyor…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Ağaç yerleştirildi: {n}. Her kart kendi kişi kartına bağlı kalır (açmak için çift tıkla).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Ağaç yerleştirildi: {n} (sınıra ulaşıldı). Her kart kendi kişi kartına bağlı kalır (açmak için çift tıkla).
+Pas de micro disponible ici. ¦ Burada mikrofon yok.
+Titre du mémo ¦ Notun başlığı
+Mémo du {date} ¦ Not: {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Ses bu panoyla birlikte saklanır (ve uygulamanın medyasında).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Mikrofon reddedildi: bilgisayarın ayarlarında izin ver.
+Arrête d’abord l’enregistrement. ¦ Önce kaydı durdur.
+Enregistre d’abord ton mémo. ¦ Önce notunu kaydet.
+Mémo vocal ¦ Sesli not
+{n}, en colonnes (un bout de tableur). ¦ {n}, sütunlar hâlinde (tablonun bir parçası).
+Mon modèle ¦ Şablonum
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Şablon saklanamayacak kadar ağır (resimden yapılmış şekiller mi?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Şablon kaydedildi: “{name}”. “Yeni pano” içinde.
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Katman silindi: “{name}” (öğeleri ana katmanda kalır)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Katman silindi (öğeleri ana katmanda kalır)
+▶ Lancer la présentation ({n}) ¦ ▶ Sunumu başlat ({n})
+▶ Lancer la présentation ¦ ▶ Sunumu başlat
+＋ La vue actuelle comme étape ¦ ＋ Şimdiki görünümü adım olarak
+＋ La sélection comme étape ¦ ＋ Seçimi adım olarak
+＋ Une étape par cadre ¦ ＋ Her çerçeve için bir adım
+☰ Les étapes (renommer, ordre…) ¦ ☰ Adımlar (yeniden adlandır, sırala…)
+▶ Les étapes de la présentation ¦ ▶ Sunumun adımları
+Étape {n} ¦ Adım {n}
+{n} dans la présentation. ¦ Sunumda: {n}.
+Aucune étape. ¦ Adım yok.
+Étape remplacée par la vue actuelle. ¦ Adımın yerine şimdiki görünüm kondu.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Önce adımlar (▶ Sun → ＋ Şimdiki görünümü adım olarak) ya da çerçeveler ekle.
+Étape d’avant ¦ Önceki adım
+Étape suivante ¦ Sonraki adım
+→ ou Espace ¦ → ya da Boşluk
+Quitter ¦ Çık
+Remplacer par la vue actuelle ¦ Şimdiki görünümle değiştir
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ “{name}” panosu ve tüm klasörleri silinsin mi? Üzerine konan fotoğraflar, sesler ve kartlar uygulamada kalır.
+sans titre ¦ başlıksız
+Tableau et dossiers supprimés. ¦ Pano ve klasörler silindi.
+Tableau supprimé. ¦ Pano silindi.
+Ce qu’on sait ¦ Bildiklerimiz
+Sources à voir ¦ Bakılacak kaynaklar
+Idée centrale ¦ Ana fikir
+Branche {n} ¦ Kol {n}
+Date {n} ¦ Tarih {n}
+Arbre à la main ¦ Elle çizilmiş ağaç
+Enfant ¦ Çocuk
+Une toile libre. ¦ Serbest bir tuval.
+Mur d’indices ¦ İpucu duvarı
+Fond de liège, une question au centre, des notes autour. ¦ Mantar arka plan, ortada bir soru, çevresinde notlar.
+Carte mentale ¦ Zihin haritası
+Une idée au centre, des branches. ¦ Ortada bir fikir, kollar.
+Une flèche du temps et des repères. ¦ Bir zaman oku ve işaretler.
+Des cases pour une famille, à relier. ¦ Bir aile için birbirine bağlanacak kutular.
+Nouveau tableau ¦ Yeni pano
+Qui est le père de Marie ? ¦ Marie’nin babası kim?
+Piste 1, les témoins… ¦ İz 1, tanıklar…
+Pour commencer ¦ Başlamak için
+Pour faire tes propres modèles : dans un tableau, ⤓ Exporter → ⭐ En faire un modèle. ¦ Kendi şablonlarını yapmak için: bir panoda ⤓ Dışa aktar → ⭐ Bundan bir şablon yap.
+Supprimer ce modèle ¦ Bu şablonu sil
+Modèle « {name} » supprimé ¦ Şablon silindi: “{name}”
+Tableau sans titre ¦ Başlıksız pano
+Modèle introuvable. ¦ Şablon bulunamadı.
+Libre ¦ Serbest
+Supprimer ce tableau ¦ Bu panoyu sil
+Chercher… (titre, partie) ¦ Ara… (başlık, bölüm)
+Rechercher un tableau ¦ Bir pano ara
+({n} prometteuses) ¦ (umut verici: {n})
+{what} : {value} ¦ {what}: {value}
+{col} : les plus récents ¦ {col}: önce en yeniler
+{col} : les plus anciens ¦ {col}: önce en eskiler
+{col} : du plus grand au plus petit ¦ {col}: büyükten küçüğe
+{col} : du plus petit au plus grand ¦ {col}: küçükten büyüğe
+{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ {help} Açmak için bir başlığa tıkla; sıralamak için bir sütuna tıkla.
+Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ Açmak için bir başlığa tıkla; sıralamak için bir sütuna tıkla.
+Rien ne correspond à ta recherche ¦ Aramana uyan bir şey yok
+Les tableaux se créent dans Enquêtes → Tableaux. ¦ Panolar İncelemeler → Panolar’da oluşturulur.
+Partie ¦ Bölüm
+Communes faites ¦ Yapılan yerleşim yerleri
+Archivé ¦ Arşivlendi
+Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres. ¦ Tüm panolar: incelemelerin, taramaların, projelerin panoları ve serbest panolar.
+Les projets de l’Atelier de recherche, avec leur état et leur échéance. ¦ Araştırma Atölyesi’nin projeleri, durumları ve son tarihleriyle.
+Toutes les enquêtes, avec leurs pistes et leurs tableaux. ¦ Tüm incelemeler, izleri ve panolarıyla.
+Toutes les battues, commune par commune. ¦ Tüm taramalar, yerleşim yeri yerleşim yeri.
+Chercher un tableau… (titre, enquête, battue) ¦ Bir pano ara… (başlık, inceleme, tarama)
+Chercher une battue… (titre, commune, personne) ¦ Bir tarama ara… (başlık, yerleşim yeri, kişi)
+Chercher un projet… (titre, sorte) ¦ Bir proje ara… (başlık, tür)
+Chercher une enquête… (titre, personne) ¦ Bir inceleme ara… (başlık, kişi)
+Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier. ¦ Büyük bir mantar pano gibi serbest bir tuval: üzerine notlar, şekiller, oklar, çizimler, fotoğraflar, sesler, PDF’ler, kartlar, uygulama ekranları… koyarsın. Her pano serbest olabilir ya da bir incelemede, bir taramada veya bir Atölye projesinde durabilir.
+Aucun tableau ici. ¦ Burada pano yok.
+Aucun tableau pour l’instant ¦ Henüz pano yok
+Vide, mur d’indices, carte mentale, frise… ¦ Boş, ipucu duvarı, zihin haritası, zaman çizelgesi…
+Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches… ¦ Aramak, bağlamak, göstermek için serbest tuvaller: notlar, oklar, fotoğraflar, sesler, kartlar…
+Dans une enquête ¦ Bir incelemede
+Dans l’Atelier ¦ Atölyede
+＋ Nouveau tableau ici ¦ ＋ Buraya yeni pano
+Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun). ¦ Bu araştırma için serbest bir pano: notlar, oklar, fotoğraflar, kartlar… Birkaç tane yapabilirsin (her biri bir “bölüm”).
+enquêtes ¦ incelemeler
+TABLEAU ¦ PANO
+TABLEAUX ¦ PANOLAR
+Ranger le tableau ¦ Panoyu yerleştir
+Ranger ¦ Yerleştir
+Laquelle ¦ Hangisi
+(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…) ¦ (isteğe bağlı: birkaç panon olsun diye, “İz 1”, “Tanıklar”…)
+(facultatif : piste 1, les témoins, la branche paternelle…) ¦ (isteğe bağlı: iz 1, tanıklar, baba kolu…)
+(aucune) ¦ (yok)
+▭ Rectangle ¦ ▭ Dikdörtgen
+▢ Arrondi ¦ ▢ Yuvarlak köşeli
+◯ Ovale ¦ ◯ Oval
+△ Triangle ¦ △ Üçgen
+☆ Étoile ¦ ☆ Yıldız
+⬡ Hexagone ¦ ⬡ Altıgen
+💬 Bulle ¦ 💬 Balon
+☁ Nuage ¦ ☁ Bulut
+pinceau|Stylo ¦ Tükenmez kalem
+pinceau|Monoligne ¦ Tek çizgi
+pinceau|Marqueur ¦ Keçeli kalem
+pinceau|Crayon ¦ Kurşun kalem
+pinceau|Pastel ¦ Pastel
+pinceau|Stylo-plume ¦ Dolma kalem
+pinceau|Calame ¦ Kamış kalem
+pinceau|Pinceau ¦ Fırça
+pinceau|Aquarelle ¦ Suluboya
+pinceau|Remplissage ¦ Dolgu
+pinceau|Surligneur ¦ Fosforlu kalem
+pinceau|Craie ¦ Tebeşir
+pinceau|Néon ¦ Neon
+pinceau|Aérographe ¦ Hava fırçası
+pinceau|Pointillé ¦ Noktalı
+Néon ¦ Neon
+Pointillé ¦ Noktalı
+trait|— droit ¦ — düz
+trait|⌒ courbe ¦ ⌒ eğri
+trait|⌐ coudé ¦ ⌐ dirsekli
+trait|∿ vague ¦ ∿ dalga
+trait|⩘ zigzag ¦ ⩘ zikzak
+trait|⤳ contourne les éléments ¦ ⤳ öğelerin çevresinden dolanır
+⌐ coudé ¦ ⌐ dirsekli
+⤳ contourne les éléments ¦ ⤳ öğelerin çevresinden dolanır
+fond|Fond à points ¦ Noktalı arka plan
+fond|Quadrillé ¦ Kareli
+fond|Lignes ¦ Çizgili
+fond|Uni ¦ Düz
+fond|Papier ¦ Kâğıt
+fond|Liège ¦ Mantar
+fond|Sombre ¦ Koyu
+fond|Couleur à choisir… ¦ İstediğin renk…
+Fond à points ¦ Noktalı arka plan
+Liège ¦ Mantar
+Couleur à choisir… ¦ İstediğin renk…
+Motif sur la couleur ¦ Renk üstünde desen
+motif|sans motif ¦ desensiz
+motif|points ¦ noktalar
+motif|quadrillé ¦ kareli
+motif|lignes ¦ çizgiler
+quadrillé ¦ kareli
+Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau ¦ Anlık görüntüler: panonun durumunu dondur, ona dön, ondan yeni bir pano yap
+📸 Instantanés ¦ 📸 Anlık görüntüler
+Créer un nouveau tableau à partir de celui-ci ¦ Bundan yeni bir pano oluştur
+PDF, image PNG ou JPG, impression, fichier du tableau, modèle ¦ PDF, PNG ya da JPG resim, yazdırma, pano dosyası, şablon
+Les pistes à vérifier : clic pour aller à la suivante ¦ Kontrol edilecek izler: bir sonrakine gitmek için tıkla
+Chercher dans le tableau ¦ Panoda ara
+Grille aimantée et guides d’alignement ¦ Mıknatıslı ızgara ve hizalama kılavuzları
+Mini-carte du tableau (montrer ou cacher) ¦ Panonun mini haritası (göster ya da gizle)
+Présenter : un parcours d’étapes ¦ Sun: adımlardan oluşan bir yol
+▶ Présenter ¦ ▶ Sun
+Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés ¦ Pano ayarları: yerleşim, araçların sırası, gösterilen ya da gizlenen düğmeler
+Verrouiller ou déverrouiller tout le tableau ¦ Tüm panoyu kilitle ya da kilidini aç
+Supprimer ce tableau (et ses dossiers) ¦ Bu panoyu sil (klasörleriyle birlikte)
+Revenir aux tableaux ¦ Panolara dön
+Titre du tableau ¦ Panonun başlığı
+État du tableau ¦ Panonun durumu
+● En cours ¦ ● Sürüyor
+⏸ En pause ¦ ⏸ Duraklatıldı
+✓ Terminé ¦ ✓ Bitti
+Enregistrer maintenant (le tableau s’enregistre aussi tout seul) ¦ Şimdi kaydet (pano kendiliğinden de kaydedilir)
+Ajouter un fichier, un média, une fiche, un écran de l’app… ¦ Bir dosya, bir medya, bir kart, bir uygulama ekranı ekle…
+Zoom : ajuster à la sélection, adapter à la fenêtre… ¦ Yakınlaştırma: seçime sığdır, pencereye sığdır…
+Montrer ce qui est groupé ¦ Gruplananları göster
+Lâche ici : images, sons, vidéos, PDF… ¦ Buraya bırak: resimler, sesler, videolar, PDF’ler…
+Un tableau vide. ¦ Boş bir pano.
+Choisis un outil à gauche, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire. ¦ Soldan bir araç seç ya da buraya fotoğraf, ses, PDF… sürükle. “＋ Ekle” bir kart, bir uygulama ekranı, bir widget, bir derleme, bir etiket ya da bir klasör koyar. Yazmak için çift tıkla.
+Revenir à la police du thème ¦ Temanın yazı tipine dön
+Aimanter : grille aimantée et guides d’alignement ¦ Mıknatısla: mıknatıslı ızgara ve hizalama kılavuzları
+Choisis à droite une personne, une famille ou une enquête, ou pose des repères. ¦ Sağdan bir kişi, bir aile ya da bir inceleme seç veya işaretler koy.
+Glisser pour plier · double-clic pour enlever ce coude ¦ Bükmek için sürükle · bu dirseği kaldırmak için çift tıkla
+Glisser pour ajouter un coude ¦ Dirsek eklemek için sürükle
+Modifié… ¦ Değiştirildi…
+Enregistré ✓ ¦ Kaydedildi ✓
+⚠ Modifié dans une autre fenêtre ¦ ⚠ Başka bir pencerede değiştirildi
+Envoi des fichiers… ¦ Dosyalar gönderiliyor…
+efface seulement ce que tu touches ¦ yalnızca dokunduğunu siler
+🩹 Gomme fine ¦ 🩹 İnce silgi
+🧽 Gomme à traits ¦ 🧽 Çizgi silgisi
+enlève le trait entier ¦ çizginin tamamını kaldırır
+Autre couleur pour les notes ¦ Notlar için başka renk
+Tire une flèche d’un élément à un autre : elle les suit quand on les déplace. ¦ Bir öğeden ötekine ok çek: onları taşıdığında onları izler.
+Clique où poser le tableur. ¦ Tabloyu koyacağın yere tıkla.
+Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer. ¦ Gezinmek için sürükle; fare tekerleği ya da iki parmak da olur; yakınlaştırmak için ⌘ + tekerlek.
+Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir. ¦ Tık: seç · ⇧ + tık: seçime ekle · ⌥ / Alt + sürükle: çoğalt · boşlukta sürükle: birkaçını seç · çift tık: yaz ya da aç.
+Les groupes sont montrés. ¦ Gruplar gösteriliyor.
+Groupes cachés. ¦ Gruplar gizlendi.
+Fond du cadre ¦ Kutunun arka planı
+Bord du cadre ¦ Kutunun kenarı
+Épaisseur du bord ¦ Kenar kalınlığı
+Marge dans le cadre ¦ Kutunun iç boşluğu
+Arrondi du cadre ¦ Kutunun köşe yuvarlaklığı
+Position le long du trait ¦ Çizgi boyunca konum
+sur le trait ¦ çizginin üstünde
+au-dessus ¦ yukarıda
+en dessous ¦ aşağıda
+Écart avec le trait ¦ Çizgiye uzaklık
+suivre l’angle du trait ¦ çizginin açısını izle
+Fond du tableau ¦ Panonun arka planı
+⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web. ¦ ⌘Z geri al · ⌘D çoğalt · ⌘G grupla (çözmek için ⇧) · ⌘L kilitle · ] [ öne / arkaya · itmek için oklar · gezinmek için boşluk · yakınlaştırmak için ⌘ + tekerlek · bir resim ya da web adresi yapıştır.
+Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux. ¦ Renkler, şekiller, yazı tipleri, boyutlar, menülerin sırası: Ayarlar → Panolar.
+Puces et numéros ¦ Madde işaretleri ve numaralandırma
+• Puce ¦ • Madde işareti
+1. Nombres ¦ 1. Sayılar
+I. Chiffres romains ¦ I. Romen rakamları
+a. Lettres ¦ a. Harfler
+A. Lettres capitales ¦ A. Büyük harfler
+– Tiret ¦ – Tire
+☐ Cases à cocher ¦ ☐ Onay kutuları
+Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur). ¦ Yazı tipinin tam kalınlıkları: aşağıda 🖥 (bilgisayarın yazı tipleri).
+Lire les graisses exactes des polices de l’ordinateur ¦ Bilgisayarın yazı tiplerinin tam kalınlıklarını oku
+Couleur des pointes ¦ Uçların rengi
+même couleur que le trait ¦ çizgiyle aynı renk
+(comme le trait) ¦ (çizgi gibi)
+Pointe au début ¦ Baştaki uç
+Pointe à la fin ¦ Sondaki uç
+Taille des pointes ¦ Uçların boyutu
+Forme du trait ¦ Çizginin şekli
+frère de, a écrit à… ¦ kardeşi, mektup yazdı…
+＋ ligne ¦ ＋ satır
+＋ colonne ¦ ＋ sütun
+− ligne ¦ − satır
+− colonne ¦ − sütun
+Ajouter une ligne dessous ¦ Altına bir satır ekle
+Enlever la ligne ¦ Satırı kaldır
+Ajouter une colonne à droite ¦ Sağa bir sütun ekle
+Enlever la colonne ¦ Sütunu kaldır
+Fusionner les cellules choisies ¦ Seçilen hücreleri birleştir
+⊞ Fusionner ¦ ⊞ Birleştir
+Séparer les cellules ¦ Hücreleri ayır
+⊟ Séparer ¦ ⊟ Ayır
+Colonne plus étroite ¦ Daha dar sütun
+Colonne plus large ¦ Daha geniş sütun
+Vider la cellule ¦ Hücreyi boşalt
+⌫ vider ¦ ⌫ boşalt
+Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir » ¦ Büyük boy tablo: daha çok işlev, sıralama, filtreler, Excel… sonra “✓ Kaydet ve dön”
+Télécharger en CSV (Excel, Numbers…) ¦ CSV olarak indir (Excel, Numbers…)
+première ligne en titre ¦ ilk satır başlık
+première colonne en titre ¦ ilk sütun başlık
+une ligne sur deux teintée ¦ satırlar bir renkli bir renksiz
+Fond des titres ¦ Başlıkların arka planı
+Fond de la cellule (les cellules choisies) ¦ Hücrenin arka planı (seçilen hücreler)
+Fond de la cellule ¦ Hücrenin arka planı
+aperçu vivant dans le tableau ¦ panoda canlı önizleme
+La fiche montre ¦ Kartın gösterdiği
+Lu dans la fiche à chaque ouverture du tableau : si la fiche change, la carte suit. ¦ Pano her açıldığında kişi kartından okunur: kart değişirse bu kart da izler.
+de la personne, son couple et ses enfants ¦ kişinin, çiftinin ve çocuklarının
+👤 Changer de personne ¦ 👤 Kişiyi değiştir
+aucune fiche (seulement mes repères) ¦ kart yok (yalnızca işaretlerim)
+une personne et sa famille ¦ bir kişi ve ailesi
+la personne d’une enquête ¦ bir incelemenin kişisi
+👤 Choisir la personne ¦ 👤 Kişiyi seç
+Une commune, un lieu… ¦ Bir yerleşim yeri, bir yer…
+relier les lieux dans l’ordre (le parcours) ¦ yerleri sırayla bağla (güzergâh)
+Poser un repère ¦ Bir işaret koy
+Lien tout prêt ¦ Hazır bağlantı
+Glisse un « ＋ » sur le trait pour le plier en plusieurs segments. ¦ Çizgiyi birkaç parçaya bükmek için üstündeki bir “＋” işaretini sürükle.
+Aligner ¦ Hizala
+Centrés (de gauche à droite) ¦ Ortalanmış (soldan sağa)
+Centrés (de haut en bas) ¦ Ortalanmış (yukarıdan aşağıya)
+Même écart de gauche à droite ¦ Soldan sağa eşit aralık
+Même écart de haut en bas ¦ Yukarıdan aşağıya eşit aralık
+Même largeur que le premier choisi ¦ İlk seçilenle aynı genişlik
+Même hauteur que le premier choisi ¦ İlk seçilenle aynı yükseklik
+Répartir ¦ Dağıt
+⇹ en largeur ¦ ⇹ yatay
+⇳ en hauteur ¦ ⇳ dikey
+═ même largeur ¦ ═ aynı genişlik
+‖ même hauteur ¦ ‖ aynı yükseklik
+🔓 Déverrouiller ¦ 🔓 Kilidi aç
+🔒 Verrouiller ¦ 🔒 Kilitle
+⧉ Grouper ¦ ⧉ Grupla
+Dégrouper ¦ Grubu çöz
+Faire de ce dessin une forme à toi (réutilisable) ¦ Bu çizimi kendine ait (yeniden kullanılabilir) bir şekle dönüştür
+✏️ En faire une forme ¦ ✏️ Bundan bir şekil yap
+Devant ¦ Öne
+Derrière ¦ Arkaya
+Image du web ¦ Web resmi
+Lien web ¦ Web bağlantısı
+Frise vivante ¦ Canlı zaman çizelgesi
+Rechercher une forme ¦ Bir şekil ara
+Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer) ¦ Başka bir şekilden şekil oluştur (çevir, döndür, uzat, ekle, delik aç)
+＋ Créer une forme ¦ ＋ Bir şekil oluştur
+✒️ Plume (tracé) ¦ ✒️ Kalem (çizim yolu)
+✍︎ À partir de mon dessin ¦ ✍︎ Çizimimden
+🖼 À partir d’une image ¦ 🖼 Bir resimden
+Fermer le tracé en cours ¦ Şimdiki çizim yolunu kapat
+Commencer un autre tracé (un trou s’il est dans la forme) ¦ Başka bir çizim yolu başlat (şeklin içindeyse bir delik)
+Supprimer le point choisi ¦ Seçilen noktayı sil
+Annuler le dernier point ¦ Son noktayı geri al
+◯ Fermer ¦ ◯ Kapat
+＋ Nouveau tracé ¦ ＋ Yeni çizim yolu
+✕ Point ¦ ✕ Nokta
+Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme. ¦ Saydam arka planlı bir PNG resim siluetini verir. Değilse işaretle: koyu olan şekil olur.
+le sombre devient la forme (images sans transparence) ¦ koyu olan şekil olur (saydamlığı olmayan resimler)
+Choisis d’abord un dessin sur le tableau. ¦ Önce panoda bir çizim seç.
+Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »). ¦ Şekli kapat: en az üç nokta, sonra ilkine tıkla (ya da “◯ Kapat”).
+Ajouter au tableau ¦ Panoya ekle
+📎 Des fichiers ¦ 📎 Dosyalar
+📁 Choisir des fichiers ¦ 📁 Dosya seç
+Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image). ¦ Resimler, GIF’ler, sesler, videolar, PDF’ler (ya da onları panoya sürükle veya bir resim yapıştır).
+🖼 Un média de l’app ¦ 🖼 Uygulamadan bir medya
+Un média de l’app ¦ Uygulamadan bir medya
+Poser sur le tableau ¦ Panoya koy
+Choisir une image, un son, une vidéo… ¦ Bir resim, bir ses, bir video seç…
+🌐 D’ailleurs ¦ 🌐 Başka yerden
+Adresse d’une image ou d’un site ¦ Bir resmin ya da sitenin adresi
+👤 Une fiche ¦ 👤 Bir kart
+Poser la fiche ¦ Kartı koy
+📺 Un écran de l’app ¦ 📺 Bir uygulama ekranı
+Une liste, un diagramme, une statistique, la carte, un village, une de tes listes… ¦ Bir liste, bir diyagram, bir istatistik, harita, bir köy, listelerinden biri…
+avec l’aperçu vivant ¦ canlı önizlemeyle
+Poser l’écran ¦ Ekranı koy
+✨ Un de mes widgets ¦ ✨ Widget’larımdan biri
+Poser le widget ¦ Widget’ı koy
+Crée d’abord un widget (Réglages → Éditeur de widgets). ¦ Önce bir widget oluştur (Ayarlar → Widget düzenleyicisi).
+Titre du recueil ¦ Derlemenin başlığı
+📚 Un recueil ¦ 📚 Bir derleme
+🏷 Une étiquette ¦ 🏷 Bir etiket
+ou un mot à toi ¦ ya da kendi kelimen
+Nom du dossier ¦ Klasörün adı
+Poser ce mot ¦ Bu kelimeyi koy
+▦ Un tableur ¦ ▦ Bir tablo
+Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers. ¦ Formüllerle (=SOMME…) doldurulacak bir ızgara; içine Excel ya da Numbers’tan bir parça yapıştırabilirsin.
+Poser un tableur ¦ Bir tablo koy
+📁 Un dossier ¦ 📁 Bir klasör
+Un tableau dans le tableau : double-clic pour y entrer. ¦ Pano içinde bir pano: içine girmek için çift tıkla.
+Créer le dossier ¦ Klasörü oluştur
+🌳 Un arbre automatique ¦ 🌳 Otomatik bir ağaç
+Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches. ¦ Bir kişi ve ebeveynleri, büyükanne-büyükbabaları ya da çocukları; oklarla bağlı kartlar olarak yerleştirilir.
+ses ancêtres ¦ ataları
+ses descendants ¦ torunları
+sa famille proche ¦ yakın ailesi
+avec les conjoints ¦ eşleriyle
+flèches (sinon des traits) ¦ oklar (yoksa çizgiler)
+Poser l’arbre ¦ Ağacı koy
+🗓 Une frise vivante ¦ 🗓 Canlı bir zaman çizelgesi
+Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche. ¦ Bir kişinin (ya da ailesinin) olayları zaman çizgisine kendiliğinden yerleşir; kişi kartını izler.
+Poser la frise ¦ Zaman çizelgesini koy
+🗺 Une carte ¦ 🗺 Bir harita
+Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères. ¦ Bir kişinin, ailesinin ya da bir incelemenin yerleri; üstüne kendi işaretlerini koyabilirsin.
+Nom de la personne (facultatif) ¦ Kişinin adı (isteğe bağlı)
+la personne et sa famille ¦ kişi ve ailesi
+personne : seulement mes repères ¦ kimse: yalnızca işaretlerim
+Poser la carte ¦ Haritayı koy
+▭ Un cadre ¦ ▭ Bir çerçeve
+Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier. ¦ Adlandırılmış bir alan (“Baba kolu”, “Bakılacak kaynaklar”): içindekiler onunla birlikte hareket eder; katlanabilir.
+Nom du cadre ¦ Çerçevenin adı
+Poser le cadre ¦ Çerçeveyi koy
+🎙 Un mémo vocal ¦ 🎙 Bir sesli not
+Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus. ¦ Sesini burada kaydet: ses panoyla birlikte saklanır ve üstüne konur.
+🎙 Enregistrer ¦ 🎙 Kaydet
+🎙 Mémo vocal ¦ 🎙 Sesli not
+Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau. ¦ Bir “.lcnda-tableau.json” dosyası (⤓ Dışa aktar → Hafif ya da tam dosya): yeni bir pano olur.
+Tableau verrouillé : clic pour le déverrouiller ¦ Pano kilitli: kilidi açmak için tıkla
+Verrouiller tout le tableau ¦ Tüm panoyu kilitle
+Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge. ¦ Pano kilitli: ona bakabilir ve içindekileri açabilirsin, hiçbir şey kıpırdamaz.
+Tableau déverrouillé. ¦ Panonun kilidi açıldı.
+Un projet de l’Atelier ¦ Bir Atölye projesi
+Un lieu (sa commune) ¦ Bir yer (yerleşim yeri)
+Un média (photo, acte, son…) ¦ Bir medya (fotoğraf, belge, ses…)
+Une famille (un couple) ¦ Bir aile (bir çift)
+Un événement ¦ Bir olay
+Un animal ¦ Bir hayvan
+Un autre tableau ¦ Başka bir pano
+Relier ce tableau à une personne, une enquête (ou une de ses parties), une battue… ¦ Bu panoyu bir kişiye, bir incelemeye (ya da bir bölümüne), bir taramaya… bağla
+🔗 Relier… ¦ 🔗 Bağla…
+Relier ce tableau ¦ Bu panoyu bağla
+À quoi ¦ Neye
+Nouveau tableau depuis un instantané ¦ Bir anlık görüntüden yeni pano
+Nouveau tableau à partir de celui-ci ¦ Bundan yeni pano
+Grille aimantée : les éléments s’alignent sur la grille et sur les autres (⌥ / Alt en glissant pour s’en passer). ¦ Mıknatıslı ızgara: öğeler ızgaraya ve birbirine hizalanır (onsuz yapmak için sürüklerken ⌥ / Alt).
+Grille aimantée enlevée. ¦ Mıknatıslı ızgara kaldırıldı.
+frère de ¦ kardeşi (erkek):
+sœur de ¦ kardeşi (kız):
+époux de ¦ kocası:
+épouse de ¦ karısı:
+père de ¦ babası:
+mère de ¦ annesi:
+fils de ¦ oğlu:
+fille de ¦ kızı:
+cousin de ¦ kuzeni:
+cousine de ¦ kuzeni:
+parrain de ¦ vaftiz babası:
+marraine de ¦ vaftiz annesi:
+témoin de ¦ tanığı:
+voisin de ¦ komşusu:
+a travaillé pour ¦ yanında çalıştı:
+a écrit à ¦ mektup yazdı:
+même personne ? ¦ aynı kişi mi?
+💬 Commentaires ¦ 💬 Yorumlar
+Ton mot (ex. « Piste », « Archives ») ¦ Kendi kelimen (örn. “İz”, “Arşivler”)
+Les mots proposés pour les bulles (tu en ajoutes avec « ＋ un autre mot… »). ¦ Balonlar için önerilen kelimeler (“＋ başka bir kelime…” ile ekle).
+Les lignes et les colonnes gardées, avec les formules possibles. ¦ Satırlar ve sütunlar korunur, formül kullanılabilir.
+🗒 Une note par ligne ¦ 🗒 Satır başına bir not
+Chaque ligne devient une note, rangées en grille. ¦ Her satır bir not olur, ızgara biçiminde dizilir.
+🗂 Une note par ligne du tableur ¦ 🗂 Tablonun her satırı için bir not
+Les colonnes d’une ligne dans la même note. ¦ Bir satırın sütunları aynı notta.
+T Un seul texte ¦ T Tek bir metin
+Tout le texte collé, d’un bloc. ¦ Yapıştırılan metnin tümü, tek blok hâlinde.
+grouper ce qui est posé ¦ konulanları grupla
+⭐ En faire un modèle ¦ ⭐ Bundan bir şablon yap
+Enregistrer le modèle ¦ Şablonu kaydet
+Nom du modèle ¦ Şablonun adı
+Pour une enquête sur un enfant trouvé… ¦ Terk edilmiş bir çocuk hakkındaki inceleme için…
+Décris-le ¦ Onu anlat
+seulement la sélection ¦ yalnızca seçim
+sans les textes (garder les cases vides, les titres des cadres restent) ¦ metinler olmadan (kutular boş kalır, çerçeve başlıkları kalır)
+Il apparaît dans « Nouveau tableau », avec les modèles de l’app. Les fiches, photos et sons posés sont gardés tels quels (ils pointent vers ta base). ¦ Uygulamanın şablonlarıyla birlikte “Yeni pano” içinde görünür. Konulan kartlar, fotoğraflar ve sesler olduğu gibi saklanır (veritabanını gösterirler).
+Calque principal ¦ Ana katman
+Les nouveaux éléments vont sur ce calque ¦ Yeni öğeler bu katmana gider
+Choisir ce qu’il contient ¦ İçindekileri seç
+Supprimer le calque (ses éléments vont sur le calque principal) ¦ Katmanı sil (öğeleri ana katmana gider)
+Mettre la sélection sur le calque choisi ¦ Seçimi seçilen katmana koy
+Un calque caché ne s’affiche pas (ni dans les images exportées) ; verrouillé, on ne peut plus le choisir ni le bouger. ¦ Gizli bir katman görünmez (dışa aktarılan resimlerde de); kilitliyse artık seçilemez ve taşınamaz.
+Y aller ¦ Oraya git
+⟳ vue ¦ ⟳ görünüm
+Chercher un mot, un nom… ¦ Bir kelime, bir ad ara…
+Mini-carte ¦ Mini harita
+Glisser pour déplacer la mini-carte ¦ Mini haritayı taşımak için sürükle
+Cacher la mini-carte ¦ Mini haritayı gizle
+Pour tous les jours ¦ Her gün için
+Écritures anciennes ¦ Eski el yazıları
+Trop lourd pour être gardé (retire des formes faites d’une image). ¦ Saklanamayacak kadar ağır (resimden yapılmış şekilleri çıkar).
+Réglages trop lourds pour être gardés (retire des formes faites d’une image). ¦ Ayarlar saklanamayacak kadar ağır (resimden yapılmış şekilleri çıkar).
+Choisis une forme de départ. ¦ Bir başlangıç şekli seç.
+Forme trop détaillée : retire des formes ajoutées. ¦ Şekil fazla ayrıntılı: eklenen şekillerden bazılarını çıkar.
+Choisis une forme ou trace la pointe. ¦ Bir şekil seç ya da ucu çiz.
+Cette forme est trop détaillée pour une pointe. ¦ Bu şekil bir uç için fazla ayrıntılı.
+les réglages des tableaux sont fermés ¦ pano ayarları kapalı
+Montrer / cacher ¦ Göster / gizle
+Déjà dans l’accès rapide ¦ Zaten hızlı erişimde
+Ajouter à l’accès rapide ¦ Hızlı erişime ekle
+La reprendre dans le dessin vectoriel (plume, points, Pathfinder…) ¦ Vektör çizimde yeniden işle (kalem, noktalar, Pathfinder…)
+Supprimer cette forme ¦ Bu şekli sil
+Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ». ¦ Henüz yok: bir panoda, Şekiller aracı → “＋ Bir şekil oluştur”.
+Supprimer la liste ¦ Listeyi sil
+Pas encore de pinceau à toi. ¦ Henüz kendi fırçan yok.
+tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus) ¦ panoların tüm ayarları (renkler, uçlar, şekiller, yazı tipleri, boyutlar, tablo, fırçalar, menüler)
+Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder). ¦ “{name}” ayarları kullanılsın mı? Şimdiki ayarların yerine geçer (saklamak istiyorsan önce onları bir adla kaydet).
+Reprendre ces réglages ¦ Bu ayarları kullan
+Reprendre les réglages ¦ Ayarları kullan
+Réglages enregistrés sous « {name} » (et utilisés dès maintenant). ¦ Ayarlar şu adla kaydedildi: “{name}” (ve şimdiden kullanılıyor).
+Réglages « {name} » importés : « Appliquer » pour t’en servir. ¦ Ayarlar içe aktarıldı: “{name}”. Kullanmak için “Uygula”.
+Palette « {name} » retirée ¦ Palet çıkarıldı: “{name}”
+Pointe « {name} » créée : elle est dans la liste. ¦ Uç oluşturuldu: “{name}”. Listede.
+Pointe retirée (les traits qui l’utilisent prennent un triangle) ¦ Uç çıkarıldı (onu kullanan çizgiler üçgen alır)
+⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer). ¦ ⚡ “{name}” zaten hızlı erişimde (bu sekmenin en üstünde; çıkarmak için üstündeki ✕).
+⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ». ¦ ⚡ Hızlı erişime eklendi: “{name}”. Bu sekmenin en üstünde ve Şekiller aracının çubuğunda. “Kaydet”i unutma.
+Chargement des formes… ¦ Şekiller yükleniyor…
+📚 Réessayer de charger les formes ¦ 📚 Şekilleri yeniden yüklemeyi dene
+Les formes n’ont pas pu être chargées. Réessaie. ¦ Şekiller yüklenemedi. Yeniden dene.
+Forme retirée (les tableaux qui l’utilisent la gardent) ¦ Şekil çıkarıldı (onu kullanan panolar korur)
+Ma liste ¦ Listem
+Liste de polices retirée ¦ Yazı tipi listesi çıkarıldı
+Ajouter une police à la liste ¦ Listeye bir yazı tipi ekle
+« {font} » ajoutée à « {list} ». ¦ “{font}” eklendi → “{list}”.
+Toutes les polices ¦ Tüm yazı tipleri
+Élémentaire ¦ Temel
+Géométrie ¦ Geometri
+Bulles ¦ Balonlar
+Étoiles et badges ¦ Yıldızlar ve rozetler
+Croyances et mémoire ¦ İnançlar ve anma
+Écrits et documents ¦ Yazılar ve belgeler
+Lieux et bâtiments ¦ Yerler ve binalar
+Maison et objets ¦ Ev ve eşyalar
+Vêtements et parures ¦ Giysiler ve süsler
+Métiers et outils ¦ Meslekler ve aletler
+Transports et voyages ¦ Ulaşım ve yolculuk
+Nature ¦ Doğa
+Météo et ciel ¦ Hava ve gökyüzü
+Cuisine et repas ¦ Mutfak ve yemekler
+Musique, jeux et sport ¦ Müzik, oyunlar ve spor
+Santé et corps ¦ Sağlık ve beden
+Objets ¦ Eşyalar
+Mes formes ¦ Şekillerim
+Lettres et chiffres ¦ Harfler ve rakamlar
+Armoiries et héraldique ¦ Armalar ve hanedanlık armacılığı
+Cadres et bordures ¦ Çerçeveler ve kenarlıklar
+Émotions ¦ Duygular
+Drapeaux ¦ Bayraklar
+Écrans et appareils ¦ Ekranlar ve cihazlar
+Argent et commerce ¦ Para ve ticaret
+Fond des formes, étiquettes, dossiers ¦ Şekillerin, etiketlerin, klasörlerin dolgusu
+Bord des formes et contour des médias ¦ Şekillerin kenarı ve medyanın çerçevesi
+Couleur du texte, des traits et flèches ¦ Metnin, çizgilerin ve okların rengi
+Légendes des traits : texte ¦ Çizgi açıklamaları: metin
+Légendes des traits : fond du cadre ¦ Çizgi açıklamaları: kutunun arka planı
+Légendes des traits : bord du cadre ¦ Çizgi açıklamaları: kutunun kenarı
+⤓ Exporter / imprimer ¦ ⤓ Dışa aktar / yazdır
+⛶ Plein écran ¦ ⛶ Tam ekran
+❓ Pistes à vérifier (compteur) ¦ ❓ Kontrol edilecek izler (sayaç)
+🔍 Chercher dans le tableau ¦ 🔍 Panoda ara
+🧲 Grille aimantée ¦ 🧲 Mıknatıslı ızgara
+🗺 Mini-carte ¦ 🗺 Mini harita
+⚙️ Réglages des tableaux ¦ ⚙️ Pano ayarları
+🗑 Supprimer ¦ 🗑 Sil
+✕ Fermer ¦ ✕ Kapat
+Bord / contour ¦ Kenar / çerçeve
+Couleur du texte ou du trait ¦ Metnin ya da çizginin rengi
+Épaisseur et style du trait ¦ Çizginin kalınlığı ve stili
+Arrondi ¦ Köşe yuvarlaklığı
+Taille et style du texte ¦ Metnin boyutu ve stili
+Pointes des flèches ¦ Okların uçları
+Forme du trait et légende ¦ Çizginin şekli ve açıklaması
+Pinceau ¦ Fırça
+Titre, étiquette, adresse ¦ Başlık, etiket, adres
+Fiche : ce qu’elle montre ¦ Kart: ne gösterdiği
+Piste : à vérifier, confirmée, fausse ¦ İz: kontrol edilecek, doğrulandı, yanlış
+Carte et repères ¦ Harita ve işaretler
+Liens tout prêts (frère de…) ¦ Hazır bağlantılar (kardeşi…)
+Boutons (dupliquer, verrouiller…) ¦ Düğmeler (çoğalt, kilitle…)
+Des fichiers ¦ Dosyalar
+D’ailleurs (web) ¦ Başka yerden (web)
+Une fiche ¦ Bir kart
+Un écran de l’app ¦ Bir uygulama ekranı
+Un de mes widgets ¦ Widget’larımdan biri
+Un tableur ¦ Bir tablo
+Un dossier ¦ Bir klasör
+Un arbre automatique ¦ Otomatik bir ağaç
+Une frise vivante ¦ Canlı bir zaman çizelgesi
+Une carte ¦ Bir harita
+Un cadre (section) ¦ Bir çerçeve (bölüm)
+Un mémo vocal ¦ Bir sesli not
+Importer un tableau ¦ Bir panoyu içe aktar
+Gras, italique ¦ Kalın, italik
+Suivre l’angle du trait ¦ Çizginin açısını izle
+pointe|aucune ¦ yok
+pointe|▶ triangle ¦ ▶ üçgen
+pointe|➤ flèche fine ¦ ➤ ince ok
+pointe|› ouverte ¦ › açık
+pointe|⏩ double ¦ ⏩ çift
+pointe|◣ demi-flèche ¦ ◣ yarım ok
+pointe|● rond ¦ ● daire
+pointe|○ rond vide ¦ ○ boş daire
+pointe|• point ¦ • nokta
+pointe|■ carré ¦ ■ kare
+pointe|□ carré vide ¦ □ boş kare
+pointe|◆ losange ¦ ◆ eşkenar dörtgen
+pointe|◇ losange vide ¦ ◇ boş eşkenar dörtgen
+pointe|| barre ¦ | çubuk
+pointe|⋔ patte d’oie ¦ ⋔ kaz ayağı
+pointe|» plumes ¦ » tüyler
+pointe|▷ triangle vide ¦ ▷ boş üçgen
+pointe|⟶ flèche longue ¦ ⟶ uzun ok
+pointe|» double chevron ¦ » çift köşeli ok
+pointe|✕ croix ¦ ✕ çarpı
+pointe|＋ plus ¦ ＋ artı
+pointe|★ étoile ¦ ★ yıldız
+pointe|♥ cœur ¦ ♥ kalp
+pointe|‖ un (deux barres) ¦ ‖ bir (iki çubuk)
+pointe|⋲ plusieurs (pied de corbeau) ¦ ⋲ çok (karga ayağı)
+pointe|◗ demi-rond ¦ ◗ yarım daire
+Chercher une forme (cœur, maison, chien…) ¦ Bir şekil ara (kalp, ev, köpek…)
+＋ ajouter (réunir) ¦ ＋ ekle (birleştir)
+⭕ percer (trou) ¦ ⭕ del (delik)
+miroir ¦ ayna
+Créer une forme à partir d’une autre ¦ Başka bir şekilden şekil oluştur
+1. La forme de départ ¦ 1. Başlangıç şekli
+2. La transformer ¦ 2. Onu dönüştür
+3. Lui ajouter d’autres formes, ou y percer un trou ¦ 3. Ona başka şekiller ekle ya da içinde bir delik aç
+＋ Ajouter une forme ¦ ＋ Bir şekil ekle
+Nom de la nouvelle forme ¦ Yeni şeklin adı
+Elle ira dans « Mes formes », et dans l’accès rapide. ¦ “Şekillerim”e ve hızlı erişime gidecek.
+Fermer la forme ¦ Şekli kapat
+Point ¦ Nokta
+RÉGLAGES DES TABLEAUX ¦ PANO AYARLARI
+FORMES ¦ ŞEKİLLER
+Créer une pointe ¦ Bir uç oluştur
+Créer la pointe ¦ Ucu oluştur
+Chercher une forme (flèche, cœur, étoile…) ¦ Bir şekil ara (ok, kalp, yıldız…)
+⬠ À partir d’une forme ¦ ⬠ Bir şekilden
+✒️ Tracée à la plume ¦ ✒️ Kalemle çizilmiş
+Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer. ¦ Ucu sağa dönük çiz (→): köşe için tıkla, eğri için tıkla ve sürükle, kapatmak için ilk noktaya tıkla.
+Accrochée ¦ Tutturulduğu yer
+par la pointe (au bout du trait) ¦ ucundan (çizginin sonunda)
+presque au bout ¦ neredeyse sonda
+par le milieu ¦ ortasından
+par l’arrière ¦ arkasından
+Trace la pointe (au moins trois points, puis ferme-la). ¦ Ucu çiz (en az üç nokta, sonra kapat).
+Choisis une forme. ¦ Bir şekil seç.
+＋ cette couleur ¦ ＋ bu renk
+＋ transparent ¦ ＋ saydam
+Sans couleur ¦ Renksiz
+🎨 Couleurs ¦ 🎨 Renkler
+➤ Pointes ¦ ➤ Uçlar
+⬠ Formes ¦ ⬠ Şekiller
+🔤 Polices ¦ 🔤 Yazı tipleri
+📏 Tailles et arrondi ¦ 📏 Boyutlar ve köşe yuvarlaklığı
+▦ Tableur ¦ ▦ Tablo
+🖌 Pinceaux ¦ 🖌 Fırçalar
+☰ Menus et options ¦ ☰ Menüler ve seçenekler
+Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux. ¦ Panolarda önerilen renkler, kategori kategori, istediğin sırayla (bir renk örneğini ya da ‹ › işaretini sürükle). “Başka renk” seçici her zaman oradadır. Birkaç paletin olabilir ve panolar için birini seçebilirsin.
+Palette utilisée ¦ Kullanılan palet
+Nom de la palette ¦ Paletin adı
+＋ Nouvelle palette ¦ ＋ Yeni palet
+Partir d’un modèle… ¦ Bir şablondan başla…
+Supprimer la palette ¦ Paleti sil
+Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume. ¦ Çizgiler ve oklar için önerilen uçlar, istediğin sırayla; görmek istemediklerinin işaretini kaldır. “＋ Bir uç oluştur”: bir şekilden (şekillerin herhangi biri ya da seninkilerden biri) ya da kalemle çizerek.
+Pointe au début, par défaut ¦ Baştaki uç, varsayılan
+Pointe à la fin, par défaut (outil Flèche) ¦ Sondaki uç, varsayılan (Ok aracı)
+＋ Créer une pointe ¦ ＋ Bir uç oluştur
+Supprimer cette pointe ¦ Bu ucu sil
+Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes. ¦ Şekil kategorileri ve şekilleri, istediğin sırayla; görmek istemediklerinin işaretini kaldır. “Hızlı erişim”: Şekiller aracının çubuğunda doğrudan önerilen şekiller.
+✒️ Dessiner une nouvelle forme (dessin vectoriel) ¦ ✒️ Yeni bir şekil çiz (vektör çizim)
+ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG… ¦ ya da yeniden işlemek için aşağıdaki bir şeklin üstündeki ✒️: kalem, noktalar ve tutamaklar, Pathfinder, SVG içe aktarma…
+📚 Montrer aussi les 2 900 formes de la grande bibliothèque ¦ 📚 Büyük kitaplığın 2 900 şeklini de göster
+lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide) ¦ harfler ve rakamlar, armalar, çerçeveler, etiketler, bayraklar, simgeler… (her zaman pano kitaplığındalar; burada onları gizlemek, sıralamak ya da hızlı erişime koymak için)
+Accès rapide ¦ Hızlı erişim
+Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle. ¦ Sırayı değiştirmek için bir şekli (ya da ‹ ›) sürükle; aşağıdaki bir şeklin üstündeki ⚡ onu buraya ekler; ✏️ ondan bir şekil oluşturur.
+Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police). ¦ Kendi yazı tipi listelerin; bir metnin yazı tipi seçilirken önerilir. “Tüm yazı tipleri” ortak listeyi açar (uygulamanın ve bilgisayarın yazı tipleri, her biri kendi yazı tipiyle yazılmış).
+Aa Toutes les polices… ¦ Aa Tüm yazı tipleri…
+＋ Nouvelle liste ¦ ＋ Yeni liste
+＋ Ajouter une police… ¦ ＋ Bir yazı tipi ekle…
+De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage. ¦ Kaydırıcıların aralığı (çizgi ve kenar kalınlığı: 0,5 ile 500 px arası; metin: 500 px’e kadar). Kaydırıcının yanındaki kutu her zaman tüm aralığı kabul eder.
+Épaisseur mini ¦ En az kalınlık
+Épaisseur maxi ¦ En çok kalınlık
+Texte mini ¦ En küçük metin
+Texte maxi ¦ En büyük metin
+Arrondi par défaut ¦ Varsayılan köşe yuvarlaklığı
+Comment est un tableur quand tu le poses dans un tableau. ¦ Bir tabloyu panoya koyduğunda nasıl göründüğü.
+Titres des colonnes, séparés par ; ¦ Sütun başlıkları, ; ile ayrılmış
+Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux. ¦ Kendi fırçaların: bir başlangıç fırçası, bir kalınlık, bir opaklık, bir <strong>sertlik</strong> (%100 = keskin kenar; daha azı = yumuşak kenar, Photoshop’taki gibi), istersen bir renk. Fırça menüsünün en üstünde görünürler.
+Mon pinceau ¦ Fırçam
+Imposer une couleur ¦ Bir rengi zorunlu kıl
+plein ¦ düz
+tirets ¦ kesik çizgiler
+longs tirets ¦ uzun kesik çizgiler
+points ¦ noktalar
+tiret-point ¦ çizgi-nokta
+＋ Nouveau pinceau ¦ ＋ Yeni fırça
+La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓. ¦ Her bölümün yeri, sonra panoda gördüğün her şeyin sırası; gizlemek için işareti kaldır. Satırları sürükle ya da ↑ ↓.
+🧭 Disposition du tableau ¦ 🧭 Panonun yerleşimi
+à gauche (en colonne) ¦ solda (sütun hâlinde)
+à droite (en colonne) ¦ sağda (sütun hâlinde)
+Réglages (texte, forme, trait…) ¦ Ayarlar (metin, şekil, çizgi…)
+cachés (plus de place) ¦ gizli (daha çok yer)
+Taille des boutons ¦ Düğme boyutu
+petits ¦ küçük
+normaux ¦ normal
+grands ¦ büyük
+En-tête (titre, propriétaire, état) ¦ Başlık (başlık, sahibi, durum)
+complet ¦ tam
+compact (une ligne) ¦ sıkışık (tek satır)
+Outils (barre du haut) ¦ Araçlar (üst çubuk)
+Boutons de l’en-tête ¦ Başlığın düğmeleri
+↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher. ¦ ↶ ↷ adın yanında kalır; ⚙️ Özelleştir, ⤓ Dışa aktar, ⛶ ve × bu sırayla sağda kalır (tüm düzenleyicilerdeki gibi): burada onları yalnızca gösterebilir ya da gizleyebilirsin.
+Réglages à droite (texte, forme, trait…) ¦ Sağda ayarlar (metin, şekil, çizgi…)
+Menu « ＋ Ajouter » ¦ “＋ Ekle” menüsü
+Réglages d’une légende de trait ¦ Bir çizgi açıklamasının ayarları
+Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs. ¦ “Açıklamanın ayarları”nda (bir çizgi seç). Önerilen renkler: 🎨 Renkler sekmesi.
+Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus. ¦ Panoların sundukları (İncelemeler → Panolar): renkler, uçlar, şekiller, yazı tipleri, boyutlar, tablo, fırçalar ve menülerin sırası.
+Bibliothèque de formes ¦ Şekil kitaplığı
+Chercher une forme… (arbre, croix, É, drapeau) ¦ Bir şekil ara… (ağaç, haç, É, bayrak)
+Chercher une forme… ¦ Bir şekil ara…
+Chargement de toutes les formes… ¦ Tüm şekiller yükleniyor…
+Les formes en plus n’ont pas pu être chargées. ¦ Ek şekiller yüklenemedi.
+⛔ Les formes en plus n’ont pas pu être chargées. ¦ ⛔ Ek şekiller yüklenemedi.
+Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…). ¦ “{q}” için şekil yok. Başka bir kelime dene (ev, haç, harf, bayrak…).
+Aucune forme dans cette catégorie. ¦ Bu kategoride şekil yok.
+{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher ¦ {n} · seçmek için ↑ ↓ ← →, almak için Enter, aramak için /
+Formes (flèches pour choisir, Entrée pour prendre) ¦ Şekiller (seçmek için oklar, almak için Enter)
+Large (16:9) ¦ Geniş (16:9)
+Standard (4:3) ¦ Standart (4:3)
+Vertical (téléphone) ¦ Dikey (telefon)
+Sur mesure… ¦ Özel boyut…
+Comme l’application ¦ Uygulama gibi
+Ardoise ¦ Arduvaz
+Parchemin ¦ Parşömen
+Aurore ¦ Şafak
+Tableau noir ¦ Kara tahta
+Titre et texte ¦ Başlık ve metin
+Titre et photo ¦ Başlık ve fotoğraf
+Photo pleine page ¦ Tam sayfa fotoğraf
+Photo et texte ¦ Fotoğraf ve metin
+Deux colonnes ¦ İki sütun
+Section ¦ Bölüm
+Chiffre clé ¦ Önemli rakam
+Double-clique pour écrire ¦ Yazmak için çift tıkla
+Légende de la photo ¦ Fotoğrafın açıklaması
+« Une phrase qui compte » ¦ “Önemli bir cümle”
+Triangle rectangle ¦ Dik üçgen
+Pentagone ¦ Beşgen
+Octogone ¦ Sekizgen
+Double flèche ¦ Çift ok
+Chevron ¦ Köşeli ok
+Ligne fléchée ¦ Oklu çizgi
+Aucun (rectangle) ¦ Yok (dikdörtgen)
+Coins arrondis ¦ Yuvarlak köşeler
+Cercle / ovale ¦ Daire / oval
+Arche (portrait ancien) ¦ Kemer (eski portre)
+Dissoudre ¦ Çöz
+Fondu par le noir ¦ Siyahla geçiş
+Glisser par-dessus ¦ Üstüne kay
+Révéler ¦ Ortaya çıkar
+Balayage ¦ Silme
+Échanger ¦ Yer değiştir
+Retourner ¦ Çevir
+Cube ¦ Küp
+Déplacement magique ¦ Sihirli geçiş
+Apparition ¦ Beliriş
+Fondu ¦ Solma
+Arrivée (glisser) ¦ Uçarak gelme (kayma)
+Rebond ¦ Sekme
+Chute ¦ Düşme
+Machine à écrire (textes) ¦ Daktilo (metinler)
+Trajectoire (déplacement) ¦ Hareket yolu (taşıma)
+depuis la gauche ¦ soldan
+depuis la droite ¦ sağdan
+depuis le haut ¦ yukarıdan
+depuis le bas ¦ aşağıdan
+Au clic ¦ Tıklayınca
+Avec la précédente ¦ Öncekiyle birlikte
+Après la précédente ¦ Öncekinden sonra
+Liaison ¦ Bağlayıcı
+liaison|Droite ¦ Düz
+liaison|En équerre ¦ Dik açılı
+liaison|Courbe ¦ Eğri
+Flèche au bout ¦ Sonda ok
+Flèches aux deux bouts ¦ İki uçta ok
+Sans flèche ¦ Oksuz
+Union (les deux réunies) ¦ Birleşim (ikisi bir arada)
+Soustraire (la 1re moins la 2e) ¦ Çıkar (1. eksi 2.)
+Intersection (ce qu’elles ont en commun) ¦ Kesişim (ortak olan)
+Choisis une personne (à droite, onglet Format) ¦ Bir kişi seç (sağda, Biçim sekmesi)
+Aucun événement daté ¦ Tarihli olay yok
+Double-clique pour choisir une image ¦ Bir resim seçmek için çift tıkla
+Aucune diapositive à montrer (toutes sont sautées ?). ¦ Gösterilecek slayt yok (hepsi atlandı mı?).
+Touches ¦ Tuşlar
+<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter ¦ <kbd>→</kbd> <kbd>boşluk</kbd> <kbd>tık</kbd> sonraki · <kbd>←</kbd> önceki · <kbd>Home</kbd> <kbd>End</kbd> · bir numara sonra <kbd>Enter</kbd>: o slayta git · <kbd>B</kbd> siyah ekran · <kbd>W</kbd> beyaz ekran · <kbd>L</kbd> lazer işaretçi · <kbd>P</kbd> sunucu · <kbd>Esc</kbd> çık
+Précédente (←) ¦ Önceki (←)
+Suivante (→ ou espace) ¦ Sonraki (→ ya da boşluk)
+Fenêtre du présentateur : notes, suivante, chronomètre (P) ¦ Sunucu penceresi: notlar, sonraki, kronometre (P)
+Pointeur laser (L) ¦ Lazer işaretçi (L)
+Les touches (?) ¦ Tuşlar (?)
+Quitter (Échap) ¦ Çık (Esc)
+Fin de la présentation — clic ou → pour quitter ¦ Sunumun sonu — çıkmak için tıkla ya da →
+Encore {n} sur cette diapositive ¦ Bu slaytta kalan: {n}
+présentation|Fin ¦ Son
+Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive). ¦ Bu slayt için not yok (slaytın altındaki 📝 Notlar sekmesi).
+La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page. ¦ Sunucu penceresi engellendi: bu sayfa için açılır pencerelere izin ver.
+Présentateur ¦ Sunucu
+Arrêter / reprendre le chronomètre ¦ Kronometreyi durdur / sürdür
+Remettre le chronomètre à zéro ¦ Kronometreyi sıfırla
+Heure : ¦ Saat:
+Ensuite ¦ Sonra
+‹ Précédente ¦ ‹ Önceki
+Suivante › ¦ Sonraki ›
+Écran noir ¦ Siyah ekran
+Écran blanc ¦ Beyaz ekran
+Touches : → ← espace, B, W, Échap ¦ Tuşlar: → ← boşluk, B, W, Esc
+Terminer ¦ Bitir
+Diapositive précédente ¦ Önceki slayt
+Diapositive suivante ¦ Sonraki slayt
+Quitter la présentation ¦ Sunumdan çık
+PRÉSENTATION ¦ SUNUM
+La personne affichée en ce moment, ou × pour en chercher une autre. ¦ Şu anda gösterilen kişi ya da başka birini aramak için ×.
+Une vidéo ou un son ¦ Bir video ya da bir ses
+La fenêtre des médias n’est pas encore prête. Réessaie dans un instant. ¦ Medya penceresi henüz hazır değil. Birazdan yeniden dene.
+Police de l’ordinateur ¦ Bilgisayarın yazı tipi
+Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) : ¦ Bu tarayıcı yazı tiplerini listeleyemiyor: kurulu bir yazı tipinin tam adını yaz (örn. Garamond):
+L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre. ¦ Bilgisayar hiç yazı tipi vermedi: adını pencereye yaz.
+Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre. ¦ Bilgisayarın yazı tipleri burada okunamıyor: pencereye bir yazı tipi adı yaz.
+🖥 Choisir une police ¦ 🖥 Bir yazı tipi seç
+Pour les titres ¦ Başlıklar için
+Pour les textes ¦ Metinler için
+Pour le texte choisi ¦ Seçilen metin için
+Chercher une police, ou taper son nom… ¦ Bir yazı tipi ara ya da adını yaz…
+{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va. ¦ Bu bilgisayardan: {n}, sonra uygulamanınkiler. Bir yazı tipine tıkla, sonra nereye gideceğini söyle.
+Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va. ¦ Uygulamanın yazı tipleri; kurulu başka bir yazı tipi için tam adını yaz, sonra Enter. Bir yazı tipine tıkla, sonra nereye gideceğini söyle.
+Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle. ¦ Listede “{q}” adında yazı tipi yok: olduğu gibi almak için Enter.
+Portez ce vieux whisky au juge blond qui fume ¦ Pijamalı hasta yağız şoföre çabucak güvendi
+Choisis une police ¦ Bir yazı tipi seç
+Clique d’abord sur une police. ¦ Önce bir yazı tipine tıkla.
+Ma présentation ¦ Sunumum
+⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)… ¦ ⤒ İçe aktar (PowerPoint, OpenDocument, PDF, resimler, metin, JSON)…
+🖨 PDF / imprimer (une diapositive par page) ¦ 🖨 PDF / yazdır (sayfa başına bir slayt)
+🖨 PDF avec les notes de l’orateur ¦ 🖨 Konuşmacı notlarıyla PDF
+🖼️ Cette diapositive en PNG ¦ 🖼️ Bu slaytı PNG olarak
+🗂️ Toutes les diapositives en PNG (.zip) ¦ 🗂️ Tüm slaytlar PNG olarak (.zip)
+⏺ Vidéo (WebM) ¦ ⏺ Video (WebM)
+⤓ Fichier de la présentation (.json) ¦ ⤓ Sunum dosyası (.json)
+Nom de la présentation ¦ Sunumun adı
+Annuler / rétablir ¦ Geri al / yinele
+↶ Annuler (⌘Z) ¦ ↶ Geri al (⌘Z)
+↷ Rétablir (⇧⌘Z) ¦ ↷ Yinele (⇧⌘Z)
+Insérer (barre du haut) ¦ Ekle (üst çubuk)
+Une zone de texte ¦ Bir metin kutusu
+◆ Formes ¦ ◆ Şekiller
+Une forme ¦ Bir şekil
+Une photo des médias ou de l’ordinateur ¦ Medyadan ya da bilgisayardan bir fotoğraf
+Un graphique (colonnes, camembert, courbe…) ¦ Bir grafik (sütunlar, pasta, çizgi…)
+👤 Généalogie (fiche, portrait, arbre, frise) ¦ 👤 Soy ağacı (kart, portre, ağaç, zaman çizelgesi)
+La généalogie : une personne de la base ¦ Soy ağacı: veritabanından bir kişi
+🪪 Fiche d’une personne ¦ 🪪 Bir kişinin kartı
+🖼️ Portrait d’une personne ¦ 🖼️ Bir kişinin portresi
+🌳 Petit arbre (parents, couple, enfants) ¦ 🌳 Küçük ağaç (ebeveynler, çift, çocuklar)
+🗓️ Frise de sa vie ¦ 🗓️ Hayatının zaman çizelgesi
+Vidéo / son ¦ Video / ses
+Une vidéo ou un son des médias ¦ Medyadan bir video ya da ses
+Disposer (barre du haut) ¦ Düzenle (üst çubuk)
+⇤⇥ Aligner et répartir ¦ ⇤⇥ Hizala ve dağıt
+⇤ À gauche ¦ ⇤ Sola
+↔ Au centre ¦ ↔ Ortaya
+⇥ À droite ¦ ⇥ Sağa
+⤒ En haut ¦ ⤒ Üste
+↕ Au milieu ¦ ↕ Ortaya (dikey)
+⤓ En bas ¦ ⤓ Alta
+⟷ Répartir horizontalement ¦ ⟷ Yatay dağıt
+⟷ Répartir verticalement ¦ ⟷ Dikey dağıt
+⧉ Ordre (devant, derrière) ¦ ⧉ Sıra (önde, arkada)
+Devant, derrière ¦ Önde, arkada
+Tout devant (⇧⌘]) ¦ En öne getir (⇧⌘])
+Avancer (⌘]) ¦ Öne getir (⌘])
+Reculer (⌘[) ¦ Arkaya gönder (⌘[)
+Tout derrière (⇧⌘[) ¦ En arkaya gönder (⇧⌘[)
+Grouper (⌘G) — ⇧⌘G pour dissocier ¦ Grupla (⌘G) — çözmek için ⇧⌘G
+Dissocier ¦ Grubu çöz
+Dissocier (⇧⌘G) ¦ Grubu çöz (⇧⌘G)
+Verrouiller / déverrouiller (⌘L) ¦ Kilitle / kilidi aç (⌘L)
+Relier deux objets par un trait qui les suit (choisis-en deux) ¦ İki nesneyi onları izleyen bir çizgiyle bağla (iki tane seç)
+Fusionner deux formes : union, soustraction, intersection ¦ İki şekli birleştir: birleşim, çıkarma, kesişim
+Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque ¦ Slayt ana şablonu: seçilen nesneleri tüm slaytlara koy ya da ana şablonu düzenle
+Lire en plein écran depuis le début (⌥⌘↩) ¦ Baştan tam ekran oynat (⌥⌘↩)
+D’ici ¦ Buradan
+Lire depuis cette diapositive (⌘↩) ¦ Bu slayttan oynat (⌘↩)
+Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ Tam ekran + sunucu penceresi (notlar, sonraki, kronometre)
+PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON ¦ PowerPoint, OpenDocument, PDF, resimler, Markdown, metin, JSON
+Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne ¦ Bir hayatın hikâyesi: bir kişinin kartından hazır slaytlar
+PDF, impression, images, vidéo, fichier de la présentation ¦ PDF, yazdırma, resimler, video, sunum dosyası
+Une forme (les autres : menu ◆ Forme en haut) ¦ Bir şekil (diğerleri: üstteki ◆ Şekil menüsü)
+Une image (médias ou ordinateur) ¦ Bir resim (medya ya da bilgisayar)
+La fiche d’une personne ¦ Bir kişinin kartı
+Présentateur : plein écran, notes, chronomètre ¦ Sunucu: tam ekran, notlar, kronometre
+Diapositives (au-dessus de la liste) ¦ Slaytlar (listenin üstünde)
+Nouvelle diapositive ¦ Yeni slayt
+＋ Diapositive ¦ ＋ Slayt
+▾ Choisir la disposition ¦ ▾ Yerleşimi seç
+Choisir la disposition ¦ Yerleşimi seç
+Dupliquer la diapositive (pour un déplacement magique) ¦ Slaytı çoğalt (sihirli geçiş için)
+Sauter / ne plus sauter à la lecture ¦ Oynatırken atla / atlama
+Commencer une section (un groupe de diapositives) ici ¦ Burada bir bölüm (slayt grubu) başlat
+Supprimer la diapositive ¦ Slaytı sil
+Diapositive précédente (Page précédente) ¦ Önceki slayt (Page Up)
+Diapositive suivante (Page suivante) ¦ Sonraki slayt (Page Down)
+Ajuster ¦ Sığdır
+Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Nesneler kenarlara, merkeze ve diğer nesnelere oturur (sürüklerken ⌘: mıknatıssız)
+Notes de l’orateur ¦ Konuşmacı notları
+📝 Notes ¦ 📝 Notlar
+Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)… ¦ Konuşmacı notları: bu slayt hakkında söylemek istediklerin (yalnızca sunucu penceresinde ve notlu PDF’te görünür)…
+Onglets de l’inspecteur (à droite) ¦ Denetçi sekmeleri (sağda)
+Format de l’objet choisi ¦ Seçilen nesnenin biçimi
+Animer ¦ Canlandır
+Transition et animations ¦ Geçiş ve animasyonlar
+Diapo ¦ Slayt
+La diapositive : disposition, fond, durée, notes ¦ Slayt: yerleşim, arka plan, süre, notlar
+Les objets de la diapositive (devant, derrière, cacher, verrouiller) ¦ Slaytın nesneleri (önde, arkada, gizle, kilitle)
+Thème, polices, format, musique ¦ Tema, yazı tipleri, biçim, müzik
+Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner ¦ Tık: bir nesne seç (⇧: seçime ekle) · çift tık: içine yaz · sürükle: taşı · tutamaklar: boyutlandır · daire: döndür
+Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Mıknatısla: nesneler kenarlara, merkeze ve diğer nesnelere oturur (sürüklerken ⌘: mıknatıssız)
+Replier / déplier la section ¦ Bölümü daralt / genişlet
+Sautée à la lecture ¦ Oynatırken atlanır
+Animations ¦ Animasyonlar
+Transition : {name} ¦ Geçiş: {name}
+Tourner (⇧ : de 15° en 15°) ¦ Döndür (⇧: 15°’lik adımlarla)
+Choisis une zone de texte. ¦ Bir metin kutusu seç.
+Le petit arbre de quelle personne ? ¦ Küçük ağaç kimin?
+La frise de la vie de qui ? ¦ Hayat zaman çizelgesi kimin?
+Lecture de la fiche… ¦ Kart okunuyor…
+Changer la vidéo ou le son ¦ Videoyu ya da sesi değiştir
+Choisis un ou plusieurs objets. ¦ Bir ya da birkaç nesne seç.
+Choisis au moins trois objets pour les répartir. ¦ Dağıtmak için en az üç nesne seç.
+Choisis au moins deux objets à grouper. ¦ Gruplamak için en az iki nesne seç.
+Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces. ¦ İki nesne seç (⇧ tık): bir çizgi onları bağlar ve taşıdığında onları izler.
+Choisis deux formes (⇧ clic) à fusionner. ¦ Birleştirilecek iki şekil seç (⇧ tık).
+⊕ Fusionner deux formes ¦ ⊕ İki şekli birleştir
+La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme. ¦ 1. şekil alttaki şekildir. İkisi de yeni şekilde saklanır.
+Comment ¦ Nasıl
+🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier. ¦ 🗂 Tüm slaytlarda (ana şablon). Bir metinde “{a}” slayt numarasını, “{b}” slayt sayısını verir. Hiçbir şey seçmeden 🗂: ana şablonu düzenle.
+Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives. ¦ Ana şablon boş: nesneler seç (logo, alt bilgi, “{a}” numarası…), sonra onları tüm slaytlara koymak için 🗂.
+🗂 Masque des diapositives ¦ 🗂 Slayt ana şablonu
+{n} sur toutes les diapositives. ¦ Tüm slaytlarda: {n}.
+Que faire ¦ Ne yapılsın
+Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre) ¦ Düzenlemek için onları bu slayta geri getir (sonra yerine koymak için 🗂)
+Remontrer le masque sur cette diapositive ¦ Ana şablonu bu slaytta yeniden göster
+Ne pas montrer le masque sur cette diapositive ¦ Ana şablonu bu slaytta gösterme
+Vider le masque ¦ Ana şablonu boşalt
+Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer). ¦ Slayt çoğaltıldı: nesneleri taşı, sonra “Sihirli geçiş” geçişini seç (✨ Canlandır sekmesi).
+Aucune couleur ¦ Renk yok
+Choisir la police (recherche, récentes, polices de l’ordinateur) ¦ Yazı tipini seç (arama, son kullanılanlar, bilgisayarın yazı tipleri)
+{what} (sur la diapositive) ¦ {what} (slaytta)
+Les réglages vont au texte sélectionné (sinon à tout le texte). ¦ Ayarlar seçilen metne uygulanır (yoksa tüm metne).
+Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné. ¦ Yazmak için metnin içine çift tıkla; ayarlar tüm metne ya da seçilen parçaya uygulanır.
+Le trait suit les deux objets quand on les déplace. ¦ Çizgi, iki nesneyi taşındıklarında izler.
+Double-clic sur une case du tableau pour l’écrire directement. ¦ Doğrudan yazmak için tablonun bir hücresine çift tıkla.
+Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour. ¦ Gösterilenler karttan geliyor (okunma tarihi: {date}): sunum veritabanı olmadan da oynatılır. “Kartı yeniden oku” onu günceller.
+(groupe) ¦ (grup)
+Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier. ¦ Slayttaki bir nesneyi seç (tık) ya da bir tane ekle (üst çubuk). ⇧ tık: birkaçını seç; arka planda sürükle: seçim dikdörtgeni; çift tık: bir metne yaz, bir resmi değiştir; sürüklerken ⌥: kopyala.
+Inspecteur : sections de « Format » ¦ Denetçi: “Biçim” bölümleri
+Inspecteur : sections de « Animer » ¦ Denetçi: “Canlandır” bölümleri
+Inspecteur : sections de « Diapositive » ¦ Denetçi: “Slayt” bölümleri
+Inspecteur : « Objets » ¦ Denetçi: “Nesneler”
+Inspecteur : sections de « Document » ¦ Denetçi: “Belge” bölümleri
+C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle. ¦ Bu ilk slayt: geçişi yalnızca oynatma döngüyle yeniden başlarsa oynar.
+✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent. ¦ ✨ Önceki slaytta ve bunda bulunan nesneler (⧉ ile çoğaltılmış slayt ya da aynı adı taşıyan nesneler) bir yerden ötekine kayar, büyür ve döner; diğerleri belirir ya da silinir.
+Aucune : il est là dès l’arrivée de la diapositive. ¦ Yok: slayt gelir gelmez oradadır.
+Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul. ¦ Slayttaki bir nesneyi belirmesi (giriş) ya da kaybolması (çıkış) için seç; tıklayınca ya da kendiliğinden.
+Pas encore d’animation sur cette diapositive. ¦ Bu slaytta henüz animasyon yok.
+Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé. ¦ Yerleşimi değiştirmek “başlık”, “metin”, “fotoğraf” nesnelerinin yerini değiştirir; yazdıkların korunur.
+Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)… ¦ Bu slayt hakkında söylemek istediklerin (sunucu penceresinde görünür)…
+Objets de la diapositive ¦ Slaytın nesneleri
+Objets (le premier est devant) ¦ Nesneler (ilki öndedir)
+Dans un groupe ¦ Bir grupta
+Aucun objet sur cette diapositive pour l’instant ¦ Bu slaytta henüz nesne yok
+Insère un texte, une image… avec la barre du haut. ¦ Üst çubukla bir metin, bir resim… ekle.
+Celle du thème ({font}) ¦ Temanınki ({font})
+{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble. ¦ {w} × {h} nokta. Biçim değişince nesneler birlikte büyür ya da küçülür.
+{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives). ¦ {n}, atlananlar: {skipped} · kendiliğinden oynatmada {time} (slayt süreleri).
+{n} · {time} en lecture toute seule (durées des diapositives). ¦ {n} · kendiliğinden oynatmada {time} (slayt süreleri).
+Il n’y a pas de diapositive avant celle-ci. ¦ Bundan önce slayt yok.
+Choisis d’abord un effet de transition. ¦ Önce bir geçiş efekti seç.
+Les dernières modifications de la présentation seront perdues. ¦ Sunumdaki son değişiklikler kaybolacak.
+Fermer sans enregistrer la présentation ? ¦ Sunum kaydedilmeden kapatılsın mı?
+une diapositive par page (« Enregistrer en PDF ») ¦ sayfa başına bir slayt (“PDF olarak kaydet”)
+📝 PDF + notes ¦ 📝 PDF + notlar
+avec les notes de l’orateur ¦ konuşmacı notlarıyla
+🗂 Toutes en PNG ¦ 🗂 Hepsi PNG olarak
+un fichier .zip ¦ bir .zip dosyası
+WebM, avec la musique ¦ WebM, müzikle
+aperçu, pages, notes ¦ önizleme, sayfalar, notlar
+pour la rouvrir ou la partager ¦ yeniden açmak ya da paylaşmak için
+Le diaporama n’est pas chargé. ¦ Slayt gösterisi yüklenmedi.
+Ajouter le récit ¦ Hikâyeyi ekle
+Rien à raconter pour cette personne. ¦ Bu kişi için anlatılacak bir şey yok.
+{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama. ¦ {n}: her metin karttan gelir. Hareketli haritalar slayt gösterisinde kalır.
+Titre de la section qui commence à cette diapositive (vide : pas de section) : ¦ Bu slaytta başlayan bölümün başlığı (boş: bölüm yok):
+Police « {font} » pour le texte choisi. ¦ Seçilen metin için yazı tipi: “{font}”.
+Police « {font} » pour les titres. ¦ Başlıklar için yazı tipi: “{font}”.
+Police « {font} » pour les textes. ¦ Metinler için yazı tipi: “{font}”.
+L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive). ¦ Resim artık slaytın arka planı (🖼 Slayt sekmesi).
+Cette transition va maintenant à toutes les diapositives. ¦ Bu geçiş artık tüm slaytlara uygulanıyor.
+L’image du fond ¦ Arka plan resmi
+Ce fond va maintenant à toutes les diapositives. ¦ Bu arka plan artık tüm slaytlara uygulanıyor.
+Une musique pendant la lecture ¦ Oynatma sırasında müzik
+Choisis un son (MP3, M4A, WAV…). ¦ Bir ses seç (MP3, M4A, WAV…).
+{name} : ni une image, ni une vidéo, ni un son. ¦ {name}: ne resim, ne video, ne ses.
+Diapositive copiée : ⌘V pour la coller. ¦ Slayt kopyalandı: yapıştırmak için ⌘V.
+ce n’est pas un fichier zip valide (pptx, odp) ¦ bu geçerli bir zip dosyası değil (pptx, odp)
+un élément du fichier est trop gros ¦ dosyadaki bir öğe çok büyük
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) ¦ dosya reddedildi: XML bildirimleri içeriyor (DOCTYPE ya da ENTITY)
+XML illisible dans le fichier ¦ dosyada okunamayan XML
+ce n’est pas une présentation PowerPoint (.pptx) ¦ bu bir PowerPoint sunumu (.pptx) değil
+aucune diapositive trouvée ¦ slayt bulunamadı
+{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté. ¦ Tarayıcının okuyamadığı bir biçimde (EMF, WMF…) olduğu için atlananlar: {n}.
+ce n’est pas un fichier OpenDocument (.odp) ¦ bu bir OpenDocument dosyası (.odp) değil
+{n} de côté. ¦ Bir kenara bırakılan: {n}.
+ce n’est pas un PDF ¦ bu bir PDF değil
+aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait ¦ bu PDF’te hiç resim (tarama, fotoğraf) bulunamadı. Metni ve çizimleri burada okunamaz: onu resim olarak ya da onu yapan yazılımdan PowerPoint olarak dışa aktar
+PDF : {n} ; le texte et les dessins du PDF ne sont pas lus. ¦ PDF: {n}; PDF’in metni ve çizimleri okunmaz.
+Carte du diaporama : le trajet animé reste dans le diaporama. ¦ Slayt gösterisi haritası: hareketli güzergâh slayt gösterisinde kalır.
+ce n’est pas une présentation de l’app ¦ bu, uygulamadan bir sunum değil
+{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici. ¦ {name}: Keynote dosyalarını kapalı bir biçimde saklar. Keynote’ta: Dosya → Şuraya Dışa Aktar → PowerPoint (ya da PDF veya Görüntüler), sonra o dosyayı buraya içe aktar.
+{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx. ¦ {name}: eski PowerPoint biçimi (2007 öncesi) burada okunamaz; aç ve .pptx olarak kaydet.
+fichier trop gros (400 Mo au plus) ¦ dosya çok büyük (en fazla 400 MB)
+{name} : format non reconnu. ¦ {name}: biçim tanınmadı.
+{name} : rien à importer. ¦ {name}: içe aktarılacak bir şey yok.
+IMPORT ¦ İÇE AKTARMA
+Rien n’a été importé ¦ Hiçbir şey içe aktarılmadı
+Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée) ¦ Şimdiki slaytların yerine koy (yoksa: gösterilen slayttan sonra eklenir)
+<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions. ¦ <b>PowerPoint (.pptx)</b> ve <b>OpenDocument / LibreOffice Impress (.odp)</b>: her slayt metinleriyle (yerinde, boyut, kalın, renk, listeler), resimleriyle, basit şekilleriyle, tablolarıyla, grafikleriyle, notlarıyla ve geçişleriyle.
+<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici. ¦ <b>Keynote (.key)</b>: Apple’ın biçimi kapalıdır. Keynote’ta: Dosya → Şuraya Dışa Aktar → <b>PowerPoint</b> (ya da PDF veya Görüntüler), sonra o dosyayı buraya içe aktar.
+<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images. ¦ <b>PDF</b>: içindeki resimler (taramalar, fotoğraflar) slayt olur, resim başına bir tane. Bir PDF’in metni ve çizimleri burada okunamaz: bir sunum için onu PowerPoint ya da resim olarak dışa aktar.
+<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image. ¦ <b>Resimler</b> (JPG, PNG, WEBP, GIF, BMP…), aynı anda birkaç tane: resim başına bir “tam sayfa fotoğraf” slaytı.
+<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive. ¦ <b>Markdown (.md) ya da metin (.txt)</b>: “# Başlık” bir slayt başlatır, “-” madde işareti yapar, “---” iki slaytı ayırır, “>” bir alıntı, “Notes:” konuşmacı notları. Düz metin: slayt başına bir paragraf.
+<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app. ¦ <b>JSON</b>: uygulamanın dışa aktardığı bir sunum (ya da slayt gösterisi).
+Aucune diapositive à imprimer. ¦ Yazdırılacak slayt yok.
+Diapositive ¦ Slayt
+Pas de notes. ¦ Not yok.
+{name} — présentation ¦ {name} — sunum
+Les diapositives ¦ Slaytlar
+Les diapositives avec les notes du présentateur ¦ Sunucu notlarıyla slaytlar
+Les notes seules (texte) ¦ Yalnızca notlar (metin)
+Diapositives par page ¦ Sayfa başına slayt
+Numéros des diapositives ¦ Slayt numaraları
+Les diapositives masquées aussi ¦ Gizli slaytlar da
+aucune diapositive ¦ slayt yok
+Préparation de {n} images… ¦ Resimler hazırlanıyor: {n}…
+Préparation de l’image… ¦ Resim hazırlanıyor…
+ce navigateur ne sait pas enregistrer de vidéo ¦ bu tarayıcı video kaydedemiyor
+La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. ¦ Video sunumu baştan sona yeniden oynatır ({time}, 🖼 Slayt sekmesindeki süreler) ve kaydeder. Pencereyi açık bırak.
+Fabriquer la vidéo ? ¦ Video yapılsın mı?
+Fabriquer la vidéo ¦ Videoyu yap
+Préparation : {n} / {total} ¦ Hazırlanıyor: {n} / {total}
+Vidéo : {n} % ¦ Video: %{n}
+Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement. ¦ Video durdu: kayıt sırasında sunum kapatıldı.
+la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur ¦ video boş: bu tarayıcıda kayıt yapılamadı
+La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur. ¦ Video boş: bu tarayıcıda kayıt yapılamadı.
+Vidéo téléchargée et rangée dans les Médias. ¦ Video indirildi ve Medya’ya konuldu.
+Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger. ¦ Onu uygulamanın Medya’sına ekleyebilir ya da yalnızca indirebilirsin.
+Vidéo prête ¦ Video hazır
+Ajouter aux Médias ¦ Medya’ya ekle
+Télécharger seulement ¦ Yalnızca indir
+Vidéo ajoutée aux Médias. ¦ Video Medya’ya eklendi.
+Vidéo impossible : {error} ¦ Video yapılamıyor: {error}
+NOUVELLE PRÉSENTATION ¦ YENİ SUNUM
+🎤 Choisis un thème ¦ 🎤 Bir tema seç
+Créer la présentation ¦ Sunumu oluştur
+Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ». ¦ Tema, renkler, yazı tipleri ve biçim sonradan değiştirilebilir (⚙️ Belge sekmesi). Bir PowerPoint’ten, bir OpenDocument’tan, bir PDF’ten ya da fotoğraflardan başlamak için: “⤒ İçe aktar”.
+⤒ Importer une présentation ¦ ⤒ Bir sunumu içe aktar
+Thème au départ ¦ Başlangıç teması
+Format au départ ¦ Başlangıç biçimi
+Transition des nouvelles diapositives ¦ Yeni slaytların geçişi
+Disposition de « ＋ Diapositive » ¦ “＋ Slayt” yerleşimi
+Aimanter les objets (guides) ¦ Nesneleri mıknatısla (kılavuzlar)
+Couleur du pointeur laser ¦ Lazer işaretçinin rengi
+↺ Réglages de départ ¦ ↺ Başlangıç ayarları
+Réglages de départ. ¦ Başlangıç ayarları.
+Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier. ¦ Üstteki düğmeler, sekmeler ve denetçinin bölümleri “Düğmeler ve seçenekler”de (🎤 Sunum düzenleyicisi) klavye kısayollarıyla birlikte sıralanır, gösterilir ya da gizlenir.
+{name} (présentation) ¦ {name} (sunum)
+Diaporama ¦ Slayt gösterisi
+Nom (pour le déplacement magique) ¦ Ad (sihirli geçiş için)
+⇋ Miroir ¦ ⇋ Ayna
+⇵ Miroir ¦ ⇵ Ayna
+Retourner de gauche à droite ¦ Soldan sağa çevir
+Retourner de haut en bas ¦ Yukarıdan aşağıya çevir
+⤢ Proportions de la photo ¦ ⤢ Fotoğrafın oranları
+Tout devant ¦ En öne getir
+Tout derrière ¦ En arkaya gönder
+Grouper (⌘G) ¦ Grupla (⌘G)
+Déverrouiller (⌘L) ¦ Kilidi aç (⌘L)
+Verrouiller (⌘L) ¦ Kilitle (⌘L)
+Dupliquer (⌘D) ¦ Çoğalt (⌘D)
+Supprimer (⌫) ¦ Sil (⌫)
+Selon le rôle ¦ Role göre
+Légère ¦ İnce
+Normale ¦ Normal
+Demi-grasse ¦ Yarı kalın
+Grasse ¦ Kalın
+Extra-grasse ¦ Ekstra kalın
+Noire ¦ Siyah
+bouton|<b>G</b> ¦ <b>K</b>
+bouton|<i>I</i> ¦ <i>İ</i>
+bouton|<u>S</u> ¦ <u>A</u>
+bouton|<s>B</s> ¦ <s>Ü</s>
+Gras (⌘B) ¦ Kalın (⌘B)
+Italique (⌘I) ¦ İtalik (⌘I)
+Souligné (⌘U) ¦ Altı çizili (⌘U)
+Exposant (1<sup>er</sup>) ¦ Üst simge (1<sup>.</sup>)
+Retrait (sous-liste) ¦ Girinti (alt liste)
+Moins de retrait ¦ Girintiyi azalt
+En haut de la zone ¦ Alanın üstünde
+Au milieu de la zone ¦ Alanın ortasında
+En bas de la zone ¦ Alanın altında
+Couleur d’accent du thème ¦ Temanın vurgu rengi
+Texte dans la forme ¦ Şeklin içinde metin
+Couleur (fond et bordure) ¦ Renk (dolgu ve kenarlık)
+Bordure ¦ Kenarlık
+Points ¦ Noktalar
+Coins ¦ Köşeler
+Forme sans fond. ¦ Dolgusuz şekil.
+Pas de fond (∅). ¦ Dolgu yok (∅).
+Pas de bordure (∅). ¦ Kenarlık yok (∅).
+🖼️ Changer l’image… ¦ 🖼️ Görüntüyü değiştir…
+🖼️ Choisir l’image… ¦ 🖼️ Görüntüyü seç…
+🖼 En fond de diapositive ¦ 🖼 Slayt arka planı olarak
+Cadrage ¦ Kadraj
+Remplir (rogner) ¦ Doldur (kırp)
+Photo entière ¦ Fotoğrafın tamamı
+Étirer ¦ Uzat
+Masque (forme) ¦ Maske (şekil)
+La photo est découpée dans cette forme : rond, arrondi, étoile, cœur… sans toucher à la photo d’origine. ¦ Fotoğraf bu şekilde kesilir: yuvarlak, yuvarlatılmış, yıldız, kalp… özgün fotoğrafa dokunmadan.
+Zoom (rogner) ¦ Yakınlaştır (kırp)
+Agrandit la photo dans son cadre ; « Cadrer ↔ ↕ » choisit ensuite quelle partie on voit. ¦ Fotoğrafı çerçevesinde büyütür; ardından “Kadrajla ↔ ↕” hangi kısmın görüneceğini seçer.
+Cadrer ↔ ¦ Kadrajla ↔
+Cadrer ↕ ¦ Kadrajla ↕
+🎚️ Retouche ¦ 🎚️ Rötuş
+Épaisseur du cadre ¦ Çerçeve kalınlığı
+Au bout ¦ Uçta
+Aux deux bouts ¦ İki uçta
+Le tableur en grand : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Büyük tablo: formüller, sıralama, Excel’den yapıştırma… sonra “✓ Kaydet ve geri dön”
+Le tableur en grand, préparé « Catégorie + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ “Kategori + seriler” olarak hazırlanmış büyük tablo: formüller, sıralama, Excel’den yapıştırma… sonra “✓ Kaydet ve geri dön”
+＋ Ligne ¦ ＋ Satır
+− Ligne ¦ − Satır
+＋ Colonne ¦ ＋ Sütun
+− Colonne ¦ − Sütun
+Première ligne en en-tête ¦ İlk satır başlık
+En-tête : fond ¦ Başlık: arka plan
+En-tête : texte ¦ Başlık: metin
+Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur) ¦ İçerik (her satıra bir sıra, hücreler “;” veya sekme ile ayrılır — bir tablodan yapıştırılabilir)
+Ou ici, en secours (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Ya da burada, yedek olarak (1. satır: Kategori ; Seri 1 ; Seri 2…)
+Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Sayılar (1. satır: Kategori ; Seri 1 ; Seri 2…)
+Vives ¦ Canlı
+Pastel ¦ Pastel
+Terre ¦ Toprak
+Gris ¦ Gri
+Selon la sorte ¦ Türüne göre
+🪪 La fiche ¦ 🪪 Kart
+🖼️ Le portrait ¦ 🖼️ Portre
+🌳 Petit arbre ¦ 🌳 Küçük ağaç
+🔄 Relire la fiche ¦ 🔄 Kartı yeniden oku
+🎬 Changer… ¦ 🎬 Değiştir…
+Lecture automatique ¦ Otomatik oynat
+En boucle ¦ Döngüde
+Sans le son ¦ Sessiz
+Boutons de lecture visibles ¦ Oynatma düğmeleri görünür
+Commencer à ¦ Başlangıç
+Effets (ombre et opacité) ¦ Efektler (gölge ve opaklık)
+Chemin ¦ Yol
+Attendre ¦ Bekle
+× Retirer ¦ × Çıkar
+Transition ¦ Geçiş
+Effet (en arrivant sur cette diapositive) ¦ Efekt (bu slayta gelirken)
+L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux. ¦ Efekt, önceki slayttan buna geçerken oynar. “Sihirli geçiş” iki slaytta da bulunan nesneleri kaydırır.
+▶ Aperçu ¦ ▶ Önizleme
+Pour toutes les diapositives ¦ Tüm slaytlar için
+Animations de l’objet choisi ¦ Seçilen nesnenin animasyonları
+＋ Entrée ¦ ＋ Giriş
+＋ Sortie ¦ ＋ Çıkış
+Ordre des animations ¦ Animasyonların sırası
+⬅ Sortie ¦ ⬅ Çıkış
+➡ Entrée ¦ ➡ Giriş
+▶ Aperçu des animations ¦ ▶ Animasyonların önizlemesi
+Disposition (place les titres, textes, photos) ¦ Yerleşim (başlıkları, metinleri, fotoğrafları yerleştirir)
+Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place. ¦ Hazır bir plan (başlık, başlık ve metin, tam sayfa fotoğraf…): yazılmış metinler korunur ve yer değiştirir.
+Celui du thème ¦ Temanınki
+Dégradé rond ¦ Dairesel geçiş
+Couleur autour de l’image ¦ Görüntünün çevresindeki renk
+Entière ¦ Tamamı
+Ce fond pour toutes les diapositives ¦ Bu arka plan tüm slaytlar için
+Durée — lecture seule et vidéo ¦ Süre — otomatik oynatma ve video
+Le temps passé sur cette diapositive quand la présentation avance toute seule et dans la vidéo exportée. ¦ Sunum kendiliğinden ilerlerken ve dışa aktarılan videoda bu slaytta geçen süre.
+Passer toute seule à la suivante (après la durée) ¦ Kendiliğinden sonrakine geç (süre dolunca)
+Sauter cette diapositive à la lecture ¦ Oynatmada bu slaytı atla
+Titre de la section (un groupe de diapositives qui commence ici) ¦ Bölüm başlığı (burada başlayan bir slayt grubu)
+ex. Les années de guerre ¦ örn. Savaş yılları
+Vers le devant ¦ Öne doğru
+Vers le fond ¦ Arkaya doğru
+Couleurs et polices ¦ Renkler ve yazı tipleri
+Accent ¦ Vurgu
+Format des diapositives ¦ Slayt biçimi
+Largeur (points) ¦ Genişlik (punto)
+Hauteur (points) ¦ Yükseklik (punto)
+Changer… ¦ Değiştir…
+🎵 Une musique pendant la lecture… ¦ 🎵 Oynatma sırasında müzik…
+Recommencer au début à la fin (borne, exposition) ¦ Sonda baştan başla (kiosk, sergi)
+Remplissage et bordure ¦ Dolgu ve kenarlık
+Ombre et opacité ¦ Gölge ve opaklık
+T Une zone de texte ¦ T Bir metin kutusu
+🖼️ Une photo des médias ou de l’ordinateur ¦ 🖼️ Medyadan veya bilgisayardan bir fotoğraf
+📊 Un graphique (colonnes, camembert, courbe…) ¦ 📊 Bir grafik (sütun, pasta, çizgi…)
+🎬 Une vidéo ou un son des médias ¦ 🎬 Medyadan bir video veya ses
+⊞ Grouper (⌘G) — ⇧⌘G pour dissocier ¦ ⊞ Grupla (⌘G) — çözmek için ⇧⌘G
+⊟ Dissocier (⇧⌘G) ¦ ⊟ Grubu çöz (⇧⌘G)
+🔒 Verrouiller / déverrouiller (⌘L) ¦ 🔒 Kilitle / kilidi aç (⌘L)
+▶ Lire en plein écran depuis le début (⌥⌘↩) ¦ ▶ Baştan tam ekran oynat (⌥⌘↩)
+⏵ Lire depuis cette diapositive (⌘↩) ¦ ⏵ Bu slayttan oynat (⌘↩)
+🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ 🎤 Tam ekran + sunucu penceresi (notlar, sonraki, kronometre)
+⤓ Exporter (PDF, PNG, vidéo, fichier) ¦ ⤓ Dışa aktar (PDF, PNG, video, dosya)
+⧉ Dupliquer la diapositive (pour un déplacement magique) ¦ ⧉ Slaytı çoğalt (sihirli geçiş için)
+👁 Sauter / ne plus sauter à la lecture ¦ 👁 Oynatmada atla / artık atlama
+§ Commencer une section (un groupe de diapositives) ici ¦ § Burada bir bölüm (slayt grubu) başlat
+🗑 Supprimer la diapositive ¦ 🗑 Slaytı sil
+‹ Diapositive précédente (Page précédente) ¦ ‹ Önceki slayt (Page Up)
+› Diapositive suivante (Page suivante) ¦ › Sonraki slayt (Page Down)
+=élément copié ¦ öğe kopyalandı|öğe kopyalandı
+=coude ¦ dirsek|dirsek
+=dessin choisi ¦ çizim seçildi|çizim seçildi
+=association ¦ bağlantı|bağlantı
+=élément absent ici ¦ öğe burada yok|öğe burada yok
+=confirmée ¦ onaylandı|onaylandı
+=fausse ¦ yanlış|yanlış
+=note posée ¦ not kondu|not kondu
+=animation ¦ animasyon|animasyon
+=sautée ¦ atlandı|atlandı
+=diapositive ajoutée ¦ slayt eklendi|slayt eklendi
+=image illisible laissée ¦ okunamayan görüntü dışarıda bırakıldı|okunamayan görüntü dışarıda bırakıldı
+=image reprise ¦ görüntü alındı|görüntü alındı
+=diapositive importée ¦ slayt içe aktarıldı|slayt içe aktarıldı
+Arrondi par défaut des éléments arrondis ¦ Yuvarlatılmış öğelerin varsayılan yuvarlaklığı
+Formules ¦ Formüller
+Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille. ¦ <code>=</code> ile başla: <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (yaş), <code>="metin"</code>. Bir hücreye bir tablo parçası (Excel, Numbers) yapıştır: ızgaraya yerleşir.
+⏺ Vidéo ¦ ⏺ Video
+Hexagone ¦ Altıgen
+Bulle ¦ Konuşma balonu
+Cœur ¦ Kalp
+⧉ Copie ¦ ⧉ Kopya
+forme|Rectangle ¦ Dikdörtgen
+forme|Rectangle arrondi ¦ Yuvarlak köşeli dikdörtgen
+forme|Ovale ¦ Oval
+forme|Triangle ¦ Üçgen
+forme|Triangle rectangle ¦ Dik üçgen
+forme|Losange ¦ Eşkenar dörtgen
+forme|Pentagone ¦ Beşgen
+forme|Hexagone ¦ Altıgen
+forme|Étoile ¦ Yıldız
+forme|Bulle ¦ Konuşma balonu
+forme|Nuage ¦ Bulut
+forme|Flèche ¦ Ok
+forme|Double flèche ¦ Çift ok
+forme|Étiquette ¦ Etiket
+forme|Parallélogramme ¦ Paralelkenar
+forme|Trapèze ¦ Yamuk
+forme|Losange plat ¦ Basık eşkenar dörtgen
+forme|Pilule ¦ Hap
+forme|Cylindre ¦ Silindir
+forme|Cube ¦ Küp
+forme|Pavé ¦ Kutu
+forme|Pyramide ¦ Piramit
+forme|Cône ¦ Koni
+forme|Tétraèdre ¦ Dörtyüzlü
+forme|Heptagone ¦ Yedigen
+forme|Octogone ¦ Sekizgen
+forme|Décagone ¦ Ongen
+forme|Dodécagone ¦ Onikigen
+forme|Anneau ¦ Halka
+forme|Demi-cercle ¦ Yarım daire
+forme|Quart de cercle ¦ Çeyrek daire
+forme|Cadre ¦ Çerçeve
+forme|Équerre ¦ L biçimi
+forme|Chevron ¦ Şerit oku
+forme|Sablier ¦ Kum saati
+forme|forme ¦ şekil
+forme|Arche ¦ Kemer
+forme|Flèche à gauche ¦ Sol ok
+forme|Flèche en haut ¦ Yukarı ok
+forme|Flèche en bas ¦ Aşağı ok
+forme|Double flèche verticale ¦ Dikey çift ok
+forme|Quatre directions ¦ Dört yön
+forme|Flèche à encoche ¦ Çentikli ok
+forme|Flèche courbe ¦ Kavisli ok
+forme|Demi-tour ¦ U dönüşü
+forme|Flèche fine ¦ İnce ok
+forme|Pavé flèche ¦ Ok bloğu
+forme|Flèche ronde ¦ Dairesel ok
+forme|Bulle ronde ¦ Yuvarlak balon
+forme|Encadré ¦ Açıklama kutusu
+forme|Pensée ¦ Düşünce
+forme|Cri ¦ Haykırış
+forme|gauche ¦ sol
+forme|Bulle carrée ¦ Kare balon
+forme|Étoile à {x} branches ¦ {x} köşeli yıldız
+forme|Éclat ¦ Patlama
+forme|Sceau ¦ Mühür
+forme|Rose des vents ¦ Rüzgâr gülü
+forme|Ruban ¦ Kurdele
+forme|Médaille ¦ Madalya
+forme|Écu ¦ Kalkan
+forme|Bannière ¦ Afiş
+forme|Cocarde ¦ Rozet
+forme|Cœur ¦ Kalp
+forme|Coche ¦ Onay işareti
+forme|Croix ¦ Çarpı
+forme|Plus ¦ Artı
+forme|Moins ¦ Eksi
+forme|Lune ¦ Ay
+forme|Éclair ¦ Şimşek
+forme|Goutte ¦ Damla
+forme|Repère ¦ İşaretçi
+forme|Drapeau ¦ Bayrak
+forme|Point d’interrogation ¦ Soru işareti
+forme|Point d’exclamation ¦ Ünlem işareti
+forme|Information ¦ Bilgi
+forme|Infini ¦ Sonsuzluk
+forme|Soleil ¦ Güneş
+forme|Signe ¦ İşaret
+forme|Arbre ¦ Ağaç
+forme|Chêne ¦ Meşe
+forme|Alliances ¦ Alyanslar
+forme|Couronne ¦ Taç
+forme|Tombe ¦ Mezar
+forme|Berceau ¦ Beşik
+forme|Parchemin ¦ Parşömen
+forme|Plume ¦ Tüy kalem
+forme|Livre ¦ Kitap
+forme|Lettre ¦ Mektup
+forme|Bougie ¦ Mum
+forme|Cachet de cire ¦ Mum mühür
+forme|Fleur de lys ¦ Zambak çiçeği (fleur-de-lis)
+forme|Branche ¦ Dal
+forme|Personne ¦ Kişi
+forme|Femme ¦ Kadın
+forme|Couple ¦ Çift
+forme|Famille ¦ Aile
+forme|Enfant ¦ Çocuk
+forme|Portrait ¦ Portre
+forme|médaillon ¦ madalyon
+forme|Soldat ¦ Asker
+forme|Maison ¦ Ev
+forme|Église ¦ Kilise
+forme|Château ¦ Şato
+forme|Mairie ¦ Belediye binası
+forme|Moulin ¦ Değirmen
+forme|Bateau ¦ Tekne
+forme|Usine ¦ Fabrika
+forme|Montagne ¦ Dağ
+forme|Pont ¦ Köprü
+forme|Clé ¦ Anahtar
+forme|Lampe ¦ Lamba
+forme|Chaise ¦ Sandalye
+forme|Horloge ¦ Saat
+forme|Lunettes ¦ Gözlük
+forme|Parapluie ¦ Şemsiye
+forme|Ampoule ¦ Ampul
+forme|Loupe ¦ Büyüteç
+forme|Cadeau ¦ Hediye
+forme|Tasse ¦ Fincan
+forme|Appareil photo ¦ Fotoğraf makinesi
+forme|Téléphone ¦ Telefon
+forme|Crayon ¦ Kurşun kalem
+forme|Sac ¦ Çanta
+forme|Valise ¦ Bavul
+forme|Chapeau ¦ Şapka
+forme|Cloche ¦ Çan
+forme|Ancre ¦ Çapa
+forme|Feuille ¦ Yaprak
+forme|Fleur ¦ Çiçek
+forme|Sapin ¦ Köknar
+forme|Vague ¦ Dalga
+forme|Poisson ¦ Balık
+forme|Oiseau ¦ Kuş
+forme|Flocon ¦ Kar tanesi
+forme|Pomme ¦ Elma
+forme|Champignon ¦ Mantar
+forme|Patte ¦ Pati
+forme|Anneau fin ¦ İnce halka
+forme|Anneau épais ¦ Kalın halka
+forme|Deux anneaux ¦ İki halka
+forme|Cadre fin ¦ İnce çerçeve
+forme|Cadre arrondi ¦ Yuvarlak köşeli çerçeve
+forme|Médaillon ¦ Madalyon
+forme|Ovale vertical ¦ Dikey oval
+forme|Ovale horizontal ¦ Yatay oval
+forme|Croissant fin ¦ İnce hilal
+forme|Goutte inversée ¦ Ters damla
+forme|Deux cœurs ¦ İki kalp
+forme|Croix grecque ¦ Yunan haçı
+forme|Croix de Malte ¦ Malta haçı
+forme|Croix de Lorraine ¦ Lorraine haçı
+forme|Croix orthodoxe ¦ Ortodoks haçı
+forme|Bannière ondulée ¦ Dalgalı afiş
+forme|Phylactère ¦ Yazı şeridi
+forme|Étiquette ronde ¦ Yuvarlak etiket
+forme|Bulle ovale ¦ Oval balon
+forme|droite ¦ sağ
+forme|Petite pensée ¦ Küçük düşünce
+forme|Quart de disque ¦ Çeyrek disk
+forme|Tiers de disque ¦ Üçte bir disk
+forme|Demi-disque ¦ Yarım disk
+forme|Deux tiers de disque ¦ Üçte iki disk
+forme|Trois quarts de disque ¦ Dörtte üç disk
+forme|Camembert ¦ Pasta grafik
+forme|Polygone à {x} côtés ¦ {x} kenarlı çokgen
+forme|Étoile fine à {x} branches ¦ {x} köşeli ince yıldız
+forme|Étoile ronde à {x} branches ¦ {x} köşeli yuvarlak yıldız
+forme|Quart d’anneau ¦ Çeyrek halka
+forme|Demi-anneau ¦ Yarım halka
+forme|Trois quarts d’anneau ¦ Dörtte üç halka
+forme|Arbre généalogique ¦ Soy ağacı
+forme|Arborescence ¦ Ağaç yapısı
+forme|Organigramme ¦ Organizasyon şeması
+forme|Liens ¦ Bağlantılar
+forme|Groupe de personnes ¦ İnsan grubu
+forme|Homme et femme ¦ Erkek ve kadın
+forme|Parents et enfant ¦ Anne baba ve çocuk
+forme|Deux femmes ¦ İki kadın
+forme|Deux hommes ¦ İki erkek
+forme|Mère et fille ¦ Anne ve kız
+forme|Père et fils ¦ Baba ve oğul
+forme|Mère et fils ¦ Anne ve oğul
+forme|Père et fille ¦ Baba ve kız
+forme|Visage de bébé ¦ Bebek yüzü
+forme|Bébé ¦ Bebek
+forme|Landau ¦ Bebek arabası
+forme|Biberon ¦ Biberon
+forme|Femme enceinte ¦ Hamile kadın
+forme|Bague ¦ Yüzük
+forme|Cœurs ¦ Kalpler
+forme|Foyer ¦ Yuva
+forme|Personne aimée ¦ Sevilen kişi
+forme|Main et cœur ¦ El ve kalp
+forme|Symbole masculin ¦ Erkek simgesi
+forme|Symbole féminin ¦ Kadın simgesi
+forme|Symbole couple ¦ Çift simgesi
+forme|Pierre tombale ¦ Mezar taşı
+forme|Cercueil ¦ Tabut
+forme|Tulipe ¦ Lale
+forme|Coquelicot ¦ Gelincik
+forme|Croix latine ¦ Latin haçı
+forme|Croix celtique ¦ Kelt haçı
+forme|Bible ¦ İncil
+forme|Certificat ¦ Sertifika
+forme|Parchemin écrit ¦ Yazılı parşömen
+forme|Plume à encre ¦ Mürekkepli tüy kalem
+forme|Tampon ¦ Damga
+forme|Passeport ¦ Pasaport
+forme|Carte d’identité ¦ Kimlik kartı
+forme|Carte et loupe ¦ Harita ve büyüteç
+forme|Document cherché ¦ Aranan belge
+forme|Frise du temps ¦ Zaman şeridi
+forme|Histoire ¦ Tarih
+forme|Diaphragme ¦ Diyafram
+forme|Cadre photo ¦ Fotoğraf çerçevesi
+forme|Miroir ovale ¦ Oval ayna
+forme|Blason couronné ¦ Taçlı arma
+forme|Tour ¦ Kule
+forme|Père et enfant ¦ Baba ve çocuk
+forme|Deux mères et enfant ¦ İki anne ve çocuk
+forme|Deux pères et enfant ¦ İki baba ve çocuk
+forme|Amour maternel ¦ Anne sevgisi
+forme|Mère qui allaite ¦ Emziren anne
+forme|Poussette ¦ Puset
+forme|Table à langer ¦ Alt değiştirme masası
+forme|contour ¦ dış hat
+forme|Adulte et enfant ¦ Yetişkin ve çocuk
+forme|rond ¦ yuvarlak
+forme|Tuteur ¦ Vasi
+forme|Deux personnes ¦ İki kişi
+forme|Maison familiale ¦ Aile evi
+forme|Registre de personnes ¦ Kişi kütüğü
+forme|Date d’une personne ¦ Bir kişinin tarihi
+forme|Fiche individuelle ¦ Bireysel kart
+forme|Dossier de personne ¦ Kişi dosyası
+forme|Acte certifié ¦ Onaylı belge
+forme|Cœur dans un carré ¦ Kare içinde kalp
+forme|Cœur rond ¦ Yuvarlak kalp
+forme|Livre de famille ¦ Aile cüzdanı
+forme|variante ¦ varyant
+forme|Symbole non binaire ¦ İkili olmayan simgesi
+forme|Taille d’un homme ¦ Bir erkeğin boyu
+forme|Album photo ¦ Fotoğraf albümü
+forme|Photos ¦ Fotoğraflar
+forme|Photo instantanée ¦ Anlık fotoğraf
+forme|Portrait photo ¦ Portre fotoğrafı
+forme|Dossier de photos ¦ Fotoğraf klasörü
+forme|Frise ¦ Zaman şeridi
+forme|Frise commentée ¦ Açıklamalı zaman şeridi
+forme|Diagramme chronologique ¦ Kronolojik grafik
+forme|Arbre en blocs ¦ Blok ağaç
+forme|Relation un à plusieurs ¦ Bire çok ilişki
+forme|Relation un à un ¦ Bire bir ilişki
+forme|Couronne ronde ¦ Yuvarlak taç
+forme|Blason à l’épée ¦ Kılıçlı arma
+forme|Blason à la croix ¦ Haçlı arma
+forme|Écu parti ¦ Dikey bölünmüş kalkan
+forme|Croix de Bolnissi ¦ Bolnisi haçı
+forme|Crâne ¦ Kafatası
+forme|Parchemin et clé ¦ Parşömen ve anahtar
+forme|Sceau rond ¦ Yuvarlak mühür
+forme|Coffre au trésor ¦ Hazine sandığı
+forme|Coffre-fort ¦ Kasa
+forme|Coffre-fort carré ¦ Kare kasa
+forme|Poignée de main ¦ El sıkışma
+forme|Miroir rectangulaire ¦ Dikdörtgen ayna
+forme|Homme ¦ Erkek
+forme|Personne âgée ¦ Yaşlı kişi
+forme|Bras levés ¦ Kollar havada
+forme|Salut ¦ Selam
+forme|Fauteuil roulant ¦ Tekerlekli sandalye
+forme|Marcheur ¦ Yürüyen kişi
+forme|Coureur ¦ Koşucu
+forme|Instituteur ¦ Öğretmen
+forme|Silhouette ¦ Siluet
+forme|Homme en cravate ¦ Kravatlı erkek
+forme|Cow-boy ¦ Kovboy
+forme|Ouvrier ¦ İşçi
+forme|Chapeau et cravate ¦ Şapka ve kravat
+forme|Insigne de police ¦ Polis rozeti
+forme|Visage d’homme ¦ Erkek yüzü
+forme|Visage de femme ¦ Kadın yüzü
+forme|Profil d’homme ¦ Erkek profili
+forme|Profil de femme ¦ Kadın profili
+forme|Moustache ¦ Bıyık
+forme|Main qui salue ¦ El sallayan el
+forme|Main ¦ El
+forme|Mains jointes ¦ Kavuşturulmuş eller
+forme|Empreinte de pied ¦ Ayak izi
+forme|File de personnes ¦ İnsan kuyruğu
+forme|Bras baissés ¦ Kollar aşağıda
+forme|Danseuse ¦ Dansçı
+forme|Personne non binaire ¦ İkili olmayan kişi
+forme|Personne en trottinette ¦ Scooter’lı kişi
+forme|Personne au déambulateur ¦ Yürüteçli kişi
+forme|Personne à canne blanche ¦ Beyaz bastonlu kişi
+forme|Présentation au tableau ¦ Tahta başında sunum
+forme|Foule ¦ Kalabalık
+forme|Groupe ¦ Grup
+forme|Silhouette ronde ¦ Yuvarlak siluet
+forme|Silhouette encadrée ¦ Çerçeveli siluet
+forme|Portraits ¦ Portreler
+forme|Femme d’affaires ¦ İş kadını
+forme|Orateur ¦ Konuşmacı
+forme|Personne qui parle ¦ Konuşan kişi
+forme|Écolier ¦ Öğrenci
+forme|Personne blessée ¦ Yaralı kişi
+forme|Personne remarquable ¦ Önemli kişi
+forme|Personne inconnue ¦ Bilinmeyen kişi
+forme|Recherche de personne ¦ Kişi arama
+forme|Ajouter une personne ¦ Kişi ekle
+forme|Musicien ¦ Müzisyen
+forme|Départ d’une personne ¦ Ayrılan kişi
+forme|Arrivée d’une personne ¦ Gelen kişi
+forme|Détails de la personne ¦ Kişinin ayrıntıları
+forme|Homme élégant ¦ Şık erkek
+forme|Femme élégante ¦ Şık kadın
+forme|Masque de protection ¦ Koruyucu maske
+forme|Tête ¦ Baş
+forme|Pensée amoureuse ¦ Sevgi dolu düşünce
+forme|Idée en tête ¦ Akılda bir fikir
+forme|Question en tête ¦ Akılda bir soru
+forme|Main gauche ¦ Sol el
+forme|Paume gauche ¦ Sol avuç
+forme|Paume droite ¦ Sağ avuç
+forme|Applaudissements ¦ Alkış
+forme|D’accord ¦ Tamam
+forme|main ¦ el
+forme|Victoire ¦ Zafer
+forme|Index levé ¦ Kalkık işaret parmağı
+forme|Index vers la droite ¦ Sağı gösteren işaret parmağı
+forme|Main tendue ¦ Uzatılmış el
+forme|Lavage des mains ¦ El yıkama
+forme|Main et pièce ¦ El ve madenî para
+forme|Biceps ¦ Pazı kası
+forme|Langue des signes ¦ İşaret dili
+forme|Empreintes de pas ¦ Ayak izleri
+forme|Méditation ¦ Meditasyon
+forme|Yoga ¦ Yoga
+forme|Promeneur au parc ¦ Parkta yürüyüşçü
+forme|Voleur ¦ Hırsız
+forme|Ninja ¦ Ninja
+forme|Incognito ¦ Gizli
+forme|Pirate ¦ Korsan
+forme|Médecin ¦ Doktor
+forme|Chien ¦ Köpek
+forme|Chien de profil ¦ Profilden köpek
+forme|Chien guide ¦ Rehber köpek
+forme|Chat ¦ Kedi
+forme|Cheval ¦ At
+forme|Cheval au galop ¦ Dörtnala koşan at
+forme|Cavalier ¦ Binici
+forme|Fer à cheval ¦ Nal
+forme|Vache ¦ İnek
+forme|Cochon ¦ Domuz
+forme|Mouton ¦ Koyun
+forme|Lapin ¦ Tavşan
+forme|Rongeur ¦ Kemirgen
+forme|Éléphant ¦ Fil
+forme|Kangourou ¦ Kanguru
+forme|Koala ¦ Koala
+forme|Panda ¦ Panda
+forme|Manchot ¦ Penguen
+forme|Chouette ¦ Baykuş
+forme|Canard ¦ Ördek
+forme|Dinde ¦ Hindi
+forme|Œuf ¦ Yumurta
+forme|Dauphin ¦ Yunus
+forme|Aileron de requin ¦ Köpekbalığı yüzgeci
+forme|Méduse ¦ Denizanası
+forme|Escargot ¦ Salyangoz
+forme|Papillon ¦ Kelebek
+forme|Abeille ¦ Arı
+forme|Coccinelle ¦ Uğur böceği
+forme|Araignée ¦ Örümcek
+forme|Insecte ¦ Böcek
+forme|Serpent ¦ Yılan
+forme|Tortue ¦ Deniz kaplumbağası
+forme|Tortue terrestre ¦ Kara kaplumbağası
+forme|Licorne ¦ Tek boynuzlu at
+forme|Os ¦ Kemik
+forme|Âne ¦ Eşek
+forme|Chauve-souris ¦ Yarasa
+forme|Toile d’araignée ¦ Örümcek ağı
+forme|Requin ¦ Köpekbalığı
+forme|Abeille et fleur ¦ Arı ve çiçek
+forme|Apiculteur ¦ Arıcı
+forme|Bocal à poisson ¦ Balık kavanozu
+forme|Araignée au fil ¦ İpe asılı örümcek
+forme|Cheval rapide ¦ Hızlı at
+forme|Chien interdit ¦ Köpek yasak
+forme|Os barré ¦ Üstü çizili kemik
+forme|Arbre feuillu ¦ Yapraklı ağaç
+forme|Conifère ¦ İğne yapraklı ağaç
+forme|Palmier ¦ Palmiye
+forme|Cactus ¦ Kaktüs
+forme|Pousse ¦ Filiz
+forme|Graine ¦ Tohum
+forme|Feuille d’érable ¦ Akçaağaç yaprağı
+forme|Trèfle ¦ Yonca
+forme|Fleur et pollen ¦ Çiçek ve polen
+forme|Herbe ¦ Çimen
+forme|Épi de blé ¦ Buğday başağı
+forme|Maïs ¦ Mısır
+forme|Cerises ¦ Kiraz
+forme|Raisin ¦ Üzüm
+forme|Poire ¦ Armut
+forme|Pastèque ¦ Karpuz
+forme|Carotte ¦ Havuç
+forme|Relief ¦ Arazi
+forme|Montagnes ¦ Dağlar
+forme|Volcan ¦ Yanardağ
+forme|Île ¦ Ada
+forme|Vagues ¦ Dalgalar
+forme|Eau ¦ Su
+forme|Feu ¦ Ateş
+forme|Terre ¦ Dünya
+forme|Globe ¦ Küre
+forme|Boussole ¦ Pusula
+forme|Carte ¦ Harita
+forme|Hameau ¦ Mezra
+forme|Forêt ¦ Orman
+forme|Bosquet ¦ Koru
+forme|Ruche ¦ Arı kovanı
+forme|Incendie de forêt ¦ Orman yangını
+forme|Semis ¦ Fide
+forme|Feuille ronde ¦ Yuvarlak yaprak
+forme|Ananas ¦ Ananas
+forme|Houblon ¦ Şerbetçiotu
+forme|Chanvre ¦ Kenevir
+forme|Compost ¦ Kompost
+forme|Fleur de lotus ¦ Nilüfer çiçeği
+forme|Champs ¦ Tarlalar
+forme|Parcelles ¦ Parseller
+forme|Parcelle ronde ¦ Yuvarlak parsel
+forme|Parcelle repérée ¦ İşaretli parsel
+forme|Sillons horizontaux ¦ Yatay karıklar
+forme|Glissement de terrain ¦ Toprak kayması
+forme|Cascade ¦ Şelale
+forme|Raz-de-marée ¦ Tsunami
+forme|Marée montante ¦ Yükselen gelgit
+forme|Humidité ¦ Nem
+forme|Puits ¦ Kuyu
+forme|Pompe à eau ¦ Su pompası
+forme|Fleur stylisée ¦ Stilize çiçek
+forme|Légende de carte ¦ Harita açıklaması
+forme|Lieu ¦ Yer
+forme|rayon ¦ yarıçap
+forme|Plusieurs lieux ¦ Birkaç yer
+forme|Distance entre lieux ¦ Yerler arası mesafe
+forme|Lieu d’une personne ¦ Bir kişinin yeri
+forme|Lieu important ¦ Önemli yer
+forme|Lieu inconnu ¦ Bilinmeyen yer
+forme|Position GPS ¦ GPS konumu
+forme|Viseur ¦ Nişangâh
+forme|Latitude ¦ Enlem
+forme|Longitude ¦ Boylam
+forme|Sommet ¦ Zirve
+forme|Montée ¦ Tırmanış
+forme|Pente montante ¦ Yukarı eğim
+forme|Rivage ¦ Kıyı
+forme|Plage ¦ Plaj
+forme|Tunnel de culture ¦ Tünel sera
+forme|Ferme et silo ¦ Çiftlik ve silo
+forme|Silo ¦ Silo
+forme|Clôture électrique ¦ Elektrikli çit
+forme|Arrosoir ¦ Sulama kabı
+forme|Arroseur ¦ Fıskiye
+forme|Râteau ¦ Tırmık
+forme|Fourche à foin ¦ Yaba
+forme|Faucille ¦ Orak
+forme|Tondeuse ¦ Çim biçme makinesi
+forme|Nuit ¦ Gece
+forme|Éclaircies ¦ Yer yer güneşli
+forme|Nuageux ¦ Bulutlu
+forme|Pluie ¦ Yağmur
+forme|Averse ¦ Sağanak
+forme|Neige ¦ Kar
+forme|Orage ¦ Fırtına
+forme|Vent ¦ Rüzgâr
+forme|Brouillard ¦ Sis
+forme|Grêle ¦ Dolu
+forme|Coucher de soleil ¦ Gün batımı
+forme|Thermomètre ¦ Termometre
+forme|Croissant de lune ¦ Hilal
+forme|Pleine lune ¦ Dolunay
+forme|Étoile filante ¦ Kayan yıldız
+forme|Scintillement ¦ Pırıltı
+forme|Ouragan ¦ Kasırga
+forme|Tornade ¦ Hortum
+forme|Tempête de sable ¦ Kum fırtınası
+forme|Brume ¦ Pus
+forme|Orage pluvieux ¦ Yağmurlu gök gürültülü fırtına
+forme|Orage et éclaircies ¦ Fırtına ve yer yer güneş
+forme|Averses et éclaircies ¦ Sağanak ve yer yer güneş
+forme|Neige et éclaircies ¦ Kar ve yer yer güneş
+forme|Pluie et neige ¦ Yağmur ve kar
+forme|Fortes chutes de neige ¦ Yoğun kar yağışı
+forme|Neige mêlée de pluie ¦ Karla karışık yağmur
+forme|Nuit nuageuse ¦ Bulutlu gece
+forme|Vent fort ¦ Kuvvetli rüzgâr
+forme|Lever du soleil ¦ Gün doğumu
+forme|Coucher du soleil ¦ Gün batımı
+forme|Coucher de lune ¦ Ay batımı
+forme|Canicule ¦ Kavurucu sıcak
+forme|Nuages ¦ Bulutlar
+forme|Vague de chaleur ¦ Sıcak hava dalgası
+forme|Arc-en-ciel ¦ Gökkuşağı
+forme|Aurore boréale ¦ Kuzey ışıkları
+forme|Nouvelle lune ¦ Yeni ay
+forme|Premier quartier ¦ İlk dördün
+forme|Dernier quartier ¦ Son dördün
+forme|Lune décroissante ¦ Küçülen ay
+forme|Lune gibbeuse décroissante ¦ Küçülen şişkin ay
+forme|Lune gibbeuse croissante ¦ Büyüyen şişkin ay
+forme|Jour et nuit ¦ Gece ve gündüz
+forme|Soleil radieux ¦ Parlak güneş
+forme|Heure solaire ¦ Güneş saati
+forme|Soleil et flocon ¦ Güneş ve kar tanesi
+forme|Chaleur ¦ Sıcaklık
+forme|Dégel ¦ Buz çözülmesi
+forme|Grand froid ¦ Dondurucu soğuk
+forme|Bonhomme de neige ¦ Kardan adam
+forme|Température élevée ¦ Yüksek sıcaklık
+forme|Température basse ¦ Düşük sıcaklık
+forme|Degrés Celsius ¦ Santigrat derece
+forme|Parasol ¦ Güneş şemsiyesi
+forme|Manche à air ¦ Rüzgâr çorabı
+forme|Fumée ¦ Duman
+forme|Inondation ¦ Sel
+forme|Tranche de pain ¦ Ekmek dilimi
+forme|Baguette ¦ Baget
+forme|Croissant ¦ Kruvasan
+forme|Fromage ¦ Peynir
+forme|Gâteau ¦ Pasta
+forme|Gâteau d’anniversaire ¦ Doğum günü pastası
+forme|Petit gâteau ¦ Kek
+forme|Biscuit ¦ Bisküvi
+forme|Bonbon ¦ Şeker
+forme|Glace ¦ Dondurma
+forme|Pizza ¦ Pizza
+forme|Cuisse de poulet ¦ Tavuk budu
+forme|Œuf au plat ¦ Sahanda yumurta
+forme|Tasse de café ¦ Bir fincan kahve
+forme|Tasse de thé ¦ Bir fincan çay
+forme|Bouilloire ¦ Su ısıtıcısı
+forme|Marmite ¦ Tencere
+forme|Couverts ¦ Çatal bıçak
+forme|Toque ¦ Aşçı şapkası
+forme|Verre de vin ¦ Bir kadeh şarap
+forme|Bouteille de vin ¦ Şarap şişesi
+forme|Chope ¦ Bira kupası
+forme|Cocktail ¦ Kokteyl
+forme|Bière ¦ Bira
+forme|Gobelet ¦ Bardak
+forme|Agrume ¦ Narenciye
+forme|Cacahuète ¦ Yer fıstığı
+forme|Nouilles ¦ Erişte
+forme|Hamburger ¦ Hamburger
+forme|Repas ¦ Yemek
+forme|Pièce montée ¦ Katlı pasta
+forme|Sucre d’orge ¦ Baston şeker
+forme|Muffin ¦ Muffin
+forme|Bretzel ¦ Pretzel
+forme|Frites ¦ Patates kızartması
+forme|Hot-dog ¦ Sosisli sandviç
+forme|Steak ¦ Biftek
+forme|Dinde rôtie ¦ Fırında hindi
+forme|Restauration ¦ Yemek hizmeti
+forme|Plat à emporter ¦ Paket yemek
+forme|Halal ¦ Helal
+forme|Casher ¦ Koşer
+forme|Taco ¦ Taco
+forme|Pâtes ¦ Makarna
+forme|Bol de riz ¦ Bir kâse pilav
+forme|Saucisse ¦ Sosis
+forme|Poireau ¦ Pırasa
+forme|Piment fort ¦ Acı biber
+forme|Piment doux ¦ Tatlı biber
+forme|Pop-corn ¦ Patlamış mısır
+forme|Glace à l’eau ¦ Buzlu şeker
+forme|Nutrition ¦ Beslenme
+forme|Bol ¦ Kâse
+forme|Saladier ¦ Salata kâsesi
+forme|Casserole ¦ Sos tenceresi
+forme|Casserole et cuillère ¦ Tencere ve kaşık
+forme|Poêle ¦ Tava
+forme|Couverts croisés ¦ Çapraz çatal bıçak
+forme|Fourchette ¦ Çatal
+forme|Cuillère ¦ Kaşık
+forme|Cuillère de sucre ¦ Bir kaşık şeker
+forme|Salière ¦ Tuzluk
+forme|Sauce soja ¦ Soya sosu
+forme|Café à emporter ¦ Paket kahve
+forme|Cafetière ¦ Kahve demliği
+forme|Bouilloire fumante ¦ Buhar çıkan ısıtıcı
+forme|Verre d’eau ¦ Bir bardak su
+forme|Flûte à champagne ¦ Şampanya kadehi
+forme|Verre tulipe ¦ Lale kadeh
+forme|Pinte ¦ Pint
+forme|Fragile ¦ Kırılacak eşya
+forme|Bouteille de soda ¦ Gazoz şişesi
+forme|Flacon ¦ Şişe
+forme|Spiritueux ¦ Sert içkiler
+forme|Tonneau de bière ¦ Bira fıçısı
+forme|Tonneau ¦ Fıçı
+forme|Mixeur ¦ Blender
+forme|Barbecue ¦ Mangal
+forme|Œuf de Pâques ¦ Paskalya yumurtası
+forme|Maison et immeuble ¦ Ev ve apartman
+forme|Porte ¦ Kapı
+forme|Porte ouverte ¦ Açık kapı
+forme|Fenêtre ¦ Pencere
+forme|Escalier ¦ Merdiven
+forme|Cheminée ¦ Şömine
+forme|Canapé ¦ Kanepe
+forme|Lit ¦ Yatak
+forme|Lit double ¦ Çift kişilik yatak
+forme|Fauteuil ¦ Koltuk
+forme|Table ¦ Masa
+forme|Armoire ¦ Gardırop
+forme|Lampe de bureau ¦ Masa lambası
+forme|Lustre ¦ Avize
+forme|Clé ancienne ¦ Eski anahtar
+forme|Cadenas ¦ Asma kilit
+forme|Cadenas ouvert ¦ Açık asma kilit
+forme|Pendule ¦ Masa saati
+forme|Réveil ¦ Çalar saat
+forme|Ballon de fête ¦ Parti balonu
+forme|Fête ¦ Parti
+forme|Ours en peluche ¦ Oyuncak ayı
+forme|Brique de jeu ¦ Oyuncak tuğla
+forme|Cintre ¦ Askı
+forme|Fer à repasser ¦ Ütü
+forme|Machine à laver ¦ Çamaşır makinesi
+forme|Aiguille ¦ İğne
+forme|Balai ¦ Süpürge
+forme|Seau ¦ Kova
+forme|Boîte aux lettres ¦ Posta kutusu
+forme|Téléphone ancien ¦ Eski telefon
+forme|Radio ¦ Radyo
+forme|Télévision ancienne ¦ Eski televizyon
+forme|Machine à écrire ¦ Daktilo
+forme|Projecteur ¦ Projektör
+forme|Pellicule ¦ Film rulosu
+forme|Film ¦ Film
+forme|Cassette ¦ Kaset
+forme|Tourne-disque ¦ Pikap
+forme|Disque ¦ Plak
+forme|Maison ronde ¦ Yuvarlak ev
+forme|Toit ¦ Çatı
+forme|Maison éclairée ¦ Işıkları yanan ev
+forme|Quitter la maison ¦ Evden çıkmak
+forme|Entrer à la maison ¦ Eve girmek
+forme|Changement de maison ¦ Ev değiştirme
+forme|Adresse ¦ Adres
+forme|Porte fermée ¦ Kapalı kapı
+forme|Porte coulissante ¦ Sürgülü kapı
+forme|Porte coulissante ouverte ¦ Açık sürgülü kapı
+forme|Sonnette ¦ Kapı zili
+forme|Fenêtre ouverte ¦ Açık pencere
+forme|Fenêtre fermée ¦ Kapalı pencere
+forme|Balcon ¦ Balkon
+forme|Store banne ¦ Tente
+forme|Escalier montant ¦ Yukarı çıkan merdiven
+forme|Escalier descendant ¦ Aşağı inen merdiven
+forme|Ascenseur ¦ Asansör
+forme|Escalator ¦ Yürüyen merdiven
+forme|Échelle ¦ El merdiveni
+forme|Garage ¦ Garaj
+forme|Garage ouvert ¦ Açık garaj
+forme|Fauteuil club ¦ Berjer koltuk
+forme|Grand lit ¦ Büyük yatak
+forme|Lit deux places ¦ İki kişilik yatak
+forme|Lit simple ¦ Tek kişilik yatak
+forme|Lits superposés ¦ Ranza
+forme|Chaise d’écolier ¦ Okul sandalyesi
+forme|Bureau ¦ Çalışma masası
+forme|Commode ¦ Şifonyer
+forme|Buffet ¦ Büfe
+forme|Plan de travail ¦ Tezgâh
+forme|Portemanteau ¦ Portmanto
+forme|Casier ¦ Dolap
+forme|Tabouret ¦ Tabure
+forme|Banc ¦ Bank
+forme|Banc à dossier ¦ Arkalıklı bank
+forme|Tapis ¦ Halı
+forme|Lampadaire ¦ Ayaklı lamba
+forme|Grand lustre ¦ Büyük avize
+forme|Applique murale ¦ Duvar lambası
+forme|Lanterne murale ¦ Duvar feneri
+forme|Réverbère ¦ Sokak lambası
+forme|Lampe à huile ¦ Gaz lambası
+forme|Guirlande lumineuse ¦ Işık zinciri
+forme|Idée ¦ Fikir
+forme|Chandelier ¦ Şamdan
+forme|Chandelier allumé ¦ Yanan şamdan
+forme|Radiateur ¦ Kalorifer peteği
+forme|Cuisinière ¦ Ocak
+forme|Four à micro-ondes ¦ Mikrodalga fırın
+forme|Réfrigérateur ¦ Buzdolabı
+forme|Lave-vaisselle ¦ Bulaşık makinesi
+forme|Aspirateur ¦ Elektrikli süpürge
+forme|Planche à repasser ¦ Ütü masası
+forme|Robinet ¦ Musluk
+forme|Douche ¦ Duş
+forme|Baignoire ¦ Küvet
+forme|Toilettes ¦ Tuvalet
+forme|Ventilateur ¦ Vantilatör
+forme|Trousseau de clés ¦ Anahtarlık
+forme|Cloche qui sonne ¦ Çalan zil
+forme|Midi ¦ Öğle
+forme|Sablier vide ¦ Boş kum saati
+forme|Sablier plein ¦ Dolu kum saati
+forme|Cadeau ouvert ¦ Açık hediye
+forme|Boîte aux lettres ouverte ¦ Açık posta kutusu
+forme|Vaporisateur ¦ Sprey şişesi
+forme|Poubelle ¦ Çöp kutusu
+forme|Panier ¦ Sepet
+forme|Colis ¦ Koli
+forme|Diable ¦ El arabası
+forme|Caméra ancienne ¦ Eski kamera
+forme|Radio FM ¦ FM radyo
+forme|Antenne radio ¦ Radyo anteni
+forme|Radiocassette ¦ Radyolu teyp
+forme|Cassette vidéo ¦ Video kaseti
+forme|Disque compact ¦ Kompakt disk
+forme|Lecteur de disques ¦ Disk çalar
+forme|Télécopieur ¦ Faks makinesi
+forme|Télévision ¦ Televizyon
+forme|Ordinateur ancien ¦ Eski bilgisayar
+forme|Disquette ¦ Disket
+forme|Calculatrice ¦ Hesap makinesi
+forme|Boulier ¦ Abaküs
+forme|Cheminée éteinte ¦ Sönmüş şömine
+forme|Volet roulant ¦ Panjur
+forme|Volet roulant ouvert ¦ Açık panjur
+forme|Ventilateur de plafond ¦ Tavan vantilatörü
+forme|Sèche-linge ¦ Kurutma makinesi
+forme|Grille-pain ¦ Ekmek kızartma makinesi
+forme|Bain à remous ¦ Jakuzi
+forme|Chauffe-eau ¦ Şofben
+forme|Climatiseur ¦ Klima
+forme|Caméscope ¦ Video kamera
+forme|Bobine de film ¦ Film makarası
+forme|Écran de projection ¦ Projeksiyon perdesi
+forme|Talkie-walkie ¦ Telsiz
+forme|Téléphone de bureau ¦ Masa telefonu
+forme|Trois heures ¦ Saat üç
+forme|Six heures ¦ Saat altı
+forme|Neuf heures ¦ Saat dokuz
+forme|Sablier écoulé ¦ Bitmiş kum saati
+forme|Lampes ¦ Lambalar
+forme|Lampadaire torchère ¦ Torşer lamba
+forme|Carton ouvert ¦ Açık karton kutu
+forme|T-shirt ¦ Tişört
+forme|Chemise ¦ Gömlek
+forme|Chapeau feutre ¦ Fötr şapka
+forme|Chapeau rond ¦ Melon şapka
+forme|Cravate ¦ Kravat
+forme|Nœud papillon ¦ Papyon
+forme|Chaussure de ville ¦ Klasik ayakkabı
+forme|Escarpin ¦ Stiletto
+forme|Basket ¦ Spor ayakkabı
+forme|Chausson de danse ¦ Bale ayakkabısı
+forme|Lunettes de soleil ¦ Güneş gözlüğü
+forme|Diamant ¦ Elmas
+forme|Collier ¦ Kolye
+forme|Montre ¦ Kol saati
+forme|Sac à main ¦ El çantası
+forme|Portefeuille ¦ Cüzdan
+forme|Parapluie fermé ¦ Kapalı şemsiye
+forme|Ciseaux ¦ Makas
+forme|Rouge à lèvres ¦ Ruj
+forme|Sac à dos ¦ Sırt çantası
+forme|Mallette ¦ Evrak çantası
+forme|Lingerie ¦ İç çamaşırı (kadın)
+forme|Sous-vêtement ¦ İç çamaşırı
+forme|Couche ¦ Bebek bezi
+forme|Chapeau de magicien ¦ Sihirbaz şapkası
+forme|Chaussure à crampons ¦ Kramponlu ayakkabı
+forme|Chaussette de Noël ¦ Noel çorabı
+forme|Portefeuille plié ¦ Katlanmış cüzdan
+forme|Pochette de voyage ¦ Seyahat kesesi
+forme|Bagage cabine ¦ Kabin bagajı
+forme|Bagage en soute ¦ Uçak altı bagajı
+forme|Sac étiqueté ¦ Etiketli çanta
+forme|Mallette professionnelle ¦ İş çantası
+forme|Sèche-cheveux ¦ Saç kurutma makinesi
+forme|Rasoir de sûreté ¦ Tıraş makinesi
+forme|Lame de rasoir ¦ Jilet
+forme|Lotion ¦ Losyon
+forme|Loup ¦ Göz maskesi
+forme|Masques de théâtre ¦ Tiyatro maskeleri
+forme|Masque de Guy Fawkes ¦ Guy Fawkes maskesi
+forme|Voiture ¦ Otomobil
+forme|Voiture de profil ¦ Profilden otomobil
+forme|Cabriolet ¦ Üstü açık araba
+forme|Break ¦ Station wagon
+forme|Camionnette ¦ Kamyonet
+forme|Camion ¦ Kamyon
+forme|Fourgon ¦ Minibüs
+forme|Autobus ¦ Otobüs
+forme|Autocar ¦ Şehirlerarası otobüs
+forme|Train ¦ Tren
+forme|Locomotive ¦ Lokomotif
+forme|Tramway ¦ Tramvay
+forme|Métro ¦ Metro
+forme|Tracteur ¦ Traktör
+forme|Vélo ¦ Bisiklet
+forme|Moto ¦ Motosiklet
+forme|Trottinette ¦ Scooter
+forme|Voilier ¦ Yelkenli
+forme|Paquebot ¦ Yolcu gemisi
+forme|Gouvernail ¦ Dümen
+forme|Avion ¦ Uçak
+forme|Décollage ¦ Kalkış
+forme|Montgolfière ¦ Sıcak hava balonu
+forme|Fusée ¦ Roket
+forme|Fusée au départ ¦ Roket fırlatma
+forme|Caravane ¦ Karavan
+forme|Camping-car ¦ Motokaravan
+forme|Station-service ¦ Benzin istasyonu
+forme|Feu tricolore ¦ Trafik ışığı
+forme|Panneau de direction ¦ Yön levhası
+forme|Route ¦ Yol
+forme|Itinéraire ¦ Güzergâh
+forme|Brouette ¦ El arabası
+forme|Volant ¦ Direksiyon
+forme|Voiture de dos ¦ Arkadan otomobil
+forme|Voiture compacte ¦ Küçük otomobil
+forme|Voiture de sport ¦ Spor araba
+forme|Limousine ¦ Limuzin
+forme|Voiture électrique ¦ Elektrikli otomobil
+forme|Siège auto ¦ Araba koltuğu
+forme|Siège enfant ¦ Çocuk koltuğu
+forme|Lavage auto ¦ Oto yıkama
+forme|Garagiste ¦ Tamirci
+forme|Taxi ¦ Taksi
+forme|Jeepney ¦ Jeepney
+forme|Camion de livraison ¦ Teslimat kamyonu
+forme|Livraison rapide ¦ Hızlı teslimat
+forme|Semi-remorque ¦ Tır
+forme|Camion plateau ¦ Düz kasa kamyon
+forme|Camion-citerne ¦ Tanker
+forme|Dépanneuse ¦ Çekici
+forme|Benne ¦ Damperli kamyon
+forme|Minibus ¦ Minibüs
+forme|Bus scolaire ¦ Okul otobüsü
+forme|Bus à impériale ¦ Çift katlı otobüs
+forme|Arrêt de bus ¦ Otobüs durağı
+forme|Train et voiture ¦ Tren ve otomobil
+forme|Train et bus ¦ Tren ve otobüs
+forme|Voiture de voyageurs ¦ Yolcu vagonu
+forme|Fourgon de queue ¦ Son vagon
+forme|Tramway de profil ¦ Profilden tramvay
+forme|souterrain ¦ yeraltı
+forme|Télécabine ¦ Teleferik
+forme|Vélo à panier ¦ Sepetli bisiklet
+forme|Vélo cargo ¦ Yük bisikleti
+forme|Vélo électrique ¦ Elektrikli bisiklet
+forme|Grand-bi ¦ Büyük tekerlekli bisiklet
+forme|Cyclomoteur ¦ Moped
+forme|Trottinette électrique ¦ Elektrikli scooter
+forme|Pousse-pousse ¦ Çekçek
+forme|Monocycle ¦ Tek tekerlekli bisiklet
+forme|Quad ¦ ATV
+forme|Motoneige ¦ Kar motosikleti
+forme|Chariot élévateur ¦ Forklift
+forme|Pelleteuse ¦ Ekskavatör
+forme|Bulldozer ¦ Buldozer
+forme|Grue ¦ Vinç
+forme|Portique ¦ Portal vinç
+forme|Atterrissage ¦ İniş
+forme|Aéroport ¦ Havalimanı
+forme|Hélicoptère ¦ Helikopter
+forme|Drone ¦ Dron
+forme|Parachute ¦ Paraşüt
+forme|Parapente ¦ Yamaç paraşütü
+forme|Soucoupe volante ¦ Uçan daire
+forme|Satellite ¦ Uydu
+forme|Station spatiale ¦ Uzay istasyonu
+forme|Sous-marin ¦ Denizaltı
+forme|Naufrage ¦ Gemi batığı
+forme|Bouée de sauvetage ¦ Can simidi
+forme|Rame ¦ Kürek
+forme|Jetée ¦ İskele
+forme|Grue portuaire ¦ Liman vinci
+forme|Kayak ¦ Kano
+forme|Aviron ¦ Kürek sporu
+forme|Avion et voiture ¦ Uçak ve otomobil
+forme|Avion et train ¦ Uçak ve tren
+forme|Autoroute ¦ Otoyol
+forme|Route droite ¦ Düz yol
+forme|Itinéraires ¦ Güzergâhlar
+forme|Tunnel ¦ Tünel
+forme|Barrière ¦ Bariyer
+forme|Tourniquet ¦ Turnike
+forme|Cône de signalisation ¦ Trafik konisi
+forme|Panneau attention ¦ Dikkat levhası
+forme|Cédez le passage ¦ Yol ver
+forme|Poteau indicateur ¦ Yön tabelası
+forme|Panneau à vendre ¦ Satılık levhası
+forme|Directions ¦ Yönler
+forme|Parking ¦ Otopark
+forme|Borne de recharge ¦ Şarj noktası
+forme|Carburant ¦ Yakıt
+forme|Pneu ¦ Lastik
+forme|Moteur ¦ Motor
+forme|Ceinture de sécurité ¦ Emniyet kemeri
+forme|Compteur de vitesse ¦ Hız göstergesi
+forme|Correspondance ¦ Aktarma
+forme|Accessibilité ¦ Erişilebilirlik
+forme|Maison moderne ¦ Modern ev
+forme|Immeuble ¦ Apartman
+forme|Ville ¦ Şehir
+forme|Bâtiment ¦ Bina
+forme|Hôpital ¦ Hastane
+forme|École ¦ Okul
+forme|toque ¦ kep
+forme|Hôtel de ville ¦ Belediye binası
+forme|Banque ¦ Banka
+forme|Boutique ¦ Butik
+forme|Commerce ¦ Dükkân
+forme|Entrepôt ¦ Depo
+forme|Grange ¦ Ahır
+forme|Serre ¦ Sera
+forme|Clôture ¦ Çit
+forme|Portail ¦ Bahçe kapısı
+forme|Tente ¦ Çadır
+forme|Phare ¦ Deniz feneri
+forme|Phare allumé ¦ Yanan deniz feneri
+forme|Mosquée ¦ Cami
+forme|Synagogue ¦ Sinagog
+forme|Temple ¦ Tapınak
+forme|Pagode ¦ Pagoda
+forme|Stade ¦ Stadyum
+forme|Théâtre ¦ Tiyatro
+forme|Fontaine ¦ Çeşme
+forme|Colonne ¦ Sütun
+forme|Mur ¦ Duvar
+forme|Éolienne ¦ Rüzgâr türbini
+forme|Tour de guet ¦ Gözetleme kulesi
+forme|Commissariat ¦ Karakol
+forme|Poste ¦ Postane
+forme|Drapeau à damier ¦ Damalı bayrak
+forme|Immeuble repéré ¦ İşaretli bina
+forme|Changer de ville ¦ Şehir değiştir
+forme|Changer de bâtiment ¦ Bina değiştir
+forme|Bibliothèque ¦ Kütüphane
+forme|bâtiment ¦ bina
+forme|Rayonnages ¦ Raflar
+forme|Commerce ouvert {x} h ¦ {x} saat açık dükkân
+forme|Hôpital repéré ¦ İşaretli hastane
+forme|Panneau d’hôpital ¦ Hastane levhası
+forme|Terrain de football ¦ Futbol sahası
+forme|Terrain de base-ball ¦ Beyzbol sahası
+forme|Poste de secours ¦ İlk yardım noktası
+forme|Tour Eiffel ¦ Eyfel Kulesi
+forme|Grande roue ¦ Dönme dolap
+forme|Yourte ¦ Yurt (çadır)
+forme|Chalet ¦ Dağ evi
+forme|Feu de camp ¦ Kamp ateşi
+forme|Piscine ¦ Yüzme havuzu
+forme|Caserne de pompiers ¦ İtfaiye istasyonu
+forme|Panneau d’affichage ¦ Reklam panosu
+forme|Panneau d’annonces ¦ İlan panosu
+forme|Podium ¦ Kürsü
+forme|Mur en flammes ¦ Alev alan duvar
+forme|Portail ouvert ¦ Açık bahçe kapısı
+forme|Réservoir ¦ Depo tankı
+forme|Pylône électrique ¦ Elektrik direği
+forme|Turbine ¦ Türbin
+forme|Panneau solaire ¦ Güneş paneli
+forme|Grand panneau solaire ¦ Büyük güneş paneli
+forme|Barrage ¦ Baraj
+forme|Explosion nucléaire ¦ Nükleer patlama
+forme|Marteau ¦ Çekiç
+forme|Outils ¦ Aletler
+forme|Clé à molette ¦ Ayarlı anahtar
+forme|Tournevis ¦ Tornavida
+forme|Lame de scie ¦ Testere bıçağı
+forme|Scie ¦ Testere
+forme|Hache ¦ Balta
+forme|Pelle ¦ Kürek
+forme|Pioche ¦ Kazma
+forme|Enclume ¦ Örs
+forme|Clou ¦ Çivi
+forme|Boîte à outils ¦ Alet kutusu
+forme|Règle ¦ Cetvel
+forme|Crayon et règle ¦ Kalem ve cetvel
+forme|Rouleau de peinture ¦ Boya rulosu
+forme|Pinceau ¦ Fırça
+forme|Palette de peintre ¦ Ressam paleti
+forme|Stéthoscope ¦ Steteskop
+forme|Trousse médicale ¦ İlk yardım çantası
+forme|Balance ¦ Terazi
+forme|Marteau de juge ¦ Hâkim tokmağı
+forme|Billets ¦ Banknotlar
+forme|Euro ¦ Euro
+forme|Caisse ¦ Kasa
+forme|Microscope ¦ Mikroskop
+forme|Fiole ¦ Şişecik
+forme|Livre d’école ¦ Okul kitabı
+forme|Camion de pompiers ¦ İtfaiye aracı
+forme|Imprimante ¦ Yazıcı
+forme|Casque de chantier ¦ Baret
+forme|Mine ¦ Maden
+forme|Bidon d’huile ¦ Yağ bidonu
+forme|Couteau ¦ Bıçak
+forme|Outils croisés ¦ Çapraz aletler
+forme|Marteau et tournevis ¦ Çekiç ve tornavida
+forme|Marteau et faucille ¦ Orak ve çekiç
+forme|Clé à tube ¦ Lokma anahtar
+forme|Pince ¦ Pense
+forme|Scie circulaire ¦ Daire testere
+forme|Cutter ¦ Maket bıçağı
+forme|Équerre et compas ¦ Gönye ve pergel
+forme|Compas ¦ Pergel
+forme|Mètre ruban ¦ Şerit metre
+forme|Niveau à bulle ¦ Su terazisi
+forme|Vis à tête plate ¦ Düz başlı vida
+forme|Vis à tête ronde ¦ Yuvarlak başlı vida
+forme|Boulon ¦ Cıvata
+forme|Écrou ¦ Somun
+forme|Rivet ¦ Perçin
+forme|Fer à souder ¦ Havya
+forme|Bêche ¦ Bel küreği
+forme|Hache de guerre ¦ Savaş baltası
+forme|Crayon à papier ¦ Kurşun kalem
+forme|Bombe de peinture ¦ Sprey boya
+forme|Pot de peinture ¦ Boya kutusu
+forme|Pipette ¦ Pipet
+forme|Dessin ¦ Çizim
+forme|Plume de dessin ¦ Çizim kalemi
+forme|Balance de cuisine ¦ Mutfak terazisi
+forme|Balance déséquilibrée ¦ Dengesiz terazi
+forme|Pèse-personne ¦ Banyo tartısı
+forme|Poids ¦ Ağırlık
+forme|Lingots d’or ¦ Altın külçeler
+forme|Liasses de billets ¦ Banknot desteleri
+forme|Tirelire ¦ Kumbara
+forme|Livre sterling ¦ İngiliz sterlini
+forme|Franc ¦ Frank
+forme|Yen ¦ Yen
+forme|Rouble ¦ Ruble
+forme|Roupie indienne ¦ Hint rupisi
+forme|Chéquier ¦ Çek defteri
+forme|Carte bancaire ¦ Banka kartı
+forme|Chariot de courses ¦ Alışveriş arabası
+forme|Sac de courses ¦ Alışveriş çantası
+forme|Soldes ¦ İndirim
+forme|Reçu ¦ Fiş
+forme|Télescope ¦ Teleskop
+forme|Bécher ¦ Beher
+forme|Ballon de chimie ¦ Kimya balonu
+forme|Éprouvette ¦ Deney tüpü
+forme|Atome ¦ Atom
+forme|Molécule ¦ Molekül
+forme|Tableau périodique ¦ Periyodik tablo
+forme|Lunettes de protection ¦ Koruyucu gözlük
+forme|Menottes ¦ Kelepçe
+forme|Extincteur ¦ Yangın söndürücü
+forme|Bouche d’incendie ¦ Yangın musluğu
+forme|Pupitre ¦ Kürsü
+forme|Présentation ¦ Sunum
+forme|Présentation projetée ¦ Yansıtılan sunum
+forme|Courrier ¦ Posta
+forme|Musique ¦ Müzik
+forme|Note de musique ¦ Nota
+forme|Clé de sol ¦ Sol anahtarı
+forme|Piano ¦ Piyano
+forme|Guitare ¦ Gitar
+forme|Violon ¦ Keman
+forme|Trompette ¦ Trompet
+forme|Saxophone ¦ Saksafon
+forme|Clairon ¦ Borazan
+forme|Micro ancien ¦ Eski mikrofon
+forme|Casque audio ¦ Kulaklık
+forme|Roi ¦ Şah
+forme|échecs ¦ satranç
+forme|Dame ¦ Vezir
+forme|Fou ¦ Fil
+forme|Pion ¦ Piyon
+forme|Cartes à jouer ¦ Oyun kâğıtları
+forme|cartes ¦ kâğıtlar
+forme|Pique ¦ Maça
+forme|Carreau ¦ Karo
+forme|Dé ¦ Zar
+forme|Puzzle ¦ Yapboz
+forme|Cerf-volant ¦ Uçurtma
+forme|Ballon de football ¦ Futbol topu
+forme|Ballon de basket ¦ Basketbol topu
+forme|Tennis ¦ Tenis
+forme|Ballon de rugby ¦ Rugby topu
+forme|Cycliste ¦ Bisikletçi
+forme|Nageur ¦ Yüzücü
+forme|Skieur ¦ Kayakçı
+forme|Coupe ¦ Kupa
+forme|Trophée ¦ Ödül kupası
+forme|Ticket ¦ Bilet
+forme|Clap de cinéma ¦ Klaket
+forme|Nuancier ¦ Renk kartelası
+forme|Livre ouvert ¦ Açık kitap
+forme|Manette ¦ Oyun kumandası
+forme|Guitare électrique ¦ Elektro gitar
+forme|Médiator ¦ Pena
+forme|Ocarina ¦ Okarina
+forme|instrument ¦ çalgı
+forme|Métronome ¦ Metronom
+forme|Microphone ¦ Mikrofon
+forme|Amplificateur ¦ Amplifikatör
+forme|Enceinte ¦ Hoparlör
+forme|Partition encadrée ¦ Çerçeveli nota kâğıdı
+forme|Croche ¦ Sekizlik nota
+forme|Blanche ¦ İkilik nota
+forme|Noire ¦ Dörtlük nota
+forme|Double croche ¦ On altılık nota
+forme|Ronde ¦ Birlik nota
+forme|Clé de fa ¦ Fa anahtarı
+forme|Clé d’ut ¦ Do anahtarı
+forme|Dièse ¦ Diyez
+forme|musique ¦ müzik
+forme|Bémol ¦ Bemol
+forme|Bécarre ¦ Natürel
+forme|Pause ¦ Birlik sus
+forme|Demi-pause ¦ İkilik sus
+forme|Soupir ¦ Dörtlük sus
+forme|Demi-soupir ¦ Sekizlik sus
+forme|Recueil de chansons ¦ Şarkı kitabı
+forme|Écouteurs ¦ Kulak içi kulaklık
+forme|Danse de salon ¦ Salon dansı
+forme|Billet ¦ Bilet
+forme|Jeu de cartes ¦ İskambil destesi
+forme|Carte de cœur ¦ Kupa kartı
+forme|Carte de pique ¦ Maça kartı
+forme|Carte de trèfle ¦ Sinek kartı
+forme|Carte de carreau ¦ Karo kartı
+forme|Jeton de poker ¦ Poker fişi
+forme|Machine à sous ¦ Kumar makinesi
+forme|Dés ¦ Zarlar
+forme|Dé à vingt faces ¦ Yirmi yüzlü zar
+forme|Damier ¦ Dama tahtası
+forme|Pièce de puzzle et cœur ¦ Yapboz parçası ve kalp
+forme|Tangram ¦ Tangram
+forme|Moulin à vent ¦ Yel değirmeni
+forme|jouet ¦ oyuncak
+forme|Bascule ¦ Tahterevalli
+forme|jeu ¦ oyun
+forme|Toboggan ¦ Kaydırak
+forme|Boule de cristal ¦ Kristal küre
+forme|Baguette magique ¦ Sihirli değnek
+forme|Feu d’artifice ¦ Havai fişek
+forme|Bowling ¦ Bowling
+forme|Billard ¦ Bilardo
+forme|Triangle de billard ¦ Bilardo üçgeni
+forme|Golf ¦ Golf
+forme|Balle de base-ball ¦ Beyzbol topu
+forme|Batte de base-ball ¦ Beyzbol sopası
+forme|Panier de basket ¦ Basketbol potası
+forme|Ballon de volley ¦ Voleybol topu
+forme|Ballon de football américain ¦ Amerikan futbolu topu
+forme|Casque de football américain ¦ Amerikan futbolu kaskı
+forme|Balle de tennis ¦ Tenis topu
+forme|Badminton ¦ Badminton
+forme|Tennis de table ¦ Masa tenisi
+forme|Crosses de hockey ¦ Hokey sopaları
+forme|Handball ¦ Hentbol
+forme|Polo ¦ Polo
+forme|Curling ¦ Curling
+forme|Arc et flèche ¦ Yay ve ok
+forme|Flèche dans la cible ¦ Hedefteki ok
+forme|Cible de tir ¦ Atış hedefi
+forme|Escrime ¦ Eskrim
+forme|Karaté ¦ Karate
+forme|Gant de boxe ¦ Boks eldiveni
+forme|Gymnastique ¦ Jimnastik
+forme|Haltérophile ¦ Halterci
+forme|Haltère ¦ Dambıl
+forme|Corde à sauter ¦ Atlama ipi
+forme|Sprinteur ¦ Sprinter
+forme|Randonneur ¦ Yürüyüşçü
+forme|Ski de fond ¦ Kros kayağı
+forme|Ski nautique ¦ Su kayağı
+forme|Planche à neige ¦ Snowboard
+forme|Raquettes à neige ¦ Kar ayakkabıları
+forme|Luge ¦ Kızak
+forme|Patin à glace ¦ Buz pateni
+forme|Patin à roulettes ¦ Paten
+forme|Roller en ligne ¦ Sıralı paten
+forme|Planche à roulettes ¦ Kaykay
+forme|Skateur ¦ Kaykaycı
+forme|Surfeur ¦ Sörfçü
+forme|Plongeur ¦ Dalgıç
+forme|Plongée sous-marine ¦ Tüplü dalış
+forme|Masque de plongée ¦ Dalış maskesi
+forme|Tuba ¦ Şnorkel
+forme|Casque de course ¦ Yarış kaskı
+forme|Sifflet ¦ Düdük
+forme|Tableau des scores ¦ Skor tabelası
+forme|Médaille d’or ¦ Altın madalya
+forme|Trophée brisé ¦ Kırık kupa
+forme|Tournoi ¦ Turnuva
+forme|Flambeau ¦ Meşale
+forme|Jumelles ¦ Dürbün
+forme|Panorama ¦ Panorama
+forme|un ¦ bir
+forme|deux ¦ iki
+forme|trois ¦ üç
+forme|quatre ¦ dört
+forme|six ¦ altı
+forme|cinéma ¦ sinema
+forme|Médaille d’argent ¦ Gümüş madalya
+forme|Médaille de bronze ¦ Bronz madalya
+forme|Cricket ¦ Kriket
+forme|Liste de chansons ¦ Şarkı listesi
+forme|Étoile de David ¦ Davut Yıldızı
+forme|Ménorah ¦ Menora
+forme|Croissant et étoile ¦ Hilal ve yıldız
+forme|Om ¦ Om
+forme|Roue du dharma ¦ Dharma çarkı
+forme|Yin et yang ¦ Yin ve yang
+forme|Paix ¦ Barış
+forme|Cœur brisé ¦ Kırık kalp
+forme|Éternité ¦ Sonsuzluk
+forme|Khanda ¦ Khanda
+forme|Ménorah allumée ¦ Yanan menora
+forme|Hexagramme ¦ Heksagram
+forme|Boule de Noël ¦ Yılbaşı süsü
+forme|Halloween ¦ Cadılar Bayramı
+forme|Citrouille ¦ Balkabağı
+forme|Document ¦ Belge
+forme|Documents ¦ Belgeler
+forme|Note écrite ¦ Yazılı not
+forme|Livres ¦ Kitaplar
+forme|Carnet ¦ Defter
+forme|Journal ¦ Günlük
+forme|Gazette ¦ Gazete
+forme|Lettre {x} ¦ Harf {x}
+forme|Timbre ¦ Pul
+forme|Archives ¦ Arşiv
+forme|Dossier ¦ Klasör
+forme|Dossier ouvert ¦ Açık klasör
+forme|Presse-papiers ¦ Pano
+forme|Calendrier ¦ Takvim
+forme|Date heureuse ¦ Mutlu tarih
+forme|Date importante ¦ Önemli tarih
+forme|Stylo ¦ Tükenmez kalem
+forme|Stylo-plume ¦ Dolma kalem
+forme|Signature ¦ İmza
+forme|Guillemet ¦ Tırnak işareti
+forme|Marque-page ¦ Kitap ayracı
+forme|Punaise ¦ Raptiye
+forme|Trombone ¦ Ataş
+forme|Post-it ¦ Yapışkan not
+forme|Bulle de message ¦ Mesaj balonu
+forme|Discussion ¦ Sohbet
+forme|Traduction ¦ Çeviri
+forme|Alphabet ¦ Alfabe
+forme|Document à modifier ¦ Düzenlenecek belge
+forme|Document signé ¦ İmzalı belge
+forme|Classeur à tiroirs ¦ Çekmeceli dosya dolabı
+forme|Document douteux ¦ Şüpheli belge
+forme|Document daté ¦ Tarihli belge
+forme|Document important ¦ Önemli belge
+forme|Document lié ¦ Bağlı belge
+forme|Partition ¦ Nota kâğıdı
+forme|Dossiers ¦ Klasörler
+forme|Dossier de la maison ¦ Evin klasörü
+forme|Dossier favori ¦ Sık kullanılan klasör
+forme|Dossier important ¦ Önemli klasör
+forme|Dossier de textes ¦ Metin klasörü
+forme|Recherche de dossier ¦ Klasör arama
+forme|Dossier daté ¦ Tarihli klasör
+forme|Dossier mystère ¦ Gizemli klasör
+forme|Recherche aux archives ¦ Arşivde araştırma
+forme|Archive précieuse ¦ Değerli arşiv
+forme|Livre ouvert vierge ¦ Boş açık kitap
+forme|pages ¦ sayfalar
+forme|Abécédaire ¦ Alfabe kitabı
+forme|Recherche dans un livre ¦ Kitapta arama
+forme|Livre daté ¦ Tarihli kitap
+forme|Livre et repère ¦ Kitap ve işaret
+forme|Livre en écriture ¦ Yazılmakta olan kitap
+forme|Marque-pages ¦ Kitap ayraçları
+forme|Carnets ¦ Defterler
+forme|Lettres ¦ Mektuplar
+forme|Bulletin ¦ Bülten
+forme|Presse-papiers vide ¦ Boş pano
+forme|Liste sur presse-papiers ¦ Panoda liste
+forme|Fiche de personne ¦ Kişi kartı
+forme|Liste validée ¦ Onaylanmış liste
+forme|Calendrier vierge ¦ Boş takvim
+forme|Mois ¦ Ay
+forme|Aujourd’hui ¦ Bugün
+forme|Période ¦ Dönem
+forme|Agenda ¦ Ajanda
+forme|Date et heure ¦ Tarih ve saat
+forme|Date inconnue ¦ Bilinmeyen tarih
+forme|Date incertaine ¦ Belirsiz tarih
+forme|Date confirmée ¦ Doğrulanmış tarih
+forme|Date de début ¦ Başlangıç tarihi
+forme|Date de fin ¦ Bitiş tarihi
+forme|Notes ¦ Notlar
+forme|Écrire une note ¦ Not yaz
+forme|Autocollant ¦ Çıkartma
+forme|Notes écrites ¦ Yazılı notlar
+forme|Pièce jointe ¦ Ek dosya
+forme|Étiquettes ¦ Etiketler
+forme|Étiquette écrite ¦ Yazılı etiket
+forme|Étiquette favorite ¦ Sık kullanılan etiket
+forme|Message écrit ¦ Yazılı mesaj
+forme|Question ¦ Soru
+forme|Conversation ¦ Konuşma
+forme|Commentaire ¦ Yorum
+forme|Commentaire écrit ¦ Yazılı yorum
+forme|Citation ¦ Alıntı
+forme|Commentaires ¦ Yorumlar
+forme|Témoignage ¦ Tanıklık
+forme|Bulle de pensée ¦ Düşünce balonu
+forme|Guillemet fermant ¦ Kapanış tırnağı
+forme|Alphabet latin ¦ Latin alfabesi
+forme|Alphabet grec ¦ Yunan alfabesi
+forme|Alphabet cyrillique ¦ Kiril alfabesi
+forme|Alphabet hébreu ¦ İbrani alfabesi
+forme|Alphabet arabe ¦ Arap alfabesi
+forme|Idéogramme ¦ İdeogram
+forme|Braille ¦ Braille
+forme|stylo ¦ kalem
+forme|Signature écrite ¦ Yazılı imza
+forme|Crayon encadré ¦ Çerçeveli kurşun kalem
+forme|Gomme ¦ Silgi
+forme|Carte de visite ¦ Kartvizit
+forme|Carte nominative ¦ İsim kartı
+forme|Répertoire ¦ Adres defteri
+forme|Fichier rotatif ¦ Döner kartotek
+forme|Passeport biométrique ¦ Biyometrik pasaport
+forme|Licence ¦ Lisans
+forme|Bulletin de vote ¦ Oy pusulası
+forme|Vote ¦ Oy
+forme|Liste à puces ¦ Madde işaretli liste
+forme|Liste numérotée ¦ Numaralı liste
+forme|Tableau ¦ Tablo
+forme|Scanner ¦ Tarayıcı
+forme|Copie ¦ Kopya
+forme|Semaine ¦ Hafta
+forme|Fin de semaine ¦ Hafta sonu
+forme|Enveloppe ¦ Zarf
+forme|Réponse ¦ Yanıt
+forme|Texte long ¦ Uzun metin
+forme|Battement de cœur ¦ Kalp atışı
+forme|Pansement ¦ Yara bandı
+forme|Croix médicale ¦ Sağlık haçı
+forme|Ambulance ¦ Ambulans
+forme|Dent ¦ Diş
+forme|Cerveau ¦ Beyin
+forme|Poumons ¦ Akciğerler
+forme|Estomac ¦ Mide
+forme|Œil ¦ Göz
+forme|Oreille ¦ Kulak
+forme|Virus ¦ Virüs
+forme|Bactérie ¦ Bakteri
+forme|ADN ¦ DNA
+forme|Mortier ¦ Havan
+forme|Tête de mort ¦ Kurukafa
+forme|Défibrillateur ¦ Defibrilatör
+forme|Pouls ¦ Nabız
+forme|Pilules ¦ Haplar
+forme|Médicament ¦ İlaç
+forme|Ordonnance ¦ Reçete
+forme|Perfusion ¦ Serum
+forme|Poche de sang ¦ Kan torbası
+forme|Diabète ¦ Diyabet
+forme|Allergie ¦ Alerji
+forme|Radiographie ¦ Röntgen
+forme|Scanner du crâne ¦ Kafatası taraması
+forme|Brosse à dents ¦ Diş fırçası
+forme|Brosse à dents et dentifrice ¦ Diş fırçası ve diş macunu
+forme|Surdité ¦ Sağırlık
+forme|Œil fermé ¦ Kapalı göz
+forme|Cécité ¦ Körlük
+forme|Dossier médical ¦ Tıbbi dosya
+forme|Reproduction ¦ Üreme
+forme|Malade ¦ Hasta
+forme|Fièvre ¦ Ateş
+forme|Mortier et pilon ¦ Havan ve tokmak
+forme|Potion de soin ¦ Şifa iksiri
+forme|Poison ¦ Zehir
+forme|Boucle auditive ¦ İşitme döngüsü
+forme|Tache de liquide ¦ Sıvı lekesi
+forme|Cœur arrêté ¦ Durmuş kalp
+forme|Véhicule sanitaire ¦ Sağlık aracı
+forme|Étoile ronde ¦ Yuvarlak yıldız
+forme|Demi-cœur ¦ Yarım kalp
+forme|Pouce levé ¦ Kalkık başparmak
+forme|Pouce baissé ¦ İnik başparmak
+forme|Validé ¦ Onaylandı
+forme|Refusé ¦ Reddedildi
+forme|Plus rond ¦ Yuvarlak artı
+forme|Moins rond ¦ Yuvarlak eksi
+forme|Question ronde ¦ Yuvarlak soru
+forme|Attention ¦ Dikkat
+forme|Alerte ¦ Uyarı
+forme|Stop ¦ Dur
+forme|Info ronde ¦ Yuvarlak bilgi
+forme|Bouclier ¦ Kalkan
+forme|Bouclier validé ¦ Onaylı kalkan
+forme|Recyclage ¦ Geri dönüşüm
+forme|Copyright ¦ Telif hakkı
+forme|Arobase ¦ Et işareti
+forme|Pourcentage ¦ Yüzde
+forme|Dollar ¦ Dolar
+forme|Pi ¦ Pi
+forme|Somme ¦ Toplam
+forme|Danger biologique ¦ Biyolojik tehlike
+forme|Radioactif ¦ Radyoaktif
+forme|Content ¦ Mutlu
+forme|Triste ¦ Üzgün
+forme|Neutre ¦ Nötr
+forme|Ravi ¦ Çok mutlu
+forme|Pleure ¦ Ağlıyor
+forme|Fâché ¦ Kızgın
+forme|Clin d’œil ¦ Göz kırpma
+forme|Bisou ¦ Öpücük
+forme|Fantôme ¦ Hayalet
+forme|Robot ¦ Robot
+forme|Hexagones ¦ Altıgenler
+forme|Cible ¦ Hedef
+forme|Mille ¦ Bin
+forme|Engrenage ¦ Dişli
+forme|Aimant ¦ Mıknatıs
+forme|Ondes ¦ Dalgalar
+forme|Bluetooth ¦ Bluetooth
+forme|Fanion ¦ Flama
+forme|Récompense ¦ Ödül
+forme|Chiffre {x} ¦ Rakam {x}
+forme|Demi-étoile ¦ Yarım yıldız
+forme|Étoile souriante ¦ Gülümseyen yıldız
+forme|Étoile encadrée ¦ Çerçeveli yıldız
+forme|Décagramme ¦ Dekagram
+forme|Octogramme ¦ Oktagram
+forme|Sceau validé ¦ Onaylı mühür
+forme|Pour et contre ¦ Artı ve eksiler
+forme|Coche épaisse ¦ Kalın onay işareti
+forme|Double coche ¦ Çift onay işareti
+forme|Croix de refus ¦ Ret çarpısı
+forme|Croix épaisse ¦ Kalın çarpı
+forme|Interdit octogonal ¦ Sekizgen yasak
+forme|Plus épais ¦ Kalın artı
+forme|Moins épais ¦ Kalın eksi
+forme|Plus ou moins ¦ Artı eksi
+forme|Égal ¦ Eşittir
+forme|Question en losange ¦ Baklava içinde soru
+forme|Alerte en losange ¦ Baklava içinde uyarı
+forme|Interdit ¦ Yasak
+forme|Sens interdit ¦ Girilmez
+forme|Demi-bouclier ¦ Yarım kalkan
+forme|Bouclier étoilé ¦ Yıldızlı kalkan
+forme|Esperluette ¦ Ve işareti
+forme|Astérisque ¦ Yıldız işareti
+forme|Oméga ¦ Omega
+forme|Chiffre romain I ¦ Roma rakamı I
+forme|Chiffre romain II ¦ Roma rakamı II
+forme|Chiffre romain III ¦ Roma rakamı III
+forme|Chiffre romain IV ¦ Roma rakamı IV
+forme|Chiffre romain V ¦ Roma rakamı V
+forme|Chiffre romain VI ¦ Roma rakamı VI
+forme|Chiffre romain VII ¦ Roma rakamı VII
+forme|Chiffre romain VIII ¦ Roma rakamı VIII
+forme|Chiffre romain IX ¦ Roma rakamı IX
+forme|Chiffre romain X ¦ Roma rakamı X
+forme|Bâton ¦ Çubuk
+forme|Bâtons ¦ Çubuklar
+forme|cinq ¦ beş
+forme|Bélier ¦ Koç
+forme|zodiaque ¦ burç
+forme|Taureau ¦ Boğa
+forme|Gémeaux ¦ İkizler
+forme|Cancer ¦ Yengeç
+forme|Lion ¦ Aslan
+forme|Vierge ¦ Başak
+forme|Scorpion ¦ Akrep
+forme|Sagittaire ¦ Yay
+forme|Capricorne ¦ Oğlak
+forme|Verseau ¦ Kova
+forme|Poissons ¦ Balık
+forme|Visage souriant ¦ Gülen yüz
+forme|Visage décontracté ¦ Rahat yüz
+forme|Perplexe ¦ Şaşkın
+forme|Visage évanoui ¦ Bayılan yüz
+forme|Diablotin ¦ Şeytancık
+forme|Mort de rire ¦ Gülmekten kırılan
+forme|Extraterrestre ¦ Uzaylı
+forme|Pentagramme ¦ Pentagram
+forme|Losange plein ¦ Dolu baklava
+forme|Losange moyen ¦ Orta baklava
+forme|Disque plein ¦ Dolu daire
+forme|Cercle ¦ Çember
+forme|Moitié de disque ¦ Yarım daire
+forme|Petit disque ¦ Küçük daire
+forme|Disques ¦ Daireler
+forme|Ellipse ¦ Elips
+forme|Carré ¦ Kare
+forme|Carré arrondi ¦ Yuvarlatılmış kare
+forme|Petit carré ¦ Küçük kare
+forme|Triangle pointe en bas ¦ Ucu aşağıda üçgen
+forme|Sphère ¦ Küre
+forme|Formes ¦ Şekiller
+forme|Case pleine ¦ Dolu kutu
+forme|Case vide ¦ Boş kutu
+forme|Case cochée ¦ İşaretli kutu
+forme|Pastille ¦ Rozet
+forme|Pastille cochée ¦ İşaretli rozet
+forme|Points de suspension ¦ Üç nokta
+forme|Points verticaux ¦ Dikey noktalar
+forme|Grille de points ¦ Nokta ızgarası
+forme|Trois points en triangle ¦ Üçgen biçiminde üç nokta
+forme|Quadrillage ¦ Kareli ızgara
+forme|Goutte bicolore ¦ İki renkli damla
+forme|Bombe ¦ Bomba
+forme|Épée ¦ Kılıç
+forme|Épées croisées ¦ Çapraz kılıçlar
+forme|Lance ¦ Mızrak
+forme|Masse d’armes ¦ Gürz
+forme|Couteau de combat ¦ Savaş bıçağı
+forme|Étoile de ninja ¦ Ninja yıldızı
+forme|Boomerang ¦ Bumerang
+forme|Pistolet ¦ Tabanca
+forme|Munitions ¦ Mühimmat
+forme|Char d’assaut ¦ Tank
+forme|Lien ¦ Bağlantı
+forme|Maillon ¦ Zincir halkası
+forme|Empreinte digitale ¦ Parmak izi
+forme|Drapeau à hampe ¦ Direkli bayrak
+forme|Marque déposée ¦ Tescilli marka
+forme|Marque commerciale ¦ Ticari marka
+forme|Supérieur à ¦ Büyüktür
+forme|Inférieur à ¦ Küçüktür
+forme|Multiplication ¦ Çarpma
+forme|Division ¦ Bölme
+forme|Lien rompu ¦ Kopuk bağlantı
+forme|Sommeil ¦ Uyku
+forme|Flèche épaisse droite ¦ Kalın sağ ok
+forme|Flèche épaisse gauche ¦ Kalın sol ok
+forme|Flèche épaisse haut ¦ Kalın yukarı ok
+forme|Flèche épaisse bas ¦ Kalın aşağı ok
+forme|Flèche en coin ¦ Köşe ok
+forme|Flèche pleine ¦ Dolu ok
+forme|Flèche dans un rond ¦ Daire içinde ok
+forme|Double flèche épaisse ¦ Kalın çift ok
+forme|Toutes directions ¦ Her yöne
+forme|Agrandir ¦ Büyüt
+forme|Rassembler ¦ Topla
+forme|Double chevron ¦ Çift köşeli ok
+forme|Triple chevron ¦ Üçlü köşeli ok
+forme|Retour en U ¦ U dönüşü
+forme|Flèche montante ¦ Yükselen ok
+forme|Flèche descendante ¦ Alçalan ok
+forme|Retour en haut ¦ Başa dön
+forme|Rotation ¦ Döndürme
+forme|Rotation inverse ¦ Ters döndürme
+forme|Revenir ¦ Geri dön
+forme|Recharger ¦ Yeniden yükle
+forme|Synchroniser ¦ Eşitle
+forme|Échange ¦ Değiş tokuş
+forme|Échange vertical ¦ Dikey değiş tokuş
+forme|Séparation ¦ Ayrılma
+forme|Réunion ¦ Birleşme
+forme|Embranchement ¦ Dallanma
+forme|Fourche ¦ Çatal
+forme|Bifurcation ¦ Yol ayrımı
+forme|Décision ¦ Karar
+forme|Mélange ¦ Karışım
+forme|Transfert ¦ Aktarım
+forme|Suivant ¦ Sonraki
+forme|Lecture ¦ Oynat
+forme|Avance rapide ¦ Hızlı ileri
+forme|Pointe à droite ¦ Sağa uç
+forme|Navigation ¦ Gezinme
+forme|Flèche haut ¦ Yukarı ok
+forme|Flèche bas ¦ Aşağı ok
+forme|Flèche gauche ¦ Sol ok
+forme|Flèche droite ¦ Sağ ok
+forme|Flèche haut gauche ¦ Sol üst ok
+forme|Flèche haut droite ¦ Sağ üst ok
+forme|Flèche bas gauche ¦ Sol alt ok
+forme|Flèche bas droite ¦ Sağ alt ok
+forme|Flèche pleine haut ¦ Dolu yukarı ok
+forme|Flèche pleine bas ¦ Dolu aşağı ok
+forme|Flèche pleine gauche ¦ Dolu sol ok
+forme|Flèche pleine haut gauche ¦ Dolu sol üst ok
+forme|Flèche pleine haut droite ¦ Dolu sağ üst ok
+forme|Flèche pleine bas gauche ¦ Dolu sol alt ok
+forme|Flèche pleine bas droite ¦ Dolu sağ alt ok
+forme|Flèche gauche dans un rond ¦ Daire içinde sol ok
+forme|Flèche haut dans un rond ¦ Daire içinde yukarı ok
+forme|Flèche bas dans un rond ¦ Daire içinde aşağı ok
+forme|Double flèche verticale fine ¦ İnce dikey çift ok
+forme|Double flèche diagonale ¦ Çapraz çift ok
+forme|Double flèche diagonale inverse ¦ Ters çapraz çift ok
+forme|Flèche coudée haut gauche ¦ Sol üste kıvrık ok
+forme|Flèche coudée haut droite ¦ Sağ üste kıvrık ok
+forme|Flèche coudée bas gauche ¦ Sol alta kıvrık ok
+forme|Flèche coudée bas droite ¦ Sağ alta kıvrık ok
+forme|Flèche coudée vers le bas ¦ Aşağı kıvrık ok
+forme|Demi-tour à gauche ¦ Sola U dönüşü
+forme|Demi-tour à droite ¦ Sağa U dönüşü
+forme|Réduire ¦ Küçült
+forme|Étendre ¦ Genişlet
+forme|Rapprocher ¦ Yaklaştır
+forme|Écarter ¦ Uzaklaştır
+forme|Va-et-vient ¦ Gidiş geliş
+forme|Flèche d’archer ¦ Okçu oku
+forme|Chevron haut ¦ Yukarı köşeli ok
+forme|Chevron bas ¦ Aşağı köşeli ok
+forme|Chevron gauche ¦ Sol köşeli ok
+forme|Chevron droite ¦ Sağ köşeli ok
+forme|Double chevron haut ¦ Yukarı çift köşeli ok
+forme|Double chevron bas ¦ Aşağı çift köşeli ok
+forme|Double chevron gauche ¦ Sol çift köşeli ok
+forme|Pointe en haut ¦ Yukarı uç
+forme|Pointe en bas ¦ Aşağı uç
+forme|Pointe à gauche ¦ Sola uç
+forme|Échange fin ¦ İnce değiş tokuş
+forme|Échange vertical fin ¦ İnce dikey değiş tokuş
+forme|Hausse ¦ Artış
+forme|Baisse ¦ Düşüş
+forme|Stable ¦ Sabit
+forme|Annuler ¦ Geri al
+forme|Rétablir ¦ Yinele
+forme|Répondre ¦ Yanıtla
+forme|Partager ¦ Paylaş
+forme|Actualiser ¦ Yenile
+forme|Cycle ¦ Döngü
+forme|Répéter ¦ Tekrarla
+forme|Rotation complète ¦ Tam dönüş
+forme|Orbite ¦ Yörünge
+forme|Rotation à gauche ¦ Sola döndürme
+forme|Rotation à droite ¦ Sağa döndürme
+forme|Mélanger ¦ Karıştır
+forme|Flèche sortante ¦ Dışa ok
+forme|Flèche entrante ¦ İçe ok
+forme|Sous-niveau à droite ¦ Sağda alt düzey
+forme|Sous-niveau à gauche ¦ Solda alt düzey
+forme|Fusion ¦ Birleşim
+forme|Étape ¦ Adım
+forme|Fusionner ¦ Birleştir
+forme|Segment ¦ Parça
+forme|Détour ¦ Dolambaç
+forme|Connexion ¦ Bağlantı
+forme|Entrée ¦ Giriş
+forme|Sortie ¦ Çıkış
+forme|Sortie de secours ¦ Acil çıkış
+forme|Précédent ¦ Önceki
+forme|Lecture ronde ¦ Yuvarlak oynat
+forme|Position actuelle ¦ Şimdiki konum
+forme|Main pointeur ¦ İşaret eden el
+forme|Plein écran ¦ Tam ekran
+forme|Flèche haut ronde ¦ Yuvarlak yukarı ok
+forme|Flèche bas ronde ¦ Yuvarlak aşağı ok
+forme|Flèche gauche ronde ¦ Yuvarlak sol ok
+forme|Flèche droite ronde ¦ Yuvarlak sağ ok
+forme|Chevron gauche rond ¦ Yuvarlak sol köşeli ok
+forme|Chevron droite rond ¦ Yuvarlak sağ köşeli ok
+forme|Rejouer ¦ Yeniden oynat
+forme|Renouvellement ¦ Yenileme
+forme|Télécharger ¦ İndir
+forme|Envoyer ¦ Gönder
+forme|Importer ¦ İçe aktar
+forme|Exporter ¦ Dışa aktar
+forme|Arrêt ¦ Durdur
+forme|piste ¦ parça
+forme|Retour rapide ¦ Hızlı geri
+forme|Enregistrement ¦ Kayıt
+forme|Gland ¦ Meşe palamudu
+forme|trait fin ¦ ince çizgi
+forme|plein ¦ dolu
+forme|Carnet d’adresses ¦ Adres defteri
+forme|Répertoire à onglets ¦ Sekmeli rehber
+forme|Tour de contrôle ¦ Kontrol kulesi
+forme|Avion en vol ¦ Uçan uçak
+forme|Avion qui atterrit ¦ İnen uçak
+forme|Avion qui décolle ¦ Kalkan uçak
+forme|Avion au sol ¦ Yerdeki uçak
+forme|Avion penché ¦ Eğik uçak
+forme|Ancre simple ¦ Basit çapa
+forme|Angle ¦ Açı
+forme|boîte ¦ kutu
+forme|Flèche en arc vers la gauche ¦ Sola kavisli ok
+forme|Flèche en arc vers la droite ¦ Sağa kavisli ok
+forme|Double flèche courbée ¦ Kavisli çift ok
+forme|haut ¦ yukarı
+forme|Flèche courbée ¦ Kavisli ok
+forme|bas ¦ aşağı
+forme|Flèche ronde vers le bas ¦ Aşağı yuvarlak ok
+forme|Flèche ronde vers le bas à gauche ¦ Sol alta yuvarlak ok
+forme|Flèche ronde vers le bas à droite ¦ Sağ alta yuvarlak ok
+forme|Flèche ronde vers la gauche ¦ Sola yuvarlak ok
+forme|Flèche ronde vers la droite ¦ Sağa yuvarlak ok
+forme|Flèche ronde vers le haut ¦ Yukarı yuvarlak ok
+forme|Flèche ronde vers le haut à gauche ¦ Sol üste yuvarlak ok
+forme|Flèche ronde vers le haut à droite ¦ Sağ üste yuvarlak ok
+forme|Flèche tournante ¦ Dönen ok
+forme|sens des aiguilles ¦ saat yönü
+forme|sens inverse ¦ ters yön
+forme|Flèche vers le bas ¦ Aşağı ok
+forme|Flèche vers le bas à gauche ¦ Sol alta ok
+forme|Flèche vers le bas à droite ¦ Sağ alta ok
+forme|Flèche en équerre ¦ Gönye ok
+forme|Flèche en équerre vers la gauche ¦ Sola gönye ok
+forme|Flèche en équerre vers la droite ¦ Sağa gönye ok
+forme|Grosse flèche vers le bas ¦ Aşağı büyük ok
+forme|Grosse flèche vers la gauche ¦ Sola büyük ok
+forme|Grosse flèche à un trait vers le bas ¦ Aşağı tek çizgili büyük ok
+forme|Grosse flèche à un trait vers la gauche ¦ Sola tek çizgili büyük ok
+forme|Grosse flèche à un trait vers la droite ¦ Sağa tek çizgili büyük ok
+forme|Grosse flèche à un trait vers le haut ¦ Yukarı tek çizgili büyük ok
+forme|Grosse flèche à traits vers le bas ¦ Aşağı çizgili büyük ok
+forme|Grosse flèche à traits vers la gauche ¦ Sola çizgili büyük ok
+forme|Grosse flèche à traits vers la droite ¦ Sağa çizgili büyük ok
+forme|Grosse flèche à traits vers le haut ¦ Yukarı çizgili büyük ok
+forme|Grosse flèche vers la droite ¦ Sağa büyük ok
+forme|Grosse flèche vers le haut ¦ Yukarı büyük ok
+forme|Flèche vers la gauche ¦ Sola ok
+forme|Flèche jusqu’au trait vers le bas ¦ Aşağı çizgiye kadar ok
+forme|Flèche jusqu’au trait vers le bas à gauche ¦ Sol alta çizgiye kadar ok
+forme|Flèche jusqu’au trait vers le bas à droite ¦ Sağ alta çizgiye kadar ok
+forme|Flèche jusqu’au trait vers la gauche ¦ Sola çizgiye kadar ok
+forme|Flèche jusqu’au trait vers la droite ¦ Sağa çizgiye kadar ok
+forme|Flèche jusqu’au trait vers le haut ¦ Yukarı çizgiye kadar ok
+forme|Flèche jusqu’au trait vers le haut à gauche ¦ Sol üste çizgiye kadar ok
+forme|Flèche jusqu’au trait vers le haut à droite ¦ Sağ üste çizgiye kadar ok
+forme|Flèche vers la droite ¦ Sağa ok
+forme|Flèche carrée vers le bas ¦ Aşağı kare ok
+forme|Flèche carrée vers le bas à gauche ¦ Sol alta kare ok
+forme|Flèche carrée vers le bas à droite ¦ Sağ alta kare ok
+forme|Flèche carrée vers la gauche ¦ Sola kare ok
+forme|Flèche carrée vers la droite ¦ Sağa kare ok
+forme|Flèche carrée vers le haut ¦ Yukarı kare ok
+forme|Flèche carrée vers le haut à gauche ¦ Sol üste kare ok
+forme|Flèche carrée vers le haut à droite ¦ Sağ üste kare ok
+forme|Flèche en U ¦ U biçiminde ok
+forme|Flèche vers le haut ¦ Yukarı ok
+forme|Flèche vers le haut à gauche ¦ Sol üste ok
+forme|Flèche vers le haut à droite ¦ Sağ üste ok
+forme|Flèches tournantes ¦ Dönen oklar
+forme|Flèches haut et bas ¦ Yukarı ve aşağı oklar
+forme|Flèches gauche et droite ¦ Sola ve sağa oklar
+forme|écartées ¦ ayrık
+forme|Flèches vers le centre ¦ Merkeze doğru oklar
+forme|4 côtés ¦ 4 kenar
+forme|Flèches vers un trait ¦ Bir çizgiye doğru oklar
+forme|debout ¦ dikey
+forme|couché ¦ yatay
+forme|Flèches qui se rejoignent ¦ Birleşen oklar
+forme|Flèches vers l’extérieur ¦ Dışa doğru oklar
+forme|Flèches qui s’écartent d’un trait ¦ Bir çizgiden ayrılan oklar
+forme|Flèches qui se séparent ¦ Ayrışan oklar
+forme|Article ¦ Makale
+forme|Article illustré ¦ Resimli makale
+forme|Bâton d’Asclépios ¦ Asklepios’un asası
+forme|Avocat ¦ Avokado
+forme|fruit ¦ meyve
+forme|Sac simple ¦ Basit çanta
+forme|Ballon de baudruche ¦ Balon
+forme|Pansements ¦ Yara bantları
+forme|Code-barres ¦ Barkod
+forme|Barrière de chantier ¦ Şantiye bariyeri
+forme|Casquette ¦ Kep
+forme|Casque de base-ball ¦ Beyzbol kaskı
+forme|Pile chargée ¦ Dolu pil
+forme|Pile vide ¦ Boş pil
+forme|Ballon de plage ¦ Plaj topu
+forme|Bonnet ¦ Bere
+forme|Bouteille de bière ¦ Bira şişesi
+forme|Chope de bière ¦ Bira kupası
+forme|Clochette ¦ Zil
+forme|Clochette qui sonne ¦ Çalan zil
+forme|Ceinture ¦ Kemer
+forme|Plan d’architecte ¦ Mimari plan
+forme|Livre avec marque-page ¦ Ayraçlı kitap
+forme|Livre ouvert écrit ¦ Yazılı açık kitap
+forme|Livre de la personne ¦ Kişinin kitabı
+forme|Marque-page simple ¦ Basit kitap ayracı
+forme|Marque-pages simples ¦ Basit kitap ayraçları
+forme|Botte ¦ Çizme
+forme|Boules ¦ Toplar
+forme|pétanque ¦ petank
+forme|Bol de nourriture ¦ Mama kabı
+forme|Bol fumant ¦ Dumanı tüten kâse
+forme|Boule de bowling ¦ Bowling topu
+forme|Verre de cognac ¦ Konyak kadehi
+forme|Pain ¦ Ekmek
+forme|Mallette en métal ¦ Metal çanta
+forme|Scarabée ¦ Böcek
+forme|Immeuble d’appartements ¦ Apartman
+forme|Bureaux ¦ Ofisler
+forme|Immeubles ¦ Binalar
+forme|Téléphérique ¦ Teleferik
+forme|Calendrier coché ¦ İşaretli takvim
+forme|Calendrier avec un jour ¦ Bir günlü takvim
+forme|Calendrier avec des jours ¦ Günlü takvim
+forme|Calendrier avec un cœur ¦ Kalpli takvim
+forme|Calendrier avec une étoile ¦ Yıldızlı takvim
+forme|Calendrier barré ¦ Üstü çizili takvim
+forme|Sonnette de comptoir ¦ Tezgâh zili
+forme|Appareil photo plus ¦ Fotoğraf makinesi artı
+forme|Appareil photo tourner ¦ Fotoğraf makinesi döndür
+forme|Appareil photo barré ¦ Üstü çizili fotoğraf makinesi
+forme|Batterie de voiture ¦ Araba aküsü
+forme|Voiture simple ¦ Basit araba
+forme|Porte-cartes ¦ Kartlık
+forme|Cartes ¦ Kartlar
+forme|Trois cartes ¦ Üç kart
+forme|Double chevron rond vers le bas ¦ Aşağı yuvarlak çift köşeli ok
+forme|Double chevron rond vers la gauche ¦ Sola yuvarlak çift köşeli ok
+forme|Double chevron rond vers la droite ¦ Sağa yuvarlak çift köşeli ok
+forme|Double chevron rond vers le haut ¦ Yukarı yuvarlak çift köşeli ok
+forme|Chevron rond vers le bas ¦ Aşağı yuvarlak köşeli ok
+forme|Chevron rond vers la gauche ¦ Sola yuvarlak köşeli ok
+forme|Chevron rond vers la droite ¦ Sağa yuvarlak köşeli ok
+forme|Chevron rond vers le haut ¦ Yukarı yuvarlak köşeli ok
+forme|Chevrons haut et bas ¦ Yukarı ve aşağı köşeli oklar
+forme|Double chevron vers le bas ¦ Aşağı çift köşeli ok
+forme|Double chevron vers la gauche ¦ Sola çift köşeli ok
+forme|Double chevron vers la droite ¦ Sağa çift köşeli ok
+forme|Double chevron vers le haut ¦ Yukarı çift köşeli ok
+forme|Chevron vers le bas ¦ Aşağı köşeli ok
+forme|Chevron vers la gauche ¦ Sola köşeli ok
+forme|Chevron jusqu’au trait vers le bas ¦ Aşağı çizgiye kadar köşeli ok
+forme|Chevron jusqu’au trait vers la gauche ¦ Sola çizgiye kadar köşeli ok
+forme|Chevron jusqu’au trait vers la droite ¦ Sağa çizgiye kadar köşeli ok
+forme|Chevron jusqu’au trait vers le haut ¦ Yukarı çizgiye kadar köşeli ok
+forme|Chevron vers la droite ¦ Sağa köşeli ok
+forme|Chevron vers le haut ¦ Yukarı köşeli ok
+forme|Caisse enregistreuse ¦ Yazar kasa
+forme|Cassette audio ¦ Ses kaseti
+forme|Tour de château ¦ Şato kulesi
+forme|Diplôme ¦ Diploma
+forme|Tableau noir ¦ Kara tahta
+forme|Tableau noir simple ¦ Basit kara tahta
+forme|Instituteur au tableau ¦ Tahtadaki öğretmen
+forme|Champagne ¦ Şampanya
+forme|Graphique en barres ¦ Çubuk grafik
+forme|Courbe ¦ Eğri
+forme|Bulle centrée ¦ Ortalı balon
+forme|points ¦ noktalar
+forme|texte ¦ metin
+forme|Bulle goutte ¦ Damla balon
+forme|Deux bulles ¦ İki balon
+forme|Coche ronde ¦ Yuvarlak onay işareti
+forme|Grosse coche ¦ Büyük onay işareti
+forme|Case cochée débordante ¦ Taşan işaretli kutu
+forme|Trinquer ¦ Kadeh tokuşturma
+forme|Toque de cuisinier ¦ Aşçı başlığı
+forme|Cercle en pointillés ¦ Noktalı çember
+forme|Demi-cercle plein ¦ Dolu yarım daire
+forme|Demi-cercle penché ¦ Eğik yarım daire
+forme|Cercle ouvert ¦ Açık çember
+forme|Quatre cercles ¦ Dört çember
+forme|Trois cercles ¦ Üç çember
+forme|Trois cercles et un plus ¦ Üç çember ve bir artı
+forme|Porte-bloc ¦ Altlıklı pano
+forme|Porte-bloc écrit ¦ Yazılı altlıklı pano
+forme|après-midi ¦ öğleden sonra
+forme|Horloge en avant ¦ İleri saat
+forme|Compte à rebours ¦ Geri sayım
+forme|Horloge en arrière ¦ Geri saat
+forme|Heure de la personne ¦ Kişinin saati
+forme|Nuage flèche en bas ¦ Aşağı oklu bulut
+forme|Nuage flèche en haut ¦ Yukarı oklu bulut
+forme|Nuage coché ¦ İşaretli bulut
+forme|Éclaircie ¦ Parçalı bulutlu
+forme|Nuage attention ¦ Dikkat bulutu
+forme|Nuage barré ¦ Üstü çizili bulut
+forme|Trèfle à quatre feuilles ¦ Dört yapraklı yonca
+forme|Grain de café ¦ Kahve çekirdeği
+forme|Pièce de monnaie ¦ Madeni para
+forme|tranche ¦ kenar
+forme|Pièces de monnaie ¦ Madeni paralar
+forme|Confettis ¦ Konfeti
+forme|Terrain de basket ¦ Basketbol sahası
+forme|Chapeau de cow-boy ¦ Kovboy şapkası
+forme|oiseau ¦ kuş
+forme|Grue de chantier ¦ İnşaat vinci
+forme|Viseur simple ¦ Basit vizör
+forme|Couronne à la croix ¦ Haçlı taç
+forme|Couronne simple ¦ Basit taç
+forme|meuble ¦ mobilya
+forme|Ordinateur ¦ Bilgisayar
+forme|Tablette ¦ Tablet
+forme|Quatre losanges ¦ Dört baklava
+forme|Robe ¦ Elbise
+forme|Goutte à moitié ¦ Yarım damla
+forme|Goutte simple ¦ Basit damla
+forme|Œuf fêlé ¦ Çatlak yumurta
+forme|Enveloppe ouverte ¦ Açık zarf
+forme|Enveloppe simple ¦ Basit zarf
+forme|Enveloppe simple ouverte ¦ Basit açık zarf
+forme|Escalier roulant ¦ Yürüyen merdiven
+forme|descente ¦ iniş
+forme|montée ¦ çıkış
+forme|Examen ¦ Sınav
+forme|Deux yeux ¦ İki göz
+forme|Masque de soin ¦ Bakım maskesi
+forme|Ferme ¦ Çiftlik
+forme|Fichier ¦ Dosya
+forme|Fichier d’archives ¦ Arşiv dosyası
+forme|Fichier son ¦ Ses dosyası
+forme|Fichier image ¦ Görüntü dosyası
+forme|Chercher dans un document ¦ Belgede ara
+forme|Fichier PDF ¦ PDF dosyası
+forme|Document écrit ¦ Yazılı belge
+forme|Fichier vidéo ¦ Video dosyası
+forme|Fichier compressé ¦ Sıkıştırılmış dosya
+forme|Fichiers ¦ Dosyalar
+forme|Scénario ¦ Senaryo
+forme|Empreinte digitale simple ¦ Basit parmak izi
+forme|Flamme ¦ Alev
+forme|Croix de secours ¦ İlk yardım haçı
+forme|Trousse de secours ¦ İlk yardım çantası
+forme|Poisson simple ¦ Basit balık
+forme|Fanion plié ¦ Katlanmış flama
+forme|drapeau ¦ bayrak
+forme|Flamme vive ¦ Canlı alev
+forme|Lampe de poche ¦ El feneri
+forme|dos ¦ sırt
+forme|Flèche de parcours ¦ Parkur oku
+forme|Lotus ¦ Nilüfer
+forme|Dossier simple ¦ Basit klasör
+forme|Dossier de la personne ¦ Kişinin klasörü
+forme|Dossier à l’étoile ¦ Yıldızlı klasör
+forme|Dossier personnel ¦ Kişisel klasör
+forme|Fourchette et couteau ¦ Çatal ve bıçak
+forme|Coins de cadre ¦ Çerçeve köşeleri
+forme|Bidon d’essence ¦ Benzin bidonu
+forme|Pompe à essence ¦ Benzin pompası
+forme|Jauge ¦ Gösterge
+forme|Engrenage fin ¦ İnce dişli
+forme|Engrenage à six dents ¦ Altı dişli çark
+forme|Symbole femme ¦ Kadın simgesi
+forme|Symbole intersexe ¦ İnterseks simgesi
+forme|Symbole homme ¦ Erkek simgesi
+forme|Symbole neutre ¦ Nötr simge
+forme|Symbole transgenre ¦ Trans simgesi
+forme|Europe ¦ Avrupa
+forme|Afrique ¦ Afrika
+forme|Amériques ¦ Amerika kıtaları
+forme|Globe simple ¦ Basit küre
+forme|Globe terrestre sur pied ¦ Ayaklı dünya küresi
+forme|Lunettes de natation ¦ Yüzücü gözlüğü
+forme|Toque de diplômé ¦ Mezuniyet kepi
+forme|Épis de blé ¦ Buğday başakları
+forme|Réseau de points ¦ Nokta ağı
+forme|Grille de quatre ¦ Dörtlü ızgara
+forme|Grille de neuf ¦ Dokuzlu ızgara
+forme|Main et pièces ¦ El ve madeni paralar
+forme|Main et œil ¦ El ve göz
+forme|Poing ¦ Yumruk
+forme|Main qui attrape ¦ Yakalayan el
+forme|Paume ¦ Avuç içi
+forme|Signe de paix ¦ Barış işareti
+forme|Main qui montre ¦ Gösteren el
+forme|Savon liquide ¦ Sıvı sabun
+forme|Sac à main simple ¦ Basit el çantası
+forme|Phares ¦ Farlar
+forme|Casque micro ¦ Mikrofonlu kulaklık
+forme|Cœur droit ¦ Düz kalp
+forme|Cœur droit brisé ¦ Kırık düz kalp
+forme|Surligneur ¦ Fosforlu kalem
+forme|Hockey ¦ Hokey
+forme|Sweat à capuche ¦ Kapüşonlu sweatshirt
+forme|début ¦ başlangıç
+forme|fin ¦ son
+forme|milieu ¦ orta
+forme|Sablier simple ¦ Basit kum saati
+forme|Maison au trait ¦ Çizgi ev
+forme|Maison simple ¦ Basit ev
+forme|Badge ¦ Yaka kartı
+forme|Image ¦ Görüntü
+forme|Images ¦ Görüntüler
+forme|Facture ¦ Fatura
+forme|Bocal ¦ Kavanoz
+forme|Bocal étiqueté ¦ Etiketli kavanoz
+forme|Jeep ¦ Cip
+forme|Clavier ¦ Klavye
+forme|Trou de serrure ¦ Anahtar deliği
+forme|Échelle simple ¦ Basit merdiven
+forme|Suspension ¦ Sarkıt lamba
+forme|Ordinateur portable ¦ Dizüstü bilgisayar
+forme|Bouée ¦ Can simidi
+forme|Ampoule à filament ¦ Filamanlı ampul
+forme|Liste ¦ Liste
+forme|Liste de favoris ¦ Sık kullanılanlar listesi
+forme|Cadenas fermé ¦ Kapalı asma kilit
+forme|Cadenas à clé ¦ Anahtarlı asma kilit
+forme|Casiers ¦ Dolaplar
+forme|Aimant droit ¦ Düz mıknatıs
+forme|Repère sur la carte ¦ Haritada işaret
+forme|Repère et zone ¦ İşaret ve alan
+forme|Repère au sol ¦ Yerde işaret
+forme|Carte dépliée ¦ Açılmış harita
+forme|Masque joyeux ¦ Neşeli maske
+forme|Masque triste ¦ Hüzünlü maske
+forme|Médaille militaire ¦ Askerî madalya
+forme|Porte-voix ¦ Megafon
+forme|Porte-voix simple ¦ Basit megafon
+forme|Météore ¦ Göktaşı
+forme|Micro ¦ Mikrofon
+forme|Micro de scène ¦ Sahne mikrofonu
+forme|Moins carré ¦ Kare eksi
+forme|Billet ondulé ¦ Dalgalı banknot
+forme|Écran ¦ Ekran
+forme|Lune et étoiles ¦ Ay ve yıldızlar
+forme|Mobylette ¦ Moped
+forme|de face ¦ önden
+forme|Souris ¦ Fare
+forme|ordinateur ¦ bilgisayar
+forme|Note simple ¦ Basit nota
+forme|Notes de musique ¦ Notalar
+forme|Notes moins ¦ Notalar eksi
+forme|Notes plus ¦ Notalar artı
+forme|Notes simples ¦ Basit notalar
+forme|Flèche de navigation ¦ Gezinme oku
+forme|Aiguille à coudre ¦ Dikiş iğnesi
+forme|Coupure de presse ¦ Gazete kupürü
+forme|Note ¦ Not
+forme|Note vierge ¦ Boş not
+forme|Note et crayon ¦ Not ve kalem
+forme|Bloc-notes ¦ Not defteri
+forme|Fauteuil de bureau ¦ Ofis koltuğu
+forme|Onigiri ¦ Onigiri
+forme|Orange ¦ Portakal
+forme|Tranche d’orange ¦ Portakal dilimi
+forme|Four ¦ Fırın
+forme|Brosse de peintre ¦ Boya fırçası
+forme|Palette ¦ Palet
+forme|Pantalon ¦ Pantolon
+forme|Avion en papier ¦ Kâğıt uçak
+forme|Avion en papier penché ¦ Eğik kâğıt uçak
+forme|Trombone couché ¦ Yatık ataş
+forme|Pied-de-mouche ¦ Paragraf işareti
+forme|Parc ¦ Park
+forme|Chemin ¦ Yol
+forme|Empreinte de patte ¦ Pati izi
+forme|Symbole de paix ¦ Barış simgesi
+forme|Plume de stylo ¦ Kalem ucu
+forme|Crayon simple ¦ Basit kurşun kalem
+forme|Poivron ¦ Biber
+forme|Personne bras ouverts ¦ Kollarını açmış kişi
+forme|Personne simple ¦ Basit kişi
+forme|Personne dans un rond ¦ Daire içinde kişi
+forme|Surfeur des neiges ¦ Snowboardcu
+forme|Tai-chi ¦ Tai chi
+forme|Lanceur ¦ Atıcı
+forme|Téléphone qui sonne ¦ Çalan telefon
+forme|Clavier de piano ¦ Piyano klavyesi
+forme|Table de pique-nique ¦ Piknik masası
+forme|Verre à bière ¦ Bira bardağı
+forme|Pipe ¦ Pipo
+forme|Planète ¦ Gezegen
+forme|Lecture-pause ¦ Oynat-duraklat
+forme|Liste de lecture ¦ Çalma listesi
+forme|Prise électrique ¦ Elektrik prizi
+forme|Fiches électriques ¦ Elektrik fişleri
+forme|Plus carré ¦ Kare artı
+forme|Jeton de jeu ¦ Oyun jetonu
+forme|Voiture de police ¦ Polis arabası
+forme|Polygone ¦ Çokgen
+forme|Plante en pot ¦ Saksı bitkisi
+forme|Marche-arrêt ¦ Aç-kapat
+forme|Tableau de présentation ¦ Sunum tahtası
+forme|Punaise simple ¦ Basit raptiye
+forme|Pièce de puzzle ¦ Yapboz parçası
+forme|Guillemets ¦ Tırnak işaretleri
+forme|Raquette ¦ Raket
+forme|Poste de radio ¦ Radyo
+forme|Arc-en-ciel et nuage ¦ Gökkuşağı ve bulut
+forme|Enregistrer ¦ Kaydet
+forme|Rectangle en pointillés ¦ Noktalı dikdörtgen
+forme|Fusée au décollage ¦ Kalkan roket
+forme|Sceau dentelé ¦ Tırtıklı mühür
+forme|Siège ¦ Koltuk
+forme|grosse flèche ¦ büyük ok
+forme|Écu simple ¦ Basit kalkan arması
+forme|Écu coché ¦ İşaretli kalkan arması
+forme|Écu écartelé ¦ Dörde bölünmüş kalkan arması
+forme|Écu au chevron ¦ Çevronlu kalkan arması
+forme|Écu à la croix ¦ Haçlı kalkan arması
+forme|Écu à la barre ¦ Sol çaprazlı kalkan arması
+forme|Écu à l’étoile ¦ Yıldızlı kalkan arması
+forme|Écu au point d’exclamation ¦ Ünlem işaretli kalkan arması
+forme|Conteneur ¦ Konteyner
+forme|Chemise pliée ¦ Katlanmış gömlek
+forme|Sac de courses ouvert ¦ Açık alışveriş çantası
+forme|Chariot simple ¦ Basit alışveriş arabası
+forme|Crevette ¦ Karides
+forme|Sigma ¦ Sigma
+forme|Panneau indicateur ¦ Yön tabelası
+forme|Gyrophare ¦ Döner lamba
+forme|Diaporama ¦ Slayt gösterisi
+forme|Visage en colère ¦ Öfkeli yüz
+forme|Visage sans expression ¦ İfadesiz yüz
+forme|Visage blasé ¦ Bıkkın yüz
+forme|Visage qui fond ¦ Eriyen yüz
+forme|Visage nerveux ¦ Gergin yüz
+forme|Visage triste ¦ Üzgün yüz
+forme|Visage KO ¦ Nakavt yüz
+forme|chaussure ¦ ayakkabı
+forme|Basket en marche ¦ Yürüyen spor ayakkabı
+forme|Flocon de neige ¦ Kar tanesi
+forme|Ballon de foot ¦ Futbol topu
+forme|Chaussette ¦ Çorap
+forme|Étincelle ¦ Kıvılcım
+forme|Haut-parleur ¦ Hoparlör
+forme|Spirale ¦ Sarmal
+forme|Carré à moitié ¦ Yarım kare
+forme|Quatre carrés ¦ Dört kare
+forme|Étoile à quatre branches ¦ Dört kollu yıldız
+forme|Marches ¦ Basamaklar
+forme|carré ¦ kare
+forme|Stratégie ¦ Strateji
+forme|Élève ¦ Öğrenci
+forme|Valise à roulettes ¦ Tekerlekli valiz
+forme|Valise simple ¦ Basit valiz
+forme|Soleil voilé ¦ Puslu güneş
+forme|Lever de soleil ¦ Gün doğumu
+forme|Seringue ¦ Şırınga
+forme|Tee-shirt ¦ Tişört
+forme|grille ¦ ızgara
+forme|Étiquette en chevron ¦ Köşeli etiket
+forme|Étiquette simple ¦ Basit etiket
+forme|Sachet de thé ¦ Çay poşeti
+forme|Thermomètre froid ¦ Soğuk termometre
+forme|Thermomètre chaud ¦ Sıcak termometre
+forme|Thermomètre simple ¦ Basit termometre
+forme|Pouce en bas ¦ Başparmak aşağı
+forme|Pouce en haut ¦ Başparmak yukarı
+forme|Billet d’entrée ¦ Giriş bileti
+forme|Chronomètre ¦ Kronometre
+forme|Pot à pourboires ¦ Bahşiş kavanozu
+forme|Tipi ¦ Çadır (tipi)
+forme|Cabas ¦ Pazar çantası
+forme|Cabas simple ¦ Basit pazar çantası
+forme|Serviette ¦ Havlu
+forme|Cône de chantier ¦ Trafik konisi
+forme|Panneau routier ¦ Yol tabelası
+forme|Train régional ¦ Bölgesel tren
+forme|Train simple ¦ Basit tren
+forme|Traduire ¦ Çevir
+forme|Poubelle simple ¦ Basit çöp kutusu
+forme|Plateau ¦ Tepsi
+forme|Courbe qui baisse ¦ Düşen eğri
+forme|Courbe qui monte ¦ Yükselen eğri
+forme|Triangle en pointillés ¦ Noktalı üçgen
+forme|chariot ¦ araba
+forme|Chariot à bagages ¦ Bagaj arabası
+forme|Parapluie simple ¦ Basit şemsiye
+forme|buste ¦ büst
+forme|Personne vérifiée ¦ Doğrulanmış kişi
+forme|Personne moins ¦ Kişi eksi
+forme|Personne plus ¦ Kişi artı
+forme|Liste de personnes ¦ Kişi listesi
+forme|Personne dans un carré ¦ Kare içinde kişi
+forme|Quatre personnes ¦ Dört kişi
+forme|Trois personnes ¦ Üç kişi
+forme|Vidéo ¦ Video
+forme|Caméra ¦ Kamera
+forme|Disque vinyle ¦ Plak
+forme|Mur de briques ¦ Tuğla duvar
+forme|triangle ¦ üçgen
+forme|losange ¦ baklava
+forme|octogone ¦ sekizgen
+forme|Onde ¦ Dalga
+forme|Son ¦ Ses
+forme|onde ¦ dalga
+forme|Fauteuil roulant en mouvement ¦ Hareket eden tekerlekli sandalye
+forme|Wi-Fi ¦ Wi-Fi
+forme|Clé plate ¦ Açık ağızlı anahtar
+forme|Pelote de laine ¦ Yün yumağı
+forme|seule ¦ tek başına
+forme|seul ¦ tek başına
+forme|Lettre {x} minuscule ¦ Küçük harf {x}
+forme|Point ¦ Nokta
+forme|Virgule ¦ Virgül
+forme|Point-virgule ¦ Noktalı virgül
+forme|Deux-points ¦ İki nokta
+forme|Point d’exclamation renversé ¦ Ters ünlem işareti
+forme|Point d’interrogation renversé ¦ Ters soru işareti
+forme|Apostrophe ¦ Kesme işareti
+forme|Guillemet droit ¦ Düz tırnak
+forme|Guillemet ouvrant ¦ Açılış tırnağı
+forme|Parenthèse ouvrante ¦ Açılış parantezi
+forme|Parenthèse fermante ¦ Kapanış parantezi
+forme|Crochet ouvrant ¦ Açılış köşeli parantezi
+forme|Crochet fermant ¦ Kapanış köşeli parantezi
+forme|Trait d’union ¦ Kısa çizgi
+forme|Tiret ¦ Tire
+forme|et ¦ ve
+forme|numéro ¦ numara
+forme|Pour cent ¦ Yüzde
+forme|naissance ¦ doğum
+forme|Barre oblique ¦ Eğik çizgi
+forme|Paragraphe ¦ Paragraf
+forme|Degré ¦ Derece
+forme|naissance ° ¦ doğum °
+forme|décès † ¦ ölüm †
+forme|Double croix ¦ Çift haç
+forme|Numéro ¦ Numara
+forme|Nombre {x} ¦ Sayı {x}
+forme|Signe de naissance ¦ Doğum işareti
+forme|Étoile de naissance ¦ Doğum yıldızı
+forme|Croix de décès ¦ Ölüm haçı
+forme|Signe du mariage ¦ Evlilik işareti
+forme|Signe du divorce ¦ Boşanma işareti
+forme|Union libre ¦ Resmî olmayan birliktelik
+forme|mariage ¦ evlilik
+forme|inhumation ¦ defin
+forme|Urne ¦ Kül kabı
+forme|crémation ¦ yakma
+forme|mort au combat ¦ savaşta öldü
+forme|Fleuron ¦ Süsleme
+forme|vers la gauche ¦ sola doğru
+forme|Feuille de vigne ¦ Asma yaprağı
+forme|ornement ¦ süs
+forme|Croix ombrée ¦ Gölgeli haç
+forme|Croix à contour ¦ Konturlu haç
+forme|Chrisme ¦ Hristos monogramı
+forme|Croix de Jérusalem ¦ Kudüs haçı
+forme|Ankh ¦ Ankh
+forme|croix ansée ¦ kulplu haç
+forme|Symbole de Farsi ¦ Fars simgesi
+forme|Croix pattée à contour ¦ Konturlu pençe haç
+forme|Croix grecque épaisse ¦ Kalın Yunan haçı
+forme|Croix à centre ouvert ¦ Ortası açık haç
+forme|Croix à centre rond ¦ Ortası yuvarlak haç
+forme|Reine ¦ Kraliçe
+forme|Marteau et pic ¦ Çekiç ve kazma
+forme|justice ¦ adalet
+forme|Bâton d’Esculape ¦ Asklepios’un asası
+forme|Alambic ¦ İmbik
+forme|Roue dentée ¦ Dişli çark
+forme|Caducée d’Hermès ¦ Hermes’in asası
+forme|Caducée ¦ Kaduse
+forme|Main qui écrit ¦ Yazan el
+forme|note ¦ nota
+forme|Deux croches ¦ İki sekizlik nota
+forme|Doubles croches ¦ Çift on altılık notalar
+forme|Dé un ¦ Zar bir
+forme|Dé deux ¦ Zar iki
+forme|Dé trois ¦ Zar üç
+forme|Dé quatre ¦ Zar dört
+forme|Dé cinq ¦ Zar beş
+forme|Dé six ¦ Zar altı
+forme|Comète ¦ Kuyruklu yıldız
+forme|Soleil à rayons ¦ Işınlı güneş
+forme|Flocon ciselé ¦ Oymalı kar tanesi
+forme|Flocon épais ¦ Kalın kar tanesi
+forme|Trèfle irlandais ¦ İrlanda yoncası
+forme|Fleur à cinq pétales ¦ Beş yapraklı çiçek
+forme|Fleur ornée ¦ Süslü çiçek
+forme|Fleur étoilée ¦ Yıldız çiçek
+forme|Fleur à six pétales ¦ Altı yapraklı çiçek
+forme|Fleur en goutte ¦ Damla çiçek
+forme|Étoile pleine ¦ Dolu yıldız
+forme|Étoile vide ¦ Boş yıldız
+forme|Étoile à quatre pointes ¦ Dört köşeli yıldız
+forme|Étoile à contour ¦ Çerçeveli yıldız
+forme|Étoile dans un rond ¦ Daire içinde yıldız
+forme|Étoile à centre ouvert ¦ Ortası açık yıldız
+forme|Étoile à centre noir ¦ Ortası siyah yıldız
+forme|Étoile ombrée ¦ Gölgeli yıldız
+forme|Étoile en hélice ¦ Pervane yıldız
+forme|Étoile en relief ¦ Kabartmalı yıldız
+forme|Astérisque épais ¦ Kalın yıldız işareti
+forme|Astérisque à centre ouvert ¦ Ortası açık yıldız işareti
+forme|Astérisque à huit branches ¦ Sekiz kollu yıldız işareti
+forme|Étoile à huit branches ¦ Sekiz köşeli yıldız
+forme|Étoile tourbillon ¦ Fırıldak yıldız
+forme|Étoile à six branches ¦ Altı köşeli yıldız
+forme|Étoile à huit branches fine ¦ İnce sekiz köşeli yıldız
+forme|Étoile à huit branches épaisse ¦ Kalın sekiz köşeli yıldız
+forme|Étoile à douze branches ¦ On iki köşeli yıldız
+forme|Étoile à seize branches ¦ On altı köşeli yıldız
+forme|Astérisque en gouttes ¦ Damlalı yıldız işareti
+forme|Soleil rond ¦ Yuvarlak güneş
+forme|Trois astérisques ¦ Üç yıldız işareti
+forme|Main qui montre à droite ¦ Sağı gösteren el
+forme|Main qui montre à gauche ¦ Solu gösteren el
+forme|Main qui montre en haut ¦ Yukarıyı gösteren el
+forme|Main qui montre en bas ¦ Aşağıyı gösteren el
+forme|deux doigts ¦ iki parmak
+forme|Sourire ¦ Gülümseme
+forme|Sourire plein ¦ Dolu gülümseme
+forme|Tristesse ¦ Üzüntü
+forme|Cœur penché ¦ Eğik kalp
+forme|Haute tension ¦ Yüksek gerilim
+forme|Tasse fumante ¦ Dumanı tüten fincan
+forme|Source chaude ¦ Kaplıca
+forme|Coche fine ¦ İnce onay işareti
+forme|Croix tracée ¦ Çizilmiş çarpı
+forme|Croix tracée épaisse ¦ Kalın çizilmiş çarpı
+forme|Losange à quatre pointes ¦ Dört köşeli baklava
+forme|Marque de référence ¦ Başvuru işareti
+forme|Marque ¦ İşaret
+forme|Plus dans un rond ¦ Daire içinde artı
+forme|Croix dans un rond ¦ Daire içinde çarpı
+forme|Point dans un rond ¦ Daire içinde nokta
+forme|Rond dans un rond ¦ Daire içinde daire
+forme|Rond à moitié ¦ Yarım daire
+forme|Rond au quart ¦ Çeyrek daire
+forme|Rond aux trois quarts ¦ Dörtte üç daire
+forme|astronomie ¦ astronomi
+forme|Premier croissant ¦ Büyüyen hilal
+forme|Dernier croissant ¦ Küçülen hilal
+forme|Jupiter ¦ Jüpiter
+forme|Saturne ¦ Satürn
+forme|Mercure ¦ Merkür
+forme|Écu français ¦ Fransız kalkanı
+forme|Écu ancien ¦ Eski kalkan
+forme|Écu espagnol ¦ İspanyol kalkanı
+forme|Écu en losange ¦ Baklava kalkan
+forme|dames ¦ hanımlar
+forme|Écu ovale ¦ Oval kalkan
+forme|ecclésiastique ¦ dinî
+forme|Écu rond ¦ Yuvarlak kalkan
+forme|Bannière carrée ¦ Kare sancak
+forme|coupé en deux debout ¦ dikine ikiye bölünmüş
+forme|Écu coupé ¦ Yatay ikiye bölünmüş kalkan
+forme|en deux couché ¦ yatay ikiye
+forme|Écu tranché ¦ Sağ verev bölünmüş kalkan
+forme|en diagonale ¦ çaprazlama
+forme|Écu taillé ¦ Sol verev bölünmüş kalkan
+forme|en quatre ¦ dörde
+forme|Écu écartelé en sautoir ¦ Çapraz dörde bölünmüş kalkan
+forme|Écu tiercé en pal ¦ Dikine üçe bölünmüş kalkan
+forme|trois bandes debout ¦ üç dikey şerit
+forme|Écu tiercé en fasce ¦ Yatay üçe bölünmüş kalkan
+forme|trois bandes couchées ¦ üç yatay şerit
+forme|Écu chef ¦ Başlıklı kalkan
+forme|bande en haut ¦ üstte şerit
+forme|Écu champagne ¦ Tabanlı kalkan
+forme|bande en bas ¦ altta şerit
+forme|Écu fasce ¦ Yatay kuşaklı kalkan
+forme|Écu pal ¦ Dikey kuşaklı kalkan
+forme|Écu bande ¦ Sağ verev kuşaklı kalkan
+forme|Écu barre ¦ Sol verev kuşaklı kalkan
+forme|Écu croix ¦ Haçlı kalkan
+forme|Écu sautoir ¦ Çapraz haçlı kalkan
+forme|croix de Saint-André ¦ Aziz Andreas haçı
+forme|Écu chevron ¦ Şevronlu kalkan
+forme|Écu franc-quartier ¦ Köşe kareli kalkan
+forme|carré en haut à gauche ¦ sol üstte kare
+forme|Écu pairle ¦ Y çatallı kalkan
+forme|en Y ¦ Y biçiminde
+forme|Écu burelé ¦ Yatay çizgili kalkan
+forme|bandes couchées ¦ yatay şeritler
+forme|Écu palé ¦ Dikey çizgili kalkan
+forme|bandes debout ¦ dikey şeritler
+forme|Écu échiqueté ¦ Damalı kalkan
+forme|damier ¦ dama tahtası
+forme|Écu losange ¦ Baklavalı kalkan
+forme|en cœur ¦ ortada
+forme|Écu bordure ¦ Kenar bordürlü kalkan
+forme|Couronne de comte ¦ Kont tacı
+forme|perles ¦ inciler
+forme|Couronne murale ¦ Sur tacı
+forme|ville ¦ şehir
+forme|Heaume ¦ Miğfer
+forme|Lambrequins ¦ Miğfer örtüsü
+forme|manteau ¦ manto
+forme|Listel ¦ Şerit yazı
+forme|devise ¦ düstur
+forme|Cadre double ¦ Çift çerçeve
+forme|Cadre épais ¦ Kalın çerçeve
+forme|Cadre arrondi double ¦ Çift yuvarlak köşeli çerçeve
+forme|Médaillon double ¦ Çift madalyon
+forme|Cadre rond ¦ Yuvarlak çerçeve
+forme|Cadre rond double ¦ Çift yuvarlak çerçeve
+forme|Cadre octogonal ¦ Sekizgen çerçeve
+forme|Cadre hexagonal ¦ Altıgen çerçeve
+forme|Cadre en losange ¦ Baklava çerçeve
+forme|Cadre en arche ¦ Kemerli çerçeve
+forme|Cadre en ogive ¦ Sivri kemerli çerçeve
+forme|Cartouche à coins rentrants ¦ Köşeleri içe girintili kartuş
+forme|Cadre à coins coupés ¦ Köşeleri kesik çerçeve
+forme|Cadre ticket ¦ Bilet çerçeve
+forme|Cadre en cœur ¦ Kalp çerçeve
+forme|Cadre en écu ¦ Kalkan çerçeve
+forme|Cadre festonné ¦ Fistolu çerçeve
+forme|Cadre timbre-poste ¦ Posta pulu çerçeve
+forme|Cadre perlé ¦ İncili çerçeve
+forme|Cadre en étoile ¦ Yıldız çerçeve
+forme|Cadre sceau dentelé ¦ Dişli mühür çerçeve
+forme|Cadre rosace ¦ Gül pencere çerçeve
+forme|Quatre coins ¦ Dört köşe
+forme|Coins de photo ¦ Fotoğraf köşelikleri
+forme|Coins arrondis ornés ¦ Süslü yuvarlak köşeler
+forme|Filet ¦ Çizgi
+forme|Double filet ¦ Çift çizgi
+forme|Ligne de points ¦ Noktalı çizgi
+forme|Frise en vagues ¦ Dalgalı bordür
+forme|Frise en zigzag ¦ Zikzak bordür
+forme|Frise grecque ¦ Grek bordür
+forme|Séparateur orné ¦ Süslü ayırıcı
+forme|Étiquette à trou ¦ Delikli etiket
+forme|Étiquette arrondie ¦ Yuvarlak etiket
+forme|Étiquette rectangle ¦ Dikdörtgen etiket
+forme|Étiquette à encoches ¦ Çentikli etiket
+forme|Étiquette flèche ¦ Ok etiket
+forme|Étiquette flèche gauche ¦ Sol ok etiket
+forme|Ruban à bouts pliés ¦ Uçları katlı kurdele
+forme|Ruban courbé ¦ Kıvrık kurdele
+forme|Signet ¦ Kitap ayracı
+forme|Fanion triangulaire ¦ Üçgen flama
+forme|Étiquette ovale ¦ Oval etiket
+forme|Étiquette ovale à bord ¦ Kenarlı oval etiket
+forme|Étiquette à bord ¦ Kenarlı etiket
+forme|Étiquette de prix ¦ Fiyat etiketi
+forme|Pastille festonnée ¦ Fistolu rozet
+forme|Pastille « nouveau » ¦ “Yeni” rozeti
+forme|Rosette à rubans ¦ Kurdeleli rozet
+forme|Étiquette suspendue ¦ Asılı etiket
+forme|Onglet ¦ Sekme
+forme|Cartouche ¦ Kartuş
+forme|Cartouche à bord ¦ Kenarlı kartuş
+forme|Gommette ¦ Çıkartma
+forme|Flamme verticale ¦ Dikey flama
+forme|Étiquette double ¦ Çift etiket
+forme|Drapeau uni ¦ Düz bayrak
+forme|à colorier ¦ boyanacak
+forme|Drapeau à trois bandes debout ¦ Üç dikey şeritli bayrak
+forme|Drapeau à bande centrale debout ¦ Ortası dikey şeritli bayrak
+forme|Drapeau à trois bandes couchées ¦ Üç yatay şeritli bayrak
+forme|Drapeau à bande centrale couchée ¦ Ortası yatay şeritli bayrak
+forme|Drapeau à deux bandes couchées ¦ İki yatay şeritli bayrak
+forme|Drapeau à deux bandes debout ¦ İki dikey şeritli bayrak
+forme|Drapeau à croix scandinave ¦ İskandinav haçlı bayrak
+forme|Drapeau à croix centrée ¦ Ortada haçlı bayrak
+forme|Drapeau à croix droite ¦ Düz haçlı bayrak
+forme|Drapeau à croix en X ¦ X haçlı bayrak
+forme|Drapeau à disque ¦ Daireli bayrak
+forme|Drapeau au croissant et à l’étoile ¦ Ay yıldızlı bayrak
+forme|Drapeau à l’étoile ¦ Yıldızlı bayrak
+forme|Drapeau étoilé à rayures ¦ Yıldızlı ve çizgili bayrak
+forme|Drapeau au triangle ¦ Üçgenli bayrak
+forme|Drapeau en diagonale ¦ Çapraz bayrak
+forme|Drapeau à canton ¦ Köşe kareli bayrak
+forme|Drapeau à croix doubles ¦ Çift haçlı bayrak
+forme|Drapeau à bandes et canton ¦ Şeritli ve köşe kareli bayrak
+forme|Drapeau à queue d’aronde ¦ Kırlangıç kuyruklu bayrak
+forme|Drapeau flottant ¦ Dalgalanan bayrak
+forme|Drapeau sur mât ¦ Direkte bayrak
+forme|Drapeau tricolore sur mât ¦ Direkte üç renkli bayrak
+forme|Lien parent → un enfant ¦ Ebeveyn → tek çocuk bağı
+forme|Lien parent → {x} enfants ¦ Ebeveyn → çocuk bağı ({x} çocuk)
+forme|Lien de couple ¦ Çift bağı
+forme|Couple et enfants ¦ Çift ve çocuklar
+forme|Accolade ¦ Küme parantezi
+forme|vers la droite ¦ sağa doğru
+forme|vers le bas ¦ aşağı doğru
+forme|Branches d’ascendance ¦ Ata dalları
+forme|Case de personne ¦ Kişi kutusu
+forme|Médaillon de personne ¦ Kişi madalyonu
+forme|Éventail généalogique ¦ Soy ağacı yelpazesi
+forme|Deux alliances entrelacées ¦ İç içe iki alyans
+forme|Arbre et racines ¦ Ağaç ve kökler

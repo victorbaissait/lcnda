@@ -1,0 +1,710 @@
+fr ¦ tr
+=grappe ¦ küme|küme
+=chevauchement ¦ örtüşme|örtüşme
+adn|Nom ¦ Ad
+Test ¦ Test
+Segments ¦ Segmentler
+Groupes ¦ Gruplar
+Paternel ¦ Baba tarafı
+Maternel ¦ Anne tarafı
+Pas de réponse ¦ Yanıt yok
+ADN-X ¦ X-DNA
+ADN-Y ¦ Y-DNA
+ADNmt ¦ mtDNA
+Autosomal (atDNA) ¦ Otozomal (atDNA)
+ADN mitochondrial ¦ Mitokondriyal DNA
+Demi-oncle, demi-tante ¦ Üvey amca/dayı, üvey hala/teyze
+vous ¦ sen
+grands-parents ¦ büyükanne ve büyükbabalar
+arrière-arrière-grands-parents (4e génération) ¦ büyük büyük dedeler ve nineler (4. kuşak)
+5e génération ¦ 5. kuşak
+6e génération ¦ 6. kuşak
+7e génération ¦ 7. kuşak
+8e génération ¦ 8. kuşak
+Relation proposée ¦ Önerilen akrabalık
+Correspondances en commun ¦ Ortak eşleşmeler
+Taille de l’arbre ¦ Ağacın boyutu
+Arbre (adresse) ¦ Ağaç (adres)
+Contact ¦ İletişim
+cM sur le X ¦ X üzerinde cM
+Pays ¦ Ülke
+Fiche sur le site (adresse) ¦ Sitedeki kart (adres)
+Identifiant chez la société ¦ Şirketteki kimlik
+Haplogroupe Y ¦ Y haplogrubu
+Haplogroupe mt ¦ mt haplogrubu
+Haplogroupe mitochondrial ¦ Mitokondriyal haplogrup
+% d’ADN partagé ¦ Paylaşılan DNA yüzdesi
+Grappe (Genetic Affairs) ¦ Küme (Genetic Affairs)
+Nom de la correspondance ¦ Eşleşmenin adı
+Chromosome ¦ Kromozom
+SNP ¦ SNP
+Groupe ou ancêtre ¦ Grup veya ata
+n° {n} ¦ no. {n}
+{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable. ¦ {n} / {total}. Bir ada tıkla: kartı açılır (cM, ortak ata, ağaç, takip). Hesaplayıcı en olası akrabalığı önerir.
+Supprimer {n} correspondances et leurs segments ? ¦ {n} eşleşme ve segmentleri silinsin mi?
+Supprimer cette correspondance et ses segments ? ¦ Bu eşleşme ve segmentleri silinsin mi?
+Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test. ¦ centiMorgan (cM) ortak DNA miktarını ölçer: bir ebeveynle yaklaşık 3 400 cM, birinci dereceden kuzenle 850, ikinci dereceden kuzenle 200. Test sitesinin verdiği sayıyı aynen yaz.
+Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens. ¦ Uzun bir ortak DNA parçası (20 cM’den fazla) çoğu zaman yakın ve kesin bir akrabalığı gösterir; çok sayıda küçük parça ise çok eski atalardan gelebilir.
+Relation probable ({cm} cM, {pct} %) ¦ Olası akrabalık ({cm} cM, %{pct})
+fichier de <b>{name}</b> ¦ dosya: <b>{name}</b>
+{n} de {tool} : chacune devient un groupe (« {tool} 1 »…), retrouvé dans « 🗂️ Groupes ». ¦ {tool} kaynağından {n}: her biri bir grup olur (“{tool} 1”…), “🗂️ Gruplar” içinde bulunur.
+⤓ {file} : {n} pour DNA Painter. ¦ ⤓ {file}: DNA Painter için {n}.
+Branche Martin (Bretagne) ¦ Martin kolu (Bretagne)
+Supprimer le groupe « {name} » ? (les correspondances restent) ¦ Grup silinsin mi: “{name}”? (eşleşmeler kalır)
+{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages) ¦ {lo} ile {hi} cM arasında {n} (sınırlar ⚙️ Ayarlar içinde)
+{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages) ¦ Bu test için {lo} ile {hi} cM arasında {n} (sınırlar ⚙️ Ayarlar içinde)
+{base} ; {n} sans « correspondances en commun » notées, donc ignorées. ¦ {base}; {n} için not edilmiş “ortak eşleşmeler” yok, bu yüzden dikkate alınmadı.
+Créer {n} avec ces couleurs ¦ Bu renklerle {n} oluştur
+Créé par la méthode de Leeds autour de {name} ({cm} cM). ¦ Leeds yöntemiyle oluşturuldu. Merkez: {name} ({cm} cM).
+masculin|inconnu ¦ bilinmiyor
+Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit. ¦ Gruplar (kümeler), birbiriyle de eşleşen eşleşmeleri bir araya getirir: her grubun çoğu zaman tek bir ata çifti vardır. Çok yakın akrabaları ve gürültüyü dışarıda bırakmak için 30 ile 600 cM arasını tut.
+{n} entre {lo} et {hi} cM ; {shared} avec des correspondances en commun, {links} de segments. Les très proches parents (au-delà de {hi} cM) sont écartés : ils correspondent à tout le monde. ¦ {lo} ile {hi} cM arasında {n}; ortak eşleşmeli: {shared}, segment bağlantısı: {links}. Çok yakın akrabalar ({hi} cM üzeri) dışarıda bırakılır: herkesle eşleşirler.
+Grappe {n} ¦ Küme {n}
+{n} correspondances · {lo}–{hi} cM · liens {pct} % ¦ {n} eşleşme · {lo}–{hi} cM · bağlantılar %{pct}
+Ancêtre commun encore inconnu (côté {side}) : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Ortak ata henüz bilinmiyor (taraf: {side}): bu eşleşmelerden birini ağaca yerleştir (bağlı kart) veya soyadlarını ekle.
+Ancêtre commun encore inconnu : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Ortak ata henüz bilinmiyor: bu eşleşmelerden birini ağaca yerleştir (bağlı kart) veya soyadlarını ekle.
+Groupe automatique : {n} correspondances qui se correspondent entre elles. ¦ Otomatik grup: birbiriyle eşleşen {n} eşleşme.
+{n} groupes créés ou mis à jour. ¦ {n} grup oluşturuldu veya güncellendi.
+{n} groupe créé ou mis à jour. ¦ {n} grup oluşturuldu veya güncellendi.
+noms : {list} ¦ soyadları: {list}
+lieux : {list} ¦ yerler: {list}
+grappe {n} ¦ küme {n}
+plus long segment {cm} cM ¦ en uzun segment {cm} cM
+À {pct} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille. ¦ %{pct} olasılıkla doğrudan soy hattında bir akrabalık (ebeveyn, büyükanne/büyükbaba, büyük ata): önce yakın ailene bak.
+Dans la <b>grappe {n}</b>. ¦ <b>Küme {n}</b> içinde.
+Dans la <b>grappe {n}</b> — ancêtres communs de la grappe : {couple}. ¦ <b>Küme {n}</b> içinde — kümenin ortak ataları: {couple}.
+Dans la <b>grappe {n}</b> — ancêtres probables de la grappe : {couple}. ¦ <b>Küme {n}</b> içinde — kümenin olası ataları: {couple}.
+🎯 Déjà placée dans l’arbre : ancêtres communs {couple}. ¦ 🎯 Ağaca zaten yerleştirildi: ortak atalar {couple}.
+{couple} (probable) ¦ {couple} (olası)
+{name} — chr {c} : {a}–{b} Mb, {cm} cM ¦ {name} — kr {c}: {a}–{b} Mb, {cm} cM
+{pct} % de l’ADN (sur {total} cM) ¦ DNA’nın %{pct} kadarı (toplam {total} cM)
+Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est. ¦ Daha ileri gitmek için (dış araçlar, İngilizce): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Akraba evliliği (yalıtılmış köyler, kapalı topluluklar) ve implex (tekrarlanan atalar) cM değerini şişirir: akrabalık olduğundan daha yakın görünür.
+Les « origines ethniques » données par les sociétés : des <b>estimations</b>, qui changent d’une société à l’autre et d’une mise à jour à l’autre. Elles ne remplacent pas les registres. ¦ Şirketlerin verdiği “etnik kökenler”: şirketten şirkete ve güncellemeden güncellemeye değişen <b>tahminler</b>. Kayıtların yerini tutmazlar.
+Couleur « {name} » ¦ Renk: “{name}”
+👥 Correspondance ADN « {name} » : <b>{cm} cM</b> ¦ 👥 DNA eşleşmesi “{name}”: <b>{cm} cM</b>
+ancêtre commun : {name} ¦ ortak ata: {name}
+Code civil, article 16-10 (examen des caractéristiques génétiques : seulement à des fins médicales ou de recherche scientifique, avec consentement écrit) ¦ Fransız Medeni Kanunu, madde 16-10 (genetik özelliklerin incelenmesi: yalnızca tıbbi veya bilimsel araştırma amacıyla, yazılı onayla)
+Code pénal, article 226-28-1 (demander un examen génétique hors des cas prévus par la loi : 3 750 € d’amende) ¦ Fransız Ceza Kanunu, madde 226-28-1 (kanunun öngördüğü durumlar dışında genetik test istemek: 3 750 € para cezası)
+Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (nouvelle rédaction de l’article 16-10) ¦ 2 Ağustos 2021 tarihli ve 2021-1017 sayılı biyoetik kanunu, madde 16 (16-10. maddenin yeni metni)
+Code civil sur Légifrance (articles 16-10 à 16-13 : examen génétique, empreintes génétiques, filiation) ¦ Légifrance’ta Medeni Kanun (madde 16-10 ile 16-13: genetik inceleme, genetik parmak izi, soy bağı)
+Code pénal sur Légifrance (articles 226-25 à 226-30) ¦ Légifrance’ta Ceza Kanunu (madde 226-25 ile 226-30)
+Code de la santé publique sur Légifrance (articles L1131-1 et suivants : examens génétiques) ¦ Légifrance’ta Halk Sağlığı Kanunu (madde L1131-1 ve devamı: genetik testler)
+CNIL : les données génétiques sont des données « sensibles » (RGPD, article 9) ¦ CNIL: genetik veriler “hassas” verilerdir (GDPR, madde 9)
+Personne : mets « À contacter » dans le suivi d’une correspondance. ¦ Kimse yok: bir eşleşmenin takibinde “İletişime geçilecek” seç.
+J’ai lu cette mise en garde (elle ne s’affichera plus en haut des autres pages). ¦ Bu uyarıyı okudum (artık diğer sayfaların üstünde görünmeyecek).
+La mise en garde reviendra en haut des pages. ¦ Uyarı yeniden sayfaların üstünde görünecek.
+Modifier le test ¦ Testi düzenle
+Société / origine ¦ Şirket / kaynak
+Géré par ¦ Yöneten
+Fichier brut (où il est rangé) ¦ Ham dosya (nerede saklanıyor)
+(qui a accepté quoi, cadre médical ou de recherche, pays…) ¦ (kim neye onay verdi, tıbbi veya araştırma çerçevesi, ülke…)
+(une ligne par région : « Bretagne ; 42 ») ¦ (bölge başına bir satır: “Bretagne ; 42”)
+Supprimer ce test, ses correspondances et ses segments ? ¦ Bu test, eşleşmeleri ve segmentleri silinsin mi?
+Supprimer le test ¦ Testi sil
+Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs. ¦ Kişi ve şirket başına bir test: tür, haplogruplar, tahmini kökenler, belirteçler.
+Aucun test ADN pour l’instant ¦ Henüz DNA testi yok
+Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances. ¦ Eşleşmelerini saklamak için testini ekle (Ancestry, MyHeritage, 23andMe…).
+⤒ Importer (CSV) ¦ ⤒ İçe aktar (CSV)
+Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent. ¦ Önce “🧬 Testlerim” içine bir test ekle: eşleşmeler ona bağlanır.
+Nom, nom de famille, lieu, note… ¦ Ad, soyadı, yer, not…
+cM min ¦ En az cM
+cM max ¦ En çok cM
+Ajouter au groupe… ¦ Gruba ekle…
+Retirer du groupe… ¦ Gruptan çıkar…
+Aucune correspondance pour ces filtres. ¦ Bu filtrelere uyan eşleşme yok.
+cM : les plus nombreux ¦ cM: en çoktan aza
+cM : les moins nombreux ¦ cM: en azdan çoğa
+Nom : A → Z ¦ Ad: A → Z
+Nom : Z → A ¦ Ad: Z → A
+Segments : les plus nombreux ¦ Segmentler: en çoktan aza
+Les plus récemment modifiées ¦ En son değiştirilenler
+Les plus anciennement modifiées ¦ En eski değiştirilenler
+Supprimer les correspondances ¦ Eşleşmeleri sil
+Nom (tel que sur le site) ¦ Ad (sitedeki gibi)
+Relation proposée par la société ¦ Şirketin önerdiği akrabalık
+Ancêtre(s) commun(s) (MRCA) ¦ Ortak ata(lar) (MRCA)
+Jean Martin et Marie Durand ¦ Jean Martin ve Marie Durand
+Étoiles (0 à 5) ¦ Yıldız (0 ile 5 arası)
+Aucun groupe (« 🗂️ Groupes »). ¦ Grup yok (“🗂️ Gruplar”).
+Noms de famille en commun ¦ Ortak soyadları
+Lieux en commun ¦ Ortak yerler
+Arbre en ligne (adresse) ¦ Çevrimiçi ağaç (adres)
+Taille de son arbre ¦ Ağacının boyutu
+(une par ligne ou séparées par ; — sert à la méthode de Leeds) ¦ (her satıra bir tane veya ; ile ayrılmış — Leeds yöntemi için kullanılır)
+Supprimer la correspondance ¦ Eşleşmeyi sil
+CSV de la société ¦ şirketin CSV dosyası
+Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) ou par un outil (DNA Painter, Genetic Affairs : AutoCluster, AutoTree) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé. ¦ Şirketin (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) veya bir aracın (DNA Painter, Genetic Affairs: AutoCluster, AutoTree) dışa aktardığı CSV dosyası: eşleşme listesi veya segmentler. Sütunlar kendiliğinden tanınır. Ham DNA dosyası (SNP’lerin) asla içe aktarılmaz.
+Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.) ¦ Sıkıştırılmış dosya: önce bilgisayarında aç ve içindeki .csv dosyasını seç. (Ham DNA dosyası ise asla içe aktarılmaz.)
+C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient. ¦ Bu sıkıştırılmış bir dosya (.zip): önce aç ve içindeki .csv dosyasını seç.
+Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments). ¦ Sütunlar tanınmadı: en azından ad ve cM (eşleşmeler) ya da kromozom, başlangıç ve bitiş (segmentler) gerekir.
+Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés. ¦ Zaten var olan bir eşleşme (aynı ad, aynı test) güncellenir: notların, grupların, takibin ve bağlı kartın korunur.
+Remplacer tous les segments de ce test ¦ Bu testin tüm segmentlerini değiştir
+Choisis au moins la colonne du nom (« Colonnes reconnues »). ¦ En azından ad sütununu seç (“Tanınan sütunlar”).
+Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »). ¦ Kromozom, başlangıç ve bitiş sütunlarını seç (“Tanınan sütunlar”).
+Ce test n’a pas encore de segments à exporter : importe-les d’abord (⤒ Importer des segments). ¦ Bu testin henüz dışa aktarılacak segmenti yok: önce onları içe aktar (⤒ Segmentleri içe aktar).
+Modifier le groupe ¦ Grubu düzenle
+Couple d’ancêtres supposé ¦ Varsayılan ata çifti
+Supprimer le groupe ¦ Grubu sil
+Groupes et méthode de Leeds ¦ Gruplar ve Leeds yöntemi
+Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ». ¦ Eşleşmelerini kola göre düzenle. Leeds yöntemi, birbiriyle eşleşen 2. ve 3. dereceden kuzenleri (≈ 90 ile 400 cM) gruplar: her grup çoğu zaman 8 büyük atandan birini gösterir… yeter ki “ortak eşleşmelerini” not etmiş ol.
+Aucun groupe pour l’instant ¦ Henüz grup yok
+Méthode de Leeds automatique ¦ Otomatik Leeds yöntemi
+Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »). ¦ Henüz grup bulunamadı: yakın eşleşmelerini aç ve “Ortak eşleşmeler” alanını doldur (veya bir “Shared matches” sütunu içe aktar).
+Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome. ¦ Birbiriyle eşleşen eşleşmeler kümeler oluşturur: her küme genellikle aynı ata çiftinden gelir. Hesap, not edilmiş veya içe aktarılmış “ortak eşleşmeleri” ve aynı kromozomda örtüşen segmentleri kullanır.
+(ou mettre à jour ceux déjà créés) ¦ (veya önceden oluşturulanları güncelle)
+Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes). ¦ Henüz küme yok: “ortak eşleşmeler” (bir eşleşmenin kartında veya içe aktarırken “Shared matches” sütunu) ya da segmentler (🧩 Kromozomlar) gerekir.
+Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve. ¦ Bir eşleşme (veya bir cM sayısı) için olası akrabalıklar ve ağacındaki muhtemelen soyundan geldiği ata çiftleri, en olasıdan en az olasıya. Dayanaklar: cM (Shared cM Project), taraf, ortak soyadları ve yerler, küme ve yaş. Bu doğrulanacak bir ipucudur, asla bir kanıt değildir.
+Placer un cousin dans l’arbre ¦ Bir kuzeni ağaca yerleştir
+— ou les cM à la main ci-dessous — ¦ — veya aşağıya cM değerini elle yaz —
+Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement. ¦ Bu test hiçbir karta bağlı değil: ağacın yerleştirmede kullanılması için onu test edilen kişiye bağla (🧬 Testlerim).
+Lecture de l’arbre… ¦ Ağaç okunuyor…
+Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée). ¦ Sonra: bu çiftin torunlarını ara (Grafikler’de “Torunlar”), eşleşmenin ağacıyla karşılaştır ve karta not et (Ortak ata, Bağlı kart).
+Indices ¦ İpuçları
+Retenir ¦ Tut
+Noté dans la correspondance (Ancêtre commun, côté). ¦ Eşleşmeye not edildi (Ortak ata, taraf).
+Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment). ¦ “Kromozom tarayıcısı”: her eşleşmenin seninle nerede DNA paylaştığını gösterir. Örtüşen segmentler belki aynı atadan gelir (üçgenleme — doğrulanmalı: her biri o segmentte diğeriyle de eşleşmeli).
+Le fichier CSV que DNA Painter sait lire (« Paint a new match » → importer) ¦ DNA Painter’ın okuyabildiği CSV dosyası (“Paint a new match” → içe aktar)
+⤒ Importer des segments (CSV) ¦ ⤒ Segmentleri içe aktar (CSV)
+⤓ Exporter pour DNA Painter ¦ ⤓ DNA Painter için dışa aktar
+Segment ¦ Segment
+Chevauchements (triangulation possible) ¦ Örtüşmeler (olası üçgenleme)
+Chr ¦ Kr
+De (Mb) ¦ Başlangıç (Mb)
+À (Mb) ¦ Bitiş (Mb)
+Correspondance 1 ¦ Eşleşme 1
+Correspondance 2 ¦ Eşleşme 2
+Aucun pour l’instant. ¦ Şimdilik yok.
+Segment refusé : vérifie le chromosome, et que la fin est après le début. ¦ Segment reddedildi: kromozomu ve bitişin başlangıçtan sonra olduğunu kontrol et.
+Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations. ¦ Hangi akrabalık için kaç centimorgan paylaşılır? Shared cM Project’e göre yaklaşık değerler (Blaine Bettinger, sürüm 4, 2020): binlerce gerçek vakada gözlenen bir ortalama ve bir aralık. Aynı değer birden fazla akrabalığa uyabilir.
+Ex. 230 ¦ Örn. 230
+Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau). ¦ Bu değer için bilinen akrabalık yok (3 720 cM üzeri: kişinin kendisi veya tek yumurta ikizi).
+Tableau de référence ¦ Başvuru tablosu
+Fourchette ¦ Aralık
+D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X. ¦ Ağacına göre: bir kişinin Y-DNA’sı (babanın babasının babası…), mitokondriyal DNA’sı (annenin annesi…) ve X-DNA’sı kimden geliyor. Kimi test ettireceğini bilmek, bir haplogrubu veya X üzerindeki bir eşleşmeyi okumak için yararlı.
+Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent. ¦ Yalnızca erkeklerde Y-DNA bulunur. Kadınlarda Y-DNA yoktur: onu babası, erkek kardeşleri veya aynı soyadlı bir kuzeni taşır.
+Pas de père connu dans l’arbre. ¦ Ağaçta bilinen baba yok.
+Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester. ¦ Bu erkeklerin hepsi (neredeyse) aynı Y kromozomuna sahip: bu soy hattından yaşayan bir erkek onu test ettirebilir.
+Pas de mère connue dans l’arbre. ¦ Ağaçta bilinen anne yok.
+Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour. ¦ Annelerden tüm çocuklarına geçer; onu sırası gelince yalnızca kızlar aktarır.
+Un homme reçoit son X de sa mère seulement. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Erkek X kromozomunu yalnızca annesinden alır. Baba yalnızca annesinden aldığı X’i aktarır: bu yüzden bazı atalar X vermiş olamaz. {n}:
+Une femme reçoit un X de chaque parent. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Kadın her ebeveyninden bir X alır. Baba yalnızca annesinden aldığı X’i aktarır: bu yüzden bazı atalar X vermiş olamaz. {n}:
+Aucune estimation : ajoute-les dans un test (« 🧬 Mes tests » → Origines estimées). ¦ Tahmin yok: bunları bir teste ekle (“🧬 Testlerim” → Tahmini kökenler).
+Ce que montre l’onglet, dans l’ordre voulu, et comment. ¦ Sekmenin ne gösterdiği, istediğin sırayla ve nasıl.
+Rubriques de la colonne de gauche ¦ Sol sütunun bölümleri
+Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée). ¦ Görmek istediklerini işaretle; sıra için ↑ ↓ (veya tutamacı sürükle).
+Ne montrer que les correspondances d’au moins ¦ Yalnızca en az şu kadar olan eşleşmeleri göster
+Lignes affichées à la fois ¦ Bir kerede gösterilen satır
+Méthode de Leeds : de ¦ Leeds yöntemi: en az
+Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Yüzdeler için toplam cM (Ancestry/MyHeritage 6 800, 23andMe 7 400)
+Sauvegarde de l’onglet ¦ Sekmenin yedeği
+Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part. ¦ Testler, eşleşmeler, segmentler ve gruplar veritabanında (ve yedeklerinde). İstersen onları ayrıca dışa aktarabilirsin.
+Fait. ¦ Tamam.
+C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes. ¦ Bu bir ham DNA dosyası (SNP’lerin, yani harf harf genomun): asla içe aktarılmaz. Senin ve aileninin mahremiyetini korumak için ve Fransa’da tıbbi veya araştırma çerçevesi dışında genetik test yasak olduğu için uygulama yalnızca eşleşme ve segment listelerini tutar. Bunun yerine şirketten eşleşme listesini (matches) veya kromozom tarayıcısını dışa aktar.
+=analysée ¦ analiz edildi|analiz edildi
+=visage à nommer ¦ adlandırılacak yüz|adlandırılacak yüz
+=photo restante ¦ kalan fotoğraf|kalan fotoğraf
+=photo sautée ¦ atlanan fotoğraf|atlanan fotoğraf
+=visage ignoré ¦ yüz yok sayıldı|yüz yok sayıldı
+Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé). ¦ Tanıma modeli yüklenemedi (ilk seferde internet bağlantısı gerekir veya değiştirilmiş dosya reddedildi).
+Bibliothèque… ¦ Kütüphane…
+Bibliothèque illisible. ¦ Kütüphane okunamıyor.
+Bibliothèque de reconnaissance indisponible. ¦ Tanıma kütüphanesi kullanılamıyor.
+Repérage des visages… ¦ Yüzler bulunuyor…
+Points du visage… ¦ Yüz noktaları…
+Empreintes des visages… ¦ Yüz izleri…
+Analyse arrêtée. ¦ Analiz durduruldu.
+Fil de calcul impossible : {err} ¦ Hesaplama iş parçacığı başlatılamadı: {err}
+Le modèle met trop de temps à se charger. ¦ Modelin yüklenmesi çok uzun sürüyor.
+le calcul a planté ¦ hesaplama çöktü
+Fil de calcul en erreur. ¦ Hesaplama iş parçacığında hata.
+Calcul sur la page (plus lent)… ¦ Sayfada hesaplanıyor (daha yavaş)…
+Redémarrage du calcul… ¦ Hesaplama yeniden başlatılıyor…
+trop longue à analyser (plus de {n} s) ¦ analiz etmek için çok uzun ({n} sn’den fazla)
+Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur. ¦ 1. adım: uygulama seçilen fotoğraflardaki yüzleri bulur. 2. adım: zaten tanınmış yüzlere göre bir ad önerir. Her şey bu bilgisayarda hesaplanır.
+MÉDIAS · VISAGES ¦ MEDYA · YÜZLER
+Visages ¦ Yüzler
+Chargement des photos… ¦ Fotoğraflar yükleniyor…
+≈ {time} sur cet ordinateur ¦ Bu bilgisayarda ≈ {time}
+environ 1 à 3 s par photo, selon l’ordinateur ¦ bilgisayara göre fotoğraf başına yaklaşık 1 ile 3 sn
+<b>{n}</b> identifiés ¦ <b>{n}</b> tanındı
+<b>{n}</b> identifié ¦ <b>{n}</b> tanındı
+{n} identifiés ¦ {n} tanındı
+{n} identifié ¦ {n} tanındı
+① Trouver les visages ¦ ① Yüzleri bul
+② Qui est-ce ? ¦ ② Bu kim?
+Les {n} plus récentes ¦ En yeni {n}
+{n} à analyser ¦ Analiz edilecek: {n}
+<b>Analyse en pause</b> : {n} sur {total} ({what}). ¦ <b>Analiz duraklatıldı</b>: {n} / {total} ({what}).
+analyse|Abandonner ¦ Vazgeç
+Quelles photos analyser ? ¦ Hangi fotoğraflar analiz edilsin?
+Sauter les photos déjà analysées ¦ Zaten analiz edilmiş fotoğrafları atla
+Analyser {n} ¦ {n} analiz et
+Rien à analyser ici ¦ Burada analiz edilecek bir şey yok
+↻ Réessayer {n} ¦ ↻ {n} için yeniden dene
+Photos avec des visages à nommer ¦ Adlandırılacak yüzleri olan fotoğraflar
+Ouvrir {name} ¦ Aç: {name}
+détection simple ¦ basit algılama
+Ouvrir et identifier ¦ Aç ve tanımla
+Tous les visages trouvés ont un nom ou ont été ignorés. 👍 ¦ Bulunan tüm yüzlerin bir adı var veya yok sayıldı. 👍
+Lance une analyse : les photos où l’app trouve des visages apparaîtront ici. ¦ Bir analiz başlat: uygulamanın yüz bulduğu fotoğraflar burada görünecek.
+entre 1900 et 1950, vers 1925, 1960… ¦ entre 1900 et 1950, vers 1925, 1960…
+Les photos marquées avec des visages ¦ Yüzlerle işaretlenmiş fotoğraflar
+photo de la personne, portrait d’une fiche, visages déjà identifiés, étiquette « portrait » ou « visage » ¦ kişinin fotoğrafı, bir kartın portresi, zaten tanınmış yüzler, “portrait” veya “visage” etiketi
+Les photos affichées dans la liste Médias ¦ Medya listesinde gösterilen fotoğraflar
+avec ta recherche et tes filtres actuels ¦ şu anki aramanla ve filtrelerinle
+Les photos d’une personne ¦ Bir kişinin fotoğrafları
+rattachées à sa fiche ou où elle est identifiée ¦ kartına bağlı veya tanındığı fotoğraflar
+Les photos d’une étiquette ¦ Bir etiketin fotoğrafları
+Un album ou un dossier ¦ Bir albüm veya klasör
+Une période ¦ Bir dönem
+d’après la date de la photo, sinon sa date d’ajout ¦ fotoğrafın tarihine göre, yoksa eklenme tarihine göre
+les dernières ajoutées ¦ en son eklenenler
+Toutes les photos ¦ Tüm fotoğraflar
+peut être long : tu peux mettre en pause et reprendre plus tard ¦ uzun sürebilir: duraklatıp daha sonra devam edebilirsin
+En attendant, nomme les inconnus regroupés (👥). ¦ Bu arada gruplanmış bilinmeyenleri adlandır (👥).
+Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ¦ Öneri almak için: birkaç fotoğraf aç ve yüzleri elle tanımla (görüntüleyicideki “Tanımla” düğmesi veya ① adımındaki “Aç ve tanımla”), her kişi için en az bir kez.
+Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. ¦ Henüz yüz bulunamadı. ① adımıyla başla: birkaç fotoğraf seç ve analizi başlat.
+💡 Propositions ¦ 💡 Öneriler
+👥 Inconnus regroupés ¦ 👥 Gruplanmış bilinmeyenler
+❔ Autres inconnus ¦ ❔ Diğer bilinmeyenler
+✓ Identifiés ¦ ✓ Tanınanlar
+✓ Accepter les {n} très probables ¦ ✓ Çok olası {n} yüzü kabul et
+visage|probable ¦ olası
+ressemblance {pct} % ¦ benzerlik %{pct}
+ou {name} ? ¦ yoksa bu mu: {name}?
+✓ Oui ¦ ✓ Evet
+Quelqu’un d’autre… ¦ Başka biri…
+Pas un visage, ou personne à ne pas nommer ¦ Yüz değil veya adlandırılmayacak bir kişi
+Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main. ¦ Şimdilik öneri yok: daha fazla fotoğraf analiz et veya daha fazla yüzü elle tanımla.
+<b>{n} visages</b> qui se ressemblent, sur {p} photos. ¦ Birbirine benzeyen <b>{n} yüz</b>, {p} fotoğrafta.
+Nommer… ¦ Adlandır…
+Demander à la famille ¦ Aileye sor
+Personne n’est encore identifié. ¦ Henüz kimse tanımlanmadı.
+⏸ En pause (la photo en cours se termine) ¦ ⏸ Duraklatıldı (geçerli fotoğraf bitiriliyor)
+{s} s par photo · reste ≈ {left} ¦ Fotoğraf başına {s} sn · kalan ≈ {left}
+vitesse : on mesure… ¦ hız: ölçülüyor…
+■ Arrêter ¦ ■ Durdur
+Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent. ¦ Sayfada hesaplanıyor (ayrı iş parçacığı başlatılamadı): biraz daha yavaş.
+Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom. ¦ Tanıma modeli kullanılamıyor ({why}). Tarayıcının basit algılaması: yüzler bulunur ama ad önerilmez.
+Chargement du modèle… ¦ Model yükleniyor…
+Chargement du modèle : {step} ¦ Model yükleniyor: {step}
+■ Analyse arrêtée : {n}{more}. ¦ ■ Analiz durduruldu: {n}{more}.
+✓ Analyse finie : {n}{more}. ¦ ✓ Analiz bitti: {n}{more}.
+Il reste {n} : « ▶ Reprendre » quand tu veux. ¦ Kalan: {n}. İstediğin zaman “▶ Devam et”.
+■ Analyse arrêtée. ¦ ■ Analiz durduruldu.
+{n} : tu pourras reprendre. ¦ {n}: daha sonra devam edebilirsin.
+Visage ignoré ¦ Yüz yok sayıldı
+photos de {name} ¦ fotoğraflar: {name}
+photos sautées ¦ atlanan fotoğraflar
+Identifié : {name} ¦ Tanındı: {name}
+{n} (certitude « probable ») ¦ {n} (kesinlik “olası”)
+Qui est-ce ? ({n} visages) ¦ Bu kim? ({n} yüz)
+Certitude ¦ Kesinlik
+Certaine ¦ Kesin
+Possible ¦ Mümkün
+Choisis… ¦ Seç…
+Hier et aujourd’hui ¦ Dün ve bugün
+Nom de la comparaison ¦ Karşılaştırmanın adı
+Enregistrer la comparaison (reliée aux deux photos et aux personnes) ¦ Karşılaştırmayı kaydet (iki fotoğrafa ve kişilere bağlı)
+A — l’image ancienne ¦ A — eski görüntü
+B — la photo d’aujourd’hui ¦ B — bugünün fotoğrafı
+Photo A ¦ A fotoğrafı
+Photo B ¦ B fotoğrafı
+La photo A ¦ A fotoğrafı
+La photo B ¦ B fotoğrafı
+la photo A ¦ A fotoğrafı
+La photo « {name} » n’a pas pu être ouverte. ¦ Fotoğraf açılamadı: “{name}”.
+Choisis la photo B à droite → ¦ B fotoğrafını sağda seç →
+Choisis la photo A à droite → ¦ A fotoğrafını sağda seç →
+Clique <b>{what}</b> (à ta gauche sur l’écran). ¦ <b>{what}</b> öğesine tıkla (ekranda solunda).
+Échap pour arrêter. ¦ Durdurmak için Esc.
+Clique sur la photo <b>{side}</b> : {what}. ¦ <b>{side}</b> fotoğrafına tıkla: {what}.
+Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics. ¦ {side} fotoğrafında yüz bulunamadı: gözleri iki tıklamayla yerleştir.
+Le modèle de visages n’a pas pu être chargé. ¦ Yüz modeli yüklenemedi.
+Pose les yeux en deux clics par photo. ¦ Her fotoğrafta gözleri iki tıklamayla yerleştir.
+Pas encore de ressemblance calculée pour ces deux photos. ¦ Bu iki fotoğraf için henüz benzerlik hesaplanmadı.
+« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias). ¦ “✨ Gözleri kendiliğinden bul” bunu hesaplar (bu bilgisayardaki yüz modeli) veya bu fotoğraflarda <b>👤 Yüzler</b> aracını çalıştır (Listeler → Medya).
+Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes. ¦ Yüz modeli tarafından bu bilgisayarda hesaplandı ({from}). Yaş, ışık, açı ve fotoğraf kalitesi sonucu çok değiştirir; bir aile benzerliği (ebeveyn, erkek kardeş, kız kardeş) de güçlü bir benzerlik verebilir. Belgelerle doğrulanmalı.
+visages repérés à l’instant ¦ az önce bulunan yüzler
+visages trouvés par 👤 Visages ¦ 👤 Yüzler aracının bulduğu yüzler
+Rideau ¦ Perde
+Part de B ¦ B’nin payı
+La photo B, à poser à côté de « {name} ». ¦ B fotoğrafı, şunun yanına konacak: “{name}”.
+Une photo de cette personne ; ensuite, la photo à comparer. ¦ Bu kişinin bir fotoğrafı; sonra karşılaştırılacak fotoğraf.
+Comparer deux photos (ressemblance, même personne à deux âges…) ¦ İki fotoğrafı karşılaştır (benzerlik, iki farklı yaşta aynı kişi…)
+Ressemblance très forte — ce n’est pas une preuve ¦ Çok güçlü benzerlik — bu bir kanıt değil
+Ressemblance forte — ce n’est pas une preuve ¦ Güçlü benzerlik — bu bir kanıt değil
+Ressemblance moyenne — ce n’est pas une preuve ¦ Orta benzerlik — bu bir kanıt değil
+Ressemblance faible — ce n’est pas une preuve ¦ Zayıf benzerlik — bu bir kanıt değil
+Affichage des deux photos ¦ İki fotoğrafın gösterimi
+Zoomer et déplacer les deux photos ensemble ¦ İki fotoğrafı birlikte yakınlaştır ve kaydır
+Zoomer ¦ Yakınlaştır
+Toute la photo ¦ Fotoğrafın tamamı
+Toute la photo (double-clic) ¦ Fotoğrafın tamamı (çift tıklama)
+Les deux photos : molette pour zoomer, glisser pour déplacer, double-clic pour revoir toute la photo ¦ İki fotoğraf: yakınlaştırmak için tekerlek, kaydırmak için sürükle, fotoğrafın tamamını yeniden görmek için çift tıkla
+Les deux photos ¦ İki fotoğraf
+Mettre A à la place de B et B à la place de A ¦ A’yı B’nin yerine, B’yi A’nın yerine koy
+⇄ Échanger A et B ¦ ⇄ A ile B’yi değiştir
+Caler la photo d’aujourd’hui ¦ Bugünün fotoğrafını hizala
+Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille. ¦ Her fotoğrafta aynı iki işarete tıkla (çan kulesinin tepesi, bir çatının köşesi…): bugünün fotoğrafı döndürülür ve aynı boyuta getirilir.
+Deux clics sur la photo A, puis les deux mêmes repères sur la photo B ¦ A fotoğrafında iki tıklama, sonra B fotoğrafında aynı iki işaret
+📌 Poser 2 repères par photo ¦ 📌 Fotoğraf başına 2 işaret koy
+Caler sur les repères ¦ İşaretlere göre hizala
+✕ Retirer les repères ¦ ✕ İşaretleri kaldır
+Ajuster à la main ¦ Elle ayarla
+Glisser sur l’image déplace seulement la photo d’aujourd’hui ¦ Görüntüde sürüklemek yalnızca bugünün fotoğrafını kaydırır
+Glisser déplace la photo B ¦ Sürüklemek B fotoğrafını kaydırır
+Les yeux (alignement) ¦ Gözler (hizalama)
+Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste. ¦ İki yüz aynı boyuta, gözler aynı yüksekliğe getirilir: karşılaştırma çok daha doğru olur.
+✨ Repérer les yeux tout seul ¦ ✨ Gözleri kendiliğinden bul
+Clique l’œil gauche puis l’œil droit sur chaque photo ¦ Her fotoğrafta önce sol göze, sonra sağ göze tıkla
+👁 Poser les yeux (2 clics par photo) ¦ 👁 Gözleri yerleştir (fotoğraf başına 2 tıklama)
+Aligner sur les yeux ¦ Gözlere göre hizala
+✕ Retirer les yeux posés ¦ ✕ Yerleştirilen gözleri kaldır
+Prises sur les deux photos ; ajoute ou retire qui tu veux. ¦ İki fotoğraftan alındı; istediğini ekle veya çıkar.
+Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé… ¦ Fark ettiklerin: burnun, kulakların biçimi, saç çizgisi, ben, tahmini yaş…
+Fondu : part de la photo B ; rideau : place du rideau ¦ Geçiş: B fotoğrafının payı; perde: perdenin yeri
+Choisis une photo (image). ¦ Bir fotoğraf (görüntü) seç.
+C’est déjà l’autre photo : choisis-en une autre. ¦ Bu zaten diğer fotoğraf: başka bir tane seç.
+Choisis les deux photos à comparer ¦ Karşılaştırılacak iki fotoğrafı seç
+Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes… ¦ İki portre: iki farklı yaşta aynı kişi, akraba olduğu düşünülen iki kişi…
+🖼 Choisir la photo A ¦ 🖼 A fotoğrafını seç
+Pose d’abord deux repères sur chaque photo (📌). ¦ Önce her fotoğrafa iki işaret koy (📌).
+Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo). ¦ Önce iki fotoğrafta da gözleri yerleştir (✨ kendiliğinden veya 👁 fotoğraf başına iki tıklama).
+le repère 1 sur l’image ancienne (A) ¦ eski görüntüdeki (A) 1. işaret
+le repère 2 sur l’image ancienne (A) ¦ eski görüntüdeki (A) 2. işaret
+le même repère 1 sur la photo d’aujourd’hui (B) ¦ bugünün fotoğrafındaki (B) aynı 1. işaret
+le même repère 2 sur la photo d’aujourd’hui (B) ¦ bugünün fotoğrafındaki (B) aynı 2. işaret
+l’œil de gauche de la photo A ¦ A fotoğrafındaki sol göz
+l’œil de droite de la photo A ¦ A fotoğrafındaki sağ göz
+l’œil de gauche de la photo B ¦ B fotoğrafındaki sol göz
+l’œil de droite de la photo B ¦ B fotoğrafındaki sağ göz
+Choisis d’abord les deux photos. ¦ Önce iki fotoğrafı seç.
+Repères non posés : rien n’a changé. ¦ İşaretler konmadı: hiçbir şey değişmedi.
+Yeux non posés : rien n’a changé. ¦ Gözler yerleştirilmedi: hiçbir şey değişmedi.
+Repères posés : la photo d’aujourd’hui est calée sur l’ancienne. ¦ İşaretler kondu: bugünün fotoğrafı eskisine hizalandı.
+Yeux posés : les deux visages sont alignés. ¦ Gözler yerleştirildi: iki yüz hizalandı.
+Le modèle de visages n’est pas disponible ici : pose les yeux en deux clics par photo. ¦ Yüz modeli burada kullanılamıyor: her fotoğrafta gözleri iki tıklamayla yerleştir.
+Le modèle de visages (≈ 13 Mo, sur cet ordinateur seulement) se charge une fois, au premier clic. ¦ Yüz modeli (≈ 13 MB, yalnızca bu bilgisayarda) ilk tıklamada bir kez yüklenir.
+Visages trouvés : les yeux sont alignés. ¦ Yüzler bulundu: gözler hizalandı.
+Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo. ¦ Yüz modeli yüklenemedi (ilk seferde internet gerekir): her fotoğrafta gözleri iki tıklamayla yerleştir.
+Choisis les deux photos. ¦ İki fotoğrafı seç.
+Choisis les deux photos avant d’enregistrer. ¦ Kaydetmeden önce iki fotoğrafı seç.
+Les derniers changements de la comparaison ne sont pas enregistrés. ¦ Karşılaştırmadaki son değişiklikler kaydedilmedi.
+C’est la même photo : choisis-en une autre. ¦ Bu aynı fotoğraf: başka bir tane seç.
+comparaison de photos ¦ fotoğraf karşılaştırması
+Deux photos ¦ İki fotoğraf
+=autre déplacement ¦ diğer yolculuk|diğer yolculuk
+=déplacement ¦ yolculuk|yolculuk
+=personne vivante ou confidentielle ¦ yaşayan veya gizli kişi|yaşayan veya gizli kişi
+=lieu de la famille ¦ ailenin yeri|ailenin yeri
+=couche importée ¦ katman içe aktarıldı|katman içe aktarıldı
+=couche ¦ katman|katman
+{n} jours ({w} semaines) ¦ {n} gün ({w} hafta)
+Il faut environ {dur} pour aller de {from} à {to} ({how}, ≈ {what}). ¦ Yolculuk {from} → {to}: yaklaşık {dur} sürer ({how}, ≈ {what}).
+Il faut environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Yolculuk {from} → {to}, {year} yılında: yaklaşık {dur} sürer ({how}, ≈ {what}).
+Il fallait environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Yolculuk {from} → {to}, {year} yılında: yaklaşık {dur} sürüyordu ({how}, ≈ {what}).
+{km} sur l’eau ¦ suda {km}
+{km} de voie ¦ demiryolunda {km}
+{km} de route ¦ karayolunda {km}
+À pied ¦ Yürüyerek
+à pied ¦ yürüyerek
+À cheval ¦ At sırtında
+à cheval ¦ at sırtında
+En diligence ¦ Posta arabasıyla
+en diligence ¦ posta arabasıyla
+Bateau (rivière) ¦ Tekne (nehir)
+en bateau sur la rivière ¦ nehirde tekneyle
+Bateau (mer) ¦ Gemi (deniz)
+en bateau ¦ gemiyle
+En train ¦ Trenle
+en train ¦ trenle
+4 à 5 km/h, 8 heures de marche par jour ¦ saatte 4 ile 5 km, günde 8 saat yürüyüş
+au pas et au trot, en ménageant sa monture (un courrier qui change de cheval aux relais va deux fois plus loin) ¦ adım adım ve tırısla, atı yormadan (menzil hanlarında at değiştiren bir ulak iki kat uzağa gider)
+coches puis diligences et malles-poste ; on roule de plus en plus la nuit ¦ önce at arabaları, sonra posta arabaları ve posta faytonları; giderek daha çok gece de yol alınır
+coche d’eau, halage, puis bateaux à vapeur ¦ su arabası, yedekte çekme, sonra buharlı tekneler
+à la voile jusque vers 1840, puis à la vapeur ¦ 1840 dolaylarına kadar yelkenle, sonra buharla
+selon les lignes ouvertes : grandes lignes de 1840 à 1860, petites lignes jusque vers 1910 ¦ açık hatlara göre: ana hatlar 1840–1860 arası, tali hatlar 1910 dolaylarına kadar
+par la route ¦ karayoluyla
+par la rivière ¦ nehir yoluyla
+par la mer ¦ deniz yoluyla
+par le rail ¦ demiryoluyla
+Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) et « L’identité de la France » (1986) : à pied, 30 à 40 km par jour ; à cheval, 50 à 60 km par jour pour un voyageur qui garde sa monture. ¦ Fernand Braudel, “Civilisation matérielle, économie et capitalisme” (1979) ve “L’identité de la France” (1986): yürüyerek günde 30 ile 40 km; atını değiştirmeyen bir yolcu için at sırtında günde 50 ile 60 km.
+Règlements militaires (XVIIIᵉ–XIXᵉ s.) : l’étape ordinaire d’une troupe à pied est de 24 à 28 km par jour ; un marcheur seul fait davantage. ¦ Askerî yönetmelikler (18.–19. yüzyıl): yaya birliklerin olağan günlük yürüyüşü 24 ile 28 km’dir; tek başına yürüyen biri daha fazlasını yapar.
+Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, et « Atlas de la Révolution française », t. 1 « Routes et communications » (1987) : les temps de parcours depuis Paris sont presque divisés par deux entre 1765 et 1780 (turgotines). ¦ Guy Arbellot, “La grande mutation des routes de France au milieu du XVIIIᵉ siècle”, Annales ESC, 1973 ve “Atlas de la Révolution française”, c. 1 “Routes et communications” (1987): Paris’ten yolculuk süreleri 1765 ile 1780 arasında neredeyse yarıya iner (turgotine’ler).
+Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995) : diligences des Messageries roulant jour et nuit vers 1830, malles-poste à près de 10 km/h vers 1845. ¦ Christophe Studeny, “L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle” (Gallimard, 1995): 1830 dolaylarında gece gündüz yol alan Messageries posta arabaları, 1845 dolaylarında saatte yaklaşık 10 km giden posta faytonları.
+François Caron, « Histoire des chemins de fer en France », t. 1 (1997) : première ligne de voyageurs en 1837 (Paris – Saint-Germain), grandes lignes ouvertes de 1840 à 1860, environ 40 km/h de moyenne arrêts compris vers 1860. ¦ François Caron, “Histoire des chemins de fer en France”, c. 1 (1997): 1837’de ilk yolcu hattı (Paris – Saint-Germain), 1840–1860 arası açılan ana hatlar, 1860 dolaylarında duraklar dahil ortalama saatte yaklaşık 40 km.
+Traversées de l’Atlantique Nord : 30 à 45 jours à la voile ; 12 à 14 jours en vapeur vers 1860 ; 6 à 7 jours vers 1900 ; 4 à 5 jours pour les grands paquebots des années 1930. ¦ Kuzey Atlantik geçişleri: yelkenle 30 ile 45 gün; 1860 dolaylarında buharla 12 ile 14 gün; 1900 dolaylarında 6 ile 7 gün; 1930’ların büyük yolcu gemileriyle 4 ile 5 gün.
+Coches d’eau et halage : 20 à 40 km par jour en remontant, davantage en descendant ; premiers bateaux à vapeur sur la Saône et le Rhône vers 1830. ¦ Su arabaları ve yedekte çekme: akıntıya karşı günde 20 ile 40 km, akıntı yönünde daha fazla; Saône ve Rhône’da ilk buharlı tekneler 1830 dolaylarında.
+réglé ¦ ayarlandı
+Vitesse réglée par toi ¦ Senin ayarladığın hız
+Pas avant {year} ¦ En erken: {year}
+km/j ¦ km/g
+{name} : kilomètres par jour ¦ {name}: günde kilometre
+Détour {how} ¦ Dolambaç: {how}
+Vitesses de trajet enregistrées ¦ Yolculuk hızları kaydedildi
+Vitesses remises comme au départ ¦ Hızlar başlangıçtaki gibi yapıldı
+Tulle, Brive… ¦ Tulle, Brive…
+Paris… ¦ Paris…
+Un des deux lieux n’a pas de position sur la carte ({name}) : place-le d’abord. ¦ İki yerden birinin haritada konumu yok ({name}): önce onu yerleştir.
+À vol d’oiseau : <b>{km}</b> ¦ Kuş uçuşu: <b>{km}</b>
+Je relis ses événements… ¦ Olaylarını okuyorum…
+Au total, environ <b>{km}</b> à vol d’oiseau d’un lieu de vie à l’autre ({n}). ¦ Toplamda, bir yaşam yerinden diğerine kuş uçuşu yaklaşık <b>{km}</b> ({n}).
+Distance parcourue ¦ Kat edilen mesafe
+Par jour ¦ Günlük
+⚙️ Vitesses et sources ¦ ⚙️ Hızlar ve kaynaklar
+Les vitesses suivent l’époque (ordres de grandeur pour la France et l’Europe de l’Ouest). Écris une autre distance par jour pour un moyen ; vide = selon l’époque. ¦ Hızlar döneme göre değişir (Fransa ve Batı Avrupa için kaba değerler). Bir ulaşım aracı için başka bir günlük mesafe yaz; boş = döneme göre.
+Le détour : la route n’est jamais droite. 1,25 = 25 % de plus que la distance à vol d’oiseau. ¦ Dolambaç: yol hiçbir zaman dümdüz değildir. 1,25 = kuş uçuşu mesafeden %25 fazla.
+📍 Entre deux lieux ¦ 📍 İki yer arasında
+👤 Le long d’une vie ¦ 👤 Bir yaşam boyunca
+Année du voyage ¦ Yolculuğun yılı
+Distances et temps de trajet ¦ Mesafeler ve yolculuk süreleri
+Distances et temps de trajet… ¦ Mesafeler ve yolculuk süreleri…
+Choisis le lieu de départ et le lieu d’arrivée ¦ Çıkış ve varış yerini seç
+Choisis une personne pour suivre ses déplacements ¦ Yolculuklarını izlemek için bir kişi seç
+Pas de déplacement : il faut au moins deux lieux placés sur la carte ¦ Yolculuk yok: haritada konumu olan en az iki yer gerekir
+Pas de déplacement entre deux lieux placés ¦ Konumu olan iki yer arasında yolculuk yok
+🧭 Ses déplacements ¦ 🧭 Yolculukları
+🧭 Calculer un trajet… ¦ 🧭 Bir yolculuk hesapla…
+📜 Ancienne (parchemin) ¦ 📜 Eski (parşömen)
+🎖 État-major (XIXᵉ) ¦ 🎖 Kurmay haritası (19. yüzyıl)
+🌙 Bleu nuit et or ¦ 🌙 Gece mavisi ve altın
+🎯 Autour des lieux ¦ 🎯 Yerlerin çevresi
+CARTE · À IMPRIMER ¦ HARİTA · YAZDIRMAK İÇİN
+Grande carte à imprimer ¦ Yazdırılacak büyük harita
+Grande carte à imprimer… ¦ Yazdırılacak büyük harita…
+Grande carte ¦ Büyük harita
+Cartouche ¦ Kartuş
+Les BORIE ¦ BORIE ailesi
+Ce qu’on met dessus ¦ Üzerine konanlar
+● Lieux de naissance ¦ ● Doğum yerleri
+◆ Lieux de mariage ¦ ◆ Evlilik yerleri
+✝ Lieux de décès ¦ ✝ Ölüm yerleri
+Migrations (naissance → décès) ¦ Göçler (doğum → ölüm)
+➜ Migrations (naissance → décès) ¦ ➜ Göçler (doğum → ölüm)
+👤 Portraits en médaillon ¦ 👤 Madalyon içinde portreler
+Une branche (ses ancêtres seulement) ¦ Bir kol (yalnızca ataları)
+Toute la famille ¦ Bütün aile
+Habillage ¦ Süsleme
+Cartouche (titre, famille, dates) ¦ Kartuş (başlık, aile, tarihler)
+Jamais de personne vivante ni de fiche confidentielle sur cette carte. Le fond est dessiné par l’app (Natural Earth, IGN), sans tuiles d’Internet : il reste net à toutes les tailles. ¦ Bu haritada asla yaşayan kişi veya gizli kart yok. Zemin uygulama tarafından çizilir (Natural Earth, IGN), internet karoları olmadan: her boyutta net kalır.
+Les {name} ¦ {name} ailesi
+Notre famille ¦ Ailemiz
+Les lieux de la famille ¦ Ailenin yerleri
+Fond : {src} ¦ Zemin: {src}
+Natural Earth (domaine public) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (kamu malı) · IGN Admin Express (Licence Ouverte)
+Natural Earth (domaine public) ¦ Natural Earth (kamu malı)
+dessin impossible ¦ çizim yapılamadı
+image trop grande pour ce navigateur ¦ görüntü bu tarayıcı için çok büyük
+{n} laissées de côté ¦ {n} dışarıda bırakıldı
+{n} laissée de côté ¦ {n} dışarıda bırakıldı
+image : jusqu’à {w} × {h} px ({dpi} ppp) ¦ görüntü: en fazla {w} × {h} px ({dpi} dpi)
+Aucun lieu placé sur la carte pour ces choix : place les lieux de la famille (fiche du lieu → position) ou coche d’autres événements. ¦ Bu seçimler için haritada konumu olan yer yok: ailenin yerlerini yerleştir (yer kartı → konum) veya başka olayları işaretle.
+Qualité ramenée à {dpi} ppp (taille de l’affiche, mémoire du navigateur). ¦ Kalite {dpi} dpi değerine düşürüldü (afiş boyutu, tarayıcı belleği).
+{paper}, prêt pour l’imprimeur ¦ {paper}, matbaaya hazır
+haute définition ¦ yüksek çözünürlük
+📍 Lieux de la famille en épingles ¦ 📍 Ailenin yerleri iğne olarak
+Glisse pour tourner, molette pour zoomer. Au clavier : ← → pour tourner, ↑ ↓ pour pencher, + et − pour zoomer, 0 pour revenir. ¦ Döndürmek için sürükle, yakınlaştırmak için tekerlek. Klavyeyle: döndürmek için ← →, eğmek için ↑ ↓, yakınlaştırmak için + ve −, başa dönmek için 0.
+Relief en 3D ¦ 3B kabartma
+Relief 3D ¦ 3B kabartma
+Relief 3D… ¦ 3B kabartma…
+CARTE · RELIEF ¦ HARİTA · KABARTMA
+Exagération du relief ¦ Kabartmanın abartılması
+Choisis le lieu du centre (un lieu placé sur la carte) ¦ Merkezdeki yeri seç (haritada konumu olan bir yer)
+Je lis les altitudes… ¦ Yükseklikleri okuyorum…
+La carte du relief n’est pas installée : elle vient avec la Météo d’autrefois (Réglages → 🌦 Météo d’autrefois). ¦ Kabartma haritası kurulu değil: Geçmişin hava durumu ile birlikte gelir (Ayarlar → 🌦 Geçmişin hava durumu).
+Pas d’altitude pour cette zone : la carte du relief couvre {n} pays ({list}). ¦ Bu bölge için yükseklik yok: kabartma haritası {n} ülkeyi kapsıyor ({list}).
+Pas d’altitude pour cette zone : la carte du relief couvre seulement quelques pays. ¦ Bu bölge için yükseklik yok: kabartma haritası yalnızca birkaç ülkeyi kapsıyor.
+{km} de côté ¦ kenar başına {km}
+Altitudes : {min} m à {max} m ¦ Yükseklikler: {min} m ile {max} m arası
+{pct} % sans altitude (mer ou hors de la carte) ¦ %{pct} yükseklik yok (deniz veya harita dışı)
+{n} dans la zone ¦ Bölgede: {n}
+Altitudes : Copernicus DEM GLO-90 (grille de 30″), © DLR / Airbus, Copernicus. ¦ Yükseklikler: Copernicus DEM GLO-90 (30″ ızgara), © DLR / Airbus, Copernicus.
+Le moteur 3D ne se charge pas. ¦ 3B motoru yüklenmiyor.
+Ce navigateur ne sait pas dessiner en 3D (WebGL éteint). ¦ Bu tarayıcı 3B çizemiyor (WebGL kapalı).
+Ma couche ¦ Katmanım
+Mes couches ¦ Katmanlarım
+Mes couches (dessiner) ¦ Katmanlarım (çiz)
+Cacher mes couches ¦ Katmanlarımı gizle
+Clique sur la carte pour poser le point. Échap pour arrêter. ¦ Noktayı koymak için haritaya tıkla. Durdurmak için Esc.
+Clique point par point. ¦ Nokta nokta tıkla.
+Entrée ou double-clic pour finir, ⌫ pour retirer le dernier, Échap pour arrêter. ¦ Bitirmek için Enter veya çift tıkla, sonuncuyu çıkarmak için ⌫, durdurmak için Esc.
+Couleur de la couche ¦ Katmanın rengi
+Dessiner dans cette couche ¦ Bu katmanda çiz
+Aucune couche pour l’instant ¦ Henüz katman yok
+Importer des couches ¦ Katmanları içe aktar
+GeoJSON ou KML ¦ GeoJSON veya KML
+Aucune forme lisible dans ce fichier. ¦ Bu dosyada okunabilir şekil yok.
+⬠ Nom de la zone ¦ ⬠ Bölgenin adı
+〰 Nom de l’itinéraire ¦ 〰 Güzergâhın adı
+Facultatif. ¦ İsteğe bağlı.
+Les terres de la famille ¦ Ailenin toprakları
+Le chemin de l’école ¦ Okul yolu
+📝 La note ¦ 📝 Not
+📍 Nom du point ¦ 📍 Noktanın adı
+Ce que tu veux noter à cet endroit. ¦ Bu yere not etmek istediğin şey.
+Ici se trouvait le moulin ¦ Değirmen burada bulunuyordu
+〰 Itinéraire ¦ 〰 Güzergâh
+⬠ Zone ¦ ⬠ Bölge
+📍 Point ¦ 📍 Nokta
+📝 Note ¦ 📝 Not
+Zone ajoutée à « {name} » ¦ Bölge eklendi: “{name}”
+Itinéraire ajouté à « {name} » ¦ Güzergâh eklendi: “{name}”
+Note ajoutée à « {name} » ¦ Not eklendi: “{name}”
+Point ajouté à « {name} » ¦ Nokta eklendi: “{name}”
+{dur} aujourd’hui ¦ bugün {dur}
+« {name} » supprimé de la couche ¦ Katmandan silindi: “{name}”
+« {name} » modifié ¦ Düzenlendi: “{name}”
+« Aucune » = la couleur de la couche ¦ “Hiçbiri” = katmanın rengi
+MES COUCHES ¦ KATMANLARIM
+Renommer la couche ¦ Katmanı yeniden adlandır
+Couche renommée « {name} » ¦ Katmanın yeni adı: “{name}”
+Exporter en GeoJSON ¦ GeoJSON olarak dışa aktar
+Exporter en KML ¦ KML olarak dışa aktar
+Supprimer la couche ¦ Katmanı sil
+Couche « {name} » supprimée ¦ Katman silindi: “{name}”
+Couleur de la couche changée ¦ Katmanın rengi değiştirildi
+Couche « {name} » créée ¦ Katman oluşturuldu: “{name}”
+Toutes en GeoJSON ¦ Tümü GeoJSON olarak
+Toutes en KML ¦ Tümü KML olarak
+Zone ¦ Bölge
+{n} Ko ¦ {n} KB
+Fond à comparer ¦ Karşılaştırılacak zemin
+Façon de comparer ¦ Karşılaştırma biçimi
+▏ Trait ¦ ▏ Çizgi
+◐ Transparence ¦ ◐ Saydamlık
+Transparence du fond à comparer ¦ Karşılaştırılacak zeminin saydamlığı
+Transparence en % ¦ Yüzde olarak saydamlık
+Trait de comparaison : glisse-le, ou flèches gauche et droite ¦ Karşılaştırma çizgisi: sürükle veya sol ve sağ okları kullan
+(approximatif) ¦ (yaklaşık)
+Frontières ¦ Sınırlar
+🏛 Province : {name} ¦ 🏛 Eyalet: {name}
+🏛 Département de 1790 : {name} ¦ 🏛 1790 departmanı: {name}
+Tracé approximatif, d’après les départements d’aujourd’hui ({list}). ¦ Yaklaşık çizim, bugünkü departmanlara göre ({list}).
+Tracé approximatif, d’après les départements d’aujourd’hui. ¦ Yaklaşık çizim, bugünkü departmanlara göre.
+🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes). ¦ 🏚 Ortadan kalkmış yerleşim yerleri: bir kez indirilmeli (Ayarlar → 🏛 Eski sınırlar).
+🏚 Zoome sur une région pour voir les communes disparues. ¦ 🏚 Ortadan kalkmış yerleşim yerlerini görmek için bir bölgeye yakınlaş.
+Pas français en 1789 : royaume de Sardaigne (français en 1860). L’ouest (Grasse) était en Provence. ¦ 1789’da Fransız değil: Sardinya Krallığı (1860’ta Fransız). Batısı (Grasse) Provence’taydı.
+Pas française en 1789 : royaume de Sardaigne (française en 1860). ¦ 1789’da Fransız değil: Sardinya Krallığı (1860’ta Fransız).
+Pas français en 1789 : Avignon et le Comtat appartenaient au pape (réunis en 1791). ¦ 1789’da Fransız değil: Avignon ve Comtat papaya aitti (1791’de katıldı).
+Mulhouse était une république alliée des Suisses (réunie en 1798). ¦ Mulhouse İsviçrelilerin müttefiki bir cumhuriyetti (1798’de katıldı).
+Montbéliard appartenait au Wurtemberg (réuni en 1793). ¦ Montbéliard Württemberg’e aitti (1793’te katıldı).
+Coupé en Rhône et Loire en 1793. ¦ 1793’te Rhône ve Loire olarak ikiye bölündü.
+Le département de Paris (puis de la Seine, 1795). ¦ Paris departmanı (sonra Seine, 1795).
+Partagé en 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ 1968’de bölündü (Yvelines, Essonne, Val-d’Oise…).
+Le Tarn-et-Garonne n’existe qu’en 1808 (pris au Lot surtout, et à 5 départements voisins) : ici rangé avec le Lot. ¦ Tarn-et-Garonne ancak 1808’de kuruldu (çoğunlukla Lot’tan ve 5 komşu departmandan alındı): burada Lot ile birlikte gösterilir.
+Un seul département en 1790 (coupé en deux de 1793 à 1811, puis en 1976). ¦ 1790’da tek bir departman (1793–1811 arası, sonra 1976’da ikiye bölündü).
+Devenu Maine-et-Loire en 1791. ¦ 1791’de Maine-et-Loire oldu.
+Limites changées en 1871 (Meurthe-et-Moselle). ¦ Sınırları 1871’de değişti (Meurthe-et-Moselle).
+Limites changées en 1871. ¦ Sınırları 1871’de değişti.
+Belfort en faisait partie jusqu’en 1871. ¦ Belfort 1871’e kadar onun parçasıydı.
+Devenu Alpes-de-Haute-Provence en 1970. ¦ 1970’te Alpes-de-Haute-Provence oldu.
+Comté de Nice (royaume de Sardaigne) : pas français en 1790 ¦ Nice Kontluğu (Sardinya Krallığı): 1790’da Fransız değil
+Savoie (royaume de Sardaigne) : pas française en 1790 ¦ Savoie (Sardinya Krallığı): 1790’da Fransız değil
+Avignon et Comtat Venaissin (au pape) : réunis en 1791 ¦ Avignon ve Comtat Venaissin (papalık): 1791’de katıldı
+Pas en France en 1790. ¦ 1790’da Fransa’da değil.
+réunie en commune nouvelle ¦ yeni bir yerleşim yerinde birleştirildi
+Réglages · Cartes ¦ Ayarlar · Haritalar
+Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »). ¦ Eyaletler, 1790 departmanları ve ortadan kalkmış yerleşim yerleri, Harita’da (“🏛 Sınırlar” düğmesi).
+↗ Voir sur la Carte ¦ ↗ Harita’da gör
+🏛 Provinces (≈ 1789) et départements de 1790 ¦ 🏛 Eyaletler (≈ 1789) ve 1790 departmanları
+Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée. ¦ Uygulamayla birlikte gelir: indirilecek bir şey yok. Bunlar bugünkü departmanlara göre yapılmış <b>yaklaşık</b> çizimlerdir (her departman, en büyük kısmını kapsayan eyalete konmuştur). Gerçek sınırları için özgür ve resmî bir kaynak bulunamadı.
+{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when} ¦ {size} ({bytes} bayt) · sha256 izi {hash}… · kontrol edildi: {when}
+taille inconnue ¦ boyut bilinmiyor
+enfants ¦ çocuklar
+Grand-parent ¦ Büyükanne veya büyükbaba
+Parrain ou marraine ¦ Vaftiz babası veya vaftiz annesi
+Frère ou sœur mort avant ¦ Daha önce ölmüş erkek veya kız kardeş
+Choisi à la main ¦ Elle seçildi
+choisi à la main ¦ elle seçildi
+vérifié ¦ kontrol edildi
+Corrigé ou confirmé à la main ¦ Elle düzeltildi veya onaylandı
+Indice de confiance : {n} sur 100 ¦ Güven puanı: {n} / 100
+Ma branche paternelle ¦ Baba tarafındaki kolum
+Ma branche maternelle ¦ Anne tarafındaki kolum
+D’où vient le prénom, par époque ¦ Adın kaynağı, döneme göre
+Enfants qui portent le prénom de leur parrain ou marraine ¦ Vaftiz babasının veya vaftiz annesinin adını taşıyan çocuklar
+% des enfants qui ont un parrain ou une marraine notés ¦ Vaftiz babası veya vaftiz annesi kayıtlı çocukların yüzdesi
+Tous les prénoms ¦ Tüm adlar
+Pour chaque enfant, d’où vient probablement son prénom : parrain, marraine, grand-parent, frère ou sœur mort avant (prénom « relevé »), oncle, tante, saint du jour. Chaque piste a sa règle et un indice de confiance ; tu peux la corriger sur la fiche ou ici avec ⋯. Sans les personnes en vie ni les fiches confidentielles. ¦ Her çocuk için adının muhtemelen nereden geldiği: vaftiz babası, vaftiz annesi, büyükanne/büyükbaba, daha önce ölmüş erkek veya kız kardeş (ad “yeniden alınmış”), amca/dayı, hala/teyze, günün azizi. Her ipucunun bir kuralı ve bir güven puanı var; onu kartta veya burada ⋯ ile düzeltebilirsin. Yaşayan kişiler ve gizli kartlar hariç.
+prénoms expliqués sur {n} ¦ açıklanan ad (toplam {n})
+prénom expliqué sur {n} ¦ açıklanan ad (toplam {n})
+des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total}) ¦ vaftiz babası veya vaftiz annesi kayıtlı çocuklardan onun adını taşıyanlar ({n} / {total})
+🌳 Les flèches de transmission ¦ 🌳 Aktarım okları
+Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche. ¦ Her ad için bir satır, yıllar yatay: her ok adı aktaran kişiden çocuğa gider. Kartı açmak için bir yuvarlağa tıkla.
+Chaque enfant ¦ Her çocuk
+Prénom reçu de ¦ Adı aldığı kişi
+La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres. ¦ Liste {n} çocukta durur (önce en çok aktarılan adlar); üstteki sayılar herkesi sayar. Diğerlerini görmek için bir ad seç.
+Aucun enfant prénommé {name} ¦ Bu adı taşıyan çocuk yok: {name}
+Rien à comparer pour l’instant ¦ Şimdilik karşılaştırılacak bir şey yok
+Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême). ¦ Ebeveynlerine bağlı çocuklar gerekir (veya doğumun ya da vaftizin “parrain”, “marraine” tanıkları olarak kaydedilmiş vaftiz ana babaları).
+Les plus sûrs d’abord ¦ Önce en kesin olanlar
+Les moins sûrs d’abord ¦ Önce en az kesin olanlar
+Aucune transmission entre deux fiches datées (le saint du jour n’a pas de flèche). ¦ Tarihli iki kart arasında aktarım yok (günün azizinin oku yoktur).
+{name} ({year}) : ouvrir la fiche ¦ {name} ({year}): kartı aç
+Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul. ¦ En çok aktarılan {n} ad; tek başına görmek için “Ad” içinde bir ad seç.
+Flèches de transmission des prénoms ¦ Adların aktarım okları
+C’est bien ça ¦ Doğru
+Garder cette piste comme sûre ¦ Bu ipucunu kesin olarak tut
+Prénom reçu de {name} : confirmé. ¦ Adı aldığı kişi: {name} — onaylandı.
+Ce n’est pas ça ¦ Bu değil
+Écarter cette piste ¦ Bu ipucunu bırak
+Piste écartée. ¦ İpucu bırakıldı.
+Plutôt : {who} ¦ Daha çok: {who}
+Prénom reçu de {name}. ¦ Adı aldığı kişi: {name}.
+Celle dont il ou elle tient son prénom ¦ Adını aldığı kişi
+De qui tient-il son prénom ? ¦ Adını kimden almış?
+la personne choisie ¦ seçilen kişi
+Oublier les corrections à la main ¦ Elle yapılan düzeltmeleri unut
+Corrections oubliées : le calcul de l’app revient. ¦ Düzeltmeler unutuldu: uygulamanın hesabı geri geldi.
+Voir la transmission de ce prénom ¦ Bu adın aktarımını gör
+Prénom reçu de… ¦ Adı aldığı kişi…
+saint du jour : ¦ günün azizi:
+Prénom reçu de {who} ¦ Adı aldığı kişi: {who}
+indice {n} sur 100 ¦ puan {n} / 100
+Ta famille ¦ Ailen
+France ≈ ¦ Fransa ≈
+personnes {who} ¦ kişiler {who}
+pas de données ¦ veri yok
+Moins de 10 : à lire avec prudence ¦ 10’dan az: dikkatle oku
+Aucune époque dans cette période ¦ Bu aralıkta dönem yok
+Les repères français vont de 1686 à 1999 : élargis la période. ¦ Fransa için başvuru değerleri 1686’dan 1999’a kadar: aralığı genişlet.
+Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles. ¦ Ailenin ortalamaları, aynı dönemin Fransa ortalamalarının yanında (≈: kaba değerler, kaynaklarıyla). Bir ailede birkaç düzine belge bulunur: karşılaştırmayı kabaca oku. Yaşayan kişiler ve gizli kartlar hariç.
+📚 D’où viennent les chiffres de la France ¦ 📚 Fransa’nın sayıları nereden geliyor
+TA FAMILLE ET LA FRANCE ¦ AİLEN VE FRANSA
+Lecture impossible. ¦ Okunamadı.
+Simple ¦ Basit
+Scientifique ¦ Bilimsel
+Ruban ¦ Şerit
+RUBAN ¦ ŞERİT
+chiffres ¦ rakam
+ex. mariage-1925 ¦ örn. evlilik-1925
+Janv. ¦ Oca.
+Juil. ¦ Tem.
+Sept. ¦ Eyl.
+Oct. ¦ Eki.
+Nov. ¦ Kas.
+Archive ¦ Arşiv
+{n} vie à raconter : {list} ¦ Anlatılacak yaşam ({n}): {list}
+JEU ¦ OYUN
+côté ¦ taraf
+Comparer avec… ¦ Karşılaştır…
+Choisir la personne… ¦ Kişiyi seç…
+Âge moyen au premier mariage ¦ İlk evlilikte ortalama yaş
+L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues). ¦ Her eşin ilk evliliğindeki yaşı (doğum tarihi ve evlilik tarihi bilinen).
+Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros. ¦ Dönem içinde evlenen çiftlerin bilinen çocuk sayısı (veritabanında en az bir çocuğu olan çiftler). Fransa’da: kadın başına çocuk (doğurganlık hızı); yalnızca kabaca karşılaştırılabilir.
+baby-boom (1946-1964) ¦ bebek patlaması (1946-1964)
+Mortalité infantile (morts avant 1 an) ¦ Bebek ölümleri (1 yaşından önce ölenler)
+Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas. ¦ Dönem içinde doğan ve ölümü bilinen (veya hayatta kalan) 1 000 çocuktan kaçının 1 yaşından önce öldüğü. Ölen bebekler ağaçlarda çoğu zaman eksiktir: ailenin sayısı çoğu zaman çok düşüktür.
+Espérance de vie à la naissance ¦ Doğumda yaşam beklentisi
+L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut. ¦ Dönem içinde doğan kişilerin ortalama ölüm yaşı (doğum ve ölüm bilinen). Ölen bebekler ağaçlarda çoğu zaman eksiktir: ailenin sayısı çoğu zaman çok yüksektir.
+Savoir signer son acte de mariage ¦ Evlilik belgesini imzalayabilmek
+La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour. ¦ Evlilik belgesini imzalayan damat ve gelinlerin oranı (evliliklerdeki “imzaladı” kutusu). Fransa’da: belirtilen yıllarda ölçüldü; ailende: çevresindeki yıllarda.
+Part des métiers de la terre (agriculture, forêt) ¦ Toprakla ilgili mesleklerin oranı (tarım, ormancılık)
+Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Ailede o tarihte çalışma yaşında (20 ile 60 arası) olan ve mesleği tanınan kişiler arasında toprak ve orman mesleklerinin oranı (laboureur, cultivateur, tarım işçisi, oduncu…).
+Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France. ¦ Yuvarlanmış büyüklük dereceleri, her zaman önünde “≈” ile. Çalışmalar örnekleme veya yıllara göre biraz farklı sayılar verdiğinde bir aralık. Emin olunmayan bir sayı konmadı: uydurulmuş bir sayıdansa boş bir hücre daha iyidir. Bir ailenin ortalamaları (birkaç düzine belge) tüm Fransa’nınkilerle yalnızca kabaca karşılaştırılabilir.
+nées entre 1846 et 1886 ¦ 1846 ile 1886 arasında doğan
+{type} publiée par {from} ¦ {type} · yayımlayan: {from}
+LCNDA (fichiers livrés avec l’app) ¦ LCNDA (uygulamayla gelen dosyalar)
+Événements survenus aux communes depuis 1943 (INSEE) ¦ 1943’ten beri yerleşim yerlerinde olan değişiklikler (INSEE)
+Communes depuis 1943 (INSEE) ¦ 1943’ten beri yerleşim yerleri (INSEE)

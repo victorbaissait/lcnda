@@ -1,0 +1,782 @@
+fr ¦ tr
+menu|Affichage ¦ Görünüm
+Insertion ¦ Ekle
+Format ¦ Biçim
+Tableau ¦ Tablo
+Champ (page, nombre de pages, titre, auteur)… ¦ Alan (sayfa, sayfa sayısı, başlık, yazar)…
+N° de page ¦ Sayfa no.
+(celle de Normal) ¦ (Normal stilinki)
+(titre vide) ¦ (boş başlık)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = birkaç harf, ? = bir harf, # = bir rakam
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (her şey korunur)
+1 (retirer les colonnes) ¦ 1 (sütunları kaldır)
+1. Liste numérotée ¦ 1. Numaralı liste
+1re ligne ¦ 1. satır
+1re ligne (négatif : en saillie) ¦ 1. satır (negatif: asılı)
+60 onglets au plus. ¦ En fazla 60 sekme.
+A Couleur… ¦ A Renk…
+Accentuation ¦ Vurgu
+Adresse ¦ Adres
+Afficher : nom, dates, naissance… ¦ Göster: ad, tarihler, doğum…
+Ajoute au moins une personne. ¦ En az bir kişi ekle.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Önce alanlar ekle: Ekle → “📨 Birleştirme alanı” (Ad, Soyadı, Doğum tarihi…).
+Ajouter la citation ¦ Alıntıyı ekle
+Ajouter les personnes d’une liste ¦ Bir listedeki kişileri ekle
+Ajouter une légende ¦ Bir açıklama yazısı ekle
+Album photo (21,6 × 28 cm) ¦ Fotoğraf albümü (21,6 × 28 cm)
+Alignement ¦ Hizalama
+Aligner à droite ¦ Sağa hizala
+Aligner à gauche ¦ Sola hizala
+Aligné sur le texte (seul sur sa ligne) ¦ Metinle aynı hizada (satırında tek başına)
+Allemand ¦ Almanca
+Aller ¦ Git
+Aller à la page ¦ Sayfaya git
+Anglais ¦ İngilizce
+Années (1850 – 1920) ¦ Yıllar (1850 – 1920)
+Aperçu avec {name} : ¦ Önizleme — kişi: {name}
+Apostrophe typographique ’ ¦ Tipografik kesme işareti ’
+Au moins une ligne. ¦ En az bir satır.
+Aucun champ à mettre à jour. ¦ Güncellenecek alan yok.
+Aucune modification suivie dans le document. ¦ Belgede izlenen değişiklik yok.
+Aucune modification suivie. ¦ İzlenen değişiklik yok.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ İzlenen değişiklik yok. “✍ Değişiklikleri izle” her eklemenin ve her silmenin kaydını tutar.
+Augmenter le retrait ¦ Girintiyi artır
+Auteur ¦ Yazar
+Autre ¦ Diğer
+Avis de recherche (lettre aux cousins, remplie) ¦ Araştırma çağrısı (kuzenlere mektup, doldurulmuş)
+Barre d’outils ¦ Araç çubuğu
+Barre d’outils en ruban (avec les noms) ¦ Şerit araç çubuğu (adlarıyla)
+Barre d’outils · {what} ¦ Araç çubuğu · {what}
+Barré ¦ Üstü çizili
+Bas ¦ Alt
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Biyografi eklendi (uygulama karta göre yazdı): dilediğin gibi düzenle.
+Bordure et trame ¦ Kenarlık ve gölgelendirme
+Bordure et trame… ¦ Kenarlık ve gölgelendirme…
+Bordures ¦ Kenarlıklar
+Bordures du tableau ¦ Tablo kenarlıkları
+Breton ¦ Bretonca
+COMPARER ¦ KARŞILAŞTIR
+Cacher dans le texte ¦ Metinde gizle
+Caractères (espaces compris) ¦ Karakterler (boşluklar dahil)
+Caractères (sans les espaces) ¦ Karakterler (boşluklar hariç)
+Caractères spéciaux ¦ Özel karakterler
+Carré (le texte autour) ¦ Kare (metin etrafında)
+Carré 15 × 15 cm ¦ Kare 15 × 15 cm
+Carré 21 × 21 cm ¦ Kare 21 × 21 cm
+Carré 30 × 30 cm ¦ Kare 30 × 30 cm
+Carte de visite ¦ Kartvizit
+Cartes et livres ¦ Kartlar ve kitaplar
+Carton DL (faire-part) ¦ DL kart (duyuru)
+Case séparée ¦ Hücre bölündü
+Cases fusionnées ¦ Hücreler birleştirildi
+Casse ¦ Büyük/küçük harf
+Ce diagramme est vide. ¦ Bu diyagram boş.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ Bu belgede henüz birleştirme alanı yok (Ekle → “📨 Birleştirme alanı”). Önce imlecin bulunduğu yere küçük bir kimlik kartı eklensin mi?
+Ce livre n’a pas de styles de paragraphe. ¦ Bu kitapta paragraf stili yok.
+Ce passage a changé : relance la relecture. ¦ Bu bölüm değişti: düzeltme okumasını yeniden başlat.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Resmin gösterdiği, tek cümleyle (örn. “Jean ile Marie’nin kilise önünde düğünü, 1923”)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Bu metin kartı izler: belge açıldığında güncellenir (Araçlar → Alanları güncelle).
+Centrer ¦ Ortala
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Çok büyük olan bazı resimler alınmadı.
+Cette case n’est pas fusionnée. ¦ Bu hücre birleştirilmiş değil.
+Cette feuille est vide. ¦ Bu sayfa boş.
+Cette image n’a pas de fichier. ¦ Bu resmin dosyası yok.
+Champ ¦ Alan
+Changer l’image ¦ Resmi değiştir
+Changer l’image… ¦ Resmi değiştir…
+Chaque Mot ¦ Her Sözcük
+Chaque Mot Avec Une Majuscule ¦ Her Sözcüğün Baş Harfi Büyük
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ 🔍 ile bir sözcük ara: bulunan her yer burada görünür.
+Chercher… (un mot, un nom) ¦ Ara… (bir sözcük, bir ad)
+Choisir un classeur du Tableur ¦ Tablo’dan bir çalışma kitabı seç
+Choisir un média (lien) ¦ Bir medya seç (bağlantı)
+Choisis d’abord du texte. ¦ Önce metin seç.
+Choisis d’abord le texte à changer. ¦ Önce değiştirilecek metni seç.
+Choisis le passage à commenter. ¦ Yorum yapılacak bölümü seç.
+Choisis les paragraphes à mettre en colonnes. ¦ Sütunlara bölünecek paragrafları seç.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Bir sözcük seç (çift tıkla) ya da imleci içine koy, sonra 🔁 Eş anlamlılar.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Hücrelerden bir dikdörtgen seç (başka bir birleştirmenin parçası olmadan).
+Classique ¦ Klasik
+Classique (à la française) ¦ Klasik (Fransız usulü)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Bir sözcüğe tıkla: “{word}” sözcüğünün yerine geçer (geri dönmek için ↶).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Metne eklemek için tıkla (pencere açık kalır).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Karşılaştırmak için iki sürümü (ya da “Şimdi”yi) işaretle.
+Coller depuis Word ou le web ¦ Word’den ya da web’den yapıştır
+Coller sans la mise en forme ¦ Biçimlendirmeden yapıştır
+Colonne ajoutée ¦ Sütun eklendi
+Colonne supprimée ¦ Sütun silindi
+Commande inconnue : {cmd} ¦ Bilinmeyen komut: {cmd}
+Commencer sur une nouvelle page ¦ Yeni bir sayfada başla
+Commentaire supprimé ¦ Yorum silindi
+Commentaires ¦ Yorumlar
+Commentaires (panneau) ¦ Yorumlar (panel)
+Commenter ¦ Yorum yap
+Compte rendu de visite ¦ Ziyaret raporu
+Conjoint ¦ Eş
+Copie enregistrée : « {name} ». ¦ Kopya kaydedildi: “{name}”.
+Copie impossible : {error} ¦ Kopyalanamadı: {error}
+Copie rangée dans les médias ({format}). ¦ Kopya medyaya kaydedildi ({format}).
+Copie « {name} » enregistrée. ¦ “{name}” kopyası kaydedildi.
+Corriger ¦ Düzelt
+Couleur du texte ¦ Metin rengi
+Couleur du texte… ¦ Metin rengi…
+Couleur et surlignage (C2) ¦ Renk ve vurgulama (C2)
+Couper ici ¦ Buradan böl
+Créer le lien ¦ Bağlantıyı oluştur
+Créer le style ¦ Stili oluştur
+Créer le tableau ¦ Tabloyu oluştur
+Créer les copies ¦ Kopyaları oluştur
+Cyrillique ¦ Kiril
+Dans la sélection : mots ¦ Seçimde: sözcükler
+Dans le texte, entre parenthèses ¦ Metinde, parantez içinde
+Date (mise à jour à chaque ouverture) ¦ Tarih (her açılışta güncellenir)
+Date du jour ¦ Bugünün tarihi
+Date du mariage ¦ Evlilik tarihi
+Demande d’acte (remplie avec une fiche) ¦ Belge talebi (bir kartla doldurulmuş)
+Demande d’acte d’état civil ¦ Nüfus kaydı belgesi talebi
+Design ¦ Tasarım
+Diminuer le retrait ¦ Girintiyi azalt
+Document ¦ Belge
+Document importé ¦ Belge içe aktarıldı
+Document modifié ailleurs ¦ Belge başka bir yerde değiştirildi
+Document « {name} » importé ({words}) ¦ “{name}” belgesi içe aktarıldı ({words})
+Donne un nom au style. ¦ Stile bir ad ver.
+Double (2) ¦ Çift (2)
+Double-clic : modifier le pied de page ¦ Çift tıklama: alt bilgiyi düzenle
+Double-clic : modifier l’en-tête ¦ Çift tıklama: üst bilgiyi düzenle
+Double-clic : renommer · clic droit : plus ¦ Çift tıklama: yeniden adlandır · sağ tıklama: diğer
+Droite ¦ Sağ
+Déplacer à droite ¦ Sağa taşı
+Déplacer à gauche ¦ Sola taşı
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ İmlecin bulunduğu paragrafa göre: istediğini değiştir, sonra stiller listesinde önerilecek.
+Effacer la mise en forme ¦ Biçimlendirmeyi temizle
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Yazım denetimi (kırmızı altı çizili sözcükler, sağ tıklamayla düzeltmeler) ve sesli okuma için kullanılır.
+En note de bas de page ¦ Dipnot olarak
+En note de fin ¦ Son not olarak
+En-tête (en haut de chaque page) ¦ Üst bilgi (her sayfanın üstünde)
+En-tête de la première page ¦ İlk sayfanın üst bilgisi
+En-tête et pied de page ¦ Üst bilgi ve alt bilgi
+En-tête et pied de page… ¦ Üst bilgi ve alt bilgi…
+En-tête et pied… ¦ Üst ve alt bilgi…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Önce belgeyi kaydet (💾): sürümleri onunla birlikte saklanacak.
+Enregistrer comme modèle ¦ Şablon olarak kaydet
+Enregistrer comme modèle… ¦ Şablon olarak kaydet…
+Enregistrer comme nouvelle version ¦ Yeni sürüm olarak kaydet
+Enregistrer tout seul ¦ Kendiliğinden kaydet
+Enregistrer une copie ¦ Bir kopyasını kaydet
+Envoi des images indisponible. ¦ Resim gönderme kullanılamıyor.
+Envoyer ¦ Gönder
+Envoyer vers la mise en page… ¦ Sayfa düzenine gönder…
+Espace après ¦ Sonra boşluk
+Espace après le paragraphe ¦ Paragraftan sonra boşluk
+Espace avant ¦ Önce boşluk
+Espace avant le paragraphe ¦ Paragraftan önce boşluk
+Espace fine avant ; ! ? ¦ ; ! ? öncesinde ince boşluk (Fransızca kuralı)
+Espace insécable avant les deux-points ¦ İki nokta öncesinde bölünemez boşluk (Fransızca kuralı)
+Espaces en trop ¦ Fazla boşluklar
+Espagnol ¦ İspanyolca
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ Ve {n} tane daha (“Tümünü düzelt” onları da alır).
+Exporté : {name} ¦ Dışa aktarıldı: {name}
+Exposant ¦ Üst simge
+Expressions simples ¦ Basit kalıplar
+FORMAT ¦ BİÇİM
+Famille et vie ¦ Aile ve yaşam
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ Sayfa bir belge için çok büyük (20 000’den fazla hücre): Tablo’da daha küçük bir aralık seç.
+Fiche d’identité d’un ancêtre (remplie) ¦ Bir atanın kimlik kartı (doldurulmuş)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Kart belgenin arkasında açıldı (görmek için belgeyi kapat ya da küçült).
+Filigrane ¦ Filigran
+Garder avec le paragraphe suivant ¦ Sonraki paragrafla birlikte tut
+Garder avec le suivant ¦ Sonrakiyle birlikte tut
+Garder la mise en forme (nettoyée) ¦ Biçimlendirmeyi koru (temizlenmiş)
+Garder ma version ¦ Benim sürümümü koru
+Gauche ¦ Sol
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Birkaç hücre seçmek için fareyi bir hücreden diğerine sürükle, sonra “Birleştir”.
+Gras ¦ Kalın
+Gras, italique… ¦ Kalın, italik…
+Grec ¦ Yunanca
+Groupe de caractères ¦ Karakter grubu
+Guillemets français « » ¦ Fransız tırnakları « »
+Haut ¦ Üst
+Hauteur ¦ Yükseklik
+Histoire d’une maison ou d’un village ¦ Bir evin ya da bir köyün tarihi
+IMAGE ¦ RESİM
+Image ¦ Resim
+Image ajoutée (et rangée dans les médias). ¦ Resim eklendi (ve medyaya kaydedildi).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Resim seçildi: boyut için bir köşeyi sürükle, metin kaydırma için sağ tıkla, silmek için ⌫.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Resim yerleştirildi: boyut için tıkla, metin kaydırma (kare, üst ve alt) ve açıklama yazısı için sağ tıkla.
+Image rangée dans les médias… ¦ Resim medyaya kaydediliyor…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Açıklaması olmayan resim (göremeyen kişilere sesli okunur)
+Image supprimée ¦ Resim silindi
+Impossible d’enregistrer : {error} ¦ Kaydedilemedi: {error}
+Indice ¦ Alt simge
+Insérer la fiche d’identité ¦ Kimlik kartını ekle
+Interligne ¦ Satır aralığı
+Interligne et espacement ¦ Satır ve paragraf aralığı
+Interligne {n} ¦ Satır aralığı {n}
+Italien ¦ İtalyanca
+Italique ¦ İtalik
+Jeu de styles ¦ Stil takımı
+Jeu de styles des nouveaux documents ¦ Yeni belgelerin stil takımı
+Jeu de styles « {name} » ¦ Stil takımı: “{name}”
+Jeu de styles… ¦ Stil takımı…
+Justifier ¦ İki yana yasla
+Justifié ¦ İki yana yaslı
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Kaynakça (Ekle → 📚) alıntılanan kaynakları kendiliğinden toplar.
+La biographie de qui ? ¦ Kimin biyografisi?
+La demande d’acte pour qui ? ¦ Belge talebi kimin için?
+La fenêtre des images n’est pas chargée. ¦ Resim penceresi yüklenmedi.
+La fenêtre des versions n’est pas chargée. ¦ Sürümler penceresi yüklenmedi.
+La fiche de qui ? ¦ Kimin kartı?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ Bu tarayıcıda sesli okuma yok.
+La naissance : date et lieu ¦ Doğum: tarih ve yer
+La première ligne est répétée en haut de chaque page ¦ İlk satır her sayfanın üstünde yinelenir
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Belgenin devamı kendi biçimiyle yeni bir sayfada başlar: örneğin yatay büyük bir tablo ya da ağaç, sonra yeniden dikey.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Tab tuşu bir sonraki durak noktasına ilerler. Tabloda Tab sonraki hücreye geçer; listede bir düzey kaydırır.
+La vérification n’est pas chargée. ¦ Denetim yüklenmedi.
+Langue ¦ Dil
+Langue des nouveaux documents ¦ Yeni belgelerin dili
+Langue du document (orthographe, lecture à voix haute) ¦ Belgenin dili (yazım, sesli okuma)
+Largeur ¦ Genişlik
+Latin ¦ Latince
+Le décès : date et lieu ¦ Ölüm: tarih ve yer
+Le livre dont reprendre les styles ¦ Stilleri alınacak kitap
+Le mot entier seulement ¦ Yalnızca tam sözcük
+Le mot tel qu’il apparaîtra dans l’index : ¦ Sözcüğün dizinde görüneceği hâli:
+Le moteur du tableur n’est pas chargé. ¦ Tablo motoru yüklenmedi.
+Le nom (lien vers la fiche) ¦ Ad (karta bağlantı)
+Le nom de la copie : ¦ Kopyanın adı:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Şablonun adı (metin kalır: boş bir şablon istiyorsan önce onu boşalt):
+Le nom du nouvel onglet ¦ Yeni sekmenin adı
+Le nom et les années (1850 – 1920) ¦ Ad ve yıllar (1850 – 1920)
+Le nom, la naissance et le décès ¦ Ad, doğum ve ölüm
+Le petit arbre de qui ? ¦ Kimin küçük ağacı?
+Le récit de qui ? ¦ Kimin hikâyesi?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Metin bir kitabın sayfaları olur (Sayfa düzeni): 1. düzey başlıklar bölüm olur, resimler açıklamalarıyla resim sayfaları olur, notlar sonda bir “Notlar” bölümü olur. Belgen burada olduğu gibi kalır.
+Le texte seul ¦ Yalnızca metin
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Birleştirilmiş hücrelerle sıralama çalışmaz: önce onları ayır.
+Lecture arrêtée. ¦ Okuma durduruldu.
+Legal US ¦ US Legal
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ “ ” alanları bir kartın değerlerini alır: Dosya → “👤 Bir kartla doldur…” ya da Araçlar → “📨 Adres mektup birleştirme…” ile kişi başına bir kopya.
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Son kayıttan bu yana yapılan değişiklikler kaybolacak.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Veritabanındaki bir adın yanına yazılmış tarihler ve yerler onun kartıyla karşılaştırılır (doğum, vaftiz, evlilik, ölüm, defin, yaşlar, Sosa numaraları). Hiçbir şey kendiliğinden değiştirilmez.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Dosyadaki makrolar yok sayılır (asla çalıştırılmazlar).
+Les modifications ne sont plus suivies. ¦ Değişiklikler artık izlenmiyor.
+Les modifications sont suivies ¦ Değişiklikler izleniyor
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Yanlış yazılmış sözcüklerin altı kırmızıyla çizilir (düzeltmeler için sağ tıkla).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Seçili paragraflar dengeli sütunlara bölünür (gazetedeki gibi).
+Les personnes du publipostage ¦ Adres mektup birleştirmedeki kişiler
+Les raccourcis à soi ne sont pas chargés. ¦ Kişisel kısayollar yüklenmedi.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Başlıklar ve metin yazı tipini ve rengini birlikte değiştirir; kendi stillerin kalır.
+Lettre US ¦ US Letter
+Lettre aux archives ¦ Arşive mektup
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ Arşive mektup, belge talebi, bir atanın hikâyesi, ziyaret raporu, araştırma raporu…
+Lettre à la famille ¦ Aileye mektup
+Lettres accentuées ¦ Aksanlı harfler
+Lettres et abréviations anciennes ¦ Eski harfler ve kısaltmalar
+Lettrine ¦ Büyük ilk harf
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Bağlantı “{text}”: bunun yerine nereye gittiğini yaz
+Lieu du mariage ¦ Evlilik yeri
+Ligne ajoutée ¦ Satır eklendi
+Ligne au-dessus ¦ Üstte satır
+Ligne d’en-tête (répétée sur chaque page) ¦ Başlık satırı (her sayfada yinelenir)
+Ligne en dessous ¦ Altta satır
+Ligne supprimée ¦ Satır silindi
+Lire à voix haute ¦ Sesli oku
+Liste numérotée ¦ Numaralı liste
+Liste à puces ¦ Madde işaretli liste
+Livre (15,6 × 23,4 cm) ¦ Kitap (15,6 × 23,4 cm)
+Livre US (6 × 9 in) ¦ US kitap (6 × 9 in)
+Livre ancien ¦ Eski kitap
+Louise Borie, née en 1850 ¦ Louise Borie, 1850’de doğdu
+L’onglet « {name} » et son texte seront supprimés. ¦ “{name}” sekmesi ve metni silinecek.
+MAJUSCULES ¦ BÜYÜK HARF
+Majuscule en début de phrase ¦ Cümle başı büyük harf
+Majuscules et minuscules comptent ¦ Büyük/küçük harf önemli
+Marquer ¦ İşaretle
+Marquer pour l’index ¦ Dizin için işaretle
+Marques de mise en forme ¦ Biçimlendirme işaretleri
+Marques de mise en forme ¶ ¦ Biçimlendirme işaretleri ¶
+Mathématiques ¦ Matematik
+Mes modèles ¦ Şablonlarım
+Mettre à jour les champs (personnes, dates) ¦ Alanları güncelle (kişiler, tarihler)
+Mise en forme ¦ Biçimlendirme
+Mise en forme (panneau de droite) ¦ Biçimlendirme (sağ panel)
+Mise en évidence ¦ Güçlü vurgu
+Moderne ¦ Modern
+Modification acceptée ¦ Değişiklik kabul edildi
+Modification précédente ¦ Önceki değişiklik
+Modification refusée ¦ Değişiklik reddedildi
+Modification suivante ¦ Sonraki değişiklik
+Modifications suivies ¦ İzlenen değişiklikler
+Modifier le lien… ¦ Bağlantıyı düzenle…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ “{name}” şablonu kaydedildi (Bir şablondan başla → Şablonlarım).
+Moi ¦ Ben
+Mon document ¦ Belgem
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Adım (değişiklik izleme ve yorumlar için)
+Monnaies et chiffres ¦ Para birimleri ve rakamlar
+Montrer dans le texte ¦ Metinde göster
+Montrer les marques de mise en forme ¶ ¦ Biçimlendirme işaretlerini göster ¶
+Montrer les modifications ¦ Değişiklikleri göster
+Montrer les modifications… ¦ Değişiklikleri göster…
+Montrer ▾ ¦ Göster ▾
+Mot ancien ¦ Eski sözcük
+Mot entier ¦ Tam sözcük
+Mot répété ¦ Yinelenen sözcük
+Mots ¦ Sözcükler
+NOTE DE BAS DE PAGE ¦ DİPNOT
+NOTE DE FIN ¦ SON NOT
+Naissance et décès ¦ Doğum ve ölüm
+Nom de famille ¦ Soyadı
+Nombre de colonnes ¦ Sütun sayısı
+Nombre de mots, de caractères, de paragraphes ¦ Sözcük, karakter, paragraf sayısı
+Nombre de pages ¦ Sayfa sayısı
+Non (avec 💾 ou ⌘S) ¦ Hayır (💾 ya da ⌘S ile)
+Normal ¦ Normal
+Normal, A4, marges de 2,5 cm ¦ Normal, A4, 2,5 cm kenar boşlukları
+Note de bas de page ¦ Dipnot
+Note de fin (à la fin du document) ¦ Son not (belgenin sonunda)
+Note {n} ¦ Not {n}
+Nouveau commentaire ¦ Yeni yorum
+Nouvel onglet ¦ Yeni sekme
+Nouvelle section en paysage. ¦ Yatay yeni bölüm.
+Nouvelle section en portrait. ¦ Dikey yeni bölüm.
+Numéro de la page (1 à {n}) : ¦ Sayfa numarası (1 ile {n} arası):
+Néerlandais ¦ Felemenkçe
+OUTILS ¦ ARAÇLAR
+Occitan ¦ Oksitanca
+Onglet renommé ¦ Sekme yeniden adlandırıldı
+Onglet supprimé ¦ Sekme silindi
+Onglet {n} ¦ Sekme {n}
+Onglets du document ¦ Belgenin sekmeleri
+Onglets rangés ¦ Sekmeler sıralandı
+Orientation ¦ Yön
+Orientation de la suite ¦ Devamının yönü
+Ouvrir le lieu ¦ Yeri aç
+Ouvrir le panneau de navigation ¦ Gezinti panelini aç
+Page blanche ¦ Boş sayfa
+Page {n} ¦ Sayfa {n}
+Page {page} / {total} ¦ Sayfa {page} / {total}
+Panneau de droite ¦ Sağ panel
+Panneau de navigation : titres, pages, résultats ¦ Gezinti paneli: başlıklar, sayfalar, sonuçlar
+Paragraphe ¦ Paragraf
+Paragraphes ¦ Paragraflar
+Paragraphe… ¦ Paragraf…
+Pas de personne dans cette liste. ¦ Bu listede kişi yok.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ “{word}” için bilinen eş anlamlı yok. Yerleşik sözlükte (Fransızca) {n} sözcük grubu var, çoğu bir aile hikâyesine ait.
+Pas d’espace avant la virgule ou le point ¦ Virgülden ya da noktadan önce boşluk yok
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Henüz yorum yok: bir bölüm seç, sonra “💬 Yeni yorum”.
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ Henüz sana ait bir şablon yok: bir belgede Dosya → “Şablon olarak kaydet…”.
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Henüz başlık yok: bir paragraf için “Başlık 1” (ya da Başlık 2, 3…) stilini seç, burada görünecek.
+Personne pour l’instant. ¦ Şimdilik kimse yok.
+Petites capitales ¦ Küçük büyük harfler
+Pied de la première page ¦ İlk sayfanın alt bilgisi
+Pied de page (en bas de chaque page) ¦ Alt bilgi (her sayfanın altında)
+Place d’abord le curseur dans le texte. ¦ Önce imleci metne yerleştir.
+Place le curseur dans un paragraphe. ¦ İmleci bir paragrafa yerleştir.
+Place le curseur dans un tableau. ¦ İmleci bir tabloya yerleştir.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ İmleci bir değişikliğe yerleştir (yeşil metin ya da kırmızı üstü çizili).
+Place le curseur à l’endroit de la coupure. ¦ İmleci bölmenin olacağı yere yerleştir.
+Plein écran (⛶) ¦ Tam ekran (⛶)
+Plus de ligne d’en-tête ¦ Başlık satırı olmasın
+Points de suspension en un seul signe ¦ Üç nokta tek karakter olarak
+Police ¦ Yazı tipi
+Police (E5) ¦ Yazı tipi (E5)
+Police et taille (E5) ¦ Yazı tipi ve boyutu (E5)
+Police… ¦ Yazı tipi…
+Polonais ¦ Lehçe
+Portugais ¦ Portekizce
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Belge bir ekran okuyucuyla, sesli ya da büyük boyutta iyi okunsun diye.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Veritabanından bir kart ya da yer için: Ekle → 👤 Bir kişi, 📍 Bir yer.
+Première page différente (pour une page de titre ou une lettre) ¦ Farklı ilk sayfa (bir başlık sayfası ya da mektup için)
+Précédent (⇧ Entrée) ¦ Önceki (⇧ Enter)
+Quelle feuille ? ¦ Hangi sayfa?
+Ranger une copie dans les médias ¦ Bir kopyasını medyaya kaydet
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Şuraya kaydedildi: Listeler → 🛠️ Düzenleme araçları → 📝 Kelime işlemci.
+Rapport de recherche ¦ Araştırma raporu
+Rechercher et remplacer ¦ Bul ve değiştir
+Relecture ¦ Gözden geçirme
+Remplacer par ¦ Şununla değiştir
+Remplacer par… ¦ Şununla değiştir…
+Remplir avec la fiche de qui ? ¦ Kimin kartıyla doldurulsun?
+Renommer l’onglet ¦ Sekmeyi yeniden adlandır
+Renommer… ¦ Yeniden adlandır…
+Retirer la légende ¦ Açıklama yazısını çıkar
+Retirer le lien (garder le texte) ¦ Bağlantıyı çıkar (metni koru)
+Retirer l’espace après ¦ Sonraki boşluğu kaldır
+Retirer l’espace avant ¦ Önceki boşluğu kaldır
+Retrait gauche ¦ Sol girinti
+Retrait à droite ¦ Sağ girinti
+Retrait à gauche ¦ Sol girinti
+Rien (le texte comme s’il était accepté) ¦ Hiçbiri (metin kabul edilmiş gibi)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ O zamandan beri değişiklik yok: yazdığın ya da sildiğin şeyler burada görünecek.
+Rien à remplacer. ¦ Değiştirilecek bir şey yok.
+Récents ¦ Son kullanılanlar
+Récit d’un ancêtre ¦ Bir atanın hikâyesi
+Récit — {name} ¦ Hikâye — {name}
+Répondre ¦ Yanıtla
+Répondre… ¦ Yanıtla…
+STYLES ¦ STİLLER
+Saut de page : la suite commence en haut de la page suivante. ¦ Sayfa sonu: devamı sonraki sayfanın üstünden başlar.
+Section {n} sur {total} (comme le document). ¦ Bölüm {n} / {total} (belge gibi).
+Section {n} sur {total} (format à elle). ¦ Bölüm {n} / {total} (kendi biçimi var).
+Seulement un trait dessous ¦ Yalnızca altta bir çizgi
+Signature ¦ İmza
+Simple (1) ¦ Tek (1)
+Simple (une marge à côté des ajouts) ¦ Basit (eklemelerin yanında bir kenar boşluğu)
+Souligné ¦ Altı çizili
+Sous-titre ¦ Alt başlık
+Style ¦ Stil
+Style de caractère (quelques mots) ¦ Karakter stili (birkaç sözcük)
+Style de paragraphe ¦ Paragraf stili
+Style du paragraphe ¦ Paragrafın stili
+Style « {name} » ¦ Stil: “{name}”
+Style « {name} » créé. ¦ “{name}” stili oluşturuldu.
+Style « {name} » supprimé ¦ “{name}” stili silindi
+Styles ¦ Stiller
+Styles de paragraphe ¦ Paragraf stilleri
+Suivant ¦ Sonraki
+Suivant (Entrée) ¦ Sonraki (Enter)
+Suivre les modifications ¦ Değişiklikleri izle
+Sujet ¦ Konu
+Supprimer la colonne ¦ Sütunu sil
+Supprimer le tableau ¦ Tabloyu sil
+Supprimer l’image ¦ Resmi sil
+Supprimer l’onglet ? ¦ Sekme silinsin mi?
+Supprimer… ¦ Sil…
+Surlignage ¦ Vurgulama
+Surlignage… ¦ Vurgulama…
+Symboles et flèches ¦ Simgeler ve oklar
+Séparer la cellule ¦ Hücreyi böl
+T Titre ¦ T Başlık
+TRAITEMENT DE TEXTE ¦ KELİME İŞLEMCİ
+Retrait − ¦ Girinti −
+Tableau de « {name} » ¦ Tablo — kaynak: “{name}”
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Başlık satırı olmayan tablo (Tablo → “Başlık satırı”)
+Tableau supprimé ¦ Tablo silindi
+Tableau trié de A à Z ¦ Tablo A’dan Z’ye sıralandı
+Tableau trié de Z à A ¦ Tablo Z’den A’ya sıralandı
+Tableau « {name} » ajouté ({n}). ¦ “{name}” tablosu eklendi ({n}).
+Tabloïd US ¦ US Tabloid
+Tabulations… ¦ Sekme durakları…
+Taille de l’image ¦ Resim boyutu
+Taille… ¦ Boyut…
+Temps de lecture : environ {n} min. ¦ Okuma süresi: yaklaşık {n} dk.
+Texte affiché ¦ Görünen metin
+Texte de la note ¦ Not metni
+Texte du commentaire ¦ Yorum metni
+Texte du document ¦ Belge metni
+Texte très petit (moins de 8 points) ¦ Çok küçük metin (8 puntodan az)
+Titre 1 ¦ Başlık 1
+Titre 2 ¦ Başlık 2
+Titre 3 ¦ Başlık 3
+Titre 4 ¦ Başlık 4
+Titre 5 ¦ Başlık 5
+Titre 6 ¦ Başlık 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ {last}. düzeyden hemen sonra {n}. düzey başlık: bir düzey atlanmış
+Titre en {head}, texte en {body} ¦ Başlıklar: {head}, metin: {body}
+Titre vide ¦ Boş başlık
+Titres ¦ Başlıklar
+Ton commentaire… ¦ Yorumun…
+Tous les paragraphes de ce style changent ensemble. ¦ Bu stildeki tüm paragraflar birlikte değişir.
+Tout accepter ¦ Tümünü kabul et
+Tout concorde avec les fiches. ¦ Her şey kartlarla uyuşuyor.
+Tout corriger ¦ Tümünü düzelt
+Tout est déjà à jour. ¦ Her şey zaten güncel.
+Tout montrer (ajouts et suppressions) ¦ Her şeyi göster (eklemeler ve silmeler)
+Tout refuser ¦ Tümünü reddet
+Tout remplacer ¦ Tümünü değiştir
+Tout retirer ¦ Tümünü çıkar
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ Metnin tam genişliği: {n} px. Yükseklik orantılı değişir (bozulma olmaz).
+Toutes les 10 minutes ¦ 10 dakikada bir
+Toutes les 5 minutes ¦ 5 dakikada bir
+Toutes les minutes ¦ Her dakika
+Trame (fond) ¦ Gölgelendirme (arka plan)
+Trame de la cellule… ¦ Hücre gölgelendirmesi…
+Transcription (machine à écrire) ¦ Transkripsiyon (daktilo)
+Transcription d’acte mise au propre ¦ Bir belgenin temize çekilmiş transkripsiyonu
+Triple (3) ¦ Üç kat (3)
+Tu cherches des renseignements sur qui ? ¦ Kim hakkında bilgi arıyorsun?
+Typographie française ¦ Fransız tipografisi
+Un arrêt tous les ¦ Durak aralığı
+Un cadre autour du paragraphe ¦ Paragrafın çevresinde bir çerçeve
+Un champ vide s’écrit ¦ Boş bir alan şöyle yazılır
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Bu ziyaretin kelime işlemcide bir raporu (arşiv numaraları, sonuçlar, devamı)
+Un document garde au moins un onglet. ¦ Bir belgede en az bir sekme kalır.
+Un lieu de la base ¦ Veritabanından bir yer
+Un nom pour cette version (facultatif) : ¦ Bu sürüm için bir ad (isteğe bağlı):
+Un style porte déjà ce nom. ¦ Bu adda bir stil zaten var.
+Une adresse qui commence par https:// (ou mailto:). ¦ https:// (ya da mailto:) ile başlayan bir adres.
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Bu arada başka bir pencere bu belgeyi kaydetti. Kendi sürümünü korursan onunki silinir.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Kişi başına bu belgenin bir kopyası, her “ ” alanı o kişinin kartıyla doldurulur; kopyalar yeni bir belgede art arda gelir (her biri için yeni bir sayfa). Kullanılan alanlar: {list}.
+Une espace après la virgule ¦ Virgülden sonra bir boşluk
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Web’den bir resim alınmadı: onu bilgisayara kaydet, sonra buraya sürükle.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Tarayıcının gösteremediği türde bir resim (EMF, WMF, TIFF…) dışarıda bırakıldı.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Tarayıcının gösteremediği türde bir resim (SVG, EMF, WMF…) dışarıda bırakıldı.
+Une largeur de 16 px au moins. ¦ En az 16 px genişlik.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Bir başlık satırı (her sayfada yinelenir)
+Une personne de la base ¦ Veritabanından bir kişi
+Utilise {key} dans le texte. ¦ Metinde {key} kullan.
+Utilise {key}. ¦ {key} kullan.
+Version du {date} ¦ Sürüm: {date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Sürüm kaydedildi (Dosya → 🕘 Sürümler…).
+Vitesse de lecture à voix haute ¦ Sesli okuma hızı
+Voir ¦ Göster
+Vérification de l’orthographe arrêtée. ¦ Yazım denetimi kapatıldı.
+Vérification impossible. ¦ Denetim yapılamadı.
+Vérifier avec les fiches ¦ Kartlarla karşılaştır
+Vérifier l’orthographe pendant la frappe ¦ Yazarken yazımı denetle
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, metin, HTML, yazdırma
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ ekledi
+a supprimé ¦ sildi
+automatique ¦ otomatik
+aux archives : cotes vues, trouvailles, suite ¦ arşivde: görülen arşiv numaraları, bulunanlar, devamı
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ bu .{ext} dosyası bozuk (zip değil)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ bu LibreOffice dosyası bir metin değil (bir çalışma kitabı ya da sunum)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ bu zip dosyası ne bir Word belgesi (.docx) ne de bir LibreOffice belgesi (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ bu bir LibreOffice belgesi (.odt) değil
+ce n’est pas un document Word (.docx) : il manque son texte ¦ bu bir Word belgesi (.docx) değil: metni eksik
+ce n’est pas un fichier RTF ¦ bu bir RTF dosyası değil
+ce n’est pas un fichier du traitement de texte ¦ bu bir kelime işlemci dosyası değil
+ces réglages du traitement de texte ¦ bu kelime işlemci ayarları
+demande de recherche à un service d’archives ¦ bir arşiv kurumuna araştırma talebi
+divorcé ¦ boşanmış
+droite ¦ sağ
+décédé (croix) ¦ ölmüş (haç)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ ardından başka değişiklikler yapıldı: ↶ kullan ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ ardından başka değişiklikler yapıldı: belgede ↶ kullan
+espace fine insécable (avant ; : ! ? ») ¦ dar bölünemez boşluk (; : ! ? » öncesinde)
+espace insécable ¦ bölünemez boşluk
+et (note tironienne) ¦ ve (Tiro işareti)
+ex. BROUILLON, COPIE ¦ örn. TASLAK, KOPYA
+fichier RTF trop imbriqué ¦ RTF dosyası çok fazla iç içe
+fichier du traitement de texte ¦ kelime işlemci dosyası
+fichier refusé : beaucoup trop de paragraphes ¦ dosya reddedildi: çok fazla paragraf
+fichier refusé : trop compliqué ¦ dosya reddedildi: çok karmaşık
+fichier refusé : trop gros ¦ dosya reddedildi: çok büyük
+fichier trop gros (plus de {n} Mo) ¦ dosya çok büyük ({n} MB’den fazla)
+https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ o
+inhumé ¦ defnedildi
+je cherche des renseignements sur cette personne ¦ bu kişi hakkında bilgi arıyorum
+la biographie F5 de la fiche, à compléter ¦ kartın F5 biyografisi, tamamlanacak
+le texte seul ¦ yalnızca metin
+le texte à l’écran ¦ ekrandaki metin
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ eski Word dosyaları (.doc) okunamıyor: onu Word’de ya da LibreOffice’te aç ve .docx olarak kaydet
+marié ¦ evli
+marié (autre signe) ¦ evli (başka işaret)
+minuscules ¦ küçük harf
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ doğum, evlilik ya da ölüm: kişi, tarihler ve önceden yazılmış yerler
+nom, naissance, parents, métier, mariage, décès ¦ ad, doğum, ebeveynler, meslek, evlilik, ölüm
+numéro ¦ numara
+né / née ¦ doğdu
+p barré (par) ¦ çizgili p (per)
+p à crosse (pro) ¦ kıvrımlı p (pro)
+page web ¦ web sayfası
+pour partager une découverte ¦ bir keşfi paylaşmak için
+question, sources, analyse, conclusion ¦ soru, kaynaklar, çözümleme, sonuç
+ruban|Caractères ¦ Karakterler
+ruban|Centre ¦ Orta
+ruban|Couleur ¦ Renk
+ruban|Effacer ¦ Temizle
+ruban|Interligne ¦ Aralık
+ruban|Note ¦ Not
+ruban|Numéros ¦ Numaralar
+ruban|Petites ¦ Küçük
+ruban|Puces ¦ Madde işaretleri
+ruban|Retrait + ¦ Girinti +
+ruban|Retrait − ¦ Girinti −
+ruban|Suivi ¦ İzleme
+ruban|Surligner ¦ Vurgula
+récit en parties, images, notes ¦ bölümlere ayrılmış hikâye, resimler, notlar
+texte avec les titres ¦ başlıklarıyla metin
+texte de l’acte, notes, références ¦ belgenin metni, notlar, kaynaklar
+tous les traitements de texte ¦ tüm kelime işlemciler
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ bir PDF burada düzenlenebilir metne dönüştürülemez: onu yeniden yazmak için Belge transkripsiyonu’nu aç
+un ancêtre ¦ bir ata
+{added} ajouté, {removed} retiré. ¦ Eklenen: {added}, çıkarılan: {removed}.
+{added} ajouté, {removed} retirés. ¦ Eklenen: {added}, çıkarılan: {removed}.
+{added} ajoutés, {removed} retiré. ¦ Eklenen: {added}, çıkarılan: {removed}.
+{added} ajoutés, {removed} retirés. ¦ Eklenen: {added}, çıkarılan: {removed}.
+{name} (copie) ¦ {name} (kopya)
+{name} — publipostage ({n}) ¦ {name} — adres mektup birleştirme ({n})
+{name} — que faut-il écrire ? ¦ {name} — ne yazılmalı?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} — kart: {name} (geri dönmek için ↶).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ Dosyadan {n} çıkarıldı (betikler, formlar, çerçeveler…): asla çalıştırılmazlar.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ Dosyadan {n} çıkarıldı (betikler, formlar, çerçeveler…): asla çalıştırılmazlar.
+{n} du web non reprise. ¦ Web’den {n} alınmadı.
+{n} du web non reprises. ¦ Web’den {n} alınmadı.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ {n} sayfa düzenine gönderildi: kontrol et, sonra kitabı kaydet.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ {n} sayfa düzenine gönderildi: kontrol et, sonra kitabı kaydet.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Web’den {n} resim alınmadı: onları bilgisayara kaydet, sonra buraya sürükle.
+{n} mis à jour d’après les fiches. ¦ {n} kartlara göre güncellendi.
+{n} modifications acceptées ¦ {n} değişiklik kabul edildi
+{n} modifications refusées ¦ {n} değişiklik reddedildi
+{n} rangée dans les médias. ¦ {n} medyaya kaydedildi.
+{n} rangées dans les médias. ¦ {n} medyaya kaydedildi.
+{n} repris de « {name} » ¦ {n} alındı — kaynak: “{name}”
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word ve LibreOffice stilleri, listeleri, tabloları, resimleri, notları, üst ve alt bilgiyi, yorumları ve izlenen değişiklikleri korur.
+« ________ » (à remplir à la main) ¦ “________” (elle doldurulacak)
+« … » (pour le voir) ¦ “…” (görmek için)
+¶ Marques de mise en forme ¦ ¶ Biçimlendirme işaretleri
+¶ Paragraphe ¦ ¶ Paragraf
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Paragraf (aralıklar, girintiler, satır aralığı)…
+¹ Note de bas de page ¦ ¹ Dipnot
+À quoi ça sert ? ¦ Ne işe yarar?
+Écrire sur cette personne ¦ Bu kişi hakkında yaz
+Écris le texte du lien. ¦ Bağlantının metnini yaz.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Yaz, çubuğun solundan bir stil seç; eylemler için sağ tıkla.
+à lire, à envoyer ¦ okumak, göndermek için
+à ouvrir dans un navigateur ¦ bir tarayıcıda açmak için
+à une mairie : naissance, mariage, décès ¦ bir belediyeye: doğum, evlilik, ölüm
+Ω Caractères spéciaux ¦ Ω Özel karakterler
+Ω Caractères spéciaux… ¦ Ω Özel karakterler…
+― Ligne horizontale ¦ ― Yatay çizgi
+• Liste à puces ¦ • Madde işaretli liste
+ⁱ Note de fin ¦ ⁱ Son not
+ℹ️ Propriétés du document… ¦ ℹ️ Belge özellikleri…
+↕ Trier A → Z (cette colonne) ¦ ↕ A → Z sırala (bu sütun)
+↕ Trier Z → A (cette colonne) ¦ ↕ Z → A sırala (bu sütun)
+↶ Annulé ¦ ↶ Geri alındı
+↷ Rétabli ¦ ↷ Yinelendi
+↺ Rouvrir ¦ ↺ Yeniden aç
+⇄ Comparer deux versions… ¦ ⇄ İki sürümü karşılaştır…
+⇥ Tabulations ¦ ⇥ Sekme durakları
+⇥ Tabulations… ¦ ⇥ Sekme durakları…
+∑ Nombre de pages ¦ ∑ Sayfa sayısı
+⊞ Fusionner les cellules ¦ ⊞ Hücreleri birleştir
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Kelime işlemci kısayolları
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Kelime işlemci kısayolları…
+▢ Bordure et trame… ¦ ▢ Kenarlık ve gölgelendirme…
+▥ Colonnes ¦ ▥ Sütunlar
+▥ Colonnes… ¦ ▥ Sütunlar…
+▦ Insérer un tableau… ¦ ▦ Tablo ekle…
+▦ Nouveau tableau ¦ ▦ Yeni tablo
+▦ Tableau… ¦ ▦ Tablo…
+▭ Paysage ¦ ▭ Yatay
+▯ Portrait ¦ ▯ Dikey
+♿ Accessibilité : {n} point ¦ ♿ Erişilebilirlik: {n} nokta
+♿ Accessibilité : {n} points ¦ ♿ Erişilebilirlik: {n} nokta
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Bildirilecek bir şey yok: resimler açıklanmış, başlıklar sırada, tabloların başlıkları var, bağlantılar açık.
+♿ Vérifier l’accessibilité… ¦ ♿ Erişilebilirliği denetle…
+⚙️ Personnaliser ¦ ⚙️ Kişiselleştir
+⚙️ Réglages du traitement de texte ¦ ⚙️ Kelime işlemci ayarları
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Kelime işlemci ayarları…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Değişiklikler izleniyor: her ekleme ve her silme görünür kalır.
+✍ Suivi ¦ ✍ İzleme
+✍ Suivre les modifications ¦ ✍ Değişiklikleri izle
+✍ modifications à relire ¦ ✍ gözden geçirilecek değişiklikler
+✎ Auteur ¦ ✎ Yazar
+✎ Le style « {name} » ¦ ✎ Stil: “{name}”
+✎ Modifier le style ¦ ✎ Stili düzenle
+✏️ À mes mesures ¦ ✏️ Özel boyut
+✓ Accepter ¦ ✓ Kabul et
+✓ Accepter la modification ¦ ✓ Değişikliği kabul et
+✓ En-tête et pied de page repris. ¦ ✓ Üst ve alt bilgi alındı.
+✓ Repris : {list}. ¦ ✓ Alındı: {list}.
+✓ Résolu ¦ ✓ Çözüldü
+✓ Tout accepter ¦ ✓ Tümünü kabul et
+✓ Tout concorde avec les fiches. ¦ ✓ Her şey kartlarla uyuşuyor.
+✗ Refuser ¦ ✗ Reddet
+✗ Refuser la modification ¦ ✗ Değişikliği reddet
+✗ Tout refuser ¦ ✗ Tümünü reddet
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Bir kaynak alıntıla
+❝ Source citée… ¦ ❝ Alıntılanan kaynak…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ İçe aktar (Word, LibreOffice…)…
+⤒ Importer le document ¦ ⤒ Belgeyi içe aktar
+⤒ Importer un document ¦ ⤒ Bir belge içe aktar
+⤓ Exporter… ¦ ⤓ Dışa aktar…
+⤓ Saut de page ¦ ⤓ Sayfa sonu
+＋ Ajouter des personnes… ¦ ＋ Kişi ekle…
+＋ Description… ¦ ＋ Açıklama…
+＋ Les personnes d’une de mes listes… ¦ ＋ Listelerimden birindeki kişiler…
+＋ Nouveau commentaire ¦ ＋ Yeni yorum
+＋ Nouveau document ¦ ＋ Yeni belge
+＋ Nouveau style ¦ ＋ Yeni stil
+＋ Nouveau style d’après la sélection… ¦ ＋ Seçimden yeni stil…
+🌐 Langue du document ¦ 🌐 Belgenin dili
+🌐 Langue… ¦ 🌐 Dil…
+🌐 Page web (.html) ¦ 🌐 Web sayfası (.html)
+🌳 Un petit arbre… ¦ 🌳 Küçük bir ağaç…
+🎞 Un média (lien)… ¦ 🎞 Bir medya (bağlantı)…
+🎨 Choisir… ¦ 🎨 Seç…
+🎨 Couleur de page… ¦ 🎨 Sayfa rengi…
+🎨 Forme ¦ 🎨 Biçim
+🎨 Styles… ¦ 🎨 Stiller…
+👤 Remplir avec une fiche ¦ 👤 Bir kartla doldur
+👤 Remplir avec une fiche… ¦ 👤 Bir kartla doldur…
+👤 Une personne de la base… ¦ 👤 Veritabanından bir kişi…
+💬 Montrer les commentaires ¦ 💬 Yorumları göster
+💬 Nouveau commentaire ¦ 💬 Yeni yorum
+💾 Fichier de l’outil ¦ 💾 Aracın dosyası
+📁 Ranger une copie dans les médias ¦ 📁 Bir kopyasını medyaya kaydet
+📄 Format, marges et orientation… ¦ 📄 Boyut, kenar boşlukları ve yön…
+📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Sayfalar
+📄 Saut de section ¦ 📄 Bölüm sonu
+📄 Saut de section (autre orientation)… ¦ 📄 Bölüm sonu (başka yön)…
+📅 Date ¦ 📅 Tarih
+📅 Date du jour ¦ 📅 Bugünün tarihi
+📊 Un diagramme… ¦ 📊 Bir diyagram…
+📋 Partir d’un modèle ¦ 📋 Bir şablondan başla
+📋 Partir d’un modèle… ¦ 📋 Bir şablondan başla…
+📍 Un lieu de la base… ¦ 📍 Veritabanından bir yer…
+📐 Envoyer vers la mise en page ¦ 📐 Sayfa düzenine gönder
+📐 Envoyer vers la mise en page… ¦ 📐 Sayfa düzenine gönder…
+📐 Reprendre les styles d’un livre… ¦ 📐 Bir kitabın stillerini al…
+📐 Styles d’un livre… ¦ 📐 Bir kitabın stilleri…
+📑 Sommaire ¦ 📑 İçindekiler
+📖 La biographie d’une personne… ¦ 📖 Bir kişinin biyografisi…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Kaynakça
+📜 Brouillon (sans les pages) ¦ 📜 Taslak (sayfasız)
+📝 Compte rendu ¦ 📝 Rapor
+📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Bu kişi hakkında yaz: biyografisi önceden yerleştirilmiş bir kelime işlemci belgesi
+📨 Champ de fusion ¦ 📨 Birleştirme alanı
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Birleştirme alanı (ad, tarihler…)
+📨 Publipostage ¦ 📨 Adres mektup birleştirme
+📨 Publipostage… ¦ 📨 Adres mektup birleştirme…
+🔁 Synonymes de « {word} » ¦ 🔁 Eş anlamlılar: “{word}”
+🔁 Synonymes… ¦ 🔁 Eş anlamlılar…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Okunuyor… (Esc ya da Araçlar → ⏹ Okumayı durdur)
+🔊 Lire à voix haute ¦ 🔊 Sesli oku
+🔍 Rechercher ¦ 🔍 Bul
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 {n} yerde düzeltildi (geri dönmek için ↶).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 {n} yerde düzeltildi (geri dönmek için ↶).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Düzeltme okuması (Fransız tipografisi, yinelemeler)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Düzeltilecek bir şey yok: tipografi ve yinelemeler iyi.
+🔎 Vérification avec les fiches… ¦ 🔎 Kartlarla karşılaştırılıyor…
+🔎 Vérifier avec les fiches ¦ 🔎 Kartlarla karşılaştır
+🔎 {n} à regarder. ¦ 🔎 Bakılacak {n}.
+🔗 Lien… ¦ 🔗 Bağlantı…
+🔗 Modifier le lien ¦ 🔗 Bağlantıyı düzenle
+🔗 Nouveau lien ¦ 🔗 Yeni bağlantı
+🔢 Nombre de mots ¦ 🔢 Sözcük sayısı
+🔢 Nombre de mots… ¦ 🔢 Sözcük sayısı…
+🔤 Index ¦ 🔤 Dizin
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Yeni sürüm olarak kaydet
+🕘 Nouvelle version ¦ 🕘 Yeni sürüm
+🕘 Versions… ¦ 🕘 Sürümler…
+🖍 Surlignage… ¦ 🖍 Vurgulama…
+🖨 Imprimer… ¦ 🖨 Yazdır…
+🖼 Image… ¦ 🖼 Resim…
+🧭 Panneau de navigation ¦ 🧭 Gezinti paneli
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Bu tabloyu Tablo’da aç
+🧾 Tableau venu du Tableur… ¦ 🧾 Tablo’dan gelen tablo…
+🧾 Texte (.txt) ¦ 🧾 Metin (.txt)
+=remplacement ¦ değiştirme|değiştirme
+=commentaire ¦ yorum|yorum
+=modification suivie ¦ izlenen değişiklik|izlenen değişiklik
+=tableau ¦ tablo|tablo
+=style ¦ stil|stil
+=paragraphe ¦ paragraf|paragraf
+=champ rempli ¦ alan dolduruldu|alan dolduruldu
+texte|Caractère ¦ Karakter
+icone-gras|G ¦ K
+icone-italique|I ¦ İ
+icone-souligne|S ¦ A
+icone-petites-capitales|Pᴄ ¦ Kʙ

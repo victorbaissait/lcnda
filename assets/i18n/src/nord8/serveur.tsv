@@ -1,0 +1,1616 @@
+fr ¦ tr
+Action inconnue ¦ Bilinmeyen işlem
+Action inconnue. ¦ Bilinmeyen işlem.
+Demande inconnue. ¦ Bilinmeyen istek.
+Fichier non reçu. ¦ Dosya alınmadı.
+Personne introuvable ¦ Kişi bulunamadı
+Personne introuvable. ¦ Kişi bulunamadı.
+Source introuvable. ¦ Kaynak bulunamadı.
+Version introuvable. ¦ Sürüm bulunamadı.
+ID manquant ¦ Kimlik eksik
+POST requis ¦ POST gerekli
+Refusé. ¦ Reddedildi.
+Mot de passe incorrect. ¦ Parola yanlış.
+ZIP illisible. ¦ ZIP okunamıyor.
+Export impossible : l’extension PHP zip manque. ¦ Dışa aktarma yapılamıyor: PHP zip eklentisi eksik.
+Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page. ¦ Başka bir pencerede başka bir soy ağacı açıldı: sayfayı yeniden yükle.
+Session expirée, ou une autre généalogie a été ouverte entre-temps (autre fenêtre) : recharge la page. ¦ Oturumun süresi doldu ya da bu arada başka bir soy ağacı açıldı (başka pencere): sayfayı yeniden yükle.
+L’enregistrement n’a pas pu se faire (une donnée reçue n’a pas la forme attendue). Rien n’a été modifié. Réessaie ; si ça recommence, recharge la page et signale-le. ¦ Kayıt yapılamadı (alınan bir veri beklenen biçimde değil). Hiçbir şey değiştirilmedi. Yeniden dene; yine olursa sayfayı yeniden yükle ve bildir.
+Mode consultation : pas de copie de la base vers un autre dossier. ¦ Görüntüleme modu: veritabanı başka bir klasöre kopyalanamaz.
+{n} jour ¦ {n} gün
+{n} jours ¦ {n} gün
+{n} an ¦ {n} yıl
+Date qui n’existe pas : « {date} » ¦ Var olmayan tarih: “{date}”
+{event} le « {date} » : ce jour n’existe pas dans le calendrier julien. ¦ {event}, tarih: “{date}”: bu gün Jülyen takviminde yok.
+{event} le « {date} » : ce jour n’existe pas dans le calendrier grégorien. ¦ {event}, tarih: “{date}”: bu gün Gregoryen takviminde yok.
+Date trop longue ({n} signes) ¦ Tarih çok uzun ({n} karakter)
+{event} : « {text}… » — une note a sans doute été collée dans la case de la date. ¦ {event}: “{text}…” — tarih kutusuna büyük olasılıkla bir not yapıştırılmış.
+Dates à l’envers : « {date} » ¦ Ters tarihler: “{date}”
+{event} : la première année ({a}) vient après la seconde ({b}). Sans doute « entre {b} et {a} ». ¦ {event}: ilk yıl ({a}) ikinciden ({b}) sonra geliyor. Büyük olasılıkla “entre {b} et {a}”.
+Date « {date} » lue comme l’an {y} ¦ “{date}” tarihi şu yıl olarak okundu: {y}
+{event} : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année. ¦ {event}: yılın önünde eksi işareti var. İsa’dan önceki bir tarih için “5 av. J.-C.” yaz; yoksa yılı düzelt.
+Décès avant la naissance ¦ Doğumdan önce ölüm
+Naissance {b} · décès {d} ¦ Doğum {b} · ölüm {d}
+Décès ({d}) avant sa naissance ({b}) ¦ Ölüm ({d}) doğumdan ({b}) önce
+inhumation ¦ defin
+baptême ¦ vaftiz
+Mort à {n} ans ¦ {n} yaşında öldü
+Morte à {n} ans ¦ {n} yaşında öldü
+Mort(e) à {n} ans ¦ {n} yaşında öldü
+Naissance {b} · décès {d} (seuil : {n} ans) ¦ Doğum {b} · ölüm {d} (eşik: {n} yıl)
+Très peu de gens dépassent {a} ans ; au-delà de {b} ans, c’est presque toujours une erreur. ¦ Çok az kişi {a} yaşını geçer; {b} yaşın üstü neredeyse her zaman bir hatadır.
+Naissance dans le futur ¦ Gelecekte doğum
+Naissance {b} ¦ Doğum {b}
+Dates de naissance contradictoires ¦ Çelişen doğum tarihleri
+Dates de décès contradictoires ¦ Çelişen ölüm tarihleri
+Inhumation avant le décès ¦ Ölümden önce defin
+Décès {d} · inhumation {i} ¦ Ölüm {d} · defin {i}
+Inhumation {span} après le décès ¦ Ölümden {span} sonra defin
+Décès {d} · inhumation {i} (seuil : {n} jours) ¦ Ölüm {d} · defin {i} (eşik: {n} gün)
+Baptême {span} après la naissance ¦ Doğumdan {span} sonra vaftiz
+Naissance {b} · baptême {t} (seuil : {n} jours) ¦ Doğum {b} · vaftiz {t} (eşik: {n} gün)
+{event} avant la naissance ¦ Doğumdan önce: {event}
+{event} {date} · naissance {b} ¦ {event} {date} · doğum {b}
+{event} après le décès ¦ Ölümden sonra: {event}
+{event} {date} · décès {d} ¦ {event} {date} · ölüm {d}
+Marié après son décès ¦ Ölümünden sonra evlenmiş
+Mariée après son décès ¦ Ölümünden sonra evlenmiş
+Marié(e) après son décès ¦ Ölümünden sonra evlenmiş
+Mariage {m} · décès {d} ¦ Evlilik {m} · ölüm {d}
+Marié le {m}, après sa mort ¦ Evlilik tarihi {m}, ölümünden sonra
+Mariée le {m}, après sa mort ¦ Evlilik tarihi {m}, ölümünden sonra
+Marié(e) le {m}, après sa mort ¦ Evlilik tarihi {m}, ölümünden sonra
+Mariage avant la naissance ¦ Doğumdan önce evlilik
+Mariage {m} · naissance {b} ¦ Evlilik {m} · doğum {b}
+Marié à {n} ans ¦ {n} yaşında evlenmiş
+Mariée à {n} ans ¦ {n} yaşında evlenmiş
+Marié(e) à {n} ans ¦ {n} yaşında evlenmiş
+Mariage {m} · naissance {b} (seuil : {n} ans) ¦ Evlilik {m} · doğum {b} (eşik: {n} yıl)
+Avant {n} ans, un mariage est presque impossible. ¦ {n} yaşından önce evlilik neredeyse imkânsızdır.
+Mère née après son enfant ¦ Anne, çocuğundan sonra doğmuş
+Père né après son enfant ¦ Baba, çocuğundan sonra doğmuş
+Parent né après son enfant ¦ Ebeveyn, çocuğundan sonra doğmuş
+Naissance de {child} {cb} · mère née {pb} ¦ Çocuğun doğumu: {child} {cb} · annenin doğumu {pb}
+Naissance de {child} {cb} · père né {pb} ¦ Çocuğun doğumu: {child} {cb} · babanın doğumu {pb}
+Naissance de {child} {cb} · parent né {pb} ¦ Çocuğun doğumu: {child} {cb} · ebeveynin doğumu {pb}
+Née après son enfant {child} ({cb}) ¦ Çocuğundan sonra doğmuş: {child} ({cb})
+Né après son enfant {child} ({cb}) ¦ Çocuğundan sonra doğmuş: {child} ({cb})
+Sa mère est née après sa naissance ({pb}) ¦ Annesi kendisinden sonra doğmuş ({pb})
+Son père est né après sa naissance ({pb}) ¦ Babası kendisinden sonra doğmuş ({pb})
+Son parent est né après sa naissance ({pb}) ¦ Ebeveyni kendisinden sonra doğmuş ({pb})
+naiss. {name} ¦ doğum: {name}
+décès {name} ¦ ölüm: {name}
+Mère de {n} ans à la naissance ¦ Doğumda anne {n} yaşında
+Père de {n} ans à la naissance ¦ Doğumda baba {n} yaşında
+Parent de {n} ans à la naissance ¦ Doğumda ebeveyn {n} yaşında
+Mère de {n} an à la naissance ¦ Doğumda anne {n} yaşında
+Père de {n} an à la naissance ¦ Doğumda baba {n} yaşında
+Parent de {n} an à la naissance ¦ Doğumda ebeveyn {n} yaşında
+Naissance {cb} · mère née {pb} (seuil : {n} ans) ¦ Doğum {cb} · annenin doğumu {pb} (eşik: {n} yıl)
+Naissance {cb} · père né {pb} (seuil : {n} ans) ¦ Doğum {cb} · babanın doğumu {pb} (eşik: {n} yıl)
+Naissance {cb} · parent né {pb} (seuil : {n} ans) ¦ Doğum {cb} · ebeveynin doğumu {pb} (eşik: {n} yıl)
+Mère de {child} à {n} ans ¦ {n} yaşında anne oldu: {child}
+Père de {child} à {n} ans ¦ {n} yaşında baba oldu: {child}
+Parent de {child} à {n} ans ¦ {n} yaşında ebeveyn oldu: {child}
+Sa mère n’avait que {n} ans à sa naissance ¦ Doğduğunda annesi yalnızca {n} yaşındaydı
+Son père n’avait que {n} ans à sa naissance ¦ Doğduğunda babası yalnızca {n} yaşındaydı
+Son parent n’avait que {n} ans à sa naissance ¦ Doğduğunda ebeveyni yalnızca {n} yaşındaydı
+Sa mère avait {n} ans à sa naissance ¦ Doğduğunda annesi {n} yaşındaydı
+Son père avait {n} ans à sa naissance ¦ Doğduğunda babası {n} yaşındaydı
+Une naissance après {a} ans est presque impossible ; à partir de {b} ans, c’est à vérifier. ¦ {a} yaşından sonra doğum neredeyse imkânsızdır; {b} yaşından itibaren kontrol etmeye değer.
+Naissance {cb} · décès de la mère {pd} ¦ Doğum {cb} · annenin ölümü {pd}
+Naissance {cb} · décès du père {pd} (seuil : {n} jours) ¦ Doğum {cb} · babanın ölümü {pd} (eşik: {n} gün)
+Naissance {cb} · décès du parent {pd} (seuil : {n} jours) ¦ Doğum {cb} · ebeveynin ölümü {pd} (eşik: {n} gün)
+Un enfant ne peut pas naître après la mort de sa mère. ¦ Bir çocuk annesinin ölümünden sonra doğamaz.
+Un enfant naît au plus 9 à 10 mois après la mort du père (seuil : {n} jours). ¦ Bir çocuk, babanın ölümünden en fazla 9-10 ay sonra doğar (eşik: {n} gün).
+Né {span} après la mort de sa mère ¦ Annesinin ölümünden {span} sonra doğmuş
+Né {span} après la mort de son père ¦ Babasının ölümünden {span} sonra doğmuş
+Né {span} après la mort de son parent ¦ Ebeveyninin ölümünden {span} sonra doğmuş
+Née {span} après la mort de sa mère ¦ Annesinin ölümünden {span} sonra doğmuş
+Née {span} après la mort de son père ¦ Babasının ölümünden {span} sonra doğmuş
+Née {span} après la mort de son parent ¦ Ebeveyninin ölümünden {span} sonra doğmuş
+Né(e) {span} après la mort de sa mère ¦ Annesinin ölümünden {span} sonra doğmuş
+Né(e) {span} après la mort de son père ¦ Babasının ölümünden {span} sonra doğmuş
+Né(e) {span} après la mort de son parent ¦ Ebeveyninin ölümünden {span} sonra doğmuş
+Né après la mort de sa mère ¦ Annesinin ölümünden sonra doğmuş
+Né après la mort de son père ¦ Babasının ölümünden sonra doğmuş
+Né après la mort de son parent ¦ Ebeveyninin ölümünden sonra doğmuş
+Née après la mort de sa mère ¦ Annesinin ölümünden sonra doğmuş
+Née après la mort de son père ¦ Babasının ölümünden sonra doğmuş
+Née après la mort de son parent ¦ Ebeveyninin ölümünden sonra doğmuş
+Né(e) après la mort de sa mère ¦ Annesinin ölümünden sonra doğmuş
+Né(e) après la mort de son père ¦ Babasının ölümünden sonra doğmuş
+Né(e) après la mort de son parent ¦ Ebeveyninin ölümünden sonra doğmuş
+Son fils {child} naît {span} après sa mort ¦ Oğlu {child}, ölümünden {span} sonra doğuyor
+Son fils {child} naît après sa mort ¦ Oğlu {child}, ölümünden sonra doğuyor
+Sa fille {child} naît {span} après sa mort ¦ Kızı {child}, ölümünden {span} sonra doğuyor
+Sa fille {child} naît après sa mort ¦ Kızı {child}, ölümünden sonra doğuyor
+Son enfant {child} naît {span} après sa mort ¦ Çocuğu {child}, ölümünden {span} sonra doğuyor
+Son enfant {child} naît après sa mort ¦ Çocuğu {child}, ölümünden sonra doğuyor
+Seulement {n} mois après son frère ¦ Erkek kardeşinden yalnızca {n} ay sonra
+Seulement {n} mois après sa sœur ¦ Kız kardeşinden yalnızca {n} ay sonra
+Seulement {n} mois après son aîné ¦ Büyük kardeşinden yalnızca {n} ay sonra
+Naissances {a} et {b} (seuil : {n} mois) ¦ Doğumlar {a} ve {b} (eşik: {n} ay)
+Deux enfants de la même mère naissent au moins 8 à 9 mois l’un après l’autre (sauf jumeaux). ¦ Aynı anneden iki çocuk en az 8-9 ay arayla doğar (ikizler dışında).
+Deux enfants la même année ¦ Aynı yıl iki çocuk
+{a} et {b} : naissance en {y} (jumeaux, doublon ou date approximative ?) ¦ {a} ve {b}: doğum yılı {y} (ikizler mi, çift kayıt mı, yaklaşık tarih mi?)
+Né bien avant le mariage des parents ¦ Ebeveynlerin evliliğinden çok önce doğmuş
+Née bien avant le mariage des parents ¦ Ebeveynlerin evliliğinden çok önce doğmuş
+Né(e) bien avant le mariage des parents ¦ Ebeveynlerin evliliğinden çok önce doğmuş
+Naissance {b} · mariage {m} ¦ Doğum {b} · evlilik {m}
+Fratrie étalée sur {n} ans ¦ {n} yıla yayılan kardeşler
+Aîné(e) {a} {ad}, cadet(te) {b} {bd} (seuil : {n} ans) : deux générations mélangées ? ¦ En büyük {a} {ad}, en küçük {b} {bd} (eşik: {n} yıl): iki kuşak karışmış olabilir mi?
+Rattaché à {n} familles de parents ¦ {n} ebeveyn ailesine bağlı
+Rattachée à {n} familles de parents ¦ {n} ebeveyn ailesine bağlı
+Cela peut être voulu (adoption, famille recomposée) ou être une erreur. ¦ Bu bilerek yapılmış olabilir (evlat edinme, yeniden kurulan aile) ya da bir hata olabilir.
+Famille n° {n} sans conjoint ¦ Eşi olmayan aile no. {n}
+Enfants : {names} : il manque le père et la mère. ¦ Çocuklar: {names}: baba ve anne eksik.
+Un mariage, sans les époux : il manque le père et la mère. ¦ Eşleri olmayan bir evlilik: baba ve anne eksik.
+Sosa {n} notée femme ¦ Sosa {n} kadın olarak kayıtlı
+Sosa {n} noté homme ¦ Sosa {n} erkek olarak kayıtlı
+Un Sosa pair est un père : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Çift bir Sosa numarası bir babadır: kartın cinsiyetini ya da ağaçtaki yerini kontrol et.
+Un Sosa impair est une mère : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Tek bir Sosa numarası bir annedir: kartın cinsiyetini ya da ağaçtaki yerini kontrol et.
+Sosa {s} : {n} ans pour {k} générations ¦ Sosa {s}: {k} kuşak için {n} yıl
+Né(e) {b}, son descendant Sosa {s} {d} : une génération en trop (homonyme pris pour son père) ? ¦ Doğum {b}, soyundan Sosa {s} {d}: bir kuşak fazla mı (babası sanılan bir adaş)?
+Né(e) {b}, son descendant Sosa {s} {d} : une génération oubliée ? ¦ Doğum {b}, soyundan Sosa {s} {d}: unutulmuş bir kuşak mı?
+même nom ¦ aynı soyadı
+même prénom ¦ aynı ad
+prénom proche ¦ benzer ad
+même sexe ¦ aynı cinsiyet
+sexe ¦ cinsiyet
+même naissance ¦ aynı doğum
+nés à {n} an près ¦ doğumlar arasında en fazla {n} yıl
+nés la même année ¦ aynı yıl doğmuşlar
+nés {a} / {b} ¦ doğum {a} / {b}
+même décès ¦ aynı ölüm
+morts {a} / {b} ¦ ölüm {a} / {b}
+mêmes parents ¦ aynı ebeveynler
+parents ¦ ebeveynler
+même conjoint ¦ aynı eş
+autres conjoints ¦ diğer eşler
+nés au même endroit ¦ aynı yerde doğmuşlar
+nés à {n} km ¦ doğum yerleri arası {n} km
+né {b} / mort {d} ¦ doğum {b} / ölüm {d}
+né {b} ¦ doğum {b}
+né ? / mort {d} ¦ doğum ? / ölüm {d}
+né ? ¦ doğum ?
+Ressemble à la fiche n° {n} ({pct} %) ¦ Şu kartla benziyor: no. {n} (%{pct})
+kin|sa mère ¦ annesi
+kin|son père ¦ babası
+kin|son parent ¦ ebeveyni
+kin|sa grand-mère ¦ büyükannesi
+kin|son grand-père ¦ büyükbabası
+kin|son grand-parent ¦ büyük ebeveyni
+kin|son ancêtre ({n} générations) ¦ atası ({n} kuşak)
+kin|sa fille ¦ kızı
+kin|son fils ¦ oğlu
+kin|son enfant ¦ çocuğu
+kin|sa petite-fille ¦ kız torunu
+kin|son petit-fils ¦ erkek torunu
+kin|son petit-enfant ¦ torunu
+kin|son descendant ({n} générations) ¦ soyundan biri ({n} kuşak)
+{name} marié à {kin} ¦ {name} — evlendiği kişi: {kin}
+{name} mariée à {kin} ¦ {name} — evlendiği kişi: {kin}
+{name} marié(e) à {kin} ¦ {name} — evlendiği kişi: {kin}
+{name} est {kin} et aussi son conjoint (famille n° {n}) : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus. ¦ {name} hem {kin} hem de eşi (aile no. {n}): yanlış kuşağa bağlanmış bir kart ya da karıştırılmış iki adaş.
+Animal noté conjoint d’une personne : {name} ¦ Bir kişinin eşi olarak kayıtlı hayvan: {name}
+Animal noté parent d’une personne : {name} ¦ Bir kişinin ebeveyni olarak kayıtlı hayvan: {name}
+Animal noté enfant d’une personne : {name} ¦ Bir kişinin çocuğu olarak kayıtlı hayvan: {name}
+Famille n° {n} : {animals} avec {people}. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint. ¦ Aile no. {n}: {animals} ile birlikte {people}. Bir hayvan, sahibine kendi kartında (Sahibi) bağlanır; ebeveyn ya da eş olarak değil.
+{n} événement à cet endroit ¦ Bu yerde {n} olay
+{n} événements à cet endroit ¦ Bu yerde {n} olay
+À {km} km en {n} jours ¦ {n} günde {km} km
+À {km} km en {n} jour ¦ {n} günde {km} km
+À {km} km en moins d’un jour ¦ Bir günden kısa sürede {km} km
+{a} {ad} à {ap} · {b} {bd} à {bp} (au plus ≈ {n} km par jour à cette époque) ¦ {a} {ad} — yer: {ap} · {b} {bd} — yer: {bp} (o dönemde günde en fazla ≈ {n} km)
+Une même personne ne peut pas être à deux endroits aussi éloignés en si peu de temps : souvent deux homonymes confondus dans une seule fiche. ¦ Aynı kişi bu kadar kısa sürede bu kadar uzak iki yerde olamaz: çoğu zaman tek bir kartta karıştırılmış iki adaş.
+Lieux de naissance contradictoires ¦ Çelişen doğum yerleri
+Lieux de décès contradictoires ¦ Çelişen ölüm yerleri
+Baptême à {n} km du lieu de naissance ¦ Doğum yerinden {n} km uzakta vaftiz
+Naissance à {b} · baptême à {t} (seuil : {n} km). Souvent : une commune homonyme. ¦ Doğum yeri: {b} · vaftiz yeri: {t} (eşik: {n} km). Çoğu zaman: aynı adlı bir yerleşim yeri.
+Coordonnées 0, 0 (en plein océan, au large de l’Afrique) ¦ Koordinatlar 0, 0 (okyanusun ortasında, Afrika açıklarında)
+Hors de {country} alors que le pays indiqué est {country} ¦ Belirtilen ülke {country} olduğu hâlde bu ülkenin dışında: {country}
+Latitude et longitude probablement inversées ¦ Enlem ve boylam büyük olasılıkla yer değiştirmiş
+Inverser latitude et longitude ¦ Enlem ile boylamın yerini değiştir
+Longitude probablement de mauvais signe (est / ouest) ¦ Boylamın işareti büyük olasılıkla yanlış (doğu / batı)
+Corriger le signe de la longitude ¦ Boylamın işaretini düzelt
+Une autre commune « {name} » est beaucoup plus près du reste de la famille ({a} km au lieu de {b} km) : département {dep} ¦ “{name}” adlı başka bir yerleşim yeri ailenin geri kalanına çok daha yakın ({b} km yerine {a} km): département {dep}
+Prendre la commune du département {dep} ¦ Département {dep} içindeki yerleşim yerini al
+À {n} km du reste de la famille ¦ Ailenin geri kalanından {n} km uzakta
+la commune ¦ yerleşim yeri
+Commence par les tables décennales (un index alphabétique par décennie), puis le registre de l’année trouvée. ¦ Önce on yıllık dizinlerle başla (her on yıl için alfabetik bir dizin), sonra bulduğun yılın kütüğüne bak.
+Registres paroissiaux (BMS) ¦ Kilise kayıtları (BMS)
+Les baptêmes de la paroisse de {commune} (collection communale, série E dépôt ou GG ; ou celle du greffe). Le baptême suit la naissance de 0 à 3 jours. ¦ Kilise bölgesinin vaftizleri: {commune} (belediye nüshası, E dépôt ya da GG serisi; ya da mahkeme kalemi nüshası). Vaftiz doğumdan 0 ile 3 gün sonra yapılır.
+État civil — naissances ¦ Nüfus kayıtları — doğumlar
+Les registres de naissances de {commune}. {td} ¦ Doğum kütükleri: {commune}. {td}
+Mairie ¦ Belediye
+Un acte de naissance de moins de 75 ans n’est pas en ligne : copie intégrale à demander à la mairie (avec la preuve de ta filiation). ¦ 75 yıldan yeni bir doğum belgesi çevrimiçi değildir: tam suretini belediyeden iste (soy bağını kanıtlayan belgeyle).
+Les mariages de la paroisse de {commune}, d’ordinaire celle de l’épouse ; regarde aussi les bans dans la paroisse de l’époux. ¦ Kilise bölgesinin evlilikleri: {commune} (genellikle gelininki); damadın kilise bölgesindeki evlilik ilanlarına da bak.
+État civil — mariages ¦ Nüfus kayıtları — evlilikler
+Les registres de mariages de {commune} (commune de l’épouse le plus souvent). {td} Les publications de bans sont parfois dans un registre à part. ¦ Evlilik kütükleri: {commune} (çoğu zaman gelinin yerleşim yeri). {td} Evlilik ilanları bazen ayrı bir kütüktedir.
+Notaires (série E) et contrôle des actes (2 C) ¦ Noterler (E serisi) ve belge denetimi (2 C)
+Minutes notariales (série 3 E) ¦ Noter tutanakları (3 E serisi)
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Le registre du contrôle des actes (série 2 C) donne le notaire et la date. ¦ Evlilik sözleşmesi, birkaç gün ya da hafta önce bir noterde imzalanır; 1850’den beri evlilik belgesi bir sözleşme olup olmadığını ve hangi noterde yapıldığını söyler. Belge denetimi kütüğü (2 C serisi) noteri ve tarihi verir.
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Les registres de l’enregistrement (série 3 Q, actes civils publics) le retrouvent aussi. ¦ Evlilik sözleşmesi, birkaç gün ya da hafta önce bir noterde imzalanır; 1850’den beri evlilik belgesi bir sözleşme olup olmadığını ve hangi noterde yapıldığını söyler. Tescil kütükleri (3 Q serisi, resmî medeni belgeler) de onu bulur.
+Un acte de mariage de moins de 75 ans n’est pas en ligne : copie à demander à la mairie. ¦ 75 yıldan yeni bir evlilik belgesi çevrimiçi değildir: suretini belediyeden iste.
+Les sépultures de la paroisse de {commune} (inhumation le lendemain du décès, en général). ¦ Kilise bölgesinin defin kayıtları: {commune} (defin genellikle ölümün ertesi günü).
+État civil — décès ¦ Nüfus kayıtları — ölümler
+Les décès de {commune}, mais aussi de la commune d’un enfant chez qui la personne a pu finir sa vie, ou de l’hospice voisin. {td} ¦ Ölüm kayıtları: {commune}; ama kişinin hayatını yanında bitirmiş olabileceği bir çocuğunun yerleşim yerine ya da yakındaki darülacezeye de bak. {td}
+Enregistrement (série 3 Q) ¦ Tescil (3 Q serisi)
+Les tables des successions et absences du bureau de l’enregistrement du canton : la date et le lieu du décès, les héritiers, parfois les biens. ¦ Kantonun tescil dairesinin miras ve gaiplik dizinleri: ölüm tarihi ve yeri, mirasçılar, bazen mallar.
+Pour un homme mort entre 1914 et 1921 : la base des « morts pour la France » (ministère des Armées). ¦ 1914 ile 1921 arasında ölmüş bir erkek için: “morts pour la France” veritabanı (Fransa Silahlı Kuvvetler Bakanlığı).
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de baptême. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Evlilik belgesi ebeveynlerinin adlarını verir (ve hayatta olup olmadıklarını söyler); yoksa vaftiz belgesi. 1792’den önce evlilik belgeleri çoğu zaman ebeveynlerin adını verir, ama her zaman değil.
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de naissance. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Evlilik belgesi ebeveynlerinin adlarını verir (ve hayatta olup olmadıklarını söyler); yoksa doğum belgesi. 1792’den önce evlilik belgeleri çoğu zaman ebeveynlerin adını verir, ama her zaman değil.
+Recensements (série 6 M), à partir de 1836 ¦ Nüfus sayımları (6 M serisi), 1836’dan itibaren
+La famille sous le même toit, avec les âges : pour trouver la commune et l’année de naissance. ¦ Aynı çatı altındaki aile, yaşlarıyla: doğduğu yerleşim yerini ve yılı bulmak için.
+Recensements (série 6 M) ¦ Nüfus sayımları (6 M serisi)
+Les listes nominatives de {commune}, tous les 5 ans de 1836 à 1936 (avec l’âge, le métier, toute la maisonnée) ; beaucoup sont en ligne. Dans une grande ville, il faut l’adresse (rue). ¦ Nominatif listeler: {commune}, 1836’dan 1936’ya her 5 yılda bir (yaş, meslek, tüm hane halkıyla); çoğu çevrimiçi. Büyük bir şehirde adres (sokak) gerekir.
+Recrutement militaire (série 1 R) ¦ Askerlik kaydı (1 R serisi)
+Le registre matricule de sa classe (année de naissance + 20), au bureau de recrutement du département où il habitait à 20 ans : signalement (taille, yeux, cheveux), adresses successives, campagnes, blessures. Index alphabétique par classe. ¦ Sınıfının künye kütüğü (doğum yılı + 20), 20 yaşında oturduğu département’ın askerlik şubesinde: eşkâl (boy, göz, saç), art arda adresler, seferler, yaralar. Sınıf başına alfabetik dizin.
+Les tables des successions et absences puis les registres des mutations après décès, au bureau de l’enregistrement du canton du décès : héritiers, biens, valeur. Souvent dans les 6 mois après le décès. ¦ Önce miras ve gaiplik dizinleri, sonra ölüm sonrası intikal kütükleri, ölümün olduğu kantonun tescil dairesinde: mirasçılar, mallar, değer. Çoğu zaman ölümden sonraki 6 ay içinde.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. ¦ Evlilik sözleşmesi, kasabanın ya da kantonun noterinde, evlilikten kısa süre önce: çeyiz, tanıklar, geniş aile.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. L’acte de mariage (après 1850) dit s’il y a un contrat et chez quel notaire. ¦ Evlilik sözleşmesi, kasabanın ya da kantonun noterinde, evlilikten kısa süre önce: çeyiz, tanıklar, geniş aile. Evlilik belgesi (1850’den sonra) bir sözleşme olup olmadığını ve hangi noterde yapıldığını söyler.
+Hors de France : les registres sont aux archives de la région ou de la paroisse ; FamilySearch en a numérisé beaucoup. ¦ Fransa dışında: kütükler bölge ya da kilise bölgesi arşivlerindedir; FamilySearch bunların çoğunu dijitalleştirdi.
+Les Archives nationales d’outre-mer gardent les doubles des registres (état civil en ligne). ¦ Archives nationales d’outre-mer kütüklerin ikinci nüshalarını saklar (nüfus kayıtları çevrimiçi).
+État civil reconstitué ¦ Yeniden oluşturulmuş nüfus kayıtları
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans les fichiers de l’état civil reconstitué (Archives de Paris). ¦ Paris’in 1860 öncesi nüfus kayıtları 1871’de yandı: yeniden oluşturulmuş nüfus kayıtları dosyalarında ara (Archives de Paris).
+vivante aux recensements de {a} à {b} ({n}) ¦ {a} – {b} nüfus sayımlarında hayatta ({n})
+vivant aux recensements de {a} à {b} ({n}) ¦ {a} – {b} nüfus sayımlarında hayatta ({n})
+vivante aux recensements de {years} ¦ şu nüfus sayımlarında hayatta: {years}
+vivant aux recensements de {years} ¦ şu nüfus sayımlarında hayatta: {years}
+classe {c} (né en {y}) ¦ sınıf {c} (doğum yılı {y})
+décès en {y} ¦ ölüm yılı {y}
+mariage en {y} ¦ evlilik yılı {y}
+enfant né en {y} ¦ çocuğun doğum yılı {y}
+enfant né en {y} ; souvent dans la paroisse de l’épouse ¦ çocuğun doğum yılı {y}; çoğu zaman gelinin kilise bölgesinde
+dernière mention en {y} ¦ son anılma yılı {y}
+née vers {y} ¦ doğum yılı yaklaşık {y}
+né vers {y} ¦ doğum yılı yaklaşık {y}
+son acte de mariage ({y}) nomme ses parents ¦ evlilik belgesi ({y}) ebeveynlerinin adını verir
+son acte de baptême ({y}) nomme ses parents ¦ vaftiz belgesi ({y}) ebeveynlerinin adını verir
+Même nom, née {n} ans avant à {place} : sa mère ? ¦ Aynı soyadı, {n} yıl önce doğmuş, yer: {place}: annesi mi?
+Même nom, né {n} ans avant à {place} : son père ? ¦ Aynı soyadı, {n} yıl önce doğmuş, yer: {place}: babası mı?
+Même nom, née {n} ans avant : sa mère ? ¦ Aynı soyadı, {n} yıl önce doğmuş: annesi mi?
+Même nom, né {n} ans avant : son père ? ¦ Aynı soyadı, {n} yıl önce doğmuş: babası mı?
+Même nom, née en {y} à {place} : un frère, une sœur, un cousin ? ¦ Aynı soyadı, doğum yılı {y}, yer: {place}: bir erkek kardeş, bir kız kardeş, bir kuzen mi?
+Même nom, né en {y} à {place} : un frère, une sœur, un cousin ? ¦ Aynı soyadı, doğum yılı {y}, yer: {place}: bir erkek kardeş, bir kız kardeş, bir kuzen mi?
+Même nom, née en {y} : un frère, une sœur, un cousin ? ¦ Aynı soyadı, doğum yılı {y}: bir erkek kardeş, bir kız kardeş, bir kuzen mi?
+Même nom, né en {y} : un frère, une sœur, un cousin ? ¦ Aynı soyadı, doğum yılı {y}: bir erkek kardeş, bir kız kardeş, bir kuzen mi?
+Même nom, même lieu (née en {y}) ¦ Aynı soyadı, aynı yer (doğum yılı {y})
+Même nom, même lieu (né en {y}) ¦ Aynı soyadı, aynı yer (doğum yılı {y})
+Même nom, même lieu ¦ Aynı soyadı, aynı yer
+{act} de {y} ¦ {act} ({y})
+même nom : de la famille ? ¦ aynı soyadı: aileden mi?
+souvent un proche ¦ çoğu zaman bir yakın
+Quelqu’un ¦ Biri
+Dans le même foyer en {y} à {place}{pos} : un parent âgé, un beau-parent ? ¦ Aynı hanede, yıl {y}, yer: {place}{pos}: yaşlı bir ebeveyn mi, bir kayınvalide ya da kayınpeder mi?
+Dans le même foyer en {y}{pos} : un parent âgé, un beau-parent ? ¦ Aynı hanede, yıl {y}{pos}: yaşlı bir ebeveyn mi, bir kayınvalide ya da kayınpeder mi?
+Correspondance ADN{details} : son arbre a peut-être la suite ¦ DNA eşleşmesi{details}: devamı belki onun ağacındadır
+🧩 Mur de la semaine ¦ 🧩 Haftanın tuğla duvarı
+Mur de brique : {name} — chercher ses deux parents ¦ Tuğla duvar: {name} — iki ebeveyni de ara
+Mur de brique : {name} — chercher son père ¦ Tuğla duvar: {name} — babasını ara
+Mur de brique : {name} — chercher sa mère ¦ Tuğla duvar: {name} — annesini ara
+Mur de brique : {name} — chercher ce qui manque ¦ Tuğla duvar: {name} — eksik olanı ara
+génération {n} ¦ kuşak {n}
+🌍 Où chercher ? te propose les sites à consulter ¦ 🌍 Nerede aramalı? sana bakılacak siteleri önerir
+Piste faite ¦ İpucu tamamlandı
+Commune inconnue : choisis la commune du dépouillement (avec son code INSEE) dans Recherche. ¦ Bilinmeyen yerleşim yeri: Araştırma’da dökümün yerleşim yerini (INSEE koduyla) seç.
+Département inconnu. ¦ Bilinmeyen département.
+Téléchargement impossible : PHP n’a pas l’extension curl. ¦ İndirilemiyor: PHP’de curl eklentisi yok.
+Le fichier des adresses du département n’est pas encore téléchargé. ¦ Département’ın adres dosyası henüz indirilmedi.
+Fichier des adresses illisible. ¦ Adres dosyası okunamıyor.
+Indique l’ancien nom de la rue. ¦ Sokağın eski adını yaz.
+Les services d’archives ne sont pas encore prêts : relance l’app. ¦ Arşiv hizmetleri henüz hazır değil: uygulamayı yeniden başlat.
+Cette suppression n’a pas été trouvée dans le journal. ¦ Bu silme işlemi günlükte bulunamadı.
+Ce service existe déjà. ¦ Bu hizmet zaten var.
+Artiste introuvable : cette fiche n’existe pas, ou plus (supprimée ?). ¦ Sanatçı bulunamadı: bu kart yok ya da artık yok (silindi mi?).
+Sorte de fiche inconnue. ¦ Bilinmeyen kart türü.
+Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue. ¦ Bu kartta “Sanatçı” işaretli değil: kataloğa bir öğe koymadan önce kartta “Sanatçı”yı işaretle (Kartı düzenle).
+Élément trop volumineux. ¦ Öğe çok büyük.
+Élément introuvable : il a peut-être été supprimé ou rangé chez un autre artiste. ¦ Öğe bulunamadı: silinmiş ya da başka bir sanatçıya konmuş olabilir.
+Élément introuvable : il a peut-être déjà été supprimé. ¦ Öğe bulunamadı: zaten silinmiş olabilir.
+Rangement impossible : un des éléments n’existe plus (recharge le catalogue). ¦ Sıralanamıyor: öğelerden biri artık yok (kataloğu yeniden yükle).
+Rien à remettre. ¦ Geri getirilecek bir şey yok.
+La fiche de la personne n’existe plus : impossible de remettre cet élément. ¦ Kişinin kartı artık yok: bu öğe geri getirilemiyor.
+Donne un nom à cette sorte de fiche. ¦ Bu kart türüne bir ad ver.
+Cette sorte a trop de réglages. ¦ Bu türün çok fazla ayarı var.
+Des fiches de cette sorte existent encore : supprime-les d’abord. ¦ Bu türde kartlar hâlâ var: önce onları sil.
+Réglage inconnu. ¦ Bilinmeyen ayar.
+Réglages trop volumineux. ¦ Ayarlar çok büyük.
+Import impossible : PHP n’a pas l’extension curl. ¦ İçe aktarılamıyor: PHP’de curl eklentisi yok.
+Le site demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Site beklemeni istiyor (çok fazla istek): bir dakika sonra yeniden dene.
+Le site refuse la demande : une clé ou un jeton est nécessaire (ou il n’est pas bon). ¦ Site isteği reddediyor: bir anahtar ya da belirteç gerekli (ya da doğru değil).
+Rien trouvé à cette adresse (identifiant inconnu). ¦ Bu adreste hiçbir şey bulunamadı (bilinmeyen tanımlayıcı).
+Réponse illisible du site. ¦ Siteden okunamayan yanıt.
+La recherche par nom sur Discogs demande un jeton personnel (gratuit : discogs.com → Paramètres → Développeurs). Sans jeton, colle l’adresse d’un artiste, d’un album ou d’un disque. ¦ Discogs’ta adla arama kişisel bir belirteç ister (ücretsiz: discogs.com → Settings → Developers). Belirteç yoksa bir sanatçının, albümün ya da plağın adresini yapıştır.
+Ce n’est pas une image (JPEG, PNG, WebP ou GIF). ¦ Bu bir görsel değil (JPEG, PNG, WebP ya da GIF).
+Image refusée : seules les images de Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb et Apple sont rapatriées. ¦ Görsel reddedildi: yalnızca Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb ve Apple görselleri getirilir.
+Trop de redirections. ¦ Çok fazla yönlendirme.
+Donne un titre au projet. ¦ Projeye bir başlık ver.
+Ce dossier n’est pas dans ce projet. ¦ Bu klasör bu projede değil.
+Un dossier ne peut pas aller dans lui-même ni dans un de ses sous-dossiers. ¦ Bir klasör kendi içine ya da alt klasörlerinden birine giremez.
+Donne un nom au dossier. ¦ Klasöre bir ad ver.
+Élément introuvable. ¦ Öğe bulunamadı.
+Donne un titre à cet élément. ¦ Bu öğeye bir başlık ver.
+Rien de reconnu : le fichier doit être un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ou RIS (.ris). ¦ Hiçbir şey tanınmadı: dosya bir Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ya da RIS (.ris) dışa aktarımı olmalı.
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un export de bibliographie n’utilise pas. ¦ Dosya reddedildi: bir kaynakça dışa aktarımının kullanmadığı XML bildirimleri (DOCTYPE ya da ENTITY) içeriyor.
+Donne un nom au projet. ¦ Projeye bir ad ver.
+Projet trop gros (4 Mo au plus pour les réglages). ¦ Proje çok büyük (ayarlar için en fazla 4 MB).
+Réglages du projet illisibles. ¦ Proje ayarları okunamıyor.
+Ce média n’est pas un son. ¦ Bu medya bir ses değil.
+Ce fichier n’est pas une version de ce son. ¦ Bu dosya bu sesin bir sürümü değil.
+Trop de zones (500 au plus). ¦ Çok fazla bölge (en fazla 500).
+Le mot de passe doit faire au moins 8 caractères. ¦ Parola en az 8 karakter olmalı.
+Le chiffrement des sauvegardes n’est pas disponible sur cet ordinateur. ¦ Yedeklerin şifrelenmesi bu bilgisayarda kullanılamıyor.
+Impossible de créer le dossier temporaire de la sauvegarde. ¦ Yedeğin geçici klasörü oluşturulamadı.
+Impossible de créer l’archive. ¦ Arşiv oluşturulamadı.
+Écriture de l’archive impossible. ¦ Arşiv yazılamadı.
+Ce fichier n’est pas une base SQLite lisible. ¦ Bu dosya okunabilir bir SQLite veritabanı değil.
+Cette base vient d’une version plus récente de l’application : mets LCNDA à jour pour l’ouvrir. ¦ Bu veritabanı uygulamanın daha yeni bir sürümünden geliyor: açmak için LCNDA’yı güncelle.
+Une généalogie est déjà ouverte : elle ne sera pas remplacée. Ouvre ce fichier sur l’écran de démarrage d’une installation vide. ¦ Bir soy ağacı zaten açık: yerine konmayacak. Bu dosyayı boş bir kurulumun başlangıç ekranından aç.
+Impossible de créer le dossier de la base. ¦ Veritabanı klasörü oluşturulamadı.
+Lecture de la base impossible dans l’archive. ¦ Arşivdeki veritabanı okunamadı.
+Impossible d’enregistrer le fichier reçu. ¦ Alınan dosya kaydedilemedi.
+Impossible de créer le dossier des médias. ¦ Medya klasörü oluşturulamadı.
+Impossible de remplacer la base vide. ¦ Boş veritabanı değiştirilemedi.
+Impossible de mettre la base en place. ¦ Veritabanı yerine konamadı.
+Import par chemin réservé à l’application de bureau. ¦ Yolla içe aktarma yalnızca masaüstü uygulamasında var.
+Ce dossier n’est ni un paquet MacFamilyTree (.mftpkg), ni un fichier Hérédis (.hmw). ¦ Bu klasör ne bir MacFamilyTree paketi (.mftpkg) ne de bir Hérédis dosyası (.hmw).
+« Une journée dans la vie » est faite pour les personnes. ¦ “Hayatından bir gün” kişiler için yapıldı.
+Cette fiche n’est pas montrée en mode consultation. ¦ Bu kart görüntüleme modunda gösterilmez.
+Cet événement n’est pas dans la vie de cette personne. ¦ Bu olay bu kişinin hayatında yok.
+Cet événement n’a pas de date : choisis-en un autre, ou écris une date. ¦ Bu olayın tarihi yok: başka birini seç ya da bir tarih yaz.
+Choisis un événement de sa vie, ou écris une date. ¦ Hayatından bir olay seç ya da bir tarih yaz.
+Je ne comprends pas cette date (exemples : 7 mai 1925, vers 1784, 12 thermidor an II). ¦ Bu tarihi anlamıyorum (örnekler: 7 mai 1925, vers 1784, 12 thermidor an II).
+Personne introuvable : choisis d’abord à qui se rattache cette fiche. ¦ Kişi bulunamadı: önce bu kartın kime bağlı olduğunu seç.
+Fiche verrouillée. Déverrouille-la avant de modifier ou supprimer cette personne. ¦ Kart kilitli. Bu kişiyi düzenlemeden ya da silmeden önce kilidini aç.
+Fiche introuvable : elle a peut-être été supprimée. ¦ Kart bulunamadı: silinmiş olabilir.
+Fiche introuvable : elle a peut-être déjà été supprimée. ¦ Kart bulunamadı: zaten silinmiş olabilir.
+Ce tableau a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Bu tablo, sen açtığından beri başka bir pencerede değiştirildi.
+Instantané introuvable. ¦ Anlık görüntü bulunamadı.
+Donne un nom à l’instantané. ¦ Anlık görüntüye bir ad ver.
+La base locale n'a pas encore été importée. ¦ Yerel veritabanı henüz içe aktarılmadı.
+Parcelle introuvable (supprimée ?). ¦ Parsel bulunamadı (silindi mi?).
+Lien de sorte inconnue. ¦ Bilinmeyen türde bağlantı.
+La section s’écrit avec 1 ou 2 lettres ou chiffres (ex. « AB », « B », « 0A »). ¦ Pafta 1 ya da 2 harf veya rakamla yazılır (örn. “AB”, “B”, “0A”).
+Le numéro de parcelle est un nombre de 1 à 9999. ¦ Parsel numarası 1 ile 9999 arasında bir sayıdır.
+Code de commune (INSEE) inconnu : 5 chiffres, ex. 19272. ¦ Bilinmeyen yerleşim yeri kodu (INSEE): 5 rakam, örn. 19272.
+Donne au moins la section et le numéro de la parcelle (ou un lieu-dit). ¦ En azından paftayı ve parsel numarasını (ya da bir mevki adını) ver.
+La surface est un nombre de mètres carrés. ¦ Yüzölçümü metrekare cinsinden bir sayıdır.
+Parcelle introuvable (déjà supprimée ?). ¦ Parsel bulunamadı (zaten silindi mi?).
+Cette fiche n’existe pas (supprimée ?). ¦ Bu kart yok (silindi mi?).
+Beaucoup de demandes au cadastre en une minute : attends un petit moment et réessaie. ¦ Bir dakikada kadastroya çok fazla istek: biraz bekle ve yeniden dene.
+Le cadastre en ligne ne répond pas pour l’instant. ¦ Çevrimiçi kadastro şu anda yanıt vermiyor.
+Le cadastre en ligne ne répond pas (pas d’Internet ?). Tu peux remplir la parcelle à la main. ¦ Çevrimiçi kadastro yanıt vermiyor (internet yok mu?). Parseli elle doldurabilirsin.
+Recherche impossible : PHP n’a pas l’extension curl. ¦ Arama yapılamıyor: PHP’de curl eklentisi yok.
+La réponse du service est trop grosse : précise la recherche (section et numéro). ¦ Hizmetin yanıtı çok büyük: aramayı daralt (pafta ve numara).
+Choisis d’abord une commune de France (avec son code INSEE). ¦ Önce Fransa’dan bir yerleşim yeri seç (INSEE koduyla).
+Point de la carte incompris. ¦ Haritadaki nokta anlaşılamadı.
+Écris la section (1 ou 2 lettres, ex. « AB » ou « B »). ¦ Paftayı yaz (1 ya da 2 harf, örn. “AB” ya da “B”).
+Il faut une parcelle avec sa commune, sa section et son numéro. ¦ Yerleşim yeri, paftası ve numarası olan bir parsel gerekli.
+Les ventes (DVF) n’ont pas pu être lues : pas d’Internet, ou service indisponible. ¦ Satışlar (DVF) okunamadı: internet yok ya da hizmet kullanılamıyor.
+Demande de carte inconnue. ¦ Bilinmeyen harita isteği.
+Opération de carte inconnue. ¦ Bilinmeyen harita işlemi.
+Action de carte inconnue. ¦ Bilinmeyen harita eylemi.
+Zone illisible : il faut un sud, un ouest, un nord et un est. ¦ Alan okunamıyor: bir güney, bir batı, bir kuzey ve bir doğu gerekli.
+Carte trop longue à décrire. ¦ Haritayı tanımlamak çok uzun.
+Adresse refusée. ¦ Adres reddedildi.
+Fichier impossible à écrire. ¦ Dosya yazılamıyor.
+Fichier trop gros : ce n’est pas celui attendu. ¦ Dosya çok büyük: beklenen dosya bu değil.
+Dossier des frontières impossible à créer. ¦ Sınırlar klasörü oluşturulamıyor.
+Aucune commune ancienne lue dans ces fichiers : rien n’a été installé. ¦ Bu dosyalarda hiçbir eski yerleşim yeri okunamadı: hiçbir şey kurulmadı.
+Fichier impossible à ranger. ¦ Dosya yerine konamıyor.
+Choisis un nom de famille. ¦ Bir soyadı seç.
+Rien à citer : choisis une source. ¦ Alıntılanacak bir şey yok: bir kaynak seç.
+Donne un nom à l’objet (ex. « Horloge comtoise »). ¦ Nesneye bir ad ver (örn. “Duvar saati”).
+Donne un titre (ex. « La tarte aux pommes de mémé »). ¦ Bir başlık ver (örn. “Ninemin elmalı turtası”).
+Lieu introuvable (les adresses ont peut-être changé). ¦ Yer bulunamadı (adresler değişmiş olabilir).
+Donne un nom (ex. « Salon de généalogie de Paris »). ¦ Bir ad ver (örn. “Paris Soy Bilimi Fuarı”).
+Réglages illisibles. ¦ Ayarlar okunamıyor.
+Événement introuvable. ¦ Olay bulunamadı.
+Donnée incorrecte : un texte est attendu. ¦ Yanlış veri: bir metin bekleniyor.
+Opération inconnue. ¦ Bilinmeyen işlem.
+Choisis l’ancêtre (ou le couple) dont on réunit les descendants. ¦ Torunları bir araya getirilecek atayı (ya da çifti) seç.
+Invité introuvable. ¦ Davetli bulunamadı.
+Réponse inconnue. ¦ Bilinmeyen yanıt.
+Le nombre de personnes va de 0 à 99. ¦ Kişi sayısı 0 ile 99 arasında.
+SocFace lit « née en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “née en {sf}” okuyor, kartın şunu diyor: {p} — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « né en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “né en {sf}” okuyor, kartın şunu diyor: {p} — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « née vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “née vers {sf}” okuyor, kartın şunu diyor: {p} — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « né vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “né vers {sf}” okuyor, kartın şunu diyor: {p} — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « née à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “née à {sf}” okuyor, kartın şunu diyor: {p} — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « né à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “né à {sf}” okuyor, kartın şunu diyor: {p} — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « femme », ta fiche dit homme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “kadın” okuyor, kartın erkek diyor — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « homme », ta fiche dit femme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace “erkek” okuyor, kartın kadın diyor — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « {role} » du chef de ménage, ta fiche dit enfant — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace hane reisine göre “{role}” okuyor, kartın çocuk diyor — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « {role} » du chef de ménage, ta fiche dit conjoint — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace hane reisine göre “{role}” okuyor, kartın eş diyor — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « {role} » du chef de ménage, ta fiche dit parent — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace hane reisine göre “{role}” okuyor, kartın ebeveyn diyor — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « {role} » du chef de ménage, ta fiche ne les relie pas — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace hane reisine göre “{role}” okuyor, kartın onları bağlamıyor — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+SocFace lit « {role} » du chef de ménage, ta fiche dit rien — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace hane reisine göre “{role}” okuyor, kartın hiçbir şey demiyor — yapay zekâ yanlış okumuş olabilir: görselde kontrol et.
+vivante en {y}, à {place} vers {y} d’après un événement de la même année ¦ {y} yılında hayatta, yaklaşık {y} yılında yer: {place}, aynı yıldaki bir olaya göre
+vivant en {y}, à {place} vers {y} d’après un événement de la même année ¦ {y} yılında hayatta, yaklaşık {y} yılında yer: {place}, aynı yıldaki bir olaya göre
+vivante en {y}, à {place} vers {y} d’après un événement proche ¦ {y} yılında hayatta, yaklaşık {y} yılında yer: {place}, yakın bir olaya göre
+vivant en {y}, à {place} vers {y} d’après un événement proche ¦ {y} yılında hayatta, yaklaşık {y} yılında yer: {place}, yakın bir olaya göre
+Recensement de {y} à {place} (SocFace) : {what} ¦ Nüfus sayımı {y}, yer: {place} (SocFace): {what}
+Recensement de {y} (SocFace) : {what} ¦ Nüfus sayımı {y} (SocFace): {what}
+socface|année de naissance ¦ doğum yılı
+socface|lieu de naissance ¦ doğum yeri
+socface|genre ¦ cinsiyet
+socface|lien de parenté ¦ akrabalık bağı
+{text} (foyer coché « Vérifié sur l’image ») ¦ {text} (hanede “Görselde kontrol edildi” işaretli)
+Le numéro de table va de 1 à 500. ¦ Masa numarası 1 ile 500 arasında.
+Donne au moins un prénom ou un nom. ¦ En azından bir ad ya da soyadı ver.
+Cette fiche est introuvable (ou confidentielle). ¦ Bu kart bulunamadı (ya da gizli).
+Cette personne est déjà dans la liste des invités. ¦ Bu kişi zaten davetli listesinde.
+Aucun invité. ¦ Davetli yok.
+Aucune ligne à importer. ¦ İçe aktarılacak satır yok.
+Réglage trop long. ¦ Ayar çok uzun.
+Mode consultation : les cousinades (adresses des vivants) ne se montrent pas. ¦ Görüntüleme modu: aile buluşmaları (yaşayanların adresleri) gösterilmez.
+Choisis l’ancêtre. ¦ Atayı seç.
+Donnée inconnue. ¦ Bilinmeyen veri.
+Données inconnues. ¦ Bilinmeyen veriler.
+Diagramme trop gros (plus de 1,5 Mo de données). ¦ Diyagram çok büyük (1,5 MB’tan fazla veri).
+Indique le numéro de la page (ou de la vue). ¦ Sayfanın (ya da görüntünün) numarasını yaz.
+Choisis la personne testée (ou donne un nom au test). ¦ Test edilen kişiyi seç (ya da teste bir ad ver).
+Choisis d’abord le test (kit) auquel rattacher les correspondances. ¦ Önce eşleşmelerin bağlanacağı testi (kiti) seç.
+Donne le nom de la correspondance. ¦ Eşleşmenin adını ver.
+Ce fichier ressemble à un fichier ADN brut (des SNP « rs… ») : il n’est jamais importé, par prudence pour la vie privée et la loi française. Importe plutôt la liste des correspondances ou des segments. ¦ Bu dosya ham bir DNA dosyasına benziyor (“rs…” SNP’leri): gizlilik ve Fransız yasası nedeniyle hiçbir zaman içe aktarılmaz. Bunun yerine eşleşmelerin ya da segmentlerin listesini içe aktar.
+Coche au moins une sorte d’anniversaire. ¦ En az bir yıldönümü türünü işaretle.
+Coche au moins une sorte de contacts. ¦ En az bir kişi türünü işaretle.
+Aucun contact à exporter : ton répertoire, tes services d’archives et tes cousins ADN sont vides. ¦ Dışa aktarılacak kişi yok: rehberin, arşiv hizmetlerin ve DNA kuzenlerin boş.
+Aucune personne n°1 (Sosa) : choisis-la d’abord (Réglages → Apparence). ¦ 1 numaralı kişi (Sosa) yok: önce onu seç (Ayarlar → Görünüm).
+Choisis la personne de la branche. ¦ Kolun kişisini seç.
+Aucune personne à exporter. ¦ Dışa aktarılacak kişi yok.
+Création du fichier ZIP impossible. ¦ ZIP dosyası oluşturulamadı.
+Donne un nom à l’employeur. ¦ İşverene bir ad ver.
+La base d’exemple a déjà des fiches. ¦ Örnek veritabanında zaten kartlar var.
+Dossier des médias impossible à créer. ¦ Medya klasörü oluşturulamıyor.
+Copie d’une image d’exemple impossible. ¦ Örnek bir görsel kopyalanamadı.
+Les médias font plus de 4 Go : le paquet serait trop gros. Fais plutôt une branche (une personne et ses ancêtres), ou une sauvegarde complète. ¦ Medya 4 GB’tan büyük: paket çok büyük olur. Bunun yerine bir kol (bir kişi ve ataları) ya da tam bir yedek yap.
+Pas assez de place libre sur l’ordinateur pour fabriquer ce paquet. ¦ Bu paketi hazırlamak için bilgisayarda yeterli boş yer yok.
+Le paquet GedZip n’a pas pu être fabriqué. ¦ GedZip paketi hazırlanamadı.
+Le paquet GedZip n’a pas pu être écrit. ¦ GedZip paketi yazılamadı.
+Le paquet Gramps n’a pas pu être fabriqué. ¦ Gramps paketi hazırlanamadı.
+Contrôle : le nom d’une personne cachée restait dans la copie. Rien n’a été fabriqué. ¦ Kontrol: gizli bir kişinin adı kopyada kalmıştı. Hiçbir şey hazırlanmadı.
+Contrôle : une personne vivante avait encore des renseignements. Rien n’a été fabriqué. ¦ Kontrol: yaşayan bir kişinin hâlâ bilgileri vardı. Hiçbir şey hazırlanmadı.
+Une des personnes choisies pour les branches n’existe plus. ¦ Kollar için seçilen kişilerden biri artık yok.
+Impossible de préparer le fichier. ¦ Dosya hazırlanamadı.
+Lecture du fichier GEDCOM impossible ¦ GEDCOM dosyası okunamadı
+Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé. ¦ Bu dosya bir GEDCOM değil: hiçbir kişi ya da “HEAD” başlığı bulunamadı.
+Graphique illisible (trop de champs). ¦ Grafik okunamıyor (çok fazla alan).
+Graphique illisible (trop imbriqué). ¦ Grafik okunamıyor (çok fazla iç içe).
+Sorte de graphique inconnue. ¦ Bilinmeyen grafik türü.
+Graphique trop gros pour être enregistré (2 Mo au plus). ¦ Grafik kaydedilemeyecek kadar büyük (en fazla 2 MB).
+Liste de graphiques illisible. ¦ Grafik listesi okunamıyor.
+Vignette refusée. ¦ Küçük resim reddedildi.
+Opération inconnue sur les graphiques. ¦ Grafiklerde bilinmeyen işlem.
+Action inconnue sur les graphiques. ¦ Grafiklerde bilinmeyen eylem.
+Fichier Hérédis introuvable. ¦ Hérédis dosyası bulunamadı.
+Aucun fichier .heredis dans ce dossier Hérédis. ¦ Bu Hérédis klasöründe hiç .heredis dosyası yok.
+Ce fichier n’est pas un fichier Hérédis lisible (Hérédis 2019 ou plus récent). ¦ Bu dosya okunabilir bir Hérédis dosyası değil (Hérédis 2019 ya da daha yeni).
+Média introuvable ¦ Medya bulunamadı
+Donne un nom aux armoiries (ex. « Armes de la famille de Montferrand »). ¦ Armaya bir ad ver (örn. “Montferrand ailesinin arması”).
+Donne un nom au circuit (ex. « Sur les traces des Dupont en Corrèze »). ¦ Gezi rotasına bir ad ver (örn. “Corrèze’de Dupont’ların izinde”).
+Étape introuvable ¦ Durak bulunamadı
+Choisis au moins une personne (ou une branche) pour préparer le circuit. ¦ Gezi rotasını hazırlamak için en az bir kişi (ya da bir kol) seç.
+Donne un titre au document (ex. « Livret de famille Dupont-Martin »). ¦ Belgeye bir başlık ver (örn. “Dupont-Martin aile cüzdanı”).
+Donne un nom à la carte (ex. « Cadastre napoléonien de Saint-Yrieix, 1834 »). ¦ Haritaya bir ad ver (örn. “Saint-Yrieix Napolyon kadastrosu, 1834”).
+Indique au moins un critère. ¦ En az bir ölçüt belirt.
+Donne un nom à la recherche (ex. « Les Dupont du Nord avant 1800 »). ¦ Aramaya bir ad ver (örn. “1800’den önce Nord’daki Dupont’lar”).
+Décompresse d’abord le fichier ZIP, puis importe le fichier CSV. ¦ Önce ZIP dosyasını aç, sonra CSV dosyasını içe aktar.
+dossier introuvable (disque ou clé débranché ?) ¦ klasör bulunamadı (disk ya da USB bellek çıkarıldı mı?)
+dossier non accessible en écriture ¦ klasöre yazılamıyor
+impossible de créer le sous-dossier de cette généalogie ¦ bu soy ağacının alt klasörü oluşturulamadı
+Aucun dossier hors de l’ordinateur n’est réglé. ¦ Bilgisayar dışında hiçbir klasör ayarlanmadı.
+Je n’ai pas compris la date ou l’âge de la question, alors je ne liste pas tout. Exemples : « Qui est né le 7 mai 1950 ? », « nés en 1924 », « nés en l’an II », « nés un 15 brumaire », « morts à 70 ans », « morts avant leur naissance ». ¦ Sorudaki tarihi ya da yaşı anlamadım, bu yüzden her şeyi listelemiyorum. Örnekler (Fransızca): « Qui est né le 7 mai 1950 ? », « nés en 1924 », « nés en l’an II », « nés un 15 brumaire », « morts à 70 ans », « morts avant leur naissance ».
+Je n’ai pas compris la question. Exemples : « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ». ¦ Soruyu anlamadım. Örnekler (Fransızca): « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ».
+Indique la langue. ¦ Dili belirt.
+Acte introuvable (ou de plus de 100 ans : il est sans doute en ligne aux archives). ¦ Belge bulunamadı (ya da 100 yıldan eski: büyük olasılıkla arşivlerde çevrimiçidir).
+Cet acte est déjà ouvert au public. ¦ Bu belge zaten herkese açık.
+Cette copie demande Argon2id, que le PHP de cet ordinateur ne connaît pas : ouvre-la sur un Mac ou sous Linux. ¦ Bu kopya Argon2id gerektiriyor, bu bilgisayarın PHP’si onu tanımıyor: bir Mac’te ya da Linux’ta aç.
+Copie chiffrée abîmée. ¦ Şifreli kopya bozuk.
+Écriture impossible (disque plein ?) : la copie n’a pas été faite. ¦ Yazılamadı (disk dolu mu?): kopya yapılmadı.
+Fichier temporaire impossible à créer. ¦ Geçici dosya oluşturulamıyor.
+Lecture de la base impossible. ¦ Veritabanı okunamadı.
+Ce fichier n’est pas une copie chiffrée LCNDA. ¦ Bu dosya şifreli bir LCNDA kopyası değil.
+Copie chiffrée incomplète. ¦ Şifreli kopya eksik.
+Mot de passe incorrect, ou fichier abîmé. ¦ Parola yanlış ya da dosya bozuk.
+Fichier de sortie impossible à créer. ¦ Çıktı dosyası oluşturulamıyor.
+Choisis un mot de passe d’au moins 12 caractères, par exemple une phrase de quelques mots (à garder précieusement : sans lui, la copie est illisible, même pour toi). ¦ En az 12 karakterlik bir parola seç, örneğin birkaç kelimelik bir cümle (iyi sakla: o olmadan kopya, senin için bile okunamaz).
+Ce fichier n’a pas la taille d’une copie chiffrée LCNDA. ¦ Bu dosya şifreli bir LCNDA kopyasının boyutunda değil.
+Impossible de ranger la copie. ¦ Kopya yerine konamadı.
+La copie déchiffrée n’est pas une base lisible. ¦ Şifresi çözülen kopya okunabilir bir veritabanı değil.
+Rien à harmoniser. ¦ Uyumlu hâle getirilecek bir şey yok.
+Cette harmonisation ne peut pas être annulée. ¦ Bu uyumlaştırma geri alınamaz.
+Coordonnées invalides. ¦ Geçersiz koordinatlar.
+Donne un nom au bloc. ¦ Bloka bir ad ver.
+Ajoute au moins un champ. ¦ En az bir alan ekle.
+Ce fichier n’est pas un bloc LCNDA. ¦ Bu dosya bir LCNDA bloku değil.
+Cette fiche n’appartient pas à ce bloc. ¦ Bu kart bu bloka ait değil.
+Mode consultation : rien ne peut être modifié. Pour en sortir, clique sur « Quitter la consultation » et donne le mot de passe. ¦ Görüntüleme modu: hiçbir şey değiştirilemez. Çıkmak için “Görüntüleme modundan çık”a tıkla ve parolayı gir.
+Choisis un mot de passe d’au moins 4 caractères. ¦ En az 4 karakterlik bir parola seç.
+Impossible d’activer le mode consultation (dossier des données en lecture seule ?). ¦ Görüntüleme modu açılamadı (veri klasörü salt okunur mu?).
+Choisis le lieu (hameau, village) dans les suggestions. ¦ Yeri (mezra, köy) önerilerden seç.
+Indique la paroisse (ex. « Saint-Martin de Brive »). ¦ Kilise bölgesini belirt (örn. “Saint-Martin de Brive”).
+Indique le nom. ¦ Adı belirt.
+Indique ton prénom (il apparaît dans les paquets que tu envoies). ¦ Adını belirt (gönderdiğin paketlerde görünür).
+Le travail à deux n’est pas commencé sur cette base. ¦ Bu veritabanında birlikte çalışma başlamadı.
+Aucune modification depuis le dernier paquet. ¦ Son paketten beri değişiklik yok.
+Paquet introuvable : recharge-le. ¦ Paket bulunamadı: yeniden yükle.
+Paquet illisible : recharge-le. ¦ Paket okunamıyor: yeniden yükle.
+Cette demande doit être un envoi. ¦ Bu istek bir gönderim olmalı.
+Donne un nom à l’objet. ¦ Nesneye bir ad ver.
+Image refusée : une image PNG, JPEG ou WebP de moins de 300 Ko. ¦ Görsel reddedildi: 300 KB’tan küçük bir PNG, JPEG ya da WebP görseli olmalı.
+Modèle trop gros (30 Mo au plus) ou vide. ¦ Model çok büyük (en fazla 30 MB) ya da boş.
+Adresse refusée (seules les adresses de la bibliothèque en ligne sont permises). ¦ Adres reddedildi (yalnızca çevrimiçi kütüphanenin adreslerine izin var).
+Fichier trop gros pour être téléchargé. ¦ Dosya indirilemeyecek kadar büyük.
+La bibliothèque en ligne ne répond pas : vérifie la connexion à internet (ou réessaie plus tard). ¦ Çevrimiçi kütüphane yanıt vermiyor: internet bağlantısını kontrol et (ya da daha sonra yeniden dene).
+La bibliothèque demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Kütüphane beklemeni istiyor (çok fazla istek): bir dakika sonra yeniden dene.
+Modèle introuvable dans la bibliothèque. ¦ Model kütüphanede bulunamadı.
+Réponse illisible de la bibliothèque en ligne. ¦ Çevrimiçi kütüphaneden okunamayan yanıt.
+Identifiant de modèle incorrect. ¦ Model tanımlayıcısı yanlış.
+Ce n’est pas un modèle 3D. ¦ Bu bir 3B model değil.
+Ce modèle n’existe pas en glTF. ¦ Bu modelin glTF sürümü yok.
+Modèle trop lourd (plus de 40 Mo avec ses textures). ¦ Model çok ağır (dokularıyla birlikte 40 MB’tan fazla).
+Modèle trop compliqué (trop de fichiers). ¦ Model çok karmaşık (çok fazla dosya).
+Fichier abîmé pendant le téléchargement (empreinte différente) : réessaie. ¦ Dosya indirilirken bozuldu (farklı sağlama değeri): yeniden dene.
+Modèle trop lourd. ¦ Model çok ağır.
+Ce glTF est illisible. ¦ Bu glTF okunamıyor.
+Données intégrées illisibles. ¦ Gömülü veriler okunamıyor.
+Chemin de fichier refusé dans le modèle. ¦ Modelde dosya yolu reddedildi.
+Une texture du modèle n’est pas une image PNG, JPEG ou WebP. ¦ Modelin bir dokusu PNG, JPEG ya da WebP görseli değil.
+Modèle trop gros (30 Mo au plus). ¦ Model çok büyük (en fazla 30 MB).
+Conversion du modèle impossible. ¦ Model dönüştürülemedi.
+Le pack n’est plus là : renvoie le fichier ZIP. ¦ Paket artık yok: ZIP dosyasını yeniden gönder.
+PHP n’a pas l’extension zip : impossible d’ouvrir un pack. ¦ PHP’de zip eklentisi yok: paket açılamıyor.
+Aucun fichier ZIP reçu (ou trop gros pour le serveur). ¦ Hiç ZIP dosyası alınmadı (ya da sunucu için çok büyük).
+Ce fichier n’est pas un ZIP. ¦ Bu dosya bir ZIP değil.
+Aucun modèle 3D (GLB, glTF, OBJ, STL) dans ce ZIP. ¦ Bu ZIP’te hiç 3B model (GLB, glTF, OBJ, STL) yok.
+Choisis au moins un modèle. ¦ En az bir model seç.
+Indique la licence du pack (CC0, domaine public…). ¦ Paketin lisansını belirt (CC0, kamu malı…).
+Rien à rattacher. ¦ Bağlanacak bir şey yok.
+Plan trop lourd (6 Mo au plus) : un plan scanné plus petit ? ¦ Plan çok ağır (en fazla 6 MB): daha küçük taranmış bir plan olabilir mi?
+Le plan contient un contenu refusé. ¦ Plan reddedilen bir içerik barındırıyor.
+Aucun fichier reçu. ¦ Hiç dosya alınmadı.
+Formats 3D acceptés : OBJ, STL, GLB, glTF (et MTL pour les couleurs d’un OBJ). ¦ Kabul edilen 3B biçimler: OBJ, STL, GLB, glTF (ve bir OBJ’nin renkleri için MTL).
+Fichier plus gros que prévu : refusé. ¦ Dosya beklenenden büyük: reddedildi.
+Écriture impossible dans le dossier des données. ¦ Veri klasörüne yazılamıyor.
+Téléchargement interrompu : réessaie. ¦ İndirme yarıda kesildi: yeniden dene.
+Dossier hors des données de la reconnaissance d’écriture : rien n’est effacé. ¦ Klasör el yazısı tanıma verilerinin dışında: hiçbir şey silinmedi.
+Ce modèle ne se télécharge pas tout seul : ajoute son fichier à la main. ¦ Bu model kendiliğinden inmiyor: dosyasını elle ekle.
+Une installation est en cours : attends qu’elle finisse. ¦ Bir kurulum sürüyor: bitmesini bekle.
+Nom de modèle refusé. ¦ Model adı reddedildi.
+Impossible de déplacer le modèle. ¦ Model taşınamadı.
+Il faut un fichier de modèle Kraken (.mlmodel). ¦ Bir Kraken model dosyası (.mlmodel) gerekli.
+Ce fichier est trop petit pour être un modèle. ¦ Bu dosya bir model olmak için çok küçük.
+Impossible de ranger le modèle. ¦ Model yerine konamadı.
+Deux lectures sont déjà en cours : attends qu’une se termine. ¦ Zaten iki okuma sürüyor: birinin bitmesini bekle.
+Choisis d’abord l’image de l’acte. ¦ Önce belgenin görselini seç.
+La lecture d’écriture marche seulement sur les images. ¦ El yazısı okuma yalnızca görsellerde çalışır.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR). ¦ El yazısı okuma henüz kurulmadı: Ayarlar → El yazısı tanıma (HTR).
+Modèle inconnu. ¦ Bilinmeyen model.
+Ce modèle d’écriture n’est pas installé : Réglages → Reconnaissance d’écriture (HTR), étape ②. ¦ Bu el yazısı modeli kurulu değil: Ayarlar → El yazısı tanıma (HTR), adım ②.
+Image améliorée trop lourde. ¦ İyileştirilmiş görsel çok ağır.
+Image améliorée illisible. ¦ İyileştirilmiş görsel okunamıyor.
+Image améliorée trop grande. ¦ İyileştirilmiş görsel çok büyük.
+Nom de fichier média invalide. ¦ Geçersiz medya dosyası adı.
+Fichier média introuvable. ¦ Medya dosyası bulunamadı.
+Cette image ne peut pas être lue (format). ¦ Bu görsel okunamıyor (biçim).
+Copie de l’image impossible. ¦ Görsel kopyalanamadı.
+Hypothèse introuvable. ¦ Hipotez bulunamadı.
+La comparaison des hypothèses n’est pas encore prête : relance l’app. ¦ Hipotezlerin karşılaştırılması henüz hazır değil: uygulamayı yeniden başlat.
+Réponse introuvable. ¦ Yanıt bulunamadı.
+Lieu introuvable : choisis-le dans la liste. ¦ Yer bulunamadı: listeden seç.
+Donne un nom à cette réponse (ex. « Naves »). ¦ Bu yanıta bir ad ver (örn. “Naves”).
+Huit réponses au plus : retires-en une avant d’en ajouter. ¦ En fazla sekiz yanıt: yenisini eklemeden önce birini çıkar.
+C’est la réponse retenue : reviens d’abord sur la conclusion (↶). ¦ Bu seçilen yanıt: önce sonuçtan geri dön (↶).
+Choisis une source, un média ou un dépouillement, ou écris la preuve. ¦ Bir kaynak, bir medya ya da bir döküm seç veya kanıtı yaz.
+Sorte de preuve inconnue. ¦ Bilinmeyen kanıt türü.
+Cet élément n’existe pas (ou plus) dans la base. ¦ Bu öğe veritabanında yok (ya da artık yok).
+Soixante preuves au plus pour une hypothèse. ¦ Bir hipotez için en fazla altmış kanıt.
+Cette preuve est déjà dans la colonne. ¦ Bu kanıt zaten sütunda.
+Cette réponse existe déjà. ¦ Bu yanıt zaten var.
+Cette preuve existe déjà. ¦ Bu kanıt zaten var.
+La réponse de cette preuve a été retirée. ¦ Bu kanıtın yanıtı çıkarıldı.
+Choisis une des réponses de cette hypothèse. ¦ Bu hipotezin yanıtlarından birini seç.
+Cette hypothèse est déjà conclue : reviens d’abord sur la conclusion (↶). ¦ Bu hipotez zaten sonuçlandı: önce sonuçtan geri dön (↶).
+Cette réponse n’a pas de lieu : choisis le lieu (📍) avant de la retenir. ¦ Bu yanıtın yeri yok: seçmeden önce yeri (📍) seç.
+Cette réponse n’a pas de date : écris-la avant de la retenir. ¦ Bu yanıtın tarihi yok: seçmeden önce tarihi yaz.
+Il n’y a pas de conclusion à défaire. ¦ Geri alınacak bir sonuç yok.
+L’événement a été modifié depuis la conclusion : remets-le à la main si besoin. ¦ Olay, sonuçtan beri değişti: gerekirse onu elle geri getir.
+Version des empreintes incorrecte. ¦ Parmak izi sürümü yanlış.
+Donnée incorrecte (« items ») : une liste est attendue. ¦ Yanlış veri (“items”): bir liste bekleniyor.
+Trop d’empreintes envoyées d’un coup. ¦ Bir kerede çok fazla parmak izi gönderildi.
+Donnée incorrecte (« paires »). ¦ Yanlış veri (“paires”).
+Choisis ce qu’on fait des autres photos : corbeille ou versions. ¦ Diğer fotoğraflarla ne yapılacağını seç: çöp kutusu ya da sürümler.
+La photo à garder est introuvable. ¦ Saklanacak fotoğraf bulunamadı.
+Choisis au moins une photo à fusionner avec celle qu’on garde. ¦ Saklanan fotoğrafla birleştirilecek en az bir fotoğraf seç.
+Trop de photos dans ce groupe : fusionne-les en plusieurs fois. ¦ Bu grupta çok fazla fotoğraf var: onları birkaç seferde birleştir.
+Une des photos du groupe est introuvable (déjà fusionnée ?). ¦ Gruptaki fotoğraflardan biri bulunamadı (zaten birleştirildi mi?).
+Cette fusion est déjà annulée. ¦ Bu birleştirme zaten geri alındı.
+La photo écartée n’a pas été trouvée dans le journal. ¦ Bir kenara konan fotoğraf günlükte bulunamadı.
+Action inconnue sur les images semblables. ¦ Benzer görsellerde bilinmeyen eylem.
+C’est une sauvegarde de RootsMagic (.rmbackup) : ouvre-la dans RootsMagic (Fichier → Restaurer), puis importe ici le fichier .rmtree. ¦ Bu bir RootsMagic yedeği (.rmbackup): onu RootsMagic’te aç (File → Restore), sonra .rmtree dosyasını buraya içe aktar.
+C’est une base GeneWeb (.gwb), illisible hors de GeneWeb. Dans GeneWeb, fais « gwu » (ou exporte la base en .gw) puis importe ici le fichier .gw. ¦ Bu bir GeneWeb veritabanı (.gwb), GeneWeb dışında okunamaz. GeneWeb’de “gwu” çalıştır (ya da veritabanını .gw olarak dışa aktar), sonra .gw dosyasını buraya içe aktar.
+Le paquet GEDCOM-X (.gedx) n’est pas encore lu : importe plutôt le fichier GEDCOM-X en JSON ou en XML (ou un GEDCOM). ¦ GEDCOM-X paketi (.gedx) henüz okunmuyor: bunun yerine GEDCOM-X dosyasını JSON ya da XML olarak (ya da bir GEDCOM) içe aktar.
+Ce fichier RootsMagic est trop gros (plus de 1 Go). ¦ Bu RootsMagic dosyası çok büyük (1 GB’tan fazla).
+Ce fichier n’est pas une base RootsMagic lisible (il est abîmé, ou ce n’est pas un .rmtree). ¦ Bu dosya okunabilir bir RootsMagic veritabanı değil (bozuk ya da bir .rmtree değil).
+Ce fichier RootsMagic est abîmé : il ne s’ouvre pas. ¦ Bu RootsMagic dosyası bozuk: açılmıyor.
+Ce fichier RootsMagic est abîmé : une table ne se lit pas. ¦ Bu RootsMagic dosyası bozuk: bir tablo okunmuyor.
+Ce fichier GEDCOM-X contient un « DOCTYPE » ou des « ENTITY » XML : il est refusé par prudence. ¦ Bu GEDCOM-X dosyası bir XML “DOCTYPE” ya da “ENTITY” içeriyor: önlem olarak reddedildi.
+Le XML de ce fichier GEDCOM-X est abîmé (ou ce n’est pas du GEDCOM-X). ¦ Bu GEDCOM-X dosyasının XML’i bozuk (ya da bu GEDCOM-X değil).
+Ce fichier GEDCOM-X est trop gros (plus de 300 Mo). ¦ Bu GEDCOM-X dosyası çok büyük (300 MB’tan fazla).
+Le JSON de ce fichier GEDCOM-X est abîmé : il ne peut pas être lu. ¦ Bu GEDCOM-X dosyasının JSON’u bozuk: okunamıyor.
+Ce fichier n’est pas du GEDCOM-X. ¦ Bu dosya GEDCOM-X değil.
+Ce fichier GeneWeb est trop gros (plus de 300 Mo). ¦ Bu GeneWeb dosyası çok büyük (300 MB’tan fazla).
+Ce fichier n’est pas un fichier texte GeneWeb (.gw) : il contient des données binaires. Une base GeneWeb (.gwb) ne se lit pas : dans GeneWeb, fais « gwu » (ou « Exporter en .gw ») puis importe ce fichier. ¦ Bu dosya bir GeneWeb metin dosyası (.gw) değil: ikili veri içeriyor. Bir GeneWeb veritabanı (.gwb) okunamaz: GeneWeb’de “gwu” çalıştır (ya da “Export to .gw”), sonra o dosyayı içe aktar.
+Ce fichier GeneWeb a trop de lignes. ¦ Bu GeneWeb dosyasında çok fazla satır var.
+Ce fichier n’est pas un fichier GeneWeb (.gw) : aucun bloc « fam », « pevt » ou « notes » trouvé. ¦ Bu dosya bir GeneWeb dosyası (.gw) değil: hiçbir “fam”, “pevt” ya da “notes” bloku bulunamadı.
+Lecture du fichier Gramps impossible. ¦ Gramps dosyası okunamadı.
+Ce fichier Gramps compressé est abîmé. ¦ Bu sıkıştırılmış Gramps dosyası bozuk.
+Ce fichier contient des « ENTITY » XML : il est refusé par prudence. ¦ Bu dosya XML “ENTITY” bildirimleri içeriyor: önlem olarak reddedildi.
+Ce fichier contient un « DOCTYPE » XML inattendu : il est refusé par prudence. ¦ Bu dosya beklenmedik bir XML “DOCTYPE” içeriyor: önlem olarak reddedildi.
+Ce fichier n’est pas un fichier Gramps (balise « database » absente). ¦ Bu dosya bir Gramps dosyası değil (“database” etiketi yok).
+Le XML de ce fichier Gramps est abîmé : il ne peut pas être lu. ¦ Bu Gramps dosyasının XML’i bozuk: okunamıyor.
+Impossible d’ouvrir le paquet Gramps (.gpkg). ¦ Gramps paketi (.gpkg) açılamadı.
+Ce paquet Gramps contient trop de fichiers : il n’est pas ouvert. ¦ Bu Gramps paketi çok fazla dosya içeriyor: açılmadı.
+Ce paquet Gramps est trop gros une fois ouvert pour la place libre de l’ordinateur. ¦ Bu Gramps paketi açıldığında bilgisayardaki boş yer için çok büyük.
+Ce paquet Gramps est anormal (beaucoup trop gros une fois ouvert) : il n’est pas ouvert. ¦ Bu Gramps paketi olağan dışı (açıldığında çok çok büyük): açılmadı.
+Dossier temporaire impossible à créer. ¦ Geçici klasör oluşturulamıyor.
+Fichier temporaire impossible à écrire. ¦ Geçici dosya yazılamıyor.
+Ce paquet Gramps est incomplet (fichier coupé). ¦ Bu Gramps paketi eksik (dosya kesik).
+Aucun fichier « data.gramps » dans ce paquet : ce n’est pas un paquet Gramps. ¦ Bu pakette “data.gramps” dosyası yok: bu bir Gramps paketi değil.
+Ce format n’est pas un arbre : choisis un fichier GEDCOM (.ged), Gramps (.gramps, .gpkg), GedZip (.zip), Hérédis (.heredis) ou MacFamilyTree (.mftpkg). ¦ Bu biçim bir ağaç değil: bir GEDCOM (.ged), Gramps (.gramps, .gpkg), GedZip (.zip), Hérédis (.heredis) ya da MacFamilyTree (.mftpkg) dosyası seç.
+C’est une sauvegarde complète de LCNDA : elle remplacerait toute ta base. Ouvre-la plutôt depuis Réglages → Sauvegarde. ¦ Bu tam bir LCNDA yedeği: tüm veritabanının yerine geçer. Bunun yerine onu Ayarlar → Yedek’ten aç.
+Cette archive .zip est abîmée. ¦ Bu .zip arşivi bozuk.
+Ni fichier GEDCOM, ni Hérédis, ni MacFamilyTree dans cette archive. ¦ Bu arşivde ne GEDCOM, ne Hérédis, ne de MacFamilyTree dosyası var.
+Le fichier n’a pas pu être gardé pour l’import. ¦ Dosya içe aktarma için saklanamadı.
+Fichier à importer introuvable : recommence. ¦ İçe aktarılacak dosya bulunamadı: yeniden başla.
+Le fichier à importer a été oublié (plus d’un jour) : recommence. ¦ İçe aktarılacak dosya unutuldu (bir günden eski): yeniden başla.
+Annulation impossible : cet import a déjà été annulé ou oublié. ¦ Geri alınamıyor: bu içe aktarma zaten geri alındı ya da unutuldu.
+Des fiches importées ont déjà été reliées à d’autres : l’import ne peut plus être annulé d’un coup. ¦ İçe aktarılan kartlar başkalarına bağlandı bile: içe aktarma artık tek seferde geri alınamaz.
+Aucun acte reçu. ¦ Hiç belge alınmadı.
+Aucun acte lisible dans ce fichier : vérifie le choix des colonnes. ¦ Bu dosyada okunabilir belge yok: sütun seçimini kontrol et.
+Annulation impossible : ce n’est pas un import de relevés. ¦ Geri alınamıyor: bu bir döküm içe aktarması değil.
+Aucune personne dans ce tableau : choisis au moins la colonne du nom ou du prénom. ¦ Bu tabloda kişi yok: en azından soyadı ya da ad sütununu seç.
+Aucune source à exporter. ¦ Dışa aktarılacak kaynak yok.
+Ce fichier n’est ni du RIS (.ris) ni du BibTeX (.bib). ¦ Bu dosya ne RIS (.ris) ne de BibTeX (.bib).
+Aucune référence reconnue dans ce fichier. ¦ Bu dosyada hiçbir kaynakça girdisi tanınmadı.
+Fichier GeoJSON abîmé : il ne peut pas être lu. ¦ GeoJSON dosyası bozuk: okunamıyor.
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un fichier KML n’utilise pas. ¦ Dosya reddedildi: bir KML dosyasının kullanmadığı XML bildirimleri (DOCTYPE ya da ENTITY) içeriyor.
+Fichier KML abîmé : il ne peut pas être lu. ¦ KML dosyası bozuk: okunamıyor.
+Ce fichier XML n’est pas un KML (Google Earth). ¦ Bu XML dosyası bir KML (Google Earth) değil.
+Ce fichier n’est ni un KML (Google Earth) ni un GeoJSON. ¦ Bu dosya ne bir KML (Google Earth) ne de bir GeoJSON.
+Aucun lieu avec des coordonnées dans ce fichier. ¦ Bu dosyada koordinatlı yer yok.
+Trop de lieux d’un coup. ¦ Bir kerede çok fazla yer.
+Aucune ligne cochée : rien à faire. ¦ Hiçbir satır işaretli değil: yapılacak bir şey yok.
+Adresse refusée : seuls les fichiers de data.gouv.fr sont téléchargés. ¦ Adres reddedildi: yalnızca data.gouv.fr dosyaları indirilir.
+Création du fichier temporaire impossible. ¦ Geçici dosya oluşturulamadı.
+Ce fichier n’est pas un fichier des décès de l’INSEE. ¦ Bu dosya bir INSEE ölüm dosyası değil.
+Donne un nom au document. ¦ Belgeye bir ad ver.
+Trop de pages (2 000 au plus). ¦ Çok fazla sayfa (en fazla 2.000).
+Document trop lourd (24 Mo au plus) : utilise des photos de la base plutôt que des photos importées, ou des photos plus petites. ¦ Belge çok ağır (en fazla 24 MB): içe aktarılmış fotoğraflar yerine veritabanındaki fotoğrafları ya da daha küçük fotoğrafları kullan.
+Ce document a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Bu belge, sen açtığından beri başka bir pencerede değiştirildi.
+Impossible de créer le dossier des traitements par lot. ¦ Toplu işlemler klasörü oluşturulamadı.
+Lot inconnu ou trop ancien : recommence le traitement. ¦ Bilinmeyen ya da çok eski toplu iş: işlemi yeniden başlat.
+Ce lot est trop grand. ¦ Bu toplu iş çok büyük.
+Impossible de ranger le fichier dans les médias. ¦ Dosya medyaya konamadı.
+Média introuvable (il a peut-être été supprimé entre-temps). ¦ Medya bulunamadı (bu arada silinmiş olabilir).
+Ce fichier n’est pas encore dans les médias. ¦ Bu dosya henüz medyada değil.
+Fiche verrouillée : on n’y relie pas de nouveau média. Déverrouille-la d’abord. ¦ Kart kilitli: ona yeni medya bağlanamaz. Önce kilidini aç.
+Nom du fichier manquant. ¦ Dosya adı eksik.
+Ce lot a déjà été annulé, ou il est trop ancien. ¦ Bu toplu iş zaten geri alındı ya da çok eski.
+Analyse expirée : envoie de nouveau le fichier. ¦ Analizin süresi doldu: dosyayı yeniden gönder.
+Choisis un fichier GEDCOM (.ged) ou Gramps (.gramps, .gpkg). ¦ Bir GEDCOM (.ged) ya da Gramps (.gramps, .gpkg) dosyası seç.
+Impossible de créer le dossier de sauvegarde. ¦ Yedek klasörü oluşturulamadı.
+La base doit d’abord être mise à jour (structure n° 64). ¦ Veritabanının önce güncellenmesi gerekiyor (yapı no. 64).
+Coordonnées impossibles. ¦ İmkânsız koordinatlar.
+Dossier des données météo impossible à créer. ¦ Hava durumu veri klasörü oluşturulamıyor.
+Ce fichier est trop petit pour être un pack météo. ¦ Bu dosya bir hava durumu paketi olmak için çok küçük.
+Ce fichier est trop gros pour être un pack météo (16 Go au plus). ¦ Bu dosya bir hava durumu paketi olmak için çok büyük (en fazla 16 GB).
+Envoi inconnu ou expiré : recommence l’import. ¦ Bilinmeyen ya da süresi dolmuş gönderim: içe aktarmayı yeniden başlat.
+Morceau du fichier hors de place : recommence l’import. ¦ Dosya parçası yerinde değil: içe aktarmayı yeniden başlat.
+Le fichier envoyé dépasse la taille annoncée : recommence l’import. ¦ Gönderilen dosya bildirilen boyutu aşıyor: içe aktarmayı yeniden başlat.
+Ce n’est pas un pack météo de LCNDA (fichier .lcmeteo). ¦ Bu bir LCNDA hava durumu paketi (.lcmeteo dosyası) değil.
+En-tête du pack abîmé. ¦ Paketin başlığı bozuk.
+Le fichier est incomplet (téléchargement interrompu ?) : rien n’a été installé. ¦ Dosya eksik (indirme yarıda mı kesildi?): hiçbir şey kurulmadı.
+Le fichier est abîmé (empreinte différente) : rien n’a été installé. ¦ Dosya bozuk (farklı sağlama değeri): hiçbir şey kurulmadı.
+Le pack ne peut pas être lu : rien n’a été installé. ¦ Paket okunamıyor: hiçbir şey kurulmadı.
+Pack impossible à ranger. ¦ Paket yerine konamıyor.
+Sorte de pack inconnue. ¦ Bilinmeyen paket türü.
+Ce pack n’est pas dans le dossier des données (le socle livré avec l’app ne se supprime pas). ¦ Bu paket veri klasöründe değil (uygulamayla gelen temel paket silinemez).
+Pack impossible à retirer. ¦ Paket çıkarılamıyor.
+Un autre pack de cette sorte a été importé entre-temps. ¦ Bu arada bu türde başka bir paket içe aktarıldı.
+Action météo inconnue. ¦ Bilinmeyen hava durumu eylemi.
+Métier introuvable. ¦ Meslek bulunamadı.
+la structure de la base ne se stabilise pas après 5 passages ¦ veritabanı yapısı 5 geçişten sonra kararlı hâle gelmiyor
+Donne un titre à l’événement. ¦ Olaya bir başlık ver.
+Donne l’année de l’événement (entre 1000 et 2100). ¦ Olayın yılını ver (1000 ile 2100 arasında).
+L’année de fin doit venir après celle du début. ¦ Bitiş yılı başlangıç yılından sonra gelmeli.
+Choisis la commune de l’événement. ¦ Olayın yerleşim yerini seç.
+L’adresse du lien doit commencer par http:// ou https://. ¦ Bağlantı adresi http:// ya da https:// ile başlamalı.
+Trop de rushes dans le projet (500 au plus). ¦ Projede çok fazla ham çekim var (en fazla 500).
+Un rush du projet n’est pas un média de la base. ¦ Projedeki bir ham çekim veritabanının medyasından değil.
+Impossible de créer le dossier du musée. ¦ Müze klasörü oluşturulamadı.
+Musée introuvable. ¦ Müze bulunamadı.
+Un musée reçu ne se modifie pas. ¦ Alınan bir müze düzenlenemez.
+Ordre impossible : éléments de salles différentes. ¦ Sıralanamıyor: öğeler farklı salonlarda.
+Impossible de ranger le fichier. ¦ Dosya yerine konamadı.
+Ce musée n’a pas de livre d’or. ¦ Bu müzenin anı defteri yok.
+Il faut un nom et un message. ¦ Bir ad ve bir mesaj gerekli.
+Seul un musée reçu peut être supprimé ; le tien se vide salle par salle. ¦ Yalnızca alınan bir müze silinebilir; seninki salon salon boşaltılır.
+Ce fichier n’est pas un musée LCNDA (.lcnda-musee.zip). ¦ Bu dosya bir LCNDA müzesi (.lcnda-musee.zip) değil.
+Ce fichier n’est pas un musée LCNDA. ¦ Bu dosya bir LCNDA müzesi değil.
+Donne un nom à la liste. ¦ Listeye bir ad ver.
+Ajoute au moins une colonne à remplir. ¦ Doldurulacak en az bir sütun ekle.
+Ajoute au moins un champ au formulaire. ¦ Forma en az bir alan ekle.
+Ce fichier n’est pas une liste LCNDA. ¦ Bu dosya bir LCNDA listesi değil.
+Cette fiche n’est pas dans cette liste. ¦ Bu kart bu listede değil.
+Document introuvable : il n’existe pas, ou plus. ¦ Belge bulunamadı: yok ya da artık yok.
+Intitulé obligatoire. ¦ Başlık zorunlu.
+Donne le nom de la revue. ¦ Derginin adını ver.
+Revue, collection ou série introuvable. ¦ Dergi, koleksiyon ya da dizi bulunamadı.
+Choisis la revue de ce numéro. ¦ Bu sayının dergisini seç.
+Numéro introuvable. ¦ Sayı bulunamadı.
+Donne un titre (quelques mots suffisent). ¦ Bir başlık ver (birkaç kelime yeter).
+Donne un nom à ces règles (le journal, la rubrique). ¦ Bu kurallara bir ad ver (gazete, bölüm).
+Règles introuvables. ¦ Kurallar bulunamadı.
+Boucle dans le pedigree : un animal ne peut pas être son propre ancêtre. ¦ Soy kütüğünde döngü: bir hayvan kendi atası olamaz.
+Le père et la mère sont le même animal. ¦ Baba ve anne aynı hayvan.
+Cet animal existe déjà. ¦ Bu hayvan zaten var.
+Cette suppression est trop ancienne : elle ne contient pas de quoi rendre l’animal. ¦ Bu silme çok eski: hayvanı geri getirmek için gerekenleri içermiyor.
+Donne un titre à la demande. ¦ İsteğe bir başlık ver.
+Choisis au moins une photo (une image JPEG, PNG, GIF ou WebP). ¦ En az bir fotoğraf seç (bir JPEG, PNG, GIF ya da WebP görseli).
+Choisis au moins un visage à faire reconnaître (ou trace-le sur la photo). ¦ Tanınacak en az bir yüz seç (ya da fotoğrafın üstüne çiz).
+Fichier de réponses manquant. ¦ Yanıt dosyası eksik.
+Ce fichier n’est pas un fichier de réponses (il est illisible). ¦ Bu dosya bir yanıt dosyası değil (okunamıyor).
+Ce fichier n’est pas un fichier de réponses de « Qui est sur cette photo ? ». ¦ Bu dosya “Bu fotoğrafta kim var?” için bir yanıt dosyası değil.
+Version de fichier de réponses inconnue. ¦ Bilinmeyen yanıt dosyası sürümü.
+Fichier de réponses refusé : identifiant incorrect. ¦ Yanıt dosyası reddedildi: tanımlayıcı yanlış.
+Ce fichier répond à une demande qui n’est pas dans cette généalogie. ¦ Bu dosya, bu soy ağacında olmayan bir isteği yanıtlıyor.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de cette demande (somme de contrôle). ¦ Yanıt dosyası reddedildi: bu isteğin gönderilmiş hiçbir sürümüne uymuyor (sağlama toplamı).
+Fichier de réponses refusé : la liste des réponses manque. ¦ Yanıt dosyası reddedildi: yanıt listesi eksik.
+Fichier de réponses refusé : plus de réponses que de visages. ¦ Yanıt dosyası reddedildi: yüzlerden çok yanıt var.
+Fichier de réponses refusé : une réponse est mal formée. ¦ Yanıt dosyası reddedildi: bir yanıt hatalı biçimde.
+Fichier de réponses refusé : une réponse contient des données inattendues. ¦ Yanıt dosyası reddedildi: bir yanıt beklenmedik veriler içeriyor.
+Fichier de réponses refusé : visage inconnu. ¦ Yanıt dosyası reddedildi: bilinmeyen yüz.
+Fichier de réponses refusé : deux réponses pour le même visage. ¦ Yanıt dosyası reddedildi: aynı yüz için iki yanıt.
+Fichier de réponses refusé : nom proposé inconnu. ¦ Yanıt dosyası reddedildi: önerilen ad bilinmiyor.
+Ces réponses ont déjà été importées. ¦ Bu yanıtlar zaten içe aktarıldı.
+Aucune réponse à importer dans ce fichier. ¦ Bu dosyada içe aktarılacak yanıt yok.
+Rien à annuler. ¦ Geri alınacak bir şey yok.
+Donnée incorrecte (« personnes ») : une liste est attendue. ¦ Yanlış veri (“personnes”): bir liste bekleniyor.
+La base n’est pas encore à jour : relance l’app. ¦ Veritabanı henüz güncel değil: uygulamayı yeniden başlat.
+Choisis deux photos de tes médias. ¦ Medyandan iki fotoğraf seç.
+Choisis deux photos différentes. ¦ İki farklı fotoğraf seç.
+Donne un nom à la comparaison. ¦ Karşılaştırmaya bir ad ver.
+Opération inconnue sur les comparaisons de photos. ¦ Fotoğraf karşılaştırmalarında bilinmeyen işlem.
+Action inconnue sur les comparaisons de photos. ¦ Fotoğraf karşılaştırmalarında bilinmeyen eylem.
+Enquête introuvable. ¦ İnceleme bulunamadı.
+Carte de photos introuvable dans cette généalogie. ¦ Fotoğraf haritası bu soy ağacında bulunamadı.
+Période incomprise : écris par exemple « été 2023 » → « juillet 2023 », « 1950 », « entre 1950 et 1960 ». ¦ Dönem anlaşılamadı: örneğin “été 2023” → “juillet 2023”, “1950”, “entre 1950 et 1960” yaz.
+Photo introuvable sur cette carte (retirée entre-temps ?). ¦ Fotoğraf bu haritada bulunamadı (bu arada çıkarıldı mı?).
+Date incomprise : écris par exemple « 14 juillet 2023 », « vers 1950 », « entre 1880 et 1885 ». ¦ Tarih anlaşılamadı: örneğin “14 juillet 2023”, “vers 1950”, “entre 1880 et 1885” yaz.
+Fiche verrouillée : déverrouille-la avant d’y rattacher ou d’en détacher une photo. ¦ Kart kilitli: bir fotoğrafı bağlamadan ya da çıkarmadan önce kilidini aç.
+Cette photo n’a pas de position GPS d’origine. ¦ Bu fotoğrafın özgün GPS konumu yok.
+200 fichiers au plus à la fois. ¦ Bir seferde en fazla 200 dosya.
+Opération inconnue sur les cartes de photos. ¦ Fotoğraf haritalarında bilinmeyen işlem.
+Action inconnue sur les cartes de photos. ¦ Fotoğraf haritalarında bilinmeyen eylem.
+Carte de photos illisible. ¦ Fotoğraf haritası okunamıyor.
+Ville introuvable dans la liste des villes du monde. ¦ Şehir, dünya şehirleri listesinde bulunamadı.
+La zone dessinée n’est pas lisible. ¦ Çizilen alan okunamıyor.
+Le cercle doit avoir un centre et un rayon entre 5 m et 50 km. ¦ Dairenin bir merkezi ve 5 m ile 50 km arasında bir yarıçapı olmalı.
+Un sommet de la zone n’est pas lisible. ¦ Alanın bir köşesi okunamıyor.
+Un sommet de la zone n’a pas de coordonnées valides. ¦ Alanın bir köşesinin geçerli koordinatları yok.
+Une zone a besoin d’au moins 3 points différents. ¦ Bir alan en az 3 farklı nokta ister.
+La zone est toute plate : ses points sont alignés. ¦ Alan dümdüz: noktaları aynı doğru üzerinde.
+Sorte de zone inconnue (cercle ou polygone). ¦ Bilinmeyen alan türü (daire ya da çokgen).
+Ce média n’est pas une image. ¦ Bu medya bir görsel değil.
+Cette image n’existe plus dans les Médias. ¦ Bu görsel artık Medya’da yok.
+Choisis une image (photo, carte postale, gravure, plan). ¦ Bir görsel seç (fotoğraf, kartpostal, gravür, plan).
+La photo d’aujourd’hui doit être une autre image. ¦ Bugünün fotoğrafı başka bir görsel olmalı.
+Ce lieu n’existe plus dans la base. ¦ Bu yer artık veritabanında yok.
+Le point précis a besoin de la latitude et de la longitude. ¦ Kesin nokta için enlem ve boylam gerekli.
+Donne au moins un lieu, un point sur la carte ou une zone. ¦ En azından bir yer, haritada bir nokta ya da bir alan ver.
+Choisis où demander de l’aide (entraide ou petite annonce). ¦ Nereden yardım isteyeceğini seç (yardımlaşma ya da küçük ilan).
+Qui a répondu ? Donne un nom ou un pseudo. ¦ Kim yanıt verdi? Bir ad ya da takma ad ver.
+Opération inconnue sur les images de lieux. ¦ Yer görsellerinde bilinmeyen işlem.
+Action inconnue sur les images de lieux. ¦ Yer görsellerinde bilinmeyen eylem.
+Cette personne n’existe plus dans la base. ¦ Bu kişi artık veritabanında yok.
+Choisis l’image du recto. ¦ Ön yüz görselini seç.
+L’image du verso n’existe plus. ¦ Arka yüz görseli artık yok.
+Le recto et le verso doivent être deux images différentes. ¦ Ön yüz ve arka yüz iki farklı görsel olmalı.
+Cette image a déjà sa fiche de carte postale. ¦ Bu görselin zaten kartpostal kartı var.
+Le verso choisi appartient déjà à une autre carte postale. ¦ Seçilen arka yüz zaten başka bir kartpostala ait.
+L’image du recto a été supprimée entre-temps : la carte ne peut pas revenir. ¦ Ön yüz görseli bu arada silindi: kartpostal geri gelemez.
+Opération inconnue sur les cartes postales. ¦ Kartpostallarda bilinmeyen işlem.
+Action inconnue sur les cartes postales. ¦ Kartpostallarda bilinmeyen eylem.
+Cette généalogie a déjà des données : rien n’a été changé. ¦ Bu soy ağacında zaten veri var: hiçbir şey değiştirilmedi.
+Donne un nom à ton animal. ¦ Hayvanına bir ad ver.
+La base d’exemple est déjà ouverte. ¦ Örnek veritabanı zaten açık.
+Ce n’est pas la base d’exemple : rien n’a été fait. ¦ Bu örnek veritabanı değil: hiçbir şey yapılmadı.
+Ce n’est pas la base d’exemple. ¦ Bu örnek veritabanı değil.
+Numéro de fiche de mauvaise forme. ¦ Kart numarası hatalı biçimde.
+Cette fiche n’existe pas. ¦ Bu kart yok.
+La personne choisie n’existe pas. ¦ Seçilen kişi yok.
+Choisis une autre personne que l’enfant. ¦ Çocuktan başka bir kişi seç.
+Choisis la personne dont il tient son prénom. ¦ Adını aldığı kişiyi seç.
+Les dossiers de preuve ne sont pas encore prêts : relance l’app. ¦ Kanıt dosyaları henüz hazır değil: uygulamayı yeniden başlat.
+Dossier de preuve introuvable. ¦ Kanıt dosyası bulunamadı.
+Choisis la personne du dossier. ¦ Dosyanın kişisini seç.
+Choisis une autre personne. ¦ Başka bir kişi seç.
+Cet événement n’est pas sur la fiche de cette personne. ¦ Bu olay bu kişinin kartında yok.
+Ce dossier est déjà supprimé. ¦ Bu dosya zaten silindi.
+Ligne du dossier introuvable. ¦ Dosyanın satırı bulunamadı.
+La source ou la citation choisie n’existe plus. ¦ Seçilen kaynak ya da alıntı artık yok.
+Ce lien parent-enfant n’existe pas. ¦ Bu ebeveyn–çocuk bağı yok.
+Donne un nom à ce profil. ¦ Bu profile bir ad ver.
+Ce profil a trop de réglages. ¦ Bu profilin çok fazla ayarı var.
+Partie de puzzle inconnue. ¦ Bilinmeyen yapboz oyunu.
+Image du puzzle absente. ¦ Yapboz görseli yok.
+Image du puzzle refusée. ¦ Yapboz görseli reddedildi.
+Taille d’image du puzzle invalide. ¦ Yapboz görselinin boyutu geçersiz.
+Partie de puzzle illisible. ¦ Yapboz oyunu okunamıyor.
+Nombre de pièces invalide (4 à 1000). ¦ Parça sayısı geçersiz (4 ile 1000 arası).
+On ne peut pas changer le nombre de pièces d’une partie commencée. ¦ Başlamış bir oyunun parça sayısı değiştirilemez.
+Pièces du puzzle illisibles. ¦ Yapboz parçaları okunamıyor.
+Pièces du puzzle abîmées (order). ¦ Yapboz parçaları bozuk (order).
+Partie de puzzle introuvable dans cette généalogie. ¦ Yapboz oyunu bu soy ağacında bulunamadı.
+Pièces du puzzle absentes. ¦ Yapboz parçaları yok.
+Partie trop grosse pour être enregistrée (2 Mo au plus). ¦ Oyun kaydedilemeyecek kadar büyük (en fazla 2 MB).
+Opération de puzzle inconnue. ¦ Bilinmeyen yapboz işlemi.
+Action de puzzle inconnue. ¦ Bilinmeyen yapboz eylemi.
+Date incorrecte : écris-la comme le calendrier la propose. ¦ Yanlış tarih: takvimin önerdiği gibi yaz.
+Liste de questions incorrecte. ¦ Soru listesi yanlış.
+Donne un titre au questionnaire. ¦ Ankete bir başlık ver.
+Ce contact n’est plus dans le Répertoire des vivants. ¦ Bu kişi artık Yaşayanlar rehberinde değil.
+État inconnu. ¦ Bilinmeyen durum.
+Réponse collée incorrecte. ¦ Yapıştırılan yanıt yanlış.
+Ce fichier n’est pas un fichier de réponses de « Questions aux proches ». ¦ Bu dosya “Yakınlara sorular” için bir yanıt dosyası değil.
+Ce fichier répond à un questionnaire qui n’est pas dans cette généalogie. ¦ Bu dosya, bu soy ağacında olmayan bir anketi yanıtlıyor.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de ce questionnaire (somme de contrôle). ¦ Yanıt dosyası reddedildi: bu anketin gönderilmiş hiçbir sürümüne uymuyor (sağlama toplamı).
+Trop de réponses dans ce fichier. ¦ Bu dosyada çok fazla yanıt var.
+Fichier de réponses refusé : numéro de question incorrect. ¦ Yanıt dosyası reddedildi: soru numarası yanlış.
+Fichier de réponses refusé : une question doit être un texte. ¦ Yanıt dosyası reddedildi: bir soru metin olmalı.
+Écris la question. ¦ Soruyu yaz.
+500 questions à toi au plus. ¦ En fazla 500 kendi sorun.
+Opération inconnue sur les questionnaires. ¦ Anketlerde bilinmeyen işlem.
+Action inconnue sur les questionnaires. ¦ Anketlerde bilinmeyen eylem.
+Donne un nom au recueil. ¦ Derlemeye bir ad ver.
+Choisis une image pour la couverture. ¦ Kapak için bir görsel seç.
+Donne un nom à la version (ex. « Photos 2015 »). ¦ Sürüme bir ad ver (örn. “Fotoğraflar 2015”).
+Un recueil garde au moins une version. ¦ Bir derleme en az bir sürümü saklar.
+Choisis la version où ranger ces photos. ¦ Bu fotoğrafların konacağı sürümü seç.
+Cette photo n’est pas sur cette page. ¦ Bu fotoğraf bu sayfada değil.
+Cette page est dans un autre recueil. ¦ Bu sayfa başka bir derlemede.
+Version du recueil introuvable. ¦ Derlemenin sürümü bulunamadı.
+Le média n’existe plus. ¦ Medya artık yok.
+Choisis à quoi rattacher le recueil. ¦ Derlemenin neye bağlanacağını seç.
+Page d’un autre recueil. ¦ Başka bir derlemenin sayfası.
+Recherche de battue introuvable. ¦ Tarama araması bulunamadı.
+Choisis où rattacher l’image. ¦ Görselin nereye bağlanacağını seç.
+Pays inconnu du catalogue. ¦ Katalogda bilinmeyen ülke.
+Dossier de téléchargement impossible à créer. ¦ İndirme klasörü oluşturulamıyor.
+Données de ce pays introuvables. ¦ Bu ülkenin verileri bulunamadı.
+La France ne peut pas être retirée. ¦ Fransa çıkarılamaz.
+Des battues utilisent des communes de ce pays : retire-les d’abord de ces battues (rien n’a été supprimé). ¦ Bazı taramalar bu ülkenin yerleşim yerlerini kullanıyor: önce onları bu taramalardan çıkar (hiçbir şey silinmedi).
+Personne ou sens de la branche manquant. ¦ Kişi ya da kolun yönü eksik.
+Feuille de mission introuvable. ¦ Görev kâğıdı bulunamadı.
+Date de visite invalide. ¦ Geçersiz ziyaret tarihi.
+Cote de visite introuvable. ¦ Ziyaretin arşiv numarası bulunamadı.
+La photo de départ n’est plus dans les médias. ¦ Başlangıç fotoğrafı artık medyada değil.
+Masque illisible dans le projet. ¦ Projede okunamayan maske.
+Projet trop lourd (40 Mo au plus) : retire des sélections ou des masques. ¦ Proje çok ağır (en fazla 40 MB): bazı seçimleri ya da maskeleri çıkar.
+Choisis d’abord la personne du centre. ¦ Önce ortadaki kişiyi seç.
+Personne introuvable : choisis d’abord à qui se rattache cette information. ¦ Kişi bulunamadı: önce bu bilginin kime bağlı olduğunu seç.
+Fiche verrouillée. Déverrouille-la avant de la modifier. ¦ Kart kilitli. Düzenlemeden önce kilidini aç.
+Cette information n’existe plus : elle a peut-être été supprimée. ¦ Bu bilgi artık yok: silinmiş olabilir.
+Trop de lignes de santé (50 000 au plus). ¦ Çok fazla sağlık satırı (en fazla 50.000).
+Cette information a déjà été supprimée. ¦ Bu bilgi zaten silindi.
+Impossible d’enregistrer les réglages de la sauvegarde. ¦ Yedekleme ayarları kaydedilemedi.
+Écris le chemin complet du dossier (par exemple /Volumes/MaCle/LCNDA ou ~/Dropbox/LCNDA). ¦ Klasörün tam yolunu yaz (örneğin /Volumes/MaCle/LCNDA ya da ~/Dropbox/LCNDA).
+impossible de nommer la copie ¦ kopyaya ad verilemedi
+Une sauvegarde est déjà en cours. ¦ Zaten bir yedekleme sürüyor.
+Impossible de lire la copie. ¦ Kopya okunamadı.
+Impossible de créer le dossier des sauvegardes. ¦ Yedekler klasörü oluşturulamadı.
+Impossible de remplacer la base (est-elle ouverte ailleurs ?). ¦ Veritabanı değiştirilemedi (başka bir yerde açık mı?).
+Impossible de mettre la copie en place. ¦ Kopya yerine konamadı.
+Identifiant ORCID incorrect : 16 chiffres par groupes de 4 (ex. 0000-0002-1825-0097). ¦ ORCID kimliği yanlış: 4’erli gruplar hâlinde 16 rakam (örn. 0000-0002-1825-0097).
+Écris le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL. ¦ Yazarın adını (örn. Anne Martin) ya da HAL tanımlayıcısını yaz.
+Les recensements SocFace ne sont pas installés. ¦ SocFace nüfus sayımları kurulu değil.
+Demande de remplissage de mauvaise forme. ¦ Doldurma isteği hatalı biçimde.
+Demande de remplissage illisible. ¦ Doldurma isteği okunamıyor.
+Liste de fiches de mauvaise forme. ¦ Kart listesi hatalı biçimde.
+Je ne sais pas prendre cela dans la base. ¦ Bunu veritabanından nasıl alacağımı bilmiyorum.
+Choisis un dépouillement. ¦ Bir döküm seç.
+Ce dépouillement n’existe plus. ¦ Bu döküm artık yok.
+Choisis une de tes listes. ¦ Listelerinden birini seç.
+Il n’y a pas de lignes à envoyer. ¦ Gönderilecek satır yok.
+Donnée incorrecte dans une ligne. ¦ Bir satırda yanlış veri.
+Je ne sais pas envoyer cela vers la base. ¦ Bunu veritabanına nasıl göndereceğimi bilmiyorum.
+Donne l’année du recensement (par exemple 1836). ¦ Nüfus sayımının yılını ver (örneğin 1836).
+Rien à envoyer : toutes les lignes sont laissées de côté. ¦ Gönderilecek bir şey yok: tüm satırlar bir kenara bırakıldı.
+Jeton d’annulation de mauvaise forme. ¦ Geri alma belirteci hatalı biçimde.
+Cet envoi est introuvable. ¦ Bu gönderim bulunamadı.
+Cet envoi a déjà été annulé. ¦ Bu gönderim zaten geri alındı.
+La dernière modification a changé entre-temps : rien n’a été annulé. ¦ Son değişiklik bu arada değişti: hiçbir şey geri alınmadı.
+Rien à importer. ¦ İçe aktarılacak bir şey yok.
+Trop de ménages d’un coup (400 au plus) : coupe le fichier. ¦ Bir kerede çok fazla hane (en fazla 400): dosyayı böl.
+Rien à importer : aucun ménage avec une année de recensement. ¦ İçe aktarılacak bir şey yok: nüfus sayımı yılı olan hiçbir hane yok.
+Cet import est déjà annulé, ou introuvable. ¦ Bu içe aktarma zaten geri alındı ya da bulunamadı.
+Ici, on range une image (JPG, PNG, WebP, GIF), un PDF ou un texte (.txt). ¦ Buraya bir görsel (JPG, PNG, WebP, GIF), bir PDF ya da bir metin (.txt) konabilir.
+Choisis d’abord la fiche à qui ce document se rapporte. ¦ Önce bu belgenin ilgili olduğu kartı seç.
+Il faut un fichier, un lien ou au moins le texte du document. ¦ Bir dosya, bir bağlantı ya da en azından belgenin metni gerekli.
+Données de l’import illisibles. ¦ İçe aktarma verileri okunamıyor.
+Cet ajout ne correspond pas à ce document. ¦ Bu ekleme bu belgeye uymuyor.
+Il faut un fichier, un lien, le texte du document ou au moins une ligne à ajouter. ¦ Bir dosya, bir bağlantı, belgenin metni ya da en azından eklenecek bir satır gerekli.
+Choisis d’abord la commune. ¦ Önce yerleşim yerini seç.
+Choisis le lieu (ou la fiche) que ce document complète. ¦ Bu belgenin tamamladığı yeri (ya da kartı) seç.
+Impossible d’enregistrer l’image retouchée. ¦ Düzenlenen görsel kaydedilemedi.
+Seuls les images, les sons et les vidéos se modifient. ¦ Yalnızca görseller, sesler ve videolar düzenlenebilir.
+Le fichier de cette version n’est plus dans le dossier des médias. ¦ Bu sürümün dosyası artık medya klasöründe değil.
+Donne un nom à la version. ¦ Sürüme bir ad ver.
+L’original ne se supprime pas. ¦ Özgün dosya silinemez.
+L’original n’est plus dans le dossier des médias : affiche d’abord une autre version. ¦ Özgün dosya artık medya klasöründe değil: önce başka bir sürümü göster.
+Acte introuvable (supprimé ?). ¦ Belge bulunamadı (silindi mi?).
+Sorte de bien inconnue. ¦ Bilinmeyen mal türü.
+La valeur d’un bien est un nombre (ex. 1200). ¦ Bir malın değeri bir sayıdır (örn. 1200).
+Donne au moins le défunt (ou le donateur), un héritier ou un bien. ¦ En azından ölen kişiyi (ya da bağışçıyı), bir mirasçıyı ya da bir malı ver.
+Acte introuvable (déjà supprimé ?). ¦ Belge bulunamadı (zaten silindi mi?).
+Acte introuvable (rien à remettre). ¦ Belge bulunamadı (geri getirilecek bir şey yok).
+Mode consultation : pas de partage. ¦ Görüntüleme modu: paylaşım yok.
+Un numéro de puce n’a que des chiffres (15 en général). ¦ Bir çip numarası yalnızca rakamlardan oluşur (genellikle 15).
+Rien à supprimer. ¦ Silinecek bir şey yok.
+Déjà supprimé. ¦ Zaten silindi.
+Trop de points d’un coup (5 000 au plus par envoi). ¦ Bir kerede çok fazla nokta (gönderim başına en fazla 5.000).
+Trop d’animaux d’un coup (5 000 au plus). ¦ Bir kerede çok fazla hayvan (en fazla 5.000).
+Fichier trop gros : trop de points GPS (500 000 au plus). ¦ Dosya çok büyük: çok fazla GPS noktası (en fazla 500.000).
+Fichier trop gros : trop de lignes. ¦ Dosya çok büyük: çok fazla satır.
+Écris le chemin complet du dossier partagé (par exemple /Volumes/MaCle ou ~/Dropbox). ¦ Paylaşılan klasörün tam yolunu yaz (örneğin /Volumes/MaCle ya da ~/Dropbox).
+Impossible de créer le rangement dans le dossier partagé. ¦ Paylaşılan klasörde saklama alanı oluşturulamadı.
+Impossible d’écrire la copie de départ. ¦ Başlangıç kopyası yazılamadı.
+Impossible d’écrire dans le dossier partagé. ¦ Paylaşılan klasöre yazılamadı.
+Choisis d’abord le dossier partagé. ¦ Önce paylaşılan klasörü seç.
+Aucun dossier partagé n’est choisi sur cet ordinateur. ¦ Bu bilgisayarda hiçbir paylaşılan klasör seçilmedi.
+Cette fusion est déjà annulée, ou introuvable. ¦ Bu birleştirme zaten geri alındı ya da bulunamadı.
+Paquet introuvable dans le dossier partagé. ¦ Paket paylaşılan klasörde bulunamadı.
+Ce conflit est déjà réglé. ¦ Bu çakışma zaten çözüldü.
+« Garder les deux » marche pour une note. ¦ “İkisini de sakla” bir not için çalışır.
+La fiche est verrouillée : déverrouille-la d’abord. ¦ Kart kilitli: önce kilidini aç.
+Ce conflit n’est pas réglé. ¦ Bu çakışma çözülmedi.
+Document trop lourd : partage-le en plusieurs documents. ¦ Belge çok ağır: onu birkaç belgeye böl.
+Document trop lourd (plus de 30 Mo) : range les images dans les médias, ou partage-le en plusieurs documents. ¦ Belge çok ağır (30 MB’tan fazla): görselleri medyaya koy ya da belgeyi birkaç belgeye böl.
+Ce document a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Bu belge, sen açtığından beri başka bir yerde (başka sekme ya da pencere) değiştirildi.
+Document introuvable : enregistre-le d’abord. ¦ Belge bulunamadı: önce kaydet.
+Fichier manquant ou trop lourd (plus de 30 Mo). ¦ Dosya eksik ya da çok ağır (30 MB’tan fazla).
+Donne un titre à la fiche. ¦ Karta bir başlık ver.
+Image de l’acte introuvable. ¦ Belgenin görseli bulunamadı.
+Zones ou personnes de l’acte illisibles : rien n’a été changé. ¦ Belgenin alanları ya da kişileri okunamıyor: hiçbir şey değiştirilmedi.
+Les Trésors ne sont pas encore prêts sur cette base. ¦ Hazineler bu veritabanında henüz hazır değil.
+Média ou fiche introuvable. ¦ Medya ya da kart bulunamadı.
+Dessin trop lourd (plus de 8 Mo) : retire des images importées. ¦ Çizim çok ağır (8 MB’tan fazla): içe aktarılmış bazı görselleri çıkar.
+Cadre de carte invalide. ¦ Geçersiz harita çerçevesi.
+Réponse de Wikipédia illisible. ¦ Wikipedia’dan okunamayan yanıt.
+Une page est trop lourde (plus de 2 Mo) : range les images dans les médias, ou partage-la en deux pages. ¦ Bir sayfa çok ağır (2 MB’tan fazla): görselleri medyaya koy ya da sayfayı ikiye böl.
+Les fichiers en plus sont trop lourds (8 Mo en tout au plus). ¦ Ek dosyalar çok ağır (toplamda en fazla 8 MB).
+La feuille de styles ou le script est trop lourd (600 ko au plus). ¦ Stil sayfası ya da betik çok ağır (en fazla 600 KB).
+Site trop lourd (plus de 20 Mo) : range les images dans les médias plutôt que dans les pages. ¦ Site çok ağır (20 MB’tan fazla): görselleri sayfalar yerine medyaya koy.
+Ce site a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Bu site, sen açtığından beri başka bir yerde (başka sekme ya da pencere) değiştirildi.
+Site introuvable : enregistre-le d’abord. ¦ Site bulunamadı: önce kaydet.
+PHP est introuvable pour exécuter la page (indique son chemin dans la variable GENEALOGY_PHP). ¦ Sayfayı çalıştırmak için PHP bulunamadı (yolunu GENEALOGY_PHP değişkenine yaz).
+Impossible de préparer le dossier d’exécution. ¦ Çalıştırma klasörü hazırlanamadı.
+PHP n’a pas pu être lancé pour exécuter la page. ¦ Sayfayı çalıştırmak için PHP başlatılamadı.
+Impossible de garder l’aperçu en direct. ¦ Canlı önizleme saklanamadı.
+Aperçu expiré. ¦ Önizlemenin süresi doldu.
+Impossible de garder les réglages de publication (dossier des données en lecture seule ?). ¦ Yayın ayarları saklanamadı (veri klasörü salt okunur mu?).
+Le service demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Hizmet beklemeni istiyor (çok fazla istek): bir dakika sonra yeniden dene.
+Le nom du serveur FTP n’est pas bon (exemple : ftp.mon-hebergeur.fr). ¦ FTP sunucusunun adı doğru değil (örnek: ftp.benim-barindirma.com).
+Dossier du site incorrect. ¦ Site klasörü yanlış.
+Donne le mot de passe FTP. ¦ FTP parolasını ver.
+Trop de fichiers pour une publication. ¦ Bir yayın için çok fazla dosya.
+Le site est trop lourd pour être publié d’un coup (plus de 50 Mo). ¦ Site tek seferde yayınlanamayacak kadar ağır (50 MB’tan fazla).
+Impossible de préparer le site. ¦ Site hazırlanamadı.
+Réponse de Netlify illisible. ¦ Netlify’dan okunamayan yanıt.
+Netlify n’a pas pu recevoir le site. ¦ Netlify siteyi alamadı.
+Réponse de GitHub illisible. ¦ GitHub’dan okunamayan yanıt.
+Le dépôt GitHub doit s’écrire « nom » ou « compte/nom ». ¦ GitHub deposu “ad” ya da “hesap/ad” biçiminde yazılmalı.
+Le FTP sécurisé n’est pas disponible avec ce PHP (curl sans FTPS). ¦ Güvenli FTP bu PHP ile kullanılamıyor (FTPS’siz curl).
+Donne d’abord le serveur, l’identifiant et le mot de passe FTP. ¦ Önce FTP sunucusunu, kullanıcı adını ve parolayı ver.
+Le serveur FTP ne répond pas : vérifie son nom et ta connexion. ¦ FTP sunucusu yanıt vermiyor: adını ve bağlantını kontrol et.
+Le serveur FTP refuse l’identifiant ou le mot de passe. ¦ FTP sunucusu kullanıcı adını ya da parolayı reddediyor.
+Le serveur FTP n’a pas de connexion chiffrée valable (TLS) : par sûreté, rien n’est envoyé en clair. ¦ FTP sunucusunun geçerli şifreli bağlantısı (TLS) yok: güvenlik için hiçbir şey şifresiz gönderilmez.
+Un identifiant Wikidata commence par Q suivi de chiffres (« Q7186 »). ¦ Bir Wikidata kimliği Q ile başlar ve rakamlarla devam eder (“Q7186”).
+Coche au moins une chose à ajouter. ¦ Eklenecek en az bir şeyi işaretle.
+Classeur trop grand : plus de 2 millions de cellules. ¦ Çalışma kitabı çok büyük: 2 milyondan fazla hücre.
+Classeur trop lourd (plus de 40 Mo) : partage-le en plusieurs classeurs. ¦ Çalışma kitabı çok ağır (40 MB’tan fazla): onu birkaç çalışma kitabına böl.
+Ce classeur a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Bu çalışma kitabı, sen açtığından beri başka bir pencerede değiştirildi.
+Base SQLite introuvable ou non autorisée. ¦ SQLite veritabanı bulunamadı ya da izin verilmedi.
+Impossible de créer le dossier de configuration. ¦ Yapılandırma klasörü oluşturulamadı.
+Impossible de supprimer la base active. ¦ Etkin veritabanı silinemedi.
+Réglages invalides. ¦ Geçersiz ayarlar.
+Un réglage est trop volumineux. ¦ Bir ayar çok büyük.
+Impossible d’enregistrer les défauts du site. ¦ Sitenin varsayılanları kaydedilemedi.
+Import ZIP impossible : l'extension PHP ZipArchive n'est pas disponible. ¦ ZIP içe aktarılamıyor: PHP ZipArchive eklentisi kullanılamıyor.
+Aucun fichier .csv ou .txt trouvé dans le ZIP ¦ ZIP içinde hiç .csv ya da .txt dosyası bulunamadı
+Lecture du fichier INSEE dans le ZIP impossible ¦ ZIP içindeki INSEE dosyası okunamadı
+Création du fichier temporaire impossible ¦ Geçici dosya oluşturulamadı
+Écriture du fichier temporaire impossible ¦ Geçici dosya yazılamadı
+Lecture du fichier impossible ¦ Dosya okunamadı
+Colonnes non reconnues : ce fichier ne ressemble pas au fichier des personnes décédées de l'INSEE (colonnes attendues, avec ou sans en-tête : nom, prenom (ou nomprenom combiné), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces). ¦ Sütunlar tanınmadı: bu dosya INSEE’nin ölen kişiler dosyasına benzemiyor (beklenen sütunlar, başlıklı ya da başlıksız: nom, prenom (ya da birleşik nomprenom), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces).
+Impossible d’enregistrer la liste des généalogies. ¦ Soy ağaçları listesi kaydedilemedi.
+Donne un nom à la nouvelle généalogie. ¦ Yeni soy ağacına bir ad ver.
+Impossible de créer le dossier de la généalogie. ¦ Soy ağacı klasörü oluşturulamadı.
+Généalogie introuvable. ¦ Soy ağacı bulunamadı.
+Le nom ne peut pas être vide. ¦ Ad boş olamaz.
+La généalogie principale ne peut pas être mise de côté. ¦ Ana soy ağacı bir kenara konamaz.
+Ouvre d’abord une autre généalogie. ¦ Önce başka bir soy ağacı aç.
+Impossible de créer le dossier des généalogies mises de côté. ¦ Bir kenara konan soy ağaçlarının klasörü oluşturulamadı.
+Impossible de déplacer le dossier de la généalogie. ¦ Soy ağacı klasörü taşınamadı.
+Seules les quinze dernières suppressions sont restaurables. ¦ Yalnızca son on beş silme geri getirilebilir.
+Cette suppression ne peut pas être restaurée proprement. ¦ Bu silme düzgün biçimde geri getirilemiyor.
+Type de restauration non pris en charge. ¦ Geri getirme türü desteklenmiyor.
+Événement introuvable dans le snapshot. ¦ Olay anlık görüntüde bulunamadı.
+Cet événement existe déjà. ¦ Bu olay zaten var.
+La personne liée à cet événement n’existe plus. ¦ Bu olaya bağlı kişi artık yok.
+La famille liée à cet événement n’existe plus. ¦ Bu olaya bağlı aile artık yok.
+Média introuvable dans le snapshot. ¦ Medya anlık görüntüde bulunamadı.
+Ce média existe déjà. ¦ Bu medya zaten var.
+Un rattachement du média n’existe plus. ¦ Medyanın bir bağı artık yok.
+Note introuvable dans le snapshot. ¦ Not anlık görüntüde bulunamadı.
+Cette note existe déjà. ¦ Bu not zaten var.
+Le rattachement de la note n’existe plus. ¦ Notun bağı artık yok.
+Source introuvable dans le snapshot. ¦ Kaynak anlık görüntüde bulunamadı.
+Un rattachement de la source n’existe plus. ¦ Kaynağın bir bağı artık yok.
+Cette source existe déjà. ¦ Bu kaynak zaten var.
+La source liée à cette citation n’existe plus. ¦ Bu alıntıya bağlı kaynak artık yok.
+Battue introuvable dans le snapshot. ¦ Tarama anlık görüntüde bulunamadı.
+Cette battue existe déjà. ¦ Bu tarama zaten var.
+La commune de départ n’existe plus. ¦ Başlangıç yerleşim yeri artık yok.
+Annotation de battue introuvable dans le snapshot. ¦ Tarama notu anlık görüntüde bulunamadı.
+Cette annotation existe déjà. ¦ Bu not zaten var.
+La battue liée à cette annotation n’existe plus. ¦ Bu nota bağlı tarama artık yok.
+Commune liée introuvable dans le snapshot. ¦ Bağlı yerleşim yeri anlık görüntüde bulunamadı.
+Cette commune liée existe déjà. ¦ Bu bağlı yerleşim yeri zaten var.
+La battue liée à cette commune n’existe plus. ¦ Bu yerleşim yerine bağlı tarama artık yok.
+Enquête introuvable dans le snapshot. ¦ İnceleme anlık görüntüde bulunamadı.
+Cette enquête existe déjà. ¦ Bu inceleme zaten var.
+La personne principale de l’enquête n’existe plus. ¦ İncelemenin ana kişisi artık yok.
+Piste introuvable dans le snapshot. ¦ İpucu anlık görüntüde bulunamadı.
+Cette piste existe déjà. ¦ Bu ipucu zaten var.
+L’enquête liée à cette piste n’existe plus. ¦ Bu ipucuna bağlı inceleme artık yok.
+Média d’enquête introuvable dans le snapshot. ¦ İnceleme medyası anlık görüntüde bulunamadı.
+Ce média d’enquête existe déjà. ¦ Bu inceleme medyası zaten var.
+L’enquête liée à ce média n’existe plus. ¦ Bu medyaya bağlı inceleme artık yok.
+Le média lié n’existe plus. ¦ Bağlı medya artık yok.
+Impossible de créer le fichier temporaire d’export. ¦ Geçici dışa aktarma dosyası oluşturulamadı.
+Fichier de base introuvable ¦ Veritabanı dosyası bulunamadı
+Impossible de créer le dossier des bases de test. ¦ Test veritabanları klasörü oluşturulamadı.
+Impossible de créer la copie temporaire de restauration. ¦ Geri getirme için geçici kopya oluşturulamadı.
+Média ou fichier manquant. ¦ Medya ya da dosya eksik.
+Le fichier choisi n’existe pas dans le dossier media. ¦ Seçilen dosya media klasöründe yok.
+Base ou sauvegarde de comparaison introuvable. ¦ Karşılaştırma veritabanı ya da yedeği bulunamadı.
+Source de comparaison manquante. ¦ Karşılaştırma kaynağı eksik.
+Impossible d'ouvrir le paquet .mftpkg (format inattendu) ¦ .mftpkg paketi açılamadı (beklenmedik biçim)
+Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet. ¦ Arşiv biçimi tanınmadı: pakette ne GEDCOM dosyası (.ged), ne MacFamilyTree veritabanı (“database”), ne de Hérédis dosyası (.heredis) var.
+Cette archive contient trop de fichiers : elle n’est pas ouverte. ¦ Bu arşiv çok fazla dosya içeriyor: açılmadı.
+Cette archive est trop grosse une fois ouverte pour la place libre de l’ordinateur. ¦ Bu arşiv açıldığında bilgisayardaki boş yer için çok büyük.
+Impossible de créer un dossier temporaire pour l'extraction ¦ Çıkarma için geçici klasör oluşturulamadı
+Base MacFamilyTree introuvable dans le paquet (fichier 'database' absent). ¦ Pakette MacFamilyTree veritabanı bulunamadı (“database” dosyası yok).
+Le nom du type est obligatoire ¦ Tür adı zorunlu
+Événement manquant ¦ Olay eksik
+Événement introuvable ¦ Olay bulunamadı
+Coordonnées manquantes ¦ Koordinatlar eksik
+Enquête introuvable ¦ İnceleme bulunamadı
+Indique le centre d’archives à visiter. ¦ Ziyaret edilecek arşiv merkezini belirt.
+URL générale du centre invalide. ¦ Merkezin genel URL’si geçersiz.
+URL d’information du centre invalide. ¦ Merkezin bilgi URL’si geçersiz.
+Dépouillement d’archive introuvable. ¦ Arşiv dökümü bulunamadı.
+Indique une cote à consulter. ¦ Bakılacak bir arşiv numarası belirt.
+Dépouillement introuvable ¦ Döküm bulunamadı
+Indique la lacune constatée. ¦ Saptanan boşluğu belirt.
+Indique l’acte ou le document à consulter. ¦ Bakılacak belgeyi ya da evrakı belirt.
+Ce média n’est pas lié au dépouillement. ¦ Bu medya dökümle bağlı değil.
+Indique le texte de la ligne. ¦ Satırın metnini belirt.
+Ajoute au moins une ligne avant de créer une version. ¦ Sürüm oluşturmadan önce en az bir satır ekle.
+Dépouillement manquant ¦ Döküm eksik
+Média ou dépouillement manquant ¦ Medya ya da döküm eksik
+Choisis une personne existante ¦ Var olan bir kişi seç
+Indique un prénom ou un nom pour créer la personne ¦ Kişiyi oluşturmak için bir ad ya da soyadı belirt
+Indique au moins un prénom ou un nom relevé ¦ Bulunan en az bir ad ya da soyadı belirt
+Personne relevée introuvable ¦ Kaydedilen kişi bulunamadı
+Action d’écriture inconnue ¦ Bilinmeyen yazma eylemi
+Nom d’étiquette obligatoire. ¦ Etiket adı zorunlu.
+Étiquette introuvable. ¦ Etiket bulunamadı.
+Cible d’étiquette invalide. ¦ Geçersiz etiket hedefi.
+Portée non prise en charge ¦ Kapsam desteklenmiyor
+Relation incomplète ¦ Eksik ilişki
+Une personne ne peut pas être liée à elle-même ¦ Bir kişi kendisine bağlanamaz
+Impossible : une personne et un animal ne peuvent pas être parents ou conjoints l’un de l’autre. ¦ İmkânsız: bir kişi ile bir hayvan birbirinin ebeveyni ya da eşi olamaz.
+Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant). ¦ İmkânsız: bu kişi diğerinin hem atası hem de torunu olur. Bağın yönünü kontrol et (ebeveyn ya da çocuk).
+Événement lié introuvable pour cette personne. ¦ Bu kişi için bağlı olay bulunamadı.
+Hypothèse introuvable ¦ Hipotez bulunamadı
+Année de recensement invalide ¦ Geçersiz nüfus sayımı yılı
+Personne liée introuvable ¦ Bağlı kişi bulunamadı
+Nom du membre obligatoire ¦ Üye adı zorunlu
+Cette personne est déjà le membre principal de ce foyer : modifie plutôt sa ligne. ¦ Bu kişi zaten bu hanenin ana üyesi: bunun yerine onun satırını düzenle.
+Le membre principal se modifie depuis le recensement, il ne se retire pas ici. ¦ Ana üye nüfus sayımından düzenlenir, burada çıkarılmaz.
+Type de rattachement invalide ¦ Geçersiz bağ türü
+Référence ou personne manquante ¦ Başvuru ya da kişi eksik
+Cet événement n’est pas lié à cette personne ¦ Bu olay bu kişiye bağlı değil
+Cette sépulture n’est pas liée à cette personne ¦ Bu mezar bu kişiye bağlı değil
+Choisis au moins un média ¦ En az bir medya seç
+Aucun nouveau média à lier ¦ Bağlanacak yeni medya yok
+Ce recensement n’est pas lié à cette personne ¦ Bu nüfus sayımı bu kişiye bağlı değil
+Entrée introuvable ¦ Kayıt bulunamadı
+Fusion impossible : on ne fusionne pas une personne avec un animal. ¦ Birleştirme imkânsız: bir kişi bir hayvanla birleştirilmez.
+Type Décès introuvable ¦ Ölüm türü bulunamadı
+Personne et titre de l’enquête obligatoires ¦ Kişi ve inceleme başlığı zorunlu
+Enquête manquante ¦ İnceleme eksik
+Un suivi de registre choisi n’existe plus. ¦ Seçilen bir kütük takibi artık yok.
+Lien de suivi invalide. ¦ Geçersiz takip bağlantısı.
+Enquête et intitulé obligatoires ¦ İnceleme ve başlık zorunlu
+Cette piste n’a pas de rappel. ¦ Bu ipucunun hatırlatıcısı yok.
+Date du rappel obligatoire. ¦ Hatırlatıcı tarihi zorunlu.
+Titre du rappel obligatoire. ¦ Hatırlatıcı başlığı zorunlu.
+Titre de budget obligatoire. ¦ Bütçe başlığı zorunlu.
+Ligne de budget introuvable. ¦ Bütçe satırı bulunamadı.
+Ligne de budget manquante. ¦ Bütçe satırı eksik.
+Le destinataire (mairie, archives, greffe…) est obligatoire. ¦ Alıcı (belediye, arşivler, mahkeme kalemi…) zorunlu.
+L’objet du courrier est obligatoire. ¦ Mektubun konusu zorunlu.
+La personne liée est introuvable. ¦ Bağlı kişi bulunamadı.
+Titre et commune de départ obligatoires. ¦ Başlık ve başlangıç yerleşim yeri zorunlu.
+Commune de départ introuvable dans les contours. ¦ Başlangıç yerleşim yeri sınırlarda bulunamadı.
+Commune liée manquante. ¦ Bağlı yerleşim yeri eksik.
+Commune liée introuvable. ¦ Bağlı yerleşim yeri bulunamadı.
+Commune liée invalide. ¦ Bağlı yerleşim yeri geçersiz.
+Dossier introuvable pour cette enquête. ¦ Bu inceleme için klasör bulunamadı.
+Média évalué introuvable ¦ Değerlendirilen medya bulunamadı
+Média d’enquête manquant. ¦ İnceleme medyası eksik.
+Média d’enquête introuvable. ¦ İnceleme medyası bulunamadı.
+Paramètres manquants ¦ Parametreler eksik
+Événement invalide. ¦ Geçersiz olay.
+Donne un nom au dossier ¦ Klasöre bir ad ver
+Choisis au moins un média à déplacer ¦ Taşınacak en az bir medya seç
+Dossier de destination invalide ¦ Geçersiz hedef klasör
+Statut invalide : choisis Vivant, Décédé ou Inconnu. ¦ Geçersiz durum: Yaşıyor, Ölü ya da Bilinmiyor seç.
+Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version). ¦ Bu kart, sen açtığından beri başka bir pencerede değiştirildi: değişiklikleri görmek için yeniden yükle (düzenlemelerin kaybolmadı: bu pencerede duruyor; yeniden yüklemeden önce onları kopyala ya da diğer sürümün yerine geçmek için “Yine de kaydet”i seç).
+Cette suppression est trop ancienne : elle ne contient pas de quoi restaurer la fiche. ¦ Bu silme çok eski: kartı geri getirmek için gerekenleri içermiyor.
+Cette fiche existe déjà. ¦ Bu kart zaten var.
+Personne introuvable : la fiche a peut-être été supprimée. ¦ Kişi bulunamadı: kart silinmiş olabilir.
+Cette image source n’est pas liée à la fiche. ¦ Bu kaynak görseli karta bağlı değil.
+Média de preuve introuvable ¦ Kanıt medyası bulunamadı
+Famille ou type d’événement manquant ¦ Aile ya da olay türü eksik
+Personne ou type d’événement manquant ¦ Kişi ya da olay türü eksik
+Type d’événement introuvable : choisis-en un dans la liste. ¦ Olay türü bulunamadı: listeden birini seç.
+Événement ou type manquant ¦ Olay ya da tür eksik
+Personne ou nom de la fiche manquant ¦ Kişi ya da kartın adı eksik
+Choisis l’événement à sourcer ¦ Kaynak eklenecek olayı seç
+Média manquant ¦ Medya eksik
+Rotation disponible uniquement pour les images. ¦ Döndürme yalnızca görseller için kullanılabilir.
+Rotation impossible : l’extension PHP GD n’est pas disponible. ¦ Döndürme yapılamıyor: PHP GD eklentisi kullanılamıyor.
+Format image non pris en charge pour la rotation. ¦ Görsel biçimi döndürme için desteklenmiyor.
+Impossible de lire l’image. ¦ Görsel okunamadı.
+Impossible d’enregistrer l’image tournée. ¦ Döndürülen görsel kaydedilemedi.
+Modèle HTR inconnu ¦ Bilinmeyen HTR modeli
+La reconnaissance manuscrite est disponible uniquement sur les images. ¦ El yazısı tanıma yalnızca görsellerde kullanılabilir.
+Image améliorée : écriture impossible. ¦ İyileştirilmiş görsel: yazılamadı.
+La reconnaissance d’écriture n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois). ¦ El yazısı tanıma henüz kurulmadı: Ayarlar → El yazısı tanıma (HTR) → “Kur” (yalnızca bir kez).
+Impossible de lancer le service HTR local. ¦ Yerel HTR hizmeti başlatılamadı.
+Cette image n’est pas rattachée à la personne ¦ Bu görsel kişiye bağlı değil
+Ordre des médias manquant ¦ Medya sırası eksik
+Type de média invalide. ¦ Geçersiz medya türü.
+Référence ou personne manquante. ¦ Referans ya da kişi eksik.
+Cet événement n’est pas lié à cette personne. ¦ Bu olay bu kişiye bağlı değil.
+Choisis au moins deux médias pour créer un document groupé. ¦ Gruplanmış bir belge oluşturmak için en az iki medya seç.
+Un des médias choisis n’est pas lié à cet élément. ¦ Seçilen medyalardan biri bu öğeye bağlı değil.
+Document groupé manquant. ¦ Gruplanmış belge eksik.
+Document groupé introuvable. ¦ Gruplanmış belge bulunamadı.
+Ordre des médias manquant. ¦ Medyaların sırası eksik.
+Nom de branche obligatoire. ¦ Kol adı zorunlu.
+Nom de vue obligatoire ¦ Görünüm adı zorunlu
+Le terme est requis ¦ Terim gerekli
+Sépulture introuvable ¦ Mezar bulunamadı
+Cette personne est déjà rattachée à une sépulture ¦ Bu kişi zaten bir mezara bağlı
+Sépulture manquante ¦ Mezar eksik
+Cette personne est déjà rattachée à une autre sépulture ¦ Bu kişi zaten başka bir mezara bağlı
+Cette personne est déjà associée à cette sépulture ¦ Bu kişi zaten bu mezara bağlı
+Référence manquante ¦ Referans eksik
+Cette personne n’est pas rattachée à cette sépulture ¦ Bu kişi bu mezara bağlı değil
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Son kişi çıkarılamaz: gerekirse mezarı sil
+Ce média n’est pas accessible depuis cette fiche ¦ Bu medyaya bu karttan ulaşılamıyor
+Ce rattachement existe déjà ¦ Bu bağ zaten var
+Données manquantes ¦ Veriler eksik
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Son bağ çıkarılamaz — tamamen kaldırmak istiyorsan medyayı sil
+Méthode refusée ¦ Yöntem reddedildi
+Personne, annotation de battue ou dépouillement manquant ¦ Kişi, tarama notu ya da döküm eksik
+Aucun fichier reçu ¦ Hiç dosya alınmadı
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ Ön/arka yüzlü bir kartpostal tam olarak iki görüntü içermeli: önce ön yüz, sonra arka yüz.
+Dossier d’enquête introuvable. ¦ İnceleme dosyası bulunamadı.
+Annotation de battue introuvable. ¦ Tarama notu bulunamadı.
+Choisis le type de l’événement à créer. ¦ Oluşturulacak olayın türünü seç.
+Ce recensement n’est pas rattaché à cette personne. ¦ Bu nüfus sayımı bu kişiye bağlı değil.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Hiç dosya alınmadı: yeniden seç.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ Ön/arka yüzlü bir kartpostal yalnızca iki görüntü içermeli.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Bu dosya zaten içe aktarılmış gibi görünüyor (“{file}”, tarih: {date}, {n} satır). Yine de içe aktarmak istiyorsan onayla.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Kart kilitli ({name}). Bu çifti düzenlemeden önce kilidini aç.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Birleştirme yapılamaz: {a} ve {b} bir çift. İki eş aynı kişi değildir.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Birleştirme yapılamaz: {a}, {b} kişisinin atası. Bir ata ve torunu aynı kişi değildir.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Bu parsel zaten listende (kart no. {n}): ikincisini oluşturmak yerine onu aç.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ Zaten {n} fotoğraf haritan var: yenisini oluşturmak için birini sil.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ Devam eden {n} yapboz saklanır: yenisine başlamak için birini bitir ya da sil.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ {n} grafik ve widget saklanır: yenisini oluşturmak için birini sil.
+Le champ « {label} » est obligatoire. ¦ “{label}” alanı zorunlu.
+Le champ « {label} » est à remplir. ¦ “{label}” alanı doldurulmalı.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ “{name}” bir dişi: baba olamaz.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ “{name}” bir erkek: anne olamaz.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Klasör bulunamadı: {dir} (USB bellek ya da disk çıkarıldı mı?). Yedekleme, geri gelir gelmez yapılacak.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Klasör bulunamadı: {dir} (USB bellek çıkarıldı mı?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Paylaşılan klasör bulunamadı: {dir} (USB bellek çıkarıldı mı?). Hiçbir şey kaybolmadı: değişikliklerin bir dahaki sefere gidecek.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Bu soy ağacı zaten “{name}” bilgisayarında açık. Önce orada kapat: aynı dosyaya yazan iki bilgisayar onu bozabilir.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Bu dosya türü medyaya konamaz (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Bu dosya türü medyaya konamaz (uzantısız).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Dosyanın içeriği uzantısıyla uyuşmuyor (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Bu yedeği açmak için diskte yeterli yer yok (yaklaşık {n} MB boş yer gerekir).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Tam yedeği hazırlamak için diskte yeterli yer yok (yaklaşık {n} MB boş yer gerekir).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ Bu dosyada zaten {n} satır var: başka bir tane aç.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Yüz {n} için kişinin kartını seç (ya da “Sonra”).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Şu tanıklık için ilgili kişiyi seç: “{q}”.
+La page {n} existe déjà. ¦ Sayfa {n} zaten var.
+Cette date est avant sa naissance ({date}) ¦ Bu tarih doğumundan önce ({date})
+Cette date est après son décès ({date}) ¦ Bu tarih ölümünden sonra ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ Tam doğum tarihi bilinmiyor: {name}.
+Commune inconnue. ¦ Bilinmeyen yerleşim yeri.
+Adresse inconnue. ¦ Bilinmeyen adres.
+Position impossible. ¦ Olanaksız konum.
+Service d’archives introuvable. ¦ Arşiv kurumu bulunamadı.
+Adresse e-mail invalide. ¦ Geçersiz e-posta adresi.
+Cette fiche n’existe plus. ¦ Bu kart artık yok.
+Fiche introuvable. ¦ Kart bulunamadı.
+Fiche introuvable ¦ Kart bulunamadı
+Profil inconnu. ¦ Bilinmeyen profil.
+Sorte inconnue. ¦ Bilinmeyen tür.
+Sorte introuvable. ¦ Tür bulunamadı.
+Demande Discogs inconnue. ¦ Bilinmeyen Discogs isteği.
+Demande MusicBrainz inconnue. ¦ Bilinmeyen MusicBrainz isteği.
+Demande Open Library inconnue. ¦ Bilinmeyen Open Library isteği.
+Demande Wikidata inconnue. ¦ Bilinmeyen Wikidata isteği.
+Demande TMDb inconnue. ¦ Bilinmeyen TMDb isteği.
+Demande iTunes inconnue. ¦ Bilinmeyen iTunes isteği.
+Source d’import inconnue. ¦ Bilinmeyen içe aktarma kaynağı.
+Impossible d’enregistrer l’image. ¦ Görüntü kaydedilemedi.
+Image illisible. ¦ Görüntü okunamıyor.
+Image trop lourde (15 Mo au plus). ¦ Görüntü çok büyük (en fazla 15 MB).
+Projet introuvable. ¦ Proje bulunamadı.
+Dossier introuvable. ¦ Klasör bulunamadı.
+Dossier introuvable ¦ Klasör bulunamadı
+Fichier trop gros. ¦ Dosya çok büyük.
+Fichier Zotero RDF illisible. ¦ Zotero RDF dosyası okunamıyor.
+Fichier JSON illisible. ¦ JSON dosyası okunamıyor.
+Fichier EndNote XML illisible. ¦ EndNote XML dosyası okunamıyor.
+Son introuvable. ¦ Ses bulunamadı.
+Zones illisibles. ¦ Bölgeler okunamıyor.
+Transcription illisible. ¦ Transkripsiyon okunamıyor.
+Transcription trop longue (5 000 lignes au plus). ¦ Transkripsiyon çok uzun (en fazla 5 000 satır).
+Cette base ne contient aucune personne. ¦ Bu veritabanında hiç kişi yok.
+Impossible d’ouvrir l’archive. ¦ Arşiv açılamadı.
+Aucune base (.db) dans cette archive. ¦ Bu arşivde veritabanı (.db) yok.
+Fichier introuvable ou illisible. ¦ Dosya bulunamadı ya da okunamıyor.
+Fiche trop volumineuse. ¦ Kart çok büyük.
+Tableau introuvable. ¦ Pano bulunamadı.
+Tableau trop lourd : retire quelques dessins. ¦ Pano çok ağır: birkaç çizimi çıkar.
+Tableau parent introuvable. ¦ Üst pano bulunamadı.
+Parcelle introuvable. ¦ Parsel bulunamadı.
+Lieu introuvable. ¦ Yer bulunamadı.
+Couche illisible. ¦ Katman okunamıyor.
+Couche trop lourde (8 Mo au plus). ¦ Katman çok büyük (en fazla 8 MB).
+Couche introuvable. ¦ Katman bulunamadı.
+Carte illisible. ¦ Harita okunamıyor.
+Fichier d’essai introuvable. ¦ Deneme dosyası bulunamadı.
+Copie impossible. ¦ Kopyalama yapılamadı.
+Fichier illisible. ¦ Dosya okunamıyor.
+Citation introuvable. ¦ Alıntı bulunamadı.
+Citation introuvable ¦ Alıntı bulunamadı
+Objet introuvable ¦ Nesne bulunamadı
+Objet introuvable. ¦ Nesne bulunamadı.
+Souvenir introuvable ¦ Hatıra bulunamadı
+Type inconnu ¦ Bilinmeyen tür
+Adresse invalide ¦ Geçersiz adres
+Salon introuvable ¦ Fuar bulunamadı
+Alerte inconnue. ¦ Bilinmeyen uyarı.
+Texte illisible. ¦ Metin okunamıyor.
+Date d’envoi incorrecte. ¦ Gönderim tarihi hatalı.
+Courrier introuvable. ¦ Mektup bulunamadı.
+Cousinade introuvable. ¦ Aile buluşması bulunamadı.
+Champ inconnu. ¦ Bilinmeyen alan.
+Champ inconnu ¦ Bilinmeyen alan
+Valeur hors limites. ¦ Değer sınırların dışında.
+Liste inconnue. ¦ Bilinmeyen liste.
+Widget inconnu. ¦ Bilinmeyen widget.
+Ensemble inconnu. ¦ Bilinmeyen küme.
+Choisis au moins 2 ensembles. ¦ En az 2 küme seç.
+Choisis au moins deux personnes. ¦ En az iki kişi seç.
+Choisis deux personnes. ¦ İki kişi seç.
+Diagramme introuvable. ¦ Diyagram bulunamadı.
+Foyer inconnu. ¦ Bilinmeyen hane.
+Test introuvable. ¦ Test bulunamadı.
+Correspondance introuvable. ¦ Eşleşme bulunamadı.
+Groupe introuvable. ¦ Grup bulunamadı.
+Format d’export inconnu. ¦ Bilinmeyen dışa aktarma biçimi.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Dışa aktarma yapılamaz: bu bilgisayarda PHP ZipArchive eklentisi eksik.
+Fichier temporaire impossible. ¦ Geçici dosya oluşturulamadı.
+Employeur sans nom. ¦ Adı olmayan işveren.
+Photo introuvable. ¦ Fotoğraf bulunamadı.
+Visage introuvable. ¦ Yüz bulunamadı.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ ePub yapılamaz: PHP ZipArchive eklentisi eksik.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Belge yapılamaz: PHP ZipArchive eklentisi eksik.
+Livret introuvable. ¦ Kitapçık bulunamadı.
+Graphique inconnu (identifiant invalide). ¦ Bilinmeyen grafik (geçersiz kimlik).
+Graphique illisible. ¦ Grafik okunamıyor.
+Graphique illisible (champ inconnu). ¦ Grafik okunamıyor (bilinmeyen alan).
+Graphique illisible (parties). ¦ Grafik okunamıyor (bölümler).
+Graphique introuvable. ¦ Grafik bulunamadı.
+Lien impossible ¦ Bağ kurulamaz
+Voyage introuvable ¦ Yolculuk bulunamadı
+Placement introuvable ¦ Yerleştirme bulunamadı
+Armoiries introuvables ¦ Arma bulunamadı
+Circuit introuvable ¦ Gezi bulunamadı
+Ligne introuvable ¦ Satır bulunamadı
+Ligne introuvable. ¦ Satır bulunamadı.
+Circuit manquant ¦ Gezi eksik
+Aucun fichier CSV dans ce ZIP. ¦ Bu ZIP içinde CSV dosyası yok.
+Aucune ligne utilisable dans ce fichier. ¦ Bu dosyada kullanılabilir satır yok.
+Acte ou document manquant ¦ Belge (kayıt) ya da doküman eksik
+Chiffrement impossible. ¦ Şifreleme yapılamadı.
+Copie introuvable ¦ Kopya bulunamadı
+Copie introuvable. ¦ Kopya bulunamadı.
+Harmonisation introuvable. ¦ Uyumlaştırma bulunamadı.
+Bloc introuvable ¦ Blok bulunamadı
+Nom manquant. ¦ Ad eksik.
+Enregistrement impossible. ¦ Kaydedilemedi.
+Source inconnue. ¦ Bilinmeyen kaynak.
+Pack inconnu. ¦ Bilinmeyen paket.
+Pack trop gros (150 Mo au plus). ¦ Paket çok büyük (en fazla 150 MB).
+GLB illisible. ¦ GLB okunamıyor.
+OBJ illisible. ¦ OBJ okunamıyor.
+Maison introuvable. ¦ Ev bulunamadı.
+Recensement introuvable. ¦ Nüfus sayımı bulunamadı.
+Recensement introuvable ¦ Nüfus sayımı bulunamadı
+Fichier 3D trop gros (30 Mo au plus). ¦ 3B dosyası çok büyük (en fazla 30 MB).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Kurulum programı bulunamadı (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Bilinmeyen kurulum isteği.
+Lecture inconnue. ¦ Bilinmeyen okuma.
+Lecture inconnue (ou trop ancienne). ¦ Bilinmeyen okuma (ya da çok eski).
+Preuve introuvable. ¦ Kanıt bulunamadı.
+Preuve introuvable ¦ Kanıt bulunamadı
+Empreinte d’image incorrecte. ¦ Görüntü parmak izi hatalı.
+Empreinte d’image incorrecte (couleurs). ¦ Görüntü parmak izi hatalı (renkler).
+Empreinte d’image incorrecte (points). ¦ Görüntü parmak izi hatalı (noktalar).
+Fusion impossible ici. ¦ Burada birleştirme yapılamaz.
+Fusion inconnue. ¦ Bilinmeyen birleştirme.
+Fusion introuvable. ¦ Birleştirme bulunamadı.
+Fusion impossible ¦ Birleştirme yapılamaz
+Annulation impossible ici. ¦ Burada geri alınamaz.
+Fichier RootsMagic introuvable. ¦ RootsMagic dosyası bulunamadı.
+Aucune personne dans ce fichier GEDCOM-X. ¦ Bu GEDCOM-X dosyasında hiç kişi yok.
+Annulation impossible : import inconnu. ¦ Geri alınamaz: bilinmeyen içe aktarma.
+Fichier trop gros (20 Mo au plus). ¦ Dosya çok büyük (en fazla 20 MB).
+Aucun point dans ce GeoJSON. ¦ Bu GeoJSON içinde nokta yok.
+Document introuvable. ¦ Belge bulunamadı.
+Document illisible. ¦ Belge okunamıyor.
+Cette action s’envoie en POST. ¦ Bu işlem POST ile gönderilir.
+Lot inconnu. ¦ Bilinmeyen toplu işlem.
+Fichier vide. ¦ Dosya boş.
+Fichier vide ¦ Dosya boş
+Sortie inconnue. ¦ Bilinmeyen çıktı.
+Analyse introuvable. ¦ Analiz bulunamadı.
+Altitude impossible : entre −450 et 8 900 m. ¦ Olanaksız yükseklik: −450 ile 8 900 m arasında olmalı.
+Envoi inconnu. ¦ Bilinmeyen gönderim.
+Projet illisible. ¦ Proje okunamıyor.
+Rush illisible. ¦ Klip okunamıyor.
+Projet trop lourd (4 Mo au plus). ¦ Proje çok büyük (en fazla 4 MB).
+Salle introuvable. ¦ Salon bulunamadı.
+Fichier trop lourd. ¦ Dosya çok büyük.
+Salle ou œuvre introuvable. ¦ Salon ya da eser bulunamadı.
+Import impossible : l’extension PHP zip manque. ¦ İçe aktarma yapılamaz: PHP zip eklentisi eksik.
+Liste introuvable. ¦ Liste bulunamadı.
+Ligne invalide. ¦ Geçersiz satır.
+Cette liste n’existe plus. ¦ Bu liste artık yok.
+Personne manquante. ¦ Kişi eksik.
+Personne manquante ¦ Kişi eksik
+Adresse Internet invalide ¦ Geçersiz internet adresi
+Adresse Internet invalide. ¦ Geçersiz internet adresi.
+Statut inconnu. ¦ Bilinmeyen durum.
+Revue introuvable. ¦ Dergi bulunamadı.
+Article introuvable. ¦ Makale bulunamadı.
+Quoi supprimer ? ¦ Neyi sileyim?
+Annonce introuvable. ¦ İlan bulunamadı.
+Animal introuvable. ¦ Hayvan bulunamadı.
+Demande introuvable. ¦ İstek bulunamadı.
+Visage incorrect. ¦ Hatalı yüz.
+Choix incorrect. ¦ Hatalı seçim.
+Comparaison introuvable. ¦ Karşılaştırma bulunamadı.
+Image introuvable. ¦ Görüntü bulunamadı.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Enlem -90 ile 90, boylam -180 ile 180 arasında olmalı.
+Cette demande d’entraide n’existe plus. ¦ Bu yardım isteği artık yok.
+Cette annonce n’existe plus. ¦ Bu ilan artık yok.
+Carte postale introuvable. ¦ Kartpostal bulunamadı.
+Choix inconnu. ¦ Bilinmeyen seçim.
+Niveau inconnu. ¦ Bilinmeyen seviye.
+Seuls tes propres profils se modifient ici. ¦ Burada yalnızca kendi profillerin düzenlenebilir.
+Seuls tes propres profils se suppriment. ¦ Yalnızca kendi profillerin silinebilir.
+Profil introuvable. ¦ Profil bulunamadı.
+Questionnaire introuvable. ¦ Anket bulunamadı.
+Question incorrecte. ¦ Hatalı soru.
+Choix incorrects. ¦ Hatalı seçimler.
+Question introuvable. ¦ Soru bulunamadı.
+Recueil introuvable. ¦ Derleme bulunamadı.
+Aucune photo. ¦ Hiç fotoğraf yok.
+Page introuvable. ¦ Sayfa bulunamadı.
+Rattachement inconnu. ¦ Bilinmeyen bağ.
+Bloc inconnu. ¦ Bilinmeyen blok.
+Village introuvable. ¦ Köy bulunamadı.
+Pays non disponible. ¦ Ülke kullanılamıyor.
+Branche introuvable ¦ Kol bulunamadı
+Branche introuvable. ¦ Kol bulunamadı.
+Import indisponible. ¦ İçe aktarma kullanılamıyor.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ DOI tanınmadı: “10.” ile başlar (örn. 10.1038/251123a0) ya da https://doi.org/… adresini yapıştır
+Source inconnue (DOI, ORCID ou HAL). ¦ Bilinmeyen kaynak (DOI, ORCID ya da HAL).
+Ligne inconnue. ¦ Bilinmeyen satır.
+Report inconnu. ¦ Bilinmeyen erteleme.
+Rappel introuvable. ¦ Hatırlatma bulunamadı.
+Piste introuvable. ¦ İpucu bulunamadı.
+Statistique inconnue. ¦ Bilinmeyen istatistik.
+Ligne illisible. ¦ Satır okunamıyor.
+Diaporama introuvable. ¦ Slayt gösterisi bulunamadı.
+Diaporama trop lourd. ¦ Slayt gösterisi çok büyük.
+Foyer SocFace introuvable. ¦ SocFace hanesi bulunamadı.
+Ligne SocFace introuvable. ¦ SocFace satırı bulunamadı.
+Sorte d’import inconnue. ¦ Bilinmeyen içe aktarma türü.
+Import inconnu. ¦ Bilinmeyen içe aktarma.
+Ce lieu n’existe plus. ¦ Bu yer artık yok.
+L’original garde son nom. ¦ Asıl dosya adını korur.
+Bien inconnu. ¦ Bilinmeyen mülk.
+Acte introuvable. ¦ Belge (kayıt) bulunamadı.
+Site introuvable. ¦ Alan bulunamadı.
+Marque introuvable. ¦ İşaret bulunamadı.
+Observation introuvable. ¦ Gözlem bulunamadı.
+Comptage introuvable. ¦ Sayım bulunamadı.
+Appartenance introuvable. ¦ Üyelik bulunamadı.
+Import introuvable. ¦ İçe aktarma bulunamadı.
+Import introuvable ¦ İçe aktarma bulunamadı
+Fichier trop gros : trop d’observations. ¦ Dosya çok büyük: çok fazla gözlem var.
+Conflit illisible. ¦ Çakışma okunamıyor.
+Document illisible : il manque son texte. ¦ Belge okunamıyor: metni eksik.
+Partie illisible. ¦ Bölüm okunamıyor.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Belge çok büyük: sekmelerini birkaç belgeye böl.
+Version trop lourde. ¦ Sürüm çok büyük.
+Transcription introuvable. ¦ Transkripsiyon bulunamadı.
+Dessin introuvable. ¦ Çizim bulunamadı.
+Commune introuvable. ¦ Yerleşim yeri bulunamadı.
+Site illisible : il manque ses pages. ¦ Site okunamıyor: sayfaları eksik.
+Page illisible. ¦ Sayfa okunamıyor.
+Service inconnu. ¦ Bilinmeyen hizmet.
+Adresse non permise. ¦ İzin verilmeyen adres.
+Publication impossible : l’extension PHP curl manque. ¦ Yayımlanamaz: PHP curl eklentisi eksik.
+Donne l’identifiant FTP. ¦ FTP kullanıcı adını gir.
+Colle d’abord ton jeton Netlify. ¦ Önce Netlify jetonunu yapıştır.
+Colle d’abord ton jeton GitHub. ¦ Önce GitHub jetonunu yapıştır.
+Identifiant Wikidata incorrect. ¦ Hatalı Wikidata kimliği.
+Classeur illisible : il manque ses feuilles. ¦ Çalışma kitabı okunamıyor: sayfaları eksik.
+Feuille illisible. ¦ Sayfa okunamıyor.
+Classeur introuvable. ¦ Çalışma kitabı bulunamadı.
+Import manquant ¦ İçe aktarma eksik
+Archive ZIP illisible ¦ ZIP arşivi okunamıyor
+Modification introuvable. ¦ Değişiklik bulunamadı.
+Sauvegarde introuvable. ¦ Yedek bulunamadı.
+Lecture impossible ¦ Okunamadı
+JSON invalide ou non-objet ¦ Geçersiz ya da nesne olmayan JSON
+Impossible d'ouvrir l'archive (format inattendu) ¦ Arşiv açılamadı (beklenmeyen biçim)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ GedZip arşivi açılamadı (beklenmeyen biçim)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ Arşivde GEDCOM dosyası (.ged) bulunamadı.
+Type introuvable ¦ Tür bulunamadı
+Identifiant manquant ¦ Kimlik eksik
+Battue introuvable ¦ Tarama bulunamadı
+Battue introuvable. ¦ Tarama bulunamadı.
+Lacune introuvable. ¦ Boşluk bulunamadı.
+Lien direct vers l’archive invalide. ¦ Arşive doğrudan bağlantı geçersiz.
+Mention familiale invalide ¦ Geçersiz aile notu
+Titre obligatoire ¦ Başlık zorunlu
+Recensement manquant ¦ Nüfus sayımı eksik
+Membre manquant ¦ Üye eksik
+Membre introuvable ¦ Üye bulunamadı
+Dossier militaire invalide ¦ Geçersiz askerlik dosyası
+Recensement ou personne manquante ¦ Nüfus sayımı ya da kişi eksik
+Journal introuvable ¦ Günlük bulunamadı
+Confirmation requise ¦ Onay gerekli
+Piste manquante. ¦ İpucu eksik.
+Rappel manquant. ¦ Hatırlatma eksik.
+Courrier manquant. ¦ Mektup eksik.
+Contact introuvable. ¦ Kişi (iletişim) bulunamadı.
+Contact manquant. ¦ Kişi (iletişim) eksik.
+Battue manquante. ¦ Tarama eksik.
+Battue, commune et nom obligatoires. ¦ Tarama, yerleşim yeri ve ad zorunlu.
+Battue et commune obligatoires. ¦ Tarama ve yerleşim yeri zorunlu.
+Annotation manquante. ¦ Not eksik.
+Annotation introuvable. ¦ Not bulunamadı.
+Dossier parent invalide ¦ Geçersiz üst klasör
+Dossier manquant ¦ Klasör eksik
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Geçersiz cinsiyet: Erkek, Kadın, İkili olmayan ya da Bilinmiyor seç.
+Variante manquante ¦ Varyant eksik
+Variante introuvable ¦ Varyant bulunamadı
+Famille introuvable ¦ Aile bulunamadı
+Fiche en ligne introuvable ¦ Çevrimiçi kart bulunamadı
+Fiche en ligne manquante ¦ Çevrimiçi kart eksik
+Personne ou contenu manquant ¦ Kişi ya da içerik eksik
+Note ou contenu manquant ¦ Not ya da içerik eksik
+Note introuvable ¦ Not bulunamadı
+Note manquante ¦ Not eksik
+Personne et titre obligatoires ¦ Kişi ve başlık zorunlu
+Source et titre obligatoires ¦ Kaynak ve başlık zorunlu
+Source introuvable ¦ Kaynak bulunamadı
+Source manquante ¦ Kaynak eksik
+Rotation impossible. ¦ Döndürme yapılamadı.
+Script HTR local introuvable. ¦ Yerel HTR betiği bulunamadı.
+Fiche individuelle invalide. ¦ Geçersiz bireysel kart.
+Alerte manquante ¦ Uyarı eksik
+Patronyme et groupe obligatoires ¦ Soyadı ve grup zorunlu
+Personne racine introuvable. ¦ Kök kişi bulunamadı.
+Vue introuvable ¦ Görünüm bulunamadı
+Cible manquante ¦ Hedef eksik
+Identification manquante ¦ Tanımlama eksik
+Identification introuvable ¦ Tanımlama bulunamadı
+Objet ou souvenir manquant ¦ Nesne ya da hatıra eksik
+À faire le {date} ¦ Yapılacak tarih: {date}
+Avant le {date} ¦ Son tarih: {date}
+Après le {date} ¦ Şu tarihten sonra: {date}
+Rappel libre ¦ Serbest hatırlatma
+Enquête « {title} » ¦ İnceleme “{title}”
+Pas encore envoyé ¦ Henüz gönderilmedi
+Envoyé aujourd’hui ¦ Bugün gönderildi
+Réponse attendue depuis {n} jours ¦ {n} gündür yanıt bekleniyor
+Réponse attendue depuis {n} jour ¦ {n} gündür yanıt bekleniyor
+relance prévue le {date} : à relancer ¦ hatırlatma tarihi {date}: yeniden yaz
+relance le {date} ¦ hatırlatma: {date}
+Visite ¦ Ziyaret
+Prévue le {date} : note-la comme faite ¦ Planlanan tarih {date}: yapıldı olarak işaretle
+Le {date} ¦ Tarih: {date}
+{n} cotes à consulter ¦ Bakılacak {n} arşiv numarası
+{n} cote à consulter ¦ Bakılacak {n} arşiv numarası
+Piste ¦ İpucu
+À explorer ¦ Araştırılacak
+Hypothèse : {title} ¦ Varsayım: {title}
+Hypothèse : sans titre ¦ Varsayım: başlıksız
+confiance faible ¦ düşük güven
+confiance moyenne ¦ orta güven
+confiance forte ¦ yüksek güven
+Vu ¦ Görüldü
+Recensement de {y} à {place} : chercher sur SocFace ¦ {y} yılı nüfus sayımı ({place}): SocFace’te ara
+Recensement de {y} : chercher sur SocFace ¦ {y} yılı nüfus sayımı: SocFace’te ara
+Cherché sur SocFace ¦ SocFace’te arandı
+{act} : {name}, chercher à {place} ¦ {act}: {name}, arama yeri: {place}
+{act} : {name} ¦ {act}: {name}
+acte|Parents ¦ Anne baba
+acte|Contrat de mariage ¦ Evlilik sözleşmesi
+acte|Succession ¦ Miras
+acte|Registre matricule ¦ Askerlik kütüğü
+Foyer de {name} ¦ Hane — {name}
+{n} personnes ¦ {n} kişi
+{n} personne ¦ {n} kişi
+Demande d’entraide ¦ Yardım isteği
+Une réponse t’attend ¦ Seni bir yanıt bekliyor
+Brouillon à publier ¦ Yayımlanacak taslak
+Publiée il y a {n} jours ¦ {n} gün önce yayımlandı
+Publiée il y a {n} jour ¦ {n} gün önce yayımlandı
+Rappel fait ¦ Hatırlatma yapıldı
+Demande résolue ¦ İstek çözüldü
+Piste explorée ¦ İpucu araştırıldı
+Hypothèse revue ¦ Varsayım gözden geçirildi
+Recherche faite ¦ Araştırma yapıldı
+Alerte revue ¦ Uyarı gözden geçirildi
+Piste du mur faite ¦ Tuğla duvar ipucu tamamlandı
+Lien vérifié ¦ Bağ doğrulandı
+🛡 Lien à consolider ¦ 🛡 Güçlendirilecek bağ
+Lien à consolider : {child}, le fils de {parent} ¦ Güçlendirilecek bağ: {child} ({parent} kişisinin oğlu)
+Lien à consolider : {child}, la fille de {parent} ¦ Güçlendirilecek bağ: {child} ({parent} kişisinin kızı)
+Lien à consolider : {child}, l’enfant de {parent} ¦ Güçlendirilecek bağ: {child} ({parent} kişisinin çocuğu)
+cherche l’acte de naissance ou de baptême qui le nomme ¦ onu adıyla anan doğum ya da vaftiz belgesini ara

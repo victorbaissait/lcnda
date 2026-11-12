@@ -1,0 +1,1565 @@
+fr ¦ tr
+Espace de travail « {name} » appliqué. ¦ Çalışma alanı uygulandı: “{name}”.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Ayarlar içe aktarıldı: “{name}”. Kullanmak için “Uygula”ya bas.
+{layer} (avant / après) ¦ {layer} (önce / sonra)
+Avant / après — {name} ¦ Önce / sonra — {name}
+Modèle des visages : {what} ¦ Yüz modeli: {what}
+Portrait de {name} (photo d’identité) ¦ Portre: {name} (vesikalık fotoğraf)
+Portrait (photo d’identité) ¦ Portre (vesikalık fotoğraf)
+Fiche {num} ¦ Kart {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ Yüz bulunamadı: “{name}”. Ortadan kırpıldı, kontrol et (ya da yüzü görüntüleyicide tanımla)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portre hazır: uymayanların işaretini kaldır, sonra “Portre olarak kullan”a bas.|{n} portre hazır: uymayanların işaretini kaldır, sonra “Portre olarak kullan”a bas.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portre hazır: uymuyorsa işaretini kaldır, sonra “Portre olarak kullan”a bas.|{n} portre hazır: uymayanların işaretini kaldır, sonra “Portre olarak kullan”a bas.
+Aucun visage trouvé tout seul. ¦ Kendiliğinden hiç yüz bulunamadı.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} tane daha ortadan kırpıldı: yalnızca uyuyorsa işaretle.|{n} tane daha ortadan kırpıldı: yalnızca uyanları işaretle.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} tane daha ortadan kırpıldı: yalnızca uyuyorsa işaretle.|{n} tane daha ortadan kırpıldı: yalnızca uyanları işaretle.
+Calque {num} ¦ Katman {num}
+Groupe {num} ¦ Grup {num}
+calque|Réglages ¦ Ayarlar
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Kırpma maskesi: yalnızca hemen altındakini etkiler: “{name}” (Photoshop’ta iki katman arasında ⌥ Alt + tıklama)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Kırpma maskesi: yalnızca hemen altındaki öğeyi etkiler (Photoshop’ta iki katman arasında ⌥ Alt + tıklama)
+seulement sur « {name} » ¦ yalnızca şunun üzerinde: “{name}”
+seulement sur ce qui est juste dessous ¦ yalnızca hemen altındakinin üzerinde
+touche tout ce qui est dessous dans « {name} » ¦ altındaki her şeyi etkiler: “{name}”
+réglages, {n} corrections ¦ ayarlar, {n} düzeltme
+réglages, {n} correction ¦ ayarlar, {n} düzeltme
+« {name} » mis dans un groupe ¦ Gruba alındı: “{name}”
+{layer} montré ¦ Gösterildi: {layer}
+{layer} masqué ¦ Gizlendi: {layer}
+Masque qui cache la sélection ajouté à {name} ¦ Seçimi gizleyen maske eklendi: {name}
+Masque qui cache tout ajouté à {name} ¦ Her şeyi gizleyen maske eklendi: {name}
+Masque ajouté à {name} ¦ Maske eklendi: {name}
+Masque de {name} désactivé ¦ Maske kapatıldı: {name}
+Masque de {name} réactivé ¦ Maske yeniden açıldı: {name}
+Masque de {name} inversé ¦ Maske ters çevrildi: {name}
+Masque de {name} retiré ¦ Maske çıkarıldı: {name}
+« {name} » à sa taille d’origine ¦ Özgün boyutuna döndü: “{name}”
+✨ Filtre sur « {name} » ¦ ✨ Filtre: “{name}”
+« {name} » pixellisé ¦ Piksele dönüştürüldü: “{name}”
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ Piksele dönüştürüldü: “{name}”. Şimdiki boyutunda sabitlendi (büyütmek onu bulanıklaştırır)
+Groupe « {name} » supprimé (son contenu reste) ¦ Grup silindi: “{name}” (içeriği kalıyor)
+{layer} supprimé ¦ Silindi: {layer}
+« {name} » retiré des calques ¦ Katmanlardan çıkarıldı: “{name}”
+Calque « {name} » supprimé avec ce qui est dessus ¦ Katman, üzerindekilerle birlikte silindi: “{name}”
+{layer} dupliquée ¦ Çoğaltıldı: {layer}
+{layer} dupliqué ¦ Çoğaltıldı: {layer}
+{layer} vidé ¦ Boşaltıldı: {layer}
+{layer} déplacé ¦ Taşındı: {layer}
+Opacité de {name} : {n} % ¦ Opaklık: {name}: %{n}
+Fond de {name} : {n} % ¦ Dolgu: {name}: %{n}
+Renommé « {name} » ¦ Yeni ad: “{name}”
+Fusion de {name} : {what} ¦ Birleştirme: {name}: {what}
+« {name} » rangé dans « {group} » ¦ “{name}” → “{group}” grubuna alındı
+« {name} » sorti du groupe ¦ Gruptan çıkarıldı: “{name}”
+« {name} » rangé tout en bas ¦ En alta taşındı: “{name}”
+« {name} » rangé au-dessus de « {other} » ¦ “{name}”, “{other}” katmanının üstüne taşındı
+« {name} » rangé sous « {other} » ¦ “{name}”, “{other}” katmanının altına taşındı
+🎚 Calque de réglage {name} ¦ 🎚 Ayar katmanı: {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 <b>Fotoğraf</b> ayarları
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Maskede ⬜ fırça gösterir (gizleneni geri getirir) — değiştirmek için X
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Maskede ⬛ fırça gizler — değiştirmek için X
+Texte choisi : « {text} » ¦ Seçilen metin: “{text}”
+Glyphe {what} ajouté ¦ Glif eklendi: {what}
+« {what} » copié : colle-le dans un texte (⌘V). ¦ Kopyalandı: “{what}”. Bir metne yapıştır (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ katman: “{name}” (yalnızca alttaki öğe)
+calque « {name} » ¦ katman: “{name}”
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Aralık: {a}° / {b}° — {c}° \ {d}° (işaretleri sürükle)
+Propriétés de « {name} » ¦ Özellikler: “{name}”
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Ton/Doygunluk: “{name}”
+Motif « {what} » : calque « {name} » ¦ Desen “{what}”: katman “{name}”
+Motif de « {name} » ¦ Desen: “{name}”
+Motif « {what} » sur « {name} » ¦ Desen “{what}” → “{name}”
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Desen kitaplıktan çıkarıldı: “{what}” (onu kullanan katmanlar korur)
+le calque « {name} » ¦ katman: “{name}”
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: bir katmanın üzerine boya.
+Dégradé : {what} ¦ Degrade: {what}
+Dégradé {num} ¦ Degrade {num}
+Calque « {name} » ¦ Katman: “{name}”
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ “{name}” · maskesi (siyah = gizli, beyaz = görünür): her şey hemen görünür
+« {name} » : tout se voit tout de suite ¦ “{name}”: her şey hemen görünür
+le prochain dégradé que tu traceras ¦ çizeceğin bir sonraki degrade
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Hazır ayar kaydedildi: “{name}”. Bu listede kalıyor.
+Dégradé modifié sur « {name} » ¦ Degrade değiştirildi: “{name}”
+Texte « {text} » ¦ Metin: “{text}”
+Objet dynamique « {name} » : image remplacée ¦ Akıllı nesne “{name}”: görüntü değiştirildi
+Image placée : « {name} » ¦ Görüntü yerleştirildi: “{name}”
+Image placée, mais pas rangée dans les médias : {err} ¦ Görüntü yerleştirildi ama medyaya eklenmedi: {err}
+Élément supprimé de « {name} » ¦ Öğe silindi: “{name}”
+Image tournée sur « {name} » ¦ Görüntü döndürüldü: “{name}”
+Image agrandie / réduite sur « {name} » ¦ Görüntü büyütüldü / küçültüldü: “{name}”
+Dégradé ajusté (masque) sur « {name} » ¦ Degrade ayarlandı (maske): “{name}”
+Dégradé ajusté sur « {name} » ¦ Degrade ayarlandı: “{name}”
+Élément déplacé sur « {name} » ¦ Öğe taşındı: “{name}”
+Masque en dégradé sur « {name} » ¦ Degrade maske: “{name}”
+Dégradé {what} : « {name} » ¦ Degrade {what}: “{name}”
+{what} sur « {name} » ¦ {what}: “{name}”
+Masque : caché au pinceau ¦ Maske: fırçayla gizlendi
+Masque : montré au pinceau ¦ Maske: fırçayla gösterildi
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Kırışık onarıldı ({n} dokunuş) (✨ Rötuşlar katmanı)
+Pli réparé (calque ✨ Retouches) ¦ Kırışık onarıldı (✨ Rötuşlar katmanı)
+Recadrage enlevé ¦ Kırpma kaldırıldı
+Recadrage et redressement ({a}°) ¦ Kırpma ve düzeltme ({a}°)
+Recadrage ¦ Kırpma
+Filtre « {what} » (refait) ¦ Filtre “{what}” (yeniden yapıldı)
+« {what} » refait sur un nouveau calque. ¦ Yeni bir katmanda yeniden yapıldı: “{what}”.
+limité à la sélection ¦ seçimle sınırlı
+Filtre « {what} » ¦ Filtre “{what}”
+Filtre « {what} » ajouté au calque ¦ Filtre katmana eklendi: “{what}”
+Filtre « {what} » réglé ¦ Filtre ayarlandı: “{what}”
+Action « {name} » ¦ Eylem: “{name}”
+Action du {date} ¦ Eylem: {date}
+Action « {name} » enregistrée. ¦ Eylem kaydedildi: “{name}”.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Eylem içe aktarıldı: “{name}”. “Bu fotoğrafta” ya da “Birkaç fotoğrafta…” seç.
+Action « {name} » supprimée ¦ Eylem silindi: “{name}”
+« {name} » sur plusieurs photos ¦ Birkaç fotoğrafta: “{name}”
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Bitti: {n} / {total} fotoğraf, yeni sürüm gösteriliyor.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Bitti: {n} / {total} fotoğraf, yeni sürüm gösteriliyor.
+Terminé : {n} photos sur {total}. ¦ Bitti: {n} / {total} fotoğraf.
+Terminé : {n} photo sur {total}. ¦ Bitti: {n} / {total} fotoğraf.
+{layer} (retouchée) ¦ {layer} (rötuşlandı)
+« {name} » · comme le style de calque de Photoshop ¦ “{name}” · Photoshop’taki katman stili gibi
+Effets de {layer} enlevés ¦ Efektler kaldırıldı: {layer}
+Effets de {layer} ¦ Efektler: {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ İnce, açık ya da koyu çizgiler kırmızıyla işaretlendi (seçimde). Kontrol et, sonra “Bu çizgileri onar”a bas.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ İnce, açık ya da koyu çizgiler kırmızıyla işaretlendi. Kontrol et, sonra “Bu çizgileri onar”a bas.
+{what} (en rouge sur la photo). ¦ {what} (fotoğrafta kırmızıyla).
+Plis réparés ({what}) ¦ Kırışıklar onarıldı ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: 👁 ya da ◧ ile karşılaştır; geri dönmek için ↶.
+={n} lignes repérées puis comblées ¦ {n} çizgi bulundu ve dolduruldu|{n} çizgi bulundu ve dolduruldu
+={n} ligne repérée puis comblée ¦ {n} çizgi bulundu ve dolduruldu|{n} çizgi bulundu ve dolduruldu
+=pli|{n} lignes ¦ {n} çizgi|{n} çizgi
+=pli|{n} ligne ¦ {n} çizgi|{n} çizgi
+=retouche|{n} étapes ¦ {n} adım|{n} adım
+=retouche|{n} étape ¦ {n} adım|{n} adım
+=ligne repérée ¦ bulunan çizgi|bulunan çizgi
+=ligne réparée ¦ onarılan çizgi|onarılan çizgi
+=calque de réglage ¦ ayar katmanı|ayar katmanı
+=portrait mis à jour ¦ güncellenen portre|güncellenen portre
+✨ Restauration en une fois ({what}) ¦ ✨ Tek seferde onarım ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Onarım yapıldı ({what}): her adım bir “✨” katmanı (Katmanlar); gizleyebilir ya da azaltabilirsin; ↶ hepsini geri alır.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Kartın portresi güncellendi: “{name}” (kırpılan fotoğraf medyasında).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Kartın portresi güncellendi (kırpılan fotoğraf medyasında).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (kırpıldı)
+Horizon redressé ({a}°) ¦ Ufuk düzeltildi ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ {a}° düzeltildi: çerçeveyi ayarla, sonra “✓ Onayla”ya bas.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Fotoğraf {a}° düzeltildi (köşeler görünmesin diye kırpıldı). Ayarlamak için ⌗ Kırp.
+Redressée automatiquement ({a}°) ¦ Kendiliğinden düzeltildi ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Yansımalar ayrı bir katmanda kaldırıldı (yalnızca seçimde: sınırlamak için önce camı seç): gücü ve boyutu ayarla; opaklık dozu belirler, 🎭 sınırlar, 👁 gizler. Fotoğrafa dokunulmaz.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Yansımalar ayrı bir katmanda kaldırıldı: gücü ve boyutu ayarla; opaklık dozu belirler, 🎭 sınırlar, 👁 gizler. Fotoğrafa dokunulmaz.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Renklendirme bir ayar katmanında (seçimle sınırlı): renkleri ve gücü seç; sınırlamak için 🎭, gizlemek için 👁. Fotoğrafa dokunulmaz.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Renklendirme bir ayar katmanında: renkleri ve gücü seç; sınırlamak için 🎭, gizlemek için 👁. Fotoğrafa dokunulmaz.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} leke kaldırıldı, katman: “{layer}” (fotoğrafa dokunulmaz). Karşılaştırmak için gizle ya da azalt; fazlaysa ↶.|{n} leke kaldırıldı, katman: “{layer}” (fotoğrafa dokunulmaz). Karşılaştırmak için gizle ya da azalt; fazlaysa ↶.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} leke kaldırıldı, katman: “{layer}” (fotoğrafa dokunulmaz). Karşılaştırmak için gizle ya da azalt; fazlaysa ↶.|{n} leke kaldırıldı, katman: “{layer}” (fotoğrafa dokunulmaz). Karşılaştırmak için gizle ya da azalt; fazlaysa ↶.
+✨ Taches enlevées ¦ ✨ Lekeler kaldırıldı
+Taches enlevées automatiquement ({n}) ¦ Lekeler kendiliğinden kaldırıldı ({n})
+Sélection remplie ({what}) ¦ Seçim dolduruldu ({what})
+Sélection effacée sur « {name} » ¦ Seçim silindi: “{name}”
+Masque d’après la sélection ({name}) ¦ Seçimden maske ({name})
+Préréglage « {name} » retiré ¦ Hazır ayar çıkarıldı: “{name}”
+Préréglage « {name} » ¦ Hazır ayar: “{name}”
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Proje: “{name}” (bulmak için 📂 Dosya → Proje aç)
+Versions de la photo ({n}) ¦ Fotoğrafın sürümleri ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm, {dpi} ppi
+≈ {size} Mo en mémoire ¦ Bellekte ≈ {size} MB
+Taille de l’image : {w} × {h} px ¦ Görüntü boyutu: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Çalışma alanı: {w} × {h} px
+Zone de travail de départ ¦ Başlangıç çalışma alanı
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Bu görüntü çok büyük ({n} milyon nokta): kaydetmek uzun sürebilir, hatta başarısız olabilir.
+Enregistrer quand même ? ¦ Yine de kaydedilsin mi?
+Projet « {name} » rouvert ¦ Proje yeniden açıldı: “{name}”
+Projet en partie illisible : {err} ¦ Proje kısmen okunamıyor: {err}
+photo de départ introuvable ¦ başlangıç fotoğrafı bulunamadı
+Supprimer le projet « {name} » ? ¦ Proje silinsin mi: “{name}”?
+Quitter le plein écran ¦ Tam ekrandan çık
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Kaydetmek için yer kalmadı: bir çalışma alanını sil.
+Ranger, montrer ou cacher les boutons et les options ¦ Düğmeleri ve seçenekleri sırala, göster ya da gizle
+⚙️ Boutons et options ¦ ⚙️ Düğmeler ve seçenekler
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Gösterilecekleri işaretle, ↑ ↓ ile (ya da ⠿ ile sürükleyerek) sırala. Bir dahaki sefere saklanır. Photoshop’un çalışma alanları gibi: bir düzeni bir adla kaydet (“Onarım”, “Hızlı montaj”…) ve birinden ötekine geç.
+les boutons montrés, cachés et rangés ¦ gösterilen, gizlenen ve sıralanan düğmeler
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Düğmeler başlangıçtaki gibi yapıldı (başlangıç sırasını görmek için pencereyi yeniden aç).
+Boutons rangés. ¦ Düğmeler sıralandı.
+Hautes lumières ¦ Açık tonlar
+Vibrance (couleurs ternes d’abord) ¦ Canlılık (önce soluk renkler)
+Teinte (tourner les couleurs) ¦ Ton (renkleri döndür)
+Noir d’entrée ¦ Giriş siyahı
+Blanc d’entrée ¦ Giriş beyazı
+Tons moyens (gamma ×100) ¦ Orta tonlar (gama ×100)
+Noir de sortie ¦ Çıkış siyahı
+Blanc de sortie ¦ Çıkış beyazı
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Doğal: gökyüzü, yeşillik, ten, giysiler (önerilen)
+Sépia chaud ¦ Sıcak sepya
+Autochrome (couleurs d’autrefois) ¦ Otokrom (eski zaman renkleri)
+Portrait (peau rosée) ¦ Portre (pembemsi ten)
+Paysage : ciel en haut, terre en bas ¦ Manzara: üstte gökyüzü, altta toprak
+Saturation augmentée ¦ Artırılmış doygunluk
+Saturation plus forte ¦ Daha güçlü doygunluk
+Rouges plus saturés ¦ Daha doygun kırmızılar
+Jaune intensifié ¦ Yoğunlaştırılmış sarı
+Ciel plus bleu ¦ Daha mavi gökyüzü
+Peau plus douce ¦ Daha yumuşak ten
+Désaturer ¦ Doygunluğu kaldır
+Verts d’automne ¦ Sonbahar yeşilleri
+Reflets en moins (vitre, verre, vernis) ¦ Daha az yansıma (cam, bardak, vernik)
+Taille des reflets (0 = moyenne) ¦ Yansımaların boyutu (0 = orta)
+Poussière et rayures (automatique) ¦ Toz ve çizikler (otomatik)
+Réduire le bruit ¦ Gürültüyü azalt
+Netteté ¦ Keskinlik
+Clarté (contraste local) ¦ Netlik (yerel kontrast)
+Flou de surface (garde les contours) ¦ Yüzey bulanıklığı (kenarları korur)
+Décentrement (maquette, tilt-shift) ¦ Kaydırma (maket, tilt-shift)
+Largeur de la bande ¦ Şeridin genişliği
+Flou de l’objectif (bokeh) ¦ Objektif bulanıklığı (bokeh)
+Ajouter du bruit ¦ Gürültü ekle
+Poussière et rayures ¦ Toz ve çizikler
+Passe-haut (pour accentuer en Incrustation) ¦ Yüksek geçiren (Bindirme ile keskinleştirmek için)
+Esthétiques ¦ Estetik
+Garder les couleurs (0 / 1) ¦ Renkleri koru (0 / 1)
+Tracé des contours ¦ Kenar çizgisi
+Contours lumineux (néon) ¦ Parlak kenarlar (neon)
+Postérisation ¦ Posterleştirme
+Seuil (noir et blanc pur) ¦ Eşik (saf siyah beyaz)
+Vers la droite (1) / gauche (0) ¦ Sağa doğru (1) / sola (0)
+Peinture à l’huile ¦ Yağlı boya
+Taille de la touche ¦ Fırça darbesinin boyutu
+Taille des taches ¦ Lekelerin boyutu
+Dessin au crayon ¦ Kurşun kalem çizimi
+En couleur (0 / 1) ¦ Renkli (0 / 1)
+Taille des carreaux ¦ Karoların boyutu
+Demi-teinte (points d’imprimerie) ¦ Yarım ton (baskı noktaları)
+Taille des cristaux ¦ Kristallerin boyutu
+Éclairage (projecteur) ¦ Aydınlatma (projektör)
+Lumière X ¦ Işık X
+Lumière Y ¦ Işık Y
+Lumière ambiante ¦ Ortam ışığı
+Halo de lumière (flare) ¦ Işık hâlesi (flare)
+À partir de (luminosité) ¦ Başlangıç (parlaklık)
+Déformation ¦ Bozma
+Pincement / sphérisation ¦ Sıkıştırma / küreleştirme
+Force (− sphère, + pincement) ¦ Güç (− küre, + sıkıştırma)
+Longueur d’onde ¦ Dalga boyu
+Ondulation (ronds dans l’eau) ¦ Dalgalanma (sudaki halkalar)
+Écart des ronds ¦ Halkalar arası mesafe
+Coordonnées polaires ¦ Kutupsal koordinatlar
+Rectangle → polaire (0) / l’inverse (1) ¦ Dikdörtgen → kutupsal (0) / tersi (1)
+Minimum (assombrit, épaissit le sombre) ¦ En az (koyulaştırır, koyu alanı kalınlaştırır)
+Maximum (éclaircit, épaissit le clair) ¦ En çok (açar, açık alanı kalınlaştırır)
+Décalage (avec retour de l’autre côté) ¦ Kaydırma (öbür taraftan geri döner)
+Enlever les reflets (vitre) ¦ Yansımaları kaldır (cam)
+Reflets en moins ¦ Daha az yansıma
+Vieille photo ravivée ¦ Canlandırılmış eski fotoğraf
+Négatif → positif ¦ Negatif → pozitif
+🖌 Forme du panneau Formes ¦ 🖌 Şekiller panelinden şekil
+Avec empattement ¦ Tırnaklı
+Sans empattement ¦ Tırnaksız
+Manuscrite ¦ El yazısı
+Extra-fin ¦ Çok ince
+Ultra-léger ¦ Ultra hafif
+Léger ¦ Hafif
+Médium ¦ Orta
+Demi-gras ¦ Yarı kalın
+Extra-gras ¦ Çok kalın
+Aligné à gauche ¦ Sola hizalı
+Aligné à droite ¦ Sağa hizalı
+Justifié, dernière ligne à gauche ¦ İki yana yaslı, son satır solda
+Justifié, dernière ligne centrée ¦ İki yana yaslı, son satır ortada
+Justifié, dernière ligne à droite ¦ İki yana yaslı, son satır sağda
+Tout justifié ¦ Tamamen iki yana yaslı
+Ligatures et formes ¦ Bitişik harfler ve biçimler
+Unicode : Latin étendu A ¦ Unicode: Genişletilmiş Latin A
+Unicode : Latin étendu B ¦ Unicode: Genişletilmiş Latin B
+Unicode : hébreu ¦ Unicode: İbranice
+Unicode : exposants et indices ¦ Unicode: üst ve alt simgeler
+Unicode : flèches ¦ Unicode: oklar
+Unicode : mathématiques ¦ Unicode: matematik
+Unicode : formes géométriques ¦ Unicode: geometrik şekiller
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: Genişletilmiş Latin D (eski kısaltmalar)
+espace fine ¦ ince boşluk
+tiret conditionnel (césure) ¦ koşullu tire (heceleme)
+mort au combat ¦ savaşta öldü
+et (abréviation ancienne) ¦ ve (eski kısaltma)
+s long ¦ uzun s
+Linéaire ¦ Doğrusal
+Radial ¦ Dairesel
+Angle (conique) ¦ Açı (konik)
+Réfléchi ¦ Yansımalı
+Losange ¦ Eşkenar dörtgen
+Premier plan → arrière-plan ¦ Ön plan → arka plan
+Hachures croisées ¦ Çapraz tarama
+Écailles ¦ Pullar
+Brin d’herbe ¦ Ot sapı
+Éclaboussure ¦ Sıçrama
+Ma forme (d’après une sélection) ¦ Şeklim (bir seçimden)
+Aérographe ¦ Hava fırçası
+Carré net ¦ Keskin kare
+Étoiles semées ¦ Serpiştirilmiş yıldızlar
+Éclaboussures ¦ Sıçramalar
+Superposition (Écran) ¦ Bindirme (Ekran)
+⌗ Cadrer et redresser ¦ ⌗ Çerçevele ve düzelt
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Eğri taranmış, kenarları beyaz ya da yıpranmış bir fotoğraf: önce düzelt, sonra önemli olanı tut.
+📐 Redresser tout seul ¦ 📐 Kendiliğinden düzelt
+⌗ Recadrer ¦ ⌗ Kırp
+⧈ Photo prise de biais ¦ ⧈ Eğik açıdan çekilmiş fotoğraf
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Solmuş renkler, sararmış fotoğraf
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Zaman fotoğrafları sarartır, soldurur ya da pembeleştirir. “Sararmayı kaldır” her rengi yerine koyar; “Canlandır” kontrastı geri getirir.
+🟨 Enlever le jaunissement ¦ 🟨 Sararmayı kaldır
+✨ Raviver une vieille photo ¦ ✨ Eski bir fotoğrafı canlandır
+Réglage automatique ¦ Otomatik ayar
+🧹 Poussières et petites taches ¦ 🧹 Toz ve küçük lekeler
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Beyaz ya da siyah noktalar, küf lekeleri: uygulama onları arar ve tek tek kaldırır (düzelticiyle). Yalnızca bir bölümü işlemek için önce onu seç. Geri kalanlar için: elle 🩹 düzeltici.
+Sensibilité ¦ Duyarlılık
+Taille maximale d’une tache ¦ Bir lekenin en büyük boyutu
+🔍 Repérer et enlever les taches ¦ 🔍 Lekeleri bul ve kaldır
+🩹 Correcteur à la main ¦ 🩹 Elle düzeltici
+Filtre poussière et rayures ¦ Toz ve çizik filtresi
+🩹 Déchirures, plis, rayures ¦ 🩹 Yırtıklar, kırışıklar, çizikler
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ “Kırışıkları bul” ince açık ya da koyu çizgileri bulur ve doldurmayı önerir. Elle: 🪡 Onar fırçası — kırışığın üzerine boya, çevresine göre yeniden yapılır. Eksik bir parça için (kopmuş köşe) damga, yakındaki bir bölümü kopyalar.
+🔍 Repérer les plis et rayures ¦ 🔍 Kırışıkları ve çizikleri bul
+🪡 Réparer au pinceau ¦ 🪡 Fırçayla onar
+➰ Entourer une zone… ¦ ➰ Bir alanın çevresini çiz…
+🌫️ Grain et bruit ¦ 🌫️ Gren ve gürültü
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Grenli bir fotoğraf ya da yıpranmış bir baskı: kenarları kaybetmeden yumuşat.
+🙂 Netteté des visages ¦ 🙂 Yüzlerin netliği
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Bir yüzü ◯ elips ile çevrele, sonra “Daha net yüz”e bas: gürültüsü azaltılır ve keskinleştirilir, yalnızca orada (dozunu ayarlayabileceğin ayrı bir katmanda).
+◯ Entourer le visage ¦ ◯ Yüzü çevrele
+✨ Visage plus net ¦ ✨ Daha net yüz
+Visage plus net ¦ Daha net yüz
+🎯 Sélectionner le sujet ¦ 🎯 Konuyu seç
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Siyah beyaz bir fotoğrafı renklendir
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Kendiliğinden (eski zaman renklerinden bir degrade) ya da elle: aşağıdan bir renk seç ve yavaşça boya, fotoğrafın ışığı korunur.
+🎨 Coloriser tout seul ¦ 🎨 Kendiliğinden renklendir
+🖌 Coloriser au pinceau ¦ 🖌 Fırçayla renklendir
+✅ Comparer et enregistrer ¦ ✅ Karşılaştır ve kaydet
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Karşılaştırmak için “👁 Önce / sonra”ya (fotoğrafın altında) basılı tut ya da birinden ötekine kaydırmak için “◧ Perde”yi kullan. Onarılan fotoğraf yeni bir sürüm olur: özgün fotoğraf kalır.
+💾 Enregistrer et afficher ¦ 💾 Kaydet ve göster
+Garder le travail pour plus tard ¦ Çalışmayı sonraya sakla
+Impossible d’ouvrir cette image. ¦ Bu görüntü açılamıyor.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Her adım isteğe bağlıdır ve geri alınabilir (↶). Hiçbir şey özgün fotoğrafa zarar vermez: onarılan fotoğraf yeni bir sürüm olur.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Gürültü azaltma, toz, kırışıklar, kontrast, keskinlik ve renklendirme tek seferde: her adımı görür ve seçersin
+✨ Restaurer en une fois ¦ ✨ Tek seferde onar
+ou étape par étape : ¦ ya da adım adım:
+Réparer ¦ Onar
+🪡 Réparer ¦ 🪡 Onar
+Déplacer la vue ¦ Görünümü kaydır
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Bir kırışığı ya da yırtığı onar (R): üzerine boya, çevresine göre yeniden yapılır
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Silgi (E): seçilen katmanı siler; fotoğrafta onu bir maskeyle gizler (hiçbir şey kaybolmaz)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Degrade (G): çizmek için sürükle; maskede katmanı yumuşakça eritir
+Déplacer un élément d’un calque (V) ¦ Bir katmanın öğesini taşı (V)
+Déplacer un élément d’un calque ¦ Bir katmanın öğesini taşı
+Sélection rectangle (M) ¦ Dikdörtgen seçim (M)
+Sélection rectangle ¦ Dikdörtgen seçim
+Sélection ellipse (⇧M) ¦ Elips seçim (⇧M)
+Sélection ellipse ¦ Elips seçim
+Lasso : entourer à main levée (L) ¦ Kement: serbest elle çevrele (L)
+Lasso : entourer à main levée ¦ Kement: serbest elle çevrele
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Kalem: nokta nokta seçim (P) — kapatmak için çift tıkla ya da Enter
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Kalem: nokta nokta seçim — kapatmak için çift tıkla ya da Enter
+Sélection automatique (baguette magique) (W) ¦ Otomatik seçim (sihirli değnek) (W)
+Sélection automatique (baguette magique) ¦ Otomatik seçim (sihirli değnek)
+Recadrer et redresser (C) ¦ Kırp ve düzelt (C)
+Recadrer et redresser ¦ Kırp ve düzelt
+Correcteur de taches (J) ¦ Leke düzeltici (J)
+Correcteur de taches ¦ Leke düzeltici
+🩹 Correcteur de taches ¦ 🩹 Leke düzeltici
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Bir kırışığı ya da yırtığı onar: üzerine boya, çevresine göre yeniden yapılır
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Damga: bir nokta ya da seçili bir alan (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Damga: bir nokta ya da seçili bir alan
+Pinceau (B) ¦ Fırça (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Silgi: seçilen katmanı siler; fotoğrafta onu bir maskeyle gizler (hiçbir şey kaybolmaz)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Şekiller: dikdörtgen, elips, çizgi, ok (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Şekiller: dikdörtgen, elips, çizgi, ok
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Degrade: çizmek için sürükle; maskede katmanı yumuşakça eritir
+Texte (T) ¦ Metin (T)
+Main, ou barre d’espace (H) ¦ El ya da boşluk tuşu (H)
+Main, ou barre d’espace ¦ El ya da boşluk tuşu
+Zoom (Z) — ⌥ pour reculer ¦ Yakınlaştır (Z) — uzaklaştırmak için ⌥
+Zoom — ⌥ pour reculer ¦ Yakınlaştır — uzaklaştırmak için ⌥
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Projeyi kaydet (sonra devam etmek için)
+📂 Ouvrir un projet… ¦ 📂 Proje aç…
+Enregistrer et afficher cette version ¦ Bu sürümü kaydet ve göster
+Enregistrer sans l’afficher ¦ Göstermeden kaydet
+Copie séparée ¦ Ayrı kopya
+ℹ️ Informations… ¦ ℹ️ Bilgiler…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Görüntüyü dışa aktar (PNG, JPG, yazdır)…
+⤓ Exporter l’avant / après… ¦ ⤓ Önce / sonra görüntüsünü dışa aktar…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 PSD olarak dışa aktar (katmanlarla)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Bir PSD dosyasının katmanlarını içe aktar…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Eylemler: kayıtlı ayarlar, birkaç fotoğrafta yeniden uygulamak için…
+⚡ Passer à la retouche rapide ¦ ⚡ Hızlı rötuşa geç
+🕘 Historique ¦ 🕘 Geçmiş
+🎚 Réglages, niveaux et courbe ¦ 🎚 Ayarlar, düzeyler ve eğri
+🎨 Teinte/Saturation… ¦ 🎨 Ton/Doygunluk…
+⌗ Recadrer et redresser ¦ ⌗ Kırp ve düzelt
+📐 Redresser automatiquement ¦ 📐 Kendiliğinden düzelt
+Annuler le recadrage ¦ Kırpmayı geri al
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Perspektifi düzelt (eğik açıdan çekilmiş fotoğraf)…
+Enlever la perspective ¦ Perspektifi kaldır
+📏 Taille de l’image… ¦ 📏 Görüntü boyutu…
+⬚ Taille de la zone de travail… ¦ ⬚ Çalışma alanı boyutu…
+🔄 Rotation de l’image ¦ 🔄 Görüntüyü döndür
+↻ 90° horaire ¦ ↻ 90° saat yönünde
+↺ 90° antihoraire ¦ ↺ 90° saat yönünün tersine
+Angle… ¦ Açı…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Ufku düzelt (bir çizgi çiz)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Görüntüyü yatay çevir
+⇅ Symétrie verticale de l’image ¦ ⇅ Görüntüyü dikey çevir
+✨ Restaurer en une fois… ¦ ✨ Tek seferde onar…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Eski bir fotoğrafı onar (adım adım)
+🔍 Repérer les plis et rayures… ¦ 🔍 Kırışıkları ve çizikleri bul…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Fırçayla onar (kırışıklar, yırtıklar)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Toz ve çizikler (Filtreler)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Yansımaları kaldır (cam): ayrı katman
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Renklendir: ayar katmanı (degrade)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Fırçayla renklendir: “Renk” katmanı
+🪪 Recadrer en photo d’identité… ¦ 🪪 Vesikalık fotoğraf olarak kırp…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Birkaç kartın portreleri…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Sıvılaştır (fırçayla biçim boz)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Sihirli silgi (düz arka plan → saydam)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Maskenin kenarını incelt (saçlar, kenarlar)…
+☁️ Remplacer le ciel… ¦ ☁️ Gökyüzünü değiştir…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Bir kişiyi dekupe et (saydam, bulanık ya da düz arka plan)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 ×2 / ×4 büyüt…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Panorama: başka fotoğraflarla birleştir…
+Calque ¦ Katman
+＋ Nouveau calque ¦ ＋ Yeni katman
+📁 Nouveau groupe ¦ 📁 Yeni grup
+Grouper le calque choisi ¦ Seçilen katmanı grupla
+🎚 Nouveau calque de réglage ¦ 🎚 Yeni ayar katmanı
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Yeni Ton/Doygunluk ayarı
+Nouveau réglage Teinte/Saturation ¦ Yeni Ton/Doygunluk ayarı
+🖼️ Placer une image… ¦ 🖼️ Görüntü yerleştir…
+▦ Nouveau calque de dégradé… ¦ ▦ Yeni degrade katmanı…
+▩ Nouveau calque de motif… ¦ ▩ Yeni desen katmanı…
+▩ Créer un motif… ¦ ▩ Desen oluştur…
+▩ Créer un motif ¦ ▩ Desen oluştur
+＋ Créer un motif… ¦ ＋ Desen oluştur…
+Copier la sélection sur un calque ¦ Seçimi bir katmana kopyala
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Seçilen katmana maske ekle
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Her şeyi gizleyen maske (🎭 üzerinde ⌥ + tıklama)
+Masque d’après la sélection ¦ Seçimden maske
+Masque qui cache la sélection ¦ Seçimi gizleyen maske
+Inverser le masque ¦ Maskeyi ters çevir
+Retirer le masque ¦ Maskeyi çıkar
+inverser le masque ¦ maskeyi ters çevir
+retirer le masque ¦ maskeyi çıkar
+🗂 Calques ¦ 🗂 Katmanlar
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Konuyu seç (otomatik)
+✂️ Détourer une personne… ¦ ✂️ Bir kişiyi dekupe et…
+Désélectionner ¦ Seçimi kaldır
+Inverser ¦ Ters çevir
+Contour progressif… ¦ Yumuşak kenar…
+Contour progressif ¦ Yumuşak kenar
+Agrandir… ¦ Genişlet…
+Réduire… ¦ Daralt…
+Remplir avec la couleur ¦ Renkle doldur
+Effacer (transparent) ¦ Sil (saydam)
+Recadrer sur la sélection ¦ Seçime göre kırp
+Filtre ¦ Filtre
+↻ Refaire le dernier filtre ¦ ↻ Son filtreyi yeniden uygula
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Hızlı filtreler ve katman filtreleri (panel)
+Enlever les filtres rapides ¦ Hızlı filtreleri kaldır
+Replier / ouvrir le panneau de droite ¦ Sağ paneli daralt / aç
+◧ Avant / après en rideau ¦ ◧ Perde biçiminde önce / sonra
+Toute l’image ¦ Tüm görüntü
+Nom du projet de retouche ¦ Rötuş projesinin adı
+Le nom du projet de retouche (tape pour le changer) ¦ Rötuş projesinin adı (değiştirmek için yaz)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Hızlı rötuşa geç (0.5.0 sürümündeki): ayarlar, eğri, lekeler, damga — daha az düğme
+⚡ Rapide ¦ ⚡ Hızlı
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Dışa aktar: rötuşlanmış görüntü (PNG, JPG, yazdır) ya da önce / sonra
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Projeyi kaydet: tüm çalışma (katmanlar, maskeler, ayarlar…), yeniden açıp devam etmek için
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Rötuşlanmış görüntü (PNG, JPG, yazdır)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Önce / sonra (yan yana ya da perde)…
+Dureté ¦ Sertlik
+Sorte de pinceau ¦ Fırça türü
+Couleurs rapides ¦ Hızlı renkler
+contour ¦ kontur
+Contour du texte ¦ Metnin konturu
+Couleur du contour ¦ Konturun rengi
+Épaisseur du contour ¦ Konturun kalınlığı
+épaisseur ¦ kalınlık
+ombre ¦ gölge
+Ombre du texte ¦ Metnin gölgesi
+Couleur de l’ombre ¦ Gölgenin rengi
+Tampon : endroit à recopier, aligné ¦ Damga: kopyalanacak yer, hizalı
+🎯 Choisir l’endroit à recopier ¦ 🎯 Kopyalanacak yeri seç
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ İşaretli: kopyalanan yer bir çizgiden ötekine fırçayı izler. İşaretsiz: her çizgi aynı yerden başlar.
+aligné ¦ hizalı
+Réparer : grain, repérer les plis ¦ Onar: gren, kırışıkları bul
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ İşaretli: çevredeki fotoğraf greninden biraz onarılan alana geri konur, böylece fazla pürüzsüz görünmez.
+garder le grain ¦ greni koru
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ İnce çizgileri (kırışıklar, çizikler) kendiliğinden bul ve doldurmayı öner
+🔍 Repérer les plis ¦ 🔍 Kırışıkları bul
+Texte gras ¦ Kalın metin
+Texte italique ¦ İtalik metin
+Forme (rectangle, ellipse, flèche…) ¦ Şekil (dikdörtgen, elips, ok…)
+Rectangle arrondi ¦ Yuvarlatılmış dikdörtgen
+Forme remplie ¦ Dolu şekil
+remplie ¦ dolu
+Couleur de fond des formes ¦ Şekillerin dolgu rengi
+Baguette : tolérance ¦ Değnek: tolerans
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Bir rengin seçilmek için tıklanan renkten ne kadar uzaklaşabileceği: küçük = yalnızca aynı ton, büyük = yakın tonlar da.
+Tolérance ¦ Tolerans
+Baguette : contiguë ¦ Değnek: bitişik
+contiguë ¦ bitişik
+Sélectionner le sujet ¦ Konuyu seç
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Arka plan fotoğrafın kenarlarında tanınır; tolerans ne kadar uzağa gideceğini ayarlar
+🎯 Sujet ¦ 🎯 Konu
+Actions de la sélection ¦ Seçim eylemleri
+⇧ ajouter · ⌥ enlever ¦ ⇧ ekle · ⌥ çıkar
+→ Calque ¦ → Katman
+Remplir ¦ Doldur
+Effacer ¦ Sil
+Masque ¦ Maske
+Recadrer ¦ Kırp
+Recadrage : proportions, redresser ¦ Kırpma: oranlar, düzelt
+Proportions ¦ Oranlar
+Libres ¦ Serbest
+Celles de la photo ¦ Fotoğrafınkiler
+Carré 1:1 ¦ Kare 1:1
+A4 portrait ¦ A4 dikey
+Redresser ¦ Düzelt
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Ana çizgilerin açısını bulur (ufuk, duvarlar, çerçeveler)
+📐 Auto ¦ 📐 Otomatik
+✓ Valider ¦ ✓ Onayla
+Perspective ¦ Perspektif
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ 4 köşeyi dikdörtgen olması gerekenin köşelerine yerleştir (fotoğraf, belge, cephe).
+Coins aux bords ¦ Köşeler kenarlarda
+Dégradé : couleurs, forme, options ¦ Degrade: renkler, biçim, seçenekler
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Degradeyi düzenle: renkler, saydamlık, hazır ayarlar
+Forme du dégradé ¦ Degradenin biçimi
+Inverser le dégradé ¦ Degradeyi ters çevir
+inverser ¦ ters çevir
+Tramage ¦ Titreklik (dithering)
+tramage ¦ titreklik
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Yumuşak degradelerde görünen “basamakları” önleyen çok hafif bir gren.
+Masque : cacher / montrer ¦ Maske: gizle / göster
+⬛ cacher ¦ ⬛ gizle
+⬜ montrer ¦ ⬜ göster
+Aide de l’outil ¦ Aracın yardımı
+Couleurs (premier plan et arrière-plan) ¦ Renkler (ön plan ve arka plan)
+Noir et blanc (D) ¦ Siyah ve beyaz (D)
+Couleurs par défaut : noir et blanc ¦ Varsayılan renkler: siyah ve beyaz
+Intervertir les deux couleurs (X) ¦ İki rengin yerini değiştir (X)
+Intervertir les couleurs ¦ Renklerin yerini değiştir
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Arka plan rengi (şekillerin dolgusu): değiştirmek için tıkla
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Ön plan rengi (fırça, metin, şekiller): değiştirmek için tıkla
+Replier le panneau (plus de place pour la photo) — Tab ¦ Paneli daralt (fotoğrafa daha çok yer) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Paneli genişletmek ya da daraltmak için sürükle (çift tıklama: başlangıç boyutu)
+Onglets du panneau de droite ¦ Sağ panelin sekmeleri
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Özellikler: seçilen katmanın Ton/Doygunluk, maske, konum ve boyutu
+ⓘ Propriétés ¦ ⓘ Özellikler
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Karakter: yazı tipi, çeşit (kalınlık), boyut, satır aralığı, harf aralığı…
+🔤 Caractère ¦ 🔤 Karakter
+Motifs : remplir d’un motif, créer les siens ¦ Desenler: bir desenle doldur, kendi desenlerini oluştur
+▩ Motifs ¦ ▩ Desenler
+Motifs ¦ Desenler
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Fırça biçimleri: hazır ayarlar, aralık, açı, dağılım, bir seçimden biçim
+🖌 Formes ¦ 🖌 Biçimler
+Restaurer une vieille photo, pas à pas ¦ Eski bir fotoğrafı adım adım onar
+🧭 Restaurer ¦ 🧭 Onar
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Doygunluk gibi, ama zaten canlı renkler pek değişmez: önce soluk tonlar (ten, açık gökyüzü) canlanır.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Siyaha ve beyaza dokunmadan orta tonları açar ya da koyulaştırır: 100’ün üstünde daha açık; altında daha koyu.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Eğriye tıklama: nokta ekle · sürükleme: taşı · kaldırmak için: seç ve “Noktayı kaldır”a bas (ya da ⌫) ya da çerçevenin dışına sürükle.
+Enlever le point ¦ Noktayı kaldır
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Yumuşak renklendirme (siyah beyaz fotoğraf)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Bir ayar katmanında daha iyi (Görüntü → Renklendir): dozunu ayarlar, maskeler, kaldırırsın. Elle boyamak için: Görüntü → Fırçayla renklendir.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Ayarlardan sonra hızlı filtreler: fotoğrafta ya da bir ayar katmanında (altındaki her şeyde ya da yalnızca hemen alttaki katmanda). Aynıları tam boyutta kaydedilen görüntüye de uygulanır.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Genel kontrastı değiştirmeden orta ayrıntıların kontrastını güçlendirir (kırışıklıklar, kumaş kıvrımları, yazı).
+Enlever les filtres ¦ Filtreleri kaldır
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Çeşit: kalınlık (Light, Regular, Bold, Black…) ve italik
+Taille (en points de l’image) ¦ Boyut (görüntünün noktası olarak)
+Interligne (vide = automatique, 120 % de la taille) ¦ Satır aralığı (boş = otomatik, boyutun %120’si)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Harf çifti aralığı: yazı tipine göre yaklaştırılan harf çiftleri (Metrik) ya da hiç (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Harf aralığı: tüm harfler arasındaki boşluk, boyutun binde biri olarak
+Échelle verticale ¦ Dikey ölçek
+Échelle horizontale ¦ Yatay ölçek
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Dikey kaydırma (pozitifse taban çizgisinin üstünde)
+Lissage des bords des lettres ¦ Harf kenarlarını yumuşatma
+Lissage ¦ Yumuşatma
+Lissé ¦ Yumuşak
+Aucun (bords nets, pixels) ¦ Hiçbiri (keskin kenarlar, pikseller)
+Alignement du paragraphe ¦ Paragraf hizalaması
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Sonraki metinler için. Değiştirmek için ➤ ile bir metin seç.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Sonraki metinler için. Değiştirmek için bir metne tıkla (Metin aracı ya da ➤).
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Yazılmakta olan metin: her ayar ona hemen uygulanır.
+Métrique ¦ Metrik
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Çeşitler, uygulama okuyabildiğinde bilgisayarın yazı tiplerinden (Mac, Windows, Linux) gelir; yoksa olağan kalınlıklar.
+Retrait de la première ligne (négatif : en saillie) ¦ İlk satırın girintisi (negatif: asılı)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Metin bloğunun genişliği: satırlar kendiliğinden kesilir (boş = basit metin, paragraf başına bir satır)
+Espace avant chaque paragraphe ¦ Her paragraftan önce boşluk
+Espace après chaque paragraphe ¦ Her paragraftan sonra boşluk
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Uzun sözcükleri satır sonunda tireyle böl (Fransızcanın basit kuralları; bir sözcükteki koşullu tire ⌥- önce dikkate alınır)
+Ω Glyphes ¦ Ω Glifler
+Police (famille) ¦ Yazı tipi (aile)
+(Auto) ¦ (Otomatik)
+⟸ gauche ¦ ⟸ sol
+≡ centre ¦ ≡ orta
+droite ⟹ ¦ sağ ⟹
+Symboles ¦ Simgeler
+Code (U+00E9) ou caractère ¦ Kod (U+00E9) ya da karakter
+Chercher un glyphe ¦ Glif ara
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Bir metin bloğu için tıklamak yerine Metin aracı T ile bir çerçeve sürükle ya da genişliğini buraya yaz. İki yana yaslama yalnızca bir blok için geçerlidir.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Tıklama: yazılmakta olan metne (ya da seçilen metnin sonuna) eklenir. Metin yoksa: kopyalanır.
+Choisis d’abord un texte (outil T). ¦ Önce bir metin seç (T aracı).
+Un autre média, rattaché aux mêmes fiches ¦ Aynı kartlara bağlı başka bir medya
+Gardée dans les versions, la photo affichée ne change pas ¦ Sürümlerde saklanır, gösterilen fotoğraf değişmez
+avec les annotations (calques visibles) ¦ notlarla birlikte (görünür katmanlar)
+Avec les annotations (calques visibles) ¦ Notlarla birlikte (görünür katmanlar)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Özgün fotoğraf hiç değişmez: her rötuş fotoğrafın bir sürümüdür ve her yerde hangisinin gösterileceğini sen seçersin.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Görüntüyü Medyaya kaydet
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Görüntü (katmanlar dahil) medyadakinin yerine geçer; proje ise devam etmek için tüm katmanları saklar
+Enregistrer le projet (calques, masques, réglages) ¦ Projeyi kaydet (katmanlar, maskeler, ayarlar)
+la retouche est fermée ¦ rötuş kapatıldı
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ O ana dönmek için bir adıma tıkla; başka bir şey yapmadığın sürece sonraki adımlar (gri) kalır.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Maskeyi boyuyorsun (fırça: ⬛ gizle / ⬜ göster). Tıklama: katmana dön
+Masque : clic pour le peindre au pinceau ¦ Maske: fırçayla boyamak için tıkla
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + tıklama: maskeyi kapat / yeniden aç
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + tıklama: maskeyi tek başına gör
+touche \ : le masque en rouge par-dessus ¦ \ tuşu: maske üstte kırmızı
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Maske ekle (bir bölümü silmeden gizle) — ⌥ / Alt + tıklama: her şeyi (ya da seçimi) gizleyen bir maske
+masque ¦ maske
+Ranger dans un groupe ¦ Bir gruba al
+(hors groupe) ¦ (grup dışı)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Sıralamak için sürükle: üstüne, altına ya da bir gruba (bir grubun ortasına bırak)
+Calque de réglage ¦ Ayar katmanı
+La photo (réglages, taches, tampon) ¦ Fotoğraf (ayarlar, lekeler, damga)
+Supprimer le groupe (ce qu’il contient reste) ¦ Grubu sil (içindekiler kalır)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Fotoğrafı katmanlardan çıkar (geri koymak için ⌘Z)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Karıştırma modu: katmanın altındakiyle nasıl karıştığı
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Dolgu: yalnızca katmanın içeriğinin dozunu ayarlar, efektlerini değil (gölge, parıltı, kontur). %0’da yalnızca efektler kalır.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Katman efektleri: gölge, dış parıltı, kontur, renk bindirme
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Akıllı nesne: kayıpsız büyüt, küçült, döndür (özgün görüntü saklanır)
+🧩 Objet dynamique ¦ 🧩 Akıllı nesne
+Une autre image à la même place, même taille, même rotation ¦ Aynı yerde, aynı boyutta, aynı dönüşte başka bir görüntü
+Remplacer… ¦ Değiştir…
+Remettre l’image à sa taille d’origine (et droite) ¦ Görüntüyü özgün boyutuna (ve düz) getir
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Hemen üstte, yalnızca bu görüntüyü etkileyen bir filtre katmanı: ayarlanabilir, dozu belirlenebilir, gizlenebilir
+✨ Filtre dynamique ¦ ✨ Akıllı filtre
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Görüntüyü şimdiki boyutunda piksellere sabitle (artık kayıpsız büyütme yok)
+Pixelliser ¦ Piksele dönüştür
+Couleurs, transparence, forme, préréglages ¦ Renkler, saydamlık, biçim, hazır ayarlar
+▦ Modifier le dégradé… ¦ ▦ Degradeyi düzenle…
+Motif, échelle, angle, décalage ¦ Desen, ölçek, açı, kaydırma
+▩ Modifier le motif… ¦ ▩ Deseni düzenle…
+Comme un masque d’écrêtage de Photoshop ¦ Photoshop’taki kırpma maskesi gibi
+régler… ¦ ayarla…
+ne touche que l’élément juste dessous ¦ yalnızca hemen altındaki öğeyi etkiler
+touche tout ce qui est dessous ¦ altındaki her şeyi etkiler
+(seulement l’élément dessous) ¦ (yalnızca alttaki öğe)
+(tout ce qui est dessous) ¦ (altındaki her şey)
+régler la photo ¦ fotoğrafı ayarla
+＋ dans un calque de réglage ¦ ＋ bir ayar katmanında
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Ayrı bir katmanda ayarlar ve filtreler: maskelenebilir, dozu ayarlanabilir ya da bir katmanla sınırlanabilir
+✨ Filtres : ¦ ✨ Filtreler:
+Changer les réglages de ce filtre ¦ Bu filtrenin ayarlarını değiştir
+vider ¦ boşalt
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ boş grup: buraya bir katman sürükle (⠿) ya da 📁 ile buraya al
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Fırça, şekiller ve metin seçilen katmana (mavi) gider. 📁 Bir grup katmanlar ve başka gruplar içerebilir; 🎚 bir ayar katmanı, ayarları ve filtreleri altındakilere (ya da yalnızca hemen alttaki öğeye) uygular. 🎭 Bir maske silmeden gizler.
+＋ Calque ¦ ＋ Katman
+＋ Groupe ¦ ＋ Grup
+＋ Réglage ¦ ＋ Ayar
+🖼️ Image ¦ 🖼️ Görüntü
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Veritabanından ya da bilgisayardan bir görüntü, yeni bir katmanda, akıllı nesne olarak (kayıpsız büyüt, küçült, döndür)
+Un groupe vide au-dessus du calque choisi ¦ Seçilen katmanın üstünde boş bir grup
+Réglages et filtres dans un calque ¦ Bir katmanda ayarlar ve filtreler
+La photo a été retirée des calques : la remettre tout en bas ¦ Fotoğraf katmanlardan çıkarıldı: en alta geri koy
+↺ Remettre la photo ¦ ↺ Fotoğrafı geri koy
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Seçilen katmanı yeni bir gruba alır (⌘G)
+Grouper ¦ Grupla
+Sélection → calque ¦ Seçim → katman
+Aucun calque. ¦ Katman yok.
+Choisis d’abord un calque. ¦ Önce bir katman seç.
+Nouveau calque ¦ Yeni katman
+Nouveau calque de réglage ¦ Yeni ayar katmanı
+Photo remise dans les calques ¦ Fotoğraf katmanlara geri konuldu
+Masque ajouté : la sélection est cachée. ¦ Maske eklendi: seçim gizlendi.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Maske eklendi: her şey gizlendi; göstermek için ⬜ ile boya.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Maske eklendi: gizlemek için ⬛, göstermek için ⬜ ile boya.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Yalnızca maske: beyaz = görünür, siyah = gizli (geri dönmek için ⌥ + tıklama)
+Ce calque est verrouillé. ¦ Bu katman kilitli.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Akıllı filtre: bir filtre seç (“＋ Filtre ekle…”); yalnızca bu görüntüyü etkiler ve ayarlanabilir kalır.
+verrouillé ¦ kilitli
+déverrouillé ¦ kilidi açık
+seulement sur l’élément dessous ¦ yalnızca alttaki öğede
+sur tout ce qui est dessous ¦ altındaki her şeyde
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Paneli aç (Ayarlar, Katmanlar…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Yakınlaştırılmış görüntüde gezinmek için sürükle (boşluk tuşu her araçla aynısını yapar).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Bir çizgiye, şekle, metne ya da bir katmandan kopyalanan bir alana tıkla, sonra sürükle. ⌫ onu siler; bir metni yeniden yazmak için üzerine çift tıkla.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Bir dikdörtgen seçmek için sürükle (⇧ ile: ekle, ⌥: çıkar). Çubuktaki ayarlar sonra seçime uygulanır.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Bir oval seçmek için sürükle (⇧: ekle, ⌥: çıkar).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Seçilecek alanı serbest elle çevrele (⇧: ekle, ⌥: çıkar).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Kalem: alanın çevresine nokta nokta tıkla; kapatmak için çift tıkla, Enter’a bas ya da ilk noktaya tıkla. Esc: vazgeç.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Bir renge tıkla: yakın tondaki tüm komşu noktalar seçilir (Tolerans). ⇧: ekle, ⌥: çıkar.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Çerçevenin tutamaçlarını sürükle (ya da yeni bir çerçeve çiz), oranları seç, kaydırıcıyla düzelt, sonra “✓ Onayla”ya bas.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Tıklama: buraya yakınlaştır · ⌥ + tıklama: uzaklaştır · ya da bir alana yakınlaştırmak için sürükle.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ 4 köşeyi eğik çekilmiş fotoğrafın, belgenin ya da cephenin köşelerine sürükle, sonra “✓ Onayla”ya bas: düzleştirilir. Tercihen leke düzeltmelerinden önce yap.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Şekli seçilen katmana çizmek için sürükle (⇧: kare, daire ya da dik açı).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Degradenin başından sonuna sürükle (⇧: her 45°’de bir): bir “Degrade” katmanına gider (varsa seçimin içinde; seçilen maskede katmanı yumuşakça eritir). Ayarlamak için yuvarlaklarını çek; renklerini değiştirmek için renkli çubuğa tıkla.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Bir lekeye, toza ya da çiziğe tıkla: çevresindekiyle değiştirilir. Bir çizik için boyunca sürükle. Kesinlik için yakınlaştır (⌘ + tekerlek).
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ “Kopyalanacak yeri seç”e bas (ya da ⌥ + tıklama), sonra örtülecek alanı boya. “Hizalı”: kaynak bir çizgiden ötekine fırçanı izler. Bir seçimle: alanın bir kopyasını başka yere koymak için sürükle.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Seçilen katmana (Katmanlar) boya: elle not al, çevrele, ok çiz. Silgi boyananı siler, asla fotoğrafı değil.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Katmanın MASKESİNİ boyuyorsun: ⬛ gizle, ⬜ göster. Hiçbir şey silinmez. Katmana dönmek için maskenin küçük resmine (Katmanlar) tıkla.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Görüntüde metnin olacağı yere tıkla, yaz, sonra Enter’a bas (alt satıra geçmek için ⇧ + Enter).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Kırışığın, çiziğin ya da yırtığın üzerine boya (hareket sırasında kırmızı): bırakınca alan çevresine göre yeniden yapılır. Kesinlik için yakınlaştır; “🔍 Kırışıkları bul” onları kendiliğinden bulur.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Gerekirse iki yuvarlağı gözlerin üzerine sürükle: çerçeve izler (gözler yatay, hep aynı yükseklikte). Paneldeki kenar boşluğunu ayarla, sonra “✓ Kırp” ya da “👤 Portre olarak kullan”a bas.
+Calque « Annotations » créé ¦ “Notlar” katmanı oluşturuldu
+Annotations ¦ Notlar
+Masque ajouté à la photo (gomme) ¦ Fotoğrafa maske eklendi (silgi)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Fotoğrafta silgi: fotoğraf bir maskeyle gizlenir, hiçbir şey silinmez. Geri getirmek için: X tuşu (⬜ göster), sonra üzerinden yeniden geç.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Göster: fırça (ya da silgi) gizleneni geri getirir. ⬛ gizle’ye dönmek için X.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Gizle: fırça (ya da silgi) gizler. ⬜ göster için X.
+Style du texte ¦ Metnin stili
+Caractère du texte ¦ Metnin karakteri
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Bilgisayarın çeşitlerini oku…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Hedefli ayar: fotoğrafta bir renge bas ve sağa (daha doygun) ya da sola (daha az) sürükle; ⌘ / Ctrl ile ton değişir
+Réglage ciblé ¦ Hedefli ayar
+Pipettes de la gamme ¦ Aralığın damlalıkları
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Damlalık: aralık, fotoğrafta tıklanan rengi merkez alır
+Ajouter à la gamme la couleur cliquée ¦ Tıklanan rengi aralığa ekle
+Retirer de la gamme la couleur cliquée ¦ Tıklanan rengi aralıktan çıkar
+Bord intérieur : plein effet jusqu’ici ¦ İç kenar: buraya kadar tam etki
+Bord extérieur : l’effet s’éteint ici ¦ Dış kenar: etki burada söner
+Haut : les couleurs avant ; bas : après. ¦ Üst: önceki renkler; alt: sonraki.
+🎚 Autres réglages… ¦ 🎚 Diğer ayarlar…
+🖌 Peindre le masque ¦ 🖌 Maskeyi boya
+Réactiver ¦ Yeniden aç
+Désactiver ¦ Kapat
+▦ Calque de dégradé ¦ ▦ Degrade katmanı
+garder les proportions ¦ oranları koru
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Hemen üstte, yalnızca bu katmanı etkileyen bir ayar katmanı
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Bu katmanda Ton/Doygunluk
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Ton/Doygunluk için fotoğrafı ya da bir 🎚 ayar katmanını (Katmanlar) seç.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Fotoğrafta bir renge bas ve sola ya da sağa sürükle (⌘ / Ctrl: ton).
+💧 Clique sur une couleur de la photo. ¦ 💧 Fotoğrafta bir renge tıkla.
+C’est un gris : il n’a pas de teinte. ¦ Bu bir gri: tonu yok.
+Gamme choisie à la pipette ¦ Aralık damlalıkla seçildi
+Gamme élargie ¦ Aralık genişletildi
+Gamme réduite ¦ Aralık daraltıldı
+Coloriser : oui ¦ Renklendir: evet
+Coloriser : non ¦ Renklendir: hayır
+Coloriser ¦ Renklendir
+Propriétés du masque ¦ Maskenin özellikleri
+Teinte/Saturation remise à zéro ¦ Ton/Doygunluk sıfırlandı
+Masque inversé ¦ Maske ters çevrildi
+Masque désactivé ¦ Maske kapatıldı
+Masque réactivé ¦ Maske yeniden açıldı
+Masque retiré ¦ Maske çıkarıldı
+Masque ajouté ¦ Maske eklendi
+Ce calque a déjà un masque. ¦ Bu katmanın zaten bir maskesi var.
+Teinte/Saturation sur un calque ¦ Bir katmanda Ton/Doygunluk
+Teinte/Saturation ¦ Ton/Doygunluk
+Ancien style ¦ Eski stil
+Global ¦ Genel
+Rouges ¦ Kırmızılar
+Jaunes ¦ Sarılar
+Verts ¦ Yeşiller
+Cyans ¦ Camgöbekleri
+Bleus ¦ Maviler
+Magentas ¦ Macentalar
+Cyanotype ¦ Siyanotip
+Supprimer ce motif ¦ Bu deseni sil
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Desen katmanı <b>“{name}”</b>: her şey burada, hemen ayarlanır.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Bir desen seç, sonra “Doldur”a bas: kendi katmanına gider (varsa seçimin içinde). Uygulamanın desenleri iki rengini alır.
+fond transparent (motifs de l’app) ¦ saydam arka plan (uygulamanın desenleri)
+Décalage horizontal ¦ Yatay kaydırma
+Décalage vertical ¦ Dikey kaydırma
+▩ Remplir : nouveau calque de motif ¦ ▩ Doldur: yeni desen katmanı
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Desen kitaplığına eklenir (bu bilgisayarda saklanır).
+l’image visible ¦ görünür görüntü
+Taille du carreau ¦ Karonun boyutu
+raccord sans couture (les bords se fondent) ¦ dikişsiz ek (kenarlar birbirine karışır)
+Garder et remplir ¦ Sakla ve doldur
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Bu deseni saklamak için yer kalmadı: desenleri sil ya da onu küçült.
+Motif gardé dans la bibliothèque ▩. ¦ Desen ▩ kitaplığına kaydedildi.
+Mon motif ¦ Desenim
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Bir biçime tıkla: 🖌 fırça onu alır. Boyut yukarıda ayarlanır (ya da [ ve ]).
+Forme de la pointe ¦ Ucun biçimi
+Pas (écart entre les empreintes) ¦ Aralık (izler arası mesafe)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Küçük: sürekli bir çizgi. Büyük: ayrı izler (yıldızlar, yapraklar).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ %100’de biçim tamdır; daha aşağıda basıklaşır (tüy kalem, yassı fırça).
+l’angle suit le trait ¦ açı çizgiyi izler
+Dynamique et dispersion ¦ Dinamik ve dağılım
+Variation de taille ¦ Boyut değişimi
+Variation d’angle ¦ Açı değişimi
+Dispersion ¦ Dağılım
+Nombre par empreinte ¦ İz başına sayı
+Transfert et couleur ¦ Aktarım ve renk
+Flux (chaque empreinte) ¦ Akış (her iz)
+Variation d’opacité ¦ Opaklık değişimi
+Variation de couleur ¦ Renk değişimi
+Fais d’abord une sélection autour du dessin ¦ Önce çizimin çevresinde bir seçim yap
+Fais d’abord une sélection autour du dessin. ¦ Önce çizimin çevresinde bir seçim yap.
+＋ Forme d’après la sélection ¦ ＋ Seçimden biçim
+Garder comme préréglage ¦ Hazır ayar olarak sakla
+＋ Garder comme préréglage ¦ ＋ Hazır ayar olarak sakla
+Garder cette forme de pinceau ¦ Bu fırça biçimini sakla
+Nom du préréglage : ¦ Hazır ayarın adı:
+Plus de place pour garder ce pinceau. ¦ Bu fırçayı saklamak için yer kalmadı.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Biçimin hazır: onunla boya; yeniden bulmak için “Hazır ayar olarak sakla”.
+Rond net ¦ Keskin yuvarlak
+Rond doux ¦ Yumuşak yuvarlak
+Surligneur ¦ Fosforlu kalem
+Crayon fin ¦ İnce kurşun kalem
+Craie (grain) ¦ Tebeşir (grenli)
+Craie ¦ Tebeşir
+Fusain ¦ Kömür kalem
+Dégradé inversé ¦ Ters degrade
+Dégradé : tramage ¦ Degrade: titreklik
+Dégradé : sans tramage ¦ Degrade: titrekliksiz
+▦ Dégradé ¦ ▦ Degrade
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Tıklama: bu noktaya bir renk durağı ekle
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Çubuğa tıklama: bir durak daha · taşımak için bir durağı sürükle, kaldırmak için aşağı sürükle
+Mélange ¦ Karışım
+Classique (RVB) ¦ Klasik (RGB)
+Perceptuel (plus doux) ¦ Algısal (daha yumuşak)
+Par les teintes ¦ Tonlara göre
+Au-delà des bouts ¦ Uçların ötesinde
+Couleur des bouts ¦ Uçların rengi
+Répéter ¦ Yinele
+Répéter en miroir ¦ Ayna biçiminde yinele
+Le début devient la fin ¦ Başlangıç son olur
+⇄ Retourner les arrêts ¦ ⇄ Durakları ters çevir
+Espacer également ¦ Eşit aralıkla yerleştir
+Couleur de l’arrêt ¦ Durağın rengi
+Arrêt choisi ¦ Seçilen durak
+Milieu vers le suivant ¦ Sonrakine doğru orta nokta
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Bu durakla sonraki arasında yarı karışımın olduğu yer (Photoshop’taki küçük eşkenar dörtgen).
+✕ Enlever cet arrêt ¦ ✕ Bu durağı kaldır
+Supprimer ce préréglage ¦ Bu hazır ayarı sil
+Garder ce dégradé ¦ Bu degradeyi sakla
+Mon dégradé ¦ Degradem
+Premier plan → transparent ¦ Ön plan → saydam
+Noir → blanc ¦ Siyah → beyaz
+Blanc → transparent ¦ Beyaz → saydam
+Vignette (bords sombres) ¦ Vinyet (koyu kenarlar)
+Arc-en-ciel ¦ Gökkuşağı
+Cuivre ¦ Bakır
+Chrome ¦ Krom
+Or ¦ Altın
+Vieux papier ¦ Eski kâğıt
+Nuit ¦ Gece
+Printemps ¦ İlkbahar
+Mer ¦ Deniz
+Coucher de soleil ¦ Gün batımı
+▭ Linéaire ¦ ▭ Doğrusal
+◉ Radial ¦ ◉ Dairesel
+◔ Angle (conique) ¦ ◔ Açı (konik)
+⇋ Réfléchi ¦ ⇋ Yansımalı
+◇ Losange ¦ ◇ Eşkenar dörtgen
+Damier ¦ Dama
+Pois ¦ Puantiye
+Rayures ¦ Çizgili
+Hachures ¦ Tarama
+Briques ¦ Tuğlalar
+Chevrons ¦ Balıksırtı
+Losanges ¦ Baklavalar
+Vagues ¦ Dalgalar
+Toile ¦ Keten bez
+Croix ¦ Haçlar
+Fleurs de lys ¦ Zambak çiçekleri
+Clique maintenant à l’endroit à recopier. ¦ Şimdi kopyalanacak yere tıkla.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Bu katman kilitli: Katmanlar’dan kilidini aç.
+Texte effacé ¦ Metin silindi
+Sélection vide ¦ Seçim boş
+Sélection ajoutée ¦ Seçim eklendi
+Sélection retirée ¦ Seçim çıkarıldı
+Image remplacée : même place, même taille, même rotation. ¦ Görüntü değiştirildi: aynı yer, aynı boyut, aynı dönüş.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Görüntü yerleştirildi: ➤ ile sürükle, boyut için bir köşeyi çek (⇧: serbest), döndürmek için yuvarlak tutamacı kullan.
+Ce fichier n’est pas une image. ¦ Bu dosya bir görüntü değil.
+Remplacer l’image de l’objet dynamique ¦ Akıllı nesnenin görüntüsünü değiştir
+Remplacer par cette image ¦ Bu görüntüyle değiştir
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Yeni görüntü eskisinin yerini, boyutunu ve dönüşünü alır.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Yeni bir katmana, 🧩 akıllı nesne olarak gelir (kayıpsız büyüt, küçült, döndür). Fotoğrafın üzerine bir dosya da sürükleyebilir ya da kopyalanmış bir görüntüyü yapıştırabilirsin (⌘V).
+Sélection automatique ¦ Otomatik seçim
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Bu katman kilitli: Katmanlar’dan başka birini seç.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Kopyalanacak yer seçildi: şimdi örtülecek alanı boya.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Önce kopyalanacak yeri seç (🎯 düğmesi ya da ⌥ + tıklama).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Fotoğraf artık katmanlarda değil: “↺ Fotoğrafı geri koy” (Katmanlar sekmesi).
+La photo est verrouillée (🔒 dans Calques). ¦ Fotoğraf kilitli (Katmanlar’da 🔒).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Damga: kopyalanan alan (✨ Rötuşlar katmanı)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Önce bir seçim yap (⬚ ◯ ➰ ✒︎ 🪄 araçları).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Şimdilik hiç filtre kullanılmadı (Filtre menüsü).
+Opacité du calque (dosage) ¦ Katmanın opaklığı (doz)
+Valeurs de départ ¦ Başlangıç değerleri
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Hiçbir şey bozulmaz: filtre kendi katmanındadır. Sonra: Katmanlar → katman → ✨ Filtreler sekmesi → “ayarla…”.
+Filtre enlevé du calque ¦ Filtre katmandan kaldırıldı
+Ordre des filtres ¦ Filtrelerin sırası
+Filtres enlevés ¦ Filtreler kaldırıldı
+Plus de place pour les actions : supprimes-en une. ¦ Eylemler için yer kalmadı: birini sil.
+⚡ Actions ¦ ⚡ Eylemler
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Eylemin adı (örn. “1930 albümünün fotoğrafları”)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Bir eylem fotoğrafın ayarlarını (pozlama, düzeyler, eğri, ton, filtreler, toz, renklendirme…) ve maskesiz ayar katmanlarını saklar. Başka bir fotoğrafa ya da tek seferde birkaçına yeniden uygulanır: her biri <b>yeni bir sürüm</b> alır, özgün fotoğraf saklanır.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Bu eylemi saklamak ya da vermek için bir dosyaya kaydet
+Sur cette photo ¦ Bu fotoğrafta
+Sur plusieurs photos… ¦ Birkaç fotoğrafta…
+Aucune action enregistrée pour l’instant ¦ Şimdilik kayıtlı eylem yok
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ “＋ Şimdiki ayarları kaydet”, onları başka fotoğraflarda yeniden uygulamak için saklar.
+Les photos à retoucher ¦ Rötuşlanacak fotoğraflar
+Prendre ces photos ¦ Bu fotoğrafları al
+＋ Choisir des photos… ¦ ＋ Fotoğraf seç…
+afficher la nouvelle version ¦ yeni sürümü göster
+Aucune photo choisie. ¦ Hiç fotoğraf seçilmedi.
+refusé ¦ reddedildi
+fx Effets du calque ¦ fx Katman efektleri
+Fond (le contenu seulement, pas les effets) ¦ Dolgu (yalnızca içerik, efektler değil)
+Lueur externe ¦ Dış parıltı
+Incrustation de couleur ¦ Renk bindirme
+à l’extérieur ¦ dışarıda
+au milieu ¦ ortada
+à l’intérieur ¦ içeride
+Tout enlever ¦ Hepsini kaldır
+🔍 Plis et rayures ¦ 🔍 Kırışıklar ve çizikler
+Recherche des plis… ¦ Kırışıklar aranıyor…
+garder le grain autour ¦ çevredeki greni koru
+🪡 Plutôt à la main ¦ 🪡 Daha çok elle
+✓ Réparer ces lignes ¦ ✓ Bu çizgileri onar
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Kırışık bulunamadı: duyarlılığı artır ya da 🪡 fırçasıyla elle onar.
+Réparation… ¦ Onarılıyor…
+✨ Plis et rayures comblés ¦ ✨ Kırışıklar ve çizikler dolduruldu
+🌫️ Débruitage ¦ 🌫️ Gürültü azaltma
+adoucit le grain sans perdre les contours ¦ kenarları kaybetmeden greni yumuşatır
+🧹 Poussières et rayures ¦ 🧹 Toz ve çizikler
+les petits points blancs ou noirs ¦ küçük beyaz ya da siyah noktalar
+🩹 Plis et fines déchirures ¦ 🩹 Kırışıklar ve ince yırtıklar
+lignes fines repérées puis comblées ¦ bulunup doldurulan ince çizgiler
+🎚 Contraste et niveaux automatiques ¦ 🎚 Otomatik kontrast ve düzeyler
+noirs bien noirs, blancs bien blancs ¦ tam siyah siyahlar, tam beyaz beyazlar
+🔎 Netteté douce ¦ 🔎 Yumuşak keskinlik
+un peu plus de piqué ¦ biraz daha netlik
+🌈 Colorisation ¦ 🌈 Renklendirme
+couleurs d’époque (photo en noir et blanc) ¦ eski zaman renkleri (siyah beyaz fotoğraf)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ fotoğrafın zaten renkleri var: yine de istiyorsan işaretle
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Tutulacak adımları işaretle; her biri sonra gizleyebileceğin ya da dozunu ayarlayabileceğin bir “✨” katmanı olur. ↶ hepsini tek seferde geri alır.
+Garder : {what} ¦ Tut: {what}
+détail au centre ¦ ortadaki ayrıntı
+Aperçus… ¦ Önizlemeler…
+aucun pli trouvé à cette intensité ¦ bu yoğunlukta kırışık bulunamadı
+Coche au moins une étape. ¦ En az bir adım işaretle.
+✨ Plis et fines déchirures ¦ ✨ Kırışıklar ve ince yırtıklar
+✨ Poussières et rayures ¦ ✨ Toz ve çizikler
+✨ Débruitage ¦ ✨ Gürültü azaltma
+✨ Contraste et niveaux ¦ ✨ Kontrast ve düzeyler
+✨ Netteté douce ¦ ✨ Yumuşak keskinlik
+✨ Colorisation ¦ ✨ Renklendirme
+Colorisation ¦ Renklendirme
+Couleurs (pinceau) ¦ Renkler (fırça)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Rötuşlar (lekeler, kırışıklar, damga)
+🪪 Photo d’identité ¦ 🪪 Vesikalık fotoğraf
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Gözler yatay, hep aynı yükseklikte: böyle yapılan tüm portreler aynı biçimdedir.
+✓ Yeux trouvés sur le visage. ¦ ✓ Yüzde gözler bulundu.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Fotoğraftaki tanımlamaya göre: yuvarlakları gözlere göre ayarla.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Yüz bulunamadı: iki yuvarlağı gözlerin üzerine sürükle.
+Plusieurs fiches… ¦ Birkaç kart…
+✓ Recadrer ¦ ✓ Kırp
+👤 Utiliser comme portrait… ¦ 👤 Portre olarak kullan…
+Recadré en photo d’identité ¦ Vesikalık fotoğraf olarak kırpıldı
+3:4 (portrait classique) ¦ 3:4 (klasik portre)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (vesikalık fotoğraf)
+Marge autour du visage ¦ Yüzün çevresindeki boşluk
+Hauteur des yeux ¦ Gözlerin yüksekliği
+modèle absent ¦ model yok
+Recherche du visage… ¦ Yüz aranıyor…
+Photo non enregistrée. ¦ Fotoğraf kaydedilmedi.
+Utiliser comme portrait de quelle fiche ? ¦ Hangi kartın portresi olarak kullanılsın?
+PHOTO D’IDENTITÉ ¦ VESİKALIK FOTOĞRAF
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Kırpılan fotoğraf kartın medyasına eklenir, sonra onun portresi olur (eski portre medyasında kalır).
+Choisis une personne dans la liste. ¦ Listeden bir kişi seç.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ RÖTUŞ · VESİKALIK FOTOĞRAF
+🪪 Portraits de plusieurs fiches ¦ 🪪 Birkaç kartın portreleri
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Kartları seç: uygulama her biri için portresini (ya da ilk fotoğrafını) alır, yüzü bulur ve ötekilerle aynı biçimde kırpar (gözler aynı yükseklikte). Kontrol et, sonra “Portre olarak kullan”a bas: kırpılan her fotoğraf kendi kartının medyasına girer ve onun portresi olur (eskisi kalır).
+🔍 Préparer les portraits ¦ 🔍 Portreleri hazırla
+Aucune fiche choisie pour l’instant ¦ Şimdilik hiç kart seçilmedi
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Yukarıdan bir ya da birkaç kişi seç, sonra “🔍 Portreleri hazırla”ya bas.
+Choisis d’abord une ou plusieurs fiches. ¦ Önce bir ya da birkaç kart seç.
+aucune photo dans la fiche ¦ kartta fotoğraf yok
+yeux trouvés ¦ gözler bulundu
+d’après l’identification ¦ tanımlamaya göre
+✓ portrait mis à jour ¦ ✓ portre güncellendi
+Utiliser comme portraits ¦ Portre olarak kullan
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Döndürme henüz hazır değil: birazdan yeniden dene.
+Rotation de l’image ¦ Görüntüyü döndürme
+Rotation de l’image : 90° horaire ¦ Görüntüyü döndürme: 90° saat yönünde
+Rotation de l’image : 90° antihoraire ¦ Görüntüyü döndürme: 90° saat yönünün tersine
+Rotation de l’image : 180° ¦ Görüntüyü döndürme: 180°
+Rotation de l’image : {a}° horaire ¦ Görüntüyü döndürme: {a}° saat yönünde
+Rotation de l’image : {a}° antihoraire ¦ Görüntüyü döndürme: {a}° saat yönünün tersine
+Symétrie horizontale de l’image ¦ Görüntüyü yatay çevirme
+Symétrie verticale de l’image ¦ Görüntüyü dikey çevirme
+Perspective figée ¦ Perspektif sabitlendi
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Önceki kırpma kaldırıldı (artık düz durmuyordu): gerekirse yeniden yap ya da ↶ Geri al.
+📐 Redresser l’horizon ¦ 📐 Ufku düzelt
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Çizginde ölçülen açı: fotoğraf düzelmek için bu açı kadar döner.
+Coins ajoutés autour ¦ Çevreye eklenen köşeler
+Transparents (PNG) ¦ Saydam (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Boş köşeleri kaldırmak için kırp
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Tüm katmanlar, maskeler, metinler ve seçim fotoğrafla birlikte döner. ↶ Geri al (⌘Z) önceki hâline döndürür.
+Donne un angle entre 0,01 et 359,99°. ¦ 0,01 ile 359,99° arasında bir açı gir.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Ufuk boyunca (ya da dümdüz bir duvar boyunca) bir çizgi çiz: fotoğraf düzelmek için döner. Durmak için Esc.
+Cette ligne est déjà droite : rien à tourner. ¦ Bu çizgi zaten düz: döndürülecek bir şey yok.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Fotoğraf telefon yan tutularak çekilmiş: yatık kaydedilmiş.
+↻ Remettre droite ¦ ↻ Düzelt
+Photo remise droite (orientation du téléphone) ¦ Fotoğraf düzeltildi (telefonun yönü)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Süren rötuşlar kaybolacak (💾 Projeyi kaydet onları sonraya saklar).
+Passer à la retouche simple ? ¦ Basit rötuşa geçilsin mi?
+Passer sans enregistrer ¦ Kaydetmeden geç
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD henüz hazır değil: birazdan yeniden dene.
+L’assemblage de photos n’est pas encore prêt. ¦ Fotoğraf birleştirme henüz hazır değil.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Bu araç henüz hazır değil: birazdan yeniden dene.
+Recherche du sujet… ¦ Konu aranıyor…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Konu bulunamadı: arka plan tüm kenara değiyor. Daha az toleransla (🪄) ya da kementle dene.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Konu seçildi: eklemek için ⇧ + değnek ya da kement, çıkarmak için ⌥; uygulamak için “Maske”. Tolerans (🪄): arka planın nereye kadar gittiği.
+Sujet sélectionné ¦ Konu seçildi
+La photo semble déjà droite. ¦ Fotoğraf zaten düz görünüyor.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Bazı düzeltmeler (lekeler, damga) zaten yapıldı: düzleştirmeyle birlikte kayacaklar.
+Redresser la perspective ? ¦ Perspektif düzeltilsin mi?
+Perspective redressée ¦ Perspektif düzeltildi
+Perspective enlevée ¦ Perspektif kaldırıldı
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Renkleri boya (yumuşak fırça): katman “Renk” karıştırma modunda, fotoğrafın ışığı korunur. Düzeltmek için 🧽, dozu ayarlamak için katmanın opaklığı.
+Recherche des taches… ¦ Lekeler aranıyor…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Leke bulunamadı: duyarlılığı ya da boyutu artır.
+✨ Jaunissement enlevé ¦ ✨ Sararma kaldırıldı
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Sararma, “✨ Sararma kaldırıldı” ayar katmanında kaldırıldı: fotoğrafa dokunulmaz.
+Jaunissement enlevé (calque de réglage) ¦ Sararma kaldırıldı (ayar katmanı)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Önce yüzü ◯ elipsle çevrele (fotoğrafın üzerinde sürükle), sonra yeniden “Daha net yüz”e tıkla.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Yüzün gürültüsü azaltıldı ve ayrı bir katmanda keskinleştirildi: opaklığı etkinin dozunu belirler.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Düzeltici hazır: çizik ya da kırışık boyunca sürükle (kesinlik için yakınlaştır).
+✨ Vieille photo ravivée ¦ ✨ Eski fotoğraf canlandırıldı
+✨ Réglage automatique ¦ ✨ Otomatik ayar
+Fais d’abord une sélection. ¦ Önce bir seçim yap.
+Masque qui cache tout ¦ Her şeyi gizleyen maske
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Bu katmanın maskesi yok (Katman → Maske ekle).
+Ce calque n’a pas de masque. ¦ Bu katmanın maskesi yok.
+Sélection inversée ¦ Seçim ters çevrildi
+Agrandir la sélection ¦ Seçimi genişlet
+Réduire la sélection ¦ Seçimi daralt
+De combien de points (de l’aperçu) ? ¦ Kaç nokta (önizlemede)?
+Sélection agrandie ¦ Seçim genişletildi
+Sélection réduite ¦ Seçim daraltıldı
+Contour progressif de la sélection ¦ Seçimin yumuşak kenarı
+Copie de la sélection ¦ Seçimin kopyası
+Sélection copiée sur un calque ¦ Seçim bir katmana kopyalandı
+Remplissage ¦ Doldurma
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Fotoğraftaki alan silindi: saydam olacak (görüntü PNG olarak kaydedilir).
+Sélection effacée ¦ Seçim silindi
+Recadré sur la sélection ¦ Seçime göre kırpıldı
+Filtres de ce calque ¦ Bu katmanın filtreleri
+Plus tôt ¦ Daha önce
+un filtre… ¦ bir filtre…
+＋ Ajouter ¦ ＋ Ekle
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ <b>Filtre</b> menüsü: her filtre kendi katmanına konur (hiçbir şey bozulmaz): onu ayarlar, katmanın opaklığıyla dozunu belirler, bir 🎭 maskeyle sınırlar, 👁 ile gizlersin.
+Réglages remis à zéro ¦ Ayarlar sıfırlandı
+Point de courbe enlevé ¦ Eğri noktası kaldırıldı
+Supprimer ce point ¦ Bu noktayı sil
+Point de la courbe ¦ Eğrinin noktası
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Kırmızı maske: gizlenen (geri dönmek için \ tuşu)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Henüz proje olarak kaydedilmedi: 💾 Kaydet, sonra devam etmek için tüm çalışmayı saklar
+Enregistrer le projet sous un autre nom ¦ Projeyi başka bir adla kaydet
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Yeni projenin adı (“📂 Projeler…” içinde bulmak için):
+Les retouches en cours seront perdues. ¦ Süren rötuşlar kaybolacak.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Bu çalışmayı kaydetmeden başka bir proje açılsın mı?
+Ouvrir sans enregistrer ¦ Kaydetmeden aç
+affichée ¦ gösteriliyor
+en cours de retouche ¦ rötuşlanıyor
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Gör, karşılaştır, geri dön, yeniden adlandır, sil (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Gör, karşılaştır, geri dön, yeniden adlandır, sil
+l’original est toujours gardé ¦ özgün fotoğraf her zaman saklanır
+Original ¦ Özgün
+Quitter cette retouche sans l’enregistrer ? ¦ Bu rötuştan kaydetmeden çıkılsın mı?
+Pas de versions pour cette image. ¦ Bu görüntünün sürümü yok.
+Bicubique, plus lisse (pour agrandir) ¦ Bikübik, daha yumuşak (büyütmek için)
+Bicubique, plus net (pour réduire) ¦ Bikübik, daha keskin (küçültmek için)
+Bilinéaire ¦ Bilineer
+Au plus proche (contours nets, pixels) ¦ En yakın komşu (keskin kenarlar, pikseller)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Kaydedilen ya da dışa aktarılan görüntünün boyutu (Görüntü → Görüntü boyutu, Çalışma alanı boyutu)
+📏 Taille de l’image ¦ 📏 Görüntü boyutu
+pixels ¦ piksel
+pour cent ¦ yüzde
+Ajuster à un format ¦ Bir biçime uydur
+— garder ces mesures — ¦ — bu ölçüleri koru —
+🔗 Conserver les proportions ¦ 🔗 Oranları koru
+Résolution ¦ Çözünürlük
+Rééchantillonner ¦ Yeniden örnekle
+Méthode ¦ Yöntem
+À l’impression ¦ Baskıda
+↺ Remettre la taille d’origine ¦ ↺ Özgün boyuta getir
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Fotoğraf rötuş sırasında tam kalitede kalır: seçilen boyut, görüntüyü kaydettiğinde ya da dışa aktardığında uygulanır. ↶ Geri al (⌘Z) önceki boyuta döndürür.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ 300 ppi ile A5 basmak için yeterince büyük.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ 300 ppi ile A5 basmak için fazla küçük (1748 × 2480 px gerekir).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Kenar başına 1 ile 30 000 piksel arasında bir boyut seç (en çok 260 milyon piksel).
+⬚ Taille de la zone de travail ¦ ⬚ Çalışma alanı boyutu
+Nouvelle taille ¦ Yeni boyut
+Ancrage ¦ Bağlantı noktası
+Où reste l’image ¦ Görüntünün kaldığı yer
+Relative (ajouter à la taille actuelle) ¦ Göreli (şimdiki boyuta ekle)
+Au centre ¦ Ortada
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Görüntü bu yerde kalır; tuval çevresinde büyür (ya da kesilir).
+Fond de la zone ajoutée ¦ Eklenen alanın arka planı
+Transparent (PNG) ¦ Saydam (PNG)
+↺ Remettre la zone de départ ¦ ↺ Başlangıç alanına getir
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Geri al (⌘Z) önceki alana döndürür.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Kenar başına 1 ile 30 000 piksel arasında bir boyut seç.
+Informations de l’image ¦ Görüntünün bilgileri
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Bu bilgiler kaydedilen ya da dışa aktarılan görüntüye yazılır (XMP; Photoshop, Lightroom, Dosya Gezgini… tarafından okunabilir).
+Droits (copyright) ¦ Haklar (telif hakkı)
+Personnes reliées ¦ Bağlı kişiler
+Image trop grande pour être enregistrée par le navigateur. ¦ Görüntü tarayıcının kaydedemeyeceği kadar büyük.
+Image trop grande pour le navigateur. ¦ Görüntü tarayıcı için fazla büyük.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Rötuşlanmış kopya aynı kartlara eklendi.
+Image enregistrée dans les Médias. ¦ Görüntü Medyaya kaydedildi.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Yeni sürüm gösteriliyor. Özgün fotoğraf sürümlerde saklanır.
+Version enregistrée (non affichée). ¦ Sürüm kaydedildi (gösterilmiyor).
+Ouverture de la photo ¦ Fotoğraf açılıyor
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Başlangıç fotoğrafının boyutu değişmiş: katmanları kontrol et.
+Supprimer le projet (les photos et leurs versions restent) ¦ Projeyi sil (fotoğraflar ve sürümleri kalır)
+Aucun projet de retouche pour l’instant ¦ Şimdilik rötuş projesi yok
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ Rötuş’ta “💾 Projeyi kaydet”e bas.
+Renommer le projet ¦ Projeyi yeniden adlandır
+La photo et ses versions restent. ¦ Fotoğraf ve sürümleri kalır.
+Écran 16:9 — 1920 × 1080 ¦ Ekran 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Kare — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Kartpostal — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 dikey (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 yatay (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 dikey (300 dpi) — 2480 × 3508
+Autre taille… ¦ Başka boyut…
+⬜ Partir d’un canevas vide ¦ ⬜ Boş bir tuvalle başla
+⬜ Canevas vide ¦ ⬜ Boş tuval
+Créer et ouvrir ¦ Oluştur ve aç
+Une couleur… ¦ Bir renk…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Tuval Medyaya eklenir; sonra üzerine katmanlar, gruplar, metin, şekiller, fotoğraflar (Seçim → katman) konur…
+Taille entre 16 et 8 000 pixels de côté. ¦ Kenar başına 16 ile 8 000 piksel arasında boyut.
+Canevas trop grand pour le navigateur. ¦ Tuval tarayıcı için fazla büyük.
+Création impossible. ¦ Oluşturulamıyor.
+Canevas ¦ Tuval
+Restaurer cette photo ¦ Bu fotoğrafı onar
+Retoucher cette photo ¦ Bu fotoğrafı rötuşla
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ İçe aktarılan bir fotoğraf Medyaya eklenir (bir karta bağlanmadan); rötuşları sürüm olarak saklanır.
+Rouvrir un travail de retouche enregistré ¦ Kaydedilmiş bir rötuş çalışmasını yeniden aç
+📂 Projets… ¦ 📂 Projeler…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Çizmek, yazmak ya da katmanları birleştirmek için boş bir görüntü
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Fazla büyük: {w} × {h} nokta. Büyütme kenar başına {max} noktayla (ve {mp} milyon noktayla) sınırlı.
+Ta sélection est prise comme ciel ¦ Seçimin gökyüzü olarak alındı
+Ciel trouvé : {cov} de la photo ¦ Gökyüzü bulundu: fotoğrafın {cov} kadarı
+calques « Ciel » et « Harmonisation » ¦ “Gökyüzü” ve “Uyumlandırma” katmanları
+Ciel remplacé ({what}) ¦ Gökyüzü değiştirildi ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Kişi dekupe edildi (dikdörtgeninin içinde): arka planı seç; fırçayla düzeltmek için “Konturu rötuşla”.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Kişi dekupe edildi: arka planı seç; fırçayla düzeltmek için “Konturu rötuşla”.
+{w} × {h} points aujourd’hui ¦ Şimdi {w} × {h} nokta
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Bu görüntü zaten büyük: büyütme kenar başına {max} noktayla sınırlı.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 kenar başına {max} noktadan fazlasını verirdi: yalnızca ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Büyütülen görüntü indirildi ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ ×{k} büyütülen görüntü ({w} × {h}) medyaya eklendi.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ ×{k} büyütülmüş yeni sürüm ({w} × {h}) gösteriliyor; özgün fotoğraf sürümlerde kalır.
+☀️ Bleu dégagé ¦ ☀️ Açık mavi
+⛅ Beaux nuages ¦ ⛅ Güzel bulutlar
+🌅 Coucher de soleil ¦ 🌅 Gün batımı
+⛈️ Ciel orageux ¦ ⛈️ Fırtınalı gökyüzü
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Beyaz kış gökyüzü
+Agrandissement arrêté. ¦ Büyütme durduruldu.
+Fil de calcul en panne. ¦ Hesaplama iş parçacığı çöktü.
+Recherche du ciel… ¦ Gökyüzü aranıyor…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Gökyüzü bulamıyorum: fotoğrafın üstüne değmeli ve yeterince düz olmalı. Kendin seç (🪄 değnek, ➰ kement), sonra yeniden başla: seçimin gökyüzü olarak alınacak.
+Harmonisation du premier plan ¦ Ön planın uyumlandırılması
+Ciel ¦ Gökyüzü
+☁️ Remplacer le ciel ¦ ☁️ Gökyüzünü değiştir
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Bir gökyüzü fotoğrafı: veritabanından ya da bilgisayardan
+Une image… ¦ Bir görüntü…
+Taille du nouveau ciel ¦ Yeni gökyüzünün boyutu
+Position verticale ¦ Dikey konum
+Position horizontale ¦ Yatay konum
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ %100’ün üzerinde bir boyutla: gökyüzünün hangi bölümünün göründüğü (0 = üst).
+Fondu à l’horizon ¦ Ufukta geçiş
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Gökyüzü ile yer arasındaki sınırı yumuşatır (ağaçlar, çatılar): ne kadar yüksekse o kadar yumuşak.
+Harmoniser le premier plan ¦ Ön planı uyumlandır
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Her şey birbirine uysun diye manzara yeni gökyüzünün renginden ve ışığından biraz alır.
+Opacité du ciel ¦ Gökyüzünün opaklığı
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ “Gökyüzü” katmanının maskesini boya: ⬛ gizle (gökyüzünün geçmemesi gereken yerde), ⬜ göster
+🖌 Corriger le masque ¦ 🖌 Maskeyi düzelt
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Hiçbir şey bozulmaz: gökyüzü maskeli bir katmandır. Gökyüzünden bir parça eksikse ya da taşıyorsa: “Maskeyi düzelt” ya da gökyüzünü kendin seç (🪄, ➰) ve yeniden başlat.
+Une photo de ciel ¦ Bir gökyüzü fotoğrafı
+Prendre ce ciel ¦ Bu gökyüzünü al
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Veritabanından bir fotoğraf ya da bilgisayardan bir görüntü (medyaya girer).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Gökyüzünün maskesini boyuyorsun: gökyüzünün taştığı yerde ⬛ gizle (yapraklar, çatılar), eksik olduğu yerde ⬜ göster. Sonra “✓ Tamam”a bas.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Gökyüzü değiştirildi: “Gökyüzü” ve “Ön planın uyumlandırılması” katmanları (opaklık, maske, karşılaştırmak için 👁).
+✂️ Détourer une personne ¦ ✂️ Bir kişiyi dekupe et
+Sans intelligence artificielle : tout se calcule ici ¦ Yapay zekâ olmadan: her şey burada hesaplanır
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Kişinin çevresine çok sıkı olmayan bir dikdörtgen çiz (⬚) — ya da hiçbir şey yapma: tüm fotoğraf çerçeve olur.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. “Dekupe et”: uygulama kişinin (dikdörtgenin içinde) ve arka planın (çevresinde) renklerini öğrenir, sonra konturları izler.
+⬚ Tracer un rectangle ¦ ⬚ Bir dikdörtgen çiz
+✂️ Détourer ¦ ✂️ Dekupe et
+Fond transparent (image en PNG) ¦ Saydam arka plan (PNG görüntü)
+Fond flou ¦ Bulanık arka plan
+Fond uni ¦ Düz arka plan
+Garder la personne sur un calque à part ¦ Kişiyi ayrı bir katmanda tut
+Flou du fond ¦ Arka planın bulanıklığı
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Maskeyi boya: ⬛ gizle, ⬜ göster
+🖌 Retoucher le contour ¦ 🖌 Konturu rötuşla
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Kişi arka planından ayrıldığında iyi çalışır (farklı renkler, oldukça sade bir arka plan). İnce saçlar, kalabalık bir arka plan ya da arka planla aynı renkte giysiler: fırçayla rötuşlaman gerekir (“Konturu rötuşla”).
+Personne détourée ¦ Kişi dekupe edildi
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Kişinin çevresine bir dikdörtgen çiz (çevresinde biraz arka plan bırakarak), sonra “✂️ Dekupe et”e bas.
+Détourage… ¦ Dekupe ediliyor…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Kişi bulunamadı: dikdörtgeni ona daha yakın çiz, sonra yeniden başla.
+✂️ Détourer à nouveau ¦ ✂️ Yeniden dekupe et
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Kişinin maskesini boyuyorsun: ⬛ gizle (kalan arka plan), ⬜ göster (kişiden unutulmuş bir parça).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Arka planın maskesini boyuyorsun: ⬛ gizle (burası kişi), ⬜ göster (burası arka plan).
+Détourage : fond transparent ¦ Dekupe: saydam arka plan
+Détourage : fond flou ¦ Dekupe: bulanık arka plan
+Détourage : fond uni ¦ Dekupe: düz renk arka plan
+Détourage : personne sur un calque ¦ Dekupe: kişi ayrı katmanda
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Arka plan saydam yapıldı (fotoğrafın maskesi): görüntü PNG olarak kaydedilecek.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Dekupe yapıldı: her şey katmanlarda, gerekirse düzeltilecek maskelerle.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Kişinin çevresine bir dikdörtgen çiz (⬚) ya da tüm fotoğraf için doğrudan “✂️ Dekupe et”.
+Préparation de l’image en pleine taille… ¦ Görüntü tam boyutta hazırlanıyor…
+🔍 Agrandir l’image ¦ 🔍 Görüntüyü büyüt
+Netteté des contours ¦ Kenar netliği
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Hale oluşturmadan kenarları güçlendirir; düz alanlar (gökyüzü, ten) yumuşak kalır.
+Clique pour choisir l’endroit de l’aperçu ¦ Önizlemenin yerini seçmek için tıkla
+Lissage du grain ¦ Grenin yumuşatılması
+Avant (agrandi simplement) ¦ Önce (basitçe büyütülmüş)
+Après, à 100 % ¦ Sonra, %100
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Fotoğrafın her yerde gösterilen yeni bir sürümü (orijinali kalır)
+Agrandir → nouvelle version ¦ Büyüt → yeni sürüm
+→ copie séparée ¦ → ayrı kopya
+Agrandir → dans les médias ¦ Büyüt → medyaya
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Büyütme, hiç fotoğraflanmamış ayrıntıları geri getiremez: görüntü daha büyük ve daha net olur, daha kesin değil.
+Cette image est déjà trop grande pour être agrandie. ¦ Bu görüntü büyütülmek için zaten çok büyük.
+Filtre : {what} ¦ Filtre: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Ton/Doygunluk {num}
+Motif {num} ¦ Desen {num}
+Bruit ¦ Gürültü
+Artistiques ¦ Sanatsal
+Pixellisation ¦ Pikselleştirme
+Rendu ¦ İşleme
+Autres ¦ Diğer
+Flou gaussien ¦ Gauss bulanıklığı
+Flou de mouvement ¦ Hareket bulanıklığı
+Flou radial (zoom) ¦ Radyal bulanıklık (yakınlaştırma)
+Flou rotatif ¦ Dönen bulanıklık
+Accentuation (masque flou) ¦ Keskinleştirme (bulanık maske)
+Estampage (relief) ¦ Kabartma
+Solarisation ¦ Solarizasyon
+Diffusion ¦ Dağıtma
+Vent ¦ Rüzgâr
+Aquarelle ¦ Suluboya
+Vieux film ¦ Eski film
+Cristallisation ¦ Kristalleştirme
+Pointillisme ¦ Noktacılık
+Nuages (texture) ¦ Bulutlar (doku)
+Lueur diffuse ¦ Yaygın parıltı
+Tourbillon ¦ Girdap
+Onde ¦ Dalga
+Rayon ¦ Yarıçap
+Centre X ¦ Merkez X
+Centre Y ¦ Merkez Y
+Seuil ¦ Eşik
+Bande nette, hauteur ¦ Net şerit, yükseklik
+Points lumineux ¦ Işıklı noktalar
+Monochrome (0 / 1) ¦ Tek renk (0 / 1)
+Gain ¦ Kazanç
+Niveaux ¦ Düzeyler
+Longueur ¦ Uzunluk
+Contours ¦ Kenarlar
+Trait ¦ Çizgi
+Traits noirs ¦ Siyah çizgiler
+Usure ¦ Aşınma
+Position X ¦ Konum X
+Position Y ¦ Konum Y
+Amplitude ¦ Genlik
+Horizontale (0) / verticale (1) ¦ Yatay (0) / dikey (1)
+Horizontal ¦ Yatay
+Contraste ¦ Kontrast
+Ombres ¦ Gölgeler
+Chaleur ¦ Sıcaklık
+Rouge ¦ Kırmızı
+Vert ¦ Yeşil
+Bleu ¦ Mavi
+RVB ¦ RGB
+Assombrir ¦ Koyulaştır
+Grain ¦ Gren
+Vignette ¦ Vinyet
+Force ¦ Güç
+Couleurs ¦ Renkler
+Auto ¦ Otomatik
+Document lisible ¦ Okunaklı belge
+Niveaux : point noir, tons moyens, point blanc ¦ Düzeyler: siyah nokta, orta tonlar, beyaz nokta
+Niveaux automatiques ¦ Otomatik düzeyler
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Eğriyi yükseltmek açar, çukurlaştırmak koyulaştırır, bir “S” kontrast verir. Kırmızı, yeşil, mavi: baskın bir renk tonunu düzelt.
+✨ Menu ¦ ✨ Menü
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Taşı: tutamacı sürükle ya da Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Otomatik: en koyu noktalar siyah, en açık noktalar beyaz olur; 2. kez tıklamak önceki duruma döndürür.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Yalnızca koyu bölümleri açar (ya da sola doğru koyulaştırır), açık bölümlere dokunmaz.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Önceki duruma dönmek için yeniden tıkla
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Eğriye tıkla: nokta ekle · sürükle: taşı · kaldırmak için: noktayı seç, sonra “Noktayı kaldır” (ya da ⌫ tuşu), ya da çerçevenin dışına sürükle.
+fx ¦ fx
+Normal italique ¦ Normal italik
+Extra-fin italique ¦ Ekstra ince italik
+Ultra-léger italique ¦ Ultra hafif italik
+Léger italique ¦ Hafif italik
+Médium italique ¦ Orta italik
+Demi-gras italique ¦ Yarı kalın italik
+Gras italique ¦ Kalın italik
+Extra-gras italique ¦ Ekstra kalın italik
+Noir italique ¦ Siyah italik
+Unicode : Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: Yunanca
+Unicode : cyrillique ¦ Unicode: Kiril
+Unicode : ponctuation ¦ Unicode: noktalama
+Unicode : monnaies ¦ Unicode: para birimleri
+Unicode : symboles de lettres ¦ Unicode: harf benzeri simgeler
+Unicode : nombres ¦ Unicode: sayılar
+Unicode : traits de tableau ¦ Unicode: tablo çizgileri
+Unicode : symboles divers ¦ Unicode: çeşitli simgeler
+Unicode : casseau (dingbats) ¦ Unicode: süs simgeleri (dingbats)
+Unicode : ligatures ¦ Unicode: bitişik harfler
+Grain de papier ¦ Kâğıt dokusu
+Rond ¦ Yuvarlak
+Plume calligraphique ¦ Hat kalemi
+Crayon ¦ Kurşun kalem
+Pinceau sec ¦ Kuru fırça
+Herbe ¦ Çimen
+Peau claire ¦ Açık ten
+Peau hâlée ¦ Bronz ten
+Peau mate ¦ Esmer ten
+Joues, lèvres ¦ Yanaklar, dudaklar
+Cheveux bruns ¦ Kahverengi saç
+Cheveux blonds ¦ Sarı saç
+Cheveux gris ¦ Gri saç
+Feuillage ¦ Yapraklar
+Uniforme, costume bleu ¦ Üniforma, mavi takım elbise
+Robe bordeaux ¦ Bordo elbise
+Habit noir ¦ Siyah giysi
+Mur, pierre ¦ Duvar, taş
+Brique, tuile ¦ Tuğla, kiremit
+Bois ¦ Ahşap
+🩹 Correcteur ¦ 🩹 Düzeltici
+🧬 Tampon (morceau manquant) ¦ 🧬 Damga (eksik parça)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Yakınlaştırma: sığdır, %50, %100, %200
+photo|Restaurer ¦ Onar
+menu|Sélection ¦ Seçim
+retouche|Courbe ¦ Eğri
+motif|D’après ¦ Kaynak
+pinceau|Feuille ¦ Yaprak
+pinceau|Étoile ¦ Yıldız
+pinceau|Carré ¦ Kare
+Glisse pour comparer ¦ Karşılaştırmak için sürükle
+Rideau avant / après ¦ Önce / sonra perdesi
+Image importée ¦ İçe aktarılan görüntü
+La fenêtre d’export n’est pas encore prête. ¦ Dışa aktarma penceresi henüz hazır değil.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Görüntü indirildi; bir kopyası medyaya kondu.
+Aperçu de l’avant / après ¦ Önce / sonra önizlemesi
+Rideau vertical (avant à gauche) ¦ Dikey perde (önce solda)
+Rideau horizontal (avant en haut) ¦ Yatay perde (önce üstte)
+L’une sous l’autre ¦ Alt alta
+Position du rideau ¦ Perdenin konumu
+ex. Mariage de Jean et Marie, 1925 ¦ örn. Mariage de Jean et Marie, 1925
+Écrire « Avant » et « Après » ¦ “Önce” ve “Sonra” yaz
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Önce / sonra indirildi; bir kopyası medyaya kondu.
+Garder appuyé pour voir l’original ¦ Orijinali görmek için basılı tut
+👁 Avant / après ¦ 👁 Önce / sonra
+◧ Rideau ¦ ◧ Perde
+Comparer avec un rideau qu’on glisse sur la photo ¦ Fotoğrafın üzerinde kaydırılan bir perdeyle karşılaştır
+Rideau vertical ou horizontal ¦ Dikey ya da yatay perde
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Önce / sonrayı görüntü olarak dışa aktar (yan yana ya da perde, açıklamayla)
+Rideau horizontal ¦ Yatay perde
+Rideau vertical ¦ Dikey perde
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Çerçevenin yüzün çevresinde ne kadar taştığı: küçük = yüze yakın, büyük = omuzlar ve biraz arka plan.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Gözlerin çerçevedeki yüksekliği, üstten: tüm portrelerde aynıdır, yan yana konunca hizalanırlar.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Zayıf: fırçanın kenarı yumuşaktır ve kaynaşır; güçlü: kenar nettir.
+Filtres ¦ Filtreler
+✨ Filtres ¦ ✨ Filtreler
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Klasik: eskisi gibi. Algısal: göze daha eşit bir geçiş, ortada gri ya da fazla koyu bölge olmadan. Tonlardan geçerek: gökkuşağının renklerinden geçerek.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Daha yüksek: daha soluk ya da daha kısa çizgiler de alınır. Fazla yüksekse fotoğrafın ayrıntıları (saç, yazı) da alınabilir: kırmızıya bak.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Tüm adımların gücü bir arada: düşük = belli belirsiz bir onarım, yüksek = daha belirgin (ama “fazla pürüzsüz” olmasına dikkat et).
+Sens ¦ Yön
+De combien ¦ Ne kadar
+↻ Horaire ¦ ↻ Saat yönünde
+↺ Antihoraire ¦ ↺ Saat yönünün tersine
+↻ Faire pivoter ¦ ↻ Döndür
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Döndürülen fotoğraftaki en büyük düz dikdörtgeni tutar: boş köşe kalmaz. Bu bir kırpmadır: “Kırpmayı geri al” onu kaldırır.
+Enlever ¦ Kaldır
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ İşaretli: piksel sayısı değişir (görüntü yeniden hesaplanır). İşaretsiz: yalnızca çözünürlük ve baskı boyutu değişir, pikseller aynı kalır.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ İşaretli: görüntünün çevresine eklenecek (ya da negatif bir sayıyla çıkarılacak) miktarı yazarsın.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Büyütmeden önce greni ve gürültüyü yumuşatır (kenarlar kalır): grenli taranmış bir fotoğraf için yararlı.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Fotoğrafı çekilmiş ya da taranmış bir negatif için: açık ve koyu tonlar yer değiştirir.
+Nom de la photo retouchée ¦ Rötuşlanan fotoğrafın adı
+Le nom de la copie et des fichiers exportés ¦ Kopyanın ve dışa aktarılan dosyaların adı
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Tam rötuş: katmanlar, seçimler, maskeler, metin, şekiller, filtreler, projeler
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Gürültü giderme, toz, kırışıklık, kontrast, netlik ve renklendirme bir arada (tam rötuşta)
+🎛️ Retouche complète ¦ 🎛️ Tam rötuş
+Retouche complète ¦ Tam rötuş
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Dışa aktar: rötuşlanan fotoğraf (PNG, JPG, yazdır) ya da önce / sonra
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Fotoğrafın bu sürümünü kaydet ve göster (orijinali saklanır)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Rötuşlanan fotoğraf (PNG, JPG, yazdır)…
+Barre des outils ¦ Araç çubuğu
+Réglages : couleur, lumière, courbe ¦ Ayarlar: renk, ışık, eğri
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Leke düzeltici: bir lekeye, toza, çiziğe tıkla
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Klon damgası: kopyalanacak yer için {key} + tıkla, sonra örtülecek alanı boya
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ Kopyalanacak yeri seçmek için {key} + tıkla, sonra örtülecek alanı boya.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ 90° sola döndür (saat yönünün tersine)
+Pivoter à gauche ¦ Sola döndür
+Faire pivoter de 90° vers la droite (horaire) ¦ 90° sağa döndür (saat yönünde)
+Pivoter à droite ¦ Sağa döndür
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Tam rötuş: katmanlar, seçimler, maskeler, metin, filtreler
+Les corrections en cours seront perdues. ¦ Devam eden düzeltmeler kaybolacak.
+Passer à la retouche complète ? ¦ Tam rötuşa geçilsin mi?
+Passer à la retouche complète ¦ Tam rötuşa geç
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Rengi ve ışığı sağdan ayarla · karşılaştırmak için “👁 Önce / sonra” düğmesini basılı tut
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Bir lekeye, toza ya da çiziğe tıkla: çevresindekiyle değiştirilir. Bir çizik için boyunca sürükle.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Önce kopyalanacak yeri seç: Alt + tıkla (Mac’te ⌥ + tıkla).
+Versions de la photo ¦ Fotoğrafın sürümleri
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Göstermeden kaydet (sürümlerde saklanır)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Ayrı kopya (aynı kartlara bağlı başka bir medya)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Rötuşlanan fotoğrafı dışa aktar (PNG, JPG, yazdır)…
+Exporter l’avant / après… ¦ Önce / sonrayı dışa aktar…
+Restaurer en une fois… ¦ Tek seferde onar…
+Pivoter de 90° à droite (horaire) ¦ 90° sağa döndür (saat yönünde)
+Pivoter de 90° à gauche (antihoraire) ¦ 90° sola döndür (saat yönünün tersine)
+Avant / après en rideau ¦ Perdeli önce / sonra
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Fotoğraf medyaya eklenir (kartsız). Bu fotoğraftaki devam eden ayarlar bırakılır.
+Retoucher « {name} » à la place ? ¦ Onun yerine bunu rötuşla: “{name}”?
+💧 Fluidité ¦ 💧 Akışkanlık
+Fluidité ¦ Akışkanlık
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Fotoğrafı biçimini bozmak için üzerine boya, yumuşak bir hamur gibi
+L’image suit la main ¦ Görüntü eli izler
+Agrandit sous le pinceau (garder appuyé) ¦ Fırçanın altını büyütür (basılı tut)
+Rétrécit sous le pinceau (garder appuyé) ¦ Fırçanın altını küçültür (basılı tut)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Saat yönünde döndürür
+Fait tourner dans l’autre sens ¦ Ters yönde döndürür
+Ramène peu à peu l’image d’origine ¦ Orijinal görüntüyü yavaş yavaş geri getirir
+➡ Pousser ¦ ➡ İt
+⊕ Gonfler ¦ ⊕ Şişir
+⊖ Dégonfler ¦ ⊖ Söndür
+Dégonfler ¦ Söndür
+Gonfler ¦ Şişir
+Pousser ¦ İt
+↻ Tourbillon ¦ ↻ Girdap
+↺ Tourbillon inverse ¦ ↺ Ters girdap
+Tourbillon inverse ¦ Ters girdap
+↩ Reconstruire ¦ ↩ Yeniden oluştur
+Reconstruire ¦ Yeniden oluştur
+Image trop grande pour la Fluidité. ¦ Görüntü Akışkanlık için çok büyük.
+↶ Annuler le coup ¦ ↶ Son darbeyi geri al
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Uygula (“Akışkanlık” katmanı)
+Rien n’a été déformé. ¦ Hiçbir şey bozulmadı.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Akışkanlık “Akışkanlık” katmanına uygulandı (fotoğraf altta kalır: karşılaştırmak için 👁).
+🪄 Gomme magique ¦ 🪄 Sihirli silgi
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Saydam yapılacak arka plana tıkla (birden çok tıklama birbirine eklenir)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Yalnızca komşu alan (yoksa: bu renk her yerde)
+↶ Annuler le clic ¦ ↶ Tıklamayı geri al
+✓ Appliquer (masque de la photo) ¦ ✓ Uygula (fotoğrafın maskesi)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Fotoğrafın zaten bir maskesi var: sihirli silgi onun yerini alır.
+Remplacer le masque de la photo ? ¦ Fotoğrafın maskesi değiştirilsin mi?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Arka plan saydam yapıldı (fotoğrafın maskesi, fırçayla düzeltilebilir): görüntü PNG olarak kaydedilir.
+Masque de « {name} » ¦ Maske: “{name}”
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Henüz maske yok: dekupe et (✂️), arka planı sil (🪄) ya da bir katmana maske ekle, sonra kenarını iyileştir.
+✨ Affiner le bord ¦ ✨ Kenarı iyileştir
+Décaler le bord ¦ Kenarı kaydır
+Voir le masque seul (blanc : gardé) ¦ Yalnızca maskeyi gör (beyaz: tutulan)
+Bord du masque affiné ¦ Maskenin kenarı iyileştirildi
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Kenar iyileştirildi (geri dönmek için ↶; kalanını fırça düzeltir).
+Lissage du bord ¦ Kenar yumuşatma
+Contraste du bord ¦ Kenar kontrastı
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Görüntü çok büyük ({w} × {h} nokta): fotoğrafların boyutunu küçült.
+Recherche… ({i}/{total}) ¦ Aranıyor… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ “{name}”: kayma {dx} × {dy} nokta, döndürme {rot}°, benzerlik %{pct}.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Kesin ortak bölüm yok: {names} — elle yerleştir (sürükle, oklar; kontrol etmek için “Fark modu”).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotoğraflar hizalandı: kontrol et (ayarlamak için sürükle, oklar). “Ekleri kaynaştır” kaydederken birleşim yerini yumuşatır.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotoğraf hizalandı: kontrol et (ayarlamak için sürükle, oklar). “Ekleri kaynaştır” kaydederken birleşim yerini yumuşatır.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Birleştirilmiş görüntü kaydedildi, şu fotoğrafla aynı kartlara bağlandı: “{name}”. Orijinal fotoğraflar kalır.
+Titre de l’image assemblée ¦ Birleştirilmiş görüntünün başlığı
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Birleştirilmiş görüntünün başlığı (ve dışa aktarılan dosyaların adı)
+L’image assemblée : PNG, JPG ou imprimer ¦ Birleştirilmiş görüntü: PNG, JPG ya da yazdır
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Birleştirilmiş görüntüyü medyaya kaydet, veritabanındaki ilk fotoğrafla aynı kartlara bağlı olarak
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Seçmek için bir fotoğrafa tıkla, taşımak için sürükle · Shift + tekerlek: boyut · Alt + tekerlek: döndürme · tekerlek: yakınlaştırma · oklar: 1 px (Shift: 10 px) · eklemek için bilgisayardan bir fotoğrafı buraya sürükle
+Fond blanc (sinon transparent en PNG) ¦ Beyaz arka plan (yoksa PNG’de saydam)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ İşaretli: fotoğrafların çevresindeki arka plan beyazdır. İşaretsiz: saydam kalır (yalnızca PNG’de; JPG her zaman beyaz koyar).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ İyi örtüşen yerler siyah olur: aynı yerin iki fotoğrafını hizalamak için ideal
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ İki fotoğrafın aynı bölümleri siyah olur: yazı neredeyse kaybolduğunda tam olarak hizalanmışlardır.
+Mode différence ¦ Fark modu
+Boutons des photos ¦ Fotoğraf düğmeleri
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Panorama, iki seferde fotoğraflanmış sayfa: her fotoğraf, örtüştükleri yerde bir öncekinin üzerine konur (kayma, küçük döndürme)
+🪄 Aligner tout seul ¦ 🪄 Kendiliğinden hizala
+Image enregistrée ¦ Görüntü kaydedildi
+JPEG (léger) ¦ JPEG (hafif)
+PNG (sans perte) ¦ PNG (kayıpsız)
+Fondre les raccords ¦ Ekleri kaynaştır
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ İki fotoğrafın örtüştüğü yerde, üstteki fotoğrafın kenarı yumuşakça silinir: birleşim yerinde görünür bir basamak kalmaz.
+Largeur du fondu ¦ Geçiş genişliği
+Rogner aux parties couvertes (sans coins vides) ¦ Örtülü bölümlere kırp (boş köşe olmadan)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Fotoğraflarla tamamen örtülü en büyük dikdörtgeni tutar: panoramanın çevresinde beyaz köşe kalmaz.
+L’assemblage non enregistré sera perdu. ¦ Kaydedilmemiş birleştirme kaybolacak.
+Fermer sans enregistrer l’assemblage ? ¦ Birleştirme kaydedilmeden kapatılsın mı?
+Mettre devant ¦ Öne getir
+Mettre derrière ¦ Arkaya gönder
+Aucune photo à assembler pour l’instant ¦ Henüz birleştirilecek fotoğraf yok
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ “＋ Fotoğraflar” ya da bilgisayardan bir fotoğrafı çalışma alanına sürükle.
+＋ Photos ¦ ＋ Fotoğraflar
+Clique une photo pour la régler. ¦ Ayarlamak için bir fotoğrafa tıkla.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Fotoğrafın gerçek noktalarına göre boyutu: iki fotoğrafı aynı ölçeğe getirmek için.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Yarı saydam olunca üstteki fotoğraf alttakini gösterir: yazılar hizalanır.
+À moitié transparente ¦ Yarı saydam
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ İki fotoğrafı aynı ölçeğe getirmek için: üstteki fotoğrafı yarı saydam yap (ya da “Fark modu”nu işaretle), sonra yazılar üst üste gelene kadar boyutunu ve dönüşünü ayarla.
+Opaque ¦ Opak
+Aucune photo visible. ¦ Görünür fotoğraf yok.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Örtüşen en az iki fotoğraf ekle (“＋ Fotoğraflar”).
+Le navigateur n’a pas pu créer l’image. ¦ Tarayıcı görüntüyü oluşturamadı.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Veritabanına kaydetmek için fotoğraflardan biri veritabanından gelmeli (yoksa: ⤓ İndir).
+Création de l’image… ¦ Görüntü oluşturuluyor…
+ASSEMBLER ¦ BİRLEŞTİR
+ce n’est pas un fichier PSD ¦ bu bir PSD dosyası değil
+les très grands PSD (PSB) ne sont pas lus ¦ çok büyük PSD’ler (PSB) okunmaz
+version de PSD inconnue ¦ bilinmeyen PSD sürümü
+profondeur {n} bits non lue (seulement 8 bits) ¦ {n} bit derinlik okunmaz (yalnızca 8 bit)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ yalnızca RGB ya da gri tonlamalı PSD’ler okunur
+image trop grande ¦ görüntü çok büyük
+compression ZIP non lue ¦ ZIP sıkıştırması okunmaz
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD hazır: {n} katman, {w} × {h} px (ayar katmanları düzleştirilmiş görüntüde).|🗂 PSD hazır: {n} katman, {w} × {h} px (ayar katmanları düzleştirilmiş görüntüde).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD hazır: {n} katman, {w} × {h} px (ayar katmanları düzleştirilmiş görüntüde).|🗂 PSD hazır: {n} katman, {w} × {h} px (ayar katmanları düzleştirilmiş görüntüde).
+PSD illisible : {err}. ¦ PSD okunamıyor: {err}.
+Calque PSD ¦ PSD katmanı
+PSD importé : {file} ¦ PSD içe aktarıldı: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} katman içe aktarıldı, dosya: “{file}” (oranlar farklı: fotoğrafa uyduruldu).|🗂 {n} katman içe aktarıldı, dosya: “{file}” (oranlar farklı: fotoğrafa uyduruldu).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} katman içe aktarıldı, dosya: “{file}”.|🗂 {n} katman içe aktarıldı, dosya: “{file}”.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} katman içe aktarıldı, dosya: “{file}” (oranlar farklı: fotoğrafa uyduruldu).|🗂 {n} katman içe aktarıldı, dosya: “{file}” (oranlar farklı: fotoğrafa uyduruldu).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} katman içe aktarıldı, dosya: “{file}”.|🗂 {n} katman içe aktarıldı, dosya: “{file}”.
+Cocher pour comparer ¦ Karşılaştırmak için işaretle
+Coche deux versions pour les comparer. ¦ Karşılaştırmak için iki sürümü işaretle.
+Plus ancien ¦ Daha eski
+léger ¦ hafif
+Taille des vignettes ¦ Küçük resimlerin boyutu
+Utiliser ces images ¦ Bu görüntüleri kullan
+Chercher : titre, cote, personne, lieu, année ¦ Ara: başlık, arşiv numarası, kişi, yer, yıl
+Titre, cote, personne, lieu, année… ¦ Başlık, arşiv numarası, kişi, yer, yıl…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Boşluk: işaretle · Enter: onayla
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: onayla
+Retouche ¦ Rötuş
+RETOUCHE ¦ RÖTUŞ
+photo|Légende ¦ Açıklama
+Propriétés ¦ Özellikler
+Préréglage ¦ Hazır ayar
+Aucun. ¦ Yok.
+trop petite pour imprimer en A5 ¦ A5 basmak için çok küçük
+assez grande pour imprimer en A5 ¦ A5 basmak için yeterince büyük
+Écran 16:9 (1920 × 1080) ¦ Ekran 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Ekran 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Kare 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Dikey 9:16 (1080 × 1920)
+photo|Exposition ¦ Pozlama
+photo|Luminosité ¦ Parlaklık
+Colorisation : {what} ¦ Renklendirme: {what}
+{what} oui ¦ {what} evet
+{what} non ¦ {what} hayır
+Courbe {what} ¦ Eğri: {what}
+{layer} verrouillé ¦ {layer} kilitli
+{layer} déverrouillé ¦ {layer} kilidi açık
+« {name} » seulement sur l’élément dessous ¦ “{name}” yalnızca alttaki öğede
+« {name} » sur tout ce qui est dessous ¦ “{name}” alttaki her şeyde
+Teinte/Saturation : {what} ¦ Ton/Doygunluk: {what}
+{dpi} ppp ¦ {dpi} dpi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Gönderiliyor ({w} × {h} nokta, {size} MB)…
+Barre du haut (groupes) ¦ Üst çubuk (gruplar)
+Les outils ¦ Araçlar
+Options des outils (pinceau, texte…) ¦ Araç seçenekleri (fırça, metin…)
+Colonne d’outils ¦ Araç sütunu
+Panneau Réglages ¦ Ayarlar paneli
+Préréglages ¦ Hazır ayarlar
+Import des réglages indisponible. ¦ Ayarların içe aktarılması kullanılamıyor.

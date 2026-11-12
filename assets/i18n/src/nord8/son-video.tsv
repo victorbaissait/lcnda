@@ -1,0 +1,1005 @@
+fr ¦ tr
+(l’original reste gardé : on peut y revenir) ¦ (orijinal saklanır: ona geri dönebilirsin)
+(voix, plus léger) ¦ (ses kaydı, daha hafif)
+1 rush ajouté : glisse-le sur la frise. ¦ 1 ham çekim eklendi: onu zaman çizelgesine sürükle.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ 1 ham çekim eklendi: onu zaman çizelgesine sürükle. Projeyi kaydettiğinde Medya’ya girer.
+: l’original ne change pas du tout ¦ : orijinal hiç değişmez
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>Ayrı bir kopya</b> (aynı kartlara bağlı başka bir ses)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>Ayrı bir kopya</b> (aynı kartlara bağlı başka bir video)
+Au repère orange ({time}) ¦ Turuncu işarette ({time})
+Boutons des pistes : {n} px ¦ İz düğmeleri: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ İz düğmeleri: {n} px (başlangıç boyutu)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Bu dosya bir ayar; şunun için: {a}. Şunun için değil: {b}. Onu doğru yerde içe aktar.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ İçindekiler ({what}) köke taşınır.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ İçindekiler ({what}) şuraya taşınır: “{dir}”.
+Chapitre {n} ¦ Bölüm {n}
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Zaman çizelgesine tıkla: konumlan · bir öğeye tıkla: onu seç · sürükle: taşı · {play}: oynat · {split}: burada kes · {del}: kaldır
+Enregistrement du son… {n} % ¦ Ses kaydediliyor… %{n}
+Ensemble « {name} » appliqué. ¦ “{name}” seti uygulandı.
+Ensemble « {name} » supprimé ¦ “{name}” seti silindi
+Envoi des rushes {k}/{n}… ¦ Ham çekimler gönderiliyor {k}/{n}…
+Espace ¦ Boşluk
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ {fmt} dosyası indirildi ({n} MB). Veritabanında hiçbir şey değişmedi.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ Zaman çizelgesinde {n} kez kullanılıyor: bu bölümler de çıkarılacak. Dosya Medya’daysa orada kalır.
+Image clé {time} ¦ Anahtar kare {time}
+Le fichier importé est maintenant dans les Médias. ¦ İçe aktarılan dosya artık Medya’da.
+Le fichier reste dans les Médias s’il y est. ¦ Dosya Medya’daysa orada kalır.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Kurgu kaydedilmek için yeniden oynatılıyor: bu <b>{time}</b> sürer (kendi süresi). Pencereyi açık bırak.
+Les boutons des pistes ont déjà leur taille de départ. ¦ İz düğmeleri zaten başlangıç boyutunda.
+Les boutons des pistes sont déjà au plus grand. ¦ İz düğmeleri zaten en büyük boyutta.
+Les boutons des pistes sont déjà au plus petit. ¦ İz düğmeleri zaten en küçük boyutta.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ İçe aktarılan {n} dosya artık Medya’da.
+Mettre « {name} » dans… ¦ “{name}” şuraya koy…
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Kurgu hazırlandı: {what}. İstediğini düzelt, sonra ⤓ Dışa aktar.
+Nom du dossier (dans « {name} ») : ¦ Klasörün adı (“{name}” içinde):
+Nom du dossier : ¦ Klasörün adı:
+Nouveau chapitre ¦ Yeni bölüm
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Yeni sürüm, şimdilik <b>göstermeden</b>
+Nouvelle version, montrée partout ¦ Yeni sürüm, her yerde gösterilir
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Bir kez aç: {what}. Düğmeleri burada görünecek.
+Où mettre « {name} » ? ¦ “{name}” nereye konsun?
+Piste « {name} » ajoutée. ¦ “{name}” izi eklendi.
+Piste « {name} » supprimée ¦ “{name}” izi silindi
+Piste « {name} » supprimée (avec {what}) ¦ “{name}” izi silindi (birlikte: {what})
+Piste « {name} » vidée ¦ “{name}” izi boşaltıldı
+Ranger « {name} » dans… ¦ “{name}” şuraya yerleştir…
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Mevcut ayarlar “{name}” setiyle değiştirilsin mi?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Ham çekim silindi; zaman çizelgesindeki {n} bölümüyle birlikte.
+Rush supprimé, avec son passage sur la frise. ¦ Ham çekim silindi; zaman çizelgesindeki bölümüyle birlikte.
+Rush supprimé. ¦ Ham çekim silindi.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ “{name}” ayarı içe aktarıldı: kullanmak için “Uygula”.
+Supprimer le dossier « {name} » ? ¦ “{name}” klasörü silinsin mi?
+Supprimer le rush ¦ Ham çekimi sil
+Supprimer « {name} » du projet ? ¦ “{name}” projeden silinsin mi?
+Titre de la vidéo ¦ Videonun başlığı
+Titre du chapitre qui commence à {time} : ¦ Şu anda başlayan bölümün başlığı: {time}
+Titre du son ¦ Sesin başlığı
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ “{name}” adında bir ayar zaten var. Bunun adı ne olsun?
+ce rush ¦ bu ham çekim
+comme l’original (mono) ¦ orijinal gibi (mono)
+comme l’original (stéréo) ¦ orijinal gibi (stereo)
+comme l’original ({n} kHz) ¦ orijinal gibi ({n} kHz)
+la copie est rattachée aux mêmes fiches ¦ kopya aynı kartlara bağlanır
+la disposition du montage ¦ kurgu yerleşimi
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ ses kaydı için en hafifi · yaklaşık {n} MB · QuickTime oynatmaz
+le plus léger · ~{n} Mo ¦ en hafifi · ~{n} MB
+les boutons de « {name} » ¦ düğmeler: “{name}”
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ kesinlikle her yerde çalar (telefonlar, arabalar, Mac, Windows) · 128 kbit/s ile yaklaşık {n} MB
+lu partout · ~{n} Mo ¦ her yerde çalar · ~{n} MB
+l’original est toujours gardé · montrée : {name} ¦ orijinal her zaman saklanır · gösterilen: {name}
+l’outil « {name} » ¦ araç: “{name}”
+nouvelle version, copie (réglages) ¦ yeni sürüm, kopya (ayarlar)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ kaydedilmek için gerçek zamanlı yeniden oynatılır (pencereyi açık bırak) · boyut, kalite, saniyedeki kare ve ses düzeyi (📢 {n} LUFS): Ayarlar → Kurgu
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ kaydedilmek için gerçek zamanlı yeniden oynatılır (pencereyi açık bırak) · boyut, kalite, saniyedeki kare ve standart ses düzeyi: Ayarlar → Kurgu
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ kayıpsız ve WAV’dan yaklaşık iki kat hafif · yaklaşık {n} MB · tarayıcılar, VLC, Windows çalar; QuickTime çalmaz
+sans perte · ~{n} Mo ¦ kayıpsız · ~{n} MB
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ kayıpsız, her yerde çalar (Mac, Windows, Audacity) · yaklaşık {n} MB
+sans perte, léger · ~{n} Mo ¦ kayıpsız, hafif · ~{n} MB
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ kayıpsız; GarageBand, Logic, QuickTime için · yaklaşık {n} MB · yalnızca indirmek için (uygulama çalmaz)
+stéréo ¦ stereo
+sur chaque temps ¦ her vuruşta
+tourné de {n}° ¦ {n}° döndürüldü
+tous les {n} temps ¦ her {n} vuruşta bir
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: video, fotoğraf ya da ses değil.
+{n} images/s ¦ {n} kare/sn
+{n} rushes ajoutés : glisse-les sur la frise. ¦ {n} ham çekim eklendi: onları zaman çizelgesine sürükle.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ {n} ham çekim eklendi: onları zaman çizelgesine sürükle. Projeyi kaydettiğinde Medya’ya girerler.
+{n} temps repérés · environ {bpm} battements par minute. ¦ {n} vuruş bulundu · dakikada yaklaşık {bpm} vuruş.
+{n} temps repérés. ¦ {n} vuruş bulundu.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: birini seç, sonra “Uygula”.
+{what} sur la piste « Sous-titres ». ¦ {what} — “Altyazılar” izinde.
+« {name} » est revenu du Studio son, nettoyé. ¦ “{name}” Ses stüdyosundan temizlenmiş olarak döndü.
+« {name} » rangé dans la racine. ¦ “{name}” köke yerleştirildi.
+« {name} » rangé dans « {dir} ». ¦ “{name}” şuraya yerleştirildi: “{dir}”.
+À la fin ¦ Sonda
+◇ image clé à {time} ¦ ◇ anahtar kare: {time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} → iz 1 (kaymalar: {offs}).
+💾 Dans les médias… ¦ 💾 Medyaya…
+📢 Mesure du volume… {n} % ¦ 📢 Ses düzeyi ölçülüyor… %{n}
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Ölçülen ses düzeyi: {a} LUFS → {b} LUFS (tepeler sınırlayıcıyla tutuldu).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Ölçülen ses düzeyi: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 “{name}” izi kilitlendi: öğeleri artık hareket etmez.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 “{name}” izinin kilidi açıldı.
+🕘 Versions ({n})… ¦ 🕘 Sürümler ({n})…
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 {n} vuruş bulundu (dakikada yaklaşık {bpm}).
+🥁 {n} temps repérés. ¦ 🥁 {n} vuruş bulundu.
+=rush ¦ ham çekim|ham çekim
+=plan ajouté ¦ plan eklendi|plan eklendi
+=sous-titre importé ¦ altyazı içe aktarıldı|altyazı içe aktarıldı
+=ensemble importé ¦ set içe aktarıldı|set içe aktarıldı
+=réglage du Studio reste appliqué ¦ Stüdyo ayarı uygulanmış durumda|Stüdyo ayarı uygulanmış durumda
+=morceau ¦ parça|parça
+(rien ne change dans la base) ¦ (veritabanında hiçbir şey değişmez)
+(un autre son, rattaché aux mêmes fiches) ¦ (aynı kartlara bağlı başka bir ses)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (aynı kartlara bağlı başka bir video)
+300 dossiers au plus. ¦ En fazla 300 klasör.
+bandes floues plutôt que noires ¦ siyah yerine bulanık şeritler
+Activer / couper ¦ Aç / kapat
+Adaptation spatiale ¦ Uzamsal uyarlama
+Adapter (toute l’image, bandes noires) ¦ Sığdır (tüm görüntü, siyah şeritler)
+Aide sous la frise ¦ Zaman çizelgesinin altında yardım
+Aigus ¦ Tizler
+Aimant arrêté. ¦ Mıknatıs kapatıldı.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Mıknatısla: sürüklerken bir öğe oynatma kafasına, öbürlerinin başına ya da sonuna, bölümlere ve müziğin vuruşlarına yapışır (Alt / Option basılı tut: mıknatıssız)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Mıknatısla: sürüklenen öğe oynatma kafasına, öbür öğelere, bölümlere ve müziğin vuruşlarına yapışır (Alt / Option: mıknatıssız)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Buraya anahtar kare ekle (değer zamanla değişebilir)
+Aller à l'image clé précédente de l'élément choisi ¦ Seçili öğenin önceki anahtar karesine git
+Aller à l'image clé suivante de l'élément choisi ¦ Seçili öğenin sonraki anahtar karesine git
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Projenin adı (📂 Projeler… içinde bulmak için)
+Le son du morceau passe sur une piste son, à part ¦ Parçanın sesi ayrı bir ses izine geçer
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Bitmiş ses: yeni sürüm (orijinal saklanır), kopya, yeni ses ya da indirilen dosya
+Ancien film ¦ Eski film
+Ancrage X ¦ Bağlama X
+Ancrage Y ¦ Bağlama Y
+Au début ¦ Başta
+Aucun projet son pour l’instant ¦ Şimdilik ses projesi yok
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Tanınan altyazı yok (.srt ya da .vtt dosyası).
+Aucune (taille d’origine) ¦ Hiçbiri (özgün boyut)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ Ayrıca ⌘ + ve ⌘ −, geri dönmek için ⌘ 0
+Avancer le morceau dans la piste 1 ¦ Parçayı iz 1’de öne al
+← Avancer ¦ ← Öne al
+Reculer → ¦ Geriye al →
+Bord adouci ¦ Yumuşak kenar
+Boutons remis comme au départ. ¦ Düğmeler başlangıçtaki gibi yapıldı.
+Cacher cette piste (ni vue ni entendue) ¦ Bu izi gizle (ne görünür ne duyulur)
+Montrée ¦ Gösteriliyor
+Cachée ¦ Gizli
+Ce fichier n’est pas une disposition du montage. ¦ Bu dosya bir kurgu yerleşimi değil.
+Ce réglage est vide ou abîmé. ¦ Bu ayar boş ya da bozuk.
+Cette piste est déjà vide. ¦ Bu iz zaten boş.
+Chapitres copiés. ¦ Bölümler kopyalandı.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Konumlanmak için zaman çizelgesine, seçmek için bir öğeye tıkla; bir öğeyi zamanda taşımak için ya da aynı türden başka bir ize sürükle (videolar ve fotoğraflar tüm video izlerine gider, metin ↔ metin, ses ↔ ses). Boşluk = oynat / duraklat · ⌫ ya da Del = kaldır · B = burada kes · ◇ = anahtar kare · 🧲 sürüklenen öğe öbürlerine yapışır (Alt / Option: mıknatıssız) · 🔒 kilitli bir iz artık hareket etmez.
+Comme la 1re vidéo ¦ 1. video gibi
+Comme la vidéo ¦ Video gibi
+Composition ¦ Birleştirme
+Copie ce texte : ¦ Bu metni kopyala:
+Couleur du fondu ¦ Geçişin rengi
+Couleurs vives ¦ Canlı renkler
+Coupe franche ¦ Düz kesme
+Coupe le morceau choisi à la tête de lecture ¦ Seçili parçayı oynatma kafasında kes
+Commence ici ¦ Burada başlar
+Finit ici ¦ Burada biter
+Le morceau choisi commence à la tête de lecture ¦ Seçili parça oynatma kafasında başlar
+Le morceau choisi finit à la tête de lecture ¦ Seçili parça oynatma kafasında biter
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ “Sesi düzenle” içinde “💾 Projeyi kaydet”.
+Monter ce bloc ¦ Bu bloğu yukarı taşı
+Descendre ce bloc ¦ Bu bloğu aşağı taşı
+Monter la piste ¦ İzi yukarı taşı
+Descendre la piste ¦ İzi aşağı taşı
+Distorsion ¦ Bozulma
+Doux ¦ Yumuşak
+Durée du film : ¦ Filmin süresi:
+Durée illisible ¦ Okunamayan süre
+Durée par photo ¦ Fotoğraf başına süre
+Durée à l’écran ¦ Ekrandaki süre
+Défiler ¦ Kaydır
+Détacher le son ¦ Sesi ayır
+🔊 Détacher le son ¦ 🔊 Sesi ayır
+Montrer cette piste ¦ Bu izi göster
+Déverrouiller la piste ¦ İzin kilidini aç
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ İzi kilitle (öğeleri artık hareket etmez, kesilmez, kaldırılmaz)
+ENREGISTRER LE SON ¦ SESİ KAYDET
+EXPORTER LA VIDÉO ¦ VİDEOYU DIŞA AKTAR
+Effacer les temps ¦ Vuruşları sil
+Repérer les temps ¦ Vuruşları bul
+Repérer de nouveau ¦ Yeniden bul
+Effet Ken Burns ¦ Ken Burns efekti
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Eski film efekti: gren, çizikler, tozlar, titreyen görüntü, kararmış köşeler
+En couple ¦ Çift olarak
+Les parents ¦ Anne baba
+Les enfants ¦ Çocuklar
+En incrustation, à la tête de lecture ¦ Bindirme olarak, oynatma kafasında
+Enlever cette image clé ¦ Bu anahtar kareyi kaldır
+Enlever l'élément choisi ¦ Seçili öğeyi kaldır
+🗑 Enlever ¦ 🗑 Kaldır
+Enlever la stabilisation ¦ Sabitlemeyi kaldır
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Konunun üzerindeki yeşil yansımayı kaldır (saçlar, kenarlar)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Film akarken sesini mikrofonla kaydet (kulaklık önerilir)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Kurgu projesini kaydet; sonra yeniden açıp devam etmek için (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Ses projesini kaydet; sonra geri dönmek için (⌘S)
+Entre deux images clés ¦ İki anahtar kare arasında
+en douceur ¦ yumuşak geçişle
+régulier ¦ düzenli
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Bir dosya dışa aktar (istersen medyaya bir kopya da)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Video dosyasını oluşturur (MP4 ya da WebM, birkaç görüntü biçimi) ve medyaya koyar: yeni sürüm, kopya ya da yeni video
+Fermer sans enregistrer les modifications ? ¦ Değişiklikler kaydedilmeden kapatılsın mı?
+Fondu au blanc ¦ Beyaza geçiş
+Fondu au noir ¦ Siyaha geçiş
+Fondu d’entrée ¦ Giriş geçişi
+Fondu de sortie ¦ Çıkış geçişi
+↗ Fondu d’entrée ¦ ↗ Giriş geçişi
+↘ Fondu de sortie ¦ ↘ Çıkış geçişi
+Fondu en couleur (au choix) ¦ Renge geçiş (seçilebilir)
+Fondu enchaîné ¦ Çapraz geçiş
+Fondu flou ¦ Bulanık geçiş
+Genre (vidéo, photo, son) ¦ Tür (video, fotoğraf, ses)
+Glisse depuis la droite ¦ Sağdan kayarak gelir
+Glisse depuis la gauche ¦ Soldan kayarak gelir
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Seçmek için dalga üzerinde sürükle · tıkla = konumlan · Boşluk = dinle · tekerlek = kaydır, Ctrl + tekerlek = yakınlaştır
+Glisse-le sur une piste de la frise ¦ Onu zaman çizelgesinin bir izine sürükle
+Glissement vers la droite ¦ Sağa kayma
+Glissement vers la gauche (la suivante pousse) ¦ Sola kayma (sonraki iter)
+Glissement vers le bas ¦ Aşağı kayma
+Glissement vers le haut ¦ Yukarı kayma
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Paneli genişletmek ya da daraltmak için sürükle (çift tık: başlangıç genişliği)
+Graves ¦ Basslar
+Tons moyens ¦ Orta tonlar
+Hauteur des pistes ¦ İzlerin yüksekliği
+Taille des boutons des pistes ¦ İz düğmelerinin boyutu
+Image et son ¦ Görüntü ve ses
+Images par seconde ¦ Saniyedeki kare
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Videolarını ve fotoğraflarını 🎞️ Ham çekim sekmesine içe aktar, sonra zaman çizelgesine sürükle (ya da “＋ Arkasına video / fotoğraf”).
+Inclinaison horizontale ¦ Yatay eğim
+Inclinaison verticale ¦ Dikey eğim
+Indique un nombre, par exemple 6 ou -3. ¦ Bir sayı gir, örneğin 6 ya da -3.
+＋ Incrustation ¦ ＋ Bindirme
+＋ Incruster ¦ ＋ Bindir
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Görüntünün bir köşesinde bir video ya da fotoğraf, oynatma kafasında
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Bir video ya da fotoğraf, Video 1 izinde arkasına
+＋ Vidéo / photo à la suite ¦ ＋ Arkasına video / fotoğraf
+Vidéo / photo à la suite ¦ Arkasına video / fotoğraf
+Lecture ¦ Oynatma
+Les modifications du montage seront perdues. ¦ Kurgudaki değişiklikler kaybolacak.
+Les modifications du son seront perdues. ¦ Sesteki değişiklikler kaybolacak.
+Les photos arrivent… ¦ Fotoğraflar geliyor…
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Ayarlar seçime uygulanır; seçim yoksa tüm sese.
+Les vidéos, photos et sons du projet ¦ Projenin videoları, fotoğrafları ve sesleri
+Lettres qui se resserrent ¦ Birbirine yaklaşan harfler
+Lettres qui s’écartent ¦ Birbirinden uzaklaşan harfler
+Lissage du mouvement ¦ Hareket yumuşatma
+MODIFIER LE SON ¦ SESİ DÜZENLE
+MODÈLE DE MONTAGE ¦ KURGU ŞABLONU
+MONTAGE VIDÉO ¦ VİDEO KURGUSU
+🎬 MONTAGE VIDÉO ¦ 🎬 VİDEO KURGUSU
+🎬 MONTAGE ¦ 🎬 KURGU
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Yeşil perde videosunu üste koy (bindirme, tam ekran), dekoru da (arşiv fotoğrafı, başka video) alta, iz 1’e.
+Mettre ce dossier dans un autre ¦ Bu klasörü başka birinin içine koy
+Mode de fusion ¦ Karıştırma modu
+Mon son ¦ Sesim
+Mot par mot ¦ Kelime kelime
+Musique pendant la voix ¦ Ses kaydı sırasında müzik
+Nom du fichier téléchargé ¦ İndirilen dosyanın adı
+Non, nettoyer la sélection ¦ Hayır, seçimi temizle
+Oui, c’est du bruit seul ¦ Evet, yalnızca gürültü
+Nouveau dossier dans le dossier ouvert ¦ Açık klasörde yeni klasör
+Nouveau montage ¦ Yeni kurgu
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Yeni ses kaydedildi, aynı kartlara bağlandı.
+Nouveau ⚡ Son rapide ¦ Yeni ⚡ Hızlı ses
+Nouvelle version montrée partout. L’original est gardé. ¦ Yeni sürüm her yerde gösteriliyor. Orijinal saklandı.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Yeni video kaydedildi, aynı kartlara bağlandı.
+Version enregistrée (l’ancienne reste montrée). ¦ Sürüm kaydedildi (eskisi gösterilmeye devam ediyor).
+Ordre d’arrivée ¦ Geliş sırası
+Trier les rushes ¦ Ham çekimleri sırala
+Outils du montage ¦ Kurgu araçları
+Outils du son ¦ Ses araçları
+Ouverture du son… ¦ Ses açılıyor…
+Ouvrir ce dossier ¦ Bu klasörü aç
+Renommer ce dossier ¦ Bu klasörü yeniden adlandır
+Renommer ce rush ¦ Bu ham çekimi yeniden adlandır
+Ranger ce rush dans un dossier ¦ Bu ham çekimi bir klasöre yerleştir
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Bu ses kaydedilmeden başka bir proje açılsın mı?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Bu proje kaydedilmeden başka bir proje açılsın mı?
+Panneau des réglages ¦ Ayarlar paneli
+Part vers la droite ¦ Sağa doğru çıkar
+Part vers la gauche ¦ Sola doğru çıkar
+Pas d’image clé après. ¦ Sonrasında anahtar kare yok.
+Pas d’image clé avant. ¦ Öncesinde anahtar kare yok.
+Passer dans l’autre colonne ¦ Öbür sütuna geç
+Pistes ¦ İzler
+Plus chaud ¦ Daha sıcak
+Plus froid ¦ Daha soğuk
+Projets de montage ¦ Kurgu projeleri
+Projets son ¦ Ses projeleri
+Préparation du fichier… ¦ Dosya hazırlanıyor…
+Qualité MP3 ¦ MP3 kalitesi
+Que fait chaque outil ? ¦ Her araç ne yapar?
+Raccourcir les blancs ¦ Boşlukları kısalt
+⏩ Raccourcir les longs blancs ¦ ⏩ Uzun boşlukları kısalt
+Rebondit puis disparaît ¦ Sıçrar, sonra kaybolur
+Reculer le morceau dans la piste 1 ¦ Parçayı iz 1’de geriye al
+Rejoue ce texte depuis son début ¦ Bu metni baştan yeniden oynatır
+Remplir (recadre pour remplir) ¦ Doldur (doldurmak için kırpar)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Arka plan rengini saydam yap (yeşil ya da mavi perde): alttaki görünür
+Roues de couleur ¦ Renk tekerlekleri
+Rouvrir un montage enregistré ¦ Kaydedilmiş bir kurguyu yeniden aç
+Rouvrir un son en cours de travail ¦ Üzerinde çalışılan bir sesi yeniden aç
+Son 1 ¦ Ses 1
+Son 2 ¦ Ses 2
+🎵 Son 1 ¦ 🎵 Ses 1
+Vidéo 1 ¦ Video 1
+Vidéo 2 ¦ Video 2
+Textes 1 ¦ Metinler 1
+🔤 Textes 1 ¦ 🔤 Metinler 1
+Son ajouté (il est sélectionné). ¦ Ses eklendi (seçili durumda).
+Son illisible ¦ Okunamayan ses
+Vidéo illisible ¦ Okunamayan video
+vidéo illisible ¦ okunamayan video
+son introuvable ¦ ses bulunamadı
+Sort du flou ¦ Bulanıklıktan çıkar
+Stabilisation annulée. ¦ Sabitleme iptal edildi.
+Superposition claire (écran) ¦ Açık bindirme (ekran)
+Supprimer cette piste ¦ Bu izi sil
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Bu izi boşalt (kalır, filmin temel izi odur)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Projeyi sil (videolar ve fotoğraflar Medya’da kalır)
+Sur la frise ¦ Zaman çizelgesinde
+Surgit avec un rebond ¦ Sıçrayarak belirir
+Tombe et rebondit ¦ Düşer ve sıçrar
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Her parçanın ayarlarına eklenir (🎯 Öğe sekmesi → “🔊 Bu parçanın sesi”).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Her parçanın renklerine eklenir (Öğe sekmesi).
+S’efface lettre par lettre ¦ Harf harf silinir
+S’efface mot par mot ¦ Kelime kelime silinir
+Température (froid ↔ chaud) ¦ Sıcaklık (soğuk ↔ sıcak)
+Titre / texte ¦ Başlık / metin
+＋ Titre / texte ¦ ＋ Başlık / metin
+Son / musique ¦ Ses / müzik
+Tout reste modifiable ensuite. ¦ Sonra her şey düzenlenebilir kalır.
+Transformer ¦ Dönüştür
+Transition avant ¦ Önceki geçiş
+Type ¦ Tür
+Un chapitre commence à la tête de lecture ¦ Oynatma kafasında bir bölüm başlar
+Chapitre ici ¦ Burada bölüm
+Un chapitre par grande étape ¦ Her büyük aşama için bir bölüm
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ Oynatma kafasında, “Altyazılar” izinde 3 sn’lik bir altyazı
+Sous-titre ici ¦ Burada altyazı
+Une petite vidéo dans un coin, réglable ¦ Bir köşede küçük bir video, ayarlanabilir
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ Bir metin izi başlıklar alır (“＋ Başlık / metin”).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Bilgisayardan videolar, fotoğraflar ya da sesler (aynı anda birkaç tane), açık klasöre yerleştirilir
+Voix off ¦ Dış ses
+🎙 Voix off ¦ 🎙 Dış ses
+⏹ Arrêter la voix off ¦ ⏹ Dış sesi durdur
+Volet de droite à gauche ¦ Sağdan sola perde
+Volet de gauche à droite ¦ Soldan sağa perde
+Volet en cercle (iris) ¦ Daire perde (iris)
+Volume général ¦ Genel ses düzeyi
+WebM — léger ¦ WebM — hafif
+Zoom ¦ Yakınlaştırma
+Zoom arrière sur la frise ¦ Zaman çizelgesinde uzaklaştır
+Zoom avant sur la frise ¦ Zaman çizelgesinde yakınlaştır
+Zoom avant à travers ¦ İçinden yakınlaşarak
+Zoom de la frise ¦ Zaman çizelgesi yakınlaştırması
+Zoomer sur la sélection ¦ Seçime yakınlaştır
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ siyah şeritler yerine bulanık şeritler (aynı görüntü, bulanıklaştırılmış, arkada)
+centré ¦ ortalı
+ces boutons ¦ bu düğmeler
+cette disposition ¦ bu yerleşim
+commence par un fondu depuis le noir ¦ siyahtan açılarak başlar
+finit par un fondu au noir ¦ siyaha kararak biter
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ tüm fotoğraflarda Ken Burns efekti (yavaş ve çeşitli yakınlaşma ve kayma)
+la musique baisse toute seule pendant une voix ¦ bir ses konuşurken müzik kendiliğinden kısılır
+… et aussi pendant le son des vidéos de la piste 1 ¦ … ve iz 1’deki videoların sesi sırasında da
+le montage est vide ¦ kurgu boş
+l’image tremble un peu, comme dans un vieux projecteur ¦ görüntü eski bir projektördeki gibi biraz titrer
+sépia (couleurs passées, brunes) ¦ sepya (solmuş, kahverengi renkler)
+pas de sélection ¦ seçim yok
+plusieurs formats, nouvelle version ¦ birkaç biçim, yeni sürüm
+sans les blancs, voix plus nette… ¦ boşluksuz, daha net ses…
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ “🔖 Burada bölüm” oynatma kafasına bir bölüm koyar.
+· tire le point vers une couleur, double-clic pour revenir ¦ · noktayı bir renge doğru çek, geri dönmek için çift tıkla
+À la suite dans Vidéo 1 ¦ Video 1’de arkasına
+＋ À la suite ¦ ＋ Arkasına
+＋ Son seul ¦ ＋ Yalnızca ses
+Échelle (tout) ¦ Ölçek (tümü)
+Échelle X ¦ Ölçek X
+Échelle Y ¦ Ölçek Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Dinle, karşılaştır, her yerde göster, yeniden adlandır, sil
+↻ Refaire l’analyse ¦ ↻ Çözümlemeyi yeniden yap
+⌨️ Raccourcis du montage ¦ ⌨️ Kurgu kısayolları
+▣ Dans un coin ¦ ▣ Bir köşede
+⛶ Tout l’écran ¦ ⛶ Tam ekran
+▶ Lire ¦ ▶ Oynat
+▶ Lire / pause ¦ ▶ Oynat / duraklat
+✂️ Modifier un son ouvre ¦ ✂️ Sesi düzenle şunu açar:
+⬅️ Glisse vers la gauche ¦ ⬅️ Sola kayar
+➡️ Glisse vers la droite ¦ ➡️ Sağa kayar
+⬆️ Monte ¦ ⬆️ Yukarı kayar
+⬇️ Descend ¦ ⬇️ Aşağı kayar
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Ham çekimleri içe aktar (videolar, fotoğraflar, sesler)…
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Altyazıları içe aktar (.srt, .vtt)…
+⬚ Garder seulement la sélection ¦ ⬚ Yalnızca seçimi tut
+〰️ Enlever le bourdonnement ¦ 〰️ Uğultuyu kaldır
+＋ Ajouter un son… ¦ ＋ Ses ekle…
+＋ Piste texte ¦ ＋ Metin izi
+🎙 Musique et voix ¦ 🎙 Müzik ve ses kaydı
+🎛️ Réglages de l’image ¦ 🎛️ Görüntü ayarları
+🎞️ Film ¦ 🎞️ Film
+🎞️ Rush ¦ 🎞️ Ham çekim
+🎞️ Rushes ¦ 🎞️ Ham çekimler
+🎯 Élément ¦ 🎯 Öğe
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Eski film (bu parça)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Eski film (tüm film)
+🎧 Mono ¦ 🎧 Mono
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Mono (iki tarafta aynı ses)
+🎧 SON ¦ 🎧 SES
+🎨 Couleurs de ce morceau ¦ 🎨 Bu parçanın renkleri
+🎨 Couleurs de tout le film ¦ 🎨 Tüm filmin renkleri
+🎬 Disposition du montage ¦ 🎬 Kurgu yerleşimi
+🎯 Vectorscope et histogramme ¦ 🎯 Vektörskop ve histogram
+🎲 Automatique (varié) ¦ 🎲 Otomatik (çeşitli)
+💾 Garder dans les médias… ¦ 💾 Medyada sakla…
+📁＋ Dossier ¦ 📁＋ Klasör
+📏 Normaliser ¦ 📏 Normalleştir
+📐 Format de l’image ¦ 📐 Görüntü biçimi
+📢 Volume standard (LUFS)… ¦ 📢 Standart ses düzeyi (LUFS)…
+📱 Téléphone 9:16 (vertical) ¦ 📱 Telefon 9:16 (dikey)
+📺 Ancien écran 4:3 ¦ 📺 Eski ekran 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Ekran 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Portre 4:5 (sosyal ağlar)
+🖼️ Vidéos incrustées ¦ 🖼️ Bindirilmiş videolar
+🔇 Sans le son ¦ 🔇 Sessiz
+🔇 Sans son ¦ 🔇 Sessiz
+🔇 Silence ¦ 🔇 Sessizlik
+🔊 Volume… ¦ 🔊 Ses düzeyi…
+🔖 Chapitres ¦ 🔖 Bölümler
+🖼️ Photos ¦ 🖼️ Fotoğraflar
+🗂 De la base ¦ 🗂 Veritabanından
+🗣️ Voix plus nette ¦ 🗣️ Daha net ses
+🟩 Fond vert (incrustation) ¦ 🟩 Yeşil perde (bindirme)
+🧲 Aimanter ¦ 🧲 Mıknatısla
+Aimanter ¦ Mıknatısla
+🧹 Moins de souffle et de grondement ¦ 🧹 Daha az cızırtı ve uğultu
+🧹 Réduire le souffle ¦ 🧹 Cızırtıyı azalt
+🪄 « La vie de… » ¦ 🪄 “… hayatı”
+🪄 « Une famille » ¦ 🪄 “Bir aile”
+{what}, et rangés dans les médias. ¦ {what}, ve medyaya yerleştirildi.
+=fichier téléchargé ¦ dosya indirildi|dosya indirildi
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Dosya indirildi ve bir kopyası medyaya yerleştirildi.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} kHz · ses yüksekliği {lufs} LUFS · tepe {pk} dB
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · tepe {pk} dB · ses yüksekliği <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Her bölge ayrı bir dosyada ({n})
+Chaque piste dans un fichier ({n}) ¦ Her iz ayrı bir dosyada ({n})
+Comme l’original (stéréo) ¦ Orijinal gibi (stereo)
+Comme l’original (mono) ¦ Orijinal gibi (mono)
+Comme l’original ({n} kHz) ¦ Orijinal gibi ({n} kHz)
+Relier « {name} » à une personne… ¦ Bir kişiye bağla: “{name}”…
+Relier « {name} » à une personne ¦ Bir kişiye bağla: “{name}”
+Relier « {name} » à un événement ¦ Bir olaya bağla: “{name}”
+Relier « {name} » à {what} ¦ Bağla: “{name}” → {what}
+Relier « {name} » ¦ Bağla: “{name}”
+Insérer « {name} » ¦ Ekle: “{name}”
+Enregistrement au micro ({time}) ¦ Mikrofon kaydı ({time})
+🎛️ Rack d’effets ¦ 🎛️ Efekt rafı
+Rack d’effets ¦ Efekt rafı
+=effet ¦ efekt|efekt
+Rallumer ¦ Yeniden aç
+Éteindre ¦ Kapat
+Rallumer l’effet ¦ Efekti yeniden aç
+Éteindre l’effet ¦ Efekti kapat
+Rallumer {what} ¦ Yeniden aç: {what}
+Éteindre {what} ¦ Kapat: {what}
+Retirer {what} ¦ Çıkar: {what}
+Effet « {name} » retiré ¦ “{name}” efekti çıkarıldı
+Réglages « {name} » ¦ “{name}” ayarları
+Égaliseur : {what} ¦ Ekolayzer: {what}
+à plat ¦ düz
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Gürültü izi: {a} → {b} (seçilen {n} sn gürültü).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Gürültü izi: {a} → {b} ({n} sn yalnızca gürültü, kendiliğinden bulundu).
+Réverbération : {what} ¦ Yankı: {what}
+{n} Hz (trouvé) ¦ {n} Hz (bulundu)
+Trouver tout seul ¦ Kendiliğinden bul
+Forme du fondu d’entrée ¦ Giriş geçişinin biçimi
+Forme du fondu de sortie ¦ Çıkış geçişinin biçimi
+Forme du fondu ¦ Geçişin biçimi
+{what} au pinceau. ¦ {what} — fırçayla.
+=zone réparée ¦ bölge onarıldı|bölge onarıldı
+=réparation au pinceau ¦ fırçayla onarım|fırçayla onarım
+Seulement sur {a} → {b} ¦ Yalnızca {a} → {b} üzerinde
+Renommer « {name} » ¦ Yeniden adlandır: “{name}”
+Écouter « {name} » ¦ Dinle: “{name}”
+Fichier introuvable ¦ Dosya bulunamadı
+Prise micro du {date} ¦ Mikrofon kaydı, tarih: {date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Sürükle = seç · <kbd>Boşluk</kbd> dinle · <kbd>⌘</kbd> ve tekerlek: yakınlaştır · <kbd>M</kbd> işaretçi · <kbd>A</kbd> basılı: öncesi
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Seçmek için dalga üzerinde sürükle; tıkla = konumlan; ⇧ ← → seçimi büyütür.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Spektrumdaki lekeyi boya (öksürük, zil sesi), sonra “🩹 Onar”. Boyut: kaydırıcı.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Spektrumdaki lekenin çevresini çiz, sonra “🩹 Onar”.
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Dalgaya tıkla: o noktaya bir 🚩 işaretçi.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Çok izli: bir parçayı ikiye kesmek için ona tıkla. Dalga üzerinde: seçimi siler.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Aynı noktada öncesini duymak için <kbd>A</kbd> tuşunu basılı tut.
+{name} — {what} (prêt) ¦ {name} — {what} (hazır)
+{time} au début ¦ Başta {time}
+{time} à la fin ¦ Sonda {time}
+Les zones hachurées seront coupées ({what}). ¦ Taralı bölgeler kesilecek ({what}).
+Glisse les poignées noires pour changer. ¦ Değiştirmek için siyah tutamaçları sürükle.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ elektriğin “mmm” sesi (kendiliğinden bulundu: {n} Hz)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ elektriğin “mmm” sesi (bulunamadı: varsayılan 50 Hz)
+le « mmm » du courant ¦ elektriğin “mmm” sesi
+le « chhh » de la cassette ¦ kasetin “şşş” sesi
+plus de {n} s → 0,5 s ¦ {n} sn’den uzun → 0,5 sn
+{name} (nettoyé) ¦ {name} (temizlendi)
+Couper la fin ({time}) ¦ Sonu kes ({time})
+Couper le début ({time}) ¦ Başı kes ({time})
+Nettoyer « {name} » à la place ? ¦ Onun yerine “{name}” temizlensin mi?
+Ouvrir ce son ¦ Bu sesi aç
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ Elektrik uğultusu bulundu ({n} Hz): tıklamalarla birlikte kaldırıldı. Farkı dinle.
+son|piste ¦ iz
+baisse|de ¦ azaltma:
+retour en ¦ geri dönüş:
+Piste de la voix ¦ Ses kaydının izi
+Piste qui baisse ¦ Kısılan iz
+Baisse en dB ¦ dB olarak azaltma
+{name} : armée pour le micro ¦ {name}: mikrofon için hazır
+{name} : désarmée ¦ {name}: hazır değil
+Renommer la piste « {name} » ¦ İzi yeniden adlandır: “{name}”
+{name} : courbe du panoramique ¦ {name}: kaydırma (pan) eğrisi
+{name} : courbe du volume ¦ {name}: ses düzeyi eğrisi
+Couper « {name} » à {time} ¦ Kes: “{name}”, {time}
+Déplacer « {name} » ¦ Taşı: “{name}”
+le morceau ¦ parça
+{name} : point ajouté à {time} ¦ {name}: nokta eklendi, {time}
+{name} : point retiré ¦ {name}: nokta çıkarıldı
+Ajouter « {name} » sur {track} ¦ Ekle: “{name}” → {track}
+Morceau « {name} » retiré ¦ “{name}” parçası çıkarıldı
+son ¦ ses
+(mélange) ¦ (karışım)
+Le son ouvert ici ¦ Burada açılan ses
+Le son tel qu’il est (garde la touche A appuyée) ¦ Sesin olduğu hâli (A tuşunu basılı tut)
+Appliquer le rack pour de bon ¦ Rafı kalıcı olarak uygula
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Önce bir izi ● ile hazırla (M S ● düğmelerinde).
+Atténuer de ¦ Azaltma miktarı
+Aucun effet ¦ Efekt yok
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Efekt yok: “＋ Efekt ekle” ya da Efektler menüsü.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ İşaretçi ya da bölge yok: bir bölümü seç, sonra “＋ Yeni bölge” (ya da M).
+Avant ou après ¦ Önce ya da sonra
+Baisser la musique sous la voix ¦ Ses kaydı sırasında müziği kıs
+Ne plus baisser la musique ¦ Müziği artık kısma
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ Yakında: bilgisayarda çalışan bir tanıma motoru (internete hiçbir şey gönderilmez)
+Boucle ¦ Döngü
+Calcul des effets… ¦ Efektler hesaplanıyor…
+Ce fichier n’est pas un réglage du son. ¦ Bu dosya bir ses ayarı değil.
+Ce navigateur ne donne pas accès au micro. ¦ Bu tarayıcı mikrofona erişim vermiyor.
+Ce qui est dit ¦ Söylenen
+Choisis d’abord une zone. ¦ Önce bir bölge seç.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Bir bölge seç (solda ya da dalganın üstünde) ya da bir tane oluştur: “＋ Yeni bölge”.
+Clics et craquements ¦ Tıklamalar ve çıtırtılar
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Geri dönmek için bir adıma tıkla; grileşmiş adımlar ↷ ile geri gelir.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Bir saate tıklamak o bölümü dinletir. .txt, .srt, .vtt olarak dışa aktarma: ⤓ Dışa aktar → 📝 Metin ve işaretler. Metin veritabanında aranabilir.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Temizlenmiş kopya aynı kartlara eklendi.
+Copie séparée ajoutée aux mêmes fiches. ¦ Ayrı kopya aynı kartlara eklendi.
+Couper le début et la fin ¦ Başı ve sonu kes
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Bir parçayı ikiye kes (çok izli); dalga üzerinde: seçimi sil
+Crête ¦ Tepe
+Effacer le dessin ¦ Çizimi sil
+× Effacer le dessin ¦ × Çizimi sil
+Empreinte du bruit ¦ Gürültü izi
+En S ¦ S biçiminde
+Rapide ¦ Hızlı
+Lente ¦ Yavaş
+🏠 Pièce ¦ 🏠 Oda
+⛪ Église ¦ ⛪ Kilise
+🎭 Salle ¦ 🎭 Salon
+🧱 Cave ¦ 🧱 Mahzen
+Enlever le bourdonnement ¦ Uğultuyu kaldır
+Enregistrer au micro ¦ Mikrofonla kaydet
+● Enregistrer au micro ¦ ● Mikrofonla kaydet
+🎙️ Enregistrer au micro ¦ 🎙️ Mikrofonla kaydet
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Mikrofonla kaydet (turuncu işarette; çok izlide: hazırlanmış ● izde)
+Enregistrer dans les médias ¦ Medyaya kaydet
+Enregistrer et afficher cette version (l’original est gardé) ¦ Bu sürümü kaydet ve göster (orijinal saklanır)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Ses projesini kaydet (raf, bölgeler, izler), geri dönmek için
+Enregistrer le projet sous… ¦ Projeyi farklı kaydet…
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Dışa aktar: MP3, M4A, WAV, FLAC, Ogg, AIFF, metin ve işaretler
+Exporter ce passage… ¦ Bu bölümü dışa aktar…
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Bir dosya dışa aktar (MP3, WAV, FLAC…), istersen medyaya bir kopya da
+Fichiers ¦ Dosyalar
+Fort ¦ Güçlü
+Moyen ¦ Orta
+Garde ¦ Tutma
+Garder seulement la sélection ¦ Yalnızca seçimi tut
+Gardée dans les versions, le son affiché ne change pas ¦ Sürümlerde saklanır, gösterilen ses değişmez
+Insérer un son… ¦ Ses ekle…
+La fenêtre d’export n’est pas prête. ¦ Dışa aktarma penceresi hazır değil.
+L’export n’est pas encore prêt. ¦ Dışa aktarma henüz hazır değil.
+La sélection ¦ Seçim
+Lasso de réparation ¦ Onarım kementi
+Lasso de réparation (sur le spectre) ¦ Onarım kementi (spektrum üzerinde)
+➰ Lasso de réparation ¦ ➰ Onarım kementi
+Pinceau de réparation ¦ Onarım fırçası
+Pinceau de réparation (sur le spectre) ¦ Onarım fırçası (spektrum üzerinde)
+🖌 Pinceau de réparation ¦ 🖌 Onarım fırçası
+Les boutons ¦ Düğmeler
+Les réglages du son seront perdus. ¦ Ses ayarları kaybolacak.
+Lire la sélection en boucle ¦ Seçimi döngüde oynat
+🔁 Lire en boucle ¦ 🔁 Döngüde oynat
+🐢 Lire à 75 % ¦ 🐢 %75 hızda oynat
+Marqueur ici ¦ Burada işaretçi
+🚩 Marqueur ici ¦ 🚩 Burada işaretçi
+Marqueurs et zones ¦ İşaretçiler ve bölgeler
+Zones et marqueurs ¦ Bölgeler ve işaretçiler
+Mono ¦ Mono
+Stéréo ¦ Stereo
+Nettoyer ¦ Temizle
+Nettoyer le souffle ¦ Cızırtıyı temizle
+Nom du projet son ¦ Ses projesinin adı
+Nom du son ¦ Sesin adı
+Nouvelle piste ¦ Yeni iz
+Nouvelle version affichée partout. L’original est gardé. ¦ Yeni sürüm her yerde gösteriliyor. Orijinal saklandı.
+Version enregistrée (l’ancienne reste affichée). ¦ Sürüm kaydedildi (eskisi gösterilmeye devam ediyor).
+Nouvelle zone ¦ Yeni bölge
+Ouverture ¦ Açılış
+Ouvrir un autre projet sans enregistrer ? ¦ Kaydetmeden başka bir proje açılsın mı?
+Pause quand j’écris ¦ Yazarken duraklat
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Bir lekeyi boya (öksürük, zil, kapı), sonra “🩹 Onar”.
+Poser des marqueurs (clic sur l’onde) ¦ İşaretçi koy (dalgaya tıkla)
+🚩 Poser des marqueurs ¦ 🚩 İşaretçi koy
+Raccourcir ¦ Kısalt
+Rendre agréable ¦ Hoş hâle getir
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ ⚡ Hızlı sese dön: gösterebildikleri yeniden düğme olur, gerisi uygulanmış kalır
+Réglages du Son rapide ¦ Hızlı ses ayarları
+Réglages repris ¦ Ayarlar aktarıldı
+Seulement sur la sélection ¦ Yalnızca seçim üzerinde
+Silence ¦ Sessizlik
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Cızırtı, tıklamalar, uğultu, ses, ses düzeyi ve başın ve sonun kesilmesi, tek seferde
+✨ Tout nettoyer en une fois ¦ ✨ Hepsini tek seferde temizle
+Spectre ¦ Spektrum
+Spectre : montrer / cacher ¦ Spektrum: göster / gizle
+Sélection : glisser sur l’onde ¦ Seçim: dalga üzerinde sürükle
+Tout le son : glisse le cadre pour te déplacer ¦ Tüm ses: hareket etmek için çerçeveyi sürükle
+Un autre son, rattaché aux mêmes fiches ¦ Aynı kartlara bağlı başka bir ses
+Un ensemble prêt ne se supprime pas. ¦ Hazır bir set silinemez.
+VU-mètres ¦ VU metreler
+Volume du morceau ¦ Parçanın ses düzeyi
+Volume du morceau… ¦ Parçanın ses düzeyi…
+Zoom sur la sélection ¦ Seçime yakınlaştır
+Zoom vertical + ¦ Dikey yakınlaştır +
+Zoom vertical − ¦ Dikey yakınlaştır −
+ces réglages du son ¦ bu ses ayarları
+disque, bande abîmée ¦ plak, bozuk bant
+les voix lointaines remontent, les cris baissent ¦ uzak sesler yükselir, bağırışlar azalır
+on comprend mieux les mots ¦ kelimeler daha iyi anlaşılır
+nouvelle version, copie ¦ yeni sürüm, kopya
+trouvé tout seul, poignées sur l’onde ¦ kendiliğinden bulundu, tutamaçlar dalga üzerinde
+souffle, voix claire, volume égal ¦ cızırtı, net ses, eşit ses düzeyi
+souffle fort, voix, coupe des blancs ¦ güçlü cızırtı, ses, boşlukların kesilmesi
+de-hum, égaliseur, limiteur ¦ de-hum, ekolayzer, sınırlayıcı
+📼 Cassette des années 70 ¦ 📼 70’lerin kaseti
+🎙 Dictaphone ¦ 🎙 Ses kayıt cihazı
+💒 Vidéo de mariage 1987 ¦ 💒 1987 düğün videosu
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Dinle, sonra “⏱ Saati ekle” (⌘T) ve söyleneni yaz.
+⏱ Insérer l’heure ¦ ⏱ Saati ekle
+Écouter ce passage ¦ Bu bölümü dinle
+Écouter seulement le passage peint ¦ Yalnızca boyanan bölümü dinle
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Dinle, A / B karşılaştır, her yerde göster, yeniden adlandır, sil
+ℹ️ Infos du son ¦ ℹ️ Ses bilgileri
+▶ Écouter / pause ¦ ▶ Dinle / duraklat
+▶ Écouter 10 s du résultat ¦ ▶ Sonucun 10 sn’sini dinle
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Kes (panoya)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Bir parçayı kes (çok izli)
+〰️ Forme d’onde ¦ 〰️ Dalga biçimi
+＋ Ajouter un effet ▾ ¦ ＋ Efekt ekle ▾
+🎛️ Multipiste ¦ 🎛️ Çok izli
+🎬 Ouvrir dans le montage ¦ 🎬 Kurguda aç
+👂 Écoute d’abord ¦ 👂 Önce dinle
+👂 Écouter la zone ¦ 👂 Bölgeyi dinle
+📝 Transcription ¦ 📝 Transkripsiyon
+🔗 Relier ce passage ¦ 🔗 Bu bölümü bağla
+🗣️ La voix ¦ 🗣️ Ses
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Kendiliğinden yazıya dök (yakında)
+½ ton ¦ ½ ton
+Volume ¦ Ses düzeyi
+Normaliser ¦ Normalleştir
+Volume égal ¦ Eşit ses düzeyi
+Sonie visée ¦ Hedef ses yüksekliği
+Niveleur ¦ Dengeleyici
+Fondus ¦ Geçişler
+Égaliseur graphique ¦ Grafik ekolayzer
+Égaliseur paramétrique ¦ Parametrik ekolayzer
+Égaliseurs ¦ Ekolayzerler
+Filtre passe-haut / passe-bas ¦ Yüksek geçiren / alçak geçiren filtre
+Passe-haut ¦ Yüksek geçiren
+Passe-bas ¦ Alçak geçiren
+Compresseur ¦ Kompresör
+Dynamique ¦ Dinamik
+Rapport ¦ Oran
+Attaque ¦ Atak
+Relâche ¦ Bırakma
+Gain de sortie ¦ Çıkış kazancı
+Limiteur ¦ Sınırlayıcı
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Rafta en sona konur: artık hiç “cızırdayan” ses yok.
+Plafond ¦ Tavan
+Réduction de bruit ¦ Gürültü azaltma
+Réduction ¦ Azaltma
+N’écouter que le bruit enlevé ¦ Yalnızca kaldırılan gürültüyü dinle
+De-clicker ¦ De-clicker
+Clics ¦ Tıklamalar
+De-hum ¦ De-hum
+Harmoniques ¦ Harmonikler
+De-esser ¦ De-esser
+Sifflantes ¦ Islıklı sesler
+Baisser jusqu’à ¦ Şuna kadar kıs
+Réparations au pinceau ¦ Fırçayla onarımlar
+Voix plus claire ¦ Daha net ses
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Ekolayzer (daha az uğultu, daha çok netlik) ve kompresör.
+Réverbération ¦ Yankı
+Ambiance ¦ Ortam
+Vitesse et hauteur ¦ Hız ve perde
+Temps ¦ Süre
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Çok hızlı çalınan bir kaset için (“ördek” sesi): %96 onu gerçek hızına döndürür.
+Vitesse ¦ Hız
+Garder la hauteur de la voix ¦ Sesin perdesini koru
+Blancs de plus de ¦ Şundan uzun boşluklar
+Ramenés à ¦ Şuna indirilir
+Fin ¦ Son
+Diapositive {k} / {n} ¦ Slayt {k} / {n}
+Aucune diapositive ¦ Slayt yok
+Aucune diapositive. ¦ Slayt yok.
+Aucune diapositive pour l’instant ¦ Şimdilik slayt yok
+{what} aux Médias (le son devient la musique). ¦ {what} — Medya’ya (ses, müzik olur).
+{what} aux Médias. ¦ {what} — Medya’ya.
+=diapositive est prête ¦ slayt hazır|slayt hazır
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Slayt gösterisindekilerin yerini alabilir ya da arkalarına eklenebilir.
+Remplacer le diaporama par le récit ? ¦ Slayt gösterisi anlatıyla değiştirilsin mi?
+Ajouter à la suite ¦ Arkasına ekle
+Police du style ({name}) ¦ Stilin yazı tipi ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ {time} ileri al (Ayarlar › Görünüm içinde ayarlanabilir)
+Suivi sur {n} positions. ¦ {n} konum boyunca izlendi.
+(importé) ¦ (içe aktarıldı)
+Durée souhaitée ¦ İstenen süre
+Mettre les sources dans les notes ¦ Kaynakları notlara koy
+⇥ durée = voix ¦ ⇥ süre = ses kaydı
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Fotoğraf, başlık, harita ekle ya da her şeyi “✨ Bir hayatın öyküsü” hazırlasın. Fotoğrafları buraya da sürükleyebilirsin.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Bu dosya LCNDA’nın dışa aktardığı bir slayt gösterisi değil (⤓ Dışa aktar → 💾 Dosya).
+Ce que raconte cette diapositive… ¦ Bu slaytın anlattığı…
+Changer la photo ¦ Fotoğrafı değiştir
+🖼️ Changer la photo ¦ 🖼️ Fotoğrafı değiştir
+Choisis d’abord une personne. ¦ Önce bir kişi seç.
+Couleur du trajet ¦ Yolculuğun rengi
+Glisse des photos ou un son. ¦ Fotoğraf ya da ses sürükle.
+Glisser vers la droite ¦ Sağa kaydır
+Glisser vers la gauche ¦ Sola kaydır
+Zoom arrière lent ¦ Yavaş uzaklaşma
+La fenêtre des médias n’est pas encore prête. ¦ Medya penceresi henüz hazır değil.
+Les dernières modifications du diaporama seront perdues. ¦ Slayt gösterisindeki son değişiklikler kaybolacak.
+Les photos du récit ¦ Anlatının fotoğrafları
+Légendes ¦ Açıklamalar
+Personnes sous chaque photo ¦ Her fotoğrafın altında kişiler
+Place du texte ¦ Metnin yeri
+Police des textes ¦ Metinlerin yazı tipi
+Prendre ce son ¦ Bu sesi al
+RÉCIT D’UNE VIE ¦ BİR HAYATIN ÖYKÜSÜ
+Récit d’une vie ¦ Bir hayatın öyküsü
+✨ Récit d’une vie ¦ ✨ Bir hayatın öyküsü
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Bir hayatın öyküsü: bir kişinin kartından hazır bir slayt gösterisi
+Un diaporama tout fait à partir de la fiche d’une personne ¦ Bir kişinin kartından hazır bir slayt gösterisi
+Selon les textes ¦ Metinlere göre
+Une musique ¦ Bir müzik
+Une photo par page ¦ Sayfa başına bir fotoğraf
+Une photo ronde au-dessus du titre ¦ Başlığın üstünde yuvarlak bir fotoğraf
+Une photo ronde au-dessus du titre… ¦ Başlığın üstünde yuvarlak bir fotoğraf…
+Une présentation ou un diaporama ? ¦ Sunum mu, slayt gösterisi mi?
+Une voix, un son ¦ Bir ses kaydı, bir ses
+Vidéo téléchargée. ¦ Video indirildi.
+cette diapositive ¦ bu slayt
+retirer la voix ¦ ses kaydını kaldır
+✨ Préparation du récit… ¦ ✨ Anlatı hazırlanıyor…
+🎙 Enregistrer ma voix ¦ 🎙 Sesimi kaydet
+🎤 En faire une présentation… ¦ 🎤 Bundan bir sunum yap…
+🖼 Choisir les photos… ¦ 🖼 Fotoğrafları seç…
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Görüntü biçimi (ekran için 16:9, telefon için 9:16)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Dışa aktar: video, görüntüler, PDF, yazdırma, dosya
+Ajouter un titre ¦ Başlık ekle
+Ajouter une carte (trajet) ¦ Harita ekle (yolculuk)
+Ajouter une carte ¦ Harita ekle
+＋ Carte (trajet) ¦ ＋ Harita (yolculuk)
+Regarder en plein écran (Échap pour revenir) ¦ Tam ekran izle (geri dönmek için Esc)
+Avancer dans le diaporama ¦ Slayt gösterisinde ilerle
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Süresini, geçişini, metnini, ses kaydını ayarlamak için bir slayt seç (solda).
+🎞️ Tout le diaporama ¦ 🎞️ Tüm slayt gösterisi
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Tüm başlıkların ve açıklamaların yazı tipi. Seçim yoksa stilin yazı tipidir (Klasik, Eski albüm…).
+Une musique de fond, prise dans les sons des médias ¦ Medyadaki seslerden alınan bir arka plan müziği
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ Bu slaytlardan Keynote tarzı bir sunum (metinler, şekiller, animasyonlar, sunucu modu…); slayt gösterisi olduğu gibi kalır
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Bir slayta tıkla: sağda ayarla · sıralamak için sürükle · Boşluk: oynat
+Album ancien ¦ Eski albüm
+Clair ¦ Açık
+Lire / pause ¦ Oynat / duraklat
+Lire ¦ Oynat
+Regarder ¦ İzle
+📺 Regarder ¦ 📺 İzle
+Musique de fond ¦ Arka plan müziği
+🎵 Musique ¦ 🎵 Müzik
+🎵 Musique de fond (facultatif) ¦ 🎵 Arka plan müziği (isteğe bağlı)
+=diapositive ¦ slayt|slayt
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Bir kişi seç: kartından (doğum, vaftiz, evlilik, çocuklar, meslekler, nüfus sayımları, taşınmalar, ölüm, defin), fotoğraflarından ve haritadaki yerlerinden kendiliğinden bir slayt gösterisi hazırlanır. Eksik bir bilgi slayt oluşturmaz; sonra her şey düzenlenebilir kalır.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Anlatı yaklaşık bu süreyi alır: her slayt biraz uzar ya da kısalır. “Metinlere göre” okumaya zaman bırakır.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Fotoğraf yok: anlatı başlıklardan ve haritalardan oluşacak.
+Inclure les frères et sœurs ¦ Kardeşleri de ekle
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Her olayın kaynakları (başlık, sayfa) kendi slaytının notlarına yazılır: düzenlerken görünür, oynatırken görünmez.
+Ajouter les événements historiques de l’époque ¦ Dönemin tarihî olaylarını ekle
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Uygulamanın bildiği (Listeler → Salgınlar, savaşlar, kışlar) ve kişinin hayatı boyunca yaşanmış salgınlar, savaşlar ve sert kışlar.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Kartın “📖 Biyografi” bloğundaki metin (düzenlediysen senin sürümün), kısa hâliyle, bir slaytta.
+Créer le récit ¦ Anlatıyı oluştur
+DIAPORAMA ¦ SLAYT GÖSTERİSİ
+Environ 1 minute ¦ Yaklaşık 1 dakika
+Environ 2 minutes ¦ Yaklaşık 2 dakika
+Environ 3 minutes ¦ Yaklaşık 3 dakika
+Environ 5 minutes ¦ Yaklaşık 5 dakika
+Environ 8 minutes ¦ Yaklaşık 8 dakika
+Environ 10 minutes ¦ Yaklaşık 10 dakika
+Choisir un son… ¦ Bir ses seç…
+Ajouter sa biographie (📖) ¦ Biyografisini ekle (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Hareket edeni izle
+✕ Ne plus suivre ¦ ✕ Artık izleme
+🎥 Plusieurs caméras ¦ 🎥 Birkaç kamera
+Synchroniser et monter ¦ Eşzamanla ve kurgula
+quand quelqu’un parle plus près d’une autre caméra ¦ biri başka bir kameraya daha yakın konuştuğunda
+Lecture des sons… ¦ Sesler okunuyor…
+dédié à {who} ¦ ithaf: {who}
+Pas encore de {what} pour ce soir ¦ Bu akşam için henüz {what} yok
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Başlıkları sırayla yaz; bisler, cover’lar, konuklar… ile birlikte; ya da başka bir akşamın setlist’ini kopyala.
+La sorte de ce soir ¦ Bu akşamın türü
+En faire : {what} (la setlist s’adapte) ¦ Şuna dönüştür: {what} (setlist uyum sağlar)
+{n} prévues ¦ {n} planlandı
+d’après {what} ¦ kaynak: {what}
+{what} à la setlist. ¦ {what} → setlist.
+{what} depuis « {name} ». ¦ {what} — kaynak: “{name}”.
+=ligne ajoutée ¦ satır eklendi|satır eklendi
+=ligne copiée ¦ satır kopyalandı|satır kopyalandı
+Setlist de « {name} » copiée ({what}) ¦ “{name}” setlist’i kopyalandı ({what})
+Ce soir devient : {what} ¦ Bu akşam artık: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ Parçalara {n} “canlı” kayıt eklendi
+1 enregistrement « en public » ajouté au morceau ¦ Parçaya 1 “canlı” kayıt eklendi
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ Bu akşamdan zaten {n} “canlı” kayıt çıkarıldı.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ Bu akşamdan zaten 1 “canlı” kayıt çıkarıldı.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Parçaların “canlı” kayıtlarını oluştur ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Parçanın “canlı” kaydını oluştur ({n})
+« {name} » ajouté au catalogue ({what}). ¦ “{name}” kataloğa eklendi ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Bu akşamlar için veritabanında yer yok ({what}: veritabanında seçilmiş yer yok).
+Aucun lieu de ta base pour ces soirs. ¦ Bu akşamlar için veritabanında yer yok.
+{what} sans coordonnées ¦ {what} — koordinat yok
+{what} sans lieu de ta base ¦ {what} — veritabanında yer yok
+=soir ¦ akşam|akşam
+🔝 {what} les plus joués ¦ 🔝 En çok çalınanlar: {what}
+{what} par soir ¦ Akşam başına {what}
+{n} en moyenne ¦ ortalama {n}
+{what} mais jamais sur scène, et {other} : ¦ {what}, ama hiç sahnede değil; ve {other}:
+{what} mais jamais sur scène : ¦ {what}, ama hiç sahnede değil:
+{what} jamais dans une setlist : ¦ {what} — hiçbir setlist’te yok:
+=morceau enregistré ¦ kaydedilmiş parça|kaydedilmiş parça
+=autre fiche ¦ başka kart|başka kart
+… et {n} de plus ¦ … ve {n} tane daha
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ “{name}” profili işaretlendi: bölümleri sayfasında.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ Bu sezonda {a}–{b} numaralı bölüm yok.
+Aucun épisode n° {a} dans cette saison. ¦ Bu sezonda {a} numaralı bölüm yok.
+＋ Nouveau concert ou représentation ¦ ＋ Yeni konser ya da gösteri
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Ara… (şehir, salon, çalınan parça, turne, kişi)
+Aucun concert ni spectacle pour l’instant ¦ Şimdilik konser ya da gösteri yok
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ Bir akşam = bir kart: tarih, yer, setlist (başlıklar, bisler, cover’lar, konuklar), sahnede ve salonda kimler vardı.
+Concert ou représentation ¦ Konser ya da gösteri
+Concerts et représentations ¦ Konserler ve gösteriler
+=concert ou représentation ¦ konser ya da gösteri|konser ya da gösteri
+Spectacle d’humour ¦ Mizah gösterisi
+Scènes jouées ¦ Oynanan sahneler
+Concert d’orchestre ¦ Orkestra konseri
+Début d’une partie ¦ Bir bölümün başlangıcı
+Bande, intro enregistrée ¦ Bant, kayıtlı giriş
+Dernière fois ¦ Son kez
+Reprise, invités, dédicace, 1re fois, durée… ¦ Cover, konuklar, ithaf, ilk kez, süre…
+＋ Un rappel ¦ ＋ Bir bis
+📋 Coller une liste ¦ 📋 Bir liste yapıştır
+📋 Copier la setlist d’un autre soir ¦ 📋 Başka bir akşamın setlist’ini kopyala
+Copier la setlist d’un autre soir ¦ Başka bir akşamın setlist’ini kopyala
+inachevé ¦ yarım kaldı
+Nouvelle partie ¦ Yeni bölüm
+critique positive ¦ olumlu eleştiri
+critique négative ¦ olumsuz eleştiri
+neutre ¦ tarafsız
+Église, chapelle ¦ Kilise, şapel
+Bal, salle des fêtes ¦ Balo, düğün salonu
+Café, cabaret ¦ Kafe, kabare
+Soirée privée ¦ Özel davet
+Festival, fête ¦ Festival, şenlik
+création du rôle ¦ rolün ilk yorumu
+Création du rôle ¦ Rolün ilk yorumu
+chef d’orchestre ¦ orkestra şefi
+Un ou une soliste ¦ Bir solist
+Une personne dans la salle ¦ Salondaki bir kişi
+🎭 Ce soir-là, au théâtre ¦ 🎭 O akşam, tiyatroda
+Rôles du soir ¦ Akşamın rolleri
+Titulaire ou remplaçant ¦ Asıl oyuncu ya da yedek
+La soirée ¦ Akşam
+Joué ¦ Çalındı
+La tournée ¦ Turne
+Dates prévues ¦ Planlanan tarihler
+Les dates ¦ Tarihler
+📅 Les dates ¦ 📅 Tarihler
+＋ Ajouter une date ¦ ＋ Tarih ekle
+＋ Ajouter une représentation ¦ ＋ Gösteri ekle
+Chanson parlée, poème dit ¦ Konuşmalı şarkı, okunan şiir
+Sketch, numéro, scène ¦ Skeç, numara, sahne
+Sketches, numéros, scènes ¦ Skeçler, numaralar, sahneler
+Écrit, créé ¦ Yazıldı, yaratıldı
+Tiré de ¦ Şuradan alındı
+Son ou vidéo ¦ Ses ya da video
+Carte indisponible. ¦ Harita kullanılamıyor.
+Avec une setlist ¦ Setlist’i olan
+Avec une captation ¦ Kaydı olan
+Avec une 1re fois ¦ İlk kez çalınan bir parçası olan
+Avec un remplacement ¦ Yedeğin oynadığı
+Avec ce titre joué ¦ Bu parçanın çalındığı
+Joué ce soir-là ¦ O akşam çalındı
+Carte des lieux… ¦ Yerlerin haritası…
+🗺 Carte des lieux ¦ 🗺 Yerlerin haritası
+hors tournée ¦ turne dışı
+Dernière ¦ Son
+Moins ↑ ¦ Daha az ↑
+Soirs par année ¦ Yıllara göre akşamlar
+📅 Soirs par année ¦ 📅 Yıllara göre akşamlar
+Durée moyenne ¦ Ortalama süre
+Ville la plus visitée ¦ En çok gidilen şehir
+🚌 Setlist type d’une tournée ¦ 🚌 Bir turnenin tipik setlist’i
+Choisis une tournée. ¦ Bir turne seç.
+Choisis deux soirs différents. ¦ İki farklı akşam seç.
+Cinéma ¦ Sinema
+Au générique ¦ Jenerikte
+Pas au générique ¦ Jenerikte değil
+Tournage, période ¦ Çekim, dönem
+🎭 Au théâtre ¦ 🎭 Tiyatroda
+Théâtres, salles ¦ Tiyatrolar, salonlar
+Un théâtre ¦ Bir tiyatro
+Théâtre, salle ¦ Tiyatro, salon
+Un remplacement ¦ Bir yedek oyunculuk
+📺 Télévision, radio ¦ 📺 Televizyon, radyo
+Voix française de ¦ Fransızca seslendirmesi:
+Un ou une partenaire ¦ Bir partner
+Prix et nominations ¦ Ödüller ve adaylıklar
+Œuvre A → Z ¦ Eser A → Z
+Fiches « Rôle » ¦ “Rol” kartları
+Films du catalogue ¦ Katalogdaki filmler
+Cités dans d’autres catalogues ¦ Başka kataloglarda geçenler
+Crédit ¦ Jenerik bilgisi
+RÔLE ¦ ROL
+＋ En faire une fiche rôle détaillée ¦ ＋ Ayrıntılı bir rol kartı yap
+D’où vient la ligne ¦ Satırın geldiği yer
+Chercher un rôle, un film, un partenaire… ¦ Rol, film, partner ara…
+Profil d’acteur ¦ Oyuncu profili
+Débuts ¦ İlk adımlar
+Une école, un cours ¦ Bir okul, bir kurs
+École, conservatoire, cours ¦ Okul, konservatuvar, kurs
+Prix, diplôme ¦ Ödül, diploma
+Un agent ¦ Bir menajer
+Une troupe ¦ Bir topluluk
+Troupe, théâtre ¦ Topluluk, tiyatro
+Un casting ¦ Bir seçme
+Rôle visé ¦ Hedeflenen rol
+pas obtenu ¦ alınamadı
+Compétences, physique, voix ¦ Yetenekler, görünüş, ses
+Tout voir, trier ¦ Hepsini gör, sırala
+Aucune série, aucun téléfilm. ¦ Dizi ya da televizyon filmi yok.
+Théâtrographie ¦ Tiyatro rolleri
+Aucun rôle au théâtre. ¦ Tiyatroda rol yok.
+Aucune voix. ¦ Seslendirme yok.
+Publicité et mannequinat ¦ Reklam ve mankenlik
+Aucune publicité. ¦ Reklam yok.
+Aucun clip. ¦ Klip yok.
+=casting noté ¦ kaydedilmiş seçme|kaydedilmiş seçme
+Aucun casting noté. ¦ Kaydedilmiş seçme yok.
+Les statistiques viennent des rôles notés. ¦ İstatistikler kaydedilmiş rollerden gelir.
+Rôles par décennie ¦ On yıllara göre roller
+Réalisateurs ¦ Yönetmenler
+Aucun soir noté. ¦ Kaydedilmiş akşam yok.
+Feuilleton télévisé ¦ Televizyon dizisi
+Websérie ¦ Web dizisi
+Séries et émissions ¦ Diziler ve programlar
+La série ¦ Dizi
+Saisons et épisodes ¦ Sezonlar ve bölümler
+Durée d’un épisode ¦ Bir bölümün süresi
+Qui y a fait quoi ¦ Kim ne yaptı
+Épisodes prévus ¦ Planlanan bölümler
+L’épisode ¦ Bölüm
+N° dans la saison ¦ Sezondaki no.
+N° dans la série ¦ Dizideki no.
+Un ou une scénariste ¦ Bir senarist
+Un invité ¦ Bir konuk
+Rôle ou métier ¦ Rol ya da meslek
+toute la série ¦ tüm dizi
+Chaîne, station, éditeur ¦ Kanal, istasyon, yayıncı
+Un créateur, une créatrice ¦ Bir yaratıcı
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Bu görüntü alttakiyle nasıl karışır: “Çarp” koyulaştırır, “Açık bindirme” açar, “Normal” onu doğrudan üstüne koyar.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ Fotoğraf üzerinde yavaş bir kamera hareketi: ekrandayken yavaşça yaklaşır, uzaklaşır ya da kayar.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Anahtar kare, bir ayarı (boyut, yer, döndürme…) filmin bir anına sabitler; iki anahtar kare arasında görüntü birinden öbürüne yumuşak ya da düzenli hızla geçer.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ “Cızırtıyı azalt”: önce yalnızca gürültünün duyulduğu bir bölümü seç, örnek olarak kullanılır. “Daha net ses” konuşmayı daha anlaşılır yapar. “Normalleştir” ses düzeyini bozmadan en yükseğe çıkarır.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ Yumuşak: az temizlenir, ses doğal kalır. Güçlü: daha çok gürültü kaldırılır, ama ses biraz “metalik” olabilir. 👂 Önce / ✨ Sonra ile dinle.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Bu ham çekimi projeden sil (ve zaman çizelgesindeki {n} bölümünü)
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Bu ham çekimi projeden sil (ve zaman çizelgesindeki bölümünü)
+Supprimer ce rush du projet ¦ Bu ham çekimi projeden sil
+{time} à l’écran ¦ Ekranda {time}
+🖼️ Photo de la piste 1 ¦ 🖼️ İz 1’deki fotoğraf
+🎬 Morceau de la piste 1 ¦ 🎬 İz 1’deki parça

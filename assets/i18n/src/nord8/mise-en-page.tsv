@@ -1,0 +1,1060 @@
+fr ¦ tr
+Format de la page ¦ Sayfa biçimi
+Celui du design ¦ Tasarımınki
+✏️ Personnalisé (à mes mesures) ¦ ✏️ Özel (kendi ölçülerimle)
+Portrait (plus haut que large) ¦ Dikey (yüksekliği genişliğinden fazla)
+Paysage (plus large que haut) ¦ Yatay (genişliği yüksekliğinden fazla)
+Supprimer ce format à moi ¦ Bu kendi biçimimi sil
+＋ Enregistrer ce format ¦ ＋ Bu biçimi kaydet
+La page garde le format du design. ¦ Sayfa tasarımın biçimini korur.
+carré ¦ kare
+⚠️ Entre 3 cm et 1,5 m de côté. ¦ ⚠️ Kenar 3 cm ile 1,5 m arasında olmalı.
+Format entre 3 cm et 1,5 m de côté. ¦ Kenarı 3 cm ile 1,5 m arasında bir biçim.
+Nom de ce format (ex. Mon carnet 17 × 24) : ¦ Bu biçimin adı (ör. Defterim 17 × 24):
+Format « {name} » enregistré : il est proposé pour les prochains documents. ¦ “{name}” biçimi kaydedildi: sonraki belgeler için önerilecek.
+Format « {name} » supprimé ¦ “{name}” biçimi silindi
+Superposition (écran) ¦ Ekran
+Lumière tamisée ¦ Yumuşak ışık
+Lumière crue ¦ Sert ışık
+Éclaircir ¦ Açıklaştır
+Densité couleur − ¦ Renk yanığı
+Densité couleur + ¦ Renk soldurma
+Différence ¦ Fark
+Luminosité ¦ Parlaklık
+Pointillés ¦ Noktalı
+Aucun habillage ¦ Metin kaydırma yok
+Autour du cadre ¦ Çerçevenin çevresinde
+Autour de la forme (ellipse) ¦ Şeklin çevresinde (elips)
+Saut d’objet (rien à côté) ¦ Nesneyi atla (yanında hiçbir şey)
+Remplir le cadre proportionnellement ¦ Çerçeveyi orantılı doldur
+Ajuster le contenu proportionnellement ¦ İçeriği orantılı sığdır
+Ajuster le contenu au cadre (déformé) ¦ İçeriği çerçeveye sığdır (bozulur)
+Taille d’origine (centrée) ¦ Özgün boyut (ortalanmış)
+Titre du livre ¦ Kitabın başlığı
+Nom d’une personne ¦ Bir kişinin adı
+Dates et numéro ¦ Tarihler ve numara
+Folio (numéro de page) ¦ Folyo (sayfa numarası)
+Couleur du livre ¦ Kitabın rengi
+Fond léger ¦ Hafif arka plan
+Dégradé du livre ¦ Kitabın renk geçişi
+Dégradé ¦ Renk geçişi
+Ascendance (les ancêtres) ¦ Atalar
+Descendance (les enfants, petits-enfants…) ¦ Torunlar (çocuklar, torunlar…)
+Sablier (ancêtres en haut, descendants en bas) ¦ Kum saati (atalar üstte, torunlar altta)
+Éventail (roue des ancêtres) ¦ Yelpaze (ataların çarkı)
+Classique (cases arrondies, couleur du livre) ¦ Klasik (yuvarlak kutular, kitabın rengi)
+Couleurs (bleu les hommes, rose les femmes) ¦ Renkler (erkekler mavi, kadınlar pembe)
+Élégant ¦ Zarif
+Sépia ¦ Sepya
+Comme le site ¦ Site gibi
+Un chapitre commence ici. Change les styles dans l’onglet « Texte » : tout le livre suit. ¦ Burada bir bölüm başlıyor. Stilleri “Metin” sekmesinde değiştir: tüm kitap uyar.
+📜 Biographie d’un ancêtre ¦ 📜 Bir atanın biyografisi
+Page de titre, portrait, repères en frise, sa vie racontée, ses sources. ¦ Başlık sayfası, portre, zaman şeridinde dönüm noktaları, anlatılan hayatı, kaynakları.
+🌳 Arbre en double page ¦ 🌳 Çift sayfa soy ağacı
+Son arbre étalé sur deux pages en vis-à-vis. ¦ Ağacı, karşılıklı iki sayfaya yayılmış.
+Des pages de photos, remplies avec celles de la personne ou de sa famille proche. ¦ Kişinin ya da yakın ailesinin fotoğraflarıyla doldurulmuş fotoğraf sayfaları.
+Le couple, les enfants, et les événements de la famille au fil des années. ¦ Çift, çocuklar ve yıllar içinde ailenin olayları.
+L’ancêtre commun, ses descendants branche par branche, « qui est qui », des pages de souvenirs. ¦ Ortak ata, torunları kol kol, “kim kimdir”, anı sayfaları.
+📚 Un livre de famille prêt à l’emploi ¦ 📚 Kullanıma hazır bir aile kitabı
+Nom du document ¦ Belgenin adı
+de la personne ¦ kişinin
+de la personne et de sa famille proche ¦ kişinin ve yakın ailesinin
+Tout se modifie ensuite. Les textes des fiches sont des objets dynamiques : « ↻ Mettre à jour » les refait si la fiche change. ¦ Sonra her şey düzenlenebilir. Kartların metinleri dinamik nesnelerdir: kart değişirse “↻ Güncelle” onları yeniden oluşturur.
+L’ancêtre commun ¦ Ortak ata
+Le chef de famille (ou l’un des époux) ¦ Aile reisi (ya da eşlerden biri)
+Le livre se prépare… ¦ Kitap hazırlanıyor…
+Sélection (V) ¦ Seçim (V)
+Cadre d’image (F) ¦ Görsel çerçevesi (F)
+Étoile (E) ¦ Yıldız (E)
+Plume (P) : clic = point, double-clic ou Entrée = fini ¦ Kalem (P): tıkla = nokta, çift tıkla ya da Enter = bitti
+Zoom (Z) — Alt pour reculer ¦ Yakınlaştır (Z) — uzaklaştırmak için Alt
+Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir · double-clic : écrire ou placer une image ¦ Tıkla: seç (⇧: ekleyerek) · sürükle: taşı · tutamaçlar: büyüt · çift tıkla: yaz ya da görsel yerleştir
+Glisse pour tracer un bloc de texte, puis écris ¦ Bir metin bloğu çizmek için sürükle, sonra yaz
+Glisse pour tracer un cadre, puis double-clic pour y placer une image ¦ Bir çerçeve çizmek için sürükle, sonra içine görsel koymak için çift tıkla
+Glisse pour dessiner (⇧ : un carré) ¦ Çizmek için sürükle (⇧: kare)
+Glisse pour dessiner (⇧ : un cercle) ¦ Çizmek için sürükle (⇧: daire)
+Glisse pour dessiner un polygone ¦ Çokgen çizmek için sürükle
+Glisse pour dessiner une étoile ¦ Yıldız çizmek için sürükle
+Glisse pour tracer une ligne (⇧ : droite ou à 45°) ¦ Çizgi çizmek için sürükle (⇧: düz ya da 45°)
+Clic : un point · glisser : une courbe · double-clic ou Entrée : fini ¦ Tıkla: nokta · sürükle: eğri · çift tıkla ya da Enter: bitti
+Glisse pour déplacer la vue (ou barre d’espace) ¦ Görünümü kaydırmak için sürükle (ya da boşluk tuşu)
+Choisir la police dans la liste ¦ Yazı tipini listeden seç
+Menus du haut ¦ Üst menüler
+🎨 Enregistrer comme design… ¦ 🎨 Tasarım olarak kaydet…
+📐 Format du document… ¦ 📐 Belge biçimi…
+ℹ️ Informations du document… ¦ ℹ️ Belge bilgileri…
+⤓ Exporter (PDF, ePub, HTML, fichier)… ¦ ⤓ Dışa aktar (PDF, ePub, HTML, dosya)…
+✅ Contrôle avant impression… ¦ ✅ Baskı öncesi kontrol…
+↻ Mettre à jour les objets dynamiques (photos, fiches, arbres) ¦ ↻ Dinamik nesneleri güncelle (fotoğraflar, kartlar, ağaçlar)
+🎨 Mes styles (pour tous mes documents)… ¦ 🎨 Stillerim (tüm belgelerim için)…
+Arrière-plan ¦ Arka plan
+Ajuster le cadre au contenu ¦ Çerçeveyi içeriğe uydur
+🖼️ Placer une image (liée si elle vient de l’app)… ¦ 🖼️ Görsel yerleştir (uygulamadan geliyorsa bağlantılı)…
+➜ Chaîner le bloc de texte vers un autre… ¦ ➜ Metin bloğunu başka bir bloğa zincirle…
+⤵ Faire couler le texte sur de nouvelles pages ¦ ⤵ Metni yeni sayfalara akıt
+Couper le chaînage ¦ Zinciri kopar
+📑 Insérer une table des matières ¦ 📑 İçindekiler tablosu ekle
+🔤 Insérer un index des noms ¦ 🔤 Ad dizini ekle
+📍 Insérer un index des lieux ¦ 📍 Yer dizini ekle
+🔨 Insérer un index des métiers ¦ 🔨 Meslek dizini ekle
+¹ Insérer une note de bas de page… ¦ ¹ Dipnot ekle…
+📚 Citer une source (en note)… ¦ 📚 Kaynak göster (notta)…
+🗒 Insérer les notes du chapitre ¦ 🗒 Bölüm notlarını ekle
+📚 Insérer la bibliographie ¦ 📚 Kaynakçayı ekle
+🌳 Insérer un arbre généalogique (objet dynamique)… ¦ 🌳 Soy ağacı ekle (dinamik nesne)…
+👤 Insérer le texte d’une fiche (objet dynamique)… ¦ 👤 Bir kartın metnini ekle (dinamik nesne)…
+🌦 Encadré météo d’un événement… ¦ 🌦 Bir olayın hava durumu kutusu…
+📊 Insérer un diagramme (objet dynamique)… ¦ 📊 Diyagram ekle (dinamik nesne)…
+▦ Insérer un QR code (fiche, adresse, texte)… ¦ ▦ QR kod ekle (kart, adres, metin)…
+＋ Ajouter une page à la fin ¦ ＋ Sona sayfa ekle
+＋ Insérer des pages… ¦ ＋ Sayfa ekle…
+📨 Publipostage : une page par personne… ¦ 📨 Toplu belge: kişi başına bir sayfa…
+📨 Page modèle de publipostage (avec des champs) ¦ 📨 Toplu belge şablon sayfası (alanlarla)
+Aller à la page… ¦ Sayfaya git…
+⏮ Première page ¦ ⏮ İlk sayfa
+‹ Page précédente ¦ ‹ Önceki sayfa
+Dernière page ⏭ ¦ Son sayfa ⏭
+💬 Commenter le passage ou l’objet choisi… ¦ 💬 Seçilen bölüme ya da nesneye yorum yap…
+✎ Suggérer une modification du texte choisi… ¦ ✎ Seçilen metinde değişiklik öner…
+🗂 Voir les commentaires ¦ 🗂 Yorumları gör
+📨 Envoyer à un cousin (fichier de relecture)… ¦ 📨 Bir kuzene gönder (okuma dosyası)…
+⤒ Importer les commentaires d’un cousin… ¦ ⤒ Bir kuzenin yorumlarını içe aktar…
+📝 PDF annoté (avec les commentaires)… ¦ 📝 Notlu PDF (yorumlarla)…
+📏 Repères et marges ¦ 📏 Kılavuzlar ve kenar boşlukları
+Aperçu (sans repères) ¦ Önizleme (kılavuzsuz)
+Annuler / rétablir (en haut) ¦ Geri al / yinele (üstte)
+Annuler (⌘Z) ¦ Geri al (⌘Z)
+Rétablir (⇧⌘Z) ¦ Yinele (⇧⌘Z)
+Exporter : PDF, ePub, HTML, impression, fichier du document ¦ Dışa aktar: PDF, ePub, HTML, yazdırma, belge dosyası
+Fond et contour de l’objet choisi : clic = choisir la couleur ¦ Seçilen nesnenin dolgusu ve kenarı: tıkla = rengi seç
+Fond : clic pour choisir la couleur ¦ Dolgu: rengi seçmek için tıkla
+Contour : clic pour choisir la couleur ¦ Kenar: rengi seçmek için tıkla
+Intervertir fond et contour (⇧X) ¦ Dolguyla kenarı değiştir (⇧X)
+Aucune couleur pour le fond ou le contour choisi (/) ¦ Seçilen dolgu ya da kenar için renk yok (/)
+Barre du bas ¦ Alt çubuk
+Première page ¦ İlk sayfa
+Numéro de la page ¦ Sayfa numarası
+Dernière page ¦ Son sayfa
+Position du pointeur (mm) ¦ İmlecin konumu (mm)
+Voyant des erreurs (contrôle en direct) ¦ Hata göstergesi (canlı kontrol)
+Contrôle en direct ¦ Canlı kontrol
+Ouverture du document ¦ Belgenin açılışı
+Rétabli : {x} ¦ Yinelendi: {x}
+la mise en page est fermée ¦ sayfa düzeni kapalı
+d’autres changements ont suivi : utilise ↶ dans la barre de l’outil ¦ ardından başka değişiklikler yapıldı: aracın çubuğundaki ↶ düğmesini kullan
+Annuler : {x} (⌘Z) ¦ Geri al: {x} (⌘Z)
+Rien à annuler ¦ Geri alınacak bir şey yok
+Rétablir : {x} (⇧⌘Z) ¦ Yinele: {x} (⇧⌘Z)
+Rien à rétablir ¦ Yinelenecek bir şey yok
+Gabarit « {name} » — ce qui est posé ici apparaît sur toutes ses pages. ¦ “{name}” şablonu — buraya konan her şey tüm sayfalarında görünür.
+＋ Numéro de page ¦ ＋ Sayfa numarası
+＋ Titre du livre en haut ¦ ＋ Üstte kitabın başlığı
+＋ Chapitre en cours en haut ¦ ＋ Üstte geçerli bölüm
+Revenir aux pages ¦ Sayfalara dön
+Aimanter : les objets se collent aux marges, aux repères et aux autres objets ¦ Mıknatısla: nesneler kenar boşluklarına, kılavuzlara ve diğer nesnelere yapışır
+Repères et marges : montrer ou cacher ¦ Kılavuzlar ve kenar boşlukları: göster ya da gizle
+{what} se remplit tout seul (réglages dans Objet). ¦ {what} kendiliğinden dolar (ayarlar Nesne menüsünde).
+Le sommaire ¦ İçindekiler
+L’index des noms ¦ Ad dizini
+L’index des lieux ¦ Yer dizini
+L’index des métiers ¦ Meslek dizini
+Le bloc des notes ¦ Not bloğu
+La bibliographie ¦ Kaynakça
+Ce bloc ¦ Bu blok
+Ce bloc est la suite d’un sommaire ou d’un index automatique. ¦ Bu blok, otomatik bir içindekilerin ya da dizinin devamıdır.
+Texte chaîné : il s’écrit dans son premier bloc (la suite se remplit toute seule). ¦ Zincirli metin: ilk bloğunda yazılır (devamı kendiliğinden dolar).
+Ce texte suit une fiche de la généalogie (objet dynamique). L’écrire à la main le détache de la fiche. ¦ Bu metin soy ağacındaki bir kartı izler (dinamik nesne). Elle yazmak onu karttan ayırır.
+Détacher le texte de la fiche ? ¦ Metin karttan ayrılsın mı?
+Détacher et écrire ¦ Ayır ve yaz
+Texte détaché de la fiche ¦ Metin karttan ayrıldı
+Objet verrouillé. ¦ Nesne kilitli.
+Texte modifié ¦ Metin değiştirildi
+Choisis un bloc de texte (ou du texte dedans). ¦ Bir metin bloğu (ya da içindeki metni) seç.
+Choisis un bloc de texte. ¦ Bir metin bloğu seç.
+Chaînage annulé. ¦ Zincir kaldırıldı.
+Objet verrouillé (Objet → Verrouiller pour le libérer). ¦ Nesne kilitli (açmak için Nesne → Kilitle).
+Élément du gabarit : Pages → gabarit → « Modifier », ou « Détacher les éléments du gabarit ». ¦ Şablon öğesi: Sayfalar → şablon → “Düzenle” ya da “Şablon öğelerini ayır”.
+Copie déplacée ¦ Kopya taşındı
+Déplacement ({what}) ¦ Taşıma ({what})
+Taille changée ¦ Boyut değiştirildi
+Nouveau : {x} ¦ Yeni: {x}
+cadre d’image ¦ görsel çerçevesi
+étoile ¦ yıldız
+Cadre d’image : double-clic pour y placer une image. ¦ Görsel çerçevesi: içine görsel koymak için çift tıkla.
+Tracé à la plume ¦ Kalemle çizim
+Objet verrouillé : déverrouille-le d’abord (Objet → 🔒 Verrouiller / déverrouiller). ¦ Nesne kilitli: önce kilidini aç (Nesne → 🔒 Kilitle / kilidi aç).
+{n} objets supprimés ¦ {n} nesne silindi
+Objet supprimé ¦ Nesne silindi
+objets copiés ¦ nesne kopyalandı
+Rien à coller. ¦ Yapıştırılacak bir şey yok.
+pages ajoutées ¦ sayfa eklendi
+Insérer des pages ¦ Sayfa ekle
+Insérer ¦ Ekle
+après la page ¦ sayfadan sonra
+avant la page ¦ sayfadan önce
+au début du document ¦ belgenin başına
+à la fin du document ¦ belgenin sonuna
+La liste des formats n’est pas chargée. ¦ Biçim listesi yüklenmedi.
+📐 Format du document ¦ 📐 Belge biçimi
+Pages en vis-à-vis (livre) ¦ Karşılıklı sayfalar (kitap)
+Appliquer le format à ¦ Biçimi şuna uygula
+Toutes les pages ({what}) ¦ Tüm sayfalar ({what})
+La page {n} seulement ¦ Yalnızca sayfa {n}
+Numéros des pages ¦ Sayfa numaraları
+Les pages : ¦ Sayfalar:
+Les marges, colonnes et le fond perdu valent pour tout le document. ¦ Kenar boşlukları, sütunlar ve taşma payı tüm belge için geçerlidir.
+Les objets ¦ Nesneler
+Restent en place ¦ Yerinde kalır
+Sont remis à l’échelle (agrandis ou réduits avec la page) ¦ Ölçeklenir (sayfayla birlikte büyür ya da küçülür)
+Petit fond (intérieur) ¦ İç kenar boşluğu
+Grand fond (extérieur) ¦ Dış kenar boşluğu
+Colonnes et fond perdu ¦ Sütunlar ve taşma payı
+Gouttière ¦ Sütun aralığı
+↶ Annuler (⌘Z) revient au format d’avant. ¦ ↶ Geri al (⌘Z) önceki biçime döner.
+Choisis une page entre 3 cm et 1,5 m de côté. ¦ Kenarı 3 cm ile 1,5 m arasında bir sayfa seç.
+Écris les numéros des pages, par exemple « {a}-{b}, {c} ». ¦ Sayfa numaralarını yaz, örneğin “{a}-{b}, {c}”.
+Format du document : {f} ¦ Belge biçimi: {f}
+Format du document : {f} ({what}) ¦ Belge biçimi: {f} ({what})
+Ces informations vont dans le PDF (titre du fichier, auteur, sujet, mots-clés) et dans l’ePub exportés (la description aussi). ¦ Bu bilgiler dışa aktarılan PDF’e (dosya başlığı, yazar, konu, anahtar sözcükler) ve ePub’a (açıklama da) girer.
+Informations du document ¦ Belge bilgileri
+Mettre le gabarit ¦ Şablonu uygula
+Aucun (enlever le gabarit) ¦ Hiçbiri (şablonu kaldır)
+Sur ¦ Nereye
+la page {n} seulement ¦ yalnızca sayfa {n}
+les pages de … à … ¦ … ile … arasındaki sayfalar
+les pages qui ont le gabarit… (remplacer) ¦ şu şablona sahip sayfalar… (değiştir)
+les pages de gauche ¦ sol sayfalar
+les pages de droite ¦ sağ sayfalar
+Gabarit à remplacer ¦ Değiştirilecek şablon
+les pages sans gabarit ¦ şablonsuz sayfalar
+Rien à changer : ces pages ont déjà ce gabarit. ¦ Değişecek bir şey yok: bu sayfalarda zaten bu şablon var.
+Gabarit « {name} » sur {what} ¦ “{name}” şablonu uygulandı: {what}
+Gabarit enlevé de {what} ¦ Şablon kaldırıldı: {what}
+Aller à la page (1 à {n}) : ¦ Sayfaya git (1 ile {n} arası):
+Il faut garder au moins une page. ¦ En az bir sayfa kalmalı.
+Page {n} supprimée ¦ Sayfa {n} silindi
+Choisis un autre bloc. ¦ Başka bir blok seç.
+Un sommaire ou un index ne peut pas recevoir la suite d’un texte. ¦ İçindekiler ya da dizin bir metnin devamını alamaz.
+Ce bloc reçoit déjà la suite d’un autre texte. ¦ Bu blok zaten başka bir metnin devamını alıyor.
+Ce chaînage ferait une boucle. ¦ Bu zincir bir döngü oluşturur.
+Ce bloc contient déjà du texte : il sera ajouté à la fin du texte chaîné. ¦ Bu blokta zaten metin var: zincirli metnin sonuna eklenecek.
+Chaîner vers ce bloc ? ¦ Bu bloğa zincirlensin mi?
+Chaîner ¦ Zincirle
+Blocs de texte chaînés ¦ Zincirli metin blokları
+➜ Chaîné : la suite va dans le bloc de la page {n}. ¦ ➜ Zincirli: devamı sayfa {n} üzerindeki bloğa gider.
+Choisis d’abord un bloc de texte. ¦ Önce bir metin bloğu seç.
+Je répartis le texte… ¦ Metni dağıtıyorum…
+Suite du texte ¦ Metnin devamı
+Le texte tient déjà dans ses blocs. ¦ Metin zaten bloklarına sığıyor.
+Texte réparti sur {what} ¦ Metin dağıtıldı: {what}
+{what} : le texte continue de bloc en bloc. ¦ {what}: metin bloktan bloğa devam ediyor.
+Ouvre d’abord un gabarit (Pages → Modifier). ¦ Önce bir şablon aç (Sayfalar → Düzenle).
+Table des matières ¦ İçindekiler tablosu
+Index des lieux ¦ Yer dizini
+Index des métiers ¦ Meslek dizini
+Notes du chapitre ¦ Bölüm notları
+Pas dans un gabarit : sur une page. ¦ Şablonda değil: bir sayfada.
+Les notes du chapitre se rangeront dans ce bloc au lieu du bas de chaque texte (Document → Notes de bas de page). ¦ Bölüm notları her metnin altı yerine bu blokta toplanacak (Belge → Dipnotlar).
+Mettre les notes en fin de chapitre ? ¦ Notlar bölüm sonuna konsun mu?
+Oui, en fin de chapitre ¦ Evet, bölüm sonuna
+Non, garder en bas des blocs ¦ Hayır, blokların altında kalsın
+🗒 Les notes du chapitre se rangent ici toutes seules. ¦ 🗒 Bölüm notları kendiliğinden buraya toplanır.
+📚 La bibliographie se remplit avec les sources citées en note. ¦ 📚 Kaynakça, notlarda gösterilen kaynaklarla dolar.
+Lieu à indexer ¦ Dizine alınacak yer
+Métier à indexer ¦ Dizine alınacak meslek
+Sinon : seulement les mots marqués avec le style de caractère « {name} ». ¦ Yoksa: yalnızca “{name}” karakter stiliyle işaretlenmiş sözcükler.
+Chercher aussi les lieux de ta généalogie ? ¦ Soy ağacındaki yerler de aransın mı?
+Chercher aussi les métiers de ta généalogie ? ¦ Soy ağacındaki meslekler de aransın mı?
+Oui, les chercher ¦ Evet, ara
+Non, seulement les mots marqués ¦ Hayır, yalnızca işaretli sözcükler
+{what} : rangé de A à Z, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ {what}: A’dan Z’ye sıralı, sayfalarıyla. Uzunsa: Nesne → Metni akıt.
+Nom à indexer ¦ Dizine alınacak ad
+Sinon : seulement les noms marqués avec le style de caractère « Nom à indexer ». ¦ Yoksa: yalnızca “Dizine alınacak ad” karakter stiliyle işaretlenmiş adlar.
+Chercher aussi les noms des personnes de la généalogie ? ¦ Soy ağacındaki kişilerin adları da aransın mı?
+Oui, chercher les noms ¦ Evet, adları ara
+Non, seulement les noms marqués ¦ Hayır, yalnızca işaretli adlar
+Sommaire : il suit les paragraphes en style « Chapitre » (d’autres styles dans Objet). S’il est long : Objet → Faire couler le texte. ¦ İçindekiler: “Bölüm” stilindeki paragrafları izler (başka stiller Nesne menüsünde). Uzunsa: Nesne → Metni akıt.
+Index : rangé par nom, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ Dizin: ada göre sıralı, sayfalarıyla. Uzunsa: Nesne → Metni akıt.
+Termine d’abord le texte en cours (Échap), puis recommence. ¦ Önce yazmakta olduğun metni bitir (Esc), sonra yeniden başla.
+Aucun objet dynamique dans ce document (photos liées, textes de fiches, diagrammes, arbres). ¦ Bu belgede dinamik nesne yok (bağlantılı fotoğraflar, kart metinleri, diyagramlar, ağaçlar).
+Objets dynamiques mis à jour ¦ Dinamik nesneler güncellendi
+{n} mis à jour ¦ {n} güncellendi
+tout est à jour ¦ her şey güncel
+Cette image n’est pas liée à une photo de l’app. ¦ Bu görsel uygulamadaki bir fotoğrafa bağlı değil.
+Photo introuvable dans l’app. ¦ Fotoğraf uygulamada bulunamadı.
+Insérer un diagramme ¦ Diyagram ekle
+Diagramme inséré ¦ Diyagram eklendi
+La météo d’autrefois n’est pas prête. ¦ Eski zamanların hava durumu hazır değil.
+Encadré météo ¦ Hava durumu kutusu
+Insérer un encadré météo ¦ Hava durumu kutusu ekle
+Mettre à jour ¦ Güncelle
+L’encadré dit le temps qu’il faisait le jour de l’événement (icône, phrase et source, qui suit à l’export). « ↻ Mettre à jour les objets dynamiques » le refait. ¦ Kutu, olayın olduğu gün havanın nasıl olduğunu söyler (simge, cümle ve kaynak; dışa aktarmada da yer alır). “↻ Dinamik nesneleri güncelle” onu yeniden oluşturur.
+Choisis un événement. ¦ Bir olay seç.
+Texte lié à une fiche ¦ Bir karta bağlı metin
+Insérer le texte d’une fiche ¦ Bir kartın metnini ekle
+Le texte suit la fiche : si elle change dans la généalogie, « 🔗 Mettre à jour les liens » (ou la réouverture du document) le refait. ¦ Metin kartı izler: kart soy ağacında değişirse “🔗 Bağlantıları güncelle” (ya da belgeyi yeniden açmak) onu yeniden oluşturur.
+Ce qu’il faut montrer ¦ Gösterilecekler
+Coche au moins une chose à montrer. ¦ Gösterilecek en az bir şey işaretle.
+Le générateur de QR codes n’est pas encore prêt. ¦ QR kod oluşturucu henüz hazır değil.
+▦ Modifier le QR code ¦ ▦ QR kodu düzenle
+▦ Insérer un QR code ¦ ▦ QR kod ekle
+Ce que le QR code ouvre ¦ QR kodun açtığı şey
+👤 Une fiche de la généalogie ¦ 👤 Soy ağacından bir kart
+🌐 Une adresse web ¦ 🌐 Bir web adresi
+🔤 Un texte ¦ 🔤 Bir metin
+Le contenu ¦ İçerik
+(choisis d’abord la personne) ¦ (önce kişiyi seç)
+Les fiches de l’app restent sur cet ordinateur : le QR code mène aux fiches en ligne de la personne (Geneanet, Filae…, notées dans sa fiche) ou à FamilySearch ; sinon, il contient son identité en texte (lisible par n’importe quel téléphone). ¦ Uygulamanın kartları bu bilgisayarda kalır: QR kod, kişinin çevrimiçi kayıtlarına (Geneanet, Filae…, kartında yazılı) ya da FamilySearch’e götürür; yoksa kimliğini metin olarak içerir (her telefon okuyabilir).
+Rien à coder pour l’instant. ¦ Şimdilik kodlanacak bir şey yok.
+{n} octets · version {v} ({s} × {s} modules) · correction d’erreurs M ¦ {n} bayt · sürüm {v} ({s} × {s} modül) · hata düzeltme M
+Choisis la personne (et ce que le QR code contient). ¦ Kişiyi seç (ve QR kodun ne içereceğini).
+Écris ce que le QR code doit contenir. ¦ QR kodun ne içermesi gerektiğini yaz.
+QR code modifié ¦ QR kod düzenlendi
+QR code inséré ¦ QR kod eklendi
+▦ QR code : tire un coin pour la taille (il reste carré) ; double-clic pour le modifier. ¦ ▦ QR kod: boyut için bir köşeyi çek (kare kalır); düzenlemek için çift tıkla.
+🪪 Son identité en texte : « {x} » ¦ 🪪 Metin olarak kimliği: “{x}”
+Repères ¦ Kılavuzlar
+Page modèle de publipostage ¦ Toplu belge şablon sayfası
+📨 Page modèle posée : change la mise en forme à ton goût, puis Page → « Publipostage ». ¦ 📨 Şablon sayfa kondu: biçimini istediğin gibi değiştir, sonra Sayfa → “Toplu belge”.
+Gabarit « {name} » ¦ “{name}” şablonu
+📨 Une page par personne ¦ 📨 Kişi başına bir sayfa
+Créer les pages ¦ Sayfaları oluştur
+Page modèle ¦ Şablon sayfa
+les ancêtres de… ¦ şu kişinin ataları…
+les descendants de… ¦ şu kişinin torunları…
+ancêtres et descendants de… ¦ şu kişinin ataları ve torunları…
+une liste de fiches ¦ bir kart listesi
+les fiches d’une étiquette ¦ bir etiketin kartları
+Les fiches ¦ Kartlar
+celui de l’arbre (Sosa, d’Aboville) ¦ ağacınki (Sosa, d’Aboville)
+par naissance ¦ doğuma göre
+après la page modèle ¦ şablon sayfadan sonra
+retirer la page modèle ensuite ¦ ardından şablon sayfayı çıkar
+Champs trouvés : {list} ¦ Bulunan alanlar: {list}
+⚠️ Aucun champ sur cette page : Page → « Page modèle de publipostage » en pose une toute prête. ¦ ⚠️ Bu sayfada alan yok: Sayfa → “Toplu belge şablon sayfası” hazır bir tane koyar.
+→ {what} (seulement les {n} premières). ¦ → {what} (yalnızca ilk {n} tanesi).
+=page sera créée ¦ sayfa oluşturulacak|sayfa oluşturulacak
+pages seront créées ¦ sayfa oluşturulacak
+Choisis les personnes. ¦ Kişileri seç.
+(aucune étiquette) ¦ (etiket yok)
+Aucune personne dans ce choix. ¦ Bu seçimde kişi yok.
+📨 {what} (une par personne). ↶ pour tout défaire. ¦ 📨 {what} (kişi başına bir tane). Hepsini geri almak için ↶.
+=page créée ¦ sayfa oluşturuldu|sayfa oluşturuldu
+pages créées ¦ sayfa oluşturuldu
+Double-clic dans un bloc de texte, place le curseur où va l’appel de note, puis recommence. ¦ Bir metin bloğuna çift tıkla, imleci not işaretinin geleceği yere koy, sonra yeniden başla.
+¹ Note ajoutée : tous les numéros se remettent dans l’ordre quand tu sors du texte (Échap). ¦ ¹ Not eklendi: metinden çıktığında (Esc) tüm numaralar yeniden sıraya girer.
+Texte de la note (il s’écrit en bas du bloc, ou en fin de chapitre) : ¦ Notun metni (bloğun altına ya da bölüm sonuna yazılır):
+Ajouter la note ¦ Notu ekle
+Comme les archives (« AD Corrèze, 3 E 123, f° 12 ») ¦ Arşivlerdeki gibi (“AD Corrèze, 3 E 123, f° 12”)
+NOTE · SOURCE ¦ NOT · KAYNAK
+📚 Citer une source ¦ 📚 Kaynak göster
+Écrire la note ¦ Notu yaz
+La référence s’écrit en note, à l’endroit du curseur, dans le style choisi ; la source entre dans la bibliographie (Objet → Insérer la bibliographie). ¦ Gönderme, imlecin olduğu yere, seçilen stilde not olarak yazılır; kaynak kaynakçaya girer (Nesne → Kaynakçayı ekle).
+AD Corrèze ¦ AD Corrèze
+acte de baptême de Jean ¦ acte de baptême de Jean
+Dépôt (archives) ¦ Depo (arşiv)
+Folio, page ou vue ¦ Folyo, sayfa ya da görüntü
+À ajouter (facultatif) ¦ Eklenecek (isteğe bağlı)
+Choisis une source : la note s’écrit ici. ¦ Bir kaynak seç: not buraya yazılır.
+Choisis une source. ¦ Bir kaynak seç.
+📚 Citation ajoutée en note (et dans la bibliographie). ¦ 📚 Alıntı nota (ve kaynakçaya) eklendi.
+Note retirée ¦ Not çıkarıldı
+¹ Modifier la note ¦ ¹ Notu düzenle
+Texte de la note : ¦ Notun metni:
+Note modifiée ¦ Not düzenlendi
+🌳 Modifier l’arbre ¦ 🌳 Ağacı düzenle
+🌳 Insérer un arbre généalogique ¦ 🌳 Soy ağacı ekle
+Mettre à jour l’arbre ¦ Ağacı güncelle
+Insérer l’arbre ¦ Ağacı ekle
+L’arbre est dessiné d’après la base : il se refait tout seul à l’ouverture du document et avec « ↻ Mettre à jour les objets dynamiques ». Il s’imprime et passe dans le PDF comme une image nette. ¦ Ağaç veritabanına göre çizilir: belge açılırken ve “↻ Dinamik nesneleri güncelle” ile kendiliğinden yeniden oluşur. Yazdırılır ve PDF’e net bir görsel olarak geçer.
+Style des cases ¦ Kutuların stili
+Photos des fiches ¦ Kartların fotoğrafları
+Choisis la personne de l’arbre. ¦ Ağacın kişisini seç.
+🌳 Je dessine l’arbre… ¦ 🌳 Ağacı çiziyorum…
+Arbre modifié ¦ Ağaç düzenlendi
+Arbre inséré ¦ Ağaç eklendi
+💬 Ton nom ¦ 💬 Adın
+Ton prénom (il signe tes commentaires) : ¦ Adın (yorumlarını imzalar):
+Choisis d’abord les mots à changer : double-clic dans le texte, puis sélectionne-les. ¦ Önce değiştirilecek sözcükleri seç: metne çift tıkla, sonra onları seç.
+Choisis un objet, ou des mots dans un texte (double-clic), puis « 💬 Commenter ». ¦ Bir nesne ya da bir metindeki sözcükleri seç (çift tıkla), sonra “💬 Yorum yap”.
+✎ Suggérer une modification ¦ ✎ Değişiklik öner
+Remplacer « {x} » par : ¦ “{x}” şununla değiştirilsin:
+Suggérer ¦ Öner
+Ton commentaire sur « {x} » : ¦ “{x}” hakkındaki yorumun:
+Ton commentaire sur cet objet : ¦ Bu nesne hakkındaki yorumun:
+Ajouter le commentaire ¦ Yorumu ekle
+Suggestion ajoutée ¦ Öneri eklendi
+Commentaire ajouté ¦ Yorum eklendi
+✎ Suggestion notée : elle s’accepte ou se refuse dans Relecture. ¦ ✎ Öneri kaydedildi: Gözden geçirme bölümünde kabul ya da reddedilir.
+💬 Commentaire ajouté. ¦ 💬 Yorum eklendi.
+Le passage a changé depuis : la suggestion ne peut plus s’appliquer toute seule. Change le texte à la main, puis « Résoudre ». ¦ Bölüm o zamandan beri değişti: öneri artık kendiliğinden uygulanamaz. Metni elle değiştir, sonra “Çözüldü”.
+Suggestion acceptée ¦ Öneri kabul edildi
+Suggestion refusée ¦ Öneri reddedildi
+remplacer « {a} » par « {b} » ¦ “{a}” yerine “{b}”
+📨 Fichier de relecture prêt : envoie-le à ton cousin. Il l’importe dans 📐 Mise en page, commente, puis te renvoie le sien (Relecture → Importer). ¦ 📨 Gözden geçirme dosyası hazır: kuzenine gönder. O, dosyayı 📐 Sayfa düzeni’ne aktarır, yorum yapar, sonra kendi dosyasını sana geri gönderir (Gözden geçirme → İçe aktar).
+Ce fichier n’est pas un fichier de relecture LCNDA. ¦ Bu dosya bir LCNDA gözden geçirme dosyası değil.
+C’est un fichier de réglage, pas un fichier de relecture. ¦ Bu bir ayar dosyası, gözden geçirme dosyası değil.
+Ce fichier n’est pas un fichier de relecture LCNDA (📨 Envoyer à un cousin). ¦ Bu dosya bir LCNDA gözden geçirme dosyası değil (📨 Bir kuzene gönder).
+Ce fichier de relecture a été fait pour un autre document. Importer quand même ses commentaires ? ¦ Bu gözden geçirme dosyası başka bir belge için yapılmış. Yorumları yine de içe aktarılsın mı?
+Un autre document ? ¦ Başka bir belge mi?
+Rien de nouveau dans ce fichier : ses commentaires sont déjà là. ¦ Bu dosyada yeni bir şey yok: yorumları zaten burada.
+Commentaires importés ¦ Yorumlar içe aktarıldı
+=commentaire ajouté ¦ yorum eklendi|yorum eklendi
+commentaires ajoutés ¦ yorum eklendi
+=réponse ajoutée ¦ yanıt eklendi|yanıt eklendi
+réponses ajoutées ¦ yanıt eklendi
+✓ acceptée ¦ ✓ kabul edildi
+✕ refusée ¦ ✕ reddedildi
+sur un objet de la page ¦ sayfadaki bir nesnede
+✎ Remplacer par « <b>{x}</b> » ¦ ✎ Şununla değiştir: “<b>{x}</b>”
+↩ Répondre ¦ ↩ Yanıtla
+✓ Résoudre ¦ ✓ Çözüldü
+Supprimer le commentaire ¦ Yorumu sil
+Choisis des mots (double-clic dans un texte) ou un objet, puis « 💬 Commenter » ou « ✎ Suggérer ». Les bulles au bord des pages montrent où ils sont. ¦ Sözcükler (bir metne çift tıkla) ya da bir nesne seç, sonra “💬 Yorum yap” ya da “✎ Öner”. Sayfaların kenarındaki balonlar nerede olduklarını gösterir.
+✎ Suggérer ¦ ✎ Öner
+Résolus ¦ Çözülenler
+Aucun commentaire résolu ¦ Çözülmüş yorum yok
+Aucun commentaire ¦ Yorum yok
+Choisis des mots dans un texte, puis « 💬 Commenter ». ¦ Bir metindeki sözcükleri seç, sonra “💬 Yorum yap”.
+Aucun commentaire. ¦ Yorum yok.
+Envoyer à un cousin ¦ Bir kuzene gönder
+Le fichier de relecture contient le livre : ton cousin l’importe dans son LCNDA (📐 Mise en page → Importer), ajoute ses commentaires, puis te renvoie le sien. Ou envoie-lui le PDF annoté, à lire sur papier. ¦ Gözden geçirme dosyası kitabı içerir: kuzenin onu kendi LCNDA’sına aktarır (📐 Sayfa düzeni → İçe aktar), yorumlarını ekler, sonra kendi dosyasını sana geri gönderir. Ya da ona kâğıtta okuması için notlu PDF’i gönder.
+⤒ Importer ses commentaires… ¦ ⤒ Onun yorumlarını içe aktar…
+📝 PDF annoté… ¦ 📝 Notlu PDF…
+Ton nom ¦ Adın
+il signe tes commentaires ¦ yorumlarını imzalar
+L’envoi des images n’est pas encore prêt. Réessaie dans un instant. ¦ Görsel gönderimi henüz hazır değil. Birazdan yeniden dene.
+Seules les images se posent sur la page. ¦ Sayfaya yalnızca görseller konabilir.
+Envoi de {what} dans les médias… ¦ Medyaya gönderiliyor: {what}…
+=image déposée ¦ görsel bırakıldı|görsel bırakıldı
+images déposées ¦ görsel bırakıldı
+🖼️ {what} dans les médias et sur la page (liées). ¦ 🖼️ {what} medyada ve sayfada (bağlantılı).
+🖼️ {what} dans les médias et sur la page (liée). ¦ 🖼️ {what} medyada ve sayfada (bağlantılı).
+Plus de place : supprime un ensemble. ¦ Yer kalmadı: bir takımı sil.
+les styles de ce document ¦ bu belgenin stilleri
+{a} de paragraphe · {b} de caractère ¦ {a} paragraf · {b} karakter
+Styles « {name} » mis dans le document ¦ “{name}” stilleri belgeye kondu
+Styles mis dans le document : tout le texte qui les utilise suit. ¦ Stiller belgeye kondu: onları kullanan tüm metin uyar.
+Copie « {name} » créée. ¦ “{name}” kopyası oluşturuldu.
+Styles « {name} » supprimés ¦ “{name}” stilleri silindi
+les styles de la mise en page ¦ sayfa düzeninin stilleri
+Ce réglage ne contient aucun style. ¦ Bu ayar hiç stil içermiyor.
+Réglage « {name} » importé. ¦ “{name}” ayarı içe aktarıldı.
+🎨 Mes styles, pour tous mes documents ¦ 🎨 Stillerim, tüm belgelerim için
+Garde les styles de paragraphe et de caractère (et les couleurs du nuancier qu’ils utilisent) de ce document, pour les remettre dans un autre (« Appliquer »). Les styles du même nom sont remplacés, les autres ajoutés. ¦ Bu belgenin paragraf ve karakter stillerini (ve kullandıkları renk paletini) sakla, başka bir belgeye koymak için (“Uygula”). Aynı adlı stiller değiştirilir, diğerleri eklenir.
+=texte qui déborde ¦ taşan metin|taşan metin
+textes qui débordent ¦ taşan metin
+=fait contredit par les fiches ¦ kartlarla çelişen bilgi|kartlarla çelişen bilgi
+faits contredits par les fiches ¦ kartlarla çelişen bilgi
+{n} à vérifier ¦ Kontrol edilecek: {n}
+Aucune erreur ¦ Hata yok
+Aucun texte ne déborde, aucun fait contredit par les fiches ¦ Taşan metin yok, kartlarla çelişen bilgi yok
+Contrôle en cours… ¦ Kontrol ediliyor…
+Texte qui déborde (alors qu’il est chaîné : vérifie le bloc suivant). ¦ Taşan metin (zincirli olduğu hâlde: sonraki bloğu kontrol et).
+Texte qui déborde de son bloc (⊞) : agrandis le bloc, chaîne-le, ou « Faire couler le texte ». ¦ Bloğundan taşan metin (⊞): bloğu büyüt, zincirle ya da “Metni akıt”.
+Texte hors des marges : il risque d’être coupé ou trop près du bord. ¦ Kenar boşluklarının dışında metin: kesilebilir ya da kenara çok yakın olabilir.
+Cadre d’image vide. ¦ Boş görsel çerçevesi.
+Photo liée introuvable dans l’app. ¦ Bağlantılı fotoğraf uygulamada bulunamadı.
+Image trop petite pour l’impression : {n} points par pouce à cette taille (il en faut 300 pour une belle impression, 150 au minimum). ¦ Görsel baskı için çok küçük: bu boyutta inç başına {n} nokta (güzel bir baskı için 300, en az 150 gerekir).
+Touche le bord de la page sans aller jusqu’au fond perdu ({n} mm) : un liseré blanc peut apparaître à la coupe. ¦ Sayfanın kenarına değiyor ama taşma payına ({n} mm) kadar uzanmıyor: kesimde beyaz bir şerit görünebilir.
+Vérification des faits impossible pour le moment (la base ne répond pas). ¦ Bilgi kontrolü şimdilik yapılamıyor (veritabanı yanıt vermiyor).
+Appel de note sans texte : Texte → « Notes de ce bloc » pour l’écrire. ¦ Metni olmayan not işareti: yazmak için Metin → “Bu bloğun notları”.
+Les notes vont « en fin de chapitre », mais aucun bloc ne les reçoit : Objet → « Insérer les notes du chapitre » (ou Document → Notes : en bas du bloc). ¦ Notlar “bölüm sonuna” gidiyor ama onları alan bir blok yok: Nesne → “Bölüm notlarını ekle” (ya da Belge → Notlar: bloğun altında).
+{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ Henüz çözülmemiş: {what} (💬 Gözden geçirme sekmesi). Yazdırılmazlar.
+{what} pas encore résolu (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ Henüz çözülmemiş: {what} (💬 Gözden geçirme sekmesi). Yazdırılmazlar.
+Police « {name} » absente de cet ordinateur : une autre la remplace à l’impression. ¦ “{name}” yazı tipi bu bilgisayarda yok: yazdırırken başka biri onun yerini alır.
+Pas de fond perdu (Document → Fond perdu, 3 à 5 mm) : nécessaire si des images ou couleurs vont jusqu’au bord. ¦ Taşma payı yok (Belge → Taşma payı, 3 ile 5 mm): görseller ya da renkler kenara kadar uzanıyorsa gerekli.
+CONTRÔLE AVANT IMPRESSION ¦ BASKI ÖNCESİ KONTROL
+{what} à corriger ¦ Düzeltilecek: {what}
+=problème ¦ sorun|sorun
+Prêt pour l’impression ({what}) ¦ Baskıya hazır ({what})
+Prêt pour l’impression ¦ Baskıya hazır
+{a} · {b} · {c}. Clique sur « Aller » pour voir l’objet. Pour l’imprimeur : Fichier → « PDF avec fond perdu et traits de coupe ». ¦ {a} · {b} · {c}. Nesneyi görmek için “Git”e tıkla. Matbaa için: Dosya → “Taşma paylı ve kesim işaretli PDF”.
+✅ Rien à signaler. ¦ ✅ Bildirilecek bir şey yok.
+Ajuster le cadre ¦ Çerçeveyi uydur
+Placer une image ¦ Görsel yerleştir
+Page ajoutée à la fin ¦ Sona sayfa eklendi
+Pages insérées ¦ Sayfalar eklendi
+Page dupliquée ¦ Sayfa çoğaltıldı
+Page supprimée ¦ Sayfa silindi
+🧲 Aimanter : oui. ¦ 🧲 Mıknatısla: açık.
+🧲 Aimanter : arrêté. ¦ 🧲 Mıknatısla: kapalı.
+Ce bloc est déjà chaîné (« Couper le chaînage » d’abord). ¦ Bu blok zaten zincirli (önce “Zinciri kopar”).
+➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler. ¦ ➜ Devamını alacak metin bloğuna tıkla (herhangi bir sayfada). Esc: iptal.
+Ce bloc n’est pas chaîné vers un autre. ¦ Bu blok başka bir bloğa zincirli değil.
+Chaînage coupé ¦ Zincir koparıldı
+Choisis un objet. ¦ Bir nesne seç.
+Déplacement au clavier ¦ Klavyeyle taşıma
+Nom du design (il sera proposé pour les prochains livres) : ¦ Tasarımın adı (sonraki kitaplar için önerilecek):
+Nom de la copie : ¦ Kopyanın adı:
+Design « {name} » enregistré : il est proposé pour les nouveaux livres. ¦ “{name}” tasarımı kaydedildi: yeni kitaplar için önerilir.
+Les dernières modifications seront perdues. ¦ Son değişiklikler kaybolacak.
+{what} · {w} × {h} mm. Dans la fenêtre du navigateur, garde « Taille réelle (100 %) ». ¦ {what} · {w} × {h} mm. Tarayıcı penceresinde “Gerçek boyut (%100)” seçeneğini koru.
+Planches (pages en vis-à-vis) ¦ Yaylar (karşılıklı sayfalar)
+Livret plié ¦ Katlanmış kitapçık
+(pages remises dans l’ordre, 2 par face) ¦ (sayfalar yeniden sıralanır, yüz başına 2)
+Notes et commentaires ({n}) ¦ Notlar ve yorumlar ({n})
+Notes et commentaires ¦ Notlar ve yorumlar
+Préparation du fichier HTML (les images sont intégrées)… ¦ HTML dosyası hazırlanıyor (görseller gömülü)…
+Préparation du livre numérique (ePub)… ¦ E-kitap (ePub) hazırlanıyor…
+📱 ePub prêt ({n} Ko) : il s’ouvre dans Livres, Kobo, Calibre… ¦ 📱 ePub hazır ({n} KB): Kitaplar, Kobo, Calibre… ile açılır.
+🗄️ PDF/A : dessin des pages… ¦ 🗄️ PDF/A: sayfalar çiziliyor…
+🗄️ PDF/A : dessin des pages… {n} % ¦ 🗄️ PDF/A: sayfalar çiziliyor… %{n}
+🗄️ PDF/A prêt ({n} Mo) : fait pour être gardé longtemps (archives, notaire, dépôt). ¦ 🗄️ PDF/A hazır ({n} MB): uzun süre saklanmak için yapıldı (arşiv, noter, teslim).
+par l’impression ¦ yazdırma yoluyla
+📖 Livret à plier ¦ 📖 Katlanacak kitapçık
+pages remises dans l’ordre, 2 par face ¦ sayfalar yeniden sıralanır, yüz başına 2
+archivage (ISO 19005), pages en image ¦ arşivleme (ISO 19005), sayfalar görsel olarak
+liseuse, téléphone, tablette ¦ e-okuyucu, telefon, tablet
+une page, photos comprises ¦ tek sayfa, fotoğraflar dahil
+📝 PDF annoté ¦ 📝 Notlu PDF
+avec les commentaires ¦ yorumlarla
+à envoyer à un cousin ¦ bir kuzene göndermek için
+le document (.json) ¦ belge (.json)
+Aucun gabarit ¦ Şablon yok
+Le gabarit est un fond commun à plusieurs pages (numéro de page, titre courant, filets) : ce qui est posé sur le gabarit apparaît sur toutes ses pages. ¦ Şablon, birkaç sayfanın ortak zeminidir (sayfa numarası, sayfa başlığı, çizgiler): şablona konan her şey tüm sayfalarında görünür.
+Ajouter, enlever ou remplacer le gabarit de cette page ¦ Bu sayfanın şablonunu ekle, kaldır ya da değiştir
+Mettre, enlever ou remplacer un gabarit sur plusieurs pages ¦ Birkaç sayfada şablon uygula, kaldır ya da değiştir
+Appliquer à la page {n} ¦ Sayfa {n} için uygula
+Les éléments du gabarit deviennent modifiables sur cette page ¦ Şablon öğeleri bu sayfada düzenlenebilir hâle gelir
+＋ Nouveau gabarit ¦ ＋ Yeni şablon
+Détacher les éléments ¦ Öğeleri ayır
+Avancer la page ¦ Sayfayı öne al
+Reculer la page ¦ Sayfayı geri al
+＋ Page à la fin ¦ ＋ Sona sayfa
+＋ Insérer… ¦ ＋ Ekle…
+Aller à ¦ Git
+Le calque du haut est devant. Nouveaux objets : calque choisi (●). ¦ Üstteki katman öndedir. Yeni nesneler: seçilen katman (●).
+Double-clic : renommer ¦ Çift tıkla: yeniden adlandır
+Sélection vers ¦ Seçimi şuraya
+Objets de la page ¦ Sayfanın nesneleri
+Cadre d’image ¦ Görsel çerçevesi
+Tracé ¦ Çizim
+Forme composée ¦ Bileşik şekil
+Aucun objet sur cette page. ¦ Bu sayfada nesne yok.
+Choisis un objet sur la page (outil ➤). Double-clic sur un texte pour l’écrire, sur un cadre pour y placer une image. ¦ Sayfada bir nesne seç (➤ aracı). Bir metne yazmak için, bir çerçeveye görsel koymak için çift tıkla.
+🖼️ Placer une image ¦ 🖼️ Görsel yerleştir
+Position et taille ¦ Konum ve boyut
+(dans Calques) ¦ (Katmanlar içinde)
+Biseautés ¦ Pahlı
+Comment la couleur de l’objet se mélange à ce qui est dessous : « Produit » assombrit, « Superposition » éclaircit. ¦ Nesnenin renginin altındakiyle nasıl karıştığı: “Çarp” koyulaştırır, “Ekran” açar.
+Adoucit les bords de l’objet sur cette largeur, comme un flou du pourtour. ¦ Nesnenin kenarlarını bu genişlikte yumuşatır, çevresine bulanıklık gibi.
+Ombre portée ¦ Gölge
+Décalage X ¦ X kayması
+Décalage Y ¦ Y kayması
+Côtés ¦ Kenarlar
+Convertir la forme ¦ Şekli dönüştür
+Habillage du texte ¦ Metin kaydırma
+Le texte voisin ¦ Yakındaki metin
+Les blocs de texte posés sous cet objet le contournent au lieu de passer dessous. ¦ Bu nesnenin altındaki metin blokları altından geçmek yerine onun çevresinden dolanır.
+Les blocs de texte de la page contournent cet objet. ¦ Sayfanın metin blokları bu nesnenin çevresinden dolanır.
+mis à jour ¦ güncellendi
+personne introuvable ¦ kişi bulunamadı
+Il suit la base : il se refait à l’ouverture du document et avec « ↻ Mettre à jour ». ¦ Veritabanını izler: belge açılırken ve “↻ Güncelle” ile yeniden oluşur.
+L’arbre reste tel quel et ne suit plus la base ¦ Ağaç olduğu gibi kalır ve artık veritabanını izlemez
+✎ Modifier l’arbre… ¦ ✎ Ağacı düzenle…
+↻ Mettre à jour ¦ ↻ Güncelle
+Détacher ¦ Ayır
+Il contient : « {x} ». Il se redessine net à toutes les tailles (PDF, ePub, HTML). ¦ İçeriği: “{x}”. Her boyutta net olarak yeniden çizilir (PDF, ePub, HTML).
+▦ Modifier le QR code… ¦ ▦ QR kodu düzenle…
+lié ¦ bağlantılı
+✎ Modifier le diagramme ¦ ✎ Diyagramı düzenle
+liée ¦ bağlantılı
+mise à jour ¦ güncellendi
+L’image ne suit plus la photo de l’app ¦ Görsel artık uygulamadaki fotoğrafı izlemiyor
+✎ Modifier l’original (retouche) ¦ ✎ Aslını düzenle (rötuş)
+Incorporer (ne plus suivre) ¦ Göm (artık izleme)
+Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base. ¦ Görsel belgeye gömüldü. Uygulamadaki bir fotoğrafı (ve rötuşlarını) izlemesi için: “Görseli değiştir” ve onu veritabanından seç.
+🖼️ Remplacer l’image ¦ 🖼️ Görseli değiştir
+🖼️ Placer l’image ¦ 🖼️ Görseli yerleştir
+Cadre au contenu ¦ Çerçeveyi içeriğe
+Marge intérieure ¦ İç boşluk
+En haut ¦ Üstte
+Au milieu ¦ Ortada
+Ajuster la hauteur au texte ¦ Yüksekliği metne uydur
+➜ Texte chaîné ¦ ➜ Zincirli metin
+Bloc {a} sur {b} : ¦ Blok {a} / {b}:
+Un texte peut continuer d’un bloc à l’autre, sur d’autres pages : il passe tout seul à la suite quand le premier est plein. ¦ Bir metin bloktan bloğa, başka sayfalarda devam edebilir: ilki dolunca kendiliğinden devamına geçer.
+Couper après ce bloc ¦ Bu bloktan sonra kopar
+➜ Chaîner vers un bloc… ¦ ➜ Bir bloğa zincirle…
+Ajoute des pages (même gabarit) et des blocs chaînés jusqu’à ce que tout le texte tienne ¦ Tüm metin sığana kadar sayfalar (aynı şablon) ve zincirli bloklar ekler
+⤵ Faire couler sur de nouvelles pages ¦ ⤵ Yeni sayfalara akıt
+📍 Index des lieux ¦ 📍 Yer dizini
+🔨 Index des métiers ¦ 🔨 Meslek dizini
+métiers ¦ meslekler
+Mots marqués avec le style de caractère « Lieu à indexer », et {what} de ta base cherchés dans le texte. Rangé de A à Z, avec les pages. ¦ “Dizine alınacak yer” karakter stiliyle işaretlenmiş sözcükler ve metinde aranan veritabanındaki {what}. A’dan Z’ye sıralı, sayfalarıyla.
+Mots marqués avec le style de caractère « Lieu à indexer », et {what} de ta base cherché dans le texte. Rangé de A à Z, avec les pages. ¦ “Dizine alınacak yer” karakter stiliyle işaretlenmiş sözcükler ve metinde aranan veritabanındaki {what}. A’dan Z’ye sıralı, sayfalarıyla.
+Mots marqués avec le style de caractère « Lieu à indexer ». Rangé de A à Z, avec les pages. ¦ “Dizine alınacak yer” karakter stiliyle işaretlenmiş sözcükler. A’dan Z’ye sıralı, sayfalarıyla.
+Mots marqués avec le style de caractère « Métier à indexer », et {what} de ta base cherchés dans le texte. Rangé de A à Z, avec les pages. ¦ “Dizine alınacak meslek” karakter stiliyle işaretlenmiş sözcükler ve metinde aranan veritabanındaki {what}. A’dan Z’ye sıralı, sayfalarıyla.
+Mots marqués avec le style de caractère « Métier à indexer », et {what} de ta base cherché dans le texte. Rangé de A à Z, avec les pages. ¦ “Dizine alınacak meslek” karakter stiliyle işaretlenmiş sözcükler ve metinde aranan veritabanındaki {what}. A’dan Z’ye sıralı, sayfalarıyla.
+Mots marqués avec le style de caractère « Métier à indexer ». Rangé de A à Z, avec les pages. ¦ “Dizine alınacak meslek” karakter stiliyle işaretlenmiş sözcükler. A’dan Z’ye sıralı, sayfalarıyla.
+Style des lignes ¦ Satırların stili
+↻ Recharger ceux de la base ¦ ↻ Veritabanındakileri yeniden yükle
+＋ Chercher ceux de la base ¦ ＋ Veritabanındakileri ara
+Seulement les mots marqués ¦ Yalnızca işaretli sözcükler
+🗒 Notes du chapitre ¦ 🗒 Bölüm notları
+Les notes appelées dans le chapitre où se trouve ce bloc s’y rangent toutes seules, numérotées (Document → Notes de bas de page). ¦ Bu bloğun bulunduğu bölümde gösterilen notlar buraya kendiliğinden, numaralı olarak toplanır (Belge → Dipnotlar).
+Les sources citées en note (« 📚 Citer une source ») s’y rangent toutes seules, de A à Z. ¦ Notta gösterilen kaynaklar (“📚 Kaynak göster”) buraya kendiliğinden, A’dan Z’ye toplanır.
+📑 Table des matières ¦ 📑 İçindekiler tablosu
+Elle reprend, dans l’ordre des pages, les paragraphes de ces styles (le 1er au premier niveau, les suivants en retrait) : ¦ Sayfa sırasıyla, bu stillerdeki paragrafları alır (1. stil ilk düzeyde, sonrakiler girintili):
+Noms marqués avec le style de caractère « Nom à indexer », et {what} de la généalogie cherchées dans le texte. Rangé par nom de famille, avec les pages. ¦ “Dizine alınacak ad” karakter stiliyle işaretlenmiş adlar ve metinde aranan soy ağacındaki {what}. Soyadına göre sıralı, sayfalarıyla.
+Noms marqués avec le style de caractère « Nom à indexer », et {what} de la généalogie cherchée dans le texte. Rangé par nom de famille, avec les pages. ¦ “Dizine alınacak ad” karakter stiliyle işaretlenmiş adlar ve metinde aranan soy ağacındaki {what}. Soyadına göre sıralı, sayfalarıyla.
+Noms marqués avec le style de caractère « Nom à indexer ». Rangé par nom de famille, avec les pages. ¦ “Dizine alınacak ad” karakter stiliyle işaretlenmiş adlar. Soyadına göre sıralı, sayfalarıyla.
+↻ Recharger les noms de la généalogie ¦ ↻ Soy ağacındaki adları yeniden yükle
+＋ Chercher les noms de la généalogie ¦ ＋ Soy ağacındaki adları ara
+Seulement les noms marqués ¦ Yalnızca işaretli adlar
+🌦 Objet dynamique : météo ¦ 🌦 Dinamik nesne: hava durumu
+Cet encadré suit la météo d’un événement ({when}). L’écrire à la main le détache. ¦ Bu kutu bir olayın hava durumunu izler ({when}). Elle yazmak onu ayırır.
+Cet encadré suit la météo d’un événement. L’écrire à la main le détache. ¦ Bu kutu bir olayın hava durumunu izler. Elle yazmak onu ayırır.
+Changer l’événement… ¦ Olayı değiştir…
+👤 Objet dynamique : fiche ¦ 👤 Dinamik nesne: kart
+Ce texte suit une fiche de la généalogie ({when}). L’écrire à la main le détache. ¦ Bu metin soy ağacındaki bir kartı izler ({when}). Elle yazmak onu ayırır.
+Ce texte suit une fiche de la généalogie. L’écrire à la main le détache. ¦ Bu metin soy ağacındaki bir kartı izler. Elle yazmak onu ayırır.
+Changer la fiche ou ce qu’on montre… ¦ Kartı ya da gösterileni değiştir…
+Aligner et répartir ¦ Hizala ve dağıt
+Par rapport à ¦ Neye göre
+la sélection ¦ seçim
+aux marges ¦ kenar boşlukları
+Répartir ↔ ¦ Dağıt ↔
+Répartir ↕ ¦ Dağıt ↕
+Soustraire : les formes de devant découpent celle du fond. ¦ Çıkar: öndeki şekiller arkadakini keser.
+Décomposer ¦ Ayrıştır
+Choisis au moins deux formes (Maj + clic). ¦ En az iki şekil seç (Shift + tıkla).
+Toutes capitales ¦ Tümü büyük harf
+Crénage ¦ Karakter aralığı (kerning)
+Enlever la mise en forme ¦ Biçimlendirmeyi kaldır
+Choisir n’importe quelle couleur ¦ İstediğin rengi seç
+Justifié, dernière ligne aussi ¦ İki yana yaslı, son satır da
+Césure ¦ Heceleme
+Une note numérotée toute seule, à l’endroit du curseur ¦ İmlecin olduğu yerde kendiliğinden numaralanan bir not
+La référence d’une source de ta base, en note ¦ Veritabanındaki bir kaynağın göndermesi, notta
+Un commentaire de relecture sur les mots choisis ¦ Seçilen sözcükler üzerine bir gözden geçirme yorumu
+Proposer un autre texte à la place des mots choisis ¦ Seçilen sözcüklerin yerine başka bir metin öner
+1. Liste ¦ 1. Liste
+Insérer : ¦ Ekle:
+Modifier le style (tout le livre suit) ¦ Stili değiştir (tüm kitap uyar)
+Styles de caractère ¦ Karakter stilleri
+Aucun (enlever) ¦ Hiçbiri (kaldır)
+✏️ Tu écris dans un bloc : les réglages s’appliquent au texte choisi (sinon au paragraphe ou à tout le bloc). Échap pour sortir. ¦ ✏️ Bir blokta yazıyorsun: ayarlar seçilen metne (yoksa paragrafa ya da tüm bloğa) uygulanır. Çıkmak için Esc.
+Bloc choisi : les réglages s’appliquent à tout son texte. Double-clic pour écrire dedans. ¦ Seçilen blok: ayarlar tüm metnine uygulanır. İçine yazmak için çift tıkla.
+Choisis un bloc de texte (outil T pour en tracer un). ¦ Bir metin bloğu seç (çizmek için T aracı).
+Notes de ce bloc ({n}) ¦ Bu bloğun notları ({n})
+Modifier la note ¦ Notu düzenle
+Retirer la note ¦ Notu çıkar
+Modifier le dégradé ¦ Renk geçişini düzenle
+Changer la couleur (tout le livre suit) ¦ Rengi değiştir (tüm kitap uyar)
+＋ Ajouter la couleur ¦ ＋ Rengi ekle
+＋ Nouveau dégradé ¦ ＋ Yeni renk geçişi
+Dégradé « {name} » ¦ “{name}” renk geçişi
+＋ Arrêt de couleur ¦ ＋ Renk durağı
+pour l’objet choisi, sans l’ajouter au nuancier ¦ seçilen nesne için, renk paletine eklemeden
+↻ Mettre à jour les objets dynamiques ¦ ↻ Dinamik nesneleri güncelle
+⛔ personne introuvable ¦ ⛔ kişi bulunamadı
+suit la base ¦ veritabanını izler
+Textes liés à des fiches ({n}) ¦ Kartlara bağlı metinler ({n})
+⛔ fiche introuvable ¦ ⛔ kart bulunamadı
+suit la fiche ¦ kartı izler
+Liens — images placées ({n}) ¦ Bağlantılar — yerleştirilen görseller ({n})
+Image intégrée ¦ Gömülü görsel
+intégrée au document ¦ belgeye gömülü
+🔗 liée · mise à jour ¦ 🔗 bağlantılı · güncellendi
+🔗 liée · à jour ¦ 🔗 bağlantılı · güncel
+photo de la base ¦ veritabanındaki fotoğraf
+Retoucher la photo de l’app ¦ Uygulamadaki fotoğrafı rötuşla
+Aucun cadre d’image : outil ⊠ ou Objet → Placer une image. ¦ Görsel çerçevesi yok: ⊠ aracı ya da Nesne → Görsel yerleştir.
+Clique sur une étape pour revenir à ce moment-là. Les étapes d’après restent (en gris) tant que tu ne modifies rien d’autre. ¦ O ana dönmek için bir adıma tıkla. Sonraki adımlar, başka bir şey değiştirmediğin sürece (gri olarak) kalır.
+Format du document ¦ Belge biçimi
+Titre du livre ({titre}) ¦ Kitabın başlığı ({titre})
+Personnalisé ¦ Özel
+La marge de 3 à 5 mm autour de la page, coupée par l’imprimeur : les images qui vont jusqu’au bord doivent la remplir. ¦ Sayfanın çevresindeki, matbaanın kestiği 3–5 mm’lik pay: kenara kadar uzanan görseller onu doldurmalı.
+Une bande en dehors du fond perdu pour les notes à l’imprimeur (titre, date) ; elle ne s’imprime qu’avec les traits de coupe. ¦ Taşma payının dışında, matbaaya notlar (başlık, tarih) için bir şerit; yalnızca kesim işaretleriyle yazdırılır.
+Les nouveaux documents partent des <button type="button" class="link-button" data-ly-defaults>réglages par défaut</button>. ¦ Yeni belgeler <button type="button" class="link-button" data-ly-defaults>varsayılan ayarlardan</button> başlar.
+réglages par défaut ¦ varsayılan ayarlar
+Les notes vont ¦ Notlar şuraya gider
+En bas du bloc : chaque note s’écrit sous le texte qui l’appelle. En fin de chapitre : toutes les notes du chapitre se rangent dans le bloc « Notes du chapitre » (Objet → Insérer les notes du chapitre). ¦ Bloğun altında: her not, onu gösteren metnin altına yazılır. Bölüm sonunda: bölümün tüm notları “Bölüm notları” bloğunda toplanır (Nesne → Bölüm notlarını ekle).
+en bas du bloc de texte ¦ metin bloğunun altında
+en fin de chapitre ¦ bölüm sonunda
+qui se suivent dans tout le livre ¦ tüm kitap boyunca devam eden
+qui recommencent à 1 à chaque chapitre ¦ her bölümde 1’den yeniden başlayan
+qui recommencent à 1 à chaque page ¦ her sayfada 1’den yeniden başlayan
+{what} dans le document. Pour en ajouter une : double-clic dans un texte, place le curseur, puis Texte → « ¹ Note » ou « 📚 Citer une source ». ¦ Belgede: {what}. Bir tane eklemek için: bir metne çift tıkla, imleci yerleştir, sonra Metin → “¹ Not” ya da “📚 Kaynak göster”.
+Notes de bas de page : réglage ¦ Dipnotlar: ayar
+Gabarit « {name} » sur la page {n} ¦ “{name}” şablonu sayfa {n} üzerinde
+Gabarit enlevé de la page {n} ¦ Şablon sayfa {n} üzerinden kaldırıldı
+{what} changé ¦ Değiştirildi: {what}
+Une adresse commence par https:// ou mailto: ¦ Bir adres https:// ya da mailto: ile başlar
+Code couleur : # suivi de 6 chiffres ou lettres (ex. #7a2e2e). ¦ Renk kodu: # ve ardından 6 rakam ya da harf (ör. #7a2e2e).
+Image incorporée ¦ Görsel gömüldü
+Texte de la fiche mis à jour ¦ Kartın metni güncellendi
+Les dernières modifications ne sont pas enregistrées (enregistre d’abord si besoin). ¦ Son değişiklikler kaydedilmedi (gerekirse önce kaydet).
+Fermer la mise en page pour ouvrir la fiche ? ¦ Kartı açmak için sayfa düzeni kapatılsın mı?
+Index : noms de la généalogie ¦ Dizin: soy ağacındaki adlar
+Index : noms marqués seulement ¦ Dizin: yalnızca işaretli adlar
+Index : mots de la base ¦ Dizin: veritabanındaki sözcükler
+Index : mots marqués seulement ¦ Dizin: yalnızca işaretli sözcükler
+🌳 Je redessine l’arbre… ¦ 🌳 Ağacı yeniden çiziyorum…
+Arbre mis à jour ¦ Ağaç güncellendi
+🌳 Arbre à jour d’après la base. ¦ 🌳 Ağaç veritabanına göre güncel.
+Arbre détaché de la base ¦ Ağaç veritabanından ayrıldı
+Ta réponse à {name} : ¦ Yanıtın (kime: {name}):
+Réponse ajoutée ¦ Yanıt eklendi
+Commentaire résolu ¦ Yorum çözüldü
+Nom du calque : ¦ Katmanın adı:
+Choisis du texte, puis le bouton. ¦ Metin seç, sonra düğmeye bas.
+Choisis du texte dans un bloc. ¦ Bir blokta metin seç.
+Adresse du lien (https://…) : ¦ Bağlantının adresi (https://…):
+Double-clic dans un bloc de texte d’abord. ¦ Önce bir metin bloğuna çift tıkla.
+Choisis des mots dans un bloc de texte. ¦ Bir metin bloğunda sözcükler seç.
+Ce navigateur ne sait pas lister les polices de l’ordinateur : tape le nom de la police. ¦ Bu tarayıcı bilgisayarın yazı tiplerini listeleyemiyor: yazı tipinin adını yaz.
+{what} de l’ordinateur ajoutées à la liste. ¦ Bilgisayardan listeye eklendi: {what}.
+{what} de l’ordinateur ajoutée à la liste. ¦ Bilgisayardan listeye eklendi: {what}.
+(niveau {n}) ¦ (düzey {n})
+Accès aux polices refusé. ¦ Yazı tiplerine erişim reddedildi.
+Nom de la couleur : ¦ Rengin adı:
+Nuance supprimée ¦ Renk tonu silindi
+Nuance supprimée ({n} objets passent en noir) ¦ Renk tonu silindi ({n} nesne siyaha geçiyor)
+Nuance supprimée ({n} objet passe en noir) ¦ Renk tonu silindi ({n} nesne siyaha geçiyor)
+Nom du gabarit : ¦ Şablonun adı:
+Supprimer « {name} » ¦ Sil: “{name}”
+Supprimer le gabarit ¦ Şablonu sil
+{n} pages utilisent ce gabarit. ¦ {n} sayfa bu şablonu kullanıyor.
+{n} page utilise ce gabarit. ¦ {n} sayfa bu şablonu kullanıyor.
+Aucune page n’utilise ce gabarit. ¦ Hiçbir sayfa bu şablonu kullanmıyor.
+Ces pages prennent à la place ¦ Bu sayfalar yerine bunu alır
+Gabarit « {name} » supprimé ¦ “{name}” şablonu silindi
+Cette page n’a pas de gabarit. ¦ Bu sayfanın şablonu yok.
+Éléments du gabarit détachés : modifiables sur cette page. ¦ Şablon öğeleri ayrıldı: bu sayfada düzenlenebilir.
+Il faut au moins un calque. ¦ En az bir katman gerekli.
+Calque « {name} » supprimé ¦ “{name}” katmanı silindi
+Choisis un objet pour intervertir son fond et son contour. ¦ Dolgusuyla kenarını değiştirmek için bir nesne seç.
+Nouveau style ¦ Yeni stil
+Nouveau style de caractère ¦ Yeni karakter stili
+STYLE DE CARACTÈRE ¦ KARAKTER STİLİ
+Enregistrer le style ¦ Stili kaydet
+Justifié (tout) ¦ İki yana yaslı (tümü)
+Lettrine (lignes, 0 = aucune) ¦ Büyük ilk harf (satır, 0 = yok)
+Tous les paragraphes (mots) qui ont ce style changent dans tout le livre. ¦ Bu stile sahip tüm paragraflar (sözcükler) tüm kitapta değişir.
+Tous les paragraphes qui ont ce style changent dans tout le livre. ¦ Bu stile sahip tüm paragraflar tüm kitapta değişir.
+La fenêtre des images n’est pas encore prête. Réessaie dans un instant. ¦ Görsel penceresi henüz hazır değil. Birazdan yeniden dene.
+PLACER UNE IMAGE ¦ GÖRSEL YERLEŞTİR
+Placer cette image ¦ Bu görseli yerleştir
+Elle reste liée (objet dynamique) : retouchée dans l’app, elle se met à jour ici. ¦ Bağlantılı kalır (dinamik nesne): uygulamada rötuşlanırsa burada da güncellenir.
+Naissance et décès (dates et lieux) ¦ Doğum ve ölüm (tarihler ve yerler)
+acceptée ¦ kabul edildi
+refusée ¦ reddedildi
+✎ Remplacer « {a} » par « {b} » ¦ ✎ “{a}” yerine “{b}”
+(page {w} × {h} + fond perdu {b} mm et traits de coupe) ¦ (sayfa {w} × {h} + taşma payı {b} mm ve kesim işaretleri)
+🖨 Imprimer / enregistrer en PDF ¦ 🖨 Yazdır / PDF olarak kaydet
+Fichier trop gros pour un réglage. ¦ Dosya bir ayar için çok büyük.
+Ce réglage vient d’un autre outil (« {tool} ») : il ne va pas dans {label}. ¦ Bu ayar başka bir araçtan geliyor (“{tool}”): şuraya gitmez: {label}.
+Tu as déjà un réglage « {name} ». Nom pour celui-ci : ¦ Zaten bir “{name}” ayarın var. Bunun için ad:
+{name} (importé) ¦ {name} (içe aktarılan)
+Réglages par défaut des nouveaux documents ¦ Yeni belgelerin varsayılan ayarları
+Petit fond / intérieur ¦ İç kenar boşluğu
+Grand fond / extérieur ¦ Dış kenar boşluğu
+Police des titres ¦ Başlıkların yazı tipi
+Police du texte ¦ Metnin yazı tipi
+Corps du texte ¦ Metin punto boyutu
+Numéro de la 1re page ¦ 1. sayfanın numarası
+Folio et titre courant sur le gabarit ¦ Şablonda folyo ve sayfa başlığı
+Réglages par défaut des livres ¦ Kitapların varsayılan ayarları
+Un atelier façon InDesign : pages, gabarits, calques, textes, formes, images, nuancier… Pars d’une page blanche, des données de la famille ou d’un design. ¦ InDesign tarzı bir atölye: sayfalar, şablonlar, katmanlar, metinler, şekiller, görseller, renk paleti… Boş bir sayfadan, ailenin verilerinden ya da bir tasarımdan başla.
+＋ Nouveau livre d’après la famille ¦ ＋ Aileye göre yeni kitap
+📚 Livre prêt à l’emploi ¦ 📚 Kullanıma hazır kitap
+＋ Nouveau depuis un design ¦ ＋ Bir tasarımdan yeni
+⚙️ Réglages par défaut ¦ ⚙️ Varsayılan ayarlar
+📚 Livres de famille prêts à l’emploi ¦ 📚 Kullanıma hazır aile kitapları
+Aucun livre pour l’instant ¦ Şimdilik kitap yok
+Commence par un livre fait d’après la famille : il se remplit avec les fiches. ¦ Aileye göre yapılmış bir kitapla başla: kartlarla dolar.
+Un design est un modèle : ouvre un livre, puis Fichier → « Enregistrer comme design ». Les designs de l’app (ci-dessous) peuvent aussi être modifiés et enregistrés à ton nom. ¦ Tasarım bir şablondur: bir kitap aç, sonra Dosya → “Tasarım olarak kaydet”. Uygulamanın tasarımları (aşağıda) da düzenlenip senin adına kaydedilebilir.
+✨ Designs de l’app ¦ ✨ Uygulamanın tasarımları
+Modifier (à mon nom) ¦ Düzenle (benim adıma)
+Exporte-le d’abord si tu veux le garder. ¦ Saklamak istiyorsan önce dışa aktar.
+Supprimer ce document ? ¦ Bu belge silinsin mi?
+Supprimer le document ¦ Belgeyi sil
+Document supprimé. ¦ Belge silindi.
+Ce fichier n’est pas un document de mise en page LCNDA. ¦ Bu dosya bir LCNDA sayfa düzeni belgesi değil.
+Livre à relire importé (de {name}) : ouvre-le, commente (menu Relecture), puis « 📨 Envoyer à un cousin » pour renvoyer tes commentaires. ¦ Gözden geçirilecek kitap içe aktarıldı (gönderen: {name}): aç, yorum yap (Gözden geçirme menüsü), sonra yorumlarını geri göndermek için “📨 Bir kuzene gönder”.
+Livre à relire importé : ouvre-le, commente (menu Relecture), puis « 📨 Envoyer à un cousin » pour renvoyer tes commentaires. ¦ Gözden geçirilecek kitap içe aktarıldı: aç, yorum yap (Gözden geçirme menüsü), sonra yorumlarını geri göndermek için “📨 Bir kuzene gönder”.
+C’est un fichier de réglage : il s’importe dans le document ouvert, Fichier → « Mes styles » → « Importer un réglage ». ¦ Bu bir ayar dosyası: açık belgeye aktarılır, Dosya → “Stillerim” → “Bir ayarı içe aktar”.
+Document importé. ¦ Belge içe aktarıldı.
+La famille en chiffres ¦ Rakamlarla aile
+Une page par personne ¦ Kişi başına bir sayfa
+Les lieux ¦ Yerler
+Mot de la fin ¦ Son söz
+👪 Un livre d’après la famille ¦ 👪 Aileye göre bir kitap
+🎨 Depuis un design ¦ 🎨 Bir tasarımdan
+Créer le document ¦ Belgeyi oluştur
+Pages, marges et colonnes ¦ Sayfalar, kenar boşlukları ve sütunlar
+Marges en millimètres. Le fond perdu (trait rouge) dépasse de la page pour les images à bord perdu ; la ligne-bloc (trait bleu) garde la place des notes pour l’imprimeur. Les deux s’impriment avec « PDF avec fond perdu et traits de coupe ». ¦ Kenar boşlukları milimetre cinsinden. Taşma payı (kırmızı çizgi), kenara taşan görseller için sayfanın dışına uzanır; not alanı (mavi çizgi) matbaaya notlar için yer ayırır. İkisi de “Taşma paylı ve kesim işaretli PDF” ile yazdırılır.
+Ordre des fiches ¦ Kartların sırası
+celui de l’arbre ¦ ağacınki
+Photos par personne ¦ Kişi başına fotoğraf
+Le design est copié : couverture, pages d’exemple, gabarits, styles et couleurs — tout se modifie. ¦ Tasarım kopyalandı: kapak, örnek sayfalar, şablonlar, stiller ve renkler — hepsi düzenlenebilir.
+Le livre est fait page par page (les textes trop longs continuent sur la page suivante) ; tout se modifie ensuite. Les personnes cachées à l’export restent cachées. ¦ Kitap sayfa sayfa yapılır (çok uzun metinler sonraki sayfada devam eder); sonra her şey düzenlenebilir. Dışa aktarmada gizlenen kişiler gizli kalır.
+Choisis la personne de départ. ¦ Başlangıç kişisini seç.
+Les livres faits dans l’atelier de mise en page (façon InDesign) et tes designs : ouvre-les, crée-en un, règle les réglages par défaut. ¦ Sayfa düzeni atölyesinde (InDesign tarzı) yapılan kitaplar ve tasarımların: aç, yenisini oluştur, varsayılan ayarları düzenle.
+↗ Ouvrir l’atelier ¦ ↗ Atölyeyi aç
+Aucun livre pour « {q} ». ¦ “{q}” için kitap yok.
+Aucun livre pour l’instant : « ＋ Nouveau livre d’après la famille ». ¦ Şimdilik kitap yok: “＋ Aileye göre yeni kitap”.
+Aucun design pour « {q} ». ¦ “{q}” için tasarım yok.
+Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « ↗ Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ». ¦ Sana ait tasarım yok: bir kitapta Dosya → “Tasarım olarak kaydet” ya da “↗ Atölyeyi aç” → Uygulamanın tasarımları → “Düzenle (benim adıma)”.
+Chercher un livre ou un design… (nom) ¦ Bir kitap ya da tasarım ara… (ad)
+↻ Objets dynamiques : {a}, {b}. ¦ ↻ Dinamik nesneler: {a}, {b}.
+↻ Objets dynamiques : {a}. ¦ ↻ Dinamik nesneler: {a}.
+Page {n} (celle-ci) ¦ Sayfa {n} (bu sayfa)
+La page modèle contient des champs entre accolades, remplacés pour chaque personne : {list}. Un cadre d’image nommé <code>{portrait}</code> (onglet Objet → Nom) reçoit son portrait. ¦ Şablon sayfa, her kişi için değiştirilen süslü parantez içinde alanlar içerir: {list}. <code>{portrait}</code> adlı bir görsel çerçevesi (Nesne sekmesi → Ad) onun portresini alır.
+· cadre {portrait} ¦ · çerçeve {portrait}
+→ {what}. ¦ → {what}.
+Publipostage : {what} ¦ Toplu belge: {what}
+📊 Diagramme <b>lié</b>{state} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »). ¦ 📊 <b>Bağlantılı</b> diyagram{state}: Grafikler → Diyagramlarım içinde düzenlenirse burada yeniden çizilir (“Güncelle”).
+Image <b>liée</b> à une photo de l’app{state} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici. ¦ Uygulamadaki bir fotoğrafa <b>bağlantılı</b> görsel{state}: tam kalitede kalır (hiçbir şey küçültülmez) ve uygulamada yapılan her rötuş buraya gelir.
+Historique ({what}) ¦ Geçmiş ({what})
+📖 Livres ({n}) ¦ 📖 Kitaplar ({n})
+🎨 Mes designs ({n}) ¦ 🎨 Tasarımlarım ({n})
+{y} n’est pas une année bissextile (février n’a que 28 jours) ¦ {y} artık yıl değil (şubat yalnızca 28 gün)
+il n’y a pas de jour 0 ¦ 0. gün diye bir gün yok
+{month} n’a que {n} jours ¦ {month} yalnızca {n} gün çeker
+il n’y a que 12 mois ¦ yalnızca 12 ay var
+{month} {y} n’a que {n} jours ¦ {month} {y} yalnızca {n} gün çeker
+📅 Date impossible : « {said} » — {why}. ¦ 📅 İmkânsız tarih: “{said}” — {why}.
+✍️ « {said} » : aucune fiche à ce nom. Tu voulais écrire « {fix} » ? ¦ ✍️ “{said}”: bu adda kart yok. Şunu mu yazmak istedin: “{fix}”?
+🎂 Âge impossible : « {said} » (personne n’a vécu plus de 122 ans). ¦ 🎂 İmkânsız yaş: “{said}” (kimse 122 yıldan fazla yaşamadı).
+🎂 Âge impossible pour un mariage : « {said} ». ¦ 🎂 Bir evlilik için imkânsız yaş: “{said}”.
+{a} ou {b} ans ¦ {a} ya da {b} yaş
+🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) elle avait {age}{multi}. ¦ 🎂 {name}: metinde “{said}” yazıyor; karta göre (° {b}, {ev} {e}) yaşı {age}{multi}.
+🎂 {name} : le texte dit « {said} », d’après la fiche (° {b}, {ev} {e}) il avait {age}{multi}. ¦ 🎂 {name}: metinde “{said}” yazıyor; karta göre (° {b}, {ev} {e}) yaşı {age}{multi}.
+({n} fiches portent ce nom) ¦ ({n} kart bu adı taşıyor)
+🔎 {name} : le texte place {event} à « {place} », la fiche dit {fiche}{multi}. ¦ 🔎 {name}: metne göre {event} yeri “{place}”, karta göre {fiche}{multi}.
+🔎 {name} : le texte dit « {said} », la fiche dit {what} {fiche}{multi}. ¦ 🔎 {name}: metinde “{said}” yazıyor, kartta {what} {fiche}{multi}.
+🔎 {name} : le texte parle d’{event} (« {said} ») que la fiche n’a pas encore{multi} — à ajouter ? ¦ 🔎 {name}: metin şundan söz ediyor: {event} (“{said}”); kartta henüz yok{multi} — eklensin mi?
+📍 « {place} » n’est pas un lieu de ta base : tu voulais dire « {near} » ? ¦ 📍 “{place}” veritabanındaki bir yer değil: “{near}” mı demek istedin?
+📍 « {place} » n’est pas encore dans les lieux de ta base. ¦ 📍 “{place}” henüz veritabanındaki yerler arasında değil.
+🔢 {name} : le texte dit « {said} », la fiche a le Sosa {nums}{who}{multi}. ¦ 🔢 {name}: metinde “{said}” yazıyor, kartın Sosa numarası {nums}{who}{multi}.
+(ancêtres de {name}) ¦ ({name} adlı kişinin ataları)
+🔢 {name} : le texte dit « {said} », mais la fiche n’a pas de numéro Sosa{who}{multi}. ¦ 🔢 {name}: metinde “{said}” yazıyor ama kartın Sosa numarası yok{who}{multi}.
+(ce n’est pas un ancêtre direct de {name}) ¦ ({name} adlı kişinin doğrudan atası değil)
+Pages remises dans l’ordre du pliage ¦ Sayfalar katlama sırasına göre dizildi
+L’imprimante retourne la feuille ¦ Yazıcı kâğıdı çeviriyor
+Retourner sur le côté ¦ Yandan çevir
+(petit côté, le plus courant) ¦ (kısa kenar, en yaygını)
+Retourner par le haut ¦ Üstten çevir
+{n} feuilles pliées ({p} pages) : imprime en recto verso, puis plie et agrafe au milieu. ¦ {n} katlanmış yaprak ({p} sayfa): çift taraflı yazdır, sonra katla ve ortadan zımbala.
+{n} feuille pliée ({p} pages) : imprime en recto verso, puis plie et agrafe au milieu. ¦ {n} katlanmış yaprak ({p} sayfa): çift taraflı yazdır, sonra katla ve ortadan zımbala.
+{name} — livret ¦ {name} — kitapçık
+la mise en page n’est pas chargée ¦ sayfa düzeni yüklenmedi
+la page {n} n’a pas pu être dessinée ¦ sayfa {n} çizilemedi
+=objet copié ¦ nesne kopyalandı|nesne kopyalandı
+=page ajoutée ¦ sayfa eklendi|sayfa eklendi
+=objet ¦ nesne|nesne
+=introuvable ¦ bulunamadı|bulunamadı
+=commentaire de relecture ¦ gözden geçirme yorumu|gözden geçirme yorumu
+=avertissement ¦ uyarı|uyarı
+=remarque ¦ not|not
+=police ¦ yazı tipi|yazı tipi
+ly|Relecture ¦ Gözden geçirme
+ly|Objet ¦ Nesne
+ly|Calques ¦ Katmanlar
+ly|Texte ¦ Metin
+ly|Liens ¦ Bağlantılar
+ly|Historique ¦ Geçmiş
+ly|Affichage ¦ Görünüm
+ly|Édition ¦ Düzen
+Menu {name} ¦ Menü: {name}
+Plume : clic = point, double-clic ou Entrée = fini ¦ Kalem: tıkla = nokta, çift tıkla ya da Enter = bitti
+Zoom — Alt pour reculer ¦ Yakınlaştır — uzaklaştırmak için Alt
+Rectangle ¦ Dikdörtgen
+Ellipse ¦ Elips
+Polygone ¦ Çokgen
+Main ¦ El
+bloc de texte ¦ metin bloğu
+rectangle ¦ dikdörtgen
+ellipse ¦ elips
+polygone ¦ çokgen
+mois|janvier ¦ ocak
+mois|février ¦ şubat
+mois|mars ¦ mart
+mois|avril ¦ nisan
+mois|mai ¦ mayıs
+mois|juin ¦ haziran
+mois|juillet ¦ temmuz
+mois|août ¦ ağustos
+mois|septembre ¦ eylül
+mois|octobre ¦ ekim
+mois|novembre ¦ kasım
+mois|décembre ¦ aralık
+la naissance ¦ doğum
+le baptême ¦ vaftiz
+le décès ¦ ölüm
+la inhumation ¦ defin
+le mariage ¦ evlilik
+une naissance ¦ bir doğum
+un baptême ¦ bir vaftiz
+un décès ¦ bir ölüm
+une inhumation ¦ bir defin
+un mariage ¦ bir evlilik
+Produit ¦ Çarp
+Incrustation ¦ Bindirme
+Obscurcir ¦ Koyulaştır
+Exclusion ¦ Dışlama
+Teinte ¦ Renk tonu
+Saturation ¦ Doygunluk
+Plein ¦ Düz
+Tirets ¦ Kesik çizgi
+Tiret-point ¦ Çizgi-nokta
+Tirets longs ¦ Uzun kesik çizgi
+Sobre (simple trait) ¦ Sade (tek çizgi)
+Cartouche (double filet) ¦ Kartuş (çift çizgi)
+Calques ¦ Katmanlar
+Objet ¦ Nesne
+Liens ¦ Bağlantılar
+Historique ¦ Geçmiş
+Premier plan ¦ En öne
+Avancer ¦ Öne al
+Reculer ¦ Geri al
+🙈 Masquer ¦ 🙈 Gizle
+Masquer ¦ Gizle
+Outils (colonne de gauche) ¦ Araçlar (sol sütun)
+Messages ¦ Mesajlar
+＋ Pied de page ¦ ＋ Altbilgi
+Pied de page ¦ Altbilgi
+Faire tourner ¦ Döndür
+Rotation ¦ Döndürme
+PAGES ¦ SAYFALAR
+DOCUMENT ¦ BELGE
+GABARITS ¦ ŞABLONLAR
+OBJET DYNAMIQUE ¦ DİNAMİK NESNE
+QR CODE ¦ QR KOD
+PUBLIPOSTAGE ¦ TOPLU BELGE
+STYLE DE PARAGRAPHE ¦ PARAGRAF STİLİ
+LIVRE DE FAMILLE ¦ AİLE KİTABI
+Format de page ¦ Sayfa biçimi
+Marges ¦ Kenar boşlukları
+Fond perdu ¦ Taşma payı
+Maintenant ¦ Şimdi
+Gabarit de plusieurs pages ¦ Birkaç sayfanın şablonu
+📄 Gabarit de plusieurs pages… ¦ 📄 Birkaç sayfanın şablonu…
+Appliquer ¦ Uygula
+Chapitre courant ¦ Geçerli bölüm
+Diagrammes indisponibles. ¦ Diyagramlar kullanılamıyor.
+Diagramme ¦ Diyagram
+📊 Diagramme ¦ 📊 Diyagram
+Marge (modules) ¦ Kenar boşluğu (modül)
+QR code ¦ QR kod
+▦ QR code ¦ ▦ QR kod
+Ordre ¦ Sıra
+Valider ¦ Onayla
+Forme ¦ Şekil
+💬 Commentaire ¦ 💬 Yorum
+✕ Refuser ¦ ✕ Reddet
+Ouverts ¦ Açık olanlar
+Page vide. ¦ Boş sayfa.
+Bloc de texte vide. ¦ Boş metin bloğu.
+Pages simples ¦ Tek sayfalar
+Traits de coupe ¦ Kesim işaretleri
+Gabarits ¦ Şablonlar
+Page sans gabarit ¦ Şablonsuz sayfa
+↑ Avancer ¦ ↑ Öne al
+↓ Reculer ¦ ↓ Geri al
+Cacher ¦ Gizle
+Montrer ¦ Göster
+Angle ¦ Açı
+⇋ Miroir H ¦ ⇋ Yatay ayna
+⇵ Miroir V ¦ ⇵ Dikey ayna
+Bouts ¦ Uçlar
+Droits ¦ Düz
+Arrondis ¦ Yuvarlak
+Angles ¦ Köşeler
+Pointus ¦ Sivri
+Angles arrondis ¦ Yuvarlak köşeler
+Effets ¦ Efektler
+Fusion ¦ Karışım
+Flou ¦ Bulanıklık
+Creux ¦ Çukur
+Courbe douce ¦ Yumuşak eğri
+Distance ¦ Mesafe
+🌳 Arbre (objet dynamique) ¦ 🌳 Ağaç (dinamik nesne)
+🔗 Objet dynamique ¦ 🔗 Dinamik nesne
+Vider ¦ Boşalt
+Ajustement ¦ Sığdırma
+Bloc de texte ¦ Metin bloğu
+Vertical ¦ Dikey
+Pathfinder ¦ Pathfinder
+⊖ Soustraire ¦ ⊖ Çıkar
+⊗ Intersection ¦ ⊗ Kesişim
+⊘ Exclure ¦ ⊘ Dışla
+Disposition ¦ Düzen
+Graisse ¦ Kalınlık
+Romain ¦ Düz (roman)
+Corps ¦ Punto
+Interlignage ¦ Satır aralığı
+Approche ¦ Harf aralığı
+Ligne de base ¦ Taban çizgisi
+Capitales ¦ Büyük harfler
+Normales ¦ Normal
+Couleur libre ¦ Serbest renk
+Retrait droit ¦ Sağ girinti
+Nuancier ¦ Renk paleti
+Cadre vide ¦ Boş çerçeve
+Petit fond ¦ İç kenar
+Grand fond ¦ Dış kenar
+Ligne-bloc ¦ Not alanı
+Notes de bas de page ¦ Dipnotlar
+Commentaire rouvert ¦ Yorum yeniden açıldı
+Ascendance ¦ Atalar
+Descendance ¦ Torunlar
+Copie faite. ¦ Kopya yapıldı.
+Marge gauche ¦ Sol kenar boşluğu
+Marge droite ¦ Sağ kenar boşluğu
+📐 Livres de famille ¦ 📐 Aile kitapları
+📖 Livres ¦ 📖 Kitaplar
+🎨 Designs ¦ 🎨 Tasarımlar
+Traits de pli ¦ Katlama çizgileri
+Album photo ¦ Fotoğraf albümü
+Sobre ¦ Sade
+🖼️ Galerie de photos ¦ 🖼️ Fotoğraf galerisi
+📗 Livret de famille / chronique ¦ 📗 Aile cüzdanı / kronik
+🎉 Carnet de cousinade ¦ 🎉 Aile buluşması defteri
+Gabarit : {name} ¦ Şablon: {name}
+Publipostage : {what}. ¦ Toplu belge: {what}.
+Note : {x} ¦ Not: {x}
+Page {n} : ¦ Sayfa {n}:
+Pages ({n}) ¦ Sayfalar ({n})
+Arbres ({n}) ¦ Ağaçlar ({n})
+📚 Mes livres ({n}) ¦ 📚 Kitaplarım ({n})
+💬 Commentaires de relecture ({n}) ¦ 💬 Gözden geçirme yorumları ({n})
+(Le sommaire se remplit avec les paragraphes en style « Chapitre », ou ceux choisis dans Objet.) ¦ (İçindekiler “Bölüm” stilindeki ya da Nesne menüsünde seçilen paragraflarla dolar.)
+(Les notes sont en bas de chaque bloc de texte. Pour les avoir ici, en fin de chapitre : Document → Notes de bas de page.) ¦ (Notlar her metin bloğunun altında. Onları burada, bölüm sonunda görmek için: Belge → Dipnotlar.)
+(Aucune note dans ce chapitre : elles se rangent ici toutes seules.) ¦ (Bu bölümde not yok: notlar buraya kendiliğinden toplanır.)
+(La bibliographie se remplit avec les sources citées en note : Texte → « 📚 Citer une source ».) ¦ (Kaynakça notta gösterilen kaynaklarla dolar: Metin → “📚 Kaynak göster”.)
+(L’index se remplit avec les noms marqués en style de caractère « Nom à indexer », et les personnes de la généalogie trouvées dans le texte.) ¦ (Dizin, “Dizine alınacak ad” karakter stiliyle işaretlenmiş adlarla ve metinde bulunan soy ağacındaki kişilerle dolar.)
+(L’index des lieux se remplit avec les mots marqués « Lieu à indexer », et les lieux de ta base trouvés dans le texte.) ¦ (Yer dizini, “Dizine alınacak yer” olarak işaretlenmiş sözcüklerle ve metinde bulunan veritabanındaki yerlerle dolar.)
+(L’index des métiers se remplit avec les mots marqués « Métier à indexer », et les métiers de ta base trouvés dans le texte.) ¦ (Meslek dizini, “Dizine alınacak meslek” olarak işaretlenmiş sözcüklerle ve metinde bulunan veritabanındaki mesleklerle dolar.)
+Historique ({n} étapes) ¦ Geçmiş ({n} adım)
+Historique ({n} étape) ¦ Geçmiş ({n} adım)
+Clic : le contrôle détaillé. ¦ Tıkla: ayrıntılı kontrol.
+https://… (cliquable dans le PDF et le HTML) ¦ https://… (PDF’te ve HTML’de tıklanabilir)
+Garder les styles de ce document sous un nom ¦ Bu belgenin stillerini bir adla sakla
+tout de suite ¦ hemen
+Largeur et hauteur ¦ Genişlik ve yükseklik
+mariage, Brive, 1925 (séparés par des virgules) ¦ evlilik, Brive, 1925 (virgülle ayrılmış)
+La marge claire autour du code : 4 modules d’après la norme, pour que les téléphones le lisent bien. ¦ Kodun çevresindeki açık renkli boşluk: telefonların iyi okuması için standarda göre 4 modül.
+Le numéro de la feuille (f° 12, f° 12 v° pour le verso), de la page ou de la vue en ligne. ¦ Yaprağın numarası (f° 12, arka yüz için f° 12 v°), sayfanın ya da çevrimiçi görüntünün numarası.
+Combien de rangées : 2 = la personne et ses parents (ou ses enfants), 4 = jusqu’aux arrière-grands-parents. Au-delà de 6, les cases deviennent petites. ¦ Kaç sıra: 2 = kişi ve ebeveynleri (ya da çocukları), 4 = büyük büyükanne ve büyükbabalara kadar. 6’dan sonra kutular küçülür.
+La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord. ¦ Matbaanın keseceği 3–5 mm’lik pay, görseller kenara kadar uzansın diye.
+1re page n° ¦ 1. sayfa no.
+paysage ¦ yatay
+portrait ¦ dikey
+Papier ¦ Kâğıt
+Marge haut ¦ Üst kenar boşluğu
+Marge bas ¦ Alt kenar boşluğu
+fond transparent ¦ saydam arka plan
+📨 Fichier de relecture… ¦ 📨 Gözden geçirme dosyası…
+Plusieurs pages… ¦ Birkaç sayfa…
+Points de conduite (……… 12) ¦ Yol gösteren noktalar (……… 12)
+¹ Note ¦ ¹ Not
+Approche (‰) ¦ Harf aralığı (‰)
+Retrait 1re ligne ¦ İlk satır girintisi
+💿 Discographie ¦ 💿 Diskografi
+Livre de famille ¦ Aile kitabı
+Aide : La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord. ¦ Yardım: Matbaanın keseceği 3–5 mm’lik pay, görseller kenara kadar uzansın diye.

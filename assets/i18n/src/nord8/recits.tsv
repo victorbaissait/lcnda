@@ -1,0 +1,1543 @@
+fr ¦ tr
+son {x} (lien) ¦ onun {x}
+sa {x} (lien) ¦ onun {x}
+père ¦ baba
+mère ¦ anne
+grand-père ¦ büyükbaba
+grand-mère ¦ büyükanne
+arrière-grand-père ¦ büyük büyükbaba
+arrière-grand-mère ¦ büyük büyükanne
+arrière-arrière-grand-père ¦ büyük büyük büyükbaba
+arrière-arrière-grand-mère ¦ büyük büyük büyükanne
+arrière-arrière-arrière-grand-père ¦ büyük büyük büyük büyükbaba
+arrière-arrière-arrière-grand-mère ¦ büyük büyük büyük büyükanne
+ancêtre à la {n}e génération ¦ {n}. kuşaktan ata
+{kin} de {name} ¦ {kin} (kişi: {name})
+Il est né {when}{where}. ¦ Doğdu: {when}{where}.
+Elle est née {when}{where}. ¦ Doğdu: {when}{where}.
+Il était {occ}. ¦ Mesleği: {occ}.
+Elle était {occ}. ¦ Mesleği: {occ}.
+Il a épousé {name}{when}{where}. ¦ Evlendiği kişi: {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ Evlendiği kişi: {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ Bir çocuğu oldu: {list}.
+Elle a eu un enfant : {list}. ¦ Bir çocuğu oldu: {list}.
+Il a eu {n} enfants : {list}. ¦ {n} çocuğu oldu: {list}.
+Elle a eu {n} enfants : {list}. ¦ {n} çocuğu oldu: {list}.
+Il est mort {when}{age}{where}. ¦ Öldü: {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ Öldü: {when}{age}{where}.
+, à {n} ans ¦ , {n} yaşında
+, à {n} an ¦ , {n} yaşında
+avec {name} ¦ birlikte: {name}
+se mariait{with}{where}{date} ¦ evleniyordu{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ resmî nikâhla evleniyordu{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ dinî nikâhla evleniyordu{with}{where}{date}
+mourait{with}{where}{date} ¦ ölüyordu{with}{where}{date}
+était inhumé{with}{where}{date} ¦ toprağa veriliyordu{with}{where}{date}
+était inhumée{with}{where}{date} ¦ toprağa veriliyordu{with}{where}{date}
+habitait{with}{where}{date} ¦ yaşıyordu{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ çalışıyordu{what}{with}{where}{date}
+partait{with}{where}{date} ¦ yola çıkıyordu{with}{where}{date}
+arrivait{with}{where}{date} ¦ geliyordu{with}{where}{date}
+était recensé{with}{where}{date} ¦ nüfus sayımına kaydediliyordu{with}{where}{date}
+était recensée{with}{where}{date} ¦ nüfus sayımına kaydediliyordu{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ askerdeydi{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ diploma alıyordu{with}{where}{date}
+devenait français{with}{where}{date} ¦ Fransız vatandaşı oluyordu{with}{where}{date}
+devenait française{with}{where}{date} ¦ Fransız vatandaşı oluyordu{with}{where}{date}
+était baptisé{with}{where}{date} ¦ vaftiz ediliyordu{with}{where}{date}
+était baptisée{with}{where}{date} ¦ vaftiz ediliyordu{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ konfirmasyonunu yapıyordu{with}{where}{date}
+était à l’école{with}{where}{date} ¦ okuldaydı{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ bir olay yaşıyordu ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ baba oluyordu (çocuk: {name}){where}{date}
+devenait mère de {name}{where}{date} ¦ anne oluyordu (çocuk: {name}){where}{date}
+n’était plus là : il était mort à {n} ans ¦ artık hayatta değildi: {n} yaşında ölmüştü
+n’était plus là : elle était morte à {n} ans ¦ artık hayatta değildi: {n} yaşında ölmüştü
+vivait sans doute du côté de {place} en {y}{occ} ¦ büyük olasılıkla şu yerin yakınında yaşıyordu: {place} ({y} yılında){occ}
+vivait sa vie en {y}{occ} ¦ hayatını sürdürüyordu ({y} yılında){occ}
+À {n} ans… ¦ {n} yaşında…
+À {n} ans, il {facts}. ¦ {n} yaşında: {facts}.
+À {n} ans, elle {facts}. ¦ {n} yaşında: {facts}.
+{who} de {name} dont on connaît la naissance. ¦ {who} (kişi: {name}), doğumu bilinen.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} (kişi: {name}), doğumu bilinen (doğum tarihi olmayan {k} kişi sayılmadı).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, tıpkı şu kişi gibi: {kin} {from}{fy}
+C’est un homme. ¦ Bu bir erkek.
+C’est une femme. ¦ Bu bir kadın.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Bu bir erkek, 18. yüzyılda ya da daha önce doğmuş.
+C’est un homme, né au XIXe siècle. ¦ Bu bir erkek, 19. yüzyılda doğmuş.
+C’est un homme, né au XXe siècle. ¦ Bu bir erkek, 20. yüzyılda doğmuş.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Bu bir kadın, 18. yüzyılda ya da daha önce doğmuş.
+C’est une femme, née au XIXe siècle. ¦ Bu bir kadın, 19. yüzyılda doğmuş.
+C’est une femme, née au XXe siècle. ¦ Bu bir kadın, 20. yüzyılda doğmuş.
+Il est né à {place}. ¦ Doğum yeri: {place}.
+Elle est née à {place}. ¦ Doğum yeri: {place}.
+Son métier : {occ}. ¦ Mesleği: {occ}.
+Il a vécu {n} ans. ¦ {n} yıl yaşadı.
+Elle a vécu {n} ans. ¦ {n} yıl yaşadı.
+Il a eu {n} enfant. ¦ {n} çocuğu oldu.
+Elle a eu {n} enfant. ¦ {n} çocuğu oldu.
+Il a eu {n} enfants. ¦ {n} çocuğu oldu.
+Elle a eu {n} enfants. ¦ {n} çocuğu oldu.
+On ne lui connaît pas d’enfant. ¦ Bilinen bir çocuğu yok.
+Né dans les années {y}. ¦ Doğum: {y}’li yıllar.
+Née dans les années {y}. ¦ Doğum: {y}’li yıllar.
+Sa femme s’appelait {name}. ¦ Karısının adı: {name}.
+Son mari s’appelait {name}. ¦ Kocasının adı: {name}.
+Un de ses enfants s’appelait {name}. ¦ Çocuklarından birinin adı: {name}.
+Son nom commence par {l}… et compte {n} lettres. ¦ Soyadı {l}… ile başlıyor ve {n} harften oluşuyor.
+Ta naissance ¦ Doğumun
+Tu es {name}. ¦ Sen şu kişisin: {name}.
+Tu nais {when}{where}{parents}. ¦ Doğuyorsun: {when}{where}{parents}.
+fils de {names} ¦ oğlu (anne ve baba: {names})
+fille de {names} ¦ kızı (anne ve baba: {names})
+{a} et de {b} ¦ {a} ve {b}
+Ton père est {occ}. ¦ Babanın mesleği: {occ}.
+Le métier ¦ Meslek
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ On beş yaşındasın, yıl {y}. Hayatını kazanman gerek. Ne yapacaksın?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ On beş yaşındasın. Hayatını kazanman gerek. Ne yapacaksın?
+Devenir {occ} ¦ Bu mesleği seç: {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ Gerçek hayatta {name} şu mesleği edindi: {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ Gerçek hayatta {name} şu mesleği edindi: {occ}.
+L’amour ¦ Aşk
+Tu as {n} ans. ¦ {n} yaşındasın.
+À {place}, deux personnes ont attiré ton regard… ¦ {place}: iki kişi dikkatini çekti…
+deux personnes ont attiré ton regard… ¦ iki kişi dikkatini çekti…
+Épouser {name} ¦ Evlen: {name}
+Rester libre encore un peu ¦ Biraz daha bekâr kal
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ Gerçek hayatta {first} şu kişiyle evlendi: {name}{when}{where}.
+Partir ? ¦ Gitmek mi?
+La vie est dure{where}. On parle de partir… ¦ Hayat zor{where}. Gitmekten söz ediliyor…
+Partir pour {place} ¦ Şuraya git: {place}
+Rester au pays ¦ Memlekette kal
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ Gerçek hayatta {name} yolunu şurada bitirdi: {place}.
+On parle de partir pour la ville… ¦ Şehre gitmekten söz ediliyor…
+Partir ¦ Git
+Rester à {place} ¦ Burada kal: {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ Gerçek hayatta {name} şurada kaldı: {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ Gerçek hayatta {name} şurada kaldı: {place}.
+Les enfants ¦ Çocuklar
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Bir çocuk dünyaya geliyor: {list}. Onların büyümesini izliyorsun.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ {n} çocuk dünyaya geliyor: {list}. Onların büyümesini izliyorsun.
+La fin du voyage ¦ Yolculuğun sonu
+Tu t’éteins {when}{where}{age}. ¦ Hayata gözlerini yumuyorsun: {when}{where}{age}.
+Ton histoire continue… ¦ Hikâyen sürüyor…
+{n} personnes nées un {date} : {list}. ¦ Aynı günde ({date}) doğan {n} kişi: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} doğum gününde, {n} yaşında öldü ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} doğum gününde, {n} yaşında öldü ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} bir {date} günü doğdu; bu gün şu kişinin ölüm yıldönümü: {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} bir {date} günü doğdu; bu gün şu kişinin ölüm yıldönümü: {kin} {who} ({y}).
+son ancêtre ¦ atası
+{n} mariages le même jour de l’année : {list}. ¦ Yılın aynı gününde {n} evlilik: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} ve {b} tam {n} yıl arayla, gün gününe doğdu ({y1} ve {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} Noel günü doğdu ({y}).
+{name} est née le jour de Noël {y}. ¦ {name} Noel günü doğdu ({y}).
+{name} est né le jour de l’An {y}. ¦ {name} yılbaşı günü doğdu ({y}).
+{name} est née le jour de l’An {y}. ¦ {name} yılbaşı günü doğdu ({y}).
+{name} est né un vendredi 13 ({date}). ¦ {name} 13’üne denk gelen bir cuma günü doğdu ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} 13’üne denk gelen bir cuma günü doğdu ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} {n} yaşında evlendi; babası {father} ile aynı yaşta.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} {n} yaşında evlendi; babası {father} ile aynı yaşta.
+En quelle année est né {name} ? ¦ {name} hangi yıl doğdu?
+En quelle année est née {name} ? ¦ {name} hangi yıl doğdu?
+Où est né {name} ? ¦ {name} nerede doğdu?
+Où est née {name} ? ¦ {name} nerede doğdu?
+Quel était le métier de {name} ? ¦ Meslek neydi? Kişi: {name}
+{name} était {occ}. ¦ {name}: {occ}.
+Qui a épousé {name} ? ¦ Kiminle evlendi? Kişi: {name}
+{a} et {b} se sont mariés{when}{where}. ¦ {a} ve {b} evlendi{when}{where}.
+Qui est le père de {name} ? ¦ Babası kim? Kişi: {name}
+Qui est la mère de {name} ? ¦ Annesi kim? Kişi: {name}
+{name} est le fils de {parent}. ¦ {name}, {parent} adlı kişinin oğlu.
+{name} est la fille de {parent}. ¦ {name}, {parent} adlı kişinin kızı.
+Combien d’enfants a eus {name} ? ¦ Kaç çocuğu oldu? Kişi: {name}
+À quel âge est mort {name} ? ¦ Kaç yaşında öldü? Kişi: {name}
+À quel âge est morte {name} ? ¦ Kaç yaşında öldü? Kişi: {name}
+Qui est né le premier ? ¦ İlk kim doğdu?
+Ici est né {name}, {when}. ¦ {name} burada doğdu, {when}.
+Ici est née {name}, {when}. ¦ {name} burada doğdu, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ {name} de burada doğdu, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ {name} de burada doğdu, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ {name} burada doğdu, {when}; mesleği şu olacak: {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ {name} burada doğdu, {when}; mesleği şu olacak: {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ {name} de burada doğdu, {when}; mesleği şu olacak: {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ {name} de burada doğdu, {when}; mesleği şu olacak: {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Burada, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Sonra, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Burada, {when}, {name} şu kişiyle evlendi: {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Sonra, {when}, {name} şu kişiyle evlendi: {other}.
+Ici est mort {name}, {when}{age}. ¦ {name} burada öldü, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ {name} burada öldü, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ {name} de burada öldü, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ {name} de burada öldü, {when}{age}.
+son conjoint ¦ eşi
+Naissance ({date}) ¦ Doğum ({date})
+Mariage avec {name} ({date}) ¦ Evlilik: {name} ({date})
+Mariage avec {name} ¦ Evlilik: {name}
+Mariage ({date}) ¦ Evlilik ({date})
+Décès ({date}) ¦ Ölüm ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ oğullarının doğumunu size sevinçle duyururlar
+ont la joie de vous annoncer la naissance de leur fille ¦ kızlarının doğumunu size sevinçle duyururlar
+a la joie de vous annoncer la naissance de son fils ¦ oğlunun doğumunu size sevinçle duyurur
+a la joie de vous annoncer la naissance de sa fille ¦ kızının doğumunu size sevinçle duyurur
+a la joie de vous annoncer la naissance de ¦ sevinçle doğumunu duyurur:
+On nous prie d’annoncer le décès de ¦ Üzülerek vefatını bildiririz:
+survenu {when}{age} ¦ vefat tarihi: {when}{age}
+survenue {when}{age} ¦ vefat tarihi: {when}{age}
+, dans sa {n}e année ¦ , {n}. yaşında
+De la part de ¦ Ailesi adına
+Monsieur {name}, son époux ¦ Bay {name}, eşi
+Madame {name}, son épouse ¦ Bayan {name}, eşi
+{names}, ses enfants ¦ {names}, çocukları
+{names}, son fils ¦ {names}, oğlu
+{names}, sa fille ¦ {names}, kızı
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ çocuklarının evliliğini size bildirmekten onur duyarlar
+ont la joie de vous faire part de leur mariage ¦ evliliklerini size sevinçle bildirirler
+célébré {when} ¦ tören tarihi: {when}
+{names} se sont dit oui ! ¦ {names} “evet” dedi!
+Bienvenue à {name} ! ¦ Hoş geldin, {name}!
+Adieu à {name} ¦ Elveda, {name}
+Une année tranquille ¦ Sakin bir yıl
+C’est {when} que {a} a épousé {b}. ¦ {when}: {a} ile {b} evlendi.
+{name} est le fils de {parents} ¦ {name}, oğlu; anne ve baba: {parents}
+{name} est la fille de {parents} ¦ {name}, kızı; anne ve baba: {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Yeni evlilere mutluluklar dileriz.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Mutlu anne ve baba ({names}) tüm ailenin tebriklerini kabul ediyor.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Bu yıl ailede kayda değer bir şey olmadı; bu da güzel bir haber.
+{name} fête ses {n} ans. ¦ {name} {n} yaşına giriyor.
+{names} : {n} ans de mariage ! ¦ {names}: evliliğin {n}. yılı!
+Né il y a {n} ans, jour pour jour. ¦ Tam {n} yıl önce bugün doğdu.
+Née il y a {n} ans, jour pour jour. ¦ Tam {n} yıl önce bugün doğdu.
+Disparu il y a {n} ans, jour pour jour. ¦ Tam {n} yıl önce bugün aramızdan ayrıldı.
+Disparue il y a {n} ans, jour pour jour. ¦ Tam {n} yıl önce bugün aramızdan ayrıldı.
+Fils de {names}. ¦ Oğlu; anne ve baba: {names}.
+Fille de {names}. ¦ Kızı; anne ve baba: {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ Erkek kardeşi {name} doğdu: {when}; aralarında dokuz aydan az fark var (ikizlerin tarihi aynı olurdu).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ Kız kardeşi {name} doğdu: {when}; aralarında dokuz aydan az fark var (ikizlerin tarihi aynı olurdu).
+{name} est mort {when}, avant ce mariage. ¦ {name} bu evlilikten önce öldü: {when}.
+{name} est morte {when}, avant ce mariage. ¦ {name} bu evlilikten önce öldü: {when}.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ Aynı yıl, {label}: {place}, {km} km uzakta. Mümkün ama kontrol etmekte fayda var.
+Un métier à {n} ans : c’est jeune. ¦ {n} yaşında bir meslek: bu erken.
+🔎 À regarder aussi ¦ 🔎 Şunlara da bak
+{name} naît {when} {where}. ¦ {name} doğuyor: {when} {where}.
+Ses parents : {list}. ¦ Anne ve babası: {list}.
+Parent connu : {list}. ¦ Bilinen ebeveyn: {list}.
+Ses frères et sœurs ¦ Kardeşleri
+Son frère ou sa sœur ¦ Kardeşi
+{name} reçoit le baptême {when} {where}. ¦ {name} vaftiz ediliyor: {when} {where}.
+Présents : {list}. ¦ Orada bulunanlar: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Dinî nikâh kıyılıyor: {when} {where}.
+Le mariage civil est célébré {when} {where}. ¦ Resmî nikâh kıyılıyor: {when} {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} evleniyor (eşi: {who}): {when} {where}.
+{name} se marie {when} {where}. ¦ {name} evleniyor: {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} ölüyor: {when} {where}{age}.
+Cause notée : {cause}. ¦ Kaydedilen neden: {cause}.
+{name} repose {where} ¦ {name} burada yatıyor: {where}
+{name} est inhumé ¦ {name} toprağa verildi
+{name} est inhumée ¦ {name} toprağa verildi
+{name} est inhumé(e) ¦ {name} toprağa verildi
+(inhumation {when}) ¦ (defin: {when})
+{kind} {when} {where}. ¦ {kind}: {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} mesleği: {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} yerleşiyor: {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} oturuyor: {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ {y} nüfus sayımında {name} şurada yaşıyor: {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ Nüfus sayımında ({when}) {name} şurada yaşıyor: {where}{desc}.
+à l’adresse « {ad} » ¦ adres: “{ad}”
+Métier noté : {job}. ¦ Kaydedilen meslek: {job}.
+Le foyer compte {who}. ¦ Hanede yaşayanlar: {who}.
+{label} {when} {where}. ¦ {label}: {when} {where}.
+Recensement de {y} ¦ Nüfus sayımı: {y}
+Déménagement ¦ Taşınma
+Domicile ¦ İkametgâh
+Sépulture ¦ Defin
+Crémation ¦ Ölü yakma
+Obsèques ¦ Cenaze töreni
+Ses enfants ¦ Çocukları
+Son enfant ¦ Çocuğu
+{n} enfants connus : {list}. ¦ Bilinen {n} çocuk: {list}.
+Un enfant connu : {list}. ¦ Bilinen bir çocuk: {list}.
+Pendant sa vie ¦ Hayatı boyunca
+Sa vie en quelques mots ¦ Birkaç sözle hayatı
+Ta version de la biographie (📖 sur la fiche). ¦ Biyografinin senin yazdığın hâli (kartta 📖).
+Biographie écrite par l’app d’après la fiche. ¦ Biyografiyi uygulama karttan yola çıkarak yazdı.
+Les lieux de sa vie ¦ Hayatının geçtiği yerler
+Sa descendance ¦ Torunları
+{list} dans la généalogie. ¦ Soy ağacında: {list}.
+Récit d’une vie — {name} ¦ Bir hayat hikâyesi — {name}
+=petit-enfant ¦ torun|torun
+=arrière-petit-enfant ¦ torun çocuğu|torun çocuğu
+=autre descendant ¦ başka bir torun|başka torun
+=signature ¦ imza|imza
+=visage ¦ yüz|yüz
+=trésor caché ¦ saklı hazine|saklı hazine
+Garder la mémoire ¦ Hatırayı korumak
+← Tous les trésors ¦ ← Tüm hazineler
+Trésors · {fam} ¦ Hazineler · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Ancak belirli bir tarihte açılan bir metin, ses ya da video: “Léa’nın 18 yaşı için”, “2050’de”.
+{n} scellée ¦ {n} mühürlü
+{n} ouverte ¦ {n} açılmış
+📬 Ouvertes ¦ 📬 Açılmış olanlar
+Aucune lettre ouverte pour l’instant ¦ Şimdilik açılmış mektup yok
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ Mühürlü bir mektup günü gelince kendiliğinden açılır.
+Souvenirs des sens ¦ Duyuların hatıraları
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Mumun kokusu, değirmenin sesi, reçelin tadı: hiçbir belgenin saklamadıkları.
+Le sens ¦ Duyu
+👃 Une odeur ¦ 👃 Bir koku
+👂 Un son ¦ 👂 Bir ses
+👅 Un goût ¦ 👅 Bir tat
+✋ Au toucher ¦ ✋ Bir dokunuş
+👁 Une image ¦ 👁 Bir görüntü
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Hiçbir belgeye sığmayan hatıralar: bir koku, bir ses, bir tat. Varsa kaydedilmiş bir ses ya da bir fotoğraf ekle.
+Noter un souvenir ¦ Bir hatıra yaz
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Listeler › Aile hafızası içinde gör
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Deyimler, lakaplar, gelenekler ve tanıklıklarla birlikte saklanır
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Şimdilik yazılmış hatıra yok: merdivendeki mum kokusu, değirmenin sesi, ninenin reçelinin tadı…
+Le livre de recettes ¦ Yemek tarifi kitabı
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Ailenin tarifleri, onları kimin yaptığı ve hikâyeleri; ardından yazdırılacak gerçek bir kitap.
+Rubrique ¦ Bölüm
+Entrées et soupes ¦ Başlangıçlar ve çorbalar
+Plats ¦ Ana yemekler
+Desserts et gâteaux ¦ Tatlılar ve pastalar
+Confitures et conserves ¦ Reçeller ve konserveler
+Boissons ¦ İçecekler
+Ajouter une recette ¦ Tarif ekle
+Imprimer le livre ¦ Kitabı yazdır
+{label} : couverture, sommaire, une page chacun ¦ {label}: kapak, içindekiler, her biri için bir sayfa
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Şimdilik tarif yok: ninenin far tatlısı, pazar günlerinin lahana çorbası…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Şimdilik kitaba konacak bir şey yok: “＋ {what}” ile başla.
+Les chansons de la famille ¦ Ailenin şarkıları
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Ninniler, ziyafet şarkıları, kura askerlerinin şarkıları: sözler, ezgi, kimin söylediği, kaydı ve yazdırılacak bir defter.
+Berceuses ¦ Ninniler
+Chansons de fête et de repas ¦ Bayram ve sofra şarkıları
+Chansons de travail ¦ İş şarkıları
+Conscrits et soldats ¦ Kura askerleri ve askerler
+Noël ¦ Noel
+En patois ¦ Yerel ağızda
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Sözler, ezgi, kimin söylediği — ve yapabilirsen kaydı (medyadan seçilen bir ses).
+Ajouter une chanson ¦ Şarkı ekle
+Imprimer le carnet ¦ Defteri yazdır
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Şimdilik şarkı yok: ninenin ninnisi, ziyafet sonu şarkısı…
+L’entretien guidé ¦ Rehberli söyleşi
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Bir büyükanne ya da büyükbabaya sorulacak doğru sorular, sesli okunur; kayıt, her soru için bir işaretle, onun kartında saklanır.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Sorular büyük yazıyla gösterilir (ve sesli okunabilir); söyleşi mikrofonla kaydedilir, her soru kayıtta işaretlenir, sonra ses kartın medyasında saklanır.
+La personne interrogée ¦ Söyleşi yapılan kişi
+Lire les questions à voix haute ¦ Soruları sesli oku
+Les thèmes ¦ Konular
+🧒 L’enfance ¦ 🧒 Çocukluk
+✏️ L’école ¦ ✏️ Okul
+👪 La famille ¦ 👪 Aile
+🔨 Le travail ¦ 🔨 İş
+💞 L’amour ¦ 💞 Aşk
+🪖 La guerre ¦ 🪖 Savaş
+🏡 La maison ¦ 🏡 Ev
+🎉 Les fêtes ¦ 🎉 Bayramlar
+💬 Pour plus tard ¦ 💬 Gelecek için
+Les entretiens enregistrés ¦ Kaydedilen söyleşiler
+🎙️ Commencer l’entretien ¦ 🎙️ Söyleşiyi başlat
+Les questions sur papier, avec la place pour noter les réponses ¦ Cevapları yazacak yeri olan, kâğıt üzerinde sorular
+Aucun entretien pour l’instant ¦ Şimdilik söyleşi yok
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Kişiyi ve konuları seç, sonra “🎙️ Söyleşiyi başlat”.
+La veillée en un clic ¦ Tek tıkla aile gecesi
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Tam ekranda bir kolun portreleri geçer, her hayat yumuşak bir müzik eşliğinde sesli anlatılır.
+Autour de ¦ Merkezdeki kişi
+Secondes par vie ¦ Hayat başına saniye
+Raconter à voix haute ¦ Sesli anlat
+Musique douce ¦ Yumuşak müzik
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Tam ekran: portreler geçer, her hayat anlatılır. Boşluk = duraklat, oklar = önceki / sonraki, Esc = bitir.
+La veillée de la famille {name} ¦ Aile gecesi: {name} ailesi
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Bu akşam şu kişinin ailesinden {n} hayat anlatıyoruz: {name}.
+Bonne nuit ¦ İyi geceler
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ Şimdi sıra sizde: hatırladıklarınızı anlatın.
+{n} vies à raconter : {list} ¦ Anlatılacak {n} hayat: {list}
+🕯️ Lancer la veillée ¦ 🕯️ Aile gecesini başlat
+Découvrir ¦ Keşfet
+À ton âge… ¦ Senin yaşında…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Her atanın senin yaşındayken yaptığı: evleniyordu, yola çıkıyordu, anne ya da baba oluyordu…
+L’âge ¦ Yaş
+Mon âge ¦ Benim yaşım
+Aperçu, A4 ou A5, ⤓ PDF ¦ Önizleme, A4 ya da A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Bir kuşak atlayan adlar
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Büyükbabası gibi Henri, büyük büyükannesi gibi Rose: anne ve babanın üzerinden aktarılan adlar.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Bir kuşak “atlayan” ad: çocuk onu bir büyükanne ya da büyükbabadan (veya büyük büyükanne ya da büyükbabadan) alır, oysa ne babası ne annesi bu adı taşıyordu. Her adın Fransa’daki popülerliği (INSEE) <b>Miras → Adlar</b> bölümünde.
+{n} prénom transmis par-dessus une génération ¦ Bir kuşağın üzerinden aktarılan {n} ad
+{n} fois ¦ {n} kez
+Les prénoms qui reviennent ¦ Tekrar eden adlar
+Le pouvoir d’achat d’autrefois ¦ Eski zamanların satın alma gücü
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ 1880’de 1.200 franklık bir çeyiz: bugünün kaç eurosu, kaç kilo ekmek, kaç günlük iş?
+La somme ¦ Tutar
+livres (ou francs de l’époque) ¦ livre (ya da dönemin frankı)
+sous (1/20 de livre ou de franc) ¦ sou (livre ya da frankın 1/20’si)
+deniers (1/240 de livre) ¦ denier (livre’in 1/240’ı)
+anciens francs (après 1960) ¦ eski frank (1960 sonrası)
+centimes ¦ santim
+euros ¦ euro
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Dayanaklar: 1901’den itibaren INSEE fiyat endeksi; öncesinde gıda fiyatlarına göre bir büyüklük sırası. Ekmek: sıradan ekmeğin kilosunun ortalama fiyatı. Günler: bir gündelikçinin ücreti. Bir écu = 3 livre.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Eski para dönüştürücüsünde adım adım hesap ↗
+Les sommes de ton arbre ¦ Ağacındaki tutarlar
+{sum} en {y} ¦ {sum} ({y} yılında)
+≈ {eur} d’aujourd’hui ¦ ≈ bugünün {eur} tutarı
+{kg} kg de pain ¦ {kg} kg ekmek
+{d} journées de travail ¦ {d} günlük iş
+En euros d’aujourd’hui ¦ Bugünün eurosuyla
+En pain ¦ Ekmek olarak
+soit {n} baguettes d’aujourd’hui ¦ yani bugünün {n} bageti
+En journées de travail ¦ İş günü olarak
+d’un journalier en {y} ¦ bir gündelikçinin işi ({y} yılında)
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ bugünün asgari ücretiyle {eur}
+francs ¦ frank
+{n} {unit} de {y}. ¦ {n} {unit} ({y} yılı).
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ İki rakam aynı şeyi söylemiyor: ekmek eskiden oranla çok daha pahalıydı, emek ise çok daha ucuz.
+Les vieux mots des actes ¦ Belgelerdeki eski sözcükler
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Bir belge yapıştır: eski (Fransızca) sözcükler vurgulanır ve açıklanır.
+Colle ici le texte d’un acte ¦ Bir belgenin metnini buraya yapıştır
+Dans ton arbre ¦ Ağacında
+Chercher un mot ¦ Bir sözcük ara
+{n} mots ¦ {n} sözcük
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Latince, kısaltmalar ve eski harfler ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Bu sözcükler ve açıklamaları Fransız belgelerinden geliyor: Fransızca kalırlar.
+Jouer en famille ¦ Ailece oyna
+Jeu des 7 familles ¦ 7 aile oyunu
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Ağacından yapılan kartlar: herkesin fotoğrafı seçilip kırpılır, altı kart stili, renkler, arka yüz; yazdırıp kesmek için.
+Les familles ¦ Aileler
+par nom de famille ¦ soyadına göre
+par branche (arrière-grands-parents) ¦ kola göre (büyük büyükanne ve büyükbabalar)
+Le style ¦ Stil
+🃏 Classique ¦ 🃏 Klasik
+📜 Ancien (papier jauni) ¦ 📜 Eski (sararmış kâğıt)
+◻️ Moderne (grande photo) ¦ ◻️ Modern (büyük fotoğraf)
+🧸 Pour les petits ¦ 🧸 Küçükler için
+🎩 Années folles ¦ 🎩 Çılgın Yirmiler
+🪵 Bois gravé ¦ 🪵 Ağaç baskı
+Couleurs d’origine ¦ Orijinal renkler
+Le dos ¦ Arka yüz
+Un dos à motif (à imprimer au verso) ¦ Desenli arka yüz (arka tarafa yazdırılır)
+Sans dos ¦ Arka yüz yok
+Le lieu de naissance ¦ Doğum yeri
+La liste de la famille ¦ Aile listesi
+Les photos choisies, les couleurs et le style de départ ¦ Seçilen fotoğraflar, renkler ve başlangıç stili
+📷 sur une carte : choisir et recadrer sa photo. ¦ Bir kartta 📷: fotoğrafını seç ve kırp.
+{n} familles de 6 cartes ({total} cartes). ¦ 6 kartlık {n} aile ({total} kart).
+Choisir et recadrer la photo de {name} ¦ Fotoğrafı seç ve kırp: {name}
+Le grand-père ¦ Büyükbaba
+Le fils ¦ Oğul
+Jeu des familles ¦ Aile oyunu
+La grand-mère ¦ Büyükanne
+La fille ¦ Kız
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Kart sayfaları (ve arka yüzleri), oyun kurallarıyla birlikte
+Arbre à colorier ¦ Boyama ağacı
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Bir çocuğun gerçek ataları siyah çizgilerle: bir ağaç, bir çiçek bahçesi, bir köy, armalar, sıcak hava balonları, bir arı kovanı, bir yelpaze ya da bir gül pencere.
+L’enfant (ou la personne) au pied de l’arbre ¦ Ağacın dibindeki çocuk (ya da kişi)
+5 (petites cases) ¦ 5 (küçük kutular)
+Le dessin ¦ Çizim
+🌳 Le grand arbre ¦ 🌳 Büyük ağaç
+🌷 Le jardin de fleurs ¦ 🌷 Çiçek bahçesi
+🏡 Le village (une maison chacun) ¦ 🏡 Köy (herkese bir ev)
+🛡️ Les blasons ¦ 🛡️ Armalar
+🎈 Les montgolfières ¦ 🎈 Sıcak hava balonları
+🐝 La ruche (alvéoles) ¦ 🐝 Arı kovanı (petek gözleri)
+🪭 L’éventail ¦ 🪭 Yelpaze
+🏵️ La rosace ¦ 🏵️ Gül pencere
+Le prénom seul (petits) ¦ Yalnızca ad (küçükler)
+Prénom et nom ¦ Ad ve soyadı
+Prénom, nom et année ¦ Ad, soyadı ve yıl
+L’écriture ¦ Yazı
+D’écolier ¦ Okul el yazısı
+Bâton (lettres rondes) ¦ Düz yazı (yuvarlak harfler)
+Le trait ¦ Çizgi
+Fin (grands) ¦ İnce (büyükler)
+Épais (petits, gros feutres) ¦ Kalın (küçükler, kalın keçeli kalemler)
+Sans ¦ Yok
+Double trait ¦ Çift çizgi
+Guirlande de feuilles ¦ Yaprak çelengi
+Le titre ¦ Başlık
+L’arbre de … ¦ Şu kişinin ağacı: …
+Dessiner ¦ Çiz
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Bilgisayara bir dosya kaydet ya da bir kopyasını medyada sakla
+L’arbre de {name} ¦ Şu kişinin ağacı: {name}
+Le quiz du repas ¦ Yemek sofrası bilgi yarışması
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ Televizyonda, takımlar hâlinde: ağaçtan çıkarılan sorular (kim kiminle evlendi, nerede, hangi meslek), geri sayım ve puanlar.
+Les équipes (séparées par des virgules) ¦ Takımlar (virgülle ayrılmış)
+Les {name}, Les cousins ¦ {name} ailesi, Kuzenler
+Secondes pour répondre ¦ Cevap için saniye
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Bilgisayarı televizyona bağla: soru ve dört cevap büyük gösterilir; geri sayım bitince (ya da <b>Enter</b> ile) doğru cevap çıkar, sonra puanı bilen takıma verirsin (<b>1</b> ile <b>9</b> arası tuşlar). Telefonlardan cevap vermek için uygulamaya evin tüm ağından erişilebilmesi gerekirdi: şimdilik bu mümkün değil, ekranın karşısında oynanır.
+📺 Lancer le quiz ¦ 📺 Bilgi yarışmasını başlat
+Un avant-goût ¦ Ön tadım
+Créer et fabriquer ¦ Oluştur ve yap
+Le faire-part d’un événement ¦ Bir olayın duyuru kartı
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Ağaçtan bir doğum, evlilik ya da ölüm: duyuru kartı dönemin üslubunda kendiliğinden hazırlanır.
+L’événement ¦ Olay
+Classique (1900) ¦ Klasik (1900)
+Art déco (1925) ¦ Art deco (1925)
+Fleuri ¦ Çiçekli
+Deuil (liseré noir) ¦ Yas (siyah kenar)
+Romantique (dentelle, 1880) ¦ Romantik (dantel, 1880)
+Art nouveau (1900) ¦ Art nouveau (1900)
+Champêtre (papier kraft) ¦ Kır (kraft kâğıt)
+Bleu et or ¦ Mavi ve altın
+Layette (naissance) ¦ Bebek (doğum)
+Épuré ¦ Sade
+🎨 Plus d’options ¦ 🎨 Daha fazla seçenek
+Le format ¦ Biçim
+Carte A6 (portrait) ¦ A6 kart (dikey)
+Marque-page ¦ Kitap ayracı
+Celle du style ¦ Stilinki
+Écriture à la plume ¦ Dolma kalem yazısı
+Élégante (Didot) ¦ Zarif (Didot)
+Bâton ¦ Düz yazı
+Les ornements ¦ Süslemeler
+Ceux du style ¦ Stilinkiler
+Mes couleurs ¦ Renklerim
+La photo de la personne ¦ Kişinin fotoğrafı
+Sa forme ¦ Biçimi
+Couleurs de la photo ¦ Fotoğrafın renkleri
+D’origine ¦ Orijinal
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Metin (satır satır; bir satırın önünde * = büyük)
+Le mur des signatures ¦ İmzalar duvarı
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Belgelerde bulunan tüm imzalar, kesilip döneme göre dizilmiş: her kuşağın el yazısı.
+La Belle Époque ¦ Belle Époque
+L’affiche (image PNG) ¦ Afiş (PNG görüntü)
+Lieux et voyages ¦ Yerler ve yolculuklar
+Le film des migrations ¦ Göçler filmi
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Yıl yıl herkes, doğumundan ölümüne harita üzerinde hareket eder; film video olarak kaydedilir.
+Durée du film ¦ Film süresi
+Sans carte ¦ Haritasız
+▶ Jouer ¦ ▶ Oynat
+{n} parcours, de {y0} à {y1} ¦ {n} yolculuk, {y0} – {y1}
+famille {name} ¦ {name} ailesi
+Le fond de carte se charge… ¦ Harita altlığı yükleniyor…
+{n} personne en vie ¦ Hayatta {n} kişi
+Fond de carte © OpenStreetMap, Esri ¦ Harita altlığı © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Video (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Film kayıt sırasında bir kez oynatılır
+Cette image (PNG) ¦ Bu görüntü (PNG)
+Le film des migrations — {title} ¦ Göçler filmi — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Film oynarken kaydedilen video
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Ataların köyü, Cassini haritasında ve bugünün haritasında, kaydırılan bir perdeyle.
+Hier ¦ Dün
+Carte de Cassini (XVIIIe s.) ¦ Cassini haritası (18. yy.)
+Cassini, exemplaire du roi ¦ Cassini, kralın nüshası
+Carte d’État-major (1820-1866) ¦ Fransız kurmay haritası (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Perdeyi kaydır (ya da klavyenin ok tuşlarını kullan).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Dünün haritasıyla bugünün haritası arasındaki perde
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Haritalar: IGN Géoplateforme (Cassini, kurmay haritası), © OpenStreetMap, Esri. Harita sekmesinde “üst üste bindirme” modu da iki altlığı saydamlıkla karşılaştırır.
+La promenade guidée ¦ Rehberli gezinti
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Bir hayatın yerleri sırasıyla, her durağın hikâyesi sesli okunur — oraya vardığında kendiliğinden bile.
+La promenade de ¦ Gezintisi:
+Le parcours ¦ Güzergâh
+les lieux de sa vie ¦ hayatının geçtiği yerler
+les villages de ses ancêtres ¦ atalarının köyleri
+🔊 Tout le guide ¦ 🔊 Rehberin tamamı
+📍 Me guider en marchant ¦ 📍 Yürürken bana yol göster
+⏹ Silence ¦ ⏹ Sessiz
+Le guide de la promenade, étape par étape ¦ Gezinti rehberi, adım adım
+🔊 Écouter ¦ 🔊 Dinle
+🧭 Itinéraire ¦ 🧭 Yol tarifi
+{km} km en tout (à vol d’oiseau) ¦ Toplam {km} km (kuş uçuşu)
+Outils malins ¦ Akıllı araçlar
+Dater une vieille photo ¦ Eski bir fotoğrafı tarihlendir
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Malzeme, karton, giysiler, saç biçimleri: bir yıl aralığı ve ağaçtan kim olabileceği.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Fotoğrafta gördüklerini işaretle (her soru için bir ya da birkaç cevap, bilmiyorsan hiçbiri). Aralıklar bilerek geniş tutuldu.
+Le support ¦ Malzeme
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Ayna gibi gümüşlenmiş metal levha, bir kutu içinde
+Image sur verre, dans un écrin (ambrotype) ¦ Cam üzerinde görüntü, bir kutu içinde (ambrotip)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ İnce bir demir levha üzerinde koyu görüntü (ferrotip)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Kartona yapıştırılmış küçük kart (6 × 10 cm): carte de visite
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Karton üzerinde büyük kart (11 × 16 cm): kabine kartı
+Carte postale photo (dos imprimé « carte postale ») ¦ Fotoğraflı kartpostal (arkasında “kartpostal” baskısı)
+Tirage papier aux bords dentelés ¦ Tırtıklı kenarlı kâğıt baskı
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Kartonsuz küçük siyah beyaz kâğıt baskı, düz beyaz kenarlar
+Photo couleur aux couleurs passées (orange, magenta) ¦ Renkleri solmuş renkli fotoğraf (turuncu, eflatun)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Geniş beyaz kenarlı kare baskı (Polaroid / Instamatic türü)
+Le carton (carte de visite ou cabinet) ¦ Karton (carte de visite ya da kabine kartı)
+Coins carrés, carton fin et clair ¦ Kare köşeler, ince ve açık renkli karton
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Kalın ve renkli karton (krem, siyah, bordo), yaldızlı kenar
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Arkada süslü büyük harflerle fotoğrafçının adı, madalyalar
+Bord biseauté doré ¦ Yaldızlı pahlı kenar
+Les vêtements des femmes ¦ Kadın giysileri
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Çok geniş çan etek (kerinolin), düşük omuzlar
+Jupe plate devant et gonflée derrière (tournure) ¦ Önü düz, arkası kabarık etek (tournure)
+Manches très bouffantes en haut (gigot) ¦ Üstü çok kabarık kollar (but kol)
+Silhouette en S, col montant, grand chapeau ¦ S biçimli siluet, dik yaka, büyük şapka
+Robe droite, taille basse, jupe au genou ¦ Düz elbise, düşük bel, diz boyu etek
+Épaules carrées, jupe sous le genou ¦ Kare omuzlar, dizin altında etek
+Jupe ample et taille fine (New Look) ¦ Bol etek ve ince bel (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Yöresel başlık ya da köylü kadın başlığı
+Les coiffures ¦ Saç biçimleri
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Ortadan ayrılmış, kulaklara yapışık saç
+Frange frisée sur le front ¦ Alında kıvırcık kâkül
+Chignon haut et volumineux ¦ Yüksek ve hacimli topuz
+Cheveux courts « à la garçonne » ¦ “Garçon” kısa saç
+Mise en plis ondulée ¦ Dalgalı mizanpli
+Les hommes ¦ Erkekler
+Haut-de-forme ¦ Silindir şapka
+Canotier (chapeau de paille plat) ¦ Hasır şapka (düz)
+Moustache fournie, sans barbe ¦ Gür bıyık, sakalsız
+Barbe entière fournie ¦ Gür tam sakal
+Col cassé et nœud papillon ¦ Kırık yaka ve papyon
+Uniforme bleu horizon ¦ Ufuk mavisi üniforma
+Costume trois-pièces large, chapeau mou ¦ Bol üç parçalı takım, yumuşak fötr şapka
+Pantalon pattes d’éléphant, cheveux longs ¦ İspanyol paça pantolon, uzun saç
+Le décor ¦ Dekor
+Fond peint, colonne, balustrade, rideau drapé ¦ Boyalı fon, sütun, korkuluk, drapeli perde
+Fond uni, simple chaise ¦ Düz fon, sade sandalye
+Dehors, photo prise sur le vif (pas en atelier) ¦ Dışarıda, anında çekilmiş fotoğraf (stüdyoda değil)
+Et toi, que sais-tu ? ¦ Peki sen ne biliyorsun?
+Photographe ou date notée : de ¦ Fotoğrafçı ya da yazılı tarih: başlangıç
+Âge apparent de la personne ¦ Kişinin görünen yaşı
+C’est ¦ Bu
+un homme, un garçon ¦ bir erkek, bir oğlan
+une femme, une fille ¦ bir kadın, bir kız
+Lieu (nom du photographe, ville) ¦ Yer (fotoğrafçının adı, şehir)
+Coche au moins un indice ¦ En az bir ipucu işaretle
+Les rappels de recherche ¦ Araştırma hatırlatıcıları
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ “FAURE koluna 8 aydır dokunmadın”: uykuya dalmış kollar, eksik olanlar, tek tıkla bir hatırlatıcı.
+Les branches de ¦ Kolları:
+Endormie depuis au moins ¦ En az şu süredir uykuda
+peu importe ¦ fark etmez
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Tarih, koldaki bir kartta yapılan son değişikliğin tarihidir. Hatırlatıcı tek tıkla oluşturulur: uygulamanın hatırlatıcılarına (Listeler → Hatırlatıcılar) ve “Yaklaşanlar” widget’ına eklenir.
+Branche {name} ({first}) ¦ {name} kolu ({first})
+Reprendre la branche {name} ({first}) ¦ {name} koluna geri dön ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Bu kadar uzun süredir uykuda olan kol yok
+Les actes manquants ¦ Eksik belgeler
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Soyun eksikleri, aranacak arşivlere göre sıralanmış (Araştırma sekmesinin yardımcısı).
+Je regarde ce qui manque… ¦ Eksiklere bakıyorum…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ <b>“Ne eksik?”</b> yardımcısı (Araştırma sekmesi) soydaki eksik belgeleri arşiv kurumlarına göre sıralar; yerleşim yeri, yıllar ve bakılacak seriler (nüfus kayıtları, on yıllık dizinler, kilise kayıtları, noterler, nüfus sayımları, askerlik kayıt defterleri) ve FranceArchives bağlantısıyla.
+{n} recherches à faire sur 6 générations ¦ 6 kuşakta yapılacak {n} araştırma
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Araştırma sekmesindeki “Ne eksik?” yardımcısı
+Le thème d’époque ¦ Dönem teması
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ Her kart kendi zamanının renkleriyle: parşömen, sepya, Belle Époque, art deco, savaş sonrası altın yıllar.
+Habiller chaque fiche aux couleurs de son époque ¦ Her kartı kendi döneminin renkleriyle giydir
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ Bir atanın kartı, yaşadığı zamanın (25 yaşındaki) görünümünü alır: Eski Rejim için parşömen, 19. yüzyıl için sepya, Çılgın Yirmiler için art deco… Uygulamanın geri kalanı değişmez. Bu ayar bu bilgisayarda saklanır.
+📜 Ancien Régime ¦ 📜 Eski Rejim
+avant ¦ öncesi
+🎖️ Révolution et Empire ¦ 🎖️ Devrim ve İmparatorluk
+🎩 Le XIXe siècle ¦ 🎩 19. yüzyıl
+🌿 La Belle Époque ¦ 🌿 Belle Époque
+🍸 Les années folles et la guerre ¦ 🍸 Çılgın Yirmiler ve savaş
+🚗 Les Trente Glorieuses ¦ 🚗 Savaş sonrası altın yıllar
+📻 Les années 70 et après ¦ 📻 70’ler ve sonrası
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ Doğum gecesi köyün üzerindeki yıldızlar, Ay ve gezegenler: saklanacak ya da hediye edilecek bir görüntü.
+La naissance de ¦ Doğumu:
+Vers quelle heure (heure solaire du lieu) ¦ Saat kaç sularında (yerin güneş saati)
+Nuit bleue ¦ Mavi gece
+Affiche (fond crème) ¦ Afiş (krem fon)
+Noir et or ¦ Siyah ve altın
+Encre sur papier (à imprimer) ¦ Kâğıt üzerinde mürekkep (yazdırmak için)
+Aube (rose et bleu) ¦ Şafak (pembe ve mavi)
+Vert forêt ¦ Orman yeşili
+Ronde ¦ Yuvarlak
+Carrée ¦ Kare
+Fenêtre en arc ¦ Kemerli pencere
+Affiche ¦ Afiş
+A4 (portrait) ¦ A4 (dikey)
+Élégante ¦ Zarif
+À la plume ¦ Dolma kalemle
+Les constellations ¦ Takımyıldızlar
+La Voie lactée (évocation) ¦ Samanyolu (izlenim)
+Les repères (hauteur, directions) ¦ İşaretler (yükseklik, yönler)
+✏️ Les textes ¦ ✏️ Metinler
+(le nom) ¦ (ad)
+(le lieu et la date) ¦ (yer ve tarih)
+Dernière ligne ¦ Son satır
+(la lune, les planètes) ¦ (ay, gezegenler)
+Aussi rangée sur sa fiche ¦ Onun kartında da saklanır
+{place} — {when}, vers {h} ¦ {place} — {when}, saat {h} sularında
+pleine lune ¦ dolunay
+Jupiter ¦ Jüpiter
+{list} brillait ¦ Parlayanlar: {list}
+Grande Ourse ¦ Büyükayı
+Orion ¦ Avcı
+Cassiopée ¦ Kraliçe
+Lion ¦ Aslan
+Gémeaux ¦ İkizler
+Bouvier ¦ Çoban
+Taureau ¦ Boğa
+Petite Ourse ¦ Küçükayı
+Cocher ¦ Arabacı
+Grand Chien ¦ Büyükköpek
+Vierge ¦ Başak
+boussole|N ¦ K
+boussole|E ¦ D
+boussole|S ¦ G
+boussole|O ¦ B
+{n} % éclairée ¦ %{n} aydınlık
+coucher du soleil vers {h} ¦ gün batımı saat {h} sularında
+lever vers {h} ¦ gün doğumu saat {h} sularında
+{n} étoiles brillantes au-dessus de l’horizon ¦ Ufkun üzerinde {n} parlak yıldız
+Allumer une bougie ¦ Bir mum yak
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ Bir ata için bir mum, bir notla: yedi gün yanar. Yaklaşan doğum ve ölüm yıldönümleri.
+{n} bougie allumée ¦ Yanan {n} mum
+{n} au registre ¦ Kayıt defterinde {n}
+Aucune bougie allumée en ce moment ¦ Şu anda yanan mum yok
+📅 Dans les trente jours ¦ 📅 Önümüzdeki otuz gün içinde
+{n} ans de sa naissance ({date}) ¦ Doğumunun {n}. yılı ({date})
+dans {n} jours ¦ {n} gün sonra
+{n} ans de son décès ({date}) ¦ Ölümünün {n}. yılı ({date})
+L’ambiance sonore d’époque ¦ Dönemin ses atmosferi
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ Aile gecesinin ateşi ve saati, pazar çanları, demirci, istasyon, değirmen: ataların zamanının sesleri.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 Ocak başında aile gecesi (1880 sularında)
+🔔 Le village un dimanche matin ¦ 🔔 Bir pazar sabahı köy
+⚒️ L’atelier du forgeron ¦ ⚒️ Demirci atölyesi
+🚂 La gare (vers 1900) ¦ 🚂 İstasyon (1900 sularında)
+💧 Le moulin au bord de l’eau ¦ 💧 Su kenarındaki değirmen
+🌧️ La nuit d’orage ¦ 🌧️ Fırtınalı gece
+🌊 Le port ¦ 🌊 Liman
+🐓 La ferme au petit matin ¦ 🐓 Sabahın erken saatinde çiftlik
+🌙 Une nuit d’été à la campagne ¦ 🌙 Kırda bir yaz gecesi
+🧺 Le lavoir ¦ 🧺 Çamaşırhane
+🧺 Le jour de marché ¦ 🧺 Pazar günü
+🍷 Le café du village ¦ 🍷 Köy kahvesi
+🪗 Le bal musette ¦ 🪗 Akordeonlu dans salonu
+⛪ La messe à l’église ¦ ⛪ Kilisede ayin
+🪡 L’atelier de couture ¦ 🪡 Dikiş atölyesi
+🧵 La filature et le tissage ¦ 🧵 İplik fabrikası ve dokuma
+🧶 La veillée des fileuses ¦ 🧶 İplik eğirenlerin gecesi
+🪚 L’atelier du menuisier ¦ 🪚 Marangoz atölyesi
+🏫 La classe (vers 1900) ¦ 🏫 Sınıf (1900 sularında)
+✒️ L’étude du notaire ¦ ✒️ Noterin yazıhanesi
+🌾 Les moissons ¦ 🌾 Hasat
+🐝 Le rucher ¦ 🐝 Arılık
+🐴 La route en diligence ¦ 🐴 Posta arabası yolu
+Ou celle du métier de ¦ Ya da şu mesleğinki:
+▶ Écouter ¦ ▶ Dinle
+🔈 Volume ¦ 🔈 Ses düzeyi
+⏲️ S’arrêter après ¦ ⏲️ Şu süreden sonra dur
+Un mélange au hasard de 3 à 5 couches ¦ 3 ile 5 katman arasında rastgele bir karışım
+🎲 Au hasard ¦ 🎲 Rastgele
+Tout à zéro ¦ Hepsini sıfırla
+Durée du fichier son ¦ Ses dosyasının süresi
+⭐ Mes ambiances ¦ ⭐ Ses atmosferlerim
+💾 Garder ce mélange ¦ 💾 Bu karışımı sakla
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Her şey bilgisayar tarafından gürültü ve saf seslerden üretilir: bir kayıt değil, bir izlenim. Her katmanı zevkine göre ayarla ({n} katman).
+Chercher une couche (cloches, eau, atelier…) ¦ Bir katman ara (çanlar, su, atölye…)
+Chercher une couche ¦ Bir katman ara
+🌬️ Le vent ¦ 🌬️ Rüzgâr
+🌧️ La pluie ¦ 🌧️ Yağmur
+🔥 Le feu de cheminée ¦ 🔥 Şömine ateşi
+🕰️ L’horloge comtoise ¦ 🕰️ Ayaklı saat
+🔔 Les cloches du village ¦ 🔔 Köy çanları
+⚒️ L’enclume du forgeron ¦ ⚒️ Demircinin örsü
+🐦 Les oiseaux ¦ 🐦 Kuşlar
+💧 La rivière et le moulin ¦ 💧 Dere ve değirmen
+🚂 Le train à vapeur ¦ 🚂 Buharlı tren
+🌊 La mer ¦ 🌊 Deniz
+🦗 Les grillons ¦ 🦗 Cırcır böcekleri
+🐸 Les grenouilles de la mare ¦ 🐸 Gölet kurbağaları
+🦉 La chouette ¦ 🦉 Baykuş
+🐓 Le coq ¦ 🐓 Horoz
+🐄 Les sonnailles des vaches ¦ 🐄 İnek çanları
+🐴 Les sabots du cheval ¦ 🐴 At nalları
+🛞 La charrette sur les pavés ¦ 🛞 Arnavut kaldırımında araba
+🐝 Les abeilles du rucher ¦ 🐝 Arılıktaki arılar
+🌾 Le vent dans les blés ¦ 🌾 Buğdaylarda rüzgâr
+⛈️ Le tonnerre au loin ¦ ⛈️ Uzaktan gök gürültüsü
+⛲ La fontaine du lavoir ¦ ⛲ Çamaşırhane çeşmesi
+🧺 Les battoirs des lavandières ¦ 🧺 Çamaşırcı kadınların tokmakları
+🧶 Le rouet qui file ¦ 🧶 İplik eğiren çıkrık
+🧵 Le métier à tisser ¦ 🧵 Dokuma tezgâhı
+🪡 La machine à coudre ¦ 🪡 Dikiş makinesi
+🪚 La scie du menuisier ¦ 🪚 Marangozun testeresi
+✒️ La plume sur le papier ¦ ✒️ Kâğıt üzerinde kalem
+🗣️ Le murmure de la foule ¦ 🗣️ Kalabalığın uğultusu
+🍷 Les verres du café ¦ 🍷 Kahvedeki bardaklar
+⛪ L’orgue de l’église ¦ ⛪ Kilise orgu
+🪗 L’accordéon du bal musette ¦ 🪗 Dans salonunun akordeonu
+🏫 La craie au tableau ¦ 🏫 Tahtada tebeşir
+🪵 Le bois qui craque ¦ 🪵 Gıcırdayan tahta
+👣 Des pas sur le gravier ¦ 👣 Çakılda ayak sesleri
+🕊️ Les mouettes ¦ 🕊️ Martılar
+🎶 Le bourdon de la vielle ¦ 🎶 Vielle’in dem sesi
+© Crédits et droits des sons ¦ © Seslerin emeği ve hakları
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Hiçbir kayıt kullanılmaz: <b>her ses, sen dinlerken tarayıcın tarafından hesaplanır</b> (Web Audio), gürültü ve saf seslerden. Bu yüzden LCNDA dışında anılacak bir yazar yoktur ve hiçbir şey indirilmez.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Telifsiz</b>: onları dinleyebilir, kaydedebilir, bir kurguya ya da sunuma koyabilir, hatta paylaşabilirsin; kimseye sormadan (kamu malı gibi, CC0).
+bruit blanc filtré, qui ondule lentement ¦ yavaşça dalgalanan filtrelenmiş beyaz gürültü
+bruit aigu et milliers de petites gouttes au hasard ¦ tiz gürültü ve rastgele binlerce küçük damla
+bruit grave et crépitements au hasard ¦ pes gürültü ve rastgele çıtırtılar
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ saf seslerden iki “tik”, her 40 saniyede bir çan
+sons purs aux harmoniques des cloches de bronze ¦ bronz çanların harmoniklerini taşıyan saf sesler
+coups métalliques : trois sons purs qui s’éteignent ¦ metalik vuruşlar: sönen üç saf ses
+petits sifflets de sons purs qui montent ¦ yükselen küçük saf ses ıslıkları
+bruit filtré et le battement grave de la roue ¦ filtrelenmiş gürültü ve çarkın pes vuruşu
+souffles de vapeur rythmés et un sifflet à deux notes ¦ ritimli buhar üflemeleri ve iki notalı bir düdük
+bruit grave qui monte et descend comme les vagues ¦ dalgalar gibi yükselip alçalan pes gürültü
+trilles de sons purs très aigus ¦ çok tiz saf ses trilleri
+sons en dents de scie qui montent ¦ yükselen testere dişi sesler
+trois sons purs graves qui glissent ¦ kayan üç pes saf ses
+trois sons qui montent puis retombent ¦ yükselip sonra düşen üç ses
+sons métalliques aux harmoniques de cloche ¦ çan harmonikli metalik sesler
+petits chocs de bruit au rythme du pas ¦ adım ritminde küçük gürültü darbeleri
+grondement grave qui tremble et cailloux de bruit ¦ titreyen pes bir gümbürtü ve gürültü çakılları
+trois notes graves qui vibrent ¦ titreşen üç pes nota
+bruit très aigu qui ondule ¦ dalgalanan çok tiz gürültü
+grondements de bruit très grave ¦ çok pes gürültü gümbürtüleri
+bruit d’eau et gouttes de sons purs ¦ su gürültüsü ve saf ses damlaları
+deux chocs sourds ¦ iki boğuk vuruş
+ronronnement et petit clic de la roue ¦ çarkın vızıltısı ve küçük tıkırtısı
+le claquement de la navette et le coup du battant ¦ mekiğin şakırtısı ve tefin vuruşu
+cliquetis rapides par séries ¦ seriler hâlinde hızlı tıkırtılar
+bruit filtré qui va et vient ¦ gidip gelen filtrelenmiş gürültü
+grattements de bruit aigu ¦ tiz gürültü cızırtıları
+quatre bandes de bruit qui imitent les voix ¦ sesleri taklit eden dört gürültü bandı
+tintements de sons purs ¦ saf ses çınlamaları
+accords tenus de sons doux ¦ yumuşak seslerden uzatılmış akorlar
+une petite valse de sons en dents de scie, basse et accords ¦ testere dişi seslerden küçük bir vals, bas ve akorlar
+traits de bruit et le petit coup du point ¦ gürültü çizgileri ve noktanın küçük vuruşu
+craquements de bruit ¦ gürültü çatırtıları
+pas de bruit filtré ¦ filtrelenmiş gürültüden ayak sesleri
+cris en dents de scie qui descendent ¦ alçalan testere dişi çığlıklar
+trois notes graves tenues, qui vibrent un peu ¦ hafifçe titreşen, uzatılmış üç pes nota
+Fichier son (WebM) ¦ Ses dosyası (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ Seçilen süre boyunca duyulan
+L’arbre qui pousse ¦ Büyüyen ağaç
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ Bir atanın torunları yıl yıl belirir, dallar uzar, yapraklar kızarır.
+▶ Faire pousser ¦ ▶ Büyüt
+lente ¦ yavaş
+normale ¦ normal
+rapide ¦ hızlı
+La musique de l’arbre ¦ Ağacın müziği
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ Ağaç bir partisyon gibi çalınır: her doğum için bir nota, her evlilik için bir akor; dinlemek ya da indirmek için.
+tout l’arbre ¦ tüm ağaç
+Tempo ¦ Tempo
+lent ¦ yavaş
+normal ¦ normal
+vif ¦ canlı
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ Her doğum bir notadır: yakın kuşaklar için daha tiz, uzun bir hayat için daha uzun, kadınlar için daha yumuşak tınılı; her evlilik bir akor; her ölüm pes bir nota.
+Fichier son (WAV) ¦ Ses dosyası (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ {b} doğum, {m} evlilik, {d} ölüm — {s} saniye
+La chasse au trésor ¦ Hazine avı
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Evin içine saklanmış atalarla ilgili bilmeceler: yalnızca doğru cevap bir sonraki saklanma yerine götürür.
+🗝️ Préparer la chasse ¦ 🗝️ Avı hazırla
+Le nom de la chasse ¦ Avın adı
+La chasse au trésor de la famille {name} ¦ {name} ailesinin hazine avı
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ Saklanma yerleri, sırasıyla (her satıra bir tane; sonuncusu hazinenin yeri)
+sous le paillasson ¦ paspasın altında
+dans la boîte aux lettres ¦ posta kutusunda
+derrière l’horloge ¦ saatin arkasında
+au fond du placard de l’entrée ¦ giriş dolabının dibinde
+Le trésor (ce qu’on trouve à la fin) ¦ Hazine (sonunda bulunan)
+le gâteau d’anniversaire de Mamie ¦ ninenin doğum günü pastası
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ Her bilmece bir ata hakkındadır; her cevap bir saklanma yerini gösterir: devamını bulmak için doğru cevap gerekir.
+L’ancêtre mystère ¦ Gizemli ata
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ Saklı bir ata, ipuçları tek tek: her gün tüm aile için aynısı. Kim en hızlı bulacak?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ Günün gizemli atası: {date}
+Proposer ¦ Tahmin et
+Un indice de plus ({n}) ¦ Bir ipucu daha ({n})
+Je donne ma langue au chat ¦ Pes ediyorum
+Trouvé maintenant : {n} points. ¦ Şimdi bulundu: {n} puan.
+Le livre dont tu es le héros ¦ Kahramanı sen olduğun kitap
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Bir atanın hayatını yaşa ve onun seçimlerini yap — meslek, evlilik, göç — sonra onun gerçekte ne seçtiğini keşfet.
+Tu seras ¦ Sen olacaksın:
+📖 Commencer l’histoire ¦ 📖 Hikâyeyi başlat
+Les coïncidences ¦ Tesadüfler
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Aynı gün doğmuş, doğum gününde ölmüş, gün gününe yüz yıl arayla evlenmiş: ağacın rastlantıları.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Ağaçta ne kadar kesin tarih (gün ve ay) varsa, o kadar çok çıkar.
+« Et si… » ¦ “Ya … olsaydı”
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ Ya bu ikisi hiç karşılaşmasaydı? Hiç var olmayacak tüm hayatlar — belki de seninki.
+Et si… ¦ Ya … olsaydı
+ces deux-là ne s’étaient jamais rencontrés ¦ bu ikisi hiç karşılaşmasaydı
+cette personne n’avait pas vécu ¦ bu kişi hiç yaşamasaydı
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 {n} hayat hiç var olmayacaktı
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ Ağacın %{pct} kadarı; bugün hayatta olanlar: {who}.
+Et {name} non plus. ¦ {name} de var olmayacaktı.
+La broderie au point de croix ¦ Kanaviçe işlemesi
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ Eski usul bir örnek işleme: aile adı, bir çift, bir tarih, bir ağaç; desen ve iplikler.
+FAMILLE {name} ¦ {name} AİLESİ
+La date ¦ Tarih
+Le lieu (facultatif) ¦ Yer (isteğe bağlı)
+La couleur du titre ¦ Başlığın rengi
+Brun ¦ Kahverengi
+Bleu ciel ¦ Gök mavisi
+La couleur du couple ¦ Çiftin rengi
+Le titre en grandes lettres (double) ¦ Büyük harflerle başlık (çift)
+Le motif ¦ Motif
+❤️ Le cœur ¦ ❤️ Kalp
+👑 Le cœur couronné ¦ 👑 Taçlı kalp
+🌷 Les tulipes ¦ 🌷 Laleler
+⛪ L’église ¦ ⛪ Kilise
+🕊️ Les colombes ¦ 🕊️ Güvercinler
+— Aucun motif ¦ — Motif yok
+Ses couleurs ¦ Renkleri
+celle du motif ¦ motifinki
+Deux petits cœurs de chaque côté ¦ Her iki yanda iki küçük kalp
+La bordure ¦ Kenarlık
+· Les points (à l’ancienne) ¦ · Noktalar (eski usul)
+♥ La frise de cœurs ¦ ♥ Kalp frizi
+⌇ La frise en zigzag ¦ ⌇ Zikzak friz
+▭ Le double trait ¦ ▭ Çift çizgi
+— Sans bordure ¦ — Kenarlıksız
+La toile ¦ Kumaş
+Aïda 11 ¦ Etamin 11
+Aïda 14 ¦ Etamin 14
+Aïda 16 ¦ Etamin 16
+Aïda 18 ¦ Etamin 18
+Lin 28 fils (un point sur 2 fils) ¦ 28 iplikli keten (2 iplik üzerine bir ilmek)
+Sa couleur (aperçu) ¦ Rengi (önizleme)
+Écru ¦ Ham beyaz
+Lin ¦ Keten
+Bleu nuit ¦ Gece mavisi
+l’aperçu brodé ¦ işlenmiş önizleme
+la grille à symboles ¦ simgeli desen
+La grille (dessin SVG) ¦ Desen (SVG çizim)
+L’aperçu brodé (image PNG) ¦ İşlenmiş önizleme (PNG görüntü)
+La grille à symboles et la liste des fils ¦ Simgeli desen ve iplik listesi
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} ilmek · kumaş: {cloth}, {cw} × {ch} cm (her yanda 5 cm pay bırak)
+{n} points ¦ {n} ilmek
+La gravure au laser ¦ Lazerle kazıma
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ Ataların yelpaze şeması, gerçek boyutlarda SVG dosyası olarak, bir lazer kazıma makinesine hazır (kazıma ve kesme).
+Les ancêtres de ¦ Ataları:
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ Dosya gerçek boyutlarda, milimetre cinsinden: <b>siyah = kazıma</b> (çizgiler ve adlar), <b>kırmızı = kesme</b> (dış hat, ince çizgi). LightBurn, Glowforge, xTool, Inkscape ile çalışır. İçe aktarırken boyutu her zaman kontrol et.
+Dessin SVG pour la graveuse ¦ Kazıma makinesi için SVG çizim
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ Gerçek boyutlarda: siyah = kazıma, kırmızı = kesme
+La mosaïque de portraits ¦ Portre mozaiği
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ Ağaçtaki tüm yüzler tek bir görüntüde ya da tüm ailenin yüzleriyle yeniden oluşturulmuş bir portre.
+Je rassemble les visages… ¦ Yüzleri topluyorum…
+La mosaïque ¦ Mozaik
+tous les visages, en grille ¦ tüm yüzler, ızgara hâlinde
+un portrait refait avec tous les autres ¦ diğer tüm yüzlerle yeniden oluşturulan bir portre
+Le portrait à refaire ¦ Yeniden oluşturulacak portre
+Finesse ¦ İncelik
+Le visage de la lignée ¦ Soyun yüzü
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ Babadan babaya ya da anneden anneye: yüzler yan yana, geçişli ve kuşakların ortalama yüzü.
+La lignée ¦ Soy
+de père en père ¦ babadan babaya
+de mère en mère ¦ anneden anneye
+▶ Le fondu ¦ ▶ Geçiş
+Les visages (image PNG) ¦ Yüzler (PNG görüntü)
+Le visage moyen de {n} générations ¦ {n} kuşağın ortalama yüzü
+Le fondu ¦ Geçiş
+La gazette de l’année ¦ Yılın gazetesi
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ Ailenin bir yılı için bir gazetenin birinci sayfası: evlilikler, doğumlar, bizimkilerden haberler, ekmeğin fiyatı.
+Les années les plus riches : ¦ En dolu yıllar:
+🎨 Le style du journal ¦ 🎨 Gazetenin stili
+📜 Ancien (1900) ¦ 📜 Eski (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Resimli ek (renkli)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ Günlük gazete (gazete kâğıdı)
+🎩 Années 30 ¦ 🎩 1930’lar
+◻️ Moderne ¦ ◻️ Modern
+💖 Magazine ¦ 💖 Dergi
+📣 À sensation (gros titres) ¦ 📣 Magazin (büyük manşetler)
+🧸 Le journal des enfants ¦ 🧸 Çocuk gazetesi
+Le nom du journal ¦ Gazetenin adı
+Le bandeau ¦ Başlık bandı
+Édition unique ¦ Tek baskı
+Le papier ¦ Kâğıt
+Celui du style ¦ Stilinki
+Crème ¦ Krem
+Jauni ¦ Sararmış
+Papier journal ¦ Gazete kâğıdı
+Ma couleur ¦ Benim rengim
+Les colonnes ¦ Sütunlar
+L’article de une ¦ Manşet yazısı
+Les nouvelles ¦ Haberler
+Le coin pratique ¦ Pratik köşe
+5 centimes ¦ 5 santim
+Prix : {price} ¦ Fiyat: {price}
+{n} membres de la famille en vie ¦ Hayatta olan {n} aile üyesi
+Carnet ¦ Duyurular
+Nouvelles des nôtres ¦ Bizimkilerden haberler
+Anniversaires ¦ Doğum günleri
+{n} centimes ¦ {n} santim
+Le kilo de pain : environ {price}. ¦ Ekmeğin kilosu: yaklaşık {price}.
+Qui fait quoi ¦ Kim ne yapıyor
+Composée à partir de l’arbre de famille · {y} ¦ Aile ağacından hazırlandı · {y}
+Le fond d’écran du jour ¦ Günün duvar kâğıdı
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ Her gün ekranının boyutlarında, görüntüyle bir ata: renkler, desen, fotoğraf, metinler, takvim… her şey ayarlanabilir.
+L’ANCÊTRE DU JOUR ¦ GÜNÜN ATASI
+Ordinateur ¦ Bilgisayar
+Grand écran (2K) ¦ Büyük ekran (2K)
+Écran 4K ¦ 4K ekran
+Écran très large ¦ Çok geniş ekran
+Mac Retina ¦ Mac Retina
+Tablette ¦ Tablet
+Tablette debout ¦ Tablet (dikey)
+Téléphone Android ¦ Android telefon
+L’ancêtre (celui du jour par défaut) ¦ Ata (varsayılan olarak günün atası)
+🎨 Couleurs et fond ¦ 🎨 Renkler ve arka plan
+Les couleurs ¦ Renkler
+Selon l’époque de l’ancêtre ¦ Atanın dönemine göre
+Crème et encre ¦ Krem ve mürekkep
+Vert sauge ¦ Adaçayı yeşili
+Océan ¦ Okyanus
+Poudre ¦ Pudra
+Le dégradé ¦ Renk geçişi
+En biais ¦ Çapraz
+De haut en bas ¦ Yukarıdan aşağı
+De gauche à droite ¦ Soldan sağa
+En rond ¦ Dairesel
+Aucun (uni) ¦ Yok (düz)
+Rayures fines ¦ İnce çizgiler
+Un arbre en filigrane ¦ Filigran olarak bir ağaç
+La photo floutée en fond ¦ Arka planda bulanık fotoğraf
+🖼️ La photo ¦ 🖼️ Fotoğraf
+En arc ¦ Kemerli
+La place ¦ Konum
+En haut, centrée ¦ Yukarıda, ortada
+La taille ¦ Boyut
+L’alignement ¦ Hizalama
+L’étiquette ¦ Etiket
+Sa vie en deux phrases ¦ İki cümlede hayatı
+Une phrase à moi ¦ Kendi cümlem
+Une devise, un souvenir… ¦ Bir düstur, bir hatıra…
+🧩 En plus ¦ 🧩 Ekstralar
+Le calendrier du mois ¦ Ayın takvimi
+Laisser la place pour ¦ Şunlara yer bırak
+les icônes du bureau (à gauche) ¦ masaüstü simgeleri (solda)
+l’heure du téléphone (en haut) ¦ telefonun saati (yukarıda)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ Her gün başka bir ata — öncelikle doğum ya da ölüm yıldönümü o güne denk gelen. Ayarların bu bilgisayarda saklanır.
+Le fond d’écran (image PNG) ¦ Duvar kâğıdı (PNG görüntü)
+Fond d’écran du jour ¦ Günün duvar kâğıdı
+Les passeports ¦ Pasaportlar
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Gezgin bir atanın iç ya da dış pasaportu, eşkâli, robot resmi ve yayımlanmış dökümlerin içe aktarılması (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ Pasaport ekle
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ Bir döküm içe aktar (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ Yayımlanmış bir döküm (örneğin data.gouv.fr’de)
+{n} passeport rattaché ¦ Bağlı {n} pasaport
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ “＋ Pasaport ekle” ya da yayımlanmış bir dökümü içe aktar.
+Grand-parent raconte ¦ Büyükanne ve büyükbaba anlatıyor
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ Söylenerek yazdırılmış ya da yapıştırılmış bir anlatı: bulunan doğumlar, evlilikler, meslekler ve ikametgâhlar, ağaçla karşılaştırılır ve tek tıkla eklenir.
+Qui raconte ¦ Anlatan kişi
+🎤 Dicter ¦ 🎤 Söyleyerek yazdır
+🔍 Repérer les faits ¦ 🔍 Olguları bul
+Le repérage des faits lit les récits écrits en français. ¦ Olgu bulma, Fransızca yazılmış anlatıları okur.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ Anlatı (söylenerek yazdırılmış, yapıştırılmış ya da bir kayıttan aktarılmış)
+💾 Enregistrer le récit ¦ 💾 Anlatıyı kaydet
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Kartın ✨ Hazineler bloğunda saklanır
+Partager une branche (pour un temps) ¦ Bir kolu paylaş (bir süreliğine)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ Bir kuzene gönderilecek bir dosya: yaşayanlar olmadan kol, bir parolayla korunur, seçilen tarihte süresi dolar.
+La branche de ¦ Kolu:
+Valable jusqu’au ¦ Geçerlilik sonu
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Parola (dosya şifrelenir, parola olmadan okunamaz)
+à donner à part, par téléphone par exemple ¦ ayrıca ver, örneğin telefonla
+Montrer ou cacher le mot de passe ¦ Parolayı göster ya da gizle
+Quatre mots et un nombre, faciles à dicter ¦ Dört sözcük ve bir sayı, söylemesi kolay
+🎲 En proposer un ¦ 🎲 Bir tane öner
+Copier le mot de passe ¦ Parolayı kopyala
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Parolasız (önerilmez: dosyayı alan herkes okuyabilir ve son tarih artık hiçbir şeyi korumaz)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Uygulama olmadan herhangi bir tarayıcıda açılan tek bir HTML dosyası: e-postayla gönderilir ya da buluta konur. Kendilerini anan cümlelerle birlikte çıkarılanlar: yaşayan ya da muhtemelen yaşayan kişiler (GEDCOM “Paylaşmak için” dışa aktarmasındaki kuralın aynısı), gizli kartlar. Kart numaraları dışarı çıkmaz.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Bu dosyanın neyi koruduğu, neyi korumadığı
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ AES-256-GCM şifreleme, anahtar paroladan türetilir (PBKDF2, {n} tur): parola olmadan içerik (adlar ve başlık dâhil) okunamaz.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ Dosya hiçbir yere bağlanmaz (hiçbir internet adresi çağrılmaz; bunu tarayıcı sağlar).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Son tarih açılışta kontrol edilir, ama parolayı bilen ve bilgisayarının saatini geri alan biri bunu aşabilir ya da gördüğünü kopyalayabilir: bir paylaşım geri alınamaz. Yalnızca dolaşmasını kabul ettiğin şeyleri paylaş.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Parolayı dosyadan farklı bir yoldan gönder (telefon, SMS): ikisi aynı e-postada olursa hiçbir şey korunmaz.
+{n} personnes partagées ¦ Paylaşılan {n} kişi
+{n} retirées (vivantes ou récentes) ¦ Çıkarılan {n} (yaşayan ya da yakın tarihli)
+🔗 Fabriquer le fichier à partager ¦ 🔗 Paylaşılacak dosyayı hazırla
+Le passeport des lieux ¦ Yerlerin pasaportu
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ Ağaçtaki her köy için bir damga: oraya gittiğinde renklenir. Kaç tanesini ziyaret ettin?
+Le carnet des tampons, à imprimer ¦ Yazdırılacak damga defteri
+{n} / {total} lieux visités ¦ {n} / {total} yer ziyaret edildi
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ Ağaçtaki her yerin bir damgası var. Oraya gittiğinde — köy, kilise, belediye, mezarlık —, üzerine tıkla: “Oraya gittim”.
+{n} pers. ¦ {n} kişi
+Le tour du monde des ancêtres ¦ Ataların dünya turu
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ Yerden yere kat edilen kilometreler, en uzun yolculuk, doğduğu yerden en uzak nokta, yüzyıl yüzyıl.
+Tous ensemble ¦ Hep birlikte
+{n} % du chemin vers la Lune ¦ Ay’a giden yolun %{n} kadarı
+Le plus long voyage ¦ En uzun yolculuk
+Le plus loin du berceau ({place}) ¦ Doğduğu yerden en uzak ({place})
+Les grands voyageurs ¦ Büyük gezginler
+Entre le berceau des parents et celui des enfants ¦ Anne ve babanın doğduğu yer ile çocukların doğduğu yer arasında
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Bir ebeveynin doğum yeri ile çocuğunun doğum yeri arasındaki ortalama uzaklık, yüzyıl yüzyıl: köyünden uzaklaşan aile.
+Les maisons dans le temps ¦ Zaman içinde evler
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ Bir köy, bir ev: orada kim yaşadı, ne zamandan ne zamana, kuşaktan kuşağa.
+{n} personnes sur {y} ans ¦ {y} yılda {n} kişi
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: ailenin {y} yıllık varlığı, atalardan {n} kuşak boyunca
+1 sou ¦ 1 sou
+{n} membre de la famille en vie ¦ Hayatta olan {n} aile üyesi
+Pas d’autres nouvelles. ¦ Başka haber yok.
+Rien cette année. ¦ Bu yıl bir şey yok.
+1 franc ¦ 1 frank
+5 francs ¦ 5 frank
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ Bu akşam şu kişinin ailesinden {n} hayat anlatıyoruz: {name}.
+⏳ Ce partage a expiré. ¦ ⏳ Bu paylaşımın süresi doldu.
+Parents : ¦ Anne ve baba:
+Enfants : ¦ Çocuklar:
+Chercher un nom… ¦ Bir ad ara…
+🔒 Ce partage est protégé. ¦ 🔒 Bu paylaşım korumalı.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Paylaşımın geçerlilik sonu: {date}. Yaşayan kişiler dâhil değil.
+l’arbre dit {what} ¦ ağaçtaki bilgi: {what}
+concorde avec l’arbre ({what}) ¦ ağaçla uyuşuyor ({what})
+nouvelle lune ¦ yeni ay
+(sous l’horizon) ¦ (ufkun altında)
+astre|Mars ¦ Mars
+{list} brillaient ¦ Parlayanlar: {list}
+dernier croissant ¦ son hilal
+lune gibbeuse décroissante ¦ küçülen şişkin ay
+Saturne ¦ Satürn
+dernier quartier ¦ son dördün
+{km} km depuis l’étape d’avant ¦ Önceki duraktan bu yana {km} km
+🕯️ Garder la mémoire ¦ 🕯️ Hatırayı korumak
+🔭 Découvrir ¦ 🔭 Keşfet
+Trésor ¦ Hazine
+Récits ¦ Anlatılar
+Chasses au trésor ¦ Hazine avları
+TRÉSORS ¦ HAZİNELER
+trésors ¦ hazineler
+Garde au moins un trésor affiché. ¦ En az bir hazineyi görünür bırak.
+Dossier vide ¦ Boş klasör
+Les trésors n’ont pas pu être lus. ¦ Hazineler okunamadı.
+Broderie — {title} ¦ İşleme — {title}
+Aucun visage connu dans cette lignée ¦ Bu soyda bilinen yüz yok
+La Gazette {y} ¦ Gazete {y}
+Fond d’écran ¦ Duvar kâğıdı
+Pégase ¦ Kanatlı At
+Andromède ¦ Andromeda
+Persée ¦ Perseus
+sous l’horizon ¦ ufkun altında
+date exacte inconnue ¦ kesin tarih bilinmiyor
+Les deux guerres ¦ İki savaş
+(aucun événement daté) ¦ (tarihli olay yok)
+Faire-part — {name} ¦ Duyuru kartı — {name}
+Faire-part ¦ Duyuru kartı
+L’arbre est vide ¦ Ağaç boş
+{n} prénoms transmis par-dessus une génération ¦ Bir kuşağın üzerinden aktarılan {n} ad
+{n} mots expliqués ¦ Açıklanan {n} sözcük
+{n} mot expliqué ¦ Açıklanan {n} sözcük
+Aucun vieux mot reconnu. ¦ Tanınan eski sözcük yok.
+sous l’évier ¦ lavabonun altında
+Les chasses préparées ¦ Hazırlanan avlar
+{n} cachettes ¦ {n} saklanma yeri
+Donne au moins deux cachettes. ¦ En az iki saklanma yeri ver.
+Chasse au trésor ¦ Hazine avı
+La chasse sera effacée. ¦ Av silinecek.
+Carte {n} ¦ Kart {n}
+(à donner au départ) ¦ (başlangıçta verilecek)
+{answer} → cherchez {where} ¦ {answer} → bakın: {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ Tarihi, yeri ya da mesleği olan birkaç ata gerekiyor
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ Rastgele bir gizemli ata
+{n} parties ¦ {n} oyun
+{n} partie ¦ {n} oyun
+🎉 Bravo ! ¦ 🎉 Bravo!
+😶 C’était… ¦ 😶 Buydu…
+🎲 Un autre, au hasard ¦ 🎲 Rastgele başka biri
+{n} essais ratés ¦ {n} yanlış tahmin
+Choisis quelqu’un. ¦ Birini seç.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ Başka bir hayat mümkün olabilirdi… ama seni buraya getiren bu oldu.
+📖 Recommencer ¦ 📖 Yeniden başla
+Tourner la page → ¦ Sayfayı çevir →
+Aucune coïncidence trouvée ¦ Tesadüf bulunamadı
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 {n} hayat hiç var olmayacaktı
+la fenêtre d’impression n’est pas prête. ¦ yazdırma penceresi hazır değil.
+🃏 7 FAMILLES ¦ 🃏 7 AİLE
+(visage repéré) ¦ (yüz bulundu)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Onun kartından (Medya) ekle, sonra buraya dön.
+Jeu remis comme au départ. ¦ Oyun başlangıçtaki gibi yapıldı.
+Donne au moins une équipe. ¦ En az bir takım ver.
+Égalité ! ¦ Berabere!
+{n} point ¦ {n} puan
+Question {n} / {total} ¦ Soru {n} / {total}
+Question suivante ▶ ¦ Sonraki soru ▶
+Vidéo prête. ¦ Video hazır.
+Donne-lui un titre. ¦ Bir başlık ver.
+SOUVENIR DES SENS ¦ DUYULARIN HATIRASI
+Chaque samedi, elle cirait les marches… ¦ Her cumartesi merdivenleri cilalardı…
+La préparation ¦ Hazırlanışı
+CHANSONS DE LA FAMILLE ¦ AİLENİN ŞARKILARI
+Les paroles ¦ Sözler
+Quand on la chantait ¦ Ne zaman söylenirdi
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ On yaşındayken sıradan bir gününü anlat.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Ezbere ne öğrenirdiniz?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Ailede hep anlatılan hikâyeler var mıydı?
+Quel outil ou quel geste te reste dans les mains ? ¦ Hangi alet ya da hangi el hareketi hâlâ ellerinde?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Kocanla, karınla, sevdiğinle nasıl tanıştın?
+Où avez-vous habité au début ? ¦ İlk başta nerede oturdunuz?
+Où étais-tu pendant la guerre ? ¦ Savaş sırasında neredeydin?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Hiç unutmadığın bir gün var mı?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Ev nasıl ısıtılırdı, nasıl aydınlatılırdı?
+Comment fêtait-on Noël ? ¦ Noel nasıl kutlanırdı?
+S’ouvre ¦ Açılış
+L’anniversaire de ¦ Doğum günü:
+À ses ¦ Yaşı:
+La lettre ¦ Mektup
+Écris ici… ¦ Buraya yaz…
+LETTRE AUX DESCENDANTS ¦ TORUNLARA MEKTUP
+✉️ La lettre ¦ ✉️ Mektup
+✉️ Nouvelle lettre ¦ ✉️ Yeni mektup
+🔒 Sceller la lettre ¦ 🔒 Mektubu mühürle
+Choisis une personne dont on connaît la naissance. ¦ Doğumu bilinen bir kişi seç.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Bir şey yaz ya da bir ses, bir video veya bir fotoğraf ekle.
+{n} scellées ¦ {n} mühürlü
+{n} ouvertes ¦ {n} açılmış
+De {from} ¦ Gönderen: {from}
+écrite ¦ yazıldı
+Sommaire ¦ İçindekiler
+ça rappelle {who} ¦ şu kişiyi hatırlatıyor: {who}
+{n} recettes transmises ¦ Aktarılan {n} tarif
+{n} recette transmise ¦ Aktarılan {n} tarif
+Chantée par {who} ¦ Söyleyen: {who}
+Sans enregistrement ¦ Kayıt yok
+(le son reste dans les médias) ¦ (ses medyada kalır)
+Entretien avec {name} ¦ Söyleşi: {name}
+Choisis au moins un thème. ¦ En az bir konu seç.
+Question suivante → ¦ Sonraki soru →
+Passer ¦ Atla
+🔊 Relire ¦ 🔊 Yeniden oku
+J’enregistre l’entretien… ¦ Söyleşiyi kaydediyorum…
+Entretien gardé (sans son). ¦ Söyleşi saklandı (sessiz).
+{n} bougies allumées ¦ Yanan {n} mum
+mélange ¦ karışım
+UNE BOUGIE ¦ BİR MUM
+encore {n} j ¦ {n} gün kaldı
+demain ¦ yarın
+allumée ¦ yandı
+par {name} ¦ yakan: {name}
+Bougie supprimée ¦ Mum silindi
+Bougie supprimée. ¦ Mum silindi.
+Ambiance arrêtée (minuterie). ¦ Ses atmosferi durdu (zamanlayıcı).
+Monte au moins une couche. ¦ En az bir katmanı aç.
+Garder ce mélange ¦ Bu karışımı sakla
+Mélange gardé. ¦ Karışım saklandı.
+« {name} » supprimé. ¦ “{name}” silindi.
+Ce navigateur ne sait pas enregistrer. ¦ Bu tarayıcı kayıt yapamıyor.
+Ambiance — {name} ¦ Ses atmosferi — {name}
+à ¦ –
+Tous les indices s’accordent (vers {y}). ¦ Tüm ipuçları uyuşuyor ({y} sularında).
+Qui cela peut être ¦ Kim olabilir
+Avait {n} ans vers {y} ¦ {y} sularında {n} yaşındaydı
+Reprendre la branche {name} ¦ {name} koluna geri dön
+RAPPEL DE RECHERCHE ¦ ARAŞTIRMA HATIRLATICISI
+Pas touchée depuis {d} ¦ Şu süredir dokunulmadı: {d}
+modifiée ¦ değiştirildi
+Jamais modifiée ¦ Hiç değiştirilmedi
+rien d’évident ne manque ¦ belirgin bir eksik yok
+Thème d’époque arrêté. ¦ Dönem teması kapatıldı.
+châtains ¦ kestane rengi
+coloré ¦ kırmızı benizli
+cicatrice au front ¦ alında yara izi
+{n} passeports rattachés ¦ {n} pasaport bağlı
+{n} affichés ¦ {n} gösteriliyor
+{n} affiché ¦ {n} gösteriliyor
+Dans l’arbre ¦ Ağaçta
+Délivré ¦ Verildi
+son grand-père ¦ dedesi
+sa grand-mère ¦ büyükannesi
+un frère ou une sœur ¦ bir erkek ya da kız kardeş
+{n} faits repérés ¦ {n} bilgi bulundu
+{n} fait repéré ¦ {n} bilgi bulundu
+{n} personne partagée ¦ {n} kişi paylaşıldı
+PASSEPORT ¦ PASAPORT
+🛂 Nouveau passeport ¦ 🛂 Yeni pasaport
+Passeport enregistré. ¦ Pasaport kaydedildi.
+je ne trouve pas d’enregistrements répétés dans ce XML ¦ bu XML içinde tekrarlanan kayıt bulamıyorum
+{n} passeports ¦ {n} pasaport
+aucune ¦ hiçbiri
+un nom, une commune, un métier… ¦ bir ad, bir yerleşim yeri, bir meslek…
+Ce relevé est trop gros (20 Mo au plus). ¦ Bu döküm çok büyük (en fazla 20 MB).
+{n} passeports lus. ¦ {n} pasaport okundu.
+Passeport intérieur ¦ İç pasaport
+＋ Passeport ¦ ＋ Pasaport
+Les passeports n’ont pas pu être lus. ¦ Pasaportlar okunamadı.
+Modifier ce passeport ¦ Bu pasaportu düzenle
+Aucun passeport ne correspond ¦ Eşleşen pasaport yok
+Passeports ¦ Pasaportlar
+Voyageur ¦ Yolcu
+Délivré à ¦ Verildiği yer
+📍 Délivré à ¦ 📍 Verildiği yer
+sorte d’événement introuvable ¦ olay türü bulunamadı
+Aucun fait repéré ¦ Bulunan bilgi yok
+⏹ Arrêter la dictée ¦ ⏹ Dikteyi durdur
+Solide. ¦ Güçlü.
+Oui, quand même ¦ Evet, yine de
+La branche {name} — partagée par la famille ¦ {name} kolu — aile tarafından paylaşıldı
+PASSEPORT DES LIEUX ¦ YERLER PASAPORTU
+Où es-tu né, et dans quelle maison as-tu grandi ? ¦ Nerede doğdun, hangi evde büyüdün?
+Où es-tu née, et dans quelle maison as-tu grandi ? ¦ Nerede doğdun, hangi evde büyüdün?
+À quoi jouais-tu, et avec qui ? ¦ Ne oynardın, kiminle?
+Quelle odeur ou quel bruit te ramène tout de suite à ton enfance ? ¦ Hangi koku ya da ses seni hemen çocukluğuna götürür?
+Qui était la personne la plus importante pour toi, petit ? ¦ Çocukken senin için en önemli kişi kimdi?
+Qui était la personne la plus importante pour toi, petite ? ¦ Çocukken senin için en önemli kişi kimdi?
+Comment allais-tu à l’école ? ¦ Okula nasıl giderdin?
+Te souviens-tu de ton maître ou de ta maîtresse ? ¦ Öğretmenini hatırlıyor musun?
+Jusqu’à quel âge es-tu allé à l’école, et pourquoi ? ¦ Kaç yaşına kadar okula gittin, neden?
+Jusqu’à quel âge es-tu allée à l’école, et pourquoi ? ¦ Kaç yaşına kadar okula gittin, neden?
+Que sais-tu de tes grands-parents ? ¦ Büyükannen ve büyükbaban hakkında ne biliyorsun?
+Quels étaient les métiers de tes parents ? ¦ Annenle babanın meslekleri neydi?
+Y a-t-il un secret ou une brouille dont on parlait à voix basse ? ¦ Fısıltıyla konuşulan bir sır ya da küslük var mıydı?
+Quels prénoms revenaient dans la famille, et pourquoi ? ¦ Ailede hangi adlar tekrar tekrar verilirdi, neden?
+Quel a été ton premier travail, et combien gagnais-tu ? ¦ İlk işin neydi, ne kadar kazanıyordun?
+Raconte une journée de travail. ¦ Bir iş gününü anlat.
+De quoi es-tu le plus fier dans ton métier ? ¦ Mesleğinde en çok neyle gurur duyuyorsun?
+Comment s’est passé le mariage ? ¦ Düğün nasıl geçti?
+Qu’est-ce qui manquait le plus ? ¦ En çok ne eksikti?
+Qui est parti, et qui est revenu ? ¦ Kim gitti, kim geri döndü?
+Décris-moi la maison : les pièces, la cuisine, le jardin. ¦ Bana evi anlat: odaları, mutfağı, bahçeyi.
+Qu’est-ce qu’on mangeait le dimanche ? ¦ Pazar günleri ne yenirdi?
+Quelles étaient les fêtes du village ? ¦ Köyün bayramları nelerdi?
+Quelle chanson chantait-on à la fin des repas ? ¦ Yemeklerin sonunda hangi şarkı söylenirdi?
+Qu’est-ce que tu aimerais que tes arrière-petits-enfants sachent de toi ? ¦ Torunlarının çocuklarının senin hakkında ne bilmesini isterdin?
+Quel conseil donnerais-tu à quelqu’un de vingt ans ? ¦ Yirmi yaşındaki birine ne öğüt verirdin?
+Qu’est-ce qui a le plus changé dans ta vie ? ¦ Hayatında en çok ne değişti?
+{n} livre ¦ {n} livre
+{n} livres ¦ {n} livre
+{n} franc ¦ {n} frank
+{n} francs ¦ {n} frank
+{n} euro ¦ {n} avro
+unité|en ¦ cinsinden
+année|à ¦ ile
+date|Le ¦ Tarih:
+force|faible ¦ zayıf
+force|correct ¦ orta
+force|solide ¦ güçlü
+aucune|personne ¦ hiç kimse
+signalement|1 m 65 ¦ 1 m 65
+signalement|châtains ¦ kestane rengi
+signalement|gris ¦ gri
+signalement|aquilin ¦ kemerli
+signalement|rond ¦ yuvarlak
+signalement|ovale ¦ oval
+signalement|coloré ¦ kırmızı benizli
+signalement|brune ¦ esmer
+signalement|cicatrice au front ¦ alında yara izi
+soit {n} baguette d’aujourd’hui ¦ yani bugünkü fiyatla {n} baget
+De la Révolution au Second Empire, il fallait un passeport pour aller d’un département à l’autre ; il portait le <b>signalement</b> du voyageur, une description qui remplace souvent la photo qu’on n’a pas. Les relevés publiés (par exemple les passeports intérieurs de Saint-Brieuc, 1830-1839, sur data.gouv.fr) s’importent ici : télécharge le fichier, puis « Importer un relevé ». ¦ Fransız Devrimi’nden İkinci İmparatorluk’a kadar bir departmandan ötekine gitmek için pasaport gerekirdi; pasaportta yolcunun <b>eşkâli</b> yazardı: elimizde olmayan fotoğrafın yerini çoğu zaman bu tarif tutar. Yayımlanmış dökümler (örneğin Saint-Brieuc iç pasaportları, 1830-1839, data.gouv.fr sitesinde) buradan içe aktarılır: dosyayı indir, sonra “Döküm içe aktar”.
+🎲 Jouer en famille ¦ 🎲 Ailece oyna
+🎨 Créer et fabriquer ¦ 🎨 Oluştur ve yap
+🗺️ Lieux et voyages ¦ 🗺️ Yerler ve yolculuklar
+🧰 Outils malins ¦ 🧰 Akıllı araçlar
+L’atelier de mise en page n’est pas disponible ici. ¦ Sayfa düzeni atölyesi burada kullanılamıyor.
+Une copie est rangée dans les médias (et sur la fiche) : « {title} ». ¦ Bir kopya medyaya (ve karta) kaydedildi: “{title}”.
+Une copie est rangée dans les médias : « {title} ». ¦ Bir kopya medyaya kaydedildi: “{title}”.
+Ouvrir dans la mise en page ¦ Sayfa düzeninde aç
+Pour tout retravailler (textes, cadres, pages) ¦ Her şeyi yeniden işlemek için (metinler, çerçeveler, sayfalar)
+⤓ Exporter ¦ ⤓ Dışa aktar
+🖨 Imprimer ▾ ¦ 🖨 Yazdır ▾
+Les trésors et leurs dossiers ¦ Hazineler ve klasörleri
+Réordonner les trésors ¦ Hazineleri yeniden sırala
+Ordre et trésors affichés enregistrés. ¦ Sıra ve gösterilen hazineler kaydedildi.
+Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre. ¦ Ağacından yola çıkarak hayran kalmak, oynamak, oluşturmak ve anıları korumak için.
+⚙️ Réglages pour y ranger des trésors (ou l’effacer). ¦ ⚙️ İçine hazine koymak (ya da silmek) için ayarlar.
+＋ Souvenir ¦ ＋ Anı
+＋ Lettre ¦ ＋ Mektup
+Aucun trésor pour l’instant ¦ Şimdilik hazine yok
+Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors. ¦ Bir anı (bir koku, bir ses), bir tarif, bir şarkı, ileride açılacak bir mektup, kaydedilmiş bir söyleşi… hepsi ✨ Hazineler sekmesinde saklanır.
+Grille de broderie ¦ Nakış şeması
+Un carré = un point de croix ; les traits épais tous les 10 points. ¦ Bir kare = bir çarpı işi ilmeği; kalın çizgiler her 10 ilmekte bir.
+Aucun portrait dans l’arbre ¦ Ağaçta portre yok
+Ajoute une photo de portrait sur les fiches, ou encadre les visages dans la visionneuse. ¦ Kartlara portre fotoğrafı ekle ya da görüntüleyicide yüzleri çerçeve içine al.
+{list}. Ajoute des portraits ou encadre les visages sur les photos. ¦ {list}. Portre ekle ya da fotoğraflardaki yüzleri çerçeve içine al.
+Le visage moyen de {n} génération ¦ {n} kuşağın ortalama yüzü
+{n} sous ¦ {n} sou
+Il faut des ancêtres avec une date de naissance ¦ Doğum tarihi olan atalar gerekli
+premier croissant ¦ büyüyen hilal
+premier quartier ¦ ilk dördün
+lune gibbeuse croissante ¦ büyüyen şişkin ay
+{place} (pas placé sur la carte : ciel de Paris) ¦ {place} (haritada yeri yok: Paris gökyüzü)
+il faisait jour : voici les étoiles cachées par le soleil ¦ gündüzdü: işte güneşin gizlediği yıldızlar
+Il faut au moins l’année de naissance. ¦ En az doğum yılı gerekli.
+⚠️ Date exacte inconnue : ciel du 1er juillet. ¦ ⚠️ Kesin tarih bilinmiyor: 1 Temmuz gökyüzü.
+⚠️ Lieu non placé sur la carte. ¦ ⚠️ Yer haritaya yerleştirilmemiş.
+Il faut au moins l’année de naissance pour voir le ciel. ¦ Gökyüzünü görmek için en az doğum yılı gerekli.
+Pas de portrait sur cette fiche. ¦ Bu kartta portre yok.
+Avant 1700 ¦ 1700’den önce
+Le XVIIIe siècle ¦ 18. yüzyıl
+Révolution et Empire ¦ Devrim ve İmparatorluk
+Le XIXe siècle ¦ 19. yüzyıl
+Depuis 1946 ¦ 1946’dan beri
+Aucune signature repérée pour l’instant ¦ Şimdilik imza bulunmadı
+Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque. ¦ Medya görüntüleyicide bir belge aç, sonra “＋ İmza tanımla”: imzayı çerçeve içine al ve kimin olduğunu söyle. İmza buraya gelir, döneme göre sıralanır.
+Pas d’ancêtres connus pour cette personne ¦ Bu kişinin bilinen atası yok
+Aucun prénom ne saute de génération dans l’arbre pour l’instant ¦ Ağaçta şimdilik bir kuşak atlayan ad yok
+laboureur, brumaire, dot… ¦ laboureur, brumaire, dot…
+(passe la souris dessus) : ¦ (fareyle üzerine gel):
+L’arbre ne donne que {n} énigmes : enlève des cachettes. ¦ Ağaç yalnızca {n} bilmece veriyor: birkaç saklanma yerini çıkar.
+L’arbre ne donne que {n} énigme : enlève des cachettes. ¦ Ağaç yalnızca {n} bilmece veriyor: birkaç saklanma yerini çıkar.
+Chasse prête : imprime les cartes. ¦ Av hazır: kartları yazdır.
+Supprimer ? ¦ Silinsin mi?
+sous le lit ¦ yatağın altında
+dans le four ¦ fırının içinde
+derrière le canapé ¦ kanepenin arkasında
+dans la baignoire ¦ küvetin içinde
+dans le panier à linge ¦ kirli çamaşır sepetinde
+derrière la porte du garage ¦ garaj kapısının arkasında
+dans la boîte à chaussures ¦ ayakkabı kutusunda
+sous le coussin ¦ minderin altında
+dans le pot de fleurs ¦ saksının içinde
+au fond du frigo ¦ buzdolabının en dibinde
+sous la table de la cuisine ¦ mutfak masasının altında
+sous le tapis ¦ halının altında
+(à cacher : {where}) ¦ (saklanacak yer: {where})
+C’est la dernière : le trésor vous attend ! ¦ Bu sonuncusu: hazine sizi bekliyor!
+<b>Pour l’organisateur.</b> Donnez la carte 1 aux joueurs. Cachez chaque carte suivante à l’endroit indiqué en haut de la carte. Le trésor ({treasure}) va à : {where}. ¦ <b>Düzenleyen için.</b> 1. kartı oyunculara verin. Sonraki her kartı, kartın üstünde yazan yere saklayın. Hazine ({treasure}) şuraya konur: {where}.
+à vous de choisir ¦ seçim sizin
+{n} essai raté ¦ {n} yanlış tahmin
+Non, ce n’est pas ça… un indice de plus. ¦ Hayır, o değil… bir ipucu daha.
+Il faut un ancêtre avec une date de naissance et un métier ou un mariage ¦ Doğum tarihi ve bir mesleği ya da evliliği olan bir ata gerekli
+Tu as fait {n} choix sur {total} comme {name}. ¦ {total} seçimden {n} tanesini {name} gibi yaptın.
+Une vie vécue à l’identique : tu connais bien ton ancêtre ! ¦ Birebir aynı yaşanmış bir hayat: atanı iyi tanıyorsun!
+Avec tes choix, l’histoire de la famille aurait été tout autre. ¦ Senin seçimlerinle ailenin hikâyesi bambaşka olurdu.
+✨ Le même choix que ton ancêtre ! ¦ ✨ Atanla aynı seçim!
+🌀 Une autre vie commence… mais revenons à la vraie. ¦ 🌀 Başka bir hayat başlıyor… ama gerçeğine dönelim.
+Il faut des dates précises (jour et mois). ¦ Kesin tarihler (gün ve ay) gerekli.
+{pct} % de l’arbre. ¦ Ağacın %{pct} kadarı.
+Personne ne descend de ce choix dans l’arbre ¦ Ağaçta bu seçimden gelen kimse yok
+Portrait de la fiche ¦ Kartın portresi
+Aucune photo jointe à cette fiche, ni de visage encadré sur une photo ¦ Bu karta ekli fotoğraf yok, bir fotoğrafta çerçeve içine alınmış yüz de yok
+🔍 Zoom ¦ 🔍 Yakınlaştır
+Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ¦ Yerleştirmek için fotoğrafı çerçevenin içinde sürükle; fare tekerleği (ya da + ve −) yakınlaştırır.
+Les photos marquées d’un visage se recadrent toutes seules sur lui. ¦ Yüzü işaretlenmiş fotoğraflar kendiliğinden o yüze göre kırpılır.
+Pas encore assez de familles ¦ Henüz yeterli aile yok
+Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ». ¦ En az altı (ölmüş) kişilik en az iki aile gerekli: ağacı tamamla ya da “kola göre” seçeneğini dene.
+{n} famille de 6 cartes ({total} cartes). ¦ 6 kartlık {n} aile ({total} kart).
+🃏 Le jeu des {n} familles ¦ 🃏 {n} aile oyunu
+Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille {fam}, je voudrais {role} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné. ¦ Herkese 6 kart dağıtın, kalanlar desteyi oluşturur. Sıra sana gelince, elinde kartı olan bir aileden bir oyuncudan kart iste (“{fam} ailesinden {role} istiyorum”). Kartı varsa sana verir ve yeniden oynarsın; yoksa “Desteden çek!”. Tamamlanan aile önüne konur. En çok aileyi toplayan kazanır.
+Les familles : {list}. ¦ Aileler: {list}.
+Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière. ¦ Çift taraflı yazdırma (uzun kenar): her arka yüz sayfası kendi kart sayfasının ardından gelir ve tam arkaya denk gelecek şekilde önceden çevrilmiştir.
+Ajoute des personnes pour dessiner leur arbre. ¦ Ağaçlarını çizmek için kişi ekle.
+L’arbre est trop petit pour faire des questions. ¦ Ağaç, soru hazırlamak için çok küçük.
+Voir la réponse (Entrée) ¦ Cevabı gör (Enter)
+✕ Fin ¦ ✕ Bitir
+Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film ¦ Filmi yapmak için haritaya yerleştirilmiş (enlem ve boylam) ve tarihli yerler gerekli
+🔴 Enregistrement… ¦ 🔴 Kaydediliyor…
+Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude) ¦ Ağaçtaki hiçbir yer haritaya yerleştirilmemiş (enlem ve boylam)
+Aucun lieu placé sur la carte pour cette personne ¦ Bu kişi için haritaya yerleştirilmiş yer yok
+La position n’est pas disponible sur cet appareil. ¦ Bu cihazda konum kullanılamıyor.
+📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m) ¦ 📍 Konumunu arıyorum… (her durağın hikâyesi 300 m yakına gelince kendiliğinden okunacak)
+dans {n} jour ¦ {n} gün sonra
+dans {n} mois ¦ {n} ay sonra
+dans {n} ans ¦ {n} yıl sonra
+De la part de (une fiche, ou un nom) ¦ Gönderen (bir kart ya da bir ad)
+Pour (ex. « Léa », « mes petits-enfants », « celui qui reprendra la maison ») ¦ Alıcı (ör. “Léa”, “torunlarım”, “evi devralacak kişi”)
+à une date ¦ bir tarihte
+à un anniversaire ¦ bir doğum gününde
+Un son, une vidéo ou une photo (facultatif) ¦ Bir ses, bir video ya da bir fotoğraf (isteğe bağlı)
+Choisis le jour où la lettre s’ouvrira. ¦ Mektubun açılacağı günü seç.
+La date doit être dans le futur (sinon ce n’est plus une surprise). ¦ Tarih gelecekte olmalı (yoksa sürpriz olmaz).
+Pour ses {n} ans ¦ {n}. yaş günü için
+à ses {n} ans ¦ {n} yaşında
+Lettre enregistrée. ¦ Mektup kaydedildi.
+🔒 Lettre scellée : elle s’ouvrira le {date}. ¦ 🔒 Mektup mühürlendi. Açılış tarihi: {date}.
+🔒 En attente ¦ 🔒 Bekliyor
+La lettre sera effacée pour de bon. ¦ Mektup kalıcı olarak silinecek.
+Supprimer la lettre ? ¦ Mektup silinsin mi?
+Cet élément sera effacé pour de bon. ¦ Bu öğe kalıcı olarak silinecek.
+Rien à mettre dans le livre pour l’instant. ¦ Şimdilik kitaba konacak bir şey yok.
+de la famille ¦ aileden
+Le souvenir en quelques mots ¦ Birkaç kelimeyle anı
+L’odeur de la cire dans l’escalier ¦ Merdivendeki cila kokusu
+Ça rappelle (une fiche, ou un nom) ¦ Hatırlattığı (bir kart ya da bir ad)
+la maison de Naves ¦ Naves’taki ev
+vers 1950, l’été ¦ vers 1950, l’été
+Un son, une photo (facultatif) ¦ Bir ses, bir fotoğraf (isteğe bağlı)
+LIVRE DE RECETTES ¦ TARİF KİTABI
+Le nom de la recette ¦ Tarifin adı
+Le clafoutis de Rose ¦ Rose’un clafoutis tatlısı
+La recette de (une fiche, ou un nom) ¦ Tarifin sahibi (bir kart ya da bir ad)
+Pour combien ¦ Kaç kişilik
+pour 6 ¦ 6 kişilik
+Les ingrédients (un par ligne) ¦ Malzemeler (her satıra bir tane)
+500 g de cerises noires ¦ 500 g siyah kiraz
+3 œufs ¦ 3 yumurta
+Son histoire (d’où elle vient, quand on la faisait) ¦ Hikâyesi (nereden geldiği, ne zaman yapıldığı)
+Une photo du plat ou de la fiche écrite à la main ¦ Yemeğin ya da elle yazılmış tarif kartının fotoğrafı
+sur l’air de « {tune} » ¦ “{tune}” ezgisiyle
+Le titre (ou le premier vers) ¦ Başlık (ya da ilk dize)
+Chantée par (une fiche, ou un nom) ¦ Söyleyen (bir kart ya da bir ad)
+Sur l’air de ¦ Ezgisi
+L’enregistrement (son ou vidéo) ¦ Kayıt (ses ya da video)
+Le carnet de chansons ¦ Şarkı defteri
+{n} chansons de la famille ¦ Aileden {n} şarkı
+{n} chanson de la famille ¦ Aileden {n} şarkı
+Supprimer la fiche de l’entretien ¦ Söyleşi kartını sil
+La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias. ¦ Söyleşi kartı (sorular ve işaretler) silinecek; ses medyada kalır.
+Le micro n’est pas disponible : l’entretien continue sans enregistrement (note les réponses). ¦ Mikrofon kullanılamıyor: söyleşi kayıt olmadan sürüyor (cevapları not et).
+Notes rapides (facultatif) ¦ Hızlı notlar (isteğe bağlı)
+← Précédente ¦ ← Önceki
+Dernière question : terminer ¦ Son soru: bitir
+▶ Reprendre ¦ ▶ Sürdür
+⏸ Pause ¦ ⏸ Duraklat
+⏹ Terminer ¦ ⏹ Bitir
+Entretien enregistré : le son est dans les médias de la fiche. ¦ Söyleşi kaydedildi: ses, kartın medyasında.
+Personne à raconter de ce côté-là. ¦ Bu tarafta anlatılacak kimse yok.
+Un mot (facultatif) ¦ Bir not (isteğe bağlı)
+Choisis pour qui. ¦ Kimin için olduğunu seç.
+🕯️ Une bougie brûle pour {name} pendant {n} jours. ¦ 🕯️ {n} gün boyunca bir mum yanıyor. Kimin için: {name}.
+📖 Le registre ¦ 📖 Kayıt defteri
+Son nom : ¦ Adı:
+Le nom de ce mélange ¦ Bu karışımın adı
+Choisis d’abord un de tes mélanges. ¦ Önce karışımlarından birini seç.
+Enregistrement de {d} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt). ¦ Kayıt: {d}. Dosya sonunda gelir (daha erken bitirmek için yeniden ⤓ Dışa aktar → ses dosyası).
+Ce navigateur ne sait pas fabriquer de fichier son. ¦ Bu tarayıcı ses dosyası oluşturamıyor.
+Je fabrique le fichier son… ¦ Ses dosyasını oluşturuyorum…
+Les indices ne s’accordent pas tous : {n} sur {total} tombent dans cette période. Revois celui qui détonne. ¦ İpuçlarının hepsi uyuşmuyor: {total} ipucundan {n} tanesi bu döneme düşüyor. Uymayanı yeniden gözden geçir.
+Personne dans l’arbre n’avait cet âge pendant cette période. ¦ Ağaçta bu dönemde bu yaşta kimse yoktu.
+Indique l’âge apparent pour voir qui ça peut être. ¦ Kim olabileceğini görmek için görünen yaşı gir.
+⏰ Me le rappeler ¦ ⏰ Bana hatırlat
+Le rappel ¦ Hatırlatma
+Écris le rappel. ¦ Hatırlatmayı yaz.
+Choisis la date du rappel. ¦ Hatırlatma tarihini seç.
+⏰ Rappel créé pour le {date} (Listes → Rappels). ¦ ⏰ Hatırlatma oluşturuldu. Tarih: {date} (Listeler → Hatırlatmalar).
+Archives à trouver ¦ Bulunacak arşivler
+{n} recherche à faire sur 6 générations ¦ 6 kuşakta yapılacak {n} araştırma
+Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu ¦ 6 kuşakta eksik bir şey yok ya da yardımcı okunamadı
+Les fiches prennent maintenant les couleurs de leur époque. ¦ Kartlar artık kendi dönemlerinin renklerini alıyor.
+Signes particuliers ¦ Özel işaretler
+pour voyager d’un département à l’autre ¦ bir departmandan ötekine yolculuk için
+pour aller à l’étranger ¦ yurt dışına gitmek için
+Date de délivrance ¦ Veriliş tarihi
+Motif du voyage ¦ Yolculuğun nedeni
+Le signalement ¦ Eşkâl
+🛂 Le passeport ¦ 🛂 Pasaport
+Le voyageur ¦ Yolcu
+Choisis le voyageur. ¦ Yolcuyu seç.
+{what} de {name} ({date}) ¦ {what} — {name} ({date})
+ce XML contient des déclarations (DOCTYPE ou ENTITY) : il est refusé par prudence ¦ bu XML bildirimler içeriyor (DOCTYPE ya da ENTITY): güvenlik için reddedildi
+le fichier XML est abîmé ¦ XML dosyası bozuk
+Fermer le relevé ¦ Dökümü kapat
+Le passeport sera effacé. ¦ Pasaport silinecek.
+Rattaché à {name}. ¦ Bağlandı: {name}.
+{n} correspondances possibles avec l’arbre (en tête) ¦ Ağaçla {n} olası eşleşme (başta)
+{n} correspondance possible avec l’arbre (en tête) ¦ Ağaçla {n} olası eşleşme (başta)
+Aucun passeport pour l’instant. ¦ Şimdilik pasaport yok.
+Avant 1860, pour voyager en France, il fallait un passeport intérieur avec son signalement : s’il en existe un, ajoute-le ici. ¦ 1860’tan önce Fransa’da yolculuk etmek için eşkâli yazılı bir iç pasaport gerekirdi: varsa buraya ekle.
+＋ Nouveau passeport intérieur ¦ ＋ Yeni iç pasaport
+Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors. ¦ Ailenin pasaportları: iç pasaport (bir departmandan ötekine yolculuk için, 1860 civarına kadar) ve yurt dışı pasaportu. Kartta (🛂 Pasaportlar bloğu) ya da ✨ Hazineler bölümünde girilir.
+Chercher… (voyageur, destination, motif, profession) ¦ Ara… (yolcu, varış yeri, neden, meslek)
+Passeport pour l’étranger ¦ Yurt dışı pasaportu
+Pour l’étranger ¦ Yurt dışı için
+pas encore dans l’arbre ¦ henüz ağaçta değil
+mariage pas encore daté dans l’arbre ¦ evlilik ağaçta henüz tarihlenmemiş
+concorde ({what}) ¦ uyuşuyor ({what})
+pas de métier dans l’arbre ¦ ağaçta meslek yok
+ce lieu est déjà dans l’arbre ¦ bu yer zaten ağaçta
+ce lieu n’est pas encore sur la fiche ¦ bu yer henüz kartta değil
+👶 Naissance ¦ 👶 Doğum
+🕯️ Décès ¦ 🕯️ Ölüm
+💍 Mariage ¦ 💍 Evlilik
+🔨 Métier ¦ 🔨 Meslek
+🏠 Domicile ¦ 🏠 İkamet
+un mariage s’ajoute depuis la fiche du couple ¦ evlilik, çiftin kartından eklenir
+D’après le récit de {name} : « {text} » ¦ Anlatan: {name} — “{text}”
+＋ Ajouter à la fiche ¦ ＋ Karta ekle
+Rien n’est changé sans ton accord : « Ajouter à la fiche » crée un événement avec la phrase du récit comme source. ¦ Onayın olmadan hiçbir şey değişmez: “Karta ekle”, anlatıdaki cümleyi kaynak olarak kullanan bir olay oluşturur.
+Essaie des phrases comme « Mon père était boulanger », « Ma mère est née en 1932 à Tulle ». ¦ “Mon père était boulanger”, “Ma mère est née en 1932 à Tulle” gibi (Fransızca) cümleler dene.
+Ajouté à la fiche. ¦ Karta eklendi.
+Le récit est vide : dicte-le, colle-le ou recopie-le. ¦ Anlatı boş: söyleyerek yazdır, yapıştır ya da elle yaz.
+Le récit de {name} ({date}) ¦ Anlatı: {name} ({date})
+Récit enregistré (bloc ✨ Trésors de la fiche). ¦ Anlatı kaydedildi (kartın ✨ Hazineler bloğu).
+Trop court : quelqu’un d’obstiné pourrait le deviner en essayant beaucoup de mots de passe sur le fichier. ¦ Çok kısa: inatçı biri dosya üzerinde çok sayıda parola deneyerek bunu tahmin edebilir.
+Correct pour un partage de quelques semaines. ¦ Birkaç haftalık bir paylaşım için yeterli.
+Une branche de famille partagée ¦ Paylaşılan bir aile kolu
+{n} retirée (vivantes ou récentes) ¦ {n} çıkarıldı (yaşayan ya da yakın tarihli)
+Mot de passe copié. ¦ Parola kopyalandı.
+Personne à partager dans cette branche. ¦ Bu kolda paylaşılacak kimse yok.
+Choisis un mot de passe (ou « 🎲 En proposer un »), ou coche « Sans mot de passe ». ¦ Bir parola seç (ya da “🎲 Bir tane öner”) veya “Parolasız” kutusunu işaretle.
+Ce mot de passe est court : quelqu’un d’obstiné pourrait le trouver en essayant beaucoup de mots de passe. Fabriquer le fichier quand même ? ¦ Bu parola kısa: inatçı biri çok sayıda parola deneyerek bulabilir. Dosya yine de oluşturulsun mu?
+Mot de passe faible ¦ Zayıf parola
+Choisis jusqu’à quand le partage est valable. ¦ Paylaşımın ne zamana kadar geçerli olacağını seç.
+Une branche de la famille — partagée par la famille ¦ Ailenin bir kolu — aile tarafından paylaşıldı
+Fichier prêt : envoie-le, et donne le mot de passe à part. ¦ Dosya hazır: gönder ve parolayı ayrıca ver.
+Aucun lieu dans l’arbre ¦ Ağaçta yer yok
+✅ J’y suis allé ¦ ✅ Oraya gittim
+Retirer le tampon ¦ Damgayı kaldır
+Il faut des lieux placés sur la carte et datés pour compter les kilomètres ¦ Kilometreleri saymak için haritaya yerleştirilmiş ve tarihli yerler gerekli
+Il faut au moins un lieu où deux personnes de l’arbre ont vécu ¦ Ağaçtan iki kişinin yaşadığı en az bir yer gerekli
+{place} : {y} ans de présence de la famille, sur {n} génération d’ancêtres ¦ {place}: ailenin {y} yıllık varlığı, {n} ata kuşağı boyunca
+{place} : {y} ans de présence de la famille ¦ {place}: ailenin {y} yıllık varlığı
+portrait ✓ ¦ portre ✓
+✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche ¦ ✨ Bir hayatın hikâyesi: bu karttan hazır bir slayt gösterisi
+Récit d’une vie en diaporama ¦ Slayt gösterisi olarak bir hayatın hikâyesi
+Pour tes 18 ans ¦ 18. yaş günün için
+Quand ¦ Ne zaman
+Raconte ¦ Anlat
+Passeport ¦ Pasaport
+Barbe ¦ Sakal

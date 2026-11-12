@@ -1,0 +1,2121 @@
+fr ¦ tr
+Rez-de-chaussée ¦ Zemin kat
+Cave ¦ Mahzen
+1er étage ¦ 1. kat
+{level}e étage ¦ Kat {level}
+Maison de famille ¦ Aile evi
+Époque sans nom ¦ Adsız dönem
+Barre du haut ¦ Üst çubuk
+Barre de la vue 3D ¦ 3B görünüm çubuğu
+Vues dessus / face / côté ¦ Üstten / önden / yandan görünümler
+Revêtement sur {what} de mur ¦ Duvar kaplaması: {what}
+=face ¦ yüz|yüz
+=mur ¦ duvar|duvar
+=étage ¦ kat|kat
+=trait ¦ çizgi|çizgi
+=objet trouvé ¦ nesne bulundu|nesne bulundu
+Aucune pièce tracée ¦ Çizilmiş oda yok
+Pièces et surfaces ¦ Odalar ve alanlar
+Plan du ¦ Planın tarihi
+double hauteur (vide au-dessus) ¦ çift yükseklik (üstü açık)
+trémie de l’escalier ¦ merdiven boşluğu
+escalier (plancher fermé) ¦ merdiven (döşeme kapalı)
+VIDE ¦ BOŞLUK
+vide sur {name} ¦ boşluk, altı: {name}
+maison|Vide ¦ Boşluk
+sans plancher ¦ döşemesiz
+m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Çatı eğimi altında 1,80 m’den az
+🕰 Fantôme : {name} ¦ 🕰 Hayalet: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · sehim {arrow}
+{len} pour fermer en rectangle ¦ dikdörtgen olarak kapatmak için {len}
+départ (clic : fermer) ¦ başlangıç (tıkla: kapat)
+maison|départ ¦ başlangıç
+Posé sous l’étage « {name} ». ¦ Şu katın altına kondu: “{name}”.
+📐 {area} m² au sol ¦ 📐 {area} m² taban
+{area} m² au sol ¦ {area} m² taban
+{carrez} m² loi Carrez ¦ {carrez} m² Carrez yasası
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² Carrez yasası (yükseklik ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (ayakta durulabilen yerler: 1,80 m ve üzeri, planda taralı)
+Habitant : {role} — ouvrir la fiche ¦ Oturan: {role} — kartı aç
+Habitant — ouvrir la fiche ¦ Oturan — kartı aç
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Odaya bağlı: “{room}” — kartı aç
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — dönem: {era} — bulunduğu kartı aç
+{label} — ouvrir la fiche où il est ¦ {label} — bulunduğu kartı aç
+🏷 Les souvenirs de la maison ¦ 🏷 Evin anıları
+Aller à « {where} » et voir le souvenir ¦ Şuraya git ve anıyı gör: “{where}”
+Soleil calculé pour {place} ({lat}° N). ¦ Güneş şu yer için hesaplandı: {place} ({lat}° K).
+le lieu de la maison ¦ evin yeri
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Evin yerinin koordinatları yok: güneş Fransa’nın merkezi için hesaplandı.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Gece, yerleştirdiğin lambalar yanar (3B görünüm → ☀️ Işık).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Başlamak için: ⬚ <b>bir oda sürükle</b> (duvarları kendiliğinden oluşur) ya da ▬ duvarları tek tek çiz. ▨ Bir <b>boşluk</b> (asma kat, çift yükseklik) üst katta çizilir. Sonra 🚪 kapılar ve 🪟 pencereler (duvara bir tık) ve <b>mobilya</b> (yandaki sekme).
+{area} m² habitables ¦ {area} m² yaşam alanı
+Face côté {rooms} ¦ Şu tarafa bakan yüz: {rooms}
+Face extérieure (façade) ¦ Dış yüz (cephe)
+Les murs de « {name} » ¦ Odanın duvarları: “{name}”
+la pièce ¦ oda
+Les murs de toutes les pièces de cet étage ¦ Bu kattaki tüm odaların duvarları
+Toutes les façades de cet étage ¦ Bu katın tüm cepheleri
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Evdeki tüm odaların duvarları (tüm katlar)
+Toutes les façades de la maison (tous les étages) ¦ Evin tüm cepheleri (tüm katlar)
+Vide sur « {room} » ({floor}). ¦ Boşluk, altı: “{room}” ({floor}).
+Vide sur l’étage « {floor} ». ¦ Boşluk, altındaki kat: “{floor}”.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Bu en alt kat: bu boşluk hiçbir yere açılmıyor.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} toplam · çevre {p}
+La face de {walls} tournée vers la pièce. ¦ Odaya bakan yüz: {walls}.
+Années de {name} ¦ Yıllar: {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Yükseklik: katın yüksekliği + döşeme ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {rise} cm yüksekliğinde {n} basamak, basamak genişliği {going} cm · 2 h + g = {sum} cm|{rise} cm yüksekliğinde {n} basamak, basamak genişliği {going} cm · 2 h + g = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Üstteki döşemeyi aç (“{name}”)
+Ouvrir le plancher au-dessus ¦ Üstteki döşemeyi aç
+posé sur « {name} » : il le suit ¦ şunun üzerine kondu: “{name}”; onu izler
+un objet ¦ bir nesne
+Georgia (de départ) ¦ Georgia (başlangıçtaki)
+État d’origine ¦ Özgün durum
+Époque modifiée ¦ Dönem değiştirildi
+Nouvelle époque : {name} ¦ Yeni dönem: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Dönemler kaldırıldı (“{name}” planı tarihsiz olarak kalır)
+Époque « {name} » supprimée avec son plan ¦ Dönem planıyla birlikte silindi: “{name}”
+{name} est déjà rattaché. ¦ Zaten bağlı: {name}.
+🏠 un habitant y est ¦ 🏠 içinde bir oturan var
+Posé sur « {name} » ¦ Şunun üzerine kondu: “{name}”
+Posé au sol ¦ Yere kondu
+Pièce {n} ¦ Oda {n}
+Pièce de {area} m² ¦ {area} m² oda
+Vide sur {name} ¦ Boşluk, altı: {name}
+Mezzanine ¦ Asma kat
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Asma kat kondu (“Asma kat” katı eklendi): {room} üzerinde boşluk, korkuluk ve merdiven.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Asma kat şu kata kondu: “{floor}”; {room} üzerinde boşluk, korkuluk ve merdiven.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm çok kısa: metre için “{typed} m” yaz.
+{name} posé ¦ Kondu: {name}
+{msg} — et maintenant le deuxième point. ¦ {msg} — şimdi ikinci nokta.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ Ölçekli: seçilen uzunluk {len}. Sonra “✏️ Duvarları kopyala” (Kat sekmesi).
+Plan ancien redressé ({deg}°) ¦ Eski plan düzeltildi ({deg}°)
+Souvenir ¦ Anı
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Bir anı bağla: “{name}”
+Un souvenir pour « {name} » ¦ Bir anı: “{name}”
+✍ Un récit pour « {name} » ¦ ✍ Bir anlatı: “{name}”
+👤 Une personne liée à « {name} » ¦ 👤 Bağlı bir kişi: “{name}”
+Ce qui s’y est passé ¦ Orada olanlar
+Réglage « {name} » appliqué ¦ Ayar uygulandı: “{name}”
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Bu ayar başka bir araca ait (“{tool}”): onu Ev’e değil, o araca içe aktar.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ “{name}” adında bir ayar zaten var. İçe aktarılan ayarın adı:
+{lines} et {texts}. ¦ {lines} ve {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Her çizgi bir duvar olur; “pièce / room” katmanındaki kapalı bir çevre, içine konan metinle adlandırılan bir oda olur.
+Pas repris : {what}. ¦ Alınmayanlar: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Bu kat ({name}), içindekilere ek olarak
+{walls}, {rooms} et {texts} importés. ¦ İçe aktarıldı: {walls}, {rooms} ve {texts}.
+🔁 Répéter cette fenêtre ¦ 🔁 Bu pencereyi tekrarla
+🔁 Répéter cette porte ¦ 🔁 Bu kapıyı tekrarla
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Aynı duvar boyunca, öteki ucuna doğru kopyalar (duvar: {len}).
+🔁 Répéter « {name} » ¦ 🔁 Tekrarla: “{name}”
+{name} (à {len}) ¦ {name} ({len} uzakta)
+{copies} de « {name} ». ¦ “{name}”: {copies}.
+Vue 3D ¦ 3B görünüm
+Au-dessus : {name} ¦ Üstte: {name}
+En dessous : {name} (cave, sous-sol) ¦ Altta: {name} (mahzen, bodrum)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Şunun duvarlarını al (ve pencerelerini): “{name}”
+{name} ajouté ¦ Eklendi: {name}
+Étages ¦ Katlar
+{name} (murs repris) ¦ {name} (duvarlar alındı)
+Étage « {name} » supprimé ¦ Kat silindi: “{name}”
+Maison de {place} ¦ Ev: {place}
+✓ Toit retiré ¦ ✓ Çatı kaldırıldı
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Çatı eklendi: en üst kattan görünür (“{name}”)
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Çatı eklendi: duvarların üzerine oturur (şimdilik duvar yok)
+✓ Toit ajouté ¦ ✓ Çatı eklendi
+Arrêt {n} de la visite guidée ¦ Rehberli gezinin {n}. durağı
+{label} — ouvrir la fiche ¦ {label} — kartı aç
+Habitant ¦ Oturan
+{label} — époque : {era} ¦ {label} — dönem: {era}
+{what} sur {total} ¦ {what} / {total}
+Supprimer la maison « {name} » ? ¦ “{name}” evi silinsin mi?
+Supprimer la maison ¦ Evi sil
+🕰 époque : {name} ¦ 🕰 dönem: {name}
+aucune époque choisie ¦ dönem seçilmedi
+mètres ¦ metre
+centimètres ¦ santimetre
+millimètres ¦ milimetre
+pieds ¦ ayak
+toises (1,949 m) ¦ toises (1,949 m)
+pieds du roi (32,48 cm) ¦ pieds du roi (32,48 cm)
+aunes de Paris (1,188 m) ¦ aunes de Paris (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ perches de Paris (18 ayak, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ perches royales (22 ayak, 7,146 m)
+pas (environ 75 cm) ¦ adım (yaklaşık 75 cm)
+Plâtre blanc ¦ Beyaz alçı
+Enduit à la chaux ¦ Kireç sıva
+Pierre apparente ¦ Açıkta taş
+Brique ¦ Tuğla
+Colombage (pans de bois) ¦ Bağdadi (ahşap karkas)
+Lambris de bois ¦ Ahşap lambri
+Papier peint ¦ Duvar kâğıdı
+Carrelage ¦ Fayans
+Béton ¦ Beton
+Torchis ¦ Çamur sıvalı dal örgü
+Enduit, crépi ¦ Sıva, serpme sıva
+Pierre de taille ¦ Kesme taş
+Papier peint à rayures ¦ Çizgili duvar kâğıdı
+Papier peint à fleurs ¦ Çiçekli duvar kâğıdı
+Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parke
+Parquet à bâtons rompus ¦ Balıksırtı parke
+Tomettes ¦ Pişmiş toprak karolar
+Carreaux de ciment ¦ Çimento karolar
+Damier noir et blanc ¦ Siyah beyaz dama
+Dalles de pierre ¦ Taş döşeme
+Terre battue ¦ Sıkıştırılmış toprak
+Moquette, tapis ¦ Halı kaplama, kilim
+Herbe (extérieur) ¦ Çim (dış mekân)
+Gravier, cour ¦ Çakıl, avlu
+Bois clair (hêtre, pin) ¦ Açık renk ahşap (kayın, çam)
+Chêne ¦ Meşe
+Noyer ¦ Ceviz
+Merisier ¦ Kiraz ağacı
+Bois foncé (ébène, bois ciré) ¦ Koyu ahşap (abanoz, cilalı ahşap)
+Bois peint ¦ Boyalı ahşap
+Métal, acier ¦ Metal, çelik
+Fonte, fer forgé ¦ Dökme demir, ferforje
+Laiton, bronze, doré ¦ Pirinç, bronz, yaldız
+Zinc, fer-blanc ¦ Çinko, teneke
+Pierre ¦ Taş
+Marbre ¦ Mermer
+Grès, terre cuite ¦ Taş çanak, pişmiş toprak
+Faïence, porcelaine, émail ¦ Fayans çanak, porselen, emaye
+Tissu ¦ Kumaş
+Velours ¦ Kadife
+Cuir ¦ Deri
+Osier, rotin ¦ Hasır, rattan
+Paille ¦ Saman
+Verre ¦ Cam
+Sans pieds ¦ Ayaksız
+Pieds droits ¦ Düz ayaklar
+Pieds tournés ¦ Torna ayaklar
+Pieds boules (miches) ¦ Top ayaklar
+Patins ¦ Kızaklar
+Roulettes ¦ Tekerlekler
+Barreaux de bois ¦ Ahşap korkuluk çubukları
+Métal (barreaux fins) ¦ Metal (ince çubuklar)
+Muret plein ¦ Dolu alçak duvar
+Métiers, ferme ¦ Meslekler, çiftlik
+Extérieur ¦ Dış mekân
+sa chambre ¦ yatak odası
+né ici ¦ burada doğdu
+née ici ¦ burada doğdu
+y a vécu ¦ burada yaşadı
+y est mort ¦ burada öldü
+y est morte ¦ burada öldü
+les parents ¦ anne-baba
+les enfants ¦ çocuklar
+locataire ¦ kiracı
+fermier ¦ kiracı çiftçi
+domestique ¦ hizmetkâr
+servante ¦ hizmetçi kadın
+valet ¦ uşak
+nourrice ¦ sütanne
+pensionnaire ¦ pansiyoner
+atelier ¦ atölye
+boutique ¦ dükkân
+Nom de la maison ¦ Evin adı
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Mıknatıslama ayarları: ızgara, köşeler, açılar, hassasiyet ve 💾 kayıtlı ayarlar
+Réglages de l’aimant ¦ Mıknatıslama ayarları
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Kopyalanacak eski bir plan, bir kadastro…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Görüntü olarak bir nesne (üstten görünüm)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 Bir 3B nesne (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 Bir ev (.json dosyası)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 Bir DXF planı (AutoCAD, LibreCAD, mimar, noter)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Plan (PNG, JPG, PDF, SVG, yazdırma), 3B görünüm, evin dosyası
+Choisir, déplacer ¦ Seç, taşı
+Déplacer la vue, ou barre d’espace ¦ Görünümü taşı veya boşluk tuşu
+Pièce rectangulaire, murs compris : glisser ¦ Dikdörtgen oda, duvarlar dahil: sürükle
+Vide, trémie, double hauteur : glisser, sans murs ¦ Boşluk, merdiven boşluğu, çift yükseklik: sürükle, duvarsız
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Duvar: her köşe için bir tık, bitirmek için çift tık veya Enter
+Pièce de forme libre, sans murs : un clic par coin ¦ Serbest biçimli oda, duvarsız: her köşe için bir tık
+Porte : clic sur un mur ¦ Kapı: bir duvara tıkla
+Fenêtre : clic sur un mur ¦ Pencere: bir duvara tıkla
+Cote, mesure : deux clics ¦ Ölçü, ölçüm: iki tık
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Oklu etiket: noktaya bir tık, yazılacak yere bir tık
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Evin başka bir dönemi hayalet olarak (🕰 katmanındaki, yoksa önceki dönem): çok saydam duvarlar, kesik çizgili kenarlar
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Evin üzerinde iki tık: mesafe (ve iki nokta arasındaki yükseklik)
+Tous les étages ¦ Tüm katlar
+Murs coupés (voir dedans) ¦ Kesik duvarlar (içini gör)
+Murs coupés ¦ Kesik duvarlar
+🕰 Autre époque ¦ 🕰 Başka dönem
+Vue de dessus ¦ Üstten görünüm
+Vue de face ¦ Önden görünüm
+Vue de côté ¦ Yandan görünüm
+Dessus ¦ Üst
+Face ¦ Ön
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Saate, tarihe ve yere göre güneş; gece lambalar
+Visiter la maison à hauteur d’yeux ¦ Evi göz hizasında gez
+☀️ Lumière ¦ ☀️ Işık
+🚶 Visiter ¦ 🚶 Gez
+📏 Mesurer ¦ 📏 Ölç
+Plan 2D ¦ 2B plan
+Toit ¦ Çatı
+Cotes ¦ Ölçüler
+Mobilier ¦ Mobilya
+Propriétés de l’élément choisi ¦ Seçilen öğenin özellikleri
+Mobilier : meubles, portes, fenêtres à poser ¦ Mobilya: yerleştirilecek eşyalar, kapılar, pencereler
+L’étage affiché : niveaux, hauteur, sol ¦ Gösterilen kat: seviyeler, yükseklik, zemin
+La maison : nom, époque, réglages généraux ¦ Ev: ad, dönem, genel ayarlar
+la maison est fermée ¦ ev kapalı
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ ardından başka değişiklikler yapıldı: üst çubuktaki ↶ düğmesini kullan
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Mıknatısla: ızgara, duvarların köşeleri ve ortaları, açılar (kapatmak için Alt)
+{walls} ajouté depuis {when} ¦ {walls} eklendi, {when} tarihinden beri
+{walls} ajoutés depuis {when} ¦ {walls} eklendi, {when} tarihinden beri
+{walls} disparu depuis {when} ¦ {walls} yok oldu, {when} tarihinden beri
+{walls} disparus depuis {when} ¦ {walls} yok oldu, {when} tarihinden beri
+{walls} plus là en {when} ¦ {walls} şu tarihte artık yok: {when}
+{walls} ajouté en {when} ¦ {walls} eklendi: {when}
+{walls} ajoutés en {when} ¦ {walls} eklendi: {when}
+={n} souvenir : clic pour voir ¦ {n} anı: görmek için tıkla|{n} anı: görmek için tıkla
+={n} souvenirs : clic pour voir ¦ {n} anı: görmek için tıkla|{n} anı: görmek için tıkla
+Glisser : la pointe de la flèche ¦ Sürükle: okun ucu
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Başka bir katı ya da aynı katı başka bir dönemde saydam olarak gör
+Calque d’un autre étage ou d’une autre époque ¦ Başka bir katın veya başka bir dönemin katmanı
+Calque d’un autre étage ou d’une époque ¦ Başka bir katın veya bir dönemin katmanı
+👻 Calque : non ¦ 👻 Katman: yok
+👻 Dessous ¦ 👻 Alt
+👻 Dessus ¦ 👻 Üst
+👻 Les deux ¦ 👻 İkisi
+🕰 Époque d’avant ¦ 🕰 Önceki dönem
+🕰 Époque d’après ¦ 🕰 Sonraki dönem
+🕰 Choisir une époque… ¦ 🕰 Bir dönem seç…
+Ajouter un étage ou une cave ¦ Kat veya mahzen ekle
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Katlar: yönet, ekle, çoğalt, sil
+Plus d’actions sur les étages ¦ Katlar için diğer işlemler
+Chercher : lit, poêle, rouet… ¦ Ara: yatak, soba, çıkrık…
+Mes objets ¦ Nesnelerim
+Aucun objet importé pour l’instant ¦ Şimdilik içe aktarılmış nesne yok
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ Bir 3B dosyayı (OBJ, STL, glTF, GLB) veya bir görüntüyü “⤒ İçe aktar” (üstte).
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Bir nesneye tıkla: görünümün ortasına konur; sonra yerine sürükle (döndürmek için R veya yuvarlak tutamaç).
+Nom de l’étage ¦ Katın adı
+Épaisseur des nouveaux murs ¦ Yeni duvarların kalınlığı
+Épaisseur des planchers ¦ Döşemelerin kalınlığı
+Pas de la grille ¦ Izgara aralığı
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Bu katı çoğalt (duvarlar)
+Supprimer l’étage ¦ Katı sil
+Cotes des murs ¦ Duvar ölçüleri
+Cotes d’ensemble ¦ Genel ölçüler
+Tableau des pièces sur le plan ¦ Planda odalar tablosu
+Cartouche (nom, lieu, époque, étage) ¦ Antet (ad, yer, dönem, kat)
+Affichage sombre (dessin technique) ¦ Koyu görünüm (teknik çizim)
+Plafond (visite 3D) ¦ Tavan (3B gezi)
+Aucun (ouvert) ¦ Yok (açık)
+Plafond uni ¦ Düz tavan
+Poutres apparentes ¦ Açıkta kirişler
+Couleur du plafond ¦ Tavanın rengi
+Légende : ― ajouté · ┄ disparu ¦ Açıklama: ― eklenen · ┄ yok olan
+Transparence du calque ¦ Katmanın saydamlığı
+📐 Plan ancien, cadastre ¦ 📐 Eski plan, kadastro
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Bir Napolyon kadastrosu, eski bir plan, bir kroki: arka plana koy, ölçeklendir, sonra duvarları üzerinden kopyala.
+🖼 Choisir l’image… ¦ 🖼 Görüntüyü seç…
+Le mettre sous cet étage ¦ Bu katın altına koy
+Visible ¦ Görünür
+🔒 Verrouillé ¦ 🔒 Kilitli
+📏 Mettre à l’échelle ¦ 📏 Ölçeklendir
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Görüntüdeki bir duvar boyunca iki tık: düz olur (yatay veya dikey)
+✓ Fin du décalque ¦ ✓ Kopyalamayı bitir
+✏️ Décalquer les murs ¦ ✏️ Duvarları kopyala
+🖼 Changer d’image… ¦ 🖼 Görüntüyü değiştir…
+🏠 Combles (sous le toit) ¦ 🏠 Çatı arası (çatının altı)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ En üst kat için, eğimli bir çatının altında (Kat sekmesi → 🏠 Çatı): tavan eğimi izler ve tavan yüksekliği planın her yerinde okunur.
+Combles : le plafond suit la pente du toit ¦ Çatı arası: tavan çatının eğimini izler
+Hauteur des murs sous le toit ¦ Çatı altındaki duvarların yüksekliği
+🏠 Toit (vue 3D) ¦ 🏠 Çatı (3B görünüm)
+Un toit sur l’étage le plus haut ¦ En üst katın üzerinde bir çatı
+Deux pans (pignons) ¦ İki yüzlü (beşik)
+Quatre pans (croupes) ¦ Dört yüzlü (kırma)
+Pavillon (pointe) ¦ Piramit (sivri)
+Un pan (appentis) ¦ Tek yüzlü (sundurma)
+Mansardé ¦ Mansart
+Plat (toit-terrasse) ¦ Düz (teras çatı)
+Faîtage ¦ Mahya
+Dans la longueur ¦ Boyuna
+Dans la largeur ¦ Enine
+Est – ouest ¦ Doğu – batı
+Nord – sud ¦ Kuzey – güney
+Débord ¦ Saçak taşması
+Couverture ¦ Çatı örtüsü
+Tuiles canal ¦ Oluklu kiremit
+Tuiles plates ¦ Düz kiremit
+Tuiles vernissées ¦ Sırlı kiremit
+Ardoises ¦ Arduvaz
+Lauzes (pierre) ¦ Taş levhalar (lauzes)
+Chaume ¦ Saz
+Zinc ¦ Çinko
+Bac acier ¦ Çelik sac
+Pignons, acrotères ¦ Kalkanlar, parapetler
+Acrotère (toit plat) ¦ Parapet (düz çatı)
+Une cheminée ¦ Bir baca
+Place de la cheminée ¦ Bacanın yeri
+Gouttières et descentes ¦ Oluklar ve iniş boruları
+Un toit par aile (maison en L, en T, en U) ¦ Her kanat için bir çatı (L, T, U biçimli ev)
+Verrières, lanterneaux et édicules ¦ Cam çatılar, çatı ışıklıkları ve çatı çıkışları
+Fenêtres de toit et lucarnes ¦ Çatı pencereleri ve çatı kapıcıkları
+🪟 Verrière ¦ 🪟 Cam çatı
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Çatı çıkışı (çatıya erişim)
+🔆 Lanterneau ¦ 🔆 Çatı ışıklığı
+🪟 Fenêtre de toit ¦ 🪟 Çatı penceresi
+🏠 Lucarne ¦ 🏠 Çatı kapıcığı
+🏚 Chien-assis ¦ 🏚 Tek eğimli çatı kapıcığı
+Lucarne ¦ Çatı kapıcığı
+Aile ¦ Kanat
+Arrière ¦ Arka
+En travers ¦ Çapraz
+Vers l’égout ¦ Saçağa doğru
+Profondeur ¦ Derinlik
+＋ Verrière ¦ ＋ Cam çatı
+＋ Édicule ¦ ＋ Çatı çıkışı
+＋ Lanterneau ¦ ＋ Çatı ışıklığı
+＋ Fenêtre de toit ¦ ＋ Çatı penceresi
+＋ Lucarne ¦ ＋ Çatı kapıcığı
+＋ Chien-assis ¦ ＋ Tek eğimli çatı kapıcığı
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Şimdilik bir şey yok: oturanları ve nüfus sayımlarını ekle (aşağıda).
+📍 Lieu et époque ¦ 📍 Yer ve dönem
+Époque (en quelques mots) ¦ Dönem (birkaç sözcükle)
+Aucun souvenir posé pour l’instant ¦ Şimdilik yerleştirilmiş anı yok
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Bir eşyaya veya bir odaya tıkla, sonra “🔗 Bir anı bağla”: bir fotoğraf, bir anlatı, bir kişi, bir aile anısı.
+☀️ Orientation et lumière ¦ ☀️ Yön ve ışık
+Nord du plan ¦ Planın kuzeyi
+Heure ¦ Saat
+Jour ¦ Gün
+Jour de l’année ¦ Yılın günü
+Hauteur des yeux pour la visite ¦ Gezi için göz yüksekliği
+👥 Les habitants ¦ 👥 Oturanlar
+rôle, années (né ici, 1880–1920…) ¦ rol, yıllar (burada doğdu, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Oturan ekle…
+📋 Les recensements ¦ 📋 Nüfus sayımları
+Ouvrir la fiche où est ce recensement ¦ Bu nüfus sayımının bulunduğu kartı aç
+L’époque de la maison qui correspond à ce recensement ¦ Bu nüfus sayımına karşılık gelen ev dönemi
+— époque — ¦ — dönem —
+Aucun recensement rattaché. ¦ Bağlı nüfus sayımı yok.
+＋ Ajouter un recensement… ¦ ＋ Nüfus sayımı ekle…
+🕰 Les époques ¦ 🕰 Dönemler
+Montrer la maison à cette époque ¦ Evi bu dönemde göster
+Renommer, changer la date, rattacher à un recensement ¦ Adını değiştir, tarihi değiştir, bir nüfus sayımına bağla
+Supprimer cette époque ¦ Bu dönemi sil
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Ev zamanla değişti mi? Her yıl veya tarih için (1850, 1900, 1936…) kendi planıyla bir dönem oluştur: değişimini görürsün ve her biri bir nüfus sayımına bağlanabilir.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Yeni dönem (bunun kopyası)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Yeni dönem (bunun kopyası)…
+▶ Voir évoluer ¦ ▶ Değişimi izle
+⏹ Arrêter ¦ ⏹ Durdur
+📖 Histoire de la maison ¦ 📖 Evin tarihi
+Histoire de la maison ¦ Evin tarihi
+Construite par…, agrandie en…, vendue en… ¦ Yapan…, büyütüldüğü yıl…, satıldığı yıl…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Bir duvara, odaya, eşyaya tıkla: ayarları buraya gelir (malzeme, renk, boyut, ad, anılar). Tekerlek: yakınlaştır; boşluk tuşu: görünümü taşı; Alt: mıknatıssız.
+Cet étage ¦ Bu kat
+={n} pièce ¦ {n} oda|{n} oda
+={n} pièces ¦ {n} oda|{n} oda
+={n} étage ¦ {n} kat|{n} kat
+={n} étages ¦ {n} kat|{n} kat
+={n} habitant ¦ {n} oturan|{n} oturan
+={n} habitants ¦ {n} oturan|{n} oturan
+={n} époque ¦ {n} dönem|{n} dönem
+={n} époques ¦ {n} dönem|{n} dönem
+={n} arrêt ¦ {n} durak|{n} durak
+={n} arrêts ¦ {n} durak|{n} durak
+={n} modèle ¦ {n} model|{n} model
+={n} modèles ¦ {n} model|{n} model
+={n} recensement rattaché ¦ {n} bağlı nüfus sayımı|{n} bağlı nüfus sayımı
+={n} recensements rattachés ¦ {n} bağlı nüfus sayımı|{n} bağlı nüfus sayımı
+={n} habitant ajouté depuis le recensement. ¦ Nüfus sayımından {n} oturan eklendi.|Nüfus sayımından {n} oturan eklendi.
+={n} habitants ajoutés depuis le recensement. ¦ Nüfus sayımından {n} oturan eklendi.|Nüfus sayımından {n} oturan eklendi.
+={n} trémie ouverte ¦ {n} merdiven boşluğu açıldı|{n} merdiven boşluğu açıldı
+={n} trémies ouvertes ¦ {n} merdiven boşluğu açıldı|{n} merdiven boşluğu açıldı
+={n} étage supprimé ¦ {n} kat silindi|{n} kat silindi
+={n} étages supprimés ¦ {n} kat silindi|{n} kat silindi
+={n} copie seulement : le mur est trop court pour plus. ¦ Yalnızca {n} kopya: duvar daha fazlası için çok kısa.|Yalnızca {n} kopya: duvar daha fazlası için çok kısa.
+={n} copies seulement : le mur est trop court pour plus. ¦ Yalnızca {n} kopya: duvar daha fazlası için çok kısa.|Yalnızca {n} kopya: duvar daha fazlası için çok kısa.
+={n} lampe allumée ¦ {n} lamba yanıyor|{n} lamba yanıyor
+={n} lampes allumées ¦ {n} lamba yanıyor|{n} lamba yanıyor
+={n} refusé : {list} ¦ {n} reddedildi: {list}|{n} reddedildi: {list}
+={n} refusés : {list} ¦ {n} reddedildi: {list}|{n} reddedildi: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} görüntü: film yapmak için 🎬 Montaj’a sürükle (metinler dış ses olarak).|✓ {n} görüntü: film yapmak için 🎬 Montaj’a sürükle (metinler dış ses olarak).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} görüntü: film yapmak için 🎬 Montaj’a sürükle (metinler dış ses olarak).|✓ {n} görüntü: film yapmak için 🎬 Montaj’a sürükle (metinler dış ses olarak).
+🔗 Relier un souvenir… ¦ 🔗 Bir anı bağla…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Açı (°, 0 = sağa, 90 = yukarı)
+Début X ¦ Başlangıç X
+Début Y ¦ Başlangıç Y
+Fin X ¦ Bitiş X
+Fin Y ¦ Bitiş Y
+Hauteur (cm, vide = celle de l’étage) ¦ Yükseklik (cm, boş = katınki)
+⌒ Courbure (flèche) ¦ ⌒ Eğrilik (sehim)
+✂ Couper en deux ¦ ✂ İkiye böl
+Revêtement ¦ Kaplama
+Pareil pour : ¦ Aynısı şunun için:
+tout l’étage ¦ tüm kat
+toute la maison ¦ tüm ev
+Couleur et texture ¦ Renk ve doku
+Taille du motif ¦ Desen boyutu
+Allège (cm du sol) ¦ Denizlik yüksekliği (yerden cm)
+Position sur le mur ¦ Duvardaki konum
+Du début du mur ¦ Duvarın başından
+Jusqu’à la fin ¦ Sonuna kadar
+🚪 Genre et ouverture ¦ 🚪 Tür ve açılış
+Porte ¦ Kapı
+Porte double ¦ Çift kanatlı kapı
+Porte d’entrée ¦ Giriş kapısı
+Passage, arche ¦ Geçit, kemer
+Porte de grange ¦ Ahır kapısı
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Duvar boyunca bir sıra pencere (veya kapı)
+🔁 Répéter… ¦ 🔁 Tekrarla…
+↔ Sens d’ouverture ¦ ↔ Açılış yönü
+▨ Plancher : plein ou vide ¦ ▨ Döşeme: dolu veya boşluk
+Pas de plancher : vide sur l’étage du dessous ¦ Döşeme yok: alttaki kata açık boşluk
+Garde-corps ¦ Korkuluk
+Garde-corps autour ¦ Çevresinde korkuluk
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Eksikse üst katı, bu odanın bir kısmına asma katı, geri kalanına boşluğu, korkuluğunu ve merdiveni ekler
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Bu odaya açık asma kat
+Mezzanine ouverte ¦ Açık asma kat
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Duvarlar ve eşyalar odayı izler
+🧱 Murs de la pièce ¦ 🧱 Odanın duvarları
+Sol ¦ Zemin
+Salle commune ¦ Ortak oda
+Chambre des parents ¦ Anne-babanın yatak odası
+Chambre des enfants ¦ Çocukların yatak odası
+Salle à manger ¦ Yemek odası
+Grenier ¦ Tavan arası
+Cellier ¦ Kiler
+Étable ¦ İnek ahırı
+Grange ¦ Ambar
+Fournil ¦ Fırın odası
+Boutique ¦ Dükkân
+Couloir ¦ Koridor
+Cour ¦ Avlu
+Jardin ¦ Bahçe
+Potager ¦ Sebze bahçesi
+Basse-cour ¦ Kümes avlusu
+🕯 Souvenirs de la pièce ¦ 🕯 Odanın anıları
+La chambre où est née Marie en 1890 ; la veillée… ¦ Marie’nin 1890’da doğduğu oda; akşam toplantıları…
+Les personnes de la pièce ¦ Odanın kişileri
+Leurs années dans cette pièce ¦ Bu odadaki yılları
+années : 1890 – 1925 ¦ yıllar: 1890 – 1925
+🪜 Escalier ¦ 🪜 Merdiven
+✓ confortable (60 à 66 cm) ¦ ✓ rahat (60 ile 66 cm arası)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ biraz dik: merdiveni uzat veya döner bir merdiven seç
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ basamaklar çok uzun: merdiveni kısalt
+Quart tournant ¦ Çeyrek dönüş
+Vers la gauche ¦ Sola doğru
+Vers la droite ¦ Sağa doğru
+Le haut devient le bas ¦ Üst alt olur
+⇅ Inverser le sens de montée ¦ ⇅ Çıkış yönünü ters çevir
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Üstte kat yok: üstteki ＋ ile ekle.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Önceden çizilmiş evler için: her merdiven üst katın döşemesini deler
+Ouvrir les trémies de tous les escaliers ¦ Tüm merdivenlerin boşluklarını aç
+Du sol ¦ Yerden
+Les prochains objets de ce modèle seront posés à cette taille ¦ Bu modelin sonraki nesneleri bu boyutta konacak
+💾 Garder pour ce modèle ¦ 💾 Bu model için sakla
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Altındaki eşyanın üzerine koy (masa, konsol, şömine…)
+⬆ Sur l’objet dessous ¦ ⬆ Alttaki nesnenin üzerine
+⬇ Au sol ¦ ⬇ Yere
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Tek seferde birden çok kopya: sıra hâlinde, ızgara hâlinde ya da bir nesnenin çevresinde daire hâlinde (bir masanın çevresinde 6 sandalye)
+Pieds ¦ Ayaklar
+Pieds, poignées, filets, ferrures ¦ Ayaklar, kulplar, şeritler, madenî aksam
+Sans deuxième couleur ¦ İkinci renk yok
+Époque, style ¦ Dönem, üslup
+Effets : pieds et détails ¦ Efektler: ayaklar ve ayrıntılar
+🏷 Souvenirs de cet objet ¦ 🏷 Bu nesnenin anıları
+Son histoire (objet de famille) ¦ Hikâyesi (aile yadigârı)
+Flèche vers un point ¦ Bir noktaya ok
+Couleur de la flèche ¦ Okun rengi
+Police de départ ¦ Başlangıç yazı tipi
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Yıllara veya tarihlere göre evin sürümleri: değişimini izle, bir dönemi bir nüfus sayımına bağla
+🕰 Époques ¦ 🕰 Dönemler
+L’époque d’avant ¦ Önceki dönem
+L’époque montrée (plan 2D et vue 3D) ¦ Gösterilen dönem (2B plan ve 3B görünüm)
+L’époque d’après ¦ Sonraki dönem
+⋯ Gérer les époques… ¦ ⋯ Dönemleri yönet…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Değişimi izle: dönemler birbiri ardına
+MAISON · ÉPOQUES ¦ EV · DÖNEMLER
+MAISON ¦ EV
+Créer l’époque ¦ Dönemi oluştur
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Evin şu anda çizili hâli ilk dönem olur: ona bir ad ve bir tarih ver. Yeni dönem bir kopyadan başlar, sonra onu değiştirirsin (eklenen bir oda, yıkılan bir duvar, başka eşyalar…).
+La maison dessinée maintenant ¦ Şu anda çizili ev
+Année ou date ¦ Yıl veya tarih
+La nouvelle époque ¦ Yeni dönem
+ex. Après l’agrandissement ¦ ör. Büyütmeden sonra
+Rattachée au recensement ¦ Bağlı nüfus sayımı
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Bir nüfus sayımına bağlamak için: Ev sekmesi → “📋 Nüfus sayımları” → ＋ Bir nüfus sayımı.
+Donne un nom ou une date à cette époque. ¦ Bu döneme bir ad veya bir tarih ver.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Yeni dönem oluşturuldu (kopya): farklı olanı değiştir. Dönemler arasında geçmek için üstteki “‹ ›”.
+Époque supprimée ¦ Dönem silindi
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Evin değişimini görmek için en az iki dönem oluştur (＋ Yeni dönem).
+＋ Un recensement ¦ ＋ Bir nüfus sayımı
+Recensements à rattacher ¦ Bağlanacak nüfus sayımları
+Ajouter aussi les personnes du foyer comme habitants ¦ Hanedeki kişileri de oturan olarak ekle
+À l’époque ¦ Dönem
+Choisis au moins un recensement. ¦ En az bir nüfus sayımı seç.
+Clique sur un mur. ¦ Bir duvara tıkla.
+Une étiquette à flèche ¦ Oklu bir etiket
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Not (ör. “Çift cam 1978’de takıldı”, “Kuyu buradaydı”)
+Étiquette à flèche ¦ Oklu etiket
+Un texte sur le plan ¦ Plan üzerinde bir metin
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Yazılacak metin (bir odanın, bir yerin adı, bir not…)
+Mur modifié ¦ Duvar değiştirildi
+Pièce modifiée ¦ Oda değiştirildi
+Flèche déplacée ¦ Ok taşındı
+Objet tourné ¦ Nesne döndürüldü
+Plan ancien déplacé ¦ Eski plan taşındı
+Une pièce d’au moins 50 cm de côté. ¦ Her kenarı en az 50 cm olan bir oda.
+Un vide d’au moins 40 cm de côté. ¦ Her kenarı en az 40 cm olan bir boşluk.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Bu boşluk en alt katta: hiçbir yere açılmıyor. Asma kat için boşluğu üst kata çiz.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Önce plandan odayı (oturma odasını) seç.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Oda asma kat için biraz küçük (en az 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Tıkla: seç · sürükle: taşı · tutamaçlar: duvarı uzat, odanın biçimini değiştir · ⌫: sil
+Glisser pour déplacer la vue ¦ Görünümü taşımak için sürükle
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Çapraz sürükle: dört duvarıyla dikdörtgen bir oda (alan gösterilir)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Çapraz sürükle: döşemesiz bir boşluk (asma kat, çift yükseklik, merdiven boşluğu); duvarsız kenarlar boyunca kendiliğinden bir korkuluk konur
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Her köşe için bir tık (mıknatıs: ızgara, köşeler, dik açılar; Alt: serbest) · çift tık veya Enter: bitir · 1. noktaya tık: kapat (ve odayı oluştur)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ Serbest biçimli bir oda (duvarsız): her köşe için bir tık, bitirmek için çift tık
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Bir duvara tıkla: bir kapı (sonra duvar boyunca kaydır)
+Clic sur un mur : une fenêtre ¦ Bir duvara tıkla: bir pencere
+Deux clics : une cote (la distance s’affiche) ¦ İki tık: bir ölçü (mesafe gösterilir)
+Clic : écrire un texte sur le plan ¦ Tıkla: plana bir metin yaz
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Gösterilecek noktaya (kuyu, bir pencere…) tıkla, sonra notun yazılacağı yere tıkla
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ genişlik x derinlik (ör. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ uzunluk (cm veya 3,5 m) sonra @açı ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Genişlik x derinlik yaz: 420 x 350 (cm) veya 4,2 x 3,5 m (en az 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Önce plandaki başlangıç noktasına tıkla, sonra uzunluğu yaz.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Uzunluk anlaşılmadı: 350, 3,5 m veya açı için 350 @ 90.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Açı anlaşılmadı (derece olarak: 0 sağa, 90 yukarı).
+Grille ¦ Izgara
+Coins des murs et des pièces ¦ Duvarların ve odaların köşeleri
+Milieu des murs ¦ Duvarların ortası
+Le long des murs (au cm) ¦ Duvarlar boyunca (cm hassasiyetle)
+Alignements (lignes de rappel) ¦ Hizalamalar (kılavuz çizgileri)
+Pas des angles ¦ Açı adımı
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: mıknatıs yok (mm hassasiyetle) · ⇧: 45° açılar · oklar: seçileni 1 cm kaydır (⇧: bir ızgara adımı) · çizerken uzunluğu klavyeden yaz.
+Décalé ¦ Kaydırıldı
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Bir OBJ, STL, GLB veya glTF dosyası gerekli.
+Lecture du modèle… ¦ Model okunuyor…
+Objet importé ¦ Nesne içe aktarıldı
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ 3B nesne içe aktarıldı: tüm evler için Mobilya → “Nesnelerim” içinde de var.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Nesne kondu (üstten görünüm): gerçek boyutunu Özellikler’de ayarla.
+Envoi de l’image dans les médias… ¦ Görüntü medyaya gönderiliyor…
+MAISON · PLAN ANCIEN ¦ EV · ESKİ PLAN
+Le plan à calquer ¦ Kopyalanacak plan
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Bir Napolyon kadastrosu, eski bir plan, bir kroki… “📁 İçe aktar” bilgisayardan birini alır (medyaya girer).
+Poser ce plan ¦ Bu planı yerleştir
+Cette image ne peut pas servir de plan. ¦ Bu görüntü plan olarak kullanılamaz.
+Plan ancien posé ¦ Eski plan yerleştirildi
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Eski planda uzunluğu bilinen bir şeyin iki ucuna tıkla (bir duvar, çizili ölçek)
+Les deux points sont trop proches. ¦ İki nokta birbirine çok yakın.
+📏 Mettre le plan à l’échelle ¦ 📏 Planı ölçeklendir
+Mettre à l’échelle ¦ Ölçeklendir
+Quelle est la vraie longueur entre ces deux points ? ¦ Bu iki nokta arasındaki gerçek uzunluk nedir?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Napolyon kadastrosu çoğunlukla 1/2500 veya 1/1250 ölçeklidir; eski planlar toise (6 ayak, 1,949 m) ve pied du roi (32,48 cm) ile ölçer: sayıyı yaz, dönüştürme kendiliğinden yapılır.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Bir uzunluk yaz, örneğin 12 veya 3,5.
+Plan ancien mis à l’échelle ¦ Eski plan ölçeklendirildi
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Eski planda bir duvar boyunca iki noktaya tıkla: düz olacak
+Ce mur est déjà droit. ¦ Bu duvar zaten düz.
+↻ Redresser ¦ ↻ Düzelt
+✥ Déplacer ¦ ✥ Taşı
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Kopyalama: eski planı izleyerek her duvar köşesi için bir tık · bir duvarı bitirmek için çift tık veya Enter · bütün bir oda için ⬚
+Photo, document ¦ Fotoğraf, belge
+Récit ¦ Anlatı
+Souvenir de famille ¦ Aile anısı
+Objet de famille ¦ Aile yadigârı
+Voir ce souvenir ¦ Bu anıyı gör
+Retirer ce souvenir (sans le supprimer de la base) ¦ Bu anıyı çıkar (veritabanından silmeden)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Bağlı anı yok: bir fotoğraf, bir anlatı, bir kişi…
+Aucun souvenir ne correspond. ¦ Uyan anı yok.
+Aucun souvenir de famille pour l’instant ¦ Şimdilik aile anısı yok
+Essaie un autre mot. ¦ Başka bir sözcük dene.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Listeler → Aile belleği (tarifler, deyimler, şarkılar…) veya Aile yadigârları.
+MAISON · SOUVENIRS ¦ EV · ANILAR
+📜 Un souvenir de famille ¦ 📜 Bir aile anısı
+Chercher… (recette, montre, surnom) ¦ Ara… (tarif, saat, lakap)
+Chercher un souvenir ¦ Anı ara
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Önce bir eşya, bir nesne veya bir oda seç.
+🖼 Une photo, un document ¦ 🖼 Bir fotoğraf, bir belge
+pris dans les médias (ou importé depuis l’ordinateur) ¦ medyadan alınır (veya bilgisayardan içe aktarılır)
+✍ Un récit ¦ ✍ Bir anlatı
+ce qui s’est passé ici, ce qu’on en raconte ¦ burada olanlar, anlatılanlar
+👤 Une personne ¦ 👤 Bir kişi
+qui a vécu ici, qui s’en servait ¦ burada yaşayan, onu kullanan
+une recette, une expression, un objet de famille… ¦ bir tarif, bir deyim, bir aile yadigârı…
+ex. La veillée de Noël 1912 ¦ ör. 1912 Noel arifesi
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Burada olanlar, anlatılanlar…
+Le récit ¦ Anlatı
+Écris un titre ou un récit. ¦ Bir başlık veya bir anlatı yaz.
+Souvenir rattaché ¦ Anı bağlandı
+Ce média n’existe plus. ¦ Bu medya artık yok.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Kaydedilmemiş ev kaybolacak (önce 💾).
+Ouvrir la fiche ? ¦ Kart açılsın mı?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ mıknatıslama, ızgara, duvar kalınlığı, göz yüksekliği ve ışık
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Dosya hazır: 🧲 Mıknatısla → “⤒ İçe aktar” ile içe aktarılır.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Bu dosya okunamıyor (bir .json ayar dosyası gerekli).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Bu dosya bir LCNDA ayarı değil (bir araçta ⤓ Ayarı dışa aktar).
+Le plan de cet étage est vide. ¦ Bu katın planı boş.
+le plan de l’étage ¦ katın planı
+le plan, plus léger ¦ plan, daha hafif
+le plan sur une page A4 ¦ A4 sayfada plan
+le plan, en dessin ¦ plan, çizim olarak
+le plan, tout de suite ¦ plan, hemen
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ AutoCAD, LibreCAD… için katın planı (katmanlar, cm cinsinden)
+image de la vue 3D ¦ 3B görünümün görüntüsü
+🧊 Vue 3D ¦ 🧊 3B görünüm
+💾 Fichier de la maison ¦ 💾 Evin dosyası
+à réimporter (⤒ Importer) ¦ yeniden içe aktarmak için (⤒ İçe aktar)
+Ce fichier DXF n’est pas lisible. ¦ Bu DXF dosyası okunamıyor.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ Bu DXF’te çizgi bulunamadı (“ikili” bir DXF okunamaz: onu metin DXF, ASCII olarak kaydet).
+MAISON · IMPORT DXF ¦ EV · DXF İÇE AKTARMA
+Importer le plan ¦ Planı içe aktar
+Unité du dessin ¦ Çizimin birimi
+Épaisseur des murs ¦ Duvar kalınlığı
+Où le mettre ¦ Nereye konsun
+Un nouvel étage ¦ Yeni bir kat
+Calques à prendre ¦ Alınacak katmanlar
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Buradan dışa aktarılmış bir plan: duvarları eksenlerinden alınır (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Bir mimar planı her duvarı çoğu zaman iki çizgiyle çizer: küçük bir kalınlık bırak ya da mobilya, ölçü ve tarama katmanlarının işaretini kaldır.
+Coche au moins un calque. ¦ En az bir katman işaretle.
+Rien à reprendre dans ces calques. ¦ Bu katmanlarda alınacak bir şey yok.
+Plan importé ¦ İçe aktarılan plan
+Plan DXF importé ¦ DXF planı içe aktarıldı
+Nombre en tout ¦ Toplam sayı
+Espace entre deux ¦ İki tanesi arasındaki boşluk
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Bu duvarda yer yok: aralığı azalt ya da ilkini duvarın başına doğru taşı.
+Répété ¦ Tekrarlandı
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Önce bir nesne, bir kapı veya bir pencere seç.
+En ligne ¦ Sıra hâlinde
+En grille (rangées) ¦ Izgara hâlinde (sıralar)
+En cercle (autour d’un objet) ¦ Daire hâlinde (bir nesnenin çevresinde)
+Sens (en ligne) ¦ Yön (sıra hâlinde)
+→ vers la droite ¦ → sağa
+↓ vers le bas ¦ ↓ aşağı
+← vers la gauche ¦ ← sola
+↑ vers le haut ¦ ↑ yukarı
+Par rangée (en grille) ¦ Sıra başına (ızgara)
+Autour de (en cercle) ¦ Çevresinde (daire)
+Un point, au rayon ci-dessous ¦ Bir nokta, aşağıdaki yarıçapta
+Rayon (si autour d’un point) ¦ Yarıçap (bir noktanın çevresindeyse)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ Daire hâlinde: önce tek bir nesneyi (bir sandalye) masanın çevresindeki yerine koy, onu seç, sonra tekrarla: kopyalar masanın çevresinde döner ve ilki gibi ona bakar.
+Ce fichier n’est pas lisible. ¦ Bu dosya okunamıyor.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Bu dosya bir LCNDA evi değil (⤓ Dışa aktar → 💾 Evin dosyası).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Burada çizilen plan dosyadakiyle değiştirilecek (geri dönmek için ↶).
+Remplacer le plan par celui du fichier ? ¦ Plan dosyadakiyle değiştirilsin mi?
+Remplacer le plan ¦ Planı değiştir
+Maison importée ¦ Ev içe aktarıldı
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Bir görüntü, bir 3B nesne (OBJ, STL, glTF, GLB) veya bir ev dosyası bırak.
+📁 Que faire de cette image ? ¦ 📁 Bu görüntüyle ne yapılsın?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Bu tablonun, bu çerçevenin görüntüsü
+posée sur l’objet choisi, en 2D et en 3D ¦ seçilen nesnenin üzerine konur, 2B ve 3B olarak
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Kopyalanacak eski bir plan, bir kadastro
+posé en fond, à mettre à l’échelle ¦ arka plana konur, ölçeklendirilecek
+🖼 Un objet vu de dessus ¦ 🖼 Üstten görülen bir nesne
+posé sur le plan comme un meuble ¦ plana bir eşya gibi konur
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Seçilen şey için bir anı
+rattaché au meuble ou à la pièce ¦ eşyaya veya odaya bağlanır
+Construction de la maison en 3D… ¦ Ev 3B olarak kuruluyor…
+Vue 3D indisponible. ¦ 3B görünüm kullanılamıyor.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Sürükle: döndür · sağ tık veya ⇧ sürükle: taşı · tekerlek: yaklaş · ☀️ Işık: saat ve mevsim · 🚶 Gez: W A S D veya oklar · ✦: bir anı
+Les dernières modifications de la maison seront perdues. ¦ Evdeki son değişiklikler kaybolacak.
+Fermer sans enregistrer la maison ? ¦ Ev kaydedilmeden kapatılsın mı?
+Supprimé ¦ Silindi
+Dupliqué ¦ Çoğaltıldı
+Sens de l’escalier ¦ Merdivenin yönü
+Tous les escaliers ouvrent déjà le plancher. ¦ Tüm merdivenler döşemeyi zaten açıyor.
+Verrière ajoutée ¦ Cam çatı eklendi
+Édicule ajouté ¦ Çatı çıkışı eklendi
+Lanterneau ajouté ¦ Çatı ışıklığı eklendi
+Fenêtre de toit ajoutée ¦ Çatı penceresi eklendi
+Lucarne ajoutée ¦ Çatı kapıcığı eklendi
+Chien-assis ajouté ¦ Tek eğimli çatı kapıcığı eklendi
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ 3B görünümde çatıyla birlikte görünür.
+Retiré du toit ¦ Çatıdan çıkarıldı
+Fenêtre de toit ou lucarne retirée ¦ Çatı penceresi veya çatı kapıcığı çıkarıldı
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Bu nesnenin altında bir şey yok: önce onu eşyanın (bir masa, bir konsol…) üzerine sürükle.
+Taille hors limites (de 1 cm à 50 m). ¦ Boyut sınırların dışında (1 cm ile 50 m arası).
+Agrandi ¦ Büyütüldü
+Réduit ¦ Küçültüldü
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Bu model için boyut saklandı: sonrakiler bunun gibi konacak.
+Sens d’ouverture ¦ Açılış yönü
+Côté d’ouverture ¦ Açılış tarafı
+Mur coupé ¦ Duvar bölündü
+＋ Un étage ¦ ＋ Bir kat
+Hauteur sous plafond ¦ Tavan yüksekliği
+Gérer les étages… ¦ Katları yönet…
+Renommer, hauteur sous plafond, supprimer ¦ Adını değiştir, tavan yüksekliği, sil
+Ajouter un étage… ¦ Kat ekle…
+Les étages ¦ Katlar
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ En üstten en alta. Bir katın adını veya yüksekliğini değiştir ya da onu (içindeki her şeyle) sil.
+Niveau ¦ Seviye
+Il faut au moins un étage. ¦ En az bir kat gerekli.
+{names} supprimés avec ce qu’ils contenaient ¦ İçindekilerle birlikte silindi: {names}
+{names} supprimé avec ce qu’il contenait ¦ İçindekilerle birlikte silindi: {names}
+Étage supprimé ¦ Kat silindi
+Étage renommé ¦ Katın adı değiştirildi
+Renommer l’étage ¦ Katın adını değiştir
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Eski planı sürükle (planın boş bir yerinden); bitirmek için yeniden “✥ Taşı”ya tıkla.
+Plan ancien retiré ¦ Eski plan kaldırıldı
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Eski plan arka plandan kaldırıldı (görüntü medyada kalır)
+Plan ancien sous cet étage ¦ Bu katın altındaki eski plan
+Plan ancien ¦ Eski plan
+Plan ancien verrouillé ¦ Eski plan kilitlendi
+Plan ancien déverrouillé ¦ Eski planın kilidi açıldı
+Un habitant de la maison ¦ Evde oturan biri
+Habitant ajouté ¦ Oturan eklendi
+Habitant retiré ¦ Oturan çıkarıldı
+Une personne liée à cette pièce ¦ Bu odaya bağlı bir kişi
+Personne liée à la pièce ¦ Kişi odaya bağlandı
+Le plan est vide. ¦ Plan boş.
+Fenêtre bloquée. ¦ Pencere engellendi.
+Ce recensement n’est relié à aucune fiche. ¦ Bu nüfus sayımı hiçbir karta bağlı değil.
+Recensement retiré ¦ Nüfus sayımı çıkarıldı
+Personne retirée ¦ Kişi çıkarıldı
+Souvenir retiré ¦ Anı çıkarıldı
+Légende des époques ¦ Dönemlerin açıklaması
+Personnes de la pièce ¦ Odanın kişileri
+Flèche ajoutée ¦ Ok eklendi
+Flèche retirée ¦ Ok çıkarıldı
+Lumière ¦ Işık
+Années de la personne ¦ Kişinin yılları
+Recensement rattaché à l’époque ¦ Nüfus sayımı döneme bağlandı
+Revêtement du mur ¦ Duvarın kaplaması
+Murs de la pièce ¦ Odanın duvarları
+Autre époque en 3D ¦ 3B’de başka dönem
+📍 Un arrêt de la visite guidée ¦ 📍 Rehberli gezinin bir durağı
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Burada söylenen (rehberli gezide sesli okunur):
+Ici, la salle commune : on y veillait l’hiver… ¦ Burası ortak oda: kış akşamları burada toplanılırdı…
+Ajouter l’arrêt ¦ Durağı ekle
+MAISON · PHOTO D’ÉPOQUE ¦ EV · DÖNEM FOTOĞRAFI
+La photo prise d’ici ¦ Buradan çekilen fotoğraf
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Bu noktada, bu yönde çekilmiş eski fotoğraf: onu evle karşılaştırabilirsin (Eskiden ⟷ Bugün kaydırıcısı).
+Poser la photo ¦ Fotoğrafı yerleştir
+Cette image ne peut pas servir ici. ¦ Bu görüntü burada kullanılamaz.
+Photo d’époque ¦ Dönem fotoğrafı
+Photo d’époque posée ¦ Dönem fotoğrafı yerleştirildi
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Planın kuzeyi: ayarlamak için tıkla (☀️ Yön ve ışık)
+Aucune maison ne correspond. ¦ Uyan ev yok.
+Époques ¦ Dönemler
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Mérimée kaydı (miras)…
+🏠 Maisons ¦ 🏠 Evler
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Aile evlerinin 2B ve 3B planları: odaları, eşyaları, oturanları, nüfus sayımları, dönemleri ve anıları.
+Renommer la maison ¦ Evin adını değiştir
+Ouvrir la maison ¦ Evi aç
+↗ Ouvrir la maison ¦ ↗ Evi aç
+Cette maison est déjà rattachée. ¦ Bu ev zaten bağlı.
+🏠 Maison ¦ 🏠 Ev
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Önce nüfus sayımını kaydet: sonra hanenin yaşadığı evi (ve evin dönemini) ona bağlayabilirsin.
+Détacher la maison de ce recensement ¦ Evin bu nüfus sayımıyla bağını kaldır
+Relier une maison : nom, lieu… ¦ Bir ev bağla: ad, yer…
+Époque de la maison ¦ Evin dönemi
+Dessiner la maison de ce foyer ¦ Bu hanenin evini çiz
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Hemen bağlanır (“Kaydet” beklenmez). Evde: Ev sekmesi → “📋 Nüfus sayımları”.
+— époque de la maison — ¦ — evin dönemi —
+Le recensement a des changements non enregistrés. ¦ Nüfus sayımında kaydedilmemiş değişiklikler var.
+Ouvrir la maison quand même ? ¦ Ev yine de açılsın mı?
+Maison détachée du recensement. ¦ Evin nüfus sayımıyla bağı kaldırıldı.
+Choisis une maison. ¦ Bir ev seç.
+Maison rattachée au recensement. ¦ Ev nüfus sayımına bağlandı.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Tüm katın uzunluğu ve genişliği, planın altında ve solunda (her duvarın ölçülerine ek olarak).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Planın sağına konan bir tablo: her oda ve alanı ile toplam. Kendiliğinden güncellenir ve planla birlikte gider (görüntü, PDF, yazdırma).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Gerçek planların sağ altındaki çerçeve: evin adı, yer, dönem, kat ve bugünün tarihi.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Teknik çizim programlarındaki gibi koyu zemin üzerinde açık renkli plan. Yalnızca ekranda: görüntüler, PDF’ler ve çıktılar beyaz zeminde kalır.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Alttaki (veya üstteki) kat bunun altında saydam olarak görünür: 1. katın duvarlarını zemin katınkilerin tam üstüne koymak için pratik. 🕰 Başka bir dönem: aynı kat, olduğu (veya olacağı) gibi, sepya tonlarında.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Görüntüde uzunluğu bilinen bir şeyin iki ucuna tıkla (bir duvar, planın ölçeği), sonra gerçek uzunluğunu ver: metre ya da eski toise ve ayak olarak (kendiliğinden dönüştürülür).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Tavan çatı eğimini izler (3B görünüm, kesit, gezi); “Carrez yasası” alanı yalnızca yüksekliğin en az 1,80 m olduğu yerleri sayar.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Eğimin altındaki alçak duvar (“diz duvarı”): çatı döşemeden başlıyorsa 0, çoğu zaman 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ L, T veya U biçimli bir ev için: aynı eğimde her kanat için bir çatı; dereler (iki çatının birleştiği yer) kendiliğinden oluşur. Kanatlar en üst katın odalarını izler.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Planı kuzeye göre döndürür: 0° = planın üstü kuzey, 90° = planın üstü doğuya bakar. 3B görünümdeki güneş ve gölgeler bunu izler.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Gezi sırasında göz yüksekliğin (🚶 Gez, 3B görünüm): bir yetişkin için 1,60 m, bir çocuk gibi görmek için 1 m.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Evde göz yüksekliğin: bir yetişkin için 1,60 m, bir çocuk gibi görmek için 1 m.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Duvarın ortasının düz çizgiden ne kadar çıktığı: bir yana +, öbür yana −; 0 = düz bir duvar. Yuvarlak bir kule, bir apsis, kavisli bir duvar için.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Bu duvardaki deseni (tuğlalar, taşlar, duvar kâğıdı) büyütür veya küçültür: %100 = gerçek boyut.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Pencerenin alt kenarının döşemeden yüksekliği (çoğu zaman 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Döşemesiz bir alan: alttaki kat görünür (asma kat, çift yükseklikli oturma odası, merdiven boşluğu). 3B’de döşeme delinir ve gezide oraya yürünemez.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Boşluğun bir duvara değmeyen kenarları boyunca kendiliğinden konur (bir merdivenin ulaştığı yerde açık bırakılır).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Odayı taşıdığında duvarları (kapılar ve pencereler dahil), eşyaları ve metinleri onu izler. Sürüklerken ⇧: yalnızca oda.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Çıkılacak yükseklik: katın yüksekliği artı döşeme kalınlığı (Ev sekmesinde ayarlanır). “Yükseklik” alanında elle sabitlemek için işareti kaldır.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Merdivenin üstünde üst katın döşemesini deler (merdiven boşluğu), varış tarafı dışında çevresine bir korkuluk koyar.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Nesnenin alt kenarının döşemeden yüksekliği: yerdeki bir eşya için 0, duvara asılı bir saat için 140.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Nesneyi oranlarını koruyarak büyütür veya küçültür: çok küçük veya çok büyük gelen içe aktarılmış bir model için pratik.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ Metinden plandaki bir noktaya (kuyu, bir pencere, bir şömine…) bir ok. Yöneltmek için kırmızı tutamacı sürükle.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Açı mıknatısı açıkken çizilen bir duvar bu adımdaki açılara oturur: 90° = yalnızca dik açılar, 45° = çaprazlar da, 15° = daha ince.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Kaydır: ev, yıla en yakın (önceki veya eşit) dönemi alır.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Planı kuzeye göre döndürür: 0° = planın üstü kuzey, 90° = planın üstü doğuya bakar. Gölgeler bunu izler.
+Licence : {x} ¦ Lisans: {x}
+Auteur : {x} ¦ Yazar: {x}
+Source : {x} ¦ Kaynak: {x}
+🕰 ancien ¦ 🕰 eski
+Forme « {name} » ¦ Biçim: “{name}”
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, {h} cm yüksek, yerden {elev} cm
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, {h} cm yüksek
+{name} (à moi) ¦ {name} (benim)
+Comme « {name} » ¦ Şunun gibi: “{name}”
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ “{name}” nesnesi kütüphaneden silinsin mi?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ “{name}”, “{cat}” içinde: yerleştirmek için ona tıkla.
+Supprimer « {name} » de « Mes objets » ? ¦ “{name}”, “Nesnelerim”den silinsin mi?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ Evlerine yerleştirmek için <b>telifsiz</b> 3B modeller (CC0: kamu malı, koşulsuz kullanılabilir). Lisansları, yazarları ve kaynaklarıyla birlikte <b>Mobilya → “Nesnelerim”</b> içine gelirler.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Modelleri sağlayan: {ph} (Powered by Poly Haven) — lisans {cc0}. İndirme senin sunucun üzerinden yapılır (model başına yaklaşık 1 ile 10 MB, dokular dahil).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Önce yazarının sitesinden bir <b>CC0</b> paketi (bir .zip dosyası) indir, sonra onu burada seç: saklanacak modelleri işaretlersin (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} ({total} içinden en çok indirilen {n})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ “{name}” Mobilya → “Nesnelerim” içinde (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Pakette bulunan lisans
+Mesure et vignettes… ¦ Ölçüm ve küçük resimler…
+{models} dans « Mes objets ». ¦ “Nesnelerim” içinde: {models}.
+Renommer, ranger, voir la licence, supprimer ¦ Adını değiştir, yerleştir, lisansı gör, sil
+Modifier ou supprimer cet objet ¦ Bu nesneyi düzenle veya sil
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Hiçbir şey uymuyor. ＋ Nesneyi oluştur ya da 📦 Çevrimiçi kütüphanede ara.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Burada: oluşturduğun nesneler (＋ Nesne oluştur), 📦 Çevrimiçi kütüphaneden indirilenler ve içe aktarılmış 3B dosyalar (⤒ İçe aktar, üstte).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Bu kategoride eski bir şey yok (“🕰 Yalnızca eski” işaretini kaldır).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Bu kategoride gösterilen nesne yok (yeniden göstermek için ⚙️ Düzenle).
+Chercher… lit, lampe, piano, vache, salon… ¦ Ara… yatak, lamba, piyano, inek, salon…
+Chercher un objet ¦ Nesne ara
+Un objet à toi : nom, taille, couleur, forme, image ¦ Sana ait bir nesne: ad, boyut, renk, biçim, görüntü
+Des modèles 3D libres de droit (CC0) à télécharger ¦ İndirilecek telifsiz (CC0) 3B modeller
+Montrer, cacher, ranger les catégories et les objets ¦ Kategorileri ve nesneleri göster, gizle, düzenle
+Ne montrer que le mobilier et les objets d’autrefois ¦ Yalnızca eski zamanların mobilyalarını ve nesnelerini göster
+＋ Créer un objet ¦ ＋ Nesne oluştur
+📦 Bibliothèque en ligne ¦ 📦 Çevrimiçi kütüphane
+⚙️ Ranger ¦ ⚙️ Düzenle
+🕰 Ancien seulement ¦ 🕰 Yalnızca eski
+Ovale ¦ Oval
+Triangle ¦ Üçgen
+En L ¦ L biçimli
+Lit simple ¦ Tek kişilik yatak
+Lit clos ¦ Dolap yatak
+Meuble à portes ¦ Kapaklı dolap
+Banc-coffre à dossier ¦ Arkalıklı sandık bank
+Horloge ¦ Saat
+Cheminée à manteau ¦ Şömineli ocak
+Cheminée à manteau (hotte) ¦ Şömineli ocak (davlumbaz)
+Poêle ¦ Soba
+Cuisinière ¦ Ocak
+Évier ¦ Eviye
+Lavabo, toilette ¦ Lavabo, tuvalet masası
+Maie, pétrin ¦ Hamur teknesi
+Broc et cuvette ¦ İbrik ve leğen
+Fontaine ¦ Çeşme
+Baratte ¦ Yayık
+Lampe ¦ Lamba
+Bougeoir ¦ Şamdan
+Chenets ¦ Ocak demirleri
+Fer à repasser ¦ Ütü
+Banc d’école ¦ Okul sırası
+Miroir, cadre au mur ¦ Ayna, duvar çerçevesi
+Statue ¦ Heykel
+Animal ¦ Hayvan
+Cabane ¦ Kulübe
+Cône, tipi ¦ Koni, çadır
+Bloc (boîte pleine) ¦ Blok (dolu kutu)
+Cylindre ¦ Silindir
+Bassine, baquet (ouvert) ¦ Leğen, tekne (açık)
+Table (plateau et 4 pieds) ¦ Masa (tabla ve 4 ayak)
+Table ovale ¦ Oval masa
+Caisson sur pieds ¦ Ayaklı kasa
+Comptoir, plan de travail ¦ Tezgâh, çalışma tezgâhı
+Buffet deux-corps, vaisselier ¦ İki gövdeli büfe, tabaklık
+Vitrine ¦ Vitrin
+Armoire (corniche) ¦ Gardırop (kornişli)
+Commode à tiroirs ¦ Çekmeceli konsol
+Coffre à couvercle ¦ Kapaklı sandık
+Étagère ouverte ¦ Açık raf
+Lit ¦ Yatak
+Poêle rond (Godin) ¦ Yuvarlak soba (Godin)
+Crémaillère et chaudron ¦ Kazan askısı ve kazan
+Baignoire sur pieds ¦ Ayaklı küvet
+Lavabo sur colonne ¦ Ayaklı lavabo
+Fontaine sur support ¦ Ayak üzerinde çeşme
+Baratte à piston ¦ Pistonlu yayık
+Lampe à pétrole ¦ Gaz lambası
+Bougeoir, chandelier ¦ Şamdan, çok kollu şamdan
+Poste TSF ¦ Radyo (TSF)
+Phonographe ¦ Fonograf
+Machine à coudre à pédale ¦ Pedallı dikiş makinesi
+Banc d’école à pupitre ¦ Rahleli okul sırası
+Pressoir, presse ¦ Pres, mengene
+Miroir ¦ Ayna
+Cadre au mur ¦ Duvar çerçevesi
+Statue sur socle ¦ Kaide üzerinde heykel
+Plante en pot ¦ Saksı bitkisi
+Boule ¦ Küre
+Cône ¦ Koni
+Cabane (toit) ¦ Kulübe (çatılı)
+À plat (tapis) ¦ Düz (halı)
+Plateau avec l’image dessus ¦ Üstünde görüntü olan tabla
+MAISON · MOBILIER ¦ EV · MOBİLYA
+MAISON · MES OBJETS ¦ EV · NESNELERİM
+Créer l’objet ¦ Nesneyi oluştur
+Partir d’un objet existant (facultatif) ¦ Var olan bir nesneden başla (isteğe bağlı)
+— un objet vide — ¦ — boş bir nesne —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ ör. Büyükannenin gardırobu, değirmenin presi…
+Nouvelle catégorie… ¦ Yeni kategori…
+ex. Grenier ¦ ör. Tavan arası
+Vu de dessus (2D) ¦ Üstten görünüm (2B)
+En volume (3D) ¦ Hacimli (3B)
+2ᵉ couleur (pieds, poignées, filets) ¦ 2. renk (ayaklar, kulplar, şeritler)
+2ᵉ couleur ¦ 2. renk
+Une deuxième couleur ¦ İkinci bir renk
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Yerde (0), masada (75), duvara asılı (140)…
+Tourné de ¦ Döndürme
+Image vue de dessus (facultatif) ¦ Üstten görünüm görüntüsü (isteğe bağlı)
+🖼️ Une photo des médias… ¦ 🖼️ Medyadan bir fotoğraf…
+Retirer l’image ¦ Görüntüyü çıkar
+Note (souvenir, provenance) ¦ Not (anı, nereden geldiği)
+Aperçu en 3D ¦ 3B önizleme
+⏳ Mesure… ¦ ⏳ Ölçülüyor…
+Une photo de l’objet (vue de dessus) ¦ Nesnenin bir fotoğrafı (üstten görünüm)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Görüntü plana nesnenin boyutunda konur.
+Ceux déjà posés dans les maisons restent. ¦ Evlere önceden konmuş olanlar kalır.
+Donne un nom à la nouvelle catégorie. ¦ Yeni kategoriye bir ad ver.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Nesne değiştirildi (önceden konmuş olanlar eski biçimlerini korur).
+Montrer aussi dans la catégorie ¦ Şu kategoride de göster
+— seulement dans « Mes objets » — ¦ — yalnızca “Nesnelerim” içinde —
+« Mes objets » seulement ¦ Yalnızca “Nesnelerim”
+Licence ¦ Lisans
+non précisée (fichier importé) ¦ belirtilmemiş (içe aktarılmış dosya)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ 3B dosya silinir: konduğu yerlerde yeniden basit bir kutu olur.
+Aucun objet. ¦ Nesne yok.
+⚙️ Ranger le mobilier ¦ ⚙️ Mobilyayı düzenle
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Görmek istediklerini işaretle ve ↑ ↓ ile sırala: önce kategoriler, sonra her kategorinin nesneleri.
+Objets de ¦ Nesneleri:
+Mobilier remis comme au départ. ¦ Mobilya başlangıçtaki gibi yapıldı.
+Garde au moins une catégorie. ¦ En az bir kategori bırak.
+Kenney — tous les packs 3D ¦ Kenney — tüm 3B paketler
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — “CC0” filtresi
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Çevrimiçi kütüphane (telifsiz)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Ara (Fransızca veya İngilizce): chaise, tonneau, lampe, vase…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (çevrimiçi)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ Bir ZIP paketi (Kenney, Quaternius…)
+Ranger aussi dans ¦ Şuraya da yerleştir
+Chargement de la liste… ¦ Liste yükleniyor…
+Recherche… ¦ Aranıyor…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ ZIP dosyasını seç…
+Voir sur Poly Haven ¦ Poly Haven’da gör
+Aucun modèle ne correspond. ¦ Uyan model yok.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ İnternet olmadan da önceden indirilmiş bir ZIP paketini içe aktarabilir (yandaki sekme) ya da ＋ kendi nesnelerini oluşturabilirsin.
+Un téléchargement est en cours… ¦ Bir indirme sürüyor…
+⏳ Téléchargement… ¦ ⏳ İndiriliyor…
+✓ Dans « Mes objets » ¦ ✓ “Nesnelerim” içinde
+Envoi et lecture du pack… ¦ Paket gönderiliyor ve okunuyor…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Gönderilemedi (dosya sunucu için çok mu büyük?).
+Envoi impossible. ¦ Gönderilemedi.
+Image impossible. ¦ Görüntü olmadı.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ Pakette lisans dosyası yok: yazarın sitesinde gerçekten telifsiz olduğunu kontrol et.
+Auteur, source ¦ Yazar, kaynak
+Adresse du pack (facultatif) ¦ Paketin adresi (isteğe bağlı)
+⤒ Importer les modèles cochés ¦ ⤒ İşaretli modelleri içe aktar
+Coche au moins un modèle. ¦ En az bir model işaretle.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Paketin lisansını belirt (örneğin CC0 1.0).
+Surface (m²) ¦ Alan (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Carrez yasası ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ En düşük yükseklik (cm)
+Hauteur maxi (cm) ¦ En yüksek yükseklik (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ 5 cm’den kısa bir duvar (fazladan bir çift tık mı?)
+« {name} » n’a pas de porte ¦ Kapısı olmayan oda: “{name}”
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Merdiven biraz dik: {rise} cm yüksekliğinde {n} basamak, basamak genişliği {going} cm (2 h + g = {sum} cm)|Merdiven biraz dik: {rise} cm yüksekliğinde {n} basamak, basamak genişliği {going} cm (2 h + g = {sum} cm)
+Un escalier sans étage au-dessus ¦ Üstünde kat olmayan bir merdiven
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Merdiven şu katın döşemesini delmiyor: “{name}” (Özellikler → “Üstteki döşemeyi aç”)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ En alt katta bir boşluk: hiçbir yere açılmıyor
+Des pièces sans aucun mur ¦ Hiç duvarı olmayan odalar
+maison|Mur ¦ Duvar
+maison|Ouverture ¦ Açıklık
+maison|Combles ¦ Çatı arası
+maison|Pièce ¦ Oda
+maison|Escalier ¦ Merdiven
+maison|Étage ¦ Kat
+Mur ¦ Duvar
+Escalier ¦ Merdiven
+Combles ¦ Çatı arası
+Plans ¦ Planlar
+▶ Visite guidée ¦ ▶ Rehberli gezi
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Uygulama olmadan açılan, salt okunur gezi. Döndürmek için fare veya parmak, yakınlaştırmak için tekerlek, yürümek için “🚶 Gez” (W A S D veya oklar).
+📐 Surfaces ¦ 📐 Alanlar
+Surfaces ¦ Alanlar
+⚠️ Vérifier le plan ¦ ⚠️ Planı kontrol et
+🗺 Visite guidée ¦ 🗺 Rehberli gezi
+aucun arrêt ¦ durak yok
+📷 Photos d’époque ¦ 📷 Dönem fotoğrafları
+🏘 Le hameau ¦ 🏘 Mezra
+cette maison seule ¦ yalnızca bu ev
+foyer n° {n} ¦ hane no. {n}
+{a} à {b} m ¦ {a} ile {b} m arası
+un clic : aller à l’endroit ¦ bir tık: o yere git
+{name} — coupe ¦ {name} — kesit
+Texte de l’arrêt {n} ¦ {n}. durağın metni
+Texte de l’arrêt ¦ Durağın metni
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Videoyu dışa aktar: {fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: kamera birinden ötekine kayar ve her durağın metni altyazı olarak görünür. Video gerçek zamanlı yapılır (yaklaşık {s} saniye): pencereyi açık bırak.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Bir pencere artık var olmayan bir duvarın üzerinde
+Une porte est posée sur un mur qui n’existe plus ¦ Bir kapı artık var olmayan bir duvarın üzerinde
+Une fenêtre est plus large que son mur ¦ Bir pencere duvarından geniş
+Une porte est plus large que son mur ¦ Bir kapı duvarından geniş
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Bir pencere tavanı aşıyor ({wall} cm duvar için {top} cm): döşeme onu kesiyor
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Bir kapı tavanı aşıyor ({wall} cm duvar için {top} cm): döşeme onu kesiyor
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Bir pencere bu noktada çatı eğiminin altına giriyor
+Une porte passe sous la pente du toit à cet endroit ¦ Bir kapı bu noktada çatı eğiminin altına giriyor
+🧰 Outils de la maison ¦ 🧰 Evin araçları
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ 🧾 Tablo’da açılan alanlar tablosu
+Clique deux points sur le plan : la ligne de coupe ¦ Planda iki noktaya tıkla: kesit çizgisi
+📐 Surfaces par pièce ¦ 📐 Odalara göre alanlar
+✂ Tracer la ligne de coupe ¦ ✂ Kesit çizgisini çiz
+✂ Voir la coupe ¦ ✂ Kesiti gör
+🕰 L’année ¦ 🕰 Yıl
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Yılı kaydırırken önceki dönem sepya kesik çizgilerle görünür kalır
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Önceki dönemi hayalet olarak göster
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Hazır video olarak rehberli gezi: bir duraktan ötekine kayılır, metin altyazı olarak
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ Her durak için bir görüntü ve metinler, bir .zip dosyasında: 🎬 Montaj’a sürüklemek için
+✎ Les arrêts ¦ ✎ Duraklar
+🎬 Vidéo de la visite… ¦ 🎬 Gezinin videosu…
+⤓ Images de la visite ¦ ⤓ Gezinin görüntüleri
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Duraklar ve fotoğraflar gezi sırasında konur (🚶 Gez, 3B görünüm)
+＋ Arrêt, 📷 photo… ¦ ＋ Durak, 📷 fotoğraf…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ Gönderilecek bir .html dosyası: 3B ev ve planları, uygulama olmadan, salt okunur (kişiler ve anılar olmadan)
+🏘 Bâtiments du terrain… ¦ 🏘 Arazideki binalar…
+📤 Partager la visite ¦ 📤 Geziyi paylaş
+Aucune pièce dessinée. ¦ Çizilmiş oda yok.
+Toute la maison ¦ Tüm ev
+Loi Carrez ¦ Carrez yasası
+Surface ¦ Alan
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Carrez yasası: yalnızca ayakta durulabilen kısımlar sayılır (tavan yüksekliği en az 1,80 m, çatı araları dahil). Boşluklar ve merdivenler sayılmaz.
+Le Tableur n’est pas prêt. ¦ Tablo hazır değil.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Bildirilecek bir şey yok: kapılar, pencereler, merdivenler ve odalar tutarlı.
+✓ Rien à signaler. ¦ ✓ Bildirilecek bir şey yok.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Planda kesit çizgisinin iki ucuna tıkla
+Ligne de coupe ¦ Kesit çizgisi
+Trace d’abord la ligne de coupe sur le plan. ¦ Önce planda kesit çizgisini çiz.
+✂ Coupe de la maison ¦ ✂ Evin kesiti
+⤓ Exporter en SVG ¦ ⤓ SVG olarak dışa aktar
+⤓ Exporter en PNG ¦ ⤓ PNG olarak dışa aktar
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ 3B görünümü aç, sonra “🚶 Gez”: gezinin altında “📍 Burada durak” bir durak koyar (sesli okunan bir metinle) ve “📷 Burada dönem fotoğrafı” o noktadan çekilmiş bir fotoğraf koyar.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Rehberli gezinin durakları
+Arrêt retiré ¦ Durak çıkarıldı
+Arrêts rangés ¦ Duraklar sıralandı
+Impossible de faire les images. ¦ Görüntüler yapılamadı.
+Une image par arrêt… ¦ Her durak için bir görüntü…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Önce durak koy: 3B görünüm → 🚶 Gez → 📍 Burada durak.
+🎬 La vidéo de la visite guidée ¦ 🎬 Rehberli gezinin videosu
+Paysage 1280 × 720 (écran) ¦ Yatay 1280 × 720 (ekran)
+Carré 1080 × 1080 (messageries) ¦ Kare 1080 × 1080 (mesajlaşma)
+Titre au début ¦ Başta başlık
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Bu tarayıcı video kaydedemiyor: “⤓ Gezinin görüntüleri”ni kullan.
+🔴 Enregistrement de la visite… ¦ 🔴 Gezi kaydediliyor…
+fenêtre des médias indisponible ¦ medya penceresi kullanılamıyor
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Video dışa aktarıldı ve bir kopyası medyaya kondu.
+✓ Vidéo exportée. ¦ ✓ Video dışa aktarıldı.
+Photo retirée ¦ Fotoğraf çıkarıldı
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Dosya hazır: gönder; uygulama olmadan bir tarayıcıda çift tıkla açılır.
+Retirer du terrain ¦ Araziden çıkar
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Mezra: arazideki binalar
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Çiftlik, ambar, fırın, kuyu, komşu evler: her biri “🏠 Aile evleri” listesinden bir ev, buraya yanına konmuş (3B’de ve planda kesik çizgiyle).
+＋ Ajouter un bâtiment ¦ ＋ Bina ekle
+N° de foyer au recensement (facultatif) ¦ Nüfus sayımındaki hane no. (isteğe bağlı)
+Bâtiment ajouté ¦ Bina eklendi
+Bâtiment déplacé ¦ Bina taşındı
+Bâtiment retiré ¦ Bina çıkarıldı
+Soleil à {deg}° de haut, au {dir} ¦ Güneş {deg}° yükseklikte, yön: {dir}
+boussole|nord ¦ kuzey
+boussole|nord-est ¦ kuzeydoğu
+boussole|est ¦ doğu
+boussole|sud-est ¦ güneydoğu
+boussole|sud ¦ güney
+boussole|sud-ouest ¦ güneybatı
+boussole|ouest ¦ batı
+boussole|nord-ouest ¦ kuzeybatı
+🌙 Nuit ¦ 🌙 Gece
+Crépuscule ¦ Alacakaranlık
+(pose une lampe pour éclairer) ¦ (aydınlatmak için bir lamba koy)
+nuit polaire ¦ kutup gecesi
+soleil de minuit ¦ gece yarısı güneşi
+lever {rise}, coucher {set} ¦ doğuş {rise}, batış {set}
+France (lieu de la maison inconnu) ¦ Fransa (evin yeri bilinmiyor)
+au sol {len} ¦ yerde {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Durak {n} / {total}
+🪜 Un escalier : ¦ 🪜 Bir merdiven:
+⬆ Monter (E) ¦ ⬆ Çık (E)
+⬇ Descendre (C) ¦ ⬇ İn (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Bu glTF ayrı dosyalar kullanıyor: onu GLB olarak (tek dosya) dışa aktar.
+Format 3D inconnu. ¦ Bilinmeyen 3B biçimi.
+✦ Les souvenirs de la pièce ¦ ✦ Odanın anıları
+☀️ Lumière du jour ¦ ☀️ Gün ışığı
+Le soleil passe d’une heure à l’autre ¦ Güneş saatten saate geçer
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ Günün bu saatinde, 1 Ocak’tan 31 Aralık’a: gölgeler kışın uzar
+▶ Voir la journée ¦ ▶ Günü oynat
+▶ Voir l’année ¦ ▶ Yılı oynat
+❄️ Hiver ¦ ❄️ Kış
+🌱 Printemps ¦ 🌱 İlkbahar
+☀️ Été ¦ ☀️ Yaz
+🍂 Automne ¦ 🍂 Sonbahar
+📅 Aujourd’hui ¦ 📅 Bugün
+Ombres portées ¦ Düşen gölgeler
+🚶 Visite ¦ 🚶 Gezi
+Monter à l’étage du dessus (E ou Page ↑) ¦ Üst kata çık (E veya Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Alt kata in (C veya Page ↓)
+Yeux à ¦ Göz yüksekliği
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Rehberli gezinin bir durağı, burada, o yöne bakarak (sesli okunan bir metinle)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Bu noktadan, bu yönde çekilmiş eski bir fotoğraf: bugünkü evle karşılaştırılır
+📍 Arrêt ici ¦ 📍 Burada durak
+📷 Photo d’époque ici ¦ 📷 Burada dönem fotoğrafı
+Petite carte : clic pour t’y rendre ¦ Küçük harita: oraya gitmek için tıkla
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ W A S D veya oklar: yürü · Shift: koş · fare etrafa bakar · Esc: fareyi serbest bırak
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Sol alttaki daire: yürü · görünümde sürükle: bak · ✦: anıyı görmek için dokun
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ W A S D veya oklar: yürü · görünüme tıkla: fareyle bak · ✦: anıyı görmek için tıkla · Esc: çık
+✋ Arrêter la visite ¦ ✋ Geziyi durdur
+Autrefois ¦ Eskiden
+Autrefois ou aujourd’hui ¦ Eskiden veya bugün
+Arrêt suivant ¦ Sonraki durak
+Arrêter la visite guidée ¦ Rehberli geziyi durdur
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Önce durak koy (🚶 Gez → 📍 Burada durak).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Bu tarayıcı video kaydedemiyor.
+Remettre la vue comme au départ ¦ Görünümü başlangıçtaki gibi yap
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ {n} numaralı medyanın görüntüsü bulunamadı: yerine düz bir tuval konuyor.
+Cadre {n} : une image ¦ Çerçeve {n}: bir görüntü
+Cadre {n} : vide ¦ Çerçeve {n}: boş
+Image du cadre {n} ¦ Çerçeve {n} görüntüsü
+Prise dans les médias ¦ Medyadan alındı
+L’image de « {name} » ¦ Görüntü: “{name}”
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Şunun üzerine bırak: “{name}” (çerçeve {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Şunun üzerine bırak: “{name}”
+Remplir (recadrer) ¦ Doldur (kırp)
+Ajuster (toute l’image) ¦ Sığdır (tüm görüntü)
+Centrer (taille réelle) ¦ Ortala (gerçek boyut)
+Pas d’image. ¦ Görüntü yok.
+Image introuvable ¦ Görüntü bulunamadı
+Le cadre ¦ Çerçeve
+MAISON · IMAGE ¦ EV · GÖRÜNTÜ
+Poser cette image ¦ Bu görüntüyü yerleştir
+Ou un souvenir de cet objet : ¦ Ya da bu nesnenin bir anısı:
+La rattacher aussi aux souvenirs de cet objet ¦ Bunu bu nesnenin anılarına da bağla
+🏷 Garder aussi comme souvenir ¦ 🏷 Anı olarak da sakla
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Bu görüntü medyada bulunamıyor: yerine düz bir tuval konuyor. Başka birini seç.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Önizleme: görüntüyü taşımak için sürükle, yakınlaştırmak için tekerlek
+Glisse pour déplacer l’image · molette pour zoomer ¦ Görüntüyü taşımak için sürükle · yakınlaştırmak için tekerlek
+Dans le cadre ¦ Çerçevede
+Remettre l’image au centre, sans zoom ¦ Görüntüyü yakınlaştırmasız olarak ortaya geri koy
+↺ Recadrage de départ ¦ ↺ Başlangıçtaki kırpma
+Recadrage de départ ¦ Başlangıçtaki kırpma
+Sa couleur ¦ Rengi
+Passe-partout ¦ Paspartu
+🖼 Images des cadres ¦ 🖼 Çerçevelerin görüntüleri
+🖼 Image ¦ 🖼 Görüntü
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Bilgisayardan bir görüntüyü de nesnenin üzerine, planda veya 3B görünümde sürükleyebilirsin: medyaya girer.
+Image posée ¦ Görüntü yerleştirildi
+Image retirée ¦ Görüntü çıkarıldı
+Import de l’image… ¦ Görüntü içe aktarılıyor…
+Image déposée sur l’objet ¦ Görüntü nesnenin üzerine bırakıldı
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Görüntü medyaya kondu ve nesnenin üzerine yerleştirildi.
+Image prise dans les souvenirs ¦ Görüntü anılardan alındı
+Image tournée ¦ Görüntü döndürüldü
+Image réglée ¦ Görsel ayarlandı
+Image recadrée ¦ Görsel kırpıldı
+Image zoomée ¦ Görsel yakınlaştırıldı
+Cote ¦ Ölçü
+Hauteur (cm) ¦ Yükseklik (cm)
+Contenu ¦ İçerik
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Planı kuzeye göre döndürür: 0° = planın üstü kuzeyde, 90° = planın üstü doğuya bakıyor. Güneş ve gölgeler de buna uyar.
+Lit d’une personne ¦ Tek kişilik yatak
+Chambre ¦ Yatak odası
+Lit double ¦ Çift kişilik yatak
+Lit clos (breton) ¦ Kapalı yatak (Bretagne)
+Berceau ¦ Beşik
+Lit d’enfant ¦ Çocuk yatağı
+Table de chevet ¦ Komodin
+Commode ¦ Şifonyer
+Coiffeuse ¦ Makyaj masası
+Prie-Dieu ¦ Diz çökme sırası (prie-Dieu)
+Religion, souvenirs ¦ Din, hatıralar
+Table ¦ Masa
+Séjour ¦ Oturma odası
+Table ronde ¦ Yuvarlak masa
+Chaise ¦ Sandalye
+Fauteuil ¦ Koltuk
+Canapé ¦ Kanepe
+Banc ¦ Bank
+Buffet ¦ Büfe
+Vaisselier ¦ Tabaklık
+Horloge comtoise ¦ Comtoise saat
+Piano droit ¦ Duvar piyanosu
+Bibliothèque ¦ Kitaplık
+Cheminée ¦ Şömine
+Poêle à bois ¦ Odun sobası
+Tapis ¦ Halı
+Lampadaire ¦ Ayaklı lamba
+Plante ¦ Bitki
+Poste de radio (TSF) ¦ Radyo (TSF)
+Cuisinière à bois ¦ Odunlu ocak
+Cuisine ¦ Mutfak
+Évier en pierre ¦ Taş eviye
+Pétrin ¦ Hamur teknesi
+Garde-manger ¦ Kiler dolabı
+Réfrigérateur ¦ Buzdolabı
+Plan de travail ¦ Tezgâh
+Baignoire ¦ Küvet
+Salle d’eau ¦ Banyo
+Douche ¦ Duş
+WC ¦ WC
+Lavabo ¦ Lavabo
+Table de toilette (broc et cuvette) ¦ Tuvalet masası (ibrik ve leğen)
+Armoire ¦ Gardırop
+Rangement ¦ Depolama
+Coffre ¦ Sandık
+Étagère ¦ Raf
+Rouet ¦ Çıkrık
+Métiers, atelier ¦ Meslekler, atölye
+Métier à tisser ¦ Dokuma tezgâhı
+Établi ¦ Çalışma tezgâhı
+Tonneau ¦ Fıçı
+Machine à coudre ¦ Dikiş makinesi
+Enclume ¦ Örs
+Mangeoire, crèche ¦ Yemlik, ahır yemliği
+Ferme, animaux ¦ Çiftlik, hayvanlar
+Charrette ¦ Araba (at arabası)
+Puits ¦ Kuyu
+Jardin, extérieur ¦ Bahçe, dış mekân
+Arbre ¦ Ağaç
+Voiture ¦ Otomobil
+Banc de jardin ¦ Bahçe bankı
+Escalier droit ¦ Düz merdiven
+Structure ¦ Yapı
+Escalier tournant ¦ Döner merdiven
+Poteau, pilier ¦ Direk, sütun
+Placard ¦ Gömme dolap
+Lit bateau (Empire) ¦ Kayık yatak (Empire)
+Lit Louis-Philippe ¦ Louis-Philippe yatak
+Lit à baldaquin ¦ Cibinlikli yatak
+Lit en fer forgé ¦ Ferforje yatak
+Grand lit (160) ¦ Büyük yatak (160)
+Paillasse (lit de paille) ¦ Ot şilte (saman yatak)
+Armoire normande ¦ Normandiya gardırobu
+Armoire à glace ¦ Aynalı gardırop
+Chiffonnier, semainier ¦ Şifoniyer, haftalık
+Table de nuit à marbre ¦ Mermerli komodin
+Lampe de chevet ¦ Başucu lambası
+Pot de chambre ¦ Lazımlık
+Paravent ¦ Paravan
+Psyché (miroir sur pied) ¦ Boy aynası (ayaklı ayna)
+Fauteuil Voltaire ¦ Voltaire koltuk
+Banquette de pied de lit ¦ Yatak ucu puf
+Descente de lit ¦ Yatak kenarı halısı
+Dressing ¦ Giyinme odası
+Chaise paillée ¦ Hasır sandalye
+Coffre de mariage ¦ Çeyiz sandığı
+Malle-cabine ¦ Kabin bavulu
+Table de toilette à miroir ¦ Aynalı tuvalet masası
+Chaufferette, bassinoire ¦ Ayak ısıtıcısı, yatak ısıtıcısı
+Cheminée de chambre ¦ Yatak odası şöminesi
+Table ovale à rallonges ¦ Açılır oval masa
+Table de ferme ¦ Çiftlik masası
+Table basse ¦ Sehpa
+Guéridon ¦ Yuvarlak küçük masa
+Bergère ¦ Berjer
+Fauteuil à bascule ¦ Sallanan koltuk
+Canapé trois places ¦ Üçlü kanepe
+Méridienne ¦ Şezlong (méridienne)
+Pouf ¦ Puf
+Pendule de cheminée ¦ Şömine saati
+Grande cheminée à manteau ¦ Büyük davlumbazlı şömine
+Poêle en faïence ¦ Çini soba
+Meuble TV ¦ TV ünitesi
+Gramophone ¦ Gramofon
+Harmonium ¦ Armonyum
+Piano à queue ¦ Kuyruklu piyano
+Lustre ¦ Avize
+Tapis rond ¦ Yuvarlak halı
+Bibliothèque vitrée ¦ Camlı kitaplık
+Chaise cannée ¦ Hasır örgülü sandalye
+Jardinière ¦ Çiçeklik
+Cage à oiseaux ¦ Kuş kafesi
+Aquarium ¦ Akvaryum
+Console ¦ Konsol
+Bonheur-du-jour ¦ Bonheur-du-jour (yazı masası)
+Canapé-lit, clic-clac ¦ Çekyat
+Potager (fourneau maçonné) ¦ Taş ocak (örme fırın)
+Âtre avec crémaillère ¦ Çengelli ocak
+Four encastrable ¦ Ankastre fırın
+Plaques de cuisson ¦ Ocak
+Lave-vaisselle ¦ Bulaşık makinesi
+Congélateur coffre ¦ Sandık tipi dondurucu
+Glacière (armoire à glace) ¦ Buzluk (buz dolabı)
+Évier double ¦ Çift gözlü eviye
+Îlot central ¦ Orta ada
+Plan de travail en L ¦ L biçimli tezgâh
+Hotte ¦ Davlumbaz
+Meuble haut ¦ Üst dolap
+Meuble bas ¦ Alt dolap
+Tabouret ¦ Tabure
+Table de cuisine ¦ Mutfak masası
+Panetière ¦ Ekmek dolabı
+Billot de boucher ¦ Kasap kütüğü
+Seau, cruche ¦ Kova, testi
+Saloir, jarre ¦ Tuzlama küpü, küp
+Micro-ondes ¦ Mikrodalga fırın
+Cuisinière à gaz ¦ Gazlı ocak
+Chaudron ¦ Kazan
+Moulin à café ¦ Kahve değirmeni
+Réfrigérateur américain ¦ Amerikan buzdolabı
+Égouttoir, vaisselier mural ¦ Bulaşıklık, duvar tabaklığı
+Baignoire sabot ¦ Oturmalı küvet
+Baignoire sur pieds (fonte) ¦ Ayaklı küvet (döküm)
+Cuvier, baquet ¦ Çamaşır teknesi, tekne
+Bidet ¦ Bide
+Double vasque ¦ Çift lavabo
+Douche à l’italienne ¦ Zemin seviyesinde duş
+Machine à laver ¦ Çamaşır makinesi
+Sèche-linge ¦ Kurutma makinesi
+Chauffe-eau, ballon ¦ Su ısıtıcı, termosifon
+Radiateur ¦ Radyatör
+Sèche-serviettes ¦ Havlu ısıtıcı
+Meuble vasque ¦ Lavabo dolabı
+Miroir de salle de bains ¦ Banyo aynası
+WC à la turque ¦ Alaturka tuvalet
+Chaise percée ¦ Lazımlıklı sandalye
+Lessiveuse ¦ Çamaşır kazanı
+Étendoir à linge ¦ Çamaşır askısı
+Panier à linge ¦ Çamaşır sepeti
+Colonne de rangement ¦ Boy dolabı
+WC suspendu ¦ Asma klozet
+Bac à douche ¦ Duş teknesi
+Malle de voyage ¦ Seyahat sandığı
+Bahut ¦ Bahut (alçak dolap)
+Buffet deux corps ¦ İki gövdeli büfe
+Enfilade ¦ Uzun büfe
+Confiturier ¦ Reçel dolabı
+Étagère métallique ¦ Metal raf
+Penderie, portant ¦ Elbise askılığı
+Portemanteau ¦ Portmanto
+Meuble à cases ¦ Bölmeli dolap
+Placard mural ¦ Duvar dolabı
+Meuble à chaussures ¦ Ayakkabılık
+Casier à bouteilles ¦ Şişe rafı
+Pile de cartons ¦ Karton kutu yığını
+Cantine militaire ¦ Asker sandığı
+Armoire à linge ¦ Çamaşır dolabı
+Porte-parapluies ¦ Şemsiyelik
+Meuble d’entrée ¦ Antre dolabı
+Vestiaire métallique ¦ Metal soyunma dolabı
+Commode basse ¦ Alçak şifonyer
+Coffre à bois ¦ Odun sandığı
+Secrétaire à abattant ¦ Kapaklı sekreter
+Bureau plat (ministre) ¦ Düz çalışma masası (bakan masası)
+Bureau à cylindre ¦ Silindir kapaklı masa
+Fauteuil de bureau ¦ Çalışma koltuğu
+Chaise de bureau en bois ¦ Ahşap çalışma sandalyesi
+Cartonnier ¦ Dosya dolabı
+Classeur à tiroirs ¦ Çekmeceli dosya dolabı
+Ordinateur (écran) ¦ Bilgisayar (ekran)
+Imprimante, scanner ¦ Yazıcı, tarayıcı
+Globe terrestre ¦ Yerküre
+Coffre-fort ¦ Kasa
+Lampe de bureau ¦ Masa lambası
+Bibliothèque murale ¦ Duvar kitaplığı
+Table à dessin ¦ Çizim masası
+Boîtes d’archives ¦ Arşiv kutuları
+Téléphone mural (ancien) ¦ Duvar telefonu (eski)
+Tableau noir, tableau blanc ¦ Kara tahta, beyaz tahta
+Bureau moderne ¦ Modern çalışma masası
+Caisson à tiroirs ¦ Çekmeceli keson
+Fauteuil club ¦ Chesterfield koltuk
+Berceau en osier ¦ Hasır beşik
+Lit à barreaux ¦ Parmaklıklı yatak
+Lits superposés ¦ Ranza
+Table à langer ¦ Alt değiştirme masası
+Coffre à jouets ¦ Oyuncak sandığı
+Cheval à bascule ¦ Sallanan at
+Parc ¦ Oyun parkı
+Chaise haute ¦ Mama sandalyesi
+Pupitre d’écolier ¦ Öğrenci sırası
+Landau ¦ Bebek arabası
+Maison de poupée ¦ Oyuncak bebek evi
+Tipi ¦ Tipi çadırı
+Petite table ¦ Küçük masa
+Petite chaise ¦ Küçük sandalye
+Tapis de jeu ¦ Oyun halısı
+Ours en peluche ¦ Oyuncak ayı
+Bibliothèque basse ¦ Alçak kitaplık
+Trotteur, porteur ¦ Yürüteç, binmeli oyuncak
+Crucifix ¦ Haç
+Bénitier ¦ Kutsal su kabı
+Petit autel, oratoire ¦ Küçük sunak, dua köşesi
+Statue de la Vierge ¦ Meryem Ana heykeli
+Chandelier, cierge ¦ Şamdan, mum
+Portrait de famille ¦ Aile portresi
+Photo de mariage encadrée ¦ Çerçeveli düğün fotoğrafı
+Arbre généalogique encadré ¦ Çerçeveli soy ağacı
+Globe de mariée ¦ Gelin fanusu
+Cadre de médailles ¦ Madalya çerçevesi
+Bible familiale sur lutrin ¦ Kürsü üzerinde aile İncili
+Coffret à souvenirs ¦ Hatıra kutusu
+Vitrine à souvenirs ¦ Hatıra vitrini
+Lampe à huile ¦ Kandil
+Buste sur colonne ¦ Sütun üzerinde büst
+Icône, image pieuse ¦ İkona, dinî resim
+Pile d’albums de famille ¦ Aile albümleri yığını
+Plaque commémorative ¦ Anma plaketi
+Malle aux souvenirs ¦ Hatıra sandığı
+Croix de bois au mur ¦ Duvarda tahta haç
+Retable, armoire d’église ¦ Mihrap arkalığı, kilise dolabı
+Forge (foyer) ¦ Demirci ocağı
+Soufflet de forge ¦ Demirci körüğü
+Tour à bois ¦ Ahşap torna
+Presse à imprimer ¦ Matbaa makinesi
+Meule à aiguiser ¦ Bileği taşı
+Cuve de vigneron ¦ Bağcı teknesi
+Pressoir à vin ¦ Üzüm presi
+Alambic ¦ İmbik
+Comptoir de boutique ¦ Dükkân tezgâhı
+Balance à bascule ¦ Baskül
+Caisse enregistreuse ¦ Yazar kasa
+Étalage de magasin ¦ Mağaza teşhir rafı
+Fauteuil de barbier ¦ Berber koltuğu
+Établi de cordonnier ¦ Kunduracı tezgâhı
+Chevalet de peintre ¦ Ressam şövalesi
+Carreau de dentellière ¦ Dantelci yastığı
+Four de boulanger ¦ Fırıncı fırını
+Barrique ¦ Varil
+Meule de moulin ¦ Değirmen taşı
+Chevalet de scieur ¦ Bıçkıcı sehpası
+Établi de menuisier ¦ Marangoz tezgâhı
+Panneau à outils ¦ Alet panosu
+Vache ¦ İnek
+Cheval ¦ At
+Âne ¦ Eşek
+Cochon ¦ Domuz
+Mouton ¦ Koyun
+Chèvre ¦ Keçi
+Poule ¦ Tavuk
+Chien ¦ Köpek
+Chat ¦ Kedi
+Clapier à lapins ¦ Tavşan kafesi
+Poulailler ¦ Kümes
+Niche ¦ Köpek kulübesi
+Stalle, box d’écurie ¦ Ahır bölmesi
+Abreuvoir ¦ Suluk
+Râtelier à foin ¦ Saman yemliği
+Meule de foin ¦ Saman yığını
+Botte de paille ¦ Saman balyası
+Charrue ¦ Saban
+Herse ¦ Tırmık (tarla)
+Tracteur ancien ¦ Eski traktör
+Brouette ¦ El arabası
+Baratte à beurre ¦ Yayık
+Ruche ¦ Arı kovanı
+Coffre à grain ¦ Tahıl sandığı
+Bidon à lait ¦ Süt güğümü
+Tombereau ¦ Devrilir yük arabası
+Arbre fruitier ¦ Meyve ağacı
+Sapin, conifère ¦ Köknar, iğne yapraklı
+Haie ¦ Çit (bitki)
+Buisson, arbuste ¦ Çalı, ağaççık
+Massif de fleurs ¦ Çiçek tarhı
+Potager (planches) ¦ Sebze bahçesi (tarhlar)
+Mare, bassin ¦ Gölet, havuz
+Lavoir ¦ Çamaşırhane (lavoir)
+Four à pain ¦ Ekmek fırını
+Pompe à bras ¦ El pompası
+Croix de chemin, calvaire ¦ Yol haçı, calvaire
+Pierre tombale ¦ Mezar taşı
+Table de jardin ¦ Bahçe masası
+Chaise de jardin ¦ Bahçe sandalyesi
+Transat, chaise longue ¦ Şezlong
+Parasol ¦ Güneş şemsiyesi
+Barbecue ¦ Mangal
+Balançoire ¦ Salıncak
+Toboggan ¦ Kaydırak
+Pergola, tonnelle ¦ Pergola, çardak
+Clôture, barrière ¦ Çit, bariyer
+Portail ¦ Bahçe kapısı
+Muret de pierre ¦ Alçak taş duvar
+Bicyclette ¦ Bisiklet
+Cabane de jardin ¦ Bahçe kulübesi
+Serre ¦ Sera
+Tas de bois ¦ Odun yığını
+Bouleau, arbre fin ¦ Huş, ince ağaç
+Banc de pierre ¦ Taş bank
+Escalier en colimaçon ¦ Sarmal merdiven
+Échelle de meunier ¦ Değirmenci merdiveni
+Colonne ronde ¦ Yuvarlak sütun
+Poutre apparente ¦ Açıkta kiriş
+Trappe de cave ¦ Mahzen kapağı
+Marche, seuil ¦ Basamak, eşik
+Garde-corps, rampe ¦ Korkuluk, tırabzan
+Conduit de cheminée ¦ Baca kanalı
+Verrière, cloison vitrée ¦ Cam bölme, cam duvar
+Radiateur en fonte ¦ Döküm radyatör
+Chaudière ¦ Kombi, kazan
+Pilier de pierre ¦ Taş direk
+Estrade, palier ¦ Kürsü, sahanlık
+Muret, demi-cloison ¦ Alçak duvar, yarım bölme
+Niche, alcôve ¦ Niş, alkov
+Bonnetière (armoire à une porte) ¦ Bonnetière (tek kapılı dolap)
+Armoire de mariage (de dot) ¦ Çeyiz dolabı
+Lit clos à portes coulissantes ¦ Sürgülü kapılı kapalı yatak
+Lit-armoire, lit clos d’angle ¦ Dolap yatak, köşe kapalı yatak
+Lit d’alcôve à rideaux ¦ Perdeli alkov yatağı
+Berceau ancien en bois (à bascule) ¦ Eski ahşap beşik (sallanan)
+Berceau à capote en osier ¦ Tenteli hasır beşik
+Bassinoire en cuivre (à long manche) ¦ Bakır yatak ısıtıcısı (uzun saplı)
+Table de toilette à marbre ¦ Mermerli tuvalet masası
+Cuvette et broc en faïence ¦ Fayans leğen ve ibrik
+Commode galbée (Louis XV) ¦ Kavisli şifonyer (Louis XV)
+Bougeoir de chevet ¦ Başucu şamdanı
+Chaufferette à braises ¦ Közlü ayak ısıtıcısı
+Malle en osier ¦ Hasır sandık
+Horloge comtoise à ventre (violonée) ¦ Göbekli Comtoise saat (keman biçimli)
+Horloge comtoise peinte ¦ Boyalı Comtoise saat
+Horloge de parquet (régulateur) ¦ Ayaklı saat (regülatör)
+Buffet bas à deux portes ¦ İki kapılı alçak büfe
+Vaisselier breton ¦ Bretagne tabaklığı
+Vaisselier normand ¦ Normandiya tabaklığı
+Banc-coffre à dossier (archebanc) ¦ Arkalıklı sandık-bank (archebanc)
+Banc-coffre de lit clos ¦ Kapalı yatak sandık-bankı
+Chaise paillée à barreaux ¦ Çubuklu hasır sandalye
+Fauteuil paillé (de grand-mère) ¦ Hasır koltuk (büyükanne koltuğu)
+Table à volets ¦ Kanatlı masa
+Table de ferme en chêne (à tiroir) ¦ Meşe çiftlik masası (çekmeceli)
+Lampe tempête ¦ Fırtına feneri
+Chandelier, bougeoir ¦ Şamdan, mumluk
+Suspension à pétrole ¦ Gaz lambası avizesi
+Poste TSF à lampes ¦ Lambalı TSF radyo
+Phonographe à pavillon ¦ Borulu fonograf
+Poêle Godin (fonte émaillée) ¦ Godin soba (emaye döküm)
+Poêle à bois en fonte (cloche) ¦ Döküm odun sobası (çan biçimli)
+Chenets (la paire) ¦ Şömine demirleri (çift)
+Cheminée à manteau (à hotte) ¦ Davlumbazlı şömine
+Cheminée de pierre à linteau de bois ¦ Ahşap lentolu taş şömine
+Cantou (coin du feu) ¦ Cantou (ocak başı)
+Bergère Louis XVI ¦ Louis XVI berjer
+Fauteuil crapaud ¦ Kurbağa koltuk (crapaud)
+Sellette (porte-plante) ¦ Saksı sehpası
+Portrait des ancêtres (ovale) ¦ Ataların portresi (oval)
+Maie (pétrin sur pieds) ¦ Maie (ayaklı hamur teknesi)
+Maie-coffre à couvercle ¦ Kapaklı hamur sandığı
+Huche à pain ¦ Ekmek sandığı
+Cuisinière à bois en fonte (à barre de laiton) ¦ Döküm odunlu ocak (pirinç çubuklu)
+Cuisinière émaillée bois et charbon ¦ Emaye odun ve kömür ocağı
+Potager carrelé (fourneau à braises) ¦ Çinili ocak (közlü ocak)
+Évier taillé dans la pierre ¦ Taştan oyma eviye
+Évier en grès émaillé ¦ Sırlı taş eviye
+Fontaine en cuivre sur son support ¦ Ayaklığında bakır çeşme
+Fontaine en grès ¦ Taş çeşme (gré)
+Saloir en grès ¦ Taş tuzlama küpü
+Saloir en bois (coffre à sel) ¦ Ahşap tuzlama sandığı (tuz sandığı)
+Garde-manger grillagé (mural) ¦ Telli kiler dolabı (duvar)
+Buffet de cuisine (années 1930-1950) ¦ Mutfak büfesi (1930-1950’ler)
+Moulin à café mural ¦ Duvar kahve değirmeni
+Fer à repasser en fonte ¦ Döküm ütü
+Marmite en fonte ¦ Döküm tencere
+Cruche, pichet en grès ¦ Toprak testi, sürahi
+Tue-mouches en verre (piège à mouches) ¦ Cam sinek tuzağı
+Balance Roberval et ses poids ¦ Roberval terazisi ve ağırlıkları
+Glacière en bois doublée de zinc ¦ Çinko kaplı ahşap buzluk
+Tub (grand bassin en zinc) ¦ Tub (büyük çinko leğen)
+Baquet de lessive en bois ¦ Ahşap çamaşır teknesi
+Lessiveuse à champignon ¦ Mantar borulu çamaşır kazanı
+Baignoire en zinc ¦ Çinko küvet
+Lave-mains en fonte émaillée ¦ Emaye döküm el lavabosu
+Planche à laver ¦ Çamaşır tahtası
+Buffet deux-corps vitré ¦ Camlı iki gövdeli büfe
+Buffet deux-corps normand ¦ Normandiya iki gövdeli büfesi
+Armoire lorraine ¦ Lorraine gardırobu
+Armoire bressane ¦ Bresse gardırobu
+Coffre de mariage sculpté ¦ Oymalı çeyiz sandığı
+Malle bombée de voyage ¦ Bombeli seyahat sandığı
+Coffre à linge à pentures de fer ¦ Demir menteşeli çamaşır sandığı
+Panetière provençale (murale) ¦ Provence ekmek dolabı (duvar)
+Étagère à cuivres ¦ Bakır rafı
+Bureau de pente (dos d’âne) ¦ Eğimli yazı masası (dos d’âne)
+Scriban (pente et vitrine) ¦ Scriban (eğimli ve vitrinli)
+Écritoire, encrier et plumier ¦ Yazı takımı, hokka ve kalemlik
+Lampe bouillotte ¦ Bouillotte lamba
+Banc d’école à pupitre (deux places) ¦ Sıralı okul bankı (iki kişilik)
+Pupitre d’écolier à abattant ¦ Kapaklı öğrenci sırası
+Ardoise d’écolier ¦ Öğrenci yazı tahtası
+Cheval de bois ¦ Tahta at
+Poupée de porcelaine ¦ Porselen bebek
+Chaise d’enfant paillée ¦ Hasır çocuk sandalyesi
+Trotteur d’enfant en bois ¦ Ahşap çocuk yürüteci
+Prie-Dieu sculpté ¦ Oymalı diz çökme sırası
+Bénitier de chambre en faïence ¦ Fayans oda kutsal su kabı
+Crucifix de chevet (Christ en bronze) ¦ Başucu haçı (bronz İsa)
+Globe de mariée sur son socle ¦ Kaidesi üzerinde gelin fanusu
+Statuette de saint ¦ Aziz heykelciği
+Image de communion encadrée ¦ Çerçeveli komünyon resmi
+Couronne de perles (mortuaire) ¦ İnci çelenk (cenaze)
+Rouet flamand (à fuseau) ¦ Flaman çıkrığı (iğli)
+Grand rouet à laine ¦ Büyük yün çıkrığı
+Métier à tisser à bras ¦ El dokuma tezgâhı
+Métier à tapisserie (vertical) ¦ Goblen tezgâhı (dikey)
+Dévidoir à écheveaux ¦ Çile aspisi
+Machine à coudre à pédale (Singer) ¦ Pedallı dikiş makinesi (Singer)
+Machine à coudre à main ¦ El dikiş makinesi
+Mannequin de couturière ¦ Terzi mankeni
+Fourneau à fers de repasseuse ¦ Ütücü ütü ocağı
+Banc de sabotier ¦ Nalınçı tezgâhı
+Presse à fromage ¦ Peynir presi
+Baratte à piston en bois ¦ Pistonlu ahşap yayık
+Baratte-tonneau à manivelle ¦ Kollu fıçı yayık
+Écrémeuse ¦ Krema makinesi
+Joug de bœufs ¦ Öküz boyunduruğu
+Outils (fourche, faux, râteau) ¦ Aletler (yaba, tırpan, tırmık)
+Pressoir à pommes (cidre) ¦ Elma presi (elma şarabı)
+Charreton à bras ¦ El arabası (iki tekerlekli)
+Ruche en paille (panier) ¦ Saman kovan (sepet)
+Puits à margelle et petit toit ¦ Bilezikli ve küçük çatılı kuyu
+Pompe à eau en fonte et son auge ¦ Döküm su pompası ve yalağı
+Auge en pierre ¦ Taş yalak
+Banc à laver (de lavoir) ¦ Çamaşır bankı (lavoir)
+Canapé moderne trois places ¦ Modern üçlü kanepe
+Canapé deux places ¦ İkili kanepe
+Canapé d’angle ¦ Köşe kanepe
+Canapé Chesterfield (capitonné) ¦ Chesterfield kanepe (kapitoneli)
+Fauteuil scandinave ¦ İskandinav koltuk
+Fauteuil suspendu (œuf) ¦ Asma koltuk (yumurta)
+Pouf poire ¦ Armut puf
+Pouf capitonné ¦ Kapitoneli puf
+Repose-pieds ¦ Ayak dayama
+Table basse en verre ¦ Cam sehpa
+Bout de canapé ¦ Kanepe yan sehpası
+Bibliothèque garnie de livres ¦ Kitaplarla dolu kitaplık
+Meuble à disques vinyles ¦ Plak dolabı
+Cheminée moderne à insert ¦ Modern kapalı şömine
+Poêle à granulés ¦ Pelet sobası
+Porte-revues ¦ Dergilik
+Table d’échecs ¦ Satranç masası
+Billard ¦ Bilardo
+Pare-feu de cheminée ¦ Şömine siperi
+Panier à bûches ¦ Odun sepeti
+Table de salle à manger (8 couverts) ¦ Yemek masası (8 kişilik)
+Table dressée pour un repas de famille ¦ Aile yemeği için kurulmuş masa
+Table ronde à pied central ¦ Tek ayaklı yuvarlak masa
+Table à rallonges ouverte ¦ Açılmış uzatmalı masa
+Chaise à barreaux (bistrot) ¦ Çubuklu sandalye (bistro)
+Chaise rembourrée ¦ Döşemeli sandalye
+Chaise scandinave ¦ İskandinav sandalye
+Chaise médaillon (Louis XVI) ¦ Madalyon sandalye (Louis XVI)
+Buffet scandinave sur pieds ¦ Ayaklı İskandinav büfe
+Vitrine à vaisselle ¦ Tabak vitrini
+Banc de table ¦ Masa bankı
+Desserte, chariot de service ¦ Servis sehpası, servis arabası
+Candélabre à cinq branches ¦ Beş kollu şamdan
+Coupe de fruits ¦ Meyve kâsesi
+Bouquet dans un vase ¦ Vazoda buket
+Piano de cuisson ¦ Mutfak şefi ocağı
+Colonne de cuisine (four et micro-ondes) ¦ Mutfak boy dolabı (fırın ve mikrodalga)
+Évier timbre d’office (céramique) ¦ Seramik servis eviyesi
+Suspension à casseroles ¦ Tencere askısı
+Poubelle à pédale ¦ Pedallı çöp kutusu
+Étagère à épices et bocaux ¦ Baharat ve kavanoz rafı
+Desserte à roulettes de cuisine ¦ Tekerlekli mutfak servis arabası
+Mange-debout ¦ Ayakta yemek masası
+Tabouret de bar ¦ Bar taburesi
+Table en formica (années 60) ¦ Formika masa (60’lar)
+Chaise en formica (années 60) ¦ Formika sandalye (60’lar)
+Pots d’herbes aromatiques ¦ Saksıda aromatik otlar
+Échelle à pain (suspendue) ¦ Ekmek merdiveni (asma)
+Lit double moderne (140) ¦ Modern çift kişilik yatak (140)
+Lit king size (180) ¦ King size yatak (180)
+Lit simple moderne (90) ¦ Modern tek kişilik yatak (90)
+Lit mezzanine avec bureau ¦ Çalışma masalı yüksek yatak
+Futon, lit bas ¦ Futon, alçak yatak
+Table de chevet moderne ¦ Modern komodin
+Armoire à portes coulissantes (miroir) ¦ Sürgülü kapılı gardırop (aynalı)
+Coiffeuse moderne à miroir rond ¦ Yuvarlak aynalı modern makyaj masası
+Valet de chambre ¦ Elbise askı sehpası
+Lit de fer à barreaux ¦ Parmaklıklı demir yatak
+Chaise de nourrice (basse) ¦ Emzirme sandalyesi (alçak)
+Baignoire d’angle ¦ Köşe küvet
+Baignoire îlot (moderne) ¦ Ada küvet (modern)
+Cabine de douche ¦ Duş kabini
+Porte-serviettes sur pied ¦ Ayaklı havluluk
+Pèse-personne ¦ Banyo baskülü
+Vasque à poser sur plan en bois ¦ Ahşap tezgâh üstü lavabo
+WC à réservoir ¦ Rezervuarlı klozet
+WC à chasse d’eau haute (à chaîne) ¦ Yüksek rezervuarlı klozet (zincirli)
+Armoire à pharmacie murale ¦ Duvar ecza dolabı
+Colonne lave-linge et sèche-linge ¦ Çamaşır ve kurutma makinesi kulesi
+Buanderie ¦ Çamaşır odası
+Planche à repasser et son fer ¦ Ütü masası ve ütüsü
+Bac à laver (évier de buanderie) ¦ Çamaşır teknesi (çamaşır odası eviyesi)
+Balai, seau et serpillière ¦ Süpürge, kova ve paspas
+Étagère à linge plié ¦ Katlanmış çamaşır rafı
+Corbeille à linge en osier ¦ Hasır çamaşır sepeti
+Séchoir à linge (accordéon) ¦ Çamaşır kurutmalığı (akordeon)
+Aspirateur traîneau ¦ Toz torbalı elektrikli süpürge
+Aspirateur balai ¦ Dikey süpürge
+Essoreuse à rouleaux (ancienne) ¦ Merdaneli sıkma makinesi (eski)
+Machine à laver à manivelle (ancienne) ¦ Kollu çamaşır makinesi (eski)
+Patère murale et manteaux ¦ Duvar askısı ve paltolar
+Vestiaire d’entrée à miroir (ancien) ¦ Aynalı antre portmantosu (eski)
+Banc à chaussures ¦ Ayakkabı bankı
+Console et miroir d’entrée ¦ Antre konsolu ve aynası
+Paillasson ¦ Paspas (kapı önü)
+Boîte à clés murale ¦ Duvar anahtar kutusu
+Boîte aux lettres sur pied ¦ Ayaklı posta kutusu
+Ordinateur portable ¦ Dizüstü bilgisayar
+Ordinateur de bureau (écran, tour, clavier) ¦ Masaüstü bilgisayar (ekran, kasa, klavye)
+Minitel ¦ Minitel
+Téléphone à cadran ¦ Çevirmeli telefon
+Échelle de bibliothèque ¦ Kütüphane merdiveni
+Tableau en liège (pense-bête) ¦ Mantar pano (not panosu)
+Corbeille à papier ¦ Çöp sepeti
+Bureau assis-debout ¦ Oturma-ayakta çalışma masası
+Rayonnage d’archives (généalogie) ¦ Arşiv rafları (soy ağacı)
+Circuit de train électrique ¦ Elektrikli tren rayı
+Cubes empilés ¦ Üst üste küpler
+Tricycle ¦ Üç tekerlekli bisiklet
+Cuisine pour enfant (dînette) ¦ Oyuncak mutfak
+Théâtre de marionnettes (castelet) ¦ Kukla tiyatrosu
+Ballon ¦ Top
+Trottinette ¦ Scooter (çocuk)
+Baby-foot ¦ Langırt
+Luge en bois ¦ Ahşap kızak
+Lit de fer d’enfant ¦ Demir çocuk yatağı
+Lampadaire à abat-jour ¦ Abajurlu ayaklı lamba
+Luminaires ¦ Aydınlatmalar
+Lampadaire arc ¦ Kavisli ayaklı lamba
+Lampadaire trépied ¦ Üç ayaklı lambader
+Lampe de salon (pied boule) ¦ Salon lambası (top ayaklı)
+Lampe de banquier (verte) ¦ Bankacı lambası (yeşil)
+Lampe d’architecte ¦ Mimar lambası
+Suspension de cuisine ¦ Mutfak sarkıt lambası
+Suspension à trois globes ¦ Üç küreli sarkıt lamba
+Lustre à pampilles ¦ Kristal sallantılı avize
+Suspension boule en papier ¦ Kâğıt top sarkıt lamba
+Applique murale ¦ Duvar apliği
+Rail de spots ¦ Ray spot
+Lanterne ¦ Fener
+Bougies (groupe) ¦ Mumlar (grup)
+Guirlande lumineuse ¦ Işıklı süs zinciri
+Lampe Tiffany (vitrail) ¦ Tiffany lamba (vitray)
+Lampe à lave ¦ Lav lambası
+Lampe champignon ¦ Mantar lamba
+Réverbère (lampadaire de jardin) ¦ Sokak lambası (bahçe lambası)
+Lampe Pigeon ¦ Pigeon lambası
+Mur de cadres photo ¦ Fotoğraf çerçeveli duvar
+Cadre photo à poser ¦ Masa üstü fotoğraf çerçevesi
+Tableau : paysage ¦ Tablo: manzara
+Tableau : marine ¦ Tablo: deniz manzarası
+Tableau abstrait ¦ Soyut tablo
+Tableau : nature morte ¦ Tablo: natürmort
+Carte ancienne encadrée ¦ Çerçeveli eski harita
+Papillons encadrés ¦ Çerçeveli kelebekler
+Miroir rond ¦ Yuvarlak ayna
+Miroir soleil ¦ Güneş ayna
+Grand miroir doré (trumeau) ¦ Büyük yaldızlı ayna (trumeau)
+Tapis persan ¦ İran halısı
+Tapis berbère ¦ Berberi halısı
+Tapis kilim ¦ Kilim
+Tapis de couloir ¦ Koridor halısı
+Tapis à poils longs ¦ Uzun tüylü halı
+Rideaux sur tringle ¦ Korniş üzerinde perdeler
+Ficus en pot ¦ Saksıda ficus
+Monstera (grandes feuilles) ¦ Monstera (büyük yapraklı)
+Cactus en pot ¦ Saksıda kaktüs
+Palmier d’intérieur (kentia) ¦ İç mekân palmiyesi (kentia)
+Bambou en bac ¦ Saksıda bambu
+Orchidée ¦ Orkide
+Fougère en pot ¦ Saksıda eğrelti otu
+Grand vase de sol (branches) ¦ Büyük yer vazosu (dallar)
+Horloge murale ¦ Duvar saati
+Horloge à coucou ¦ Guguklu saat
+Horloge œil-de-bœuf ¦ Öküz gözü saat
+Sculpture moderne sur socle ¦ Kaide üzerinde modern heykel
+Maquette de voilier ¦ Yelkenli maketi
+Coupe, trophée ¦ Kupa, ödül
+Bocal à poisson rouge ¦ Japon balığı fanusu
+Réfrigérateur rétro (années 50) ¦ Retro buzdolabı (50’ler)
+Électroménager ¦ Ev aletleri
+Réfrigérateur combiné moderne ¦ Modern kombi buzdolabı
+Congélateur armoire ¦ Dikey dondurucu
+Cave à vin réfrigérée ¦ Soğutmalı şarap dolabı
+Grille-pain ¦ Ekmek kızartma makinesi
+Bouilloire ¦ Su ısıtıcısı (kettle)
+Machine à café expresso ¦ Espresso makinesi
+Robot pâtissier ¦ Hamur mikseri
+Téléviseur des années 60 (à pieds) ¦ 60’ların televizyonu (ayaklı)
+Chaîne hi-fi et enceintes ¦ Müzik seti ve hoparlörler
+Enceinte colonne ¦ Kule hoparlör
+Platine vinyle ¦ Pikap
+Radiocassette (années 80) ¦ Radyolu teyp (80’ler)
+Console de jeux et manettes ¦ Oyun konsolu ve kollar
+Ventilateur sur pied ¦ Ayaklı vantilatör
+Radiateur bain d’huile ¦ Yağlı radyatör
+Poêle à pétrole ¦ Gazyağı sobası
+Aspirateur robot ¦ Robot süpürge
+Climatiseur mural ¦ Duvar tipi klima
+Guitare sur son support ¦ Sehpasında gitar
+Musique ¦ Müzik
+Guitare électrique et ampli ¦ Elektro gitar ve amfi
+Violon sur son support ¦ Sehpasında keman
+Violoncelle ¦ Viyolonsel
+Contrebasse ¦ Kontrbas
+Harpe ¦ Arp
+Batterie ¦ Davul seti
+Clavier électronique sur pied ¦ Ayaklı elektronik klavye
+Pupitre à musique ¦ Nota sehpası
+Tuba ¦ Tuba
+Djembé ¦ Cembe
+Clavecin ¦ Klavsen
+Vielle à roue ¦ Çarklı lir (vielle)
+Juke-box ¦ Müzik kutusu (juke-box)
+Orgue de Barbarie ¦ Laterna
+Moto ¦ Motosiklet
+Garage ¦ Garaj
+Mobylette (cyclomoteur) ¦ Mobilet (moped)
+Servante d’atelier ¦ Atölye alet arabası
+Établi et panneau à outils ¦ Tezgâh ve alet panosu
+Rayonnage métallique et caisses ¦ Metal raf ve kasalar
+Perceuse à colonne ¦ Sütunlu matkap
+Scie sur table ¦ Masa testeresi
+Jerrican ¦ Bidon
+Pile de pneus ¦ Lastik yığını
+Escabeau ¦ Basamaklı merdiven
+Remorque ¦ Römork
+Kayak ¦ Kano
+Table de ping-pong ¦ Masa tenisi masası
+Tondeuse à gazon ¦ Çim biçme makinesi
+Tracteur tondeuse ¦ Çim biçme traktörü
+Trampoline ¦ Trambolin
+Piscine hors-sol ¦ Yer üstü havuz
+Piscine creusée ¦ Gömme havuz
+Spa (jacuzzi) ¦ Jakuzi
+Hamac sur support ¦ Ayaklı hamak
+Balancelle de jardin ¦ Bahçe salıncağı
+Kiosque, gloriette ¦ Köşk, kameriye
+Salon de jardin bistrot ¦ Bistro bahçe takımı
+Barbecue boule ¦ Küre mangal
+Brasero ¦ Ateş çukuru (brazero)
+Bac à sable ¦ Kum havuzu
+Nichoir sur poteau ¦ Direk üzerinde kuş yuvası
+Composteur ¦ Kompost kabı
+Récupérateur d’eau de pluie ¦ Yağmur suyu deposu
+Nain de jardin ¦ Bahçe cücesi
+Cadran solaire ¦ Güneş saati
+Pots de fleurs ¦ Çiçek saksıları
+Olivier en pot ¦ Saksıda zeytin ağacı
+Carré potager surélevé ¦ Yükseltilmiş sebze yatağı
+Dévidoir à tuyau d’arrosage ¦ Bahçe hortumu makarası
+Arrosoir ¦ Sulama kabı
+Étendoir parapluie ¦ Şemsiye çamaşır askısı
+Petit pont de jardin ¦ Küçük bahçe köprüsü
+Mât et drapeau ¦ Direk ve bayrak
+Roue de charrette (décor) ¦ Araba tekerleği (süs)
+Tarare (vanneuse à grain) ¦ Harman savurma makinesi (tarare)
+Égrenoir à maïs ¦ Mısır taneleme makinesi
+Hache-paille ¦ Saman kıyma makinesi
+Selle sur chevalet ¦ Sehpa üzerinde eyer
+Faucheuse à cheval ¦ Atlı biçerdöver
+Rouleau agricole en pierre ¦ Taş tarım silindiri
+Palanche et ses deux seaux ¦ Omuz sırığı ve iki kovası
+Tonneaux sur leur chantier ¦ Sehpalarında fıçılar
+Tabouret de traite et seau ¦ Sağım taburesi ve kova
+Sacs de grain ¦ Tahıl çuvalları
+Éolienne de pompage (ancienne) ¦ Pompa yel değirmeni (eski)
+Pigeonnier ¦ Güvercinlik
+Épouvantail ¦ Korkuluk (bostan)
+Encoignure (meuble d’angle) ¦ Köşe dolabı
+Placard à portes coulissantes ¦ Sürgülü kapılı dolap
+Étagère à chaussures ¦ Ayakkabı rafı
+Coin des icônes (« beau coin » orthodoxe) ¦ İkona köşesi (Ortodoks “güzel köşe”)
+Veilleuse d’icône (lampada) ¦ İkona kandili (lampada)
+Croix orthodoxe murale ¦ Duvar Ortodoks haçı
+Croix murale sans Christ (protestante) ¦ İsa figürsüz duvar haçı (Protestan)
+Grande Bible ouverte sur pupitre ¦ Kürsüde açık büyük İncil
+Image du Sacré-Cœur encadrée ¦ Çerçeveli Kutsal Kalp resmi
+Ex-voto (plaque de remerciement) ¦ Adak (şükran plaketi)
+Couronne de l’Avent ¦ Advent çelengi
+Crèche de Noël ¦ Noel beşiği
+Chapelet accroché (rosaire) ¦ Asılı tespih (rosaryo)
+Ménorah (chandelier à sept branches) ¦ Menora (yedi kollu şamdan)
+Hanoukia (chandelier à neuf branches) ¦ Hanukiya (dokuz kollu şamdan)
+Chandeliers de shabbat (paire) ¦ Şabat şamdanları (çift)
+Mézouza (au montant de la porte) ¦ Mezuza (kapı pervazında)
+Étoile de David murale ¦ Duvar Davut Yıldızı
+Mizrah (plaque tournée vers Jérusalem) ¦ Mizrah (Kudüs’e dönük levha)
+Armoire de la Torah (aron, avec son rideau) ¦ Tevrat dolabı (aron, perdesiyle)
+Pupitre de lecture (bimah) ¦ Okuma kürsüsü (bimah)
+Coupe de kiddouch et plateau ¦ Kiduş kadehi ve tepsisi
+Plat du séder (Pessah) ¦ Seder tabağı (Pesah)
+Châle de prière (talit) sur son cintre ¦ Askısında dua şalı (talit)
+Tirelire de tsedaka ¦ Tsedaka kumbarası
+Tapis de prière ¦ Seccade
+Porte-Coran pliant (rahle) ¦ Katlanır rahle
+Croissant et étoile muraux ¦ Duvar hilal ve yıldız
+Calligraphie encadrée (Bismillah) ¦ Çerçeveli hat (Besmele)
+Chapelet (misbaha) sur sa coupelle ¦ Kâsesinde tespih (misbaha)
+Lanterne du ramadan (fanous) ¦ Ramazan feneri (fanus)
+Niche de prière murale (mihrab décoratif) ¦ Duvar mihrabı (süs)
+Coran sur l’étagère du haut ¦ Üst rafta Kur’an
+Brûleur d’encens (mabkhara) ¦ Buhurdan (mabhara)
+Bouddha assis ¦ Oturan Buda
+Grand Bouddha de jardin ¦ Büyük bahçe Budası
+Autel bouddhique (butsudan) ¦ Budist sunak (butsudan)
+Stupa miniature (chorten) ¦ Minyatür stupa (çorten)
+Moulin à prières ¦ Dua çarkı
+Drapeaux de prière (guirlande) ¦ Dua bayrakları (dizi)
+Thangka (peinture sur rouleau) ¦ Thangka (rulo resim)
+Roue du dharma murale ¦ Duvar dharma çarkı
+Bol chantant sur coussin ¦ Minder üzerinde şarkı söyleyen kâse
+Gong sur portique ¦ Sehpasında gong
+Coussin de méditation (zafu et zabuton) ¦ Meditasyon minderi (zafu ve zabuton)
+Brûle-parfum et bâtons d’encens ¦ Tütsülük ve tütsü çubukları
+Temple de maison (mandir) ¦ Ev tapınağı (mandir)
+Statue de Ganesh ¦ Ganesha heykeli
+Nataraja (Shiva dansant) ¦ Nataraja (dans eden Şiva)
+Om mural ¦ Duvar Om
+Lampe à huile (diya) ¦ Kandil (diya)
+Pot de tulsi (basilic sacré) ¦ Tulsi saksısı (kutsal fesleğen)
+Rangoli (motif coloré au sol) ¦ Rangoli (yerde renkli desen)
+Cloche de puja ¦ Puja çanı
+Guirlande de fleurs (œillets d’Inde) ¦ Çiçek çelengi (kadife çiçekleri)
+Khanda mural ¦ Duvar Khanda
+Palki Sahib (dais du Guru Granth Sahib) ¦ Palki Sahib (Guru Granth Sahib’in gölgeliği)
+Manji Sahib (petit lit du livre saint) ¦ Manji Sahib (kutsal kitabın küçük yatağı)
+Kamidana (autel shinto mural) ¦ Kamidana (Şinto duvar sunağı)
+Torii de jardin ¦ Bahçe toriisi
+Lanterne de pierre (tōrō) ¦ Taş fener (tōrō)
+Corde sacrée (shimenawa) ¦ Kutsal ip (shimenawa)
+Autel des ancêtres ¦ Atalar sunağı
+Tablettes des ancêtres ¦ Ata tabletleri
+Brûle-parfum tripode (bronze) ¦ Üç ayaklı tütsülük (bronz)
+Yin et yang mural ¦ Duvar yin-yang
+Lanterne rouge en papier ¦ Kırmızı kâğıt fener
+Vase à feu sacré (afrinagan) ¦ Kutsal ateş kabı (afrinagan)
+Coin mémoire (photo, bougie, fleurs) ¦ Anma köşesi (fotoğraf, mum, çiçekler)
+Urne funéraire ¦ Cenaze külü kabı
+Cadre de deuil (photo et ruban noir) ¦ Yas çerçevesi (fotoğraf ve siyah kurdele)
+Bougie du souvenir ¦ Anma mumu
+Boîte à lettres d’amour (correspondance) ¦ Aşk mektupları kutusu (yazışmalar)
+Vitrine à médailles et souvenirs militaires ¦ Madalya ve askerî hatıra vitrini
+Lave-linge à hublot ¦ Önden yüklemeli çamaşır makinesi
+Lave-linge à ouverture par le dessus ¦ Üstten yüklemeli çamaşır makinesi
+Lave-vaisselle compact (à poser) ¦ Küçük bulaşık makinesi (tezgâh üstü)
+Four à micro-ondes ¦ Mikrodalga fırın
+Mini-four ¦ Mini fırın
+Four encastrable sous le plan ¦ Tezgâh altı ankastre fırın
+Plaque à induction ¦ İndüksiyonlu ocak
+Table de cuisson au gaz (4 feux) ¦ Gazlı ocak (4 gözlü)
+Plancha électrique ¦ Elektrikli plancha
+Appareil à raclette ¦ Raclette makinesi
+Hotte aspirante murale ¦ Duvar davlumbazı
+Hotte îlot (suspendue) ¦ Ada davlumbazı (asma)
+Cuiseur à riz ¦ Pirinç pişirici
+Mijoteuse ¦ Yavaş pişirici
+Autocuiseur (cocotte-minute) ¦ Düdüklü tencere
+Friteuse ¦ Fritöz
+Friteuse sans huile ¦ Yağsız fritöz
+Machine à pain ¦ Ekmek yapma makinesi
+Gaufrier ¦ Waffle makinesi
+Blender ¦ Blender
+Centrifugeuse (presse-fruits) ¦ Meyve sıkacağı (santrifüj)
+Robot multifonction ¦ Mutfak robotu
+Cafetière à filtre ¦ Filtre kahve makinesi
+Machine à café à capsules ¦ Kapsüllü kahve makinesi
+Bouilloire émaillée ¦ Emaye çaydanlık
+Mini-réfrigérateur ¦ Mini buzdolabı
+Téléviseur écran plat sur pied ¦ Ayaklı düz ekran televizyon
+Grand téléviseur au mur ¦ Duvarda büyük televizyon
+Écran de projection ¦ Projeksiyon perdesi
+Vidéoprojecteur ¦ Projeksiyon cihazı
+Barre de son ¦ Ses çubuğu
+Magnétoscope (VHS) ¦ Video kaydedici (VHS)
+Lecteur DVD / Blu-ray ¦ DVD / Blu-ray oynatıcı
+Box internet ¦ İnternet modemi
+Poste de radio TSF ¦ TSF radyo
+Transistor ¦ Transistörlü radyo
+Téléphone sans fil et sa base ¦ Kablosuz telefon ve tabanı
+Nettoyeur vapeur (balai) ¦ Buharlı temizleyici (paspas)
+Centrale vapeur ¦ Buhar kazanlı ütü
+Déshumidificateur ¦ Nem alıcı
+Purificateur d’air ¦ Hava temizleyici
+Ventilateur colonne ¦ Kule vantilatör
+Chauffe-eau (ballon d’eau chaude) ¦ Su ısıtıcı (sıcak su deposu)
+Chaudière murale ¦ Duvar tipi kombi
+Radiateur électrique mural ¦ Duvar tipi elektrikli radyatör
+Machine à coudre électrique ¦ Elektrikli dikiş makinesi
+Fauteuil de bureau à roulettes ¦ Tekerlekli çalışma koltuğu
+Siège ergonomique (dossier filet) ¦ Ergonomik koltuk (fileli sırt)
+Fauteuil de direction en cuir ¦ Deri yönetici koltuğu
+Bureau informatique ¦ Bilgisayar masası
+Grand bureau (plateau 180 cm) ¦ Büyük çalışma masası (180 cm tabla)
+Table à dessin inclinable ¦ Eğimli çizim masası
+Caisson à tiroirs à roulettes ¦ Tekerlekli çekmeceli keson
+Classeur métallique à tiroirs ¦ Çekmeceli metal dosya dolabı
+Armoire à rideaux ¦ Kepenkli dolap
+Meuble à plans ¦ Plan dolabı
+Fichier à fiches en bois ¦ Ahşap fişlik
+Étagère de classeurs ¦ Klasör rafı
+Imprimante ¦ Yazıcı
+Imprimante multifonction (scanner) ¦ Çok işlevli yazıcı (tarayıcı)
+Photocopieur ¦ Fotokopi makinesi
+Scanner à plat ¦ Düz yataklı tarayıcı
+Écran d’ordinateur ¦ Bilgisayar ekranı
+Deux écrans côte à côte ¦ Yan yana iki ekran
+Ordinateur tout-en-un ¦ Hepsi bir arada bilgisayar
+Globe sur pied ¦ Ayaklı küre
+Tableau blanc ¦ Beyaz tahta
+Destructeur de documents ¦ Evrak imha makinesi
+Trieur à courrier ¦ Evrak ayırıcı
+Plante de bureau ¦ Ofis bitkisi
+Lampe de bureau LED ¦ LED masa lambası
+Repose-pieds de bureau ¦ Masa altı ayak dayama
+Fontaine à eau ¦ Su sebili
+Voiture citadine ¦ Şehir otomobili
+Voiture familiale (break) ¦ Aile otomobili (station wagon)
+Camionnette ¦ Kamyonet
+2 CV ¦ 2 CV
+Renault 4 L ¦ Renault 4 L
+Traction avant ¦ Traction avant
+Caravane ¦ Karavan
+Vélo ¦ Bisiklet
+Vélo électrique ¦ Elektrikli bisiklet
+Vélo d’enfant ¦ Çocuk bisikleti
+Vélo ancien (de facteur) ¦ Eski bisiklet (postacı bisikleti)
+Râtelier à vélos ¦ Bisiklet park yeri
+Scooter ¦ Skuter
+Panneau à outils mural ¦ Duvar alet panosu
+Armoire métallique d’atelier ¦ Atölye metal dolabı
+Étagère de garage en bois ¦ Ahşap garaj rafı
+Établi pliant ¦ Katlanır tezgâh
+Scie à onglet ¦ Gönye testeresi
+Poste à souder ¦ Kaynak makinesi
+Nettoyeur haute pression ¦ Basınçlı yıkama makinesi
+Groupe électrogène ¦ Jeneratör
+Aspirateur d’atelier ¦ Atölye süpürgesi
+Cric rouleur ¦ Tekerlekli kriko
+Borne de recharge (voiture électrique) ¦ Şarj istasyonu (elektrikli otomobil)
+Échelle d’appui ¦ Dayama merdiven
+Réfrigérateur de garage ¦ Garaj buzdolabı
+Congélateur coffre de garage ¦ Garaj sandık dondurucusu
+Poubelles de tri (conteneurs) ¦ Geri dönüşüm çöp kutuları (konteynerler)
+Canoë ¦ Kano (açık)
+Planche de surf ¦ Sörf tahtası
+Réglette d’atelier ¦ Atölye floresan armatürü
+Plafonnier rond ¦ Yuvarlak tavan lambası
+Plafonnier Art déco ¦ Art déco tavan lambası
+Dalle LED ¦ LED panel
+Lustre à bras ¦ Kollu avize
+Lustre en fer forgé (à bougies) ¦ Ferforje avize (mumlu)
+Lustre roue de charrette ¦ Araba tekerleği avize
+Réglette lumineuse ¦ Işıklı çubuk armatür
+Néon décoratif (enseigne) ¦ Dekoratif neon (tabela)
+Bandeau LED ¦ LED şerit
+Lampadaire vasque (halogène) ¦ Çanaklı ayaklı lamba (halojen)
+Lampadaire vasque Art déco ¦ Art déco çanaklı ayaklı lamba
+Lampadaire liseuse ¦ Okuma lambalı lambader
+Lampe à abat-jour plissé ¦ Pliseli abajurlu lamba
+Lampe globe en opaline ¦ Opal cam küre lamba
+Lampe de sel ¦ Tuz lambası
+Veilleuse d’enfant ¦ Çocuk gece lambası
+Lampe de lecture articulée ¦ Eklemli okuma lambası
+Lampe à carbure (de mineur) ¦ Karbür lamba (madenci)
+Bougeoir à main ¦ El şamdanı
+Applique double ¦ Çift aplik
+Applique de salle de bain ¦ Banyo apliği
+Suspension industrielle ¦ Endüstriyel sarkıt lamba
+Ampoule nue (filament) ¦ Çıplak ampul (filamanlı)
+Suspension en rotin ¦ Rattan sarkıt lamba
+Boule à facettes ¦ Disko topu
+Projecteur extérieur ¦ Dış mekân projektörü
+Borne lumineuse de jardin ¦ Işıklı bahçe babası
+Balise solaire de jardin ¦ Güneş enerjili bahçe lambası
+maison|Genre ¦ Tür
+maison|Avant ¦ Ön
+maison|Poser ¦ Yerleştir
+maison|Angles ¦ Açılar
+maison|Écurie ¦ Ahır
+maison|Croix ¦ Haç
+couleur|aucune ¦ yok

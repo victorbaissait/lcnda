@@ -1,0 +1,2638 @@
+fr ¦ tr
+=fichier laissé de côté ¦ dışarıda bırakılan dosya|dışarıda bırakılan dosya
+=document lié ¦ bağlı belge|bağlı belge
+=photo ou document lié ¦ bağlı fotoğraf veya belge|bağlı fotoğraf veya belge
+=fichier prêt ¦ hazır dosya|hazır dosya
+=groupe de doublons trouvé ¦ bulunan çift kayıt grubu|bulunan çift kayıt grubu
+=fichier analysé ¦ incelenen dosya|incelenen dosya
+=visage détecté ¦ algılanan yüz|algılanan yüz
+=tâche devenue ¦ dönüştürülen görev|dönüştürülen görev
+=fichier ¦ dosya|dosya
+=nouveau fichier ¦ yeni dosya|yeni dosya
+=décès ajouté ¦ eklenen ölüm|eklenen ölüm
+=étape ¦ durak|durak
+=faite ¦ yapıldı|yapıldı
+=point ¦ nokta|nokta
+=ensemble ¦ takım|takım
+=petit ¦ yavru|yavru
+=animal disparu ¦ kaybolan hayvan|kaybolan hayvan
+=bloc ¦ blok|blok
+=observation ¦ gözlem|gözlem
+=site ¦ alan|alan
+=sortie ¦ gezi|gezi
+=autre ¦ diğer|diğer
+=fichier ajouté ¦ eklenen dosya|eklenen dosya
+=fichier partira ¦ gönderilecek dosya|gönderilecek dosya
+=note ¦ not|not
+=lien parent-enfant ¦ ebeveyn-çocuk bağı|ebeveyn-çocuk bağı
+=ignorée ¦ atlandı|atlandı
+=age|{n} ans ¦ {n} yaş|{n} yaş
+=Environ {n} ans ¦ Yaklaşık {n} yaş|Yaklaşık {n} yaş
+1 an ¦ 1 yıl
+Années ¦ Yıllar
+(estimées) ¦ (tahmini)
+Ouvrir les {n} sites cochés ¦ İşaretli {n} siteyi aç
+Ouvrir le site coché ¦ İşaretli siteyi aç
+Ouvrir les sites cochés ¦ İşaretli siteleri aç
+Exception pour {nm} ¦ İstisna: {nm}
+Personne #{n} ¦ Kişi #{n}
+Exception mise sur {what} : ¦ İstisna konuldu: {what}
+Fiche n° {n} ¦ Kart no. {n}
+Fiche n° {n} (supprimée ?) ¦ Kart no. {n} (silindi mi?)
+{what} a été modifié dans une autre fenêtre (ou un autre onglet) depuis que tu l’as ouvert ici. Tes changements ne sont pas perdus : ils restent affichés ici tant que tu ne choisis pas. ¦ Burada açtığından beri başka bir pencerede (veya sekmede) değiştirildi: {what}. Değişikliklerin kaybolmadı: sen bir seçim yapana kadar burada gösterilmeye devam eder.
+l’outil « {nm} » ¦ “{nm}” aracı
+Fichier prêt : « {file} ». Il s’importe avec « ⤒ Importer un réglage ». ¦ Dosya hazır: “{file}”. “⤒ Bir ayarı içe aktar” ile içe aktarılır.
+Un réglage de {what}, exporté ici ou sur un autre ordinateur (fichier « lcnda-reglage-….json »). ¦ Burada veya başka bir bilgisayarda dışa aktarılmış bir ayar ({what}) (“lcnda-reglage-….json” dosyası).
+il contient un réglage pour {a}, pas pour {b} : importe-le dans le bon outil ¦ bu dosyada {a} için bir ayar var, {b} için değil: doğru araca içe aktar
+Tu as déjà un réglage « {name} » : celui-ci prendra le nom ci-dessous. ¦ Zaten “{name}” adlı bir ayarın var: bu ayar aşağıdaki adı alacak.
+un réglage « {name} » existe déjà : choisis un autre nom ¦ “{name}” adlı bir ayar zaten var: başka bir ad seç
+Ce fichier contient un réglage pour {a}, pas pour {b} : importe-le dans le bon outil. ¦ Bu dosyada {a} için bir ayar var, {b} için değil: doğru araca içe aktar.
+Ce nom est déjà pris ¦ Bu ad zaten kullanılıyor
+Copie « {nm} » créée. ¦ “{nm}” kopyası oluşturuldu.
+Sans nom ¦ Adsız
+Fiche de {nm} ¦ Kart: {nm}
+La fiche ¦ Kart
+Une copie est rangée dans les médias : « {name} ». ¦ Medyaya bir kopya kaydedildi: “{name}”.
+Copie dans les médias impossible : {err} ¦ Medyaya kopyalanamadı: {err}
+{what} des rappels ¦ Hatırlatmalar: {what}
+{what} (une personne qui serait son propre ancêtre) ¦ {what} (kendi atası olacak bir kişi)
+Import terminé : {list}. ¦ İçe aktarma bitti: {list}.
+{what} : les fiches existent, mais sans le fichier. Avec une base .db seule, utilise plutôt la « Sauvegarde complète (.zip) » (Réglages → Export), qui contient les médias. ¦ {what}: kartlar var ama dosya yok. Yalnızca bir .db veritabanıyla, bunun yerine medyayı da içeren “Tam yedek (.zip)” seçeneğini kullan (Ayarlar → Dışa aktar).
+{what} de média introuvable ¦ Bulunamayan medya: {what}
+{what} de média introuvables ¦ Bulunamayan medya: {what}
+Import de {file} en cours… (quelques minutes pour une grande généalogie avec photos) ¦ İçe aktarılıyor: {file}… (fotoğraflı büyük bir soy ağacı için birkaç dakika)
+Import en cours… ¦ İçe aktarılıyor…
+Analyse en cours… ¦ İnceleniyor…
+Fichier analysé ({x}). L'import direct pour ce format n'est pas encore disponible ; utilise un fichier GEDCOM ou .mftpkg pour importer directement. ¦ Dosya incelendi ({x}). Bu biçim için doğrudan içe aktarma henüz yok; doğrudan içe aktarmak için bir GEDCOM veya .mftpkg dosyası kullan.
+Modifier « {nm} » ¦ “{nm}” öğesini düzenle
+Nouveau thème ¦ Yeni tema
+Fond des panneaux ¦ Panel arka planı
+un lien ¦ bir bağlantı
+Le texte se lit mal sur {list} : choisis un texte plus foncé ¦ Metin şu arka planlarda zor okunuyor: {list}. Daha koyu bir metin seç
+Le texte se lit mal sur {list} : choisis un texte plus clair ¦ Metin şu arka planlarda zor okunuyor: {list}. Daha açık bir metin seç
+, ou coche « Thème sombre » ¦ , veya “Koyu tema”yı işaretle
+Thème « {nm} » enregistré. ¦ “{nm}” teması kaydedildi.
+Thème « {name} » créé : il est dans la liste « Preset », dans « ✎ Mes thèmes ». ¦ “{name}” teması oluşturuldu: “Preset” listesinde, “✎ Temalarım” altında.
+Thème « {nm} » supprimé ¦ “{nm}” teması silindi
+Design « {name} » importé : choisis-le dans « Preset ». ¦ “{name}” tasarımı içe aktarıldı: “Preset” içinden seç.
+Les messages restent {x}. ¦ Mesajların kalma süresi: {x}.
+⚠️ Sur ce fond, cette couleur se lit mal (contraste {a} : il faut {b}). ¦ ⚠️ Bu arka planda bu renk zor okunuyor (kontrast {a}: {b} gerekiyor).
+{what} n’a pas pu être remis (un élément lié a été supprimé depuis). ¦ Geri konulamadı: {what} (bağlı bir öğe o zamandan beri silindi).
+{what} n’ont pas pu être remis (un élément lié a été supprimé depuis). ¦ Geri konulamadı: {what} (bağlı bir öğe o zamandan beri silindi).
+Retirer {nm} ¦ Çıkar: {nm}
+{years} {months} et {days} ¦ {years} {months} ve {days}
+Environ 1 an ¦ Yaklaşık 1 yıl
+à {hh} h {min} ¦ saat {hh}.{min}
+à {hh} h ¦ saat {hh}
+Fiabilité : {x} ¦ Güvenilirlik: {x}
+Repères de maternité ¦ Annelik dönüm noktaları
+Naissance de {nm} ¦ Doğum: {nm}
+Décès de {nm} ¦ Ölüm: {nm}
+Intervalle {a} → {b} ¦ Aralık {a} → {b}
+Intervalle {a} → {b} : {d} — enfant manquant possible. ¦ Aralık {a} → {b}: {d} — eksik bir çocuk olabilir.
+ans ¦ yaş
+plus de 9 mois ¦ 9 aydan fazla
+État ¦ Durum
+Fin de vie : {x} ¦ Yaşamın sonu: {x}
+Fin estimée : {x} ¦ Tahmini son: {x}
+Repère documentaire : zone féconde indicative 12–55 ans. Grossesse estimée : 9 mois avant chaque naissance. ¦ Bilgi için: doğurgan yaşlar kabaca 12–55. Gebelik her doğumdan 9 ay önce olarak tahmin edilir.
+La frise s’arrête au décès. ¦ Zaman çizelgesi ölümde biter.
+Sans décès connu, la frise s’arrête à la dernière borne utile. ¦ Bilinen bir ölüm yoksa zaman çizelgesi son yararlı işarette biter.
+Média #{n} ¦ Medya #{n}
+{n} média ¦ {n} medya
+Champs attendus ({yr}) : {list} ¦ Beklenen alanlar ({yr}): {list}
+Ce bloc a été isolé car il provoquait une erreur : {err} ¦ Bu blok bir hataya yol açtığı için ayrıldı: {err}
+erreur JavaScript ¦ JavaScript hatası
+⛪ avant {year}, chercher dans les registres de la paroisse de {name} ¦ ⛪ {year} yılından önce şu kilise bölgesinin kayıtlarına bak: {name}
+(anciennement : {x}) ¦ (eski adı: {x})
+Source ¦ Kaynak
+Afficher ¦ Göster
+💬 Poser des questions sur elle ¦ 💬 Onun hakkında soru sor
+💬 Poser des questions sur lui ¦ 💬 Onun hakkında soru sor
+💬 Poser des questions sur cette personne ¦ 💬 Bu kişi hakkında soru sor
+Personnes inhumées ici ({n}) ¦ Burada gömülü kişiler ({n})
+Photos datées ({n}) ¦ Tarihli fotoğraflar ({n})
+Œuvres — {x} ¦ Eserler — {x}
+Sosa {n} ¦ Sosa {n}
+Numéro d’Aboville {n} ¦ d’Aboville numarası {n}
+d’Aboville {n} ¦ d’Aboville {n}
+Afficher sur cette fiche ¦ Bu kartta göster
+Masquer sur cette fiche ¦ Bu kartta gizle
+Afficher sur toutes ¦ Hepsinde göster
+Masquer sur toutes ¦ Hepsinde gizle
+Fiches en ligne ¦ Çevrimiçi kartlar
+Retirer l’étiquette {nm} ¦ Etiketi çıkar: {nm}
+＋ Créer l’étiquette « {name} » ¦ ＋ Etiketi oluştur: “{name}”
+Étiquette « {nm} » créée. ¦ “{nm}” etiketi oluşturuldu.
+Réf. {x} ¦ Ref. {x}
+Hypothèse ¦ Varsayım
+confiance {x} ¦ güven {x}
+Verrouiller le réordonnancement manuel ¦ Elle sıralamayı kilitle
+Déverrouiller le réordonnancement manuel ¦ Elle sıralamanın kilidini aç
+Avant ¦ Önce
+Après ¦ Sonra
+Champs modifiés : {list} ¦ Değişen alanlar: {list}
+Événement « {nm} » supprimé ¦ “{nm}” olayı silindi
+sélectionné ¦ seçili
+Supprimer {name} et tout ce qui s’y rattache (marques, observations, santé, groupe, trajets) ? ¦ {name} ve ona bağlı her şey (işaretler, gözlemler, sağlık, grup, rotalar) silinsin mi?
+Sa fiche, sa fiche d’animal et son suivi partent ensemble. Les fichiers médias restent sur le disque. Tu pourras tout rétablir depuis Réglages → Journal des modifications (« Restaurer »). ¦ Kartı, hayvan kartı ve takibi birlikte gider. Medya dosyaları diskte kalır. Her şeyi Ayarlar → Değişiklik günlüğü (“Geri yükle”) üzerinden geri getirebilirsin.
+Supprimer définitivement la fiche « {name} » ? ¦ “{name}” kartı kalıcı olarak silinsin mi?
+Les relations, événements, notes, variantes, enquêtes et liens directs seront retirés. Les fichiers médias restent sur le disque, mais leurs liens à cette fiche seront supprimés. ¦ İlişkiler, olaylar, notlar, varyantlar, incelemeler ve doğrudan bağlantılar kaldırılacak. Medya dosyaları diskte kalır, ama bu karta olan bağlantıları silinecek.
+Supprimer {nm} ¦ Sil: {nm}
+Supprimer cette fiche ¦ Bu kartı sil
+Supprimer définitivement ¦ Kalıcı olarak sil
+Fiche de {name} supprimée, avec son suivi. ¦ Kart silindi, takibiyle birlikte: {name}.
+Fiche supprimée. ¦ Kart silindi.
+les {n} premiers ¦ ilk {n}
+pas : ¦ değil:
+toutes les données ¦ tüm veriler
+Par défaut : {x}. ¦ Varsayılan: {x}.
+Aucun réglage par défaut pour l’instant : toutes les données. ¦ Henüz varsayılan bir ayar yok: tüm veriler.
+Affichage limité aux {n} premiers sur {total}. ¦ Toplam {total} içinden yalnızca ilk {n} gösteriliyor.
+Clique sur une barre pour voir les personnes. ¦ Kişileri görmek için bir çubuğa tıkla.
+Voir les personnes : {nm} ¦ Kişileri gör: {nm}
+Voir les personnes liées à {name} ¦ Bağlı kişileri gör: {name}
+± {n} km autour de la commune ¦ Yerleşim yerinin çevresinde ± {n} km
+Commune exacte uniquement ¦ Yalnızca tam yerleşim yeri
+Téléchargement et import de « {name} » ({x})… Ça peut prendre quelques minutes. ¦ “{name}” indiriliyor ve içe aktarılıyor ({x})… Bu birkaç dakika sürebilir.
+Décès INSEE : {what}, import en cours… ¦ INSEE ölümleri: {what}, içe aktarılıyor…
+Décès INSEE à jour : {what} ({list}). ¦ INSEE ölümleri güncel: {what} ({list}).
+Décès INSEE : {n} nouveaux fichiers sur data.gouv.fr. Recherche → Décès INSEE → « Fichiers de l’INSEE ». ¦ INSEE ölümleri: data.gouv.fr üzerinde {n} yeni dosya. Araştırma → INSEE ölümleri → “INSEE dosyaları”.
+Décès INSEE : nouveau fichier ({name}) sur data.gouv.fr. Recherche → Décès INSEE → « Fichiers de l’INSEE ». ¦ INSEE ölümleri: data.gouv.fr üzerinde yeni dosya ({name}). Araştırma → INSEE ölümleri → “INSEE dosyaları”.
+D’après : {x} ¦ Dayanak: {x}
+Autres indices compatibles : {x} ¦ Uyumlu diğer ipuçları: {x}
+Indices contradictoires, à vérifier : {x} ¦ Çelişkili ipuçları, kontrol edilecek: {x}
+L’écran n’est pas divisé ({key} pour le diviser). ¦ Ekran bölünmüş değil (bölmek için {key}).
+L’écran n’est pas divisé. ¦ Ekran bölünmüş değil.
+{nm} est dans les signets. ¦ Yer imlerinde: {nm}.
+{name} n’est plus dans les signets. ¦ Artık yer imlerinde değil: {name}.
+Copié : {x} ¦ Kopyalandı: {x}
+Rappel pour {nm} ¦ Hatırlatma: {nm}
+Ce qu’il faut faire ¦ Yapılacaklar
+ℹ️ « {name} » ne s’annule pas automatiquement. ¦ ℹ️ “{name}” otomatik olarak geri alınamaz.
+↷ Rétabli : « {nm} » ¦ ↷ Yinelendi: “{nm}”
+Annulé : {x} ¦ Geri alındı: {x}
+Remettre comme au départ : {key} ¦ Başlangıçtaki gibi yap: {key}
+Les raccourcis sans {key} ne marchent qu’en dehors des cases de texte. ¦ {key} içermeyen kısayollar yalnızca metin kutularının dışında çalışır.
+Clique sur « Changer » puis appuie sur la nouvelle combinaison. Le logiciel te prévient si elle est déjà prise par {os} ou par un autre raccourci. Ces réglages suivent ta base (comme l’apparence). La liste s’affiche aussi avec {key}. ¦ “Değiştir”e tıkla, sonra yeni tuş birleşimine bas. Birleşim zaten {os} veya başka bir kısayol tarafından kullanılıyorsa uygulama seni uyarır. Bu ayarlar veritabanınla birlikte gelir (görünüm gibi). Liste {key} ile de açılır.
+Réglage « {nm} » supprimé ¦ “{nm}” ayarı silindi
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ “{name}” ayarı içe aktarıldı: kullanmak için “Uygula”ya tıkla.
+⚠️ Déjà pris par {os} ou par le menu de l’application : « {key} ». Il risque de ne pas marcher. ¦ ⚠️ Zaten {os} veya uygulama menüsü tarafından kullanılıyor: “{key}”. Çalışmayabilir.
+⚠️ Déjà utilisé ici pour « {list} ». Si tu valides, ces raccourcis seront retirés de l’autre action. ¦ ⚠️ Burada zaten şunun için kullanılıyor: “{list}”. Onaylarsan bu kısayollar diğer işlemden çıkarılacak.
+⚠️ Déjà utilisé ici pour « {list} ». Si tu valides, ce raccourci sera retiré de l’autre action. ¦ ⚠️ Burada zaten şunun için kullanılıyor: “{list}”. Onaylarsan bu kısayol diğer işlemden çıkarılacak.
+Nouveau raccourci : {key} ¦ Yeni kısayol: {key}
+Raccourci retiré. ¦ Kısayol çıkarıldı.
+⚠️ la date « {date} » est impossible, vérifie-la. ¦ ⚠️ “{date}” tarihi olanaksız, kontrol et.
+Événement modifié ¦ Olay düzenlendi
+Événement ajouté ¦ Olay eklendi
+Événement modifié. ¦ Olay düzenlendi.
+Événement ajouté. ¦ Olay eklendi.
+Ce fichier est vide (0 octet) : {file}. ¦ Bu dosya boş (0 bayt): {file}.
+Ces fichiers sont vides (0 octet). ¦ Bu dosyalar boş (0 bayt).
+Sélectionne au moins un fichier ou un dossier. ¦ En az bir dosya veya klasör seç.
+{what} (type non accepté ici). ¦ {what} (bu tür burada kabul edilmiyor).
+Elle est déjà rattachée à ce {what}. ¦ Bu kişi zaten buna bağlı: {what}.
+Enregistrer mettra à jour ses informations dans ce foyer, sans créer de doublon. Continuer ? ¦ Kaydetmek, bu hanedeki bilgilerini çift kayıt oluşturmadan günceller. Devam edilsin mi?
+Elle est déjà rattachée à un autre recensement : ¦ Bu kişi zaten başka bir nüfus sayımına bağlı:
+Elle est déjà rattachée à {n} autres recensements : ¦ Bu kişi zaten {n} başka nüfus sayımına bağlı:
+C’est normal pour des années différentes ; vérifie toutefois qu’il ne s’agit pas d’un doublon avant d’ajouter ce nouveau rattachement. Continuer ? ¦ Farklı yıllar için bu normal; yine de bu yeni bağı eklemeden önce bunun bir çift kayıt olmadığını kontrol et. Devam edilsin mi?
+Personne déjà dans ce foyer ¦ Kişi zaten bu hanede
+Personne déjà recensée ailleurs ¦ Kişi zaten başka bir nüfus sayımında kayıtlı
+Ajouter quand même ¦ Yine de ekle
+{what} à ce dossier militaire. ¦ Bu askerî dosyaya: {what}.
+Sépulture — {nm} ¦ Mezar yeri — {nm}
+Nouvelle sépulture — {nm} ¦ Yeni mezar yeri — {nm}
+{what} à cette sépulture. ¦ Bu mezar yerine: {what}.
+✍️ A signé l’acte ¦ ✍️ Belgeyi imzaladı
+Cliquez sur la carte pour poser le marqueur. Utilisez le zoom pour affiner. Lieu : <strong>{place}</strong> ¦ İşaretçiyi koymak için haritaya tıkla. İnce ayar için yakınlaştırmayı kullan. Yer: <strong>{place}</strong>
+non renseigné ¦ girilmemiş
+Union avec {nm} ¦ Birliktelik: {nm}
+Union #{n} ¦ Birliktelik #{n}
+{what} à cet événement. ¦ Bu olaya: {what}.
+Cet événement ¦ Bu olay
+Le mois {n} n’existe pas (de 1 à 12). ¦ {n}. ay yok (1’den 12’ye).
+Le {day} {month} {year} n’existe pas ({max} jours ce mois-là). ¦ {day} {month} {year} diye bir gün yok (o ay {max} gün).
+{yr} est dans le futur. ¦ Gelecekte bir tarih: {yr}.
+{what} en {year}, avant la naissance ({birth}). ¦ {what}: {year} yılında, doğumdan önce ({birth}).
+{what} en {yr}, après le décès ({death}). ¦ {what}: {yr} yılında, ölümden sonra ({death}).
+Mariage à {age} (naissance en {birth}). ¦ Evlilik yaşı: {age} (doğum yılı: {birth}).
+Décès à {n} ans : c’est beaucoup. ¦ Ölüm yaşı {n}: bu çok fazla.
+Naissance en {year}, mais son parent {name} est né en {other}. ¦ Doğum yılı {year}, ama ebeveyni {name} {other} yılında doğmuş.
+Son parent {name} n’aurait que {age}. ¦ Ebeveyni {name} yalnızca şu yaşta olurdu: {age}.
+Sa mère {nm} aurait {n} ans. ¦ Annesi {nm} şu yaşta olurdu: {n}.
+Naissance en {year}, après le décès de son parent {name} ({other}). ¦ Doğum yılı {year}, ebeveyni {name} öldükten sonra ({other}).
+Naissance en {year}, mais son enfant {name} est né en {other}. ¦ Doğum yılı {year}, ama çocuğu {name} {other} yılında doğmuş.
+Décès en {year}, mais son enfant {name} naît en {other}. ¦ Ölüm yılı {year}, ama çocuğu {name} {other} yılında doğuyor.
+Enquête #{n} ¦ İnceleme #{n}
+Source #{n} ¦ Kaynak #{n}
+la date « {date} » n’est pas sûre (vers, avant, entre…) : un calendrier a besoin d’un jour précis ¦ “{date}” tarihi kesin değil (yaklaşık, önce, arasında…): bir takvim kesin bir gün ister
+seule l’année est connue (« {date} ») : il faut le jour et le mois ¦ yalnızca yıl biliniyor (“{date}”): gün ve ay gerekiyor
+la date « {date} » n’est pas un jour précis (il faut le jour, le mois et l’année) ¦ “{date}” tarihi kesin bir gün değil (gün, ay ve yıl gerekiyor)
+Impossible de mettre cet événement au calendrier : {err}. ¦ Bu olay takvime konulamadı: {err}.
+<b>{what}</b> de {nm} : {dt} ¦ <b>{what}</b> — {nm}: {dt}
+Recensement {yr} · spécial ¦ Nüfus sayımı {yr} · özel
+Recensement {yr} ¦ Nüfus sayımı {yr}
+Champs relevés habituellement en {year} ¦ {year} yılında genellikle kaydedilen alanlar
+{what} : clique « Enregistrer ». ¦ {what}: “Kaydet”e tıkla.
+Capture de l’arbre — {nm} ¦ Ağaç ekran görüntüsü — {nm}
+fiche en ligne ¦ çevrimiçi kart
+Choisis un média ci-dessus pour Document A. ¦ Belge A için yukarıdan bir medya seç.
+Choisis un média ci-dessus pour Document B. ¦ Belge B için yukarıdan bir medya seç.
+{n} fichiers identiques ¦ {n} aynı dosya
+{size} chacun · même contenu ¦ her biri {size} · aynı içerik
+{what} parmi {files} (comparaison par empreinte de fichier). ¦ {what} — toplam: {files} (dosya parmak iziyle karşılaştırma).
+Aucun doublon détecté parmi {files}. ¦ Şunlar arasında çift kayıt bulunmadı: {files}.
+Média « {name} » supprimé de la base ¦ “{name}” medyası veritabanından silindi
+{what}. Clique sur une zone pour l’identifier. ¦ {what}. Tanımlamak için bir alana tıkla.
+Événement #{n} ¦ Olay #{n}
+Texte ajouté à « {name} » : ouvre-le pour le relire et l’enregistrer. ¦ “{name}” belgesine metin eklendi: gözden geçirmek ve kaydetmek için aç.
+Modifier cette signature ¦ Bu imzayı düzenle
+Modifier cette identification ¦ Bu tanımlamayı düzenle
+Supprimer cette signature ¦ Bu imzayı sil
+Supprimer cette identification ¦ Bu tanımlamayı sil
+Supprimer cette signature ? ¦ Bu imza silinsin mi?
+Supprimer cette identification ? ¦ Bu tanımlama silinsin mi?
+Supprimer la signature ¦ İmzayı sil
+Supprimer l’identification ¦ Tanımlamayı sil
+Palette « {name} » appliquée. Clique sur Enregistrer pour confirmer. ¦ “{name}” paleti uygulandı. Onaylamak için Kaydet’e tıkla.
+« {name} » lié. Il apparaîtra après l’enregistrement. ¦ “{name}” bağlandı. Kaydettikten sonra görünecek.
+{a} : {b} à l’enregistrement. ¦ {a}: kaydedince {b}.
+Les armoiries restent pour les {n} autres porteurs. ¦ Arma diğer {n} taşıyıcı için kalıyor.
+Les armoiries restent pour l’autre porteur. ¦ Arma diğer taşıyıcı için kalıyor.
+Retirer « {name} » de cette fiche ? ¦ “{name}” bu karttan çıkarılsın mı?
+Supprimer les armoiries « {name} » ? ¦ “{name}” arması silinsin mi?
+Supprimer les armoiries ¦ Armayı sil
+{nm} (départ) ¦ {nm} (çıkış)
+Ce jour-là, {name} était au <strong>{unit}</strong>. ¦ O gün {name} şu birlikteydi: <strong>{unit}</strong>.
+il ¦ o
+Total : <strong>{x}</strong> ¦ Toplam: <strong>{x}</strong>
+dettes {x} ¦ borçlar {x}
+net <strong>{x}</strong> ¦ net <strong>{x}</strong>
+≈ <strong>{n} journées de travail</strong> d’un journalier ({y} années) ¦ ≈ bir gündelikçinin <strong>{n} iş günü</strong> ({y} yıl)
+{n} journées de travail ¦ {n} iş günü
+Blasonnement à écrire ¦ Yazılacak arma tarifi
+Devise : {x} ¦ Düstur: {x}
+Porté par {list} ¦ Taşıyanlar: {list}
+Avec l’image du blason ({n}) ¦ Arma resmiyle ({n})
+Sans image ({n}) ¦ Resimsiz ({n})
+Mort pour la France ({n}) ¦ Fransa için öldü ({n})
+Total {x} ¦ Toplam {x}
+État : {x} ¦ Durum: {x}
+Avec un scan ({n}) ¦ Taramalı ({n})
+Sans scan ({n}) ¦ Taramasız ({n})
+{what} (cochés, sinon ceux affichés) ¦ {what} (işaretliler, yoksa gösterilenler)
+Document {num} enregistré avec son scan. ¦ Belge {num} taramasıyla birlikte kaydedildi.
+Document {no} enregistré. ¦ Belge {no} kaydedildi.
+dates à fixer ¦ belirlenecek tarihler
+départ de {nm} ¦ çıkış noktası: {nm}
+{a} sur {b} ¦ {a} / {b}
+fait le {dt} ¦ yapıldığı tarih: {dt}
+pour {list} ¦ kimin için: {list}
+Sur les traces de : {list} ¦ İzinden gidilenler: {list}
+Calée ¦ Hizalandı
+À caler ¦ Hizalanacak
+{n}/2 points au moins ¦ en az {n}/2 nokta
+Calée : écart moyen {n} m ¦ Hizalandı: ortalama sapma {n} m
+(3 points : ajoute-en un 4e pour vérifier) ¦ (3 nokta: kontrol için bir 4.’sünü ekle)
+Pas encore calée (2 points complets au moins ; 3 ou plus, c’est mieux). ¦ Henüz hizalanmadı (en az 2 tam nokta; 3 veya daha fazlası daha iyi).
+Venue d’une question : seulement les proches de la fiche #{n}. ¦ Bir sorudan geldi: yalnızca #{n} numaralı kartın yakınları.
+Venue d’une question : seulement les ancêtres de la personne de départ. ¦ Bir sorudan geldi: yalnızca başlangıç kişisinin ataları.
+Seules les {n} premières sont affichées. ¦ Yalnızca ilk {n} gösteriliyor.
+Recherche enregistrée ({what}). ¦ Arama kaydedildi ({what}).
+(en pleine mode) ¦ (tam moda olduğu dönem)
+({n} ans avant le pic : en avance) ¦ (zirveden {n} yıl önce: zamanının ilerisinde)
+({n} ans après le pic) ¦ (zirveden {n} yıl sonra)
+<strong>{name}</strong> : au sommet en France vers <strong>{year}</strong> ({n} bébés). Ta famille l’a donné en {list}. ¦ <strong>{name}</strong>: Fransa’da zirvesi yaklaşık <strong>{year}</strong> ({n} bebek). Ailen bu adı şu yıllarda verdi: {list}.
+{n} lignes importées, de {a} à {b} ¦ {n} satır içe aktarıldı, {a} – {b}
+En France ({a}–{b}) ¦ Fransa’da ({a}–{b})
+Aucune naissance datée depuis {year} dans ta base. ¦ Veritabanında {year} yılından beri tarihli doğum yok.
+Prénoms importés : {n} lignes ({a}–{b}). ¦ Adlar içe aktarıldı: {n} satır ({a}–{b}).
+Ta dernière copie hors de cet ordinateur date de {what}. ¦ Bu bilgisayarın dışındaki son kopyanın yaşı: {what}.
+Copie faite : {file} (+ {n} médias) ¦ Kopya yapıldı: {file} (+ {n} medya)
+Copie faite : {fi} ¦ Kopya yapıldı: {fi}
+dernière copie : {dt} ¦ son kopya: {dt}
+Plus d’actions sur la section « {name} » ¦ “{name}” bölümü için diğer işlemler
+Section renommée : « {nm} » ¦ Bölümün yeni adı: “{nm}”
+Icône de la section « {name} » changée ¦ “{name}” bölümünün simgesi değişti
+Section « {nm} » montée ¦ “{nm}” bölümü yukarı taşındı
+Section « {nm} » descendue ¦ “{nm}” bölümü aşağı taşındı
+Section « {nm} » supprimée ¦ “{nm}” bölümü silindi
+ses {n} blocs vont dans « Sans section » ¦ {n} bloğu “Bölümsüz” içine gider
+son bloc va dans « Sans section » ¦ bloğu “Bölümsüz” içine gider
+Cacher le bloc « {nm} » ¦ “{nm}” bloğunu gizle
+Montrer le bloc « {nm} » ¦ “{nm}” bloğunu göster
+Cacher la section « {nm} » ¦ “{nm}” bölümünü gizle
+Montrer la section « {nm} » ¦ “{nm}” bölümünü göster
+Déplacer « {name} » : glisse, ou Alt + ↑ / ↓ ¦ Taşı: “{name}” — sürükle veya Alt + ↑ / ↓
+Plus d’actions sur « {nm} » ¦ Diğer işlemler: “{nm}”
+Déplacer la section « {name} » : glisse, ou Alt + ↑ / ↓ ¦ “{name}” bölümünü taşı: sürükle veya Alt + ↑ / ↓
+cachée ¦ gizli
+repliée au départ ¦ başta kapalı
+Au clavier : Tab jusqu’à ⠿ puis {a} / {b} ¦ Klavyeyle: Tab ile ⠿ işaretine git, sonra {a} / {b}
+⋯ d’une section : Renommer, Changer l’icône, Monter, Descendre, Supprimer (↶ Annuler). ¦ ⋯ bir bölümün menüsü: Yeniden adlandır, Simgeyi değiştir, Yukarı taşı, Aşağı taşı, Sil (↶ Geri al).
+Section « {nm} » créée ¦ “{nm}” bölümü oluşturuldu
+ici ¦ burada
+« {a} » va dans « {b} » ¦ “{a}”, “{b}” içine gider
+« {nm} » y sera rangé. ¦ “{nm}” buraya yerleştirilecek.
+{nm} (copie) ¦ {nm} (kopya)
+Section « {name} » dupliquée (vide) ¦ “{name}” bölümü çoğaltıldı (boş)
+{nm} déplacé ¦ Taşındı: {nm}
+« {name} » est maintenant {i}ᵉ sur {n} ¦ “{name}” artık {n} içinde {i}.
+Le style des fiches : {x}. Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ Kartların stili: {x}. Başlık biçimiyle birlikte, bu sayfanın aşağısında ayarlanır.
+traits, coins, ombres ¦ çizgiler, köşeler, gölgeler
+la fiche n°{n} ¦ {n} numaralı kart
+La fiche ouverte ({name}) est un animal : son exception se règle avec « 🐾 Animaux », en haut des Sections. ¦ Açık kart ({name}) bir hayvan: istisnası Bölümlerin üstündeki “🐾 Hayvanlar” ile ayarlanır.
+La fiche ouverte ({name}) est une personne : son exception se règle avec « 👤 Personnes », en haut des Sections. ¦ Açık kart ({name}) bir kişi: istisnası Bölümlerin üstündeki “👤 Kişiler” ile ayarlanır.
+Ranger les sections — fiche de {name} ¦ Bölümleri düzenle — kart: {name}
+{n} en vie ¦ {n} hayatta
+{n} animaux ont reçu leur fiche complète. ¦ {n} hayvan tam kartını aldı.
+1 animal a reçu sa fiche complète. ¦ 1 hayvan tam kartını aldı.
+Un animal n’a plus qu’une seule fiche : tout ce que montrait l’ancienne « fiche d’animal » y est, rangé en sections. Rien n’est perdu. ¦ Bir hayvanın artık tek bir kartı var: eski “hayvan kartı”nın gösterdiği her şey orada, bölümlere ayrılmış olarak. Hiçbir şey kaybolmadı.
+La fiche de <b>{name}</b> a été supprimée, mais l’animal était resté dans la liste des animaux, avec son suivi. ¦ Kart silindi: <b>{name}</b>. Ama hayvan, takibiyle birlikte hayvanlar listesinde kalmıştı.
+La fiche de {name} est rétablie. ¦ Kart geri getirildi: {name}.
+« {name} » supprimé, avec son suivi. Pour le rétablir : Réglages → Journal des modifications → « Restaurer ». ¦ “{name}” takibiyle birlikte silindi. Geri getirmek için: Ayarlar → Değişiklik günlüğü → “Geri yükle”.
+Père de {nm} ¦ Babası olduğu: {nm}
+Mère de {nm} ¦ Annesi olduğu: {nm}
+🐾 Descendance ¦ 🐾 Soy
+Portée du {dt} ¦ Batın: {dt}
+Portée (date inconnue) ¦ Batın (tarih bilinmiyor)
+avec {nm} ¦ birlikte: {nm}
+Consanguinité (Wright, sur les ancêtres connus) : <strong>{x}</strong> ¦ Akrabalı üreme (Wright, bilinen atalara göre): <strong>{x}</strong>
+ancêtres communs : ¦ ortak atalar:
+Remplacer les réglages actuels par « {name} » ? ¦ Geçerli ayarlar “{name}” ile değiştirilsin mi?
+Appliquer ces réglages ¦ Bu ayarları uygula
+Remplacer les réglages ¦ Ayarları değiştir
+Réglage « {name} » importé : « Appliquer » pour t’en servir. ¦ “{name}” ayarı içe aktarıldı: kullanmak için “Uygula”.
+Champ « {nm} » ajouté. ¦ “{nm}” alanı eklendi.
+Catégorie « {name} » ajoutée : ajoute-lui des champs avec « ＋ Champ ». ¦ “{name}” kategorisi eklendi: “＋ Alan” ile ona alanlar ekle.
+Espèce « {nm} » ajoutée. ¦ “{nm}” türü eklendi.
+Remplacer les réglages actuels par ceux du fichier (et ajouter {what}) ? ¦ Geçerli ayarlar dosyadakilerle değiştirilsin mi (ve şunlar eklensin mi: {what})?
+Remplacer les réglages actuels par ceux du fichier ? ¦ Geçerli ayarlar dosyadakilerle değiştirilsin mi?
+Importer des réglages ¦ Ayarları içe aktar
+affixe « {nm} » ¦ üretici adı “{nm}”
+Caractéristiques ¦ Özellikler
+{what} dans la liste. ¦ Listede: {what}.
+Ce bloc n’a pas pu être dessiné : {err} ¦ Bu blok çizilemedi: {err}
+Jamais vu depuis le baguage ¦ Halkalamadan beri hiç görülmedi
+Vu aujourd’hui ¦ Bugün görüldü
+Vu hier ¦ Dün görüldü
+Vu il y a {what} ¦ Son görülme: {what} önce
+Pas revu depuis {what} ¦ Şu süredir görülmedi: {what}
+Pas revu depuis {n} jours ¦ {n} gündür görülmedi
+Vu il y a 12 jours ¦ 12 gün önce görüldü
+Ouvrir cette observation ¦ Bu gözlemi aç
+👁 Vu la dernière fois : {date} ¦ 👁 Son görülme: {date}
+par ¦ tarafından
+{what} posée ¦ Takıldı: {what}
+retirée ¦ çıkarıldı
+Pose des bagues de couleur ¦ Renkli halkaların takılması
+📡 Autres marques ¦ 📡 Diğer işaretler
+Ses marques ¦ İşaretleri
+Aucune marque pour l’instant ({list}…). ¦ Henüz işaret yok ({list}…).
+Marques retirées ({n}) ¦ Çıkarılan işaretler ({n})
+posée le {dt} ¦ takıldığı tarih: {dt}
+un point toutes les {n} min ¦ her {n} dakikada bir nokta
+fin : {dt} ¦ bitiş: {dt}
+fin : toujours en place ¦ bitiş: hâlâ takılı
+photo de référence à ajouter ¦ eklenecek referans fotoğrafı
+Le suivi de {nm} ¦ Takip: {nm}
+Les bagues de {nm} ¦ Halkalar: {nm}
+Nouvelle marque : {what} ¦ Yeni işaret: {what}
+{n} en {yr} ¦ {yr} yılında {n}
+vu sur {what} ¦ görüldüğü yer: {what}
+🩺 Santé de {nm} ¦ 🩺 Sağlık: {nm}
+Pourquoi : <b>{x}</b> ¦ Neden: <b>{x}</b>
+Où : 📍 {place} ¦ Nerede: 📍 {place}
+Soigné par {nm} ¦ Bakan: {nm}
+relâché le {dt} ¦ salıverildiği tarih: {dt}
+relâché ¦ salıverildi
+† mort le {dt} ¦ † ölüm tarihi: {dt}
+† mort ¦ † öldü
+🩺 SANTÉ ¦ 🩺 SAĞLIK
+Modifier l’événement de santé ¦ Sağlık olayını düzenle
+Nouvel événement de santé ¦ Yeni sağlık olayı
+quitte ¦ ayrılıyor
+quitte « {nm} » ¦ ayrılıyor: “{nm}”
+👥 Groupe de {nm} ¦ 👥 Grup: {nm}
+Sortie ¦ Çıkış
+Sortie (facultatif) ¦ Çıkış (isteğe bağlı)
+{what} (une sortie = un trajet) ¦ {what} (bir gezi = bir rota)
+plus loin {x} ¦ en uzak {x}
+zone ≈ {x} ¦ alan ≈ {x}
+dehors ¦ dışarıda
+sortie {time} ¦ çıkış {time}
+rentrée {time} ¦ dönüş {time}
+le plus loin de la maison ¦ evden en uzak
+zone fréquentée ¦ kullanılan alan
+Nuit du {a} au {b} ¦ Gece: {a} → {b}
+Afficher « {nm} » ¦ Göster: “{nm}”
+né à ¦ doğum yeri
+née à ¦ doğum yeri
+né(e) à ¦ doğum yeri
+naissance à ¦ doğum yeri
+né le ¦ doğum tarihi
+née le ¦ doğum tarihi
+né(e) le ¦ doğum tarihi
+naissance le ¦ doğum tarihi
+? date incertaine ¦ ? belirsiz tarih
+Union ¦ Birliktelik
+Cette fiche n’existe plus : une autre est affichée. ¦ Bu kart artık yok: başka bir kart gösteriliyor.
+Pas de conjoint ¦ Eş yok
+Pas d’enfant ¦ Çocuk yok
+Pas de conjoint suspecté ¦ Şüphelenilen eş yok
+Pas d’enfant suspecté ¦ Şüphelenilen çocuk yok
+Non renseigné ¦ Girilmemiş
+Aucun parent ¦ Ebeveyn yok
+Aucun conjoint ¦ Eş yok
+Aucun enfant ¦ Çocuk yok
+Aucun lien ¦ Bağlantı yok
+À la naissance ¦ Doğumda
+Date incertaine (cochée dans « Modifier l’événement ») ¦ Belirsiz tarih (“Olayı düzenle” içinde işaretli)
+Déduit ¦ Çıkarsanmış
+Estimé ¦ Tahmini
+Non évalué ¦ Değerlendirilmemiş
+Certain ¦ Kesin
+Doute ¦ Şüpheli
+Média de preuve lié ¦ Bağlı kanıt medyası
+Non vérifié ¦ Kontrol edilmedi
+Vérifié : aucun enfant vu ¦ Kontrol edildi: çocuk görülmedi
+Sûrement pas d’enfant, mais doute ¦ Büyük olasılıkla çocuk yok, ama emin değil
+Ajoute une année de naissance pour calculer cette frise. ¦ Bu zaman çizelgesini hesaplamak için bir doğum yılı ekle.
+Décès d’un conjoint ¦ Bir eşin ölümü
+Naissance d’un enfant ¦ Bir çocuğun doğumu
+Enfants ¦ Çocuklar
+Mariages ¦ Evlilikler
+Intervalles possibles ¦ Olası aralıklar
+Enfant possible entre deux naissances ¦ İki doğum arasında olası çocuk
+avant 12 ans ¦ 12 yaşından önce
+après 55 ans ¦ 55 yaşından sonra
+Aucun nom trouvé ¦ Ad bulunamadı
+À chercher ¦ Aranacak
+Trouvé ¦ Bulundu
+Non trouvé ¦ Bulunamadı
+Pas encore né ¦ Henüz doğmamış
+Pas encore en France ¦ Henüz Fransa’da değil
+Pas en France ¦ Fransa’da değil
+Plus en France ¦ Artık Fransa’da değil
+Déjà décédé ¦ Zaten ölmüş
+Année de naissance ¦ Doğum yılı
+Position dans le ménage ¦ Hanedeki konumu
+Nationalité ¦ Uyruk
+Rubriques supplémentaires ¦ Ek başlıklar
+Âge ¦ Yaş
+Profession ¦ Meslek
+Employeur / entreprise ¦ İşveren / şirket
+Ville de naissance ¦ Doğduğu şehir
+Situation personnelle ¦ Medeni durum
+Masquer les détails ¦ Ayrıntıları gizle
+Afficher les détails ¦ Ayrıntıları göster
+Revenir au réglage global ¦ Genel ayara dön
+Gérer les médias ¦ Medyayı yönet
+Lieu/adresse à préciser ¦ Belirtilecek yer/adres
+Personne non liée ¦ Bağlanmamış kişi
+Fiche de l’employeur ¦ İşverenin kartı
+Modifier ce membre ¦ Bu üyeyi düzenle
+Retirer du foyer ¦ Haneden çıkar
+＋ Membre du foyer ¦ ＋ Hane üyesi
+＋ Recensement spécial ¦ ＋ Özel nüfus sayımı
+Recensement spécial ¦ Özel nüfus sayımı
+Supprimer ce recensement spécial ¦ Bu özel nüfus sayımını sil
+Supprimer ce recensement ¦ Bu nüfus sayımını sil
+Les années grisées sont probablement impossibles d’après naissance/décès. 1916 et 1941 ne sont pas proposés car les recensements généraux n’ont pas eu lieu. ¦ Gri yıllar, doğum/ölüm bilgisine göre büyük olasılıkla olanaksız. 1916 ve 1941 önerilmez, çünkü o yıllarda genel nüfus sayımı yapılmadı.
+Lieu sans nom ¦ Adsız yer
+lieu sans nom ¦ adsız yer
+sans lieu ¦ yer yok
+lieu inconnu ¦ bilinmeyen yer
+Lieu trop vague pour être placé sur la carte ¦ Yer, haritaya konulamayacak kadar belirsiz
+Carte des événements de la personne ¦ Kişinin olaylarının haritası
+Ordre des lieux ¦ Yerlerin sırası
+Ordre alphabétique ¦ Alfabetik sıra
+Ordre chronologique ¦ Kronolojik sıra
+♂ mâle ¦ ♂ erkek
+♀ femelle ¦ ♀ dişi
+En vie ¦ Hayatta
+Mode vérification ¦ Kontrol modu
+Rôle / travail ¦ Rol / iş
+Référence ¦ Referans
+Autres prénoms ¦ Diğer adlar
+Titre / préfixe ¦ Unvan / önek
+Métier / activité ¦ Meslek / faaliyet
+Mort Pour La France ¦ Fransa İçin Öldü
+Identité ¦ Kimlik
+Modifier l’identité ¦ Kimliği düzenle
+Voir les médias liés ¦ Bağlı medyayı gör
+Témoins ¦ Tanıklar
+Modifier ce recensement ¦ Bu nüfus sayımını düzenle
+Témoin ¦ Tanık
+Tous (mélangés) ¦ Hepsi (karışık)
+Tous (séparés) ¦ Hepsi (ayrı)
+Mes événements ¦ Olaylarım
+Comme témoin ¦ Tanık olarak
+Naissance, baptême, mariage, décès… tout ce qui date une vie. ¦ Doğum, vaftiz, evlilik, ölüm… bir hayatı tarihlendiren her şey.
+Document généalogique ¦ Soy ağacı belgesi
+Médias de la fiche ¦ Kartın medyası
+Verrouiller le réordonnancement des médias de la fiche ¦ Kartın medyasının sıralamasını kilitle
+Aucune photographie ou reproduction d’acte ¦ Fotoğraf veya belge kopyası yok
+Aucune lettre, carte postale ou autre correspondance ¦ Mektup, kartpostal veya başka yazışma yok
+Témoignage ¦ Tanıklık
+Témoignage / souvenir ¦ Tanıklık / anı
+Témoignages / souvenirs ¦ Tanıklıklar / anılar
+Repérée ¦ Bulundu
+Média lié ¦ Bağlı medya
+Aucune signature identifiée. ¦ Tanımlanmış imza yok.
+Sources & citations ¦ Kaynaklar ve alıntılar
+Note d’où vient chaque information : acte, registre, site… ¦ Her bilginin nereden geldiğini not et: belge, defter, site…
+Toutes les citations ¦ Tüm alıntılar
+Références externes ¦ Dış referanslar
+Identifiant source ¦ Kaynak kimliği
+Numéro Sosa ¦ Sosa numarası
+Numéro d'Aboville ¦ d’Aboville numarası
+Enquête ¦ İnceleme
+Sans question détaillée ¦ Ayrıntılı soru yok
+Terminée ¦ Bitti
+＋ Enquête ¦ ＋ İnceleme
+＋ Battue ¦ ＋ Tarama
+Carte des événements ¦ Olayların haritası
+Score de complétude ¦ Tamlık puanı
+Pas assez d’informations pour générer une biographie utile. ¦ Yararlı bir biyografi yazmak için yeterli bilgi yok.
+Décision du conseil de révision ¦ Askerlik kurulu kararı
+Compris dans la liste ¦ Listeye dahil
+Marques particulières ¦ Belirgin işaretler
+Degré d'instruction générale ¦ Genel eğitim düzeyi
+Degré d'instruction militaire ¦ Askerî eğitim düzeyi
+Armée active ¦ Muvazzaf ordu
+Disponibilité / réserve active ¦ Hazırda bekleme / muvazzaf yedek
+Armée territoriale ¦ Bölgesel ordu
+Entrée active ¦ Muvazzaf hizmete giriş
+Passé en disponibilité ¦ Hazırda beklemeye geçti
+Passé en réserve active ¦ Muvazzaf yedeğe geçti
+Passé en territoriale ¦ Bölgesel orduya geçti
+Passé en réserve territoriale ¦ Bölgesel yedeğe geçti
+Libéré du service ¦ Terhis edildi
+documents liés ¦ bağlı belgeler
+Époques de passage ¦ Geçiş tarihleri
+Services, campagnes & décorations ¦ Hizmetler, seferler ve nişanlar
+Localités successives ¦ Art arda oturduğu yerler
+Notes complémentaires ¦ Ek notlar
+Aucune information militaire renseignée. ¦ Askerî bilgi girilmemiş.
+Modifier les informations militaires ¦ Askerî bilgileri düzenle
+Militaire ¦ Askerî
+Bon état ¦ İyi durumda
+État moyen ¦ Orta durumda
+Mauvais état ¦ Kötü durumda
+À restaurer ¦ Onarılacak
+État inconnu ¦ Durumu bilinmiyor
+Cimetière ¦ Mezarlık
+＋ Renseigner la sépulture ¦ ＋ Mezar yerini gir
+Renseigner la sépulture ¦ Mezar yerini gir
+Sépulture existante ¦ Mezar yeri hâlâ var
+⚠ Sépulture disparue ¦ ⚠ Mezar yeri artık yok
+Retirer de la sépulture ¦ Mezar yerinden çıkar
+Aucune personne rattachée. ¦ Bağlı kişi yok.
+Aucune photo datée de la sépulture. ¦ Mezar yerinin tarihli fotoğrafı yok.
+＋ Ajouter ou relier une photo ¦ ＋ Fotoğraf ekle veya bağla
+Modifier la sépulture ¦ Mezar yerini düzenle
+Supprimer la sépulture ¦ Mezar yerini sil
+Sépulture ¦ Defin
+Écrivain ¦ Yazar
+Cinéaste ¦ Sinemacı
+Poète ¦ Şair
+Vidéaste ¦ Video yapımcısı
+Chef d’orchestre ¦ Orkestra şefi
+Aucune œuvre ou réalisation enregistrée. ¦ Kayıtlı eser veya başarı yok.
+Ajouter une œuvre / réalisation ¦ Eser / başarı ekle
+Chargement des ascendants… ¦ Atalar yükleniyor…
+Chargement des descendants… ¦ Torunlar yükleniyor…
+Gérer les objets ¦ Nesneleri yönet
+Gérer la mémoire familiale ¦ Aile belleğini yönet
+Exports rapides de cette fiche. Le PDF utilise l’impression du navigateur, avec l’ordre, la taille et la visibilité des blocs de cette fiche. ¦ Bu kartın hızlı dışa aktarımları. PDF, bu karttaki blokların sırası, boyutu ve görünürlüğüyle tarayıcının yazdırma özelliğini kullanır.
+Personnaliser l’export ¦ Dışa aktarmayı özelleştir
+PDF / imprimer ¦ PDF / yazdır
+JSON fiche ¦ Kart JSON
+Exports fiche ¦ Kart dışa aktarımları
+FICHE INDIVIDUELLE ¦ KİŞİ KARTI
+Fiche individuelle ¦ Kişi kartı
+Numéros Sosa (ancêtre présent plusieurs fois dans l’arbre) ¦ Sosa numaraları (ata ağaçta birkaç kez yer alıyor)
+Hors généalogie ¦ Soy ağacı dışında
+Déverrouiller la fiche ¦ Kartın kilidini aç
+Verrouiller la fiche ¦ Kartı kilitle
+Historique de la fiche ¦ Kartın geçmişi
+Frères & sœurs ¦ Kardeşler
+Aucun connu ¦ Bilinen yok
+🙈 Lignes vides masquées ¦ 🙈 Boş satırlar gizli
+👁 Lignes vides affichées ¦ 👁 Boş satırlar gösteriliyor
+Réglage non enregistré (stockage indisponible). ¦ Ayar kaydedilmedi (depolama kullanılamıyor).
+Lignes vides masquées sur cette fiche. ¦ Boş satırlar bu kartta gizlendi.
+Lignes vides masquées sur toutes les fiches. ¦ Boş satırlar tüm kartlarda gizlendi.
+Lignes vides affichées sur cette fiche. ¦ Boş satırlar bu kartta gösteriliyor.
+Lignes vides affichées sur toutes les fiches. ¦ Boş satırlar tüm kartlarda gösteriliyor.
+Date de naissance ¦ Doğum tarihi
+Lieu de naissance ¦ Doğum yeri
+Date de mariage ¦ Evlilik tarihi
+Lieu de mariage ¦ Evlilik yeri
+Date de décès ¦ Ölüm tarihi
+Lieu de décès ¦ Ölüm yeri
+Autre information ¦ Diğer bilgi
+Exacte ¦ Doğru
+Inexacte ¦ Yanlış
+Incomplète ¦ Eksik
+Approximative ¦ Yaklaşık
+Inconnue ¦ Bilinmiyor
+Aucune vérification effectuée. ¦ Hiç kontrol yapılmadı.
+Fiche en ligne ¦ Çevrimiçi kart
+Voir la capture de l’arbre en grand ¦ Ağaç ekran görüntüsünü büyük gör
+Capture d’écran de l’arbre ¦ Ağacın ekran görüntüsü
+Geneanet, FamilySearch, Filae… les arbres en ligne où figure cette personne. ¦ Geneanet, FamilySearch, Filae… bu kişinin yer aldığı çevrimiçi ağaçlar.
+＋ Ajouter une fiche en ligne ¦ ＋ Çevrimiçi kart ekle
+Aucune fiche en ligne pour l’instant ¦ Henüz çevrimiçi kart yok
+Étiquette ¦ Etiket
+Retirer cette étiquette ¦ Bu etiketi çıkar
+Tape pour chercher une étiquette… ¦ Etiket aramak için yaz…
+Aucune étiquette. ¦ Etiket yok.
+Ajouter une étiquette ¦ Etiket ekle
+Tape le nom d’une étiquette. ¦ Bir etiketin adını yaz.
+Enregistre d’abord cette fiche avant d’ajouter une étiquette. ¦ Etiket eklemeden önce bu kartı kaydet.
+Vues enregistrées ¦ Kayıtlı görünümler
+Visites d’archives ¦ Arşiv ziyaretleri
+Autre source ¦ Diğer kaynak
+Source sans titre ¦ Başlıksız kaynak
+Événement lié ¦ Bağlı olay
+Toute la fiche ¦ Kartın tamamı
+Citer cette source ¦ Bu kaynağa atıf yap
+❝ Citer : la référence écrite en 4 styles, prête à copier ¦ ❝ Atıf: referans 4 stilde yazılmış, kopyalanmaya hazır
+Aucune variante enregistrée. ¦ Kayıtlı varyant yok.
+Confirmée ¦ Doğrulandı
+Rejetée ¦ Reddedildi
+Ouverte ¦ Açık
+Non sourcé ¦ Kaynaksız
+Source indirecte ¦ Dolaylı kaynak
+Source directe ¦ Doğrudan kaynak
+Sources concordantes ¦ Uyumlu kaynaklar
+Faible ¦ Düşük
+Moyenne ¦ Orta
+Forte ¦ Yüksek
+Ce qui est complet ¦ Tam olanlar
+Ce qui est incomplet ¦ Eksik olanlar
+Ce qui manque ¦ Hiç olmayanlar
+de complétude documentaire ¦ belgesel tamlık
+Vidéo ¦ Video
+VIDÉO ¦ VİDEO
+Documents du recensement ¦ Nüfus sayımı belgeleri
+Photo de la personne ¦ Kişinin fotoğrafı
+Alphabétique ¦ Alfabetik
+Chronologique ¦ Kronolojik
+Manuel (glisser-déposer) ¦ Elle (sürükle-bırak)
+Carte postale ¦ Kartpostal
+Télégramme ¦ Telgraf
+Carte de vœux ¦ Tebrik kartı
+Lettre ¦ Mektup
+Média ¦ Medya
+Sans étiquette ¦ Etiketsiz
+Par correspondant (A → Z) ¦ Yazışılan kişiye göre (A → Z)
+Par correspondant (Z → A) ¦ Yazışılan kişiye göre (Z → A)
+Par étiquette (ex. « Correspondance 1914-1918 ») ¦ Etikete göre (ör. “Correspondance 1914-1918”)
+Alphabétique (sans le correspondant) ¦ Alfabetik (yazışılan kişi olmadan)
+EXPORT FICHE ¦ KART DIŞA AKTARIMI
+Revenir aux réglages globaux ¦ Genel ayarlara dön
+Enregistrer et imprimer ¦ Kaydet ve yazdır
+Réglages de cette fiche réinitialisés. ¦ Bu kartın ayarları başlangıçtaki gibi yapıldı.
+Export de cette fiche personnalisé. ¦ Bu kartın dışa aktarımı özelleştirildi.
+Chargement de l’historique… ¦ Geçmiş yükleniyor…
+Restauration bloquée ¦ Geri yükleme engellendi
+Restaurer ¦ Geri yükle
+Détails ¦ Ayrıntılar
+Modification ¦ Değişiklik
+Aucune modification enregistrée pour cette fiche. ¦ Bu kart için kayıtlı değişiklik yok.
+L’élément supprimé sera remis dans la base. ¦ Silinen öğe veritabanına geri konulacak.
+Restaurer cette suppression ? ¦ Bu silme geri alınsın mı?
+Suppression restaurée. ¦ Silme geri alındı.
+Fiche restaurée avec ses événements, liens familiaux, notes, médias et sources. ¦ Kart olayları, aile bağları, notları, medyası ve kaynaklarıyla geri getirildi.
+Les personnes qui y sont rattachées ne seront plus liées. ¦ Buna bağlı kişilerin bağlantısı kalkacak.
+Sépulture supprimée. ¦ Mezar yeri silindi.
+Sa fiche n’est pas supprimée. ¦ Kişinin kartı silinmez.
+Personne retirée de la sépulture. ¦ Kişi mezar yerinden çıkarıldı.
+CIMETIÈRE ¦ MEZARLIK
+Fiche verrouillée. ¦ Kart kilitlendi.
+Fiche déverrouillée. ¦ Kartın kilidi açıldı.
+Capture de l’arbre ¦ Ağacın ekran görüntüsü
+Hypothèse supprimée ¦ Varsayım silindi
+Preuve supprimée ¦ Kanıt silindi
+Le lien de parenté est retiré ; aucune fiche n’est supprimée. ¦ Akrabalık bağı kaldırıldı; hiçbir kart silinmedi.
+Relation retirée. ¦ İlişki kaldırıldı.
+Année du recensement spécial (par exemple 1946) : ¦ Özel nüfus sayımının yılı (örneğin 1946):
+Année invalide pour un recensement spécial. ¦ Özel nüfus sayımı için geçersiz yıl.
+Membre retiré du foyer. ¦ Üye haneden çıkarıldı.
+Choisis le tri « Manuel » pour activer le glisser-déposer. ¦ Sürükle-bırakı açmak için “Elle” sıralamasını seç.
+Verrouiller le réordonnancement des portraits ¦ Portrelerin sıralamasını kilitle
+Déverrouiller le réordonnancement des portraits ¦ Portrelerin sıralamasının kilidini aç
+Note supprimée ¦ Not silindi
+Source supprimée ¦ Kaynak silindi
+Crée la première fiche, ou importe un fichier GEDCOM depuis Réglages → Import. ¦ İlk kartı oluştur veya Ayarlar → İçe aktar üzerinden bir GEDCOM dosyası içe aktar.
+Les graphiques n’ont pas pu se charger (fichier app-graphiques.js manquant ?). ¦ Grafikler yüklenemedi (app-graphiques.js dosyası eksik mi?).
+Recharge la page ; si le problème continue, le fichier manque peut-être. ¦ Sayfayı yeniden yükle; sorun sürerse dosya eksik olabilir.
+Déplacer ¦ Taşı
+Modifier cette vue ¦ Bu görünümü düzenle
+♂ Mâle ¦ ♂ Erkek
+♀ Femelle ¦ ♀ Dişi
+Masculin ¦ Erkek
+Féminin ¦ Kadın
+Autre / non binaire ¦ Diğer / ikili olmayan
+Affixe (nom de l’élevage) ¦ Üretici adı (yetiştiricinin adı)
+Modifier l’animal ¦ Hayvanı düzenle
+Modifier la personne ¦ Kişiyi düzenle
+Enregistrer quand même (remplacer l’autre version) ¦ Yine de kaydet (diğer sürümün yerine geçsin)
+Non classé ¦ Sınıflandırılmamış
+Mode consultation : rien ne peut être modifié. ¦ Görüntüleme modu: hiçbir şey değiştirilemez.
+Nouvelle fiche ¦ Yeni kart
+Gérer les médias du dossier militaire ¦ Askerî dosyanın medyasını yönet
+photos ou documents liés ¦ bağlı fotoğraflar veya belgeler
+Enregistre d’abord la sépulture pour pouvoir ajouter des photos. ¦ Fotoğraf ekleyebilmek için önce mezar yerini kaydet.
+Détails de l'œuvre ¦ Eserin ayrıntıları
+Aucun témoin ajouté. ¦ Tanık eklenmedi.
+Retirer ce témoin ¦ Bu tanığı çıkar
+Rôle ou précision (ex. parrain, témoin de mariage…) ¦ Rol veya ayrıntı (ör. vaftiz babası, nikâh tanığı…)
+Pour le diagramme « Savoir signer » ¦ “İmza atabiliyordu” diyagramı için
+On ne sait pas ¦ Bilinmiyor
+Non (ne sait pas signer) ¦ Hayır (imza atamıyordu)
+Aucun parrain ou marraine ajouté. ¦ Vaftiz babası veya annesi eklenmedi.
+Retirer ce parrain ou cette marraine ¦ Bu vaftiz babasını veya annesini çıkar
+Parrain ¦ Vaftiz babası
+Marraine ¦ Vaftiz annesi
+Précision ¦ Ayrıntı
+Précision éventuelle ¦ İsteğe bağlı ayrıntı
+Cette personne est déjà témoin. ¦ Bu kişi zaten tanık.
+Rôle ¦ Rol
+Position précise enregistrée : ¦ Kaydedilen kesin konum:
+Aucune position précise (la ville sera utilisée) ¦ Kesin konum yok (şehir kullanılacak)
+POSITION PRÉCISE ¦ KESİN KONUM
+Affiner la localisation ¦ Konumu ince ayarla
+Enregistrer cette position ¦ Bu konumu kaydet
+Modifier une œuvre ¦ Bir eseri düzenle
+Modifier un événement ¦ Bir olayı düzenle
+Enregistre l’événement avant d’ajouter des documents. ¦ Belge eklemeden önce olayı kaydet.
+janvier ¦ Ocak
+février ¦ Şubat
+mars ¦ Mart
+avril ¦ Nisan
+mai ¦ Mayıs
+juin ¦ Haziran
+juillet ¦ Temmuz
+août ¦ Ağustos
+septembre ¦ Eylül
+octobre ¦ Ekim
+novembre ¦ Kasım
+décembre ¦ Aralık
+⚠️ À vérifier ¦ ⚠️ Kontrol edilecek
+Tu peux enregistrer quand même. Tout l’arbre : Réglages → Incohérences avancées. ¦ Yine de kaydedebilirsin. Tüm ağaç için: Ayarlar → Gelişmiş tutarsızlıklar.
+un parent ¦ bir ebeveyn
+un enfant ¦ bir çocuk
+un conjoint ¦ bir eş
+Modifier l’enquête ¦ İncelemeyi düzenle
+Nouvelle enquête ¦ Yeni inceleme
+Ce lieu n’est pas une commune française connue : choisis une commune de France. ¦ Bu yer bilinen bir Fransız yerleşim yeri değil: Fransa’da bir yerleşim yeri seç.
+Modifier la battue ¦ Taramayı düzenle
+Nouvelle battue ¦ Yeni tarama
+Créer la battue ¦ Taramayı oluştur
+Modifier l’hypothèse ¦ Varsayımı düzenle
+Nouvelle hypothèse ¦ Yeni varsayım
+Aucune source précise ¦ Belirli bir kaynak yok
+Modifier la preuve ¦ Kanıtı düzenle
+Nouvelle preuve ¦ Yeni kanıt
+Modifier l’entrée ¦ Girdiyi düzenle
+Nouvelle entrée ¦ Yeni girdi
+Modifier la commune liée ¦ Bağlı yerleşim yerini düzenle
+Suivi sans intitulé ¦ Başlıksız döküm
+Aucun suivi trouvé. ¦ Döküm bulunamadı.
+Retirer ce suivi ¦ Bu dökümü çıkar
+Modifier l’annotation ¦ Açıklamayı düzenle
+Modifier une piste ou une source ¦ Bir ipucunu veya kaynağı düzenle
+PISTE EXPLORÉE ¦ İNCELENEN İPUCU
+cet événement n’a pas de date ¦ bu olayın tarihi yok
+Anniversaire du décès ¦ Ölüm yıldönümü
+Anniversaire du baptême ¦ Vaftiz yıldönümü
+Anniversaire de l’inhumation ¦ Defin yıldönümü
+née ¦ doğdu
+né ¦ doğdu
+Événement ¦ Olay
+Exporté depuis LCNDA (généalogie). ¦ LCNDA’dan (soy ağacı) dışa aktarıldı.
+CALENDRIER ¦ TAKVİM
+＋ Ajouter à mon calendrier ¦ ＋ Takvimime ekle
+Ajouter à mon calendrier ¦ Takvimime ekle
+Dans le calendrier ¦ Takvimde
+Tous les ans (l’anniversaire) ¦ Her yıl (yıldönümü)
+Une seule fois, à la date de l’événement ¦ Yalnızca bir kez, olayın tarihinde
+Me le rappeler la veille ¦ Bir gün önce bana hatırlat
+Un fichier .ics est téléchargé : ouvre-le, ton calendrier (Apple, Google, Outlook…) propose de l’ajouter. Le réimporter ne crée pas de doublon. ¦ Bir .ics dosyası indirilir: onu aç, takvimin (Apple, Google, Outlook…) eklemeyi önerir. Yeniden içe aktarmak çift kayıt oluşturmaz.
+⤓ Télécharger le fichier ¦ ⤓ Dosyayı indir
+Fichier .ics prêt : ouvre-le pour l’ajouter à ton calendrier. ¦ .ics dosyası hazır: takvimine eklemek için aç.
+Rappel généalogique ¦ Soy ağacı hatırlatması
+Choisis une date de rappel. ¦ Bir hatırlatma tarihi seç.
+À faire avant : ¦ Öncesinde yapılacak:
+À faire après : ¦ Sonrasında yapılacak:
+À faire : ¦ Yapılacak:
+Racine de l’enquête ¦ İncelemenin kökü
+— Choisis d’abord une personne — ¦ — Önce bir kişi seç —
+Aucun média pour cette personne ¦ Bu kişi için medya yok
+✓ Sélectionné ¦ ✓ Seçildi
+La fiche entière ¦ Kartın tamamı
+Carte d’électeur ¦ Seçmen kartı
+Carte d’identité ¦ Kimlik kartı
+Aucune autre correspondance ¦ Başka yazışma yok
+Aucun événement pour cette personne ¦ Bu kişi için olay yok
+Crée le recensement puis ouvre les médias. ¦ Nüfus sayımını oluştur, sonra medyayı aç.
+Aucun membre du foyer ajouté. ¦ Hane üyesi eklenmedi.
+Enregistre d’abord ce recensement pour pouvoir ajouter des membres du foyer. ¦ Hane üyesi ekleyebilmek için önce bu nüfus sayımını kaydet.
+Ce document doit contenir au moins deux images. ¦ Bu belge en az iki resim içermeli.
+DOCUMENT GROUPÉ ¦ GRUPLANMIŞ BELGE
+Réorganiser les images ¦ Resimleri yeniden sırala
+Glisse les miniatures pour définir l’ordre de lecture du document. ¦ Belgenin okuma sırasını belirlemek için küçük resimleri sürükle.
+Ordre des images ¦ Resimlerin sırası
+Glisser pour déplacer ¦ Taşımak için sürükle
+Enregistrer l’ordre ¦ Sırayı kaydet
+APERÇU ¦ ÖNİZLEME
+Ordre des images enregistré. ¦ Resim sırası kaydedildi.
+Médias de cet événement ¦ Bu olayın medyası
+Coche plusieurs fichiers pour les réunir. Pour un document déjà groupé, coche une image puis réorganise ses pages. ¦ Birleştirmek için birkaç dosyayı işaretle. Zaten gruplanmış bir belge için bir resmi işaretle, sonra sayfalarını yeniden sırala.
+Document groupé ¦ Gruplanmış belge
+Réorganiser le document ¦ Belgeyi yeniden sırala
+Dissocier le document sélectionné ¦ Seçili belgeyi ayır
+Sélectionne un ou plusieurs médias existants (maintiens ⌘ / Ctrl) ou importe un nouveau fichier. ¦ Var olan bir veya birkaç medya seç (⌘ / Ctrl tuşunu basılı tut) ya da yeni bir dosya içe aktar.
+Aucun autre média existant — importe un nouveau fichier ci-dessous. ¦ Var olan başka medya yok — aşağıdan yeni bir dosya içe aktar.
+Médias existants ¦ Var olan medya
+Importer des fichiers ¦ Dosyaları içe aktar
+📁 ou glisse les fichiers ici, ou colle-les (⌘V). ¦ 📁 veya dosyaları buraya sürükle ya da yapıştır (⌘V).
+📁 ou ¦ 📁 veya
+glisse les fichiers ici ¦ dosyaları buraya sürükle
+, ou colle-les (⌘V) ¦ , ya da yapıştır (⌘V)
+fichiers prêts ¦ hazır dosya
+Coche au moins deux médias. ¦ En az iki medya işaretle.
+Document groupé créé. ¦ Gruplanmış belge oluşturuldu.
+Sélectionne les éléments d’un seul document groupé. ¦ Yalnızca tek bir gruplanmış belgenin öğelerini seç.
+Document dissocié. ¦ Belge ayrıldı.
+Coche une image du document que tu veux réorganiser. ¦ Yeniden sıralamak istediğin belgenin bir resmini işaretle.
+Choisis ou importe au moins un fichier. ¦ En az bir dosya seç veya içe aktar.
+=média lié ¦ bağlı medya dosyası|bağlı medya dosyası
+=média importé ¦ içe aktarılan medya dosyası|içe aktarılan medya dosyası
+Modifier un membre ¦ Bir üyeyi düzenle
+Intitulé (ex : Parrain, Cote de l’acte…) ¦ Başlık (ör. Vaftiz babası, Belgenin arşiv numarası…)
+Retirer ce champ ¦ Bu alanı çıkar
+— non vérifié — ¦ — kontrol edilmedi —
+Commentaire (ex : date exacte 1892, pas 1898…) ¦ Yorum (ör. kesin tarih 1892, 1898 değil…)
+(l’image reste dans les médias) ¦ (resim medyada kalır)
+Aucune capture. ¦ Ekran görüntüsü yok.
+Choisis une image (capture d’écran). ¦ Bir resim seç (ekran görüntüsü).
+Envoi de la capture… ¦ Ekran görüntüsü gönderiliyor…
+Capture rangée dans les médias de la fiche (la fenêtre avait été fermée). ¦ Ekran görüntüsü kartın medyasına kaydedildi (pencere kapatılmıştı).
+Généalogie ¦ Soy ağacı
+Modifier une note ¦ Bir notu düzenle
+Modifier une source ¦ Bir kaynağı düzenle
+Non rattaché ¦ Bağlı değil
+MÉDIAS ¦ MEDYA
+Un autre document de tes médias ¦ Medyandan başka bir belge
+Chercher : titre, cote, personne, lieu, année… ¦ Ara: başlık, arşiv numarası, kişi, yer, yıl…
+Du même endroit, pour ¦ Aynı yerden, şunun için
+Même contexte ¦ Aynı bağlam
+Pas d’autre document ici : cherche dans tes médias. ¦ Burada başka belge yok: medyanda ara.
+Le document A ¦ Belge A
+Le document B ¦ Belge B
+Ouvrir le fichier ¦ Dosyayı aç
+Erreur pendant la recherche de doublons. ¦ Çift kayıtlar aranırken hata oluştu.
+fichiers analysés ¦ incelenen dosya
+visages détectés ¦ algılanan yüz
+L’outil Visages n’est pas encore chargé : réessaie dans un instant. ¦ Yüzler aracı henüz yüklenmedi: birazdan yeniden dene.
+Rattachement retiré. ¦ Bağ kaldırıldı.
+Tous les éléments disponibles sont déjà rattachés. ¦ Kullanılabilir tüm öğeler zaten bağlı.
+Relier aussi à ¦ Şuna da bağla
+— choisir — ¦ — seç —
+Choisis un élément. ¦ Bir öğe seç.
+Rattachement ajouté. ¦ Bağ eklendi.
+Transcription enregistrée. ¦ Transkripsiyon kaydedildi.
+La transcription est déjà structurée. ¦ Transkripsiyon zaten yapılandırılmış.
+Gabarit de transcription ajouté. ¦ Transkripsiyon şablonu eklendi.
+Moteur OCR indisponible après chargement. ¦ OCR motoru yüklendikten sonra kullanılamıyor.
+Impossible de charger le lecteur de texte. ¦ Metin okuyucu yüklenemedi.
+Impossible de charger le moteur OCR (connexion internet requise, ou fichier modifié refusé). ¦ OCR motoru yüklenemedi (internet bağlantısı gerekli ya da değiştirilmiş dosya reddedildi).
+OCR disponible uniquement pour les images. ¦ OCR yalnızca resimler için kullanılabilir.
+Chargement du moteur OCR… ¦ OCR motoru yükleniyor…
+Aucun texte détecté. ¦ Metin algılanmadı.
+Échec de l’OCR. ¦ OCR başarısız oldu.
+HTR disponible uniquement pour les images. ¦ HTR yalnızca resimler için kullanılabilir.
+Aucun texte reconnu. ¦ Metin tanınmadı.
+modèle local ¦ yerel model
+Échec de la reconnaissance manuscrite. ¦ El yazısı tanıma başarısız oldu.
+Média enregistré. ¦ Medya kaydedildi.
+Image tournée. ¦ Resim döndürüldü.
+Ouvre une fiche personne pour définir un portrait. ¦ Portre belirlemek için bir kişi kartı aç.
+Photo principale retirée. ¦ Ana fotoğraf çıkarıldı.
+Identifier ce visage ¦ Bu yüzü tanımla
+Voir la fiche ¦ Kartı gör
+Aucune identification. ¦ Tanımlama yok.
+Peut-être ¦ Belki
+Probable ¦ Muhtemel
+＋ Identifier quelqu'un ¦ ＋ Birini tanımla
+＋ Identifier une signature ¦ ＋ Bir imzayı tanımla
+À qui appartient cette signature ? ¦ Bu imza kimin?
+Qui apparaît dans la zone sélectionnée ? ¦ Seçili alanda kim görünüyor?
+Peut-être elle / lui ¦ Belki o
+Choisis une personne. ¦ Bir kişi seç.
+Signature enregistrée. ¦ İmza kaydedildi.
+Identification enregistrée. ¦ Tanımlama kaydedildi.
+Signature modifiée. ¦ İmza düzenlendi.
+Identification modifiée. ¦ Tanımlama düzenlendi.
+Signature supprimée. ¦ İmza silindi.
+Identification supprimée. ¦ Tanımlama silindi.
+cette palette ¦ bu palet
+ces couleurs des niveaux ¦ bu düzey renkleri
+Conserver cette vue ¦ Bu görünümü koru
+PALETTE DES STATISTIQUES ¦ İSTATİSTİK PALETİ
+COULEURS DES FICHES ¦ KART RENKLERİ
+Chargement des étiquettes… ¦ Etiketler yükleniyor…
+Tape pour chercher une étiquette... ¦ Etiket aramak için yaz...
+Aucune étiquette créée. Crée-la d’abord dans Réglages → Étiquettes. ¦ Oluşturulmuş etiket yok. Önce Ayarlar → Etiketler içinde oluştur.
+Aucune étiquette ajoutée. ¦ Etiket eklenmedi.
+Aucune étiquette existante trouvée. ¦ Var olan etiket bulunamadı.
+Trait et titre ¦ Çizgi ve başlık
+Encadrée ¦ Çerçeveli
+Grand titre ¦ Büyük başlık
+Bandeau ¦ Bant
+Centré ¦ Ortalı
+Onglets en haut ¦ Üstte sekmeler
+Le titre au milieu, un trait de chaque côté. Façon livre. ¦ Başlık ortada, her iki yanında bir çizgi. Kitap gibi.
+Une section = un onglet (bleu = ouvert), avec le nombre entre parenthèses. ¦ Bir bölüm = bir sekme (mavi = açık), sayı parantez içinde.
+au milieu de la fiche ¦ kartın ortasında
+Toute la largeur ¦ Tam genişlik
+ils se partagent la ligne ¦ satırı paylaşırlar
+À gauche ¦ Solda
+À droite ¦ Sağda
+Fiche ¦ Kart
+Famille ¦ Aile
+Vie ¦ Yaşam
+Bagues et marques ¦ Halkalar ve işaretler
+Observations ¦ Gözlemler
+Santé ¦ Sağlık
+Sans section ¦ Bölümsüz
+Sections de la fiche ¦ Kartın bölümleri
+⚙️ Ranger les sections… ¦ ⚙️ Bölümleri düzenle…
+Ranger les sections ¦ Bölümleri düzenle
+Rien dans cette section pour l’instant. ¦ Bu bölümde henüz bir şey yok.
+↺ Reprendre celui de toutes les fiches ¦ ↺ Tüm kartlarınkini kullan
+Renommer la section ¦ Bölümü yeniden adlandır
+Changer l’icône ¦ Simgeyi değiştir
+Déplier ¦ Aç
+Ranger les sections… ¦ Bölümleri düzenle…
+Icône de la section ¦ Bölüm simgesi
+Le rangement de toutes les fiches est repris ¦ Tüm kartların düzeni yeniden kullanılıyor
+Largeur du bloc ¦ Blok genişliği
+Double-clic pour renommer ¦ Yeniden adlandırmak için çift tıkla
+Vide : glisse des blocs ici. ¦ Boş: blokları buraya sürükle.
+Choisir une icône ¦ Bir simge seç
+Nom de la section (« Suivi », « Métier »…) ¦ Bölüm adı (“Takip”, “Meslek”…)
+Nom de la nouvelle section ¦ Yeni bölümün adı
+＋ Nouvelle section ¦ ＋ Yeni bölüm
+Créer la section ¦ Bölümü oluştur
+Masquer les lignes vides (pas remplies) du bloc Identité ¦ Kimlik bloğundaki boş (doldurulmamış) satırları gizle
+Nouveau nom de la section ¦ Bölümün yeni adı
+Déplacer vers ▸ ¦ Şuraya taşı ▸
+Nouvelle section… ¦ Yeni bölüm…
+Nouvelle section ¦ Yeni bölüm
+Déplacer vers ¦ Şuraya taşı
+Montrer le bloc ¦ Bloğu göster
+Cacher le bloc ¦ Bloğu gizle
+Ouverte au départ ¦ Başta açık
+Repliée au départ ¦ Başta kapalı
+Présentation de l’éditeur ¦ Düzenleyicinin görünümü
+Comme avant ¦ Eskisi gibi
+Nouveau ¦ Yeni
+Style des fiches ↓ ¦ Kart stili ↓
+Sections des fiches ¦ Kartların bölümleri
+Pour quelles fiches ¦ Hangi kartlar için
+Sections propres aux animaux ¦ Hayvanlara özel bölümler
+Éteint : les animaux prennent les sections des personnes. ¦ Kapalı: hayvanlar kişilerin bölümlerini kullanır.
+Style des sections ¦ Bölüm stili
+En option ¦ İsteğe bağlı
+Place des onglets ¦ Sekmelerin yeri
+« ▦ Tout voir » ¦ “▦ Hepsini gör”
+▦ Tout voir ¦ ▦ Hepsini gör
+Ouvrir les fiches avec les sections repliées ¦ Kartları bölümler kapalı olarak aç
+Sur téléphone : seulement la première section ouverte ¦ Telefonda: yalnızca ilk bölüm açık
+Numéros des sections ¦ Bölüm numaraları
+Écriture ¦ Yazım
+Numéros des blocs ¦ Blok numaraları
+À la suite (01, 02…) ¦ Art arda (01, 02…)
+Par section (1.1, 1.2…) ¦ Bölüme göre (1.1, 1.2…)
+Onglets : montrer le nombre entre parenthèses ¦ Sekmeler: sayıyı parantez içinde göster
+Sections vides ¦ Boş bölümler
+En gris ¦ Gri
+Cachées ¦ Gizli
+Repliables ¦ Katlanabilir
+L’espace entre deux sections vaut deux fois l’écart entre deux blocs : il suit A2 Densité. Le bandeau prend la couleur principale de l’Apparence, qui passe toujours devant. ¦ İki bölüm arasındaki boşluk, iki blok arasındaki aralığın iki katıdır: A2 Yoğunluk’u izler. Bant, Görünüm’ün ana rengini alır; Görünüm her zaman önceliklidir.
+FICHES PERSONNES ¦ KİŞİ KARTLARI
+Ordre et visibilité des blocs ¦ Blokların sırası ve görünürlüğü
+Toutes les fiches d’animaux ¦ Tüm hayvan kartları
+Toutes les fiches de personnes ¦ Tüm kişi kartları
+Les animaux prennent les sections des personnes (« Sections propres aux animaux » est éteint) : créer, renommer ou ranger une section change aussi celles des personnes. ¦ Hayvanlar kişilerin bölümlerini kullanıyor (“Hayvanlara özel bölümler” kapalı): bir bölümü oluşturmak, yeniden adlandırmak veya düzenlemek kişilerinkini de değiştirir.
+Annuler l’exception ¦ İstisnayı iptal et
+Exception fiche actuelle ¦ Geçerli kart için istisna
+un animal ¦ bir hayvan
+une personne ¦ bir kişi
+Aperçu avec : ¦ Şununla önizle:
+Aperçu de la fiche (lecture seule) ¦ Kart önizlemesi (salt okunur)
+↗ Ouvrir cette fiche ¦ ↗ Bu kartı aç
+Aucun animal pour l’instant : l’aperçu montre un dessin. ¦ Henüz hayvan yok: önizleme bir çizim gösteriyor.
+Aucune fiche pour l’instant : l’aperçu montre un dessin. ¦ Henüz kart yok: önizleme bir çizim gösteriyor.
+Éléments de l’en-tête ¦ Başlık öğeleri
+Cette personne était… ¦ Bu kişi şuydu…
+Filtres du bloc Événements ¦ Olaylar bloğunun filtreleri
+Ascendants et descendants ¦ Atalar ve torunlar
+Fiches avec un réglage particulier ¦ Özel ayarı olan kartlar
+Sur cette page ¦ Bu sayfada
+🗂 FICHE ANIMAL ¦ 🗂 HAYVAN KARTI
+🗂 FICHE ¦ 🗂 KART
+Pour cette fiche seulement ¦ Yalnızca bu kart için
+Pour toutes les fiches d’animaux ¦ Tüm hayvan kartları için
+Pour toutes les fiches ¦ Tüm kartlar için
+Tous les réglages des fiches ↗ ¦ Tüm kart ayarları ↗
+Rangement des sections ¦ Bölümlerin düzeni
+Rangement propre à cette fiche ¦ Bu karta özel düzen
+Modifier la fiche ¦ Kartı düzenle
+Boutons de l’en-tête… ¦ Başlık düğmeleri…
+Convertisseur d’autrefois… ¦ Eski birim dönüştürücü…
+Partager le suivi… ¦ Takibi paylaş…
+Né(e) le ¦ Doğum tarihi
+Naissance le ¦ Doğum tarihi
+Né le ¦ Doğum tarihi
+Née le ¦ Doğum tarihi
+médias liés ¦ bağlı medya
+médias importés ¦ içe aktarılan medya
+le bloc ¦ blok
+la section ¦ bölüm
+Stérilisé(e) le ¦ Kısırlaştırma tarihi
+Stérilisé le ¦ Kısırlaştırma tarihi
+Stérilisée le ¦ Kısırlaştırma tarihi
+Stérilisation le ¦ Kısırlaştırma tarihi
+Mort(e) le ¦ Ölüm tarihi
+Mort le ¦ Ölüm tarihi
+Morte le ¦ Ölüm tarihi
+stérilisé(e) ¦ kısırlaştırılmış
+décédé(e) ¦ ölmüş
+Cheval, poney, âne ¦ At, midilli, eşek
+Rongeur (cochon d’Inde, hamster…) ¦ Kemirgen (kobay, hamster…)
+Animal de la ferme (vache, chèvre, mouton…) ¦ Çiftlik hayvanı (inek, keçi, koyun…)
+Mammifère sauvage (loup, cerf, singe…) ¦ Yabani memeli (kurt, geyik, maymun…)
+🏠 Maîtres ¦ 🏠 Sahipler
+Nom d’affixe / nom officiel ¦ Tescilli ad / resmî ad
+Nom d’affixe / nom officiel (LOF, LOOF…) ¦ Tescilli ad / resmî ad (LOF, LOOF…)
+Appelé ¦ Çağrı adı
+Variété ¦ Çeşit
+Stérilisation ¦ Kısırlaştırma
+Naissance (date, lieu) ¦ Doğum (tarih, yer)
+Décès (date, lieu, cause, repose) ¦ Ölüm (tarih, yer, neden, yattığı yer)
+Puce électronique ¦ Mikroçip
+Puce électronique (15 chiffres) ¦ Mikroçip (15 hane)
+Livre des origines ¦ Soy kütüğü
+N° d’inscription ¦ Kayıt no.
+Éleveur ¦ Yetiştirici
+Adresse de l’élevage ¦ Yetiştiricinin adresi
+Père (dans la base) ¦ Baba (veritabanında)
+Nom du père ¦ Babanın adı
+Inscription du père ¦ Babanın kaydı
+Mère (dans la base) ¦ Anne (veritabanında)
+Nom de la mère ¦ Annenin adı
+Inscription de la mère ¦ Annenin kaydı
+Ses maîtres (liste) ¦ Sahipleri (liste)
+Titres et concours (liste) ¦ Unvanlar ve yarışmalar (liste)
+Vétérinaire ¦ Veteriner
+Santé (texte) ¦ Sağlık (metin)
+Vaccins et traitements ¦ Aşılar ve tedaviler
+Les moments de sa vie ¦ Hayatının anları
+Caractère ¦ Mizaç
+Son histoire ¦ Hikâyesi
+Photos et documents ¦ Fotoğraflar ve belgeler
+Case oui / non ¦ Evet / hayır kutusu
+Liste de choix ¦ Seçim listesi
+Catégorie ¦ Kategori
+Réglages trop lourds pour être gardés. ¦ Ayarlar saklanamayacak kadar büyük.
+Ensembles trop lourds pour être gardés. ¦ Takımlar saklanamayacak kadar büyük.
+Livre généalogique de la race ¦ Irkın soy kütüğü
+propriétaire ¦ sahip
+co-propriétaire ¦ ortak sahip
+éleveur ¦ yetiştirici
+famille d’accueil ¦ koruyucu aile
+déménagement ¦ taşınma
+mise bas / portée ¦ doğurma / batın
+stérilisation ¦ kısırlaştırma
+opération ¦ ameliyat
+retrouvé ¦ yeniden bulundu
+départ ¦ ayrılış
+Aucun animal ne correspond. ¦ Uyan hayvan yok.
+Chercher… (nom, race, puce, éleveur, maître) ¦ Ara… (ad, ırk, çip, yetiştirici, sahip)
+Personnes et animaux mêlés. ¦ Kişiler ve hayvanlar karışık.
+Cette fiche a été supprimée ¦ Bu kart silindi
+↺ La rétablir ¦ ↺ Geri getir
+🗑 Supprimer l’animal ¦ 🗑 Hayvanı sil
+« ↺ La rétablir » refait sa fiche avec ce qu’il a gardé (nom, sexe, dates, parents, suivi). « 🗑 Supprimer l’animal » l’enlève aussi, avec tout son suivi (tu pourras le rétablir depuis le Journal des modifications). ¦ “↺ Geri getir”, sakladıklarıyla (ad, cinsiyet, tarihler, ebeveynler, takip) kartını yeniden oluşturur. “🗑 Hayvanı sil” onu da tüm takibiyle birlikte kaldırır (Değişiklik günlüğünden geri getirebilirsin).
+Père ¦ Baba
+Mère ¦ Anne
+Portée ¦ Kapsam
+jusqu’à ¦ kadar
+Stérilisé ¦ Kısırlaştırılmış
+Stérilisé(e) ¦ Kısırlaştırılmış
+Cause du décès ¦ Ölüm nedeni
+À compléter avec « ✎ Modifier ». ¦ “✎ Düzenle” ile tamamlanacak.
+Coefficient de Wright, d’après les ancêtres connus ¦ Wright katsayısı, bilinen atalara göre
+consanguinité : ¦ akrabalı üreme:
+Consanguinité ¦ Akrabalı üreme
+son père ¦ babası
+sa mère ¦ annesi
+Aucun petit dans la base ¦ Veritabanında yavru yok
+Sa fiche se crée avec ce parent déjà rempli. ¦ Kartı bu ebeveyn zaten doldurulmuş olarak oluşturulur.
+＋ Un petit ¦ ＋ Bir yavru
+Mêmes parents ¦ Aynı ebeveynler
+Demi-frères et demi-sœurs ¦ Üvey kardeşler
+même père ¦ aynı baba
+même mère ¦ aynı anne
+🏠 Ses maîtres ¦ 🏠 Sahipleri
+Résultat ¦ Sonuç
+📅 Sa vie ¦ 📅 Hayatı
+Ajoute ses photos, son pedigree papier, son carnet de santé… avec « ✎ Modifier ». ¦ Fotoğraflarını, kâğıt soy belgesini, sağlık karnesini… “✎ Düzenle” ile ekle.
+Courbe du poids ¦ Ağırlık eğrisi
+Générations ¦ Kuşaklar
+Haut de chaque bloc : côté père ; bas : côté mère. Une couleur = un ancêtre qui revient plusieurs fois. Clique un nom pour ouvrir sa fiche. ¦ Her bloğun üstü: baba tarafı; altı: anne tarafı. Bir renk = birkaç kez geçen bir ata. Kartını açmak için bir ada tıkla.
+Génération ¦ Kuşak
+Position (P = père, M = mère) ¦ Konum (B = baba, A = anne)
+maître ¦ sahip
+Fiche (ou nom) ¦ Kart (veya ad)
+Jusqu’à ¦ Kadar
+vaccin ou traitement ¦ aşı veya tedavi
+Rappel le ¦ Rapel tarihi
+Quoi ¦ Ne
+— pas dans la base — ¦ — veritabanında değil —
+Sa fiche s’ouvre après l’enregistrement, comme celle d’une personne (arbre, événements, photos, sources, suivi…). ¦ Kartı, kaydettikten sonra bir kişininki gibi açılır (ağaç, olaylar, fotoğraflar, kaynaklar, takip…).
+liste blanche, oreille tachée… ¦ beyaz akıtma, benekli kulak…
+Taille (au garrot) ¦ Boy (omuz yüksekliği)
+Tours, chez l’éleveur… ¦ Tours, yetiştiricinin yanında…
+Repose (jardin, cimetière animalier, cendres…) ¦ Yattığı yer (bahçe, hayvan mezarlığı, küller…)
+Profil ADN, tests de parenté ¦ DNA profili, ebeveynlik testleri
+Portée (n°, lettre de l’année…) ¦ Batın (no., yılın harfi…)
+portée « M » 2015 ¦ “M” batını 2015
+ou son nom ¦ veya adı
+Son inscription ¦ Kaydı
+Allergies, intolérances ¦ Alerjiler, intoleranslar
+Santé : maladies, opérations, traitements ¦ Sağlık: hastalıklar, ameliyatlar, tedaviler
+joueur, peureux de l’orage… ¦ oyuncu, fırtınadan korkar…
+Comment il est arrivé dans la famille… ¦ Aileye nasıl geldiği…
+Sources (certificat, pedigree, carnet de santé…) ¦ Kaynaklar (sertifika, soy belgesi, sağlık karnesi…)
+Pas encore de champ : Réglages → Animaux → « ＋ Champ ». ¦ Henüz alan yok: Ayarlar → Hayvanlar → “＋ Alan”.
+Proposer cette espèce ¦ Bu türü öner
+Icône ¦ Simge
+Reprendre un fichier « Tout exporter » ¦ Bir “Hepsini dışa aktar” dosyasını yükle
+RÉGLAGES ¦ AYARLAR
+⤓ Tout exporter ¦ ⤓ Hepsini dışa aktar
+⤒ Tout importer ¦ ⤒ Hepsini içe aktar
+Coche celles qu’on propose ; range-les avec ↑ ↓. ¦ Önerilecekleri işaretle; ↑ ↓ ile sırala.
+Nouvelle espèce (ex. Furet, Alpaga) ¦ Yeni tür (ör. Gelincik, Alpaka)
+📝 Formulaire « Nouvel animal » ¦ 📝 “Yeni hayvan” formu
+Réglages pour ¦ Şunun için ayarlar
+tous les animaux ¦ tüm hayvanlar
+— réglage propre ¦ — kendi ayarı
+réglage propre à cette espèce (sinon, celui de tous les animaux) ¦ bu türe özel ayar (yoksa tüm hayvanlarınki)
+Nom de la catégorie ¦ Kategori adı
+Nom du champ ¦ Alan adı
+Nouveau champ (ex. Groupe sanguin) ¦ Yeni alan (ör. Kan grubu)
+choix séparés par ; ¦ seçenekleri ; ile ayır
+Nouvelle catégorie (ex. Génétique, Dressage) ¦ Yeni kategori (örn. Genetik, Eğitim)
+＋ Catégorie ¦ ＋ Kategori
+＋ Champ ¦ ＋ Alan
+＋ Espèce ¦ ＋ Tür
+Ce réglage n’a pas pu être lu. ¦ Bu ayar okunamadı.
+Écris le nom du champ. ¦ Alanın adını yaz.
+Écris le nom de la catégorie. ¦ Kategorinin adını yaz.
+Écris le nom de l’espèce. ¦ Türün adını yaz.
+Ce fichier n’est pas un fichier de réglages des animaux. ¦ Bu dosya bir hayvan ayarları dosyası değil.
+Rien pour l’instant. ¦ Şimdilik hiçbir şey yok.
+🗂️ Mes catégories ¦ 🗂️ Kategorilerim
+Pas encore de caractéristiques (race, puce, éleveur, pedigree…). ¦ Henüz özellik yok (ırk, çip, yetiştirici, soy kütüğü…).
+＋ Ses caractéristiques ¦ ＋ Özellikleri
+Ses caractéristiques (race, puce, éleveur, santé…) : « ✎ Modifier ». ¦ Özellikleri (ırk, çip, yetiştirici, sağlık…): “✎ Düzenle”.
+Modifier les caractéristiques ¦ Özellikleri düzenle
+Modifier la santé ¦ Sağlığı düzenle
+＋ Un animal ¦ ＋ Bir hayvan
+Aucun animal. Listes → Animaux de compagnie → « ＋ Nouvel animal ». ¦ Hiç hayvan yok. Listeler → Evcil hayvanlar → “＋ Yeni hayvan”.
+Aucun animal relié à cette fiche. ¦ Bu karta bağlı hayvan yok.
+Le suivi… ¦ Takip…
+Le suivi n’a pas pu être lu. ¦ Takip okunamadı.
+bague métal ¦ metal halka
+rien ¦ hiçbir şey
+couleur ¦ renk
+Marques proposées pour ¦ Önerilen işaretler:
+Âge au baguage ¦ Halkalama yaşı
+Âge au marquage ¦ İşaretleme yaşı
+Âge au baguage ou au marquage ¦ Halkalama veya işaretleme yaşı
+Responsable du suivi ¦ Takip sorumlusu
+Bagueur ou responsable ¦ Halkalayan veya sorumlu
+en cours ¦ devam ediyor
+en pause ¦ duraklatıldı
+terminé ¦ bitti
+pas encore commencé ¦ henüz başlamadı
+Pas encore de suivi pour cet animal. ¦ Bu hayvan için henüz takip yok.
+✎ Commencer le suivi ¦ ✎ Takibe başla
+Pas de bagues de couleur. ¦ Renkli halka yok.
+＋ Poser des bagues ¦ ＋ Halka tak
+🔩 Bague métal ¦ 🔩 Metal halka
+Numéro ¦ Numara
+Posée le ¦ Takılma tarihi
+Retirée le ¦ Çıkarılma tarihi
+Pas de bague métal. ¦ Metal halka yok.
+Pas de puce, de collier, de marque d’aile ni de balise. ¦ Çip, tasma, kanat işareti veya verici yok.
+🧬 Les marques proposées suivent l’espèce : ¦ 🧬 Önerilen işaretler türe göre değişir:
+Émet ¦ Yayınlar
+Fait ¦ Yapıldı
+Marque supprimée. ¦ İşaret silindi.
+Marque ¦ İşaret
+Photo de référence ¦ Referans fotoğrafı
+Corneille noire, Hérisson d’Europe, Grand dauphin… ¦ Leş kargası, Avrupa kirpisi, Afalina yunusu…
+Le suivi ¦ Takip
+Terminé ¦ Bitti
+Suivi enregistré. ¦ Takip kaydedildi.
+en bas ¦ altta
+en haut ¦ üstte
+Pas de bague ici ¦ Burada halka yok
+l’ancienne « 7H » était usée ¦ eski “7H” aşınmıştı
+Pourquoi le changement ¦ Değişikliğin nedeni
+Donne la date du changement. ¦ Değişikliğin tarihini gir.
+bagues changées ¦ halkalar değiştirildi
+Bagues enregistrées. ¦ Halkalar kaydedildi.
+Écaille marginale 3 ¦ Kenar pulu 3
+Marque de peinture, médaillon… ¦ Boya işareti, madalyon…
+perdue, usée, changée… ¦ kayıp, aşınmış, değiştirilmiş…
+Marque ajoutée. ¦ İşaret eklendi.
+Marque enregistrée. ¦ İşaret kaydedildi.
+Chercher… (lieu, observateur, note) ¦ Ara… (yer, gözlemci, not)
+En entier ¦ Tamamı
+Plus récentes ¦ En yeniler
+Plus anciennes ¦ En eskiler
+Aucune observation ne correspond. ¦ Eşleşen gözlem yok.
+Pas encore d’observation ¦ Henüz gözlem yok
+Frise des états ¦ Durum zaman çizelgesi
+Pas encore d’état. ¦ Henüz durum yok.
+Il faut au moins deux poids datés. ¦ En az iki tarihli ağırlık gerekir.
+Poids ¦ Ağırlık
+Événements de santé ¦ Sağlık olayları
+Aucun événement de santé. ¦ Sağlık olayı yok.
+Événement de santé supprimé. ¦ Sağlık olayı silindi.
+L’animal ¦ Hayvan
+État après ¦ Sonraki durum
+Ce qu’il a ¦ Nesi var
+Patte arrière gauche entaillée ¦ Sol arka bacağında kesik
+Plus de causes ▾ ¦ Daha fazla neden ▾
+Précise si tu veux… (« débroussailleuse du voisin, sous la haie ») ¦ İstersen ayrıntı ver… (“komşunun tırpan makinesi, çitin altında”)
+Où ¦ Nerede
+Soigné par ¦ Tedavi eden
+Plaie nettoyée, bandage ¦ Yara temizlendi, bandaj
+Médicaments ¦ İlaçlar
+Antibiotique 5 jours, anti-douleur ¦ 5 gün antibiyotik, ağrı kesici
+Pas encore ¦ Henüz değil
+Relâché le … ¦ Serbest bırakıldı: …
+Mort le … ¦ Öldü: …
+date de la suite ¦ devamın tarihi
+Date de la suite ¦ Devamın tarihi
+Choisis l’animal. ¦ Hayvanı seç.
+Donne la date de l’événement. ¦ Olayın tarihini gir.
+Événement de santé enregistré. ¦ Sağlık olayı kaydedildi.
+Événement de santé créé. ¦ Sağlık olayı oluşturuldu.
+Moins de causes ▴ ¦ Daha az neden ▴
+Une autre cause ¦ Başka bir neden
+La cause (elle sera proposée les prochaines fois) : ¦ Neden (sonraki seferlerde önerilecek):
+entre dans ¦ girer:
+arrive dans ¦ gelir:
+Pas encore d’histoire. ¦ Henüz geçmiş yok.
+Rouge : alpha, dominant, matriarche · bleu : membre · vert : jeune · gris : satellite, subordonné · ✖ exclu · † mort · → passé dans un autre groupe · ↗ parti. ¦ Kırmızı: alfa, baskın, anaç · mavi: üye · yeşil: genç · gri: uydu, ast · ✖ dışlanmış · † ölü · → başka bir gruba geçti · ↗ ayrıldı.
+＋ Entrée dans un groupe ¦ ＋ Bir gruba giriş
+Aujourd’hui ¦ Bugün
+Changer de rôle ¦ Rol değiştir
+Sortie du groupe… ¦ Gruptan çıkış…
+Dans aucun groupe pour l’instant. ¦ Şimdilik hiçbir grupta değil.
+Pour un animal social : meute, troupe, clan, pod, colonie… ¦ Sosyal bir hayvan için: sürü, kurt sürüsü, klan, yunus sürüsü, koloni…
+Frise de son histoire sociale ¦ Sosyal geçmişinin zaman çizelgesi
+Ligne de l’histoire supprimée. ¦ Geçmiş satırı silindi.
+Changement de rôle ¦ Rol değişikliği
+Sortie du groupe ¦ Gruptan çıkış
+Modifier l’appartenance ¦ Üyeliği düzenle
+Entrée dans un groupe ¦ Bir gruba giriş
+Le groupe ¦ Grup
+alpha, matriarche, jeune… ou un mot libre ¦ alfa, anaç, genç… veya serbest bir kelime
+Entre dans le groupe ¦ Gruba girer
+Naît dans le groupe ¦ Grupta doğar
+Fonde le groupe ¦ Grubu kurar
+Vient d’un autre groupe ¦ Başka bir gruptan gelir
+Change de rôle ¦ Rol değiştirir
+— encore dans le groupe — ¦ — hâlâ grupta —
+Le nouveau groupe ¦ Yeni grup
+Son rôle là-bas ¦ Oradaki rolü
+Nouveau rôle ¦ Yeni rol
+Depuis le ¦ Başlangıç tarihi
+Choisis le groupe (ou crée-le). ¦ Grubu seç (veya oluştur).
+Écris le nouveau rôle. ¦ Yeni rolü yaz.
+Choisis le nouveau groupe. ¦ Yeni grubu seç.
+Nouveau rôle enregistré. ¦ Yeni rol kaydedildi.
+Sortie du groupe enregistrée. ¦ Gruptan çıkış kaydedildi.
+Appartenance enregistrée. ¦ Üyelik kaydedildi.
+Entrée dans le groupe enregistrée. ¦ Gruba giriş kaydedildi.
+La carte… ¦ Harita…
+Relier les points dans l’ordre ¦ Noktaları sırayla bağla
+Tous les points ¦ Tüm noktalar
+Pas de trajet GPS. ¦ GPS rotası yok.
+Une balise ou un collier GPS ? Importe son fichier (GPX, KML, CSV). ¦ Bir verici ya da GPS tasması mı? Dosyasını içe aktar (GPX, KML, CSV).
+⤒ Importer un trajet… ¦ ⤒ Bir rota içe aktar…
+Fichiers importés ¦ İçe aktarılan dosyalar
+Ces points seront retirés de la base (le fichier d’origine n’est pas touché). ¦ Bu noktalar veritabanından çıkarılacak (asıl dosyaya dokunulmaz).
+Points retirés. ¦ Noktalar çıkarıldı.
+GPX (ce trajet) ¦ GPX (bu rota)
+KML (ce trajet) ¦ KML (bu rota)
+Ouvrir dans le tableur ¦ Tabloda aç
+Ouvrir la page « Cette personne était… » (ses profils) ¦ “Bu kişi şuydu…” sayfasını aç (profilleri)
+🧩 Cette personne était… : ouvrir sa page de profils ¦ 🧩 Bu kişi şuydu…: profil sayfasını aç
+Cette personne était… : ses profils ¦ Bu kişi şuydu…: profilleri
+(outil des profils pas chargé) ¦ (profil aracı yüklenmedi)
+FICHE INDIVIDUELLE · #{n} ¦ KİŞİ KARTI · #{n}
+IDENTITÉ ¦ KİMLİK
+Préfixe ¦ Önek
+Couleur des yeux ¦ Göz rengi
+Non applicable ¦ Geçerli değil
+N° de référence ¦ Referans no.
+(choisir un existant ou taper un nouveau nom pour le créer) ¦ (var olanı seç veya oluşturmak için yeni bir ad yaz)
+Hors de ma généalogie ¦ Soy ağacımın dışında
+(individu utile pour une enquête, mais pas dans ma lignée directe) ¦ (bir inceleme için yararlı bir kişi, ama doğrudan soyumda değil)
+(photographe, peintre, écrivain, cinéaste, sculpteur, dramaturge, poète, vidéaste, plasticien, danseur, acteur…) ¦ (fotoğrafçı, ressam, yazar, sinemacı, heykeltıraş, oyun yazarı, şair, video sanatçısı, plastik sanatçı, dansçı, oyuncu…)
+Afficher les événements artistiques dans : ¦ Sanatsal olayları şurada göster:
+Le bloc Événements ¦ Olaylar bloğu
+Le bloc Œuvres ¦ Eserler bloğu
+Les deux ¦ İkisi de
+🎖 Afficher le bloc militaire ¦ 🎖 Askerlik bloğunu göster
+(informations du registre matricule) ¦ (askerlik kayıt defteri bilgileri)
+Activez le bloc militaire dans Réglages → Ordre et visibilité des blocs avant de pouvoir cocher cette option. ¦ Bu seçeneği işaretleyebilmek için önce Ayarlar → Blokların sırası ve görünürlüğü bölümünde askerlik bloğunu aç.
+🚢 Départs / émigration ¦ 🚢 Gidişler / göç
+(voyage, port, navire, destination, liste de passagers, naturalisation, papiers d’émigration, trajet sur la carte) ¦ (yolculuk, liman, gemi, varış yeri, yolcu listesi, vatandaşlığa geçiş, göç belgeleri, haritada rota)
+👶 Enfant placé ¦ 👶 Bakıma verilen çocuk
+(mis en nourrice, abandonné, recueilli par l’hospice : lieu, durée, carte) ¦ (sütanneye verilmiş, terk edilmiş, darülacezeye alınmış: yer, süre, harita)
+🛡️ Armoiries ¦ 🛡️ Arma
+(armoiries portées : image, blasonnement, devise, titre) ¦ (taşınan arma: görsel, arma tarifi, düstur, unvan)
+🎖️ Poilu 14-18 ¦ 🎖️ 14-18 askeri (Poilu)
+(régiments, blessures, journaux de marche et opérations) ¦ (alaylar, yaralar, harekât günlükleri)
+✊ Résistant ¦ ✊ Direnişçi
+(réseau, nom de guerre, arrestation, caches, parcours jour par jour sur la carte, compagnons) ¦ (ağ, kod adı, tutuklanma, saklanma yerleri, haritada gün gün güzergâh, yoldaşlar)
+🗳 Électeur ¦ 🗳 Seçmen
+(cartes avec photos, commune, bureau de vote, numéros, et toutes les dates où la personne a voté) ¦ (fotoğraflı kartlar, yerleşim yeri, oy sandığı, numaralar ve kişinin oy kullandığı tüm tarihler)
+🗣 Langues ¦ 🗣 Diller
+(langues parlées par la personne et sa descendance ; s’affiche aussi tout seul quand une langue est connue) ¦ (kişinin ve torunlarının konuştuğu diller; bir dil bilindiğinde kendiliğinden de görünür)
+Décision du Conseil de Révision ¦ Askerlik Muayene Kurulu kararı
+Propre au service armé… ¦ Silahlı hizmete elverişli…
+Décision et motifs ¦ Karar ve gerekçeler
+1ère partie, 1ère portion… ¦ 1. kısım, 1. bölüm…
+Compris dans la … partie de la liste ¦ Listenin … kısmında yer alır
+Signalement ¦ Eşkâl
+Cheveux ¦ Saç
+Sourcils ¦ Kaşlar
+Yeux ¦ Gözler
+Front ¦ Alın
+Nez ¦ Burun
+Bouche ¦ Ağız
+Menton ¦ Çene
+Visage ¦ Yüz
+Taille ¦ Boy
+châtain, brun… ¦ kestane, esmer…
+châtain clair… ¦ açık kestane…
+rond, carré… ¦ yuvarlak, köşeli…
+cicatrice au front gauche… ¦ alnın solunda yara izi…
+exercé, non exercé… ¦ eğitimli, eğitimsiz…
+Corps d’affectation ¦ Atandığı birlik
+Dans l'armée active ¦ Muvazzaf orduda
+Dans la disponibilité / réserve de l'armée active ¦ Muvazzaf ordunun hazırlık / yedek kuvvetinde
+Dans l'armée territoriale et sa réserve ¦ Bölgesel orduda ve yedeğinde
+Entrée dans l'armée active ¦ Muvazzaf orduya giriş
+Passé dans la disponibilité ¦ Hazırlık kuvvetine geçiş
+Passé dans la réserve active ¦ Muvazzaf yedeğe geçiş
+Passé dans l'armée territoriale ¦ Bölgesel orduya geçiş
+Passé dans la réserve territoriale ¦ Bölgesel yedeğe geçiş
+Libération du service militaire ¦ Askerlik hizmetinden terhis
+Détail des services et mutations diverses ¦ Hizmetlerin ve çeşitli nakillerin ayrıntısı
+Arrivé au corps le 15 novembre 1897… Blessé le 9 septembre 1914, amputation… ¦ Arrivé au corps le 15 novembre 1897… Blessé le 9 septembre 1914, amputation…
+Campagnes, blessures, décorations, actions d'éclat… ¦ Seferler, yaralar, nişanlar, kahramanlıklar…
+Localités successives habitées ¦ Sırayla oturulan yerler
+Condamné par jugement… du tribunal correctionnel de Tours… ¦ Condamné par jugement… du tribunal correctionnel de Tours…
+Remarques libres sur le dossier militaire… ¦ Askerlik dosyası hakkında serbest notlar…
+Cimetière de… ¦ Mezarlık…
+Adresse du cimetière ¦ Mezarlığın adresi
+Division 4, carré B, rangée 3, tombe 12… ¦ Bölüm 4, ada B, sıra 3, mezar 12…
+Emplacement / plan (division, carré, rangée, numéro…) ¦ Konum / plan (bölüm, ada, sıra, numara…)
+État d'entretien ¦ Bakım durumu
+La sépulture existe encore aujourd'hui ¦ Mezar bugün hâlâ duruyor
+Si la tombe n'existe plus (reprise de concession, destruction…), décoche cette case : la sépulture reste consultable dans l'historique, et tu peux toujours y rattacher plusieurs personnes. ¦ Mezar artık yoksa (kullanım hakkının geri alınması, yıkım…), bu kutunun işaretini kaldır: mezar geçmişte görüntülenebilir kalır ve ona yine birden fazla kişi bağlayabilirsin.
+Photos datées ¦ Tarihli fotoğraflar
+Remarques libres sur la sépulture… ¦ Mezar hakkında serbest notlar…
+Choisis une personne de l'arbre (tombe familiale accueillant plusieurs personnes). ¦ Ağaçtan bir kişi seç (birden fazla kişiyi barındıran aile mezarı).
+ÉVÉNEMENT ¦ OLAY
+Cette personne ¦ Bu kişi
+Le couple / une union ¦ Çift / bir birliktelik
+Union concernée ¦ İlgili birliktelik
+Prénom tel qu’il est dans l’acte ¦ Belgedeki haliyle ad
+Prénom relevé ¦ Kaydedilen ad
+Nom tel qu’il est dans l’acte ¦ Belgedeki haliyle soyadı
+Nom relevé ¦ Kaydedilen soyadı
+Date telle qu’elle est connue ¦ Bilindiği haliyle tarih
+Choisir une date dans le calendrier ¦ Takvimden bir tarih seç
+Ouvrir le calendrier ¦ Takvimi aç
+La date est douteuse : lecture difficile, sources qui se contredisent, âge recalculé… ¦ Tarih şüpheli: okuması zor, birbiriyle çelişen kaynaklar, yeniden hesaplanmış yaş…
+à 3 heures du matin, 14 h 30… ¦ à 3 heures du matin, 14 h 30…
+Heure de l’événement ¦ Olayın saati
+Calendrier de cette date ¦ Bu tarihin takvimi
+Grégorien ¦ Gregoryen
+Julien ¦ Jülyen
+Républicain ¦ Cumhuriyet
+Calculée si la date est reconnue ¦ Tarih tanınırsa hesaplanır
+Équivalence automatique ¦ Otomatik karşılık
+Date alternative / équivalence ¦ Alternatif tarih / karşılık
+Titre ou précision ¦ Başlık veya ayrıntı
+Informations complémentaires ¦ Ek bilgiler
+＋ Ancien nom ou ancien pays du lieu ¦ ＋ Yerin eski adı veya eski ülkesi
+Ancien nom du lieu ¦ Yerin eski adı
+Ancien pays ¦ Eski ülke
+Pour le diagramme « Savoir signer » : qui a signé l’acte (ou « ne sait pas signer ») ¦ “İmza atabilmek” diyagramı için: belgeyi kim imzaladı (veya “imza atamıyor”)
+✍️ La personne (ou l’époux) a signé ¦ ✍️ Kişi (veya koca) imzaladı
+✍️ L’épouse a signé (mariage) ¦ ✍️ Eş (kadın) imzaladı (evlilik)
+Ex. âge indiqué au mariage de son frère… ¦ Örn. kardeşinin evliliğinde belirtilen yaş…
+Fiabilité du fait ¦ Bilginin güvenilirliği
+D’où vient cette information ¦ Bu bilgi nereden geliyor
+Média de preuve ¦ Kanıt medyası
+Le lien déjà présent sur une autre fiche est conservé. ¦ Başka bir kartta zaten var olan bağlantı korunur.
+Nouveau type ¦ Yeni tür
+Relier à ¦ Bağla:
+Créer un événement pour ce média ¦ Bu medya için bir olay oluştur
+Type d’événement ¦ Olay türü
+Acte trouvé, mention marginale… ¦ Bulunan belge, kenar notu…
+Correspondance ¦ Yazışma
+ex. carte familiale, billet, invitation… ¦ örn. aile kartı, not, davetiye…
+Style personnalisé ¦ Özel stil
+Destinataire(s) / expéditeur(s) ¦ Alıcı(lar) / gönderen(ler)
+Tape un nom pour retrouver une personne de l’arbre… ¦ Ağaçtan bir kişiyi bulmak için bir ad yaz…
+Répond à ¦ Yanıt verdiği
+Date du document ¦ Belgenin tarihi
+Nature du média ¦ Medyanın türü
+Document / média standard ¦ Standart belge / medya
+Photo de monument aux morts ¦ Şehitler anıtı fotoğrafı
+Carte postale recto/verso (2 images : recto puis verso) ¦ Ön/arka kartpostal (2 görsel: önce ön, sonra arka)
+Référence / cote du document ¦ Belgenin referansı / arşiv numarası
+Nom du registre ou livre ¦ Kayıt defterinin veya kitabın adı
+Page(s) ou vue(s) ¦ Sayfa(lar) veya görüntü(ler)
+Intéressant car la date indiquée est 1856… ¦ İlginç çünkü belirtilen tarih 1856…
+Dossier de l’enquête ¦ İnceleme dosyası
+Piste(s) concernée(s) ¦ İlgili iz(ler)
+Intéressant ¦ İlginç
+Rejeté ¦ Reddedildi
+Nom de la fiche ¦ Kartın adı
+Site / source ¦ Site / kaynak
+Vérification champ par champ ¦ Alan alan doğrulama
+Choisir une image ¦ Bir görsel seç
+… ou colle une capture (⌘V / Ctrl+V) dans cette fenêtre. Elle est aussi rangée dans les médias de la fiche. ¦ … veya bu pencereye bir ekran görüntüsü yapıştır (⌘V). Görüntü kartın medyasına da kaydedilir.
+Type de source ¦ Kaynak türü
+Source Internet ¦ İnternet kaynağı
+Archive sans média ¦ Medyasız arşiv
+Un événement précis ¦ Belirli bir olay
+Fiche Geneanet, Paris Table décennale 1881-1891, livre familial… ¦ Geneanet kartı, Paris Table décennale 1881-1891, aile kitabı…
+Titre de la source ¦ Kaynağın başlığı
+Geneanet, Archives départementales, éditeur… ¦ Geneanet, Archives départementales, yayıncı…
+Site, archive ou éditeur ¦ Site, arşiv veya yayıncı
+Auteur, contributeur ou déposant ¦ Yazar, katkıda bulunan veya teslim eden
+Page ou référence ¦ Sayfa veya referans
+Résumé ou copie des informations utiles… ¦ Yararlı bilgilerin özeti veya kopyası…
+Informations relevées ¦ Kaydedilen bilgiler
+Nom du type ¦ Türün adı
+Créer le type ¦ Türü oluştur
+Une personne existante ¦ Var olan bir kişi
+Créer une nouvelle personne ¦ Yeni bir kişi oluştur
+Aucun suspecté ¦ Şüphelenilen yok
+Même personne que… ¦ Şununla aynı kişi…
+ID personne ¦ Kişi kimliği
+Pourquoi cette hypothèse existe, ce qui manque pour la confirmer… ¦ Bu varsayım neden var, doğrulamak için ne eksik…
+HYPOTHÈSE ¦ VARSAYIM
+Élément lié ¦ Bağlı öğe
+Identité / doublon ¦ Kimlik / mükerrer kayıt
+Fiche liée, si besoin ¦ Gerekirse bağlı kart
+PREUVE ¦ KANIT
+Naissance, parents, lieu… ¦ Doğum, ebeveynler, yer…
+Source liée ¦ Bağlı kaynak
+Date précise ou cote ¦ Kesin tarih veya arşiv numarası
+Prénom dans le recensement ¦ Nüfus sayımındaki ad
+Nom dans le recensement ¦ Nüfus sayımındaki soyadı
+42 ans, né en 1814… ¦ 42 yaşında, 1814 doğumlu…
+Âge / année de naissance ¦ Yaş / doğum yılı
+Ville indiquée dans le recensement ¦ Nüfus sayımında belirtilen şehir
+chef, épouse, fils… ¦ hane reisi, eşi, oğlu…
+marié, veuve… ¦ evli, dul…
+Membres du foyer ¦ Hane üyeleri
+Fiche existante, si connue ¦ Biliniyorsa var olan kart
+Âge / naissance ¦ Yaş / doğum
+Médias déjà présents sur cette fiche ¦ Bu kartta zaten olan medyalar
+Images ou PDF ¦ Görseller veya PDF
+Enregistrer les médias ¦ Medyaları kaydet
+Ou importe directement une nouvelle image / un PDF. ¦ Veya doğrudan yeni bir görsel / PDF içe aktar.
+Recherche sur les registres de… ¦ Şu yerin kayıt defterlerinde araştırma…
+Ce que j’ai fait ¦ Yaptıklarım
+Prochaine étape ¦ Sonraki adım
+Paris, Table décennale 1881-1891 ¦ Paris, Table décennale 1881-1891
+Commune liée ¦ Bağlı yerleşim yeri
+Nom de l'ancienne commune ou subdivision ¦ Eski yerleşim yerinin veya alt bölümün adı
+Période ¦ Dönem
+Tables décennales, registre NMD… ¦ Tables décennales, NMD kayıt defteri…
+Ex : recensement 1921, Vulaines-sur-Seine… ¦ Örn: 1921 nüfus sayımı, Vulaines-sur-Seine…
+Suivi des registres dépouillés ¦ Dökümü yapılan kayıt defterlerinin takibi
+Image précédente ¦ Önceki görsel
+Image suivante ¦ Sonraki görsel
+RATTACHÉ À ¦ BAĞLI OLDUĞU
+Intitulé du média ¦ Medyanın başlığı
+Date du média ¦ Medyanın tarihi
+Aucune (pas une correspondance) ¦ Hiçbiri (yazışma değil)
+Registre ou livre ¦ Kayıt defteri veya kitap
+Contexte, qualité de lecture, source du fichier… ¦ Bağlam, okuma kalitesi, dosyanın kaynağı…
+Transcription du document ¦ Belgenin transkripsiyonu
+OCR français ¦ Fransızca OCR
+OCR anglais ¦ İngilizce OCR
+OCR allemand ¦ Almanca OCR
+OCR néerlandais ¦ Felemenkçe OCR
+OCR norvégien ¦ Norveççe OCR
+OCR suédois ¦ İsveççe OCR
+OCR tchèque ¦ Çekçe OCR
+Langue / modèle d’écriture manuscrite ¦ El yazısı dili / modeli
+Français · manuscrit généalogique ¦ Fransızca · soy kütüğü el yazısı
+Latin / médiéval · ancien ¦ Latince / ortaçağ · eski
+Italien · médiéval / ancien ¦ İtalyanca · ortaçağ / eski
+Néerlandais · expérimental ¦ Felemenkçe · deneysel
+Polonais · expérimental ¦ Lehçe · deneysel
+Suédois · nordique ancien ¦ İsveççe · eski İskandinav
+Finlandais · expérimental ¦ Fince · deneysel
+Norvégien · nordique ancien ¦ Norveççe · eski İskandinav
+Croate · expérimental ¦ Hırvatça · deneysel
+Tchèque · Bohême XIXe ¦ Çekçe · 19. yüzyıl Bohemya
+Hongrois · expérimental ¦ Macarca · deneysel
+Slovaque · expérimental ¦ Slovakça · deneysel
+Estonien · expérimental ¦ Estonca · deneysel
+Letton · expérimental ¦ Letonca · deneysel
+Lituanien · expérimental ¦ Litvanca · deneysel
+Irlandais · expérimental ¦ İrlandaca · deneysel
+Roumain · expérimental ¦ Rumence · deneysel
+Retrouver dans la base les photos qui lui ressemblent : la même, retouchée, recadrée, zoomée ou dans un autre format ¦ Veritabanında ona benzeyen fotoğrafları bul: aynısı, rötuşlanmış, kırpılmış, yakınlaştırılmış veya başka bir biçimde
+Assembler cette photo avec d’autres (redimensionner, faire tourner, transparence) ¦ Bu fotoğrafı başkalarıyla birleştir (boyutlandır, döndür, saydamlık)
+Couper, améliorer le son, assembler… L’original est toujours gardé. ¦ Kes, sesi iyileştir, birleştir… Orijinal her zaman saklanır.
+🔍 Comparer avec… ¦ 🔍 Şununla karşılaştır…
+🔍 Chercher une image semblable ¦ 🔍 Benzer bir görsel ara
+Enregistrer la transcription ¦ Transkripsiyonu kaydet
+Fiche créée : {nm}. ¦ Kart oluşturuldu: {nm}.
+{n} générations ¦ {n} kuşak
+Ascendance fermée : {x} ¦ Kapalı atalar: {x}
+Descendance fermée : {x} ¦ Kapalı torunlar: {x}
+⊘ lignée éteinte ¦ ⊘ soyu tükenmiş
+⊘ Déclarer l’ascendance fermée ¦ ⊘ Ataları kapalı ilan et
+⊘ Déclarer la descendance fermée ¦ ⊘ Torunları kapalı ilan et
+⊘ Ascendance fermée ¦ ⊘ Atalar kapalı
+⊘ Descendance fermée ¦ ⊘ Torunlar kapalı
+Sûr ¦ Kesin
+Très probable ¦ Çok olası
+Gros doute ¦ Büyük şüphe
+Identité nom/prénom ¦ Ad/soyad kimliği
+Naissance avec date complète ¦ Tam tarihli doğum
+Décès/vivant renseigné ¦ Ölüm/hayatta bilgisi girilmiş
+Décès avec date complète ¦ Tam tarihli ölüm
+Lieu de décès si décès connu ¦ Ölüm biliniyorsa ölüm yeri
+Parents documentés ¦ Belgelenmiş ebeveynler
+Conjoint ou absence documentée ¦ Eş veya belgelenmiş yokluğu
+Enfants ou absence documentée ¦ Çocuklar veya belgelenmiş yokluğu
+Au moins une source/preuve ¦ En az bir kaynak/kanıt
+Médias ou note de recherche ¦ Medya veya araştırma notu
+Niveau de confiance des faits ¦ Bilgilerin güven düzeyi
+=enfant ¦ çocuk|çocuk
+Pas d’enfant connu ¦ Bilinen çocuk yok
+Arbre très grand : affichage limité. ¦ Ağaç çok büyük: görüntü sınırlı.
+D’autres ancêtres existent au-delà ¦ Daha ötede başka atalar var
+D’autres descendants existent au-delà ¦ Daha ötede başka torunlar var
+┄ suite ¦ ┄ devamı
+∞ conjoint inconnu ¦ ∞ bilinmeyen eş
+Parent ¦ Ebeveyn
+Grands-parents ¦ Büyükanne ve büyükbaba
+Arrière-grands-parents ¦ Büyük büyükanne ve büyükbaba
+Petits-enfants ¦ Torunlar
+Arrière-petits-enfants ¦ Torunların çocukları
+Aucun parent connu. ¦ Bilinen ebeveyn yok.
+Aucun descendant connu. ¦ Bilinen torun yok.
+Naissance (étoile) ¦ Doğum (yıldız)
+Décès (croix) ¦ Ölüm (haç)
+Baptême / Inhumation ¦ Vaftiz / Defin
+Résidence ¦ İkamet
+Église ¦ Kilise
+Crémation (urne) ¦ Yakma (urne)
+Génériques ¦ Genel
+Étoile creuse ¦ İçi boş yıldız
+Éclair ¦ Şimşek
+Étoile pleine ¦ Dolu yıldız
+Étoile fine ¦ İnce yıldız
+Losange orné ¦ Süslü baklava
+Repère ¦ İşaret
+Trèfle ¦ Yonca
+Téléphone ¦ Telefon
+Case validée ¦ Onaylı kutu
+Case refusée ¦ Reddedilmiş kutu
+Flèche ¦ Ok
+Voyage / Émigration ¦ Yolculuk / Göç
+Étoile cerclée ¦ Daireli yıldız
+Comète / Long voyage ¦ Kuyruklu yıldız / Uzun yolculuk
+Lieu / Position ¦ Yer / Konum
+Santé / Médecine ¦ Sağlık / Tıp
+Captivité / Esclavage ¦ Esaret / Kölelik
+Astérisque ¦ Yıldız işareti
+Film / Cinéma ¦ Film / Sinema
+Théâtre / Scène ¦ Tiyatro / Sahne
+Poème / Écriture ¦ Şiir / Yazı
+Vidéo / Performance ¦ Video / Performans
+Rôle / Acteur ¦ Rol / Oyuncu
+Anniversaires du jour ¦ Bugünün yıldönümleri
+N’importe quel écran de l’app dans la page : une liste, un diagramme, une statistique, une fiche, la carte, un outil… Choisis-le avec le crayon ✎. ¦ Uygulamanın herhangi bir ekranı sayfada: bir liste, bir diyagram, bir istatistik, bir kart, harita, bir araç… Kalemle ✎ seç.
+Un titre, une note, une consigne ou un pense-bête, avec des émojis. ¦ Emojili bir başlık, not, talimat veya hatırlatma.
+Résumé chiffré de la base. ¦ Veritabanının sayısal özeti.
+Dates familiales qui reviennent dans les prochains jours. ¦ Önümüzdeki günlerde yeniden gelen aile tarihleri.
+Anniversaires de naissance, mariage ou décès du jour. ¦ Bugünün doğum, evlilik veya ölüm yıldönümleri.
+Rappels autonomes et rappels liés aux enquêtes. ¦ Bağımsız hatırlatmalar ve incelemelere bağlı hatırlatmalar.
+Dernières actions enregistrées dans le journal. ¦ Günlüğe kaydedilen son işlemler.
+Dernières suppressions restaurables quand c’est possible. ¦ Mümkün olduğunda geri yüklenebilen son silmeler.
+Personnes verrouillées récemment. ¦ Son kilitlenen kişiler.
+Fiches ouvertes récemment sur ce navigateur. ¦ Bu tarayıcıda son açılan kartlar.
+Affiche une personne au hasard ou une personne précise. ¦ Rastgele bir kişiyi veya belirli bir kişiyi gösterir.
+Les objets de famille d’une personne (choisie, ou la dernière fiche consultée) : photo, transmission, qui les a aujourd’hui. Le crayon règle la personne. ¦ Bir kişinin aile eşyaları (seçilen veya son görüntülenen kart): fotoğraf, aktarım, bugün kimde oldukları. Kalem kişiyi ayarlar.
+La mémoire familiale d’une personne (choisie, ou la dernière fiche consultée) : recettes, expressions, chansons, surnoms, traditions. Le crayon règle la personne. ¦ Bir kişinin aile hafızası (seçilen veya son görüntülenen kart): tarifler, deyimler, şarkılar, lakaplar, gelenekler. Kalem kişiyi ayarlar.
+Affiche un bloc de fiche personne pour une personne choisie ou aléatoire. ¦ Seçilen veya rastgele bir kişi için kişi kartından bir blok gösterir.
+Affiche une image au hasard. ¦ Rastgele bir görsel gösterir.
+Personnes marquées comme favorites. ¦ Favori olarak işaretlenen kişiler.
+Fiches qui manquent d’informations importantes. ¦ Önemli bilgileri eksik olan kartlar.
+Personnes qui n’ont aucune source directe ou indirecte. ¦ Hiçbir doğrudan veya dolaylı kaynağı olmayan kişiler.
+Événements sans source associée. ¦ Bağlı kaynağı olmayan olaylar.
+Événements sans média associé. ¦ Bağlı medyası olmayan olaylar.
+Médias isolés ou mal rattachés. ¦ Yalnız kalmış veya yanlış bağlanmış medyalar.
+Médias sans transcription OCR, HTR ou manuelle. ¦ OCR, HTR veya elle transkripsiyonu olmayan medyalar.
+Images sans personne ou signature identifiée. ¦ Tanımlanmış kişisi veya imzası olmayan görseller.
+Signatures identifiées qui méritent comparaison. ¦ Karşılaştırılmayı hak eden tanımlanmış imzalar.
+Communes ou lieux sans coordonnées complètes. ¦ Koordinatları eksik yerleşim yerleri veya yerler.
+Branches familiales qui ont peu de sources/médias. ¦ Az kaynağı/medyası olan aile kolları.
+Couples sans événement de mariage enregistré. ¦ Kaydedilmiş evlilik olayı olmayan çiftler.
+Personnes dont un parent ou les deux manquent. ¦ Ebeveynlerinden biri veya ikisi eksik olan kişiler.
+Baptêmes sans parrain ou marraine enregistré. ¦ Vaftiz babası veya vaftiz annesi kaydedilmemiş vaftizler.
+Premiers numéros SOSA manquants. ¦ Eksik ilk SOSA numaraları.
+Accès rapide aux archives départementales favorites ou utiles. ¦ Favori veya yararlı Archives départementales’a hızlı erişim.
+Avancement de la lignée SOSA. ¦ SOSA soyunun ilerleyişi.
+Étiquettes les plus utilisées. ¦ En çok kullanılan etiketler.
+Mini-carte globale des lieux de la base. ¦ Veritabanındaki yerlerin genel mini haritası.
+Mini-carte filtrée sur une branche ou un patronyme. ¦ Bir kola veya soyadına göre süzülmüş mini harita.
+Mini-carte d’itinéraire, au hasard ou pour une personne précise. ¦ Rastgele veya belirli bir kişi için güzergâh mini haritası.
+Timeline compacte des événements d’une personne. ¦ Bir kişinin olaylarının kısa zaman çizelgesi.
+Un indicateur configurable en grand. ¦ Büyük gösterilen, ayarlanabilir bir gösterge.
+Objectif libre pour garder le cap pendant une session. ¦ Bir oturum boyunca yönünü korumak için serbest bir hedef.
+Taux de fiches avec naissance, décès, média et source. ¦ Doğumu, ölümü, medyası ve kaynağı olan kartların oranı.
+Date de ta dernière copie hors de cet ordinateur (disque externe, clé, iCloud, Dropbox…). ¦ Bu bilgisayarın dışındaki son kopyanın tarihi (harici disk, USB bellek, iCloud, Dropbox…).
+Les personnes sans fiche qui reviennent le plus souvent dans tes transcriptions (témoins, voisins, parrains…). ¦ Transkripsiyonlarında en sık geçen kartı olmayan kişiler (tanıklar, komşular, vaftiz babaları…).
+Lieux les plus présents dans les événements. ¦ Olaylarda en sık geçen yerler.
+Projet scientifique utile pour croiser histoire sociale, familles et populations. ¦ Sosyal tarih, aileler ve nüfusları karşılaştırmak için yararlı bilimsel proje.
+Portail national des archives françaises. ¦ Fransız arşivlerinin ulusal portalı.
+Bibliothèque numérique ¦ Dijital kütüphane
+Presse, livres, cartes, images et documents numérisés de la BnF. ¦ BnF’nin sayısallaştırılmış basını, kitapları, haritaları, görselleri ve belgeleri.
+Mémoire des hommes ¦ Mémoire des hommes
+Bases militaires françaises, morts pour la France, unités, journaux de marche. ¦ Fransız askerî veritabanları, Fransa için ölenler, birlikler, harekât günlükleri.
+Documents et arbres collaboratifs, compte souvent nécessaire. ¦ Ortak belgeler ve ağaçlar, çoğu zaman hesap gerekir.
+Chercher un acte ¦ Bir belge ara
+Commander un acte ¦ Bir belge sipariş et
+Attente de la réception d'un acte ¦ Bir belgenin gelmesini bekleme
+Prendre un abonnement ¦ Abone ol
+Se désabonner ¦ Aboneliği iptal et
+Acheter une revue ¦ Bir dergi satın al
+Emprunter une revue ¦ Bir dergi ödünç al
+Consulter une revue ¦ Bir dergiye bak
+Acheter un livre ¦ Bir kitap satın al
+Retrouver un livre ¦ Bir kitabı bul
+Analyser un document ¦ Bir belgeyi incele
+Déplacement aux archives ¦ Arşive gitme
+Matériel ¦ Malzeme
+Archives départementales ¦ Archives départementales
+Fichier numérique (PDF / image) ¦ Dijital dosya (PDF / görsel)
+Scan haute définition ¦ Yüksek çözünürlüklü tarama
+Envoyé ¦ Gönderildi
+En attente ¦ Bekliyor
+Réponse reçue ¦ Yanıt alındı
+Faits — utilisés ¦ Bilgiler — kullanılan
+Faits — non utilisés ¦ Bilgiler — kullanılmayan
+Tous les faits ¦ Tüm bilgiler
+🏠 Animal : ses maîtres ¦ 🏠 Hayvan: sahipleri
+🩺 Animal : santé ¦ 🩺 Hayvan: sağlık
+📅 Animal : sa vie ¦ 📅 Hayvan: hayatı
+🗂️ Animal : mes catégories ¦ 🗂️ Hayvan: kategorilerim
+🌍 Où chercher ? ¦ 🌍 Nerede aramalı?
+Œuvres artistiques ¦ Sanat eserleri
+🎨 Artiste : sa page ¦ 🎨 Sanatçı: sayfası
+🎨 Cité dans des catalogues d’artistes ¦ 🎨 Sanatçı kataloglarında anılıyor
+📰 Dans les médias ¦ 📰 Medyada
+🎧 On l’entend ¦ 🎧 Sesi duyuluyor
+Départs / émigration ¦ Gidişler / göç
+Enfant placé ¦ Bakıma verilen çocuk
+Inventaire après décès ¦ Ölüm sonrası envanter
+Résistant ¦ Direnişçi
+Mes blocs (éditeur de blocs) ¦ Bloklarım (blok düzenleyici)
+Cité dans ¦ Anıldığı yer
+🌦 Météo de sa vie ¦ 🌦 Hayatının hava durumu
+✨ Trésors (souvenirs, recettes, lettres…) ¦ ✨ Hazineler (anılar, tarifler, mektuplar…)
+🌌 Le ciel de sa naissance ¦ 🌌 Doğduğu günün gökyüzü
+Pas d’Internet : les cartes passent au fond hors ligne. ¦ İnternet yok: haritalar çevrimdışı arka plana geçer.
+Archives et bases ¦ Arşivler ve veritabanları
+Presse et livres ¦ Basın ve kitaplar
+Notices d’autorité ¦ Otorite kayıtları
+Décès INSEE depuis 1970 (matchID) ¦ 1970’ten beri INSEE ölümleri (matchID)
+Léonore (Légion d’honneur) ¦ Léonore (Légion d’honneur)
+Cocher Léonore (Légion d’honneur) ¦ Léonore’u işaretle (Légion d’honneur)
+Yad Vashem (victimes de la Shoah) ¦ Yad Vashem (Holokost kurbanları)
+Décrets de naturalisation 1883-1930 (Archives nationales) ¦ Vatandaşlığa alma kararnameleri 1883-1930 (Archives nationales)
+Minutier central des notaires de Paris ¦ Minutier central des notaires de Paris
+Archives nationales d’outre-mer (ANOM) ¦ Archives nationales d’outre-mer (ANOM)
+Dossiers d’officiers (SHD) ¦ Subay dosyaları (SHD)
+Mémorial de la Shoah ¦ Mémorial de la Shoah
+Livre-Mémorial des déportés (FMD) ¦ Livre-Mémorial des déportés (FMD)
+Maitron des fusillés 1940-1944 ¦ Maitron des fusillés 1940-1944
+MémorialGenWeb (monuments aux morts) ¦ MémorialGenWeb (şehitler anıtları)
+Morts de la guerre de 1870-1871 ¦ 1870-1871 savaşının ölüleri
+Relevés de tombes (Geneanet) ¦ Mezar dökümleri (Geneanet)
+Géopatronyme (où vivait ce nom, 1891-1990) ¦ Géopatronyme (bu soyadı nerede yaşıyordu, 1891-1990)
+Huguenots réfugiés ¦ Mülteci Huguenotlar
+Rôles d’équipage (marine marchande) ¦ Mürettebat listeleri (ticaret filosu)
+Matricula (registres paroissiaux d’Europe centrale) ¦ Matricula (Orta Avrupa kilise kayıtları)
+Digitalarkivet (Norvège) ¦ Digitalarkivet (Norveç)
+Riksarkivet (Suède) ¦ Riksarkivet (İsveç)
+Porta fontium (Bohême, Bavière) ¦ Porta fontium (Bohemya, Bavyera)
+Chronicling America (États-Unis) ¦ Chronicling America (Amerika Birleşik Devletleri)
+Papers Past (Nouvelle-Zélande) ¦ Papers Past (Yeni Zelanda)
+BnF (autorités) ¦ BnF (otorite kayıtları)
+Wikipédia ¦ Vikipedi
+Deuxièmes prénoms ¦ İkinci adlar
+De la naissance au décès ; pour les sites qui ont des champs de date (Geneanet, Filae, FamilySearch…). Les moteurs de recherche ne reçoivent pas d’année. ¦ Doğumdan ölüme; tarih alanları olan siteler için (Geneanet, Filae, FamilySearch…). Arama motorlarına yıl gönderilmez.
+Aussi sous le nom d’épouse (moteurs de recherche) ¦ Evlilik soyadıyla da (arama motorları)
+Aucun site choisi ¦ Seçilen site yok
+Règle-les dans Réglages → Apparence. ¦ Bunları Ayarlar → Görünüm bölümünde ayarla.
+Tout cocher ¦ Hepsini işaretle
+Tout décocher ¦ Hiçbirini işaretleme
+S’ouvre dans ton navigateur. Coche le lieu, les années ou le conjoint pour écarter les homonymes. ¦ Tarayıcında açılır. Adaşları elemek için yeri, yılları veya eşi işaretle.
+Le Petit Journal ¦ Le Petit Journal
+La une du jour (Gallica) ¦ Günün manşeti (Gallica)
+Le jour de ¦ Şu günde:
+Aucun de ces journaux n’est numérisé pour cette année. ¦ Bu gazetelerin hiçbiri bu yıl için sayısallaştırılmamış.
+Journaux numérisés de 1854 à 1944. Si le journal n’est pas paru ce jour-là, Gallica montre le calendrier du mois. ¦ 1854’ten 1944’e sayısallaştırılmış gazeteler. Gazete o gün çıkmadıysa Gallica ayın takvimini gösterir.
+Tout sélectionner ¦ Tümünü seç
+Tout désélectionner ¦ Seçimi kaldır
+Enregistrer ces sites ¦ Bu siteleri kaydet
+Ex : Archives du Lot ¦ Örn: Archives du Lot
+Nom du site ¦ Sitenin adı
+Icône (facultatif) ¦ Simge (isteğe bağlı)
+Blocs de la fiche ¦ Kartın blokları
+Aucune fiche n’a d’exception : toutes suivent ce réglage. ¦ Hiçbir kartın istisnası yok: hepsi bu ayarı izliyor.
+Aucune fiche : toutes suivent le réglage commun. ¦ Hiç kart yok: hepsi ortak ayarı izliyor.
+Retirer l’exception ¦ İstisnayı çıkar
+Réglage particulier de la fiche retiré ¦ Kartın özel ayarı çıkarıldı
+Garde au moins un graphique visible. ¦ En az bir grafiği görünür bırak.
+Ordre des graphiques enregistré. ¦ Grafiklerin sırası kaydedildi.
+Garde au moins une sorte de widget. ¦ En az bir widget türü bırak.
+Bibliothèque des widgets rangée. ¦ Widget kitaplığı düzenlendi.
+Fond de cartes standard ¦ Standart harita altlığı
+Fond de la carte ¦ Haritanın altlığı
+Hors ligne (frontières et communes, sans Internet) ¦ Çevrimdışı (sınırlar ve yerleşim yerleri, İnternet olmadan)
+Relief léger ¦ Hafif kabartma
+Océan (Esri) ¦ Okyanus (Esri)
+Voyager (avec labels) ¦ Voyager (etiketli)
+Quadrillé ¦ Kareli
+Couleur unie ¦ Düz renk
+Sombre ¦ Koyu
+Cartes historiques ¦ Tarihî haritalar
+Carte de Cassini (18e s.) ¦ Cassini haritası (18. yüzyıl)
+Cassini — exemplaire du roi ¦ Cassini — kralın nüshası
+État-Major (France, 19e s.) ¦ État-Major (Fransa, 19. yüzyıl)
+Swisstopo — Carte Dufour (Suisse, 1845-1865) ¦ Swisstopo — Dufour haritası (İsviçre, 1845-1865)
+Swisstopo — Carte Siegfried (Suisse, 1870-1949) ¦ Swisstopo — Siegfried haritası (İsviçre, 1870-1949)
+OS 6-inch Écosse (1842-1882) ¦ OS 6-inch İskoçya (1842-1882)
+Carte de Ferraris (Belgique, 1777) ¦ Ferraris haritası (Belçika, 1777)
+Carte Vandermaelen (Belgique, 1846-1854) ¦ Vandermaelen haritası (Belçika, 1846-1854)
+Carte Fricx (Belgique, 1744) ¦ Fricx haritası (Belçika, 1744)
+France IGN (Géoplateforme) ¦ Fransa IGN (Géoplateforme)
+Photos aériennes historiques IGN (1950-1965) ¦ IGN tarihî hava fotoğrafları (1950-1965)
+Scan50 1950 — carte papier IGN ¦ Scan50 1950 — IGN kâğıt haritası
+Parcelles du cadastre (IGN, actuel) ¦ Kadastro parselleri (IGN, güncel)
+OS 25-inch Écosse (1892-1905) ¦ OS 25-inch İskoçya (1892-1905)
+GSGS 3906 — War Office 1940-1943 (Écosse) ¦ GSGS 3906 — War Office 1940-1943 (İskoçya)
+MTN50 première édition (Espagne, 1910-1970) ¦ MTN50 ilk baskı (İspanya, 1910-1970)
+{what} « {nm} » supprimé ¦ {what} “{nm}” silindi
+{what} « {nm} » supprimée ¦ {what} “{nm}” silindi
+{what} « {name} » importé : « Appliquer » pour t’en servir ¦ {what} “{name}” içe aktarıldı: kullanmak için “Uygula”ya tıkla
+{what} « {name} » importée : « Appliquer » pour t’en servir ¦ {what} “{name}” içe aktarıldı: kullanmak için “Uygula”ya tıkla
+Le Petit Parisien ¦ Le Petit Parisien
+États-Unis (USGS) ¦ Amerika Birleşik Devletleri (USGS)
+Cet écran n’existe plus : modifie l’onglet dans Réglages → Éditeur d’onglets. ¦ Bu ekran artık yok: sekmeyi Ayarlar → Sekme düzenleyici bölümünde değiştir.
+Sauvegarde protégée ¦ Korumalı yedek
+Mot de passe incorrect. Réessaie (attention aux majuscules). ¦ Parola yanlış. Yeniden dene (büyük harflere dikkat et).
+Cette sauvegarde est protégée par un mot de passe. ¦ Bu yedek bir parolayla korunuyor.
+Réponse ¦ Yanıt
+Tape <b>{word}</b> pour confirmer ¦ Onaylamak için <b>{word}</b> yaz
+Ce document ¦ Bu belge
+Modifié dans une autre fenêtre ¦ Başka bir pencerede değiştirildi
+Recharger ¦ Yeniden yükle
+: voir la version de l’autre fenêtre (tes derniers changements d’ici sont abandonnés). ¦ : diğer pencerenin sürümünü gör (buradaki son değişikliklerin bırakılır).
+Garder ma version (écraser) ¦ Benim sürümümü koru (üzerine yaz)
+Réglages enregistrés. ¦ Ayarlar kaydedildi.
+Réussite ¦ Başarı
+✓ Fiche enregistrée. ¦ ✓ Kart kaydedildi.
+Fiche enregistrée. ¦ Kart kaydedildi.
+Interdit ou erreur ¦ Yasak veya hata
+⛔ Impossible : cette fiche est verrouillée. ¦ ⛔ Olmaz: bu kart kilitli.
+Suppression (avec « Annuler ») ¦ Silme (“Geri al” ile)
+Supprimé. ¦ Silindi.
+« 🗺 Mes cartes » de la Carte ¦ Haritanın “🗺 Haritalarım” bölümü
+les designs (Apparence → Mes propres designs) ¦ tasarımlar (Görünüm → Kendi tasarımlarım)
+les styles des diagrammes (⚙️ Personnaliser) ¦ diyagram stilleri (⚙️ Özelleştir)
+le mode simple (Accessibilité → 🧓 Mode simple) ¦ basit mod (Erişilebilirlik → 🧓 Basit mod)
+les raccourcis clavier ¦ klavye kısayolları
+les widgets « Raccourcis » ¦ “Kısayollar” widget’ları
+l’apparence (designs) ¦ görünüm (tasarımlar)
+les réglages des tableaux ¦ tabloların ayarları
+les animaux ¦ hayvanlar
+l’Atelier de recherche ¦ Araştırma Atölyesi
+les couleurs des statistiques ¦ istatistik renkleri
+les couleurs des battues ¦ tarama renkleri
+les couleurs des badges ¦ rozet renkleri
+les réglages des artistes (champs affichés, page de l’artiste) ¦ sanatçı ayarları (gösterilen alanlar, sanatçının sayfası)
+les types d’œuvres (✎ Mes types) ¦ eser türleri (✎ Türlerim)
+les réglages du labyrinthe (Jeu) ¦ labirent ayarları (Oyun)
+les réglages de la calculette 🧮 ¦ hesap makinesi ayarları 🧮
+Importer un réglage ¦ Bir ayarı içe aktar
+ce fichier n’est pas un réglage enregistré de LCNDA ¦ bu dosya kaydedilmiş bir LCNDA ayarı değil
+ce réglage est vide ou abîmé ¦ bu ayar boş veya bozuk
+Réglage importé ¦ Ayar içe aktarıldı
+le réglage ¦ ayar
+Ce fichier n’est pas un réglage enregistré de LCNDA. ¦ Bu dosya kaydedilmiş bir LCNDA ayarı değil.
+Ce réglage est vide ou abîmé : il ne peut pas être importé. ¦ Bu ayar boş veya bozuk: içe aktarılamaz.
+Enregistrer ce réglage dans un fichier, pour le garder ou le donner ¦ Bu ayarı saklamak veya başkasına vermek için bir dosyaya kaydet
+Reprendre un réglage exporté (fichier .json) ¦ Dışa aktarılmış bir ayarı geri al (.json dosyası)
+⤒ Importer un réglage ¦ ⤒ Bir ayarı içe aktar
+Réglage ¦ Ayar
+Plus de place pour enregistrer ce réglage. ¦ Bu ayarı kaydetmek için yer kalmadı.
+Ici, il faut un jour précis : par exemple « 7 mai 1925 » ou « 07/05/1925 ». ¦ Burada belirli bir gün gerekir: örneğin “7 mai 1925” veya “07/05/1925”.
+⚠️ Ici, il faut un jour précis : « 7 mai 1925 » ou « 07/05/1925 ». ¦ ⚠️ Burada belirli bir gün gerekir: “7 mai 1925” veya “07/05/1925”.
+Exporter le graphique ¦ Grafiği dışa aktar
+PDF, image PNG ou JPG, impression ¦ PDF, PNG veya JPG görsel, yazdırma
+Fenêtre d’impression bloquée par le navigateur. ¦ Yazdırma penceresi tarayıcı tarafından engellendi.
+Image impossible : le graphique est trop grand. ¦ Görsel olmaz: grafik çok büyük.
+La copie dans les médias n’a pas pu être faite. ¦ Medyaya kopya yapılamadı.
+tâches devenues ¦ dönüşen görevler
+liens familiaux impossibles ignorés ¦ olanaksız aile bağları yok sayıldı
+Choisir un fichier… ¦ Bir dosya seç…
+Sélectionne un fichier ¦ Bir dosya seç
+Indique au moins un prénom ou un nom ¦ En az bir ad veya soyadı gir
+Indique au moins un prénom ou un nom. ¦ En az bir ad veya soyadı gir.
+Première personne créée. Rechargement… ¦ İlk kişi oluşturuldu. Yeniden yükleniyor…
+Plus doux ¦ Daha yumuşak
+Rose poudré ¦ Pudra pembesi
+Bleu pétrole pâle ¦ Soluk petrol mavisi
+Lavande grisée ¦ Grimsi lavanta
+Fond de la page ¦ Sayfanın arka planı
+Fond des cartes ¦ Kartların arka planı
+Traits qui entourent (bordures) ¦ Çevreleyen çizgiler (kenarlıklar)
+Thème sombre ¦ Koyu tema
+Créer le thème ¦ Temayı oluştur
+En-tête d’une carte ¦ Kartın başlığı
+le fond de la page ¦ sayfanın arka planı
+le fond des panneaux ¦ panellerin arka planı
+le fond des cartes ¦ kartların arka planı
+Liste des designs enregistrée. ¦ Tasarım listesi kaydedildi.
+Renommer le design ¦ Tasarımı yeniden adlandır
+Nouveau nom : ¦ Yeni ad:
+Coin des messages ¦ Mesajların köşesi
+Messages après une action ¦ Bir işlemden sonraki mesajlar
+Coin de l’écran ¦ Ekranın köşesi
+Durée d’affichage ¦ Görünme süresi
+Le message reste tant que la souris est dessus. Le réglage « durée des messages » d’Accessibilité s’y ajoute. ¦ Fare üzerindeyken mesaj kalır. Erişilebilirlik’teki “mesaj süresi” ayarı buna eklenir.
+Les messages apparaîtront ici. ¦ Mesajlar burada görünecek.
+Prendre la couleur du thème ¦ Temanın rengini al
+Préparation de la vue… ¦ Görünüm hazırlanıyor…
+Le tableau de bord n’a pas pu se charger (fichier app-tableau-de-bord.js manquant ?). ¦ Gösterge paneli yüklenemedi (app-tableau-de-bord.js dosyası eksik mi?).
+Enregistrer ces widgets ¦ Bu widget’ları kaydet
+Largeur du widget ¦ Widget’ın genişliği
+Nombre d’éléments ¦ Öğe sayısı
+En signet ¦ Yer işaretinde
+Essaie une autre orthographe ou une partie du nom. ¦ Başka bir yazım veya adın bir parçasını dene.
+＋ Critère ¦ ＋ Ölçüt
+choisir… ¦ seç…
+⚙️ Réglages par défaut des distributions ¦ ⚙️ Dağılımların varsayılan ayarları
+⭐ Garder ces filtres par défaut pour toutes ¦ ⭐ Bu süzgeçleri hepsi için varsayılan olarak koru
+↺ Revenir aux filtres par défaut ¦ ↺ Başlangıçtaki gibi yap (varsayılan süzgeçler)
+Plus de réglage par défaut ¦ Artık varsayılan ayar yok
+=élément compté ¦ sayılan öğe|sayılan öğe
+Aucune donnée disponible pour cette statistique. ¦ Bu istatistik için veri yok.
+Ces filtres sont maintenant ceux de départ de toutes les distributions. ¦ Bu süzgeçler artık tüm dağılımların başlangıç süzgeçleri.
+Plus de filtres par défaut : les distributions partent de toutes les données. ¦ Artık varsayılan süzgeç yok: dağılımlar tüm verilerden başlar.
+— voir les personnes ¦ — kişileri gör
+évènements ¦ olaylar
+La carte n’a pas pu se charger (fichier app-carte.js manquant ?). ¦ Harita yüklenemedi (app-carte.js dosyası eksik mi?).
+Les listes n’ont pas pu se charger (fichier app-listes.js manquant ?). ¦ Listeler yüklenemedi (app-listes.js dosyası eksik mi?).
+Ligne de budget supprimée ¦ Bütçe satırı silindi
+Courrier supprimé du registre ¦ Mektup kayıt defterinden silindi
+Courrier classé dans les faits. ¦ Mektup bilgiler arasına konuldu.
+Rappel marqué comme fait. ¦ Hatırlatma yapıldı olarak işaretlendi.
+Modifier le rappel ¦ Hatırlatmayı düzenle
+Rappel supprimé ¦ Hatırlatma silindi
+Rappel retiré (la piste reste) ¦ Hatırlatma çıkarıldı (iz kalıyor)
+les plus anciennes ¦ en eskiler
+les plus anciens ¦ en eskiler
+les plus récentes ¦ en yeniler
+les plus récents ¦ en yeniler
+La chronologie n’a pas pu se charger (fichier app-chronologie.js manquant ?). ¦ Kronoloji yüklenemedi (app-chronologie.js dosyası eksik mi?).
+La recherche n’a pas pu se charger (fichier app-recherche.js manquant ?). ¦ Araştırma yüklenemedi (app-recherche.js dosyası eksik mi?).
+décès ajoutés ¦ eklenen ölümler
+Les enquêtes n’ont pas pu se charger (fichier app-enquetes.js manquant ?). ¦ İncelemeler yüklenemedi (app-enquetes.js dosyası eksik mi?).
+Tables décennales ¦ Tables décennales
+Née ¦ Doğum
+Né ¦ Doğum
+Dates estimées ¦ Tahmini tarihler
+Estimation pour orienter les recherches dans les registres, pas une date prouvée. ¦ Kayıt defterlerinde aramaya yön vermek için bir tahmin, kanıtlanmış bir tarih değil.
+Écran ¦ Ekran
+🗺 Carte de la vie (une personne, animée) ¦ 🗺 Hayat haritası (bir kişi, hareketli)
+▶ Visite guidée (relancer) ¦ ▶ Rehberli tur (yeniden başlat)
+🪙 Convertisseur d’autrefois (livres, francs, mesures, calendrier républicain) ¦ 🪙 Eski zaman dönüştürücü (livre, frank, ölçüler, Cumhuriyet takvimi)
+Une personne, une battue, une enquête, un lieu, un graphique, un écran… ¦ Bir kişi, bir tarama, bir inceleme, bir yer, bir grafik, bir ekran…
+Aucun résultat ¦ Sonuç yok
+Fenêtres et écran divisé ¦ Pencereler ve bölünmüş ekran
+Se déplacer ¦ Gezinme
+Sur une fiche personne ¦ Bir kişi kartında
+Se promener dans la famille ¦ Ailede dolaşma
+Pendant la saisie ¦ Yazarken
+Dans les listes ¦ Listelerde
+Dans la visionneuse de médias ¦ Medya görüntüleyicide
+Dans une transcription ¦ Bir transkripsiyonda
+Dans une battue ¦ Bir taramada
+Sécurité ¦ Güvenlik
+Ouvrir l’écran actuel dans une nouvelle fenêtre ¦ Geçerli ekranı yeni bir pencerede aç
+Écran précédent ¦ Önceki ekran
+Écran suivant ¦ Sonraki ekran
+Chercher un mot dans l’écran affiché ¦ Görüntülenen ekranda bir kelime ara
+Recherche rapide (personnes, battues, enquêtes, lieux, écrans) ¦ Hızlı arama (kişiler, taramalar, incelemeler, yerler, ekranlar)
+Ouvrir ou fermer la calculette 🧮 ¦ Hesap makinesini 🧮 aç veya kapat
+Ouvrir les réglages (Apparence) ¦ Ayarları aç (Görünüm)
+Modifier la fiche ouverte ¦ Açık kartı düzenle
+Cette fiche est verrouillée. ¦ Bu kart kilitli.
+Imprimer la fiche ou l’écran ¦ Kartı veya ekranı yazdır
+Copier la référence de la personne (nom, années, Sosa) ¦ Kişinin referansını kopyala (ad, yıllar, Sosa)
+Aller au père ¦ Babaya git
+Aller à la mère ¦ Anneye git
+Aller au premier enfant ¦ İlk çocuğa git
+Frère ou sœur précédent (par ordre de naissance) ¦ Önceki kardeş (doğum sırasına göre)
+Frère ou sœur suivant ¦ Sonraki kardeş
+Aller au conjoint ¦ Eşe git
+Revenir au de cujus (personne de départ) ¦ De cujus’a dön (başlangıç kişisi)
+Aucune personne de départ n’est définie. ¦ Tanımlı başlangıç kişisi yok.
+Enregistrer le formulaire ouvert ¦ Açık formu kaydet
+Nouvelle observation (fiche d’un animal) ¦ Yeni gözlem (hayvan kartı)
+Ligne précédente ¦ Önceki satır
+Ligne suivante ¦ Sonraki satır
+Ouvrir la ligne choisie ¦ Seçilen satırı aç
+Aperçu rapide (photo, document) sans quitter la liste ¦ Listeden çıkmadan hızlı önizleme (fotoğraf, belge)
+Média précédent ¦ Önceki medya
+Média suivant ¦ Sonraki medya
+Tourner l’image (vers la droite) ¦ Görseli döndür (sağa)
+Taille d’origine ¦ Orijinal boyut
+Lecture / pause (audio, vidéo) ¦ Oynat / duraklat (ses, video)
+Insérer « [illisible] » ¦ “[illisible]” ekle
+Insérer « [?] » après un mot incertain ¦ Emin olunmayan bir kelimeden sonra “[?]” ekle
+Faire une sauvegarde tout de suite ¦ Hemen bir yedek al
+Annuler la dernière modification d’une fiche (hors d’une case de texte, avec confirmation) ¦ Bir karttaki son değişikliği geri al (metin kutusu dışında, onayla)
+Coller ¦ Yapıştır
+Copier ¦ Kopyala
+Couper ¦ Kes
+Recharger l’écran ¦ Ekranı yeniden yükle
+Forcer le rechargement ¦ Yeniden yüklemeyi zorla
+Taille réelle de l’affichage ¦ Görüntünün gerçek boyutu
+Zoom de l’affichage ¦ Görüntüyü yakınlaştır
+Zoom arrière de l’affichage ¦ Görüntüyü uzaklaştır
+Fermer la fenêtre ¦ Pencereyi kapat
+Réduire la fenêtre ¦ Pencereyi küçült
+Champ suivant ¦ Sonraki alan
+Champ précédent ¦ Önceki alan
+Fermer une fenêtre de saisie ¦ Bir giriş penceresini kapat
+Masquer l’application ¦ Uygulamayı gizle
+Masquer les autres applications ¦ Diğer uygulamaları gizle
+Changer d’application ¦ Uygulama değiştir
+Recherche du Finder ¦ Finder araması
+Capture d’écran ¦ Ekran görüntüsü
+Capture d’une zone ¦ Bir alanın ekran görüntüsü
+Verrouiller l’écran ¦ Ekranı kilitle
+Recherche dans le menu Aide ¦ Yardım menüsünde arama
+Afficher / masquer le Dock ¦ Dock’u göster / gizle
+Bureau précédent (Mission Control) ¦ Önceki masaüstü (Mission Control)
+Bureau suivant (Mission Control) ¦ Sonraki masaüstü (Mission Control)
+Fenêtres de l’application ¦ Uygulamanın pencereleri
+Emoji et symboles ¦ Emoji ve semboller
+Fermer la session ¦ Oturumu kapat
+Réduire toutes les fenêtres ¦ Tüm pencereleri küçült
+Menu Démarrer ¦ Başlat menüsü
+Gestionnaire des tâches ¦ Görev Yöneticisi
+Écran de sécurité ¦ Güvenlik ekranı
+Menu de la fenêtre ¦ Pencere menüsü
+Rotation de l’écran (pilotes Intel) ¦ Ekranı döndürme (Intel sürücüleri)
+Outils de développement (version de test) ¦ Geliştirici araçları (deneme sürümü)
+Ouvrir un terminal ¦ Bir terminal aç
+Lancer une commande ¦ Bir komut çalıştır
+Menu des applications ¦ Uygulamalar menüsü
+Déplacer la fenêtre ¦ Pencereyi taşı
+Redimensionner la fenêtre ¦ Pencereyi yeniden boyutlandır
+Taper un caractère Unicode (dans les cases de texte) ¦ Bir Unicode karakteri yaz (metin kutularında)
+Retour arrière ¦ Geri silme
+Ouvre d’abord une fiche personne. ¦ Önce bir kişi kartı aç.
+Pas d’écran précédent. ¦ Önceki ekran yok.
+Pas d’écran suivant. ¦ Sonraki ekran yok.
+Chercher dans l’écran… ¦ Ekranda ara…
+Chercher dans l’écran ¦ Ekranda ara
+Précédente ¦ Önceki
+Suivante ¦ Sonraki
+Maj+Entrée ¦ Shift+Enter
+Flèches puis Entrée, ou un clic. ¦ Oklar sonra Enter veya bir tıklama.
+Aucun père connu. ¦ Bilinen baba yok.
+Aucune mère connue. ¦ Bilinen anne yok.
+Aucun enfant connu. ¦ Bilinen çocuk yok.
+Aucun conjoint connu. ¦ Bilinen eş yok.
+Aucun frère ni sœur connu. ¦ Bilinen kardeş yok.
+Créer le rappel ¦ Hatırlatmayı oluştur
+Rappel créé (Listes → Rappels). ¦ Hatırlatma oluşturuldu (Listeler → Hatırlatmalar).
+Image et texte l’un sous l’autre. ¦ Görsel ve metin alt alta.
+Image et texte côte à côte. ¦ Görsel ve metin yan yana.
+Insérer le s long ¦ Uzun s ekle
+Toutes les communes affichées sont terminées. ¦ Gösterilen tüm yerleşim yerleri bitti.
+Ce qui a été supprimé sera remis. ¦ Silinenler geri konacak.
+La fiche reprendra exactement son état d’avant cette modification. ¦ Kart, bu değişiklikten önceki durumuna tam olarak dönecek.
+Annuler la dernière modification ? ¦ Son değişiklik geri alınsın mı?
+Annuler la modification ¦ Değişikliği geri al
+Ce que tu as tapé dans cette fenêtre sera perdu. ¦ Bu pencerede yazdıkların kaybolacak.
+Fermer sans enregistrer ? ¦ Kaydetmeden kapatılsın mı?
+Fermer sans enregistrer ¦ Kaydetmeden kapat
+Continuer la saisie ¦ Yazmaya devam et
+Tab pour choisir ¦ Seçmek için Tab
+Ouvrir une personne, une battue ou une enquête dans l’autre moitié de l’écran ¦ Bir kişiyi, taramayı veya incelemeyi ekranın diğer yarısında aç
+Geste de la souris : non modifiable ¦ Fare hareketi: değiştirilemez
+… dans une nouvelle fenêtre ¦ … yeni bir pencerede
+Fermer sans enregistrer (avec une confirmation si tu as tapé quelque chose) ¦ Kaydetmeden kapat (bir şey yazdıysan onay istenir)
+Touche du système ¦ Sistem tuşu
+personnalisé ¦ özel
+⌘ = touche Commande, ⌥ = Option, ⇧ = Majuscule. ¦ ⌘ = Command tuşu, ⌥ = Option, ⇧ = Shift.
+Ctrl = Contrôle, Maj = Majuscule. ¦ Ctrl = Control, Shift = büyük harf tuşu.
+⌨️ Dans les outils de modification ¦ ⌨️ Düzenleme araçlarında
+ce jeu de raccourcis ¦ bu kısayol takımı
+Échap : annuler · Retour arrière : aucun raccourci. ¦ Esc: iptal · Geri silme: kısayol yok.
+Utiliser ce raccourci ¦ Bu kısayolu kullan
+Sous Windows, Alt + lettre peut aussi ouvrir un menu. ¦ Windows’ta Alt + harf bir menü de açabilir.
+Sur Mac, ⌥ + lettre écrit un caractère spécial dans les cases de texte : ce raccourci ne marchera qu’en dehors des cases. ¦ Mac’te ⌥ + harf metin kutularında özel bir karakter yazar: bu kısayol yalnızca kutuların dışında çalışır.
+Cette action n’aura plus de raccourci. ¦ Bu işlemin artık kısayolu olmayacak.
+✓ Aucun conflit connu. ¦ ✓ Bilinen çakışma yok.
+Glisser pour changer la largeur ¦ Genişliği değiştirmek için sürükle
+Glisser pour changer la hauteur ¦ Yüksekliği değiştirmek için sürükle
+Afficher cet écran dans la partie principale ¦ Bu ekranı ana bölümde göster
+Ouvrir ce panneau dans une vraie fenêtre (pratique avec deux écrans) ¦ Bu paneli gerçek bir pencerede aç (iki ekranla kullanışlı)
+Fermer le panneau ¦ Paneli kapat
+Deuxième écran ¦ İkinci ekran
+À côté ¦ Yanında
+En dessous ¦ Altında
+⇠ Ici ¦ ⇠ Burada
+Fenêtre ↗ ¦ Pencere ↗
+Tape un nom… ¦ Bir ad yaz…
+Aucune fiche : le texte sera gardé tel quel ¦ Kart yok: metin olduğu gibi saklanacak
+l’a transmis ¦ aktardı
+l’a reçu ¦ aldı
+concerné ¦ ilgili
+Chercher… (objet, étiquette, personne) ¦ Ara… (eşya, etiket, kişi)
+Passé par ¦ Geçtiği kişi
+👤 Passé par ¦ 👤 Geçtiği kişi
+Avec une photo ¦ Fotoğraflı
+📷 Avec photo ¦ 📷 Fotoğraflı
+Sans photo ¦ Fotoğrafsız
+Aucun objet ne correspond ¦ Eşleşen eşya yok
+De (personne) ¦ Kimden (kişi)
+ou nom libre ¦ veya serbest ad
+À (personne) ¦ Kime (kişi)
+Occasion (mariage, héritage…) ¦ Vesile (evlilik, miras…)
+Modifier l’objet ¦ Eşyayı düzenle
+Nouvel objet ¦ Yeni eşya
+Aujourd’hui chez ¦ Bugün kimde
+Étiquettes : enregistre d’abord l’objet, puis ajoute-les ici. ¦ Etiketler: önce eşyayı kaydet, sonra onları buraya ekle.
+＋ Étape ¦ ＋ Aşama
+Le fichier reste dans tes médias. ¦ Dosya medyanda kalır.
+L’objet et l’historique de sa transmission seront supprimés. ¦ Eşya ve aktarım geçmişi silinecek.
+Supprimer l’objet ¦ Eşyayı sil
+Objet supprimé. ¦ Eşya silindi.
+Objet enregistré. ¦ Eşya kaydedildi.
+Objet enregistré : tu peux maintenant lui mettre des étiquettes. ¦ Eşya kaydedildi: artık ona etiket ekleyebilirsin.
+Les recettes de grand-mère, les expressions, les chansons, les surnoms, les traditions, rattachés aux personnes qui les ont transmis. ¦ Büyükannenin tarifleri, deyimler, şarkılar, lakaplar, gelenekler; onları aktaran kişilere bağlı.
+Chercher… (texte, étiquette, personne) ¦ Ara… (metin, etiket, kişi)
+Transmis par ¦ Aktaran
+👤 Transmis par ¦ 👤 Aktaran
+Aucun souvenir ne correspond ¦ Eşleşen anı yok
+Une recette, une expression, une chanson… ¦ Bir tarif, bir deyim, bir şarkı…
+Nouveau souvenir ¦ Yeni anı
+Modifier le souvenir ¦ Anıyı düzenle
+Supprimer le souvenir ¦ Anıyı sil
+Texte (recette, paroles, sens de l’expression…) ¦ Metin (tarif, sözler, deyimin anlamı…)
+Étiquettes : enregistre d’abord, puis ajoute-les ici. ¦ Etiketler: önce kaydet, sonra onları buraya ekle.
+Enregistré : tu peux maintenant lui mettre des étiquettes. ¦ Kaydedildi: artık ona etiket ekleyebilirsin.
+Le Figaro ¦ Le Figaro
+Le Temps ¦ Le Temps
+🗿 Monument aux morts ¦ 🗿 Şehitler anıtı
+Diplôme ¦ Diploma
+Angleterre, ancien style (avant 1752) ¦ İngiltere, eski usul (1752 öncesi)
+Bengali (Bangladesh) ¦ Bengal (Bangladeş)
+Bhoutanais drukpa (année) ¦ Bhutan drukpa (yıl)
+Birman (année) ¦ Birmanya (yıl)
+Byzantin (Anno Mundi, Russie avant 1700) ¦ Bizans (Anno Mundi, 1700 öncesi Rusya)
+Chinois (lunaire) ¦ Çin (ay takvimi)
+Compte long maya ¦ Maya uzun sayımı
+Copte ¦ Kıpti
+Coréen (année Dangi) ¦ Kore (Dangi yılı)
+Coréen lunaire (traditionnel) ¦ Kore ay takvimi (geleneksel)
+France, style de Pâques (avant 1567) ¦ Fransa, Paskalya usulü (1567 öncesi)
+Hégirien Umm al-Qura (Arabie saoudite) ¦ Hicri Ümmü’l-Kura (Suudi Arabistan)
+Indien (national, ère Saka) ¦ Hint (ulusal, Saka dönemi)
+Japonais (ères, depuis 1873) ¦ Japon (dönemler, 1873’ten beri)
+Juche (Corée du Nord) ¦ Juche (Kuzey Kore)
+Juif ¦ Yahudi
+Minguo (Taïwan) ¦ Minguo (Tayvan)
+Musulman civil ¦ Sivil Hicri
+Persan (hégirien solaire) ¦ İran (güneş Hicri)
+Romain (calendes, nones, ides) ¦ Roma (calendae, nonae, idus)
+Thaï (ère bouddhiste) ¦ Tay (Budist dönemi)
+Ère d’Espagne ¦ İspanya dönemi
+Éthiopien ¦ Etiyopya
+Médor ¦ Médor
+Médor du Val de Loire ¦ Médor du Val de Loire
+Mémé ¦ Mémé
+du Val de Loire ¦ du Val de Loire
+Rex des Grands Prés ¦ Rex des Grands Prés
+Flora du Moulin ¦ Flora du Moulin
+noir et feu ¦ siyah ve ten rengi
+Chartreux, Labrador… ¦ Chartreux, Labrador…
+=fichier créé ¦ oluşturulan dosya|oluşturulan dosya
+=lieu précis ¦ kesin yer|kesin yer
+=branche fermée ¦ kapalı kol|kapalı kol
+=personne ajoutée ¦ eklenen kişi|eklenen kişi
+=fiche complétée ¦ tamamlanan kart|tamamlanan kart
+La tarte aux pommes de mémé ¦ Ninemin elmalı turtası
+Remplis la case « Adresse » des événements ou des recensements, ou place un point GPS précis. ¦ Olayların veya nüfus sayımlarının “Adres” kutusunu doldur ya da kesin bir GPS noktası koy.
+Chercher… (adresse, commune) ¦ Ara… (adres, yerleşim yeri)
+Avec une adresse ¦ Adresli
+Regroupement des points GPS ¦ GPS noktalarının gruplanması
+Le plus d’événements ¦ En çok olay
+Années : les plus anciens ¦ Yıllar: en eskiler
+Années : les plus récents ¦ Yıllar: en yeniler
+Lieu précis ¦ Kesin yer
+lieux précis ¦ kesin yerler
+Aucun lieu précis ne correspond ¦ Eşleşen kesin yer yok
+Vérifie l’orthographe, ou retire un filtre. ¦ Yazımı kontrol et veya bir süzgeci kaldır.
+LIEU PRÉCIS ¦ KESİN YER
+← Tous les lieux précis ¦ ← Tüm kesin yerler
+Personne de rattaché. ¦ Bağlı kişi.
+Sur la carte ¦ Haritada
+Pas de coordonnées pour ce lieu. ¦ Bu yer için koordinat yok.
+Adresse écrite ¦ Yazılı adres
+Habitants successifs ¦ Sırayla oturanlar
+Aucun événement. ¦ Olay yok.
+baptisée ¦ vaftiz edildi
+baptisé ¦ vaftiz edildi
+Naissances datées ¦ Tarihli doğumlar
+Prénom du saint du jour ¦ Günün azizinin adı
+Voir les personnes ¦ Kişileri gör
+Par époque ¦ Döneme göre
+Époque ¦ Dönem
+Par famille (au moins 8 naissances datées) ¦ Aileye göre (en az 8 tarihli doğum)
+Pas assez de naissances datées par famille. ¦ Aile başına yeterli tarihli doğum yok.
+Filtrer : prénom, nom, saint… ¦ Süz: ad, soyadı, aziz…
+Les personnes concernées ¦ İlgili kişiler
+qui ne le portent pas ¦ bu adı taşımayanlar
+née la veille ¦ bir gün önce doğdu
+né la veille ¦ bir gün önce doğdu
+Saint du jour ¦ Günün azizi
+Aucune personne pour ce choix. ¦ Bu seçim için kişi yok.
+Par jour de l’année (1er janvier → 31 décembre) ¦ Yılın gününe göre (1 Ocak → 31 Aralık)
+Par saint ¦ Azize göre
+Jamais vérifié ¦ Hiç kontrol edilmedi
+Déplacé ¦ Taşınmış
+Ne répond plus ¦ Artık yanıt vermiyor
+Le site refuse les robots (à vérifier à la main) ¦ Site robotları reddediyor (elle kontrol edilmeli)
+Vérifier les liens web ¦ Web bağlantılarını kontrol et
+Vérifier le lien ¦ Bağlantıyı kontrol et
+déplacé ¦ taşınmış
+Tous les liens ¦ Tüm bağlantılar
+Les liens à regarder ¦ Bakılması gereken bağlantılar
+Jamais vérifiés ¦ Hiç kontrol edilmeyenler
+Qui fonctionnent ¦ Çalışanlar
+Où il est enregistré ¦ Nerede kayıtlı
+Nouvelle adresse ¦ Yeni adres
+Copie archivée ¦ Arşivlenmiş kopya
+Remplacer le lien ¦ Bağlantıyı değiştir
+Aucune copie trouvée ¦ Kopya bulunamadı
+Aucun lien. ¦ Bağlantı yok.
+Vérification… ¦ Kontrol ediliyor…
+Vérification terminée. ¦ Kontrol bitti.
+Remplacer ce lien partout ? ¦ Bu bağlantı her yerde değiştirilsin mi?
+Lien remplacé ¦ Bağlantı değiştirildi
+passé ¦ geçmiş
+J’y suis allé ¦ Oraya gittim
+Que prévoir ¦ Ne hazırlamalı
+Comment y aller ¦ Oraya nasıl gidilir
+Stands à voir ¦ Görülecek stantlar
+Horaires ¦ Saatler
+Au (si plusieurs jours) ¦ Bitiş (birkaç günse)
+＋ Salon ou événement ¦ ＋ Fuar veya etkinlik
+Un salon, un forum, une journée portes ouvertes des archives : la date, le lieu, que prévoir. ¦ Bir fuar, bir forum, arşivlerin açık kapı günü: tarih, yer, ne hazırlamalı.
+Chercher… (nom, ville, stands) ¦ Ara… (ad, şehir, stantlar)
+Passés ¦ Geçmiş olanlar
+Le plus proche ¦ En yakın
+Aucun salon ne correspond ¦ Eşleşen fuar yok
+Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les salons passés). ¦ Aranan kelimeleri değiştir veya bir süzgeci kaldır (“Tümünü temizle” geçmiş fuarları da gösterir).
+Enregistré (avec un rappel). ¦ Kaydedildi (bir hatırlatmayla).
+Nouveau salon ou événement ¦ Yeni fuar veya etkinlik
+Modifier le salon ¦ Fuarı düzenle
+Supprimer le salon ¦ Fuarı sil
+Salon de la généalogie ¦ Soy ağacı fuarı
+Salon, forum, congrès… ¦ Fuar, forum, kongre…
+Salon ¦ Fuar
+Forum ¦ Forum
+Congrès ¦ Kongre
+Journée portes ouvertes ¦ Açık kapı günü
+Conférence ¦ Konferans
+Entrée libre ¦ Giriş serbest
+Mairie du 15e, Paris ¦ Mairie du 15e, Paris
+Liste des branches bloquées, clé USB, questions pour le cercle du Limousin… ¦ Tıkanan kolların listesi, USB bellek, Limousin derneği için sorular…
+Cercle généalogique de la Corrèze (stand 12), Archives départementales… ¦ Cercle généalogique de la Corrèze (stant 12), Archives départementales…
+Liens (un par ligne, avec un nom si tu veux : « Programme https://… ») ¦ Bağlantılar (her satıra bir tane, istersen bir adla: “Program https://…”)
+Me le rappeler ¦ Bana hatırlat
+Lignée éteinte (aucun descendant) ¦ Soyu tükenmiş (hiç torun yok)
+Enfant naturel, père inconnu ¦ Evlilik dışı çocuk, baba bilinmiyor
+Enfant trouvé, parents inconnus ¦ Bulunmuş çocuk, ebeveynler bilinmiyor
+Registres détruits ou perdus ¦ Kayıt defterleri yok olmuş veya kaybolmuş
+Plus d’actes plus anciens ¦ Daha eski belge yok
+Recherches complètes sans résultat ¦ Sonuçsuz kalan eksiksiz araştırmalar
+Réglage enregistré pour cette fiche. ¦ Ayar bu kart için kaydedildi.
+Réglage enregistré pour toutes les fiches (exception possible dans Réglages → Apparence). ¦ Ayar tüm kartlar için kaydedildi (Ayarlar → Görünüm bölümünde istisna mümkün).
+BRANCHE FERMÉE ¦ KAPALI KOL
+Le couple avec ¦ Şununla çift:
+Depuis ¦ Başlangıç
+Raison ¦ Neden
+Degré de certitude ¦ Kesinlik derecesi
+Note (ce qui a été cherché, où, quand) ¦ Not (ne arandı, nerede, ne zaman)
+Rouvrir la branche ¦ Kolu yeniden aç
+Elle ne sera plus marquée fermée. ¦ Artık kapalı olarak işaretlenmeyecek.
+Rouvrir cette branche ? ¦ Bu kol yeniden açılsın mı?
+Branche enregistrée comme fermée. ¦ Kol kapalı olarak kaydedildi.
+Chercher… (nom, raison, note) ¦ Ara… (ad, neden, not)
+Aucune branche fermée ne correspond ¦ Eşleşen kapalı kol yok
+Choisis une personne avec le crayon. ¦ Kalemle bir kişi seç.
+Ouvre une fiche : elle apparaîtra ici. ¦ Bir kart aç: burada görünecek.
+Chargement de la lignée… ¦ Soy yükleniyor…
+Générations enregistrées. ¦ Kuşaklar kaydedildi.
+Exception retirée : la fiche suit le réglage de toutes les fiches. ¦ İstisna çıkarıldı: kart tüm kartların ayarını izliyor.
+Espèce (son nom) ¦ Tür (adı)
+Date du baguage ou du marquage ¦ Halkalama veya işaretleme tarihi
+Code gravé ¦ Kazınmış kod
+Couleur du code ¦ Kodun rengi
+Autre couleur ¦ Başka renk
+Date de la pose ou du changement ¦ Takma veya değiştirme tarihi
+Nom de la marque ¦ İşaretin adı
+Un point toutes les ¦ Şu aralıkla bir nokta:
+Où est-elle ¦ Nerede
+Pourquoi retirée ¦ Neden çıkarıldı
+Rôle (facultatif) ¦ Rol (isteğe bağlı)
+Le ¦ Tarih
+Vert jusqu’à ¦ Şu süreye kadar yeşil:
+· Pas revu au bout de ¦ · Şu süreden sonra görülmedi:
+naissance des petits ¦ yavruların doğumu
+naît dans ¦ doğduğu yer:
+🩺＋ Santé ¦ 🩺＋ Sağlık
+L’identité est toujours montrée ¦ Kimlik her zaman gösterilir
+Toujours montré ¦ Her zaman gösterilir
+Style des sections : ¦ Bölümlerin stili:
+Programme ¦ Program
+Profil des marques ¦ İşaret profili
+FUSIONNER UN ARBRE ¦ BİR AĞACI BİRLEŞTİR
+Fusionner l’arbre d’un cousin ¦ Bir kuzenin ağacını birleştir
+Fichier GEDCOM reçu (.ged) ¦ Alınan GEDCOM dosyası (.ged)
+De qui vient cet arbre ? ¦ Bu ağaç kimden geliyor?
+Comparer avec ma base ¦ Veritabanımla karşılaştır
+Mêmes personnes proposées ¦ Önerilen aynı kişiler
+ARBRE REÇU ¦ ALINAN AĞAÇ
+Nouvelle personne : l’ajouter ¦ Yeni kişi: ekle
+Même personne que ¦ Şununla aynı kişi:
+Différences : ¦ Farklar:
+Ignorer ¦ Yok say
+Tout ce qui est affiché : nouvelles personnes ¦ Gösterilen her şey: yeni kişiler
+Tout ce qui est affiché : ignorer ¦ Gösterilen her şey: yok say
+Revenir aux propositions ¦ Önerilere dön
+Rien dans cette catégorie. ¦ Bu kategoride hiçbir şey yok.
+Rien n’a été modifié dans ta base. ¦ Veritabanında hiçbir şey değiştirilmedi.
+Abandonner cette fusion ? ¦ Bu birleştirmeden vazgeçilsin mi?
+Abandonner la fusion ¦ Birleştirmeden vazgeç
+Continuer la fusion ¦ Birleştirmeye devam et
+FUSION TERMINÉE ¦ BİRLEŞTİRME BİTTİ
+L’arbre a été fusionné ¦ Ağaç birleştirildi
+Voir les étiquettes ¦ Etiketleri gör
+Fusionner un autre arbre ¦ Başka bir ağaç birleştir
+Fusion terminée. ¦ Birleştirme bitti.
+Les réglages n’ont pas pu se charger (fichier app-maintenance.js manquant ?). ¦ Ayarlar yüklenemedi (app-maintenance.js dosyası eksik mi?).
+Ordre et listes affichées enregistrés. ¦ Sıra ve gösterilen listeler kaydedildi.
+Cachée : clique pour la montrer ¦ Gizli: göstermek için tıkla
+Affichée : clique pour la cacher ¦ Gösteriliyor: gizlemek için tıkla
+🙈 Cachée ¦ 🙈 Gizli
+👁 Affichée ¦ 👁 Gösteriliyor
+La pièce d’archives se charge… ¦ Arşiv belgesi yükleniyor…
+Le jeu n’a pas pu se charger (fichier app-jeu.js manquant ?). ¦ Oyun yüklenemedi (app-jeu.js dosyası eksik mi?).
+La comparaison n’a pas pu se charger (fichier app-comparaison.js manquant ?). ¦ Karşılaştırma yüklenemedi (app-comparaison.js dosyası eksik mi?).
+Jours complémentaires ¦ Tamamlayıcı günler
+Hors période républicaine officielle ¦ Resmî Cumhuriyet dönemi dışında
+Non disponible dans ce navigateur ¦ Bu tarayıcıda kullanılamıyor
+(année seulement) ¦ (yalnızca yıl)
+après 1752 (nouveau style) ¦ 1752 sonrası (yeni usul)
+après 1567 (année au 1er janvier) ¦ 1567 sonrası (yıl 1 Ocak’ta başlar)
+↗ Réglages → 🗓 Sauvegarde automatique ¦ ↗ Ayarlar → 🗓 Otomatik yedekleme
+Dernière sauvegarde : ¦ Son yedek:
+Dernier essai échoué : ¦ Son başarısız deneme:
+Aucune sauvegarde lancée depuis ce navigateur. ¦ Bu tarayıcıdan başlatılan yedek yok.
+Sauvegarde automatique programmée ¦ Planlanmış otomatik yedekleme
+data/backups ou /chemin/vers/dossier ¦ data/backups veya /klasöre/giden/yol
+Unité ¦ Birim
+Conserver au maximum ¦ En fazla sakla
+Activer la sauvegarde automatique ¦ Otomatik yedeklemeyi aç
+Tester le dossier ¦ Klasörü dene
+Faire une sauvegarde maintenant ¦ Şimdi bir yedek al
+Enregistrer la programmation ¦ Planlamayı kaydet
+Mode confidentialité ¦ Gizlilik modu
+Masque les personnes vivantes dans les exports partageables. L’export SQLite reste volontairement complet : c’est une sauvegarde de travail. ¦ Paylaşılabilir dışa aktarımlarda yaşayan kişileri gizler. SQLite dışa aktarımı bilerek eksiksiz kalır: bu bir çalışma yedeğidir.
+Vide = seuls les vivants sont masqués. ¦ Boş = yalnızca yaşayanlar gizlenir.
+Export des données ¦ Verilerin dışa aktarımı
+Télécharge les données dans les formats disponibles. ¦ Verileri kullanılabilir biçimlerde indirir.
+Choisis le contenu transmis avant de télécharger le fichier d'échange. ¦ Değişim dosyasını indirmeden önce aktarılacak içeriği seç.
+GEDCOM 7.0 (recommandé) ¦ GEDCOM 7.0 (önerilen)
+GEDCOM 5.5.1 (compatibilité ancienne) ¦ GEDCOM 5.5.1 (eski uyumluluk)
+Inclure les personnes vivantes ¦ Yaşayan kişileri dahil et
+Inclure les médias ¦ Medyaları dahil et
+Inclure les notes ¦ Notları dahil et
+Inclure les sources ¦ Kaynakları dahil et
+🩺 Inclure la santé de la famille (privée) ¦ 🩺 Ailenin sağlık bilgilerini dahil et (özel)
+Télécharger le GEDCOM ¦ GEDCOM’u indir
+GEDCOM 5.5.1 est une version ancienne. Préférer GEDCOM 7.0 lorsque le logiciel destinataire le permet. ¦ GEDCOM 5.5.1 eski bir sürüm. Alıcı yazılım izin veriyorsa GEDCOM 7.0’ı tercih et.
+CSV — Global (toutes tables) ¦ CSV — Genel (tüm tablolar)
+Télécharger le CSV global ¦ Genel CSV’yi indir
+CSV — Fichiers séparés par table ¦ CSV — Tablo başına ayrı dosyalar
+Télécharger le JSON ¦ JSON’u indir
+Dump JSON structuré de toutes les tables (personnes, familles, événements, notes, sources, lieux). Idéal pour la sauvegarde ou un re-import dans une autre instance. ¦ Tüm tabloların yapılandırılmış JSON dökümü (kişiler, aileler, olaylar, notlar, kaynaklar, yerler). Yedek almak veya başka bir kuruluma yeniden içe aktarmak için ideal.
+Sauvegarde complète (.zip) ¦ Eksiksiz yedek (.zip)
+La base ¦ Veritabanı
+Télécharger la sauvegarde complète ¦ Eksiksiz yedeği indir
+Protégée par un mot de passe ¦ Parolayla korunuyor
+s’il est perdu, la sauvegarde ne pourra plus être ouverte ¦ kaybolursa yedek bir daha açılamaz
+Mot de passe (8 caractères au moins) ¦ Parola (en az 8 karakter)
+Le retaper ¦ Yeniden yaz
+Télécharger la sauvegarde protégée ¦ Korumalı yedeği indir
+Le fichier de base de données seul, ¦ Yalnızca veritabanı dosyası,
+sans les médias ¦ medya olmadan
+Télécharger le .db ¦ .db dosyasını indir
+Télécharger le rapport HTML ¦ HTML raporunu indir
+Les deux mots de passe ne sont pas identiques. ¦ İki parola aynı değil.
+Préparation de la sauvegarde protégée… (le téléchargement va commencer) ¦ Korumalı yedek hazırlanıyor… (indirme başlayacak)
+Sauvegarde automatique activée. ¦ Otomatik yedekleme açıldı.
+Programmation enregistrée. ¦ Zamanlama kaydedildi.
+Vérification du dossier… ¦ Klasör kontrol ediliyor…
+Aucune sauvegarde dans ce dossier. ¦ Bu klasörde yedek yok.
+Dossier prêt ¦ Klasör hazır
+Dossier non inscriptible ¦ Klasöre yazılamıyor
+Sauvegarde créée. ¦ Yedek oluşturuldu.
+Sauvegarde créée : ¦ Yedek oluşturuldu:
+Nom du module ¦ Modül adı
+Fonds de cartes ¦ Harita altlıkları
+＋ Nouveau module ¦ ＋ Yeni modül
+Ordre et noms du menu principal ¦ Ana menünün sırası ve adları
+Décoche une liste pour la masquer dans la barre latérale. ¦ Kenar çubuğunda gizlemek için bir listenin işaretini kaldır.
+Enregistrer la bibliothèque ¦ Kitaplığı kaydet
+Enregistrer ces blocs ¦ Bu blokları kaydet
+Afficher le bloc ¦ Bloğu göster
+Annuler l'exception ¦ İstisnayı iptal et
+Enregistrer ces filtres ¦ Bu filtreleri kaydet
+Verrouillage des fiches non modifiées ¦ Değiştirilmemiş kartları kilitleme
+=fiche non modifiée ¦ değiştirilmemiş kart|değiştirilmemiş kart
+verrouillée ¦ kilitli
+déverrouillée ¦ kilidi açık
+Verrouiller toutes ¦ Tümünü kilitle
+Déverrouiller toutes ¦ Tümünün kilidini aç
+Déverrouiller ¦ Kilidi aç
+Verrouiller ¦ Kilitle
+Fiches non modifiées ¦ Değiştirilmemiş kartlar
+Numérotation Sosa ¦ Sosa numaralandırması
+=personne numérotée ¦ numaralı kişi|numaralı kişi
+Aucune personne racine définie pour le moment ¦ Şimdilik kök kişi belirlenmedi
+Numérotation d'Aboville ¦ d’Aboville numaralandırması
+Colonne latérale ¦ Yan sütun
+À gauche (défaut) ¦ Solda (varsayılan)
+Police de l’app ¦ Uygulamanın yazı tipi
+Fond de carte géographique ¦ Coğrafi harita altlığı
+— Cartes historiques — ¦ — Tarihî haritalar —
+— France IGN (Géoplateforme) — ¦ — Fransa IGN (Géoplateforme) —
+— États-Unis (USGS) — ¦ — Amerika Birleşik Devletleri (USGS) —
+Détails des recensements ¦ Nüfus sayımı ayrıntıları
+Masqués par défaut ¦ Varsayılan olarak gizli
+Affichés par défaut ¦ Varsayılan olarak görünür
+Ordre des recensements spéciaux ¦ Özel nüfus sayımlarının sırası
+Classiques puis spéciaux ¦ Önce klasikler, sonra özeller
+Tout chronologique ¦ Tümü kronolojik
+Forme des avatars ¦ Avatar biçimi
+Combiné ¦ Birleşik
+Masquer de la fiche ¦ Karttan gizle
+Mort Pour La France (défaut) ¦ Fransa İçin Öldü (varsayılan)
+Couleurs des badges ¦ Rozet renkleri
+† Décès ¦ † Ölüm
+Boutons du haut ¦ Üstteki düğmeler
+En-tête ¦ Üst bilgi
+Sections et blocs ¦ Bölümler ve bloklar
+Ce qu’on y voit ¦ Orada ne görünür
+Numéros et verrou ¦ Numaralar ve kilit
+Numérotation et verrou ¦ Numaralandırma ve kilit
+Le reste ¦ Geri kalanı
+Ordre des cartes ¦ Kartların sırası
+Glisse les blocs pour changer leur ordre. Décoche un bloc pour le masquer. ¦ Sıralarını değiştirmek için blokları sürükle. Gizlemek için bir bloğun işaretini kaldır.
+Ouvre une personne pour lui donner son propre réglage. ¦ Kendi ayarını vermek için bir kişiyi aç.
+Ouvre une personne pour lui donner ses propres sites. ¦ Kendi sitelerini vermek için bir kişiyi aç.
+Les fiches qui ont leurs propres blocs, filtres d’événements ou sites de recherche (au lieu du réglage de toutes les fiches). ¦ Kendi blokları, olay filtreleri veya arama siteleri olan kartlar (tüm kartların ayarı yerine).
+Recherche des fiches… ¦ Kartlar aranıyor…
+Apparence appliquée. ¦ Görünüm uygulandı.
+Défauts du site appliqués. ¦ Sitenin varsayılanları uygulandı.
+Aucun défaut de site enregistré. ¦ Kaydedilmiş site varsayılanı yok.
+cette apparence ¦ bu görünüm
+Couleurs des badges appliquées. ¦ Rozet renkleri uygulandı.
+Couleurs des badges réinitialisées. ¦ Rozet renkleri başlangıçtaki gibi yapıldı.
+Sauf statistiques. Décocher pour masquer dans la barre latérale. ¦ İstatistikler hariç. Kenar çubuğunda gizlemek için işareti kaldır.
+Uniquement les statistiques. Décocher pour masquer. ¦ Yalnızca istatistikler. Gizlemek için işareti kaldır.
+Ajouter un événement de famille ¦ Aile olayı ekle
+Ajouter un événement ¦ Olay ekle
+Rattachés uniquement à cette personne, dont les portraits. ¦ Yalnızca bu kişiye bağlı olanlar, portreler dahil.
+Ajouter une correspondance ¦ Yazışma ekle
+＋ Ajouter une correspondance ¦ ＋ Yazışma ekle
+Ajouter un témoignage / souvenir ¦ Tanıklık / anı ekle
+Aucun témoignage ou souvenir pour l’instant ¦ Şimdilik tanıklık veya anı yok
+Un enregistrement, ou les souvenirs d’un proche : « 💬 Poser des questions » prépare un questionnaire à lui envoyer. ¦ Bir ses kaydı ya da bir yakının anıları: “💬 Soru sor”, ona göndermek için bir soru listesi hazırlar.
+＋ Ajouter un témoignage ¦ ＋ Tanıklık ekle
+❝ Toutes les citations de la fiche, prêtes à copier, exporter ou imprimer ¦ ❝ Karttaki tüm alıntılar, kopyalamaya, dışa aktarmaya veya yazdırmaya hazır
+Aucune enquête ou battue liée à cette personne. ¦ Bu kişiye bağlı inceleme veya tarama yok.
+Aucune sépulture pour l’instant ¦ Şimdilik mezar yeri yok
+Affiner sur la carte ¦ Haritada netleştir
+Aucune note pour l’instant ¦ Şimdilik not yok
+＋ Ajouter une note ¦ ＋ Not ekle
+＋ Ajouter une source ¦ ＋ Kaynak ekle
+＋ Ajouter un média ¦ ＋ Medya ekle
+Aucun lieu assez précis à afficher sur la carte. ¦ Haritada gösterecek kadar kesin bir yer yok.
+Le pedigree en grand, sur plusieurs générations ¦ Soy kütüğü büyük boyutta, birkaç kuşak boyunca
+Relie l’animal aux fiches de ses maîtres : il apparaîtra sur leur fiche. ¦ Hayvanı sahiplerinin kartlarına bağla: onların kartında görünecek.
+📖 Son histoire et nos souvenirs ¦ 📖 Hikâyesi ve anılarımız
+📏 Poids et taille ¦ 📏 Ağırlık ve boy
+🔖 Identification et origines ¦ 🔖 Kimlik ve köken
+Choisis le père et la mère s’ils ont une fiche (pour le pedigree sur plusieurs générations) ; sinon écris leur nom. ¦ Kartları varsa anneyi ve babayı seç (birkaç kuşaklık soy kütüğü için); yoksa adlarını yaz.
+Relie les fiches de la famille : l’animal apparaîtra sur leur fiche (bloc « Animaux de compagnie »). ¦ Ailenin kartlarını bağla: hayvan onların kartında görünecek (“Evcil hayvanlar” bloğu).
+Tests de santé et ADN ¦ Sağlık ve DNA testleri
+🗒️ Ses notes et ses sources : dans le bloc « Notes » de sa fiche complète. ¦ 🗒️ Notları ve kaynakları: tam kartındaki “Notlar” bloğunda.
+📷 Ses photos et documents (pedigree papier, carnet de santé…) : dans le bloc « Médias » de sa fiche complète. ¦ 📷 Fotoğrafları ve belgeleri (kâğıt soy kütüğü, sağlık karnesi…): tam kartındaki “Medya” bloğunda.
+Un animal a une fiche comme une personne (arbre, événements, photos, sources), avec en plus ses caractéristiques d’animal (espèce, race, puce, pedigree…). ¦ Bir hayvanın da bir kişi gibi kartı vardır (ağaç, olaylar, fotoğraflar, kaynaklar); ayrıca hayvan özellikleri de vardır (tür, ırk, çip, soy kütüğü…).
+🐾 Un animal ¦ 🐾 Bir hayvan
+Blocs à afficher sur la fiche ¦ Kartta gösterilecek bloklar
+aucun profil coché ¦ işaretli profil yok
+Un bloc Œuvres à part ¦ Ayrı bir Eserler bloğu
+précisions sur le lieu, l'adresse… ¦ yer, adres hakkında ayrıntılar…
+＋ Ajouter ou relier un média ¦ ＋ Medya ekle veya bağla
+＋ Ajouter un parrain / une marraine ¦ ＋ Vaftiz babası / vaftiz annesi ekle
+＋ Ajouter un témoin ¦ ＋ Tanık ekle
+Commence un prénom ou un nom à la fin de la phrase pour le compléter. ¦ Tamamlamak için cümlenin sonunda bir ad veya soyadı yazmaya başla.
+＋ Ajouter une marque ▾ ¦ ＋ İşaret ekle ▾
+Chaque fois qu’on le voit : quand, où, ce qu’il faisait, avec qui, par qui, et si la bague a été bien lue. ¦ Her görüldüğünde: ne zaman, nerede, ne yapıyordu, kiminle, kim gördü ve halka doğru okundu mu.
+Plus d’actions sur la fiche ¦ Kartta daha fazla işlem
+Plus d’actions sur la section ¦ Bölümde daha fazla işlem
+Ajouter aux signets ¦ Yer imlerine ekle
+Retirer des signets ¦ Yer imlerinden çıkar
+Ajouter une note ¦ Not ekle
+Ajouter une source ¦ Kaynak ekle
+Ajouter des médias ¦ Medya ekle
+🧬 Les marques proposées suivent l’espèce : {list}. ¦ 🧬 Önerilen işaretler türe göre değişir: {list}.
+On retrouve l’oiseau par les couleurs des bagues et le code. ¦ Kuş, halkalarının renkleri ve koduyla bulunur.
+On retrouve l’animal par son n° (même en partie). ¦ Hayvan, numarasıyla bulunur (bir kısmıyla bile).
+Bague métal ¦ Metal halka
+Bagues de couleur ¦ Renkli halkalar
+Marque d’aile ¦ Kanat etiketi
+Balise GPS ¦ GPS vericisi
+Tatouage ¦ Dövme
+Collier ¦ Tasma
+Médaille ¦ Künye
+Collier GPS ¦ GPS tasması
+Boucle d’oreille ¦ Kulak küpesi
+Transpondeur PIT ¦ PIT transponder
+Marque d’écaille ¦ Kabuk plakası işareti
+Bague d’avant-bras ¦ Ön kol halkası
+Émetteur ¦ Verici
+Photo-identification ¦ Fotoğrafla tanımlama
+Balise satellite (Argos) ¦ Uydu vericisi (Argos)
+Marque de nageoire ¦ Yüzgeç etiketi
+Collier GPS / VHF ¦ GPS / VHF tasması
+Encoche d’oreille ¦ Kulak çentiği
+Autre marque ¦ Başka işaret
+Très large (22px) ¦ Çok geniş (22px)
+Très gros caractères (32px) ¦ Çok büyük harfler (32px)
+Enquêtes en secondaire ¦ İkincil olarak incelemeler
+Les thèmes proposés dans « Preset » : coche ceux à montrer, range-les en glissant ⠿ (ou ↑ ↓). Ceux de l’app ne se suppriment pas : décoche-les pour les cacher. Les tiens (★, rangés dans « ✎ Mes thèmes ») se modifient, se renomment, se dupliquent, s’exportent. ¦ “Preset” içinde önerilen temalar: göstermek istediklerini işaretle, ⠿ ile sürükleyerek (veya ↑ ↓) sırala. Uygulamanın temaları silinemez: gizlemek için işaretlerini kaldır. Seninkiler (★, “✎ Temalarım” içinde) düzenlenebilir, yeniden adlandırılabilir, çoğaltılabilir, dışa aktarılabilir.
+Créer un design à partir de celui-ci ¦ Bundan yeni bir tasarım oluştur
+Enregistrer l’ordre et les designs montrés ¦ Sırayı ve gösterilen tasarımları kaydet
+▸ ouvrir ¦ ▸ aç
+Le fond ¦ Arka plan
+Retirer la photo ¦ Fotoğrafı çıkar
+Sur quelles pages ¦ Hangi sayfalarda
+Voir sur : ¦ Şurada gör:
+une fiche ¦ bir kart
+le tableau de bord ¦ gösterge paneli
+au départ ¦ başlangıçta
+« Réglages » ne peut pas être masqué. Tape un autre nom dans la case pour renommer un onglet (vide = nom d’origine). La petite case à droite : l’émoji devant le nom (vide = aucun ; ⊞ + . pour choisir un émoji). ¦ “Ayarlar” gizlenemez. Bir sekmeyi yeniden adlandırmak için kutuya başka bir ad yaz (boş = asıl ad). Sağdaki küçük kutu: adın önündeki emoji (boş = yok; emoji seçmek için ⊞ + .).
+Émoji devant le nom : tape-en un (ou colle-le), ou vide la case pour n’en mettre aucun ¦ Adın önündeki emoji: bir tane yaz (veya yapıştır) ya da hiç koymamak için kutuyu boşalt
+↺ Remettre les noms comme au départ ¦ ↺ Adları başlangıçtaki gibi yap
+Décédé fond ¦ Ölmüş arka planı
+Décédé texte ¦ Ölmüş metni
+À vérifier fond ¦ Kontrol edilecek arka planı
+À vérifier texte ¦ Kontrol edilecek metni
+Hors gén. fond ¦ Soy ağacı dışı arka planı
+Hors gén. texte ¦ Soy ağacı dışı metni
+Ton ¦ Ton
+Position sur la carte (défaut) ¦ Haritadaki konum (varsayılan)
+Réorganisez les catégories et les fonds. Décochez pour masquer. ¦ Kategorileri ve altlıkları yeniden düzenle. Gizlemek için işareti kaldır.
+Supprimer ce module ¦ Bu modülü sil
+Où ils apparaissent, et leurs couleurs (fond et texte) selon la sorte de message. Gardé sur cet ordinateur ; « Essayer » montre le message tel qu’il sera. ¦ Nerede görünecekleri ve mesajın türüne göre renkleri (arka plan ve metin). Bu bilgisayarda saklanır; “Dene”, mesajı olacağı gibi gösterir.
+Essayer ¦ Dene
+En haut à gauche ¦ Sol üstte
+En haut à droite ¦ Sağ üstte
+En bas à gauche ¦ Sol altta
+En bas à droite ¦ Sağ altta
+Réorganise la bibliothèque de widgets de la colonne de gauche, puis règle les widgets déjà posés sur le tableau de bord. ¦ Soldaki sütunda widget kitaplığını yeniden düzenle, sonra gösterge panelinde zaten duran widget'ları ayarla.
+Glisse les types de widgets pour changer leur ordre dans la colonne du tableau de bord. Décoche pour masquer un type. ¦ Gösterge paneli sütunundaki sıralarını değiştirmek için widget türlerini sürükle. Bir türü gizlemek için işaretini kaldır.
+Règle l’ordre, la largeur et le nombre d’éléments des widgets déjà affichés. ¦ Zaten görünen widget'ların sırasını, genişliğini ve öğe sayısını ayarla.
+Blocs à afficher sur demande ¦ İstendiğinde gösterilen bloklar
+🏆 Concours et récompenses ¦ 🏆 Yarışmalar ve ödüller
+🎓 Diplômes et formation ¦ 🎓 Diplomalar ve eğitim
+Choisis les types d'événements à afficher dans le bloc Événements. Décoche un type pour le masquer. ¦ Olaylar bloğunda gösterilecek olay türlerini seç. Gizlemek için bir türün işaretini kaldır.
+Nombre de générations affichées dans les blocs « Ascendants » et « Descendants » des fiches. Un trait « ┄ suite » signale qu’il y a d’autres générations au-delà. ¦ Kartlardaki “Atalar” ve “Torunlar” bloklarında gösterilen kuşak sayısı. “┄ devamı” çizgisi, ötesinde başka kuşaklar olduğunu gösterir.
+Choisis les sites proposés dans le bloc « Chercher sur internet » (fiches et widget) et leur ordre. Glisse pour réordonner, décoche pour masquer. ¦ “İnternette ara” bloğunda (kartlar ve widget) önerilen siteleri ve sıralarını seç. Yeniden sıralamak için sürükle, gizlemek için işareti kaldır.
+＋ Ajouter ce site ¦ ＋ Bu siteyi ekle
+💾 Réglages enregistrés : l’Apparence ¦ 💾 Kaydedilmiş ayarlar: Görünüm
+💾 Réglages enregistrés : toute l’app ¦ 💾 Kaydedilmiş ayarlar: tüm uygulama
+La colonne de gauche : où, son dessin, les lignes cachées ¦ Soldaki sütun: yeri, görünüşü, gizli satırlar
+La forme des listes (les lignes, la colonne des personnes, les tableaux) ¦ Listelerin biçimi (satırlar, kişiler sütunu, tablolar)
+Les icônes : émojis, traits, pictogrammes ¦ Simgeler: emojiler, çizgiler, piktogramlar
+La densité : l’espace autour des choses ¦ Yoğunluk: şeylerin etrafındaki boşluk
+🧭 Ses déplacements (distances et temps de trajet) ¦ 🧭 Yolculukları (mesafeler ve yol süreleri)
+🖼️ Artiste : œuvres et inventaire ¦ 🖼️ Sanatçı: eserler ve envanter
+Contrôle les adresses enregistrées (fiches en ligne, sources Internet, médias, liens externes utiles…) et signale celles qui ne marchent plus, avant qu’elles ne soient perdues. Quand un site a déplacé une page, la nouvelle adresse est proposée ; quand une page a disparu, une copie sur Internet Archive (archive.org) est cherchée. Rien n’est remplacé sans ton accord. ¦ Kaydedilmiş adresleri (çevrim içi kartlar, internet kaynakları, medya, yararlı dış bağlantılar…) kontrol eder ve kaybolmadan önce artık çalışmayanları bildirir. Bir site bir sayfayı taşıdıysa yeni adres önerilir; bir sayfa kaybolduysa Internet Archive (archive.org) üzerinde bir kopya aranır. Senin onayın olmadan hiçbir şey değiştirilmez.
+Aucun lien à regarder. Lance une vérification pour mettre à jour. ¦ Bakılacak bağlantı yok. Güncellemek için bir kontrol başlat.
+Diviser l’écran en deux (ou le refermer) ¦ Ekranı ikiye böl (veya yeniden kapat)
+Écran divisé : côte à côte ou en haut et en bas ¦ Bölünmüş ekran: yan yana veya üstte ve altta
+Passer d’une moitié de l’écran à l’autre ¦ Ekranın bir yarısından diğerine geç
+Ajouter ou retirer des signets ¦ Yer imi ekle veya çıkar
+Aller à un enfant (une liste s’ouvre s’il y en a plusieurs) ¦ Bir çocuğa git (birden fazlaysa bir liste açılır)
+Ajouter un événement à la fiche ¦ Karta olay ekle
+Ajouter un média à la fiche ¦ Karta medya ekle
+Ajouter une source ou une citation ¦ Kaynak veya alıntı ekle
+Créer un rappel lié à la fiche ¦ Karta bağlı bir hatırlatıcı oluştur
+Dans un champ de date : taper « v », « av », « ap » ou « en » propose « vers », « avant », « après », « entre … et » ¦ Bir tarih alanında: “v”, “av”, “ap” veya “en” yazınca “vers”, “avant”, “après”, “entre … et” önerilir
+Image et texte côte à côte, ou l’un sous l’autre ¦ Görüntü ve metin yan yana ya da biri diğerinin altında
+La commune choisie passe à « Pas commencé » ¦ Seçilen yerleşim yeri “Başlanmadı” durumuna geçer
+La commune choisie passe à « Pas terminé » ¦ Seçilen yerleşim yeri “Bitmedi” durumuna geçer
+La commune choisie passe à « Terminé » ¦ Seçilen yerleşim yeri “Bitti” durumuna geçer
+Aller à la prochaine commune pas encore terminée ¦ Henüz bitmemiş bir sonraki yerleşim yerine git
+Ouvrir les registres en ligne de la commune choisie ¦ Seçilen yerleşim yerinin çevrim içi kayıt defterlerini aç
+Montage vidéo, son, retouche des photos, mise en page : des raccourcis à toi pour chaque outil (aussi dans Réglages → Montage, retouche, mise en page et son). ¦ Video kurgusu, ses, fotoğraf rötuşu, sayfa düzeni: her araç için sana ait kısayollar (ayrıca Ayarlar → Kurgu, rötuş, sayfa düzeni ve ses içinde).
+Champs spécifiques à l'œuvre (séparés par des virgules) ¦ Esere özgü alanlar (virgülle ayrılmış)
+Émigration ¦ Göç
+📜 Aide à la lecture ¦ 📜 Okuma yardımı
+↗ Ouvrir en grand ¦ ↗ Büyük aç
+mètre ¦ metre
+grégorien ¦ Gregoryen
+Pâques ¦ Paskalya
+Vendémiaire ¦ Vendémiaire
+Brumaire ¦ Brumaire
+Frimaire ¦ Frimaire
+Nivôse ¦ Nivôse
+Pluviôse ¦ Pluviôse
+Ventôse ¦ Ventôse
+Germinal ¦ Germinal
+Floréal ¦ Floréal
+Prairial ¦ Prairial
+Messidor ¦ Messidor
+Thermidor ¦ Thermidor
+Fructidor ¦ Fructidor
