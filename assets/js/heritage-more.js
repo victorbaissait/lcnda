@@ -2174,7 +2174,7 @@
      * on ouvre la FAQ ou une bulle « En savoir plus (FAQ) → ». Chaque question y a un repère tiré de sa question française
      * (faqId) : les liens data-help-faq et UI.openFaq('…') qui citent la question française la retrouvent dans toutes les langues.
      * Une question ou une réponse pas encore traduite reste en français. */
-    const FAQ_I18N_V = 8; // monter avec VERSION de scripts/build-faq-i18n.js
+    const FAQ_I18N_V = 9; // monter avec VERSION de scripts/build-faq-i18n.js
     const faqI18n = () => window.LCNDA_I18N;
     const tt = (s, v) => (faqI18n() ? faqI18n().t(s, v) : s);
     const faqLang = () => faqI18n()?.lang || 'fr';
@@ -2232,6 +2232,7 @@
         lt: 'ir ar arba bet kad kaip kas koks kokia kuris kuri kur kada kodel as tu jis ji mes jus jie mano tavo savo man tau mane tave tai sis si tas ta yra buvo bus buti nera ne taip jei su be is i ant per uz apie galiu gali noriu reikia daryti darau padaryti budas programa app lcnda dalykas genealogija baze',
         lv: 'un vai bet ka kas kurs kura kur kad kapec es tu vins vina mes jus vini mans mana tavs tava savs mani tevi man tev tas ta sis si ir bija bus but nav ne ja ar bez no uz pie par pec var varu gribu vajag darit daru veids lietotne app lcnda programma lieta genealogija datubaze',
         et: 'ja ning voi aga et kui kuidas mis milline kes miks millal kus mina ma sina sa tema ta meie me teie te nemad nad minu mu sinu su oma mind sind mulle sulle see too need on oli olla ei jah kas ka veel ainult koos ilma saan saad saab tahan tahaksin pean peab teha teen viis rakendus app lcnda programm asi genealoogia sugupuu andmebaas',
+        is: 'og eda en ad i a um fra til med an fyrir vid af er eru var voru vera verdur hef hefur hafa get getur geta gat hvernig hvad hver hvada hvers vegna hvenaer hvar eg mig mer min mitt minn thu thig ther thin thitt thinn hann hun thad their thaer thau thetta thessi sem ekki nei ja ef tha lika bara vil vill langar thar tharf thurfa gera geri gert leid app lcnda forrit hlutur aettfraedi aettartre gagnagrunnur',
     }).map(([k, v]) => [k, new Set(v.split(' '))]));
     const FAQ_SYN = {photo: 'image media scan document', image: 'photo media', media: 'photo image document', scan: 'photo document numeriser', pdf: 'imprimer livre exporter', imprimer: 'pdf livre', livre: 'livret pdf imprimer',
         supprimer: 'effacer enlever retirer', effacer: 'supprimer', ancetre: 'sosa lignee aieul', sosa: 'ancetre lignee cujus', cujus: 'sosa depart', arbre: 'genealogie diagramme ascendant', carte: 'lieu plan',
@@ -2263,12 +2264,13 @@
         lt: {nuotrauka: 'foto vaizdas medija skenavimas', foto: 'nuotrauka vaizdas', vaizdas: 'nuotrauka foto', pdf: 'spausdinti knyga eksportas', spausdinti: 'pdf knyga', knyga: 'pdf spausdinti', istrinti: 'pasalinti', pasalinti: 'istrinti', atsargine: 'kopija issaugoti backup', protevis: 'sosa', medis: 'giminmedis diagrama', giminmedis: 'medis', zemelapis: 'vieta', diagrama: 'statistika grafikas', importas: 'gedcom heredis gramps ancestry myheritage', eksportas: 'pdf csv', klaida: 'patikra', garsas: 'audio irasas', vestuves: 'santuoka', santuoka: 'vestuves', ieskoti: 'rasti', rasti: 'ieskoti'},
         lv: {fotografija: 'foto attels mediji skenesana', foto: 'fotografija attels', attels: 'foto fotografija', pdf: 'drukat gramata eksports', drukat: 'pdf gramata', gramata: 'pdf drukat', dzest: 'nonemt', nonemt: 'dzest', rezerves: 'kopija saglabat backup', sencis: 'sosa', koks: 'dzimtas diagramma', dzimtas: 'koks', karte: 'vieta', diagramma: 'statistika grafiks', imports: 'gedcom heredis gramps ancestry myheritage', eksports: 'pdf csv', kluda: 'parbaude', skana: 'audio ieraksts', kazas: 'laulibas', laulibas: 'kazas', meklet: 'atrast', atrast: 'meklet'},
         et: {foto: 'fotograafia pilt meedia skannimine', fotograafia: 'foto pilt', pilt: 'foto fotograafia', pdf: 'printida raamat eksport', printida: 'pdf raamat', raamat: 'pdf printida', kustuta: 'eemalda', eemalda: 'kustuta', varukoopia: 'koopia salvesta backup', esivanem: 'sosa', sugupuu: 'puu diagramm', puu: 'sugupuu', kaart: 'koht', diagramm: 'statistika graafik', import: 'gedcom heredis gramps ancestry myheritage', eksport: 'pdf csv', viga: 'kontroll', heli: 'audio salvestis', pulm: 'abielu', abielu: 'pulm', otsi: 'leia', leia: 'otsi'},
+        is: {mynd: 'ljosmynd midill skonnun', ljosmynd: 'mynd', pdf: 'prenta bok utflutningur', prenta: 'pdf bok', bok: 'pdf prenta', eyda: 'fjarlaegja', fjarlaegja: 'eyda', afrit: 'oryggisafrit vista backup', forfadir: 'sosa', aettartre: 'tre skyringarmynd', tre: 'aettartre', kort: 'stadur', graf: 'tolfraedi skyringarmynd', innflutningur: 'gedcom heredis gramps ancestry myheritage', utflutningur: 'pdf csv', villa: 'athugun', hljod: 'audio upptaka', brudkaup: 'hjonaband', hjonaband: 'brudkaup', leita: 'finna', finna: 'leita'},
     };
     // les synonymes vont dans les deux sens, et se retrouvent aussi au pluriel ou sous une autre forme du mot
     const faqBoth = map => Object.entries({...map}).forEach(([k, v]) => v.split(' ').forEach(x => { map[x] = [...new Set(`${map[x] || ''} ${k}`.trim().split(' '))].join(' '); }));
     faqBoth(FAQ_SYN); Object.values(FAQ_SYN_L).forEach(faqBoth);
     const faqSyn = (w, L = 'fr') => { const M = L === 'fr' ? FAQ_SYN : (FAQ_SYN_L[L] || {}); return M[w] || M[w.replace(/s$/, '')] || M[w.replace(/(es|s|x)$/, 'e')] || M[w.replace(/er$/, 'e')] || ''; };
-    const faqFold = t => String(t || '').toLowerCase().replace(/ł/g, 'l').replace(/ß/g, 'ss').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/đ/g, 'd').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
+    const faqFold = t => String(t || '').toLowerCase().replace(/ł/g, 'l').replace(/ß/g, 'ss').replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/đ/g, 'd').replace(/ð/g, 'd').replace(/þ/g, 'th').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
     const FAQ_STEM = {
         fr: w => (w.length > 4 ? w.replace(/(ements|ement|ations|ation|ees|es|s|x|e)$/, '') : w.replace(/s$/, '')),
         en: w => (w.length > 4 ? w.replace(/(ings|ing|ed|es|s)$/, '') : w.replace(/s$/, '')),
@@ -2291,6 +2293,7 @@
         lt: w => (w.length > 4 ? w.replace(/(iuose|uose|ams|oms|ems|ims|ais|iai|ios|iu|uo|us|as|is|ys|es|os|ai|a|e|i|o|u)$/, '') : w),
         lv: w => (w.length > 4 ? w.replace(/(iem|os|us|as|es|is|am|em|im|um|ai|ei|a|e|i|u|s)$/, '') : w),
         et: w => (w.length > 4 ? w.replace(/(dega|tega|desse|tesse|dele|tele|dest|test|sse|ssa|ust|lle|lla|lt|le|st|ga|ks|de|te|id|d|t)$/, '') : w),
+        is: w => (w.length > 4 ? w.replace(/(unum|inum|anna|inni|inna|ingu|num|ana|ins|ann|nar|um|ar|ir|ur|an|in|id|na|a|i|s|u)$/, '') : w),
     };
     const faqStem = (w, L = 'fr') => (FAQ_STEM[L] || FAQ_STEM.fr)(w);
     // un mot composé (« faire-part ») reste entier dans la question ; dans les textes, il compte entier et en morceaux

@@ -1,0 +1,48 @@
+fr ¦ is
+# ═════ zone « montage » : islandais (is) ═════
+Boutons des pistes : petits ¦ Hnappar rása: litlir
+Boutons des pistes : grands ¦ Hnappar rása: stórir
+Les boutons des pistes ont déjà cette taille. ¦ Hnappar rásanna eru þegar af þessari stærð.
+Petits ¦ Litlir
+Moyens (départ) ¦ Miðlungs (sjálfgefið)
+Grands ¦ Stórir
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Færa þennan hluta: dragðu handfangið, eða Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Hlutar hægri spjaldsins: ↺ Upphafsstilla
+Sections du panneau de droite remises comme au départ ¦ Hlutar hægri spjaldsins upphafsstilltir
+Les sections du panneau de droite sont déjà comme au départ. ¦ Hlutar hægri spjaldsins eru þegar eins og í upphafi.
+Taille et place ¦ Stærð og staðsetning
+Durée, taille et place ¦ Lengd, stærð og staðsetning
+Couleurs de cette vidéo ¦ Litir þessa myndskeiðs
+Rotation et fondus ¦ Snúningur og deyfingar
+Volume et effets ¦ Hljóðstyrkur og áhrif
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Litir og gamla-filmu-áhrif þessa búts verða eins og í upphafi
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Litir og gamla-filmu-áhrif allrar myndarinnar verða eins og í upphafi
+Couleurs remises comme au départ ¦ Litir upphafsstilltir
+Le son de tout le film revient comme au départ (volume, effets) ¦ Hljóð allrar myndarinnar verður eins og í upphafi (hljóðstyrkur, áhrif)
+Son du film remis comme au départ ¦ Hljóð myndarinnar upphafsstillt
+Texte remis comme au départ ¦ Texti upphafsstilltur
+Volume dans le temps ¦ Hljóðstyrkur yfir tíma
+Poser des points sur le morceau ¦ Setja punkta á bútinn
+Point à la tête de lecture ¦ Punktur við spilunarhausinn
+Effacer la courbe ¦ Hreinsa ferilinn
+Courbe du volume effacée ¦ Hljóðstyrksferill hreinsaður
+Volume : {n} % ¦ Hljóðstyrkur: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Punktar á ferlinum: {n}. Miðlínan = hljóðstyrkurinn sem stilltur er að ofan; efst, allt að tvöfalt hærra.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Enginn ferill enn: hljóðstyrkurinn helst sá sami frá upphafi til enda (með deyfingum sínum).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Á völdum bút, á tímalínunni: smellur setur punkt, dragðu punkt til að færa hann (ofar: hærra, neðar: lægra), tvísmellur fjarlægir hann.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Smelltu á bútinn á tímalínunni til að setja punkt; dragðu punkt til að færa hann; tvísmelltu til að fjarlægja hann.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Jafnari hljóðstyrkur (veikir kaflar hækka, sterkir lækka)
+Lieu de la réverbération ¦ Rými endurómsins
+Une grande salle ¦ Stór salur
+Une église ¦ Kirkja
+Une cave ¦ Kjallari
+Gauche ↔ droite ¦ Vinstri ↔ hægri
+Police et couleur ¦ Letur og litur
+italique ¦ skáletur
+Contour et ombre ¦ Útlína og skuggi
+autour des lettres ¦ í kringum stafina
+Force de l’ombre ¦ Styrkur skuggans
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Kveiktu á „skugga“ (Letur og litur) til að stilla skuggann.
+Bandeau derrière le texte ¦ Borði á bak við textann
+Opacité du bandeau ¦ Ógegnsæi borðans
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Kveiktu á „borða“ (Letur og litur): litaður bakgrunnur á bak við textann, meira eða minna gegnsær, með beinum eða ávölum hornum.

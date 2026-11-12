@@ -927,6 +927,96 @@ et *Märkmed*.
 | FAQ | DUK | BUJ | KKK |
 | Traduction faite par une IA | Išvertė DI | Tulkojis MI | Tõlkinud tehisintellekt |
 
+## Langue ajoutée ensuite : islandais (is)
+
+Fichiers à part : `assets/i18n/src/nord7/<zone>.tsv` (1re ligne `fr ¦ is`, même clé que `<zone>.tsv`).
+On traduit **depuis le français** (`node scripts/i18n-todo.js is <zone>` montre l’anglais et l’allemand, plus le norvégien
+bokmål puis le danois, langues nordiques proches, en aide).
+Ton : on tutoie (*þú*), phrases courtes et simples : impératif 2e personne du singulier (« Veldu », « Smelltu », « Dragðu »,
+« Reyndu aftur », « Athugaðu stafsetninguna ») ; boutons et entrées de menu à l’infinitif sans « að » (« Vista », « Eyða »,
+« Bæta við », « Loka »). Guillemets „…“. Lettres propres à l’islandais (á, ð, é, í, ó, ú, ý, þ, æ, ö) : toujours écrites ;
+la recherche de la FAQ les ramène à a, d, e, i, o, u, y, th, ae, o.
+**Pluriels — ordre des formes dans les `.tsv`** : `one|other` (`FORMS.def` dans `scripts/i18n-build.js`) :
+`einstaklingur|einstaklingar` → « 1 einstaklingur », « 21 einstaklingur », « 31 einstaklingur », « 101 einstaklingur »,
+« 0 einstaklingar », « 2 einstaklingar », « 11 einstaklingar », « 111 einstaklingar ». La forme « un » sert pour tout nombre qui
+finit par 1, sauf 11 (et 111, 211…). Un nombre à virgule suit Intl (« 1,5 » → la forme « autres »).
+Un nombre dans une phrase sans pluriel (« {n} éléments ») s’écrit plutôt « Atriði: {n} » pour ne pas casser l’accord.
+Années : « árið 1582 » ; siècles : « 18. öld ». Les exemples de dates d’actes restent en français, lisibles par la lecture C4
+(« 12/03/1790 », « 12 mars 1790 », « 9 novembre 1799 »), jamais un mois islandais. Les mots des actes cités (« à l’heure de
+vêpres », « né », « décédée »…) restent en français, avec l’explication autour.
+« Fiche » d’une personne : *spjald* (aussi pour l’affichage « Liste | Fiches » : *Listi | Spjöld*) ; l’onglet du menu : *flipi* ;
+« 📒 Fiches » (notes de sujets) : *📒 Minnisblöð*. « Personne » : *einstaklingur* (« Personnes » : *Einstaklingar*).
+
+| Français | Íslenska |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | spjald |
+| 📒 Fiches (sujets) | 📒 Minnisblöð |
+| généalogie (la base de la personne) | ættfræði (ættfræðin þín) |
+| base (de données) | gagnagrunnur |
+| acte | skjal (kirkjubókarfærsla) |
+| baptême / naissance | skírn / fæðing |
+| mariage | hjónaband (hjónavígsla, brúðkaup) |
+| décès | andlát |
+| parrain / marraine | guðfaðir / guðmóðir |
+| témoin / déclarant | vottur / tilkynnandi |
+| ascendants / descendants | forfeður / afkomendur |
+| branche | grein |
+| génération | kynslóð |
+| implexe | forfeðrahrun |
+| recensement | manntal |
+| inventaire après décès | dánarbúsuppskrift |
+| dépouillement | skráning |
+| cote (d’archive) | safnmark |
+| mur de brique | blindgata |
+| cousinade | ættarmót |
+| commune / ville / village | sveitarfélag / borg / þorp |
+| paroisse | sókn |
+| catalogue raisonné | heildarskrá verka |
+| Tableau de bord | Stjórnborð |
+| widget | græja |
+| Personnes | Einstaklingar |
+| Graphiques / Diagrammes | Gröf / Skýringarmyndir |
+| Carte | Kort |
+| Listes | Listar |
+| Chronologie | Tímalína |
+| Recherche | Rannsóknir |
+| Enquêtes | Athuganir |
+| Trésors | Fjársjóðir |
+| Réglages | Stillingar |
+| Apparence | Útlit |
+| Médias | Miðlar |
+| Source | Heimild |
+| Étiquette | Merki |
+| Battue | Leit |
+| Mode simple | Einfaldur hamur |
+| Mode consultation | Skoðunarhamur |
+| Sauvegarde | Afrit |
+| Enregistrer / ✓ Enregistré | Vista / ✓ Vistað |
+| Annuler (bouton) | Hætta við |
+| ↶ Annuler / ↷ Rétablir | ↶ Afturkalla / ↷ Endurgera |
+| Fermer | Loka |
+| Supprimer | Eyða |
+| Retirer (détacher) | Fjarlægja |
+| Modifier | Breyta |
+| Créer / Ajouter | Búa til / Bæta við |
+| Relier | Tengja |
+| ↺ Remettre comme au départ | ↺ Upphafsstilla |
+| Réessayer | Reyna aftur |
+| ⤒ Importer / ⤓ Exporter | ⤒ Flytja inn / ⤓ Flytja út |
+| 🖨 Imprimer | 🖨 Prenta |
+| Chercher / Filtrer ▾ / Trier : | Leita / Sía ▾ / Raða: |
+| ✓ Compris : | ✓ Skilið: |
+| Aimanter | Grípa |
+| Liste \| Fiches (affichage) | Listi \| Spjöld |
+| onglet | flipi |
+| Tableur / Traitement de texte | Töflureiknir / Ritvinnsla |
+| Mise en page | Umbrot |
+| ordinateur | tölva |
+| app | app (appið) |
+| FAQ | FAQ (Algengar spurningar) |
+| Traduction faite par une IA | Þýtt af gervigreind |
+
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 
 | Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |

@@ -1,0 +1,134 @@
+fr ¦ is
+# ═════ zone « reste5 » : islandais (is) ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Línur, skuggar og horn á spjöldum einstaklinga og dýra: blokkir, hnappar, reitir. Restin af appinu breytist ekki; litirnir og letrið eru áfram þau sem eru í Útliti.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Bilið í og á milli blokka, hæð línanna í listum, spássía hnappanna.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Litlu myndirnar á hnöppum, tækjastikum og fyrirsögnum.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Efsti hluti spjaldsins: andlitsmynd, nafn, dagsetningar, merki og hnappar.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Aukahnapparnir (Hætta við, Breyta, ＋ Bæta við…); aðalhnappurinn er alltaf fylltur, í aðallit Útlitsins.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Gluggar sem opnast, valmyndir, skilaboðin neðst til vinstri, hnappar þegar músin fer yfir þá. Forskoðunin endurtekur sig.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Listarnir (Listar, Einstaklingar, Rannsóknir…), dálkur einstaklinganna og töflurnar.
+{label} (nombre) ¦ {label} (fjöldi)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Fyrir lista, töflur og valvalmyndina. Hærra = auðveldara að hitta; lægra = fleiri línur sjást.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Efsti hluti spjaldsins. Línur, skuggar og horn spjaldsins eru stillt rétt fyrir neðan
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Aðeins línur, skuggar og horn spjaldanna (einstaklingar og dýr): restin af appinu breytist ekki. Vinstri dálkurinn hefur sínar eigin (Valmyndir, dálkur og listar → Dálkur)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Bilið í og á milli blokka, hæð línanna í listum, spássía hnappanna. Vinstri dálkur sem er stilltur á „Þéttur“ (flipinn Dálkur) heldur sinni eigin stærð: þetta tvennt leggst ekki saman
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Litlu myndirnar á hnöppum, tækjastikum og fyrirsögnum. Línur og skuggar fylgja
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Línur listanna (Listar, Einstaklingar, Rannsóknir…), dálkur einstaklinganna og töflurnar. Línur og skuggar fylgja
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Aukahnapparnir (Hætta við, Breyta, ＋ Bæta við…). Línur og skuggar fylgja
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Hvernig gluggar, valmyndir og skilaboð birtast. Forskoðunin endurtekur sig
+{group} : {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Ekkert hreyfist: hver skjár heldur útlitinu sem þú þekkir.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 ólík útlit; litirnir þínir fyrir karl / konu og lögun avatarsins gilda ekki um þau.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Eitt útlit alls staðar, í lit kynsins: karl, kona, dýr sjást í sjónhendingu.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Létt í þéttum listum og í valvalmyndinni (það er nú þegar samþykkt fyrirmynd valmyndarinnar).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ „Skjalasafns“-stíll spjaldsins þíns: svartur rammi, svarthvít mynd, eins og áfest passamynd.
+Nouveau nom de l’onglet {tab} ¦ Nýtt heiti flipans {tab}
+Émoji de l’onglet {tab} ¦ Tjákn flipans {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ Einstaklingur nr. 1 (upphafsmanneskjan); faðir hennar hefur nr. 2, móðir hennar nr. 3, og svo framvegis: faðir númers N hefur alltaf 2N, móðirin 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Fyrir afkomendur: einstaklingur nr. 1, börn hans 1.1, 1.2, 1.3…, börn 1.2 eru 1.2.1, 1.2.2… Hver punktur = ein kynslóð í viðbót.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ Þema stillir liti alls appsins: aðallitinn, bakgrunn síðunnar, spjalda, korta og fyrirsagna þeirra, textann og línurnar í kring (lit og þykkt). Búðu til þitt eigið út frá þema sem er til: það bætist við listann „Forstilling“, undir „✎ Þemun mín“.
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Lögun litlu númeruðu ferninganna á blokkunum og upphafsstafanna á spjöldunum. Bættu við þínum eigin formum (formasafn taflnanna, teiknaður marghyrningur, innflutt SVG), raðaðu listanum í valmyndinni „Lögun avatara“, feldu þau sem þú notar ekki.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Stóri ramminn efst á hverju spjaldi: nafnið, merkin (Sosa, Þarf að athuga, Utan ættfræðinnar, Listamaður) og dálkurinn með ferhyrndu hnöppunum. Þú getur falið hann fyrir hreint spjald (myndasýning), raðað hnöppunum, falið þá, sett þá í 2 dálka.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Litlu ferhyrndu hnapparnir efst til hægri, við hliðina á fjölda einstaklinga: skiptur skjár, nýr gluggi, skoðunarhamur, einfaldur hamur, reiknivél, Ættfræðin mín. Taktu hakið af til að fela, dragðu ⠿ til að breyta röðinni.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Hnappar efstu stikunnar, við hliðina á fjölda einstaklinga. Dragðu ⠿ (eða Alt + ↑ / ↓) til að breyta röð þeirra; taktu hakið af hnappi til að fela hann. Neðar: „👤 Nýr einstaklingur“ og flýtileið í hvert breytingaverkfæri (töflureiknir, klipping, myndvinnsla…) og hvern hluta Athugana: hakaðu við þau sem þú vilt hafa efst og veldu hvað smellurinn opnar (lista verkefnanna eða nýtt verkefni). Það er geymt strax.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Blokkum spjalds er raðað í nefnda hluta (Auðkenni, Fjölskylda…). Hér: hvert fyrirsagnir þeirra og valkostir fara; lögunin (línur, horn, skuggar) er stillt neðar, með hausnum („Stíll spjaldanna“).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Dragðu hlutana og blokkirnar til að breyta röð þeirra. Taktu hakið af hluta eða blokk til að fela hann.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Hvernig listarnir sem má raða á þessari síðu eru teiknaðir. Breytir aðeins þessum stillingaskjá (og glugganum „⚙️ Raða hlutunum“ á spjaldi): hvorki spjöldunum né gögnunum.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Blokkum er raðað í nefnda hluta (Auðkenni, Fjölskylda…). Hér: hvernig fyrirsagnir þeirra og valkostir eru teiknaðir. Hver breyting er geymd strax.
+Retenu d’une fiche à l’autre. ¦ Munað frá einu spjaldi til annars.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Engin lína né rammi: bara nafnið, stórt, eins og kafli.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Rammi utan um hlutann, fyrirsögnin í merkimiða á brúninni.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Lítil fyrirsögn í hástöfum á línu. Látlaust, tekur lítið pláss.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ Borði í aðallitnum (þeim úr Útliti), fyrirsögn í hvítu.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ „Nýtt“: hlutar sem borðar, ⠿ og 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Það sem þú gerir með appinu: flipar þess og fyrsti skjár. Engu spjaldi er eytt.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Að breyta notkun breytir <b>aðeins flipunum og fyrsta skjánum</b>. Engu spjaldi er eytt: einstaklingarnir verða áfram, jafnvel þegar flipinn er falinn. Það má kveikja á fleiri en einu: flipar þeirra leggjast saman.
+Personnes, arbre, actes. ¦ Einstaklingar, tré, skjöl.
+« 🌳 Ma généalogie » seule ¦ Aðeins „🌳 Ættfræðin mín“
+Trésors de famille. ¦ Fjölskyldufjársjóðir.
+Catalogue raisonné. ¦ Heildarskrá verka.
+Maisons et lieux. ¦ Hús og staðir.
+L’entreprise, 👥 Membres. ¦ Fyrirtækið, 👥 Félagar.
+Animaux, portées, pedigree. ¦ Dýr, got, ættbók.
+Suivi des animaux. ¦ Eftirfylgni dýra.
+Documents, ✨ Trésors. ¦ Skjöl, ✨ Fjársjóðir.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Flipum er raðað, þeir endurnefndir og faldir einn af öðrum í „Röð og heiti aðalvalmyndarinnar“.
+Au féminin ¦ Í kvenkyni
+Au masculin ¦ Í karlkyni
+Avec un point médian ¦ Með miðpunkti
+Entre parenthèses ¦ Innan sviga
+Sexe « Autre / non binaire » ¦ Kyn „Annað / kynsegin“
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Kyn „Ekki skráð“ (og dýr af óþekktu kyni)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Á spjöldum karla og kvenna beygjast orðin sjálfkrafa (á frönsku: « né le » eða « née le », « décédé » eða « décédée »). Veldu hér hvernig á að skrifa þau á hinum spjöldunum. Hvert val er geymt strax.
+comme on dit « la personne » : « née », « décédée » ¦ eins og í « la personne » (kvenkyn): « née », « décédée »
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ ekkert breytist: « né(e) », nema « Vivante », « Décédée » á spjaldinu
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ hlutlaust orðalag þegar það er til (« Naissance le … », « Décès »), annars « né(e) »
+« né », « décédé » ¦ « né », « décédé » (karlkyn)
+« né(e) », « décédé(e) », partout ¦ « né(e) », « décédé(e) », alls staðar
+« né·e », « décédé·e » ¦ « né·e », « décédé·e » (miðpunktur)
+autre / non binaire ¦ annað / kynsegin
+sexe non renseigné ¦ kyn ekki skráð
+Arbre en filigrane ¦ Tré sem vatnsmerki
+Bleu pâle (comme avant) ¦ Fölblátt (eins og áður)
+Gris neutre ¦ Hlutlaust grátt
+Les traits de mon thème (✎ Mes thèmes) ¦ Línur þemans míns (✎ Þemun mín)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Línur þemans míns: veldu fyrst þitt eigið þema (✎ Þemun mín)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Fölblátt = eins og áður · grátt · aðallitur Útlitsins (fylgir ef þú breytir honum) · sepía · litur línanna í þemanu þínu (✎ Þemun mín) · þinn eigin litur.
+Cahier ligné ¦ Línustrikuð stílabók
+Papier millimétré ¦ Millimetrapappír
+Papier vergé ¦ Rifflaður pappír
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Það sem sést á bak við blokkirnar, á öllum síðum. Bakgrunnurinn helst mjög fölur svo hann trufli aldrei lesturinn; litur pappírsins kemur úr Forstillingunni (eða þemanu þínu).
+Choisir une photo ¦ Velja mynd
+Couleur du motif ¦ Litur mynstursins
+Couleur principale (suit l’Apparence) ¦ Aðallitur (fylgir Útliti)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ Frá „varla sýnilegt“ til „vel greinilegt“. Í upphafi: eins og í dag.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Án haks: einlitur bakgrunnur á þessum síðum. Kortið og ritlarnir á heilum skjá halda alltaf sínum.
+Pas encore de photo : fond uni en attendant. ¦ Engin mynd enn: einlitur bakgrunnur á meðan.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Fölnuð eftir styrknum og gerð óskýr, svo hún sé í bakgrunni án þess að trufla. Hún verður á þessari tölvu (ekki í sjálfgefnum stillingum vefsins: þar er einlitur bakgrunnur).
+bords à peine teintés, vieille photo ¦ varla litaðar brúnir, gömul mynd
+comme aujourd’hui ¦ eins og í dag
+de petites branches, très pâles ¦ litlar greinar, mjög fölar
+du papier vers la couleur ¦ frá pappírnum að litnum
+fin, trait plus fort tous les 5 ¦ fínt, sterkari lína á 5 línu fresti
+fines rayures des vieux papiers ¦ fínar rákir gamals pappírs
+hexagones de la maison de famille ¦ sexhyrningar ættaróðalsins
+lignes et double marge, comme l’état civil ¦ línur og tvöföld spássía, eins og í kirkjubókum
+lignes et marge rouge ¦ línur og rauð spássía
+pâle et floutée derrière ¦ föl og óskýr á bak við
+rien derrière, le plus calme ¦ ekkert á bak við, rólegast
+tissage léger, album de famille ¦ létt vefnaður, fjölskyldualbúm
+une grille de petits points ¦ net af litlum punktum
+va bien avec « Archive papier » ¦ passar vel við „Pappírsskjalasafn“
+Une page de l’app ¦ Síða í appinu
+Ta photo ¦ Myndin þín
+les Réglages ¦ Stillingarnar
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ Í listum þar sem hakað er við það sem birtist (valmyndir, listar, Endurraða, Sérsníða…): lína án haks helst óbreytt, eða gránar aðeins.
+Une ligne affichée ¦ Lína sem birtist
+Une ligne cachée ¦ Falin lína
+Lignes cachées dans les listes à ranger ¦ Faldar línur í listum sem má raða
+Supprimer en rouge ¦ Eyða í rauðu
+Hypothèses à comparer ¦ Tilgátur til að bera saman
+signature ou sceau ¦ undirskrift eða innsigli
+PLAN DU RECENSEMENT ¦ KORT MANNTALSINS
+Fonds de carte du plan des adresses ¦ Grunnkort heimilisfangakortsins
+Plan, photo aérienne, carte hors ligne… ¦ Götukort, loftmynd, kort án nettengingar…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, État-major, kort og myndir frá 1950…
+Carte ancienne (par-dessus) ¦ Gamalt kort (ofan á)
+Aujourd’hui (dessous) ¦ Í dag (undir)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Skráningar (flipinn „Kort“) og spjald þorps: grunnkortin með haki koma fyrst í valmyndunum; það fyrsta með haki er upphafskortið. Öll hin eru áfram í valmyndunum, eftir flokkum.
+naissance manquante ¦ fæðingu vantar
+décès manquant ¦ andlát vantar
+parents manquants ¦ foreldra vantar
+source manquante ¦ heimild vantar
+aucun média ¦ engir miðlar
+1 livre en {y} ¦ 1 livre árið {y}
+1 franc en {y} ¦ 1 franki árið {y}
+1 euro en {y} ¦ 1 evra árið {y}
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> að núvirði
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> af brauði
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} dagsverk daglaunamanns
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} dagsverk daglaunamanns
+🛡 Solidité des liens à côté des parents ¦ 🛡 Áreiðanleiki tengsla við hlið foreldranna
+Seulement Supposé et Réfuté ¦ Aðeins Ágiskað og Hrakið
+Toujours ¦ Alltaf
+Jamais ¦ Aldrei
