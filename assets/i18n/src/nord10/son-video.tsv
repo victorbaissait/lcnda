@@ -1,0 +1,1005 @@
+fr ¦ sq ¦ mt
+(l’original reste gardé : on peut y revenir) ¦ (origjinali ruhet: mund të kthehesh tek ai) ¦ (l-oriġinal jibqa’ miżmum: tista’ terġa’ lura għalih)
+(voix, plus léger) ¦ (zë, më i lehtë) ¦ (vuċi, eħfef)
+1 rush ajouté : glisse-le sur la frise. ¦ 1 klip u shtua: tërhiqe në vijën kohore. ¦ 1 klipp miżjud: kaxkru fuq il-linja tal-ħin.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ 1 klip u shtua: tërhiqe në vijën kohore. Hyn në Media kur ruan projektin. ¦ 1 klipp miżjud: kaxkru fuq il-linja tal-ħin. Jidħol fil-Midja meta tissejvja l-proġett.
+: l’original ne change pas du tout ¦ : origjinali nuk ndryshon fare ¦ : l-oriġinal ma jinbidel xejn
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>Një kopje më vete</b> (një tingull tjetër, i lidhur me të njëjtat kartela) ¦ <b>Kopja għaliha</b> (ħoss ieħor, marbut mal-istess skedi)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>Një kopje më vete</b> (një video tjetër, e lidhur me të njëjtat kartela) ¦ <b>Kopja għaliha</b> (vidjo oħra, marbuta mal-istess skedi)
+Au repère orange ({time}) ¦ Te shenja portokalli ({time}) ¦ Fil-marka oranġjo ({time})
+Boutons des pistes : {n} px ¦ Butonat e pistave: {n} px ¦ Buttuni tat-traċċi: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ Butonat e pistave: {n} px (madhësia fillestare) ¦ Buttuni tat-traċċi: {n} px (daqs tal-bidu)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Ky skedar është një cilësim për {a}, jo për {b}: importoje atje. ¦ Dan il-fajl huwa setting għal {a}, mhux għal {b}: importah f’postu.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ Përmbajtja e tij ({what}) ngjitet në rrënjë. ¦ Dak li fih ({what}) jitla’ fl-għerq.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ Përmbajtja e tij ({what}) ngjitet te «{dir}». ¦ Dak li fih ({what}) jitla’ f’“{dir}”.
+Chapitre {n} ¦ Kapitulli {n} ¦ Kapitlu {n}
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Kliko në vijën kohore: vendosu aty · kliko një element: zgjidhe · tërhiq: zhvendose · {play}: luaj · {split}: preje këtu · {del}: hiqe ¦ Ikklikkja fuq il-linja tal-ħin: poġġi ruħek hemm · ikklikkja fuq element: agħżlu · kaxkar: ċaqalqu · {play}: ħaddem · {split}: aqta’ hawn · {del}: neħħi
+Enregistrement du son… {n} % ¦ Po ruhet tingulli… {n} % ¦ Qed jiġi ssejvjat il-ħoss… {n} %
+Ensemble « {name} » appliqué. ¦ Grupi «{name}» u zbatua. ¦ Is-sett “{name}” ġie applikat.
+Ensemble « {name} » supprimé ¦ Grupi «{name}» u fshi ¦ Is-sett “{name}” tħassar
+Envoi des rushes {k}/{n}… ¦ Po dërgohen klipet {k}/{n}… ¦ Qed jintbagħtu l-klippijiet {k}/{n}…
+Espace ¦ Hapësirë ¦ Spazju
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ Skedari {fmt} u shkarkua ({n} MB). Asgjë nuk ndryshoi në bazë. ¦ Il-fajl {fmt} tniżżel ({n} MB). Xejn ma nbidel fid-database.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ Përdoret {n} herë në vijën kohore: edhe këto pjesë do të hiqen. Skedari mbetet në Media nëse është aty. ¦ Jintuża {n}-il darba fuq il-linja tal-ħin: dawn il-partijiet jitneħħew ukoll. Il-fajl jibqa’ fil-Midja jekk ikun hemm.
+Image clé {time} ¦ Kuadër kyç {time} ¦ Keyframe {time}
+Le fichier importé est maintenant dans les Médias. ¦ Skedari i importuar tani është në Media. ¦ Il-fajl importat issa jinsab fil-Midja.
+Le fichier reste dans les Médias s’il y est. ¦ Skedari mbetet në Media nëse është aty. ¦ Il-fajl jibqa’ fil-Midja jekk ikun hemm.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Montazhi luhet përsëri që të ruhet: kjo zgjat <b>{time}</b> (kohëzgjatja e tij). Lëre dritaren të hapur. ¦ Il-muntaġġ jerġa’ jindaqq biex jiġi ssejvjat: dan jieħu <b>{time}</b> (it-tul tiegħu). Ħalli t-tieqa miftuħa.
+Les boutons des pistes ont déjà leur taille de départ. ¦ Butonat e pistave e kanë tashmë madhësinë fillestare. ¦ Il-buttuni tat-traċċi diġà għandhom id-daqs tal-bidu.
+Les boutons des pistes sont déjà au plus grand. ¦ Butonat e pistave janë tashmë në madhësinë më të madhe. ¦ Il-buttuni tat-traċċi diġà huma fl-akbar daqs.
+Les boutons des pistes sont déjà au plus petit. ¦ Butonat e pistave janë tashmë në madhësinë më të vogël. ¦ Il-buttuni tat-traċċi diġà huma fl-iżgħar daqs.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ {n} skedarët e importuar tani janë në Media. ¦ Il-{n} fajls importati issa jinsabu fil-Midja.
+Mettre « {name} » dans… ¦ Vendos «{name}» në… ¦ Poġġi “{name}” f’…
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Montazhi u krijua: {what}. Rregullo çfarë të duash, pastaj ⤓ Eksporto. ¦ Il-muntaġġ sar: {what}. Irranġa li trid, imbagħad ⤓ Esporta.
+Nom du dossier (dans « {name} ») : ¦ Emri i dosjes (te «{name}»): ¦ Isem il-folder (f’“{name}”):
+Nom du dossier : ¦ Emri i dosjes: ¦ Isem il-folder:
+Nouveau chapitre ¦ Kapitull i ri ¦ Kapitlu ġdid
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Version i ri, <b>pa e shfaqur</b> për momentin ¦ Verżjoni ġdida, <b>mingħajr ma tintwera</b> għalissa
+Nouvelle version, montrée partout ¦ Version i ri, i shfaqur kudo ¦ Verżjoni ġdida, murija kullimkien
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Hap një herë {what}: butonat e tij do të shfaqen këtu. ¦ Iftaħ {what} darba: il-buttuni tiegħu jidhru hawn.
+Où mettre « {name} » ? ¦ Ku ta vendos «{name}»? ¦ Fejn tpoġġi “{name}”?
+Piste « {name} » ajoutée. ¦ Pista «{name}» u shtua. ¦ It-traċċa “{name}” żdiedet.
+Piste « {name} » supprimée ¦ Pista «{name}» u fshi ¦ It-traċċa “{name}” tħassret
+Piste « {name} » supprimée (avec {what}) ¦ Pista «{name}» u fshi (bashkë me {what}) ¦ It-traċċa “{name}” tħassret (flimkien ma’ {what})
+Piste « {name} » vidée ¦ Pista «{name}» u zbraz ¦ It-traċċa “{name}” tbattlet
+Ranger « {name} » dans… ¦ Rendit «{name}» në… ¦ Irranġa “{name}” f’…
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Të zëvendësohen cilësimet aktuale me grupin «{name}»? ¦ Tibdel is-settings attwali bis-sett “{name}”?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Klipi u fshi, bashkë me {n} pjesët e tij në vijën kohore. ¦ Il-klipp tħassar, flimkien mal-{n} partijiet tiegħu fuq il-linja tal-ħin.
+Rush supprimé, avec son passage sur la frise. ¦ Klipi u fshi, bashkë me pjesën e tij në vijën kohore. ¦ Il-klipp tħassar, flimkien mal-parti tiegħu fuq il-linja tal-ħin.
+Rush supprimé. ¦ Klipi u fshi. ¦ Il-klipp tħassar.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ Cilësimi «{name}» u importua: «Zbato» për ta përdorur. ¦ Is-setting “{name}” ġie importat: “Applika” biex tużah.
+Supprimer le dossier « {name} » ? ¦ Të fshihet dosja «{name}»? ¦ Tħassar il-folder “{name}”?
+Supprimer le rush ¦ Fshi klipin ¦ Ħassar il-klipp
+Supprimer « {name} » du projet ? ¦ Të fshihet «{name}» nga projekti? ¦ Tħassar “{name}” mill-proġett?
+Titre de la vidéo ¦ Titulli i videos ¦ Titlu tal-vidjo
+Titre du chapitre qui commence à {time} : ¦ Titulli i kapitullit që fillon në {time}: ¦ Titlu tal-kapitlu li jibda f’{time}:
+Titre du son ¦ Titulli i tingullit ¦ Titlu tal-ħoss
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ Një cilësim quhet tashmë «{name}». Çfarë emri t’i vëmë këtij? ¦ Diġà hemm setting jismu “{name}”. X’isem tagħti lil dan?
+ce rush ¦ ky klip ¦ dan il-klipp
+comme l’original (mono) ¦ si origjinali (mono) ¦ bħall-oriġinal (mono)
+comme l’original (stéréo) ¦ si origjinali (stereo) ¦ bħall-oriġinal (stereo)
+comme l’original ({n} kHz) ¦ si origjinali ({n} kHz) ¦ bħall-oriġinal ({n} kHz)
+la copie est rattachée aux mêmes fiches ¦ kopja lidhet me të njëjtat kartela ¦ il-kopja hija marbuta mal-istess skedi
+la disposition du montage ¦ paraqitja e montazhit ¦ it-tqassim tal-muntaġġ
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ më i lehti për zërin · rreth {n} MB · QuickTime nuk e lexon ¦ l-eħfef għall-vuċi · madwar {n} MB · QuickTime ma jaqrahx
+le plus léger · ~{n} Mo ¦ më i lehti · ~{n} MB ¦ l-eħfef · ~{n} MB
+les boutons de « {name} » ¦ butonat e «{name}» ¦ il-buttuni ta’ “{name}”
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ lexohet absolutisht kudo (telefona, makina, Mac, Windows) · rreth {n} MB në 128 kbit/s ¦ jinqara assolutament kullimkien (telefowns, karozzi, Mac, Windows) · madwar {n} MB b’128 kbit/s
+lu partout · ~{n} Mo ¦ lexohet kudo · ~{n} MB ¦ jinqara kullimkien · ~{n} MB
+l’original est toujours gardé · montrée : {name} ¦ origjinali ruhet gjithmonë · i shfaqur: {name} ¦ l-oriġinal dejjem jinżamm · muri: {name}
+l’outil « {name} » ¦ mjeti «{name}» ¦ l-għodda “{name}”
+nouvelle version, copie (réglages) ¦ version i ri, kopje (cilësime) ¦ verżjoni ġdida, kopja (settings)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ luhet në kohë reale që të ruhet (lëre dritaren të hapur) · madhësia, cilësia, kuadrot në sekondë dhe volumi (📢 {n} LUFS): Cilësimet → Montazh ¦ jindaqq f’ħin reali biex jiġi ssejvjat (ħalli t-tieqa miftuħa) · daqs, kwalità, frejms kull sekonda u volum (📢 {n} LUFS): Issettjar → Muntaġġ
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ luhet në kohë reale që të ruhet (lëre dritaren të hapur) · madhësia, cilësia, kuadrot në sekondë dhe volumi standard: Cilësimet → Montazh ¦ jindaqq f’ħin reali biex jiġi ssejvjat (ħalli t-tieqa miftuħa) · daqs, kwalità, frejms kull sekonda u volum standard: Issettjar → Muntaġġ
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ pa humbje dhe rreth dy herë më i lehtë se WAV · rreth {n} MB · lexohet nga shfletuesit, VLC, Windows; jo nga QuickTime ¦ mingħajr telf u madwar darbtejn eħfef mill-WAV · madwar {n} MB · jinqara mill-browsers, VLC, Windows; mhux minn QuickTime
+sans perte · ~{n} Mo ¦ pa humbje · ~{n} MB ¦ mingħajr telf · ~{n} MB
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ pa humbje, lexohet kudo (Mac, Windows, Audacity) · rreth {n} MB ¦ mingħajr telf, jinqara kullimkien (Mac, Windows, Audacity) · madwar {n} MB
+sans perte, léger · ~{n} Mo ¦ pa humbje, i lehtë · ~{n} MB ¦ mingħajr telf, ħafif · ~{n} MB
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ pa humbje, për GarageBand, Logic, QuickTime · rreth {n} MB · vetëm për shkarkim (aplikacioni nuk e lexon) ¦ mingħajr telf, għal GarageBand, Logic, QuickTime · madwar {n} MB · biex tniżżlu biss (l-app ma taqrahx)
+stéréo ¦ stereo ¦ stereo
+sur chaque temps ¦ në çdo rrahje ¦ fuq kull taħbita
+tourné de {n}° ¦ rrotulluar me {n}° ¦ imdawwar b’{n}°
+tous les {n} temps ¦ çdo {n} rrahje ¦ kull {n} taħbitiet
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: as video, as foto, as tingull. ¦ {file}: la vidjo, la ritratt u lanqas ħoss.
+{n} images/s ¦ {n} kuadro/s ¦ {n} frejms/s
+{n} rushes ajoutés : glisse-les sur la frise. ¦ U shtuan {n} klipe: tërhiqi në vijën kohore. ¦ Żdiedu {n} klippijiet: kaxkarhom fuq il-linja tal-ħin.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ U shtuan {n} klipe: tërhiqi në vijën kohore. Hyjnë në Media kur ruan projektin. ¦ Żdiedu {n} klippijiet: kaxkarhom fuq il-linja tal-ħin. Jidħlu fil-Midja meta tissejvja l-proġett.
+{n} temps repérés · environ {bpm} battements par minute. ¦ U gjetën {n} rrahje · rreth {bpm} rrahje në minutë. ¦ Instabu {n} taħbitiet · madwar {bpm} taħbita kull minuta.
+{n} temps repérés. ¦ U gjetën {n} rrahje. ¦ Instabu {n} taħbitiet.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: zgjidh një, pastaj «Zbato». ¦ {what}: agħżel wieħed imbagħad “Applika”.
+{what} sur la piste « Sous-titres ». ¦ {what} në pistën «Titrat». ¦ {what} fuq it-traċċa “Sottotitli”.
+« {name} » est revenu du Studio son, nettoyé. ¦ «{name}» u kthye nga Studioja e zërit, i pastruar. ¦ “{name}” reġa’ lura mill-Istudjo tal-ħoss, imnaddaf.
+« {name} » rangé dans la racine. ¦ «{name}» u vendos në rrënjë. ¦ “{name}” tqiegħed fl-għerq.
+« {name} » rangé dans « {dir} ». ¦ «{name}» u vendos te «{dir}». ¦ “{name}” tqiegħed f’“{dir}”.
+À la fin ¦ Në fund ¦ Fl-aħħar
+◇ image clé à {time} ¦ ◇ kuadër kyç në {time} ¦ ◇ keyframe f’{time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} në pistën 1 (zhvendosje: {offs}). ¦ 🎥 {what} fit-traċċa 1 (ċaqliq: {offs}).
+💾 Dans les médias… ¦ 💾 Në media… ¦ 💾 Fil-midja…
+📢 Mesure du volume… {n} % ¦ 📢 Po matet volumi… {n} % ¦ 📢 Qed jitkejjel il-volum… {n} %
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Volumi i matur: {a} LUFS → {b} LUFS (majat i mban kufizuesi). ¦ 📢 Volum imkejjel: {a} LUFS → {b} LUFS (il-qċaċet miżmuma mil-limiter).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Volumi i matur: {a} LUFS → {b} LUFS. ¦ 📢 Volum imkejjel: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 Pista «{name}» u kyç: elementet e saj nuk lëvizin më. ¦ 🔒 It-traċċa “{name}” imsakkra: l-elementi tagħha ma jiċċaqilqux aktar.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 Pista «{name}» u shkyç. ¦ 🔓 It-traċċa “{name}” inħallet.
+🕘 Versions ({n})… ¦ 🕘 Versionet ({n})… ¦ 🕘 Verżjonijiet ({n})…
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 U gjetën {n} rrahje (rreth {bpm} në minutë). ¦ 🥁 Instabu {n} taħbitiet (madwar {bpm} kull minuta).
+🥁 {n} temps repérés. ¦ 🥁 U gjetën {n} rrahje. ¦ 🥁 Instabu {n} taħbitiet.
+=rush ¦ klip|klipe ¦ klipp|klippijiet|klippijiet|klipp|klipp
+=plan ajouté ¦ plan i shtuar|plane të shtuara ¦ xena miżjuda|xeni miżjuda|xeni miżjuda|xena miżjuda|xena miżjuda
+=sous-titre importé ¦ titër e importuar|titra të importuara ¦ sottotitlu importat|sottotitli importati|sottotitli importati|sottotitlu importat|sottotitlu importat
+=ensemble importé ¦ grup i importuar|grupe të importuara ¦ sett importat|settijiet importati|settijiet importati|sett importat|sett importat
+=réglage du Studio reste appliqué ¦ cilësim i Studios mbetet i zbatuar|cilësime të Studios mbeten të zbatuara ¦ setting tal-Istudjo jibqa’ applikat|settings tal-Istudjo jibqgħu applikati|settings tal-Istudjo jibqgħu applikati|setting tal-Istudjo jibqgħu applikati|setting tal-Istudjo jibqgħu applikati
+=morceau ¦ pjesë|pjesë ¦ biċċa|biċċiet|biċċiet|biċċa|biċċa
+(rien ne change dans la base) ¦ (asgjë nuk ndryshon në bazë) ¦ (xejn ma jinbidel fid-database)
+(un autre son, rattaché aux mêmes fiches) ¦ (një tingull tjetër, i lidhur me të njëjtat kartela) ¦ (ħoss ieħor, marbut mal-istess skedi)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (një video tjetër, e lidhur me të njëjtat kartela) ¦ (vidjo oħra, marbuta mal-istess skedi)
+300 dossiers au plus. ¦ 300 dosje më së shumti. ¦ 300 folder l-aktar.
+bandes floues plutôt que noires ¦ shirita të turbullt në vend të të zinjve ¦ strixxi mċajpra minflok suwed
+Activer / couper ¦ Aktivizo / ndërprit ¦ Attiva / itfi
+Adaptation spatiale ¦ Përshtatje hapësinore ¦ Adattament spazjali
+Adapter (toute l’image, bandes noires) ¦ Përshtat (gjithë imazhi, shirita të zinj) ¦ Adatta (l-istampa kollha, strixxi suwed)
+Aide sous la frise ¦ Ndihmë poshtë vijës kohore ¦ Għajnuna taħt il-linja tal-ħin
+Aigus ¦ Të lartat ¦ Treble
+Aimant arrêté. ¦ Magneti u ndal. ¦ Il-kalamita twaqqfet.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Magnetizo: kur tërhiqet, një element ngjitet te koka e luajtjes, në fillim ose në fund të të tjerëve, te kapitujt dhe te rrahjet e muzikës (mbaj Alt / Option të shtypur: pa magnet) ¦ Manjetizza: meta tkaxkar, element jeħel mal-playhead, mal-bidu jew mat-tmiem tal-oħrajn, mal-kapitli u mat-taħbitiet tal-mużika (żomm Alt / Option magħfus: mingħajr kalamita)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Magnetizo: një element i tërhequr ngjitet te koka e luajtjes, te elementet e tjera, te kapitujt dhe te rrahjet e muzikës (Alt / Option: pa magnet) ¦ Manjetizza: element imkaxkar jeħel mal-playhead, mal-elementi l-oħra, mal-kapitli u mat-taħbitiet tal-mużika (Alt / Option: mingħajr kalamita)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Shto një kuadër kyç këtu (vlera mund të ndryshojë me kalimin e kohës) ¦ Żid keyframe hawn (il-valur jista’ jinbidel maż-żmien)
+Aller à l'image clé précédente de l'élément choisi ¦ Shko te kuadri kyç i mëparshëm i elementit të zgjedhur ¦ Mur għall-keyframe ta’ qabel tal-element magħżul
+Aller à l'image clé suivante de l'élément choisi ¦ Shko te kuadri kyç i radhës i elementit të zgjedhur ¦ Mur għall-keyframe li jmiss tal-element magħżul
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Emri i projektit (për ta gjetur te 📂 Projektet…) ¦ L-isem tal-proġett (biex issibu f’📂 Proġetti…)
+Le son du morceau passe sur une piste son, à part ¦ Tingulli i pjesës kalon në një pistë zëri më vete ¦ Il-ħoss tal-biċċa jgħaddi fuq traċċa tal-ħoss għaliha
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Tingulli i përfunduar: version i ri (origjinali ruhet), kopje, tingull i ri ose skedar i shkarkuar ¦ Il-ħoss lest: verżjoni ġdida (l-oriġinal jinżamm), kopja, ħoss ġdid jew fajl imniżżel
+Ancien film ¦ Film i vjetër ¦ Film antik
+Ancrage X ¦ Ankorimi X ¦ Ankra X
+Ancrage Y ¦ Ankorimi Y ¦ Ankra Y
+Au début ¦ Në fillim ¦ Fil-bidu
+Aucun projet son pour l’instant ¦ Asnjë projekt zëri për momentin ¦ L-ebda proġett tal-ħoss għalissa
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Nuk u njoh asnjë titër (skedar .srt ose .vtt). ¦ L-ebda sottotitlu ma ntgħaraf (fajl .srt jew .vtt).
+Aucune (taille d’origine) ¦ Asnjë (madhësia origjinale) ¦ Xejn (daqs oriġinali)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ Edhe ⌘ + dhe ⌘ −, ⌘ 0 për t’u kthyer ¦ Ukoll ⌘ + u ⌘ −, ⌘ 0 biex terġa’ lura
+Avancer le morceau dans la piste 1 ¦ Çoje pjesën përpara në pistën 1 ¦ Ressaq il-biċċa ’l quddiem fit-traċċa 1
+← Avancer ¦ ← Përpara ¦ ← ’Il quddiem
+Reculer → ¦ Prapa → ¦ Lura →
+Bord adouci ¦ Buzë e zbutur ¦ Tarf imrattab
+Boutons remis comme au départ. ¦ Butonat u kthyen si në fillim. ¦ Il-buttuni reġgħu tqiegħdu kif kienu.
+Cacher cette piste (ni vue ni entendue) ¦ Fshih këtë pistë (as shihet, as dëgjohet) ¦ Aħbi din it-traċċa (la tidher u lanqas tinstema’)
+Montrée ¦ E shfaqur ¦ Murija
+Cachée ¦ E fshehur ¦ Moħbija
+Ce fichier n’est pas une disposition du montage. ¦ Ky skedar nuk është një paraqitje montazhi. ¦ Dan il-fajl mhuwiex tqassim tal-muntaġġ.
+Ce réglage est vide ou abîmé. ¦ Ky cilësim është bosh ose i dëmtuar. ¦ Dan is-setting huwa vojt jew imħassar.
+Cette piste est déjà vide. ¦ Kjo pistë është tashmë bosh. ¦ Din it-traċċa diġà vojta.
+Chapitres copiés. ¦ Kapitujt u kopjuan. ¦ Il-kapitli ġew ikkupjati.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Kliko në vijën kohore për t’u vendosur, në një element për ta zgjedhur; tërhiq një element për ta zhvendosur në kohë, ose në një pistë tjetër të të njëjtit lloj (videot dhe fotot shkojnë në të gjitha pistat e videos, tekst ↔ tekst, zë ↔ zë). Hapësirë = luaj / pauzë · ⌫ ose Delete = hiq · B = preje këtu · ◇ = kuadër kyç · 🧲 një element i tërhequr ngjitet te të tjerët (Alt / Option: pa magnet) · 🔒 një pistë e kyçur nuk lëviz më. ¦ Ikklikkja fuq il-linja tal-ħin biex tpoġġi ruħek, fuq element biex tagħżlu; kaxkar element biex iċċaqalqu fil-ħin, jew fuq traċċa oħra tal-istess tip (vidjos u ritratti jmorru fuq it-traċċi kollha tal-vidjo, test ↔ test, ħoss ↔ ħoss). Spazju = ħaddem / pawża · ⌫ jew Delete = neħħi · B = aqta’ hawn · ◇ = keyframe · 🧲 element imkaxkar jeħel mal-oħrajn (Alt / Option: mingħajr kalamita) · 🔒 traċċa msakkra ma tiċċaqlaqx aktar.
+Comme la 1re vidéo ¦ Si videoja e parë ¦ Bħall-ewwel vidjo
+Comme la vidéo ¦ Si videoja ¦ Bħall-vidjo
+Composition ¦ Kompozim ¦ Kompożizzjoni
+Copie ce texte : ¦ Kopjo këtë tekst: ¦ Ikkopja dan it-test:
+Couleur du fondu ¦ Ngjyra e zbehjes ¦ Kulur tal-fade
+Couleurs vives ¦ Ngjyra të gjalla ¦ Kuluri ħajjin
+Coupe franche ¦ Prerje e prerë ¦ Qatgħa diretta
+Coupe le morceau choisi à la tête de lecture ¦ Pret pjesën e zgjedhur te koka e luajtjes ¦ Jaqta’ l-biċċa magħżula fil-playhead
+Commence ici ¦ Fillon këtu ¦ Jibda hawn
+Finit ici ¦ Mbaron këtu ¦ Jispiċċa hawn
+Le morceau choisi commence à la tête de lecture ¦ Pjesa e zgjedhur fillon te koka e luajtjes ¦ Il-biċċa magħżula tibda fil-playhead
+Le morceau choisi finit à la tête de lecture ¦ Pjesa e zgjedhur mbaron te koka e luajtjes ¦ Il-biċċa magħżula tispiċċa fil-playhead
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ Te «Ndrysho tingullin», «💾 Ruaj projektin». ¦ F’“Editja l-ħoss”, “💾 Issejvja l-proġett”.
+Monter ce bloc ¦ Ngjite këtë bllok lart ¦ Tella’ dan il-blokk
+Descendre ce bloc ¦ Ule këtë bllok poshtë ¦ Niżżel dan il-blokk
+Monter la piste ¦ Ngjite pistën lart ¦ Tella’ t-traċċa
+Descendre la piste ¦ Ule pistën poshtë ¦ Niżżel it-traċċa
+Distorsion ¦ Shtrembërim ¦ Distorsjoni
+Doux ¦ I butë ¦ Ħafif
+Durée du film : ¦ Kohëzgjatja e filmit: ¦ Tul tal-film:
+Durée illisible ¦ Kohëzgjatje e palexueshme ¦ Tul li ma jinqarax
+Durée par photo ¦ Kohëzgjatja për foto ¦ Tul għal kull ritratt
+Durée à l’écran ¦ Kohëzgjatja në ekran ¦ Tul fuq l-iskrin
+Défiler ¦ Lëviz ¦ Skrollja
+Détacher le son ¦ Shkëput tingullin ¦ Ifred il-ħoss
+🔊 Détacher le son ¦ 🔊 Shkëput tingullin ¦ 🔊 Ifred il-ħoss
+Montrer cette piste ¦ Shfaq këtë pistë ¦ Uri din it-traċċa
+Déverrouiller la piste ¦ Shkyç pistën ¦ Iftaħ is-serratura tat-traċċa
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ Kyç pistën (elementet e saj nuk lëvizin, nuk priten dhe nuk hiqen më) ¦ Sakkar it-traċċa (l-elementi tagħha ma jiċċaqilqux, ma jinqatgħux u ma jitneħħewx aktar)
+ENREGISTRER LE SON ¦ RUAJ TINGULLIN ¦ ISSEJVJA L-ĦOSS
+EXPORTER LA VIDÉO ¦ EKSPORTO VIDEON ¦ ESPORTA L-VIDJO
+Effacer les temps ¦ Fshi rrahjet ¦ Ħassar it-taħbitiet
+Repérer les temps ¦ Gjej rrahjet ¦ Sib it-taħbitiet
+Repérer de nouveau ¦ Gjej përsëri ¦ Erġa’ sib
+Effet Ken Burns ¦ Efekti Ken Burns ¦ Effett Ken Burns
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Efekt filmi i vjetër: kokrrizim, gërvishtje, pluhur, imazh që dridhet, qoshe të errësuara ¦ Effett ta’ film antik: grajn, girfiet, trab, stampa li tteptep, kantunieri mdallma
+En couple ¦ Në çift ¦ Bħala koppja
+Les parents ¦ Prindërit ¦ Il-ġenituri
+Les enfants ¦ Fëmijët ¦ It-tfal
+En incrustation, à la tête de lecture ¦ Si mbivendosje, te koka e luajtjes ¦ Bħala overlay, fil-playhead
+Enlever cette image clé ¦ Hiq këtë kuadër kyç ¦ Neħħi dan il-keyframe
+Enlever l'élément choisi ¦ Hiq elementin e zgjedhur ¦ Neħħi l-element magħżul
+🗑 Enlever ¦ 🗑 Hiq ¦ 🗑 Neħħi
+Enlever la stabilisation ¦ Hiq stabilizimin ¦ Neħħi l-istabilizzazzjoni
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Hiq reflektimin e gjelbër mbi subjektin (flokë, buzë) ¦ Neħħi r-rifless aħdar fuq is-suġġett (xagħar, truf)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Regjistro zërin tënd në mikrofon ndërsa filmi luhet (këshillohen kufje) ¦ Irrekordja leħnek bil-mikrofonu waqt li l-film jimxi (rakkomandati l-headphones)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Ruaj projektin e montazhit, për ta rihapur dhe vazhduar më vonë (⌘S) ¦ Issejvja l-proġett tal-muntaġġ, biex terġa’ tiftħu u tkompli aktar tard (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Ruaj projektin e zërit, për t’u kthyer më vonë (⌘S) ¦ Issejvja l-proġett tal-ħoss, biex terġa’ lura għalih aktar tard (⌘S)
+Entre deux images clés ¦ Mes dy kuadrove kyçe ¦ Bejn żewġ keyframes
+en douceur ¦ butësisht ¦ bil-mod
+régulier ¦ i rregullt ¦ regolari
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Eksporto një skedar (dhe, nëse do, një kopje në media) ¦ Esporta fajl (u, jekk trid, kopja fil-midja)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Krijon skedarin e videos (MP4 ose WebM, disa formate imazhi) dhe e vendos në media: version i ri, kopje ose video e re ¦ Joħloq il-fajl tal-vidjo (MP4 jew WebM, diversi formati tal-istampa) u jpoġġih fil-midja: verżjoni ġdida, kopja jew vidjo ġdida
+Fermer sans enregistrer les modifications ? ¦ Të mbyllet pa ruajtur ndryshimet? ¦ Tagħlaq mingħajr ma tissejvja l-bidliet?
+Fondu au blanc ¦ Zbehje në të bardhë ¦ Fade għall-abjad
+Fondu au noir ¦ Zbehje në të zezë ¦ Fade għall-iswed
+Fondu d’entrée ¦ Zbehje hyrëse ¦ Fade tad-dħul
+Fondu de sortie ¦ Zbehje dalëse ¦ Fade tal-ħruġ
+↗ Fondu d’entrée ¦ ↗ Zbehje hyrëse ¦ ↗ Fade tad-dħul
+↘ Fondu de sortie ¦ ↘ Zbehje dalëse ¦ ↘ Fade tal-ħruġ
+Fondu en couleur (au choix) ¦ Zbehje në ngjyrë (sipas zgjedhjes) ¦ Fade f’kulur (għażla tiegħek)
+Fondu enchaîné ¦ Zbehje e ndërthurur ¦ Crossfade
+Fondu flou ¦ Zbehje e turbullt ¦ Fade imċajpar
+Genre (vidéo, photo, son) ¦ Lloji (video, foto, tingull) ¦ Tip (vidjo, ritratt, ħoss)
+Glisse depuis la droite ¦ Rrëshqet nga e djathta ¦ Tiżżerżaq mil-lemin
+Glisse depuis la gauche ¦ Rrëshqet nga e majta ¦ Tiżżerżaq mix-xellug
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Tërhiq mbi valën për të përzgjedhur · klikim = vendosu · Hapësirë = dëgjo · rrota = lëviz, Ctrl + rrota = zmadhim ¦ Kaxkar fuq il-mewġa biex tagħżel · klikk = poġġi ruħek · Spazju = isma’ · rota = skrollja, Ctrl + rota = zoom
+Glisse-le sur une piste de la frise ¦ Tërhiqe në një pistë të vijës kohore ¦ Kaxkru fuq traċċa tal-linja tal-ħin
+Glissement vers la droite ¦ Rrëshqitje djathtas ¦ Żerżiq lejn il-lemin
+Glissement vers la gauche (la suivante pousse) ¦ Rrëshqitje majtas (e radhës shtyn) ¦ Żerżiq lejn ix-xellug (li jmiss jimbotta)
+Glissement vers le bas ¦ Rrëshqitje poshtë ¦ Żerżiq ’l isfel
+Glissement vers le haut ¦ Rrëshqitje lart ¦ Żerżiq ’il fuq
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Tërhiq për të zgjeruar ose ngushtuar panelin (klikim i dyfishtë: gjerësia fillestare) ¦ Kaxkar biex twessa’ jew iddejjaq il-pannell (klikk doppju: wisa’ tal-bidu)
+Graves ¦ Të ulëtat ¦ Bass
+Tons moyens ¦ Tonet e mesme ¦ Toni medji
+Hauteur des pistes ¦ Lartësia e pistave ¦ Għoli tat-traċċi
+Taille des boutons des pistes ¦ Madhësia e butonave të pistave ¦ Daqs tal-buttuni tat-traċċi
+Image et son ¦ Imazh dhe tingull ¦ Stampa u ħoss
+Images par seconde ¦ Kuadro në sekondë ¦ Frejms kull sekonda
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Importo videot dhe fotot e tua te skeda 🎞️ Klipe, pastaj tërhiqi në vijën kohore (ose «＋ Video / foto në vazhdim»). ¦ Importa l-vidjos u r-ritratti tiegħek fit-tab 🎞️ Klippijiet, imbagħad kaxkarhom fuq il-linja tal-ħin (jew “＋ Vidjo / ritratt wara xulxin”).
+Inclinaison horizontale ¦ Pjerrësi horizontale ¦ Inklinazzjoni orizzontali
+Inclinaison verticale ¦ Pjerrësi vertikale ¦ Inklinazzjoni vertikali
+Indique un nombre, par exemple 6 ou -3. ¦ Shkruaj një numër, për shembull 6 ose -3. ¦ Ikteb numru, pereżempju 6 jew -3.
+＋ Incrustation ¦ ＋ Mbivendosje ¦ ＋ Overlay
+＋ Incruster ¦ ＋ Mbivendos ¦ ＋ Poġġi fuq
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Një video ose një foto në një qoshe të imazhit, te koka e luajtjes ¦ Vidjo jew ritratt f’kantuniera tal-istampa, fil-playhead
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Një video ose një foto, në vazhdim në pistën Video 1 ¦ Vidjo jew ritratt, wara xulxin fit-traċċa Vidjo 1
+＋ Vidéo / photo à la suite ¦ ＋ Video / foto në vazhdim ¦ ＋ Vidjo / ritratt wara xulxin
+Vidéo / photo à la suite ¦ Video / foto në vazhdim ¦ Vidjo / ritratt wara xulxin
+Lecture ¦ Luajtje ¦ Daqq
+Les modifications du montage seront perdues. ¦ Ndryshimet e montazhit do të humbasin. ¦ Il-bidliet fil-muntaġġ jintilfu.
+Les modifications du son seront perdues. ¦ Ndryshimet e tingullit do të humbasin. ¦ Il-bidliet fil-ħoss jintilfu.
+Les photos arrivent… ¦ Fotot po vijnë… ¦ Ir-ritratti qed jaslu…
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Cilësimet zbatohen te përzgjedhja; pa përzgjedhje, te i gjithë tingulli. ¦ Is-settings japplikaw għall-għażla; mingħajr għażla, għall-ħoss kollu.
+Les vidéos, photos et sons du projet ¦ Videot, fotot dhe tingujt e projektit ¦ Il-vidjos, ir-ritratti u l-ħsejjes tal-proġett
+Lettres qui se resserrent ¦ Shkronja që ngushtohen ¦ Ittri li jersqu lejn xulxin
+Lettres qui s’écartent ¦ Shkronja që largohen ¦ Ittri li jitbiegħdu
+Lissage du mouvement ¦ Zbutja e lëvizjes ¦ Twittija tal-moviment
+MODIFIER LE SON ¦ NDRYSHO TINGULLIN ¦ EDITJA L-ĦOSS
+MODÈLE DE MONTAGE ¦ MODEL MONTAZHI ¦ MUDELL TAL-MUNTAĠĠ
+MONTAGE VIDÉO ¦ MONTAZH VIDEO ¦ MUNTAĠĠ TAL-VIDJO
+🎬 MONTAGE VIDÉO ¦ 🎬 MONTAZH VIDEO ¦ 🎬 MUNTAĠĠ TAL-VIDJO
+🎬 MONTAGE ¦ 🎬 MONTAZH ¦ 🎬 MUNTAĠĠ
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Vendos videon me sfond të gjelbër sipër (mbivendosje, gjithë ekrani) dhe dekorin (foto arkivi, video tjetër) poshtë, në pistën 1. ¦ Poġġi l-vidjo bl-isfond aħdar fuq (overlay, l-iskrin kollu), u x-xenarju (ritratt tal-arkivju, vidjo oħra) taħt, fit-traċċa 1.
+Mettre ce dossier dans un autre ¦ Vendose këtë dosje brenda një tjetre ¦ Poġġi dan il-folder ġo ieħor
+Mode de fusion ¦ Mënyra e përzierjes ¦ Modalità tat-taħlit
+Mon son ¦ Tingulli im ¦ Il-ħoss tiegħi
+Mot par mot ¦ Fjalë për fjalë ¦ Kelma kelma
+Musique pendant la voix ¦ Muzikë gjatë zërit ¦ Mużika waqt il-vuċi
+Nom du fichier téléchargé ¦ Emri i skedarit të shkarkuar ¦ Isem il-fajl imniżżel
+Non, nettoyer la sélection ¦ Jo, pastro përzgjedhjen ¦ Le, naddaf l-għażla
+Oui, c’est du bruit seul ¦ Po, është vetëm zhurmë ¦ Iva, hija storbju biss
+Nouveau dossier dans le dossier ouvert ¦ Dosje e re në dosjen e hapur ¦ Folder ġdid fil-folder miftuħ
+Nouveau montage ¦ Montazh i ri ¦ Muntaġġ ġdid
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Tingull i ri u ruajt, i lidhur me të njëjtat kartela. ¦ Ħoss ġdid issejvjat, marbut mal-istess skedi.
+Nouveau ⚡ Son rapide ¦ I ri: ⚡ Tingull i shpejtë ¦ Ġdid: ⚡ Ħoss malajr
+Nouvelle version montrée partout. L’original est gardé. ¦ Version i ri i shfaqur kudo. Origjinali ruhet. ¦ Verżjoni ġdida murija kullimkien. L-oriġinal jinżamm.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Video e re u ruajt, e lidhur me të njëjtat kartela. ¦ Vidjo ġdida ssejvjata, marbuta mal-istess skedi.
+Version enregistrée (l’ancienne reste montrée). ¦ Versioni u ruajt (i vjetri mbetet i shfaqur). ¦ Verżjoni ssejvjata (il-qadima tibqa’ murija).
+Ordre d’arrivée ¦ Rendi i ardhjes ¦ Ordni tal-wasla
+Trier les rushes ¦ Rendit klipet ¦ Issortja l-klippijiet
+Outils du montage ¦ Mjetet e montazhit ¦ Għodod tal-muntaġġ
+Outils du son ¦ Mjetet e tingullit ¦ Għodod tal-ħoss
+Ouverture du son… ¦ Po hapet tingulli… ¦ Qed jinfetaħ il-ħoss…
+Ouvrir ce dossier ¦ Hap këtë dosje ¦ Iftaħ dan il-folder
+Renommer ce dossier ¦ Riemërto këtë dosje ¦ Semmi mill-ġdid dan il-folder
+Renommer ce rush ¦ Riemërto këtë klip ¦ Semmi mill-ġdid dan il-klipp
+Ranger ce rush dans un dossier ¦ Vendose këtë klip në një dosje ¦ Poġġi dan il-klipp f’folder
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Të hapet një projekt tjetër pa e ruajtur këtë tingull? ¦ Tiftaħ proġett ieħor mingħajr ma tissejvja dan il-ħoss?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Të hapet një projekt tjetër pa e ruajtur këtë? ¦ Tiftaħ proġett ieħor mingħajr ma tissejvja dan?
+Panneau des réglages ¦ Paneli i cilësimeve ¦ Pannell tas-settings
+Part vers la droite ¦ Largohet djathtas ¦ Jitlaq lejn il-lemin
+Part vers la gauche ¦ Largohet majtas ¦ Jitlaq lejn ix-xellug
+Pas d’image clé après. ¦ Nuk ka kuadër kyç më pas. ¦ M’hemmx keyframe wara.
+Pas d’image clé avant. ¦ Nuk ka kuadër kyç më parë. ¦ M’hemmx keyframe qabel.
+Passer dans l’autre colonne ¦ Kalo në kolonën tjetër ¦ Mur fil-kolonna l-oħra
+Pistes ¦ Pistat ¦ Traċċi
+Plus chaud ¦ Më i ngrohtë ¦ Iktar sħun
+Plus froid ¦ Më i ftohtë ¦ Iktar kiesaħ
+Projets de montage ¦ Projektet e montazhit ¦ Proġetti tal-muntaġġ
+Projets son ¦ Projektet e zërit ¦ Proġetti tal-ħoss
+Préparation du fichier… ¦ Po përgatitet skedari… ¦ Qed jitħejja l-fajl…
+Qualité MP3 ¦ Cilësia MP3 ¦ Kwalità MP3
+Que fait chaque outil ? ¦ Çfarë bën secili mjet? ¦ X’jagħmel kull għodda?
+Raccourcir les blancs ¦ Shkurto heshtjet ¦ Qassar is-skiet
+⏩ Raccourcir les longs blancs ¦ ⏩ Shkurto heshtjet e gjata ¦ ⏩ Qassar is-skiet twil
+Rebondit puis disparaît ¦ Kërcen, pastaj zhduket ¦ Jaqbeż imbagħad jisparixxi
+Reculer le morceau dans la piste 1 ¦ Çoje pjesën prapa në pistën 1 ¦ Ressaq il-biċċa lura fit-traċċa 1
+Rejoue ce texte depuis son début ¦ Luaj përsëri këtë tekst nga fillimi ¦ Erġa’ ħaddem dan it-test mill-bidu
+Remplir (recadre pour remplir) ¦ Mbush (pret për të mbushur) ¦ Imla (jaqta’ biex jimla)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Bëje transparente ngjyrën e sfondit (sfond i gjelbër ose blu): shihet ajo që është poshtë ¦ Agħmel trasparenti l-kulur tal-isfond (sfond aħdar jew blu): jidher dak li hemm taħt
+Roues de couleur ¦ Rrotat e ngjyrave ¦ Roti tal-kuluri
+Rouvrir un montage enregistré ¦ Rihap një montazh të ruajtur ¦ Erġa’ iftaħ muntaġġ issejvjat
+Rouvrir un son en cours de travail ¦ Rihap një tingull në punë ¦ Erġa’ iftaħ ħoss li qed taħdem fuqu
+Son 1 ¦ Tingull 1 ¦ Ħoss 1
+Son 2 ¦ Tingull 2 ¦ Ħoss 2
+🎵 Son 1 ¦ 🎵 Tingull 1 ¦ 🎵 Ħoss 1
+Vidéo 1 ¦ Video 1 ¦ Vidjo 1
+Vidéo 2 ¦ Video 2 ¦ Vidjo 2
+Textes 1 ¦ Tekste 1 ¦ Testi 1
+🔤 Textes 1 ¦ 🔤 Tekste 1 ¦ 🔤 Testi 1
+Son ajouté (il est sélectionné). ¦ Tingulli u shtua (është i përzgjedhur). ¦ Il-ħoss żdied (huwa magħżul).
+Son illisible ¦ Tingull i palexueshëm ¦ Ħoss li ma jinqarax
+Vidéo illisible ¦ Video e palexueshme ¦ Vidjo li ma tinqarax
+vidéo illisible ¦ video e palexueshme ¦ vidjo li ma tinqarax
+son introuvable ¦ tingulli nuk u gjet ¦ ħoss li ma nstabx
+Sort du flou ¦ Del nga turbullira ¦ Joħroġ miċ-ċpar
+Stabilisation annulée. ¦ Stabilizimi u anulua. ¦ L-istabilizzazzjoni tneħħiet.
+Superposition claire (écran) ¦ Mbivendosje e çelur (ekran) ¦ Superpożizzjoni ċara (screen)
+Supprimer cette piste ¦ Fshi këtë pistë ¦ Ħassar din it-traċċa
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Zbraze këtë pistë (mbetet, është pista bazë e filmit) ¦ Battal din it-traċċa (tibqa’, hija t-traċċa bażi tal-film)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Fshi projektin (videot dhe fotot mbeten në Media) ¦ Ħassar il-proġett (il-vidjos u r-ritratti jibqgħu fil-Midja)
+Sur la frise ¦ Në vijën kohore ¦ Fuq il-linja tal-ħin
+Surgit avec un rebond ¦ Shfaqet me një kërcim ¦ Jitfaċċa b’qabża
+Tombe et rebondit ¦ Bie dhe kërcen ¦ Jaqa’ u jaqbeż
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Shtohet te cilësimet e çdo pjese (skeda 🎯 Element → «🔊 Tingulli i kësaj pjese»). ¦ Jiżdied mas-settings ta’ kull biċċa (tab 🎯 Element → “🔊 Ħoss ta’ din il-biċċa”).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Shtohen te ngjyrat e çdo pjese (skeda Element). ¦ Jiżdiedu mal-kuluri ta’ kull biċċa (tab Element).
+S’efface lettre par lettre ¦ Zhduket shkronjë pas shkronje ¦ Jitħassar ittra ittra
+S’efface mot par mot ¦ Zhduket fjalë pas fjale ¦ Jitħassar kelma kelma
+Température (froid ↔ chaud) ¦ Temperatura (e ftohtë ↔ e ngrohtë) ¦ Temperatura (kiesaħ ↔ sħun)
+Titre / texte ¦ Titull / tekst ¦ Titlu / test
+＋ Titre / texte ¦ ＋ Titull / tekst ¦ ＋ Titlu / test
+Son / musique ¦ Tingull / muzikë ¦ Ħoss / mużika
+Tout reste modifiable ensuite. ¦ Gjithçka mbetet e ndryshueshme më pas. ¦ Kollox jibqa’ jista’ jiġi editjat wara.
+Transformer ¦ Transformo ¦ Ittrasforma
+Transition avant ¦ Kalimi para ¦ Transizzjoni qabel
+Type ¦ Lloji ¦ Tip
+Un chapitre commence à la tête de lecture ¦ Një kapitull fillon te koka e luajtjes ¦ Kapitlu jibda fil-playhead
+Chapitre ici ¦ Kapitull këtu ¦ Kapitlu hawn
+Un chapitre par grande étape ¦ Një kapitull për çdo etapë të madhe ¦ Kapitlu għal kull stadju kbir
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ Një titër prej 3 s te koka e luajtjes, në pistën «Titrat» ¦ Sottotitlu ta’ 3 s fil-playhead, fuq it-traċċa “Sottotitli”
+Sous-titre ici ¦ Titër këtu ¦ Sottotitlu hawn
+Une petite vidéo dans un coin, réglable ¦ Një video e vogël në një qoshe, e rregullueshme ¦ Vidjo żgħira f’kantuniera, li tista’ taġġustaha
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ Një pistë teksti merr tituj («＋ Titull / tekst»). ¦ Traċċa tat-test tirċievi titli (“＋ Titlu / test”).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Video, foto ose tinguj nga kompjuteri (disa njëherësh), të vendosur në dosjen e hapur ¦ Vidjos, ritratti jew ħsejjes mill-kompjuter (diversi f’daqqa), imqiegħda fil-folder miftuħ
+Voix off ¦ Zë jashtë kamerës ¦ Voice-over
+🎙 Voix off ¦ 🎙 Zë jashtë kamerës ¦ 🎙 Voice-over
+⏹ Arrêter la voix off ¦ ⏹ Ndalo zërin jashtë kamerës ¦ ⏹ Waqqaf il-voice-over
+Volet de droite à gauche ¦ Perde nga e djathta në të majtë ¦ Purtiera mil-lemin għax-xellug
+Volet de gauche à droite ¦ Perde nga e majta në të djathtë ¦ Purtiera mix-xellug għal-lemin
+Volet en cercle (iris) ¦ Perde rrethore (iris) ¦ Purtiera f’ċirku (iris)
+Volume général ¦ Volumi i përgjithshëm ¦ Volum ġenerali
+WebM — léger ¦ WebM — i lehtë ¦ WebM — ħafif
+Zoom ¦ Zmadhim ¦ Zoom
+Zoom arrière sur la frise ¦ Zvogëlo vijën kohore ¦ Zoom ’il barra fuq il-linja tal-ħin
+Zoom avant sur la frise ¦ Zmadho vijën kohore ¦ Zoom ’il ġewwa fuq il-linja tal-ħin
+Zoom avant à travers ¦ Zmadhim përmes ¦ Zoom ’il ġewwa minn ġo fih
+Zoom de la frise ¦ Zmadhimi i vijës kohore ¦ Zoom tal-linja tal-ħin
+Zoomer sur la sélection ¦ Zmadho përzgjedhjen ¦ Agħmel zoom fuq l-għażla
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ shirita të turbullt në vend të shiritave të zinj (i njëjti imazh, i turbulluar, prapa) ¦ strixxi mċajpra minflok strixxi suwed (l-istess stampa, imċajpra, warajha)
+centré ¦ në qendër ¦ fiċ-ċentru
+ces boutons ¦ këta butona ¦ dawn il-buttuni
+cette disposition ¦ këtë paraqitje ¦ dan it-tqassim
+commence par un fondu depuis le noir ¦ fillon me një zbehje nga e zeza ¦ jibda b’fade mill-iswed
+finit par un fondu au noir ¦ mbaron me një zbehje në të zezë ¦ jispiċċa b’fade għall-iswed
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ efekti Ken Burns në të gjitha fotot (zmadhim dhe rrëshqitje të ngadalta, të ndryshme) ¦ effett Ken Burns fuq ir-ritratti kollha (zoom u żerżiq bil-mod, varjati)
+la musique baisse toute seule pendant une voix ¦ muzika ulet vetë gjatë një zëri ¦ il-mużika tinżel waħedha waqt vuċi
+… et aussi pendant le son des vidéos de la piste 1 ¦ … dhe gjithashtu gjatë tingullit të videove të pistës 1 ¦ … u wkoll waqt il-ħoss tal-vidjos tat-traċċa 1
+le montage est vide ¦ montazhi është bosh ¦ il-muntaġġ huwa vojt
+l’image tremble un peu, comme dans un vieux projecteur ¦ imazhi dridhet pak, si në një projektor të vjetër ¦ l-istampa titriegħed ftit, bħal fi projettur antik
+sépia (couleurs passées, brunes) ¦ sepia (ngjyra të zbehura, kafe) ¦ sepja (kuluri baħħ, kannella)
+pas de sélection ¦ asnjë përzgjedhje ¦ l-ebda għażla
+plusieurs formats, nouvelle version ¦ disa formate, version i ri ¦ diversi formati, verżjoni ġdida
+sans les blancs, voix plus nette… ¦ pa heshtjet, zë më i qartë… ¦ mingħajr is-skiet, vuċi iktar ċara…
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ «🔖 Kapitull këtu» vendos një kapitull te koka e luajtjes. ¦ “🔖 Kapitlu hawn” ipoġġi kapitlu fil-playhead.
+· tire le point vers une couleur, double-clic pour revenir ¦ · tërhiq pikën drejt një ngjyre, klikim i dyfishtë për t’u kthyer ¦ · iġbed il-punt lejn kulur, klikk doppju biex terġa’ lura
+À la suite dans Vidéo 1 ¦ Në vazhdim te Video 1 ¦ Wara xulxin f’Vidjo 1
+＋ À la suite ¦ ＋ Në vazhdim ¦ ＋ Wara xulxin
+＋ Son seul ¦ ＋ Vetëm tingull ¦ ＋ Ħoss biss
+Échelle (tout) ¦ Shkalla (gjithçka) ¦ Skala (kollox)
+Échelle X ¦ Shkalla X ¦ Skala X
+Échelle Y ¦ Shkalla Y ¦ Skala Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Dëgjo, krahaso, shfaq kudo, riemërto, fshi ¦ Isma’, qabbel, uri kullimkien, semmi mill-ġdid, ħassar
+↻ Refaire l’analyse ¦ ↻ Bëje përsëri analizën ¦ ↻ Erġa’ agħmel l-analiżi
+⌨️ Raccourcis du montage ¦ ⌨️ Shkurtoret e montazhit ¦ ⌨️ Shortcuts tal-muntaġġ
+▣ Dans un coin ¦ ▣ Në një qoshe ¦ ▣ F’kantuniera
+⛶ Tout l’écran ¦ ⛶ Gjithë ekrani ¦ ⛶ L-iskrin kollu
+▶ Lire ¦ ▶ Luaj ¦ ▶ Ħaddem
+▶ Lire / pause ¦ ▶ Luaj / pauzë ¦ ▶ Ħaddem / pawża
+✂️ Modifier un son ouvre ¦ ✂️ Ndrysho një tingull hap ¦ ✂️ Editja ħoss jiftaħ
+⬅️ Glisse vers la gauche ¦ ⬅️ Rrëshqet majtas ¦ ⬅️ Jiżżerżaq lejn ix-xellug
+➡️ Glisse vers la droite ¦ ➡️ Rrëshqet djathtas ¦ ➡️ Jiżżerżaq lejn il-lemin
+⬆️ Monte ¦ ⬆️ Ngjitet ¦ ⬆️ Jitla’
+⬇️ Descend ¦ ⬇️ Zbret ¦ ⬇️ Jinżel
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Importo klipe (video, foto, tinguj)… ¦ ⤒ Importa klippijiet (vidjos, ritratti, ħsejjes)…
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Importo titra (.srt, .vtt)… ¦ ⤒ Importa sottotitli (.srt, .vtt)…
+⬚ Garder seulement la sélection ¦ ⬚ Mbaj vetëm përzgjedhjen ¦ ⬚ Żomm l-għażla biss
+〰️ Enlever le bourdonnement ¦ 〰️ Hiq gumëzhimën ¦ 〰️ Neħħi t-tidwi
+＋ Ajouter un son… ¦ ＋ Shto një tingull… ¦ ＋ Żid ħoss…
+＋ Piste texte ¦ ＋ Pistë teksti ¦ ＋ Traċċa tat-test
+🎙 Musique et voix ¦ 🎙 Muzikë dhe zë ¦ 🎙 Mużika u vuċi
+🎛️ Réglages de l’image ¦ 🎛️ Cilësimet e imazhit ¦ 🎛️ Settings tal-istampa
+🎞️ Film ¦ 🎞️ Film ¦ 🎞️ Film
+🎞️ Rush ¦ 🎞️ Klip ¦ 🎞️ Klipp
+🎞️ Rushes ¦ 🎞️ Klipe ¦ 🎞️ Klippijiet
+🎯 Élément ¦ 🎯 Element ¦ 🎯 Element
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Film i vjetër (kjo pjesë) ¦ 🎞️ Film antik (din il-biċċa)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Film i vjetër (i gjithë filmi) ¦ 🎞️ Film antik (il-film kollu)
+🎧 Mono ¦ 🎧 Mono ¦ 🎧 Mono
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Mono (i njëjti tingull nga të dyja anët) ¦ 🎧 Mono (l-istess ħoss fiż-żewġ naħat)
+🎧 SON ¦ 🎧 TINGULL ¦ 🎧 ĦOSS
+🎨 Couleurs de ce morceau ¦ 🎨 Ngjyrat e kësaj pjese ¦ 🎨 Kuluri ta’ din il-biċċa
+🎨 Couleurs de tout le film ¦ 🎨 Ngjyrat e gjithë filmit ¦ 🎨 Kuluri tal-film kollu
+🎬 Disposition du montage ¦ 🎬 Paraqitja e montazhit ¦ 🎬 Tqassim tal-muntaġġ
+🎯 Vectorscope et histogramme ¦ 🎯 Vektorskop dhe histogram ¦ 🎯 Vectorscope u istogramma
+🎲 Automatique (varié) ¦ 🎲 Automatik (i larmishëm) ¦ 🎲 Awtomatiku (varjat)
+💾 Garder dans les médias… ¦ 💾 Ruaje në media… ¦ 💾 Żommu fil-midja…
+📁＋ Dossier ¦ 📁＋ Dosje ¦ 📁＋ Folder
+📏 Normaliser ¦ 📏 Normalizo ¦ 📏 Normalizza
+📐 Format de l’image ¦ 📐 Formati i imazhit ¦ 📐 Format tal-istampa
+📢 Volume standard (LUFS)… ¦ 📢 Volum standard (LUFS)… ¦ 📢 Volum standard (LUFS)…
+📱 Téléphone 9:16 (vertical) ¦ 📱 Telefon 9:16 (vertikal) ¦ 📱 Mowbajl 9:16 (vertikali)
+📺 Ancien écran 4:3 ¦ 📺 Ekran i vjetër 4:3 ¦ 📺 Skrin antik 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Ekran 16:9 ¦ 🖥️ Skrin 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Portret 4:5 (rrjete sociale) ¦ 🖼️ Portrait 4:5 (netwerks soċjali)
+🖼️ Vidéos incrustées ¦ 🖼️ Video të mbivendosura ¦ 🖼️ Vidjos f’overlay
+🔇 Sans le son ¦ 🔇 Pa tingullin ¦ 🔇 Mingħajr il-ħoss
+🔇 Sans son ¦ 🔇 Pa tingull ¦ 🔇 Mingħajr ħoss
+🔇 Silence ¦ 🔇 Heshtje ¦ 🔇 Skiet
+🔊 Volume… ¦ 🔊 Volumi… ¦ 🔊 Volum…
+🔖 Chapitres ¦ 🔖 Kapitujt ¦ 🔖 Kapitli
+🖼️ Photos ¦ 🖼️ Foto ¦ 🖼️ Ritratti
+🗂 De la base ¦ 🗂 Nga baza ¦ 🗂 Mid-database
+🗣️ Voix plus nette ¦ 🗣️ Zë më i qartë ¦ 🗣️ Vuċi iktar ċara
+🟩 Fond vert (incrustation) ¦ 🟩 Sfond i gjelbër (mbivendosje) ¦ 🟩 Sfond aħdar (overlay)
+🧲 Aimanter ¦ 🧲 Magnetizo ¦ 🧲 Manjetizza
+Aimanter ¦ Magnetizo ¦ Manjetizza
+🧹 Moins de souffle et de grondement ¦ 🧹 Më pak fërfëritje dhe gjëmim ¦ 🧹 Inqas sfiq u ħemħem
+🧹 Réduire le souffle ¦ 🧹 Ul fërfëritjen ¦ 🧹 Naqqas is-sfiq
+🪄 « La vie de… » ¦ 🪄 «Jeta e…» ¦ 🪄 “Il-ħajja ta’…”
+🪄 « Une famille » ¦ 🪄 «Një familje» ¦ 🪄 “Familja”
+{what}, et rangés dans les médias. ¦ {what}, dhe të vendosura në media. ¦ {what}, u mqiegħda fil-midja.
+=fichier téléchargé ¦ skedar i shkarkuar|skedarë të shkarkuar ¦ fajl imniżżel|fajls imniżżla|fajls imniżżla|fajl imniżżel|fajl imniżżel
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Skedari u shkarkua dhe një kopje u vendos në media. ¦ Il-fajl tniżżel, u kopja tqiegħdet fil-midja.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} kHz · zëshmëri {lufs} LUFS · majë {pk} dB ¦ {dur} · {ch} · {khz} kHz · loudness {lufs} LUFS · quċċata {pk} dB
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · majë {pk} dB · zëshmëri <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · quċċata {pk} dB · loudness <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Çdo zonë në një skedar ({n}) ¦ Kull żona f’fajl ({n})
+Chaque piste dans un fichier ({n}) ¦ Çdo pistë në një skedar ({n}) ¦ Kull traċċa f’fajl ({n})
+Comme l’original (stéréo) ¦ Si origjinali (stereo) ¦ Bħall-oriġinal (stereo)
+Comme l’original (mono) ¦ Si origjinali (mono) ¦ Bħall-oriġinal (mono)
+Comme l’original ({n} kHz) ¦ Si origjinali ({n} kHz) ¦ Bħall-oriġinal ({n} kHz)
+Relier « {name} » à une personne… ¦ Lidh «{name}» me një person… ¦ Għaqqad “{name}” ma’ persuna…
+Relier « {name} » à une personne ¦ Lidh «{name}» me një person ¦ Għaqqad “{name}” ma’ persuna
+Relier « {name} » à un événement ¦ Lidh «{name}» me një ngjarje ¦ Għaqqad “{name}” ma’ avveniment
+Relier « {name} » à {what} ¦ Lidh «{name}» me {what} ¦ Għaqqad “{name}” ma’ {what}
+Relier « {name} » ¦ Lidh «{name}» ¦ Għaqqad “{name}”
+Insérer « {name} » ¦ Fut «{name}» ¦ Daħħal “{name}”
+Enregistrement au micro ({time}) ¦ Regjistrim me mikrofon ({time}) ¦ Recording bil-mikrofonu ({time})
+🎛️ Rack d’effets ¦ 🎛️ Rafti i efekteve ¦ 🎛️ Rack tal-effetti
+Rack d’effets ¦ Rafti i efekteve ¦ Rack tal-effetti
+=effet ¦ efekt|efekte ¦ effett|effetti|effetti|effett|effett
+Rallumer ¦ Ndize përsëri ¦ Erġa’ ixgħel
+Éteindre ¦ Fike ¦ Itfi
+Rallumer l’effet ¦ Ndize përsëri efektin ¦ Erġa’ ixgħel l-effett
+Éteindre l’effet ¦ Fike efektin ¦ Itfi l-effett
+Rallumer {what} ¦ Ndiz përsëri {what} ¦ Erġa’ ixgħel {what}
+Éteindre {what} ¦ Fik {what} ¦ Itfi {what}
+Retirer {what} ¦ Hiq {what} ¦ Neħħi {what}
+Effet « {name} » retiré ¦ Efekti «{name}» u hoq ¦ L-effett “{name}” tneħħa
+Réglages « {name} » ¦ Cilësimet e «{name}» ¦ Settings ta’ “{name}”
+Égaliseur : {what} ¦ Barazues: {what} ¦ Ekwalizzatur: {what}
+à plat ¦ i sheshtë ¦ ċatt
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Gjurma: {a} → {b} ({n} s zhurmë e zgjedhur). ¦ Marka: {a} → {b} ({n} s ta’ storbju magħżul).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Gjurma: {a} → {b} ({n} s vetëm zhurmë, e gjetur vetë). ¦ Marka: {a} → {b} ({n} s ta’ storbju biss, misjub waħdu).
+Réverbération : {what} ¦ Jehonë: {what} ¦ Riverberazzjoni: {what}
+{n} Hz (trouvé) ¦ {n} Hz (u gjet) ¦ {n} Hz (misjub)
+Trouver tout seul ¦ Gjeje vetë ¦ Sib waħdu
+Forme du fondu d’entrée ¦ Forma e zbehjes hyrëse ¦ Forma tal-fade tad-dħul
+Forme du fondu de sortie ¦ Forma e zbehjes dalëse ¦ Forma tal-fade tal-ħruġ
+Forme du fondu ¦ Forma e zbehjes ¦ Forma tal-fade
+{what} au pinceau. ¦ {what} me penel. ¦ {what} bil-pinzell.
+=zone réparée ¦ zonë e riparuar|zona të riparuara ¦ żona msewwija|żoni msewwija|żoni msewwija|żona msewwija|żona msewwija
+=réparation au pinceau ¦ riparim me penel|riparime me penel ¦ tiswija bil-pinzell|tiswijiet bil-pinzell|tiswijiet bil-pinzell|tiswija bil-pinzell|tiswija bil-pinzell
+Seulement sur {a} → {b} ¦ Vetëm në {a} → {b} ¦ Biss fuq {a} → {b}
+Renommer « {name} » ¦ Riemërto «{name}» ¦ Semmi mill-ġdid “{name}”
+Écouter « {name} » ¦ Dëgjo «{name}» ¦ Isma’ “{name}”
+Fichier introuvable ¦ Skedari nuk u gjet ¦ Fajl li ma nstabx
+Prise micro du {date} ¦ Regjistrim me mikrofon i {date} ¦ Recording bil-mikrofonu tal-{date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Tërhiq = përzgjidh · <kbd>Hapësirë</kbd> dëgjo · <kbd>⌘</kbd> dhe rrota: zmadhim · <kbd>M</kbd> shënjues · <kbd>A</kbd> e mbajtur: para ¦ Kaxkar = agħżel · <kbd>Spazju</kbd> isma’ · <kbd>⌘</kbd> u rota: zoom · <kbd>M</kbd> marker · <kbd>A</kbd> magħfusa: ta’ qabel
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Tërhiq mbi valën për të përzgjedhur; klikim = vendosu; ⇧ ← → zmadhon përzgjedhjen. ¦ Kaxkar fuq il-mewġa biex tagħżel; klikk = poġġi ruħek; ⇧ ← → ikabbar l-għażla.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Pikturo mbi njollën e spektrit (kollë, zile), pastaj «🩹 Riparo». Madhësia: rrëshqitësi. ¦ Pinġi fuq it-tebgħa tal-ispettru (sogħla, qanpiena), imbagħad “🩹 Saħħaħ”. Daqs: is-slider.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Rrethoje njollën në spektër, pastaj «🩹 Riparo». ¦ Dawwar it-tebgħa fuq l-ispettru, imbagħad “🩹 Saħħaħ”.
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Klikim mbi valë: një shënjues 🚩 në atë vend. ¦ Klikk fuq il-mewġa: marker 🚩 f’dak il-post.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Shumëpistë: kliko një pjesë për ta prerë në dysh. Mbi valë: fshin përzgjedhjen. ¦ Multitraċċa: ikklikkja fuq biċċa biex taqsamha fi tnejn. Fuq il-mewġa: tħassar l-għażla.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Mbaje <kbd>A</kbd> të shtypur për të dëgjuar si ishte më parë, në të njëjtin vend. ¦ Żomm <kbd>A</kbd> magħfusa biex tisma’ kif kien qabel, fl-istess post.
+{name} — {what} (prêt) ¦ {name} — {what} (gati) ¦ {name} — {what} (lest)
+{time} au début ¦ {time} në fillim ¦ {time} fil-bidu
+{time} à la fin ¦ {time} në fund ¦ {time} fl-aħħar
+Les zones hachurées seront coupées ({what}). ¦ Zonat me viza do të priten ({what}). ¦ Iż-żoni mmarkati b’linji jinqatgħu ({what}).
+Glisse les poignées noires pour changer. ¦ Tërhiq dorezat e zeza për të ndryshuar. ¦ Kaxkar il-maqbdiet suwed biex tibdel.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ «mmm»-ja e rrymës (u gjet vetë: {n} Hz) ¦ il-“mmm” tad-dawl (misjub waħdu: {n} Hz)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ «mmm»-ja e rrymës (nuk u gjet: 50 Hz si parazgjedhje) ¦ il-“mmm” tad-dawl (xejn ma nstab: 50 Hz awtomatikament)
+le « mmm » du courant ¦ «mmm»-ja e rrymës ¦ il-“mmm” tad-dawl
+le « chhh » de la cassette ¦ «shhh»-ja e kasetës ¦ il-“xxx” tal-cassette
+plus de {n} s → 0,5 s ¦ më shumë se {n} s → 0,5 s ¦ aktar minn {n} s → 0.5 s
+{name} (nettoyé) ¦ {name} (i pastruar) ¦ {name} (imnaddaf)
+Couper la fin ({time}) ¦ Prit fundin ({time}) ¦ Aqta’ t-tmiem ({time})
+Couper le début ({time}) ¦ Prit fillimin ({time}) ¦ Aqta’ l-bidu ({time})
+Nettoyer « {name} » à la place ? ¦ Të pastrohet «{name}» në vend të tij? ¦ Tnaddaf “{name}” minfloku?
+Ouvrir ce son ¦ Hap këtë tingull ¦ Iftaħ dan il-ħoss
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ U gjet një gumëzhimë e rrymës ({n} Hz): hiqet, bashkë me kërcitjet. Dëgjo ndryshimin. ¦ Instab tidwi tad-dawl ({n} Hz): jitneħħa, flimkien mal-klikks. Isma’ d-differenza.
+son|piste ¦ pistë ¦ traċċa
+baisse|de ¦ me ¦ b’
+retour en ¦ kthim në ¦ lura għal
+Piste de la voix ¦ Pista e zërit ¦ Traċċa tal-vuċi
+Piste qui baisse ¦ Pista që ulet ¦ Traċċa li tinżel
+Baisse en dB ¦ Ulja në dB ¦ Tnaqqis f’dB
+{name} : armée pour le micro ¦ {name}: e armatosur për mikrofonin ¦ {name}: armata għall-mikrofonu
+{name} : désarmée ¦ {name}: e çarmatosur ¦ {name}: diżarmata
+Renommer la piste « {name} » ¦ Riemërto pistën «{name}» ¦ Semmi mill-ġdid it-traċċa “{name}”
+{name} : courbe du panoramique ¦ {name}: kurba e panoramës ¦ {name}: kurva tal-pan
+{name} : courbe du volume ¦ {name}: kurba e volumit ¦ {name}: kurva tal-volum
+Couper « {name} » à {time} ¦ Prit «{name}» në {time} ¦ Aqta’ “{name}” f’{time}
+Déplacer « {name} » ¦ Zhvendos «{name}» ¦ Ċaqlaq “{name}”
+le morceau ¦ pjesa ¦ il-biċċa
+{name} : point ajouté à {time} ¦ {name}: u shtua një pikë në {time} ¦ {name}: punt miżjud f’{time}
+{name} : point retiré ¦ {name}: pika u hoq ¦ {name}: punt imneħħi
+Ajouter « {name} » sur {track} ¦ Shto «{name}» në {track} ¦ Żid “{name}” fuq {track}
+Morceau « {name} » retiré ¦ Pjesa «{name}» u hoq ¦ Il-biċċa “{name}” tneħħiet
+son ¦ tingull ¦ ħoss
+(mélange) ¦ (përzierje) ¦ (taħlita)
+Le son ouvert ici ¦ Tingulli i hapur këtu ¦ Il-ħoss miftuħ hawn
+Le son tel qu’il est (garde la touche A appuyée) ¦ Tingulli siç është (mbaj të shtypur tastin A) ¦ Il-ħoss kif inhu (żomm il-buttuna A magħfusa)
+Appliquer le rack pour de bon ¦ Zbato raftin përfundimisht ¦ Applika r-rack għal dejjem
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Armato fillimisht një pistë me ● (te butonat e saj M S ●). ¦ L-ewwel arma traċċa b’● (fil-buttuni tagħha M S ●).
+Atténuer de ¦ Zbut me ¦ Attenwa b’
+Aucun effet ¦ Asnjë efekt ¦ L-ebda effett
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Asnjë efekt: «＋ Shto një efekt», ose menyja Efektet. ¦ L-ebda effett: “＋ Żid effett”, jew il-menu Effetti.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ Asnjë shënjues apo zonë: përzgjidh një pjesë, pastaj «＋ Zonë e re» (ose M). ¦ L-ebda marker jew żona: agħżel parti, imbagħad “＋ Żona ġdida” (jew M).
+Avant ou après ¦ Para ose pas ¦ Qabel jew wara
+Baisser la musique sous la voix ¦ Ul muzikën nën zërin ¦ Naqqas il-mużika taħt il-vuċi
+Ne plus baisser la musique ¦ Mos e ul më muzikën ¦ Tibqax tnaqqas il-mużika
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ Së shpejti: një motor njohjeje që punon në kompjuter (asgjë nuk dërgohet në internet) ¦ Dalwaqt: magna tar-rikonoxximent li taħdem fil-kompjuter (xejn ma jintbagħat fuq l-Internet)
+Boucle ¦ Cikël ¦ Loop
+Calcul des effets… ¦ Po llogariten efektet… ¦ Qed jinħadmu l-effetti…
+Ce fichier n’est pas un réglage du son. ¦ Ky skedar nuk është një cilësim tingulli. ¦ Dan il-fajl mhuwiex setting tal-ħoss.
+Ce navigateur ne donne pas accès au micro. ¦ Ky shfletues nuk jep qasje në mikrofon. ¦ Dan il-browser ma jagħtix aċċess għall-mikrofonu.
+Ce qui est dit ¦ Çfarë thuhet ¦ Dak li jingħad
+Choisis d’abord une zone. ¦ Zgjidh fillimisht një zonë. ¦ L-ewwel agħżel żona.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Zgjidh një zonë (majtas ose sipër valës), ose krijo një: «＋ Zonë e re». ¦ Agħżel żona (fuq ix-xellug jew fuq il-mewġa), jew oħloq waħda: “＋ Żona ġdida”.
+Clics et craquements ¦ Kërcitje dhe krisje ¦ Klikks u tqarqiċ
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Kliko një hap për t’u kthyer tek ai; hapat e zbehur kthehen me ↷. ¦ Ikklikkja fuq pass biex terġa’ lura għalih; il-passi griżi jerġgħu lura b’↷.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Klikimi mbi një orë të bën të dëgjosh atë pjesë. Eksporti në .txt, .srt, .vtt: ⤓ Eksporto → 📝 Tekst dhe shenja. Teksti mund të kërkohet në bazë. ¦ Klikk fuq ħin iħallik tisma’ dik il-parti. Esportazzjoni f’.txt, .srt, .vtt: ⤓ Esporta → 📝 Test u marki. It-test jista’ jitfittex fid-database.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Kopja e pastruar u shtua te të njëjtat kartela. ¦ Kopja mnaddfa żdiedet mal-istess skedi.
+Copie séparée ajoutée aux mêmes fiches. ¦ Kopja më vete u shtua te të njëjtat kartela. ¦ Kopja separata żdiedet mal-istess skedi.
+Couper le début et la fin ¦ Prit fillimin dhe fundin ¦ Aqta’ l-bidu u t-tmiem
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Prit një pjesë në dysh (shumëpistë); mbi valë: fshi përzgjedhjen ¦ Aqsam biċċa fi tnejn (multitraċċa); fuq il-mewġa: ħassar l-għażla
+Crête ¦ Majë ¦ Quċċata
+Effacer le dessin ¦ Fshi vizatimin ¦ Ħassar it-tpinġija
+× Effacer le dessin ¦ × Fshi vizatimin ¦ × Ħassar it-tpinġija
+Empreinte du bruit ¦ Gjurma e zhurmës ¦ Marka tal-istorbju
+En S ¦ Në formë S ¦ F’forma ta’ S
+Rapide ¦ E shpejtë ¦ Malajr
+Lente ¦ E ngadaltë ¦ Bil-mod
+🏠 Pièce ¦ 🏠 Dhomë ¦ 🏠 Kamra
+⛪ Église ¦ ⛪ Kishë ¦ ⛪ Knisja
+🎭 Salle ¦ 🎭 Sallë ¦ 🎭 Sala
+🧱 Cave ¦ 🧱 Bodrum ¦ 🧱 Kantina
+Enlever le bourdonnement ¦ Hiq gumëzhimën ¦ Neħħi t-tidwi
+Enregistrer au micro ¦ Regjistro me mikrofon ¦ Irrekordja bil-mikrofonu
+● Enregistrer au micro ¦ ● Regjistro me mikrofon ¦ ● Irrekordja bil-mikrofonu
+🎙️ Enregistrer au micro ¦ 🎙️ Regjistro me mikrofon ¦ 🎙️ Irrekordja bil-mikrofonu
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Regjistro me mikrofon (te shenja portokalli; në shumëpistë: në pistën e armatosur ●) ¦ Irrekordja bil-mikrofonu (fil-marka oranġjo; f’multitraċċa: fuq it-traċċa armata ●)
+Enregistrer dans les médias ¦ Ruaj në media ¦ Issejvja fil-midja
+Enregistrer et afficher cette version (l’original est gardé) ¦ Ruaj dhe shfaq këtë version (origjinali ruhet) ¦ Issejvja u uri din il-verżjoni (l-oriġinal jinżamm)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Ruaj projektin e zërit (rafti, zonat, pistat), për t’u kthyer tek ai ¦ Issejvja l-proġett tal-ħoss (rack, żoni, traċċi), biex terġa’ lura għalih
+Enregistrer le projet sous… ¦ Ruaj projektin si… ¦ Issejvja l-proġett bħala…
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Eksporto: MP3, M4A, WAV, FLAC, Ogg, AIFF, tekst dhe shenja ¦ Esporta: MP3, M4A, WAV, FLAC, Ogg, AIFF, test u marki
+Exporter ce passage… ¦ Eksporto këtë pjesë… ¦ Esporta din il-parti…
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Eksporto një skedar (MP3, WAV, FLAC…), dhe nëse do një kopje në media ¦ Esporta fajl (MP3, WAV, FLAC…), u jekk trid kopja fil-midja
+Fichiers ¦ Skedarët ¦ Fajls
+Fort ¦ I fortë ¦ Qawwi
+Moyen ¦ Mesatar ¦ Medju
+Garde ¦ Mbajtja ¦ Żamma
+Garder seulement la sélection ¦ Mbaj vetëm përzgjedhjen ¦ Żomm l-għażla biss
+Gardée dans les versions, le son affiché ne change pas ¦ Ruhet te versionet, tingulli i shfaqur nuk ndryshon ¦ Miżmuma fil-verżjonijiet, il-ħoss muri ma jinbidilx
+Insérer un son… ¦ Fut një tingull… ¦ Daħħal ħoss…
+La fenêtre d’export n’est pas prête. ¦ Dritarja e eksportit nuk është gati. ¦ It-tieqa tal-esportazzjoni mhix lesta.
+L’export n’est pas encore prêt. ¦ Eksporti nuk është ende gati. ¦ L-esportazzjoni għadha mhix lesta.
+La sélection ¦ Përzgjedhja ¦ L-għażla
+Lasso de réparation ¦ Lasoja e riparimit ¦ Lasso tat-tiswija
+Lasso de réparation (sur le spectre) ¦ Lasoja e riparimit (në spektër) ¦ Lasso tat-tiswija (fuq l-ispettru)
+➰ Lasso de réparation ¦ ➰ Lasoja e riparimit ¦ ➰ Lasso tat-tiswija
+Pinceau de réparation ¦ Peneli i riparimit ¦ Pinzell tat-tiswija
+Pinceau de réparation (sur le spectre) ¦ Peneli i riparimit (në spektër) ¦ Pinzell tat-tiswija (fuq l-ispettru)
+🖌 Pinceau de réparation ¦ 🖌 Peneli i riparimit ¦ 🖌 Pinzell tat-tiswija
+Les boutons ¦ Butonat ¦ Il-buttuni
+Les réglages du son seront perdus. ¦ Cilësimet e tingullit do të humbasin. ¦ Is-settings tal-ħoss jintilfu.
+Lire la sélection en boucle ¦ Luaj përzgjedhjen në cikël ¦ Ħaddem l-għażla f’loop
+🔁 Lire en boucle ¦ 🔁 Luaj në cikël ¦ 🔁 Ħaddem f’loop
+🐢 Lire à 75 % ¦ 🐢 Luaj me 75 % ¦ 🐢 Ħaddem b’75 %
+Marqueur ici ¦ Shënjues këtu ¦ Marker hawn
+🚩 Marqueur ici ¦ 🚩 Shënjues këtu ¦ 🚩 Marker hawn
+Marqueurs et zones ¦ Shënjuesit dhe zonat ¦ Markers u żoni
+Zones et marqueurs ¦ Zonat dhe shënjuesit ¦ Żoni u markers
+Mono ¦ Mono ¦ Mono
+Stéréo ¦ Stereo ¦ Stereo
+Nettoyer ¦ Pastro ¦ Naddaf
+Nettoyer le souffle ¦ Pastro fërfëritjen ¦ Naddaf is-sfiq
+Nom du projet son ¦ Emri i projektit të zërit ¦ Isem il-proġett tal-ħoss
+Nom du son ¦ Emri i tingullit ¦ Isem il-ħoss
+Nouvelle piste ¦ Pistë e re ¦ Traċċa ġdida
+Nouvelle version affichée partout. L’original est gardé. ¦ Version i ri i shfaqur kudo. Origjinali ruhet. ¦ Verżjoni ġdida murija kullimkien. L-oriġinal jinżamm.
+Version enregistrée (l’ancienne reste affichée). ¦ Versioni u ruajt (i vjetri mbetet i shfaqur). ¦ Verżjoni ssejvjata (il-qadima tibqa’ murija).
+Nouvelle zone ¦ Zonë e re ¦ Żona ġdida
+Ouverture ¦ Hapja ¦ Ftuħ
+Ouvrir un autre projet sans enregistrer ? ¦ Të hapet një projekt tjetër pa ruajtur? ¦ Tiftaħ proġett ieħor mingħajr ma tissejvja?
+Pause quand j’écris ¦ Pauzë kur shkruaj ¦ Pawża meta nikteb
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Pikturo mbi një njollë (kollë, zile, derë), pastaj «🩹 Riparo». ¦ Pinġi fuq tebgħa (sogħla, qanpiena, bieb), imbagħad “🩹 Saħħaħ”.
+Poser des marqueurs (clic sur l’onde) ¦ Vendos shënjues (klikim mbi valë) ¦ Poġġi markers (klikk fuq il-mewġa)
+🚩 Poser des marqueurs ¦ 🚩 Vendos shënjues ¦ 🚩 Poġġi markers
+Raccourcir ¦ Shkurto ¦ Qassar
+Rendre agréable ¦ Bëje të këndshëm ¦ Agħmlu pjaċevoli
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ Kthehu te ⚡ Tingulli i shpejtë: çfarë di të tregojë kthehet si butona, pjesa tjetër mbetet e zbatuar ¦ Erġa’ lura għall-⚡ Ħoss malajr: dak li jaf juri jerġa’ lura bħala buttuni, il-bqija jibqa’ applikat
+Réglages du Son rapide ¦ Cilësimet e Tingullit të shpejtë ¦ Settings tal-Ħoss malajr
+Réglages repris ¦ Cilësimet u morën ¦ Settings meħuda
+Seulement sur la sélection ¦ Vetëm te përzgjedhja ¦ Biss fuq l-għażla
+Silence ¦ Heshtje ¦ Skiet
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Fërfëritje, kërcitje, gumëzhimë, zë, volum dhe prerje e fillimit dhe e fundit, njëherësh ¦ Sfiq, klikks, tidwi, vuċi, volum u qtugħ tal-bidu u tat-tmiem, f’daqqa
+✨ Tout nettoyer en une fois ¦ ✨ Pastro gjithçka njëherësh ¦ ✨ Naddaf kollox f’daqqa
+Spectre ¦ Spektri ¦ Spettru
+Spectre : montrer / cacher ¦ Spektri: shfaq / fshih ¦ Spettru: uri / aħbi
+Sélection : glisser sur l’onde ¦ Përzgjedhja: tërhiq mbi valë ¦ Għażla: kaxkar fuq il-mewġa
+Tout le son : glisse le cadre pour te déplacer ¦ I gjithë tingulli: tërhiq kornizën për të lëvizur ¦ Il-ħoss kollu: kaxkar il-qafas biex tiċċaqlaq
+Un autre son, rattaché aux mêmes fiches ¦ Një tingull tjetër, i lidhur me të njëjtat kartela ¦ Ħoss ieħor, marbut mal-istess skedi
+Un ensemble prêt ne se supprime pas. ¦ Një grup i gatshëm nuk fshihet. ¦ Sett lest ma jitħassarx.
+VU-mètres ¦ Matësit VU ¦ VU-meters
+Volume du morceau ¦ Volumi i pjesës ¦ Volum tal-biċċa
+Volume du morceau… ¦ Volumi i pjesës… ¦ Volum tal-biċċa…
+Zoom sur la sélection ¦ Zmadho përzgjedhjen ¦ Zoom fuq l-għażla
+Zoom vertical + ¦ Zmadhim vertikal + ¦ Zoom vertikali +
+Zoom vertical − ¦ Zmadhim vertikal − ¦ Zoom vertikali −
+ces réglages du son ¦ këto cilësime tingulli ¦ dawn is-settings tal-ħoss
+disque, bande abîmée ¦ disk, shirit i dëmtuar ¦ diska, tejp imħassar
+les voix lointaines remontent, les cris baissent ¦ zërat e largët ngrihen, britmat ulen ¦ il-vuċijiet imbiegħda jitilgħu, l-għajjat jinżel
+on comprend mieux les mots ¦ fjalët kuptohen më mirë ¦ il-kliem jinftiehem aħjar
+nouvelle version, copie ¦ version i ri, kopje ¦ verżjoni ġdida, kopja
+trouvé tout seul, poignées sur l’onde ¦ u gjet vetë, doreza mbi valë ¦ misjub waħdu, maqbdiet fuq il-mewġa
+souffle, voix claire, volume égal ¦ fërfëritje, zë i qartë, volum i barabartë ¦ sfiq, vuċi ċara, volum ugwali
+souffle fort, voix, coupe des blancs ¦ fërfëritje e fortë, zë, prerje e heshtjeve ¦ sfiq qawwi, vuċi, qtugħ tas-skiet
+de-hum, égaliseur, limiteur ¦ heqje gumëzhime, barazues, kufizues ¦ de-hum, ekwalizzatur, limiter
+📼 Cassette des années 70 ¦ 📼 Kasetë e viteve 70 ¦ 📼 Cassette tas-snin 70
+🎙 Dictaphone ¦ 🎙 Diktafon ¦ 🎙 Dittafonu
+💒 Vidéo de mariage 1987 ¦ 💒 Video dasme 1987 ¦ 💒 Vidjo ta’ tieġ 1987
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Dëgjo, pastaj «⏱ Fut orën» (⌘T) dhe shkruaj çfarë thuhet. ¦ Isma’, imbagħad “⏱ Daħħal il-ħin” (⌘T) u ikteb dak li jingħad.
+⏱ Insérer l’heure ¦ ⏱ Fut orën ¦ ⏱ Daħħal il-ħin
+Écouter ce passage ¦ Dëgjo këtë pjesë ¦ Isma’ din il-parti
+Écouter seulement le passage peint ¦ Dëgjo vetëm pjesën e pikturuar ¦ Isma’ biss il-parti mpinġija
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Dëgjo, krahaso A / B, shfaq kudo, riemërto, fshi ¦ Isma’, qabbel A / B, uri kullimkien, semmi mill-ġdid, ħassar
+ℹ️ Infos du son ¦ ℹ️ Informacione për tingullin ¦ ℹ️ Informazzjoni dwar il-ħoss
+▶ Écouter / pause ¦ ▶ Dëgjo / pauzë ¦ ▶ Isma’ / pawża
+▶ Écouter 10 s du résultat ¦ ▶ Dëgjo 10 s të rezultatit ¦ ▶ Isma’ 10 s tar-riżultat
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Prit (në kujtesë) ¦ ✂️ Aqta’ (fil-clipboard)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Prit një pjesë (shumëpistë) ¦ ✂️ Aqta’ biċċa (multitraċċa)
+〰️ Forme d’onde ¦ 〰️ Forma e valës ¦ 〰️ Forma tal-mewġa
+＋ Ajouter un effet ▾ ¦ ＋ Shto një efekt ▾ ¦ ＋ Żid effett ▾
+🎛️ Multipiste ¦ 🎛️ Shumëpistë ¦ 🎛️ Multitraċċa
+🎬 Ouvrir dans le montage ¦ 🎬 Hape në montazh ¦ 🎬 Iftaħ fil-muntaġġ
+👂 Écoute d’abord ¦ 👂 Dëgjo fillimisht ¦ 👂 Isma’ l-ewwel
+👂 Écouter la zone ¦ 👂 Dëgjo zonën ¦ 👂 Isma’ ż-żona
+📝 Transcription ¦ 📝 Transkriptim ¦ 📝 Traskrizzjoni
+🔗 Relier ce passage ¦ 🔗 Lidh këtë pjesë ¦ 🔗 Għaqqad din il-parti
+🗣️ La voix ¦ 🗣️ Zëri ¦ 🗣️ Il-vuċi
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Transkripto vetë (së shpejti) ¦ 🤖 Ittraskrivi waħdu (dalwaqt)
+½ ton ¦ ½ ton ¦ ½ ton
+Volume ¦ Volumi ¦ Volum
+Normaliser ¦ Normalizo ¦ Normalizza
+Volume égal ¦ Volum i barabartë ¦ Volum ugwali
+Sonie visée ¦ Zëshmëria e synuar ¦ Loudness immirat
+Niveleur ¦ Niveluesi ¦ Livellatur
+Fondus ¦ Zbehjet ¦ Fades
+Égaliseur graphique ¦ Barazues grafik ¦ Ekwalizzatur grafiku
+Égaliseur paramétrique ¦ Barazues parametrik ¦ Ekwalizzatur parametriku
+Égaliseurs ¦ Barazuesit ¦ Ekwalizzaturi
+Filtre passe-haut / passe-bas ¦ Filtër i lartë / i ulët ¦ Filtru high-pass / low-pass
+Passe-haut ¦ Filtër i lartë ¦ High-pass
+Passe-bas ¦ Filtër i ulët ¦ Low-pass
+Compresseur ¦ Kompresor ¦ Kompressur
+Dynamique ¦ Dinamika ¦ Dinamika
+Rapport ¦ Raporti ¦ Proporzjon
+Attaque ¦ Sulmi ¦ Attakk
+Relâche ¦ Lëshimi ¦ Rilaxx
+Gain de sortie ¦ Përforcimi i daljes ¦ Gain tal-ħruġ
+Limiteur ¦ Kufizues ¦ Limiter
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Vendoset i fundit në raft: kurrë më tingull që «çjerr». ¦ Imqiegħed l-aħħar fir-rack: qatt aktar ħoss li “jgħajjat”.
+Plafond ¦ Tavani ¦ Limitu massimu
+Réduction de bruit ¦ Reduktimi i zhurmës ¦ Tnaqqis tal-istorbju
+Réduction ¦ Reduktimi ¦ Tnaqqis
+N’écouter que le bruit enlevé ¦ Dëgjo vetëm zhurmën e hequr ¦ Isma’ biss l-istorbju mneħħi
+De-clicker ¦ Heqës kërcitjesh ¦ De-clicker
+Clics ¦ Kërcitjet ¦ Klikks
+De-hum ¦ Heqje gumëzhime ¦ De-hum
+Harmoniques ¦ Harmonikët ¦ Armoniċi
+De-esser ¦ Zbutës sibilantesh ¦ De-esser
+Sifflantes ¦ Sibilantet ¦ Sibilanti
+Baisser jusqu’à ¦ Ul deri në ¦ Naqqas sa
+Réparations au pinceau ¦ Riparime me penel ¦ Tiswijiet bil-pinzell
+Voix plus claire ¦ Zë më i qartë ¦ Vuċi iktar ċara
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Barazues (më pak gjëmim, më shumë prani) dhe kompresor. ¦ Ekwalizzatur (inqas ħemħem, aktar preżenza) u kompressur.
+Réverbération ¦ Jehonë ¦ Riverberazzjoni
+Ambiance ¦ Ambienti ¦ Atmosfera
+Vitesse et hauteur ¦ Shpejtësia dhe lartësia ¦ Veloċità u pitch
+Temps ¦ Koha ¦ Ħin
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Për një kasetë që luhet shumë shpejt (zë «rose»): 96 % e kthen në shpejtësinë e saj të vërtetë. ¦ Għal cassette li tindaqq malajr wisq (vuċi “ta’ papra”): 96 % terġa’ tpoġġiha fil-veloċità vera tagħha.
+Vitesse ¦ Shpejtësia ¦ Veloċità
+Garder la hauteur de la voix ¦ Ruaj lartësinë e zërit ¦ Żomm il-pitch tal-vuċi
+Blancs de plus de ¦ Heshtje më të gjata se ¦ Skiet itwal minn
+Ramenés à ¦ Të reduktuara në ¦ Imnaqqsa għal
+Fin ¦ Fundi ¦ Tmiem
+Diapositive {k} / {n} ¦ Diapozitivi {k} / {n} ¦ Slajd {k} / {n}
+Aucune diapositive ¦ Asnjë diapozitiv ¦ L-ebda slajd
+Aucune diapositive. ¦ Asnjë diapozitiv. ¦ L-ebda slajd.
+Aucune diapositive pour l’instant ¦ Asnjë diapozitiv për momentin ¦ L-ebda slajd għalissa
+{what} aux Médias (le son devient la musique). ¦ {what} te Media (tingulli bëhet muzika). ¦ {what} fil-Midja (il-ħoss isir il-mużika).
+{what} aux Médias. ¦ {what} te Media. ¦ {what} fil-Midja.
+=diapositive est prête ¦ diapozitiv është gati|diapozitivë janë gati ¦ slajd huwa lest|slajds huma lesti|slajds huma lesti|slajd huma lesti|slajd huma lesti
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Mund të zëvendësojnë ato të shfaqjes së diapozitivëve ose të vijnë në vazhdim. ¦ {what}. Jistgħu jieħdu post dawk tas-slideshow jew jiġu warajhom.
+Remplacer le diaporama par le récit ? ¦ Të zëvendësohet shfaqja e diapozitivëve me rrëfimin? ¦ Tibdel is-slideshow bir-rakkont?
+Ajouter à la suite ¦ Shto në vazhdim ¦ Żid warajhom
+Police du style ({name}) ¦ Fonti i stilit ({name}) ¦ Font tal-istil ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ Shko përpara me {time} (rregullohet te Cilësimet › Pamja) ¦ Mur ’il quddiem {time} (tista’ tbiddlu f’Issettjar › Dehra)
+Suivi sur {n} positions. ¦ Ndjekur në {n} pozicione. ¦ Segwit fuq {n} pożizzjonijiet.
+(importé) ¦ (i importuar) ¦ (importat)
+Durée souhaitée ¦ Kohëzgjatja e dëshiruar ¦ Tul mixtieq
+Mettre les sources dans les notes ¦ Vendos burimet te shënimet ¦ Poġġi s-sorsi fin-noti
+⇥ durée = voix ¦ ⇥ kohëzgjatja = zëri ¦ ⇥ tul = vuċi
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Shto foto, një titull, një hartë, ose lëre «✨ Rrëfimi i një jete» të përgatisë gjithçka. Mund të tërheqësh edhe foto këtu. ¦ Żid ritratti, titlu, mappa, jew ħalli “✨ Rakkont ta’ ħajja” jħejji kollox. Tista’ wkoll tkaxkar ritratti hawn.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Ky skedar nuk është një shfaqje diapozitivësh e eksportuar nga LCNDA (⤓ Eksporto → 💾 Skedar). ¦ Dan il-fajl mhuwiex slideshow esportat minn LCNDA (⤓ Esporta → 💾 Fajl).
+Ce que raconte cette diapositive… ¦ Çfarë tregon ky diapozitiv… ¦ Dak li jirrakkonta dan is-slajd…
+Changer la photo ¦ Ndrysho foton ¦ Ibdel ir-ritratt
+🖼️ Changer la photo ¦ 🖼️ Ndrysho foton ¦ 🖼️ Ibdel ir-ritratt
+Choisis d’abord une personne. ¦ Zgjidh fillimisht një person. ¦ L-ewwel agħżel persuna.
+Couleur du trajet ¦ Ngjyra e itinerarit ¦ Kulur tar-rotta
+Glisse des photos ou un son. ¦ Tërhiq foto ose një tingull. ¦ Kaxkar ritratti jew ħoss.
+Glisser vers la droite ¦ Rrëshqit djathtas ¦ Żerżaq lejn il-lemin
+Glisser vers la gauche ¦ Rrëshqit majtas ¦ Żerżaq lejn ix-xellug
+Zoom arrière lent ¦ Zvogëlim i ngadaltë ¦ Zoom ’il barra bil-mod
+La fenêtre des médias n’est pas encore prête. ¦ Dritarja e medias nuk është ende gati. ¦ It-tieqa tal-midja għadha mhix lesta.
+Les dernières modifications du diaporama seront perdues. ¦ Ndryshimet e fundit të shfaqjes së diapozitivëve do të humbasin. ¦ L-aħħar bidliet fis-slideshow jintilfu.
+Les photos du récit ¦ Fotot e rrëfimit ¦ Ir-ritratti tar-rakkont
+Légendes ¦ Mbishkrimet ¦ Kapsjonijiet
+Personnes sous chaque photo ¦ Personat poshtë çdo fotoje ¦ Persuni taħt kull ritratt
+Place du texte ¦ Vendi i tekstit ¦ Post tat-test
+Police des textes ¦ Fonti i teksteve ¦ Font tat-testi
+Prendre ce son ¦ Merr këtë tingull ¦ Ħu dan il-ħoss
+RÉCIT D’UNE VIE ¦ RRËFIMI I NJË JETE ¦ RAKKONT TA’ ĦAJJA
+Récit d’une vie ¦ Rrëfimi i një jete ¦ Rakkont ta’ ħajja
+✨ Récit d’une vie ¦ ✨ Rrëfimi i një jete ¦ ✨ Rakkont ta’ ħajja
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Rrëfimi i një jete: një shfaqje diapozitivësh e gatshme nga kartela e një personi ¦ ✨ Rakkont ta’ ħajja: slideshow lest mill-iskeda ta’ persuna
+Un diaporama tout fait à partir de la fiche d’une personne ¦ Një shfaqje diapozitivësh e gatshme nga kartela e një personi ¦ Slideshow lest mill-iskeda ta’ persuna
+Selon les textes ¦ Sipas teksteve ¦ Skont it-testi
+Une musique ¦ Një muzikë ¦ Mużika
+Une photo par page ¦ Një foto për faqe ¦ Ritratt wieħed għal kull paġna
+Une photo ronde au-dessus du titre ¦ Një foto e rrumbullakët mbi titullin ¦ Ritratt tond fuq it-titlu
+Une photo ronde au-dessus du titre… ¦ Një foto e rrumbullakët mbi titullin… ¦ Ritratt tond fuq it-titlu…
+Une présentation ou un diaporama ? ¦ Një prezantim apo një shfaqje diapozitivësh? ¦ Preżentazzjoni jew slideshow?
+Une voix, un son ¦ Një zë, një tingull ¦ Vuċi, ħoss
+Vidéo téléchargée. ¦ Videoja u shkarkua. ¦ Il-vidjo tniżżlet.
+cette diapositive ¦ ky diapozitiv ¦ dan is-slajd
+retirer la voix ¦ hiq zërin ¦ neħħi l-vuċi
+✨ Préparation du récit… ¦ ✨ Po përgatitet rrëfimi… ¦ ✨ Qed jitħejja r-rakkont…
+🎙 Enregistrer ma voix ¦ 🎙 Regjistro zërin tim ¦ 🎙 Irrekordja leħni
+🎤 En faire une présentation… ¦ 🎤 Bëje një prezantim… ¦ 🎤 Agħmel minnu preżentazzjoni…
+🖼 Choisir les photos… ¦ 🖼 Zgjidh fotot… ¦ 🖼 Agħżel ir-ritratti…
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Formati i imazhit (16:9 për ekran, 9:16 për telefon) ¦ Format tal-istampa (16:9 għal skrin, 9:16 għal mowbajl)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Eksporto: video, imazhe, PDF, printim, skedar ¦ Esporta: vidjo, stampi, PDF, printjar, fajl
+Ajouter un titre ¦ Shto një titull ¦ Żid titlu
+Ajouter une carte (trajet) ¦ Shto një hartë (itinerar) ¦ Żid mappa (rotta)
+Ajouter une carte ¦ Shto një hartë ¦ Żid mappa
+＋ Carte (trajet) ¦ ＋ Hartë (itinerar) ¦ ＋ Mappa (rotta)
+Regarder en plein écran (Échap pour revenir) ¦ Shiko në ekran të plotë (Escape për t’u kthyer) ¦ Ara fuq skrin sħiħ (Escape biex terġa’ lura)
+Avancer dans le diaporama ¦ Ec përpara në shfaqjen e diapozitivëve ¦ Mur ’il quddiem fis-slideshow
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Zgjidh një diapozitiv (majtas) për të rregulluar kohëzgjatjen, kalimin, tekstin dhe zërin e tij. ¦ Agħżel slajd (fuq ix-xellug) biex taġġusta t-tul, it-transizzjoni, it-test u l-vuċi tiegħu.
+🎞️ Tout le diaporama ¦ 🎞️ E gjithë shfaqja e diapozitivëve ¦ 🎞️ Is-slideshow kollu
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Fonti i të gjithë titujve dhe mbishkrimeve. Pa zgjedhje, është ai i stilit (Klasik, Album i vjetër…). ¦ Il-font tat-titli u l-kapsjonijiet kollha. Mingħajr għażla, huwa dak tal-istil (Klassiku, Album antik…).
+Une musique de fond, prise dans les sons des médias ¦ Një muzikë sfondi, e marrë nga tingujt e medias ¦ Mużika fl-isfond, meħuda mill-ħsejjes tal-midja
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ Një prezantim si Keynote i bërë nga këta diapozitivë (tekste, forma, animacione, mënyra e prezantuesit…); shfaqja e diapozitivëve mbetet siç është ¦ Preżentazzjoni stil Keynote magħmula minn dawn is-slajds (testi, forom, animazzjonijiet, modalità tal-preżentatur…); is-slideshow jibqa’ kif inhu
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Kliko një diapozitiv: rregulloje djathtas · tërhiqi për t’i renditur · Hapësirë: luaj ¦ Ikklikkja fuq slajd: aġġustah fuq il-lemin · kaxkarhom biex tirranġahom · Spazju: ħaddem
+Album ancien ¦ Album i vjetër ¦ Album antik
+Clair ¦ I çelur ¦ Ċar
+Lire / pause ¦ Luaj / pauzë ¦ Ħaddem / pawża
+Lire ¦ Luaj ¦ Ħaddem
+Regarder ¦ Shiko ¦ Ara
+📺 Regarder ¦ 📺 Shiko ¦ 📺 Ara
+Musique de fond ¦ Muzikë sfondi ¦ Mużika fl-isfond
+🎵 Musique ¦ 🎵 Muzikë ¦ 🎵 Mużika
+🎵 Musique de fond (facultatif) ¦ 🎵 Muzikë sfondi (opsionale) ¦ 🎵 Mużika fl-isfond (mhux obbligatorja)
+=diapositive ¦ diapozitiv|diapozitivë ¦ slajd|slajds|slajds|slajd|slajd
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Zgjidh një person: një shfaqje diapozitivësh përgatitet vetë me kartelën e tij (lindja, pagëzimi, martesa, fëmijët, profesionet, regjistrimet e popullsisë, shpërnguljet, vdekja, varrimi), fotot e tij, vendet e tij në një hartë. Një informacion që mungon nuk jep diapozitiv; gjithçka mbetet e ndryshueshme më pas. ¦ Agħżel persuna: slideshow jitħejja waħdu bl-iskeda tagħha (twelid, magħmudija, żwieġ, tfal, xogħlijiet, ċensimenti, tibdil ta’ residenza, mewt, dfin), ir-ritratti tagħha, il-postijiet tagħha fuq mappa. Informazzjoni nieqsa ma tagħtix slajd; kollox jibqa’ jista’ jiġi editjat wara.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Rrëfimi zgjat afërsisht kaq: çdo diapozitiv zgjatet ose shkurtohet pak. «Sipas teksteve» lë kohë për të lexuar. ¦ Ir-rakkont jieħu bejn wieħed u ieħor dan it-tul: kull slajd jitwal jew jiqsar ftit. “Skont it-testi” iħalli ħin biex taqra.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Asnjë foto: rrëfimi do të bëhet nga tituj dhe harta. ¦ L-ebda ritratt: ir-rakkont isir minn titli u mapep.
+Inclure les frères et sœurs ¦ Përfshi vëllezërit dhe motrat ¦ Inkludi l-aħwa
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Burimet e çdo ngjarjeje (titulli, faqja) shkruhen te shënimet e diapozitivit të saj: shihen kur ndryshon, jo gjatë luajtjes. ¦ Is-sorsi ta’ kull avveniment (titlu, paġna) huma miktuba fin-noti tas-slajd tiegħu: jidhru meta teditja, mhux waqt id-daqq.
+Ajouter les événements historiques de l’époque ¦ Shto ngjarjet historike të kohës ¦ Żid l-avvenimenti storiċi taż-żmien
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Epidemitë, luftërat dhe dimrat e mëdhenj që njeh aplikacioni (Listat → Epidemi, luftëra, dimra) dhe që ndodhën gjatë jetës së tij. ¦ L-epidemiji, il-gwerer u x-xtiewi kbar li l-app taf (Listi → Epidemiji, gwerer, xtiewi) u li seħħew matul ħajjitha.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Teksti i bllokut «📖 Biografia» i kartelës (versioni yt nëse e ke ndryshuar), në version të shkurtër, në një diapozitiv. ¦ It-test tal-blokk “📖 Bijografija” tal-iskeda (il-verżjoni tiegħek jekk editjajtha), f’verżjoni qasira, fuq slajd.
+Créer le récit ¦ Krijo rrëfimin ¦ Oħloq ir-rakkont
+DIAPORAMA ¦ SHFAQJE DIAPOZITIVËSH ¦ SLIDESHOW
+Environ 1 minute ¦ Rreth 1 minutë ¦ Madwar 1 minuta
+Environ 2 minutes ¦ Rreth 2 minuta ¦ Madwar 2 minuti
+Environ 3 minutes ¦ Rreth 3 minuta ¦ Madwar 3 minuti
+Environ 5 minutes ¦ Rreth 5 minuta ¦ Madwar 5 minuti
+Environ 8 minutes ¦ Rreth 8 minuta ¦ Madwar 8 minuti
+Environ 10 minutes ¦ Rreth 10 minuta ¦ Madwar 10 minuti
+Choisir un son… ¦ Zgjidh një tingull… ¦ Agħżel ħoss…
+Ajouter sa biographie (📖) ¦ Shto biografinë e tij (📖) ¦ Żid il-bijografija tagħha (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Ndiq atë që lëviz ¦ 🎯 Segwi dak li jiċċaqlaq
+✕ Ne plus suivre ¦ ✕ Mos e ndiq më ¦ ✕ Tibqax issegwi
+🎥 Plusieurs caméras ¦ 🎥 Disa kamera ¦ 🎥 Diversi kameras
+Synchroniser et monter ¦ Sinkronizo dhe monto ¦ Issinkronizza u immonta
+quand quelqu’un parle plus près d’une autre caméra ¦ kur dikush flet më afër një kamere tjetër ¦ meta xi ħadd jitkellem eqreb lejn kamera oħra
+Lecture des sons… ¦ Po lexohen tingujt… ¦ Qed jinqraw il-ħsejjes…
+dédié à {who} ¦ kushtuar {who} ¦ iddedikat lil {who}
+Pas encore de {what} pour ce soir ¦ Ende asnjë {what} për këtë mbrëmje ¦ Għad m’hemmx {what} għal-lejla
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Shëno titujt me radhë, me bis-et, ripunimet, të ftuarit… ose kopjo listën e këngëve të një mbrëmjeje tjetër. ¦ Niżżel it-titli bl-ordni, bl-encores, il-covers, il-mistednin… jew ikkopja s-setlist ta’ lejla oħra.
+La sorte de ce soir ¦ Lloji i kësaj mbrëmjeje ¦ It-tip tal-lejla
+En faire : {what} (la setlist s’adapte) ¦ Bëje: {what} (lista e këngëve përshtatet) ¦ Agħmel minnha: {what} (is-setlist tadatta ruħha)
+{n} prévues ¦ {n} të planifikuara ¦ {n} ippjanati
+d’après {what} ¦ sipas {what} ¦ skont {what}
+{what} à la setlist. ¦ {what} te lista e këngëve. ¦ {what} fis-setlist.
+{what} depuis « {name} ». ¦ {what} nga «{name}». ¦ {what} minn “{name}”.
+=ligne ajoutée ¦ rresht i shtuar|rreshta të shtuar ¦ linja miżjuda|linji miżjuda|linji miżjuda|linja miżjuda|linja miżjuda
+=ligne copiée ¦ rresht i kopjuar|rreshta të kopjuar ¦ linja kkupjata|linji kkupjati|linji kkupjati|linja kkupjata|linja kkupjata
+Setlist de « {name} » copiée ({what}) ¦ Lista e këngëve e «{name}» u kopjua ({what}) ¦ Is-setlist ta’ “{name}” ġiet ikkupjata ({what})
+Ce soir devient : {what} ¦ Kjo mbrëmje bëhet: {what} ¦ Il-lejla ssir: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ {n} regjistrime «live» u shtuan te pjesët ¦ {n} recordings “live” miżjuda mal-biċċiet
+1 enregistrement « en public » ajouté au morceau ¦ 1 regjistrim «live» u shtua te pjesa ¦ 1 recording “live” miżjud mal-biċċa
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ {n} regjistrime «live» janë nxjerrë tashmë nga kjo mbrëmje. ¦ {n} recordings “live” diġà ttieħdu minn din il-lejla.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ 1 regjistrim «live» është nxjerrë tashmë nga kjo mbrëmje. ¦ 1 recording “live” diġà ttieħed minn din il-lejla.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Bëji regjistrime «live» të pjesëve ({n}) ¦ → Agħmel minnhom recordings “live” tal-biċċiet ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Bëje regjistrim «live» të pjesës ({n}) ¦ → Agħmel minnu recording “live” tal-biċċa ({n})
+« {name} » ajouté au catalogue ({what}). ¦ «{name}» u shtua në katalog ({what}). ¦ “{name}” żdied mal-katalgu ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Asnjë vend nga baza jote për këto mbrëmje ({what} pa vend të zgjedhur në bazë). ¦ L-ebda post mid-database tiegħek għal dawn il-ljieli ({what} mingħajr post magħżul fid-database).
+Aucun lieu de ta base pour ces soirs. ¦ Asnjë vend nga baza jote për këto mbrëmje. ¦ L-ebda post mid-database tiegħek għal dawn il-ljieli.
+{what} sans coordonnées ¦ {what} pa koordinata ¦ {what} mingħajr koordinati
+{what} sans lieu de ta base ¦ {what} pa vend nga baza jote ¦ {what} mingħajr post mid-database tiegħek
+=soir ¦ mbrëmje|mbrëmje ¦ lejla|ljieli|ljieli|lejla|lejla
+🔝 {what} les plus joués ¦ 🔝 {what} më të luajturat ¦ 🔝 {what} l-aktar indaqqu
+{what} par soir ¦ {what} për mbrëmje ¦ {what} kull lejla
+{n} en moyenne ¦ {n} mesatarisht ¦ {n} bħala medja
+{what} mais jamais sur scène, et {other} : ¦ {what} por kurrë në skenë, dhe {other}: ¦ {what} iżda qatt fuq il-palk, u {other}:
+{what} mais jamais sur scène : ¦ {what} por kurrë në skenë: ¦ {what} iżda qatt fuq il-palk:
+{what} jamais dans une setlist : ¦ {what} kurrë në një listë këngësh: ¦ {what} qatt f’setlist:
+=morceau enregistré ¦ pjesë e regjistruar|pjesë të regjistruara ¦ biċċa rrekordjata|biċċiet rrekordjati|biċċiet rrekordjati|biċċa rrekordjata|biċċa rrekordjata
+=autre fiche ¦ kartelë tjetër|kartela të tjera ¦ skeda oħra|skedi oħra|skedi oħra|skeda oħra|skeda oħra
+… et {n} de plus ¦ … dhe {n} të tjera ¦ … u {n} oħra
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ Profili «{name}» u shënua: seksionet e tij janë në faqen e tij. ¦ ✓ Il-profil “{name}” immarkat: it-taqsimiet tiegħu jinsabu fil-paġna tiegħu.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ Asnjë episod nr. {a} deri {b} në këtë sezon. ¦ L-ebda episodju nru {a} sa {b} f’dan l-istaġun.
+Aucun épisode n° {a} dans cette saison. ¦ Asnjë episod nr. {a} në këtë sezon. ¦ L-ebda episodju nru {a} f’dan l-istaġun.
+＋ Nouveau concert ou représentation ¦ ＋ Koncert ose shfaqje e re ¦ ＋ Kunċert jew rappreżentazzjoni ġdida
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Kërko… (qytet, sallë, pjesë e luajtur, turne, person) ¦ Fittex… (belt, sala, biċċa mdoqqa, tour, persuna)
+Aucun concert ni spectacle pour l’instant ¦ Asnjë koncert apo shfaqje për momentin ¦ L-ebda kunċert jew spettaklu għalissa
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ Një mbrëmje = një kartelë: data, vendi, lista e këngëve (tituj, bis-e, ripunime, të ftuar), kush ishte në skenë dhe në sallë. ¦ Lejla = skeda: id-data, il-post, is-setlist (titli, encores, covers, mistednin), min kien fuq il-palk u fis-sala.
+Concert ou représentation ¦ Koncert ose shfaqje ¦ Kunċert jew rappreżentazzjoni
+Concerts et représentations ¦ Koncerte dhe shfaqje ¦ Kunċerti u rappreżentazzjonijiet
+=concert ou représentation ¦ koncert ose shfaqje|koncerte ose shfaqje ¦ kunċert jew rappreżentazzjoni|kunċerti jew rappreżentazzjonijiet|kunċerti jew rappreżentazzjonijiet|kunċert jew rappreżentazzjoni|kunċert jew rappreżentazzjoni
+Spectacle d’humour ¦ Shfaqje humori ¦ Spettaklu tal-kummiedja
+Scènes jouées ¦ Skenat e luajtura ¦ Xeni mdoqqa
+Concert d’orchestre ¦ Koncert orkestre ¦ Kunċert tal-orkestra
+Début d’une partie ¦ Fillimi i një pjese ¦ Bidu ta’ parti
+Bande, intro enregistrée ¦ Shirit, hyrje e regjistruar ¦ Tejp, intro rrekordjata
+Dernière fois ¦ Herën e fundit ¦ L-aħħar darba
+Reprise, invités, dédicace, 1re fois, durée… ¦ Ripunim, të ftuar, kushtim, hera e 1-rë, kohëzgjatje… ¦ Cover, mistednin, dedika, l-1 darba, tul…
+＋ Un rappel ¦ ＋ Një bis ¦ ＋ Encore
+📋 Coller une liste ¦ 📋 Ngjit një listë ¦ 📋 Waħħal lista
+📋 Copier la setlist d’un autre soir ¦ 📋 Kopjo listën e këngëve të një mbrëmjeje tjetër ¦ 📋 Ikkopja s-setlist ta’ lejla oħra
+Copier la setlist d’un autre soir ¦ Kopjo listën e këngëve të një mbrëmjeje tjetër ¦ Ikkopja s-setlist ta’ lejla oħra
+inachevé ¦ i papërfunduar ¦ mhux mitmum
+Nouvelle partie ¦ Pjesë e re ¦ Parti ġdida
+critique positive ¦ kritikë pozitive ¦ kritika pożittiva
+critique négative ¦ kritikë negative ¦ kritika negattiva
+neutre ¦ neutrale ¦ newtrali
+Église, chapelle ¦ Kishë, kapelë ¦ Knisja, kappella
+Bal, salle des fêtes ¦ Ballo, sallë festash ¦ Ballu, sala tal-festi
+Café, cabaret ¦ Kafene, kabare ¦ Kafè, kabaret
+Soirée privée ¦ Mbrëmje private ¦ Serata privata
+Festival, fête ¦ Festival, festë ¦ Festival, festa
+création du rôle ¦ krijimi i rolit ¦ ħolqien tar-rwol
+Création du rôle ¦ Krijimi i rolit ¦ Ħolqien tar-rwol
+chef d’orchestre ¦ dirigjent ¦ direttur tal-orkestra
+Un ou une soliste ¦ Një solist ose soliste ¦ Solist jew solista
+Une personne dans la salle ¦ Një person në sallë ¦ Persuna fis-sala
+🎭 Ce soir-là, au théâtre ¦ 🎭 Atë mbrëmje, në teatër ¦ 🎭 Dik il-lejla, fit-teatru
+Rôles du soir ¦ Rolet e mbrëmjes ¦ Rwoli tal-lejla
+Titulaire ou remplaçant ¦ Titullar ose zëvendësues ¦ Regolari jew sostitut
+La soirée ¦ Mbrëmja ¦ Il-lejla
+Joué ¦ E luajtur ¦ Indaqq
+La tournée ¦ Turneu ¦ It-tour
+Dates prévues ¦ Datat e planifikuara ¦ Dati ppjanati
+Les dates ¦ Datat ¦ Id-dati
+📅 Les dates ¦ 📅 Datat ¦ 📅 Id-dati
+＋ Ajouter une date ¦ ＋ Shto një datë ¦ ＋ Żid data
+＋ Ajouter une représentation ¦ ＋ Shto një shfaqje ¦ ＋ Żid rappreżentazzjoni
+Chanson parlée, poème dit ¦ Këngë e folur, poezi e recituar ¦ Kanzunetta mitkellma, poeżija rreċitata
+Sketch, numéro, scène ¦ Skeç, numër, skenë ¦ Skeċċ, numru, xena
+Sketches, numéros, scènes ¦ Skeçe, numra, skena ¦ Skeċċijiet, numri, xeni
+Écrit, créé ¦ Shkruar, krijuar ¦ Miktub, maħluq
+Tiré de ¦ Marrë nga ¦ Meħud minn
+Son ou vidéo ¦ Tingull ose video ¦ Ħoss jew vidjo
+Carte indisponible. ¦ Harta nuk është e disponueshme. ¦ Il-mappa mhix disponibbli.
+Avec une setlist ¦ Me listë këngësh ¦ B’setlist
+Avec une captation ¦ Me regjistrim ¦ B’recording
+Avec une 1re fois ¦ Me një herë të parë ¦ B’l-ewwel darba
+Avec un remplacement ¦ Me një zëvendësim ¦ B’sostituzzjoni
+Avec ce titre joué ¦ Me këtë titull të luajtur ¦ B’dan it-titlu mdoqq
+Joué ce soir-là ¦ E luajtur atë mbrëmje ¦ Indaqq dik il-lejla
+Carte des lieux… ¦ Harta e vendeve… ¦ Mappa tal-postijiet…
+🗺 Carte des lieux ¦ 🗺 Harta e vendeve ¦ 🗺 Mappa tal-postijiet
+hors tournée ¦ jashtë turneut ¦ barra mit-tour
+Dernière ¦ E fundit ¦ L-aħħar
+Moins ↑ ¦ Më pak ↑ ¦ Inqas ↑
+Soirs par année ¦ Mbrëmje në vit ¦ Ljieli kull sena
+📅 Soirs par année ¦ 📅 Mbrëmje në vit ¦ 📅 Ljieli kull sena
+Durée moyenne ¦ Kohëzgjatja mesatare ¦ Tul medju
+Ville la plus visitée ¦ Qyteti më i vizituar ¦ L-aktar belt miżjura
+🚌 Setlist type d’une tournée ¦ 🚌 Lista tipike e këngëve të një turneu ¦ 🚌 Setlist tipika ta’ tour
+Choisis une tournée. ¦ Zgjidh një turne. ¦ Agħżel tour.
+Choisis deux soirs différents. ¦ Zgjidh dy mbrëmje të ndryshme. ¦ Agħżel żewġ ljieli differenti.
+Cinéma ¦ Kinema ¦ Ċinema
+Au générique ¦ Në titrat e filmit ¦ Fil-krediti
+Pas au générique ¦ Jo në titrat e filmit ¦ Mhux fil-krediti
+Tournage, période ¦ Xhirimi, periudha ¦ Filmjar, perjodu
+🎭 Au théâtre ¦ 🎭 Në teatër ¦ 🎭 Fit-teatru
+Théâtres, salles ¦ Teatro, salla ¦ Teatri, swali
+Un théâtre ¦ Një teatër ¦ Teatru
+Théâtre, salle ¦ Teatër, sallë ¦ Teatru, sala
+Un remplacement ¦ Një zëvendësim ¦ Sostituzzjoni
+📺 Télévision, radio ¦ 📺 Televizion, radio ¦ 📺 Televiżjoni, radju
+Voix française de ¦ Zëri francez i ¦ Leħen Franċiż ta’
+Un ou une partenaire ¦ Një partner ose partnere ¦ Sieħeb jew sieħba
+Prix et nominations ¦ Çmime dhe nominime ¦ Premjijiet u nominazzjonijiet
+Œuvre A → Z ¦ Vepra A → Z ¦ Xogħol A → Z
+Fiches « Rôle » ¦ Kartelat «Rol» ¦ Skedi “Rwol”
+Films du catalogue ¦ Filmat e katalogut ¦ Films tal-katalgu
+Cités dans d’autres catalogues ¦ Përmendur në katalogë të tjerë ¦ Imsemmija f’katalgi oħra
+Crédit ¦ Kredit ¦ Kreditu
+RÔLE ¦ ROLI ¦ RWOL
+＋ En faire une fiche rôle détaillée ¦ ＋ Bëje një kartelë roli të detajuar ¦ ＋ Agħmel minnu skeda ta’ rwol iddettaljata
+D’où vient la ligne ¦ Nga vjen rreshti ¦ Minn fejn ġejja l-linja
+Chercher un rôle, un film, un partenaire… ¦ Kërko një rol, një film, një partner… ¦ Fittex rwol, film, sieħeb…
+Profil d’acteur ¦ Profil aktori ¦ Profil ta’ attur
+Débuts ¦ Fillimet ¦ Debutt
+Une école, un cours ¦ Një shkollë, një kurs ¦ Skola, kors
+École, conservatoire, cours ¦ Shkollë, konservator, kurs ¦ Skola, konservatorju, kors
+Prix, diplôme ¦ Çmim, diplomë ¦ Premju, diploma
+Un agent ¦ Një agjent ¦ Aġent
+Une troupe ¦ Një trupë ¦ Grupp teatrali
+Troupe, théâtre ¦ Trupë, teatër ¦ Grupp teatrali, teatru
+Un casting ¦ Një audicion ¦ Awdizzjoni
+Rôle visé ¦ Roli i synuar ¦ Rwol immirat
+pas obtenu ¦ nuk u mor ¦ mhux miksub
+Compétences, physique, voix ¦ Aftësi, pamje fizike, zë ¦ Ħiliet, dehra fiżika, vuċi
+Tout voir, trier ¦ Shiko gjithçka, rendit ¦ Ara kollox, issortja
+Aucune série, aucun téléfilm. ¦ Asnjë serial, asnjë film televiziv. ¦ L-ebda serje, l-ebda film tat-televiżjoni.
+Théâtrographie ¦ Teatrografia ¦ Teatrografija
+Aucun rôle au théâtre. ¦ Asnjë rol në teatër. ¦ L-ebda rwol fit-teatru.
+Aucune voix. ¦ Asnjë zë. ¦ L-ebda vuċi.
+Publicité et mannequinat ¦ Reklama dhe modelim ¦ Reklami u mudellar
+Aucune publicité. ¦ Asnjë reklamë. ¦ L-ebda reklam.
+Aucun clip. ¦ Asnjë videoklip. ¦ L-ebda video clip.
+=casting noté ¦ audicion i shënuar|audicione të shënuara ¦ awdizzjoni nnotata|awdizzjonijiet innotati|awdizzjonijiet innotati|awdizzjoni nnotata|awdizzjoni nnotata
+Aucun casting noté. ¦ Asnjë audicion i shënuar. ¦ L-ebda awdizzjoni nnotata.
+Les statistiques viennent des rôles notés. ¦ Statistikat vijnë nga rolet e shënuara. ¦ L-istatistika ġejjin mir-rwoli nnotati.
+Rôles par décennie ¦ Rolet sipas dekadave ¦ Rwoli skont id-deċennju
+Réalisateurs ¦ Regjisorët ¦ Diretturi
+Aucun soir noté. ¦ Asnjë mbrëmje e shënuar. ¦ L-ebda lejla nnotata.
+Feuilleton télévisé ¦ Serial televiziv ¦ Serje televiżiva
+Websérie ¦ Serial në internet ¦ Webserje
+Séries et émissions ¦ Seriale dhe emisione ¦ Serje u programmi
+La série ¦ Seriali ¦ Is-serje
+Saisons et épisodes ¦ Sezonet dhe episodet ¦ Staġuni u episodji
+Durée d’un épisode ¦ Kohëzgjatja e një episodi ¦ Tul ta’ episodju
+Qui y a fait quoi ¦ Kush bëri çfarë ¦ Min għamel xiex
+Épisodes prévus ¦ Episodet e planifikuara ¦ Episodji ppjanati
+L’épisode ¦ Episodi ¦ L-episodju
+N° dans la saison ¦ Nr. në sezon ¦ Nru fl-istaġun
+N° dans la série ¦ Nr. në serial ¦ Nru fis-serje
+Un ou une scénariste ¦ Një skenarist ose skenariste ¦ Kittieb jew kittieba tal-iskript
+Un invité ¦ Një i ftuar ¦ Mistieden
+Rôle ou métier ¦ Rol ose profesion ¦ Rwol jew xogħol
+toute la série ¦ i gjithë seriali ¦ is-serje kollha
+Chaîne, station, éditeur ¦ Kanal, stacion, botues ¦ Stazzjon, kanal, pubblikatur
+Un créateur, une créatrice ¦ Një krijues, një krijuese ¦ Kreatur, kreatriċi
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Si përzihet ky imazh me atë poshtë: «Produkt» errëson, «Mbivendosje e çelur» ndriçon, «Normal» thjesht e vendos sipër. ¦ Kif din l-istampa titħallat ma’ dik taħtha: “Prodott” iddallam, “Superpożizzjoni ċara” iċċara, “Normali” sempliċement tpoġġiha fuqha.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ Një lëvizje e ngadaltë kamere mbi foton: ajo afrohet, largohet ose rrëshqet butësisht ndërsa është në ekran. ¦ Moviment bil-mod tal-kamera fuq ir-ritratt: joqrob, jitbiegħed jew jiżżerżaq bil-mod waqt li jkun fuq l-iskrin.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Një kuadër kyç fikson një cilësim (madhësia, vendi, rrotullimi…) në një moment të filmit; mes dy kuadrove kyçe, imazhi kalon nga njëri te tjetri, butësisht ose me shpejtësi të rregullt. ¦ Keyframe jiffissa setting (daqs, post, rotazzjoni…) f’mument tal-film; bejn żewġ keyframes, l-istampa tgħaddi minn wieħed għall-ieħor, bil-mod jew b’veloċità regolari.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ «Ul fërfëritjen»: zgjidh fillimisht një pjesë ku dëgjohet vetëm zhurma, ajo shërben si shembull. «Zë më i qartë» e bën të folurën më të qartë. «Normalizo» e ngre volumin në maksimum pa e ngopur. ¦ “Naqqas is-sfiq”: l-ewwel agħżel parti fejn tisma’ l-istorbju biss, isservi ta’ eżempju. “Vuċi iktar ċara” tagħmel il-kliem iktar ċar. “Normalizza” itella’ l-volum għall-ogħla mingħajr ma jissatura.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ I butë: pastrohet pak, zëri mbetet natyral. I fortë: hiqet më shumë zhurmë, me rrezikun e një tingulli pak «metalik». Dëgjo me 👂 Para / ✨ Pas. ¦ Ħafif: tnaddaf ftit, il-vuċi tibqa’ naturali. Qawwi: tneħħi aktar storbju, bir-riskju ta’ ħoss ftit “metalliku”. Isma’ b’👂 Qabel / ✨ Wara.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Fshi këtë klip nga projekti (dhe {n} pjesët e tij në vijën kohore) ¦ Ħassar dan il-klipp mill-proġett (u l-{n} partijiet tiegħu fuq il-linja tal-ħin)
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Fshi këtë klip nga projekti (dhe pjesën e tij në vijën kohore) ¦ Ħassar dan il-klipp mill-proġett (u l-parti tiegħu fuq il-linja tal-ħin)
+Supprimer ce rush du projet ¦ Fshi këtë klip nga projekti ¦ Ħassar dan il-klipp mill-proġett
+{time} à l’écran ¦ {time} në ekran ¦ {time} fuq l-iskrin
+🖼️ Photo de la piste 1 ¦ 🖼️ Foto e pistës 1 ¦ 🖼️ Ritratt tat-traċċa 1
+🎬 Morceau de la piste 1 ¦ 🎬 Pjesa e pistës 1 ¦ 🎬 Biċċa tat-traċċa 1

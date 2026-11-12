@@ -1,0 +1,782 @@
+fr ¦ sq ¦ mt
+menu|Affichage ¦ Pamja ¦ Wiri
+Insertion ¦ Futje ¦ Daħħal
+Format ¦ Formati ¦ Format
+Tableau ¦ Tabela ¦ Tabella
+Champ (page, nombre de pages, titre, auteur)… ¦ Fushë (faqja, numri i faqeve, titulli, autori)… ¦ Qasam (paġna, numru ta’ paġni, titlu, awtur)…
+N° de page ¦ Nr. i faqes ¦ Nru tal-paġna
+(celle de Normal) ¦ (ajo e Normal) ¦ (dik ta’ Normal)
+(titre vide) ¦ (titull bosh) ¦ (titlu vojt)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = shkronja, ? = një shkronjë, # = një shifër ¦ * = ittri, ? = ittra waħda, # = ċifra
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (ruhet gjithçka) ¦ .lcnda-texte (kollox jinżamm)
+1 (retirer les colonnes) ¦ 1 (hiq kolonat) ¦ 1 (neħħi l-kolonni)
+1. Liste numérotée ¦ 1. Listë e numëruar ¦ 1. Lista nnumerata
+1re ligne ¦ Rreshti i 1-rë ¦ L-1 linja
+1re ligne (négatif : en saillie) ¦ Rreshti i 1-rë (negativ: i dalë) ¦ L-1 linja (negattiv: ħierġa)
+60 onglets au plus. ¦ 60 skeda më së shumti. ¦ 60 tab l-aktar.
+A Couleur… ¦ A Ngjyra… ¦ A Kulur…
+Accentuation ¦ Theksim ¦ Enfasi
+Adresse ¦ Adresa ¦ Indirizz
+Afficher : nom, dates, naissance… ¦ Shfaq: emri, datat, lindja… ¦ Uri: isem, dati, twelid…
+Ajoute au moins une personne. ¦ Shto të paktën një person. ¦ Żid mill-inqas persuna waħda.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Shto fillimisht fusha: Futje → «📨 Fushë bashkimi» (Emri, Mbiemri, Data e lindjes…). ¦ L-ewwel żid qasam: Daħħal → “📨 Qasam tal-għaqda” (Isem, Kunjom, Data tat-twelid…).
+Ajouter la citation ¦ Shto citimin ¦ Żid iċ-ċitazzjoni
+Ajouter les personnes d’une liste ¦ Shto personat e një liste ¦ Żid il-persuni ta’ lista
+Ajouter une légende ¦ Shto një mbishkrim ¦ Żid kapsjoni
+Album photo (21,6 × 28 cm) ¦ Album fotografik (21,6 × 28 cm) ¦ Album tar-ritratti (21.6 × 28 cm)
+Alignement ¦ Shtrirja ¦ Allinjament
+Aligner à droite ¦ Shtrije djathtas ¦ Allinja lejn il-lemin
+Aligner à gauche ¦ Shtrije majtas ¦ Allinja lejn ix-xellug
+Aligné sur le texte (seul sur sa ligne) ¦ Në linjë me tekstin (vetëm në rreshtin e vet) ¦ Fl-istess linja mat-test (waħdu fil-linja tiegħu)
+Allemand ¦ Gjermanisht ¦ Ġermaniż
+Aller ¦ Shko ¦ Mur
+Aller à la page ¦ Shko te faqja ¦ Mur għall-paġna
+Anglais ¦ Anglisht ¦ Ingliż
+Années (1850 – 1920) ¦ Vitet (1850 – 1920) ¦ Snin (1850 – 1920)
+Aperçu avec {name} : ¦ Paraparje me {name}: ¦ Preview b’{name}:
+Apostrophe typographique ’ ¦ Apostrof tipografik ’ ¦ Appostrofu tipografiku ’
+Au moins une ligne. ¦ Të paktën një rresht. ¦ Mill-inqas linja waħda.
+Aucun champ à mettre à jour. ¦ Asnjë fushë për t’u përditësuar. ¦ L-ebda qasam x’jiġi aġġornat.
+Aucune modification suivie dans le document. ¦ Asnjë ndryshim i ndjekur në dokument. ¦ L-ebda bidla segwita fid-dokument.
+Aucune modification suivie. ¦ Asnjë ndryshim i ndjekur. ¦ L-ebda bidla segwita.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ Asnjë ndryshim i ndjekur. «✍ Ndiq ndryshimet» ruan gjurmën e çdo shtimi dhe çdo fshirjeje. ¦ L-ebda bidla segwita. “✍ Segwi l-bidliet” iżomm rekord ta’ kull żieda u ta’ kull tħassir.
+Augmenter le retrait ¦ Rrit kryeradhën ¦ Kabbar l-indentazzjoni
+Auteur ¦ Autori ¦ Awtur
+Autre ¦ Tjetër ¦ Ieħor
+Avis de recherche (lettre aux cousins, remplie) ¦ Njoftim kërkimi (letër për kushërinjtë, e plotësuar) ¦ Avviż ta’ tfittxija (ittra lill-kuġini, mimlija)
+Barre d’outils ¦ Shiriti i mjeteve ¦ Toolbar
+Barre d’outils en ruban (avec les noms) ¦ Shirit mjetesh si fjongo (me emrat) ¦ Toolbar f’ribbon (bl-ismijiet)
+Barre d’outils · {what} ¦ Shiriti i mjeteve · {what} ¦ Toolbar · {what}
+Barré ¦ I hequr me vijë ¦ Ingassat
+Bas ¦ Poshtë ¦ Isfel
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Biografia u shtua (shkruar nga aplikacioni sipas kartelës): ndryshoje lirisht. ¦ Il-bijografija żdiedet (miktuba mill-app skont l-iskeda): editjaha kif trid.
+Bordure et trame ¦ Kufiri dhe hijëzimi ¦ Bordura u dellijiet
+Bordure et trame… ¦ Kufiri dhe hijëzimi… ¦ Bordura u dellijiet…
+Bordures ¦ Kufijtë ¦ Bordura
+Bordures du tableau ¦ Kufijtë e tabelës ¦ Bordura tat-tabella
+Breton ¦ Bretonisht ¦ Brettun
+COMPARER ¦ KRAHASO ¦ QABBEL
+Cacher dans le texte ¦ Fshih në tekst ¦ Aħbi fit-test
+Caractères (espaces compris) ¦ Shenja (me hapësira) ¦ Karattri (bl-ispazji)
+Caractères (sans les espaces) ¦ Shenja (pa hapësira) ¦ Karattri (mingħajr spazji)
+Caractères spéciaux ¦ Shenja të veçanta ¦ Karattri speċjali
+Carré (le texte autour) ¦ Katror (teksti përreth) ¦ Kwadru (it-test madwaru)
+Carré 15 × 15 cm ¦ Katror 15 × 15 cm ¦ Kwadru 15 × 15 cm
+Carré 21 × 21 cm ¦ Katror 21 × 21 cm ¦ Kwadru 21 × 21 cm
+Carré 30 × 30 cm ¦ Katror 30 × 30 cm ¦ Kwadru 30 × 30 cm
+Carte de visite ¦ Kartëvizitë ¦ Business card
+Cartes et livres ¦ Karta dhe libra ¦ Kards u kotba
+Carton DL (faire-part) ¦ Karton DL (lajmërim) ¦ Kartun DL (avviż)
+Case séparée ¦ Qeliza u nda ¦ Ċellola maqsuma
+Cases fusionnées ¦ Qelizat u bashkuan ¦ Ċelloli magħquda
+Casse ¦ Madhësia e shkronjave ¦ Kapitali/żgħar
+Ce diagramme est vide. ¦ Ky diagram është bosh. ¦ Dan id-dijagramma vojt.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ Ky dokument nuk ka ende fushë bashkimi (Futje → «📨 Fushë bashkimi»). Të futet fillimisht një kartelë e vogël identiteti te kursori? ¦ Dan id-dokument għad m’għandux qasam tal-għaqda (Daħħal → “📨 Qasam tal-għaqda”). L-ewwel tdaħħal skeda żgħira tal-identità fejn hemm il-cursor?
+Ce livre n’a pas de styles de paragraphe. ¦ Ky libër nuk ka stile paragrafi. ¦ Dan il-ktieb m’għandux stili tal-paragrafu.
+Ce passage a changé : relance la relecture. ¦ Kjo pjesë ka ndryshuar: rinis rileximin. ¦ Din il-parti nbidlet: erġa’ ibda r-reviżjoni.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Çfarë tregon imazhi, në një fjali (p.sh. «Martesa e Jean dhe Marie para kishës, 1923») ¦ Dak li turi l-istampa, f’sentenza (eż. “Żwieġ ta’ Jean u Marie quddiem il-knisja, 1923”)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Ky tekst ndjek kartelën: përditësohet kur hapet dokumenti (Mjetet → Përditëso fushat). ¦ Dan it-test isegwi l-iskeda: jiġi aġġornat meta jinfetaħ id-dokument (Għodod → Aġġorna l-oqsma).
+Centrer ¦ Në qendër ¦ Iċċentra
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Disa imazhe, shumë të rënda, nuk u morën. ¦ Xi stampi, tqal wisq, ma ttieħdux.
+Cette case n’est pas fusionnée. ¦ Kjo qelizë nuk është e bashkuar. ¦ Din iċ-ċellola mhix magħquda.
+Cette feuille est vide. ¦ Kjo fletë është bosh. ¦ Din il-folja vojta.
+Cette image n’a pas de fichier. ¦ Ky imazh nuk ka skedar. ¦ Din l-istampa m’għandhiex fajl.
+Champ ¦ Fushë ¦ Qasam
+Changer l’image ¦ Ndrysho imazhin ¦ Ibdel l-istampa
+Changer l’image… ¦ Ndrysho imazhin… ¦ Ibdel l-istampa…
+Chaque Mot ¦ Çdo Fjalë ¦ Kull Kelma
+Chaque Mot Avec Une Majuscule ¦ Çdo Fjalë Me Shkronjë Të Madhe ¦ Kull Kelma B’Ittra Kbira
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ Kërko një fjalë me 🔍: çdo vend i gjetur shfaqet këtu. ¦ Fittex kelma b’🔍: kull post misjub jidher hawn.
+Chercher… (un mot, un nom) ¦ Kërko… (një fjalë, një emër) ¦ Fittex… (kelma, isem)
+Choisir un classeur du Tableur ¦ Zgjidh një libër pune nga Fleta llogaritëse ¦ Agħżel workbook mill-Folja elettronika
+Choisir un média (lien) ¦ Zgjidh një media (lidhje) ¦ Agħżel midja (link)
+Choisis d’abord du texte. ¦ Zgjidh fillimisht tekst. ¦ L-ewwel agħżel test.
+Choisis d’abord le texte à changer. ¦ Zgjidh fillimisht tekstin për të ndryshuar. ¦ L-ewwel agħżel it-test li trid tibdel.
+Choisis le passage à commenter. ¦ Zgjidh pjesën për të komentuar. ¦ Agħżel il-parti li trid tikkummenta.
+Choisis les paragraphes à mettre en colonnes. ¦ Zgjidh paragrafët për t’i vendosur në kolona. ¦ Agħżel il-paragrafi li trid tpoġġi f’kolonni.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Zgjidh një fjalë (klikim i dyfishtë) ose vendos kursorin brenda saj, pastaj 🔁 Sinonime. ¦ Agħżel kelma (klikk doppju) jew poġġi l-cursor fiha, imbagħad 🔁 Sinonimi.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Zgjidh një drejtkëndësh qelizash (pa copa të një bashkimi tjetër). ¦ Agħżel rettangolu ta’ ċelloli (mingħajr biċċa minn għaqda oħra).
+Classique ¦ Klasik ¦ Klassiku
+Classique (à la française) ¦ Klasik (në mënyrën franceze) ¦ Klassiku (bil-Franċiż)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Kliko një fjalë: ajo zëvendëson «{word}» (↶ për t’u kthyer). ¦ Ikklikkja fuq kelma: tieħu post “{word}” (↶ biex terġa’ lura).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Kliko për ta shtuar në tekst (dritarja mbetet e hapur). ¦ Ikklikkja biex iżżidha mat-test (it-tieqa tibqa’ miftuħa).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Shëno dy versione (ose «Tani») për t’i krahasuar. ¦ Immarka żewġ verżjonijiet (jew “Issa”) biex tqabbilhom.
+Coller depuis Word ou le web ¦ Ngjit nga Word ose nga uebi ¦ Waħħal minn Word jew mill-web
+Coller sans la mise en forme ¦ Ngjit pa formatim ¦ Waħħal mingħajr il-formattjar
+Colonne ajoutée ¦ Kolona u shtua ¦ Kolonna miżjuda
+Colonne supprimée ¦ Kolona u fshi ¦ Kolonna mħassra
+Commande inconnue : {cmd} ¦ Komandë e panjohur: {cmd} ¦ Kmand mhux magħruf: {cmd}
+Commencer sur une nouvelle page ¦ Fillo në një faqe të re ¦ Ibda f’paġna ġdida
+Commentaire supprimé ¦ Komenti u fshi ¦ Kumment imħassar
+Commentaires ¦ Komentet ¦ Kummenti
+Commentaires (panneau) ¦ Komentet (paneli) ¦ Kummenti (pannell)
+Commenter ¦ Komento ¦ Ikkummenta
+Compte rendu de visite ¦ Raport vizite ¦ Rapport taż-żjara
+Conjoint ¦ Bashkëshorti ¦ Konjuġi
+Copie enregistrée : « {name} ». ¦ Kopja u ruajt: «{name}». ¦ Kopja ssejvjata: “{name}”.
+Copie impossible : {error} ¦ Kopjimi nuk u bë: {error} ¦ Il-kopja ma setgħetx issir: {error}
+Copie rangée dans les médias ({format}). ¦ Kopja u vendos në media ({format}). ¦ Kopja tqiegħdet fil-midja ({format}).
+Copie « {name} » enregistrée. ¦ Kopja «{name}» u ruajt. ¦ Il-kopja “{name}” ġiet issejvjata.
+Corriger ¦ Korrigjo ¦ Ikkoreġi
+Couleur du texte ¦ Ngjyra e tekstit ¦ Kulur tat-test
+Couleur du texte… ¦ Ngjyra e tekstit… ¦ Kulur tat-test…
+Couleur et surlignage (C2) ¦ Ngjyra dhe theksimi (C2) ¦ Kulur u highlight (C2)
+Couper ici ¦ Prit këtu ¦ Aqta’ hawn
+Créer le lien ¦ Krijo lidhjen ¦ Oħloq il-link
+Créer le style ¦ Krijo stilin ¦ Oħloq l-istil
+Créer le tableau ¦ Krijo tabelën ¦ Oħloq it-tabella
+Créer les copies ¦ Krijo kopjet ¦ Oħloq il-kopji
+Cyrillique ¦ Cirilik ¦ Ċirilliku
+Dans la sélection : mots ¦ Në përzgjedhje: fjalë ¦ Fl-għażla: kliem
+Dans le texte, entre parenthèses ¦ Në tekst, në kllapa ¦ Fit-test, bejn il-parentesi
+Date (mise à jour à chaque ouverture) ¦ Data (përditësohet në çdo hapje) ¦ Data (aġġornata kull darba li jinfetaħ)
+Date du jour ¦ Data e sotme ¦ Data tal-lum
+Date du mariage ¦ Data e martesës ¦ Data taż-żwieġ
+Demande d’acte (remplie avec une fiche) ¦ Kërkesë për akt (e plotësuar me një kartelë) ¦ Talba għal att (mimlija b’skeda)
+Demande d’acte d’état civil ¦ Kërkesë për akt të gjendjes civile ¦ Talba għal att tar-reġistru pubbliku
+Design ¦ Dizajni ¦ Disinn
+Diminuer le retrait ¦ Zvogëlo kryeradhën ¦ Naqqas l-indentazzjoni
+Document ¦ Dokument ¦ Dokument
+Document importé ¦ Dokument i importuar ¦ Dokument importat
+Document modifié ailleurs ¦ Dokumenti u ndryshua diku tjetër ¦ Id-dokument inbidel x’imkien ieħor
+Document « {name} » importé ({words}) ¦ Dokumenti «{name}» u importua ({words}) ¦ Id-dokument “{name}” ġie importat ({words})
+Donne un nom au style. ¦ Jepi një emër stilit. ¦ Agħti isem lill-istil.
+Double (2) ¦ Dyfish (2) ¦ Doppju (2)
+Double-clic : modifier le pied de page ¦ Klikim i dyfishtë: ndrysho fundin e faqes ¦ Klikk doppju: editja l-footer
+Double-clic : modifier l’en-tête ¦ Klikim i dyfishtë: ndrysho kreun e faqes ¦ Klikk doppju: editja l-header
+Double-clic : renommer · clic droit : plus ¦ Klikim i dyfishtë: riemërto · klikim i djathtë: më shumë ¦ Klikk doppju: semmi mill-ġdid · klikk lemin: aktar
+Droite ¦ Djathtas ¦ Lemin
+Déplacer à droite ¦ Zhvendos djathtas ¦ Ċaqlaq lejn il-lemin
+Déplacer à gauche ¦ Zhvendos majtas ¦ Ċaqlaq lejn ix-xellug
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ Sipas paragrafit të kursorit: ndrysho çfarë të duash, pastaj do të propozohet në listën e stileve. ¦ Skont il-paragrafu tal-cursor: ibdel li trid, imbagħad jiġi propost fil-lista tal-istili.
+Effacer la mise en forme ¦ Fshi formatimin ¦ Neħħi l-formattjar
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Shërben për drejtshkrimin (fjalët e nënvizuara me të kuqe, korrigjimet me klikim të djathtë) dhe për leximin me zë. ¦ Isservi għall-ortografija (kliem issottolinjat bl-aħmar, korrezzjonijiet bil-klikk lemin) u għall-qari b’leħen għoli.
+En note de bas de page ¦ Si shënim në fund të faqes ¦ Bħala nota f’qiegħ il-paġna
+En note de fin ¦ Si shënim në fund ¦ Bħala nota fl-aħħar
+En-tête (en haut de chaque page) ¦ Kreu i faqes (në krye të çdo faqeje) ¦ Header (fil-quċċata ta’ kull paġna)
+En-tête de la première page ¦ Kreu i faqes së parë ¦ Header tal-ewwel paġna
+En-tête et pied de page ¦ Kreu dhe fundi i faqes ¦ Header u footer
+En-tête et pied de page… ¦ Kreu dhe fundi i faqes… ¦ Header u footer…
+En-tête et pied… ¦ Kreu dhe fundi… ¦ Header u footer…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Ruaje fillimisht dokumentin (💾): versionet e tij do të ruhen bashkë me të. ¦ L-ewwel issejvja d-dokument (💾): il-verżjonijiet tiegħu jinżammu miegħu.
+Enregistrer comme modèle ¦ Ruaj si model ¦ Issejvja bħala mudell
+Enregistrer comme modèle… ¦ Ruaj si model… ¦ Issejvja bħala mudell…
+Enregistrer comme nouvelle version ¦ Ruaj si version të ri ¦ Issejvja bħala verżjoni ġdida
+Enregistrer tout seul ¦ Ruaj automatikisht ¦ Issejvja waħdu
+Enregistrer une copie ¦ Ruaj një kopje ¦ Issejvja kopja
+Envoi des images indisponible. ¦ Dërgimi i imazheve nuk është i disponueshëm. ¦ Il-bgħit tal-istampi mhux disponibbli.
+Envoyer ¦ Dërgo ¦ Ibgħat
+Envoyer vers la mise en page… ¦ Dërgo në faqosje… ¦ Ibgħat għat-tqassim…
+Espace après ¦ Hapësirë pas ¦ Spazju wara
+Espace après le paragraphe ¦ Hapësirë pas paragrafit ¦ Spazju wara l-paragrafu
+Espace avant ¦ Hapësirë para ¦ Spazju qabel
+Espace avant le paragraphe ¦ Hapësirë para paragrafit ¦ Spazju qabel il-paragrafu
+Espace fine avant ; ! ? ¦ Hapësirë e ngushtë para ; ! ? ¦ Spazju rqiq qabel ; ! ?
+Espace insécable avant les deux-points ¦ Hapësirë e pandashme para dy pikave ¦ Spazju li ma jinqasamx qabel iż-żewġ punti
+Espaces en trop ¦ Hapësira të tepërta ¦ Spazji żejda
+Espagnol ¦ Spanjisht ¦ Spanjol
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ Dhe {n} të tjera («Korrigjo të gjitha» i merr edhe ato). ¦ U {n} oħra (“Ikkoreġi kollox” jieħu dawk ukoll).
+Exporté : {name} ¦ U eksportua: {name} ¦ Esportat: {name}
+Exposant ¦ Mbishkrim i sipërm ¦ Superscript
+Expressions simples ¦ Shprehje të thjeshta ¦ Mudelli sempliċi
+FORMAT ¦ FORMATI ¦ FORMAT
+Famille et vie ¦ Familja dhe jeta ¦ Familja u ħajja
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ Fleta është shumë e madhe për një dokument (mbi 20 000 qeliza): zgjidh një zonë më të vogël në Fletën llogaritëse. ¦ Folja kbira wisq għal dokument (aktar minn 20,000 ċellola): agħżel firxa iżgħar fil-Folja elettronika.
+Fiche d’identité d’un ancêtre (remplie) ¦ Kartelë identiteti e një paraardhësi (e plotësuar) ¦ Skeda tal-identità ta’ antenat (mimlija)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Kartela është hapur pas dokumentit (mbylle ose zvogëloje për ta parë). ¦ Skeda miftuħa wara d-dokument (agħlqu jew imminimizzah biex tarah).
+Filigrane ¦ Filigran ¦ Watermark
+Garder avec le paragraphe suivant ¦ Mbaje me paragrafin pasues ¦ Żomm mal-paragrafu li jmiss
+Garder avec le suivant ¦ Mbaje me pasuesin ¦ Żomm ma’ dak li jmiss
+Garder la mise en forme (nettoyée) ¦ Ruaj formatimin (të pastruar) ¦ Żomm il-formattjar (imnaddaf)
+Garder ma version ¦ Mbaj versionin tim ¦ Żomm il-verżjoni tiegħi
+Gauche ¦ Majtas ¦ Xellug
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Tërhiq miun nga një qelizë te tjetra për të zgjedhur disa, pastaj «Bashko». ¦ Kaxkar il-maws minn ċellola għal oħra biex tagħżel diversi, imbagħad “Għaqqad iċ-ċelloli”.
+Gras ¦ Të trasha ¦ Grassett
+Gras, italique… ¦ Të trasha, të pjerrëta… ¦ Grassett, korsiv…
+Grec ¦ Greqisht ¦ Grieg
+Groupe de caractères ¦ Grup shenjash ¦ Grupp ta’ karattri
+Guillemets français « » ¦ Thonjëza franceze « » ¦ Virgoletti Franċiżi « »
+Haut ¦ Lart ¦ Fuq
+Hauteur ¦ Lartësia ¦ Għoli
+Histoire d’une maison ou d’un village ¦ Historia e një shtëpie ose e një fshati ¦ Storja ta’ dar jew ta’ raħal
+IMAGE ¦ IMAZH ¦ STAMPA
+Image ¦ Imazh ¦ Stampa
+Image ajoutée (et rangée dans les médias). ¦ Imazhi u shtua (dhe u vendos në media). ¦ L-istampa żdiedet (u tqiegħdet fil-midja).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Imazhi i zgjedhur: tërhiq një qoshe për madhësinë, klikim i djathtë për mbështjelljen, ⌫ për ta fshirë. ¦ Stampa magħżula: iġbed kantuniera għad-daqs, klikk lemin għat-tgeżwir tat-test, ⌫ biex tħassarha.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Imazhi u vendos: klikim për madhësinë, klikim i djathtë për mbështjelljen (katror, lart dhe poshtë) dhe mbishkrimin. ¦ Stampa mqiegħda: klikk għad-daqs, klikk lemin għat-tgeżwir (kwadru, fuq u isfel) u l-kapsjoni.
+Image rangée dans les médias… ¦ Imazhi po vendoset në media… ¦ L-istampa qed titqiegħed fil-midja…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Imazh pa përshkrim (lexohet me zë për personat që nuk shohin) ¦ Stampa mingħajr deskrizzjoni (tinqara b’leħen għoli lil min ma jarax)
+Image supprimée ¦ Imazhi u fshi ¦ Stampa mħassra
+Impossible d’enregistrer : {error} ¦ Nuk mund të ruhet: {error} ¦ Ma tistax tissejvja: {error}
+Indice ¦ Mbishkrim i poshtëm ¦ Subscript
+Insérer la fiche d’identité ¦ Fut kartelën e identitetit ¦ Daħħal l-iskeda tal-identità
+Interligne ¦ Hapësira mes rreshtave ¦ Spazju bejn il-linji
+Interligne et espacement ¦ Hapësira mes rreshtave dhe ndarja ¦ Spazju bejn il-linji u spazjar
+Interligne {n} ¦ Hapësira mes rreshtave {n} ¦ Spazju bejn il-linji {n}
+Italien ¦ Italisht ¦ Taljan
+Italique ¦ Të pjerrëta ¦ Korsiv
+Jeu de styles ¦ Grup stilesh ¦ Sett ta’ stili
+Jeu de styles des nouveaux documents ¦ Grupi i stileve të dokumenteve të reja ¦ Sett ta’ stili tad-dokumenti ġodda
+Jeu de styles « {name} » ¦ Grupi i stileve «{name}» ¦ Sett ta’ stili “{name}”
+Jeu de styles… ¦ Grup stilesh… ¦ Sett ta’ stili…
+Justifier ¦ Justifiko ¦ Iġġustifika
+Justifié ¦ I justifikuar ¦ Iġġustifikat
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Bibliografia (Futje → 📚) merr vetë burimet e cituara. ¦ Il-bibljografija (Daħħal → 📚) tiġbor waħedha s-sorsi kkwotati.
+La biographie de qui ? ¦ Biografia e kujt? ¦ Il-bijografija ta’ min?
+La demande d’acte pour qui ? ¦ Kërkesa për akt për kë? ¦ It-talba għal att għal min?
+La fenêtre des images n’est pas chargée. ¦ Dritarja e imazheve nuk është ngarkuar. ¦ It-tieqa tal-istampi mhix imtella’.
+La fenêtre des versions n’est pas chargée. ¦ Dritarja e versioneve nuk është ngarkuar. ¦ It-tieqa tal-verżjonijiet mhix imtella’.
+La fiche de qui ? ¦ Kartela e kujt? ¦ L-iskeda ta’ min?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ Leximi me zë nuk ekziston në këtë shfletues. ¦ Il-qari b’leħen għoli ma jeżistix f’dan il-browser.
+La naissance : date et lieu ¦ Lindja: data dhe vendi ¦ It-twelid: data u post
+La première ligne est répétée en haut de chaque page ¦ Rreshti i parë përsëritet në krye të çdo faqeje ¦ L-ewwel linja tirrepeti ruħha fil-quċċata ta’ kull paġna
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Vazhdimi i dokumentit fillon në një faqe të re, me formatin e vet: për shembull një tabelë e madhe ose një pemë horizontale, pastaj kthehemi në vertikale. ¦ Il-bqija tad-dokument tibda f’paġna ġdida, bil-format tagħha: pereżempju tabella kbira jew siġra orizzontali, imbagħad terġa’ lura għal vertikali.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Tasti Tab shkon deri te ndalesa e radhës. Në tabelë, Tab kalon te qeliza tjetër; në listë, zhvendos një nivel. ¦ Il-buttuna Tab tmur sal-waqfa li jmiss. F’tabella, Tab tmur għaċ-ċellola li jmiss; f’lista, iċċaqlaq livell wieħed.
+La vérification n’est pas chargée. ¦ Kontrolli nuk është ngarkuar. ¦ Il-verifika mhix imtella’.
+Langue ¦ Gjuha ¦ Lingwa
+Langue des nouveaux documents ¦ Gjuha e dokumenteve të reja ¦ Lingwa tad-dokumenti ġodda
+Langue du document (orthographe, lecture à voix haute) ¦ Gjuha e dokumentit (drejtshkrimi, leximi me zë) ¦ Lingwa tad-dokument (ortografija, qari b’leħen għoli)
+Largeur ¦ Gjerësia ¦ Wisa’
+Latin ¦ Latinisht ¦ Latin
+Le décès : date et lieu ¦ Vdekja: data dhe vendi ¦ Il-mewt: data u post
+Le livre dont reprendre les styles ¦ Libri nga i cili merren stilet ¦ Il-ktieb li minnu jittieħdu l-istili
+Le mot entier seulement ¦ Vetëm fjala e plotë ¦ Il-kelma sħiħa biss
+Le mot tel qu’il apparaîtra dans l’index : ¦ Fjala siç do të shfaqet në indeks: ¦ Il-kelma kif se tidher fl-indiċi:
+Le moteur du tableur n’est pas chargé. ¦ Motori i fletës llogaritëse nuk është ngarkuar. ¦ Il-magna tal-folja elettronika mhix imtella’.
+Le nom (lien vers la fiche) ¦ Emri (lidhje me kartelën) ¦ L-isem (link għall-iskeda)
+Le nom de la copie : ¦ Emri i kopjes: ¦ L-isem tal-kopja:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Emri i modelit (teksti mbetet: zbrazë më parë nëse do një model bosh): ¦ L-isem tal-mudell (it-test jibqa’: battlu qabel jekk trid mudell vojt):
+Le nom du nouvel onglet ¦ Emri i skedës së re ¦ L-isem tat-tab il-ġdida
+Le nom et les années (1850 – 1920) ¦ Emri dhe vitet (1850 – 1920) ¦ L-isem u s-snin (1850 – 1920)
+Le nom, la naissance et le décès ¦ Emri, lindja dhe vdekja ¦ L-isem, it-twelid u l-mewt
+Le petit arbre de qui ? ¦ Pema e vogël e kujt? ¦ Is-siġra ż-żgħira ta’ min?
+Le récit de qui ? ¦ Rrëfimi i kujt? ¦ Ir-rakkont ta’ min?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Teksti bëhet faqe libri (Faqosje): titujt 1 bëhen kapituj, imazhet faqe imazhesh me mbishkrimin e tyre, shënimet një pjesë «Shënime» në fund. Dokumenti yt mbetet siç është këtu. ¦ It-test isir paġni ta’ ktieb (Tqassim): it-titli 1 isiru kapitli, l-istampi paġni ta’ stampi bil-kapsjoni tagħhom, in-noti parti “Noti” fl-aħħar. Id-dokument tiegħek jibqa’ kif inhu hawn.
+Le texte seul ¦ Vetëm teksti ¦ It-test biss
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Renditja nuk funksionon me qeliza të bashkuara: ndaji fillimisht. ¦ L-issortjar ma jaħdimx b’ċelloli magħquda: l-ewwel ifridhom.
+Lecture arrêtée. ¦ Leximi u ndal. ¦ Il-qari twaqqaf.
+Legal US ¦ Legal US ¦ Legal US
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ Fushat «» marrin vlerat e një kartele: Skedari → «👤 Plotëso me një kartelë…», ose një kopje për person me Mjetet → «📨 Postim masiv…». ¦ L-oqsma “” jieħdu l-valuri ta’ skeda: Fajl → “👤 Imla b’skeda…”, jew kopja għal kull persuna b’Għodod → “📨 Mail merge…”.
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Ndryshimet e bëra që nga ruajtja e fundit do të humbasin. ¦ Il-bidliet magħmula mill-aħħar issejvjar jintilfu.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Datat dhe vendet e shkruara pranë një emri të bazës krahasohen me kartelën e tij (lindja, pagëzimi, martesa, vdekja, varrimi, moshat, numrat Sosa). Asgjë nuk ndryshohet vetë. ¦ Id-dati u l-postijiet miktuba ħdejn isem mid-database jitqabblu mal-iskeda tiegħu (twelid, magħmudija, żwieġ, mewt, dfin, etajiet, numri Sosa). Xejn ma jinbidel waħdu.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Makrot e skedarit shpërfillen (nuk nisen kurrë). ¦ Il-macros tal-fajl jiġu injorati (qatt ma jitħaddmu).
+Les modifications ne sont plus suivies. ¦ Ndryshimet nuk ndiqen më. ¦ Il-bidliet m’għadhomx segwiti.
+Les modifications sont suivies ¦ Ndryshimet po ndiqen ¦ Il-bidliet qed jiġu segwiti
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Fjalët e shkruara gabim nënvizohen me të kuqe (klikim i djathtë për korrigjimet). ¦ Il-kliem miktub ħażin huwa sottolinjat bl-aħmar (klikk lemin għall-korrezzjonijiet).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Paragrafët e zgjedhur ndahen në kolona të barabarta (si në gazetë). ¦ Il-paragrafi magħżula jinqasmu f’kolonni bilanċjati (bħal f’gazzetta).
+Les personnes du publipostage ¦ Personat e postimit masiv ¦ Il-persuni tal-mail merge
+Les raccourcis à soi ne sont pas chargés. ¦ Shkurtoret e tua nuk janë ngarkuar. ¦ Ix-shortcuts tiegħek mhumiex imtella’.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Titujt dhe teksti ndryshojnë së bashku fontin dhe ngjyrën; stilet e tua mbeten. ¦ It-titli u t-test jibdlu flimkien il-font u l-kulur; l-istili tiegħek jibqgħu.
+Lettre US ¦ Letter US ¦ Letter US
+Lettre aux archives ¦ Letër për arkivat ¦ Ittra lill-arkivji
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ Letër për arkivat, kërkesë për akt, rrëfim për një paraardhës, raport vizite, raport kërkimi… ¦ Ittra lill-arkivji, talba għal att, rakkont ta’ antenat, rapport taż-żjara, rapport tar-riċerka…
+Lettre à la famille ¦ Letër për familjen ¦ Ittra lill-familja
+Lettres accentuées ¦ Shkronja me shenja ¦ Ittri b’aċċenti
+Lettres et abréviations anciennes ¦ Shkronja dhe shkurtime të vjetra ¦ Ittri u abbrevjazzjonijiet antiki
+Lettrine ¦ Shkronjë e madhe zbukuruese ¦ Drop cap
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Lidhja «{text}»: shkruaj më mirë se ku të çon ¦ Link “{text}”: ikteb aħjar fejn iwassal
+Lieu du mariage ¦ Vendi i martesës ¦ Post taż-żwieġ
+Ligne ajoutée ¦ Rreshti u shtua ¦ Ringiela miżjuda
+Ligne au-dessus ¦ Rresht sipër ¦ Ringiela fuq
+Ligne d’en-tête (répétée sur chaque page) ¦ Rresht titujsh (përsëritet në çdo faqe) ¦ Ringiela tal-intestatura (ripetuta f’kull paġna)
+Ligne en dessous ¦ Rresht poshtë ¦ Ringiela taħt
+Ligne supprimée ¦ Rreshti u fshi ¦ Ringiela mħassra
+Lire à voix haute ¦ Lexo me zë ¦ Aqra b’leħen għoli
+Liste numérotée ¦ Listë e numëruar ¦ Lista nnumerata
+Liste à puces ¦ Listë me pika ¦ Lista bil-bullets
+Livre (15,6 × 23,4 cm) ¦ Libër (15,6 × 23,4 cm) ¦ Ktieb (15.6 × 23.4 cm)
+Livre US (6 × 9 in) ¦ Libër US (6 × 9 in) ¦ Ktieb US (6 × 9 in)
+Livre ancien ¦ Libër i vjetër ¦ Ktieb antik
+Louise Borie, née en 1850 ¦ Louise Borie, lindur më 1850 ¦ Louise Borie, imwielda fl-1850
+L’onglet « {name} » et son texte seront supprimés. ¦ Skeda «{name}» dhe teksti i saj do të fshihen. ¦ It-tab “{name}” u t-test tiegħu se jitħassru.
+MAJUSCULES ¦ SHKRONJA TË MËDHA ¦ ITTRI KBAR
+Majuscule en début de phrase ¦ Shkronjë e madhe në fillim të fjalisë ¦ Ittra kbira fil-bidu tas-sentenza
+Majuscules et minuscules comptent ¦ Dallo shkronjat e mëdha nga të voglat ¦ L-ittri kbar u żgħar jgħoddu
+Marquer ¦ Shëno ¦ Immarka
+Marquer pour l’index ¦ Shëno për indeksin ¦ Immarka għall-indiċi
+Marques de mise en forme ¦ Shenjat e formatimit ¦ Marki tal-formattjar
+Marques de mise en forme ¶ ¦ Shenjat e formatimit ¶ ¦ Marki tal-formattjar ¶
+Mathématiques ¦ Matematikë ¦ Matematika
+Mes modèles ¦ Modelet e mia ¦ Il-mudelli tiegħi
+Mettre à jour les champs (personnes, dates) ¦ Përditëso fushat (personat, datat) ¦ Aġġorna l-oqsma (persuni, dati)
+Mise en forme ¦ Formatimi ¦ Formattjar
+Mise en forme (panneau de droite) ¦ Formatimi (paneli djathtas) ¦ Formattjar (pannell tal-lemin)
+Mise en évidence ¦ Theksim i fortë ¦ Enfasi qawwija
+Moderne ¦ Modern ¦ Modern
+Modification acceptée ¦ Ndryshimi u pranua ¦ Bidla aċċettata
+Modification précédente ¦ Ndryshimi i mëparshëm ¦ Bidla ta’ qabel
+Modification refusée ¦ Ndryshimi u refuzua ¦ Bidla miċħuda
+Modification suivante ¦ Ndryshimi pasues ¦ Bidla li jmiss
+Modifications suivies ¦ Ndryshimet e ndjekura ¦ Bidliet segwiti
+Modifier le lien… ¦ Ndrysho lidhjen… ¦ Editja l-link…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Modeli «{name}» u ruajt (Nis nga një model → Modelet e mia). ¦ Il-mudell “{name}” ġie ssejvjat (Ibda minn mudell → Il-mudelli tiegħi).
+Moi ¦ Unë ¦ Jien
+Mon document ¦ Dokumenti im ¦ Id-dokument tiegħi
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Emri im (për ndjekjen e ndryshimeve dhe komentet) ¦ Ismi (għas-segwitu tal-bidliet u l-kummenti)
+Monnaies et chiffres ¦ Monedha dhe shifra ¦ Muniti u ċifri
+Montrer dans le texte ¦ Shfaq në tekst ¦ Uri fit-test
+Montrer les marques de mise en forme ¶ ¦ Shfaq shenjat e formatimit ¶ ¦ Uri l-marki tal-formattjar ¶
+Montrer les modifications ¦ Shfaq ndryshimet ¦ Uri l-bidliet
+Montrer les modifications… ¦ Shfaq ndryshimet… ¦ Uri l-bidliet…
+Montrer ▾ ¦ Shfaq ▾ ¦ Uri ▾
+Mot ancien ¦ Fjalë e vjetër ¦ Kelma antika
+Mot entier ¦ Fjalë e plotë ¦ Kelma sħiħa
+Mot répété ¦ Fjalë e përsëritur ¦ Kelma ripetuta
+Mots ¦ Fjalë ¦ Kliem
+NOTE DE BAS DE PAGE ¦ SHËNIM NË FUND TË FAQES ¦ NOTA F’QIEGĦ IL-PAĠNA
+NOTE DE FIN ¦ SHËNIM NË FUND ¦ NOTA FL-AĦĦAR
+Naissance et décès ¦ Lindja dhe vdekja ¦ Twelid u mewt
+Nom de famille ¦ Mbiemri ¦ Kunjom
+Nombre de colonnes ¦ Numri i kolonave ¦ Numru ta’ kolonni
+Nombre de mots, de caractères, de paragraphes ¦ Numri i fjalëve, shenjave, paragrafëve ¦ Numru ta’ kliem, karattri, paragrafi
+Nombre de pages ¦ Numri i faqeve ¦ Numru ta’ paġni
+Non (avec 💾 ou ⌘S) ¦ Jo (me 💾 ose ⌘S) ¦ Le (b’💾 jew ⌘S)
+Normal ¦ Normal ¦ Normali
+Normal, A4, marges de 2,5 cm ¦ Normal, A4, kufij 2,5 cm ¦ Normali, A4, marġini ta’ 2.5 cm
+Note de bas de page ¦ Shënim në fund të faqes ¦ Nota f’qiegħ il-paġna
+Note de fin (à la fin du document) ¦ Shënim në fund (në fund të dokumentit) ¦ Nota fl-aħħar (fl-aħħar tad-dokument)
+Note {n} ¦ Shënimi {n} ¦ Nota {n}
+Nouveau commentaire ¦ Koment i ri ¦ Kumment ġdid
+Nouvel onglet ¦ Skedë e re ¦ Tab ġdida
+Nouvelle section en paysage. ¦ Seksion i ri horizontal. ¦ Taqsima ġdida orizzontali.
+Nouvelle section en portrait. ¦ Seksion i ri vertikal. ¦ Taqsima ġdida vertikali.
+Numéro de la page (1 à {n}) : ¦ Numri i faqes (1 deri {n}): ¦ Numru tal-paġna (1 sa {n}):
+Néerlandais ¦ Holandisht ¦ Olandiż
+OUTILS ¦ MJETET ¦ GĦODOD
+Occitan ¦ Oksitanisht ¦ Oċċitan
+Onglet renommé ¦ Skeda u riemërtua ¦ Tab imsemmija mill-ġdid
+Onglet supprimé ¦ Skeda u fshi ¦ Tab imħassra
+Onglet {n} ¦ Skeda {n} ¦ Tab {n}
+Onglets du document ¦ Skedat e dokumentit ¦ Tabs tad-dokument
+Onglets rangés ¦ Skedat u renditën ¦ Tabs irranġati
+Orientation ¦ Orientimi ¦ Orjentazzjoni
+Orientation de la suite ¦ Orientimi i vazhdimit ¦ Orjentazzjoni tal-bqija
+Ouvrir le lieu ¦ Hap vendin ¦ Iftaħ il-post
+Ouvrir le panneau de navigation ¦ Hap panelin e lundrimit ¦ Iftaħ il-pannell tan-navigazzjoni
+Page blanche ¦ Faqe e bardhë ¦ Paġna vojta
+Page {n} ¦ Faqja {n} ¦ Paġna {n}
+Page {page} / {total} ¦ Faqja {page} / {total} ¦ Paġna {page} / {total}
+Panneau de droite ¦ Paneli djathtas ¦ Pannell tal-lemin
+Panneau de navigation : titres, pages, résultats ¦ Paneli i lundrimit: tituj, faqe, rezultate ¦ Pannell tan-navigazzjoni: titli, paġni, riżultati
+Paragraphe ¦ Paragraf ¦ Paragrafu
+Paragraphes ¦ Paragrafë ¦ Paragrafi
+Paragraphe… ¦ Paragraf… ¦ Paragrafu…
+Pas de personne dans cette liste. ¦ Asnjë person në këtë listë. ¦ L-ebda persuna f’din il-lista.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ Nuk njihet asnjë sinonim për «{word}». Fjalori i integruar ka {n} grupe fjalësh, sidomos ato të një rrëfimi familjar. ¦ L-ebda sinonimu magħruf għal “{word}”. Id-dizzjunarju integrat fih {n} gruppi ta’ kliem, l-aktar dawk ta’ rakkont tal-familja.
+Pas d’espace avant la virgule ou le point ¦ Pa hapësirë para presjes ose pikës ¦ L-ebda spazju qabel il-virgola jew il-punt
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Ende asnjë koment: zgjidh një pjesë, pastaj «💬 Koment i ri». ¦ Għad m’hemmx kummenti: agħżel parti, imbagħad “💬 Kumment ġdid”.
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ Ende asnjë model yti: në një dokument, Skedari → «Ruaj si model…». ¦ Għad m’għandekx mudell tiegħek: f’dokument, Fajl → “Issejvja bħala mudell…”.
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Ende asnjë titull: zgjidh stilin «Titulli 1» (ose Titulli 2, 3…) për një paragraf, do të shfaqet këtu. ¦ Għad m’hemmx titlu: agħżel l-istil “Titlu 1” (jew Titlu 2, 3…) għal paragrafu, u jidher hawn.
+Personne pour l’instant. ¦ Askush për momentin. ¦ Ħadd għalissa.
+Petites capitales ¦ Kapitale të vogla ¦ Small caps
+Pied de la première page ¦ Fundi i faqes së parë ¦ Footer tal-ewwel paġna
+Pied de page (en bas de chaque page) ¦ Fundi i faqes (në fund të çdo faqeje) ¦ Footer (f’qiegħ kull paġna)
+Place d’abord le curseur dans le texte. ¦ Vendos fillimisht kursorin në tekst. ¦ L-ewwel poġġi l-cursor fit-test.
+Place le curseur dans un paragraphe. ¦ Vendos kursorin në një paragraf. ¦ Poġġi l-cursor f’paragrafu.
+Place le curseur dans un tableau. ¦ Vendos kursorin në një tabelë. ¦ Poġġi l-cursor f’tabella.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ Vendos kursorin në një ndryshim (tekst i gjelbër ose i hequr me të kuqe). ¦ Poġġi l-cursor f’bidla (test aħdar jew ingassat bl-aħmar).
+Place le curseur à l’endroit de la coupure. ¦ Vendos kursorin në vendin e prerjes. ¦ Poġġi l-cursor fejn trid il-qasma.
+Plein écran (⛶) ¦ Ekran i plotë (⛶) ¦ Skrin sħiħ (⛶)
+Plus de ligne d’en-tête ¦ Jo më rresht titujsh ¦ Ebda ringiela tal-intestatura
+Points de suspension en un seul signe ¦ Tre pika në një shenjë të vetme ¦ Tliet tikek f’sinjal wieħed
+Police ¦ Fonti ¦ Font
+Police (E5) ¦ Fonti (E5) ¦ Font (E5)
+Police et taille (E5) ¦ Fonti dhe madhësia (E5) ¦ Font u daqs (E5)
+Police… ¦ Fonti… ¦ Font…
+Polonais ¦ Polonisht ¦ Pollakk
+Portugais ¦ Portugalisht ¦ Portugiż
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Që dokumenti të lexohet mirë me lexues ekrani, me zë ose i zmadhuar. ¦ Biex id-dokument jinqara tajjeb b’screen reader, b’leħen għoli jew kbir.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Për një kartelë ose një vend të bazës: Futje → 👤 Një person, 📍 Një vend. ¦ Għal skeda jew post mid-database: Daħħal → 👤 Persuna, 📍 Post.
+Première page différente (pour une page de titre ou une lettre) ¦ Faqja e parë ndryshe (për një faqe titulli ose një letër) ¦ L-ewwel paġna differenti (għal paġna tat-titlu jew ittra)
+Précédent (⇧ Entrée) ¦ I mëparshmi (⇧ Enter) ¦ Ta’ qabel (⇧ Enter)
+Quelle feuille ? ¦ Cila fletë? ¦ Liema folja?
+Ranger une copie dans les médias ¦ Vendos një kopje në media ¦ Poġġi kopja fil-midja
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Gjendet te Listat → 🛠️ Mjetet e ndryshimit → 📝 Përpunues teksti. ¦ Tinsab f’Listi → 🛠️ Għodod tal-editjar → 📝 Proċessur tal-kliem.
+Rapport de recherche ¦ Raport kërkimi ¦ Rapport tar-riċerka
+Rechercher et remplacer ¦ Kërko dhe zëvendëso ¦ Fittex u ibdel
+Relecture ¦ Rilexim ¦ Reviżjoni
+Remplacer par ¦ Zëvendëso me ¦ Ibdel b’
+Remplacer par… ¦ Zëvendëso me… ¦ Ibdel b’…
+Remplir avec la fiche de qui ? ¦ Të plotësohet me kartelën e kujt? ¦ Timla bl-iskeda ta’ min?
+Renommer l’onglet ¦ Riemërto skedën ¦ Semmi mill-ġdid it-tab
+Renommer… ¦ Riemërto… ¦ Semmi mill-ġdid…
+Retirer la légende ¦ Hiq mbishkrimin ¦ Neħħi l-kapsjoni
+Retirer le lien (garder le texte) ¦ Hiq lidhjen (mbaj tekstin) ¦ Neħħi l-link (żomm it-test)
+Retirer l’espace après ¦ Hiq hapësirën pas ¦ Neħħi l-ispazju wara
+Retirer l’espace avant ¦ Hiq hapësirën para ¦ Neħħi l-ispazju qabel
+Retrait gauche ¦ Kryeradha majtas ¦ Indentazzjoni xellugija
+Retrait à droite ¦ Kryeradha djathtas ¦ Indentazzjoni lemin
+Retrait à gauche ¦ Kryeradha majtas ¦ Indentazzjoni xellug
+Rien (le texte comme s’il était accepté) ¦ Asgjë (teksti sikur të ishte pranuar) ¦ Xejn (it-test qisu aċċettat)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ Asgjë nuk ka ndryshuar që atëherë: çfarë shkruan ose fshin do të shfaqet këtu. ¦ Xejn ma nbidel minn dak iż-żmien: dak li tikteb jew tħassar jidher hawn.
+Rien à remplacer. ¦ Asgjë për të zëvendësuar. ¦ Xejn x’tibdel.
+Récents ¦ Të fundit ¦ Riċenti
+Récit d’un ancêtre ¦ Rrëfim për një paraardhës ¦ Rakkont ta’ antenat
+Récit — {name} ¦ Rrëfim — {name} ¦ Rakkont — {name}
+Répondre ¦ Përgjigju ¦ Wieġeb
+Répondre… ¦ Përgjigju… ¦ Wieġeb…
+STYLES ¦ STILET ¦ STILI
+Saut de page : la suite commence en haut de la page suivante. ¦ Ndërprerje faqeje: vazhdimi fillon në krye të faqes pasuese. ¦ Qasma tal-paġna: il-bqija tibda fil-quċċata tal-paġna li jmiss.
+Section {n} sur {total} (comme le document). ¦ Seksioni {n} nga {total} (si dokumenti). ¦ Taqsima {n} minn {total} (bħad-dokument).
+Section {n} sur {total} (format à elle). ¦ Seksioni {n} nga {total} (format më vete). ¦ Taqsima {n} minn {total} (format għaliha).
+Seulement un trait dessous ¦ Vetëm një vijë poshtë ¦ Linja taħt biss
+Signature ¦ Nënshkrimi ¦ Firma
+Simple (1) ¦ Njëfish (1) ¦ Wieħed (1)
+Simple (une marge à côté des ajouts) ¦ E thjeshtë (një kufi pranë shtesave) ¦ Sempliċi (marġni ħdejn iż-żidiet)
+Souligné ¦ I nënvizuar ¦ Sottolinjat
+Sous-titre ¦ Nëntitull ¦ Sottotitlu
+Style ¦ Stili ¦ Stil
+Style de caractère (quelques mots) ¦ Stil shenjash (disa fjalë) ¦ Stil tal-karattri (ftit kliem)
+Style de paragraphe ¦ Stil paragrafi ¦ Stil tal-paragrafu
+Style du paragraphe ¦ Stili i paragrafit ¦ Stil tal-paragrafu
+Style « {name} » ¦ Stili «{name}» ¦ Stil “{name}”
+Style « {name} » créé. ¦ Stili «{name}» u krijua. ¦ L-istil “{name}” inħoloq.
+Style « {name} » supprimé ¦ Stili «{name}» u fshi ¦ L-istil “{name}” tħassar
+Styles ¦ Stilet ¦ Stili
+Styles de paragraphe ¦ Stilet e paragrafit ¦ Stili tal-paragrafu
+Suivant ¦ Tjetri ¦ Li jmiss
+Suivant (Entrée) ¦ Tjetri (Enter) ¦ Li jmiss (Enter)
+Suivre les modifications ¦ Ndiq ndryshimet ¦ Segwi l-bidliet
+Sujet ¦ Subjekti ¦ Suġġett
+Supprimer la colonne ¦ Fshi kolonën ¦ Ħassar il-kolonna
+Supprimer le tableau ¦ Fshi tabelën ¦ Ħassar it-tabella
+Supprimer l’image ¦ Fshi imazhin ¦ Ħassar l-istampa
+Supprimer l’onglet ? ¦ Të fshihet skeda? ¦ Tħassar it-tab?
+Supprimer… ¦ Fshi… ¦ Ħassar…
+Surlignage ¦ Theksimi me ngjyrë ¦ Highlight
+Surlignage… ¦ Theksimi me ngjyrë… ¦ Highlight…
+Symboles et flèches ¦ Simbole dhe shigjeta ¦ Simboli u vleġeġ
+Séparer la cellule ¦ Ndaje qelizën ¦ Ifred iċ-ċellola
+T Titre ¦ T Titull ¦ T Titlu
+TRAITEMENT DE TEXTE ¦ PËRPUNUES TEKSTI ¦ PROĊESSUR TAL-KLIEM
+Retrait − ¦ Kryeradha − ¦ Indentazzjoni −
+Tableau de « {name} » ¦ Tabela e «{name}» ¦ Tabella ta’ “{name}”
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Tabelë pa rresht titujsh (Tabela → «Rresht titujsh») ¦ Tabella mingħajr ringiela tat-titli (Tabella → “Ringiela tal-intestatura”)
+Tableau supprimé ¦ Tabela u fshi ¦ Tabella mħassra
+Tableau trié de A à Z ¦ Tabela u rendit nga A në Z ¦ Tabella ssortjata minn A sa Z
+Tableau trié de Z à A ¦ Tabela u rendit nga Z në A ¦ Tabella ssortjata minn Z sa A
+Tableau « {name} » ajouté ({n}). ¦ Tabela «{name}» u shtua ({n}). ¦ It-tabella “{name}” żdiedet ({n}).
+Tabloïd US ¦ Tabloid US ¦ Tabloid US
+Tabulations… ¦ Tabulimet… ¦ Tabs…
+Taille de l’image ¦ Madhësia e imazhit ¦ Daqs tal-istampa
+Taille… ¦ Madhësia… ¦ Daqs…
+Temps de lecture : environ {n} min. ¦ Koha e leximit: rreth {n} min. ¦ Ħin tal-qari: madwar {n} min.
+Texte affiché ¦ Teksti i shfaqur ¦ Test muri
+Texte de la note ¦ Teksti i shënimit ¦ Test tan-nota
+Texte du commentaire ¦ Teksti i komentit ¦ Test tal-kumment
+Texte du document ¦ Teksti i dokumentit ¦ Test tad-dokument
+Texte très petit (moins de 8 points) ¦ Tekst shumë i vogël (nën 8 pika) ¦ Test żgħir ħafna (inqas minn 8 punti)
+Titre 1 ¦ Titulli 1 ¦ Titlu 1
+Titre 2 ¦ Titulli 2 ¦ Titlu 2
+Titre 3 ¦ Titulli 3 ¦ Titlu 3
+Titre 4 ¦ Titulli 4 ¦ Titlu 4
+Titre 5 ¦ Titulli 5 ¦ Titlu 5
+Titre 6 ¦ Titulli 6 ¦ Titlu 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ Titull i nivelit {n} menjëherë pas një niveli {last}: kapërcehet një nivel ¦ Titlu tal-livell {n} eżatt wara livell {last}: livell jinqabeż
+Titre en {head}, texte en {body} ¦ Titulli me {head}, teksti me {body} ¦ Titlu b’{head}, test b’{body}
+Titre vide ¦ Titull bosh ¦ Titlu vojt
+Titres ¦ Titujt ¦ Titli
+Ton commentaire… ¦ Komenti yt… ¦ Il-kumment tiegħek…
+Tous les paragraphes de ce style changent ensemble. ¦ Të gjithë paragrafët e këtij stili ndryshojnë së bashku. ¦ Il-paragrafi kollha ta’ dan l-istil jinbidlu flimkien.
+Tout accepter ¦ Prano të gjitha ¦ Aċċetta kollox
+Tout concorde avec les fiches. ¦ Gjithçka përputhet me kartelat. ¦ Kollox jaqbel mal-iskedi.
+Tout corriger ¦ Korrigjo të gjitha ¦ Ikkoreġi kollox
+Tout est déjà à jour. ¦ Gjithçka është tashmë e përditësuar. ¦ Kollox diġà aġġornat.
+Tout montrer (ajouts et suppressions) ¦ Shfaq gjithçka (shtesat dhe fshirjet) ¦ Uri kollox (żidiet u tħassir)
+Tout refuser ¦ Refuzo të gjitha ¦ Iċħad kollox
+Tout remplacer ¦ Zëvendëso të gjitha ¦ Ibdel kollox
+Tout retirer ¦ Hiqi të gjitha ¦ Neħħi kollox
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ E gjithë gjerësia e tekstit: {n} px. Lartësia ndjek (pa shtrembërim). ¦ Il-wisa’ kollu tat-test: {n} px. L-għoli jsegwi (mingħajr deformazzjoni).
+Toutes les 10 minutes ¦ Çdo 10 minuta ¦ Kull 10 minuti
+Toutes les 5 minutes ¦ Çdo 5 minuta ¦ Kull 5 minuti
+Toutes les minutes ¦ Çdo minutë ¦ Kull minuta
+Trame (fond) ¦ Hijëzimi (sfondi) ¦ Dellijiet (sfond)
+Trame de la cellule… ¦ Hijëzimi i qelizës… ¦ Dellijiet taċ-ċellola…
+Transcription (machine à écrire) ¦ Transkriptim (makinë shkrimi) ¦ Traskrizzjoni (magna tat-tajpjar)
+Transcription d’acte mise au propre ¦ Transkriptim i pastër i aktit ¦ Traskrizzjoni tal-att ikkupjata fil-pulit
+Triple (3) ¦ Trefish (3) ¦ Tripplu (3)
+Tu cherches des renseignements sur qui ? ¦ Për kë kërkon informacione? ¦ Dwar min qed tfittex informazzjoni?
+Typographie française ¦ Tipografia franceze ¦ Tipografija Franċiża
+Un arrêt tous les ¦ Një ndalesë çdo ¦ Waqfa kull
+Un cadre autour du paragraphe ¦ Një kornizë rreth paragrafit ¦ Qafas madwar il-paragrafu
+Un champ vide s’écrit ¦ Një fushë bosh shkruhet ¦ Qasam vojt jinkiteb
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Një raport i kësaj vizite në përpunuesin e tekstit (shenjat e arkivit, rezultatet, vazhdimi) ¦ Rapport ta’ din iż-żjara fil-proċessur tal-kliem (numri tal-arkivju, riżultati, x’imiss)
+Un document garde au moins un onglet. ¦ Një dokument mban të paktën një skedë. ¦ Dokument iżomm mill-inqas tab waħda.
+Un lieu de la base ¦ Një vend i bazës ¦ Post mid-database
+Un nom pour cette version (facultatif) : ¦ Një emër për këtë version (opsional): ¦ Isem għal din il-verżjoni (mhux obbligatorju):
+Un style porte déjà ce nom. ¦ Një stil e ka tashmë këtë emër. ¦ Diġà hemm stil b’dan l-isem.
+Une adresse qui commence par https:// (ou mailto:). ¦ Një adresë që fillon me https:// (ose mailto:). ¦ Indirizz li jibda b’https:// (jew mailto:).
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Një dritare tjetër e ka ruajtur këtë dokument ndërkohë. Nëse mban versionin tënd, do të fshihet i saj. ¦ Tieqa oħra ssejvjat dan id-dokument sadanittant. Jekk iżżomm il-verżjoni tiegħek, tħassar tagħha.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Një kopje e këtij dokumenti për çdo person, çdo fushë «» e plotësuar me kartelën e tij; kopjet vijnë njëra pas tjetrës në një dokument të ri (një faqe e re për secilën). Fushat e përdorura: {list}. ¦ Kopja ta’ dan id-dokument għal kull persuna, kull qasam “” mimli bl-iskeda tagħha; il-kopji jiġu wara xulxin f’dokument ġdid (paġna ġdida għal kull waħda). Oqsma użati: {list}.
+Une espace après la virgule ¦ Një hapësirë pas presjes ¦ Spazju wara l-virgola
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Një imazh nga uebi nuk u mor: ruaje në kompjuter, pastaj tërhiqe këtu. ¦ Stampa mill-web ma ttieħditx: issejvjaha fuq il-kompjuter, imbagħad kaxkarha hawn.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Një imazh i një lloji që shfletuesi nuk e shfaq (EMF, WMF, TIFF…) u la mënjanë. ¦ Stampa ta’ tip li l-browser ma jurix (EMF, WMF, TIFF…) tħalliet barra.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Një imazh i një lloji që shfletuesi nuk e shfaq (SVG, EMF, WMF…) u la mënjanë. ¦ Stampa ta’ tip li l-browser ma jurix (SVG, EMF, WMF…) tħalliet barra.
+Une largeur de 16 px au moins. ¦ Një gjerësi prej të paktën 16 px. ¦ Wisa’ ta’ mill-inqas 16 px.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Një rresht titujsh (përsëritet në çdo faqe) ¦ Ringiela tal-intestatura (ripetuta f’kull paġna)
+Une personne de la base ¦ Një person i bazës ¦ Persuna mid-database
+Utilise {key} dans le texte. ¦ Përdor {key} në tekst. ¦ Uża {key} fit-test.
+Utilise {key}. ¦ Përdor {key}. ¦ Uża {key}.
+Version du {date} ¦ Versioni i {date} ¦ Verżjoni tal-{date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Versioni u ruajt (Skedari → 🕘 Versionet…). ¦ Verżjoni ssejvjata (Fajl → 🕘 Verżjonijiet…).
+Vitesse de lecture à voix haute ¦ Shpejtësia e leximit me zë ¦ Veloċità tal-qari b’leħen għoli
+Voir ¦ Shiko ¦ Ara
+Vérification de l’orthographe arrêtée. ¦ Kontrolli i drejtshkrimit u ndal. ¦ Il-verifika tal-ortografija twaqqfet.
+Vérification impossible. ¦ Kontrolli nuk mund të bëhet. ¦ Il-verifika ma tistax issir.
+Vérifier avec les fiches ¦ Kontrollo me kartelat ¦ Iċċekkja mal-iskedi
+Vérifier l’orthographe pendant la frappe ¦ Kontrollo drejtshkrimin gjatë shtypjes ¦ Iċċekkja l-ortografija waqt it-tajpjar
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, tekst, HTML, printim ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, test, HTML, printjar
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ shtoi ¦ żied
+a supprimé ¦ fshiu ¦ ħassar
+automatique ¦ automatik ¦ awtomatiku
+aux archives : cotes vues, trouvailles, suite ¦ në arkiva: shenjat e para, gjetjet, vazhdimi ¦ fl-arkivji: numri tal-arkivju li rajt, sejbiet, x’imiss
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ ky skedar .{ext} është i dëmtuar (nuk është zip) ¦ dan il-fajl .{ext} huwa mħassar (mhuwiex zip)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ ky skedar LibreOffice nuk është tekst (është fletë llogaritëse ose prezantim) ¦ dan il-fajl LibreOffice mhuwiex test (huwa workbook jew preżentazzjoni)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ ky skedar zip nuk është as dokument Word (.docx) as dokument LibreOffice (.odt) ¦ dan il-fajl zip la huwa dokument Word (.docx) u lanqas dokument LibreOffice (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ nuk është dokument LibreOffice (.odt) ¦ mhuwiex dokument LibreOffice (.odt)
+ce n’est pas un document Word (.docx) : il manque son texte ¦ nuk është dokument Word (.docx): i mungon teksti ¦ mhuwiex dokument Word (.docx): it-test tiegħu nieqes
+ce n’est pas un fichier RTF ¦ nuk është skedar RTF ¦ mhuwiex fajl RTF
+ce n’est pas un fichier du traitement de texte ¦ nuk është skedar i përpunuesit të tekstit ¦ mhuwiex fajl tal-proċessur tal-kliem
+ces réglages du traitement de texte ¦ këto cilësime të përpunuesit të tekstit ¦ dawn is-settings tal-proċessur tal-kliem
+demande de recherche à un service d’archives ¦ kërkesë kërkimi drejtuar një shërbimi arkivash ¦ talba għal riċerka lil servizz tal-arkivji
+divorcé ¦ i divorcuar ¦ iddivorzjat
+droite ¦ djathtas ¦ lemin
+décédé (croix) ¦ i vdekur (kryq) ¦ miet (salib)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ pasuan ndryshime të tjera: përdor ↶ ({key}) ¦ segwew bidliet oħra: uża ↶ ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ pasuan ndryshime të tjera: përdor ↶ në dokument ¦ segwew bidliet oħra: uża ↶ fid-dokument
+espace fine insécable (avant ; : ! ? ») ¦ hapësirë e ngushtë e pandashme (para ; : ! ? ») ¦ spazju rqiq li ma jinqasamx (qabel ; : ! ? »)
+espace insécable ¦ hapësirë e pandashme ¦ spazju li ma jinqasamx
+et (note tironienne) ¦ dhe (shenjë tironiane) ¦ u (nota tironjana)
+ex. BROUILLON, COPIE ¦ p.sh. DRAFT, KOPJE ¦ eż. ABBOZZ, KOPJA
+fichier RTF trop imbriqué ¦ skedar RTF tepër i ndërthurur ¦ fajl RTF b’wisq livelli ġo xulxin
+fichier du traitement de texte ¦ skedar i përpunuesit të tekstit ¦ fajl tal-proċessur tal-kliem
+fichier refusé : beaucoup trop de paragraphes ¦ skedari u refuzua: shumë e shumë paragrafë ¦ fajl irrifjutat: ħafna wisq paragrafi
+fichier refusé : trop compliqué ¦ skedari u refuzua: tepër i ndërlikuar ¦ fajl irrifjutat: ikkumplikat wisq
+fichier refusé : trop gros ¦ skedari u refuzua: tepër i madh ¦ fajl irrifjutat: kbir wisq
+fichier trop gros (plus de {n} Mo) ¦ skedar tepër i madh (mbi {n} MB) ¦ fajl kbir wisq (aktar minn {n} MB)
+https://…, mailto:… ¦ https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ ai / ajo ¦ hu / hi
+inhumé ¦ i varrosur ¦ midfun
+je cherche des renseignements sur cette personne ¦ kërkoj informacione për këtë person ¦ qed infittex informazzjoni dwar din il-persuna
+la biographie F5 de la fiche, à compléter ¦ biografia F5 e kartelës, për t’u plotësuar ¦ il-bijografija F5 tal-iskeda, biex timliha
+le texte seul ¦ vetëm teksti ¦ it-test biss
+le texte à l’écran ¦ teksti në ekran ¦ it-test fuq l-iskrin
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ skedarët e vjetër Word (.doc) nuk lexohen: hape në Word ose LibreOffice dhe ruaje si .docx ¦ il-fajls Word qodma (.doc) ma jinqrawx: iftħu f’Word jew LibreOffice u ssejvjah bħala .docx
+marié ¦ i martuar ¦ miżżewweġ
+marié (autre signe) ¦ i martuar (shenjë tjetër) ¦ miżżewweġ (sinjal ieħor)
+minuscules ¦ shkronja të vogla ¦ ittri żgħar
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ lindje, martesë ose vdekje: personi, datat dhe vendet e shkruara tashmë ¦ twelid, żwieġ jew mewt: il-persuna, id-dati u l-postijiet diġà miktuba
+nom, naissance, parents, métier, mariage, décès ¦ emri, lindja, prindërit, profesioni, martesa, vdekja ¦ isem, twelid, ġenituri, xogħol, żwieġ, mewt
+numéro ¦ numër ¦ numru
+né / née ¦ i lindur / e lindur ¦ imwieled / imwielda
+p barré (par) ¦ p e prerë (par) ¦ p maqtugħa (par)
+p à crosse (pro) ¦ p me bisht (pro) ¦ p b’kurva (pro)
+page web ¦ faqe interneti ¦ paġna web
+pour partager une découverte ¦ për të ndarë një zbulim ¦ biex taqsam sejba
+question, sources, analyse, conclusion ¦ pyetja, burimet, analiza, përfundimi ¦ mistoqsija, sorsi, analiżi, konklużjoni
+ruban|Caractères ¦ Simbole ¦ Simboli
+ruban|Centre ¦ Qendër ¦ Ċentru
+ruban|Couleur ¦ Ngjyra ¦ Kulur
+ruban|Effacer ¦ Fshi ¦ Ħassar
+ruban|Interligne ¦ Hapësira ¦ Spazjar
+ruban|Note ¦ Shënim ¦ Nota
+ruban|Numéros ¦ Numra ¦ Numri
+ruban|Petites ¦ Të vogla ¦ Żgħar
+ruban|Puces ¦ Pika ¦ Bullets
+ruban|Retrait + ¦ Kryeradha + ¦ Indentazzjoni +
+ruban|Retrait − ¦ Kryeradha − ¦ Indentazzjoni −
+ruban|Suivi ¦ Ndjekja ¦ Segwitu
+ruban|Surligner ¦ Thekso ¦ Highlight
+récit en parties, images, notes ¦ rrëfim në pjesë, imazhe, shënime ¦ rakkont f’partijiet, stampi, noti
+texte avec les titres ¦ tekst me titujt ¦ test bit-titli
+texte de l’acte, notes, références ¦ teksti i aktit, shënime, referenca ¦ test tal-att, noti, referenzi
+tous les traitements de texte ¦ të gjithë përpunuesit e tekstit ¦ il-proċessuri tal-kliem kollha
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ një PDF nuk shndërrohet këtu në tekst të ndryshueshëm: hap Transkriptimin e akteve për ta rishkruar ¦ PDF ma jinbidilx hawn f’test li jista’ jiġi editjat: iftaħ it-Traskrizzjoni tal-atti biex tikkupjah
+un ancêtre ¦ një paraardhës ¦ antenat
+{added} ajouté, {removed} retiré. ¦ Shtuar: {added}, hequr: {removed}. ¦ Miżjud: {added}, imneħħi: {removed}.
+{added} ajouté, {removed} retirés. ¦ Shtuar: {added}, hequr: {removed}. ¦ Miżjud: {added}, imneħħija: {removed}.
+{added} ajoutés, {removed} retiré. ¦ Shtuar: {added}, hequr: {removed}. ¦ Miżjuda: {added}, imneħħi: {removed}.
+{added} ajoutés, {removed} retirés. ¦ Shtuar: {added}, hequr: {removed}. ¦ Miżjuda: {added}, imneħħija: {removed}.
+{name} (copie) ¦ {name} (kopje) ¦ {name} (kopja)
+{name} — publipostage ({n}) ¦ {name} — postim masiv ({n}) ¦ {name} — mail merge ({n})
+{name} — que faut-il écrire ? ¦ {name} — çfarë duhet shkruar? ¦ {name} — x’għandu jinkiteb?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} me kartelën e {name} (↶ për t’u kthyer). ¦ {n} bl-iskeda ta’ {name} (↶ biex terġa’ lura).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ {n} nga skedari (skripte, formularë, korniza…) u hoq: nuk nisen kurrë. ¦ {n} mill-fajl (scripts, formoli, frames…) tneħħa: qatt ma jitħaddmu.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ {n} nga skedari (skripte, formularë, korniza…) u hoqën: nuk nisen kurrë. ¦ {n} mill-fajl (scripts, formoli, frames…) tneħħew: qatt ma jitħaddmu.
+{n} du web non reprise. ¦ {n} nga uebi nuk u mor. ¦ {n} mill-web ma ttieħditx.
+{n} du web non reprises. ¦ {n} nga uebi nuk u morën. ¦ {n} mill-web ma ttieħdux.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ {n} u dërgua në faqosje: kontrollo, pastaj ruaj librin. ¦ {n} intbagħat għat-tqassim: iċċekkja, imbagħad issejvja l-ktieb.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ {n} u dërguan në faqosje: kontrollo, pastaj ruaj librin. ¦ {n} intbagħtu għat-tqassim: iċċekkja, imbagħad issejvja l-ktieb.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ {n} imazhe nga uebi nuk u morën: ruaji në kompjuter, pastaj tërhiqi këtu. ¦ {n} stampi mill-web ma ttieħdux: issejvjahom fuq il-kompjuter, imbagħad kaxkarhom hawn.
+{n} mis à jour d’après les fiches. ¦ {n} u përditësuan sipas kartelave. ¦ {n} aġġornati skont l-iskedi.
+{n} modifications acceptées ¦ {n} ndryshime u pranuan ¦ {n} bidliet aċċettati
+{n} modifications refusées ¦ {n} ndryshime u refuzuan ¦ {n} bidliet miċħuda
+{n} rangée dans les médias. ¦ {n} u vendos në media. ¦ {n} tqiegħdet fil-midja.
+{n} rangées dans les médias. ¦ {n} u vendosën në media. ¦ {n} tqiegħdu fil-midja.
+{n} repris de « {name} » ¦ {n} të marra nga «{name}» ¦ {n} meħuda minn “{name}”
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word dhe LibreOffice ruajnë stilet, listat, tabelat, imazhet, shënimet, kreun dhe fundin e faqes, komentet dhe ndryshimet e ndjekura. ¦ {pages} · {words}. Word u LibreOffice iżommu l-istili, il-listi, it-tabelli, l-istampi, in-noti, il-header u l-footer, il-kummenti u l-bidliet segwiti.
+« ________ » (à remplir à la main) ¦ «________» (për t’u plotësuar me dorë) ¦ “________” (biex timlih bl-idejn)
+« … » (pour le voir) ¦ «…» (për ta parë) ¦ “…” (biex tarah)
+¶ Marques de mise en forme ¦ ¶ Shenjat e formatimit ¦ ¶ Marki tal-formattjar
+¶ Paragraphe ¦ ¶ Paragraf ¦ ¶ Paragrafu
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Paragraf (hapësirat, kryeradhat, hapësira mes rreshtave)… ¦ ¶ Paragrafu (spazji, indentazzjonijiet, spazju bejn il-linji)…
+¹ Note de bas de page ¦ ¹ Shënim në fund të faqes ¦ ¹ Nota f’qiegħ il-paġna
+À quoi ça sert ? ¦ Për çfarë shërben? ¦ Għal xiex iservi?
+Écrire sur cette personne ¦ Shkruaj për këtë person ¦ Ikteb dwar din il-persuna
+Écris le texte du lien. ¦ Shkruaj tekstin e lidhjes. ¦ Ikteb it-test tal-link.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Shkruaj, zgjidh një stil majtas në shirit; klikim i djathtë për veprimet. ¦ Ikteb, agħżel stil fuq ix-xellug tal-bar; klikk lemin għall-azzjonijiet.
+à lire, à envoyer ¦ për t’u lexuar, për t’u dërguar ¦ biex jinqara, biex jintbagħat
+à ouvrir dans un navigateur ¦ për t’u hapur në shfletues ¦ biex jinfetaħ f’browser
+à une mairie : naissance, mariage, décès ¦ drejtuar një bashkie: lindje, martesë, vdekje ¦ lil kunsill lokali: twelid, żwieġ, mewt
+Ω Caractères spéciaux ¦ Ω Shenja të veçanta ¦ Ω Karattri speċjali
+Ω Caractères spéciaux… ¦ Ω Shenja të veçanta… ¦ Ω Karattri speċjali…
+― Ligne horizontale ¦ ― Vijë horizontale ¦ ― Linja orizzontali
+• Liste à puces ¦ • Listë me pika ¦ • Lista bil-bullets
+ⁱ Note de fin ¦ ⁱ Shënim në fund ¦ ⁱ Nota fl-aħħar
+ℹ️ Propriétés du document… ¦ ℹ️ Vetitë e dokumentit… ¦ ℹ️ Proprjetajiet tad-dokument…
+↕ Trier A → Z (cette colonne) ¦ ↕ Rendit A → Z (këtë kolonë) ¦ ↕ Issortja A → Z (din il-kolonna)
+↕ Trier Z → A (cette colonne) ¦ ↕ Rendit Z → A (këtë kolonë) ¦ ↕ Issortja Z → A (din il-kolonna)
+↶ Annulé ¦ ↶ U zhbë ¦ ↶ Imreġġa’ lura
+↷ Rétabli ¦ ↷ U ribë ¦ ↷ Erġa’ sar
+↺ Rouvrir ¦ ↺ Rihap ¦ ↺ Erġa’ iftaħ
+⇄ Comparer deux versions… ¦ ⇄ Krahaso dy versione… ¦ ⇄ Qabbel żewġ verżjonijiet…
+⇥ Tabulations ¦ ⇥ Tabulimet ¦ ⇥ Tabs
+⇥ Tabulations… ¦ ⇥ Tabulimet… ¦ ⇥ Tabs…
+∑ Nombre de pages ¦ ∑ Numri i faqeve ¦ ∑ Numru ta’ paġni
+⊞ Fusionner les cellules ¦ ⊞ Bashko qelizat ¦ ⊞ Għaqqad iċ-ċelloli
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Shkurtoret e përpunuesit të tekstit ¦ ⌨️ Shortcuts tal-proċessur tal-kliem
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Shkurtoret e përpunuesit të tekstit… ¦ ⌨️ Shortcuts tal-proċessur tal-kliem…
+▢ Bordure et trame… ¦ ▢ Kufiri dhe hijëzimi… ¦ ▢ Bordura u dellijiet…
+▥ Colonnes ¦ ▥ Kolonat ¦ ▥ Kolonni
+▥ Colonnes… ¦ ▥ Kolonat… ¦ ▥ Kolonni…
+▦ Insérer un tableau… ¦ ▦ Fut një tabelë… ¦ ▦ Daħħal tabella…
+▦ Nouveau tableau ¦ ▦ Tabelë e re ¦ ▦ Tabella ġdida
+▦ Tableau… ¦ ▦ Tabela… ¦ ▦ Tabella…
+▭ Paysage ¦ ▭ Horizontale ¦ ▭ Orizzontali
+▯ Portrait ¦ ▯ Vertikale ¦ ▯ Vertikali
+♿ Accessibilité : {n} point ¦ ♿ Aksesueshmëria: {n} pikë ¦ ♿ Aċċessibbiltà: {n} punt
+♿ Accessibilité : {n} points ¦ ♿ Aksesueshmëria: {n} pikë ¦ ♿ Aċċessibbiltà: {n} punti
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Asgjë për të sinjalizuar: imazhe të përshkruara, tituj me radhë, tabela me tituj, lidhje të qarta. ¦ ♿ Xejn x’tirrapporta: stampi deskritti, titli f’ordni, tabelli bit-titli, links ċari.
+♿ Vérifier l’accessibilité… ¦ ♿ Kontrollo aksesueshmërinë… ¦ ♿ Iċċekkja l-aċċessibbiltà…
+⚙️ Personnaliser ¦ ⚙️ Përshtat ¦ ⚙️ Personalizza
+⚙️ Réglages du traitement de texte ¦ ⚙️ Cilësimet e përpunuesit të tekstit ¦ ⚙️ Settings tal-proċessur tal-kliem
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Cilësimet e përpunuesit të tekstit… ¦ ⚙️ Settings tal-proċessur tal-kliem…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Ndryshimet po ndiqen: çdo shtim dhe çdo fshirje mbeten të dukshme. ¦ ✍ Il-bidliet qed jiġu segwiti: kull żieda u kull tħassir jibqgħu jidhru.
+✍ Suivi ¦ ✍ Ndjekja ¦ ✍ Segwitu
+✍ Suivre les modifications ¦ ✍ Ndiq ndryshimet ¦ ✍ Segwi l-bidliet
+✍ modifications à relire ¦ ✍ ndryshime për t’u rilexuar ¦ ✍ bidliet x’jiġu riveduti
+✎ Auteur ¦ ✎ Autori ¦ ✎ Awtur
+✎ Le style « {name} » ¦ ✎ Stili «{name}» ¦ ✎ L-istil “{name}”
+✎ Modifier le style ¦ ✎ Ndrysho stilin ¦ ✎ Editja l-istil
+✏️ À mes mesures ¦ ✏️ Me masat e mia ¦ ✏️ Bil-qisien tiegħi
+✓ Accepter ¦ ✓ Prano ¦ ✓ Aċċetta
+✓ Accepter la modification ¦ ✓ Prano ndryshimin ¦ ✓ Aċċetta l-bidla
+✓ En-tête et pied de page repris. ¦ ✓ Kreu dhe fundi i faqes u morën. ¦ ✓ Header u footer meħuda.
+✓ Repris : {list}. ¦ ✓ U morën: {list}. ¦ ✓ Meħuda: {list}.
+✓ Résolu ¦ ✓ U zgjidh ¦ ✓ Solvut
+✓ Tout accepter ¦ ✓ Prano të gjitha ¦ ✓ Aċċetta kollox
+✓ Tout concorde avec les fiches. ¦ ✓ Gjithçka përputhet me kartelat. ¦ ✓ Kollox jaqbel mal-iskedi.
+✗ Refuser ¦ ✗ Refuzo ¦ ✗ Iċħad
+✗ Refuser la modification ¦ ✗ Refuzo ndryshimin ¦ ✗ Iċħad il-bidla
+✗ Tout refuser ¦ ✗ Refuzo të gjitha ¦ ✗ Iċħad kollox
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Cito një burim ¦ ❝ Ikkwota sors
+❝ Source citée… ¦ ❝ Burim i cituar… ¦ ❝ Sors ikkwotat…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ Importo (Word, LibreOffice…)… ¦ ⤒ Importa (Word, LibreOffice…)…
+⤒ Importer le document ¦ ⤒ Importo dokumentin ¦ ⤒ Importa d-dokument
+⤒ Importer un document ¦ ⤒ Importo një dokument ¦ ⤒ Importa dokument
+⤓ Exporter… ¦ ⤓ Eksporto… ¦ ⤓ Esporta…
+⤓ Saut de page ¦ ⤓ Ndërprerje faqeje ¦ ⤓ Qasma tal-paġna
+＋ Ajouter des personnes… ¦ ＋ Shto persona… ¦ ＋ Żid persuni…
+＋ Description… ¦ ＋ Përshkrim… ¦ ＋ Deskrizzjoni…
+＋ Les personnes d’une de mes listes… ¦ ＋ Personat e një prej listave të mia… ¦ ＋ Il-persuni ta’ waħda mil-listi tiegħi…
+＋ Nouveau commentaire ¦ ＋ Koment i ri ¦ ＋ Kumment ġdid
+＋ Nouveau document ¦ ＋ Dokument i ri ¦ ＋ Dokument ġdid
+＋ Nouveau style ¦ ＋ Stil i ri ¦ ＋ Stil ġdid
+＋ Nouveau style d’après la sélection… ¦ ＋ Stil i ri sipas përzgjedhjes… ¦ ＋ Stil ġdid skont l-għażla…
+🌐 Langue du document ¦ 🌐 Gjuha e dokumentit ¦ 🌐 Lingwa tad-dokument
+🌐 Langue… ¦ 🌐 Gjuha… ¦ 🌐 Lingwa…
+🌐 Page web (.html) ¦ 🌐 Faqe interneti (.html) ¦ 🌐 Paġna web (.html)
+🌳 Un petit arbre… ¦ 🌳 Një pemë e vogël… ¦ 🌳 Siġra żgħira…
+🎞 Un média (lien)… ¦ 🎞 Një media (lidhje)… ¦ 🎞 Midja (link)…
+🎨 Choisir… ¦ 🎨 Zgjidh… ¦ 🎨 Agħżel…
+🎨 Couleur de page… ¦ 🎨 Ngjyra e faqes… ¦ 🎨 Kulur tal-paġna…
+🎨 Forme ¦ 🎨 Forma ¦ 🎨 Forma
+🎨 Styles… ¦ 🎨 Stilet… ¦ 🎨 Stili…
+👤 Remplir avec une fiche ¦ 👤 Plotëso me një kartelë ¦ 👤 Imla b’skeda
+👤 Remplir avec une fiche… ¦ 👤 Plotëso me një kartelë… ¦ 👤 Imla b’skeda…
+👤 Une personne de la base… ¦ 👤 Një person i bazës… ¦ 👤 Persuna mid-database…
+💬 Montrer les commentaires ¦ 💬 Shfaq komentet ¦ 💬 Uri l-kummenti
+💬 Nouveau commentaire ¦ 💬 Koment i ri ¦ 💬 Kumment ġdid
+💾 Fichier de l’outil ¦ 💾 Skedari i mjetit ¦ 💾 Fajl tal-għodda
+📁 Ranger une copie dans les médias ¦ 📁 Vendos një kopje në media ¦ 📁 Poġġi kopja fil-midja
+📄 Format, marges et orientation… ¦ 📄 Formati, kufijtë dhe orientimi… ¦ 📄 Format, marġini u orjentazzjoni…
+📄 PDF ¦ 📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Faqet ¦ 📄 Paġni
+📄 Saut de section ¦ 📄 Ndërprerje seksioni ¦ 📄 Qasma tat-taqsima
+📄 Saut de section (autre orientation)… ¦ 📄 Ndërprerje seksioni (orientim tjetër)… ¦ 📄 Qasma tat-taqsima (orjentazzjoni oħra)…
+📅 Date ¦ 📅 Data ¦ 📅 Data
+📅 Date du jour ¦ 📅 Data e sotme ¦ 📅 Data tal-lum
+📊 Un diagramme… ¦ 📊 Një diagram… ¦ 📊 Dijagramma…
+📋 Partir d’un modèle ¦ 📋 Nis nga një model ¦ 📋 Ibda minn mudell
+📋 Partir d’un modèle… ¦ 📋 Nis nga një model… ¦ 📋 Ibda minn mudell…
+📍 Un lieu de la base… ¦ 📍 Një vend i bazës… ¦ 📍 Post mid-database…
+📐 Envoyer vers la mise en page ¦ 📐 Dërgo në faqosje ¦ 📐 Ibgħat għat-tqassim
+📐 Envoyer vers la mise en page… ¦ 📐 Dërgo në faqosje… ¦ 📐 Ibgħat għat-tqassim…
+📐 Reprendre les styles d’un livre… ¦ 📐 Merr stilet e një libri… ¦ 📐 Ħu l-istili ta’ ktieb…
+📐 Styles d’un livre… ¦ 📐 Stilet e një libri… ¦ 📐 Stili ta’ ktieb…
+📑 Sommaire ¦ 📑 Përmbajtja ¦ 📑 Werrej
+📖 La biographie d’une personne… ¦ 📖 Biografia e një personi… ¦ 📖 Il-bijografija ta’ persuna…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Bibliografia ¦ 📚 Bibljografija
+📜 Brouillon (sans les pages) ¦ 📜 Draft (pa faqet) ¦ 📜 Abbozz (mingħajr il-paġni)
+📝 Compte rendu ¦ 📝 Raport ¦ 📝 Rapport
+📝 RTF ¦ 📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Shkruaj për këtë person: një dokument i përpunuesit të tekstit, me biografinë e tij të vendosur tashmë ¦ 📝 Ikteb dwar din il-persuna: dokument tal-proċessur tal-kliem, bil-bijografija tagħha diġà fih
+📨 Champ de fusion ¦ 📨 Fushë bashkimi ¦ 📨 Qasam tal-għaqda
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Fushë bashkimi (emri, datat…) ¦ 📨 Qasam tal-għaqda (isem, dati…)
+📨 Publipostage ¦ 📨 Postim masiv ¦ 📨 Mail merge
+📨 Publipostage… ¦ 📨 Postim masiv… ¦ 📨 Mail merge…
+🔁 Synonymes de « {word} » ¦ 🔁 Sinonimet e «{word}» ¦ 🔁 Sinonimi ta’ “{word}”
+🔁 Synonymes… ¦ 🔁 Sinonime… ¦ 🔁 Sinonimi…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Po lexohet… (Escape ose Mjetet → ⏹ Ndalo leximin) ¦ 🔊 Qari… (Escape jew Għodod → ⏹ Waqqaf il-qari)
+🔊 Lire à voix haute ¦ 🔊 Lexo me zë ¦ 🔊 Aqra b’leħen għoli
+🔍 Rechercher ¦ 🔍 Kërko ¦ 🔍 Fittex
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 U korrigjua në {n} vend (↶ për t’u kthyer). ¦ 🔎 Ikkoreġut f’{n} post (↶ biex terġa’ lura).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 U korrigjua në {n} vende (↶ për t’u kthyer). ¦ 🔎 Ikkoreġut f’{n} postijiet (↶ biex terġa’ lura).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Rilexim (tipografia, përsëritjet)… ¦ 🔎 Reviżjoni (tipografija, ripetizzjonijiet)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Asgjë për t’u korrigjuar: tipografia dhe përsëritjet janë në rregull. ¦ 🔎 Xejn x’tirranġa: it-tipografija u r-ripetizzjonijiet huma tajbin.
+🔎 Vérification avec les fiches… ¦ 🔎 Po kontrollohet me kartelat… ¦ 🔎 Qed jiġi ċċekkjat mal-iskedi…
+🔎 Vérifier avec les fiches ¦ 🔎 Kontrollo me kartelat ¦ 🔎 Iċċekkja mal-iskedi
+🔎 {n} à regarder. ¦ 🔎 {n} për t’u parë. ¦ 🔎 {n} x’tara.
+🔗 Lien… ¦ 🔗 Lidhje… ¦ 🔗 Link…
+🔗 Modifier le lien ¦ 🔗 Ndrysho lidhjen ¦ 🔗 Editja l-link
+🔗 Nouveau lien ¦ 🔗 Lidhje e re ¦ 🔗 Link ġdid
+🔢 Nombre de mots ¦ 🔢 Numri i fjalëve ¦ 🔢 Numru ta’ kliem
+🔢 Nombre de mots… ¦ 🔢 Numri i fjalëve… ¦ 🔢 Numru ta’ kliem…
+🔤 Index ¦ 🔤 Indeksi ¦ 🔤 Indiċi
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Ruaj si version të ri ¦ 🕘 Issejvja bħala verżjoni ġdida
+🕘 Nouvelle version ¦ 🕘 Version i ri ¦ 🕘 Verżjoni ġdida
+🕘 Versions… ¦ 🕘 Versionet… ¦ 🕘 Verżjonijiet…
+🖍 Surlignage… ¦ 🖍 Theksimi me ngjyrë… ¦ 🖍 Highlight…
+🖨 Imprimer… ¦ 🖨 Printo… ¦ 🖨 Ipprintja…
+🖼 Image… ¦ 🖼 Imazh… ¦ 🖼 Stampa…
+🧭 Panneau de navigation ¦ 🧭 Paneli i lundrimit ¦ 🧭 Pannell tan-navigazzjoni
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Hape këtë tabelë në Fletën llogaritëse ¦ 🧾 Iftaħ din it-tabella fil-Folja elettronika
+🧾 Tableau venu du Tableur… ¦ 🧾 Tabelë nga Fleta llogaritëse… ¦ 🧾 Tabella mill-Folja elettronika…
+🧾 Texte (.txt) ¦ 🧾 Tekst (.txt) ¦ 🧾 Test (.txt)
+=remplacement ¦ zëvendësim|zëvendësime ¦ sostituzzjoni|sostituzzjonijiet|sostituzzjonijiet|sostituzzjoni|sostituzzjoni
+=commentaire ¦ koment|komente ¦ kumment|kummenti|kummenti|kumment|kumment
+=modification suivie ¦ ndryshim i ndjekur|ndryshime të ndjekura ¦ bidla segwita|bidliet segwiti|bidliet segwiti|bidla segwita|bidla segwita
+=tableau ¦ tabelë|tabela ¦ tabella|tabelli|tabelli|tabella|tabella
+=style ¦ stil|stile ¦ stil|stili|stili|stil|stil
+=paragraphe ¦ paragraf|paragrafë ¦ paragrafu|paragrafi|paragrafi|paragrafu|paragrafu
+=champ rempli ¦ fushë e plotësuar|fusha të plotësuara ¦ qasam mimli|oqsma mimlija|oqsma mimlija|qasam mimli|qasam mimli
+texte|Caractère ¦ Shenjë ¦ Karattru
+icone-gras|G ¦ T ¦ G
+icone-italique|I ¦ P ¦ K
+icone-souligne|S ¦ N ¦ S
+icone-petites-capitales|Pᴄ ¦ Kᴠ ¦ Sᴄ

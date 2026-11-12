@@ -1,0 +1,1692 @@
+fr ¦ sq ¦ mt
+donnees|Tableaux ¦ Tabelat ¦ Tabelli
+Types de diagrammes enregistrés (galerie des diagrammes et Éditeur de graphiques). ¦ Llojet e diagrameve të ruajtura (galeria e diagrameve dhe Redaktori i grafikëve). ¦ Tipi ta’ dijagrammi ssejvjati (gallerija tad-dijagrammi u l-Editur tal-grafiċi).
+Les mêmes types pour <b>Mes diagrammes</b> et pour l’<b>Éditeur de graphiques</b> : ↑ ↓ pour l’ordre, décoche pour cacher un type, choisis un groupe (ou « ＋ Nouveau groupe… ») pour les regrouper à ta façon ; ✎ renomme un groupe, ↑ ↓ de l’en-tête range les groupes. ¦ Të njëjtat lloje për <b>Diagramet e mia</b> dhe për <b>Redaktorin e grafikëve</b>: ↑ ↓ për renditjen, hiq shenjën për të fshehur një lloj, zgjidh një grup (ose «＋ Grup i ri…») për t’i grupuar si të duash; ✎ riemërton një grup, ↑ ↓ e kokës rendit grupet. ¦ L-istess tipi għal <b>Id-dijagrammi tiegħi</b> u għall-<b>Editur tal-grafiċi</b>: ↑ ↓ għall-ordni, neħħi l-marka biex taħbi tip, agħżel grupp (jew “＋ Grupp ġdid…”) biex tiġborhom kif trid int; ✎ ibiddel l-isem ta’ grupp, ↑ ↓ tal-intestatura jordna l-gruppi.
+⤒ Mon propre graphique à partir de données d’ailleurs ¦ ⤒ Grafiku im nga të dhëna nga diku tjetër ¦ ⤒ Il-grafika tiegħi minn data minn x’imkien ieħor
+<b>Un tableau</b> (tableur, site, CSV) : copie-le, puis <b>Graphiques → Mes diagrammes → ＋ Nouveau</b> (ou « ⤒ Importer » là où l’on pose un diagramme : fiche, personne, enquête, Atelier) → « Coller un tableau ». Première colonne = les noms, colonnes suivantes = les chiffres ; une première ligne de titres devient le nom des séries. ¦ <b>Një tabelë</b> (fletë llogaritëse, faqe interneti, CSV): kopjoje, pastaj <b>Grafikët → Diagramet e mia → ＋ I ri</b> (ose «⤒ Importo» aty ku vendos një diagram: fletë shënimesh, person, hetim, Punëtori) → «Ngjit një tabelë». Kolona e parë = emrat, kolonat në vijim = shifrat; një rresht i parë titujsh bëhet emri i serive. ¦ <b>Tabella</b> (folja elettronika, sit, CSV): ikkopjaha, imbagħad <b>Grafiċi → Id-dijagrammi tiegħi → ＋ Ġdid</b> (jew “⤒ Importa” fejn tpoġġi dijagramma: nota, persuna, investigazzjoni, Workshop) → “Waħħal tabella”. L-ewwel kolonna = l-ismijiet, il-kolonni ta’ wara = in-numri; l-ewwel ringiela ta’ titoli ssir l-isem tas-serje.
+<b>Un fichier CSV</b> : « ⤒ Importer » → « Fichier » (séparateur virgule, point-virgule ou tabulation). ¦ <b>Një skedar CSV</b>: «⤒ Importo» → «Skedar» (ndarës presje, pikëpresje ose tabulim). ¦ <b>Fajl CSV</b>: “⤒ Importa” → “Fajl” (separatur virgola, semikolon jew tab).
+<b>Une page Wikipédia</b> : « ⤒ Importer » → « Page Wikipédia », colle son adresse : ses tableaux et ses images de graphiques s’affichent, choisis-en un. ¦ <b>Një faqe Wikipedia</b>: «⤒ Importo» → «Faqe Wikipedia», ngjit adresën e saj: shfaqen tabelat dhe imazhet e grafikëve të saj, zgjidh njërën. ¦ <b>Paġna ta’ Wikipedia</b>: “⤒ Importa” → “Paġna ta’ Wikipedia”, waħħal l-indirizz tagħha: jidhru t-tabelli u l-istampi tal-grafiċi tagħha, agħżel waħda.
+<b>Une image de graphique</b> (camembert, barres, courbe, hémicycle) : « ⤒ Importer » → « Image » : l’app repère les couleurs et propose les chiffres (parts, hauteurs, sièges) ; corrige les noms et les valeurs dans le tableau avant de créer le diagramme. ¦ <b>Një imazh grafiku</b> (byrek, shtylla, kurbë, hemiciklik): «⤒ Importo» → «Imazh»: aplikacioni dallon ngjyrat dhe propozon shifrat (pjesët, lartësitë, vendet); korrigjo emrat dhe vlerat në tabelë para se të krijosh diagramin. ¦ <b>Stampa ta’ grafika</b> (torta, vireg, kurva, emiċiklu): “⤒ Importa” → “Stampa”: l-app tagħraf il-kuluri u tipproponi n-numri (sehem, għoli, siġġijiet); ikkoreġi l-ismijiet u l-valuri fit-tabella qabel toħloq id-dijagramma.
+<b>Un graphique partagé</b> par quelqu’un (fichier <code>.lcnda-widget.json</code>) : « ⤒ Importer » → « Fichier » : il rejoint « Mes graphiques » et se dessine avec les données de ton arbre. ¦ <b>Një grafik i ndarë</b> nga dikush (skedar <code>.lcnda-widget.json</code>): «⤒ Importo» → «Skedar»: hyn te «Grafikët e mi» dhe vizatohet me të dhënat e pemës sate. ¦ <b>Grafika maqsuma</b> minn xi ħadd (fajl <code>.lcnda-widget.json</code>): “⤒ Importa” → “Fajl”: tidħol f’“Il-grafiċi tiegħi” u tinġibed bid-data tas-siġra tiegħek.
+Ensuite, le diagramme se choisit parmi tous les types (parts, chiffres, frises, liens…), se règle, s’exporte (PNG, SVG, PDF) et se pose partout. ¦ Pastaj diagrami zgjidhet midis të gjitha llojeve (pjesë, shifra, vija kohore, lidhje…), rregullohet, eksportohet (PNG, SVG, PDF) dhe vendoset kudo. ¦ Imbagħad id-dijagramma tintgħażel minn fost it-tipi kollha (sehem, numri, kronoloġiji, rabtiet…), tiġi rranġata, esportata (PNG, SVG, PDF) u titpoġġa kullimkien.
+(avec des personnes) ¦ (me persona) ¦ (b’persuni)
+Ce dessin a besoin d’une liste de personnes (source « Personnes »). ¦ Ky vizatim ka nevojë për një listë personash (burimi «Personat»). ¦ Dan id-disinn għandu bżonn lista ta’ persuni (sors “Persuni”).
+Aucune personne avec un lieu de naissance et un lieu de décès. ¦ Asnjë person me vend lindjeje dhe vend vdekjeje. ¦ L-ebda persuna b’post tat-twelid u post tal-mewt.
+Créer le diagramme ¦ Krijo diagramin ¦ Oħloq id-dijagramma
+Un de tes graphiques (Réglages → Éditeur de graphiques), un exemple, ou une statistique de l’app (naissances par décennie, prénoms…), dessiné avec le type de ton choix. ¦ Një nga grafikët e tu (Cilësimet → Redaktori i grafikëve), një shembull ose një statistikë e aplikacionit (lindje sipas dekadës, emra…), vizatuar me llojin që zgjedh. ¦ Waħda mill-grafiċi tiegħek (Issettjar → Editur tal-grafiċi), eżempju, jew statistika tal-app (twelid skont id-deċennju, ismijiet…), miġbuda bit-tip li tagħżel int.
+Chiffres tenus à jour (relus dans l’arbre à chaque affichage) ¦ Shifra të mbajtura të përditësuara (rilexohen në pemë sa herë shfaqen) ¦ Numri aġġornati (jinqraw mill-ġdid fis-siġra kull darba li jidhru)
+＋ Créer un nouveau graphique (Éditeur de graphiques)… ¦ ＋ Krijo një grafik të ri (Redaktori i grafikëve)… ¦ ＋ Oħloq grafika ġdida (Editur tal-grafiċi)…
+🌐 Page Wikipédia ¦ 🌐 Faqe Wikipedia ¦ 🌐 Paġna ta’ Wikipedia
+Copie un tableau (tableur, site web…) et colle-le ici. Première colonne = les noms, colonnes suivantes = les chiffres. ¦ Kopjo një tabelë (fletë llogaritëse, faqe interneti…) dhe ngjite këtu. Kolona e parë = emrat, kolonat në vijim = shifrat. ¦ Ikkopja tabella (folja elettronika, sit web…) u waħħalha hawn. L-ewwel kolonna = l-ismijiet, il-kolonni ta’ wara = in-numri.
+L’adresse d’une page Wikipédia (n’importe quelle langue) : ses tableaux et ses graphiques s’affichent, choisis-en un. Il faut Internet. ¦ Adresa e një faqeje Wikipedia (çfarëdo gjuhe): shfaqen tabelat dhe grafikët e saj, zgjidh njërin. Duhet Internet. ¦ L-indirizz ta’ paġna ta’ Wikipedia (kwalunkwe lingwa): jidhru t-tabelli u l-grafiċi tagħha, agħżel waħda. Trid l-Internet.
+Un camembert, des barres ou colonnes, une courbe ou un hémicycle en image : l’app regarde ses couleurs et propose des chiffres, à corriger ensuite. ¦ Një byrek, shtylla ose kolona, një kurbë ose një hemiciklik në imazh: aplikacioni shikon ngjyrat dhe propozon shifra, për t’u korrigjuar më pas. ¦ Torta, vireg jew kolonni, kurva jew emiċiklu bħala stampa: l-app tħares lejn il-kuluri u tipproponi numri, biex tikkoreġihom wara.
+Graphique « {name} » ajouté à Mes graphiques. ¦ Grafiku «{name}» u shtua te Grafikët e mi. ¦ Il-grafika “{name}” ġiet miżjuda ma’ Il-grafiċi tiegħi.
+Lecture de la page… ¦ Po lexohet faqja… ¦ Qed tinqara l-paġna…
+{n} lignes ¦ {n} rreshta ¦ {n} ringieli
+<b>Images</b> (graphiques à convertir en chiffres) ¦ <b>Imazhe</b> (grafikë për t’u kthyer në shifra) ¦ <b>Stampi</b> (grafiċi biex jinbidlu f’numri)
+Image illisible (ou refusée par le site). ¦ Imazh i palexueshëm (ose i refuzuar nga faqja). ¦ Stampa li ma tinqarax (jew miċħuda mis-sit).
+Pas de couleur franche trouvée (graphique en noir et blanc ?) : remplis le tableau à la main. ¦ Nuk u gjet asnjë ngjyrë e qartë (grafik bardhezi?): plotësoje tabelën me dorë. ¦ Ma nstab l-ebda kulur ċar (grafika iswed u abjad?): imla t-tabella bl-idejn.
+Parts en % de la surface colorée. Les textes ne sont pas lus : donne un nom à chaque part. ¦ Pjesët në % të sipërfaqes me ngjyrë. Tekstet nuk lexohen: jepi një emër çdo pjese. ¦ Is-sehem f’% tal-wiċċ ikkulurit. It-testi ma jinqrawx: agħti isem lil kull sehem.
+Sièges comptés (une tache = un siège ; deux sièges collés comptent pour deux). Nomme les groupes. ¦ Vendet e numëruara (një njollë = një vend; dy vende të ngjitura numërohen si dy). Emërto grupet. ¦ Siġġijiet magħduda (tikka waħda = siġġu wieħed; żewġ siġġijiet imwaħħlin jgħoddu għal tnejn). Semmi l-gruppi.
+Hauteur de la courbe (0 à 100 % de l’image) en 12 points : règle l’échelle avec « Valeur du haut ». ¦ Lartësia e kurbës (0 deri 100 % e imazhit) në 12 pika: rregullo shkallën me «Vlera e sipërme». ¦ L-għoli tal-kurva (0 sa 100 % tal-istampa) fi 12-il punt: irranġa l-iskala b’“Valur ta’ fuq”.
+Longueur de chaque barre, la plus longue = 100 : indique sa vraie valeur dans « Valeur du haut », et nomme les barres. ¦ Gjatësia e çdo shtylle, më e gjata = 100: shëno vlerën e saj të vërtetë te «Vlera e sipërme» dhe emërto shtyllat. ¦ It-tul ta’ kull virga, l-itwal = 100: daħħal il-valur veru tagħha f’“Valur ta’ fuq” u semmi l-vireg.
+C’est un… ¦ Është një… ¦ Huwa…
+Sorte de média ¦ Lloji i medias ¦ Tip ta’ midja
+en vie ou décédés ¦ gjallë ose të vdekur ¦ ħajjin jew mejtin
+avec ou sans source ¦ me ose pa burim ¦ b’sors jew mingħajr
+par sorte de média ¦ sipas llojit të medias ¦ skont it-tip ta’ midja
+l’âge au décès ¦ mosha në vdekje ¦ l-età fil-mewt
+l’âge au mariage ¦ mosha në martesë ¦ l-età fiż-żwieġ
+le nombre d’enfants ¦ numri i fëmijëve ¦ in-numru ta’ tfal
+l’âge au premier enfant ¦ mosha në fëmijën e parë ¦ l-età fl-ewwel tifel
+Une de mes listes ¦ Një nga listat e mia ¦ Waħda mil-listi tiegħi
+de A à Z ¦ nga A në Z ¦ minn A sa Z
+de Z à A ¦ nga Z në A ¦ minn Z sa A
+dans l’ordre ¦ me radhë ¦ bl-ordni
+Part en % ¦ Pjesa në % ¦ Sehem f’%
+Une personne qui a plusieurs de ces événements dans le même groupe ne compte qu’une fois. ¦ Një person që ka disa nga këto ngjarje në të njëjtin grup numërohet vetëm një herë. ¦ Persuna li għandha diversi minn dawn l-avvenimenti fl-istess grupp tingħadd darba biss.
+Pour ne garder que certaines personnes : un métier, un nombre d’enfants, un lieu de naissance, une période, un âge au décès, une étiquette, une génération Sosa… Ajoute autant de critères que tu veux : « tous » les veut tous (ET), « au moins un » se contente d’un seul (OU). ¦ Për të mbajtur vetëm disa persona: një profesion, një numër fëmijësh, një vend lindjeje, një periudhë, një moshë në vdekje, një etiketë, një brez Sosa… Shto sa kritere të duash: «të gjitha» i do të gjitha (DHE), «të paktën një» kënaqet me një (OSE). ¦ Biex iżżomm xi persuni biss: xogħol, numru ta’ tfal, post tat-twelid, perjodu, età fil-mewt, tikketta, ġenerazzjoni Sosa… Żid kemm trid kriterji: “kollha” jridhom kollha (U), “mill-inqas wieħed” jikkuntenta b’wieħed (JEW).
+Les personnes prises en compte : toute ta base, tes ancêtres ou tes descendants, une branche, une étiquette, une de tes listes, une recherche, ou des personnes que tu choisis. ¦ Personat që merren parasysh: gjithë baza jote, paraardhësit ose pasardhësit e tu, një degë, një etiketë, një nga listat e tua, një kërkim ose persona që zgjedh ti. ¦ Il-persuni meqjusa: id-database kollha tiegħek, l-antenati jew id-dixxendenti tiegħek, fergħa, tikketta, waħda mil-listi tiegħek, tfittxija, jew persuni li tagħżel int.
+La personne d’où l’on part pour ses ancêtres, ses descendants ou ses branches (elle est comptée avec ses ancêtres et ses descendants). ¦ Personi nga nisemi për paraardhësit, pasardhësit ose degët e tij (numërohet bashkë me paraardhësit dhe pasardhësit e tij). ¦ Il-persuna li minnha nibdew għall-antenati, id-dixxendenti jew il-fergħat tagħha (tingħadd mal-antenati u d-dixxendenti tagħha).
+Jusqu’à combien de générations on remonte (ou on descend). 0 = toutes. ¦ Deri në sa breza ngjitemi (ose zbresim). 0 = të gjithë. ¦ Kemm-il ġenerazzjoni nitilgħu (jew ninżlu). 0 = kollha.
+Seulement les personnes d’une de tes listes (Réglages → Mes listes). ¦ Vetëm personat e një prej listave të tua (Cilësimet → Listat e mia). ¦ Il-persuni ta’ waħda mil-listi tiegħek biss (Issettjar → Il-listi tiegħi).
+Seulement les personnes dont le nom ou le prénom contient ces lettres. ¦ Vetëm personat, mbiemri ose emri i të cilëve përmban këto shkronja. ¦ Il-persuni li l-kunjom jew l-isem tagħhom fih dawn l-ittri biss.
+Seulement ce qui s’est passé entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Vetëm ajo që ndodhi midis këtyre dy datave, shkruar si në një akt (1789, vers 1850, mai 1900…). Mjafton një datë. ¦ Dak li ġara bejn dawn iż-żewġ dati biss, miktuba bħal f’att (1789, vers 1850, mai 1900…). Data waħda biżżejjed.
+Seulement les personnes nées entre ces deux dates, écrites comme dans un acte (1789, vers 1850, mai 1900…). Une seule date suffit. ¦ Vetëm personat e lindur midis këtyre dy datave, shkruar si në një akt (1789, vers 1850, mai 1900…). Mjafton një datë. ¦ Il-persuni mwielda bejn dawn iż-żewġ dati biss, miktuba bħal f’att (1789, vers 1850, mai 1900…). Data waħda biżżejjed.
+Pour les colonnes empilées, la pyramide, la carte de chaleur… : chaque groupe est coupé en séries (hommes et femmes, ou siècles). ¦ Për kolonat e grumbulluara, piramidën, hartën e nxehtësisë…: çdo grup ndahet në seri (burra dhe gra, ose shekuj). ¦ Għall-kolonni f’munzell, il-piramida, il-mappa tas-sħana…: kull grupp jinqasam f’serje (irġiel u nisa, jew sekli).
+L’ordre des valeurs. « Automatique » : du plus grand au plus petit, ou dans l’ordre du temps pour les dates et les âges. ¦ Renditja e vlerave. «Automatike»: nga më e madhja te më e vogla, ose sipas kohës për datat dhe moshat. ¦ L-ordni tal-valuri. “Awtomatiku”: mill-akbar għall-iżgħar, jew skont iż-żmien għad-dati u l-etajiet.
+Combien de valeurs garder, les premières après le tri. 0 = toutes. ¦ Sa vlera të mbash, të parat pas renditjes. 0 = të gjitha. ¦ Kemm-il valur iżżomm, l-ewwel wara l-issortjar. 0 = kollha.
+Les valeurs au-delà des N premières sont additionnées dans une dernière barre « Autres ». ¦ Vlerat përtej N të parave mblidhen në një shtyllë të fundit «Të tjerë». ¦ Il-valuri lil hinn mill-ewwel N jingħaddu flimkien f’virga finali “Oħrajn”.
+Montrer aussi ce qui n’est pas renseigné (sans lieu, sans date, sans métier…) sous le nom « Inconnu ». ¦ Shfaq edhe atë që nuk është plotësuar (pa vend, pa datë, pa profesion…) me emrin «I panjohur». ¦ Uri wkoll dak li mhux mimli (bla post, bla data, bla xogħol…) taħt l-isem “Mhux magħruf”.
+Un nombre, une part en %, ou la moyenne (la médiane) d’une valeur : âge au décès, âge au mariage, nombre d’enfants. ¦ Një numër, një pjesë në %, ose mesatarja (mediana) e një vlere: mosha në vdekje, mosha në martesë, numri i fëmijëve. ¦ Numru, sehem f’%, jew il-medja (il-medjan) ta’ valur: età fil-mewt, età fiż-żwieġ, numru ta’ tfal.
+Le diagramme se recalcule à chaque affichage : il suit les changements de ta base. ¦ Diagrami rillogaritet sa herë shfaqet: ndjek ndryshimet e bazës sate. ¦ Id-dijagramma terġa’ tiġi kkalkulata kull darba li tidher: issegwi l-bidliet fid-database tiegħek.
+✏️ Sur mesure (critères, ce qu’on compte, regroupé par…) ¦ ✏️ Sipas porosisë (kritere, çfarë numërohet, grupuar sipas…) ¦ ✏️ Personalizzat (kriterji, x’jingħadd, miġbur skont…)
+Âge au décès, hommes et femmes ¦ Mosha në vdekje, burra dhe gra ¦ Età fil-mewt, irġiel u nisa
+Causes de décès, par siècle ¦ Shkaqet e vdekjes, sipas shekullit ¦ Kawżi tal-mewt, skont is-seklu
+Mariages par mois ¦ Martesat sipas muajit ¦ Żwiġijiet skont ix-xahar
+Âge au mariage, hommes et femmes ¦ Mosha në martesë, burra dhe gra ¦ Età fiż-żwieġ, irġiel u nisa
+Âge moyen au mariage, par siècle de naissance ¦ Mosha mesatare në martesë, sipas shekullit të lindjes ¦ Età medja fiż-żwieġ, skont is-seklu tat-twelid
+Âge au premier enfant, pères et mères ¦ Mosha në fëmijën e parë, etër dhe nëna ¦ Età fl-ewwel tifel, missirijiet u ommijiet
+Âge moyen au premier enfant, par siècle de naissance ¦ Mosha mesatare në fëmijën e parë, sipas shekullit të lindjes ¦ Età medja fl-ewwel tifel, skont is-seklu tat-twelid
+Lieux de naissance (communes) ¦ Vendet e lindjes (komuna) ¦ Postijiet tat-twelid (komuni)
+Métiers des femmes et des hommes ¦ Profesionet e grave dhe të burrave ¦ Xogħlijiet tan-nisa u tal-irġiel
+Décès par mois ¦ Vdekjet sipas muajit ¦ Mwiet skont ix-xahar
+Mes ancêtres, côté père et côté mère ¦ Paraardhësit e mi, nga ana e babait dhe nga ana e nënës ¦ L-antenati tiegħi, min-naħa tal-missier u min-naħa tal-omm
+Médias par nom de famille ¦ Media sipas mbiemrit ¦ Midja skont il-kunjom
+nées en {a} ¦ të lindura në {a} ¦ imwielda fl-{a}
+periode|en {a} ¦ në {a} ¦ fl-{a}
+nées entre {a} et {b} ¦ të lindura midis {a} dhe {b} ¦ imwielda bejn l-{a} u l-{b}
+periode|entre {a} et {b} ¦ midis {a} dhe {b} ¦ bejn l-{a} u l-{b}
+nées depuis {a} ¦ të lindura që nga {a} ¦ imwielda mill-{a}
+periode|depuis {a} ¦ që nga {a} ¦ mill-{a}
+nées jusqu’en {b} ¦ të lindura deri në {b} ¦ imwielda sal-{b}
+periode|jusqu’en {b} ¦ deri në {b} ¦ sal-{b}
+au moins un de ces critères (OU) ¦ të paktën një nga këto kritere (OSE) ¦ mill-inqas wieħed minn dawn il-kriterji (JEW)
+critere|qui ont ¦ që kanë ¦ li għandhom
+critere|{a} ans ¦ {a} vjeç ¦ {a} sena
+critere|de {a} à {b} ans ¦ nga {a} deri {b} vjeç ¦ minn {a} sa {b}-il sena
+critere|de {a} à {b} ¦ nga {a} deri {b} ¦ minn {a} sa {b}
+critere|au moins {a} ans ¦ të paktën {a} vjeç ¦ mill-inqas {a} sena
+critere|au moins {a} ¦ të paktën {a} ¦ mill-inqas {a}
+critere|au plus {b} ans ¦ më së shumti {b} vjeç ¦ l-aktar {b} sena
+critere|au plus {b} ¦ më së shumti {b} ¦ l-aktar {b}
+nés en {a} ¦ të lindur në {a} ¦ imwielda fl-{a}
+nés entre {a} et {b} ¦ të lindur midis {a} dhe {b} ¦ imwielda bejn l-{a} u l-{b}
+nés depuis {a} ¦ të lindur që nga {a} ¦ imwielda mill-{a}
+nés jusqu’en {b} ¦ të lindur deri në {b} ¦ imwielda sal-{b}
+morts en {a} ¦ të vdekur në {a} ¦ mietu fl-{a}
+morts entre {a} et {b} ¦ të vdekur midis {a} dhe {b} ¦ mietu bejn l-{a} u l-{b}
+morts depuis {a} ¦ të vdekur që nga {a} ¦ mietu mill-{a}
+morts jusqu’en {b} ¦ të vdekur deri në {b} ¦ mietu sal-{b}
+liste|ou ¦ ose ¦ jew
+métier « {v} » ¦ profesioni «{v}» ¦ xogħol “{v}”
+nom « {v} » ¦ mbiemri «{v}» ¦ kunjom “{v}”
+prénom « {v} » ¦ emri «{v}» ¦ isem “{v}”
+nés à « {v} » ¦ të lindur në «{v}» ¦ imwielda f’“{v}”
+morts ou inhumés à « {v} » ¦ të vdekur ose të varrosur në «{v}» ¦ mietu jew midfuna f’“{v}”
+avec un événement à « {v} » ¦ me një ngjarje në «{v}» ¦ b’avveniment f’“{v}”
+avec un événement dans « {v} » ¦ me një ngjarje brenda «{v}» ¦ b’avveniment ġewwa “{v}”
+à moins de {km} km de « {v} » ¦ më pak se {km} km nga «{v}» ¦ inqas minn {km} km minn “{v}”
+critere|femmes ¦ gra ¦ nisa
+critere|hommes ¦ burra ¦ irġiel
+sexe inconnu ¦ gjinia e panjohur ¦ sess mhux magħruf
+critere|en vie ¦ gjallë ¦ ħajjin
+critere|décédés ¦ të vdekur ¦ mejtin
+statut à vérifier ¦ statusi për t’u kontrolluar ¦ status li jrid jiġi ċċekkjat
+ayant vécu {r} ¦ që kanë jetuar {r} ¦ li għexu {r}
+âgés {r} à : {types} ¦ në moshën {r} në: {types} ¦ ta’ età {r} fi: {types}
+âgés {r} ¦ në moshën {r} ¦ ta’ età {r}
+mes ancêtres (Sosa) ¦ paraardhësit e mi (Sosa) ¦ l-antenati tiegħi (Sosa)
+génération Sosa {r} ¦ brezi Sosa {r} ¦ ġenerazzjoni Sosa {r}
+critere|sans source ¦ pa burim ¦ bla sors
+avec une photo ou un document ¦ me një foto ose një dokument ¦ b’ritratt jew dokument
+critere|parents inconnus ¦ prindër të panjohur ¦ ġenituri mhux magħrufa
+dans mes favoris ¦ te të preferuarit e mi ¦ fil-favoriti tiegħi
+cause de décès « {v} » ¦ shkaku i vdekjes «{v}» ¦ kawża tal-mewt “{v}”
+ayant eu : {types} ¦ që kanë pasur: {types} ¦ li kellhom: {types}
+étiquette « {v} » ¦ etiketa «{v}» ¦ tikketta “{v}”
+critere|sauf {x} ¦ përveç {x} ¦ ħlief {x}
+Groupe de personnes ¦ Grup personash ¦ Grupp ta’ persuni
+gén. ¦ brezi ¦ ġen.
+periode|à ¦ deri ¦ sa
+🔄 Tenir à jour (relire les chiffres à chaque affichage) ¦ 🔄 Mbaje të përditësuar (rilexo shifrat sa herë shfaqet) ¦ 🔄 Żomm aġġornat (aqra n-numri mill-ġdid kull darba li jidher)
+({n} générations) ¦ ({n} breza) ¦ ({n} ġenerazzjonijiet)
+({n} génération) ¦ ({n} brez) ¦ ({n} ġenerazzjoni)
+les ancêtres de {name} ¦ paraardhësit e {name} ¦ l-antenati ta’ {name}
+critere|mes ancêtres ¦ paraardhësit e mi ¦ l-antenati tiegħi
+les descendants de {name} ¦ pasardhësit e {name} ¦ id-dixxendenti ta’ {name}
+critere|mes descendants ¦ pasardhësit e mi ¦ id-dixxendenti tiegħi
+la branche paternelle de {name} ¦ dega atësore e {name} ¦ il-fergħa tal-missier ta’ {name}
+ma branche paternelle ¦ dega ime atësore ¦ il-fergħa tal-missier tiegħi
+la branche maternelle de {name} ¦ dega amësore e {name} ¦ il-fergħa tal-omm ta’ {name}
+ma branche maternelle ¦ dega ime amësore ¦ il-fergħa tal-omm tiegħi
+l’étiquette « {name} » ¦ etiketa «{name}» ¦ it-tikketta “{name}”
+critere|une étiquette ¦ një etiketë ¦ tikketta
+la liste « {name} » ¦ lista «{name}» ¦ il-lista “{name}”
+critere|une de mes listes ¦ një nga listat e mia ¦ waħda mil-listi tiegħi
+les noms qui contiennent « {q} » ¦ emrat që përmbajnë «{q}» ¦ l-ismijiet li fihom “{q}”
+critere|une recherche ¦ një kërkim ¦ tfittxija
+{n} personnes choisies ¦ {n} persona të zgjedhur ¦ {n} persuni magħżula
+{n} personne choisie ¦ {n} person i zgjedhur ¦ {n} persuna magħżula
+toute ma base ¦ gjithë baza ime ¦ id-database kollha tiegħi
+Un graphique de l’app ¦ Një grafik i aplikacionit ¦ Grafika tal-app
+Médiane de {value} ({what}) ¦ Mediana e {value} ({what}) ¦ Medjan ta’ {value} ({what})
+chaque personne une fois ¦ çdo person një herë ¦ kull persuna darba
+personnes {p} ¦ persona {p} ¦ persuni {p}
+une série par sexe ¦ një seri për gjini ¦ serje waħda għal kull sess
+une série par siècle ¦ një seri për shekull ¦ serje waħda għal kull seklu
+{n} premiers et « Autres » ¦ {n} të parët dhe «Të tjerë» ¦ l-ewwel {n} u “Oħrajn”
+{n} premier et « Autres » ¦ {n} i pari dhe «Të tjerë» ¦ l-ewwel {n} u “Oħrajn”
+toutes les valeurs ¦ të gjitha vlerat ¦ il-valuri kollha
+« Inconnu » montré ¦ «I panjohur» i shfaqur ¦ “Mhux magħruf” jidher
+unite|en % ¦ në % ¦ f’%
+Moyenne de {value} ({what}) ¦ Mesatarja e {value} ({what}) ¦ Medja ta’ {value} ({what})
+{n} premiers ¦ {n} të parët ¦ l-ewwel {n}
+{n} premier ¦ {n} i pari ¦ l-ewwel {n}
+ayant {t} enfant ¦ me {t} fëmijë ¦ b’{t} tifel
+ayant {t} enfants ¦ me {t} fëmijë ¦ b’{t} tfal
+ayant {t} union ¦ me {t} bashkim ¦ b’{t} unjoni
+ayant {t} unions ¦ me {t} bashkime ¦ b’{t} unjonijiet
+ayant {t} source ¦ me {t} burim ¦ b’{t} sors
+ayant {t} sources ¦ me {t} burime ¦ b’{t} sorsi
+Gris-bleu calme, traits fins, quadrillage léger. ¦ Gri-blu e qetë, vija të holla, rrjetë e lehtë. ¦ Griż-blu kalm, linji rqaq, gradilja ħafifa.
+Papier ancien, encre brune, police à empattements. ¦ Letër e vjetër, bojë kafe, shkronja me këmbëza. ¦ Karta antika, linka kannella, font b’serif.
+Couleurs franches, traits épais, coins arrondis. ¦ Ngjyra të forta, vija të trasha, qoshe të rrumbullakëta. ¦ Kuluri qawwija, linji ħoxnin, kantunieri tondi.
+Noir et blanc imprimable ¦ Bardhezi për printim ¦ Iswed u abjad għall-ipprintjar
+Gris du noir au clair, quadrillage marqué : lisible imprimé sans couleur. ¦ Gri nga e zeza te e çelura, rrjetë e theksuar: lexohet edhe kur printohet pa ngjyrë. ¦ Griżi mill-iswed sal-ċar, gradilja qawwija: tinqara meta tiġi pprintjata mingħajr kulur.
+Couleurs qu’on distingue même en voyant mal certaines couleurs (Okabe-Ito). ¦ Ngjyra që dallohen edhe kur sheh keq disa ngjyra (Okabe-Ito). ¦ Kuluri li tagħrafhom anki jekk ma tarax tajjeb xi kuluri (Okabe-Ito).
+{n} petits diagrammes, même échelle (de {lo} à {hi}) ¦ {n} diagrame të vogla, e njëjta shkallë (nga {lo} deri {hi}) ¦ {n} dijagrammi żgħar, l-istess skala (minn {lo} sa {hi})
+Repère de date ¦ Shenjë date ¦ Marka tad-data
+Revenir au dessin complet ¦ Kthehu te vizatimi i plotë ¦ Lura għad-disinn sħiħ
+Enregistrer la lecture en vidéo ¦ Ruaje luajtjen si video ¦ Issejvja r-riproduzzjoni bħala vidjo
+Réglages → Accessibilité → Mouvement ¦ Cilësimet → Përshtatshmëria → Lëvizja ¦ Issettjar → Aċċessibbiltà → Moviment
+Mouvements réduits : une étape à la fois, sans glisser ¦ Lëvizje të pakësuara: një hap në një herë, pa rrëshqitje ¦ Moviment imnaqqas: pass wieħed kull darba, mingħajr ma jiżżerżaq
+Lire les années ¦ Luaj vitet ¦ Ħaddem is-snin
+Mettre en pause ¦ Ndalo përkohësisht ¦ Pawża
+rien à filmer ¦ asgjë për të filmuar ¦ xejn x’tiffilmja
+✓ Vidéo exportée ({format}). ¦ ✓ Videoja u eksportua ({format}). ¦ ✓ Il-vidjo ġie esportat ({format}).
+Vidéo impossible : {err} ¦ Videoja nuk është e mundur: {err} ¦ Vidjo mhux possibbli: {err}
+Les couleurs et réglages du type, comme avant ¦ Ngjyrat dhe cilësimet e llojit, si më parë ¦ Il-kuluri u l-issettjar tat-tip, bħal qabel
+Selon le type ¦ Sipas llojit ¦ Skont it-tip
+Marqué ¦ E theksuar ¦ Qawwija
+Tous mes diagrammes prennent ce style (même ceux qui avaient le leur) ¦ Të gjitha diagramet e mia marrin këtë stil (edhe ato që kishin të tyrin) ¦ Id-dijagrammi kollha tiegħi jieħdu dan l-istil (anki dawk li kellhom tagħhom)
+Les nouveaux diagrammes, et ceux sans style à eux, le prennent ¦ Diagramet e reja, dhe ato pa stil të tyre, e marrin ¦ Id-dijagrammi ġodda, u dawk mingħajr stil tagħhom, jieħduh
+Appliquer à tous les diagrammes ¦ Zbatoje për të gjitha diagramet ¦ Applika għad-dijagrammi kollha
+⭐ Style par défaut ¦ ⭐ Stili i parazgjedhur ¦ ⭐ Stil awtomatiku
+à (facultatif) ¦ deri (sipas dëshirës) ¦ sa (mhux obbligatorju)
+Retirer l’annotation ¦ Hiq shënimin ¦ Neħħi l-annotazzjoni
+Aucune annotation : ajoute une flèche, un texte, une zone ou un repère de date. ¦ Asnjë shënim: shto një shigjetë, një tekst, një zonë ose një shenjë date. ¦ L-ebda annotazzjoni: żid vleġġa, test, żona jew marka tad-data.
+Toutes les séries ¦ Të gjitha seritë ¦ Is-serji kollha
+Nom de la ligne ¦ Emri i vijës ¦ Isem il-linja
+Échelle logarithmique (très grands écarts) ¦ Shkallë logaritmike (diferenca shumë të mëdha) ¦ Skala logaritmika (differenzi kbar ħafna)
+Deuxième axe (à droite) ¦ Boshti i dytë (djathtas) ¦ It-tieni assi (fuq il-lemin)
+{name} (en courbe) ¦ {name} (si kurbë) ¦ {name} (bħala kurva)
+Les séries du tableau ¦ Seritë e tabelës ¦ Is-serji tat-tabella
+Le sexe ¦ Gjinia ¦ Is-sess
+Le siècle ¦ Shekulli ¦ Is-seklu
+La branche (côté père / côté mère) ¦ Dega (nga babai / nga nëna) ¦ Il-fergħa (naħa tal-missier / naħa tal-omm)
+Le lieu (département) ¦ Vendi (departamenti) ¦ Il-post (dipartiment)
+Le lieu (pays) ¦ Vendi (shteti) ¦ Il-post (pajjiż)
+La génération ¦ Brezi ¦ Il-ġenerazzjoni
+Un seul diagramme ¦ Një diagram i vetëm ¦ Dijagramma waħda
+Répéter le diagramme par ¦ Përsërite diagramin sipas ¦ Irrepeti d-dijagramma skont
+Pour répéter par sexe, siècle, branche, lieu ou génération : prends tes chiffres avec « 🧮 Compter dans ma base » (onglet « Depuis l’app ») et coche « Tenir à jour ». ¦ Për ta përsëritur sipas gjinisë, shekullit, degës, vendit ose brezit: merr shifrat me «🧮 Numëro në bazën time» (skeda «Nga aplikacioni») dhe shëno «Mbaje të përditësuar». ¦ Biex tirrepeti skont is-sess, is-seklu, il-fergħa, il-post jew il-ġenerazzjoni: ħu n-numri b’“🧮 Għodd fid-database tiegħi” (tab “Mill-app”) u immarka “Żomm aġġornat”.
+Les données vont de {a} à {b} : le curseur ▶ sous l’aperçu les fait apparaître année après année. ¦ Të dhënat shkojnë nga {a} në {b}: rrëshqitësi ▶ nën pamjen paraprake i shfaq vit pas viti. ¦ Id-data tmur minn {a} sa {b}: is-slider ▶ taħt il-preview juriha sena wara sena.
+Montrer aussi le curseur ▶ là où le diagramme est posé (Graphiques, fiches, tableau de bord) ¦ Shfaq edhe rrëshqitësin ▶ aty ku është vendosur diagrami (Grafikët, kartelat, Paneli) ¦ Uri wkoll is-slider ▶ fejn titpoġġa d-dijagramma (Grafiċi, skedi, Pannell)
+Recommencer au début (boucle) ¦ Fillo sërish nga fillimi (cikël) ¦ Erġa’ ibda mill-bidu (loop)
+Un pas de ¦ Një hap prej ¦ Pass ta’
+unite|ans ¦ vjet ¦ snin
+« Réduire les animations » est demandé : la lecture avance d’une étape par seconde, sans glisser. ¦ «Pakëso animacionet» është kërkuar: luajtja ecën një hap në sekondë, pa rrëshqitje. ¦ “Naqqas l-animazzjonijiet” mixgħul: ir-riproduzzjoni timxi pass kull sekonda, mingħajr ma tiżżerżaq.
+Palette, police, fond, traits, coins, taille du texte, quadrillage : choisis un style prêt, retouche-le, garde-le sous un nom. ¦ Paleta, shkronjat, sfondi, vijat, qoshet, madhësia e tekstit, rrjeta: zgjidh një stil të gatshëm, ndryshoje, ruaje me një emër. ¦ Paletta, font, sfond, linji, kantunieri, daqs tat-test, gradilja: agħżel stil lest, irranġah, żommu b’isem.
+Pose-les ici, puis glisse-les sur l’aperçu (et leurs poignées pour les agrandir). Elles partent avec le diagramme à l’export et à l’impression. ¦ Vendosi këtu, pastaj tërhiqi mbi pamjen paraprake (dhe dorezat e tyre për t’i zmadhuar). Ato shkojnë bashkë me diagramin në eksport dhe në printim. ¦ Poġġihom hawn, imbagħad kaxkarhom fuq il-preview (u l-manki tagħhom biex tkabbarhom). Imorru mad-dijagramma meta tesporta u tipprintja.
+📏 Lignes de repère et axes ¦ 📏 Vija referimi dhe boshte ¦ 📏 Linji ta’ referenza u assi
+Moyenne et médiane se calculent seules ; l’objectif et la valeur sont à toi. ¦ Mesatarja dhe mediana llogariten vetë; objektivi dhe vlera janë në dorën tënde. ¦ Il-medja u l-medjan jiġu kkalkulati waħedhom; il-mira u l-valur jiddeċiedihom int.
+Un petit diagramme par groupe, côte à côte, avec la même échelle pour comparer d’un coup d’œil. ¦ Një diagram i vogël për çdo grup, krah për krah, me të njëjtën shkallë për t’i krahasuar me një shikim. ¦ Dijagramma żgħira għal kull grupp, ħdejn xulxin, bl-istess skala biex tqabbel f’daqqa t’għajn.
+▶ Lecture dans le temps ¦ ▶ Luajtje në kohë ¦ ▶ Riproduzzjoni matul iż-żmien
+Aucun chiffre pour ce découpage. ¦ Asnjë shifër për këtë ndarje. ¦ L-ebda numru għal dan it-tqassim.
+{n} petits diagrammes, même échelle. ¦ {n} diagrame të vogla, e njëjta shkallë. ¦ {n} dijagrammi żgħar, l-istess skala.
+Baptêmes et sépultures ¦ Pagëzime dhe varrime ¦ Magħmudijiet u difniet
+Police du diagramme ¦ Shkronjat e diagramit ¦ Font tad-dijagramma
+⭐ « {name} » : style par défaut des nouveaux diagrammes et de ceux sans style à eux. ¦ ⭐ «{name}»: stili i parazgjedhur i diagrameve të reja dhe i atyre pa stil të tyre. ¦ ⭐ “{name}”: stil awtomatiku tad-dijagrammi ġodda u ta’ dawk mingħajr stil tagħhom.
+Plus de style par défaut ¦ Pa stil të parazgjedhur ¦ L-ebda stil awtomatiku
+60 annotations au plus. ¦ Më së shumti 60 shënime. ¦ L-aktar 60 annotazzjoni.
+Guerre de 14 ¦ Lufta e 14-ës ¦ Il-Gwerra tal-14
+Mon repère ¦ Shenja ime ¦ Il-marka tiegħi
+Mon texte ¦ Teksti im ¦ It-test tiegħi
+Ligne de repère retirée ¦ Vija e referimit u hoq ¦ Linja ta’ referenza tneħħiet
+Annotation retirée ¦ Shënimi u hoq ¦ Annotazzjoni tneħħiet
+(retouché) ¦ (i ndryshuar) ¦ (irranġat)
+Style « {name} » appliqué à {n} diagrammes ¦ Stili «{name}» u zbatua te {n} diagrame ¦ L-istil “{name}” ġie applikat għal {n} dijagrammi
+Style « {name} » appliqué à {n} diagramme ¦ Stili «{name}» u zbatua te {n} diagram ¦ L-istil “{name}” ġie applikat għal {n} dijagramma
+Mes styles enregistrés ¦ Stilet e mia të ruajtura ¦ L-istili ssejvjati tiegħi
+ce style (palette, police, fond, traits, coins, taille du texte, quadrillage) ¦ ky stil (paleta, shkronjat, sfondi, vijat, qoshet, madhësia e tekstit, rrjeta) ¦ dan l-istil (paletta, font, sfond, linji, kantunieri, daqs tat-test, gradilja)
+Style « {name} » appliqué à ce diagramme. ¦ Stili «{name}» u zbatua te ky diagram. ¦ L-istil “{name}” ġie applikat għal din id-dijagramma.
+Style « {name} » importé. ¦ Stili «{name}» u importua. ¦ L-istil “{name}” ġie importat.
+Annotation : glisser pour la déplacer, Suppr pour la retirer ¦ Shënim: tërhiqe për ta lëvizur, Delete për ta hequr ¦ Annotazzjoni: kaxkarha biex iċċaqlaqha, Delete biex tneħħiha
+Texte de l’annotation ¦ Teksti i shënimit ¦ Test tal-annotazzjoni
+Hauteur du dessin (0 = automatique) ¦ Lartësia e vizatimit (0 = automatike) ¦ Għoli tad-disinn (0 = awtomatiku)
+Ajoute la personne du milieu (génération 0), puis ses ascendants (−1, −2…) et ses descendants (1, 2…). ¦ Shto personin në mes (brezi 0), pastaj paraardhësit e tij (−1, −2…) dhe pasardhësit (1, 2…). ¦ Żid il-persuna fin-nofs (ġenerazzjoni 0), imbagħad l-antenati tagħha (−1, −2…) u d-dixxendenti (1, 2…).
+Gén. +{g} ¦ Brezi +{g} ¦ Ġen. +{g}
+Le sablier de {name} ¦ Ora me rërë e {name} ¦ Il-ħġieġa tar-ramel ta’ {name}
+Ajoute des tâches : nom, début, fin (dates ou années), avancement en %. ¦ Shto detyra: emri, fillimi, fundi (data ose vite), përparimi në %. ¦ Żid kompiti: isem, bidu, tmiem (dati jew snin), progress f’%.
+Diagramme de Gantt : {n} tâches. ¦ Diagram Gantt: {n} detyra. ¦ Dijagramma Gantt: {n} kompiti.
+Diagramme de Gantt : {n} tâche. ¦ Diagram Gantt: {n} detyrë. ¦ Dijagramma Gantt: {n} kompitu.
+Ma recherche sur les {name} ¦ Kërkimi im për familjen {name} ¦ Ir-riċerka tiegħi dwar il-familja {name}
+Relevés de Naves (1700-1792) ¦ Zbërthimet e Naves (1700-1792) ¦ Indiċi tar-reġistri ta’ Naves (1700-1792)
+État civil de Tulle ¦ Gjendja civile e Tulle ¦ Stat ċivili ta’ Tulle
+Notaires (contrats de mariage) ¦ Noterë (kontrata martese) ¦ Nutara (kuntratti taż-żwieġ)
+Recensements 1836-1936 ¦ Regjistrime të popullsisë 1836-1936 ¦ Ċensimenti 1836-1936
+Registres matricules ¦ Regjistrat ushtarakë ¦ Reġistri militari
+Visite à Arnac-la-Poste ¦ Vizitë në Arnac-la-Poste ¦ Żjara f’Arnac-la-Poste
+Terrain ¦ Në terren ¦ Fuq il-post
+Mon idée ¦ Ideja ime ¦ L-idea tiegħi
+Ajoute des branches (et, à côté, leurs idées). ¦ Shto degë (dhe, pranë tyre, idetë e tyre). ¦ Żid fergħat (u, ħdejhom, l-ideat tagħhom).
+Carte mentale « {name} » : {n} branches. ¦ Harta mendore «{name}»: {n} degë. ¦ Mappa mentali “{name}”: {n} fergħat.
+Carte mentale « {name} » : {n} branche. ¦ Harta mendore «{name}»: {n} degë. ¦ Mappa mentali “{name}”: {n} fergħa.
+Mes pistes de recherche ¦ Gjurmët e mia të kërkimit ¦ Il-pisti tar-riċerka tiegħi
+Famille {name} ¦ Familja {name} ¦ Familja {name}
+Registres de Naves ¦ Regjistrat e Naves ¦ Reġistri ta’ Naves
+Notaires de Tulle ¦ Noterët e Tulle ¦ Nutara ta’ Tulle
+Laboureurs ¦ Bujq ¦ Bdiewa
+Tisserands ¦ Endës ¦ Insiġa
+Qui était Jeanne Roux ? ¦ Kush ishte Jeanne Roux? ¦ Min kienet Jeanne Roux?
+Pourquoi le départ en 1902 ? ¦ Pse u nis në 1902? ¦ Għaliex it-tluq fl-1902?
+Photos ¦ Foto ¦ Ritratti
+Mariage 1919 ¦ Martesa 1919 ¦ Żwieġ 1919
+Maison de Naves ¦ Shtëpia në Naves ¦ Id-dar f’Naves
+Cousins ¦ Kushërinj ¦ Kuġini
+Branche de Paris ¦ Dega e Parisit ¦ Il-fergħa ta’ Pariġi
+ADN : 3 correspondances ¦ ADN: 3 përputhje ¦ DNA: 3 tqabbil
+Ajoute des noms et leurs chiffres. ¦ Shto emra dhe shifrat e tyre. ¦ Żid ismijiet u n-numri tagħhom.
+Barres en cercle : {n} lignes, la plus longue « {name} » ({v}). ¦ Shtylla në rreth: {n} rreshta, më e gjata «{name}» ({v}). ¦ Vireg f’ċirku: {n} ringieli, l-itwal “{name}” ({v}).
+Les prénoms les plus donnés ¦ Emrat më të dhënë ¦ L-aktar ismijiet mogħtija
+fois ¦ herë ¦ darbiet
+Ajoute des noms (patronymes, métiers, lieux…) et leurs chiffres. ¦ Shto emra (mbiemra, profesione, vende…) dhe shifrat e tyre. ¦ Żid ismijiet (kunjomijiet, xogħlijiet, postijiet…) u n-numri tagħhom.
+Bulles groupées : {n} bulles ({k} trop petites pour la place). ¦ Flluska të grupuara: {n} flluska ({k} shumë të vogla për hapësirën). ¦ Bżieżaq miġbura: {n} bżieżaq ({k} żgħar wisq għall-ispazju).
+Bulles groupées : {n} bulles. ¦ Flluska të grupuara: {n} flluska. ¦ Bżieżaq miġbura: {n} bżieżaq.
+Les noms de famille de l’arbre ¦ Mbiemrat e pemës ¦ Il-kunjomijiet tas-siġra
+Ajoute des objectifs : un nom, où tu en es, et le but (ex. 12 sur 16 ancêtres trouvés). ¦ Shto objektiva: një emër, ku je, dhe synimi (p.sh. 12 nga 16 paraardhës të gjetur). ¦ Żid għanijiet: isem, fejn wasalt, u l-mira (eż. 12 minn 16-il antenat misjuba).
+{name} : {v} sur {goal} ¦ {name}: {v} nga {goal} ¦ {name}: {v} minn {goal}
+Anneaux d’avancement : {n} objectifs. ¦ Unaza përparimi: {n} objektiva. ¦ Ċrieki tal-progress: {n} għanijiet.
+Anneaux d’avancement : {n} objectifs, de {a} à {b} %. ¦ Unaza përparimi: {n} objektiva, nga {a} deri {b} %. ¦ Ċrieki tal-progress: {n} għanijiet, minn {a} sa {b} %.
+Grands-parents trouvés ¦ Gjyshër të gjetur ¦ Nanniet misjuba
+Actes de naissance sourcés ¦ Akte lindjeje me burim ¦ Atti tat-twelid b’sors
+Photos identifiées ¦ Foto të identifikuara ¦ Ritratti identifikati
+Quadrisaïeuls ¦ Stërstërgjyshër ¦ Bużnanniet il-kbar tal-kbar
+Génération 6 ¦ Brezi 6 ¦ Ġenerazzjoni 6
+Génération 7 ¦ Brezi 7 ¦ Ġenerazzjoni 7
+Génération +4 ¦ Brezi +4 ¦ Ġenerazzjoni +4
+Génération +{g} ¦ Brezi +{g} ¦ Ġenerazzjoni +{g}
+Les noms de famille ¦ Mbiemrat ¦ Il-kunjomijiet
+Les communes de naissance ¦ Komunat e lindjes ¦ Il-komuni tat-twelid
+Les siècles de naissance ¦ Shekujt e lindjes ¦ Is-sekli tat-twelid
+{n}e siècle ¦ Shekulli {n} ¦ Is-seklu {n}
+Prendre dans mon arbre ¦ Merr nga pema ime ¦ Ħu mis-siġra tiegħi
+Rien trouvé dans l’arbre pour ce choix. ¦ Nuk u gjet asgjë në pemë për këtë zgjedhje. ¦ Ma nstab xejn fis-siġra għal din l-għażla.
+{n} lignes prises dans l’arbre. ¦ {n} rreshta të marrë nga pema. ¦ {n} ringieli meħuda mis-siġra.
+⏳ Le sablier de quelqu’un de mon arbre ¦ ⏳ Ora me rërë e dikujt nga pema ime ¦ ⏳ Il-ħġieġa tar-ramel ta’ xi ħadd mis-siġra tiegħi
+Ses ancêtres au-dessus, ses descendants au-dessous, avec leurs dates. ¦ Paraardhësit e tij sipër, pasardhësit poshtë, me datat e tyre. ¦ L-antenati tagħha fuq, id-dixxendenti taħt, bid-dati tagħhom.
+Générations au-dessus ¦ Breza sipër ¦ Ġenerazzjonijiet fuq
+Générations au-dessous ¦ Breza poshtë ¦ Ġenerazzjonijiet taħt
+📅 Les vies côte à côte ¦ 📅 Jetët krah për krah ¦ 📅 Il-ħajjiet ħdejn xulxin
+Une barre par personne, de sa naissance à son décès (ou à aujourd’hui). ¦ Një shtyllë për person, nga lindja deri te vdekja (ose deri sot). ¦ Virga għal kull persuna, mit-twelid sal-mewt (jew sal-lum).
+Ses ancêtres directs ¦ Paraardhësit e tij të drejtpërdrejtë ¦ L-antenati diretti tagħha
+Sa famille proche (parents, frères et sœurs, enfants) ¦ Familja e tij e afërt (prindër, vëllezër e motra, fëmijë) ¦ Il-familja qrib tagħha (ġenituri, aħwa, tfal)
+Ses descendants ¦ Pasardhësit e tij ¦ Id-dixxendenti tagħha
+Les vies autour de {name} ¦ Jetët rreth {name} ¦ Il-ħajjiet madwar {name}
+🧠 Une personne et ses branches ¦ 🧠 Një person dhe degët e tij ¦ 🧠 Persuna u l-fergħat tagħha
+Au centre la personne ; autour, ses enfants (et leurs enfants), ou les métiers et les communes de ses ancêtres. ¦ Në qendër personi; përreth, fëmijët e tij (dhe fëmijët e tyre), ose profesionet dhe komunat e paraardhësve të tij. ¦ Fiċ-ċentru l-persuna; madwarha, it-tfal tagħha (u t-tfal tagħhom), jew ix-xogħlijiet u l-komuni tal-antenati tagħha.
+Les branches ¦ Degët ¦ Il-fergħat
+Ses enfants, et leurs enfants ¦ Fëmijët e tij, dhe fëmijët e tyre ¦ It-tfal tagħha, u t-tfal tagħhom
+Les métiers de ses ancêtres ¦ Profesionet e paraardhësve të tij ¦ Ix-xogħlijiet tal-antenati tagħha
+Les communes de naissance de ses ancêtres ¦ Komunat e lindjes së paraardhësve të tij ¦ Il-komuni tat-twelid tal-antenati tagħha
+La descendance de {name} ¦ Pasardhësit e {name} ¦ Id-dixxendenza ta’ {name}
+D’où viennent les ancêtres de {name} ¦ Nga vijnë paraardhësit e {name} ¦ Minn fejn ġejjin l-antenati ta’ {name}
+🎯 Un classement de mon arbre ¦ 🎯 Një renditje e pemës sime ¦ 🎯 Klassifika tas-siġra tiegħi
+Les plus fréquents dans toute la base, en barres autour d’un cercle. ¦ Më të shpeshtat në gjithë bazën, në shtylla rreth një rrethi. ¦ L-aktar frekwenti fid-database kollha, f’vireg madwar ċirku.
+fiches ¦ kartela ¦ skedi
+🫧 Les bulles de mon arbre ¦ 🫧 Flluskat e pemës sime ¦ 🫧 Il-bżieżaq tas-siġra tiegħi
+Une bulle par nom, métier ou commune : plus il y a de fiches, plus elle est grosse. ¦ Një flluskë për emër, profesion ose komunë: sa më shumë kartela, aq më e madhe. ¦ Bużżieqa għal kull isem, xogħol jew komun: aktar ma jkun hemm skedi, akbar tkun.
+Les bulles ¦ Flluskat ¦ Il-bżieżaq
+⭕ Où j’en suis dans mon arbre ¦ ⭕ Ku jam me pemën time ¦ ⭕ Fejn wasalt fis-siġra tiegħi
+Un anneau par objectif : plein, c’est fini. ¦ Një unazë për objektiv: e plotë do të thotë mbaroi. ¦ Ċirku għal kull għan: mimli jfisser lest.
+Les objectifs ¦ Objektivat ¦ L-għanijiet
+Les ancêtres trouvés, génération par génération ¦ Paraardhësit e gjetur, brez pas brezi ¦ L-antenati misjuba, ġenerazzjoni wara ġenerazzjoni
+Les fiches complètes (dates, lieux, métier) ¦ Kartelat e plota (data, vende, profesion) ¦ Skedi kompluti (dati, postijiet, xogħol)
+Date de décès (personnes décédées) ¦ Data e vdekjes (persona të vdekur) ¦ Data tal-mewt (persuni mejtin)
+Mes fiches complètes ¦ Kartelat e mia të plota ¦ L-iskedi kompluti tiegħi
+Les ancêtres de {name} : où j’en suis ¦ Paraardhësit e {name}: ku jam ¦ L-antenati ta’ {name}: fejn wasalt
+Les personnes (génération : 0 = la personne, −1 = parents, 1 = enfants…) ¦ Personat (brezi: 0 = personi, −1 = prindërit, 1 = fëmijët…) ¦ Il-persuni (ġenerazzjoni: 0 = il-persuna, −1 = ġenituri, 1 = tfal…)
+Couleur des ascendants ¦ Ngjyra e paraardhësve ¦ Kulur tal-antenati
+Couleur de la personne ¦ Ngjyra e personit ¦ Kulur tal-persuna
+Couleur des descendants ¦ Ngjyra e pasardhësve ¦ Kulur tad-dixxendenti
+Hauteur d’une case ¦ Lartësia e një kutie ¦ Għoli ta’ kaxxa
+Écart entre générations ¦ Largësia midis brezave ¦ Distanza bejn il-ġenerazzjonijiet
+Traits vers la personne ¦ Vija drejt personit ¦ Linji lejn il-persuna
+Nom des générations à gauche ¦ Emri i brezave majtas ¦ Isem il-ġenerazzjonijiet fuq ix-xellug
+Les tâches ¦ Detyrat ¦ Il-kompiti
+Début (date ou année) ¦ Fillimi (data ose viti) ¦ Bidu (data jew sena)
+Une par tâche ¦ Një për detyrë ¦ Waħda għal kull kompitu
+Couleur (une seule) ¦ Ngjyra (vetëm një) ¦ Kulur (wieħed biss)
+Montrer l’avancement ¦ Shfaq përparimin ¦ Uri l-progress
+Écrire le % ¦ Shkruaj %-në ¦ Ikteb il-%
+Trait « aujourd’hui » ¦ Vija «sot» ¦ Linja “illum”
+Couleur du trait « aujourd’hui » ¦ Ngjyra e vijës «sot» ¦ Kulur tal-linja “illum”
+Les branches et leurs idées (une ligne par idée) ¦ Degët dhe idetë e tyre (një rresht për ide) ¦ Il-fergħat u l-ideat tagħhom (ringiela għal kull idea)
+Le mot du centre ¦ Fjala në qendër ¦ Il-kelma fiċ-ċentru
+Couleur du centre ¦ Ngjyra e qendrës ¦ Kulur taċ-ċentru
+Branches en courbes ¦ Degë të lakuara ¦ Fergħat mgħawġa
+Épaisseur des branches ¦ Trashësia e degëve ¦ Ħxuna tal-fergħat
+Une par ligne ¦ Një për rresht ¦ Waħda għal kull ringiela
+Chiffre d’un tour complet (vide = le plus grand) ¦ Shifra e një rrotullimi të plotë (bosh = më e madhja) ¦ Valur ta’ dawra sħiħa (vojt = l-akbar)
+Une par bulle ¦ Një për flluskë ¦ Waħda għal kull bużżieqa
+Écart entre les bulles ¦ Largësia midis flluskave ¦ Distanza bejn il-bżieżaq
+Le but ¦ Synimi ¦ Il-mira
+Anneaux l’un dans l’autre ¦ Unaza njëra brenda tjetrës ¦ Ċrieki wieħed ġo l-ieħor
+Un anneau par objectif, côte à côte ¦ Një unazë për objektiv, krah për krah ¦ Ċirku għal kull għan, ħdejn xulxin
+Par ligne (côte à côte) ¦ Për rresht (krah për krah) ¦ Għal kull ringiela (ħdejn xulxin)
+1er siècle ¦ Shekulli i 1-rë ¦ L-1 seklu
+nombre|{n}e siècle ¦ Shekulli i {n}-të ¦ Is-seklu {n}
+⚠ Lieux sans position : {list} ¦ ⚠ Vende pa pozicion: {list} ¦ ⚠ Postijiet mingħajr pożizzjoni: {list}
+mentions par département ¦ përmendje sipas departamentit ¦ referenzi skont id-dipartiment
+Choisis un nom dans « Depuis l’app » (ou tape des lieux et des dates). ¦ Zgjidh një emër te «Nga aplikacioni» (ose shkruaj vende dhe data). ¦ Agħżel isem f’“Mill-app” (jew ikteb postijiet u dati).
+Aucune mention au {when}. ¦ Asnjë përmendje në {when}. ¦ L-ebda referenza fis-{when}.
+Aucune mention pour ce nom. ¦ Asnjë përmendje për këtë emër. ¦ L-ebda referenza għal dan l-isem.
+Carte du nom {name} : {n} au {when} dans {d}. ¦ Harta e mbiemrit {name}: {n} në {when} në {d}. ¦ Mappa tal-kunjom {name}: {n} fis-{when} f’{d}.
+Carte du nom {name} : {n} au {when}. ¦ Harta e mbiemrit {name}: {n} në {when}. ¦ Mappa tal-kunjom {name}: {n} fis-{when}.
+Carte du nom {name} : {n} dans {d}. ¦ Harta e mbiemrit {name}: {n} në {d}. ¦ Mappa tal-kunjom {name}: {n} f’{d}.
+Carte du nom {name} : {n}. ¦ Harta e mbiemrit {name}: {n}. ¦ Mappa tal-kunjom {name}: {n}.
+jusqu’en {y} ¦ deri në {y} ¦ sal-{y}
+années {y} ¦ vitet {y} ¦ is-snin {y}
+peu → beaucoup ¦ pak → shumë ¦ ftit → ħafna
+peu ¦ pak ¦ ftit
+beaucoup ¦ shumë ¦ ħafna
+Prends les événements de ton arbre (« Depuis l’app »). ¦ Merr ngjarjet e pemës sate («Nga aplikacioni»). ¦ Ħu l-avvenimenti tas-siġra tiegħek (“Mill-app”).
+Carte de chaleur : {n} ({when}). ¦ Hartë nxehtësie: {n} ({when}). ¦ Mappa tas-sħana: {n} ({when}).
+Carte de chaleur : {n}. ¦ Hartë nxehtësie: {n}. ¦ Mappa tas-sħana: {n}.
+Relie des correspondances ADN à leur fiche (onglet ADN), puis « Depuis l’app ». ¦ Lidh përputhjet ADN me kartelën e tyre (skeda ADN), pastaj «Nga aplikacioni». ¦ Għaqqad it-tqabbil tad-DNA mal-iskeda tagħhom (tab DNA), imbagħad “Mill-app”.
+=lieu d’ancêtre commun ¦ vend i paraardhësit të përbashkët|vende të paraardhësve të përbashkët ¦ post ta’ antenat komuni|postijiet ta’ antenati komuni|postijiet ta’ antenati komuni|post ta’ antenat komuni|post ta’ antenat komuni
+=mention ¦ përmendje|përmendje ¦ referenza|referenzi|referenzi|referenza|referenza
+=recherche vue ¦ kërkim i parë|kërkime të para ¦ tfittxija magħmula|tfittxijiet magħmula|tfittxijiet magħmula|tfittxija magħmula|tfittxija magħmula
+=à faire ou à revoir ¦ për t’u bërë ose rishikuar|për t’u bërë ose rishikuar ¦ x’isir jew x’jiġi rivedut|x’isir jew x’jiġi rivedut|x’isir jew x’jiġi rivedut|x’isir jew x’jiġi rivedut|x’isir jew x’jiġi rivedut
+Carte des cousins ADN : {n}. ¦ Harta e kushërinjve ADN: {n}. ¦ Mappa tal-kuġini tad-DNA: {n}.
+En partie, à revoir ¦ Pjesërisht, për t’u rishikuar ¦ Parzjalment, irid jiġi rivedut
+Prévu, pas fait ¦ I planifikuar, i pabërë ¦ Ippjanat, mhux magħmul
+Toutes les sortes d’actes ¦ Të gjitha llojet e akteve ¦ It-tipi kollha ta’ atti
+Naissances et baptêmes ¦ Lindje dhe pagëzime ¦ Twelid u magħmudijiet
+Décès et sépultures ¦ Vdekje dhe varrime ¦ Mwiet u difniet
+Tout vu ¦ Gjithçka e parë ¦ Kollox muri
+Trous à couvrir ¦ Boshllëqe për t’u mbuluar ¦ Vojt li jridu jimtlew
+Clic : le détail ¦ Kliko: detajet ¦ Ikklikkja: id-dettalji
+Rien pour ce choix (sorte d’acte, période). ¦ Asgjë për këtë zgjedhje (lloji i aktit, periudha). ¦ Xejn għal din l-għażla (tip ta’ att, perjodu).
+Prends tes dépouillements, battues et trous (« Depuis l’app »). ¦ Merr zbërthimet, kërkimet në terren dhe boshllëqet e tua («Nga aplikacioni»). ¦ Ħu l-indiċi tar-reġistri, it-tfittxijiet fuq il-post u l-vojt tiegħek (“Mill-app”).
+Carte de tes recherches : {n} — {g} tout vu, {o} en partie, {r} avec des trous. ¦ Harta e kërkimeve të tua: {n} — {g} gjithçka e parë, {o} pjesërisht, {r} me boshllëqe. ¦ Mappa tar-riċerki tiegħek: {n} — {g} kollox muri, {o} parzjalment, {r} b’vojt.
+✓ Ce qui a été vu ¦ ✓ Çfarë është parë ¦ ✓ Dak li ġie muri
+⚠️ Ce qui manque ou reste à revoir ¦ ⚠️ Çfarë mungon ose mbetet për t’u rishikuar ¦ ⚠️ Dak li jonqos jew għad irid jiġi rivedut
+Rien de vu ici pour l’instant. ¦ Ende asgjë e parë këtu. ¦ Għadu ma ntwera xejn hawn.
+Rien ne manque ici. ¦ Këtu nuk mungon asgjë. ¦ Hawn ma jonqos xejn.
+CARTE DE TES RECHERCHES ¦ HARTA E KËRKIMEVE TË TUA ¦ MAPPA TAR-RIĊERKI TIEGĦEK
+Données prises dans l’app. ¦ Të dhëna të marra nga aplikacioni. ¦ Data meħuda mill-app.
+Quels événements ¦ Cilat ngjarje ¦ Liema avvenimenti
+Naissances, mariages, décès, résidences ¦ Lindje, martesa, vdekje, vendbanime ¦ Twelid, żwiġijiet, mwiet, residenzi
+🔤 Un nom de ta généalogie ¦ 🔤 Një mbiemër nga gjenealogjia jote ¦ 🔤 Kunjom mill-ġenealoġija tiegħek
+Choisis un nom dans la liste (les plus fréquents d’abord) ou une personne : son nom est pris. Jamais un vivant ni une fiche confidentielle. ¦ Zgjidh një mbiemër në listë (më të shpeshtët së pari) ose një person: merret mbiemri i tij. Kurrë një i gjallë apo një kartelë konfidenciale. ¦ Agħżel kunjom mil-lista (l-aktar frekwenti l-ewwel) jew persuna: jittieħed il-kunjom tagħha. Qatt persuna ħajja jew skeda kunfidenzjali.
+ou une personne ¦ ose një person ¦ jew persuna
+Avec les variantes du même groupe de noms ¦ Me variantet e të njëjtit grup mbiemrash ¦ Bil-varjanti tal-istess grupp ta’ kunjomijiet
+Aucun nom ¦ Asnjë mbiemër ¦ L-ebda kunjom
+Choisis un nom. ¦ Zgjidh një mbiemër. ¦ Agħżel kunjom.
+Le nom {name}, siècle par siècle ¦ Mbiemri {name}, shekull pas shekulli ¦ Il-kunjom {name}, seklu wara seklu
+Avec {list} ¦ Me {list} ¦ Ma’ {list}
+Aucun événement avec un lieu pour ce nom. ¦ Asnjë ngjarje me vend për këtë mbiemër. ¦ L-ebda avveniment b’post għal dan il-kunjom.
+{n} du nom {name}. ¦ {n} me mbiemrin {name}. ¦ {n} bil-kunjom {name}.
+🔥 Les événements de ton arbre ¦ 🔥 Ngjarjet e pemës sate ¦ 🔥 L-avvenimenti tas-siġra tiegħek
+Chaque événement daté qui a un lieu compte. Le curseur ▶ passe les décennies une à une. ¦ Numërohet çdo ngjarje me datë që ka një vend. Rrëshqitësi ▶ kalon dekadat një nga një. ¦ Jgħodd kull avveniment b’data li għandu post. Is-slider ▶ jgħaddi d-deċennji wieħed wieħed.
+Aucun événement daté avec un lieu. ¦ Asnjë ngjarje me datë dhe vend. ¦ L-ebda avveniment b’data u post.
+🧬 Tes correspondances ADN ¦ 🧬 Përputhjet e tua ADN ¦ 🧬 It-tqabbil tad-DNA tiegħek
+Les correspondances reliées à une fiche de l’arbre (onglet ADN) : l’ancêtre commun calculé et ses lieux. Les noms des correspondances (souvent vivantes) ne sont mis que si tu le demandes. ¦ Përputhjet e lidhura me një kartelë të pemës (skeda ADN): paraardhësi i përbashkët i llogaritur dhe vendet e tij. Emrat e përputhjeve (shpesh të gjallë) vihen vetëm nëse e kërkon. ¦ It-tqabbil marbut ma’ skeda tas-siġra (tab DNA): l-antenat komuni kkalkulat u l-postijiet tiegħu. L-ismijiet tat-tqabbil (spiss persuni ħajjin) jidhru biss jekk titlob.
+Écrire le nom des correspondances (pas pour un export partagé) ¦ Shkruaj emrat e përputhjeve (jo për një eksport të ndarë) ¦ Ikteb l-ismijiet tat-tqabbil (mhux għal esportazzjoni maqsuma)
+Aucun test ADN ¦ Asnjë test ADN ¦ L-ebda test tad-DNA
+Aucun ancêtre commun avec un lieu : relie des correspondances à leur fiche dans l’onglet ADN. ¦ Asnjë paraardhës i përbashkët me vend: lidh përputhjet me kartelën e tyre te skeda ADN. ¦ L-ebda antenat komuni b’post: għaqqad it-tqabbil mal-iskeda tagħhom fit-tab DNA.
+🔎 Tes recherches ¦ 🔎 Kërkimet e tua ¦ 🔎 Ir-riċerki tiegħek
+Les dépouillements (registres consultés), les communes des battues et les actes qui manquent à tes ancêtres (« Que manque-t-il ? »). ¦ Zbërthimet (regjistrat e shqyrtuar), komunat e kërkimeve në terren dhe aktet që u mungojnë paraardhësve të tu («Çfarë mungon?»). ¦ L-indiċi tar-reġistri (reġistri kkonsultati), il-komuni tat-tfittxijiet fuq il-post u l-atti li jonqsu lill-antenati tiegħek (“X’jonqos?”).
+Aucune recherche ni aucun trou avec une commune placée. ¦ Asnjë kërkim apo boshllëk me komunë të vendosur. ¦ L-ebda riċerka jew vojt b’komun ippożizzjonat.
+Correspondance n° 1 ¦ Përputhja nr. 1 ¦ Tqabbil nru 1
+Correspondance n° 2 ¦ Përputhja nr. 2 ¦ Tqabbil nru 2
+Correspondance n° 3 ¦ Përputhja nr. 3 ¦ Tqabbil nru 3
+Correspondance n° 4 ¦ Përputhja nr. 4 ¦ Tqabbil nru 4
+Correspondance n° 5 ¦ Përputhja nr. 5 ¦ Tqabbil nru 5
+Registres paroissiaux ¦ Regjistrat e famullisë ¦ Reġistri parrokkjali
+Registre abîmé ¦ Regjistër i dëmtuar ¦ Reġistru mħassar
+Prévu ¦ I planifikuar ¦ Ippjanat
+Cadrer tout seul sur les points ¦ Përqendro vetë mbi pikat ¦ Iċċentra waħdu fuq il-punti
+Comme le type ¦ Si lloji ¦ Bħat-tip
+Couleur de « peu » ¦ Ngjyra e «pak» ¦ Kulur ta’ “ftit”
+Couleur de « beaucoup » ¦ Ngjyra e «shumë» ¦ Kulur ta’ “ħafna”
+Les mentions du nom (une par ligne) ¦ Përmendjet e mbiemrit (një për rresht) ¦ Ir-referenzi tal-kunjom (waħda għal kull ringiela)
+Lieu (« Auch », « Auch 43.65, 0.59 ») ¦ Vendi («Auch», «Auch 43.65, 0.59») ¦ Post (“Auch”, “Auch 43.65, 0.59”)
+N° du département ¦ Nr. i departamentit ¦ Nru tad-dipartiment
+Nom montré (vide = toutes les lignes) ¦ Mbiemri i shfaqur (bosh = të gjitha rreshtat) ¦ Kunjom muri (vojt = ir-ringieli kollha)
+🔤 Ce nom sur Géopatronyme (1891-1990) ↗ ¦ 🔤 Ky mbiemër në Géopatronyme (1891-1990) ↗ ¦ 🔤 Dan il-kunjom fuq Géopatronyme (1891-1990) ↗
+Choisis un nom : un lien ouvrira sa répartition en France de 1891 à 1990 (Géopatronyme). ¦ Zgjidh një mbiemër: një lidhje do të hapë shpërndarjen e tij në Francë nga 1891 në 1990 (Géopatronyme). ¦ Agħżel kunjom: link jiftaħ id-distribuzzjoni tiegħu fi Franza mill-1891 sal-1990 (Géopatronyme).
+Départements colorés ¦ Departamente me ngjyra ¦ Dipartimenti kkuluriti
+Des ronds par lieu ¦ Rrathë për vend ¦ Tikek għal kull post
+Siècle montré (une année ; vide = tous) ¦ Shekulli i shfaqur (një vit; bosh = të gjithë) ¦ Seklu muri (sena; vojt = kollha)
+Écrire le nombre sur les départements ¦ Shkruaj numrin mbi departamentet ¦ Ikteb in-numru fuq id-dipartimenti
+Carte des patronymes : {n} mentions. ¦ Harta e mbiemrave: {n} përmendje. ¦ Mappa tal-kunjomijiet: {n} referenzi.
+Les événements (un par ligne) ¦ Ngjarjet (një për rresht) ¦ L-avvenimenti (wieħed għal kull ringiela)
+Décennie montrée (une année ; vide = toutes) ¦ Dekada e shfaqur (një vit; bosh = të gjitha) ¦ Deċennju muri (sena; vojt = kollha)
+La décennie seule ¦ Vetëm dekada ¦ Id-deċennju biss
+Tout jusqu’à cette décennie ¦ Gjithçka deri në këtë dekadë ¦ Kollox sa dan id-deċennju
+La même pour toutes les décennies ¦ E njëjta për të gjitha dekadat ¦ L-istess għad-deċennji kollha
+Propre à chaque décennie ¦ E veçantë për çdo dekadë ¦ Speċifika għal kull deċennju
+Finesse (cases sur la largeur) ¦ Imtësia (kuti në gjerësi) ¦ Finezza (kaxxi fuq il-wisa’)
+Étalement ¦ Shpërndarja ¦ Firxa
+Où vivait la famille, décennie par décennie ¦ Ku jetonte familja, dekadë pas dekade ¦ Fejn kienet tgħix il-familja, deċennju wara deċennju
+Carte de chaleur : {n} événements. ¦ Hartë nxehtësie: {n} ngjarje. ¦ Mappa tas-sħana: {n} avvenimenti.
+Les lieux des ancêtres communs ¦ Vendet e paraardhësve të përbashkët ¦ Il-postijiet tal-antenati komuni
+Selon le groupe ¦ Sipas grupit ¦ Skont il-grupp
+Selon les cM partagés ¦ Sipas cM të përbashkëta ¦ Skont iċ-cM maqsuma
+Là où plusieurs correspondances ¦ Aty ku ka disa përputhje ¦ Fejn hemm diversi tqabbil
+Mes cousins ADN : où vivaient nos ancêtres communs ¦ Kushërinjtë e mi ADN: ku jetonin paraardhësit tanë të përbashkët ¦ Il-kuġini tiegħi tad-DNA: fejn kienu jgħixu l-antenati komuni tagħna
+Carte des cousins ADN : {n} lieux. ¦ Harta e kushërinjve ADN: {n} vende. ¦ Mappa tal-kuġini tad-DNA: {n} postijiet.
+Les recherches, commune par commune ¦ Kërkimet, komunë pas komune ¦ Ir-riċerki, komun wara komun
+Noms des communes ¦ Emrat e komunave ¦ Ismijiet tal-komuni
+Les trous et les plus remplies ¦ Boshllëqet dhe më të plotat ¦ Il-vojt u l-aktar mimlija
+Mes recherches dans le Gers ¦ Kërkimet e mia në Gers ¦ Ir-riċerki tiegħi fil-Gers
+Carte de tes recherches : {n} lignes. ¦ Harta e kërkimeve të tua: {n} rreshta. ¦ Mappa tar-riċerki tiegħek: {n} ringieli.
+{g} générations ¦ {g} breza ¦ {g} ġenerazzjonijiet
+Ma branche paternelle (côté père) ¦ Dega ime atësore (nga babai) ¦ Il-fergħa tal-missier tiegħi (naħa tal-missier)
+Ma branche maternelle (côté mère) ¦ Dega ime amësore (nga nëna) ¦ Il-fergħa tal-omm tiegħi (naħa tal-omm)
+Avant la Révolution (jusqu’en 1789) ¦ Para Revolucionit (deri në 1789) ¦ Qabel ir-Rivoluzzjoni (sal-1789)
+Au XVIIIe siècle ¦ Në shekullin XVIII ¦ Fis-seklu 18
+Au XIXe siècle ¦ Në shekullin XIX ¦ Fis-seklu 19
+Naissances par lieu ¦ Lindjet sipas vendit ¦ Twelid skont il-post
+Naissances de mes ancêtres ¦ Lindjet e paraardhësve të mi ¦ Twelid tal-antenati tiegħi
+Décès par lieu ¦ Vdekjet sipas vendit ¦ Mwiet skont il-post
+Mariages par lieu ¦ Martesat sipas vendit ¦ Żwiġijiet skont il-post
+Naissances, mariages et décès ¦ Lindje, martesa dhe vdekje ¦ Twelid, żwiġijiet u mwiet
+Personnes différentes par lieu ¦ Persona të ndryshëm sipas vendit ¦ Persuni differenti skont il-post
+Familles (patronymes différents) par lieu ¦ Familje (mbiemra të ndryshëm) sipas vendit ¦ Familji (kunjomijiet differenti) skont il-post
+Âge moyen au décès par lieu ¦ Mosha mesatare në vdekje sipas vendit ¦ Età medja fil-mewt skont il-post
+Actes trouvés (événements avec une source) ¦ Akte të gjetura (ngjarje me burim) ¦ Atti misjuba (avvenimenti b’sors)
+Naissances au XIXe siècle ¦ Lindje në shekullin XIX ¦ Twelid fis-seklu 19
+Naissances avant la Révolution ¦ Lindje para Revolucionit ¦ Twelid qabel ir-Rivoluzzjoni
+Tout au XIXe siècle ¦ Gjithçka në shekullin XIX ¦ Kollox fis-seklu 19
+Tout, avant la Révolution ¦ Gjithçka, para Revolucionit ¦ Kollox, qabel ir-Rivoluzzjoni
+Les anniversaires de mes ancêtres ¦ Ditëlindjet e paraardhësve të mi ¦ Għeluq is-snin tal-antenati tiegħi
+Mariages de mes ancêtres ¦ Martesat e paraardhësve të mi ¦ Żwiġijiet tal-antenati tiegħi
+Ses parents et ses enfants ¦ Prindërit dhe fëmijët e tij ¦ Il-ġenituri u t-tfal tagħha
+Grands-parents et petits-enfants ¦ Gjyshër dhe nipër e mbesa ¦ Nanniet u neputijiet
+Le plus loin possible ¦ Sa më larg të jetë e mundur ¦ L-aktar ’il bogħod possibbli
+Les vies de ses ancêtres (3 générations) ¦ Jetët e paraardhësve të tij (3 breza) ¦ Il-ħajjiet tal-antenati tagħha (3 ġenerazzjonijiet)
+Sa famille proche ¦ Familja e tij e afërt ¦ Il-familja qrib tagħha
+Les vies de ses descendants ¦ Jetët e pasardhësve të tij ¦ Il-ħajjiet tad-dixxendenti tagħha
+Ses enfants et petits-enfants ¦ Fëmijët dhe nipërit e tij ¦ It-tfal u n-neputijiet tagħha
+Les communes de ses ancêtres ¦ Komunat e paraardhësve të tij ¦ Il-komuni tal-antenati tagħha
+Les ancêtres trouvés par génération ¦ Paraardhësit e gjetur sipas brezit ¦ L-antenati misjuba skont il-ġenerazzjoni
+Les fiches complètes ¦ Kartelat e plota ¦ L-iskedi kompluti
+Taux de recherche de mes ancêtres (5 générations) ¦ Shkalla e kërkimit të paraardhësve të mi (5 breza) ¦ Rata tar-riċerka tal-antenati tiegħi (5 ġenerazzjonijiet)
+Régions de naissance (6 générations) ¦ Rajonet e lindjes (6 breza) ¦ Reġjuni tat-twelid (6 ġenerazzjonijiet)
+Départements de naissance (6 générations) ¦ Departamentet e lindjes (6 breza) ¦ Dipartimenti tat-twelid (6 ġenerazzjonijiet)
+Pays de naissance (8 générations) ¦ Shtetet e lindjes (8 breza) ¦ Pajjiżi tat-twelid (8 ġenerazzjonijiet)
+Communes de naissance (5 générations) ¦ Komunat e lindjes (5 breza) ¦ Komuni tat-twelid (5 ġenerazzjonijiet)
+Métiers de mes ancêtres (5 générations) ¦ Profesionet e paraardhësve të mi (5 breza) ¦ Xogħlijiet tal-antenati tiegħi (5 ġenerazzjonijiet)
+Siècles de naissance (8 générations) ¦ Shekujt e lindjes (8 breza) ¦ Sekli tat-twelid (8 ġenerazzjonijiet)
+Noms de famille (6 générations) ¦ Mbiemrat (6 breza) ¦ Kunjomijiet (6 ġenerazzjonijiet)
+Hommes et femmes (4 générations) ¦ Burra dhe gra (4 breza) ¦ Irġiel u nisa (4 ġenerazzjonijiet)
+Le plus loin possible (10 générations) ¦ Sa më larg të jetë e mundur (10 breza) ¦ L-aktar ’il bogħod possibbli (10 ġenerazzjonijiet)
+Toute la descendance connue (8 générations) ¦ Gjithë pasardhësit e njohur (8 breza) ¦ Id-dixxendenza magħrufa kollha (8 ġenerazzjonijiet)
+Toute la descendance connue (10 générations) ¦ Gjithë pasardhësit e njohur (10 breza) ¦ Id-dixxendenza magħrufa kollha (10 ġenerazzjonijiet)
+Ses liens directs (témoins, parrains, marraines) ¦ Lidhjet e tij të drejtpërdrejta (dëshmitarë, kumbarë, kumbara) ¦ Ir-rabtiet diretti tagħha (xhieda, parrini, parrini nisa)
+Ses liens et les liens de ses liens ¦ Lidhjet e tij dhe lidhjet e lidhjeve të tij ¦ Ir-rabtiet tagħha u r-rabtiet tar-rabtiet tagħha
+Tous les liens de ma base ¦ Të gjitha lidhjet e bazës sime ¦ Ir-rabtiet kollha fid-database tiegħi
+Implexe : un même ancêtre par plusieurs chemins ¦ Implekse: i njëjti paraardhës nga disa rrugë ¦ Impless: l-istess antenat minn diversi toroq
+Témoins, parrains et marraines ¦ Dëshmitarë, kumbarë dhe kumbara ¦ Xhieda, parrini u parrini nisa
+Mes ancêtres et les fiches avec une source ¦ Paraardhësit e mi dhe kartelat me burim ¦ L-antenati tiegħi u l-iskedi b’sors
+Avec un portrait, avec une source ¦ Me portret, me burim ¦ B’ritratt, b’sors
+Mes ancêtres, avec portrait, avec source ¦ Paraardhësit e mi, me portret, me burim ¦ L-antenati tiegħi, b’ritratt, b’sors
+Vivants, avec un portrait, avec une source ¦ Të gjallë, me portret, me burim ¦ Ħajjin, b’ritratt, b’sors
+Mes ancêtres, hommes, avec source ¦ Paraardhësit e mi, burra, me burim ¦ L-antenati tiegħi, irġiel, b’sors
+Les vies de toute ma base ¦ Jetët e gjithë bazës sime ¦ Il-ħajjiet tad-database kollha tiegħi
+Décès seulement ¦ Vetëm vdekjet ¦ Mwiet biss
+Lieu de naissance → lieu de décès ¦ Vendi i lindjes → vendi i vdekjes ¦ Post tat-twelid → post tal-mewt
+Lieu de naissance → lieu du mariage ¦ Vendi i lindjes → vendi i martesës ¦ Post tat-twelid → post taż-żwieġ
+D’une génération à l’autre ¦ Nga një brez te tjetri ¦ Minn ġenerazzjoni għal oħra
+Mes ancêtres : naissance → décès ¦ Paraardhësit e mi: lindje → vdekje ¦ L-antenati tiegħi: twelid → mewt
+Mes ancêtres : d’une génération à l’autre ¦ Paraardhësit e mi: nga një brez te tjetri ¦ L-antenati tiegħi: minn ġenerazzjoni għal oħra
+Au XIXe siècle : naissance → décès ¦ Në shekullin XIX: lindje → vdekje ¦ Fis-seklu 19: twelid → mewt
+Sa vie : les étapes avec un lieu ¦ Jeta e tij: etapat me vend ¦ Ħajjitha: il-passi b’post
+Sa vie : toutes les étapes (même sans lieu) ¦ Jeta e tij: të gjitha etapat (edhe pa vend) ¦ Ħajjitha: il-passi kollha (anki mingħajr post)
+Avant la Révolution ¦ Para Revolucionit ¦ Qabel ir-Rivoluzzjoni
+Mes parents et grands-parents (3 générations) ¦ Prindërit dhe gjyshërit e mi (3 breza) ¦ Il-ġenituri u n-nanniet tiegħi (3 ġenerazzjonijiet)
+Le XVIIIe siècle, année par année ¦ Shekulli XVIII, vit pas viti ¦ Is-seklu 18, sena wara sena
+Le XIXe siècle, année par année ¦ Shekulli XIX, vit pas viti ¦ Is-seklu 19, sena wara sena
+Mes ancêtres, par 5 ans ¦ Paraardhësit e mi, çdo 5 vjet ¦ L-antenati tiegħi, kull 5 snin
+Qui vit aujourd’hui ¦ Kush jeton sot ¦ Min hu ħaj illum
+Qui vivait en {y} ¦ Kush jetonte në {y} ¦ Min kien ħaj fl-{y}
+Ses frères et sœurs (1 génération) ¦ Vëllezërit dhe motrat e tij (1 brez) ¦ Ħutha (ġenerazzjoni 1)
+Ses cousins germains (2 générations) ¦ Kushërinjtë e tij të parë (2 breza) ¦ Il-kuġini ġermani tagħha (2 ġenerazzjonijiet)
+Ses cousins issus de germains (3 générations) ¦ Kushërinjtë e tij të dytë (3 breza) ¦ Il-kuġini tat-tieni grad tagħha (3 ġenerazzjonijiet)
+Les cousins germains (2 générations) ¦ Kushërinjtë e parë (2 breza) ¦ Il-kuġini ġermani (2 ġenerazzjonijiet)
+Les cousins issus de germains (3 générations) ¦ Kushërinjtë e dytë (3 breza) ¦ Il-kuġini tat-tieni grad (3 ġenerazzjonijiet)
+Jusqu’à 4 générations, tous les liens ¦ Deri në 4 breza, të gjitha lidhjet ¦ Sa 4 ġenerazzjonijiet, ir-rabtiet kollha
+Jusqu’à 6 générations, tous les liens ¦ Deri në 6 breza, të gjitha lidhjet ¦ Sa 6 ġenerazzjonijiet, ir-rabtiet kollha
+Moi, mes parents et mes grands-parents ¦ Unë, prindërit dhe gjyshërit e mi ¦ Jien, il-ġenituri u n-nanniet tiegħi
+Moi et mes parents ¦ Unë dhe prindërit e mi ¦ Jien u l-ġenituri tiegħi
+Mes parents, moi et mes enfants ¦ Prindërit e mi, unë dhe fëmijët e mi ¦ Il-ġenituri tiegħi, jien u t-tfal tiegħi
+Le plus loin possible (14 générations) ¦ Sa më larg të jetë e mundur (14 breza) ¦ L-aktar ’il bogħod possibbli (14-il ġenerazzjoni)
+Ce que je sais (6 générations) ¦ Çfarë di (6 breza) ¦ Dak li naf (6 ġenerazzjonijiet)
+Taux de recherche (8 générations) ¦ Shkalla e kërkimit (8 breza) ¦ Rata tar-riċerka (8 ġenerazzjonijiet)
+Métiers (5 générations) ¦ Profesionet (5 breza) ¦ Xogħlijiet (5 ġenerazzjonijiet)
+Hommes et femmes (5 générations) ¦ Burra dhe gra (5 breza) ¦ Irġiel u nisa (5 ġenerazzjonijiet)
+Les villages des deux époux (10 lieux) ¦ Fshatrat e dy bashkëshortëve (10 vende) ¦ L-irħula taż-żewġ konjuġi (10 postijiet)
+Les villages des deux époux (20 lieux) ¦ Fshatrat e dy bashkëshortëve (20 vende) ¦ L-irħula taż-żewġ konjuġi (20 post)
+Le village de chacun → le lieu du mariage (10 lieux) ¦ Fshati i secilit → vendi i martesës (10 vende) ¦ Ir-raħal ta’ kull wieħed → il-post taż-żwieġ (10 postijiet)
+Les 6 villages principaux ¦ 6 fshatrat kryesorë ¦ Is-6 irħula ewlenin
+Âge au décès, par siècle ¦ Mosha në vdekje, sipas shekullit ¦ Età fil-mewt, skont is-seklu
+Mes ancêtres : âge au décès, par siècle ¦ Paraardhësit e mi: mosha në vdekje, sipas shekullit ¦ L-antenati tiegħi: età fil-mewt, skont is-seklu
+Ses grands-parents et ses petits-enfants ¦ Gjyshërit dhe nipërit e tij ¦ In-nanniet u n-neputijiet tagħha
+Quatre générations d’ancêtres ¦ Katër breza paraardhësish ¦ Erba’ ġenerazzjonijiet ta’ antenati
+Six générations d’ancêtres ¦ Gjashtë breza paraardhësish ¦ Sitt ġenerazzjonijiet ta’ antenati
+Ses descendants sur 4 générations ¦ Pasardhësit e tij në 4 breza ¦ Id-dixxendenti tagħha fuq 4 ġenerazzjonijiet
+Trois générations de chaque côté ¦ Tre breza nga secila anë ¦ Tliet ġenerazzjonijiet minn kull naħa
+Une courbe par siècle de naissance ¦ Një kurbë për shekull lindjeje ¦ Kurva għal kull seklu tat-twelid
+Branche paternelle et maternelle ¦ Dega atësore dhe amësore ¦ Fergħa tal-missier u tal-omm
+Mes ancêtres, génération par génération ¦ Paraardhësit e mi, brez pas brezi ¦ L-antenati tiegħi, ġenerazzjoni wara ġenerazzjoni
+Une seule courbe pour toute ma base ¦ Një kurbë e vetme për gjithë bazën time ¦ Kurva waħda għad-database kollha tiegħi
+Nés au XIXe siècle, femmes et hommes ¦ Të lindur në shekullin XIX, gra dhe burra ¦ Imwielda fis-seklu 19, nisa u rġiel
+Père → fils, sur 3 générations ¦ Baba → bir, në 3 breza ¦ Missier → iben, fuq 3 ġenerazzjonijiet
+Père → fils, sur 5 générations ¦ Baba → bir, në 5 breza ¦ Missier → iben, fuq 5 ġenerazzjonijiet
+Parents → enfants, sur 3 générations ¦ Prindër → fëmijë, në 3 breza ¦ Ġenituri → tfal, fuq 3 ġenerazzjonijiet
+Mes ancêtres : père → fils ¦ Paraardhësit e mi: baba → bir ¦ L-antenati tiegħi: missier → iben
+Les 5 mères qui ont eu le plus d’enfants ¦ 5 nënat që patën më shumë fëmijë ¦ Il-5 ommijiet li kellhom l-aktar tfal
+Les 10 mères qui ont eu le plus d’enfants ¦ 10 nënat që patën më shumë fëmijë ¦ L-10 ommijiet li kellhom l-aktar tfal
+Les mères parmi mes ancêtres ¦ Nënat midis paraardhësve të mi ¦ L-ommijiet fost l-antenati tiegħi
+Mes ancêtres sur 2 générations ¦ Paraardhësit e mi në 2 breza ¦ L-antenati tiegħi fuq 2 ġenerazzjonijiet
+Mes ancêtres sur 3 générations ¦ Paraardhësit e mi në 3 breza ¦ L-antenati tiegħi fuq 3 ġenerazzjonijiet
+Mes ancêtres sur 4 générations ¦ Paraardhësit e mi në 4 breza ¦ L-antenati tiegħi fuq 4 ġenerazzjonijiet
+Mes ancêtres sur 5 générations ¦ Paraardhësit e mi në 5 breza ¦ L-antenati tiegħi fuq 5 ġenerazzjonijiet
+Mes ancêtres sur 3 générations (parents, grands-parents) ¦ Paraardhësit e mi në 3 breza (prindër, gjyshër) ¦ L-antenati tiegħi fuq 3 ġenerazzjonijiet (ġenituri, nanniet)
+Mes ancêtres, par siècle ¦ Paraardhësit e mi, sipas shekullit ¦ L-antenati tiegħi, skont is-seklu
+Au XIXe siècle, par décennie ¦ Në shekullin XIX, sipas dekadës ¦ Fis-seklu 19, skont id-deċennju
+Les 20 couples qui ont eu le plus d’enfants ¦ 20 çiftet që patën më shumë fëmijë ¦ L-20 koppja li kellhom l-aktar tfal
+Les 40 couples ¦ 40 çiftet ¦ L-40 koppja
+Adulte à 21 ans (majorité d’autrefois) ¦ I rritur në 21 vjeç (madhoria e dikurshme) ¦ Adult fl-età ta’ 21 sena (il-maġġorità ta’ dari)
+Par siècle, moins de 8 mois ¦ Sipas shekullit, më pak se 8 muaj ¦ Skont is-seklu, inqas minn 8 xhur
+Par demi-siècle, moins de 8 mois ¦ Sipas gjysmëshekullit, më pak se 8 muaj ¦ Skont nofs is-seklu, inqas minn 8 xhur
+Par décennie, moins de 8 mois ¦ Sipas dekadës, më pak se 8 muaj ¦ Skont id-deċennju, inqas minn 8 xhur
+Très tôt : moins de 7 mois, par siècle ¦ Shumë herët: më pak se 7 muaj, sipas shekullit ¦ Kmieni ħafna: inqas minn 7 xhur, skont is-seklu
+Depuis son lieu de naissance (8 générations) ¦ Nga vendi i tij i lindjes (8 breza) ¦ Mill-post tat-twelid tagħha (8 ġenerazzjonijiet)
+Depuis son lieu de naissance (5 générations) ¦ Nga vendi i tij i lindjes (5 breza) ¦ Mill-post tat-twelid tagħha (5 ġenerazzjonijiet)
+Depuis le berceau des plus anciens (10 générations) ¦ Nga djepi i më të vjetërve (10 breza) ¦ Mill-benniena tal-eqdem (10 ġenerazzjonijiet)
+Les 8 communes les plus suivies ¦ 8 komunat më të ndjekura ¦ It-8 komuni l-aktar segwiti
+Tous les segments ¦ Të gjitha segmentet ¦ Is-segmenti kollha
+Segments d’au moins 7 cM (les plus sûrs) ¦ Segmente të paktën 7 cM (më të sigurtat) ¦ Segmenti ta’ mill-inqas 7 cM (l-aktar żguri)
+Segments d’au moins 10 cM ¦ Segmente të paktën 10 cM ¦ Segmenti ta’ mill-inqas 10 cM
+Gros segments (20 cM et plus) ¦ Segmente të mëdha (20 cM e më shumë) ¦ Segmenti kbar (20 cM u aktar)
+Toutes les correspondances (150 au plus) ¦ Të gjitha përputhjet (më së shumti 150) ¦ It-tqabbil kollu (l-aktar 150)
+Au moins 20 cM (150 au plus) ¦ Të paktën 20 cM (më së shumti 150) ¦ Mill-inqas 20 cM (l-aktar 150)
+Cousins proches (90 cM et plus) ¦ Kushërinj të afërt (90 cM e më shumë) ¦ Kuġini qrib (90 cM u aktar)
+Au moins 50 cM, toutes ¦ Të paktën 50 cM, të gjitha ¦ Mill-inqas 50 cM, kollha
+Graphique : un point de départ tout prêt ¦ Grafik: një pikënisje e gatshme ¦ Grafika: punt tat-tluq lest
+✏️ Sur mesure (les réglages ci-dessous) ¦ ✏️ Sipas porosisë (cilësimet më poshtë) ¦ ✏️ Personalizzat (l-issettjar hawn taħt)
+Ce point de départ n’a pas pu être réglé. ¦ Kjo pikënisje nuk mund të rregullohej. ¦ Dan il-punt tat-tluq ma setax jiġi ssettjat.
+Réglé. Clique sur « {label} » pour voir le dessin. ¦ U rregullua. Kliko «{label}» për të parë vizatimin. ¦ Issettjat. Ikklikkja “{label}” biex tara d-disinn.
+Pas d’ascendance : choisis une personne de départ (Personnes → sa fiche → « Personne de départ »). ¦ Asnjë prejardhje: zgjidh një person nisjeje (Personat → kartela e tij → «Personi i nisjes»). ¦ L-ebda antenati: agħżel persuna tat-tluq (Persuni → l-iskeda tagħha → “Persuna tat-tluq”).
+Pas d’enfant connu pour la personne de départ. ¦ Asnjë fëmijë i njohur për personin e nisjes. ¦ L-ebda tifel magħruf għall-persuna tat-tluq.
+Pas de fratrie connue. ¦ Asnjë vëlla apo motër e njohur. ¦ L-ebda aħwa magħrufa.
+La fratrie de la personne de départ ¦ Vëllezërit dhe motrat e personit të nisjes ¦ L-aħwa tal-persuna tat-tluq
+Les enfants de la personne de départ ¦ Fëmijët e personit të nisjes ¦ It-tfal tal-persuna tat-tluq
+Les vies de mes ancêtres ({n} générations) ¦ Jetët e paraardhësve të mi ({n} breza) ¦ Il-ħajjiet tal-antenati tiegħi ({n} ġenerazzjonijiet)
+Pas de descendance connue. ¦ Asnjë pasardhës i njohur. ¦ L-ebda dixxendenza magħrufa.
+Homme ¦ Burrë ¦ Raġel
+Femme ¦ Grua ¦ Mara
+Aucune date de naissance pour ces personnes. ¦ Asnjë datë lindjeje për këta persona. ¦ L-ebda data tat-twelid għal dawn il-persuni.
+La vie de la personne de départ, étape par étape ¦ Jeta e personit të nisjes, hap pas hapi ¦ Il-ħajja tal-persuna tat-tluq, pass pass
+Naissances et décès de mes ancêtres (3 générations) ¦ Lindjet dhe vdekjet e paraardhësve të mi (3 breza) ¦ Twelid u mwiet tal-antenati tiegħi (3 ġenerazzjonijiet)
+Naissances et décès de mes ancêtres (4 générations) ¦ Lindjet dhe vdekjet e paraardhësve të mi (4 breza) ¦ Twelid u mwiet tal-antenati tiegħi (4 ġenerazzjonijiet)
+Naissances, mariages et décès de sa fratrie ¦ Lindjet, martesat dhe vdekjet e vëllezërve dhe motrave të tij ¦ Twelid, żwiġijiet u mwiet ta’ ħutha
+La naissance de ses enfants ¦ Lindja e fëmijëve të tij ¦ It-twelid ta’ wliedha
+{what} avec {who} à {place} ¦ {what} me {who} në {place} ¦ {what} ma’ {who} f’{place}
+{what} avec {who} ¦ {what} me {who} ¦ {what} ma’ {who}
+{what} à {place} ¦ {what} në {place} ¦ {what} f’{place}
+Mes ancêtres : naissances et décès ¦ Paraardhësit e mi: lindje dhe vdekje ¦ L-antenati tiegħi: twelid u mwiet
+Aucune date pour ce choix. ¦ Asnjë datë për këtë zgjedhje. ¦ L-ebda data għal din l-għażla.
+Année de naissance et âge au décès (une personne = un point) ¦ Viti i lindjes dhe mosha në vdekje (një person = një pikë) ¦ Sena tat-twelid u età fil-mewt (persuna waħda = tikka waħda)
+Âge de l’époux et âge de l’épouse au mariage ¦ Mosha e burrit dhe mosha e gruas në martesë ¦ L-età tar-raġel u l-età tal-mara fiż-żwieġ
+Âge de l’époux ¦ Mosha e burrit ¦ L-età tar-raġel
+Âge de l’épouse ¦ Mosha e gruas ¦ L-età tal-mara
+Âge des époux au mariage ¦ Mosha e bashkëshortëve në martesë ¦ L-età tal-konjuġi fiż-żwieġ
+Âge au décès selon l’année de naissance ¦ Mosha në vdekje sipas vitit të lindjes ¦ Età fil-mewt skont is-sena tat-twelid
+Âge au mariage et âge au décès ¦ Mosha në martesë dhe mosha në vdekje ¦ Età fiż-żwieġ u età fil-mewt
+Pas assez de dates dans l’arbre pour ce choix. ¦ Nuk ka mjaft data në pemë për këtë zgjedhje. ¦ M’hemmx biżżejjed dati fis-siġra għal din l-għażla.
+bleu : hommes · rouge : femmes ¦ blu: burra · e kuqe: gra ¦ blu: irġiel · aħmar: nisa
+Département de naissance → département de décès ¦ Departamenti i lindjes → departamenti i vdekjes ¦ Dipartiment tat-twelid → dipartiment tal-mewt
+Département de naissance → département du mariage ¦ Departamenti i lindjes → departamenti i martesës ¦ Dipartiment tat-twelid → dipartiment taż-żwieġ
+Département du parent → département de l’enfant ¦ Departamenti i prindit → departamenti i fëmijës ¦ Dipartiment tal-ġenitur → dipartiment tat-tifel
+Pays de naissance → pays de décès ¦ Shteti i lindjes → shteti i vdekjes ¦ Pajjiż tat-twelid → pajjiż tal-mewt
+Commune de naissance → commune de décès ¦ Komuna e lindjes → komuna e vdekjes ¦ Komun tat-twelid → komun tal-mewt
+Fils ¦ Bir ¦ Iben
+Fille ¦ Bijë ¦ Bint
+Père : {x} ¦ Babai: {x} ¦ Missier: {x}
+Parent : ¦ Prindi: ¦ Ġenitur:
+Enfant : ¦ Fëmija: ¦ Tifel:
+Pas assez de lieux connus des deux côtés. ¦ Nuk ka mjaft vende të njohura nga të dyja anët. ¦ M’hemmx biżżejjed postijiet magħrufa miż-żewġ naħat.
+Sa descendance sur 2 générations ¦ Pasardhësit e tij në 2 breza ¦ Id-dixxendenza tagħha fuq 2 ġenerazzjonijiet
+Sa descendance sur 3 générations ¦ Pasardhësit e tij në 3 breza ¦ Id-dixxendenza tagħha fuq 3 ġenerazzjonijiet
+Rien à dessiner pour ce choix. ¦ Asgjë për të vizatuar për këtë zgjedhje. ¦ Xejn x’tpinġi għal din l-għażla.
+Mes ancêtres ({n} générations) ¦ Paraardhësit e mi ({n} breza) ¦ L-antenati tiegħi ({n} ġenerazzjonijiet)
+Mes ancêtres en chiffres (trouvés, sourcés, taux de recherche) ¦ Paraardhësit e mi në shifra (të gjetur, me burim, shkalla e kërkimit) ¦ L-antenati tiegħi f’numri (misjuba, b’sors, rata tar-riċerka)
+La qualité de ma base (sources, noms, lieux) ¦ Cilësia e bazës sime (burime, emra, vende) ¦ Il-kwalità tad-database tiegħi (sorsi, ismijiet, postijiet)
+Ancêtres trouvés (10 générations) ¦ Paraardhës të gjetur (10 breza) ¦ Antenati misjuba (10 ġenerazzjonijiet)
+Trouvés sur 8 générations ¦ Të gjetur në 8 breza ¦ Misjuba fuq 8 ġenerazzjonijiet
+Ancêtres avec une source ¦ Paraardhës me burim ¦ Antenati b’sors
+Taux de recherche moyen ¦ Shkalla mesatare e kërkimit ¦ Rata medja tar-riċerka
+Génération la plus lointaine ¦ Brezi më i largët ¦ L-aktar ġenerazzjoni ’l bogħod
+Mes ancêtres en chiffres ¦ Paraardhësit e mi në shifra ¦ L-antenati tiegħi f’numri
+à partir de {name} ¦ duke nisur nga {name} ¦ mibdija minn {name}
+Les chiffres ne sont pas encore prêts. ¦ Shifrat nuk janë ende gati. ¦ In-numri għadhom mhumiex lesti.
+Fiches avec une source ¦ Kartela me burim ¦ Skedi b’sors
+Personnes décédées ¦ Persona të vdekur ¦ Persuni mejtin
+Noms de famille différents ¦ Mbiemra të ndryshëm ¦ Kunjomijiet differenti
+La qualité de ma base ¦ Cilësia e bazës sime ¦ Il-kwalità tad-database tiegħi
+Ancêtres avec une source, génération par génération ¦ Paraardhës me burim, brez pas brezi ¦ Antenati b’sors, ġenerazzjoni wara ġenerazzjoni
+Taux de recherche moyen, génération par génération ¦ Shkalla mesatare e kërkimit, brez pas brezi ¦ Rata medja tar-riċerka, ġenerazzjoni wara ġenerazzjoni
+Ancêtres dont on connaît la date de naissance, par génération ¦ Paraardhës me datë lindjeje të njohur, sipas brezit ¦ Antenati li d-data tat-twelid tagħhom hi magħrufa, skont il-ġenerazzjoni
+Génér. {g} ¦ Brezi {g} ¦ Ġen. {g}
+Pas d’ancêtre trouvé. ¦ Asnjë paraardhës i gjetur. ¦ L-ebda antenat misjub.
+Taux de recherche, génération par génération ¦ Shkalla e kërkimit, brez pas brezi ¦ Rata tar-riċerka, ġenerazzjoni wara ġenerazzjoni
+Date de naissance connue ¦ Data e lindjes e njohur ¦ Data tat-twelid magħrufa
+à partir de {name} (parmi les ancêtres trouvés) ¦ duke nisur nga {name} (midis paraardhësve të gjetur) ¦ mibdija minn {name} (fost l-antenati misjuba)
+Objectif à changer dans le tableau ¦ Objektivi për t’u ndryshuar në tabelë ¦ Mira li tinbidel fit-tabella
+Ajoute des noms (lignes) et au moins deux périodes (colonnes). ¦ Shto emra (rreshta) dhe të paktën dy periudha (kolona). ¦ Żid ismijiet (ringieli) u mill-inqas żewġ perjodi (kolonni).
+Aucun rang à montrer : vérifie les chiffres. ¦ Asnjë renditje për të shfaqur: kontrollo shifrat. ¦ L-ebda pożizzjoni x’turi: iċċekkja n-numri.
+Ajoute au moins deux périodes (lignes) et des catégories (colonnes). ¦ Shto të paktën dy periudha (rreshta) dhe kategori (kolona). ¦ Żid mill-inqas żewġ perjodi (ringieli) u kategoriji (kolonni).
+Ajoute des valeurs (une par ligne) : l’app les range dans les tranches. ¦ Shto vlera (një për rresht): aplikacioni i rendit në intervale. ¦ Żid valuri (wieħed għal kull ringiela): l-app tqassamhom f’meded.
+médiane ¦ mediana ¦ medjan
+Ajoute des valeurs avec leur groupe (siècle, sexe…) : médiane et quartiles sont calculés. ¦ Shto vlera me grupin e tyre (shekull, gjini…): llogariten mediana dhe kuartilet. ¦ Żid valuri bil-grupp tagħhom (seklu, sess…): il-medjan u l-kwartili jiġu kkalkulati.
+{name} — {n} valeurs : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} vlera: mediana {md}{u}, kuartilet {q1} dhe {q3}, nga {min} deri {max}{u}, mesatarja {mean} ¦ {name} — {n} valuri: medjan {md}{u}, kwartili {q1} u {q3}, minn {min} sa {max}{u}, medja {mean}
+{name} — {n} valeur : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean} ¦ {name} — {n} vlerë: mediana {md}{u}, kuartilet {q1} dhe {q3}, nga {min} deri {max}{u}, mesatarja {mean} ¦ {name} — {n} valur: medjan {md}{u}, kwartili {q1} u {q3}, minn {min} sa {max}{u}, medja {mean}
+moyenne {v}{u} ¦ mesatarja {v}{u} ¦ medja {v}{u}
+{v}{u} (valeur à part) ¦ {v}{u} (vlerë e veçantë) ¦ {v}{u} (valur barra)
+Ajoute des lignes avec deux valeurs (ex. âge du mari, âge de la femme). ¦ Shto rreshta me dy vlera (p.sh. mosha e burrit, mosha e gruas). ¦ Żid ringieli b’żewġ valuri (eż. l-età tar-raġel, l-età tal-mara).
+écart ¦ diferenca ¦ differenza
+Ajoute des lignes avec une valeur « avant » et une valeur « après ». ¦ Shto rreshta me një vlerë «para» dhe një vlerë «pas». ¦ Żid ringieli b’valur “qabel” u valur “wara”.
+Ajoute des étapes : un départ, des hausses (+) et des baisses (−), des sous-totaux. ¦ Shto hapa: një fillim, rritje (+) dhe ulje (−), nëntotale. ¦ Żid passi: bidu, żidiet (+) u tnaqqis (−), subtotali.
+Ajoute des lignes : un nom et un nombre. ¦ Shto rreshta: një emër dhe një numër. ¦ Żid ringieli: isem u numru.
+Ajoute des valeurs : une ligne = une personne (nom, valeur, groupe). ¦ Shto vlera: një rresht = një person (emër, vlerë, grup). ¦ Żid valuri: ringiela waħda = persuna waħda (isem, valur, grupp).
+médiane {v}{u} ¦ mediana {v}{u} ¦ medjan {v}{u}
+5 000 premiers points sur {n} ¦ 5 000 pikat e para nga {n} ¦ L-ewwel 5 000 punt minn {n}
+Ajoute des périodes (lignes) et une colonne par petite courbe. ¦ Shto periudha (rreshta) dhe një kolonë për çdo mini-kurbë. ¦ Żid perjodi (ringieli) u kolonna għal kull kurva żgħira.
+Ajoute une carte : un nom, un chiffre (et la valeur d’avant, une mini-courbe, des seuils…). ¦ Shto një kartë: një emër, një shifër (dhe vlera e mëparshme, një mini-kurbë, pragje…). ¦ Żid karta: isem, numru (u l-valur ta’ qabel, sparkline, limiti…).
+Ajoute une ligne : un nom, une valeur, un objectif (et des zones). ¦ Shto një rresht: një emër, një vlerë, një objektiv (dhe zona). ¦ Żid ringiela: isem, valur, mira (u żoni).
+tout le monde ¦ të gjithë ¦ kulħadd
+les femmes ¦ gratë ¦ in-nisa
+les hommes ¦ burrat ¦ l-irġiel
+Âge au décès (tout le monde) ¦ Mosha në vdekje (të gjithë) ¦ Età fil-mewt (kulħadd)
+Âge au décès (les femmes) ¦ Mosha në vdekje (gratë) ¦ Età fil-mewt (in-nisa)
+Âge au décès (les hommes) ¦ Mosha në vdekje (burrat) ¦ Età fil-mewt (l-irġiel)
+D’après {n} personnes de l’arbre ¦ Bazuar në {n} persona të pemës ¦ Ibbażat fuq {n} persuni tas-siġra
+Les métiers de la famille ¦ Profesionet e familjes ¦ Ix-xogħlijiet tal-familja
+Naissances par commune ¦ Lindjet sipas komunës ¦ Twelid skont il-komun
+Naissances par nom de famille ¦ Lindjet sipas mbiemrit ¦ Twelid skont il-kunjom
+par tranches de {n} ans ¦ në intervale prej {n} vjetësh ¦ f’meded ta’ {n} snin
+Prénoms les plus donnés par décennie ({who}) ¦ Emrat më të dhënë sipas dekadës ({who}) ¦ L-aktar ismijiet mogħtija skont id-deċennju ({who})
+Pas assez de naissances datées. ¦ Nuk ka mjaft lindje me datë. ¦ M’hemmx biżżejjed twelid b’data.
+Les 10 prénoms les plus donnés par décennie ¦ 10 emrat më të dhënë sipas dekadës ¦ L-10 ismijiet l-aktar mogħtija skont id-deċennju
+D’après les naissances de l’arbre ¦ Bazuar në lindjet e pemës ¦ Ibbażat fuq it-twelid tas-siġra
+Métiers (par 25 ans) ¦ Profesionet (çdo 25 vjet) ¦ Xogħlijiet (kull 25 sena)
+Métiers (par 50 ans) ¦ Profesionet (çdo 50 vjet) ¦ Xogħlijiet (kull 50 sena)
+Naissances par nom de famille (par décennie) ¦ Lindjet sipas mbiemrit (sipas dekadës) ¦ Twelid skont il-kunjom (skont id-deċennju)
+Naissances par commune (par 25 ans) ¦ Lindjet sipas komunës (çdo 25 vjet) ¦ Twelid skont il-komun (kull 25 sena)
+Naissances par commune (par décennie) ¦ Lindjet sipas komunës (sipas dekadës) ¦ Twelid skont il-komun (skont id-deċennju)
+Âges des époux au mariage (25 couples les plus récents) ¦ Mosha e bashkëshortëve në martesë (25 çiftet më të fundit) ¦ L-età tal-konjuġi fiż-żwieġ (l-aktar 25 koppja riċenti)
+Âges des époux au mariage (50 couples) ¦ Mosha e bashkëshortëve në martesë (50 çifte) ¦ L-età tal-konjuġi fiż-żwieġ (50 koppja)
+Aucun couple marié avec les deux dates de naissance. ¦ Asnjë çift i martuar me të dyja datat e lindjes. ¦ L-ebda koppja miżżewġa biż-żewġ dati tat-twelid.
+Lui ¦ Ai ¦ Hu
+D’après les mariages de l’arbre ¦ Bazuar në martesat e pemës ¦ Ibbażat fuq iż-żwiġijiet tas-siġra
+Naissances par commune : un siècle et le suivant ¦ Lindjet sipas komunës: një shekull dhe pasardhësi ¦ Twelid skont il-komun: seklu u dak ta’ wara
+Il faut des naissances sur au moins deux siècles. ¦ Duhen lindje në të paktën dy shekuj. ¦ Iridu twelid fuq mill-inqas żewġ sekli.
+Naissances par commune, d’un siècle à l’autre ¦ Lindjet sipas komunës, nga një shekull te tjetri ¦ Twelid skont il-komun, minn seklu għal ieħor
+Naissances et décès dans l’arbre (par 50 ans) ¦ Lindje dhe vdekje në pemë (çdo 50 vjet) ¦ Twelid u mwiet fis-siġra (kull 50 sena)
+Naissances et décès dans l’arbre (par 25 ans) ¦ Lindje dhe vdekje në pemë (çdo 25 vjet) ¦ Twelid u mwiet fis-siġra (kull 25 sena)
+Naissances et décès dans l’arbre (par siècle) ¦ Lindje dhe vdekje në pemë (sipas shekullit) ¦ Twelid u mwiet fis-siġra (skont is-seklu)
+Les vivants de l’arbre, période par période ¦ Të gjallët e pemës, periudhë pas periudhe ¦ Il-ħajjin tas-siġra, perjodu wara perjodu
+naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après ¦ lindje (+) dhe vdekje (−); vdekje e panjohur e një lindjeje të vjetër: numërohet 60 vjet më vonë ¦ twelid (+) u mwiet (−); mewt mhux magħrufa ta’ twelid antik: tingħadd 60 sena wara
+Les compteurs de ma base (personnes, familles, médias…) ¦ Numëruesit e bazës sime (persona, familje, media…) ¦ Il-kontaturi tad-database tiegħi (persuni, familji, midja…)
+il y a un mois ¦ një muaj më parë ¦ xahar ilu
+Ancêtres trouvés (8 générations) ¦ Paraardhës të gjetur (8 breza) ¦ Antenati misjuba (8 ġenerazzjonijiet)
+Ma base en chiffres ¦ Baza ime në shifra ¦ Id-database tiegħi f’numri
+mini-courbes : les 12 derniers mois ¦ mini-kurba: 12 muajt e fundit ¦ sparklines: l-aħħar 12-il xahar
+Ancêtres trouvés par génération (SOSA) ¦ Paraardhës të gjetur sipas brezit (SOSA) ¦ Antenati misjuba skont il-ġenerazzjoni (SOSA)
+Pas d’ascendance SOSA : choisis une personne de départ. ¦ Asnjë prejardhje SOSA: zgjidh një person nisjeje. ¦ L-ebda antenati SOSA: agħżel persuna tat-tluq.
+Génér. ¦ Brezi ¦ Ġen.
+Ancêtres trouvés, génération par génération ¦ Paraardhës të gjetur, brez pas brezi ¦ Antenati misjuba, ġenerazzjoni wara ġenerazzjoni
+Objectif : 75 % (à changer dans le tableau) ¦ Objektivi: 75 % (ndryshoje në tabelë) ¦ Mira: 75 % (biddilha fit-tabella)
+Unité (ex. : ans, personnes) ¦ Njësia (p.sh.: vjet, persona) ¦ Unità (eż.: snin, persuni)
+Les prénoms les plus donnés, décennie par décennie ¦ Emrat më të dhënë, dekadë pas dekade ¦ L-aktar ismijiet mogħtija, deċennju wara deċennju
+rang de 1 (le plus donné) à 8 ; dans le tableau : le nombre de naissances ¦ renditja nga 1 (më i dhëni) deri 8; në tabelë: numri i lindjeve ¦ pożizzjoni minn 1 (l-aktar mogħti) sa 8; fit-tabella: in-numru ta’ twelid
+Laboureur ¦ Bujk ¦ Bidwi
+Tisserand ¦ Endës ¦ Insieġ
+Instituteur ¦ Mësues ¦ Għalliem
+Employé ¦ Nëpunës ¦ Impjegat
+Journalier ¦ Punëtor ditor ¦ Ħaddiem bil-ġurnata
+Domestique ¦ Shërbëtor ¦ Qaddej
+Les métiers de la famille sur 200 ans ¦ Profesionet e familjes në 200 vjet ¦ Ix-xogħlijiet tal-familja matul 200 sena
+nombre de personnes, par tranches de 25 ans ¦ numri i personave, në intervale prej 25 vjetësh ¦ numru ta’ persuni, f’meded ta’ 25 sena
+par tranches de 5 ans ¦ në intervale prej 5 vjetësh ¦ f’meded ta’ 5 snin
+Jean et Marie (1789) ¦ Jean dhe Marie (1789) ¦ Jean u Marie (1789)
+Pierre et Anne (1812) ¦ Pierre dhe Anne (1812) ¦ Pierre u Anne (1812)
+Louis et Rose (1838) ¦ Louis dhe Rose (1838) ¦ Louis u Rose (1838)
+Joseph et Jeanne (1861) ¦ Joseph dhe Jeanne (1861) ¦ Joseph u Jeanne (1861)
+François et Louise (1889) ¦ François dhe Louise (1889) ¦ François u Louise (1889)
+Henri et Germaine (1919) ¦ Henri dhe Germaine (1919) ¦ Henri u Germaine (1919)
+André et Simone (1946) ¦ André dhe Simone (1946) ¦ André u Simone (1946)
+XVIIIe siècle ¦ Shekulli XVIII ¦ Is-seklu 18
+XIXe siècle ¦ Shekulli XIX ¦ Is-seklu 19
+Les vivants de la famille ¦ Të gjallët e familjes ¦ Il-membri ħajjin tal-familja
+naissances (+), décès et départs (−) ¦ lindje (+), vdekje dhe largime (−) ¦ twelid (+), mwiet u tluq (−)
+En 1800 ¦ Në 1800 ¦ Fl-1800
+Naissances 1800-1849 ¦ Lindje 1800-1849 ¦ Twelid 1800-1849
+Décès 1800-1849 ¦ Vdekje 1800-1849 ¦ Mwiet 1800-1849
+En 1850 ¦ Në 1850 ¦ Fl-1850
+Naissances 1850-1899 ¦ Lindje 1850-1899 ¦ Twelid 1850-1899
+Départs (Amérique) ¦ Largime (Amerikë) ¦ Tluq (Amerka)
+Décès 1850-1899 ¦ Vdekje 1850-1899 ¦ Mwiet 1850-1899
+En 1900 ¦ Në 1900 ¦ Fl-1900
+Févr. ¦ Shk. ¦ Fra.
+Mars ¦ Mar. ¦ Mar.
+Avril ¦ Pri. ¦ Apr.
+Mai ¦ Maj ¦ Mej.
+Juin ¦ Qer. ¦ Ġun.
+Août ¦ Gus. ¦ Aww.
+Déc. ¦ Dhj. ¦ Diċ.
+Âge au décès : une personne, un point ¦ Mosha në vdekje: një person, një pikë ¦ Età fil-mewt: persuna waħda, tikka waħda
+Naissances par branche ¦ Lindjet sipas degës ¦ Twelid skont il-fergħa
+tous les 20 ans, même échelle ¦ çdo 20 vjet, e njëjta shkallë ¦ kull 20 sena, l-istess skala
+Ma généalogie en chiffres ¦ Gjenealogjia ime në shifra ¦ Il-ġenealoġija tiegħi f’numri
+l’an dernier ¦ vitin e kaluar ¦ is-sena l-oħra
+Actes numérisés ¦ Akte të dixhitalizuara ¦ Atti diġitalizzati
+Fiches sans source ¦ Kartela pa burim ¦ Skedi bla sors
+Photos légendées ¦ Foto me përshkrim ¦ Ritratti b’deskrizzjoni
+pareil ¦ njëlloj ¦ l-istess
+Objectif : 75 % ¦ Objektivi: 75 % ¦ Mira: 75 %
+Génér. 2 (parents) ¦ Brezi 2 (prindërit) ¦ Ġen. 2 (ġenituri)
+Génér. 3 ¦ Brezi 3 ¦ Ġen. 3
+Génér. 4 ¦ Brezi 4 ¦ Ġen. 4
+Génér. 5 ¦ Brezi 5 ¦ Ġen. 5
+Génér. 6 ¦ Brezi 6 ¦ Ġen. 6
+Génér. 7 ¦ Brezi 7 ¦ Ġen. 7
+Génér. 8 ¦ Brezi 8 ¦ Ġen. 8
+Génér. 9 ¦ Brezi 9 ¦ Ġen. 9
+Par la 1re valeur ¦ Sipas vlerës së 1-rë ¦ Skont l-ewwel valur
+Par la 2e valeur ¦ Sipas vlerës së 2-të ¦ Skont it-tieni valur
+Les noms (lignes) et les périodes (colonnes) ¦ Emrat (rreshta) dhe periudhat (kolona) ¦ L-ismijiet (ringieli) u l-perjodi (kolonni)
+Nom / prénom ¦ Mbiemër / emër ¦ Kunjom / isem
+Les chiffres du tableau sont ¦ Shifrat e tabelës janë ¦ In-numri tat-tabella huma
+Des nombres : l’app calcule le rang ¦ Numra: aplikacioni llogarit renditjen ¦ Numri: l-app tikkalkula l-pożizzjoni
+Déjà des rangs (1 = premier) ¦ Tashmë renditje (1 = i pari) ¦ Diġà pożizzjonijiet (1 = l-ewwel)
+Hauteur d’un rang ¦ Lartësia e një renditjeje ¦ Għoli ta’ pożizzjoni
+Les périodes (lignes) et les catégories (colonnes) ¦ Periudhat (rreshta) dhe kategoritë (kolona) ¦ Il-perjodi (ringieli) u l-kategoriji (kolonni)
+Courants (centrés, le moins de mouvement) ¦ Rryma (në qendër, me sa më pak lëvizje) ¦ Kurrenti (iċċentrati, l-inqas moviment)
+Centrés sur l’axe ¦ Në qendër të boshtit ¦ Iċċentrati fuq l-assi
+Empilés sur le sol ¦ Të grumbulluara mbi tokë ¦ F’munzell mal-art
+En parts (100 %) ¦ Në pjesë (100 %) ¦ F’sehem (100 %)
+Noms dans les courants ¦ Emrat brenda rrymave ¦ Ismijiet ġol-kurrenti
+Les valeurs (une par ligne : l’app les range en tranches) ¦ Vlerat (një për rresht: aplikacioni i rendit në intervale) ¦ Il-valuri (wieħed għal kull ringiela: l-app tqassamhom f’meded)
+Largeur des tranches (0 = automatique) ¦ Gjerësia e intervaleve (0 = automatike) ¦ Wisa’ tal-meded (0 = awtomatiku)
+Début de la première tranche (vide = automatique) ¦ Fillimi i intervalit të parë (bosh = automatik) ¦ Bidu tal-ewwel medda (vojt = awtomatiku)
+Couleur des colonnes ¦ Ngjyra e kolonave ¦ Kulur tal-kolonni
+Montrer la moyenne ¦ Shfaq mesataren ¦ Uri l-medja
+Les valeurs et leur groupe (médiane, quartiles et extrêmes sont calculés) ¦ Vlerat dhe grupi i tyre (llogariten mediana, kuartilet dhe ekstremet) ¦ Il-valuri u l-grupp tagħhom (il-medjan, il-kwartili u l-estremi jiġu kkalkulati)
+Boîtes debout ¦ Kuti në këmbë ¦ Kaxxi wieqfa
+Boîtes couchées ¦ Kuti të shtrira ¦ Kaxxi mimdudin
+Jusqu’à 1,5 × l’écart des quartiles (valeurs à part en ronds) ¦ Deri në 1,5 × diferenca e kuartileve (vlerat e veçanta si rrathë) ¦ Sa 1,5 × il-firxa interkwartili (valuri barra bħala ċrieki)
+Du minimum au maximum ¦ Nga minimumi te maksimumi ¦ Mill-minimu sal-massimu
+Montrer la moyenne (◆) ¦ Shfaq mesataren (◆) ¦ Uri l-medja (◆)
+Les lignes et leurs deux valeurs ¦ Rreshtat dhe dy vlerat e tyre ¦ Ir-ringieli u ż-żewġ valuri tagħhom
+Écrire l’écart ¦ Shkruaj diferencën ¦ Ikteb id-differenza
+Les lignes : la valeur avant, la valeur après ¦ Rreshtat: vlera para, vlera pas ¦ Ir-ringieli: il-valur qabel, il-valur wara
+Une couleur par ligne ¦ Një ngjyrë për rresht ¦ Kulur għal kull ringiela
+Couleur des hausses ¦ Ngjyra e rritjeve ¦ Kulur taż-żidiet
+Couleur des baisses ¦ Ngjyra e uljeve ¦ Kulur tat-tnaqqis
+Les étapes (dans l’ordre) ¦ Hapat (me radhë) ¦ Il-passi (bl-ordni)
+Valeur (+ ou −) ¦ Vlera (+ ose −) ¦ Valur (+ jew −)
+Hausse ou baisse ¦ Rritje ose ulje ¦ Żieda jew tnaqqis
+Sous-total (calculé) ¦ Nëntotal (i llogaritur) ¦ Subtotal (ikkalkulat)
+Total (calculé) ¦ Totali (i llogaritur) ¦ Total (ikkalkulat)
+Traits entre les marches ¦ Vija midis shkallëve ¦ Linji bejn it-taraġ
+Couleur des totaux ¦ Ngjyra e totaleve ¦ Kulur tat-totali
+Les points (une ligne = une personne) ¦ Pikat (një rresht = një person) ¦ It-tikek (ringiela waħda = persuna waħda)
+Les périodes (lignes) et une colonne par petite courbe ¦ Periudhat (rreshta) dhe një kolonë për çdo mini-kurbë ¦ Il-perjodi (ringieli) u kolonna għal kull kurva żgħira
+Courbes par ligne (0 = automatique) ¦ Kurba për rresht (0 = automatike) ¦ Kurvi għal kull ringiela (0 = awtomatiku)
+Hauteur d’une courbe ¦ Lartësia e një kurbe ¦ Għoli ta’ kurva
+Remplir sous la courbe ¦ Mbush nën kurbë ¦ Imla taħt il-kurva
+Écrire la dernière valeur ¦ Shkruaj vlerën e fundit ¦ Ikteb l-aħħar valur
+Valeur d’avant (flèche, écart) ¦ Vlera e mëparshme (shigjetë, diferencë) ¦ Valur ta’ qabel (vleġġa, differenza)
+Texte « avant » (ex. : l’an dernier) ¦ Teksti «para» (p.sh.: vitin e kaluar) ¦ Test “qabel” (eż.: is-sena l-oħra)
+Mini-courbe (chiffres séparés par des espaces) ¦ Mini-kurbë (shifra të ndara me hapësira) ¦ Sparkline (numri separati bi spazji)
+C’est plus haut ¦ Është më lart ¦ Huwa ogħla
+C’est plus bas ¦ Është më poshtë ¦ Huwa iktar baxx
+Couleur (sinon selon les seuils) ¦ Ngjyra (përndryshe sipas pragjeve) ¦ Kulur (inkella skont il-limiti)
+Cartes par ligne (0 = automatique) ¦ Karta për rresht (0 = automatike) ¦ Karti għal kull ringiela (0 = awtomatiku)
+En valeur et en % ¦ Në vlerë dhe në % ¦ Bħala valur u f’%
+En valeur ¦ Në vlerë ¦ Bħala valur
+En % ¦ Në % ¦ F’%
+Chiffres après la virgule (au plus) ¦ Shifra pas presjes (më së shumti) ¦ Ċifri wara l-punt deċimali (l-aktar)
+Couleur « bien » ¦ Ngjyra «mirë» ¦ Kulur “tajjeb”
+Couleur « moyen » ¦ Ngjyra «mesatare» ¦ Kulur “medju”
+Couleur « à surveiller » ¦ Ngjyra «për t’u ndjekur» ¦ Kulur “oqgħod attent”
+Les barres ¦ Shtyllat ¦ Il-vireg
+Unité (ex. : %) ¦ Njësia (p.sh.: %) ¦ Unità (eż.: %)
+Graduations sous la dernière barre ¦ Shkallëzimi nën shtyllën e fundit ¦ Gradwazzjoni taħt l-aħħar virga
+Couleur de la valeur ¦ Ngjyra e vlerës ¦ Kulur tal-valur
+Couleur de l’objectif ¦ Ngjyra e objektivit ¦ Kulur tal-mira
+Couleur des zones ¦ Ngjyra e zonave ¦ Kulur taż-żoni
+Ajoute des périodes : le nombre d’enfants nés, ceux morts avant 1 an et avant 5 ans. ¦ Shto periudha: numrin e fëmijëve të lindur, ata të vdekur para 1 vjeç dhe para 5 vjeç. ¦ Żid perjodi: in-numru ta’ tfal imwielda, dawk li mietu qabel sena u qabel il-5 snin.
+En tout : {a} % des enfants morts avant 1 an, {b} % avant 5 ans ({n}). ¦ Gjithsej: {a} % e fëmijëve vdiqën para 1 vjeç, {b} % para 5 vjeç ({n}). ¦ B’kollox: {a} % tat-tfal mietu qabel sena, {b} % qabel il-5 snin ({n}).
+Mortalité des enfants ¦ Vdekshmëria e fëmijëve ¦ Mortalità tat-tfal
+Ajoute des couples : enfants nés, arrivés à l’âge adulte, morts jeunes. ¦ Shto çifte: fëmijë të lindur, që arritën moshën e rritur, të vdekur të rinj. ¦ Żid koppji: tfal imwielda, li waslu għall-età adulta, li mietu żgħar.
+{name} : {n} sans date de décès ¦ {name}: {n} pa datë vdekjeje ¦ {name}: {n} mingħajr data tal-mewt
+Sur {n}, {p} % sont arrivés à l’âge adulte. ¦ Nga {n}, {p} % arritën moshën e rritur. ¦ Minn {n}, {p} % waslu għall-età adulta.
+Arrivés à l’âge adulte ¦ Arritën moshën e rritur ¦ Waslu għall-età adulta
+Ajoute des lignes : une période, « Naissances » ou « Décès », et les 12 mois. ¦ Shto rreshta: një periudhë, «Lindje» ose «Vdekje», dhe 12 muajt. ¦ Żid ringieli: perjodu, “Twelid” jew “Mwiet”, u t-12-il xahar.
+{n} naissances ({p} % de l’année) ¦ {n} lindje ({p} % e vitit) ¦ {n} twelid ({p} % tas-sena)
+{n} naissances ¦ {n} lindje ¦ {n} twelid
+{n} décès ({p} % de l’année) ¦ {n} vdekje ({p} % e vitit) ¦ {n} mwiet ({p} % tas-sena)
+Saisons des naissances et des décès (plus foncé = plus d’actes) ¦ Stinët e lindjeve dhe vdekjeve (më e errët = më shumë akte) ¦ L-istaġuni tat-twelid u l-mwiet (iktar skur = iktar atti)
+moins de 6 mois ¦ më pak se 6 muaj ¦ inqas minn 6 xhur
+6 mois à 1 an ¦ 6 muaj deri 1 vit ¦ 6 xhur sa sena
+1 à 2 ans ¦ 1 deri 2 vjet ¦ 1 sa 2 snin
+2 à 5 ans ¦ 2 deri 5 vjet ¦ 2 sa 5 snin
+5 à 10 ans ¦ 5 deri 10 vjet ¦ 5 sa 10 snin
+10 ans et plus ¦ 10 vjet e më shumë ¦ 10 snin u aktar
+Ajoute des remariages : le nom, le sexe et le délai en mois depuis la mort du premier conjoint. ¦ Shto rimartesa: emrin, gjininë dhe kohën në muaj që nga vdekja e bashkëshortit të parë. ¦ Żid żwiġijiet mill-ġdid: l-isem, is-sess u ż-żmien fix-xhur mill-mewt tal-ewwel konjuġi.
+Hommes remariés {when} après : {n} ¦ Burra të rimartuar {when} më pas: {n} ¦ Irġiel li reġgħu żżewġu {when} wara: {n}
+Femmes remariées {when} après : {n} ¦ Gra të rimartuara {when} më pas: {n} ¦ Nisa li reġgħu żżewġu {when} wara: {n}
+Délai médian avant de se remarier : {a} pour les hommes, {b} pour les femmes. ¦ Koha mediane para rimartesës: {a} për burrat, {b} për gratë. ¦ Żmien medjan qabel ma jerġgħu jiżżewġu: {a} għall-irġiel, {b} għan-nisa.
+Veuvage et remariage ¦ Vejëria dhe rimartesa ¦ Romol u żwieġ mill-ġdid
+Ajoute des couples : l’année du mariage et sa durée en années. ¦ Shto çifte: vitin e martesës dhe kohëzgjatjen e saj në vite. ¦ Żid koppji: is-sena taż-żwieġ u t-tul tiegħu fi snin.
+Durée médiane : {a} ans ({n} terminés par un décès). ¦ Kohëzgjatja mediane: {a} vjet ({n} të mbaruara me një vdekje). ¦ Tul medjan: {a} snin ({n} spiċċaw b’mewt).
+Durée médiane : {a} ans ({n} terminé par un décès). ¦ Kohëzgjatja mediane: {a} vjet ({n} e mbaruar me një vdekje). ¦ Tul medjan: {a} snin ({n} spiċċa b’mewt).
+Durée des mariages ¦ Kohëzgjatja e martesave ¦ Tul taż-żwiġijiet
+Ajoute des naissances : l’année, l’âge du père, l’âge de la mère. ¦ Shto lindje: vitin, moshën e babait, moshën e nënës. ¦ Żid twelid: is-sena, l-età tal-missier, l-età tal-omm.
+le père ¦ babai ¦ il-missier
+la mère ¦ nëna ¦ l-omm
+Âge du père (médiane {n} ans) ¦ Mosha e babait (mediana {n} vjet) ¦ L-età tal-missier (medjan {n} snin)
+Âge de la mère (médiane {n} ans) ¦ Mosha e nënës (mediana {n} vjet) ¦ L-età tal-omm (medjan {n} snin)
+Âge des parents à chaque naissance ¦ Mosha e prindërve në çdo lindje ¦ L-età tal-ġenituri f’kull twelid
+Ajoute des périodes : le nombre de couples, les premiers enfants nés avant le mariage et ceux nés moins de 8 mois après. ¦ Shto periudha: numrin e çifteve, fëmijët e parë të lindur para martesës dhe ata të lindur më pak se 8 muaj pas saj. ¦ Żid perjodi: in-numru ta’ koppji, l-ewwel tfal imwielda qabel iż-żwieġ u dawk imwielda inqas minn 8 xhur wara.
+{name} : {a} premiers enfants nés avant le mariage, sur {n} ¦ {name}: {a} fëmijë të parë të lindur para martesës, nga {n} ¦ {name}: {a} ewwel tfal imwielda qabel iż-żwieġ, minn {n}
+{name} : {a} premier enfant né avant le mariage, sur {n} ¦ {name}: {a} fëmijë i parë i lindur para martesës, nga {n} ¦ {name}: {a} ewwel tifel imwieled qabel iż-żwieġ, minn {n}
+{name} : {a} nés moins de 8 mois après, sur {n} ¦ {name}: {a} të lindur më pak se 8 muaj pas, nga {n} ¦ {name}: {a} imwielda inqas minn 8 xhur wara, minn {n}
+{name} : {a} né moins de 8 mois après, sur {n} ¦ {name}: {a} i lindur më pak se 8 muaj pas, nga {n} ¦ {name}: {a} imwieled inqas minn 8 xhur wara, minn {n}
+Né avant le mariage ¦ I lindur para martesës ¦ Imwieled qabel iż-żwieġ
+Né moins de 8 mois après ¦ I lindur më pak se 8 muaj pas ¦ Imwieled inqas minn 8 xhur wara
+{p} % des premiers enfants ont été conçus avant le mariage ({n}). ¦ {p} % e fëmijëve të parë u ngjizën para martesës ({n}). ¦ {p} % tal-ewwel tfal tnisslu qabel iż-żwieġ ({n}).
+Conceptions avant mariage ¦ Ngjizje para martesës ¦ Tnissil qabel iż-żwieġ
+moins d’1 an ¦ më pak se 1 vit ¦ inqas minn sena
+1 à 3 ans ¦ 1 deri 3 vjet ¦ 1 sa 3 snin
+3 à 5 ans ¦ 3 deri 5 vjet ¦ 3 sa 5 snin
+10 à 15 ans ¦ 10 deri 15 vjet ¦ 10 sa 15-il sena
+15 ans et plus ¦ 15 vjet e më shumë ¦ 15-il sena u aktar
+Ajoute des couples : l’écart d’âge en années (positif = le mari est plus âgé). ¦ Shto çifte: diferencën e moshës në vite (pozitive = burri është më i madh). ¦ Żid koppji: id-differenza fl-età fi snin (pożittiva = ir-raġel hu ikbar).
+Le mari est plus âgé ¦ Burri është më i madh ¦ Ir-raġel hu ikbar
+La femme est plus âgée ¦ Gruaja është më e madhe ¦ Il-mara hi ikbar
+Mari plus âgé de {gap} : {n} ¦ Burri më i madh me {gap}: {n} ¦ Raġel ikbar b’{gap}: {n}
+Femme plus âgée de {gap} : {n} ¦ Gruaja më e madhe me {gap}: {n} ¦ Mara ikbar b’{gap}: {n}
+Écart médian : {a} ans ; la femme est plus âgée dans {p} % des couples. ¦ Diferenca mediane: {a} vjet; gruaja është më e madhe në {p} % të çifteve. ¦ Differenza medjana: {a} snin; il-mara hi ikbar f’{p} % tal-koppji.
+Écart médian : {a} an ; la femme est plus âgée dans {p} % des couples. ¦ Diferenca mediane: {a} vit; gruaja është më e madhe në {p} % të çifteve. ¦ Differenza medjana: {a} sena; il-mara hi ikbar f’{p} % tal-koppji.
+Écart d’âge entre époux ¦ Diferenca e moshës midis bashkëshortëve ¦ Differenza fl-età bejn il-konjuġi
+Ajoute des générations : la distance moyenne (km) au lieu de référence. ¦ Shto breza: largësinë mesatare (km) nga vendi i referimit. ¦ Żid ġenerazzjonijiet: id-distanza medja (km) mill-post ta’ referenza.
+Génération {g} : {km} km en médiane ({n}, le plus loin à {max} km) ¦ Brezi {g}: {km} km mediana ({n}, më i largëti në {max} km) ¦ Ġenerazzjoni {g}: {km} km medjan ({n}, l-aktar ’il bogħod f’{max} km)
+Génération {g} : {km} km en moyenne ({n}, le plus loin à {max} km) ¦ Brezi {g}: {km} km mesatarisht ({n}, më i largëti në {max} km) ¦ Ġenerazzjoni {g}: {km} km bħala medja ({n}, l-aktar ’il bogħod f’{max} km)
+=lieu connu ¦ vend i njohur|vende të njohura ¦ post magħruf|postijiet magħrufa|postijiet magħrufa|post magħruf|post magħruf
+Distance au {ref}. ¦ Largësia nga {ref}. ¦ Distanza minn {ref}.
+Loin du berceau ¦ Larg djepit ¦ ’Il bogħod mill-benniena
+Note qui a signé : dans « Modifier un événement », « ✍️ A signé » pour les époux et chaque témoin. ¦ Shëno kush nënshkroi: te «Ndrysho një ngjarje», «✍️ Nënshkroi» për bashkëshortët dhe çdo dëshmitar. ¦ Innota min iffirma: f’“Editja avveniment”, “✍️ Iffirma” għall-konjuġi u kull xhud.
+Hommes (époux…) ¦ Burra (bashkëshortë…) ¦ Irġiel (miżżewġin…)
+Femmes (épouses…) ¦ Gra (bashkëshorte…) ¦ Nisa (miżżewġin…)
+{a} ont signé sur {b} ¦ {a} nënshkruan nga {b} ¦ {a} iffirmaw minn {b}
+Part de ceux qui savaient signer ¦ Pjesa e atyre që dinin të nënshkruanin ¦ Sehem ta’ dawk li kienu jafu jiffirmaw
+Ajoute des générations : pour chaque acte, combien sont sourcés, sans source, manquants. ¦ Shto breza: për çdo akt, sa kanë burim, sa janë pa burim, sa mungojnë. ¦ Żid ġenerazzjonijiet: għal kull att, kemm għandhom sors, kemm m’għandhomx sors, kemm huma neqsin.
+Génération 12 ¦ Brezi 12 ¦ Ġenerazzjoni 12
+sourcé ¦ me burim ¦ b’sors
+sans source ¦ pa burim ¦ bla sors
+manquant ¦ mungon ¦ nieqes
+{n} sourcés ¦ {n} me burim ¦ {n} b’sors
+{n} sourcé ¦ {n} me burim ¦ {n} b’sors
+{n} sans source ¦ {n} pa burim ¦ {n} bla sors
+{n} manquants ¦ {n} mungojnë ¦ {n} neqsin
+{n} manquant ¦ {n} mungon ¦ {n} nieqes
+{p} % des actes attendus sont prouvés par une source. ¦ {p} % e akteve të pritura vërtetohen nga një burim. ¦ {p} % tal-atti mistennija huma ppruvati minn sors.
+Ce que tu as prouvé ¦ Çfarë ke vërtetuar ¦ Dak li ppruvajt
+Dépouillé ¦ I zbërthyer ¦ Indiċjat
+Vu, rien trouvé ¦ Parë, asgjë e gjetur ¦ Muri, ma nstab xejn
+Acte trouvé (source) ¦ Akt i gjetur (burim) ¦ Att misjub (sors)
+Ajoute des lignes : la commune, les années vues (de… à…) et la sorte (dépouillé, vu sans rien, à faire, acte). ¦ Shto rreshta: komunën, vitet e para (nga… deri…) dhe llojin (i zbërthyer, parë pa gjë, për t’u bërë, akt). ¦ Żid ringieli: il-komun, is-snin murija (minn… sa…) u t-tip (indiċjat, muri bla xejn, x’isir, att).
+{place} : de {a} à {b} — en rouge pâle, les années pas encore vues ¦ {place}: nga {a} deri {b} — me të kuqe të zbehtë, vitet ende të paparë ¦ {place}: minn {a} sa {b} — b’aħmar ċar, is-snin li għadhom ma ntwerewx
+Pas encore vu ¦ Ende i paparë ¦ Għadu ma ntweriex
+Registres consultés ¦ Regjistrat e shqyrtuar ¦ Reġistri kkonsultati
+Couple {n} ¦ Çifti {n} ¦ Koppja {n}
+Enfant {n} ¦ Fëmija {n} ¦ Tifel {n}
+Quart de siècle ¦ Çerek shekulli ¦ Kwart ta’ seklu
+Demi-siècle ¦ Gjysmë shekulli ¦ Nofs seklu
+👶 Les enfants de ma base ¦ 👶 Fëmijët e bazës sime ¦ 👶 It-tfal fid-database tiegħi
+Chaque enfant né (ou baptisé) avec une date : mort avant 1 an, avant 5 ans, ou plus tard. Ceux dont on ne connaît pas le décès sont laissés de côté. ¦ Çdo fëmijë i lindur (ose i pagëzuar) me datë: i vdekur para 1 vjeç, para 5 vjeç, ose më vonë. Ata, vdekja e të cilëve nuk dihet, lihen mënjanë. ¦ Kull tifel imwieled (jew mgħammed) b’data: miet qabel sena, qabel il-5 snin, jew aktar tard. Dawk li l-mewt tagħhom mhix magħrufa jitħallew barra.
+Aucun enfant avec une naissance et un décès connus. ¦ Asnjë fëmijë me lindje dhe vdekje të njohura. ¦ L-ebda tifel b’twelid u mewt magħrufa.
+{n} périodes prises dans ta base ({k} personnes sans date de décès laissées de côté). ¦ {n} periudha të marra nga baza jote ({k} persona pa datë vdekjeje të lënë mënjanë). ¦ {n} perjodi meħuda mid-database tiegħek ({k} persuni mingħajr data tal-mewt imħallija barra).
+👨‍👩‍👧 Les couples de ma base ¦ 👨‍👩‍👧 Çiftet e bazës sime ¦ 👨‍👩‍👧 Il-koppji fid-database tiegħi
+Pour chaque couple : ses enfants, ceux arrivés à l’âge adulte et ceux morts jeunes. ¦ Për çdo çift: fëmijët e tij, ata që arritën moshën e rritur dhe ata që vdiqën të rinj. ¦ Għal kull koppja: it-tfal tagħhom, dawk li waslu għall-età adulta u dawk li mietu żgħar.
+Adulte à partir de ¦ I rritur duke nisur nga ¦ Adult minn
+Aucun couple avec des enfants. ¦ Asnjë çift me fëmijë. ¦ L-ebda koppja bit-tfal.
+Les fratries qui ont survécu ¦ Vëllezërit e motrat që mbijetuan ¦ L-aħwa li baqgħu ħajjin
+{n} couples pris dans ta base (sur {k}). ¦ {n} çifte të marra nga baza jote (nga {k}). ¦ {n} koppji meħuda mid-database tiegħek (minn {k}).
+🗓 Les naissances et les décès de ma base ¦ 🗓 Lindjet dhe vdekjet e bazës sime ¦ 🗓 It-twelid u l-mwiet fid-database tiegħi
+Datés au mois près : combien chaque mois, période par période. ¦ Me datë deri në muaj: sa në çdo muaj, periudhë pas periudhe. ¦ Iddatati sax-xahar: kemm f’kull xahar, perjodu wara perjodu.
+Aucune naissance ni aucun décès datés au mois près. ¦ Asnjë lindje apo vdekje me datë deri në muaj. ¦ L-ebda twelid jew mewt iddatati sax-xahar.
+💔 Les remariages de ma base ¦ 💔 Rimartesat e bazës sime ¦ 💔 Iż-żwiġijiet mill-ġdid fid-database tiegħi
+Les personnes mariées deux fois ou plus : le temps entre la mort du conjoint et le mariage suivant (les deux dates connues). ¦ Personat e martuar dy herë ose më shumë: koha midis vdekjes së bashkëshortit dhe martesës së radhës (të dyja datat të njohura). ¦ Il-persuni miżżewġa darbtejn jew aktar: iż-żmien bejn il-mewt tal-konjuġi u ż-żwieġ ta’ wara (iż-żewġ dati magħrufa).
+Aucun remariage avec la date du décès du conjoint et celle du nouveau mariage. ¦ Asnjë rimartesë me datën e vdekjes së bashkëshortit dhe atë të martesës së re. ¦ L-ebda żwieġ mill-ġdid bid-data tal-mewt tal-konjuġi u dik taż-żwieġ il-ġdid.
+{n} remariages pris dans ta base. ¦ {n} rimartesa të marra nga baza jote. ¦ {n} żwiġijiet mill-ġdid meħuda mid-database tiegħek.
+⏳ Les mariages de ma base ¦ ⏳ Martesat e bazës sime ¦ ⏳ Iż-żwiġijiet fid-database tiegħi
+De la date du mariage à la mort du premier des deux époux. ¦ Nga data e martesës deri te vdekja e të parit nga dy bashkëshortët. ¦ Mid-data taż-żwieġ sal-mewt tal-ewwel wieħed miż-żewġ konjuġi.
+Aucun mariage daté dont un des époux a une date de décès. ¦ Asnjë martesë me datë ku njëri nga bashkëshortët ka datë vdekjeje. ¦ L-ebda żwieġ iddatat fejn wieħed mill-konjuġi għandu data tal-mewt.
+{n} mariages pris dans ta base ({k} encore en cours ou sans date de décès). ¦ {n} martesa të marra nga baza jote ({k} ende në vazhdim ose pa datë vdekjeje). ¦ {n} żwiġijiet meħuda mid-database tiegħek ({k} għadhom għaddejjin jew mingħajr data tal-mewt).
+{n} mariages pris dans ta base. ¦ {n} martesa të marra nga baza jote. ¦ {n} żwiġijiet meħuda mid-database tiegħek.
+👴 Les naissances de ma base ¦ 👴 Lindjet e bazës sime ¦ 👴 It-twelid fid-database tiegħi
+Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance. ¦ Për çdo fëmijë: mosha e babait dhe e nënës ditën e lindjes së tij. ¦ Għal kull tifel: l-età ta’ missieru u ta’ ommu fil-jum tat-twelid tiegħu.
+Aucun enfant dont un parent a une date de naissance. ¦ Asnjë fëmijë me një prind që ka datë lindjeje. ¦ L-ebda tifel b’ġenitur li għandu data tat-twelid.
+{n} naissances prises dans ta base. ¦ {n} lindje të marra nga baza jote. ¦ {n} twelid meħuda mid-database tiegħek.
+🤰 Les premiers enfants de ma base ¦ 🤰 Fëmijët e parë të bazës sime ¦ 🤰 L-ewwel tfal fid-database tiegħi
+Pour chaque mariage daté au mois près : le premier enfant est-il né avant, ou moins de 8 mois après ? ¦ Për çdo martesë me datë deri në muaj: a lindi fëmija i parë para, apo më pak se 8 muaj pas? ¦ Għal kull żwieġ iddatat sax-xahar: l-ewwel tifel twieled qabel, jew inqas minn 8 xhur wara?
+« Tôt » : moins de ¦ «Herët»: më pak se ¦ “Kmieni”: inqas minn
+Aucun mariage daté au mois près avec un enfant daté. ¦ Asnjë martesë me datë deri në muaj me një fëmijë me datë. ¦ L-ebda żwieġ iddatat sax-xahar b’tifel iddatat.
+💑 Les couples de ma base ¦ 💑 Çiftet e bazës sime ¦ 💑 Il-koppji fid-database tiegħi
+L’écart entre les dates de naissance du mari et de la femme. ¦ Diferenca midis datave të lindjes së burrit dhe të gruas. ¦ Id-differenza bejn id-dati tat-twelid tar-raġel u tal-mara.
+Aucun couple dont les deux époux ont une date de naissance. ¦ Asnjë çift ku të dy bashkëshortët kanë datë lindjeje. ¦ L-ebda koppja fejn iż-żewġ konjuġi għandhom data tat-twelid.
+🧭 L’ascendance d’une personne ¦ 🧭 Prejardhja e një personi ¦ 🧭 L-antenati ta’ persuna
+Génération par génération : à quelle distance du lieu de référence sont nés ses ancêtres (les lieux ont besoin de leurs coordonnées). ¦ Brez pas brezi: në çfarë largësie nga vendi i referimit lindën paraardhësit e tij (vendet kanë nevojë për koordinatat e tyre). ¦ Ġenerazzjoni wara ġenerazzjoni: kemm ’il bogħod mill-post ta’ referenza twieldu l-antenati tagħha (il-postijiet għandhom bżonn il-koordinati tagħhom).
+Distance mesurée depuis ¦ Largësia e matur nga ¦ Distanza mkejla minn
+Le lieu de naissance de la personne ¦ Vendi i lindjes së personit ¦ Il-post tat-twelid tal-persuna
+Le centre des lieux de la génération la plus ancienne ¦ Qendra e vendeve të brezit më të vjetër ¦ Iċ-ċentru tal-postijiet tal-eqdem ġenerazzjoni
+Un lieu que je choisis ¦ Një vend që zgjedh unë ¦ Post li nagħżel jien
+Le lieu (si « un lieu que je choisis ») ¦ Vendi (nëse «një vend që zgjedh unë») ¦ Il-post (jekk “post li nagħżel jien”)
+Choisis le lieu dans le menu. ¦ Zgjidh vendin në menu. ¦ Agħżel il-post fil-menu.
+Le lieu de référence n’a pas de coordonnées. ¦ Vendi i referimit nuk ka koordinata. ¦ Il-post ta’ referenza m’għandux koordinati.
+Aucun ancêtre né dans un lieu situé. ¦ Asnjë paraardhës i lindur në një vend të pozicionuar. ¦ L-ebda antenat imwieled f’post ippożizzjonat.
+Loin du berceau — {name} ¦ Larg djepit — {name} ¦ ’Il bogħod mill-benniena — {name}
+✍️ Les signatures notées dans ma base ¦ ✍️ Nënshkrimet e shënuara në bazën time ¦ ✍️ Il-firem innotati fid-database tiegħi
+Ceux qui ont signé l’acte, ou « ne sait pas signer » : à noter dans « Modifier un événement » (✍️ pour les époux, et pour chaque témoin). ¦ Ata që nënshkruan aktin, ose «nuk di të nënshkruajë»: për t’u shënuar te «Ndrysho një ngjarje» (✍️ për bashkëshortët, dhe për çdo dëshmitar). ¦ Dawk li ffirmaw l-att, jew “ma jafx jiffirma”: innotah f’“Editja avveniment” (✍️ għall-konjuġi, u għal kull xhud).
+Aucune signature notée pour l’instant : dans un événement, choisis « ✍️ A signé : oui / non » pour les époux et les témoins. ¦ Ende asnjë nënshkrim i shënuar: në një ngjarje, zgjidh «✍️ Nënshkroi: po / jo» për bashkëshortët dhe dëshmitarët. ¦ Għadu l-ebda firma innotata: f’avveniment, agħżel “✍️ Iffirma: iva / le” għall-konjuġi u x-xhieda.
+✅ L’ascendance d’une personne ¦ ✅ Prejardhja e një personi ¦ ✅ L-antenati ta’ persuna
+Pour chaque génération d’ancêtres : les naissances, mariages et décès prouvés par une source, présents sans source, ou pas encore trouvés. ¦ Për çdo brez paraardhësish: lindjet, martesat dhe vdekjet të vërtetuara nga një burim, të pranishme pa burim, ose ende të pagjetura. ¦ Għal kull ġenerazzjoni ta’ antenati: it-twelid, iż-żwiġijiet u l-mwiet ippruvati minn sors, preżenti bla sors, jew li għadhom ma nstabux.
+Ce que j’ai prouvé — {name} ¦ Çfarë kam vërtetuar — {name} ¦ Dak li ppruvajt — {name}
+📚 Mes dépouillements et mes actes ¦ 📚 Zbërthimet dhe aktet e mia ¦ 📚 L-indiċi tar-reġistri u l-atti tiegħi
+Pour chaque commune : les années des registres dépouillés (suivi des dépouillements) et des actes trouvés avec une source. ¦ Për çdo komunë: vitet e regjistrave të zbërthyer (ndjekja e zbërthimeve) dhe të akteve të gjetura me burim. ¦ Għal kull komun: is-snin tar-reġistri indiċjati (segwitu tal-indiċi) u tal-atti misjuba b’sors.
+Aucun dépouillement avec des années, ni d’acte sourcé avec un lieu. ¦ Asnjë zbërthim me vite, as akt me burim me vend. ¦ L-ebda indiċi b’snin, u l-ebda att b’sors b’post.
+{n} communes prises dans ta base. ¦ {n} komuna të marra nga baza jote. ¦ {n} komuni meħuda mid-database tiegħek.
+Les périodes ¦ Periudhat ¦ Il-perjodi
+Période (ex. 1780) ¦ Periudha (p.sh. 1780) ¦ Perjodu (eż. 1780)
+Enfants nés ¦ Fëmijë të lindur ¦ Tfal imwielda
+Le nombre ¦ Numri ¦ In-numru
+Aussi « avant 5 ans » ¦ Edhe «para 5 vjeç» ¦ Ukoll “qabel il-5 snin”
+Couleur « avant 1 an » ¦ Ngjyra «para 1 vjeç» ¦ Kulur “qabel sena”
+Couleur « avant 5 ans » ¦ Ngjyra «para 5 vjeç» ¦ Kulur “qabel il-5 snin”
+Arrivés adultes ¦ Arritën moshën e rritur ¦ Waslu adulti
+Le plus de morts jeunes d’abord ¦ Më shumë të vdekur të rinj së pari ¦ L-aktar mwiet żgħar l-ewwel
+Couples au plus ¦ Çifte më së shumti ¦ Koppji l-aktar
+Couleur « adultes » ¦ Ngjyra «të rritur» ¦ Kulur “adulti”
+Couleur « morts jeunes » ¦ Ngjyra «të vdekur të rinj» ¦ Kulur “mietu żgħar”
+Couleur « on ne sait pas » ¦ Ngjyra «nuk dihet» ¦ Kulur “mhux magħruf”
+Les fratries de la famille ¦ Vëllezërit e motrat e familjes ¦ L-aħwa tal-familja
+Les lignes (une période et une sorte, puis les 12 mois) ¦ Rreshtat (një periudhë dhe një lloj, pastaj 12 muajt) ¦ Ir-ringieli (perjodu u tip, imbagħad it-12-il xahar)
+Les naissances ¦ Lindjet ¦ It-twelid
+Les décès ¦ Vdekjet ¦ Il-mwiet
+Comparer les mois (part de l’année, en %) ¦ Krahaso muajt (pjesa e vitit, në %) ¦ Qabbel ix-xhur (sehem mis-sena, f’%)
+Hauteur des cases ¦ Lartësia e kutive ¦ Għoli tal-kaxxi
+Saisons des naissances et des décès ¦ Stinët e lindjeve dhe vdekjeve ¦ L-istaġuni tat-twelid u l-mwiet
+Les remariages ¦ Rimartesat ¦ Iż-żwiġijiet mill-ġdid
+Année du veuvage ¦ Viti i vejërisë ¦ Sena tar-romol
+Combien de temps avant de se remarier ¦ Sa kohë para rimartesës ¦ Kemm żmien qabel ma jerġa’ jiżżewweġ
+Les mariages ¦ Martesat ¦ Iż-żwiġijiet
+Âge du père ¦ Mosha e babait ¦ L-età tal-missier
+Âge de la mère ¦ Mosha e nënës ¦ L-età tal-omm
+Le père et la mère ¦ Babai dhe nëna ¦ Il-missier u l-omm
+Moyenne par quart de siècle (ligne) ¦ Mesatarja për çerek shekulli (vijë) ¦ Medja għal kull kwart ta’ seklu (linja)
+Couleur du père ¦ Ngjyra e babait ¦ Kulur tal-missier
+Couleur de la mère ¦ Ngjyra e nënës ¦ Kulur tal-omm
+Couleur « avant » ¦ Ngjyra «para» ¦ Kulur “qabel”
+Couleur « moins de 8 mois » ¦ Ngjyra «më pak se 8 muaj» ¦ Kulur “inqas minn 8 xhur”
+Conceptions avant le mariage ¦ Ngjizje para martesës ¦ Tnissil qabel iż-żwieġ
+Écart (ans, + = le mari est plus âgé) ¦ Diferenca (vjet, + = burri është më i madh) ¦ Differenza (snin, + = ir-raġel hu ikbar)
+Couleur « mari plus âgé » ¦ Ngjyra «burri më i madh» ¦ Kulur “raġel ikbar”
+Couleur « femme plus âgée » ¦ Ngjyra «gruaja më e madhe» ¦ Kulur “mara ikbar”
+Lieux connus ¦ Vende të njohura ¦ Postijiet magħrufa
+Distance médiane ¦ Largësia mediane ¦ Distanza medjana
+Le plus loin ¦ Më i largëti ¦ L-aktar ’il bogħod
+Trait : le plus loin ¦ Vijë: më i largëti ¦ Linja: l-aktar ’il bogħod
+Phrase sous le dessin ¦ Fjali nën vizatim ¦ Sentenza taħt id-disinn
+lieu de naissance de la personne ¦ vendi i lindjes së personit ¦ il-post tat-twelid tal-persuna
+Hommes : ont signé ¦ Burrat: nënshkruan ¦ Irġiel: iffirmaw
+Hommes : n’ont pas signé ¦ Burrat: nuk nënshkruan ¦ Irġiel: ma ffirmawx
+Femmes : ont signé ¦ Gratë: nënshkruan ¦ Nisa: iffirmaw
+Femmes : n’ont pas signé ¦ Gratë: nuk nënshkruan ¦ Nisa: ma ffirmawx
+Témoins : ont signé ¦ Dëshmitarët: nënshkruan ¦ Xhieda: iffirmaw
+Témoins : n’ont pas signé ¦ Dëshmitarët: nuk nënshkruan ¦ Xhieda: ma ffirmawx
+Couleur des témoins ¦ Ngjyra e dëshmitarëve ¦ Kulur tax-xhieda
+Savoir signer ¦ Të dish të nënshkruash ¦ Tkun taf tiffirma
+Ancêtres possibles ¦ Paraardhës të mundshëm ¦ Antenati possibbli
+{what} : sourcée ¦ {what}: me burim ¦ {what}: b’sors
+{what} : sans source ¦ {what}: pa burim ¦ {what}: bla sors
+{what} : manquante ¦ {what}: mungon ¦ {what}: nieqsa
+Couleur « sourcé » ¦ Ngjyra «me burim» ¦ Kulur “b’sors”
+Couleur « sans source » ¦ Ngjyra «pa burim» ¦ Kulur “bla sors”
+Couleur « manquant » ¦ Ngjyra «mungon» ¦ Kulur “nieqes”
+Ce que j’ai prouvé ¦ Çfarë kam vërtetuar ¦ Dak li ppruvajt
+Les registres ¦ Regjistrat ¦ Ir-reġistri
+Montrer les trous (rouge pâle) ¦ Shfaq boshllëqet (e kuqe e zbehtë) ¦ Uri l-vojt (aħmar ċar)
+Communes au plus ¦ Komuna më së shumti ¦ Komuni l-aktar
+Couleur « {what} » ¦ Ngjyra «{what}» ¦ Kulur “{what}”
+{name} : {n} adultes ¦ {name}: {n} të rritur ¦ {name}: {n} adulti
+{name} : {n} adulte ¦ {name}: {n} i rritur ¦ {name}: {n} adult
+{name} : {n} morts jeunes ¦ {name}: {n} të vdekur të rinj ¦ {name}: {n} mietu żgħar
+{name} : {n} mort jeune ¦ {name}: {n} i vdekur i ri ¦ {name}: {n} miet żgħir
+Éventail d’ascendance de {g} générations : {n} sur {max} places. ¦ Fresk prejardhjeje me {g} breza: {n} nga {max} vende. ¦ Mrewħa tal-antenati ta’ {g} ġenerazzjonijiet: {n} minn {max} post.
+🪭 Mes ancêtres (numéros Sosa) ¦ 🪭 Paraardhësit e mi (numrat Sosa) ¦ 🪭 L-antenati tiegħi (numri Sosa)
+Chaque case reçoit un ancêtre et se colore selon ce que tu choisis. Les cases vides sont les ancêtres pas encore trouvés. ¦ Çdo kuti merr një paraardhës dhe ngjyroset sipas asaj që zgjedh. Kutitë bosh janë paraardhësit ende të pagjetur. ¦ Kull kaxxa tieħu antenat u tiġi kkulurita skont dak li tagħżel. Il-kaxxi vojta huma l-antenati li għadhom ma nstabux.
+Personne au centre ¦ Personi në qendër ¦ Persuna fiċ-ċentru
+Taux de recherche (dates, lieux, mariage, source) ¦ Shkalla e kërkimit (data, vende, martesë, burim) ¦ Rata tar-riċerka (dati, postijiet, żwieġ, sors)
+Département de naissance ¦ Departamenti i lindjes ¦ Dipartiment tat-twelid
+Prendre mes ancêtres ¦ Merr paraardhësit e mi ¦ Ħu l-antenati tiegħi
+{n} ancêtres pris dans l’app. ¦ {n} paraardhës të marrë nga aplikacioni. ¦ {n} antenati meħuda mill-app.
+Ajoute des lignes : un nom, le nom au-dessus (vide pour le centre) et un chiffre. ¦ Shto rreshta: një emër, emrin sipër (bosh për qendrën) dhe një shifër. ¦ Żid ringieli: isem, l-isem ta’ fuq (vojt għaċ-ċentru) u numru.
+Soleil de {n} parts sur {d} anneaux, total {t}. ¦ Diell me {n} pjesë në {d} unaza, gjithsej {t}. ¦ Xemx ta’ {n} partijiet fuq {d} ċrieki, total {t}.
+🌞 Une descendance ¦ 🌞 Një pasardhje ¦ 🌞 Dixxendenza
+Chaque enfant devient une part de son parent ; la taille d’une part = le nombre de descendants (la personne comprise). ¦ Çdo fëmijë bëhet një pjesë e prindit të tij; madhësia e një pjese = numri i pasardhësve (përfshirë personin). ¦ Kull tifel isir parti mill-ġenitur tiegħu; id-daqs ta’ parti = in-numru ta’ dixxendenti (inkluża l-persuna).
+Ancêtre au centre ¦ Paraardhësi në qendër ¦ Antenat fiċ-ċentru
+Aucun descendant trouvé pour cette personne. ¦ Asnjë pasardhës i gjetur për këtë person. ¦ L-ebda dixxendent misjub għal din il-persuna.
+{n} personnes prises dans l’app (les 3 000 premières). ¦ {n} persona të marrë nga aplikacioni (3 000 të parët). ¦ {n} persuni meħuda mill-app (l-ewwel 3 000).
+{n} personnes prises dans l’app. ¦ {n} persona të marrë nga aplikacioni. ¦ {n} persuni meħuda mill-app.
+Ajoute des liens : une personne, une autre, et la sorte de lien (témoin, parrain, voisin…). ¦ Shto lidhje: një person, një tjetër dhe llojin e lidhjes (dëshmitar, kumbar, fqinj…). ¦ Żid rabtiet: persuna, oħra, u t-tip ta’ rabta (xhud, parrinu, ġar…).
+Réseau de {n} personnes et {k} liens. ¦ Rrjet me {n} persona dhe {k} lidhje. ¦ Netwerk ta’ {n} persuni u {k} rabtiet.
+Arcs : {n} personnes et {k} liens. ¦ Harqe: {n} persona dhe {k} lidhje. ¦ Arki: {n} persuni u {k} rabtiet.
+Aucun témoin, parrain ou marraine noté dans les actes de ces personnes. ¦ Asnjë dëshmitar, kumbar ose kumbarë i shënuar në aktet e këtyre personave. ¦ L-ebda xhud, parrinu jew parrina innotati fl-atti ta’ dawn il-persuni.
+Pas d’implexe : aucun ancêtre n’apparaît deux fois. ¦ Asnjë implekse: asnjë paraardhës nuk shfaqet dy herë. ¦ L-ebda impless: l-ebda antenat ma jidher darbtejn.
+Aucun mariage entre deux familles. ¦ Asnjë martesë midis dy familjeve. ¦ L-ebda żwieġ bejn żewġ familji.
+Implexe : {n} à plusieurs places ¦ Implekse: {n} në disa vende ¦ Impless: {n} f’diversi postijiet
+Mariages entre familles ¦ Martesa midis familjeve ¦ Żwiġijiet bejn familji
+{n} liens pris dans l’app. ¦ {n} lidhje të marra nga aplikacioni. ¦ {n} rabtiet meħuda mill-app.
+{n} lien pris dans l’app. ¦ {n} lidhje e marrë nga aplikacioni. ¦ {n} rabta meħuda mill-app.
+🕸 Témoins, parrains, marraines ¦ 🕸 Dëshmitarë, kumbarë, kumbara ¦ 🕸 Xhieda, parrini, parrini nisa
+Les personnes notées dans les actes (témoins, parrains, déclarants…) et celles pour qui elles l’ont été. Couleur = nom de famille. ¦ Personat e shënuar në akte (dëshmitarë, kumbarë, deklarues…) dhe ata për të cilët ishin të tillë. Ngjyra = mbiemri. ¦ Il-persuni innotati fl-atti (xhieda, parrini, dikjaranti…) u dawk li għalihom kienu hekk. Kulur = kunjom.
+Jusqu’où ¦ Deri ku ¦ Sa fejn
+Ses liens directs ¦ Lidhjet e tij të drejtpërdrejta ¦ Ir-rabtiet diretti tagħha
+Et les liens de ses liens ¦ Dhe lidhjet e lidhjeve të tij ¦ U r-rabtiet tar-rabtiet tagħha
+Toute ma base (les 2 500 premiers liens) ¦ Gjithë baza ime (2 500 lidhjet e para) ¦ Id-database kollha tiegħi (l-ewwel 2 500 rabta)
+Prendre ces liens ¦ Merr këto lidhje ¦ Ħu dawn ir-rabtiet
+Ajoute des liens : une personne, une autre, et la sorte de lien (mariage, implexe…). ¦ Shto lidhje: një person, një tjetër dhe llojin e lidhjes (martesë, implekse…). ¦ Żid rabtiet: persuna, oħra, u t-tip ta’ rabta (żwieġ, impless…).
+🌈 Des liens de l’app ¦ 🌈 Lidhje nga aplikacioni ¦ 🌈 Rabtiet mill-app
+Implexe : un même ancêtre à plusieurs numéros Sosa ¦ Implekse: i njëjti paraardhës me disa numra Sosa ¦ Impless: l-istess antenat b’diversi numri Sosa
+Témoins, parrains, marraines ¦ Dëshmitarë, kumbarë, kumbara ¦ Xhieda, parrini, parrini nisa
+Personne de départ (implexe, témoins) ¦ Personi i nisjes (implekse, dëshmitarë) ¦ Persuna tat-tluq (impless, xhieda)
+Il faut 2, 3 ou 4 ensembles. ¦ Duhen 2, 3 ose 4 bashkësi. ¦ Iridu 2, 3 jew 4 settijiet.
+⭕ Des ensembles de l’app ¦ ⭕ Bashkësi nga aplikacioni ¦ ⭕ Settijiet mill-app
+Choisis 2 à 4 ensembles : chaque zone reçoit le nombre de personnes qui sont dans ces ensembles-là, et pas dans les autres. ¦ Zgjidh 2 deri 4 bashkësi: çdo zonë merr numrin e personave që janë në ato bashkësi, dhe jo në të tjerat. ¦ Agħżel minn 2 sa 4 settijiet: kull żona tieħu n-numru ta’ persuni li huma f’dawk is-settijiet, u mhux fl-oħrajn.
+Personne de départ (pour « Mes ancêtres ») ¦ Personi i nisjes (për «Paraardhësit e mi») ¦ Persuna tat-tluq (għal “L-antenati tiegħi”)
+Rien d’autre pour l’instant. ¦ Asgjë tjetër për momentin. ¦ Xejn aktar għalissa.
+Choisis 2 à 4 ensembles (là : {n}). ¦ Zgjidh 2 deri 4 bashkësi (tani: {n}). ¦ Agħżel minn 2 sa 4 settijiet (issa: {n}).
+{n} personnes comptées. ¦ {n} persona të numëruar. ¦ {n} persuni magħduda.
+{n} personne comptée. ¦ {n} person i numëruar. ¦ {n} persuna magħduda.
+Février ¦ Shkurt ¦ Frar
+Décembre ¦ Dhjetor ¦ Diċembru
+Aucune date avec le jour et le mois (ex. : 7 mai 1925, 08/12/1960). ¦ Asnjë datë me ditën dhe muajin (p.sh.: 7 mai 1925, 08/12/1960). ¦ L-ebda data bil-jum u x-xahar (eż.: 7 mai 1925, 08/12/1960).
+Ajoute des dates (7 mai 1925, 08/12/1960, 12 thermidor an II…) et, si tu veux, un nombre. ¦ Shto data (7 mai 1925, 08/12/1960, 12 thermidor an II…) dhe, nëse do, një numër. ¦ Żid dati (7 mai 1925, 08/12/1960, 12 thermidor an II…) u, jekk trid, numru.
+{d} {month} {y} : {v} ¦ {d} {month} {y}: {v} ¦ {d} ta’ {month} {y}: {v}
+{d} {month} : {v} ¦ {d} {month}: {v} ¦ {d} ta’ {month}: {v}
+jour|1er ¦ 1 ¦ 1
+{n} dates sans jour précis (non montrées) ¦ {n} data pa ditë të saktë (të pashfaqura) ¦ {n} dati mingħajr jum preċiż (mhux murija)
+{n} date sans jour précis (non montrée) ¦ {n} datë pa ditë të saktë (e pashfaqur) ¦ {n} data mingħajr jum preċiż (mhux murija)
+Calendrier : {n} événements montrés, au plus {m} le même jour. ¦ Kalendari: {n} ngjarje të shfaqura, më së shumti {m} në të njëjtën ditë. ¦ Kalendarju: {n} avvenimenti murija, l-aktar {m} fl-istess jum.
+Calendrier : {n} événement montré, au plus {m} le même jour. ¦ Kalendari: {n} ngjarje e shfaqur, më së shumti {m} në të njëjtën ditë. ¦ Kalendarju: {n} avveniment muri, l-aktar {m} fl-istess jum.
+Personne (pour ses ancêtres) ¦ Personi (për paraardhësit e tij) ¦ Persuna (għall-antenati tagħha)
+🗓 Des événements de l’app, jour par jour ¦ 🗓 Ngjarje nga aplikacioni, ditë pas dite ¦ 🗓 Avvenimenti mill-app, jum b’jum
+Seules les dates avec le jour comptent. « Toutes années ensemble » montre la saison (366 cases) ; « Une ligne par année » montre les années choisies. ¦ Numërohen vetëm datat me ditë. «Të gjitha vitet bashkë» tregon stinën (366 kuti); «Një rresht për vit» tregon vitet e zgjedhura. ¦ Jgħoddu biss id-dati bil-jum. “Is-snin kollha flimkien” turi l-istaġun (366 kaxxa); “Ringiela għal kull sena” turi s-snin magħżula.
+Prendre ces dates ¦ Merr këto data ¦ Ħu dawn id-dati
+Coche au moins une sorte d’événement. ¦ Shëno të paktën një lloj ngjarjeje. ¦ Immarka mill-inqas tip wieħed ta’ avveniment.
+Aucune date complète (jour, mois, année) pour ces événements. ¦ Asnjë datë e plotë (ditë, muaj, vit) për këto ngjarje. ¦ L-ebda data sħiħa (jum, xahar, sena) għal dawn l-avvenimenti.
+{what} jour par jour ¦ {what} ditë pas dite ¦ {what} jum b’jum
+{n} dates complètes prises ({k} sans jour précis laissées de côté). ¦ {n} data të plota të marra ({k} pa ditë të saktë të lëna mënjanë). ¦ {n} dati sħaħ meħuda ({k} mingħajr jum preċiż imħallija barra).
+Ajoute des chiffres pour chaque mois (janvier à décembre). ¦ Shto shifra për çdo muaj (janar deri dhjetor). ¦ Żid numri għal kull xahar (Jannar sa Diċembru).
+Rose des mois : {list}. ¦ Trëndafili i muajve: {list}. ¦ Ward tax-xhur: {list}.
+{name} {n} (le plus en {month}) ¦ {name} {n} (më shumë në {month}) ¦ {name} {n} (l-aktar f’{month})
+🌸 Des événements de l’app, mois par mois ¦ 🌸 Ngjarje nga aplikacioni, muaj pas muaji ¦ 🌸 Avvenimenti mill-app, xahar b’xahar
+Une série par sorte d’événement ; seules les dates avec le mois comptent. ¦ Një seri për çdo lloj ngjarjeje; numërohen vetëm datat me muaj. ¦ Serje għal kull tip ta’ avveniment; jgħoddu biss id-dati bix-xahar.
+Compter par mois ¦ Numëro sipas muajit ¦ Għodd skont ix-xahar
+Aucune date avec le mois pour ces événements. ¦ Asnjë datë me muaj për këto ngjarje. ¦ L-ebda data bix-xahar għal dawn l-avvenimenti.
+Chiffres pris dans l’app. ¦ Shifra të marra nga aplikacioni. ¦ Numri meħuda mill-app.
+Ajoute des événements : une date (ou un début et une fin) et un nom. ¦ Shto ngjarje: një datë (ose një fillim dhe një fund) dhe një emër. ¦ Żid avvenimenti: data (jew bidu u tmiem) u isem.
+Spirale du temps de {a} à {b}, {per} ans par tour : {n}. ¦ Spiralja e kohës nga {a} në {b}, {per} vjet për rrotullim: {n}. ¦ Spirali taż-żmien minn {a} sa {b}, {per} snin għal kull dawra: {n}.
+Mariage à Rennes ¦ Martesë në Rennes ¦ Żwieġ f’Rennes
+Départ pour Nantes ¦ Nisje për në Nantes ¦ Tluq lejn Nantes
+Achat de la ferme ¦ Blerja e fermës ¦ Xiri tar-razzett
+Arrivée à Paris ¦ Mbërritja në Paris ¦ Wasla f’Pariġi
+🌀 Des vies et des événements de l’app ¦ 🌀 Jetë dhe ngjarje nga aplikacioni ¦ 🌀 Ħajjiet u avvenimenti mill-app
+Les vies (de la naissance au décès) ¦ Jetët (nga lindja deri te vdekja) ¦ Il-ħajjiet (mit-twelid sal-mewt)
+Des événements (points) ¦ Ngjarje (pika) ¦ Avvenimenti (tikek)
+Aucune personne avec une date de naissance ou de décès. ¦ Asnjë person me datë lindjeje ose vdekjeje. ¦ L-ebda persuna b’data tat-twelid jew tal-mewt.
+Vies de la famille ¦ Jetët e familjes ¦ Ħajjiet tal-familja
+Les événements de la famille ¦ Ngjarjet e familjes ¦ L-avvenimenti tal-familja
+{n} lignes prises dans l’app. ¦ {n} rreshta të marrë nga aplikacioni. ¦ {n} ringieli meħuda mill-app.
+{n} ligne prise dans l’app. ¦ {n} rresht i marrë nga aplikacioni. ¦ {n} ringiela meħuda mill-app.
+Les plus reliés (30) ¦ Më të lidhurit (30) ¦ L-aktar konnessi (30)
+Par groupe (colonne « Groupe ») ¦ Sipas grupit (kolona «Grupi») ¦ Skont il-grupp (kolonna “Grupp”)
+Groupes trouvés tout seuls ¦ Grupe të gjetura vetë ¦ Gruppi misjuba waħedhom
+Une seule (les liens en couleur) ¦ Vetëm një (lidhjet me ngjyrë) ¦ Waħda biss (ir-rabtiet bil-kulur)
+Couleur du tableau ¦ Ngjyra e tabelës ¦ Kulur tat-tabella
+Les liens (une ligne par lien) ¦ Lidhjet (një rresht për lidhje) ¦ Ir-rabtiet (ringiela għal kull rabta)
+Sorte de lien (témoin, parrain…) ¦ Lloji i lidhjes (dëshmitar, kumbar…) ¦ Tip ta’ rabta (xhud, parrinu…)
+Les personnes (facultatif : groupe et couleur) ¦ Personat (sipas dëshirës: grupi dhe ngjyra) ¦ Il-persuni (mhux obbligatorju: grupp u kulur)
+Couleur des sortes de liens (facultatif) ¦ Ngjyra e llojeve të lidhjeve (sipas dëshirës) ¦ Kulur tat-tipi ta’ rabtiet (mhux obbligatorju)
+Détail (dates, lieu…) ¦ Detaje (data, vend…) ¦ Dettall (dati, post…)
+Le nom ¦ Emri ¦ L-isem
+Le nom et la valeur ¦ Emri dhe vlera ¦ L-isem u l-valur
+Le nom et le détail ¦ Emri dhe detajet ¦ L-isem u d-dettall
+La valeur ¦ Vlera ¦ Il-valur
+Dégradé : minimum (vide = auto) ¦ Shkallëzim ngjyre: minimumi (bosh = automatik) ¦ Gradjent: minimu (vojt = awtomatiku)
+Dégradé : maximum (vide = auto) ¦ Shkallëzim ngjyre: maksimumi (bosh = automatik) ¦ Gradjent: massimu (vojt = awtomatiku)
+Unité (%, ans…) ¦ Njësia (%, vjet…) ¦ Unità (%, snin…)
+Taille du centre ¦ Madhësia e qendrës ¦ Daqs taċ-ċentru
+Numéro des générations ¦ Numri i brezave ¦ Numri tal-ġenerazzjonijiet
+Origines de mes ancêtres ¦ Origjinat e paraardhësve të mi ¦ L-oriġini tal-antenati tiegħi
+Les parts (parent → enfant → chiffre) ¦ Pjesët (prind → fëmijë → shifër) ¦ Il-partijiet (ġenitur → tifel → numru)
+Au-dessus (vide = au centre) ¦ Sipër (bosh = në qendër) ¦ Fuq (vojt = fiċ-ċentru)
+Taille des parts ¦ Madhësia e pjesëve ¦ Daqs tal-partijiet
+Le chiffre (ou la somme des parts) ¦ Shifra (ose shuma e pjesëve) ¦ In-numru (jew is-somma tal-partijiet)
+Le nombre de descendants ¦ Numri i pasardhësve ¦ In-numru ta’ dixxendenti
+Le nombre de bouts de branche ¦ Numri i majave të degëve ¦ In-numru ta’ truf tal-fergħat
+Anneaux au plus ¦ Unaza më së shumti ¦ Ċrieki l-aktar
+Une par branche (plus clair vers l’extérieur) ¦ Një për degë (më e çelur drejt jashtë) ¦ Waħda għal kull fergħa (aktar ċar lejn barra)
+Une par anneau ¦ Një për unazë ¦ Waħda għal kull ċirku
+Le nom et le chiffre ¦ Emri dhe shifra ¦ L-isem u n-numru
+Ordre des parts ¦ Renditja e pjesëve ¦ Ordni tal-partijiet
+De la plus grande à la plus petite ¦ Nga më e madhja te më e vogla ¦ Mill-akbar għall-iżgħar
+Texte au centre ¦ Teksti në qendër ¦ Test fiċ-ċentru
+Rapprocher les points de même couleur ¦ Afro pikat me të njëjtën ngjyrë ¦ Qarreb it-tikek tal-istess kulur
+Liens colorés selon leur sorte ¦ Lidhje me ngjyra sipas llojit ¦ Rabtiet ikkuluriti skont it-tip
+Selon le nombre de liens ¦ Sipas numrit të lidhjeve ¦ Skont in-numru ta’ rabtiet
+Tous pareils ¦ Të gjitha njësoj ¦ Kollha l-istess
+Écartement ¦ Hapësira ¦ Spazjar
+Témoins et parrains au village ¦ Dëshmitarë dhe kumbarë në fshat ¦ Xhieda u parrini fir-raħal
+Les personnes, dans l’ordre de la ligne (facultatif) ¦ Personat, sipas renditjes së vijës (sipas dëshirës) ¦ Il-persuni, skont l-ordni tal-linja (mhux obbligatorju)
+Ordre sur la ligne ¦ Renditja në vijë ¦ Ordni fuq il-linja
+Comme dans les tableaux ¦ Si në tabela ¦ Bħal fit-tabelli
+Les plus reliés d’abord ¦ Më të lidhurit së pari ¦ L-aktar konnessi l-ewwel
+Par numéro (Sosa 2, 3, 10…) ¦ Sipas numrit (Sosa 2, 3, 10…) ¦ Skont in-numru (Sosa 2, 3, 10…)
+Au-dessus et en dessous selon la sorte ¦ Sipër dhe poshtë sipas llojit ¦ Fuq u taħt skont it-tip
+Hauteur des arcs ¦ Lartësia e harqeve ¦ L-għoli tal-arki
+Arcs colorés selon leur sorte ¦ Harqe me ngjyra sipas llojit ¦ Arki bil-kulur skont it-tip
+Sous la ligne ¦ Nën vijë ¦ Taħt il-linja
+Mariages entre familles du village ¦ Martesa midis familjeve të fshatit ¦ Żwiġijiet bejn familji tar-raħal
+Les ensembles (2 à 4) : A, B, C, D ¦ Bashkësitë (2 deri në 4): A, B, C, D ¦ Is-settijiet (2 sa 4): A, B, C, D
+Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres) ¦ Çfarë shkruhet në çdo zonë (AB = në A dhe B, jo në të tjerat) ¦ X’jinkiteb f’kull żona (AB = f’A u B, mhux fl-oħrajn)
+Nombre ou texte ¦ Numër ose tekst ¦ Numru jew test
+Ajouter le pourcentage ¦ Shto përqindjen ¦ Żid il-persentaġġ
+Total de chaque ensemble à côté de son nom ¦ Totali i çdo bashkësie pranë emrit të saj ¦ It-total ta’ kull sett ħdejn ismu
+Transparence des formes ¦ Tejdukshmëria e formave ¦ Trasparenza tal-forom
+Mes sources ¦ Burimet e mia ¦ Is-sorsi tiegħi
+Les dates (une ligne par événement, ou une date et un nombre) ¦ Datat (një rresht për çdo ngjarje, ose një datë dhe një numër) ¦ Id-dati (ringiela għal kull avveniment, jew data u numru)
+Toutes années ensemble (12 mois × 31 jours) ¦ Të gjitha vitet bashkë (12 muaj × 31 ditë) ¦ Is-snin kollha flimkien (12-il xahar × 31 jum)
+Une ligne par année (semaines) ¦ Një rresht për çdo vit (javë) ¦ Ringiela għal kull sena (ġimgħat)
+Années (ex. 1890-1895, 1900 ; vide = auto) ¦ Vitet (p.sh. 1890-1895, 1900; bosh = automatik) ¦ Snin (eż. 1890-1895, 1900; vojt = awtomatiku)
+Doux (racine carrée) ¦ E butë (rrënjë katrore) ¦ Ħafif (għerq kwadru)
+Écrire les nombres dans les cases ¦ Shkruaj numrat në kuti ¦ Ikteb in-numri fil-kaxxi
+Dire combien de dates n’ont pas de jour ¦ Trego sa data nuk kanë ditë ¦ Għid kemm-il data m’għandhiex jum
+Jours de naissance de mes ancêtres ¦ Ditët e lindjes së paraardhësve të mi ¦ Il-jiem tat-twelid tal-antenati tiegħi
+Superposées (transparentes) ¦ Të mbivendosura (të tejdukshme) ¦ Waħda fuq l-oħra (trasparenti)
+Longueur des rayons ¦ Gjatësia e rrezeve ¦ It-tul tar-raġġi
+Surface juste (racine carrée) ¦ Sipërfaqe e saktë (rrënjë katrore) ¦ Erja eżatta (għerq kwadru)
+Écrire les nombres (une seule série) ¦ Shkruaj numrat (vetëm një seri) ¦ Ikteb in-numri (serje waħda biss)
+Mois en abrégé ¦ Muajt të shkurtuar ¦ Xhur imqassra
+Naissances, mariages et décès par mois ¦ Lindje, martesa dhe vdekje sipas muajit ¦ Twelid, żwiġijiet u mwiet skont ix-xahar
+Les événements (une date = un point ; un début et une fin = un trait) ¦ Ngjarjet (një datë = një pikë; një fillim dhe një fund = një vijë) ¦ L-avvenimenti (data = tikka; bidu u tmiem = linja)
+Date ou début ¦ Data ose fillimi ¦ Data jew bidu
+Un tour de spirale ¦ Një rrotullim i spirales ¦ Dawra waħda tal-ispirali
+Un siècle ¦ Një shekull ¦ Seklu
+Une décennie ¦ Një dekadë ¦ Għaxar snin
+Autant d’années que… ¦ Aq vite sa… ¦ Daqstant snin daqs…
+Années par tour ¦ Vite për rrotullim ¦ Snin għal kull dawra
+Tous (sans chevauchement) ¦ Të gjitha (pa mbivendosje) ¦ Kollha (mingħajr ma jaqbżu fuq xulxin)
+Trois siècles de la famille Martin ¦ Tre shekuj të familjes Martin ¦ Tliet sekli tal-familja Martin
+Remettre comme au départ (ou double-clic sur le fond) ¦ Ktheje si në fillim (ose kliko dy herë në sfond) ¦ Erġa’ poġġi kif kien (jew ikklikkja darbtejn fuq l-isfond)
+Arrêter / relancer le mouvement ¦ Ndal / rinis lëvizjen ¦ Waqqaf / erġa’ ibda l-moviment
+Arrêter ou relancer le mouvement ¦ Ndal ose rinis lëvizjen ¦ Waqqaf jew erġa’ ibda l-moviment
+Zoomer avec la molette (sinon : Ctrl + molette) ¦ Zmadho me rrotëzën (përndryshe: Ctrl + rrotëzën) ¦ Żum bir-rota tal-maws (inkella: Ctrl + rota)
+Zoom à la molette ¦ Zmadhim me rrotëzën ¦ Żum bir-rota
+Glisse un point pour le placer · double-clic pour le libérer ¦ Tërhiq një pikë për ta vendosur · kliko dy herë për ta lëshuar ¦ Iġbed tikka biex tpoġġiha · ikklikkja darbtejn biex teħlisha
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » → Retrouver les lieux ¦ ⚠ Vende pa pozicion: {list} — shkruaj «Emri 48.11, -1.68» ose «Nga aplikacioni» → Gjej vendet ¦ ⚠ Postijiet mingħajr pożizzjoni: {list} — ikteb “Isem 48.11, -1.68” jew “Mill-app” → Sib il-postijiet
+né(e) en {y} ¦ lindur në {y} ¦ imwieled/imwielda fl-{y}
+{a} → {b} : même premier prénom ¦ {a} → {b}: i njëjti emër i parë ¦ {a} → {b}: l-istess l-ewwel isem
+{a} → {b} : un autre de ses prénoms ¦ {a} → {b}: një tjetër nga emrat e tij ¦ {a} → {b}: isem ieħor minn ismijietu
+{a} → {b} : prénom différent ¦ {a} → {b}: emër i ndryshëm ¦ {a} → {b}: isem differenti
+Ajoute des événements : un lieu, une date, une sorte (ou « Depuis l’app »). ¦ Shto ngjarje: një vend, një datë, një lloj (ose «Nga aplikacioni»). ¦ Żid avvenimenti: post, data, tip (jew “Mill-app”).
+Carte en points : {n} événements dans {k}. ¦ Hartë me pika: {n} ngjarje në {k}. ¦ Mappa bit-tikek: {n} avvenimenti f’{k}.
+{unit} par alvéole ¦ {unit} për qelizë ¦ {unit} għal kull ċellula
+Ajoute des événements : un lieu et une date (ou « Depuis l’app »). ¦ Shto ngjarje: një vend dhe një datë (ose «Nga aplikacioni»). ¦ Żid avvenimenti: post u data (jew “Mill-app”).
+=alvéole ¦ qelizë|qeliza ¦ ċellula|ċelluli|ċelluli|ċellula|ċellula
+=filleul ¦ fëmijë i pagëzuar|fëmijë të pagëzuar ¦ filjoz|filjozi|filjozi|filjoz|filjoz
+=cause ¦ shkak|shkaqe ¦ kawża|kawżi|kawżi|kawża|kawża
+=grande famille ¦ grup kryesor|grupe kryesore ¦ grupp ewlieni|gruppi ewlenin|gruppi ewlenin|grupp ewlieni|grupp ewlieni
+=descendant ¦ pasardhës|pasardhës ¦ dixxendent|dixxendenti|dixxendenti|dixxendent|dixxendent
+=lieu retrouvé ¦ vend i gjetur|vende të gjetura ¦ post misjub|postijiet misjuba|postijiet misjuba|post misjub|post misjub
+=lieu sans position ¦ vend pa pozicion|vende pa pozicion ¦ post mingħajr pożizzjoni|postijiet mingħajr pożizzjoni|postijiet mingħajr pożizzjoni|post mingħajr pożizzjoni|post mingħajr pożizzjoni
+=étape placée ¦ ndalesë e vendosur|ndalesa të vendosura ¦ waqfa mqiegħda|waqfiet imqiegħda|waqfiet imqiegħda|waqfa mqiegħda|waqfa mqiegħda
+Carte en hexagones : {n} événements dans {k} ; la plus remplie en compte {max}. ¦ Hartë me gjashtëkëndësha: {n} ngjarje në {k}; më e mbushura ka {max}. ¦ Mappa bl-eżagoni: {n} avvenimenti f’{k}; l-aktar mimlija għandha {max}.
+{name} : de {lo} (clair) à {hi} (foncé) ¦ {name}: nga {lo} (e çelët) në {hi} (e errët) ¦ {name}: minn {lo} (ċar) sa {hi} (skur)
+⚠ Pas trouvé sur ce fond : {list} ¦ ⚠ Nuk u gjet në këtë hartë bazë: {list} ¦ ⚠ Ma nstabx fuq din il-mappa ta’ sfond: {list}
+Carte déformée : {n} grossies selon leur chiffre (carrés). ¦ Hartë e deformuar: {n} të zmadhuara sipas shifrës së tyre (katrorë). ¦ Mappa deformata: {n} imkabbra skont iċ-ċifra tagħhom (kwadri).
+Carte déformée : {n} grossies selon leur chiffre (ronds). ¦ Hartë e deformuar: {n} të zmadhuara sipas shifrës së tyre (rrathë). ¦ Mappa deformata: {n} imkabbra skont iċ-ċifra tagħhom (ċrieki).
+Étape {k} sur {n} : {what} ¦ Ndalesa {k} nga {n}: {what} ¦ Waqfa {k} minn {n}: {what}
+{n} de {a} à {b} — {k} sur la carte ¦ {n} nga {a} në {b} — {k} në hartë ¦ {n} minn {a} sa {b} — {k} fuq il-mappa
+{n} — {k} sur la carte ¦ {n} — {k} në hartë ¦ {n} — {k} fuq il-mappa
+Ajoute les étapes d’une vie : une date, ce qui s’est passé, un lieu. ¦ Shto ndalesat e një jete: një datë, çfarë ndodhi, një vend. ¦ Żid il-waqfiet ta’ ħajja: data, x’ġara, post.
+Carte qui raconte : aucune étape. ¦ Hartë që tregon: asnjë ndalesë. ¦ Mappa li tirrakkonta: l-ebda waqfa.
+Carte qui raconte : {n}, étape {k} : {what}. ¦ Hartë që tregon: {n}, ndalesa {k}: {what}. ¦ Mappa li tirrakkonta: {n}, waqfa {k}: {what}.
+Carte qui raconte : {n}. ¦ Hartë që tregon: {n}. ¦ Mappa li tirrakkonta: {n}.
+Diagrammes Généalogie indisponibles. ¦ Diagramet e Gjenealogjisë nuk janë të disponueshme. ¦ Id-dijagrammi tal-Ġenealoġija mhumiex disponibbli.
+Ajoute des lignes : un nom, le nom du parent (vide pour l’ancêtre) et un chiffre si tu veux. ¦ Shto rreshta: një emër, emrin e prindit (bosh për paraardhësin) dhe një shifër nëse do. ¦ Żid ringieli: isem, l-isem tal-ġenitur (vojt għall-antenat) u ċifra jekk trid.
+{n} · {p} % de la descendance ¦ {n} · {p} % e pasardhësve ¦ {n} · {p} % tad-dixxendenti
+Descendance en rectangles : {n} sur {g}. ¦ Pasardhësit në drejtkëndësha: {n} në {g}. ¦ Dixxendenti f’rettangoli: {n} fuq {g}.
+Ajoute des lignes : le parrain ou la marraine, le filleul, et leurs années de naissance. ¦ Shto rreshta: kumbarin ose kumbarën, fëmijën e pagëzuar dhe vitet e tyre të lindjes. ¦ Żid ringieli: il-parrinu jew il-parrina, il-filjoz, u s-snin tat-twelid tagħhom.
+Aucun filleul ne porte le prénom de son parrain ou de sa marraine ({n}). ¦ Asnjë fëmijë i pagëzuar nuk mban emrin e kumbarit ose të kumbarës së tij ({n}). ¦ L-ebda filjoz ma għandu l-isem tal-parrinu jew tal-parrina tiegħu ({n}).
+{n} filleuls sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} fëmijë të pagëzuar nga {t} ({p} %) mbajnë emrin e kumbarit ose të kumbarës ¦ {n} filjozi minn {t} ({p} %) għandhom l-isem tal-parrinu jew tal-parrina
+{n} filleul sur {t} ({p} %) portent le prénom de leur parrain ou marraine ¦ {n} fëmijë i pagëzuar nga {t} ({p} %) mban emrin e kumbarit ose të kumbarës ¦ {n} filjoz minn {t} ({p} %) għandu l-isem tal-parrinu jew tal-parrina
+Pointillés : un autre de ses prénoms ¦ Me pika: një tjetër nga emrat e tij ¦ Bit-tikek: isem ieħor minn ismijietu
+Prénoms transmis : {n} filleuls sur {t} portent le prénom de leur parrain ou marraine ; le plus transmis : {name}. ¦ Emra të trashëguar: {n} fëmijë të pagëzuar nga {t} mbajnë emrin e kumbarit ose të kumbarës; më i trashëguari: {name}. ¦ Ismijiet mgħoddija: {n} filjozi minn {t} għandhom l-isem tal-parrinu jew tal-parrina; l-aktar mgħoddi: {name}.
+Naissance et petite enfance ¦ Lindja dhe fëmijëria e hershme ¦ Twelid u l-ewwel tfulija
+Reins, sang et autres maladies ¦ Veshkat, gjaku dhe sëmundje të tjera ¦ Kliewi, demm u mard ieħor
+Ajoute des causes de décès et leur nombre (ou « Depuis l’app »). ¦ Shto shkaqe vdekjeje dhe numrin e tyre (ose «Nga aplikacioni»). ¦ Żid kawżi tal-mewt u n-numru tagħhom (jew “Mill-app”).
+{name} : {v} ({a} % des décès, {b} % de « {fam} ») ¦ {name}: {v} ({a} % e vdekjeve, {b} % e «{fam}») ¦ {name}: {v} ({a} % tal-imwiet, {b} % ta’ “{fam}”)
+Causes de décès : {n} décès en {k} ; la plus fréquente : {name}. ¦ Shkaqet e vdekjes: {n} vdekje në {k}; më i shpeshti: {name}. ¦ Kawżi tal-mewt: {n} mewt f’{k}; l-aktar frekwenti: {name}.
+Naissances, mariages et décès de la famille ¦ Lindjet, martesat dhe vdekjet e familjes ¦ It-twelid, iż-żwiġijiet u l-imwiet tal-familja
+un point par événement ¦ një pikë për çdo ngjarje ¦ tikka għal kull avveniment
+Village {n} (près de {place}) ¦ Fshati {n} (pranë {place}) ¦ Raħal {n} (qrib {place})
+nombre d’événements par alvéole ¦ numri i ngjarjeve për qelizë ¦ numru ta’ avvenimenti għal kull ċellula
+chaque département grossi selon le nombre d’ancêtres ¦ çdo departament i zmadhuar sipas numrit të paraardhësve ¦ kull dipartiment imkabbar skont in-numru ta’ antenati
+ancêtres ¦ paraardhës ¦ antenati
+Descendance de {name} ¦ Pasardhësit e {name} ¦ Id-dixxendenti ta’ {name}
+Prénoms transmis par les parrains et marraines ¦ Emra të trashëguar nga kumbarët dhe kumbarat ¦ Ismijiet mgħoddija mill-parrini
+causes relevées dans les actes de décès ¦ shkaqe të shënuara në aktet e vdekjes ¦ kawżi miktuba fl-atti tal-mewt
+{n} : vérifie-les sur la carte. ¦ {n}: kontrolloji në hartë. ¦ {n}: iċċekkjahom fuq il-mappa.
+Aucun lieu retrouvé : tape leurs coordonnées dans le tableau (« Nom 48.11, -1.68 »). ¦ Asnjë vend nuk u gjet: shkruaj koordinatat e tyre në tabelë («Emri 48.11, -1.68»). ¦ L-ebda post ma nstab: ikteb il-koordinati tagħhom fit-tabella (“Isem 48.11, -1.68”).
+📍 Les événements de ton arbre ¦ 📍 Ngjarjet e pemës sate ¦ 📍 L-avvenimenti tas-siġra tiegħek
+Chaque événement qui a un lieu devient un point (un mariage compte pour chacun des deux époux). Les lieux sans coordonnées sont retrouvés dans les communes de France par leur nom et leur département. Le tableau est remplacé. ¦ Çdo ngjarje që ka një vend bëhet një pikë (një martesë llogaritet për secilin nga dy bashkëshortët). Vendet pa koordinata gjenden në komunat e Francës sipas emrit dhe departamentit. Tabela zëvendësohet. ¦ Kull avveniment li għandu post isir tikka (żwieġ jgħodd għal kull wieħed miż-żewġ miżżewġin). Il-postijiet mingħajr koordinati jinstabu fost il-komuni ta’ Franza skont isimhom u d-dipartiment tagħhom. It-tabella tinbidel.
+Aucun événement avec un lieu pour ce choix. ¦ Asnjë ngjarje me vend për këtë zgjedhje. ¦ L-ebda avveniment b’post għal din l-għażla.
+{what} de mes ancêtres ¦ {what} e paraardhësve të mi ¦ {what} tal-antenati tiegħi
+{what} de la famille ¦ {what} e familjes ¦ {what} tal-familja
+{n} pris dans l’arbre (les 12 000 premiers). ¦ {n} të marra nga pema (12 000 të parat). ¦ {n} meħuda mis-siġra (l-ewwel 12 000).
+{n} pris dans l’arbre. ¦ {n} të marra nga pema. ¦ {n} meħuda mis-siġra.
+{n} : « 🔎 Retrouver les lieux sans position ». ¦ {n}: «🔎 Gjej vendet pa pozicion». ¦ {n}: “🔎 Sib il-postijiet mingħajr pożizzjoni”.
+Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé. ¦ Ngjarjet e tij (lindja, pagëzimi, martesat, vendbanimet, zanatet, vdekja…) bëhen ndalesat, sipas rendit të datave. Tabela zëvendësohet. ¦ L-avvenimenti tiegħu (twelid, magħmudija, żwiġijiet, residenzi, xogħlijiet, mewt…) isiru l-waqfiet, skont l-ordni tad-dati. It-tabella tinbidel.
+Garder aussi les étapes sans lieu (sur la frise seulement) ¦ Mbaj edhe ndalesat pa vend (vetëm në vijën kohore) ¦ Żomm ukoll il-waqfiet mingħajr post (fuq il-linja taż-żmien biss)
+Aucun événement avec un lieu pour cette personne. ¦ Asnjë ngjarje me vend për këtë person. ¦ L-ebda avveniment b’post għal din il-persuna.
+{n} prises dans la vie de {name}. ¦ {n} të marra nga jeta e {name}. ¦ {n} meħuda mill-ħajja ta’ {name}.
+{n} prise dans la vie de {name}. ¦ {n} e marrë nga jeta e {name}. ¦ {n} meħuda mill-ħajja ta’ {name}.
+Chaque enfant devient une case sous son parent ; sa largeur = le nombre de ses descendants (la personne comprise). Un clic sur une case ouvre la fiche. ¦ Çdo fëmijë bëhet një kuti nën prindin e tij; gjerësia e saj = numri i pasardhësve të tij (përfshirë personin). Një klikim mbi një kuti hap kartelën. ¦ Kull tifel isir kaxxa taħt il-ġenitur tiegħu; il-wisa’ tagħha = in-numru tad-dixxendenti tiegħu (inkluża l-persuna). Klikk fuq kaxxa jiftaħ l-iskeda.
+Ancêtre en haut ¦ Paraardhësi lart ¦ L-antenat fuq
+{n} personne prise dans l’app. ¦ {n} person i marrë nga aplikacioni. ¦ {n} persuna meħuda mill-app.
+🎀 Parrains, marraines et filleuls ¦ 🎀 Kumbarët, kumbarat dhe fëmijët e pagëzuar ¦ 🎀 Parrini u filjozi
+Les témoins des naissances et des baptêmes dont le rôle dit « parrain » ou « marraine ». Le lien de parenté (grand-père, oncle, sœur…) est trouvé dans l’arbre. ¦ Dëshmitarët e lindjeve dhe të pagëzimeve, roli i të cilëve thotë «kumbar» ose «kumbarë». Lidhja farefisnore (gjysh, xhaxha, motër…) gjendet në pemë. ¦ Ix-xhieda tat-twelid u tal-magħmudijiet li r-rwol tagħhom jgħid “parrinu” jew “parrina”. Ir-rabta tal-qrubija (nannu, ziju, oħt…) tinstab fis-siġra.
+Seulement autour de mes ancêtres (lignée Sosa) ¦ Vetëm rreth paraardhësve të mi (linja Sosa) ¦ Biss madwar l-antenati tiegħi (linja Sosa)
+Prendre les parrains et marraines ¦ Merr kumbarët dhe kumbarat ¦ Ħu l-parrini
+Aucun parrain ni marraine dans les témoins des naissances et baptêmes (rôle « parrain » ou « marraine »). ¦ Asnjë kumbar apo kumbarë te dëshmitarët e lindjeve dhe pagëzimeve (roli «kumbar» ose «kumbarë»). ¦ L-ebda parrinu jew parrina fost ix-xhieda tat-twelid u tal-magħmudijiet (rwol “parrinu” jew “parrina”).
+{n} pris dans l’app (les 3 000 premiers). ¦ {n} të marra nga aplikacioni (3 000 të parat). ¦ {n} meħuda mill-app (l-ewwel 3 000).
+{n} pris dans l’app. ¦ {n} të marra nga aplikacioni. ¦ {n} meħuda mill-app.
+🎗 Les causes de décès de ton arbre ¦ 🎗 Shkaqet e vdekjes në pemën tënde ¦ 🎗 Il-kawżi tal-mewt fis-siġra tiegħek
+La cause écrite sur le décès (ou la sépulture) de chaque personne. Les grandes familles (maladies infectieuses, cœur, accidents, guerre…) sont devinées d’après les mots ; corrige-les dans la colonne « Grande famille ». ¦ Shkaku i shkruar te vdekja (ose varrimi) i çdo personi. Grupet kryesore (sëmundje infektive, zemër, aksidente, luftë…) hamendësohen nga fjalët; korrigjoji te kolona «Grup kryesor». ¦ Il-kawża miktuba fuq il-mewt (jew id-dfin) ta’ kull persuna. Il-gruppi ewlenin (mard infettiv, qalb, inċidenti, gwerra…) jiġu mbassra mill-kliem; ikkoreġihom fil-kolonna “Grupp ewlieni”.
+Prendre les causes de décès ¦ Merr shkaqet e vdekjes ¦ Ħu l-kawżi tal-mewt
+Aucune cause de décès relevée : elle s’écrit dans le champ « Cause » d’un décès. ¦ Asnjë shkak vdekjeje i shënuar: ai shkruhet te fusha «Shkaku» i një vdekjeje. ¦ L-ebda kawża tal-mewt miktuba: tinkiteb fil-qasam “Kawża” ta’ mewt.
+Causes de décès dans la famille ¦ Shkaqet e vdekjes në familje ¦ Kawżi tal-mewt fil-familja
+{n} avec une cause, en {k} différentes. ¦ {n} me një shkak, në {k} të ndryshme. ¦ {n} b’kawża, f’{k} differenti.
+{n} avec une cause, en {k} différente. ¦ {n} me një shkak, në {k} të ndryshëm. ¦ {n} b’kawża, f’{k} differenti.
+Pas de fiche derrière ce point : les lignes ont été tapées à la main (« Depuis l’app » les relie aux fiches). ¦ Nuk ka kartelë pas kësaj pike: rreshtat janë shkruar me dorë («Nga aplikacioni» i lidh me kartelat). ¦ M’hemm l-ebda skeda wara din it-tikka: ir-ringieli nkitbu bl-idejn (“Mill-app” jgħaqqadhom mal-iskedi).
+Étapes de la vie ¦ Ndalesat e jetës ¦ Waqfiet tal-ħajja
+Étape précédente ¦ Ndalesa e mëparshme ¦ Waqfa ta’ qabel
+Vitesse de la lecture ¦ Shpejtësia e luajtjes ¦ Veloċità tal-preżentazzjoni
+Seulement à partir de l’année ¦ Vetëm duke filluar nga viti ¦ Biss mis-sena
+Lieu (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Vendi («Rennes», «Rennes 48.11, -1.68», «35»…) ¦ Post (“Rennes”, “Rennes 48.11, -1.68”, “35”…)
+Selon le siècle ¦ Sipas shekullit ¦ Skont is-seklu
+Mot pour un point (ex. : naissance) ¦ Fjalë për një pikë (p.sh.: lindje) ¦ Kelma għal tikka (eż.: twelid)
+Carte en points : {n} événements. ¦ Hartë me pika: {n} ngjarje. ¦ Mappa bit-tikek: {n} avvenimenti.
+Taille des alvéoles (% de la largeur) ¦ Madhësia e qelizave (% e gjerësisë) ¦ Daqs taċ-ċelluli (% tal-wisa’)
+Échelle douce (très grands écarts) ¦ Shkallë e butë (diferenca shumë të mëdha) ¦ Skala ħafifa (differenzi kbar ħafna)
+Écrire le nombre dans les alvéoles ¦ Shkruaj numrin në qeliza ¦ Ikteb in-numru fiċ-ċelluli
+Carte en hexagones : {n} événements. ¦ Hartë me gjashtëkëndësha: {n} ngjarje. ¦ Mappa bl-eżagoni: {n} avvenimenti.
+Les zones et leurs chiffres ¦ Zonat dhe shifrat e tyre ¦ Iż-żoni u ċ-ċifri tagħhom
+Zone (nom ou code : 35, Gers, FR, Vaud…) ¦ Zona (emër ose kod: 35, Gers, FR, Vaud…) ¦ Żona (isem jew kodiċi: 35, Gers, FR, Vaud…)
+Taille des formes (% de la carte) ¦ Madhësia e formave (% e hartës) ¦ Daqs tal-forom (% tal-mappa)
+Écart entre les formes ¦ Hapësira midis formave ¦ Spazju bejn il-forom
+Selon le chiffre (dégradé) ¦ Sipas shifrës (shkallëzim ngjyre) ¦ Skont iċ-ċifra (gradjent)
+La vraie carte en fond (pâle) ¦ Harta e vërtetë në sfond (e zbehtë) ¦ Il-mappa vera fl-isfond (pallida)
+Couleur de la carte en fond ¦ Ngjyra e hartës në sfond ¦ Kulur tal-mappa fl-isfond
+Un trait vers la vraie place quand une forme a bougé ¦ Një vijë drejt vendit të vërtetë kur një formë është lëvizur ¦ Linja lejn il-post veru meta forma tkun ċaqalqet
+Carte déformée : {n} zones. ¦ Hartë e deformuar: {n} zona. ¦ Mappa deformata: {n} żoni.
+Lieu (« Rennes », « Rennes 48.11, -1.68 ») ¦ Vendi («Rennes», «Rennes 48.11, -1.68») ¦ Post (“Rennes”, “Rennes 48.11, -1.68”)
+Étape montrée (-1 = toute la vie) ¦ Ndalesa e treguar (-1 = gjithë jeta) ¦ Waqfa murija (-1 = il-ħajja kollha)
+Suit l’étape en cours (zoom) ¦ Ndjek ndalesën aktuale (zmadhim) ¦ Isegwi l-waqfa attwali (żum)
+Zoom sur l’étape (degrés autour) ¦ Zmadhim në ndalesë (gradë përreth) ¦ Żum fuq il-waqfa (gradi madwar)
+Montrer les étapes à venir (pointillés) ¦ Trego ndalesat që vijnë (me pika) ¦ Uri l-waqfiet li ġejjin (bit-tikek)
+Carte qui raconte : {n} étapes. ¦ Hartë që tregon: {n} ndalesa. ¦ Mappa li tirrakkonta: {n} waqfiet.
+De haut en bas (générations en lignes) ¦ Nga lart poshtë (brezat në rreshta) ¦ Minn fuq għal isfel (ġenerazzjonijiet f’ringieli)
+De gauche à droite (générations en colonnes) ¦ Nga e majta në të djathtë (brezat në kolona) ¦ Mix-xellug għal-lemin (ġenerazzjonijiet f’kolonni)
+Une par branche (plus clair en descendant) ¦ Një për çdo degë (më e çelët duke zbritur) ¦ Waħda għal kull fergħa (eħfef kif tinżel)
+Selon le sexe ¦ Sipas gjinisë ¦ Skont is-sess
+Le nom et l’année ¦ Emri dhe viti ¦ L-isem u s-sena
+Le nom et le nombre ¦ Emri dhe numri ¦ L-isem u n-numru
+Les parrains, marraines et filleuls ¦ Kumbarët, kumbarat dhe fëmijët e pagëzuar ¦ Il-parrini u l-filjozi
+Parrain ou marraine (Prénom NOM) ¦ Kumbar ose kumbarë (Emri MBIEMRI) ¦ Parrinu jew parrina (Isem KUNJOM)
+Filleul ou filleule (Prénom NOM) ¦ Fëmija i pagëzuar (Emri MBIEMRI) ¦ Filjoz jew filjoża (Isem KUNJOM)
+Lien (grand-père, oncle…) ¦ Lidhja (gjysh, xhaxha…) ¦ Rabta (nannu, ziju…)
+Année de naissance (parrain) ¦ Viti i lindjes (kumbari) ¦ Sena tat-twelid (parrinu)
+Année de naissance (filleul) ¦ Viti i lindjes (fëmija i pagëzuar) ¦ Sena tat-twelid (filjoz)
+Prénoms au plus (lignes) ¦ Emra të parë më së shumti (rreshta) ¦ L-ogħla numru ta’ ismijiet (ringieli)
+Les causes de décès ¦ Shkaqet e vdekjes ¦ Il-kawżi tal-mewt
+Grande famille (vide = devinée) ¦ Grup kryesor (bosh = i hamendësuar) ¦ Grupp ewlieni (vojt = imbassar)
+Deviner les grandes familles d’après les mots ¦ Hamendëso grupet kryesore nga fjalët ¦ Ibbassar il-gruppi ewlenin mill-kliem
+Épaisseur des grandes familles ¦ Trashësia e grupeve kryesore ¦ Ħxuna tal-gruppi ewlenin
+Les noms et les nombres ¦ Emrat dhe numrat ¦ L-ismijiet u n-numri
+Les noms et les pourcentages ¦ Emrat dhe përqindjet ¦ L-ismijiet u l-persentaġġi
+Ranger les causes de la plus fréquente à la plus rare ¦ Rendit shkaqet nga më i shpeshti te më i rralli ¦ Ordna l-kawżi mill-aktar frekwenti għall-aktar rari
+migration|{n} flux ¦ {n} flukse ¦ {n} flussi
+le département ¦ departamenti ¦ id-dipartiment
+la province ¦ provinca ¦ il-provinċja
+le canton ¦ kantoni ¦ il-kanton
+un département ¦ një departament ¦ dipartiment
+des départements ¦ të departamenteve ¦ tad-dipartimenti
+une province ¦ një provincë ¦ provinċja
+des provinces ¦ të provincave ¦ tal-provinċji
+un canton ¦ një kanton ¦ kanton
+des cantons ¦ të kantoneve ¦ tal-kantuni
+Province ¦ Provinca ¦ Provinċja
+Canton ¦ Kanton ¦ Kanton
+Zoomer sur {what} ¦ Zmadho te {what} ¦ Żum fuq {what}
+{what} (nom ou numéro : {ex}) ¦ {what} (emër ose numër: {ex}) ¦ {what} (isem jew numru: {ex})
+Limites {what} par-dessus les communes ¦ Kufijtë {what} mbi komunat ¦ Il-fruntieri {what} fuq il-komuni
+{what} entière ¦ {what} e plotë ¦ {what} kollha
+Îles Britanniques ¦ Ishujt Britanikë ¦ Il-Gżejjer Brittaniċi
+Péninsule Ibérique ¦ Gadishulli Iberik ¦ Il-Peniżola Iberika
+Allemagne et Benelux ¦ Gjermania dhe Beneluksi ¦ Il-Ġermanja u l-Benelux
+Méditerranée ¦ Mesdheu ¦ Il-Mediterran
+Afrique du Nord ¦ Afrika e Veriut ¦ L-Afrika ta’ Fuq
+Afrique de l’Ouest ¦ Afrika Perëndimore ¦ L-Afrika tal-Punent
+Proche et Moyen-Orient ¦ Lindja e Afërt dhe e Mesme ¦ Il-Lvant Qarib u Nofsani
+Océan Indien ¦ Oqeani Indian ¦ L-Oċean Indjan
+Asie du Sud-Est ¦ Azia Juglindore ¦ ix-Xlokk tal-Asja
+Atlantique Nord (vers l’Amérique) ¦ Atlantiku i Veriut (drejt Amerikës) ¦ L-Atlantiku ta’ Fuq (lejn l-Amerika)
+Québec et Acadie ¦ Kebeku dhe Akadia ¦ Il-Quebec u l-Akadja
+Antilles et Caraïbes ¦ Antilet dhe Karaibet ¦ L-Antilli u l-Karibew
+Amérique centrale ¦ Amerika Qendrore ¦ L-Amerika Ċentrali
+Centre et Massif central ¦ Qendra dhe Masivi Qendror ¦ Iċ-Ċentru u l-Massif Central
+Sud-Est et Alpes ¦ Juglindja dhe Alpet ¦ Ix-Xlokk u l-Alpi
+Paris et petite couronne ¦ Parisi dhe periferia e afërt ¦ Pariġi u l-inħawi qrib
+Fond de carte illisible. ¦ Harta bazë nuk lexohet. ¦ Il-mappa ta’ sfond ma tinqarax.
+Ce navigateur ne sait pas ouvrir ce fond de carte. ¦ Ky shfletues nuk di ta hapë këtë hartë bazë. ¦ Dan il-browser ma jafx jiftaħ din il-mappa ta’ sfond.
+Fond de carte inconnu. ¦ Hartë bazë e panjohur. ¦ Mappa ta’ sfond mhux magħrufa.
+Fond de carte introuvable. ¦ Harta bazë nuk u gjet. ¦ Il-mappa ta’ sfond ma nstabitx.
+Fond de carte indisponible. ¦ Harta bazë nuk është e disponueshme. ¦ Il-mappa ta’ sfond mhix disponibbli.
+(homonymes : précise {what}) ¦ (emra të njëjtë: saktëso {what}) ¦ (ismijiet l-istess: speċifika {what})
+(plusieurs villes de ce nom : choisis-en une) ¦ (disa qytete me këtë emër: zgjidh një) ¦ (diversi bliet b’dan l-isem: agħżel waħda)
+{name} : pas de chiffre ¦ {name}: pa shifër ¦ {name}: l-ebda ċifra
+moins de {a} ¦ më pak se {a} ¦ inqas minn {a}
+{a} et plus ¦ {a} e më shumë ¦ {a} jew aktar
+de {a} à moins de {b} ¦ nga {a} deri në më pak se {b} ¦ minn {a} sa inqas minn {b}
+pas de chiffre ¦ pa shifër ¦ l-ebda ċifra
+Ajoute des zones et leurs chiffres (onglet Données ou « Depuis l’app »). ¦ Shto zona dhe shifrat e tyre (skeda Të dhënat ose «Nga aplikacioni»). ¦ Żid żoni u ċ-ċifri tagħhom (tab Data jew “Mill-app”).
+⚠ Lieux sans position : {list} — « Depuis l’app » → Lieux ¦ ⚠ Vende pa pozicion: {list} — «Nga aplikacioni» → Vende ¦ ⚠ Postijiet mingħajr pożizzjoni: {list} — “Mill-app” → Postijiet
+⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app » ¦ ⚠ Vende pa pozicion: {list} — shkruaj «Emri 48.11, -1.68» ose «Nga aplikacioni» ¦ ⚠ Postijiet mingħajr pożizzjoni: {list} — ikteb “Isem 48.11, -1.68” jew “Mill-app”
+Ajoute des lieux (ou des zones) et leurs chiffres. ¦ Shto vende (ose zona) dhe shifrat e tyre. ¦ Żid postijiet (jew żoni) u ċ-ċifri tagħhom.
+Carte à symboles proportionnels : {n} ronds, le plus gros vaut {max}. ¦ Hartë me simbole proporcionale: {n} rrathë, më i madhi vlen {max}. ¦ Mappa b’simboli proporzjonali: {n} ċrieki, l-akbar jiswa {max}.
+Niveau de détail ¦ Niveli i detajeve ¦ Livell ta’ dettall
+Partie de la carte (cadrage) ¦ Pjesa e hartës (kuadrimi) ¦ Parti mill-mappa (qafas)
+Lambert azimutale équivalente (Europe, pays) ¦ Lambert azimutale me sipërfaqe të barabartë (Evropë, vende) ¦ Lambert azimutali ta’ erja ugwali (Ewropa, pajjiżi)
+Outre-mer en encarts ¦ Territoret përtej detit në kuadrate të veçanta ¦ It-territorji barranin f’kaxxi apposta
+Encart zoomé sur l’Île-de-France ¦ Kuadrat i zmadhuar mbi Île-de-France ¦ Kaxxa mkabbra fuq l-Île-de-France
+Toute l’Île-de-France ¦ E gjithë Île-de-France ¦ L-Île-de-France kollha
+Pays voisins en gris ¦ Vendet fqinje në gri ¦ Pajjiżi ġirien bil-griż
+Mer en couleur ¦ Deti me ngjyrë ¦ Baħar bil-kulur
+Couleur de la mer ¦ Ngjyra e detit ¦ Kulur tal-baħar
+Hauteur du dessin (px, vide = selon la carte) ¦ Lartësia e vizatimit (px, bosh = sipas hartës) ¦ Għoli tat-tpinġija (px, vojt = skont il-mappa)
+Autant de zones dans chaque classe (quantiles) ¦ Aq zona në çdo klasë (kuantile) ¦ L-istess numru ta’ żoni f’kull klassi (kwantili)
+Classes de même largeur ¦ Klasa me të njëjtën gjerësi ¦ Klassijiet tal-istess wisa’
+Épaisseur des limites ¦ Trashësia e kufijve ¦ Ħxuna tal-fruntieri
+Épaisseur des limites des communes ¦ Trashësia e kufijve të komunave ¦ Ħxuna tal-fruntieri tal-komuni
+Bulle aussi sur les zones sans chiffre ¦ Flluskë edhe mbi zonat pa shifër ¦ Bużżieqa anke fuq iż-żoni mingħajr ċifra
+Bulle aussi sur les communes sans chiffre (plus lent) ¦ Flluskë edhe mbi komunat pa shifër (më ngadalë) ¦ Bużżieqa anke fuq il-komuni mingħajr ċifra (aktar bil-mod)
+Signaler les lignes pas trouvées sur la carte ¦ Sinjalizo rreshtat që nuk u gjetën në hartë ¦ Indika r-ringieli li ma nstabux fuq il-mappa
+Épaisseur du plus gros flux ¦ Trashësia e fluksit më të madh ¦ Ħxuna tal-akbar fluss
+Épaisseur du plus petit flux ¦ Trashësia e fluksit më të vogël ¦ Ħxuna tal-iżgħar fluss
+Pointes de flèche ¦ Majat e shigjetave ¦ Ponot tal-vleġeġ
+Selon le lieu de départ ¦ Sipas vendit të nisjes ¦ Skont il-post tat-tluq
+Selon le lieu d’arrivée ¦ Sipas vendit të mbërritjes ¦ Skont il-post tal-wasla
+Ronds sur les lieux ¦ Rrathë mbi vendet ¦ Ċrieki fuq il-postijiet
+Regrouper par zone (un rond au centre de chaque zone du fond) ¦ Grupo sipas zonës (një rreth në qendër të çdo zone të hartës bazë) ¦ Iġbor skont iż-żona (ċirku fiċ-ċentru ta’ kull żona tal-isfond)
+Rayon du plus gros rond (px, vide = auto) ¦ Rrezja e rrethit më të madh (px, bosh = automatik) ¦ Raġġ tal-akbar ċirku (px, vojt = awtomatiku)
+Chiffre à côté du nom ¦ Shifra pranë emrit ¦ Ċifra ħdejn l-isem
+un rond par commune ¦ një rreth për çdo komunë ¦ ċirku għal kull komun
+naissances ¦ lindje ¦ twelid
+naissances par département ¦ lindje sipas departamentit ¦ twelid skont id-dipartiment
+Les migrations de la famille ¦ Migrimet e familjes ¦ Il-migrazzjonijiet tal-familja
+du lieu de naissance au lieu de décès ¦ nga vendi i lindjes te vendi i vdekjes ¦ mill-post tat-twelid sal-post tal-mewt
+personnes ¦ persona ¦ persuni
+Âge moyen au décès (en années) ¦ Mosha mesatare në vdekje (në vite) ¦ Età medja fil-mewt (fi snin)
+Actes trouvés (événements avec une source ou un document) ¦ Akte të gjetura (ngjarje me një burim ose një dokument) ¦ Atti misjuba (avvenimenti b’sors jew dokument)
+D’une génération à l’autre (naissance du parent → de l’enfant) ¦ Nga një brez te tjetri (lindja e prindit → e fëmijës) ¦ Minn ġenerazzjoni għall-oħra (twelid tal-ġenitur → tat-tifel)
+Cadrage de la carte ¦ Kuadrimi i hartës ¦ Qafas tal-mappa
+Tracer un cadre sur la carte (ou Maj + glisser) ¦ Vizato një kuadrat mbi hartë (ose Shift + tërhiq) ¦ Pinġi qafas fuq il-mappa (jew Shift + iġbed)
+Revenir au cadrage de départ ¦ Kthehu te kuadrimi fillestar ¦ Erġa’ lura għall-qafas tal-bidu
+Molette : zoomer · glisser : déplacer · Maj + glisser : tracer un cadre ¦ Rrotëza: zmadho · tërhiq: zhvendos · Shift + tërhiq: vizato një kuadrat ¦ Rota: żum · iġbed: ċaqlaq · Shift + iġbed: pinġi qafas
+(famille) ¦ (familja) ¦ (familja)
+pas encore utilisée ¦ ende e papërdorur ¦ għadha ma ntużatx
+Les migrations de ton arbre ¦ Migrimet në pemën tënde ¦ Il-migrazzjonijiet fis-siġra tiegħek
+Les lieux de ton arbre ¦ Vendet e pemës sate ¦ Il-postijiet tas-siġra tiegħek
+Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé. ¦ Çdo vend i bazës sate bëhet një rreth, më i madh kur më shumë persona kanë lindur (u martuan, vdiqën) aty. Vendet me koordinata vendosen saktësisht; të tjerat kërkohen sipas emrit në hartë. Tabela zëvendësohet. ¦ Kull post fid-database tiegħek isir ċirku, akbar meta aktar persuni twieldu (iżżewġu, mietu) hemm. Il-postijiet b’koordinati jitqiegħdu eżatt; l-oħrajn jitfittxu b’isimhom fuq il-mappa. It-tabella tinbidel.
+Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé. ¦ Çdo person lidh dy vende të bazës sate (ato që kanë koordinata, ose një zonë të njohur të hartës). Tabela zëvendësohet. ¦ Kull persuna tgħaqqad żewġ postijiet fid-database tiegħek (dawk li għandhom koordinati, jew żona magħrufa tal-mappa). It-tabella tinbidel.
+Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé. ¦ Çdo vend i bazës sate lidhet me zonën e tij (sipas koordinatave, përndryshe departamentit, rajonit ose vendit; për komunat: kodi INSEE, pastaj emri dhe departamenti), pastaj zonat numërohen. Tabela zëvendësohet. ¦ Kull post fid-database tiegħek jintrabat maż-żona tiegħu (skont il-koordinati, inkella d-dipartiment, ir-reġjun jew il-pajjiż; għall-komuni: il-kodiċi INSEE, imbagħad l-isem u d-dipartiment), imbagħad iż-żoni jingħaddu. It-tabella tinbidel.
+🔄 Tenir à jour (relire l’arbre à chaque affichage) ¦ 🔄 Mbaje të përditësuar (rilexo pemën sa herë shfaqet) ¦ 🔄 Żommu aġġornat (erġa’ aqra s-siġra kull darba li tintwera)
+＋ Ajouter un flux ¦ ＋ Shto një fluks ¦ ＋ Żid fluss
+＋ Ajouter ce flux ¦ ＋ Shto këtë fluks ¦ ＋ Żid dan il-fluss
+Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »). ¦ Një vend pa pozicion (⚠): zgjidhe në bazën tënde ose te komunat dhe qytetet e botës, ose shkruaj koordinatat e tij në tabelë («Rennes 48.11, -1.68»). ¦ Post mingħajr pożizzjoni (⚠): agħżlu mid-database tiegħek jew mill-komuni u l-ibliet tad-dinja, jew ikteb il-koordinati tiegħu fit-tabella (“Rennes 48.11, -1.68”).
+⏳ Lecture de l’arbre… ¦ ⏳ Po lexohet pema… ¦ ⏳ Qed tinqara s-siġra…
+(mes ancêtres) ¦ (paraardhësit e mi) ¦ (l-antenati tiegħi)
+{n} : cherchés par leur nom sur la carte. ¦ {n}: të kërkuara sipas emrit në hartë. ¦ {n}: imfittxija b’isimhom fuq il-mappa.
+{n} : cherché par leur nom sur la carte. ¦ {n}: i kërkuar sipas emrit në hartë. ¦ {n}: imfittex b’ismu fuq il-mappa.
+=lieu sans coordonnées ¦ vend pa koordinata|vende pa koordinata ¦ post mingħajr koordinati|postijiet mingħajr koordinati|postijiet mingħajr koordinati|post mingħajr koordinati|post mingħajr koordinati
+=lieu rattaché ¦ vend i lidhur|vende të lidhura ¦ post marbut|postijiet marbuta|postijiet marbuta|post marbut|post marbut
+Aucun lieu dans ton arbre pour ce choix. ¦ Asnjë vend në pemën tënde për këtë zgjedhje. ¦ L-ebda post fis-siġra tiegħek għal din l-għażla.
+Aucun déplacement trouvé (il faut deux lieux différents pour une même personne). ¦ Asnjë zhvendosje nuk u gjet (duhen dy vende të ndryshme për të njëjtin person). ¦ L-ebda ċaqliq ma nstab (iridu żewġ postijiet differenti għall-istess persuna).
+{n} : voir « Les lieux du tableau ». ¦ {n}: shih «Vendet e tabelës». ¦ {n}: ara “Il-postijiet tat-tabella”.
+{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre). ¦ {n} në {z} (mosha mesatare mbi {p}; harta tregon vite, jo një numër). ¦ {n} f’{z} (età medja fuq {p}; il-mappa turi snin, mhux numru).
+{n} à {z}. ¦ {n} në {z}. ¦ {n} f’{z}.
+{n} hors de cette carte ou sans position ({list}). ¦ {n} jashtë kësaj harte ose pa pozicion ({list}). ¦ {n} barra din il-mappa jew mingħajr pożizzjoni ({list}).
+Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages. ¦ Asnjë vend i pemës sate nuk bie në këtë hartë: ndrysho hartën ose nivelin te Cilësimet. ¦ L-ebda post tas-siġra tiegħek ma jaqa’ fuq din il-mappa: ibdel il-mappa jew il-livell fl-Issettjar.
+Où est « {name} » ? ¦ Ku është «{name}»? ¦ Fejn hu “{name}”?
+Le tableau n’a pas encore de lieux. ¦ Tabela nuk ka ende vende. ¦ It-tabella għad m’għandhiex postijiet.
+Ce lieu n’a pas de coordonnées : choisis-en un autre, ou tape ses coordonnées dans le tableau. ¦ Ky vend nuk ka koordinata: zgjidh një tjetër, ose shkruaj koordinatat e tij në tabelë. ¦ Dan il-post m’għandux koordinati: agħżel ieħor, jew ikteb il-koordinati tiegħu fit-tabella.
+Choisis le lieu de départ et le lieu d’arrivée. ¦ Zgjidh vendin e nisjes dhe vendin e mbërritjes. ¦ Agħżel il-post tat-tluq u l-post tal-wasla.
+Flux ajouté. ¦ Fluksi u shtua. ¦ Il-fluss ġie miżjud.
+niveau|ville ¦ qytet ¦ belt
+niveau|département ¦ departament ¦ dipartiment
+niveau|province ¦ provincë ¦ provinċja
+niveau|canton ¦ kanton ¦ kanton
+niveau|région ¦ rajon ¦ reġjun
+niveau|grande région ¦ rajon i madh ¦ reġjun kbir
+niveau|pays ¦ vend ¦ pajjiż
+niveau|continent ¦ kontinent ¦ kontinent
+niveau|zone ¦ zonë ¦ żona
+sa commune ¦ komuna e tij ¦ il-komun tiegħu
+leur commune ¦ komuna e tyre ¦ il-komun tagħhom
+une ville ¦ një qytet ¦ belt
+son département ¦ departamenti i tij ¦ id-dipartiment tiegħu
+leur département ¦ departamenti i tyre ¦ id-dipartiment tagħhom
+sa province ¦ provinca e tij ¦ il-provinċja tiegħu
+leur province ¦ provinca e tyre ¦ il-provinċja tagħhom
+son canton ¦ kantoni i tij ¦ il-kanton tiegħu
+leur canton ¦ kantoni i tyre ¦ il-kanton tagħhom
+région ¦ rajon ¦ reġjun
+sa région ¦ rajoni i tij ¦ ir-reġjun tiegħu
+leur région ¦ rajoni i tyre ¦ ir-reġjun tagħhom
+une région ¦ një rajon ¦ reġjun
+grande région ¦ rajon i madh ¦ reġjun kbir
+sa grande région ¦ rajoni i tij i madh ¦ ir-reġjun kbir tiegħu
+leur grande région ¦ rajoni i tyre i madh ¦ ir-reġjun kbir tagħhom
+une grande région ¦ një rajon i madh ¦ reġjun kbir
+son pays ¦ vendi i tij ¦ il-pajjiż tiegħu
+leur pays ¦ vendi i tyre ¦ il-pajjiż tagħhom
+un pays ¦ një vend ¦ pajjiż
+son continent ¦ kontinenti i tij ¦ il-kontinent tiegħu
+leur continent ¦ kontinenti i tyre ¦ il-kontinent tagħhom
+un continent ¦ një kontinent ¦ kontinent
+sa zone ¦ zona e tij ¦ iż-żona tiegħu
+leur zone ¦ zona e tyre ¦ iż-żona tagħhom
+une zone ¦ një zonë ¦ żona
+aussi « {name} » ¦ edhe «{name}» ¦ ukoll “{name}”
+autre niveau : « {name} » ¦ nivel tjetër: «{name}» ¦ livell ieħor: “{name}”
+ancienne commune ¦ ish-komunë ¦ komun ta’ qabel
+Plusieurs villes s’appellent {name} ({n}) : choisis-en une dans la liste. ¦ Disa qytete quhen {name} ({n}): zgjidh një nga lista. ¦ Diversi bliet jisimhom {name} ({n}): agħżel waħda mil-lista.
+Plusieurs villes s’appellent {name} : choisis-en une dans la liste. ¦ Disa qytete quhen {name}: zgjidh një nga lista. ¦ Diversi bliet jisimhom {name}: agħżel waħda mil-lista.
+{name} est {a}, mais la carte montre le niveau « {level} » : choisis {b} dans la liste, ou change le niveau de détail (Réglages). ¦ {name} është {a}, por harta tregon nivelin «{level}»: zgjidh {b} në listë, ose ndrysho nivelin e detajeve (Cilësimet). ¦ {name} hu {a}, iżda l-mappa turi l-livell “{level}”: agħżel {b} mil-lista, jew ibdel il-livell ta’ dettall (Issettjar).
+Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste. ¦ Nuk u gjet në këtë hartë: kontrollo drejtshkrimin, ose zgjidh nga lista. ¦ Ma nstabx fuq din il-mappa: iċċekkja l-ortografija, jew agħżel mil-lista.
+{n} villes comptent dans {where} sur cette carte (niveau « {level} »). ¦ {n} qytete llogariten në {where} në këtë hartë (niveli «{level}»). ¦ {n} bliet jgħoddu f’{where} fuq din il-mappa (livell “{level}”).
+1 ville compte dans {where} sur cette carte (niveau « {level} »). ¦ 1 qytet llogaritet në {where} në këtë hartë (niveli «{level}»). ¦ Belt 1 tgħodd f’{where} fuq din il-mappa (livell “{level}”).
+Rien de ce nom sur cette carte. ¦ Asgjë me këtë emër në këtë hartë. ¦ Xejn b’dan l-isem fuq din il-mappa.
+chargement des communes… ¦ po ngarkohen komunat… ¦ qed jitgħabbew il-komuni…
+↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer ¦ ↑ ↓ për të zgjedhur · Enter për të konfirmuar · Esc për të mbyllur ¦ ↑ ↓ biex tagħżel · Enter biex tikkonferma · Esc biex tagħlaq
+Une ville compte dans {where} sur cette carte. ¦ Një qytet llogaritet në {where} në këtë hartë. ¦ Belt waħda tgħodd f’{where} fuq din il-mappa.
+Niveau « Communes » : chaque ville a sa couleur. ¦ Niveli «Komunat»: çdo qytet ka ngjyrën e vet. ¦ Livell “Komuni”: kull belt għandha l-kulur tagħha.
+Zone (nom ou code : 35, FRH03, BE, Vaud…) ¦ Zona (emër ose kod: 35, FRH03, BE, Vaud…) ¦ Żona (isem jew kodiċi: 35, FRH03, BE, Vaud…)
+Carte colorée : {n} zones ({map}, {level}). ¦ Hartë me ngjyra: {n} zona ({map}, {level}). ¦ Mappa bil-kuluri: {n} żoni ({map}, {level}).
+Carte des migrations : {n} flux. ¦ Harta e migrimeve: {n} flukse. ¦ Mappa tal-migrazzjonijiet: {n} flussi.
+Les lieux (ou zones) et leurs chiffres ¦ Vendet (ose zonat) dhe shifrat e tyre ¦ Il-postijiet (jew iż-żoni) u ċ-ċifri tagħhom
+Lieu ou zone (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Vend ose zonë («Rennes», «Rennes 48.11, -1.68», «35»…) ¦ Post jew żona (“Rennes”, “Rennes 48.11, -1.68”, “35”…)
+Carte à symboles proportionnels : {n} lieux. ¦ Hartë me simbole proporcionale: {n} vende. ¦ Mappa b’simboli proporzjonali: {n} postijiet.
+Rien à dessiner pour l’instant. ¦ Asgjë për të vizatuar tani për tani. ¦ Għalissa m’hemm xejn x’tpinġi.
+Graphique introuvable : supprimé, ou fait dans un autre navigateur. ¦ Grafiku nuk u gjet: është fshirë, ose është bërë në një shfletues tjetër. ¦ Il-grafika ma nstabitx: tħassret, jew saret f’browser ieħor.
+L’ouvrir en grand dans Graphiques ¦ Hape të madh te Grafikët ¦ Iftaħha kbira fil-Grafiċi
+Ajuster à la page ¦ Përshtate me faqen ¦ Daħħal fil-paġna
+par l’impression : « Enregistrer en PDF » ¦ përmes printimit: «Ruaj si PDF» ¦ permezz tal-ipprintjar: “Issejvja bħala PDF”
+ouvrir les chiffres dans le tableur ¦ hap shifrat në fletën llogaritëse ¦ iftaħ iċ-ċifri fil-folja elettronika
+du diagramme, à réimporter ¦ i diagramit, për t’u importuar përsëri ¦ tad-dijagramma, biex terġa’ timportah
+à coller ailleurs (⌘V) ¦ për ta ngjitur diku tjetër (⌘V) ¦ biex teħel x’imkien ieħor (⌘V)
+Revenir à la couleur automatique ¦ Kthehu te ngjyra automatike ¦ Erġa’ lura għall-kulur awtomatiku
+🧾 Tout voir dans le tableur ¦ 🧾 Shiko gjithçka në fletën llogaritëse ¦ 🧾 Ara kollox fil-folja elettronika
+{a} lignes sur {b} (toutes comptent dans le dessin) ¦ {a} rreshta nga {b} (të gjithë llogariten në vizatim) ¦ {a} ringieli minn {b} (kollha jgħoddu fit-tpinġija)
+Couleur de la série ¦ Ngjyra e serisë ¦ Kulur tas-serje
+Supprimer cette série ¦ Fshi këtë seri ¦ Ħassar din is-serje
+Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici ¦ Kopjo qeliza në Excel, LibreOffice, Numbers… dhe ngjiti këtu ¦ Ikkopja ċelluli f’Excel, LibreOffice, Numbers… u eħilhom hawn
+⤒ Importer un CSV ¦ ⤒ Importo një CSV ¦ ⤒ Importa CSV
+Un classeur déjà fait dans le Tableur : une feuille, une plage, copiée une fois ou liée ¦ Një libër pune i bërë tashmë në Fletën llogaritëse: një fletë, një varg, i kopjuar një herë ose i lidhur ¦ Workbook diġà magħmul fil-Folja elettronika: folja, firxa, ikkupjata darba jew marbuta
+Relevés paroissiaux ¦ Zbërthime famullie ¦ Indiċi tar-reġistri parrokkjali
+Visite aux AD ¦ Vizitë në arkiv ¦ Żjara fl-arkivju
+Déplacement ¦ Udhëtim ¦ Vjaġġ
+Rédaction ¦ Shkrim ¦ Kitba
+Planning de recherche ¦ Plani i kërkimeve ¦ Pjan ta’ riċerka
+Style, annotations, lignes de repère, petits multiples, lecture dans le temps ¦ Stili, shënime, vija referimi, shumëfisha të vegjël, luajtje në kohë ¦ Stil, annotazzjonijiet, linji ta’ referenza, multipli żgħar, preżentazzjoni maż-żmien
+Les figer (les modifier à la main) ¦ Ngrii ato (ndryshoji me dorë) ¦ Iffriżahom (editjahom bl-idejn)
+Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Fleta llogaritëse e madhe, e përgatitur me kolonat e këtij diagrami: formula, renditje, ngjit nga Excel… pastaj «✓ Ruaj dhe kthehu» ¦ Il-folja elettronika kbira, ippreparata bil-kolonni ta’ din id-dijagramma: formuli, issortjar, waħħal minn Excel… imbagħad “✓ Issejvja u erġa’ lura”
+dans le tableur (formules, tri, Excel…) ¦ në fletën llogaritëse (formula, renditje, Excel…) ¦ fil-folja elettronika (formuli, issortjar, Excel…)
+🔄 Chiffres tenus à jour depuis « {src} » : ils sont relus à chaque affichage. ¦ 🔄 Shifra të përditësuara nga «{src}»: rilexohen sa herë shfaqen. ¦ 🔄 Ċifri miżmuma aġġornati minn “{src}”: jerġgħu jinqraw kull darba li jintwerew.
+l’app ¦ aplikacioni ¦ l-app
+Pas de réglage particulier. ¦ Asnjë cilësim i veçantë. ¦ L-ebda issettjar partikolari.
+🌳 Des données de mon arbre ¦ 🌳 Të dhëna nga pema ime ¦ 🌳 Data mis-siġra tiegħi
+Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main). ¦ Zëvendëson tabelën me shifra të llogaritura në bazën tënde (pastaj mund t’i rregullosh me dorë). ¦ Tissostitwixxi t-tabella b’ċifri kkalkulati fid-database tiegħek (imbagħad tista’ tirranġahom bl-idejn).
+📊 Des chiffres de l’app ¦ 📊 Shifra nga aplikacioni ¦ 📊 Ċifri mill-app
+Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Réglages → Éditeur de graphiques). ¦ Zëvendëson tabelën me shifra të llogaritura në bazën tënde: «🧮 Numëro në bazën time» (çfarë numërohet, grupi i personave, periudha, grupimi… gjithçka rregullohet më poshtë), një shembull, një statistikë e aplikacionit ose një nga «Grafikët e mi» (të bërë te Cilësimet → Redaktori i grafikëve). ¦ Tissostitwixxi t-tabella b’ċifri kkalkulati fid-database tiegħek: “🧮 Għodd fid-database tiegħi” (x’jingħadd, il-grupp ta’ persuni, il-perjodu, il-grupp… kollox jiġi ssettjat hawn taħt), eżempju, statistika tal-app jew waħda minn “Il-grafiċi tiegħi” (magħmula fl-Issettjar → Editur tal-grafiċi).
+👥 Des personnes de la base ¦ 👥 Persona nga baza ¦ 👥 Persuni mid-database
+Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté). ¦ Çdo person bëhet një rresht, nga lindja te vdekja (roli: Burrë ose Grua, ndryshoje si të duash). ¦ Kull persuna ssir ringiela, mit-twelid sal-mewt (rwol: Raġel jew Mara, ibdlu kif trid).
+Leurs naissances, mariages et décès deviennent des dates de la frise. ¦ Lindjet, martesat dhe vdekjet e tyre bëhen data të vijës kohore. ¦ It-twelid, iż-żwiġijiet u l-imwiet tagħhom isiru dati fuq il-linja taż-żmien.
+Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données). ¦ Ky lloj diagrami plotësohet me dorë, duke ngjitur një tabelë ose me një CSV (skeda Të dhënat). ¦ Dan it-tip ta’ dijagramma jimtela bl-idejn, billi twaħħal tabella jew b’CSV (tab Data).
+Données prises dans ton arbre. ¦ Të dhëna të marra nga pema jote. ¦ Data meħuda mis-siġra tiegħek.
+Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base » ¦ Këto shifra janë numëruar tashmë: mund t’i renditësh, të mbash të parat, të tregosh «E panjohur» ose t’i kthesh në %. Për të zgjedhur çfarë numërohet, grupin e personave ose periudhën, merr «🧮 Numëro në bazën time» ¦ Dawn iċ-ċifri diġà ngħaddu: tista’ tissortjahom, iżżomm l-ewwel uħud, turi “Mhux magħruf” jew tgħaddihom f’%. Biex tagħżel x’jingħadd, il-grupp ta’ persuni jew il-perjodu, ħu “🧮 Għodd fid-database tiegħi”
+{name} — pas pour ce diagramme ¦ {name} — jo për këtë diagram ¦ {name} — mhux għal din id-dijagramma
+Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ». ¦ Asnjë shifër për këto cilësime: provo një grup tjetër, një periudhë tjetër ose trego «E panjohur». ¦ L-ebda ċifra għal dan l-issettjar: ipprova grupp ieħor, perjodu ieħor jew uri “Mhux magħruf”.
+{n} valeurs prises dans ta base ({k} comptés). ¦ {n} vlera të marra nga baza jote ({k} të numëruara). ¦ {n} valuri meħuda mid-database tiegħek ({k} magħduda).
+{n} valeur prise dans ta base ({k} comptés). ¦ {n} vlerë e marrë nga baza jote ({k} të numëruara). ¦ {n} valur meħud mid-database tiegħek ({k} magħduda).
+{n} valeur prise dans ta base. ¦ {n} vlerë e marrë nga baza jote. ¦ {n} valur meħud mid-database tiegħek.
+{n} valeurs prises dans l’app. ¦ {n} vlera të marra nga aplikacioni. ¦ {n} valuri meħuda mill-app.
+{n} valeur prise dans l’app. ¦ {n} vlerë e marrë nga aplikacioni. ¦ {n} valur meħud mill-app.
+{name} : pas de date de naissance dans sa fiche. ¦ {name}: nuk ka datë lindjeje në kartelën e tij. ¦ {name}: l-ebda data tat-twelid fl-iskeda.
+{name} ajouté. ¦ {name} u shtua. ¦ {name} ġie miżjud.
+{name} ajoutée. ¦ {name} u shtua. ¦ {name} ġiet miżjuda.
+{name} ajouté(e). ¦ {name} u shtua. ¦ {name} ġie/ġiet miżjud/a.
+Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Réglages → Éditeur de widgets), un bloc de fiche, la mise en page. ¦ Diagrami shfaqet atëherë në kartelën e personit, në hetim ose në projektin e Punishtes. Për ta vendosur diku tjetër: një widget (Cilësimet → Redaktori i widget-eve), një bllok kartele, faqosja. ¦ Id-dijagramma mbagħad tidher fuq l-iskeda tal-persuna, fl-investigazzjoni jew fil-proġett tal-Workshop. Biex tpoġġiha x’imkien ieħor: widget (Issettjar → Editur tal-widgets), blokk ta’ skeda, it-tqassim.
+ou une partie d’enquête, un projet de l’Atelier… ¦ ose një pjesë hetimi, një projekt i Punishtes… ¦ jew parti minn investigazzjoni, proġett tal-Workshop…
+Supprimer la série « {name} » et ses chiffres ? ¦ Të fshihet seria «{name}» dhe shifrat e saj? ¦ Tħassar is-serje “{name}” u ċ-ċifri tagħha?
+Supprimer la série ¦ Fshi serinë ¦ Ħassar is-serje
+Vider le tableau ¦ Zbraz tabelën ¦ Battal it-tabella
+une feuille, une plage : copiée une fois ou liée (tenue à jour) ¦ një fletë, një varg: i kopjuar një herë ose i lidhur (i përditësuar) ¦ folja, firxa: ikkupjata darba jew marbuta (miżmuma aġġornata)
+Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé. ¦ Përzgjidh qeliza në Excel, LibreOffice, Numbers ose Google Sheets, kopjoji (⌘C) dhe ngjiti këtu. Nëse rreshti i parë ka tituj, ata bëhen emrat e serive. Tabela aktuale zëvendësohet. ¦ Agħżel ċelluli f’Excel, LibreOffice, Numbers jew Google Sheets, ikkopjahom (⌘C) u eħilhom hawn. Jekk l-ewwel ringiela fiha titoli, isiru l-ismijiet tas-serje. It-tabella attwali tinbidel.
+Données liées au classeur : elles suivent le Tableur. ¦ Të dhëna të lidhura me librin e punës: ndjekin Fletën llogaritëse. ¦ Data marbuta mal-workbook: isegwu l-Folja elettronika.
+{n} lignes copiées du classeur. ¦ {n} rreshta të kopjuar nga libri i punës. ¦ {n} ringieli kkupjati mill-workbook.
+Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ? ¦ Ky lloj nuk lexon të njëjtën tabelë: shembulli zëvendëson të dhënat e tua. Të vazhdohet? ¦ Dan it-tip ma jaqrax l-istess tabella: l-eżempju jissostitwixxi d-data tiegħek. Tkompli?
+D’un graphique (à moi ou de l’app, tenu à jour) ¦ Nga një grafik (imi ose i aplikacionit, i përditësuar) ¦ Minn grafika (tiegħi jew tal-app, miżmuma aġġornata)
+Un de mes graphiques (Éditeur de graphiques, tenu à jour) ¦ Një nga grafikët e mi (Redaktori i grafikëve, i përditësuar) ¦ Waħda mill-grafiċi tiegħi (Editur tal-grafiċi, miżmuma aġġornata)
+Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page. ¦ Gjysmërreth i një kuvendi, patkua, vijë kohore e anëtarëve të një grupi muzikor si në Wikipedia, vijë jetësh, grafik me pite, flukse migrimi, organigramë, re emrash… me shifrat e tua ose ato të aplikacionit. Pastaj vendosen kudo: paneli, fletë shënimesh, kartela e një personi, hetime, Punishtja, faqosja. ¦ Emiċiklu ta’ assemblea, nagħla taż-żiemel, linja taż-żmien tal-membri ta’ grupp mużikali bħal Wikipedia, linja ta’ ħajjiet, grafika tat-torta, flussi ta’ migrazzjoni, organigramma, sħaba ta’ ismijiet… biċ-ċifri tiegħek jew tal-app. Imbagħad jitqiegħdu kullimkien: pannell, noti, l-iskeda ta’ persuna, investigazzjonijiet, Workshop, tqassim.
+MES DIAGRAMMES ¦ DIAGRAMET E MIA ¦ ID-DIJAGRAMMI TIEGĦI
+📈 Ce diagramme montre ton graphique « {name} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé. ¦ 📈 Ky diagram tregon grafikun tënd «{name}» (Redaktori i grafikëve): vizatimi dhe shifrat e tij e ndjekin, kudo që të vendoset. ¦ 📈 Din id-dijagramma turi l-grafika tiegħek “{name}” (Editur tal-grafiċi): it-tpinġija u ċ-ċifri tagħha jsegwuha, kull fejn titqiegħed.
+🔗 Données : {src} · tenu à jour. ¦ 🔗 Të dhëna: {src} · i përditësuar. ¦ 🔗 Data: {src} · miżmuma aġġornata.
+🔄 Chiffres tenus à jour depuis « {src} ». ¦ 🔄 Shifra të përditësuara nga «{src}». ¦ 🔄 Ċifri miżmuma aġġornati minn “{src}”.
+✎ Modifier le graphique ¦ ✎ Ndrysho grafikun ¦ ✎ Editja l-grafika
+Une copie figée, à retoucher comme un diagramme ¦ Një kopje e ngrirë, për ta rregulluar si diagram ¦ Kopja ffriżata, biex tirranġaha bħal dijagramma
+Une copie à modifier ¦ Një kopje për ta ndryshuar ¦ Kopja biex teditjaha
+Le poser sur le tableau de bord, comme un widget ¦ Vendose në panel, si widget ¦ Poġġiha fuq il-pannell, bħal widget
+Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>. ¦ Për ta vendosur diku tjetër: <b>Cilësimet → Redaktori i widget-eve</b> (pjesa «Diagram») për panelin ose një skedë, një bllok «📊 Diagram» në një <b>Fletë shënimesh</b>, «Lidh» (skeda e redaktorit) për kartelën e një personi, një hetim ose një projekt të Punishtes, dhe «Fut → Diagram» te <b>faqosja</b>. Të gjithë grafikët dhe diagramet e tu: <b>Listat → Grafikët dhe diagramet</b>. ¦ Biex tpoġġiha x’imkien ieħor: <b>Issettjar → Editur tal-widgets</b> (il-parti “Dijagramma”) għall-pannell jew tab, blokk “📊 Dijagramma” f’<b>Nota</b>, “Għaqqad” (tab tal-editur) għall-iskeda ta’ persuna, investigazzjoni jew proġett tal-Workshop, u “Daħħal → Dijagramma” fit-<b>tqassim</b>. Il-grafiċi u d-dijagrammi kollha tiegħek: <b>Listi → Grafiċi u dijagrammi</b>.
+Rien à copier : le graphique est introuvable. ¦ Asgjë për të kopjuar: grafiku nuk gjendet. ¦ Xejn x’tikkopja: il-grafika ma tinstabx.
+Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé. ¦ Të fshihet diagrami «{name}»? Ai zhduket edhe nga widget-et, fletët e shënimeve dhe hetimet ku është vendosur. ¦ Tħassar id-dijagramma “{name}”? Tisparixxi wkoll mill-widgets, in-noti u l-investigazzjonijiet fejn tqiegħdet.
+Supprimer le diagramme ¦ Fshi diagramin ¦ Ħassar id-dijagramma
+Passe par les Réglages → Éditeur de widgets. ¦ Kalo nga Cilësimet → Redaktori i widget-eve. ¦ Għaddi mill-Issettjar → Editur tal-widgets.
+Ajouter un diagramme ¦ Shto një diagram ¦ Żid dijagramma
+Ajoute des groupes et leur nombre de sièges. ¦ Shto grupe dhe numrin e tyre të vendeve. ¦ Żid gruppi u n-numru ta’ siġġijiet tagħhom.
+{n} sièges ¦ {n} vende ¦ {n} siġġijiet
+Tribune · {n} sièges ¦ Tribuna · {n} vende ¦ Tribuna · {n} siġġijiet
+Majorité absolue : {n} sièges ¦ Shumica absolute: {n} vende ¦ Maġġoranza assoluta: {n} siġġijiet
+Ajoute des lignes : un nom, des rôles, une date de début et de fin. ¦ Shto rreshta: një emër, role, një datë fillimi dhe mbarimi. ¦ Żid ringieli: isem, rwoli, data tal-bidu u tat-tmiem.
+Ajoute des dates et ce qui s’est passé. ¦ Shto data dhe çfarë ndodhi. ¦ Żid dati u x’ġara.
+Ajoute des lignes de chiffres. ¦ Shto rreshta me shifra. ¦ Żid ringieli ta’ ċifri.
+Ajoute des tranches (âges…) et deux séries (hommes, femmes…). ¦ Shto grupmosha (mosha…) dhe dy seri (burra, gra…). ¦ Żid faxex (etajiet…) u żewġ serji (irġiel, nisa…).
+Ajoute des lignes et des colonnes de chiffres. ¦ Shto rreshta dhe kolona me shifra. ¦ Żid ringieli u kolonni ta’ ċifri.
+Ajoute des points : X, Y (et une taille pour des bulles). ¦ Shto pika: X, Y (dhe një madhësi për flluska). ¦ Żid punti: X, Y (u daqs għall-bżieżaq).
+Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ». ¦ Shto kuti: një emër dhe, për secilën, kutinë e saj «sipër». ¦ Żid kaxxi: isem u, għal kull waħda, il-kaxxa tagħha “ta’ fuq”.
+Ajoute des mots (noms, prénoms, lieux…) et leur poids. ¦ Shto fjalë (mbiemra, emra, vende…) dhe peshën e tyre. ¦ Żid kliem (kunjomijiet, ismijiet, postijiet…) u l-piż tagħhom.
+Texte au centre (sinon le total) ¦ Tekst në qendër (përndryshe totali) ¦ Test fiċ-ċentru (inkella t-total)
+Total au centre ¦ Totali në qendër ¦ Total fiċ-ċentru
+Les groupes (de gauche à droite) ¦ Grupet (nga e majta në të djathtë) ¦ Il-gruppi (mix-xellug għal-lemin)
+Côté (Westminster) ¦ Anë (Westminster) ¦ Naħa (Westminster)
+Salle (rangées face à la tribune) ¦ Sallë (rreshta përballë tribunës) ¦ Sala (ringieli quddiem it-tribuna)
+Angle de l’arc ¦ Këndi i harkut ¦ Angolu tal-arkata
+Nombre de rangées (0 = automatique) ¦ Numri i rreshtave (0 = automatik) ¦ Numru ta’ ringieli (0 = awtomatiku)
+Texte au centre (sinon le nombre de sièges) ¦ Tekst në qendër (përndryshe numri i vendeve) ¦ Test fiċ-ċentru (inkella n-numru ta’ siġġijiet)
+Petit texte sous le nombre ¦ Tekst i vogël nën numër ¦ Test żgħir taħt in-numru
+En texte et ligne au milieu ¦ Si tekst dhe vijë në mes ¦ Bħala test u linja fin-nofs
+Écologistes ¦ Ekologjistët ¦ Ekoloġisti
+Libéraux ¦ Liberalët ¦ Liberali
+Les rôles et leur couleur ¦ Rolet dhe ngjyra e tyre ¦ Ir-rwoli u l-kulur tagħhom
+Début de la frise (vide = auto) ¦ Fillimi i vijës kohore (bosh = automatik) ¦ Bidu tal-linja taż-żmien (vojt = awtomatiku)
+Fin de la frise (vide = auto) ¦ Fundi i vijës kohore (bosh = automatik) ¦ Tmiem tal-linja taż-żmien (vojt = awtomatiku)
+Écrire le nom des traits verticaux ¦ Shkruaj emrin e vijave vertikale ¦ Ikteb l-isem tal-linji vertikali
+Les Cousins — membres ¦ Les Cousins — anëtarët ¦ Les Cousins — membri
+Guitare solo, Chœurs ¦ Kitarë solo, Kor ¦ Kitarra solista, Kor
+Deuxième ¦ I dyti ¦ It-tieni
+Tous en dessous ¦ Të gjithë poshtë ¦ Kollha taħt
+Décès de Jean ¦ Vdekja e Jean ¦ Mewt ta’ Jean
+La famille Martin ¦ Familja Martin ¦ Il-familja Martin
+Sur les parts ¦ Mbi pjesët ¦ Fuq il-biċċiet
+Avec une date de naissance ¦ Me një datë lindjeje ¦ B’data tat-twelid
+Où en sont mes recherches ¦ Ku janë kërkimet e mia ¦ Fejn waslu r-riċerki tiegħi
+Maximum de l’échelle (vide = auto) ¦ Maksimumi i shkallës (bosh = automatik) ¦ Massimu tal-iskala (vojt = awtomatiku)
+Première ligne en bas ¦ Rreshti i parë poshtë ¦ L-ewwel ringiela isfel
+Naissances par mois et par siècle ¦ Lindjet sipas muajit dhe shekullit ¦ Twelid skont ix-xahar u s-seklu
+Nom de l’axe X ¦ Emri i boshtit X ¦ Isem tal-assi X
+Nom de l’axe Y ¦ Emri i boshtit Y ¦ Isem tal-assi Y
+Taille de la plus grosse bulle ¦ Madhësia e flluskës më të madhe ¦ Daqs tal-akbar bużżieqa
+Âge au mariage et nombre d’enfants ¦ Mosha në martesë dhe numri i fëmijëve ¦ Età fiż-żwieġ u numru ta’ tfal
+Au-dessus (nom de la case) ¦ Sipër (emri i kutisë) ¦ Fuq (isem tal-kaxxa)
+Présidente ¦ Presidentja ¦ President
+Trésorier ¦ Arkëtari ¦ Teżorier
+Secrétaire ¦ Sekretari ¦ Segretarju
+3 bénévoles ¦ 3 vullnetarë ¦ 3 voluntiera
+Fêtes ¦ Festat ¦ Festi
+5 bénévoles ¦ 5 vullnetarë ¦ 5 voluntiera
+Association des Amis du village ¦ Shoqata e Miqve të fshatit ¦ Assoċjazzjoni Ħbieb tar-Raħal
+Diagramme de Venn (2 ou 3 ensembles) ¦ Diagrami i Venit (2 ose 3 bashkësi) ¦ Dijagramma ta’ Venn (2 jew 3 settijiet)
+Mes objectifs ¦ Objektivat e mi ¦ L-għanijiet tiegħi
+Jean et Marie ¦ Jean dhe Marie ¦ Jean u Marie
+Pierre et Anne ¦ Pierre dhe Anne ¦ Pierre u Anne
+Louis et Rose ¦ Louis dhe Rose ¦ Louis u Rose
+Enfants par couple ¦ Fëmijë për çift ¦ Tfal għal kull koppja
+Source / note en bas ¦ Burim / shënim poshtë ¦ Sors / nota isfel
+Largeur de l’image ¦ Gjerësia e imazhit ¦ Wisa’ tal-istampa
+Notaires ¦ Noterët ¦ Nutara
+↺ Police de l’app ¦ ↺ Shkronja e aplikacionit ¦ ↺ Font tal-app
+{name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} nga {n} fëmijë vdiqën para moshës 1 vjeç ({p} %) ¦ {name}: {a} minn {n} tfal mietu qabel sena ({p} %)
+{name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} nga {n} vdiqën para moshës 5 vjeç ({p} %) ¦ {name}: {a} minn {n} mietu qabel il-5 snin ({p} %)
+parrains : {a} sur {b} · marraines : {c} sur {d} ¦ kumbarët: {a} nga {b} · kumbarat: {c} nga {d} ¦ parrini: {a} minn {b} · parrini (nisa): {c} minn {d}

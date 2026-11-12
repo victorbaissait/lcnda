@@ -1,0 +1,1565 @@
+fr ¦ sq ¦ mt
+Espace de travail « {name} » appliqué. ¦ Hapësira e punës «{name}» u zbatua. ¦ L-ispazju tax-xogħol “{name}” ġie applikat.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Cilësimet «{name}» u importuan: «Zbato» për t’i përdorur. ¦ L-issettjar “{name}” importat: “Applika” biex tużah.
+{layer} (avant / après) ¦ {layer} (para / pas) ¦ {layer} (qabel / wara)
+Avant / après — {name} ¦ Para / pas — {name} ¦ Qabel / wara — {name}
+Modèle des visages : {what} ¦ Modeli i fytyrave: {what} ¦ Mudell tal-uċuħ: {what}
+Portrait de {name} (photo d’identité) ¦ Portreti i {name} (foto dokumenti) ¦ Ritratt ta’ {name} (ritratt tal-passaport)
+Portrait (photo d’identité) ¦ Portret (foto dokumenti) ¦ Ritratt (ritratt tal-passaport)
+Fiche {num} ¦ Kartela {num} ¦ Skeda {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ fytyra nuk u gjet te «{name}»: kuadrim në qendër, për t’u kontrolluar (ose identifiko fytyrën te shikuesi) ¦ ⚠️ l-ebda wiċċ ma nstab fuq “{name}”: inkwadrat fiċ-ċentru, iċċekkjah (jew identifika l-wiċċ fil-viewer)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portret gati: hiq shenjën nëse nuk shkon, pastaj «Përdor si portrete».|{n} portrete gati: hiq shenjën nga ata që nuk shkojnë, pastaj «Përdor si portrete». ¦ {n} ritratt lest: neħħi l-marka jekk ma jaqbilx, imbagħad “Uża bħala ritratti”.|{n} ritratti lesti: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.|{n} ritratti lesti: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.|{n} ritratt lest: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.|{n} ritratt lest: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portret gati: hiq shenjën nëse nuk shkon, pastaj «Përdor si portrete».|{n} portrete gati: hiq shenjën nga ata që nuk shkojnë, pastaj «Përdor si portrete». ¦ {n} ritratt lest: neħħi l-marka jekk ma jaqbilx, imbagħad “Uża bħala ritratti”.|{n} ritratti lesti: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.|{n} ritratti lesti: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.|{n} ritratt lest: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.|{n} ritratt lest: neħħi l-marka minn dawk li ma jaqblux, imbagħad “Uża bħala ritratti”.
+Aucun visage trouvé tout seul. ¦ Asnjë fytyrë nuk u gjet vetë. ¦ L-ebda wiċċ ma nstab waħdu.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} tjetër është vendosur në qendër: shënoje vetëm nëse shkon.|{n} të tjerë janë vendosur në qendër: shënoji vetëm nëse shkojnë. ¦ {n} ieħor huwa ċċentrat: immarkah biss jekk jaqbel.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} tjetër është vendosur në qendër: shënoje vetëm nëse shkon.|{n} të tjerë janë vendosur në qendër: shënoji vetëm nëse shkojnë. ¦ {n} ieħor huwa ċċentrat: immarkah biss jekk jaqbel.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.|{n} oħrajn huma ċċentrati: immarkahom biss jekk jaqblu.
+Calque {num} ¦ Shtresa {num} ¦ Saff {num}
+Groupe {num} ¦ Grupi {num} ¦ Grupp {num}
+calque|Réglages ¦ Rregullime ¦ Aġġustamenti
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Maskë prerjeje: prek vetëm «{name}» menjëherë poshtë (⌥ Alt + klik midis dy shtresave në Photoshop) ¦ Maskra tal-qtugħ: tmiss biss “{name}” eżatt taħt (⌥ Alt + klikk bejn żewġ saffi f’Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Maskë prerjeje: prek vetëm elementin menjëherë poshtë (⌥ Alt + klik midis dy shtresave në Photoshop) ¦ Maskra tal-qtugħ: tmiss biss l-element eżatt taħt (⌥ Alt + klikk bejn żewġ saffi f’Photoshop)
+seulement sur « {name} » ¦ vetëm mbi «{name}» ¦ fuq “{name}” biss
+seulement sur ce qui est juste dessous ¦ vetëm mbi atë që është menjëherë poshtë ¦ biss fuq dak li hemm eżatt taħt
+touche tout ce qui est dessous dans « {name} » ¦ prek gjithçka që është poshtë në «{name}» ¦ tmiss dak kollu li hemm taħt f’“{name}”
+réglages, {n} corrections ¦ rregullime, {n} korrigjime ¦ aġġustamenti, {n} korrezzjonijiet
+réglages, {n} correction ¦ rregullime, {n} korrigjim ¦ aġġustamenti, {n} korrezzjoni
+« {name} » mis dans un groupe ¦ «{name}» u vendos në një grup ¦ “{name}” tqiegħed fi grupp
+{layer} montré ¦ {layer} u shfaq ¦ {layer} muri
+{layer} masqué ¦ {layer} u fsheh ¦ {layer} moħbi
+Masque qui cache la sélection ajouté à {name} ¦ Maska që fsheh përzgjedhjen u shtua te {name} ¦ Maskra li taħbi l-għażla miżjuda ma’ {name}
+Masque qui cache tout ajouté à {name} ¦ Maska që fsheh gjithçka u shtua te {name} ¦ Maskra li taħbi kollox miżjuda ma’ {name}
+Masque ajouté à {name} ¦ Maska u shtua te {name} ¦ Maskra miżjuda ma’ {name}
+Masque de {name} désactivé ¦ Maska e {name} u çaktivizua ¦ Il-maskra ta’ {name} mitfija
+Masque de {name} réactivé ¦ Maska e {name} u riaktivizua ¦ Il-maskra ta’ {name} mixgħula mill-ġdid
+Masque de {name} inversé ¦ Maska e {name} u përmbys ¦ Il-maskra ta’ {name} maqluba
+Masque de {name} retiré ¦ Maska e {name} u hoq ¦ Il-maskra ta’ {name} imneħħija
+« {name} » à sa taille d’origine ¦ «{name}» në madhësinë e tij origjinale ¦ “{name}” fid-daqs oriġinali tiegħu
+✨ Filtre sur « {name} » ¦ ✨ Filtër mbi «{name}» ¦ ✨ Filtru fuq “{name}”
+« {name} » pixellisé ¦ «{name}» u rasterizua ¦ “{name}” rasterizzat
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ «{name}» u rasterizua: i ngrirë në madhësinë aktuale (zmadhimi do ta bëjë të turbullt) ¦ “{name}” rasterizzat: iffissat fid-daqs attwali tiegħu (jekk tkabbru jsir imċajpar)
+Groupe « {name} » supprimé (son contenu reste) ¦ Grupi «{name}» u fshi (përmbajtja e tij mbetet) ¦ Il-grupp “{name}” tħassar (il-kontenut jibqa’)
+{layer} supprimé ¦ {layer} u fshi ¦ {layer} imħassar
+« {name} » retiré des calques ¦ «{name}» u hoq nga shtresat ¦ “{name}” imneħħi mis-saffi
+Calque « {name} » supprimé avec ce qui est dessus ¦ Shtresa «{name}» u fshi me gjithçka që ka sipër ¦ Is-saff “{name}” tħassar b’dak kollu li fih
+{layer} dupliquée ¦ {layer} u dyfishua ¦ {layer} duplikata
+{layer} dupliqué ¦ {layer} u dyfishua ¦ {layer} duplikat
+{layer} vidé ¦ {layer} u zbraz ¦ {layer} żvojtat
+{layer} déplacé ¦ {layer} u zhvendos ¦ {layer} imċaqlaq
+Opacité de {name} : {n} % ¦ Patejdukshmëria e {name}: {n} % ¦ Opaċità ta’ {name}: {n} %
+Fond de {name} : {n} % ¦ Mbushja e {name}: {n} % ¦ Mili ta’ {name}: {n} %
+Renommé « {name} » ¦ U riemërtua «{name}» ¦ Isem ġdid “{name}”
+Fusion de {name} : {what} ¦ Shkrirja e {name}: {what} ¦ Taħlit ta’ {name}: {what}
+« {name} » rangé dans « {group} » ¦ «{name}» u vendos te «{group}» ¦ “{name}” tqiegħed f’“{group}”
+« {name} » sorti du groupe ¦ «{name}» doli nga grupi ¦ “{name}” ħareġ mill-grupp
+« {name} » rangé tout en bas ¦ «{name}» u vendos në fund fare ¦ “{name}” tqiegħed fil-qiegħ nett
+« {name} » rangé au-dessus de « {other} » ¦ «{name}» u vendos mbi «{other}» ¦ “{name}” tqiegħed fuq “{other}”
+« {name} » rangé sous « {other} » ¦ «{name}» u vendos nën «{other}» ¦ “{name}” tqiegħed taħt “{other}”
+🎚 Calque de réglage {name} ¦ 🎚 Shtresë rregullimi {name} ¦ 🎚 Saff ta’ aġġustament {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Rregullimet e <b>fotos</b> ¦ 🖼 Aġġustamenti tar-<b>ritratt</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Mbi maskë, peneli ⬜ shfaq (kthen atë që ishte fshehur) — X për të ndërruar ¦ Fuq il-maskra, il-pinzell ⬜ juri (iġib lura dak li kien moħbi) — X biex tbiddel
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Mbi maskë, peneli ⬛ fsheh — X për të ndërruar ¦ Fuq il-maskra, il-pinzell ⬛ jaħbi — X biex tbiddel
+Texte choisi : « {text} » ¦ Teksti i zgjedhur: «{text}» ¦ Test magħżul: “{text}”
+Glyphe {what} ajouté ¦ Glifi {what} u shtua ¦ Glifu {what} miżjud
+« {what} » copié : colle-le dans un texte (⌘V). ¦ «{what}» u kopjua: ngjite në një tekst (⌘V). ¦ “{what}” ikkupjat: waħħlu f’test (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ shtresa «{name}» (vetëm elementi poshtë) ¦ saff “{name}” (l-element ta’ taħt biss)
+calque « {name} » ¦ shtresa «{name}» ¦ saff “{name}”
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Gama: {a}° / {b}° — {c}° \ {d}° (tërhiq shenjat) ¦ Firxa: {a}° / {b}° — {c}° \ {d}° (kaxkar il-markaturi)
+Propriétés de « {name} » ¦ Vetitë e «{name}» ¦ Karatteristiċi ta’ “{name}”
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Nuanca/Ngopja mbi «{name}» ¦ 🎨 Lewn/Saturazzjoni fuq “{name}”
+Motif « {what} » : calque « {name} » ¦ Motivi «{what}»: shtresa «{name}» ¦ Disinn “{what}”: saff “{name}”
+Motif de « {name} » ¦ Motivi i «{name}» ¦ Disinn ta’ “{name}”
+Motif « {what} » sur « {name} » ¦ Motivi «{what}» mbi «{name}» ¦ Disinn “{what}” fuq “{name}”
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Motivi «{what}» u hoq nga biblioteka (shtresat që e përdorin e mbajnë) ¦ Id-disinn “{what}” tneħħa mil-librerija (is-saffi li jużawh iżommuh)
+le calque « {name} » ¦ shtresa «{name}» ¦ is-saff “{name}”
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: piko mbi një shtresë. ¦ 🖌 {name}: pinġi fuq saff.
+Dégradé : {what} ¦ Gradient: {what} ¦ Gradjent: {what}
+Dégradé {num} ¦ Gradient {num} ¦ Gradjent {num}
+Calque « {name} » ¦ Shtresa «{name}» ¦ Saff “{name}”
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ «{name}» · maska e tij (e zezë = e fshehur, e bardhë = e shfaqur): gjithçka duket menjëherë ¦ “{name}” · il-maskra tiegħu (iswed = moħbi, abjad = muri): kollox jidher minnufih
+« {name} » : tout se voit tout de suite ¦ «{name}»: gjithçka duket menjëherë ¦ “{name}”: kollox jidher minnufih
+le prochain dégradé que tu traceras ¦ gradienti i ardhshëm që do të vizatosh ¦ il-gradjent li jmiss li tpinġi
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Paracaktimi «{name}» u mbajt: mbetet në këtë listë. ¦ Il-preset “{name}” miżmum: jibqa’ f’din il-lista.
+Dégradé modifié sur « {name} » ¦ Gradienti u ndryshua mbi «{name}» ¦ Gradjent mibdul fuq “{name}”
+Texte « {text} » ¦ Teksti «{text}» ¦ Test “{text}”
+Objet dynamique « {name} » : image remplacée ¦ Objekt dinamik «{name}»: imazhi u zëvendësua ¦ Oġġett dinamiku “{name}”: stampa mibdula
+Image placée : « {name} » ¦ Imazhi u vendos: «{name}» ¦ Stampa mqiegħda: “{name}”
+Image placée, mais pas rangée dans les médias : {err} ¦ Imazhi u vendos, por nuk u ruajt te mediat: {err} ¦ Stampa mqiegħda, iżda mhux fil-midja: {err}
+Élément supprimé de « {name} » ¦ Elementi u fshi nga «{name}» ¦ Element imħassar minn “{name}”
+Image tournée sur « {name} » ¦ Imazhi u rrotullua mbi «{name}» ¦ Stampa mdawra fuq “{name}”
+Image agrandie / réduite sur « {name} » ¦ Imazhi u zmadhua / zvogëlua mbi «{name}» ¦ Stampa mkabbra / imċekkna fuq “{name}”
+Dégradé ajusté (masque) sur « {name} » ¦ Gradienti u rregullua (maska) mbi «{name}» ¦ Gradjent aġġustat (maskra) fuq “{name}”
+Dégradé ajusté sur « {name} » ¦ Gradienti u rregullua mbi «{name}» ¦ Gradjent aġġustat fuq “{name}”
+Élément déplacé sur « {name} » ¦ Elementi u zhvendos mbi «{name}» ¦ Element imċaqlaq fuq “{name}”
+Masque en dégradé sur « {name} » ¦ Maskë me gradient mbi «{name}» ¦ Maskra bil-gradjent fuq “{name}”
+Dégradé {what} : « {name} » ¦ Gradient {what}: «{name}» ¦ Gradjent {what}: “{name}”
+{what} sur « {name} » ¦ {what} mbi «{name}» ¦ {what} fuq “{name}”
+Masque : caché au pinceau ¦ Maska: fshehur me penel ¦ Maskra: moħbi bil-pinzell
+Masque : montré au pinceau ¦ Maska: shfaqur me penel ¦ Maskra: muri bil-pinzell
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Palosja u riparua ({n} prekje) (shtresa ✨ Retushime) ¦ Tinja msewwija ({n} messiet) (saff ✨ Rtokki)
+Pli réparé (calque ✨ Retouches) ¦ Palosja u riparua (shtresa ✨ Retushime) ¦ Tinja msewwija (saff ✨ Rtokki)
+Recadrage enlevé ¦ Prerja u hoq ¦ Qtugħ imneħħi
+Recadrage et redressement ({a}°) ¦ Prerje dhe drejtim ({a}°) ¦ Qtugħ u ddrittjar ({a}°)
+Recadrage ¦ Prerje ¦ Qtugħ
+Filtre « {what} » (refait) ¦ Filtri «{what}» (u ribë) ¦ Filtru “{what}” (magħmul mill-ġdid)
+« {what} » refait sur un nouveau calque. ¦ «{what}» u ribë në një shtresë të re. ¦ “{what}” sar mill-ġdid fuq saff ġdid.
+limité à la sélection ¦ i kufizuar te përzgjedhja ¦ limitat għall-għażla
+Filtre « {what} » ¦ Filtri «{what}» ¦ Filtru “{what}”
+Filtre « {what} » ajouté au calque ¦ Filtri «{what}» u shtua te shtresa ¦ Filtru “{what}” miżjud mas-saff
+Filtre « {what} » réglé ¦ Filtri «{what}» u rregullua ¦ Filtru “{what}” aġġustat
+Action « {name} » ¦ Veprimi «{name}» ¦ Azzjoni “{name}”
+Action du {date} ¦ Veprimi i {date} ¦ Azzjoni tal-{date}
+Action « {name} » enregistrée. ¦ Veprimi «{name}» u ruajt. ¦ L-azzjoni “{name}” ġiet issejvjata.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Veprimi «{name}» u importua: «Në këtë foto» ose «Në disa foto…». ¦ L-azzjoni “{name}” importata: “Fuq dan ir-ritratt” jew “Fuq diversi ritratti…”.
+Action « {name} » supprimée ¦ Veprimi «{name}» u fshi ¦ L-azzjoni “{name}” tħassret
+« {name} » sur plusieurs photos ¦ «{name}» në disa foto ¦ “{name}” fuq diversi ritratti
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Mbaroi: {n} foto nga {total}, versioni i ri u shfaq. ¦ Lest: {n} ritratti minn {total}, il-verżjoni l-ġdida murija.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Mbaroi: {n} foto nga {total}, versioni i ri u shfaq. ¦ Lest: {n} ritratt minn {total}, il-verżjoni l-ġdida murija.
+Terminé : {n} photos sur {total}. ¦ Mbaroi: {n} foto nga {total}. ¦ Lest: {n} ritratti minn {total}.
+Terminé : {n} photo sur {total}. ¦ Mbaroi: {n} foto nga {total}. ¦ Lest: {n} ritratt minn {total}.
+{layer} (retouchée) ¦ {layer} (e retushuar) ¦ {layer} (irtukkjata)
+« {name} » · comme le style de calque de Photoshop ¦ «{name}» · si stili i shtresës në Photoshop ¦ “{name}” · bħall-istil tas-saff ta’ Photoshop
+Effets de {layer} enlevés ¦ Efektet e {layer} u hoqën ¦ L-effetti ta’ {layer} tneħħew
+Effets de {layer} ¦ Efektet e {layer} ¦ L-effetti ta’ {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Vijat e holla, të çelëta ose të errëta, shënohen me të kuqe (në përzgjedhje). Kontrollo, pastaj «Riparo këto vija». ¦ Il-linji rqaq, ċari jew skuri, huma mmarkati bl-aħmar (fl-għażla). Iċċekkja, imbagħad “Sewwi dawn il-linji”.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Vijat e holla, të çelëta ose të errëta, shënohen me të kuqe. Kontrollo, pastaj «Riparo këto vija». ¦ Il-linji rqaq, ċari jew skuri, huma mmarkati bl-aħmar. Iċċekkja, imbagħad “Sewwi dawn il-linji”.
+{what} (en rouge sur la photo). ¦ {what} (me të kuqe në foto). ¦ {what} (bl-aħmar fuq ir-ritratt).
+Plis réparés ({what}) ¦ Palosjet u riparuan ({what}) ¦ Tinjiet imsewwija ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: krahaso me 👁 ose ◧; ↶ për t’u kthyer. ¦ {what}: qabbel b’👁 jew ◧; ↶ biex terġa’ lura.
+={n} lignes repérées puis comblées ¦ {n} vijë e gjetur dhe e mbushur|{n} vija të gjetura dhe të mbushura ¦ {n} linja misjuba u mimlija|{n} linji misjuba u mimlija|{n} linji misjuba u mimlija|{n} linja misjuba u mimlija|{n} linja misjuba u mimlija
+={n} ligne repérée puis comblée ¦ {n} vijë e gjetur dhe e mbushur|{n} vija të gjetura dhe të mbushura ¦ {n} linja misjuba u mimlija|{n} linji misjuba u mimlija|{n} linji misjuba u mimlija|{n} linja misjuba u mimlija|{n} linja misjuba u mimlija
+=pli|{n} lignes ¦ {n} vijë|{n} vija ¦ {n} linja|{n} linji|{n} linji|{n} linja|{n} linja
+=pli|{n} ligne ¦ {n} vijë|{n} vija ¦ {n} linja|{n} linji|{n} linji|{n} linja|{n} linja
+=retouche|{n} étapes ¦ {n} hap|{n} hapa ¦ {n} pass|{n} passi|{n} passi|{n} pass|{n} pass
+=retouche|{n} étape ¦ {n} hap|{n} hapa ¦ {n} pass|{n} passi|{n} passi|{n} pass|{n} pass
+=ligne repérée ¦ vijë e gjetur|vija të gjetura ¦ linja misjuba|linji misjuba|linji misjuba|linja misjuba|linja misjuba
+=ligne réparée ¦ vijë e riparuar|vija të riparuara ¦ linja msewwija|linji msewwija|linji msewwija|linja msewwija|linja msewwija
+=calque de réglage ¦ shtresë rregullimi|shtresa rregullimi ¦ saff ta’ aġġustament|saffi ta’ aġġustament|saffi ta’ aġġustament|saff ta’ aġġustament|saff ta’ aġġustament
+=portrait mis à jour ¦ portret i përditësuar|portrete të përditësuara ¦ ritratt aġġornat|ritratti aġġornati|ritratti aġġornati|ritratt aġġornat|ritratt aġġornat
+✨ Restauration en une fois ({what}) ¦ ✨ Restaurim njëherësh ({what}) ¦ ✨ Restawr f’daqqa ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Restaurimi u bë ({what}): çdo hap është një shtresë «✨» (Shtresat) që mund ta fshehësh ose ta dozosh; ↶ i zhbën të gjitha. ¦ Restawr magħmul ({what}): kull pass huwa saff “✨” (Saffi) li tista’ taħbi jew tiddoża; ↶ iħassar kollox.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Portreti i kartelës «{name}» u përditësua (fotoja e prerë është te mediat e saj). ¦ Ir-ritratt tal-iskeda “{name}” aġġornat (ir-ritratt maqtugħ jinsab fil-midja tagħha).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Portreti i kartelës u përditësua (fotoja e prerë është te mediat e saj). ¦ Ir-ritratt tal-iskeda aġġornat (ir-ritratt maqtugħ jinsab fil-midja tagħha).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (e prerë) ¦ {w} × {h} px (maqtugħ)
+Horizon redressé ({a}°) ¦ Horizonti u drejtua ({a}°) ¦ Orizzont iddrittjat ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ E drejtuar me {a}°: rregullo kornizën pastaj «✓ Mirato». ¦ Iddrittjat b’{a}°: aġġusta l-qafas imbagħad “✓ Ikkonferma”.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Fotoja u drejtua me {a}° (dhe u pre që të mos duken qoshet). ⌗ Prit për ta rregulluar. ¦ Ritratt iddrittjat b’{a}° (u maqtugħ biex ma jidhrux il-kantunieri). ⌗ Aqta’ biex taġġusta.
+Redressée automatiquement ({a}°) ¦ U drejtua automatikisht ({a}°) ¦ Iddrittjat awtomatikament ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Reflekset u hoqën në një shtresë më vete (vetëm në përzgjedhje: përzgjidh fillimisht xhamin për ta kufizuar): rregullo forcën dhe madhësinë, patejdukshmëria dozon, 🎭 kufizon, 👁 fsheh. Fotoja nuk preket. ¦ Riflessi mneħħija fuq saff separat (fl-għażla biss: l-ewwel agħżel il-ħġieġ biex tillimita): aġġusta s-saħħa u d-daqs, l-opaċità tiddoża, 🎭 tillimita, 👁 taħbi. Ir-ritratt ma jintmissx.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Reflekset u hoqën në një shtresë më vete: rregullo forcën dhe madhësinë, patejdukshmëria dozon, 🎭 kufizon, 👁 fsheh. Fotoja nuk preket. ¦ Riflessi mneħħija fuq saff separat: aġġusta s-saħħa u d-daqs, l-opaċità tiddoża, 🎭 tillimita, 👁 taħbi. Ir-ritratt ma jintmissx.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Ngjyrosje në një shtresë rregullimi (e kufizuar te përzgjedhja): zgjidh ngjyrat dhe forcën; 🎭 për ta kufizuar, 👁 për ta fshehur. Fotoja nuk preket. ¦ Kulur f’saff ta’ aġġustament (limitat għall-għażla): agħżel il-kuluri u s-saħħa; 🎭 biex tillimitah, 👁 biex taħbih. Ir-ritratt ma jintmissx.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Ngjyrosje në një shtresë rregullimi: zgjidh ngjyrat dhe forcën; 🎭 për ta kufizuar, 👁 për ta fshehur. Fotoja nuk preket. ¦ Kulur f’saff ta’ aġġustament: agħżel il-kuluri u s-saħħa; 🎭 biex tillimitah, 👁 biex taħbih. Ir-ritratt ma jintmissx.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} njollë u hoq, në shtresën «{layer}» (fotoja nuk preket): fshihe ose ule për të krahasuar; ↶ nëse është tepër.|{n} njolla u hoqën, në shtresën «{layer}» (fotoja nuk preket): fshihe ose ule për të krahasuar; ↶ nëse është tepër. ¦ {n} tebgħa mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tbajja’ mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tbajja’ mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tebgħa mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tebgħa mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} njollë u hoq, në shtresën «{layer}» (fotoja nuk preket): fshihe ose ule për të krahasuar; ↶ nëse është tepër.|{n} njolla u hoqën, në shtresën «{layer}» (fotoja nuk preket): fshihe ose ule për të krahasuar; ↶ nëse është tepër. ¦ {n} tebgħa mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tbajja’ mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tbajja’ mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tebgħa mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.|{n} tebgħa mneħħija, fuq is-saff “{layer}” (ir-ritratt ma jintmissx): aħbih jew naqqsu biex tqabbel; ↶ jekk hu wisq.
+✨ Taches enlevées ¦ ✨ Njollat u hoqën ¦ ✨ Tbajja’ mneħħija
+Taches enlevées automatiquement ({n}) ¦ Njollat u hoqën automatikisht ({n}) ¦ Tbajja’ mneħħija awtomatikament ({n})
+Sélection remplie ({what}) ¦ Përzgjedhja u mbush ({what}) ¦ Għażla mimlija ({what})
+Sélection effacée sur « {name} » ¦ Përzgjedhja u fshi mbi «{name}» ¦ Għażla mħassra fuq “{name}”
+Masque d’après la sélection ({name}) ¦ Maskë sipas përzgjedhjes ({name}) ¦ Maskra mill-għażla ({name})
+Préréglage « {name} » retiré ¦ Paracaktimi «{name}» u hoq ¦ Il-preset “{name}” tneħħa
+Préréglage « {name} » ¦ Paracaktimi «{name}» ¦ Preset “{name}”
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Projekti «{name}» (📂 Skedar → Hap një projekt për ta gjetur) ¦ Proġett “{name}” (📂 Fajl → Iftaħ proġett biex issibu)
+Versions de la photo ({n}) ¦ Versionet e fotos ({n}) ¦ Verżjonijiet tar-ritratt ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm në {dpi} ppi ¦ {w} × {h} cm b’{dpi} dpi
+≈ {size} Mo en mémoire ¦ ≈ {size} MB në memorie ¦ ≈ {size} MB fil-memorja
+Taille de l’image : {w} × {h} px ¦ Madhësia e imazhit: {w} × {h} px ¦ Daqs tal-istampa: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Zona e punës: {w} × {h} px ¦ Żona tax-xogħol: {w} × {h} px
+Zone de travail de départ ¦ Zona fillestare e punës ¦ Żona tax-xogħol tal-bidu
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Ky imazh është shumë i madh ({n} milionë pika): ruajtja mund të zgjasë, madje të dështojë. ¦ Din l-istampa kbira ħafna ({n} miljun pixel): l-issejvjar jista’ jieħu fit-tul, jew saħansitra jfalli.
+Enregistrer quand même ? ¦ Ta ruash gjithsesi? ¦ Tissejvja xorta waħda?
+Projet « {name} » rouvert ¦ Projekti «{name}» u rihap ¦ Il-proġett “{name}” infetaħ mill-ġdid
+Projet en partie illisible : {err} ¦ Projekt pjesërisht i palexueshëm: {err} ¦ Proġett parzjalment ma jinqarax: {err}
+photo de départ introuvable ¦ fotoja fillestare nuk gjendet ¦ ir-ritratt tal-bidu ma nstabx
+Supprimer le projet « {name} » ? ¦ Ta fshish projektin «{name}»? ¦ Tħassar il-proġett “{name}”?
+Quitter le plein écran ¦ Dil nga ekrani i plotë ¦ Oħroġ mill-iskrin sħiħ
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Nuk ka më vend për të ruajtur: fshi një hapësirë pune. ¦ M’hemmx aktar spazju biex tissejvja: ħassar spazju tax-xogħol.
+Ranger, montrer ou cacher les boutons et les options ¦ Rendit, shfaq ose fshih butonat dhe opsionet ¦ Irranġa, uri jew aħbi l-buttuni u l-għażliet
+⚙️ Boutons et options ¦ ⚙️ Butonat dhe opsionet ¦ ⚙️ Buttuni u għażliet
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Shëno atë që shfaqet, rendit me ↑ ↓ (ose duke tërhequr ⠿). Ruhet për herën tjetër. Si hapësirat e punës në Photoshop: ruaj një rregullim me një emër («Restaurim», «Montazh i shpejtë»…) dhe kalo nga njëri te tjetri. ¦ Immarka dak li jintwera, irranġa b’↑ ↓ (jew billi tkaxkar ⠿). Jinżamm għall-darba li jmiss. Bħall-ispazji tax-xogħol ta’ Photoshop: issejvja tqassim b’isem (“Restawr”, “Immuntar malajr”…) u għaddi minn wieħed għall-ieħor.
+les boutons montrés, cachés et rangés ¦ butonat e shfaqur, të fshehur dhe të renditur ¦ il-buttuni murija, moħbija u rranġati
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Butonat u kthyen si në fillim (rihap dritaren për të gjetur rendin fillestar). ¦ Il-buttuni reġgħu tqiegħdu kif kienu (erġa’ iftaħ it-tieqa biex issib l-ordni tal-bidu).
+Boutons rangés. ¦ Butonat u renditën. ¦ Buttuni rranġati.
+Hautes lumières ¦ Dritat e larta ¦ Dwal għoljin
+Vibrance (couleurs ternes d’abord) ¦ Gjallëria (ngjyrat e zbehta së pari) ¦ Vibrance (l-ewwel il-kuluri baħħ)
+Teinte (tourner les couleurs) ¦ Nuanca (rrotullo ngjyrat) ¦ Lewn (dawwar il-kuluri)
+Noir d’entrée ¦ E zeza hyrëse ¦ Iswed tad-dħul
+Blanc d’entrée ¦ E bardha hyrëse ¦ Abjad tad-dħul
+Tons moyens (gamma ×100) ¦ Tonet e mesme (gama ×100) ¦ Toni medji (gamma ×100)
+Noir de sortie ¦ E zeza dalëse ¦ Iswed tal-ħruġ
+Blanc de sortie ¦ E bardha dalëse ¦ Abjad tal-ħruġ
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Natyrale: qielli, gjelbërimi, lëkura, rrobat (e këshilluar) ¦ Naturali: sema, ħdura, ġilda, ħwejjeġ (rakkomandat)
+Sépia chaud ¦ Sepia e ngrohtë ¦ Sepja sħun
+Autochrome (couleurs d’autrefois) ¦ Autokrom (ngjyrat e dikurshme) ¦ Autochrome (kuluri ta’ żmien ilu)
+Portrait (peau rosée) ¦ Portret (lëkurë rozë) ¦ Ritratt (ġilda roża)
+Paysage : ciel en haut, terre en bas ¦ Peizazh: qielli lart, toka poshtë ¦ Pajsaġġ: sema fuq, art isfel
+Saturation augmentée ¦ Ngopje e shtuar ¦ Saturazzjoni miżjuda
+Saturation plus forte ¦ Ngopje më e fortë ¦ Saturazzjoni aktar qawwija
+Rouges plus saturés ¦ Të kuqe më të ngopura ¦ Aħmar aktar saturat
+Jaune intensifié ¦ E verdhë e forcuar ¦ Isfar intensifikat
+Ciel plus bleu ¦ Qiell më blu ¦ Sema aktar blu
+Peau plus douce ¦ Lëkurë më e butë ¦ Ġilda aktar lixxa
+Désaturer ¦ Zbeh ngjyrat ¦ Neħħi s-saturazzjoni
+Verts d’automne ¦ Të gjelbra vjeshte ¦ Aħdar tal-ħarifa
+Reflets en moins (vitre, verre, vernis) ¦ Më pak reflekse (xham, qelq, llak) ¦ Inqas riflessi (ħġieġ, kristall, verniċ)
+Taille des reflets (0 = moyenne) ¦ Madhësia e reflekseve (0 = mesatare) ¦ Daqs tar-riflessi (0 = medju)
+Poussière et rayures (automatique) ¦ Pluhur dhe gërvishtje (automatik) ¦ Trab u grif (awtomatiku)
+Réduire le bruit ¦ Zvogëlo zhurmën ¦ Naqqas il-ħsejjes
+Netteté ¦ Mprehtësia ¦ Nitidezza
+Clarté (contraste local) ¦ Qartësia (kontrast lokal) ¦ Ċarezza (kuntrast lokali)
+Flou de surface (garde les contours) ¦ Turbullim sipërfaqeje (ruan konturet) ¦ Ċajpar tal-wiċċ (iżomm il-kontorni)
+Décentrement (maquette, tilt-shift) ¦ Zhvendosje (maketë, tilt-shift) ¦ Deċentrament (mudell, tilt-shift)
+Largeur de la bande ¦ Gjerësia e brezit ¦ Wisa’ tal-faxxa
+Flou de l’objectif (bokeh) ¦ Turbullim objektivi (bokeh) ¦ Ċajpar tal-lenti (bokeh)
+Ajouter du bruit ¦ Shto zhurmë ¦ Żid ħsejjes
+Poussière et rayures ¦ Pluhur dhe gërvishtje ¦ Trab u grif
+Passe-haut (pour accentuer en Incrustation) ¦ Kalim i lartë (për të mprehur në Mbivendosje) ¦ High-pass (biex tagħti nitidezza f’Overlay)
+Esthétiques ¦ Stilizime ¦ Stilizzazzjoni
+Garder les couleurs (0 / 1) ¦ Ruaj ngjyrat (0 / 1) ¦ Żomm il-kuluri (0 / 1)
+Tracé des contours ¦ Vizatim konturesh ¦ Tpinġija tal-kontorni
+Contours lumineux (néon) ¦ Kontur me dritë (neon) ¦ Kontorni tad-dawl (neon)
+Postérisation ¦ Posterizim ¦ Posterizzazzjoni
+Seuil (noir et blanc pur) ¦ Pragu (bardh e zi i pastër) ¦ Limitu (iswed u abjad pur)
+Vers la droite (1) / gauche (0) ¦ Djathtas (1) / majtas (0) ¦ Lejn il-lemin (1) / ix-xellug (0)
+Peinture à l’huile ¦ Pikturë me vaj ¦ Pittura biż-żejt
+Taille de la touche ¦ Madhësia e penelatës ¦ Daqs tal-pinzellata
+Taille des taches ¦ Madhësia e njollave ¦ Daqs tat-tbajja’
+Dessin au crayon ¦ Vizatim me laps ¦ Disinn biż-żebgħa tal-lapes
+En couleur (0 / 1) ¦ Me ngjyra (0 / 1) ¦ Bil-kulur (0 / 1)
+Taille des carreaux ¦ Madhësia e katrorëve ¦ Daqs tal-kwadri
+Demi-teinte (points d’imprimerie) ¦ Gjysmëton (pika shtypi) ¦ Halftone (tikki tal-istampar)
+Taille des cristaux ¦ Madhësia e kristaleve ¦ Daqs tal-kristalli
+Éclairage (projecteur) ¦ Ndriçim (projektor) ¦ Dawl (projettur)
+Lumière X ¦ Drita X ¦ Dawl X
+Lumière Y ¦ Drita Y ¦ Dawl Y
+Lumière ambiante ¦ Drita e ambientit ¦ Dawl ambjentali
+Halo de lumière (flare) ¦ Halo drite (flare) ¦ Halo tad-dawl (flare)
+À partir de (luminosité) ¦ Duke filluar nga (ndriçimi) ¦ Minn (luminożità)
+Déformation ¦ Deformim ¦ Distorsjoni
+Pincement / sphérisation ¦ Shtrëngim / sferizim ¦ Għafsa / sferizzazzjoni
+Force (− sphère, + pincement) ¦ Forca (− sferë, + shtrëngim) ¦ Saħħa (− sfera, + għafsa)
+Longueur d’onde ¦ Gjatësia e valës ¦ Tul tal-mewġa
+Ondulation (ronds dans l’eau) ¦ Valëzim (rrathë në ujë) ¦ Mewġ (ċrieki fl-ilma)
+Écart des ronds ¦ Largësia e rrathëve ¦ Distanza bejn iċ-ċrieki
+Coordonnées polaires ¦ Koordinata polare ¦ Koordinati polari
+Rectangle → polaire (0) / l’inverse (1) ¦ Drejtkëndësh → polar (0) / e kundërta (1) ¦ Rettangolu → polari (0) / bil-maqlub (1)
+Minimum (assombrit, épaissit le sombre) ¦ Minimum (errëson, trash pjesët e errëta) ¦ Minimu (jiskura, iħaxxen l-iskur)
+Maximum (éclaircit, épaissit le clair) ¦ Maksimum (zbardh, trash pjesët e çelëta) ¦ Massimu (jiċċara, iħaxxen iċ-ċar)
+Décalage (avec retour de l’autre côté) ¦ Zhvendosje (me kthim nga ana tjetër) ¦ Ċaqliq (b’ritorn min-naħa l-oħra)
+Enlever les reflets (vitre) ¦ Hiq reflekset (xham) ¦ Neħħi r-riflessi (ħġieġ)
+Reflets en moins ¦ Më pak reflekse ¦ Inqas riflessi
+Vieille photo ravivée ¦ Foto e vjetër e gjallëruar ¦ Ritratt qadim imqajjem
+Négatif → positif ¦ Negativ → pozitiv ¦ Negattiv → pożittiv
+🖌 Forme du panneau Formes ¦ 🖌 Forma e panelit Format ¦ 🖌 Forma tal-pannell Forom
+Avec empattement ¦ Me serif ¦ B’serif
+Sans empattement ¦ Pa serif ¦ Mingħajr serif
+Manuscrite ¦ Dorëshkrim ¦ Kitba bl-idejn
+Extra-fin ¦ Shumë e hollë ¦ Rqiq ħafna
+Ultra-léger ¦ Ultra e lehtë ¦ Ultra-ħafif
+Léger ¦ E lehtë ¦ Ħafif
+Médium ¦ Mesatare ¦ Medju
+Demi-gras ¦ Gjysmë e trashë ¦ Nofs grass
+Extra-gras ¦ Shumë e trashë ¦ Grass ħafna
+Aligné à gauche ¦ Rreshtuar majtas ¦ Allinjat max-xellug
+Aligné à droite ¦ Rreshtuar djathtas ¦ Allinjat mal-lemin
+Justifié, dernière ligne à gauche ¦ I justifikuar, rreshti i fundit majtas ¦ Ġustifikat, l-aħħar linja max-xellug
+Justifié, dernière ligne centrée ¦ I justifikuar, rreshti i fundit në qendër ¦ Ġustifikat, l-aħħar linja fiċ-ċentru
+Justifié, dernière ligne à droite ¦ I justifikuar, rreshti i fundit djathtas ¦ Ġustifikat, l-aħħar linja mal-lemin
+Tout justifié ¦ I justifikuar plotësisht ¦ Ġustifikat kollu
+Ligatures et formes ¦ Ligatura dhe forma ¦ Ligaturi u forom
+Unicode : Latin étendu A ¦ Unicode: Latinishtja e zgjeruar A ¦ Unicode: Latin estiż A
+Unicode : Latin étendu B ¦ Unicode: Latinishtja e zgjeruar B ¦ Unicode: Latin estiż B
+Unicode : hébreu ¦ Unicode: hebraisht ¦ Unicode: Ebrajk
+Unicode : exposants et indices ¦ Unicode: eksponentë dhe indekse ¦ Unicode: superscripts u subscripts
+Unicode : flèches ¦ Unicode: shigjeta ¦ Unicode: vleġeġ
+Unicode : mathématiques ¦ Unicode: matematikë ¦ Unicode: matematika
+Unicode : formes géométriques ¦ Unicode: forma gjeometrike ¦ Unicode: forom ġeometriċi
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: latinishtja e zgjeruar D (shkurtime të vjetra) ¦ Unicode: Latin estiż D (abbrevjazzjonijiet antiki)
+espace fine ¦ hapësirë e hollë ¦ spazju rqiq
+tiret conditionnel (césure) ¦ vizë kushtëzuese (ndarje rrokjesh) ¦ sing kundizzjonali (qsim tal-kliem)
+mort au combat ¦ rënë në luftë ¦ miet fil-ġlied
+et (abréviation ancienne) ¦ dhe (shkurtim i vjetër) ¦ u (abbrevjazzjoni antika)
+s long ¦ s e gjatë ¦ s twila
+Linéaire ¦ Linear ¦ Lineari
+Radial ¦ Radial ¦ Radjali
+Angle (conique) ¦ Kënd (konik) ¦ Angolu (koniku)
+Réfléchi ¦ I pasqyruar ¦ Rifless
+Losange ¦ Romb ¦ Rombu
+Premier plan → arrière-plan ¦ Plani i parë → sfondi ¦ L-ewwel pjan → sfond
+Hachures croisées ¦ Vijëzime të kryqëzuara ¦ Tratteġġ inkroċjat
+Écailles ¦ Luspa ¦ Qxur
+Brin d’herbe ¦ Fije bari ¦ Fergħa ħaxix
+Éclaboussure ¦ Spërkatje ¦ Titjira
+Ma forme (d’après une sélection) ¦ Forma ime (sipas një përzgjedhjeje) ¦ Il-forma tiegħi (minn għażla)
+Aérographe ¦ Aerograf ¦ Airbrush
+Carré net ¦ Katror i prerë ¦ Kwadru nadif
+Étoiles semées ¦ Yje të shpërndara ¦ Stilel imxerrda
+Éclaboussures ¦ Spërkatje ¦ Titjiriet
+Superposition (Écran) ¦ Mbivendosje (Ekran) ¦ Superpożizzjoni (Screen)
+⌗ Cadrer et redresser ¦ ⌗ Kuadro dhe drejto ¦ ⌗ Inkwadra u ddrittja
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Një foto e skanuar shtrembër, me buzë të bardha ose të dëmtuara: e drejtojmë, pastaj mbajmë atë që ka rëndësi. ¦ Ritratt skennjat mgħawweġ, bit-truf bojod jew imħassra: niddrittjawh, imbagħad inżommu dak li jgħodd.
+📐 Redresser tout seul ¦ 📐 Drejto vetë ¦ 📐 Iddrittja waħdu
+⌗ Recadrer ¦ ⌗ Prit ¦ ⌗ Aqta’
+⧈ Photo prise de biais ¦ ⧈ Foto e bërë në kënd ¦ ⧈ Ritratt meħud mill-ġenb
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Ngjyra të zbehura, foto e zverdhur ¦ 🎨 Kuluri baħħ, ritratt sfar
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Koha i zverdh, i zbeh ose i bën rozë fotot. «Hiq zverdhjen» e vendos çdo ngjyrë në vendin e saj; «Gjallëro» rikthen kontrastin. ¦ Iż-żmien jisfar, jitfi jew jaħmar ir-ritratti. “Neħħi l-isfurija” jerġa’ jpoġġi kull kulur f’postu; “Qajjem” jerġa’ jagħti kuntrast.
+🟨 Enlever le jaunissement ¦ 🟨 Hiq zverdhjen ¦ 🟨 Neħħi l-isfurija
+✨ Raviver une vieille photo ¦ ✨ Gjallëro një foto të vjetër ¦ ✨ Qajjem ritratt qadim
+Réglage automatique ¦ Rregullim automatik ¦ Aġġustament awtomatiku
+🧹 Poussières et petites taches ¦ 🧹 Pluhur dhe njolla të vogla ¦ 🧹 Trab u tbajja’ żgħar
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Pikat e bardha ose të zeza, shpimet: aplikacioni i kërkon dhe i heq një nga një (me korrektorin). Për të trajtuar vetëm një pjesë, përzgjidhe fillimisht. Ato që mbeten: korrektori 🩹 me dorë. ¦ It-tikki bojod jew suwed, it-tbajja’ żgħar: l-app tfittixhom u tneħħihom wieħed wieħed (bil-korrettur). Biex tittratta parti biss, l-ewwel agħżilha. Dak li jibqa’: il-korrettur 🩹 bl-idejn.
+Sensibilité ¦ Ndjeshmëria ¦ Sensittività
+Taille maximale d’une tache ¦ Madhësia maksimale e një njolle ¦ Daqs massimu ta’ tebgħa
+🔍 Repérer et enlever les taches ¦ 🔍 Gjej dhe hiq njollat ¦ 🔍 Sib u neħħi t-tbajja’
+🩹 Correcteur à la main ¦ 🩹 Korrektor me dorë ¦ 🩹 Korrettur bl-idejn
+Filtre poussière et rayures ¦ Filtër pluhuri dhe gërvishtjesh ¦ Filtru tat-trab u l-grif
+🩹 Déchirures, plis, rayures ¦ 🩹 Grisje, palosje, gërvishtje ¦ 🩹 Ċrit, tinjiet, grif
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ «Gjej palosjet» gjen vijat e holla të çelëta ose të errëta dhe propozon t’i mbushë. Me dorë: peneli 🪡 Riparo — piko mbi palosjen, ajo ribëhet sipas asaj që e rrethon. Për një copë që mungon (qoshe e grisur), vula kopjon një pjesë fqinje. ¦ “Sib it-tinjiet” isib il-linji rqaq ċari jew skuri u jipproponi li jimlihom. Bl-idejn: il-pinzell 🪡 Sewwi — pinġi fuq it-tinja, terġa’ ssir skont dak li hemm madwarha. Għal biċċa nieqsa (kantuniera mqatta’), it-timbru jikkopja parti viċina.
+🔍 Repérer les plis et rayures ¦ 🔍 Gjej palosjet dhe gërvishtjet ¦ 🔍 Sib it-tinjiet u l-grif
+🪡 Réparer au pinceau ¦ 🪡 Riparo me penel ¦ 🪡 Sewwi bil-pinzell
+➰ Entourer une zone… ¦ ➰ Rrethoji një zonë… ¦ ➰ Dawwar żona…
+🌫️ Grain et bruit ¦ 🌫️ Kokrrizë dhe zhurmë ¦ 🌫️ Grana u ħsejjes
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Një foto me kokrriza ose një printim i dëmtuar: e zbusim pa humbur konturet. ¦ Ritratt bil-grana jew stampa mħassra: nrattbuh mingħajr ma nitilfu l-kontorni.
+🙂 Netteté des visages ¦ 🙂 Mprehtësia e fytyrave ¦ 🙂 Nitidezza tal-uċuħ
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Rrethoje një fytyrë me elipsin ◯, pastaj «Fytyrë më e mprehtë»: pastrohet nga zhurma dhe mprehet, vetëm aty (shtresë më vete, që mund ta dozosh). ¦ Dawwar wiċċ bl-ellissi ◯, imbagħad “Wiċċ aktar nitidu”: jitnaddaf mill-ħsejjes u jiġi enfasizzat, hemm biss (saff separat, li tista’ tiddoża).
+◯ Entourer le visage ¦ ◯ Rrethoje fytyrën ¦ ◯ Dawwar il-wiċċ
+✨ Visage plus net ¦ ✨ Fytyrë më e mprehtë ¦ ✨ Wiċċ aktar nitidu
+Visage plus net ¦ Fytyrë më e mprehtë ¦ Wiċċ aktar nitidu
+🎯 Sélectionner le sujet ¦ 🎯 Përzgjidh subjektin ¦ 🎯 Agħżel is-suġġett
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Ngjyros një foto bardh e zi ¦ 🌈 Ikkulurixxi ritratt iswed u abjad
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Vetë (një gradient ngjyrash të asaj kohe), ose me dorë: zgjidh një ngjyrë më poshtë dhe piko butë, drita e fotos ruhet. ¦ Waħdu (gradjent ta’ kuluri ta’ dak iż-żmien), jew bl-idejn: agħżel kulur hawn taħt u pinġi bil-mod, id-dawl tar-ritratt jinżamm.
+🎨 Coloriser tout seul ¦ 🎨 Ngjyros vetë ¦ 🎨 Ikkulurixxi waħdu
+🖌 Coloriser au pinceau ¦ 🖌 Ngjyros me penel ¦ 🖌 Ikkulurixxi bil-pinzell
+✅ Comparer et enregistrer ¦ ✅ Krahaso dhe ruaj ¦ ✅ Qabbel u ssejvja
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Mbaj shtypur «👁 Para / pas» (nën foto) për të krahasuar, ose «◧ Perde» për të rrëshqitur nga njëra te tjetra. Fotoja e restauruar bëhet version i ri: origjinali mbetet. ¦ Żomm magħfus “👁 Qabel / wara” (taħt ir-ritratt) biex tqabbel, jew “◧ Purtiera” biex tiżżerżaq minn wieħed għall-ieħor. Ir-ritratt irrestawrat isir verżjoni ġdida: l-oriġinal jibqa’.
+💾 Enregistrer et afficher ¦ 💾 Ruaj dhe shfaq ¦ 💾 Issejvja u uri
+Garder le travail pour plus tard ¦ Mbaje punën për më vonë ¦ Żomm ix-xogħol għal aktar tard
+Impossible d’ouvrir cette image. ¦ Ky imazh nuk mund të hapet. ¦ Ma tistax tinfetaħ din l-istampa.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Çdo hap është opsional dhe zhbëhet (↶). Asgjë nuk e dëmton origjinalin: fotoja e restauruar bëhet version i ri. ¦ Kull pass mhux obbligatorju u jista’ jitneħħa (↶). Xejn ma jagħmel ħsara lill-oriġinal: ir-ritratt irrestawrat isir verżjoni ġdida.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Heqja e zhurmës, pluhuri, palosjet, kontrasti, mprehtësia dhe ngjyrosja njëherësh: sheh çdo hap dhe zgjedh ¦ Tnaqqis tal-ħsejjes, trab, tinjiet, kuntrast, nitidezza u kulur f’daqqa: tara kull pass u tagħżel
+✨ Restaurer en une fois ¦ ✨ Restauro njëherësh ¦ ✨ Irrestawra f’daqqa
+ou étape par étape : ¦ ose hap pas hapi: ¦ jew pass pass:
+Réparer ¦ Riparo ¦ Sewwi
+🪡 Réparer ¦ 🪡 Riparo ¦ 🪡 Sewwi
+Déplacer la vue ¦ Zhvendos pamjen ¦ Ċaqlaq il-veduta
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Riparo një palosje ose një grisje (R): piko sipër, ribëhet sipas rrethinës ¦ Sewwi tinja jew ċarta (R): pinġi fuqha, terġa’ ssir skont dak li hemm madwar
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Goma (E): fshin shtresën e zgjedhur; mbi foto, e fsheh me një maskë (asgjë nuk humbet) ¦ Gomma (E): tħassar is-saff magħżul; fuq ir-ritratt, taħbih b’maskra (xejn ma jintilef)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Gradient (G): tërhiq për ta vizatuar; mbi një maskë, e shkrin shtresën ¦ Gradjent (G): kaxkar biex tpinġih; fuq maskra, idewweb is-saff
+Déplacer un élément d’un calque (V) ¦ Zhvendos një element të një shtrese (V) ¦ Ċaqlaq element ta’ saff (V)
+Déplacer un élément d’un calque ¦ Zhvendos një element të një shtrese ¦ Ċaqlaq element ta’ saff
+Sélection rectangle (M) ¦ Përzgjedhje drejtkëndëshe (M) ¦ Għażla rettangolari (M)
+Sélection rectangle ¦ Përzgjedhje drejtkëndëshe ¦ Għażla rettangolari
+Sélection ellipse (⇧M) ¦ Përzgjedhje eliptike (⇧M) ¦ Għażla ellittika (⇧M)
+Sélection ellipse ¦ Përzgjedhje eliptike ¦ Għażla ellittika
+Lasso : entourer à main levée (L) ¦ Laso: rrethoje me dorë të lirë (L) ¦ Lazz: dawwar bl-idejn ħielsa (L)
+Lasso : entourer à main levée ¦ Laso: rrethoje me dorë të lirë ¦ Lazz: dawwar bl-idejn ħielsa
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Pena: përzgjedhje pikë pas pike (P) — klik i dyfishtë ose Enter për ta mbyllur ¦ Pinna: għażla punt punt (P) — klikk doppju jew Enter biex tagħlaq
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Pena: përzgjedhje pikë pas pike — klik i dyfishtë ose Enter për ta mbyllur ¦ Pinna: għażla punt punt — klikk doppju jew Enter biex tagħlaq
+Sélection automatique (baguette magique) (W) ¦ Përzgjedhje automatike (shkop magjik) (W) ¦ Għażla awtomatika (bastun maġiku) (W)
+Sélection automatique (baguette magique) ¦ Përzgjedhje automatike (shkop magjik) ¦ Għażla awtomatika (bastun maġiku)
+Recadrer et redresser (C) ¦ Prit dhe drejto (C) ¦ Aqta’ u ddrittja (C)
+Recadrer et redresser ¦ Prit dhe drejto ¦ Aqta’ u ddrittja
+Correcteur de taches (J) ¦ Korrektor njollash (J) ¦ Korrettur tat-tbajja’ (J)
+Correcteur de taches ¦ Korrektor njollash ¦ Korrettur tat-tbajja’
+🩹 Correcteur de taches ¦ 🩹 Korrektor njollash ¦ 🩹 Korrettur tat-tbajja’
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Riparo një palosje ose një grisje: piko sipër, ribëhet sipas rrethinës ¦ Sewwi tinja jew ċarta: pinġi fuqha, terġa’ ssir skont dak li hemm madwar
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Vulë klonimi: një vend, ose një zonë e përzgjedhur (S) ¦ Timbru: post wieħed, jew żona magħżula (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Vulë klonimi: një vend, ose një zonë e përzgjedhur ¦ Timbru: post wieħed, jew żona magħżula
+Pinceau (B) ¦ Penel (B) ¦ Pinzell (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Goma: fshin shtresën e zgjedhur; mbi foto, e fsheh me një maskë (asgjë nuk humbet) ¦ Gomma: tħassar is-saff magħżul; fuq ir-ritratt, taħbih b’maskra (xejn ma jintilef)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Format: drejtkëndësh, elips, vijë, shigjetë (U) ¦ Forom: rettangolu, ellissi, linja, vleġġa (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Format: drejtkëndësh, elips, vijë, shigjetë ¦ Forom: rettangolu, ellissi, linja, vleġġa
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Gradient: tërhiq për ta vizatuar; mbi një maskë, e shkrin shtresën ¦ Gradjent: kaxkar biex tpinġih; fuq maskra, idewweb is-saff
+Texte (T) ¦ Tekst (T) ¦ Test (T)
+Main, ou barre d’espace (H) ¦ Dora, ose tasti i hapësirës (H) ¦ Id, jew l-ispace bar (H)
+Main, ou barre d’espace ¦ Dora, ose tasti i hapësirës ¦ Id, jew l-ispace bar
+Zoom (Z) — ⌥ pour reculer ¦ Zmadhim (Z) — ⌥ për ta zvogëluar ¦ Żum (Z) — ⌥ biex tnaqqas
+Zoom — ⌥ pour reculer ¦ Zmadhim — ⌥ për ta zvogëluar ¦ Żum — ⌥ biex tnaqqas
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Ruaj projektin (për të vazhduar më vonë) ¦ 💾 Issejvja l-proġett (biex tkompli aktar tard)
+📂 Ouvrir un projet… ¦ 📂 Hap një projekt… ¦ 📂 Iftaħ proġett…
+Enregistrer et afficher cette version ¦ Ruaj dhe shfaq këtë version ¦ Issejvja u uri din il-verżjoni
+Enregistrer sans l’afficher ¦ Ruaj pa e shfaqur ¦ Issejvja mingħajr ma turiha
+Copie séparée ¦ Kopje më vete ¦ Kopja separata
+ℹ️ Informations… ¦ ℹ️ Informacione… ¦ ℹ️ Informazzjoni…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Eksporto imazhin (PNG, JPG, printo)… ¦ ⤓ Esporta l-istampa (PNG, JPG, ipprintja)…
+⤓ Exporter l’avant / après… ¦ ⤓ Eksporto para / pas… ¦ ⤓ Esporta l-qabel / wara…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Eksporto në PSD (me shtresat)… ¦ 🗂 Esporta f’PSD (bis-saffi)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Importo shtresat e një PSD… ¦ 🗂 Importa s-saffi ta’ PSD…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Veprime: rregullime të ruajtura, për t’u ribërë në disa foto… ¦ ⚡ Azzjonijiet: aġġustamenti ssejvjati, biex terġa’ tagħmilhom fuq diversi ritratti…
+⚡ Passer à la retouche rapide ¦ ⚡ Kalo te retushimi i shpejtë ¦ ⚡ Għaddi għar-rtokk malajr
+🕘 Historique ¦ 🕘 Historiku ¦ 🕘 Storja
+🎚 Réglages, niveaux et courbe ¦ 🎚 Rregullime, nivele dhe kurba ¦ 🎚 Aġġustamenti, livelli u kurva
+🎨 Teinte/Saturation… ¦ 🎨 Nuanca/Ngopja… ¦ 🎨 Lewn/Saturazzjoni…
+⌗ Recadrer et redresser ¦ ⌗ Prit dhe drejto ¦ ⌗ Aqta’ u ddrittja
+📐 Redresser automatiquement ¦ 📐 Drejto automatikisht ¦ 📐 Iddrittja awtomatikament
+Annuler le recadrage ¦ Anulo prerjen ¦ Ikkanċella l-qtugħ
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Drejto perspektivën (foto e bërë në kënd)… ¦ ⧈ Ikkoreġi l-perspettiva (ritratt meħud mill-ġenb)…
+Enlever la perspective ¦ Hiq perspektivën ¦ Neħħi l-perspettiva
+📏 Taille de l’image… ¦ 📏 Madhësia e imazhit… ¦ 📏 Daqs tal-istampa…
+⬚ Taille de la zone de travail… ¦ ⬚ Madhësia e zonës së punës… ¦ ⬚ Daqs taż-żona tax-xogħol…
+🔄 Rotation de l’image ¦ 🔄 Rrotullimi i imazhit ¦ 🔄 Dawran tal-istampa
+↻ 90° horaire ¦ ↻ 90° në drejtim orar ¦ ↻ 90° lemin
+↺ 90° antihoraire ¦ ↺ 90° në drejtim kundërorar ¦ ↺ 90° xellug
+Angle… ¦ Këndi… ¦ Angolu…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Drejto horizontin (vizato një vijë)… ¦ 📐 Iddrittja l-orizzont (pinġi linja)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Pasqyro imazhin horizontalisht ¦ ⇆ Aqleb l-istampa orizzontalment
+⇅ Symétrie verticale de l’image ¦ ⇅ Pasqyro imazhin vertikalisht ¦ ⇅ Aqleb l-istampa vertikalment
+✨ Restaurer en une fois… ¦ ✨ Restauro njëherësh… ¦ ✨ Irrestawra f’daqqa…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Restauro një foto të vjetër (hap pas hapi) ¦ 🧭 Irrestawra ritratt qadim (pass pass)
+🔍 Repérer les plis et rayures… ¦ 🔍 Gjej palosjet dhe gërvishtjet… ¦ 🔍 Sib it-tinjiet u l-grif…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Riparo me penel (palosje, grisje) ¦ 🪡 Sewwi bil-pinzell (tinjiet, ċrit)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Pluhur dhe gërvishtje (Filtrat) ¦ 🧹 Trab u grif (Filtri)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Hiq reflekset (xham): shtresë më vete ¦ 🪟 Neħħi r-riflessi (ħġieġ): saff separat
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Ngjyros: shtresë rregullimi (gradient) ¦ 🎨 Ikkulurixxi: saff ta’ aġġustament (gradjent)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Ngjyros me penel: shtresë «Ngjyrë» ¦ 🖌 Ikkulurixxi bil-pinzell: saff “Kulur”
+🪪 Recadrer en photo d’identité… ¦ 🪪 Prit si foto dokumenti… ¦ 🪪 Aqta’ bħala ritratt tal-passaport…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Portrete për disa kartela… ¦ 🪪 Ritratti ta’ diversi skedi…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Rrjedhshmëri (deformo me penel)… ¦ 💧 Liquify (iddeforma bil-pinzell)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Gomë magjike (sfond njëngjyrësh → transparent)… ¦ 🪄 Gomma maġika (sfond uniformi → trasparenti)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Përmirëso skajin e maskës (flokë, kontur)… ¦ ✨ Irfina t-tarf tal-maskra (xagħar, kontorni)…
+☁️ Remplacer le ciel… ¦ ☁️ Zëvendëso qiellin… ¦ ☁️ Ibdel is-sema…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Prit një person (sfond transparent, i turbullt, njëngjyrësh)… ¦ ✂️ Aqta’ persuna (sfond trasparenti, imċajpar, uniformi)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Zmadho ×2 / ×4… ¦ 🔍 Kabbar ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Panoramë: bashko me foto të tjera… ¦ 🧩 Panorama: għaqqad ma’ ritratti oħra…
+Calque ¦ Shtresa ¦ Saff
+＋ Nouveau calque ¦ ＋ Shtresë e re ¦ ＋ Saff ġdid
+📁 Nouveau groupe ¦ 📁 Grup i ri ¦ 📁 Grupp ġdid
+Grouper le calque choisi ¦ Grupo shtresën e zgjedhur ¦ Iġbor is-saff magħżul fi grupp
+🎚 Nouveau calque de réglage ¦ 🎚 Shtresë e re rregullimi ¦ 🎚 Saff ġdid ta’ aġġustament
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Rregullim i ri Nuancë/Ngopje ¦ 🎨 Aġġustament ġdid Lewn/Saturazzjoni
+Nouveau réglage Teinte/Saturation ¦ Rregullim i ri Nuancë/Ngopje ¦ Aġġustament ġdid Lewn/Saturazzjoni
+🖼️ Placer une image… ¦ 🖼️ Vendos një imazh… ¦ 🖼️ Poġġi stampa…
+▦ Nouveau calque de dégradé… ¦ ▦ Shtresë e re gradienti… ¦ ▦ Saff ġdid ta’ gradjent…
+▩ Nouveau calque de motif… ¦ ▩ Shtresë e re motivi… ¦ ▩ Saff ġdid ta’ disinn…
+▩ Créer un motif… ¦ ▩ Krijo një motiv… ¦ ▩ Oħloq disinn…
+▩ Créer un motif ¦ ▩ Krijo një motiv ¦ ▩ Oħloq disinn
+＋ Créer un motif… ¦ ＋ Krijo një motiv… ¦ ＋ Oħloq disinn…
+Copier la sélection sur un calque ¦ Kopjo përzgjedhjen në një shtresë ¦ Ikkopja l-għażla fuq saff
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Shto një maskë te shtresa e zgjedhur ¦ 🎭 Żid maskra mas-saff magħżul
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Maskë që fsheh gjithçka (⌥ + klik mbi 🎭) ¦ 🎭 Maskra li taħbi kollox (⌥ + klikk fuq 🎭)
+Masque d’après la sélection ¦ Maskë sipas përzgjedhjes ¦ Maskra mill-għażla
+Masque qui cache la sélection ¦ Maskë që fsheh përzgjedhjen ¦ Maskra li taħbi l-għażla
+Inverser le masque ¦ Përmbys maskën ¦ Aqleb il-maskra
+Retirer le masque ¦ Hiq maskën ¦ Neħħi l-maskra
+inverser le masque ¦ përmbys maskën ¦ aqleb il-maskra
+retirer le masque ¦ hiq maskën ¦ neħħi l-maskra
+🗂 Calques ¦ 🗂 Shtresat ¦ 🗂 Saffi
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Përzgjidh subjektin (automatik) ¦ 🎯 Agħżel is-suġġett (awtomatiku)
+✂️ Détourer une personne… ¦ ✂️ Prit një person… ¦ ✂️ Aqta’ persuna…
+Désélectionner ¦ Hiq përzgjedhjen ¦ Neħħi l-għażla
+Inverser ¦ Përmbys ¦ Aqleb
+Contour progressif… ¦ Zbutje e skajeve… ¦ Feather…
+Contour progressif ¦ Zbutje e skajeve ¦ Feather
+Agrandir… ¦ Zgjero… ¦ Kabbar…
+Réduire… ¦ Ngushto… ¦ Ċekken…
+Remplir avec la couleur ¦ Mbush me ngjyrë ¦ Imla bil-kulur
+Effacer (transparent) ¦ Fshi (transparent) ¦ Ħassar (trasparenti)
+Recadrer sur la sélection ¦ Prit sipas përzgjedhjes ¦ Aqta’ skont l-għażla
+Filtre ¦ Filtër ¦ Filtru
+↻ Refaire le dernier filtre ¦ ↻ Ribëj filtrin e fundit ¦ ↻ Erġa’ agħmel l-aħħar filtru
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Filtra të shpejtë dhe filtrat e shtresës (paneli) ¦ ✨ Filtri malajr u filtri tas-saff (pannell)
+Enlever les filtres rapides ¦ Hiq filtrat e shpejtë ¦ Neħħi l-filtri malajr
+Replier / ouvrir le panneau de droite ¦ Palos / hap panelin e djathtë ¦ Agħlaq / iftaħ il-pannell tal-lemin
+◧ Avant / après en rideau ¦ ◧ Para / pas me perde ¦ ◧ Qabel / wara bil-purtiera
+Toute l’image ¦ Gjithë imazhi ¦ L-istampa kollha
+Nom du projet de retouche ¦ Emri i projektit të retushimit ¦ Isem il-proġett tar-rtokk
+Le nom du projet de retouche (tape pour le changer) ¦ Emri i projektit të retushimit (shkruaj për ta ndryshuar) ¦ Isem il-proġett tar-rtokk (ittajpja biex tibdlu)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Kalo te retushimi i shpejtë (ai i versionit 0.5.0): rregullime, kurbë, njolla, vulë — më pak butona ¦ Għaddi għar-rtokk malajr (dak tal-verżjoni 0.5.0): aġġustamenti, kurva, tbajja’, timbru — inqas buttuni
+⚡ Rapide ¦ ⚡ I shpejtë ¦ ⚡ Malajr
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Eksporto: imazhin e retushuar (PNG, JPG, printo) ose para / pas ¦ Esporta: l-istampa rtukkjata (PNG, JPG, ipprintja) jew il-qabel / wara
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Ruaj projektin: gjithë punën (shtresa, maska, rregullime…) për ta rihapur dhe vazhduar ¦ Issejvja l-proġett: ix-xogħol kollu (saffi, maskri, aġġustamenti…) biex terġa’ tiftħu u tkompli
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Imazhi i retushuar (PNG, JPG, printo)… ¦ 🖼 L-istampa rtukkjata (PNG, JPG, ipprintja)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Para / pas (krah për krah ose perde)… ¦ ◧ Qabel / wara (ħdejn xulxin jew purtiera)…
+Dureté ¦ Fortësia ¦ Ebusija
+Sorte de pinceau ¦ Lloji i penelit ¦ Tip ta’ pinzell
+Couleurs rapides ¦ Ngjyra të shpejta ¦ Kuluri malajr
+contour ¦ kontur ¦ kontorn
+Contour du texte ¦ Konturi i tekstit ¦ Kontorn tat-test
+Couleur du contour ¦ Ngjyra e konturit ¦ Kulur tal-kontorn
+Épaisseur du contour ¦ Trashësia e konturit ¦ Ħxuna tal-kontorn
+épaisseur ¦ trashësi ¦ ħxuna
+ombre ¦ hije ¦ dell
+Ombre du texte ¦ Hija e tekstit ¦ Dell tat-test
+Couleur de l’ombre ¦ Ngjyra e hijes ¦ Kulur tad-dell
+Tampon : endroit à recopier, aligné ¦ Vulë: vendi për t’u kopjuar, i rreshtuar ¦ Timbru: il-post li tikkopja, allinjat
+🎯 Choisir l’endroit à recopier ¦ 🎯 Zgjidh vendin për t’u kopjuar ¦ 🎯 Agħżel il-post li tikkopja
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ E shënuar: vendi i kopjuar ndjek penelin nga një vizë te tjetra. E pashënuar: çdo vizë nis nga i njëjti vend. ¦ Immarkat: il-post ikkupjat isegwi l-pinzell minn linja għall-oħra. Mhux immarkat: kull linja terġa’ tibda mill-istess post.
+aligné ¦ i rreshtuar ¦ allinjat
+Réparer : grain, repérer les plis ¦ Riparo: kokrriza, gjej palosjet ¦ Sewwi: grana, sib it-tinjiet
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ E shënuar: pak nga kokrrizat e fotos përreth rikthehen në zonën e riparuar, që të mos duket shumë e lëmuar. ¦ Immarkat: ftit mill-grana tar-ritratt madwar terġa’ titqiegħed fiż-żona msewwija, biex ma tidhirx lixxa wisq.
+garder le grain ¦ ruaj kokrrizat ¦ żomm il-grana
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Gjej vetë vijat e holla (palosje, gërvishtje) dhe propozo t’i mbushësh ¦ Sib waħdek il-linji rqaq (tinjiet, grif) u ipproponi li jimtlew
+🔍 Repérer les plis ¦ 🔍 Gjej palosjet ¦ 🔍 Sib it-tinjiet
+Texte gras ¦ Tekst i trashë ¦ Test grass
+Texte italique ¦ Tekst i pjerrët ¦ Test korsiv
+Forme (rectangle, ellipse, flèche…) ¦ Forma (drejtkëndësh, elips, shigjetë…) ¦ Forma (rettangolu, ellissi, vleġġa…)
+Rectangle arrondi ¦ Drejtkëndësh me qoshe të rrumbullakëta ¦ Rettangolu b’kantunieri tondi
+Forme remplie ¦ Formë e mbushur ¦ Forma mimlija
+remplie ¦ e mbushur ¦ mimlija
+Couleur de fond des formes ¦ Ngjyra e mbushjes së formave ¦ Kulur tal-mili tal-forom
+Baguette : tolérance ¦ Shkopi: toleranca ¦ Bastun: tolleranza
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Sa larg mund të shkojë një ngjyrë nga ajo e klikuar për t’u marrë: e vogël = vetëm e njëjta nuancë, e madhe = edhe nuancat fqinje. ¦ Kemm jista’ kulur jitbiegħed minn dak ikklikkjat biex jittieħed: żgħir = l-istess lewn biss, kbir = anki l-lewn viċin.
+Tolérance ¦ Toleranca ¦ Tolleranza
+Baguette : contiguë ¦ Shkopi: i vazhdueshëm ¦ Bastun: kontigwu
+contiguë ¦ i vazhdueshëm ¦ kontigwu
+Sélectionner le sujet ¦ Përzgjidh subjektin ¦ Agħżel is-suġġett
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Sfondi njihet në skajet e fotos; toleranca rregullon deri ku shkon ¦ L-isfond jingħaraf fit-truf tar-ritratt; it-tolleranza tirranġa sa fejn jasal
+🎯 Sujet ¦ 🎯 Subjekti ¦ 🎯 Suġġett
+Actions de la sélection ¦ Veprimet e përzgjedhjes ¦ Azzjonijiet tal-għażla
+⇧ ajouter · ⌥ enlever ¦ ⇧ shto · ⌥ hiq ¦ ⇧ żid · ⌥ neħħi
+→ Calque ¦ → Shtresë ¦ → Saff
+Remplir ¦ Mbush ¦ Imla
+Effacer ¦ Fshi ¦ Ħassar
+Masque ¦ Maskë ¦ Maskra
+Recadrer ¦ Prit ¦ Aqta’
+Recadrage : proportions, redresser ¦ Prerja: përmasat, drejto ¦ Qtugħ: proporzjonijiet, iddrittja
+Proportions ¦ Përmasat ¦ Proporzjonijiet
+Libres ¦ Të lira ¦ Ħielsa
+Celles de la photo ¦ Ato të fotos ¦ Dawk tar-ritratt
+Carré 1:1 ¦ Katror 1:1 ¦ Kwadru 1:1
+A4 portrait ¦ A4 vertikale ¦ A4 vertikali
+Redresser ¦ Drejto ¦ Iddrittja
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Gjen këndin e vijave kryesore (horizonti, muret, kornizat) ¦ Isib l-angolu tal-linji ewlenin (orizzont, ħitan, gwarniċi)
+📐 Auto ¦ 📐 Auto ¦ 📐 Awto
+✓ Valider ¦ ✓ Mirato ¦ ✓ Ikkonferma
+Perspective ¦ Perspektiva ¦ Perspettiva
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Vendos 4 qoshet mbi qoshet e asaj që duhet të bëhet drejtkëndëshe (fotoja, dokumenti, fasada). ¦ Poġġi l-4 kantunieri fuq il-kantunieri ta’ dak li għandu jsir rettangolari (ir-ritratt, id-dokument, il-faċċata).
+Coins aux bords ¦ Qoshet në skaje ¦ Kantunieri fit-truf
+Dégradé : couleurs, forme, options ¦ Gradient: ngjyrat, forma, opsionet ¦ Gradjent: kuluri, forma, għażliet
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Ndrysho gradientin: ngjyrat, tejdukshmëria, paracaktimet ¦ Editja l-gradjent: kuluri, trasparenza, presets
+Forme du dégradé ¦ Forma e gradientit ¦ Forma tal-gradjent
+Inverser le dégradé ¦ Përmbys gradientin ¦ Aqleb il-gradjent
+inverser ¦ përmbys ¦ aqleb
+Tramage ¦ Rasterizim me pika ¦ Dithering
+tramage ¦ rasterizim me pika ¦ dithering
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Një kokrrizë shumë e lehtë që shmang «shkallët» e dukshme në gradientet e buta. ¦ Grana ħafifa ħafna li tevita t-“turġien” li jidhru fil-gradjenti ratba.
+Masque : cacher / montrer ¦ Maska: fshih / shfaq ¦ Maskra: aħbi / uri
+⬛ cacher ¦ ⬛ fshih ¦ ⬛ aħbi
+⬜ montrer ¦ ⬜ shfaq ¦ ⬜ uri
+Aide de l’outil ¦ Ndihma e mjetit ¦ Għajnuna tal-għodda
+Couleurs (premier plan et arrière-plan) ¦ Ngjyrat (plani i parë dhe sfondi) ¦ Kuluri (l-ewwel pjan u sfond)
+Noir et blanc (D) ¦ Bardh e zi (D) ¦ Iswed u abjad (D)
+Couleurs par défaut : noir et blanc ¦ Ngjyrat fillestare: e zezë dhe e bardhë ¦ Kuluri awtomatiċi: iswed u abjad
+Intervertir les deux couleurs (X) ¦ Ndërro dy ngjyrat (X) ¦ Aqleb iż-żewġ kuluri (X)
+Intervertir les couleurs ¦ Ndërro ngjyrat ¦ Aqleb il-kuluri
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Ngjyra e sfondit (mbushja e formave): kliko për ta ndryshuar ¦ Kulur tal-isfond (mili tal-forom): ikklikkja biex tibdlu
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Ngjyra e planit të parë (penel, tekst, forma): kliko për ta ndryshuar ¦ Kulur tal-ewwel pjan (pinzell, test, forom): ikklikkja biex tibdlu
+Replier le panneau (plus de place pour la photo) — Tab ¦ Palos panelin (më shumë vend për foton) — Tab ¦ Agħlaq il-pannell (aktar spazju għar-ritratt) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Tërhiq për ta zgjeruar ose ngushtuar panelin (klik i dyfishtë: madhësia fillestare) ¦ Kaxkar biex twessa’ jew iddejjaq il-pannell (klikk doppju: id-daqs tal-bidu)
+Onglets du panneau de droite ¦ Skedat e panelit të djathtë ¦ It-tabs tal-pannell tal-lemin
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Vetitë: Nuancë/Ngopje, maskë, pozicioni dhe madhësia e shtresës së zgjedhur ¦ Karatteristiċi: Lewn/Saturazzjoni, maskra, pożizzjoni u daqs tas-saff magħżul
+ⓘ Propriétés ¦ ⓘ Vetitë ¦ ⓘ Karatteristiċi
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Shkronja: fonti, varianti (trashësia), madhësia, hapësira mes rreshtave, hapësira mes shkronjave… ¦ Karattru: font, varjant (piż), daqs, spazju bejn il-linji, spazju bejn l-ittri…
+🔤 Caractère ¦ 🔤 Shkronja ¦ 🔤 Karattru
+Motifs : remplir d’un motif, créer les siens ¦ Motivet: mbush me një motiv, krijo të tuat ¦ Disinji: imla b’disinn, oħloq tiegħek
+▩ Motifs ¦ ▩ Motivet ¦ ▩ Disinji
+Motifs ¦ Motivet ¦ Disinji
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Format e penelit: paracaktime, hapi, këndi, shpërndarja, forma sipas një përzgjedhjeje ¦ Forom tal-pinzell: presets, spazjar, angolu, tixrid, forma minn għażla
+🖌 Formes ¦ 🖌 Format ¦ 🖌 Forom
+Restaurer une vieille photo, pas à pas ¦ Restauro një foto të vjetër, hap pas hapi ¦ Irrestawra ritratt qadim, pass pass
+🧭 Restaurer ¦ 🧭 Restauro ¦ 🧭 Irrestawra
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Si ngopja, por ngjyrat tashmë të gjalla lëvizin pak: nuancat e zbehta (lëkura, qielli i zbehtë) gjallërohen së pari. ¦ Bħas-saturazzjoni, iżda l-kuluri diġà ħajjin jinbidlu ftit: il-lewn baħħ (ġilda, sema ċar) jitqajjem l-ewwel.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Çel ose errëson tonet e mesme pa prekur të zezën as të bardhën: mbi 100, më e çelët; poshtë, më e errët. ¦ Jiċċara jew jiskura t-toni medji mingħajr ma jmiss l-iswed jew l-abjad: ’il fuq minn 100, aktar ċar; taħt, aktar skur.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Kliko mbi kurbë: shto një pikë · tërhiq: zhvendose · për ta hequr: zgjidhe pastaj «Hiq pikën» (ose ⌫), ose tërhiqe jashtë kornizës. ¦ Ikklikkja fuq il-kurva: żid punt · kaxkar: ċaqalqu · biex tneħħih: agħżlu imbagħad “Neħħi l-punt” (jew ⌫), jew kaxkru ’il barra mill-qafas.
+Enlever le point ¦ Hiq pikën ¦ Neħħi l-punt
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Ngjyrosje e butë (foto bardh e zi) ¦ 🎨 Kulur delikat (ritratt iswed u abjad)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Më mirë në një shtresë rregullimi (Imazh → Ngjyros): e dozon, e maskon, e heq. Për të ngjyrosur me dorë: Imazh → Ngjyros me penel. ¦ Aħjar f’saff ta’ aġġustament (Stampa → Ikkulurixxi): tiddożah, taħbih, tneħħih. Biex tikkulurixxi bl-idejn: Stampa → Ikkulurixxi bil-pinzell.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Filtra të shpejtë, pas rregullimeve: mbi foto, ose në një shtresë rregullimi (mbi gjithçka që është poshtë, ose vetëm shtresën menjëherë poshtë). Të njëjtat mbi imazhin e ruajtur në madhësi të plotë. ¦ Filtri malajr, wara l-aġġustamenti: fuq ir-ritratt, jew f’saff ta’ aġġustament (fuq dak kollu li hemm taħt, jew biss is-saff eżatt taħt). L-istess fuq l-istampa ssejvjata f’daqs sħiħ.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Forcon kontrastin e detajeve të mesme (rrudha, palosje të një pëlhure, shkrim) pa ndryshuar kontrastin e përgjithshëm. ¦ Isaħħaħ il-kuntrast tad-dettalji medji (tikmix, tinjiet ta’ drapp, kitba) mingħajr ma jibdel il-kuntrast ġenerali.
+Enlever les filtres ¦ Hiq filtrat ¦ Neħħi l-filtri
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Varianti: trashësia (Light, Regular, Bold, Black…) dhe të pjerrëtat ¦ Varjant: il-piż (Light, Regular, Bold, Black…) u l-korsiv
+Taille (en points de l’image) ¦ Madhësia (në pika të imazhit) ¦ Daqs (f’pixels tal-istampa)
+Interligne (vide = automatique, 120 % de la taille) ¦ Hapësira mes rreshtave (bosh = automatike, 120 % e madhësisë) ¦ Spazju bejn il-linji (vojt = awtomatiku, 120 % tad-daqs)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Kerning: çiftet e shkronjave afrohen sipas fontit (Metrik) ose aspak (0) ¦ Kerning: il-pari tal-ittri jersqu skont il-font (Metriku) jew xejn (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Hapësira mes shkronjave: hapësira midis të gjitha shkronjave, në të mijëtat e madhësisë ¦ Spazjar: l-ispazju bejn l-ittri kollha, f’elfijiet tad-daqs
+Échelle verticale ¦ Shkalla vertikale ¦ Skala vertikali
+Échelle horizontale ¦ Shkalla horizontale ¦ Skala orizzontali
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Zhvendosje vertikale (mbi vijën bazë nëse është pozitive) ¦ Ċaqliq vertikali (fuq il-linja bażi jekk pożittiv)
+Lissage des bords des lettres ¦ Zbutja e skajeve të shkronjave ¦ Twittija tat-truf tal-ittri
+Lissage ¦ Zbutja ¦ Twittija
+Lissé ¦ E zbutur ¦ Imwittija
+Aucun (bords nets, pixels) ¦ Asnjë (skaje të mprehta, piksele) ¦ Xejn (truf ċari, pixels)
+Alignement du paragraphe ¦ Rreshtimi i paragrafit ¦ Allinjament tal-paragrafu
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Për tekstet e ardhshme. Zgjidh një tekst me ➤ për ta ndryshuar. ¦ Għat-testi li jmiss. Agħżel test b’➤ biex tibdlu.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Për tekstet e ardhshme. Kliko mbi një tekst (mjeti Tekst ose ➤) për ta ndryshuar. ¦ Għat-testi li jmiss. Ikklikkja fuq test (għodda Test jew ➤) biex tibdlu.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Tekst duke u shkruar: çdo rregullim zbatohet menjëherë. ¦ ✍️ Test qed jinkiteb: kull aġġustament japplika minnufih.
+Métrique ¦ Metrik ¦ Metriku
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Variantet vijnë nga fontet e kompjuterit (Mac, Windows, Linux) kur aplikacioni mund t’i lexojë; përndryshe trashësitë e zakonshme. ¦ Il-varjanti ġejjin mill-fonts tal-kompjuter (Mac, Windows, Linux) meta l-app tista’ taqrahom; inkella l-piżijiet tas-soltu.
+Retrait de la première ligne (négatif : en saillie) ¦ Hyrja e rreshtit të parë (negative: e dalë) ¦ Daħla tal-ewwel linja (negattiv: ħierġa)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Gjerësia e bllokut të tekstit: rreshtat priten vetë (bosh = tekst i thjeshtë, një rresht për paragraf) ¦ Wisa’ tal-blokk tat-test: il-linji jinqasmu waħedhom (vojt = test sempliċi, linja waħda għal kull paragrafu)
+Espace avant chaque paragraphe ¦ Hapësirë para çdo paragrafi ¦ Spazju qabel kull paragrafu
+Espace après chaque paragraphe ¦ Hapësirë pas çdo paragrafi ¦ Spazju wara kull paragrafu
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Ndaj fjalët e gjata në fund të rreshtit, me vizë (rregulla të thjeshta të frëngjishtes; një vizë kushtëzuese ⌥- brenda një fjale merret e para) ¦ Aqsam il-kliem twal fl-aħħar tal-linja, b’sing (regoli sempliċi tal-Franċiż; sing kundizzjonali ⌥- ġo kelma jittieħed l-ewwel)
+Ω Glyphes ¦ Ω Glifet ¦ Ω Glifi
+Police (famille) ¦ Fonti (familja) ¦ Font (familja)
+(Auto) ¦ (Auto) ¦ (Awto)
+⟸ gauche ¦ ⟸ majtas ¦ ⟸ xellug
+≡ centre ¦ ≡ qendër ¦ ≡ ċentru
+droite ⟹ ¦ djathtas ⟹ ¦ lemin ⟹
+Symboles ¦ Simbole ¦ Simboli
+Code (U+00E9) ou caractère ¦ Kodi (U+00E9) ose shkronja ¦ Kodiċi (U+00E9) jew karattru
+Chercher un glyphe ¦ Kërko një glif ¦ Fittex glifu
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Për një bllok teksti, tërhiq një kornizë me mjetin Tekst T në vend që të klikosh, ose jepi gjerësinë këtu. Justifikimi vlen vetëm për një bllok. ¦ Għal blokk tat-test, kaxkar qafas bl-għodda Test T minflok tikklikkja, jew agħti l-wisa’ tiegħu hawn. Il-ġustifikazzjoni tgħodd biss għal blokk.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Kliko: shtohet te teksti që po shkruhet (ose në fund të tekstit të zgjedhur). Pa tekst: kopjohet. ¦ Ikklikkja: jiżdied mat-test li qed jinkiteb (jew fl-aħħar tat-test magħżul). Mingħajr test: jiġi kkupjat.
+Choisis d’abord un texte (outil T). ¦ Zgjidh fillimisht një tekst (mjeti T). ¦ L-ewwel agħżel test (għodda T).
+Un autre média, rattaché aux mêmes fiches ¦ Një media tjetër, e lidhur me të njëjtat kartela ¦ Midja oħra, marbuta mal-istess skedi
+Gardée dans les versions, la photo affichée ne change pas ¦ Ruhet në versione, fotoja e shfaqur nuk ndryshon ¦ Tinżamm fil-verżjonijiet, ir-ritratt muri ma jinbidilx
+avec les annotations (calques visibles) ¦ me shënimet (shtresat e dukshme) ¦ bl-annotazzjonijiet (saffi viżibbli)
+Avec les annotations (calques visibles) ¦ Me shënimet (shtresat e dukshme) ¦ Bl-annotazzjonijiet (saffi viżibbli)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Origjinali nuk ndryshohet kurrë: çdo retushim është një version i fotos, dhe ti zgjedh atë që shfaqet kudo. ¦ L-oriġinal qatt ma jinbidel: kull rtokk huwa verżjoni tar-ritratt, u int tagħżel liema tidher kullimkien.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Ruaj imazhin te Media ¦ 🖼 Issejvja l-istampa fil-Midja
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Imazhi (përfshirë shtresat) zëvendëson atë të medias; projekti ruan të gjitha shtresat për të vazhduar ¦ L-istampa (inklużi s-saffi) tieħu post dik tal-midja; il-proġett iżomm is-saffi kollha biex tkompli
+Enregistrer le projet (calques, masques, réglages) ¦ Ruaj projektin (shtresa, maska, rregullime) ¦ Issejvja l-proġett (saffi, maskri, aġġustamenti)
+la retouche est fermée ¦ retushimi është mbyllur ¦ ir-rtokk huwa magħluq
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Kliko mbi një hap për t’u kthyer në atë moment; hapat pasues mbeten (në gri) për sa kohë nuk bën asgjë tjetër. ¦ Ikklikkja fuq pass biex terġa’ lura għal dak il-mument; il-passi ta’ wara jibqgħu (bil-griż) sakemm ma tagħmel xejn ieħor.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Po pikturon maskën (penel: ⬛ fshih / ⬜ shfaq). Kliko: kthehu te shtresa ¦ Qed tpinġi l-maskra (pinzell: ⬛ aħbi / ⬜ uri). Ikklikkja: erġa’ lura għas-saff
+Masque : clic pour le peindre au pinceau ¦ Maska: kliko për ta pikturuar me penel ¦ Maskra: ikklikkja biex tpinġiha bil-pinzell
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + klik: çaktivizo / riaktivizo maskën ¦ ⇧ Shift + klikk: itfi / erġa’ ixgħel il-maskra
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + klik: shiko vetëm maskën ¦ ⌥ Alt + klikk: ara l-maskra biss
+touche \ : le masque en rouge par-dessus ¦ tasti \: maska me të kuqe sipër ¦ it-tasta \: il-maskra bl-aħmar minn fuq
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Shto një maskë (fsheh një pjesë pa e fshirë) — ⌥ / Alt + klik: një maskë që fsheh gjithçka (ose fsheh përzgjedhjen) ¦ Żid maskra (aħbi parti mingħajr ma tħassarha) — ⌥ / Alt + klikk: maskra li taħbi kollox (jew taħbi l-għażla)
+masque ¦ maskë ¦ maskra
+Ranger dans un groupe ¦ Vendos në një grup ¦ Poġġi fi grupp
+(hors groupe) ¦ (jashtë grupit) ¦ (barra mill-grupp)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Tërhiq për të renditur: sipër, poshtë, ose në një grup (lësho në mes të një grupi) ¦ Kaxkar biex tirranġa: fuq, taħt, jew fi grupp (itlaq f’nofs grupp)
+Calque de réglage ¦ Shtresë rregullimi ¦ Saff ta’ aġġustament
+La photo (réglages, taches, tampon) ¦ Fotoja (rregullime, njolla, vulë) ¦ Ir-ritratt (aġġustamenti, tbajja’, timbru)
+Supprimer le groupe (ce qu’il contient reste) ¦ Fshi grupin (ajo që përmban mbetet) ¦ Ħassar il-grupp (dak li fih jibqa’)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Hiq foton nga shtresat (⌘Z për ta rikthyer) ¦ Neħħi r-ritratt mis-saffi (⌘Z biex terġa’ tpoġġih)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Mënyra e shkrirjes: si përzihet shtresa me atë që është poshtë ¦ Mod ta’ taħlit: kif is-saff jitħallat ma’ dak li hemm taħt
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Mbushja: dozon vetëm përmbajtjen e shtresës, jo efektet e saj (hije, shkëlqim, kontur). Në 0 %, mbeten vetëm efektet. ¦ Mili: jiddoża biss il-kontenut tas-saff, mhux l-effetti tiegħu (dell, dija, kontorn). B’0 %, jibqgħu l-effetti biss.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Efektet e shtresës: hije e hedhur, shkëlqim i jashtëm, kontur, mbivendosje ngjyre ¦ Effetti tas-saff: dell mitfugħ, dija minn barra, kontorn, overlay tal-kulur
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Objekt dinamik: zmadho, zvogëlo, rrotullo pa humbje (imazhi origjinal ruhet) ¦ Oġġett dinamiku: kabbar, ċekken, dawwar mingħajr telf (l-istampa oriġinali tinżamm)
+🧩 Objet dynamique ¦ 🧩 Objekt dinamik ¦ 🧩 Oġġett dinamiku
+Une autre image à la même place, même taille, même rotation ¦ Një imazh tjetër në të njëjtin vend, e njëjta madhësi, i njëjti rrotullim ¦ Stampa oħra fl-istess post, l-istess daqs, l-istess dawran
+Remplacer… ¦ Zëvendëso… ¦ Ibdel…
+Remettre l’image à sa taille d’origine (et droite) ¦ Ktheje imazhin në madhësinë origjinale (dhe drejt) ¦ Erġa’ poġġi l-istampa fid-daqs oriġinali (u dritta)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Një shtresë filtrash menjëherë sipër, që prek vetëm këtë imazh: mund ta rregullosh, ta dozosh, ta fshehësh ¦ Saff ta’ filtri eżatt fuq, li jmiss biss din l-istampa: tista’ taġġustah, tiddożah, taħbih
+✨ Filtre dynamique ¦ ✨ Filtër dinamik ¦ ✨ Filtru dinamiku
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Ngrije imazhin në piksele, në madhësinë që ka (pa zmadhim pa humbje më) ¦ Iffissa l-istampa f’pixels, fid-daqs li għandha (m’hemmx aktar tkabbir mingħajr telf)
+Pixelliser ¦ Rasterizo ¦ Irrasterizza
+Couleurs, transparence, forme, préréglages ¦ Ngjyrat, tejdukshmëria, forma, paracaktimet ¦ Kuluri, trasparenza, forma, presets
+▦ Modifier le dégradé… ¦ ▦ Ndrysho gradientin… ¦ ▦ Editja l-gradjent…
+Motif, échelle, angle, décalage ¦ Motivi, shkalla, këndi, zhvendosja ¦ Disinn, skala, angolu, ċaqliq
+▩ Modifier le motif… ¦ ▩ Ndrysho motivin… ¦ ▩ Editja d-disinn…
+Comme un masque d’écrêtage de Photoshop ¦ Si një maskë prerjeje në Photoshop ¦ Bħal maskra tal-qtugħ ta’ Photoshop
+régler… ¦ rregullo… ¦ aġġusta…
+ne touche que l’élément juste dessous ¦ prek vetëm elementin menjëherë poshtë ¦ tmiss biss l-element eżatt taħt
+touche tout ce qui est dessous ¦ prek gjithçka që është poshtë ¦ tmiss dak kollu li hemm taħt
+(seulement l’élément dessous) ¦ (vetëm elementi poshtë) ¦ (l-element ta’ taħt biss)
+(tout ce qui est dessous) ¦ (gjithçka që është poshtë) ¦ (dak kollu li hemm taħt)
+régler la photo ¦ rregullo foton ¦ aġġusta r-ritratt
+＋ dans un calque de réglage ¦ ＋ në një shtresë rregullimi ¦ ＋ f’saff ta’ aġġustament
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Rregullime dhe filtra në një shtresë më vete, që mund ta maskosh, ta dozosh ose ta kufizosh te një shtresë ¦ Aġġustamenti u filtri f’saff separat, li tista’ taħbi, tiddoża jew tillimita għal saff wieħed
+✨ Filtres : ¦ ✨ Filtrat: ¦ ✨ Filtri:
+Changer les réglages de ce filtre ¦ Ndrysho rregullimet e këtij filtri ¦ Ibdel l-aġġustamenti ta’ dan il-filtru
+vider ¦ zbraz ¦ battal
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ grup bosh: tërhiq një shtresë këtu (⠿), ose vendose me 📁 ¦ grupp vojt: kaxkar saff hawn (⠿), jew poġġih b’📁
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Peneli, format dhe teksti shkojnë te shtresa e zgjedhur (në blu). 📁 një grup mund të përmbajë shtresa dhe grupe të tjera; 🎚 një shtresë rregullimi zbaton rregullime dhe filtra mbi atë që është poshtë (ose vetëm mbi elementin menjëherë poshtë). 🎭 një maskë fsheh pa fshirë. ¦ Il-pinzell, il-forom u t-test imorru fuq is-saff magħżul (bil-blu). 📁 grupp jista’ jkun fih saffi u gruppi oħra; 🎚 saff ta’ aġġustament japplika aġġustamenti u filtri fuq dak li hemm taħt (jew biss fuq l-element eżatt taħt). 🎭 maskra taħbi mingħajr ma tħassar.
+＋ Calque ¦ ＋ Shtresë ¦ ＋ Saff
+＋ Groupe ¦ ＋ Grup ¦ ＋ Grupp
+＋ Réglage ¦ ＋ Rregullim ¦ ＋ Aġġustament
+🖼️ Image ¦ 🖼️ Imazh ¦ 🖼️ Stampa
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Një imazh nga baza ose nga kompjuteri, në një shtresë të re, si objekt dinamik (zmadho, zvogëlo, rrotullo pa humbje) ¦ Stampa mid-database jew mill-kompjuter, fuq saff ġdid, bħala oġġett dinamiku (kabbar, ċekken, dawwar mingħajr telf)
+Un groupe vide au-dessus du calque choisi ¦ Një grup bosh mbi shtresën e zgjedhur ¦ Grupp vojt fuq is-saff magħżul
+Réglages et filtres dans un calque ¦ Rregullime dhe filtra në një shtresë ¦ Aġġustamenti u filtri f’saff
+La photo a été retirée des calques : la remettre tout en bas ¦ Fotoja u hoq nga shtresat: ktheje në fund fare ¦ Ir-ritratt tneħħa mis-saffi: erġa’ poġġih fil-qiegħ nett
+↺ Remettre la photo ¦ ↺ Ktheje foton ¦ ↺ Erġa’ poġġi r-ritratt
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Vendos shtresën e zgjedhur në një grup të ri (⌘G) ¦ Iqiegħed is-saff magħżul fi grupp ġdid (⌘G)
+Grouper ¦ Grupo ¦ Iġbor fi grupp
+Sélection → calque ¦ Përzgjedhje → shtresë ¦ Għażla → saff
+Aucun calque. ¦ Asnjë shtresë. ¦ L-ebda saff.
+Choisis d’abord un calque. ¦ Zgjidh fillimisht një shtresë. ¦ L-ewwel agħżel saff.
+Nouveau calque ¦ Shtresë e re ¦ Saff ġdid
+Nouveau calque de réglage ¦ Shtresë e re rregullimi ¦ Saff ġdid ta’ aġġustament
+Photo remise dans les calques ¦ Fotoja u rikthye te shtresat ¦ Ir-ritratt reġa’ tqiegħed fis-saffi
+Masque ajouté : la sélection est cachée. ¦ Maska u shtua: përzgjedhja është fshehur. ¦ Maskra miżjuda: l-għażla hija moħbija.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Maska u shtua: gjithçka është fshehur; piko me ⬜ për ta shfaqur. ¦ Maskra miżjuda: kollox moħbi; pinġi b’⬜ biex turi.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Maska u shtua: piko me ⬛ për të fshehur, me ⬜ për të shfaqur. ¦ Maskra miżjuda: pinġi b’⬛ biex taħbi, b’⬜ biex turi.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Vetëm maska: e bardhë = e shfaqur, e zezë = e fshehur (⌥ + klik për t’u kthyer) ¦ Il-maskra biss: abjad = muri, iswed = moħbi (⌥ + klikk biex terġa’ lura)
+Ce calque est verrouillé. ¦ Kjo shtresë është e kyçur. ¦ Dan is-saff huwa msakkar.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Filtër dinamik: zgjidh një filtër («＋ Shto një filtër…»); prek vetëm këtë imazh dhe mbetet i rregullueshëm. ¦ Filtru dinamiku: agħżel filtru (“＋ Żid filtru…”); imiss biss din l-istampa, u jibqa’ jista’ jiġi aġġustat.
+verrouillé ¦ i kyçur ¦ imsakkar
+déverrouillé ¦ i zhkyçur ¦ miftuħ
+seulement sur l’élément dessous ¦ vetëm mbi elementin poshtë ¦ biss fuq l-element ta’ taħt
+sur tout ce qui est dessous ¦ mbi gjithçka që është poshtë ¦ fuq dak kollu li hemm taħt
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Hap panelin (Rregullime, Shtresat…) — Tab ¦ Iftaħ il-pannell (Aġġustamenti, Saffi…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Tërhiq për të lëvizur në imazhin e zmadhuar (tasti i hapësirës bën të njëjtën gjë me çdo mjet). ¦ Kaxkar biex timxi fl-istampa mkabbra (l-ispace bar jagħmel l-istess ma’ kwalunkwe għodda).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Kliko mbi një vizë, një formë, një tekst ose një zonë të kopjuar të një shtrese, pastaj tërhiqe. ⌫ e fshin, klik i dyfishtë mbi një tekst për ta rishkruar. ¦ Ikklikkja fuq linja, forma, test jew żona kkupjata ta’ saff, imbagħad kaxkarha. ⌫ tħassarha, klikk doppju fuq test biex terġa’ tiktbu.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Tërhiq për të përzgjedhur një drejtkëndësh (⇧ gjithashtu: shto, ⌥: hiq). Rregullimet e shiritit veprojnë pastaj mbi përzgjedhjen. ¦ Kaxkar biex tagħżel rettangolu (⇧ ukoll: żid, ⌥: neħħi). L-aġġustamenti tal-bar imbagħad jaħdmu fuq l-għażla.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Tërhiq për të përzgjedhur një oval (⇧: shto, ⌥: hiq). ¦ Kaxkar biex tagħżel ovali (⇧: żid, ⌥: neħħi).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Rrethoje me dorë të lirë zonën që do të përzgjedhësh (⇧: shto, ⌥: hiq). ¦ Dawwar bl-idejn ħielsa ż-żona li trid tagħżel (⇧: żid, ⌥: neħħi).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Pena: kliko pikë pas pike rreth zonës; klik i dyfishtë, Enter ose klik mbi pikën e parë për ta mbyllur. Esc: braktis. ¦ Pinna: ikklikkja punt punt madwar iż-żona; klikk doppju, Enter jew klikk fuq l-ewwel punt biex tagħlaq. Esc: abbanduna.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Kliko mbi një ngjyrë: të gjitha pikat fqinje me nuancë të afërt përzgjidhen (Toleranca). ⇧: shto, ⌥: hiq. ¦ Ikklikkja fuq kulur: il-punti viċini kollha b’lewn simili jintgħażlu (Tolleranza). ⇧: żid, ⌥: neħħi.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Tërhiq dorezat e kornizës (ose vizato një kornizë të re), zgjidh përmasat, drejto me rrëshqitësin, pastaj «✓ Mirato». ¦ Kaxkar il-manki tal-qafas (jew pinġi qafas ġdid), agħżel il-proporzjonijiet, iddrittja bis-slider, imbagħad “✓ Ikkonferma”.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Kliko: zmadho këtu · ⌥ + klik: zvogëlo · ose tërhiq për të zmadhuar një zonë. ¦ Ikklikkja: żum hawn · ⌥ + klikk: naqqas · jew kaxkar biex tagħmel żum fuq żona.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Tërhiq 4 qoshet mbi qoshet e fotos, të dokumentit ose të fasadës së fotografuar në kënd, pastaj «✓ Mirato»: rikthehet e rrafshët. Më mirë para korrigjimeve të njollave. ¦ Kaxkar l-4 kantunieri fuq il-kantunieri tar-ritratt, tad-dokument jew tal-faċċata meħuda mill-ġenb, imbagħad “✓ Ikkonferma”: terġa’ ssir ċatta. Preferibbilment qabel il-korrezzjonijiet tat-tbajja’.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Tërhiq për të vizatuar formën në shtresën e zgjedhur (⇧: katror, rreth ose kënd i drejtë). ¦ Kaxkar biex tpinġi l-forma fuq is-saff magħżul (⇧: kwadru, ċirku jew angolu rett).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Tërhiq nga fillimi në fund të gradientit (⇧: çdo 45°): shkon në një shtresë «Gradient» (në përzgjedhje nëse ka një; mbi maskën e zgjedhur, e shkrin shtresën). Tërhiq pastaj rrathët e tij për ta rregulluar; kliko mbi shiritin me ngjyra për të ndryshuar ngjyrat. ¦ Kaxkar mill-bidu sat-tmiem tal-gradjent (⇧: kull 45°): imur fuq saff “Gradjent” (fl-għażla jekk hemm waħda; fuq il-maskra magħżula, idewweb is-saff). Imbagħad iġbed iċ-ċrieki tiegħu biex taġġustah; ikklikkja fuq il-bar ikkulurit biex tibdel il-kuluri.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Kliko mbi një njollë, një pluhur ose një gërvishtje: zëvendësohet me atë që e rrethon. Për një gërvishtje, tërhiq përgjatë saj. Zmadho (⌘ + rrota) për të qenë i saktë. ¦ Ikklikkja fuq tebgħa, trab jew grif: jinbidel b’dak li hemm madwaru. Għal grif, kaxkar tulu. Agħmel żum (⌘ + rota) biex tkun preċiż.
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ «Zgjidh vendin për t’u kopjuar» (ose ⌥ + klik), pastaj piko mbi zonën për t’u mbuluar. «I rreshtuar»: burimi ndjek penelin tënd nga një vizë te tjetra. Me përzgjedhje: tërhiq për të vendosur një kopje të zonës diku tjetër. ¦ “Agħżel il-post li tikkopja” (jew ⌥ + klikk), imbagħad pinġi fuq iż-żona li trid tgħatti. “Allinjat”: is-sors isegwi l-pinzell tiegħek minn linja għall-oħra. B’għażla: kaxkar biex tpoġġi kopja taż-żona x’imkien ieħor.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Piko mbi shtresën e zgjedhur (Shtresat): shëno, rrethoje, vizato shigjeta me dorë. Goma fshin atë që është pikturuar, kurrë foton. ¦ Pinġi fuq is-saff magħżul (Saffi): annota, dawwar, agħmel vleġeġ bl-idejn. Il-gomma tħassar dak li tpinġa, qatt ir-ritratt.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Po pikturon MASKËN e shtresës: ⬛ fshih, ⬜ shfaq. Asgjë nuk fshihet përgjithmonë. Kliko mbi miniaturën e maskës (Shtresat) për t’u kthyer te shtresa. ¦ Qed tpinġi l-MASKRA tas-saff: ⬛ aħbi, ⬜ uri. Xejn ma jitħassar. Ikklikkja fuq il-thumbnail tal-maskra (Saffi) biex terġa’ lura għas-saff.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Kliko në imazh aty ku do tekstin, shkruaj, pastaj Enter (⇧ + Enter për të kaluar në rresht të ri). ¦ Ikklikkja fl-istampa fejn trid it-test, ikteb, imbagħad Enter (⇧ + Enter biex tmur f’linja ġdida).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Piko mbi palosjen, gërvishtjen ose grisjen (me të kuqe gjatë lëvizjes): kur e lëshon, zona ribëhet sipas asaj që e rrethon. Zmadho për të qenë i saktë; «🔍 Gjej palosjet» i gjen vetë. ¦ Pinġi fuq it-tinja, il-grif jew iċ-ċarta (bl-aħmar waqt il-moviment): meta titlaq, iż-żona terġa’ ssir skont dak li hemm madwarha. Agħmel żum biex tkun preċiż; “🔍 Sib it-tinjiet” isibhom waħdu.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Tërhiq dy rrathët mbi sy nëse duhet: korniza ndjek (sytë horizontalisht, gjithmonë në të njëjtën lartësi). Rregullo kufirin te paneli, pastaj «✓ Prit» ose «👤 Përdor si portret». ¦ Kaxkar iż-żewġ ċrieki fuq l-għajnejn jekk meħtieġ: il-qafas isegwi (għajnejn orizzontali, dejjem fl-istess għoli). Aġġusta l-marġni fil-pannell, imbagħad “✓ Aqta’” jew “👤 Uża bħala ritratt”.
+Calque « Annotations » créé ¦ Shtresa «Shënime» u krijua ¦ Is-saff “Annotazzjonijiet” inħoloq
+Annotations ¦ Shënime ¦ Annotazzjonijiet
+Masque ajouté à la photo (gomme) ¦ Maska u shtua te fotoja (gomë) ¦ Maskra miżjuda mar-ritratt (gomma)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Gomë mbi foto: fshihet nga një maskë, asgjë nuk fshihet përgjithmonë. Për ta rikthyer: tasti X (⬜ shfaq), pastaj kalo sërish sipër. ¦ Gomma fuq ir-ritratt: jinħeba b’maskra, xejn ma jitħassar. Biex terġa’ ġġibu: it-tasta X (⬜ uri), imbagħad erġa’ għaddi minn fuqu.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Shfaq: peneli (ose goma) rikthen atë që ishte fshehur. X për t’u kthyer te ⬛ fshih. ¦ ⬜ Uri: il-pinzell (jew il-gomma) iġib lura dak li kien moħbi. X biex terġa’ għal ⬛ aħbi.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Fshih: peneli (ose goma) fsheh. X për ⬜ shfaq. ¦ ⬛ Aħbi: il-pinzell (jew il-gomma) jaħbi. X għal ⬜ uri.
+Style du texte ¦ Stili i tekstit ¦ Stil tat-test
+Caractère du texte ¦ Shkronja e tekstit ¦ Karattru tat-test
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Lexo variantet e kompjuterit… ¦ 🔎 Aqra l-varjanti tal-kompjuter…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Rregullim i synuar: shtyp mbi një ngjyrë të fotos dhe tërhiq djathtas (më e ngopur) ose majtas (më pak); me ⌘ / Ctrl, ndryshon nuanca ¦ Aġġustament immirat: agħfas fuq kulur tar-ritratt u kaxkar lejn il-lemin (aktar saturat) jew lejn ix-xellug (inqas); b’⌘ / Ctrl, jinbidel il-lewn
+Réglage ciblé ¦ Rregullim i synuar ¦ Aġġustament immirat
+Pipettes de la gamme ¦ Pipetat e gamës ¦ Kontagocce tal-firxa
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Pipetë: gama përqendrohet te ngjyra e klikuar në foto ¦ Kontagocce: il-firxa tiċċentra fuq il-kulur ikklikkjat fir-ritratt
+Ajouter à la gamme la couleur cliquée ¦ Shto në gamë ngjyrën e klikuar ¦ Żid mal-firxa l-kulur ikklikkjat
+Retirer de la gamme la couleur cliquée ¦ Hiq nga gama ngjyrën e klikuar ¦ Neħħi mill-firxa l-kulur ikklikkjat
+Bord intérieur : plein effet jusqu’ici ¦ Skaji i brendshëm: efekt i plotë deri këtu ¦ Tarf ta’ ġewwa: effett sħiħ sa hawn
+Bord extérieur : l’effet s’éteint ici ¦ Skaji i jashtëm: efekti shuhet këtu ¦ Tarf ta’ barra: l-effett jintefa hawn
+Haut : les couleurs avant ; bas : après. ¦ Lart: ngjyrat para; poshtë: pas. ¦ Fuq: il-kuluri qabel; isfel: wara.
+🎚 Autres réglages… ¦ 🎚 Rregullime të tjera… ¦ 🎚 Aġġustamenti oħra…
+🖌 Peindre le masque ¦ 🖌 Piko maskën ¦ 🖌 Pinġi l-maskra
+Réactiver ¦ Riaktivizo ¦ Erġa’ ixgħel
+Désactiver ¦ Çaktivizo ¦ Itfi
+▦ Calque de dégradé ¦ ▦ Shtresë gradienti ¦ ▦ Saff ta’ gradjent
+garder les proportions ¦ ruaj përmasat ¦ żomm il-proporzjonijiet
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Një shtresë rregullimi menjëherë sipër, që prek vetëm këtë shtresë ¦ Saff ta’ aġġustament eżatt fuq, li jmiss biss dan is-saff
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Nuancë/Ngopje mbi këtë shtresë ¦ 🎨 Lewn/Saturazzjoni fuq dan is-saff
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Zgjidh foton ose një shtresë rregullimi 🎚 (Shtresat) për Nuancë/Ngopje. ¦ Agħżel ir-ritratt jew saff ta’ aġġustament 🎚 (Saffi) għal Lewn/Saturazzjoni.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Shtyp mbi një ngjyrë të fotos dhe tërhiq majtas ose djathtas (⌘ / Ctrl: nuanca). ¦ 👆 Agħfas fuq kulur tar-ritratt u kaxkar lejn ix-xellug jew il-lemin (⌘ / Ctrl: il-lewn).
+💧 Clique sur une couleur de la photo. ¦ 💧 Kliko mbi një ngjyrë të fotos. ¦ 💧 Ikklikkja fuq kulur tar-ritratt.
+C’est un gris : il n’a pas de teinte. ¦ Është gri: nuk ka nuancë. ¦ Huwa griż: m’għandux lewn.
+Gamme choisie à la pipette ¦ Gama e zgjedhur me pipetë ¦ Firxa magħżula bil-kontagocce
+Gamme élargie ¦ Gama u zgjerua ¦ Firxa mwessgħa
+Gamme réduite ¦ Gama u ngushtua ¦ Firxa mnaqqsa
+Coloriser : oui ¦ Ngjyros: po ¦ Ikkulurixxi: iva
+Coloriser : non ¦ Ngjyros: jo ¦ Ikkulurixxi: le
+Coloriser ¦ Ngjyros ¦ Ikkulurixxi
+Propriétés du masque ¦ Vetitë e maskës ¦ Karatteristiċi tal-maskra
+Teinte/Saturation remise à zéro ¦ Nuanca/Ngopja u kthye në zero ¦ Lewn/Saturazzjoni reġgħu għal żero
+Masque inversé ¦ Maska u përmbys ¦ Maskra maqluba
+Masque désactivé ¦ Maska u çaktivizua ¦ Maskra mitfija
+Masque réactivé ¦ Maska u riaktivizua ¦ Maskra mixgħula mill-ġdid
+Masque retiré ¦ Maska u hoq ¦ Maskra mneħħija
+Masque ajouté ¦ Maska u shtua ¦ Maskra miżjuda
+Ce calque a déjà un masque. ¦ Kjo shtresë ka tashmë një maskë. ¦ Dan is-saff diġà għandu maskra.
+Teinte/Saturation sur un calque ¦ Nuancë/Ngopje mbi një shtresë ¦ Lewn/Saturazzjoni fuq saff
+Teinte/Saturation ¦ Nuancë/Ngopje ¦ Lewn/Saturazzjoni
+Ancien style ¦ Stil i vjetër ¦ Stil antik
+Global ¦ Global ¦ Globali
+Rouges ¦ Të kuqet ¦ Ħomor
+Jaunes ¦ Të verdhat ¦ Sofor
+Verts ¦ Të gjelbrat ¦ Ħodor
+Cyans ¦ Cianet ¦ Ċjan
+Bleus ¦ Blutë ¦ Blu
+Magentas ¦ Magentat ¦ Maġenta
+Cyanotype ¦ Cianotip ¦ Ċjanotip
+Supprimer ce motif ¦ Fshi këtë motiv ¦ Ħassar dan id-disinn
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Shtresë motivi <b>«{name}»</b>: gjithçka rregullohet këtu, menjëherë. ¦ Saff ta’ disinn <b>“{name}”</b>: kollox jiġi aġġustat hawn, minnufih.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Zgjidh një motiv, pastaj «Mbush»: shkon në shtresën e vet (në përzgjedhje nëse ka). Motivet e aplikacionit marrin dy ngjyrat e tua. ¦ Agħżel disinn, imbagħad “Imla”: imur fuq saff tiegħu stess (fl-għażla jekk hemm waħda). Id-disinji tal-app jieħdu ż-żewġ kuluri tiegħek.
+fond transparent (motifs de l’app) ¦ sfond transparent (motivet e aplikacionit) ¦ sfond trasparenti (disinji tal-app)
+Décalage horizontal ¦ Zhvendosje horizontale ¦ Ċaqliq orizzontali
+Décalage vertical ¦ Zhvendosje vertikale ¦ Ċaqliq vertikali
+▩ Remplir : nouveau calque de motif ¦ ▩ Mbush: shtresë e re motivi ¦ ▩ Imla: saff ġdid ta’ disinn
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Shtohet në bibliotekën e motiveve (ruajtur në këtë kompjuter). ¦ Jidħol fil-librerija tad-disinji (miżmuma f’dan il-kompjuter).
+l’image visible ¦ imazhi i dukshëm ¦ l-istampa viżibbli
+Taille du carreau ¦ Madhësia e pllakës ¦ Daqs tal-madum
+raccord sans couture (les bords se fondent) ¦ bashkim pa qepje (skajet shkrihen) ¦ mingħajr ħjata (it-truf jitħalltu)
+Garder et remplir ¦ Mbaje dhe mbush ¦ Żomm u imla
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Nuk ka më vend për ta mbajtur këtë motiv: fshi disa motive, ose bëje më të vogël. ¦ M’hemmx aktar spazju biex iżżomm dan id-disinn: ħassar xi disinji, jew agħmlu iżgħar.
+Motif gardé dans la bibliothèque ▩. ¦ Motivi u ruajt në bibliotekë ▩. ¦ Disinn miżmum fil-librerija ▩.
+Mon motif ¦ Motivi im ¦ Id-disinn tiegħi
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Kliko mbi një formë: peneli 🖌 e merr. Madhësia rregullohet lart (ose [ dhe ]). ¦ Ikklikkja fuq forma: il-pinzell 🖌 jieħuha. Id-daqs jiġi aġġustat fuq (jew [ u ]).
+Forme de la pointe ¦ Forma e majës ¦ Forma tal-ponta
+Pas (écart entre les empreintes) ¦ Hapi (largësia midis gjurmëve) ¦ Spazjar (distanza bejn l-impronti)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ I vogël: një vizë e vazhdueshme. I madh: gjurmë të ndara (yje, gjethe). ¦ Żgħir: linja kontinwa. Kbir: impronti separati (stilel, weraq).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ Në 100 % forma është e plotë; më poshtë, është e shtypur (pendë, penel i sheshtë). ¦ B’100 % il-forma hija sħiħa; inqas, tkun iċċattjata (pinna, pinzell ċatt).
+l’angle suit le trait ¦ këndi ndjek vizën ¦ l-angolu jsegwi l-linja
+Dynamique et dispersion ¦ Dinamika dhe shpërndarja ¦ Dinamika u tixrid
+Variation de taille ¦ Ndryshimi i madhësisë ¦ Varjazzjoni tad-daqs
+Variation d’angle ¦ Ndryshimi i këndit ¦ Varjazzjoni tal-angolu
+Dispersion ¦ Shpërndarja ¦ Tixrid
+Nombre par empreinte ¦ Numri për gjurmë ¦ Numru għal kull impronta
+Transfert et couleur ¦ Transferimi dhe ngjyra ¦ Trasferiment u kulur
+Flux (chaque empreinte) ¦ Rrjedha (çdo gjurmë) ¦ Fluss (kull impronta)
+Variation d’opacité ¦ Ndryshimi i patejdukshmërisë ¦ Varjazzjoni tal-opaċità
+Variation de couleur ¦ Ndryshimi i ngjyrës ¦ Varjazzjoni tal-kulur
+Fais d’abord une sélection autour du dessin ¦ Bëj fillimisht një përzgjedhje rreth vizatimit ¦ L-ewwel agħmel għażla madwar id-disinn
+Fais d’abord une sélection autour du dessin. ¦ Bëj fillimisht një përzgjedhje rreth vizatimit. ¦ L-ewwel agħmel għażla madwar id-disinn.
+＋ Forme d’après la sélection ¦ ＋ Formë sipas përzgjedhjes ¦ ＋ Forma mill-għażla
+Garder comme préréglage ¦ Mbaje si paracaktim ¦ Żomm bħala preset
+＋ Garder comme préréglage ¦ ＋ Mbaje si paracaktim ¦ ＋ Żomm bħala preset
+Garder cette forme de pinceau ¦ Mbaje këtë formë peneli ¦ Żomm din il-forma ta’ pinzell
+Nom du préréglage : ¦ Emri i paracaktimit: ¦ Isem il-preset:
+Plus de place pour garder ce pinceau. ¦ Nuk ka më vend për ta mbajtur këtë penel. ¦ M’hemmx aktar spazju biex iżżomm dan il-pinzell.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Forma jote është gati: piko me të; «Mbaje si paracaktim» për ta gjetur sërish. ¦ 🖌 Il-forma tiegħek lesta: pinġi biha; “Żomm bħala preset” biex terġa’ ssibha.
+Rond net ¦ I rrumbullakët i mprehtë ¦ Tond ċar
+Rond doux ¦ I rrumbullakët i butë ¦ Tond artab
+Surligneur ¦ Theksues ¦ Highlighter
+Crayon fin ¦ Laps i hollë ¦ Lapes fin
+Craie (grain) ¦ Shkumës (kokrriza) ¦ Ġibs (grana)
+Craie ¦ Shkumës ¦ Ġibs
+Fusain ¦ Qymyr vizatimi ¦ Faħam tad-disinn
+Dégradé inversé ¦ Gradient i përmbysur ¦ Gradjent maqlub
+Dégradé : tramage ¦ Gradient: rasterizim me pika ¦ Gradjent: dithering
+Dégradé : sans tramage ¦ Gradient: pa rasterizim me pika ¦ Gradjent: mingħajr dithering
+▦ Dégradé ¦ ▦ Gradient ¦ ▦ Gradjent
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Kliko: shto një pikë ngjyre në këtë vend ¦ Ikklikkja: żid punt tal-kulur f’dan il-post
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Kliko mbi shirit: një pikë më shumë · tërhiq një pikë për ta zhvendosur, poshtë për ta hequr ¦ Ikklikkja fuq il-bar: punt ieħor · kaxkar punt biex iċċaqalqu, ’l isfel biex tneħħih
+Mélange ¦ Përzierja ¦ Taħlit
+Classique (RVB) ¦ Klasike (RGB) ¦ Klassiku (RGB)
+Perceptuel (plus doux) ¦ Perceptuale (më e butë) ¦ Perċettiv (aktar artab)
+Par les teintes ¦ Përmes nuancave ¦ Permezz tal-lewn
+Au-delà des bouts ¦ Përtej skajeve ¦ Lil hinn mit-truf
+Couleur des bouts ¦ Ngjyra e skajeve ¦ Kulur tat-truf
+Répéter ¦ Përsërit ¦ Irrepeti
+Répéter en miroir ¦ Përsërit si pasqyrë ¦ Irrepeti bħal mera
+Le début devient la fin ¦ Fillimi bëhet fund ¦ Il-bidu jsir it-tmiem
+⇄ Retourner les arrêts ¦ ⇄ Kthe pikat ¦ ⇄ Aqleb il-punti
+Espacer également ¦ Shpërndaj në mënyrë të barabartë ¦ Ifred b’mod ugwali
+Couleur de l’arrêt ¦ Ngjyra e pikës ¦ Kulur tal-punt
+Arrêt choisi ¦ Pika e zgjedhur ¦ Punt magħżul
+Milieu vers le suivant ¦ Mesi drejt tjetrës ¦ Nofs lejn li jmiss
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Ku ndodhet përzierja në gjysmë midis kësaj pike dhe tjetrës (rombi i vogël i Photoshop). ¦ Fejn jinsab it-taħlit f’nofs it-triq bejn dan il-punt u li jmiss (ir-rombu ż-żgħir ta’ Photoshop).
+✕ Enlever cet arrêt ¦ ✕ Hiq këtë pikë ¦ ✕ Neħħi dan il-punt
+Supprimer ce préréglage ¦ Fshi këtë paracaktim ¦ Ħassar dan il-preset
+Garder ce dégradé ¦ Mbaje këtë gradient ¦ Żomm dan il-gradjent
+Mon dégradé ¦ Gradienti im ¦ Il-gradjent tiegħi
+Premier plan → transparent ¦ Plani i parë → transparent ¦ L-ewwel pjan → trasparenti
+Noir → blanc ¦ E zezë → e bardhë ¦ Iswed → abjad
+Blanc → transparent ¦ E bardhë → transparent ¦ Abjad → trasparenti
+Vignette (bords sombres) ¦ Vinjetë (skaje të errëta) ¦ Vinjetta (truf skuri)
+Arc-en-ciel ¦ Ylber ¦ Qawsalla
+Cuivre ¦ Bakër ¦ Ram
+Chrome ¦ Krom ¦ Krom
+Or ¦ Ar ¦ Deheb
+Vieux papier ¦ Letër e vjetër ¦ Karta qadima
+Nuit ¦ Natë ¦ Lejl
+Printemps ¦ Pranverë ¦ Rebbiegħa
+Mer ¦ Det ¦ Baħar
+Coucher de soleil ¦ Perëndim dielli ¦ Nżul ix-xemx
+▭ Linéaire ¦ ▭ Linear ¦ ▭ Lineari
+◉ Radial ¦ ◉ Radial ¦ ◉ Radjali
+◔ Angle (conique) ¦ ◔ Kënd (konik) ¦ ◔ Angolu (koniku)
+⇋ Réfléchi ¦ ⇋ I pasqyruar ¦ ⇋ Rifless
+◇ Losange ¦ ◇ Romb ¦ ◇ Rombu
+Damier ¦ Shah ¦ Ċess
+Pois ¦ Pika ¦ Tikki
+Rayures ¦ Vija ¦ Strixxi
+Hachures ¦ Vijëzime ¦ Tratteġġ
+Briques ¦ Tulla ¦ Briks
+Chevrons ¦ Kurriz peshku ¦ Xewka tal-ħuta
+Losanges ¦ Romba ¦ Rombi
+Vagues ¦ Valë ¦ Mewġ
+Toile ¦ Pëlhurë ¦ Tila
+Croix ¦ Kryqe ¦ Slaleb
+Fleurs de lys ¦ Zambakë ¦ Fleur-de-lis
+Clique maintenant à l’endroit à recopier. ¦ Kliko tani në vendin për t’u kopjuar. ¦ Issa ikklikkja fuq il-post li tikkopja.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Kjo shtresë është e kyçur: zhkyçe te Shtresat. ¦ Dan is-saff huwa msakkar: iftħu f’Saffi.
+Texte effacé ¦ Teksti u fshi ¦ Test imħassar
+Sélection vide ¦ Përzgjedhje bosh ¦ Għażla vojta
+Sélection ajoutée ¦ Përzgjedhja u shtua ¦ Għażla miżjuda
+Sélection retirée ¦ Përzgjedhja u hoq ¦ Għażla mneħħija
+Image remplacée : même place, même taille, même rotation. ¦ Imazhi u zëvendësua: i njëjti vend, e njëjta madhësi, i njëjti rrotullim. ¦ Stampa mibdula: l-istess post, l-istess daqs, l-istess dawran.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Imazhi u vendos: ➤ tërhiqe, tërhiq një qoshe për madhësinë (⇧: e lirë), dorezën e rrumbullakët për ta rrotulluar. ¦ Stampa mqiegħda: ➤ kaxkarha, iġbed kantuniera għad-daqs (⇧: ħieles), il-manku tond biex iddawwarha.
+Ce fichier n’est pas une image. ¦ Ky skedar nuk është imazh. ¦ Dan il-fajl mhux stampa.
+Remplacer l’image de l’objet dynamique ¦ Zëvendëso imazhin e objektit dinamik ¦ Ibdel l-istampa tal-oġġett dinamiku
+Remplacer par cette image ¦ Zëvendëso me këtë imazh ¦ Ibdel b’din l-istampa
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Imazhi i ri merr vendin, madhësinë dhe rrotullimin e të vjetrit. ¦ L-istampa l-ġdida tieħu l-post, id-daqs u d-dawran tal-qadima.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Vjen në një shtresë të re, si objekt dinamik 🧩 (zmadho, zvogëlo, rrotullo pa humbje). Mund edhe të tërheqësh një skedar mbi foto, ose të ngjitësh një imazh të kopjuar (⌘V). ¦ Tasal fuq saff ġdid, bħala oġġett dinamiku 🧩 (kabbar, ċekken, dawwar mingħajr telf). Tista’ wkoll tkaxkar fajl fuq ir-ritratt, jew twaħħal stampa kkupjata (⌘V).
+Sélection automatique ¦ Përzgjedhje automatike ¦ Għażla awtomatika
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Kjo shtresë është e kyçur: zgjidh një tjetër te Shtresat. ¦ Dan is-saff huwa msakkar: agħżel ieħor f’Saffi.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Vendi për t’u kopjuar u zgjodh: piko tani mbi zonën për t’u mbuluar. ¦ Il-post li tikkopja ntgħażel: issa pinġi fuq iż-żona li trid tgħatti.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Zgjidh fillimisht vendin për t’u kopjuar (butoni 🎯 ose ⌥ + klik). ¦ L-ewwel agħżel il-post li tikkopja (buttuna 🎯 jew ⌥ + klikk).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Fotoja nuk është më te shtresat: «↺ Ktheje foton» (skeda Shtresat). ¦ Ir-ritratt m’għadux fis-saffi: “↺ Erġa’ poġġi r-ritratt” (tab Saffi).
+La photo est verrouillée (🔒 dans Calques). ¦ Fotoja është e kyçur (🔒 te Shtresat). ¦ Ir-ritratt huwa msakkar (🔒 f’Saffi).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Vulë: zona e kopjuar (shtresa ✨ Retushime) ¦ Timbru: żona kkupjata (saff ✨ Rtokki)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Bëj fillimisht një përzgjedhje (mjetet ⬚ ◯ ➰ ✒︎ 🪄). ¦ L-ewwel agħmel għażla (għodod ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Ende asnjë filtër i përdorur (menyja Filtër). ¦ Għalissa l-ebda filtru użat (menu Filtru).
+Opacité du calque (dosage) ¦ Patejdukshmëria e shtresës (dozimi) ¦ Opaċità tas-saff (dożaġġ)
+Valeurs de départ ¦ Vlerat fillestare ¦ Valuri tal-bidu
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Asgjë nuk shkatërrohet: filtri është në shtresën e vet. Më vonë: Shtresat → shtresa → skeda ✨ Filtrat → «rregullo…». ¦ Xejn ma jinqered: il-filtru qiegħed fuq saff tiegħu stess. Aktar tard: Saffi → is-saff → tab ✨ Filtri → “aġġusta…”.
+Filtre enlevé du calque ¦ Filtri u hoq nga shtresa ¦ Filtru mneħħi mis-saff
+Ordre des filtres ¦ Rendi i filtrave ¦ Ordni tal-filtri
+Filtres enlevés ¦ Filtrat u hoqën ¦ Filtri mneħħija
+Plus de place pour les actions : supprimes-en une. ¦ Nuk ka më vend për veprime: fshi njërin. ¦ M’hemmx aktar spazju għall-azzjonijiet: ħassar waħda.
+⚡ Actions ¦ ⚡ Veprimet ¦ ⚡ Azzjonijiet
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Emri i veprimit (p.sh. «Fotot e albumit 1930») ¦ Isem l-azzjoni (eż. “Ritratti tal-album 1930”)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Një veprim ruan rregullimet e fotos (ekspozimi, nivelet, kurba, nuanca, filtrat, pluhuri, ngjyrosja…) dhe shtresat e saj të rregullimit pa maskë. E zbaton sërish në një foto tjetër, ose në disa njëherësh: secila merr një <b>version të ri</b>, origjinali ruhet. ¦ Azzjoni żżomm l-aġġustamenti tar-ritratt (espożizzjoni, livelli, kurva, lewn, filtri, trab, kulur…) u s-saffi ta’ aġġustament tiegħu mingħajr maskra. Terġa’ tapplikaha fuq ritratt ieħor, jew fuq diversi f’daqqa: kull wieħed jirċievi <b>verżjoni ġdida</b>, l-oriġinal jinżamm.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Ruaje këtë veprim në një skedar, për ta mbajtur ose për ta dhënë ¦ Issejvja din l-azzjoni f’fajl, biex iżżommha jew tagħtiha
+Sur cette photo ¦ Në këtë foto ¦ Fuq dan ir-ritratt
+Sur plusieurs photos… ¦ Në disa foto… ¦ Fuq diversi ritratti…
+Aucune action enregistrée pour l’instant ¦ Ende asnjë veprim i ruajtur ¦ Għalissa l-ebda azzjoni ssejvjata
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ «＋ Ruaj rregullimet aktuale» i mban për t’i ribërë në foto të tjera. ¦ “＋ Issejvja l-aġġustamenti attwali” iżommhom biex terġa’ tagħmilhom fuq ritratti oħra.
+Les photos à retoucher ¦ Fotot për t’u retushuar ¦ Ir-ritratti biex tirtokkja
+Prendre ces photos ¦ Merr këto foto ¦ Ħu dawn ir-ritratti
+＋ Choisir des photos… ¦ ＋ Zgjidh foto… ¦ ＋ Agħżel ritratti…
+afficher la nouvelle version ¦ shfaq versionin e ri ¦ uri l-verżjoni l-ġdida
+Aucune photo choisie. ¦ Asnjë foto e zgjedhur. ¦ L-ebda ritratt magħżul.
+refusé ¦ u refuzua ¦ miċħud
+fx Effets du calque ¦ fx Efektet e shtresës ¦ fx Effetti tas-saff
+Fond (le contenu seulement, pas les effets) ¦ Mbushja (vetëm përmbajtja, jo efektet) ¦ Mili (il-kontenut biss, mhux l-effetti)
+Lueur externe ¦ Shkëlqim i jashtëm ¦ Dija minn barra
+Incrustation de couleur ¦ Mbivendosje ngjyre ¦ Overlay tal-kulur
+à l’extérieur ¦ jashtë ¦ barra
+au milieu ¦ në mes ¦ fin-nofs
+à l’intérieur ¦ brenda ¦ ġewwa
+Tout enlever ¦ Hiqi të gjitha ¦ Neħħi kollox
+🔍 Plis et rayures ¦ 🔍 Palosje dhe gërvishtje ¦ 🔍 Tinjiet u grif
+Recherche des plis… ¦ Po kërkohen palosjet… ¦ Qed infittxu t-tinjiet…
+garder le grain autour ¦ ruaj kokrrizat përreth ¦ żomm il-grana madwar
+🪡 Plutôt à la main ¦ 🪡 Më mirë me dorë ¦ 🪡 Aħjar bl-idejn
+✓ Réparer ces lignes ¦ ✓ Riparo këto vija ¦ ✓ Sewwi dawn il-linji
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Asnjë palosje nuk u gjet: rrite ndjeshmërinë, ose riparo me dorë me penelin 🪡. ¦ L-ebda tinja ma nstabet: għolli s-sensittività, jew sewwi bl-idejn bil-pinzell 🪡.
+Réparation… ¦ Po riparohet… ¦ Qed jissewwa…
+✨ Plis et rayures comblés ¦ ✨ Palosjet dhe gërvishtjet u mbushën ¦ ✨ Tinjiet u grif mimlija
+🌫️ Débruitage ¦ 🌫️ Heqja e zhurmës ¦ 🌫️ Tnaqqis tal-ħsejjes
+adoucit le grain sans perdre les contours ¦ zbut kokrrizat pa humbur konturet ¦ irattab il-grana mingħajr ma jitlef il-kontorni
+🧹 Poussières et rayures ¦ 🧹 Pluhur dhe gërvishtje ¦ 🧹 Trab u grif
+les petits points blancs ou noirs ¦ pikat e vogla të bardha ose të zeza ¦ it-tikki żgħar bojod jew suwed
+🩹 Plis et fines déchirures ¦ 🩹 Palosje dhe grisje të holla ¦ 🩹 Tinjiet u ċrit irqaq
+lignes fines repérées puis comblées ¦ vija të holla të gjetura dhe të mbushura ¦ linji rqaq misjuba u mimlija
+🎚 Contraste et niveaux automatiques ¦ 🎚 Kontrast dhe nivele automatike ¦ 🎚 Kuntrast u livelli awtomatiċi
+noirs bien noirs, blancs bien blancs ¦ të zezat vërtet të zeza, të bardhat vërtet të bardha ¦ iswed verament iswed, abjad verament abjad
+🔎 Netteté douce ¦ 🔎 Mprehtësi e butë ¦ 🔎 Nitidezza delikata
+un peu plus de piqué ¦ pak më shumë qartësi ¦ ftit aktar definizzjoni
+🌈 Colorisation ¦ 🌈 Ngjyrosje ¦ 🌈 Kulur
+couleurs d’époque (photo en noir et blanc) ¦ ngjyrat e asaj kohe (foto bardh e zi) ¦ kuluri ta’ dak iż-żmien (ritratt iswed u abjad)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ fotoja ka tashmë ngjyra: shëno nëse do gjithsesi ¦ ir-ritratt diġà għandu l-kuluri: immarka jekk trid xorta waħda
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Shëno hapat që do të mbash; secili bëhet një shtresë «✨» që mund ta fshehësh ose ta dozosh më pas. ↶ i zhbën të gjitha njëherësh. ¦ Immarka l-passi li trid iżżomm; kull wieħed isir saff “✨” li wara tista’ taħbi jew tiddoża. ↶ iħassar kollox f’daqqa.
+Garder : {what} ¦ Mbaj: {what} ¦ Żomm: {what}
+détail au centre ¦ detaj në qendër ¦ dettall fiċ-ċentru
+Aperçus… ¦ Paraparje… ¦ Previews…
+aucun pli trouvé à cette intensité ¦ asnjë palosje nuk u gjet me këtë intensitet ¦ l-ebda tinja ma nstabet b’din l-intensità
+Coche au moins une étape. ¦ Shëno të paktën një hap. ¦ Immarka mill-inqas pass wieħed.
+✨ Plis et fines déchirures ¦ ✨ Palosje dhe grisje të holla ¦ ✨ Tinjiet u ċrit irqaq
+✨ Poussières et rayures ¦ ✨ Pluhur dhe gërvishtje ¦ ✨ Trab u grif
+✨ Débruitage ¦ ✨ Heqja e zhurmës ¦ ✨ Tnaqqis tal-ħsejjes
+✨ Contraste et niveaux ¦ ✨ Kontrast dhe nivele ¦ ✨ Kuntrast u livelli
+✨ Netteté douce ¦ ✨ Mprehtësi e butë ¦ ✨ Nitidezza delikata
+✨ Colorisation ¦ ✨ Ngjyrosje ¦ ✨ Kulur
+Colorisation ¦ Ngjyrosje ¦ Kulur
+Couleurs (pinceau) ¦ Ngjyra (penel) ¦ Kuluri (pinzell)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Retushime (njolla, palosje, vulë) ¦ ✨ Rtokki (tbajja’, tinjiet, timbru)
+🪪 Photo d’identité ¦ 🪪 Foto dokumenti ¦ 🪪 Ritratt tal-passaport
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Sytë horizontalisht, gjithmonë në të njëjtën lartësi: të gjitha portretet e bëra kështu kanë të njëjtin format. ¦ L-għajnejn orizzontali, dejjem fl-istess għoli: ir-ritratti kollha magħmula hekk għandhom l-istess format.
+✓ Yeux trouvés sur le visage. ¦ ✓ Sytë u gjetën në fytyrë. ¦ ✓ L-għajnejn instabu fuq il-wiċċ.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Sipas identifikimit të fotos: rregullo rrathët mbi sy. ¦ ✓ Skont l-identifikazzjoni tar-ritratt: aġġusta ċ-ċrieki fuq l-għajnejn.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Fytyra nuk u gjet: tërhiq dy rrathët mbi sy. ¦ ⚠️ Wiċċ ma nstabx: kaxkar iż-żewġ ċrieki fuq l-għajnejn.
+Plusieurs fiches… ¦ Disa kartela… ¦ Diversi skedi…
+✓ Recadrer ¦ ✓ Prit ¦ ✓ Aqta’
+👤 Utiliser comme portrait… ¦ 👤 Përdor si portret… ¦ 👤 Uża bħala ritratt…
+Recadré en photo d’identité ¦ U pre si foto dokumenti ¦ Maqtugħ bħala ritratt tal-passaport
+3:4 (portrait classique) ¦ 3:4 (portret klasik) ¦ 3:4 (ritratt klassiku)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (foto dokumenti) ¦ 35 × 45 mm (ritratt tal-passaport)
+Marge autour du visage ¦ Kufiri rreth fytyrës ¦ Marġni madwar il-wiċċ
+Hauteur des yeux ¦ Lartësia e syve ¦ Għoli tal-għajnejn
+modèle absent ¦ modeli mungon ¦ mudell nieqes
+Recherche du visage… ¦ Po kërkohet fytyra… ¦ Qed infittxu l-wiċċ…
+Photo non enregistrée. ¦ Fotoja nuk u ruajt. ¦ Ritratt mhux issejvjat.
+Utiliser comme portrait de quelle fiche ? ¦ Si portret i cilës kartelë? ¦ Tużah bħala ritratt ta’ liema skeda?
+PHOTO D’IDENTITÉ ¦ FOTO DOKUMENTI ¦ RITRATT TAL-PASSAPORT
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Fotoja e prerë shtohet te mediat e kartelës, pastaj bëhet portreti i saj (portreti i vjetër mbetet te mediat e saj). ¦ Ir-ritratt maqtugħ jiżdied mal-midja tal-iskeda, imbagħad isir ir-ritratt tagħha (ir-ritratt il-qadim jibqa’ fil-midja tagħha).
+Choisis une personne dans la liste. ¦ Zgjidh një person nga lista. ¦ Agħżel persuna mil-lista.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ RETUSHIM · FOTO DOKUMENTI ¦ RTOKK · RITRATT TAL-PASSAPORT
+🪪 Portraits de plusieurs fiches ¦ 🪪 Portrete për disa kartela ¦ 🪪 Ritratti ta’ diversi skedi
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Zgjidh kartelat: për secilën, aplikacioni merr portretin e saj (ose foton e parë), gjen fytyrën dhe e kuadron në të njëjtin format me të tjerat (sytë në të njëjtën lartësi). Ti kontrollon, pastaj «Përdor si portrete»: çdo foto e prerë hyn te mediat e kartelës së saj dhe bëhet portreti i saj (i vjetri mbetet). ¦ Agħżel l-iskedi: għal kull waħda, l-app tieħu r-ritratt tagħha (jew l-ewwel ritratt), issib il-wiċċ u tinkwadrah fl-istess format bħall-oħrajn (għajnejn fl-istess għoli). Int tiċċekkja, imbagħad “Uża bħala ritratti”: kull ritratt maqtugħ jidħol fil-midja tal-iskeda tiegħu u jsir ir-ritratt tagħha (il-qadim jibqa’).
+🔍 Préparer les portraits ¦ 🔍 Përgatit portretet ¦ 🔍 Ipprepara r-ritratti
+Aucune fiche choisie pour l’instant ¦ Ende asnjë kartelë e zgjedhur ¦ Għalissa l-ebda skeda magħżula
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Zgjidh një ose disa persona më sipër, pastaj «🔍 Përgatit portretet». ¦ Agħżel persuna jew aktar hawn fuq, imbagħad “🔍 Ipprepara r-ritratti”.
+Choisis d’abord une ou plusieurs fiches. ¦ Zgjidh fillimisht një ose disa kartela. ¦ L-ewwel agħżel skeda jew aktar.
+aucune photo dans la fiche ¦ asnjë foto në kartelë ¦ l-ebda ritratt fl-iskeda
+yeux trouvés ¦ sytë u gjetën ¦ għajnejn misjuba
+d’après l’identification ¦ sipas identifikimit ¦ skont l-identifikazzjoni
+✓ portrait mis à jour ¦ ✓ portreti u përditësua ¦ ✓ ritratt aġġornat
+Utiliser comme portraits ¦ Përdor si portrete ¦ Uża bħala ritratti
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Rrotullimi nuk është ende gati: provo përsëri pas pak. ¦ Id-dawran għadu mhux lest: erġa’ pprova ftit wara.
+Rotation de l’image ¦ Rrotullimi i imazhit ¦ Dawran tal-istampa
+Rotation de l’image : 90° horaire ¦ Rrotullimi i imazhit: 90° në drejtim orar ¦ Dawran tal-istampa: 90° lemin
+Rotation de l’image : 90° antihoraire ¦ Rrotullimi i imazhit: 90° në drejtim kundërorar ¦ Dawran tal-istampa: 90° xellug
+Rotation de l’image : 180° ¦ Rrotullimi i imazhit: 180° ¦ Dawran tal-istampa: 180°
+Rotation de l’image : {a}° horaire ¦ Rrotullimi i imazhit: {a}° në drejtim orar ¦ Dawran tal-istampa: {a}° lemin
+Rotation de l’image : {a}° antihoraire ¦ Rrotullimi i imazhit: {a}° në drejtim kundërorar ¦ Dawran tal-istampa: {a}° xellug
+Symétrie horizontale de l’image ¦ Pasqyro imazhin horizontalisht ¦ Aqleb l-istampa orizzontalment
+Symétrie verticale de l’image ¦ Pasqyro imazhin vertikalisht ¦ Aqleb l-istampa vertikalment
+Perspective figée ¦ Perspektiva u fiksua ¦ Perspettiva ffissata
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Prerja e mëparshme u hoq (nuk qëndronte më drejt): bëje sërish nëse duhet, ose ↶ Zhbëj. ¦ Il-qtugħ ta’ qabel tneħħa (ma kienx għadu dritt): erġa’ agħmlu jekk meħtieġ, jew ↶ Erġa’ lura.
+📐 Redresser l’horizon ¦ 📐 Drejto horizontin ¦ 📐 Iddrittja l-orizzont
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Këndi i matur në vijën tënde: fotoja rrotullohet me këtë kënd për t’u drejtuar. ¦ L-angolu mkejjel fuq il-linja tiegħek: ir-ritratt idur b’dan l-angolu biex jerġa’ jkun dritt.
+Coins ajoutés autour ¦ Qoshet u shtuan përreth ¦ Kantunieri miżjuda madwar
+Transparents (PNG) ¦ Transparente (PNG) ¦ Trasparenti (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Prit për të hequr qoshet bosh ¦ ✂️ Aqta’ biex tneħħi l-kantunieri vojta
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Të gjitha shtresat, maskat, tekstet dhe përzgjedhja rrotullohen me foton. ↶ Zhbëj (⌘Z) e kthen si më parë. ¦ Is-saffi kollha, il-maskri, it-testi u l-għażla jduru mar-ritratt. ↶ Erġa’ lura (⌘Z) jerġa’ jġibu kif kien.
+Donne un angle entre 0,01 et 359,99°. ¦ Jep një kënd midis 0,01 dhe 359,99°. ¦ Agħti angolu bejn 0.01 u 359.99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Vizato një vijë përgjatë horizontit (ose një muri krejt të drejtë): fotoja do të rrotullohet për t’u drejtuar. Esc për të ndaluar. ¦ Pinġi linja tul l-orizzont (jew ħajt dritt sew): ir-ritratt idur biex jerġa’ jkun dritt. Esc biex tieqaf.
+Cette ligne est déjà droite : rien à tourner. ¦ Kjo vijë është tashmë e drejtë: asgjë për t’u rrotulluar. ¦ Din il-linja diġà dritta: xejn x’iddawwar.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Foto e bërë me telefonin të kthyer: është ruajtur e shtrirë. ¦ Ritratt meħud bit-telefon imdawwar: huwa ssejvjat mimdud.
+↻ Remettre droite ¦ ↻ Drejtoje ¦ ↻ Iddrittjah
+Photo remise droite (orientation du téléphone) ¦ Fotoja u drejtua (orientimi i telefonit) ¦ Ritratt iddrittjat (orjentazzjoni tat-telefon)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Retushimet në vazhdim do të humbasin (💾 Ruaj projektin i mban për më vonë). ¦ Ir-rtokki għaddejjin jintilfu (💾 Issejvja l-proġett iżommhom għal aktar tard).
+Passer à la retouche simple ? ¦ Të kalosh te retushimi i thjeshtë? ¦ Tgħaddi għar-rtokk sempliċi?
+Passer sans enregistrer ¦ Kalo pa ruajtur ¦ Għaddi mingħajr ma tissejvja
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD nuk është ende gati: provo përsëri pas pak. ¦ Il-PSD għadu mhux lest: erġa’ pprova ftit wara.
+L’assemblage de photos n’est pas encore prêt. ¦ Bashkimi i fotove nuk është ende gati. ¦ It-twaħħil tar-ritratti għadu mhux lest.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Ky mjet nuk është ende gati: provo përsëri pas pak. ¦ Din l-għodda għadha mhix lesta: erġa’ pprova ftit wara.
+Recherche du sujet… ¦ Po kërkohet subjekti… ¦ Qed infittxu s-suġġett…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Subjekti nuk u gjet: sfondi prek gjithë skajin. Provo me më pak tolerancë (🪄), ose me lason. ¦ Is-suġġett ma nstabx: l-isfond imiss it-tarf kollu. Ipprova b’inqas tolleranza (🪄), jew bil-lazz.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Subjekti u përzgjodh: ⇧ + shkop ose laso për të shtuar, ⌥ për të hequr; «Maskë» për ta zbatuar. Toleranca (🪄): deri ku shkon sfondi. ¦ Suġġett magħżul: ⇧ + bastun jew lazz biex iżżid, ⌥ biex tneħħi; “Maskra” biex tapplikaha. Tolleranza (🪄): sa fejn jasal l-isfond.
+Sujet sélectionné ¦ Subjekti u përzgjodh ¦ Suġġett magħżul
+La photo semble déjà droite. ¦ Fotoja duket tashmë e drejtë. ¦ Ir-ritratt jidher diġà dritt.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Disa korrigjime (njolla, vulë) janë bërë tashmë: do të lëvizin me rrafshimin. ¦ Xi korrezzjonijiet (tbajja’, timbru) diġà saru: se jiċċaqilqu mal-iċċattjar.
+Redresser la perspective ? ¦ Ta drejtosh perspektivën? ¦ Tikkoreġi l-perspettiva?
+Perspective redressée ¦ Perspektiva u drejtua ¦ Perspettiva kkoreġuta
+Perspective enlevée ¦ Perspektiva u hoq ¦ Perspettiva mneħħija
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Piko ngjyrat (penel i butë): shtresa është në shkrirjen «Ngjyrë», drita e fotos ruhet. 🧽 për të korrigjuar, patejdukshmëria e shtresës për të dozuar. ¦ Pinġi l-kuluri (pinzell artab): is-saff huwa fit-taħlit “Kulur”, id-dawl tar-ritratt jinżamm. 🧽 biex tikkoreġi, l-opaċità tas-saff biex tiddoża.
+Recherche des taches… ¦ Po kërkohen njollat… ¦ Qed infittxu t-tbajja’…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Asnjë njollë nuk u gjet: rrit ndjeshmërinë ose madhësinë. ¦ L-ebda tebgħa ma nstabet: żid is-sensittività jew id-daqs.
+✨ Jaunissement enlevé ¦ ✨ Zverdhja u hoq ¦ ✨ Sfurija mneħħija
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Zverdhja u hoq në shtresën e rregullimit «✨ Zverdhja u hoq»: fotoja nuk preket. ¦ Is-sfurija tneħħiet fuq is-saff ta’ aġġustament “✨ Sfurija mneħħija”: ir-ritratt ma jintmissx.
+Jaunissement enlevé (calque de réglage) ¦ Zverdhja u hoq (shtresë rregullimi) ¦ Sfurija mneħħija (saff ta’ aġġustament)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Rrethoje fillimisht fytyrën me elipsin ◯ (tërhiq mbi foto), pastaj kliko sërish «Fytyrë më e mprehtë». ¦ L-ewwel dawwar il-wiċċ bl-ellissi ◯ (kaxkar fuq ir-ritratt), imbagħad erġa’ ikklikkja “Wiċċ aktar nitidu”.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Fytyra u pastrua nga zhurma dhe u mpreh në një shtresë më vete: patejdukshmëria e saj dozon efektin. ¦ Wiċċ imnaddaf mill-ħsejjes u enfasizzat fuq saff separat: l-opaċità tiegħu tiddoża l-effett.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Korrektori gati: tërhiq përgjatë gërvishtjes ose palosjes (zmadho për të qenë i saktë). ¦ Korrettur lest: kaxkar tul il-grif jew it-tinja (agħmel żum biex tkun preċiż).
+✨ Vieille photo ravivée ¦ ✨ Foto e vjetër e gjallëruar ¦ ✨ Ritratt qadim imqajjem
+✨ Réglage automatique ¦ ✨ Rregullim automatik ¦ ✨ Aġġustament awtomatiku
+Fais d’abord une sélection. ¦ Bëj fillimisht një përzgjedhje. ¦ L-ewwel agħmel għażla.
+Masque qui cache tout ¦ Maskë që fsheh gjithçka ¦ Maskra li taħbi kollox
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Kjo shtresë nuk ka maskë (Shtresa → Shto një maskë). ¦ Dan is-saff m’għandux maskra (Saff → Żid maskra).
+Ce calque n’a pas de masque. ¦ Kjo shtresë nuk ka maskë. ¦ Dan is-saff m’għandux maskra.
+Sélection inversée ¦ Përzgjedhja u përmbys ¦ Għażla maqluba
+Agrandir la sélection ¦ Zgjero përzgjedhjen ¦ Kabbar l-għażla
+Réduire la sélection ¦ Ngushto përzgjedhjen ¦ Ċekken l-għażla
+De combien de points (de l’aperçu) ? ¦ Me sa pika (të paraparjes)? ¦ B’kemm pixel (tal-preview)?
+Sélection agrandie ¦ Përzgjedhja u zgjerua ¦ Għażla mkabbra
+Sélection réduite ¦ Përzgjedhja u ngushtua ¦ Għażla mċekkna
+Contour progressif de la sélection ¦ Zbutje e skajeve të përzgjedhjes ¦ Feather tal-għażla
+Copie de la sélection ¦ Kopje e përzgjedhjes ¦ Kopja tal-għażla
+Sélection copiée sur un calque ¦ Përzgjedhja u kopjua në një shtresë ¦ Għażla kkupjata fuq saff
+Remplissage ¦ Mbushje ¦ Mili
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Zona u fshi nga fotoja: do të jetë transparente (imazhi ruhet në PNG). ¦ Żona mħassra mir-ritratt: tkun trasparenti (stampa ssejvjata f’PNG).
+Sélection effacée ¦ Përzgjedhja u fshi ¦ Għażla mħassra
+Recadré sur la sélection ¦ U pre sipas përzgjedhjes ¦ Maqtugħ skont l-għażla
+Filtres de ce calque ¦ Filtrat e kësaj shtrese ¦ Filtri ta’ dan is-saff
+Plus tôt ¦ Më herët ¦ Qabel
+un filtre… ¦ një filtër… ¦ filtru…
+＋ Ajouter ¦ ＋ Shto ¦ ＋ Żid
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Menyja <b>Filtër</b>: çdo filtër vendoset në shtresën e vet (asgjë nuk shkatërrohet): e rregullon, e dozon me patejdukshmërinë e shtresës, e kufizon me një maskë 🎭, e fsheh 👁. ¦ ✨ Menu <b>Filtru</b>: kull filtru jitqiegħed fuq saff tiegħu stess (xejn ma jinqered): taġġustah, tiddożah bl-opaċità tas-saff, tillimitah b’maskra 🎭, taħbih 👁.
+Réglages remis à zéro ¦ Rregullimet u kthyen në zero ¦ Aġġustamenti reġgħu għal żero
+Point de courbe enlevé ¦ Pika e kurbës u hoq ¦ Punt tal-kurva mneħħi
+Supprimer ce point ¦ Fshi këtë pikë ¦ Ħassar dan il-punt
+Point de la courbe ¦ Pika e kurbës ¦ Punt tal-kurva
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Maska me të kuqe: ajo që është fshehur (tasti \ për t’u kthyer) ¦ Maskra bl-aħmar: dak li hu moħbi (it-tasta \ biex terġa’ lura)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Ende i paruajtur si projekt: 💾 Ruaj mban gjithë punën për të vazhduar më vonë ¦ Għadu mhux issejvjat bħala proġett: 💾 Issejvja jżomm ix-xogħol kollu biex tkompli aktar tard
+Enregistrer le projet sous un autre nom ¦ Ruaj projektin me një emër tjetër ¦ Issejvja l-proġett b’isem ieħor
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Emri i projektit të ri (për ta gjetur te «📂 Projektet…»): ¦ Isem il-proġett il-ġdid (biex issibu f’“📂 Proġetti…”):
+Les retouches en cours seront perdues. ¦ Retushimet në vazhdim do të humbasin. ¦ Ir-rtokki għaddejjin jintilfu.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Të hapësh një projekt tjetër pa e ruajtur këtë punë? ¦ Tiftaħ proġett ieħor mingħajr ma tissejvja dan ix-xogħol?
+Ouvrir sans enregistrer ¦ Hap pa ruajtur ¦ Iftaħ mingħajr ma tissejvja
+affichée ¦ e shfaqur ¦ murija
+en cours de retouche ¦ duke u retushuar ¦ qed tiġi rtukkjata
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Shiko, krahaso, kthehu, riemërto, fshi (L3) ¦ Ara, qabbel, erġa’ lura, ibdel l-isem, ħassar (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Shiko, krahaso, kthehu, riemërto, fshi ¦ Ara, qabbel, erġa’ lura, ibdel l-isem, ħassar
+l’original est toujours gardé ¦ origjinali ruhet gjithmonë ¦ l-oriġinal dejjem jinżamm
+Original ¦ Origjinali ¦ Oriġinal
+Quitter cette retouche sans l’enregistrer ? ¦ Të dalësh nga ky retushim pa e ruajtur? ¦ Toħroġ minn dan ir-rtokk mingħajr ma tissejvjah?
+Pas de versions pour cette image. ¦ Nuk ka versione për këtë imazh. ¦ M’hemmx verżjonijiet għal din l-istampa.
+Bicubique, plus lisse (pour agrandir) ¦ Bikubik, më i lëmuar (për zmadhim) ¦ Bikubiku, aktar lixx (biex tkabbar)
+Bicubique, plus net (pour réduire) ¦ Bikubik, më i mprehtë (për zvogëlim) ¦ Bikubiku, aktar nitidu (biex iċċekken)
+Bilinéaire ¦ Bilinear ¦ Bilineari
+Au plus proche (contours nets, pixels) ¦ Më i afërti (konture të mprehta, piksele) ¦ L-eqreb (truf ċari, pixels)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Madhësia e imazhit të ruajtur ose të eksportuar (Imazh → Madhësia e imazhit, Madhësia e zonës së punës) ¦ Id-daqs tal-istampa ssejvjata jew esportata (Stampa → Daqs tal-istampa, Daqs taż-żona tax-xogħol)
+📏 Taille de l’image ¦ 📏 Madhësia e imazhit ¦ 📏 Daqs tal-istampa
+pixels ¦ piksele ¦ pixels
+pour cent ¦ përqind ¦ fil-mija
+Ajuster à un format ¦ Përshtat në një format ¦ Aġġusta għal format
+— garder ces mesures — ¦ — mbaj këto masa — ¦ — żomm dawn il-qisien —
+🔗 Conserver les proportions ¦ 🔗 Ruaj përmasat ¦ 🔗 Żomm il-proporzjonijiet
+Résolution ¦ Rezolucioni ¦ Riżoluzzjoni
+Rééchantillonner ¦ Rimostro ¦ Erġa’ ikkampjuna
+Méthode ¦ Metoda ¦ Metodu
+À l’impression ¦ Në printim ¦ Fl-istampar
+↺ Remettre la taille d’origine ¦ ↺ Ktheje madhësinë origjinale ¦ ↺ Erġa’ poġġi d-daqs oriġinali
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Fotoja mbetet në cilësi të plotë gjatë retushimit: madhësia e zgjedhur zbatohet kur ruan ose eksporton imazhin. ↶ Zhbëj (⌘Z) kthehet te madhësia e mëparshme. ¦ Ir-ritratt jibqa’ fi kwalità sħiħa waqt ir-rtokk: id-daqs magħżul japplika meta tissejvja jew tesporta l-istampa. ↶ Erġa’ lura (⌘Z) jerġa’ għad-daqs ta’ qabel.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Mjaft e madhe për ta printuar në A5 me 300 ppi. ¦ ✓ Kbira biżżejjed biex tipprintja f’A5 b’300 dpi.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Shumë e vogël për ta printuar në A5 me 300 ppi (duhen 1748 × 2480 px). ¦ ⚠️ Żgħira wisq biex tipprintja f’A5 b’300 dpi (trid 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Zgjidh një madhësi midis 1 dhe 30 000 pikselësh për brinjë (260 milionë piksele më së shumti). ¦ Agħżel daqs bejn 1 u 30 000 pixel kull naħa (260 miljun pixel l-aktar).
+⬚ Taille de la zone de travail ¦ ⬚ Madhësia e zonës së punës ¦ ⬚ Daqs taż-żona tax-xogħol
+Nouvelle taille ¦ Madhësia e re ¦ Daqs ġdid
+Ancrage ¦ Ankorimi ¦ Ankraġġ
+Où reste l’image ¦ Ku mbetet imazhi ¦ Fejn tibqa’ l-istampa
+Relative (ajouter à la taille actuelle) ¦ Relative (shto te madhësia aktuale) ¦ Relattiv (żid mad-daqs attwali)
+Au centre ¦ Në qendër ¦ Fiċ-ċentru
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Imazhi mbetet në këtë vend; pëlhura zgjerohet (ose pritet) përreth. ¦ L-istampa tibqa’ f’dan il-post; it-tila tikber (jew tinqata’) madwarha.
+Fond de la zone ajoutée ¦ Sfondi i zonës së shtuar ¦ Sfond taż-żona miżjuda
+Transparent (PNG) ¦ Transparent (PNG) ¦ Trasparenti (PNG)
+↺ Remettre la zone de départ ¦ ↺ Ktheje zonën fillestare ¦ ↺ Erġa’ poġġi ż-żona tal-bidu
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Zhbëj (⌘Z) kthehet te zona e mëparshme. ¦ ↶ Erġa’ lura (⌘Z) jerġa’ għaż-żona ta’ qabel.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Zgjidh një madhësi midis 1 dhe 30 000 pikselësh për brinjë. ¦ Agħżel daqs bejn 1 u 30 000 pixel kull naħa.
+Informations de l’image ¦ Informacionet e imazhit ¦ Informazzjoni tal-istampa
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Këto informacione shkruhen në imazhin e ruajtur ose të eksportuar (XMP, i lexueshëm nga Photoshop, Lightroom, Explorer…). ¦ Din l-informazzjoni tinkiteb fl-istampa ssejvjata jew esportata (XMP, tinqara minn Photoshop, Lightroom, l-Explorer…).
+Droits (copyright) ¦ Të drejtat (copyright) ¦ Drittijiet (copyright)
+Personnes reliées ¦ Personat e lidhur ¦ Persuni marbuta
+Image trop grande pour être enregistrée par le navigateur. ¦ Imazh shumë i madh për t’u ruajtur nga shfletuesi. ¦ Stampa kbira wisq biex tiġi ssejvjata mill-browser.
+Image trop grande pour le navigateur. ¦ Imazh shumë i madh për shfletuesin. ¦ Stampa kbira wisq għall-browser.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Kopja e retushuar u shtua te të njëjtat kartela. ¦ Kopja rtukkjata miżjuda mal-istess skedi.
+Image enregistrée dans les Médias. ¦ Imazhi u ruajt te Media. ¦ Stampa ssejvjata fil-Midja.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Versioni i ri u shfaq. Origjinali ruhet te versionet. ¦ Il-verżjoni l-ġdida murija. L-oriġinal jinżamm fil-verżjonijiet.
+Version enregistrée (non affichée). ¦ Versioni u ruajt (pa u shfaqur). ¦ Verżjoni ssejvjata (mhux murija).
+Ouverture de la photo ¦ Po hapet fotoja ¦ Qed jinfetaħ ir-ritratt
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Fotoja fillestare nuk ka më të njëjtën madhësi: kontrollo shtresat. ¦ Ir-ritratt tal-bidu m’għandux aktar l-istess daqs: iċċekkja s-saffi.
+Supprimer le projet (les photos et leurs versions restent) ¦ Fshi projektin (fotot dhe versionet e tyre mbeten) ¦ Ħassar il-proġett (ir-ritratti u l-verżjonijiet tagħhom jibqgħu)
+Aucun projet de retouche pour l’instant ¦ Ende asnjë projekt retushimi ¦ Għalissa l-ebda proġett ta’ rtokk
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ Te Retushimi, «💾 Ruaj projektin». ¦ Fir-Rtokk, “💾 Issejvja l-proġett”.
+Renommer le projet ¦ Riemërto projektin ¦ Ibdel l-isem tal-proġett
+La photo et ses versions restent. ¦ Fotoja dhe versionet e saj mbeten. ¦ Ir-ritratt u l-verżjonijiet tiegħu jibqgħu.
+Écran 16:9 — 1920 × 1080 ¦ Ekran 16:9 — 1920 × 1080 ¦ Skrin 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Katror — 1080 × 1080 ¦ Kwadru — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Kartolinë — 1500 × 2100 ¦ Kartolina — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 vertikale (150 dpi) — 1240 × 1754 ¦ A4 vertikali (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 horizontale (150 dpi) — 1754 × 1240 ¦ A4 orizzontali (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 vertikale (300 dpi) — 2480 × 3508 ¦ A4 vertikali (300 dpi) — 2480 × 3508
+Autre taille… ¦ Madhësi tjetër… ¦ Daqs ieħor…
+⬜ Partir d’un canevas vide ¦ ⬜ Nis nga një kanavacë bosh ¦ ⬜ Ibda minn kanvas vojt
+⬜ Canevas vide ¦ ⬜ Kanavacë bosh ¦ ⬜ Kanvas vojt
+Créer et ouvrir ¦ Krijo dhe hap ¦ Oħloq u iftaħ
+Une couleur… ¦ Një ngjyrë… ¦ Kulur…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Kanavaca shtohet te Media; pastaj vendos aty shtresa, grupe, tekst, forma, foto (Përzgjedhje → shtresë)… ¦ Il-kanvas jiżdied mal-Midja; imbagħad tpoġġi fih saffi, gruppi, test, forom, ritratti (Għażla → saff)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Madhësia midis 16 dhe 8 000 pikselësh për brinjë. ¦ Daqs bejn 16 u 8 000 pixel kull naħa.
+Canevas trop grand pour le navigateur. ¦ Kanavacë shumë e madhe për shfletuesin. ¦ Kanvas kbir wisq għall-browser.
+Création impossible. ¦ Krijimi është i pamundur. ¦ Ma jistax jinħoloq.
+Canevas ¦ Kanavacë ¦ Kanvas
+Restaurer cette photo ¦ Restauro këtë foto ¦ Irrestawra dan ir-ritratt
+Retoucher cette photo ¦ Retusho këtë foto ¦ Irtokkja dan ir-ritratt
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Një foto e importuar shtohet te Media (pa u lidhur me një kartelë); retushimet e saj ruhen si versione. ¦ Ritratt importat jiżdied mal-Midja (mingħajr ma jkun marbut ma’ skeda); ir-rtokki tiegħu jinżammu bħala verżjonijiet.
+Rouvrir un travail de retouche enregistré ¦ Rihap një punë retushimi të ruajtur ¦ Erġa’ iftaħ xogħol ta’ rtokk issejvjat
+📂 Projets… ¦ 📂 Projektet… ¦ 📂 Proġetti…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Një imazh bosh, për të vizatuar, shkruar ose bashkuar shtresa ¦ Stampa vojta, biex tpinġi, tikteb jew tgħaqqad saffi
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Shumë e madhe: {w} × {h} pika. Zmadhimi kufizohet në {max} pika për brinjë (dhe {mp} milionë pika). ¦ Kbira wisq: {w} × {h} pixel. It-tkabbir huwa limitat għal {max} pixel kull naħa (u {mp} miljun pixel).
+Ta sélection est prise comme ciel ¦ Përzgjedhja jote merret si qiell ¦ L-għażla tiegħek tittieħed bħala sema
+Ciel trouvé : {cov} de la photo ¦ Qielli u gjet: {cov} e fotos ¦ Sema misjuba: {cov} tar-ritratt
+calques « Ciel » et « Harmonisation » ¦ shtresat «Qielli» dhe «Harmonizimi» ¦ saffi “Sema” u “Armonizzazzjoni”
+Ciel remplacé ({what}) ¦ Qielli u zëvendësua ({what}) ¦ Sema mibdula ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Personi u pre (në drejtkëndëshin tënd): zgjidh sfondin; «Retusho konturin» për ta korrigjuar me penel. ¦ Persuna maqtugħa (fir-rettangolu tiegħek): agħżel l-isfond; “Irtokkja l-kontorn” biex tikkoreġi bil-pinzell.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Personi u pre: zgjidh sfondin; «Retusho konturin» për ta korrigjuar me penel. ¦ Persuna maqtugħa: agħżel l-isfond; “Irtokkja l-kontorn” biex tikkoreġi bil-pinzell.
+{w} × {h} points aujourd’hui ¦ {w} × {h} pika sot ¦ {w} × {h} pixel illum
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Ky imazh është tashmë i madh: zmadhimi kufizohet në {max} pika për brinjë. ¦ Din l-istampa diġà kbira: it-tkabbir huwa limitat għal {max} pixel kull naħa.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 do të jepte më shumë se {max} pika për brinjë: vetëm ×2. ¦ ×4 jagħti aktar minn {max} pixel kull naħa: ×2 biss.
+Image agrandie téléchargée ({w} × {h}). ¦ Imazhi i zmadhuar u shkarkua ({w} × {h}). ¦ Stampa mkabbra mniżżla ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Imazhi i zmadhuar ×{k} ({w} × {h}) u ruajt te mediat. ¦ Stampa mkabbra ×{k} ({w} × {h}) tqiegħdet fil-midja.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Versioni i ri i zmadhuar ×{k} ({w} × {h}) u shfaq; origjinali mbetet te versionet. ¦ Il-verżjoni l-ġdida mkabbra ×{k} ({w} × {h}) murija; l-oriġinal jibqa’ fil-verżjonijiet.
+☀️ Bleu dégagé ¦ ☀️ Blu i kthjellët ¦ ☀️ Blu ċar
+⛅ Beaux nuages ¦ ⛅ Re të bukura ¦ ⛅ Sħab sbieħ
+🌅 Coucher de soleil ¦ 🌅 Perëndim dielli ¦ 🌅 Nżul ix-xemx
+⛈️ Ciel orageux ¦ ⛈️ Qiell me stuhi ¦ ⛈️ Sema maltempata
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Qiell i bardhë dimri ¦ 🌫️ Sema bajda tax-xitwa
+Agrandissement arrêté. ¦ Zmadhimi u ndal. ¦ It-tkabbir twaqqaf.
+Fil de calcul en panne. ¦ Fija e llogaritjes nuk punon. ¦ Il-proċess tal-kalkolu ma jaħdimx.
+Recherche du ciel… ¦ Po kërkohet qielli… ¦ Qed infittxu s-sema…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Nuk po e gjej qiellin: duhet të prekë pjesën e sipërme të fotos dhe të jetë mjaft njëngjyrësh. Përzgjidhe vetë (🪄 shkop, ➰ laso), pastaj fillo sërish: përzgjedhja jote do të merret si qiell. ¦ Ma nsibx is-sema: għandha tmiss in-naħa ta’ fuq tar-ritratt u tkun uniformi biżżejjed. Agħżilha int (🪄 bastun, ➰ lazz), imbagħad erġa’ ibda: l-għażla tiegħek tittieħed bħala sema.
+Harmonisation du premier plan ¦ Harmonizimi i planit të parë ¦ Armonizzazzjoni tal-ewwel pjan
+Ciel ¦ Qielli ¦ Sema
+☁️ Remplacer le ciel ¦ ☁️ Zëvendëso qiellin ¦ ☁️ Ibdel is-sema
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Një foto qielli: nga baza ose nga kompjuteri ¦ Ritratt tas-sema: mid-database jew mill-kompjuter
+Une image… ¦ Një imazh… ¦ Stampa…
+Taille du nouveau ciel ¦ Madhësia e qiellit të ri ¦ Daqs tas-sema l-ġdida
+Position verticale ¦ Pozicioni vertikal ¦ Pożizzjoni vertikali
+Position horizontale ¦ Pozicioni horizontal ¦ Pożizzjoni orizzontali
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Me madhësi mbi 100 %: cila pjesë e qiellit duket (0 = sipër). ¦ B’daqs ’il fuq minn 100 %: liema parti tas-sema tidher (0 = in-naħa ta’ fuq).
+Fondu à l’horizon ¦ Shkrirje në horizont ¦ Dewbien fl-orizzont
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Zbut kufirin midis qiellit dhe tokës (pemë, çati): më lart, më e shkrirë. ¦ Irattab il-fruntiera bejn is-sema u l-art (siġar, soqfa): aktar għoli, aktar imdewweb.
+Harmoniser le premier plan ¦ Harmonizo planin e parë ¦ Armonizza l-ewwel pjan
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Peizazhi merr pak nga ngjyra dhe drita e qiellit të ri, që gjithçka të shkojë bashkë. ¦ Il-pajsaġġ jieħu ftit mill-kulur u d-dawl tas-sema l-ġdida, biex kollox jaqbel flimkien.
+Opacité du ciel ¦ Patejdukshmëria e qiellit ¦ Opaċità tas-sema
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Piko maskën e shtresës «Qielli»: ⬛ fshih (aty ku qielli nuk duhet të kalojë), ⬜ shfaq ¦ Pinġi l-maskra tas-saff “Sema”: ⬛ aħbi (fejn is-sema m’għandhiex tgħaddi), ⬜ uri
+🖌 Corriger le masque ¦ 🖌 Korrigjo maskën ¦ 🖌 Ikkoreġi l-maskra
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Asgjë nuk shkatërrohet: qielli është një shtresë me maskë. Nëse mungon ose del jashtë një copë qielli: «Korrigjo maskën», ose përzgjidh vetë qiellin (🪄, ➰) dhe rinis. ¦ Xejn ma jinqered: is-sema hija saff b’maskra. Jekk biċċa sema nieqsa jew toħroġ barra: “Ikkoreġi l-maskra”, jew agħżel is-sema int (🪄, ➰) u erġa’ ibda.
+Une photo de ciel ¦ Një foto qielli ¦ Ritratt tas-sema
+Prendre ce ciel ¦ Merr këtë qiell ¦ Ħu din is-sema
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Një foto nga baza, ose një imazh nga kompjuteri (hyn te mediat). ¦ Ritratt mid-database, jew stampa mill-kompjuter (tidħol fil-midja).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Po pikturon maskën e qiellit: ⬛ fshih aty ku qielli del jashtë (gjethe, çati), ⬜ shfaq aty ku mungon. Pastaj «✓ OK». ¦ Qed tpinġi l-maskra tas-sema: ⬛ aħbi fejn is-sema toħroġ barra (weraq, soqfa), ⬜ uri fejn hi nieqsa. Imbagħad “✓ OK”.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Qielli u zëvendësua: shtresat «Qielli» dhe «Harmonizimi i planit të parë» (patejdukshmëria, maska, 👁 për të krahasuar). ¦ Sema mibdula: saffi “Sema” u “Armonizzazzjoni tal-ewwel pjan” (opaċità, maskra, 👁 biex tqabbel).
+✂️ Détourer une personne ¦ ✂️ Prit një person ¦ ✂️ Aqta’ persuna
+Sans intelligence artificielle : tout se calcule ici ¦ Pa inteligjencë artificiale: gjithçka llogaritet këtu ¦ Mingħajr intelliġenza artifiċjali: kollox jiġi kkalkulat hawn
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Vizato një drejtkëndësh rreth personit (⬚), jo shumë ngushtë — ose lëre të gjithë: gjithë fotoja shërben si kornizë. ¦ 1. Pinġi rettangolu madwar il-persuna (⬚), mhux issikkat wisq — jew ħalli kollox: ir-ritratt kollu jservi ta’ qafas.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. «Prit»: aplikacioni mëson ngjyrat e personit (në drejtkëndësh) dhe të sfondit (përreth), pastaj ndjek konturet. ¦ 2. “Aqta’”: l-app titgħallem il-kuluri tal-persuna (fir-rettangolu) u tal-isfond (madwar), imbagħad issegwi l-kontorni.
+⬚ Tracer un rectangle ¦ ⬚ Vizato një drejtkëndësh ¦ ⬚ Pinġi rettangolu
+✂️ Détourer ¦ ✂️ Prit ¦ ✂️ Aqta’
+Fond transparent (image en PNG) ¦ Sfond transparent (imazh në PNG) ¦ Sfond trasparenti (stampa f’PNG)
+Fond flou ¦ Sfond i turbullt ¦ Sfond imċajpar
+Fond uni ¦ Sfond njëngjyrësh ¦ Sfond uniformi
+Garder la personne sur un calque à part ¦ Mbaje personin në një shtresë më vete ¦ Żomm il-persuna fuq saff separat
+Flou du fond ¦ Turbullimi i sfondit ¦ Ċajpar tal-isfond
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Piko maskën: ⬛ fshih, ⬜ shfaq ¦ Pinġi l-maskra: ⬛ aħbi, ⬜ uri
+🖌 Retoucher le contour ¦ 🖌 Retusho konturin ¦ 🖌 Irtokkja l-kontorn
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Funksionon mirë kur personi dallohet nga sfondi (ngjyra të ndryshme, sfond mjaft i thjeshtë). Flokë të hollë, sfond i ngarkuar ose rroba me ngjyrën e sfondit: do të duhet retushuar me penel («Retusho konturin»). ¦ Taħdem tajjeb meta l-persuna tinfired mill-isfond (kuluri differenti, sfond sempliċi biżżejjed). Xagħar irqiq, sfond mgħobbi jew ħwejjeġ bil-kulur tal-isfond: ikollok tirtokkja bil-pinzell (“Irtokkja l-kontorn”).
+Personne détourée ¦ Personi u pre ¦ Persuna maqtugħa
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Vizato një drejtkëndësh rreth personit (duke lënë pak sfond përreth), pastaj «✂️ Prit». ¦ Pinġi rettangolu madwar il-persuna (u ħalli ftit sfond madwar), imbagħad “✂️ Aqta’”.
+Détourage… ¦ Po pritet… ¦ Qed jinqata’…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Personi nuk u gjet: vizato drejtkëndëshin më afër tij, pastaj fillo sërish. ¦ Il-persuna ma nstabitx: pinġi r-rettangolu eqreb lejha, imbagħad erġa’ ibda.
+✂️ Détourer à nouveau ¦ ✂️ Prit sërish ¦ ✂️ Erġa’ aqta’
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Po pikturon maskën e personit: ⬛ fshih (sfondi i mbetur), ⬜ shfaq (një copë e harruar e personit). ¦ Qed tpinġi l-maskra tal-persuna: ⬛ aħbi (l-isfond li baqa’), ⬜ uri (biċċa mill-persuna li ntesiet).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Po pikturon maskën e sfondit: ⬛ fshih (aty është personi), ⬜ shfaq (aty është sfondi). ¦ Qed tpinġi l-maskra tal-isfond: ⬛ aħbi (hemm hi l-persuna), ⬜ uri (hemm hu l-isfond).
+Détourage : fond transparent ¦ Prerje: sfond transparent ¦ Qtugħ: sfond trasparenti
+Détourage : fond flou ¦ Prerje: sfond i turbullt ¦ Qtugħ: sfond imċajpar
+Détourage : fond uni ¦ Prerje: sfond njëngjyrësh ¦ Qtugħ: sfond ta’ kulur wieħed
+Détourage : personne sur un calque ¦ Prerje: personi në një shtresë ¦ Qtugħ: persuna fuq saff
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Sfondi u bë transparent (maska e fotos): imazhi do të ruhet në PNG. ¦ Sfond magħmul trasparenti (maskra tar-ritratt): l-immaġni tiġi ssejvjata f’PNG.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Prerja u bë: gjithçka është në shtresa, me maska për t’u retushuar nëse duhet. ¦ Qtugħ lest: kollox fuq saffi, b’maskri biex jiġu rritokkati jekk ikun hemm bżonn.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Vizato një drejtkëndësh rreth personit (⬚), ose «✂️ Prit» drejtpërdrejt për gjithë foton. ¦ Pinġi rettangolu madwar il-persuna (⬚), jew “✂️ Aqta’” direttament għar-ritratt kollu.
+Préparation de l’image en pleine taille… ¦ Po përgatitet imazhi në madhësi të plotë… ¦ L-immaġni qed titħejja f’daqs sħiħ…
+🔍 Agrandir l’image ¦ 🔍 Zmadho imazhin ¦ 🔍 Kabbar l-immaġni
+Netteté des contours ¦ Mprehtësia e konturave ¦ Nitidezza tal-kontorni
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Përforcon konturat pa krijuar aureolë; sipërfaqet e njëtrajtshme (qielli, lëkura) mbeten të buta. ¦ Issaħħaħ il-kontorni mingħajr ma tagħmel halo; l-uċuħ uniformi (sema, ġilda) jibqgħu rotob.
+Clique pour choisir l’endroit de l’aperçu ¦ Kliko për të zgjedhur vendin e pamjes paraprake ¦ Ikklikkja biex tagħżel il-post tal-preview
+Lissage du grain ¦ Zbutja e kokrrizave ¦ Twittija tal-qamħ
+Avant (agrandi simplement) ¦ Para (thjesht e zmadhuar) ¦ Qabel (sempliċement imkabbra)
+Après, à 100 % ¦ Pas, në 100 % ¦ Wara, f’100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Një version i ri i fotos, i shfaqur kudo (origjinali mbetet) ¦ Verżjoni ġdida tar-ritratt, murija kullimkien (l-oriġinal jibqa’)
+Agrandir → nouvelle version ¦ Zmadho → version i ri ¦ Kabbar → verżjoni ġdida
+→ copie séparée ¦ → kopje e veçantë ¦ → kopja separata
+Agrandir → dans les médias ¦ Zmadho → te media ¦ Kabbar → fil-midja
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Zmadhimi nuk i rikthen detajet që nuk janë fotografuar kurrë: imazhi është më i madh dhe më i mprehtë, jo më i saktë. ¦ It-tkabbir ma jġibx lura d-dettalji li qatt ma ġew ritrattati: l-immaġni hi akbar u aktar nitida, mhux aktar preċiża.
+Cette image est déjà trop grande pour être agrandie. ¦ Ky imazh është tashmë shumë i madh për t’u zmadhuar. ¦ Din l-immaġni diġà kbira wisq biex titkabbar.
+Filtre : {what} ¦ Filtri: {what} ¦ Filtru: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Nuanca/Ngopja {num} ¦ 🎨 Lewn/Saturazzjoni {num}
+Motif {num} ¦ Motivi {num} ¦ Disinn {num}
+Bruit ¦ Zhurmë ¦ Storbju
+Artistiques ¦ Artistikë ¦ Artistiċi
+Pixellisation ¦ Pikselizim ¦ Pixelizzazzjoni
+Rendu ¦ Paraqitje ¦ Rendering
+Autres ¦ Të tjerë ¦ Oħrajn
+Flou gaussien ¦ Turbullim gausian ¦ Ċajpra Gaussjana
+Flou de mouvement ¦ Turbullim lëvizjeje ¦ Ċajpra tal-moviment
+Flou radial (zoom) ¦ Turbullim radial (zmadhim) ¦ Ċajpra radjali (żoom)
+Flou rotatif ¦ Turbullim rrotullues ¦ Ċajpra li ddur
+Accentuation (masque flou) ¦ Mprehje (maskë e turbullt) ¦ Nitidezza (maskra mċajpra)
+Estampage (relief) ¦ Stampim (reliev) ¦ Emboss (riljev)
+Solarisation ¦ Solarizim ¦ Solarizzazzjoni
+Diffusion ¦ Difuzion ¦ Diffużjoni
+Vent ¦ Erë ¦ Riħ
+Aquarelle ¦ Akuarel ¦ Akkwarell
+Vieux film ¦ Film i vjetër ¦ Film qadim
+Cristallisation ¦ Kristalizim ¦ Kristallizzazzjoni
+Pointillisme ¦ Pikëzim ¦ Puntilliżmu
+Nuages (texture) ¦ Re (teksturë) ¦ Sħab (tessut)
+Lueur diffuse ¦ Shkëlqim i shpërndarë ¦ Dija mxerrda
+Tourbillon ¦ Vorbull ¦ Duwamar
+Onde ¦ Valë ¦ Mewġa
+Rayon ¦ Rrezja ¦ Raġġ
+Centre X ¦ Qendra X ¦ Ċentru X
+Centre Y ¦ Qendra Y ¦ Ċentru Y
+Seuil ¦ Pragu ¦ Limitu
+Bande nette, hauteur ¦ Brez i mprehtë, lartësia ¦ Strixxa nitida, għoli
+Points lumineux ¦ Pika të ndritshme ¦ Punti ta’ dawl
+Monochrome (0 / 1) ¦ Njëngjyrësh (0 / 1) ¦ Monokromu (0 / 1)
+Gain ¦ Përforcimi ¦ Gwadann
+Niveaux ¦ Nivelet ¦ Livelli
+Longueur ¦ Gjatësia ¦ Tul
+Contours ¦ Konturat ¦ Kontorni
+Trait ¦ Vija ¦ Linja
+Traits noirs ¦ Vija të zeza ¦ Linji suwed
+Usure ¦ Konsumim ¦ Xedd
+Position X ¦ Pozicioni X ¦ Pożizzjoni X
+Position Y ¦ Pozicioni Y ¦ Pożizzjoni Y
+Amplitude ¦ Amplituda ¦ Amplitudni
+Horizontale (0) / verticale (1) ¦ Horizontale (0) / vertikale (1) ¦ Orizzontali (0) / vertikali (1)
+Horizontal ¦ Horizontal ¦ Orizzontali
+Contraste ¦ Kontrasti ¦ Kuntrast
+Ombres ¦ Hijet ¦ Dellijiet
+Chaleur ¦ Ngrohtësia ¦ Sħana
+Rouge ¦ E kuqe ¦ Aħmar
+Vert ¦ E gjelbër ¦ Aħdar
+Bleu ¦ Blu ¦ Blu
+RVB ¦ RGB ¦ RGB
+Assombrir ¦ Errëso ¦ Dallam
+Grain ¦ Kokrriza ¦ Qamħ
+Vignette ¦ Vinjetë ¦ Vinjetta
+Force ¦ Forca ¦ Saħħa
+Couleurs ¦ Ngjyrat ¦ Kuluri
+Auto ¦ Auto ¦ Awto
+Document lisible ¦ Dokument i lexueshëm ¦ Dokument jinqara
+Niveaux : point noir, tons moyens, point blanc ¦ Nivelet: pika e zezë, tonet e mesme, pika e bardhë ¦ Livelli: punt iswed, toni medji, punt abjad
+Niveaux automatiques ¦ Nivele automatike ¦ Livelli awtomatiċi
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Ngritja e kurbës ndriçon, ulja errëson, një «S» jep kontrast. E kuqe, e gjelbër, blu: korrigjo një ngjyrë mbizotëruese. ¦ Tgħolli l-kurva ddawwal, tniżżilha tiskura, “S” tagħti kuntrast. Aħmar, aħdar, blu: ikkoreġi kulur dominanti.
+✨ Menu ¦ ✨ Menyja ¦ ✨ Menu
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Zhvendos: tërhiq dorezën, ose Alt + ↑ / ↓ ¦ Ċaqlaq: kaxkar il-manku, jew Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Auto: pikat më të errëta bëhen të zeza dhe më të ndritshmet të bardha; klikimi i 2-të kthen gjendjen e mëparshme. ¦ Awto: l-iktar punti skuri jsiru suwed u l-iktar ċari bojod; it-2 klikk jerġa’ lura għall-istat ta’ qabel.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Ndriçon vetëm pjesët e errëta (ose i errëson drejt së majtës), pa prekur të ndritshmet. ¦ Iddawwal biss il-partijiet skuri (jew tiskurahom lejn ix-xellug), mingħajr ma tmiss iċ-ċari.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Kliko përsëri për t’u kthyer në gjendjen e mëparshme ¦ Ikklikkja mill-ġdid biex terġa’ lura għall-istat ta’ qabel
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Klik në kurbë: shto një pikë · tërhiq: zhvendose · për ta hequr: zgjidhe pastaj «Hiq pikën» (ose tasti ⌫), ose tërhiqe jashtë kornizës. ¦ Klikk fuq il-kurva: żid punt · kaxkar: ċaqalqu · biex tneħħih: agħżlu imbagħad “Neħħi l-punt” (jew it-tasta ⌫), jew kaxkru ’l barra mill-qafas.
+fx ¦ fx ¦ fx
+Normal italique ¦ Normal i pjerrët ¦ Normali korsiv
+Extra-fin italique ¦ Shumë i hollë i pjerrët ¦ Extra-rqiq korsiv
+Ultra-léger italique ¦ Ultra i lehtë i pjerrët ¦ Ultra-ħafif korsiv
+Léger italique ¦ I lehtë i pjerrët ¦ Ħafif korsiv
+Médium italique ¦ Mesatar i pjerrët ¦ Medju korsiv
+Demi-gras italique ¦ Gjysmë i trashë i pjerrët ¦ Nofs-grassett korsiv
+Gras italique ¦ I trashë i pjerrët ¦ Grassett korsiv
+Extra-gras italique ¦ Shumë i trashë i pjerrët ¦ Extra-grassett korsiv
+Noir italique ¦ I zi i pjerrët ¦ Iswed korsiv
+Unicode : Latin-1 ¦ Unicode: Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: greqisht ¦ Unicode: Grieg
+Unicode : cyrillique ¦ Unicode: cirilik ¦ Unicode: Ċirilliku
+Unicode : ponctuation ¦ Unicode: pikësim ¦ Unicode: punteġġjatura
+Unicode : monnaies ¦ Unicode: monedha ¦ Unicode: muniti
+Unicode : symboles de lettres ¦ Unicode: simbole shkronjash ¦ Unicode: simboli tal-ittri
+Unicode : nombres ¦ Unicode: numra ¦ Unicode: numri
+Unicode : traits de tableau ¦ Unicode: vija tabelash ¦ Unicode: linji tat-tabelli
+Unicode : symboles divers ¦ Unicode: simbole të ndryshme ¦ Unicode: simboli varji
+Unicode : casseau (dingbats) ¦ Unicode: dingbats ¦ Unicode: dingbats
+Unicode : ligatures ¦ Unicode: ligatura ¦ Unicode: ligaturi
+Grain de papier ¦ Kokrrizë letre ¦ Qamħ tal-karta
+Rond ¦ I rrumbullakët ¦ Tond
+Plume calligraphique ¦ Pendë kaligrafike ¦ Pinna kalligrafika
+Crayon ¦ Laps ¦ Lapes
+Pinceau sec ¦ Penel i thatë ¦ Pinzell niexef
+Herbe ¦ Bar ¦ Ħaxix
+Peau claire ¦ Lëkurë e çelur ¦ Ġilda ċara
+Peau hâlée ¦ Lëkurë e nxirë ¦ Ġilda ikkunzata
+Peau mate ¦ Lëkurë ezmere ¦ Ġilda skura
+Joues, lèvres ¦ Faqe, buzë ¦ Ħaddejn, xufftejn
+Cheveux bruns ¦ Flokë kafe ¦ Xagħar kannella
+Cheveux blonds ¦ Flokë bjondë ¦ Xagħar blond
+Cheveux gris ¦ Flokë gri ¦ Xagħar griż
+Feuillage ¦ Gjethe ¦ Weraq
+Uniforme, costume bleu ¦ Uniformë, kostum blu ¦ Uniformi, libsa blu
+Robe bordeaux ¦ Fustan bordo ¦ Libsa bordeaux
+Habit noir ¦ Veshje e zezë ¦ Libsa sewda
+Mur, pierre ¦ Mur, gur ¦ Ħajt, ġebla
+Brique, tuile ¦ Tullë, tjegull ¦ Briks, madum tas-saqaf
+Bois ¦ Dru ¦ Injam
+🩹 Correcteur ¦ 🩹 Korrigjues ¦ 🩹 Korrettur
+🧬 Tampon (morceau manquant) ¦ 🧬 Vulë (copë që mungon) ¦ 🧬 Timbru (biċċa nieqsa)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Zmadhimi: përshtat, 50 %, 100 %, 200 % ¦ Żoom: aġġusta, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Restauro ¦ Irrestawra
+menu|Sélection ¦ Përzgjedhja ¦ Selezzjoni
+retouche|Courbe ¦ Kurba ¦ Kurva
+motif|D’après ¦ Sipas ¦ Skont
+pinceau|Feuille ¦ Gjethe ¦ Werqa
+pinceau|Étoile ¦ Yll ¦ Stilla
+pinceau|Carré ¦ Katror ¦ Kwadru
+Glisse pour comparer ¦ Rrëshqit për të krahasuar ¦ Iżżerżaq biex tqabbel
+Rideau avant / après ¦ Perde para / pas ¦ Purtiera qabel / wara
+Image importée ¦ Imazh i importuar ¦ Immaġni importata
+La fenêtre d’export n’est pas encore prête. ¦ Dritarja e eksportit nuk është ende gati. ¦ It-tieqa tal-esportazzjoni għadha mhix lesta.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Imazhi u shkarkua; një kopje është vendosur te media. ¦ Immaġni mniżżla; kopja hi mqiegħda fil-midja.
+Aperçu de l’avant / après ¦ Pamje paraprake e para / pas ¦ Preview tal-qabel / wara
+Rideau vertical (avant à gauche) ¦ Perde vertikale (para majtas) ¦ Purtiera vertikali (qabel fuq ix-xellug)
+Rideau horizontal (avant en haut) ¦ Perde horizontale (para lart) ¦ Purtiera orizzontali (qabel fuq)
+L’une sous l’autre ¦ Njëra nën tjetrën ¦ Waħda taħt l-oħra
+Position du rideau ¦ Pozicioni i perdes ¦ Pożizzjoni tal-purtiera
+ex. Mariage de Jean et Marie, 1925 ¦ p.sh. Martesa e Jean dhe Marie, 1925 ¦ eż. Żwieġ ta’ Jean u Marie, 1925
+Écrire « Avant » et « Après » ¦ Shkruaj «Para» dhe «Pas» ¦ Ikteb “Qabel” u “Wara”
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Para / pas u shkarkua; një kopje është vendosur te media. ¦ Qabel / wara mniżżel; kopja hi mqiegħda fil-midja.
+Garder appuyé pour voir l’original ¦ Mbaje shtypur për të parë origjinalin ¦ Żomm magħfus biex tara l-oriġinal
+👁 Avant / après ¦ 👁 Para / pas ¦ 👁 Qabel / wara
+◧ Rideau ¦ ◧ Perde ¦ ◧ Purtiera
+Comparer avec un rideau qu’on glisse sur la photo ¦ Krahaso me një perde që rrëshqet mbi foto ¦ Qabbel b’purtiera li tiżżerżaq fuq ir-ritratt
+Rideau vertical ou horizontal ¦ Perde vertikale ose horizontale ¦ Purtiera vertikali jew orizzontali
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Eksporto para / pas si imazh (krah për krah ose perde, me legjendë) ¦ Esporta l-qabel / wara bħala immaġni (ħdejn xulxin jew purtiera, b’deskrizzjoni)
+Rideau horizontal ¦ Perde horizontale ¦ Purtiera orizzontali
+Rideau vertical ¦ Perde vertikale ¦ Purtiera vertikali
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Sa del korniza rreth fytyrës: e vogël = fytyrë e ngushtë, e madhe = shpatulla dhe pak sfond. ¦ Kemm joħroġ il-qafas madwar il-wiċċ: żgħir = wiċċ mill-qrib, kbir = spallejn u ftit sfond.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Lartësia e syve në kornizë, nga lart: e njëjta për të gjitha portretet, ato rreshtohen kur vendosen krah për krah. ¦ L-għoli tal-għajnejn fil-qafas, minn fuq: l-istess għar-ritratti kollha, jiġu allinjati meta jitqiegħdu ħdejn xulxin.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ E dobët: buza e penelit është e butë dhe shkrihet; e fortë: buza është e mprehtë. ¦ Dgħajjef: it-tarf tal-pinzell hu artab u jitħallat; qawwi: it-tarf hu nitidu.
+Filtres ¦ Filtrat ¦ Filtri
+✨ Filtres ¦ ✨ Filtrat ¦ ✨ Filtri
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Klasik: si më parë. Perceptues: një kalim më i barabartë për syrin, pa zonë gri ose shumë të errët në mes. Sipas nuancave: duke kaluar nëpër ngjyrat e ylberit. ¦ Klassiku: bħal qabel. Perċettiv: passaġġ aktar ugwali għall-għajn, mingħajr żona griża jew skura wisq fin-nofs. Skont il-lewn: billi tgħaddi mill-kuluri tal-qawsalla.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Më lart: merren edhe vija më të zbehta ose më të shkurtra. Shumë lart, mund të merren detaje të fotos (flokë, shkrim): shiko të kuqen. ¦ Ogħla: jittieħdu wkoll linji aktar ċari jew aktar qosra. Għoli wisq, jistgħu jittieħdu dettalji tar-ritratt (xagħar, kitba): ħares lejn l-aħmar.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Forca e të gjitha hapave njëherësh: e ulët = një restaurim i matur, e lartë = më i dukshëm (por kujdes nga «tepër i lëmuar»). ¦ Is-saħħa tal-passi kollha f’daqqa: baxx = restawr diskret, għoli = aktar qawwi (imma attent għal “lixx wisq”).
+Sens ¦ Drejtimi ¦ Direzzjoni
+De combien ¦ Sa ¦ Kemm
+↻ Horaire ¦ ↻ Në drejtim të akrepave ¦ ↻ Lejn il-lemin
+↺ Antihoraire ¦ ↺ Kundër akrepave ¦ ↺ Lejn ix-xellug
+↻ Faire pivoter ¦ ↻ Rrotullo ¦ ↻ Dawwar
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Mban drejtkëndëshin më të madh të drejtë në foton e rrotulluar: pa qoshe bosh. Është një prerje: «Anulo prerjen» e heq. ¦ Iżżomm l-akbar rettangolu dritt fir-ritratt imdawwar: l-ebda rokna vojta. Hu qtugħ: “Ikkanċella l-qtugħ” ineħħih.
+Enlever ¦ Hiq ¦ Neħħi
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Shënuar: numri i pikselëve ndryshon (imazhi rillogaritet). Pa shenjë: ndryshojnë vetëm rezolucioni dhe madhësia në printim, pikselët mbeten të njëjtë. ¦ Immarkat: in-numru ta’ pixels jinbidel (l-immaġni terġa’ tiġi kkalkulata). Mhux immarkat: jinbidlu biss ir-riżoluzzjoni u d-daqs tal-istampar, il-pixels jibqgħu l-istess.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Shënuar: shkruan çfarë shtohet (ose hiqet, me një numër negativ) rreth imazhit. ¦ Immarkat: tikteb dak li jiżdied (jew jitneħħa, b’numru negattiv) madwar l-immaġni.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Para zmadhimit, zbut kokrrizat dhe zhurmën (konturat mbeten): e dobishme për një foto të skanuar me kokrriza. ¦ Qabel ma tkabbar, itaffi l-qamħ u l-istorbju (il-kontorni jibqgħu): utli għal ritratt skanjat bil-qamħ.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Për një negativ të fotografuar ose të skanuar: të ndriçuarat dhe të errëtat shkëmbehen. ¦ Għal negattiv ritrattat jew skanjat: iċ-ċari u l-iskuri jinqalbu.
+Nom de la photo retouchée ¦ Emri i fotos së retushuar ¦ Isem ir-ritratt irritokkat
+Le nom de la copie et des fichiers exportés ¦ Emri i kopjes dhe i skedarëve të eksportuar ¦ L-isem tal-kopja u tal-fajls esportati
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Retushimi i plotë: shtresa, përzgjedhje, maska, tekst, forma, filtra, projekte ¦ Ir-ritokk sħiħ: saffi, selezzjonijiet, maskri, test, forom, filtri, proġetti
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Heqja e zhurmës, pluhurit, palosjeve, kontrasti, mprehtësia dhe ngjyrosja njëherësh (te retushimi i plotë) ¦ Tneħħija tal-istorbju, trab, tinjiet, kuntrast, nitidezza u kulur f’daqqa (fir-ritokk sħiħ)
+🎛️ Retouche complète ¦ 🎛️ Retushim i plotë ¦ 🎛️ Ritokk sħiħ
+Retouche complète ¦ Retushim i plotë ¦ Ritokk sħiħ
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Eksporto: foton e retushuar (PNG, JPG, printo) ose para / pas ¦ Esporta: ir-ritratt irritokkat (PNG, JPG, ipprintja) jew il-qabel / wara
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Ruaj dhe shfaq këtë version të fotos (origjinali ruhet) ¦ Issejvja u uri din il-verżjoni tar-ritratt (l-oriġinal jinżamm)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Fotoja e retushuar (PNG, JPG, printo)… ¦ 🖼 Ir-ritratt irritokkat (PNG, JPG, ipprintja)…
+Barre des outils ¦ Shiriti i mjeteve ¦ Bar tal-għodod
+Réglages : couleur, lumière, courbe ¦ Cilësimet: ngjyra, drita, kurba ¦ Issettjar: kulur, dawl, kurva
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Korrigjuesi i njollave: kliko mbi një njollë, një pluhur, një gërvishtje ¦ Korrettur tat-tbajja’: ikklikkja fuq tebgħa, trab, grif
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Vula e dyfishimit: {key} + klik në vendin për t’u kopjuar, pastaj pikturo zonën për t’u mbuluar ¦ Timbru tad-duplikazzjoni: {key} + klikk fuq il-post li se tikkopja, imbagħad pinġi fuq iż-żona li se tgħatti
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + klik për të zgjedhur vendin për t’u kopjuar, pastaj pikturo zonën për t’u mbuluar. ¦ {key} + klikk biex tagħżel il-post li se tikkopja, imbagħad pinġi fuq iż-żona li se tgħatti.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Rrotullo 90° majtas (kundër akrepave) ¦ Dawwar 90° lejn ix-xellug (kontra l-arloġġ)
+Pivoter à gauche ¦ Rrotullo majtas ¦ Dawwar lejn ix-xellug
+Faire pivoter de 90° vers la droite (horaire) ¦ Rrotullo 90° djathtas (në drejtim të akrepave) ¦ Dawwar 90° lejn il-lemin (mal-arloġġ)
+Pivoter à droite ¦ Rrotullo djathtas ¦ Dawwar lejn il-lemin
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Retushim i plotë: shtresa, përzgjedhje, maska, tekst, filtra ¦ Ritokk sħiħ: saffi, selezzjonijiet, maskri, test, filtri
+Les corrections en cours seront perdues. ¦ Korrigjimet në vazhdim do të humbasin. ¦ Il-korrezzjonijiet li għaddejjin jintilfu.
+Passer à la retouche complète ? ¦ Të kalohet te retushimi i plotë? ¦ Tgħaddi għar-ritokk sħiħ?
+Passer à la retouche complète ¦ Kalo te retushimi i plotë ¦ Għaddi għar-ritokk sħiħ
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Rregullo ngjyrën dhe dritën djathtas · mbaj shtypur «👁 Para / pas» për të krahasuar ¦ Irranġa l-kulur u d-dawl fuq il-lemin · żomm “👁 Qabel / wara” magħfus biex tqabbel
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Kliko mbi një njollë, një pluhur ose një gërvishtje: zëvendësohet nga ajo që e rrethon. Për një gërvishtje, rrëshqit përgjatë saj. ¦ Ikklikkja fuq tebgħa, trab jew grif: tiġi sostitwita b’dak li hemm madwarha. Għal grif, iżżerżaq tulu.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Zgjidh së pari vendin për t’u kopjuar: Alt + klik (⌥ + klik në Mac). ¦ L-ewwel agħżel il-post li se tikkopja: Alt + klikk (⌥ + klikk fuq Mac).
+Versions de la photo ¦ Versionet e fotos ¦ Verżjonijiet tar-ritratt
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Ruaj pa e shfaqur (mbahet te versionet) ¦ Issejvja mingħajr ma turih (jinżamm fil-verżjonijiet)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Kopje e veçantë (një media tjetër, e lidhur me të njëjtat kartela) ¦ Kopja separata (midja oħra, magħquda mal-istess skedi)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Eksporto foton e retushuar (PNG, JPG, printo)… ¦ Esporta r-ritratt irritokkat (PNG, JPG, ipprintja)…
+Exporter l’avant / après… ¦ Eksporto para / pas… ¦ Esporta l-qabel / wara…
+Restaurer en une fois… ¦ Restauro njëherësh… ¦ Irrestawra f’daqqa…
+Pivoter de 90° à droite (horaire) ¦ Rrotullo 90° djathtas (në drejtim të akrepave) ¦ Dawwar 90° lejn il-lemin (mal-arloġġ)
+Pivoter de 90° à gauche (antihoraire) ¦ Rrotullo 90° majtas (kundër akrepave) ¦ Dawwar 90° lejn ix-xellug (kontra l-arloġġ)
+Avant / après en rideau ¦ Para / pas me perde ¦ Qabel / wara bil-purtiera
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Fotoja shtohet te media (pa kartelë). Cilësimet në vazhdim për këtë foto braktisen. ¦ Ir-ritratt jiżdied fil-midja (mingħajr skeda). L-issettjar li għaddej fuq dan ir-ritratt jiġi abbandunat.
+Retoucher « {name} » à la place ? ¦ Të retushohet «{name}» në vend të saj? ¦ Tirritokka “{name}” minfloku?
+💧 Fluidité ¦ 💧 Rrjedhshmëri ¦ 💧 Fluwidità
+Fluidité ¦ Rrjedhshmëri ¦ Fluwidità
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Pikturo mbi foto për ta deformuar, si një brumë i butë ¦ Pinġi fuq ir-ritratt biex tiddeformah, bħal għaġina ratba
+L’image suit la main ¦ Imazhi ndjek dorën ¦ L-immaġni ssegwi l-id
+Agrandit sous le pinceau (garder appuyé) ¦ Zmadhon nën penel (mbaje shtypur) ¦ Tkabbar taħt il-pinzell (żomm magħfus)
+Rétrécit sous le pinceau (garder appuyé) ¦ Zvogëlon nën penel (mbaje shtypur) ¦ Iċċekken taħt il-pinzell (żomm magħfus)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Rrotullon në drejtim të akrepave të orës ¦ Iddur mal-arloġġ
+Fait tourner dans l’autre sens ¦ Rrotullon në drejtimin tjetër ¦ Iddur fid-direzzjoni l-oħra
+Ramène peu à peu l’image d’origine ¦ Rikthen pak nga pak imazhin origjinal ¦ Ġġib lura ftit ftit l-immaġni oriġinali
+➡ Pousser ¦ ➡ Shty ¦ ➡ Imbotta
+⊕ Gonfler ¦ ⊕ Fryj ¦ ⊕ Nefaħ
+⊖ Dégonfler ¦ ⊖ Shfryj ¦ ⊖ Żgħar
+Dégonfler ¦ Shfryj ¦ Żgħar
+Gonfler ¦ Fryj ¦ Nefaħ
+Pousser ¦ Shty ¦ Imbotta
+↻ Tourbillon ¦ ↻ Vorbull ¦ ↻ Duwamar
+↺ Tourbillon inverse ¦ ↺ Vorbull i kundërt ¦ ↺ Duwamar bil-maqlub
+Tourbillon inverse ¦ Vorbull i kundërt ¦ Duwamar bil-maqlub
+↩ Reconstruire ¦ ↩ Rindërto ¦ ↩ Erġa’ ibni
+Reconstruire ¦ Rindërto ¦ Erġa’ ibni
+Image trop grande pour la Fluidité. ¦ Imazh shumë i madh për Rrjedhshmërinë. ¦ Immaġni kbira wisq għall-Fluwidità.
+↶ Annuler le coup ¦ ↶ Zhbëj goditjen ¦ ↶ Erġa’ lura l-pass
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Zbato (shtresa «Rrjedhshmëri») ¦ ✓ Applika (saff “Fluwidità”)
+Rien n’a été déformé. ¦ Asgjë nuk u deformua. ¦ Xejn ma ġie deformat.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Rrjedhshmëria u zbatua në shtresën «Rrjedhshmëri» (fotoja mbetet poshtë: 👁 për të krahasuar). ¦ 💧 Fluwidità applikata fuq is-saff “Fluwidità” (ir-ritratt jibqa’ taħt: 👁 biex tqabbel).
+🪄 Gomme magique ¦ 🪄 Goma magjike ¦ 🪄 Gomma maġika
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Kliko në sfondin për ta bërë transparent (disa klikime shtohen) ¦ Ikklikkja fuq l-isfond li trid tagħmel trasparenti (diversi klikks jiżdiedu)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Vetëm zona fqinje (përndryshe: kjo ngjyrë kudo) ¦ Iż-żona ħdejn biss (inkella: dan il-kulur kullimkien)
+↶ Annuler le clic ¦ ↶ Zhbëj klikimin ¦ ↶ Erġa’ lura l-klikk
+✓ Appliquer (masque de la photo) ¦ ✓ Zbato (maska e fotos) ¦ ✓ Applika (maskra tar-ritratt)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Fotoja ka tashmë një maskë: goma magjike e zëvendëson. ¦ Ir-ritratt diġà għandu maskra: il-gomma maġika tissostitwiha.
+Remplacer le masque de la photo ? ¦ Të zëvendësohet maska e fotos? ¦ Tissostitwixxi l-maskra tar-ritratt?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Sfondi u bë transparent (maska e fotos, për t’u retushuar me penel): imazhi ruhet në PNG. ¦ 🪄 Sfond magħmul trasparenti (maskra tar-ritratt, biex tirritokka bil-pinzell): l-immaġni tiġi ssejvjata f’PNG.
+Masque de « {name} » ¦ Maska e «{name}» ¦ Maskra ta’ “{name}”
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Ende nuk ka maskë: prit (✂️), fshi sfondin me gomë (🪄) ose shto një maskë në një shtresë, pastaj përmirëso buzën e saj. ¦ Għad m’hemmx maskra: aqta’ (✂️), ħassar l-isfond bil-gomma (🪄) jew żid maskra ma’ saff, imbagħad irfina t-tarf tagħha.
+✨ Affiner le bord ¦ ✨ Përmirëso buzën ¦ ✨ Irfina t-tarf
+Décaler le bord ¦ Zhvendos buzën ¦ Ċaqlaq it-tarf
+Voir le masque seul (blanc : gardé) ¦ Shiko vetëm maskën (e bardhë: e mbajtur) ¦ Ara l-maskra biss (abjad: miżmum)
+Bord du masque affiné ¦ Buza e maskës u përmirësua ¦ Tarf tal-maskra rfinat
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Buza u përmirësua (↶ për t’u kthyer; peneli korrigjon pjesën tjetër). ¦ ✨ Tarf irfinat (↶ biex terġa’ lura; il-pinzell jikkoreġi l-bqija).
+Lissage du bord ¦ Zbutja e buzës ¦ Twittija tat-tarf
+Contraste du bord ¦ Kontrasti i buzës ¦ Kuntrast tat-tarf
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Imazh shumë i madh ({w} × {h} pika): zvogëlo madhësinë e fotove. ¦ Immaġni kbira wisq ({w} × {h} punti): naqqas id-daqs tar-ritratti.
+Recherche… ({i}/{total}) ¦ Po kërkohet… ({i}/{total}) ¦ Qed infittex… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ «{name}»: zhvendosje {dx} × {dy} pika, rrotullim {rot}°, ngjashmëri {pct} %. ¦ “{name}”: ċaqliq {dx} × {dy} punti, rotazzjoni {rot}°, xebh {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Asnjë pjesë e përbashkët e sigurt për {names}: vendose me dorë (tërhiq, shigjetat; «Mënyra e diferencës» për ta kontrolluar). ¦ L-ebda parti komuni ċerta għal {names}: poġġiha bl-idejn (kaxkar, vleġeġ; “Modalità tad-differenza” biex tiċċekkja).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotot u rreshtuan: kontrollo (tërhiq, shigjetat për ta rregulluar). «Shkri bashkimet» zbut lidhjen gjatë ruajtjes. ¦ Ritratti allinjati: iċċekkja (kaxkar, vleġeġ biex taġġusta). “Ħallat il-ġonot” itaffi l-ġonta meta tissejvja.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotoja u rreshtua: kontrollo (tërhiq, shigjetat për ta rregulluar). «Shkri bashkimet» zbut lidhjen gjatë ruajtjes. ¦ Ritratt allinjat: iċċekkja (kaxkar, vleġeġ biex taġġusta). “Ħallat il-ġonot” itaffi l-ġonta meta tissejvja.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Imazhi i bashkuar u ruajt, i lidhur me të njëjtat kartela si «{name}». Fotot origjinale mbeten. ¦ Immaġni magħquda ssejvjata, marbuta mal-istess skedi bħal “{name}”. Ir-ritratti oriġinali jibqgħu.
+Titre de l’image assemblée ¦ Titulli i imazhit të bashkuar ¦ Titlu tal-immaġni magħquda
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Titulli i imazhit të bashkuar (dhe emri i skedarëve të eksportuar) ¦ It-titlu tal-immaġni magħquda (u l-isem tal-fajls esportati)
+L’image assemblée : PNG, JPG ou imprimer ¦ Imazhi i bashkuar: PNG, JPG ose printo ¦ L-immaġni magħquda: PNG, JPG jew ipprintja
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Ruaj imazhin e bashkuar te media, të lidhur me të njëjtat kartela si fotoja e parë e bazës ¦ Issejvja l-immaġni magħquda fil-midja, marbuta mal-istess skedi bħall-ewwel ritratt tad-database
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Kliko një foto për ta zgjedhur, tërhiq për ta zhvendosur · Shift + rrota: madhësia · Alt + rrota: rrotullimi · rrota: zmadhimi · shigjetat: 1 px (Shift: 10 px) · tërhiq këtu një foto nga kompjuteri për ta shtuar ¦ Ikklikkja ritratt biex tagħżlu, kaxkar biex iċċaqalqu · Shift + rota: daqs · Alt + rota: rotazzjoni · rota: żoom · vleġeġ: 1 px (Shift: 10 px) · kaxkar hawn ritratt mill-kompjuter biex iżżidu
+Fond blanc (sinon transparent en PNG) ¦ Sfond i bardhë (përndryshe transparent në PNG) ¦ Sfond abjad (inkella trasparenti f’PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Shënuar: sfondi rreth fotove është i bardhë. Pa shenjë, mbetet transparent (vetëm në PNG; JPG vendos gjithmonë të bardhë). ¦ Immarkat: l-isfond madwar ir-ritratti hu abjad. Mhux immarkat, jibqa’ trasparenti (f’PNG biss; il-JPG dejjem ipoġġi abjad).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Ajo që mbivendoset mirë bëhet e zezë: ideale për të rreshtuar dy foto të të njëjtit vend ¦ Dak li jikkoinċidi tajjeb isir iswed: ideali biex tallinja żewġ ritratti tal-istess post
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Pjesët identike të dy fotove bëhen të zeza: kur shkrimi pothuajse zhduket, ato janë rreshtuar në mënyrë të përsosur. ¦ Il-partijiet identiċi taż-żewġ ritratti jsiru suwed: meta l-kitba kważi tisparixxi, huma allinjati perfettament.
+Mode différence ¦ Mënyra e diferencës ¦ Modalità tad-differenza
+Boutons des photos ¦ Butonat e fotove ¦ Buttuni tar-ritratti
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Panoramë, faqe e fotografuar dy herë: çdo foto vendoset mbi të mëparshmen aty ku mbulohen (zhvendosje, rrotullim i vogël) ¦ Panorama, paġna ritrattata f’darbtejn: kull ritratt jitqiegħed fuq ta’ qablu fejn jikkoinċidu (ċaqliq, rotazzjoni żgħira)
+🪄 Aligner tout seul ¦ 🪄 Rreshto vetë ¦ 🪄 Allinja waħdu
+Image enregistrée ¦ Imazhi u ruajt ¦ Immaġni ssejvjata
+JPEG (léger) ¦ JPEG (i lehtë) ¦ JPEG (ħafif)
+PNG (sans perte) ¦ PNG (pa humbje) ¦ PNG (mingħajr telf)
+Fondre les raccords ¦ Shkri bashkimet ¦ Ħallat il-ġonot
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Aty ku dy foto mbulohen, buza e asaj sipër zbehet butë: asnjë shkallë e dukshme në bashkim. ¦ Fejn żewġ ritratti jikkoinċidu, it-tarf ta’ dak ta’ fuq jgħib bil-mod: l-ebda tarġa viżibbli fil-ġonta.
+Largeur du fondu ¦ Gjerësia e shkrirjes ¦ Wisa’ tal-ħlit
+Rogner aux parties couvertes (sans coins vides) ¦ Prit te pjesët e mbuluara (pa qoshe bosh) ¦ Aqta’ għall-partijiet koperti (mingħajr rokna vojta)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Mban drejtkëndëshin më të madh plotësisht të mbuluar nga fotot: pa qoshe të bardha rreth një panorame. ¦ Iżżomm l-akbar rettangolu kopert kompletament mir-ritratti: l-ebda rokna bajda madwar panorama.
+L’assemblage non enregistré sera perdu. ¦ Bashkimi i paruajtur do të humbasë. ¦ L-għaqda mhux issejvjata tintilef.
+Fermer sans enregistrer l’assemblage ? ¦ Të mbyllet pa e ruajtur bashkimin? ¦ Tagħlaq mingħajr ma tissejvja l-għaqda?
+Mettre devant ¦ Vendose përpara ¦ Poġġi quddiem
+Mettre derrière ¦ Vendose prapa ¦ Poġġi wara
+Aucune photo à assembler pour l’instant ¦ Ende asnjë foto për t’u bashkuar ¦ Għalissa ebda ritratt x’tgħaqqad
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ «＋ Foto», ose tërhiq një foto nga kompjuteri në tryezën e punës. ¦ “＋ Ritratti”, jew kaxkar ritratt mill-kompjuter fuq il-pjan tax-xogħol.
+＋ Photos ¦ ＋ Foto ¦ ＋ Ritratti
+Clique une photo pour la régler. ¦ Kliko një foto për ta rregulluar. ¦ Ikklikkja ritratt biex tirranġah.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Madhësia e fotos në krahasim me pikat e saj të vërteta: për të vendosur dy foto në të njëjtën shkallë. ¦ Id-daqs tar-ritratt meta mqabbel mal-punti veri tiegħu: biex tpoġġi żewġ ritratti fl-istess skala.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Gjysmë transparente, fotoja sipër lë të duket atë poshtë: rreshtohen shkrimet. ¦ Nofsu trasparenti, ir-ritratt ta’ fuq iħalli jidher dak ta’ taħt: tallinja l-kitbiet.
+À moitié transparente ¦ Gjysmë transparente ¦ Nofsu trasparenti
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Për të vendosur dy foto në të njëjtën shkallë: bëje atë sipër gjysmë transparente (ose shëno «Mënyra e diferencës»), pastaj rregullo madhësinë dhe rrotullimin derisa shkrimet të mbivendosen. ¦ Biex tpoġġi żewġ ritratti fl-istess skala: agħmel dak ta’ fuq nofsu trasparenti (jew immarka “Modalità tad-differenza”), imbagħad aġġusta d-daqs u r-rotazzjoni tiegħu sakemm il-kitbiet jikkoinċidu.
+Opaque ¦ Opake ¦ Opak
+Aucune photo visible. ¦ Asnjë foto e dukshme. ¦ Ebda ritratt viżibbli.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Shto të paktën dy foto që mbulojnë njëra-tjetrën («＋ Foto»). ¦ Żid mill-inqas żewġ ritratti li jikkoinċidu (“＋ Ritratti”).
+Le navigateur n’a pas pu créer l’image. ¦ Shfletuesi nuk mundi të krijonte imazhin. ¦ Il-browser ma setax joħloq l-immaġni.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Për ta ruajtur në bazë, një nga fotot duhet të vijë nga baza (përndryshe: ⤓ Shkarko). ¦ Biex tissejvja fid-database, wieħed mir-ritratti jrid ikun ġej mid-database (inkella: ⤓ Niżżel).
+Création de l’image… ¦ Po krijohet imazhi… ¦ L-immaġni qed tinħoloq…
+ASSEMBLER ¦ BASHKO ¦ GĦAQQAD
+ce n’est pas un fichier PSD ¦ nuk është skedar PSD ¦ mhux fajl PSD
+les très grands PSD (PSB) ne sont pas lus ¦ PSD-të shumë të mëdha (PSB) nuk lexohen ¦ il-PSD kbar ħafna (PSB) ma jinqrawx
+version de PSD inconnue ¦ version i panjohur PSD ¦ verżjoni PSD mhux magħrufa
+profondeur {n} bits non lue (seulement 8 bits) ¦ thellësia {n} bit nuk lexohet (vetëm 8 bit) ¦ fond ta’ {n} bits ma jinqarax (8 bits biss)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ lexohen vetëm PSD në RGB ose në shkallë gri ¦ jinqraw biss PSD f’RGB jew fi gradi tal-griż
+image trop grande ¦ imazh shumë i madh ¦ immaġni kbira wisq
+compression ZIP non lue ¦ kompresimi ZIP nuk lexohet ¦ kompressjoni ZIP ma tinqarax
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD gati: {n} shtresë, {w} × {h} px (shtresat e rregullimit janë në imazhin e rrafshuar).|🗂 PSD gati: {n} shtresa, {w} × {h} px (shtresat e rregullimit janë në imazhin e rrafshuar). ¦ 🗂 PSD lest: {n} saff, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saffi, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saffi, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saff, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saff, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD gati: {n} shtresë, {w} × {h} px (shtresat e rregullimit janë në imazhin e rrafshuar).|🗂 PSD gati: {n} shtresa, {w} × {h} px (shtresat e rregullimit janë në imazhin e rrafshuar). ¦ 🗂 PSD lest: {n} saff, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saffi, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saffi, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saff, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).|🗂 PSD lest: {n} saff, {w} × {h} px (is-saffi tal-aġġustament jinsabu fl-immaġni ċċattjata).
+PSD illisible : {err}. ¦ PSD i palexueshëm: {err}. ¦ PSD ma jinqarax: {err}.
+Calque PSD ¦ Shtresë PSD ¦ Saff PSD
+PSD importé : {file} ¦ PSD i importuar: {file} ¦ PSD importat: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} shtresë u importua nga «{file}» (përmasa të ndryshme: u përshtat me foton).|🗂 {n} shtresa u importuan nga «{file}» (përmasa të ndryshme: u përshtatën me foton). ¦ 🗂 {n} saff importat minn “{file}” (proporzjonijiet differenti: aġġustat għar-ritratt).|🗂 {n} saffi importati minn “{file}” (proporzjonijiet differenti: aġġustati għar-ritratt).|🗂 {n} saffi importati minn “{file}” (proporzjonijiet differenti: aġġustati għar-ritratt).|🗂 {n} saff importat minn “{file}” (proporzjonijiet differenti: aġġustat għar-ritratt).|🗂 {n} saff importat minn “{file}” (proporzjonijiet differenti: aġġustat għar-ritratt).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} shtresë u importua nga «{file}».|🗂 {n} shtresa u importuan nga «{file}». ¦ 🗂 {n} saff importat minn “{file}”.|🗂 {n} saffi importati minn “{file}”.|🗂 {n} saffi importati minn “{file}”.|🗂 {n} saff importat minn “{file}”.|🗂 {n} saff importat minn “{file}”.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} shtresë u importua nga «{file}» (përmasa të ndryshme: u përshtat me foton).|🗂 {n} shtresa u importuan nga «{file}» (përmasa të ndryshme: u përshtatën me foton). ¦ 🗂 {n} saff importat minn “{file}” (proporzjonijiet differenti: aġġustat għar-ritratt).|🗂 {n} saffi importati minn “{file}” (proporzjonijiet differenti: aġġustati għar-ritratt).|🗂 {n} saffi importati minn “{file}” (proporzjonijiet differenti: aġġustati għar-ritratt).|🗂 {n} saff importat minn “{file}” (proporzjonijiet differenti: aġġustat għar-ritratt).|🗂 {n} saff importat minn “{file}” (proporzjonijiet differenti: aġġustat għar-ritratt).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} shtresë u importua nga «{file}».|🗂 {n} shtresa u importuan nga «{file}». ¦ 🗂 {n} saff importat minn “{file}”.|🗂 {n} saffi importati minn “{file}”.|🗂 {n} saffi importati minn “{file}”.|🗂 {n} saff importat minn “{file}”.|🗂 {n} saff importat minn “{file}”.
+Cocher pour comparer ¦ Shëno për të krahasuar ¦ Immarka biex tqabbel
+Coche deux versions pour les comparer. ¦ Shëno dy versione për t’i krahasuar. ¦ Immarka żewġ verżjonijiet biex tqabbilhom.
+Plus ancien ¦ Më të vjetra ¦ L-eqdem
+léger ¦ i lehtë ¦ ħafif
+Taille des vignettes ¦ Madhësia e miniaturave ¦ Daqs tal-minjaturi
+Utiliser ces images ¦ Përdor këto imazhe ¦ Uża dawn l-immaġnijiet
+Chercher : titre, cote, personne, lieu, année ¦ Kërko: titull, shenjë arkivi, person, vend, vit ¦ Fittex: titlu, numru tal-arkivju, persuna, post, sena
+Titre, cote, personne, lieu, année… ¦ Titull, shenjë arkivi, person, vend, vit… ¦ Titlu, numru tal-arkivju, persuna, post, sena…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Hapësirë: shëno · Enter: konfirmo ¦ ↑ ↓ ← → · Spazju: immarka · Enter: ikkonferma
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: konfirmo ¦ ↑ ↓ ← → · Enter: ikkonferma
+Retouche ¦ Retushim ¦ Ritokk
+RETOUCHE ¦ RETUSHIM ¦ RITOKK
+photo|Légende ¦ Legjenda ¦ Deskrizzjoni
+Propriétés ¦ Vetitë ¦ Proprjetajiet
+Préréglage ¦ Paracilësim ¦ Issettjar lest
+Aucun. ¦ Asnjë. ¦ Xejn.
+trop petite pour imprimer en A5 ¦ shumë e vogël për t’u printuar në A5 ¦ żgħira wisq biex tiġi pprintjata f’A5
+assez grande pour imprimer en A5 ¦ mjaft e madhe për t’u printuar në A5 ¦ kbira biżżejjed biex tiġi pprintjata f’A5
+Écran 16:9 (1920 × 1080) ¦ Ekran 16:9 (1920 × 1080) ¦ Skrin 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Ekran 4:3 (1600 × 1200) ¦ Skrin 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Katror 1:1 (1080 × 1080) ¦ Kwadru 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Vertikal 9:16 (1080 × 1920) ¦ Vertikali 9:16 (1080 × 1920)
+photo|Exposition ¦ Ekspozimi ¦ Esponiment
+photo|Luminosité ¦ Ndriçimi ¦ Luminożità
+Colorisation : {what} ¦ Ngjyrosja: {what} ¦ Kulurazzjoni: {what}
+{what} oui ¦ {what} po ¦ {what} iva
+{what} non ¦ {what} jo ¦ {what} le
+Courbe {what} ¦ Kurba {what} ¦ Kurva {what}
+{layer} verrouillé ¦ {layer} u kyç ¦ {layer} imsakkar
+{layer} déverrouillé ¦ {layer} u shkyç ¦ {layer} miftuħ
+« {name} » seulement sur l’élément dessous ¦ «{name}» vetëm mbi elementin poshtë ¦ “{name}” biss fuq l-element ta’ taħt
+« {name} » sur tout ce qui est dessous ¦ «{name}» mbi gjithçka poshtë ¦ “{name}” fuq kull ma hemm taħt
+Teinte/Saturation : {what} ¦ Nuanca/Ngopja: {what} ¦ Lewn/Saturazzjoni: {what}
+{dpi} ppp ¦ {dpi} ppi ¦ {dpi} ppi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Dërgimi ({w} × {h} pika, {size} MB)… ¦ Bgħit ({w} × {h} punti, {size} MB)…
+Barre du haut (groupes) ¦ Shiriti i sipërm (grupet) ¦ Bar ta’ fuq (gruppi)
+Les outils ¦ Mjetet ¦ L-għodod
+Options des outils (pinceau, texte…) ¦ Opsionet e mjeteve (peneli, teksti…) ¦ Għażliet tal-għodod (pinzell, test…)
+Colonne d’outils ¦ Kolona e mjeteve ¦ Kolonna tal-għodod
+Panneau Réglages ¦ Paneli i cilësimeve ¦ Pannell tal-issettjar
+Préréglages ¦ Paracilësime ¦ Issettjar lest
+Import des réglages indisponible. ¦ Importi i cilësimeve nuk është i disponueshëm. ¦ L-importazzjoni tal-issettjar mhix disponibbli.

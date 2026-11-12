@@ -96,10 +96,11 @@ const mtRule = n => { n = Math.abs(n); if (Math.floor(n) !== n) return 'other'; 
                     if (!plural && vars(k) !== vars(v)) bad.push(`${f}:${i + 2} [${c}] variables : ${v}`);
                     if (tags(k) !== tags(v)) bad.push(`${f}:${i + 2} [${c}] balises : ${v}`);
                 }
+                const sym = /[«»]/.test(k); // la clé parle du signe lui-même (« guillemets », flèche »)
                 if (/[“”„]/.test(sq)) bad.push(`${f}:${i + 2} [sq] “ ” „ : ${sq}`);
-                if ((sq.match(/«/g) || []).length !== (sq.match(/»/g) || []).length) bad.push(`${f}:${i + 2} [sq] « sans » : ${sq}`);
-                if (/« | »/.test(sq)) bad.push(`${f}:${i + 2} [sq] espace dans «…» : ${sq}`);
-                if (/[«»„]/.test(mt)) bad.push(`${f}:${i + 2} [mt] « » „ : ${mt}`);
+                if (!sym && (sq.match(/«/g) || []).length !== (sq.match(/»/g) || []).length) bad.push(`${f}:${i + 2} [sq] « sans » : ${sq}`);
+                if (!sym && /« | »/.test(sq)) bad.push(`${f}:${i + 2} [sq] espace dans «…» : ${sq}`);
+                if (!sym && /[«»„]/.test(mt)) bad.push(`${f}:${i + 2} [mt] « » „ : ${mt}`);
                 if ((mt.match(/“/g) || []).length !== (mt.match(/”/g) || []).length) bad.push(`${f}:${i + 2} [mt] “ sans ” : ${mt}`);
                 if (plural && sq.split('|').length !== 2) bad.push(`${f}:${i + 2} [sq] pluriel en ${sq.split('|').length} formes : ${sq}`);
                 if (plural && mt.split('|').length !== 5) bad.push(`${f}:${i + 2} [mt] pluriel en ${mt.split('|').length} formes : ${mt}`);
