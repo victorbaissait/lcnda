@@ -363,3 +363,1203 @@ Colonne d’outils ¦ Stupac alata ¦ Stolpec orodij
 Panneau Réglages ¦ Ploča Prilagodbe ¦ Plošča Prilagoditve
 Préréglages ¦ Predlošci ¦ Prednastavitve
 Import des réglages indisponible. ¦ Uvoz postavki nije dostupan. ¦ Uvoz nastavitev ni na voljo.
+Espace de travail « {name} » appliqué. ¦ Radni prostor „{name}” primijenjen. ¦ Delovni prostor »{name}« uporabljen.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Postavke „{name}” uvezene: „Primijeni” da ih koristiš. ¦ Nastavitve »{name}« uvožene: »Uporabi«, da jih uporabiš.
+{layer} (avant / après) ¦ {layer} (prije / poslije) ¦ {layer} (prej / potem)
+Avant / après — {name} ¦ Prije / poslije — {name} ¦ Prej / potem — {name}
+Modèle des visages : {what} ¦ Model lica: {what} ¦ Model obrazov: {what}
+Portrait de {name} (photo d’identité) ¦ Portret – {name} (fotografija za osobnu iskaznicu) ¦ Portret – {name} (fotografija za osebni dokument)
+Portrait (photo d’identité) ¦ Portret (fotografija za osobnu iskaznicu) ¦ Portret (fotografija za osebni dokument)
+Fiche {num} ¦ Zapis {num} ¦ Zapis {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ lice nije pronađeno na „{name}”: izrez u sredini, provjeri (ili označi lice u pregledniku) ¦ ⚠️ obraza ni bilo mogoče najti na »{name}«: obrez na sredini, preveri (ali označi obraz v pregledovalniku)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portret spreman: odznači one koji ne odgovaraju, zatim „Koristi kao portrete”.|{n} portreta spremna: odznači one koji ne odgovaraju, zatim „Koristi kao portrete”.|{n} portreta spremno: odznači one koji ne odgovaraju, zatim „Koristi kao portrete”. ¦ {n} portret pripravljen: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.|{n} portreta pripravljena: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.|{n} portreti pripravljeni: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.|{n} portretov pripravljenih: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portret spreman: odznači one koji ne odgovaraju, zatim „Koristi kao portrete”.|{n} portreta spremna: odznači one koji ne odgovaraju, zatim „Koristi kao portrete”.|{n} portreta spremno: odznači one koji ne odgovaraju, zatim „Koristi kao portrete”. ¦ {n} portret pripravljen: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.|{n} portreta pripravljena: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.|{n} portreti pripravljeni: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.|{n} portretov pripravljenih: odznači tiste, ki niso v redu, nato »Uporabi kot portrete«.
+Aucun visage trouvé tout seul. ¦ Nijedno lice nije pronađeno automatski. ¦ Samodejno ni bil najden noben obraz.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ Još {n} izrezan je u sredini: označi ga samo ako odgovara.|Još {n} izrezana su u sredini: označi ih samo ako odgovaraju.|Još {n} izrezano je u sredini: označi ih samo ako odgovaraju. ¦ Še {n} je obrezan na sredini: označi ga samo, če je v redu.|Še {n} sta obrezana na sredini: označi ju samo, če sta v redu.|Še {n} so obrezani na sredini: označi jih samo, če so v redu.|Še {n} je obrezanih na sredini: označi jih samo, če so v redu.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ Još {n} izrezan je u sredini: označi ga samo ako odgovara.|Još {n} izrezana su u sredini: označi ih samo ako odgovaraju.|Još {n} izrezano je u sredini: označi ih samo ako odgovaraju. ¦ Še {n} je obrezan na sredini: označi ga samo, če je v redu.|Še {n} sta obrezana na sredini: označi ju samo, če sta v redu.|Še {n} so obrezani na sredini: označi jih samo, če so v redu.|Še {n} je obrezanih na sredini: označi jih samo, če so v redu.
+Calque {num} ¦ Sloj {num} ¦ Plast {num}
+Groupe {num} ¦ Grupa {num} ¦ Skupina {num}
+calque|Réglages ¦ Prilagodbe ¦ Prilagoditve
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Maska izrezivanja: djeluje samo na „{name}” odmah ispod (⌥ Alt + klik između dva sloja u Photoshopu) ¦ Maska izrezovanja: vpliva samo na »{name}« tik pod njo (⌥ Alt + klik med dvema plastema v Photoshopu)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Maska izrezivanja: djeluje samo na element odmah ispod (⌥ Alt + klik između dva sloja u Photoshopu) ¦ Maska izrezovanja: vpliva samo na element tik pod njo (⌥ Alt + klik med dvema plastema v Photoshopu)
+seulement sur « {name} » ¦ samo na „{name}” ¦ samo na »{name}«
+seulement sur ce qui est juste dessous ¦ samo na ono što je odmah ispod ¦ samo na tisto, kar je tik spodaj
+touche tout ce qui est dessous dans « {name} » ¦ djeluje na sve ispod u „{name}” ¦ vpliva na vse spodaj v »{name}«
+réglages, {n} corrections ¦ prilagodbe, ispravci: {n} ¦ prilagoditve, popravki: {n}
+réglages, {n} correction ¦ prilagodbe, ispravci: {n} ¦ prilagoditve, popravki: {n}
+« {name} » mis dans un groupe ¦ „{name}” stavljeno u grupu ¦ »{name}« postavljeno v skupino
+{layer} montré ¦ {layer}: prikazano ¦ {layer}: prikazano
+{layer} masqué ¦ {layer}: skriveno ¦ {layer}: skrito
+Masque qui cache la sélection ajouté à {name} ¦ Maska koja skriva odabir dodana na {name} ¦ Maska, ki skrije izbor, dodana na {name}
+Masque qui cache tout ajouté à {name} ¦ Maska koja skriva sve dodana na {name} ¦ Maska, ki skrije vse, dodana na {name}
+Masque ajouté à {name} ¦ Maska dodana na {name} ¦ Maska dodana na {name}
+Masque de {name} désactivé ¦ Maska od {name} isključena ¦ Maska za {name} izklopljena
+Masque de {name} réactivé ¦ Maska od {name} ponovno uključena ¦ Maska za {name} znova vklopljena
+Masque de {name} inversé ¦ Maska od {name} obrnuta ¦ Maska za {name} obrnjena
+Masque de {name} retiré ¦ Maska od {name} uklonjena ¦ Maska za {name} odstranjena
+« {name} » à sa taille d’origine ¦ „{name}” u izvornoj veličini ¦ »{name}« v izvirni velikosti
+✨ Filtre sur « {name} » ¦ ✨ Filtar na „{name}” ¦ ✨ Filter na »{name}«
+« {name} » pixellisé ¦ „{name}” rasterizirano ¦ »{name}« rasterizirano
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ „{name}” rasterizirano: zaključano na trenutnoj veličini (povećanje će ga zamutiti) ¦ »{name}« rasterizirano: zaklenjeno na trenutni velikosti (povečava ga bo zameglila)
+Groupe « {name} » supprimé (son contenu reste) ¦ Grupa „{name}” izbrisana (njezin sadržaj ostaje) ¦ Skupina »{name}« izbrisana (njena vsebina ostane)
+{layer} supprimé ¦ {layer}: izbrisano ¦ {layer}: izbrisano
+« {name} » retiré des calques ¦ „{name}” uklonjeno iz slojeva ¦ »{name}« odstranjeno iz plasti
+Calque « {name} » supprimé avec ce qui est dessus ¦ Sloj „{name}” izbrisan zajedno sa sadržajem ¦ Plast »{name}« izbrisana skupaj z vsebino
+{layer} dupliquée ¦ {layer}: duplicirano ¦ {layer}: podvojeno
+{layer} dupliqué ¦ {layer}: duplicirano ¦ {layer}: podvojeno
+{layer} vidé ¦ {layer}: ispražnjeno ¦ {layer}: izpraznjeno
+{layer} déplacé ¦ {layer}: premješteno ¦ {layer}: premaknjeno
+Opacité de {name} : {n} % ¦ Neprozirnost {name}: {n} % ¦ Prekrivnost {name}: {n} %
+Fond de {name} : {n} % ¦ Ispuna {name}: {n} % ¦ Polnilo {name}: {n} %
+Renommé « {name} » ¦ Preimenovano u „{name}” ¦ Preimenovano v »{name}«
+Fusion de {name} : {what} ¦ Način stapanja {name}: {what} ¦ Način mešanja {name}: {what}
+« {name} » rangé dans « {group} » ¦ „{name}” premješteno u „{group}” ¦ »{name}« premaknjeno v »{group}«
+« {name} » sorti du groupe ¦ „{name}” izvađeno iz grupe ¦ »{name}« vzeto iz skupine
+« {name} » rangé tout en bas ¦ „{name}” premješteno na samo dno ¦ »{name}« premaknjeno čisto na dno
+« {name} » rangé au-dessus de « {other} » ¦ „{name}” premješteno iznad „{other}” ¦ »{name}« premaknjeno nad »{other}«
+« {name} » rangé sous « {other} » ¦ „{name}” premješteno ispod „{other}” ¦ »{name}« premaknjeno pod »{other}«
+🎚 Calque de réglage {name} ¦ 🎚 Sloj prilagodbe {name} ¦ 🎚 Prilagoditvena plast {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Prilagodbe <b>fotografije</b> ¦ 🖼 Prilagoditve <b>fotografije</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Na maski kist ⬜ otkriva (vraća ono što je bilo skriveno) — X za promjenu ¦ Na maski čopič ⬜ razkrije (vrne, kar je bilo skrito) — X za preklop
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Na maski kist ⬛ skriva — X za promjenu ¦ Na maski čopič ⬛ skrije — X za preklop
+Texte choisi : « {text} » ¦ Odabrani tekst: „{text}” ¦ Izbrano besedilo: »{text}«
+Glyphe {what} ajouté ¦ Glif {what} dodan ¦ Glif {what} dodan
+« {what} » copié : colle-le dans un texte (⌘V). ¦ „{what}” kopirano: zalijepi ga u tekst (⌘V). ¦ »{what}« kopirano: prilepi ga v besedilo (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ sloj „{name}” (samo element ispod) ¦ plast »{name}« (samo element spodaj)
+calque « {name} » ¦ sloj „{name}” ¦ plast »{name}«
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Raspon: {a}° / {b}° — {c}° \ {d}° (povuci oznake) ¦ Obseg: {a}° / {b}° — {c}° \ {d}° (povleci oznake)
+Propriétés de « {name} » ¦ Svojstva „{name}” ¦ Lastnosti »{name}«
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Nijansa/zasićenost na „{name}” ¦ 🎨 Odtenek/nasičenost na »{name}«
+Motif « {what} » : calque « {name} » ¦ Uzorak „{what}”: sloj „{name}” ¦ Vzorec »{what}«: plast »{name}«
+Motif de « {name} » ¦ Uzorak – „{name}” ¦ Vzorec – »{name}«
+Motif « {what} » sur « {name} » ¦ Uzorak „{what}” na „{name}” ¦ Vzorec »{what}« na »{name}«
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Uzorak „{what}” uklonjen iz biblioteke (slojevi koji ga koriste zadržavaju ga) ¦ Vzorec »{what}« odstranjen iz knjižnice (plasti, ki ga uporabljajo, ga obdržijo)
+le calque « {name} » ¦ sloj „{name}” ¦ plast »{name}«
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: slikaj na sloju. ¦ 🖌 {name}: slikaj na plasti.
+Dégradé : {what} ¦ Prijelaz: {what} ¦ Preliv: {what}
+Dégradé {num} ¦ Prijelaz {num} ¦ Preliv {num}
+Calque « {name} » ¦ Sloj „{name}” ¦ Plast »{name}«
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ „{name}” · njegova maska (crno = skriveno, bijelo = prikazano): sve se odmah vidi ¦ »{name}« · njena maska (črno = skrito, belo = prikazano): vse se takoj vidi
+« {name} » : tout se voit tout de suite ¦ „{name}”: sve se odmah vidi ¦ »{name}«: vse se takoj vidi
+le prochain dégradé que tu traceras ¦ sljedeći prijelaz koji nacrtaš ¦ naslednji preliv, ki ga narišeš
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Predložak „{name}” zadržan: ostaje na ovom popisu. ¦ Prednastavitev »{name}« ohranjena: ostane na tem seznamu.
+Dégradé modifié sur « {name} » ¦ Prijelaz promijenjen na „{name}” ¦ Preliv spremenjen na »{name}«
+Texte « {text} » ¦ Tekst „{text}” ¦ Besedilo »{text}«
+Objet dynamique « {name} » : image remplacée ¦ Pametni objekt „{name}”: slika zamijenjena ¦ Pametni objekt »{name}«: slika zamenjana
+Image placée : « {name} » ¦ Slika postavljena: „{name}” ¦ Slika postavljena: »{name}«
+Image placée, mais pas rangée dans les médias : {err} ¦ Slika postavljena, ali nije spremljena u medije: {err} ¦ Slika postavljena, vendar ni shranjena med medije: {err}
+Élément supprimé de « {name} » ¦ Element izbrisan iz „{name}” ¦ Element izbrisan iz »{name}«
+Image tournée sur « {name} » ¦ Slika zakrenuta na „{name}” ¦ Slika zasukana na »{name}«
+Image agrandie / réduite sur « {name} » ¦ Slika povećana / smanjena na „{name}” ¦ Slika povečana / pomanjšana na »{name}«
+Dégradé ajusté (masque) sur « {name} » ¦ Prijelaz prilagođen (maska) na „{name}” ¦ Preliv prilagojen (maska) na »{name}«
+Dégradé ajusté sur « {name} » ¦ Prijelaz prilagođen na „{name}” ¦ Preliv prilagojen na »{name}«
+Élément déplacé sur « {name} » ¦ Element pomaknut na „{name}” ¦ Element premaknjen na »{name}«
+Masque en dégradé sur « {name} » ¦ Maska s prijelazom na „{name}” ¦ Maska s prelivom na »{name}«
+Dégradé {what} : « {name} » ¦ Prijelaz {what}: „{name}” ¦ Preliv {what}: »{name}«
+{what} sur « {name} » ¦ {what} na „{name}” ¦ {what} na »{name}«
+Masque : caché au pinceau ¦ Maska: skriveno kistom ¦ Maska: skrito s čopičem
+Masque : montré au pinceau ¦ Maska: otkriveno kistom ¦ Maska: razkrito s čopičem
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Pregib popravljen (potezi: {n}) (sloj ✨ Retuš) ¦ Pregib popravljen (potez: {n}) (plast ✨ Retuše)
+Pli réparé (calque ✨ Retouches) ¦ Pregib popravljen (sloj ✨ Retuš) ¦ Pregib popravljen (plast ✨ Retuše)
+Recadrage enlevé ¦ Obrezivanje uklonjeno ¦ Obrezovanje odstranjeno
+Recadrage et redressement ({a}°) ¦ Obrezivanje i ispravljanje ({a}°) ¦ Obrezovanje in poravnava ({a}°)
+Recadrage ¦ Obrezivanje ¦ Obrezovanje
+Filtre « {what} » (refait) ¦ Filtar „{what}” (ponovljen) ¦ Filter »{what}« (ponovljen)
+« {what} » refait sur un nouveau calque. ¦ „{what}” ponovljeno na novom sloju. ¦ »{what}« ponovljeno na novi plasti.
+limité à la sélection ¦ ograničeno na odabir ¦ omejeno na izbor
+Filtre « {what} » ¦ Filtar „{what}” ¦ Filter »{what}«
+Filtre « {what} » ajouté au calque ¦ Filtar „{what}” dodan sloju ¦ Filter »{what}« dodan plasti
+Filtre « {what} » réglé ¦ Filtar „{what}” podešen ¦ Filter »{what}« nastavljen
+Action « {name} » ¦ Radnja „{name}” ¦ Dejanje »{name}«
+Action du {date} ¦ Radnja od {date} ¦ Dejanje z dne {date}
+Action « {name} » enregistrée. ¦ Radnja „{name}” spremljena. ¦ Dejanje »{name}« shranjeno.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Radnja „{name}” uvezena: „Na ovoj fotografiji” ili „Na više fotografija…”. ¦ Dejanje »{name}« uvoženo: »Na tej fotografiji« ali »Na več fotografijah…«.
+Action « {name} » supprimée ¦ Radnja „{name}” izbrisana ¦ Dejanje »{name}« izbrisano
+« {name} » sur plusieurs photos ¦ „{name}” na više fotografija ¦ »{name}« na več fotografijah
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Gotovo: fotografije {n} od {total}, prikazana je nova verzija. ¦ Končano: fotografije {n} od {total}, prikazana je nova različica.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Gotovo: fotografije {n} od {total}, prikazana je nova verzija. ¦ Končano: fotografije {n} od {total}, prikazana je nova različica.
+Terminé : {n} photos sur {total}. ¦ Gotovo: fotografije {n} od {total}. ¦ Končano: fotografije {n} od {total}.
+Terminé : {n} photo sur {total}. ¦ Gotovo: fotografije {n} od {total}. ¦ Končano: fotografije {n} od {total}.
+{layer} (retouchée) ¦ {layer} (retuširano) ¦ {layer} (retuširano)
+« {name} » · comme le style de calque de Photoshop ¦ „{name}” · kao stil sloja u Photoshopu ¦ »{name}« · kot slog plasti v Photoshopu
+Effets de {layer} enlevés ¦ Efekti sloja {layer} uklonjeni ¦ Učinki plasti {layer} odstranjeni
+Effets de {layer} ¦ Efekti sloja {layer} ¦ Učinki plasti {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Tanke linije, svijetle ili tamne, označene su crveno (u odabiru). Provjeri, zatim „Popravi ove linije”. ¦ Tanke črte, svetle ali temne, so označene z rdečo (v izboru). Preveri, nato »Popravi te črte«.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Tanke linije, svijetle ili tamne, označene su crveno. Provjeri, zatim „Popravi ove linije”. ¦ Tanke črte, svetle ali temne, so označene z rdečo. Preveri, nato »Popravi te črte«.
+{what} (en rouge sur la photo). ¦ {what} (crveno na fotografiji). ¦ {what} (z rdečo na fotografiji).
+Plis réparés ({what}) ¦ Pregibi popravljeni ({what}) ¦ Pregibi popravljeni ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: usporedi s 👁 ili ◧; ↶ za povratak. ¦ {what}: primerjaj z 👁 ali ◧; ↶ za vrnitev.
+={n} lignes repérées puis comblées ¦ {n} linija pronađena pa popunjena|{n} linije pronađene pa popunjene|{n} linija pronađeno pa popunjeno ¦ {n} črta najdena in zapolnjena|{n} črti najdeni in zapolnjeni|{n} črte najdene in zapolnjene|{n} črt najdenih in zapolnjenih
+={n} ligne repérée puis comblée ¦ {n} linija pronađena pa popunjena|{n} linije pronađene pa popunjene|{n} linija pronađeno pa popunjeno ¦ {n} črta najdena in zapolnjena|{n} črti najdeni in zapolnjeni|{n} črte najdene in zapolnjene|{n} črt najdenih in zapolnjenih
+=pli|{n} lignes ¦ {n} linija|{n} linije|{n} linija ¦ {n} črta|{n} črti|{n} črte|{n} črt
+=pli|{n} ligne ¦ {n} linija|{n} linije|{n} linija ¦ {n} črta|{n} črti|{n} črte|{n} črt
+=retouche|{n} étapes ¦ {n} korak|{n} koraka|{n} koraka ¦ {n} korak|{n} koraka|{n} koraki|{n} korakov
+=retouche|{n} étape ¦ {n} korak|{n} koraka|{n} koraka ¦ {n} korak|{n} koraka|{n} koraki|{n} korakov
+=ligne repérée ¦ pronađena linija|pronađene linije|pronađenih linija ¦ najdena črta|najdeni črti|najdene črte|najdenih črt
+=ligne réparée ¦ popravljena linija|popravljene linije|popravljenih linija ¦ popravljena črta|popravljeni črti|popravljene črte|popravljenih črt
+=calque de réglage ¦ sloj prilagodbe|sloja prilagodbe|slojeva prilagodbe ¦ prilagoditvena plast|prilagoditveni plasti|prilagoditvene plasti|prilagoditvenih plasti
+=portrait mis à jour ¦ ažurirani portret|ažurirana portreta|ažuriranih portreta ¦ posodobljen portret|posodobljena portreta|posodobljeni portreti|posodobljenih portretov
+✨ Restauration en une fois ({what}) ¦ ✨ Restauracija u jednom koraku ({what}) ¦ ✨ Obnova v enem koraku ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Restauracija gotova ({what}): svaki korak je sloj „✨” (Slojevi) koji možeš sakriti ili ublažiti; ↶ poništava sve. ¦ Obnova končana ({what}): vsak korak je plast »✨« (Plasti), ki jo lahko skriješ ali omiliš; ↶ razveljavi vse.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Portret zapisa „{name}” ažuriran (obrezana fotografija je u njegovim medijima). ¦ Portret zapisa »{name}« posodobljen (obrezana fotografija je med njegovimi mediji).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Portret zapisa ažuriran (obrezana fotografija je u njegovim medijima). ¦ Portret zapisa posodobljen (obrezana fotografija je med njegovimi mediji).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (obrezano) ¦ {w} × {h} px (obrezano)
+Horizon redressé ({a}°) ¦ Horizont ispravljen ({a}°) ¦ Obzorje poravnano ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Ispravljeno za {a}°: prilagodi okvir pa „✓ Potvrdi”. ¦ Poravnano za {a}°: prilagodi okvir, nato »✓ Potrdi«.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Fotografija ispravljena za {a}° (i obrezana da se ne vide kutovi). ⌗ Obreži za prilagodbu. ¦ Fotografija poravnana za {a}° (in obrezana, da se ne vidijo vogali). ⌗ Obreži za prilagoditev.
+Redressée automatiquement ({a}°) ¦ Automatski ispravljeno ({a}°) ¦ Samodejno poravnano ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Odsjaji uklonjeni na zasebnom sloju (samo u odabiru: najprije odaberi staklo da ograničiš): podesi jačinu i veličinu, neprozirnost dozira, 🎭 ograničava, 👁 skriva. Fotografija ostaje netaknuta. ¦ Odsevi odstranjeni na ločeni plasti (samo v izboru: najprej izberi steklo, da omejiš): nastavi moč in velikost, prekrivnost odmerja, 🎭 omeji, 👁 skrije. Fotografija ostane nedotaknjena.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Odsjaji uklonjeni na zasebnom sloju: podesi jačinu i veličinu, neprozirnost dozira, 🎭 ograničava, 👁 skriva. Fotografija ostaje netaknuta. ¦ Odsevi odstranjeni na ločeni plasti: nastavi moč in velikost, prekrivnost odmerja, 🎭 omeji, 👁 skrije. Fotografija ostane nedotaknjena.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Bojenje u sloju prilagodbe (ograničeno na odabir): odaberi boje i jačinu; 🎭 da ga ograničiš, 👁 da ga sakriješ. Fotografija ostaje netaknuta. ¦ Barvanje v prilagoditveni plasti (omejeno na izbor): izberi barve in moč; 🎭 za omejitev, 👁 za skritje. Fotografija ostane nedotaknjena.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Bojenje u sloju prilagodbe: odaberi boje i jačinu; 🎭 da ga ograničiš, 👁 da ga sakriješ. Fotografija ostaje netaknuta. ¦ Barvanje v prilagoditveni plasti: izberi barve in moč; 🎭 za omejitev, 👁 za skritje. Fotografija ostane nedotaknjena.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} mrlja uklonjena, na sloju „{layer}” (fotografija ostaje netaknuta): sakrij ga ili smanji za usporedbu; ↶ ako je previše.|{n} mrlje uklonjene, na sloju „{layer}” (fotografija ostaje netaknuta): sakrij ga ili smanji za usporedbu; ↶ ako je previše.|{n} mrlja uklonjeno, na sloju „{layer}” (fotografija ostaje netaknuta): sakrij ga ili smanji za usporedbu; ↶ ako je previše. ¦ {n} madež odstranjen, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.|{n} madeža odstranjena, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.|{n} madeži odstranjeni, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.|{n} madežev odstranjenih, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} mrlja uklonjena, na sloju „{layer}” (fotografija ostaje netaknuta): sakrij ga ili smanji za usporedbu; ↶ ako je previše.|{n} mrlje uklonjene, na sloju „{layer}” (fotografija ostaje netaknuta): sakrij ga ili smanji za usporedbu; ↶ ako je previše.|{n} mrlja uklonjeno, na sloju „{layer}” (fotografija ostaje netaknuta): sakrij ga ili smanji za usporedbu; ↶ ako je previše. ¦ {n} madež odstranjen, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.|{n} madeža odstranjena, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.|{n} madeži odstranjeni, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.|{n} madežev odstranjenih, na plasti »{layer}« (fotografija ostane nedotaknjena): skrij jo ali jo zmanjšaj za primerjavo; ↶, če je preveč.
+✨ Taches enlevées ¦ ✨ Mrlje uklonjene ¦ ✨ Madeži odstranjeni
+Taches enlevées automatiquement ({n}) ¦ Mrlje automatski uklonjene ({n}) ¦ Madeži samodejno odstranjeni ({n})
+Sélection remplie ({what}) ¦ Odabir ispunjen ({what}) ¦ Izbor zapolnjen ({what})
+Sélection effacée sur « {name} » ¦ Odabir obrisan na „{name}” ¦ Izbor izbrisan na »{name}«
+Masque d’après la sélection ({name}) ¦ Maska prema odabiru ({name}) ¦ Maska iz izbora ({name})
+Préréglage « {name} » retiré ¦ Predložak „{name}” uklonjen ¦ Prednastavitev »{name}« odstranjena
+Préréglage « {name} » ¦ Predložak „{name}” ¦ Prednastavitev »{name}«
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Projekt „{name}” (📂 Datoteka → Otvori projekt da ga ponovno pronađeš) ¦ Projekt »{name}« (📂 Datoteka → Odpri projekt, da ga znova najdeš)
+Versions de la photo ({n}) ¦ Verzije fotografije ({n}) ¦ Različice fotografije ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm pri {dpi} ppi ¦ {w} × {h} cm pri {dpi} ppi
+≈ {size} Mo en mémoire ¦ ≈ {size} MB u memoriji ¦ ≈ {size} MB v pomnilniku
+Taille de l’image : {w} × {h} px ¦ Veličina slike: {w} × {h} px ¦ Velikost slike: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Radna površina: {w} × {h} px ¦ Delovna površina: {w} × {h} px
+Zone de travail de départ ¦ Početna radna površina ¦ Začetna delovna površina
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Ova je slika vrlo velika ({n} milijuna točaka): spremanje može potrajati ili čak ne uspjeti. ¦ Ta slika je zelo velika ({n} milijonov točk): shranjevanje lahko traja dolgo ali celo spodleti.
+Enregistrer quand même ? ¦ Ipak spremiti? ¦ Vseeno shranim?
+Projet « {name} » rouvert ¦ Projekt „{name}” ponovno otvoren ¦ Projekt »{name}« znova odprt
+Projet en partie illisible : {err} ¦ Projekt djelomično nečitljiv: {err} ¦ Projekt delno neberljiv: {err}
+photo de départ introuvable ¦ početna fotografija nije pronađena ¦ začetne fotografije ni mogoče najti
+Supprimer le projet « {name} » ? ¦ Izbrisati projekt „{name}”? ¦ Izbrišem projekt »{name}«?
+Quitter le plein écran ¦ Izađi iz cijelog zaslona ¦ Zapusti celozaslonski način
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Nema više mjesta za spremanje: izbriši jedan radni prostor. ¦ Ni več prostora za shranjevanje: izbriši en delovni prostor.
+Ranger, montrer ou cacher les boutons et les options ¦ Rasporedi, prikaži ili sakrij gumbe i opcije ¦ Razporedi, prikaži ali skrij gumbe in možnosti
+⚙️ Boutons et options ¦ ⚙️ Gumbi i opcije ¦ ⚙️ Gumbi in možnosti
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Označi što se prikazuje, rasporedi s ↑ ↓ (ili povlačenjem ⠿). Zadržava se za sljedeći put. Kao radni prostori u Photoshopu: spremi raspored pod imenom („Restauracija”, „Brza obrada”…) i prelazi s jednog na drugi. ¦ Označi, kaj se prikaže, razporedi z ↑ ↓ (ali z vlečenjem ⠿). Ohrani se za naslednjič. Kot delovni prostori v Photoshopu: shrani razporeditev pod imenom (»Obnova«, »Hitro urejanje«…) in preklapljaj med njimi.
+les boutons montrés, cachés et rangés ¦ prikazani, skriveni i raspoređeni gumbi ¦ prikazani, skriti in razporejeni gumbi
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Gumbi vraćeni na početno (ponovno otvori prozor da vidiš početni redoslijed). ¦ Gumbi ponastavljeni na začetno (znova odpri okno, da vidiš začetni vrstni red).
+Boutons rangés. ¦ Gumbi raspoređeni. ¦ Gumbi razporejeni.
+Hautes lumières ¦ Svijetli tonovi ¦ Svetli toni
+Vibrance (couleurs ternes d’abord) ¦ Živost (najprije blijede boje) ¦ Živahnost (najprej blede barve)
+Teinte (tourner les couleurs) ¦ Nijansa (zakreni boje) ¦ Odtenek (zasukaj barve)
+Noir d’entrée ¦ Ulazna crna ¦ Vhodna črna
+Blanc d’entrée ¦ Ulazna bijela ¦ Vhodna bela
+Tons moyens (gamma ×100) ¦ Srednji tonovi (gama ×100) ¦ Srednji toni (gama ×100)
+Noir de sortie ¦ Izlazna crna ¦ Izhodna črna
+Blanc de sortie ¦ Izlazna bijela ¦ Izhodna bela
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Prirodno: nebo, zelenilo, koža, odjeća (preporučeno) ¦ Naravno: nebo, zelenje, koža, oblačila (priporočeno)
+Sépia chaud ¦ Topla sepija ¦ Topla sepija
+Autochrome (couleurs d’autrefois) ¦ Autokrom (boje iz prošlosti) ¦ Avtokrom (barve iz preteklosti)
+Portrait (peau rosée) ¦ Portret (ružičasta koža) ¦ Portret (rožnata koža)
+Paysage : ciel en haut, terre en bas ¦ Krajolik: nebo gore, zemlja dolje ¦ Pokrajina: nebo zgoraj, zemlja spodaj
+Saturation augmentée ¦ Pojačana zasićenost ¦ Povečana nasičenost
+Saturation plus forte ¦ Jača zasićenost ¦ Močnejša nasičenost
+Rouges plus saturés ¦ Zasićenije crvene ¦ Bolj nasičene rdeče
+Jaune intensifié ¦ Pojačana žuta ¦ Okrepljena rumena
+Ciel plus bleu ¦ Plavije nebo ¦ Bolj modro nebo
+Peau plus douce ¦ Mekša koža ¦ Mehkejša koža
+Désaturer ¦ Ukloni zasićenost ¦ Razbarvaj
+Verts d’automne ¦ Jesenske zelene ¦ Jesenske zelene
+Reflets en moins (vitre, verre, vernis) ¦ Manje odsjaja (staklo, lak) ¦ Manj odsevov (steklo, lak)
+Taille des reflets (0 = moyenne) ¦ Veličina odsjaja (0 = srednja) ¦ Velikost odsevov (0 = srednja)
+Poussière et rayures (automatique) ¦ Prašina i ogrebotine (automatski) ¦ Prah in praske (samodejno)
+Réduire le bruit ¦ Smanji šum ¦ Zmanjšaj šum
+Netteté ¦ Oštrina ¦ Ostrina
+Clarté (contraste local) ¦ Jasnoća (lokalni kontrast) ¦ Jasnost (lokalni kontrast)
+Flou de surface (garde les contours) ¦ Površinsko zamućenje (čuva rubove) ¦ Površinska zameglitev (ohrani robove)
+Décentrement (maquette, tilt-shift) ¦ Tilt-shift (maketa) ¦ Tilt-shift (maketa)
+Largeur de la bande ¦ Širina pojasa ¦ Širina pasu
+Flou de l’objectif (bokeh) ¦ Zamućenje objektiva (bokeh) ¦ Zameglitev objektiva (bokeh)
+Ajouter du bruit ¦ Dodaj šum ¦ Dodaj šum
+Poussière et rayures ¦ Prašina i ogrebotine ¦ Prah in praske
+Passe-haut (pour accentuer en Incrustation) ¦ Visokopropusni (za izoštravanje u načinu Preklapanje) ¦ Visokoprepustni (za izostritev v načinu Prekrivanje)
+Esthétiques ¦ Stilizacija ¦ Stilizacija
+Garder les couleurs (0 / 1) ¦ Zadrži boje (0 / 1) ¦ Ohrani barve (0 / 1)
+Tracé des contours ¦ Obris kontura ¦ Obris kontur
+Contours lumineux (néon) ¦ Svjetleći rubovi (neon) ¦ Žareči robovi (neon)
+Postérisation ¦ Posterizacija ¦ Posterizacija
+Seuil (noir et blanc pur) ¦ Prag (čisto crno-bijelo) ¦ Prag (čisto črno-belo)
+Vers la droite (1) / gauche (0) ¦ Udesno (1) / ulijevo (0) ¦ V desno (1) / v levo (0)
+Peinture à l’huile ¦ Uljana slika ¦ Oljna slika
+Taille de la touche ¦ Veličina poteza ¦ Velikost poteze
+Taille des taches ¦ Veličina mrlja ¦ Velikost madežev
+Dessin au crayon ¦ Crtež olovkom ¦ Risba s svinčnikom
+En couleur (0 / 1) ¦ U boji (0 / 1) ¦ V barvi (0 / 1)
+Taille des carreaux ¦ Veličina pločica ¦ Velikost ploščic
+Demi-teinte (points d’imprimerie) ¦ Poluton (tiskarske točke) ¦ Polton (tiskarske pike)
+Taille des cristaux ¦ Veličina kristala ¦ Velikost kristalov
+Éclairage (projecteur) ¦ Osvjetljenje (reflektor) ¦ Osvetlitev (reflektor)
+Lumière X ¦ Svjetlo X ¦ Svetloba X
+Lumière Y ¦ Svjetlo Y ¦ Svetloba Y
+Lumière ambiante ¦ Ambijentalno svjetlo ¦ Ambientna svetloba
+Halo de lumière (flare) ¦ Odsjaj objektiva (flare) ¦ Bleščanje objektiva (flare)
+À partir de (luminosité) ¦ Počevši od (svjetlina) ¦ Začenši od (svetlost)
+Déformation ¦ Izobličenje ¦ Popačenje
+Pincement / sphérisation ¦ Stiskanje / sferizacija ¦ Stiskanje / sferizacija
+Force (− sphère, + pincement) ¦ Jačina (− sfera, + stiskanje) ¦ Moč (− krogla, + stiskanje)
+Longueur d’onde ¦ Valna duljina ¦ Valovna dolžina
+Ondulation (ronds dans l’eau) ¦ Talasanje (krugovi u vodi) ¦ Valovanje (krogi na vodi)
+Écart des ronds ¦ Razmak krugova ¦ Razmik krogov
+Coordonnées polaires ¦ Polarne koordinate ¦ Polarne koordinate
+Rectangle → polaire (0) / l’inverse (1) ¦ Pravokutno → polarno (0) / obrnuto (1) ¦ Pravokotno → polarno (0) / obratno (1)
+Minimum (assombrit, épaissit le sombre) ¦ Minimum (zatamnjuje, podebljava tamno) ¦ Minimum (potemni, odebeli temno)
+Maximum (éclaircit, épaissit le clair) ¦ Maksimum (posvjetljuje, podebljava svijetlo) ¦ Maksimum (posvetli, odebeli svetlo)
+Décalage (avec retour de l’autre côté) ¦ Pomak (s povratkom s druge strane) ¦ Zamik (z vrnitvijo na drugi strani)
+Enlever les reflets (vitre) ¦ Ukloni odsjaje (staklo) ¦ Odstrani odseve (steklo)
+Reflets en moins ¦ Manje odsjaja ¦ Manj odsevov
+Vieille photo ravivée ¦ Oživljena stara fotografija ¦ Poživljena stara fotografija
+Négatif → positif ¦ Negativ → pozitiv ¦ Negativ → pozitiv
+🖌 Forme du panneau Formes ¦ 🖌 Oblik s ploče Oblici ¦ 🖌 Oblika s plošče Oblike
+Avec empattement ¦ Sa serifima ¦ S serifi
+Sans empattement ¦ Bez serifa ¦ Brez serifov
+Manuscrite ¦ Rukopisno ¦ Rokopisno
+Extra-fin ¦ Ekstra tanko ¦ Ekstra tanko
+Ultra-léger ¦ Ultra lagano ¦ Ultra lahko
+Léger ¦ Lagano ¦ Lahko
+Médium ¦ Srednje ¦ Srednje
+Demi-gras ¦ Polupodebljano ¦ Polkrepko
+Extra-gras ¦ Ekstra podebljano ¦ Ekstra krepko
+Aligné à gauche ¦ Poravnato lijevo ¦ Poravnano levo
+Aligné à droite ¦ Poravnato desno ¦ Poravnano desno
+Justifié, dernière ligne à gauche ¦ Obostrano, zadnji redak lijevo ¦ Obojestransko, zadnja vrstica levo
+Justifié, dernière ligne centrée ¦ Obostrano, zadnji redak u sredini ¦ Obojestransko, zadnja vrstica na sredini
+Justifié, dernière ligne à droite ¦ Obostrano, zadnji redak desno ¦ Obojestransko, zadnja vrstica desno
+Tout justifié ¦ Potpuno obostrano ¦ Popolnoma obojestransko
+Ligatures et formes ¦ Ligature i oblici ¦ Ligature in oblike
+Unicode : Latin étendu A ¦ Unicode: latinica proširena A ¦ Unicode: latinica, razširjena A
+Unicode : Latin étendu B ¦ Unicode: latinica proširena B ¦ Unicode: latinica, razširjena B
+Unicode : hébreu ¦ Unicode: hebrejski ¦ Unicode: hebrejščina
+Unicode : exposants et indices ¦ Unicode: eksponenti i indeksi ¦ Unicode: nadpisani in podpisani znaki
+Unicode : flèches ¦ Unicode: strelice ¦ Unicode: puščice
+Unicode : mathématiques ¦ Unicode: matematika ¦ Unicode: matematika
+Unicode : formes géométriques ¦ Unicode: geometrijski oblici ¦ Unicode: geometrijske oblike
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: latinica proširena D (stare kratice) ¦ Unicode: latinica, razširjena D (stare okrajšave)
+espace fine ¦ uski razmak ¦ ozek presledek
+tiret conditionnel (césure) ¦ meka crtica (rastavljanje) ¦ mehki vezaj (deljenje)
+mort au combat ¦ poginuo u borbi ¦ padel v boju
+et (abréviation ancienne) ¦ i (stara kratica) ¦ in (stara okrajšava)
+s long ¦ dugo s ¦ dolgi s
+Linéaire ¦ Linearni ¦ Linearni
+Radial ¦ Radijalni ¦ Radialni
+Angle (conique) ¦ Kutni (konusni) ¦ Kotni (stožčasti)
+Réfléchi ¦ Zrcalni ¦ Zrcalni
+Losange ¦ Romb ¦ Romb
+Premier plan → arrière-plan ¦ Prednji plan → pozadina ¦ Ospredje → ozadje
+Hachures croisées ¦ Unakrsno šrafiranje ¦ Križno šrafiranje
+Écailles ¦ Ljuske ¦ Luske
+Brin d’herbe ¦ Vlat trave ¦ Bilka trave
+Éclaboussure ¦ Prskanje ¦ Pljusk
+Ma forme (d’après une sélection) ¦ Moj oblik (prema odabiru) ¦ Moja oblika (iz izbora)
+Aérographe ¦ Zračni kist ¦ Zračni čopič
+Carré net ¦ Oštar kvadrat ¦ Oster kvadrat
+Étoiles semées ¦ Rasute zvijezde ¦ Raztresene zvezde
+Éclaboussures ¦ Prskanja ¦ Pljuski
+Superposition (Écran) ¦ Zaslon ¦ Zaslon
+⌗ Cadrer et redresser ¦ ⌗ Izreži i ispravi ¦ ⌗ Obreži in poravnaj
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Fotografija skenirana ukoso, s bijelim ili oštećenim rubovima: ispravi je, zatim zadrži ono što je važno. ¦ Fotografija, optično prebrana postrani, z belimi ali poškodovanimi robovi: poravnaj jo, nato ohrani, kar je pomembno.
+📐 Redresser tout seul ¦ 📐 Ispravi automatski ¦ 📐 Poravnaj samodejno
+⌗ Recadrer ¦ ⌗ Obreži ¦ ⌗ Obreži
+⧈ Photo prise de biais ¦ ⧈ Fotografija snimljena ukoso ¦ ⧈ Fotografija, posneta postrani
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Izblijedjele boje, požutjela fotografija ¦ 🎨 Zbledele barve, porumenela fotografija
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Vrijeme fotografije čini žutima, blijedima ili ružičastima. „Ukloni žutilo” vraća svaku boju na mjesto; „Oživi” vraća kontrast. ¦ Čas fotografije porumeni, zbledi ali obarva rožnato. »Odstrani rumenilo« vrne vsako barvo na svoje mesto; »Poživi« vrne kontrast.
+🟨 Enlever le jaunissement ¦ 🟨 Ukloni žutilo ¦ 🟨 Odstrani rumenilo
+✨ Raviver une vieille photo ¦ ✨ Oživi staru fotografiju ¦ ✨ Poživi staro fotografijo
+Réglage automatique ¦ Automatska prilagodba ¦ Samodejna prilagoditev
+🧹 Poussières et petites taches ¦ 🧹 Prašina i sitne mrlje ¦ 🧹 Prah in drobni madeži
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Bijele ili crne točkice, pjege: aplikacija ih traži i uklanja jednu po jednu (alatom za korekciju). Da obradiš samo dio, najprije ga odaberi. Za ostatak: korektor 🩹 ručno. ¦ Bele ali črne pike, pege: aplikacija jih poišče in odstrani eno za drugo (s korektorjem). Če želiš obdelati le del, ga najprej izberi. Za ostalo: korektor 🩹 ročno.
+Sensibilité ¦ Osjetljivost ¦ Občutljivost
+Taille maximale d’une tache ¦ Najveća veličina mrlje ¦ Največja velikost madeža
+🔍 Repérer et enlever les taches ¦ 🔍 Pronađi i ukloni mrlje ¦ 🔍 Poišči in odstrani madeže
+🩹 Correcteur à la main ¦ 🩹 Ručni korektor ¦ 🩹 Ročni korektor
+Filtre poussière et rayures ¦ Filtar prašine i ogrebotina ¦ Filter za prah in praske
+🩹 Déchirures, plis, rayures ¦ 🩹 Poderotine, pregibi, ogrebotine ¦ 🩹 Raztrganine, pregibi, praske
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ „Pronađi pregibe” nalazi tanke svijetle ili tamne linije i nudi da ih popuni. Ručno: kist 🪡 Popravi — slikaj po pregibu, obnavlja se prema okolini. Za dio koji nedostaje (otkinuti kut), pečat kopira susjedni dio. ¦ »Poišči pregibe« najde tanke svetle ali temne črte in jih ponudi zapolniti. Ročno: čopič 🪡 Popravi — slikaj po pregibu, obnovi se iz okolice. Za manjkajoči del (odtrgan vogal) žig skopira sosednji del.
+🔍 Repérer les plis et rayures ¦ 🔍 Pronađi pregibe i ogrebotine ¦ 🔍 Poišči pregibe in praske
+🪡 Réparer au pinceau ¦ 🪡 Popravi kistom ¦ 🪡 Popravi s čopičem
+➰ Entourer une zone… ¦ ➰ Zaokruži područje… ¦ ➰ Obkroži območje…
+🌫️ Grain et bruit ¦ 🌫️ Zrnatost i šum ¦ 🌫️ Zrnatost in šum
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Zrnata fotografija ili oštećena kopija: omekšaj bez gubitka rubova. ¦ Zrnata fotografija ali poškodovan odtis: zgladi brez izgube robov.
+🙂 Netteté des visages ¦ 🙂 Oštrina lica ¦ 🙂 Ostrina obrazov
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Zaokruži lice elipsom ◯, zatim „Oštrije lice”: uklanja se šum i izoštrava, samo tamo (zaseban sloj koji možeš dozirati). ¦ Obkroži obraz z elipso ◯, nato »Ostrejši obraz«: odstrani se šum in izostri, samo tam (ločena plast, ki jo lahko odmeriš).
+◯ Entourer le visage ¦ ◯ Zaokruži lice ¦ ◯ Obkroži obraz
+✨ Visage plus net ¦ ✨ Oštrije lice ¦ ✨ Ostrejši obraz
+Visage plus net ¦ Oštrije lice ¦ Ostrejši obraz
+🎯 Sélectionner le sujet ¦ 🎯 Odaberi motiv ¦ 🎯 Izberi motiv
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Oboji crno-bijelu fotografiju ¦ 🌈 Pobarvaj črno-belo fotografijo
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Automatski (prijelaz boja iz tog doba) ili ručno: odaberi boju ispod i nježno slikaj, svjetlo fotografije se čuva. ¦ Samodejno (preliv barv iz tistega časa) ali ročno: izberi barvo spodaj in nežno slikaj, svetloba fotografije se ohrani.
+🎨 Coloriser tout seul ¦ 🎨 Oboji automatski ¦ 🎨 Pobarvaj samodejno
+🖌 Coloriser au pinceau ¦ 🖌 Oboji kistom ¦ 🖌 Pobarvaj s čopičem
+✅ Comparer et enregistrer ¦ ✅ Usporedi i spremi ¦ ✅ Primerjaj in shrani
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Drži pritisnuto „👁 Prije / poslije” (ispod fotografije) za usporedbu ili „◧ Zavjesa” za klizanje s jedne na drugu. Restaurirana fotografija postaje nova verzija: izvornik ostaje. ¦ Drži pritisnjeno »👁 Prej / potem« (pod fotografijo) za primerjavo ali »◧ Zavesa« za drsenje z ene na drugo. Obnovljena fotografija postane nova različica: izvirnik ostane.
+💾 Enregistrer et afficher ¦ 💾 Spremi i prikaži ¦ 💾 Shrani in prikaži
+Garder le travail pour plus tard ¦ Zadrži rad za kasnije ¦ Ohrani delo za pozneje
+Impossible d’ouvrir cette image. ¦ Ova se slika ne može otvoriti. ¦ Te slike ni mogoče odpreti.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Svaki je korak neobavezan i može se poništiti (↶). Ništa ne oštećuje izvornik: restaurirana fotografija postaje nova verzija. ¦ Vsak korak je neobvezen in ga lahko razveljaviš (↶). Nič ne poškoduje izvirnika: obnovljena fotografija postane nova različica.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Uklanjanje šuma, prašine, pregiba, kontrast, oštrina i bojenje odjednom: vidiš svaki korak i biraš ¦ Odstranjevanje šuma, prahu, pregibov, kontrast, ostrina in barvanje naenkrat: vidiš vsak korak in izbiraš
+✨ Restaurer en une fois ¦ ✨ Restauriraj odjednom ¦ ✨ Obnovi naenkrat
+ou étape par étape : ¦ ili korak po korak: ¦ ali korak za korakom:
+Réparer ¦ Popravi ¦ Popravi
+🪡 Réparer ¦ 🪡 Popravi ¦ 🪡 Popravi
+Déplacer la vue ¦ Pomakni prikaz ¦ Premakni pogled
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Popravi pregib ili poderotinu (R): slikaj po njoj, obnavlja se prema okolini ¦ Popravi pregib ali raztrganino (R): slikaj čez, obnovi se iz okolice
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Gumica (E): briše odabrani sloj; na fotografiji je skriva maskom (ništa se ne gubi) ¦ Radirka (E): briše izbrano plast; na fotografiji jo skrije z masko (nič se ne izgubi)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Prijelaz (G): povuci da ga nacrtaš; na maski stapa sloj ¦ Preliv (G): povleci, da ga narišeš; na maski zlije plast
+Déplacer un élément d’un calque (V) ¦ Pomakni element sloja (V) ¦ Premakni element plasti (V)
+Déplacer un élément d’un calque ¦ Pomakni element sloja ¦ Premakni element plasti
+Sélection rectangle (M) ¦ Pravokutni odabir (M) ¦ Pravokotni izbor (M)
+Sélection rectangle ¦ Pravokutni odabir ¦ Pravokotni izbor
+Sélection ellipse (⇧M) ¦ Eliptični odabir (⇧M) ¦ Eliptični izbor (⇧M)
+Sélection ellipse ¦ Eliptični odabir ¦ Eliptični izbor
+Lasso : entourer à main levée (L) ¦ Laso: zaokruži prostoručno (L) ¦ Laso: obkroži prostoročno (L)
+Lasso : entourer à main levée ¦ Laso: zaokruži prostoručno ¦ Laso: obkroži prostoročno
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Pero: odabir točku po točku (P) — dvoklik ili Enter za zatvaranje ¦ Pero: izbor točko za točko (P) — dvoklik ali Enter za zaprtje
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Pero: odabir točku po točku — dvoklik ili Enter za zatvaranje ¦ Pero: izbor točko za točko — dvoklik ali Enter za zaprtje
+Sélection automatique (baguette magique) (W) ¦ Automatski odabir (čarobni štapić) (W) ¦ Samodejni izbor (čarobna paličica) (W)
+Sélection automatique (baguette magique) ¦ Automatski odabir (čarobni štapić) ¦ Samodejni izbor (čarobna paličica)
+Recadrer et redresser (C) ¦ Obreži i ispravi (C) ¦ Obreži in poravnaj (C)
+Recadrer et redresser ¦ Obreži i ispravi ¦ Obreži in poravnaj
+Correcteur de taches (J) ¦ Korektor mrlja (J) ¦ Korektor madežev (J)
+Correcteur de taches ¦ Korektor mrlja ¦ Korektor madežev
+🩹 Correcteur de taches ¦ 🩹 Korektor mrlja ¦ 🩹 Korektor madežev
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Popravi pregib ili poderotinu: slikaj po njoj, obnavlja se prema okolini ¦ Popravi pregib ali raztrganino: slikaj čez, obnovi se iz okolice
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Pečat: jedno mjesto ili odabrano područje (S) ¦ Žig: eno mesto ali izbrano območje (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Pečat: jedno mjesto ili odabrano područje ¦ Žig: eno mesto ali izbrano območje
+Pinceau (B) ¦ Kist (B) ¦ Čopič (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Gumica: briše odabrani sloj; na fotografiji je skriva maskom (ništa se ne gubi) ¦ Radirka: briše izbrano plast; na fotografiji jo skrije z masko (nič se ne izgubi)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Oblici: pravokutnik, elipsa, linija, strelica (U) ¦ Oblike: pravokotnik, elipsa, črta, puščica (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Oblici: pravokutnik, elipsa, linija, strelica ¦ Oblike: pravokotnik, elipsa, črta, puščica
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Prijelaz: povuci da ga nacrtaš; na maski stapa sloj ¦ Preliv: povleci, da ga narišeš; na maski zlije plast
+Texte (T) ¦ Tekst (T) ¦ Besedilo (T)
+Main, ou barre d’espace (H) ¦ Ruka ili razmaknica (H) ¦ Roka ali preslednica (H)
+Main, ou barre d’espace ¦ Ruka ili razmaknica ¦ Roka ali preslednica
+Zoom (Z) — ⌥ pour reculer ¦ Zum (Z) — ⌥ za udaljavanje ¦ Povečava (Z) — ⌥ za pomanjšanje
+Zoom — ⌥ pour reculer ¦ Zum — ⌥ za udaljavanje ¦ Povečava — ⌥ za pomanjšanje
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Spremi projekt (za nastavak kasnije) ¦ 💾 Shrani projekt (za nadaljevanje pozneje)
+📂 Ouvrir un projet… ¦ 📂 Otvori projekt… ¦ 📂 Odpri projekt…
+Enregistrer et afficher cette version ¦ Spremi i prikaži ovu verziju ¦ Shrani in prikaži to različico
+Enregistrer sans l’afficher ¦ Spremi bez prikazivanja ¦ Shrani brez prikaza
+Copie séparée ¦ Zasebna kopija ¦ Ločena kopija
+ℹ️ Informations… ¦ ℹ️ Informacije… ¦ ℹ️ Informacije…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Izvezi sliku (PNG, JPG, ispis)… ¦ ⤓ Izvozi sliko (PNG, JPG, tisk)…
+⤓ Exporter l’avant / après… ¦ ⤓ Izvezi prije / poslije… ¦ ⤓ Izvozi prej / potem…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Izvezi u PSD (sa slojevima)… ¦ 🗂 Izvozi v PSD (s plastmi)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Uvezi slojeve iz PSD-a… ¦ 🗂 Uvozi plasti iz PSD…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Radnje: spremljene prilagodbe, za ponavljanje na više fotografija… ¦ ⚡ Dejanja: shranjene prilagoditve za ponovitev na več fotografijah…
+⚡ Passer à la retouche rapide ¦ ⚡ Prijeđi na brzi retuš ¦ ⚡ Preklopi na hitro retuširanje
+🕘 Historique ¦ 🕘 Povijest ¦ 🕘 Zgodovina
+🎚 Réglages, niveaux et courbe ¦ 🎚 Prilagodbe, razine i krivulja ¦ 🎚 Prilagoditve, ravni in krivulja
+🎨 Teinte/Saturation… ¦ 🎨 Nijansa/zasićenost… ¦ 🎨 Odtenek/nasičenost…
+⌗ Recadrer et redresser ¦ ⌗ Obreži i ispravi ¦ ⌗ Obreži in poravnaj
+📐 Redresser automatiquement ¦ 📐 Ispravi automatski ¦ 📐 Poravnaj samodejno
+Annuler le recadrage ¦ Poništi obrezivanje ¦ Razveljavi obrezovanje
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Ispravi perspektivu (fotografija snimljena ukoso)… ¦ ⧈ Popravi perspektivo (fotografija, posneta postrani)…
+Enlever la perspective ¦ Ukloni perspektivu ¦ Odstrani perspektivo
+📏 Taille de l’image… ¦ 📏 Veličina slike… ¦ 📏 Velikost slike…
+⬚ Taille de la zone de travail… ¦ ⬚ Veličina radne površine… ¦ ⬚ Velikost delovne površine…
+🔄 Rotation de l’image ¦ 🔄 Rotacija slike ¦ 🔄 Sukanje slike
+↻ 90° horaire ¦ ↻ 90° u smjeru kazaljke ¦ ↻ 90° v smeri urinega kazalca
+↺ 90° antihoraire ¦ ↺ 90° suprotno od kazaljke ¦ ↺ 90° v nasprotni smeri urinega kazalca
+Angle… ¦ Kut… ¦ Kot…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Ispravi horizont (nacrtaj liniju)… ¦ 📐 Poravnaj obzorje (nariši črto)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Zrcali sliku vodoravno ¦ ⇆ Zrcali sliko vodoravno
+⇅ Symétrie verticale de l’image ¦ ⇅ Zrcali sliku okomito ¦ ⇅ Zrcali sliko navpično
+✨ Restaurer en une fois… ¦ ✨ Restauriraj odjednom… ¦ ✨ Obnovi naenkrat…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Restauriraj staru fotografiju (korak po korak) ¦ 🧭 Obnovi staro fotografijo (korak za korakom)
+🔍 Repérer les plis et rayures… ¦ 🔍 Pronađi pregibe i ogrebotine… ¦ 🔍 Poišči pregibe in praske…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Popravi kistom (pregibi, poderotine) ¦ 🪡 Popravi s čopičem (pregibi, raztrganine)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Prašina i ogrebotine (Filtri) ¦ 🧹 Prah in praske (Filtri)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Ukloni odsjaje (staklo): zaseban sloj ¦ 🪟 Odstrani odseve (steklo): ločena plast
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Oboji: sloj prilagodbe (prijelaz) ¦ 🎨 Pobarvaj: prilagoditvena plast (preliv)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Oboji kistom: sloj „Boja” ¦ 🖌 Pobarvaj s čopičem: plast »Barva«
+🪪 Recadrer en photo d’identité… ¦ 🪪 Obreži kao fotografiju za osobnu iskaznicu… ¦ 🪪 Obreži kot fotografijo za osebni dokument…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Portreti više zapisa… ¦ 🪪 Portreti več zapisov…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Fluidnost (izobličavanje kistom)… ¦ 💧 Utekočinjenje (popačenje s čopičem)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Čarobna gumica (jednolična pozadina → prozirno)… ¦ 🪄 Čarobna radirka (enobarvno ozadje → prosojno)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Doradi rub maske (kosa, obrisi)… ¦ ✨ Izboljšaj rob maske (lasje, obrisi)…
+☁️ Remplacer le ciel… ¦ ☁️ Zamijeni nebo… ¦ ☁️ Zamenjaj nebo…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Izdvoji osobu (prozirna, zamućena ili jednolična pozadina)… ¦ ✂️ Izreži osebo (prosojno, zamegljeno ali enobarvno ozadje)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Povećaj ×2 / ×4… ¦ 🔍 Povečaj ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Panorama: spoji s drugim fotografijama… ¦ 🧩 Panorama: združi z drugimi fotografijami…
+Calque ¦ Sloj ¦ Plast
+＋ Nouveau calque ¦ ＋ Novi sloj ¦ ＋ Nova plast
+📁 Nouveau groupe ¦ 📁 Nova grupa ¦ 📁 Nova skupina
+Grouper le calque choisi ¦ Grupiraj odabrani sloj ¦ Združi izbrano plast v skupino
+🎚 Nouveau calque de réglage ¦ 🎚 Novi sloj prilagodbe ¦ 🎚 Nova prilagoditvena plast
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Nova prilagodba Nijansa/zasićenost ¦ 🎨 Nova prilagoditev Odtenek/nasičenost
+Nouveau réglage Teinte/Saturation ¦ Nova prilagodba Nijansa/zasićenost ¦ Nova prilagoditev Odtenek/nasičenost
+🖼️ Placer une image… ¦ 🖼️ Postavi sliku… ¦ 🖼️ Postavi sliko…
+▦ Nouveau calque de dégradé… ¦ ▦ Novi sloj prijelaza… ¦ ▦ Nova plast preliva…
+▩ Nouveau calque de motif… ¦ ▩ Novi sloj uzorka… ¦ ▩ Nova plast vzorca…
+▩ Créer un motif… ¦ ▩ Stvori uzorak… ¦ ▩ Ustvari vzorec…
+▩ Créer un motif ¦ ▩ Stvori uzorak ¦ ▩ Ustvari vzorec
+＋ Créer un motif… ¦ ＋ Stvori uzorak… ¦ ＋ Ustvari vzorec…
+Copier la sélection sur un calque ¦ Kopiraj odabir na sloj ¦ Kopiraj izbor na plast
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Dodaj masku odabranom sloju ¦ 🎭 Dodaj masko izbrani plasti
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Maska koja skriva sve (⌥ + klik na 🎭) ¦ 🎭 Maska, ki skrije vse (⌥ + klik na 🎭)
+Masque d’après la sélection ¦ Maska prema odabiru ¦ Maska iz izbora
+Masque qui cache la sélection ¦ Maska koja skriva odabir ¦ Maska, ki skrije izbor
+Inverser le masque ¦ Obrni masku ¦ Obrni masko
+Retirer le masque ¦ Ukloni masku ¦ Odstrani masko
+inverser le masque ¦ obrni masku ¦ obrni masko
+retirer le masque ¦ ukloni masku ¦ odstrani masko
+🗂 Calques ¦ 🗂 Slojevi ¦ 🗂 Plasti
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Odaberi motiv (automatski) ¦ 🎯 Izberi motiv (samodejno)
+✂️ Détourer une personne… ¦ ✂️ Izdvoji osobu… ¦ ✂️ Izreži osebo…
+Désélectionner ¦ Poništi odabir ¦ Prekliči izbor
+Inverser ¦ Obrni ¦ Obrni
+Contour progressif… ¦ Mekani rub… ¦ Mehki rob…
+Contour progressif ¦ Mekani rub ¦ Mehki rob
+Agrandir… ¦ Proširi… ¦ Razširi…
+Réduire… ¦ Suzi… ¦ Skrči…
+Remplir avec la couleur ¦ Ispuni bojom ¦ Zapolni z barvo
+Effacer (transparent) ¦ Obriši (prozirno) ¦ Izbriši (prosojno)
+Recadrer sur la sélection ¦ Obreži prema odabiru ¦ Obreži na izbor
+Filtre ¦ Filtar ¦ Filter
+↻ Refaire le dernier filtre ¦ ↻ Ponovi zadnji filtar ¦ ↻ Ponovi zadnji filter
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Brzi filtri i filtri sloja (ploča) ¦ ✨ Hitri filtri in filtri plasti (plošča)
+Enlever les filtres rapides ¦ Ukloni brze filtre ¦ Odstrani hitre filtre
+Replier / ouvrir le panneau de droite ¦ Sklopi / otvori desnu ploču ¦ Strni / odpri desno ploščo
+◧ Avant / après en rideau ¦ ◧ Prije / poslije kao zavjesa ¦ ◧ Prej / potem kot zavesa
+Toute l’image ¦ Cijela slika ¦ Cela slika
+Nom du projet de retouche ¦ Naziv projekta retuša ¦ Ime projekta retuširanja
+Le nom du projet de retouche (tape pour le changer) ¦ Naziv projekta retuša (upiši da ga promijeniš) ¦ Ime projekta retuširanja (vtipkaj, da ga spremeniš)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Prijeđi na brzi retuš (onaj iz verzije 0.5.0): prilagodbe, krivulja, mrlje, pečat — manje gumba ¦ Preklopi na hitro retuširanje (tisto iz različice 0.5.0): prilagoditve, krivulja, madeži, žig — manj gumbov
+⚡ Rapide ¦ ⚡ Brzo ¦ ⚡ Hitro
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Izvoz: retuširana slika (PNG, JPG, ispis) ili prije / poslije ¦ Izvoz: retuširana slika (PNG, JPG, tisk) ali prej / potem
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Spremi projekt: sav rad (slojevi, maske, prilagodbe…) da ga ponovno otvoriš i nastaviš ¦ Shrani projekt: vse delo (plasti, maske, prilagoditve…), da ga znova odpreš in nadaljuješ
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Retuširana slika (PNG, JPG, ispis)… ¦ 🖼 Retuširana slika (PNG, JPG, tisk)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Prije / poslije (jedno uz drugo ili zavjesa)… ¦ ◧ Prej / potem (drug ob drugem ali zavesa)…
+Dureté ¦ Tvrdoća ¦ Trdota
+Sorte de pinceau ¦ Vrsta kista ¦ Vrsta čopiča
+Couleurs rapides ¦ Brze boje ¦ Hitre barve
+contour ¦ obris ¦ obroba
+Contour du texte ¦ Obris teksta ¦ Obroba besedila
+Couleur du contour ¦ Boja obrisa ¦ Barva obrobe
+Épaisseur du contour ¦ Debljina obrisa ¦ Debelina obrobe
+épaisseur ¦ debljina ¦ debelina
+ombre ¦ sjena ¦ senca
+Ombre du texte ¦ Sjena teksta ¦ Senca besedila
+Couleur de l’ombre ¦ Boja sjene ¦ Barva sence
+Tampon : endroit à recopier, aligné ¦ Pečat: mjesto za kopiranje, poravnato ¦ Žig: mesto za kopiranje, poravnano
+🎯 Choisir l’endroit à recopier ¦ 🎯 Odaberi mjesto za kopiranje ¦ 🎯 Izberi mesto za kopiranje
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Označeno: kopirano mjesto prati kist od poteza do poteza. Neoznačeno: svaki potez kreće s istog mjesta. ¦ Označeno: kopirano mesto sledi čopiču od poteze do poteze. Neoznačeno: vsaka poteza začne z istega mesta.
+aligné ¦ poravnato ¦ poravnano
+Réparer : grain, repérer les plis ¦ Popravak: zrnatost, pronalaženje pregiba ¦ Popravilo: zrnatost, iskanje pregibov
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Označeno: malo okolne zrnatosti fotografije vraća se u popravljeno područje, da ne izgleda previše glatko. ¦ Označeno: malo okoliške zrnatosti fotografije se vrne v popravljeno območje, da ni videti preveč gladko.
+garder le grain ¦ zadrži zrnatost ¦ ohrani zrnatost
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Automatski pronađi tanke linije (pregibe, ogrebotine) i ponudi da ih popuni ¦ Samodejno poišči tanke črte (pregibe, praske) in ponudi njihovo zapolnitev
+🔍 Repérer les plis ¦ 🔍 Pronađi pregibe ¦ 🔍 Poišči pregibe
+Texte gras ¦ Podebljani tekst ¦ Krepko besedilo
+Texte italique ¦ Kurziv ¦ Ležeče besedilo
+Forme (rectangle, ellipse, flèche…) ¦ Oblik (pravokutnik, elipsa, strelica…) ¦ Oblika (pravokotnik, elipsa, puščica…)
+Rectangle arrondi ¦ Zaobljeni pravokutnik ¦ Zaobljen pravokotnik
+Forme remplie ¦ Ispunjeni oblik ¦ Zapolnjena oblika
+remplie ¦ ispunjeno ¦ zapolnjeno
+Couleur de fond des formes ¦ Boja ispune oblika ¦ Barva polnila oblik
+Baguette : tolérance ¦ Štapić: tolerancija ¦ Paličica: toleranca
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Koliko boja smije odstupati od kliknute da bude obuhvaćena: malo = samo ista nijansa, veliko = i susjedne nijanse. ¦ Koliko sme barva odstopati od kliknjene, da jo zajame: majhno = samo isti odtenek, veliko = tudi sosednji odtenki.
+Tolérance ¦ Tolerancija ¦ Toleranca
+Baguette : contiguë ¦ Štapić: susjedno ¦ Paličica: sosednje
+contiguë ¦ susjedno ¦ sosednje
+Sélectionner le sujet ¦ Odaberi motiv ¦ Izberi motiv
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Pozadina se prepoznaje po rubovima fotografije; tolerancija određuje dokle seže ¦ Ozadje se prepozna po robovih fotografije; toleranca določa, kako daleč seže
+🎯 Sujet ¦ 🎯 Motiv ¦ 🎯 Motiv
+Actions de la sélection ¦ Radnje odabira ¦ Dejanja izbora
+⇧ ajouter · ⌥ enlever ¦ ⇧ dodaj · ⌥ oduzmi ¦ ⇧ dodaj · ⌥ odvzemi
+→ Calque ¦ → Sloj ¦ → Plast
+Remplir ¦ Ispuni ¦ Zapolni
+Effacer ¦ Obriši ¦ Izbriši
+Masque ¦ Maska ¦ Maska
+Recadrer ¦ Obreži ¦ Obreži
+Recadrage : proportions, redresser ¦ Obrezivanje: omjeri, ispravljanje ¦ Obrezovanje: razmerja, poravnava
+Proportions ¦ Omjeri ¦ Razmerja
+Libres ¦ Slobodno ¦ Prosto
+Celles de la photo ¦ Kao fotografija ¦ Kot fotografija
+Carré 1:1 ¦ Kvadrat 1:1 ¦ Kvadrat 1:1
+A4 portrait ¦ A4 uspravno ¦ A4 pokončno
+Redresser ¦ Ispravi ¦ Poravnaj
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Pronalazi kut glavnih linija (horizont, zidovi, okviri) ¦ Poišče kot glavnih črt (obzorje, zidovi, okvirji)
+📐 Auto ¦ 📐 Auto ¦ 📐 Samodejno
+✓ Valider ¦ ✓ Potvrdi ¦ ✓ Potrdi
+Perspective ¦ Perspektiva ¦ Perspektiva
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Postavi 4 kuta na kutove onoga što treba postati pravokutno (fotografija, dokument, pročelje). ¦ Postavi 4 vogale na vogale tistega, kar mora postati pravokotno (fotografija, dokument, pročelje).
+Coins aux bords ¦ Kutovi na rubovima ¦ Vogali na robovih
+Dégradé : couleurs, forme, options ¦ Prijelaz: boje, oblik, opcije ¦ Preliv: barve, oblika, možnosti
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Uredi prijelaz: boje, prozirnost, predlošci ¦ Uredi preliv: barve, prosojnost, prednastavitve
+Forme du dégradé ¦ Oblik prijelaza ¦ Oblika preliva
+Inverser le dégradé ¦ Obrni prijelaz ¦ Obrni preliv
+inverser ¦ obrni ¦ obrni
+Tramage ¦ Raster (dithering) ¦ Rastriranje (dithering)
+tramage ¦ raster ¦ rastriranje
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Vrlo lagana zrnatost koja sprječava vidljive „stepenice” u mekim prijelazima. ¦ Zelo rahla zrnatost, ki prepreči vidne »stopnice« v mehkih prelivih.
+Masque : cacher / montrer ¦ Maska: sakrij / otkrij ¦ Maska: skrij / razkrij
+⬛ cacher ¦ ⬛ sakrij ¦ ⬛ skrij
+⬜ montrer ¦ ⬜ otkrij ¦ ⬜ razkrij
+Aide de l’outil ¦ Pomoć za alat ¦ Pomoč za orodje
+Couleurs (premier plan et arrière-plan) ¦ Boje (prednji plan i pozadina) ¦ Barve (ospredje in ozadje)
+Noir et blanc (D) ¦ Crno i bijelo (D) ¦ Črna in bela (D)
+Couleurs par défaut : noir et blanc ¦ Zadane boje: crna i bijela ¦ Privzete barve: črna in bela
+Intervertir les deux couleurs (X) ¦ Zamijeni dvije boje (X) ¦ Zamenjaj barvi (X)
+Intervertir les couleurs ¦ Zamijeni boje ¦ Zamenjaj barvi
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Boja pozadine (ispuna oblika): klikni da je promijeniš ¦ Barva ozadja (polnilo oblik): klikni, da jo spremeniš
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Boja prednjeg plana (kist, tekst, oblici): klikni da je promijeniš ¦ Barva ospredja (čopič, besedilo, oblike): klikni, da jo spremeniš
+Replier le panneau (plus de place pour la photo) — Tab ¦ Sklopi ploču (više mjesta za fotografiju) — Tab ¦ Strni ploščo (več prostora za fotografijo) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Povuci da proširiš ili suziš ploču (dvoklik: početna veličina) ¦ Povleci, da razširiš ali zožiš ploščo (dvoklik: začetna velikost)
+Onglets du panneau de droite ¦ Kartice desne ploče ¦ Zavihki desne plošče
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Svojstva: Nijansa/zasićenost, maska, položaj i veličina odabranog sloja ¦ Lastnosti: Odtenek/nasičenost, maska, položaj in velikost izbrane plasti
+ⓘ Propriétés ¦ ⓘ Svojstva ¦ ⓘ Lastnosti
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Znak: font, varijanta (debljina), veličina, prored, razmak… ¦ Znak: pisava, različica (debelina), velikost, razmik vrstic, razmik črk…
+🔤 Caractère ¦ 🔤 Znak ¦ 🔤 Znak
+Motifs : remplir d’un motif, créer les siens ¦ Uzorci: ispuni uzorkom, stvori vlastite ¦ Vzorci: zapolni z vzorcem, ustvari svoje
+▩ Motifs ¦ ▩ Uzorci ¦ ▩ Vzorci
+Motifs ¦ Uzorci ¦ Vzorci
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Vrhovi kista: predlošci, razmak, kut, raspršenost, oblik prema odabiru ¦ Konice čopiča: prednastavitve, razmik, kot, razpršenost, oblika iz izbora
+🖌 Formes ¦ 🖌 Oblici ¦ 🖌 Oblike
+Restaurer une vieille photo, pas à pas ¦ Restauriraj staru fotografiju, korak po korak ¦ Obnovi staro fotografijo, korak za korakom
+🧭 Restaurer ¦ 🧭 Restauriraj ¦ 🧭 Obnovi
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Kao zasićenost, ali se već žive boje malo mijenjaju: blijede nijanse (koža, blijedo nebo) oživljavaju se prve. ¦ Kot nasičenost, vendar se že žive barve malo spremenijo: blede odtenke (koža, bledo nebo) se poživijo najprej.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Posvjetljuje ili zatamnjuje srednje tonove bez diranja crne i bijele: iznad 100 svjetlije; ispod tamnije. ¦ Posvetli ali potemni srednje tone, ne da bi spremenil črno in belo: nad 100 svetleje; pod tem temneje.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Klik na krivulju: dodaj točku · povlačenje: pomakni je · za uklanjanje: odaberi je pa „Ukloni točku” (ili ⌫), ili je povuci izvan okvira. ¦ Klik na krivuljo: dodaj točko · vlečenje: premakni jo · za odstranitev: izberi jo, nato »Odstrani točko« (ali ⌫), ali jo povleci iz okvirja.
+Enlever le point ¦ Ukloni točku ¦ Odstrani točko
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Blago bojenje (crno-bijela fotografija) ¦ 🎨 Nežno barvanje (črno-bela fotografija)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Bolje u sloju prilagodbe (Slika → Oboji): možeš ga dozirati, maskirati, ukloniti. Za ručno bojenje: Slika → Oboji kistom. ¦ Bolje v prilagoditveni plasti (Slika → Pobarvaj): lahko jo odmeriš, maskiraš, odstraniš. Za ročno barvanje: Slika → Pobarvaj s čopičem.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Brzi filtri, nakon prilagodbi: na fotografiji ili u sloju prilagodbe (na svemu ispod ili samo na sloju odmah ispod). Isti i na slici spremljenoj u punoj veličini. ¦ Hitri filtri, po prilagoditvah: na fotografiji ali v prilagoditveni plasti (na vsem spodaj ali samo na plasti tik spodaj). Enaki tudi na sliki, shranjeni v polni velikosti.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Pojačava kontrast srednjih detalja (bore, nabori tkanine, rukopis) bez promjene ukupnog kontrasta. ¦ Okrepi kontrast srednjih podrobnosti (gube, gube tkanine, pisava) brez spremembe splošnega kontrasta.
+Enlever les filtres ¦ Ukloni filtre ¦ Odstrani filtre
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Varijanta: debljina (Light, Regular, Bold, Black…) i kurziv ¦ Različica: debelina (Light, Regular, Bold, Black…) in ležeče
+Taille (en points de l’image) ¦ Veličina (u točkama slike) ¦ Velikost (v točkah slike)
+Interligne (vide = automatique, 120 % de la taille) ¦ Prored (prazno = automatski, 120 % veličine) ¦ Razmik vrstic (prazno = samodejno, 120 % velikosti)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Podrezivanje: parovi slova približeni prema fontu (Metrički) ili nikako (0) ¦ Spodsekavanje: pari črk, približani glede na pisavo (Metrično) ali sploh ne (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Razmak slova: prostor između svih slova, u tisućinkama veličine ¦ Razmik črk: prostor med vsemi črkami, v tisočinkah velikosti
+Échelle verticale ¦ Okomito skaliranje ¦ Navpično merilo
+Échelle horizontale ¦ Vodoravno skaliranje ¦ Vodoravno merilo
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Okomiti pomak (iznad osnovne linije ako je pozitivan) ¦ Navpični zamik (nad osnovnico, če je pozitiven)
+Lissage des bords des lettres ¦ Zaglađivanje rubova slova ¦ Glajenje robov črk
+Lissage ¦ Zaglađivanje ¦ Glajenje
+Lissé ¦ Zaglađeno ¦ Zglajeno
+Aucun (bords nets, pixels) ¦ Bez (oštri rubovi, pikseli) ¦ Brez (ostri robovi, piksli)
+Alignement du paragraphe ¦ Poravnanje odlomka ¦ Poravnava odstavka
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Za sljedeće tekstove. Odaberi tekst s ➤ da ga promijeniš. ¦ Za naslednja besedila. Izberi besedilo z ➤, da ga spremeniš.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Za sljedeće tekstove. Klikni na tekst (alat Tekst ili ➤) da ga promijeniš. ¦ Za naslednja besedila. Klikni na besedilo (orodje Besedilo ali ➤), da ga spremeniš.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Tekst koji se upravo piše: svaka se postavka odmah primjenjuje. ¦ ✍️ Besedilo, ki ga pišeš: vsaka nastavitev se takoj uporabi.
+Métrique ¦ Metrički ¦ Metrično
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Varijante dolaze iz fontova računala (Mac, Windows, Linux) kada ih aplikacija može pročitati; inače uobičajene debljine. ¦ Različice prihajajo iz pisav računalnika (Mac, Windows, Linux), ko jih aplikacija lahko prebere; sicer običajne debeline.
+Retrait de la première ligne (négatif : en saillie) ¦ Uvlaka prvog retka (negativno: viseća) ¦ Zamik prve vrstice (negativno: viseči)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Širina tekstnog bloka: retci se sami prelamaju (prazno = običan tekst, jedan redak po odlomku) ¦ Širina besedilnega bloka: vrstice se same prelomijo (prazno = navadno besedilo, ena vrstica na odstavek)
+Espace avant chaque paragraphe ¦ Razmak prije svakog odlomka ¦ Razmik pred vsakim odstavkom
+Espace après chaque paragraphe ¦ Razmak nakon svakog odlomka ¦ Razmik za vsakim odstavkom
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Rastavljaj duge riječi na kraju retka crticom (jednostavna francuska pravila; meka crtica ⌥- u riječi ima prednost) ¦ Deli dolge besede na koncu vrstice z vezajem (preprosta francoska pravila; mehki vezaj ⌥- v besedi ima prednost)
+Ω Glyphes ¦ Ω Glifovi ¦ Ω Glifi
+Police (famille) ¦ Font (obitelj) ¦ Pisava (družina)
+(Auto) ¦ (Auto) ¦ (Samodejno)
+⟸ gauche ¦ ⟸ lijevo ¦ ⟸ levo
+≡ centre ¦ ≡ sredina ¦ ≡ sredina
+droite ⟹ ¦ desno ⟹ ¦ desno ⟹
+Symboles ¦ Simboli ¦ Simboli
+Code (U+00E9) ou caractère ¦ Kôd (U+00E9) ili znak ¦ Koda (U+00E9) ali znak
+Chercher un glyphe ¦ Traži glif ¦ Išči glif
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Za tekstni blok povuci okvir alatom Tekst T umjesto klika ili ovdje upiši njegovu širinu. Obostrano poravnanje vrijedi samo za blok. ¦ Za besedilni blok povleci okvir z orodjem Besedilo T namesto klika ali tukaj vpiši njegovo širino. Obojestranska poravnava velja samo za blok.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Klik: dodano u tekst koji se piše (ili na kraj odabranog teksta). Bez teksta: kopirano. ¦ Klik: dodano v besedilo, ki ga pišeš (ali na konec izbranega besedila). Brez besedila: kopirano.
+Choisis d’abord un texte (outil T). ¦ Najprije odaberi tekst (alat T). ¦ Najprej izberi besedilo (orodje T).
+Un autre média, rattaché aux mêmes fiches ¦ Drugi medij, povezan s istim zapisima ¦ Drug medij, povezan z istimi zapisi
+Gardée dans les versions, la photo affichée ne change pas ¦ Zadržano u verzijama, prikazana fotografija se ne mijenja ¦ Ohranjeno med različicami, prikazana fotografija se ne spremeni
+avec les annotations (calques visibles) ¦ s bilješkama (vidljivi slojevi) ¦ z opombami (vidne plasti)
+Avec les annotations (calques visibles) ¦ S bilješkama (vidljivi slojevi) ¦ Z opombami (vidne plasti)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Izvornik se nikad ne mijenja: svaki je retuš verzija fotografije, a ti biraš onu koja se svugdje prikazuje. ¦ Izvirnik se nikoli ne spremeni: vsako retuširanje je različica fotografije, ti pa izbereš tisto, ki se prikaže povsod.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Spremi sliku u Medije ¦ 🖼 Shrani sliko med Medije
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Slika (sa slojevima) zamjenjuje sliku medija; projekt zadržava sve slojeve za nastavak ¦ Slika (s plastmi) zamenja sliko medija; projekt ohrani vse plasti za nadaljevanje
+Enregistrer le projet (calques, masques, réglages) ¦ Spremi projekt (slojevi, maske, prilagodbe) ¦ Shrani projekt (plasti, maske, prilagoditve)
+la retouche est fermée ¦ retuš je zatvoren ¦ retuširanje je zaprto
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Klikni na korak da se vratiš na taj trenutak; sljedeći koraci ostaju (sivo) dok ne napraviš nešto drugo. ¦ Klikni na korak, da se vrneš na tisti trenutek; naslednji koraki ostanejo (sivo), dokler ne narediš česa drugega.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Slikaš masku (kist: ⬛ sakrij / ⬜ otkrij). Klik: povratak na sloj ¦ Slikaš masko (čopič: ⬛ skrij / ⬜ razkrij). Klik: nazaj na plast
+Masque : clic pour le peindre au pinceau ¦ Maska: klikni da je slikaš kistom ¦ Maska: klikni, da jo slikaš s čopičem
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + klik: isključi / uključi masku ¦ ⇧ Shift + klik: izklopi / vklopi masko
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + klik: prikaži samo masku ¦ ⌥ Alt + klik: prikaži samo masko
+touche \ : le masque en rouge par-dessus ¦ tipka \: maska crveno preko ¦ tipka \: maska z rdečo čez
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Dodaj masku (sakrij dio bez brisanja) — ⌥ / Alt + klik: maska koja skriva sve (ili skriva odabir) ¦ Dodaj masko (skrij del, ne da bi ga izbrisal) — ⌥ / Alt + klik: maska, ki skrije vse (ali skrije izbor)
+masque ¦ maska ¦ maska
+Ranger dans un groupe ¦ Stavi u grupu ¦ Postavi v skupino
+(hors groupe) ¦ (izvan grupe) ¦ (zunaj skupine)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Povuci za raspoređivanje: iznad, ispod ili u grupu (pusti u sredini grupe) ¦ Povleci za razporejanje: nad, pod ali v skupino (spusti na sredino skupine)
+Calque de réglage ¦ Sloj prilagodbe ¦ Prilagoditvena plast
+La photo (réglages, taches, tampon) ¦ Fotografija (prilagodbe, mrlje, pečat) ¦ Fotografija (prilagoditve, madeži, žig)
+Supprimer le groupe (ce qu’il contient reste) ¦ Izbriši grupu (njezin sadržaj ostaje) ¦ Izbriši skupino (njena vsebina ostane)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Ukloni fotografiju iz slojeva (⌘Z za vraćanje) ¦ Odstrani fotografijo iz plasti (⌘Z za vrnitev)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Način stapanja: kako se sloj miješa s onim ispod ¦ Način mešanja: kako se plast meša s tistim spodaj
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Ispuna: dozira samo sadržaj sloja, ne i njegove efekte (sjena, sjaj, obris). Na 0 % ostaju samo efekti. ¦ Polnilo: odmerja samo vsebino plasti, ne njenih učinkov (senca, sij, obroba). Pri 0 % ostanejo samo učinki.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Efekti sloja: bačena sjena, vanjski sjaj, obris, preklapanje boje ¦ Učinki plasti: senca, zunanji sij, obroba, prekrivanje z barvo
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Pametni objekt: povećaj, smanji, zakreni bez gubitka (izvorna slika se čuva) ¦ Pametni objekt: povečaj, pomanjšaj, zasukaj brez izgube (izvirna slika se ohrani)
+🧩 Objet dynamique ¦ 🧩 Pametni objekt ¦ 🧩 Pametni objekt
+Une autre image à la même place, même taille, même rotation ¦ Druga slika na istom mjestu, iste veličine, iste rotacije ¦ Druga slika na istem mestu, enake velikosti, enakega zasuka
+Remplacer… ¦ Zamijeni… ¦ Zamenjaj…
+Remettre l’image à sa taille d’origine (et droite) ¦ Vrati sliku na izvornu veličinu (i ravno) ¦ Vrni sliko na izvirno velikost (in naravnost)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Sloj filtara odmah iznad, koji djeluje samo na ovu sliku: možeš ga podesiti, dozirati, sakriti ¦ Plast filtrov tik nad njo, ki vpliva samo na to sliko: lahko jo nastaviš, odmeriš, skriješ
+✨ Filtre dynamique ¦ ✨ Pametni filtar ¦ ✨ Pametni filter
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Zaključaj sliku u pikselima u trenutnoj veličini (nema više povećanja bez gubitka) ¦ Zakleni sliko v piksle v trenutni velikosti (ni več povečave brez izgube)
+Pixelliser ¦ Rasteriziraj ¦ Rasteriziraj
+Couleurs, transparence, forme, préréglages ¦ Boje, prozirnost, oblik, predlošci ¦ Barve, prosojnost, oblika, prednastavitve
+▦ Modifier le dégradé… ¦ ▦ Uredi prijelaz… ¦ ▦ Uredi preliv…
+Motif, échelle, angle, décalage ¦ Uzorak, mjerilo, kut, pomak ¦ Vzorec, merilo, kot, zamik
+▩ Modifier le motif… ¦ ▩ Uredi uzorak… ¦ ▩ Uredi vzorec…
+Comme un masque d’écrêtage de Photoshop ¦ Kao maska izrezivanja u Photoshopu ¦ Kot maska izrezovanja v Photoshopu
+régler… ¦ podesi… ¦ nastavi…
+ne touche que l’élément juste dessous ¦ djeluje samo na element odmah ispod ¦ vpliva samo na element tik spodaj
+touche tout ce qui est dessous ¦ djeluje na sve ispod ¦ vpliva na vse spodaj
+(seulement l’élément dessous) ¦ (samo element ispod) ¦ (samo element spodaj)
+(tout ce qui est dessous) ¦ (sve ispod) ¦ (vse spodaj)
+régler la photo ¦ podesi fotografiju ¦ nastavi fotografijo
+＋ dans un calque de réglage ¦ ＋ u sloju prilagodbe ¦ ＋ v prilagoditveni plasti
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Prilagodbe i filtri u zasebnom sloju, koji možeš maskirati, dozirati ili ograničiti na jedan sloj ¦ Prilagoditve in filtri v ločeni plasti, ki jo lahko maskiraš, odmeriš ali omejiš na eno plast
+✨ Filtres : ¦ ✨ Filtri: ¦ ✨ Filtri:
+Changer les réglages de ce filtre ¦ Promijeni postavke ovog filtra ¦ Spremeni nastavitve tega filtra
+vider ¦ isprazni ¦ izprazni
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ prazna grupa: povuci sloj ovamo (⠿) ili ga stavi s 📁 ¦ prazna skupina: povleci plast sem (⠿) ali jo postavi s 📁
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Kist, oblici i tekst idu na odabrani sloj (plavo). 📁 grupa može sadržavati slojeve i druge grupe; 🎚 sloj prilagodbe primjenjuje prilagodbe i filtre na ono ispod (ili samo na element odmah ispod). 🎭 maska skriva bez brisanja. ¦ Čopič, oblike in besedilo gredo na izbrano plast (modro). 📁 skupina lahko vsebuje plasti in druge skupine; 🎚 prilagoditvena plast uporabi prilagoditve in filtre na tistem spodaj (ali samo na elementu tik spodaj). 🎭 maska skrije brez brisanja.
+＋ Calque ¦ ＋ Sloj ¦ ＋ Plast
+＋ Groupe ¦ ＋ Grupa ¦ ＋ Skupina
+＋ Réglage ¦ ＋ Prilagodba ¦ ＋ Prilagoditev
+🖼️ Image ¦ 🖼️ Slika ¦ 🖼️ Slika
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Slika iz baze ili s računala, na novom sloju, kao pametni objekt (povećaj, smanji, zakreni bez gubitka) ¦ Slika iz baze ali z računalnika, na novi plasti, kot pametni objekt (povečaj, pomanjšaj, zasukaj brez izgube)
+Un groupe vide au-dessus du calque choisi ¦ Prazna grupa iznad odabranog sloja ¦ Prazna skupina nad izbrano plastjo
+Réglages et filtres dans un calque ¦ Prilagodbe i filtri u sloju ¦ Prilagoditve in filtri v plasti
+La photo a été retirée des calques : la remettre tout en bas ¦ Fotografija je uklonjena iz slojeva: vrati je na samo dno ¦ Fotografija je bila odstranjena iz plasti: vrni jo čisto na dno
+↺ Remettre la photo ¦ ↺ Vrati fotografiju ¦ ↺ Vrni fotografijo
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Stavlja odabrani sloj u novu grupu (⌘G) ¦ Postavi izbrano plast v novo skupino (⌘G)
+Grouper ¦ Grupiraj ¦ Združi v skupino
+Sélection → calque ¦ Odabir → sloj ¦ Izbor → plast
+Aucun calque. ¦ Nema slojeva. ¦ Ni plasti.
+Choisis d’abord un calque. ¦ Najprije odaberi sloj. ¦ Najprej izberi plast.
+Nouveau calque ¦ Novi sloj ¦ Nova plast
+Nouveau calque de réglage ¦ Novi sloj prilagodbe ¦ Nova prilagoditvena plast
+Photo remise dans les calques ¦ Fotografija vraćena u slojeve ¦ Fotografija vrnjena med plasti
+Masque ajouté : la sélection est cachée. ¦ Maska dodana: odabir je skriven. ¦ Maska dodana: izbor je skrit.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Maska dodana: sve je skriveno; slikaj s ⬜ da otkriješ. ¦ Maska dodana: vse je skrito; slikaj z ⬜, da razkriješ.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Maska dodana: slikaj s ⬛ da sakriješ, s ⬜ da otkriješ. ¦ Maska dodana: slikaj z ⬛, da skriješ, z ⬜, da razkriješ.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Samo maska: bijelo = prikazano, crno = skriveno (⌥ + klik za povratak) ¦ Samo maska: belo = prikazano, črno = skrito (⌥ + klik za vrnitev)
+Ce calque est verrouillé. ¦ Ovaj je sloj zaključan. ¦ Ta plast je zaklenjena.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Pametni filtar: odaberi filtar („＋ Dodaj filtar…”); djeluje samo na ovu sliku i ostaje podesiv. ¦ Pametni filter: izberi filter (»＋ Dodaj filter…«); vpliva samo na to sliko in ostane nastavljiv.
+verrouillé ¦ zaključano ¦ zaklenjeno
+déverrouillé ¦ otključano ¦ odklenjeno
+seulement sur l’élément dessous ¦ samo na elementu ispod ¦ samo na elementu spodaj
+sur tout ce qui est dessous ¦ na svemu ispod ¦ na vsem spodaj
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Otvori ploču (Prilagodbe, Slojevi…) — Tab ¦ Odpri ploščo (Prilagoditve, Plasti…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Povuci za kretanje po uvećanoj slici (razmaknica radi isto s bilo kojim alatom). ¦ Povleci za premikanje po povečani sliki (preslednica naredi isto s katerim koli orodjem).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Klikni na potez, oblik, tekst ili kopirano područje sloja, zatim ga povuci. ⌫ ga briše, dvoklik na tekst da ga ponovno napišeš. ¦ Klikni na potezo, obliko, besedilo ali kopirano območje plasti, nato ga povleci. ⌫ ga izbriše, dvoklik na besedilo, da ga znova napišeš.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Povuci za odabir pravokutnika (uz ⇧: dodaj, ⌥: oduzmi). Postavke trake zatim djeluju na odabir. ¦ Povleci za izbor pravokotnika (z ⇧: dodaj, ⌥: odvzemi). Nastavitve vrstice nato delujejo na izbor.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Povuci za odabir ovala (⇧: dodaj, ⌥: oduzmi). ¦ Povleci za izbor ovala (⇧: dodaj, ⌥: odvzemi).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Prostoručno zaokruži područje za odabir (⇧: dodaj, ⌥: oduzmi). ¦ Prostoročno obkroži območje za izbor (⇧: dodaj, ⌥: odvzemi).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Pero: klikaj točku po točku oko područja; dvoklik, Enter ili klik na prvu točku za zatvaranje. Esc: odustani. ¦ Pero: klikaj točko za točko okoli območja; dvoklik, Enter ali klik na prvo točko za zaprtje. Esc: opusti.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Klikni na boju: odabiru se sve susjedne točke slične nijanse (Tolerancija). ⇧: dodaj, ⌥: oduzmi. ¦ Klikni na barvo: izberejo se vse sosednje točke podobnega odtenka (Toleranca). ⇧: dodaj, ⌥: odvzemi.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Povuci ručke okvira (ili nacrtaj novi okvir), odaberi omjere, ispravi klizačem, zatim „✓ Potvrdi”. ¦ Povleci ročaje okvirja (ali nariši nov okvir), izberi razmerja, poravnaj z drsnikom, nato »✓ Potrdi«.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Klik: zumiraj ovdje · ⌥ + klik: udalji · ili povuci za zumiranje područja. ¦ Klik: povečaj tukaj · ⌥ + klik: pomanjšaj · ali povleci za povečavo območja.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Povuci 4 kuta na kutove fotografije, dokumenta ili pročelja snimljenog ukoso, zatim „✓ Potvrdi”: izravnava se. Najbolje prije ispravljanja mrlja. ¦ Povleci 4 vogale na vogale fotografije, dokumenta ali pročelja, posnetega postrani, nato »✓ Potrdi«: se izravna. Najbolje pred popravki madežev.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Povuci da nacrtaš oblik na odabranom sloju (⇧: kvadrat, krug ili pravi kut). ¦ Povleci, da narišeš obliko na izbrani plasti (⇧: kvadrat, krog ali pravi kot).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Povuci od početka do kraja prijelaza (⇧: svakih 45°): ide na sloj „Prijelaz” (u odabiru ako postoji; na odabranoj maski stapa sloj). Zatim povuci njegove krugove za prilagodbu; klik na obojenu traku mijenja boje. ¦ Povleci od začetka do konca preliva (⇧: vsakih 45°): gre na plast »Preliv« (v izboru, če obstaja; na izbrani maski zlije plast). Nato povleci njegove kroge za prilagoditev; klik na barvni trak spremeni barve.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Klikni na mrlju, prašinu ili ogrebotinu: zamjenjuje se onim što je okružuje. Za ogrebotinu povuci duž nje. Zumiraj (⌘ + kotačić) za preciznost. ¦ Klikni na madež, prah ali prasko: zamenja se s tistim, kar ga obdaja. Pri praski povleci vzdolž nje. Povečaj (⌘ + kolesce) za natančnost.
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ „Odaberi mjesto za kopiranje” (ili ⌥ + klik), zatim slikaj po području koje treba prekriti. „Poravnato”: izvor prati tvoj kist od poteza do poteza. S odabirom: povuci da postaviš kopiju područja drugdje. ¦ »Izberi mesto za kopiranje« (ali ⌥ + klik), nato slikaj po območju, ki ga želiš prekriti. »Poravnano«: vir sledi tvojemu čopiču od poteze do poteze. Z izborom: povleci, da postaviš kopijo območja drugam.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Slikaj na odabranom sloju (Slojevi): bilježi, zaokružuj, crtaj strelice rukom. Gumica briše naslikano, nikad fotografiju. ¦ Slikaj na izbrani plasti (Plasti): označuj, obkroži, riši puščice ročno. Radirka briše naslikano, nikoli fotografije.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Slikaš MASKU sloja: ⬛ sakrij, ⬜ otkrij. Ništa se ne briše. Klikni na sličicu maske (Slojevi) za povratak na sloj. ¦ Slikaš MASKO plasti: ⬛ skrij, ⬜ razkrij. Nič se ne izbriše. Klikni na sličico maske (Plasti) za vrnitev na plast.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Klikni u sliku na mjesto teksta, piši, zatim Enter (⇧ + Enter za novi redak). ¦ Klikni v sliko na mesto besedila, piši, nato Enter (⇧ + Enter za novo vrstico).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Slikaj po pregibu, ogrebotini ili poderotini (crveno tijekom poteza): kad pustiš, područje se obnavlja prema okolini. Zumiraj za preciznost; „🔍 Pronađi pregibe” ih nalazi automatski. ¦ Slikaj po pregibu, praski ali raztrganini (med potezo z rdečo): ko spustiš, se območje obnovi iz okolice. Povečaj za natančnost; »🔍 Poišči pregibe« jih najde samodejno.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Po potrebi povuci dva kruga na oči: okvir slijedi (oči vodoravno, uvijek na istoj visini). Podesi marginu u ploči, zatim „✓ Obreži” ili „👤 Koristi kao portret”. ¦ Po potrebi povleci kroga na oči: okvir sledi (oči vodoravno, vedno na isti višini). Nastavi rob v plošči, nato »✓ Obreži« ali »👤 Uporabi kot portret«.
+Calque « Annotations » créé ¦ Sloj „Bilješke” stvoren ¦ Plast »Opombe« ustvarjena
+Annotations ¦ Bilješke ¦ Opombe
+Masque ajouté à la photo (gomme) ¦ Maska dodana fotografiji (gumica) ¦ Maska dodana fotografiji (radirka)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Gumica na fotografiji: skriva se maskom, ništa se ne briše. Za vraćanje: tipka X (⬜ otkrij), zatim ponovno prijeđi preko. ¦ Radirka na fotografiji: skrije se z masko, nič se ne izbriše. Za vrnitev: tipka X (⬜ razkrij), nato znova pojdi čez.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Otkrij: kist (ili gumica) vraća ono što je bilo skriveno. X za povratak na ⬛ sakrij. ¦ ⬜ Razkrij: čopič (ali radirka) vrne, kar je bilo skrito. X za vrnitev na ⬛ skrij.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Sakrij: kist (ili gumica) skriva. X za ⬜ otkrij. ¦ ⬛ Skrij: čopič (ali radirka) skrije. X za ⬜ razkrij.
+Style du texte ¦ Stil teksta ¦ Slog besedila
+Caractère du texte ¦ Znak teksta ¦ Znak besedila
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Pročitaj varijante s računala… ¦ 🔎 Preberi različice z računalnika…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Ciljana prilagodba: pritisni na boju fotografije i povuci udesno (zasićenije) ili ulijevo (manje); s ⌘ / Ctrl mijenja se nijansa ¦ Ciljna prilagoditev: pritisni na barvo fotografije in povleci v desno (bolj nasičeno) ali v levo (manj); s ⌘ / Ctrl se spremeni odtenek
+Réglage ciblé ¦ Ciljana prilagodba ¦ Ciljna prilagoditev
+Pipettes de la gamme ¦ Pipete raspona ¦ Kapalke obsega
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Pipeta: raspon se centrira na boju kliknutu u fotografiji ¦ Kapalka: obseg se osredini na barvo, kliknjeno v fotografiji
+Ajouter à la gamme la couleur cliquée ¦ Dodaj kliknutu boju u raspon ¦ Dodaj kliknjeno barvo v obseg
+Retirer de la gamme la couleur cliquée ¦ Ukloni kliknutu boju iz raspona ¦ Odstrani kliknjeno barvo iz obsega
+Bord intérieur : plein effet jusqu’ici ¦ Unutarnji rub: puni učinak do ovdje ¦ Notranji rob: polni učinek do sem
+Bord extérieur : l’effet s’éteint ici ¦ Vanjski rub: učinak se ovdje gasi ¦ Zunanji rob: učinek tukaj ugasne
+Haut : les couleurs avant ; bas : après. ¦ Gore: boje prije; dolje: poslije. ¦ Zgoraj: barve prej; spodaj: potem.
+🎚 Autres réglages… ¦ 🎚 Ostale prilagodbe… ¦ 🎚 Druge prilagoditve…
+🖌 Peindre le masque ¦ 🖌 Slikaj masku ¦ 🖌 Slikaj masko
+Réactiver ¦ Ponovno uključi ¦ Znova vklopi
+Désactiver ¦ Isključi ¦ Izklopi
+▦ Calque de dégradé ¦ ▦ Sloj prijelaza ¦ ▦ Plast preliva
+garder les proportions ¦ zadrži omjere ¦ ohrani razmerja
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Sloj prilagodbe odmah iznad, koji djeluje samo na ovaj sloj ¦ Prilagoditvena plast tik nad njo, ki vpliva samo na to plast
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Nijansa/zasićenost na ovom sloju ¦ 🎨 Odtenek/nasičenost na tej plasti
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Odaberi fotografiju ili sloj prilagodbe 🎚 (Slojevi) za Nijansu/zasićenost. ¦ Izberi fotografijo ali prilagoditveno plast 🎚 (Plasti) za Odtenek/nasičenost.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Pritisni na boju fotografije i povuci ulijevo ili udesno (⌘ / Ctrl: nijansa). ¦ 👆 Pritisni na barvo fotografije in povleci v levo ali v desno (⌘ / Ctrl: odtenek).
+💧 Clique sur une couleur de la photo. ¦ 💧 Klikni na boju u fotografiji. ¦ 💧 Klikni na barvo v fotografiji.
+C’est un gris : il n’a pas de teinte. ¦ To je siva: nema nijansu. ¦ To je siva: nima odtenka.
+Gamme choisie à la pipette ¦ Raspon odabran pipetom ¦ Obseg, izbran s kapalko
+Gamme élargie ¦ Raspon proširen ¦ Obseg razširjen
+Gamme réduite ¦ Raspon sužen ¦ Obseg zožen
+Coloriser : oui ¦ Oboji: da ¦ Pobarvaj: da
+Coloriser : non ¦ Oboji: ne ¦ Pobarvaj: ne
+Coloriser ¦ Oboji ¦ Pobarvaj
+Propriétés du masque ¦ Svojstva maske ¦ Lastnosti maske
+Teinte/Saturation remise à zéro ¦ Nijansa/zasićenost vraćena na početno ¦ Odtenek/nasičenost ponastavljena na začetno
+Masque inversé ¦ Maska obrnuta ¦ Maska obrnjena
+Masque désactivé ¦ Maska isključena ¦ Maska izklopljena
+Masque réactivé ¦ Maska ponovno uključena ¦ Maska znova vklopljena
+Masque retiré ¦ Maska uklonjena ¦ Maska odstranjena
+Masque ajouté ¦ Maska dodana ¦ Maska dodana
+Ce calque a déjà un masque. ¦ Ovaj sloj već ima masku. ¦ Ta plast že ima masko.
+Teinte/Saturation sur un calque ¦ Nijansa/zasićenost na sloju ¦ Odtenek/nasičenost na plasti
+Teinte/Saturation ¦ Nijansa/zasićenost ¦ Odtenek/nasičenost
+Ancien style ¦ Stari stil ¦ Stari slog
+Global ¦ Sve ¦ Vse
+Rouges ¦ Crvene ¦ Rdeče
+Jaunes ¦ Žute ¦ Rumene
+Verts ¦ Zelene ¦ Zelene
+Cyans ¦ Cijan ¦ Cian
+Bleus ¦ Plave ¦ Modre
+Magentas ¦ Magenta ¦ Magenta
+Cyanotype ¦ Cijanotipija ¦ Cianotipija
+Supprimer ce motif ¦ Izbriši ovaj uzorak ¦ Izbriši ta vzorec
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Sloj uzorka <b>„{name}”</b>: sve se podešava ovdje, odmah. ¦ Plast vzorca <b>»{name}«</b>: vse se nastavi tukaj, takoj.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Odaberi uzorak, zatim „Ispuni”: ide na vlastiti sloj (u odabiru ako postoji). Uzorci aplikacije koriste tvoje dvije boje. ¦ Izberi vzorec, nato »Zapolni«: gre na svojo plast (v izboru, če obstaja). Vzorci aplikacije uporabijo tvoji dve barvi.
+fond transparent (motifs de l’app) ¦ prozirna pozadina (uzorci aplikacije) ¦ prosojno ozadje (vzorci aplikacije)
+Décalage horizontal ¦ Vodoravni pomak ¦ Vodoravni zamik
+Décalage vertical ¦ Okomiti pomak ¦ Navpični zamik
+▩ Remplir : nouveau calque de motif ¦ ▩ Ispuni: novi sloj uzorka ¦ ▩ Zapolni: nova plast vzorca
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Pridružuje se biblioteci uzoraka (čuva se na ovom računalu). ¦ Pridruži se knjižnici vzorcev (shranjena na tem računalniku).
+l’image visible ¦ vidljiva slika ¦ vidna slika
+Taille du carreau ¦ Veličina pločice ¦ Velikost ploščice
+raccord sans couture (les bords se fondent) ¦ bešavni spoj (rubovi se stapaju) ¦ brezšivni spoj (robovi se zlijejo)
+Garder et remplir ¦ Zadrži i ispuni ¦ Ohrani in zapolni
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Nema više mjesta za ovaj uzorak: izbriši neke uzorke ili ga smanji. ¦ Ni več prostora za ta vzorec: izbriši nekaj vzorcev ali ga pomanjšaj.
+Motif gardé dans la bibliothèque ▩. ¦ Uzorak zadržan u biblioteci ▩. ¦ Vzorec ohranjen v knjižnici ▩.
+Mon motif ¦ Moj uzorak ¦ Moj vzorec
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Klik na oblik: kist 🖌 ga preuzima. Veličina se podešava gore (ili [ i ]). ¦ Klik na obliko: čopič 🖌 jo prevzame. Velikost nastaviš zgoraj (ali [ in ]).
+Forme de la pointe ¦ Oblik vrha ¦ Oblika konice
+Pas (écart entre les empreintes) ¦ Razmak (između otisaka) ¦ Razmik (med odtisi)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Malo: neprekinut potez. Veliko: odvojeni otisci (zvijezde, listovi). ¦ Majhno: neprekinjena poteza. Veliko: ločeni odtisi (zvezde, listi).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ Na 100 % oblik je cijeli; niže je spljošten (pero, plosnati kist). ¦ Pri 100 % je oblika cela; nižje je sploščena (pero, ploščat čopič).
+l’angle suit le trait ¦ kut prati potez ¦ kot sledi potezi
+Dynamique et dispersion ¦ Dinamika i raspršenost ¦ Dinamika in razpršenost
+Variation de taille ¦ Varijacija veličine ¦ Spreminjanje velikosti
+Variation d’angle ¦ Varijacija kuta ¦ Spreminjanje kota
+Dispersion ¦ Raspršenost ¦ Razpršenost
+Nombre par empreinte ¦ Broj po otisku ¦ Število na odtis
+Transfert et couleur ¦ Prijenos i boja ¦ Prenos in barva
+Flux (chaque empreinte) ¦ Protok (svaki otisak) ¦ Pretok (vsak odtis)
+Variation d’opacité ¦ Varijacija neprozirnosti ¦ Spreminjanje prekrivnosti
+Variation de couleur ¦ Varijacija boje ¦ Spreminjanje barve
+Fais d’abord une sélection autour du dessin ¦ Najprije napravi odabir oko crteža ¦ Najprej naredi izbor okoli risbe
+Fais d’abord une sélection autour du dessin. ¦ Najprije napravi odabir oko crteža. ¦ Najprej naredi izbor okoli risbe.
+＋ Forme d’après la sélection ¦ ＋ Oblik prema odabiru ¦ ＋ Oblika iz izbora
+Garder comme préréglage ¦ Zadrži kao predložak ¦ Ohrani kot prednastavitev
+＋ Garder comme préréglage ¦ ＋ Zadrži kao predložak ¦ ＋ Ohrani kot prednastavitev
+Garder cette forme de pinceau ¦ Zadrži ovaj vrh kista ¦ Ohrani to konico čopiča
+Nom du préréglage : ¦ Naziv predloška: ¦ Ime prednastavitve:
+Plus de place pour garder ce pinceau. ¦ Nema više mjesta za ovaj kist. ¦ Ni več prostora za ta čopič.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Tvoj je oblik spreman: slikaj njime; „Zadrži kao predložak” da ga ponovno pronađeš. ¦ 🖌 Tvoja oblika je pripravljena: slikaj z njo; »Ohrani kot prednastavitev«, da jo znova najdeš.
+Rond net ¦ Oštar okrugli ¦ Oster okrogel
+Rond doux ¦ Meki okrugli ¦ Mehek okrogel
+Surligneur ¦ Marker ¦ Označevalnik
+Crayon fin ¦ Tanka olovka ¦ Tanek svinčnik
+Craie (grain) ¦ Kreda (zrnato) ¦ Kreda (zrnato)
+Craie ¦ Kreda ¦ Kreda
+Fusain ¦ Ugljen ¦ Oglje
+Dégradé inversé ¦ Prijelaz obrnut ¦ Preliv obrnjen
+Dégradé : tramage ¦ Prijelaz: raster ¦ Preliv: rastriranje
+Dégradé : sans tramage ¦ Prijelaz: bez rastera ¦ Preliv: brez rastriranja
+▦ Dégradé ¦ ▦ Prijelaz ¦ ▦ Preliv
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Klik: dodaj točku boje na ovo mjesto ¦ Klik: dodaj barvno točko na to mesto
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Klik na traku: još jedna točka · povuci točku da je pomakneš, prema dolje da je ukloniš ¦ Klik na trak: še ena točka · povleci točko, da jo premakneš, navzdol, da jo odstraniš
+Mélange ¦ Miješanje ¦ Mešanje
+Classique (RVB) ¦ Klasično (RGB) ¦ Klasično (RGB)
+Perceptuel (plus doux) ¦ Perceptivno (mekše) ¦ Zaznavno (mehkeje)
+Par les teintes ¦ Kroz nijanse ¦ Skozi odtenke
+Au-delà des bouts ¦ Izvan krajeva ¦ Onkraj koncev
+Couleur des bouts ¦ Boja krajeva ¦ Barva koncev
+Répéter ¦ Ponavljaj ¦ Ponavljaj
+Répéter en miroir ¦ Ponavljaj zrcalno ¦ Ponavljaj zrcalno
+Le début devient la fin ¦ Početak postaje kraj ¦ Začetek postane konec
+⇄ Retourner les arrêts ¦ ⇄ Obrni točke ¦ ⇄ Obrni točke
+Espacer également ¦ Ravnomjerno razmakni ¦ Enakomerno razporedi
+Couleur de l’arrêt ¦ Boja točke ¦ Barva točke
+Arrêt choisi ¦ Odabrana točka ¦ Izbrana točka
+Milieu vers le suivant ¦ Sredina prema sljedećoj ¦ Sredina proti naslednji
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Gdje je polovično miješanje između ove točke i sljedeće (mali romb u Photoshopu). ¦ Kje je polovično mešanje med to točko in naslednjo (mali romb v Photoshopu).
+✕ Enlever cet arrêt ¦ ✕ Ukloni ovu točku ¦ ✕ Odstrani to točko
+Supprimer ce préréglage ¦ Izbriši ovaj predložak ¦ Izbriši to prednastavitev
+Garder ce dégradé ¦ Zadrži ovaj prijelaz ¦ Ohrani ta preliv
+Mon dégradé ¦ Moj prijelaz ¦ Moj preliv
+Premier plan → transparent ¦ Prednji plan → prozirno ¦ Ospredje → prosojno
+Noir → blanc ¦ Crno → bijelo ¦ Črno → belo
+Blanc → transparent ¦ Bijelo → prozirno ¦ Belo → prosojno
+Vignette (bords sombres) ¦ Vinjeta (tamni rubovi) ¦ Vinjeta (temni robovi)
+Arc-en-ciel ¦ Duga ¦ Mavrica
+Cuivre ¦ Bakar ¦ Baker
+Chrome ¦ Krom ¦ Krom
+Or ¦ Zlato ¦ Zlato
+Vieux papier ¦ Stari papir ¦ Star papir
+Nuit ¦ Noć ¦ Noč
+Printemps ¦ Proljeće ¦ Pomlad
+Mer ¦ More ¦ Morje
+Coucher de soleil ¦ Zalazak sunca ¦ Sončni zahod
+▭ Linéaire ¦ ▭ Linearni ¦ ▭ Linearni
+◉ Radial ¦ ◉ Radijalni ¦ ◉ Radialni
+◔ Angle (conique) ¦ ◔ Kutni (konusni) ¦ ◔ Kotni (stožčasti)
+⇋ Réfléchi ¦ ⇋ Zrcalni ¦ ⇋ Zrcalni
+◇ Losange ¦ ◇ Romb ¦ ◇ Romb
+Damier ¦ Šahovnica ¦ Šahovnica
+Pois ¦ Točkice ¦ Pikice
+Rayures ¦ Pruge ¦ Črte
+Hachures ¦ Šrafura ¦ Šrafura
+Briques ¦ Cigle ¦ Opeke
+Chevrons ¦ Ševroni ¦ Ševroni
+Losanges ¦ Rombovi ¦ Rombi
+Vagues ¦ Valovi ¦ Valovi
+Toile ¦ Platno ¦ Platno
+Croix ¦ Križići ¦ Križci
+Fleurs de lys ¦ Ljiljani ¦ Lilije
+Clique maintenant à l’endroit à recopier. ¦ Sada klikni na mjesto za kopiranje. ¦ Zdaj klikni na mesto za kopiranje.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Ovaj je sloj zaključan: otključaj ga u Slojevima. ¦ Ta plast je zaklenjena: odkleni jo v Plasteh.
+Texte effacé ¦ Tekst obrisan ¦ Besedilo izbrisano
+Sélection vide ¦ Prazan odabir ¦ Prazen izbor
+Sélection ajoutée ¦ Odabir dodan ¦ Izbor dodan
+Sélection retirée ¦ Odabir oduzet ¦ Izbor odvzet
+Image remplacée : même place, même taille, même rotation. ¦ Slika zamijenjena: isto mjesto, ista veličina, ista rotacija. ¦ Slika zamenjana: isto mesto, enaka velikost, enak zasuk.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Slika postavljena: ➤ povuci je, povuci kut za veličinu (⇧: slobodno), okruglu ručku za zakretanje. ¦ Slika postavljena: ➤ povleci jo, povleci vogal za velikost (⇧: prosto), okrogel ročaj za sukanje.
+Ce fichier n’est pas une image. ¦ Ova datoteka nije slika. ¦ Ta datoteka ni slika.
+Remplacer l’image de l’objet dynamique ¦ Zamijeni sliku pametnog objekta ¦ Zamenjaj sliko pametnega objekta
+Remplacer par cette image ¦ Zamijeni ovom slikom ¦ Zamenjaj s to sliko
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Nova slika preuzima mjesto, veličinu i rotaciju stare. ¦ Nova slika prevzame mesto, velikost in zasuk stare.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Dolazi na novi sloj, kao pametni objekt 🧩 (povećaj, smanji, zakreni bez gubitka). Možeš i povući datoteku na fotografiju ili zalijepiti kopiranu sliku (⌘V). ¦ Pride na novo plast kot pametni objekt 🧩 (povečaj, pomanjšaj, zasukaj brez izgube). Lahko tudi povlečeš datoteko na fotografijo ali prilepiš kopirano sliko (⌘V).
+Sélection automatique ¦ Automatski odabir ¦ Samodejni izbor
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Ovaj je sloj zaključan: odaberi drugi u Slojevima. ¦ Ta plast je zaklenjena: izberi drugo v Plasteh.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Mjesto za kopiranje odabrano: sada slikaj po području koje treba prekriti. ¦ Mesto za kopiranje izbrano: zdaj slikaj po območju, ki ga želiš prekriti.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Najprije odaberi mjesto za kopiranje (gumb 🎯 ili ⌥ + klik). ¦ Najprej izberi mesto za kopiranje (gumb 🎯 ali ⌥ + klik).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Fotografija više nije u slojevima: „↺ Vrati fotografiju” (kartica Slojevi). ¦ Fotografije ni več med plastmi: »↺ Vrni fotografijo« (zavihek Plasti).
+La photo est verrouillée (🔒 dans Calques). ¦ Fotografija je zaključana (🔒 u Slojevima). ¦ Fotografija je zaklenjena (🔒 v Plasteh).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Pečat: područje kopirano (sloj ✨ Retuš) ¦ Žig: območje skopirano (plast ✨ Retuše)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Najprije napravi odabir (alati ⬚ ◯ ➰ ✒︎ 🪄). ¦ Najprej naredi izbor (orodja ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Još nije korišten nijedan filtar (izbornik Filtar). ¦ Še noben filter ni bil uporabljen (meni Filter).
+Opacité du calque (dosage) ¦ Neprozirnost sloja (doziranje) ¦ Prekrivnost plasti (odmerek)
+Valeurs de départ ¦ Početne vrijednosti ¦ Začetne vrednosti
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Ništa se ne uništava: filtar je na vlastitom sloju. Kasnije: Slojevi → sloj → kartica ✨ Filtri → „podesi…”. ¦ Nič se ne uniči: filter je na svoji plasti. Pozneje: Plasti → plast → zavihek ✨ Filtri → »nastavi…«.
+Filtre enlevé du calque ¦ Filtar uklonjen sa sloja ¦ Filter odstranjen s plasti
+Ordre des filtres ¦ Redoslijed filtara ¦ Vrstni red filtrov
+Filtres enlevés ¦ Filtri uklonjeni ¦ Filtri odstranjeni
+Plus de place pour les actions : supprimes-en une. ¦ Nema više mjesta za radnje: izbriši jednu. ¦ Ni več prostora za dejanja: izbriši eno.
+⚡ Actions ¦ ⚡ Radnje ¦ ⚡ Dejanja
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Naziv radnje (npr. „Fotografije iz albuma 1930.”) ¦ Ime dejanja (npr. »Fotografije iz albuma 1930«)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Radnja čuva prilagodbe fotografije (ekspozicija, razine, krivulja, nijansa, filtri, prašina, bojenje…) i njezine slojeve prilagodbe bez maske. Primijeniš je na drugu fotografiju ili na više odjednom: svaka dobiva <b>novu verziju</b>, izvornik se čuva. ¦ Dejanje ohrani prilagoditve fotografije (osvetlitev, ravni, krivulja, odtenek, filtri, prah, barvanje…) in njene prilagoditvene plasti brez maske. Uporabiš ga na drugi fotografiji ali na več hkrati: vsaka dobi <b>novo različico</b>, izvirnik se ohrani.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Spremi ovu radnju u datoteku, da je zadržiš ili nekome daš ¦ Shrani to dejanje v datoteko, da ga obdržiš ali komu daš
+Sur cette photo ¦ Na ovoj fotografiji ¦ Na tej fotografiji
+Sur plusieurs photos… ¦ Na više fotografija… ¦ Na več fotografijah…
+Aucune action enregistrée pour l’instant ¦ Još nema spremljenih radnji ¦ Še ni shranjenih dejanj
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ „＋ Spremi trenutne prilagodbe” čuva ih za ponovnu primjenu na drugim fotografijama. ¦ »＋ Shrani trenutne prilagoditve« jih ohrani za ponovno uporabo na drugih fotografijah.
+Les photos à retoucher ¦ Fotografije za retuš ¦ Fotografije za retuširanje
+Prendre ces photos ¦ Uzmi ove fotografije ¦ Vzemi te fotografije
+＋ Choisir des photos… ¦ ＋ Odaberi fotografije… ¦ ＋ Izberi fotografije…
+afficher la nouvelle version ¦ prikaži novu verziju ¦ prikaži novo različico
+Aucune photo choisie. ¦ Nije odabrana nijedna fotografija. ¦ Izbrana ni nobena fotografija.
+refusé ¦ odbijeno ¦ zavrnjeno
+fx Effets du calque ¦ fx Efekti sloja ¦ fx Učinki plasti
+Fond (le contenu seulement, pas les effets) ¦ Ispuna (samo sadržaj, ne efekti) ¦ Polnilo (samo vsebina, ne učinki)
+Lueur externe ¦ Vanjski sjaj ¦ Zunanji sij
+Incrustation de couleur ¦ Preklapanje boje ¦ Prekrivanje z barvo
+à l’extérieur ¦ izvana ¦ zunaj
+au milieu ¦ u sredini ¦ na sredini
+à l’intérieur ¦ iznutra ¦ znotraj
+Tout enlever ¦ Ukloni sve ¦ Odstrani vse
+🔍 Plis et rayures ¦ 🔍 Pregibi i ogrebotine ¦ 🔍 Pregibi in praske
+Recherche des plis… ¦ Traženje pregiba… ¦ Iskanje pregibov…
+garder le grain autour ¦ zadrži okolnu zrnatost ¦ ohrani okoliško zrnatost
+🪡 Plutôt à la main ¦ 🪡 Radije ručno ¦ 🪡 Raje ročno
+✓ Réparer ces lignes ¦ ✓ Popravi ove linije ¦ ✓ Popravi te črte
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Nije pronađen nijedan pregib: povećaj osjetljivost ili popravi ručno kistom 🪡. ¦ Ni najdenega pregiba: povečaj občutljivost ali popravi ročno s čopičem 🪡.
+Réparation… ¦ Popravljanje… ¦ Popravljanje…
+✨ Plis et rayures comblés ¦ ✨ Pregibi i ogrebotine popunjeni ¦ ✨ Pregibi in praske zapolnjeni
+🌫️ Débruitage ¦ 🌫️ Uklanjanje šuma ¦ 🌫️ Odstranjevanje šuma
+adoucit le grain sans perdre les contours ¦ ublažava zrnatost bez gubitka rubova ¦ omili zrnatost brez izgube robov
+🧹 Poussières et rayures ¦ 🧹 Prašina i ogrebotine ¦ 🧹 Prah in praske
+les petits points blancs ou noirs ¦ sitne bijele ili crne točkice ¦ drobne bele ali črne pike
+🩹 Plis et fines déchirures ¦ 🩹 Pregibi i sitne poderotine ¦ 🩹 Pregibi in drobne raztrganine
+lignes fines repérées puis comblées ¦ tanke linije pronađene pa popunjene ¦ tanke črte najdene in zapolnjene
+🎚 Contraste et niveaux automatiques ¦ 🎚 Automatski kontrast i razine ¦ 🎚 Samodejni kontrast in ravni
+noirs bien noirs, blancs bien blancs ¦ crne posve crne, bijele posve bijele ¦ črne povsem črne, bele povsem bele
+🔎 Netteté douce ¦ 🔎 Blago izoštravanje ¦ 🔎 Nežna izostritev
+un peu plus de piqué ¦ malo više oštrine ¦ malo več ostrine
+🌈 Colorisation ¦ 🌈 Bojenje ¦ 🌈 Barvanje
+couleurs d’époque (photo en noir et blanc) ¦ boje iz tog doba (crno-bijela fotografija) ¦ barve iz tistega časa (črno-bela fotografija)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ fotografija već ima boje: označi ako ipak želiš ¦ fotografija že ima barve: označi, če vseeno želiš
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Označi korake koje želiš zadržati; svaki postaje sloj „✨” koji kasnije možeš sakriti ili dozirati. ↶ poništava sve odjednom. ¦ Označi korake, ki jih želiš ohraniti; vsak postane plast »✨«, ki jo lahko pozneje skriješ ali odmeriš. ↶ razveljavi vse naenkrat.
+Garder : {what} ¦ Zadrži: {what} ¦ Ohrani: {what}
+détail au centre ¦ detalj u sredini ¦ podrobnost na sredini
+Aperçus… ¦ Pregledi… ¦ Predogledi…
+aucun pli trouvé à cette intensité ¦ nijedan pregib nije pronađen pri ovoj jačini ¦ pri tej moči ni najdenega pregiba
+Coche au moins une étape. ¦ Označi barem jedan korak. ¦ Označi vsaj en korak.
+✨ Plis et fines déchirures ¦ ✨ Pregibi i sitne poderotine ¦ ✨ Pregibi in drobne raztrganine
+✨ Poussières et rayures ¦ ✨ Prašina i ogrebotine ¦ ✨ Prah in praske
+✨ Débruitage ¦ ✨ Uklanjanje šuma ¦ ✨ Odstranjevanje šuma
+✨ Contraste et niveaux ¦ ✨ Kontrast i razine ¦ ✨ Kontrast in ravni
+✨ Netteté douce ¦ ✨ Blago izoštravanje ¦ ✨ Nežna izostritev
+✨ Colorisation ¦ ✨ Bojenje ¦ ✨ Barvanje
+Colorisation ¦ Bojenje ¦ Barvanje
+Couleurs (pinceau) ¦ Boje (kist) ¦ Barve (čopič)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Retuš (mrlje, pregibi, pečat) ¦ ✨ Retuše (madeži, pregibi, žig)
+🪪 Photo d’identité ¦ 🪪 Fotografija za osobnu iskaznicu ¦ 🪪 Fotografija za osebni dokument
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Oči vodoravno, uvijek na istoj visini: svi portreti napravljeni tako imaju isti format. ¦ Oči vodoravno, vedno na isti višini: vsi tako narejeni portreti imajo enak format.
+✓ Yeux trouvés sur le visage. ¦ ✓ Oči pronađene na licu. ¦ ✓ Oči najdene na obrazu.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Prema identifikaciji na fotografiji: namjesti krugove na oči. ¦ ✓ Glede na prepoznavo na fotografiji: namesti kroga na oči.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Lice nije pronađeno: povuci dva kruga na oči. ¦ ⚠️ Obraza ni bilo mogoče najti: povleci kroga na oči.
+Plusieurs fiches… ¦ Više zapisa… ¦ Več zapisov…
+✓ Recadrer ¦ ✓ Obreži ¦ ✓ Obreži
+👤 Utiliser comme portrait… ¦ 👤 Koristi kao portret… ¦ 👤 Uporabi kot portret…
+Recadré en photo d’identité ¦ Obrezano kao fotografija za osobnu iskaznicu ¦ Obrezano kot fotografija za osebni dokument
+3:4 (portrait classique) ¦ 3:4 (klasični portret) ¦ 3:4 (klasičen portret)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (fotografija za osobnu iskaznicu) ¦ 35 × 45 mm (fotografija za osebni dokument)
+Marge autour du visage ¦ Margina oko lica ¦ Rob okoli obraza
+Hauteur des yeux ¦ Visina očiju ¦ Višina oči
+modèle absent ¦ model nedostaje ¦ model manjka
+Recherche du visage… ¦ Traženje lica… ¦ Iskanje obraza…
+Photo non enregistrée. ¦ Fotografija nije spremljena. ¦ Fotografija ni shranjena.
+Utiliser comme portrait de quelle fiche ? ¦ Koristiti kao portret kojeg zapisa? ¦ Uporabim kot portret katerega zapisa?
+PHOTO D’IDENTITÉ ¦ FOTOGRAFIJA ZA OSOBNU ISKAZNICU ¦ FOTOGRAFIJA ZA OSEBNI DOKUMENT
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Obrezana fotografija dodaje se medijima zapisa, zatim postaje njegov portret (stari portret ostaje u medijima). ¦ Obrezana fotografija se doda med medije zapisa, nato postane njegov portret (stari portret ostane med mediji).
+Choisis une personne dans la liste. ¦ Odaberi osobu s popisa. ¦ Izberi osebo s seznama.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ RETUŠ · FOTOGRAFIJA ZA OSOBNU ISKAZNICU ¦ RETUŠIRANJE · FOTOGRAFIJA ZA OSEBNI DOKUMENT
+🪪 Portraits de plusieurs fiches ¦ 🪪 Portreti više zapisa ¦ 🪪 Portreti več zapisov
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Odaberi zapise: za svaki aplikacija uzima njegov portret (ili prvu fotografiju), pronalazi lice i izrezuje ga u istom formatu kao ostale (oči na istoj visini). Provjeriš, zatim „Koristi kao portrete”: svaka obrezana fotografija ulazi u medije svog zapisa i postaje njegov portret (stari ostaje). ¦ Izberi zapise: za vsakega aplikacija vzame njegov portret (ali prvo fotografijo), najde obraz in ga obreže v enakem formatu kot druge (oči na isti višini). Preveriš, nato »Uporabi kot portrete«: vsaka obrezana fotografija gre med medije svojega zapisa in postane njegov portret (stari ostane).
+🔍 Préparer les portraits ¦ 🔍 Pripremi portrete ¦ 🔍 Pripravi portrete
+Aucune fiche choisie pour l’instant ¦ Još nije odabran nijedan zapis ¦ Izbran še ni noben zapis
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Odaberi jednu ili više osoba iznad, zatim „🔍 Pripremi portrete”. ¦ Izberi eno ali več oseb zgoraj, nato »🔍 Pripravi portrete«.
+Choisis d’abord une ou plusieurs fiches. ¦ Najprije odaberi jedan ili više zapisa. ¦ Najprej izberi enega ali več zapisov.
+aucune photo dans la fiche ¦ nema fotografije u zapisu ¦ v zapisu ni fotografije
+yeux trouvés ¦ oči pronađene ¦ oči najdene
+d’après l’identification ¦ prema identifikaciji ¦ glede na prepoznavo
+✓ portrait mis à jour ¦ ✓ portret ažuriran ¦ ✓ portret posodobljen
+Utiliser comme portraits ¦ Koristi kao portrete ¦ Uporabi kot portrete
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Rotacija još nije spremna: pokušaj ponovno za trenutak. ¦ Sukanje še ni pripravljeno: poskusi znova čez trenutek.
+Rotation de l’image ¦ Rotacija slike ¦ Sukanje slike
+Rotation de l’image : 90° horaire ¦ Rotacija slike: 90° u smjeru kazaljke ¦ Sukanje slike: 90° v smeri urinega kazalca
+Rotation de l’image : 90° antihoraire ¦ Rotacija slike: 90° suprotno od kazaljke ¦ Sukanje slike: 90° v nasprotni smeri urinega kazalca
+Rotation de l’image : 180° ¦ Rotacija slike: 180° ¦ Sukanje slike: 180°
+Rotation de l’image : {a}° horaire ¦ Rotacija slike: {a}° u smjeru kazaljke ¦ Sukanje slike: {a}° v smeri urinega kazalca
+Rotation de l’image : {a}° antihoraire ¦ Rotacija slike: {a}° suprotno od kazaljke ¦ Sukanje slike: {a}° v nasprotni smeri urinega kazalca
+Symétrie horizontale de l’image ¦ Vodoravno zrcaljenje slike ¦ Vodoravno zrcaljenje slike
+Symétrie verticale de l’image ¦ Okomito zrcaljenje slike ¦ Navpično zrcaljenje slike
+Perspective figée ¦ Perspektiva fiksirana ¦ Perspektiva zaklenjena
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Prethodno obrezivanje je uklonjeno (više nije bilo ravno): ponovi ga po potrebi ili ↶ Poništi. ¦ Prejšnje obrezovanje je bilo odstranjeno (ni bilo več ravno): ponovi ga po potrebi ali ↶ Razveljavi.
+📐 Redresser l’horizon ¦ 📐 Ispravi horizont ¦ 📐 Poravnaj obzorje
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Kut izmjeren na tvojoj liniji: fotografija se zakreće za taj kut da bi se ispravila. ¦ Kot, izmerjen na tvoji črti: fotografija se zasuka za ta kot, da se poravna.
+Coins ajoutés autour ¦ Kutovi dodani okolo ¦ Vogali dodani okoli
+Transparents (PNG) ¦ Prozirni (PNG) ¦ Prosojni (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Obreži da ukloniš prazne kutove ¦ ✂️ Obreži, da odstraniš prazne vogale
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Svi slojevi, maske, tekstovi i odabir zakreću se s fotografijom. ↶ Poništi (⌘Z) vraća kako je bilo. ¦ Vse plasti, maske, besedila in izbor se zasukajo s fotografijo. ↶ Razveljavi (⌘Z) vrne, kot je bilo.
+Donne un angle entre 0,01 et 359,99°. ¦ Upiši kut između 0,01 i 359,99°. ¦ Vpiši kot med 0,01 in 359,99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Nacrtaj liniju duž horizonta (ili ravnog zida): fotografija će se zakrenuti da je ispravi. Esc za prekid. ¦ Nariši črto vzdolž obzorja (ali ravnega zidu): fotografija se bo zasukala, da jo poravna. Esc za prekinitev.
+Cette ligne est déjà droite : rien à tourner. ¦ Ova je linija već ravna: nema se što zakrenuti. ¦ Ta črta je že ravna: ni česa sukati.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Fotografija snimljena okrenutim telefonom: spremljena je položena. ¦ Fotografija, posneta z obrnjenim telefonom: shranjena je ležeče.
+↻ Remettre droite ¦ ↻ Uspravi ¦ ↻ Postavi pokonci
+Photo remise droite (orientation du téléphone) ¦ Fotografija uspravljena (orijentacija telefona) ¦ Fotografija postavljena pokonci (usmerjenost telefona)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Trenutni retuš bit će izgubljen (💾 Spremi projekt čuva ga za kasnije). ¦ Trenutno retuširanje bo izgubljeno (💾 Shrani projekt ga ohrani za pozneje).
+Passer à la retouche simple ? ¦ Prijeći na jednostavni retuš? ¦ Preklopim na preprosto retuširanje?
+Passer sans enregistrer ¦ Prijeđi bez spremanja ¦ Preklopi brez shranjevanja
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD još nije spreman: pokušaj ponovno za trenutak. ¦ PSD še ni pripravljen: poskusi znova čez trenutek.
+L’assemblage de photos n’est pas encore prêt. ¦ Spajanje fotografija još nije spremno. ¦ Združevanje fotografij še ni pripravljeno.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Ovaj alat još nije spreman: pokušaj ponovno za trenutak. ¦ To orodje še ni pripravljeno: poskusi znova čez trenutek.
+Recherche du sujet… ¦ Traženje motiva… ¦ Iskanje motiva…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Motiv nije pronađen: pozadina dodiruje cijeli rub. Pokušaj s manjom tolerancijom (🪄) ili lasom. ¦ Motiva ni bilo mogoče najti: ozadje se dotika celega roba. Poskusi z manjšo toleranco (🪄) ali z lasom.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Motiv odabran: ⇧ + štapić ili laso za dodavanje, ⌥ za oduzimanje; „Maska” za primjenu. Tolerancija (🪄): dokle seže pozadina. ¦ Motiv izbran: ⇧ + paličica ali laso za dodajanje, ⌥ za odvzemanje; »Maska« za uporabo. Toleranca (🪄): kako daleč seže ozadje.
+Sujet sélectionné ¦ Motiv odabran ¦ Motiv izbran
+La photo semble déjà droite. ¦ Fotografija se već čini ravnom. ¦ Fotografija je videti že ravna.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Neki su ispravci (mrlje, pečat) već napravljeni: pomaknut će se s izravnavanjem. ¦ Nekateri popravki (madeži, žig) so že narejeni: premaknili se bodo z izravnavo.
+Redresser la perspective ? ¦ Ispraviti perspektivu? ¦ Popravim perspektivo?
+Perspective redressée ¦ Perspektiva ispravljena ¦ Perspektiva popravljena
+Perspective enlevée ¦ Perspektiva uklonjena ¦ Perspektiva odstranjena
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Slikaj boje (meki kist): sloj je u načinu stapanja „Boja”, svjetlo fotografije se čuva. 🧽 za ispravak, neprozirnost sloja za doziranje. ¦ Slikaj barve (mehek čopič): plast je v načinu mešanja »Barva«, svetloba fotografije se ohrani. 🧽 za popravek, prekrivnost plasti za odmerjanje.
+Recherche des taches… ¦ Traženje mrlja… ¦ Iskanje madežev…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Nije pronađena nijedna mrlja: povećaj osjetljivost ili veličinu. ¦ Ni najdenega madeža: povečaj občutljivost ali velikost.
+✨ Jaunissement enlevé ¦ ✨ Žutilo uklonjeno ¦ ✨ Rumenilo odstranjeno
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Žutilo uklonjeno na sloju prilagodbe „✨ Žutilo uklonjeno”: fotografija ostaje netaknuta. ¦ Rumenilo odstranjeno na prilagoditveni plasti »✨ Rumenilo odstranjeno«: fotografija ostane nedotaknjena.
+Jaunissement enlevé (calque de réglage) ¦ Žutilo uklonjeno (sloj prilagodbe) ¦ Rumenilo odstranjeno (prilagoditvena plast)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Najprije zaokruži lice elipsom ◯ (povuci po fotografiji), zatim ponovno klikni „Oštrije lice”. ¦ Najprej obkroži obraz z elipso ◯ (povleci po fotografiji), nato znova klikni »Ostrejši obraz«.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Lice očišćeno od šuma i izoštreno na zasebnom sloju: njegova neprozirnost dozira učinak. ¦ Obraz očiščen šuma in izostren na ločeni plasti: njena prekrivnost odmerja učinek.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Korektor spreman: povuci duž ogrebotine ili pregiba (zumiraj za preciznost). ¦ Korektor pripravljen: povleci vzdolž praske ali pregiba (povečaj za natančnost).
+✨ Vieille photo ravivée ¦ ✨ Oživljena stara fotografija ¦ ✨ Poživljena stara fotografija
+✨ Réglage automatique ¦ ✨ Automatska prilagodba ¦ ✨ Samodejna prilagoditev
+Fais d’abord une sélection. ¦ Najprije napravi odabir. ¦ Najprej naredi izbor.
+Masque qui cache tout ¦ Maska koja skriva sve ¦ Maska, ki skrije vse
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Ovaj sloj nema masku (Sloj → Dodaj masku). ¦ Ta plast nima maske (Plast → Dodaj masko).
+Ce calque n’a pas de masque. ¦ Ovaj sloj nema masku. ¦ Ta plast nima maske.
+Sélection inversée ¦ Odabir obrnut ¦ Izbor obrnjen
+Agrandir la sélection ¦ Proširi odabir ¦ Razširi izbor
+Réduire la sélection ¦ Suzi odabir ¦ Skrči izbor
+De combien de points (de l’aperçu) ? ¦ Za koliko točaka (pregleda)? ¦ Za koliko točk (predogleda)?
+Sélection agrandie ¦ Odabir proširen ¦ Izbor razširjen
+Sélection réduite ¦ Odabir sužen ¦ Izbor skrčen
+Contour progressif de la sélection ¦ Mekani rub odabira ¦ Mehki rob izbora
+Copie de la sélection ¦ Kopija odabira ¦ Kopija izbora
+Sélection copiée sur un calque ¦ Odabir kopiran na sloj ¦ Izbor kopiran na plast
+Remplissage ¦ Ispuna ¦ Polnilo
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Područje obrisano s fotografije: bit će prozirno (slika spremljena kao PNG). ¦ Območje izbrisano s fotografije: bo prosojno (slika shranjena kot PNG).
+Sélection effacée ¦ Odabir obrisan ¦ Izbor izbrisan
+Recadré sur la sélection ¦ Obrezano prema odabiru ¦ Obrezano na izbor
+Filtres de ce calque ¦ Filtri ovog sloja ¦ Filtri te plasti
+Plus tôt ¦ Ranije ¦ Prej
+un filtre… ¦ filtar… ¦ filter…
+＋ Ajouter ¦ ＋ Dodaj ¦ ＋ Dodaj
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Izbornik <b>Filtar</b>: svaki se filtar stavlja na vlastiti sloj (ništa se ne uništava): podešavaš ga, doziraš neprozirnošću sloja, ograničavaš maskom 🎭, skrivaš 👁. ¦ ✨ Meni <b>Filter</b>: vsak filter gre na svojo plast (nič se ne uniči): nastaviš ga, odmeriš s prekrivnostjo plasti, omejiš z masko 🎭, skriješ 👁.
+Réglages remis à zéro ¦ Prilagodbe vraćene na početno ¦ Prilagoditve ponastavljene na začetno
+Point de courbe enlevé ¦ Točka krivulje uklonjena ¦ Točka krivulje odstranjena
+Supprimer ce point ¦ Izbriši ovu točku ¦ Izbriši to točko
+Point de la courbe ¦ Točka krivulje ¦ Točka krivulje
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Maska crveno: ono što je skriveno (tipka \ za povratak) ¦ Maska z rdečo: kar je skrito (tipka \ za vrnitev)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Još nije spremljeno kao projekt: 💾 Spremi čuva sav rad za nastavak kasnije ¦ Še ni shranjeno kot projekt: 💾 Shrani ohrani vse delo za nadaljevanje pozneje
+Enregistrer le projet sous un autre nom ¦ Spremi projekt pod drugim imenom ¦ Shrani projekt pod drugim imenom
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Naziv novog projekta (da ga pronađeš u „📂 Projekti…”): ¦ Ime novega projekta (da ga najdeš v »📂 Projekti…«):
+Les retouches en cours seront perdues. ¦ Trenutni retuš bit će izgubljen. ¦ Trenutno retuširanje bo izgubljeno.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Otvoriti drugi projekt bez spremanja ovog rada? ¦ Odprem drug projekt brez shranjevanja tega dela?
+Ouvrir sans enregistrer ¦ Otvori bez spremanja ¦ Odpri brez shranjevanja
+affichée ¦ prikazano ¦ prikazano
+en cours de retouche ¦ u retušu ¦ v retuširanju
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Pregledaj, usporedi, vrati, preimenuj, izbriši (L3) ¦ Oglej si, primerjaj, vrni, preimenuj, izbriši (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Pregledaj, usporedi, vrati, preimenuj, izbriši ¦ Oglej si, primerjaj, vrni, preimenuj, izbriši
+l’original est toujours gardé ¦ izvornik se uvijek čuva ¦ izvirnik se vedno ohrani
+Original ¦ Izvornik ¦ Izvirnik
+Quitter cette retouche sans l’enregistrer ? ¦ Napustiti ovaj retuš bez spremanja? ¦ Zapustim to retuširanje brez shranjevanja?
+Pas de versions pour cette image. ¦ Nema verzija za ovu sliku. ¦ Za to sliko ni različic.
+Bicubique, plus lisse (pour agrandir) ¦ Bikubično, glađe (za povećanje) ¦ Bikubično, bolj gladko (za povečavo)
+Bicubique, plus net (pour réduire) ¦ Bikubično, oštrije (za smanjenje) ¦ Bikubično, ostreje (za pomanjšanje)
+Bilinéaire ¦ Bilinearno ¦ Bilinearno
+Au plus proche (contours nets, pixels) ¦ Najbliži susjed (oštri rubovi, pikseli) ¦ Najbližji sosed (ostri robovi, piksli)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Veličina spremljene ili izvezene slike (Slika → Veličina slike, Veličina radne površine) ¦ Velikost shranjene ali izvožene slike (Slika → Velikost slike, Velikost delovne površine)
+📏 Taille de l’image ¦ 📏 Veličina slike ¦ 📏 Velikost slike
+pixels ¦ pikseli ¦ piksli
+pour cent ¦ posto ¦ odstotki
+Ajuster à un format ¦ Prilagodi formatu ¦ Prilagodi formatu
+— garder ces mesures — ¦ — zadrži ove mjere — ¦ — ohrani te mere —
+🔗 Conserver les proportions ¦ 🔗 Zadrži omjere ¦ 🔗 Ohrani razmerja
+Résolution ¦ Razlučivost ¦ Ločljivost
+Rééchantillonner ¦ Ponovno uzorkuj ¦ Prevzorči
+Méthode ¦ Metoda ¦ Metoda
+À l’impression ¦ Pri ispisu ¦ Pri tisku
+↺ Remettre la taille d’origine ¦ ↺ Vrati izvornu veličinu ¦ ↺ Ponastavi na izvirno velikost
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Fotografija ostaje u punoj kvaliteti tijekom retuša: odabrana veličina primjenjuje se kad spremiš ili izvezeš sliku. ↶ Poništi (⌘Z) vraća prethodnu veličinu. ¦ Fotografija med retuširanjem ostane v polni kakovosti: izbrana velikost se uporabi, ko sliko shraniš ali izvoziš. ↶ Razveljavi (⌘Z) vrne prejšnjo velikost.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Dovoljno velika za ispis u A5 pri 300 ppi. ¦ ✓ Dovolj velika za tisk v A5 pri 300 ppi.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Premala za ispis u A5 pri 300 ppi (potrebno je 1748 × 2480 px). ¦ ⚠️ Premajhna za tisk v A5 pri 300 ppi (potrebno je 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Odaberi veličinu između 1 i 30 000 piksela po stranici (najviše 260 milijuna piksela). ¦ Izberi velikost med 1 in 30 000 piksli na stranico (največ 260 milijonov pikslov).
+⬚ Taille de la zone de travail ¦ ⬚ Veličina radne površine ¦ ⬚ Velikost delovne površine
+Nouvelle taille ¦ Nova veličina ¦ Nova velikost
+Ancrage ¦ Sidro ¦ Sidro
+Où reste l’image ¦ Gdje slika ostaje ¦ Kje ostane slika
+Relative (ajouter à la taille actuelle) ¦ Relativno (dodaj trenutnoj veličini) ¦ Relativno (dodaj trenutni velikosti)
+Au centre ¦ U sredini ¦ Na sredini
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Slika ostaje na tom mjestu; platno se oko nje povećava (ili obrezuje). ¦ Slika ostane na tem mestu; platno se okoli nje poveča (ali obreže).
+Fond de la zone ajoutée ¦ Pozadina dodanog područja ¦ Ozadje dodanega območja
+Transparent (PNG) ¦ Prozirno (PNG) ¦ Prosojno (PNG)
+↺ Remettre la zone de départ ¦ ↺ Vrati početnu radnu površinu ¦ ↺ Ponastavi na začetno delovno površino
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Poništi (⌘Z) vraća prethodnu radnu površinu. ¦ ↶ Razveljavi (⌘Z) vrne prejšnjo delovno površino.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Odaberi veličinu između 1 i 30 000 piksela po stranici. ¦ Izberi velikost med 1 in 30 000 piksli na stranico.
+Informations de l’image ¦ Informacije o slici ¦ Informacije o sliki
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Ove se informacije upisuju u spremljenu ili izvezenu sliku (XMP, čitljivo u Photoshopu, Lightroomu, Exploreru…). ¦ Te informacije se zapišejo v shranjeno ali izvoženo sliko (XMP, berljivo v Photoshopu, Lightroomu, Raziskovalcu…).
+Droits (copyright) ¦ Prava (copyright) ¦ Pravice (avtorske pravice)
+Personnes reliées ¦ Povezane osobe ¦ Povezane osebe
+Image trop grande pour être enregistrée par le navigateur. ¦ Slika je prevelika da bi je preglednik spremio. ¦ Slika je prevelika, da bi jo brskalnik shranil.
+Image trop grande pour le navigateur. ¦ Slika je prevelika za preglednik. ¦ Slika je prevelika za brskalnik.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Retuširana kopija dodana istim zapisima. ¦ Retuširana kopija dodana istim zapisom.
+Image enregistrée dans les Médias. ¦ Slika spremljena u Medije. ¦ Slika shranjena med Medije.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Nova verzija prikazana. Izvornik se čuva u verzijama. ¦ Nova različica prikazana. Izvirnik se ohrani med različicami.
+Version enregistrée (non affichée). ¦ Verzija spremljena (nije prikazana). ¦ Različica shranjena (ni prikazana).
+Ouverture de la photo ¦ Otvaranje fotografije ¦ Odpiranje fotografije
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Početna fotografija više nije iste veličine: provjeri slojeve. ¦ Začetna fotografija ni več enake velikosti: preveri plasti.
+Supprimer le projet (les photos et leurs versions restent) ¦ Izbriši projekt (fotografije i njihove verzije ostaju) ¦ Izbriši projekt (fotografije in njihove različice ostanejo)
+Aucun projet de retouche pour l’instant ¦ Još nema projekata retuša ¦ Še ni projektov retuširanja
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ U Retušu, „💾 Spremi projekt”. ¦ V Retuširanju »💾 Shrani projekt«.
+Renommer le projet ¦ Preimenuj projekt ¦ Preimenuj projekt
+La photo et ses versions restent. ¦ Fotografija i njezine verzije ostaju. ¦ Fotografija in njene različice ostanejo.
+Écran 16:9 — 1920 × 1080 ¦ Zaslon 16:9 — 1920 × 1080 ¦ Zaslon 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Kvadrat — 1080 × 1080 ¦ Kvadrat — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Razglednica — 1500 × 2100 ¦ Razglednica — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 uspravno (150 dpi) — 1240 × 1754 ¦ A4 pokončno (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 položeno (150 dpi) — 1754 × 1240 ¦ A4 ležeče (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 uspravno (300 dpi) — 2480 × 3508 ¦ A4 pokončno (300 dpi) — 2480 × 3508
+Autre taille… ¦ Druga veličina… ¦ Druga velikost…
+⬜ Partir d’un canevas vide ¦ ⬜ Kreni od praznog platna ¦ ⬜ Začni s praznim platnom
+⬜ Canevas vide ¦ ⬜ Prazno platno ¦ ⬜ Prazno platno
+Créer et ouvrir ¦ Stvori i otvori ¦ Ustvari in odpri
+Une couleur… ¦ Boja… ¦ Barva…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Platno se dodaje u Medije; zatim na njega stavljaš slojeve, grupe, tekst, oblike, fotografije (Odabir → sloj)… ¦ Platno se doda med Medije; nanj nato postaviš plasti, skupine, besedilo, oblike, fotografije (Izbor → plast)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Veličina između 16 i 8 000 piksela po stranici. ¦ Velikost med 16 in 8 000 piksli na stranico.
+Canevas trop grand pour le navigateur. ¦ Platno je preveliko za preglednik. ¦ Platno je preveliko za brskalnik.
+Création impossible. ¦ Stvaranje nije moguće. ¦ Ustvarjanje ni mogoče.
+Canevas ¦ Platno ¦ Platno
+Restaurer cette photo ¦ Restauriraj ovu fotografiju ¦ Obnovi to fotografijo
+Retoucher cette photo ¦ Retuširaj ovu fotografiju ¦ Retuširaj to fotografijo
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Uvezena fotografija dodaje se u Medije (bez povezivanja sa zapisom); njezini se retuši čuvaju kao verzije. ¦ Uvožena fotografija se doda med Medije (brez povezave z zapisom); njena retuširanja se ohranijo kot različice.
+Rouvrir un travail de retouche enregistré ¦ Ponovno otvori spremljeni rad retuša ¦ Znova odpri shranjeno retuširanje
+📂 Projets… ¦ 📂 Projekti… ¦ 📂 Projekti…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Prazna slika, za crtanje, pisanje ili spajanje slojeva ¦ Prazna slika za risanje, pisanje ali združevanje plasti
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Preveliko: {w} × {h} točaka. Povećanje je ograničeno na {max} točaka po stranici (i {mp} milijuna točaka). ¦ Preveliko: {w} × {h} točk. Povečava je omejena na {max} točk na stranico (in {mp} milijonov točk).
+Ta sélection est prise comme ciel ¦ Tvoj odabir uzima se kao nebo ¦ Tvoj izbor se uporabi kot nebo
+Ciel trouvé : {cov} de la photo ¦ Nebo pronađeno: {cov} fotografije ¦ Nebo najdeno: {cov} fotografije
+calques « Ciel » et « Harmonisation » ¦ slojevi „Nebo” i „Usklađivanje” ¦ plasti »Nebo« in »Uskladitev«
+Ciel remplacé ({what}) ¦ Nebo zamijenjeno ({what}) ¦ Nebo zamenjano ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Osoba izdvojena (u tvom pravokutniku): odaberi pozadinu; „Doradi obris” za ispravak kistom. ¦ Oseba izrezana (v tvojem pravokotniku): izberi ozadje; »Popravi obris« za popravek s čopičem.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Osoba izdvojena: odaberi pozadinu; „Doradi obris” za ispravak kistom. ¦ Oseba izrezana: izberi ozadje; »Popravi obris« za popravek s čopičem.
+{w} × {h} points aujourd’hui ¦ {w} × {h} točaka sada ¦ {w} × {h} točk zdaj
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Ova je slika već velika: povećanje je ograničeno na {max} točaka po stranici. ¦ Ta slika je že velika: povečava je omejena na {max} točk na stranico.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 bi dalo više od {max} točaka po stranici: samo ×2. ¦ ×4 bi dalo več kot {max} točk na stranico: samo ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Povećana slika preuzeta ({w} × {h}). ¦ Povečana slika prenesena ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Slika povećana ×{k} ({w} × {h}) spremljena u medije. ¦ Slika, povečana ×{k} ({w} × {h}), shranjena med medije.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Nova verzija povećana ×{k} ({w} × {h}) prikazana; izvornik ostaje u verzijama. ¦ Nova različica, povečana ×{k} ({w} × {h}), prikazana; izvirnik ostane med različicami.
+☀️ Bleu dégagé ¦ ☀️ Vedro plavo ¦ ☀️ Jasno modro
+⛅ Beaux nuages ¦ ⛅ Lijepi oblaci ¦ ⛅ Lepi oblaki
+🌅 Coucher de soleil ¦ 🌅 Zalazak sunca ¦ 🌅 Sončni zahod
+⛈️ Ciel orageux ¦ ⛈️ Olujno nebo ¦ ⛈️ Nevihtno nebo
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Bijelo zimsko nebo ¦ 🌫️ Belo zimsko nebo
+Agrandissement arrêté. ¦ Povećanje zaustavljeno. ¦ Povečava ustavljena.
+Fil de calcul en panne. ¦ Nit izračuna je pala. ¦ Nit izračuna je odpovedala.
+Recherche du ciel… ¦ Traženje neba… ¦ Iskanje neba…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Ne nalazim nebo: mora dodirivati vrh fotografije i biti prilično jednolično. Odaberi ga sam (🪄 štapić, ➰ laso), zatim pokušaj ponovno: tvoj će se odabir uzeti kao nebo. ¦ Neba ne najdem: dotikati se mora vrha fotografije in biti dokaj enakomerno. Izberi ga sam (🪄 paličica, ➰ laso), nato začni znova: tvoj izbor bo uporabljen kot nebo.
+Harmonisation du premier plan ¦ Usklađivanje prednjeg plana ¦ Uskladitev ospredja
+Ciel ¦ Nebo ¦ Nebo
+☁️ Remplacer le ciel ¦ ☁️ Zamijeni nebo ¦ ☁️ Zamenjaj nebo
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Fotografija neba: iz baze ili s računala ¦ Fotografija neba: iz baze ali z računalnika
+Une image… ¦ Slika… ¦ Slika…
+Taille du nouveau ciel ¦ Veličina novog neba ¦ Velikost novega neba
+Position verticale ¦ Okomiti položaj ¦ Navpični položaj
+Position horizontale ¦ Vodoravni položaj ¦ Vodoravni položaj
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Uz veličinu iznad 100 %: koji se dio neba vidi (0 = vrh). ¦ Pri velikosti nad 100 %: kateri del neba se vidi (0 = vrh).
+Fondu à l’horizon ¦ Stapanje na horizontu ¦ Zlivanje na obzorju
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Ublažava granicu između neba i zemlje (drveće, krovovi): više = jače stopljeno. ¦ Omili mejo med nebom in zemljo (drevesa, strehe): višje = bolj zlito.
+Harmoniser le premier plan ¦ Uskladi prednji plan ¦ Uskladi ospredje
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Krajolik malo preuzima boju i svjetlo novog neba, da sve pristaje zajedno. ¦ Pokrajina malo prevzame barvo in svetlobo novega neba, da se vse ujema.
+Opacité du ciel ¦ Neprozirnost neba ¦ Prekrivnost neba
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Slikaj masku sloja „Nebo”: ⬛ sakrij (gdje nebo ne smije prolaziti), ⬜ otkrij ¦ Slikaj masko plasti »Nebo«: ⬛ skrij (kjer se nebo ne sme videti), ⬜ razkrij
+🖌 Corriger le masque ¦ 🖌 Ispravi masku ¦ 🖌 Popravi masko
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Ništa se ne uništava: nebo je sloj s maskom. Ako dio neba nedostaje ili prelazi: „Ispravi masku” ili sam odaberi nebo (🪄, ➰) i pokreni ponovno. ¦ Nič se ne uniči: nebo je plast z masko. Če del neba manjka ali sega čez: »Popravi masko« ali sam izberi nebo (🪄, ➰) in zaženi znova.
+Une photo de ciel ¦ Fotografija neba ¦ Fotografija neba
+Prendre ce ciel ¦ Uzmi ovo nebo ¦ Uporabi to nebo
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Fotografija iz baze ili slika s računala (ulazi u medije). ¦ Fotografija iz baze ali slika z računalnika (gre med medije).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Slikaš masku neba: ⬛ sakrij gdje nebo prelazi (lišće, krovovi), ⬜ otkrij gdje nedostaje. Zatim „✓ U redu”. ¦ Slikaš masko neba: ⬛ skrij, kjer nebo sega čez (listje, strehe), ⬜ razkrij, kjer manjka. Nato »✓ V redu«.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Nebo zamijenjeno: slojevi „Nebo” i „Usklađivanje prednjeg plana” (neprozirnost, maska, 👁 za usporedbu). ¦ Nebo zamenjano: plasti »Nebo« in »Uskladitev ospredja« (prekrivnost, maska, 👁 za primerjavo).
+✂️ Détourer une personne ¦ ✂️ Izdvoji osobu ¦ ✂️ Izreži osebo
+Sans intelligence artificielle : tout se calcule ici ¦ Bez umjetne inteligencije: sve se izračunava ovdje ¦ Brez umetne inteligence: vse se izračuna tukaj
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Nacrtaj pravokutnik oko osobe (⬚), ne preusko — ili ostavi sve: cijela fotografija služi kao okvir. ¦ 1. Nariši pravokotnik okoli osebe (⬚), ne preozko — ali pusti vse: celotna fotografija služi kot okvir.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. „Izdvoji”: aplikacija uči boje osobe (u pravokutniku) i pozadine (okolo), zatim prati obrise. ¦ 2. »Izreži«: aplikacija se nauči barv osebe (v pravokotniku) in ozadja (okoli), nato sledi obrisom.
+⬚ Tracer un rectangle ¦ ⬚ Nacrtaj pravokutnik ¦ ⬚ Nariši pravokotnik
+✂️ Détourer ¦ ✂️ Izdvoji ¦ ✂️ Izreži
+Fond transparent (image en PNG) ¦ Prozirna pozadina (slika u PNG-u) ¦ Prosojno ozadje (slika PNG)
+Fond flou ¦ Zamućena pozadina ¦ Zamegljeno ozadje
+Fond uni ¦ Jednolična pozadina ¦ Enobarvno ozadje
+Garder la personne sur un calque à part ¦ Zadrži osobu na zasebnom sloju ¦ Ohrani osebo na ločeni plasti
+Flou du fond ¦ Zamućenje pozadine ¦ Zameglitev ozadja
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Slikaj masku: ⬛ sakrij, ⬜ otkrij ¦ Slikaj masko: ⬛ skrij, ⬜ razkrij
+🖌 Retoucher le contour ¦ 🖌 Doradi obris ¦ 🖌 Popravi obris
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Dobro radi kad se osoba ističe od pozadine (različite boje, prilično jednostavna pozadina). Tanka kosa, pretrpana pozadina ili odjeća boje pozadine: trebat ćeš doraditi kistom („Doradi obris”). ¦ Deluje dobro, ko oseba izstopa iz ozadja (različne barve, dokaj preprosto ozadje). Tanki lasje, natrpano ozadje ali oblačila v barvi ozadja: popraviti boš moral/morala s čopičem (»Popravi obris«).
+Personne détourée ¦ Osoba izdvojena ¦ Oseba izrezana
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Nacrtaj pravokutnik oko osobe (ostavljajući malo pozadine svuda okolo), zatim „✂️ Izdvoji”. ¦ Nariši pravokotnik okoli osebe (pusti malo ozadja povsod okoli), nato »✂️ Izreži«.
+Détourage… ¦ Izdvajanje… ¦ Izrezovanje…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Osoba nije pronađena: nacrtaj pravokutnik bliže njoj, zatim pokušaj ponovno. ¦ Osebe ni bilo mogoče najti: nariši pravokotnik bližje njej, nato začni znova.
+✂️ Détourer à nouveau ¦ ✂️ Ponovno izdvoji ¦ ✂️ Znova izreži

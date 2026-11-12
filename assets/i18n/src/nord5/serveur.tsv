@@ -1,0 +1,416 @@
+fr ¦ hr ¦ sl
+Référence ou personne manquante. ¦ Nedostaje referenca ili osoba. ¦ Manjka sklic ali oseba.
+Cet événement n’est pas lié à cette personne. ¦ Ovaj događaj nije povezan s ovom osobom. ¦ Ta dogodek ni povezan s to osebo.
+Choisis au moins deux médias pour créer un document groupé. ¦ Odaberi barem dva medija da stvoriš grupirani dokument. ¦ Izberi vsaj dva medija, da ustvariš združeni dokument.
+Un des médias choisis n’est pas lié à cet élément. ¦ Jedan od odabranih medija nije povezan s ovom stavkom. ¦ Eden od izbranih medijev ni povezan s tem elementom.
+Document groupé manquant. ¦ Nedostaje grupirani dokument. ¦ Manjka združeni dokument.
+Document groupé introuvable. ¦ Grupirani dokument nije pronađen. ¦ Združenega dokumenta ni mogoče najti.
+Ordre des médias manquant. ¦ Nedostaje redoslijed medija. ¦ Manjka vrstni red medijev.
+Nom de branche obligatoire. ¦ Naziv grane je obavezan. ¦ Ime veje je obvezno.
+Nom de vue obligatoire ¦ Naziv pogleda je obavezan ¦ Ime pogleda je obvezno
+Le terme est requis ¦ Pojam je obavezan ¦ Izraz je obvezen
+Sépulture introuvable ¦ Grob nije pronađen ¦ Groba ni mogoče najti
+Cette personne est déjà rattachée à une sépulture ¦ Ova je osoba već povezana s grobom ¦ Ta oseba je že povezana z grobom
+Sépulture manquante ¦ Nedostaje grob ¦ Manjka grob
+Cette personne est déjà rattachée à une autre sépulture ¦ Ova je osoba već povezana s drugim grobom ¦ Ta oseba je že povezana z drugim grobom
+Cette personne est déjà associée à cette sépulture ¦ Ova je osoba već povezana s ovim grobom ¦ Ta oseba je že povezana s tem grobom
+Référence manquante ¦ Nedostaje referenca ¦ Manjka sklic
+Cette personne n’est pas rattachée à cette sépulture ¦ Ova osoba nije povezana s ovim grobom ¦ Ta oseba ni povezana s tem grobom
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Posljednju osobu nije moguće ukloniti: izbriši grob ako je potrebno ¦ Zadnje osebe ni mogoče odstraniti: po potrebi izbriši grob
+Ce média n’est pas accessible depuis cette fiche ¦ Ovaj medij nije dostupan iz ovog zapisa ¦ Ta medij ni dosegljiv iz tega zapisa
+Ce rattachement existe déjà ¦ Ova veza već postoji ¦ Ta povezava že obstaja
+Données manquantes ¦ Nedostaju podaci ¦ Manjkajo podatki
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Posljednju vezu nije moguće ukloniti — izbriši medij ako ga želiš potpuno ukloniti ¦ Zadnje povezave ni mogoče odstraniti — izbriši medij, če ga želiš povsem odstraniti
+Méthode refusée ¦ Metoda odbijena ¦ Metoda zavrnjena
+Personne, annotation de battue ou dépouillement manquant ¦ Nedostaje osoba, bilješka sustavne pretrage ili indeks zapisa ¦ Manjka oseba, opomba sistematičnega iskanja ali indeks vpisov
+Aucun fichier reçu ¦ Nije primljena nijedna datoteka ¦ Prejeta ni bila nobena datoteka
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ Razglednica s prednjom i stražnjom stranom mora sadržavati točno dvije slike: prednju pa stražnju. ¦ Razglednica s sprednjo in zadnjo stranjo mora vsebovati natanko dve sliki: sprednjo in nato zadnjo.
+Dossier d’enquête introuvable. ¦ Mapa istrage nije pronađena. ¦ Mape preiskave ni mogoče najti.
+Annotation de battue introuvable. ¦ Bilješka sustavne pretrage nije pronađena. ¦ Opombe sistematičnega iskanja ni mogoče najti.
+Choisis le type de l’événement à créer. ¦ Odaberi vrstu događaja koji želiš stvoriti. ¦ Izberi vrsto dogodka, ki ga želiš ustvariti.
+Ce recensement n’est pas rattaché à cette personne. ¦ Ovaj popis stanovništva nije povezan s ovom osobom. ¦ Ta popis prebivalstva ni povezan s to osebo.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Nije primljena nijedna datoteka: odaberi je ponovno. ¦ Prejeta ni bila nobena datoteka: izberi jo znova.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ Razglednica s prednjom i stražnjom stranom smije sadržavati samo dvije slike. ¦ Razglednica s sprednjo in zadnjo stranjo sme vsebovati samo dve sliki.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Čini se da je ova datoteka već uvezena („{file}” {date}, redaka: {n}). Potvrdi ako je ipak želiš uvesti. ¦ Zdi se, da je bila ta datoteka že uvožena (»{file}« {date}, vrstic: {n}). Potrdi, če jo želiš vseeno uvoziti.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Zapis je zaključan ({name}). Otključaj ga prije nego što izmijeniš ovaj par. ¦ Zapis je zaklenjen ({name}). Odkleni ga, preden spremeniš ta par.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Spajanje nije moguće: {a} i {b} čine par. Dva supružnika nisu ista osoba. ¦ Združitev ni mogoča: {a} in {b} sta par. Zakonca nista ista oseba.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Spajanje nije moguće: {a} je predak osobe {b}. Predak i njegov potomak nisu ista osoba. ¦ Združitev ni mogoča: {a} je prednik osebe {b}. Prednik in njegov potomec nista ista oseba.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Ova je čestica već na tvom popisu (zapis br. {n}): otvori nju umjesto da stvaraš drugu. ¦ Ta parcela je že na tvojem seznamu (zapis št. {n}): raje odpri njo, kot da ustvariš drugo.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ Već imaš ovoliko karata s fotografijama: {n}. Izbriši jednu da bi stvorio/stvorila novu. ¦ Zemljevidov s fotografijami imaš že: {n}. Izbriši enega, da ustvariš novega.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ Čuva se najviše ovoliko započetih slagalica: {n}. Završi ili izbriši jednu da bi započeo/započela novu. ¦ Shrani se največ toliko začetih sestavljank: {n}. Dokončaj ali izbriši eno, da začneš novo.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ Čuva se najviše ovoliko grafikona i widgeta: {n}. Izbriši jedan da bi stvorio/stvorila novi. ¦ Shrani se največ toliko grafov in gradnikov: {n}. Izbriši enega, da ustvariš novega.
+Le champ « {label} » est obligatoire. ¦ Polje „{label}” je obavezno. ¦ Polje »{label}« je obvezno.
+Le champ « {label} » est à remplir. ¦ Polje „{label}” treba ispuniti. ¦ Polje »{label}« je treba izpolniti.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ „{name}” je ženka: ne može biti otac. ¦ »{name}« je samica: ne more biti oče.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ „{name}” je mužjak: ne može biti majka. ¦ »{name}« je samec: ne more biti mati.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Mapa nije pronađena: {dir} (USB stick ili disk iskopčan?). Sigurnosna kopija napravit će se čim se vrati. ¦ Mape ni mogoče najti: {dir} (je ključek ali disk izklopljen?). Varnostna kopija se bo naredila, takoj ko bo spet na voljo.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Mapa nije pronađena: {dir} (USB stick iskopčan?). ¦ Mape ni mogoče najti: {dir} (je ključek izklopljen?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Zajednička mapa nije pronađena: {dir} (USB stick iskopčan?). Ništa nije izgubljeno: tvoje promjene poslat će se sljedeći put. ¦ Skupne mape ni mogoče najti: {dir} (je ključek izklopljen?). Nič ni izgubljeno: tvoje spremembe bodo poslane naslednjič.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Ovo je rodoslovlje već otvoreno na računalu „{name}”. Najprije ga ondje zatvori: dva računala koja pišu u istu datoteku mogu je oštetiti. ¦ To rodoslovje je že odprto na računalniku »{name}«. Najprej ga zapri tam: dva računalnika, ki pišeta v isto datoteko, jo lahko poškodujeta.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Ova se vrsta datoteke ne sprema u medije (.{ext}). ¦ Te vrste datoteke ni mogoče shraniti med medije (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Ova se vrsta datoteke ne sprema u medije (bez nastavka). ¦ Te vrste datoteke ni mogoče shraniti med medije (brez končnice).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Sadržaj datoteke ne odgovara njezinu nastavku (.{ext}). ¦ Vsebina datoteke se ne ujema z njeno končnico (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Nema dovoljno mjesta na disku za otvaranje ove sigurnosne kopije (potrebno je oko {n} MB slobodno). ¦ Na disku ni dovolj prostora za odpiranje te varnostne kopije (potrebnih je približno {n} MB prostora).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Nema dovoljno prostora na disku za pripremu potpune sigurnosne kopije (potrebno je oko {n} MB slobodno). ¦ Na disku ni dovolj prostora za pripravo celotne varnostne kopije (potrebnih je približno {n} MB prostora).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ Ova mapa već ima redaka: {n}. Otvori drugu. ¦ Ta mapa ima že vrstic: {n}. Odpri drugo.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Odaberi zapis osobe za lice {n} (ili „Kasnije”). ¦ Izberi zapis osebe za obraz {n} (ali »Pozneje«).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Odaberi osobu na koju se odnosi svjedočanstvo „{q}”. ¦ Izberi osebo, na katero se nanaša pričevanje »{q}«.
+La page {n} existe déjà. ¦ Stranica {n} već postoji. ¦ Stran {n} že obstaja.
+Cette date est avant sa naissance ({date}) ¦ Ovaj je datum prije njezina/njegova rođenja ({date}) ¦ Ta datum je pred rojstvom osebe ({date})
+Cette date est après son décès ({date}) ¦ Ovaj je datum nakon njezine/njegove smrti ({date}) ¦ Ta datum je po smrti osebe ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ Točan datum rođenja osobe {name} nije poznat. ¦ Točen datum rojstva osebe {name} ni znan.
+Commune inconnue. ¦ Nepoznata općina. ¦ Neznana občina.
+Adresse inconnue. ¦ Nepoznata adresa. ¦ Neznan naslov.
+Position impossible. ¦ Nemoguć položaj. ¦ Nemogoč položaj.
+Service d’archives introuvable. ¦ Arhivska služba nije pronađena. ¦ Arhivske službe ni mogoče najti.
+Adresse e-mail invalide. ¦ Neispravna e-mail adresa. ¦ Neveljaven e-poštni naslov.
+Cette fiche n’existe plus. ¦ Ovaj zapis više ne postoji. ¦ Ta zapis ne obstaja več.
+Fiche introuvable. ¦ Zapis nije pronađen. ¦ Zapisa ni mogoče najti.
+Fiche introuvable ¦ Zapis nije pronađen ¦ Zapisa ni mogoče najti
+Profil inconnu. ¦ Nepoznat profil. ¦ Neznan profil.
+Sorte inconnue. ¦ Nepoznata vrsta. ¦ Neznana vrsta.
+Sorte introuvable. ¦ Vrsta nije pronađena. ¦ Vrste ni mogoče najti.
+Demande Discogs inconnue. ¦ Nepoznat Discogs zahtjev. ¦ Neznana zahteva Discogs.
+Demande MusicBrainz inconnue. ¦ Nepoznat MusicBrainz zahtjev. ¦ Neznana zahteva MusicBrainz.
+Demande Open Library inconnue. ¦ Nepoznat Open Library zahtjev. ¦ Neznana zahteva Open Library.
+Demande Wikidata inconnue. ¦ Nepoznat Wikidata zahtjev. ¦ Neznana zahteva Wikidata.
+Demande TMDb inconnue. ¦ Nepoznat TMDb zahtjev. ¦ Neznana zahteva TMDb.
+Demande iTunes inconnue. ¦ Nepoznat iTunes zahtjev. ¦ Neznana zahteva iTunes.
+Source d’import inconnue. ¦ Nepoznat izvor uvoza. ¦ Neznan vir uvoza.
+Impossible d’enregistrer l’image. ¦ Sliku nije moguće spremiti. ¦ Slike ni mogoče shraniti.
+Image illisible. ¦ Slika je nečitljiva. ¦ Slika ni berljiva.
+Image trop lourde (15 Mo au plus). ¦ Slika je prevelika (najviše 15 MB). ¦ Slika je prevelika (največ 15 MB).
+Projet introuvable. ¦ Projekt nije pronađen. ¦ Projekta ni mogoče najti.
+Dossier introuvable. ¦ Mapa nije pronađena. ¦ Mape ni mogoče najti.
+Dossier introuvable ¦ Mapa nije pronađena ¦ Mape ni mogoče najti
+Fichier trop gros. ¦ Datoteka je prevelika. ¦ Datoteka je prevelika.
+Fichier Zotero RDF illisible. ¦ Datoteka Zotero RDF je nečitljiva. ¦ Datoteka Zotero RDF ni berljiva.
+Fichier JSON illisible. ¦ Datoteka JSON je nečitljiva. ¦ Datoteka JSON ni berljiva.
+Fichier EndNote XML illisible. ¦ Datoteka EndNote XML je nečitljiva. ¦ Datoteka EndNote XML ni berljiva.
+Son introuvable. ¦ Zvuk nije pronađen. ¦ Zvoka ni mogoče najti.
+Zones illisibles. ¦ Zone su nečitljive. ¦ Območja niso berljiva.
+Transcription illisible. ¦ Transkripcija je nečitljiva. ¦ Prepis ni berljiv.
+Transcription trop longue (5 000 lignes au plus). ¦ Transkripcija je preduga (najviše 5 000 redaka). ¦ Prepis je predolg (največ 5 000 vrstic).
+Cette base ne contient aucune personne. ¦ Ova baza ne sadrži nijednu osobu. ¦ Ta baza ne vsebuje nobene osebe.
+Impossible d’ouvrir l’archive. ¦ Arhivu nije moguće otvoriti. ¦ Arhiva ni mogoče odpreti.
+Aucune base (.db) dans cette archive. ¦ U ovoj arhivi nema baze (.db). ¦ V tem arhivu ni baze (.db).
+Fichier introuvable ou illisible. ¦ Datoteka nije pronađena ili je nečitljiva. ¦ Datoteke ni mogoče najti ali ni berljiva.
+Fiche trop volumineuse. ¦ Zapis je prevelik. ¦ Zapis je prevelik.
+Tableau introuvable. ¦ Ploča nije pronađena. ¦ Table ni mogoče najti.
+Tableau trop lourd : retire quelques dessins. ¦ Ploča je preteška: ukloni nekoliko crteža. ¦ Tabla je pretežka: odstrani nekaj risb.
+Tableau parent introuvable. ¦ Nadređena ploča nije pronađena. ¦ Nadrejene table ni mogoče najti.
+Parcelle introuvable. ¦ Čestica nije pronađena. ¦ Parcele ni mogoče najti.
+Lieu introuvable. ¦ Mjesto nije pronađeno. ¦ Kraja ni mogoče najti.
+Couche illisible. ¦ Sloj je nečitljiv. ¦ Plast ni berljiva.
+Couche trop lourde (8 Mo au plus). ¦ Sloj je pretežak (najviše 8 MB). ¦ Plast je pretežka (največ 8 MB).
+Couche introuvable. ¦ Sloj nije pronađen. ¦ Plasti ni mogoče najti.
+Carte illisible. ¦ Karta je nečitljiva. ¦ Zemljevid ni berljiv.
+Fichier d’essai introuvable. ¦ Probna datoteka nije pronađena. ¦ Preizkusne datoteke ni mogoče najti.
+Copie impossible. ¦ Kopiranje nije moguće. ¦ Kopiranje ni mogoče.
+Fichier illisible. ¦ Datoteka je nečitljiva. ¦ Datoteka ni berljiva.
+Citation introuvable. ¦ Citat nije pronađen. ¦ Navedka ni mogoče najti.
+Citation introuvable ¦ Citat nije pronađen ¦ Navedka ni mogoče najti
+Objet introuvable ¦ Predmet nije pronađen ¦ Predmeta ni mogoče najti
+Objet introuvable. ¦ Predmet nije pronađen. ¦ Predmeta ni mogoče najti.
+Souvenir introuvable ¦ Uspomena nije pronađena ¦ Spomina ni mogoče najti
+Type inconnu ¦ Nepoznat tip ¦ Neznan tip
+Adresse invalide ¦ Neispravna adresa ¦ Neveljaven naslov
+Salon introuvable ¦ Soba nije pronađena ¦ Sobe ni mogoče najti
+Alerte inconnue. ¦ Nepoznato upozorenje. ¦ Neznano opozorilo.
+Texte illisible. ¦ Tekst je nečitljiv. ¦ Besedilo ni berljivo.
+Date d’envoi incorrecte. ¦ Neispravan datum slanja. ¦ Napačen datum pošiljanja.
+Courrier introuvable. ¦ Pismo nije pronađeno. ¦ Pisma ni mogoče najti.
+Cousinade introuvable. ¦ Obiteljsko okupljanje nije pronađeno. ¦ Družinskega srečanja ni mogoče najti.
+Champ inconnu. ¦ Nepoznato polje. ¦ Neznano polje.
+Champ inconnu ¦ Nepoznato polje ¦ Neznano polje
+Valeur hors limites. ¦ Vrijednost je izvan granica. ¦ Vrednost je zunaj meja.
+Liste inconnue. ¦ Nepoznat popis. ¦ Neznan seznam.
+Widget inconnu. ¦ Nepoznat widget. ¦ Neznan gradnik.
+Ensemble inconnu. ¦ Nepoznat skup. ¦ Neznana množica.
+Choisis au moins 2 ensembles. ¦ Odaberi barem 2 skupa. ¦ Izberi vsaj 2 množici.
+Choisis au moins deux personnes. ¦ Odaberi barem dvije osobe. ¦ Izberi vsaj dve osebi.
+Choisis deux personnes. ¦ Odaberi dvije osobe. ¦ Izberi dve osebi.
+Diagramme introuvable. ¦ Dijagram nije pronađen. ¦ Diagrama ni mogoče najti.
+Foyer inconnu. ¦ Nepoznato kućanstvo. ¦ Neznano gospodinjstvo.
+Test introuvable. ¦ Test nije pronađen. ¦ Testa ni mogoče najti.
+Correspondance introuvable. ¦ Podudaranje nije pronađeno. ¦ Ujemanja ni mogoče najti.
+Groupe introuvable. ¦ Grupa nije pronađena. ¦ Skupine ni mogoče najti.
+Format d’export inconnu. ¦ Nepoznat format izvoza. ¦ Neznana oblika izvoza.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Izvoz nije moguć: na ovom računalu nedostaje PHP proširenje ZipArchive. ¦ Izvoz ni mogoč: na tem računalniku manjka razširitev PHP ZipArchive.
+Fichier temporaire impossible. ¦ Privremenu datoteku nije moguće stvoriti. ¦ Začasne datoteke ni mogoče ustvariti.
+Employeur sans nom. ¦ Poslodavac bez imena. ¦ Delodajalec brez imena.
+Photo introuvable. ¦ Fotografija nije pronađena. ¦ Fotografije ni mogoče najti.
+Visage introuvable. ¦ Lice nije pronađeno. ¦ Obraza ni mogoče najti.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ ePub nije moguć: nedostaje PHP proširenje ZipArchive. ¦ ePub ni mogoč: manjka razširitev PHP ZipArchive.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Dokument nije moguć: nedostaje PHP proširenje ZipArchive. ¦ Dokument ni mogoč: manjka razširitev PHP ZipArchive.
+Livret introuvable. ¦ Knjižica nije pronađena. ¦ Knjižice ni mogoče najti.
+Graphique inconnu (identifiant invalide). ¦ Nepoznat grafikon (neispravan identifikator). ¦ Neznan graf (neveljaven identifikator).
+Graphique illisible. ¦ Grafikon je nečitljiv. ¦ Graf ni berljiv.
+Graphique illisible (champ inconnu). ¦ Grafikon je nečitljiv (nepoznato polje). ¦ Graf ni berljiv (neznano polje).
+Graphique illisible (parties). ¦ Grafikon je nečitljiv (dijelovi). ¦ Graf ni berljiv (deli).
+Graphique introuvable. ¦ Grafikon nije pronađen. ¦ Grafa ni mogoče najti.
+Lien impossible ¦ Veza nije moguća ¦ Povezava ni mogoča
+Voyage introuvable ¦ Putovanje nije pronađeno ¦ Potovanja ni mogoče najti
+Placement introuvable ¦ Smještaj nije pronađen ¦ Namestitve ni mogoče najti
+Armoiries introuvables ¦ Grb nije pronađen ¦ Grba ni mogoče najti
+Circuit introuvable ¦ Obilazak nije pronađen ¦ Krožne poti ni mogoče najti
+Ligne introuvable ¦ Redak nije pronađen ¦ Vrstice ni mogoče najti
+Ligne introuvable. ¦ Redak nije pronađen. ¦ Vrstice ni mogoče najti.
+Circuit manquant ¦ Nedostaje obilazak ¦ Manjka krožna pot
+Aucun fichier CSV dans ce ZIP. ¦ U ovom ZIP-u nema CSV datoteke. ¦ V tem ZIP-u ni datoteke CSV.
+Aucune ligne utilisable dans ce fichier. ¦ U ovoj datoteci nema nijednog upotrebljivog retka. ¦ V tej datoteki ni nobene uporabne vrstice.
+Acte ou document manquant ¦ Nedostaje matični zapis ili dokument ¦ Manjka matični vpis ali dokument
+Chiffrement impossible. ¦ Šifriranje nije moguće. ¦ Šifriranje ni mogoče.
+Copie introuvable ¦ Kopija nije pronađena ¦ Kopije ni mogoče najti
+Copie introuvable. ¦ Kopija nije pronađena. ¦ Kopije ni mogoče najti.
+Harmonisation introuvable. ¦ Usklađivanje nije pronađeno. ¦ Poenotenja ni mogoče najti.
+Bloc introuvable ¦ Blok nije pronađen ¦ Bloka ni mogoče najti
+Nom manquant. ¦ Nedostaje ime. ¦ Manjka ime.
+Enregistrement impossible. ¦ Spremanje nije moguće. ¦ Shranjevanje ni mogoče.
+Source inconnue. ¦ Nepoznat izvor. ¦ Neznan vir.
+Pack inconnu. ¦ Nepoznat paket. ¦ Neznan paket.
+Pack trop gros (150 Mo au plus). ¦ Paket je prevelik (najviše 150 MB). ¦ Paket je prevelik (največ 150 MB).
+GLB illisible. ¦ GLB je nečitljiv. ¦ GLB ni berljiv.
+OBJ illisible. ¦ OBJ je nečitljiv. ¦ OBJ ni berljiv.
+Maison introuvable. ¦ Kuća nije pronađena. ¦ Hiše ni mogoče najti.
+Recensement introuvable. ¦ Popis stanovništva nije pronađen. ¦ Popisa prebivalstva ni mogoče najti.
+Recensement introuvable ¦ Popis stanovništva nije pronađen ¦ Popisa prebivalstva ni mogoče najti
+Fichier 3D trop gros (30 Mo au plus). ¦ 3D datoteka je prevelika (najviše 30 MB). ¦ Datoteka 3D je prevelika (največ 30 MB).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Instalacijski program nije pronađen (scripts/htr_install.php). ¦ Namestitvenega programa ni mogoče najti (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Nepoznat zahtjev za instalaciju. ¦ Neznana zahteva za namestitev.
+Lecture inconnue. ¦ Nepoznato čitanje. ¦ Neznano branje.
+Lecture inconnue (ou trop ancienne). ¦ Nepoznato čitanje (ili prestaro). ¦ Neznano branje (ali prestaro).
+Preuve introuvable. ¦ Dokaz nije pronađen. ¦ Dokaza ni mogoče najti.
+Preuve introuvable ¦ Dokaz nije pronađen ¦ Dokaza ni mogoče najti
+Empreinte d’image incorrecte. ¦ Neispravan otisak slike. ¦ Napačen odtis slike.
+Empreinte d’image incorrecte (couleurs). ¦ Neispravan otisak slike (boje). ¦ Napačen odtis slike (barve).
+Empreinte d’image incorrecte (points). ¦ Neispravan otisak slike (točke). ¦ Napačen odtis slike (točke).
+Fusion impossible ici. ¦ Spajanje ovdje nije moguće. ¦ Združitev tukaj ni mogoča.
+Fusion inconnue. ¦ Nepoznato spajanje. ¦ Neznana združitev.
+Fusion introuvable. ¦ Spajanje nije pronađeno. ¦ Združitve ni mogoče najti.
+Fusion impossible ¦ Spajanje nije moguće ¦ Združitev ni mogoča
+Annulation impossible ici. ¦ Poništavanje ovdje nije moguće. ¦ Razveljavitev tukaj ni mogoča.
+Fichier RootsMagic introuvable. ¦ Datoteka RootsMagic nije pronađena. ¦ Datoteke RootsMagic ni mogoče najti.
+Aucune personne dans ce fichier GEDCOM-X. ¦ U ovoj datoteci GEDCOM-X nema nijedne osobe. ¦ V tej datoteki GEDCOM-X ni nobene osebe.
+Annulation impossible : import inconnu. ¦ Poništavanje nije moguće: nepoznat uvoz. ¦ Razveljavitev ni mogoča: neznan uvoz.
+Fichier trop gros (20 Mo au plus). ¦ Datoteka je prevelika (najviše 20 MB). ¦ Datoteka je prevelika (največ 20 MB).
+Aucun point dans ce GeoJSON. ¦ U ovom GeoJSON-u nema nijedne točke. ¦ V tem GeoJSON-u ni nobene točke.
+Document introuvable. ¦ Dokument nije pronađen. ¦ Dokumenta ni mogoče najti.
+Document illisible. ¦ Dokument je nečitljiv. ¦ Dokument ni berljiv.
+Cette action s’envoie en POST. ¦ Ova se radnja šalje kao POST. ¦ To dejanje se pošlje kot POST.
+Lot inconnu. ¦ Nepoznata serija. ¦ Neznan paket.
+Fichier vide. ¦ Prazna datoteka. ¦ Prazna datoteka.
+Fichier vide ¦ Prazna datoteka ¦ Prazna datoteka
+Sortie inconnue. ¦ Nepoznat izlaz. ¦ Neznan izhod.
+Analyse introuvable. ¦ Analiza nije pronađena. ¦ Analize ni mogoče najti.
+Altitude impossible : entre −450 et 8 900 m. ¦ Nadmorska visina nije moguća: unesi između −450 i 8 900 m. ¦ Nadmorska višina ni mogoča: vnesi med −450 in 8 900 m.
+Envoi inconnu. ¦ Nepoznato slanje. ¦ Neznana pošiljka.
+Projet illisible. ¦ Projekt je nečitljiv. ¦ Projekt ni berljiv.
+Rush illisible. ¦ Snimka je nečitljiva. ¦ Posnetek ni berljiv.
+Projet trop lourd (4 Mo au plus). ¦ Projekt je pretežak (najviše 4 MB). ¦ Projekt je pretežak (največ 4 MB).
+Salle introuvable. ¦ Dvorana nije pronađena. ¦ Dvorane ni mogoče najti.
+Fichier trop lourd. ¦ Datoteka je preteška. ¦ Datoteka je pretežka.
+Salle ou œuvre introuvable. ¦ Dvorana ili djelo nije pronađeno. ¦ Dvorane ali dela ni mogoče najti.
+Import impossible : l’extension PHP zip manque. ¦ Uvoz nije moguć: nedostaje PHP proširenje zip. ¦ Uvoz ni mogoč: manjka razširitev PHP zip.
+Liste introuvable. ¦ Popis nije pronađen. ¦ Seznama ni mogoče najti.
+Ligne invalide. ¦ Neispravan redak. ¦ Neveljavna vrstica.
+Cette liste n’existe plus. ¦ Ovaj popis više ne postoji. ¦ Ta seznam ne obstaja več.
+Personne manquante. ¦ Nedostaje osoba. ¦ Manjka oseba.
+Personne manquante ¦ Nedostaje osoba ¦ Manjka oseba
+Adresse Internet invalide ¦ Neispravna internetska adresa ¦ Neveljaven spletni naslov
+Adresse Internet invalide. ¦ Neispravna internetska adresa. ¦ Neveljaven spletni naslov.
+Statut inconnu. ¦ Nepoznat status. ¦ Neznan status.
+Revue introuvable. ¦ Časopis nije pronađen. ¦ Revije ni mogoče najti.
+Article introuvable. ¦ Članak nije pronađen. ¦ Članka ni mogoče najti.
+Quoi supprimer ? ¦ Što izbrisati? ¦ Kaj izbrisati?
+Annonce introuvable. ¦ Oglas nije pronađen. ¦ Oglasa ni mogoče najti.
+Animal introuvable. ¦ Životinja nije pronađena. ¦ Živali ni mogoče najti.
+Demande introuvable. ¦ Zahtjev nije pronađen. ¦ Zahteve ni mogoče najti.
+Visage incorrect. ¦ Neispravno lice. ¦ Napačen obraz.
+Choix incorrect. ¦ Neispravan izbor. ¦ Napačna izbira.
+Comparaison introuvable. ¦ Usporedba nije pronađena. ¦ Primerjave ni mogoče najti.
+Image introuvable. ¦ Slika nije pronađena. ¦ Slike ni mogoče najti.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Geografska širina između -90 i 90, dužina između -180 i 180. ¦ Zemljepisna širina med -90 in 90, dolžina med -180 in 180.
+Cette demande d’entraide n’existe plus. ¦ Ovaj zahtjev za pomoć više ne postoji. ¦ Ta prošnja za pomoč ne obstaja več.
+Cette annonce n’existe plus. ¦ Ovaj oglas više ne postoji. ¦ Ta oglas ne obstaja več.
+Carte postale introuvable. ¦ Razglednica nije pronađena. ¦ Razglednice ni mogoče najti.
+Choix inconnu. ¦ Nepoznat izbor. ¦ Neznana izbira.
+Niveau inconnu. ¦ Nepoznata razina. ¦ Neznana raven.
+Seuls tes propres profils se modifient ici. ¦ Ovdje se mogu uređivati samo tvoji vlastiti profili. ¦ Tukaj lahko urejaš samo svoje profile.
+Seuls tes propres profils se suppriment. ¦ Mogu se brisati samo tvoji vlastiti profili. ¦ Izbrišeš lahko samo svoje profile.
+Profil introuvable. ¦ Profil nije pronađen. ¦ Profila ni mogoče najti.
+Questionnaire introuvable. ¦ Upitnik nije pronađen. ¦ Vprašalnika ni mogoče najti.
+Question incorrecte. ¦ Neispravno pitanje. ¦ Napačno vprašanje.
+Choix incorrects. ¦ Neispravni izbori. ¦ Napačne izbire.
+Question introuvable. ¦ Pitanje nije pronađeno. ¦ Vprašanja ni mogoče najti.
+Recueil introuvable. ¦ Zbirka nije pronađena. ¦ Zbirke ni mogoče najti.
+Aucune photo. ¦ Nema fotografija. ¦ Ni fotografij.
+Page introuvable. ¦ Stranica nije pronađena. ¦ Strani ni mogoče najti.
+Rattachement inconnu. ¦ Nepoznata veza. ¦ Neznana povezava.
+Bloc inconnu. ¦ Nepoznat blok. ¦ Neznan blok.
+Village introuvable. ¦ Selo nije pronađeno. ¦ Vasi ni mogoče najti.
+Pays non disponible. ¦ Zemlja nije dostupna. ¦ Država ni na voljo.
+Branche introuvable ¦ Grana nije pronađena ¦ Veje ni mogoče najti
+Branche introuvable. ¦ Grana nije pronađena. ¦ Veje ni mogoče najti.
+Import indisponible. ¦ Uvoz nije dostupan. ¦ Uvoz ni na voljo.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ Nije prepoznat nijedan DOI: počinje s „10.” (npr. 10.1038/251123a0), ili zalijepi adresu https://doi.org/… ¦ Prepoznan ni noben DOI: začne se z »10.« (npr. 10.1038/251123a0), ali prilepi naslov https://doi.org/…
+Source inconnue (DOI, ORCID ou HAL). ¦ Nepoznat izvor (DOI, ORCID ili HAL). ¦ Neznan vir (DOI, ORCID ali HAL).
+Ligne inconnue. ¦ Nepoznat redak. ¦ Neznana vrstica.
+Report inconnu. ¦ Nepoznata odgoda. ¦ Neznana preložitev.
+Rappel introuvable. ¦ Podsjetnik nije pronađen. ¦ Opomnika ni mogoče najti.
+Piste introuvable. ¦ Trag nije pronađen. ¦ Sledi ni mogoče najti.
+Statistique inconnue. ¦ Nepoznata statistika. ¦ Neznana statistika.
+Ligne illisible. ¦ Redak je nečitljiv. ¦ Vrstica ni berljiva.
+Diaporama introuvable. ¦ Dijaprojekcija nije pronađena. ¦ Diaprojekcije ni mogoče najti.
+Diaporama trop lourd. ¦ Dijaprojekcija je preteška. ¦ Diaprojekcija je pretežka.
+Foyer SocFace introuvable. ¦ Kućanstvo SocFace nije pronađeno. ¦ Gospodinjstva SocFace ni mogoče najti.
+Ligne SocFace introuvable. ¦ Redak SocFace nije pronađen. ¦ Vrstice SocFace ni mogoče najti.
+Sorte d’import inconnue. ¦ Nepoznata vrsta uvoza. ¦ Neznana vrsta uvoza.
+Import inconnu. ¦ Nepoznat uvoz. ¦ Neznan uvoz.
+Ce lieu n’existe plus. ¦ Ovo mjesto više ne postoji. ¦ Ta kraj ne obstaja več.
+L’original garde son nom. ¦ Izvornik zadržava svoje ime. ¦ Izvirnik obdrži svoje ime.
+Bien inconnu. ¦ Nepoznata imovina. ¦ Neznano premoženje.
+Acte introuvable. ¦ Matični zapis nije pronađen. ¦ Matičnega vpisa ni mogoče najti.
+Site introuvable. ¦ Lokacija nije pronađena. ¦ Lokacije ni mogoče najti.
+Marque introuvable. ¦ Biljeg nije pronađen. ¦ Označbe ni mogoče najti.
+Observation introuvable. ¦ Opažanje nije pronađeno. ¦ Opazovanja ni mogoče najti.
+Comptage introuvable. ¦ Brojanje nije pronađeno. ¦ Štetja ni mogoče najti.
+Appartenance introuvable. ¦ Pripadnost nije pronađena. ¦ Pripadnosti ni mogoče najti.
+Import introuvable. ¦ Uvoz nije pronađen. ¦ Uvoza ni mogoče najti.
+Import introuvable ¦ Uvoz nije pronađen ¦ Uvoza ni mogoče najti
+Fichier trop gros : trop d’observations. ¦ Datoteka je prevelika: previše opažanja. ¦ Datoteka je prevelika: preveč opazovanj.
+Conflit illisible. ¦ Sukob je nečitljiv. ¦ Konflikt ni berljiv.
+Document illisible : il manque son texte. ¦ Dokument je nečitljiv: nedostaje mu tekst. ¦ Dokument ni berljiv: manjka mu besedilo.
+Partie illisible. ¦ Dio je nečitljiv. ¦ Del ni berljiv.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Dokument je pretežak: podijeli njegove kartice u više dokumenata. ¦ Dokument je pretežak: razdeli njegove zavihke na več dokumentov.
+Version trop lourde. ¦ Verzija je preteška. ¦ Različica je pretežka.
+Transcription introuvable. ¦ Transkripcija nije pronađena. ¦ Prepisa ni mogoče najti.
+Dessin introuvable. ¦ Crtež nije pronađen. ¦ Risbe ni mogoče najti.
+Commune introuvable. ¦ Općina nije pronađena. ¦ Občine ni mogoče najti.
+Site illisible : il manque ses pages. ¦ Web-mjesto je nečitljivo: nedostaju mu stranice. ¦ Spletno mesto ni berljivo: manjkajo mu strani.
+Page illisible. ¦ Stranica je nečitljiva. ¦ Stran ni berljiva.
+Service inconnu. ¦ Nepoznata usluga. ¦ Neznana storitev.
+Adresse non permise. ¦ Adresa nije dopuštena. ¦ Naslov ni dovoljen.
+Publication impossible : l’extension PHP curl manque. ¦ Objava nije moguća: nedostaje PHP proširenje curl. ¦ Objava ni mogoča: manjka razširitev PHP curl.
+Donne l’identifiant FTP. ¦ Unesi FTP korisničko ime. ¦ Vnesi uporabniško ime FTP.
+Colle d’abord ton jeton Netlify. ¦ Najprije zalijepi svoj Netlify token. ¦ Najprej prilepi svoj žeton Netlify.
+Colle d’abord ton jeton GitHub. ¦ Najprije zalijepi svoj GitHub token. ¦ Najprej prilepi svoj žeton GitHub.
+Identifiant Wikidata incorrect. ¦ Neispravan Wikidata identifikator. ¦ Napačen identifikator Wikidata.
+Classeur illisible : il manque ses feuilles. ¦ Radna knjiga je nečitljiva: nedostaju joj listovi. ¦ Delovni zvezek ni berljiv: manjkajo mu listi.
+Feuille illisible. ¦ List je nečitljiv. ¦ List ni berljiv.
+Classeur introuvable. ¦ Radna knjiga nije pronađena. ¦ Delovnega zvezka ni mogoče najti.
+Import manquant ¦ Nedostaje uvoz ¦ Manjka uvoz
+Archive ZIP illisible ¦ ZIP arhiva je nečitljiva ¦ Arhiv ZIP ni berljiv
+Modification introuvable. ¦ Izmjena nije pronađena. ¦ Spremembe ni mogoče najti.
+Sauvegarde introuvable. ¦ Sigurnosna kopija nije pronađena. ¦ Varnostne kopije ni mogoče najti.
+Lecture impossible ¦ Čitanje nije moguće ¦ Branje ni mogoče
+JSON invalide ou non-objet ¦ Neispravan JSON ili nije objekt ¦ Neveljaven JSON ali ni objekt
+Impossible d'ouvrir l'archive (format inattendu) ¦ Arhivu nije moguće otvoriti (neočekivan format) ¦ Arhiva ni mogoče odpreti (nepričakovana oblika)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ Arhivu GedZip nije moguće otvoriti (neočekivan format) ¦ Arhiva GedZip ni mogoče odpreti (nepričakovana oblika)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ Datoteka GEDCOM (.ged) nije pronađena u arhivi. ¦ Datoteke GEDCOM (.ged) v arhivu ni mogoče najti.
+Type introuvable ¦ Tip nije pronađen ¦ Tipa ni mogoče najti
+Identifiant manquant ¦ Nedostaje identifikator ¦ Manjka identifikator
+Battue introuvable ¦ Sustavna pretraga nije pronađena ¦ Sistematičnega iskanja ni mogoče najti
+Battue introuvable. ¦ Sustavna pretraga nije pronađena. ¦ Sistematičnega iskanja ni mogoče najti.
+Lacune introuvable. ¦ Praznina nije pronađena. ¦ Vrzeli ni mogoče najti.
+Lien direct vers l’archive invalide. ¦ Neispravna izravna poveznica na arhiv. ¦ Neveljavna neposredna povezava do arhiva.
+Mention familiale invalide ¦ Neispravna obiteljska napomena ¦ Neveljavna družinska omemba
+Titre obligatoire ¦ Naslov je obavezan ¦ Naslov je obvezen
+Recensement manquant ¦ Nedostaje popis stanovništva ¦ Manjka popis prebivalstva
+Membre manquant ¦ Nedostaje član ¦ Manjka član
+Membre introuvable ¦ Član nije pronađen ¦ Člana ni mogoče najti
+Dossier militaire invalide ¦ Neispravan vojni dosje ¦ Neveljavna vojaška mapa
+Recensement ou personne manquante ¦ Nedostaje popis stanovništva ili osoba ¦ Manjka popis prebivalstva ali oseba
+Journal introuvable ¦ Dnevnik nije pronađen ¦ Dnevnika ni mogoče najti
+Confirmation requise ¦ Potrebna je potvrda ¦ Potrebna je potrditev
+Piste manquante. ¦ Nedostaje trag. ¦ Manjka sled.
+Rappel manquant. ¦ Nedostaje podsjetnik. ¦ Manjka opomnik.
+Courrier manquant. ¦ Nedostaje pismo. ¦ Manjka pismo.
+Contact introuvable. ¦ Kontakt nije pronađen. ¦ Stika ni mogoče najti.
+Contact manquant. ¦ Nedostaje kontakt. ¦ Manjka stik.
+Battue manquante. ¦ Nedostaje sustavna pretraga. ¦ Manjka sistematično iskanje.
+Battue, commune et nom obligatoires. ¦ Sustavna pretraga, općina i ime su obavezni. ¦ Sistematično iskanje, občina in ime so obvezni.
+Battue et commune obligatoires. ¦ Sustavna pretraga i općina su obavezne. ¦ Sistematično iskanje in občina sta obvezna.
+Annotation manquante. ¦ Nedostaje bilješka. ¦ Manjka opomba.
+Annotation introuvable. ¦ Bilješka nije pronađena. ¦ Opombe ni mogoče najti.
+Dossier parent invalide ¦ Neispravna nadređena mapa ¦ Neveljavna nadrejena mapa
+Dossier manquant ¦ Nedostaje mapa ¦ Manjka mapa
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Neispravan spol: odaberi Muško, Žensko, Nebinarno ili Nepoznato. ¦ Neveljaven spol: izberi Moški, Ženski, Nebinarno ali Neznano.
+Variante manquante ¦ Nedostaje varijanta ¦ Manjka različica
+Variante introuvable ¦ Varijanta nije pronađena ¦ Različice ni mogoče najti
+Famille introuvable ¦ Obitelj nije pronađena ¦ Družine ni mogoče najti
+Fiche en ligne introuvable ¦ Mrežni zapis nije pronađen ¦ Spletnega zapisa ni mogoče najti
+Fiche en ligne manquante ¦ Nedostaje mrežni zapis ¦ Manjka spletni zapis
+Personne ou contenu manquant ¦ Nedostaje osoba ili sadržaj ¦ Manjka oseba ali vsebina
+Note ou contenu manquant ¦ Nedostaje bilješka ili sadržaj ¦ Manjka opomba ali vsebina
+Note introuvable ¦ Bilješka nije pronađena ¦ Opombe ni mogoče najti
+Note manquante ¦ Nedostaje bilješka ¦ Manjka opomba
+Personne et titre obligatoires ¦ Osoba i naslov su obavezni ¦ Oseba in naslov sta obvezna
+Source et titre obligatoires ¦ Izvor i naslov su obavezni ¦ Vir in naslov sta obvezna
+Source introuvable ¦ Izvor nije pronađen ¦ Vira ni mogoče najti
+Source manquante ¦ Nedostaje izvor ¦ Manjka vir
+Rotation impossible. ¦ Okretanje nije moguće. ¦ Vrtenje ni mogoče.
+Script HTR local introuvable. ¦ Lokalna HTR skripta nije pronađena. ¦ Lokalnega skripta HTR ni mogoče najti.
+Fiche individuelle invalide. ¦ Neispravan pojedinačni zapis. ¦ Neveljaven posamični zapis.
+Alerte manquante ¦ Nedostaje upozorenje ¦ Manjka opozorilo
+Patronyme et groupe obligatoires ¦ Prezime i grupa su obavezni ¦ Priimek in skupina sta obvezna
+Personne racine introuvable. ¦ Polazna osoba nije pronađena. ¦ Izhodiščne osebe ni mogoče najti.
+Vue introuvable ¦ Pogled nije pronađen ¦ Pogleda ni mogoče najti
+Cible manquante ¦ Nedostaje cilj ¦ Manjka cilj
+Identification manquante ¦ Nedostaje identifikacija ¦ Manjka identifikacija
+Identification introuvable ¦ Identifikacija nije pronađena ¦ Identifikacije ni mogoče najti
+Objet ou souvenir manquant ¦ Nedostaje predmet ili uspomena ¦ Manjka predmet ali spomin
+À faire le {date} ¦ Učiniti {date} ¦ Opraviti {date}
+Avant le {date} ¦ Prije {date} ¦ Pred {date}
+Après le {date} ¦ Nakon {date} ¦ Po {date}
+Rappel libre ¦ Slobodan podsjetnik ¦ Prosti opomnik
+Enquête « {title} » ¦ Istraga „{title}” ¦ Preiskava »{title}«
+Pas encore envoyé ¦ Još nije poslano ¦ Še ni poslano
+Envoyé aujourd’hui ¦ Poslano danas ¦ Poslano danes
+Réponse attendue depuis {n} jours ¦ Dana čekanja na odgovor: {n} ¦ Dni čakanja na odgovor: {n}
+Réponse attendue depuis {n} jour ¦ Odgovor se čeka {n} dan ¦ Odgovor se čaka {n} dan
+relance prévue le {date} : à relancer ¦ ponovni upit zakazan za {date}: treba ga poslati ¦ ponovni poziv predviden {date}: treba ga poslati
+relance le {date} ¦ ponovni upit {date} ¦ ponovni poziv {date}
+Visite ¦ Posjet ¦ Obisk
+Prévue le {date} : note-la comme faite ¦ Zakazano za {date}: označi ga kao obavljen ¦ Predvideno {date}: označi ga kot opravljenega
+Le {date} ¦ {date} ¦ {date}
+{n} cotes à consulter ¦ Signatura za pregled: {n} ¦ Signatur za pregled: {n}
+{n} cote à consulter ¦ {n} signatura za pregled ¦ {n} signatura za pregled
+Piste ¦ Trag ¦ Sled
+À explorer ¦ Za istražiti ¦ Za raziskati
+Hypothèse : {title} ¦ Pretpostavka: {title} ¦ Domneva: {title}
+Hypothèse : sans titre ¦ Pretpostavka: bez naslova ¦ Domneva: brez naslova
+confiance faible ¦ slabo pouzdanje ¦ nizko zaupanje
+confiance moyenne ¦ srednje pouzdanje ¦ srednje zaupanje
+confiance forte ¦ jako pouzdanje ¦ visoko zaupanje
+Vu ¦ Viđeno ¦ Videno
+Recensement de {y} à {place} : chercher sur SocFace ¦ Popis stanovništva {y}. u mjestu {place}: potraži na SocFaceu ¦ Popis prebivalstva {y} v kraju {place}: poišči na SocFace
+Recensement de {y} : chercher sur SocFace ¦ Popis stanovništva {y}.: potraži na SocFaceu ¦ Popis prebivalstva {y}: poišči na SocFace
+Cherché sur SocFace ¦ Traženo na SocFaceu ¦ Iskano na SocFace
+{act} : {name}, chercher à {place} ¦ {act}: {name}, traži u mjestu {place} ¦ {act}: {name}, išči v kraju {place}
+{act} : {name} ¦ {act}: {name} ¦ {act}: {name}
+acte|Parents ¦ Roditelji ¦ Starši
+acte|Contrat de mariage ¦ Bračni ugovor ¦ Poročna pogodba
+acte|Succession ¦ Ostavina ¦ Zapuščina
+acte|Registre matricule ¦ Vojni matični registar ¦ Vojaški matični register
+Foyer de {name} ¦ Kućanstvo osobe {name} ¦ Gospodinjstvo osebe {name}
+{n} personnes ¦ Osoba: {n} ¦ Oseb: {n}
+{n} personne ¦ {n} osoba ¦ {n} oseba
+Demande d’entraide ¦ Zahtjev za pomoć ¦ Prošnja za pomoč
+Une réponse t’attend ¦ Čeka te odgovor ¦ Čaka te odgovor
+Brouillon à publier ¦ Skica za objavu ¦ Osnutek za objavo
+Publiée il y a {n} jours ¦ Objavljeno prije ovoliko dana: {n} ¦ Objavljeno pred toliko dnevi: {n}
+Publiée il y a {n} jour ¦ Objavljeno prije {n} dan ¦ Objavljeno pred {n} dnem
+Rappel fait ¦ Podsjetnik obavljen ¦ Opomnik opravljen
+Demande résolue ¦ Zahtjev riješen ¦ Prošnja rešena
+Piste explorée ¦ Trag istražen ¦ Sled raziskana
+Hypothèse revue ¦ Pretpostavka pregledana ¦ Domneva pregledana
+Recherche faite ¦ Istraživanje obavljeno ¦ Raziskovanje opravljeno
+Alerte revue ¦ Upozorenje pregledano ¦ Opozorilo pregledano
+Piste du mur faite ¦ Trag s mrtve točke obavljen ¦ Sled slepe ulice opravljena
+Lien vérifié ¦ Veza provjerena ¦ Povezava preverjena
+🛡 Lien à consolider ¦ 🛡 Veza za učvrstiti ¦ 🛡 Povezava za utrditev
+Lien à consolider : {child}, le fils de {parent} ¦ Veza za učvrstiti: {child}, sin osobe {parent} ¦ Povezava za utrditev: {child}, sin osebe {parent}
+Lien à consolider : {child}, la fille de {parent} ¦ Veza za učvrstiti: {child}, kći osobe {parent} ¦ Povezava za utrditev: {child}, hči osebe {parent}
+Lien à consolider : {child}, l’enfant de {parent} ¦ Veza za učvrstiti: {child}, dijete osobe {parent} ¦ Povezava za utrditev: {child}, otrok osebe {parent}
+cherche l’acte de naissance ou de baptême qui le nomme ¦ potraži matični zapis o rođenju ili krštenju u kojem se spominje ¦ poišči rojstni ali krstni matični vpis, v katerem je omenjen
