@@ -64,6 +64,7 @@ function checkReference(dir, problems) {
       catch { problems.push('catalogue illisible : ' + full); }
       continue;
     }
+    if (name === 'frontieres' && fs.statSync(full).isDirectory()) { checkFrontieres(full, problems); continue; }
     if (!/^geo-[a-z]+\.sqlite\.gz$/.test(name)) { problems.push('fichier inattendu dans data/reference/ : ' + full); continue; }
     // Le schéma (sqlite_master) est au début du fichier : on ne décompresse que les 2 premiers Mo.
     const fd = fs.openSync(full, 'r'); const head = Buffer.alloc(Math.min(2 * 1024 * 1024, fs.fstatSync(fd).size)); fs.readSync(fd, head, 0, head.length, 0); fs.closeSync(fd);
@@ -91,6 +92,44 @@ function isMeteoData(full, problems) {
   return true;
 }
 
+/**
+ * 🧭 Images dessinées de la base d'exemple (famille imaginaire, assets/exemple/) : permises seulement à cet endroit,
+ * sous ces noms et avec exactement ces empreintes — une vraie photo glissée là, ou une image modifiée, arrête la fabrication.
+ */
+const EXEMPLE_IMAGES = {
+  'acte-mariage.jpg': 'd5c156145985bad7823c6df1c983a02b184924ac744c415393c9928d16a822b7',
+  'atelier.jpg': '06470a84cd7ea95ae4ec3fbceca62b47098f46c4593c882056275ea5ecabb142',
+  'bourg.jpg': '1a8ef08acc3a1fd9349f345442f9029701a5e923c62d00d1f3466910685b1f4c',
+  'foins.jpg': 'a3ad0d6ef1ab82f7155aaef7c8183caae2d4ec7408a6dcb283d18234f5456afc',
+  'livret-militaire.jpg': 'aa5243099ec8187bcef44bd6834aaa625bc1258313cfd445630648050b25a876',
+  'maison.jpg': '77212787400d401746ce6eb3ebcec1ecb59eb57a387727d2077abb3657a57184',
+  'mariage.jpg': '70616e6ab3d2ca92a75ad92884c3fcf2c7d0fe2cd43b17005890f9e58992ed87',
+  'port.jpg': '197196d00b0eff9232b20042f9c6433e50521b6974614840a99e0a701007474a',
+  'recensement.jpg': 'd1a3ef4ffb110a0e84cd58379e9a5140c545146930a2499d55f66677d858471b',
+};
+const sha256File = full => require('node:crypto').createHash('sha256').update(fs.readFileSync(full)).digest('hex');
+function isExempleImage(full) {
+  const m = full.match(/[\\/]php-app[\\/]assets[\\/]exemple[\\/]([^\\/]+)$/);
+  return !!(m && EXEMPLE_IMAGES[m[1]] && sha256File(full) === EXEMPLE_IMAGES[m[1]]);
+}
+
+/**
+ * 🏛 data/reference/frontieres/ : fichiers officiels de l'INSEE (COG, Licence Ouverte) — seulement ces quatre fichiers,
+ * et les deux CSV doivent avoir l'empreinte écrite dans SHA256SUMS.
+ */
+function checkFrontieres(dir, problems) {
+  const allowed = new Set(['mvt.csv', 'com.csv', 'LICENCE.txt', 'SHA256SUMS']);
+  for (const name of fs.readdirSync(dir)) if (!allowed.has(name)) problems.push('fichier inattendu dans data/reference/frontieres/ : ' + path.join(dir, name));
+  let sums = {};
+  try { for (const line of fs.readFileSync(path.join(dir, 'SHA256SUMS'), 'utf8').split('\n')) { const m = line.match(/^([0-9a-f]{64})\s+(\S+)$/); if (m) sums[m[2]] = m[1]; } }
+  catch { problems.push('SHA256SUMS absent : ' + dir); return; }
+  for (const csv of ['mvt.csv', 'com.csv']) {
+    const full = path.join(dir, csv);
+    if (!fs.existsSync(full)) { problems.push('frontières : fichier absent ' + full); continue; }
+    if (sums[csv] !== sha256File(full)) problems.push('frontières : empreinte différente de SHA256SUMS : ' + full);
+  }
+}
+
 function verifyPackage(context) {
   const problems = [];
   walk(context.appOutDir, (full, entry) => {
@@ -101,7 +140,7 @@ function verifyPackage(context) {
   if (fs.existsSync(phpApp)) {
     walk(phpApp, (full, entry) => {
       if (entry.isDirectory() && FORBIDDEN_DIRS.has(entry.name)) problems.push('dossier interdit : ' + full);
-      if (entry.isFile() && MEDIA.test(entry.name)) problems.push('média : ' + full);
+      if (entry.isFile() && MEDIA.test(entry.name) && !isExempleImage(full)) problems.push('média : ' + full);
     });
     const dataDir = path.join(phpApp, 'data');
     const dataFiles = fs.existsSync(dataDir) ? fs.readdirSync(dataDir) : [];
