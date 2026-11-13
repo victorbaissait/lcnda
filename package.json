@@ -93,6 +93,8 @@
           "data/reference/geo-*.sqlite.gz", "data/reference/frontieres/**",
           "data/reference/catalogue.json", "scripts/htr_recognize.py", "scripts/htr_install.php",
           "data-meteo/meteo-*.sqlite",
+          "!assets/i18n/src/**",
+          "!assets/i18n/faq/src/**",
           "!**/.DS_Store"
         ]
       },
