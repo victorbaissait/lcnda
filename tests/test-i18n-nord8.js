@@ -24,7 +24,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
     const B = require('../scripts/i18n-build.js');
     const F = require('../scripts/build-faq-i18n.js');
     await t('tr déclaré partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(22, 23), NEW); assert.equal(I.CODES.length, 28);
+        assert.deepEqual(I.CODES.slice(22, 23), NEW); assert.equal(I.CODES.length, 30);
         assert.deepEqual([I.info('tr').name, I.info('tr').flag, I.info('tr').locale], ['Türkçe', '🇹🇷', 'tr-TR']);
         assert.ok(/const I18N_LANGS = \[[^\]]*'et', 'is', 'tr'(, '[a-z]{2}')*\];/.test(fs.readFileSync(path.join(root, 'lib/i18n.php'), 'utf8')));
         assert.deepEqual(B.NEW_LANGS.slice(14, 15), NEW); assert.deepEqual(F.NEW_LANGS.slice(14, 15), NEW); assert.equal(F.LANGS.length, 7);

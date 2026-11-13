@@ -3,16 +3,16 @@
  *
  *   node scripts/i18n-check.js            résumé + problèmes (code de sortie 1 s'il y a une erreur)
  *   node scripts/i18n-check.js --verbose  aussi les avertissements (longueur suspecte, traduction = français)
- *   node scripts/i18n-check.js --strict-new   pour les langues ajoutées ensuite (cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id) aussi : une clé absente devient une erreur (quand leur traduction sera finie)
+ *   node scripts/i18n-check.js --strict-new   pour les langues ajoutées ensuite (cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id, ru, uk) aussi : une clé absente devient une erreur (quand leur traduction sera finie)
  *   node scripts/i18n-check.js --lang cs   le détail d'une langue seulement (avec --verbose : chaque texte manquant)
  *
  * Erreurs : clé manquante dans une des 7 premières langues (en, es, de, it, pt, pl, nl), variables {x} différentes du français, pluriel sans toutes ses formes
- *           (ou avec plusieurs formes pour une langue qui n’en a qu’une : vi, id),
+ *           (ou avec plusieurs formes pour une langue qui n’en a qu’une : vi, id ; ru et uk en demandent trois, one|few|many),
  *           texte vide, symbole de tête perdu (« ＋ », « ↶ », « ⤒ »…), fichier .json pas à jour avec les sources.
  * Avertissements : traduction 2,5 × plus longue que le français (risque de débordement, surtout en allemand),
  *           traduction identique au français (souvent un oubli, parfois normal : « Sosa », « GEDCOM »),
- *           cs / sv / da / sk / nb / ro / fi / hu / hr / sl / lt / lv / et / is / tr / lb / sq / mt / vi / id : textes encore sans traduction (comptés : « cs : N textes encore sans traduction » ; repli sur le
- *           français), lignes des sous-dossiers de assets/i18n/src/ (nord/, nord2/, nord3/, nord4/, nord5/, nord6/, nord7/, nord8/, nord9/, nord10/, nord11/) dont la clé n'existe plus en français.
+ *           cs / sv / da / sk / nb / ro / fi / hu / hr / sl / lt / lv / et / is / tr / lb / sq / mt / vi / id / ru / uk : textes encore sans traduction (comptés : « cs : N textes encore sans traduction » ; repli sur le
+ *           français), lignes des sous-dossiers de assets/i18n/src/ (nord/, nord2/, nord3/, nord4/, nord5/, nord6/, nord7/, nord8/, nord9/, nord10/, nord11/, nord12/) dont la clé n'existe plus en français.
  */
 'use strict';
 const fs = require('fs');
@@ -27,7 +27,7 @@ const LEADSYM = /^[＋↶↷⤒⤓✓⚠️⛔ℹ️🔍↗×✎🗑💾🖨⧉�
 function check({verbose = false, strictNew = false, only = '', src = ''} = {}) {
     const {rows, orphans, dups} = readSources(src ? {withOrphans: true, src} : {withOrphans: true});
     const errors = [], warns = [];
-    const missingNew = Object.fromEntries(NEW_LANGS.map(c => [c, []])); // cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id : textes encore sans traduction
+    const missingNew = Object.fromEntries(NEW_LANGS.map(c => [c, []])); // cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id, ru, uk : textes encore sans traduction
     const keys = new Map();
     rows.forEach(r => keys.set((r.plural ? '=' : '') + r.key, r));
     const langs = only ? LANGS.filter(c => c === only) : LANGS;

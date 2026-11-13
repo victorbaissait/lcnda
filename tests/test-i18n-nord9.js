@@ -25,7 +25,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
     const B = require('../scripts/i18n-build.js');
     const F = require('../scripts/build-faq-i18n.js');
     await t('lb déclaré partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(23, 24), NEW); assert.equal(I.CODES.length, 28);
+        assert.deepEqual(I.CODES.slice(23, 24), NEW); assert.equal(I.CODES.length, 30);
         assert.deepEqual([I.info('lb').name, I.info('lb').flag, I.info('lb').locale], ['Lëtzebuergesch', '🇱🇺', 'lb-LU']);
         assert.ok(/const I18N_LANGS = \[[^\]]*'is', 'tr', 'lb'(, '[a-z]{2}')*\];/.test(fs.readFileSync(path.join(root, 'lib/i18n.php'), 'utf8')));
         assert.deepEqual(B.NEW_LANGS.slice(15, 16), NEW); assert.deepEqual(F.NEW_LANGS.slice(15, 16), NEW); assert.equal(F.LANGS.length, 7);

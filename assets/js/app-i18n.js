@@ -6,13 +6,13 @@
  *   t('Fiche', {ctx: 'onglet'})            → clé « onglet|Fiche » quand un même mot se traduit autrement (repli : « Fiche »)
  *   plural(3, 'personne')                  → « 3 personnes » / « 3 people » / « 3 osoby » (Intl.PluralRules, 0 et 1 au singulier en français)
  *   fmtNumber(1234.5), fmtDate(date, opts) → Intl selon la langue (jamais pour les dates généalogiques : elles suivent C4)
- * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id), fabriqués par scripts/i18n-build.js depuis
+ * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id, ru, uk), fabriqués par scripts/i18n-build.js depuis
  * assets/i18n/src/*.tsv (et assets/i18n/src/nord/*.tsv pour cs, sv, da ; assets/i18n/src/nord2/*.tsv pour sk, nb ;
  * assets/i18n/src/nord3/*.tsv pour ro ; assets/i18n/src/nord4/*.tsv pour fi, hu ;
  * assets/i18n/src/nord5/*.tsv pour hr, sl ; assets/i18n/src/nord6/*.tsv pour lt, lv, et ;
  * assets/i18n/src/nord7/*.tsv pour is ; assets/i18n/src/nord8/*.tsv pour tr ;
  * assets/i18n/src/nord9/*.tsv pour lb ; assets/i18n/src/nord10/*.tsv pour sq, mt ;
- * assets/i18n/src/nord11/*.tsv pour vi, id).
+ * assets/i18n/src/nord11/*.tsv pour vi, id ; assets/i18n/src/nord12/*.tsv pour ru, uk).
  * Valeur = texte, ou formes de pluriel {zero, one, two, few, many, other}.
  *
  * En français, RIEN ne change : t() rend le texte tel quel, plural() est celui d'avant, aucune page n'est retouchée.
@@ -60,10 +60,14 @@
         // (attention : « id » est aussi le nom de beaucoup de propriétés dans le code : un code de langue ne sert jamais de nom de propriété d’un objet de données)
         {code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳', locale: 'vi-VN', intlFallback: ['en']},
         {code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩', locale: 'id-ID', intlFallback: ['en']},
+        // russe et ukrainien : écrits en cyrillique ; presque tous les navigateurs ont leurs dates et leurs nombres ; sinon, l’anglais
+        // (« uk » est l’ukrainien, pas le Royaume-Uni : l’anglais britannique reste « en »)
+        {code: 'ru', name: 'Русский', flag: '🇷🇺', locale: 'ru-RU', intlFallback: ['en']},
+        {code: 'uk', name: 'Українська', flag: '🇺🇦', locale: 'uk-UA', intlFallback: ['en']},
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 28; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 29; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -148,13 +152,18 @@
     const pluralRules = new Map();
     /** maltais (CLDR 42 et plus) : one (1) | two (2) | few (0, 3–10, 103–110…) | many (11–19, 111–119…) | other (le reste, et
      *  les nombres à virgule) — la même règle que lib/i18n.php (i18n_plural_cat), pour un navigateur qui ne la connaît pas encore ;
-     *  vietnamien et indonésien : une seule forme (other), quel que soit le nombre (« 1 người », « 5 người ») */
+     *  vietnamien et indonésien : une seule forme (other), quel que soit le nombre (« 1 người », « 5 người ») ;
+     *  russe et ukrainien : one (1, 21, 31… sauf 11) | few (2–4, 22–24… sauf 12–14) | many (0, 5–20, 25–30…) | other (les
+     *  nombres à virgule ; dans le dictionnaire = la forme few : « 1,5 человека ») */
+    const slavic = n => { if (Math.floor(n) !== n) return 'other'; const m10 = n % 10, m100 = n % 100; return (m10 === 1 && m100 !== 11) ? 'one' : (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) ? 'few' : 'many'; };
     const OWN_RULES = {
         vi: () => 'other',
         id: () => 'other',
+        ru: n => slavic(n),
+        uk: n => slavic(n),
         mt: n => { if (Math.floor(n) !== n) return 'other'; if (n === 1) return 'one'; if (n === 2) return 'two'; const m = n % 100; return (n === 0 || (m >= 3 && m <= 10)) ? 'few' : (m >= 11 && m <= 19) ? 'many' : 'other'; },
     };
-    const OWN_NEEDS = {mt: ['one', 'two', 'few', 'many', 'other']};
+    const OWN_NEEDS = {mt: ['one', 'two', 'few', 'many', 'other'], ru: ['one', 'few', 'many', 'other'], uk: ['one', 'few', 'many', 'other']};
     function category(n, code = lang) {
         if (!pluralRules.has(code)) {
             let r = null;
@@ -405,7 +414,7 @@
     }
     function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])); }
 
-    /** menu des 28 langues (nom dans sa langue + drapeau + code) */
+    /** menu des 30 langues (nom dans sa langue + drapeau + code) */
     function selectHtml(attrs = '') {
         return `<select ${attrs} data-i18n-off>${LANGS.map(l => `<option value="${l.code}" ${l.code === lang ? 'selected' : ''}>${l.flag} ${l.name} (${l.code.toUpperCase()})</option>`).join('')}</select>`;
     }

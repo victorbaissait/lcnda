@@ -1,0 +1,48 @@
+fr ¦ ru ¦ uk
+# ═════ zone « montage » : russe (ru), ukrainien (uk) ═════
+Boutons des pistes : petits ¦ Кнопки дорожек: маленькие ¦ Кнопки доріжок: маленькі
+Boutons des pistes : grands ¦ Кнопки дорожек: большие ¦ Кнопки доріжок: великі
+Les boutons des pistes ont déjà cette taille. ¦ Кнопки дорожек уже такого размера. ¦ Кнопки доріжок уже такого розміру.
+Petits ¦ Маленькие ¦ Маленькі
+Moyens (départ) ¦ Средние (по умолчанию) ¦ Середні (типово)
+Grands ¦ Большие ¦ Великі
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Переставить этот раздел: перетащи за ручку или Alt + ↑ / ↓ ¦ Переставити цей розділ: перетягни за ручку або Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Разделы правой панели: ↺ Вернуть как было ¦ Розділи правої панелі: ↺ Повернути як було
+Sections du panneau de droite remises comme au départ ¦ Разделы правой панели возвращены как было ¦ Розділи правої панелі повернуто як було
+Les sections du panneau de droite sont déjà comme au départ. ¦ Разделы правой панели уже такие, как вначале. ¦ Розділи правої панелі вже такі, як спочатку.
+Taille et place ¦ Размер и положение ¦ Розмір і положення
+Durée, taille et place ¦ Длительность, размер и положение ¦ Тривалість, розмір і положення
+Couleurs de cette vidéo ¦ Цвета этого видео ¦ Кольори цього відео
+Rotation et fondus ¦ Поворот и переходы ¦ Поворот і переходи
+Volume et effets ¦ Громкость и эффекты ¦ Гучність і ефекти
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Цвета и эффект старой плёнки этого фрагмента возвращаются как было ¦ Кольори й ефект старої плівки цього фрагмента повертаються як було
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Цвета и эффект старой плёнки всего фильма возвращаются как было ¦ Кольори й ефект старої плівки всього фільму повертаються як було
+Couleurs remises comme au départ ¦ Цвета возвращены как было ¦ Кольори повернуто як було
+Le son de tout le film revient comme au départ (volume, effets) ¦ Звук всего фильма возвращается как было (громкость, эффекты) ¦ Звук усього фільму повертається як було (гучність, ефекти)
+Son du film remis comme au départ ¦ Звук фильма возвращён как было ¦ Звук фільму повернуто як було
+Texte remis comme au départ ¦ Текст возвращён как было ¦ Текст повернуто як було
+Volume dans le temps ¦ Громкость во времени ¦ Гучність у часі
+Poser des points sur le morceau ¦ Ставить точки на фрагменте ¦ Ставити точки на фрагменті
+Point à la tête de lecture ¦ Точка у указателя воспроизведения ¦ Точка біля вказівника відтворення
+Effacer la courbe ¦ Стереть кривую ¦ Стерти криву
+Courbe du volume effacée ¦ Кривая громкости стёрта ¦ Криву гучності стерто
+Volume : {n} % ¦ Громкость: {n} % ¦ Гучність: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Точек на кривой: {n}. Средняя линия = громкость, заданная выше; вверху — до двух раз громче. ¦ Точок на кривій: {n}. Середня лінія = гучність, задана вище; угорі — до двох разів гучніше.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Кривой пока нет: громкость одинакова от начала до конца (с её переходами). ¦ Кривої ще немає: гучність однакова від початку до кінця (з її переходами).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ На выбранном фрагменте, на шкале времени: щелчок ставит точку, точку можно перетащить (выше — громче, ниже — тише), двойной щелчок её убирает. ¦ На вибраному фрагменті, на шкалі часу: клацання ставить точку, точку можна перетягнути (вище — гучніше, нижче — тихіше), подвійне клацання її прибирає.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Щёлкни по фрагменту на шкале времени, чтобы поставить точку; перетащи точку, чтобы её сдвинуть; двойной щелчок — чтобы убрать. ¦ ✎ Клацни по фрагменту на шкалі часу, щоб поставити точку; перетягни точку, щоб її зсунути; подвійне клацання — щоб прибрати.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Более ровная громкость (тихие места громче, громкие — тише) ¦ Рівніша гучність (тихі місця гучніші, гучні — тихіші)
+Lieu de la réverbération ¦ Место реверберации ¦ Місце реверберації
+Une grande salle ¦ Большой зал ¦ Велика зала
+Une église ¦ Церковь ¦ Церква
+Une cave ¦ Погреб ¦ Льох
+Gauche ↔ droite ¦ Влево ↔ вправо ¦ Ліворуч ↔ праворуч
+Police et couleur ¦ Шрифт и цвет ¦ Шрифт і колір
+italique ¦ курсив ¦ курсив
+Contour et ombre ¦ Контур и тень ¦ Контур і тінь
+autour des lettres ¦ вокруг букв ¦ навколо літер
+Force de l’ombre ¦ Сила тени ¦ Сила тіні
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Включи «тень» (Шрифт и цвет), чтобы настроить тень. ¦ Увімкни «тінь» (Шрифт і колір), щоб налаштувати тінь.
+Bandeau derrière le texte ¦ Полоса за текстом ¦ Смуга за текстом
+Opacité du bandeau ¦ Непрозрачность полосы ¦ Непрозорість смуги
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Включи «полосу» (Шрифт и цвет): цветной фон за текстом, более или менее прозрачный, с прямыми или скруглёнными углами. ¦ Увімкни «смугу» (Шрифт і колір): кольоровий фон за текстом, більш або менш прозорий, із прямими чи заокругленими кутами.

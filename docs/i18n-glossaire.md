@@ -3,7 +3,7 @@
 À suivre pour toute traduction de LCNDA (mode d’emploi : `docs/I18N.md`). Un mot de l’app se traduit **toujours de la
 même façon** dans une langue. Ton : on tutoie partout (en : *you* ; es : *tú* ; de : *du* ; it : *tu* ; pt : *tu* ;
 pl : *ty* ; nl : *je* ; cs : *ty* ; sv : *du* ; da : *du*). Phrases courtes et simples, comme en français.
-Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål (et les langues suivantes, jusqu’au vietnamien et à l’indonésien) ont leur propre section à la fin (« Langues ajoutées ensuite »).
+Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål (et les langues suivantes, jusqu’au vietnamien, à l’indonésien, au russe et à l’ukrainien) ont leur propre section à la fin (« Langues ajoutées ensuite »).
 
 ## Généalogie
 
@@ -1586,6 +1586,185 @@ comme propriété d’un objet de données ; `tests/test-i18n-nord11.js` le vér
 | app | aplikasi |
 | FAQ | FAQ (Pertanyaan umum) |
 | Traduction faite par une IA | Diterjemahkan oleh AI |
+
+## Langue ajoutée ensuite : russe (ru)
+
+Fichiers : `assets/i18n/src/nord12/<zone>.tsv` (1re ligne `fr ¦ ru ¦ uk`), 2e colonne. `node scripts/i18n-todo.js ru <zone>`
+montre l’anglais, l’allemand et le polonais (langue slave déjà traduite, mêmes pluriels). Russe standard, ton simple et
+chaleureux : on **tutoie** (*ты* : « Ты уверен(а)? », « твоя генеалогия », « Выбери… », « Попробуй ещё раз ») — jamais
+*вы*, même dans les messages d’erreur ; quand le genre de la personne compte, les deux formes (« уверен(а) », « я сделал(а) »).
+Boutons à l’infinitif (« Сохранить », « Удалить », « Добавить », « Закрыть ») ; « Отмена » pour fermer sans garder,
+« ↶ Отменить » pour défaire. Guillemets **«…» sans espaces à l’intérieur** ; pas d’espace avant « : ? ! ; » ; tiret « — ».
+Lettre « ё » écrite (« всё », « ещё ») ; jamais de lettres ukrainiennes (і, ї, є, ґ).
+Exemples de dates d’actes en chiffres (« 12/03/1790 ») ou laissés en français (« vers 1784 », « an II ») : c’est ce que l’app
+comprend ; nombres avec la virgule décimale et l’espace des milliers (`ru-RU` : « 3,5 », « 1 000 ») ; dates et nombres
+`ru-RU`, sinon `en` (`intlFallback`). Touches de déplacement « W A S D ».
+**Pluriel : trois formes** dans cet ordre `one|few|many` (`FORMS.ru`), comme le polonais : 1, 21, 31… sauf 11 | 2 à 4, 22 à
+24… sauf 12 à 14 | 0, 5 à 20, 25 à 30… (`=personne ¦ человек|человека|человек`, `=semaine ¦ неделя|недели|недель`) ; les
+nombres à virgule prennent la forme few (« 1,5 человека »). Hors `plural()`, un nombre variable ne s’accorde pas : tourner la
+phrase (« Элементов: {n} », « Найдено: {what} », « Импортировано: {what}. »).
+
+| Français | Русский |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | карточка |
+| 📒 Fiches (sujets) | 📒 Заметки |
+| Liste \| Fiches (affichage) | Список \| Карточки |
+| personne / Personnes | человек / Люди |
+| généalogie (la base de la personne) | генеалогия (твоя генеалогия) |
+| base (de données) | база |
+| acte | запись (акта), запись акта |
+| baptême / naissance | крещение / рождение |
+| mariage | брак |
+| décès | смерть |
+| parrain / marraine | крёстный / крёстная |
+| témoin / déclarant | свидетель / заявитель |
+| ascendants / descendants | предки / потомки |
+| ancêtre | предок |
+| branche | ветвь |
+| génération | поколение |
+| implexe | импликс |
+| recensement | перепись |
+| inventaire après décès | опись имущества после смерти |
+| dépouillement | выписка |
+| cote (d’archive) | шифр |
+| mur de brique | тупик |
+| cousinade | встреча родни |
+| commune / ville / village | коммуна / город / деревня |
+| paroisse | приход |
+| lieu | место |
+| source | источник |
+| média / Médias | медиафайл / Медиафайлы |
+| étiquette | метка |
+| enquête / Enquêtes | расследование / Расследования |
+| Recherche (onglet) | Исследования |
+| Battue | облава |
+| catalogue raisonné | каталог-резоне |
+| Tableau de bord | Панель управления |
+| widget | виджет |
+| Graphiques / Diagrammes | Графики / Диаграммы |
+| Carte | Карта |
+| arbre | древо |
+| Listes | Списки |
+| Chronologie | Хронология |
+| Trésors | Сокровища |
+| Réglages | Настройки |
+| Apparence | Внешний вид |
+| Mode simple / Mode consultation | Простой режим / Режим просмотра |
+| Sauvegarde | Резервная копия |
+| Enregistrer / ✓ Enregistré | Сохранить / ✓ Сохранено |
+| Annuler (bouton) | Отмена |
+| ↶ Annuler / ↷ Rétablir | ↶ Отменить / ↷ Вернуть |
+| Fermer | Закрыть |
+| Supprimer | Удалить |
+| Retirer (détacher) | Убрать |
+| Modifier | Изменить |
+| Créer… / ＋ Ajouter… / ＋ Nouveau… | Создать… / ＋ Добавить… / ＋ Новый… (Новая…, Новое…) |
+| Relier | Связать |
+| ↺ Remettre comme au départ | ↺ Вернуть как было |
+| Réessayer | Повторить попытку |
+| ⤒ Importer / ⤓ Exporter ▾ | ⤒ Импорт / ⤓ Экспорт ▾ |
+| 🖨 Imprimer | 🖨 Печать |
+| Chercher / Filtrer ▾ / Trier : | Искать / Фильтр ▾ / Сортировать: |
+| ✓ Compris : | ✓ Понятно: |
+| Aimanter | Притягивать |
+| onglet | вкладка |
+| fichier / dossier | файл / папка |
+| Tableur / Traitement de texte | Электронная таблица / Текстовый редактор |
+| Mise en page | Вёрстка |
+| ordinateur | компьютер |
+| app | приложение |
+| FAQ | FAQ (частые вопросы) |
+| Traduction faite par une IA | Перевод сделан ИИ |
+
+## Langue ajoutée ensuite : ukrainien (uk)
+
+Mêmes fichiers que le russe : `assets/i18n/src/nord12/<zone>.tsv`, 3e colonne. `node scripts/i18n-todo.js uk <zone>` montre
+l’anglais, l’allemand et le polonais. **Traduire depuis le français**, jamais depuis le russe (les faux amis sont nombreux).
+Ukrainien standard, ton simple et chaleureux : on **tutoie** (*ти* : « Ти впевнений(а)? », « твоя генеалогія », « Вибери… »,
+« Спробуй ще раз ») — jamais *ви* ; les deux formes quand le genre compte (« впевнений(а) », « я робив(ла) »). Boutons à
+l’infinitif (« Зберегти », « Видалити », « Додати », « Закрити ») ; « Скасувати » pour fermer sans garder, « ↶ Відмінити »
+pour défaire, « ↷ Повторити » pour rétablir. Apostrophe **’** (« пов’язати », « ім’я », « комп’ютер »). « Застосунок » pour
+l’app, « мапа » pour une carte géographique, « тека » pour un dossier. Guillemets **«…» sans espaces à l’intérieur** ; pas
+d’espace avant « : ? ! ; ». Jamais de lettres russes (ы, э, ъ, ё). Mêmes règles que le russe pour les dates d’actes, les
+nombres (`uk-UA` : « 3,5 ») et « W A S D » ; dates et nombres `uk-UA`, sinon `en`. **« uk » est le code de l’ukrainien**
+(pas du Royaume-Uni : l’anglais britannique reste « en »).
+**Pluriel : trois formes** `one|few|many` (`FORMS.uk`), mêmes nombres que le russe (`=personne ¦ … ¦ людина|людини|людей`,
+`=semaine ¦ … ¦ тиждень|тижні|тижнів`) ; les nombres à virgule prennent la forme few (« 1,5 людини »). Hors `plural()`,
+tourner la phrase (« Елементів: {n} », « Знайдено: {what} »).
+
+| Français | Українська |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | картка |
+| 📒 Fiches (sujets) | 📒 Нотатки |
+| Liste \| Fiches (affichage) | Список \| Картки |
+| personne / Personnes | людина / Люди |
+| généalogie (la base de la personne) | генеалогія (твоя генеалогія) |
+| base (de données) | база |
+| acte | актовий запис, запис |
+| baptême / naissance | хрещення / народження |
+| mariage | шлюб |
+| décès | смерть |
+| parrain / marraine | хрещений батько / хрещена мати |
+| témoin / déclarant | свідок / заявник |
+| ascendants / descendants | предки / нащадки |
+| ancêtre | предок |
+| branche | гілка |
+| génération | покоління |
+| implexe | імплекс |
+| recensement | перепис |
+| inventaire après décès | опис майна після смерті |
+| dépouillement | виписка |
+| cote (d’archive) | шифр |
+| mur de brique | глухий кут |
+| cousinade | зустріч родини |
+| commune / ville / village | комуна / місто / село |
+| paroisse | парафія |
+| lieu | місце |
+| source | джерело |
+| média / Médias | медіафайл / Медіафайли |
+| étiquette | мітка |
+| enquête / Enquêtes | розслідування / Розслідування |
+| Recherche (onglet) | Дослідження |
+| Battue | облава |
+| catalogue raisonné | каталог-резоне |
+| Tableau de bord | Панель керування |
+| widget | віджет |
+| Graphiques / Diagrammes | Графіки / Діаграми |
+| Carte | Мапа |
+| arbre | дерево |
+| Listes | Списки |
+| Chronologie | Хронологія |
+| Trésors | Скарби |
+| Réglages | Налаштування |
+| Apparence | Вигляд |
+| Mode simple / Mode consultation | Простий режим / Режим перегляду |
+| Sauvegarde | Резервна копія |
+| Enregistrer / ✓ Enregistré | Зберегти / ✓ Збережено |
+| Annuler (bouton) | Скасувати |
+| ↶ Annuler / ↷ Rétablir | ↶ Відмінити / ↷ Повторити |
+| Fermer | Закрити |
+| Supprimer | Видалити |
+| Retirer (détacher) | Прибрати |
+| Modifier | Змінити |
+| Créer… / ＋ Ajouter… / ＋ Nouveau… | Створити… / ＋ Додати… / ＋ Новий… (Нова…, Нове…) |
+| Relier | Пов’язати |
+| ↺ Remettre comme au départ | ↺ Повернути як було |
+| Réessayer | Спробувати ще раз |
+| ⤒ Importer / ⤓ Exporter ▾ | ⤒ Імпорт / ⤓ Експорт ▾ |
+| 🖨 Imprimer | 🖨 Друк |
+| Chercher / Filtrer ▾ / Trier : | Шукати / Фільтр ▾ / Сортувати: |
+| ✓ Compris : | ✓ Зрозуміло: |
+| Aimanter | Притягувати |
+| onglet | вкладка |
+| fichier / dossier | файл / тека |
+| Tableur / Traitement de texte | Електронна таблиця / Текстовий редактор |
+| Mise en page | Верстка |
+| ordinateur | комп’ютер |
+| app | застосунок |
+| FAQ | FAQ (часті запитання) |
+| Traduction faite par une IA | Переклад зроблено ШІ |
 
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 

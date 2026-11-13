@@ -21,10 +21,12 @@
  *     one|two|few|many|other (mt, CLDR 42 et plus : 1 | 2 | 0, 3 à 10, 103 à 110… | 11 à 19, 111 à 119… | 20 à 102, 120…
  *     et les nombres à virgule ; persuna|persuni|persuni|persuna|persuna — « żewġ persuni » s’écrit avec le nombre {n}) ;
  *     other seulement (vi, id : une seule forme pour tous les nombres, sans « | » ; người, orang) ;
+ *     one|few|many (ru, uk, comme le polonais : 1, 21… sauf 11 | 2 à 4, 22 à 24… sauf 12 à 14 | 0, 5 à 20, 25… ;
+ *     человек|человека|человек, людина|людини|людей ; les nombres à virgule prennent la forme few, « 1,5 человека ») ;
  *   - ligne vide ou commençant par « # » : ignorée. Variables {n}, {x} : les mêmes dans toutes les langues.
  * Les langues ajoutées ensuite ont leurs propres fichiers, un par zone, dans un sous-dossier de assets/i18n/src/ :
  * nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da »), nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb »), nord3/<zone>.tsv
- * (1re ligne « fr ¦ ro »), nord4/<zone>.tsv (1re ligne « fr ¦ fi ¦ hu ») , nord5/<zone>.tsv (1re ligne « fr ¦ hr ¦ sl ») , nord6/<zone>.tsv (1re ligne « fr ¦ lt ¦ lv ¦ et »), nord7/<zone>.tsv (1re ligne « fr ¦ is »), nord8/<zone>.tsv (1re ligne « fr ¦ tr »), nord9/<zone>.tsv (1re ligne « fr ¦ lb ») nord10/<zone>.tsv (1re ligne « fr ¦ sq ¦ mt ») et nord11/<zone>.tsv (1re ligne « fr ¦ vi ¦ id »),
+ * (1re ligne « fr ¦ ro »), nord4/<zone>.tsv (1re ligne « fr ¦ fi ¦ hu ») , nord5/<zone>.tsv (1re ligne « fr ¦ hr ¦ sl ») , nord6/<zone>.tsv (1re ligne « fr ¦ lt ¦ lv ¦ et »), nord7/<zone>.tsv (1re ligne « fr ¦ is »), nord8/<zone>.tsv (1re ligne « fr ¦ tr »), nord9/<zone>.tsv (1re ligne « fr ¦ lb ») nord10/<zone>.tsv (1re ligne « fr ¦ sq ¦ mt »), nord11/<zone>.tsv (1re ligne « fr ¦ vi ¦ id ») et nord12/<zone>.tsv (1re ligne « fr ¦ ru ¦ uk »),
  * mêmes clés
  * (y compris « ctx|… » et « =mot ») que assets/i18n/src/<zone>.tsv : ainsi on les traduit sans toucher aux fichiers des
  * 7 premières langues. Tout sous-dossier de src/ est lu ; chaque fichier dit ses langues dans sa 1re ligne : toutes les
@@ -39,10 +41,10 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'assets/i18n/src');
 const NORD = path.join(SRC, 'nord');
 const CORE = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];  // traduites en entier : une clé absente est une erreur
-const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id']; // en cours de traduction : une clé absente → repli sur le français
+const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id', 'ru', 'uk']; // en cours de traduction : une clé absente → repli sur le français
 const LANGS = [...CORE, ...NEW_LANGS];
-const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)', ro: 'Română', fi: 'Suomi', hu: 'Magyar', hr: 'Hrvatski', sl: 'Slovenščina', lt: 'Lietuvių', lv: 'Latviešu', et: 'Eesti', is: 'Íslenska', tr: 'Türkçe', lb: 'Lëtzebuergesch', sq: 'Shqip', mt: 'Malti', vi: 'Tiếng Việt', id: 'Bahasa Indonesia'};
-const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], ro: ['one', 'few', 'other'], hr: ['one', 'few', 'other'], sl: ['one', 'two', 'few', 'other'], lt: ['one', 'few', 'other'], lv: ['zero', 'one', 'other'], mt: ['one', 'two', 'few', 'many', 'other'], vi: ['other'], id: ['other'], def: ['one', 'other']};
+const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)', ro: 'Română', fi: 'Suomi', hu: 'Magyar', hr: 'Hrvatski', sl: 'Slovenščina', lt: 'Lietuvių', lv: 'Latviešu', et: 'Eesti', is: 'Íslenska', tr: 'Türkçe', lb: 'Lëtzebuergesch', sq: 'Shqip', mt: 'Malti', vi: 'Tiếng Việt', id: 'Bahasa Indonesia', ru: 'Русский', uk: 'Українська'};
+const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], ro: ['one', 'few', 'other'], hr: ['one', 'few', 'other'], sl: ['one', 'two', 'few', 'other'], lt: ['one', 'few', 'other'], lv: ['zero', 'one', 'other'], mt: ['one', 'two', 'few', 'many', 'other'], vi: ['other'], id: ['other'], ru: ['one', 'few', 'many'], uk: ['one', 'few', 'many'], def: ['one', 'other']};
 
 function readFile(file, label) {
     const out = [];
@@ -115,7 +117,7 @@ function forms(code, v) {
     const parts = v.split('|').map(s => s.trim());
     const names = FORMS[code] || FORMS.def, o = {};
     names.forEach((n, i) => { o[n] = parts[i] || parts[parts.length - 1]; });
-    if (code === 'pl') o.other = o.few;
+    if (code === 'pl' || code === 'ru' || code === 'uk') o.other = o.few; // Intl (pl, ru, uk) : 1,5 → « other » (comme « 2 à 4 » : 1,5 osoby, 1,5 человека)
     else if (code === 'cs' || code === 'sk') { o.other = o.many; o.many = o.few; } // Intl (cs, sk) : 5 et plus → « other », 1,5 → « many » (comme « 2 à 4 »)
     else if (code === 'lt') o.many = o.other; // Intl (lt) : 1,5 → « many » : la forme other
     else if (!o.other) o.other = o.one;

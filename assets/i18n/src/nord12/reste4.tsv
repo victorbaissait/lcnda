@@ -1,0 +1,238 @@
+fr ¦ ru ¦ uk
+# ═════ zone « reste4 » : russe (ru), ukrainien (uk) ═════
+Mesures anciennes par région ¦ Старинные меры по регионам ¦ Старовинні міри за регіонами
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Меры менялись от провинции к провинции, иногда от деревни к деревне. Выбери регион, значение и единицу: приложение даст соответствие в метрах, арах или литрах и в других мерах этого места. ¦ Міри змінювалися від провінції до провінції, іноді від села до села. Вибери регіон, значення та одиницю: застосунок дасть відповідник у метрах, арах чи літрах та в інших мірах цього місця.
+Région / ville ¦ Регион / город ¦ Регіон / місто
+Entre une valeur. ¦ Введи значение. ¦ Введи значення.
+Longueurs ¦ Длина ¦ Довжина
+Grains (matières sèches) ¦ Зерно (сыпучие продукты) ¦ Зерно (сипкі продукти)
+Liquides (vin, cidre, huile) ¦ Жидкости (вино, сидр, масло) ¦ Рідини (вино, сидр, олія)
+kilomètre ¦ километр ¦ кілометр
+mètre carré ¦ квадратный метр ¦ квадратний метр
+are ¦ ар ¦ ар
+hectare ¦ гектар ¦ гектар
+litre ¦ литр ¦ літр
+hectolitre ¦ гектолитр ¦ гектолітр
+Paris, Île-de-France (mesures du roi) ¦ Париж, Иль-де-Франс (королевские меры) ¦ Париж, Іль-де-Франс (королівські міри)
+Lyon, Lyonnais ¦ Лион, Лионне ¦ Ліон, Ліонне
+Bretagne (Rennes) ¦ Бретань (Ренн) ¦ Бретань (Ренн)
+Normandie (Rouen) ¦ Нормандия (Руан) ¦ Нормандія (Руан)
+Bourgogne (Dijon, Beaune) ¦ Бургундия (Дижон, Бон) ¦ Бургундія (Діжон, Бон)
+Provence (Marseille) ¦ Прованс (Марсель) ¦ Прованс (Марсель)
+Lorraine (Nancy) ¦ Лотарингия (Нанси) ¦ Лотарингія (Нансі)
+Alsace (Strasbourg) ¦ Эльзас (Страсбург) ¦ Ельзас (Страсбург)
+Flandre (Lille) ¦ Фландрия (Лилль) ¦ Фландрія (Лілль)
+très variable ¦ очень по-разному ¦ дуже по-різному
+très variable d’une ville à l’autre ¦ очень по-разному от города к городу ¦ дуже по-різному від міста до міста
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ очень по-разному (от 1 500 до 3 000 м² в зависимости от места) ¦ дуже по-різному (від 1 500 до 3 000 м² залежно від місця)
+de 45 à 50 litres selon le lieu ¦ от 45 до 50 литров в зависимости от места ¦ від 45 до 50 літрів залежно від місця
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈: приблизное значение или разное в разных городах. Источники: закон от 19 фримера VIII года (королевский фут, туаз) и «Tables de comparaison entre les mesures anciennes et celles qui les remplacent», изданные по департаментам (X год – 1812). Для конкретной коммуны ищи таблицу своего департамента в департаментском архиве. ¦ ≈: приблизне значення або різне в різних містах. Джерела: закон від 19 фрімера VIII року (королівський фут, туаз) і «Tables de comparaison entre les mesures anciennes et celles qui les remplacent», видані за департаментами (X рік – 1812). Для конкретної комуни шукай таблицю свого департаменту в департаментському архіві.
+Âge ↔ date de naissance ¦ Возраст ↔ дата рождения ¦ Вік ↔ дата народження
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ В записях актов часто указан возраст, а не дата рождения. «32 года при смерти 12/03/1790» → родился между двумя датами. Или наоборот: точный возраст на дату. ¦ В актових записах часто вказано вік, а не дату народження. «32 роки на момент смерті 12/03/1790» → народився між двома датами. Або навпаки: точний вік на дату.
+exact (ans révolus) ¦ точный (полных лет) ¦ точний (повних років)
+« environ » (± 2 ans) ¦ «около» (± 2 года) ¦ «близько» (± 2 роки)
+arrondi (± 5 ans) ¦ округлённый (± 5 лет) ¦ округлений (± 5 років)
+très vague (± 10 ans) ¦ очень приблизительный (± 10 лет) ¦ дуже приблизний (± 10 років)
+À la date de ¦ На дату ¦ На дату
+Entre un âge et la date de l’acte. ¦ Введи возраст и дату записи. ¦ Введи вік і дату запису.
+Âge le ¦ Возраст на ¦ Вік на
+Entre une date de naissance et une autre date. ¦ Введи дату рождения и другую дату. ¦ Введи дату народження й іншу дату.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Дата не распознана: напиши, например, 12/03/1790, 03/1790 или 1790. ¦ Дату не розпізнано: напиши, наприклад, 12/03/1790, 03/1790 або 1790.
+Naissance entre le {from} et le {to} ¦ Рождение между {from} и {to} ¦ Народження між {from} і {to}
+soit vers {when} (entre {lo} et {hi} révolus) ¦ то есть около {when} (от {lo} до {hi} полных) ¦ тобто близько {when} (від {lo} до {hi} повних)
+soit vers {when} ¦ то есть около {when} ¦ тобто близько {when}
+Date non reconnue : écris par exemple 13/03/1757. ¦ Дата не распознана: напиши, например, 13/03/1757. ¦ Дату не розпізнано: напиши, наприклад, 13/03/1757.
+La seconde date est avant la naissance. ¦ Вторая дата раньше рождения. ¦ Друга дата раніша за народження.
+soit {days} de vie ¦ то есть {days} жизни ¦ тобто {days} життя
+Entre {min} et {max} ¦ От {min} до {max} ¦ Від {min} до {max}
+Une des dates est incomplète. ¦ Одна из дат неполная. ¦ Одна з дат неповна.
+Écart entre deux dates ¦ Промежуток между двумя датами ¦ Проміжок між двома датами
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ Сколько времени прошло между двумя записями? Годы, месяцы, дни, общее число дней и недель. Неполная дата («03/1790», «1802») даёт минимальный и максимальный промежуток. ¦ Скільки часу минуло між двома записами? Роки, місяці, дні, загальна кількість днів і тижнів. Неповна дата («03/1790», «1802») дає мінімальний і максимальний проміжок.
+9 novembre 1799 ¦ 09/11/1799 ¦ 09/11/1799
+Entre deux dates. ¦ Введи две даты. ¦ Введи дві дати.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Дата не распознана: напиши, например, 14/07/1789, 07/1789 или 1789. ¦ Дату не розпізнано: напиши, наприклад, 14/07/1789, 07/1789 або 1789.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (вторая дата более ранняя: промежуток считается в обратную сторону) ¦ (друга дата раніша: проміжок рахується у зворотний бік)
+{weeks} et {days} ¦ {weeks} и {days} ¦ {weeks} і {days}
+Du {a} au {b} : une date est incomplète. ¦ С {a} по {b}: одна дата неполная. ¦ З {a} по {b}: одна дата неповна.
+=semaine ¦ неделя|недели|недель ¦ тиждень|тижні|тижнів
+Jour de la semaine ¦ День недели ¦ День тижня
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ На какой день недели пришлась дата? До 1582 года действует юлианский календарь: выбери обычай. ¦ На який день тижня припала дата? До 1582 року діє юліанський календар: вибери звичай.
+France (julien jusqu’au 9 déc. 1582) ¦ Франция (юлианский до 9 дек. 1582) ¦ Франція (юліанський до 9 груд. 1582)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Рим (юлианский до 4 окт. 1582) ¦ Рим (юліанський до 4 жовт. 1582)
+Toujours grégorien ¦ Всегда григорианский ¦ Завжди григоріанський
+Toujours julien ¦ Всегда юлианский ¦ Завжди юліанський
+Indices pour la recherche (baptêmes, mariages…) ¦ Подсказки для поиска (крещения, браки…) ¦ Підказки для пошуку (хрещення, шлюби…)
+Entre une date complète. ¦ Введи полную дату. ¦ Введи повну дату.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ Нужна полная дата: день, месяц и год (напр. 14/07/1789). ¦ Потрібна повна дата: день, місяць і рік (напр. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Такого дня во Франции не было: за 9 декабря 1582 года последовало 20 декабря. ¦ Такого дня у Франції не було: після 9 грудня 1582 року настало 20 грудня.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Такого дня в Риме не было: за 4 октября 1582 года последовало 15 октября. ¦ Такого дня в Римі не було: після 4 жовтня 1582 року настало 15 жовтня.
+soit le {date} dans le calendrier grégorien ¦ то есть {date} по григорианскому календарю ¦ тобто {date} за григоріанським календарем
+soit le {date} dans le calendrier julien ¦ то есть {date} по юлианскому календарю ¦ тобто {date} за юліанським календарем
+C’était un {day} ¦ Это был день: {day} ¦ Це був день: {day}
+julien ¦ юлианский ¦ юліанський
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ День Господень: много крещений (часто в день рождения или на следующий день); браки редки. ¦ День Господній: багато хрещень (часто в день народження або наступного дня); шлюби рідкісні.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Обычный день свадеб в деревне при Старом порядке. ¦ Звичайний день весіль у селі за Старого порядку.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Излюбленный день свадеб во многих приходах при Старом порядке. ¦ Улюблений день весіль у багатьох парафіях за Старого порядку.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ Постный день в некоторых диоцезах: браки реже. ¦ Пісний день у деяких дієцезіях: шлюби рідше.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Обычный день; праздники Вознесения и Тела Христова. ¦ Звичайний день; свята Вознесіння та Тіла Христового.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Постный день (память о Страстях): в этот день избегали венчаться. ¦ Пісний день (пам’ять про Страсті): цього дня уникали вінчатися.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ Постный день до XVIII века во многих диоцезах; в XIX — частый день гражданских браков. ¦ Пісний день до XVIII століття в багатьох дієцезіях; у XIX — частий день цивільних шлюбів.
+Saint du jour et fêtes mobiles ¦ Святой дня и переходящие праздники ¦ Святий дня та перехідні свята
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Переходящие праздники зависят от Пасхи. Святой дня помогает понять имя: часто давали имя святого дня рождения или крещения. ¦ Перехідні свята залежать від Великодня. Святий дня допомагає зрозуміти ім’я: часто давали ім’я святого дня народження чи хрещення.
+Comput ¦ Пасхалия ¦ Пасхалія
+auto (julien avant 1583) ¦ авто (юлианский до 1583) ¦ авто (юліанський до 1583)
+date|Mois ¦ Месяц ¦ Місяць
+Entre une année entre 400 et 2400. ¦ Введи год от 400 до 2400. ¦ Введи рік від 400 до 2400.
+Dates dans le calendrier julien. ¦ Даты по юлианскому календарю. ¦ Дати за юліанським календарем.
+Ce jour n’existe pas. ¦ Такого дня не существует. ¦ Такого дня не існує.
+Dans ta base, nés ou baptisés ce jour : ¦ В твоей базе родились или крещены в этот день: ¦ У твоїй базі народилися або охрещені цього дня:
+porte le prénom du saint du jour ¦ носит имя святого дня ¦ має ім’я святого дня
+Saint du jour indisponible. ¦ Святой дня недоступен. ¦ Святий дня недоступний.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Святые: обычный календарь французских альманахов (тот же, что у виджета «Имя и святой дня»); он менялся в разные эпохи и в разных диоцезах. ¦ Святі: звичайний календар французьких альманахів (той самий, що у віджета «Ім’я та святий дня»); він змінювався в різні епохи та в різних дієцезіях.
+dimanche, début du temps de la Septuagésime ¦ воскресенье, начало периода Септуагесимы ¦ неділя, початок періоду Септуагесими
+dimanche ¦ воскресенье ¦ неділя
+dimanche gras ¦ Жирное воскресенье ¦ Жирна неділя
+veille des Cendres, fin du carnaval ¦ канун Пепельной среды, конец карнавала ¦ переддень Попільної середи, кінець карнавалу
+début du Carême : plus de mariages jusqu’à Pâques ¦ начало Великого поста: свадеб больше нет до Пасхи ¦ початок Великого посту: весіль більше немає до Великодня
+dimanche des Brandons ¦ воскресенье костров (Brandons) ¦ неділя вогнищ (Brandons)
+jeudi ¦ четверг ¦ четвер
+Pâques fleuries ¦ Вербное воскресенье ¦ Вербна неділя
+baptêmes solennels ¦ торжественные крещения ¦ урочисті хрещення
+dimanche, fin du temps pascal des mariages interdits ¦ воскресенье, конец пасхального периода без свадеб ¦ неділя, кінець великоднього періоду без весіль
+lundi, processions dans les champs ¦ понедельник, крестные ходы по полям ¦ понеділок, хресні ходи полями
+jeudi (fêtée le dimanche suivant après 1802) ¦ четверг (после 1802 года празднуется в следующее воскресенье) ¦ четвер (після 1802 року святкується наступної неділі)
+vendredi ¦ пятница ¦ п’ятниця
+Heures canoniques ¦ Канонические часы ¦ Канонічні години
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ В записях иногда указано время «в час вечерни» или «после большой мессы». Церковные часы следовали за солнцем: день делился на 12 часов, летом более длинных, чем зимой. ¦ У записах іноді вказано час «о годині вечірні» або «після великої меси». Церковні години слідували за сонцем: день ділився на 12 годин, улітку довших, ніж узимку.
+(équinoxe) ¦ (равноденствие) ¦ (рівнодення)
+(jours les plus longs) ¦ (самые длинные дни) ¦ (найдовші дні)
+(jours les plus courts) ¦ (самые короткие дни) ¦ (найкоротші дні)
+vers {time} ¦ около {time} ¦ близько {time}
+{winter} en hiver, {summer} en été ¦ {winter} зимой, {summer} летом ¦ {winter} узимку, {summer} улітку
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ Напиши упоминание по-французски («à l’heure de vêpres», «après complies»…) или смотри таблицу. ¦ Напиши згадку французькою («à l’heure de vêpres», «après complies»…) або дивись таблицю.
+{hour} en {month} : {time} ¦ {hour} в месяце {month}: {time} ¦ {hour} у місяці {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ от {dec} в декабре до {jun} в июне ¦ від {dec} у грудні до {jun} у червні
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Час не распознан: matines, laudes, prime, tierce, sexte, none, vêpres, complies или angélus. ¦ Годину не розпізнано: matines, laudes, prime, tierce, sexte, none, vêpres, complies або angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ ночная служба (в приходах часто пелась накануне вечером или рано утром) ¦ нічна служба (у парафіях часто співалася напередодні ввечері або рано-вранці)
+à l’aube, avant le lever du soleil ¦ на рассвете, до восхода солнца ¦ на світанку, до сходу сонця
+6e heure, midi ¦ 6-й час, полдень ¦ 6-та година, полудень
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ на закате (по воскресеньям в приходе часто уже с начала дня) ¦ на заході сонця (у неділю в парафії часто вже з початку пообіддя)
+à la nuit, avant le coucher ¦ ночью, перед сном ¦ уночі, перед сном
+cloche du matin, de midi et du soir ¦ утренний, полуденный и вечерний колокол ¦ ранковий, полуденний і вечірній дзвін
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Солнечное время (полдень = солнце выше всего), рассчитанное для центра Франции; официальное время существует только с 1891 года. Реальное время служб различалось по приходам и монастырям. ¦ Сонячний час (полудень = сонце найвище), розрахований для центру Франції; офіційний час існує лише з 1891 року. Реальний час служб різнився за парафіями та монастирями.
+Monnaies étrangères anciennes ¦ Старинные иностранные монеты ¦ Старовинні іноземні монети
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ В договорах и описях встречаются пистоли, дукаты, флорины или пиастры. Их стоимость в турских ливрах, счётной монете королевства, в зависимости от эпохи. ¦ У договорах та описах трапляються пістолі, дукати, флорини чи піастри. Їхня вартість у турських ліврах, рахунковій монеті королівства, залежно від епохи.
+Monnaie ¦ Монета ¦ Монета
+XVIIe siècle (1640-1700) ¦ XVII век (1640-1700) ¦ XVII століття (1640-1700)
+XVIIIe siècle (1726-1789) ¦ XVIII век (1726-1789) ¦ XVIII століття (1726-1789)
+Toutes les monnaies à cette époque ¦ Все монеты этой эпохи ¦ Усі монети цієї епохи
+soit ≈ {n} livres ¦ то есть ≈ {n} ливров ¦ тобто ≈ {n} ліврів
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Эта монета не имела хождения во Франции в то время. ¦ Ця монета не мала обігу у Франції в той час.
+Louis d’or (France) ¦ Луидор (Франция) ¦ Луїдор (Франція)
+Écu d’or au soleil (France) ¦ Золотой экю с солнцем (Франция) ¦ Золотий екю із сонцем (Франція)
+Écu blanc ou louis d’argent (France) ¦ Белый экю или серебряный луи (Франция) ¦ Білий екю або срібний луї (Франція)
+Pistole (Espagne, Italie) ¦ Пистоль (Испания, Италия) ¦ Пістоль (Іспанія, Італія)
+Ducat d’or (Venise, Hollande, Empire) ¦ Золотой дукат (Венеция, Голландия, Империя) ¦ Золотий дукат (Венеція, Голландія, Імперія)
+Florin de Hollande (gulden) ¦ Голландский флорин (гульден) ¦ Голландський флорин (гульден)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Рейнский гульден или флорин (Германия, Эльзас, Швейцария) ¦ Рейнський гульден або флорин (Німеччина, Ельзас, Швейцарія)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Талер, риксдалер (Империя, Саксония, Пруссия) ¦ Талер, риксдалер (Імперія, Саксонія, Пруссія)
+Piastre ou réal de huit (Espagne) ¦ Пиастр или восьмерной реал (Испания) ¦ Піастр або восьмерний реал (Іспанія)
+Livre sterling (Angleterre) ¦ Фунт стерлингов (Англия) ¦ Фунт стерлінгів (Англія)
+Livre de Lorraine ¦ Лотарингский ливр ¦ Лотаринзький лівр
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ введён в 1640 году по 10 ливров; 24 ливра с 1726 года до Революции ¦ запроваджений 1640 року по 10 ліврів; 24 ліври з 1726 року до Революції
+plus frappé après 1640 ¦ после 1640 года больше не чеканился ¦ після 1640 року більше не карбувався
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 3 ливра в 1641 году; большой экю в 6 ливров (и малый экю в 3 ливра) в XVIII веке ¦ 3 ліври 1641 року; великий екю в 6 ліврів (і малий екю в 3 ліври) у XVIII столітті
+souvent une monnaie de compte valant 10 livres ¦ часто счётная монета стоимостью 10 ливров ¦ часто рахункова монета вартістю 10 ліврів
+« piastre gourde » des colonies ¦ колониальный «пиастр гурд» ¦ колоніальний «піастр гурд»
+monnaie de compte, d’après le cours du change ¦ счётная монета, по обменному курсу ¦ рахункова монета, за обмінним курсом
+15 sols 6 deniers tournois ¦ 15 турских солей 6 денье ¦ 15 турських солів 6 деньє
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Приблизительные значения (≈) по монетным ордонансам от Людовика XIII до Людовика XVI, весу чистого золота или серебра в монетах и обменному курсу в Париже (Savary, «Dictionnaire universel de commerce»). Курсы часто менялись, особенно с 1689 по 1726 год: это порядок величины. ¦ Приблизні значення (≈) за монетними ордонансами від Людовика XIII до Людовика XVI, вагою чистого золота чи срібла в монетах і обмінним курсом у Парижі (Savary, «Dictionnaire universel de commerce»). Курси часто змінювалися, особливо з 1689 по 1726 рік: це порядок величини.
+Calculateur de générations ¦ Калькулятор поколений ¦ Калькулятор поколінь
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ Сколько поколений между двумя годами? В среднем 25–33 года на поколение: около 30 лет по мужской линии, 27 лет по женской. ¦ Скільки поколінь між двома роками? У середньому 25–33 роки на покоління: близько 30 років за чоловічою лінією, 27 років за жіночою.
+Année (ta naissance) ¦ Год (твоё рождение) ¦ Рік (твоє народження)
+Année (l’ancêtre) ¦ Год (предок) ¦ Рік (предок)
+Entre deux années. ¦ Введи два года. ¦ Введи два роки.
+Générations en arrière ¦ Поколений назад ¦ Поколінь назад
+Depuis l’année ¦ От года ¦ Від року
+Entre deux années différentes. ¦ Введи два разных года. ¦ Введи два різні роки.
+Environ {min} à {max} générations ¦ Примерно от {min} до {max} поколений ¦ Приблизно від {min} до {max} поколінь
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: ≈ {male} поколений по мужской линии (30 лет), ≈ {female} по женской (27 лет) ¦ {years}: ≈ {male} поколінь за чоловічою лінією (30 років), ≈ {female} за жіночою (27 років)
+Entre un nombre de générations (1 à 40) et une année. ¦ Введи число поколений (от 1 до 40) и год. ¦ Введи кількість поколінь (від 1 до 40) і рік.
+ancêtres de la génération {n} ¦ предки поколения {n} ¦ предки покоління {n}
+{gens} en arrière → nés vers {from}–{to} ¦ {gens} назад → родились около {from}–{to} ¦ {gens} назад → народилися близько {from}–{to}
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ ≈ {male} по мужской линии, ≈ {female} по женской ¦ ≈ {male} за чоловічою лінією, ≈ {female} за жіночою
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ {at} {label} теоретически (Sosa от {from} до {to}); всего {total} предков до этого поколения ¦ {at} {label} теоретично (Sosa від {from} до {to}); загалом {total} предків до цього покоління
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ Теоретически число предков удваивается с каждым поколением; на практике их меньше, потому что родственники вступали в брак между собой (импликс). ¦ Теоретично кількість предків подвоюється з кожним поколінням; на практиці їх менше, бо родичі одружувалися між собою (імплекс).
+le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754
+/Documents/Scans généalogie ¦ /Документы/Сканы генеалогии ¦ /Документи/Скани генеалогії
+Saint-Martin de Brive ¦ Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ Приход учреждён в 1792 году; см. также часовню… ¦ Парафію засновано 1792 року; див. також каплицю…
+Religion et noblesse ¦ Религия и дворянство ¦ Релігія та шляхта
+Travail et société ¦ Труд и общество ¦ Праця та суспільство
+Voyages et lieux ¦ Путешествия и места ¦ Подорожі та місця
+Temps et nature ¦ Время и природа ¦ Час і природа
+Formes et repères ¦ Фигуры и метки ¦ Фігури та позначки
+Artistique ¦ Художественные ¦ Мистецькі
+Voyages ¦ Путешествия ¦ Подорожі
+Tous les emojis ¦ Все эмодзи ¦ Усі емодзі
+Autres emojis ¦ Другие эмодзи ¦ Інші емодзі
+Choisir un fond ¦ Выбрать фон ¦ Вибрати тло
+Choisir un fond… ¦ Выбрать фон… ¦ Вибрати тло…
+Choisir un fond de carte ¦ Выбрать подложку карты ¦ Вибрати підкладку мапи
+Choisir une icône… ¦ Выбрать значок… ¦ Вибрати значок…
+Aucune icône ¦ Без значка ¦ Без значка
+Aucun fond ¦ Без фона ¦ Без тла
+choisir ¦ выбрать ¦ вибрати
+valider ¦ подтвердить ¦ підтвердити
+fermer ¦ закрыть ¦ закрити
+Chercher une icône ¦ Искать значок ¦ Шукати значок
+Chercher un fond ¦ Искать фон ¦ Шукати тло
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Искать фон… (напр. Cassini, рельеф, 1850) ¦ Шукати тло… (напр. Cassini, рельєф, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Искать… (по-французски, напр. coeur, bateau, chien) ¦ Шукати… (французькою, напр. coeur, bateau, chien)
+Chercher… (ex. église, mariage, étoile) ¦ Искать… (напр. церковь, брак, звезда) ¦ Шукати… (напр. церква, шлюб, зірка)
+Utiliser « {x} » ¦ Использовать «{x}» ¦ Використати «{x}»
+1 icône pour « {q} » ¦ 1 значок для «{q}» ¦ 1 значок для «{q}»
+{n} icônes pour « {q} » ¦ Значков для «{q}»: {n} ¦ Значків для «{q}»: {n}
+1 fond pour « {q} » ¦ 1 фон для «{q}» ¦ 1 тло для «{q}»
+{n} fonds pour « {q} » ¦ Фонов для «{q}»: {n} ¦ Тел для «{q}»: {n}
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ Для «{q}» ничего нет. Проверь написание или попробуй другое слово. ¦ Для «{q}» нічого немає. Перевір написання або спробуй інше слово.
+Retirer l’icône ¦ Убрать значок ¦ Прибрати значок
+Retirer le fond ¦ Убрать фон ¦ Прибрати тло
+Allemand et alsacien ¦ Немецкий и эльзасский ¦ Німецька та ельзаська
+Néerlandais / flamand ¦ Нидерландский / фламандский ¦ Нідерландська / фламандська
+Croate / serbe en lettres latines ¦ Хорватский / сербский латиницей ¦ Хорватська / сербська латинкою
+Slovène ¦ Словенский ¦ Словенська
+Gaélique irlandais ¦ Ирландский гэльский ¦ Ірландська гельська
+Biélorusse ¦ Белорусский ¦ Білоруська
+Serbe en cyrillique ¦ Сербский кириллицей ¦ Сербська кирилицею
+Hébreu ¦ Иврит ¦ Іврит
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Даты по григорианскому календарю. Возраст в старых записях часто приблизителен: «около 40 лет» может означать 35 или 45. ¦ Дати за григоріанським календарем. Вік у старих записах часто приблизний: «близько 40 років» може означати 35 або 45.
+Changer dans l’onglet Personnes ¦ Изменить во вкладке Люди ¦ Змінити у вкладці Люди
+Mode de chronologie parallèle ¦ Режим параллельной хронологии ¦ Режим паралельної хронології
+Les événements sans année restent sur les fiches. ¦ События без года остаются на карточках. ¦ Події без року залишаються на картках.
+Modifier la frise historique ¦ Изменить историческую ленту времени ¦ Змінити історичну стрічку часу
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Крупные события, поставляемые с приложением, и твои (местная история) ¦ Великі події, що постачаються із застосунком, і твої (місцева історія)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Медиафайлы и архивные документы твоей базы, как люди: список слева (А → Я или в 📁 папках), карточка справа. ¦ Медіафайли та архівні документи твоєї бази, як люди: список ліворуч (А → Я або в 📁 теках), картка праворуч.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Папки сокровищ (переименовать, создать, удалить, выбрать, что в них), порядок, что показывается (сейчас: {n}) ¦ Теки скарбів (перейменувати, створити, видалити, вибрати, що в них), порядок, що показується (зараз: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Папки сокровищ (переименовать, создать, удалить, выбрать, что в них), порядок, что показывается ¦ Теки скарбів (перейменувати, створити, видалити, вибрати, що в них), порядок, що показується
+Me le rappeler (la veille, une semaine avant…) ¦ Напомнить мне (накануне, за неделю…) ¦ Нагадати мені (напередодні, за тиждень…)
+choses à vérifier ¦ что проверить ¦ що перевірити
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Чтобы показать древо человеку, которому неуютно с компьютером: очень большие кнопки, только древо, фото и карточки, и ничего, что можно случайно изменить. ¦ Щоб показати дерево людині, якій незручно з комп’ютером: дуже великі кнопки, лише дерево, фото й картки, і нічого, що можна випадково змінити.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Нет гипотез: вопрос, который нужно решить («родился в Нав или в Тюле?»), с доводами за и против. ¦ Немає гіпотез: питання, яке треба розв’язати («народився в Нав чи в Тюлі?»), з доказами за і проти.
+Détaillée ¦ Подробная ¦ Детальна
+Ce qu’on inclut ¦ Что включить ¦ Що включити
+Texte de l’app ¦ Текст приложения ¦ Текст застосунку
+Regénérer ¦ Создать заново ¦ Створити знову
+Une journée… ¦ Один день из жизни… ¦ Один день із життя…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Переписать текст по карточке и посмотреть, что изменилось ¦ Переписати текст за карткою й подивитися, що змінилося
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ Небольшой рассказ об одном дне его жизни: возраст, семья, деревня, ремесло, календарь, погода, обстановка ¦ Невелика розповідь про один день із життя: вік, родина, село, ремесло, календар, погода, обставини
+Ajouter un événement local ¦ Добавить местное событие ¦ Додати місцеву подію
+Rien dans cette sorte pendant sa vie. ¦ Ничего такого за время его жизни. ¦ Нічого такого за час його життя.
+Voir toute la liste et ses sources ¦ Посмотреть весь список и его источники ¦ Переглянути весь список і його джерела
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ Праздник, наводнение, пожар в деревне… привязанные к коммуне ¦ Свято, повінь, пожежа в селі… прив’язані до комуни
+Sortes d’événements ¦ Виды событий ¦ Види подій
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Статья, интервью на радио, телепередача, объявление о рождении или некролог, опубликованное фото… ¦ Стаття, інтерв’ю на радіо, телепередача, оголошення про народження чи некролог, опубліковане фото…
+Ajouter un passage ¦ Добавить упоминание ¦ Додати згадку
+La revue de presse de cette personne ¦ Пресса об этом человеке ¦ Преса про цю людину
+Modifier l’identifiant Wikidata ¦ Изменить идентификатор Wikidata ¦ Змінити ідентифікатор Wikidata
+Plus de détails ¦ Подробнее ¦ Докладніше

@@ -2241,6 +2241,9 @@
         // vietnamien : les mots sans leurs accents (faqFold : « người » → nguoi, « đ » → d) ; pas les mots qui, sans accents, en cachent un autre (« anh » : ảnh, « ban » : bản đồ, « the » : thẻ, « sao » : sao lưu, « ho » : họ, « dang » : dạng, « tai » : tải…)
         vi: 'la va hoac nhung cua co khong cho voi mot cac duoc de trong khi nao lam gi nhu vay toi minh no ta thi neu tu ra vao nay kia day roi da se muon can phai hay nhe cung rat nhieu it ung app lcnda chuong trinh phan mem cach dieu',
         id: 'dan atau tapi tetapi dari ke di pada dengan tanpa untuk oleh dalam yang ini itu adalah ialah ada tidak bukan ya jika kalau bagaimana apa apakah mana siapa kenapa mengapa kapan dimana saya aku kamu anda dia ia kami kita mereka bisa dapat mau ingin harus perlu cara juga hanya sudah akan sedang lebih sangat semua beberapa sini sana aplikasi app lcnda program hal sesuatu silsilah',
+        // russe et ukrainien : les mots en cyrillique, ramenés par faqFold (ё → е, й → и, ї → і) ; les petits mots seulement
+        ru: 'и или но а в во на с со к ко по о об от до из у за для без при про как что это этот эта эти тот та те так где когда почему зачем кто какои какая какие каким можно нужно надо ли я меня мне мои моя мои ты тебя тебе твои твоя твои он она они оно его ее их мы нас нам наш не нет да же бы уже еще только тоже очень все все весь сделать делать хочу хотел хотела могу может можешь есть быть был была app lcnda приложение программа приложении вещь генеалогия',
+        uk: 'і и та або але а в у на з із зі до від по про для без при як що це цеи ця ці тои ті так де коли чому навіщо хто якии яка які яким можна треба потрібно чи я мене мені міи моя моі ти тебе тобі твіи твоя твоі він вона вони воно иого іі іх ми нас нам наш не ні же б вже ще лише тільки теж дуже все усе весь зробити робити хочу хотів хотіла можу може можеш є бути був була app lcnda застосунок програма застосунку річ генеалогія',
     }).map(([k, v]) => [k, new Set(v.split(' '))]));
     const FAQ_SYN = {photo: 'image media scan document', image: 'photo media', media: 'photo image document', scan: 'photo document numeriser', pdf: 'imprimer livre exporter', imprimer: 'pdf livre', livre: 'livret pdf imprimer',
         supprimer: 'effacer enlever retirer', effacer: 'supprimer', ancetre: 'sosa lignee aieul', sosa: 'ancetre lignee cujus', cujus: 'sosa depart', arbre: 'genealogie diagramme ascendant', carte: 'lieu plan',
@@ -2279,6 +2282,8 @@
         mt: {ritratt: 'immagni media skenjar', immagni: 'ritratt media', pdf: 'ipprintja ktieb esporta', ipprintja: 'pdf ktieb', ktieb: 'pdf ipprintja', hassar: 'nehhi', nehhi: 'hassar', backup: 'kopja issejvja', antenat: 'sosa', sigra: 'dijagramma', mappa: 'post', dijagramma: 'statistika grafika', importa: 'import gedcom heredis gramps ancestry myheritage', esporta: 'export pdf csv', zball: 'kontroll', hoss: 'awdjo recording', tieg: 'zwieg', zwieg: 'tieg', fittex: 'sib', sib: 'fittex'},
         vi: {anh: 'hinh media quet', hinh: 'anh', pdf: 'in sach xuat', in: 'pdf sach', sach: 'pdf in', xoa: 'go bo', go: 'xoa', luu: 'sao chep', tien: 'sosa', cay: 'pha so', ban: 'dia diem', bieu: 'thong ke', nhap: 'import gedcom heredis gramps ancestry myheritage', xuat: 'export pdf csv', loi: 'sai', sai: 'loi', am: 'thanh ghi', cuoi: 'hon', tim: 'kiem'},
         id: {foto: 'gambar media pindai', gambar: 'foto', pdf: 'cetak buku ekspor', cetak: 'pdf buku', buku: 'pdf cetak', hapus: 'buang', buang: 'hapus', cadangan: 'salinan simpan backup', leluhur: 'sosa', pohon: 'diagram', peta: 'tempat', grafik: 'statistik diagram', impor: 'import gedcom heredis gramps ancestry myheritage', ekspor: 'export pdf csv', kesalahan: 'periksa', suara: 'audio rekaman', nikah: 'perkawinan', perkawinan: 'nikah', cari: 'temukan', temukan: 'cari'},
+        ru: {фото: 'фотография изображение медиа скан', фотография: 'фото', изображение: 'фото', pdf: 'печать книга экспорт', печать: 'pdf книга', книга: 'pdf печать', удалить: 'убрать стереть', убрать: 'удалить', копия: 'резервная сохранить backup', резервная: 'копия backup', предок: 'sosa', предки: 'sosa', древо: 'дерево диаграмма', дерево: 'древо', карта: 'место', диаграмма: 'статистика график', импорт: 'import gedcom heredis gramps ancestry myheritage', экспорт: 'export pdf csv', ошибка: 'проверка', звук: 'аудио запись', свадьба: 'брак', брак: 'свадьба', искать: 'наити поиск', наити: 'искать'},
+        uk: {фото: 'фотографія зображення медіа скан', фотографія: 'фото', зображення: 'фото', pdf: 'друк книга експорт', друк: 'pdf книга', книга: 'pdf друк', видалити: 'прибрати стерти', прибрати: 'видалити', копія: 'резервна зберегти backup', резервна: 'копія backup', предок: 'sosa', предки: 'sosa', дерево: 'діаграма', мапа: 'карта місце', карта: 'мапа', діаграма: 'статистика графік', імпорт: 'import gedcom heredis gramps ancestry myheritage', експорт: 'export pdf csv', помилка: 'перевірка', звук: 'аудіо запис', весілля: 'шлюб', шлюб: 'весілля', шукати: 'знаити пошук', знаити: 'шукати'},
     };
     // les synonymes vont dans les deux sens, et se retrouvent aussi au pluriel ou sous une autre forme du mot
     const faqBoth = map => Object.entries({...map}).forEach(([k, v]) => v.split(' ').forEach(x => { map[x] = [...new Set(`${map[x] || ''} ${k}`.trim().split(' '))].join(' '); }));
@@ -2314,10 +2319,12 @@
         mt: w => { const x = w.length > 6 ? w.replace(/^(tal|tad|tat|tas|taz|tan|tar|fil|bil|mill|lill|ghall|il|is|it|id|in|ir|iz|ic|ix)(?=[a-z]{4})/, '') : w; return x.length > 4 ? x.replace(/(ijiet|jiet|iet|i|a)$/, '') : x; }, // maltais : l’article collé (« il-ktieb » → ktieb) et les pluriels (ħ, ġ, ż, ċ ramenés à h, g, z, c par faqFold)
         vi: w => w, // vietnamien : des mots d’une syllabe, sans terminaisons (ơ, ư, đ et les accents empilés ramenés à o, u, d par faqFold)
         id: w => { let x = w.length > 5 ? w.replace(/(nya|lah|kah)$/, '') : w; x = x.length > 5 ? x.replace(/(kan|an)$/, '') : x; return x.length > 5 ? x.replace(/^(meng|meny|mem|men|me|peng|peny|pem|pen|per|pe|di|ber|ter|ke|se)/, '') : x; }, // indonésien : « -nya », « -kan », « -an » et les préfixes (« menghapus », « dihapus » → hapus)
+        ru: w => (w.length > 4 ? w.replace(/(иями|ями|ами|ого|его|ому|ему|ыми|ими|иях|ях|ах|ией|ию|ыи|ои|ии|еи|ая|яя|ое|ее|ые|ие|ия|ов|ев|ом|ем|ам|ям|ую|юю|ть|а|я|о|е|ы|и|у|ю|ь)$/, '') : w), // russe : terminaisons des noms, des adjectifs et des verbes (« фотографии », « фотография » → фотограф ; й, ё ramenés à и, е par faqFold)
+        uk: w => (w.length > 4 ? w.replace(/(ями|ами|ові|еві|ого|ому|ими|іми|ях|ах|ии|іи|ою|ею|ам|ям|ом|ем|ів|іі|ія|ію|ти|ть|а|я|о|е|и|і|у|ю|ь)$/, '') : w), // ukrainien : même principe (ї, й ramenés à і, и par faqFold ; l’apostrophe coupe le mot)
     };
     const faqStem = (w, L = 'fr') => (FAQ_STEM[L] || FAQ_STEM.fr)(w);
     // un mot composé (« faire-part ») reste entier dans la question ; dans les textes, il compte entier et en morceaux
-    const faqWords = (t, query = false, L = 'fr') => { const stop = L === 'fr' ? FAQ_STOP : (FAQ_STOP_L[L] || FAQ_STOP); const out = []; faqFold(t).split(/[^a-z0-9-]+/).forEach(tok => { const parts = tok.split('-').filter(Boolean); if (parts.length > 1) { out.push(parts.join('')); if (!query) out.push(...parts); } else if (parts[0]) out.push(parts[0]); }); return out.filter(w => w.length > 1 && !stop.has(w)); };
+    const faqWords = (t, query = false, L = 'fr') => { const stop = L === 'fr' ? FAQ_STOP : (FAQ_STOP_L[L] || FAQ_STOP); const out = []; faqFold(t).split(/[^a-z0-9а-яієґ-]+/).forEach(tok => { const parts = tok.split('-').filter(Boolean); if (parts.length > 1) { out.push(parts.join('')); if (!query) out.push(...parts); } else if (parts[0]) out.push(parts[0]); }); return out.filter(w => w.length > 1 && !stop.has(w)); };
     const faqIndex = new Map(); // « code|repère » → {qs, as} (les mots, déjà réduits)
     const faqIdx = (L, key, group, q, a) => { const k = `${L}|${key}|${q.length}`; let x = faqIndex.get(k); if (!x) { x = {qs: faqWords(q + ' ' + group, false, L).map(w => faqStem(w, L)), as: faqWords(a, false, L).map(w => faqStem(w, L))}; faqIndex.set(k, x); } return x; };
     function faqSearch(query) {
@@ -2326,7 +2333,7 @@
         const want = lang => faqWords(query, true, lang).map(w => [faqStem(w, lang), ...faqSyn(w, lang).split(' ').filter(Boolean).map(x => faqStem(x, lang))]);
         const wantFr = want('fr'), wantL = L === 'fr' ? [] : want(L);
         if (!wantFr.length && !wantL.length) return null;
-        const folded = faqFold(query).replace(/[^a-z0-9]+/g, ' ').trim();
+        const folded = faqFold(query).replace(/[^a-z0-9а-яієґ]+/g, ' ').trim();
         const has = (list2, w) => list2.some(x => x === w || (w.length >= 4 && (x.startsWith(w) || w.startsWith(x)) && x.length >= 4));
         const scoreOf = (wanted, {qs, as}) => {
             if (!wanted.length) return 0;
@@ -2345,7 +2352,7 @@
             let score = scoreOf(wantFr, faqIdx('fr', id, group, r.fq, r.fa));
             if (L !== 'fr' && (r.tq || r.ta)) score = Math.max(score, scoreOf(wantL, faqIdx(L, id, label, r.q, r.a)));
             // la question exacte (un lien de l'app qui cite la question française, ou la question traduite) passe devant tout
-            if (folded && (folded === faqFold(r.fq).replace(/[^a-z0-9]+/g, ' ').trim() || (r.tq && folded === faqFold(r.q).replace(/[^a-z0-9]+/g, ' ').trim()))) score += 100;
+            if (folded && (folded === faqFold(r.fq).replace(/[^a-z0-9а-яієґ]+/g, ' ').trim() || (r.tq && folded === faqFold(r.q).replace(/[^a-z0-9а-яієґ]+/g, ' ').trim()))) score += 100;
             if (score) hits.push({group: label, q: r.q, a: r.a, fq: r.fq, fr: L !== 'fr' && !r.ta, score});
         }));
         hits.sort((x, y) => y.score - x.score);
