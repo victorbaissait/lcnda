@@ -1,0 +1,980 @@
+fr ¦ el ¦ bg
+Génération {g} ¦ Γενιά {g} ¦ Поколение {g}
+★ ancêtre commun ¦ ★ κοινός πρόγονος ¦ ★ общ предшественик
+Comment sont-ils parents ? ¦ Πώς συγγενεύουν; ¦ Как са роднини?
+cousins issus de germains aussi par {name} (implexe) ¦ δεύτερα ξαδέλφια και μέσω {name} (implexe) ¦ втори братовчеди и чрез {name} (имплекс)
+⚠ Lieux sans position : {list} — écris « Nom 48.11, -1.68 » ¦ ⚠ Τόποι χωρίς θέση: {list} — γράψε «Όνομα 48.11, -1.68» ¦ ⚠ Места без позиция: {list} — напиши „Име 48.11, -1.68“
+De la génération {a} à la génération {b}, le centre de la famille s’est déplacé de {km} km. ¦ Από τη γενιά {a} στη γενιά {b}, το κέντρο της οικογένειας μετακινήθηκε {km} km. ¦ От поколение {a} до поколение {b} центърът на семейството се е преместил с {km} km.
+Centre de gravité de {n} générations, {km} km parcourus. ¦ Κέντρο βάρους γενιών ({n}), διανύθηκαν {km} km. ¦ Център на тежестта на поколенията ({n}), изминати {km} km.
+Centre de gravité de {n} générations. ¦ Κέντρο βάρους γενιών ({n}). ¦ Център на тежестта на поколенията ({n}).
+Ajoute des lieux avec leur génération (ou « Depuis l’app »). ¦ Πρόσθεσε τόπους με τη γενιά τους (ή «Από την εφαρμογή»). ¦ Добави места с тяхното поколение (или „От приложението“).
+Gén. {g} ({max}) ¦ Γεν. {g} ({max}) ¦ Пок. {g} ({max})
+{found} ancêtres trouvés sur {max} possibles en {n} générations ({pct} %). ¦ Βρέθηκαν πρόγονοι: {found} από {max} δυνατούς, γενιές: {n} ({pct} %). ¦ Намерени предци: {found} от {max} възможни, поколения: {n} ({pct} %).
+Complétude : {pct} % des ancêtres sur {n} générations. ¦ Πληρότητα: {pct} % των προγόνων, γενιές: {n}. ¦ Пълнота: {pct} % от предците, поколения: {n}.
+… et {n} lignes de plus (« 🖨 Imprimer le tableau » les met toutes) ¦ … και ακόμη γραμμές: {n} (η «🖨 Εκτύπωση του πίνακα» τις βάζει όλες) ¦ … и още редове: {n} („🖨 Печат на таблицата“ ги включва всички)
+Tableau d’ascendance : {n} ancêtres. ¦ Πίνακας προγόνων: {n}. ¦ Таблица на предците: {n}.
+Tableau d’ascendance ¦ Πίνακας προγόνων ¦ Таблица на предците
+Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »). ¦ Πρόσθεσε αντιστοιχίες από {lo} έως {hi} cM με τις κοινές τους αντιστοιχίες (ή «Από την εφαρμογή»). ¦ Добави съвпадения от {lo} до {hi} cM с общите им съвпадения (или „От приложението“).
+dates · surtout en {month} ¦ ημερομηνίες · κυρίως τον {month} ¦ дати · най-вече през {month}
+Roue de l’année : {n} dates, surtout en {month}. ¦ Τροχός του έτους: ημερομηνίες {n}, κυρίως τον {month}. ¦ Колело на годината: дати {n}, най-вече през {month}.
+{name} (à gauche) ¦ {name} (αριστερά) ¦ {name} (вляво)
+{name} (à droite) ¦ {name} (δεξιά) ¦ {name} (вдясно)
+Barres et courbe : {n} lignes. ¦ Μπάρες και καμπύλη: γραμμές {n}. ¦ Стълбове и крива: редове {n}.
+Sous {v} ¦ Κάτω από {v} ¦ Под {v}
+Au-dessus de {v} ¦ Πάνω από {v} ¦ Над {v}
+Collines empilées : {s} séries sur {n} périodes. ¦ Στοιβαγμένοι λόφοι: σειρές {s}, περίοδοι {n}. ¦ Наредени хълмове: серии {s}, периоди {n}.
+Coordonnées parallèles : {n} lignes sur {a} axes. ¦ Παράλληλες συντεταγμένες: γραμμές {n}, άξονες {a}. ¦ Паралелни координати: линии {n}, оси {a}.
+Chemin trouvé en {n} étapes. ¦ Βρέθηκε διαδρομή, βήματα: {n}. ¦ Намерен е път, стъпки: {n}.
+Chemin trouvé en 1 étape. ¦ Βρέθηκε διαδρομή σε 1 βήμα. ¦ Намерен е път с 1 стъпка.
+Aucun ancêtre dont le lieu de naissance a des coordonnées ({n} sans lieu situé). ¦ Κανένας πρόγονος με τόπο γέννησης που να έχει συντεταγμένες (χωρίς εντοπισμένο τόπο: {n}). ¦ Няма предци с място на раждане с координати (без определено място: {n}).
+Aucun ancêtre dont le lieu de naissance a des coordonnées. ¦ Κανένας πρόγονος με τόπο γέννησης που να έχει συντεταγμένες. ¦ Няма предци с място на раждане с координати.
+Le centre de la famille de {name} ¦ Το κέντρο της οικογένειας: {name} ¦ Центърът на семейството на {name}
+Les générations de {name} ¦ Οι γενιές: {name} ¦ Поколенията на {name}
+{n} lieux de naissance pris dans ta base ({m} sans lieu situé). ¦ Τόποι γέννησης από τη βάση σου: {n} (χωρίς εντοπισμένο τόπο: {m}). ¦ Места на раждане от твоята база: {n} (без определено място: {m}).
+{n} lieux de naissance pris dans ta base. ¦ Τόποι γέννησης από τη βάση σου: {n}. ¦ Места на раждане от твоята база: {n}.
+L’arbre de {name} : ce qu’on connaît ¦ Το δέντρο: {name} — τι γνωρίζουμε ¦ Дървото на {name}: какво знаем
+Tableau d’ascendance de {name} ¦ Πίνακας προγόνων: {name} ¦ Таблица на предците на {name}
+{n} ancêtres pris dans ta base (arrêt à 4 096 lignes). ¦ Πρόγονοι από τη βάση σου: {n} (διακοπή στις 4.096 γραμμές). ¦ Предци от твоята база: {n} (спиране при 4 096 реда).
+{n} ancêtres pris dans ta base. ¦ Πρόγονοι από τη βάση σου: {n}. ¦ Предци от твоята база: {n}.
+Aucune naissance ni aucun décès daté. ¦ Καμία χρονολογημένη γέννηση ή θάνατος. ¦ Няма датирани раждания или смърти.
+Filles ¦ Κορίτσια ¦ Момичета
+Garçons ¦ Αγόρια ¦ Момчета
+{n} noms sur {p} périodes. ¦ Ονόματα: {n}, περίοδοι: {p}. ¦ Имена: {n}, периоди: {p}.
+{n} personnes comptées, {y} années. ¦ Άτομα που μετρήθηκαν: {n}, χρόνια: {y}. ¦ Преброени хора: {n}, години: {y}.
+Arrière-arrière-grands-parents ¦ Προ-προπάπποι και προ-προγιαγιάδες ¦ Пра-прадядовци и пра-прабаби
+Arrière-arrière-arrière-grands-parents ¦ Προ-προ-προπάπποι και προ-προ-προγιαγιάδες ¦ Пра-пра-прадядовци и пра-пра-прабаби
+Les cartes ne sont pas chargées. ¦ Οι χάρτες δεν έχουν φορτωθεί. ¦ Картите не са заредени.
+Ancêtres connus ¦ Γνωστοί πρόγονοι ¦ Известни предци
+Grand-père paternel ¦ Παππούς από τον πατέρα ¦ Дядо по бащина линия
+Grand-mère paternelle ¦ Γιαγιά από τον πατέρα ¦ Баба по бащина линия
+Grand-père maternel ¦ Παππούς από τη μητέρα ¦ Дядо по майчина линия
+Grand-mère maternelle ¦ Γιαγιά από τη μητέρα ¦ Баба по майчина линия
+Fêtes des prénoms ¦ Ονομαστικές γιορτές ¦ Имени дни
+Âge au 1er enfant ¦ Ηλικία στο 1ο παιδί ¦ Възраст при 1-во дете
+Les métiers ¦ Τα επαγγέλματα ¦ Професиите
+Un titre par génération ¦ Ένας τίτλος ανά γενιά ¦ Едно заглавие на поколение
+Tous mes tests ¦ Όλα τα τεστ μου ¦ Всички мои тестове
+Par décennie ¦ Ανά δεκαετία ¦ По десетилетия
+Par demi-siècle ¦ Ανά μισό αιώνα ¦ По половин век
+Par siècle ¦ Ανά αιώνα ¦ По векове
+Décès ↔ naissances ¦ Θάνατοι ↔ γεννήσεις ¦ Смърти ↔ раждания
+Périodes ¦ Περίοδοι ¦ Периоди
+Personnes au plus ¦ Άτομα το πολύ ¦ Хора най-много
+Âge au 1er mariage ¦ Ηλικία στον 1ο γάμο ¦ Възраст при 1-ви брак
+Aucune naissance datée. ¦ Καμία χρονολογημένη γέννηση. ¦ Няма датирани раждания.
+Un dégradé ¦ Μια διαβάθμιση ¦ Преливане
+Une couleur chacune ¦ Ένα χρώμα στο καθένα ¦ По един цвят на всяка
+Lien avec la personne d’avant ¦ Σχέση με το προηγούμενο άτομο ¦ Връзка с предишния човек
+son époux / épouse ¦ ο σύζυγός του / η σύζυγός της ¦ съпругът ѝ / съпругата му
+Selon la place ¦ Ανάλογα με τον χώρο ¦ Според мястото
+En liste, étape par étape ¦ Σε λίστα, βήμα βήμα ¦ В списък, стъпка по стъпка
+La phrase du lien ¦ Η φράση της συγγένειας ¦ Изречението за родството
+Une seule ¦ Μόνο μία ¦ Само една
+Sens des flèches ¦ Κατεύθυνση των βελών ¦ Посока на стрелките
+Des plus anciens vers toi ¦ Από τους παλαιότερους προς εσένα ¦ От най-старите към теб
+De toi vers les plus anciens ¦ Από εσένα προς τους παλαιότερους ¦ От теб към най-старите
+La trajectoire ¦ Η τροχιά ¦ Траекторията
+Taille des lieux ¦ Μέγεθος των τόπων ¦ Размер на местата
+La phrase du déplacement ¦ Η φράση της μετακίνησης ¦ Изречението за преместването
+Écarter les points d’un même lieu ¦ Άπλωσε τα σημεία του ίδιου τόπου ¦ Раздалечи точките на едно и също място
+Noms des lieux les plus remplis ¦ Ονόματα των πιο γεμάτων τόπων ¦ Имена на най-пълните места
+D’où viennent mes ancêtres ¦ Από πού έρχονται οι πρόγονοί μου ¦ Откъде идват моите предци
+Trouvés ¦ Βρέθηκαν ¦ Намерени
+Longueur des barres ¦ Μήκος των μπαρών ¦ Дължина на стълбовете
+Écrire les % ¦ Γράψε τα % ¦ Пиши %
+Les ancêtres ¦ Οι πρόγονοι ¦ Предците
+Lignes montrées au plus ¦ Γραμμές που εμφανίζονται το πολύ ¦ Показани редове най-много
+Les correspondances ¦ Οι αντιστοιχίες ¦ Съвпаденията
+ADN partagé ¦ Κοινό DNA ¦ Обща ДНК
+Correspondances au plus ¦ Αντιστοιχίες το πολύ ¦ Съвпадения най-много
+Mes cousins ADN, par grand-parent ¦ Τα ξαδέλφια μου στο DNA, ανά παππού και γιαγιά ¦ Моите ДНК братовчеди, по баба и дядо
+La courbe = la colonne n° ¦ Η καμπύλη = η στήλη αρ. ¦ Кривата = колона №
+Largeur des barres ¦ Πλάτος των μπαρών ¦ Ширина на стълбовете
+Une colonne autour du centre ¦ Μία στήλη γύρω από το κέντρο ¦ Една колона около центъра
+Par écart ¦ Κατά διαφορά ¦ По разлика
+Par total ¦ Κατά σύνολο ¦ По общо
+Écrire les chiffres ¦ Γράψε τους αριθμούς ¦ Пиши числата
+Écart entre les collines ¦ Απόσταση ανάμεσα στους λόφους ¦ Разстояние между хълмовете
+À l’envers ¦ Ανάποδα ¦ Наобратно
+Une par série ¦ Ένα ανά σειρά ¦ По една на серия
+Opacité des lignes ¦ Αδιαφάνεια των γραμμών ¦ Непрозрачност на линиите
+La marche ¦ Το σκαλοπάτι ¦ Стъпалото
+Carte des générations : {n} lieux de naissance. ¦ Χάρτης των γενιών: τόποι γέννησης {n}. ¦ Карта на поколенията: места на раждане {n}.
+Génération {g} ({name}) : {found} sur {max} possibles ¦ Γενιά {g} ({name}): {found} από {max} δυνατούς ¦ Поколение {g} ({name}): {found} от {max} възможни
+{n} personnes différentes (implexe) ¦ Διαφορετικά άτομα: {n} (implexe) ¦ Различни хора: {n} (имплекс)
+Méthode de Leeds : {n} groupes de couleur. ¦ Μέθοδος Leeds: ομάδες χρώματος {n}. ¦ Метод на Лийдс: цветни групи {n}.
+{name} : {n} en tout, le plus en {peak} ({v}) ¦ {name}: {n} συνολικά, τα περισσότερα το {peak} ({v}) ¦ {name}: общо {n}, най-много през {peak} ({v})
+Courbe en escalier : {n} points. ¦ Κλιμακωτή καμπύλη: σημεία {n}. ¦ Стъпаловидна крива: точки {n}.
+n° de fiche ¦ αρ. καρτέλας ¦ № на картон
+liens de sang par {n} branches (implexe) ¦ δεσμοί αίματος μέσω κλάδων: {n} (implexe) ¦ кръвни връзки чрез клонове: {n} (имплекс)
+{n} générations prises dans ta base. ¦ Γενιές από τη βάση σου: {n}. ¦ Поколения от твоята база: {n}.
+{n} correspondances prises dans l’onglet ADN. ¦ Αντιστοιχίες από την καρτέλα DNA: {n}. ¦ Съвпадения от раздела ДНК: {n}.
+{n} dates prises dans ta base. ¦ Ημερομηνίες από τη βάση σου: {n}. ¦ Дати от твоята база: {n}.
+{n} périodes prises dans ta base. ¦ Περίοδοι από τη βάση σου: {n}. ¦ Периоди от твоята база: {n}.
+{n} vies prises dans ta base. ¦ Ζωές από τη βάση σου: {n}. ¦ Животи от твоята база: {n}.
+Choisis deux personnes (« Depuis l’app ») ou écris le chemin, une personne par ligne. ¦ Διάλεξε δύο άτομα («Από την εφαρμογή») ή γράψε τη διαδρομή, ένα άτομο ανά γραμμή. ¦ Избери двама души („От приложението“) или напиши пътя, по един човек на ред.
+{gen} : centre de {n} lieux de naissance ¦ {gen}: κέντρο τόπων γέννησης ({n}) ¦ {gen}: център на местата на раждане ({n})
+{gen} : centre de {n} lieu de naissance ¦ {gen}: κέντρο τόπου γέννησης ({n}) ¦ {gen}: център на мястото на раждане ({n})
+écart moyen {km} km ¦ μέση απόκλιση {km} km ¦ средно отклонение {km} km
+Ajoute des lieux de naissance avec leur génération (ou « Depuis l’app »). ¦ Πρόσθεσε τόπους γέννησης με τη γενιά τους (ή «Από την εφαρμογή»). ¦ Добави места на раждане с тяхното поколение (или „От приложението“).
+Ajoute des générations : la génération et le nombre d’ancêtres trouvés. ¦ Πρόσθεσε γενιές: τη γενιά και τον αριθμό των προγόνων που βρέθηκαν. ¦ Добави поколения: поколението и броя на намерените предци.
+Encore à trouver ¦ Μένουν να βρεθούν ¦ Още за намиране
+Personnes différentes (implexe) ¦ Διαφορετικά άτομα (implexe) ¦ Различни хора (имплекс)
+Ajoute des ancêtres : leur numéro Sosa et leur nom (ou « Depuis l’app »). ¦ Πρόσθεσε προγόνους: τον αριθμό Sosa και το όνομά τους (ή «Από την εφαρμογή»). ¦ Добави предци: техния номер Sosa и име (или „От приложението“).
+Ajoute des dates (« 14/07 » ou « 07-14 »), une sorte et un nom (ou « Depuis l’app »). ¦ Πρόσθεσε ημερομηνίες («14/07» ή «07-14»), ένα είδος και ένα όνομα (ή «Από την εφαρμογή»). ¦ Добави дати („14/07“ или „07-14“), вид и име (или „От приложението“).
+Il faut au moins deux colonnes de chiffres : des barres à gauche, une courbe à droite. ¦ Χρειάζονται τουλάχιστον δύο στήλες αριθμών: μπάρες αριστερά, μια καμπύλη δεξιά. ¦ Трябват поне две колони с числа: стълбове вляво, крива вдясно.
+Aucun chiffre dans le tableau. ¦ Κανένας αριθμός στον πίνακα. ¦ Няма числа в таблицата.
+Ajoute des lignes : un nom et deux chiffres (gauche, droite), ou un seul chiffre autour du centre. ¦ Πρόσθεσε γραμμές: ένα όνομα και δύο αριθμούς (αριστερά, δεξιά), ή έναν μόνο αριθμό γύρω από το κέντρο. ¦ Добави редове: име и две числа (вляво, вдясно) или едно число около центъра.
+Sous le centre ¦ Κάτω από το κέντρο ¦ Под центъра
+Ajoute des lignes (années, décennies…) et une colonne de chiffres par colline. ¦ Πρόσθεσε γραμμές (χρόνια, δεκαετίες…) και μία στήλη αριθμών ανά λόφο. ¦ Добави редове (години, десетилетия…) и по една колона с числа за всеки хълм.
+Il faut au moins deux colonnes de chiffres (les axes) et une ligne par personne ou par chose. ¦ Χρειάζονται τουλάχιστον δύο στήλες αριθμών (οι άξονες) και μία γραμμή ανά άτομο ή πράγμα. ¦ Трябват поне две колони с числа (осите) и по един ред за човек или нещо.
+Ajoute des lignes : une année (ou un nom) et un chiffre. ¦ Πρόσθεσε γραμμές: ένα έτος (ή ένα όνομα) και έναν αριθμό. ¦ Добави редове: година (или име) и число.
+🔒 Pour partager : sans les noms des personnes en vie ¦ 🔒 Για κοινοποίηση: χωρίς τα ονόματα των ζωντανών ¦ 🔒 За споделяне: без имената на живите хора
+Les ancêtres de la personne de départ ¦ Οι πρόγονοι του ατόμου αφετηρίας ¦ Предците на началния човек
+Lecture de ta généalogie… ¦ Ανάγνωση της γενεαλογίας σου… ¦ Четене на твоята генеалогия…
+Données prises dans ta base. ¦ Δεδομένα από τη βάση σου. ¦ Данни от твоята база.
+🔗 Deux personnes de ma base ¦ 🔗 Δύο άτομα της βάσης μου ¦ 🔗 Двама души от моята база
+L’app cherche le plus court chemin : on remonte jusqu’à l’ancêtre commun et on redescend ; avec les alliances, elle passe aussi par les époux (beau-frère, cousin de l’épouse…). Un même lien par plusieurs ancêtres (implexe) est signalé. ¦ Η εφαρμογή ψάχνει τη συντομότερη διαδρομή: ανεβαίνουμε ως τον κοινό πρόγονο και ξανακατεβαίνουμε· με τις συγγένειες εξ αγχιστείας, περνά και από τους συζύγους (κουνιάδος, ξάδελφος της συζύγου…). Ο ίδιος δεσμός μέσω πολλών προγόνων (implexe) επισημαίνεται. ¦ Приложението търси най-краткия път: изкачваме се до общия предшественик и слизаме обратно; със сватовството минава и през съпрузите (зет, братовчед на съпругата…). Една и съща връзка през няколко предци (имплекс) се отбелязва.
+Passer aussi par les alliances (époux, épouses) ¦ Πέρασε και από τις συγγένειες εξ αγχιστείας (σύζυγοι) ¦ Минавай и през сватовството (съпрузи, съпруги)
+Trouver le chemin ¦ Βρες τη διαδρομή ¦ Намери пътя
+Choisis les deux personnes dans les menus. ¦ Διάλεξε τα δύο άτομα στα μενού. ¦ Избери двамата души в менютата.
+Aucun lien trouvé entre ces deux personnes dans ta base. ¦ Δεν βρέθηκε σχέση ανάμεσα σε αυτά τα δύο άτομα στη βάση σου. ¦ Не е намерена връзка между тези двама души в твоята база.
+Aucun ancêtre commun : essaie avec les alliances. ¦ Κανένας κοινός πρόγονος: δοκίμασε με τις συγγένειες εξ αγχιστείας. ¦ Няма общ предшественик: опитай със сватовството.
+🎯 Les lieux de naissance de mes ancêtres ¦ 🎯 Οι τόποι γέννησης των προγόνων μου ¦ 🎯 Местата на раждане на моите предци
+🌈 Les lieux de naissance de mes ancêtres ¦ 🌈 Οι τόποι γέννησης των προγόνων μου ¦ 🌈 Местата на раждане на моите предци
+Chaque ancêtre (numéro Sosa) est placé à son lieu de naissance (ou de baptême), avec sa génération. Les lieux sans coordonnées sont laissés de côté. ¦ Κάθε πρόγονος (αριθμός Sosa) τοποθετείται στον τόπο γέννησής του (ή βάπτισης), με τη γενιά του. Οι τόποι χωρίς συντεταγμένες παραλείπονται. ¦ Всеки предшественик (номер Sosa) се поставя на мястото си на раждане (или кръщене), с поколението си. Местата без координати се пропускат.
+🧩 L’ascendance d’une personne ¦ 🧩 Οι πρόγονοι ενός ατόμου ¦ 🧩 Родословието на човек
+Pour chaque génération : les ancêtres possibles (1, 2, 4, 8…), les places trouvées et les personnes différentes (implexe). ¦ Για κάθε γενιά: οι δυνατοί πρόγονοι (1, 2, 4, 8…), οι θέσεις που βρέθηκαν και τα διαφορετικά άτομα (implexe). ¦ За всяко поколение: възможните предци (1, 2, 4, 8…), намерените места и различните хора (имплекс).
+Aucun ancêtre trouvé pour cette personne. ¦ Δεν βρέθηκε πρόγονος για αυτό το άτομο. ¦ Не са намерени предци за този човек.
+📜 Les ancêtres d’une personne ¦ 📜 Οι πρόγονοι ενός ατόμου ¦ 📜 Предците на човек
+Une ligne par numéro Sosa : nom, naissance, mariage, décès (dates et lieux). Un ancêtre présent plusieurs fois (implexe) renvoie à son premier numéro. ¦ Μία γραμμή ανά αριθμό Sosa: όνομα, γέννηση, γάμος, θάνατος (ημερομηνίες και τόποι). Ένας πρόγονος που εμφανίζεται πολλές φορές (implexe) παραπέμπει στον πρώτο του αριθμό. ¦ Един ред на номер Sosa: име, раждане, брак, смърт (дати и места). Предшественик, който се среща няколко пъти (имплекс), препраща към първия си номер.
+🖨 Imprimer le tableau… ¦ 🖨 Εκτύπωση του πίνακα… ¦ 🖨 Печат на таблицата…
+Depuis l’onglet ADN : les correspondances d’un test et leurs « correspondances en commun ». La méthode de Leeds range celles de 90 à 400 cM (cousins de 2e et 3e degré) en groupes de couleur, souvent un par grand-parent. ¦ Από την καρτέλα DNA: οι αντιστοιχίες ενός τεστ και οι «κοινές αντιστοιχίες» τους. Η μέθοδος Leeds ταξινομεί όσες είναι από 90 έως 400 cM (ξαδέλφια 2ου και 3ου βαθμού) σε ομάδες χρώματος, συχνά μία ανά παππού ή γιαγιά. ¦ От раздела ДНК: съвпаденията на един тест и техните „общи съвпадения“. Методът на Лийдс подрежда тези от 90 до 400 cM (братовчеди от 2-ра и 3-та степен) в цветни групи, често по една за всеки дядо или баба.
+Aucune correspondance ADN dans ta base (onglet ADN → Correspondances). ¦ Καμία αντιστοιχία DNA στη βάση σου (καρτέλα DNA → Αντιστοιχίες). ¦ Няма ДНК съвпадения в твоята база (раздел ДНК → Съвпадения).
+Il manque les « correspondances en commun » : remplis-les dans l’onglet ADN (ou importe-les). ¦ Λείπουν οι «κοινές αντιστοιχίες»: συμπλήρωσέ τες στην καρτέλα DNA (ή κάνε εισαγωγή). ¦ Липсват „общите съвпадения“: попълни ги в раздела ДНК (или ги импортирай).
+Méthode de Leeds ¦ Μέθοδος Leeds ¦ Метод на Лийдс
+🎡 Les dates de ma famille ¦ 🎡 Οι ημερομηνίες της οικογένειάς μου ¦ 🎡 Датите на моето семейство
+Les naissances, mariages et décès datés au jour près, et la fête du prénom de chacun (calendrier des saints). Les fiches confidentielles ne sont jamais prises. ¦ Οι γεννήσεις, οι γάμοι και οι θάνατοι με ακριβή ημέρα, και η ονομαστική γιορτή του καθενός (εορτολόγιο αγίων). Οι εμπιστευτικές καρτέλες δεν λαμβάνονται ποτέ. ¦ Ражданията, браковете и смъртите с точност до деня, и имения ден на всеки (календар на светците). Поверителните картони никога не се вземат.
+Les personnes en vie (et leurs mariages) ¦ Τα ζωντανά άτομα (και οι γάμοι τους) ¦ Живите хора (и техните бракове)
+Coche au moins une sorte de date. ¦ Τσέκαρε τουλάχιστον ένα είδος ημερομηνίας. ¦ Отметни поне един вид дата.
+Aucune date au jour près pour ce choix. ¦ Καμία ημερομηνία με ακριβή ημέρα για αυτή την επιλογή. ¦ Няма дати с точност до деня за този избор.
+L’année de la famille ¦ Η χρονιά της οικογένειας ¦ Годината на семейството
+Par quart de siècle ¦ Ανά τέταρτο αιώνα ¦ По четвърт век
+📊 Naissances et âge au décès ¦ 📊 Γεννήσεις και ηλικία θανάτου ¦ 📊 Раждания и възраст при смърт
+↔️ Naissances et décès ¦ ↔️ Γεννήσεις και θάνατοι ¦ ↔️ Раждания и смърти
+Les naissances de chaque période en barres (à gauche), l’âge moyen au décès en courbe (à droite). ¦ Οι γεννήσεις κάθε περιόδου σε μπάρες (αριστερά), η μέση ηλικία θανάτου σε καμπύλη (δεξιά). ¦ Ражданията за всеки период в стълбове (вляво), средната възраст при смърт в крива (вдясно).
+Les décès à gauche, les naissances à droite, période par période (ou les femmes et les hommes). ¦ Οι θάνατοι αριστερά, οι γεννήσεις δεξιά, περίοδο με περίοδο (ή οι γυναίκες και οι άντρες). ¦ Смъртите вляво, ражданията вдясно, период по период (или жените и мъжете).
+Face à face ¦ Πρόσωπο με πρόσωπο ¦ Лице в лице
+Naissances : filles ↔ garçons ¦ Γεννήσεις: κορίτσια ↔ αγόρια ¦ Раждания: момичета ↔ момчета
+Âge moyen au décès ¦ Μέση ηλικία θανάτου ¦ Средна възраст при смърт
+Naissances et âge moyen au décès ¦ Γεννήσεις και μέση ηλικία θανάτου ¦ Раждания и средна възраст при смърт
+Filles et garçons à la naissance ¦ Κορίτσια και αγόρια κατά τη γέννηση ¦ Момичета и момчета при раждане
+Décès et naissances ¦ Θάνατοι και γεννήσεις ¦ Смърти и раждания
+🏔 Les noms de famille au fil du temps ¦ 🏔 Τα επώνυμα με τον καιρό ¦ 🏔 Фамилните имена във времето
+Les noms les plus portés : une colline par nom, la hauteur = les naissances de chaque période. ¦ Τα πιο συχνά ονόματα: ένας λόφος ανά όνομα, το ύψος = οι γεννήσεις κάθε περιόδου. ¦ Най-разпространените имена: един хълм на име, височината = ражданията за всеки период.
+Aucune naissance datée avec un nom de famille. ¦ Καμία χρονολογημένη γέννηση με επώνυμο. ¦ Няма датирани раждания с фамилно име.
+Les noms de famille au fil du temps ¦ Τα επώνυμα με τον καιρό ¦ Фамилните имена във времето
+🧵 Les vies de ma base ¦ 🧵 Οι ζωές της βάσης μου ¦ 🧵 Животите в моята база
+Pour chaque personne (vies finies seulement) : l’âge au premier mariage, au premier enfant, le nombre d’enfants et l’âge au décès ; une couleur par siècle de naissance. ¦ Για κάθε άτομο (μόνο ολοκληρωμένες ζωές): η ηλικία στον πρώτο γάμο, στο πρώτο παιδί, ο αριθμός παιδιών και η ηλικία θανάτου· ένα χρώμα ανά αιώνα γέννησης. ¦ За всеки човек (само завършени животи): възрастта при първия брак, при първото дете, броят деца и възрастта при смърт; един цвят на век на раждане.
+Pas assez de vies datées (il faut au moins 3 des 4 chiffres). ¦ Δεν υπάρχουν αρκετές χρονολογημένες ζωές (χρειάζονται τουλάχιστον 3 από τους 4 αριθμούς). ¦ Няма достатъчно датирани животи (трябват поне 3 от 4-те числа).
+Les vies de la famille ¦ Οι ζωές της οικογένειας ¦ Животите на семейството
+📶 Combien en vie, année par année ¦ 📶 Πόσοι ζωντανοί, χρόνο με χρόνο ¦ 📶 Колко живи, година по година
+Une personne compte de sa naissance à son décès ; décès inconnu : en vie si elle est née il y a moins de 100 ans, sinon jusqu’à 60 ans (comme « Les vivants de l’arbre »). ¦ Ένα άτομο μετρά από τη γέννηση ως τον θάνατό του· άγνωστος θάνατος: ζωντανό αν γεννήθηκε πριν από λιγότερα από 100 χρόνια, αλλιώς ως τα 60 (όπως στο «Οι ζωντανοί του δέντρου»). ¦ Човек се брои от раждането до смъртта си; неизвестна смърт: жив, ако е роден преди по-малко от 100 години, иначе до 60 години (както в „Живите в дървото“).
+Personnes en vie ¦ Ζωντανά άτομα ¦ Живи хора
+Combien de la famille étaient en vie ¦ Πόσοι από την οικογένεια ζούσαν ¦ Колко от семейството са били живи
+Couleurs des générations ¦ Χρώματα των γενιών ¦ Цветове на поколенията
+Dégradé : la plus proche ¦ Διαβάθμιση: η πιο κοντινή ¦ Преливане: най-близкото
+Dégradé : la plus ancienne ¦ Διαβάθμιση: η παλαιότερη ¦ Преливане: най-старото
+Les ancêtres (lieu de naissance « Nom 48.11, -1.68 » et génération : 2 = parents, 3 = grands-parents…) ¦ Οι πρόγονοι (τόπος γέννησης «Όνομα 48.11, -1.68» και γενιά: 2 = γονείς, 3 = παππούδες…) ¦ Предците (място на раждане „Име 48.11, -1.68“ и поколение: 2 = родители, 3 = баби и дядовци…)
+Le chemin (une personne par ligne, de la première à la seconde) ¦ Η διαδρομή (ένα άτομο ανά γραμμή, από το πρώτο στο δεύτερο) ¦ Пътят (по един човек на ред, от първия до втория)
+son père / sa mère (on monte) ¦ ο πατέρας / η μητέρα του (ανεβαίνουμε) ¦ баща му / майка му (нагоре)
+son enfant (on descend) ¦ το παιδί του (κατεβαίνουμε) ¦ детето му (надолу)
+En V (montée puis descente) ¦ Σε V (άνοδος και μετά κάθοδος) ¦ Във форма на V (нагоре, после надолу)
+Les autres liens (implexe) ¦ Οι άλλοι δεσμοί (implexe) ¦ Другите връзки (имплекс)
+Couleur des cases ¦ Χρώμα των κουτιών ¦ Цвят на клетките
+Cadrer tout seul sur les lieux ¦ Αυτόματο κάδρο στους τόπους ¦ Автоматично кадриране по местата
+Montrer chaque lieu (pâle) ¦ Δείξε κάθε τόπο (αχνά) ¦ Покажи всяко място (бледо)
+Cercle de l’écart moyen ¦ Κύκλος της μέσης απόκλισης ¦ Кръг на средното отклонение
+Couleur de la trajectoire ¦ Χρώμα της τροχιάς ¦ Цвят на траекторията
+Le centre de la famille, génération par génération ¦ Το κέντρο της οικογένειας, γενιά με γενιά ¦ Центърът на семейството, поколение по поколение
+Nom écrit à partir de … ancêtres ¦ Όνομα γραμμένο από … προγόνους και πάνω ¦ Име се изписва от … предци нагоре
+Les générations (1 = la personne) ¦ Οι γενιές (1 = το άτομο) ¦ Поколенията (1 = самият човек)
+Éventail (une case par ancêtre) ¦ Βεντάλια (ένα κουτί ανά πρόγονο) ¦ Ветрило (една клетка на предшественик)
+Éventail : générations ¦ Βεντάλια: γενιές ¦ Ветрило: поколения
+Toutes pareilles (en %) ¦ Όλες ίδιες (σε %) ¦ Всички еднакви (в %)
+Selon le nombre possible ¦ Ανάλογα με τον δυνατό αριθμό ¦ Според възможния брой
+Montrer les personnes différentes (implexe) ¦ Δείξε τα διαφορετικά άτομα (implexe) ¦ Покажи различните хора (имплекс)
+Phrase de résumé ¦ Φράση σύνοψης ¦ Обобщаващо изречение
+Couleur des connus ¦ Χρώμα των γνωστών ¦ Цвят на известните
+Couleur des manquants ¦ Χρώμα των ελλειπόντων ¦ Цвят на липсващите
+Couleur de l’implexe ¦ Χρώμα του implexe ¦ Цвят на имплекса
+Ce que je connais de mon arbre ¦ Τι γνωρίζω για το δέντρο μου ¦ Какво знам за дървото си
+Correspondances en commun (séparées par ;) ¦ Κοινές αντιστοιχίες (χωρισμένες με ;) ¦ Общи съвпадения (разделени с ;)
+Groupes de couleur au plus ¦ Ομάδες χρώματος το πολύ ¦ Цветни групи най-много
+Noms des groupes (séparés par des virgules) ¦ Ονόματα των ομάδων (χωρισμένα με κόμματα) ¦ Имена на групите (разделени със запетаи)
+Noms en haut des colonnes ¦ Ονόματα στην κορυφή των στηλών ¦ Имена в горната част на колоните
+Jour (14/07 ou 07-14) ¦ Ημέρα (14/07 ή 07-14) ¦ Ден (14/07 или 07-14)
+Le trait « aujourd’hui » ¦ Η γραμμή «σήμερα» ¦ Линията „днес“
+Le nombre au centre ¦ Ο αριθμός στο κέντρο ¦ Числото в центъра
+Les chiffres (la dernière colonne = la courbe) ¦ Οι αριθμοί (η τελευταία στήλη = η καμπύλη) ¦ Числата (последната колона = кривата)
+Nom de l’axe de gauche ¦ Όνομα του αριστερού άξονα ¦ Име на лявата ос
+Nom de l’axe de droite ¦ Όνομα του δεξιού άξονα ¦ Име на дясната ос
+Unité à gauche ¦ Μονάδα αριστερά ¦ Единица вляво
+Unité à droite ¦ Μονάδα δεξιά ¦ Единица вдясно
+Axe de droite à partir de zéro ¦ Δεξιός άξονας από το μηδέν ¦ Дясна ос от нула
+Épaisseur de la courbe ¦ Πάχος της καμπύλης ¦ Дебелина на кривата
+Points de la courbe ¦ Σημεία της καμπύλης ¦ Точки на кривата
+Écrire les chiffres de la courbe ¦ Γράψε τους αριθμούς της καμπύλης ¦ Пиши числата на кривата
+Les lignes (1re colonne à gauche, 2e à droite) ¦ Οι γραμμές (1η στήλη αριστερά, 2η δεξιά) ¦ Редовете (1-ва колона вляво, 2-ра вдясно)
+Deux colonnes face à face ¦ Δύο στήλες πρόσωπο με πρόσωπο ¦ Две колони една срещу друга
+Le centre (une colonne) ¦ Το κέντρο (μία στήλη) ¦ Центърът (една колона)
+Titre à gauche ¦ Τίτλος αριστερά ¦ Заглавие вляво
+Titre à droite ¦ Τίτλος δεξιά ¦ Заглавие вдясно
+Couleur à gauche ¦ Χρώμα αριστερά ¦ Цвят вляво
+Couleur à droite ¦ Χρώμα δεξιά ¦ Цвят вдясно
+Comme dans le tableau ¦ Όπως στον πίνακα ¦ Както в таблицата
+Sur le trait du milieu ¦ Στη μεσαία γραμμή ¦ На средната линия
+Décès et naissances dans la famille ¦ Θάνατοι και γεννήσεις στην οικογένεια ¦ Смърти и раждания в семейството
+Les chiffres (une ligne par période, une colonne par colline) ¦ Οι αριθμοί (μία γραμμή ανά περίοδο, μία στήλη ανά λόφο) ¦ Числата (един ред на период, една колона на хълм)
+Chaque colline à sa hauteur ¦ Κάθε λόφος στο δικό του ύψος ¦ Всеки хълм със своя височина
+Même échelle pour toutes ¦ Ίδια κλίμακα για όλους ¦ Един мащаб за всички
+Dégradé : première ¦ Διαβάθμιση: πρώτη ¦ Преливане: първа
+Dégradé : dernière ¦ Διαβάθμιση: τελευταία ¦ Преливане: последна
+Écrire le sommet ¦ Γράψε την κορυφή ¦ Пиши върха
+Les lignes (une par personne ; une colonne par axe) ¦ Οι γραμμές (μία ανά άτομο· μία στήλη ανά άξονα) ¦ Редовете (един на човек; една колона на ос)
+Mettre en avant (un groupe ou un nom) ¦ Ανάδειξε (μια ομάδα ή ένα όνομα) ¦ Открои (група или име)
+Les chiffres (une année ou un nom par ligne) ¦ Οι αριθμοί (ένα έτος ή ένα όνομα ανά γραμμή) ¦ Числата (година или име на ред)
+Après le point ¦ Μετά το σημείο ¦ След точката
+Avant le point ¦ Πριν από το σημείο ¦ Преди точката
+Remplir dessous (une série) ¦ Γέμισμα από κάτω (μία σειρά) ¦ Запълни отдолу (една серия)
+Axe à partir de zéro ¦ Άξονας από το μηδέν ¦ Ос от нула
+Montrer le plus haut ¦ Δείξε το υψηλότερο ¦ Покажи най-високото
+Gén. {g} ¦ Γεν. {g} ¦ Пок. {g}
+gén. {g} ¦ γεν. {g} ¦ пок. {g}
+Arbre en frise : {n} vies sur {g} générations, de {from} à {to}. ¦ Δέντρο σε ταινία: ζωές {n}, γενιές {g}, από {from} έως {to}. ¦ Дърво-лента: животи {n}, поколения {g}, от {from} до {to}.
+{name} : décès inconnu ¦ {name}: άγνωστος θάνατος ¦ {name}: неизвестна смърт
+{name} ({years}) : {age} ans (en vie) ¦ {name} ({years}): ηλικία {age} (ζει) ¦ {name} ({years}): възраст {age} (жив/жива)
+{name} ({years}) : {age} ans ¦ {name} ({years}): ηλικία {age} ¦ {name} ({years}): възраст {age}
+Mariage à {age} ans ({year}) ¦ Γάμος σε ηλικία {age} ({year}) ¦ Брак на възраст {age} ({year})
+Naissance d’un enfant à {age} ans ({year}) ¦ Γέννηση παιδιού σε ηλικία {age} ({year}) ¦ Раждане на дете на възраст {age} ({year})
+naissance d’un enfant ¦ γέννηση παιδιού ¦ раждане на дете
+{n} ans et + ¦ {n} ετών και άνω ¦ {n} и повече години
+{n} personnes en vie ¦ Ζωντανά άτομα: {n} ¦ Живи хора: {n}
+Pyramide des âges en {year} : {n} personnes en vie (sur {total}). ¦ Πυραμίδα ηλικιών το {year}: ζωντανά άτομα {n} (από {total}). ¦ Възрастова пирамида през {year}: живи хора {n} (от {total}).
+Degré {d} ¦ Βαθμός {d} ¦ Степен {d}
+Déplier {name} ¦ Ανάπτυξη: {name} ¦ Разгъни: {name}
+Plier {name} ¦ Σύμπτυξη: {name} ¦ Сгъни: {name}
+Déplier ({n} personnes) ¦ Ανάπτυξη (άτομα: {n}) ¦ Разгъни (хора: {n})
+Graphe des cousinages : {n} personnes, {l} liens. ¦ Γράφημα συγγενειών: άτομα {n}, δεσμοί {l}. ¦ Граф на родството: хора {n}, връзки {l}.
+{a} est {kin} de {b} ¦ {a}: {kin} του/της {b} ¦ {a} е {kin} на {b}
+(degré {d}) ¦ (βαθμός {d}) ¦ (степен {d})
+{a} et {b} : pas de lien trouvé ¦ {a} και {b}: δεν βρέθηκε δεσμός ¦ {a} и {b}: не е намерена връзка
+Degré 1 (parent, enfant) ¦ Βαθμός 1 (γονέας, παιδί) ¦ Степен 1 (родител, дете)
+Degré 2 (frère, grand-parent) ¦ Βαθμός 2 (αδελφός, παππούς/γιαγιά) ¦ Степен 2 (брат, баба/дядо)
+Degré 4 (cousin germain) ¦ Βαθμός 4 (πρώτος ξάδελφος) ¦ Степен 4 (първи братовчед)
+Matrice de parenté de {n} personnes : {l} liens trouvés. ¦ Μήτρα συγγένειας (άτομα: {n}): βρέθηκαν δεσμοί {l}. ¦ Матрица на родството (хора: {n}): намерени връзки {l}.
+entre à la génération {g} par {who} ¦ μπαίνει στη γενιά {g} μέσω {who} ¦ влиза в поколение {g} чрез {who}
+entre à la génération {g} ¦ μπαίνει στη γενιά {g} ¦ влиза в поколение {g}
+porteurs par génération : {list} ¦ φορείς ανά γενιά: {list} ¦ носители по поколения: {list}
+Entre à la génération {g} ¦ Μπαίνει στη γενιά {g} ¦ Влиза в поколение {g}
+Arbre des patronymes : {n} noms sur {g} générations. ¦ Δέντρο επωνύμων: ονόματα {n}, γενιές {g}. ¦ Дърво на фамилиите: имена {n}, поколения {g}.
+Aucun mariage entre ces lieux. ¦ Κανένας γάμος ανάμεσα σε αυτούς τους τόπους. ¦ Няма бракове между тези места.
+Diagramme d’accord : {n} lieux, environ {v} {unit}. ¦ Διάγραμμα χορδών: τόποι {n}, περίπου {v} {unit}. ¦ Хордова диаграма: места {n}, около {v} {unit}.
+mariages ¦ γάμοι ¦ бракове
+Violon : {c} catégories, {n} valeurs. ¦ Βιολί: κατηγορίες {c}, τιμές {n}. ¦ Цигулка: категории {c}, стойности {n}.
+pas encore trouvé ¦ δεν βρέθηκε ακόμη ¦ още не е намерен
+Quadrillage de {g} générations : {found} ancêtres trouvés sur {total} places ({pct} %). ¦ Πλέγμα γενιών ({g}): βρέθηκαν πρόγονοι {found} από {total} θέσεις ({pct} %). ¦ Мрежа на поколенията ({g}): намерени предци {found} от {total} места ({pct} %).
+Les vies de mes ancêtres ({name}) ¦ Οι ζωές των προγόνων μου ({name}) ¦ Животите на моите предци ({name})
+Les vies de mes ancêtres ¦ Οι ζωές των προγόνων μου ¦ Животите на моите предци
+Aucune naissance ni aucun décès daté à {place}. ¦ Καμία χρονολογημένη γέννηση ή θάνατος στο {place}. ¦ Няма датирани раждания или смърти в {place}.
+{n} années prises dans ta base. ¦ Χρόνια από τη βάση σου: {n}. ¦ Години от твоята база: {n}.
+Qui vivait en … ? ¦ Ποιος ζούσε το …; ¦ Кой е живял през …?
+Qui vivait en {year} ? ¦ Ποιος ζούσε το {year}; ¦ Кой е живял през {year}?
+{n} personnes prises dans ta base. ¦ Άτομα από τη βάση σου: {n}. ¦ Хора от твоята база: {n}.
+Les cousins de {name} ¦ Τα ξαδέλφια: {name} ¦ Братовчедите на {name}
+{n} personnes prises dans ta base (les 1 500 premières). ¦ Άτομα από τη βάση σου: {n} (τα πρώτα 1.500). ¦ Хора от твоята база: {n} (първите 1 500).
+Les cousinages ¦ Οι συγγένειες ¦ Роднинските връзки
+{n} personnes et {l} liens pris dans ta base. ¦ Από τη βάση σου: άτομα {n}, δεσμοί {l}. ¦ От твоята база: хора {n}, връзки {l}.
+{n} personnes, {l} liens trouvés. ¦ Άτομα: {n}, δεσμοί που βρέθηκαν: {l}. ¦ Хора: {n}, намерени връзки: {l}.
+Les noms de famille de {name} ¦ Τα επώνυμα: {name} ¦ Фамилните имена на {name}
+{n} noms pris dans ta base. ¦ Ονόματα από τη βάση σου: {n}. ¦ Имена от твоята база: {n}.
+Aucun mariage avec des lieux connus. ¦ Κανένας γάμος με γνωστούς τόπους. ¦ Няма бракове с известни места.
+Où l’on venait se marier ¦ Από πού έρχονταν για να παντρευτούν ¦ Откъде са идвали да се женят
+Mariages entre villages ¦ Γάμοι ανάμεσα σε χωριά ¦ Бракове между села
+{n} paires de lieux prises dans ta base. ¦ Ζεύγη τόπων από τη βάση σου: {n}. ¦ Двойки места от твоята база: {n}.
+Aucune personne avec les deux dates. ¦ Κανένα άτομο με τις δύο ημερομηνίες. ¦ Няма хора с двете дати.
+{n} valeurs prises dans ta base. ¦ Τιμές από τη βάση σου: {n}. ¦ Стойности от твоята база: {n}.
+{c}e siècle ¦ {c}ος αιώνας ¦ {c} век
+Les enfants de {name} ¦ Τα παιδιά: {name} ¦ Децата на {name}
+D’où viennent mes noms ¦ Από πού έρχονται τα επώνυμά μου ¦ Откъде идват фамилните ми имена
+Âge au décès par siècle ¦ Ηλικία θανάτου ανά αιώνα ¦ Възраст при смърт по векове
+Âge au décès par sexe ¦ Ηλικία θανάτου ανά φύλο ¦ Възраст при смърт по пол
+Âge au mariage par sexe ¦ Ηλικία γάμου ανά φύλο ¦ Възраст при брак по пол
+Âge au mariage par siècle ¦ Ηλικία γάμου ανά αιώνα ¦ Възраст при брак по векове
+{name} : ferme l’éditeur et clique à nouveau pour ouvrir sa fiche. ¦ {name}: κλείσε τον επεξεργαστή και κάνε ξανά κλικ για να ανοίξεις την καρτέλα. ¦ {name}: затвори редактора и щракни отново, за да отвориш картона.
+Ajoute des personnes : un nom, une génération (ou un n° Sosa), une naissance et un décès. ¦ Πρόσθεσε άτομα: ένα όνομα, μια γενιά (ή έναν αρ. Sosa), μια γέννηση και έναν θάνατο. ¦ Добави хора: име, поколение (или № Sosa), раждане и смърт.
+Ajoute des années avec leurs naissances et leurs décès. ¦ Πρόσθεσε χρόνια με τις γεννήσεις και τους θανάτους τους. ¦ Добави години с техните раждания и смърти.
+Plus de décès que de naissances ¦ Περισσότεροι θάνατοι από γεννήσεις ¦ Повече смърти, отколкото раждания
+{b} naissances et {d} décès de {from} à {to}, {c} crises marquées. ¦ Από {from} έως {to}: γεννήσεις {b}, θάνατοι {d}, σημειωμένες κρίσεις {c}. ¦ От {from} до {to}: раждания {b}, смърти {d}, отбелязани кризи {c}.
+{b} naissances et {d} décès de {from} à {to}, {c} crise marquée. ¦ Από {from} έως {to}: γεννήσεις {b}, θάνατοι {d}, σημειωμένες κρίσεις {c}. ¦ От {from} до {to}: раждания {b}, смърти {d}, отбелязани кризи {c}.
+Ajoute les enfants : un nom, une naissance, un décès (et leurs mariages, leurs enfants). ¦ Πρόσθεσε τα παιδιά: ένα όνομα, μια γέννηση, έναν θάνατο (και τους γάμους τους, τα παιδιά τους). ¦ Добави децата: име, раждане, смърт (и техните бракове, техните деца).
+Ajoute des personnes (naissance, décès, sexe) ou prends celles de ta base (« Depuis l’app »). ¦ Πρόσθεσε άτομα (γέννηση, θάνατος, φύλο) ή πάρε αυτά της βάσης σου («Από την εφαρμογή»). ¦ Добави хора (раждане, смърт, пол) или вземи тези от твоята база („От приложението“).
+Issus d’issus de germains ¦ Τρίτα ξαδέλφια ¦ Трети братовчеди
+Ligne directe ¦ Ευθεία γραμμή ¦ Пряка линия
+Oncles, tantes, neveux ¦ Θείοι, θείες, ανίψια ¦ Чичовци, лели, племенници
+Cousins germains ¦ Πρώτα ξαδέλφια ¦ Първи братовчеди
+Cousins issus de germains ¦ Δεύτερα ξαδέλφια ¦ Втори братовчеди
+Sans lien de sang ¦ Χωρίς συγγένεια αίματος ¦ Без кръвно родство
+Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien. ¦ Πρόσθεσε άτομα: ένα όνομα, το άτομο από πάνω (κενό για την κορυφή), τα χρόνια, τη συγγένεια. ¦ Добави хора: име, човекът отгоре (празно за върха), годините, родството.
+Arbre en accordéon : {n} personnes, {r} sommets. ¦ Δέντρο ακορντεόν: άτομα {n}, κορυφές {r}. ¦ Дърво-акордеон: хора {n}, върхове {r}.
+Arbre en accordéon : {n} personnes, {r} sommet. ¦ Δέντρο ακορντεόν: άτομα {n}, κορυφές {r}. ¦ Дърво-акордеон: хора {n}, върхове {r}.
+parente|arrière-grand-père ¦ προπάππους ¦ прадядо
+parente|grand-père ¦ παππούς ¦ дядо
+parente|père ¦ πατέρας ¦ баща
+parente|moi ¦ εγώ ¦ аз
+parente|sœur ¦ αδελφή ¦ сестра
+parente|frère ¦ αδελφός ¦ брат
+parente|tante ¦ θεία ¦ леля
+parente|oncle ¦ θείος ¦ чичо
+parente|cousin germain ¦ πρώτος ξάδελφος ¦ първи братовчед
+parente|cousine germaine ¦ πρώτη ξαδέλφη ¦ първа братовчедка
+parente|grand-oncle ¦ αδελφός του παππού/της γιαγιάς ¦ брат на дядо или баба
+parente|cousin germain de mon père ¦ πρώτος ξάδελφος του πατέρα μου ¦ първи братовчед на баща ми
+parente|cousin issu de germains ¦ δεύτερος ξάδελφος ¦ втори братовчед
+parente|cousine issue de germains ¦ δεύτερη ξαδέλφη ¦ втора братовчедка
+parente|fils ¦ γιος ¦ син
+parente|fille ¦ κόρη ¦ дъщеря
+parente|petit-fils ¦ εγγονός ¦ внук
+parente|petite-fille ¦ εγγονή ¦ внучка
+parente|arrière-petit-fils ¦ δισέγγονος ¦ правнук
+parente|neveu ¦ ανιψιός ¦ племенник
+parente|petit-neveu ¦ εγγονός του αδελφού/της αδελφής ¦ внук на брат или сестра
+parente|parent ¦ συγγενής ¦ роднина
+parente|frères et sœurs ¦ αδέλφια ¦ братя и сестри
+parente|cousins germains ¦ πρώτα ξαδέλφια ¦ първи братовчеди
+parente|cousins issus de germains ¦ δεύτερα ξαδέλφια ¦ втори братовчеди
+parente|cousins issus d’issus de germains ¦ τρίτα ξαδέλφια ¦ трети братовчеди
+parente|parent et enfant ¦ γονέας και παιδί ¦ родител и дете
+parente|oncle ou tante et neveu ou nièce ¦ θείος ή θεία και ανιψιός ή ανιψιά ¦ чичо или леля и племенник или племенница
+parente|à la mode de Bretagne ¦ «αλά βρετονικά» (διπλός δεσμός) ¦ „по бретонски“ (двойна връзка)
+parente|époux ¦ σύζυγοι ¦ съпрузи
+Ajoute des liens : deux personnes et leur lien (cousins germains…), ou prends-les dans ta base. ¦ Πρόσθεσε δεσμούς: δύο άτομα και τη συγγένειά τους (πρώτα ξαδέλφια…), ή πάρ’ τους από τη βάση σου. ¦ Добави връзки: двама души и тяхното родство (първи братовчеди…) или ги вземи от твоята база.
+Ajoute au moins deux personnes, puis ce que chacune est pour l’autre (ou prends-les dans ta base). ¦ Πρόσθεσε τουλάχιστον δύο άτομα, και μετά τι είναι το καθένα για το άλλο (ή πάρ’ τα από τη βάση σου). ¦ Добави поне двама души, после какъв е всеки за другия (или ги вземи от твоята база).
+Ajoute des noms : le nom, le nom d’où il vient (vide pour le premier), la génération où il entre. ¦ Πρόσθεσε ονόματα: το όνομα, το όνομα από το οποίο προέρχεται (κενό για το πρώτο), τη γενιά στην οποία μπαίνει. ¦ Добави имена: името, името, от което идва (празно за първото), поколението, в което влиза.
+Ajoute des paires de lieux et combien de mariages les relient. ¦ Πρόσθεσε ζεύγη τόπων και πόσοι γάμοι τα συνδέουν. ¦ Добави двойки места и колко брака ги свързват.
+Ajoute des valeurs : une catégorie (siècle, sexe…) et un chiffre par ligne. ¦ Πρόσθεσε τιμές: μια κατηγορία (αιώνας, φύλο…) και έναν αριθμό ανά γραμμή. ¦ Добави стойности: категория (век, пол…) и число на ред.
+{name} : {n} valeurs, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: τιμές {n}, διάμεσος {med}, οι μισές ανάμεσα σε {q1} και {q3}, από {min} έως {max} ¦ {name}: стойности {n}, медиана {med}, половината между {q1} и {q3}, от {min} до {max}
+{name} : {n} valeur, médiane {med}, la moitié entre {q1} et {q3}, de {min} à {max} ¦ {name}: τιμές {n}, διάμεσος {med}, οι μισές ανάμεσα σε {q1} και {q3}, από {min} έως {max} ¦ {name}: стойности {n}, медиана {med}, половината между {q1} и {q3}, от {min} до {max}
+Nom seulement ¦ Μόνο όνομα ¦ Само име
+Une date ¦ Μία ημερομηνία ¦ Една дата
+Dates et lieux ¦ Ημερομηνίες και τόποι ¦ Дати и места
+Sourcé ¦ Με πηγή ¦ С източник
+Ajoute des ancêtres : un n° Sosa, un nom et une valeur (ou prends-les dans ta base). ¦ Πρόσθεσε προγόνους: έναν αρ. Sosa, ένα όνομα και μια τιμή (ή πάρ’ τους από τη βάση σου). ¦ Добави предци: № Sosa, име и стойност (или ги вземи от твоята база).
+🧬 Mes ancêtres, génération par génération ¦ 🧬 Οι πρόγονοί μου, γενιά με γενιά ¦ 🧬 Моите предци, поколение по поколение
+Chaque ancêtre devient une barre, de sa naissance à son décès ; les générations s’empilent, la couleur montre la branche (paternelle ou maternelle). ¦ Κάθε πρόγονος γίνεται μια μπάρα, από τη γέννηση ως τον θάνατό του· οι γενιές στοιβάζονται, το χρώμα δείχνει τον κλάδο (πατρικό ή μητρικό). ¦ Всеки предшественик става лента от раждането до смъртта си; поколенията се трупат едно над друго, цветът показва клона (бащин или майчин).
+Aucun ancêtre daté pour cette personne. ¦ Κανένας χρονολογημένος πρόγονος για αυτό το άτομο. ¦ Няма датирани предци за този човек.
+{n} enfants pris dans ta base. ¦ Παιδιά από τη βάση σου: {n}. ¦ Деца от твоята база: {n}.
+{n} enfant pris dans ta base. ¦ Παιδιά από τη βάση σου: {n}. ¦ Деца от твоята база: {n}.
+📉 Naissances et décès de ma base ¦ 📉 Γεννήσεις και θάνατοι της βάσης μου ¦ 📉 Раждания и смърти в моята база
+Compte les naissances (ou baptêmes) et les décès (ou sépultures) de chaque année. Laisse le lieu vide pour toute la base. ¦ Μετρά τις γεννήσεις (ή βαπτίσεις) και τους θανάτους (ή ταφές) κάθε χρονιάς. Άφησε τον τόπο κενό για όλη τη βάση. ¦ Брои ражданията (или кръщенетата) и смъртите (или погребенията) за всяка година. Остави мястото празно за цялата база.
+Un seul lieu (facultatif) ¦ Ένας μόνο τόπος (προαιρετικό) ¦ Само едно място (по избор)
+Année par année ¦ Χρόνο με χρόνο ¦ Година по година
+Par 5 ans ¦ Ανά 5 χρόνια ¦ По 5 години
+Par 10 ans ¦ Ανά 10 χρόνια ¦ По 10 години
+Naissances et décès ¦ Γεννήσεις και θάνατοι ¦ Раждания и смърти
+👨‍👩‍👧 Une fratrie de ma base ¦ 👨‍👩‍👧 Αδέλφια από τη βάση μου ¦ 👨‍👩‍👧 Братя и сестри от моята база
+Choisis une personne : ses frères et sœurs (ou ses enfants) deviennent des barres sur le même axe des âges, avec leurs mariages et la naissance de leurs enfants. ¦ Διάλεξε ένα άτομο: τα αδέλφια του (ή τα παιδιά του) γίνονται μπάρες στον ίδιο άξονα ηλικιών, με τους γάμους τους και τις γεννήσεις των παιδιών τους. ¦ Избери човек: братята и сестрите му (или децата му) стават ленти на една и съща ос на възрастта, с техните бракове и ражданията на децата им.
+Sa fratrie (elle comprise) ¦ Τα αδέλφια του (μαζί με το ίδιο) ¦ Братята и сестрите (включително самия човек)
+Personne : aucun enfant trouvé. ¦ Άτομο: δεν βρέθηκαν παιδιά. ¦ Човек: не са намерени деца.
+🔺 Toutes les personnes de ma base ¦ 🔺 Όλα τα άτομα της βάσης μου ¦ 🔺 Всички хора в моята база
+Chaque personne née, et pas encore morte, l’année choisie compte dans sa tranche d’âge. Ensuite : le curseur sous le dessin change l’année, ▶ fait défiler le temps. ¦ Κάθε άτομο που έχει γεννηθεί, και δεν έχει πεθάνει ακόμη, τη χρονιά που διάλεξες μετρά στην ηλικιακή του ομάδα. Μετά: ο δρομέας κάτω από το σχέδιο αλλάζει τη χρονιά, το ▶ κυλά τον χρόνο. ¦ Всеки човек, роден и още не починал в избраната година, се брои във възрастовата си група. След това: плъзгачът под рисунката сменя годината, ▶ превърта времето.
+Année de départ ¦ Χρονιά αφετηρίας ¦ Начална година
+Décès inconnu ¦ Άγνωστος θάνατος ¦ Неизвестна смърт
+Ne pas compter la personne ¦ Να μη μετρηθεί το άτομο ¦ Не броя човека
+Supposer une vie de 60 ans ¦ Υπόθεσε ζωή 60 ετών ¦ Приеми живот от 60 години
+Supposer une vie de 80 ans ¦ Υπόθεσε ζωή 80 ετών ¦ Приеми живот от 80 години
+Aucune personne avec une date de naissance. ¦ Κανένα άτομο με ημερομηνία γέννησης. ¦ Няма хора с дата на раждане.
+🪗 Mes ancêtres et leurs descendants ¦ 🪗 Οι πρόγονοί μου και οι απόγονοί τους ¦ 🪗 Моите предци и техните потомци
+Les ancêtres de la personne sur quelques générations, puis tous leurs descendants jusqu’à sa génération : frères et sœurs, oncles, cousins germains, issus de germains… avec le lien de parenté de chacun. ¦ Οι πρόγονοι του ατόμου για μερικές γενιές, και μετά όλοι οι απόγονοί τους ως τη γενιά του: αδέλφια, θείοι, πρώτα ξαδέλφια, δεύτερα ξαδέλφια… με τη συγγένεια του καθενός. ¦ Предците на човека за няколко поколения, после всичките им потомци до неговото поколение: братя и сестри, чичовци, първи братовчеди, втори братовчеди… с родството на всеки.
+Pas assez de parents connus pour cette personne. ¦ Δεν υπάρχουν αρκετοί γνωστοί συγγενείς για αυτό το άτομο. ¦ Няма достатъчно известни роднини за този човек.
+🧶 Les cousins de ma base ¦ 🧶 Τα ξαδέλφια της βάσης μου ¦ 🧶 Братовчедите в моята база
+Choisis des personnes (au moins deux), ou laisse vide : l’app prend la personne de départ et tous ses cousins de la même génération jusqu’à l’ancêtre commun choisi. ¦ Διάλεξε άτομα (τουλάχιστον δύο), ή άφησέ το κενό: η εφαρμογή παίρνει το άτομο αφετηρίας και όλα τα ξαδέλφια του της ίδιας γενιάς ως τον κοινό πρόγονο που διάλεξες. ¦ Избери хора (поне двама) или остави празно: приложението взема началния човек и всичките му братовчеди от същото поколение до избрания общ предшественик.
+Personnes (facultatif) ¦ Άτομα (προαιρετικό) ¦ Хора (по избор)
+Ancêtre commun jusqu’à ¦ Κοινός πρόγονος έως ¦ Общ предшественик до
+Les plus proches (et de quoi tout relier) ¦ Οι πιο κοντινοί (και ό,τι χρειάζεται για να συνδεθούν όλα) ¦ Най-близките (и каквото трябва, за да се свърже всичко)
+Aucun lien de parenté trouvé entre ces personnes. ¦ Δεν βρέθηκε συγγένεια ανάμεσα σε αυτά τα άτομα. ¦ Не е намерено родство между тези хора.
+🔢 Des personnes de ma base ¦ 🔢 Άτομα από τη βάση μου ¦ 🔢 Хора от моята база
+Choisis jusqu’à 20 personnes : chaque case dit ce que la personne de la colonne est pour celle de la ligne (père, oncle, cousin germain…), et se colore selon la proximité. ¦ Διάλεξε έως 20 άτομα: κάθε κουτί λέει τι είναι το άτομο της στήλης για εκείνο της γραμμής (πατέρας, θείος, πρώτος ξάδελφος…) και χρωματίζεται ανάλογα με την εγγύτητα. ¦ Избери до 20 души: всяка клетка казва какъв е човекът от колоната за този от реда (баща, чичо, първи братовчед…) и се оцветява според близостта.
+Qui est quoi pour qui ¦ Ποιος είναι τι για ποιον ¦ Кой какъв е на кого
+🌳 Les noms de mes ancêtres ¦ 🌳 Τα επώνυμα των προγόνων μου ¦ 🌳 Фамилните имена на моите предци
+Chaque nom de famille de l’ascendance : par qui et quand il entre dans l’arbre (une femme et son nom), ses variantes d’écriture regroupées, et combien d’ancêtres le portent à chaque génération. ¦ Κάθε επώνυμο της καταγωγής: από ποιον και πότε μπαίνει στο δέντρο (μια γυναίκα και το όνομά της), οι παραλλαγές γραφής του μαζί, και πόσοι πρόγονοι το φέρουν σε κάθε γενιά. ¦ Всяко фамилно име в родословието: чрез кого и кога влиза в дървото (жена и нейното име), вариантите на изписването му заедно и колко предци го носят във всяко поколение.
+Aucun nom de famille dans cette ascendance. ¦ Κανένα επώνυμο σε αυτή την καταγωγή. ¦ Няма фамилни имена в това родословие.
+🎼 Les mariages de ma base ¦ 🎼 Οι γάμοι της βάσης μου ¦ 🎼 Браковете в моята база
+Chaque mariage relie deux lieux : les lieux de naissance des deux époux, ou le lieu de naissance de chacun et le lieu du mariage. Les lieux les plus fréquents gardent leur nom, les autres vont dans « Autres ». ¦ Κάθε γάμος συνδέει δύο τόπους: τους τόπους γέννησης των δύο συζύγων, ή τον τόπο γέννησης του καθενός και τον τόπο του γάμου. Οι πιο συχνοί τόποι κρατούν το όνομά τους, οι άλλοι πάνε στα «Άλλα». ¦ Всеки брак свързва две места: местата на раждане на двамата съпрузи или мястото на раждане на всеки и мястото на брака. Най-честите места запазват името си, другите отиват в „Други“.
+Le village de l’époux et celui de l’épouse ¦ Το χωριό του συζύγου και της συζύγου ¦ Селото на съпруга и това на съпругата
+Le village de chacun → le lieu du mariage ¦ Το χωριό του καθενός → ο τόπος του γάμου ¦ Селото на всеки → мястото на брака
+Lieux gardés ¦ Τόποι που κρατιούνται ¦ Запазени места
+🎻 Des âges de ma base ¦ 🎻 Ηλικίες από τη βάση μου ¦ 🎻 Възрасти от моята база
+Chaque personne donne une valeur (son âge au décès, ou au mariage), rangée dans une catégorie (son siècle, son sexe). ¦ Κάθε άτομο δίνει μια τιμή (την ηλικία θανάτου ή γάμου), σε μια κατηγορία (τον αιώνα του, το φύλο του). ¦ Всеки човек дава стойност (възрастта си при смърт или при брак), подредена в категория (своя век, своя пол).
+🟩 Mes ancêtres (numéros Sosa) ¦ 🟩 Οι πρόγονοί μου (αριθμοί Sosa) ¦ 🟩 Моите предци (номера Sosa)
+Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche. ¦ Ένα κουτί ανά θέση προγόνου· τα γκρι κουτιά είναι οι πρόγονοι που δεν βρέθηκαν ακόμη. Κλικ σε ένα κουτί (εκτός επεξεργαστή): η καρτέλα του. ¦ Една клетка на място на предшественик; сивите клетки са още ненамерените предци. Щракване върху клетка (извън редактора): картонът му.
+Ce que je sais (nom, dates, lieux, sources) ¦ Τι ξέρω (όνομα, ημερομηνίες, τόποι, πηγές) ¦ Какво знам (име, дати, места, източници)
+Région de naissance ¦ Περιοχή γέννησης ¦ Област на раждане
+Siècle de naissance ¦ Αιώνας γέννησης ¦ Век на раждане
+Les personnes (une barre par vie) ¦ Τα άτομα (μία μπάρα ανά ζωή) ¦ Хората (една лента на живот)
+Génération (vide = d’après le n° Sosa) ¦ Γενιά (κενό = από τον αρ. Sosa) ¦ Поколение (празно = по № Sosa)
+Décès (vide = vivant ; ? = inconnu) ¦ Θάνατος (κενό = ζει· ? = άγνωστος) ¦ Смърт (празно = жив; ? = неизвестна)
+Les événements historiques en fond (facultatif) ¦ Τα ιστορικά γεγονότα στο φόντο (προαιρετικό) ¦ Историческите събития на фона (по избор)
+Couleur des barres ¦ Χρώμα των μπαρών ¦ Цвят на лентите
+Branche paternelle ou maternelle ¦ Πατρικός ή μητρικός κλάδος ¦ Бащин или майчин клон
+Homme ou femme ¦ Άντρας ή γυναίκα ¦ Мъж или жена
+Colonne « Groupe » ¦ Στήλη «Ομάδα» ¦ Колона „Група“
+Serrée (noms dans les barres) ¦ Πυκνή (ονόματα μέσα στις μπάρες) ¦ Сбито (имената в лентите)
+Une ligne par personne (noms à gauche) ¦ Μία γραμμή ανά άτομο (ονόματα αριστερά) ¦ Един ред на човек (имената вляво)
+Les plus anciennes en haut ¦ Οι παλαιότεροι πάνω ¦ Най-старите горе
+Les plus récentes en haut ¦ Οι πιο πρόσφατοι πάνω ¦ Най-новите горе
+Noms dans les barres ¦ Ονόματα μέσα στις μπάρες ¦ Имена в лентите
+Montrer les événements ¦ Δείξε τα γεγονότα ¦ Покажи събитията
+Les crises (à changer ou compléter) ¦ Οι κρίσεις (για αλλαγή ή συμπλήρωση) ¦ Кризите (за промяна или допълване)
+Fin (vide = une année) ¦ Τέλος (κενό = μία χρονιά) ¦ Край (празно = една година)
+Lisser les courbes (moyenne sur … ans) ¦ Εξομάλυνση των καμπυλών (μέσος όρος σε … χρόνια) ¦ Изглаждане на кривите (средно за … години)
+Montrer les crises ¦ Δείξε τις κρίσεις ¦ Покажи кризите
+Colorer quand les décès dépassent les naissances ¦ Χρωμάτισε όταν οι θάνατοι ξεπερνούν τις γεννήσεις ¦ Оцветявай, когато смъртите надвишават ражданията
+Couleur des naissances ¦ Χρώμα των γεννήσεων ¦ Цвят на ражданията
+Couleur des décès ¦ Χρώμα των θανάτων ¦ Цвят на смъртите
+Nom de l’axe des valeurs ¦ Όνομα του άξονα τιμών ¦ Име на оста на стойностите
+Naissances et décès au village ¦ Γεννήσεις και θάνατοι στο χωριό ¦ Раждания и смърти в селото
+Les enfants (dans l’ordre de naissance) ¦ Τα παιδιά (με σειρά γέννησης) ¦ Децата (по реда на раждане)
+Prénom / nom ¦ Όνομα / επώνυμο ¦ Име / фамилия
+Décès (vide = vivant ou inconnu) ¦ Θάνατος (κενό = ζει ή άγνωστος) ¦ Смърт (празно = жив или неизвестна)
+Mariages (dates, séparées par des virgules) ¦ Γάμοι (ημερομηνίες, χωρισμένες με κόμματα) ¦ Бракове (дати, разделени със запетаи)
+Naissance de ses enfants (dates) ¦ Γεννήσεις των παιδιών του (ημερομηνίες) ¦ Раждания на децата му (дати)
+Les âges (tous partent de 0) ¦ Οι ηλικίες (όλες ξεκινούν από 0) ¦ Възрастите (всички започват от 0)
+Les années (calendrier) ¦ Τα χρόνια (ημερολόγιο) ¦ Годините (календар)
+Par date de naissance ¦ Κατά ημερομηνία γέννησης ¦ По дата на раждане
+Les personnes (à la main ; celles de ta base : « Depuis l’app ») ¦ Τα άτομα (με το χέρι· της βάσης σου: «Από την εφαρμογή») ¦ Хората (на ръка; от твоята база: „От приложението“)
+Année montrée ¦ Χρονιά που εμφανίζεται ¦ Показана година
+Tranches d’âge ¦ Ηλικιακές ομάδες ¦ Възрастови групи
+Dernière tranche à partir de ¦ Τελευταία ομάδα από ¦ Последна група от
+Décès inconnu : supposer une vie de … ans (0 = ne pas compter) ¦ Άγνωστος θάνατος: υπόθεσε ζωή … ετών (0 = να μη μετρηθεί) ¦ Неизвестна смърт: приеми живот от … години (0 = не броя)
+Même échelle pour toutes les années (lecture) ¦ Ίδια κλίμακα για όλα τα χρόνια (αναπαραγωγή) ¦ Един мащаб за всички години (възпроизвеждане)
+Afficher les nombres ¦ Εμφάνιση των αριθμών ¦ Показвай числата
+Couleur des hommes ¦ Χρώμα των αντρών ¦ Цвят на мъжете
+Couleur des femmes ¦ Χρώμα των γυναικών ¦ Цвят на жените
+Hauteur des barres (px, au total) ¦ Ύψος των μπαρών (px, συνολικά) ¦ Височина на лентите (px, общо)
+Les personnes (même nom au-dessus = branche) ¦ Τα άτομα (ίδιο όνομα από πάνω = κλάδος) ¦ Хората (едно и също име отгоре = клон)
+Au-dessus (nom ; vide pour le haut) ¦ Από πάνω (όνομα· κενό για την κορυφή) ¦ Отгоре (име; празно за върха)
+Lien de parenté ¦ Συγγένεια ¦ Родство
+Degré (couleur) ¦ Βαθμός (χρώμα) ¦ Степен (цвят)
+Montrer le lien de parenté ¦ Δείξε τη συγγένεια ¦ Покажи родството
+Générations ouvertes au départ (0 = toutes) ¦ Γενιές ανοιχτές στην αρχή (0 = όλες) ¦ Поколения, отворени в началото (0 = всички)
+Décalage d’une génération ¦ Εσοχή ανά γενιά ¦ Отстъп на поколение
+Les liens (deux personnes et leur lien) ¦ Οι δεσμοί (δύο άτομα και η συγγένειά τους) ¦ Връзките (двама души и тяхното родство)
+Les personnes (facultatif : famille pour la couleur) ¦ Τα άτομα (προαιρετικό: οικογένεια για το χρώμα) ¦ Хората (по избор: семейство за цвета)
+Noms des liens sur les traits ¦ Ονόματα των δεσμών πάνω στις γραμμές ¦ Имена на връзките върху линиите
+Si pas trop nombreux (60) ¦ Αν δεν είναι πάρα πολλοί (60) ¦ Ако не са твърде много (60)
+Les cousinages de la famille ¦ Οι συγγένειες της οικογένειας ¦ Роднинските връзки в семейството
+Les personnes (lignes et colonnes, 40 au plus) ¦ Τα άτομα (γραμμές και στήλες, 40 το πολύ) ¦ Хората (редове и колони, най-много 40)
+Les cases : ce que B est pour A ¦ Τα κουτιά: τι είναι ο B για τον A ¦ Клетките: какъв е B на A
+Lien (père, cousin germain…) ¦ Συγγένεια (πατέρας, πρώτος ξάδελφος…) ¦ Родство (баща, първи братовчед…)
+Le lien ¦ Η συγγένεια ¦ Родството
+Le degré ¦ Ο βαθμός ¦ Степента
+Rien (couleurs seules) ¦ Τίποτα (μόνο χρώματα) ¦ Нищо (само цветове)
+Les noms (d’où vient chacun) ¦ Τα ονόματα (από πού έρχεται το καθένα) ¦ Имената (откъде идва всяко)
+Arrive par (nom ; vide pour le premier) ¦ Έρχεται μέσω (όνομα· κενό για το πρώτο) ¦ Идва чрез (име; празно за първото)
+Génération d’entrée ¦ Γενιά εισόδου ¦ Поколение на влизане
+Porteurs par génération (1,2,4…) ¦ Φορείς ανά γενιά (1,2,4…) ¦ Носители по поколения (1,2,4…)
+Les ancêtres (n° Sosa → valeur) ¦ Οι πρόγονοι (αρ. Sosa → τιμή) ¦ Предците (№ Sosa → стойност)
+Valeur (chiffre ou catégorie) ¦ Τιμή (αριθμός ή κατηγορία) ¦ Стойност (число или категория)
+Les catégories et leur couleur (facultatif) ¦ Οι κατηγορίες και το χρώμα τους (προαιρετικό) ¦ Категориите и техният цвят (по избор)
+Une ligne par génération ¦ Μία γραμμή ανά γενιά ¦ Един ред на поколение
+Un carré (cases dans l’ordre des numéros) ¦ Ένα τετράγωνο (κουτιά με τη σειρά των αριθμών) ¦ Квадрат (клетки по реда на номерата)
+Le nom (si la place le permet) ¦ Το όνομα (αν χωράει) ¦ Името (ако има място)
+Le n° Sosa ¦ Ο αρ. Sosa ¦ № Sosa
+Le nom et le n° Sosa ¦ Το όνομα και ο αρ. Sosa ¦ Името и № Sosa
+Un dégradé (chiffres) ¦ Μια διαβάθμιση (αριθμοί) ¦ Преливане (числа)
+Une couleur par catégorie ¦ Ένα χρώμα ανά κατηγορία ¦ Един цвят на категория
+Dégradé : minimum ¦ Διαβάθμιση: ελάχιστο ¦ Преливане: минимум
+Dégradé : maximum ¦ Διαβάθμιση: μέγιστο ¦ Преливане: максимум
+Couleur des ancêtres pas trouvés ¦ Χρώμα των προγόνων που δεν βρέθηκαν ¦ Цвят на ненамерените предци
+Ce que je sais de mes ancêtres ¦ Τι ξέρω για τους προγόνους μου ¦ Какво знам за моите предци
+Les paires de lieux ¦ Τα ζεύγη τόπων ¦ Двойките места
+Lieu A ¦ Τόπος A ¦ Място A
+Lieu B ¦ Τόπος B ¦ Място B
+Lieux gardés (les autres : « Autres ») ¦ Τόποι που κρατιούνται (οι άλλοι: «Άλλα») ¦ Запазени места (другите: „Други“)
+Mariages dans le même lieu (boucles) ¦ Γάμοι στον ίδιο τόπο (βρόχοι) ¦ Бракове на едно и също място (примки)
+Opacité des rubans ¦ Αδιαφάνεια των κορδελών ¦ Непрозрачност на лентите
+Là où il y a la place ¦ Όπου υπάρχει χώρος ¦ Където има място
+Unité (ex. : mariages) ¦ Μονάδα (π.χ.: γάμοι) ¦ Единица (напр.: бракове)
+Les valeurs (une par ligne) ¦ Οι τιμές (μία ανά γραμμή) ¦ Стойностите (по една на ред)
+Catégorie (siècle, sexe…) ¦ Κατηγορία (αιώνας, φύλο…) ¦ Категория (век, пол…)
+Médiane et quartiles ¦ Διάμεσος και τεταρτημόρια ¦ Медиана и квартили
+Écrire la médiane ¦ Γράψε τη διάμεσο ¦ Пиши медианата
+Par médiane ¦ Κατά διάμεσο ¦ По медиана
+Unité (ex. : ans) ¦ Μονάδα (π.χ.: έτη) ¦ Единица (напр.: години)
+Nom de l’axe ¦ Όνομα του άξονα ¦ Име на оста
+Faire défiler les années ¦ Κύλιση των χρόνων ¦ Превъртай годините
+=segment ¦ τμήμα|τμήματα ¦ сегмент|сегмента
+=correspondance ¦ αντιστοιχία|αντιστοιχίες ¦ съвпадение|съвпадения
+=valeur ¦ τιμή|τιμές ¦ стойност|стойности
+=couple ¦ ζεύγος|ζεύγη ¦ двойка|двойки
+Peint : {p} % côté père · {m} % côté mère ¦ Βαμμένο: {p} % από την πλευρά του πατέρα · {m} % από την πλευρά της μητέρας ¦ Оцветено: {p} % от страна на бащата · {m} % от страна на майката
+Peint : {p} % du génome ¦ Βαμμένο: {p} % του γονιδιώματος ¦ Оцветено: {p} % от генома
+({n} petits segments non montrés) ¦ (μικρά τμήματα που δεν εμφανίζονται: {n}) ¦ (непоказани малки сегменти: {n})
+Chromosome {c} — copie reçue du père ({mb} Mb) ¦ Χρωμόσωμα {c} — αντίγραφο από τον πατέρα ({mb} Mb) ¦ Хромозома {c} — копие от бащата ({mb} Mb)
+Chromosome {c} — copie reçue de la mère ¦ Χρωμόσωμα {c} — αντίγραφο από τη μητέρα ¦ Хромозома {c} — копие от майката
+Chromosome {c} ({mb} Mb) ¦ Χρωμόσωμα {c} ({mb} Mb) ¦ Хромозома {c} ({mb} Mb)
+chromosome {c} : {a} à {b} Mb ¦ χρωμόσωμα {c}: {a} έως {b} Mb ¦ хромозома {c}: от {a} до {b} Mb
+(clic : sa fiche) ¦ (κλικ: η καρτέλα του) ¦ (щракване: картонът му)
+(clic : la liste) ¦ (κλικ: η λίστα) ¦ (щракване: списъкът)
+Côté père ¦ Πλευρά πατέρα ¦ По бащина линия
+Côté mère ¦ Πλευρά μητέρας ¦ По майчина линия
+Côté inconnu ¦ Άγνωστη πλευρά ¦ Неизвестна линия
+côté père ¦ πλευρά πατέρα ¦ по бащина линия
+côté mère ¦ πλευρά μητέρας ¦ по майчина линия
+des deux côtés ¦ και από τις δύο πλευρές ¦ и от двете страни
+côté inconnu ¦ άγνωστη πλευρά ¦ неизвестна линия
+Branche inconnue ¦ Άγνωστος κλάδος ¦ Неизвестен клон
+Peinture des chromosomes : {s} de {m} ¦ Βάψιμο χρωμοσωμάτων: {s} από {m} ¦ Оцветяване на хромозомите: {s} от {m}
+{p} % du génome côté père et {m} % côté mère ¦ {p} % του γονιδιώματος από την πλευρά του πατέρα και {m} % από την πλευρά της μητέρας ¦ {p} % от генома по бащина линия и {m} % по майчина линия
+Peinture des chromosomes — {name} ¦ Βάψιμο χρωμοσωμάτων — {name} ¦ Оцветяване на хромозомите — {name}
+Correspondance {n} ¦ Αντιστοιχία {n} ¦ Съвпадение {n}
+parenté connue : {k} ¦ γνωστή συγγένεια: {k} ¦ известно родство: {k}
+parentés possibles : {k} ¦ πιθανές συγγένειες: {k} ¦ възможни родства: {k}
+{rel} : en moyenne {avg} cM, de {min} à {max} cM — {n} de tes correspondances dans cette fourchette ¦ {rel}: κατά μέσο όρο {avg} cM, από {min} έως {max} cM — αντιστοιχίες σου σε αυτό το εύρος: {n} ¦ {rel}: средно {avg} cM, от {min} до {max} cM — твои съвпадения в този диапазон: {n}
+pour {name} : {p} % ¦ για {name}: {p} % ¦ за {name}: {p} %
+{n} correspondances placées ¦ Αντιστοιχίες που τοποθετήθηκαν: {n} ¦ Поставени съвпадения: {n}
+{n} correspondance placée ¦ Αντιστοιχίες που τοποθετήθηκαν: {n} ¦ Поставени съвпадения: {n}
+Règle des cM : {n} sur une échelle logarithmique de {r} parentés (Shared cM Project). ¦ Χάρακας cM: {n} σε λογαριθμική κλίμακα {r} συγγενειών (Shared cM Project). ¦ Линийка за cM: {n} по логаритмична скала от {r} родства (Shared cM Project).
+Règle des cM : {n} sur une échelle linéaire de {r} parentés (Shared cM Project). ¦ Χάρακας cM: {n} σε γραμμική κλίμακα {r} συγγενειών (Shared cM Project). ¦ Линийка за cM: {n} по линейна скала от {r} родства (Shared cM Project).
+{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max} ¦ {name}: {n}, διάμεσος {med}, μέσος όρος {mean}, από {min} έως {max} ¦ {name}: {n}, медиана {med}, средно {mean}, от {min} до {max}
+{name} : médiane {v} ¦ {name}: διάμεσος {v} ¦ {name}: медиана {v}
+Vagues : {g}, {n} valeurs, de {min} à {max}. ¦ Κύματα: {g}, {n}, από {min} έως {max}. ¦ Вълни: {g}, {n}, от {min} до {max}.
+({p} % de {label}, {t} % du tout) ¦ ({p} % του {label}, {t} % του συνόλου) ¦ ({p} % от {label}, {t} % от цялото)
+Mosaïque de {c} colonnes (largeur = part du total {t}) et {s} séries. ¦ Μωσαϊκό: στήλες {c} (πλάτος = μερίδιο του συνόλου {t}), σειρές {s}. ¦ Мозайка: колони {c} (ширина = дял от общото {t}), серии {s}.
+(écart {v}) ¦ (διαφορά {v}) ¦ (разлика {v})
+Échelle de points : {n} lignes, {s}. ¦ Κλίμακα σημείων: γραμμές {n}, {s}. ¦ Точкова скала: редове {n}, {s}.
+(total {v}) ¦ (σύνολο {v}) ¦ (общо {v})
+Rose de Nightingale : {n} parts, {s}, l’aire de chaque part suit le chiffre. ¦ Ρόδο της Nightingale: τμήματα {n}, {s}, το εμβαδόν κάθε τμήματος ακολουθεί τον αριθμό. ¦ Роза на Найтингейл: дялове {n}, {s}, площта на всеки дял следва числото.
+Rose de Nightingale : {n} parts, {s}. ¦ Ρόδο της Nightingale: τμήματα {n}, {s}. ¦ Роза на Найтингейл: дялове {n}, {s}.
+Même métier que le père : {n} sur {t} ({p} %) ¦ Ίδιο επάγγελμα με τον πατέρα: {n} από {t} ({p} %) ¦ Същата професия като бащата: {n} от {t} ({p} %)
+Père {a} → {kid} {b} : {n} ¦ Πατέρας {a} → {kid} {b}: {n} ¦ Баща {a} → {kid} {b}: {n}
+{p} % des enfants de {job}, {t} % du tout ¦ {p} % των παιδιών με επάγγελμα πατέρα {job}, {t} % του συνόλου ¦ {p} % от децата с професия на бащата {job}, {t} % от цялото
+Père ↓ · {kid} → ¦ Πατέρας ↓ · {kid} → ¦ Баща ↓ · {kid} →
+Chiffres en % des enfants de chaque métier du père ¦ Αριθμοί σε % των παιδιών κάθε επαγγέλματος του πατέρα ¦ Числа в % от децата за всяка професия на бащата
+Chiffres en % de chaque métier de {kid} ¦ Αριθμοί σε % κάθε επαγγέλματος: {kid} ¦ Числа в % от всяка професия: {kid}
+Chiffres en % du tout ¦ Αριθμοί σε % του συνόλου ¦ Числа в % от цялото
+Chiffres en nombre ¦ Αριθμοί σε πλήθος ¦ Числа в брой
+cadre de couleur : même métier que le père. ¦ χρωματιστό πλαίσιο: ίδιο επάγγελμα με τον πατέρα. ¦ цветна рамка: същата професия като бащата.
+Cadre de couleur : même métier que le père. ¦ Χρωματιστό πλαίσιο: ίδιο επάγγελμα με τον πατέρα. ¦ Цветна рамка: същата професия като бащата.
+Tableau de mobilité : {t} couples père et {kid}, {n} métiers ; {p} % font le métier du père. ¦ Πίνακας κινητικότητας: ζεύγη πατέρας–{kid}: {t}, επαγγέλματα: {n}· {p} % κάνουν το επάγγελμα του πατέρα. ¦ Таблица на мобилността: двойки баща – {kid}: {t}, професии: {n}; {p} % упражняват професията на бащата.
+, femmes et hommes ¦ , γυναίκες και άντρες ¦ , жени и мъже
+, par siècle du mariage ¦ , ανά αιώνα γάμου ¦ , по век на брака
+, par siècle de naissance ¦ , ανά αιώνα γέννησης ¦ , по век на раждане
+, par siècle ¦ , ανά αιώνα ¦ , по векове
+D’après {n} de l’arbre ¦ Με βάση το δέντρο: {n} ¦ Според дървото: {n}
+largeur : le nombre de personnes de la période ; hauteur : la part de chacun ¦ πλάτος: ο αριθμός ατόμων της περιόδου· ύψος: το μερίδιο του καθενός ¦ ширина: броят хора в периода; височина: делът на всеки
+D’après les fiches de l’arbre ¦ Με βάση τις καρτέλες του δέντρου ¦ Според картоните в дървото
+femmes et hommes ¦ γυναίκες και άντρες ¦ жени и мъже
+D’après {n} au mois près ¦ Με βάση δεδομένα με ακρίβεια μήνα: {n} ¦ Според данни с точност до месеца: {n}
+D’après {n} père et {kid} dont les deux métiers sont connus ¦ Με βάση: {n} (πατέρας και {kid} με γνωστά και τα δύο επαγγέλματα) ¦ Според: {n} (баща и {kid} с известни и двете професии)
+{n} pris dans l’onglet ADN. ¦ Από την καρτέλα DNA: {n}. ¦ От раздела ДНК: {n}.
+{n} prises dans l’onglet ADN. ¦ Από την καρτέλα DNA: {n}. ¦ От раздела ДНК: {n}.
+(les 300 premières) ¦ (τα πρώτα 300) ¦ (първите 300)
+clic : la fiche. ¦ κλικ: η καρτέλα. ¦ щракване: картонът.
+Cette partie ¦ Αυτό το μέρος ¦ Тази част
+{name} : ferme l’éditeur et clique à nouveau pour voir la liste des personnes. ¦ {name}: κλείσε τον επεξεργαστή και κάνε ξανά κλικ για να δεις τη λίστα των ατόμων. ¦ {name}: затвори редактора и щракни отново, за да видиш списъка с хората.
+Aucun segment à montrer (vérifie le chromosome, le début et la fin, ou le minimum de cM). ¦ Κανένα τμήμα για εμφάνιση (έλεγξε το χρωμόσωμα, την αρχή και το τέλος, ή το ελάχιστο cM). ¦ Няма сегменти за показване (провери хромозомата, началото и края или минимума cM).
+Ajoute des segments : chromosome, début, fin (en Mb ou en paires de bases), cM, correspondance. ¦ Πρόσθεσε τμήματα: χρωμόσωμα, αρχή, τέλος (σε Mb ή ζεύγη βάσεων), cM, αντιστοιχία. ¦ Добави сегменти: хромозома, начало, край (в Mb или базови двойки), cM, съвпадение.
+▲ père ▼ mère ¦ ▲ πατέρας ▼ μητέρα ¦ ▲ баща ▼ майка
+Ajoute tes correspondances (nom, cM) : elles se placent sur la règle. ¦ Πρόσθεσε τις αντιστοιχίες σου (όνομα, cM): τοποθετούνται στον χάρακα. ¦ Добави своите съвпадения (име, cM): те се поставят на линийката.
+Ajoute des valeurs avec leur groupe (siècle, sexe, branche…) : une vague par groupe. ¦ Πρόσθεσε τιμές με την ομάδα τους (αιώνας, φύλο, κλάδος…): ένα κύμα ανά ομάδα. ¦ Добави стойности с групата им (век, пол, клон…): една вълна на група.
+Ajoute des colonnes (lignes du tableau) et leurs parts (séries) : la largeur suit le total. ¦ Πρόσθεσε στήλες (γραμμές του πίνακα) και τα μερίδιά τους (σειρές): το πλάτος ακολουθεί το σύνολο. ¦ Добави колони (редове на таблицата) и техните дялове (серии): ширината следва общото.
+Ajoute des lignes et leurs valeurs (une colonne par série, ex. femmes et hommes). ¦ Πρόσθεσε γραμμές και τις τιμές τους (μία στήλη ανά σειρά, π.χ. γυναίκες και άντρες). ¦ Добави редове и техните стойности (по една колона на серия, напр. жени и мъже).
+Ajoute des parts (mois, saisons…) et leurs chiffres (une colonne par série). ¦ Πρόσθεσε τμήματα (μήνες, εποχές…) και τους αριθμούς τους (μία στήλη ανά σειρά). ¦ Добави дялове (месеци, сезони…) и техните числа (по една колона на серия).
+Ajoute des lignes : métier du père, métier de l’enfant, combien. ¦ Πρόσθεσε γραμμές: επάγγελμα πατέρα, επάγγελμα παιδιού, πόσα. ¦ Добави редове: професия на бащата, професия на детето, колко.
+Aucune donnée dans l’arbre pour ce choix (dates manquantes ?). ¦ Κανένα δεδομένο στο δέντρο για αυτή την επιλογή (λείπουν ημερομηνίες;). ¦ Няма данни в дървото за този избор (липсват дати?).
+Aucune donnée dans l’arbre pour ce choix. ¦ Κανένα δεδομένο στο δέντρο για αυτή την επιλογή. ¦ Няма данни в дървото за този избор.
+Les métiers de la famille, siècle par siècle ¦ Τα επαγγέλματα της οικογένειας, αιώνα με αιώνα ¦ Професиите в семейството, век по век
+Les communes de naissance, siècle par siècle ¦ Οι δήμοι γέννησης, αιώνα με αιώνα ¦ Общините на раждане, век по век
+Les noms de famille, siècle par siècle ¦ Τα επώνυμα, αιώνα με αιώνα ¦ Фамилните имена, век по век
+Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix. ¦ Δεν υπάρχουν αρκετές ημερομηνίες γέννησης και θανάτου (ή γάμου) για αυτή την επιλογή. ¦ Няма достатъчно дати на раждане и смърт (или брак) за този избор.
+Âge moyen au décès, par siècle de naissance ¦ Μέση ηλικία θανάτου, ανά αιώνα γέννησης ¦ Средна възраст при смърт, по век на раждане
+Âge moyen au mariage, par siècle ¦ Μέση ηλικία γάμου, ανά αιώνα ¦ Средна възраст при брак, по векове
+Âge moyen au décès, par commune de naissance ¦ Μέση ηλικία θανάτου, ανά δήμο γέννησης ¦ Средна възраст при смърт, по община на раждане
+Âge moyen au décès, par nom de famille ¦ Μέση ηλικία θανάτου, ανά επώνυμο ¦ Средна възраст при смърт, по фамилно име
+Aucune date au mois près dans l’arbre pour ce choix. ¦ Καμία ημερομηνία με ακρίβεια μήνα στο δέντρο για αυτή την επιλογή. ¦ Няма дати с точност до месеца в дървото за този избор.
+Naissances, mariages et décès, mois par mois ¦ Γεννήσεις, γάμοι και θάνατοι, μήνα με μήνα ¦ Раждания, бракове и смърти, месец по месец
+Les naissances, mois par mois ¦ Οι γεννήσεις, μήνα με μήνα ¦ Ражданията, месец по месец
+Les mariages, mois par mois ¦ Οι γάμοι, μήνα με μήνα ¦ Браковете, месец по месец
+Les décès, mois par mois ¦ Οι θάνατοι, μήνα με μήνα ¦ Смъртите, месец по месец
+Les conceptions (naissance − 9 mois), mois par mois ¦ Οι συλλήψεις (γέννηση − 9 μήνες), μήνα με μήνα ¦ Зачатията (раждане − 9 месеца), месец по месец
+Aucun couple père / enfant dont les deux métiers sont connus. ¦ Κανένα ζεύγος πατέρα / παιδιού με γνωστά και τα δύο επαγγέλματα. ¦ Няма двойка баща / дете с известни и двете професии.
+Métier du père, métier de l’enfant ¦ Επάγγελμα πατέρα, επάγγελμα παιδιού ¦ Професия на бащата, професия на детето
+Métier du père, métier du fils ¦ Επάγγελμα πατέρα, επάγγελμα γιου ¦ Професия на бащата, професия на сина
+Métier du père, métier de la fille ¦ Επάγγελμα πατέρα, επάγγελμα κόρης ¦ Професия на бащата, професия на дъщерята
+Âge au décès, par siècle de naissance ¦ Ηλικία θανάτου, ανά αιώνα γέννησης ¦ Възраст при смърт, по век на раждане
+Âge au décès, femmes et hommes ¦ Ηλικία θανάτου, γυναίκες και άντρες ¦ Възраст при смърт, жени и мъже
+Âge au mariage, par siècle ¦ Ηλικία γάμου, ανά αιώνα ¦ Възраст при брак, по векове
+Âge au mariage, femmes et hommes ¦ Ηλικία γάμου, γυναίκες και άντρες ¦ Възраст при брак, жени и мъже
+Métiers, siècle par siècle ¦ Επαγγέλματα, αιώνα με αιώνα ¦ Професии, век по век
+Communes de naissance, siècle par siècle ¦ Δήμοι γέννησης, αιώνα με αιώνα ¦ Общини на раждане, век по век
+Noms de famille, siècle par siècle ¦ Επώνυμα, αιώνα με αιώνα ¦ Фамилни имена, век по век
+Métiers, par 50 ans ¦ Επαγγέλματα, ανά 50 χρόνια ¦ Професии, по 50 години
+Âge moyen au décès (femmes, hommes), par siècle de naissance ¦ Μέση ηλικία θανάτου (γυναίκες, άντρες), ανά αιώνα γέννησης ¦ Средна възраст при смърт (жени, мъже), по век на раждане
+Âge moyen au mariage (femmes, hommes), par siècle ¦ Μέση ηλικία γάμου (γυναίκες, άντρες), ανά αιώνα ¦ Средна възраст при брак (жени, мъже), по векове
+Naissances, mariages et décès, par mois ¦ Γεννήσεις, γάμοι και θάνατοι, ανά μήνα ¦ Раждания, бракове и смърти, по месеци
+Naissances par mois, par siècle ¦ Γεννήσεις ανά μήνα, ανά αιώνα ¦ Раждания по месеци, по векове
+Conceptions par mois (naissance − 9 mois), par siècle ¦ Συλλήψεις ανά μήνα (γέννηση − 9 μήνες), ανά αιώνα ¦ Зачатия по месеци (раждане − 9 месеца), по векове
+Mariages par mois, par siècle ¦ Γάμοι ανά μήνα, ανά αιώνα ¦ Бракове по месеци, по векове
+Décès par mois, par siècle ¦ Θάνατοι ανά μήνα, ανά αιώνα ¦ Смърти по месеци, по векове
+Métier du père → métier du fils ¦ Επάγγελμα πατέρα → επάγγελμα γιου ¦ Професия на бащата → професия на сина
+Métier du père → métier de la fille ¦ Επάγγελμα πατέρα → επάγγελμα κόρης ¦ Професия на бащата → професия на дъщерята
+Métier du père → métier de l’enfant (fils et filles) ¦ Επάγγελμα πατέρα → επάγγελμα παιδιού (γιοι και κόρες) ¦ Професия на бащата → професия на детето (синове и дъщери)
+La personne qui a fait le test… ¦ Το άτομο που έκανε το τεστ… ¦ Човекът, който е направил теста…
+ℹ️ Aucun test ADN dans ta base : ajoute-le dans l’onglet ADN (🧬 Mes tests), ou remplis le tableau à la main. ¦ ℹ️ Κανένα τεστ DNA στη βάση σου: πρόσθεσέ το στην καρτέλα DNA (🧬 Τα τεστ μου), ή συμπλήρωσε τον πίνακα με το χέρι. ¦ ℹ️ Няма ДНК тест в твоята база: добави го в раздела ДНК (🧬 Моите тестове) или попълни таблицата на ръка.
+ℹ️ Cette personne n’a pas de test : voici tous les tests de ta base. ¦ ℹ️ Αυτό το άτομο δεν έχει τεστ: ορίστε όλα τα τεστ της βάσης σου. ¦ ℹ️ Този човек няма тест: ето всички тестове в твоята база.
+Lecture de tes données ADN… ¦ Ανάγνωση των δεδομένων DNA σου… ¦ Четене на твоите ДНК данни…
+Aucun test ADN dans ta base. ¦ Κανένα τεστ DNA στη βάση σου. ¦ Няма ДНК тест в твоята база.
+🧬 Les segments d’un test ¦ 🧬 Τα τμήματα ενός τεστ ¦ 🧬 Сегментите на един тест
+Les segments partagés avec chaque cousin (onglet ADN → 🧩 Chromosomes) sont peints sur ses chromosomes, colorés par branche (les groupes de l’onglet ADN, ou l’ancêtre noté sur le segment). ¦ Τα τμήματα που μοιράζεσαι με κάθε ξάδελφο (καρτέλα DNA → 🧩 Χρωμοσώματα) βάφονται στα χρωμοσώματά του, χρωματισμένα ανά κλάδο (οι ομάδες της καρτέλας DNA, ή ο πρόγονος που σημειώθηκε στο τμήμα). ¦ Сегментите, общи с всеки братовчед (раздел ДНК → 🧩 Хромозоми), се оцветяват върху хромозомите му по клонове (групите от раздела ДНК или предшественикът, отбелязан на сегмента).
+Segments d’au moins ¦ Τμήματα τουλάχιστον ¦ Сегменти от поне
+Ce test n’a pas encore de segments : importe-les dans l’onglet ADN (🧩 Chromosomes → ⤒ Importer des segments). ¦ Αυτό το τεστ δεν έχει ακόμη τμήματα: κάνε εισαγωγή τους στην καρτέλα DNA (🧩 Χρωμοσώματα → ⤒ Εισαγωγή τμημάτων). ¦ Този тест още няма сегменти: импортирай ги в раздела ДНК (🧩 Хромозоми → ⤒ Импортирай сегменти).
+D’après l’onglet ADN (segments partagés) ¦ Με βάση την καρτέλα DNA (κοινά τμήματα) ¦ Според раздела ДНК (общи сегменти)
+📏 Les correspondances d’un test ¦ 📏 Οι αντιστοιχίες ενός τεστ ¦ 📏 Съвпаденията на един тест
+Chaque correspondance se place sur la règle d’après ses cM partagés ; survole un point pour voir les parentés possibles. ¦ Κάθε αντιστοιχία τοποθετείται στον χάρακα ανάλογα με τα κοινά cM της· πέρασε πάνω από ένα σημείο για να δεις τις πιθανές συγγένειες. ¦ Всяко съвпадение се поставя на линийката според общите си cM; посочи точка, за да видиш възможните родства.
+Correspondances d’au moins ¦ Αντιστοιχίες τουλάχιστον ¦ Съвпадения от поне
+Combien au plus ¦ Πόσες το πολύ ¦ Колко най-много
+Aucune correspondance avec des cM pour ce test (ou au-dessus du minimum choisi). ¦ Καμία αντιστοιχία με cM για αυτό το τεστ (ή πάνω από το ελάχιστο που διάλεξες). ¦ Няма съвпадения с cM за този тест (или над избрания минимум).
+segments partagés, colorés par branche ¦ κοινά τμήματα, χρωματισμένα ανά κλάδο ¦ общи сегменти, оцветени по клонове
+Mes chromosomes peints ¦ Τα βαμμένα χρωμοσώματά μου ¦ Моите оцветени хромозоми
+Mes cousins ADN sur la règle des cM ¦ Τα ξαδέλφια μου στο DNA στον χάρακα cM ¦ Моите ДНК братовчеди на линийката за cM
+par siècle de naissance ¦ ανά αιώνα γέννησης ¦ по век на раждане
+Les métiers, siècle par siècle ¦ Τα επαγγέλματα, αιώνα με αιώνα ¦ Професиите, век по век
+largeur : nombre de personnes ; hauteur : part du métier ¦ πλάτος: αριθμός ατόμων· ύψος: μερίδιο του επαγγέλματος ¦ ширина: брой хора; височина: дял на професията
+par commune de naissance, femmes et hommes ¦ ανά δήμο γέννησης, γυναίκες και άντρες ¦ по община на раждане, жени и мъже
+Les mois de la vie ¦ Οι μήνες της ζωής ¦ Месеците на живота
+naissances, mariages et décès ¦ γεννήσεις, γάμοι και θάνατοι ¦ раждания, бракове и смърти
+Les segments partagés (un par ligne) ¦ Τα κοινά τμήματα (ένα ανά γραμμή) ¦ Общите сегменти (по един на ред)
+Chromosome (1 à 22, X) ¦ Χρωμόσωμα (1 έως 22, X) ¦ Хромозома (от 1 до 22, X)
+Début (Mb ou paires de bases) ¦ Αρχή (Mb ή ζεύγη βάσεων) ¦ Начало (Mb или базови двойки)
+Branche (couple d’ancêtres) ¦ Κλάδος (ζεύγος προγόνων) ¦ Клон (двойка предци)
+Couleur (sinon celle de la branche) ¦ Χρώμα (αλλιώς του κλάδου) ¦ Цвят (иначе този на клона)
+Les branches et leur couleur (facultatif) ¦ Οι κλάδοι και το χρώμα τους (προαιρετικό) ¦ Клоновете и техният цвят (по избор)
+Deux copies par chromosome (père en haut, mère en bas) ¦ Δύο αντίγραφα ανά χρωμόσωμα (πατέρας πάνω, μητέρα κάτω) ¦ Две копия на хромозома (бащата горе, майката долу)
+Une seule barre par chromosome ¦ Μία μόνο μπάρα ανά χρωμόσωμα ¦ Само една лента на хромозома
+Couleur des segments ¦ Χρώμα των τμημάτων ¦ Цвят на сегментите
+Par correspondance ¦ Ανά αντιστοιχία ¦ По съвпадение
+Par côté (père, mère) ¦ Ανά πλευρά (πατέρας, μητέρα) ¦ По линия (баща, майка)
+Couleur du côté père ¦ Χρώμα της πλευράς του πατέρα ¦ Цвят на бащината линия
+Couleur du côté mère ¦ Χρώμα της πλευράς της μητέρας ¦ Цвят на майчината линия
+Cacher les segments de moins de ¦ Απόκρυψη τμημάτων μικρότερων από ¦ Скрий сегментите под
+Épaisseur des chromosomes ¦ Πάχος των χρωμοσωμάτων ¦ Дебелина на хромозомите
+Colonnes (0 = selon la largeur) ¦ Στήλες (0 = ανάλογα με το πλάτος) ¦ Колони (0 = според ширината)
+Montrer le chromosome X ¦ Δείξε το χρωμόσωμα X ¦ Покажи хромозома X
+Noms dans les segments (s’ils tiennent) ¦ Ονόματα μέσα στα τμήματα (αν χωρούν) ¦ Имена в сегментите (ако се побират)
+Parenté connue (facultatif) ¦ Γνωστή συγγένεια (προαιρετικό) ¦ Известно родство (по избор)
+Montrer les parentés possibles de… (un nom) ¦ Δείξε τις πιθανές συγγένειες του… (ένα όνομα) ¦ Покажи възможните родства на… (име)
+Régulière ¦ Κανονική ¦ Равномерна
+Parentés ¦ Συγγένειες ¦ Родства
+Les principales ¦ Οι κυριότερες ¦ Основните
+Toutes (demi-parentés, générations d’écart…) ¦ Όλες (ετεροθαλείς συγγένειες, διαφορά γενεών…) ¦ Всички (полуродства, разлика в поколенията…)
+Noms écrits (les plus proches d’abord) ¦ Ονόματα που γράφονται (οι πιο κοντινοί πρώτα) ¦ Изписани имена (първо най-близките)
+Trait à la moyenne de chaque parenté ¦ Γραμμή στον μέσο όρο κάθε συγγένειας ¦ Черта при средното на всяко родство
+Couleur des autres points ¦ Χρώμα των άλλων σημείων ¦ Цвят на другите точки
+Couleur des fourchettes ¦ Χρώμα των ευρών ¦ Цвят на диапазоните
+Fin de l’échelle ¦ Τέλος της κλίμακας ¦ Край на скалата
+Les valeurs et leur groupe (une vague par groupe) ¦ Οι τιμές και η ομάδα τους (ένα κύμα ανά ομάδα) ¦ Стойностите и групата им (една вълна на група)
+Nom (personne…) ¦ Όνομα (άτομο…) ¦ Име (човек…)
+Groupe (siècle, sexe…) ¦ Ομάδα (αιώνας, φύλο…) ¦ Група (век, пол…)
+Couleur du groupe ¦ Χρώμα της ομάδας ¦ Цвят на групата
+Chevauchement des vagues ¦ Επικάλυψη των κυμάτων ¦ Застъпване на вълните
+Écart entre les vagues ¦ Απόσταση ανάμεσα στα κύματα ¦ Разстояние между вълните
+Hauteur des vagues ¦ Ύψος των κυμάτων ¦ Височина на вълните
+Chaque vague à sa hauteur ¦ Κάθε κύμα στο δικό του ύψος ¦ Всяка вълна със своя височина
+Selon le nombre de valeurs ¦ Ανάλογα με τον αριθμό τιμών ¦ Според броя стойности
+Par nombre de valeurs ¦ Κατά αριθμό τιμών ¦ По брой стойности
+Une par groupe ¦ Ένα ανά ομάδα ¦ По една на група
+Dégradé : première couleur ¦ Διαβάθμιση: πρώτο χρώμα ¦ Преливане: първи цвят
+Dégradé : dernière couleur ¦ Διαβάθμιση: τελευταίο χρώμα ¦ Преливане: последен цвят
+Montrer la médiane ¦ Δείξε τη διάμεσο ¦ Покажи медианата
+Écrire le nombre de valeurs ¦ Γράψε τον αριθμό τιμών ¦ Пиши броя стойности
+Début de l’axe (vide = automatique) ¦ Αρχή του άξονα (κενό = αυτόματα) ¦ Начало на оста (празно = автоматично)
+Fin de l’axe (vide = automatique) ¦ Τέλος του άξονα (κενό = αυτόματα) ¦ Край на оста (празно = автоматично)
+Les colonnes (lignes) et leurs parts (séries) ¦ Οι στήλες (γραμμές) και τα μερίδιά τους (σειρές) ¦ Колоните (редове) и техните дялове (серии)
+La part en % ¦ Το μερίδιο σε % ¦ Делът в %
+Le chiffre ¦ Ο αριθμός ¦ Числото
+Part de chaque colonne sous l’axe ¦ Μερίδιο κάθε στήλης κάτω από τον άξονα ¦ Дял на всяка колона под оста
+Ordre des colonnes ¦ Σειρά των στηλών ¦ Ред на колоните
+Les plus larges d’abord ¦ Οι πιο φαρδιές πρώτα ¦ Първо най-широките
+Écart entre les colonnes ¦ Απόσταση ανάμεσα στις στήλες ¦ Разстояние между колоните
+Couleur des traits ¦ Χρώμα των γραμμών ¦ Цвят на линиите
+Les lignes et leurs valeurs (une colonne par série) ¦ Οι γραμμές και οι τιμές τους (μία στήλη ανά σειρά) ¦ Редовете и техните стойности (по една колона на серия)
+Par écart entre les deux séries ¦ Κατά διαφορά ανάμεσα στις δύο σειρές ¦ По разлика между двете серии
+Pointillé sur toute la largeur ¦ Διακεκομμένη σε όλο το πλάτος ¦ Пунктир по цялата ширина
+Entre les points (écart) ¦ Ανάμεσα στα σημεία (διαφορά) ¦ Между точките (разлика)
+Couleur des points (une seule série) ¦ Χρώμα των σημείων (μία μόνο σειρά) ¦ Цвят на точките (само една серия)
+Écrire la valeur ¦ Γράψε την τιμή ¦ Пиши стойността
+Écrire l’écart (deux séries) ¦ Γράψε τη διαφορά (δύο σειρές) ¦ Пиши разликата (две серии)
+Mettre en avant (un nom ; les autres pâlissent) ¦ Ανάδειξε (ένα όνομα· τα άλλα ξεθωριάζουν) ¦ Открои (име; другите избледняват)
+Les parts (mois, saisons…) et leurs chiffres ¦ Τα τμήματα (μήνες, εποχές…) και οι αριθμοί τους ¦ Дяловете (месеци, сезони…) и техните числа
+Plusieurs séries ¦ Πολλές σειρές ¦ Няколко серии
+Empilées ¦ Στοιβαγμένες ¦ Наредени една върху друга
+Superposées (comme Florence Nightingale) ¦ Επικαλυπτόμενες (όπως η Florence Nightingale) ¦ Наложени (като при Флорънс Найтингейл)
+L’aire suit le chiffre (sinon : la longueur) ¦ Το εμβαδόν ακολουθεί τον αριθμό (αλλιώς: το μήκος) ¦ Площта следва числото (иначе: дължината)
+Départ (degrés, 0 = en haut) ¦ Αρχή (μοίρες, 0 = πάνω) ¦ Начало (градуси, 0 = горе)
+Noms des parts ¦ Ονόματα των τμημάτων ¦ Имена на дяловете
+Cercles de l’échelle ¦ Κύκλοι της κλίμακας ¦ Кръгове на скалата
+Couleur des traits entre les parts ¦ Χρώμα των γραμμών ανάμεσα στα τμήματα ¦ Цвят на линиите между дяловете
+Les couples de métiers ¦ Τα ζεύγη επαγγελμάτων ¦ Двойките професии
+Métier du père ¦ Επάγγελμα πατέρα ¦ Професия на бащата
+Métier de l’enfant ¦ Επάγγελμα παιδιού ¦ Професия на детето
+Regrouper des métiers (facultatif : un mot → une famille de métiers) ¦ Ομαδοποίηση επαγγελμάτων (προαιρετικό: μια λέξη → μια οικογένεια επαγγελμάτων) ¦ Групиране на професии (по избор: дума → семейство професии)
+Métier (ou un morceau du mot) ¦ Επάγγελμα (ή ένα κομμάτι της λέξης) ¦ Професия (или част от думата)
+Famille de métiers ¦ Οικογένεια επαγγελμάτων ¦ Семейство професии
+En % des enfants de chaque métier du père ¦ Σε % των παιδιών κάθε επαγγέλματος του πατέρα ¦ В % от децата за всяка професия на бащата
+En % de chaque métier de l’enfant ¦ Σε % κάθε επαγγέλματος του παιδιού ¦ В % от всяка професия на детето
+En nombre ¦ Σε πλήθος ¦ В брой
+Combien de métiers ¦ Πόσα επαγγέλματα ¦ Колко професии
+Regrouper les autres dans « Autres » ¦ Ομαδοποίησε τα υπόλοιπα στα «Άλλα» ¦ Събери останалите в „Други“
+Les plus fréquents d’abord ¦ Τα πιο συχνά πρώτα ¦ Първо най-честите
+Cadre « même métier que le père » ¦ Πλαίσιο «ίδιο επάγγελμα με τον πατέρα» ¦ Рамка „същата професия като бащата“
+Le mot pour l’enfant (ex. : le fils) ¦ Η λέξη για το παιδί (π.χ.: ο γιος) ¦ Думата за детето (напр.: синът)
+Ces personnes ne sont plus dans la base. ¦ Αυτά τα άτομα δεν είναι πια στη βάση. ¦ Тези хора вече не са в базата.
+Naissances ¦ Γεννήσεις ¦ Раждания
+=lignée ¦ γραμμή καταγωγής|γραμμές καταγωγής ¦ линия|линии
+=mère ¦ μητέρα|μητέρες ¦ майка|майки
+personne de départ ¦ άτομο αφετηρίας ¦ начален човек
+ancêtre ({k} générations) ¦ πρόγονος (γενιές: {k}) ¦ предшественик (поколения: {k})
+descendant ({k} générations) ¦ απόγονος (γενιές: {k}) ¦ потомък (поколения: {k})
+descendante ({k} générations) ¦ απόγονος (γενιές: {k}) ¦ потомка (поколения: {k})
+{k} générations au-dessus ¦ {k} γενιές πάνω ¦ {k} поколения нагоре
+{k} générations en dessous ¦ {k} γενιές κάτω ¦ {k} поколения надолу
+Arrière-arrière-petits-enfants ¦ Τρισέγγονα ¦ Праправнуци
+Arrière-arrière-arrière-petits-enfants ¦ Τετρασέγγονα ¦ Пра-праправнуци
+parente|mère ¦ μητέρα ¦ майка
+parente|grand-mère ¦ γιαγιά ¦ баба
+parente|grand-parent ¦ παππούς ή γιαγιά ¦ дядо или баба
+parente|enfant ¦ παιδί ¦ дете
+parente|petit-enfant ¦ εγγόνι ¦ внук или внучка
+parente|arrière-grand-mère ¦ προγιαγιά ¦ прабаба
+parente|arrière-grand-parent ¦ προπάππους ή προγιαγιά ¦ прадядо или прабаба
+parente|arrière-arrière-grand-père ¦ προ-προπάππους ¦ пра-прадядо
+parente|arrière-arrière-grand-mère ¦ προ-προγιαγιά ¦ пра-прабаба
+parente|arrière-arrière-grand-parent ¦ προ-προπάππους ή προ-προγιαγιά ¦ пра-прадядо или пра-прабаба
+parente|arrière-arrière-arrière-grand-père ¦ προ-προ-προπάππους ¦ пра-пра-прадядо
+parente|arrière-arrière-arrière-grand-mère ¦ προ-προ-προγιαγιά ¦ пра-пра-прабаба
+parente|arrière-arrière-arrière-grand-parent ¦ προ-προ-προπάππους ή προ-προ-προγιαγιά ¦ пра-пра-прадядо или пра-пра-прабаба
+parente|arrière-petite-fille ¦ δισέγγονη ¦ правнучка
+parente|arrière-petit-enfant ¦ δισέγγονο ¦ правнук или правнучка
+parente|arrière-arrière-petit-fils ¦ τρισέγγονος ¦ праправнук
+parente|arrière-arrière-petite-fille ¦ τρισέγγονη ¦ праправнучка
+parente|arrière-arrière-petit-enfant ¦ τρισέγγονο ¦ праправнук или праправнучка
+parente|arrière-arrière-arrière-petit-fils ¦ τετρασέγγονος ¦ пра-праправнук
+parente|arrière-arrière-arrière-petite-fille ¦ τετρασέγγονη ¦ пра-праправнучка
+parente|arrière-arrière-arrière-petit-enfant ¦ τετρασέγγονο ¦ пра-праправнук или пра-праправнучка
+{n} générations en vie en même temps : {a} – {b} ¦ Γενιές που ζούσαν ταυτόχρονα: {n} ({a} – {b}) ¦ Поколения, живели едновременно: {n} ({a} – {b})
+(en vie) ¦ (ζει) ¦ (жив/жива)
+(décès inconnu : vie supposée) ¦ (άγνωστος θάνατος: υποθετική διάρκεια ζωής) ¦ (неизвестна смърт: предполагаем живот)
+(décès inconnu) ¦ (άγνωστος θάνατος) ¦ (неизвестна смърт)
+{a} ({ra}) a connu {b} ({rb}) pendant {years} ({period}). ¦ {a} ({ra}) γνώρισε {b} ({rb}) για {years} ({period}). ¦ {a} ({ra}) е познавал(а) {b} ({rb}) в продължение на {years} ({period}).
+{a} a connu {b} ({k} générations plus tard) pendant {years} ({period}). ¦ {a} γνώρισε {b} ({k} γενιές αργότερα) για {years} ({period}). ¦ {a} е познавал(а) {b} ({k} поколения по-късно) в продължение на {years} ({period}).
+Personne de ces vies ne se chevauche sur {n} générations ou plus. ¦ Καμία από αυτές τις ζωές δεν επικαλύπτεται σε {n} γενιές ή περισσότερες. ¦ Никой от тези животи не се застъпва в {n} или повече поколения.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontres racontées. ¦ Ποιος γνώρισε ποιον: ζωές {n}, γενιές {g}· συναντήσεις που περιγράφονται: {s}. ¦ Кой кого е познавал: животи {n}, поколения {g}; описани срещи: {s}.
+Qui a connu qui : {n} vies sur {g} générations ; {s} rencontre racontée. ¦ Ποιος γνώρισε ποιον: ζωές {n}, γενιές {g}· συναντήσεις που περιγράφονται: {s}. ¦ Кой кого е познавал: животи {n}, поколения {g}; описани срещи: {s}.
+Âge (ans) ¦ Ηλικία (έτη) ¦ Възраст (години)
+médiane {n} ans ¦ διάμεση ηλικία {n} ¦ медиана: възраст {n}
+{name} : la moitié a passé {n} ans ¦ {name}: οι μισοί ξεπέρασαν την ηλικία {n} ¦ {name}: половината са надживели възраст {n}
+{name} : {p} % encore en vie à {a} ans ({n}) · {d} entre {a} et {b} ans ¦ {name}: {p} % ακόμη ζωντανοί σε ηλικία {a} ({n}) · {d} ανάμεσα σε {a} και {b} ετών ¦ {name}: {p} % още живи на възраст {a} ({n}) · {d} на възраст между {a} и {b}
+Courbe de survie : {n} personnes en {g} groupes. ¦ Καμπύλη επιβίωσης: άτομα {n}, ομάδες {g}. ¦ Крива на преживяемостта: хора {n}, групи {g}.
+Courbe de survie : {n} personnes en {g} groupe. ¦ Καμπύλη επιβίωσης: άτομα {n}, ομάδες {g}. ¦ Крива на преживяемостта: хора {n}, групи {g}.
+Même métier que la génération d’avant — {list} ¦ Ίδιο επάγγελμα με την προηγούμενη γενιά — {list} ¦ Същата професия като предишното поколение — {list}
+Métiers sur {n} générations : {l}. ¦ Επαγγέλματα σε γενιές ({n}): {l}. ¦ Професии в поколения ({n}): {l}.
+{a} et {b} : {d} ¦ {a} και {b}: {d} ¦ {a} и {b}: {d}
+(né à {p}) ¦ (γεννήθηκε στο {p}) ¦ (роден в {p})
+(née à {p}) ¦ (γεννήθηκε στο {p}) ¦ (родена в {p})
+même lieu de naissance ¦ ίδιος τόπος γέννησης ¦ едно и също място на раждане
+mariage {y} ¦ γάμος {y} ¦ брак {y}
+(au-delà du cercle) ¦ (πέρα από τον κύκλο) ¦ (извън кръга)
+le village de l’époux ¦ το χωριό του συζύγου ¦ селото на съпруга
+{n} du même lieu ¦ Από τον ίδιο τόπο: {n} ¦ От същото място: {n}
+{c} : la moitié des mariages à moins de {km} km ¦ {c}: οι μισοί γάμοι σε λιγότερο από {km} km ¦ {c}: половината бракове на по-малко от {km} km
+Rayon des mariages : {n}, médiane {km} km. ¦ Ακτίνα γάμων: {n}, διάμεσος {km} km. ¦ Радиус на браковете: {n}, медиана {km} km.
+Génération {g} : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes ¦ Γενιά {g}: δυνατοί πρόγονοι {t}, θέσεις που βρέθηκαν {f} ({p} %), διαφορετικά άτομα {d} ¦ Поколение {g}: възможни предци {t}, намерени места {f} ({p} %), различни хора {d}
+implexe {p} % ¦ implexe {p} % ¦ имплекс {p} %
+Ancêtres présents plusieurs fois à la génération {g} ¦ Πρόγονοι που εμφανίζονται πολλές φορές στη γενιά {g} ¦ Предци, които се срещат няколко пъти в поколение {g}
+Sur {n} générations : {t} ancêtres possibles, {f} places trouvées ({p} %), {d} personnes différentes (génération par génération) — implexe {i} %. ¦ Σε γενιές ({n}): δυνατοί πρόγονοι {t}, θέσεις που βρέθηκαν {f} ({p} %), διαφορετικά άτομα {d} (γενιά με γενιά) — implexe {i} %. ¦ В поколения ({n}): възможни предци {t}, намерени места {f} ({p} %), различни хора {d} (поколение по поколение) — имплекс {i} %.
+Implexe sur {n} générations : {p} %. ¦ Implexe σε γενιές ({n}): {p} %. ¦ Имплекс в поколения ({n}): {p} %.
+Mariages datés au jour près : {l} pendant le Carême et {a} pendant l’Avent, sur {t} ({p} %). ¦ Γάμοι με ακριβή ημέρα: {l} στη Σαρακοστή και {a} στη Σαρακοστή των Χριστουγέννων (Advent), από {t} ({p} %). ¦ Бракове с точност до деня: {l} през Великия пост и {a} през Адвента, от {t} ({p} %).
+Conceptions pendant le Carême : {n} sur {t} ({p} % ; {e} % si tout était égal). ¦ Συλλήψεις στη Σαρακοστή: {n} από {t} ({p} %· {e} % αν όλα ήταν ίσα). ¦ Зачатия през Великия пост: {n} от {t} ({p} %; {e} %, ако всичко беше равно).
+En mars (Carême) : {a} % des {what} ; en décembre (Avent) : {b} % ; {e} % si tout était égal. ¦ Τον Μάρτιο (Σαρακοστή): {a} % των {what}· τον Δεκέμβριο (Advent): {b} %· {e} % αν όλα ήταν ίσα. ¦ През март (Велики пост): {a} % от {what}; през декември (Адвент): {b} %; {e} %, ако всичко беше равно.
+Mois des {a} et des {b} : {x} et {y}. ¦ Μήνες για {a} και {b}: {x} και {y}. ¦ Месеци за {a} и {b}: {x} и {y}.
+Mois des {a} : {x}. ¦ Μήνες για {a}: {x}. ¦ Месеци за {a}: {x}.
+nés en {month} ¦ γεννημένοι τον {month} ¦ родени през {month}
+Si {what} étaient répartis également sur l’année (selon le nombre de jours du mois) ¦ Αν {what} ήταν μοιρασμένα ομοιόμορφα στη χρονιά (ανάλογα με τις ημέρες του μήνα) ¦ Ако {what} бяха разпределени равномерно през годината (според дните в месеца)
+(naissance inconnue : âges estimés) ¦ (άγνωστη γέννηση: εκτιμώμενες ηλικίες) ¦ (неизвестно раждане: приблизителни възрасти)
+{name} : née en {y} (mère : {age} ans, estimé) ¦ {name}: γεννήθηκε το {y} (μητέρα: ηλικία {age}, εκτίμηση) ¦ {name}: родена през {y} (майка: възраст {age}, приблизително)
+{name} : née en {y} (mère : {age} ans) ¦ {name}: γεννήθηκε το {y} (μητέρα: ηλικία {age}) ¦ {name}: родена през {y} (майка: възраст {age})
+{name} : né en {y} (mère : {age} ans, estimé) ¦ {name}: γεννήθηκε το {y} (μητέρα: ηλικία {age}, εκτίμηση) ¦ {name}: роден през {y} (майка: възраст {age}, приблизително)
+{name} : né en {y} (mère : {age} ans) ¦ {name}: γεννήθηκε το {y} (μητέρα: ηλικία {age}) ¦ {name}: роден през {y} (майка: възраст {age})
+{n} mois entre {a} et {b} ¦ Μήνες ανάμεσα σε {a} και {b}: {n} ¦ Месеци между {a} и {b}: {n}
+le suivant ¦ το επόμενο ¦ следващото
+{k} chez {m} ¦ {k} στη {m} ¦ {k} при {m}
+écart médian entre deux naissances : {n} mois ¦ διάμεσο διάστημα ανάμεσα σε δύο γεννήσεις (μήνες): {n} ¦ медианен интервал между две раждания (месеци): {n}
+{p} % morts avant {n} ans. ¦ {p} % πέθαναν πριν από την ηλικία {n}. ¦ {p} % са починали преди възраст {n}.
+Espacement des naissances : {m}, {k}, écart médian {n} mois. ¦ Απόσταση γεννήσεων: {m}, {k}, διάμεσο διάστημα (μήνες): {n}. ¦ Интервали между ражданията: {m}, {k}, медианен интервал (месеци): {n}.
+Espacement des naissances : {m}, {k}. ¦ Απόσταση γεννήσεων: {m}, {k}. ¦ Интервали между ражданията: {m}, {k}.
+Lieux de vie de {n} : {l}. ¦ Τόποι ζωής ({n}): {l}. ¦ Места на живот ({n}): {l}.
+Qui a connu qui autour de {name} ¦ Ποιος γνώρισε ποιον γύρω από: {name} ¦ Кой кого е познавал около {name}
+Survie par {what} ¦ Επιβίωση ανά: {what} ¦ Преживяемост по: {what}
+{n} personnes prises dans ta base ({u} sans date de décès laissées de côté). ¦ Άτομα από τη βάση σου: {n} (παραλείφθηκαν χωρίς ημερομηνία θανάτου: {u}). ¦ Хора от твоята база: {n} (пропуснати без дата на смърт: {u}).
+{n} lignées prises dans ta base. ¦ Γραμμές καταγωγής από τη βάση σου: {n}. ¦ Линии от твоята база: {n}.
+Aucun couple dont les deux lieux de naissance ont des coordonnées ({n} couples sans lieu situé). ¦ Κανένα ζευγάρι με συντεταγμένες και στους δύο τόπους γέννησης (ζευγάρια χωρίς εντοπισμένο τόπο: {n}). ¦ Няма двойки, чиито две места на раждане имат координати (двойки без определено място: {n}).
+Aucun couple dont les deux lieux de naissance ont des coordonnées. ¦ Κανένα ζευγάρι με συντεταγμένες και στους δύο τόπους γέννησης. ¦ Няма двойки, чиито две места на раждане имат координати.
+{n} couples pris dans ta base ({m} sans lieux situés). ¦ Ζευγάρια από τη βάση σου: {n} (χωρίς εντοπισμένους τόπους: {m}). ¦ Двойки от твоята база: {n} (без определени места: {m}).
+{n} couples pris dans ta base. ¦ Ζευγάρια από τη βάση σου: {n}. ¦ Двойки от твоята база: {n}.
+{n} générations prises dans ta base (arrêt à 250 000 places). ¦ Γενιές από τη βάση σου: {n} (διακοπή στις 250.000 θέσεις). ¦ Поколения от твоята база: {n} (спиране при 250 000 места).
+{m} mariages et {c} naissances pris dans ta base. ¦ Από τη βάση σου: γάμοι {m}, γεννήσεις {c}. ¦ От твоята база: бракове {m}, раждания {c}.
+Les naissances de {name} ¦ Οι γεννήσεις: {name} ¦ Ражданията: {name}
+{m} et {n} enfants pris dans ta base. ¦ Από τη βάση σου: {m}· παιδιά: {n}. ¦ От твоята база: {m}; деца: {n}.
+{n} personnes et {l} lieux pris dans ta base. ¦ Από τη βάση σου: άτομα {n}, τόποι {l}. ¦ От твоята база: хора {n}, места {l}.
+Combien étaient encore en vie à chaque âge ¦ Πόσοι ζούσαν ακόμη σε κάθε ηλικία ¦ Колко са били още живи на всяка възраст
+Métiers de père en fils ¦ Επαγγέλματα από πατέρα σε γιο ¦ Професии от баща на син
+Mariages et conceptions par mois (Bretagne, XVIIIe s.) ¦ Γάμοι και συλλήψεις ανά μήνα (Βρετάνη, 18ος αι.) ¦ Бракове и зачатия по месеци (Бретан, XVIII в.)
+Les naissances de quatre mères de la famille ¦ Οι γεννήσεις τεσσάρων μητέρων της οικογένειας ¦ Ражданията на четири майки от семейството
+Où vivait la famille Martin ¦ Πού ζούσε η οικογένεια Martin ¦ Къде е живяло семейство Martin
+ferme l’éditeur pour ouvrir une fiche ¦ κλείσε τον επεξεργαστή για να ανοίξεις μια καρτέλα ¦ затвори редактора, за да отвориш картон
+un clic ouvre la fiche ¦ ένα κλικ ανοίγει την καρτέλα ¦ едно щракване отваря картона
+Ajoute des personnes : un nom, la naissance, le décès et la génération (0 = toi, −1 = parents, 1 = enfants…). ¦ Πρόσθεσε άτομα: ένα όνομα, τη γέννηση, τον θάνατο και τη γενιά (0 = εσύ, −1 = γονείς, 1 = παιδιά…). ¦ Добави хора: име, раждане, смърт и поколение (0 = ти, −1 = родители, 1 = деца…).
+Ajoute des lignes : un groupe (siècle, sexe, branche…), un âge, et « décédé » ou « encore en vie ». ¦ Πρόσθεσε γραμμές: μια ομάδα (αιώνας, φύλο, κλάδος…), μια ηλικία, και «πέθανε» ή «ζει ακόμη». ¦ Добави редове: група (век, пол, клон…), възраст и „починал“ или „още жив“.
+Aucune personne de la liste n’a une date de naissance et une date de décès. ¦ Κανένα άτομο της λίστας δεν έχει ημερομηνία γέννησης και ημερομηνία θανάτου. ¦ Никой от списъка няма едновременно дата на раждане и дата на смърт.
+Trisaïeul ¦ Προ-προπάππους ¦ Пра-прадядо
+Trisaïeuls ¦ Προ-προπάπποι ¦ Пра-прадядовци
+Arrière-grand-père ¦ Προπάππους ¦ Прадядо
+Grand-père ¦ Παππούς ¦ Дядо
+Ajoute des lignées : le métier de l’ancêtre, puis de son fils, de son petit-fils… et combien de fois. ¦ Πρόσθεσε γραμμές καταγωγής: το επάγγελμα του προγόνου, μετά του γιου του, του εγγονού του… και πόσες φορές. ¦ Добави линии: професията на предшественика, после на сина му, на внука му… и колко пъти.
+Même métier que le père ¦ Ίδιο επάγγελμα με τον πατέρα ¦ Същата професия като бащата
+Ajoute des mariages : les deux époux, la distance entre leurs lieux de naissance (km) et l’année. ¦ Πρόσθεσε γάμους: τους δύο συζύγους, την απόσταση ανάμεσα στους τόπους γέννησής τους (km) και τη χρονιά. ¦ Добави бракове: двамата съпрузи, разстоянието между местата им на раждане (km) и годината.
+Ajoute des générations : le numéro, les places trouvées et les personnes différentes. ¦ Πρόσθεσε γενιές: τον αριθμό, τις θέσεις που βρέθηκαν και τα διαφορετικά άτομα. ¦ Добави поколения: номера, намерените места и различните хора.
+Ajoute les chiffres de chaque mois (janvier à décembre) : mariages, et conceptions ou naissances. ¦ Πρόσθεσε τους αριθμούς κάθε μήνα (Ιανουάριος έως Δεκέμβριος): γάμοι, και συλλήψεις ή γεννήσεις. ¦ Добави числата за всеки месец (от януари до декември): бракове и зачатия или раждания.
+Carême : du mercredi des Cendres (entre le 4 février et le 10 mars) à Pâques (entre le 22 mars et le 25 avril) — l’Église ne mariait pas ¦ Σαρακοστή: από την Τετάρτη της Τέφρας (ανάμεσα στις 4 Φεβρουαρίου και τις 10 Μαρτίου) ως το Πάσχα (ανάμεσα στις 22 Μαρτίου και τις 25 Απριλίου) — η Εκκλησία δεν τελούσε γάμους ¦ Велики пост: от Пепеляна сряда (между 4 февруари и 10 март) до Великден (между 22 март и 25 април) — Църквата не е венчавала
+Avent : du 4e dimanche avant Noël (entre le 27 novembre et le 3 décembre) au 24 décembre — pas de mariage non plus ¦ Advent: από την 4η Κυριακή πριν από τα Χριστούγεννα (ανάμεσα στις 27 Νοεμβρίου και τις 3 Δεκεμβρίου) ως τις 24 Δεκεμβρίου — ούτε τότε γάμοι ¦ Адвент: от 4-тата неделя преди Коледа (между 27 ноември и 3 декември) до 24 декември — също без бракове
+Aucune personne de la liste n’a un mois de naissance. ¦ Κανένα άτομο της λίστας δεν έχει μήνα γέννησης. ¦ Никой от списъка няма месец на раждане.
+Ajoute des enfants : le nom de la mère, sa naissance, puis chaque enfant et sa date de naissance. ¦ Πρόσθεσε παιδιά: το όνομα της μητέρας, τη γέννησή της, μετά κάθε παιδί και την ημερομηνία γέννησής του. ¦ Добави деца: името на майката, раждането ѝ, после всяко дете и датата му на раждане.
+Moins de 15 mois d’écart ¦ Διαφορά κάτω από 15 μήνες ¦ Разлика под 15 месеца
+Ajoute des lieux : la personne, le lieu, le début et la fin (années ou dates). ¦ Πρόσθεσε τόπους: το άτομο, τον τόπο, την αρχή και το τέλος (χρόνια ή ημερομηνίες). ¦ Добави места: човекът, мястото, началото и краят (години или дати).
+Les descendants de la personne de départ ¦ Οι απόγονοι του ατόμου αφετηρίας ¦ Потомците на началния човек
+Ses ancêtres et ses descendants, chacun sur sa ligne : l’app cherche ceux qui se sont connus à plusieurs générations d’écart. ¦ Οι πρόγονοι και οι απόγονοί του, ο καθένας στη γραμμή του: η εφαρμογή ψάχνει όσους γνωρίστηκαν με διαφορά πολλών γενεών. ¦ Неговите предци и потомци, всеки на своя ред: приложението търси онези, които са се познавали през няколко поколения.
+Pas assez de personnes datées autour de cette personne. ¦ Δεν υπάρχουν αρκετά χρονολογημένα άτομα γύρω από αυτό το άτομο. ¦ Няма достатъчно датирани хора около този човек.
+📉 Les âges de ma base ¦ 📉 Οι ηλικίες της βάσης μου ¦ 📉 Възрастите в моята база
+L’âge au décès de chacun ; les personnes encore en vie comptent jusqu’à leur âge d’aujourd’hui. Les décès inconnus sont laissés de côté. ¦ Η ηλικία θανάτου του καθενός· τα ζωντανά άτομα μετρούν ως τη σημερινή τους ηλικία. Οι άγνωστοι θάνατοι παραλείπονται. ¦ Възрастта при смърт на всеки; живите хора се броят до днешната си възраст. Неизвестните смърти се пропускат.
+Génération (ancêtres) ¦ Γενιά (πρόγονοι) ¦ Поколение (предци)
+Aucune personne avec une naissance et un décès (ou en vie). ¦ Κανένα άτομο με γέννηση και θάνατο (ή ζωντανό). ¦ Няма хора с раждане и смърт (или живи).
+🔀 Les métiers de ma base ¦ 🔀 Τα επαγγέλματα της βάσης μου ¦ 🔀 Професиите в моята база
+Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ». ¦ Κάθε γραμμή καταγωγής (πατέρας, παππούς… ή γονείς) δίνει μια διαδρομή επαγγελμάτων· το επάγγελμα προέρχεται από την καρτέλα ή από το πρώτο γεγονός «Επάγγελμα». ¦ Всяка линия (баща, дядо… или родители) дава път от професии; професията идва от картона или от първото събитие „Професия“.
+Parents → enfants (pères et mères) ¦ Γονείς → παιδιά (πατέρες και μητέρες) ¦ Родители → деца (бащи и майки)
+Aucune lignée avec au moins deux métiers connus. ¦ Καμία γραμμή καταγωγής με τουλάχιστον δύο γνωστά επαγγέλματα. ¦ Няма линия с поне две известни професии.
+Aucun métier dans ta base (fiche ou événement « Profession »). ¦ Κανένα επάγγελμα στη βάση σου (καρτέλα ή γεγονός «Επάγγελμα»). ¦ Няма професии в твоята база (картон или събитие „Професия“).
+Métiers de parents à enfants ¦ Επαγγέλματα από γονείς σε παιδιά ¦ Професии от родители на деца
+💍 Les couples de ma base ¦ 💍 Τα ζευγάρια της βάσης μου ¦ 💍 Двойките в моята база
+La distance entre les lieux de naissance des deux époux (les lieux ont besoin de leurs coordonnées), et la direction vue depuis le village de l’époux. ¦ Η απόσταση ανάμεσα στους τόπους γέννησης των δύο συζύγων (οι τόποι χρειάζονται συντεταγμένες), και η κατεύθυνση όπως φαίνεται από το χωριό του συζύγου. ¦ Разстоянието между местата на раждане на двамата съпрузи (местата трябва да имат координати) и посоката, гледана от селото на съпруга.
+Génération par génération : les ancêtres possibles (2, 4, 8…), les places trouvées et les personnes différentes (un même ancêtre peut occuper plusieurs places). ¦ Γενιά με γενιά: οι δυνατοί πρόγονοι (2, 4, 8…), οι θέσεις που βρέθηκαν και τα διαφορετικά άτομα (ο ίδιος πρόγονος μπορεί να καταλαμβάνει πολλές θέσεις). ¦ Поколение по поколение: възможните предци (2, 4, 8…), намерените места и различните хора (един предшественик може да заема няколко места).
+📅 Les mariages et les naissances de ma base ¦ 📅 Οι γάμοι και οι γεννήσεις της βάσης μου ¦ 📅 Браковете и ражданията в моята база
+Les mariages datés au mois près ; les conceptions = la naissance (ou le baptême) moins 9 mois. Carême et Avent sont comptés au jour près quand la date est complète. ¦ Οι γάμοι με ακρίβεια μήνα· οι συλλήψεις = η γέννηση (ή η βάπτιση) μείον 9 μήνες. Η Σαρακοστή και το Advent μετρώνται με ακρίβεια ημέρας όταν η ημερομηνία είναι πλήρης. ¦ Браковете с точност до месеца; зачатията = раждането (или кръщенето) минус 9 месеца. Великият пост и Адвентът се броят с точност до деня, когато датата е пълна.
+À (année) ¦ Έως (έτος) ¦ До (година)
+Aucun mariage ni aucune naissance datés au mois près. ¦ Κανένας γάμος ή γέννηση με ακρίβεια μήνα. ¦ Няма бракове или раждания с точност до месеца.
+Mariages et conceptions par mois ¦ Γάμοι και συλλήψεις ανά μήνα ¦ Бракове и зачатия по месеци
+👶 Les mères de ma base ¦ 👶 Οι μητέρες της βάσης μου ¦ 👶 Майките в моята база
+Chaque mère sur une ligne, ses enfants à l’âge qu’elle avait à leur naissance, l’écart en mois entre deux naissances et les enfants morts jeunes. ¦ Κάθε μητέρα σε μια γραμμή, τα παιδιά της στην ηλικία που είχε όταν γεννήθηκαν, η διαφορά σε μήνες ανάμεσα σε δύο γεννήσεις και τα παιδιά που πέθαναν μικρά. ¦ Всяка майка на един ред, децата ѝ на възрастта, която е имала при раждането им, разликата в месеци между две раждания и децата, починали малки.
+Celles qui ont le plus d’enfants ¦ Όσες έχουν τα περισσότερα παιδιά ¦ Тези с най-много деца
+La mère (pour « une seule mère ») ¦ Η μητέρα (για «μία μόνο μητέρα») ¦ Майката (за „само една майка“)
+Personne de départ (pour les ancêtres) ¦ Άτομο αφετηρίας (για τους προγόνους) ¦ Начален човек (за предците)
+Combien de mères au plus ¦ Πόσες μητέρες το πολύ ¦ Колко майки най-много
+Choisis la mère dans le menu. ¦ Διάλεξε τη μητέρα στο μενού. ¦ Избери майката в менюто.
+Aucune mère avec des enfants dans ta base. ¦ Καμία μητέρα με παιδιά στη βάση σου. ¦ Няма майки с деца в твоята база.
+🏘️ Les lieux de vie de ma base ¦ 🏘️ Οι τόποι ζωής της βάσης μου ¦ 🏘️ Местата на живот в моята база
+Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune. ¦ Για κάθε άτομο, οι τόποι του με χρονολογική σειρά: γέννηση, βάπτιση, κατοικίες, απογραφές, γάμος, επάγγελμα, θάνατος… Ένα χρώμα ανά δήμο. ¦ За всеки човек — местата му по реда на времето: раждане, кръщене, местоживеене, преброявания, брак, професия, смърт… Един цвят на община.
+La personne de départ et ses ancêtres ¦ Το άτομο αφετηρίας και οι πρόγονοί του ¦ Началният човек и неговите предци
+Ses parents, elle et ses enfants ¦ Οι γονείς του, το ίδιο και τα παιδιά του ¦ Родителите му, самият той и децата му
+Personnes (pour « que je choisis ») ¦ Άτομα (για «που διαλέγω») ¦ Хора (за „които избирам“)
+Choisis au moins une personne dans le menu. ¦ Διάλεξε τουλάχιστον ένα άτομο στο μενού. ¦ Избери поне един човек в менюто.
+Aucun événement avec un lieu pour ces personnes. ¦ Κανένα γεγονός με τόπο για αυτά τα άτομα. ¦ Няма събития с място за тези хора.
+Les lieux de vie de la famille ¦ Οι τόποι ζωής της οικογένειας ¦ Местата на живот на семейството
+Les personnes (génération : 0 = la personne de départ, −1 = parents, 1 = enfants…) ¦ Τα άτομα (γενιά: 0 = το άτομο αφετηρίας, −1 = γονείς, 1 = παιδιά…) ¦ Хората (поколение: 0 = началният човек, −1 = родители, 1 = деца…)
+Vers (son enfant ou parent du côté de la personne de départ) ¦ Προς (το παιδί ή τον γονέα του από την πλευρά του ατόμου αφετηρίας) ¦ Към (детето или родителя му откъм началния човек)
+Rencontres racontées ¦ Συναντήσεις που περιγράφονται ¦ Описани срещи
+Écart de générations au moins ¦ Διαφορά γενεών τουλάχιστον ¦ Разлика в поколенията поне
+Montrer quand le plus de générations vivaient ensemble ¦ Δείξε πότε ζούσαν μαζί οι περισσότερες γενιές ¦ Покажи кога са живели заедно най-много поколения
+Noms à gauche ¦ Ονόματα αριστερά ¦ Имена вляво
+Âge dans la barre ¦ Ηλικία μέσα στη μπάρα ¦ Възраст в лентата
+Décès inconnu : vie supposée (ans, 0 = non) ¦ Άγνωστος θάνατος: υποθετική διάρκεια ζωής (έτη, 0 = όχι) ¦ Неизвестна смърт: предполагаем живот (години, 0 = не)
+Groupe (siècle, sexe, branche…) ¦ Ομάδα (αιώνας, φύλο, κλάδος…) ¦ Група (век, пол, клон…)
+À cet âge ¦ Σε αυτή την ηλικία ¦ На тази възраст
+Encore en vie ¦ Ζει ακόμη ¦ Още жив/жива
+Montrer l’âge médian (la moitié encore en vie) ¦ Δείξε τη διάμεση ηλικία (οι μισοί ακόμη ζωντανοί) ¦ Покажи медианната възраст (половината още живи)
+Lire la part en vie à l’âge de… ¦ Διάβασε το ποσοστό ζωντανών στην ηλικία… ¦ Прочети дела на живите на възраст…
+Compter les vivants (jusqu’à leur âge d’aujourd’hui) ¦ Μέτρα τους ζωντανούς (ως τη σημερινή τους ηλικία) ¦ Брой живите (до днешната им възраст)
+Lignes droites (au lieu des marches) ¦ Ευθείες γραμμές (αντί για σκαλοπάτια) ¦ Прави линии (вместо стъпала)
+Épaisseur des courbes ¦ Πάχος των καμπυλών ¦ Дебелина на кривите
+Âge au plus (vide = auto) ¦ Μέγιστη ηλικία (κενό = αυτόματα) ¦ Най-голяма възраст (празно = автоматично)
+Éditeur de graphiques : une courbe par ¦ Επεξεργαστής γραφημάτων: μία καμπύλη ανά ¦ Редактор на графики: една крива на
+Bulles au survol tous les … ans ¦ Φούσκες στο πέρασμα του ποντικιού κάθε … χρόνια ¦ Балончета при посочване на всеки … години
+Les lignées (métier à chaque génération, du plus ancien au plus jeune) ¦ Οι γραμμές καταγωγής (επάγγελμα σε κάθε γενιά, από τον παλαιότερο στον νεότερο) ¦ Линиите (професия във всяко поколение, от най-стария до най-младия)
+Génération 1 ¦ Γενιά 1 ¦ Поколение 1
+Génération 2 ¦ Γενιά 2 ¦ Поколение 2
+Génération 3 ¦ Γενιά 3 ¦ Поколение 3
+Génération 4 ¦ Γενιά 4 ¦ Поколение 4
+Génération 5 ¦ Γενιά 5 ¦ Поколение 5
+Combien de lignées ¦ Πόσες γραμμές καταγωγής ¦ Колко линии
+Couleur de chaque métier (facultatif) ¦ Χρώμα κάθε επαγγέλματος (προαιρετικό) ¦ Цвят на всяка професия (по избор)
+Métiers montrés (les autres : « Autres métiers ») ¦ Επαγγέλματα που εμφανίζονται (τα άλλα: «Άλλα επαγγέλματα») ¦ Показани професии (другите: „Други професии“)
+Le métier de départ ¦ Το επάγγελμα αφετηρίας ¦ Началната професия
+Vert si le métier est gardé ¦ Πράσινο αν το επάγγελμα διατηρείται ¦ Зелено, ако професията се запазва
+Noms des colonnes (séparés par des virgules) ¦ Ονόματα των στηλών (χωρισμένα με κόμματα) ¦ Имена на колоните (разделени със запетаи)
+Noms des métiers ¦ Ονόματα των επαγγελμάτων ¦ Имена на професиите
+Nombres à côté des noms ¦ Αριθμοί δίπλα στα ονόματα ¦ Числа до имената
+Phrase « même métier que la génération d’avant » ¦ Φράση «ίδιο επάγγελμα με την προηγούμενη γενιά» ¦ Изречение „същата професия като предишното поколение“
+Largeur des colonnes ¦ Πλάτος των στηλών ¦ Ширина на колоните
+Espace entre les métiers ¦ Απόσταση ανάμεσα στα επαγγέλματα ¦ Разстояние между професиите
+Nom des métiers inconnus ¦ Όνομα για τα άγνωστα επαγγέλματα ¦ Име за неизвестните професии
+Arrière-grand-père, Grand-père, Père, Fils ¦ Προπάππους, Παππούς, Πατέρας, Γιος ¦ Прадядо, Дядо, Баща, Син
+Née à ¦ Γεννήθηκε στο ¦ Родена в
+Direction (N, NE… ou degrés) ¦ Κατεύθυνση (N, NE… ή μοίρες) ¦ Посока (N, NE… или градуси)
+Couleur de chaque siècle (facultatif) ¦ Χρώμα κάθε αιώνα (προαιρετικό) ¦ Цвят на всеки век (по избор)
+Siècle (ex. XIXe s.) ¦ Αιώνας (π.χ. 19ος αι.) ¦ Век (напр. XIX в.)
+Échelle des distances ¦ Κλίμακα αποστάσεων ¦ Скала на разстоянията
+Douce (racine carrée) ¦ Ήπια (τετραγωνική ρίζα) ¦ Мека (квадратен корен)
+Logarithmique (le proche en grand) ¦ Λογαριθμική (τα κοντινά μεγάλα) ¦ Логаритмична (близкото в едър план)
+Cercle extérieur (km, vide = auto) ¦ Εξωτερικός κύκλος (km, κενό = αυτόματα) ¦ Външен кръг (km, празно = автоматично)
+Cercle de la distance médiane de chaque siècle ¦ Κύκλος της διάμεσης απόστασης κάθε αιώνα ¦ Кръг на медианното разстояние за всеки век
+Tableau par siècle ¦ Πίνακας ανά αιώνα ¦ Таблица по векове
+Nom du centre ¦ Όνομα του κέντρου ¦ Име на центъра
+Les générations ¦ Οι γενιές ¦ Поколенията
+Génération (1 = la personne) ¦ Γενιά (1 = το άτομο) ¦ Поколение (1 = самият човек)
+Taux d’implexe à droite ¦ Ποσοστό implexe δεξιά ¦ Дял на имплекса вдясно
+Couleur des possibles ¦ Χρώμα των δυνατών ¦ Цвят на възможните
+Couleur des places trouvées ¦ Χρώμα των θέσεων που βρέθηκαν ¦ Цвят на намерените места
+Couleur des personnes différentes ¦ Χρώμα των διαφορετικών ατόμων ¦ Цвят на различните хора
+Les mois (janvier à décembre) ¦ Οι μήνες (Ιανουάριος έως Δεκέμβριος) ¦ Месеците (от януари до декември)
+Deux bandeaux (l’un sous l’autre) ¦ Δύο ταινίες (η μία κάτω από την άλλη) ¦ Две ленти (една под друга)
+Seulement la première série ¦ Μόνο η πρώτη σειρά ¦ Само първата серия
+Repérer le Carême et l’Avent ¦ Σημείωσε τη Σαρακοστή και το Advent ¦ Отбележи Великия пост и Адвента
+Ligne « si tout était égal » (selon les jours du mois) ¦ Γραμμή «αν όλα ήταν ίσα» (ανάλογα με τις ημέρες του μήνα) ¦ Линия „ако всичко беше равно“ (според дните в месеца)
+Écrire les nombres ¦ Γράψε τους αριθμούς ¦ Пиши числата
+Les enfants (une ligne par enfant) ¦ Τα παιδιά (μία γραμμή ανά παιδί) ¦ Децата (един ред на дете)
+Naissance de la mère ¦ Γέννηση της μητέρας ¦ Раждане на майката
+Décès de la mère ¦ Θάνατος της μητέρας ¦ Смърт на майката
+Naissance de l’enfant ¦ Γέννηση του παιδιού ¦ Раждане на детето
+Décès de l’enfant ¦ Θάνατος του παιδιού ¦ Смърт на детето
+L’âge de la mère ¦ Η ηλικία της μητέρας ¦ Възрастта на майката
+Écarts en mois entre deux naissances ¦ Διαφορές σε μήνες ανάμεσα σε δύο γεννήσεις ¦ Разлики в месеци между две раждания
+Mères au plus ¦ Μητέρες το πολύ ¦ Майки най-много
+Les lieux (une ligne par lieu et par période) ¦ Οι τόποι (μία γραμμή ανά τόπο και περίοδο) ¦ Местата (един ред на място и период)
+De (année ou date) ¦ Από (έτος ή ημερομηνία) ¦ От (година или дата)
+Couleur de chaque lieu (facultatif) ¦ Χρώμα κάθε τόπου (προαιρετικό) ¦ Цвят на всяко място (по избор)
+Une couleur par ¦ Ένα χρώμα ανά ¦ Един цвят на
+Lieux en couleur (les autres en gris) ¦ Τόποι με χρώμα (οι άλλοι γκρι) ¦ Места в цвят (другите в сиво)
+Nom du lieu dans la bande ¦ Όνομα του τόπου μέσα στην ταινία ¦ Име на мястото в лентата
+Par date de début ¦ Κατά ημερομηνία αρχής ¦ По начална дата
+Épaisseur des bandes ¦ Πάχος των ταινιών ¦ Дебелина на лентите
+{n} génération ¦ {n} γενιά ¦ {n} поколение

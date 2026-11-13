@@ -1,0 +1,1565 @@
+fr ¦ el ¦ bg
+Espace de travail « {name} » appliqué. ¦ Ο χώρος εργασίας «{name}» εφαρμόστηκε. ¦ Работното пространство „{name}“ е приложено.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Οι ρυθμίσεις «{name}» εισήχθησαν: πάτα «Εφαρμογή» για να τις χρησιμοποιήσεις. ¦ Настройките „{name}“ са импортирани: натисни „Приложи“, за да ги използваш.
+{layer} (avant / après) ¦ {layer} (πριν / μετά) ¦ {layer} (преди / след)
+Avant / après — {name} ¦ Πριν / μετά — {name} ¦ Преди / след — {name}
+Modèle des visages : {what} ¦ Μοντέλο προσώπων: {what} ¦ Модел на лицата: {what}
+Portrait de {name} (photo d’identité) ¦ Πορτρέτο: {name} (φωτογραφία ταυτότητας) ¦ Портрет: {name} (снимка за документи)
+Portrait (photo d’identité) ¦ Πορτρέτο (φωτογραφία ταυτότητας) ¦ Портрет (снимка за документи)
+Fiche {num} ¦ Καρτέλα {num} ¦ Картон {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ δεν βρέθηκε πρόσωπο στο «{name}»: κάδρο στο κέντρο, έλεγξέ το (ή σημείωσε το πρόσωπο στο πρόγραμμα προβολής) ¦ ⚠️ не е намерено лице в „{name}“: кадриране в центъра, провери (или отбележи лицето в прегледа)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} πορτρέτο έτοιμο: ξετσέκαρέ το αν δεν ταιριάζει, μετά «Χρήση ως πορτρέτα».|{n} πορτρέτα έτοιμα: ξετσέκαρε όσα δεν ταιριάζουν, μετά «Χρήση ως πορτρέτα». ¦ {n} портрет е готов: махни отметката, ако не става, после „Използвай като портрети“.|{n} портрета са готови: махни отметките на тези, които не стават, после „Използвай като портрети“.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} πορτρέτο έτοιμο: ξετσέκαρέ το αν δεν ταιριάζει, μετά «Χρήση ως πορτρέτα».|{n} πορτρέτα έτοιμα: ξετσέκαρε όσα δεν ταιριάζουν, μετά «Χρήση ως πορτρέτα». ¦ {n} портрет е готов: махни отметката, ако не става, после „Използвай като портрети“.|{n} портрета са готови: махни отметките на тези, които не стават, после „Използвай като портрети“.
+Aucun visage trouvé tout seul. ¦ Δεν βρέθηκε κανένα πρόσωπο αυτόματα. ¦ Не е намерено лице автоматично.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} ακόμα είναι στο κέντρο του κάδρου: τσέκαρέ το μόνο αν ταιριάζει.|{n} ακόμα είναι στο κέντρο του κάδρου: τσέκαρέ τα μόνο αν ταιριάζουν. ¦ Още {n} е кадриран в центъра: отметни го само ако става.|Още {n} са кадрирани в центъра: отметни ги само ако стават.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} ακόμα είναι στο κέντρο του κάδρου: τσέκαρέ το μόνο αν ταιριάζει.|{n} ακόμα είναι στο κέντρο του κάδρου: τσέκαρέ τα μόνο αν ταιριάζουν. ¦ Още {n} е кадриран в центъра: отметни го само ако става.|Още {n} са кадрирани в центъра: отметни ги само ако стават.
+Calque {num} ¦ Επίπεδο {num} ¦ Слой {num}
+Groupe {num} ¦ Ομάδα {num} ¦ Група {num}
+calque|Réglages ¦ Ρυθμίσεις ¦ Настройки
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Μάσκα αποκοπής: επηρεάζει μόνο το «{name}» ακριβώς από κάτω (⌥ Alt + κλικ ανάμεσα σε δύο επίπεδα στο Photoshop) ¦ Изрязваща маска: засяга само „{name}“ точно отдолу (⌥ Alt + клик между два слоя във Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Μάσκα αποκοπής: επηρεάζει μόνο το στοιχείο ακριβώς από κάτω (⌥ Alt + κλικ ανάμεσα σε δύο επίπεδα στο Photoshop) ¦ Изрязваща маска: засяга само елемента точно отдолу (⌥ Alt + клик между два слоя във Photoshop)
+seulement sur « {name} » ¦ μόνο στο «{name}» ¦ само върху „{name}“
+seulement sur ce qui est juste dessous ¦ μόνο σε ό,τι είναι ακριβώς από κάτω ¦ само върху това, което е точно отдолу
+touche tout ce qui est dessous dans « {name} » ¦ επηρεάζει ό,τι είναι από κάτω στο «{name}» ¦ засяга всичко отдолу в „{name}“
+réglages, {n} corrections ¦ ρυθμίσεις, {n} διορθώσεις ¦ настройки, {n} корекции
+réglages, {n} correction ¦ ρυθμίσεις, {n} διόρθωση ¦ настройки, {n} корекция
+« {name} » mis dans un groupe ¦ Το «{name}» μπήκε σε ομάδα ¦ „{name}“ е сложен в група
+{layer} montré ¦ {layer}: εμφανίζεται ¦ {layer}: показан
+{layer} masqué ¦ {layer}: κρυμμένο ¦ {layer}: скрит
+Masque qui cache la sélection ajouté à {name} ¦ Μάσκα που κρύβει την επιλογή προστέθηκε στο {name} ¦ Маска, която скрива селекцията, е добавена към {name}
+Masque qui cache tout ajouté à {name} ¦ Μάσκα που κρύβει τα πάντα προστέθηκε στο {name} ¦ Маска, която скрива всичко, е добавена към {name}
+Masque ajouté à {name} ¦ Μάσκα προστέθηκε στο {name} ¦ Маска е добавена към {name}
+Masque de {name} désactivé ¦ Η μάσκα του {name} απενεργοποιήθηκε ¦ Маската на {name} е изключена
+Masque de {name} réactivé ¦ Η μάσκα του {name} ενεργοποιήθηκε ξανά ¦ Маската на {name} е включена отново
+Masque de {name} inversé ¦ Η μάσκα του {name} αντιστράφηκε ¦ Маската на {name} е обърната
+Masque de {name} retiré ¦ Η μάσκα του {name} αφαιρέθηκε ¦ Маската на {name} е премахната
+« {name} » à sa taille d’origine ¦ Το «{name}» στο αρχικό του μέγεθος ¦ „{name}“ в оригиналния си размер
+✨ Filtre sur « {name} » ¦ ✨ Φίλτρο στο «{name}» ¦ ✨ Филтър върху „{name}“
+« {name} » pixellisé ¦ Το «{name}» μετατράπηκε σε pixel ¦ „{name}“ е растеризиран
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ Το «{name}» μετατράπηκε σε pixel: παγωμένο στο τωρινό του μέγεθος (αν το μεγαλώσεις θα θολώσει) ¦ „{name}“ е растеризиран: фиксиран в сегашния си размер (ако го увеличиш, ще стане размазан)
+Groupe « {name} » supprimé (son contenu reste) ¦ Η ομάδα «{name}» διαγράφηκε (το περιεχόμενό της μένει) ¦ Групата „{name}“ е изтрита (съдържанието ѝ остава)
+{layer} supprimé ¦ {layer}: διαγράφηκε ¦ {layer}: изтрит
+« {name} » retiré des calques ¦ Το «{name}» αφαιρέθηκε από τα επίπεδα ¦ „{name}“ е премахнат от слоевете
+Calque « {name} » supprimé avec ce qui est dessus ¦ Το επίπεδο «{name}» διαγράφηκε μαζί με ό,τι έχει πάνω του ¦ Слоят „{name}“ е изтрит заедно с това, което е върху него
+{layer} dupliquée ¦ {layer}: δημιουργήθηκε αντίγραφο ¦ {layer}: дублирана
+{layer} dupliqué ¦ {layer}: δημιουργήθηκε αντίγραφο ¦ {layer}: дублиран
+{layer} vidé ¦ {layer}: άδειασε ¦ {layer}: изпразнен
+{layer} déplacé ¦ {layer}: μετακινήθηκε ¦ {layer}: преместен
+Opacité de {name} : {n} % ¦ Αδιαφάνεια του {name}: {n} % ¦ Непрозрачност на {name}: {n} %
+Fond de {name} : {n} % ¦ Γέμισμα του {name}: {n} % ¦ Запълване на {name}: {n} %
+Renommé « {name} » ¦ Μετονομάστηκε σε «{name}» ¦ Преименуван на „{name}“
+Fusion de {name} : {what} ¦ Ανάμειξη του {name}: {what} ¦ Смесване на {name}: {what}
+« {name} » rangé dans « {group} » ¦ Το «{name}» μπήκε στο «{group}» ¦ „{name}“ е преместен в „{group}“
+« {name} » sorti du groupe ¦ Το «{name}» βγήκε από την ομάδα ¦ „{name}“ е изваден от групата
+« {name} » rangé tout en bas ¦ Το «{name}» μπήκε τελευταίο, στο κάτω μέρος ¦ „{name}“ е преместен най-отдолу
+« {name} » rangé au-dessus de « {other} » ¦ Το «{name}» μπήκε πάνω από το «{other}» ¦ „{name}“ е преместен над „{other}“
+« {name} » rangé sous « {other} » ¦ Το «{name}» μπήκε κάτω από το «{other}» ¦ „{name}“ е преместен под „{other}“
+🎚 Calque de réglage {name} ¦ 🎚 Επίπεδο ρύθμισης {name} ¦ 🎚 Коригиращ слой {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Ρυθμίσεις της <b>φωτογραφίας</b> ¦ 🖼 Настройки на <b>снимката</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Στη μάσκα, το πινέλο ⬜ εμφανίζει (φέρνει πίσω ό,τι ήταν κρυμμένο) — X για αλλαγή ¦ Върху маската четката ⬜ показва (връща скритото) — X за смяна
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Στη μάσκα, το πινέλο ⬛ κρύβει — X για αλλαγή ¦ Върху маската четката ⬛ скрива — X за смяна
+Texte choisi : « {text} » ¦ Επιλεγμένο κείμενο: «{text}» ¦ Избран текст: „{text}“
+Glyphe {what} ajouté ¦ Ο χαρακτήρας {what} προστέθηκε ¦ Глифът {what} е добавен
+« {what} » copié : colle-le dans un texte (⌘V). ¦ Το «{what}» αντιγράφηκε: επικόλλησέ το σε ένα κείμενο (⌘V). ¦ „{what}“ е копиран: постави го в текст (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ επίπεδο «{name}» (μόνο το στοιχείο από κάτω) ¦ слой „{name}“ (само елемента отдолу)
+calque « {name} » ¦ επίπεδο «{name}» ¦ слой „{name}“
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Εύρος: {a}° / {b}° — {c}° \ {d}° (σύρε τους δείκτες) ¦ Обхват: {a}° / {b}° — {c}° \ {d}° (плъзни маркерите)
+Propriétés de « {name} » ¦ Ιδιότητες του «{name}» ¦ Свойства на „{name}“
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Απόχρωση/Κορεσμός στο «{name}» ¦ 🎨 Нюанс/Наситеност върху „{name}“
+Motif « {what} » : calque « {name} » ¦ Μοτίβο «{what}»: επίπεδο «{name}» ¦ Мотив „{what}“: слой „{name}“
+Motif de « {name} » ¦ Μοτίβο του «{name}» ¦ Мотив на „{name}“
+Motif « {what} » sur « {name} » ¦ Μοτίβο «{what}» στο «{name}» ¦ Мотив „{what}“ върху „{name}“
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Το μοτίβο «{what}» αφαιρέθηκε από τη βιβλιοθήκη (τα επίπεδα που το χρησιμοποιούν το κρατούν) ¦ Мотивът „{what}“ е премахнат от библиотеката (слоевете, които го използват, го запазват)
+le calque « {name} » ¦ το επίπεδο «{name}» ¦ слоя „{name}“
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: ζωγράφισε σε ένα επίπεδο. ¦ 🖌 {name}: рисувай върху слой.
+Dégradé : {what} ¦ Διαβάθμιση: {what} ¦ Преливане: {what}
+Dégradé {num} ¦ Διαβάθμιση {num} ¦ Преливане {num}
+Calque « {name} » ¦ Επίπεδο «{name}» ¦ Слой „{name}“
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ «{name}» · η μάσκα του (μαύρο = κρυμμένο, λευκό = ορατό): όλα φαίνονται αμέσως ¦ „{name}“ · маската му (черно = скрито, бяло = показано): всичко се вижда веднага
+« {name} » : tout se voit tout de suite ¦ «{name}»: όλα φαίνονται αμέσως ¦ „{name}“: всичко се вижда веднага
+le prochain dégradé que tu traceras ¦ η επόμενη διαβάθμιση που θα σχεδιάσεις ¦ следващото преливане, което ще начертаеш
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Η προρύθμιση «{name}» κρατήθηκε: μένει σε αυτή τη λίστα. ¦ Готовата настройка „{name}“ е запазена: остава в този списък.
+Dégradé modifié sur « {name} » ¦ Η διαβάθμιση άλλαξε στο «{name}» ¦ Преливането е променено върху „{name}“
+Texte « {text} » ¦ Κείμενο «{text}» ¦ Текст „{text}“
+Objet dynamique « {name} » : image remplacée ¦ Έξυπνο αντικείμενο «{name}»: η εικόνα αντικαταστάθηκε ¦ Смарт обект „{name}“: изображението е заменено
+Image placée : « {name} » ¦ Η εικόνα τοποθετήθηκε: «{name}» ¦ Изображението е поставено: „{name}“
+Image placée, mais pas rangée dans les médias : {err} ¦ Η εικόνα τοποθετήθηκε, αλλά δεν μπήκε στα πολυμέσα: {err} ¦ Изображението е поставено, но не е прибрано в медиите: {err}
+Élément supprimé de « {name} » ¦ Ένα στοιχείο διαγράφηκε από το «{name}» ¦ Елемент е изтрит от „{name}“
+Image tournée sur « {name} » ¦ Η εικόνα περιστράφηκε στο «{name}» ¦ Изображението е завъртяно върху „{name}“
+Image agrandie / réduite sur « {name} » ¦ Η εικόνα μεγάλωσε / μίκρυνε στο «{name}» ¦ Изображението е увеличено / намалено върху „{name}“
+Dégradé ajusté (masque) sur « {name} » ¦ Η διαβάθμιση προσαρμόστηκε (μάσκα) στο «{name}» ¦ Преливането е нагласено (маска) върху „{name}“
+Dégradé ajusté sur « {name} » ¦ Η διαβάθμιση προσαρμόστηκε στο «{name}» ¦ Преливането е нагласено върху „{name}“
+Élément déplacé sur « {name} » ¦ Ένα στοιχείο μετακινήθηκε στο «{name}» ¦ Елемент е преместен върху „{name}“
+Masque en dégradé sur « {name} » ¦ Μάσκα με διαβάθμιση στο «{name}» ¦ Маска с преливане върху „{name}“
+Dégradé {what} : « {name} » ¦ Διαβάθμιση {what}: «{name}» ¦ Преливане {what}: „{name}“
+{what} sur « {name} » ¦ {what} στο «{name}» ¦ {what} върху „{name}“
+Masque : caché au pinceau ¦ Μάσκα: κρύφτηκε με το πινέλο ¦ Маска: скрито с четката
+Masque : montré au pinceau ¦ Μάσκα: εμφανίστηκε με το πινέλο ¦ Маска: показано с четката
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Η πτυχή επιδιορθώθηκε ({n} πινελιές) (επίπεδο ✨ Ρετούς) ¦ Гънката е поправена ({n} щриха) (слой ✨ Ретуши)
+Pli réparé (calque ✨ Retouches) ¦ Η πτυχή επιδιορθώθηκε (επίπεδο ✨ Ρετούς) ¦ Гънката е поправена (слой ✨ Ретуши)
+Recadrage enlevé ¦ Η περικοπή αφαιρέθηκε ¦ Изрязването е премахнато
+Recadrage et redressement ({a}°) ¦ Περικοπή και ίσιωμα ({a}°) ¦ Изрязване и изправяне ({a}°)
+Recadrage ¦ Περικοπή ¦ Изрязване
+Filtre « {what} » (refait) ¦ Φίλτρο «{what}» (ξανά) ¦ Филтър „{what}“ (повторен)
+« {what} » refait sur un nouveau calque. ¦ Το «{what}» έγινε ξανά σε νέο επίπεδο. ¦ „{what}“ е повторен върху нов слой.
+limité à la sélection ¦ περιορισμένο στην επιλογή ¦ ограничено до селекцията
+Filtre « {what} » ¦ Φίλτρο «{what}» ¦ Филтър „{what}“
+Filtre « {what} » ajouté au calque ¦ Το φίλτρο «{what}» προστέθηκε στο επίπεδο ¦ Филтърът „{what}“ е добавен към слоя
+Filtre « {what} » réglé ¦ Το φίλτρο «{what}» ρυθμίστηκε ¦ Филтърът „{what}“ е настроен
+Action « {name} » ¦ Ενέργεια «{name}» ¦ Действие „{name}“
+Action du {date} ¦ Ενέργεια της {date} ¦ Действие от {date}
+Action « {name} » enregistrée. ¦ Η ενέργεια «{name}» αποθηκεύτηκε. ¦ Действието „{name}“ е запазено.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Η ενέργεια «{name}» εισήχθη: «Σε αυτή τη φωτογραφία» ή «Σε πολλές φωτογραφίες…». ¦ Действието „{name}“ е импортирано: „Върху тази снимка“ или „Върху няколко снимки…“.
+Action « {name} » supprimée ¦ Η ενέργεια «{name}» διαγράφηκε ¦ Действието „{name}“ е изтрито
+« {name} » sur plusieurs photos ¦ «{name}» σε πολλές φωτογραφίες ¦ „{name}“ върху няколко снимки
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Ολοκληρώθηκε: {n} φωτογραφίες από {total}, εμφανίζεται η νέα έκδοση. ¦ Готово: {n} снимки от {total}, показана е новата версия.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Ολοκληρώθηκε: {n} φωτογραφία από {total}, εμφανίζεται η νέα έκδοση. ¦ Готово: {n} снимка от {total}, показана е новата версия.
+Terminé : {n} photos sur {total}. ¦ Ολοκληρώθηκε: {n} φωτογραφίες από {total}. ¦ Готово: {n} снимки от {total}.
+Terminé : {n} photo sur {total}. ¦ Ολοκληρώθηκε: {n} φωτογραφία από {total}. ¦ Готово: {n} снимка от {total}.
+{layer} (retouchée) ¦ {layer} (ρετουσαρισμένη) ¦ {layer} (ретуширана)
+« {name} » · comme le style de calque de Photoshop ¦ «{name}» · όπως το στυλ επιπέδου του Photoshop ¦ „{name}“ · като стила на слой във Photoshop
+Effets de {layer} enlevés ¦ Τα εφέ του {layer} αφαιρέθηκαν ¦ Ефектите на {layer} са премахнати
+Effets de {layer} ¦ Εφέ του {layer} ¦ Ефекти на {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Οι λεπτές γραμμές, ανοιχτές ή σκούρες, σημειώνονται με κόκκινο (μέσα στην επιλογή). Έλεγξε και μετά «Επιδιόρθωση αυτών των γραμμών». ¦ Тънките линии, светли или тъмни, са отбелязани в червено (в селекцията). Провери, после „Поправи тези линии“.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Οι λεπτές γραμμές, ανοιχτές ή σκούρες, σημειώνονται με κόκκινο. Έλεγξε και μετά «Επιδιόρθωση αυτών των γραμμών». ¦ Тънките линии, светли или тъмни, са отбелязани в червено. Провери, после „Поправи тези линии“.
+{what} (en rouge sur la photo). ¦ {what} (με κόκκινο στη φωτογραφία). ¦ {what} (в червено върху снимката).
+Plis réparés ({what}) ¦ Οι πτυχές επιδιορθώθηκαν ({what}) ¦ Гънките са поправени ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: σύγκρινε με 👁 ή ◧ · ↶ για επιστροφή. ¦ {what}: сравни с 👁 или ◧; ↶ за връщане.
+={n} lignes repérées puis comblées ¦ {n} γραμμή εντοπίστηκε και γέμισε|{n} γραμμές εντοπίστηκαν και γέμισαν ¦ {n} линия е открита и запълнена|{n} линии са открити и запълнени
+={n} ligne repérée puis comblée ¦ {n} γραμμή εντοπίστηκε και γέμισε|{n} γραμμές εντοπίστηκαν και γέμισαν ¦ {n} линия е открита и запълнена|{n} линии са открити и запълнени
+=pli|{n} lignes ¦ πτυχή|{n} γραμμές ¦ гънка|{n} линии
+=pli|{n} ligne ¦ πτυχή|{n} γραμμή ¦ гънка|{n} линия
+=retouche|{n} étapes ¦ ρετούς|{n} βήματα ¦ ретуш|{n} стъпки
+=retouche|{n} étape ¦ ρετούς|{n} βήμα ¦ ретуш|{n} стъпка
+=ligne repérée ¦ εντοπισμένη γραμμή|εντοπισμένες γραμμές ¦ открита линия|открити линии
+=ligne réparée ¦ επιδιορθωμένη γραμμή|επιδιορθωμένες γραμμές ¦ поправена линия|поправени линии
+=calque de réglage ¦ επίπεδο ρύθμισης|επίπεδα ρύθμισης ¦ коригиращ слой|коригиращи слоя
+=portrait mis à jour ¦ πορτρέτο ενημερώθηκε|πορτρέτα ενημερώθηκαν ¦ обновен портрет|обновени портрета
+✨ Restauration en une fois ({what}) ¦ ✨ Αποκατάσταση με μια κίνηση ({what}) ¦ ✨ Възстановяване наведнъж ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Η αποκατάσταση έγινε ({what}): κάθε βήμα είναι ένα επίπεδο «✨» (Επίπεδα) που μπορείς να κρύψεις ή να δοσολογήσεις · το ↶ τα αναιρεί όλα. ¦ Възстановяването е готово ({what}): всяка стъпка е слой „✨“ (Слоеве), който можеш да скриеш или дозираш; ↶ отменя всичко.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Το πορτρέτο της καρτέλας «{name}» ενημερώθηκε (η περικομμένη φωτογραφία είναι στα πολυμέσα της). ¦ Портретът на картона „{name}“ е обновен (изрязаната снимка е в медиите му).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Το πορτρέτο της καρτέλας ενημερώθηκε (η περικομμένη φωτογραφία είναι στα πολυμέσα της). ¦ Портретът на картона е обновен (изрязаната снимка е в медиите му).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (περικομμένη) ¦ {w} × {h} px (изрязана)
+Horizon redressé ({a}°) ¦ Ο ορίζοντας ισιώθηκε ({a}°) ¦ Хоризонтът е изправен ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Ισιώθηκε κατά {a}°: προσάρμοσε το κάδρο και μετά «✓ Επικύρωση». ¦ Изправена с {a}°: нагласи рамката, после „✓ Потвърди“.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Η φωτογραφία ισιώθηκε κατά {a}° (και περικόπηκε για να μη φαίνονται οι γωνίες). ⌗ Περικοπή για προσαρμογή. ¦ Снимката е изправена с {a}° (и изрязана, за да не се виждат ъглите). ⌗ Изрежи, за да нагласиш.
+Redressée automatiquement ({a}°) ¦ Ισιώθηκε αυτόματα ({a}°) ¦ Изправена автоматично ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Οι αντανακλάσεις αφαιρέθηκαν σε ξεχωριστό επίπεδο (μόνο μέσα στην επιλογή: κάνε πρώτα μια επιλογή του τζαμιού για να το περιορίσεις): ρύθμισε την ένταση και το μέγεθος, η αδιαφάνεια δοσολογεί, 🎭 περιορίζει, 👁 κρύβει. Η φωτογραφία δεν αλλάζει. ¦ Отблясъците са премахнати на отделен слой (само в селекцията: първо избери стъклото, за да ограничиш): настрой силата и размера, непрозрачността дозира, 🎭 ограничава, 👁 скрива. Снимката не се променя.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Οι αντανακλάσεις αφαιρέθηκαν σε ξεχωριστό επίπεδο: ρύθμισε την ένταση και το μέγεθος, η αδιαφάνεια δοσολογεί, 🎭 περιορίζει, 👁 κρύβει. Η φωτογραφία δεν αλλάζει. ¦ Отблясъците са премахнати на отделен слой: настрой силата и размера, непрозрачността дозира, 🎭 ограничава, 👁 скрива. Снимката не се променя.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Χρωματισμός σε επίπεδο ρύθμισης (περιορισμένος στην επιλογή): διάλεξε τα χρώματα και την ένταση · 🎭 για περιορισμό, 👁 για απόκρυψη. Η φωτογραφία δεν αλλάζει. ¦ Оцветяване в коригиращ слой (ограничено до селекцията): избери цветовете и силата; 🎭 за ограничаване, 👁 за скриване. Снимката не се променя.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Χρωματισμός σε επίπεδο ρύθμισης: διάλεξε τα χρώματα και την ένταση · 🎭 για περιορισμό, 👁 για απόκρυψη. Η φωτογραφία δεν αλλάζει. ¦ Оцветяване в коригиращ слой: избери цветовете и силата; 🎭 за ограничаване, 👁 за скриване. Снимката не се променя.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} κηλίδα αφαιρέθηκε, στο επίπεδο «{layer}» (η φωτογραφία δεν αλλάζει): κρύψε το ή χαμήλωσέ το για σύγκριση · ↶ αν είναι υπερβολικό.|{n} κηλίδες αφαιρέθηκαν, στο επίπεδο «{layer}» (η φωτογραφία δεν αλλάζει): κρύψε το ή χαμήλωσέ το για σύγκριση · ↶ αν είναι υπερβολικό. ¦ {n} петно е премахнато на слоя „{layer}“ (снимката не се променя): скрий го или го намали, за да сравниш; ↶ ако е прекалено.|{n} петна са премахнати на слоя „{layer}“ (снимката не се променя): скрий го или го намали, за да сравниш; ↶ ако е прекалено.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} κηλίδα αφαιρέθηκε, στο επίπεδο «{layer}» (η φωτογραφία δεν αλλάζει): κρύψε το ή χαμήλωσέ το για σύγκριση · ↶ αν είναι υπερβολικό.|{n} κηλίδες αφαιρέθηκαν, στο επίπεδο «{layer}» (η φωτογραφία δεν αλλάζει): κρύψε το ή χαμήλωσέ το για σύγκριση · ↶ αν είναι υπερβολικό. ¦ {n} петно е премахнато на слоя „{layer}“ (снимката не се променя): скрий го или го намали, за да сравниш; ↶ ако е прекалено.|{n} петна са премахнати на слоя „{layer}“ (снимката не се променя): скрий го или го намали, за да сравниш; ↶ ако е прекалено.
+✨ Taches enlevées ¦ ✨ Οι κηλίδες αφαιρέθηκαν ¦ ✨ Премахнати петна
+Taches enlevées automatiquement ({n}) ¦ Κηλίδες αφαιρέθηκαν αυτόματα ({n}) ¦ Автоматично премахнати петна ({n})
+Sélection remplie ({what}) ¦ Η επιλογή γέμισε ({what}) ¦ Селекцията е запълнена ({what})
+Sélection effacée sur « {name} » ¦ Η επιλογή σβήστηκε στο «{name}» ¦ Селекцията е изтрита върху „{name}“
+Masque d’après la sélection ({name}) ¦ Μάσκα από την επιλογή ({name}) ¦ Маска от селекцията ({name})
+Préréglage « {name} » retiré ¦ Η προρύθμιση «{name}» αφαιρέθηκε ¦ Готовата настройка „{name}“ е премахната
+Préréglage « {name} » ¦ Προρύθμιση «{name}» ¦ Готова настройка „{name}“
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Έργο «{name}» (📂 Αρχείο → Άνοιγμα έργου για να το ξαναβρείς) ¦ Проект „{name}“ (📂 Файл → Отвори проект, за да го намериш)
+Versions de la photo ({n}) ¦ Εκδόσεις της φωτογραφίας ({n}) ¦ Версии на снимката ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm στα {dpi} dpi ¦ {w} × {h} cm при {dpi} dpi
+≈ {size} Mo en mémoire ¦ ≈ {size} MB στη μνήμη ¦ ≈ {size} MB в паметта
+Taille de l’image : {w} × {h} px ¦ Μέγεθος εικόνας: {w} × {h} px ¦ Размер на изображението: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Περιοχή εργασίας: {w} × {h} px ¦ Работна област: {w} × {h} px
+Zone de travail de départ ¦ Αρχική περιοχή εργασίας ¦ Начална работна област
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Αυτή η εικόνα είναι πολύ μεγάλη ({n} εκατομμύρια σημεία): η αποθήκευση μπορεί να αργήσει ή και να αποτύχει. ¦ Това изображение е много голямо ({n} милиона точки): запазването може да отнеме дълго или дори да не успее.
+Enregistrer quand même ? ¦ Αποθήκευση παρ' όλα αυτά; ¦ Да запазя ли въпреки това?
+Projet « {name} » rouvert ¦ Το έργο «{name}» άνοιξε ξανά ¦ Проектът „{name}“ е отворен отново
+Projet en partie illisible : {err} ¦ Το έργο διαβάζεται μόνο εν μέρει: {err} ¦ Проектът е отчасти нечетим: {err}
+photo de départ introuvable ¦ η αρχική φωτογραφία δεν βρέθηκε ¦ началната снимка не е намерена
+Supprimer le projet « {name} » ? ¦ Διαγραφή του έργου «{name}»; ¦ Да изтрия ли проекта „{name}“?
+Quitter le plein écran ¦ Έξοδος από πλήρη οθόνη ¦ Изход от цял екран
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Δεν υπάρχει άλλος χώρος για αποθήκευση: διάγραψε έναν χώρο εργασίας. ¦ Няма повече място за запазване: изтрий едно работно пространство.
+Ranger, montrer ou cacher les boutons et les options ¦ Τακτοποίηση, εμφάνιση ή απόκρυψη κουμπιών και επιλογών ¦ Подреди, покажи или скрий бутоните и опциите
+⚙️ Boutons et options ¦ ⚙️ Κουμπιά και επιλογές ¦ ⚙️ Бутони и опции
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Τσέκαρε ό,τι θέλεις να φαίνεται, τακτοποίησε με ↑ ↓ (ή σέρνοντας το ⠿). Κρατιέται για την επόμενη φορά. Όπως οι χώροι εργασίας του Photoshop: αποθήκευσε μια διάταξη με όνομα («Αποκατάσταση», «Γρήγορο μοντάζ»…) και πέρνα από τη μία στην άλλη. ¦ Отметни какво да се показва, подреди с ↑ ↓ (или с плъзгане на ⠿). Запазва се за следващия път. Като работните пространства на Photoshop: запази подредба под име („Възстановяване“, „Бърз монтаж“…) и превключвай между тях.
+les boutons montrés, cachés et rangés ¦ τα κουμπιά που φαίνονται, κρύβονται και τακτοποιούνται ¦ показаните, скритите и подредените бутони
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Τα κουμπιά επανήλθαν στην αρχική κατάσταση (άνοιξε ξανά το παράθυρο για να δεις την αρχική σειρά). ¦ Бутоните са върнати както в началото (отвори отново прозореца, за да видиш началния ред).
+Boutons rangés. ¦ Τα κουμπιά τακτοποιήθηκαν. ¦ Бутоните са подредени.
+Hautes lumières ¦ Φωτεινοί τόνοι ¦ Светли тонове
+Vibrance (couleurs ternes d’abord) ¦ Ζωντάνια (πρώτα τα θαμπά χρώματα) ¦ Жизненост (първо бледите цветове)
+Teinte (tourner les couleurs) ¦ Απόχρωση (περιστροφή των χρωμάτων) ¦ Нюанс (завъртане на цветовете)
+Noir d’entrée ¦ Μαύρο εισόδου ¦ Черно на входа
+Blanc d’entrée ¦ Λευκό εισόδου ¦ Бяло на входа
+Tons moyens (gamma ×100) ¦ Μεσαίοι τόνοι (γάμμα ×100) ¦ Средни тонове (гама ×100)
+Noir de sortie ¦ Μαύρο εξόδου ¦ Черно на изхода
+Blanc de sortie ¦ Λευκό εξόδου ¦ Бяло на изхода
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Φυσική: ουρανός, πρασινάδα, δέρμα, ρούχα (προτείνεται) ¦ Естествено: небе, зеленина, кожа, дрехи (препоръчително)
+Sépia chaud ¦ Ζεστή σέπια ¦ Топла сепия
+Autochrome (couleurs d’autrefois) ¦ Autochrome (χρώματα του παλιού καιρού) ¦ Автохром (цветове от едно време)
+Portrait (peau rosée) ¦ Πορτρέτο (ροδαλό δέρμα) ¦ Портрет (розовееща кожа)
+Paysage : ciel en haut, terre en bas ¦ Τοπίο: ουρανός πάνω, γη κάτω ¦ Пейзаж: небе горе, земя долу
+Saturation augmentée ¦ Αυξημένος κορεσμός ¦ Увеличена наситеност
+Saturation plus forte ¦ Ισχυρότερος κορεσμός ¦ По-силна наситеност
+Rouges plus saturés ¦ Πιο κορεσμένα κόκκινα ¦ По-наситени червени
+Jaune intensifié ¦ Εντονότερο κίτρινο ¦ Засилено жълто
+Ciel plus bleu ¦ Πιο μπλε ουρανός ¦ По-синьо небе
+Peau plus douce ¦ Πιο απαλό δέρμα ¦ По-мека кожа
+Désaturer ¦ Αποκορεσμός ¦ Обезцветяване
+Verts d’automne ¦ Φθινοπωρινά πράσινα ¦ Есенни зелени
+Reflets en moins (vitre, verre, vernis) ¦ Λιγότερες αντανακλάσεις (τζάμι, γυαλί, βερνίκι) ¦ По-малко отблясъци (стъкло, витрина, лак)
+Taille des reflets (0 = moyenne) ¦ Μέγεθος αντανακλάσεων (0 = μεσαίο) ¦ Размер на отблясъците (0 = среден)
+Poussière et rayures (automatique) ¦ Σκόνη και γρατζουνιές (αυτόματα) ¦ Прах и драскотини (автоматично)
+Réduire le bruit ¦ Μείωση θορύβου ¦ Намаляване на шума
+Netteté ¦ Ευκρίνεια ¦ Острота
+Clarté (contraste local) ¦ Καθαρότητα (τοπική αντίθεση) ¦ Яснота (локален контраст)
+Flou de surface (garde les contours) ¦ Θόλωμα επιφάνειας (κρατά τα περιγράμματα) ¦ Повърхностно размиване (запазва контурите)
+Décentrement (maquette, tilt-shift) ¦ Μετατόπιση (μακέτα, tilt-shift) ¦ Наклон-отместване (макет, tilt-shift)
+Largeur de la bande ¦ Πλάτος ζώνης ¦ Ширина на лентата
+Flou de l’objectif (bokeh) ¦ Θόλωμα φακού (bokeh) ¦ Размиване на обектива (боке)
+Ajouter du bruit ¦ Προσθήκη θορύβου ¦ Добави шум
+Poussière et rayures ¦ Σκόνη και γρατζουνιές ¦ Прах и драскотини
+Passe-haut (pour accentuer en Incrustation) ¦ Υψιπερατό (για ενίσχυση σε Επικάλυψη) ¦ Високочестотен филтър (за подчертаване с Наслагване)
+Esthétiques ¦ Αισθητικά ¦ Естетически
+Garder les couleurs (0 / 1) ¦ Διατήρηση χρωμάτων (0 / 1) ¦ Запази цветовете (0 / 1)
+Tracé des contours ¦ Σχεδίαση περιγραμμάτων ¦ Очертаване на контурите
+Contours lumineux (néon) ¦ Φωτεινά περιγράμματα (νέον) ¦ Светещи контури (неон)
+Postérisation ¦ Αφίσα (posterize) ¦ Постеризация
+Seuil (noir et blanc pur) ¦ Κατώφλι (καθαρό ασπρόμαυρο) ¦ Праг (чисто черно-бяло)
+Vers la droite (1) / gauche (0) ¦ Προς τα δεξιά (1) / αριστερά (0) ¦ Надясно (1) / наляво (0)
+Peinture à l’huile ¦ Ελαιογραφία ¦ Маслена живопис
+Taille de la touche ¦ Μέγεθος πινελιάς ¦ Размер на мазката
+Taille des taches ¦ Μέγεθος κηλίδων ¦ Размер на петната
+Dessin au crayon ¦ Σχέδιο με μολύβι ¦ Рисунка с молив
+En couleur (0 / 1) ¦ Έγχρωμο (0 / 1) ¦ Цветно (0 / 1)
+Taille des carreaux ¦ Μέγεθος πλακιδίων ¦ Размер на плочките
+Demi-teinte (points d’imprimerie) ¦ Ημιτόνιο (κουκκίδες τυπογραφείου) ¦ Полутон (печатни точки)
+Taille des cristaux ¦ Μέγεθος κρυστάλλων ¦ Размер на кристалите
+Éclairage (projecteur) ¦ Φωτισμός (προβολέας) ¦ Осветление (прожектор)
+Lumière X ¦ Φως X ¦ Светлина X
+Lumière Y ¦ Φως Y ¦ Светлина Y
+Lumière ambiante ¦ Φως περιβάλλοντος ¦ Околна светлина
+Halo de lumière (flare) ¦ Λάμψη φωτός (flare) ¦ Отблясък от светлина (flare)
+À partir de (luminosité) ¦ Από (φωτεινότητα) ¦ От (яркост)
+Déformation ¦ Παραμόρφωση ¦ Деформация
+Pincement / sphérisation ¦ Τσίμπημα / σφαιροποίηση ¦ Свиване / сферизиране
+Force (− sphère, + pincement) ¦ Ένταση (− σφαίρα, + τσίμπημα) ¦ Сила (− сфера, + свиване)
+Longueur d’onde ¦ Μήκος κύματος ¦ Дължина на вълната
+Ondulation (ronds dans l’eau) ¦ Κυματισμός (κύκλοι στο νερό) ¦ Вълнички (кръгове във водата)
+Écart des ronds ¦ Απόσταση κύκλων ¦ Разстояние между кръговете
+Coordonnées polaires ¦ Πολικές συντεταγμένες ¦ Полярни координати
+Rectangle → polaire (0) / l’inverse (1) ¦ Ορθογώνιο → πολικό (0) / το αντίστροφο (1) ¦ Правоъгълни → полярни (0) / обратното (1)
+Minimum (assombrit, épaissit le sombre) ¦ Ελάχιστο (σκουραίνει, παχαίνει το σκούρο) ¦ Минимум (затъмнява, удебелява тъмното)
+Maximum (éclaircit, épaissit le clair) ¦ Μέγιστο (φωτίζει, παχαίνει το ανοιχτό) ¦ Максимум (изсветлява, удебелява светлото)
+Décalage (avec retour de l’autre côté) ¦ Μετατόπιση (με επιστροφή από την άλλη πλευρά) ¦ Отместване (с връщане от другата страна)
+Enlever les reflets (vitre) ¦ Αφαίρεση αντανακλάσεων (τζάμι) ¦ Премахни отблясъците (стъкло)
+Reflets en moins ¦ Λιγότερες αντανακλάσεις ¦ По-малко отблясъци
+Vieille photo ravivée ¦ Παλιά φωτογραφία με ζωντάνια ¦ Съживена стара снимка
+Négatif → positif ¦ Αρνητικό → θετικό ¦ Негатив → позитив
+🖌 Forme du panneau Formes ¦ 🖌 Σχήμα από τον πίνακα Σχήματα ¦ 🖌 Форма от панела Форми
+Avec empattement ¦ Με πατούρες (serif) ¦ Със серифи
+Sans empattement ¦ Χωρίς πατούρες (sans serif) ¦ Без серифи
+Manuscrite ¦ Χειρόγραφη ¦ Ръкописен
+Extra-fin ¦ Εξαιρετικά λεπτή ¦ Изключително тънък
+Ultra-léger ¦ Υπερελαφριά ¦ Свръхлек
+Léger ¦ Ελαφριά ¦ Лек
+Médium ¦ Μεσαία ¦ Среден
+Demi-gras ¦ Ημιέντονη ¦ Полудебел
+Extra-gras ¦ Πολύ έντονη ¦ Свръхдебел
+Aligné à gauche ¦ Στοίχιση αριστερά ¦ Подравнено вляво
+Aligné à droite ¦ Στοίχιση δεξιά ¦ Подравнено вдясно
+Justifié, dernière ligne à gauche ¦ Πλήρης στοίχιση, τελευταία γραμμή αριστερά ¦ Двустранно, последният ред вляво
+Justifié, dernière ligne centrée ¦ Πλήρης στοίχιση, τελευταία γραμμή στο κέντρο ¦ Двустранно, последният ред в центъра
+Justifié, dernière ligne à droite ¦ Πλήρης στοίχιση, τελευταία γραμμή δεξιά ¦ Двустранно, последният ред вдясно
+Tout justifié ¦ Πλήρης στοίχιση παντού ¦ Изцяло двустранно
+Ligatures et formes ¦ Συμπλέγματα και μορφές ¦ Лигатури и форми
+Unicode : Latin étendu A ¦ Unicode: Εκτεταμένα λατινικά Α ¦ Unicode: Разширена латиница A
+Unicode : Latin étendu B ¦ Unicode: Εκτεταμένα λατινικά Β ¦ Unicode: Разширена латиница B
+Unicode : hébreu ¦ Unicode: εβραϊκά ¦ Unicode: иврит
+Unicode : exposants et indices ¦ Unicode: εκθέτες και δείκτες ¦ Unicode: горни и долни индекси
+Unicode : flèches ¦ Unicode: βέλη ¦ Unicode: стрелки
+Unicode : mathématiques ¦ Unicode: μαθηματικά ¦ Unicode: математика
+Unicode : formes géométriques ¦ Unicode: γεωμετρικά σχήματα ¦ Unicode: геометрични фигури
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: εκτεταμένα λατινικά D (παλιές συντομογραφίες) ¦ Unicode: разширена латиница D (стари съкращения)
+espace fine ¦ λεπτό διάστημα ¦ тесен интервал
+tiret conditionnel (césure) ¦ υπό όρους παύλα (συλλαβισμός) ¦ условно тире (сричкопренасяне)
+mort au combat ¦ πέθανε στη μάχη ¦ загинал в бой
+et (abréviation ancienne) ¦ και (παλιά συντομογραφία) ¦ и (старо съкращение)
+s long ¦ μακρύ s ¦ дълго s
+Linéaire ¦ Γραμμική ¦ Линейно
+Radial ¦ Ακτινική ¦ Радиално
+Angle (conique) ¦ Γωνιακή (κωνική) ¦ Ъглово (конично)
+Réfléchi ¦ Ανακλώμενη ¦ Отразено
+Losange ¦ Ρόμβος ¦ Ромб
+Premier plan → arrière-plan ¦ Προσκήνιο → φόντο ¦ Преден план → фон
+Hachures croisées ¦ Διασταυρούμενες γραμμώσεις ¦ Кръстосано щриховане
+Écailles ¦ Λέπια ¦ Люспи
+Brin d’herbe ¦ Λεπίδα χορταριού ¦ Стрък трева
+Éclaboussure ¦ Πιτσίλισμα ¦ Пръска
+Ma forme (d’après une sélection) ¦ Το σχήμα μου (από μια επιλογή) ¦ Моята форма (от селекция)
+Aérographe ¦ Αερογράφος ¦ Аерограф
+Carré net ¦ Καθαρό τετράγωνο ¦ Остър квадрат
+Étoiles semées ¦ Σκόρπια αστέρια ¦ Разпръснати звезди
+Éclaboussures ¦ Πιτσιλιές ¦ Пръски
+Superposition (Écran) ¦ Υπέρθεση (Οθόνη) ¦ Наслагване (Екран)
+⌗ Cadrer et redresser ¦ ⌗ Κάδρο και ίσιωμα ¦ ⌗ Кадрирай и изправи
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Μια φωτογραφία σκαναρισμένη στραβά, με λευκές ή φθαρμένες άκρες: την ισιώνουμε και κρατάμε ό,τι μετράει. ¦ Снимка, сканирана накриво, с бели или повредени краища: изправяме я и запазваме важното.
+📐 Redresser tout seul ¦ 📐 Αυτόματο ίσιωμα ¦ 📐 Изправи автоматично
+⌗ Recadrer ¦ ⌗ Περικοπή ¦ ⌗ Изрежи
+⧈ Photo prise de biais ¦ ⧈ Φωτογραφία από πλάγια ¦ ⧈ Снимка под ъгъл
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Ξεθωριασμένα χρώματα, κιτρινισμένη φωτογραφία ¦ 🎨 Избледнели цветове, пожълтяла снимка
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Ο χρόνος κιτρινίζει, ξεθωριάζει ή ροδίζει τις φωτογραφίες. Η «Αφαίρεση κιτρινίσματος» βάζει κάθε χρώμα στη θέση του · το «Ζωντάνεμα» δίνει ξανά αντίθεση. ¦ Времето пожълтява, избелва или порозовява снимките. „Премахни пожълтяването“ връща всеки цвят на мястото му; „Съживи“ връща контраста.
+🟨 Enlever le jaunissement ¦ 🟨 Αφαίρεση κιτρινίσματος ¦ 🟨 Премахни пожълтяването
+✨ Raviver une vieille photo ¦ ✨ Ζωντάνεμα παλιάς φωτογραφίας ¦ ✨ Съживи стара снимка
+Réglage automatique ¦ Αυτόματη ρύθμιση ¦ Автоматична настройка
+🧹 Poussières et petites taches ¦ 🧹 Σκόνη και μικρές κηλίδες ¦ 🧹 Прах и малки петна
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Οι λευκές ή μαύρες κουκκίδες, τα στίγματα: η εφαρμογή τα βρίσκει και τα αφαιρεί ένα ένα (με το εργαλείο διόρθωσης). Για να επεξεργαστείς μόνο ένα μέρος, επίλεξέ το πρώτα. Ό,τι μείνει: το εργαλείο διόρθωσης 🩹 με το χέρι. ¦ Белите или черните точици, петънцата: приложението ги търси и ги премахва едно по едно (с коректора). За да обработиш само част, първо я избери. Каквото остане: коректорът 🩹 на ръка.
+Sensibilité ¦ Ευαισθησία ¦ Чувствителност
+Taille maximale d’une tache ¦ Μέγιστο μέγεθος κηλίδας ¦ Максимален размер на петно
+🔍 Repérer et enlever les taches ¦ 🔍 Εντοπισμός και αφαίρεση κηλίδων ¦ 🔍 Открий и премахни петната
+🩹 Correcteur à la main ¦ 🩹 Διόρθωση με το χέρι ¦ 🩹 Коректор на ръка
+Filtre poussière et rayures ¦ Φίλτρο σκόνης και γρατζουνιών ¦ Филтър за прах и драскотини
+🩹 Déchirures, plis, rayures ¦ 🩹 Σκισίματα, πτυχές, γρατζουνιές ¦ 🩹 Скъсвания, гънки, драскотини
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ Ο «Εντοπισμός πτυχών» βρίσκει τις λεπτές ανοιχτές ή σκούρες γραμμές και προτείνει να τις γεμίσει. Με το χέρι: το πινέλο 🪡 Επιδιόρθωση — ζωγράφισε πάνω στην πτυχή και ξαναγίνεται με βάση ό,τι την περιβάλλει. Για ένα κομμάτι που λείπει (σκισμένη γωνία), η σφραγίδα αντιγράφει ένα γειτονικό μέρος. ¦ „Открий гънките“ намира тънките светли или тъмни линии и предлага да ги запълни. На ръка: четката 🪡 Поправи — рисувай върху гънката и тя се възстановява според околното. За липсващо парче (откъснат ъгъл) печатът копира съседна част.
+🔍 Repérer les plis et rayures ¦ 🔍 Εντοπισμός πτυχών και γρατζουνιών ¦ 🔍 Открий гънките и драскотините
+🪡 Réparer au pinceau ¦ 🪡 Επιδιόρθωση με πινέλο ¦ 🪡 Поправи с четка
+➰ Entourer une zone… ¦ ➰ Περίγραψε μια περιοχή… ¦ ➰ Огради област…
+🌫️ Grain et bruit ¦ 🌫️ Κόκκος και θόρυβος ¦ 🌫️ Зърно и шум
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Μια κοκκώδης φωτογραφία ή μια φθαρμένη εκτύπωση: την απαλύνουμε χωρίς να χαθούν τα περιγράμματα. ¦ Зърнеста снимка или повредено копие: омекотяваме, без да губим контурите.
+🙂 Netteté des visages ¦ 🙂 Ευκρίνεια προσώπων ¦ 🙂 Острота на лицата
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Περίγραψε ένα πρόσωπο με την έλλειψη ◯ και μετά «Πιο καθαρό πρόσωπο»: καθαρίζεται από θόρυβο και γίνεται πιο ευκρινές, μόνο εκεί (ξεχωριστό επίπεδο, που μπορείς να δοσολογήσεις). ¦ Огради лице с елипсата ◯, после „По-ясно лице“: шумът се намалява и лицето се изостря само там (отделен слой, който можеш да дозираш).
+◯ Entourer le visage ¦ ◯ Περίγραψε το πρόσωπο ¦ ◯ Огради лицето
+✨ Visage plus net ¦ ✨ Πιο καθαρό πρόσωπο ¦ ✨ По-ясно лице
+Visage plus net ¦ Πιο καθαρό πρόσωπο ¦ По-ясно лице
+🎯 Sélectionner le sujet ¦ 🎯 Επιλογή του θέματος ¦ 🎯 Избери обекта
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Χρωματισμός ασπρόμαυρης φωτογραφίας ¦ 🌈 Оцвети черно-бяла снимка
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Αυτόματα (μια διαβάθμιση με χρώματα εποχής) ή με το χέρι: διάλεξε ένα χρώμα παρακάτω και ζωγράφισε απαλά, το φως της φωτογραφίας διατηρείται. ¦ Автоматично (преливане с цветове от епохата) или на ръка: избери цвят отдолу и рисувай леко, светлината на снимката се запазва.
+🎨 Coloriser tout seul ¦ 🎨 Αυτόματος χρωματισμός ¦ 🎨 Оцвети автоматично
+🖌 Coloriser au pinceau ¦ 🖌 Χρωματισμός με πινέλο ¦ 🖌 Оцвети с четка
+✅ Comparer et enregistrer ¦ ✅ Σύγκριση και αποθήκευση ¦ ✅ Сравни и запази
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Κράτα πατημένο το «👁 Πριν / μετά» (κάτω από τη φωτογραφία) για σύγκριση, ή το «◧ Αυλαία» για να περνάς από το ένα στο άλλο. Η αποκατεστημένη φωτογραφία γίνεται νέα έκδοση: το πρωτότυπο μένει. ¦ Задръж „👁 Преди / след“ (под снимката), за да сравниш, или „◧ Завеса“, за да плъзгаш от едното към другото. Възстановената снимка става нова версия: оригиналът остава.
+💾 Enregistrer et afficher ¦ 💾 Αποθήκευση και προβολή ¦ 💾 Запази и покажи
+Garder le travail pour plus tard ¦ Κράτα τη δουλειά για αργότερα ¦ Запази работата за по-късно
+Impossible d’ouvrir cette image. ¦ Δεν είναι δυνατό να ανοίξει αυτή η εικόνα. ¦ Това изображение не може да се отвори.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Κάθε βήμα είναι προαιρετικό και αναιρείται (↶). Τίποτα δεν χαλάει το πρωτότυπο: η αποκατεστημένη φωτογραφία γίνεται νέα έκδοση. ¦ Всяка стъпка е по желание и се отменя (↶). Нищо не поврежда оригинала: възстановената снимка става нова версия.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Μείωση θορύβου, σκόνη, πτυχές, αντίθεση, ευκρίνεια και χρωματισμός μαζί: βλέπεις κάθε βήμα και διαλέγεις ¦ Намаляване на шума, прах, гънки, контраст, острота и оцветяване наведнъж: виждаш всяка стъпка и избираш
+✨ Restaurer en une fois ¦ ✨ Αποκατάσταση με μια κίνηση ¦ ✨ Възстанови наведнъж
+ou étape par étape : ¦ ή βήμα βήμα: ¦ или стъпка по стъпка:
+Réparer ¦ Επιδιόρθωση ¦ Поправи
+🪡 Réparer ¦ 🪡 Επιδιόρθωση ¦ 🪡 Поправи
+Déplacer la vue ¦ Μετακίνηση της προβολής ¦ Премести изгледа
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Επιδιόρθωση πτυχής ή σκισίματος (R): ζωγράφισε από πάνω, ξαναγίνεται με βάση τα γύρω ¦ Поправи гънка или скъсване (R): рисувай отгоре, възстановява се според околното
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Γόμα (E): σβήνει το επιλεγμένο επίπεδο · στη φωτογραφία, την κρύβει με μάσκα (τίποτα δεν χάνεται) ¦ Гума (E): изтрива избрания слой; върху снимката я скрива с маска (нищо не се губи)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Διαβάθμιση (G): σύρε για να τη σχεδιάσεις · σε μάσκα, σβήνει σταδιακά το επίπεδο ¦ Преливане (G): плъзни, за да го начертаеш; върху маска плавно стопява слоя
+Déplacer un élément d’un calque (V) ¦ Μετακίνηση στοιχείου ενός επιπέδου (V) ¦ Премести елемент от слой (V)
+Déplacer un élément d’un calque ¦ Μετακίνηση στοιχείου ενός επιπέδου ¦ Премести елемент от слой
+Sélection rectangle (M) ¦ Ορθογώνια επιλογή (M) ¦ Правоъгълна селекция (M)
+Sélection rectangle ¦ Ορθογώνια επιλογή ¦ Правоъгълна селекция
+Sélection ellipse (⇧M) ¦ Ελλειπτική επιλογή (⇧M) ¦ Елиптична селекция (⇧M)
+Sélection ellipse ¦ Ελλειπτική επιλογή ¦ Елиптична селекция
+Lasso : entourer à main levée (L) ¦ Λάσο: περίγραψε με ελεύθερο χέρι (L) ¦ Ласо: огради на ръка (L)
+Lasso : entourer à main levée ¦ Λάσο: περίγραψε με ελεύθερο χέρι ¦ Ласо: огради на ръка
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Πένα: επιλογή σημείο προς σημείο (P) — διπλό κλικ ή Enter για κλείσιμο ¦ Перо: селекция точка по точка (P) — двоен клик или Enter, за да затвориш
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Πένα: επιλογή σημείο προς σημείο — διπλό κλικ ή Enter για κλείσιμο ¦ Перо: селекция точка по точка — двоен клик или Enter, за да затвориш
+Sélection automatique (baguette magique) (W) ¦ Αυτόματη επιλογή (μαγικό ραβδί) (W) ¦ Автоматична селекция (магическа пръчка) (W)
+Sélection automatique (baguette magique) ¦ Αυτόματη επιλογή (μαγικό ραβδί) ¦ Автоматична селекция (магическа пръчка)
+Recadrer et redresser (C) ¦ Περικοπή και ίσιωμα (C) ¦ Изрежи и изправи (C)
+Recadrer et redresser ¦ Περικοπή και ίσιωμα ¦ Изрежи и изправи
+Correcteur de taches (J) ¦ Διόρθωση κηλίδων (J) ¦ Коректор на петна (J)
+Correcteur de taches ¦ Διόρθωση κηλίδων ¦ Коректор на петна
+🩹 Correcteur de taches ¦ 🩹 Διόρθωση κηλίδων ¦ 🩹 Коректор на петна
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Επιδιόρθωση πτυχής ή σκισίματος: ζωγράφισε από πάνω, ξαναγίνεται με βάση τα γύρω ¦ Поправи гънка или скъсване: рисувай отгоре, възстановява се според околното
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Σφραγίδα: ένα σημείο ή μια επιλεγμένη περιοχή (S) ¦ Печат: едно място или избрана област (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Σφραγίδα: ένα σημείο ή μια επιλεγμένη περιοχή ¦ Печат: едно място или избрана област
+Pinceau (B) ¦ Πινέλο (B) ¦ Четка (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Γόμα: σβήνει το επιλεγμένο επίπεδο · στη φωτογραφία, την κρύβει με μάσκα (τίποτα δεν χάνεται) ¦ Гума: изтрива избрания слой; върху снимката я скрива с маска (нищо не се губи)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Σχήματα: ορθογώνιο, έλλειψη, γραμμή, βέλος (U) ¦ Форми: правоъгълник, елипса, линия, стрелка (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Σχήματα: ορθογώνιο, έλλειψη, γραμμή, βέλος ¦ Форми: правоъгълник, елипса, линия, стрелка
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Διαβάθμιση: σύρε για να τη σχεδιάσεις · σε μάσκα, σβήνει σταδιακά το επίπεδο ¦ Преливане: плъзни, за да го начертаеш; върху маска плавно стопява слоя
+Texte (T) ¦ Κείμενο (T) ¦ Текст (T)
+Main, ou barre d’espace (H) ¦ Χέρι, ή πλήκτρο διαστήματος (H) ¦ Ръка или интервал (H)
+Main, ou barre d’espace ¦ Χέρι, ή πλήκτρο διαστήματος ¦ Ръка или интервал
+Zoom (Z) — ⌥ pour reculer ¦ Ζουμ (Z) — ⌥ για σμίκρυνση ¦ Мащаб (Z) — ⌥ за отдалечаване
+Zoom — ⌥ pour reculer ¦ Ζουμ — ⌥ για σμίκρυνση ¦ Мащаб — ⌥ за отдалечаване
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Αποθήκευση έργου (για να συνεχίσεις αργότερα) ¦ 💾 Запази проекта (за да продължиш по-късно)
+📂 Ouvrir un projet… ¦ 📂 Άνοιγμα έργου… ¦ 📂 Отвори проект…
+Enregistrer et afficher cette version ¦ Αποθήκευση και προβολή αυτής της έκδοσης ¦ Запази и покажи тази версия
+Enregistrer sans l’afficher ¦ Αποθήκευση χωρίς προβολή ¦ Запази, без да показваш
+Copie séparée ¦ Ξεχωριστό αντίγραφο ¦ Отделно копие
+ℹ️ Informations… ¦ ℹ️ Πληροφορίες… ¦ ℹ️ Информация…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Εξαγωγή εικόνας (PNG, JPG, εκτύπωση)… ¦ ⤓ Експортирай изображението (PNG, JPG, печат)…
+⤓ Exporter l’avant / après… ¦ ⤓ Εξαγωγή του πριν / μετά… ¦ ⤓ Експортирай преди / след…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Εξαγωγή σε PSD (με τα επίπεδα)… ¦ 🗂 Експортирай в PSD (със слоевете)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Εισαγωγή επιπέδων από PSD… ¦ 🗂 Импортирай слоевете от PSD…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Ενέργειες: αποθηκευμένες ρυθμίσεις, για επανάληψη σε πολλές φωτογραφίες… ¦ ⚡ Действия: запазени настройки за повтаряне върху няколко снимки…
+⚡ Passer à la retouche rapide ¦ ⚡ Μετάβαση στο γρήγορο ρετούς ¦ ⚡ Към бързия ретуш
+🕘 Historique ¦ 🕘 Ιστορικό ¦ 🕘 История
+🎚 Réglages, niveaux et courbe ¦ 🎚 Ρυθμίσεις, επίπεδα φωτεινότητας και καμπύλη ¦ 🎚 Настройки, нива и крива
+🎨 Teinte/Saturation… ¦ 🎨 Απόχρωση/Κορεσμός… ¦ 🎨 Нюанс/Наситеност…
+⌗ Recadrer et redresser ¦ ⌗ Περικοπή και ίσιωμα ¦ ⌗ Изрежи и изправи
+📐 Redresser automatiquement ¦ 📐 Αυτόματο ίσιωμα ¦ 📐 Изправи автоматично
+Annuler le recadrage ¦ Ακύρωση περικοπής ¦ Отмени изрязването
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Διόρθωση προοπτικής (φωτογραφία από πλάγια)… ¦ ⧈ Изправи перспективата (снимка под ъгъл)…
+Enlever la perspective ¦ Αφαίρεση προοπτικής ¦ Премахни перспективата
+📏 Taille de l’image… ¦ 📏 Μέγεθος εικόνας… ¦ 📏 Размер на изображението…
+⬚ Taille de la zone de travail… ¦ ⬚ Μέγεθος περιοχής εργασίας… ¦ ⬚ Размер на работната област…
+🔄 Rotation de l’image ¦ 🔄 Περιστροφή εικόνας ¦ 🔄 Завъртане на изображението
+↻ 90° horaire ¦ ↻ 90° δεξιόστροφα ¦ ↻ 90° по часовниковата стрелка
+↺ 90° antihoraire ¦ ↺ 90° αριστερόστροφα ¦ ↺ 90° обратно на часовниковата стрелка
+Angle… ¦ Γωνία… ¦ Ъгъл…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Ίσιωμα ορίζοντα (σχεδίασε μια γραμμή)… ¦ 📐 Изправи хоризонта (начертай линия)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Οριζόντιος κατοπτρισμός εικόνας ¦ ⇆ Хоризонтално огледално обръщане
+⇅ Symétrie verticale de l’image ¦ ⇅ Κατακόρυφος κατοπτρισμός εικόνας ¦ ⇅ Вертикално огледално обръщане
+✨ Restaurer en une fois… ¦ ✨ Αποκατάσταση με μια κίνηση… ¦ ✨ Възстанови наведнъж…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Αποκατάσταση παλιάς φωτογραφίας (βήμα βήμα) ¦ 🧭 Възстанови стара снимка (стъпка по стъпка)
+🔍 Repérer les plis et rayures… ¦ 🔍 Εντοπισμός πτυχών και γρατζουνιών… ¦ 🔍 Открий гънките и драскотините…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Επιδιόρθωση με πινέλο (πτυχές, σκισίματα) ¦ 🪡 Поправи с четка (гънки, скъсвания)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Σκόνη και γρατζουνιές (Φίλτρα) ¦ 🧹 Прах и драскотини (Филтри)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Αφαίρεση αντανακλάσεων (τζάμι): ξεχωριστό επίπεδο ¦ 🪟 Премахни отблясъците (стъкло): отделен слой
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Χρωματισμός: επίπεδο ρύθμισης (διαβάθμιση) ¦ 🎨 Оцветяване: коригиращ слой (преливане)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Χρωματισμός με πινέλο: επίπεδο «Χρώμα» ¦ 🖌 Оцветяване с четка: слой „Цвят“
+🪪 Recadrer en photo d’identité… ¦ 🪪 Περικοπή σε φωτογραφία ταυτότητας… ¦ 🪪 Изрежи като снимка за документи…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Πορτρέτα για πολλές καρτέλες… ¦ 🪪 Портрети за няколко картона…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Ρευστότητα (παραμόρφωση με πινέλο)… ¦ 💧 Втечняване (деформиране с четка)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Μαγική γόμα (μονόχρωμο φόντο → διάφανο)… ¦ 🪄 Магическа гума (едноцветен фон → прозрачен)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Βελτίωση άκρης μάσκας (μαλλιά, περιγράμματα)… ¦ ✨ Прецизирай ръба на маската (коса, контури)…
+☁️ Remplacer le ciel… ¦ ☁️ Αντικατάσταση ουρανού… ¦ ☁️ Смени небето…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Απομόνωση ατόμου (διάφανο, θολό, μονόχρωμο φόντο)… ¦ ✂️ Изрежи човек (прозрачен, размит, едноцветен фон)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Μεγέθυνση ×2 / ×4… ¦ 🔍 Увеличи ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Πανόραμα: ένωση με άλλες φωτογραφίες… ¦ 🧩 Панорама: съедини с други снимки…
+Calque ¦ Επίπεδο ¦ Слой
+＋ Nouveau calque ¦ ＋ Νέο επίπεδο ¦ ＋ Нов слой
+📁 Nouveau groupe ¦ 📁 Νέα ομάδα ¦ 📁 Нова група
+Grouper le calque choisi ¦ Ομαδοποίηση του επιλεγμένου επιπέδου ¦ Групирай избрания слой
+🎚 Nouveau calque de réglage ¦ 🎚 Νέο επίπεδο ρύθμισης ¦ 🎚 Нов коригиращ слой
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Νέα ρύθμιση Απόχρωσης/Κορεσμού ¦ 🎨 Нова настройка Нюанс/Наситеност
+Nouveau réglage Teinte/Saturation ¦ Νέα ρύθμιση Απόχρωσης/Κορεσμού ¦ Нова настройка Нюанс/Наситеност
+🖼️ Placer une image… ¦ 🖼️ Τοποθέτηση εικόνας… ¦ 🖼️ Постави изображение…
+▦ Nouveau calque de dégradé… ¦ ▦ Νέο επίπεδο διαβάθμισης… ¦ ▦ Нов слой с преливане…
+▩ Nouveau calque de motif… ¦ ▩ Νέο επίπεδο μοτίβου… ¦ ▩ Нов слой с мотив…
+▩ Créer un motif… ¦ ▩ Δημιουργία μοτίβου… ¦ ▩ Създай мотив…
+▩ Créer un motif ¦ ▩ Δημιουργία μοτίβου ¦ ▩ Създай мотив
+＋ Créer un motif… ¦ ＋ Δημιουργία μοτίβου… ¦ ＋ Създай мотив…
+Copier la sélection sur un calque ¦ Αντιγραφή της επιλογής σε επίπεδο ¦ Копирай селекцията в слой
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Προσθήκη μάσκας στο επιλεγμένο επίπεδο ¦ 🎭 Добави маска към избрания слой
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Μάσκα που κρύβει τα πάντα (⌥ + κλικ στο 🎭) ¦ 🎭 Маска, която скрива всичко (⌥ + клик върху 🎭)
+Masque d’après la sélection ¦ Μάσκα από την επιλογή ¦ Маска от селекцията
+Masque qui cache la sélection ¦ Μάσκα που κρύβει την επιλογή ¦ Маска, която скрива селекцията
+Inverser le masque ¦ Αντιστροφή μάσκας ¦ Обърни маската
+Retirer le masque ¦ Αφαίρεση μάσκας ¦ Премахни маската
+inverser le masque ¦ αντιστροφή μάσκας ¦ обърни маската
+retirer le masque ¦ αφαίρεση μάσκας ¦ премахни маската
+🗂 Calques ¦ 🗂 Επίπεδα ¦ 🗂 Слоеве
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Επιλογή του θέματος (αυτόματα) ¦ 🎯 Избери обекта (автоматично)
+✂️ Détourer une personne… ¦ ✂️ Απομόνωση ατόμου… ¦ ✂️ Изрежи човек…
+Désélectionner ¦ Αποεπιλογή ¦ Махни селекцията
+Inverser ¦ Αντιστροφή ¦ Обърни
+Contour progressif… ¦ Ομαλό περίγραμμα… ¦ Плавен ръб…
+Contour progressif ¦ Ομαλό περίγραμμα ¦ Плавен ръб
+Agrandir… ¦ Επέκταση… ¦ Разшири…
+Réduire… ¦ Σμίκρυνση… ¦ Свий…
+Remplir avec la couleur ¦ Γέμισμα με το χρώμα ¦ Запълни с цвета
+Effacer (transparent) ¦ Σβήσιμο (διάφανο) ¦ Изтрий (прозрачно)
+Recadrer sur la sélection ¦ Περικοπή στην επιλογή ¦ Изрежи по селекцията
+Filtre ¦ Φίλτρο ¦ Филтър
+↻ Refaire le dernier filtre ¦ ↻ Επανάληψη τελευταίου φίλτρου ¦ ↻ Повтори последния филтър
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Γρήγορα φίλτρα και φίλτρα του επιπέδου (πίνακας) ¦ ✨ Бързи филтри и филтри на слоя (панел)
+Enlever les filtres rapides ¦ Αφαίρεση γρήγορων φίλτρων ¦ Премахни бързите филтри
+Replier / ouvrir le panneau de droite ¦ Δίπλωμα / άνοιγμα του δεξιού πίνακα ¦ Свий / отвори десния панел
+◧ Avant / après en rideau ¦ ◧ Πριν / μετά σε αυλαία ¦ ◧ Преди / след със завеса
+Toute l’image ¦ Όλη η εικόνα ¦ Цялото изображение
+Nom du projet de retouche ¦ Όνομα του έργου ρετούς ¦ Име на проекта за ретуш
+Le nom du projet de retouche (tape pour le changer) ¦ Το όνομα του έργου ρετούς (πληκτρολόγησε για να το αλλάξεις) ¦ Името на проекта за ретуш (пиши, за да го смениш)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Μετάβαση στο γρήγορο ρετούς (αυτό της έκδοσης 0.5.0): ρυθμίσεις, καμπύλη, κηλίδες, σφραγίδα — λιγότερα κουμπιά ¦ Към бързия ретуш (този от версия 0.5.0): настройки, крива, петна, печат — по-малко бутони
+⚡ Rapide ¦ ⚡ Γρήγορο ¦ ⚡ Бързо
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Εξαγωγή: η ρετουσαρισμένη εικόνα (PNG, JPG, εκτύπωση) ή το πριν / μετά ¦ Експортиране: ретушираното изображение (PNG, JPG, печат) или преди / след
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Αποθήκευση έργου: όλη η δουλειά (επίπεδα, μάσκες, ρυθμίσεις…) για να το ξανανοίξεις και να συνεχίσεις ¦ Запази проекта: цялата работа (слоеве, маски, настройки…), за да го отвориш отново и да продължиш
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Η ρετουσαρισμένη εικόνα (PNG, JPG, εκτύπωση)… ¦ 🖼 Ретушираното изображение (PNG, JPG, печат)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Πριν / μετά (δίπλα δίπλα ή αυλαία)… ¦ ◧ Преди / след (едно до друго или завеса)…
+Dureté ¦ Σκληρότητα ¦ Твърдост
+Sorte de pinceau ¦ Είδος πινέλου ¦ Вид четка
+Couleurs rapides ¦ Γρήγορα χρώματα ¦ Бързи цветове
+contour ¦ περίγραμμα ¦ контур
+Contour du texte ¦ Περίγραμμα κειμένου ¦ Контур на текста
+Couleur du contour ¦ Χρώμα περιγράμματος ¦ Цвят на контура
+Épaisseur du contour ¦ Πάχος περιγράμματος ¦ Дебелина на контура
+épaisseur ¦ πάχος ¦ дебелина
+ombre ¦ σκιά ¦ сянка
+Ombre du texte ¦ Σκιά κειμένου ¦ Сянка на текста
+Couleur de l’ombre ¦ Χρώμα σκιάς ¦ Цвят на сянката
+Tampon : endroit à recopier, aligné ¦ Σφραγίδα: σημείο προς αντιγραφή, ευθυγραμμισμένο ¦ Печат: място за копиране, подравнено
+🎯 Choisir l’endroit à recopier ¦ 🎯 Διάλεξε το σημείο προς αντιγραφή ¦ 🎯 Избери мястото за копиране
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Τσεκαρισμένο: το σημείο αντιγραφής ακολουθεί το πινέλο από τη μια πινελιά στην άλλη. Ξετσεκαρισμένο: κάθε πινελιά ξεκινά από το ίδιο σημείο. ¦ Отметнато: копираното място следва четката от щрих на щрих. Без отметка: всеки щрих започва от същото място.
+aligné ¦ ευθυγραμμισμένο ¦ подравнено
+Réparer : grain, repérer les plis ¦ Επιδιόρθωση: κόκκος, εντοπισμός πτυχών ¦ Поправка: зърно, откриване на гънки
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Τσεκαρισμένο: λίγος από τον κόκκο της φωτογραφίας γύρω ξαναμπαίνει στην επιδιορθωμένη περιοχή, για να μη φαίνεται πολύ λεία. ¦ Отметнато: малко от зърното на снимката наоколо се връща в поправената област, за да не изглежда прекалено гладка.
+garder le grain ¦ διατήρηση κόκκου ¦ запази зърното
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Βρες αυτόματα τις λεπτές γραμμές (πτυχές, γρατζουνιές) και πρότεινε να γεμίσουν ¦ Открий автоматично тънките линии (гънки, драскотини) и предложи да се запълнят
+🔍 Repérer les plis ¦ 🔍 Εντοπισμός πτυχών ¦ 🔍 Открий гънките
+Texte gras ¦ Έντονο κείμενο ¦ Получер текст
+Texte italique ¦ Πλάγιο κείμενο ¦ Курсив
+Forme (rectangle, ellipse, flèche…) ¦ Σχήμα (ορθογώνιο, έλλειψη, βέλος…) ¦ Форма (правоъгълник, елипса, стрелка…)
+Rectangle arrondi ¦ Στρογγυλεμένο ορθογώνιο ¦ Заоблен правоъгълник
+Forme remplie ¦ Γεμάτο σχήμα ¦ Запълнена форма
+remplie ¦ γεμάτο ¦ запълнена
+Couleur de fond des formes ¦ Χρώμα γεμίσματος σχημάτων ¦ Цвят на запълване на формите
+Baguette : tolérance ¦ Ραβδί: ανοχή ¦ Пръчка: толеранс
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Πόσο μπορεί ένα χρώμα να απέχει από αυτό που πάτησες για να επιλεγεί: μικρή = μόνο η ίδια απόχρωση, μεγάλη = και γειτονικές αποχρώσεις. ¦ Колко може един цвят да се отличава от щракнатия, за да бъде избран: малко = само същият нюанс, голямо = и съседни нюанси.
+Tolérance ¦ Ανοχή ¦ Толеранс
+Baguette : contiguë ¦ Ραβδί: συνεχόμενη ¦ Пръчка: съседни
+contiguë ¦ συνεχόμενη ¦ съседни
+Sélectionner le sujet ¦ Επιλογή του θέματος ¦ Избери обекта
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Το φόντο αναγνωρίζεται στις άκρες της φωτογραφίας · η ανοχή ρυθμίζει πόσο απλώνεται ¦ Фонът се разпознава по краищата на снимката; толерансът определя докъде стига
+🎯 Sujet ¦ 🎯 Θέμα ¦ 🎯 Обект
+Actions de la sélection ¦ Ενέργειες επιλογής ¦ Действия със селекцията
+⇧ ajouter · ⌥ enlever ¦ ⇧ προσθήκη · ⌥ αφαίρεση ¦ ⇧ добави · ⌥ извади
+→ Calque ¦ → Επίπεδο ¦ → Слой
+Remplir ¦ Γέμισμα ¦ Запълни
+Effacer ¦ Σβήσιμο ¦ Изтрий
+Masque ¦ Μάσκα ¦ Маска
+Recadrer ¦ Περικοπή ¦ Изрежи
+Recadrage : proportions, redresser ¦ Περικοπή: αναλογίες, ίσιωμα ¦ Изрязване: пропорции, изправяне
+Proportions ¦ Αναλογίες ¦ Пропорции
+Libres ¦ Ελεύθερες ¦ Свободни
+Celles de la photo ¦ Της φωτογραφίας ¦ На снимката
+Carré 1:1 ¦ Τετράγωνο 1:1 ¦ Квадрат 1:1
+A4 portrait ¦ A4 κατακόρυφο ¦ A4 портрет
+Redresser ¦ Ίσιωμα ¦ Изправи
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Βρίσκει τη γωνία των μεγάλων γραμμών (ορίζοντας, τοίχοι, κάδρα) ¦ Намира ъгъла на големите линии (хоризонт, стени, рамки)
+📐 Auto ¦ 📐 Αυτόματα ¦ 📐 Авто
+✓ Valider ¦ ✓ Επικύρωση ¦ ✓ Потвърди
+Perspective ¦ Προοπτική ¦ Перспектива
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Βάλε τις 4 γωνίες στις γωνίες αυτού που πρέπει να γίνει ορθογώνιο (η φωτογραφία, το έγγραφο, η πρόσοψη). ¦ Постави 4-те ъгъла върху ъглите на това, което трябва да стане правоъгълно (снимката, документа, фасадата).
+Coins aux bords ¦ Γωνίες στις άκρες ¦ Ъгли в краищата
+Dégradé : couleurs, forme, options ¦ Διαβάθμιση: χρώματα, σχήμα, επιλογές ¦ Преливане: цветове, форма, опции
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Επεξεργασία διαβάθμισης: χρώματα, διαφάνεια, προρυθμίσεις ¦ Редактирай преливането: цветове, прозрачност, готови настройки
+Forme du dégradé ¦ Σχήμα διαβάθμισης ¦ Форма на преливането
+Inverser le dégradé ¦ Αντιστροφή διαβάθμισης ¦ Обърни преливането
+inverser ¦ αντιστροφή ¦ обърни
+Tramage ¦ Πρόσμιξη (dithering) ¦ Дитеринг
+tramage ¦ πρόσμιξη ¦ дитеринг
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Ένας πολύ ελαφρύς κόκκος που αποφεύγει τα ορατά «σκαλοπάτια» στις απαλές διαβαθμίσεις. ¦ Много леко зърно, което избягва видимите „стъпала“ в меките преливания.
+Masque : cacher / montrer ¦ Μάσκα: απόκρυψη / εμφάνιση ¦ Маска: скрий / покажи
+⬛ cacher ¦ ⬛ απόκρυψη ¦ ⬛ скрий
+⬜ montrer ¦ ⬜ εμφάνιση ¦ ⬜ покажи
+Aide de l’outil ¦ Βοήθεια εργαλείου ¦ Помощ за инструмента
+Couleurs (premier plan et arrière-plan) ¦ Χρώματα (προσκήνιο και φόντο) ¦ Цветове (преден план и фон)
+Noir et blanc (D) ¦ Ασπρόμαυρο (D) ¦ Черно и бяло (D)
+Couleurs par défaut : noir et blanc ¦ Προεπιλεγμένα χρώματα: μαύρο και λευκό ¦ Цветове по подразбиране: черно и бяло
+Intervertir les deux couleurs (X) ¦ Εναλλαγή των δύο χρωμάτων (X) ¦ Размени двата цвята (X)
+Intervertir les couleurs ¦ Εναλλαγή χρωμάτων ¦ Размени цветовете
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Χρώμα φόντου (γέμισμα σχημάτων): κλικ για αλλαγή ¦ Цвят на фона (запълване на формите): клик, за да го смениш
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Χρώμα προσκηνίου (πινέλο, κείμενο, σχήματα): κλικ για αλλαγή ¦ Цвят на преден план (четка, текст, форми): клик, за да го смениш
+Replier le panneau (plus de place pour la photo) — Tab ¦ Δίπλωμα πίνακα (περισσότερος χώρος για τη φωτογραφία) — Tab ¦ Свий панела (повече място за снимката) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Σύρε για να φαρδύνεις ή να στενέψεις τον πίνακα (διπλό κλικ: αρχικό μέγεθος) ¦ Плъзни, за да разшириш или стесниш панела (двоен клик: начален размер)
+Onglets du panneau de droite ¦ Καρτέλες του δεξιού πίνακα ¦ Раздели на десния панел
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Ιδιότητες: Απόχρωση/Κορεσμός, μάσκα, θέση και μέγεθος του επιλεγμένου επιπέδου ¦ Свойства: Нюанс/Наситеност, маска, позиция и размер на избрания слой
+ⓘ Propriétés ¦ ⓘ Ιδιότητες ¦ ⓘ Свойства
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Χαρακτήρας: γραμματοσειρά, παραλλαγή (πάχος), μέγεθος, διάστιχο, διάστημα χαρακτήρων… ¦ Символ: шрифт, вариант (плътност), размер, междуредие, разредка…
+🔤 Caractère ¦ 🔤 Χαρακτήρας ¦ 🔤 Символ
+Motifs : remplir d’un motif, créer les siens ¦ Μοτίβα: γέμισμα με μοτίβο, δημιουργία δικών σου ¦ Мотиви: запълни с мотив, създай свои
+▩ Motifs ¦ ▩ Μοτίβα ¦ ▩ Мотиви
+Motifs ¦ Μοτίβα ¦ Мотиви
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Σχήματα πινέλου: προρυθμίσεις, βήμα, γωνία, διασπορά, σχήμα από επιλογή ¦ Форми на четката: готови настройки, стъпка, ъгъл, разпръскване, форма от селекция
+🖌 Formes ¦ 🖌 Σχήματα ¦ 🖌 Форми
+Restaurer une vieille photo, pas à pas ¦ Αποκατάσταση παλιάς φωτογραφίας, βήμα βήμα ¦ Възстанови стара снимка стъпка по стъпка
+🧭 Restaurer ¦ 🧭 Αποκατάσταση ¦ 🧭 Възстанови
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Όπως ο κορεσμός, αλλά τα ήδη ζωηρά χρώματα αλλάζουν λίγο: οι θαμπές αποχρώσεις (δέρμα, χλωμός ουρανός) ζωντανεύουν πρώτες. ¦ Като наситеността, но вече ярките цветове се променят малко: бледите нюанси (кожа, бледо небе) се съживяват първи.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Φωτίζει ή σκουραίνει τους μεσαίους τόνους χωρίς να αγγίζει το μαύρο ή το λευκό: πάνω από 100, πιο ανοιχτό · κάτω, πιο σκούρο. ¦ Изсветлява или затъмнява средните тонове, без да пипа черното и бялото: над 100 — по-светло; под — по-тъмно.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Κλικ στην καμπύλη: προσθήκη σημείου · σύρσιμο: μετακίνηση · για αφαίρεση: διάλεξέ το και μετά «Αφαίρεση σημείου» (ή ⌫), ή σύρε το έξω από το πλαίσιο. ¦ Клик върху кривата: добавя точка · плъзгане: мести я · за да я махнеш: избери я, после „Махни точката“ (или ⌫), или я плъзни извън рамката.
+Enlever le point ¦ Αφαίρεση σημείου ¦ Махни точката
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Απαλός χρωματισμός (ασπρόμαυρη φωτογραφία) ¦ 🎨 Меко оцветяване (черно-бяла снимка)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Καλύτερα σε επίπεδο ρύθμισης (Εικόνα → Χρωματισμός): το δοσολογείς, το καλύπτεις με μάσκα, το αφαιρείς. Για χρωματισμό με το χέρι: Εικόνα → Χρωματισμός με πινέλο. ¦ По-добре в коригиращ слой (Изображение → Оцвети): дозираш го, маскираш го, махаш го. За оцветяване на ръка: Изображение → Оцвети с четка.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Γρήγορα φίλτρα, μετά τις ρυθμίσεις: στη φωτογραφία ή σε επίπεδο ρύθμισης (σε ό,τι είναι από κάτω ή μόνο στο επίπεδο ακριβώς από κάτω). Τα ίδια εφαρμόζονται στην αποθηκευμένη εικόνα σε πλήρες μέγεθος. ¦ Бързи филтри след настройките: върху снимката или в коригиращ слой (върху всичко отдолу или само върху слоя точно отдолу). Същите се прилагат и към запазеното изображение в пълен размер.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Ενισχύει την αντίθεση των μεσαίων λεπτομερειών (ρυτίδες, πτυχές υφάσματος, γραφή) χωρίς να αλλάζει τη γενική αντίθεση. ¦ Засилва контраста на средните детайли (бръчки, гънки на плат, почерк), без да променя общия контраст.
+Enlever les filtres ¦ Αφαίρεση φίλτρων ¦ Премахни филтрите
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Παραλλαγή: το πάχος (Light, Regular, Bold, Black…) και τα πλάγια ¦ Вариант: плътността (Light, Regular, Bold, Black…) и курсивът
+Taille (en points de l’image) ¦ Μέγεθος (σε σημεία της εικόνας) ¦ Размер (в точки на изображението)
+Interligne (vide = automatique, 120 % de la taille) ¦ Διάστιχο (κενό = αυτόματο, 120 % του μεγέθους) ¦ Междуредие (празно = автоматично, 120 % от размера)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Kerning: τα ζεύγη γραμμάτων πλησιάζουν ανάλογα με τη γραμματοσειρά (Μετρικό) ή καθόλου (0) ¦ Кернинг: двойките букви се сближават според шрифта (Метричен) или изобщо не (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Διάστημα χαρακτήρων: το κενό ανάμεσα σε όλα τα γράμματα, σε χιλιοστά του μεγέθους ¦ Разредка: разстоянието между всички букви, в хилядни от размера
+Échelle verticale ¦ Κατακόρυφη κλίμακα ¦ Вертикален мащаб
+Échelle horizontale ¦ Οριζόντια κλίμακα ¦ Хоризонтален мащаб
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Κατακόρυφη μετατόπιση (πάνω από τη γραμμή βάσης αν είναι θετική) ¦ Вертикално отместване (над базовата линия, ако е положително)
+Lissage des bords des lettres ¦ Εξομάλυνση άκρων των γραμμάτων ¦ Изглаждане на ръбовете на буквите
+Lissage ¦ Εξομάλυνση ¦ Изглаждане
+Lissé ¦ Εξομαλυσμένο ¦ Изгладено
+Aucun (bords nets, pixels) ¦ Καμία (καθαρές άκρες, pixel) ¦ Без (остри ръбове, пиксели)
+Alignement du paragraphe ¦ Στοίχιση παραγράφου ¦ Подравняване на абзаца
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Για τα επόμενα κείμενα. Διάλεξε ένα κείμενο με ➤ για να το αλλάξεις. ¦ За следващите текстове. Избери текст с ➤, за да го промениш.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Για τα επόμενα κείμενα. Κάνε κλικ σε ένα κείμενο (εργαλείο Κείμενο ή ➤) για να το αλλάξεις. ¦ За следващите текстове. Щракни върху текст (инструмент Текст или ➤), за да го промениш.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Κείμενο που γράφεται τώρα: κάθε ρύθμιση εφαρμόζεται αμέσως. ¦ ✍️ Текст, който се пише в момента: всяка настройка се прилага веднага.
+Métrique ¦ Μετρικό ¦ Метричен
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Οι παραλλαγές προέρχονται από τις γραμματοσειρές του υπολογιστή (Mac, Windows, Linux) όταν η εφαρμογή μπορεί να τις διαβάσει · αλλιώς τα συνηθισμένα πάχη. ¦ Вариантите идват от шрифтовете на компютъра (Mac, Windows, Linux), когато приложението може да ги прочете; иначе обичайните плътности.
+Retrait de la première ligne (négatif : en saillie) ¦ Εσοχή πρώτης γραμμής (αρνητική: προεξοχή) ¦ Отстъп на първия ред (отрицателен: издаден)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Πλάτος του πλαισίου κειμένου: οι γραμμές κόβονται αυτόματα (κενό = απλό κείμενο, μία γραμμή ανά παράγραφο) ¦ Ширина на текстовото поле: редовете се пренасят сами (празно = обикновен текст, един ред на абзац)
+Espace avant chaque paragraphe ¦ Διάστημα πριν από κάθε παράγραφο ¦ Разстояние преди всеки абзац
+Espace après chaque paragraphe ¦ Διάστημα μετά από κάθε παράγραφο ¦ Разстояние след всеки абзац
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Συλλαβισμός μεγάλων λέξεων στο τέλος της γραμμής, με παύλα (απλοί κανόνες της γαλλικής · μια παύλα υπό όρους ⌥- μέσα σε λέξη έχει προτεραιότητα) ¦ Пренасяй дългите думи в края на реда с тире (прости правила на френския; условно тире ⌥- в дума има предимство)
+Ω Glyphes ¦ Ω Χαρακτήρες (glyphs) ¦ Ω Глифове
+Police (famille) ¦ Γραμματοσειρά (οικογένεια) ¦ Шрифт (семейство)
+(Auto) ¦ (Αυτόματο) ¦ (Авто)
+⟸ gauche ¦ ⟸ αριστερά ¦ ⟸ ляво
+≡ centre ¦ ≡ κέντρο ¦ ≡ център
+droite ⟹ ¦ δεξιά ⟹ ¦ дясно ⟹
+Symboles ¦ Σύμβολα ¦ Символи
+Code (U+00E9) ou caractère ¦ Κωδικός (U+00E9) ή χαρακτήρας ¦ Код (U+00E9) или символ
+Chercher un glyphe ¦ Αναζήτηση χαρακτήρα ¦ Търси глиф
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Για πλαίσιο κειμένου, σύρε ένα πλαίσιο με το εργαλείο Κείμενο T αντί για κλικ, ή δώσε το πλάτος του εδώ. Η πλήρης στοίχιση ισχύει μόνο για πλαίσιο. ¦ За текстово поле плъзни рамка с инструмента Текст T, вместо да щракаш, или задай ширината му тук. Двустранното подравняване важи само за поле.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Κλικ: προστίθεται στο κείμενο που γράφεται (ή στο τέλος του επιλεγμένου κειμένου). Χωρίς κείμενο: αντιγράφεται. ¦ Клик: добавя се към текста, който се пише (или в края на избрания текст). Без текст: копира се.
+Choisis d’abord un texte (outil T). ¦ Διάλεξε πρώτα ένα κείμενο (εργαλείο T). ¦ Първо избери текст (инструмент T).
+Un autre média, rattaché aux mêmes fiches ¦ Ένα άλλο πολυμέσο, συνδεδεμένο με τις ίδιες καρτέλες ¦ Друга медия, свързана със същите картони
+Gardée dans les versions, la photo affichée ne change pas ¦ Κρατιέται στις εκδόσεις, η φωτογραφία που εμφανίζεται δεν αλλάζει ¦ Запазена във версиите, показаната снимка не се променя
+avec les annotations (calques visibles) ¦ με τις σημειώσεις (ορατά επίπεδα) ¦ с анотациите (видимите слоеве)
+Avec les annotations (calques visibles) ¦ Με τις σημειώσεις (ορατά επίπεδα) ¦ С анотациите (видимите слоеве)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Το πρωτότυπο δεν αλλάζει ποτέ: κάθε ρετούς είναι μια έκδοση της φωτογραφίας και διαλέγεις ποια εμφανίζεται παντού. ¦ Оригиналът никога не се променя: всеки ретуш е версия на снимката и ти избираш коя се показва навсякъде.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Αποθήκευση εικόνας στα Πολυμέσα ¦ 🖼 Запази изображението в Медии
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Η εικόνα (μαζί με τα επίπεδα) αντικαθιστά αυτή του πολυμέσου · το έργο κρατά όλα τα επίπεδα για να συνεχίσεις ¦ Изображението (със слоевете) заменя това на медията; проектът пази всички слоеве, за да продължиш
+Enregistrer le projet (calques, masques, réglages) ¦ Αποθήκευση έργου (επίπεδα, μάσκες, ρυθμίσεις) ¦ Запази проекта (слоеве, маски, настройки)
+la retouche est fermée ¦ το ρετούς έκλεισε ¦ ретушът е затворен
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Κάνε κλικ σε ένα βήμα για να γυρίσεις σε εκείνη τη στιγμή · τα επόμενα βήματα μένουν (σε γκρι) όσο δεν κάνεις κάτι άλλο. ¦ Щракни върху стъпка, за да се върнеш към онзи момент; следващите стъпки остават (в сиво), докато не направиш нещо друго.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Ζωγραφίζεις τη μάσκα (πινέλο: ⬛ απόκρυψη / ⬜ εμφάνιση). Κλικ: επιστροφή στο επίπεδο ¦ Рисуваш маската (четка: ⬛ скрий / ⬜ покажи). Клик: връщане към слоя
+Masque : clic pour le peindre au pinceau ¦ Μάσκα: κλικ για να τη ζωγραφίσεις με πινέλο ¦ Маска: клик, за да я рисуваш с четка
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + κλικ: απενεργοποίηση / επανενεργοποίηση μάσκας ¦ ⇧ Shift + клик: изключи / включи отново маската
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + κλικ: προβολή μόνο της μάσκας ¦ ⌥ Alt + клик: виж само маската
+touche \ : le masque en rouge par-dessus ¦ πλήκτρο \: η μάσκα με κόκκινο από πάνω ¦ клавиш \: маската в червено отгоре
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Προσθήκη μάσκας (κρύψε ένα μέρος χωρίς να το σβήσεις) — ⌥ / Alt + κλικ: μάσκα που κρύβει τα πάντα (ή κρύβει την επιλογή) ¦ Добави маска (скрий част, без да я изтриваш) — ⌥ / Alt + клик: маска, която скрива всичко (или скрива селекцията)
+masque ¦ μάσκα ¦ маска
+Ranger dans un groupe ¦ Βάλε σε ομάδα ¦ Сложи в група
+(hors groupe) ¦ (εκτός ομάδας) ¦ (извън група)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Σύρε για τακτοποίηση: πάνω, κάτω ή μέσα σε ομάδα (άφησέ το στη μέση μιας ομάδας) ¦ Плъзни, за да подредиш: отгоре, отдолу или в група (пусни в средата на група)
+Calque de réglage ¦ Επίπεδο ρύθμισης ¦ Коригиращ слой
+La photo (réglages, taches, tampon) ¦ Η φωτογραφία (ρυθμίσεις, κηλίδες, σφραγίδα) ¦ Снимката (настройки, петна, печат)
+Supprimer le groupe (ce qu’il contient reste) ¦ Διαγραφή ομάδας (το περιεχόμενό της μένει) ¦ Изтрий групата (съдържанието ѝ остава)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Αφαίρεση της φωτογραφίας από τα επίπεδα (⌘Z για να μπει ξανά) ¦ Махни снимката от слоевете (⌘Z, за да я върнеш)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Λειτουργία ανάμειξης: πώς το επίπεδο αναμειγνύεται με ό,τι είναι από κάτω ¦ Режим на смесване: как слоят се смесва с това отдолу
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Γέμισμα: δοσολογεί μόνο το περιεχόμενο του επιπέδου, όχι τα εφέ του (σκιά, λάμψη, περίγραμμα). Στο 0 %, μένουν μόνο τα εφέ. ¦ Запълване: дозира само съдържанието на слоя, не ефектите му (сянка, сияние, контур). При 0 % остават само ефектите.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Εφέ επιπέδου: σκιά, εξωτερική λάμψη, περίγραμμα, επικάλυψη χρώματος ¦ Ефекти на слоя: падаща сянка, външно сияние, контур, наслагване на цвят
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Έξυπνο αντικείμενο: μεγέθυνση, σμίκρυνση, περιστροφή χωρίς απώλειες (η αρχική εικόνα κρατιέται) ¦ Смарт обект: увеличавай, намалявай, завъртай без загуба (оригиналното изображение се пази)
+🧩 Objet dynamique ¦ 🧩 Έξυπνο αντικείμενο ¦ 🧩 Смарт обект
+Une autre image à la même place, même taille, même rotation ¦ Μια άλλη εικόνα στην ίδια θέση, ίδιο μέγεθος, ίδια περιστροφή ¦ Друго изображение на същото място, същия размер, същото завъртане
+Remplacer… ¦ Αντικατάσταση… ¦ Замени…
+Remettre l’image à sa taille d’origine (et droite) ¦ Επαναφορά εικόνας στο αρχικό της μέγεθος (και ίσια) ¦ Върни изображението в оригиналния му размер (и изправено)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Ένα επίπεδο φίλτρων ακριβώς από πάνω, που επηρεάζει μόνο αυτή την εικόνα: μπορείς να το ρυθμίσεις, να το δοσολογήσεις, να το κρύψεις ¦ Слой с филтри точно отгоре, който засяга само това изображение: можеш да го настроиш, дозираш, скриеш
+✨ Filtre dynamique ¦ ✨ Έξυπνο φίλτρο ¦ ✨ Смарт филтър
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Πάγωμα της εικόνας σε pixel, στο μέγεθος που έχει (όχι πια μεγέθυνση χωρίς απώλειες) ¦ Фиксирай изображението в пиксели в сегашния размер (без повече увеличаване без загуба)
+Pixelliser ¦ Μετατροπή σε pixel ¦ Растеризирай
+Couleurs, transparence, forme, préréglages ¦ Χρώματα, διαφάνεια, σχήμα, προρυθμίσεις ¦ Цветове, прозрачност, форма, готови настройки
+▦ Modifier le dégradé… ¦ ▦ Επεξεργασία διαβάθμισης… ¦ ▦ Редактирай преливането…
+Motif, échelle, angle, décalage ¦ Μοτίβο, κλίμακα, γωνία, μετατόπιση ¦ Мотив, мащаб, ъгъл, отместване
+▩ Modifier le motif… ¦ ▩ Επεξεργασία μοτίβου… ¦ ▩ Редактирай мотива…
+Comme un masque d’écrêtage de Photoshop ¦ Όπως μια μάσκα αποκοπής του Photoshop ¦ Като изрязваща маска във Photoshop
+régler… ¦ ρύθμιση… ¦ настрой…
+ne touche que l’élément juste dessous ¦ επηρεάζει μόνο το στοιχείο ακριβώς από κάτω ¦ засяга само елемента точно отдолу
+touche tout ce qui est dessous ¦ επηρεάζει ό,τι είναι από κάτω ¦ засяга всичко отдолу
+(seulement l’élément dessous) ¦ (μόνο το στοιχείο από κάτω) ¦ (само елемента отдолу)
+(tout ce qui est dessous) ¦ (ό,τι είναι από κάτω) ¦ (всичко отдолу)
+régler la photo ¦ ρύθμιση φωτογραφίας ¦ настрой снимката
+＋ dans un calque de réglage ¦ ＋ σε επίπεδο ρύθμισης ¦ ＋ в коригиращ слой
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Ρυθμίσεις και φίλτρα σε ξεχωριστό επίπεδο, που μπορείς να καλύψεις με μάσκα, να δοσολογήσεις ή να περιορίσεις σε ένα επίπεδο ¦ Настройки и филтри в отделен слой, който можеш да маскираш, дозираш или ограничиш до един слой
+✨ Filtres : ¦ ✨ Φίλτρα: ¦ ✨ Филтри:
+Changer les réglages de ce filtre ¦ Αλλαγή ρυθμίσεων αυτού του φίλτρου ¦ Промени настройките на този филтър
+vider ¦ άδειασμα ¦ изпразни
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ κενή ομάδα: σύρε εδώ ένα επίπεδο (⠿) ή βάλ' το με 📁 ¦ празна група: плъзни слой тук (⠿) или го сложи с 📁
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Το πινέλο, τα σχήματα και το κείμενο πηγαίνουν στο επιλεγμένο επίπεδο (με μπλε). 📁 μια ομάδα μπορεί να περιέχει επίπεδα και άλλες ομάδες · 🎚 ένα επίπεδο ρύθμισης εφαρμόζει ρυθμίσεις και φίλτρα σε ό,τι είναι από κάτω (ή μόνο στο στοιχείο ακριβώς από κάτω). 🎭 μια μάσκα κρύβει χωρίς να σβήνει. ¦ Четката, формите и текстът отиват върху избрания слой (в синьо). 📁 групата може да съдържа слоеве и други групи; 🎚 коригиращият слой прилага настройки и филтри върху всичко отдолу (или само върху елемента точно отдолу). 🎭 маската скрива, без да изтрива.
+＋ Calque ¦ ＋ Επίπεδο ¦ ＋ Слой
+＋ Groupe ¦ ＋ Ομάδα ¦ ＋ Група
+＋ Réglage ¦ ＋ Ρύθμιση ¦ ＋ Настройка
+🖼️ Image ¦ 🖼️ Εικόνα ¦ 🖼️ Изображение
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Μια εικόνα από τη βάση ή από τον υπολογιστή, σε νέο επίπεδο, ως έξυπνο αντικείμενο (μεγέθυνση, σμίκρυνση, περιστροφή χωρίς απώλειες) ¦ Изображение от базата или от компютъра, на нов слой, като смарт обект (увеличавай, намалявай, завъртай без загуба)
+Un groupe vide au-dessus du calque choisi ¦ Μια κενή ομάδα πάνω από το επιλεγμένο επίπεδο ¦ Празна група над избрания слой
+Réglages et filtres dans un calque ¦ Ρυθμίσεις και φίλτρα σε ένα επίπεδο ¦ Настройки и филтри в слой
+La photo a été retirée des calques : la remettre tout en bas ¦ Η φωτογραφία αφαιρέθηκε από τα επίπεδα: βάλ' την ξανά στο κάτω μέρος ¦ Снимката е махната от слоевете: върни я най-отдолу
+↺ Remettre la photo ¦ ↺ Επαναφορά της φωτογραφίας ¦ ↺ Върни снимката
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Βάζει το επιλεγμένο επίπεδο σε νέα ομάδα (⌘G) ¦ Слага избрания слой в нова група (⌘G)
+Grouper ¦ Ομαδοποίηση ¦ Групирай
+Sélection → calque ¦ Επιλογή → επίπεδο ¦ Селекция → слой
+Aucun calque. ¦ Κανένα επίπεδο. ¦ Няма слоеве.
+Choisis d’abord un calque. ¦ Διάλεξε πρώτα ένα επίπεδο. ¦ Първо избери слой.
+Nouveau calque ¦ Νέο επίπεδο ¦ Нов слой
+Nouveau calque de réglage ¦ Νέο επίπεδο ρύθμισης ¦ Нов коригиращ слой
+Photo remise dans les calques ¦ Η φωτογραφία μπήκε ξανά στα επίπεδα ¦ Снимката е върната в слоевете
+Masque ajouté : la sélection est cachée. ¦ Η μάσκα προστέθηκε: η επιλογή είναι κρυμμένη. ¦ Маската е добавена: селекцията е скрита.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Η μάσκα προστέθηκε: όλα είναι κρυμμένα · ζωγράφισε με ⬜ για να εμφανίσεις. ¦ Маската е добавена: всичко е скрито; рисувай с ⬜, за да показваш.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Η μάσκα προστέθηκε: ζωγράφισε με ⬛ για απόκρυψη, με ⬜ για εμφάνιση. ¦ Маската е добавена: рисувай с ⬛, за да скриваш, с ⬜, за да показваш.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Μόνο η μάσκα: λευκό = ορατό, μαύρο = κρυμμένο (⌥ + κλικ για επιστροφή) ¦ Само маската: бяло = показано, черно = скрито (⌥ + клик за връщане)
+Ce calque est verrouillé. ¦ Αυτό το επίπεδο είναι κλειδωμένο. ¦ Този слой е заключен.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Έξυπνο φίλτρο: διάλεξε ένα φίλτρο («＋ Προσθήκη φίλτρου…») · επηρεάζει μόνο αυτή την εικόνα και μένει ρυθμιζόμενο. ¦ Смарт филтър: избери филтър („＋ Добави филтър…“); засяга само това изображение и остава настройваем.
+verrouillé ¦ κλειδωμένο ¦ заключен
+déverrouillé ¦ ξεκλείδωτο ¦ отключен
+seulement sur l’élément dessous ¦ μόνο στο στοιχείο από κάτω ¦ само върху елемента отдолу
+sur tout ce qui est dessous ¦ σε ό,τι είναι από κάτω ¦ върху всичко отдолу
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Άνοιγμα πίνακα (Ρυθμίσεις, Επίπεδα…) — Tab ¦ Отвори панела (Настройки, Слоеве…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Σύρε για να μετακινηθείς στη μεγεθυμένη εικόνα (το πλήκτρο διαστήματος κάνει το ίδιο με οποιοδήποτε εργαλείο). ¦ Плъзни, за да се движиш в увеличеното изображение (интервалът прави същото с всеки инструмент).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Κάνε κλικ σε μια πινελιά, ένα σχήμα, ένα κείμενο ή μια περιοχή αντιγραμμένη από επίπεδο και σύρε την. Το ⌫ τη διαγράφει, διπλό κλικ σε κείμενο για να το ξαναγράψεις. ¦ Щракни върху щрих, форма, текст или копирана област от слой, после я плъзни. ⌫ я изтрива, двоен клик върху текст, за да го пренапишеш.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Σύρε για να επιλέξεις ορθογώνιο (με ⇧: προσθήκη, ⌥: αφαίρεση). Οι ρυθμίσεις της γραμμής εργαλείων εφαρμόζονται μετά στην επιλογή. ¦ Плъзни, за да избереш правоъгълник (с ⇧: добави, ⌥: извади). Настройките от лентата после действат върху селекцията.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Σύρε για να επιλέξεις οβάλ (⇧: προσθήκη, ⌥: αφαίρεση). ¦ Плъзни, за да избереш овал (⇧: добави, ⌥: извади).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Περίγραψε με ελεύθερο χέρι την περιοχή που θέλεις να επιλέξεις (⇧: προσθήκη, ⌥: αφαίρεση). ¦ Огради на ръка областта, която искаш да избереш (⇧: добави, ⌥: извади).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Πένα: κάνε κλικ σημείο προς σημείο γύρω από την περιοχή · διπλό κλικ, Enter ή κλικ στο πρώτο σημείο για κλείσιμο. Esc: εγκατάλειψη. ¦ Перо: щракай точка по точка около областта; двоен клик, Enter или клик върху първата точка, за да затвориш. Esc: откажи.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Κάνε κλικ σε ένα χρώμα: όλα τα γειτονικά σημεία με κοντινή απόχρωση επιλέγονται (Ανοχή). ⇧: προσθήκη, ⌥: αφαίρεση. ¦ Щракни върху цвят: всички съседни точки с близък нюанс се избират (Толеранс). ⇧: добави, ⌥: извади.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Σύρε τις λαβές του πλαισίου (ή σχεδίασε νέο πλαίσιο), διάλεξε αναλογίες, ίσιωσε με τον ρυθμιστή και μετά «✓ Επικύρωση». ¦ Плъзни дръжките на рамката (или начертай нова рамка), избери пропорции, изправи с плъзгача, после „✓ Потвърди“.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Κλικ: ζουμ εδώ · ⌥ + κλικ: σμίκρυνση · ή σύρε για ζουμ σε μια περιοχή. ¦ Клик: приближи тук · ⌥ + клик: отдалечи · или плъзни, за да приближиш област.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Σύρε τις 4 γωνίες στις γωνίες της φωτογραφίας, του εγγράφου ή της πρόσοψης που τραβήχτηκε από πλάγια, και μετά «✓ Επικύρωση»: ισιώνει. Καλύτερα να γίνει πριν από τις διορθώσεις κηλίδων. ¦ Плъзни 4-те ъгъла върху ъглите на снимката, документа или фасадата, заснети под ъгъл, после „✓ Потвърди“: изправя се. За предпочитане преди корекцията на петна.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Σύρε για να σχεδιάσεις το σχήμα στο επιλεγμένο επίπεδο (⇧: τετράγωνο, κύκλος ή ορθή γωνία). ¦ Плъзни, за да начертаеш формата върху избрания слой (⇧: квадрат, кръг или прав ъгъл).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Σύρε από την αρχή ως το τέλος της διαβάθμισης (⇧: ανά 45°): μπαίνει σε επίπεδο «Διαβάθμιση» (μέσα στην επιλογή αν υπάρχει · στην επιλεγμένη μάσκα, σβήνει σταδιακά το επίπεδο). Μετά τράβηξε τους κύκλους της για προσαρμογή · κλικ στη χρωματιστή μπάρα για να αλλάξεις τα χρώματά της. ¦ Плъзни от началото до края на преливането (⇧: през 45°): то отива на слой „Преливане“ (в селекцията, ако има такава; върху избраната маска плавно стопява слоя). После дърпай кръгчетата му, за да го нагласиш; клик върху цветната лента, за да смениш цветовете.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Κάνε κλικ σε μια κηλίδα, μια σκόνη ή μια γρατζουνιά: αντικαθίσταται από ό,τι την περιβάλλει. Για γρατζουνιά, σύρε κατά μήκος. Κάνε ζουμ (⌘ + ροδέλα) για ακρίβεια. ¦ Щракни върху петно, прашинка или драскотина: заменя се с околното. За драскотина плъзни по дължината ѝ. Приближи (⌘ + колелце) за точност.
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ «Διάλεξε το σημείο προς αντιγραφή» (ή ⌥ + κλικ) και μετά ζωγράφισε την περιοχή που θέλεις να καλύψεις. «Ευθυγραμμισμένο»: η πηγή ακολουθεί το πινέλο από πινελιά σε πινελιά. Με επιλογή: σύρε για να βάλεις αντίγραφο της περιοχής αλλού. ¦ „Избери мястото за копиране“ (или ⌥ + клик), после рисувай върху областта за покриване. „Подравнено“: източникът следва четката от щрих на щрих. Със селекция: плъзни, за да поставиш копие на областта другаде.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Ζωγράφισε στο επιλεγμένο επίπεδο (Επίπεδα): σημειώσεις, κύκλοι, βέλη με το χέρι. Η γόμα σβήνει ό,τι ζωγραφίστηκε, ποτέ τη φωτογραφία. ¦ Рисувай върху избрания слой (Слоеве): анотирай, ограждай, слагай стрелки на ръка. Гумата трие нарисуваното, никога снимката.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Ζωγραφίζεις τη ΜΑΣΚΑ του επιπέδου: ⬛ απόκρυψη, ⬜ εμφάνιση. Τίποτα δεν σβήνεται. Κάνε κλικ στη μικρογραφία της μάσκας (Επίπεδα) για να γυρίσεις στο επίπεδο. ¦ Рисуваш МАСКАТА на слоя: ⬛ скрий, ⬜ покажи. Нищо не се изтрива. Щракни върху миниатюрата на маската (Слоеве), за да се върнеш към слоя.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Κάνε κλικ στην εικόνα εκεί που θέλεις το κείμενο, γράψε και μετά Enter (⇧ + Enter για νέα γραμμή). ¦ Щракни в изображението на мястото на текста, пиши, после Enter (⇧ + Enter за нов ред).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Ζωγράφισε πάνω στην πτυχή, τη γρατζουνιά ή το σκίσιμο (με κόκκινο όσο κινείσαι): όταν αφήσεις, η περιοχή ξαναγίνεται με βάση ό,τι την περιβάλλει. Κάνε ζουμ για ακρίβεια · ο «🔍 Εντοπισμός πτυχών» τις βρίσκει αυτόματα. ¦ Рисувай върху гънката, драскотината или скъсването (в червено, докато движиш): щом пуснеш, областта се възстановява според околното. Приближи за точност; „🔍 Открий гънките“ ги намира само.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Σύρε τους δύο κύκλους στα μάτια αν χρειάζεται: το κάδρο ακολουθεί (μάτια οριζόντια, πάντα στο ίδιο ύψος). Ρύθμισε το περιθώριο στον πίνακα και μετά «✓ Περικοπή» ή «👤 Χρήση ως πορτρέτο». ¦ Плъзни двете кръгчета върху очите, ако трябва: рамката следва (очите хоризонтално, винаги на същата височина). Настрой полето в панела, после „✓ Изрежи“ или „👤 Използвай като портрет“.
+Calque « Annotations » créé ¦ Δημιουργήθηκε το επίπεδο «Σημειώσεις» ¦ Създаден е слой „Анотации“
+Annotations ¦ Σημειώσεις ¦ Анотации
+Masque ajouté à la photo (gomme) ¦ Μάσκα προστέθηκε στη φωτογραφία (γόμα) ¦ Маска е добавена към снимката (гума)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Γόμα στη φωτογραφία: κρύβεται με μάσκα, τίποτα δεν σβήνεται. Για να επανέλθει: πλήκτρο X (⬜ εμφάνιση) και ξαναπέρνα από πάνω. ¦ Гума върху снимката: тя се скрива с маска, нищо не се изтрива. За да се върне: клавиш X (⬜ покажи), после мини отново отгоре.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Εμφάνιση: το πινέλο (ή η γόμα) φέρνει πίσω ό,τι ήταν κρυμμένο. X για επιστροφή σε ⬛ απόκρυψη. ¦ ⬜ Покажи: четката (или гумата) връща скритото. X за връщане към ⬛ скрий.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Απόκρυψη: το πινέλο (ή η γόμα) κρύβει. X για ⬜ εμφάνιση. ¦ ⬛ Скрий: четката (или гумата) скрива. X за ⬜ покажи.
+Style du texte ¦ Στυλ κειμένου ¦ Стил на текста
+Caractère du texte ¦ Χαρακτήρας κειμένου ¦ Символи на текста
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Ανάγνωση παραλλαγών του υπολογιστή… ¦ 🔎 Прочети вариантите от компютъра…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Στοχευμένη ρύθμιση: πάτα πάνω σε ένα χρώμα της φωτογραφίας και σύρε δεξιά (πιο κορεσμένο) ή αριστερά (λιγότερο) · με ⌘ / Ctrl αλλάζει η απόχρωση ¦ Целева настройка: натисни върху цвят от снимката и плъзни надясно (по-наситено) или наляво (по-малко); с ⌘ / Ctrl се променя нюансът
+Réglage ciblé ¦ Στοχευμένη ρύθμιση ¦ Целева настройка
+Pipettes de la gamme ¦ Σταγονόμετρα εύρους ¦ Пипети за обхвата
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Σταγονόμετρο: το εύρος κεντράρεται στο χρώμα που πάτησες στη φωτογραφία ¦ Пипета: обхватът се центрира върху щракнатия в снимката цвят
+Ajouter à la gamme la couleur cliquée ¦ Προσθήκη στο εύρος του χρώματος που πάτησες ¦ Добави щракнатия цвят към обхвата
+Retirer de la gamme la couleur cliquée ¦ Αφαίρεση από το εύρος του χρώματος που πάτησες ¦ Извади щракнатия цвят от обхвата
+Bord intérieur : plein effet jusqu’ici ¦ Εσωτερικό όριο: πλήρες εφέ ως εδώ ¦ Вътрешен ръб: пълен ефект дотук
+Bord extérieur : l’effet s’éteint ici ¦ Εξωτερικό όριο: το εφέ σβήνει εδώ ¦ Външен ръб: ефектът угасва тук
+Haut : les couleurs avant ; bas : après. ¦ Πάνω: τα χρώματα πριν · κάτω: μετά. ¦ Горе: цветовете преди; долу: след.
+🎚 Autres réglages… ¦ 🎚 Άλλες ρυθμίσεις… ¦ 🎚 Други настройки…
+🖌 Peindre le masque ¦ 🖌 Ζωγράφισε τη μάσκα ¦ 🖌 Рисувай маската
+Réactiver ¦ Επανενεργοποίηση ¦ Включи отново
+Désactiver ¦ Απενεργοποίηση ¦ Изключи
+▦ Calque de dégradé ¦ ▦ Επίπεδο διαβάθμισης ¦ ▦ Слой с преливане
+garder les proportions ¦ διατήρηση αναλογιών ¦ запази пропорциите
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Ένα επίπεδο ρύθμισης ακριβώς από πάνω, που επηρεάζει μόνο αυτό το επίπεδο ¦ Коригиращ слой точно отгоре, който засяга само този слой
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Απόχρωση/Κορεσμός σε αυτό το επίπεδο ¦ 🎨 Нюанс/Наситеност върху този слой
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Διάλεξε τη φωτογραφία ή ένα επίπεδο ρύθμισης 🎚 (Επίπεδα) για Απόχρωση/Κορεσμό. ¦ Избери снимката или коригиращ слой 🎚 (Слоеве) за Нюанс/Наситеност.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Πάτα πάνω σε ένα χρώμα της φωτογραφίας και σύρε αριστερά ή δεξιά (⌘ / Ctrl: η απόχρωση). ¦ 👆 Натисни върху цвят от снимката и плъзни наляво или надясно (⌘ / Ctrl: нюансът).
+💧 Clique sur une couleur de la photo. ¦ 💧 Κάνε κλικ σε ένα χρώμα της φωτογραφίας. ¦ 💧 Щракни върху цвят от снимката.
+C’est un gris : il n’a pas de teinte. ¦ Είναι γκρι: δεν έχει απόχρωση. ¦ Това е сиво: няма нюанс.
+Gamme choisie à la pipette ¦ Εύρος επιλεγμένο με σταγονόμετρο ¦ Обхват, избран с пипетата
+Gamme élargie ¦ Εύρος διευρυμένο ¦ Разширен обхват
+Gamme réduite ¦ Εύρος μειωμένο ¦ Стеснен обхват
+Coloriser : oui ¦ Χρωματισμός: ναι ¦ Оцветяване: да
+Coloriser : non ¦ Χρωματισμός: όχι ¦ Оцветяване: не
+Coloriser ¦ Χρωματισμός ¦ Оцвети
+Propriétés du masque ¦ Ιδιότητες μάσκας ¦ Свойства на маската
+Teinte/Saturation remise à zéro ¦ Η Απόχρωση/Κορεσμός μηδενίστηκε ¦ Нюанс/Наситеност е нулиран
+Masque inversé ¦ Η μάσκα αντιστράφηκε ¦ Маската е обърната
+Masque désactivé ¦ Η μάσκα απενεργοποιήθηκε ¦ Маската е изключена
+Masque réactivé ¦ Η μάσκα ενεργοποιήθηκε ξανά ¦ Маската е включена отново
+Masque retiré ¦ Η μάσκα αφαιρέθηκε ¦ Маската е премахната
+Masque ajouté ¦ Η μάσκα προστέθηκε ¦ Маската е добавена
+Ce calque a déjà un masque. ¦ Αυτό το επίπεδο έχει ήδη μάσκα. ¦ Този слой вече има маска.
+Teinte/Saturation sur un calque ¦ Απόχρωση/Κορεσμός σε επίπεδο ¦ Нюанс/Наситеност върху слой
+Teinte/Saturation ¦ Απόχρωση/Κορεσμός ¦ Нюанс/Наситеност
+Ancien style ¦ Παλιό στυλ ¦ Стар стил
+Global ¦ Γενικά ¦ Общо
+Rouges ¦ Κόκκινα ¦ Червени
+Jaunes ¦ Κίτρινα ¦ Жълти
+Verts ¦ Πράσινα ¦ Зелени
+Cyans ¦ Κυανά ¦ Синьозелени
+Bleus ¦ Μπλε ¦ Сини
+Magentas ¦ Ματζέντα ¦ Пурпурни
+Cyanotype ¦ Κυανοτυπία ¦ Цианотипия
+Supprimer ce motif ¦ Διαγραφή αυτού του μοτίβου ¦ Изтрий този мотив
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Επίπεδο μοτίβου <b>«{name}»</b>: όλα ρυθμίζονται εδώ, αμέσως. ¦ Слой с мотив <b>„{name}“</b>: всичко се настройва тук, веднага.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Διάλεξε ένα μοτίβο και μετά «Γέμισμα»: μπαίνει σε δικό του επίπεδο (μέσα στην επιλογή αν υπάρχει). Τα μοτίβα της εφαρμογής παίρνουν τα δύο σου χρώματα. ¦ Избери мотив, после „Запълни“: той отива на собствен слой (в селекцията, ако има такава). Мотивите на приложението вземат двата ти цвята.
+fond transparent (motifs de l’app) ¦ διάφανο φόντο (μοτίβα της εφαρμογής) ¦ прозрачен фон (мотиви на приложението)
+Décalage horizontal ¦ Οριζόντια μετατόπιση ¦ Хоризонтално отместване
+Décalage vertical ¦ Κατακόρυφη μετατόπιση ¦ Вертикално отместване
+▩ Remplir : nouveau calque de motif ¦ ▩ Γέμισμα: νέο επίπεδο μοτίβου ¦ ▩ Запълни: нов слой с мотив
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Μπαίνει στη βιβλιοθήκη μοτίβων (κρατιέται σε αυτόν τον υπολογιστή). ¦ Добавя се към библиотеката с мотиви (пази се на този компютър).
+l’image visible ¦ η ορατή εικόνα ¦ видимото изображение
+Taille du carreau ¦ Μέγεθος πλακιδίου ¦ Размер на плочката
+raccord sans couture (les bords se fondent) ¦ συνέχεια χωρίς ραφή (οι άκρες σμίγουν) ¦ безшевно повторение (краищата се сливат)
+Garder et remplir ¦ Κράτα και γέμισε ¦ Запази и запълни
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Δεν υπάρχει χώρος για αυτό το μοτίβο: διάγραψε μοτίβα ή κάν' το μικρότερο. ¦ Няма повече място за този мотив: изтрий мотиви или го направи по-малък.
+Motif gardé dans la bibliothèque ▩. ¦ Το μοτίβο κρατήθηκε στη βιβλιοθήκη ▩. ¦ Мотивът е запазен в библиотеката ▩.
+Mon motif ¦ Το μοτίβο μου ¦ Моят мотив
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Κλικ σε ένα σχήμα: το πινέλο 🖌 το παίρνει. Το μέγεθος ρυθμίζεται πάνω (ή [ και ]). ¦ Клик върху форма: четката 🖌 я взема. Размерът се настройва горе (или [ и ]).
+Forme de la pointe ¦ Σχήμα μύτης ¦ Форма на върха
+Pas (écart entre les empreintes) ¦ Βήμα (απόσταση ανάμεσα στα αποτυπώματα) ¦ Стъпка (разстояние между отпечатъците)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Μικρό: συνεχής γραμμή. Μεγάλο: χωριστά αποτυπώματα (αστέρια, φύλλα). ¦ Малка: непрекъсната линия. Голяма: отделни отпечатъци (звезди, листа).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ Στο 100 % το σχήμα είναι ολόκληρο · πιο χαμηλά, πλαταίνει (πένα, πλακέ πινέλο). ¦ При 100 % формата е цяла; по-ниско се сплесква (перо, плоска четка).
+l’angle suit le trait ¦ η γωνία ακολουθεί την πινελιά ¦ ъгълът следва щриха
+Dynamique et dispersion ¦ Δυναμική και διασπορά ¦ Динамика и разпръскване
+Variation de taille ¦ Μεταβολή μεγέθους ¦ Вариация на размера
+Variation d’angle ¦ Μεταβολή γωνίας ¦ Вариация на ъгъла
+Dispersion ¦ Διασπορά ¦ Разпръскване
+Nombre par empreinte ¦ Αριθμός ανά αποτύπωμα ¦ Брой на отпечатък
+Transfert et couleur ¦ Μεταφορά και χρώμα ¦ Пренос и цвят
+Flux (chaque empreinte) ¦ Ροή (κάθε αποτύπωμα) ¦ Поток (всеки отпечатък)
+Variation d’opacité ¦ Μεταβολή αδιαφάνειας ¦ Вариация на непрозрачността
+Variation de couleur ¦ Μεταβολή χρώματος ¦ Вариация на цвета
+Fais d’abord une sélection autour du dessin ¦ Κάνε πρώτα μια επιλογή γύρω από το σχέδιο ¦ Първо направи селекция около рисунката
+Fais d’abord une sélection autour du dessin. ¦ Κάνε πρώτα μια επιλογή γύρω από το σχέδιο. ¦ Първо направи селекция около рисунката.
+＋ Forme d’après la sélection ¦ ＋ Σχήμα από την επιλογή ¦ ＋ Форма от селекцията
+Garder comme préréglage ¦ Κράτα ως προρύθμιση ¦ Запази като готова настройка
+＋ Garder comme préréglage ¦ ＋ Κράτα ως προρύθμιση ¦ ＋ Запази като готова настройка
+Garder cette forme de pinceau ¦ Κράτα αυτό το σχήμα πινέλου ¦ Запази тази форма на четката
+Nom du préréglage : ¦ Όνομα προρύθμισης: ¦ Име на готовата настройка:
+Plus de place pour garder ce pinceau. ¦ Δεν υπάρχει χώρος για αυτό το πινέλο. ¦ Няма повече място за тази четка.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Το σχήμα σου είναι έτοιμο: ζωγράφισε με αυτό · «Κράτα ως προρύθμιση» για να το ξαναβρείς. ¦ 🖌 Формата ти е готова: рисувай с нея; „Запази като готова настройка“, за да я намериш отново.
+Rond net ¦ Καθαρός κύκλος ¦ Остър кръг
+Rond doux ¦ Απαλός κύκλος ¦ Мек кръг
+Surligneur ¦ Μαρκαδόρος υπογράμμισης ¦ Маркер
+Crayon fin ¦ Λεπτό μολύβι ¦ Тънък молив
+Craie (grain) ¦ Κιμωλία (κόκκος) ¦ Тебешир (зърно)
+Craie ¦ Κιμωλία ¦ Тебешир
+Fusain ¦ Κάρβουνο ¦ Въглен
+Dégradé inversé ¦ Αντεστραμμένη διαβάθμιση ¦ Обърнато преливане
+Dégradé : tramage ¦ Διαβάθμιση: πρόσμιξη ¦ Преливане: дитеринг
+Dégradé : sans tramage ¦ Διαβάθμιση: χωρίς πρόσμιξη ¦ Преливане: без дитеринг
+▦ Dégradé ¦ ▦ Διαβάθμιση ¦ ▦ Преливане
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Κλικ: προσθήκη στάσης χρώματος σε αυτό το σημείο ¦ Клик: добави цветна точка на това място
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Κλικ στη μπάρα: μία στάση ακόμα · σύρε μια στάση για να τη μετακινήσεις, προς τα κάτω για να την αφαιρέσεις ¦ Клик върху лентата: още една точка · плъзни точка, за да я преместиш, надолу, за да я махнеш
+Mélange ¦ Ανάμειξη ¦ Смесване
+Classique (RVB) ¦ Κλασική (RGB) ¦ Класическо (RGB)
+Perceptuel (plus doux) ¦ Αντιληπτική (πιο απαλή) ¦ Перцептивно (по-меко)
+Par les teintes ¦ Μέσω αποχρώσεων ¦ По нюанси
+Au-delà des bouts ¦ Πέρα από τα άκρα ¦ Отвъд краищата
+Couleur des bouts ¦ Χρώμα των άκρων ¦ Цвят на краищата
+Répéter ¦ Επανάληψη ¦ Повтаряй
+Répéter en miroir ¦ Επανάληψη σε καθρέφτη ¦ Повтаряй огледално
+Le début devient la fin ¦ Η αρχή γίνεται τέλος ¦ Началото става край
+⇄ Retourner les arrêts ¦ ⇄ Αντιστροφή στάσεων ¦ ⇄ Обърни точките
+Espacer également ¦ Ίση απόσταση ¦ Разпредели равномерно
+Couleur de l’arrêt ¦ Χρώμα στάσης ¦ Цвят на точката
+Arrêt choisi ¦ Επιλεγμένη στάση ¦ Избрана точка
+Milieu vers le suivant ¦ Μέση προς την επόμενη ¦ Среда към следващата
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Πού βρίσκεται η ανάμειξη στη μέση ανάμεσα σε αυτή τη στάση και την επόμενη (ο μικρός ρόμβος του Photoshop). ¦ Къде е смесването наполовина между тази точка и следващата (малкият ромб във Photoshop).
+✕ Enlever cet arrêt ¦ ✕ Αφαίρεση αυτής της στάσης ¦ ✕ Махни тази точка
+Supprimer ce préréglage ¦ Διαγραφή αυτής της προρύθμισης ¦ Изтрий тази готова настройка
+Garder ce dégradé ¦ Κράτα αυτή τη διαβάθμιση ¦ Запази това преливане
+Mon dégradé ¦ Η διαβάθμισή μου ¦ Моето преливане
+Premier plan → transparent ¦ Προσκήνιο → διάφανο ¦ Преден план → прозрачно
+Noir → blanc ¦ Μαύρο → λευκό ¦ Черно → бяло
+Blanc → transparent ¦ Λευκό → διάφανο ¦ Бяло → прозрачно
+Vignette (bords sombres) ¦ Βινιέτα (σκούρες άκρες) ¦ Винетка (тъмни краища)
+Arc-en-ciel ¦ Ουράνιο τόξο ¦ Дъга
+Cuivre ¦ Χαλκός ¦ Мед
+Chrome ¦ Χρώμιο ¦ Хром
+Or ¦ Χρυσός ¦ Злато
+Vieux papier ¦ Παλιό χαρτί ¦ Стара хартия
+Nuit ¦ Νύχτα ¦ Нощ
+Printemps ¦ Άνοιξη ¦ Пролет
+Mer ¦ Θάλασσα ¦ Море
+Coucher de soleil ¦ Ηλιοβασίλεμα ¦ Залез
+▭ Linéaire ¦ ▭ Γραμμική ¦ ▭ Линейно
+◉ Radial ¦ ◉ Ακτινική ¦ ◉ Радиално
+◔ Angle (conique) ¦ ◔ Γωνιακή (κωνική) ¦ ◔ Ъглово (конично)
+⇋ Réfléchi ¦ ⇋ Ανακλώμενη ¦ ⇋ Отразено
+◇ Losange ¦ ◇ Ρόμβος ¦ ◇ Ромб
+Damier ¦ Σκακιέρα ¦ Шахматна дъска
+Pois ¦ Πουά ¦ Точки
+Rayures ¦ Ρίγες ¦ Райета
+Hachures ¦ Γραμμώσεις ¦ Щриховка
+Briques ¦ Τούβλα ¦ Тухли
+Chevrons ¦ Ψαροκόκαλο ¦ Рибена кост
+Losanges ¦ Ρόμβοι ¦ Ромбове
+Vagues ¦ Κύματα ¦ Вълни
+Toile ¦ Καμβάς ¦ Платно
+Croix ¦ Σταυροί ¦ Кръстчета
+Fleurs de lys ¦ Κρίνα (fleur-de-lis) ¦ Лилии (фльор дьо лис)
+Clique maintenant à l’endroit à recopier. ¦ Κάνε τώρα κλικ στο σημείο προς αντιγραφή. ¦ Сега щракни върху мястото за копиране.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Αυτό το επίπεδο είναι κλειδωμένο: ξεκλείδωσέ το στα Επίπεδα. ¦ Този слой е заключен: отключи го в Слоеве.
+Texte effacé ¦ Το κείμενο σβήστηκε ¦ Текстът е изтрит
+Sélection vide ¦ Κενή επιλογή ¦ Празна селекция
+Sélection ajoutée ¦ Η επιλογή προστέθηκε ¦ Селекцията е добавена
+Sélection retirée ¦ Η επιλογή αφαιρέθηκε ¦ Селекцията е извадена
+Image remplacée : même place, même taille, même rotation. ¦ Η εικόνα αντικαταστάθηκε: ίδια θέση, ίδιο μέγεθος, ίδια περιστροφή. ¦ Изображението е заменено: същото място, същият размер, същото завъртане.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Η εικόνα τοποθετήθηκε: ➤ σύρε την, τράβηξε μια γωνία για το μέγεθος (⇧: ελεύθερα), τη στρογγυλή λαβή για περιστροφή. ¦ Изображението е поставено: ➤ плъзни го, дръпни ъгъл за размера (⇧: свободно), кръглата дръжка за завъртане.
+Ce fichier n’est pas une image. ¦ Αυτό το αρχείο δεν είναι εικόνα. ¦ Този файл не е изображение.
+Remplacer l’image de l’objet dynamique ¦ Αντικατάσταση της εικόνας του έξυπνου αντικειμένου ¦ Замени изображението на смарт обекта
+Remplacer par cette image ¦ Αντικατάσταση με αυτή την εικόνα ¦ Замени с това изображение
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Η νέα εικόνα παίρνει τη θέση, το μέγεθος και την περιστροφή της παλιάς. ¦ Новото изображение заема мястото, размера и завъртането на старото.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Μπαίνει σε νέο επίπεδο, ως έξυπνο αντικείμενο 🧩 (μεγέθυνση, σμίκρυνση, περιστροφή χωρίς απώλειες). Μπορείς επίσης να σύρεις ένα αρχείο πάνω στη φωτογραφία ή να επικολλήσεις μια αντιγραμμένη εικόνα (⌘V). ¦ То отива на нов слой като смарт обект 🧩 (увеличавай, намалявай, завъртай без загуба). Можеш също да плъзнеш файл върху снимката или да поставиш копирано изображение (⌘V).
+Sélection automatique ¦ Αυτόματη επιλογή ¦ Автоматична селекция
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Αυτό το επίπεδο είναι κλειδωμένο: διάλεξε άλλο στα Επίπεδα. ¦ Този слой е заключен: избери друг в Слоеве.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Το σημείο προς αντιγραφή επιλέχθηκε: ζωγράφισε τώρα την περιοχή που θέλεις να καλύψεις. ¦ Мястото за копиране е избрано: сега рисувай върху областта за покриване.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Διάλεξε πρώτα το σημείο προς αντιγραφή (κουμπί 🎯 ή ⌥ + κλικ). ¦ Първо избери мястото за копиране (бутон 🎯 или ⌥ + клик).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Η φωτογραφία δεν είναι πια στα επίπεδα: «↺ Επαναφορά της φωτογραφίας» (καρτέλα Επίπεδα). ¦ Снимката вече не е в слоевете: „↺ Върни снимката“ (раздел Слоеве).
+La photo est verrouillée (🔒 dans Calques). ¦ Η φωτογραφία είναι κλειδωμένη (🔒 στα Επίπεδα). ¦ Снимката е заключена (🔒 в Слоеве).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Σφραγίδα: η περιοχή αντιγράφηκε (επίπεδο ✨ Ρετούς) ¦ Печат: копирана област (слой ✨ Ретуши)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Κάνε πρώτα μια επιλογή (εργαλεία ⬚ ◯ ➰ ✒︎ 🪄). ¦ Първо направи селекция (инструменти ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Κανένα φίλτρο δεν έχει χρησιμοποιηθεί ακόμα (μενού Φίλτρο). ¦ Засега не е използван филтър (меню Филтър).
+Opacité du calque (dosage) ¦ Αδιαφάνεια επιπέδου (δοσολογία) ¦ Непрозрачност на слоя (дозиране)
+Valeurs de départ ¦ Αρχικές τιμές ¦ Начални стойности
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Τίποτα δεν καταστρέφεται: το φίλτρο είναι σε δικό του επίπεδο. Αργότερα: Επίπεδα → το επίπεδο → καρτέλα ✨ Φίλτρα → «ρύθμιση…». ¦ Нищо не се унищожава: филтърът е на собствен слой. По-късно: Слоеве → слоят → раздел ✨ Филтри → „настрой…“.
+Filtre enlevé du calque ¦ Το φίλτρο αφαιρέθηκε από το επίπεδο ¦ Филтърът е премахнат от слоя
+Ordre des filtres ¦ Σειρά φίλτρων ¦ Ред на филтрите
+Filtres enlevés ¦ Τα φίλτρα αφαιρέθηκαν ¦ Филтрите са премахнати
+Plus de place pour les actions : supprimes-en une. ¦ Δεν υπάρχει χώρος για ενέργειες: διάγραψε μία. ¦ Няма повече място за действия: изтрий едно.
+⚡ Actions ¦ ⚡ Ενέργειες ¦ ⚡ Действия
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Όνομα ενέργειας (π.χ. «Φωτογραφίες του άλμπουμ 1930») ¦ Име на действието (напр. „Снимки от албума 1930“)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Μια ενέργεια κρατά τις ρυθμίσεις της φωτογραφίας (έκθεση, επίπεδα φωτεινότητας, καμπύλη, απόχρωση, φίλτρα, σκόνη, χρωματισμός…) και τα επίπεδα ρύθμισής της χωρίς μάσκα. Την εφαρμόζεις σε άλλη φωτογραφία ή σε πολλές μαζί: η καθεμία παίρνει μια <b>νέα έκδοση</b>, το πρωτότυπο κρατιέται. ¦ Действието пази настройките на снимката (експозиция, нива, крива, нюанс, филтри, прах, оцветяване…) и коригиращите ѝ слоеве без маска. Прилагаш го върху друга снимка или върху няколко наведнъж: всяка получава <b>нова версия</b>, оригиналът се пази.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Αποθήκευση αυτής της ενέργειας σε αρχείο, για να την κρατήσεις ή να τη δώσεις ¦ Запази това действие във файл, за да го пазиш или да го дадеш
+Sur cette photo ¦ Σε αυτή τη φωτογραφία ¦ Върху тази снимка
+Sur plusieurs photos… ¦ Σε πολλές φωτογραφίες… ¦ Върху няколко снимки…
+Aucune action enregistrée pour l’instant ¦ Καμία αποθηκευμένη ενέργεια ακόμα ¦ Засега няма запазени действия
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ Το «＋ Αποθήκευση τρεχουσών ρυθμίσεων» τις κρατά για να τις εφαρμόσεις σε άλλες φωτογραφίες. ¦ „＋ Запази текущите настройки“ ги пази, за да ги приложиш отново върху други снимки.
+Les photos à retoucher ¦ Οι φωτογραφίες για ρετούς ¦ Снимките за ретуш
+Prendre ces photos ¦ Πάρε αυτές τις φωτογραφίες ¦ Вземи тези снимки
+＋ Choisir des photos… ¦ ＋ Διάλεξε φωτογραφίες… ¦ ＋ Избери снимки…
+afficher la nouvelle version ¦ προβολή της νέας έκδοσης ¦ покажи новата версия
+Aucune photo choisie. ¦ Δεν επιλέχθηκε φωτογραφία. ¦ Няма избрана снимка.
+refusé ¦ απορρίφθηκε ¦ отказано
+fx Effets du calque ¦ fx Εφέ επιπέδου ¦ fx Ефекти на слоя
+Fond (le contenu seulement, pas les effets) ¦ Γέμισμα (μόνο το περιεχόμενο, όχι τα εφέ) ¦ Запълване (само съдържанието, не ефектите)
+Lueur externe ¦ Εξωτερική λάμψη ¦ Външно сияние
+Incrustation de couleur ¦ Επικάλυψη χρώματος ¦ Наслагване на цвят
+à l’extérieur ¦ έξω ¦ отвън
+au milieu ¦ στη μέση ¦ в средата
+à l’intérieur ¦ μέσα ¦ отвътре
+Tout enlever ¦ Αφαίρεση όλων ¦ Махни всичко
+🔍 Plis et rayures ¦ 🔍 Πτυχές και γρατζουνιές ¦ 🔍 Гънки и драскотини
+Recherche des plis… ¦ Αναζήτηση πτυχών… ¦ Търсене на гънки…
+garder le grain autour ¦ διατήρηση του κόκκου γύρω ¦ запази зърното наоколо
+🪡 Plutôt à la main ¦ 🪡 Καλύτερα με το χέρι ¦ 🪡 По-добре на ръка
+✓ Réparer ces lignes ¦ ✓ Επιδιόρθωση αυτών των γραμμών ¦ ✓ Поправи тези линии
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Δεν βρέθηκε πτυχή: ανέβασε την ευαισθησία ή επιδιόρθωσε με το χέρι με το πινέλο 🪡. ¦ Не е намерена гънка: увеличи чувствителността или поправи на ръка с четката 🪡.
+Réparation… ¦ Επιδιόρθωση… ¦ Поправяне…
+✨ Plis et rayures comblés ¦ ✨ Οι πτυχές και οι γρατζουνιές γέμισαν ¦ ✨ Запълнени гънки и драскотини
+🌫️ Débruitage ¦ 🌫️ Μείωση θορύβου ¦ 🌫️ Намаляване на шума
+adoucit le grain sans perdre les contours ¦ απαλύνει τον κόκκο χωρίς να χάνονται τα περιγράμματα ¦ омекотява зърното, без да губи контурите
+🧹 Poussières et rayures ¦ 🧹 Σκόνη και γρατζουνιές ¦ 🧹 Прах и драскотини
+les petits points blancs ou noirs ¦ οι μικρές λευκές ή μαύρες κουκκίδες ¦ малките бели или черни точици
+🩹 Plis et fines déchirures ¦ 🩹 Πτυχές και λεπτά σκισίματα ¦ 🩹 Гънки и тънки скъсвания
+lignes fines repérées puis comblées ¦ λεπτές γραμμές εντοπίζονται και γεμίζουν ¦ тънки линии се откриват и запълват
+🎚 Contraste et niveaux automatiques ¦ 🎚 Αυτόματη αντίθεση και επίπεδα ¦ 🎚 Автоматичен контраст и нива
+noirs bien noirs, blancs bien blancs ¦ μαύρα πραγματικά μαύρα, λευκά πραγματικά λευκά ¦ наистина черни черни, наистина бели бели
+🔎 Netteté douce ¦ 🔎 Απαλή ευκρίνεια ¦ 🔎 Мека острота
+un peu plus de piqué ¦ λίγο περισσότερη καθαρότητα ¦ малко повече рязкост
+🌈 Colorisation ¦ 🌈 Χρωματισμός ¦ 🌈 Оцветяване
+couleurs d’époque (photo en noir et blanc) ¦ χρώματα εποχής (ασπρόμαυρη φωτογραφία) ¦ цветове от епохата (черно-бяла снимка)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ η φωτογραφία έχει ήδη χρώματα: τσέκαρε αν το θέλεις παρ' όλα αυτά ¦ снимката вече има цветове: отметни, ако все пак искаш
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Τσέκαρε τα βήματα που θέλεις να κρατήσεις · το καθένα γίνεται επίπεδο «✨» που μπορείς μετά να κρύψεις ή να δοσολογήσεις. Το ↶ τα αναιρεί όλα μαζί. ¦ Отметни стъпките, които да запазиш; всяка става слой „✨“, който после можеш да скриеш или дозираш. ↶ отменя всичко наведнъж.
+Garder : {what} ¦ Διατήρηση: {what} ¦ Запази: {what}
+détail au centre ¦ λεπτομέρεια στο κέντρο ¦ детайл в центъра
+Aperçus… ¦ Προεπισκοπήσεις… ¦ Прегледи…
+aucun pli trouvé à cette intensité ¦ δεν βρέθηκε πτυχή σε αυτή την ένταση ¦ не е намерена гънка при тази сила
+Coche au moins une étape. ¦ Τσέκαρε τουλάχιστον ένα βήμα. ¦ Отметни поне една стъпка.
+✨ Plis et fines déchirures ¦ ✨ Πτυχές και λεπτά σκισίματα ¦ ✨ Гънки и тънки скъсвания
+✨ Poussières et rayures ¦ ✨ Σκόνη και γρατζουνιές ¦ ✨ Прах и драскотини
+✨ Débruitage ¦ ✨ Μείωση θορύβου ¦ ✨ Намаляване на шума
+✨ Contraste et niveaux ¦ ✨ Αντίθεση και επίπεδα ¦ ✨ Контраст и нива
+✨ Netteté douce ¦ ✨ Απαλή ευκρίνεια ¦ ✨ Мека острота
+✨ Colorisation ¦ ✨ Χρωματισμός ¦ ✨ Оцветяване
+Colorisation ¦ Χρωματισμός ¦ Оцветяване
+Couleurs (pinceau) ¦ Χρώματα (πινέλο) ¦ Цветове (четка)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Ρετούς (κηλίδες, πτυχές, σφραγίδα) ¦ ✨ Ретуши (петна, гънки, печат)
+🪪 Photo d’identité ¦ 🪪 Φωτογραφία ταυτότητας ¦ 🪪 Снимка за документи
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Τα μάτια οριζόντια, πάντα στο ίδιο ύψος: όλα τα πορτρέτα που γίνονται έτσι έχουν την ίδια μορφή. ¦ Очите хоризонтално, винаги на същата височина: всички така направени портрети са в един и същ формат.
+✓ Yeux trouvés sur le visage. ¦ ✓ Τα μάτια βρέθηκαν στο πρόσωπο. ¦ ✓ Очите са намерени на лицето.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Με βάση την αναγνώριση της φωτογραφίας: προσάρμοσε τους κύκλους στα μάτια. ¦ ✓ Според разпознаването в снимката: нагласи кръгчетата върху очите.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Δεν βρέθηκε πρόσωπο: σύρε τους δύο κύκλους στα μάτια. ¦ ⚠️ Не е намерено лице: плъзни двете кръгчета върху очите.
+Plusieurs fiches… ¦ Πολλές καρτέλες… ¦ Няколко картона…
+✓ Recadrer ¦ ✓ Περικοπή ¦ ✓ Изрежи
+👤 Utiliser comme portrait… ¦ 👤 Χρήση ως πορτρέτο… ¦ 👤 Използвай като портрет…
+Recadré en photo d’identité ¦ Περικόπηκε σε φωτογραφία ταυτότητας ¦ Изрязано като снимка за документи
+3:4 (portrait classique) ¦ 3:4 (κλασικό πορτρέτο) ¦ 3:4 (класически портрет)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (φωτογραφία ταυτότητας) ¦ 35 × 45 mm (снимка за документи)
+Marge autour du visage ¦ Περιθώριο γύρω από το πρόσωπο ¦ Поле около лицето
+Hauteur des yeux ¦ Ύψος των ματιών ¦ Височина на очите
+modèle absent ¦ το μοντέλο λείπει ¦ моделът липсва
+Recherche du visage… ¦ Αναζήτηση προσώπου… ¦ Търсене на лице…
+Photo non enregistrée. ¦ Η φωτογραφία δεν αποθηκεύτηκε. ¦ Снимката не е запазена.
+Utiliser comme portrait de quelle fiche ? ¦ Χρήση ως πορτρέτο ποιας καρτέλας; ¦ Като портрет на кой картон?
+PHOTO D’IDENTITÉ ¦ ΦΩΤΟΓΡΑΦΙΑ ΤΑΥΤΟΤΗΤΑΣ ¦ СНИМКА ЗА ДОКУМЕНТИ
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Η περικομμένη φωτογραφία προστίθεται στα πολυμέσα της καρτέλας και γίνεται το πορτρέτο της (το παλιό πορτρέτο μένει στα πολυμέσα της). ¦ Изрязаната снимка се добавя към медиите на картона и става негов портрет (старият портрет остава в медиите му).
+Choisis une personne dans la liste. ¦ Διάλεξε ένα άτομο από τη λίστα. ¦ Избери човек от списъка.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ ΡΕΤΟΥΣ · ΦΩΤΟΓΡΑΦΙΑ ΤΑΥΤΟΤΗΤΑΣ ¦ РЕТУШ · СНИМКА ЗА ДОКУМЕНТИ
+🪪 Portraits de plusieurs fiches ¦ 🪪 Πορτρέτα για πολλές καρτέλες ¦ 🪪 Портрети за няколко картона
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Διάλεξε τις καρτέλες: για την καθεμία, η εφαρμογή παίρνει το πορτρέτο της (ή την πρώτη της φωτογραφία), βρίσκει το πρόσωπο και το κάνει κάδρο στην ίδια μορφή με τα άλλα (μάτια στο ίδιο ύψος). Ελέγχεις και μετά «Χρήση ως πορτρέτα»: κάθε περικομμένη φωτογραφία μπαίνει στα πολυμέσα της καρτέλας της και γίνεται το πορτρέτο της (το παλιό μένει). ¦ Избери картоните: за всеки приложението взема портрета му (или първата му снимка), намира лицето и го кадрира в същия формат като другите (очите на същата височина). Проверяваш, после „Използвай като портрети“: всяка изрязана снимка влиза в медиите на своя картон и става негов портрет (старият остава).
+🔍 Préparer les portraits ¦ 🔍 Προετοιμασία πορτρέτων ¦ 🔍 Подготви портретите
+Aucune fiche choisie pour l’instant ¦ Δεν επιλέχθηκε καμία καρτέλα ακόμα ¦ Засега няма избран картон
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Διάλεξε ένα ή περισσότερα άτομα παραπάνω και μετά «🔍 Προετοιμασία πορτρέτων». ¦ Избери един или повече души отгоре, после „🔍 Подготви портретите“.
+Choisis d’abord une ou plusieurs fiches. ¦ Διάλεξε πρώτα μία ή περισσότερες καρτέλες. ¦ Първо избери един или повече картона.
+aucune photo dans la fiche ¦ καμία φωτογραφία στην καρτέλα ¦ няма снимка в картона
+yeux trouvés ¦ τα μάτια βρέθηκαν ¦ очите са намерени
+d’après l’identification ¦ με βάση την αναγνώριση ¦ според разпознаването
+✓ portrait mis à jour ¦ ✓ το πορτρέτο ενημερώθηκε ¦ ✓ портретът е обновен
+Utiliser comme portraits ¦ Χρήση ως πορτρέτα ¦ Използвай като портрети
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Η περιστροφή δεν είναι ακόμα έτοιμη: δοκίμασε ξανά σε λίγο. ¦ Завъртането още не е готово: опитай отново след малко.
+Rotation de l’image ¦ Περιστροφή εικόνας ¦ Завъртане на изображението
+Rotation de l’image : 90° horaire ¦ Περιστροφή εικόνας: 90° δεξιόστροφα ¦ Завъртане на изображението: 90° по часовниковата стрелка
+Rotation de l’image : 90° antihoraire ¦ Περιστροφή εικόνας: 90° αριστερόστροφα ¦ Завъртане на изображението: 90° обратно на часовниковата стрелка
+Rotation de l’image : 180° ¦ Περιστροφή εικόνας: 180° ¦ Завъртане на изображението: 180°
+Rotation de l’image : {a}° horaire ¦ Περιστροφή εικόνας: {a}° δεξιόστροφα ¦ Завъртане на изображението: {a}° по часовниковата стрелка
+Rotation de l’image : {a}° antihoraire ¦ Περιστροφή εικόνας: {a}° αριστερόστροφα ¦ Завъртане на изображението: {a}° обратно на часовниковата стрелка
+Symétrie horizontale de l’image ¦ Οριζόντιος κατοπτρισμός εικόνας ¦ Хоризонтално огледално обръщане
+Symétrie verticale de l’image ¦ Κατακόρυφος κατοπτρισμός εικόνας ¦ Вертикално огледално обръщане
+Perspective figée ¦ Η προοπτική παγώθηκε ¦ Перспективата е фиксирана
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Η προηγούμενη περικοπή αφαιρέθηκε (δεν ήταν πια ίσια): κάν' την ξανά αν χρειάζεται, ή ↶ Αναίρεση. ¦ Предишното изрязване е премахнато (вече не беше право): направи го отново, ако трябва, или ↶ Отмени.
+📐 Redresser l’horizon ¦ 📐 Ίσιωμα ορίζοντα ¦ 📐 Изправи хоризонта
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Η γωνία που μετρήθηκε στη γραμμή σου: η φωτογραφία περιστρέφεται κατά αυτή τη γωνία για να ισιώσει. ¦ Ъгълът, измерен по линията ти: снимката се завърта с този ъгъл, за да се изправи.
+Coins ajoutés autour ¦ Γωνίες που προστέθηκαν γύρω ¦ Ъгли, добавени наоколо
+Transparents (PNG) ¦ Διάφανες (PNG) ¦ Прозрачни (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Περικοπή για αφαίρεση των κενών γωνιών ¦ ✂️ Изрежи, за да махнеш празните ъгли
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Όλα τα επίπεδα, οι μάσκες, τα κείμενα και η επιλογή περιστρέφονται μαζί με τη φωτογραφία. Το ↶ Αναίρεση (⌘Z) επιστρέφει όπως πριν. ¦ Всички слоеве, маски, текстове и селекцията се завъртат заедно със снимката. ↶ Отмени (⌘Z) връща както преди.
+Donne un angle entre 0,01 et 359,99°. ¦ Δώσε μια γωνία από 0,01 έως 359,99°. ¦ Задай ъгъл между 0,01 и 359,99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Σχεδίασε μια γραμμή κατά μήκος του ορίζοντα (ή ενός ίσιου τοίχου): η φωτογραφία θα περιστραφεί για να ισιώσει. Esc για διακοπή. ¦ Начертай линия по хоризонта (или по прав зид): снимката ще се завърти, за да се изправи. Esc, за да спреш.
+Cette ligne est déjà droite : rien à tourner. ¦ Αυτή η γραμμή είναι ήδη ίσια: δεν χρειάζεται περιστροφή. ¦ Тази линия вече е права: няма какво да се завърта.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Φωτογραφία τραβηγμένη με γυρισμένο τηλέφωνο: έχει αποθηκευτεί πλαγιαστή. ¦ Снимка, направена със завъртян телефон: записана е легнала.
+↻ Remettre droite ¦ ↻ Ίσιωμα ¦ ↻ Изправи
+Photo remise droite (orientation du téléphone) ¦ Η φωτογραφία ισιώθηκε (προσανατολισμός τηλεφώνου) ¦ Снимката е изправена (ориентация на телефона)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Τα ρετούς σε εξέλιξη θα χαθούν (η 💾 Αποθήκευση έργου τα κρατά για αργότερα). ¦ Текущите ретуши ще се загубят (💾 Запази проекта ги пази за по-късно).
+Passer à la retouche simple ? ¦ Μετάβαση στο απλό ρετούς; ¦ Да премина ли към простия ретуш?
+Passer sans enregistrer ¦ Μετάβαση χωρίς αποθήκευση ¦ Премини, без да запазваш
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ Το PSD δεν είναι ακόμα έτοιμο: δοκίμασε ξανά σε λίγο. ¦ PSD още не е готов: опитай отново след малко.
+L’assemblage de photos n’est pas encore prêt. ¦ Η ένωση φωτογραφιών δεν είναι ακόμα έτοιμη. ¦ Съединяването на снимки още не е готово.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Αυτό το εργαλείο δεν είναι ακόμα έτοιμο: δοκίμασε ξανά σε λίγο. ¦ Този инструмент още не е готов: опитай отново след малко.
+Recherche du sujet… ¦ Αναζήτηση θέματος… ¦ Търсене на обекта…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Το θέμα δεν βρέθηκε: το φόντο αγγίζει όλη την άκρη. Δοκίμασε με μικρότερη ανοχή (🪄) ή με το λάσο. ¦ Обектът не е намерен: фонът докосва целия ръб. Опитай с по-малък толеранс (🪄) или с ласото.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Το θέμα επιλέχθηκε: ⇧ + ραβδί ή λάσο για προσθήκη, ⌥ για αφαίρεση · «Μάσκα» για εφαρμογή. Ανοχή (🪄): πόσο απλώνεται το φόντο. ¦ Обектът е избран: ⇧ + пръчка или ласо, за да добавиш, ⌥, за да извадиш; „Маска“, за да го приложиш. Толеранс (🪄): докъде стига фонът.
+Sujet sélectionné ¦ Το θέμα επιλέχθηκε ¦ Обектът е избран
+La photo semble déjà droite. ¦ Η φωτογραφία φαίνεται ήδη ίσια. ¦ Снимката изглежда вече права.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Κάποιες διορθώσεις (κηλίδες, σφραγίδα) έχουν ήδη γίνει: θα μετακινηθούν με το ίσιωμα. ¦ Някои корекции (петна, печат) вече са направени: те ще се изместят при изправянето.
+Redresser la perspective ? ¦ Διόρθωση προοπτικής; ¦ Да изправя ли перспективата?
+Perspective redressée ¦ Η προοπτική διορθώθηκε ¦ Перспективата е изправена
+Perspective enlevée ¦ Η προοπτική αφαιρέθηκε ¦ Перспективата е премахната
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Ζωγράφισε τα χρώματα (απαλό πινέλο): το επίπεδο είναι σε ανάμειξη «Χρώμα», το φως της φωτογραφίας διατηρείται. 🧽 για διόρθωση, αδιαφάνεια του επιπέδου για δοσολογία. ¦ Рисувай цветовете (мека четка): слоят е в режим на смесване „Цвят“, светлината на снимката се запазва. 🧽 за поправка, непрозрачността на слоя за дозиране.
+Recherche des taches… ¦ Αναζήτηση κηλίδων… ¦ Търсене на петна…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Δεν βρέθηκε κηλίδα: αύξησε την ευαισθησία ή το μέγεθος. ¦ Не е намерено петно: увеличи чувствителността или размера.
+✨ Jaunissement enlevé ¦ ✨ Το κιτρίνισμα αφαιρέθηκε ¦ ✨ Премахнато пожълтяване
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Το κιτρίνισμα αφαιρέθηκε στο επίπεδο ρύθμισης «✨ Το κιτρίνισμα αφαιρέθηκε»: η φωτογραφία δεν αλλάζει. ¦ Пожълтяването е премахнато в коригиращия слой „✨ Премахнато пожълтяване“: снимката не се променя.
+Jaunissement enlevé (calque de réglage) ¦ Το κιτρίνισμα αφαιρέθηκε (επίπεδο ρύθμισης) ¦ Премахнато пожълтяване (коригиращ слой)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Περίγραψε πρώτα το πρόσωπο με την έλλειψη ◯ (σύρε πάνω στη φωτογραφία) και μετά πάτα ξανά «Πιο καθαρό πρόσωπο». ¦ Първо огради лицето с елипсата ◯ (плъзни върху снимката), после натисни отново „По-ясно лице“.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Το πρόσωπο καθαρίστηκε από θόρυβο και έγινε πιο ευκρινές σε ξεχωριστό επίπεδο: η αδιαφάνειά του δοσολογεί το εφέ. ¦ Шумът на лицето е намален и то е изострено на отделен слой: непрозрачността му дозира ефекта.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Το εργαλείο διόρθωσης είναι έτοιμο: σύρε κατά μήκος της γρατζουνιάς ή της πτυχής (κάνε ζουμ για ακρίβεια). ¦ Коректорът е готов: плъзни по драскотината или гънката (приближи за точност).
+✨ Vieille photo ravivée ¦ ✨ Παλιά φωτογραφία με ζωντάνια ¦ ✨ Съживена стара снимка
+✨ Réglage automatique ¦ ✨ Αυτόματη ρύθμιση ¦ ✨ Автоматична настройка
+Fais d’abord une sélection. ¦ Κάνε πρώτα μια επιλογή. ¦ Първо направи селекция.
+Masque qui cache tout ¦ Μάσκα που κρύβει τα πάντα ¦ Маска, която скрива всичко
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Αυτό το επίπεδο δεν έχει μάσκα (Επίπεδο → Προσθήκη μάσκας). ¦ Този слой няма маска (Слой → Добави маска).
+Ce calque n’a pas de masque. ¦ Αυτό το επίπεδο δεν έχει μάσκα. ¦ Този слой няма маска.
+Sélection inversée ¦ Η επιλογή αντιστράφηκε ¦ Селекцията е обърната
+Agrandir la sélection ¦ Επέκταση επιλογής ¦ Разшири селекцията
+Réduire la sélection ¦ Σμίκρυνση επιλογής ¦ Свий селекцията
+De combien de points (de l’aperçu) ? ¦ Κατά πόσα σημεία (της προεπισκόπησης); ¦ С колко точки (от прегледа)?
+Sélection agrandie ¦ Η επιλογή επεκτάθηκε ¦ Селекцията е разширена
+Sélection réduite ¦ Η επιλογή μίκρυνε ¦ Селекцията е свита
+Contour progressif de la sélection ¦ Ομαλό περίγραμμα της επιλογής ¦ Плавен ръб на селекцията
+Copie de la sélection ¦ Αντιγραφή της επιλογής ¦ Копие на селекцията
+Sélection copiée sur un calque ¦ Η επιλογή αντιγράφηκε σε επίπεδο ¦ Селекцията е копирана в слой
+Remplissage ¦ Γέμισμα ¦ Запълване
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Η περιοχή σβήστηκε από τη φωτογραφία: θα είναι διάφανη (η εικόνα αποθηκεύεται σε PNG). ¦ Областта е изтрита от снимката: ще е прозрачна (изображението се запазва като PNG).
+Sélection effacée ¦ Η επιλογή σβήστηκε ¦ Селекцията е изтрита
+Recadré sur la sélection ¦ Περικόπηκε στην επιλογή ¦ Изрязано по селекцията
+Filtres de ce calque ¦ Φίλτρα αυτού του επιπέδου ¦ Филтри на този слой
+Plus tôt ¦ Νωρίτερα ¦ По-рано
+un filtre… ¦ ένα φίλτρο… ¦ филтър…
+＋ Ajouter ¦ ＋ Προσθήκη ¦ ＋ Добави
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Μενού <b>Φίλτρο</b>: κάθε φίλτρο μπαίνει σε δικό του επίπεδο (τίποτα δεν καταστρέφεται): το ρυθμίζεις, το δοσολογείς με την αδιαφάνεια του επιπέδου, το περιορίζεις με μάσκα 🎭, το κρύβεις 👁. ¦ ✨ Меню <b>Филтър</b>: всеки филтър отива на собствен слой (нищо не се унищожава): настройваш го, дозираш го с непрозрачността на слоя, ограничаваш го с маска 🎭, скриваш го 👁.
+Réglages remis à zéro ¦ Οι ρυθμίσεις μηδενίστηκαν ¦ Настройките са нулирани
+Point de courbe enlevé ¦ Το σημείο της καμπύλης αφαιρέθηκε ¦ Точката от кривата е махната
+Supprimer ce point ¦ Διαγραφή αυτού του σημείου ¦ Изтрий тази точка
+Point de la courbe ¦ Σημείο της καμπύλης ¦ Точка от кривата
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Μάσκα με κόκκινο: ό,τι είναι κρυμμένο (πλήκτρο \ για επιστροφή) ¦ Маска в червено: скритото (клавиш \ за връщане)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Δεν έχει αποθηκευτεί ακόμα ως έργο: η 💾 Αποθήκευση κρατά όλη τη δουλειά για να συνεχίσεις αργότερα ¦ Още не е запазено като проект: 💾 Запази пази цялата работа, за да продължиш по-късно
+Enregistrer le projet sous un autre nom ¦ Αποθήκευση έργου με άλλο όνομα ¦ Запази проекта под друго име
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Όνομα του νέου έργου (για να το βρεις στα «📂 Έργα…»): ¦ Име на новия проект (за да го намериш в „📂 Проекти…“):
+Les retouches en cours seront perdues. ¦ Τα ρετούς σε εξέλιξη θα χαθούν. ¦ Текущите ретуши ще се загубят.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Άνοιγμα άλλου έργου χωρίς αποθήκευση αυτής της δουλειάς; ¦ Да отворя ли друг проект, без да запазя тази работа?
+Ouvrir sans enregistrer ¦ Άνοιγμα χωρίς αποθήκευση ¦ Отвори, без да запазваш
+affichée ¦ εμφανίζεται ¦ показана
+en cours de retouche ¦ σε ρετούς ¦ в процес на ретуш
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Προβολή, σύγκριση, επιστροφή, μετονομασία, διαγραφή (L3) ¦ Преглед, сравнение, връщане, преименуване, изтриване (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Προβολή, σύγκριση, επιστροφή, μετονομασία, διαγραφή ¦ Преглед, сравнение, връщане, преименуване, изтриване
+l’original est toujours gardé ¦ το πρωτότυπο κρατιέται πάντα ¦ оригиналът винаги се пази
+Original ¦ Πρωτότυπο ¦ Оригинал
+Quitter cette retouche sans l’enregistrer ? ¦ Έξοδος από αυτό το ρετούς χωρίς αποθήκευση; ¦ Да изляза ли от този ретуш, без да го запазя?
+Pas de versions pour cette image. ¦ Δεν υπάρχουν εκδόσεις για αυτή την εικόνα. ¦ Няма версии за това изображение.
+Bicubique, plus lisse (pour agrandir) ¦ Δικυβική, πιο λεία (για μεγέθυνση) ¦ Бикубично, по-гладко (за увеличаване)
+Bicubique, plus net (pour réduire) ¦ Δικυβική, πιο καθαρή (για σμίκρυνση) ¦ Бикубично, по-остро (за намаляване)
+Bilinéaire ¦ Διγραμμική ¦ Билинейно
+Au plus proche (contours nets, pixels) ¦ Πλησιέστερο (καθαρά περιγράμματα, pixel) ¦ Най-близък съсед (остри контури, пиксели)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Το μέγεθος της εικόνας που αποθηκεύεται ή εξάγεται (Εικόνα → Μέγεθος εικόνας, Μέγεθος περιοχής εργασίας) ¦ Размерът на запазеното или експортираното изображение (Изображение → Размер на изображението, Размер на работната област)
+📏 Taille de l’image ¦ 📏 Μέγεθος εικόνας ¦ 📏 Размер на изображението
+pixels ¦ pixel ¦ пиксела
+pour cent ¦ τοις εκατό ¦ процента
+Ajuster à un format ¦ Προσαρμογή σε μορφή ¦ Нагласи към формат
+— garder ces mesures — ¦ — διατήρηση αυτών των διαστάσεων — ¦ — запази тези размери —
+🔗 Conserver les proportions ¦ 🔗 Διατήρηση αναλογιών ¦ 🔗 Запази пропорциите
+Résolution ¦ Ανάλυση ¦ Резолюция
+Rééchantillonner ¦ Επαναδειγματοληψία ¦ Преизчисляване
+Méthode ¦ Μέθοδος ¦ Метод
+À l’impression ¦ Στην εκτύπωση ¦ При печат
+↺ Remettre la taille d’origine ¦ ↺ Επαναφορά αρχικού μεγέθους ¦ ↺ Върни оригиналния размер
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Η φωτογραφία μένει σε πλήρη ποιότητα κατά το ρετούς: το μέγεθος που διαλέγεις εφαρμόζεται όταν αποθηκεύεις ή εξάγεις την εικόνα. Το ↶ Αναίρεση (⌘Z) επιστρέφει στο προηγούμενο μέγεθος. ¦ Снимката остава в пълно качество по време на ретуша: избраният размер се прилага, когато запазиш или експортираш изображението. ↶ Отмени (⌘Z) връща предишния размер.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Αρκετά μεγάλη για εκτύπωση σε A5 στα 300 dpi. ¦ ✓ Достатъчно голямо за печат на A5 при 300 dpi.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Πολύ μικρή για εκτύπωση σε A5 στα 300 dpi (χρειάζονται 1748 × 2480 px). ¦ ⚠️ Твърде малко за печат на A5 при 300 dpi (трябват 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Διάλεξε μέγεθος από 1 έως 30 000 pixel ανά πλευρά (260 εκατομμύρια pixel το πολύ). ¦ Избери размер между 1 и 30 000 пиксела на страна (най-много 260 милиона пиксела).
+⬚ Taille de la zone de travail ¦ ⬚ Μέγεθος περιοχής εργασίας ¦ ⬚ Размер на работната област
+Nouvelle taille ¦ Νέο μέγεθος ¦ Нов размер
+Ancrage ¦ Αγκύρωση ¦ Закотвяне
+Où reste l’image ¦ Πού μένει η εικόνα ¦ Къде остава изображението
+Relative (ajouter à la taille actuelle) ¦ Σχετικό (προσθήκη στο τωρινό μέγεθος) ¦ Относително (добави към сегашния размер)
+Au centre ¦ Στο κέντρο ¦ В центъра
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Η εικόνα μένει σε αυτό το σημείο · ο καμβάς μεγαλώνει (ή κόβεται) γύρω της. ¦ Изображението остава на това място; платното се разширява (или изрязва) около него.
+Fond de la zone ajoutée ¦ Φόντο της περιοχής που προστίθεται ¦ Фон на добавената област
+Transparent (PNG) ¦ Διάφανο (PNG) ¦ Прозрачен (PNG)
+↺ Remettre la zone de départ ¦ ↺ Επαναφορά αρχικής περιοχής ¦ ↺ Върни началната област
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Η Αναίρεση (⌘Z) επιστρέφει στην προηγούμενη περιοχή. ¦ ↶ Отмени (⌘Z) връща предишната област.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Διάλεξε μέγεθος από 1 έως 30 000 pixel ανά πλευρά. ¦ Избери размер между 1 и 30 000 пиксела на страна.
+Informations de l’image ¦ Πληροφορίες εικόνας ¦ Информация за изображението
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Αυτές οι πληροφορίες γράφονται στην εικόνα που αποθηκεύεται ή εξάγεται (XMP, αναγνώσιμο από Photoshop, Lightroom, την Εξερεύνηση…). ¦ Тази информация се записва в запазеното или експортираното изображение (XMP, четимо от Photoshop, Lightroom, Explorer…).
+Droits (copyright) ¦ Δικαιώματα (copyright) ¦ Права (авторско право)
+Personnes reliées ¦ Συνδεδεμένα άτομα ¦ Свързани хора
+Image trop grande pour être enregistrée par le navigateur. ¦ Η εικόνα είναι πολύ μεγάλη για να αποθηκευτεί από το πρόγραμμα περιήγησης. ¦ Изображението е твърде голямо, за да го запази браузърът.
+Image trop grande pour le navigateur. ¦ Η εικόνα είναι πολύ μεγάλη για το πρόγραμμα περιήγησης. ¦ Изображението е твърде голямо за браузъра.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Το ρετουσαρισμένο αντίγραφο προστέθηκε στις ίδιες καρτέλες. ¦ Ретушираното копие е добавено към същите картони.
+Image enregistrée dans les Médias. ¦ Η εικόνα αποθηκεύτηκε στα Πολυμέσα. ¦ Изображението е запазено в Медии.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Εμφανίζεται η νέα έκδοση. Το πρωτότυπο κρατιέται στις εκδόσεις. ¦ Показана е новата версия. Оригиналът се пази във версиите.
+Version enregistrée (non affichée). ¦ Η έκδοση αποθηκεύτηκε (δεν εμφανίζεται). ¦ Версията е запазена (не е показана).
+Ouverture de la photo ¦ Άνοιγμα φωτογραφίας ¦ Отваряне на снимката
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Η αρχική φωτογραφία δεν έχει πια το ίδιο μέγεθος: έλεγξε τα επίπεδα. ¦ Началната снимка вече не е със същия размер: провери слоевете.
+Supprimer le projet (les photos et leurs versions restent) ¦ Διαγραφή έργου (οι φωτογραφίες και οι εκδόσεις τους μένουν) ¦ Изтрий проекта (снимките и версиите им остават)
+Aucun projet de retouche pour l’instant ¦ Κανένα έργο ρετούς ακόμα ¦ Засега няма проекти за ретуш
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ Στο Ρετούς, «💾 Αποθήκευση έργου». ¦ В Ретуш — „💾 Запази проекта“.
+Renommer le projet ¦ Μετονομασία έργου ¦ Преименувай проекта
+La photo et ses versions restent. ¦ Η φωτογραφία και οι εκδόσεις της μένουν. ¦ Снимката и версиите ѝ остават.
+Écran 16:9 — 1920 × 1080 ¦ Οθόνη 16:9 — 1920 × 1080 ¦ Екран 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Τετράγωνο — 1080 × 1080 ¦ Квадрат — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Καρτ ποστάλ — 1500 × 2100 ¦ Пощенска картичка — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 κατακόρυφο (150 dpi) — 1240 × 1754 ¦ A4 портрет (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 οριζόντιο (150 dpi) — 1754 × 1240 ¦ A4 пейзаж (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 κατακόρυφο (300 dpi) — 2480 × 3508 ¦ A4 портрет (300 dpi) — 2480 × 3508
+Autre taille… ¦ Άλλο μέγεθος… ¦ Друг размер…
+⬜ Partir d’un canevas vide ¦ ⬜ Ξεκίνα από κενό καμβά ¦ ⬜ Започни от празно платно
+⬜ Canevas vide ¦ ⬜ Κενός καμβάς ¦ ⬜ Празно платно
+Créer et ouvrir ¦ Δημιουργία και άνοιγμα ¦ Създай и отвори
+Une couleur… ¦ Ένα χρώμα… ¦ Цвят…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Ο καμβάς προστίθεται στα Πολυμέσα · μετά βάζεις επίπεδα, ομάδες, κείμενο, σχήματα, φωτογραφίες (Επιλογή → επίπεδο)… ¦ Платното се добавя към Медии; после слагаш слоеве, групи, текст, форми, снимки (Селекция → слой)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Μέγεθος από 16 έως 8 000 pixel ανά πλευρά. ¦ Размер между 16 и 8 000 пиксела на страна.
+Canevas trop grand pour le navigateur. ¦ Ο καμβάς είναι πολύ μεγάλος για το πρόγραμμα περιήγησης. ¦ Платното е твърде голямо за браузъра.
+Création impossible. ¦ Η δημιουργία δεν είναι δυνατή. ¦ Създаването не е възможно.
+Canevas ¦ Καμβάς ¦ Платно
+Restaurer cette photo ¦ Αποκατάσταση αυτής της φωτογραφίας ¦ Възстанови тази снимка
+Retoucher cette photo ¦ Ρετούς αυτής της φωτογραφίας ¦ Ретуширай тази снимка
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Μια φωτογραφία που εισάγεται προστίθεται στα Πολυμέσα (χωρίς σύνδεση με καρτέλα) · τα ρετούς της κρατιούνται ως εκδόσεις. ¦ Импортираната снимка се добавя към Медии (без връзка с картон); ретушите ѝ се пазят като версии.
+Rouvrir un travail de retouche enregistré ¦ Άνοιξε ξανά μια αποθηκευμένη δουλειά ρετούς ¦ Отвори отново запазена работа по ретуш
+📂 Projets… ¦ 📂 Έργα… ¦ 📂 Проекти…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Μια κενή εικόνα, για ζωγραφική, γραφή ή συνδυασμό επιπέδων ¦ Празно изображение за рисуване, писане или съчетаване на слоеве
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Πολύ μεγάλη: {w} × {h} σημεία. Η μεγέθυνση περιορίζεται σε {max} σημεία ανά πλευρά (και {mp} εκατομμύρια σημεία). ¦ Твърде голямо: {w} × {h} точки. Увеличението е ограничено до {max} точки на страна (и {mp} милиона точки).
+Ta sélection est prise comme ciel ¦ Η επιλογή σου θεωρείται ουρανός ¦ Селекцията ти се приема за небе
+Ciel trouvé : {cov} de la photo ¦ Βρέθηκε ουρανός: {cov} της φωτογραφίας ¦ Намерено небе: {cov} от снимката
+calques « Ciel » et « Harmonisation » ¦ επίπεδα «Ουρανός» και «Εναρμόνιση» ¦ слоеве „Небе“ и „Хармонизиране“
+Ciel remplacé ({what}) ¦ Ο ουρανός αντικαταστάθηκε ({what}) ¦ Небето е сменено ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Το άτομο απομονώθηκε (μέσα στο ορθογώνιό σου): διάλεξε το φόντο · «Διόρθωση περιγράμματος» για διόρθωση με πινέλο. ¦ Човекът е изрязан (в правоъгълника ти): избери фона; „Поправи контура“, за да коригираш с четка.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Το άτομο απομονώθηκε: διάλεξε το φόντο · «Διόρθωση περιγράμματος» για διόρθωση με πινέλο. ¦ Човекът е изрязан: избери фона; „Поправи контура“, за да коригираш с четка.
+{w} × {h} points aujourd’hui ¦ {w} × {h} σημεία σήμερα ¦ {w} × {h} точки в момента
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Αυτή η εικόνα είναι ήδη μεγάλη: η μεγέθυνση περιορίζεται σε {max} σημεία ανά πλευρά. ¦ Това изображение вече е голямо: увеличението е ограничено до {max} точки на страна.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 θα έδινε πάνω από {max} σημεία ανά πλευρά: μόνο ×2. ¦ ×4 би дало над {max} точки на страна: само ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Η μεγεθυμένη εικόνα κατέβηκε ({w} × {h}). ¦ Увеличеното изображение е изтеглено ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Η εικόνα μεγεθύνθηκε ×{k} ({w} × {h}) και μπήκε στα πολυμέσα. ¦ Изображението е увеличено ×{k} ({w} × {h}) и прибрано в медиите.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Εμφανίζεται νέα έκδοση μεγεθυμένη ×{k} ({w} × {h}) · το πρωτότυπο μένει στις εκδόσεις. ¦ Показана е нова версия, увеличена ×{k} ({w} × {h}); оригиналът остава във версиите.
+☀️ Bleu dégagé ¦ ☀️ Καθαρό μπλε ¦ ☀️ Ясно синьо
+⛅ Beaux nuages ¦ ⛅ Όμορφα σύννεφα ¦ ⛅ Красиви облаци
+🌅 Coucher de soleil ¦ 🌅 Ηλιοβασίλεμα ¦ 🌅 Залез
+⛈️ Ciel orageux ¦ ⛈️ Θυελλώδης ουρανός ¦ ⛈️ Бурно небе
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Λευκός χειμωνιάτικος ουρανός ¦ 🌫️ Бяло зимно небе
+Agrandissement arrêté. ¦ Η μεγέθυνση σταμάτησε. ¦ Увеличаването е спряно.
+Fil de calcul en panne. ¦ Το νήμα υπολογισμού απέτυχε. ¦ Изчислителната нишка се повреди.
+Recherche du ciel… ¦ Αναζήτηση ουρανού… ¦ Търсене на небето…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Δεν βρίσκω ουρανό: πρέπει να αγγίζει το πάνω μέρος της φωτογραφίας και να είναι αρκετά ομοιόμορφος. Επίλεξέ τον μόνος/η σου (🪄 ραβδί, ➰ λάσο) και ξαναδοκίμασε: η επιλογή σου θα θεωρηθεί ουρανός. ¦ Не намирам небе: трябва да докосва горния край на снимката и да е достатъчно еднородно. Избери го сам (🪄 пръчка, ➰ ласо), после опитай пак: селекцията ти ще се приеме за небе.
+Harmonisation du premier plan ¦ Εναρμόνιση του προσκηνίου ¦ Хармонизиране на предния план
+Ciel ¦ Ουρανός ¦ Небе
+☁️ Remplacer le ciel ¦ ☁️ Αντικατάσταση ουρανού ¦ ☁️ Смени небето
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Μια φωτογραφία ουρανού: από τη βάση ή από τον υπολογιστή ¦ Снимка на небе: от базата или от компютъра
+Une image… ¦ Μια εικόνα… ¦ Изображение…
+Taille du nouveau ciel ¦ Μέγεθος του νέου ουρανού ¦ Размер на новото небе
+Position verticale ¦ Κατακόρυφη θέση ¦ Вертикална позиция
+Position horizontale ¦ Οριζόντια θέση ¦ Хоризонтална позиция
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Με μέγεθος πάνω από 100 %: ποιο μέρος του ουρανού φαίνεται (0 = το πάνω). ¦ При размер над 100 %: коя част от небето се вижда (0 = горната).
+Fondu à l’horizon ¦ Σβήσιμο στον ορίζοντα ¦ Преливане при хоризонта
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Απαλύνει το όριο ανάμεσα στον ουρανό και τη γη (δέντρα, στέγες): πιο ψηλά, πιο σβησμένο. ¦ Омекотява границата между небето и земята (дървета, покриви): по-високо — по-плавно.
+Harmoniser le premier plan ¦ Εναρμόνιση του προσκηνίου ¦ Хармонизирай предния план
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Το τοπίο παίρνει λίγο από το χρώμα και το φως του νέου ουρανού, ώστε όλα να ταιριάζουν. ¦ Пейзажът поема малко от цвета и светлината на новото небе, за да си пасва всичко.
+Opacité du ciel ¦ Αδιαφάνεια ουρανού ¦ Непрозрачност на небето
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Ζωγράφισε τη μάσκα του επιπέδου «Ουρανός»: ⬛ απόκρυψη (εκεί που δεν πρέπει να περνά ο ουρανός), ⬜ εμφάνιση ¦ Рисувай маската на слоя „Небе“: ⬛ скрий (където небето не бива да минава), ⬜ покажи
+🖌 Corriger le masque ¦ 🖌 Διόρθωση μάσκας ¦ 🖌 Поправи маската
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Τίποτα δεν καταστρέφεται: ο ουρανός είναι επίπεδο με μάσκα. Αν λείπει ή ξεχειλίζει ένα κομμάτι ουρανού: «Διόρθωση μάσκας», ή επίλεξε μόνος/η σου τον ουρανό (🪄, ➰) και ξεκίνα ξανά. ¦ Нищо не се унищожава: небето е слой с маска. Ако парче небе липсва или прелива: „Поправи маската“ или избери небето сам (🪄, ➰) и пусни отново.
+Une photo de ciel ¦ Μια φωτογραφία ουρανού ¦ Снимка на небе
+Prendre ce ciel ¦ Πάρε αυτόν τον ουρανό ¦ Вземи това небе
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Μια φωτογραφία από τη βάση ή μια εικόνα από τον υπολογιστή (μπαίνει στα πολυμέσα). ¦ Снимка от базата или изображение от компютъра (влиза в медиите).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Ζωγραφίζεις τη μάσκα του ουρανού: ⬛ απόκρυψη εκεί που ο ουρανός ξεχειλίζει (φύλλωμα, στέγες), ⬜ εμφάνιση εκεί που λείπει. Μετά «✓ OK». ¦ Рисуваш маската на небето: ⬛ скрий там, където небето прелива (листа, покриви), ⬜ покажи там, където липсва. После „✓ OK“.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Ο ουρανός αντικαταστάθηκε: επίπεδα «Ουρανός» και «Εναρμόνιση του προσκηνίου» (αδιαφάνεια, μάσκα, 👁 για σύγκριση). ¦ Небето е сменено: слоеве „Небе“ и „Хармонизиране на предния план“ (непрозрачност, маска, 👁 за сравнение).
+✂️ Détourer une personne ¦ ✂️ Απομόνωση ατόμου ¦ ✂️ Изрежи човек
+Sans intelligence artificielle : tout se calcule ici ¦ Χωρίς τεχνητή νοημοσύνη: όλα υπολογίζονται εδώ ¦ Без изкуствен интелект: всичко се изчислява тук
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Σχεδίασε ένα ορθογώνιο γύρω από το άτομο (⬚), όχι πολύ σφιχτό — ή άφησέ τα όλα: ολόκληρη η φωτογραφία χρησιμεύει ως πλαίσιο. ¦ 1. Начертай правоъгълник около човека (⬚), не твърде плътно — или остави всичко: цялата снимка служи за рамка.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. «Απομόνωση»: η εφαρμογή μαθαίνει τα χρώματα του ατόμου (μέσα στο ορθογώνιο) και του φόντου (γύρω) και μετά ακολουθεί τα περιγράμματα. ¦ 2. „Изрежи“: приложението научава цветовете на човека (в правоъгълника) и на фона (около него), после следва контурите.
+⬚ Tracer un rectangle ¦ ⬚ Σχεδίασε ορθογώνιο ¦ ⬚ Начертай правоъгълник
+✂️ Détourer ¦ ✂️ Απομόνωση ¦ ✂️ Изрежи
+Fond transparent (image en PNG) ¦ Διάφανο φόντο (εικόνα PNG) ¦ Прозрачен фон (изображение PNG)
+Fond flou ¦ Θολό φόντο ¦ Размит фон
+Fond uni ¦ Μονόχρωμο φόντο ¦ Едноцветен фон
+Garder la personne sur un calque à part ¦ Κράτα το άτομο σε ξεχωριστό επίπεδο ¦ Запази човека на отделен слой
+Flou du fond ¦ Θόλωμα φόντου ¦ Размиване на фона
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Ζωγράφισε τη μάσκα: ⬛ απόκρυψη, ⬜ εμφάνιση ¦ Рисувай маската: ⬛ скрий, ⬜ покажи
+🖌 Retoucher le contour ¦ 🖌 Διόρθωση περιγράμματος ¦ 🖌 Поправи контура
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Λειτουργεί καλά όταν το άτομο ξεχωρίζει από το φόντο του (διαφορετικά χρώματα, αρκετά απλό φόντο). Λεπτά μαλλιά, φορτωμένο φόντο ή ρούχα στο χρώμα του φόντου: θα χρειαστεί διόρθωση με πινέλο («Διόρθωση περιγράμματος»). ¦ Работи добре, когато човекът се откроява от фона (различни цветове, сравнително прост фон). Тънка коса, натоварен фон или дрехи в цвета на фона: ще трябва поправка с четка („Поправи контура“).
+Personne détourée ¦ Το άτομο απομονώθηκε ¦ Човекът е изрязан
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Σχεδίασε ένα ορθογώνιο γύρω από το άτομο (αφήνοντας λίγο φόντο γύρω γύρω) και μετά «✂️ Απομόνωση». ¦ Начертай правоъгълник около човека (като оставиш малко фон наоколо), после „✂️ Изрежи“.
+Détourage… ¦ Απομόνωση… ¦ Изрязване…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Το άτομο δεν βρέθηκε: σχεδίασε το ορθογώνιο πιο κοντά του και ξεκίνα ξανά. ¦ Човекът не е намерен: начертай правоъгълника по-близо до него и опитай отново.
+✂️ Détourer à nouveau ¦ ✂️ Νέα απομόνωση ¦ ✂️ Изрежи отново
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Ζωγραφίζεις τη μάσκα του ατόμου: ⬛ απόκρυψη (φόντο που έμεινε), ⬜ εμφάνιση (κομμάτι του ατόμου που ξεχάστηκε). ¦ Рисуваш маската на човека: ⬛ скрий (останал фон), ⬜ покажи (забравено парче от човека).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Ζωγραφίζεις τη μάσκα του φόντου: ⬛ απόκρυψη (εκεί είναι το άτομο), ⬜ εμφάνιση (εκεί είναι φόντο). ¦ Рисуваш маската на фона: ⬛ скрий (там е човекът), ⬜ покажи (там е фон).
+Détourage : fond transparent ¦ Αποκοπή: διάφανο φόντο ¦ Изрязване: прозрачен фон
+Détourage : fond flou ¦ Αποκοπή: θολό φόντο ¦ Изрязване: размазан фон
+Détourage : fond uni ¦ Αποκοπή: μονόχρωμο φόντο ¦ Изрязване: едноцветен фон
+Détourage : personne sur un calque ¦ Αποκοπή: άτομο σε επίπεδο ¦ Изрязване: човекът на отделен слой
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Το φόντο έγινε διάφανο (μάσκα της φωτογραφίας): η εικόνα θα αποθηκευτεί σε PNG. ¦ Фонът е направен прозрачен (маска на снимката): изображението ще се запази в PNG.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Η αποκοπή έγινε: όλα είναι σε επίπεδα, με μάσκες για διόρθωση αν χρειαστεί. ¦ Изрязването е готово: всичко е на слоеве, с маски за доизглаждане при нужда.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Σχεδίασε ένα ορθογώνιο γύρω από το άτομο (⬚) ή πάτα κατευθείαν «✂️ Αποκοπή» για όλη τη φωτογραφία. ¦ Начертай правоъгълник около човека (⬚) или директно „✂️ Изрежи“ за цялата снимка.
+Préparation de l’image en pleine taille… ¦ Προετοιμασία της εικόνας σε πλήρες μέγεθος… ¦ Подготовка на изображението в пълен размер…
+🔍 Agrandir l’image ¦ 🔍 Μεγέθυνση της εικόνας ¦ 🔍 Увеличи изображението
+Netteté des contours ¦ Ευκρίνεια περιγραμμάτων ¦ Острота на контурите
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Ενισχύει τα περιγράμματα χωρίς φωτοστέφανο· οι ομοιόμορφες περιοχές (ουρανός, δέρμα) μένουν απαλές. ¦ Подсилва контурите без ореол; равните участъци (небе, кожа) остават меки.
+Clique pour choisir l’endroit de l’aperçu ¦ Κάνε κλικ για να διαλέξεις το σημείο της προεπισκόπησης ¦ Щракни, за да избереш мястото за прегледа
+Lissage du grain ¦ Εξομάλυνση κόκκου ¦ Изглаждане на зърното
+Avant (agrandi simplement) ¦ Πριν (απλή μεγέθυνση) ¦ Преди (просто увеличено)
+Après, à 100 % ¦ Μετά, στο 100 % ¦ След, при 100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Νέα έκδοση της φωτογραφίας, που εμφανίζεται παντού (το πρωτότυπο μένει) ¦ Нова версия на снимката, показвана навсякъде (оригиналът остава)
+Agrandir → nouvelle version ¦ Μεγέθυνση → νέα έκδοση ¦ Увеличи → нова версия
+→ copie séparée ¦ → ξεχωριστό αντίγραφο ¦ → отделно копие
+Agrandir → dans les médias ¦ Μεγέθυνση → στα πολυμέσα ¦ Увеличи → в медиите
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Η μεγέθυνση δεν ξαναβρίσκει λεπτομέρειες που δεν φωτογραφήθηκαν ποτέ: η εικόνα γίνεται μεγαλύτερη και πιο καθαρή, όχι πιο ακριβής. ¦ Увеличаването не възстановява подробности, които никога не са били заснети: изображението става по-голямо и по-ясно, но не по-точно.
+Cette image est déjà trop grande pour être agrandie. ¦ Αυτή η εικόνα είναι ήδη πολύ μεγάλη για να μεγεθυνθεί. ¦ Това изображение вече е твърде голямо, за да се увеличи.
+Filtre : {what} ¦ Φίλτρο: {what} ¦ Филтър: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Απόχρωση/Κορεσμός {num} ¦ 🎨 Нюанс/Наситеност {num}
+Motif {num} ¦ Μοτίβο {num} ¦ Шарка {num}
+Bruit ¦ Θόρυβος ¦ Шум
+Artistiques ¦ Καλλιτεχνικά ¦ Художествени
+Pixellisation ¦ Pixel ¦ Пикселизация
+Rendu ¦ Απόδοση ¦ Рендиране
+Autres ¦ Άλλα ¦ Други
+Flou gaussien ¦ Θόλωμα Gauss ¦ Гаусово размазване
+Flou de mouvement ¦ Θόλωμα κίνησης ¦ Размазване от движение
+Flou radial (zoom) ¦ Ακτινικό θόλωμα (ζουμ) ¦ Радиално размазване (зум)
+Flou rotatif ¦ Περιστροφικό θόλωμα ¦ Въртеливо размазване
+Accentuation (masque flou) ¦ Όξυνση (μάσκα θολώματος) ¦ Изостряне (маска за размазване)
+Estampage (relief) ¦ Ανάγλυφο ¦ Релеф
+Solarisation ¦ Σολαριζάρισμα ¦ Соларизация
+Diffusion ¦ Διάχυση ¦ Дифузия
+Vent ¦ Άνεμος ¦ Вятър
+Aquarelle ¦ Ακουαρέλα ¦ Акварел
+Vieux film ¦ Παλιό φιλμ ¦ Стар филм
+Cristallisation ¦ Κρυστάλλωση ¦ Кристализация
+Pointillisme ¦ Πουαντιγισμός ¦ Пуантилизъм
+Nuages (texture) ¦ Σύννεφα (υφή) ¦ Облаци (текстура)
+Lueur diffuse ¦ Διάχυτη λάμψη ¦ Разсеяно сияние
+Tourbillon ¦ Δίνη ¦ Вихър
+Onde ¦ Κύμα ¦ Вълна
+Rayon ¦ Ακτίνα ¦ Радиус
+Centre X ¦ Κέντρο X ¦ Център X
+Centre Y ¦ Κέντρο Y ¦ Център Y
+Seuil ¦ Κατώφλι ¦ Праг
+Bande nette, hauteur ¦ Καθαρή ζώνη, ύψος ¦ Ясна ивица, височина
+Points lumineux ¦ Φωτεινά σημεία ¦ Светли точки
+Monochrome (0 / 1) ¦ Μονόχρωμο (0 / 1) ¦ Едноцветно (0 / 1)
+Gain ¦ Ενίσχυση ¦ Усилване
+Niveaux ¦ Επίπεδα ¦ Нива
+Longueur ¦ Μήκος ¦ Дължина
+Contours ¦ Περιγράμματα ¦ Контури
+Trait ¦ Γραμμή ¦ Линия
+Traits noirs ¦ Μαύρες γραμμές ¦ Черни линии
+Usure ¦ Φθορά ¦ Износване
+Position X ¦ Θέση X ¦ Позиция X
+Position Y ¦ Θέση Y ¦ Позиция Y
+Amplitude ¦ Πλάτος ¦ Амплитуда
+Horizontale (0) / verticale (1) ¦ Οριζόντια (0) / κάθετη (1) ¦ Хоризонтално (0) / вертикално (1)
+Horizontal ¦ Οριζόντια ¦ Хоризонтално
+Contraste ¦ Αντίθεση ¦ Контраст
+Ombres ¦ Σκιές ¦ Сенки
+Chaleur ¦ Θερμότητα ¦ Топлина
+Rouge ¦ Κόκκινο ¦ Червено
+Vert ¦ Πράσινο ¦ Зелено
+Bleu ¦ Μπλε ¦ Синьо
+RVB ¦ RGB ¦ RGB
+Assombrir ¦ Σκούρεμα ¦ Потъмни
+Grain ¦ Κόκκος ¦ Зърно
+Vignette ¦ Βινιέτα ¦ Винетка
+Force ¦ Ένταση ¦ Сила
+Couleurs ¦ Χρώματα ¦ Цветове
+Auto ¦ Αυτόματο ¦ Авто
+Document lisible ¦ Ευανάγνωστο έγγραφο ¦ Четлив документ
+Niveaux : point noir, tons moyens, point blanc ¦ Επίπεδα: μαύρο σημείο, μεσαίοι τόνοι, λευκό σημείο ¦ Нива: черна точка, средни тонове, бяла точка
+Niveaux automatiques ¦ Αυτόματα επίπεδα ¦ Автоматични нива
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Αν ανεβάσεις την καμπύλη, φωτίζει· αν την κατεβάσεις, σκουραίνει· ένα «S» δίνει αντίθεση. Κόκκινο, πράσινο, μπλε: διόρθωση μιας χρωματικής απόχρωσης που κυριαρχεί. ¦ Повдигането на кривата изсветлява, хлътването ѝ затъмнява, едно „S“ дава контраст. Червено, зелено, синьо: поправя преобладаващ цветови оттенък.
+✨ Menu ¦ ✨ Μενού ¦ ✨ Меню
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Μετακίνηση: σύρε τη λαβή ή Alt + ↑ / ↓ ¦ Премести: плъзни дръжката или Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Αυτόματο: τα πιο σκοτεινά σημεία γίνονται μαύρα και τα πιο φωτεινά λευκά· ένα 2ο κλικ επαναφέρει την προηγούμενη κατάσταση. ¦ Авто: най-тъмните точки стават черни, а най-светлите — бели; второ щракване връща предишното състояние.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Φωτίζει μόνο τα σκοτεινά σημεία (ή τα σκουραίνει προς τα αριστερά), χωρίς να αγγίζει τα φωτεινά. ¦ Изсветлява само тъмните части (или ги затъмнява наляво), без да пипа светлите.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Κάνε ξανά κλικ για να επιστρέψεις στην προηγούμενη κατάσταση ¦ Щракни отново, за да се върнеш към предишното състояние
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Κλικ στην καμπύλη: προσθήκη σημείου · σύρσιμο: μετακίνησή του · για να το αφαιρέσεις: διάλεξέ το και πάτα «Αφαίρεση σημείου» (ή το πλήκτρο ⌫) ή σύρε το έξω από το πλαίσιο. ¦ Щракване върху кривата: добавя точка · плъзгане: мести я · за да я махнеш: избери я и „Премахни точката“ (или клавиша ⌫), или я изтегли извън рамката.
+fx ¦ fx ¦ fx
+Normal italique ¦ Κανονικά πλάγια ¦ Нормален курсив
+Extra-fin italique ¦ Εξαιρετικά λεπτά πλάγια ¦ Екстра тънък курсив
+Ultra-léger italique ¦ Υπερελαφριά πλάγια ¦ Ултралек курсив
+Léger italique ¦ Ελαφριά πλάγια ¦ Лек курсив
+Médium italique ¦ Μεσαία πλάγια ¦ Среден курсив
+Demi-gras italique ¦ Ημιέντονα πλάγια ¦ Полуудебелен курсив
+Gras italique ¦ Έντονα πλάγια ¦ Удебелен курсив
+Extra-gras italique ¦ Πολύ έντονα πλάγια ¦ Екстра удебелен курсив
+Noir italique ¦ Μαύρα πλάγια ¦ Черен курсив
+Unicode : Latin-1 ¦ Unicode: Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: ελληνικά ¦ Unicode: гръцки
+Unicode : cyrillique ¦ Unicode: κυριλλικά ¦ Unicode: кирилица
+Unicode : ponctuation ¦ Unicode: στίξη ¦ Unicode: пунктуация
+Unicode : monnaies ¦ Unicode: νομίσματα ¦ Unicode: валути
+Unicode : symboles de lettres ¦ Unicode: σύμβολα γραμμάτων ¦ Unicode: буквоподобни символи
+Unicode : nombres ¦ Unicode: αριθμοί ¦ Unicode: числа
+Unicode : traits de tableau ¦ Unicode: γραμμές πίνακα ¦ Unicode: линии за таблици
+Unicode : symboles divers ¦ Unicode: διάφορα σύμβολα ¦ Unicode: разни символи
+Unicode : casseau (dingbats) ¦ Unicode: διακοσμητικά (dingbats) ¦ Unicode: декоративни знаци (dingbats)
+Unicode : ligatures ¦ Unicode: συμπλέγματα ¦ Unicode: лигатури
+Grain de papier ¦ Υφή χαρτιού ¦ Зърно на хартията
+Rond ¦ Στρογγυλό ¦ Кръгла
+Plume calligraphique ¦ Καλλιγραφική πένα ¦ Калиграфско перо
+Crayon ¦ Μολύβι ¦ Молив
+Pinceau sec ¦ Στεγνό πινέλο ¦ Суха четка
+Herbe ¦ Χορτάρι ¦ Трева
+Peau claire ¦ Ανοιχτόχρωμο δέρμα ¦ Светла кожа
+Peau hâlée ¦ Μαυρισμένο δέρμα ¦ Загоряла кожа
+Peau mate ¦ Μελαχρινό δέρμα ¦ Мургава кожа
+Joues, lèvres ¦ Μάγουλα, χείλη ¦ Бузи, устни
+Cheveux bruns ¦ Καστανά μαλλιά ¦ Кестенява коса
+Cheveux blonds ¦ Ξανθά μαλλιά ¦ Руса коса
+Cheveux gris ¦ Γκρίζα μαλλιά ¦ Сива коса
+Feuillage ¦ Φύλλωμα ¦ Листак
+Uniforme, costume bleu ¦ Στολή, μπλε κοστούμι ¦ Униформа, син костюм
+Robe bordeaux ¦ Μπορντό φόρεμα ¦ Бордо рокля
+Habit noir ¦ Μαύρο ένδυμα ¦ Черно облекло
+Mur, pierre ¦ Τοίχος, πέτρα ¦ Стена, камък
+Brique, tuile ¦ Τούβλο, κεραμίδι ¦ Тухла, керемида
+Bois ¦ Ξύλο ¦ Дърво
+🩹 Correcteur ¦ 🩹 Διορθωτής ¦ 🩹 Коректор
+🧬 Tampon (morceau manquant) ¦ 🧬 Σφραγίδα κλωνοποίησης (κομμάτι που λείπει) ¦ 🧬 Печат за клониране (липсващо парче)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Ζουμ: προσαρμογή, 50 %, 100 %, 200 % ¦ Мащаб: побиране, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Αποκατάσταση ¦ Реставрирай
+menu|Sélection ¦ Επιλογή ¦ Селекция
+retouche|Courbe ¦ Καμπύλη ¦ Крива
+motif|D’après ¦ Βάσει ¦ По образец
+pinceau|Feuille ¦ Φύλλο ¦ Лист
+pinceau|Étoile ¦ Αστέρι ¦ Звезда
+pinceau|Carré ¦ Τετράγωνο ¦ Квадрат
+Glisse pour comparer ¦ Σύρε για σύγκριση ¦ Плъзни, за да сравниш
+Rideau avant / après ¦ Κουρτίνα πριν / μετά ¦ Завеса преди / след
+Image importée ¦ Εισαγόμενη εικόνα ¦ Импортирано изображение
+La fenêtre d’export n’est pas encore prête. ¦ Το παράθυρο εξαγωγής δεν είναι ακόμη έτοιμο. ¦ Прозорецът за експортиране още не е готов.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Η εικόνα κατέβηκε· ένα αντίγραφο φυλάχτηκε στα πολυμέσα. ¦ Изображението е изтеглено; копие е прибрано в медиите.
+Aperçu de l’avant / après ¦ Προεπισκόπηση πριν / μετά ¦ Преглед преди / след
+Rideau vertical (avant à gauche) ¦ Κάθετη κουρτίνα (το πριν αριστερά) ¦ Вертикална завеса („преди“ отляво)
+Rideau horizontal (avant en haut) ¦ Οριζόντια κουρτίνα (το πριν πάνω) ¦ Хоризонтална завеса („преди“ отгоре)
+L’une sous l’autre ¦ Η μία κάτω από την άλλη ¦ Една под друга
+Position du rideau ¦ Θέση της κουρτίνας ¦ Позиция на завесата
+ex. Mariage de Jean et Marie, 1925 ¦ π.χ. Γάμος του Jean και της Marie, 1925 ¦ напр. Сватбата на Jean и Marie, 1925
+Écrire « Avant » et « Après » ¦ Γράψε «Πριν» και «Μετά» ¦ Напиши „Преди“ и „След“
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Το πριν / μετά κατέβηκε· ένα αντίγραφο φυλάχτηκε στα πολυμέσα. ¦ „Преди / след“ е изтеглено; копие е прибрано в медиите.
+Garder appuyé pour voir l’original ¦ Κράτα πατημένο για να δεις το πρωτότυπο ¦ Задръж натиснато, за да видиш оригинала
+👁 Avant / après ¦ 👁 Πριν / μετά ¦ 👁 Преди / след
+◧ Rideau ¦ ◧ Κουρτίνα ¦ ◧ Завеса
+Comparer avec un rideau qu’on glisse sur la photo ¦ Σύγκριση με κουρτίνα που σύρεις πάνω στη φωτογραφία ¦ Сравни със завеса, която плъзгаш върху снимката
+Rideau vertical ou horizontal ¦ Κάθετη ή οριζόντια κουρτίνα ¦ Вертикална или хоризонтална завеса
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Εξαγωγή του πριν / μετά σε εικόνα (δίπλα-δίπλα ή κουρτίνα, με λεζάντα) ¦ Експортирай „преди / след“ като изображение (едно до друго или със завеса, с надпис)
+Rideau horizontal ¦ Οριζόντια κουρτίνα ¦ Хоризонтална завеса
+Rideau vertical ¦ Κάθετη κουρτίνα ¦ Вертикална завеса
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Πόσο ξεπερνά το πλαίσιο γύρω από το πρόσωπο: μικρό = σφιχτό πρόσωπο, μεγάλο = ώμοι και λίγο φόντο. ¦ Колко рамката излиза около лицето: малко = плътно около лицето, голямо = раменете и малко фон.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Το ύψος των ματιών μέσα στο πλαίσιο, από πάνω: το ίδιο για όλα τα πορτρέτα, ώστε να ευθυγραμμίζονται όταν μπαίνουν δίπλα-δίπλα. ¦ Височината на очите в рамката, отгоре надолу: еднаква за всички портрети, така че се подравняват, когато са едно до друго.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Χαμηλή: η άκρη του πινέλου είναι απαλή και σβήνει· υψηλή: η άκρη είναι καθαρή. ¦ Слаба: ръбът на четката е мек и се разлива; силна: ръбът е рязък.
+Filtres ¦ Φίλτρα ¦ Филтри
+✨ Filtres ¦ ✨ Φίλτρα ¦ ✨ Филтри
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Κλασικό: όπως πριν. Αντιληπτικό: πιο ομοιόμορφη μετάβαση για το μάτι, χωρίς γκρίζα ή πολύ σκοτεινή ζώνη στη μέση. Μέσω αποχρώσεων: περνώντας από τα χρώματα του ουράνιου τόξου. ¦ Класически: както преди. Перцептивен: по-равномерен преход за окото, без сива или твърде тъмна зона в средата. През нюансите: минава през цветовете на дъгата.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Πιο ψηλά: πιάνονται και πιο αχνές ή πιο κοντές γραμμές. Πολύ ψηλά, μπορεί να πιαστούν και λεπτομέρειες της φωτογραφίας (μαλλιά, γραφή): κοίτα το κόκκινο. ¦ По-високо: хващат се и по-бледи или по-къси линии. Твърде високо може да хване и детайли от снимката (коса, почерк): гледай червеното.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Η ένταση όλων των βημάτων μαζί: χαμηλά = διακριτική αποκατάσταση, ψηλά = πιο έντονη (αλλά πρόσεχε το «πολύ λείο»). ¦ Силата на всички стъпки наведнъж: ниско = дискретна реставрация, високо = по-силна (но внимавай с „твърде гладко“).
+Sens ¦ Φορά ¦ Посока
+De combien ¦ Πόσο ¦ С колко
+↻ Horaire ¦ ↻ Δεξιόστροφα ¦ ↻ По часовника
+↺ Antihoraire ¦ ↺ Αριστερόστροφα ¦ ↺ Обратно на часовника
+↻ Faire pivoter ¦ ↻ Περιστροφή ¦ ↻ Завърти
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Κρατά το μεγαλύτερο ίσιο ορθογώνιο μέσα στη γυρισμένη φωτογραφία: τέρμα οι κενές γωνίες. Είναι περικοπή: η «Αναίρεση περικοπής» την αφαιρεί. ¦ Запазва най-големия прав правоъгълник в завъртяната снимка: без празни ъгли. Това е изрязване: „Отмени изрязването“ го премахва.
+Enlever ¦ Αφαίρεση ¦ Премахни
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Επιλεγμένο: ο αριθμός των pixel αλλάζει (η εικόνα ξαναϋπολογίζεται). Χωρίς επιλογή: αλλάζουν μόνο η ανάλυση και το μέγεθος εκτύπωσης, τα pixel μένουν ίδια. ¦ Отметнато: броят на пикселите се променя (изображението се преизчислява). Неотметнато: променят се само резолюцията и размерът при печат, пикселите остават същите.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Επιλεγμένο: γράφεις τι προστίθεται (ή αφαιρείται, με αρνητικό αριθμό) γύρω από την εικόνα. ¦ Отметнато: пишеш какво се добавя (или маха, с отрицателно число) около изображението.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Πριν από τη μεγέθυνση, μαλακώνει τον κόκκο και τον θόρυβο (τα περιγράμματα μένουν): χρήσιμο για σκαναρισμένη φωτογραφία με κόκκο. ¦ Преди увеличаването омекотява зърното и шума (контурите остават): полезно за сканирана зърнеста снимка.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Για αρνητικό που φωτογραφήθηκε ή σκαναρίστηκε: τα φωτεινά και τα σκοτεινά αντιστρέφονται. ¦ За заснет или сканиран негатив: светлите и тъмните части се разменят.
+Nom de la photo retouchée ¦ Όνομα της επεξεργασμένης φωτογραφίας ¦ Име на ретушираната снимка
+Le nom de la copie et des fichiers exportés ¦ Το όνομα του αντιγράφου και των αρχείων που εξάγονται ¦ Името на копието и на експортираните файлове
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Το πλήρες ρετούς: επίπεδα, επιλογές, μάσκες, κείμενο, σχήματα, φίλτρα, έργα ¦ Пълният ретуш: слоеве, селекции, маски, текст, фигури, филтри, проекти
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Αφαίρεση θορύβου, σκόνης, τσακίσεων, αντίθεση, ευκρίνεια και χρωματισμός με μια κίνηση (στο πλήρες ρετούς) ¦ Премахване на шум, прах, гънки, контраст, острота и оцветяване наведнъж (в пълния ретуш)
+🎛️ Retouche complète ¦ 🎛️ Πλήρες ρετούς ¦ 🎛️ Пълен ретуш
+Retouche complète ¦ Πλήρες ρετούς ¦ Пълен ретуш
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Εξαγωγή: η επεξεργασμένη φωτογραφία (PNG, JPG, εκτύπωση) ή το πριν / μετά ¦ Експортирай: ретушираната снимка (PNG, JPG, печат) или „преди / след“
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Αποθήκευση και εμφάνιση αυτής της έκδοσης της φωτογραφίας (το πρωτότυπο φυλάγεται) ¦ Запази и покажи тази версия на снимката (оригиналът се пази)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Η επεξεργασμένη φωτογραφία (PNG, JPG, εκτύπωση)… ¦ 🖼 Ретушираната снимка (PNG, JPG, печат)…
+Barre des outils ¦ Γραμμή εργαλείων ¦ Лента с инструменти
+Réglages : couleur, lumière, courbe ¦ Ρυθμίσεις: χρώμα, φως, καμπύλη ¦ Настройки: цвят, светлина, крива
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Διορθωτής κηλίδων: κάνε κλικ σε μια κηλίδα, σκόνη, γρατσουνιά ¦ Коректор на петна: щракни върху петно, прашинка, драскотина
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Σφραγίδα κλωνοποίησης: {key} + κλικ στο σημείο που θα αντιγραφεί, μετά ζωγράφισε πάνω στην περιοχή που θα καλυφθεί ¦ Печат за клониране: {key} + щракване върху мястото за копиране, после рисувай върху зоната за покриване
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + κλικ για να διαλέξεις το σημείο που θα αντιγραφεί, μετά ζωγράφισε πάνω στην περιοχή που θα καλυφθεί. ¦ {key} + щракване, за да избереш мястото за копиране, после рисувай върху зоната за покриване.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Περιστροφή κατά 90° προς τα αριστερά (αριστερόστροφα) ¦ Завърти на 90° наляво (обратно на часовника)
+Pivoter à gauche ¦ Περιστροφή αριστερά ¦ Завърти наляво
+Faire pivoter de 90° vers la droite (horaire) ¦ Περιστροφή κατά 90° προς τα δεξιά (δεξιόστροφα) ¦ Завърти на 90° надясно (по часовника)
+Pivoter à droite ¦ Περιστροφή δεξιά ¦ Завърти надясно
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Πλήρες ρετούς: επίπεδα, επιλογές, μάσκες, κείμενο, φίλτρα ¦ Пълен ретуш: слоеве, селекции, маски, текст, филтри
+Les corrections en cours seront perdues. ¦ Οι διορθώσεις σε εξέλιξη θα χαθούν. ¦ Текущите корекции ще бъдат загубени.
+Passer à la retouche complète ? ¦ Μετάβαση στο πλήρες ρετούς; ¦ Към пълния ретуш?
+Passer à la retouche complète ¦ Μετάβαση στο πλήρες ρετούς ¦ Към пълния ретуш
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Ρύθμισε το χρώμα και το φως δεξιά · κράτα πατημένο το «👁 Πριν / μετά» για σύγκριση ¦ Настрой цвета и светлината вдясно · задръж „👁 Преди / след“, за да сравниш
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Κάνε κλικ σε μια κηλίδα, σκόνη ή γρατσουνιά: αντικαθίσταται από ό,τι υπάρχει γύρω της. Για γρατσουνιά, σύρε κατά μήκος της. ¦ Щракни върху петно, прашинка или драскотина: заменя се с това, което е около него. За драскотина плъзни по дължината ѝ.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Διάλεξε πρώτα το σημείο που θα αντιγραφεί: Alt + κλικ (⌥ + κλικ σε Mac). ¦ Първо избери мястото за копиране: Alt + щракване (⌥ + щракване на Mac).
+Versions de la photo ¦ Εκδόσεις της φωτογραφίας ¦ Версии на снимката
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Αποθήκευση χωρίς εμφάνιση (φυλάγεται στις εκδόσεις) ¦ Запази, без да показваш (пази се във версиите)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Ξεχωριστό αντίγραφο (άλλο πολυμέσο, συνδεδεμένο με τις ίδιες καρτέλες) ¦ Отделно копие (друга медия, свързана със същите картони)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Εξαγωγή της επεξεργασμένης φωτογραφίας (PNG, JPG, εκτύπωση)… ¦ Експортирай ретушираната снимка (PNG, JPG, печат)…
+Exporter l’avant / après… ¦ Εξαγωγή του πριν / μετά… ¦ Експортирай „преди / след“…
+Restaurer en une fois… ¦ Αποκατάσταση με μια κίνηση… ¦ Реставрирай наведнъж…
+Pivoter de 90° à droite (horaire) ¦ Περιστροφή κατά 90° δεξιά (δεξιόστροφα) ¦ Завърти на 90° надясно (по часовника)
+Pivoter de 90° à gauche (antihoraire) ¦ Περιστροφή κατά 90° αριστερά (αριστερόστροφα) ¦ Завърти на 90° наляво (обратно на часовника)
+Avant / après en rideau ¦ Πριν / μετά με κουρτίνα ¦ Преди / след със завеса
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Η φωτογραφία προστίθεται στα πολυμέσα (χωρίς καρτέλα). Οι ρυθμίσεις σε εξέλιξη σε αυτή εδώ τη φωτογραφία εγκαταλείπονται. ¦ Снимката се добавя в медиите (без картон). Текущите настройки на тази снимка се изоставят.
+Retoucher « {name} » à la place ? ¦ Επεξεργασία του «{name}» στη θέση της; ¦ Да ретушираш „{name}“ вместо нея?
+💧 Fluidité ¦ 💧 Ρευστοποίηση ¦ 💧 Втечняване
+Fluidité ¦ Ρευστοποίηση ¦ Втечняване
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Ζωγράφισε πάνω στη φωτογραφία για να την παραμορφώσεις, σαν μαλακή ζύμη ¦ Рисувай върху снимката, за да я деформираш като меко тесто
+L’image suit la main ¦ Η εικόνα ακολουθεί το χέρι ¦ Изображението следва ръката
+Agrandit sous le pinceau (garder appuyé) ¦ Μεγεθύνει κάτω από το πινέλο (κράτα πατημένο) ¦ Уголемява под четката (задръж натиснато)
+Rétrécit sous le pinceau (garder appuyé) ¦ Μικραίνει κάτω από το πινέλο (κράτα πατημένο) ¦ Смалява под четката (задръж натиснато)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Περιστρέφει δεξιόστροφα ¦ Върти по часовниковата стрелка
+Fait tourner dans l’autre sens ¦ Περιστρέφει προς την άλλη φορά ¦ Върти в обратната посока
+Ramène peu à peu l’image d’origine ¦ Επαναφέρει σιγά σιγά την αρχική εικόνα ¦ Постепенно връща оригиналното изображение
+➡ Pousser ¦ ➡ Ώθηση ¦ ➡ Бутане
+⊕ Gonfler ¦ ⊕ Φούσκωμα ¦ ⊕ Издуване
+⊖ Dégonfler ¦ ⊖ Ξεφούσκωμα ¦ ⊖ Свиване
+Dégonfler ¦ Ξεφούσκωμα ¦ Свиване
+Gonfler ¦ Φούσκωμα ¦ Издуване
+Pousser ¦ Ώθηση ¦ Бутане
+↻ Tourbillon ¦ ↻ Δίνη ¦ ↻ Вихър
+↺ Tourbillon inverse ¦ ↺ Αντίστροφη δίνη ¦ ↺ Обратен вихър
+Tourbillon inverse ¦ Αντίστροφη δίνη ¦ Обратен вихър
+↩ Reconstruire ¦ ↩ Ανακατασκευή ¦ ↩ Възстанови
+Reconstruire ¦ Ανακατασκευή ¦ Възстанови
+Image trop grande pour la Fluidité. ¦ Η εικόνα είναι πολύ μεγάλη για τη Ρευστοποίηση. ¦ Изображението е твърде голямо за Втечняване.
+↶ Annuler le coup ¦ ↶ Αναίρεση της πινελιάς ¦ ↶ Отмени щриха
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Εφαρμογή (επίπεδο «Ρευστοποίηση») ¦ ✓ Приложи (слой „Втечняване“)
+Rien n’a été déformé. ¦ Δεν παραμορφώθηκε τίποτα. ¦ Нищо не е деформирано.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Η Ρευστοποίηση εφαρμόστηκε στο επίπεδο «Ρευστοποίηση» (η φωτογραφία μένει από κάτω: 👁 για σύγκριση). ¦ 💧 Втечняването е приложено на слоя „Втечняване“ (снимката остава отдолу: 👁 за сравнение).
+🪄 Gomme magique ¦ 🪄 Μαγική γόμα ¦ 🪄 Магическа гума
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Κάνε κλικ στο φόντο που θα γίνει διάφανο (πολλά κλικ προστίθενται) ¦ Щракни върху фона, който да стане прозрачен (няколко щраквания се сумират)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Μόνο η γειτονική περιοχή (αλλιώς: αυτό το χρώμα παντού) ¦ Само съседната зона (иначе: този цвят навсякъде)
+↶ Annuler le clic ¦ ↶ Αναίρεση του κλικ ¦ ↶ Отмени щракването
+✓ Appliquer (masque de la photo) ¦ ✓ Εφαρμογή (μάσκα της φωτογραφίας) ¦ ✓ Приложи (маска на снимката)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Η φωτογραφία έχει ήδη μάσκα: η μαγική γόμα την αντικαθιστά. ¦ Снимката вече има маска: магическата гума я заменя.
+Remplacer le masque de la photo ? ¦ Αντικατάσταση της μάσκας της φωτογραφίας; ¦ Да се замени ли маската на снимката?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Το φόντο έγινε διάφανο (μάσκα της φωτογραφίας, για διόρθωση με πινέλο): η εικόνα αποθηκεύεται σε PNG. ¦ 🪄 Фонът е направен прозрачен (маска на снимката, за доизглаждане с четка): изображението се запазва в PNG.
+Masque de « {name} » ¦ Μάσκα του «{name}» ¦ Маска на „{name}“
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Δεν υπάρχει ακόμη μάσκα: κάνε αποκοπή (✂️), σβήσε το φόντο (🪄) ή πρόσθεσε μάσκα σε ένα επίπεδο, και μετά βελτίωσε την άκρη της. ¦ Още няма маска: изрежи (✂️), изтрий фона (🪄) или добави маска към слой, после изглади ръба ѝ.
+✨ Affiner le bord ¦ ✨ Βελτίωση άκρης ¦ ✨ Изглади ръба
+Décaler le bord ¦ Μετατόπιση της άκρης ¦ Измести ръба
+Voir le masque seul (blanc : gardé) ¦ Εμφάνιση μόνο της μάσκας (λευκό: διατηρείται) ¦ Покажи само маската (бяло: запазено)
+Bord du masque affiné ¦ Η άκρη της μάσκας βελτιώθηκε ¦ Ръбът на маската е изгладен
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Η άκρη βελτιώθηκε (↶ για επιστροφή· το πινέλο διορθώνει τα υπόλοιπα). ¦ ✨ Ръбът е изгладен (↶ за връщане; четката поправя останалото).
+Lissage du bord ¦ Εξομάλυνση της άκρης ¦ Изглаждане на ръба
+Contraste du bord ¦ Αντίθεση της άκρης ¦ Контраст на ръба
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Η εικόνα είναι πολύ μεγάλη ({w} × {h} σημεία): μείωσε το μέγεθος των φωτογραφιών. ¦ Изображението е твърде голямо ({w} × {h} точки): намали размера на снимките.
+Recherche… ({i}/{total}) ¦ Αναζήτηση… ({i}/{total}) ¦ Търсене… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ «{name}»: μετατόπιση {dx} × {dy} σημεία, περιστροφή {rot}°, ομοιότητα {pct} %. ¦ „{name}“: отместване {dx} × {dy} точки, завъртане {rot}°, сходство {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Δεν βρέθηκε σίγουρο κοινό τμήμα για {names}: τοποθέτησέ την με το χέρι (σύρσιμο, βελάκια· «Λειτουργία διαφοράς» για έλεγχο). ¦ Няма сигурна обща част за {names}: постави я ръчно (плъзгане, стрелки; „Режим разлика“ за проверка).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Οι φωτογραφίες ευθυγραμμίστηκαν: έλεγξε (σύρσιμο, βελάκια για ρύθμιση). Το «Ομαλή ένωση» μαλακώνει τη σύνδεση κατά την αποθήκευση. ¦ Снимките са подравнени: провери (плъзгане, стрелки за донастройка). „Слей съединенията“ омекотява прехода при запазване.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Η φωτογραφία ευθυγραμμίστηκε: έλεγξε (σύρσιμο, βελάκια για ρύθμιση). Το «Ομαλή ένωση» μαλακώνει τη σύνδεση κατά την αποθήκευση. ¦ Снимката е подравнена: провери (плъзгане, стрелки за донастройка). „Слей съединенията“ омекотява прехода при запазване.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Η συναρμολογημένη εικόνα αποθηκεύτηκε, συνδεδεμένη με τις ίδιες καρτέλες με το «{name}». Οι αρχικές φωτογραφίες μένουν. ¦ Сглобеното изображение е запазено и свързано със същите картони като „{name}“. Оригиналните снимки остават.
+Titre de l’image assemblée ¦ Τίτλος της συναρμολογημένης εικόνας ¦ Заглавие на сглобеното изображение
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Ο τίτλος της συναρμολογημένης εικόνας (και το όνομα των αρχείων που εξάγονται) ¦ Заглавието на сглобеното изображение (и името на експортираните файлове)
+L’image assemblée : PNG, JPG ou imprimer ¦ Η συναρμολογημένη εικόνα: PNG, JPG ή εκτύπωση ¦ Сглобеното изображение: PNG, JPG или печат
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Αποθήκευση της συναρμολογημένης εικόνας στα πολυμέσα, συνδεδεμένης με τις ίδιες καρτέλες με την πρώτη φωτογραφία της βάσης ¦ Запази сглобеното изображение в медиите, свързано със същите картони като първата снимка от базата
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Κάνε κλικ σε μια φωτογραφία για να τη διαλέξεις, σύρε για να τη μετακινήσεις · Shift + ροδέλα: μέγεθος · Alt + ροδέλα: περιστροφή · ροδέλα: ζουμ · βελάκια: 1 px (Shift: 10 px) · σύρε εδώ μια φωτογραφία από τον υπολογιστή για να την προσθέσεις ¦ Щракни снимка, за да я избереш, плъзни, за да я преместиш · Shift + колелце: размер · Alt + колелце: завъртане · колелце: мащаб · стрелки: 1 px (Shift: 10 px) · пусни тук снимка от компютъра, за да я добавиш
+Fond blanc (sinon transparent en PNG) ¦ Λευκό φόντο (αλλιώς διάφανο σε PNG) ¦ Бял фон (иначе прозрачен в PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Επιλεγμένο: το φόντο γύρω από τις φωτογραφίες είναι λευκό. Χωρίς επιλογή, μένει διάφανο (μόνο σε PNG· το JPG βάζει πάντα λευκό). ¦ Отметнато: фонът около снимките е бял. Неотметнато остава прозрачен (само в PNG; JPG винаги слага бяло).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Ό,τι ταιριάζει καλά γίνεται μαύρο: ιδανικό για να ευθυγραμμίσεις δύο φωτογραφίες του ίδιου σημείου ¦ Това, което се припокрива добре, става черно: идеално за подравняване на две снимки на едно и също място
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Τα ίδια μέρη των δύο φωτογραφιών γίνονται μαύρα: όταν η γραφή σχεδόν εξαφανίζεται, είναι τέλεια ευθυγραμμισμένες. ¦ Еднаквите части на двете снимки стават черни: когато почеркът почти изчезне, те са идеално подравнени.
+Mode différence ¦ Λειτουργία διαφοράς ¦ Режим разлика
+Boutons des photos ¦ Κουμπιά των φωτογραφιών ¦ Бутони на снимките
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Πανόραμα, σελίδα που φωτογραφήθηκε σε δύο φορές: κάθε φωτογραφία μπαίνει πάνω στην προηγούμενη εκεί που επικαλύπτονται (μετατόπιση, μικρή περιστροφή) ¦ Панорама, страница, снимана на два пъти: всяка снимка се поставя върху предишната там, където се застъпват (отместване, леко завъртане)
+🪄 Aligner tout seul ¦ 🪄 Αυτόματη ευθυγράμμιση ¦ 🪄 Подравни автоматично
+Image enregistrée ¦ Η εικόνα αποθηκεύτηκε ¦ Изображението е запазено
+JPEG (léger) ¦ JPEG (ελαφρύ) ¦ JPEG (лек)
+PNG (sans perte) ¦ PNG (χωρίς απώλειες) ¦ PNG (без загуби)
+Fondre les raccords ¦ Ομαλή ένωση ¦ Слей съединенията
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Εκεί που δύο φωτογραφίες επικαλύπτονται, η άκρη της πάνω σβήνει απαλά: δεν φαίνεται σκαλοπάτι στη σύνδεση. ¦ Там, където две снимки се застъпват, ръбът на горната избледнява плавно: не се вижда стъпало при съединението.
+Largeur du fondu ¦ Πλάτος της ομαλής μετάβασης ¦ Ширина на преливането
+Rogner aux parties couvertes (sans coins vides) ¦ Περικοπή στα καλυμμένα μέρη (χωρίς κενές γωνίες) ¦ Изрежи до покритите части (без празни ъгли)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Κρατά το μεγαλύτερο ορθογώνιο που καλύπτεται πλήρως από τις φωτογραφίες: τέρμα οι λευκές γωνίες γύρω από ένα πανόραμα. ¦ Запазва най-големия правоъгълник, изцяло покрит от снимките: без бели ъгли около панорамата.
+L’assemblage non enregistré sera perdu. ¦ Η συναρμολόγηση που δεν αποθηκεύτηκε θα χαθεί. ¦ Незапазеното сглобяване ще бъде загубено.
+Fermer sans enregistrer l’assemblage ? ¦ Κλείσιμο χωρίς αποθήκευση της συναρμολόγησης; ¦ Да затвориш, без да запазиш сглобяването?
+Mettre devant ¦ Μπροστά ¦ Премести отпред
+Mettre derrière ¦ Πίσω ¦ Премести отзад
+Aucune photo à assembler pour l’instant ¦ Καμία φωτογραφία για συναρμολόγηση προς το παρόν ¦ Засега няма снимки за сглобяване
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ «＋ Φωτογραφίες» ή σύρε μια φωτογραφία από τον υπολογιστή στην επιφάνεια εργασίας. ¦ „＋ Снимки“ или пусни снимка от компютъра върху работното поле.
+＋ Photos ¦ ＋ Φωτογραφίες ¦ ＋ Снимки
+Clique une photo pour la régler. ¦ Κάνε κλικ σε μια φωτογραφία για να τη ρυθμίσεις. ¦ Щракни снимка, за да я настроиш.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Το μέγεθος της φωτογραφίας σε σχέση με τα πραγματικά της σημεία: για να βάλεις δύο φωτογραφίες στην ίδια κλίμακα. ¦ Размерът на снимката спрямо истинските ѝ точки: за да сложиш две снимки в един и същ мащаб.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Μισοδιάφανη, η πάνω φωτογραφία αφήνει να φανεί η από κάτω: ευθυγραμμίζεις τις γραφές. ¦ Полупрозрачна, горната снимка оставя да се вижда долната: подравняваш почерците.
+À moitié transparente ¦ Μισοδιάφανη ¦ Полупрозрачна
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Για να βάλεις δύο φωτογραφίες στην ίδια κλίμακα: κάνε την πάνω μισοδιάφανη (ή τσέκαρε «Λειτουργία διαφοράς»), μετά ρύθμισε το μέγεθος και την περιστροφή της μέχρι οι γραφές να συμπέσουν. ¦ За да сложиш две снимки в един и същ мащаб: направи горната полупрозрачна (или отметни „Режим разлика“), после настрой размера и завъртането ѝ, докато почерците съвпаднат.
+Opaque ¦ Αδιαφανής ¦ Непрозрачна
+Aucune photo visible. ¦ Καμία ορατή φωτογραφία. ¦ Няма видима снимка.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Πρόσθεσε τουλάχιστον δύο φωτογραφίες που επικαλύπτονται («＋ Φωτογραφίες»). ¦ Добави поне две снимки, които се застъпват („＋ Снимки“).
+Le navigateur n’a pas pu créer l’image. ¦ Ο περιηγητής δεν μπόρεσε να δημιουργήσει την εικόνα. ¦ Браузърът не успя да създаде изображението.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Για αποθήκευση στη βάση, μία από τις φωτογραφίες πρέπει να προέρχεται από τη βάση (αλλιώς: ⤓ Λήψη). ¦ За запазване в базата една от снимките трябва да е от базата (иначе: ⤓ Изтегли).
+Création de l’image… ¦ Δημιουργία της εικόνας… ¦ Създаване на изображението…
+ASSEMBLER ¦ ΣΥΝΑΡΜΟΛΟΓΗΣΗ ¦ СГЛОБЯВАНЕ
+ce n’est pas un fichier PSD ¦ δεν είναι αρχείο PSD ¦ това не е PSD файл
+les très grands PSD (PSB) ne sont pas lus ¦ τα πολύ μεγάλα PSD (PSB) δεν διαβάζονται ¦ много големите PSD (PSB) не се четат
+version de PSD inconnue ¦ άγνωστη έκδοση PSD ¦ непозната версия на PSD
+profondeur {n} bits non lue (seulement 8 bits) ¦ βάθος {n} bit δεν διαβάζεται (μόνο 8 bit) ¦ дълбочина {n} бита не се чете (само 8 бита)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ διαβάζονται μόνο PSD σε RGB ή σε κλίμακα του γκρι ¦ четат се само PSD в RGB или в нива на сивото
+image trop grande ¦ η εικόνα είναι πολύ μεγάλη ¦ изображението е твърде голямо
+compression ZIP non lue ¦ η συμπίεση ZIP δεν διαβάζεται ¦ ZIP компресията не се чете
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 Το PSD είναι έτοιμο: {n} επίπεδο, {w} × {h} px (τα επίπεδα ρύθμισης είναι μέσα στην ισοπεδωμένη εικόνα).|🗂 Το PSD είναι έτοιμο: {n} επίπεδα, {w} × {h} px (τα επίπεδα ρύθμισης είναι μέσα στην ισοπεδωμένη εικόνα). ¦ 🗂 PSD е готов: {n} слой, {w} × {h} px (коригиращите слоеве са в слятото изображение).|🗂 PSD е готов: {n} слоя, {w} × {h} px (коригиращите слоеве са в слятото изображение).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 Το PSD είναι έτοιμο: {n} επίπεδο, {w} × {h} px (τα επίπεδα ρύθμισης είναι μέσα στην ισοπεδωμένη εικόνα).|🗂 Το PSD είναι έτοιμο: {n} επίπεδα, {w} × {h} px (τα επίπεδα ρύθμισης είναι μέσα στην ισοπεδωμένη εικόνα). ¦ 🗂 PSD е готов: {n} слой, {w} × {h} px (коригиращите слоеве са в слятото изображение).|🗂 PSD е готов: {n} слоя, {w} × {h} px (коригиращите слоеве са в слятото изображение).
+PSD illisible : {err}. ¦ Μη αναγνώσιμο PSD: {err}. ¦ PSD не може да се прочете: {err}.
+Calque PSD ¦ Επίπεδο PSD ¦ Слой от PSD
+PSD importé : {file} ¦ Εισαγωγή PSD: {file} ¦ Импортиран PSD: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 Εισήχθη {n} επίπεδο από το «{file}» (διαφορετικές αναλογίες: προσαρμόστηκε στη φωτογραφία).|🗂 Εισήχθησαν {n} επίπεδα από το «{file}» (διαφορετικές αναλογίες: προσαρμόστηκαν στη φωτογραφία). ¦ 🗂 Импортиран е {n} слой от „{file}“ (различни пропорции: нагоден към снимката).|🗂 Импортирани са {n} слоя от „{file}“ (различни пропорции: нагодени към снимката).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 Εισήχθη {n} επίπεδο από το «{file}».|🗂 Εισήχθησαν {n} επίπεδα από το «{file}». ¦ 🗂 Импортиран е {n} слой от „{file}“.|🗂 Импортирани са {n} слоя от „{file}“.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 Εισήχθη {n} επίπεδο από το «{file}» (διαφορετικές αναλογίες: προσαρμόστηκε στη φωτογραφία).|🗂 Εισήχθησαν {n} επίπεδα από το «{file}» (διαφορετικές αναλογίες: προσαρμόστηκαν στη φωτογραφία). ¦ 🗂 Импортиран е {n} слой от „{file}“ (различни пропорции: нагоден към снимката).|🗂 Импортирани са {n} слоя от „{file}“ (различни пропорции: нагодени към снимката).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 Εισήχθη {n} επίπεδο από το «{file}».|🗂 Εισήχθησαν {n} επίπεδα από το «{file}». ¦ 🗂 Импортиран е {n} слой от „{file}“.|🗂 Импортирани са {n} слоя от „{file}“.
+Cocher pour comparer ¦ Τσέκαρε για σύγκριση ¦ Отметни за сравнение
+Coche deux versions pour les comparer. ¦ Τσέκαρε δύο εκδόσεις για να τις συγκρίνεις. ¦ Отметни две версии, за да ги сравниш.
+Plus ancien ¦ Παλαιότερα ¦ По-стари
+léger ¦ ελαφρύ ¦ лек
+Taille des vignettes ¦ Μέγεθος μικρογραφιών ¦ Размер на миниатюрите
+Utiliser ces images ¦ Χρήση αυτών των εικόνων ¦ Използвай тези изображения
+Chercher : titre, cote, personne, lieu, année ¦ Αναζήτηση: τίτλος, κωδικός, άτομο, τόπος, έτος ¦ Търси: заглавие, архивен номер, човек, място, година
+Titre, cote, personne, lieu, année… ¦ Τίτλος, κωδικός, άτομο, τόπος, έτος… ¦ Заглавие, архивен номер, човек, място, година…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Διάστημα: επιλογή · Enter: επιβεβαίωση ¦ ↑ ↓ ← → · Интервал: отметни · Enter: потвърди
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: επιβεβαίωση ¦ ↑ ↓ ← → · Enter: потвърди
+Retouche ¦ Ρετούς ¦ Ретуш
+RETOUCHE ¦ ΡΕΤΟΥΣ ¦ РЕТУШ
+photo|Légende ¦ Λεζάντα ¦ Надпис
+Propriétés ¦ Ιδιότητες ¦ Свойства
+Préréglage ¦ Προρύθμιση ¦ Предварителна настройка
+Aucun. ¦ Καμία. ¦ Няма.
+trop petite pour imprimer en A5 ¦ πολύ μικρή για εκτύπωση σε A5 ¦ твърде малка за печат на A5
+assez grande pour imprimer en A5 ¦ αρκετά μεγάλη για εκτύπωση σε A5 ¦ достатъчно голяма за печат на A5
+Écran 16:9 (1920 × 1080) ¦ Οθόνη 16:9 (1920 × 1080) ¦ Екран 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Οθόνη 4:3 (1600 × 1200) ¦ Екран 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Τετράγωνο 1:1 (1080 × 1080) ¦ Квадрат 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Κάθετο 9:16 (1080 × 1920) ¦ Вертикален 9:16 (1080 × 1920)
+photo|Exposition ¦ Έκθεση ¦ Експозиция
+photo|Luminosité ¦ Φωτεινότητα ¦ Яркост
+Colorisation : {what} ¦ Χρωματισμός: {what} ¦ Оцветяване: {what}
+{what} oui ¦ {what} ναι ¦ {what} да
+{what} non ¦ {what} όχι ¦ {what} не
+Courbe {what} ¦ Καμπύλη {what} ¦ Крива {what}
+{layer} verrouillé ¦ {layer} κλειδώθηκε ¦ {layer} е заключен
+{layer} déverrouillé ¦ {layer} ξεκλειδώθηκε ¦ {layer} е отключен
+« {name} » seulement sur l’élément dessous ¦ «{name}» μόνο στο στοιχείο από κάτω ¦ „{name}“ само върху елемента отдолу
+« {name} » sur tout ce qui est dessous ¦ «{name}» σε ό,τι βρίσκεται από κάτω ¦ „{name}“ върху всичко отдолу
+Teinte/Saturation : {what} ¦ Απόχρωση/Κορεσμός: {what} ¦ Нюанс/Наситеност: {what}
+{dpi} ppp ¦ {dpi} ppi ¦ {dpi} ppi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Αποστολή ({w} × {h} σημεία, {size} MB)… ¦ Изпращане ({w} × {h} точки, {size} MB)…
+Barre du haut (groupes) ¦ Πάνω γραμμή (ομάδες) ¦ Горна лента (групи)
+Les outils ¦ Τα εργαλεία ¦ Инструментите
+Options des outils (pinceau, texte…) ¦ Επιλογές εργαλείων (πινέλο, κείμενο…) ¦ Опции на инструментите (четка, текст…)
+Colonne d’outils ¦ Στήλη εργαλείων ¦ Колона с инструменти
+Panneau Réglages ¦ Πίνακας Ρυθμίσεων ¦ Панел „Настройки“
+Préréglages ¦ Προρυθμίσεις ¦ Предварителни настройки
+Import des réglages indisponible. ¦ Η εισαγωγή ρυθμίσεων δεν είναι διαθέσιμη. ¦ Импортирането на настройки не е налично.

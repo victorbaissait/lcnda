@@ -1,0 +1,1013 @@
+fr ¦ el ¦ bg
+TABLEUR · BASE ¦ ΥΠΟΛΟΓΙΣΤΙΚΟ ΦΥΛΛΟ · ΒΑΣΗ ¦ ЕЛЕКТРОННА ТАБЛИЦА · БАЗА
+⤒ Remplir depuis l’app ¦ ⤒ Συμπλήρωση από την εφαρμογή ¦ ⤒ Попълни от приложението
+1 · Ce qu’on prend ¦ 1 · Τι παίρνουμε ¦ 1 · Какво взимаме
+(comme l’export pour partager) ¦ (όπως η εξαγωγή για κοινοποίηση) ¦ (като експорта за споделяне)
+2 · Les colonnes ¦ 2 · Οι στήλες ¦ 2 · Колоните
+(glisse ⠿ pour ranger) ¦ (σύρε το ⠿ για να τις τακτοποιήσεις) ¦ (плъзни ⠿, за да подредиш)
+＋ Une colonne tirée des données ¦ ＋ Μια στήλη από τα δεδομένα ¦ ＋ Колона от данните
+3 · Aperçu ¦ 3 · Προεπισκόπηση ¦ 3 · Преглед
+🔗 Tenir à jour ¦ 🔗 Διατήρηση ενημερωμένου ¦ 🔗 Поддържай актуално
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — οι γραμμές αλλάζουν όταν αλλάζει η βάση (στο άνοιγμα ή με ↻). Οι στήλες που πρόσθεσες δεξιά (τύποι, σημειώσεις) μένουν στη σωστή γραμμή. ¦ — редовете се променят, когато базата се промени (при отваряне или с ↻). Колоните, които си добавил вдясно (формули, бележки), остават на правилния ред.
+Où : ¦ Πού: ¦ Къде:
+à la même place (remplace la plage liée) ¦ στην ίδια θέση (αντικαθιστά τη συνδεδεμένη περιοχή) ¦ на същото място (заменя свързания диапазон)
+à partir de A1 dans une nouvelle feuille ¦ από το A1 σε νέο φύλλο ¦ от A1 в нов лист
+à partir de {cell} dans cette feuille ¦ από το {cell} σε αυτό το φύλλο ¦ от {cell} в този лист
+⤒ Remplir ¦ ⤒ Συμπλήρωση ¦ ⤒ Попълни
+Commune ¦ Δήμος ¦ Община
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Δεν υπάρχει ακόμη αποδελτίωση: Λίστες → 📜 Αποδελτιώσεις. ¦ Все още няма извлечения: Списъци → 📜 Извлечения.
+Statistique ¦ Στατιστικό ¦ Статистика
+Hommes et femmes à part ¦ Άνδρες και γυναίκες χωριστά ¦ Мъже и жени поотделно
+Pas encore de liste à toi : Listes → Mes listes. ¦ Δεν έχεις ακόμη δική σου λίστα: Λίστες → Οι λίστες μου. ¦ Все още нямаш свой списък: Списъци → Моите списъци.
+Hommes ¦ Άνδρες ¦ Мъже
+Femmes ¦ Γυναίκες ¦ Жени
+Inconnu ¦ Άγνωστο ¦ Неизвестно
+Lignée ¦ Γενεαλογική γραμμή ¦ Родова линия
+Né(e) à ¦ Γεννήθηκε στο ¦ Роден(а) в
+Nés à partir de ¦ Γεννημένοι από ¦ Родени от
+Nés jusqu’à ¦ Γεννημένοι έως ¦ Родени до
+Nés avant ¦ Γεννημένοι πριν από ¦ Родени преди
+Sorte ¦ Είδος ¦ Вид
+Chercher… (nom, prénom) ¦ Αναζήτηση… (επώνυμο, όνομα) ¦ Търси… (фамилия, име)
+Chercher… (nom, sorte, lieu) ¦ Αναζήτηση… (όνομα, είδος, τόπος) ¦ Търси… (име, вид, място)
+👤 personne ¦ 👤 άτομο ¦ 👤 човек
+📍 lieu ¦ 📍 τόπος ¦ 📍 място
+📅 date d’acte ¦ 📅 ημερομηνία πράξης ¦ 📅 дата на акта
+nombre ¦ αριθμός ¦ число
+Monter ¦ Μετακίνηση πάνω ¦ Нагоре
+Descendre ¦ Μετακίνηση κάτω ¦ Надолу
+Retirer la colonne ¦ Αφαίρεση της στήλης ¦ Премахни колоната
+Aucune colonne : ajoute-en une. ¦ Καμία στήλη: πρόσθεσε μία. ¦ Няма колони: добави една.
+Lecture de la base… ¦ Ανάγνωση της βάσης… ¦ Четене на базата…
+Lecture… ¦ Ανάγνωση… ¦ Четене…
+({shown} premières lignes sur {n}) ¦ ({shown} πρώτες γραμμές από {n}) ¦ (първите {shown} реда от {n})
+Rien ne correspond : change les filtres. ¦ Τίποτα δεν ταιριάζει: άλλαξε τα φίλτρα. ¦ Нищо не съвпада: промени филтрите.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ {n} στην άκρη (ζωντανά άτομα ή εμπιστευτικές καρτέλες). ¦ {n} настрана (живи хора или поверителни картони).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Λαμβάνονται μόνο οι πρώτες {n} γραμμές: περιόρισε τα φίλτρα. ¦ Взимат се само първите {n} реда: уточни филтрите.
+⤒ Remplir {n} ¦ ⤒ Συμπλήρωση {n} ¦ ⤒ Попълни {n}
+Toutes les colonnes sont déjà là. ¦ Όλες οι στήλες υπάρχουν ήδη. ¦ Всички колони вече са тук.
+Une colonne tirée des données ¦ Μια στήλη από τα δεδομένα ¦ Колона от данните
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Αυτό το φύλλο δεν είναι συνδεδεμένο με τη βάση: Δεδομένα → «⤒ Συμπλήρωση από την εφαρμογή…». ¦ Този лист не е свързан с базата: Данни → „⤒ Попълни от приложението…“.
+Impossible de relire la base : {error} ¦ Δεν ήταν δυνατή η επανανάγνωση της βάσης: {error} ¦ Базата не може да се прочете отново: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Ήδη ενημερωμένο: τίποτα δεν άλλαξε στη βάση. ¦ 🔗 Вече е актуално: нищо не се е променило в базата.
+{n} de plus ¦ {n} περισσότερες ¦ още {n}
+{n} de moins ¦ {n} λιγότερες ¦ {n} по-малко
+valeurs mises à jour ¦ τιμές ενημερώθηκαν ¦ обновени стойности
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 Το «{name}» ξαναδιαβάστηκε: {what} ({lost}) ¦ 🔗 „{name}“ е прочетен отново: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 Το «{name}» ξαναδιαβάστηκε: {what} ¦ 🔗 „{name}“ е прочетен отново: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Καταγραφή απογραφής</b> · οι στήλες της χρονιάς: ¦ <b>Препис от преброяване</b> · колоните за годината:
+Année du recensement ¦ Έτος απογραφής ¦ Година на преброяването
+📤 Envoyer vers la base… ¦ 📤 Αποστολή στη βάση… ¦ 📤 Изпрати към базата…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Διατηρείται ενημερωμένο: <b>{what}</b> · {n} · ξαναδιαβάστηκε {when} ¦ 🔗 Поддържа се актуално: <b>{what}</b> · {n} · прочетено отново {when}
+la base ¦ η βάση ¦ базата
+Relire depuis la base ¦ Επανανάγνωση από τη βάση ¦ Прочети отново от базата
+↻ Relire ¦ ↻ Επανανάγνωση ¦ ↻ Прочети отново
+Changer la source ou les colonnes… ¦ Αλλαγή της πηγής ή των στηλών… ¦ Промени източника или колоните…
+Envoyer vers la base… ¦ Αποστολή στη βάση… ¦ Изпрати към базата…
+Ne plus tenir à jour (garder les valeurs) ¦ Διακοπή ενημέρωσης (διατήρηση των τιμών) ¦ Спри обновяването (запази стойностите)
+« {name} » n’est plus tenue à jour ¦ Το «{name}» δεν ενημερώνεται πλέον ¦ „{name}“ вече не се обновява
+Relevé : colonnes de {year} ¦ Καταγραφή: στήλες του {year} ¦ Препис: колони за {year}
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Λειτουργία προβολής: τίποτα δεν μπορεί να σταλεί στη βάση. ¦ Режим на разглеждане: нищо не може да се изпрати към базата.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Επίλεξε τον πίνακα για αποστολή (τη γραμμή τίτλων και τις γραμμές του) και ξεκίνα ξανά. ¦ Избери таблицата за изпращане (реда със заглавията и редовете ѝ), после започни отново.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Αποστολή στη βάση — {name}, γραμμές {from} έως {to} ¦ 📤 Изпрати към базата — {name}, редове от {from} до {to}
+1. Les colonnes ¦ 1. Οι στήλες ¦ 1. Колоните
+2. Voilà ce qui va entrer ¦ 2. Αυτά θα μπουν ¦ 2. Ето какво ще влезе
+3. Envoyer ¦ 3. Αποστολή ¦ 3. Изпрати
+Voir ce qui va entrer ¦ Δες τι θα μπει ¦ Виж какво ще влезе
+Ce que ça crée : ¦ Τι δημιουργεί: ¦ Какво създава:
+Colonne ¦ Στήλη ¦ Колона
+Exemple ¦ Παράδειγμα ¦ Пример
+Va dans ¦ Πηγαίνει σε ¦ Отива в
+(sans titre) ¦ (χωρίς τίτλο) ¦ (без заглавие)
+Champ pour la colonne {col} ¦ Πεδίο για τη στήλη {col} ¦ Поле за колона {col}
+Colonnes : {list} ¦ Στήλες: {list} ¦ Колони: {list}
+aucune pour l’instant ¦ καμία προς το παρόν ¦ засега няма
+Déjà dans la base ¦ Ήδη στη βάση ¦ Вече е в базата
+Problème ¦ Πρόβλημα ¦ Проблем
+Laissée de côté ¦ Στην άκρη ¦ Оставена настрана
+📤 Créer {n} ¦ 📤 Δημιουργία {n} ¦ 📤 Създай {n}
+📤 Rien de nouveau ¦ 📤 Τίποτα νέο ¦ 📤 Нищо ново
+📤 Créer {n} et en relier {m} ¦ 📤 Δημιουργία {n} και σύνδεση {m} ¦ 📤 Създай {n} и свържи {m}
+📤 Relier {m} ¦ 📤 Σύνδεση {m} ¦ 📤 Свържи {m}
+📤 Envoyer ¦ 📤 Αποστολή ¦ 📤 Изпрати
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Διάλεξε τουλάχιστον μία στήλη για αποστολή (το όνομα, για παράδειγμα). ¦ Избери поне една колона за изпращане (името, например).
+Choisis au moins une colonne. ¦ Διάλεξε τουλάχιστον μία στήλη. ¦ Избери поне една колона.
+Donne l’année du recensement. ¦ Δώσε το έτος της απογραφής. ¦ Въведи годината на преброяването.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Χρειάζεται μια στήλη για το όνομα (ή «Επώνυμο και όνομα»). ¦ Нужна е колона за името (или „Фамилия и име“).
+Il faut une colonne pour le nom. ¦ Χρειάζεται μια στήλη για το όνομα. ¦ Нужна е колона за името.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Διάλεξε τη στήλη που λέει το είδος του γεγονότος (Βάπτιση, Θάνατος…). ¦ Избери колоната, която казва вида на събитието (Кръщене, Смърт…).
+Il manque la sorte d’événement. ¦ Λείπει το είδος του γεγονότος. ¦ Липсва видът на събитието.
+Ces lignes sont vides. ¦ Αυτές οι γραμμές είναι κενές. ¦ Тези редове са празни.
+Je compare avec ta base… ¦ Σύγκριση με τη βάση σου… ¦ Сравнявам с твоята база…
+Comparaison… ¦ Σύγκριση… ¦ Сравнение…
+Choisir la fiche de la ligne {row} ¦ Διάλεξε την καρτέλα της γραμμής {row} ¦ Избери картона за ред {row}
+choisis ▾ ¦ διάλεξε ▾ ¦ избери ▾
+Relier à {name} ({meta}) ¦ Σύνδεση με {name} ({meta}) ¦ Свържи с {name} ({meta})
+Laisser de côté ¦ Άφησέ το στην άκρη ¦ Остави настрана
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Κάποιες γραμμές μοιάζουν με πολλές καρτέλες: διάλεξε τη σωστή (αλλιώς μένουν στην άκρη). ¦ Някои редове приличат на няколко картона: избери правилния (иначе остават настрана).
+Ligne ¦ Γραμμή ¦ Ред
+Ce qui va se passer ¦ Τι θα συμβεί ¦ Какво ще стане
+Impossible d’envoyer : {error} ¦ Δεν ήταν δυνατή η αποστολή: {error} ¦ Не може да се изпрати: {error}
+contient « {text} » : compté comme {n} ¦ περιέχει «{text}»: μετράει ως {n} ¦ съдържа „{text}“: брои се като {n}
+contient l’erreur « {text} » : laissée vide ¦ περιέχει το σφάλμα «{text}»: έμεινε κενό ¦ съдържа грешката „{text}“: оставено празно
+« {text} » n’est pas un nombre : laissé vide ¦ Το «{text}» δεν είναι αριθμός: έμεινε κενό ¦ „{text}“ не е число: оставено празно
+à trouver ¦ προς εύρεση ¦ за намиране
+L’éditeur de diagrammes n’est pas chargé. ¦ Ο επεξεργαστής διαγραμμάτων δεν έχει φορτωθεί. ¦ Редакторът на диаграми не е зареден.
+L’éditeur de graphiques n’est pas chargé. ¦ Ο επεξεργαστής γραφημάτων δεν έχει φορτωθεί. ¦ Редакторът на графики не е зареден.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ Το γράφημα «{name}» προστέθηκε στα Γραφήματά μου (Γραφήματα, πίνακας ελέγχου…). ¦ Графиката „{name}“ е добавена в Моите графики (Графики, табло…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Το πρόγραμμα περιήγησης αρνείται την αντιγραφή εδώ: επίλεξε την περιοχή και πάτα {key}. ¦ Браузърът отказва да копира тук: избери диапазона и натисни {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Αντιγράφηκε: σε έναν πίνακα ιδεών (Έρευνες → 🧩 Πίνακες ιδεών), επικόλλησέ το ({key}): γίνεται αντικείμενο ▦ Υπολογιστικό φύλλο, μαζί με τους τύπους. ¦ Копирано: в дъска (Разследвания → 🧩 Дъски) го постави ({key}): става обект ▦ Електронна таблица, заедно с формулите.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Αντιγράφηκε: στη σελίδα μιας συλλογής, κάνε κλικ σε ένα κελί του πίνακα και επικόλλησε ({key}). ¦ Копирано: на страница от сборник щракни клетка от таблицата и постави ({key}).
+La présentation n’est pas chargée. ¦ Η παρουσίαση δεν έχει φορτωθεί. ¦ Презентацията не е заредена.
+… et {n} ¦ … και {n} ¦ … и {n}
+Colonnes attendues : {list} ¦ Αναμενόμενες στήλες: {list} ¦ Очаквани колони: {list}
+(une ou plusieurs) ¦ (μία ή περισσότερες) ¦ (една или повече)
+(facultatif) ¦ (προαιρετικό) ¦ (по избор)
+Les données de « {name} » ¦ Τα δεδομένα του «{name}» ¦ Данните на „{name}“
+l’outil ¦ το εργαλείο ¦ инструмента
+{name} (données) ¦ {name} (δεδομένα) ¦ {name} (данни)
+Renvoyer les données là d’où elles viennent ¦ Επιστροφή των δεδομένων εκεί από όπου ήρθαν ¦ Върни данните там, откъдето са дошли
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Τύποι, ταξινόμηση, επικόλληση από Excel… Το «Αρχείο → Αποθήκευση αντιγράφου…» κρατά επίσης αυτό το βιβλίο εργασίας στο Υπολογιστικό φύλλο. ¦ Формули, сортиране, поставяне от Excel… „Файл → Запази копие…“ пази и тази работна книга в Електронната таблица.
+Rien à ouvrir : la liste est vide. ¦ Τίποτα για άνοιγμα: η λίστα είναι κενή. ¦ Няма какво да се отвори: списъкът е празен.
+🧾 Tableur ¦ 🧾 Υπολογιστικό φύλλο ¦ 🧾 Електронна таблица
+ouvrir dans le tableur ¦ άνοιγμα στο υπολογιστικό φύλλο ¦ отвори в електронната таблица
+🧾 Ouvrir dans le tableur ¦ 🧾 Άνοιγμα στο υπολογιστικό φύλλο ¦ 🧾 Отвори в електронната таблица
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Το φύλλο είναι κενό: γράψε ή επικόλλησε έναν πίνακα και μετά επίλεξέ τον. ¦ Листът е празен: напиши или постави таблица, после я избери.
+TABLEUR · PRÉPARER POUR… ¦ ΥΠΟΛΟΓΙΣΤΙΚΟ ΦΥΛΛΟ · ΠΡΟΕΤΟΙΜΑΣΙΑ ΓΙΑ… ¦ ЕЛЕКТРОННА ТАБЛИЦА · ПОДГОТВИ ЗА…
+🎯 Préparer pour… ({range}) ¦ 🎯 Προετοιμασία για… ({range}) ¦ 🎯 Подготви за… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Το υπολογιστικό φύλλο ξέρει τι περιμένει κάθε σημείο της εφαρμογής: διάλεξε πού πάνε αυτά τα δεδομένα. Ελέγχει τις στήλες της περιοχής <b>{range}</b> και τις τακτοποιεί όπως πρέπει. ¦ Електронната таблица знае какво очаква всяко място в приложението: избери къде отиват тези данни. Тя проверява колоните на диапазона <b>{range}</b> и ги подрежда както трябва.
+Dessin ¦ Σχέδιο ¦ Рисунка
+▦ Un tableau ¦ ▦ Ένας πίνακας ¦ ▦ Таблица
+Il faut une colonne de chiffres ¦ Χρειάζεται μια στήλη με αριθμούς ¦ Нужна е колона с числа
+📊 Un graphique ¦ 📊 Ένα γράφημα ¦ 📊 Графика
+Dans la plage ¦ Στην περιοχή ¦ В диапазона
+, une ou plusieurs ¦ , μία ή περισσότερες ¦ , една или повече
+, facultatif ¦ , προαιρετικό ¦ , по избор
+Voir la cellule ¦ Δες το κελί ¦ Виж клетката
+… et {n} à vérifier. ¦ … και {n} για έλεγχο. ¦ … и {n} за проверка.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Λείπει μια στήλη: πρόσθεσέ τη στην περιοχή ή διάλεξε άλλη περιοχή. ¦ Липсва колона: добави я в диапазона или избери друг диапазон.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Διατήρηση της σύνδεσης: το διάγραμμα ακολουθεί το υπολογιστικό φύλλο (ενημερώνεται όταν αλλάζει η περιοχή) ¦ Запази връзката: диаграмата следва електронната таблица (обновява се, когато диапазонът се промени)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Διατήρηση της σύνδεσης: το διάγραμμα ακολουθεί το υπολογιστικό φύλλο (ενημερώνεται όταν αλλάζει η περιοχή) — το βιβλίο εργασίας θα αποθηκευτεί στο Υπολογιστικό φύλλο ¦ Запази връзката: диаграмата следва електронната таблица (обновява се, когато диапазонът се промени) — работната книга ще бъде запазена в Електронната таблица
+← Autre endroit ¦ ← Άλλο σημείο ¦ ← Друго място
+La première ligne donne les titres ¦ Η πρώτη γραμμή δίνει τους τίτλους ¦ Първият ред съдържа заглавията
+Pas d’aperçu. ¦ Καμία προεπισκόπηση. ¦ Няма преглед.
+🎤 Créer la présentation ¦ 🎤 Δημιουργία της παρουσίασης ¦ 🎤 Създай презентацията
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Διόρθωσε το κελί και άνοιξε ξανά το «🎯 Προετοιμασία για…». ¦ Поправи клетката, после отвори отново „🎯 Подготви за…“.
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Αυτά τα δεδομένα επιστρέφουν στο εργαλείο τους: το διάγραμμα φτιάχνεται από αντίγραφο (χωρίς σύνδεση). ¦ Тези данни се връщат в своя инструмент: диаграмата е направена от копие (без връзка).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Επίλεξε μια περιοχή με αριθμούς (για παράδειγμα: Δεκαετία, Άνδρες, Γυναίκες). ¦ Избери диапазон с числа (например: Десетилетие, Мъже, Жени).
+Tous les types de diagrammes… ¦ Όλοι οι τύποι διαγραμμάτων… ¦ Всички видове диаграми…
+Conseillés pour {range} ¦ Προτεινόμενα για {range} ¦ Препоръчани за {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Δεδομένα: «{name}» ! {range} ¦ 🔗 Данни: „{name}“ ! {range}
+Classeur ¦ Βιβλίο εργασίας ¦ Работна книга
+(feuille « {name} ») ¦ (φύλλο «{name}») ¦ (лист „{name}“)
+tenu à jour ¦ ενημερώνεται ¦ поддържа се актуално
+Les figer ¦ Πάγωμά τους ¦ Замрази ги
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Το βιβλίο εργασίας δεν βρέθηκε (διαγράφηκε;): το σχέδιο κρατά τους τελευταίους αριθμούς που διαβάστηκαν. ¦ ⚠️ Работната книга не е намерена (изтрита?): рисунката пази последните прочетени числа.
+TABLEUR ¦ ΥΠΟΛΟΓΙΣΤΙΚΟ ΦΥΛΛΟ ¦ ЕЛЕКТРОННА ТАБЛИЦА
+Nom du classeur… ¦ Όνομα του βιβλίου εργασίας… ¦ Име на работната книга…
+Plage illisible : écris par exemple A1:C12. ¦ Μη αναγνώσιμη περιοχή: γράψε για παράδειγμα A1:C12. ¦ Неразбираем диапазон: напиши например A1:C12.
+Feuille ¦ Φύλλο ¦ Лист
+Plage ¦ Περιοχή ¦ Диапазон
+Copier une fois (les chiffres ne bougent plus) ¦ Αντιγραφή μία φορά (οι αριθμοί δεν αλλάζουν πια) ¦ Копирай веднъж (числата повече не се променят)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Διατήρηση της σύνδεσης: το διάγραμμα ακολουθεί το βιβλίο εργασίας (ενημερώνεται) ¦ Запази връзката: диаграмата следва работната книга (поддържа се актуална)
+Lecture du classeur… ¦ Ανάγνωση του βιβλίου εργασίας… ¦ Четене на работната книга…
+Choisis un classeur. ¦ Διάλεξε ένα βιβλίο εργασίας. ¦ Избери работна книга.
+Écris une plage, par exemple A1:C12. ¦ Γράψε μια περιοχή, για παράδειγμα A1:C12. ¦ Напиши диапазон, например A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Γράψε το αποτέλεσμα που θέλεις στο πρώτο κελί της στήλης (για παράδειγμα «Jean D.») και ξανατρέξε το ✨ Άμεση συμπλήρωση. ¦ Напиши желания резултат в първата клетка на колоната (например „Jean D.“), после пусни отново ✨ Бързо попълване.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Δεν βρίσκω κανόνα που να ισχύει για όλα τα παραδείγματα: γράψε ένα ακόμη ή ένα πιο απλό. ¦ Не намирам правило, което да работи за всички примери: напиши още един или по-прост.
+Rien à remplir : la colonne est déjà pleine. ¦ Τίποτα για συμπλήρωση: η στήλη είναι ήδη γεμάτη. ¦ Няма какво да се попълни: колоната вече е пълна.
+{what} de {col} ¦ {what} του {col} ¦ {what} от {col}
+{what} n°{n} de {col} ¦ {what} αρ. {n} του {col} ¦ {what} № {n} от {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} αρ. {n} από το τέλος του {col} ¦ {what} № {n} от края на {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (κανόνας: {rule}). ↶ για αναίρεση. ¦ ✨ {n} (правило: {rule}). ↶ за отмяна.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Επίλεξε έναν πίνακα με γραμμή τίτλων και γραμμές δεδομένων. ¦ Избери таблица с ред заглавия и редове с данни.
+Colonne {col} ¦ Στήλη {col} ¦ Колона {col}
+DONNÉES ¦ ΔΕΔΟΜΕΝΑ ¦ ДАННИ
+Σ Sous-totaux ¦ Σ Μερικά σύνολα ¦ Σ Междинни суми
+Créer les sous-totaux ¦ Δημιουργία των μερικών συνόλων ¦ Създай междинните суми
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ Από <b>{range}</b>. Ένα νέο φύλλο: οι γραμμές ομαδοποιημένες, ένα σύνολο κάτω από κάθε ομάδα (τύποι) και μετά το γενικό σύνολο. Το «⊟ Διάρθρωση» (μενού Δεδομένα) συμπτύσσει τις λεπτομέρειες. ¦ От <b>{range}</b>. Нов лист: редовете, групирани, сума под всяка група (формули), после общата сума. „⊟ Структура“ (меню Данни) свива подробностите.
+À chaque changement de ¦ Σε κάθε αλλαγή του ¦ При всяка промяна в
+Calcul ¦ Υπολογισμός ¦ Изчисление
+Sur les colonnes ¦ Στις στήλες ¦ В колоните
+Coche au moins une colonne à calculer. ¦ Τσέκαρε τουλάχιστον μία στήλη για υπολογισμό. ¦ Отметни поне една колона за изчисление.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. Το «⊟ Διάρθρωση» (μενού Δεδομένα) συμπτύσσει τις λεπτομέρειες. ¦ Σ {n}. „⊟ Структура“ (меню Данни) свива подробностите.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ Αυτό το φύλλο δεν έχει μερικά σύνολα: πρώτα Δεδομένα → Σ Μερικά σύνολα… ¦ Този лист няма междинни суми: първо Данни → Σ Междинни суми…
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Οι λεπτομέρειες συμπτύχθηκαν: μένουν μόνο τα σύνολα. ¦ ⊟ Подробностите са свити: остават само сумите.
+⊞ Détail déplié. ¦ ⊞ Οι λεπτομέρειες αναπτύχθηκαν. ¦ ⊞ Подробностите са разгънати.
+🎯 Valeur cible ¦ 🎯 Τιμή στόχος ¦ 🎯 Търсене на цел
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Η εφαρμογή δοκιμάζει τιμές στο «κελί προς αλλαγή» μέχρι ο τύπος να δώσει το αποτέλεσμα που θέλεις. Π.χ.: σε ποια ηλικία παντρεύτηκε ώστε η διαφορά ηλικίας να είναι 7 χρόνια; ¦ Приложението пробва стойности в „клетката за промяна“, докато формулата даде желания резултат. Напр.: на каква възраст се е оженил, за да е разликата във възрастта 7 години?
+La formule de la case ¦ Ο τύπος του κελιού ¦ Формулата на клетката
+Doit donner ¦ Πρέπει να δώσει ¦ Трябва да даде
+En changeant la case ¦ Αλλάζοντας το κελί ¦ Като се промени клетката
+Écris une adresse de case (ex. C5, B2). ¦ Γράψε μια διεύθυνση κελιού (π.χ. C5, B2). ¦ Напиши адрес на клетка (напр. C5, B2).
+Écris le résultat voulu. ¦ Γράψε το αποτέλεσμα που θέλεις. ¦ Напиши желания резултат.
+La première case doit contenir une formule. ¦ Το πρώτο κελί πρέπει να περιέχει τύπο. ¦ Първата клетка трябва да съдържа формула.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Δεν βρέθηκε τιμή: ίσως ο τύπος δεν εξαρτάται από αυτό το κελί ή δεν μπορεί να φτάσει σε αυτό το αποτέλεσμα. ¦ Не е намерена стойност: може би формулата не зависи от тази клетка или не може да достигне този резултат.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: ο τύπος δίνει {target}. ↶ για αναίρεση. ¦ 🎯 {cell} = {value}: формулата дава {target}. ↶ за отмяна.
+INSERTION ¦ ΕΙΣΑΓΩΓΗ ¦ ВМЪКВАНЕ
+📈 Mini-graphique ¦ 📈 Μίνι γράφημα ¦ 📈 Мини графика
+Poser ¦ Τοποθέτηση ¦ Постави
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Ένα μικρό γράφημα μέσα στο κελί, που ακολουθεί τους αριθμούς. Αν επιλέξεις πολλές γραμμές: ένα γράφημα ανά γραμμή (η περιοχή κατεβαίνει μαζί τους). ¦ Малка графика в клетката, която следва числата. Ако са избрани няколко реда: по една графика на ред (диапазонът слиза заедно с тях).
+Les nombres (plage de la 1re ligne) ¦ Οι αριθμοί (περιοχή της 1ης γραμμής) ¦ Числата (диапазон на 1-вия ред)
+Gagné / perdu ¦ Κέρδος / απώλεια ¦ Печалба / загуба
+Couleur ¦ Χρώμα ¦ Цвят
+Écris une plage, par exemple B2:F2. ¦ Γράψε μια περιοχή, για παράδειγμα B2:F2. ¦ Напиши диапазон, например B2:F2.
+🧮 Solveur ¦ 🧮 Επιλυτής ¦ 🧮 Решател
+Résoudre ¦ Επίλυση ¦ Реши
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Όπως η τιμή στόχος, αλλά αλλάζοντας πολλά κελιά μαζί, με συνθήκες. Π.χ.: μοίρασε μια κληρονομιά σε τρεις κλάδους ώστε ο καθένας να πάρει τουλάχιστον 1 000 € και η διαφορά να είναι η μικρότερη δυνατή. ¦ Като търсенето на цел, но с промяна на няколко клетки наведнъж, с условия. Напр.: раздели наследство между три клона така, че всеки да получи поне 1 000 € и разликата да е възможно най-малка.
+La formule (case objectif) ¦ Ο τύπος (κελί στόχος) ¦ Формулата (целева клетка)
+Doit être ¦ Πρέπει να είναι ¦ Трябва да е
+la plus grande possible ¦ η μεγαλύτερη δυνατή ¦ възможно най-голяма
+la plus petite possible ¦ η μικρότερη δυνατή ¦ възможно най-малка
+égale à… ¦ ίση με… ¦ равна на…
+Valeur (si « égale à ») ¦ Τιμή (αν «ίση με») ¦ Стойност (ако е „равна на“)
+En changeant les cases ¦ Αλλάζοντας τα κελιά ¦ Като се променят клетките
+B2:B4 ou B2;C3 ¦ B2:B4 ή B2;C3 ¦ B2:B4 или B2;C3
+Conditions (une par ligne : {examples}) ¦ Συνθήκες (μία ανά γραμμή: {examples}) ¦ Условия (по едно на ред: {examples})
+Nombres entiers seulement ¦ Μόνο ακέραιοι αριθμοί ¦ Само цели числа
+La case objectif doit contenir une formule (ex. D5). ¦ Το κελί στόχος πρέπει να περιέχει τύπο (π.χ. D5). ¦ Целевата клетка трябва да съдържа формула (напр. D5).
+Trente cases à changer au plus. ¦ Το πολύ τριάντα κελιά προς αλλαγή. ¦ Най-много трийсет клетки за промяна.
+Écris les cases à changer (ex. B2:B4). ¦ Γράψε τα κελιά προς αλλαγή (π.χ. B2:B4). ¦ Напиши клетките за промяна (напр. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Μη αναγνώσιμη συνθήκη: «{text}» (π.χ. B2 >= 0). ¦ Неразбираемо условие: „{text}“ (напр. B2 >= 0).
+Écris la valeur voulue. ¦ Γράψε την τιμή που θέλεις. ¦ Напиши желаната стойност.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Καμία λύση δεν τηρεί όλες τις συνθήκες (έλεγξέ τες ή άλλαξε την αφετηρία). ¦ Няма решение, което да спазва всички условия (провери ги или промени началото).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Βρέθηκε: {cell} = {value} ({n}). ↶ για αναίρεση. ¦ 🧮 Намерено: {cell} = {value} ({n}). ↶ за отмяна.
+📋 Tableau de scénarios ¦ 📋 Πίνακας σεναρίων ¦ 📋 Таблица със сценарии
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ Κι αν αυτό το κελί ήταν 20, 25, 30…; Ο πίνακας δείχνει τι δίνουν οι τύποι για κάθε τιμή. Τοποθετείται από το επιλεγμένο κελί ({cell}) και μετά· τίποτε άλλο δεν αλλάζει. ¦ А ако тази клетка беше 20, 25, 30…? Таблицата показва какво дават формулите за всяка стойност. Поставя се от избраната клетка ({cell}) нататък; нищо друго не се променя.
+La case qui change ¦ Το κελί που αλλάζει ¦ Клетката, която се променя
+Ses valeurs (séparées par « ; », ou une plage) ¦ Οι τιμές του (χωρισμένες με «;» ή μια περιοχή) ¦ Стойностите ѝ (разделени с „;“ или диапазон)
+20;25;30 ou A10:A15 ¦ 20;25;30 ή A10:A15 ¦ 20;25;30 или A10:A15
+Les formules à suivre ¦ Οι τύποι που παρακολουθούμε ¦ Формулите за следене
+Écris la case qui change (ex. B2). ¦ Γράψε το κελί που αλλάζει (π.χ. B2). ¦ Напиши клетката, която се променя (напр. B2).
+Écris au moins une formule (ex. C5). ¦ Γράψε τουλάχιστον έναν τύπο (π.χ. C5). ¦ Напиши поне една формула (напр. C5).
+Écris des valeurs (500 au plus). ¦ Γράψε τιμές (το πολύ 500). ¦ Напиши стойности (най-много 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (σταθερές τιμές: ξανάκανέ το αν αλλάξουν τα δεδομένα). ¦ 📋 {n} (фиксирани стойности: направи го отново, ако данните се променят).
+Rien n’a été enregistré. ¦ Τίποτα δεν καταγράφηκε. ¦ Нищо не е записано.
+⏺ Nommer l’action ¦ ⏺ Όνομα της ενέργειας ¦ ⏺ Наименувай действието
+Mon action ¦ Η ενέργειά μου ¦ Моето действие
+Garder ¦ Διατήρηση ¦ Запази
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Η ενέργεια «{name}» κρατήθηκε: Δεδομένα → ▶ Καταγεγραμμένες ενέργειες. ¦ ⏺ Действието „{name}“ е запазено: Данни → ▶ Записани действия.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Καταγραφή: κάνε τις κινήσεις σου (μενού, κουμπιά, μορφές) και μετά Δεδομένα → ⏹ Διακοπή καταγραφής. ¦ ⏺ Записване: направи стъпките си (менюта, бутони, формати), после Данни → ⏹ Спри записването.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Καμία καταγεγραμμένη ενέργεια: Δεδομένα → ⏺ Καταγραφή ενέργειας. ¦ Няма записани действия: Данни → ⏺ Запиши действие.
+▶ Actions enregistrées ¦ ▶ Καταγεγραμμένες ενέργειες ¦ ▶ Записани действия
+Elles se refont sur la sélection du moment. ¦ Επαναλαμβάνονται στην τρέχουσα επιλογή. ¦ Повтарят се върху текущия избор.
+▶ Refaire ¦ ▶ Επανάληψη ¦ ▶ Повтори
+▶ « {name} » refaite. ¦ ▶ Το «{name}» επαναλήφθηκε. ¦ ▶ „{name}“ е повторено.
+Colonne {n} ¦ Στήλη {n} ¦ Колона {n}
+{what} de « {col} » ¦ {what} του «{col}» ¦ {what} на „{col}“
+Lignes ¦ Γραμμές ¦ Редове
+Total ¦ Σύνολο ¦ Общо
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · ανά «{rows}» και «{cols}» — από {src} ¦ {title} · по „{rows}“ и „{cols}“ — от {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · ανά «{rows}» — από {src} ¦ {title} · по „{rows}“ — от {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Επίλεξε μια περιοχή με γραμμή τίτλων και γραμμές δεδομένων (για παράδειγμα: Όνομα, Δήμος, Έτος, Ηλικία). ¦ Избери диапазон с ред заглавия и редове с данни (например: Име, Община, Година, Възраст).
+🔀 Tableau croisé dynamique ¦ 🔀 Συγκεντρωτικός πίνακας ¦ 🔀 Обобщена таблица
+Créer le tableau croisé ¦ Δημιουργία του συγκεντρωτικού πίνακα ¦ Създай обобщената таблица
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ Από <b>{range}</b> ({n}). Το αποτέλεσμα μπαίνει σε νέο φύλλο· το «↻ Ανανέωση του συγκεντρωτικού πίνακα» (μενού Δεδομένα) τον ξαναφτιάχνει αν αλλάξουν τα δεδομένα. ¦ От <b>{range}</b> ({n}). Резултатът отива в нов лист; „↻ Обнови обобщената таблица“ (меню Данни) я прави отново, ако данните се променят.
+En lignes ¦ Σε γραμμές ¦ По редове
+En colonnes (facultatif) ¦ Σε στήλες (προαιρετικό) ¦ По колони (по избор)
+— rien — ¦ — τίποτα — ¦ — нищо —
+Sur la colonne ¦ Στη στήλη ¦ Върху колоната
+— (compter les lignes) — ¦ — (μέτρηση των γραμμών) — ¦ — (брой на редовете) —
+Totaux ¦ Σύνολα ¦ Суми
+Aperçu : {rows} × {cols} ¦ Προεπισκόπηση: {rows} × {cols} ¦ Преглед: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Ο συγκεντρωτικός πίνακας δημιουργήθηκε: {rows} × {cols}. Δεδομένα → «↻ Ανανέωση του συγκεντρωτικού πίνακα» για να τον ξαναφτιάξεις. ¦ Обобщената таблица е създадена: {rows} × {cols}. Данни → „↻ Обнови обобщената таблица“, за да я направиш отново.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Αυτό το φύλλο δεν είναι συγκεντρωτικός πίνακας: πήγαινε στο φύλλο του «TCD …». ¦ Този лист не е обобщена таблица: отиди на листа ѝ „TCD …“.
+La feuille des données n’existe plus. ¦ Το φύλλο των δεδομένων δεν υπάρχει πια. ¦ Листът с данните вече не съществува.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Ο συγκεντρωτικός πίνακας ανανεώθηκε ({rows} × {cols}). ¦ Обобщената таблица е обновена ({rows} × {cols}).
+Graphique vivant ¦ Ζωντανό γράφημα ¦ Жива графика
+Type de graphique ¦ Τύπος γραφήματος ¦ Вид графика
+En faire un diagramme lié à la plage ¦ Κάν' το διάγραμμα συνδεδεμένο με την περιοχή ¦ Направи я диаграма, свързана с диапазона
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Επίλεξε κελιά με αριθμούς (και τα ονόματά τους αριστερά ή πάνω): το γράφημα σχεδιάζεται εδώ. ¦ Избери клетки с числа (и имената им вляво или отгоре): графиката се рисува тук.
+Plage {range} · suit la sélection ¦ Περιοχή {range} · ακολουθεί την επιλογή ¦ Диапазон {range} · следва избора
+Le moteur du tableur n’est pas chargé. ¦ Ο μηχανισμός του υπολογιστικού φύλλου δεν έχει φορτωθεί. ¦ Двигателят на електронната таблица не е зареден.
+Mon classeur ¦ Το βιβλίο εργασίας μου ¦ Моята работна книга
+Rien à rétablir. ¦ Τίποτα για επανάληψη. ¦ Няма какво да се върне отново.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ ακολούθησαν κι άλλες αλλαγές: χρησιμοποίησε το ↶ ({key}) ¦ след това има и други промени: използвай ↶ ({key})
+Barre d’outils · {group} ¦ Γραμμή εργαλείων · {group} ¦ Лента с инструменти · {group}
+Barre d’outils ¦ Γραμμή εργαλείων ¦ Лента с инструменти
+Police et gras ¦ Γραμματοσειρά και έντονα ¦ Шрифт и удебеляване
+Police (E5) ¦ Γραμματοσειρά (E5) ¦ Шрифт (E5)
+Police ¦ Γραμματοσειρά ¦ Шрифт
+Gras ¦ Έντονα ¦ Удебелен
+Italique ¦ Πλάγια ¦ Курсив
+Souligné ¦ Υπογράμμιση ¦ Подчертан
+Renvoi à la ligne ¦ Αναδίπλωση κειμένου ¦ Пренасяне на текста
+Fusionner / séparer ¦ Συγχώνευση / διαχωρισμός ¦ Обедини / раздели
+Aligner à gauche ¦ Στοίχιση αριστερά ¦ Подравни вляво
+Centrer ¦ Στο κέντρο ¦ Центрирай
+Aligner à droite ¦ Στοίχιση δεξιά ¦ Подравни вдясно
+Couleurs (C2) ¦ Χρώματα (C2) ¦ Цветове (C2)
+Couleur du texte ¦ Χρώμα κειμένου ¦ Цвят на текста
+Format de cellule ¦ Μορφή κελιού ¦ Формат на клетка
+Format de la cellule ¦ Μορφή του κελιού ¦ Формат на клетката
+Une décimale de moins ¦ Ένα δεκαδικό λιγότερο ¦ Един десетичен знак по-малко
+Une décimale de plus ¦ Ένα δεκαδικό περισσότερο ¦ Един десетичен знак повече
+Bordures ¦ Περιγράμματα ¦ Рамки
+Bordures : tout ¦ Περιγράμματα: όλα ¦ Рамки: всички
+Bordures : contour ¦ Περιγράμματα: περίγραμμα ¦ Рамки: контур
+Bordure du bas ¦ Κάτω περίγραμμα ¦ Долна рамка
+Sans bordure ¦ Χωρίς περίγραμμα ¦ Без рамка
+Graphique ¦ Γράφημα ¦ Графика
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Ένα διάγραμμα με τους αριθμούς της επιλογής: οι προτεινόμενοι τύποι για αυτή την περιοχή ¦ Диаграма с числата от избора: препоръчаните видове за този диапазон
+Choisir une fonction ¦ Επιλογή συνάρτησης ¦ Избери функция
+Fonction ¦ Συνάρτηση ¦ Функция
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, εκτύπωση ¦ XLSX, ODS, CSV, TSV, JSON, PDF, печат
+✓ Enregistrer et revenir ¦ ✓ Αποθήκευση και επιστροφή ¦ ✓ Запази и се върни
+Plein écran (⛶) ¦ Πλήρης οθόνη (⛶) ¦ Цял екран (⛶)
+Données d’un autre outil ¦ Δεδομένα από άλλο εργαλείο ¦ Данни от друг инструмент
+Adresse (tape D12 ou un nom pour y aller) ¦ Διεύθυνση (γράψε D12 ή ένα όνομα για να πας εκεί) ¦ Адрес (напиши D12 или име, за да отидеш там)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Γράψε μια διεύθυνση (D12, B2:C9) ή ένα όνομα για να πας εκεί ¦ Напиши адрес (D12, B2:C9) или име, за да отидеш там
+Contenu ou formule de la cellule ¦ Περιεχόμενο ή τύπος του κελιού ¦ Съдържание или формула на клетката
+Feuille de calcul ¦ Φύλλο εργασίας ¦ Работен лист
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Φύλλο εργασίας: πληκτρολόγησε για να γράψεις στο επιλεγμένο κελί ¦ Работен лист: пиши, за да въведеш в избраната клетка
+Écrire dans la cellule ¦ Γράψιμο στο κελί ¦ Пиши в клетката
+Panneau de droite ¦ Δεξί πλαίσιο ¦ Десен панел
+Feuilles ¦ Φύλλα ¦ Листове
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Κάνε κλικ για να διαλέξεις τι εμφανίζεται εδώ (άθροισμα, μέσος όρος…) ¦ Щракни, за да избереш какво се показва тук (сума, средно…)
+Enregistrer une copie dans le Tableur… ¦ Αποθήκευση αντιγράφου στο Υπολογιστικό φύλλο… ¦ Запази копие в Електронната таблица…
+Enregistrer une copie… ¦ Αποθήκευση αντιγράφου… ¦ Запази копие…
+Enregistrer comme modèle… ¦ Αποθήκευση ως πρότυπο… ¦ Запази като шаблон…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Εξαγωγή (XLSX, ODS, CSV, PDF…)… ¦ Експортирай (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Φύλλο «{name}» ¦ Лист „{name}“
+Pas encore relié à une fiche ¦ Δεν έχει συνδεθεί ακόμη με καρτέλα ¦ Все още не е свързано с картон
+Tire pour recopier ou continuer une suite ¦ Σύρε για να αντιγράψεις ή να συνεχίσεις μια σειρά ¦ Плъзни, за да копираш или продължиш поредица
+« {text} » n’est pas dans la liste : {list} ¦ Το «{text}» δεν είναι στη λίστα: {list} ¦ „{text}“ не е в списъка: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Χρειάζεται αριθμός από {min} έως {max}. ¦ Нужно е число от поне {min} и най-много {max}.
+Il faut un nombre d’au moins {min}. ¦ Χρειάζεται αριθμός τουλάχιστον {min}. ¦ Нужно е число от поне {min}.
+Il faut un nombre et au plus {max}. ¦ Χρειάζεται αριθμός το πολύ {max}. ¦ Нужно е число най-много {max}.
+Il faut un nombre. ¦ Χρειάζεται αριθμός. ¦ Нужно е число.
+Je ne comprends pas cette date ({why}). ¦ Δεν καταλαβαίνω αυτή την ημερομηνία ({why}). ¦ Не разбирам тази дата ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ παραδείγματα: 7 mai 1925, vers 1784, an II ¦ примери: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab = συμπλήρωση ¦ Tab = допълни
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Κατανοητό ως ημερομηνία πράξης: <b>{date}</b> (κατά προσέγγιση: οι υπολογισμοί θα δείχνουν ≈) ¦ ✓ Разбрано като дата на акт: <b>{date}</b> (приблизителна: изчисленията ще показват ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Κατανοητό ως ημερομηνία πράξης: <b>{date}</b> ¦ ✓ Разбрано като дата на акт: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Κείμενο ή αριθμός. Ξεκίνα με <b>=</b> για υπολογισμό. ¦ Текст или число. Започни с <b>=</b>, за да изчислиш.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Τύπος: κάνε κλικ ή σύρε πάνω σε κελιά για να τα βάλεις ή γράψε το όνομα μιας συνάρτησης (στα γαλλικά ή στα αγγλικά). <kbd>F4</kbd>: $A$1. ¦ ƒ Формула: щракни или плъзни върху клетки, за да ги вмъкнеш, или напиши името на функция (на френски или английски). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Διόρθωση σε {name} ¦ Поправи на {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Κατά προσέγγιση αποτέλεσμα: μία από τις ημερομηνίες είναι κατά προσέγγιση («vers», «avant», «an …» χωρίς ημέρα). ¦ Приблизителен резултат: една от датите е приблизителна („vers“, „avant“, „an …“ без ден).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ «{text}»: ούτε διεύθυνση (D12, B2:C9) ούτε όνομα του βιβλίου εργασίας. ¦ „{text}“: нито адрес (D12, B2:C9), нито име от работната книга.
+Pas de feuille « {name} ». ¦ Δεν υπάρχει φύλλο «{name}». ¦ Няма лист „{name}“.
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Χρησιμοποίησε το {key} στο πλέγμα (το πρόγραμμα περιήγησης δεν αφήνει ένα κουμπί να γράψει στο πρόχειρο). ¦ Използвай {key} в мрежата (браузърът не позволява бутон да пише в клипборда).
+En pixels (6 à 72) : ¦ Σε pixel (6 έως 72): ¦ В пиксели (от 6 до 72):
+Lignes masquées (Format → Tout remontrer) ¦ Κρυμμένες γραμμές (Μορφή → Εμφάνιση όλων ξανά) ¦ Скрити редове (Формат → Покажи всички отново)
+Colonnes masquées (Format → Tout remontrer) ¦ Κρυμμένες στήλες (Μορφή → Εμφάνιση όλων ξανά) ¦ Скрити колони (Формат → Покажи всички отново)
+Trier A → Z (sur la colonne choisie) ¦ Ταξινόμηση A → Ω (στην επιλεγμένη στήλη) ¦ Подреди А → Я (по избраната колона)
+Trier Z → A ¦ Ταξινόμηση Ω → A ¦ Подреди Я → А
+Trier sur plusieurs colonnes… ¦ Ταξινόμηση σε πολλές στήλες… ¦ Подреди по няколко колони…
+Espaces en trop retirés. ¦ Τα περιττά κενά αφαιρέθηκαν. ¦ Излишните интервали са премахнати.
+Rien à retirer. ¦ Τίποτα για αφαίρεση. ¦ Няма какво да се премахне.
+Police des cellules ¦ Γραμματοσειρά των κελιών ¦ Шрифт на клетките
+Cette police a un nom que le tableur ne sait pas garder. ¦ Αυτή η γραμματοσειρά έχει όνομα που το υπολογιστικό φύλλο δεν μπορεί να κρατήσει. ¦ Този шрифт има име, което електронната таблица не може да запази.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Μέγεθος από 6 έως 72 px (το «{value}» δεν κάνει). ¦ Размер между 6 и 72 px („{value}“ не става).
+Une taille entre 6 et 72 px. ¦ Μέγεθος από 6 έως 72 px. ¦ Размер между 6 и 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Επίλεξε πρώτα πολλά κελιά για συγχώνευση. ¦ Първо избери няколко клетки за обединяване.
+Cases fusionnées : {n} ¦ Συγχωνευμένα κελιά: {n} ¦ Обединени клетки: {n}
+Largeur de colonne ¦ Πλάτος στήλης ¦ Ширина на колоната
+Hauteur de ligne ¦ Ύψος γραμμής ¦ Височина на реда
+En pixels (16 à 1200) : ¦ Σε pixel (16 έως 1200): ¦ В пиксели (от 16 до 1200):
+En pixels (12 à 600) : ¦ Σε pixel (12 έως 600): ¦ В пиксели (от 12 до 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Ένα όνομα ξεκινά με γράμμα, χωρίς κενά (π.χ. Total, Âges_1836). ¦ Името започва с буква, без интервали (напр. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Όνομα «{name}» = {ref}: γράψε =SOMME({name}) σε έναν τύπο. ¦ Име „{name}“ = {ref}: напиши =SOMME({name}) във формула.
+Nom pour la plage ¦ Όνομα για την περιοχή ¦ Име за диапазона
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Ένα όνομα για το {ref} (για να γράφεις =SOMME(Total) αντί για =SOMME(D2:D40)): ¦ Име за {ref} (за да пишеш =SOMME(Total) вместо =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Σημείωση στο {cell} ¦ 💬 Бележка към {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Η σημείωση εμφανίζεται όταν περνάς το ποντίκι πάνω από το κελί (μια μικρή πορτοκαλί γωνία). Κενό = χωρίς σημείωση. ¦ Бележката се показва при посочване на клетката (малко оранжево ъгълче). Празно = без бележка.
+⌨️ Raccourcis du tableur ¦ ⌨️ Συντομεύσεις του υπολογιστικού φύλλου ¦ ⌨️ Клавишни комбинации на електронната таблица
+Raccourcis indisponibles. ¦ Οι συντομεύσεις δεν είναι διαθέσιμες. ¦ Клавишните комбинации не са достъпни.
+⚙️ Réglages du tableur ¦ ⚙️ Ρυθμίσεις του υπολογιστικού φύλλου ¦ ⚙️ Настройки на електронната таблица
+Après la touche Entrée, aller ¦ Μετά το πλήκτρο Enter, μετακίνηση ¦ След клавиша Enter отиди
+vers le bas ¦ προς τα κάτω ¦ надолу
+vers la droite (saisie de relevés en ligne) ¦ προς τα δεξιά (καταχώριση καταγραφών ανά γραμμή) ¦ надясно (въвеждане на преписи по редове)
+Séparateur des fichiers CSV ¦ Διαχωριστικό αρχείων CSV ¦ Разделител за CSV файлове
+point-virgule « ; » (Excel en français) ¦ σύμβολο «;» (Excel στα γαλλικά) ¦ точка и запетая „;“ (Excel на френски)
+virgule « , » ¦ κόμμα «,» ¦ запетая „,“
+tabulation ¦ στηλοθέτης ¦ табулация
+Largeur des colonnes d’une feuille neuve ¦ Πλάτος των στηλών ενός νέου φύλλου ¦ Ширина на колоните в нов лист
+Dans la barre du bas, pour les cellules choisies ¦ Στην κάτω γραμμή, για τα επιλεγμένα κελιά ¦ В долната лента, за избраните клетки
+Réglages du tableur ¦ Ρυθμίσεις του υπολογιστικού φύλλου ¦ Настройки на електронната таблица
+Trop de lignes ou de colonnes d’un coup. ¦ Πάρα πολλές γραμμές ή στήλες μαζί. ¦ Твърде много редове или колони наведнъж.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Ταξινομήθηκε {dir} στη στήλη {col} (η 1η γραμμή είναι οι τίτλοι). ¦ Подредено {dir} по колона {col} (1-вият ред са заглавията).
+Trié {dir} sur la colonne {col}. ¦ Ταξινομήθηκε {dir} στη στήλη {col}. ¦ Подредено {dir} по колона {col}.
+A → Z (croissant) ¦ A → Ω (αύξουσα) ¦ А → Я (възходящо)
+Z → A (décroissant) ¦ Ω → A (φθίνουσα) ¦ Я → А (низходящо)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Περιοχή {range} · οι ημερομηνίες πράξεων («vers 1784», «an II») ταξινομούνται κατά την ημερομηνία τους. ¦ Диапазон {range} · датите на актове („vers 1784“, „an II“) се подреждат по датата си.
+La première ligne, ce sont les titres ¦ Η πρώτη γραμμή είναι οι τίτλοι ¦ Първият ред са заглавията
+Puis par ¦ Μετά κατά ¦ После по
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Επίλεξε έναν πίνακα με γραμμή τίτλων και γραμμές από κάτω. ¦ Избери таблица с ред заглавия и редове под него.
+(vide) ¦ (κενό) ¦ (празно)
+Chercher dans le tableau… (nom, métier) ¦ Αναζήτηση στον πίνακα… (όνομα, επάγγελμα) ¦ Търси в таблицата… (име, занаят)
+{n} sur {total} ¦ {n} από {total} ¦ {n} от {total}
+Supprimer les doublons ¦ Διαγραφή των διπλότυπων ¦ Изтрий дубликатите
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Περιοχή {range} · η 1η γραμμή είναι οι τίτλοι. Η πρώτη γραμμή κάθε ομάδας μένει. ¦ Диапазон {range} · 1-вият ред са заглавията. Първият ред от всяка група остава.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Περιοχή {range}. Η πρώτη γραμμή κάθε ομάδας μένει. ¦ Диапазон {range}. Първият ред от всяка група остава.
+Compare les colonnes : ¦ Σύγκρινε τις στήλες: ¦ Сравни колоните:
+{n} en double (lignes {rows}). ¦ {n} διπλά (γραμμές {rows}). ¦ {n} повторени (редове {rows}).
+{n} en double (ligne {rows}). ¦ {n} διπλά (γραμμή {rows}). ¦ {n} повторени (ред {rows}).
+Aucune ligne en double. ¦ Καμία διπλή γραμμή. ¦ Няма повторени редове.
+Supprimer {n} ¦ Διαγραφή {n} ¦ Изтрий {n}
+Coche au moins une colonne. ¦ Τσέκαρε τουλάχιστον μία στήλη. ¦ Отметни поне една колона.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Επίλεξε κελιά κειμένου σε μια στήλη (π.χ. «MARTIN Jean, 34 ans, laboureur»). ¦ Избери текстови клетки в една колона (напр. „MARTIN Jean, 34 ans, laboureur“).
+Convertir le texte en colonnes ¦ Μετατροπή κειμένου σε στήλες ¦ Раздели текста в колони
+Convertir ¦ Μετατροπή ¦ Преобразувай
+Couper à : ¦ Χωρισμός στο: ¦ Раздели при:
+« 34 ans » devient 34 ¦ Το «34 ans» γίνεται 34 ¦ „34 ans“ става 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Το επώνυμο με κεφαλαία γίνεται ξεχωριστή στήλη («MARTIN Jean» → MARTIN | Jean) ¦ Фамилията с главни букви става отделна колона („MARTIN Jean“ → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Τα κομμάτια μπαίνουν στη στήλη {col} και στις επόμενες (ό,τι υπάρχει εκεί αντικαθίσταται· ↶ για επιστροφή). ¦ Частите отиват в колона {col} и следващите (каквото има там, се заменя; ↶ за връщане).
+Validation des données ¦ Επικύρωση δεδομένων ¦ Проверка на данните
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Για το {range}: τι μπορεί να γραφτεί σε αυτά τα κελιά. ¦ За {range}: какво може да се пише в тези клетки.
+Autoriser ¦ Να επιτρέπεται ¦ Разреши
+Une liste de choix (menu ▾) ¦ Μια λίστα επιλογών (μενού ▾) ¦ Списък с избори (меню ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Ένα άτομο από τη βάση (μενού επιλογής) ¦ 👤 Човек от базата (меню за избор)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Ένας τόπος από τη βάση (μενού επιλογής) ¦ 📍 Място от базата (меню за избор)
+Un nombre entre… ¦ Ένας αριθμός μεταξύ… ¦ Число между…
+Une date d’acte (vers 1784, an II…) ¦ Μια ημερομηνία πράξης (vers 1784, an II…) ¦ Дата на акт (vers 1784, an II…)
+Les choix (un par ligne) ¦ Οι επιλογές (μία ανά γραμμή) ¦ Изборите (по един на ред)
+Entre ¦ Μεταξύ ¦ Между
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Να επιτρέπεται και ελεύθερο κείμενο (χωρίς καρτέλα ή εκτός λίστας) ¦ Пази и свободен текст (без картон или извън списъка)
+Écris au moins un choix. ¦ Γράψε τουλάχιστον μία επιλογή. ¦ Напиши поне един избор.
+FORMAT ¦ ΜΟΡΦΗ ¦ ФОРМАТ
+Mise en forme conditionnelle ¦ Μορφοποίηση υπό όρους ¦ Условно форматиране
+Ajouter la règle ¦ Προσθήκη του κανόνα ¦ Добави правилото
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Ένα χρώμα όταν το ζητά η τιμή: το λάθος ή η παράξενη τιμή φαίνεται αμέσως. ¦ Цвят, когато стойността го изисква: грешката или странната стойност се набива на очи.
+Prêtes à l’emploi : ¦ Έτοιμοι για χρήση: ¦ Готови за употреба:
+« âge > 100 ans » ¦ «ηλικία > 100 χρόνια» ¦ „възраст > 100 години“
+« date impossible » ¦ «αδύνατη ημερομηνία» ¦ „невъзможна дата“
+« doublons » ¦ «διπλότυπα» ¦ „дубликати“
+« barres » ¦ «μπάρες» ¦ „ленти“
+Si la valeur ¦ Αν η τιμή ¦ Ако стойността
+alors ¦ τότε ¦ тогава
+en gras ¦ με έντονα ¦ с удебелен шрифт
+Une plage comme D2:D40. ¦ Μια περιοχή όπως D2:D40. ¦ Диапазон като D2:D40.
+Écris un nombre. ¦ Γράψε έναν αριθμό. ¦ Напиши число.
+ÉDITION ¦ ΕΠΕΞΕΡΓΑΣΙΑ ¦ РЕДАКТИРАНЕ
+🔍 Rechercher et remplacer ¦ 🔍 Εύρεση και αντικατάσταση ¦ 🔍 Търси и замени
+Remplacer tout ¦ Αντικατάσταση όλων ¦ Замени всички
+Remplacer par ¦ Αντικατάσταση με ¦ Замени с
+Dans toutes les feuilles ¦ Σε όλα τα φύλλα ¦ Във всички листове
+Respecter les capitales ¦ Διάκριση πεζών-κεφαλαίων ¦ Спазвай главните букви
+Chercher le suivant ¦ Εύρεση επόμενου ¦ Търси следващото
+Trouvé en {cell} ¦ Βρέθηκε στο {cell} ¦ Намерено в {cell}
+Écris ce qu’il faut chercher. ¦ Γράψε τι θέλεις να βρεις. ¦ Напиши какво да се търси.
+Aucune fonction ne correspond. ¦ Καμία συνάρτηση δεν ταιριάζει. ¦ Няма съвпадаща функция.
+ƒ Choisir une fonction ¦ ƒ Επιλογή συνάρτησης ¦ ƒ Избери функция
+Chercher… (âge, somme, recherche) ¦ Αναζήτηση… (ηλικία, άθροισμα, αναζήτηση) ¦ Търси… (възраст, сума, търсене)
+Le menu de choix n’est pas chargé. ¦ Το μενού επιλογής δεν έχει φορτωθεί. ¦ Менюто за избор не е заредено.
+📍 Un lieu pour {cell} ¦ 📍 Ένας τόπος για το {cell} ¦ 📍 Място за {cell}
+👤 Une personne pour {cell} ¦ 👤 Ένα άτομο για το {cell} ¦ 👤 Човек за {cell}
+📍 Lieu de la base ¦ 📍 Τόπος από τη βάση ¦ 📍 Място от базата
+auto ¦ αυτόματα ¦ авто
+Décimales ¦ Δεκαδικά ¦ Десетични знаци
+✓ « {text} » est comprise (≈) ¦ ✓ Το «{text}» έγινε κατανοητό (≈) ¦ ✓ „{text}“ е разбрано (≈)
+✓ « {text} » est comprise ¦ ✓ Το «{text}» έγινε κατανοητό ¦ ✓ „{text}“ е разбрано
+Noir ¦ Μαύρο ¦ Черно
+Contour ¦ Περίγραμμα ¦ Контур
+Retirer la règle ¦ Αφαίρεση του κανόνα ¦ Премахни правилото
+Aucune règle sur cette feuille. ¦ Κανένας κανόνας σε αυτό το φύλλο. ¦ Няма правила в този лист.
+＋ Ajouter une règle… ¦ ＋ Προσθήκη κανόνα… ¦ ＋ Добави правило…
+Une liste : {list} ¦ Μια λίστα: {list} ¦ Списък: {list}
+👤 Une personne de la base ¦ 👤 Ένα άτομο από τη βάση ¦ 👤 Човек от базата
+📍 Un lieu de la base ¦ 📍 Ένας τόπος από τη βάση ¦ 📍 Място от базата
+Un nombre ¦ Ένας αριθμός ¦ Число
+Une date d’acte ¦ Μια ημερομηνία πράξης ¦ Дата на акт
+Garder le texte ¦ Διατήρηση του κειμένου ¦ Запази текста
+Pas de validation ici. ¦ Καμία επικύρωση εδώ. ¦ Тук няма проверка.
+Validation des données… ¦ Επικύρωση δεδομένων… ¦ Проверка на данните…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Αποθήκευσε πρώτα το βιβλίο εργασίας (💾) και μετά άνοιξε την καρτέλα. ¦ Първо запази работната книга (💾), после отвори картона.
+{name} : lieu n° {id} de ta base. ¦ {name}: τόπος αρ. {id} της βάσης σου. ¦ {name}: място № {id} в твоята база.
+Règle « {range} » retirée ¦ Ο κανόνας «{range}» αφαιρέθηκε ¦ Правилото „{range}“ е премахнато
+Police (E5) : {font} ¦ Γραμματοσειρά (E5): {font} ¦ Шрифт (E5): {font}
+celle de départ ¦ η αρχική ¦ началният
+Panneau de droite : montrer ¦ Δεξί πλαίσιο: εμφάνιση ¦ Десен панел: покажи
+Panneau de droite : cacher ¦ Δεξί πλαίσιο: απόκρυψη ¦ Десен панел: скрий
+Double-clic : renommer · clic droit : plus d’actions ¦ Διπλό κλικ: μετονομασία · δεξί κλικ: περισσότερες ενέργειες ¦ Двойно щракване: преименувай · десен бутон: още действия
+Ajouter une feuille ¦ Προσθήκη φύλλου ¦ Добави лист
+Feuille {n} ¦ Φύλλο {n} ¦ Лист {n}
+Renommer la feuille ¦ Μετονομασία του φύλλου ¦ Преименувай листа
+Un classeur garde au moins une feuille. ¦ Ένα βιβλίο εργασίας κρατά τουλάχιστον ένα φύλλο. ¦ Работната книга пази поне един лист.
+Feuille « {name} » supprimée ¦ Το φύλλο «{name}» διαγράφηκε ¦ Листът „{name}“ е изтрит
+Couleur de l’onglet… ¦ Χρώμα της καρτέλας… ¦ Цвят на раздела…
+Déplacer à gauche ¦ Μετακίνηση αριστερά ¦ Премести вляво
+Déplacer à droite ¦ Μετακίνηση δεξιά ¦ Премести вдясно
+Somme <b>{v}</b> ¦ Άθροισμα <b>{v}</b> ¦ Сума <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Μέσος όρος <b>{v}</b> ¦ Средно <b>{v}</b>
+Nb <b>{v}</b> ¦ Πλήθος <b>{v}</b> ¦ Брой <b>{v}</b>
+Min <b>{v}</b> ¦ Ελάχ. <b>{v}</b> ¦ Мин. <b>{v}</b>
+Max <b>{v}</b> ¦ Μέγ. <b>{v}</b> ¦ Макс. <b>{v}</b>
+Dans la barre d’état ¦ Στη γραμμή κατάστασης ¦ В лентата на състоянието
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Χρησιμοποίησε το {key}: το πρόγραμμα περιήγησης δεν αφήνει ένα μενού να γράψει στο πρόχειρο. ¦ Използвай {key}: браузърът не позволява меню да пише в клипборда.
+Sélection trop grande pour le presse-papiers. ¦ Η επιλογή είναι πολύ μεγάλη για το πρόχειρο. ¦ Изборът е твърде голям за клипборда.
+Coupé : choisis où coller, puis {key}. ¦ Αποκόπηκε: διάλεξε πού θα το επικολλήσεις και μετά {key}. ¦ Изрязано: избери къде да поставиш, после {key}.
+Utilise {key} dans la grille pour coller. ¦ Χρησιμοποίησε το {key} στο πλέγμα για επικόλληση. ¦ Използвай {key} в мрежата, за да поставиш.
+Trop de cellules à coller. ¦ Πάρα πολλά κελιά για επικόλληση. ¦ Твърде много клетки за поставяне.
+{n} (avec le gras et les couleurs). ¦ {n} (με τα έντονα και τα χρώματα). ¦ {n} (с удебеляването и цветовете).
+Série {n} ¦ Σειρά {n} ¦ Серия {n}
+Colonnes groupées ¦ Ομαδοποιημένες στήλες ¦ Групирани колони
+Barres horizontales ¦ Οριζόντιες μπάρες ¦ Хоризонтални ленти
+TSV (tabulations) ¦ TSV (στηλοθέτες) ¦ TSV (табулации)
+⤒ Importer un tableau ¦ ⤒ Εισαγωγή πίνακα ¦ ⤒ Импортирай таблица
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Διαχωριστικό που εντοπίστηκε: {sep} · Κωδικοποίηση: {enc} ¦ Отгатнат разделител: {sep} · Кодиране: {enc}
+point-virgule (;) ¦ σύμβολο (;) ¦ точка и запетая (;)
+virgule (,) ¦ κόμμα (,) ¦ запетая (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Σωστοί τόνοι: «{list}». ¦ ✓ Правилни знаци: „{list}“.
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> σε {sheets} ¦ <b>{rows}</b> в {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV και TSV: το ανοιχτό φύλλο. Τα άλλα: όλο το βιβλίο εργασίας. Ένα κελί που ξεκινά με «=» προστατεύεται σε ένα CSV (κανένας κρυφός τύπος). ¦ CSV и TSV: отвореният лист. Другите: цялата работна книга. Клетка, която започва с „=“, е защитена в CSV (без подхвърлена формула).
+tout tableur ¦ κάθε υπολογιστικό φύλλο ¦ всяка електронна таблица
+tabulations ¦ στηλοθέτες ¦ табулации
+données ¦ δεδομένα ¦ данни
+à lire ¦ για ανάγνωση ¦ за четене
+💾 Fichier de l’outil ¦ 💾 Αρχείο του εργαλείου ¦ 💾 Файл на инструмента
+Exporté : {name} ¦ Εξήχθη: {name} ¦ Експортирано: {name}
+(feuille vide) ¦ (κενό φύλλο) ¦ (празен лист)
+Toutes les feuilles ¦ Όλα τα φύλλα ¦ Всички листове
+Quadrillage ¦ Πλέγμα ¦ Мрежа
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Αποθηκεύτηκε στις Λίστες → Εργαλεία επεξεργασίας → 🧾 Υπολογιστικό φύλλο. ¦ Подредено в Списъци → Инструменти за редактиране → 🧾 Електронна таблица.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Το πρότυπο «{name}» αποθηκεύτηκε (Ξεκίνα από πρότυπο → Τα πρότυπά μου). ¦ Шаблонът „{name}“ е запазен (Започни от шаблон → Моите шаблони).
+Copie « {name} » enregistrée. ¦ Το αντίγραφο «{name}» αποθηκεύτηκε. ¦ Копието „{name}“ е запазено.
+Ce classeur ¦ Αυτό το βιβλίο εργασίας ¦ Тази работна книга
+Impossible d’enregistrer : {error} ¦ Δεν ήταν δυνατή η αποθήκευση: {error} ¦ Не може да се запази: {error}
+Enregistrer comme modèle ¦ Αποθήκευση ως πρότυπο ¦ Запази като шаблон
+Enregistrer une copie ¦ Αποθήκευση αντιγράφου ¦ Запази копие
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Το όνομα του προτύπου (τα δεδομένα μένουν: άδειασέ τα πρώτα αν θέλεις κενό πρότυπο): ¦ Името на шаблона (данните остават: изчисти ги преди това, ако искаш празен шаблон):
+Le nom de la copie : ¦ Το όνομα του αντιγράφου: ¦ Името на копието:
+{name} (copie) ¦ {name} (αντίγραφο) ¦ {name} (копие)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Οι αλλαγές από την τελευταία αποθήκευση θα χαθούν. ¦ Промените след последното запазване ще бъдат загубени.
+📋 Partir d’un modèle ¦ 📋 Ξεκίνα από πρότυπο ¦ 📋 Започни от шаблон
+Mes modèles ¦ Τα πρότυπά μου ¦ Моите шаблони
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Δεν έχεις ακόμη δικό σου πρότυπο: σε ένα βιβλίο εργασίας, Αρχείο → «Αποθήκευση ως πρότυπο…». ¦ Все още нямаш свой шаблон: в работна книга, Файл → „Запази като шаблон…“.
+séparateur « {sep} » ¦ διαχωριστικό «{sep}» ¦ разделител „{sep}“
+Classeur importé ¦ Εισηγμένο βιβλίο εργασίας ¦ Импортирана работна книга
+Classeur « {name} » créé ({rows}) ¦ Το βιβλίο εργασίας «{name}» δημιουργήθηκε ({rows}) ¦ Работната книга „{name}“ е създадена ({rows})
+classeur ¦ βιβλίο εργασίας ¦ работна книга
+＋ Nouveau classeur ¦ ＋ Νέο βιβλίο εργασίας ¦ ＋ Нова работна книга
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Καταγραφή απογραφής, ενοριακό μητρώο, προϋπολογισμός της έρευνας, παρακολούθηση αλληλογραφίας… ¦ Препис от преброяване, енорийски регистър, бюджет на проучването, следене на писмата…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Διαιρείς με το μηδέν: το {ref} είναι κενό ή ίσο με 0. Συμβουλή: το =SI.ERREUR(…;"") αφήνει το κελί κενό. ¦ Делиш на нула: {ref} е празно или е 0. Съвет: =SI.ERREUR(…;"") оставя клетката празна.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Διαιρείς με το μηδέν: {why}. Συμβουλή: το =SI.ERREUR(…;"") αφήνει το κελί κενό. ¦ Делиш на нула: {why}. Съвет: =SI.ERREUR(…;"") оставя клетката празна.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Διαιρείς με το μηδέν. Συμβουλή: το =SI.ERREUR(…;"") αφήνει το κελί κενό. ¦ Делиш на нула. Съвет: =SI.ERREUR(…;"") оставя клетката празна.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Δεν ξέρω το «{name}». Μήπως εννοούσες {sugg}; ¦ Не познавам „{name}“. Може би имаш предвид {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Δεν ξέρω το «{name}». Γράψε τα πρώτα γράμματα: ανοίγει η λίστα των συναρτήσεων. ¦ Не познавам „{name}“. Напиши първите букви: отваря се списъкът с функции.
+Un nom inconnu dans la formule. ¦ Ένα άγνωστο όνομα στον τύπο. ¦ Непознато име във формулата.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ Το «{text}» δεν είναι αριθμός (κελί {cell}): δεν μπορεί να χρησιμοποιηθεί σε υπολογισμό. ¦ „{text}“ не е число (клетка {cell}): не може да се използва в изчисление.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ Το «{text}» δεν είναι αριθμός: δεν μπορεί να χρησιμοποιηθεί σε υπολογισμό. ¦ „{text}“ не е число: не може да се използва в изчисление.
+Une valeur ne convient pas ¦ Μια τιμή δεν ταιριάζει ¦ Една стойност не е подходяща
+{what} (cellule {cell}). ¦ {what} (κελί {cell}). ¦ {what} (клетка {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Ο τύπος δείχνει κάτι που δεν υπάρχει: {what}. ¦ Формулата сочи нещо, което не съществува: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Ο τύπος δείχνει ένα κελί που διαγράφηκε. ¦ Формулата сочи клетка, която е изтрита.
+Valeur introuvable ¦ Η τιμή δεν βρέθηκε ¦ Стойността не е намерена
+La recherche ¦ Η αναζήτηση ¦ Търсенето
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ Η {fn} δεν βρήκε το «{what}» στο {where}. ¦ {fn} не намери „{what}“ в {where}.
+{fn} n’a pas trouvé « {what} ». ¦ Η {fn} δεν βρήκε το «{what}». ¦ {fn} не намери „{what}“.
+{path} : la formule tourne en rond. ¦ {path}: ο τύπος κάνει κύκλους. ¦ {path}: формулата се върти в кръг.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Ο τύπος χρειάζεται τον εαυτό του: κάνει κύκλους. ¦ Формулата се нуждае от себе си: върти се в кръг.
+« {text} » : {why}. ¦ «{text}»: {why}. ¦ „{text}“: {why}.
+cette date ¦ αυτή την ημερομηνία ¦ тази дата
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Δεν καταλαβαίνω {what} («{text}»). Παραδείγματα: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Не разбирам {what} („{text}“). Примери: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Δεν καταλαβαίνω {what}. Παραδείγματα: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Не разбирам {what}. Примери: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Δεν καταλαβαίνω τον τύπο κοντά στο «{near}»: {why}. ¦ Не разбирам формулата близо до „{near}“: {why}.
+Je ne comprends pas la formule : {why}. ¦ Δεν καταλαβαίνω τον τύπο: {why}. ¦ Не разбирам формулата: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Δεν καταλαβαίνω τον τύπο κοντά στο «{near}»: έλεγξε τις παρενθέσεις, τα εισαγωγικά και τα «;». ¦ Не разбирам формулата близо до „{near}“: провери скобите, кавичките и „;“.
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Δεν καταλαβαίνω τον τύπο: έλεγξε τις παρενθέσεις, τα εισαγωγικά και τα «;». ¦ Не разбирам формулата: провери скобите, кавичките и „;“.
+Nombre impossible ¦ Αδύνατος αριθμός ¦ Невъзможно число
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Το αποτέλεσμα χρειάζεται {size} προς τα κάτω και δεξιά, αλλά το {cell} δεν είναι κενό: άδειασέ το για να δεις όλο το αποτέλεσμα. ¦ Резултатът се нуждае от {size} надолу и надясно, но {cell} не е празна: изчисти я, за да видиш целия резултат.
+plusieurs cases ¦ πολλά κελιά ¦ няколко клетки
+une case ¦ ένα κελί ¦ една клетка
+Trop gros pour être calculé : {why}. ¦ Πολύ μεγάλο για να υπολογιστεί: {why}. ¦ Твърде голямо, за да се изчисли: {why}.
+réduis la plage ¦ μίκρυνε την περιοχή ¦ намали диапазона
+Erreur dans la formule. ¦ Σφάλμα στον τύπο. ¦ Грешка във формулата.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Συμβουλή: =SI.ERREUR(A4/B4;"") ¦ Съвет: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ το αρχείο απορρίφθηκε: περιέχει δηλώσεις XML (DOCTYPE ή ENTITY) που ένα έγγραφο γραφείου δεν χρησιμοποιεί ¦ файлът е отказан: съдържа XML декларации (DOCTYPE или ENTITY), които офис документ не използва
+fichier XML abîmé ¦ κατεστραμμένο αρχείο XML ¦ повреден XML файл
+fichier refusé : trop d’éléments ¦ το αρχείο απορρίφθηκε: πάρα πολλά στοιχεία ¦ файлът е отказан: твърде много елементи
+fichier refusé : XML trop imbriqué ¦ το αρχείο απορρίφθηκε: XML με υπερβολικά βαθιά ένθεση ¦ файлът е отказан: XML с твърде дълбоко влагане
+fichier trop gros (plus de {n} Mo) ¦ το αρχείο είναι πολύ μεγάλο (πάνω από {n} MB) ¦ файлът е твърде голям (над {n} MB)
+ce n’est pas un fichier zip valide ¦ δεν είναι έγκυρο αρχείο zip ¦ това не е валиден zip файл
+fichier refusé : trop d’éléments dans le zip ¦ το αρχείο απορρίφθηκε: πάρα πολλά στοιχεία μέσα στο zip ¦ файлът е отказан: твърде много елементи в zip архива
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ κρυπτογραφημένο αρχείο: άνοιξέ το πρώτα στο πρόγραμμά του και αποθήκευσέ το χωρίς κωδικό ¦ шифрован файл: първо го отвори в неговата програма за таблици и го запази без парола
+fichier zip abîmé ¦ κατεστραμμένο αρχείο zip ¦ повреден zip файл
+fichier refusé : trop gros une fois décompressé ¦ το αρχείο απορρίφθηκε: πολύ μεγάλο μετά την αποσυμπίεση ¦ файлът е отказан: твърде голям след разархивиране
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ το αρχείο απορρίφθηκε: αποσυμπιέζεται σε κάτι υπερβολικά μεγάλο (βόμβα zip) ¦ файлът е отказан: разархивира се в нещо прекалено голямо (zip бомба)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ αυτό το πρόγραμμα περιήγησης δεν μπορεί να ανοίξει αρχεία zip (ενημέρωσέ το) ¦ този браузър не може да отваря zip файлове (обнови го)
+compression inconnue dans le fichier ¦ άγνωστη συμπίεση στο αρχείο ¦ непознато компресиране във файла
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ δεν είναι αρχείο Excel (.xlsx): λείπει το xl/workbook.xml ¦ това не е Excel файл (.xlsx): липсва xl/workbook.xml
+fichier refusé : trop de feuilles ¦ το αρχείο απορρίφθηκε: πάρα πολλά φύλλα ¦ файлът е отказан: твърде много листове
+fichier refusé : trop de cellules ¦ το αρχείο απορρίφθηκε: πάρα πολλά κελιά ¦ файлът е отказан: твърде много клетки
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ δεν είναι αρχείο LibreOffice (.ods): λείπει το content.xml ¦ това не е LibreOffice файл (.ods): липсва content.xml
+ce fichier n’est pas un JSON valide ¦ αυτό το αρχείο δεν είναι έγκυρο JSON ¦ този файл не е валиден JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ δεν βρίσκω πίνακα σε αυτό το JSON (χρειάζεται μια λίστα από γραμμές ή αντικείμενα) ¦ не намирам таблица в този JSON (нужен е списък от редове или обекти)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ τα παλιά αρχεία Excel (.xls) δεν διαβάζονται: άνοιξέ το στο Excel ή στο LibreOffice και αποθήκευσέ το ως .xlsx ¦ старите Excel файлове (.xls) не се четат: отвори го в Excel или LibreOffice и го запази като .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ αυτό το συμπιεσμένο αρχείο δεν είναι ούτε .xlsx ούτε .ods ¦ този компресиран файл не е нито .xlsx, нито .ods
+Nombre 0,00 ¦ Αριθμός 0,00 ¦ Число 0,00
+Nombre entier ¦ Ακέραιος αριθμός ¦ Цяло число
+Monnaie (€) ¦ Νόμισμα (€) ¦ Валута (€)
+Pourcentage ¦ Ποσοστό ¦ Процент
+Date courte ¦ Σύντομη ημερομηνία ¦ Кратка дата
+Date d’acte ¦ Ημερομηνία πράξης ¦ Дата на акт
+Texte ¦ Κείμενο ¦ Текст
+Relevé de recensement ¦ Καταγραφή απογραφής ¦ Препис от преброяване
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ στήλες της χρονιάς · νοικοκυριά · υπολογισμένο «Γεννήθηκε περίπου» ¦ колони за годината · домакинства · изчислено „Роден(а) около“
+Registre paroissial ¦ Ενοριακό μητρώο ¦ Енорийски регистър
+baptêmes, mariages, sépultures ¦ βαπτίσεις, γάμοι, ταφές ¦ кръщенета, бракове, погребения
+Budget de la recherche ¦ Προϋπολογισμός της έρευνας ¦ Бюджет на проучването
+actes, déplacements, abonnements ¦ πράξεις, μετακινήσεις, συνδρομές ¦ актове, пътувания, абонаменти
+Suivi des courriers ¦ Παρακολούθηση αλληλογραφίας ¦ Следене на писмата
+envoyé, relancé, réponse ¦ στάλθηκε, υπενθύμιση, απάντηση ¦ изпратено, напомнено, отговор
+Arbre en tableau ¦ Δέντρο σε πίνακα ¦ Дърво в таблица
+Sosa, génération, côté, âge ¦ Sosa, γενιά, πλευρά, ηλικία ¦ Sosa, поколение, страна, възраст
+objets, prix, total en livres ¦ αντικείμενα, τιμές, σύνολο σε λίβρες ¦ предмети, цени, общо в ливри
+Registre matricule ¦ Στρατολογικό μητρώο ¦ Военен регистър
+classe, signalement, campagnes ¦ κλάση, περιγραφή, εκστρατείες ¦ набор, описание, походи
+📋 Partir d’un modèle… ¦ 📋 Ξεκίνα από πρότυπο… ¦ 📋 Започни от шаблон…
+⤒ Importer un tableau… ¦ ⤒ Εισαγωγή πίνακα… ¦ ⤒ Импортирай таблица…
+⤓ Exporter… ¦ ⤓ Εξαγωγή… ¦ ⤓ Експортирай…
+🖨 Imprimer… ¦ 🖨 Εκτύπωση… ¦ 🖨 Печат…
+⚙️ Réglages du tableur… ¦ ⚙️ Ρυθμίσεις του υπολογιστικού φύλλου… ¦ ⚙️ Настройки на електронната таблица…
+Insertion ¦ Εισαγωγή ¦ Вмъкване
+Coller les valeurs seulement ¦ Επικόλληση μόνο τιμών ¦ Постави само стойностите
+Effacer le contenu ¦ Διαγραφή περιεχομένου ¦ Изчисти съдържанието
+Effacer tout (contenu et mise en forme) ¦ Διαγραφή όλων (περιεχόμενο και μορφοποίηση) ¦ Изчисти всичко (съдържание и форматиране)
+Recopier vers le bas ¦ Αντιγραφή προς τα κάτω ¦ Копирай надолу
+Recopier vers la droite ¦ Αντιγραφή προς τα δεξιά ¦ Копирай надясно
+🔍 Rechercher et remplacer… ¦ 🔍 Εύρεση και αντικατάσταση… ¦ 🔍 Търси и замени…
+Ligne au-dessus ¦ Γραμμή από πάνω ¦ Ред отгоре
+Ligne en dessous ¦ Γραμμή από κάτω ¦ Ред отдолу
+＋ Nouvelle feuille ¦ ＋ Νέο φύλλο ¦ ＋ Нов лист
+ƒ Fonction… ¦ ƒ Συνάρτηση… ¦ ƒ Функция…
+Σ Somme automatique ¦ Σ Αυτόματο άθροισμα ¦ Σ Автоматична сума
+📅 Date du jour ¦ 📅 Σημερινή ημερομηνία ¦ 📅 Днешната дата
+Nom pour la plage… ¦ Όνομα για την περιοχή… ¦ Име за диапазона…
+💬 Note sur la cellule… ¦ 💬 Σημείωση στο κελί… ¦ 💬 Бележка към клетката…
+📊 Graphique depuis la sélection ¦ 📊 Γράφημα από την επιλογή ¦ 📊 Графика от избора
+Barré ¦ Διακριτή διαγραφή ¦ Зачертан
+Aa Police… ¦ Aa Γραμματοσειρά… ¦ Aa Шрифт…
+Taille du texte… ¦ Μέγεθος κειμένου… ¦ Размер на текста…
+↵ Renvoi à la ligne ¦ ↵ Αναδίπλωση κειμένου ¦ ↵ Пренасяне на текста
+⊞ Fusionner / séparer ¦ ⊞ Συγχώνευση / διαχωρισμός ¦ ⊞ Обедини / раздели
+▦ Bordures : tout ¦ ▦ Περιγράμματα: όλα ¦ ▦ Рамки: всички
+▭ Bordures : contour ¦ ▭ Περιγράμματα: περίγραμμα ¦ ▭ Рамки: контур
+▁ Bordure du bas ¦ ▁ Κάτω περίγραμμα ¦ ▁ Долна рамка
+Largeur de colonne… ¦ Πλάτος στήλης… ¦ Ширина на колоната…
+Hauteur de ligne… ¦ Ύψος γραμμής… ¦ Височина на реда…
+Ajuster la largeur au contenu ¦ Προσαρμογή πλάτους στο περιεχόμενο ¦ Нагласи ширината по съдържанието
+Masquer les lignes ¦ Απόκρυψη γραμμών ¦ Скрий редовете
+Masquer les colonnes ¦ Απόκρυψη στηλών ¦ Скрий колоните
+Tout remontrer ¦ Εμφάνιση όλων ξανά ¦ Покажи всички отново
+Mise en forme conditionnelle… ¦ Μορφοποίηση υπό όρους… ¦ Условно форматиране…
+Une ligne sur deux ¦ Μία γραμμή στις δύο ¦ Ред през ред
+Effacer la mise en forme ¦ Διαγραφή μορφοποίησης ¦ Изчисти форматирането
+↕ Trier A → Z ¦ ↕ Ταξινόμηση A → Ω ¦ ↕ Подреди А → Я
+↕ Trier Z → A ¦ ↕ Ταξινόμηση Ω → A ¦ ↕ Подреди Я → А
+⚲ Filtrer ¦ ⚲ Φίλτρο ¦ ⚲ Филтрирай
+Supprimer les doublons… ¦ Διαγραφή των διπλότυπων… ¦ Изтрий дубликатите…
+Convertir le texte en colonnes… ¦ Μετατροπή κειμένου σε στήλες… ¦ Раздели текста в колони…
+Retirer les espaces en trop ¦ Αφαίρεση των περιττών κενών ¦ Премахни излишните интервали
+Figer la 1re ligne ¦ Πάγωμα της 1ης γραμμής ¦ Замрази 1-вия ред
+Figer la 1re colonne ¦ Πάγωμα της 1ης στήλης ¦ Замрази 1-вата колона
+Figer jusqu’à la cellule choisie ¦ Πάγωμα έως το επιλεγμένο κελί ¦ Замрази до избраната клетка
+Libérer les volets ¦ Ξεπάγωμα παραθύρων ¦ Размрази областите
+Montrer les formules ¦ Εμφάνιση των τύπων ¦ Покажи формулите
+⤢ Ajuster à la fenêtre ¦ ⤢ Προσαρμογή στο παράθυρο ¦ ⤢ Побери в прозореца
+100 % (taille réelle) ¦ 100 % (πραγματικό μέγεθος) ¦ 100 % (реален размер)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Συντομεύσεις του υπολογιστικού φύλλου… ¦ ⌨️ Клавишни комбинации на електронната таблица…
+Rechercher et remplacer ¦ Εύρεση και αντικατάσταση ¦ Търси и замени
+Filtrer (barre de recherche et filtres au-dessus) ¦ Φίλτρο (γραμμή αναζήτησης και φίλτρα από πάνω) ¦ Филтрирай (лента за търсене и филтри отгоре)
+Trier la plage ¦ Ταξινόμηση της περιοχής ¦ Подреди диапазона
+Somme, moyenne, nombre… ¦ Άθροισμα, μέσος όρος, πλήθος… ¦ Сума, средно, брой…
+Une personne de la base dans la cellule ¦ Ένα άτομο από τη βάση στο κελί ¦ Човек от базата в клетката
+Un lieu de la base dans la cellule ¦ Ένας τόπος από τη βάση στο κελί ¦ Място от базата в клетката
+Note sur la cellule ¦ Σημείωση στο κελί ¦ Бележка към клетката
+Graphique avec les chiffres de la sélection ¦ Γράφημα με τους αριθμούς της επιλογής ¦ Графика с числата от избора
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Πληκτρολόγησε για να γράψεις · = για υπολογισμό · διπλό κλικ για επεξεργασία · δεξί κλικ για ενέργειες · σύρε το μικρό τετράγωνο για αντιγραφή ¦ Пиши, за да въведеш · = за изчисление · двойно щракване за редактиране · десен бутон за действия · плъзни малкото квадратче, за да копираш
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter επιβεβαιώνει · Tab: κελί στα δεξιά · Esc ακυρώνει · ενώ γράφεις τύπο, κάνε κλικ ή σύρε πάνω σε κελιά για να τα βάλεις ¦ Enter потвърждава · Tab: клетката вдясно · Esc отказва · докато пишеш формула, щракни или плъзни върху клетки, за да ги вмъкнеш
+Σ Somme ¦ Σ Άθροισμα ¦ Σ Сума
+Nombre ¦ Πλήθος ¦ Брой
+Minimum ¦ Ελάχιστο ¦ Минимум
+Maximum ¦ Μέγιστο ¦ Максимум
+Somme ¦ Άθροισμα ¦ Сума
+Panneau de droite ouvert ¦ Δεξί πλαίσιο ανοιχτό ¦ Десният панел е отворен
+, virgule ¦ , κόμμα ¦ , запетая
+; point-virgule ¦ ; σύμβολο «;» ¦ ; точка и запетая
+espace ¦ κενό διάστημα ¦ интервал
+Autre… ¦ Άλλο… ¦ Друго…
+plus grande que ¦ μεγαλύτερη από ¦ по-голяма от
+plus petite que ¦ μικρότερη από ¦ по-малка от
+au moins ¦ τουλάχιστον ¦ поне
+au plus ¦ το πολύ ¦ най-много
+égale à ¦ ίση με ¦ равна на
+différente de ¦ διαφορετική από ¦ различна от
+entre ¦ μεταξύ ¦ между
+contient le texte ¦ περιέχει το κείμενο ¦ съдържа текста
+est vide ¦ είναι κενή ¦ е празна
+n’est pas vide ¦ δεν είναι κενή ¦ не е празна
+est en double ¦ είναι διπλή ¦ е повторена
+est une date impossible ¦ είναι αδύνατη ημερομηνία ¦ е невъзможна дата
+barres dans la cellule ¦ μπάρες στο κελί ¦ ленти в клетката
+fond jaune ¦ κίτρινο φόντο ¦ жълт фон
+fond rouge ¦ κόκκινο φόντο ¦ червен фон
+fond vert ¦ πράσινο φόντο ¦ зелен фон
+fond bleu ¦ μπλε φόντο ¦ син фон
+fond orange ¦ πορτοκαλί φόντο ¦ оранжев фон
+fond violet ¦ μωβ φόντο ¦ лилав фон
+règle|plus grande que ¦ μεγαλύτερη από ¦ по-голяма от
+règle|plus petite que ¦ μικρότερη από ¦ по-малка от
+règle|au moins ¦ τουλάχιστον ¦ поне
+règle|au plus ¦ το πολύ ¦ най-много
+règle|égale à ¦ ίση με ¦ равна на
+règle|différente de ¦ διαφορετική από ¦ различна от
+règle|entre ¦ μεταξύ ¦ между
+règle|contient ¦ περιέχει ¦ съдържа
+règle|vide ¦ κενή ¦ празна
+règle|pas vide ¦ όχι κενή ¦ не е празна
+règle|en double ¦ διπλή ¦ повторена
+règle|date impossible ¦ αδύνατη ημερομηνία ¦ невъзможна дата
+règle|barres ¦ μπάρες ¦ ленти
+Cellule ¦ Κελί ¦ Клетка
+Nombre et date ¦ Αριθμός και ημερομηνία ¦ Число и дата
+Couleur et bordures ¦ Χρώμα και περιγράμματα ¦ Цвят и рамки
+Validation ¦ Επικύρωση ¦ Проверка
+Adresse ¦ Διεύθυνση ¦ Адрес
+Valeur ¦ Τιμή ¦ Стойност
+Formule ¦ Τύπος ¦ Формула
+Autorise ¦ Επιτρέπει ¦ Разрешава
+Sinon ¦ Αλλιώς ¦ Иначе
+Insérer une ligne au-dessus ¦ Εισαγωγή γραμμής από πάνω ¦ Вмъкни ред отгоре
+Insérer une ligne en dessous ¦ Εισαγωγή γραμμής από κάτω ¦ Вмъкни ред отдолу
+Insérer une colonne à gauche ¦ Εισαγωγή στήλης αριστερά ¦ Вмъкни колона вляво
+Insérer une colonne à droite ¦ Εισαγωγή στήλης δεξιά ¦ Вмъкни колона вдясно
+Trier A → Z ¦ Ταξινόμηση A → Ω ¦ Подреди А → Я
+Retirer le filtre ¦ Αφαίρεση του φίλτρου ¦ Премахни филтъра
+Note… ¦ Σημείωση… ¦ Бележка…
+Ajuster la largeur ¦ Προσαρμογή του πλάτους ¦ Нагласи ширината
+Supprimer les lignes ¦ Διαγραφή των γραμμών ¦ Изтрий редовете
+Supprimer les colonnes ¦ Διαγραφή των στηλών ¦ Изтрий колоните
+Windows (vieil Excel) ¦ Windows (παλιό Excel) ¦ Windows (старо Excel)
+👤 Des fiches ¦ 👤 Καρτέλες ¦ 👤 Картони
+🏠 Un recensement (foyers) ¦ 🏠 Μια απογραφή (νοικοκυριά) ¦ 🏠 Преброяване (домакинства)
+📅 Des événements ¦ 📅 Γεγονότα ¦ 📅 Събития
+— ne pas envoyer — ¦ — να μη σταλεί — ¦ — не изпращай —
+Nom et prénom ¦ Επώνυμο και όνομα ¦ Фамилия и име
+Sexe ¦ Φύλο ¦ Пол
+Naissance (date ou année) ¦ Γέννηση (ημερομηνία ή έτος) ¦ Раждане (дата или година)
+Décès (date) ¦ Θάνατος (ημερομηνία) ¦ Смърт (дата)
+N° de foyer (ménage) ¦ Αρ. νοικοκυριού ¦ № на домакинство
+N° de maison ¦ Αρ. σπιτιού ¦ № на къща
+Rue, quartier ¦ Οδός, συνοικία ¦ Улица, квартал
+Patron, employeur ¦ Αφεντικό, εργοδότης ¦ Господар, работодател
+Situation (marié, veuf…) ¦ Οικογενειακή κατάσταση (έγγαμος, χήρος…) ¦ Семейно положение (женен, вдовец…)
+Observations, notes ¦ Παρατηρήσεις, σημειώσεις ¦ Забележки, бележки
+Sorte d’événement (acte) ¦ Είδος γεγονότος (πράξη) ¦ Вид събитие (акт)
+Date de l’événement ¦ Ημερομηνία του γεγονότος ¦ Дата на събитието
+Lieu de l’événement ¦ Τόπος του γεγονότος ¦ Място на събитието
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ στήλες της χρονιάς (1836 → 1936) · νοικοκυριά · 📤 προς τη βάση ¦ колони за годината (1836 → 1936) · домакинства · 📤 към базата
+⤒ Remplir depuis l’app… ¦ ⤒ Συμπλήρωση από την εφαρμογή… ¦ ⤒ Попълни от приложението…
+↻ Relire depuis la base ¦ ↻ Επανανάγνωση από τη βάση ¦ ↻ Прочети отново от базата
+catégorie + séries ¦ κατηγορία + σειρές ¦ категория + серии
+📊 Créer le diagramme ¦ 📊 Δημιουργία του διαγράμματος ¦ 📊 Създай диаграмата
+Un graphique ¦ Ένα γράφημα ¦ Графика
+📈 Créer le graphique ¦ 📈 Δημιουργία του γραφήματος ¦ 📈 Създай графиката
+objet ▦ Tableur ¦ αντικείμενο ▦ Υπολογιστικό φύλλο ¦ обект ▦ Електронна таблица
+📋 Copier pour un tableau ¦ 📋 Αντιγραφή για πίνακα ιδεών ¦ 📋 Копирай за дъска
+Un recueil ¦ Μια συλλογή ¦ Сборник
+tableur d’une page ¦ υπολογιστικό φύλλο σε μια σελίδα ¦ електронна таблица на страница
+📋 Copier pour un recueil ¦ 📋 Αντιγραφή για συλλογή ¦ 📋 Копирай за сборник
+tableau ou graphique ¦ πίνακας ή γράφημα ¦ таблица или графика
+Ce que le diagramme attend ¦ Τι περιμένει το διάγραμμα ¦ Какво очаква диаграмата
+Ce que le graphique attend ¦ Τι περιμένει το γράφημα ¦ Какво очаква графиката
+Ce que le tableau attend ¦ Τι περιμένει ο πίνακας ιδεών ¦ Какво очаква дъската
+Ce que le recueil attend ¦ Τι περιμένει η συλλογή ¦ Какво очаква сборникът
+Pyramide des âges ¦ Πυραμίδα ηλικιών ¦ Възрастова пирамида
+Courbes ¦ Καμπύλες ¦ Линии
+Radar ¦ Ραντάρ ¦ Радар
+Barres groupées ¦ Ομαδοποιημένες μπάρες ¦ Групирани ленти
+Camembert (une seule série) ¦ Πίτα (μία μόνο σειρά) ¦ Кръгова (само една серия)
+Rectangles proportionnels ¦ Αναλογικά ορθογώνια ¦ Пропорционални правоъгълници
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Προετοιμασία για… (διάγραμμα, γράφημα, παρουσίαση…) ¦ 🎯 Подготви за… (диаграма, графика, презентация…)
+initiale ¦ αρχικό ¦ инициал
+MAJUSCULES ¦ ΚΕΦΑΛΑΙΑ ¦ ГЛАВНИ БУКВИ
+minuscules ¦ πεζά ¦ малки букви
+Capitale ¦ Πρώτο κεφαλαίο ¦ С главна буква
+Plus petit ¦ Μικρότερο ¦ Най-малко
+Plus grand ¦ Μεγαλύτερο ¦ Най-голямо
+✨ Remplissage instantané ¦ ✨ Άμεση συμπλήρωση ¦ ✨ Бързо попълване
+Σ Sous-totaux… ¦ Σ Μερικά σύνολα… ¦ Σ Междинни суми…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Διάρθρωση: σύμπτυξη / ανάπτυξη των λεπτομερειών ¦ ⊟ Структура: свий / разгъни подробностите
+🎯 Valeur cible… ¦ 🎯 Τιμή στόχος… ¦ 🎯 Търсене на цел…
+🧮 Solveur… ¦ 🧮 Επιλυτής… ¦ 🧮 Решател…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Πίνακας σεναρίων (κι αν…)… ¦ 📋 Таблица със сценарии (а ако…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Καταγραφή ενέργειας / ⏹ διακοπή ¦ ⏺ Запиши действие / ⏹ спри
+▶ Actions enregistrées… ¦ ▶ Καταγεγραμμένες ενέργειες… ¦ ▶ Записани действия…
+📈 Mini-graphique… ¦ 📈 Μίνι γράφημα… ¦ 📈 Мини графика…
+Nombre de lignes ¦ Αριθμός γραμμών ¦ Брой редове
+Nombre de valeurs différentes ¦ Αριθμός διαφορετικών τιμών ¦ Брой различни стойности
+En % de la ligne ¦ Σε % της γραμμής ¦ В % от реда
+En % de la colonne ¦ Σε % της στήλης ¦ В % от колоната
+En % du tout ¦ Σε % του συνόλου ¦ В % от общото
+🔀 Tableau croisé dynamique… ¦ 🔀 Συγκεντρωτικός πίνακας… ¦ 🔀 Обобщена таблица…
+↻ Actualiser le tableau croisé ¦ ↻ Ανανέωση του συγκεντρωτικού πίνακα ¦ ↻ Обнови обобщената таблица
+📊 Graphique vivant (suit la sélection) ¦ 📊 Ζωντανό γράφημα (ακολουθεί την επιλογή) ¦ 📊 Жива графика (следва избора)
+📊 Graphique vivant ¦ 📊 Ζωντανό γράφημα ¦ 📊 Жива графика
+Vide ¦ Κενό ¦ Празно
+⛔ Formule en erreur ¦ ⛔ Τύπος με σφάλμα ¦ ⛔ Формула с грешка
+ƒ Formule ¦ ƒ Τύπος ¦ ƒ Формула
+VRAI / FAUX ¦ ΑΛΗΘΕΣ / ΨΕΥΔΕΣ ¦ ИСТИНА / НЕИСТИНА
+⚠️ Date impossible ¦ ⚠️ Αδύνατη ημερομηνία ¦ ⚠️ Невъзможна дата
+📅 Date d’acte ¦ 📅 Ημερομηνία πράξης ¦ 📅 Дата на акт
+Conditions ¦ Συνθήκες ¦ Условия
+Logique ¦ Λογική ¦ Логика
+Conjoint ¦ Σύζυγος ¦ Съпруг(а)
+Parents ¦ Γονείς ¦ Родители
+N° de fiche ¦ Αρ. καρτέλας ¦ № на картон
+Date ¦ Ημερομηνία ¦ Дата
+Personne(s) ¦ Άτομο(-α) ¦ Човек (хора)
+Description ¦ Περιγραφή ¦ Описание
+N° d’événement ¦ Αρ. γεγονότος ¦ № на събитие
+Foyer ¦ Νοικοκυριό ¦ Домакинство
+Employeur ¦ Εργοδότης ¦ Работодател
+Situation ¦ Κατάσταση ¦ Положение
+Rue ¦ Οδός ¦ Улица
+N° ¦ Αρ. ¦ №
+Adresse entière ¦ Πλήρης διεύθυνση ¦ Пълен адрес
+Deuxième prénom ¦ Δεύτερο όνομα ¦ Второ име
+Titre ¦ Τίτλος ¦ Титла
+Suffixe ¦ Επίθημα ¦ Суфикс
+FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Σωματική περιγραφή ¦ Физическо описание
+Teint ¦ Επιδερμίδα ¦ Тен
+Origine ¦ Καταγωγή ¦ Произход
+Vivant ? ¦ Ζει; ¦ Жив(а)?
+Modifié le ¦ Τροποποιήθηκε στις ¦ Променено на
+Cause ¦ Αιτία ¦ Причина
+Autorité ¦ Αρχή ¦ Орган
+Confiance ¦ Βεβαιότητα ¦ Доверие
+Date convertie ¦ Μετατρεπόμενη ημερομηνία ¦ Преобразувана дата
+Autre date ¦ Άλλη ημερομηνία ¦ Друга дата
+Informations en plus ¦ Επιπλέον πληροφορίες ¦ Допълнителна информация
+Calendrier ¦ Ημερολόγιο ¦ Календар
+Relevés de dépouillement ¦ Καταγραφές αποδελτίωσης ¦ Преписи от извлечения
+Noms de famille ¦ Επώνυμα ¦ Фамилни имена
+Âges au décès ¦ Ηλικίες κατά τον θάνατο ¦ Възраст при смъртта
+Décès par siècle ¦ Θάνατοι ανά αιώνα ¦ Смъртни случаи по векове
+Communes de naissance ¦ Δήμοι γέννησης ¦ Общини на раждане
+Départements de naissance ¦ Νομοί γέννησης ¦ Департаменти на раждане
+Naissances par mois ¦ Γεννήσεις ανά μήνα ¦ Раждания по месеци
+Personnes par génération ¦ Άτομα ανά γενιά ¦ Хора по поколения
+Additionne des nombres ou des plages. ¦ Προσθέτει αριθμούς ή περιοχές. ¦ Събира числа или диапазони.
+La moyenne des nombres. ¦ Ο μέσος όρος των αριθμών. ¦ Средното на числата.
+Le plus petit nombre. ¦ Ο μικρότερος αριθμός. ¦ Най-малкото число.
+Le plus grand nombre. ¦ Ο μεγαλύτερος αριθμός. ¦ Най-голямото число.
+Compte les cellules qui contiennent un nombre. ¦ Μετράει τα κελιά που περιέχουν αριθμό. ¦ Брои клетките, които съдържат число.
+Compte les cellules qui ne sont pas vides. ¦ Μετράει τα κελιά που δεν είναι κενά. ¦ Брои клетките, които не са празни.
+Compte les cellules vides. ¦ Μετράει τα κενά κελιά. ¦ Брои празните клетки.
+Multiplie des nombres. ¦ Πολλαπλασιάζει αριθμούς. ¦ Умножава числа.
+Arrondit au plus proche. ¦ Στρογγυλοποιεί στον πλησιέστερο. ¦ Закръгля до най-близкото.
+Arrondit vers zéro. ¦ Στρογγυλοποιεί προς το μηδέν. ¦ Закръгля към нула.
+Arrondit en s’éloignant de zéro. ¦ Στρογγυλοποιεί μακριά από το μηδέν. ¦ Закръгля в посока от нулата.
+La partie entière (arrondi vers le bas). ¦ Το ακέραιο μέρος (στρογγυλοποίηση προς τα κάτω). ¦ Цялата част (закръгляне надолу).
+Le nombre sans son signe. ¦ Ο αριθμός χωρίς το πρόσημό του. ¦ Числото без знака му.
+Le reste d’une division. ¦ Το υπόλοιπο μιας διαίρεσης. ¦ Остатъкът от деление.
+Un nombre élevé à une puissance. ¦ Ένας αριθμός υψωμένος σε δύναμη. ¦ Число, повдигнато на степен.
+La racine carrée. ¦ Η τετραγωνική ρίζα. ¦ Квадратният корен.
+La valeur du milieu. ¦ Η μεσαία τιμή. ¦ Средната по ред стойност.
+L’écart type (sur un échantillon). ¦ Η τυπική απόκλιση (σε δείγμα). ¦ Стандартното отклонение (за извадка).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Η θέση ενός αριθμού σε μια λίστα (1 = ο μεγαλύτερος· σειρά 1 = πρώτα ο μικρότερος). ¦ Мястото на число в списък (1 = най-голямото; ред 1 = първо най-малкото).
+La k-ième plus grande valeur. ¦ Η k-οστή μεγαλύτερη τιμή. ¦ k-тата най-голяма стойност.
+La k-ième plus petite valeur. ¦ Η k-οστή μικρότερη τιμή. ¦ k-тата най-малка стойност.
+Une valeur si le test est vrai, une autre sinon. ¦ Μια τιμή αν ο έλεγχος είναι αληθής, αλλιώς μια άλλη. ¦ Една стойност, ако проверката е вярна, иначе друга.
+La valeur du premier test vrai. ¦ Η τιμή του πρώτου αληθούς ελέγχου. ¦ Стойността на първата вярна проверка.
+La valeur, ou autre chose s’il y a une erreur. ¦ Η τιμή ή κάτι άλλο αν υπάρχει σφάλμα. ¦ Стойността или нещо друго, ако има грешка.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Η τιμή ή κάτι άλλο αν δεν βρεθεί (#N/A). ¦ Стойността или нещо друго, ако не е намерена (#N/A).
+VRAI si tous les tests sont vrais. ¦ VRAI (αληθές) αν όλοι οι έλεγχοι είναι αληθείς. ¦ VRAI (истина), ако всички проверки са верни.
+VRAI si au moins un test est vrai. ¦ VRAI (αληθές) αν τουλάχιστον ένας έλεγχος είναι αληθής. ¦ VRAI (истина), ако поне една проверка е вярна.
+La valeur VRAI (comme le mot VRAI). ¦ Η τιμή VRAI (αληθές), όπως η λέξη VRAI. ¦ Стойността VRAI (истина), като думата VRAI.
+La valeur FAUX (comme le mot FAUX). ¦ Η τιμή FAUX (ψευδές), όπως η λέξη FAUX. ¦ Стойността FAUX (неистина), като думата FAUX.
+Inverse un test. ¦ Αντιστρέφει έναν έλεγχο. ¦ Обръща проверка.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Μετράει τα κελιά που πληρούν μια συνθήκη (">60", "laboureur", "lab*"). ¦ Брои клетките, които отговарят на условие (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Μετράει τις γραμμές που πληρούν όλες τις συνθήκες. ¦ Брои редовете, които отговарят на всички условия.
+Additionne les cellules qui remplissent une condition. ¦ Προσθέτει τα κελιά που πληρούν μια συνθήκη. ¦ Събира клетките, които отговарят на условие.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Προσθέτει τις γραμμές που πληρούν όλες τις συνθήκες. ¦ Събира редовете, които отговарят на всички условия.
+La moyenne des cellules qui remplissent une condition. ¦ Ο μέσος όρος των κελιών που πληρούν μια συνθήκη. ¦ Средното на клетките, които отговарят на условие.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Ψάχνει στην 1η στήλη ενός πίνακα και επιστρέφει την τιμή μιας άλλης στήλης. ¦ Търси в 1-вата колона на таблица и връща стойността от друга колона.
+Cherche dans la 1re ligne d’un tableau. ¦ Ψάχνει στην 1η γραμμή ενός πίνακα. ¦ Търси в 1-вия ред на таблица.
+Cherche une valeur et rend celle d’à côté. ¦ Ψάχνει μια τιμή και επιστρέφει αυτή που είναι δίπλα. ¦ Търси стойност и връща съседната.
+La valeur à une ligne et une colonne de la plage. ¦ Η τιμή σε μια γραμμή και μια στήλη της περιοχής. ¦ Стойността на ред и колона от диапазона.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Η θέση μιας τιμής σε μια περιοχή (τύπος 0 = ακριβώς). ¦ Позицията на стойност в диапазон (тип 0 = точно).
+La n-ième valeur de la liste. ¦ Η n-οστή τιμή της λίστας. ¦ n-тата стойност от списъка.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Οι τιμές χωρίς διπλότυπα (επεκτείνεται στα κελιά από κάτω). ¦ Стойностите без дубликати (разлива се в клетките отдолу).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Η ταξινομημένη περιοχή (σειρά 1 = αύξουσα, -1 = φθίνουσα). ¦ Подреденият диапазон (ред 1 = възходящо, -1 = низходящо).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Οι γραμμές της περιοχής που πληρούν τη συνθήκη (π.χ. =FILTRE(A2:C9; C2:C9>30)). ¦ Редовете от диапазона, които отговарят на условието (напр. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Ενώνει κείμενα το ένα μετά το άλλο. ¦ Съединява текстове един след друг.
+Met des textes bout à bout avec un séparateur. ¦ Ενώνει κείμενα το ένα μετά το άλλο με διαχωριστικό. ¦ Съединява текстове един след друг с разделител.
+Les premiers caractères. ¦ Οι πρώτοι χαρακτήρες. ¦ Първите знаци.
+Les derniers caractères. ¦ Οι τελευταίοι χαρακτήρες. ¦ Последните знаци.
+Un morceau au milieu d’un texte. ¦ Ένα κομμάτι από τη μέση ενός κειμένου. ¦ Част от средата на текст.
+Le nombre de caractères. ¦ Ο αριθμός των χαρακτήρων. ¦ Броят на знаците.
+En capitales. ¦ Με κεφαλαία. ¦ С главни букви.
+En minuscules. ¦ Με πεζά. ¦ С малки букви.
+Une capitale au début de chaque mot. ¦ Ένα κεφαλαίο στην αρχή κάθε λέξης. ¦ Главна буква в началото на всяка дума.
+Retire les espaces en trop. ¦ Αφαιρεί τα περιττά κενά. ¦ Премахва излишните интервали.
+Remplace un morceau de texte. ¦ Αντικαθιστά ένα κομμάτι κειμένου. ¦ Заменя част от текст.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Η θέση ενός κειμένου μέσα σε άλλο (χωρίς διάκριση πεζών-κεφαλαίων). ¦ Позицията на текст в друг текст (без значение от главните букви).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Ένας αριθμός ή μια ημερομηνία γραμμένοι με μορφή ("0,00", "0 %", "jj/mm/aaaa"). ¦ Число или дата, записани с формат ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Ο αριθμός που είναι γραμμένος σε ένα κείμενο. ¦ Числото, записано в текст.
+Fabrique une date. ¦ Φτιάχνει μια ημερομηνία. ¦ Създава дата.
+L’année d’une date (date d’acte comprise). ¦ Το έτος μιας ημερομηνίας (και ημερομηνίας πράξης). ¦ Годината на дата (включително дата на акт).
+Le mois d’une date (1 à 12). ¦ Ο μήνας μιας ημερομηνίας (1 έως 12). ¦ Месецът на дата (от 1 до 12).
+Le jour du mois. ¦ Η ημέρα του μήνα. ¦ Денят от месеца.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ Η ημέρα της εβδομάδας (τύπος 1: 1 = Κυριακή· τύπος 2: 1 = Δευτέρα … 7 = Κυριακή· τύπος 3: 0 = Δευτέρα). ¦ Денят от седмицата (тип 1: 1 = неделя; тип 2: 1 = понеделник … 7 = неделя; тип 3: 0 = понеделник).
+La date du jour. ¦ Η σημερινή ημερομηνία. ¦ Днешната дата.
+La date et l’heure. ¦ Η ημερομηνία και η ώρα. ¦ Датата и часът.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Η διαφορά μεταξύ δύο ημερομηνιών, σε χρόνια, μήνες ή ημέρες («AM»: μήνες πέρα από τα χρόνια, «MJ»: ημέρες πέρα από τους μήνες, «AJ»: ημέρες πέρα από τα χρόνια· τα «Y», «D», «YM», «MD», «YD» του Excel γίνονται κατανοητά). ¦ Разликата между две дати в години, месеци или дни („AM“: месеци над годините, „MJ“: дни над месеците, „AJ“: дни над годините; „Y“, „D“, „YM“, „MD“, „YD“ от Excel също се разбират).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Η ηλικία μεταξύ δύο ημερομηνιών πράξεων («vers 1784», «an II» γίνονται κατανοητά)· «≈» αν μια ημερομηνία είναι κατά προσέγγιση. Μονάδα: «ans», «mois» ή «jours». ¦ Възрастта между две дати на актове („vers 1784“, „an II“ се разбират); „≈“, ако датата е приблизителна. Единица: „ans“, „mois“ или „jours“.
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Το έτος που βρίσκεται σε ένα κείμενο πράξης, ακόμη και δημοκρατικό («baptisé le 3 frimaire an XII» → 1803). ¦ Годината, намерена в текст на акт, дори републиканска („baptisé le 3 frimaire an XII“ → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Η ημερομηνία όπως έγινε κατανοητή, γραμμένη σωστά (όπως το «✓ Κατανοητό:» των πεδίων ημερομηνίας). ¦ Разбраната дата, изписана прегледно (като „✓ Разбрано:“ в полетата за дата).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ «jour», «mois», «année», «vers», «avant», «après» ή «entre». ¦ „jour“, „mois“, „année“, „vers“, „avant“, „après“ или „entre“.
+La date dans le calendrier républicain. ¦ Η ημερομηνία στο δημοκρατικό ημερολόγιο. ¦ Датата в републиканския календар.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Η γενιά ενός αριθμού Sosa (1 = εσύ, 2 και 3 = οι γονείς σου…). ¦ Поколението на номер Sosa (1 = ти, 2 и 3 = твоите родители…).
+Le numéro Sosa du père (2 × n). ¦ Ο αριθμός Sosa του πατέρα (2 × n). ¦ Номерът Sosa на бащата (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Ο αριθμός Sosa της μητέρας (2 × n + 1). ¦ Номерът Sosa на майката (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ «paternel» ή «maternel» (η πλευρά του Sosa 1). ¦ „paternel“ или „maternel“ (страната на Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Ένα μικρό γράφημα μέσα στο κελί: "courbe" (καμπύλη), "barres" (μπάρες) ή "gagné" (πάνω ή κάτω από το μηδέν). ¦ Малка графика в клетката: "courbe" (линия), "barres" (ленти) или "gagné" (над или под нулата).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Δίνει όνομα σε μια τιμή για να τη χρησιμοποιήσεις στον υπολογισμό. ¦ Дава име на стойност, за да я използваш в изчислението.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Μια δική σου μικρή συνάρτηση, για χρήση σε LET, MAP, PAR.LIGNE… ¦ Твоя малка функция за използване в LET, MAP, PAR.LIGNE…
+Applique la LAMBDA à chaque case de la plage. ¦ Εφαρμόζει τη LAMBDA σε κάθε κελί της περιοχής. ¦ Прилага LAMBDA към всяка клетка от диапазона.
+Un résultat par ligne de la plage. ¦ Ένα αποτέλεσμα ανά γραμμή της περιοχής. ¦ По един резултат за всеки ред от диапазона.
+Un résultat par colonne de la plage. ¦ Ένα αποτέλεσμα ανά στήλη της περιοχής. ¦ По един резултат за всяка колона от диапазона.
+Cumule les cases une à une (un total qui avance). ¦ Αθροίζει τα κελιά ένα ένα (ένα σύνολο που προχωρά). ¦ Натрупва клетките една по една (текуща сума).
+Comme REDUCE, avec chaque étape du total. ¦ Όπως το REDUCE, με κάθε βήμα του συνόλου. ¦ Като REDUCE, с всяка стъпка от сумата.
+=ligne laissée ¦ γραμμή αφέθηκε εκτός|γραμμές αφέθηκαν εκτός ¦ пропуснат ред|пропуснати реда
+=ligne remplie depuis l’app (tenue à jour) ¦ γραμμή συμπληρώθηκε από την εφαρμογή (ενημερώνεται)|γραμμές συμπληρώθηκαν από την εφαρμογή (ενημερώνονται) ¦ ред, попълнен от приложението (поддържа се актуален)|реда, попълнени от приложението (поддържат се актуални)
+=ligne remplie depuis l’app ¦ γραμμή συμπληρώθηκε από την εφαρμογή|γραμμές συμπληρώθηκαν από την εφαρμογή ¦ ред, попълнен от приложението|реда, попълнени от приложението
+=ligne à toi sans fiche : retirée ¦ δική σου γραμμή χωρίς καρτέλα: αφαιρέθηκε|δικές σου γραμμές χωρίς καρτέλα: αφαιρέθηκαν ¦ твой ред без картон: премахнат|твои реда без картон: премахнати
+=nouvelle fiche ¦ νέα καρτέλα|νέες καρτέλες ¦ нов картон|нови картона
+=reliée ¦ συνδέθηκε|συνδέθηκαν ¦ свързан|свързани
+=laissée ¦ αφέθηκε εκτός|αφέθηκαν εκτός ¦ пропуснат|пропуснати
+=autre ligne ¦ άλλη γραμμή|άλλες γραμμές ¦ друг ред|други реда
+=case ¦ κελί|κελιά ¦ клетка|клетки
+=autre case ¦ άλλο κελί|άλλα κελιά ¦ друга клетка|други клетки
+=case remplie ¦ κελί συμπληρώθηκε|κελιά συμπληρώθηκαν ¦ попълнена клетка|попълнени клетки
+=groupe ¦ ομάδα|ομάδες ¦ група|групи
+=case changée ¦ κελί άλλαξε|κελιά άλλαξαν ¦ променена клетка|променени клетки
+=scénario calculé ¦ σενάριο υπολογίστηκε|σενάρια υπολογίστηκαν ¦ изчислен сценарий|изчислени сценария
+=commande ¦ εντολή|εντολές ¦ команда|команди
+=fonction ¦ συνάρτηση|συναρτήσεις ¦ функция|функции
+=valeur en plus de la première retirée ¦ τιμή εκτός της πρώτης αφαιρέθηκε|τιμές εκτός της πρώτης αφαιρέθηκαν ¦ премахната стойност освен първата|премахнати стойности освен първата
+=ligne supprimée ¦ γραμμή διαγράφηκε|γραμμές διαγράφηκαν ¦ изтрит ред|изтрити реда
+=colonne supprimée ¦ στήλη διαγράφηκε|στήλες διαγράφηκαν ¦ изтрита колона|изтрити колони
+=ligne en double supprimée ¦ διπλή γραμμή διαγράφηκε|διπλές γραμμές διαγράφηκαν ¦ изтрит повторен ред|изтрити повторени реда
+=ligne coupée en colonnes ¦ γραμμή χωρίστηκε σε στήλες|γραμμές χωρίστηκαν σε στήλες ¦ ред, разделен на колони|реда, разделени на колони
+=case modifiée ¦ κελί τροποποιήθηκε|κελιά τροποποιήθηκαν ¦ променена клетка|променени клетки
+=cellule ¦ κελί|κελιά ¦ клетка|клетки
+=cellule copiée ¦ κελί αντιγράφηκε|κελιά αντιγράφηκαν ¦ копирана клетка|копирани клетки
+=feuille importée ¦ φύλλο εισήχθη|φύλλα εισήχθησαν ¦ импортиран лист|импортирани листа
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ την ημερομηνία ¦ датата
+le début ¦ την αρχή ¦ началото
+la fin ¦ το τέλος ¦ края
+il manque un guillemet « " » à la fin d’un texte ¦ λείπει ένα εισαγωγικό «"» στο τέλος ενός κειμένου ¦ липсват кавички „"“ в края на текст
+il manque une apostrophe à la fin du nom de feuille ¦ λείπει μια απόστροφος στο τέλος του ονόματος του φύλλου ¦ липсва апостроф в края на името на листа
+après le nom de la feuille, il faut « ! » puis la cellule ¦ μετά το όνομα του φύλλου χρειάζεται «!» και μετά το κελί ¦ след името на листа трябва „!“ и после клетката
+la formule s’arrête trop tôt ¦ ο τύπος σταματά πολύ νωρίς ¦ формулата свършва твърде рано
+il manque une parenthèse « ) » ¦ λείπει μια παρένθεση «)» ¦ липсва скоба „)“
+une parenthèse « ) » de trop ¦ μια παρένθεση «)» παραπάνω ¦ една скоба „)“ в повече
+un « ; » à une place inattendue ¦ ένα «;» σε απρόσμενη θέση ¦ „;“ на неочаквано място
+un numéro Sosa est un nombre entier qui commence à 1 ¦ ένας αριθμός Sosa είναι ακέραιος που ξεκινά από το 1 ¦ номерът Sosa е цяло число, което започва от 1
+il n’y a aucun nombre dans la plage ¦ δεν υπάρχει κανένας αριθμός στην περιοχή ¦ в диапазона няма нито едно число
+le diviseur de MOD vaut 0 ¦ ο διαιρέτης του MOD είναι 0 ¦ делителят на MOD е 0
+pas de racine carrée d’un nombre négatif ¦ δεν υπάρχει τετραγωνική ρίζα αρνητικού αριθμού ¦ няма квадратен корен от отрицателно число
+aucun nombre ¦ κανένας αριθμός ¦ няма число
+il faut au moins deux nombres ¦ χρειάζονται τουλάχιστον δύο αριθμοί ¦ нужни са поне две числа
+aucun test n’est vrai ¦ κανένας έλεγχος δεν είναι αληθής ¦ нито една проверка не е вярна
+les plages n’ont pas la même taille ¦ οι περιοχές δεν έχουν το ίδιο μέγεθος ¦ диапазоните не са с еднакъв размер
+aucune cellule ne remplit la condition ¦ κανένα κελί δεν πληροί τη συνθήκη ¦ нито една клетка не отговаря на условието
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ το 2ο μέρος πρέπει να είναι περιοχή, για παράδειγμα A2:C40 ¦ 2-рата част трябва да е диапазон, например A2:C40
+le 2e morceau doit être une plage ¦ το 2ο μέρος πρέπει να είναι περιοχή ¦ 2-рата част трябва да е диапазон
+la plage est vide ¦ η περιοχή είναι κενή ¦ диапазонът е празен
+la condition doit avoir autant de lignes que la plage ¦ η συνθήκη πρέπει να έχει όσες γραμμές έχει και η περιοχή ¦ условието трябва да има толкова редове, колкото диапазонът
+aucune ligne ne remplit la condition ¦ καμία γραμμή δεν πληροί τη συνθήκη ¦ нито един ред не отговаря на условието
+le début compte à partir de 1 ¦ η αρχή μετράει από το 1 ¦ началото се брои от 1
+cette date n’a pas de mois ¦ αυτή η ημερομηνία δεν έχει μήνα ¦ тази дата няма месец
+cette date n’a pas de jour ¦ αυτή η ημερομηνία δεν έχει ημέρα ¦ тази дата няма ден
+il faut le jour ¦ χρειάζεται η ημέρα ¦ нужен е денят
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ ο τύπος του JOURSEM πάει από 1 έως 3 (ή 11 έως 17) ¦ типът на JOURSEM е от 1 до 3 (или от 11 до 17)
+la fin est avant le début ¦ το τέλος είναι πριν από την αρχή ¦ краят е преди началото
+la seconde date est avant la première ¦ η δεύτερη ημερομηνία είναι πριν από την πρώτη ¦ втората дата е преди първата
+il faut une date au jour près ¦ χρειάζεται ημερομηνία με ακρίβεια ημέρας ¦ нужна е дата с точност до деня
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ το δημοκρατικό ημερολόγιο ισχύει από τις 22 Σεπτεμβρίου 1792 έως το 1805 ¦ републиканският календар е от 22 септември 1792 до 1805
+il faut des nombres dans la plage ¦ χρειάζονται αριθμοί στην περιοχή ¦ в диапазона трябва да има числа
+il faut une LAMBDA(…) ¦ χρειάζεται μια LAMBDA(…) ¦ нужна е LAMBDA(…)
+trop de LAMBDA imbriquées ¦ πάρα πολλές ένθετες LAMBDA ¦ твърде много вложени LAMBDA
+des paires « nom; valeur » puis le calcul ¦ ζεύγη «όνομα; τιμή» και μετά ο υπολογισμός ¦ двойки „име; стойност“, после изчислението
+un nom (lettres) avant chaque valeur ¦ ένα όνομα (γράμματα) πριν από κάθε τιμή ¦ име (букви) преди всяка стойност
+il faut au moins le calcul ¦ χρειάζεται τουλάχιστον ο υπολογισμός ¦ нужно е поне изчислението
+les paramètres sont des noms ¦ οι παράμετροι είναι ονόματα ¦ параметрите са имена
+le calcul n’a pas de résultat ¦ ο υπολογισμός δεν έχει αποτέλεσμα ¦ изчислението няма резултат
+le résultat est trop grand pour être calculé ¦ το αποτέλεσμα είναι πολύ μεγάλο για να υπολογιστεί ¦ резултатът е твърде голям, за да се изчисли
+une feuille supprimée ¦ ένα φύλλο που διαγράφηκε ¦ изтрит лист
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ μια ολόκληρη περιοχή δεν χωράει σε ένα κελί: χρησιμοποίησε SOMME(…), INDEX(…)… ¦ цял диапазон не се побира в една клетка: използвай SOMME(…), INDEX(…)…
+puissance impossible ¦ αδύνατη δύναμη ¦ невъзможна степен
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ μια LAMBDA μόνη της δεν δίνει τιμή: χρησιμοποίησέ τη σε LET, MAP… ¦ LAMBDA сама по себе си не дава стойност: използвай я в LET, MAP…
+la formule est trop longue ¦ ο τύπος είναι πολύ μεγάλος ¦ формулата е твърде дълга
+la formule est trop imbriquée ¦ ο τύπος έχει υπερβολικά βαθιά ένθεση ¦ формулата е твърде дълбоко вложена
+trop de morceaux dans une fonction ¦ πάρα πολλά μέρη σε μια συνάρτηση ¦ твърде много части във функция
+la formule demande trop de calculs ¦ ο τύπος απαιτεί πάρα πολλούς υπολογισμούς ¦ формулата изисква твърде много изчисления
+le résultat est trop grand ¦ το αποτέλεσμα είναι πολύ μεγάλο ¦ резултатът е твърде голям
+la plage est trop grande ¦ η περιοχή είναι πολύ μεγάλη ¦ диапазонът е твърде голям
+le fichier a trop de cellules ¦ το αρχείο έχει πάρα πολλά κελιά ¦ файлът има твърде много клетки
