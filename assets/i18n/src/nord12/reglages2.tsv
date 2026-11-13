@@ -361,3 +361,1203 @@ Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’anima
 Carré 👁＋ en premier dans la grille des boutons ¦ Квадрат 👁＋ первым в сетке кнопок ¦ Квадрат 👁＋ першим у сітці кнопок
 en bas à droite de la fiche ¦ внизу справа на карточке ¦ внизу праворуч на картці
 Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01). ¦ Квадрат тоже следует «Порядку и видимости кнопок» выше (строка 01). ¦ Квадрат теж іде за «Порядком і видимістю кнопок» вище (рядок 01).
+=élément retiré ¦ убранный элемент|убранных элемента|убранных элементов ¦ прибраний елемент|прибрані елементи|прибраних елементів
+=heure ¦ час|часа|часов ¦ година|години|годин
+=généalogie ¦ генеалогия|генеалогии|генеалогий ¦ генеалогія|генеалогії|генеалогій
+=changement ¦ изменение|изменения|изменений ¦ зміна|зміни|змін
+=paquet ¦ пакет|пакета|пакетов ¦ пакет|пакети|пакетів
+=chose changée des deux côtés ¦ вещь, изменённая с обеих сторон|вещи, изменённые с обеих сторон|вещей, изменённых с обеих сторон ¦ річ, змінена з обох боків|речі, змінені з обох боків|речей, змінених з обох боків
+=changement reçu ¦ полученное изменение|полученных изменения|полученных изменений ¦ отримана зміна|отримані зміни|отриманих змін
+=changement envoyé ¦ отправленное изменение|отправленных изменения|отправленных изменений ¦ надіслана зміна|надіслані зміни|надісланих змін
+=corrigée ¦ исправлена|исправлены|исправлено ¦ виправлена|виправлені|виправлено
+=écartée ¦ отложена|отложены|отложено ¦ відкладена|відкладені|відкладено
+=document traité ¦ обработанный документ|обработанных документа|обработанных документов ¦ оброблений документ|оброблені документи|оброблених документів
+=erreur ¦ ошибка|ошибки|ошибок ¦ помилка|помилки|помилок
+=nom corrigé ¦ исправленное имя|исправленных имени|исправленных имён ¦ виправлене ім’я|виправлені імені|виправлених імен
+=document sélectionné ¦ выбранный документ|выбранных документа|выбранных документов ¦ вибраний документ|вибрані документи|вибраних документів
+=photo ¦ фото|фото|фото ¦ фото|фото|фото
+=souvenir ¦ воспоминание|воспоминания|воспоминаний ¦ спогад|спогади|спогадів
+=bonne réponse ¦ правильный ответ|правильных ответа|правильных ответов ¦ правильна відповідь|правильні відповіді|правильних відповідей
+=chiffre tapé ¦ введённая цифра|введённые цифры|введённых цифр ¦ введена цифра|введені цифри|введених цифр
+=an ¦ год|года|лет ¦ рік|роки|років
+=raccourci ¦ ярлык|ярлыка|ярлыков ¦ ярлик|ярлики|ярликів
+=forme ¦ форма|формы|форм ¦ форма|форми|форм
+=chemin gardé ¦ сохранённый путь|сохранённых пути|сохранённых путей ¦ збережений шлях|збережені шляхи|збережених шляхів
+=famille vide ¦ пустая семья|пустые семьи|пустых семей ¦ порожня родина|порожні родини|порожніх родин
+=famille vide supprimée ¦ удалённая пустая семья|удалённые пустые семьи|удалённых пустых семей ¦ видалена порожня родина|видалені порожні родини|видалених порожніх родин
+=ligne exportée ¦ экспортированная строка|экспортированные строки|экспортированных строк ¦ експортований рядок|експортовані рядки|експортованих рядків
+=autre élément ¦ другой элемент|других элемента|других элементов ¦ інший елемент|інші елементи|інших елементів
+=fiche trouvée ¦ найденная карточка|найденные карточки|найденных карточек ¦ знайдена картка|знайдені картки|знайдених карток
+=hypothèse ¦ гипотеза|гипотезы|гипотез ¦ гіпотеза|гіпотези|гіпотез
+=média enregistré ¦ сохранённый медиафайл|сохранённых медиафайла|сохранённых медиафайлов ¦ збережений медіафайл|збережені медіафайли|збережених медіафайлів
+=fichier présent ¦ имеющийся файл|имеющихся файла|имеющихся файлов ¦ наявний файл|наявні файли|наявних файлів
+=lien familial impossible ignoré ¦ пропущенная невозможная родственная связь|пропущенные невозможные родственные связи|пропущенных невозможных родственных связей ¦ пропущений неможливий родинний зв’язок|пропущені неможливі родинні зв’язки|пропущених неможливих родинних зв’язків
+=média introuvable ¦ ненайденный медиафайл|ненайденных медиафайла|ненайденных медиафайлов ¦ незнайдений медіафайл|незнайдені медіафайли|незнайдених медіафайлів
+=mois ¦ месяц|месяца|месяцев ¦ місяць|місяці|місяців
+=minute ¦ минута|минуты|минут ¦ хвилина|хвилини|хвилин
+=seconde ¦ секунда|секунды|секунд ¦ секунда|секунди|секунд
+=ligne ¦ строка|строки|строк ¦ рядок|рядки|рядків
+=cadre ¦ рамка|рамки|рамок ¦ рамка|рамки|рамок
+=copie ¦ копия|копии|копий ¦ копія|копії|копій
+Ressemblance {n} % ¦ Сходство {n} % ¦ Схожість {n} %
+Score {n}/110 ¦ Оценка {n}/110 ¦ Оцінка {n}/110
+Naissances : {a} / {b} ¦ Рождения: {a} / {b} ¦ Народження: {a} / {b}
+Décès : {a} / {b} ¦ Смерти: {a} / {b} ¦ Смерті: {a} / {b}
+Fusionner la fiche #{a} dans la fiche #{b} ? ¦ Объединить карточку #{a} с карточкой #{b}? ¦ Об’єднати картку #{a} з карткою #{b}?
+Lancer sur {n} ¦ Запустить для: {n} ¦ Запустити для: {n}
+{n} avec succès. ¦ {n}: успешно. ¦ {n}: успішно.
+{n} sera concernée. Confirmer pour {action} ? ¦ Затронуто: {n}. Подтвердить действие «{action}»? ¦ Буде зачеплено: {n}. Підтвердити дію «{action}»?
+{n} seront concernées. Confirmer pour {action} ? ¦ Затронуто: {n}. Подтвердить действие «{action}»? ¦ Буде зачеплено: {n}. Підтвердити дію «{action}»?
+corriger le nom inscrit en conservant une variante ¦ исправить записанное имя, сохранив вариант ¦ виправити записане ім’я, зберігши варіант
+rattacher au groupe ¦ связать с группой ¦ пов’язати з групою
+{n} et ancien nom conservé. ¦ {n}, старое имя сохранено. ¦ {n}, старе ім’я збережено.
+{n} et anciens noms conservés. ¦ {n}, старые имена сохранены. ¦ {n}, старі імена збережено.
+{n} rattachée au groupe. ¦ {n}: связано с группой. ¦ {n}: пов’язано з групою.
+{n} rattachées au groupe. ¦ {n}: связано с группой. ¦ {n}: пов’язано з групою.
+Couleur de « {name} » ¦ Цвет «{name}» ¦ Колір «{name}»
+Pictogramme de « {name} » ¦ Значок «{name}» ¦ Значок «{name}»
+Supprimer le type « {name} » ? ¦ Удалить тип «{name}»? ¦ Видалити тип «{name}»?
+Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré. ¦ Импорт «{name}» отменён: всё, что он добавил, убрано. ¦ Імпорт «{name}» скасовано: усе, що він додав, прибрано.
+Supprimer définitivement la base « {name} » ? ¦ Удалить базу «{name}» навсегда? ¦ Видалити базу «{name}» назавжди?
+Convertir {n} Deed en Décès ? ¦ Преобразовать Deed в «Смерть»: {n}? ¦ Перетворити Deed на «Смерть»: {n}?
+Le texte sur « {name} » ¦ Текст о «{name}» ¦ Текст про «{name}»
+Les photos de {name} ¦ Фото: {name} ¦ Фото: {name}
+{x} de {who} (lien) ¦ {x} — {who} (связь) ¦ {x} — {who} (зв’язок)
+C’est toi ¦ Это ты ¦ Це ти
+c’est toi ¦ это ты ¦ це ти
+C’est toi ! ¦ Это ты! ¦ Це ти!
+C’est {rel}. ¦ Это {rel}. ¦ Це {rel}.
+Bonjour {name} ! ¦ Здравствуй, {name}! ¦ Вітаю, {name}!
+Bonjour ! ¦ Здравствуй! ¦ Вітаю!
+Bonjour {name}. Touche un gros bouton : {list}. ¦ Здравствуй, {name}. Нажми на большую кнопку: {list}. ¦ Вітаю, {name}. Натисни на велику кнопку: {list}.
+Bonjour. Touche un gros bouton : {list}. ¦ Здравствуй. Нажми на большую кнопку: {list}. ¦ Вітаю. Натисни на велику кнопку: {list}.
+Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »… ¦ Здравствуй, {name}! Приложение будет говорить «твоя мама», «твой внук»… ¦ Вітаю, {name}! Застосунок казатиме «твоя мама», «твій онук»…
+D’accord. L’app ne dira pas les liens de famille. ¦ Хорошо. Приложение не будет называть родственные связи. ¦ Добре. Застосунок не називатиме родинні зв’язки.
+⚠️ {what} (caché sur la tablette) ¦ ⚠️ {what} (скрыто на планшете) ¦ ⚠️ {what} (приховано на планшеті)
+{n} aujourd’hui ¦ Сегодня: {n} ¦ Сьогодні: {n}
+Ce n’est pas {name} ? ¦ Это не {name}? ¦ Це не {name}?
+Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée ¦ Выйти из простого режима: держи палец нажатым {n} с или держи клавишу Enter ¦ Вийти з простого режиму: тримай палець натиснутим {n} с або тримай клавішу Enter
+garde le doigt appuyé {n} s ¦ держи палец нажатым {n} с ¦ тримай палець натиснутим {n} с
+Garde le doigt appuyé {n} secondes ¦ Держи палец нажатым {n} с ¦ Тримай палець натиснутим {n} с
+Vers les parents ¦ К родителям ¦ До батьків
+Vers les enfants ¦ К детям ¦ До дітей
+l’aîné ¦ старший ¦ старший
+l’aînée ¦ старшая ¦ старша
+Regarder les {n} ¦ Посмотреть все ({n}) ¦ Переглянути всі ({n})
+{a} sur {b} ¦ {a} из {b} ¦ {a} з {b}
+vers {y} (date) ¦ около {y} ¦ близько {y}
+en {date} (année) ¦ в {date} году ¦ у {date} році
+en {date} (mois) ¦ в {date} ¦ у {date}
+le {date} (jour) ¦ {date} ¦ {date}
+à {place} (lieu) ¦ в {place} ¦ у {place}
+{name} fait partie de la famille. ¦ {name} — член семьи. ¦ {name} — член родини.
+{name} est né {details}. ¦ {name} родился {details}. ¦ {name} народився {details}.
+{name} est née {details}. ¦ {name} родилась {details}. ¦ {name} народилася {details}.
+{name} a été baptisé {details}. ¦ {name} был крещён {details}. ¦ {name} був охрещений {details}.
+{name} a été baptisée {details}. ¦ {name} была крещена {details}. ¦ {name} була охрещена {details}.
+Il ¦ Он ¦ Він
+Elle ¦ Она ¦ Вона
+C’est la fille de {names}. ¦ Это дочь: {names}. ¦ Це донька: {names}.
+C’est le fils de {names}. ¦ Это сын: {names}. ¦ Це син: {names}.
+C’est l’enfant de {names}. ¦ Это ребёнок: {names}. ¦ Це дитина: {names}.
+Il était {job}. ¦ Он был: {job}. ¦ Він був: {job}.
+Elle était {job}. ¦ Она была: {job}. ¦ Вона була: {job}.
+Il a été {job}. ¦ Он работал: {job}. ¦ Він працював: {job}.
+Elle a été {job}. ¦ Она работала: {job}. ¦ Вона працювала: {job}.
+Il est {job}. ¦ Он: {job}. ¦ Він: {job}.
+Elle est {job}. ¦ Она: {job}. ¦ Вона: {job}.
+Il s’est marié avec {name} {details}. ¦ Он женился на {name} {details}. ¦ Він одружився з {name} {details}.
+Elle s’est mariée avec {name} {details}. ¦ Она вышла замуж за {name} {details}. ¦ Вона вийшла заміж за {name} {details}.
+Il s’est marié avec {name}. ¦ Он женился на {name}. ¦ Він одружився з {name}.
+Elle s’est mariée avec {name}. ¦ Она вышла замуж за {name}. ¦ Вона вийшла заміж за {name}.
+Il a vécu avec {name}. ¦ Он жил с {name}. ¦ Він жив з {name}.
+Elle a vécu avec {name}. ¦ Она жила с {name}. ¦ Вона жила з {name}.
+Ils ont eu une fille, {name}. ¦ У них родилась дочь, {name}. ¦ У них народилася донька, {name}.
+Ils ont eu un fils, {name}. ¦ У них родился сын, {name}. ¦ У них народився син, {name}.
+Ils ont eu un enfant, {name}. ¦ У них родился ребёнок, {name}. ¦ У них народилася дитина, {name}.
+Ils ont eu {n} enfants : {names}. ¦ Детей у них было: {n} — {names}. ¦ Дітей у них було: {n} — {names}.
+Aujourd’hui, il a {age}. ¦ Сегодня ему {age}. ¦ Сьогодні йому {age}.
+Aujourd’hui, elle a {age}. ¦ Сегодня ей {age}. ¦ Сьогодні їй {age}.
+Il est décédé {details}, à {age}. ¦ Он умер {details}, в возрасте {age}. ¦ Він помер {details}, у віці {age}.
+Elle est décédée {details}, à {age}. ¦ Она умерла {details}, в возрасте {age}. ¦ Вона померла {details}, у віці {age}.
+Il est décédé {details}. ¦ Он умер {details}. ¦ Він помер {details}.
+Elle est décédée {details}. ¦ Она умерла {details}. ¦ Вона померла {details}.
+né en {y} ¦ род. в {y} ¦ нар. {y}
+née en {y} ¦ род. в {y} ¦ нар. {y}
+mort en {y} ¦ ум. в {y} ¦ пом. {y}
+morte en {y} ¦ ум. в {y} ¦ пом. {y}
+de {a} à {b} ¦ с {a} по {b} ¦ з {a} по {b}
+Toucher pour la mettre au milieu. ¦ Нажми, чтобы поставить её в центр. ¦ Натисни, щоб поставити її в центр.
+Toucher pour voir sa fiche. ¦ Нажми, чтобы увидеть карточку. ¦ Натисни, щоб побачити картку.
+Les prénoms en « {x} » ¦ Имена на «{x}» ¦ Імена на «{x}»
+Personne ne s’appelle « {q} ». Vérifie l’orthographe. ¦ Никого не зовут «{q}». Проверь написание. ¦ Нікого не звуть «{q}». Перевір написання.
+Pas d’anniversaire aujourd’hui. ¦ Сегодня нет дней рождения. ¦ Сьогодні немає днів народження.
+Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt. ¦ Сегодня нет дней рождения. Вот что будет скоро. ¦ Сьогодні немає днів народження. Ось що буде незабаром.
+📷 Des photos prises en {month} ¦ 📷 Фото, снятые в {month} ¦ 📷 Фото, зняті в {month}
+La famille de {name} ¦ Семья: {name} ¦ Родина: {name}
+Aujourd’hui ! ¦ Сегодня! ¦ Сьогодні!
+Demain ¦ Завтра ¦ Завтра
+Dans {n} jours ¦ Через {n} ¦ Через {n}
+{n} depuis le début ¦ {n} с самого начала ¦ {n} від самого початку
+Ce n’est pas {name}. Essaie encore ! ¦ Это не {name}. Попробуй ещё! ¦ Це не {name}. Спробуй ще!
+Ce n’est pas ça. Essaie encore ! ¦ Не то. Попробуй ещё! ¦ Не те. Спробуй ще!
+C’est {part} ¦ Это {part} ¦ Це {part}
+le matin ¦ утро ¦ ранок
+l’après-midi ¦ день ¦ день
+le soir ¦ вечер ¦ вечір
+{n} sur 4 ¦ {n} из 4 ¦ {n} з 4
+⚠️ {what} pour qu’il apparaisse ¦ ⚠️ {what}, чтобы он появился ¦ ⚠️ {what}, щоб він з’явився
+Modifier « {name} » ¦ Изменить «{name}» ¦ Змінити «{name}»
+Dupliquer « {name} » ¦ Дублировать «{name}» ¦ Дублювати «{name}»
+Retirer « {name} » ¦ Убрать «{name}» ¦ Прибрати «{name}»
+Monter « {name} » ¦ Поднять «{name}» ¦ Підняти «{name}»
+Descendre « {name} » ¦ Опустить «{name}» ¦ Опустити «{name}»
+Montrer « {name} » ¦ Показывать «{name}» ¦ Показувати «{name}»
+Afficher « {name} » ¦ Показать «{name}» ¦ Показати «{name}»
+cadres ajoutés au plus. ¦ — максимум добавленных рамок. ¦ — найбільше доданих рамок.
+Côté {branch} ¦ Сторона: {branch} ¦ Бік: {branch}
+Remettre « {name} » dans le mode simple ¦ Вернуть «{name}» в простой режим ¦ Повернути «{name}» у простий режим
+Photo ¦ Фото ¦ Фото
+{n} s par photo ¦ {n} с на фото ¦ {n} с на фото
+cadre après {n} min ¦ рамка через {n} мин ¦ рамка через {n} хв
+sans cadre photo ¦ без фоторамки ¦ без фоторамки
+Chiffre {n} du code ¦ Цифра {n} кода ¦ Цифра {n} коду
+Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Что увидит {name} на планшете. Простой режим <b>не позволяет ни изменять, ни удалять</b>: ни скрытого меню, ни правого клика. ¦ Що побачить {name} на планшеті. Простий режим <b>не дозволяє ні змінювати, ні видаляти</b>: ні прихованого меню, ні правого кліку.
+Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Что увидит человек на планшете. Простой режим <b>не позволяет ни изменять, ни удалять</b>: ни скрытого меню, ни правого клика. ¦ Що побачить людина на планшеті. Простий режим <b>не дозволяє ні змінювати, ні видаляти</b>: ні прихованого меню, ні правого кліку.
+Réglage « {name} » supprimé ¦ Настройка «{name}» удалена ¦ Налаштування «{name}» видалено
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ Настройка «{name}» импортирована: нажми «Применить», чтобы ею воспользоваться. ¦ Налаштування «{name}» імпортовано: натисни «Застосувати», щоб ним скористатися.
+Maison choisie : « {name} ». ¦ Выбран дом: «{name}». ¦ Вибрано будинок: «{name}».
+Maison ¦ Дом ¦ Будинок
+Adresse copiée : {url} ¦ Адрес скопирован: {url} ¦ Адресу скопійовано: {url}
+ ou  ¦ или ¦ або
+Seulement avec {what}. ¦ Только с: {what}. ¦ Лише з: {what}.
+{what} remis comme au départ ¦ {what}: возвращено как было ¦ {what}: повернуто як було
+activé ¦ включено ¦ увімкнено
+désactivé ¦ выключено ¦ вимкнено
+Style des fiches : {name}. ¦ Стиль карточек: {name}. ¦ Стиль карток: {name}.
+Style des fiches : {name} (retouché). ¦ Стиль карточек: {name} (изменён). ¦ Стиль карток: {name} (змінено).
+ton {x} (lien) ¦ твой {x} ¦ твій {x}
+ta {x} (lien) ¦ твоя {x} ¦ твоя {x}
+le {x} (lien) ¦ {x} ¦ {x}
+la {x} (lien) ¦ {x} ¦ {x}
+la femme de {who} {name} (lien) ¦ жена: {who} {name} ¦ дружина: {who} {name}
+le mari de {who} {name} (lien) ¦ муж: {who} {name} ¦ чоловік: {who} {name}
+le conjoint de {who} {name} (lien) ¦ супруг(а): {who} {name} ¦ чоловік чи дружина: {who} {name}
+lien|mère ¦ мать ¦ мати
+lien|père ¦ отец ¦ батько
+lien|parent ¦ родитель ¦ один із батьків
+lien|grand-mère ¦ бабушка ¦ бабуся
+lien|grand-père ¦ дедушка ¦ дідусь
+lien|arrière-grand-mère ¦ прабабушка ¦ прабабуся
+lien|arrière-grand-père ¦ прадедушка ¦ прадідусь
+lien|arrière-arrière-grand-mère ¦ прапрабабушка ¦ прапрабабуся
+lien|arrière-arrière-grand-père ¦ прапрадедушка ¦ прапрадідусь
+lien|fille ¦ дочь ¦ донька
+lien|fils ¦ сын ¦ син
+lien|enfant ¦ ребёнок ¦ дитина
+lien|petite-fille ¦ внучка ¦ онука
+lien|petit-fils ¦ внук ¦ онук
+lien|arrière-petite-fille ¦ правнучка ¦ правнучка
+lien|arrière-petit-fils ¦ правнук ¦ правнук
+lien|arrière-arrière-petite-fille ¦ праправнучка ¦ праправнучка
+lien|arrière-arrière-petit-fils ¦ праправнук ¦ праправнук
+lien|sœur ¦ сестра ¦ сестра
+lien|frère ¦ брат ¦ брат
+lien|tante ¦ тётя ¦ тітка
+lien|oncle ¦ дядя ¦ дядько
+lien|grand-tante ¦ двоюродная бабушка ¦ двоюрідна бабуся
+lien|grand-oncle ¦ двоюродный дедушка ¦ двоюрідний дідусь
+lien|arrière-grand-tante ¦ двоюродная прабабушка ¦ двоюрідна прабабуся
+lien|arrière-grand-oncle ¦ двоюродный прадедушка ¦ двоюрідний прадідусь
+lien|arrière-arrière-grand-tante ¦ двоюродная прапрабабушка ¦ двоюрідна прапрабабуся
+lien|arrière-arrière-grand-oncle ¦ двоюродный прапрадедушка ¦ двоюрідний прапрадідусь
+lien|nièce ¦ племянница ¦ племінниця
+lien|neveu ¦ племянник ¦ племінник
+lien|petite-nièce ¦ внучатая племянница ¦ внучата племінниця
+lien|petit-neveu ¦ внучатый племянник ¦ внучатий племінник
+lien|arrière-petite-nièce ¦ правнучатая племянница ¦ правнучата племінниця
+lien|arrière-petit-neveu ¦ правнучатый племянник ¦ правнучатий племінник
+lien|arrière-arrière-petite-nièce ¦ праправнучатая племянница ¦ праправнучата племінниця
+lien|arrière-arrière-petit-neveu ¦ праправнучатый племянник ¦ праправнучатий племінник
+lien|cousin germain ¦ двоюродный брат ¦ двоюрідний брат
+lien|cousine germaine ¦ двоюродная сестра ¦ двоюрідна сестра
+lien|cousin issu de germains ¦ троюродный брат ¦ троюрідний брат
+lien|cousine issue de germains ¦ троюродная сестра ¦ троюрідна сестра
+lien|cousin éloigné ¦ дальний родственник ¦ далекий родич
+lien|cousine éloignée ¦ дальняя родственница ¦ далека родичка
+lien|cousin ¦ кузен ¦ кузен
+lien|cousine ¦ кузина ¦ кузина
+lien|femme ¦ жена ¦ дружина
+lien|mari ¦ муж ¦ чоловік
+lien|conjoint ¦ супруг(а) ¦ чоловік чи дружина
+lien|belle-mère ¦ свекровь или тёща ¦ свекруха чи теща
+lien|beau-père ¦ свёкор или тесть ¦ свекор чи тесть
+lien|belle-fille ¦ невестка ¦ невістка
+lien|gendre ¦ зять ¦ зять
+lien|beau-fils ¦ пасынок ¦ пасинок
+lien|belle-sœur ¦ золовка или свояченица ¦ зовиця чи своячка
+lien|beau-frère ¦ шурин или деверь ¦ шурин чи дівер
+⚙️ Gérer les formes ({n}) ¦ ⚙️ Управлять формами ({n}) ¦ ⚙️ Керувати формами ({n})
+Forme « {name} » supprimée ¦ Форма «{name}» удалена ¦ Форму «{name}» видалено
+Forme « {name} » importée : elle est dans le menu « Forme des avatars ». ¦ Форма «{name}» импортирована: она в меню «Форма аватаров». ¦ Форму «{name}» імпортовано: вона в меню «Форма аватарів».
+Aucune forme pour « {q} ». Essaie un autre mot (cœur, arbre, étoile, croix…). ¦ Нет форм для «{q}». Попробуй другое слово (сердце, дерево, звезда, крест…). ¦ Немає форм для «{q}». Спробуй інше слово (серце, дерево, зірка, хрест…).
+{n} points au plus. ¦ Не больше {n} точек. ¦ Не більше {n} точок.
+{what} (scripts, textes, images, styles…) ¦ {what} (скрипты, тексты, изображения, стили…) ¦ {what} (скрипти, тексти, зображення, стилі…)
+Forme « {name} » enregistrée. ¦ Форма «{name}» сохранена. ¦ Форму «{name}» збережено.
+Forme « {name} » créée : elle est dans le menu « Forme des avatars » (✎ Mes formes). ¦ Форма «{name}» создана: она в меню «Форма аватаров» (✎ Мои формы). ¦ Форму «{name}» створено: вона в меню «Форма аватарів» (✎ Мої форми).
+Ce qu’ouvre « {name} » ¦ Что открывает «{name}» ¦ Що відкриває «{name}»
+Ouvre la fenêtre « ＋ Nouvelle personne » (ou un nouvel animal sur la page des animaux). Caché au départ. ¦ Открывает окно «＋ Новый человек» (или новое животное на странице животных). Скрыто по умолчанию. ¦ Відкриває вікно «＋ Нова людина» (або нову тварину на сторінці тварин). Приховано спочатку.
+Raccourci : Enquêtes, sur cet onglet. Caché au départ. ¦ Ярлык: Расследования, на этой вкладке. Скрыто по умолчанию. ¦ Ярлик: Розслідування, на цій вкладці. Приховано спочатку.
+Raccourci : Listes → 🛠️ Outils de modification, sur cet outil. Caché au départ. ¦ Ярлык: Списки → 🛠️ Инструменты изменения, на этом инструменте. Скрыто по умолчанию. ¦ Ярлик: Списки → 🛠️ Інструменти змінення, на цьому інструменті. Приховано спочатку.
+Forme : « {name} » ¦ Форма: «{name}» ¦ Форма: «{name}»
+Portraits : « {name} » ¦ Портреты: «{name}» ¦ Портрети: «{name}»
+Colonne de gauche : partir de « {name} » ¦ Левая колонка: начать с «{name}» ¦ Ліва колонка: почати з «{name}»
+Contrôlé {when} ¦ Проверено {when} ¦ Перевірено {when}
+Lieu corrigé : {name} ({what}) ¦ Место исправлено: {name} ({what}) ¦ Місце виправлено: {name} ({what})
+La bonne commune pour « {name} » ¦ Правильная коммуна для «{name}» ¦ Правильна комуна для «{name}»
+Exception gardée : {what} ¦ Исключение сохранено: {what} ¦ Виняток збережено: {what}
+Signalée de nouveau : {what} ¦ Снова отмечено: {what} ¦ Знову позначено: {what}
+Alerte {i} sur {n} ¦ Предупреждение {i} из {n} ¦ Попередження {i} з {n}
+{n} plus tard ¦ {n} спустя ¦ {n} потому
+Date enregistrée : {date} ¦ Дата сохранена: {date} ¦ Дату збережено: {date}
+✓ Alerte réglée ({date}) ¦ ✓ Предупреждение решено ({date}) ¦ ✓ Попередження розв’язано ({date})
+Bandeau sur la fiche : {what} ¦ Плашка на карточке: {what} ¦ Смужка на картці: {what}
+{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas) ¦ Карточек без предупреждений: {a} из {b} (исключения не считаются) ¦ Карток без попереджень: {a} з {b} (винятки не рахуються)
+{n} ans ¦ Лет: {n} ¦ Років: {n}
+{n} mois ¦ Месяцев: {n} ¦ Місяців: {n}
+Supprimer les {n} familles vides ¦ Удалить пустые семьи ({n}) ¦ Видалити порожні родини ({n})
+Supprimer les {n} familles vides ? ¦ Удалить пустые семьи ({n})? ¦ Видалити порожні родини ({n})?
+Me le signaler à nouveau si une de ces dates change ¦ Сообщить мне снова, если одна из этих дат изменится ¦ Повідомити мене знову, якщо одна з цих дат зміниться
+Me le signaler à nouveau si une de ces coordonnées change ¦ Сообщить мне снова, если одна из этих координат изменится ¦ Повідомити мене знову, якщо одна з цих координат зміниться
+Déjà pris par {os} ou le menu de l’application : « {what} ». ¦ Уже занято системой {os} или меню приложения: «{what}». ¦ Уже зайнято системою {os} або меню застосунку: «{what}».
+Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche. ¦ Уже занято приложением (даже когда открыт инструмент): «{what}». Сначала измени это в разделе «Сочетания клавиш», если тебе нужна эта клавиша. ¦ Уже зайнято застосунком (навіть коли відкрито інструмент): «{what}». Спершу зміни це в розділі «Сполучення клавіш», якщо тобі потрібна ця клавіша.
+Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant. ¦ В этом инструменте эта клавиша уже служит для «{what}»: твоё сочетание будет важнее. ¦ У цьому інструменті ця клавіша вже служить для «{what}»: твоє сполучення матиме перевагу.
+La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose. ¦ Исходная клавиша ({key}) больше не будет выполнять это действие: она свободна для другого. ¦ Початкова клавіша ({key}) більше не виконуватиме цю дію: вона вільна для іншого.
+Déjà donné à « {what} » : il lui sera retiré. ¦ Уже назначено для «{what}»: оттуда оно будет убрано. ¦ Уже призначено для «{what}»: звідти його буде прибрано.
+Sans {key}, il ne marchera qu’en dehors des cases de texte. ¦ Без {key} оно будет работать только вне текстовых полей. ¦ Без {key} воно працюватиме лише поза текстовими полями.
+NOUVEAU RACCOURCI ¦ НОВОЕ СОЧЕТАНИЕ КЛАВИШ ¦ НОВЕ СПОЛУЧЕННЯ КЛАВІШ
+Nouveau raccourci : {key} ¦ Новое сочетание клавиш: {key} ¦ Нове сполучення клавіш: {key}
+Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte. ¦ Назначь клавишу любой команде инструмента (его меню, инструментам, кнопкам). {os} и меню приложения имеют приоритет: клавиша, которую они занимают, не принимается. Твоё сочетание важнее клавиши инструмента. Без {key} оно работает только вне текстовых полей. ¦ Признач клавішу будь-якій команді інструмента (його меню, інструментам, кнопкам). {os} і меню застосунку мають перевагу: клавіша, яку вони займають, не приймається. Твоє сполучення важливіше за клавішу інструмента. Без {key} воно працює лише поза текстовими полями.
+{n} à toi ¦ Твоих: {n} ¦ Твоїх: {n}
+{a} et {n} autres personnes ¦ {a} и ещё {n} ¦ {a} та ще {n}
+Sinon, on lira : « {text} » ¦ Иначе будет прочитано: «{text}» ¦ Інакше буде прочитано: «{text}»
+Dicter dans ce champ ({key}) ¦ Диктовать в это поле ({key}) ¦ Диктувати в це поле ({key})
+Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter) ¦ Диктовка: говори, текст пишется у курсора ({key}, Esc — остановить) ¦ Диктування: говори, текст пишеться біля курсора ({key}, Esc — зупинити)
+Voici un message : il reste {n} secondes environ. ¦ Вот сообщение: осталось примерно {n} с. ¦ Ось повідомлення: лишилося приблизно {n} с.
+toutes les {n} ¦ каждые {n} ¦ кожні {n}
+chaque jour ¦ каждый день ¦ щодня
+chaque semaine ¦ каждую неделю ¦ щотижня
+Dernière sauvegarde : <b>{when}</b> ¦ Последняя резервная копия: <b>{when}</b> ¦ Остання резервна копія: <b>{when}</b>
+Dernière sauvegarde : <b>jamais</b> ¦ Последняя резервная копия: <b>никогда</b> ¦ Остання резервна копія: <b>ніколи</b>
+rien n’avait changé ¦ ничего не изменилось ¦ нічого не змінилося
+dès maintenant ¦ прямо сейчас ¦ просто зараз
+Prochaine : {when} ({freq}). ¦ Следующая: {when} ({freq}). ¦ Наступна: {when} ({freq}).
+Prochaine : {when} ({freq}, et à la fermeture). ¦ Следующая: {when} ({freq}, а также при закрытии). ¦ Наступна: {when} ({freq}, а також під час закриття).
+Dernier essai raté : {error} ¦ Последняя неудачная попытка: {error} ¦ Остання невдала спроба: {error}
+Rien n’est bloqué : continue à travailler. ¦ Ничего не заблокировано: продолжай работать. ¦ Нічого не заблоковано: працюй далі.
+Toutes mes généalogies ({n}) ¦ Все мои генеалогии ({n}) ¦ Усі мої генеалогії ({n})
+Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Вернуть твою генеалогию к выбранной копии ({when})? Всё, что ты сделал(а) после, будет заменено. Твоя текущая база сначала сохраняется в резервных копиях («до восстановления»), чтобы можно было к ней вернуться. ¦ Повернути твою генеалогію до вибраної копії ({when})? Усе, що ти зробив(ла) після, буде замінено. Твою поточну базу спершу збережено в резервних копіях («до відновлення»), щоб можна було до неї повернутися.
+Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Вернуть твою генеалогию к выбранной копии? Всё, что ты сделал(а) после, будет заменено. Твоя текущая база сначала сохраняется в резервных копиях («до восстановления»), чтобы можно было к ней вернуться. ¦ Повернути твою генеалогію до вибраної копії? Усе, що ти зробив(ла) після, буде замінено. Твою поточну базу спершу збережено в резервних копіях («до відновлення»), щоб можна було до неї повернутися.
+✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}. ¦ ✓ Генеалогия возвращена к копии ({n}). Прежняя сохранена: {file}. ¦ ✓ Генеалогію повернуто до копії ({n}). Попередню збережено: {file}.
+✓ Sauvegarde faite et vérifiée ({n}) : {size}. ¦ ✓ Резервная копия сделана и проверена ({n}): {size}. ¦ ✓ Резервну копію зроблено й перевірено ({n}): {size}.
+✓ Sauvegarde faite et vérifiée : {size}. ¦ ✓ Резервная копия сделана и проверена: {size}. ¦ ✓ Резервну копію зроблено й перевірено: {size}.
+Supprimée sur cet ordinateur, modifiée sur « {name} ». ¦ Удалено на этом компьютере, изменено на «{name}». ¦ Видалено на цьому комп’ютері, змінено на «{name}».
+Modifiée ici, supprimée sur « {name} ». ¦ Изменено здесь, удалено на «{name}». ¦ Змінено тут, видалено на «{name}».
+modifiée des deux côtés ¦ изменено с обеих сторон ¦ змінено з обох боків
+Sur « {name} » ¦ На «{name}» ¦ На «{name}»
+<b>{n}</b> à envoyer ¦ Отправить: <b>{n}</b> ¦ Надіслати: <b>{n}</b>
+<b>{n}</b> à recevoir ¦ Получить: <b>{n}</b> ¦ Отримати: <b>{n}</b>
+Rien à envoyer ¦ Нечего отправлять ¦ Нічого надсилати
+Rien à recevoir ¦ Нечего получать ¦ Нічого отримувати
+Dernière synchronisation : {when} ¦ Последняя синхронизация: {when} ¦ Остання синхронізація: {when}
+jamais ¦ никогда ¦ ніколи
+⚠️ {n} : choisis ¦ ⚠️ {n}: выбери ¦ ⚠️ {n}: вибери
+rien de nouveau ¦ ничего нового ¦ нічого нового
+{n} de « {from} » ¦ {n} из «{from}» ¦ {n} з «{from}»
+Déjà à jour ¦ Уже обновлено ¦ Уже оновлено
+⚠️ {n} : à toi de choisir. ¦ ⚠️ {n}: выбирать тебе. ¦ ⚠️ {n}: вибирати тобі.
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}). ¦ Эта генеалогия уже открыта на компьютере <b>«{name}»</b> (с {when}). ¦ Ця генеалогія вже відкрита на комп’ютері <b>«{name}»</b> (з {when}).
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>. ¦ Эта генеалогия уже открыта на компьютере <b>«{name}»</b>. ¦ Ця генеалогія вже відкрита на комп’ютері <b>«{name}»</b>.
+Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer). ¦ Всё равно открыть? Делай это, только если «{name}» выключен или приложение там закрыто (иначе файл может повредиться). ¦ Усе одно відкрити? Роби це, лише якщо «{name}» вимкнено або застосунок там закрито (інакше файл може пошкодитися).
+Télécharger LCNDA {v} ¦ Скачать LCNDA {v} ¦ Завантажити LCNDA {v}
+{a} sur {b}… ¦ {a} из {b}… ¦ {a} з {b}…
+Plus de message pour la version {v} ¦ Больше не сообщать о версии {v} ¦ Більше не повідомляти про версію {v}
+🔄 Une nouvelle version {v} est disponible. ¦ 🔄 Доступна новая версия {v}. ¦ 🔄 Доступна нова версія {v}.
+regardé {when} ¦ проверено {when} ¦ перевірено {when}
+« 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ «🔍 Проверить обновления» проверяет сразу. ¦ «🔍 Перевірити оновлення» перевіряє одразу.
+Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ На этом компьютере ещё не проверялось. «🔍 Проверить обновления» проверяет сразу. ¦ На цьому комп’ютері ще не перевірялося. «🔍 Перевірити оновлення» перевіряє одразу.
+Tu as la dernière version publiée ({v}){when}. ¦ У тебя последняя опубликованная версия ({v}){when}. ¦ У тебе остання опублікована версія ({v}){when}.
+Une nouvelle version {v} est disponible (tu as la {cur}). ¦ Доступна новая версия {v} (у тебя {cur}). ¦ Доступна нова версія {v} (у тебе {cur}).
+Tu as choisi de ne plus être prévenu pour la {v}{when}. ¦ Ты решил(а) больше не получать уведомлений о версии {v}{when}. ¦ Ти вирішив(ла) більше не отримувати сповіщень про версію {v}{when}.
+Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse. ¦ Эта настройка из другого инструмента («{name}»): она не подходит для просмотрщика. ¦ Це налаштування з іншого інструмента («{name}»): воно не підходить для переглядача.
+Réglage « {name} » mis. ¦ Настройка «{name}» применена. ¦ Налаштування «{name}» застосовано.
+Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste. ¦ Упорядочи с помощью ↑ ↓, отметь, что показывать в колонке, группами или одним списком. ¦ Упорядкуй за допомогою ↑ ↓, познач, що показувати в колонці, групами чи одним списком.
+Range avec ↑ ↓, en groupes ou en une seule liste. ¦ Упорядочи с помощью ↑ ↓, группами или одним списком. ¦ Упорядкуй за допомогою ↑ ↓, групами чи одним списком.
+Réordonner les listes ¦ Упорядочить списки ¦ Упорядкувати списки
+Réordonner les pages ¦ Упорядочить страницы ¦ Упорядкувати сторінки
+Réordonner les {what} ¦ Упорядочить: {what} ¦ Упорядкувати: {what}
+Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer. ¦ Упорядочи с помощью ↑ ↓, отметь, что показывать, группами или одним списком. Потом «Сохранить». ¦ Упорядкуй за допомогою ↑ ↓, познач, що показувати, групами чи одним списком. Потім «Зберегти».
+Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer. ¦ Упорядочи с помощью ↑ ↓, группами или одним списком. Потом «Сохранить». ¦ Упорядкуй за допомогою ↑ ↓, групами чи одним списком. Потім «Зберегти».
+Garde au moins une liste visible. ¦ Оставь видимым хотя бы один список. ¦ Залиш видимим хоча б один список.
+Garde au moins une page visible. ¦ Оставь видимой хотя бы одну страницу. ¦ Залиш видимою хоча б одну сторінку.
+(CC BY 4.0) ; collectivités locales d’Australie : © ¦ (CC BY 4.0); местные органы власти Австралии: © ¦ (CC BY 4.0); місцеві органи влади Австралії: ©
+(OGL v3) ; paroisses civiles d’Irlande : © ¦ (OGL v3); гражданские приходы Ирландии: © ¦ (OGL v3); цивільні парафії Ірландії: ©
+(William & Mary geoLab), d’après leurs sources (gouvernements, OCHA, Banque mondiale, GRID3…), licences ouvertes indiquées pays par pays dans le fichier de chaque pays (domaine public, CC BY, CC BY IGO, ODbL, CC BY-SA pour le Togo et Taïwan). ¦ (William & Mary geoLab), по их источникам (правительства, OCHA, Всемирный банк, GRID3…), открытые лицензии указаны для каждой страны в её файле (общественное достояние, CC BY, CC BY IGO, ODbL, CC BY-SA для Того и Тайваня). ¦ (William & Mary geoLab), за їхніми джерелами (уряди, OCHA, Світовий банк, GRID3…), відкриті ліцензії зазначено для кожної країни в її файлі (суспільне надбання, CC BY, CC BY IGO, ODbL, CC BY-SA для Того й Тайваню).
+(auto = comme l’app) ¦ (авто = как в приложении) ¦ (авто = як у застосунку)
+(avec ou sans accents). Ex. : ¦ (с диакритикой или без). Напр.: ¦ (з діакритикою чи без). Напр.:
+(domaine public) ; paroisses d’Angleterre et du pays de Galles : © ¦ (общественное достояние); приходы Англии и Уэльса: © ¦ (суспільне надбання); парафії Англії та Уельсу: ©
+(familles qu’on ouvre et referme) ¦ (семьи, которые раскрываются и сворачиваются) ¦ (родини, які розгортаються й згортаються)
+(hors des cases de texte) ¦ (вне текстовых полей) ¦ (поза текстовими полями)
+(jusqu’à 32 px). ¦ (до 32 px). ¦ (до 32 px).
+(style « Onglets en haut ») ¦ (стиль «Вкладки сверху») ¦ (стиль «Вкладки вгорі»)
+(un petit fichier, par e-mail par exemple). ¦ (небольшой файл, например по электронной почте). ¦ (невеликий файл, наприклад електронною поштою).
+), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. ¦ ), говори, и текст пишется у курсора. Говори «запятая», «точка», «вопросительный знак», «двоеточие», «с новой строки» или «новый абзац» для пунктуации. ¦ ), говори, і текст пишеться біля курсора. Кажи «кома», «крапка», «знак питання», «двокрапка», «з нового рядка» або «новий абзац» для пунктуації.
+). Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ ). Он настраивается вместе с формой шапки, ниже на этой странице. ¦ ). Він налаштовується разом із формою шапки, нижче на цій сторінці.
+, contient des données OS © Crown copyright (OGL v3) ; paroisses civiles d’Écosse : © ¦ , содержит данные OS © Crown copyright (OGL v3); гражданские приходы Шотландии: © ¦ , містить дані OS © Crown copyright (OGL v3); цивільні парафії Шотландії: ©
+, données sous licence ¦ , данные по лицензии ¦ , дані за ліцензією
+, même dans un tableau large avec beaucoup de colonnes. ¦ , даже в широкой таблице с множеством столбцов. ¦ , навіть у широкій таблиці з багатьма стовпцями.
+. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ . Ни одна карточка не удаляется: люди остаются на месте, даже когда вкладка скрыта. Можно включить несколько: их вкладки складываются. ¦ . Жодну картку не видаляється: люди лишаються на місці, навіть коли вкладку приховано. Можна ввімкнути кілька: їхні вкладки додаються.
+. Double-clic sur un curseur : valeur de départ. ¦ . Двойной клик по ползунку: исходное значение. ¦ . Подвійний клік на повзунку: початкове значення.
+. Même licence pour les communes d’Amérique du Sud, du Moyen-Orient, d’Asie et d’une partie de l’Afrique. ¦ . Та же лицензия для коммун Южной Америки, Ближнего Востока, Азии и части Африки. ¦ . Та сама ліцензія для комун Південної Америки, Близького Сходу, Азії та частини Африки.
+12/03/1790, mars 1790 ou 1790 ¦ 12/03/1790, mars 1790 или 1790 ¦ 12/03/1790, mars 1790 або 1790
+1re heure du jour, au lever du soleil ¦ 1-й час дня, на восходе солнца ¦ 1-ша година дня, на сході сонця
+3e heure, milieu de la matinée (heure de la grand-messe) ¦ 3-й час, середина утра (время большой мессы) ¦ 3-тя година, середина ранку (час великої меси)
+9e heure, milieu de l’après-midi ¦ 9-й час, середина дня ¦ 9-та година, середина пообіддя
+256 ancêtres de la génération 8 en théorie (Sosa 256 à 511) ; 510 ancêtres en tout jusqu’à cette génération ¦ 256 предков в поколении 8 в теории (Sosa от 256 до 511); 510 предков всего до этого поколения ¦ 256 предків у поколінні 8 теоретично (Sosa від 256 до 511); 510 предків усього до цього покоління
+4 générations ¦ 4 поколения ¦ 4 покоління
+5 générations ¦ 5 поколений ¦ 5 поколінь
+6 générations ¦ 6 поколений ¦ 6 поколінь
+6 secondes (de départ) ¦ 6 секунд (по умолчанию) ¦ 6 секунд (початково)
+4 tailles seulement : 22 px (dans une ligne), 34 px (listes, menu de choix), 48 px (arbre, vignettes), 88 px (fiche). ¦ Всего 4 размера: 22 px (в строке), 34 px (списки, меню выбора), 48 px (древо, миниатюры), 88 px (карточка). ¦ Лише 4 розміри: 22 px (у рядку), 34 px (списки, меню вибору), 48 px (дерево, мініатюри), 88 px (картка).
+: boutons et barres d’outils au trait, rubriques et contenus en émoji (💍 conjoints, 🎂 anniversaires…). ¦ : кнопки и панели инструментов — контурные, разделы и содержимое — в эмодзи (💍 супруги, 🎂 дни рождения…). ¦ : кнопки й панелі інструментів — контурні, розділи та вміст — в емодзі (💍 подружжя, 🎂 дні народження…).
+: chaque bouton est une vraie « touche » encadrée, avec son ombre. ¦ : каждая кнопка — настоящая «клавиша» в рамке, с тенью. ¦ : кожна кнопка — справжня «клавіша» в рамці, з тінню.
+: coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence. ¦ : почти прямые углы, тонкие линии, лёгкая бумажная фактура за страницами. Для кремового фона выбери пресет «Бумажный архив» во «Внешнем виде». ¦ : майже прямі кути, тонкі лінії, легка паперова фактура за сторінками. Для кремового тла вибери пресет «Паперовий архів» у «Вигляді».
+: comme un registre, on voit beaucoup de lignes. ¦ : как в реестре, видно много строк. ¦ : як у реєстрі, видно багато рядків.
+: des émojis en couleur, faciles à reconnaître. ¦ : цветные эмодзи, легко узнаваемые. ¦ : кольорові емодзі, легко впізнавані.
+: grand nom très lisible, outils toujours à droite. ¦ : крупное и очень разборчивое имя, инструменты всегда справа. ¦ : велике й дуже розбірливе ім’я, інструменти завжди праворуч.
+: le style « néo-brutal » que tu connais, net et très lisible. ¦ : знакомый тебе стиль «необрутализм», чёткий и очень разборчивый. ¦ : знайомий тобі стиль «необруталізм», чіткий і дуже розбірливий.
+: les autres restent visibles mais plus légers. ¦ : остальные остаются видимыми, но бледнее. ¦ : інші лишаються видимими, але блідішими.
+: les lignes sont hautes, on ne se trompe pas de ligne. ¦ : строки высокие, не перепутаешь строку. ¦ : рядки високі, рядок не сплутаєш.
+: l’équilibre actuel entre place et lisibilité. ¦ : нынешний баланс между местом и разборчивостью. ¦ : теперішній баланс між місцем і розбірливістю.
+: nom, prénoms, naissance, décès rangés dans des cases fixes. ¦ : фамилия, имена, рождение, смерть в фиксированных ячейках. ¦ : прізвище, імена, народження, смерть у фіксованих комірках.
+: parfait pour les longues listes et les petits écrans. ¦ : идеально для длинных списков и маленьких экранов. ¦ : ідеально для довгих списків і малих екранів.
+: rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures. ¦ : ничего лишнего, важно только содержимое. Идеально для печати или скриншотов. ¦ : нічого зайвого, важливий лише вміст. Ідеально для друку чи знімків екрана.
+: toutes les icônes ont le même trait et prennent la couleur du texte (aussi en mode sombre). ¦ : у всех значков одинаковая линия, и они берут цвет текста (и в тёмном режиме). ¦ : усі значки мають однакову лінію й беруть колір тексту (і в темному режимі).
+: traits dans les Listes, cartes encadrées dans la colonne Personnes. ¦ : линии в Списках, карточки в рамках в колонке «Люди». ¦ : лінії в Списках, картки в рамках у колонці «Люди».
+: traits fins et pâles, coins ronds, ombres floues comme sur un téléphone. ¦ : тонкие и бледные линии, скруглённые углы, размытые тени, как на телефоне. ¦ : тонкі й бліді лінії, заокруглені кути, розмиті тіні, як на телефоні.
+: une clé USB, ou un dossier iCloud Drive, Dropbox, OneDrive… L’app n’utilise aucun service en ligne et n’a pas besoin de serveur : chaque ordinateur garde sa base et dépose ses changements dans ce dossier ; l’autre les reprend. ¦ : флешка или папка iCloud Drive, Dropbox, OneDrive… Приложение не использует никаких онлайн-сервисов и не нуждается в сервере: каждый компьютер хранит свою базу и кладёт свои изменения в эту папку; другой их забирает. ¦ : флешка або тека iCloud Drive, Dropbox, OneDrive… Застосунок не використовує жодних онлайн-сервісів і не потребує сервера: кожен комп’ютер зберігає свою базу й кладе свої зміни в цю теку; інший їх забирає.
+: une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil. ¦ : большое фото (дом, семья, деревня) и круглый портрет поверх, как в профиле. ¦ : велике фото (будинок, родина, село) і круглий портрет поверх, як у профілі.
+: « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol. ¦ : «Отмена», «Изменить» становятся цветными словами, подчёркнутыми при наведении. ¦ : «Скасувати», «Змінити» стають кольоровими словами, підкресленими під час наведення.
+: « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa. ¦ : «Родилась … в …, умерла …», овальный портрет сепия, штамп Sosa. ¦ : «Народилася … у …, померла …», овальний портрет сепія, штамп Sosa.
+; des Pays-Bas : © ¦ ; Нидерландов: © ¦ ; Нідерландів: ©
+; du Québec : © ¦ ; Квебека: © ¦ ; Квебеку: ©
+; noms traduits en français. Les autres formes sont dessinées pour l’application. ¦ ; названия переведены на французский. Остальные формы нарисованы для приложения. ¦ ; назви перекладено французькою. Інші форми намальовано для застосунку.
+Accents et esprits (s’ajoutent à la lettre avant le curseur) ¦ Диакритические знаки и придыхания (добавляются к букве перед курсором) ¦ Діакритичні знаки й придихи (додаються до літери перед курсором)
+Accents é è ê, et ç, œ, æ. ¦ Диакритика é è ê, а также ç, œ, æ. ¦ Діакритика é è ê, а також ç, œ, æ.
+Actes et documents ¦ Записи актов и документы ¦ Актові записи й документи
+Affichage des événements ¦ Показ событий ¦ Показ подій
+Afficher ce bouton ¦ Показывать эту кнопку ¦ Показувати цю кнопку
+Afficher cette catégorie ¦ Показывать эту категорию ¦ Показувати цю категорію
+Afficher dans la fiche ¦ Показывать в карточке ¦ Показувати в картці
+Afficher dans le menu ¦ Показывать в меню ¦ Показувати в меню
+Afficher la liste des raccourcis ¦ Показать список сочетаний клавиш ¦ Показати список сполучень клавіш
+Afficher le cadre (défaut) ¦ Показывать рамку (по умолчанию) ¦ Показувати рамку (типово)
+Afficher seulement si renseigné ¦ Показывать, только если заполнено ¦ Показувати, лише якщо заповнено
+Affiché : clique pour le cacher ¦ Показано: нажми, чтобы скрыть ¦ Показано: натисни, щоб приховати
+Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas. ¦ Влияет на внутренние отступы и расстояние между блоками. 100 % = как раньше. «Размер шрифта» из «Внешнего вида» остаётся отдельно и добавляется; левая колонка с настройкой «Компактная» (вкладка «Колонка») сохраняет свой размер: Плотность её не затрагивает. ¦ Впливає на внутрішні відступи й відстань між блоками. 100 % = як раніше. «Розмір шрифту» з «Вигляду» лишається окремо й додається; ліва колонка з налаштуванням «Компактна» (вкладка «Колонка») зберігає свій розмір: Щільність її не зачіпає.
+Agrandit et aère le texte. Les outils en plein écran gardent leur taille pour que leurs réglages restent à leur place. ¦ Увеличивает текст и делает его просторнее. Полноэкранные инструменты сохраняют свой размер, чтобы их настройки оставались на месте. ¦ Збільшує текст і робить його просторішим. Повноекранні інструменти зберігають свій розмір, щоб їхні налаштування лишалися на місці.
+Aide : Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Справка: Что ты делаешь в приложении: его вкладки и первый экран. Ни одна карточка не удаляется. ¦ Довідка: Що ти робиш у застосунку: його вкладки й перший екран. Жодну картку не видаляється.
+Aide : Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Справка: Выбери вид дальтонизма: приложение исправит свои цвета, чтобы ты лучше их различал(а). Маленькие кружки показывают, как видятся эти цвета. ¦ Довідка: Вибери вид дальтонізму: застосунок виправить свої кольори, щоб ти краще їх розрізняв(ла). Маленькі кружечки показують, як видно ці кольори.
+Aide : La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Справка: Форма маленьких пронумерованных квадратов блоков и инициалов карточек. Добавь свои формы (библиотека таблиц, нарисованный многоугольник, импортированный SVG), упорядочи список меню «Форма аватаров», скрой те, что тебе не нужны. ¦ Довідка: Форма маленьких пронумерованих квадратів блоків та ініціалів карток. Додай свої форми (бібліотека таблиць, намальований многокутник, імпортований SVG), упорядкуй список меню «Форма аватарів», приховай ті, що тобі не потрібні.
+(CC BY 4.0) ; de Slovénie : © ¦ (CC BY 4.0); Словении: © ¦ (CC BY 4.0); Словенії: ©
+3 fiches trouvées ¦ Найдено 3 карточки ¦ Знайдено 3 картки
+Aide des touches ¦ Справка по клавишам ¦ Довідка з клавіш
+Anniversaires et souvenirs ¦ Дни рождения и памятные даты ¦ Дні народження й пам’ятні дати
+Année ¦ Год ¦ Рік
+Année de naissance lue par SocFace ¦ Год рождения, прочитанный SocFace ¦ Рік народження, прочитаний SocFace
+Aperçu vivant ¦ Живой предпросмотр ¦ Живий попередній перегляд
+Appeler quelqu’un ¦ Позвать кого-нибудь ¦ Покликати когось
+Arial, comme d’habitude. ¦ Arial, как обычно. ¦ Arial, як зазвичай.
+Arrondi des coins ¦ Скругление углов ¦ Заокруглення кутів
+Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible. ¦ Atkinson Hyperlegible: создан для людей с плохим зрением (буквы, которые не спутать: I l 1, O 0). Всегда доступен. ¦ Atkinson Hyperlegible: створений для людей зі слабким зором (літери, які не сплутати: I l 1, O 0). Завжди доступний.
+Atkinson Hyperlegible, texte 30 px, très gros boutons ¦ Atkinson Hyperlegible, текст 30 px, очень большие кнопки ¦ Atkinson Hyperlegible, текст 30 px, дуже великі кнопки
+Au démarrage, une fois par jour au plus. Seule une demande « quelle est la dernière version ? » part vers GitHub : aucune donnée de ta généalogie, aucun identifiant. Rien n’est installé tout seul. ¦ При запуске, не чаще раза в день. На GitHub уходит только запрос «какая последняя версия?»: никаких данных твоей генеалогии, никаких идентификаторов. Ничего не устанавливается само. ¦ Під час запуску, не частіше разу на день. На GitHub іде лише запит «яка остання версія?»: жодних даних твоєї генеалогії, жодних ідентифікаторів. Нічого не встановлюється саме.
+Aucun fichier média manquant. ¦ Нет отсутствующих медиафайлов. ¦ Немає відсутніх медіафайлів.
+Aucune modification pour ce filtre. ¦ Для этого фильтра изменений нет. ¦ Для цього фільтра змін немає.
+Aucune ombre ¦ Без тени ¦ Без тіні
+Aucune voix française trouvée ¦ Французский голос не найден ¦ Французький голос не знайдено
+Aujourd’hui, pas de portrait dans les cases de l’arbre. ¦ Сейчас в ячейках древа нет портретов. ¦ Зараз у клітинках дерева немає портретів.
+Aussi : ⇧ + Entrée dans la recherche rapide. ¦ А также: ⇧ + Enter в быстром поиске. ¦ А також: ⇧ + Enter у швидкому пошуку.
+Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ. ¦ А также в Настройки → Доступность → 🧓 Простой режим («Показывать кнопку»). Скрыто по умолчанию. ¦ А також у Налаштування → Доступність → 🧓 Простий режим («Показувати кнопку»). Приховано спочатку.
+Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »). ¦ А также в настройках калькулятора («Кнопка 🧮 в верхней панели»). ¦ А також у налаштуваннях калькулятора («Кнопка 🧮 у верхній панелі»).
+Avec les médias (photos, actes, sons…) ¦ С медиафайлами (фото, записи актов, звуки…) ¦ З медіафайлами (фото, актові записи, звуки…)
+Avec les pastilles ¦ С кружками ¦ З кружечками
+Aérée ¦ Просторная ¦ Простора
+Bande d’actions rapides ¦ Полоса быстрых действий ¦ Смуга швидких дій
+Baptême loin de la naissance ¦ Крещение далеко от рождения ¦ Хрещення далеко від народження
+Baptême tardif (avant 1900) ¦ Позднее крещение (до 1900) ¦ Пізнє хрещення (до 1900)
+Barre de côté ¦ Боковая панель ¦ Бічна панель
+Bleu et jaune affaiblis. ¦ Синий и жёлтый ослаблены. ¦ Синій і жовтий ослаблено.
+Bouton bleu « ＋ Observation » au-dessus de la grille ¦ Синяя кнопка «＋ Наблюдение» над сеткой ¦ Синя кнопка «＋ Спостереження» над сіткою
+Boutons carrés ¦ Квадратные кнопки ¦ Квадратні кнопки
+Boutons des pistes : plus grands ¦ Кнопки дорожек: крупнее ¦ Кнопки доріжок: більші
+Boutons des pistes : plus petits ¦ Кнопки дорожек: мельче ¦ Кнопки доріжок: менші
+Boutons des pistes : taille de départ ¦ Кнопки дорожек: исходный размер ¦ Кнопки доріжок: початковий розмір
+Boutons encadrés ¦ Кнопки в рамке ¦ Кнопки в рамці
+Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Скрывает продвинутые или редко используемые инструменты: ДНК, сравнение, животные, разделённый экран, новое окно, настройки панели управления, удалить / заблокировать карточку, история, расширенные фильтры карты… ¦ Приховує розширені або рідко вживані інструменти: ДНК, порівняння, тварини, розділений екран, нове вікно, налаштування панелі керування, видалити / заблокувати картку, історія, розширені фільтри мапи…
+Caché ¦ Скрыто ¦ Приховано
+Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Скрыто: простой режим открывается отсюда или через виджет панели управления. ¦ Приховано: простий режим відкривається звідси або через віджет панелі керування.
+Calendrier de cette date ¦ Календарь этой даты ¦ Календар цієї дати
+Calendrier républicain ¦ Республиканский календарь ¦ Республіканський календар
+Calendrier source ¦ Исходный календарь ¦ Вихідний календар
+Calendrier utilisé par défaut dans les champs de date ¦ Календарь по умолчанию в полях дат ¦ Типовий календар у полях дат
+Carré arrondi ¦ Скруглённый квадрат ¦ Заокруглений квадрат
+Carré droit ¦ Прямой квадрат ¦ Прямий квадрат
+Carré penché (défaut) ¦ Наклонный квадрат (по умолчанию) ¦ Нахилений квадрат (типово)
+Carrés numérotés ¦ Пронумерованные квадраты ¦ Пронумеровані квадрати
+Cartes avec repère ¦ Карточки с меткой ¦ Картки з позначкою
+Cartes espacées ¦ Карточки с промежутками ¦ Картки з проміжками
+Cases de l’arbre ¦ Ячейки древа ¦ Клітинки дерева
+Ce n’est pas une erreur ¦ Это не ошибка ¦ Це не помилка
+Ce que tu as réglé dans « ♿ Toute l’app » (daltonisme, contraste, taille du texte, mouvements, voix) s’applique aussi au mode simple. Pour un réglage différent, choisis « Propre au mode simple ». ¦ То, что ты настроил(а) в «♿ Всё приложение» (дальтонизм, контраст, размер текста, движения, голос), применяется и к простому режиму. Для другой настройки выбери «Своё для простого режима». ¦ Те, що ти налаштував(ла) в «♿ Увесь застосунок» (дальтонізм, контраст, розмір тексту, рухи, голос), застосовується й до простого режиму. Для іншого налаштування вибери «Своє для простого режиму».
+Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi. ¦ То, что кажется невозможным или очень редким в твоих карточках: часто опечатка, однофамилец или неверные родители. Без тебя ничего не меняется. ¦ Те, що здається неможливим або дуже рідкісним у твоїх картках: часто описка, однофамілець або неправильні батьки. Без тебе нічого не змінюється.
+Ce qu’on montre ¦ Что показываем ¦ Що показуємо
+Celle de l’app ¦ Как в приложении ¦ Як у застосунку
+Celle du thème ¦ Как в теме ¦ Як у темі
+Cette personne était… (ses profils) ¦ Этот человек был… (его профили) ¦ Ця людина була… (її профілі)
+Ceux qui arrivent ¦ Те, кто приходит ¦ Ті, хто приходить
+Champs œuvre ¦ Поля произведения ¦ Поля твору
+Changer la couleur ¦ Изменить цвет ¦ Змінити колір
+Changer le pictogramme ¦ Изменить значок ¦ Змінити значок
+Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages… ¦ Каждый выбор виден сразу: нажми, и предпросмотр обновится. Для инструментов Графики, Карта, Расследования, Исследования, Люди, Списки, Настройки… ¦ Кожен вибір видно одразу: натисни, і попередній перегляд оновиться. Для інструментів Графіки, Мапа, Розслідування, Дослідження, Люди, Списки, Налаштування…
+Chaque fiche est un objet ¦ Каждая карточка — отдельный объект ¦ Кожна картка — окремий об’єкт
+Chaque gros bouton garde sa couleur partout : on se repère sans lire. ¦ Каждая большая кнопка везде сохраняет свой цвет: ориентируешься, не читая. ¦ Кожна велика кнопка всюди зберігає свій колір: орієнтуєшся, не читаючи.
+Chercher quelqu’un par son nom ¦ Найти человека по имени ¦ Знайти людину за ім’ям
+Chercher une commande… ¦ Искать команду… ¦ Шукати команду…
+Chercher… (nom, contrôle, lieu) ¦ Искать… (имя, проверка, место) ¦ Шукати… (ім’я, перевірка, місце)
+Choisir une voix propre au mode simple ¦ Выбрать отдельный голос для простого режима ¦ Вибрати окремий голос для простого режиму
+Clair ou sombre ¦ Светлый или тёмный ¦ Світлий чи темний
+Clavier et souris ¦ Клавиатура и мышь ¦ Клавіатура й миша
+Comme le prototype ¦ Как в прототипе ¦ Як у прототипі
+Comme le reste ¦ Как всё остальное ¦ Як усе інше
+Comme les blocs (réglage A1) ¦ Как блоки (настройка A1) ¦ Як блоки (налаштування A1)
+Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via ¦ Коммуны Бельгии: IGN-NGI (Национальный географический институт Бельгии), открытая лицензия, через ¦ Комуни Бельгії: IGN-NGI (Національний географічний інститут Бельгії), відкрита ліцензія, через
+Communes de Tchéquie : RÚIAN © ¦ Коммуны Чехии: RÚIAN © ¦ Комуни Чехії: RÚIAN ©
+Communes d’Allemagne : VG250 © ¦ Коммуны Германии: VG250 © ¦ Комуни Німеччини: VG250 ©
+Communes d’Autriche : © ¦ Коммуны Австрии: © ¦ Комуни Австрії: ©
+Communes d’Espagne : © ¦ Коммуны Испании: © ¦ Комуни Іспанії: ©
+Communes d’Italie : confini amministrativi © ¦ Коммуны Италии: confini amministrativi © ¦ Комуни Італії: confini amministrativi ©
+Compact et clair ¦ Компактно и светло ¦ Компактно й світло
+Comparer les GEDCOM ¦ Сравнить GEDCOM ¦ Порівняти GEDCOM
+Comtés des États-Unis : ¦ Округа США: ¦ Округи США:
+Contour bien visible autour de l’élément choisi au clavier ¦ Хорошо видимый контур вокруг элемента, выбранного с клавиатуры ¦ Добре видимий контур навколо елемента, вибраного з клавіатури
+Contours des communes : IGN, Admin Express, via ¦ Границы коммун: IGN, Admin Express, через ¦ Межі комун: IGN, Admin Express, через
+Contraste élevé ¦ Высокий контраст ¦ Високий контраст
+Contrôle ¦ Проверка ¦ Перевірка
+Convertir une date ¦ Преобразовать дату ¦ Перетворити дату
+Correspondance (lettres, cartes) ¦ Переписка (письма, открытки) ¦ Листування (листи, листівки)
+Couleur du bord ¦ Цвет края ¦ Колір краю
+Couleur du genre, fond plein (lettres blanches) ¦ Цвет пола, сплошной фон (белые буквы) ¦ Колір статі, суцільне тло (білі літери)
+Couleur du genre, fond pâle (lettres de couleur) ¦ Цвет пола, бледный фон (цветные буквы) ¦ Колір статі, бліде тло (кольорові літери)
+Couleur principale pâle avec un trait ¦ Бледный основной цвет с линией ¦ Блідий основний колір з лінією
+Couleurs et daltonisme ¦ Цвета и дальтонизм ¦ Кольори й дальтонізм
+Couleurs seulement affaiblies (léger) ¦ Только ослабленные цвета (слабо) ¦ Лише ослаблені кольори (легко)
+Créer / modifier une branche ¦ Создать / изменить ветвь ¦ Створити / змінити гілку
+Créer / modifier une étiquette ¦ Создать / изменить метку ¦ Створити / змінити мітку
+Créer le type ¦ Создать тип ¦ Створити тип
+Créer un type ¦ Создать тип ¦ Створити тип
+Créer une copie de test ¦ Создать тестовую копию ¦ Створити тестову копію
+Créer une forme ¦ Создать форму ¦ Створити форму
+DENSITÉ ¦ ПЛОТНОСТЬ ¦ ЩІЛЬНІСТЬ
+Dans la barre au-dessus ¦ В панели сверху ¦ На панелі вгорі
+Dans un navigateur ¦ В браузере ¦ У браузері
+Demander aussi un code ¦ Также спрашивать код ¦ Також питати код
+Demander « Qui regarde ? » ¦ Спрашивать «Кто смотрит?» ¦ Питати «Хто дивиться?»
+Densité ¦ Плотность ¦ Щільність
+Des photos au hasard ¦ Случайные фото ¦ Випадкові фото
+Des photos choisies ¦ Выбранные фото ¦ Вибрані фото
+Dessin au trait ¦ Контурный рисунок ¦ Контурний малюнок
+Deutéranomalie ¦ Дейтераномалия ¦ Дейтераномалія
+Deutéranopie ¦ Дейтеранопия ¦ Дейтеранопія
+Deux façons de faire selon l’endroit. ¦ Два способа в зависимости от места. ¦ Два способи залежно від місця.
+Diaporama et cadre photo ¦ Слайд-шоу и фоторамка ¦ Слайд-шоу й фоторамка
+Dictée vocale ¦ Голосовой ввод ¦ Голосове введення
+Dictée vocale dans les champs texte ¦ Голосовой ввод в текстовых полях ¦ Голосове введення в текстових полях
+Données géographiques ¦ Географические данные ¦ Географічні дані
+Dossier des copies ¦ Папка копий ¦ Тека копій
+Dossier partagé ¦ Общая папка ¦ Спільна тека
+Double-clic : 320 px, la valeur de départ. ¦ Двойной клик: 320 px, исходное значение. ¦ Подвійний клік: 320 px, початкове значення.
+Douces et floues ¦ Мягкие и размытые ¦ М’які й розмиті
+Duplique la base ouverte pour essayer un import ou une fusion sans modifier l’original. Les médias restent partagés : ne les supprime pas depuis la copie si tu veux préserver l’original. ¦ Дублирует открытую базу, чтобы попробовать импорт или объединение, не меняя оригинал. Медиафайлы остаются общими: не удаляй их из копии, если хочешь сохранить оригинал. ¦ Дублює відкриту базу, щоб спробувати імпорт або об’єднання, не змінюючи оригінал. Медіафайли лишаються спільними: не видаляй їх з копії, якщо хочеш зберегти оригінал.
+Durée de chaque photo ¦ Длительность каждого фото ¦ Тривалість кожного фото
+Durée de l’appui long ¦ Длительность долгого нажатия ¦ Тривалість довгого натискання
+Décrire les images ¦ Описывать изображения ¦ Описувати зображення
+Défilement ¦ Прокрутка ¦ Прокручування
+Délai après la mort du père ¦ Срок после смерти отца ¦ Строк після смерті батька
+Effacer le groupe (son contenu va dans le groupe d’à côté) ¦ Удалить группу (её содержимое переходит в соседнюю группу) ¦ Видалити групу (її вміст переходить до сусідньої групи)
+En bas de la colonne ¦ Внизу колонки ¦ Унизу колонки
+En bas de la colonne des badges ¦ Внизу колонки значков ¦ Унизу колонки значків
+En bas de l’en-tête ¦ Внизу шапки ¦ Унизу шапки
+En diaporama ¦ Слайд-шоу ¦ Слайд-шоу
+En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe. ¦ На французском. Не в полях поиска, датах, числах и паролях. ¦ Французькою. Не в полях пошуку, датах, числах і паролях.
+En grand, avec sa légende ¦ Крупно, с подписью ¦ Великим, з підписом
+En très grand ¦ Очень крупно ¦ Дуже великим
+En-tête actuel ¦ Текущая шапка ¦ Поточна шапка
+En-tête de la fiche ¦ Шапка карточки ¦ Шапка картки
+En-têtes ¦ Шапки ¦ Шапки
+Enlever l’élément choisi ¦ Убрать выбранный элемент ¦ Прибрати вибраний елемент
+Enregistrer la branche ¦ Сохранить ветвь ¦ Зберегти гілку
+Enregistrer le projet sous un autre nom… ¦ Сохранить проект под другим именем… ¦ Зберегти проєкт під іншою назвою…
+Ensembles prêts ¦ Готовые наборы ¦ Готові набори
+Entre une date complète pour convertir. ¦ Введи полную дату для преобразования. ¦ Введи повну дату для перетворення.
+Espace dans les blocs ¦ Отступы в блоках ¦ Відступи в блоках
+Espace entre les boutons ¦ Расстояние между кнопками ¦ Відстань між кнопками
+Espace entre les cadres ¦ Расстояние между рамками ¦ Відстань між рамками
+Espace entre les lettres ¦ Межбуквенный интервал ¦ Міжлітерний інтервал
+Espace entre les mots ¦ Расстояние между словами ¦ Відстань між словами
+Essaie ici ¦ Попробуй здесь ¦ Спробуй тут
+FICHES ANIMAUX ¦ КАРТОЧКИ ЖИВОТНЫХ ¦ КАРТКИ ТВАРИН
+FICHES PERSONNES ET ANIMAUX ¦ КАРТОЧКИ ЛЮДЕЙ И ЖИВОТНЫХ ¦ КАРТКИ ЛЮДЕЙ І ТВАРИН
+Fiche d’une personne ¦ Карточка человека ¦ Картка людини
+Fiche · 88 px ¦ Карточка · 88 px ¦ Картка · 88 px
+Fiches personnes ¦ Карточки людей ¦ Картки людей
+Fichiers médias ¦ Медиафайлы ¦ Медіафайли
+Fond crème, police de livre, doux pour les yeux ¦ Кремовый фон, книжный шрифт, мягко для глаз ¦ Кремове тло, книжковий шрифт, м’яко для очей
+Fond pâle (comme avant) ¦ Бледный фон (как раньше) ¦ Бліде тло (як раніше)
+Force de la correction ¦ Сила коррекции ¦ Сила корекції
+Forme de l’en-tête ¦ Форма шапки ¦ Форма шапки
+Forme des boutons ¦ Форма кнопок ¦ Форма кнопок
+Forme des listes ¦ Вид списков ¦ Вигляд списків
+Français ¦ Французский ¦ Французька
+Fratrie étalée ¦ Растянутые по годам братья и сёстры ¦ Розтягнуті в часі брати й сестри
+GEDCOM de référence ¦ Эталонный GEDCOM ¦ Еталонний GEDCOM
+Garder les dernières ¦ Хранить последние ¦ Зберігати останні
+Gouvernement du Québec ¦ Правительство Квебека ¦ Уряд Квебеку
+Gravité ¦ Серьёзность ¦ Серйозність
+Grosse flèche de souris ¦ Большой указатель мыши ¦ Великий вказівник миші
+Grégorien ¦ Григорианский ¦ Григоріанський
+Hauteur des boutons ¦ Высота кнопок ¦ Висота кнопок
+Hauteur des cadres ¦ Высота рамок ¦ Висота рамок
+Hauteur des lignes ¦ Высота строк ¦ Висота рядків
+Hauteur du bandeau ¦ Высота плашки ¦ Висота смужки
+ICÔNES ¦ ЗНАЧКИ ¦ ЗНАЧКИ
+Ici : choisis le dossier. L’app y pose une copie de départ ( ¦ Здесь: выбери папку. Приложение кладёт туда исходную копию ( ¦ Тут: вибери теку. Застосунок кладе туди початкову копію (
+Icône + nom ¦ Значок + название ¦ Значок + назва
+Icône au-dessus ¦ Значок сверху ¦ Значок угорі
+Icônes ¦ Значки ¦ Значки
+Ignorée dans une case de texte ; réglable dans Raccourcis clavier. ¦ Не действует в текстовом поле; настраивается в «Сочетаниях клавиш». ¦ Не діє в текстовому полі; налаштовується в «Сполученнях клавіш».
+Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici. ¦ Они хранятся вместе с твоей генеалогией: каждый планшет или компьютер начинает отсюда. ¦ Вони зберігаються разом із твоєю генеалогією: кожен планшет чи комп’ютер починає звідси.
+Intégrité SQLite : ¦ Целостность SQLite: ¦ Цілісність SQLite:
+Jamais testé ¦ Ни разу не проверялось ¦ Жодного разу не перевірялося
+Je ne suis pas dans l’arbre ¦ Меня нет в древе ¦ Мене немає в дереві
+La forme ¦ Форма ¦ Форма
+La maison ¦ Дом ¦ Будинок
+La personne de départ ¦ Исходный человек ¦ Початкова людина
+La photo de chaque case : plus grande, on se reconnaît plus vite. ¦ Фото в каждой ячейке: крупнее — быстрее себя узнаёшь. ¦ Фото в кожній клітинці: більше — швидше себе впізнаєш.
+Largeur de la colonne ¦ Ширина колонки ¦ Ширина колонки
+Le bouton principal ressort ¦ Главная кнопка выделяется ¦ Головна кнопка виділяється
+Le cadre du haut ¦ Верхняя рамка ¦ Верхня рамка
+Le carré de la fiche, partout ¦ Квадрат карточки — везде ¦ Квадрат картки — всюди
+Le dessin de la colonne ¦ Вид колонки ¦ Вигляд колонки
+Le gris peut se confondre avec une ligne choisie si l’écran est pâle. ¦ Серый можно спутать с выбранной строкой, если экран бледный. ¦ Сірий можна сплутати з вибраним рядком, якщо екран блідий.
+Le meilleur des deux ¦ Лучшее из двух ¦ Найкраще з обох
+Le mode simple ¦ Простой режим ¦ Простий режим
+Le nom est moins grand ; un style plus « administratif ». ¦ Имя меньше; стиль более «официальный». ¦ Ім’я менше; стиль більш «офіційний».
+Le plus discret ¦ Самый незаметный ¦ Найнепомітніший
+Le plus épuré ¦ Самый строгий ¦ Найстриманіший
+Le portrait ¦ Портрет ¦ Портрет
+Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales. ¦ Круг или квадрат, который показывает человека: его цвета, фото, инициалы. ¦ Коло чи квадрат, що показує людину: її кольори, фото, ініціали.
+Le rouge est peu visible (paraît sombre, se confond avec le vert). ¦ Красный плохо виден (кажется тёмным, путается с зелёным). ¦ Червоний погано видно (здається темним, плутається із зеленим).
+Le rouge prévient avant de cliquer : on ne supprime pas une fiche par erreur. ¦ Красный предупреждает перед нажатием: карточку не удалишь по ошибке. ¦ Червоний попереджає перед натисканням: картку не видалиш помилково.
+Le site propose seulement des candidats. La fusion déplace les données vers la fiche gardée puis supprime l’autre fiche. ¦ Сайт только предлагает кандидатов. Объединение переносит данные в сохраняемую карточку, а затем удаляет другую. ¦ Сайт лише пропонує кандидатів. Об’єднання переносить дані до картки, яку зберігають, а потім видаляє іншу.
+Le sépia est plus doux pour les yeux fatigués ; le sombre n’éblouit pas le soir. ¦ Сепия мягче для усталых глаз; тёмная тема не слепит вечером. ¦ Сепія м’якша для втомлених очей; темна тема не сліпить увечері.
+Le texte des boutons principaux ¦ Текст главных кнопок ¦ Текст головних кнопок
+Lecteur d’écran ¦ Программа чтения с экрана ¦ Програма читання з екрана
+Les anniversaires ¦ Дни рождения ¦ Дні народження
+Les blocs se détachent un peu moins du fond. ¦ Блоки чуть меньше выделяются на фоне. ¦ Блоки трохи менше виділяються на тлі.
+Les couleurs de l’app, sans changement. ¦ Цвета приложения без изменений. ¦ Кольори застосунку без змін.
+Les dates seules (comme avant) ¦ Только даты (как раньше) ¦ Лише дати (як раніше)
+Les deux ¦ Оба ¦ Обидва
+Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ Карточки с пометкой «конфиденциально» никогда не показываются. ¦ Картки з позначкою «конфіденційно» ніколи не показуються.
+Les gros boutons ¦ Большие кнопки ¦ Великі кнопки
+Les modifications effectuées depuis ce site sont enregistrées ici. ¦ Изменения, сделанные с этого сайта, сохраняются здесь. ¦ Зміни, зроблені з цього сайту, зберігаються тут.
+Les personnes ¦ Люди ¦ Люди
+Les photos ¦ Фото ¦ Фото
+Les réglages du prototype que tu as aimé ¦ Настройки прототипа, который тебе понравился ¦ Налаштування прототипу, який тобі сподобався
+Lettres d’origine ¦ Исходные буквы ¦ Початкові літери
+Lien « 🧩 Cette personne était… » ¦ Ссылка «🧩 Этот человек был…» ¦ Посилання «🧩 Ця людина була…»
+Liens toujours soulignés ¦ Ссылки всегда подчёркнуты ¦ Посилання завжди підкреслені
+Lier au mode Artiste : masqué pour les personnes non artistes ¦ Связать с режимом «Художник»: скрыто для людей, которые не художники ¦ Пов’язати з режимом «Митець»: приховано для людей, які не митці
+Lieux et souvenirs ¦ Места и воспоминания ¦ Місця й спогади
+Lire les légendes des photos dans le diaporama ¦ Читать подписи к фото в слайд-шоу ¦ Читати підписи до фото в слайд-шоу
+Lire l’histoire dès qu’on ouvre une fiche ¦ Читать историю сразу при открытии карточки ¦ Читати історію одразу під час відкриття картки
+Liste aérée ¦ Просторный список ¦ Просторий список
+Liste continue ¦ Сплошной список ¦ Суцільний список
+Liste · 34 px ¦ Список · 34 px ¦ Список · 34 px
+Listes et arbre ¦ Списки и древо ¦ Списки й дерево
+Longévité 🔴 ¦ Долголетие 🔴 ¦ Довголіття 🔴
+Longévité 🟠 ¦ Долголетие 🟠 ¦ Довголіття 🟠
+L’ambiance des archives ¦ Атмосфера архива ¦ Атмосфера архіву
+L’app dit alors les noms, sans « ta mère » ni « ton petit-fils ». ¦ Тогда приложение называет имена, без «твоя мама» и «твой внук». ¦ Тоді застосунок називає імена, без «твоя мама» й «твій онук».
+L’arbre ¦ Древо ¦ Дерево
+L’heure et la date ¦ Время и дата ¦ Час і дата
+L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune). ¦ Тень делает кнопку похожей на «нажимаемую клавишу». Она следует общему стилю (чёткая, мягкая или никакой). ¦ Тінь робить кнопку схожою на «клавішу, яку натискають». Вона йде за загальним стилем (чітка, м’яка або жодної).
+Masquer tout le cadre ¦ Скрыть всю рамку ¦ Приховати всю рамку
+Mettre les espacements conseillés pour la dyslexie ¦ Задать интервалы, рекомендуемые при дислексии ¦ Задати інтервали, рекомендовані за дислексії
+Mode consultation (la famille regarde sans rien modifier) ¦ Режим просмотра (семья смотрит, ничего не меняя) ¦ Режим перегляду (родина дивиться, нічого не змінюючи)
+Modifier ce cadre ¦ Изменить эту рамку ¦ Змінити цю рамку
+Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot. ¦ Меньше кнопок — меньше сомнений: оставь только то, что человек любит смотреть. Добавленная рамка может сразу открывать карточку человека, его фото или короткую записку. ¦ Менше кнопок — менше вагань: залиш лише те, що людина любить дивитися. Додана рамка може одразу відкривати картку людини, її фото або коротку записку.
+Moins de choses visibles d’un coup ; plus de défilement. ¦ Меньше видно за раз; больше прокрутки. ¦ Менше видно за раз; більше прокручування.
+Moins de lignes visibles ; plus de défilement. ¦ Меньше строк видно; больше прокрутки. ¦ Менше рядків видно; більше прокручування.
+Moins de place pour les boutons ; plus décoratif que pratique. ¦ Меньше места для кнопок; скорее декоративно, чем практично. ¦ Менше місця для кнопок; радше декоративно, ніж практично.
+Montre l’écran comme le voit une personne daltonienne, pour vérifier qu’un document reste lisible avant de l’envoyer ou de l’imprimer. Rien n’est modifié. ¦ Показывает экран так, как его видит человек с дальтонизмом, чтобы проверить, что документ остаётся читаемым, перед отправкой или печатью. Ничего не меняется. ¦ Показує екран так, як його бачить людина з дальтонізмом, щоб перевірити, що документ лишається читабельним, перед надсиланням чи друком. Нічого не змінюється.
+Montrer la photo de la fiche quand elle existe ¦ Показывать фото карточки, если оно есть ¦ Показувати фото картки, якщо воно є
+Montrer les boutons « 🔊 Écouter » ¦ Показывать кнопки «🔊 Слушать» ¦ Показувати кнопки «🔊 Слухати»
+Médias et transcriptions ¦ Медиафайлы и расшифровки ¦ Медіафайли й розшифровки
+Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer. ¦ Никогда не клади сам файл базы в iCloud или Dropbox, чтобы открывать его с двух сторон: приложение это запрещает (блокировка), так как он может повредиться. ¦ Ніколи не клади сам файл бази в iCloud чи Dropbox, щоб відкривати його з двох боків: застосунок цього не дозволяє (блокування), бо він може пошкодитися.
+Net et régulier ¦ Чётко и ровно ¦ Чітко й рівно
+Norvégien ¦ Норвежский ¦ Норвезька
+Nouveau GEDCOM ¦ Новый GEDCOM ¦ Новий GEDCOM
+Nouvelle étiquette ¦ Новая метка ¦ Нова мітка
+Numéros ¦ Номера ¦ Номери
+Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste ¦ Сквозные номера (01, 02, 03…), одинаковые вкладки везде (значок + название), «Список | Карточки» в панели над списком ¦ Наскрізні номери (01, 02, 03…), однакові вкладки всюди (значок + назва), «Список | Картки» на панелі над списком
+N’importe quel autre lieu peut être saisi librement. ¦ Любое другое место можно ввести свободно. ¦ Будь-яке інше місце можна ввести вільно.
+On suit la ligne sans se tromper ¦ Следишь за строкой, не сбиваясь ¦ Стежиш за рядком, не збиваючись
+Onglets du haut ¦ Вкладки сверху ¦ Вкладки вгорі
+Ordre des pages des Réglages ¦ Порядок страниц Настроек ¦ Порядок сторінок Налаштувань
+Ordre et visibilité des boutons ¦ Порядок и видимость кнопок ¦ Порядок і видимість кнопок
+Ordre et visibilité des éléments de l’en-tête ¦ Порядок и видимость элементов шапки ¦ Порядок і видимість елементів шапки
+Par défaut ¦ По умолчанию ¦ Типово
+Par ligne ¦ В ряд ¦ У ряд
+Pareil que l’app ¦ Как в приложении ¦ Як у застосунку
+Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou ¦ Говори вместо того, чтобы печатать: в текстовом поле, где ты пишешь, появляется маленький 🎤. Нажми на него (или ¦ Говори замість того, щоб друкувати: у текстовому полі, де ти пишеш, з’являється маленький 🎤. Натисни на нього (або
+Pas de numéros ¦ Без номеров ¦ Без номерів
+Pas vérifiée ¦ Не проверено ¦ Не перевірено
+Pastille sous le nom ¦ Кружок под именем ¦ Кружечок під ім’ям
+Persan (hégirien solaire) ¦ Персидский (солнечная хиджра) ¦ Перський (сонячна хіджра)
+Personne qui regarde ¦ Кто смотрит ¦ Хто дивиться
+Personnes identifiées ¦ Опознанные люди ¦ Упізнані люди
+Personnes vivantes ¦ Живые люди ¦ Живі люди
+Petit écran ¦ Маленький экран ¦ Малий екран
+Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Можно спутать со ссылкой; нужно немного привыкнуть. ¦ Можна сплутати з посиланням; треба трохи звикнути.
+Photo de la personne ¦ Фото человека ¦ Фото людини
+Photo des cases de l’arbre ¦ Фото в ячейках древа ¦ Фото в клітинках дерева
+Photos retirées ¦ Убранные фото ¦ Прибрані фото
+Pictogrammes des tableaux ¦ Значки таблиц ¦ Значки таблиць
+Place de ＋ Nouvelle observation ¦ Место кнопки ＋ Новое наблюдение ¦ Місце кнопки ＋ Нове спостереження
+Plus calme pour les yeux ¦ Спокойнее для глаз ¦ Спокійніше для очей
+Plus discret que « Comme avant » : les blocs se détachent un peu moins. ¦ Скромнее, чем «Как раньше»: блоки чуть меньше выделяются. ¦ Скромніше, ніж «Як раніше»: блоки трохи менше виділяються.
+Plus d’actions (menu ⋯) ¦ Ещё действия (меню ⋯) ¦ Більше дій (меню ⋯)
+Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Больше места: реже нажимаешь соседнюю кнопку. ¦ Більше місця: рідше натискаєш сусідню кнопку.
+Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Крупные видно издалека; мелкие — панели инструментов занимают меньше места. ¦ Великі видно здалеку; малі — панелі інструментів займають менше місця.
+Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Выше — фото лучше видно; ниже — карточка начинается раньше. Только для фотоплашки. ¦ Вище — фото краще видно; нижче — картка починається раніше. Лише для фотосмужки.
+Police des cadres ¦ Шрифт рамок ¦ Шрифт рамок
+Portée ¦ Охват ¦ Охоплення
+Pour la dyslexie : choisis celle qui te va ¦ При дислексии: выбери тот, что тебе подходит ¦ За дислексії: вибери той, що тобі підходить
+Pour quitter ¦ Чтобы выйти ¦ Щоб вийти
+Pour tout le monde ¦ Для всех ¦ Для всіх
+Pratique pour apprendre l’app : plus besoin de passer la souris pour savoir ce que fait chaque bouton. Prend un peu plus de place. ¦ Удобно, чтобы освоить приложение: не нужно наводить мышь, чтобы узнать, что делает каждая кнопка. Занимает чуть больше места. ¦ Зручно, щоб освоїти застосунок: не треба наводити мишу, щоб дізнатися, що робить кожна кнопка. Займає трохи більше місця.
+Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence). ¦ Занимает высоту; без фото плашка берёт основной цвет (Внешний вид). ¦ Займає висоту; без фото смужка бере основний колір (Вигляд).
+Proposer dans le menu ¦ Предлагать в меню ¦ Пропонувати в меню
+Prénom + nom (JM) ¦ Имя + фамилия (JM) ¦ Ім’я + прізвище (JM)
+Prénom seulement ¦ Только имя ¦ Лише ім’я
+Présentation (Keynote) ¦ Презентация (Keynote) ¦ Презентація (Keynote)
+Quand il y a beaucoup de boutons, on ne voit plus lequel est important. ¦ Когда кнопок много, уже не видно, какая важная. ¦ Коли кнопок багато, вже не видно, яка важлива.
+Quand personne ne touche, lancer le diaporama ¦ Когда никто не трогает, запускать слайд-шоу ¦ Коли ніхто не торкається, запускати слайд-шоу
+Quand plusieurs personnes se servent de la même tablette. ¦ Когда одним планшетом пользуются несколько человек. ¦ Коли одним планшетом користуються кілька людей.
+Quelqu’un d’autre de la famille ¦ Кто-то другой из семьи ¦ Хтось інший з родини
+Qui est-ce ? ¦ Кто это? ¦ Хто це?
+Qui regarde ¦ Кто смотрит ¦ Хто дивиться
+Qui regarde ? ¦ Кто смотрит? ¦ Хто дивиться?
+Qui regarde l’arbre ? ¦ Кто смотрит древо? ¦ Хто дивиться дерево?
+Qui se suivent ¦ Сквозные ¦ Наскрізні
+Quitter le mode simple ¦ Выйти из простого режима ¦ Вийти з простого режиму
+Rattaché à ¦ Связано с ¦ Пов’язано з
+Recherche et enquêtes ¦ Поиск и расследования ¦ Пошук і розслідування
+Reculer le morceau → ¦ Сдвинуть фрагмент назад → ¦ Посунути фрагмент назад →
+Remettre un réglage exporté (fichier .json) ¦ Вернуть экспортированную настройку (файл .json) ¦ Повернути експортоване налаштування (файл .json)
+Ressemblance des doublons ¦ Сходство дубликатов ¦ Схожість дублікатів
+Rien ne bouge ¦ Ничего не движется ¦ Ніщо не рухається
+Récit d’une vie (diaporama tout fait) ¦ Рассказ о жизни (готовое слайд-шоу) ¦ Розповідь про життя (готове слайд-шоу)
+Réduire les mouvements ¦ Уменьшить движение ¦ Зменшити рух
+Réglages de base ¦ Основные настройки ¦ Основні налаштування
+Réglages et export ¦ Настройки и экспорт ¦ Налаштування й експорт
+Républicain ¦ Республиканский ¦ Республіканський
+Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Без цвета иногда нужна лишняя секунда, чтобы их узнать. ¦ Без кольору іноді потрібна зайва секунда, щоб їх упізнати.
+Se lit comme un acte ¦ Читается как запись акта ¦ Читається як актовий запис
+Ses photos, ceux qui y sont nés ¦ Его фото, те, кто здесь родился ¦ Його фото, ті, хто тут народився
+Signatures identifiées ¦ Опознанные подписи ¦ Упізнані підписи
+Son rapide ¦ Быстрый звук ¦ Швидкий звук
+Sortie et démarrage ¦ Выход и запуск ¦ Вихід і запуск
+Sous la souris ¦ Под мышью ¦ Під мишею
+Sous le nom ¦ Под именем ¦ Під ім’ям
+Sous À vérifier, Hors généalogie, Artiste. ¦ Под «Проверить», «Вне генеалогии», «Художник». ¦ Під «Перевірити», «Поза генеалогією», «Митець».
+Sous-titres toujours affichés ¦ Субтитры всегда показаны ¦ Субтитри завжди показано
+Studio son ¦ Звуковая студия ¦ Звукова студія
+Style des entrées ¦ Стиль пунктов ¦ Стиль пунктів
+Style des fiches ¦ Стиль карточек ¦ Стиль карток
+Style « acte ancien » ¦ Стиль «старинный акт» ¦ Стиль «старовинний акт»
+Style « carte d’identité » ¦ Стиль «удостоверение личности» ¦ Стиль «посвідчення особи»
+Suit l’accessibilité de l’app ¦ Следует доступности приложения ¦ Іде за доступністю застосунку
+Sur 1 colonne ¦ В 1 колонку ¦ В 1 колонку
+Sur 2 colonnes ¦ В 2 колонки ¦ У 2 колонки
+Sur 2 lignes (défaut) ¦ В 2 строки (по умолчанию) ¦ У 2 рядки (типово)
+Sur cet appareil ¦ На этом устройстве ¦ На цьому пристрої
+Sur l’autre ordinateur : ouvre ¦ На другом компьютере: открой ¦ На іншому комп’ютері: відкрий
+Sur un grand écran, l’œil peut sauter de ligne. ¦ На большом экране глаз может перескочить на другую строку. ¦ На великому екрані око може перескочити на інший рядок.
+Sur un petit portable, il faut souvent faire défiler. ¦ На маленьком ноутбуке часто приходится прокручивать. ¦ На маленькому ноутбуці часто доводиться прокручувати.
+Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés. ¦ На телефоне верхняя панель свёрнута: эти кнопки там не показываются. ¦ На телефоні верхня панель згорнута: ці кнопки там не показуються.
+Suédois ¦ Шведский ¦ Шведська
+Sépia doux ¦ Мягкая сепия ¦ М’яка сепія
+Ta version ¦ Твоя версия ¦ Твоя версія
+Taille des entrées ¦ Размер пунктов ¦ Розмір пунктів
+Taille des icônes ¦ Размер значков ¦ Розмір значків
+Taille des initiales ¦ Размер инициалов ¦ Розмір ініціалів
+Taille du texte ¦ Размер текста ¦ Розмір тексту
+Taille du titre des cadres ¦ Размер заголовка рамок ¦ Розмір заголовка рамок
+Tchèque ¦ Чешский ¦ Чеська
+Tes réglages d’accessibilité valent aussi ici ¦ Твои настройки доступности действуют и здесь ¦ Твої налаштування доступності діють і тут
+Tester cette sauvegarde ¦ Проверить эту резервную копию ¦ Перевірити цю резервну копію
+Texte et traits ¦ Текст и линии ¦ Текст і лінії
+Thème et couleurs → Taille typographique ¦ Тема и цвета → Размер шрифта ¦ Тема й кольори → Розмір шрифту
+Ton prénom ¦ Твоё имя ¦ Твоє ім’я
+Touche O pour une nouvelle observation ¦ Клавиша O — новое наблюдение ¦ Клавіша O — нове спостереження
+Touche de l’outil ¦ Клавиша инструмента ¦ Клавіша інструмента
+Touche ta photo. L’app dira ensuite « ta mère », « ton petit-fils »… ¦ Нажми на своё фото. Потом приложение будет говорить «твоя мама», «твой внук»… ¦ Натисни на своє фото. Потім застосунок казатиме «твоя мама», «твій онук»…
+Touche un gros bouton pour commencer. ¦ Нажми на большую кнопку, чтобы начать. ¦ Натисни на велику кнопку, щоб почати.
+Touches déjà prévues dans cet outil ¦ Клавиши, уже заданные в этом инструменте ¦ Клавіші, уже задані в цьому інструменті
+Toujours proposée (la forme de départ) ¦ Всегда предлагается (исходная форма) ¦ Завжди пропонується (початкова форма)
+Tous, dans l’ordre d’origine ¦ Все, в исходном порядке ¦ Усі, у початковому порядку
+Tout désélectionner ¦ Снять выделение со всего ¦ Зняти виділення з усього
+Tout d’un coup d’œil ¦ Всё одним взглядом ¦ Усе одним поглядом
+Tout le monde ¦ Все ¦ Усі
+Tout seul ¦ Самостоятельно ¦ Самостійно
+Tout sélectionner ¦ Выделить всё ¦ Виділити все
+Toute l’app ¦ Всё приложение ¦ Увесь застосунок
+Toutes les ¦ Каждые ¦ Кожні
+Toutes les … heures ¦ Каждые … часов ¦ Кожні … годин
+Traits entre les lignes ¦ Линии между строками ¦ Лінії між рядками
+Trois par ligne ¦ По три в ряд ¦ По три в ряд
+Très grande (56 px) ¦ Очень большой (56 px) ¦ Дуже великий (56 px)
+Très lisible ¦ Очень разборчиво ¦ Дуже розбірливо
+Très petite (30 px) ¦ Очень маленький (30 px) ¦ Дуже малий (30 px)
+Un album ¦ Альбом ¦ Альбом
+Un appui long ne se fait pas par hasard : on ne sort pas par erreur. ¦ Долгое нажатие не бывает случайным: по ошибке не выйдешь. ¦ Довге натискання не буває випадковим: помилково не вийдеш.
+Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul. ¦ Чёрный край сочетается с блоками приложения (у всех чёрная линия 2 px); без края — легче. На самых маленьких портретах край сам становится тоньше. ¦ Чорний край пасує до блоків застосунку (усі мають чорну лінію 2 px); без краю — легше. На найменших портретах край сам стає тоншим.
+Un bouton carré 🧩, dans la colonne des boutons ¦ Квадратная кнопка 🧩 в колонке кнопок ¦ Квадратна кнопка 🧩 у колонці кнопок
+Un bouton qui ne répond pas, un écran bizarre, un message d’erreur ? Décris-le : un rapport technique (sans aucune donnée de ta généalogie) est préparé, tu le relis, puis tu l’envoies par GitHub ou par e-mail. ¦ Кнопка не реагирует, странный экран, сообщение об ошибке? Опиши это: готовится технический отчёт (без каких-либо данных твоей генеалогии), ты его перечитываешь и отправляешь через GitHub или по электронной почте. ¦ Кнопка не реагує, дивний екран, повідомлення про помилку? Опиши це: готується технічний звіт (без жодних даних твоєї генеалогії), ти його перечитуєш і надсилаєш через GitHub або електронною поштою.
+Un doigt qui tremble touche facilement un bouton de 72 px ou plus (64 px au moins). ¦ Дрожащий палец легко попадает в кнопку 72 px и больше (минимум 64 px). ¦ Тремтячий палець легко влучає в кнопку 72 px і більше (щонайменше 64 px).
+Un film de famille ¦ Семейный фильм ¦ Родинний фільм
+Un lieu de famille ¦ Семейное место ¦ Родинне місце
+Un mot de la famille ¦ Слово от семьи ¦ Слово від родини
+Un petit jeu avec les portraits ¦ Маленькая игра с портретами ¦ Маленька гра з портретами
+Un petit portrait au début de chaque ligne ¦ Маленький портрет в начале каждой строки ¦ Маленький портрет на початку кожного рядка
+Un peu grande (46 px) ¦ Чуть крупнее (46 px) ¦ Трохи більший (46 px)
+Un peu moins « cliquable » au premier regard. ¦ С первого взгляда чуть менее «кликабельно». ¦ З першого погляду трохи менш «клікабельно».
+Un peu petite (38 px) ¦ Чуть меньше (38 px) ¦ Трохи менший (38 px)
+Un peu « bureau » : moins de caractère que les autres. ¦ Немного «офисный»: меньше характера, чем у остальных. ¦ Трохи «офісний»: менше характеру, ніж в інших.
+Un son, une chanson ¦ Звук, песня ¦ Звук, пісня
+Un trait épais ressemble aux traits noirs de l’app ; un trait fin fait plus élégant. Seulement pour les icônes au trait. ¦ Толстая линия похожа на чёрные линии приложения; тонкая выглядит элегантнее. Только для контурных значков. ¦ Товста лінія схожа на чорні лінії застосунку; тонка виглядає елегантніше. Лише для контурних значків.
+Une copie de ta généalogie, faite toute seule, vérifiée, rangée dans le dossier de ton choix. ¦ Копия твоей генеалогии, сделанная автоматически, проверенная, уложенная в выбранную тобой папку. ¦ Копія твоєї генеалогії, зроблена автоматично, перевірена, покладена в теку на твій вибір.
+Une copie quand tu quittes l’app (ou fermes l’onglet), seulement si quelque chose a changé. ¦ Копия при выходе из приложения (или закрытии вкладки), только если что-то изменилось. ¦ Копія під час виходу із застосунку (або закриття вкладки), лише якщо щось змінилося.
+Une grande colonne ¦ Одна большая колонка ¦ Одна велика колонка
+Une grande partie des formes des tableaux (animaux, métiers, maison, transports, météo, santé…) vient de ¦ Большая часть форм таблиц (животные, ремёсла, дом, транспорт, погода, здоровье…) взята из ¦ Більша частина форм таблиць (тварини, ремесла, будинок, транспорт, погода, здоров’я…) узята з
+Une ombre sous les boutons ¦ Тень под кнопками ¦ Тінь під кнопками
+Une photo ¦ Фото ¦ Фото
+Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence). ¦ Фото оживляет карточку. Без него его место занимают инициалы (плашка берёт основной цвет из «Внешнего вида»). ¦ Фото оживлює картку. Без нього його місце займають ініціали (смужка бере основний колір з «Вигляду»).
+Une phrase écoutée se comprend même quand on lit mal. ¦ Услышанную фразу понимаешь, даже если плохо читаешь. ¦ Почуту фразу розумієш, навіть якщо погано читаєш.
+Une seule couleur pour tous (comme la fiche) ¦ Один цвет для всех (как в карточке) ¦ Один колір для всіх (як у картці)
+Une seule lettre, celle du nom (M) ¦ Одна буква — из фамилии (M) ¦ Одна літера — з прізвища (M)
+Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur. ¦ Полезно, когда с планшетом играет и внук. Это не настоящая защита: она лишь не даёт выйти по ошибке. ¦ Корисно, коли з планшетом грається й онук. Це не справжній захист: він лише не дає вийти помилково.
+Utiliser la personne affichée ¦ Взять показанного человека ¦ Узяти показану людину
+Verrouiller / déverrouiller ¦ Заблокировать / разблокировать ¦ Заблокувати / розблокувати
+Vert affaibli (le plus courant de tous). ¦ Ослабленный зелёный (самый частый вариант). ¦ Ослаблений зелений (найпоширеніший варіант).
+Vitesse de la voix ¦ Скорость голоса ¦ Швидкість голосу
+Voir l’aperçu ¦ Предпросмотр ¦ Попередній перегляд
+Voix française de l’appareil ¦ Французский голос устройства ¦ Французький голос пристрою
+Vu la dernière fois (fiches d’animaux) ¦ Последний раз видели (карточки животных) ¦ Востаннє бачили (картки тварин)
+Zoom de départ ¦ Исходный масштаб ¦ Початковий масштаб
+arrête la lecture. ¦ останавливает чтение. ¦ зупиняє читання.
+au-delà de ¦ свыше ¦ понад
+carré photo, grand nom ¦ квадратное фото, крупное имя ¦ квадратне фото, велике ім’я
+champs rangés, photo d’identité ¦ поля по порядку, фото на документы ¦ поля за порядком, фото на документи
+chaque ligne dans son cadre ¦ каждая строка в своей рамке ¦ кожен рядок у своїй рамці
+chaque liste garde le sien ¦ у каждого списка свой ¦ у кожного списку свій
+chaque outil le sien ¦ у каждого инструмента свой ¦ у кожного інструмента свій
+coins arrondis, ombres légères ¦ скруглённые углы, лёгкие тени ¦ заокруглені кути, легкі тіні
+dans LCNDA (écran de démarrage → Importer un fichier, ou une nouvelle généalogie vide), puis ici même, choisis le même dossier. ¦ в LCNDA (стартовый экран → Импортировать файл, или новая пустая генеалогия), затем прямо здесь выбери ту же папку. ¦ у LCNDA (стартовий екран → Імпортувати файл, або нова порожня генеалогія), потім просто тут вибери ту саму теку.
+de départ ¦ исходный ¦ початковий
+dossier partagé ¦ общая папка ¦ спільна тека
+du nom ¦ имени ¦ імені
+décédé ¦ умер ¦ помер
+décédée ¦ умерла ¦ померла
+ex. Dimensions, Technique, Lieu de conservation ¦ напр. Размеры, Техника, Место хранения ¦ напр. Розміри, Техніка, Місце зберігання
+icônes fines, une seule couleur ¦ тонкие значки, один цвет ¦ тонкі значки, один колір
+impossible au-delà de ¦ невозможно свыше ¦ неможливо понад
+juste au-dessus de la liste ¦ прямо над списком ¦ просто над списком
+la Densité ne s’y ajoute pas ¦ Плотность к этому не добавляется ¦ Щільність до цього не додається
+la liste des projets ¦ список проектов ¦ список проєктів
+le numéro dans un carré ¦ номер в квадрате ¦ номер у квадраті
+là où il était ¦ там, где было ¦ там, де було
+l’entrée choisie dépasse ¦ выбранный пункт выступает ¦ вибраний пункт виступає
+on passe par le bloc « 👁 Observations » ¦ через блок «👁 Наблюдения» ¦ через блок «👁 Спостереження»
+papier, phrase d’état civil ¦ бумага, фраза из записи актов ¦ папір, фраза з актового запису
+par défaut ¦ по умолчанию ¦ типово
+plus d’espace ¦ больше места ¦ більше місця
+plus d’espace partout ¦ больше места везде ¦ більше місця всюди
+règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ настраивает всё сразу; потом можно изменить каждую строку (появится «изменено»). ¦ налаштовує все одразу; потім можна змінити кожен рядок (з’явиться «змінено»).
+sans icône ¦ без значка ¦ без значка
+se règle dans ¦ настраивается в ¦ налаштовується в
+serré, plus de lignes ¦ плотно, больше строк ¦ щільно, більше рядків
+sous l’en-tête de la fiche, replié ¦ под шапкой карточки, свёрнуто ¦ під шапкою картки, згорнуто
+sur une ligne ¦ в одну строку ¦ в один рядок
+taille du texte ¦ размер текста ¦ розмір тексту
+tout dans un cadre ¦ всё в одной рамке ¦ усе в одній рамці
+tout reste comme avant ¦ всё остаётся как раньше ¦ усе лишається як раніше
+trait pour agir, émoji pour les rubriques ¦ линия для действий, эмодзи для разделов ¦ лінія для дій, емодзі для розділів
+traits fins, grain du papier ¦ тонкие линии, бумажная фактура ¦ тонкі лінії, паперова фактура
+traits épais, ombres franches ¦ толстые линии, чёткие тени ¦ товсті лінії, чіткі тіні
+un seul cadre, lignes fines ¦ одна рамка, тонкие линии ¦ одна рамка, тонкі лінії
+un trait fin, fond transparent ¦ тонкая линия, прозрачный фон ¦ тонка лінія, прозоре тло
+« Calendrier de cette date » ¦ «Календарь этой даты» ¦ «Календар цієї дати»
+« Liste | Fiches » ¦ «Список | Карточки» ¦ «Список | Картки»
+« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias. ¦ «Убрать» скрывает фото только из простого режима: оно остаётся в твоих медиафайлах. ¦ «Прибрати» приховує фото лише з простого режиму: воно лишається у твоїх медіафайлах.
+« ＋ Nouvelle observation · vu il y a 2 j » ¦ «＋ Новое наблюдение · видели 2 дн. назад» ¦ «＋ Нове спостереження · бачили 2 дн. тому»
+À chaque ouverture ¦ При каждом открытии ¦ Під час кожного відкриття
+À droite, les unes sous les autres (comme avant) ¦ Справа, одна под другой (как раньше) ¦ Праворуч, одна під одною (як раніше)
+À vérifier, branche maternelle, acte illisible… ¦ Проверить, материнская ветвь, нечитаемая запись… ¦ Перевірити, материнська гілка, нечитабельний запис…
+À écouter ¦ Послушать ¦ Послухати
+Âge de la mère 🔴 ¦ Возраст матери 🔴 ¦ Вік матері 🔴
+Âge de la mère 🟠 ¦ Возраст матери 🟠 ¦ Вік матері 🟠
+Âge du père 🔴 ¦ Возраст отца 🔴 ¦ Вік батька 🔴
+Âge du père 🟠 ¦ Возраст отца 🟠 ¦ Вік батька 🟠
+Âge minimum au mariage ¦ Минимальный возраст вступления в брак ¦ Мінімальний вік для шлюбу
+Ère ¦ Эра ¦ Ера
+Ère d’Espagne ¦ Испанская эра ¦ Іспанська ера
+Écart entre deux naissances ¦ Промежуток между двумя рождениями ¦ Проміжок між двома народженнями
+Écouter ¦ Слушать ¦ Слухати
+Édition ¦ Правка ¦ Редагування
+Émojis ¦ Эмодзи ¦ Емодзі
+Énorme (62 px) ¦ Огромный (62 px) ¦ Величезний (62 px)
+Épaisseur des traits ¦ Толщина линий ¦ Товщина ліній
+Épaisseur du trait ¦ Толщина линии ¦ Товщина лінії
+Éteint : seulement la pastille « Vu hier ». ¦ Выключено: только кружок «Видели вчера». ¦ Вимкнено: лише кружечок «Бачили вчора».
+Éthiopien ¦ Эфиопский ¦ Ефіопський
+Étoile ¦ Звезда ¦ Зірка
+à vérifier au-delà de ¦ проверить свыше ¦ перевірити понад
+← Avancer le morceau ¦ ← Сдвинуть фрагмент вперёд ¦ ← Посунути фрагмент уперед
+↗ Voir les versions publiées ¦ ↗ Посмотреть опубликованные версии ¦ ↗ Переглянути опубліковані версії
+↺ Remettre seulement les groupes ¦ ↺ Вернуть только группы ¦ ↺ Повернути лише групи
+↻ Relancer le contrôle ¦ ↻ Перезапустить проверку ¦ ↻ Перезапустити перевірку
+▶ Ouvrir le mode simple ¦ ▶ Открыть простой режим ¦ ▶ Відкрити простий режим
+♿ Voir les réglages de toute l’app ¦ ♿ Посмотреть настройки всего приложения ¦ ♿ Переглянути налаштування всього застосунку
+⤓ Exporter ce réglage ¦ ⤓ Экспортировать эту настройку ¦ ⤓ Експортувати це налаштування
+＋ Créer une forme… ¦ ＋ Создать форму… ¦ ＋ Створити форму…
+＋ Nouvelle branche ¦ ＋ Новая ветвь ¦ ＋ Нова гілка
+＋ Nouvelle forme… ¦ ＋ Новая форма… ¦ ＋ Нова форма…
+＋ Nouvelle observation (fiches d’animaux) ¦ ＋ Новое наблюдение (карточки животных) ¦ ＋ Нове спостереження (картки тварин)
+＋ Nouvelle étiquette ¦ ＋ Новая метка ¦ ＋ Нова мітка
+🌳 L’arbre ¦ 🌳 Древо ¦ 🌳 Дерево
+🎂 Âges ¦ 🎂 Возрасты ¦ 🎂 Вік
+🎤 Dictée vocale ¦ 🎤 Голосовой ввод ¦ 🎤 Голосове введення
+🎯 Élément choisi ¦ 🎯 Выбранный элемент ¦ 🎯 Вибраний елемент
+👁 Aperçu : le même réglage partout ¦ 👁 Предпросмотр: одна и та же настройка везде ¦ 👁 Попередній перегляд: те саме налаштування всюди
+👁 Aperçu vivant ¦ 👁 Живой предпросмотр ¦ 👁 Живий попередній перегляд
+👁 Essayer ici ¦ 👁 Попробовать здесь ¦ 👁 Спробувати тут
+👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque ¦ 👁＋ Наблюдение · 🩺＋ Здоровье · 📍 GPS-маршрут · 🔖 Метка ¦ 👁＋ Спостереження · 🩺＋ Здоров’я · 📍 GPS-маршрут · 🔖 Позначка
+👤 Sur la fiche ¦ 👤 На карточке ¦ 👤 На картці
+👥 Les personnes ¦ 👥 Люди ¦ 👥 Люди
+📊 Moyennes de la famille ¦ 📊 Средние по семье ¦ 📊 Середні по родині
+📜 Sépia ¦ 📜 Сепия ¦ 📜 Сепія
+📦 Quoi ¦ 📦 Что ¦ 📦 Що
+📷 Les photos ¦ 📷 Фото ¦ 📷 Фото
+🔗 Relier ce dossier ¦ 🔗 Связать эту папку ¦ 🔗 Пов’язати цю теку
+🔴 moins de ¦ 🔴 меньше ¦ 🔴 менше
+🔴 naissance plus tard que ¦ 🔴 рождение позже, чем ¦ 🔴 народження пізніше, ніж
+🔷 Formes des avatars ¦ 🔷 Формы аватаров ¦ 🔷 Форми аватарів
+🖨 Imprimer la liste ¦ 🖨 Печать списка ¦ 🖨 Друк списку
+🗂 Les copies ¦ 🗂 Копии ¦ 🗂 Копії
+🗑 Enlever l’élément choisi ¦ 🗑 Убрать выбранный элемент ¦ 🗑 Прибрати вибраний елемент
+🟠 au-delà de ¦ 🟠 свыше ¦ 🟠 понад
+🟡 au-delà de ¦ 🟡 свыше ¦ 🟡 понад
+🟡 plus de ¦ 🟡 больше ¦ 🟡 більше
+🟡 écart de plus de ¦ 🟡 разница больше ¦ 🟡 різниця більше
+🦮 Lecteur d’écran ¦ 🦮 Программа чтения с экрана ¦ 🦮 Програма читання з екрана
+🪙 Convertisseur d’autrefois ¦ 🪙 Конвертер старых мер ¦ 🪙 Конвертер старих мір
+C’est ton anniversaire ! ¦ С днём рождения! ¦ З днем народження!
+{name} a {n} ans aujourd’hui ! ¦ {name}: сегодня исполняется {n}! ¦ {name}: сьогодні виповнюється {n}!
+Il est né {details}. ¦ Он родился {details}. ¦ Він народився {details}.
+Elle est née {details}. ¦ Она родилась {details}. ¦ Вона народилася {details}.
+{a} et {b} se sont mariés il y a {n} ans ¦ {a} и {b}: со дня свадьбы прошло лет: {n} ¦ {a} і {b}: від дня весілля минуло років: {n}
+{name} aurait eu {n} ans aujourd’hui ¦ {name}: сегодня исполнилось бы {n} ¦ {name}: сьогодні виповнилося б {n}
+On se souvient de {name} ¦ Мы помним: {name} ¦ Ми пам’ятаємо: {name}
+Elle nous a quittés {details}, il y a {n} ans. ¦ Она покинула нас {details}; прошло лет: {n}. ¦ Вона покинула нас {details}; минуло років: {n}.
+Il nous a quittés {details}, il y a {n} ans. ¦ Он покинул нас {details}; прошло лет: {n}. ¦ Він покинув нас {details}; минуло років: {n}.
+ton anniversaire ¦ твой день рождения ¦ твій день народження
+Elle aurait eu {n} ans ¦ Ей исполнилось бы {n} ¦ Їй виповнилося б {n}
+Il aurait eu {n} ans ¦ Ему исполнилось бы {n} ¦ Йому виповнилося б {n}
+Tu auras {n} ans ¦ Тебе исполнится {n} ¦ Тобі виповниться {n}
+Elle aura {n} ans ¦ Ей исполнится {n} ¦ Їй виповниться {n}
+Il aura {n} ans ¦ Ему исполнится {n} ¦ Йому виповниться {n}
+Mariés ici ¦ Вступили в брак здесь ¦ Узяли шлюб тут
+Né·es ici ¦ Родились здесь ¦ Народилися тут
+Mort·es ici ¦ Умерли здесь ¦ Померли тут
+Bravo ! C’est {name} ({rel}). ¦ Браво! Это {name} ({rel}). ¦ Браво! Це {name} ({rel}).
+Bravo ! C’est {name}. ¦ Браво! Это {name}. ¦ Браво! Це {name}.
+toi ¦ ты ¦ ти
+Avec toi ({n}) ¦ С тобой ({n}) ¦ З тобою ({n})
+Ses photos ({n}) ¦ Фото ({n}) ¦ Фото ({n})
+Sur la photo : {names}. ¦ На фото: {names}. ¦ На фото: {names}.
+=personne trouvée ¦ найденный человек|найденных человека|найденных человек ¦ знайдена людина|знайдені людини|знайдених людей
+Icône du gros bouton ¦ Значок большой кнопки ¦ Значок великої кнопки
+Un cadre ¦ Рамка ¦ Рамка
+Écris le mot ¦ Напиши слово ¦ Напиши слово
+Choisis la maison ¦ Выбери дом ¦ Вибери будинок
+Choisis la personne ¦ Выбери человека ¦ Вибери людину
+Choisis la photo ¦ Выбери фото ¦ Вибери фото
+Choisis les photos ¦ Выбери фото ¦ Вибери фото
+Choisis le film ¦ Выбери фильм ¦ Вибери фільм
+Choisis le son ¦ Выбери звук ¦ Вибери звук
+Choisis le lieu ¦ Выбери место ¦ Вибери місце
+Écris le numéro ¦ Напиши номер ¦ Напиши номер
+Sa fiche ¦ Карточка ¦ Картка
+Un mot ¦ Записка ¦ Записка
+Un film ¦ Фильм ¦ Фільм
+Un lieu ¦ Место ¦ Місце
+Un instant… ¦ Минутку… ¦ Хвилинку…
+Sans prénom ¦ Без имени ¦ Без імені
+Un instant, on prépare l’arbre… ¦ Минутку, готовим древо… ¦ Хвилинку, готуємо дерево…
+Un instant, on construit la maison… ¦ Минутку, строим дом… ¦ Хвилинку, будуємо будинок…
+La maison n’a pas pu être montrée. ¦ Не удалось показать дом. ¦ Не вдалося показати будинок.
+Monter d’un étage ¦ Подняться на этаж ¦ Піднятися на поверх
+Descendre d’un étage ¦ Спуститься на этаж ¦ Спуститися на поверх
+Voir toute la maison ¦ Посмотреть весь дом ¦ Подивитися весь будинок
+Plus près ¦ Ближе ¦ Ближче
+Plus loin ¦ Дальше ¦ Далі
+La visite ¦ Прогулка ¦ Прогулянка
+Étage ¦ Этаж ¦ Поверх
+Il se passe quelque chose aujourd’hui ! ¦ Сегодня кое-что происходит! ¦ Сьогодні дещо відбувається!
+Continue… encore un peu ¦ Продолжай… ещё немного ¦ Продовжуй… ще трохи
+On ne connaît pas encore ses parents ¦ Родители пока неизвестны ¦ Батьки поки невідомі
+Voir sa fiche ¦ Посмотреть карточку ¦ Переглянути картку
+Pas d’enfants connus ¦ Дети неизвестны ¦ Діти невідомі
+Plus gros ¦ Крупнее ¦ Більше
+Plus de monde ¦ Больше людей ¦ Більше людей
+Photo d’avant ¦ Старое фото ¦ Старе фото
+Cacher les noms ¦ Скрыть имена ¦ Приховати імена
+Qui est là ? ¦ Кто здесь? ¦ Хто тут?
+Arrêter le défilement ¦ Остановить прокрутку ¦ Зупинити прокручування
+Défilement tout seul ¦ Автопрокрутка ¦ Автопрокручування
+Ses maris ¦ Её мужья ¦ Її чоловіки
+Son mari ¦ Её муж ¦ Її чоловік
+Ses femmes ¦ Его жёны ¦ Його дружини
+Sa femme ¦ Его жена ¦ Його дружина
+Son conjoint ¦ Супруг(а) ¦ Чоловік чи дружина
+Sa sœur ¦ Сестра ¦ Сестра
+Son frère ¦ Брат ¦ Брат
+Ses frères et sœurs ¦ Братья и сёстры ¦ Брати й сестри
+Écouter son histoire ¦ Послушать историю ¦ Послухати історію
+Voir dans l’arbre ¦ Посмотреть в древе ¦ Переглянути в дереві
+Ses parents ¦ Родители ¦ Батьки
+Son parent ¦ Родитель ¦ Один із батьків
+Ses enfants ¦ Дети ¦ Діти
+Son enfant ¦ Ребёнок ¦ Дитина
+Par famille ¦ По семьям ¦ За родинами
+Par prénom ¦ По имени ¦ За ім’ям
+La famille d’aujourd’hui ¦ Семья сегодня ¦ Родина сьогодні
+Touche la première lettre du prénom. ¦ Нажми на первую букву имени. ¦ Натисни на першу літеру імені.
+Touche la personne qui regarde. ¦ Нажми на того, кто смотрит. ¦ Натисни на того, хто дивиться.
+Tape un prénom ou un nom ¦ Введи имя или фамилию ¦ Введи ім’я або прізвище
+Effacer une lettre ¦ Стереть букву ¦ Стерти літеру
+J’écoute… ¦ Слушаю… ¦ Слухаю…
+Je n’ai pas bien entendu. Réessaie, ou utilise le clavier. ¦ Я плохо расслышал. Попробуй ещё раз или воспользуйся клавиатурой. ¦ Я погано розчув. Спробуй ще раз або скористайся клавіатурою.
+La dictée n’a pas marché. Utilise le clavier. ¦ Голосовой ввод не сработал. Воспользуйся клавиатурой. ¦ Голосове введення не спрацювало. Скористайся клавіатурою.
+Voir la photo ¦ Посмотреть фото ¦ Переглянути фото
+🎈 Bientôt ¦ 🎈 Скоро ¦ 🎈 Незабаром
+Dis d’abord qui regarde : l’app montrera ta famille. ¦ Сначала скажи, кто смотрит: приложение покажет твою семью. ¦ Спершу скажи, хто дивиться: застосунок покаже твою родину.
+Tes conjoints ¦ Твои супруги ¦ Твої подружжя
+Ta femme ¦ Твоя жена ¦ Твоя дружина
+Ton mari ¦ Твой муж ¦ Твій чоловік
+Tes parents ¦ Твои родители ¦ Твої батьки
+Tes grands-parents ¦ Твои бабушки и дедушки ¦ Твої бабусі й дідусі
+Tes enfants ¦ Твои дети ¦ Твої діти
+Tes petits-enfants ¦ Твои внуки ¦ Твої онуки
+Tes arrière-petits-enfants ¦ Твои правнуки ¦ Твої правнуки
+Personne n’est encore relié dans l’arbre. ¦ В древе пока никто не связан. ¦ У дереві поки ніхто не пов’язаний.
+Ton anniversaire ¦ Твой день рождения ¦ Твій день народження
+Les anniversaires qui arrivent ¦ Ближайшие дни рождения ¦ Найближчі дні народження
+Pas de date de naissance connue pour l’instant. ¦ Дата рождения пока неизвестна. ¦ Дата народження поки невідома.
+Voir les photos ¦ Посмотреть фото ¦ Переглянути фото
+Il faut au moins trois portraits pour jouer. ¦ Чтобы играть, нужно хотя бы три портрета. ¦ Щоб грати, потрібно хоча б три портрети.
+Un autre portrait ¦ Другой портрет ¦ Інший портрет
+Écouter l’heure ¦ Послушать время ¦ Послухати час
+Écouter le numéro ¦ Послушать номер ¦ Послухати номер
+Tape le code pour quitter ¦ Введи код, чтобы выйти ¦ Введи код, щоб вийти
+Arrêter ¦ Остановить ¦ Зупинити
+Les gros boutons : avancer, reculer, tourner. On passe par les portes. ¦ Большие кнопки: вперёд, назад, повернуть. Проходим через двери. ¦ Великі кнопки: уперед, назад, повернути. Проходимо крізь двері.
+On voit déjà le plus de monde possible. ¦ Уже видно как можно больше людей. ¦ Уже видно якомога більше людей.
+Pas de frère ou de sœur après. ¦ Нет брата или сестры после. ¦ Немає брата чи сестри після.
+Pas de frère ou de sœur avant. ¦ Нет брата или сестры до. ¦ Немає брата чи сестри до.
+Mode simple quitté. Tu retrouves l’app normale. ¦ Простой режим закрыт. Ты снова в обычном приложении. ¦ Простий режим закрито. Ти знову у звичайному застосунку.
+Première fois : vérifie ces réglages, puis « ▶ Ouvrir le mode simple ». ¦ В первый раз: проверь эти настройки, потом «▶ Открыть простой режим». ¦ Уперше: перевір ці налаштування, потім «▶ Відкрити простий режим».
+▶ Démarrer le mode simple ¦ ▶ Запустить простой режим ¦ ▶ Запустити простий режим
+⚙️ Préparer ¦ ⚙️ Подготовить ¦ ⚙️ Підготувати
+Ta couleur ¦ Твой цвет ¦ Твій колір
+La personne ¦ Человек ¦ Людина
+⚠️ Pas encore de photo de cette personne : le cadre est caché ¦ ⚠️ У этого человека пока нет фото: рамка скрыта ¦ ⚠️ У цієї людини поки немає фото: рамку приховано
+Écrite toute seule (nombre de photos, souvenirs du jour) ¦ Пишется само (число фото, воспоминания дня) ¦ Пишеться саме (кількість фото, спогади дня)
+Le mot ¦ Записка ¦ Записка
+Icône du cadre ¦ Значок рамки ¦ Значок рамки
+↺ Remettre ce cadre comme au départ ¦ ↺ Вернуть эту рамку как было ¦ ↺ Повернути цю рамку як було
+Retirer ce cadre ¦ Убрать эту рамку ¦ Прибрати цю рамку
+La photo ¦ Фото ¦ Фото
+Le film ¦ Фильм ¦ Фільм
+Le son ¦ Звук ¦ Звук
+Le lieu ¦ Место ¦ Місце
+Choisis un lieu… ¦ Выбери место… ¦ Вибери місце…
+Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos). ¦ В древе пока нет мест (рождения, браки, фото). ¦ У дереві поки немає місць (народження, шлюби, фото).
+Le numéro ¦ Номер ¦ Номер
+Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…). ¦ Показывает семью того, кто смотрит (родителей, детей, внуков…). ¦ Показує родину того, хто дивиться (батьків, дітей, онуків…).
+Les anniversaires des vivants, du plus proche au plus lointain. ¦ Дни рождения живых, от ближайшего к самому дальнему. ¦ Дні народження живих, від найближчого до найдальшого.
+Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits. ¦ Один портрет, три имени: нужно найти правильное. Нужно хотя бы три портрета. ¦ Один портрет, три імені: треба знайти правильне. Потрібно хоча б три портрети.
+Toutes les photos, dans le désordre. ¦ Все фото вперемешку. ¦ Усі фото впереміш.
+Propre au mode simple ¦ Своё для простого режима ¦ Своє для простого режиму
+✕ Fermer l’essai ¦ ✕ Закрыть пробу ¦ ✕ Закрити пробу
+Daltonisme propre au mode simple ¦ Дальтонизм — своя настройка для простого режима ¦ Дальтонізм — окреме налаштування для простого режиму
+Contraste fort dans le mode simple ¦ Высокий контраст в простом режиме ¦ Високий контраст у простому режимі
+Moins d’animations dans le mode simple ¦ Меньше анимации в простом режиме ¦ Менше анімації в простому режимі
+✓ Appliqué ¦ ✓ Применено ¦ ✓ Застосовано
+Personne de l’arbre ¦ Человек из древа ¦ Людина з дерева
+Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras. ¦ Высокий контраст включён: выбранные здесь цвета вернутся, когда ты его выключишь. ¦ Високий контраст увімкнено: вибрані тут кольори повернуться, коли ти його вимкнеш.
+✓ très lisible ¦ ✓ очень разборчиво ¦ ✓ дуже розбірливо
+Jamais moins de 22 px. ¦ Никогда меньше 22 px. ¦ Ніколи менше 22 px.
+Comme l’app ¦ Как в приложении ¦ Як у застосунку
+↺ Remettre la disposition comme au départ ¦ ↺ Вернуть расположение как было ¦ ↺ Повернути розташування як було
+ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement. ¦ ℹ️ В приложении включён «режим конфиденциальности»: живые показаны только по имени. ¦ ℹ️ У застосунку ввімкнено «режим конфіденційності»: живих показано лише за ім’ям.
+Les branches apparaîtront quand l’arbre sera lu. ¦ Ветви появятся, когда древо будет прочитано. ¦ Гілки з’являться, коли дерево буде прочитано.
+Remettre dans le mode simple ¦ Вернуть в простой режим ¦ Повернути в простий режим
+🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer. ¦ 🔒 Код сохранён (он скрыт даже от приложения). Введи 4 цифры, чтобы его изменить. ¦ 🔒 Код збережено (він прихований навіть від застосунку). Введи 4 цифри, щоб його змінити.
+Coupé : cet appareil garde ses propres réglages du mode simple. ¦ Выключено: это устройство хранит свои собственные настройки простого режима. ¦ Вимкнено: цей пристрій зберігає власні налаштування простого режиму.
+⚠️ À corriger ¦ ⚠️ Нужно исправить ¦ ⚠️ Треба виправити
+⚠️ Pas assez lisible ¦ ⚠️ Недостаточно разборчиво ¦ ⚠️ Недостатньо розбірливо
+Essai fermé : c’est ainsi qu’on quitte le mode simple. ¦ Проба закрыта: вот так выходят из простого режима. ¦ Пробу закрито: ось так виходять із простого режиму.
+La photo du gros bouton ¦ Фото большой кнопки ¦ Фото великої кнопки
+Les photos du gros bouton ¦ Фото большой кнопки ¦ Фото великої кнопки
+Le film du gros bouton ¦ Фильм большой кнопки ¦ Фільм великої кнопки
+Le son du gros bouton ¦ Звук большой кнопки ¦ Звук великої кнопки
+La police des gros boutons ¦ Шрифт больших кнопок ¦ Шрифт великих кнопок
+La police du mode simple ¦ Шрифт простого режима ¦ Шрифт простого режиму
+Il faut garder au moins un gros bouton. ¦ Нужно оставить хотя бы одну большую кнопку. ¦ Треба залишити хоча б одну велику кнопку.
+Code de sortie enregistré (gardé caché). ¦ Код выхода сохранён (скрыт). ¦ Код виходу збережено (приховано).
+Retour à l’écran d’avant ¦ Назад к прошлому экрану ¦ Назад до попереднього екрана
+Âges ¦ Возрасты ¦ Вік
+Lieux mal placés ¦ Неверно размещённые места ¦ Неправильно розміщені місця
+Baptême loin ¦ Крещение далеко ¦ Хрещення далеко
+Lieux contradictoires ¦ Противоречивые места ¦ Суперечливі місця
+une mauvaise année de décès (1862 au lieu de 1882 ?), ou un homonyme pris pour le père. Regarde l’acte de décès du père. ¦ неверный год смерти (1862 вместо 1882?) или однофамилец, принятый за отца. Посмотри запись акта о смерти отца. ¦ неправильний рік смерті (1862 замість 1882?) або однофамілець, якого прийняли за батька. Подивися актовий запис про смерть батька.
+une erreur de date, ou la mère confondue avec une homonyme (une tante, une cousine). Regarde l’acte de naissance de l’enfant. ¦ ошибка в дате или мать перепутана с однофамилицей (тётей, кузиной). Посмотри запись акта о рождении ребёнка. ¦ помилка в даті або матір сплутано з однофамілицею (тіткою, кузиною). Подивися актовий запис про народження дитини.
+une génération confondue (la grand-mère prise pour la mère), ou une année mal lue. ¦ перепутано поколение (бабушка принята за мать) или неверно прочитан год. ¦ сплутано покоління (бабусю прийнято за матір) або неправильно прочитано рік.
+une génération sautée, ou une année mal lue. ¦ пропущено поколение или неверно прочитан год. ¦ пропущено покоління або неправильно прочитано рік.
+une mauvaise date de décès, ou le mariage d’un homonyme. ¦ неверная дата смерти или брак однофамильца. ¦ неправильна дата смерті або шлюб однофамільця.
+deux dates inversées, ou une année mal recopiée. ¦ две даты перепутаны местами или год переписан с ошибкой. ¦ дві дати переставлено або рік переписано з помилкою.
+un chiffre mal lu (31 au lieu de 21) ou un mois mal recopié. ¦ неверно прочитанная цифра (31 вместо 21) или месяц переписан с ошибкой. ¦ неправильно прочитана цифра (31 замість 21) або місяць переписано з помилкою.
+la naissance d’un parent prise pour la sienne, ou un homonyme. ¦ рождение родителя принято за его собственное или однофамилец. ¦ народження одного з батьків прийнято за власне або однофамілець.
+des jumeaux mal datés, ou un enfant rattaché aux mauvais parents. ¦ неверно датированные близнецы или ребёнок связан не с теми родителями. ¦ неправильно датовані близнюки або дитину пов’язано не з тими батьками.
+la même personne saisie deux fois : compare les deux fiches avant de les fusionner. ¦ один и тот же человек введён дважды: сравни обе карточки, прежде чем объединять. ¦ ту саму людину введено двічі: порівняй обидві картки, перш ніж об’єднувати.
+une commune homonyme d’un autre département, ou des coordonnées inversées. ¦ одноимённая коммуна из другого департамента или перепутанные координаты. ¦ однойменна комуна з іншого департаменту або переставлені координати.
+deux homonymes confondus dans une seule fiche. ¦ два однофамильца смешаны в одной карточке. ¦ двох однофамільців змішано в одній картці.
+une commune homonyme d’un autre département. ¦ одноимённая коммуна из другого департамента. ¦ однойменна комуна з іншого департаменту.
+les deux dates inversées. ¦ две даты перепутаны местами. ¦ дві дати переставлено.
+un tiret tapé par erreur devant l’année. ¦ дефис, по ошибке введённый перед годом. ¦ дефіс, помилково введений перед роком.
+un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas. ¦ однофамилец, принятый за супруга, или карточка, связанная на поколение выше или ниже. ¦ однофамілець, якого прийняли за чоловіка чи дружину, або картка, пов’язана на покоління вище чи нижче.
+un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement. ¦ цифра, неверно прочитанная машиной (1/7, 3/8, 5/6), или возраст, названный семьёй наугад: посмотри изображение переписи. ¦ цифра, неправильно прочитана машиною (1/7, 3/8, 5/6), або вік, названий родиною навмання: подивися зображення перепису.
+un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement. ¦ неверно прочитанное или сокращённое название коммуны («St» вместо Saint): посмотри изображение переписи. ¦ неправильно прочитана чи скорочена назва комуни («St» замість Saint): подивися зображення перепису.
+la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement. ¦ неверно прочитана графа пола или это другой член хозяйства: посмотри изображение переписи. ¦ неправильно прочитано графу статі або це інший член господарства: подивися зображення перепису.
+un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement. ¦ неверно прочитанная связь (сын / дочь), неверно разделённое хозяйство или ещё не связанная карточка: посмотри изображение переписи. ¦ неправильно прочитаний зв’язок (син / донька), неправильно розділене господарство або ще не пов’язана картка: подивися зображення перепису.
+J’ai vérifié dans l’acte : c’est bien ça ¦ Я проверил(а) в записи акта: всё верно ¦ Я перевірив(ла) в актовому записі: усе правильно
+La date est approximative (« vers… ») ¦ Дата приблизительная («vers…») ¦ Дата приблизна («vers…»)
+Ce sont deux personnes différentes ¦ Это два разных человека ¦ Це дві різні людини
+Le lieu est juste ¦ Место верное ¦ Місце правильне
+J’ai regardé l’image : ma fiche est juste, SocFace a mal lu ¦ Я посмотрел(а) изображение: моя карточка верна, SocFace прочитал неверно ¦ Я подивився(лася) на зображення: моя картка правильна, SocFace прочитав неправильно
+Ce n’est pas la même personne (homonyme) ¦ Это не тот же человек (однофамилец) ¦ Це не та сама людина (однофамілець)
+L’âge déclaré au recensement était approximatif ¦ Возраст, названный при переписи, был приблизительным ¦ Вік, названий під час перепису, був приблизним
+Personne sans nom ¦ Человек без имени ¦ Людина без імені
+Dates changées ¦ Даты изменились ¦ Дати змінилися
+Écartée ¦ Отложено ¦ Відкладено
+Plus d’alerte ¦ Предупреждения больше нет ¦ Попередження більше немає
+Le contrôle ne trouve plus ce problème ¦ Проверка больше не находит эту проблему ¦ Перевірка більше не знаходить цю проблему
+Pas une erreur ¦ Не ошибка ¦ Не помилка
+Toute la base ¦ Вся база ¦ Уся база
+Mes ancêtres (Sosa) ¦ Мои предки (Sosa) ¦ Мої предки (Sosa)
+Tous les lieux ¦ Все места ¦ Усі місця
+Aucune alerte écartée ¦ Нет отложенных предупреждений ¦ Немає відкладених попереджень
+Rien avec ces filtres ¦ С этими фильтрами ничего нет ¦ З цими фільтрами нічого немає
+Retire un filtre pour revoir les autres alertes. ¦ Убери фильтр, чтобы снова увидеть другие предупреждения. ¦ Прибери фільтр, щоб знову побачити інші попередження.
+Aucune incohérence trouvée dans tes fiches. Bravo ! ¦ В твоих карточках не найдено ни одного противоречия. Браво! ¦ У твоїх картках не знайдено жодної суперечності. Браво!
+Ouvre l’événement dans la fiche pour corriger sa date. ¦ Открой событие в карточке, чтобы исправить его дату. ¦ Відкрий подію в картці, щоб виправити її дату.
+PLACER SUR LA CARTE ¦ ПОСТАВИТЬ НА КАРТУ ¦ ПОСТАВИТИ НА МАПУ
+Choisis la commune : ses coordonnées seront reprises ¦ Выбери коммуну: её координаты будут взяты ¦ Вибери комуну: її координати буде взято
+Ce lieu n’a pas de coordonnées : choisis une commune de la liste. ¦ У этого места нет координат: выбери коммуну из списка. ¦ Це місце не має координат: вибери комуну зі списку.
+CONTRÔLE DE LA BASE ¦ ПРОВЕРКА БАЗЫ ¦ ПЕРЕВІРКА БАЗИ
+Ta raison ¦ Твоя причина ¦ Твоя причина
+Ne plus signaler ¦ Больше не сообщать ¦ Більше не повідомляти
+Écris ta raison, ou choisis-en une. ¦ Напиши свою причину или выбери одну из готовых. ¦ Напиши свою причину або вибери одну з готових.
+Détail ¦ Подробности ¦ Подробиці
+Fermer (Échap) ¦ Закрыть (Esc) ¦ Закрити (Esc)
+La famille ¦ Семья ¦ Родина
+Contrôle impossible pour l’instant. ¦ Проверка пока невозможна. ¦ Перевірка поки неможлива.
+des fiches sans alerte ¦ карточек без предупреждений ¦ карток без попереджень
+Tout voir dans « ✅ Contrôle de la base » → ¦ Посмотреть всё в «✅ Проверка базы» → ¦ Переглянути все в «✅ Перевірка бази» →
+Moyennes de la famille ¦ Средние по семье ¦ Середні по родині
+Âge au mariage des hommes ¦ Возраст вступления в брак у мужчин ¦ Вік шлюбу в чоловіків
+des femmes ¦ у женщин ¦ у жінок
+Écart entre naissances ¦ Промежуток между рождениями ¦ Проміжок між народженнями
+Pas assez de dates ¦ Недостаточно дат ¦ Недостатньо дат
+: ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant. ¦ : ни супруга, ни ребёнка, ни события, ни заметки, ни медиафайла, ни источника (часто остаются от старой программы или импорта). Прямо перед этим делается страховочная копия базы. ¦ : ні подружжя, ні дитини, ні події, ні нотатки, ні медіафайлу, ні джерела (часто лишаються від старої програми чи імпорту). Просто перед цим робиться страхувальна копія бази.
+Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant. ¦ В них нет никакой информации. Прямо перед этим делается страховочная копия базы. ¦ У них немає жодної інформації. Просто перед цим робиться страхувальна копія бази.
+Familles vides ¦ Пустые семьи ¦ Порожні родини
+Supprimer la famille vide ¦ Удалить пустую семью ¦ Видалити порожню родину
+Supprimer la famille vide ? ¦ Удалить пустую семью? ¦ Видалити порожню родину?
+Supprimer les familles vides ¦ Удалить пустые семьи ¦ Видалити порожні родини
+À la fermeture ¦ При закрытии ¦ Під час закриття
+À la main ¦ Вручную ¦ Вручну
+Avant une restauration ou une fusion ¦ Перед восстановлением или объединением ¦ Перед відновленням або об’єднанням
+Automatique ¦ Автоматически ¦ Автоматично
+Avant une mise à jour ¦ Перед обновлением ¦ Перед оновленням
+Jamais tout seul (seulement à la main) ¦ Никогда автоматически (только вручную) ¦ Ніколи автоматично (лише вручну)
+Chaque jour ¦ Каждый день ¦ Щодня
+Chaque semaine ¦ Каждую неделю ¦ Щотижня
+Vérifiée ¦ Проверена ¦ Перевірена
+Échec ¦ Сбой ¦ Збій
+Dossier absent ¦ Папки нет ¦ Теки немає
+La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous. ¦ Автоматическое резервное копирование выключено: выбери «Каждый день» ниже. ¦ Автоматичне резервне копіювання вимкнено: вибери «Щодня» нижче.
+Prochaine : à la fermeture de l’app (si quelque chose a changé). ¦ Следующая: при закрытии приложения (если что-то изменилось). ¦ Наступна: під час закриття застосунку (якщо щось змінилося).
+Aucune copie dans ce dossier pour l’instant. ¦ В этой папке пока нет копий. ¦ У цій теці поки немає копій.
+Abîmée ¦ Повреждена ¦ Пошкоджена
+⚠️ Dossier introuvable pour l’instant (clé débranchée ?). ¦ ⚠️ Папка пока не найдена (флешка отключена?). ¦ ⚠️ Теку поки не знайдено (флешку від’єднано?).
+Dossier trouvé ¦ Папка найдена ¦ Теку знайдено
+Dossier synchronisé en ligne ¦ Папка синхронизируется онлайн ¦ Тека синхронізується онлайн
+Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre. ¦ Каждая в своей подпапке, чтобы они не стирали друг друга. ¦ Кожна у своїй підтеці, щоб вони не стирали одна одну.
+Avec les médias ¦ С медиафайлами ¦ З медіафайлами
+Toutes mes généalogies ¦ Все мои генеалогии ¦ Усі мої генеалогії
+État indisponible. ¦ Состояние недоступно. ¦ Стан недоступний.
+Dossier introuvable (clé débranchée ?). Rien n’est bloqué. ¦ Папка не найдена (флешка отключена?). Ничего не заблокировано. ¦ Теку не знайдено (флешку від’єднано?). Нічого не заблоковано.
+Éteinte : rien ne se fait tout seul. ¦ Выключено: ничего не делается автоматически. ¦ Вимкнено: нічого не робиться автоматично.
+⚙️ Régler ¦ ⚙️ Настроить ¦ ⚙️ Налаштувати
+Lieu (texte) ¦ Место (текст) ¦ Місце (текст)
+Sorte d’événement ¦ Вид события ¦ Вид події
+Posée sur ¦ Помещена на ¦ Розміщена на
+l’autre ordinateur ¦ другой компьютер ¦ інший комп’ютер
+À choisir ¦ Нужно выбрать ¦ Треба вибрати
+Sur cet ordinateur ¦ На этом компьютере ¦ На цьому комп’ютері
+Garder la mienne ¦ Оставить мою ¦ Залишити мою
+Prendre l’autre ¦ Взять другую ¦ Узяти іншу
+Garder les deux ¦ Оставить обе ¦ Залишити обидві
+Dossier branché ¦ Папка подключена ¦ Теку підключено
+💻 L’autre : ¦ 💻 Другой: ¦ 💻 Інший:
+L’autre ordinateur n’est pas encore passé par ce dossier. ¦ Другой компьютер ещё не обращался к этой папке. ¦ Інший комп’ютер ще не звертався до цієї теки.
+Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Папка пока не найдена (флешка отключена?). Ничего не потеряно: твои изменения уйдут в следующий раз. ¦ Теку поки не знайдено (флешку від’єднано?). Нічого не втрачено: твої зміни підуть наступного разу.
+Paquets mis de côté ¦ Отложенные пакеты ¦ Відкладені пакети
+Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement. ¦ Ты отменил(а) их объединение: они больше не забираются автоматически. «Пересмотреть» — чтобы выбрать изменение за изменением. ¦ Ти скасував(ла) їхнє об’єднання: вони більше не забираються автоматично. «Переглянути» — щоб вибрати зміну за зміною.
+Revoir ¦ Пересмотреть ¦ Переглянути
+Dernières fusions ¦ Последние объединения ¦ Останні об’єднання

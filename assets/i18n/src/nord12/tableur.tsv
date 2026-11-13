@@ -1,0 +1,1013 @@
+fr ¦ ru ¦ uk
+TABLEUR · BASE ¦ ЭЛЕКТРОННАЯ ТАБЛИЦА · БАЗА ¦ ЕЛЕКТРОННА ТАБЛИЦЯ · БАЗА
+⤒ Remplir depuis l’app ¦ ⤒ Заполнить из приложения ¦ ⤒ Заповнити із застосунку
+1 · Ce qu’on prend ¦ 1 · Что берём ¦ 1 · Що беремо
+(comme l’export pour partager) ¦ (как экспорт для обмена) ¦ (як експорт для поширення)
+2 · Les colonnes ¦ 2 · Столбцы ¦ 2 · Стовпці
+(glisse ⠿ pour ranger) ¦ (перетащи ⠿, чтобы упорядочить) ¦ (перетягни ⠿, щоб упорядкувати)
+＋ Une colonne tirée des données ¦ ＋ Столбец из данных ¦ ＋ Стовпець із даних
+3 · Aperçu ¦ 3 · Предпросмотр ¦ 3 · Попередній перегляд
+🔗 Tenir à jour ¦ 🔗 Поддерживать в актуальном состоянии ¦ 🔗 Підтримувати актуальним
+— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne. ¦ — строки меняются, когда меняется база (при открытии или через ↻). Твои столбцы, добавленные справа (формулы, заметки), остаются на нужной строке. ¦ — рядки змінюються, коли змінюється база (під час відкриття або через ↻). Твої стовпці, додані праворуч (формули, нотатки), лишаються на потрібному рядку.
+Où : ¦ Куда: ¦ Куди:
+à la même place (remplace la plage liée) ¦ на то же место (заменяет связанный диапазон) ¦ на те саме місце (замінює пов’язаний діапазон)
+à partir de A1 dans une nouvelle feuille ¦ начиная с A1 на новом листе ¦ починаючи з A1 на новому аркуші
+à partir de {cell} dans cette feuille ¦ начиная с {cell} на этом листе ¦ починаючи з {cell} на цьому аркуші
+⤒ Remplir ¦ ⤒ Заполнить ¦ ⤒ Заповнити
+Commune ¦ Коммуна ¦ Комуна
+Pas encore de dépouillement : Listes → 📜 Dépouillements. ¦ Выписок пока нет: Списки → 📜 Выписки. ¦ Виписок поки немає: Списки → 📜 Виписки.
+Statistique ¦ Статистика ¦ Статистика
+Hommes et femmes à part ¦ Мужчины и женщины отдельно ¦ Чоловіки й жінки окремо
+Pas encore de liste à toi : Listes → Mes listes. ¦ Своих списков пока нет: Списки → Мои списки. ¦ Власних списків поки немає: Списки → Мої списки.
+Hommes ¦ Мужчины ¦ Чоловіки
+Femmes ¦ Женщины ¦ Жінки
+Inconnu ¦ Неизвестно ¦ Невідомо
+Lignée ¦ Линия ¦ Лінія
+Né(e) à ¦ Место рождения ¦ Місце народження
+Nés à partir de ¦ Родившиеся начиная с ¦ Народжені починаючи з
+Nés jusqu’à ¦ Родившиеся до (включительно) ¦ Народжені до (включно)
+Nés avant ¦ Родившиеся до ¦ Народжені до
+Sorte ¦ Вид ¦ Вид
+Chercher… (nom, prénom) ¦ Искать… (фамилия, имя) ¦ Шукати… (прізвище, ім’я)
+Chercher… (nom, sorte, lieu) ¦ Искать… (название, вид, место) ¦ Шукати… (назва, вид, місце)
+👤 personne ¦ 👤 человек ¦ 👤 людина
+📍 lieu ¦ 📍 место ¦ 📍 місце
+📅 date d’acte ¦ 📅 дата записи акта ¦ 📅 дата актового запису
+nombre ¦ число ¦ число
+Monter ¦ Вверх ¦ Вгору
+Descendre ¦ Вниз ¦ Вниз
+Retirer la colonne ¦ Убрать столбец ¦ Прибрати стовпець
+Aucune colonne : ajoute-en une. ¦ Нет столбцов: добавь хотя бы один. ¦ Немає стовпців: додай хоча б один.
+Lecture de la base… ¦ Чтение базы… ¦ Читання бази…
+Lecture… ¦ Чтение… ¦ Читання…
+({shown} premières lignes sur {n}) ¦ (первые строки: {shown} из {n}) ¦ (перші рядки: {shown} із {n})
+Rien ne correspond : change les filtres. ¦ Ничего не подходит: измени фильтры. ¦ Нічого не підходить: зміни фільтри.
+{n} de côté (personnes vivantes ou fiches confidentielles). ¦ Отложено: {n} (живые люди или конфиденциальные карточки). ¦ Відкладено: {n} (живі люди або конфіденційні картки).
+Seules les {n} premières lignes sont prises : précise les filtres. ¦ Берутся только первые строки ({n}): уточни фильтры. ¦ Беруться лише перші рядки ({n}): уточни фільтри.
+⤒ Remplir {n} ¦ ⤒ Заполнить ({n}) ¦ ⤒ Заповнити ({n})
+Toutes les colonnes sont déjà là. ¦ Все столбцы уже на месте. ¦ Усі стовпці вже на місці.
+Une colonne tirée des données ¦ Столбец из данных ¦ Стовпець із даних
+Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ». ¦ Этот лист не связан с базой: Данные → «⤒ Заполнить из приложения…». ¦ Цей аркуш не пов’язаний із базою: Дані → «⤒ Заповнити із застосунку…».
+Impossible de relire la base : {error} ¦ Не удалось перечитать базу: {error} ¦ Не вдалося перечитати базу: {error}
+🔗 Déjà à jour : rien n’a changé dans la base. ¦ 🔗 Уже актуально: в базе ничего не изменилось. ¦ 🔗 Уже актуально: у базі нічого не змінилося.
+{n} de plus ¦ на {n} больше ¦ на {n} більше
+{n} de moins ¦ на {n} меньше ¦ на {n} менше
+valeurs mises à jour ¦ значения обновлены ¦ значення оновлено
+🔗 « {name} » relue : {what} ({lost}) ¦ 🔗 «{name}» перечитана: {what} ({lost}) ¦ 🔗 «{name}» перечитано: {what} ({lost})
+🔗 « {name} » relue : {what} ¦ 🔗 «{name}» перечитана: {what} ¦ 🔗 «{name}» перечитано: {what}
+<b>Relevé de recensement</b> · les colonnes de l’année : ¦ <b>Выписка из переписи</b> · столбцы года: ¦ <b>Виписка з перепису</b> · стовпці року:
+Année du recensement ¦ Год переписи ¦ Рік перепису
+📤 Envoyer vers la base… ¦ 📤 Отправить в базу… ¦ 📤 Надіслати в базу…
+🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when} ¦ 🔗 Поддерживается актуальной: <b>{what}</b> · {n} · перечитана {when} ¦ 🔗 Підтримується актуальною: <b>{what}</b> · {n} · перечитано {when}
+la base ¦ база ¦ база
+Relire depuis la base ¦ Перечитать из базы ¦ Перечитати з бази
+↻ Relire ¦ ↻ Перечитать ¦ ↻ Перечитати
+Changer la source ou les colonnes… ¦ Изменить источник или столбцы… ¦ Змінити джерело або стовпці…
+Envoyer vers la base… ¦ Отправить в базу… ¦ Надіслати в базу…
+Ne plus tenir à jour (garder les valeurs) ¦ Больше не обновлять (сохранить значения) ¦ Більше не оновлювати (зберегти значення)
+« {name} » n’est plus tenue à jour ¦ «{name}» больше не обновляется ¦ «{name}» більше не оновлюється
+Relevé : colonnes de {year} ¦ Выписка: столбцы {year} года ¦ Виписка: стовпці {year} року
+Mode consultation : rien ne peut être envoyé vers la base. ¦ Режим просмотра: ничего нельзя отправить в базу. ¦ Режим перегляду: нічого не можна надіслати в базу.
+Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence. ¦ Выбери таблицу для отправки (её строку заголовков и строки), затем начни снова. ¦ Вибери таблицю для надсилання (її рядок заголовків і рядки), потім почни знову.
+📤 Envoyer vers la base — {name}, lignes {from} à {to} ¦ 📤 Отправить в базу — {name}, строки с {from} по {to} ¦ 📤 Надіслати в базу — {name}, рядки з {from} по {to}
+1. Les colonnes ¦ 1. Столбцы ¦ 1. Стовпці
+2. Voilà ce qui va entrer ¦ 2. Вот что войдёт ¦ 2. Ось що ввійде
+3. Envoyer ¦ 3. Отправить ¦ 3. Надіслати
+Voir ce qui va entrer ¦ Посмотреть, что войдёт ¦ Переглянути, що ввійде
+Ce que ça crée : ¦ Что это создаст: ¦ Що це створить:
+Colonne ¦ Столбец ¦ Стовпець
+Exemple ¦ Пример ¦ Приклад
+Va dans ¦ Куда идёт ¦ Куди йде
+(sans titre) ¦ (без названия) ¦ (без назви)
+Champ pour la colonne {col} ¦ Поле для столбца {col} ¦ Поле для стовпця {col}
+Colonnes : {list} ¦ Столбцы: {list} ¦ Стовпці: {list}
+aucune pour l’instant ¦ пока нет ¦ поки немає
+Déjà dans la base ¦ Уже в базе ¦ Уже в базі
+Problème ¦ Проблема ¦ Проблема
+Laissée de côté ¦ Отложена ¦ Відкладено
+📤 Créer {n} ¦ 📤 Создать ({n}) ¦ 📤 Створити ({n})
+📤 Rien de nouveau ¦ 📤 Ничего нового ¦ 📤 Нічого нового
+📤 Créer {n} et en relier {m} ¦ 📤 Создать ({n}) и связать ({m}) ¦ 📤 Створити ({n}) і пов’язати ({m})
+📤 Relier {m} ¦ 📤 Связать ({m}) ¦ 📤 Пов’язати ({m})
+📤 Envoyer ¦ 📤 Отправить ¦ 📤 Надіслати
+Choisis au moins une colonne à envoyer (le nom, par exemple). ¦ Выбери хотя бы один столбец для отправки (например, фамилию). ¦ Вибери хоча б один стовпець для надсилання (наприклад, прізвище).
+Choisis au moins une colonne. ¦ Выбери хотя бы один столбец. ¦ Вибери хоча б один стовпець.
+Donne l’année du recensement. ¦ Укажи год переписи. ¦ Вкажи рік перепису.
+Il faut une colonne pour le nom (ou « Nom et prénom »). ¦ Нужен столбец для фамилии (или «Фамилия и имя»). ¦ Потрібен стовпець для прізвища (або «Прізвище та ім’я»).
+Il faut une colonne pour le nom. ¦ Нужен столбец для фамилии. ¦ Потрібен стовпець для прізвища.
+Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…). ¦ Выбери столбец, в котором указан вид события (Крещение, Смерть…). ¦ Вибери стовпець, у якому вказано вид події (Хрещення, Смерть…).
+Il manque la sorte d’événement. ¦ Не указан вид события. ¦ Не вказано вид події.
+Ces lignes sont vides. ¦ Эти строки пусты. ¦ Ці рядки порожні.
+Je compare avec ta base… ¦ Сравниваю с твоей базой… ¦ Порівнюю з твоєю базою…
+Comparaison… ¦ Сравнение… ¦ Порівняння…
+Choisir la fiche de la ligne {row} ¦ Выбрать карточку для строки {row} ¦ Вибрати картку для рядка {row}
+choisis ▾ ¦ выбери ▾ ¦ вибери ▾
+Relier à {name} ({meta}) ¦ Связать с {name} ({meta}) ¦ Пов’язати з {name} ({meta})
+Laisser de côté ¦ Отложить ¦ Відкласти
+Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté). ¦ Некоторые строки похожи на несколько карточек: выбери нужную (иначе они будут отложены). ¦ Деякі рядки схожі на кілька карток: вибери потрібну (інакше їх буде відкладено).
+Ligne ¦ Строка ¦ Рядок
+Ce qui va se passer ¦ Что произойдёт ¦ Що станеться
+Impossible d’envoyer : {error} ¦ Не удалось отправить: {error} ¦ Не вдалося надіслати: {error}
+contient « {text} » : compté comme {n} ¦ содержит «{text}»: засчитано как {n} ¦ містить «{text}»: зараховано як {n}
+contient l’erreur « {text} » : laissée vide ¦ содержит ошибку «{text}»: оставлено пустым ¦ містить помилку «{text}»: залишено порожнім
+« {text} » n’est pas un nombre : laissé vide ¦ «{text}» — не число: оставлено пустым ¦ «{text}» — не число: залишено порожнім
+à trouver ¦ найти ¦ знайти
+L’éditeur de diagrammes n’est pas chargé. ¦ Редактор диаграмм не загружен. ¦ Редактор діаграм не завантажено.
+L’éditeur de graphiques n’est pas chargé. ¦ Редактор графиков не загружен. ¦ Редактор графіків не завантажено.
+Graphique « {name} » ajouté à Mes graphiques (Graphiques, tableau de bord…). ¦ График «{name}» добавлен в «Мои графики» (Графики, панель управления…). ¦ Графік «{name}» додано до «Мої графіки» (Графіки, панель керування…).
+Le navigateur refuse de copier ici : sélectionne la plage et fais {key}. ¦ Браузер не даёт копировать здесь: выдели диапазон и нажми {key}. ¦ Браузер не дозволяє копіювати тут: виділи діапазон і натисни {key}.
+Copié : dans un tableau (Enquêtes → 🧩 Tableaux), colle-le ({key}) : il devient un objet ▦ Tableur, formules comprises. ¦ Скопировано: в таблице (Расследования → 🧩 Таблицы) вставь это ({key}): получится объект ▦ Электронная таблица вместе с формулами. ¦ Скопійовано: у таблиці (Розслідування → 🧩 Таблиці) встав це ({key}): вийде об’єкт ▦ Електронна таблиця разом із формулами.
+Copié : dans la page d’un recueil, clique une case du tableau et colle ({key}). ¦ Скопировано: на странице сборника щёлкни ячейку таблицы и вставь ({key}). ¦ Скопійовано: на сторінці збірника клацни клітинку таблиці й встав ({key}).
+La présentation n’est pas chargée. ¦ Презентация не загружена. ¦ Презентацію не завантажено.
+… et {n} ¦ … и ещё {n} ¦ … і ще {n}
+Colonnes attendues : {list} ¦ Ожидаемые столбцы: {list} ¦ Очікувані стовпці: {list}
+(une ou plusieurs) ¦ (один или несколько) ¦ (один або кілька)
+(facultatif) ¦ (необязательно) ¦ (необов’язково)
+Les données de « {name} » ¦ Данные «{name}» ¦ Дані «{name}»
+l’outil ¦ инструмент ¦ інструмент
+{name} (données) ¦ {name} (данные) ¦ {name} (дані)
+Renvoyer les données là d’où elles viennent ¦ Вернуть данные туда, откуда они пришли ¦ Повернути дані туди, звідки вони прийшли
+Formules, tri, coller depuis Excel… « Fichier → Enregistrer une copie… » garde aussi ce classeur dans le Tableur. ¦ Формулы, сортировка, вставка из Excel… «Файл → Сохранить копию…» также сохраняет эту книгу в Электронной таблице. ¦ Формули, сортування, вставлення з Excel… «Файл → Зберегти копію…» також зберігає цю книгу в Електронній таблиці.
+Rien à ouvrir : la liste est vide. ¦ Нечего открывать: список пуст. ¦ Нічого відкривати: список порожній.
+🧾 Tableur ¦ 🧾 Электронная таблица ¦ 🧾 Електронна таблиця
+ouvrir dans le tableur ¦ открыть в электронной таблице ¦ відкрити в електронній таблиці
+🧾 Ouvrir dans le tableur ¦ 🧾 Открыть в электронной таблице ¦ 🧾 Відкрити в електронній таблиці
+La feuille est vide : écris ou colle un tableau, puis choisis-le. ¦ Лист пуст: напиши или вставь таблицу, затем выбери её. ¦ Аркуш порожній: напиши або встав таблицю, потім вибери її.
+TABLEUR · PRÉPARER POUR… ¦ ЭЛЕКТРОННАЯ ТАБЛИЦА · ПОДГОТОВИТЬ ДЛЯ… ¦ ЕЛЕКТРОННА ТАБЛИЦЯ · ПІДГОТУВАТИ ДЛЯ…
+🎯 Préparer pour… ({range}) ¦ 🎯 Подготовить для… ({range}) ¦ 🎯 Підготувати для… ({range})
+Le tableur sait ce que chaque endroit de l’app attend : choisis où vont ces données. Il vérifie les colonnes de la plage <b>{range}</b> et les range comme il faut. ¦ Электронная таблица знает, чего ждёт каждое место приложения: выбери, куда пойдут эти данные. Она проверит столбцы диапазона <b>{range}</b> и расставит их как нужно. ¦ Електронна таблиця знає, чого чекає кожне місце застосунку: вибери, куди підуть ці дані. Вона перевірить стовпці діапазону <b>{range}</b> і впорядкує їх як треба.
+Dessin ¦ Рисунок ¦ Малюнок
+▦ Un tableau ¦ ▦ Таблица ¦ ▦ Таблиця
+Il faut une colonne de chiffres ¦ Нужен столбец с числами ¦ Потрібен стовпець із числами
+📊 Un graphique ¦ 📊 График ¦ 📊 Графік
+Dans la plage ¦ В диапазоне ¦ У діапазоні
+, une ou plusieurs ¦ , один или несколько ¦ , один або кілька
+, facultatif ¦ , необязательно ¦ , необов’язково
+Voir la cellule ¦ Показать ячейку ¦ Показати клітинку
+… et {n} à vérifier. ¦ … и ещё {n} для проверки. ¦ … і ще {n} для перевірки.
+Il manque une colonne : ajoute-la dans la plage, ou choisis une autre plage. ¦ Не хватает столбца: добавь его в диапазон или выбери другой диапазон. ¦ Бракує стовпця: додай його в діапазон або вибери інший діапазон.
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) ¦ Сохранить связь: диаграмма следует за таблицей (обновляется, когда меняется диапазон) ¦ Зберегти зв’язок: діаграма стежить за таблицею (оновлюється, коли змінюється діапазон)
+Garder le lien : le diagramme suit le tableur (mis à jour quand la plage change) — le classeur sera enregistré dans le Tableur ¦ Сохранить связь: диаграмма следует за таблицей (обновляется, когда меняется диапазон) — книга будет сохранена в Электронной таблице ¦ Зберегти зв’язок: діаграма стежить за таблицею (оновлюється, коли змінюється діапазон) — книгу буде збережено в Електронній таблиці
+← Autre endroit ¦ ← Другое место ¦ ← Інше місце
+La première ligne donne les titres ¦ Первая строка — заголовки ¦ Перший рядок — заголовки
+Pas d’aperçu. ¦ Нет предпросмотра. ¦ Немає попереднього перегляду.
+🎤 Créer la présentation ¦ 🎤 Создать презентацию ¦ 🎤 Створити презентацію
+Corrige la cellule, puis rouvre « 🎯 Préparer pour… ». ¦ Исправь ячейку, затем снова открой «🎯 Подготовить для…». ¦ Виправ клітинку, потім знову відкрий «🎯 Підготувати для…».
+Ces données reviennent dans leur outil : le diagramme est fait d’une copie (pas de lien). ¦ Эти данные возвращаются в свой инструмент: диаграмма сделана из копии (без связи). ¦ Ці дані повертаються до свого інструмента: діаграму зроблено з копії (без зв’язку).
+Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes). ¦ Выбери диапазон с числами (например: Десятилетие, Мужчины, Женщины). ¦ Вибери діапазон із числами (наприклад: Десятиліття, Чоловіки, Жінки).
+Tous les types de diagrammes… ¦ Все типы диаграмм… ¦ Усі типи діаграм…
+Conseillés pour {range} ¦ Рекомендуемые для {range} ¦ Рекомендовані для {range}
+🔗 Données : « {name} » ! {range} ¦ 🔗 Данные: «{name}» ! {range} ¦ 🔗 Дані: «{name}» ! {range}
+Classeur ¦ Книга ¦ Книга
+(feuille « {name} ») ¦ (лист «{name}») ¦ (аркуш «{name}»)
+tenu à jour ¦ обновляется ¦ оновлюється
+Les figer ¦ Зафиксировать их ¦ Зафіксувати їх
+⚠️ Classeur introuvable (supprimé ?) : le dessin garde les derniers chiffres lus. ¦ ⚠️ Книга не найдена (удалена?): рисунок сохраняет последние прочитанные числа. ¦ ⚠️ Книгу не знайдено (видалено?): малюнок зберігає останні прочитані числа.
+TABLEUR ¦ ЭЛЕКТРОННАЯ ТАБЛИЦА ¦ ЕЛЕКТРОННА ТАБЛИЦЯ
+Nom du classeur… ¦ Название книги… ¦ Назва книги…
+Plage illisible : écris par exemple A1:C12. ¦ Диапазон не читается: напиши, например, A1:C12. ¦ Діапазон не читається: напиши, наприклад, A1:C12.
+Feuille ¦ Лист ¦ Аркуш
+Plage ¦ Диапазон ¦ Діапазон
+Copier une fois (les chiffres ne bougent plus) ¦ Скопировать один раз (числа больше не меняются) ¦ Скопіювати один раз (числа більше не змінюються)
+Garder le lien : le diagramme suit le classeur (tenu à jour) ¦ Сохранить связь: диаграмма следует за книгой (обновляется) ¦ Зберегти зв’язок: діаграма стежить за книгою (оновлюється)
+Lecture du classeur… ¦ Чтение книги… ¦ Читання книги…
+Choisis un classeur. ¦ Выбери книгу. ¦ Вибери книгу.
+Écris une plage, par exemple A1:C12. ¦ Напиши диапазон, например A1:C12. ¦ Напиши діапазон, наприклад A1:C12.
+Écris le résultat voulu dans la première case de la colonne (par exemple « Jean D. »), puis relance ✨ Remplissage instantané. ¦ Напиши нужный результат в первую ячейку столбца (например, «Jean D.»), затем снова запусти ✨ Мгновенное заполнение. ¦ Напиши потрібний результат у першу клітинку стовпця (наприклад, «Jean D.»), потім знову запусти ✨ Миттєве заповнення.
+Je ne trouve pas de règle qui marche pour tous les exemples : écris-en un de plus, ou un plus simple. ¦ Не могу найти правило, которое подходит ко всем примерам: напиши ещё один или попроще. ¦ Не можу знайти правило, яке підходить до всіх прикладів: напиши ще один або простіший.
+Rien à remplir : la colonne est déjà pleine. ¦ Нечего заполнять: столбец уже заполнен. ¦ Нічого заповнювати: стовпець уже заповнений.
+{what} de {col} ¦ {what} из {col} ¦ {what} з {col}
+{what} n°{n} de {col} ¦ {what} №{n} из {col} ¦ {what} №{n} з {col}
+{what} n°{n} depuis la fin de {col} ¦ {what} №{n} с конца {col} ¦ {what} №{n} з кінця {col}
+✨ {n} (règle : {rule}). ↶ pour annuler. ¦ ✨ {n} (правило: {rule}). ↶ — отменить. ¦ ✨ {n} (правило: {rule}). ↶ — відмінити.
+Choisis un tableau avec une ligne de titres et des lignes de données. ¦ Выбери таблицу со строкой заголовков и строками данных. ¦ Вибери таблицю з рядком заголовків і рядками даних.
+Colonne {col} ¦ Столбец {col} ¦ Стовпець {col}
+DONNÉES ¦ ДАННЫЕ ¦ ДАНІ
+Σ Sous-totaux ¦ Σ Промежуточные итоги ¦ Σ Проміжні підсумки
+Créer les sous-totaux ¦ Создать промежуточные итоги ¦ Створити проміжні підсумки
+D’après <b>{range}</b>. Une nouvelle feuille : les lignes rangées par groupe, un total sous chaque groupe (formules), puis le total général. « ⊟ Plan » (menu Données) replie le détail. ¦ По <b>{range}</b>. Новый лист: строки, сгруппированные по группам, итог под каждой группой (формулы), затем общий итог. «⊟ Структура» (меню Данные) сворачивает подробности. ¦ За <b>{range}</b>. Новий аркуш: рядки, згруповані за групами, підсумок під кожною групою (формули), потім загальний підсумок. «⊟ Структура» (меню Дані) згортає подробиці.
+À chaque changement de ¦ При каждом изменении ¦ За кожної зміни
+Calcul ¦ Вычисление ¦ Обчислення
+Sur les colonnes ¦ По столбцам ¦ За стовпцями
+Coche au moins une colonne à calculer. ¦ Отметь хотя бы один столбец для вычисления. ¦ Познач хоча б один стовпець для обчислення.
+Σ {n}. « ⊟ Plan » (menu Données) replie le détail. ¦ Σ {n}. «⊟ Структура» (меню Данные) сворачивает подробности. ¦ Σ {n}. «⊟ Структура» (меню Дані) згортає подробиці.
+Cette feuille n’a pas de sous-totaux : Données → Σ Sous-totaux… d’abord. ¦ На этом листе нет промежуточных итогов: сначала Данные → Σ Промежуточные итоги… ¦ На цьому аркуші немає проміжних підсумків: спершу Дані → Σ Проміжні підсумки…
+⊟ Détail replié : seuls les totaux restent. ¦ ⊟ Подробности свёрнуты: остались только итоги. ¦ ⊟ Подробиці згорнуто: лишилися тільки підсумки.
+⊞ Détail déplié. ¦ ⊞ Подробности развёрнуты. ¦ ⊞ Подробиці розгорнуто.
+🎯 Valeur cible ¦ 🎯 Подбор параметра ¦ 🎯 Добір параметра
+L’app essaie des valeurs dans « la case à changer » jusqu’à ce que la formule donne le résultat voulu. Ex. : à quel âge s’est-il marié pour que la différence d’âge soit 7 ans ? ¦ Приложение пробует значения в «изменяемой ячейке», пока формула не даст нужный результат. Пример: в каком возрасте он женился, чтобы разница в возрасте была 7 лет? ¦ Застосунок пробує значення в «клітинці, яку змінюють», доки формула не дасть потрібного результату. Приклад: у якому віці він одружився, щоб різниця у віці становила 7 років?
+La formule de la case ¦ Формула ячейки ¦ Формула клітинки
+Doit donner ¦ Должна дать ¦ Має дати
+En changeant la case ¦ Изменяя ячейку ¦ Змінюючи клітинку
+Écris une adresse de case (ex. C5, B2). ¦ Напиши адрес ячейки (напр. C5, B2). ¦ Напиши адресу клітинки (напр. C5, B2).
+Écris le résultat voulu. ¦ Напиши нужный результат. ¦ Напиши потрібний результат.
+La première case doit contenir une formule. ¦ Первая ячейка должна содержать формулу. ¦ Перша клітинка має містити формулу.
+Pas de valeur trouvée : la formule ne dépend peut-être pas de cette case, ou ne peut pas atteindre ce résultat. ¦ Значение не найдено: возможно, формула не зависит от этой ячейки или не может дать такой результат. ¦ Значення не знайдено: можливо, формула не залежить від цієї клітинки або не може дати такого результату.
+🎯 {cell} = {value} : la formule donne {target}. ↶ pour annuler. ¦ 🎯 {cell} = {value}: формула даёт {target}. ↶ — отменить. ¦ 🎯 {cell} = {value}: формула дає {target}. ↶ — відмінити.
+INSERTION ¦ ВСТАВКА ¦ ВСТАВЛЕННЯ
+📈 Mini-graphique ¦ 📈 Мини-график ¦ 📈 Мінідіаграма
+Poser ¦ Поставить ¦ Поставити
+Un petit graphique dans la case, qui suit les chiffres. Plusieurs lignes choisies : un graphique par ligne (la plage descend avec elles). ¦ Маленький график в ячейке, который следует за числами. Выбрано несколько строк — по графику на строку (диапазон сдвигается вместе с ними). ¦ Маленький графік у клітинці, що стежить за числами. Вибрано кілька рядків — по графіку на рядок (діапазон зсувається разом із ними).
+Les nombres (plage de la 1re ligne) ¦ Числа (диапазон 1-й строки) ¦ Числа (діапазон 1-го рядка)
+Gagné / perdu ¦ Выигрыш / проигрыш ¦ Виграш / програш
+Couleur ¦ Цвет ¦ Колір
+Écris une plage, par exemple B2:F2. ¦ Напиши диапазон, например B2:F2. ¦ Напиши діапазон, наприклад B2:F2.
+🧮 Solveur ¦ 🧮 Поиск решения ¦ 🧮 Пошук розв’язку
+Résoudre ¦ Решить ¦ Розв’язати
+Comme la valeur cible, mais en changeant plusieurs cases à la fois, avec des conditions. Ex. : répartir un héritage entre trois branches pour que chacune ait au moins 1 000 € et que l’écart soit le plus petit possible. ¦ Как подбор параметра, но меняет сразу несколько ячеек, с условиями. Пример: разделить наследство между тремя ветвями так, чтобы каждой досталось не меньше 1 000 €, а разница была как можно меньше. ¦ Як добір параметра, але змінює одразу кілька клітинок, з умовами. Приклад: поділити спадщину між трьома гілками так, щоб кожна отримала щонайменше 1 000 €, а різниця була якомога меншою.
+La formule (case objectif) ¦ Формула (целевая ячейка) ¦ Формула (цільова клітинка)
+Doit être ¦ Должна быть ¦ Має бути
+la plus grande possible ¦ как можно больше ¦ якомога більшою
+la plus petite possible ¦ как можно меньше ¦ якомога меншою
+égale à… ¦ равна… ¦ дорівнювати…
+Valeur (si « égale à ») ¦ Значение (если «равна») ¦ Значення (якщо «дорівнювати»)
+En changeant les cases ¦ Изменяя ячейки ¦ Змінюючи клітинки
+B2:B4 ou B2;C3 ¦ B2:B4 или B2;C3 ¦ B2:B4 або B2;C3
+Conditions (une par ligne : {examples}) ¦ Условия (по одному на строку: {examples}) ¦ Умови (по одній на рядок: {examples})
+Nombres entiers seulement ¦ Только целые числа ¦ Лише цілі числа
+La case objectif doit contenir une formule (ex. D5). ¦ Целевая ячейка должна содержать формулу (напр. D5). ¦ Цільова клітинка має містити формулу (напр. D5).
+Trente cases à changer au plus. ¦ Не больше тридцати изменяемых ячеек. ¦ Не більше тридцяти клітинок, які змінюють.
+Écris les cases à changer (ex. B2:B4). ¦ Напиши ячейки, которые нужно менять (напр. B2:B4). ¦ Напиши клітинки, які треба змінювати (напр. B2:B4).
+Condition illisible : « {text} » (ex. B2 >= 0). ¦ Условие не читается: «{text}» (напр. B2 >= 0). ¦ Умова не читається: «{text}» (напр. B2 >= 0).
+Écris la valeur voulue. ¦ Напиши нужное значение. ¦ Напиши потрібне значення.
+Pas de solution qui respecte toutes les conditions (vérifie-les, ou change le départ). ¦ Нет решения, которое выполняет все условия (проверь их или измени начальные значения). ¦ Немає розв’язку, що виконує всі умови (перевір їх або зміни початкові значення).
+🧮 Trouvé : {cell} = {value} ({n}). ↶ pour annuler. ¦ 🧮 Найдено: {cell} = {value} ({n}). ↶ — отменить. ¦ 🧮 Знайдено: {cell} = {value} ({n}). ↶ — відмінити.
+📋 Tableau de scénarios ¦ 📋 Таблица сценариев ¦ 📋 Таблиця сценаріїв
+Et si cette case valait 20, 25, 30… ? Le tableau montre ce que donnent les formules pour chaque valeur. Il est posé à partir de la case choisie ({cell}) ; rien d’autre ne change. ¦ А если бы в этой ячейке было 20, 25, 30…? Таблица показывает, что дают формулы для каждого значения. Она ставится начиная с выбранной ячейки ({cell}); больше ничего не меняется. ¦ А якби в цій клітинці було 20, 25, 30…? Таблиця показує, що дають формули для кожного значення. Її ставлять починаючи з вибраної клітинки ({cell}); більше нічого не змінюється.
+La case qui change ¦ Изменяемая ячейка ¦ Клітинка, що змінюється
+Ses valeurs (séparées par « ; », ou une plage) ¦ Её значения (через «;» или диапазон) ¦ Її значення (через «;» або діапазон)
+20;25;30 ou A10:A15 ¦ 20;25;30 или A10:A15 ¦ 20;25;30 або A10:A15
+Les formules à suivre ¦ Отслеживаемые формулы ¦ Формули, за якими стежимо
+Écris la case qui change (ex. B2). ¦ Напиши изменяемую ячейку (напр. B2). ¦ Напиши клітинку, що змінюється (напр. B2).
+Écris au moins une formule (ex. C5). ¦ Напиши хотя бы одну формулу (напр. C5). ¦ Напиши хоча б одну формулу (напр. C5).
+Écris des valeurs (500 au plus). ¦ Напиши значения (не более 500). ¦ Напиши значення (не більше 500).
+📋 {n} (valeurs fixes : refais-le si les données changent). ¦ 📋 {n} (значения постоянные: сделай заново, если данные изменятся). ¦ 📋 {n} (значення сталі: зроби заново, якщо дані зміняться).
+Rien n’a été enregistré. ¦ Ничего не записано. ¦ Нічого не записано.
+⏺ Nommer l’action ¦ ⏺ Назвать действие ¦ ⏺ Назвати дію
+Mon action ¦ Моё действие ¦ Моя дія
+Garder ¦ Сохранить ¦ Зберегти
+⏺ Action « {name} » gardée : Données → ▶ Actions enregistrées. ¦ ⏺ Действие «{name}» сохранено: Данные → ▶ Записанные действия. ¦ ⏺ Дію «{name}» збережено: Дані → ▶ Записані дії.
+⏺ Enregistrement : fais tes manipulations (menus, boutons, formats), puis Données → ⏹ Arrêter l’enregistrement. ¦ ⏺ Запись: выполни свои действия (меню, кнопки, форматы), затем Данные → ⏹ Остановить запись. ¦ ⏺ Запис: виконай свої дії (меню, кнопки, формати), потім Дані → ⏹ Зупинити запис.
+Aucune action enregistrée : Données → ⏺ Enregistrer une action. ¦ Нет записанных действий: Данные → ⏺ Записать действие. ¦ Немає записаних дій: Дані → ⏺ Записати дію.
+▶ Actions enregistrées ¦ ▶ Записанные действия ¦ ▶ Записані дії
+Elles se refont sur la sélection du moment. ¦ Они повторяются на текущем выделении. ¦ Вони повторюються на поточному виділенні.
+▶ Refaire ¦ ▶ Повторить ¦ ▶ Повторити
+▶ « {name} » refaite. ¦ ▶ «{name}» повторено. ¦ ▶ «{name}» повторено.
+Colonne {n} ¦ Столбец {n} ¦ Стовпець {n}
+{what} de « {col} » ¦ {what} из «{col}» ¦ {what} з «{col}»
+Lignes ¦ Строки ¦ Рядки
+Total ¦ Итого ¦ Разом
+{title} · par « {rows} » et « {cols} » — d’après {src} ¦ {title} · по «{rows}» и «{cols}» — по данным {src} ¦ {title} · за «{rows}» і «{cols}» — за даними {src}
+{title} · par « {rows} » — d’après {src} ¦ {title} · по «{rows}» — по данным {src} ¦ {title} · за «{rows}» — за даними {src}
+Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge). ¦ Выбери диапазон со строкой заголовков и строками данных (например: Фамилия, Коммуна, Год, Возраст). ¦ Вибери діапазон із рядком заголовків і рядками даних (наприклад: Прізвище, Комуна, Рік, Вік).
+🔀 Tableau croisé dynamique ¦ 🔀 Сводная таблица ¦ 🔀 Зведена таблиця
+Créer le tableau croisé ¦ Создать сводную таблицу ¦ Створити зведену таблицю
+D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent. ¦ По <b>{range}</b> ({n}). Результат попадает на новый лист; «↻ Обновить сводную таблицу» (меню Данные) пересоздаёт её, если данные изменятся. ¦ За <b>{range}</b> ({n}). Результат потрапляє на новий аркуш; «↻ Оновити зведену таблицю» (меню Дані) створює її заново, якщо дані зміняться.
+En lignes ¦ По строкам ¦ За рядками
+En colonnes (facultatif) ¦ По столбцам (необязательно) ¦ За стовпцями (необов’язково)
+— rien — ¦ — ничего — ¦ — нічого —
+Sur la colonne ¦ По столбцу ¦ За стовпцем
+— (compter les lignes) — ¦ — (считать строки) — ¦ — (рахувати рядки) —
+Totaux ¦ Итоги ¦ Підсумки
+Aperçu : {rows} × {cols} ¦ Предпросмотр: {rows} × {cols} ¦ Попередній перегляд: {rows} × {cols}
+Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire. ¦ Сводная таблица создана: {rows} × {cols}. Данные → «↻ Обновить сводную таблицу», чтобы пересоздать её. ¦ Зведену таблицю створено: {rows} × {cols}. Дані → «↻ Оновити зведену таблицю», щоб створити її заново.
+Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ». ¦ Этот лист — не сводная таблица: перейди на её лист «TCD …». ¦ Цей аркуш — не зведена таблиця: перейди на її аркуш «TCD …».
+La feuille des données n’existe plus. ¦ Листа с данными больше нет. ¦ Аркуша з даними більше немає.
+Tableau croisé actualisé ({rows} × {cols}). ¦ Сводная таблица обновлена ({rows} × {cols}). ¦ Зведену таблицю оновлено ({rows} × {cols}).
+Graphique vivant ¦ Живой график ¦ Живий графік
+Type de graphique ¦ Тип графика ¦ Тип графіка
+En faire un diagramme lié à la plage ¦ Сделать из него диаграмму, связанную с диапазоном ¦ Зробити з нього діаграму, пов’язану з діапазоном
+Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici. ¦ Выбери ячейки с числами (и их названия слева или сверху): график нарисуется здесь. ¦ Вибери клітинки з числами (і їхні назви ліворуч або зверху): графік намалюється тут.
+Plage {range} · suit la sélection ¦ Диапазон {range} · следует за выделением ¦ Діапазон {range} · стежить за виділенням
+Le moteur du tableur n’est pas chargé. ¦ Движок электронной таблицы не загружен. ¦ Рушій електронної таблиці не завантажено.
+Mon classeur ¦ Моя книга ¦ Моя книга
+Rien à rétablir. ¦ Нечего вернуть. ¦ Нічого повторювати.
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ после этого были другие изменения: используй ↶ ({key}) ¦ після цього були інші зміни: використай ↶ ({key})
+Barre d’outils · {group} ¦ Панель инструментов · {group} ¦ Панель інструментів · {group}
+Barre d’outils ¦ Панель инструментов ¦ Панель інструментів
+Police et gras ¦ Шрифт и жирный ¦ Шрифт і жирний
+Police (E5) ¦ Шрифт (E5) ¦ Шрифт (E5)
+Police ¦ Шрифт ¦ Шрифт
+Gras ¦ Жирный ¦ Жирний
+Italique ¦ Курсив ¦ Курсив
+Souligné ¦ Подчёркнутый ¦ Підкреслений
+Renvoi à la ligne ¦ Перенос по словам ¦ Перенесення за словами
+Fusionner / séparer ¦ Объединить / разделить ¦ Об’єднати / розділити
+Aligner à gauche ¦ Выровнять по левому краю ¦ Вирівняти ліворуч
+Centrer ¦ По центру ¦ По центру
+Aligner à droite ¦ Выровнять по правому краю ¦ Вирівняти праворуч
+Couleurs (C2) ¦ Цвета (C2) ¦ Кольори (C2)
+Couleur du texte ¦ Цвет текста ¦ Колір тексту
+Format de cellule ¦ Формат ячейки ¦ Формат клітинки
+Format de la cellule ¦ Формат этой ячейки ¦ Формат цієї клітинки
+Une décimale de moins ¦ На один знак после запятой меньше ¦ На один знак після коми менше
+Une décimale de plus ¦ На один знак после запятой больше ¦ На один знак після коми більше
+Bordures ¦ Границы ¦ Межі
+Bordures : tout ¦ Границы: все ¦ Межі: усі
+Bordures : contour ¦ Границы: внешние ¦ Межі: зовнішні
+Bordure du bas ¦ Нижняя граница ¦ Нижня межа
+Sans bordure ¦ Без границ ¦ Без меж
+Graphique ¦ График ¦ Графік
+Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage ¦ Диаграмма по числам выделения: рекомендуемые типы для этого диапазона ¦ Діаграма за числами виділення: рекомендовані типи для цього діапазону
+Choisir une fonction ¦ Выбрать функцию ¦ Вибрати функцію
+Fonction ¦ Функция ¦ Функція
+XLSX, ODS, CSV, TSV, JSON, PDF, impression ¦ XLSX, ODS, CSV, TSV, JSON, PDF, печать ¦ XLSX, ODS, CSV, TSV, JSON, PDF, друк
+✓ Enregistrer et revenir ¦ ✓ Сохранить и вернуться ¦ ✓ Зберегти й повернутися
+Plein écran (⛶) ¦ Полный экран (⛶) ¦ Повний екран (⛶)
+Données d’un autre outil ¦ Данные другого инструмента ¦ Дані іншого інструмента
+Adresse (tape D12 ou un nom pour y aller) ¦ Адрес (введи D12 или имя, чтобы перейти туда) ¦ Адреса (введи D12 або ім’я, щоб перейти туди)
+Tape une adresse (D12, B2:C9) ou un nom pour y aller ¦ Введи адрес (D12, B2:C9) или имя, чтобы перейти туда ¦ Введи адресу (D12, B2:C9) або ім’я, щоб перейти туди
+Contenu ou formule de la cellule ¦ Содержимое или формула ячейки ¦ Вміст або формула клітинки
+Feuille de calcul ¦ Лист расчётов ¦ Аркуш обчислень
+Feuille de calcul : tape pour écrire dans la cellule choisie ¦ Лист расчётов: печатай, чтобы писать в выбранную ячейку ¦ Аркуш обчислень: друкуй, щоб писати у вибрану клітинку
+Écrire dans la cellule ¦ Писать в ячейку ¦ Писати в клітинку
+Panneau de droite ¦ Правая панель ¦ Права панель
+Feuilles ¦ Листы ¦ Аркуші
+Clique pour choisir ce qu’on y voit (somme, moyenne…) ¦ Щёлкни, чтобы выбрать, что здесь показывать (сумма, среднее…) ¦ Клацни, щоб вибрати, що тут показувати (сума, середнє…)
+Enregistrer une copie dans le Tableur… ¦ Сохранить копию в Электронной таблице… ¦ Зберегти копію в Електронній таблиці…
+Enregistrer une copie… ¦ Сохранить копию… ¦ Зберегти копію…
+Enregistrer comme modèle… ¦ Сохранить как шаблон… ¦ Зберегти як шаблон…
+Exporter (XLSX, ODS, CSV, PDF…)… ¦ Экспорт (XLSX, ODS, CSV, PDF…)… ¦ Експорт (XLSX, ODS, CSV, PDF…)…
+Feuille « {name} » ¦ Лист «{name}» ¦ Аркуш «{name}»
+Pas encore relié à une fiche ¦ Ещё не связано с карточкой ¦ Ще не пов’язано з карткою
+Tire pour recopier ou continuer une suite ¦ Потяни, чтобы скопировать или продолжить ряд ¦ Потягни, щоб скопіювати або продовжити ряд
+« {text} » n’est pas dans la liste : {list} ¦ «{text}» нет в списке: {list} ¦ «{text}» немає у списку: {list}
+Il faut un nombre d’au moins {min} et au plus {max}. ¦ Нужно число не меньше {min} и не больше {max}. ¦ Потрібне число не менше за {min} і не більше за {max}.
+Il faut un nombre d’au moins {min}. ¦ Нужно число не меньше {min}. ¦ Потрібне число не менше за {min}.
+Il faut un nombre et au plus {max}. ¦ Нужно число не больше {max}. ¦ Потрібне число не більше за {max}.
+Il faut un nombre. ¦ Нужно число. ¦ Потрібне число.
+Je ne comprends pas cette date ({why}). ¦ Не понимаю эту дату ({why}). ¦ Не розумію цю дату ({why}).
+exemples : 7 mai 1925, vers 1784, an II ¦ примеры: 7 mai 1925, vers 1784, an II ¦ приклади: 7 mai 1925, vers 1784, an II
+Tab = compléter ¦ Tab — дополнить ¦ Tab — доповнити
+✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈) ¦ ✓ Понятно как дата записи акта: <b>{date}</b> (приблизительная: в расчётах будет ≈) ¦ ✓ Зрозуміло як дату актового запису: <b>{date}</b> (приблизна: в обчисленнях буде ≈)
+✓ Compris comme une date d’acte : <b>{date}</b> ¦ ✓ Понятно как дата записи акта: <b>{date}</b> ¦ ✓ Зрозуміло як дату актового запису: <b>{date}</b>
+Texte ou nombre. Commence par <b>=</b> pour calculer. ¦ Текст или число. Начни с <b>=</b>, чтобы вычислить. ¦ Текст або число. Почни з <b>=</b>, щоб обчислити.
+ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1. ¦ ƒ Формула: щёлкни по ячейкам или проведи по ним, чтобы вставить их, или введи имя функции (по-французски или по-английски). <kbd>F4</kbd>: $A$1. ¦ ƒ Формула: клацни клітинки або проведи по них, щоб вставити їх, або введи назву функції (французькою чи англійською). <kbd>F4</kbd>: $A$1.
+Corriger en {name} ¦ Исправить на {name} ¦ Виправити на {name}
+Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour). ¦ Приблизительный результат: одна из дат приблизительная («vers», «avant», «an …» без дня). ¦ Приблизний результат: одна з дат приблизна («vers», «avant», «an …» без дня).
+« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur. ¦ «{text}»: это не адрес (D12, B2:C9) и не имя из книги. ¦ «{text}»: це не адреса (D12, B2:C9) і не ім’я з книги.
+Pas de feuille « {name} ». ¦ Нет листа «{name}». ¦ Немає аркуша «{name}».
+Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers). ¦ Используй {key} в сетке (браузер не позволяет кнопке писать в буфер обмена). ¦ Використай {key} у сітці (браузер не дозволяє кнопці писати в буфер обміну).
+En pixels (6 à 72) : ¦ В пикселях (от 6 до 72): ¦ У пікселях (від 6 до 72):
+Lignes masquées (Format → Tout remontrer) ¦ Скрытые строки (Формат → Показать всё) ¦ Приховані рядки (Формат → Показати все)
+Colonnes masquées (Format → Tout remontrer) ¦ Скрытые столбцы (Формат → Показать всё) ¦ Приховані стовпці (Формат → Показати все)
+Trier A → Z (sur la colonne choisie) ¦ Сортировать А → Я (по выбранному столбцу) ¦ Сортувати А → Я (за вибраним стовпцем)
+Trier Z → A ¦ Сортировать Я → А ¦ Сортувати Я → А
+Trier sur plusieurs colonnes… ¦ Сортировать по нескольким столбцам… ¦ Сортувати за кількома стовпцями…
+Espaces en trop retirés. ¦ Лишние пробелы убраны. ¦ Зайві пробіли прибрано.
+Rien à retirer. ¦ Нечего убирать. ¦ Нічого прибирати.
+Police des cellules ¦ Шрифт ячеек ¦ Шрифт клітинок
+Cette police a un nom que le tableur ne sait pas garder. ¦ У этого шрифта имя, которое электронная таблица не умеет сохранять. ¦ Цей шрифт має назву, яку електронна таблиця не вміє зберігати.
+Une taille entre 6 et 72 px (« {value} » ne va pas). ¦ Размер от 6 до 72 px («{value}» не подходит). ¦ Розмір від 6 до 72 px («{value}» не підходить).
+Une taille entre 6 et 72 px. ¦ Размер от 6 до 72 px. ¦ Розмір від 6 до 72 px.
+Choisis d’abord plusieurs cases à fusionner. ¦ Сначала выбери несколько ячеек для объединения. ¦ Спершу вибери кілька клітинок для об’єднання.
+Cases fusionnées : {n} ¦ Объединено ячеек: {n} ¦ Об’єднано клітинок: {n}
+Largeur de colonne ¦ Ширина столбца ¦ Ширина стовпця
+Hauteur de ligne ¦ Высота строки ¦ Висота рядка
+En pixels (16 à 1200) : ¦ В пикселях (от 16 до 1200): ¦ У пікселях (від 16 до 1200):
+En pixels (12 à 600) : ¦ В пикселях (от 12 до 600): ¦ У пікселях (від 12 до 600):
+Un nom commence par une lettre, sans espace (ex. Total, Âges_1836). ¦ Имя начинается с буквы, без пробелов (напр. Total, Âges_1836). ¦ Ім’я починається з літери, без пробілів (напр. Total, Âges_1836).
+Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule. ¦ Имя «{name}» = {ref}: введи =SOMME({name}) в формуле. ¦ Ім’я «{name}» = {ref}: введи =SOMME({name}) у формулі.
+Nom pour la plage ¦ Имя для диапазона ¦ Ім’я для діапазону
+Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) : ¦ Имя для {ref} (чтобы писать =SOMME(Total) вместо =SOMME(D2:D40)): ¦ Ім’я для {ref} (щоб писати =SOMME(Total) замість =SOMME(D2:D40)):
+💬 Note sur {cell} ¦ 💬 Примечание к {cell} ¦ 💬 Примітка до {cell}
+La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note. ¦ Примечание показывается при наведении на ячейку (маленький оранжевый уголок). Пусто — нет примечания. ¦ Примітка з’являється при наведенні на клітинку (маленький помаранчевий куточок). Порожньо — немає примітки.
+⌨️ Raccourcis du tableur ¦ ⌨️ Сочетания клавиш электронной таблицы ¦ ⌨️ Сполучення клавіш електронної таблиці
+Raccourcis indisponibles. ¦ Сочетания клавиш недоступны. ¦ Сполучення клавіш недоступні.
+⚙️ Réglages du tableur ¦ ⚙️ Настройки электронной таблицы ¦ ⚙️ Налаштування електронної таблиці
+Après la touche Entrée, aller ¦ После клавиши Enter переходить ¦ Після клавіші Enter переходити
+vers le bas ¦ вниз ¦ вниз
+vers la droite (saisie de relevés en ligne) ¦ вправо (ввод выписок построчно) ¦ праворуч (введення виписок по рядках)
+Séparateur des fichiers CSV ¦ Разделитель файлов CSV ¦ Роздільник файлів CSV
+point-virgule « ; » (Excel en français) ¦ точка с запятой «;» (Excel на французском) ¦ крапка з комою «;» (Excel французькою)
+virgule « , » ¦ запятая «,» ¦ кома «,»
+tabulation ¦ табуляция ¦ табуляція
+Largeur des colonnes d’une feuille neuve ¦ Ширина столбцов нового листа ¦ Ширина стовпців нового аркуша
+Dans la barre du bas, pour les cellules choisies ¦ В нижней панели, для выбранных ячеек ¦ У нижній панелі, для вибраних клітинок
+Réglages du tableur ¦ Настройки электронной таблицы ¦ Налаштування електронної таблиці
+Trop de lignes ou de colonnes d’un coup. ¦ Слишком много строк или столбцов сразу. ¦ Забагато рядків або стовпців одразу.
+Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres). ¦ Отсортировано {dir} по столбцу {col} (1-я строка — заголовки). ¦ Відсортовано {dir} за стовпцем {col} (1-й рядок — заголовки).
+Trié {dir} sur la colonne {col}. ¦ Отсортировано {dir} по столбцу {col}. ¦ Відсортовано {dir} за стовпцем {col}.
+A → Z (croissant) ¦ А → Я (по возрастанию) ¦ А → Я (за зростанням)
+Z → A (décroissant) ¦ Я → А (по убыванию) ¦ Я → А (за спаданням)
+Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date. ¦ Диапазон {range} · даты записей актов («vers 1784», «an II») сортируются по своей дате. ¦ Діапазон {range} · дати актових записів («vers 1784», «an II») сортуються за своєю датою.
+La première ligne, ce sont les titres ¦ Первая строка — заголовки ¦ Перший рядок — заголовки
+Puis par ¦ Затем по ¦ Потім за
+Choisis un tableau avec une ligne de titres et des lignes en dessous. ¦ Выбери таблицу со строкой заголовков и строками под ней. ¦ Вибери таблицю з рядком заголовків і рядками під ним.
+(vide) ¦ (пусто) ¦ (порожньо)
+Chercher dans le tableau… (nom, métier) ¦ Искать в таблице… (фамилия, профессия) ¦ Шукати в таблиці… (прізвище, професія)
+{n} sur {total} ¦ {n} из {total} ¦ {n} з {total}
+Supprimer les doublons ¦ Удалить дубликаты ¦ Видалити дублікати
+Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste. ¦ Диапазон {range} · 1-я строка — заголовки. Первая строка каждой группы остаётся. ¦ Діапазон {range} · 1-й рядок — заголовки. Перший рядок кожної групи лишається.
+Plage {range}. La première ligne de chaque groupe reste. ¦ Диапазон {range}. Первая строка каждой группы остаётся. ¦ Діапазон {range}. Перший рядок кожної групи лишається.
+Compare les colonnes : ¦ Сравнивать столбцы: ¦ Порівнювати стовпці:
+{n} en double (lignes {rows}). ¦ Дубликатов: {n} (строки {rows}). ¦ Дублікатів: {n} (рядки {rows}).
+{n} en double (ligne {rows}). ¦ Дубликатов: {n} (строка {rows}). ¦ Дублікатів: {n} (рядок {rows}).
+Aucune ligne en double. ¦ Повторяющихся строк нет. ¦ Повторюваних рядків немає.
+Supprimer {n} ¦ Удалить ({n}) ¦ Видалити ({n})
+Coche au moins une colonne. ¦ Отметь хотя бы один столбец. ¦ Познач хоча б один стовпець.
+Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »). ¦ Выбери текстовые ячейки в одном столбце (напр. «MARTIN Jean, 34 ans, laboureur»). ¦ Вибери текстові клітинки в одному стовпці (напр. «MARTIN Jean, 34 ans, laboureur»).
+Convertir le texte en colonnes ¦ Текст по столбцам ¦ Текст за стовпцями
+Convertir ¦ Преобразовать ¦ Перетворити
+Couper à : ¦ Разделять по: ¦ Розділяти за:
+« 34 ans » devient 34 ¦ «34 ans» становится 34 ¦ «34 ans» стає 34
+Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean) ¦ Фамилия заглавными буквами становится отдельным столбцом («MARTIN Jean» → MARTIN | Jean) ¦ Прізвище великими літерами стає окремим стовпцем («MARTIN Jean» → MARTIN | Jean)
+Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir). ¦ Части попадут в столбец {col} и следующие (то, что там было, заменяется; ↶ — чтобы вернуть). ¦ Частини потраплять у стовпець {col} і наступні (те, що там було, замінюється; ↶ — щоб повернути).
+Validation des données ¦ Проверка данных ¦ Перевірка даних
+Pour {range} : ce qu’on peut écrire dans ces cases. ¦ Для {range}: что можно писать в эти ячейки. ¦ Для {range}: що можна писати в ці клітинки.
+Autoriser ¦ Разрешить ¦ Дозволити
+Une liste de choix (menu ▾) ¦ Список вариантов (меню ▾) ¦ Список варіантів (меню ▾)
+👤 Une personne de la base (menu de choix) ¦ 👤 Человек из базы (меню выбора) ¦ 👤 Людина з бази (меню вибору)
+📍 Un lieu de la base (menu de choix) ¦ 📍 Место из базы (меню выбора) ¦ 📍 Місце з бази (меню вибору)
+Un nombre entre… ¦ Число между… ¦ Число між…
+Une date d’acte (vers 1784, an II…) ¦ Дата записи акта (vers 1784, an II…) ¦ Дата актового запису (vers 1784, an II…)
+Les choix (un par ligne) ¦ Варианты (по одному на строку) ¦ Варіанти (по одному на рядок)
+Entre ¦ Между ¦ Між
+Garder aussi un texte libre (sans fiche, ou hors de la liste) ¦ Разрешить и свободный текст (без карточки или вне списка) ¦ Дозволити й вільний текст (без картки або поза списком)
+Écris au moins un choix. ¦ Напиши хотя бы один вариант. ¦ Напиши хоча б один варіант.
+FORMAT ¦ ФОРМАТ ¦ ФОРМАТ
+Mise en forme conditionnelle ¦ Условное форматирование ¦ Умовне форматування
+Ajouter la règle ¦ Добавить правило ¦ Додати правило
+Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux. ¦ Цвет, когда этого требует значение: ошибка или странное значение сразу бросается в глаза. ¦ Колір, коли цього вимагає значення: помилка чи дивне значення одразу впадає в око.
+Prêtes à l’emploi : ¦ Готовые: ¦ Готові:
+« âge > 100 ans » ¦ «возраст > 100 лет» ¦ «вік > 100 років»
+« date impossible » ¦ «невозможная дата» ¦ «неможлива дата»
+« doublons » ¦ «дубликаты» ¦ «дублікати»
+« barres » ¦ «полосы» ¦ «смуги»
+Si la valeur ¦ Если значение ¦ Якщо значення
+alors ¦ то ¦ то
+en gras ¦ жирным ¦ жирним
+Une plage comme D2:D40. ¦ Диапазон вроде D2:D40. ¦ Діапазон на кшталт D2:D40.
+Écris un nombre. ¦ Напиши число. ¦ Напиши число.
+ÉDITION ¦ ПРАВКА ¦ РЕДАГУВАННЯ
+🔍 Rechercher et remplacer ¦ 🔍 Найти и заменить ¦ 🔍 Знайти й замінити
+Remplacer tout ¦ Заменить всё ¦ Замінити все
+Remplacer par ¦ Заменить на ¦ Замінити на
+Dans toutes les feuilles ¦ Во всех листах ¦ В усіх аркушах
+Respecter les capitales ¦ Учитывать регистр ¦ Враховувати регістр
+Chercher le suivant ¦ Найти далее ¦ Знайти далі
+Trouvé en {cell} ¦ Найдено в {cell} ¦ Знайдено в {cell}
+Écris ce qu’il faut chercher. ¦ Напиши, что искать. ¦ Напиши, що шукати.
+Aucune fonction ne correspond. ¦ Ни одна функция не подходит. ¦ Жодна функція не підходить.
+ƒ Choisir une fonction ¦ ƒ Выбрать функцию ¦ ƒ Вибрати функцію
+Chercher… (âge, somme, recherche) ¦ Искать… (возраст, сумма, поиск) ¦ Шукати… (вік, сума, пошук)
+Le menu de choix n’est pas chargé. ¦ Меню выбора не загружено. ¦ Меню вибору не завантажено.
+📍 Un lieu pour {cell} ¦ 📍 Место для {cell} ¦ 📍 Місце для {cell}
+👤 Une personne pour {cell} ¦ 👤 Человек для {cell} ¦ 👤 Людина для {cell}
+📍 Lieu de la base ¦ 📍 Место из базы ¦ 📍 Місце з бази
+auto ¦ авто ¦ авто
+Décimales ¦ Знаков после запятой ¦ Знаків після коми
+✓ « {text} » est comprise (≈) ¦ ✓ «{text}» понятно (≈) ¦ ✓ «{text}» зрозуміло (≈)
+✓ « {text} » est comprise ¦ ✓ «{text}» понятно ¦ ✓ «{text}» зрозуміло
+Noir ¦ Чёрный ¦ Чорний
+Contour ¦ Контур ¦ Контур
+Retirer la règle ¦ Убрать правило ¦ Прибрати правило
+Aucune règle sur cette feuille. ¦ На этом листе нет правил. ¦ На цьому аркуші немає правил.
+＋ Ajouter une règle… ¦ ＋ Добавить правило… ¦ ＋ Додати правило…
+Une liste : {list} ¦ Список: {list} ¦ Список: {list}
+👤 Une personne de la base ¦ 👤 Человек из базы ¦ 👤 Людина з бази
+📍 Un lieu de la base ¦ 📍 Место из базы ¦ 📍 Місце з бази
+Un nombre ¦ Число ¦ Число
+Une date d’acte ¦ Дата записи акта ¦ Дата актового запису
+Garder le texte ¦ Оставить текст ¦ Залишити текст
+Pas de validation ici. ¦ Здесь нет проверки. ¦ Тут немає перевірки.
+Validation des données… ¦ Проверка данных… ¦ Перевірка даних…
+Enregistre d’abord le classeur (💾), puis ouvre la fiche. ¦ Сначала сохрани книгу (💾), затем открой карточку. ¦ Спершу збережи книгу (💾), потім відкрий картку.
+{name} : lieu n° {id} de ta base. ¦ {name}: место № {id} твоей базы. ¦ {name}: місце № {id} твоєї бази.
+Règle « {range} » retirée ¦ Правило «{range}» убрано ¦ Правило «{range}» прибрано
+Police (E5) : {font} ¦ Шрифт (E5): {font} ¦ Шрифт (E5): {font}
+celle de départ ¦ исходный ¦ початковий
+Panneau de droite : montrer ¦ Правая панель: показать ¦ Права панель: показати
+Panneau de droite : cacher ¦ Правая панель: скрыть ¦ Права панель: сховати
+Double-clic : renommer · clic droit : plus d’actions ¦ Двойной щелчок — переименовать · правый щелчок — другие действия ¦ Подвійне клацання — перейменувати · клацання правою — інші дії
+Ajouter une feuille ¦ Добавить лист ¦ Додати аркуш
+Feuille {n} ¦ Лист {n} ¦ Аркуш {n}
+Renommer la feuille ¦ Переименовать лист ¦ Перейменувати аркуш
+Un classeur garde au moins une feuille. ¦ В книге должен остаться хотя бы один лист. ¦ У книзі має залишитися хоча б один аркуш.
+Feuille « {name} » supprimée ¦ Лист «{name}» удалён ¦ Аркуш «{name}» видалено
+Couleur de l’onglet… ¦ Цвет вкладки… ¦ Колір вкладки…
+Déplacer à gauche ¦ Переместить влево ¦ Перемістити ліворуч
+Déplacer à droite ¦ Переместить вправо ¦ Перемістити праворуч
+Somme <b>{v}</b> ¦ Сумма <b>{v}</b> ¦ Сума <b>{v}</b>
+Moyenne <b>{v}</b> ¦ Среднее <b>{v}</b> ¦ Середнє <b>{v}</b>
+Nb <b>{v}</b> ¦ Кол-во <b>{v}</b> ¦ К-сть <b>{v}</b>
+Min <b>{v}</b> ¦ Мин <b>{v}</b> ¦ Мін <b>{v}</b>
+Max <b>{v}</b> ¦ Макс <b>{v}</b> ¦ Макс <b>{v}</b>
+Dans la barre d’état ¦ В строке состояния ¦ У рядку стану
+Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers. ¦ Используй {key}: браузер не позволяет меню писать в буфер обмена. ¦ Використай {key}: браузер не дозволяє меню писати в буфер обміну.
+Sélection trop grande pour le presse-papiers. ¦ Выделение слишком большое для буфера обмена. ¦ Виділення завелике для буфера обміну.
+Coupé : choisis où coller, puis {key}. ¦ Вырезано: выбери, куда вставить, затем {key}. ¦ Вирізано: вибери, куди вставити, потім {key}.
+Utilise {key} dans la grille pour coller. ¦ Используй {key} в сетке, чтобы вставить. ¦ Використай {key} у сітці, щоб вставити.
+Trop de cellules à coller. ¦ Слишком много ячеек для вставки. ¦ Забагато клітинок для вставлення.
+{n} (avec le gras et les couleurs). ¦ {n} (с жирным шрифтом и цветами). ¦ {n} (із жирним шрифтом і кольорами).
+Série {n} ¦ Ряд {n} ¦ Ряд {n}
+Colonnes groupées ¦ Сгруппированные столбцы ¦ Згруповані стовпці
+Barres horizontales ¦ Горизонтальные полосы ¦ Горизонтальні смуги
+TSV (tabulations) ¦ TSV (табуляции) ¦ TSV (табуляції)
+⤒ Importer un tableau ¦ ⤒ Импорт таблицы ¦ ⤒ Імпорт таблиці
+Séparateur deviné : {sep} · Encodage : {enc} ¦ Угаданный разделитель: {sep} · Кодировка: {enc} ¦ Вгаданий роздільник: {sep} · Кодування: {enc}
+point-virgule (;) ¦ точка с запятой (;) ¦ крапка з комою (;)
+virgule (,) ¦ запятая (,) ¦ кома (,)
+✓ Accents corrects : « {list} ». ¦ ✓ Диакритические знаки правильные: «{list}». ¦ ✓ Діакритичні знаки правильні: «{list}».
+<b>{rows}</b> dans {sheets} ¦ <b>{rows}</b> в {sheets} ¦ <b>{rows}</b> у {sheets}
+CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée). ¦ CSV и TSV: открытый лист. Остальные: вся книга. Ячейка, начинающаяся с «=», в CSV защищена (никаких подброшенных формул). ¦ CSV і TSV: відкритий аркуш. Решта: уся книга. Клітинка, що починається з «=», у CSV захищена (жодних підкинутих формул).
+tout tableur ¦ любая электронная таблица ¦ будь-яка електронна таблиця
+tabulations ¦ табуляции ¦ табуляції
+données ¦ данные ¦ дані
+à lire ¦ для чтения ¦ для читання
+💾 Fichier de l’outil ¦ 💾 Файл инструмента ¦ 💾 Файл інструмента
+Exporté : {name} ¦ Экспортировано: {name} ¦ Експортовано: {name}
+(feuille vide) ¦ (пустой лист) ¦ (порожній аркуш)
+Toutes les feuilles ¦ Все листы ¦ Усі аркуші
+Quadrillage ¦ Сетка ¦ Сітка
+Rangé dans Listes → Outils de modification → 🧾 Tableur. ¦ Сохранено в Списки → Инструменты редактирования → 🧾 Электронная таблица. ¦ Збережено в Списки → Інструменти редагування → 🧾 Електронна таблиця.
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Шаблон «{name}» сохранён (Начать с шаблона → Мои шаблоны). ¦ Шаблон «{name}» збережено (Почати з шаблону → Мої шаблони).
+Copie « {name} » enregistrée. ¦ Копия «{name}» сохранена. ¦ Копію «{name}» збережено.
+Ce classeur ¦ Эта книга ¦ Ця книга
+Impossible d’enregistrer : {error} ¦ Не удалось сохранить: {error} ¦ Не вдалося зберегти: {error}
+Enregistrer comme modèle ¦ Сохранить как шаблон ¦ Зберегти як шаблон
+Enregistrer une copie ¦ Сохранить копию ¦ Зберегти копію
+Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) : ¦ Название шаблона (данные остаются: очисти их заранее, если нужен пустой шаблон): ¦ Назва шаблону (дані лишаються: очисти їх заздалегідь, якщо потрібен порожній шаблон):
+Le nom de la copie : ¦ Название копии: ¦ Назва копії:
+{name} (copie) ¦ {name} (копия) ¦ {name} (копія)
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Изменения после последнего сохранения будут потеряны. ¦ Зміни після останнього збереження буде втрачено.
+📋 Partir d’un modèle ¦ 📋 Начать с шаблона ¦ 📋 Почати з шаблону
+Mes modèles ¦ Мои шаблоны ¦ Мої шаблони
+Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ». ¦ Своих шаблонов пока нет: в книге выбери Файл → «Сохранить как шаблон…». ¦ Власних шаблонів поки немає: у книзі вибери Файл → «Зберегти як шаблон…».
+séparateur « {sep} » ¦ разделитель «{sep}» ¦ роздільник «{sep}»
+Classeur importé ¦ Импортированная книга ¦ Імпортована книга
+Classeur « {name} » créé ({rows}) ¦ Книга «{name}» создана ({rows}) ¦ Книгу «{name}» створено ({rows})
+classeur ¦ книга ¦ книга
+＋ Nouveau classeur ¦ ＋ Новая книга ¦ ＋ Нова книга
+Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers… ¦ Выписка из переписи, приходская книга, бюджет исследований, учёт писем… ¦ Виписка з перепису, парафіяльна книга, бюджет досліджень, облік листів…
+Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Ты делишь на ноль: {ref} пусто или равно 0. Совет: =SI.ERREUR(…;"") оставляет ячейку пустой. ¦ Ти ділиш на нуль: {ref} порожня або дорівнює 0. Порада: =SI.ERREUR(…;"") залишає клітинку порожньою.
+Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Ты делишь на ноль: {why}. Совет: =SI.ERREUR(…;"") оставляет ячейку пустой. ¦ Ти ділиш на нуль: {why}. Порада: =SI.ERREUR(…;"") залишає клітинку порожньою.
+Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide. ¦ Ты делишь на ноль. Совет: =SI.ERREUR(…;"") оставляет ячейку пустой. ¦ Ти ділиш на нуль. Порада: =SI.ERREUR(…;"") залишає клітинку порожньою.
+Je ne connais pas « {name} ». Voulais-tu dire {sugg} ? ¦ Не знаю «{name}». Может, ты имел(а) в виду {sugg}? ¦ Не знаю «{name}». Може, ти мав(ла) на увазі {sugg}?
+Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre. ¦ Не знаю «{name}». Введи первые буквы — откроется список функций. ¦ Не знаю «{name}». Введи перші літери — відкриється список функцій.
+Un nom inconnu dans la formule. ¦ В формуле неизвестное имя. ¦ У формулі невідоме ім’я.
+« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec. ¦ «{text}» — не число (ячейка {cell}): с ним нельзя ничего вычислить. ¦ «{text}» — не число (клітинка {cell}): з ним не можна нічого обчислити.
+« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec. ¦ «{text}» — не число: с ним нельзя ничего вычислить. ¦ «{text}» — не число: з ним не можна нічого обчислити.
+Une valeur ne convient pas ¦ Значение не подходит ¦ Значення не підходить
+{what} (cellule {cell}). ¦ {what} (ячейка {cell}). ¦ {what} (клітинка {cell}).
+La formule montre quelque chose qui n’existe pas : {what}. ¦ Формула указывает на то, чего не существует: {what}. ¦ Формула вказує на те, чого не існує: {what}.
+La formule montre une cellule qui a été supprimée. ¦ Формула указывает на удалённую ячейку. ¦ Формула вказує на видалену клітинку.
+Valeur introuvable ¦ Значение не найдено ¦ Значення не знайдено
+La recherche ¦ Поиск ¦ Пошук
+{fn} n’a pas trouvé « {what} » dans {where}. ¦ {fn} не нашла «{what}» в {where}. ¦ {fn} не знайшла «{what}» у {where}.
+{fn} n’a pas trouvé « {what} ». ¦ {fn} не нашла «{what}». ¦ {fn} не знайшла «{what}».
+{path} : la formule tourne en rond. ¦ {path}: формула ходит по кругу. ¦ {path}: формула ходить по колу.
+La formule a besoin d’elle-même : elle tourne en rond. ¦ Формула ссылается сама на себя: она ходит по кругу. ¦ Формула посилається сама на себе: вона ходить по колу.
+« {text} » : {why}. ¦ «{text}»: {why}. ¦ «{text}»: {why}.
+cette date ¦ эту дату ¦ цю дату
+Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Не понимаю {what} («{text}»). Примеры: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Не розумію {what} («{text}»). Приклади: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Не понимаю {what}. Примеры: 7 mai 1925, vers 1784, an II, entre 1880 et 1885. ¦ Не розумію {what}. Приклади: 7 mai 1925, vers 1784, an II, entre 1880 et 1885.
+Je ne comprends pas la formule près de « {near} » : {why}. ¦ Не понимаю формулу около «{near}»: {why}. ¦ Не розумію формулу біля «{near}»: {why}.
+Je ne comprends pas la formule : {why}. ¦ Не понимаю формулу: {why}. ¦ Не розумію формулу: {why}.
+Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ». ¦ Не понимаю формулу около «{near}»: проверь скобки, кавычки и «;». ¦ Не розумію формулу біля «{near}»: перевір дужки, лапки й «;».
+Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ». ¦ Не понимаю формулу: проверь скобки, кавычки и «;». ¦ Не розумію формулу: перевір дужки, лапки й «;».
+Nombre impossible ¦ Невозможное число ¦ Неможливе число
+Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat. ¦ Результату нужно {size} вниз и вправо, но {cell} не пуста: очисти её, чтобы увидеть весь результат. ¦ Результату потрібно {size} вниз і праворуч, але {cell} не порожня: очисти її, щоб побачити весь результат.
+plusieurs cases ¦ несколько ячеек ¦ кілька клітинок
+une case ¦ одна ячейка ¦ одна клітинка
+Trop gros pour être calculé : {why}. ¦ Слишком велико для вычисления: {why}. ¦ Завелике для обчислення: {why}.
+réduis la plage ¦ уменьши диапазон ¦ зменш діапазон
+Erreur dans la formule. ¦ Ошибка в формуле. ¦ Помилка у формулі.
+Astuce : =SI.ERREUR(A4/B4;"") ¦ Совет: =SI.ERREUR(A4/B4;"") ¦ Порада: =SI.ERREUR(A4/B4;"")
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas ¦ файл отклонён: он содержит объявления XML (DOCTYPE или ENTITY), которые офисный документ не использует ¦ файл відхилено: він містить оголошення XML (DOCTYPE або ENTITY), яких офісний документ не використовує
+fichier XML abîmé ¦ повреждённый файл XML ¦ пошкоджений файл XML
+fichier refusé : trop d’éléments ¦ файл отклонён: слишком много элементов ¦ файл відхилено: забагато елементів
+fichier refusé : XML trop imbriqué ¦ файл отклонён: слишком глубокая вложенность XML ¦ файл відхилено: надто глибока вкладеність XML
+fichier trop gros (plus de {n} Mo) ¦ файл слишком большой (больше {n} МБ) ¦ файл завеликий (понад {n} МБ)
+ce n’est pas un fichier zip valide ¦ это не корректный файл zip ¦ це не коректний файл zip
+fichier refusé : trop d’éléments dans le zip ¦ файл отклонён: слишком много элементов в zip ¦ файл відхилено: забагато елементів у zip
+fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe ¦ файл зашифрован: сначала открой его в его программе электронных таблиц и сохрани без пароля ¦ файл зашифровано: спершу відкрий його в його програмі електронних таблиць і збережи без пароля
+fichier zip abîmé ¦ повреждённый файл zip ¦ пошкоджений файл zip
+fichier refusé : trop gros une fois décompressé ¦ файл отклонён: слишком большой после распаковки ¦ файл відхилено: завеликий після розпакування
+fichier refusé : il se décompresse en beaucoup trop gros (bombe zip) ¦ файл отклонён: при распаковке он становится огромным (zip-бомба) ¦ файл відхилено: після розпакування він стає величезним (zip-бомба)
+ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour) ¦ этот браузер не умеет открывать файлы zip (обнови его) ¦ цей браузер не вміє відкривати файли zip (онови його)
+compression inconnue dans le fichier ¦ неизвестный способ сжатия в файле ¦ невідомий спосіб стиснення у файлі
+ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque ¦ это не файл Excel (.xlsx): нет xl/workbook.xml ¦ це не файл Excel (.xlsx): немає xl/workbook.xml
+fichier refusé : trop de feuilles ¦ файл отклонён: слишком много листов ¦ файл відхилено: забагато аркушів
+fichier refusé : trop de cellules ¦ файл отклонён: слишком много ячеек ¦ файл відхилено: забагато клітинок
+ce n’est pas un fichier LibreOffice (.ods) : content.xml manque ¦ это не файл LibreOffice (.ods): нет content.xml ¦ це не файл LibreOffice (.ods): немає content.xml
+ce fichier n’est pas un JSON valide ¦ этот файл — не корректный JSON ¦ цей файл — не коректний JSON
+je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets) ¦ не нахожу таблицу в этом JSON (нужен список строк или объектов) ¦ не знаходжу таблиці в цьому JSON (потрібен список рядків або об’єктів)
+les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx ¦ старые файлы Excel (.xls) не читаются: открой его в Excel или LibreOffice и сохрани в .xlsx ¦ старі файли Excel (.xls) не читаються: відкрий його в Excel або LibreOffice і збережи в .xlsx
+ce fichier compressé n’est ni un .xlsx ni un .ods ¦ этот сжатый файл — ни .xlsx, ни .ods ¦ цей стиснений файл — ні .xlsx, ні .ods
+Nombre 0,00 ¦ Число 0,00 ¦ Число 0,00
+Nombre entier ¦ Целое число ¦ Ціле число
+Monnaie (€) ¦ Валюта (€) ¦ Валюта (€)
+Pourcentage ¦ Процент ¦ Відсоток
+Date courte ¦ Краткая дата ¦ Коротка дата
+Date d’acte ¦ Дата записи акта ¦ Дата актового запису
+Texte ¦ Текст ¦ Текст
+Relevé de recensement ¦ Выписка из переписи ¦ Виписка з перепису
+colonnes de l’année · foyers · « Né(e) vers » calculé ¦ столбцы года · домохозяйства · «Родился(-ась) около» вычисляется ¦ стовпці року · домогосподарства · «Народився(-лася) близько» обчислюється
+Registre paroissial ¦ Приходская книга ¦ Парафіяльна книга
+baptêmes, mariages, sépultures ¦ крещения, браки, погребения ¦ хрещення, шлюби, поховання
+Budget de la recherche ¦ Бюджет исследований ¦ Бюджет досліджень
+actes, déplacements, abonnements ¦ записи актов, поездки, подписки ¦ актові записи, поїздки, передплати
+Suivi des courriers ¦ Учёт писем ¦ Облік листів
+envoyé, relancé, réponse ¦ отправлено, напомнено, ответ ¦ надіслано, нагадано, відповідь
+Arbre en tableau ¦ Древо в таблице ¦ Дерево в таблиці
+Sosa, génération, côté, âge ¦ Sosa, поколение, сторона, возраст ¦ Sosa, покоління, бік, вік
+objets, prix, total en livres ¦ предметы, цены, итог в ливрах ¦ предмети, ціни, підсумок у ліврах
+Registre matricule ¦ Послужной список ¦ Послужний список
+classe, signalement, campagnes ¦ призыв, приметы, походы ¦ призов, прикмети, походи
+📋 Partir d’un modèle… ¦ 📋 Начать с шаблона… ¦ 📋 Почати з шаблону…
+⤒ Importer un tableau… ¦ ⤒ Импорт таблицы… ¦ ⤒ Імпорт таблиці…
+⤓ Exporter… ¦ ⤓ Экспорт… ¦ ⤓ Експорт…
+🖨 Imprimer… ¦ 🖨 Печать… ¦ 🖨 Друк…
+⚙️ Réglages du tableur… ¦ ⚙️ Настройки электронной таблицы… ¦ ⚙️ Налаштування електронної таблиці…
+Insertion ¦ Вставка ¦ Вставлення
+Coller les valeurs seulement ¦ Вставить только значения ¦ Вставити лише значення
+Effacer le contenu ¦ Очистить содержимое ¦ Очистити вміст
+Effacer tout (contenu et mise en forme) ¦ Очистить всё (содержимое и оформление) ¦ Очистити все (вміст і оформлення)
+Recopier vers le bas ¦ Заполнить вниз ¦ Заповнити вниз
+Recopier vers la droite ¦ Заполнить вправо ¦ Заповнити праворуч
+🔍 Rechercher et remplacer… ¦ 🔍 Найти и заменить… ¦ 🔍 Знайти й замінити…
+Ligne au-dessus ¦ Строка выше ¦ Рядок вище
+Ligne en dessous ¦ Строка ниже ¦ Рядок нижче
+＋ Nouvelle feuille ¦ ＋ Новый лист ¦ ＋ Новий аркуш
+ƒ Fonction… ¦ ƒ Функция… ¦ ƒ Функція…
+Σ Somme automatique ¦ Σ Автосумма ¦ Σ Автосума
+📅 Date du jour ¦ 📅 Сегодняшняя дата ¦ 📅 Сьогоднішня дата
+Nom pour la plage… ¦ Имя для диапазона… ¦ Ім’я для діапазону…
+💬 Note sur la cellule… ¦ 💬 Примечание к ячейке… ¦ 💬 Примітка до клітинки…
+📊 Graphique depuis la sélection ¦ 📊 График из выделения ¦ 📊 Графік із виділення
+Barré ¦ Зачёркнутый ¦ Закреслений
+Aa Police… ¦ Aa Шрифт… ¦ Aa Шрифт…
+Taille du texte… ¦ Размер текста… ¦ Розмір тексту…
+↵ Renvoi à la ligne ¦ ↵ Перенос по словам ¦ ↵ Перенесення за словами
+⊞ Fusionner / séparer ¦ ⊞ Объединить / разделить ¦ ⊞ Об’єднати / розділити
+▦ Bordures : tout ¦ ▦ Границы: все ¦ ▦ Межі: усі
+▭ Bordures : contour ¦ ▭ Границы: внешние ¦ ▭ Межі: зовнішні
+▁ Bordure du bas ¦ ▁ Нижняя граница ¦ ▁ Нижня межа
+Largeur de colonne… ¦ Ширина столбца… ¦ Ширина стовпця…
+Hauteur de ligne… ¦ Высота строки… ¦ Висота рядка…
+Ajuster la largeur au contenu ¦ Подогнать ширину по содержимому ¦ Підігнати ширину під вміст
+Masquer les lignes ¦ Скрыть строки ¦ Сховати рядки
+Masquer les colonnes ¦ Скрыть столбцы ¦ Сховати стовпці
+Tout remontrer ¦ Показать всё ¦ Показати все
+Mise en forme conditionnelle… ¦ Условное форматирование… ¦ Умовне форматування…
+Une ligne sur deux ¦ Чередование строк ¦ Чергування рядків
+Effacer la mise en forme ¦ Очистить оформление ¦ Очистити оформлення
+↕ Trier A → Z ¦ ↕ Сортировать А → Я ¦ ↕ Сортувати А → Я
+↕ Trier Z → A ¦ ↕ Сортировать Я → А ¦ ↕ Сортувати Я → А
+⚲ Filtrer ¦ ⚲ Фильтр ¦ ⚲ Фільтр
+Supprimer les doublons… ¦ Удалить дубликаты… ¦ Видалити дублікати…
+Convertir le texte en colonnes… ¦ Текст по столбцам… ¦ Текст за стовпцями…
+Retirer les espaces en trop ¦ Убрать лишние пробелы ¦ Прибрати зайві пробіли
+Figer la 1re ligne ¦ Закрепить 1-ю строку ¦ Закріпити 1-й рядок
+Figer la 1re colonne ¦ Закрепить 1-й столбец ¦ Закріпити 1-й стовпець
+Figer jusqu’à la cellule choisie ¦ Закрепить до выбранной ячейки ¦ Закріпити до вибраної клітинки
+Libérer les volets ¦ Снять закрепление областей ¦ Зняти закріплення областей
+Montrer les formules ¦ Показать формулы ¦ Показати формули
+⤢ Ajuster à la fenêtre ¦ ⤢ Подогнать к окну ¦ ⤢ Припасувати до вікна
+100 % (taille réelle) ¦ 100 % (реальный размер) ¦ 100 % (реальний розмір)
+⌨️ Raccourcis du tableur… ¦ ⌨️ Сочетания клавиш электронной таблицы… ¦ ⌨️ Сполучення клавіш електронної таблиці…
+Rechercher et remplacer ¦ Найти и заменить ¦ Знайти й замінити
+Filtrer (barre de recherche et filtres au-dessus) ¦ Фильтр (строка поиска и фильтры сверху) ¦ Фільтр (рядок пошуку й фільтри зверху)
+Trier la plage ¦ Сортировать диапазон ¦ Сортувати діапазон
+Somme, moyenne, nombre… ¦ Сумма, среднее, количество… ¦ Сума, середнє, кількість…
+Une personne de la base dans la cellule ¦ Человек из базы в ячейке ¦ Людина з бази в клітинці
+Un lieu de la base dans la cellule ¦ Место из базы в ячейке ¦ Місце з бази в клітинці
+Note sur la cellule ¦ Примечание к ячейке ¦ Примітка до клітинки
+Graphique avec les chiffres de la sélection ¦ График по числам выделения ¦ Графік за числами виділення
+Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier ¦ Печатай, чтобы писать · = чтобы вычислить · двойной щелчок, чтобы изменить · правый щелчок для действий · потяни маленький квадрат, чтобы скопировать ¦ Друкуй, щоб писати · = щоб обчислити · подвійне клацання, щоб змінити · клацання правою для дій · потягни маленький квадрат, щоб скопіювати
+Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre ¦ Enter подтверждает · Tab: ячейка справа · Esc отменяет · во время ввода формулы щёлкни или проведи по ячейкам, чтобы вставить их ¦ Enter підтверджує · Tab: клітинка праворуч · Esc скасовує · під час введення формули клацни або проведи по клітинках, щоб вставити їх
+Σ Somme ¦ Σ Сумма ¦ Σ Сума
+Nombre ¦ Количество ¦ Кількість
+Minimum ¦ Минимум ¦ Мінімум
+Maximum ¦ Максимум ¦ Максимум
+Somme ¦ Сумма ¦ Сума
+Panneau de droite ouvert ¦ Правая панель открыта ¦ Права панель відкрита
+, virgule ¦ , запятая ¦ , кома
+; point-virgule ¦ ; точка с запятой ¦ ; крапка з комою
+espace ¦ пробел ¦ пробіл
+Autre… ¦ Другое… ¦ Інше…
+plus grande que ¦ больше чем ¦ більше ніж
+plus petite que ¦ меньше чем ¦ менше ніж
+au moins ¦ не меньше ¦ не менше
+au plus ¦ не больше ¦ не більше
+égale à ¦ равно ¦ дорівнює
+différente de ¦ не равно ¦ не дорівнює
+entre ¦ между ¦ між
+contient le texte ¦ содержит текст ¦ містить текст
+est vide ¦ пусто ¦ порожньо
+n’est pas vide ¦ не пусто ¦ не порожньо
+est en double ¦ повторяется ¦ повторюється
+est une date impossible ¦ невозможная дата ¦ неможлива дата
+barres dans la cellule ¦ полосы в ячейке ¦ смуги в клітинці
+fond jaune ¦ жёлтый фон ¦ жовте тло
+fond rouge ¦ красный фон ¦ червоне тло
+fond vert ¦ зелёный фон ¦ зелене тло
+fond bleu ¦ синий фон ¦ синє тло
+fond orange ¦ оранжевый фон ¦ помаранчеве тло
+fond violet ¦ фиолетовый фон ¦ фіолетове тло
+règle|plus grande que ¦ больше чем ¦ більше ніж
+règle|plus petite que ¦ меньше чем ¦ менше ніж
+règle|au moins ¦ не меньше ¦ не менше
+règle|au plus ¦ не больше ¦ не більше
+règle|égale à ¦ равно ¦ дорівнює
+règle|différente de ¦ не равно ¦ не дорівнює
+règle|entre ¦ между ¦ між
+règle|contient ¦ содержит ¦ містить
+règle|vide ¦ пусто ¦ порожньо
+règle|pas vide ¦ не пусто ¦ не порожньо
+règle|en double ¦ повтор ¦ повтор
+règle|date impossible ¦ невозможная дата ¦ неможлива дата
+règle|barres ¦ полосы ¦ смуги
+Cellule ¦ Ячейка ¦ Клітинка
+Nombre et date ¦ Число и дата ¦ Число й дата
+Couleur et bordures ¦ Цвет и границы ¦ Колір і межі
+Validation ¦ Проверка ¦ Перевірка
+Adresse ¦ Адрес ¦ Адреса
+Valeur ¦ Значение ¦ Значення
+Formule ¦ Формула ¦ Формула
+Autorise ¦ Разрешает ¦ Дозволяє
+Sinon ¦ Иначе ¦ Інакше
+Insérer une ligne au-dessus ¦ Вставить строку выше ¦ Вставити рядок вище
+Insérer une ligne en dessous ¦ Вставить строку ниже ¦ Вставити рядок нижче
+Insérer une colonne à gauche ¦ Вставить столбец слева ¦ Вставити стовпець ліворуч
+Insérer une colonne à droite ¦ Вставить столбец справа ¦ Вставити стовпець праворуч
+Trier A → Z ¦ Сортировать А → Я ¦ Сортувати А → Я
+Retirer le filtre ¦ Убрать фильтр ¦ Прибрати фільтр
+Note… ¦ Примечание… ¦ Примітка…
+Ajuster la largeur ¦ Подогнать ширину ¦ Підігнати ширину
+Supprimer les lignes ¦ Удалить строки ¦ Видалити рядки
+Supprimer les colonnes ¦ Удалить столбцы ¦ Видалити стовпці
+Windows (vieil Excel) ¦ Windows (старый Excel) ¦ Windows (старий Excel)
+👤 Des fiches ¦ 👤 Карточки ¦ 👤 Картки
+🏠 Un recensement (foyers) ¦ 🏠 Перепись (домохозяйства) ¦ 🏠 Перепис (домогосподарства)
+📅 Des événements ¦ 📅 События ¦ 📅 Події
+— ne pas envoyer — ¦ — не отправлять — ¦ — не надсилати —
+Nom et prénom ¦ Фамилия и имя ¦ Прізвище та ім’я
+Sexe ¦ Пол ¦ Стать
+Naissance (date ou année) ¦ Рождение (дата или год) ¦ Народження (дата або рік)
+Décès (date) ¦ Смерть (дата) ¦ Смерть (дата)
+N° de foyer (ménage) ¦ № домохозяйства (семьи) ¦ № домогосподарства (родини)
+N° de maison ¦ № дома ¦ № будинку
+Rue, quartier ¦ Улица, квартал ¦ Вулиця, квартал
+Patron, employeur ¦ Хозяин, работодатель ¦ Господар, роботодавець
+Situation (marié, veuf…) ¦ Семейное положение (женат, вдовец…) ¦ Сімейний стан (одружений, вдівець…)
+Observations, notes ¦ Наблюдения, заметки ¦ Спостереження, нотатки
+Sorte d’événement (acte) ¦ Вид события (запись акта) ¦ Вид події (актовий запис)
+Date de l’événement ¦ Дата события ¦ Дата події
+Lieu de l’événement ¦ Место события ¦ Місце події
+colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base ¦ столбцы года (1836 → 1936) · домохозяйства · 📤 в базу ¦ стовпці року (1836 → 1936) · домогосподарства · 📤 у базу
+⤒ Remplir depuis l’app… ¦ ⤒ Заполнить из приложения… ¦ ⤒ Заповнити із застосунку…
+↻ Relire depuis la base ¦ ↻ Перечитать из базы ¦ ↻ Перечитати з бази
+catégorie + séries ¦ категория + ряды ¦ категорія + ряди
+📊 Créer le diagramme ¦ 📊 Создать диаграмму ¦ 📊 Створити діаграму
+Un graphique ¦ График ¦ Графік
+📈 Créer le graphique ¦ 📈 Создать график ¦ 📈 Створити графік
+objet ▦ Tableur ¦ объект ▦ Электронная таблица ¦ об’єкт ▦ Електронна таблиця
+📋 Copier pour un tableau ¦ 📋 Скопировать для таблицы ¦ 📋 Скопіювати для таблиці
+Un recueil ¦ Сборник ¦ Збірник
+tableur d’une page ¦ одностраничная электронная таблица ¦ односторінкова електронна таблиця
+📋 Copier pour un recueil ¦ 📋 Скопировать для сборника ¦ 📋 Скопіювати для збірника
+tableau ou graphique ¦ таблица или график ¦ таблиця або графік
+Ce que le diagramme attend ¦ Что ожидает диаграмма ¦ Що очікує діаграма
+Ce que le graphique attend ¦ Что ожидает график ¦ Що очікує графік
+Ce que le tableau attend ¦ Что ожидает таблица ¦ Що очікує таблиця
+Ce que le recueil attend ¦ Что ожидает сборник ¦ Що очікує збірник
+Pyramide des âges ¦ Возрастная пирамида ¦ Вікова піраміда
+Courbes ¦ Кривые ¦ Криві
+Radar ¦ Радар ¦ Радар
+Barres groupées ¦ Сгруппированные полосы ¦ Згруповані смуги
+Camembert (une seule série) ¦ Круговая (только один ряд) ¦ Кругова (лише один ряд)
+Rectangles proportionnels ¦ Пропорциональные прямоугольники ¦ Пропорційні прямокутники
+🎯 Préparer pour… (diagramme, graphique, présentation…) ¦ 🎯 Подготовить для… (диаграмма, график, презентация…) ¦ 🎯 Підготувати для… (діаграма, графік, презентація…)
+initiale ¦ начальная ¦ початкова
+MAJUSCULES ¦ ПРОПИСНЫЕ ¦ ВЕЛИКІ
+minuscules ¦ строчные ¦ малі
+Capitale ¦ С заглавной ¦ З великої
+Plus petit ¦ Меньше ¦ Менше
+Plus grand ¦ Больше ¦ Більше
+✨ Remplissage instantané ¦ ✨ Мгновенное заполнение ¦ ✨ Миттєве заповнення
+Σ Sous-totaux… ¦ Σ Промежуточные итоги… ¦ Σ Проміжні підсумки…
+⊟ Plan : replier / déplier le détail ¦ ⊟ Структура: свернуть / развернуть подробности ¦ ⊟ Структура: згорнути / розгорнути подробиці
+🎯 Valeur cible… ¦ 🎯 Подбор параметра… ¦ 🎯 Добір параметра…
+🧮 Solveur… ¦ 🧮 Поиск решения… ¦ 🧮 Пошук розв’язку…
+📋 Tableau de scénarios (et si…)… ¦ 📋 Таблица сценариев (а если…)… ¦ 📋 Таблиця сценаріїв (а якщо…)…
+⏺ Enregistrer une action / ⏹ arrêter ¦ ⏺ Записать действие / ⏹ остановить ¦ ⏺ Записати дію / ⏹ зупинити
+▶ Actions enregistrées… ¦ ▶ Записанные действия… ¦ ▶ Записані дії…
+📈 Mini-graphique… ¦ 📈 Мини-график… ¦ 📈 Мінідіаграма…
+Nombre de lignes ¦ Количество строк ¦ Кількість рядків
+Nombre de valeurs différentes ¦ Количество различных значений ¦ Кількість різних значень
+En % de la ligne ¦ В % от строки ¦ У % від рядка
+En % de la colonne ¦ В % от столбца ¦ У % від стовпця
+En % du tout ¦ В % от общего ¦ У % від загального
+🔀 Tableau croisé dynamique… ¦ 🔀 Сводная таблица… ¦ 🔀 Зведена таблиця…
+↻ Actualiser le tableau croisé ¦ ↻ Обновить сводную таблицу ¦ ↻ Оновити зведену таблицю
+📊 Graphique vivant (suit la sélection) ¦ 📊 Живой график (следует за выделением) ¦ 📊 Живий графік (стежить за виділенням)
+📊 Graphique vivant ¦ 📊 Живой график ¦ 📊 Живий графік
+Vide ¦ Пусто ¦ Порожньо
+⛔ Formule en erreur ¦ ⛔ Формула с ошибкой ¦ ⛔ Формула з помилкою
+ƒ Formule ¦ ƒ Формула ¦ ƒ Формула
+VRAI / FAUX ¦ ИСТИНА / ЛОЖЬ ¦ ІСТИНА / ХИБНІСТЬ
+⚠️ Date impossible ¦ ⚠️ Невозможная дата ¦ ⚠️ Неможлива дата
+📅 Date d’acte ¦ 📅 Дата записи акта ¦ 📅 Дата актового запису
+Conditions ¦ Условия ¦ Умови
+Logique ¦ Логические ¦ Логічні
+Conjoint ¦ Супруг(а) ¦ Чоловік / дружина
+Parents ¦ Родители ¦ Батьки
+N° de fiche ¦ № карточки ¦ № картки
+Date ¦ Дата ¦ Дата
+Personne(s) ¦ Человек (люди) ¦ Людина (люди)
+Description ¦ Описание ¦ Опис
+N° d’événement ¦ № события ¦ № події
+Foyer ¦ Домохозяйство ¦ Домогосподарство
+Employeur ¦ Работодатель ¦ Роботодавець
+Situation ¦ Положение ¦ Стан
+Rue ¦ Улица ¦ Вулиця
+N° ¦ № ¦ №
+Adresse entière ¦ Полный адрес ¦ Повна адреса
+Deuxième prénom ¦ Второе имя ¦ Друге ім’я
+Titre ¦ Титул ¦ Титул
+Suffixe ¦ Суффикс ¦ Суфікс
+FamilySearch ¦ FamilySearch ¦ FamilySearch
+Description physique ¦ Внешность ¦ Зовнішність
+Teint ¦ Цвет лица ¦ Колір обличчя
+Origine ¦ Происхождение ¦ Походження
+Vivant ? ¦ Жив(а)? ¦ Живий(-а)?
+Modifié le ¦ Изменено ¦ Змінено
+Cause ¦ Причина ¦ Причина
+Autorité ¦ Орган власти ¦ Орган влади
+Confiance ¦ Уверенность ¦ Впевненість
+Date convertie ¦ Преобразованная дата ¦ Перетворена дата
+Autre date ¦ Другая дата ¦ Інша дата
+Informations en plus ¦ Дополнительные сведения ¦ Додаткові відомості
+Calendrier ¦ Календарь ¦ Календар
+Relevés de dépouillement ¦ Выписки ¦ Виписки
+Noms de famille ¦ Фамилии ¦ Прізвища
+Âges au décès ¦ Возраст на момент смерти ¦ Вік на момент смерті
+Décès par siècle ¦ Смерти по векам ¦ Смерті за століттями
+Communes de naissance ¦ Коммуны рождения ¦ Комуни народження
+Départements de naissance ¦ Департаменты рождения ¦ Департаменти народження
+Naissances par mois ¦ Рождения по месяцам ¦ Народження за місяцями
+Personnes par génération ¦ Люди по поколениям ¦ Люди за поколіннями
+Additionne des nombres ou des plages. ¦ Складывает числа или диапазоны. ¦ Додає числа або діапазони.
+La moyenne des nombres. ¦ Среднее значение чисел. ¦ Середнє значення чисел.
+Le plus petit nombre. ¦ Наименьшее число. ¦ Найменше число.
+Le plus grand nombre. ¦ Наибольшее число. ¦ Найбільше число.
+Compte les cellules qui contiennent un nombre. ¦ Считает ячейки, содержащие число. ¦ Рахує клітинки, що містять число.
+Compte les cellules qui ne sont pas vides. ¦ Считает непустые ячейки. ¦ Рахує непорожні клітинки.
+Compte les cellules vides. ¦ Считает пустые ячейки. ¦ Рахує порожні клітинки.
+Multiplie des nombres. ¦ Перемножает числа. ¦ Перемножує числа.
+Arrondit au plus proche. ¦ Округляет до ближайшего. ¦ Округлює до найближчого.
+Arrondit vers zéro. ¦ Округляет к нулю. ¦ Округлює до нуля.
+Arrondit en s’éloignant de zéro. ¦ Округляет от нуля. ¦ Округлює від нуля.
+La partie entière (arrondi vers le bas). ¦ Целая часть (округление вниз). ¦ Ціла частина (округлення вниз).
+Le nombre sans son signe. ¦ Число без знака. ¦ Число без знака.
+Le reste d’une division. ¦ Остаток от деления. ¦ Остача від ділення.
+Un nombre élevé à une puissance. ¦ Число, возведённое в степень. ¦ Число, піднесене до степеня.
+La racine carrée. ¦ Квадратный корень. ¦ Квадратний корінь.
+La valeur du milieu. ¦ Значение посередине. ¦ Значення посередині.
+L’écart type (sur un échantillon). ¦ Стандартное отклонение (по выборке). ¦ Стандартне відхилення (за вибіркою).
+La place d’un nombre dans une liste (1 = le plus grand ; ordre 1 = le plus petit d’abord). ¦ Место числа в списке (1 = наибольшее; порядок 1 = сначала наименьшее). ¦ Місце числа у списку (1 = найбільше; порядок 1 = спершу найменше).
+La k-ième plus grande valeur. ¦ k-е по величине наибольшее значение. ¦ k-те за величиною найбільше значення.
+La k-ième plus petite valeur. ¦ k-е по величине наименьшее значение. ¦ k-те за величиною найменше значення.
+Une valeur si le test est vrai, une autre sinon. ¦ Одно значение, если проверка истинна, другое — если нет. ¦ Одне значення, якщо перевірка істинна, інше — якщо ні.
+La valeur du premier test vrai. ¦ Значение первой истинной проверки. ¦ Значення першої істинної перевірки.
+La valeur, ou autre chose s’il y a une erreur. ¦ Значение или что-то другое, если есть ошибка. ¦ Значення або щось інше, якщо є помилка.
+La valeur, ou autre chose si elle n’est pas trouvée (#N/A). ¦ Значение или что-то другое, если оно не найдено (#N/A). ¦ Значення або щось інше, якщо його не знайдено (#N/A).
+VRAI si tous les tests sont vrais. ¦ ИСТИНА, если все проверки истинны. ¦ ІСТИНА, якщо всі перевірки істинні.
+VRAI si au moins un test est vrai. ¦ ИСТИНА, если хотя бы одна проверка истинна. ¦ ІСТИНА, якщо хоча б одна перевірка істинна.
+La valeur VRAI (comme le mot VRAI). ¦ Значение ИСТИНА (как слово VRAI). ¦ Значення ІСТИНА (як слово VRAI).
+La valeur FAUX (comme le mot FAUX). ¦ Значение ЛОЖЬ (как слово FAUX). ¦ Значення ХИБНІСТЬ (як слово FAUX).
+Inverse un test. ¦ Обращает проверку. ¦ Обертає перевірку.
+Compte les cellules qui remplissent une condition (">60", "laboureur", "lab*"). ¦ Считает ячейки, удовлетворяющие условию (">60", "laboureur", "lab*"). ¦ Рахує клітинки, що відповідають умові (">60", "laboureur", "lab*").
+Compte les lignes qui remplissent toutes les conditions. ¦ Считает строки, удовлетворяющие всем условиям. ¦ Рахує рядки, що відповідають усім умовам.
+Additionne les cellules qui remplissent une condition. ¦ Складывает ячейки, удовлетворяющие условию. ¦ Додає клітинки, що відповідають умові.
+Additionne les lignes qui remplissent toutes les conditions. ¦ Складывает строки, удовлетворяющие всем условиям. ¦ Додає рядки, що відповідають усім умовам.
+La moyenne des cellules qui remplissent une condition. ¦ Среднее значение ячеек, удовлетворяющих условию. ¦ Середнє значення клітинок, що відповідають умові.
+Cherche dans la 1re colonne d’un tableau et rend la valeur d’une autre colonne. ¦ Ищет в 1-м столбце таблицы и возвращает значение из другого столбца. ¦ Шукає в 1-му стовпці таблиці й повертає значення з іншого стовпця.
+Cherche dans la 1re ligne d’un tableau. ¦ Ищет в 1-й строке таблицы. ¦ Шукає в 1-му рядку таблиці.
+Cherche une valeur et rend celle d’à côté. ¦ Ищет значение и возвращает соседнее. ¦ Шукає значення й повертає сусіднє.
+La valeur à une ligne et une colonne de la plage. ¦ Значение на пересечении строки и столбца диапазона. ¦ Значення на перетині рядка й стовпця діапазону.
+La position d’une valeur dans une plage (type 0 = exactement). ¦ Позиция значения в диапазоне (тип 0 = точно). ¦ Позиція значення в діапазоні (тип 0 = точно).
+La n-ième valeur de la liste. ¦ n-е значение списка. ¦ n-те значення списку.
+Les valeurs sans doublons (déborde sur les cases du dessous). ¦ Значения без повторов (выходят на ячейки ниже). ¦ Значення без повторів (виходять на клітинки нижче).
+La plage triée (ordre 1 = croissant, -1 = décroissant). ¦ Отсортированный диапазон (порядок 1 = по возрастанию, -1 = по убыванию). ¦ Відсортований діапазон (порядок 1 = за зростанням, -1 = за спаданням).
+Les lignes de la plage qui remplissent la condition (ex. =FILTRE(A2:C9; C2:C9>30)). ¦ Строки диапазона, удовлетворяющие условию (напр. =FILTRE(A2:C9; C2:C9>30)). ¦ Рядки діапазону, що відповідають умові (напр. =FILTRE(A2:C9; C2:C9>30)).
+Met des textes bout à bout. ¦ Соединяет тексты подряд. ¦ З’єднує тексти поспіль.
+Met des textes bout à bout avec un séparateur. ¦ Соединяет тексты подряд через разделитель. ¦ З’єднує тексти поспіль через роздільник.
+Les premiers caractères. ¦ Первые символы. ¦ Перші символи.
+Les derniers caractères. ¦ Последние символы. ¦ Останні символи.
+Un morceau au milieu d’un texte. ¦ Фрагмент из середины текста. ¦ Фрагмент із середини тексту.
+Le nombre de caractères. ¦ Количество символов. ¦ Кількість символів.
+En capitales. ¦ Прописными буквами. ¦ Великими літерами.
+En minuscules. ¦ Строчными буквами. ¦ Малими літерами.
+Une capitale au début de chaque mot. ¦ Заглавная буква в начале каждого слова. ¦ Велика літера на початку кожного слова.
+Retire les espaces en trop. ¦ Убирает лишние пробелы. ¦ Прибирає зайві пробіли.
+Remplace un morceau de texte. ¦ Заменяет фрагмент текста. ¦ Замінює фрагмент тексту.
+La position d’un texte dans un autre (sans tenir compte des capitales). ¦ Позиция одного текста в другом (без учёта регистра). ¦ Позиція одного тексту в іншому (без урахування регістру).
+Un nombre ou une date écrits avec un format ("0,00", "0 %", "jj/mm/aaaa"). ¦ Число или дата, записанные в формате ("0,00", "0 %", "jj/mm/aaaa"). ¦ Число або дата, записані у форматі ("0,00", "0 %", "jj/mm/aaaa").
+Le nombre écrit dans un texte. ¦ Число, записанное в тексте. ¦ Число, записане в тексті.
+Fabrique une date. ¦ Создаёт дату. ¦ Створює дату.
+L’année d’une date (date d’acte comprise). ¦ Год даты (включая дату записи акта). ¦ Рік дати (зокрема дати актового запису).
+Le mois d’une date (1 à 12). ¦ Месяц даты (от 1 до 12). ¦ Місяць дати (від 1 до 12).
+Le jour du mois. ¦ День месяца. ¦ День місяця.
+Le jour de la semaine (type 1 : 1 = dimanche ; type 2 : 1 = lundi … 7 = dimanche ; type 3 : 0 = lundi). ¦ День недели (тип 1: 1 = воскресенье; тип 2: 1 = понедельник … 7 = воскресенье; тип 3: 0 = понедельник). ¦ День тижня (тип 1: 1 = неділя; тип 2: 1 = понеділок … 7 = неділя; тип 3: 0 = понеділок).
+La date du jour. ¦ Сегодняшняя дата. ¦ Сьогоднішня дата.
+La date et l’heure. ¦ Дата и время. ¦ Дата й час.
+L’écart entre deux dates, en années, mois ou jours (« AM » : mois en plus des années, « MJ » : jours en plus des mois, « AJ » : jours en plus des années ; « Y », « D », « YM », « MD », « YD » d’Excel compris). ¦ Разница между двумя датами в годах, месяцах или днях («AM»: месяцы сверх лет, «MJ»: дни сверх месяцев, «AJ»: дни сверх лет; «Y», «D», «YM», «MD», «YD» из Excel тоже понимаются). ¦ Різниця між двома датами в роках, місяцях або днях («AM»: місяці понад роки, «MJ»: дні понад місяці, «AJ»: дні понад роки; «Y», «D», «YM», «MD», «YD» з Excel теж розуміються).
+L’âge entre deux dates d’acte (« vers 1784 », « an II » compris) ; « ≈ » si une date est approximative. Unité : « ans », « mois » ou « jours ». ¦ Возраст между двумя датами записей актов («vers 1784», «an II» понимаются); «≈», если дата приблизительная. Единица: «ans», «mois» или «jours». ¦ Вік між двома датами актових записів («vers 1784», «an II» розуміються); «≈», якщо дата приблизна. Одиниця: «ans», «mois» або «jours».
+L’année trouvée dans un texte d’acte, même républicain (« baptisé le 3 frimaire an XII » → 1803). ¦ Год, найденный в тексте записи акта, даже республиканский («baptisé le 3 frimaire an XII» → 1803). ¦ Рік, знайдений у тексті актового запису, навіть республіканський («baptisé le 3 frimaire an XII» → 1803).
+La date comprise, écrite proprement (comme « ✓ Compris : » des champs de date). ¦ Понятая дата, записанная аккуратно (как «✓ Понятно:» в полях даты). ¦ Зрозуміла дата, записана охайно (як «✓ Зрозуміло:» у полях дати).
+« jour », « mois », « année », « vers », « avant », « après » ou « entre ». ¦ «jour», «mois», «année», «vers», «avant», «après» или «entre». ¦ «jour», «mois», «année», «vers», «avant», «après» або «entre».
+La date dans le calendrier républicain. ¦ Дата по республиканскому календарю. ¦ Дата за республіканським календарем.
+La génération d’un numéro Sosa (1 = toi, 2 et 3 = tes parents…). ¦ Поколение номера Sosa (1 = ты, 2 и 3 = твои родители…). ¦ Покоління номера Sosa (1 = ти, 2 і 3 = твої батьки…).
+Le numéro Sosa du père (2 × n). ¦ Номер Sosa отца (2 × n). ¦ Номер Sosa батька (2 × n).
+Le numéro Sosa de la mère (2 × n + 1). ¦ Номер Sosa матери (2 × n + 1). ¦ Номер Sosa матері (2 × n + 1).
+« paternel » ou « maternel » (le côté du Sosa 1). ¦ «paternel» или «maternel» (сторона Sosa 1). ¦ «paternel» або «maternel» (бік Sosa 1).
+Un petit graphique dans la case : "courbe", "barres" ou "gagné" (au-dessus ou au-dessous de zéro). ¦ Маленький график в ячейке: "courbe", "barres" или "gagné" (выше или ниже нуля). ¦ Маленький графік у клітинці: "courbe", "barres" або "gagné" (вище або нижче нуля).
+Donne un nom à une valeur pour l’utiliser dans le calcul. ¦ Даёт имя значению, чтобы использовать его в вычислении. ¦ Дає ім’я значенню, щоб використати його в обчисленні.
+Une petite fonction à soi, à utiliser dans LET, MAP, PAR.LIGNE… ¦ Своя маленькая функция для LET, MAP, PAR.LIGNE… ¦ Власна маленька функція для LET, MAP, PAR.LIGNE…
+Applique la LAMBDA à chaque case de la plage. ¦ Применяет LAMBDA к каждой ячейке диапазона. ¦ Застосовує LAMBDA до кожної клітинки діапазону.
+Un résultat par ligne de la plage. ¦ Один результат на строку диапазона. ¦ Один результат на рядок діапазону.
+Un résultat par colonne de la plage. ¦ Один результат на столбец диапазона. ¦ Один результат на стовпець діапазону.
+Cumule les cases une à une (un total qui avance). ¦ Накапливает ячейки по одной (нарастающий итог). ¦ Накопичує клітинки по одній (наростаючий підсумок).
+Comme REDUCE, avec chaque étape du total. ¦ Как REDUCE, с каждым шагом итога. ¦ Як REDUCE, з кожним кроком підсумку.
+=ligne laissée ¦ строка отложена|строки отложены|строк отложено ¦ рядок відкладено|рядки відкладено|рядків відкладено
+=ligne remplie depuis l’app (tenue à jour) ¦ строка заполнена из приложения (обновляется)|строки заполнены из приложения (обновляются)|строк заполнено из приложения (обновляются) ¦ рядок заповнено із застосунку (оновлюється)|рядки заповнено із застосунку (оновлюються)|рядків заповнено із застосунку (оновлюються)
+=ligne remplie depuis l’app ¦ строка заполнена из приложения|строки заполнены из приложения|строк заполнено из приложения ¦ рядок заповнено із застосунку|рядки заповнено із застосунку|рядків заповнено із застосунку
+=ligne à toi sans fiche : retirée ¦ твоя строка без карточки: убрана|твои строки без карточки: убраны|твоих строк без карточки: убрано ¦ твій рядок без картки: прибрано|твої рядки без картки: прибрано|твоїх рядків без картки: прибрано
+=nouvelle fiche ¦ новая карточка|новые карточки|новых карточек ¦ нова картка|нові картки|нових карток
+=reliée ¦ связана|связаны|связано ¦ пов’язана|пов’язані|пов’язаних
+=laissée ¦ отложена|отложены|отложено ¦ відкладена|відкладені|відкладених
+=autre ligne ¦ другая строка|другие строки|других строк ¦ інший рядок|інші рядки|інших рядків
+=case ¦ ячейка|ячейки|ячеек ¦ клітинка|клітинки|клітинок
+=autre case ¦ другая ячейка|другие ячейки|других ячеек ¦ інша клітинка|інші клітинки|інших клітинок
+=case remplie ¦ ячейка заполнена|ячейки заполнены|ячеек заполнено ¦ клітинку заповнено|клітинки заповнено|клітинок заповнено
+=groupe ¦ группа|группы|групп ¦ група|групи|груп
+=case changée ¦ ячейка изменена|ячейки изменены|ячеек изменено ¦ клітинку змінено|клітинки змінено|клітинок змінено
+=scénario calculé ¦ сценарий вычислен|сценария вычислено|сценариев вычислено ¦ сценарій обчислено|сценарії обчислено|сценаріїв обчислено
+=commande ¦ команда|команды|команд ¦ команда|команди|команд
+=fonction ¦ функция|функции|функций ¦ функція|функції|функцій
+=valeur en plus de la première retirée ¦ значение помимо первого убрано|значения помимо первого убраны|значений помимо первого убрано ¦ значення, крім першого, прибрано|значення, крім першого, прибрано|значень, крім першого, прибрано
+=ligne supprimée ¦ строка удалена|строки удалены|строк удалено ¦ рядок видалено|рядки видалено|рядків видалено
+=colonne supprimée ¦ столбец удалён|столбца удалено|столбцов удалено ¦ стовпець видалено|стовпці видалено|стовпців видалено
+=ligne en double supprimée ¦ повторяющаяся строка удалена|повторяющиеся строки удалены|повторяющихся строк удалено ¦ повторюваний рядок видалено|повторювані рядки видалено|повторюваних рядків видалено
+=ligne coupée en colonnes ¦ строка разбита на столбцы|строки разбиты на столбцы|строк разбито на столбцы ¦ рядок розбито на стовпці|рядки розбито на стовпці|рядків розбито на стовпці
+=case modifiée ¦ ячейка изменена|ячейки изменены|ячеек изменено ¦ клітинку змінено|клітинки змінено|клітинок змінено
+=cellule ¦ ячейка|ячейки|ячеек ¦ клітинка|клітинки|клітинок
+=cellule copiée ¦ ячейка скопирована|ячейки скопированы|ячеек скопировано ¦ клітинку скопійовано|клітинки скопійовано|клітинок скопійовано
+=feuille importée ¦ лист импортирован|листа импортировано|листов импортировано ¦ аркуш імпортовано|аркуші імпортовано|аркушів імпортовано
+{sheets} ({rows}) ¦ {sheets} ({rows}) ¦ {sheets} ({rows})
+la date ¦ дата ¦ дата
+le début ¦ начало ¦ початок
+la fin ¦ конец ¦ кінець
+il manque un guillemet « " » à la fin d’un texte ¦ не хватает кавычки «"» в конце текста ¦ бракує лапки «"» у кінці тексту
+il manque une apostrophe à la fin du nom de feuille ¦ не хватает апострофа в конце имени листа ¦ бракує апострофа в кінці назви аркуша
+après le nom de la feuille, il faut « ! » puis la cellule ¦ после имени листа нужен «!», а затем ячейка ¦ після назви аркуша потрібен «!», а потім клітинка
+la formule s’arrête trop tôt ¦ формула обрывается слишком рано ¦ формула обривається зарано
+il manque une parenthèse « ) » ¦ не хватает скобки «)» ¦ бракує дужки «)»
+une parenthèse « ) » de trop ¦ лишняя скобка «)» ¦ зайва дужка «)»
+un « ; » à une place inattendue ¦ «;» в неожиданном месте ¦ «;» у несподіваному місці
+un numéro Sosa est un nombre entier qui commence à 1 ¦ номер Sosa — целое число, начиная с 1 ¦ номер Sosa — ціле число, починаючи з 1
+il n’y a aucun nombre dans la plage ¦ в диапазоне нет ни одного числа ¦ у діапазоні немає жодного числа
+le diviseur de MOD vaut 0 ¦ делитель MOD равен 0 ¦ дільник MOD дорівнює 0
+pas de racine carrée d’un nombre négatif ¦ нет квадратного корня из отрицательного числа ¦ немає квадратного кореня з від’ємного числа
+aucun nombre ¦ нет чисел ¦ немає чисел
+il faut au moins deux nombres ¦ нужно хотя бы два числа ¦ потрібно хоча б два числа
+aucun test n’est vrai ¦ ни одна проверка не истинна ¦ жодна перевірка не істинна
+les plages n’ont pas la même taille ¦ диапазоны разного размера ¦ діапазони різного розміру
+aucune cellule ne remplit la condition ¦ ни одна ячейка не удовлетворяет условию ¦ жодна клітинка не відповідає умові
+le 2e morceau doit être une plage, par exemple A2:C40 ¦ 2-я часть должна быть диапазоном, например A2:C40 ¦ 2-га частина має бути діапазоном, наприклад A2:C40
+le 2e morceau doit être une plage ¦ 2-я часть должна быть диапазоном ¦ 2-га частина має бути діапазоном
+la plage est vide ¦ диапазон пуст ¦ діапазон порожній
+la condition doit avoir autant de lignes que la plage ¦ в условии должно быть столько же строк, сколько в диапазоне ¦ в умові має бути стільки ж рядків, скільки в діапазоні
+aucune ligne ne remplit la condition ¦ ни одна строка не удовлетворяет условию ¦ жоден рядок не відповідає умові
+le début compte à partir de 1 ¦ начало считается с 1 ¦ початок рахується з 1
+cette date n’a pas de mois ¦ у этой даты нет месяца ¦ у цієї дати немає місяця
+cette date n’a pas de jour ¦ у этой даты нет дня ¦ у цієї дати немає дня
+il faut le jour ¦ нужен день ¦ потрібен день
+le type de JOURSEM va de 1 à 3 (ou 11 à 17) ¦ тип JOURSEM — от 1 до 3 (или от 11 до 17) ¦ тип JOURSEM — від 1 до 3 (або від 11 до 17)
+la fin est avant le début ¦ конец раньше начала ¦ кінець раніше за початок
+la seconde date est avant la première ¦ вторая дата раньше первой ¦ друга дата раніше за першу
+il faut une date au jour près ¦ нужна дата с точностью до дня ¦ потрібна дата з точністю до дня
+le calendrier républicain va du 22 septembre 1792 à 1805 ¦ республиканский календарь действует с 22 сентября 1792 года по 1805 год ¦ республіканський календар діє з 22 вересня 1792 року до 1805 року
+il faut des nombres dans la plage ¦ в диапазоне нужны числа ¦ у діапазоні потрібні числа
+il faut une LAMBDA(…) ¦ нужна LAMBDA(…) ¦ потрібна LAMBDA(…)
+trop de LAMBDA imbriquées ¦ слишком много вложенных LAMBDA ¦ забагато вкладених LAMBDA
+des paires « nom; valeur » puis le calcul ¦ пары «имя; значение», затем вычисление ¦ пари «ім’я; значення», потім обчислення
+un nom (lettres) avant chaque valeur ¦ имя (буквы) перед каждым значением ¦ ім’я (літери) перед кожним значенням
+il faut au moins le calcul ¦ нужно хотя бы вычисление ¦ потрібне хоча б обчислення
+les paramètres sont des noms ¦ параметры — это имена ¦ параметри — це імена
+le calcul n’a pas de résultat ¦ у вычисления нет результата ¦ обчислення не має результату
+le résultat est trop grand pour être calculé ¦ результат слишком велик для вычисления ¦ результат завеликий для обчислення
+une feuille supprimée ¦ удалённый лист ¦ видалений аркуш
+une plage entière ne tient pas dans une case : utilise SOMME(…), INDEX(…)… ¦ целый диапазон не помещается в одну ячейку: используй SOMME(…), INDEX(…)… ¦ цілий діапазон не вміщується в одну клітинку: використай SOMME(…), INDEX(…)…
+puissance impossible ¦ невозможное возведение в степень ¦ неможливе піднесення до степеня
+une LAMBDA seule ne donne pas de valeur : utilise-la dans LET, MAP… ¦ одна LAMBDA не даёт значения: используй её в LET, MAP… ¦ сама LAMBDA не дає значення: використай її в LET, MAP…
+la formule est trop longue ¦ формула слишком длинная ¦ формула задовга
+la formule est trop imbriquée ¦ слишком глубокая вложенность формулы ¦ надто глибока вкладеність формули
+trop de morceaux dans une fonction ¦ слишком много частей в функции ¦ забагато частин у функції
+la formule demande trop de calculs ¦ формула требует слишком много вычислений ¦ формула вимагає забагато обчислень
+le résultat est trop grand ¦ результат слишком велик ¦ результат завеликий
+la plage est trop grande ¦ диапазон слишком большой ¦ діапазон завеликий
+le fichier a trop de cellules ¦ в файле слишком много ячеек ¦ у файлі забагато клітинок

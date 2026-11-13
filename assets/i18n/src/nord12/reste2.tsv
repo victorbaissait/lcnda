@@ -1,0 +1,710 @@
+fr ¦ ru ¦ uk
+=grappe ¦ кластер|кластера|кластеров ¦ кластер|кластери|кластерів
+=chevauchement ¦ перекрытие|перекрытия|перекрытий ¦ перекриття|перекриття|перекриттів
+adn|Nom ¦ Имя ¦ Ім’я
+Test ¦ Тест ¦ Тест
+Segments ¦ Сегменты ¦ Сегменти
+Groupes ¦ Группы ¦ Групи
+Paternel ¦ Отцовская ¦ Батьківська
+Maternel ¦ Материнская ¦ Материнська
+Pas de réponse ¦ Нет ответа ¦ Немає відповіді
+ADN-X ¦ X-ДНК ¦ X-ДНК
+ADN-Y ¦ Y-ДНК ¦ Y-ДНК
+ADNmt ¦ мтДНК ¦ мтДНК
+Autosomal (atDNA) ¦ Аутосомная (atDNA) ¦ Аутосомна (atDNA)
+ADN mitochondrial ¦ Митохондриальная ДНК ¦ Мітохондріальна ДНК
+Demi-oncle, demi-tante ¦ Неполнородный дядя, неполнородная тётя ¦ Неповнорідний дядько, неповнорідна тітка
+vous ¦ ты ¦ ти
+grands-parents ¦ дедушки и бабушки ¦ дідусі й бабусі
+arrière-arrière-grands-parents (4e génération) ¦ прапрадеды и прапрабабушки (4-е поколение) ¦ прапрадіди й прапрабабусі (4-те покоління)
+5e génération ¦ 5-е поколение ¦ 5-те покоління
+6e génération ¦ 6-е поколение ¦ 6-те покоління
+7e génération ¦ 7-е поколение ¦ 7-ме покоління
+8e génération ¦ 8-е поколение ¦ 8-ме покоління
+Relation proposée ¦ Предлагаемое родство ¦ Запропонована спорідненість
+Correspondances en commun ¦ Общие совпадения ¦ Спільні збіги
+Taille de l’arbre ¦ Размер древа ¦ Розмір дерева
+Arbre (adresse) ¦ Древо (адрес) ¦ Дерево (адреса)
+Contact ¦ Контакт ¦ Контакт
+cM sur le X ¦ cM на X ¦ cM на X
+Pays ¦ Страна ¦ Країна
+Fiche sur le site (adresse) ¦ Профиль на сайте (адрес) ¦ Профіль на сайті (адреса)
+Identifiant chez la société ¦ Идентификатор в компании ¦ Ідентифікатор у компанії
+Haplogroupe Y ¦ Y-гаплогруппа ¦ Y-гаплогрупа
+Haplogroupe mt ¦ мт-гаплогруппа ¦ мт-гаплогрупа
+Haplogroupe mitochondrial ¦ Митохондриальная гаплогруппа ¦ Мітохондріальна гаплогрупа
+% d’ADN partagé ¦ % общей ДНК ¦ % спільної ДНК
+Grappe (Genetic Affairs) ¦ Кластер (Genetic Affairs) ¦ Кластер (Genetic Affairs)
+Nom de la correspondance ¦ Имя совпадения ¦ Ім’я збігу
+Chromosome ¦ Хромосома ¦ Хромосома
+SNP ¦ SNP ¦ SNP
+Groupe ou ancêtre ¦ Группа или предок ¦ Група або предок
+n° {n} ¦ № {n} ¦ № {n}
+{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable. ¦ {n} из {total}. Нажми на имя — откроется его карточка (cM, общий предок, древо, отслеживание). Калькулятор предлагает наиболее вероятное родство. ¦ {n} з {total}. Натисни на ім’я — відкриється його картка (cM, спільний предок, дерево, відстеження). Калькулятор пропонує найімовірнішу спорідненість.
+Supprimer {n} correspondances et leurs segments ? ¦ Удалить совпадения ({n}) и их сегменты? ¦ Видалити збіги ({n}) та їхні сегменти?
+Supprimer cette correspondance et ses segments ? ¦ Удалить это совпадение и его сегменты? ¦ Видалити цей збіг і його сегменти?
+Le centiMorgan (cM) mesure l’ADN que vous avez en commun : environ 3 400 cM avec un parent, 850 avec un cousin germain, 200 avec un cousin issu de germain. Recopie le chiffre donné par le site du test. ¦ Сантиморган (cM) измеряет ДНК, общую у тебя с другим человеком: около 3 400 cM с родителем, 850 с двоюродным братом или сестрой, 200 с троюродным. Перепиши число, которое даёт сайт теста. ¦ Сантиморган (cM) вимірює ДНК, спільну в тебе з іншою людиною: близько 3 400 cM з одним із батьків, 850 з двоюрідним братом чи сестрою, 200 з троюрідним. Перепиши число, яке дає сайт тесту.
+Un long morceau d’ADN en commun (plus de 20 cM) montre souvent une parenté proche et sûre ; beaucoup de petits morceaux peuvent venir d’ancêtres très anciens. ¦ Длинный общий кусок ДНК (больше 20 cM) часто указывает на близкое и надёжное родство; много мелких кусков могут идти от очень далёких предков. ¦ Довгий спільний шматок ДНК (понад 20 cM) часто вказує на близьку й певну спорідненість; багато дрібних шматків можуть походити від дуже давніх предків.
+Relation probable ({cm} cM, {pct} %) ¦ Вероятное родство ({cm} cM, {pct} %) ¦ Імовірна спорідненість ({cm} cM, {pct} %)
+fichier de <b>{name}</b> ¦ файл от <b>{name}</b> ¦ файл від <b>{name}</b>
+{n} de {tool} : chacune devient un groupe (« {tool} 1 »…), retrouvé dans « 🗂️ Groupes ». ¦ {n} из {tool}: каждый становится группой («{tool} 1»…), её можно найти в «🗂️ Группы». ¦ {n} з {tool}: кожен стає групою («{tool} 1»…), її можна знайти в «🗂️ Групи».
+⤓ {file} : {n} pour DNA Painter. ¦ ⤓ {file}: {n} для DNA Painter. ¦ ⤓ {file}: {n} для DNA Painter.
+Branche Martin (Bretagne) ¦ Ветвь Martin (Bretagne) ¦ Гілка Martin (Bretagne)
+Supprimer le groupe « {name} » ? (les correspondances restent) ¦ Удалить группу «{name}»? (совпадения останутся) ¦ Видалити групу «{name}»? (збіги залишаться)
+{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages) ¦ {n} от {lo} до {hi} cM (границы в ⚙️ Настройках) ¦ {n} від {lo} до {hi} cM (межі в ⚙️ Налаштуваннях)
+{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages) ¦ {n} от {lo} до {hi} cM для этого теста (границы в ⚙️ Настройках) ¦ {n} від {lo} до {hi} cM для цього тесту (межі в ⚙️ Налаштуваннях)
+{base} ; {n} sans « correspondances en commun » notées, donc ignorées. ¦ {base}; без записанных «общих совпадений», поэтому пропущены: {n}. ¦ {base}; без записаних «спільних збігів», тому пропущено: {n}.
+Créer {n} avec ces couleurs ¦ Создать {n} с этими цветами ¦ Створити {n} з цими кольорами
+Créé par la méthode de Leeds autour de {name} ({cm} cM). ¦ Создано методом Лидса вокруг {name} ({cm} cM). ¦ Створено методом Лідса навколо {name} ({cm} cM).
+masculin|inconnu ¦ неизвестный ¦ невідомий
+Les groupes (clusters) rassemblent les correspondances qui se partagent entre elles : chaque groupe a souvent un même couple d’ancêtres. Garde de 30 à 600 cM pour éviter les parents trop proches et le bruit. ¦ Группы (кластеры) объединяют совпадения, которые совпадают и друг с другом: у каждой группы часто одна и та же пара предков. Оставь от 30 до 600 cM, чтобы исключить слишком близких родственников и шум. ¦ Групи (кластери) об’єднують збіги, які збігаються й між собою: у кожної групи часто та сама пара предків. Залиш від 30 до 600 cM, щоб виключити надто близьких родичів і шум.
+{n} entre {lo} et {hi} cM ; {shared} avec des correspondances en commun, {links} de segments. Les très proches parents (au-delà de {hi} cM) sont écartés : ils correspondent à tout le monde. ¦ {n} от {lo} до {hi} cM; с общими совпадениями: {shared}, по сегментам: {links}. Очень близкие родственники (больше {hi} cM) исключены: они совпадают со всеми. ¦ {n} від {lo} до {hi} cM; зі спільними збігами: {shared}, за сегментами: {links}. Дуже близьких родичів (понад {hi} cM) виключено: вони збігаються з усіма.
+Grappe {n} ¦ Кластер {n} ¦ Кластер {n}
+{n} correspondances · {lo}–{hi} cM · liens {pct} % ¦ Совпадений: {n} · {lo}–{hi} cM · связи {pct} % ¦ Збігів: {n} · {lo}–{hi} cM · зв’язки {pct} %
+Ancêtre commun encore inconnu (côté {side}) : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Общий предок пока неизвестен (сторона: {side}): помести одно из этих совпадений в древо (связанная карточка) или добавь его фамилии. ¦ Спільний предок поки невідомий (бік: {side}): розмісти один із цих збігів у дереві (пов’язана картка) або додай його прізвища.
+Ancêtre commun encore inconnu : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille. ¦ Общий предок пока неизвестен: помести одно из этих совпадений в древо (связанная карточка) или добавь его фамилии. ¦ Спільний предок поки невідомий: розмісти один із цих збігів у дереві (пов’язана картка) або додай його прізвища.
+Groupe automatique : {n} correspondances qui se correspondent entre elles. ¦ Автоматическая группа: совпадения, которые совпадают между собой ({n}). ¦ Автоматична група: збіги, що збігаються між собою ({n}).
+{n} groupes créés ou mis à jour. ¦ Создано или обновлено групп: {n}. ¦ Створено або оновлено груп: {n}.
+{n} groupe créé ou mis à jour. ¦ Создано или обновлено групп: {n}. ¦ Створено або оновлено груп: {n}.
+noms : {list} ¦ фамилии: {list} ¦ прізвища: {list}
+lieux : {list} ¦ места: {list} ¦ місця: {list}
+grappe {n} ¦ кластер {n} ¦ кластер {n}
+plus long segment {cm} cM ¦ самый длинный сегмент {cm} cM ¦ найдовший сегмент {cm} cM
+À {pct} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille. ¦ С вероятностью {pct} % родство по прямой линии (родитель, дед или бабушка, прадед или прабабушка): сначала посмотри на близкую семью. ¦ З імовірністю {pct} % спорідненість по прямій лінії (один із батьків, дід чи баба, прадід чи прабаба): спершу подивись на близьку родину.
+Dans la <b>grappe {n}</b>. ¦ В <b>кластере {n}</b>. ¦ У <b>кластері {n}</b>.
+Dans la <b>grappe {n}</b> — ancêtres communs de la grappe : {couple}. ¦ В <b>кластере {n}</b> — общие предки кластера: {couple}. ¦ У <b>кластері {n}</b> — спільні предки кластера: {couple}.
+Dans la <b>grappe {n}</b> — ancêtres probables de la grappe : {couple}. ¦ В <b>кластере {n}</b> — вероятные предки кластера: {couple}. ¦ У <b>кластері {n}</b> — імовірні предки кластера: {couple}.
+🎯 Déjà placée dans l’arbre : ancêtres communs {couple}. ¦ 🎯 Уже помещено в древо: общие предки {couple}. ¦ 🎯 Уже розміщено в дереві: спільні предки {couple}.
+{couple} (probable) ¦ {couple} (вероятно) ¦ {couple} (імовірно)
+{name} — chr {c} : {a}–{b} Mb, {cm} cM ¦ {name} — хр {c}: {a}–{b} Мб, {cm} cM ¦ {name} — хр {c}: {a}–{b} Мб, {cm} cM
+{pct} % de l’ADN (sur {total} cM) ¦ {pct} % ДНК (из {total} cM) ¦ {pct} % ДНК (з {total} cM)
+Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est. ¦ Чтобы пойти дальше (внешние инструменты, на английском): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Эндогамия (изолированные деревни, закрытые общины) и импликс завышают cM: родство тогда кажется ближе, чем на самом деле. ¦ Щоб піти далі (зовнішні інструменти, англійською): <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. Ендогамія (ізольовані села, закриті громади) та імплекс завищують cM: спорідненість тоді здається ближчою, ніж є насправді.
+Les « origines ethniques » données par les sociétés : des <b>estimations</b>, qui changent d’une société à l’autre et d’une mise à jour à l’autre. Elles ne remplacent pas les registres. ¦ «Этническое происхождение» от компаний — это <b>оценки</b>, которые меняются от компании к компании и от обновления к обновлению. Они не заменяют метрические книги. ¦ «Етнічне походження» від компаній — це <b>оцінки</b>, які змінюються від компанії до компанії та від оновлення до оновлення. Вони не замінюють метричних книг.
+Couleur « {name} » ¦ Цвет «{name}» ¦ Колір «{name}»
+👥 Correspondance ADN « {name} » : <b>{cm} cM</b> ¦ 👥 Совпадение ДНК «{name}»: <b>{cm} cM</b> ¦ 👥 Збіг ДНК «{name}»: <b>{cm} cM</b>
+ancêtre commun : {name} ¦ общий предок: {name} ¦ спільний предок: {name}
+Code civil, article 16-10 (examen des caractéristiques génétiques : seulement à des fins médicales ou de recherche scientifique, avec consentement écrit) ¦ Гражданский кодекс Франции, статья 16-10 (исследование генетических характеристик: только в медицинских целях или для научных исследований, с письменного согласия) ¦ Цивільний кодекс Франції, стаття 16-10 (дослідження генетичних характеристик: лише з медичною метою або для наукових досліджень, за письмовою згодою)
+Code pénal, article 226-28-1 (demander un examen génétique hors des cas prévus par la loi : 3 750 € d’amende) ¦ Уголовный кодекс Франции, статья 226-28-1 (заказ генетического исследования вне случаев, предусмотренных законом: штраф 3 750 €) ¦ Кримінальний кодекс Франції, стаття 226-28-1 (замовлення генетичного дослідження поза випадками, передбаченими законом: штраф 3 750 €)
+Loi n° 2021-1017 du 2 août 2021 relative à la bioéthique, article 16 (nouvelle rédaction de l’article 16-10) ¦ Закон № 2021-1017 от 2 августа 2021 г. о биоэтике, статья 16 (новая редакция статьи 16-10) ¦ Закон № 2021-1017 від 2 серпня 2021 р. про біоетику, стаття 16 (нова редакція статті 16-10)
+Code civil sur Légifrance (articles 16-10 à 16-13 : examen génétique, empreintes génétiques, filiation) ¦ Гражданский кодекс на Légifrance (статьи 16-10–16-13: генетическое исследование, генетические отпечатки, происхождение) ¦ Цивільний кодекс на Légifrance (статті 16-10–16-13: генетичне дослідження, генетичні відбитки, походження)
+Code pénal sur Légifrance (articles 226-25 à 226-30) ¦ Уголовный кодекс на Légifrance (статьи 226-25–226-30) ¦ Кримінальний кодекс на Légifrance (статті 226-25–226-30)
+Code de la santé publique sur Légifrance (articles L1131-1 et suivants : examens génétiques) ¦ Кодекс общественного здравоохранения на Légifrance (статьи L1131-1 и далее: генетические исследования) ¦ Кодекс громадського здоров’я на Légifrance (статті L1131-1 і далі: генетичні дослідження)
+CNIL : les données génétiques sont des données « sensibles » (RGPD, article 9) ¦ CNIL: генетические данные — это «чувствительные» данные (GDPR, статья 9) ¦ CNIL: генетичні дані — це «чутливі» дані (GDPR, стаття 9)
+Personne : mets « À contacter » dans le suivi d’une correspondance. ¦ Никого: поставь «Связаться» в отслеживании совпадения. ¦ Нікого: постав «Зв’язатися» у відстеженні збігу.
+J’ai lu cette mise en garde (elle ne s’affichera plus en haut des autres pages). ¦ Я прочитал(а) это предупреждение (оно больше не будет показываться вверху других страниц). ¦ Я прочитав(ла) це попередження (воно більше не показуватиметься вгорі інших сторінок).
+La mise en garde reviendra en haut des pages. ¦ Предупреждение снова будет показываться вверху страниц. ¦ Попередження знову показуватиметься вгорі сторінок.
+Modifier le test ¦ Изменить тест ¦ Змінити тест
+Société / origine ¦ Компания / источник ¦ Компанія / джерело
+Géré par ¦ Управляет ¦ Керує
+Fichier brut (où il est rangé) ¦ Исходный файл (где он хранится) ¦ Вихідний файл (де він зберігається)
+(qui a accepté quoi, cadre médical ou de recherche, pays…) ¦ (кто на что согласился, медицинские или исследовательские рамки, страна…) ¦ (хто на що погодився, медичні чи дослідницькі рамки, країна…)
+(une ligne par région : « Bretagne ; 42 ») ¦ (по строке на регион: «Bretagne ; 42») ¦ (по рядку на регіон: «Bretagne ; 42»)
+Supprimer ce test, ses correspondances et ses segments ? ¦ Удалить этот тест, его совпадения и сегменты? ¦ Видалити цей тест, його збіги та сегменти?
+Supprimer le test ¦ Удалить тест ¦ Видалити тест
+Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs. ¦ Один тест на человека и на компанию: тип, гаплогруппы, оценка происхождения, маркеры. ¦ Один тест на людину й на компанію: тип, гаплогрупи, оцінка походження, маркери.
+Aucun test ADN pour l’instant ¦ Пока нет ДНК-тестов ¦ Поки немає ДНК-тестів
+Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances. ¦ Добавь свой тест (Ancestry, MyHeritage, 23andMe…), чтобы хранить в нём свои совпадения. ¦ Додай свій тест (Ancestry, MyHeritage, 23andMe…), щоб зберігати в ньому свої збіги.
+⤒ Importer (CSV) ¦ ⤒ Импорт (CSV) ¦ ⤒ Імпорт (CSV)
+Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent. ¦ Сначала добавь тест в «🧬 Мои тесты»: совпадения относятся к нему. ¦ Спершу додай тест у «🧬 Мої тести»: збіги належать до нього.
+Nom, nom de famille, lieu, note… ¦ Имя, фамилия, место, заметка… ¦ Ім’я, прізвище, місце, примітка…
+cM min ¦ cM мин. ¦ cM мін.
+cM max ¦ cM макс. ¦ cM макс.
+Ajouter au groupe… ¦ Добавить в группу… ¦ Додати до групи…
+Retirer du groupe… ¦ Убрать из группы… ¦ Прибрати з групи…
+Aucune correspondance pour ces filtres. ¦ Нет совпадений для этих фильтров. ¦ Немає збігів для цих фільтрів.
+cM : les plus nombreux ¦ cM: сначала больше ¦ cM: спершу більше
+cM : les moins nombreux ¦ cM: сначала меньше ¦ cM: спершу менше
+Nom : A → Z ¦ Имя: А → Я ¦ Ім’я: А → Я
+Nom : Z → A ¦ Имя: Я → А ¦ Ім’я: Я → А
+Segments : les plus nombreux ¦ Сегменты: сначала больше ¦ Сегменти: спершу більше
+Les plus récemment modifiées ¦ Недавно изменённые ¦ Нещодавно змінені
+Les plus anciennement modifiées ¦ Давно изменённые ¦ Давно змінені
+Supprimer les correspondances ¦ Удалить совпадения ¦ Видалити збіги
+Nom (tel que sur le site) ¦ Имя (как на сайте) ¦ Ім’я (як на сайті)
+Relation proposée par la société ¦ Родство, предложенное компанией ¦ Спорідненість, запропонована компанією
+Ancêtre(s) commun(s) (MRCA) ¦ Общий предок (предки) (MRCA) ¦ Спільний предок (предки) (MRCA)
+Jean Martin et Marie Durand ¦ Jean Martin и Marie Durand ¦ Jean Martin і Marie Durand
+Étoiles (0 à 5) ¦ Звёзды (от 0 до 5) ¦ Зірки (від 0 до 5)
+Aucun groupe (« 🗂️ Groupes »). ¦ Нет группы («🗂️ Группы»). ¦ Немає групи («🗂️ Групи»).
+Noms de famille en commun ¦ Общие фамилии ¦ Спільні прізвища
+Lieux en commun ¦ Общие места ¦ Спільні місця
+Arbre en ligne (adresse) ¦ Древо онлайн (адрес) ¦ Дерево онлайн (адреса)
+Taille de son arbre ¦ Размер его (её) древа ¦ Розмір його (її) дерева
+(une par ligne ou séparées par ; — sert à la méthode de Leeds) ¦ (по одной в строке или через ; — нужно для метода Лидса) ¦ (по одному в рядку або через ; — потрібно для методу Лідса)
+Supprimer la correspondance ¦ Удалить совпадение ¦ Видалити збіг
+CSV de la société ¦ CSV компании ¦ CSV компанії
+Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) ou par un outil (DNA Painter, Genetic Affairs : AutoCluster, AutoTree) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé. ¦ CSV-файл, экспортированный компанией (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) или инструментом (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): список совпадений или сегменты. Столбцы распознаются сами. Исходный файл ДНК (твои SNP) никогда не импортируется. ¦ CSV-файл, експортований компанією (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch, LivingDNA) або інструментом (DNA Painter, Genetic Affairs: AutoCluster, AutoTree): список збігів або сегменти. Стовпці розпізнаються самі. Вихідний файл ДНК (твої SNP) ніколи не імпортується.
+Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.) ¦ Сжатый файл: сначала открой его на компьютере и выбери .csv-файл внутри. (Исходный файл ДНК никогда не импортируется.) ¦ Стиснений файл: спершу відкрий його на комп’ютері й вибери .csv-файл усередині. (Вихідний файл ДНК ніколи не імпортується.)
+C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient. ¦ Это сжатый файл (.zip): сначала открой его и выбери .csv внутри. ¦ Це стиснений файл (.zip): спершу відкрий його й вибери .csv усередині.
+Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments). ¦ Столбцы не распознаны: нужны хотя бы имя и cM (совпадения) или хромосома, начало и конец (сегменты). ¦ Стовпці не розпізнано: потрібні щонайменше ім’я та cM (збіги) або хромосома, початок і кінець (сегменти).
+Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés. ¦ Совпадение, которое уже есть (то же имя, тот же тест), обновляется: твои заметки, группы, отслеживание и связанная карточка сохраняются. ¦ Збіг, який уже є (те саме ім’я, той самий тест), оновлюється: твої примітки, групи, відстеження та пов’язана картка зберігаються.
+Remplacer tous les segments de ce test ¦ Заменить все сегменты этого теста ¦ Замінити всі сегменти цього тесту
+Choisis au moins la colonne du nom (« Colonnes reconnues »). ¦ Выбери хотя бы столбец имени («Распознанные столбцы»). ¦ Вибери хоча б стовпець імені («Розпізнані стовпці»).
+Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »). ¦ Выбери столбцы хромосомы, начала и конца («Распознанные столбцы»). ¦ Вибери стовпці хромосоми, початку й кінця («Розпізнані стовпці»).
+Ce test n’a pas encore de segments à exporter : importe-les d’abord (⤒ Importer des segments). ¦ У этого теста ещё нет сегментов для экспорта: сначала импортируй их (⤒ Импорт сегментов). ¦ У цього тесту ще немає сегментів для експорту: спершу імпортуй їх (⤒ Імпорт сегментів).
+Modifier le groupe ¦ Изменить группу ¦ Змінити групу
+Couple d’ancêtres supposé ¦ Предполагаемая пара предков ¦ Імовірна пара предків
+Supprimer le groupe ¦ Удалить группу ¦ Видалити групу
+Groupes et méthode de Leeds ¦ Группы и метод Лидса ¦ Групи та метод Лідса
+Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ». ¦ Распредели свои совпадения по ветвям. Метод Лидса объединяет троюродных и четвероюродных родственников (≈ 90–400 cM), которые совпадают между собой: каждая группа часто указывает на одного из твоих 8 прадедов и прабабушек… если ты записал(а) их «общие совпадения». ¦ Розподіли свої збіги за гілками. Метод Лідса об’єднує троюрідних і чотириюрідних родичів (≈ 90–400 cM), які збігаються між собою: кожна група часто вказує на одного з твоїх 8 прадідів і прабабусь… якщо ти записав(ла) їхні «спільні збіги».
+Aucun groupe pour l’instant ¦ Пока нет групп ¦ Поки немає груп
+Méthode de Leeds automatique ¦ Автоматический метод Лидса ¦ Автоматичний метод Лідса
+Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »). ¦ Групп пока не найдено: открой свои близкие совпадения и заполни «Общие совпадения» (или импортируй столбец «Shared matches»). ¦ Груп поки не знайдено: відкрий свої близькі збіги й заповни «Спільні збіги» (або імпортуй стовпець «Shared matches»).
+Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome. ¦ Совпадения, которые совпадают между собой, образуют кластеры: каждый кластер обычно происходит от одной пары предков. Расчёт использует записанные или импортированные «общие совпадения» и сегменты, которые перекрываются на одной хромосоме. ¦ Збіги, які збігаються між собою, утворюють кластери: кожен кластер зазвичай походить від однієї пари предків. Розрахунок використовує записані або імпортовані «спільні збіги» та сегменти, що перекриваються на одній хромосомі.
+(ou mettre à jour ceux déjà créés) ¦ (или обновить уже созданные) ¦ (або оновити вже створені)
+Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes). ¦ Кластеров пока нет: нужны «общие совпадения» (в карточке совпадения или столбец «Shared matches» при импорте) или сегменты (🧩 Хромосомы). ¦ Кластерів поки немає: потрібні «спільні збіги» (у картці збігу або стовпець «Shared matches» під час імпорту) чи сегменти (🧩 Хромосоми).
+Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve. ¦ Для совпадения (или числа cM) — возможное родство и пары предков из твоего древа, от которых оно, вероятно, происходит, от более вероятных к менее вероятным. Учитываются cM (Shared cM Project), сторона, общие фамилии и места, кластер и возраст: это зацепка для проверки, а не доказательство. ¦ Для збігу (або числа cM) — можлива спорідненість і пари предків із твого дерева, від яких він, імовірно, походить, від найімовірніших до найменш імовірних. Враховуються cM (Shared cM Project), бік, спільні прізвища й місця, кластер і вік: це підказка для перевірки, а не доказ.
+Placer un cousin dans l’arbre ¦ Поместить родственника в древо ¦ Розмістити родича в дереві
+— ou les cM à la main ci-dessous — ¦ — или cM вручную ниже — ¦ — або cM вручну нижче —
+Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement. ¦ Этот тест не связан ни с одной карточкой: свяжи его с протестированным человеком (🧬 Мои тесты), чтобы древо помогало с размещением. ¦ Цей тест не пов’язаний із жодною карткою: пов’яжи його з протестованою людиною (🧬 Мої тести), щоб дерево допомагало з розміщенням.
+Lecture de l’arbre… ¦ Чтение древа… ¦ Читання дерева…
+Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée). ¦ Дальше: найди потомков этой пары («Потомки» в Графиках), сравни с древом совпадения и запиши это в карточку (Общий предок, Связанная карточка). ¦ Далі: знайди нащадків цієї пари («Нащадки» в Графіках), порівняй із деревом збігу й запиши це в картку (Спільний предок, Пов’язана картка).
+Indices ¦ Подсказки ¦ Підказки
+Retenir ¦ Запомнить ¦ Запам’ятати
+Noté dans la correspondance (Ancêtre commun, côté). ¦ Записано в совпадении (Общий предок, сторона). ¦ Записано у збігу (Спільний предок, бік).
+Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment). ¦ «Браузер хромосом»: где каждое совпадение делит с тобой ДНК. Перекрывающиеся сегменты, возможно, идут от одного предка (триангуляция — нужно подтвердить: каждый должен совпадать и с другим на этом сегменте). ¦ «Браузер хромосом»: де кожен збіг має з тобою спільну ДНК. Сегменти, що перекриваються, можливо, походять від одного предка (тріангуляція — треба підтвердити: кожен має збігатися й з іншим на цьому сегменті).
+Le fichier CSV que DNA Painter sait lire (« Paint a new match » → importer) ¦ CSV-файл, который умеет читать DNA Painter («Paint a new match» → импорт) ¦ CSV-файл, який уміє читати DNA Painter («Paint a new match» → імпорт)
+⤒ Importer des segments (CSV) ¦ ⤒ Импорт сегментов (CSV) ¦ ⤒ Імпорт сегментів (CSV)
+⤓ Exporter pour DNA Painter ¦ ⤓ Экспорт для DNA Painter ¦ ⤓ Експорт для DNA Painter
+Segment ¦ Сегмент ¦ Сегмент
+Chevauchements (triangulation possible) ¦ Перекрытия (возможна триангуляция) ¦ Перекриття (можлива тріангуляція)
+Chr ¦ Хр ¦ Хр
+De (Mb) ¦ От (Мб) ¦ Від (Мб)
+À (Mb) ¦ До (Мб) ¦ До (Мб)
+Correspondance 1 ¦ Совпадение 1 ¦ Збіг 1
+Correspondance 2 ¦ Совпадение 2 ¦ Збіг 2
+Aucun pour l’instant. ¦ Пока нет. ¦ Поки немає.
+Segment refusé : vérifie le chromosome, et que la fin est après le début. ¦ Сегмент отклонён: проверь хромосому и то, что конец идёт после начала. ¦ Сегмент відхилено: перевір хромосому і те, що кінець іде після початку.
+Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations. ¦ Сколько общих сантиморган для какого родства? Ориентировочные значения по Shared cM Project (Blaine Bettinger, версия 4, 2020): среднее и диапазон, наблюдаемые на тысячах реальных случаев. Одно и то же значение может подходить нескольким видам родства. ¦ Скільки спільних сантиморган для якої спорідненості? Орієнтовні значення за Shared cM Project (Blaine Bettinger, версія 4, 2020): середнє й діапазон, спостережені на тисячах реальних випадків. Те саме значення може підходити кільком видам спорідненості.
+Ex. 230 ¦ Напр. 230 ¦ Напр. 230
+Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau). ¦ Для этого значения нет известного родства (выше 3 720 cM — это ты сам(а) или однояйцевый близнец). ¦ Для цього значення немає відомої спорідненості (понад 3 720 cM — це ти сам(а) або однояйцевий близнюк).
+Tableau de référence ¦ Справочная таблица ¦ Довідкова таблиця
+Fourchette ¦ Диапазон ¦ Діапазон
+D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X. ¦ По твоему древу: откуда у человека Y-ДНК (отец отца отца…), митохондриальная ДНК (мать матери…) и X-ДНК. Полезно, чтобы понять, кого протестировать, и чтобы читать гаплогруппу или совпадение на X. ¦ За твоїм деревом: звідки в людини Y-ДНК (батько батька батька…), мітохондріальна ДНК (мати матері…) та X-ДНК. Корисно, щоб зрозуміти, кого протестувати, і щоб читати гаплогрупу або збіг на X.
+Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent. ¦ Y-ДНК есть только у мужчин. У женщины нет Y-ДНК: её несут отец, братья или двоюродный брат с той же фамилией. ¦ Y-ДНК є лише в чоловіків. У жінки немає Y-ДНК: її несуть батько, брати чи двоюрідний брат із тим самим прізвищем.
+Pas de père connu dans l’arbre. ¦ В древе нет известного отца. ¦ У дереві немає відомого батька.
+Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester. ¦ У всех этих мужчин (почти) одна и та же Y-хромосома: живой мужчина этой линии может её протестировать. ¦ Усі ці чоловіки мають (майже) ту саму Y-хромосому: живий чоловік цієї лінії може її протестувати.
+Pas de mère connue dans l’arbre. ¦ В древе нет известной матери. ¦ У дереві немає відомої матері.
+Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour. ¦ Передаётся матерями всем детям; дальше её передают только дочери. ¦ Передається матерями всім дітям; далі її передають лише доньки.
+Un homme reçoit son X de sa mère seulement. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Мужчина получает свою X только от матери. Отец передаёт только ту X, которую получил от своей матери: поэтому некоторые предки не могли передать X. {n}: ¦ Чоловік отримує свою X лише від матері. Батько передає лише ту X, яку отримав від своєї матері: тому деякі предки не могли передати X. {n}:
+Une femme reçoit un X de chaque parent. Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. {n} : ¦ Женщина получает по одной X от каждого родителя. Отец передаёт только ту X, которую получил от своей матери: поэтому некоторые предки не могли передать X. {n}: ¦ Жінка отримує по одній X від кожного з батьків. Батько передає лише ту X, яку отримав від своєї матері: тому деякі предки не могли передати X. {n}:
+Aucune estimation : ajoute-les dans un test (« 🧬 Mes tests » → Origines estimées). ¦ Оценок нет: добавь их в тест («🧬 Мои тесты» → Оценка происхождения). ¦ Оцінок немає: додай їх у тест («🧬 Мої тести» → Оцінка походження).
+Ce que montre l’onglet, dans l’ordre voulu, et comment. ¦ Что показывает вкладка, в нужном порядке и как. ¦ Що показує вкладка, у потрібному порядку і як.
+Rubriques de la colonne de gauche ¦ Разделы левой колонки ¦ Розділи лівої колонки
+Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée). ¦ Отметь то, что хочешь видеть; ↑ ↓ для порядка (или перетащи ручку). ¦ Познач те, що хочеш бачити; ↑ ↓ для порядку (або перетягни ручку).
+Ne montrer que les correspondances d’au moins ¦ Показывать только совпадения не меньше ¦ Показувати лише збіги щонайменше
+Lignes affichées à la fois ¦ Строк за раз ¦ Рядків за раз
+Méthode de Leeds : de ¦ Метод Лидса: от ¦ Метод Лідса: від
+Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Всего cM для % (6 800 Ancestry/MyHeritage, 7 400 23andMe) ¦ Усього cM для % (6 800 Ancestry/MyHeritage, 7 400 23andMe)
+Sauvegarde de l’onglet ¦ Резервная копия вкладки ¦ Резервна копія вкладки
+Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part. ¦ Тесты, совпадения, сегменты и группы хранятся в базе (и её резервных копиях). Их можно также экспортировать отдельно. ¦ Тести, збіги, сегменти та групи зберігаються в базі (і її резервних копіях). Їх можна також експортувати окремо.
+Fait. ¦ Готово. ¦ Готово.
+C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes. ¦ Это исходный файл ДНК (твои SNP, то есть твой геном буква за буквой): он никогда не импортируется. Ради защиты твоей частной жизни и жизни твоей семьи, а также потому, что во Франции генетический тест вне медицинских или исследовательских рамок запрещён, приложение хранит только списки совпадений и сегментов. Лучше экспортируй из компании список совпадений (matches) или браузер хромосом. ¦ Це вихідний файл ДНК (твої SNP, тобто твій геном літера за літерою): він ніколи не імпортується. Щоб захистити твоє приватне життя й життя твоєї родини, а також тому, що у Франції генетичний тест поза медичними чи дослідницькими рамками заборонено, застосунок зберігає лише списки збігів і сегментів. Краще експортуй із компанії список збігів (matches) або браузер хромосом.
+=analysée ¦ проанализирована|проанализированы|проанализировано ¦ проаналізована|проаналізовані|проаналізовано
+=visage à nommer ¦ лицо для подписи|лица для подписи|лиц для подписи ¦ обличчя для підпису|обличчя для підпису|облич для підпису
+=photo restante ¦ оставшееся фото|оставшихся фото|оставшихся фото ¦ фото, що залишилося|фото, що залишилися|фото, що залишилися
+=photo sautée ¦ пропущенное фото|пропущенных фото|пропущенных фото ¦ пропущене фото|пропущені фото|пропущених фото
+=visage ignoré ¦ пропущенное лицо|пропущенных лица|пропущенных лиц ¦ пропущене обличчя|пропущені обличчя|пропущених облич
+Impossible de charger le modèle de reconnaissance (connexion internet requise la première fois, ou fichier modifié refusé). ¦ Не удалось загрузить модель распознавания (в первый раз нужно подключение к интернету, или изменённый файл отклонён). ¦ Не вдалося завантажити модель розпізнавання (першого разу потрібне з’єднання з інтернетом, або змінений файл відхилено).
+Bibliothèque… ¦ Библиотека… ¦ Бібліотека…
+Bibliothèque illisible. ¦ Библиотека не читается. ¦ Бібліотека не читається.
+Bibliothèque de reconnaissance indisponible. ¦ Библиотека распознавания недоступна. ¦ Бібліотека розпізнавання недоступна.
+Repérage des visages… ¦ Поиск лиц… ¦ Пошук облич…
+Points du visage… ¦ Точки лица… ¦ Точки обличчя…
+Empreintes des visages… ¦ Отпечатки лиц… ¦ Відбитки облич…
+Analyse arrêtée. ¦ Анализ остановлен. ¦ Аналіз зупинено.
+Fil de calcul impossible : {err} ¦ Поток вычислений невозможен: {err} ¦ Потік обчислень неможливий: {err}
+Le modèle met trop de temps à se charger. ¦ Модель загружается слишком долго. ¦ Модель завантажується надто довго.
+le calcul a planté ¦ вычисление сбойнуло ¦ обчислення збилося
+Fil de calcul en erreur. ¦ Ошибка потока вычислений. ¦ Помилка потоку обчислень.
+Calcul sur la page (plus lent)… ¦ Вычисление на странице (медленнее)… ¦ Обчислення на сторінці (повільніше)…
+Redémarrage du calcul… ¦ Перезапуск вычисления… ¦ Перезапуск обчислення…
+trop longue à analyser (plus de {n} s) ¦ слишком долго анализировать (больше {n} с) ¦ надто довго аналізувати (понад {n} с)
+Étape 1 : l’app repère les visages sur les photos choisies. Étape 2 : elle propose un nom d’après les visages déjà identifiés. Tout se calcule sur cet ordinateur. ¦ Шаг 1: приложение находит лица на выбранных фото. Шаг 2: оно предлагает имя по уже опознанным лицам. Всё вычисляется на этом компьютере. ¦ Крок 1: застосунок знаходить обличчя на вибраних фото. Крок 2: він пропонує ім’я за вже впізнаними обличчями. Усе обчислюється на цьому комп’ютері.
+MÉDIAS · VISAGES ¦ МЕДИАФАЙЛЫ · ЛИЦА ¦ МЕДІАФАЙЛИ · ОБЛИЧЧЯ
+Visages ¦ Лица ¦ Обличчя
+Chargement des photos… ¦ Загрузка фото… ¦ Завантаження фото…
+≈ {time} sur cet ordinateur ¦ ≈ {time} на этом компьютере ¦ ≈ {time} на цьому комп’ютері
+environ 1 à 3 s par photo, selon l’ordinateur ¦ примерно от 1 до 3 с на фото, в зависимости от компьютера ¦ приблизно від 1 до 3 с на фото, залежно від комп’ютера
+<b>{n}</b> identifiés ¦ опознано: <b>{n}</b> ¦ впізнано: <b>{n}</b>
+<b>{n}</b> identifié ¦ опознано: <b>{n}</b> ¦ впізнано: <b>{n}</b>
+{n} identifiés ¦ опознано: {n} ¦ впізнано: {n}
+{n} identifié ¦ опознано: {n} ¦ впізнано: {n}
+① Trouver les visages ¦ ① Найти лица ¦ ① Знайти обличчя
+② Qui est-ce ? ¦ ② Кто это? ¦ ② Хто це?
+Les {n} plus récentes ¦ Последние ({n}) ¦ Останні ({n})
+{n} à analyser ¦ К анализу: {n} ¦ До аналізу: {n}
+<b>Analyse en pause</b> : {n} sur {total} ({what}). ¦ <b>Анализ на паузе</b>: {n} из {total} ({what}). ¦ <b>Аналіз на паузі</b>: {n} з {total} ({what}).
+analyse|Abandonner ¦ Отказаться ¦ Відмовитися
+Quelles photos analyser ? ¦ Какие фото анализировать? ¦ Які фото аналізувати?
+Sauter les photos déjà analysées ¦ Пропустить уже проанализированные фото ¦ Пропустити вже проаналізовані фото
+Analyser {n} ¦ Анализировать: {n} ¦ Аналізувати: {n}
+Rien à analyser ici ¦ Здесь нечего анализировать ¦ Тут нічого аналізувати
+↻ Réessayer {n} ¦ ↻ Повторить: {n} ¦ ↻ Повторити: {n}
+Photos avec des visages à nommer ¦ Фото с лицами, которые нужно подписать ¦ Фото з обличчями, які треба підписати
+Ouvrir {name} ¦ Открыть {name} ¦ Відкрити {name}
+détection simple ¦ простое распознавание ¦ просте розпізнавання
+Ouvrir et identifier ¦ Открыть и опознать ¦ Відкрити й впізнати
+Tous les visages trouvés ont un nom ou ont été ignorés. 👍 ¦ У всех найденных лиц есть имя, или они пропущены. 👍 ¦ Усі знайдені обличчя мають ім’я або пропущені. 👍
+Lance une analyse : les photos où l’app trouve des visages apparaîtront ici. ¦ Запусти анализ: фото, на которых приложение найдёт лица, появятся здесь. ¦ Запусти аналіз: фото, на яких застосунок знайде обличчя, з’являться тут.
+entre 1900 et 1950, vers 1925, 1960… ¦ между 1900 и 1950, около 1925, 1960… ¦ між 1900 і 1950, близько 1925, 1960…
+Les photos marquées avec des visages ¦ Фото, отмеченные лицами ¦ Фото, позначені обличчями
+photo de la personne, portrait d’une fiche, visages déjà identifiés, étiquette « portrait » ou « visage » ¦ фото человека, портрет карточки, уже опознанные лица, метка «портрет» или «лицо» ¦ фото людини, портрет картки, вже впізнані обличчя, мітка «портрет» або «обличчя»
+Les photos affichées dans la liste Médias ¦ Фото, показанные в списке Медиафайлы ¦ Фото, показані в списку Медіафайли
+avec ta recherche et tes filtres actuels ¦ с твоим текущим поиском и фильтрами ¦ з твоїм поточним пошуком і фільтрами
+Les photos d’une personne ¦ Фото человека ¦ Фото людини
+rattachées à sa fiche ou où elle est identifiée ¦ привязанные к его карточке или где он опознан ¦ прив’язані до її картки або де її впізнано
+Les photos d’une étiquette ¦ Фото с меткой ¦ Фото з міткою
+Un album ou un dossier ¦ Альбом или папка ¦ Альбом або тека
+Une période ¦ Период ¦ Період
+d’après la date de la photo, sinon sa date d’ajout ¦ по дате фото, иначе по дате добавления ¦ за датою фото, інакше за датою додавання
+les dernières ajoutées ¦ последние добавленные ¦ останні додані
+Toutes les photos ¦ Все фото ¦ Усі фото
+peut être long : tu peux mettre en pause et reprendre plus tard ¦ может занять время: можно поставить на паузу и продолжить позже ¦ може тривати довго: можна поставити на паузу й продовжити пізніше
+En attendant, nomme les inconnus regroupés (👥). ¦ А пока подпиши сгруппированных незнакомцев (👥). ¦ А поки підпиши згрупованих незнайомців (👥).
+Pour avoir des propositions : ouvre quelques photos et identifie les visages à la main (bouton « Identifier » de la visionneuse, ou « Ouvrir et identifier » à l’étape ①), au moins une fois par personne. ¦ Чтобы получать предложения: открой несколько фото и опознай лица вручную (кнопка «Опознать» в просмотрщике или «Открыть и опознать» на шаге ①), хотя бы по разу для каждого человека. ¦ Щоб отримувати пропозиції: відкрий кілька фото й впізнай обличчя вручну (кнопка «Впізнати» в переглядачі або «Відкрити й впізнати» на кроці ①), хоча б раз для кожної людини.
+Aucun visage trouvé pour l’instant. Commence par l’étape ① : choisis quelques photos et lance l’analyse. ¦ Лиц пока не найдено. Начни с шага ①: выбери несколько фото и запусти анализ. ¦ Облич поки не знайдено. Почни з кроку ①: вибери кілька фото й запусти аналіз.
+💡 Propositions ¦ 💡 Предложения ¦ 💡 Пропозиції
+👥 Inconnus regroupés ¦ 👥 Сгруппированные незнакомцы ¦ 👥 Згруповані незнайомці
+❔ Autres inconnus ¦ ❔ Другие незнакомцы ¦ ❔ Інші незнайомці
+✓ Identifiés ¦ ✓ Опознанные ¦ ✓ Впізнані
+✓ Accepter les {n} très probables ¦ ✓ Принять очень вероятные ({n}) ¦ ✓ Прийняти дуже ймовірні ({n})
+visage|probable ¦ вероятно ¦ імовірно
+ressemblance {pct} % ¦ сходство {pct} % ¦ схожість {pct} %
+ou {name} ? ¦ или {name}? ¦ або {name}?
+✓ Oui ¦ ✓ Да ¦ ✓ Так
+Quelqu’un d’autre… ¦ Кто-то другой… ¦ Хтось інший…
+Pas un visage, ou personne à ne pas nommer ¦ Не лицо или человек, которого не нужно называть ¦ Не обличчя або людина, яку не треба називати
+Aucune proposition pour l’instant : analyse plus de photos, ou identifie plus de visages à la main. ¦ Пока нет предложений: проанализируй больше фото или опознай больше лиц вручную. ¦ Поки немає пропозицій: проаналізуй більше фото або впізнай більше облич вручну.
+<b>{n} visages</b> qui se ressemblent, sur {p} photos. ¦ <b>Похожие лица: {n}</b>, на фото: {p}. ¦ <b>Схожі обличчя: {n}</b>, на фото: {p}.
+Nommer… ¦ Подписать… ¦ Підписати…
+Demander à la famille ¦ Спросить у семьи ¦ Запитати в родини
+Personne n’est encore identifié. ¦ Пока никто не опознан. ¦ Поки нікого не впізнано.
+⏸ En pause (la photo en cours se termine) ¦ ⏸ На паузе (текущее фото заканчивается) ¦ ⏸ На паузі (поточне фото завершується)
+{s} s par photo · reste ≈ {left} ¦ {s} с на фото · осталось ≈ {left} ¦ {s} с на фото · залишилося ≈ {left}
+vitesse : on mesure… ¦ скорость: измеряем… ¦ швидкість: вимірюємо…
+■ Arrêter ¦ ■ Остановить ¦ ■ Зупинити
+Calcul sur la page (le fil à part n’a pas pu démarrer) : un peu plus lent. ¦ Вычисление на странице (отдельный поток не запустился): чуть медленнее. ¦ Обчислення на сторінці (окремий потік не запустився): трохи повільніше.
+Modèle de reconnaissance indisponible ({why}). Détection simple du navigateur : les visages sont repérés, mais sans proposition de nom. ¦ Модель распознавания недоступна ({why}). Простое распознавание браузера: лица находятся, но без предложения имени. ¦ Модель розпізнавання недоступна ({why}). Просте розпізнавання браузера: обличчя знаходяться, але без пропозиції імені.
+Chargement du modèle… ¦ Загрузка модели… ¦ Завантаження моделі…
+Chargement du modèle : {step} ¦ Загрузка модели: {step} ¦ Завантаження моделі: {step}
+■ Analyse arrêtée : {n}{more}. ¦ ■ Анализ остановлен: {n}{more}. ¦ ■ Аналіз зупинено: {n}{more}.
+✓ Analyse finie : {n}{more}. ¦ ✓ Анализ завершён: {n}{more}. ¦ ✓ Аналіз завершено: {n}{more}.
+Il reste {n} : « ▶ Reprendre » quand tu veux. ¦ Осталось: {n}. «▶ Продолжить», когда захочешь. ¦ Залишилося: {n}. «▶ Продовжити», коли захочеш.
+■ Analyse arrêtée. ¦ ■ Анализ остановлен. ¦ ■ Аналіз зупинено.
+{n} : tu pourras reprendre. ¦ {n}: можно будет продолжить. ¦ {n}: можна буде продовжити.
+Visage ignoré ¦ Лицо пропущено ¦ Обличчя пропущено
+photos de {name} ¦ фото: {name} ¦ фото: {name}
+photos sautées ¦ пропущенные фото ¦ пропущені фото
+Identifié : {name} ¦ Опознан(а): {name} ¦ Впізнано: {name}
+{n} (certitude « probable ») ¦ {n} (уверенность «вероятно») ¦ {n} (певність «імовірно»)
+Qui est-ce ? ({n} visages) ¦ Кто это? (лиц: {n}) ¦ Хто це? (облич: {n})
+Certitude ¦ Уверенность ¦ Певність
+Certaine ¦ Точно ¦ Певно
+Possible ¦ Возможно ¦ Можливо
+Choisis… ¦ Выбрать… ¦ Вибрати…
+Hier et aujourd’hui ¦ Тогда и сейчас ¦ Тоді й тепер
+Nom de la comparaison ¦ Название сравнения ¦ Назва порівняння
+Enregistrer la comparaison (reliée aux deux photos et aux personnes) ¦ Сохранить сравнение (связанное с обоими фото и людьми) ¦ Зберегти порівняння (пов’язане з обома фото та людьми)
+A — l’image ancienne ¦ A — старое изображение ¦ A — старе зображення
+B — la photo d’aujourd’hui ¦ B — сегодняшнее фото ¦ B — сьогоднішнє фото
+Photo A ¦ Фото A ¦ Фото A
+Photo B ¦ Фото B ¦ Фото B
+La photo A ¦ Фото A ¦ Фото A
+La photo B ¦ Фото B ¦ Фото B
+la photo A ¦ фото A ¦ фото A
+La photo « {name} » n’a pas pu être ouverte. ¦ Не удалось открыть фото «{name}». ¦ Не вдалося відкрити фото «{name}».
+Choisis la photo B à droite → ¦ Выбери фото B справа → ¦ Вибери фото B праворуч →
+Choisis la photo A à droite → ¦ Выбери фото A справа → ¦ Вибери фото A праворуч →
+Clique <b>{what}</b> (à ta gauche sur l’écran). ¦ Нажми <b>{what}</b> (слева от тебя на экране). ¦ Натисни <b>{what}</b> (ліворуч від тебе на екрані).
+Échap pour arrêter. ¦ Esc — остановить. ¦ Esc — зупинити.
+Clique sur la photo <b>{side}</b> : {what}. ¦ Нажми на фото <b>{side}</b>: {what}. ¦ Натисни на фото <b>{side}</b>: {what}.
+Aucun visage trouvé sur la photo {side} : pose les yeux en deux clics. ¦ На фото {side} лицо не найдено: отметь глаза двумя щелчками. ¦ На фото {side} обличчя не знайдено: познач очі двома клацаннями.
+Le modèle de visages n’a pas pu être chargé. ¦ Не удалось загрузить модель лиц. ¦ Не вдалося завантажити модель облич.
+Pose les yeux en deux clics par photo. ¦ Отметь глаза двумя щелчками на каждом фото. ¦ Познач очі двома клацаннями на кожному фото.
+Pas encore de ressemblance calculée pour ces deux photos. ¦ Для этих двух фото сходство ещё не вычислено. ¦ Для цих двох фото схожість ще не обчислено.
+« ✨ Repérer les yeux tout seul » la calcule (modèle de visages sur cet ordinateur), ou lance <b>👤 Visages</b> sur ces photos (Listes → Médias). ¦ «✨ Найти глаза автоматически» вычислит его (модель лиц на этом компьютере), или запусти <b>👤 Лица</b> на этих фото (Списки → Медиафайлы). ¦ «✨ Знайти очі автоматично» обчислить її (модель облич на цьому комп’ютері), або запусти <b>👤 Обличчя</b> на цих фото (Списки → Медіафайли).
+Calculée par le modèle de visages, sur cet ordinateur ({from}). L’âge, la lumière, l’angle et la qualité des photos changent beaucoup le résultat ; un air de famille (parent, frère, sœur) peut aussi donner une ressemblance forte. À confirmer par les actes. ¦ Вычислено моделью лиц на этом компьютере ({from}). Возраст, свет, ракурс и качество фото сильно влияют на результат; семейное сходство (родитель, брат, сестра) тоже может дать высокое сходство. Нужно подтвердить по актам. ¦ Обчислено моделлю облич на цьому комп’ютері ({from}). Вік, світло, ракурс і якість фото сильно впливають на результат; родинна схожість (один із батьків, брат, сестра) теж може дати високу схожість. Треба підтвердити за актами.
+visages repérés à l’instant ¦ лица только что найдены ¦ обличчя щойно знайдено
+visages trouvés par 👤 Visages ¦ лица, найденные через 👤 Лица ¦ обличчя, знайдені через 👤 Обличчя
+Rideau ¦ Шторка ¦ Шторка
+Part de B ¦ Доля B ¦ Частка B
+La photo B, à poser à côté de « {name} ». ¦ Фото B, чтобы поставить рядом с «{name}». ¦ Фото B, щоб поставити поруч із «{name}».
+Une photo de cette personne ; ensuite, la photo à comparer. ¦ Фото этого человека; затем фото для сравнения. ¦ Фото цієї людини; потім фото для порівняння.
+Comparer deux photos (ressemblance, même personne à deux âges…) ¦ Сравнить два фото (сходство, один человек в двух возрастах…) ¦ Порівняти два фото (схожість, та сама людина у двох віках…)
+Ressemblance très forte — ce n’est pas une preuve ¦ Очень высокое сходство — это не доказательство ¦ Дуже висока схожість — це не доказ
+Ressemblance forte — ce n’est pas une preuve ¦ Высокое сходство — это не доказательство ¦ Висока схожість — це не доказ
+Ressemblance moyenne — ce n’est pas une preuve ¦ Среднее сходство — это не доказательство ¦ Середня схожість — це не доказ
+Ressemblance faible — ce n’est pas une preuve ¦ Слабое сходство — это не доказательство ¦ Слабка схожість — це не доказ
+Affichage des deux photos ¦ Показ двух фото ¦ Показ двох фото
+Zoomer et déplacer les deux photos ensemble ¦ Масштабировать и двигать оба фото вместе ¦ Масштабувати й рухати обидва фото разом
+Zoomer ¦ Масштаб ¦ Масштаб
+Toute la photo ¦ Всё фото ¦ Усе фото
+Toute la photo (double-clic) ¦ Всё фото (двойной щелчок) ¦ Усе фото (подвійне клацання)
+Les deux photos : molette pour zoomer, glisser pour déplacer, double-clic pour revoir toute la photo ¦ Оба фото: колёсико — масштаб, перетаскивание — сдвиг, двойной щелчок — снова всё фото ¦ Обидва фото: коліщатко — масштаб, перетягування — зсув, подвійне клацання — знову все фото
+Les deux photos ¦ Оба фото ¦ Обидва фото
+Mettre A à la place de B et B à la place de A ¦ Поставить A на место B, а B на место A ¦ Поставити A на місце B, а B на місце A
+⇄ Échanger A et B ¦ ⇄ Поменять A и B местами ¦ ⇄ Поміняти A і B місцями
+Caler la photo d’aujourd’hui ¦ Подогнать сегодняшнее фото ¦ Припасувати сьогоднішнє фото
+Clique deux mêmes repères sur chaque photo (le haut du clocher, le coin d’un toit…) : la photo d’aujourd’hui est tournée et mise à la même taille. ¦ Отметь две одинаковые точки на каждом фото (верх колокольни, угол крыши…): сегодняшнее фото повернётся и примет тот же размер. ¦ Познач дві однакові точки на кожному фото (верх дзвіниці, кут даху…): сьогоднішнє фото повернеться й набуде того самого розміру.
+Deux clics sur la photo A, puis les deux mêmes repères sur la photo B ¦ Два щелчка на фото A, затем те же две точки на фото B ¦ Два клацання на фото A, потім ті самі дві точки на фото B
+📌 Poser 2 repères par photo ¦ 📌 Поставить 2 точки на фото ¦ 📌 Поставити 2 точки на фото
+Caler sur les repères ¦ Подогнать по точкам ¦ Припасувати за точками
+✕ Retirer les repères ¦ ✕ Убрать точки ¦ ✕ Прибрати точки
+Ajuster à la main ¦ Подогнать вручную ¦ Припасувати вручну
+Glisser sur l’image déplace seulement la photo d’aujourd’hui ¦ Перетаскивание по изображению двигает только сегодняшнее фото ¦ Перетягування по зображенню рухає лише сьогоднішнє фото
+Glisser déplace la photo B ¦ Перетаскивание двигает фото B ¦ Перетягування рухає фото B
+Les yeux (alignement) ¦ Глаза (выравнивание) ¦ Очі (вирівнювання)
+Les deux visages sont mis à la même taille, les yeux à la même hauteur : la comparaison est bien plus juste. ¦ Оба лица приводятся к одному размеру, глаза — на одну высоту: сравнение гораздо точнее. ¦ Обидва обличчя зводяться до одного розміру, очі — на одну висоту: порівняння набагато точніше.
+✨ Repérer les yeux tout seul ¦ ✨ Найти глаза автоматически ¦ ✨ Знайти очі автоматично
+Clique l’œil gauche puis l’œil droit sur chaque photo ¦ Нажми на левый глаз, затем на правый на каждом фото ¦ Натисни на ліве око, потім на праве на кожному фото
+👁 Poser les yeux (2 clics par photo) ¦ 👁 Отметить глаза (2 щелчка на фото) ¦ 👁 Позначити очі (2 клацання на фото)
+Aligner sur les yeux ¦ Выровнять по глазам ¦ Вирівняти за очима
+✕ Retirer les yeux posés ¦ ✕ Убрать отмеченные глаза ¦ ✕ Прибрати позначені очі
+Prises sur les deux photos ; ajoute ou retire qui tu veux. ¦ Взяты с обоих фото; добавь или убери кого хочешь. ¦ Узято з обох фото; додай або прибери кого хочеш.
+Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé… ¦ Что ты замечаешь: форма носа, ушей, линия роста волос, родинка, предполагаемый возраст… ¦ Що ти помічаєш: форма носа, вух, лінія росту волосся, родимка, імовірний вік…
+Fondu : part de la photo B ; rideau : place du rideau ¦ Наплыв: доля фото B; шторка: положение шторки ¦ Перехід: частка фото B; шторка: положення шторки
+Choisis une photo (image). ¦ Выбери фото (изображение). ¦ Вибери фото (зображення).
+C’est déjà l’autre photo : choisis-en une autre. ¦ Это уже другое фото: выбери иное. ¦ Це вже інше фото: вибери ще якесь.
+Choisis les deux photos à comparer ¦ Выбери два фото для сравнения ¦ Вибери два фото для порівняння
+Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes… ¦ Два портрета: один человек в двух возрастах, два человека, которых считают родственниками… ¦ Два портрети: та сама людина у двох віках, двоє людей, яких вважають родичами…
+🖼 Choisir la photo A ¦ 🖼 Выбрать фото A ¦ 🖼 Вибрати фото A
+Pose d’abord deux repères sur chaque photo (📌). ¦ Сначала поставь две точки на каждом фото (📌). ¦ Спершу постав дві точки на кожному фото (📌).
+Pose d’abord les yeux sur les deux photos (✨ tout seul, ou 👁 deux clics par photo). ¦ Сначала отметь глаза на обоих фото (✨ автоматически или 👁 двумя щелчками на фото). ¦ Спершу познач очі на обох фото (✨ автоматично або 👁 двома клацаннями на фото).
+le repère 1 sur l’image ancienne (A) ¦ точку 1 на старом изображении (A) ¦ точку 1 на старому зображенні (A)
+le repère 2 sur l’image ancienne (A) ¦ точку 2 на старом изображении (A) ¦ точку 2 на старому зображенні (A)
+le même repère 1 sur la photo d’aujourd’hui (B) ¦ ту же точку 1 на сегодняшнем фото (B) ¦ ту саму точку 1 на сьогоднішньому фото (B)
+le même repère 2 sur la photo d’aujourd’hui (B) ¦ ту же точку 2 на сегодняшнем фото (B) ¦ ту саму точку 2 на сьогоднішньому фото (B)
+l’œil de gauche de la photo A ¦ левый глаз на фото A ¦ ліве око на фото A
+l’œil de droite de la photo A ¦ правый глаз на фото A ¦ праве око на фото A
+l’œil de gauche de la photo B ¦ левый глаз на фото B ¦ ліве око на фото B
+l’œil de droite de la photo B ¦ правый глаз на фото B ¦ праве око на фото B
+Choisis d’abord les deux photos. ¦ Сначала выбери оба фото. ¦ Спершу вибери обидва фото.
+Repères non posés : rien n’a changé. ¦ Точки не поставлены: ничего не изменилось. ¦ Точки не поставлено: нічого не змінилося.
+Yeux non posés : rien n’a changé. ¦ Глаза не отмечены: ничего не изменилось. ¦ Очі не позначено: нічого не змінилося.
+Repères posés : la photo d’aujourd’hui est calée sur l’ancienne. ¦ Точки поставлены: сегодняшнее фото подогнано под старое. ¦ Точки поставлено: сьогоднішнє фото припасовано до старого.
+Yeux posés : les deux visages sont alignés. ¦ Глаза отмечены: оба лица выровнены. ¦ Очі позначено: обидва обличчя вирівняно.
+Le modèle de visages n’est pas disponible ici : pose les yeux en deux clics par photo. ¦ Модель лиц здесь недоступна: отметь глаза двумя щелчками на каждом фото. ¦ Модель облич тут недоступна: познач очі двома клацаннями на кожному фото.
+Le modèle de visages (≈ 13 Mo, sur cet ordinateur seulement) se charge une fois, au premier clic. ¦ Модель лиц (≈ 13 МБ, только на этом компьютере) загружается один раз, при первом щелчке. ¦ Модель облич (≈ 13 МБ, лише на цьому комп’ютері) завантажується один раз, під час першого клацання.
+Visages trouvés : les yeux sont alignés. ¦ Лица найдены: глаза выровнены. ¦ Обличчя знайдено: очі вирівняно.
+Le modèle de visages n’a pas pu être chargé (il faut internet la première fois) : pose les yeux en deux clics par photo. ¦ Не удалось загрузить модель лиц (в первый раз нужен интернет): отметь глаза двумя щелчками на каждом фото. ¦ Не вдалося завантажити модель облич (першого разу потрібен інтернет): познач очі двома клацаннями на кожному фото.
+Choisis les deux photos. ¦ Выбери оба фото. ¦ Вибери обидва фото.
+Choisis les deux photos avant d’enregistrer. ¦ Выбери оба фото, прежде чем сохранять. ¦ Вибери обидва фото, перш ніж зберігати.
+Les derniers changements de la comparaison ne sont pas enregistrés. ¦ Последние изменения сравнения не сохранены. ¦ Останні зміни порівняння не збережено.
+C’est la même photo : choisis-en une autre. ¦ Это то же самое фото: выбери другое. ¦ Це те саме фото: вибери інше.
+comparaison de photos ¦ сравнение фото ¦ порівняння фото
+Deux photos ¦ Два фото ¦ Два фото
+=autre déplacement ¦ другая поездка|других поездки|других поездок ¦ інша поїздка|інші поїздки|інших поїздок
+=déplacement ¦ поездка|поездки|поездок ¦ поїздка|поїздки|поїздок
+=personne vivante ou confidentielle ¦ живой или конфиденциальный человек|живых или конфиденциальных человека|живых или конфиденциальных человек ¦ жива або конфіденційна людина|живі або конфіденційні людини|живих або конфіденційних людей
+=lieu de la famille ¦ семейное место|семейных места|семейных мест ¦ родинне місце|родинні місця|родинних місць
+=couche importée ¦ импортированный слой|импортированных слоя|импортированных слоёв ¦ імпортований шар|імпортовані шари|імпортованих шарів
+=couche ¦ слой|слоя|слоёв ¦ шар|шари|шарів
+{n} jours ({w} semaines) ¦ {n} дн. ({w} нед.) ¦ {n} дн. ({w} тиж.)
+Il faut environ {dur} pour aller de {from} à {to} ({how}, ≈ {what}). ¦ Чтобы добраться из {from} в {to}, нужно около {dur} ({how}, ≈ {what}). ¦ Щоб дістатися з {from} до {to}, потрібно близько {dur} ({how}, ≈ {what}).
+Il faut environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ Чтобы добраться из {from} в {to} в {year} году, нужно около {dur} ({how}, ≈ {what}). ¦ Щоб дістатися з {from} до {to} у {year} році, потрібно близько {dur} ({how}, ≈ {what}).
+Il fallait environ {dur} pour aller de {from} à {to} en {year} ({how}, ≈ {what}). ¦ В {year} году, чтобы добраться из {from} в {to}, требовалось около {dur} ({how}, ≈ {what}). ¦ У {year} році, щоб дістатися з {from} до {to}, потрібно було близько {dur} ({how}, ≈ {what}).
+{km} sur l’eau ¦ {km} по воде ¦ {km} водою
+{km} de voie ¦ {km} по железной дороге ¦ {km} залізницею
+{km} de route ¦ {km} по дороге ¦ {km} дорогою
+À pied ¦ Пешком ¦ Пішки
+à pied ¦ пешком ¦ пішки
+À cheval ¦ Верхом ¦ Верхи
+à cheval ¦ верхом ¦ верхи
+En diligence ¦ В дилижансе ¦ Диліжансом
+en diligence ¦ в дилижансе ¦ диліжансом
+Bateau (rivière) ¦ Лодка (река) ¦ Човен (річка)
+en bateau sur la rivière ¦ на лодке по реке ¦ човном по річці
+Bateau (mer) ¦ Судно (море) ¦ Судно (море)
+en bateau ¦ на судне ¦ судном
+En train ¦ Поездом ¦ Потягом
+en train ¦ поездом ¦ потягом
+4 à 5 km/h, 8 heures de marche par jour ¦ 4–5 км/ч, 8 часов ходьбы в день ¦ 4–5 км/год, 8 годин ходьби на день
+au pas et au trot, en ménageant sa monture (un courrier qui change de cheval aux relais va deux fois plus loin) ¦ шагом и рысью, щадя коня (курьер, меняющий лошадей на станциях, проезжает вдвое больше) ¦ ступою й риссю, шкодуючи коня (кур’єр, що міняє коней на станціях, проїжджає вдвічі більше)
+coches puis diligences et malles-poste ; on roule de plus en plus la nuit ¦ кареты, затем дилижансы и почтовые кареты; всё чаще едут и ночью ¦ карети, потім диліжанси й поштові карети; дедалі частіше їдуть і вночі
+coche d’eau, halage, puis bateaux à vapeur ¦ речные суда, бечевая тяга, затем пароходы ¦ річкові судна, бурлацька тяга, потім пароплави
+à la voile jusque vers 1840, puis à la vapeur ¦ под парусом примерно до 1840 года, затем на пару ¦ під вітрилом приблизно до 1840 року, потім на парі
+selon les lignes ouvertes : grandes lignes de 1840 à 1860, petites lignes jusque vers 1910 ¦ в зависимости от открытых линий: магистрали с 1840 по 1860 год, местные линии примерно до 1910 года ¦ залежно від відкритих ліній: магістралі з 1840 по 1860 рік, місцеві лінії приблизно до 1910 року
+par la route ¦ по дороге ¦ дорогою
+par la rivière ¦ по реке ¦ річкою
+par la mer ¦ по морю ¦ морем
+par le rail ¦ по железной дороге ¦ залізницею
+Fernand Braudel, « Civilisation matérielle, économie et capitalisme » (1979) et « L’identité de la France » (1986) : à pied, 30 à 40 km par jour ; à cheval, 50 à 60 km par jour pour un voyageur qui garde sa monture. ¦ Fernand Braudel, «Civilisation matérielle, économie et capitalisme» (1979) и «L’identité de la France» (1986): пешком — 30–40 км в день; верхом — 50–60 км в день для путника, который не меняет коня. ¦ Fernand Braudel, «Civilisation matérielle, économie et capitalisme» (1979) і «L’identité de la France» (1986): пішки — 30–40 км на день; верхи — 50–60 км на день для мандрівника, який не міняє коня.
+Règlements militaires (XVIIIᵉ–XIXᵉ s.) : l’étape ordinaire d’une troupe à pied est de 24 à 28 km par jour ; un marcheur seul fait davantage. ¦ Военные уставы (XVIII–XIX вв.): обычный дневной переход пешего войска — 24–28 км; одиночный пешеход проходит больше. ¦ Військові статути (XVIII–XIX ст.): звичайний денний перехід піхоти — 24–28 км; пішохід сам проходить більше.
+Guy Arbellot, « La grande mutation des routes de France au milieu du XVIIIᵉ siècle », Annales ESC, 1973, et « Atlas de la Révolution française », t. 1 « Routes et communications » (1987) : les temps de parcours depuis Paris sont presque divisés par deux entre 1765 et 1780 (turgotines). ¦ Guy Arbellot, «La grande mutation des routes de France au milieu du XVIIIᵉ siècle», Annales ESC, 1973, и «Atlas de la Révolution française», т. 1 «Routes et communications» (1987): время пути из Парижа сократилось почти вдвое между 1765 и 1780 годами (тюрготины). ¦ Guy Arbellot, «La grande mutation des routes de France au milieu du XVIIIᵉ siècle», Annales ESC, 1973, і «Atlas de la Révolution française», т. 1 «Routes et communications» (1987): час дороги з Парижа скоротився майже вдвічі між 1765 і 1780 роками (тюрготини).
+Christophe Studeny, « L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle » (Gallimard, 1995) : diligences des Messageries roulant jour et nuit vers 1830, malles-poste à près de 10 km/h vers 1845. ¦ Christophe Studeny, «L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle» (Gallimard, 1995): дилижансы Messageries ездят днём и ночью около 1830 года, почтовые кареты — почти 10 км/ч около 1845 года. ¦ Christophe Studeny, «L’invention de la vitesse. France, XVIIIᵉ–XXᵉ siècle» (Gallimard, 1995): диліжанси Messageries їздять удень і вночі близько 1830 року, поштові карети — майже 10 км/год близько 1845 року.
+François Caron, « Histoire des chemins de fer en France », t. 1 (1997) : première ligne de voyageurs en 1837 (Paris – Saint-Germain), grandes lignes ouvertes de 1840 à 1860, environ 40 km/h de moyenne arrêts compris vers 1860. ¦ François Caron, «Histoire des chemins de fer en France», т. 1 (1997): первая пассажирская линия в 1837 году (Париж – Сен-Жермен), магистрали открыты с 1840 по 1860 год, около 40 км/ч в среднем с остановками около 1860 года. ¦ François Caron, «Histoire des chemins de fer en France», т. 1 (1997): перша пасажирська лінія 1837 року (Париж – Сен-Жермен), магістралі відкрито з 1840 по 1860 рік, близько 40 км/год у середньому із зупинками близько 1860 року.
+Traversées de l’Atlantique Nord : 30 à 45 jours à la voile ; 12 à 14 jours en vapeur vers 1860 ; 6 à 7 jours vers 1900 ; 4 à 5 jours pour les grands paquebots des années 1930. ¦ Пересечение Северной Атлантики: 30–45 дней под парусом; 12–14 дней на пароходе около 1860 года; 6–7 дней около 1900 года; 4–5 дней на больших лайнерах 1930-х годов. ¦ Перетин Північної Атлантики: 30–45 днів під вітрилом; 12–14 днів пароплавом близько 1860 року; 6–7 днів близько 1900 року; 4–5 днів на великих лайнерах 1930-х років.
+Coches d’eau et halage : 20 à 40 km par jour en remontant, davantage en descendant ; premiers bateaux à vapeur sur la Saône et le Rhône vers 1830. ¦ Речные суда и бечевая тяга: 20–40 км в день вверх по течению, больше — вниз; первые пароходы на Соне и Роне около 1830 года. ¦ Річкові судна й бурлацька тяга: 20–40 км на день проти течії, більше — за течією; перші пароплави на Соні та Роні близько 1830 року.
+réglé ¦ задано ¦ задано
+Vitesse réglée par toi ¦ Скорость задана тобой ¦ Швидкість задана тобою
+Pas avant {year} ¦ Не раньше {year} ¦ Не раніше {year}
+km/j ¦ км/д ¦ км/д
+{name} : kilomètres par jour ¦ {name}: километров в день ¦ {name}: кілометрів на день
+Détour {how} ¦ Крюк {how} ¦ Обхід {how}
+Vitesses de trajet enregistrées ¦ Скорости в пути сохранены ¦ Швидкості в дорозі збережено
+Vitesses remises comme au départ ¦ Скорости возвращены как было ¦ Швидкості повернуто як було
+Tulle, Brive… ¦ Tulle, Brive… ¦ Tulle, Brive…
+Paris… ¦ Paris… ¦ Paris…
+Un des deux lieux n’a pas de position sur la carte ({name}) : place-le d’abord. ¦ У одного из двух мест нет положения на карте ({name}): сначала размести его. ¦ Одне з двох місць не має положення на мапі ({name}): спершу розмісти його.
+À vol d’oiseau : <b>{km}</b> ¦ По прямой: <b>{km}</b> ¦ Навпростець: <b>{km}</b>
+Je relis ses événements… ¦ Перечитываю его (её) события… ¦ Перечитую його (її) події…
+Au total, environ <b>{km}</b> à vol d’oiseau d’un lieu de vie à l’autre ({n}). ¦ Всего около <b>{km}</b> по прямой от одного места жизни к другому ({n}). ¦ Усього близько <b>{km}</b> навпростець від одного місця життя до іншого ({n}).
+Distance parcourue ¦ Пройденное расстояние ¦ Пройдена відстань
+Par jour ¦ В день ¦ На день
+⚙️ Vitesses et sources ¦ ⚙️ Скорости и источники ¦ ⚙️ Швидкості та джерела
+Les vitesses suivent l’époque (ordres de grandeur pour la France et l’Europe de l’Ouest). Écris une autre distance par jour pour un moyen ; vide = selon l’époque. ¦ Скорости зависят от эпохи (порядки величин для Франции и Западной Европы). Впиши другое расстояние в день для способа передвижения; пусто = по эпохе. ¦ Швидкості залежать від епохи (порядки величин для Франції та Західної Європи). Впиши іншу відстань на день для способу пересування; порожньо = за епохою.
+Le détour : la route n’est jamais droite. 1,25 = 25 % de plus que la distance à vol d’oiseau. ¦ Крюк: дорога никогда не бывает прямой. 1,25 = на 25 % больше, чем расстояние по прямой. ¦ Обхід: дорога ніколи не буває прямою. 1,25 = на 25 % більше, ніж відстань навпростець.
+📍 Entre deux lieux ¦ 📍 Между двумя местами ¦ 📍 Між двома місцями
+👤 Le long d’une vie ¦ 👤 На протяжении жизни ¦ 👤 Протягом життя
+Année du voyage ¦ Год поездки ¦ Рік поїздки
+Distances et temps de trajet ¦ Расстояния и время в пути ¦ Відстані та час у дорозі
+Distances et temps de trajet… ¦ Расстояния и время в пути… ¦ Відстані та час у дорозі…
+Choisis le lieu de départ et le lieu d’arrivée ¦ Выбери место отправления и место прибытия ¦ Вибери місце відправлення та місце прибуття
+Choisis une personne pour suivre ses déplacements ¦ Выбери человека, чтобы проследить его поездки ¦ Вибери людину, щоб простежити її поїздки
+Pas de déplacement : il faut au moins deux lieux placés sur la carte ¦ Нет поездок: нужно хотя бы два места на карте ¦ Немає поїздок: потрібно хоча б два місця на мапі
+Pas de déplacement entre deux lieux placés ¦ Нет поездок между двумя размещёнными местами ¦ Немає поїздок між двома розміщеними місцями
+🧭 Ses déplacements ¦ 🧭 Его (её) поездки ¦ 🧭 Його (її) поїздки
+🧭 Calculer un trajet… ¦ 🧭 Рассчитать маршрут… ¦ 🧭 Розрахувати маршрут…
+📜 Ancienne (parchemin) ¦ 📜 Старинная (пергамент) ¦ 📜 Старовинна (пергамент)
+🎖 État-major (XIXᵉ) ¦ 🎖 Штабная (XIX в.) ¦ 🎖 Штабна (XIX ст.)
+🌙 Bleu nuit et or ¦ 🌙 Тёмно-синий и золото ¦ 🌙 Темно-синій і золото
+🎯 Autour des lieux ¦ 🎯 Вокруг мест ¦ 🎯 Навколо місць
+CARTE · À IMPRIMER ¦ КАРТА · ДЛЯ ПЕЧАТИ ¦ МАПА · ДЛЯ ДРУКУ
+Grande carte à imprimer ¦ Большая карта для печати ¦ Велика мапа для друку
+Grande carte à imprimer… ¦ Большая карта для печати… ¦ Велика мапа для друку…
+Grande carte ¦ Большая карта ¦ Велика мапа
+Cartouche ¦ Картуш ¦ Картуш
+Les BORIE ¦ Семья BORIE ¦ Родина BORIE
+Ce qu’on met dessus ¦ Что на ней показать ¦ Що на ній показати
+● Lieux de naissance ¦ ● Места рождения ¦ ● Місця народження
+◆ Lieux de mariage ¦ ◆ Места браков ¦ ◆ Місця шлюбів
+✝ Lieux de décès ¦ ✝ Места смерти ¦ ✝ Місця смерті
+Migrations (naissance → décès) ¦ Миграции (рождение → смерть) ¦ Міграції (народження → смерть)
+➜ Migrations (naissance → décès) ¦ ➜ Миграции (рождение → смерть) ¦ ➜ Міграції (народження → смерть)
+👤 Portraits en médaillon ¦ 👤 Портреты в медальонах ¦ 👤 Портрети в медальйонах
+Une branche (ses ancêtres seulement) ¦ Одна ветвь (только его (её) предки) ¦ Одна гілка (лише його (її) предки)
+Toute la famille ¦ Вся семья ¦ Уся родина
+Habillage ¦ Оформление ¦ Оформлення
+Cartouche (titre, famille, dates) ¦ Картуш (название, семья, даты) ¦ Картуш (назва, родина, дати)
+Jamais de personne vivante ni de fiche confidentielle sur cette carte. Le fond est dessiné par l’app (Natural Earth, IGN), sans tuiles d’Internet : il reste net à toutes les tailles. ¦ На этой карте никогда нет живых людей и конфиденциальных карточек. Фон рисует приложение (Natural Earth, IGN), без плиток из интернета: он остаётся чётким при любом размере. ¦ На цій мапі ніколи немає живих людей і конфіденційних карток. Тло малює застосунок (Natural Earth, IGN), без плиток з інтернету: воно залишається чітким за будь-якого розміру.
+Les {name} ¦ Семья {name} ¦ Родина {name}
+Notre famille ¦ Наша семья ¦ Наша родина
+Les lieux de la famille ¦ Места семьи ¦ Місця родини
+Fond : {src} ¦ Фон: {src} ¦ Тло: {src}
+Natural Earth (domaine public) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (общественное достояние) · IGN Admin Express (Licence Ouverte) ¦ Natural Earth (суспільне надбання) · IGN Admin Express (Licence Ouverte)
+Natural Earth (domaine public) ¦ Natural Earth (общественное достояние) ¦ Natural Earth (суспільне надбання)
+dessin impossible ¦ нарисовать невозможно ¦ неможливо намалювати
+image trop grande pour ce navigateur ¦ изображение слишком большое для этого браузера ¦ зображення завелике для цього браузера
+{n} laissées de côté ¦ пропущено: {n} ¦ пропущено: {n}
+{n} laissée de côté ¦ пропущено: {n} ¦ пропущено: {n}
+image : jusqu’à {w} × {h} px ({dpi} ppp) ¦ изображение: до {w} × {h} px ({dpi} dpi) ¦ зображення: до {w} × {h} px ({dpi} dpi)
+Aucun lieu placé sur la carte pour ces choix : place les lieux de la famille (fiche du lieu → position) ou coche d’autres événements. ¦ Для этого выбора на карте нет ни одного места: размести места семьи (карточка места → положение) или отметь другие события. ¦ Для цього вибору на мапі немає жодного місця: розмісти місця родини (картка місця → положення) або познач інші події.
+Qualité ramenée à {dpi} ppp (taille de l’affiche, mémoire du navigateur). ¦ Качество снижено до {dpi} dpi (размер плаката, память браузера). ¦ Якість знижено до {dpi} dpi (розмір плаката, пам’ять браузера).
+{paper}, prêt pour l’imprimeur ¦ {paper}, готово для типографии ¦ {paper}, готово для друкарні
+haute définition ¦ высокое разрешение ¦ висока роздільність
+📍 Lieux de la famille en épingles ¦ 📍 Места семьи булавками ¦ 📍 Місця родини шпильками
+Glisse pour tourner, molette pour zoomer. Au clavier : ← → pour tourner, ↑ ↓ pour pencher, + et − pour zoomer, 0 pour revenir. ¦ Перетаскивай, чтобы вращать, колёсико — масштаб. С клавиатуры: ← → вращать, ↑ ↓ наклонять, + и − масштаб, 0 — вернуть. ¦ Перетягуй, щоб обертати, коліщатко — масштаб. З клавіатури: ← → обертати, ↑ ↓ нахиляти, + і − масштаб, 0 — повернути.
+Relief en 3D ¦ Рельеф в 3D ¦ Рельєф у 3D
+Relief 3D ¦ Рельеф 3D ¦ Рельєф 3D
+Relief 3D… ¦ Рельеф 3D… ¦ Рельєф 3D…
+CARTE · RELIEF ¦ КАРТА · РЕЛЬЕФ ¦ МАПА · РЕЛЬЄФ
+Exagération du relief ¦ Преувеличение рельефа ¦ Перебільшення рельєфу
+Choisis le lieu du centre (un lieu placé sur la carte) ¦ Выбери место в центре (место, размещённое на карте) ¦ Вибери місце в центрі (місце, розміщене на мапі)
+Je lis les altitudes… ¦ Читаю высоты… ¦ Читаю висоти…
+La carte du relief n’est pas installée : elle vient avec la Météo d’autrefois (Réglages → 🌦 Météo d’autrefois). ¦ Карта рельефа не установлена: она идёт вместе с Погодой прошлого (Настройки → 🌦 Погода прошлого). ¦ Мапу рельєфу не встановлено: вона йде разом із Погодою минулого (Налаштування → 🌦 Погода минулого).
+Pas d’altitude pour cette zone : la carte du relief couvre {n} pays ({list}). ¦ Для этой зоны нет высот: карта рельефа покрывает страны ({n}): {list}. ¦ Для цієї зони немає висот: мапа рельєфу охоплює країни ({n}): {list}.
+Pas d’altitude pour cette zone : la carte du relief couvre seulement quelques pays. ¦ Для этой зоны нет высот: карта рельефа покрывает только несколько стран. ¦ Для цієї зони немає висот: мапа рельєфу охоплює лише кілька країн.
+{km} de côté ¦ {km} по стороне ¦ {km} по стороні
+Altitudes : {min} m à {max} m ¦ Высоты: от {min} м до {max} м ¦ Висоти: від {min} м до {max} м
+{pct} % sans altitude (mer ou hors de la carte) ¦ {pct} % без высоты (море или за пределами карты) ¦ {pct} % без висоти (море або поза мапою)
+{n} dans la zone ¦ {n} в зоне ¦ {n} у зоні
+Altitudes : Copernicus DEM GLO-90 (grille de 30″), © DLR / Airbus, Copernicus. ¦ Высоты: Copernicus DEM GLO-90 (сетка 30″), © DLR / Airbus, Copernicus. ¦ Висоти: Copernicus DEM GLO-90 (сітка 30″), © DLR / Airbus, Copernicus.
+Le moteur 3D ne se charge pas. ¦ 3D-движок не загружается. ¦ 3D-рушій не завантажується.
+Ce navigateur ne sait pas dessiner en 3D (WebGL éteint). ¦ Этот браузер не умеет рисовать в 3D (WebGL выключен). ¦ Цей браузер не вміє малювати в 3D (WebGL вимкнено).
+Ma couche ¦ Мой слой ¦ Мій шар
+Mes couches ¦ Мои слои ¦ Мої шари
+Mes couches (dessiner) ¦ Мои слои (рисовать) ¦ Мої шари (малювати)
+Cacher mes couches ¦ Скрыть мои слои ¦ Сховати мої шари
+Clique sur la carte pour poser le point. Échap pour arrêter. ¦ Нажми на карту, чтобы поставить точку. Esc — остановить. ¦ Натисни на мапу, щоб поставити точку. Esc — зупинити.
+Clique point par point. ¦ Нажимай точку за точкой. ¦ Натискай точку за точкою.
+Entrée ou double-clic pour finir, ⌫ pour retirer le dernier, Échap pour arrêter. ¦ Enter или двойной щелчок — закончить, ⌫ — убрать последнюю, Esc — остановить. ¦ Enter або подвійне клацання — завершити, ⌫ — прибрати останню, Esc — зупинити.
+Couleur de la couche ¦ Цвет слоя ¦ Колір шару
+Dessiner dans cette couche ¦ Рисовать в этом слое ¦ Малювати в цьому шарі
+Aucune couche pour l’instant ¦ Пока нет слоёв ¦ Поки немає шарів
+Importer des couches ¦ Импортировать слои ¦ Імпортувати шари
+GeoJSON ou KML ¦ GeoJSON или KML ¦ GeoJSON або KML
+Aucune forme lisible dans ce fichier. ¦ В этом файле нет читаемых фигур. ¦ У цьому файлі немає читабельних фігур.
+⬠ Nom de la zone ¦ ⬠ Название зоны ¦ ⬠ Назва зони
+〰 Nom de l’itinéraire ¦ 〰 Название маршрута ¦ 〰 Назва маршруту
+Facultatif. ¦ Необязательно. ¦ Необов’язково.
+Les terres de la famille ¦ Земли семьи ¦ Землі родини
+Le chemin de l’école ¦ Дорога в школу ¦ Дорога до школи
+📝 La note ¦ 📝 Заметка ¦ 📝 Нотатка
+📍 Nom du point ¦ 📍 Название точки ¦ 📍 Назва точки
+Ce que tu veux noter à cet endroit. ¦ Что ты хочешь отметить в этом месте. ¦ Що ти хочеш зазначити в цьому місці.
+Ici se trouvait le moulin ¦ Здесь стояла мельница ¦ Тут стояв млин
+〰 Itinéraire ¦ 〰 Маршрут ¦ 〰 Маршрут
+⬠ Zone ¦ ⬠ Зона ¦ ⬠ Зона
+📍 Point ¦ 📍 Точка ¦ 📍 Точка
+📝 Note ¦ 📝 Заметка ¦ 📝 Нотатка
+Zone ajoutée à « {name} » ¦ Зона добавлена в «{name}» ¦ Зону додано до «{name}»
+Itinéraire ajouté à « {name} » ¦ Маршрут добавлен в «{name}» ¦ Маршрут додано до «{name}»
+Note ajoutée à « {name} » ¦ Заметка добавлена в «{name}» ¦ Нотатку додано до «{name}»
+Point ajouté à « {name} » ¦ Точка добавлена в «{name}» ¦ Точку додано до «{name}»
+{dur} aujourd’hui ¦ {dur} сегодня ¦ {dur} сьогодні
+« {name} » supprimé de la couche ¦ «{name}» удалено из слоя ¦ «{name}» видалено з шару
+« {name} » modifié ¦ «{name}» изменено ¦ «{name}» змінено
+« Aucune » = la couleur de la couche ¦ «Нет» = цвет слоя ¦ «Немає» = колір шару
+MES COUCHES ¦ МОИ СЛОИ ¦ МОЇ ШАРИ
+Renommer la couche ¦ Переименовать слой ¦ Перейменувати шар
+Couche renommée « {name} » ¦ Слой переименован в «{name}» ¦ Шар перейменовано на «{name}»
+Exporter en GeoJSON ¦ Экспорт в GeoJSON ¦ Експорт у GeoJSON
+Exporter en KML ¦ Экспорт в KML ¦ Експорт у KML
+Supprimer la couche ¦ Удалить слой ¦ Видалити шар
+Couche « {name} » supprimée ¦ Слой «{name}» удалён ¦ Шар «{name}» видалено
+Couleur de la couche changée ¦ Цвет слоя изменён ¦ Колір шару змінено
+Couche « {name} » créée ¦ Слой «{name}» создан ¦ Шар «{name}» створено
+Toutes en GeoJSON ¦ Все в GeoJSON ¦ Усі в GeoJSON
+Toutes en KML ¦ Все в KML ¦ Усі в KML
+Zone ¦ Зона ¦ Зона
+{n} Ko ¦ {n} КБ ¦ {n} КБ
+Fond à comparer ¦ Фон для сравнения ¦ Тло для порівняння
+Façon de comparer ¦ Способ сравнения ¦ Спосіб порівняння
+▏ Trait ¦ ▏ Линия ¦ ▏ Лінія
+◐ Transparence ¦ ◐ Прозрачность ¦ ◐ Прозорість
+Transparence du fond à comparer ¦ Прозрачность фона для сравнения ¦ Прозорість тла для порівняння
+Transparence en % ¦ Прозрачность в % ¦ Прозорість у %
+Trait de comparaison : glisse-le, ou flèches gauche et droite ¦ Линия сравнения: перетащи её или используй стрелки влево и вправо ¦ Лінія порівняння: перетягни її або використай стрілки ліворуч і праворуч
+(approximatif) ¦ (приблизительно) ¦ (приблизно)
+Frontières ¦ Границы ¦ Кордони
+🏛 Province : {name} ¦ 🏛 Провинция: {name} ¦ 🏛 Провінція: {name}
+🏛 Département de 1790 : {name} ¦ 🏛 Департамент 1790 года: {name} ¦ 🏛 Департамент 1790 року: {name}
+Tracé approximatif, d’après les départements d’aujourd’hui ({list}). ¦ Приблизный контур по нынешним департаментам ({list}). ¦ Приблизний контур за теперішніми департаментами ({list}).
+Tracé approximatif, d’après les départements d’aujourd’hui. ¦ Приблизный контур по нынешним департаментам. ¦ Приблизний контур за теперішніми департаментами.
+🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes). ¦ 🏚 Исчезнувшие коммуны: загрузить один раз (Настройки → 🏛 Старые границы). ¦ 🏚 Зниклі комуни: завантажити один раз (Налаштування → 🏛 Старі кордони).
+🏚 Zoome sur une région pour voir les communes disparues. ¦ 🏚 Приблизь регион, чтобы увидеть исчезнувшие коммуны. ¦ 🏚 Наблизь регіон, щоб побачити зниклі комуни.
+Pas français en 1789 : royaume de Sardaigne (français en 1860). L’ouest (Grasse) était en Provence. ¦ Не французский в 1789 году: Сардинское королевство (французский с 1860 года). Запад (Грас) был в Провансе. ¦ Не французький у 1789 році: Сардинське королівство (французький з 1860 року). Захід (Грас) був у Провансі.
+Pas française en 1789 : royaume de Sardaigne (française en 1860). ¦ Не французская в 1789 году: Сардинское королевство (французская с 1860 года). ¦ Не французька в 1789 році: Сардинське королівство (французька з 1860 року).
+Pas français en 1789 : Avignon et le Comtat appartenaient au pape (réunis en 1791). ¦ Не французский в 1789 году: Авиньон и Конта принадлежали папе (присоединены в 1791 году). ¦ Не французький у 1789 році: Авіньйон і Конта належали папі (приєднано 1791 року).
+Mulhouse était une république alliée des Suisses (réunie en 1798). ¦ Мюлуз был республикой, союзной швейцарцам (присоединён в 1798 году). ¦ Мюлуз був республікою, союзною швейцарцям (приєднано 1798 року).
+Montbéliard appartenait au Wurtemberg (réuni en 1793). ¦ Монбельяр принадлежал Вюртембергу (присоединён в 1793 году). ¦ Монбельяр належав Вюртембергу (приєднано 1793 року).
+Coupé en Rhône et Loire en 1793. ¦ Разделён на Рону и Луару в 1793 году. ¦ Поділено на Рону й Луару 1793 року.
+Le département de Paris (puis de la Seine, 1795). ¦ Департамент Париж (затем Сена, 1795). ¦ Департамент Париж (потім Сена, 1795).
+Partagé en 1968 (Yvelines, Essonne, Val-d’Oise…). ¦ Разделён в 1968 году (Ивелин, Эсон, Валь-д’Уаз…). ¦ Поділено 1968 року (Івлін, Ессонн, Валь-д’Уаз…).
+Le Tarn-et-Garonne n’existe qu’en 1808 (pris au Lot surtout, et à 5 départements voisins) : ici rangé avec le Lot. ¦ Тарн и Гаронна существует только с 1808 года (выделен в основном из Ло и из 5 соседних департаментов): здесь отнесён к Ло. ¦ Тарн і Гаронна існує лише з 1808 року (виділено переважно з Ло та з 5 сусідніх департаментів): тут віднесено до Ло.
+Un seul département en 1790 (coupé en deux de 1793 à 1811, puis en 1976). ¦ Один департамент в 1790 году (разделён надвое с 1793 по 1811 год, затем в 1976 году). ¦ Один департамент у 1790 році (поділено навпіл з 1793 по 1811 рік, потім 1976 року).
+Devenu Maine-et-Loire en 1791. ¦ Стал Мен и Луарой в 1791 году. ¦ Став Мен і Луарою 1791 року.
+Limites changées en 1871 (Meurthe-et-Moselle). ¦ Границы изменены в 1871 году (Мёрт и Мозель). ¦ Межі змінено 1871 року (Мерт і Мозель).
+Limites changées en 1871. ¦ Границы изменены в 1871 году. ¦ Межі змінено 1871 року.
+Belfort en faisait partie jusqu’en 1871. ¦ Бельфор входил в него до 1871 года. ¦ Бельфор входив до нього до 1871 року.
+Devenu Alpes-de-Haute-Provence en 1970. ¦ Стал Альпами Верхнего Прованса в 1970 году. ¦ Став Альпами Верхнього Провансу 1970 року.
+Comté de Nice (royaume de Sardaigne) : pas français en 1790 ¦ Графство Ницца (Сардинское королевство): не французское в 1790 году ¦ Графство Ніцца (Сардинське королівство): не французьке в 1790 році
+Savoie (royaume de Sardaigne) : pas française en 1790 ¦ Савойя (Сардинское королевство): не французская в 1790 году ¦ Савоя (Сардинське королівство): не французька в 1790 році
+Avignon et Comtat Venaissin (au pape) : réunis en 1791 ¦ Авиньон и Конта-Венессен (владение папы): присоединены в 1791 году ¦ Авіньйон і Конта-Венессен (володіння папи): приєднано 1791 року
+Pas en France en 1790. ¦ Не во Франции в 1790 году. ¦ Не у Франції в 1790 році.
+réunie en commune nouvelle ¦ объединена в новую коммуну ¦ об’єднано в нову комуну
+Réglages · Cartes ¦ Настройки · Карты ¦ Налаштування · Мапи
+Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »). ¦ Провинции, департаменты 1790 года и исчезнувшие коммуны на Карте (кнопка «🏛 Границы»). ¦ Провінції, департаменти 1790 року та зниклі комуни на Мапі (кнопка «🏛 Кордони»).
+↗ Voir sur la Carte ¦ ↗ Посмотреть на Карте ¦ ↗ Переглянути на Мапі
+🏛 Provinces (≈ 1789) et départements de 1790 ¦ 🏛 Провинции (≈ 1789) и департаменты 1790 года ¦ 🏛 Провінції (≈ 1789) та департаменти 1790 року
+Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée. ¦ Поставляются с приложением: ничего загружать не нужно. Это <b>приблизительные</b> контуры по нынешним департаментам (каждый департамент отнесён к провинции, которая покрывает большую его часть). Свободного и официального источника их настоящих границ найти не удалось. ¦ Постачаються із застосунком: нічого завантажувати не треба. Це <b>приблизні</b> контури за теперішніми департаментами (кожен департамент віднесено до провінції, яка охоплює більшу його частину). Вільного й офіційного джерела їхніх справжніх меж знайти не вдалося.
+{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when} ¦ {size} ({bytes} байт) · отпечаток sha256 {hash}… · проверено: {when} ¦ {size} ({bytes} байт) · відбиток sha256 {hash}… · перевірено: {when}
+taille inconnue ¦ размер неизвестен ¦ розмір невідомий
+enfants ¦ дети ¦ діти
+Grand-parent ¦ Дед или бабушка ¦ Дід або баба
+Parrain ou marraine ¦ Крёстный или крёстная ¦ Хрещений батько або хрещена мати
+Frère ou sœur mort avant ¦ Брат или сестра, умершие раньше ¦ Брат або сестра, що померли раніше
+Choisi à la main ¦ Выбрано вручную ¦ Вибрано вручну
+choisi à la main ¦ выбрано вручную ¦ вибрано вручну
+vérifié ¦ проверено ¦ перевірено
+Corrigé ou confirmé à la main ¦ Исправлено или подтверждено вручную ¦ Виправлено або підтверджено вручну
+Indice de confiance : {n} sur 100 ¦ Индекс доверия: {n} из 100 ¦ Індекс довіри: {n} зі 100
+Ma branche paternelle ¦ Моя отцовская ветвь ¦ Моя батьківська гілка
+Ma branche maternelle ¦ Моя материнская ветвь ¦ Моя материнська гілка
+D’où vient le prénom, par époque ¦ Откуда имя, по эпохам ¦ Звідки ім’я, за епохами
+Enfants qui portent le prénom de leur parrain ou marraine ¦ Дети, названные в честь крёстного или крёстной ¦ Діти, названі на честь хрещеного батька або хрещеної матері
+% des enfants qui ont un parrain ou une marraine notés ¦ % детей, у которых записаны крёстный или крёстная ¦ % дітей, у яких записано хрещеного батька або хрещену матір
+Tous les prénoms ¦ Все имена ¦ Усі імена
+Pour chaque enfant, d’où vient probablement son prénom : parrain, marraine, grand-parent, frère ou sœur mort avant (prénom « relevé »), oncle, tante, saint du jour. Chaque piste a sa règle et un indice de confiance ; tu peux la corriger sur la fiche ou ici avec ⋯. Sans les personnes en vie ni les fiches confidentielles. ¦ Для каждого ребёнка — откуда, вероятно, его имя: крёстный, крёстная, дед или бабушка, брат или сестра, умершие раньше («повторённое» имя), дядя, тётя, святой дня. У каждой версии своё правило и индекс доверия; её можно исправить в карточке или здесь через ⋯. Без живых людей и конфиденциальных карточек. ¦ Для кожної дитини — звідки, імовірно, її ім’я: хрещений батько, хрещена мати, дід чи баба, брат чи сестра, що померли раніше («повторене» ім’я), дядько, тітка, святий дня. Кожна версія має своє правило та індекс довіри; її можна виправити в картці або тут через ⋯. Без живих людей і конфіденційних карток.
+prénoms expliqués sur {n} ¦ имён объяснено из {n} ¦ імен пояснено з {n}
+prénom expliqué sur {n} ¦ имя объяснено из {n} ¦ ім’я пояснено з {n}
+des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total}) ¦ детей, у которых записаны крёстный или крёстная, носят его (её) имя ({n} из {total}) ¦ дітей, у яких записано хрещеного батька чи хрещену матір, носять його (її) ім’я ({n} з {total})
+🌳 Les flèches de transmission ¦ 🌳 Стрелки передачи ¦ 🌳 Стрілки передачі
+Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche. ¦ По строке на имя, годы — по горизонтали: каждая стрелка идёт от того, кто передаёт имя, к ребёнку. Нажми на кружок, чтобы открыть карточку. ¦ По рядку на ім’я, роки — по горизонталі: кожна стрілка йде від того, хто передає ім’я, до дитини. Натисни на кружечок, щоб відкрити картку.
+Chaque enfant ¦ Каждый ребёнок ¦ Кожна дитина
+Prénom reçu de ¦ Имя получено от ¦ Ім’я отримано від
+La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres. ¦ Список ограничен {n} детьми (сначала самые передаваемые имена); числа вверху учитывают всех. Выбери имя, чтобы увидеть остальных. ¦ Список обмежено {n} дітьми (спершу імена, що передавалися найчастіше); числа вгорі враховують усіх. Вибери ім’я, щоб побачити інших.
+Aucun enfant prénommé {name} ¦ Нет детей с именем {name} ¦ Немає дітей з ім’ям {name}
+Rien à comparer pour l’instant ¦ Пока нечего сравнивать ¦ Поки нічого порівнювати
+Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême). ¦ Нужны дети, связанные с родителями (или крёстные, записанные как свидетели «крёстный», «крёстная» при рождении или крещении). ¦ Потрібні діти, пов’язані з батьками (або хрещені, записані як свідки «хрещений батько», «хрещена мати» під час народження чи хрещення).
+Les plus sûrs d’abord ¦ Сначала самые надёжные ¦ Спершу найнадійніші
+Les moins sûrs d’abord ¦ Сначала наименее надёжные ¦ Спершу найменш надійні
+Aucune transmission entre deux fiches datées (le saint du jour n’a pas de flèche). ¦ Нет передачи между двумя датированными карточками (у святого дня нет стрелки). ¦ Немає передачі між двома датованими картками (святий дня не має стрілки).
+{name} ({year}) : ouvrir la fiche ¦ {name} ({year}): открыть карточку ¦ {name} ({year}): відкрити картку
+Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul. ¦ Самые передаваемые имена ({n}); выбери имя в «Имя», чтобы увидеть только его. ¦ Імена, що передавалися найчастіше ({n}); вибери ім’я в «Ім’я», щоб побачити лише його.
+Flèches de transmission des prénoms ¦ Стрелки передачи имён ¦ Стрілки передачі імен
+C’est bien ça ¦ Всё верно ¦ Усе правильно
+Garder cette piste comme sûre ¦ Считать эту версию надёжной ¦ Вважати цю версію надійною
+Prénom reçu de {name} : confirmé. ¦ Имя получено от {name}: подтверждено. ¦ Ім’я отримано від {name}: підтверджено.
+Ce n’est pas ça ¦ Это не так ¦ Це не так
+Écarter cette piste ¦ Отбросить эту версию ¦ Відкинути цю версію
+Piste écartée. ¦ Версия отброшена. ¦ Версію відкинуто.
+Plutôt : {who} ¦ Скорее: {who} ¦ Радше: {who}
+Prénom reçu de {name}. ¦ Имя получено от {name}. ¦ Ім’я отримано від {name}.
+Celle dont il ou elle tient son prénom ¦ Тот, от кого он или она получил(а) имя ¦ Той, від кого він чи вона отримав(ла) ім’я
+De qui tient-il son prénom ? ¦ От кого у него (неё) это имя? ¦ Від кого в нього (неї) це ім’я?
+la personne choisie ¦ выбранный человек ¦ вибрана людина
+Oublier les corrections à la main ¦ Забыть ручные исправления ¦ Забути ручні виправлення
+Corrections oubliées : le calcul de l’app revient. ¦ Исправления забыты: вернулся расчёт приложения. ¦ Виправлення забуто: повернувся розрахунок застосунку.
+Voir la transmission de ce prénom ¦ Посмотреть, как передавалось это имя ¦ Переглянути, як передавалося це ім’я
+Prénom reçu de… ¦ Имя получено от… ¦ Ім’я отримано від…
+saint du jour : ¦ святой дня: ¦ святий дня:
+Prénom reçu de {who} ¦ Имя получено от {who} ¦ Ім’я отримано від {who}
+indice {n} sur 100 ¦ индекс {n} из 100 ¦ індекс {n} зі 100
+Ta famille ¦ Твоя семья ¦ Твоя родина
+France ≈ ¦ Франция ≈ ¦ Франція ≈
+personnes {who} ¦ люди {who} ¦ люди {who}
+pas de données ¦ нет данных ¦ немає даних
+Moins de 10 : à lire avec prudence ¦ Меньше 10: читать с осторожностью ¦ Менше 10: читати обережно
+Aucune époque dans cette période ¦ Нет эпох в этом периоде ¦ Немає епох у цьому періоді
+Les repères français vont de 1686 à 1999 : élargis la période. ¦ Французские ориентиры охватывают 1686–1999 годы: расширь период. ¦ Французькі орієнтири охоплюють 1686–1999 роки: розшир період.
+Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles. ¦ Средние показатели твоей семьи рядом со средними по Франции той же эпохи (≈ — порядки величин, с источником). В семье несколько десятков актов: сравнение читается в общих чертах. Без живых людей и конфиденциальных карточек. ¦ Середні показники твоєї родини поруч із середніми по Франції тієї самої епохи (≈ — порядки величин, із джерелом). У родині кілька десятків актів: порівняння читається в загальних рисах. Без живих людей і конфіденційних карток.
+📚 D’où viennent les chiffres de la France ¦ 📚 Откуда цифры по Франции ¦ 📚 Звідки цифри по Франції
+TA FAMILLE ET LA FRANCE ¦ ТВОЯ СЕМЬЯ И ФРАНЦИЯ ¦ ТВОЯ РОДИНА І ФРАНЦІЯ
+Lecture impossible. ¦ Не удалось прочитать. ¦ Не вдалося прочитати.
+Simple ¦ Простой ¦ Простий
+Scientifique ¦ Научный ¦ Науковий
+Ruban ¦ Лента ¦ Стрічка
+RUBAN ¦ ЛЕНТА ¦ СТРІЧКА
+chiffres ¦ цифры ¦ цифри
+ex. mariage-1925 ¦ напр. svadba-1925 ¦ напр. vesillia-1925
+Janv. ¦ Янв. ¦ Січ.
+Juil. ¦ Июл. ¦ Лип.
+Sept. ¦ Сент. ¦ Вер.
+Oct. ¦ Окт. ¦ Жовт.
+Nov. ¦ Нояб. ¦ Лист.
+Archive ¦ Архив ¦ Архів
+{n} vie à raconter : {list} ¦ Жизни, которые можно рассказать ({n}): {list} ¦ Життя, які можна розповісти ({n}): {list}
+JEU ¦ ИГРА ¦ ГРА
+côté ¦ сторона ¦ бік
+Comparer avec… ¦ Сравнить с… ¦ Порівняти з…
+Choisir la personne… ¦ Выбрать человека… ¦ Вибрати людину…
+Âge moyen au premier mariage ¦ Средний возраст при первом браке ¦ Середній вік при першому шлюбі
+L’âge de chaque époux à son premier mariage (date de naissance et date du mariage connues). ¦ Возраст каждого супруга при первом браке (известны дата рождения и дата брака). ¦ Вік кожного з подружжя при першому шлюбі (відомі дата народження й дата шлюбу).
+Le nombre d’enfants connus des couples mariés pendant la période (couples qui ont au moins un enfant dans ta base). En France : enfants par femme (indicateur de fécondité), qui se compare seulement en gros. ¦ Число известных детей у пар, вступивших в брак в этот период (пары, у которых в твоей базе есть хотя бы один ребёнок). Во Франции: детей на женщину (коэффициент рождаемости), сравнивается лишь в общих чертах. ¦ Кількість відомих дітей у пар, що одружилися в цей період (пари, які мають у твоїй базі хоча б одну дитину). У Франції: дітей на жінку (коефіцієнт народжуваності), порівнюється лише в загальних рисах.
+baby-boom (1946-1964) ¦ бэби-бум (1946-1964) ¦ бебі-бум (1946-1964)
+Mortalité infantile (morts avant 1 an) ¦ Младенческая смертность (смерть до 1 года) ¦ Немовляча смертність (смерть до 1 року)
+Sur 1 000 enfants nés pendant la période dont on connaît le décès (ou qui ont vécu), combien sont morts avant 1 an. Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop bas. ¦ Из 1 000 детей, родившихся в этот период, чья смерть известна (или которые выжили), сколько умерли до 1 года. Умерших младенцев часто нет в древах: цифра семьи часто слишком низкая. ¦ З 1 000 дітей, народжених у цей період, чия смерть відома (або які вижили), скільки померли до 1 року. Померлих немовлят часто немає в деревах: цифра родини часто занизька.
+Espérance de vie à la naissance ¦ Ожидаемая продолжительность жизни при рождении ¦ Очікувана тривалість життя при народженні
+L’âge moyen au décès des personnes nées pendant la période (naissance et décès connus). Les bébés morts manquent souvent dans les arbres : le chiffre de la famille est souvent trop haut. ¦ Средний возраст смерти людей, родившихся в этот период (известны рождение и смерть). Умерших младенцев часто нет в древах: цифра семьи часто слишком высокая. ¦ Середній вік смерті людей, народжених у цей період (відомі народження й смерть). Померлих немовлят часто немає в деревах: цифра родини часто зависока.
+Savoir signer son acte de mariage ¦ Умение подписать свою запись о браке ¦ Уміння підписати свій актовий запис про шлюб
+La part des époux et des épouses qui ont signé leur acte de mariage (case « a signé » des mariages). En France : mesuré sur les années indiquées ; ta famille : sur les années autour. ¦ Доля женихов и невест, подписавших свою запись о браке (поле «подписал(а)» у браков). Во Франции: измерено за указанные годы; твоя семья: за соседние годы. ¦ Частка наречених, що підписали свій актовий запис про шлюб (поле «підписав(ла)» у шлюбів). У Франції: виміряно за вказані роки; твоя родина: за сусідні роки.
+Part des métiers de la terre (agriculture, forêt) ¦ Доля земледельческих профессий (сельское хозяйство, лес) ¦ Частка хліборобських професій (сільське господарство, ліс)
+Parmi les personnes de la famille en âge de travailler à cette date (20 à 60 ans) et dont le métier est reconnu, la part des métiers de la terre et de la forêt (laboureur, cultivateur, journalier agricole, bûcheron…). ¦ Среди членов семьи трудоспособного возраста на эту дату (от 20 до 60 лет), чья профессия распознана, — доля профессий, связанных с землёй и лесом (пахарь, земледелец, сельский батрак, лесоруб…). ¦ Серед членів родини працездатного віку на цю дату (від 20 до 60 років), чию професію розпізнано, — частка професій, пов’язаних із землею та лісом (орач, хлібороб, сільський наймит, лісоруб…).
+Ordres de grandeur arrondis, toujours précédés de « ≈ ». Une fourchette quand les travaux donnent des chiffres un peu différents selon l’échantillon ou les années. Un chiffre dont on n’était pas sûr n’a pas été mis : il vaut mieux une case vide qu’un chiffre inventé. Les moyennes d’une famille (quelques dizaines d’actes) ne se comparent qu’en gros à celles de toute la France. ¦ Округлённые порядки величин, всегда с «≈» впереди. Диапазон — когда исследования дают немного разные цифры в зависимости от выборки или лет. Цифру, в которой не были уверены, не ставили: лучше пустая клетка, чем выдуманная цифра. Средние одной семьи (несколько десятков актов) сравниваются со средними по всей Франции лишь в общих чертах. ¦ Округлені порядки величин, завжди з «≈» попереду. Діапазон — коли дослідження дають трохи різні цифри залежно від вибірки чи років. Цифру, у якій не були певні, не ставили: краще порожня клітинка, ніж вигадана цифра. Середні однієї родини (кілька десятків актів) порівнюються із середніми по всій Франції лише в загальних рисах.
+nées entre 1846 et 1886 ¦ родившиеся между 1846 и 1886 ¦ народжені між 1846 і 1886
+{type} publiée par {from} ¦ {type}, опубликовано: {from} ¦ {type}, опубліковано: {from}
+LCNDA (fichiers livrés avec l’app) ¦ LCNDA (файлы, поставляемые с приложением) ¦ LCNDA (файли, що постачаються із застосунком)
+Événements survenus aux communes depuis 1943 (INSEE) ¦ Изменения коммун с 1943 года (INSEE) ¦ Зміни комун з 1943 року (INSEE)
+Communes depuis 1943 (INSEE) ¦ Коммуны с 1943 года (INSEE) ¦ Комуни з 1943 року (INSEE)

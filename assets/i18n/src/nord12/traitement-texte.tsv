@@ -1,0 +1,782 @@
+fr ¦ ru ¦ uk
+menu|Affichage ¦ Вид ¦ Вигляд
+Insertion ¦ Вставка ¦ Вставлення
+Format ¦ Формат ¦ Формат
+Tableau ¦ Таблица ¦ Таблиця
+Champ (page, nombre de pages, titre, auteur)… ¦ Поле (страница, число страниц, заголовок, автор)… ¦ Поле (сторінка, кількість сторінок, заголовок, автор)…
+N° de page ¦ № страницы ¦ № сторінки
+(celle de Normal) ¦ (как у «Обычного») ¦ (як у «Звичайного»)
+(titre vide) ¦ (пустой заголовок) ¦ (порожній заголовок)
+* = des lettres, ? = une lettre, # = un chiffre ¦ * = несколько букв, ? = одна буква, # = одна цифра ¦ * = кілька літер, ? = одна літера, # = одна цифра
+.lcnda-texte (tout est gardé) ¦ .lcnda-texte (сохраняется всё) ¦ .lcnda-texte (зберігається все)
+1 (retirer les colonnes) ¦ 1 (убрать колонки) ¦ 1 (прибрати колонки)
+1. Liste numérotée ¦ 1. Нумерованный список ¦ 1. Нумерований список
+1re ligne ¦ 1-я строка ¦ 1-й рядок
+1re ligne (négatif : en saillie) ¦ 1-я строка (отрицательный: выступ) ¦ 1-й рядок (від’ємний: виступ)
+60 onglets au plus. ¦ Не больше 60 вкладок. ¦ Не більше 60 вкладок.
+A Couleur… ¦ A Цвет… ¦ A Колір…
+Accentuation ¦ Выделение ¦ Виділення
+Adresse ¦ Адрес ¦ Адреса
+Afficher : nom, dates, naissance… ¦ Показать: имя, даты, рождение… ¦ Показати: ім’я, дати, народження…
+Ajoute au moins une personne. ¦ Добавь хотя бы одного человека. ¦ Додай хоча б одну людину.
+Ajoute d’abord des champs : Insertion → « 📨 Champ de fusion » (Prénom, Nom, Date de naissance…). ¦ Сначала добавь поля: Вставка → «📨 Поле слияния» (Имя, Фамилия, Дата рождения…). ¦ Спершу додай поля: Вставлення → «📨 Поле злиття» (Ім’я, Прізвище, Дата народження…).
+Ajouter la citation ¦ Добавить цитату ¦ Додати цитату
+Ajouter les personnes d’une liste ¦ Добавить людей из списка ¦ Додати людей зі списку
+Ajouter une légende ¦ Добавить подпись ¦ Додати підпис
+Album photo (21,6 × 28 cm) ¦ Фотоальбом (21,6 × 28 см) ¦ Фотоальбом (21,6 × 28 см)
+Alignement ¦ Выравнивание ¦ Вирівнювання
+Aligner à droite ¦ Выровнять по правому краю ¦ Вирівняти праворуч
+Aligner à gauche ¦ Выровнять по левому краю ¦ Вирівняти ліворуч
+Aligné sur le texte (seul sur sa ligne) ¦ В тексте (одно в своей строке) ¦ У тексті (саме у своєму рядку)
+Allemand ¦ Немецкий ¦ Німецька
+Aller ¦ Перейти ¦ Перейти
+Aller à la page ¦ Перейти к странице ¦ Перейти до сторінки
+Anglais ¦ Английский ¦ Англійська
+Années (1850 – 1920) ¦ Годы (1850 – 1920) ¦ Роки (1850 – 1920)
+Aperçu avec {name} : ¦ Предпросмотр с {name}: ¦ Попередній перегляд з {name}:
+Apostrophe typographique ’ ¦ Типографский апостроф ’ ¦ Типографський апостроф ’
+Au moins une ligne. ¦ Хотя бы одна строка. ¦ Хоча б один рядок.
+Aucun champ à mettre à jour. ¦ Нет полей для обновления. ¦ Немає полів для оновлення.
+Aucune modification suivie dans le document. ¦ В документе нет отслеживаемых изменений. ¦ У документі немає відстежуваних змін.
+Aucune modification suivie. ¦ Нет отслеживаемых изменений. ¦ Немає відстежуваних змін.
+Aucune modification suivie. « ✍ Suivre les modifications » garde la trace de chaque ajout et de chaque suppression. ¦ Нет отслеживаемых изменений. «✍ Отслеживать изменения» сохраняет след каждого добавления и каждого удаления. ¦ Немає відстежуваних змін. «✍ Відстежувати зміни» зберігає слід кожного додавання й кожного видалення.
+Augmenter le retrait ¦ Увеличить отступ ¦ Збільшити відступ
+Auteur ¦ Автор ¦ Автор
+Autre ¦ Другое ¦ Інше
+Avis de recherche (lettre aux cousins, remplie) ¦ Объявление о поиске (письмо родственникам, заполненное) ¦ Оголошення про пошук (лист родичам, заповнений)
+Barre d’outils ¦ Панель инструментов ¦ Панель інструментів
+Barre d’outils en ruban (avec les noms) ¦ Панель инструментов лентой (с названиями) ¦ Панель інструментів стрічкою (з назвами)
+Barre d’outils · {what} ¦ Панель инструментов · {what} ¦ Панель інструментів · {what}
+Barré ¦ Зачёркнутый ¦ Закреслений
+Bas ¦ Низ ¦ Низ
+Biographie ajoutée (écrite par l’app d’après la fiche) : modifie-la librement. ¦ Биография добавлена (написана приложением по карточке): меняй её как хочешь. ¦ Біографію додано (написана застосунком за карткою): змінюй її як хочеш.
+Bordure et trame ¦ Граница и заливка ¦ Межа й заливка
+Bordure et trame… ¦ Граница и заливка… ¦ Межа й заливка…
+Bordures ¦ Границы ¦ Межі
+Bordures du tableau ¦ Границы таблицы ¦ Межі таблиці
+Breton ¦ Бретонский ¦ Бретонська
+COMPARER ¦ СРАВНИТЬ ¦ ПОРІВНЯТИ
+Cacher dans le texte ¦ Скрыть в тексте ¦ Приховати в тексті
+Caractères (espaces compris) ¦ Символы (с пробелами) ¦ Символи (з пробілами)
+Caractères (sans les espaces) ¦ Символы (без пробелов) ¦ Символи (без пробілів)
+Caractères spéciaux ¦ Специальные символы ¦ Спеціальні символи
+Carré (le texte autour) ¦ Квадрат (текст вокруг) ¦ Квадрат (текст навколо)
+Carré 15 × 15 cm ¦ Квадрат 15 × 15 см ¦ Квадрат 15 × 15 см
+Carré 21 × 21 cm ¦ Квадрат 21 × 21 см ¦ Квадрат 21 × 21 см
+Carré 30 × 30 cm ¦ Квадрат 30 × 30 см ¦ Квадрат 30 × 30 см
+Carte de visite ¦ Визитная карточка ¦ Візитівка
+Cartes et livres ¦ Открытки и книги ¦ Листівки й книжки
+Carton DL (faire-part) ¦ Карточка DL (извещение) ¦ Картка DL (оголошення)
+Case séparée ¦ Ячейка разделена ¦ Комірку розділено
+Cases fusionnées ¦ Ячейки объединены ¦ Комірки об’єднано
+Casse ¦ Регистр ¦ Регістр
+Ce diagramme est vide. ¦ Эта диаграмма пуста. ¦ Ця діаграма порожня.
+Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ? ¦ В этом документе ещё нет полей слияния (Вставка → «📨 Поле слияния»). Сначала вставить небольшую карточку личности в место курсора? ¦ У цьому документі ще немає полів злиття (Вставлення → «📨 Поле злиття»). Спершу вставити невелику картку особи в місце курсора?
+Ce livre n’a pas de styles de paragraphe. ¦ В этой книге нет стилей абзаца. ¦ У цій книжці немає стилів абзацу.
+Ce passage a changé : relance la relecture. ¦ Этот фрагмент изменился: запусти проверку заново. ¦ Цей фрагмент змінився: запусти перевірку знову.
+Ce que montre l’image, en une phrase (ex. « Mariage de Jean et Marie devant l’église, 1923 ») ¦ Что показывает изображение, одной фразой (напр. «Mariage de Jean et Marie devant l’église, 1923») ¦ Що показує зображення, одним реченням (напр. «Mariage de Jean et Marie devant l’église, 1923»)
+Ce texte suit la fiche : il se met à jour à l’ouverture du document (Outils → Mettre à jour les champs). ¦ Этот текст следует за карточкой: он обновляется при открытии документа (Инструменты → Обновить поля). ¦ Цей текст іде за карткою: він оновлюється під час відкриття документа (Інструменти → Оновити поля).
+Centrer ¦ По центру ¦ По центру
+Certaines images, trop lourdes, n’ont pas été reprises. ¦ Некоторые слишком тяжёлые изображения не были перенесены. ¦ Деякі надто важкі зображення не було перенесено.
+Cette case n’est pas fusionnée. ¦ Эта ячейка не объединена. ¦ Ця комірка не об’єднана.
+Cette feuille est vide. ¦ Этот лист пуст. ¦ Цей аркуш порожній.
+Cette image n’a pas de fichier. ¦ У этого изображения нет файла. ¦ Це зображення не має файлу.
+Champ ¦ Поле ¦ Поле
+Changer l’image ¦ Заменить изображение ¦ Замінити зображення
+Changer l’image… ¦ Заменить изображение… ¦ Замінити зображення…
+Chaque Mot ¦ Каждое Слово ¦ Кожне Слово
+Chaque Mot Avec Une Majuscule ¦ Каждое Слово С Заглавной ¦ Кожне Слово З Великої
+Cherche un mot avec 🔍 : chaque endroit trouvé s’affiche ici. ¦ Ищи слово через 🔍: каждое найденное место появится здесь. ¦ Шукай слово через 🔍: кожне знайдене місце з’явиться тут.
+Chercher… (un mot, un nom) ¦ Искать… (слово, имя) ¦ Шукати… (слово, ім’я)
+Choisir un classeur du Tableur ¦ Выбрать книгу из электронной таблицы ¦ Вибрати книгу з електронної таблиці
+Choisir un média (lien) ¦ Выбрать медиафайл (ссылка) ¦ Вибрати медіафайл (посилання)
+Choisis d’abord du texte. ¦ Сначала выдели текст. ¦ Спершу виділи текст.
+Choisis d’abord le texte à changer. ¦ Сначала выдели текст, который нужно изменить. ¦ Спершу виділи текст, який треба змінити.
+Choisis le passage à commenter. ¦ Выдели фрагмент, который хочешь прокомментировать. ¦ Виділи фрагмент, який хочеш прокоментувати.
+Choisis les paragraphes à mettre en colonnes. ¦ Выдели абзацы, которые нужно разбить на колонки. ¦ Виділи абзаци, які треба розбити на колонки.
+Choisis un mot (double-clic) ou mets le curseur dedans, puis 🔁 Synonymes. ¦ Выбери слово (двойной щелчок) или поставь в него курсор, затем 🔁 Синонимы. ¦ Вибери слово (подвійне клацання) або постав у нього курсор, потім 🔁 Синоніми.
+Choisis un rectangle de cases (sans morceau d’une autre fusion). ¦ Выдели прямоугольник ячеек (без части другого объединения). ¦ Виділи прямокутник комірок (без частини іншого об’єднання).
+Classique ¦ Классический ¦ Класичний
+Classique (à la française) ¦ Классический (на французский лад) ¦ Класичний (на французький лад)
+Clic sur un mot : il remplace « {word} » (↶ pour revenir). ¦ Щелчок по слову: оно заменит «{word}» (↶, чтобы вернуть). ¦ Клацання на слові: воно замінить «{word}» (↶, щоб повернути).
+Clique pour l’ajouter au texte (la fenêtre reste ouverte). ¦ Нажми, чтобы добавить в текст (окно остаётся открытым). ¦ Натисни, щоб додати в текст (вікно залишається відкритим).
+Coche deux versions (ou « Maintenant ») pour les comparer. ¦ Отметь две версии (или «Сейчас»), чтобы сравнить их. ¦ Познач дві версії (або «Зараз»), щоб порівняти їх.
+Coller depuis Word ou le web ¦ Вставить из Word или из интернета ¦ Вставити з Word або з інтернету
+Coller sans la mise en forme ¦ Вставить без форматирования ¦ Вставити без форматування
+Colonne ajoutée ¦ Столбец добавлен ¦ Стовпець додано
+Colonne supprimée ¦ Столбец удалён ¦ Стовпець видалено
+Commande inconnue : {cmd} ¦ Неизвестная команда: {cmd} ¦ Невідома команда: {cmd}
+Commencer sur une nouvelle page ¦ Начинать с новой страницы ¦ Починати з нової сторінки
+Commentaire supprimé ¦ Комментарий удалён ¦ Коментар видалено
+Commentaires ¦ Комментарии ¦ Коментарі
+Commentaires (panneau) ¦ Комментарии (панель) ¦ Коментарі (панель)
+Commenter ¦ Комментировать ¦ Коментувати
+Compte rendu de visite ¦ Отчёт о посещении ¦ Звіт про відвідування
+Conjoint ¦ Супруг(а) ¦ Чоловік / дружина
+Copie enregistrée : « {name} ». ¦ Копия сохранена: «{name}». ¦ Копію збережено: «{name}».
+Copie impossible : {error} ¦ Копирование невозможно: {error} ¦ Копіювання неможливе: {error}
+Copie rangée dans les médias ({format}). ¦ Копия сохранена в медиафайлах ({format}). ¦ Копію збережено в медіафайлах ({format}).
+Copie « {name} » enregistrée. ¦ Копия «{name}» сохранена. ¦ Копію «{name}» збережено.
+Corriger ¦ Исправить ¦ Виправити
+Couleur du texte ¦ Цвет текста ¦ Колір тексту
+Couleur du texte… ¦ Цвет текста… ¦ Колір тексту…
+Couleur et surlignage (C2) ¦ Цвет и выделение (C2) ¦ Колір і виділення (C2)
+Couper ici ¦ Разорвать здесь ¦ Розірвати тут
+Créer le lien ¦ Создать ссылку ¦ Створити посилання
+Créer le style ¦ Создать стиль ¦ Створити стиль
+Créer le tableau ¦ Создать таблицу ¦ Створити таблицю
+Créer les copies ¦ Создать копии ¦ Створити копії
+Cyrillique ¦ Кириллица ¦ Кирилиця
+Dans la sélection : mots ¦ В выделении: слова ¦ У виділенні: слова
+Dans le texte, entre parenthèses ¦ В тексте, в скобках ¦ У тексті, в дужках
+Date (mise à jour à chaque ouverture) ¦ Дата (обновляется при каждом открытии) ¦ Дата (оновлюється під час кожного відкриття)
+Date du jour ¦ Сегодняшняя дата ¦ Сьогоднішня дата
+Date du mariage ¦ Дата брака ¦ Дата шлюбу
+Demande d’acte (remplie avec une fiche) ¦ Запрос записи акта (заполнен по карточке) ¦ Запит актового запису (заповнений за карткою)
+Demande d’acte d’état civil ¦ Запрос записи акта гражданского состояния ¦ Запит актового запису цивільного стану
+Design ¦ Оформление ¦ Оформлення
+Diminuer le retrait ¦ Уменьшить отступ ¦ Зменшити відступ
+Document ¦ Документ ¦ Документ
+Document importé ¦ Документ импортирован ¦ Документ імпортовано
+Document modifié ailleurs ¦ Документ изменён в другом месте ¦ Документ змінено в іншому місці
+Document « {name} » importé ({words}) ¦ Документ «{name}» импортирован ({words}) ¦ Документ «{name}» імпортовано ({words})
+Donne un nom au style. ¦ Дай стилю название. ¦ Дай стилю назву.
+Double (2) ¦ Двойной (2) ¦ Подвійний (2)
+Double-clic : modifier le pied de page ¦ Двойной щелчок: изменить нижний колонтитул ¦ Подвійне клацання: змінити нижній колонтитул
+Double-clic : modifier l’en-tête ¦ Двойной щелчок: изменить верхний колонтитул ¦ Подвійне клацання: змінити верхній колонтитул
+Double-clic : renommer · clic droit : plus ¦ Двойной щелчок: переименовать · правый щелчок: ещё ¦ Подвійне клацання: перейменувати · правий клік: більше
+Droite ¦ Справа ¦ Праворуч
+Déplacer à droite ¦ Переместить вправо ¦ Перемістити праворуч
+Déplacer à gauche ¦ Переместить влево ¦ Перемістити ліворуч
+D’après le paragraphe du curseur : change ce que tu veux, puis il sera proposé dans la liste des styles. ¦ На основе абзаца под курсором: измени что хочешь, затем стиль появится в списке стилей. ¦ На основі абзацу під курсором: зміни що хочеш, потім стиль з’явиться в списку стилів.
+Effacer la mise en forme ¦ Очистить форматирование ¦ Очистити форматування
+Elle sert à l’orthographe (mots soulignés en rouge, corrections au clic droit) et à la lecture à voix haute. ¦ Он нужен для орфографии (слова подчёркнуты красным, исправления — правым щелчком) и для чтения вслух. ¦ Вона потрібна для орфографії (слова підкреслено червоним, виправлення — правим кліком) і для читання вголос.
+En note de bas de page ¦ Сноской внизу страницы ¦ Виноскою внизу сторінки
+En note de fin ¦ Концевой сноской ¦ Кінцевою виноскою
+En-tête (en haut de chaque page) ¦ Верхний колонтитул (вверху каждой страницы) ¦ Верхній колонтитул (угорі кожної сторінки)
+En-tête de la première page ¦ Верхний колонтитул первой страницы ¦ Верхній колонтитул першої сторінки
+En-tête et pied de page ¦ Колонтитулы ¦ Колонтитули
+En-tête et pied de page… ¦ Колонтитулы… ¦ Колонтитули…
+En-tête et pied… ¦ Колонтитулы… ¦ Колонтитули…
+Enregistre d’abord le document (💾) : ses versions seront gardées avec lui. ¦ Сначала сохрани документ (💾): его версии будут храниться вместе с ним. ¦ Спершу збережи документ (💾): його версії зберігатимуться разом із ним.
+Enregistrer comme modèle ¦ Сохранить как шаблон ¦ Зберегти як шаблон
+Enregistrer comme modèle… ¦ Сохранить как шаблон… ¦ Зберегти як шаблон…
+Enregistrer comme nouvelle version ¦ Сохранить как новую версию ¦ Зберегти як нову версію
+Enregistrer tout seul ¦ Сохранять автоматически ¦ Зберігати автоматично
+Enregistrer une copie ¦ Сохранить копию ¦ Зберегти копію
+Envoi des images indisponible. ¦ Отправка изображений недоступна. ¦ Надсилання зображень недоступне.
+Envoyer ¦ Отправить ¦ Надіслати
+Envoyer vers la mise en page… ¦ Отправить в вёрстку… ¦ Надіслати у верстку…
+Espace après ¦ Интервал после ¦ Інтервал після
+Espace après le paragraphe ¦ Интервал после абзаца ¦ Інтервал після абзацу
+Espace avant ¦ Интервал перед ¦ Інтервал перед
+Espace avant le paragraphe ¦ Интервал перед абзацем ¦ Інтервал перед абзацом
+Espace fine avant ; ! ? ¦ Тонкий пробел перед ; ! ? ¦ Тонкий пробіл перед ; ! ?
+Espace insécable avant les deux-points ¦ Неразрывный пробел перед двоеточием ¦ Нерозривний пробіл перед двокрапкою
+Espaces en trop ¦ Лишние пробелы ¦ Зайві пробіли
+Espagnol ¦ Испанский ¦ Іспанська
+Et {n} de plus (« Tout corriger » les prend aussi). ¦ И ещё {n} («Исправить всё» тоже их исправит). ¦ І ще {n} («Виправити все» теж їх виправить).
+Exporté : {name} ¦ Экспортировано: {name} ¦ Експортовано: {name}
+Exposant ¦ Верхний индекс ¦ Верхній індекс
+Expressions simples ¦ Простые выражения ¦ Прості вирази
+FORMAT ¦ ФОРМАТ ¦ ФОРМАТ
+Famille et vie ¦ Семья и жизнь ¦ Родина й життя
+Feuille trop grande pour un document (plus de 20 000 cases) : choisis une plage plus petite dans le Tableur. ¦ Лист слишком велик для документа (больше 20 000 ячеек): выбери диапазон поменьше в электронной таблице. ¦ Аркуш завеликий для документа (понад 20 000 комірок): вибери менший діапазон в електронній таблиці.
+Fiche d’identité d’un ancêtre (remplie) ¦ Карточка личности предка (заполненная) ¦ Картка особи предка (заповнена)
+Fiche ouverte derrière le document (ferme-le ou réduis-le pour la voir). ¦ Карточка открыта за документом (закрой или сверни его, чтобы её увидеть). ¦ Картку відкрито за документом (закрий або згорни його, щоб її побачити).
+Filigrane ¦ Водяной знак ¦ Водяний знак
+Garder avec le paragraphe suivant ¦ Не отрывать от следующего абзаца ¦ Не відривати від наступного абзацу
+Garder avec le suivant ¦ Не отрывать от следующего ¦ Не відривати від наступного
+Garder la mise en forme (nettoyée) ¦ Сохранить форматирование (очищенное) ¦ Зберегти форматування (очищене)
+Garder ma version ¦ Оставить мою версию ¦ Залишити мою версію
+Gauche ¦ Слева ¦ Ліворуч
+Glisse la souris d’une case à l’autre pour en choisir plusieurs, puis « Fusionner ». ¦ Проведи мышью от одной ячейки к другой, чтобы выбрать несколько, затем «Объединить». ¦ Проведи мишею від однієї комірки до іншої, щоб вибрати кілька, потім «Об’єднати».
+Gras ¦ Жирный ¦ Жирний
+Gras, italique… ¦ Жирный, курсив… ¦ Жирний, курсив…
+Grec ¦ Греческий ¦ Грецька
+Groupe de caractères ¦ Группа символов ¦ Група символів
+Guillemets français « » ¦ Французские кавычки « » ¦ Французькі лапки « »
+Haut ¦ Верх ¦ Верх
+Hauteur ¦ Высота ¦ Висота
+Histoire d’une maison ou d’un village ¦ История дома или деревни ¦ Історія будинку або села
+IMAGE ¦ ИЗОБРАЖЕНИЕ ¦ ЗОБРАЖЕННЯ
+Image ¦ Изображение ¦ Зображення
+Image ajoutée (et rangée dans les médias). ¦ Изображение добавлено (и сохранено в медиафайлах). ¦ Зображення додано (і збережено в медіафайлах).
+Image choisie : tire un coin pour la taille, clic droit pour l’habillage, ⌫ pour la supprimer. ¦ Изображение выбрано: потяни за угол, чтобы изменить размер, правый щелчок — обтекание, ⌫ — удалить. ¦ Зображення вибрано: потягни за кут, щоб змінити розмір, правий клік — обтікання, ⌫ — видалити.
+Image posée : clic pour la taille, clic droit pour l’habillage (carré, haut et bas) et la légende. ¦ Изображение вставлено: щелчок — размер, правый щелчок — обтекание (квадрат, сверху и снизу) и подпись. ¦ Зображення вставлено: клацання — розмір, правий клік — обтікання (квадрат, згори й знизу) і підпис.
+Image rangée dans les médias… ¦ Изображение сохраняется в медиафайлах… ¦ Зображення зберігається в медіафайлах…
+Image sans description (lue à voix haute aux personnes qui ne voient pas) ¦ Изображение без описания (читается вслух для незрячих) ¦ Зображення без опису (читається вголос для незрячих)
+Image supprimée ¦ Изображение удалено ¦ Зображення видалено
+Impossible d’enregistrer : {error} ¦ Не удалось сохранить: {error} ¦ Не вдалося зберегти: {error}
+Indice ¦ Нижний индекс ¦ Нижній індекс
+Insérer la fiche d’identité ¦ Вставить карточку личности ¦ Вставити картку особи
+Interligne ¦ Междустрочный интервал ¦ Міжрядковий інтервал
+Interligne et espacement ¦ Интервалы и отступы ¦ Інтервали й відступи
+Interligne {n} ¦ Междустрочный интервал {n} ¦ Міжрядковий інтервал {n}
+Italien ¦ Итальянский ¦ Італійська
+Italique ¦ Курсив ¦ Курсив
+Jeu de styles ¦ Набор стилей ¦ Набір стилів
+Jeu de styles des nouveaux documents ¦ Набор стилей новых документов ¦ Набір стилів нових документів
+Jeu de styles « {name} » ¦ Набор стилей «{name}» ¦ Набір стилів «{name}»
+Jeu de styles… ¦ Набор стилей… ¦ Набір стилів…
+Justifier ¦ Выровнять по ширине ¦ Вирівняти за шириною
+Justifié ¦ По ширине ¦ За шириною
+La bibliographie (Insertion → 📚) reprend toute seule les sources citées. ¦ Список литературы (Вставка → 📚) сам собирает процитированные источники. ¦ Список літератури (Вставлення → 📚) сам збирає процитовані джерела.
+La biographie de qui ? ¦ Чья биография? ¦ Чия біографія?
+La demande d’acte pour qui ? ¦ Запрос записи акта для кого? ¦ Запит актового запису для кого?
+La fenêtre des images n’est pas chargée. ¦ Окно изображений не загружено. ¦ Вікно зображень не завантажено.
+La fenêtre des versions n’est pas chargée. ¦ Окно версий не загружено. ¦ Вікно версій не завантажено.
+La fiche de qui ? ¦ Чья карточка? ¦ Чия картка?
+La lecture à voix haute n’existe pas dans ce navigateur. ¦ В этом браузере нет чтения вслух. ¦ У цьому браузері немає читання вголос.
+La naissance : date et lieu ¦ Рождение: дата и место ¦ Народження: дата й місце
+La première ligne est répétée en haut de chaque page ¦ Первая строка повторяется вверху каждой страницы ¦ Перший рядок повторюється вгорі кожної сторінки
+La suite du document commence sur une nouvelle page, avec son propre format : par exemple un grand tableau ou un arbre en paysage, puis on revient en portrait. ¦ Продолжение документа начинается с новой страницы, со своим форматом: например, большая таблица или древо в альбомной ориентации, а потом снова книжная. ¦ Продовження документа починається з нової сторінки, зі своїм форматом: наприклад, велика таблиця або дерево в альбомній орієнтації, а потім знову книжкова.
+La touche Tab avance jusqu’au prochain arrêt. Dans un tableau, Tab passe à la case suivante ; dans une liste, elle décale d’un niveau. ¦ Клавиша Tab переводит к следующей позиции табуляции. В таблице Tab переходит в следующую ячейку; в списке сдвигает на один уровень. ¦ Клавіша Tab переводить до наступної позиції табуляції. У таблиці Tab переходить до наступної комірки; у списку зсуває на один рівень.
+La vérification n’est pas chargée. ¦ Проверка не загружена. ¦ Перевірку не завантажено.
+Langue ¦ Язык ¦ Мова
+Langue des nouveaux documents ¦ Язык новых документов ¦ Мова нових документів
+Langue du document (orthographe, lecture à voix haute) ¦ Язык документа (орфография, чтение вслух) ¦ Мова документа (орфографія, читання вголос)
+Largeur ¦ Ширина ¦ Ширина
+Latin ¦ Латынь ¦ Латина
+Le décès : date et lieu ¦ Смерть: дата и место ¦ Смерть: дата й місце
+Le livre dont reprendre les styles ¦ Книга, из которой взять стили ¦ Книжка, з якої взяти стилі
+Le mot entier seulement ¦ Только целое слово ¦ Лише ціле слово
+Le mot tel qu’il apparaîtra dans l’index : ¦ Слово в том виде, в каком оно появится в указателе: ¦ Слово в тому вигляді, у якому воно з’явиться в покажчику:
+Le moteur du tableur n’est pas chargé. ¦ Движок электронной таблицы не загружен. ¦ Рушій електронної таблиці не завантажено.
+Le nom (lien vers la fiche) ¦ Имя (ссылка на карточку) ¦ Ім’я (посилання на картку)
+Le nom de la copie : ¦ Название копии: ¦ Назва копії:
+Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) : ¦ Название шаблона (текст остаётся: очисти его заранее, если хочешь пустой шаблон): ¦ Назва шаблону (текст залишається: очисти його заздалегідь, якщо хочеш порожній шаблон):
+Le nom du nouvel onglet ¦ Название новой вкладки ¦ Назва нової вкладки
+Le nom et les années (1850 – 1920) ¦ Имя и годы (1850 – 1920) ¦ Ім’я та роки (1850 – 1920)
+Le nom, la naissance et le décès ¦ Имя, рождение и смерть ¦ Ім’я, народження й смерть
+Le petit arbre de qui ? ¦ Чьё маленькое древо? ¦ Чиє маленьке дерево?
+Le récit de qui ? ¦ Чей рассказ? ¦ Чия розповідь?
+Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici. ¦ Текст становится страницами книги (Вёрстка): заголовки 1 становятся главами, изображения — страницами с изображениями и подписями, сноски — разделом «Примечания» в конце. Твой документ остаётся здесь как есть. ¦ Текст стає сторінками книжки (Верстка): заголовки 1 стають розділами, зображення — сторінками із зображеннями та підписами, виноски — частиною «Примітки» наприкінці. Твій документ залишається тут як є.
+Le texte seul ¦ Только текст ¦ Лише текст
+Le tri ne marche pas avec des cases fusionnées : sépare-les d’abord. ¦ Сортировка не работает с объединёнными ячейками: сначала раздели их. ¦ Сортування не працює з об’єднаними комірками: спершу розділи їх.
+Lecture arrêtée. ¦ Чтение остановлено. ¦ Читання зупинено.
+Legal US ¦ Legal US ¦ Legal US
+Les champs « » prennent les valeurs d’une fiche : Fichier → « 👤 Remplir avec une fiche… », ou une copie par personne avec Outils → « 📨 Publipostage… ». ¦ Поля « » принимают значения из карточки: Файл → «👤 Заполнить по карточке…», или одна копия на человека через Инструменты → «📨 Рассылка…». ¦ Поля « » беруть значення з картки: Файл → «👤 Заповнити за карткою…», або одна копія на людину через Інструменти → «📨 Розсилка…».
+Les changements faits depuis le dernier enregistrement seront perdus. ¦ Изменения, сделанные после последнего сохранения, будут потеряны. ¦ Зміни, зроблені після останнього збереження, буде втрачено.
+Les dates et les lieux écrits à côté d’un nom de la base sont comparés à sa fiche (naissance, baptême, mariage, décès, inhumation, âges, numéros Sosa). Rien n’est changé tout seul. ¦ Даты и места, написанные рядом с именем из базы, сравниваются с его карточкой (рождение, крещение, брак, смерть, погребение, возраст, номера Sosa). Ничего не меняется само. ¦ Дати й місця, написані поруч з ім’ям із бази, порівнюються з його карткою (народження, хрещення, шлюб, смерть, поховання, вік, номери Sosa). Нічого не змінюється саме.
+Les macros du fichier sont ignorées (elles ne sont jamais lancées). ¦ Макросы файла игнорируются (они никогда не запускаются). ¦ Макроси файлу ігноруються (вони ніколи не запускаються).
+Les modifications ne sont plus suivies. ¦ Изменения больше не отслеживаются. ¦ Зміни більше не відстежуються.
+Les modifications sont suivies ¦ Изменения отслеживаются ¦ Зміни відстежуються
+Les mots mal écrits sont soulignés en rouge (clic droit pour les corrections). ¦ Слова с ошибками подчёркнуты красным (правый щелчок — исправления). ¦ Слова з помилками підкреслено червоним (правий клік — виправлення).
+Les paragraphes choisis se partagent en colonnes équilibrées (comme dans un journal). ¦ Выделенные абзацы делятся на ровные колонки (как в газете). ¦ Виділені абзаци діляться на рівні колонки (як у газеті).
+Les personnes du publipostage ¦ Люди для рассылки ¦ Люди для розсилки
+Les raccourcis à soi ne sont pas chargés. ¦ Свои сочетания клавиш не загружены. ¦ Власні сполучення клавіш не завантажено.
+Les titres et le texte changent ensemble de police et de couleur ; tes propres styles restent. ¦ Заголовки и текст вместе меняют шрифт и цвет; твои собственные стили остаются. ¦ Заголовки й текст разом змінюють шрифт і колір; твої власні стилі залишаються.
+Lettre US ¦ Letter US ¦ Letter US
+Lettre aux archives ¦ Письмо в архив ¦ Лист до архіву
+Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche… ¦ Письмо в архив, запрос записи акта, рассказ о предке, отчёт о посещении, отчёт об исследовании… ¦ Лист до архіву, запит актового запису, розповідь про предка, звіт про відвідування, звіт про дослідження…
+Lettre à la famille ¦ Письмо семье ¦ Лист родині
+Lettres accentuées ¦ Буквы с диакритикой ¦ Літери з діакритикою
+Lettres et abréviations anciennes ¦ Старинные буквы и сокращения ¦ Старовинні літери й скорочення
+Lettrine ¦ Буквица ¦ Буквиця
+LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice ¦ LibreOffice, OpenOffice
+Lien « {text} » : écris plutôt où il mène ¦ Ссылка «{text}»: лучше напиши, куда она ведёт ¦ Посилання «{text}»: краще напиши, куди воно веде
+Lieu du mariage ¦ Место брака ¦ Місце шлюбу
+Ligne ajoutée ¦ Строка добавлена ¦ Рядок додано
+Ligne au-dessus ¦ Строка выше ¦ Рядок вище
+Ligne d’en-tête (répétée sur chaque page) ¦ Строка заголовка (повторяется на каждой странице) ¦ Рядок заголовка (повторюється на кожній сторінці)
+Ligne en dessous ¦ Строка ниже ¦ Рядок нижче
+Ligne supprimée ¦ Строка удалена ¦ Рядок видалено
+Lire à voix haute ¦ Читать вслух ¦ Читати вголос
+Liste numérotée ¦ Нумерованный список ¦ Нумерований список
+Liste à puces ¦ Маркированный список ¦ Маркований список
+Livre (15,6 × 23,4 cm) ¦ Книга (15,6 × 23,4 см) ¦ Книжка (15,6 × 23,4 см)
+Livre US (6 × 9 in) ¦ Книга US (6 × 9 in) ¦ Книжка US (6 × 9 in)
+Livre ancien ¦ Старинная книга ¦ Старовинна книжка
+Louise Borie, née en 1850 ¦ Louise Borie, родилась в 1850 ¦ Louise Borie, народилася 1850 року
+L’onglet « {name} » et son texte seront supprimés. ¦ Вкладка «{name}» и её текст будут удалены. ¦ Вкладку «{name}» та її текст буде видалено.
+MAJUSCULES ¦ ЗАГЛАВНЫЕ ¦ ВЕЛИКІ
+Majuscule en début de phrase ¦ Заглавная в начале предложения ¦ Велика літера на початку речення
+Majuscules et minuscules comptent ¦ С учётом регистра ¦ З урахуванням регістру
+Marquer ¦ Пометить ¦ Позначити
+Marquer pour l’index ¦ Пометить для указателя ¦ Позначити для покажчика
+Marques de mise en forme ¦ Знаки форматирования ¦ Знаки форматування
+Marques de mise en forme ¶ ¦ Знаки форматирования ¶ ¦ Знаки форматування ¶
+Mathématiques ¦ Математика ¦ Математика
+Mes modèles ¦ Мои шаблоны ¦ Мої шаблони
+Mettre à jour les champs (personnes, dates) ¦ Обновить поля (люди, даты) ¦ Оновити поля (люди, дати)
+Mise en forme ¦ Форматирование ¦ Форматування
+Mise en forme (panneau de droite) ¦ Форматирование (правая панель) ¦ Форматування (права панель)
+Mise en évidence ¦ Сильное выделение ¦ Сильне виділення
+Moderne ¦ Современный ¦ Сучасний
+Modification acceptée ¦ Изменение принято ¦ Зміну прийнято
+Modification précédente ¦ Предыдущее изменение ¦ Попередня зміна
+Modification refusée ¦ Изменение отклонено ¦ Зміну відхилено
+Modification suivante ¦ Следующее изменение ¦ Наступна зміна
+Modifications suivies ¦ Отслеживаемые изменения ¦ Відстежувані зміни
+Modifier le lien… ¦ Изменить ссылку… ¦ Змінити посилання…
+Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles). ¦ Шаблон «{name}» сохранён (Начать с шаблона → Мои шаблоны). ¦ Шаблон «{name}» збережено (Почати із шаблону → Мої шаблони).
+Moi ¦ Я ¦ Я
+Mon document ¦ Мой документ ¦ Мій документ
+Mon nom (pour le suivi des modifications et les commentaires) ¦ Моё имя (для отслеживания изменений и комментариев) ¦ Моє ім’я (для відстеження змін і коментарів)
+Monnaies et chiffres ¦ Валюты и цифры ¦ Валюти й цифри
+Montrer dans le texte ¦ Показать в тексте ¦ Показати в тексті
+Montrer les marques de mise en forme ¶ ¦ Показывать знаки форматирования ¶ ¦ Показувати знаки форматування ¶
+Montrer les modifications ¦ Показывать изменения ¦ Показувати зміни
+Montrer les modifications… ¦ Показывать изменения… ¦ Показувати зміни…
+Montrer ▾ ¦ Показать ▾ ¦ Показати ▾
+Mot ancien ¦ Старинное слово ¦ Старовинне слово
+Mot entier ¦ Целое слово ¦ Ціле слово
+Mot répété ¦ Повторённое слово ¦ Повторене слово
+Mots ¦ Слова ¦ Слова
+NOTE DE BAS DE PAGE ¦ СНОСКА ¦ ВИНОСКА
+NOTE DE FIN ¦ КОНЦЕВАЯ СНОСКА ¦ КІНЦЕВА ВИНОСКА
+Naissance et décès ¦ Рождение и смерть ¦ Народження й смерть
+Nom de famille ¦ Фамилия ¦ Прізвище
+Nombre de colonnes ¦ Число колонок ¦ Кількість колонок
+Nombre de mots, de caractères, de paragraphes ¦ Число слов, символов, абзацев ¦ Кількість слів, символів, абзаців
+Nombre de pages ¦ Число страниц ¦ Кількість сторінок
+Non (avec 💾 ou ⌘S) ¦ Нет (с 💾 или ⌘S) ¦ Ні (з 💾 або ⌘S)
+Normal ¦ Обычный ¦ Звичайний
+Normal, A4, marges de 2,5 cm ¦ Обычный, A4, поля 2,5 см ¦ Звичайний, A4, поля 2,5 см
+Note de bas de page ¦ Сноска ¦ Виноска
+Note de fin (à la fin du document) ¦ Концевая сноска (в конце документа) ¦ Кінцева виноска (наприкінці документа)
+Note {n} ¦ Сноска {n} ¦ Виноска {n}
+Nouveau commentaire ¦ Новый комментарий ¦ Новий коментар
+Nouvel onglet ¦ Новая вкладка ¦ Нова вкладка
+Nouvelle section en paysage. ¦ Новый раздел в альбомной ориентации. ¦ Новий розділ в альбомній орієнтації.
+Nouvelle section en portrait. ¦ Новый раздел в книжной ориентации. ¦ Новий розділ у книжковій орієнтації.
+Numéro de la page (1 à {n}) : ¦ Номер страницы (от 1 до {n}): ¦ Номер сторінки (від 1 до {n}):
+Néerlandais ¦ Нидерландский ¦ Нідерландська
+OUTILS ¦ ИНСТРУМЕНТЫ ¦ ІНСТРУМЕНТИ
+Occitan ¦ Окситанский ¦ Окситанська
+Onglet renommé ¦ Вкладка переименована ¦ Вкладку перейменовано
+Onglet supprimé ¦ Вкладка удалена ¦ Вкладку видалено
+Onglet {n} ¦ Вкладка {n} ¦ Вкладка {n}
+Onglets du document ¦ Вкладки документа ¦ Вкладки документа
+Onglets rangés ¦ Вкладки упорядочены ¦ Вкладки впорядковано
+Orientation ¦ Ориентация ¦ Орієнтація
+Orientation de la suite ¦ Ориентация продолжения ¦ Орієнтація продовження
+Ouvrir le lieu ¦ Открыть место ¦ Відкрити місце
+Ouvrir le panneau de navigation ¦ Открыть панель навигации ¦ Відкрити панель навігації
+Page blanche ¦ Пустая страница ¦ Порожня сторінка
+Page {n} ¦ Страница {n} ¦ Сторінка {n}
+Page {page} / {total} ¦ Страница {page} / {total} ¦ Сторінка {page} / {total}
+Panneau de droite ¦ Правая панель ¦ Права панель
+Panneau de navigation : titres, pages, résultats ¦ Панель навигации: заголовки, страницы, результаты ¦ Панель навігації: заголовки, сторінки, результати
+Paragraphe ¦ Абзац ¦ Абзац
+Paragraphes ¦ Абзацы ¦ Абзаци
+Paragraphe… ¦ Абзац… ¦ Абзац…
+Pas de personne dans cette liste. ¦ В этом списке нет людей. ¦ У цьому списку немає людей.
+Pas de synonyme connu pour « {word} ». Le dictionnaire intégré compte {n} groupes de mots, surtout ceux d’un récit de famille. ¦ Для «{word}» синонимы не известны. Встроенный словарь насчитывает групп слов: {n}, в основном из семейных рассказов. ¦ Для «{word}» синоніми невідомі. Вбудований словник налічує груп слів: {n}, переважно з родинних розповідей.
+Pas d’espace avant la virgule ou le point ¦ Без пробела перед запятой или точкой ¦ Без пробілу перед комою або крапкою
+Pas encore de commentaire : choisis un passage, puis « 💬 Nouveau commentaire ». ¦ Пока нет комментариев: выдели фрагмент, затем «💬 Новый комментарий». ¦ Поки немає коментарів: виділи фрагмент, потім «💬 Новий коментар».
+Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ». ¦ У тебя пока нет своих шаблонов: в документе Файл → «Сохранить как шаблон…». ¦ У тебе поки немає власних шаблонів: у документі Файл → «Зберегти як шаблон…».
+Pas encore de titre : choisis le style « Titre 1 » (ou Titre 2, 3…) pour un paragraphe, il apparaîtra ici. ¦ Пока нет заголовков: выбери стиль «Заголовок 1» (или Заголовок 2, 3…) для абзаца, и он появится здесь. ¦ Поки немає заголовків: вибери стиль «Заголовок 1» (або Заголовок 2, 3…) для абзацу, і він з’явиться тут.
+Personne pour l’instant. ¦ Пока никого. ¦ Поки нікого.
+Petites capitales ¦ Малые прописные ¦ Малі великі літери
+Pied de la première page ¦ Нижний колонтитул первой страницы ¦ Нижній колонтитул першої сторінки
+Pied de page (en bas de chaque page) ¦ Нижний колонтитул (внизу каждой страницы) ¦ Нижній колонтитул (унизу кожної сторінки)
+Place d’abord le curseur dans le texte. ¦ Сначала поставь курсор в текст. ¦ Спершу постав курсор у текст.
+Place le curseur dans un paragraphe. ¦ Поставь курсор в абзац. ¦ Постав курсор в абзац.
+Place le curseur dans un tableau. ¦ Поставь курсор в таблицу. ¦ Постав курсор у таблицю.
+Place le curseur dans une modification (texte vert ou barré rouge). ¦ Поставь курсор в изменение (зелёный текст или красный зачёркнутый). ¦ Постав курсор у зміну (зелений текст або червоний закреслений).
+Place le curseur à l’endroit de la coupure. ¦ Поставь курсор в место разрыва. ¦ Постав курсор у місце розриву.
+Plein écran (⛶) ¦ Во весь экран (⛶) ¦ На весь екран (⛶)
+Plus de ligne d’en-tête ¦ Без строки заголовка ¦ Без рядка заголовка
+Points de suspension en un seul signe ¦ Многоточие одним знаком ¦ Три крапки одним знаком
+Police ¦ Шрифт ¦ Шрифт
+Police (E5) ¦ Шрифт (E5) ¦ Шрифт (E5)
+Police et taille (E5) ¦ Шрифт и размер (E5) ¦ Шрифт і розмір (E5)
+Police… ¦ Шрифт… ¦ Шрифт…
+Polonais ¦ Польский ¦ Польська
+Portugais ¦ Португальский ¦ Португальська
+Pour que le document se lise bien avec un lecteur d’écran, à voix haute ou en grand. ¦ Чтобы документ хорошо читался программой чтения с экрана, вслух или крупным шрифтом. ¦ Щоб документ добре читався програмою зчитування з екрана, вголос або великим шрифтом.
+Pour une fiche ou un lieu de la base : Insertion → 👤 Une personne, 📍 Un lieu. ¦ Для карточки или места из базы: Вставка → 👤 Человек, 📍 Место. ¦ Для картки або місця з бази: Вставлення → 👤 Людина, 📍 Місце.
+Première page différente (pour une page de titre ou une lettre) ¦ Особая первая страница (для титульного листа или письма) ¦ Окрема перша сторінка (для титульної сторінки або листа)
+Précédent (⇧ Entrée) ¦ Назад (⇧ Enter) ¦ Назад (⇧ Enter)
+Quelle feuille ? ¦ Какой лист? ¦ Який аркуш?
+Ranger une copie dans les médias ¦ Сохранить копию в медиафайлах ¦ Зберегти копію в медіафайлах
+Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte. ¦ Находится в Списки → 🛠️ Инструменты редактирования → 📝 Текстовый редактор. ¦ Розміщено в Списки → 🛠️ Інструменти редагування → 📝 Текстовий редактор.
+Rapport de recherche ¦ Отчёт об исследовании ¦ Звіт про дослідження
+Rechercher et remplacer ¦ Найти и заменить ¦ Знайти й замінити
+Relecture ¦ Вычитка ¦ Вичитка
+Remplacer par ¦ Заменить на ¦ Замінити на
+Remplacer par… ¦ Заменить на… ¦ Замінити на…
+Remplir avec la fiche de qui ? ¦ Заполнить по чьей карточке? ¦ Заповнити за чиєю карткою?
+Renommer l’onglet ¦ Переименовать вкладку ¦ Перейменувати вкладку
+Renommer… ¦ Переименовать… ¦ Перейменувати…
+Retirer la légende ¦ Убрать подпись ¦ Прибрати підпис
+Retirer le lien (garder le texte) ¦ Убрать ссылку (оставить текст) ¦ Прибрати посилання (залишити текст)
+Retirer l’espace après ¦ Убрать интервал после ¦ Прибрати інтервал після
+Retirer l’espace avant ¦ Убрать интервал перед ¦ Прибрати інтервал перед
+Retrait gauche ¦ Отступ слева ¦ Відступ ліворуч
+Retrait à droite ¦ Отступ справа ¦ Відступ праворуч
+Retrait à gauche ¦ Отступ слева ¦ Відступ ліворуч
+Rien (le texte comme s’il était accepté) ¦ Ничего (текст, как если бы изменения были приняты) ¦ Нічого (текст, наче зміни прийнято)
+Rien de changé depuis : ce que tu tapes ou effaces apparaîtra ici. ¦ С тех пор ничего не изменилось: то, что ты напечатаешь или сотрёшь, появится здесь. ¦ Відтоді нічого не змінилося: те, що ти надрукуєш або зітреш, з’явиться тут.
+Rien à remplacer. ¦ Заменять нечего. ¦ Замінювати нічого.
+Récents ¦ Недавние ¦ Нещодавні
+Récit d’un ancêtre ¦ Рассказ о предке ¦ Розповідь про предка
+Récit — {name} ¦ Рассказ — {name} ¦ Розповідь — {name}
+Répondre ¦ Ответить ¦ Відповісти
+Répondre… ¦ Ответить… ¦ Відповісти…
+STYLES ¦ СТИЛИ ¦ СТИЛІ
+Saut de page : la suite commence en haut de la page suivante. ¦ Разрыв страницы: продолжение начинается вверху следующей страницы. ¦ Розрив сторінки: продовження починається вгорі наступної сторінки.
+Section {n} sur {total} (comme le document). ¦ Раздел {n} из {total} (как документ). ¦ Розділ {n} з {total} (як документ).
+Section {n} sur {total} (format à elle). ¦ Раздел {n} из {total} (свой формат). ¦ Розділ {n} з {total} (власний формат).
+Seulement un trait dessous ¦ Только линия снизу ¦ Лише лінія знизу
+Signature ¦ Подпись ¦ Підпис
+Simple (1) ¦ Одинарный (1) ¦ Одинарний (1)
+Simple (une marge à côté des ajouts) ¦ Простой (поле рядом с добавлениями) ¦ Простий (поле поруч із доданим)
+Souligné ¦ Подчёркнутый ¦ Підкреслений
+Sous-titre ¦ Подзаголовок ¦ Підзаголовок
+Style ¦ Стиль ¦ Стиль
+Style de caractère (quelques mots) ¦ Стиль символов (несколько слов) ¦ Стиль символів (кілька слів)
+Style de paragraphe ¦ Стиль абзаца ¦ Стиль абзацу
+Style du paragraphe ¦ Стиль абзаца ¦ Стиль абзацу
+Style « {name} » ¦ Стиль «{name}» ¦ Стиль «{name}»
+Style « {name} » créé. ¦ Стиль «{name}» создан. ¦ Стиль «{name}» створено.
+Style « {name} » supprimé ¦ Стиль «{name}» удалён ¦ Стиль «{name}» видалено
+Styles ¦ Стили ¦ Стилі
+Styles de paragraphe ¦ Стили абзаца ¦ Стилі абзацу
+Suivant ¦ Далее ¦ Далі
+Suivant (Entrée) ¦ Далее (Enter) ¦ Далі (Enter)
+Suivre les modifications ¦ Отслеживать изменения ¦ Відстежувати зміни
+Sujet ¦ Тема ¦ Тема
+Supprimer la colonne ¦ Удалить столбец ¦ Видалити стовпець
+Supprimer le tableau ¦ Удалить таблицу ¦ Видалити таблицю
+Supprimer l’image ¦ Удалить изображение ¦ Видалити зображення
+Supprimer l’onglet ? ¦ Удалить вкладку? ¦ Видалити вкладку?
+Supprimer… ¦ Удалить… ¦ Видалити…
+Surlignage ¦ Выделение цветом ¦ Виділення кольором
+Surlignage… ¦ Выделение цветом… ¦ Виділення кольором…
+Symboles et flèches ¦ Символы и стрелки ¦ Символи й стрілки
+Séparer la cellule ¦ Разделить ячейку ¦ Розділити комірку
+T Titre ¦ T Заголовок ¦ T Заголовок
+TRAITEMENT DE TEXTE ¦ ТЕКСТОВЫЙ РЕДАКТОР ¦ ТЕКСТОВИЙ РЕДАКТОР
+Retrait − ¦ Отступ − ¦ Відступ −
+Tableau de « {name} » ¦ Таблица «{name}» ¦ Таблиця «{name}»
+Tableau sans ligne de titres (Tableau → « Ligne d’en-tête ») ¦ Таблица без строки заголовков (Таблица → «Строка заголовка») ¦ Таблиця без рядка заголовків (Таблиця → «Рядок заголовка»)
+Tableau supprimé ¦ Таблица удалена ¦ Таблицю видалено
+Tableau trié de A à Z ¦ Таблица отсортирована от А до Я ¦ Таблицю відсортовано від А до Я
+Tableau trié de Z à A ¦ Таблица отсортирована от Я до А ¦ Таблицю відсортовано від Я до А
+Tableau « {name} » ajouté ({n}). ¦ Таблица «{name}» добавлена ({n}). ¦ Таблицю «{name}» додано ({n}).
+Tabloïd US ¦ Tabloid US ¦ Tabloid US
+Tabulations… ¦ Табуляция… ¦ Табуляція…
+Taille de l’image ¦ Размер изображения ¦ Розмір зображення
+Taille… ¦ Размер… ¦ Розмір…
+Temps de lecture : environ {n} min. ¦ Время чтения: около {n} мин. ¦ Час читання: близько {n} хв.
+Texte affiché ¦ Отображаемый текст ¦ Текст, що відображається
+Texte de la note ¦ Текст сноски ¦ Текст виноски
+Texte du commentaire ¦ Текст комментария ¦ Текст коментаря
+Texte du document ¦ Текст документа ¦ Текст документа
+Texte très petit (moins de 8 points) ¦ Очень мелкий текст (меньше 8 пунктов) ¦ Дуже дрібний текст (менше 8 пунктів)
+Titre 1 ¦ Заголовок 1 ¦ Заголовок 1
+Titre 2 ¦ Заголовок 2 ¦ Заголовок 2
+Titre 3 ¦ Заголовок 3 ¦ Заголовок 3
+Titre 4 ¦ Заголовок 4 ¦ Заголовок 4
+Titre 5 ¦ Заголовок 5 ¦ Заголовок 5
+Titre 6 ¦ Заголовок 6 ¦ Заголовок 6
+Titre de niveau {n} juste après un niveau {last} : un niveau est sauté ¦ Заголовок уровня {n} сразу после уровня {last}: уровень пропущен ¦ Заголовок рівня {n} одразу після рівня {last}: рівень пропущено
+Titre en {head}, texte en {body} ¦ Заголовок шрифтом {head}, текст шрифтом {body} ¦ Заголовок шрифтом {head}, текст шрифтом {body}
+Titre vide ¦ Пустой заголовок ¦ Порожній заголовок
+Titres ¦ Заголовки ¦ Заголовки
+Ton commentaire… ¦ Твой комментарий… ¦ Твій коментар…
+Tous les paragraphes de ce style changent ensemble. ¦ Все абзацы этого стиля меняются вместе. ¦ Усі абзаци цього стилю змінюються разом.
+Tout accepter ¦ Принять всё ¦ Прийняти все
+Tout concorde avec les fiches. ¦ Всё совпадает с карточками. ¦ Усе збігається з картками.
+Tout corriger ¦ Исправить всё ¦ Виправити все
+Tout est déjà à jour. ¦ Всё уже обновлено. ¦ Усе вже оновлено.
+Tout montrer (ajouts et suppressions) ¦ Показать всё (добавления и удаления) ¦ Показати все (додавання й видалення)
+Tout refuser ¦ Отклонить всё ¦ Відхилити все
+Tout remplacer ¦ Заменить всё ¦ Замінити все
+Tout retirer ¦ Убрать всё ¦ Прибрати все
+Toute la largeur du texte : {n} px. La hauteur suit (pas de déformation). ¦ Вся ширина текста: {n} px. Высота подстраивается (без искажения). ¦ Уся ширина тексту: {n} px. Висота підлаштовується (без спотворення).
+Toutes les 10 minutes ¦ Каждые 10 минут ¦ Кожні 10 хвилин
+Toutes les 5 minutes ¦ Каждые 5 минут ¦ Кожні 5 хвилин
+Toutes les minutes ¦ Каждую минуту ¦ Щохвилини
+Trame (fond) ¦ Заливка (фон) ¦ Заливка (тло)
+Trame de la cellule… ¦ Заливка ячейки… ¦ Заливка комірки…
+Transcription (machine à écrire) ¦ Расшифровка (пишущая машинка) ¦ Розшифровка (друкарська машинка)
+Transcription d’acte mise au propre ¦ Расшифровка записи акта начисто ¦ Розшифровка актового запису начисто
+Triple (3) ¦ Тройной (3) ¦ Потрійний (3)
+Tu cherches des renseignements sur qui ? ¦ О ком ты ищешь сведения? ¦ Про кого ти шукаєш відомості?
+Typographie française ¦ Французская типографика ¦ Французька типографіка
+Un arrêt tous les ¦ Позиция табуляции каждые ¦ Позиція табуляції кожні
+Un cadre autour du paragraphe ¦ Рамка вокруг абзаца ¦ Рамка навколо абзацу
+Un champ vide s’écrit ¦ Пустое поле записывается как ¦ Порожнє поле записується як
+Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite) ¦ Отчёт об этом посещении в текстовом редакторе (шифры, результаты, что дальше) ¦ Звіт про це відвідування в текстовому редакторі (шифри, результати, що далі)
+Un document garde au moins un onglet. ¦ В документе остаётся хотя бы одна вкладка. ¦ У документі залишається хоча б одна вкладка.
+Un lieu de la base ¦ Место из базы ¦ Місце з бази
+Un nom pour cette version (facultatif) : ¦ Название этой версии (необязательно): ¦ Назва цієї версії (необов’язково):
+Un style porte déjà ce nom. ¦ Стиль с таким названием уже есть. ¦ Стиль із такою назвою вже є.
+Une adresse qui commence par https:// (ou mailto:). ¦ Адрес, начинающийся с https:// (или mailto:). ¦ Адреса, що починається з https:// (або mailto:).
+Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne. ¦ Другое окно тем временем сохранило этот документ. Если оставить твою версию, его версия сотрётся. ¦ Інше вікно тим часом зберегло цей документ. Якщо залишити твою версію, його версію буде стерто.
+Une copie de ce document par personne, chaque champ « » rempli avec sa fiche ; les copies se suivent dans un nouveau document (une nouvelle page pour chacune). Champs utilisés : {list}. ¦ Одна копия этого документа на человека, каждое поле « » заполнено по его карточке; копии идут друг за другом в новом документе (каждая с новой страницы). Используемые поля: {list}. ¦ Одна копія цього документа на людину, кожне поле « » заповнено за її карткою; копії йдуть одна за одною в новому документі (кожна з нової сторінки). Використані поля: {list}.
+Une espace après la virgule ¦ Пробел после запятой ¦ Пробіл після коми
+Une image du web n’a pas été reprise : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Изображение из интернета не перенесено: сохрани его на компьютер, затем перетащи сюда. ¦ Зображення з інтернету не перенесено: збережи його на комп’ютер, потім перетягни сюди.
+Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté. ¦ Изображение такого вида, который браузер не показывает (EMF, WMF, TIFF…), пропущено. ¦ Зображення такого виду, який браузер не показує (EMF, WMF, TIFF…), пропущено.
+Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté. ¦ Изображение такого вида, который браузер не показывает (SVG, EMF, WMF…), пропущено. ¦ Зображення такого виду, який браузер не показує (SVG, EMF, WMF…), пропущено.
+Une largeur de 16 px au moins. ¦ Ширина не меньше 16 px. ¦ Ширина щонайменше 16 px.
+Une ligne d’en-tête (répétée sur chaque page) ¦ Строка заголовка (повторяется на каждой странице) ¦ Рядок заголовка (повторюється на кожній сторінці)
+Une personne de la base ¦ Человек из базы ¦ Людина з бази
+Utilise {key} dans le texte. ¦ Используй {key} в тексте. ¦ Використовуй {key} у тексті.
+Utilise {key}. ¦ Используй {key}. ¦ Використовуй {key}.
+Version du {date} ¦ Версия от {date} ¦ Версія від {date}
+Version enregistrée (Fichier → 🕘 Versions…). ¦ Версия сохранена (Файл → 🕘 Версии…). ¦ Версію збережено (Файл → 🕘 Версії…).
+Vitesse de lecture à voix haute ¦ Скорость чтения вслух ¦ Швидкість читання вголос
+Voir ¦ Посмотреть ¦ Переглянути
+Vérification de l’orthographe arrêtée. ¦ Проверка орфографии остановлена. ¦ Перевірку орфографії зупинено.
+Vérification impossible. ¦ Проверка невозможна. ¦ Перевірка неможлива.
+Vérifier avec les fiches ¦ Сверить с карточками ¦ Звірити з картками
+Vérifier l’orthographe pendant la frappe ¦ Проверять орфографию при наборе ¦ Перевіряти орфографію під час набору
+Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, texte, HTML, impression ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, текст, HTML, печать ¦ Word (.docx), LibreOffice (.odt), PDF, RTF, Markdown, текст, HTML, друк
+Word, Pages, Google Docs ¦ Word, Pages, Google Docs ¦ Word, Pages, Google Docs
+a ajouté ¦ добавил(а) ¦ додав(ла)
+a supprimé ¦ удалил(а) ¦ видалив(ла)
+automatique ¦ автоматически ¦ автоматично
+aux archives : cotes vues, trouvailles, suite ¦ в архив: просмотренные шифры, находки, что дальше ¦ до архіву: переглянуті шифри, знахідки, що далі
+ce fichier .{ext} est abîmé (ce n’est pas un zip) ¦ этот файл .{ext} повреждён (это не zip) ¦ цей файл .{ext} пошкоджено (це не zip)
+ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation) ¦ этот файл LibreOffice — не текст (это таблица или презентация) ¦ цей файл LibreOffice — не текст (це таблиця або презентація)
+ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt) ¦ этот zip-файл — не документ Word (.docx) и не документ LibreOffice (.odt) ¦ цей zip-файл — не документ Word (.docx) і не документ LibreOffice (.odt)
+ce n’est pas un document LibreOffice (.odt) ¦ это не документ LibreOffice (.odt) ¦ це не документ LibreOffice (.odt)
+ce n’est pas un document Word (.docx) : il manque son texte ¦ это не документ Word (.docx): в нём нет текста ¦ це не документ Word (.docx): у ньому немає тексту
+ce n’est pas un fichier RTF ¦ это не файл RTF ¦ це не файл RTF
+ce n’est pas un fichier du traitement de texte ¦ это не файл текстового редактора ¦ це не файл текстового редактора
+ces réglages du traitement de texte ¦ эти настройки текстового редактора ¦ ці налаштування текстового редактора
+demande de recherche à un service d’archives ¦ запрос на поиск в архивную службу ¦ запит на пошук до архівної служби
+divorcé ¦ в разводе ¦ розлучений(а)
+droite ¦ справа ¦ праворуч
+décédé (croix) ¦ умер(ла) (крест) ¦ помер(ла) (хрест)
+d’autres changements ont suivi : utilise ↶ ({key}) ¦ после этого были другие изменения: используй ↶ ({key}) ¦ після цього були інші зміни: використовуй ↶ ({key})
+d’autres changements ont suivi : utilise ↶ dans le document ¦ после этого были другие изменения: используй ↶ в документе ¦ після цього були інші зміни: використовуй ↶ у документі
+espace fine insécable (avant ; : ! ? ») ¦ тонкий неразрывный пробел (перед ; : ! ? ») ¦ тонкий нерозривний пробіл (перед ; : ! ? »)
+espace insécable ¦ неразрывный пробел ¦ нерозривний пробіл
+et (note tironienne) ¦ и (тиронов знак) ¦ і (тиронів знак)
+ex. BROUILLON, COPIE ¦ напр. ЧЕРНОВИК, КОПИЯ ¦ напр. ЧЕРНЕТКА, КОПІЯ
+fichier RTF trop imbriqué ¦ файл RTF слишком сложно вложен ¦ файл RTF надто складно вкладений
+fichier du traitement de texte ¦ файл текстового редактора ¦ файл текстового редактора
+fichier refusé : beaucoup trop de paragraphes ¦ файл отклонён: слишком много абзацев ¦ файл відхилено: надто багато абзаців
+fichier refusé : trop compliqué ¦ файл отклонён: слишком сложный ¦ файл відхилено: надто складний
+fichier refusé : trop gros ¦ файл отклонён: слишком большой ¦ файл відхилено: надто великий
+fichier trop gros (plus de {n} Mo) ¦ файл слишком большой (больше {n} МБ) ¦ файл надто великий (понад {n} МБ)
+https://…, mailto:… ¦ https://…, mailto:… ¦ https://…, mailto:…
+il / elle ¦ он / она ¦ він / вона
+inhumé ¦ похоронен(а) ¦ похований(а)
+je cherche des renseignements sur cette personne ¦ я ищу сведения об этом человеке ¦ я шукаю відомості про цю людину
+la biographie F5 de la fiche, à compléter ¦ биография F5 из карточки, дополни её ¦ біографія F5 з картки, доповни її
+le texte seul ¦ только текст ¦ лише текст
+le texte à l’écran ¦ текст на экране ¦ текст на екрані
+les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx ¦ старые файлы Word (.doc) не читаются: открой его в Word или LibreOffice и сохрани в .docx ¦ старі файли Word (.doc) не читаються: відкрий його в Word або LibreOffice і збережи в .docx
+marié ¦ в браке ¦ у шлюбі
+marié (autre signe) ¦ в браке (другой знак) ¦ у шлюбі (інший знак)
+minuscules ¦ строчные ¦ малі літери
+naissance, mariage ou décès : la personne, les dates et les lieux déjà écrits ¦ рождение, брак или смерть: человек, даты и места, уже записанные ¦ народження, шлюб або смерть: людина, дати й місця, уже записані
+nom, naissance, parents, métier, mariage, décès ¦ имя, рождение, родители, профессия, брак, смерть ¦ ім’я, народження, батьки, професія, шлюб, смерть
+numéro ¦ номер ¦ номер
+né / née ¦ родился / родилась ¦ народився / народилася
+p barré (par) ¦ перечёркнутое p (per) ¦ перекреслене p (per)
+p à crosse (pro) ¦ p с завитком (pro) ¦ p із завитком (pro)
+page web ¦ веб-страница ¦ вебсторінка
+pour partager une découverte ¦ чтобы поделиться открытием ¦ щоб поділитися відкриттям
+question, sources, analyse, conclusion ¦ вопрос, источники, анализ, вывод ¦ питання, джерела, аналіз, висновок
+ruban|Caractères ¦ Символы ¦ Символи
+ruban|Centre ¦ Центр ¦ Центр
+ruban|Couleur ¦ Цвет ¦ Колір
+ruban|Effacer ¦ Очистить ¦ Очистити
+ruban|Interligne ¦ Интервал ¦ Інтервал
+ruban|Note ¦ Сноска ¦ Виноска
+ruban|Numéros ¦ Номера ¦ Номери
+ruban|Petites ¦ Капитель ¦ Капітель
+ruban|Puces ¦ Маркеры ¦ Маркери
+ruban|Retrait + ¦ Отступ + ¦ Відступ +
+ruban|Retrait − ¦ Отступ − ¦ Відступ −
+ruban|Suivi ¦ Правки ¦ Правки
+ruban|Surligner ¦ Выделить ¦ Виділити
+récit en parties, images, notes ¦ рассказ по частям, изображения, сноски ¦ розповідь частинами, зображення, виноски
+texte avec les titres ¦ текст с заголовками ¦ текст із заголовками
+texte de l’acte, notes, références ¦ текст записи акта, примечания, ссылки ¦ текст актового запису, примітки, посилання
+tous les traitements de texte ¦ все текстовые редакторы ¦ усі текстові редактори
+un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier ¦ PDF здесь не превращается в редактируемый текст: открой «Расшифровку записей», чтобы его переписать ¦ PDF тут не перетворюється на редагований текст: відкрий «Розшифровку записів», щоб його переписати
+un ancêtre ¦ предок ¦ предок
+{added} ajouté, {removed} retiré. ¦ Добавлено: {added}, убрано: {removed}. ¦ Додано: {added}, прибрано: {removed}.
+{added} ajouté, {removed} retirés. ¦ Добавлено: {added}, убрано: {removed}. ¦ Додано: {added}, прибрано: {removed}.
+{added} ajoutés, {removed} retiré. ¦ Добавлено: {added}, убрано: {removed}. ¦ Додано: {added}, прибрано: {removed}.
+{added} ajoutés, {removed} retirés. ¦ Добавлено: {added}, убрано: {removed}. ¦ Додано: {added}, прибрано: {removed}.
+{name} (copie) ¦ {name} (копия) ¦ {name} (копія)
+{name} — publipostage ({n}) ¦ {name} — рассылка ({n}) ¦ {name} — розсилка ({n})
+{name} — que faut-il écrire ? ¦ {name} — что нужно написать? ¦ {name} — що треба написати?
+{n} avec la fiche de {name} (↶ pour revenir). ¦ {n} по карточке {name} (↶, чтобы вернуть). ¦ {n} за карткою {name} (↶, щоб повернути).
+{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés. ¦ Убрано из файла: {n} (скрипты, формы, фреймы…): они никогда не запускаются. ¦ Прибрано з файлу: {n} (скрипти, форми, фрейми…): вони ніколи не запускаються.
+{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés. ¦ Убрано из файла: {n} (скрипты, формы, фреймы…): они никогда не запускаются. ¦ Прибрано з файлу: {n} (скрипти, форми, фрейми…): вони ніколи не запускаються.
+{n} du web non reprise. ¦ Не перенесено из интернета: {n}. ¦ Не перенесено з інтернету: {n}.
+{n} du web non reprises. ¦ Не перенесено из интернета: {n}. ¦ Не перенесено з інтернету: {n}.
+{n} envoyé vers la mise en page : vérifie, puis enregistre le livre. ¦ Отправлено в вёрстку: {n}. Проверь, затем сохрани книгу. ¦ Надіслано у верстку: {n}. Перевір, потім збережи книжку.
+{n} envoyés vers la mise en page : vérifie, puis enregistre le livre. ¦ Отправлено в вёрстку: {n}. Проверь, затем сохрани книгу. ¦ Надіслано у верстку: {n}. Перевір, потім збережи книжку.
+{n} images du web n’ont pas été reprises : enregistre-la sur l’ordinateur, puis glisse-la ici. ¦ Изображения из интернета не перенесены: {n}. Сохрани их на компьютер, затем перетащи сюда. ¦ Зображення з інтернету не перенесено: {n}. Збережи їх на комп’ютер, потім перетягни сюди.
+{n} mis à jour d’après les fiches. ¦ Обновлено по карточкам: {n}. ¦ Оновлено за картками: {n}.
+{n} modifications acceptées ¦ Принято изменений: {n} ¦ Прийнято змін: {n}
+{n} modifications refusées ¦ Отклонено изменений: {n} ¦ Відхилено змін: {n}
+{n} rangée dans les médias. ¦ Сохранено в медиафайлах: {n}. ¦ Збережено в медіафайлах: {n}.
+{n} rangées dans les médias. ¦ Сохранено в медиафайлах: {n}. ¦ Збережено в медіафайлах: {n}.
+{n} repris de « {name} » ¦ Взято из «{name}»: {n} ¦ Узято з «{name}»: {n}
+{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies. ¦ {pages} · {words}. Word и LibreOffice сохраняют стили, списки, таблицы, изображения, сноски, колонтитулы, комментарии и отслеживаемые изменения. ¦ {pages} · {words}. Word і LibreOffice зберігають стилі, списки, таблиці, зображення, виноски, колонтитули, коментарі та відстежувані зміни.
+« ________ » (à remplir à la main) ¦ «________» (заполнить вручную) ¦ «________» (заповнити вручну)
+« … » (pour le voir) ¦ «…» (чтобы было видно) ¦ «…» (щоб було видно)
+¶ Marques de mise en forme ¦ ¶ Знаки форматирования ¦ ¶ Знаки форматування
+¶ Paragraphe ¦ ¶ Абзац ¦ ¶ Абзац
+¶ Paragraphe (espacements, retraits, interligne)… ¦ ¶ Абзац (интервалы, отступы, междустрочный интервал)… ¦ ¶ Абзац (інтервали, відступи, міжрядковий інтервал)…
+¹ Note de bas de page ¦ ¹ Сноска ¦ ¹ Виноска
+À quoi ça sert ? ¦ Для чего это? ¦ Для чого це?
+Écrire sur cette personne ¦ Написать об этом человеке ¦ Написати про цю людину
+Écris le texte du lien. ¦ Напиши текст ссылки. ¦ Напиши текст посилання.
+Écris, choisis un style à gauche de la barre ; clic droit pour les actions. ¦ Пиши, выбирай стиль слева на панели; правый щелчок — действия. ¦ Пиши, вибирай стиль ліворуч на панелі; правий клік — дії.
+à lire, à envoyer ¦ для чтения, для отправки ¦ для читання, для надсилання
+à ouvrir dans un navigateur ¦ открывается в браузере ¦ відкривається в браузері
+à une mairie : naissance, mariage, décès ¦ в мэрию: рождение, брак, смерть ¦ до мерії: народження, шлюб, смерть
+Ω Caractères spéciaux ¦ Ω Специальные символы ¦ Ω Спеціальні символи
+Ω Caractères spéciaux… ¦ Ω Специальные символы… ¦ Ω Спеціальні символи…
+― Ligne horizontale ¦ ― Горизонтальная линия ¦ ― Горизонтальна лінія
+• Liste à puces ¦ • Маркированный список ¦ • Маркований список
+ⁱ Note de fin ¦ ⁱ Концевая сноска ¦ ⁱ Кінцева виноска
+ℹ️ Propriétés du document… ¦ ℹ️ Свойства документа… ¦ ℹ️ Властивості документа…
+↕ Trier A → Z (cette colonne) ¦ ↕ Сортировать А → Я (этот столбец) ¦ ↕ Сортувати А → Я (цей стовпець)
+↕ Trier Z → A (cette colonne) ¦ ↕ Сортировать Я → А (этот столбец) ¦ ↕ Сортувати Я → А (цей стовпець)
+↶ Annulé ¦ ↶ Отменено ¦ ↶ Відмінено
+↷ Rétabli ¦ ↷ Возвращено ¦ ↷ Повторено
+↺ Rouvrir ¦ ↺ Открыть снова ¦ ↺ Відкрити знову
+⇄ Comparer deux versions… ¦ ⇄ Сравнить две версии… ¦ ⇄ Порівняти дві версії…
+⇥ Tabulations ¦ ⇥ Табуляция ¦ ⇥ Табуляція
+⇥ Tabulations… ¦ ⇥ Табуляция… ¦ ⇥ Табуляція…
+∑ Nombre de pages ¦ ∑ Число страниц ¦ ∑ Кількість сторінок
+⊞ Fusionner les cellules ¦ ⊞ Объединить ячейки ¦ ⊞ Об’єднати комірки
+⌨️ Raccourcis du traitement de texte ¦ ⌨️ Сочетания клавиш текстового редактора ¦ ⌨️ Сполучення клавіш текстового редактора
+⌨️ Raccourcis du traitement de texte… ¦ ⌨️ Сочетания клавиш текстового редактора… ¦ ⌨️ Сполучення клавіш текстового редактора…
+▢ Bordure et trame… ¦ ▢ Граница и заливка… ¦ ▢ Межа й заливка…
+▥ Colonnes ¦ ▥ Колонки ¦ ▥ Колонки
+▥ Colonnes… ¦ ▥ Колонки… ¦ ▥ Колонки…
+▦ Insérer un tableau… ¦ ▦ Вставить таблицу… ¦ ▦ Вставити таблицю…
+▦ Nouveau tableau ¦ ▦ Новая таблица ¦ ▦ Нова таблиця
+▦ Tableau… ¦ ▦ Таблица… ¦ ▦ Таблиця…
+▭ Paysage ¦ ▭ Альбомная ¦ ▭ Альбомна
+▯ Portrait ¦ ▯ Книжная ¦ ▯ Книжкова
+♿ Accessibilité : {n} point ¦ ♿ Доступность: замечаний: {n} ¦ ♿ Доступність: зауважень: {n}
+♿ Accessibilité : {n} points ¦ ♿ Доступность: замечаний: {n} ¦ ♿ Доступність: зауважень: {n}
+♿ Rien à signaler : images décrites, titres en ordre, tableaux avec titres, liens clairs. ¦ ♿ Замечаний нет: изображения описаны, заголовки по порядку, у таблиц есть заголовки, ссылки понятны. ¦ ♿ Зауважень немає: зображення описано, заголовки за порядком, таблиці мають заголовки, посилання зрозумілі.
+♿ Vérifier l’accessibilité… ¦ ♿ Проверить доступность… ¦ ♿ Перевірити доступність…
+⚙️ Personnaliser ¦ ⚙️ Настроить ¦ ⚙️ Налаштувати
+⚙️ Réglages du traitement de texte ¦ ⚙️ Настройки текстового редактора ¦ ⚙️ Налаштування текстового редактора
+⚙️ Réglages du traitement de texte… ¦ ⚙️ Настройки текстового редактора… ¦ ⚙️ Налаштування текстового редактора…
+✍ Les modifications sont suivies : chaque ajout et chaque suppression restent visibles. ¦ ✍ Изменения отслеживаются: каждое добавление и каждое удаление остаются видны. ¦ ✍ Зміни відстежуються: кожне додавання й кожне видалення залишаються видимими.
+✍ Suivi ¦ ✍ Правки ¦ ✍ Правки
+✍ Suivre les modifications ¦ ✍ Отслеживать изменения ¦ ✍ Відстежувати зміни
+✍ modifications à relire ¦ ✍ изменения для проверки ¦ ✍ зміни для перевірки
+✎ Auteur ¦ ✎ Автор ¦ ✎ Автор
+✎ Le style « {name} » ¦ ✎ Стиль «{name}» ¦ ✎ Стиль «{name}»
+✎ Modifier le style ¦ ✎ Изменить стиль ¦ ✎ Змінити стиль
+✏️ À mes mesures ¦ ✏️ Свой размер ¦ ✏️ Власний розмір
+✓ Accepter ¦ ✓ Принять ¦ ✓ Прийняти
+✓ Accepter la modification ¦ ✓ Принять изменение ¦ ✓ Прийняти зміну
+✓ En-tête et pied de page repris. ¦ ✓ Колонтитулы перенесены. ¦ ✓ Колонтитули перенесено.
+✓ Repris : {list}. ¦ ✓ Перенесено: {list}. ¦ ✓ Перенесено: {list}.
+✓ Résolu ¦ ✓ Решено ¦ ✓ Розв’язано
+✓ Tout accepter ¦ ✓ Принять всё ¦ ✓ Прийняти все
+✓ Tout concorde avec les fiches. ¦ ✓ Всё совпадает с карточками. ¦ ✓ Усе збігається з картками.
+✗ Refuser ¦ ✗ Отклонить ¦ ✗ Відхилити
+✗ Refuser la modification ¦ ✗ Отклонить изменение ¦ ✗ Відхилити зміну
+✗ Tout refuser ¦ ✗ Отклонить всё ¦ ✗ Відхилити все
+✳️ Markdown (.md) ¦ ✳️ Markdown (.md) ¦ ✳️ Markdown (.md)
+❝ Citer une source ¦ ❝ Сослаться на источник ¦ ❝ Послатися на джерело
+❝ Source citée… ¦ ❝ Источник цитаты… ¦ ❝ Джерело цитати…
+⤒ Importer (Word, LibreOffice…)… ¦ ⤒ Импорт (Word, LibreOffice…)… ¦ ⤒ Імпорт (Word, LibreOffice…)…
+⤒ Importer le document ¦ ⤒ Импортировать документ ¦ ⤒ Імпортувати документ
+⤒ Importer un document ¦ ⤒ Импортировать документ ¦ ⤒ Імпортувати документ
+⤓ Exporter… ¦ ⤓ Экспорт… ¦ ⤓ Експорт…
+⤓ Saut de page ¦ ⤓ Разрыв страницы ¦ ⤓ Розрив сторінки
+＋ Ajouter des personnes… ¦ ＋ Добавить людей… ¦ ＋ Додати людей…
+＋ Description… ¦ ＋ Описание… ¦ ＋ Опис…
+＋ Les personnes d’une de mes listes… ¦ ＋ Люди из одного из моих списков… ¦ ＋ Люди з одного з моїх списків…
+＋ Nouveau commentaire ¦ ＋ Новый комментарий ¦ ＋ Новий коментар
+＋ Nouveau document ¦ ＋ Новый документ ¦ ＋ Новий документ
+＋ Nouveau style ¦ ＋ Новый стиль ¦ ＋ Новий стиль
+＋ Nouveau style d’après la sélection… ¦ ＋ Новый стиль по выделению… ¦ ＋ Новий стиль за виділенням…
+🌐 Langue du document ¦ 🌐 Язык документа ¦ 🌐 Мова документа
+🌐 Langue… ¦ 🌐 Язык… ¦ 🌐 Мова…
+🌐 Page web (.html) ¦ 🌐 Веб-страница (.html) ¦ 🌐 Вебсторінка (.html)
+🌳 Un petit arbre… ¦ 🌳 Маленькое древо… ¦ 🌳 Маленьке дерево…
+🎞 Un média (lien)… ¦ 🎞 Медиафайл (ссылка)… ¦ 🎞 Медіафайл (посилання)…
+🎨 Choisir… ¦ 🎨 Выбрать… ¦ 🎨 Вибрати…
+🎨 Couleur de page… ¦ 🎨 Цвет страницы… ¦ 🎨 Колір сторінки…
+🎨 Forme ¦ 🎨 Оформление ¦ 🎨 Оформлення
+🎨 Styles… ¦ 🎨 Стили… ¦ 🎨 Стилі…
+👤 Remplir avec une fiche ¦ 👤 Заполнить по карточке ¦ 👤 Заповнити за карткою
+👤 Remplir avec une fiche… ¦ 👤 Заполнить по карточке… ¦ 👤 Заповнити за карткою…
+👤 Une personne de la base… ¦ 👤 Человек из базы… ¦ 👤 Людина з бази…
+💬 Montrer les commentaires ¦ 💬 Показать комментарии ¦ 💬 Показати коментарі
+💬 Nouveau commentaire ¦ 💬 Новый комментарий ¦ 💬 Новий коментар
+💾 Fichier de l’outil ¦ 💾 Файл инструмента ¦ 💾 Файл інструмента
+📁 Ranger une copie dans les médias ¦ 📁 Сохранить копию в медиафайлах ¦ 📁 Зберегти копію в медіафайлах
+📄 Format, marges et orientation… ¦ 📄 Формат, поля и ориентация… ¦ 📄 Формат, поля й орієнтація…
+📄 PDF ¦ 📄 PDF ¦ 📄 PDF
+📄 Pages ¦ 📄 Страницы ¦ 📄 Сторінки
+📄 Saut de section ¦ 📄 Разрыв раздела ¦ 📄 Розрив розділу
+📄 Saut de section (autre orientation)… ¦ 📄 Разрыв раздела (другая ориентация)… ¦ 📄 Розрив розділу (інша орієнтація)…
+📅 Date ¦ 📅 Дата ¦ 📅 Дата
+📅 Date du jour ¦ 📅 Сегодняшняя дата ¦ 📅 Сьогоднішня дата
+📊 Un diagramme… ¦ 📊 Диаграмма… ¦ 📊 Діаграма…
+📋 Partir d’un modèle ¦ 📋 Начать с шаблона ¦ 📋 Почати із шаблону
+📋 Partir d’un modèle… ¦ 📋 Начать с шаблона… ¦ 📋 Почати із шаблону…
+📍 Un lieu de la base… ¦ 📍 Место из базы… ¦ 📍 Місце з бази…
+📐 Envoyer vers la mise en page ¦ 📐 Отправить в вёрстку ¦ 📐 Надіслати у верстку
+📐 Envoyer vers la mise en page… ¦ 📐 Отправить в вёрстку… ¦ 📐 Надіслати у верстку…
+📐 Reprendre les styles d’un livre… ¦ 📐 Взять стили из книги… ¦ 📐 Узяти стилі з книжки…
+📐 Styles d’un livre… ¦ 📐 Стили книги… ¦ 📐 Стилі книжки…
+📑 Sommaire ¦ 📑 Оглавление ¦ 📑 Зміст
+📖 La biographie d’une personne… ¦ 📖 Биография человека… ¦ 📖 Біографія людини…
+📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt) ¦ 📗 LibreOffice (.odt)
+📘 Word (.docx) ¦ 📘 Word (.docx) ¦ 📘 Word (.docx)
+📚 Bibliographie ¦ 📚 Список литературы ¦ 📚 Список літератури
+📜 Brouillon (sans les pages) ¦ 📜 Черновик (без страниц) ¦ 📜 Чернетка (без сторінок)
+📝 Compte rendu ¦ 📝 Отчёт ¦ 📝 Звіт
+📝 RTF ¦ 📝 RTF ¦ 📝 RTF
+📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée ¦ 📝 Написать об этом человеке: документ текстового редактора, с уже вставленной биографией ¦ 📝 Написати про цю людину: документ текстового редактора з уже вставленою біографією
+📨 Champ de fusion ¦ 📨 Поле слияния ¦ 📨 Поле злиття
+📨 Champ de fusion (prénom, dates…) ¦ 📨 Поле слияния (имя, даты…) ¦ 📨 Поле злиття (ім’я, дати…)
+📨 Publipostage ¦ 📨 Рассылка ¦ 📨 Розсилка
+📨 Publipostage… ¦ 📨 Рассылка… ¦ 📨 Розсилка…
+🔁 Synonymes de « {word} » ¦ 🔁 Синонимы слова «{word}» ¦ 🔁 Синоніми слова «{word}»
+🔁 Synonymes… ¦ 🔁 Синонимы… ¦ 🔁 Синоніми…
+🔊 Lecture… (Échap ou Outils → ⏹ Arrêter la lecture) ¦ 🔊 Чтение… (Esc или Инструменты → ⏹ Остановить чтение) ¦ 🔊 Читання… (Esc або Інструменти → ⏹ Зупинити читання)
+🔊 Lire à voix haute ¦ 🔊 Читать вслух ¦ 🔊 Читати вголос
+🔍 Rechercher ¦ 🔍 Найти ¦ 🔍 Знайти
+🔎 Corrigé dans {n} passage (↶ pour revenir). ¦ 🔎 Исправлено мест: {n} (↶, чтобы вернуть). ¦ 🔎 Виправлено місць: {n} (↶, щоб повернути).
+🔎 Corrigé dans {n} passages (↶ pour revenir). ¦ 🔎 Исправлено мест: {n} (↶, чтобы вернуть). ¦ 🔎 Виправлено місць: {n} (↶, щоб повернути).
+🔎 Relecture (typographie, répétitions)… ¦ 🔎 Вычитка (типографика, повторы)… ¦ 🔎 Вичитка (типографіка, повтори)…
+🔎 Rien à reprendre : typographie et répétitions sont bonnes. ¦ 🔎 Исправлять нечего: типографика и повторы в порядке. ¦ 🔎 Виправляти нічого: типографіка й повтори в порядку.
+🔎 Vérification avec les fiches… ¦ 🔎 Сверка с карточками… ¦ 🔎 Звіряння з картками…
+🔎 Vérifier avec les fiches ¦ 🔎 Сверить с карточками ¦ 🔎 Звірити з картками
+🔎 {n} à regarder. ¦ 🔎 Посмотреть: {n}. ¦ 🔎 Переглянути: {n}.
+🔗 Lien… ¦ 🔗 Ссылка… ¦ 🔗 Посилання…
+🔗 Modifier le lien ¦ 🔗 Изменить ссылку ¦ 🔗 Змінити посилання
+🔗 Nouveau lien ¦ 🔗 Новая ссылка ¦ 🔗 Нове посилання
+🔢 Nombre de mots ¦ 🔢 Число слов ¦ 🔢 Кількість слів
+🔢 Nombre de mots… ¦ 🔢 Число слов… ¦ 🔢 Кількість слів…
+🔤 Index ¦ 🔤 Указатель ¦ 🔤 Покажчик
+🕘 Enregistrer comme nouvelle version ¦ 🕘 Сохранить как новую версию ¦ 🕘 Зберегти як нову версію
+🕘 Nouvelle version ¦ 🕘 Новая версия ¦ 🕘 Нова версія
+🕘 Versions… ¦ 🕘 Версии… ¦ 🕘 Версії…
+🖍 Surlignage… ¦ 🖍 Выделение цветом… ¦ 🖍 Виділення кольором…
+🖨 Imprimer… ¦ 🖨 Печать… ¦ 🖨 Друк…
+🖼 Image… ¦ 🖼 Изображение… ¦ 🖼 Зображення…
+🧭 Panneau de navigation ¦ 🧭 Панель навигации ¦ 🧭 Панель навігації
+🧾 Ouvrir ce tableau dans le Tableur ¦ 🧾 Открыть эту таблицу в электронной таблице ¦ 🧾 Відкрити цю таблицю в електронній таблиці
+🧾 Tableau venu du Tableur… ¦ 🧾 Таблица из электронной таблицы… ¦ 🧾 Таблиця з електронної таблиці…
+🧾 Texte (.txt) ¦ 🧾 Текст (.txt) ¦ 🧾 Текст (.txt)
+=remplacement ¦ замена|замены|замен ¦ заміна|заміни|замін
+=commentaire ¦ комментарий|комментария|комментариев ¦ коментар|коментарі|коментарів
+=modification suivie ¦ отслеживаемое изменение|отслеживаемых изменения|отслеживаемых изменений ¦ відстежувана зміна|відстежувані зміни|відстежуваних змін
+=tableau ¦ таблица|таблицы|таблиц ¦ таблиця|таблиці|таблиць
+=style ¦ стиль|стиля|стилей ¦ стиль|стилі|стилів
+=paragraphe ¦ абзац|абзаца|абзацев ¦ абзац|абзаци|абзаців
+=champ rempli ¦ заполненное поле|заполненных поля|заполненных полей ¦ заповнене поле|заповнені поля|заповнених полів
+texte|Caractère ¦ Символ ¦ Символ
+icone-gras|G ¦ Ж ¦ Ж
+icone-italique|I ¦ К ¦ К
+icone-souligne|S ¦ Ч ¦ П
+icone-petites-capitales|Pᴄ ¦ Мк ¦ Мк

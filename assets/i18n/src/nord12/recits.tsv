@@ -341,3 +341,1203 @@ Quand ¦ Когда ¦ Коли
 Raconte ¦ Расскажи ¦ Розкажи
 Passeport ¦ Паспорт ¦ Паспорт
 Barbe ¦ Борода ¦ Борода
+son {x} (lien) ¦ его/её {x} ¦ його/її {x}
+sa {x} (lien) ¦ его/её {x} ¦ його/її {x}
+père ¦ отец ¦ батько
+mère ¦ мать ¦ мати
+grand-père ¦ дедушка ¦ дідусь
+grand-mère ¦ бабушка ¦ бабуся
+arrière-grand-père ¦ прадедушка ¦ прадідусь
+arrière-grand-mère ¦ прабабушка ¦ прабабуся
+arrière-arrière-grand-père ¦ прапрадедушка ¦ прапрадідусь
+arrière-arrière-grand-mère ¦ прапрабабушка ¦ прапрабабуся
+arrière-arrière-arrière-grand-père ¦ прапрапрадедушка ¦ прапрапрадідусь
+arrière-arrière-arrière-grand-mère ¦ прапрапрабабушка ¦ прапрапрабабуся
+ancêtre à la {n}e génération ¦ предок в {n}-м поколении ¦ предок у {n}-му поколінні
+{kin} de {name} ¦ {kin} — {name} ¦ {kin} — {name}
+Il est né {when}{where}. ¦ Он родился {when}{where}. ¦ Він народився {when}{where}.
+Elle est née {when}{where}. ¦ Она родилась {when}{where}. ¦ Вона народилася {when}{where}.
+Il était {occ}. ¦ Он был {occ}. ¦ Він був {occ}.
+Elle était {occ}. ¦ Она была {occ}. ¦ Вона була {occ}.
+Il a épousé {name}{when}{where}. ¦ Он женился на {name}{when}{where}. ¦ Він одружився з {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ Она вышла замуж за {name}{when}{where}. ¦ Вона вийшла заміж за {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ У него был один ребёнок: {list}. ¦ У нього була одна дитина: {list}.
+Elle a eu un enfant : {list}. ¦ У неё был один ребёнок: {list}. ¦ У неї була одна дитина: {list}.
+Il a eu {n} enfants : {list}. ¦ Детей у него: {n} — {list}. ¦ Дітей у нього: {n} — {list}.
+Elle a eu {n} enfants : {list}. ¦ Детей у неё: {n} — {list}. ¦ Дітей у неї: {n} — {list}.
+Il est mort {when}{age}{where}. ¦ Он умер {when}{age}{where}. ¦ Він помер {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ Она умерла {when}{age}{where}. ¦ Вона померла {when}{age}{where}.
+, à {n} ans ¦ , возраст: {n} ¦ , вік: {n}
+, à {n} an ¦ , возраст: {n} год ¦ , вік: {n} рік
+avec {name} ¦ с {name} ¦ з {name}
+se mariait{with}{where}{date} ¦ вступает в брак{with}{where}{date} ¦ бере шлюб{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ вступает в гражданский брак{with}{where}{date} ¦ бере цивільний шлюб{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ венчается{with}{where}{date} ¦ вінчається{with}{where}{date}
+mourait{with}{where}{date} ¦ умирает{with}{where}{date} ¦ помирає{with}{where}{date}
+était inhumé{with}{where}{date} ¦ его хоронят{with}{where}{date} ¦ його ховають{with}{where}{date}
+était inhumée{with}{where}{date} ¦ её хоронят{with}{where}{date} ¦ її ховають{with}{where}{date}
+habitait{with}{where}{date} ¦ живёт{with}{where}{date} ¦ живе{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ работает (профессия:{what}){with}{where}{date} ¦ працює (професія:{what}){with}{where}{date}
+partait{with}{where}{date} ¦ уезжает{with}{where}{date} ¦ виїжджає{with}{where}{date}
+arrivait{with}{where}{date} ¦ приезжает{with}{where}{date} ¦ приїжджає{with}{where}{date}
+était recensé{with}{where}{date} ¦ его вносят в перепись{with}{where}{date} ¦ його вносять до перепису{with}{where}{date}
+était recensée{with}{where}{date} ¦ её вносят в перепись{with}{where}{date} ¦ її вносять до перепису{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ служит в армии{with}{where}{date} ¦ служить в армії{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ получает диплом{with}{where}{date} ¦ отримує диплом{with}{where}{date}
+devenait français{with}{where}{date} ¦ становится французом{with}{where}{date} ¦ стає французом{with}{where}{date}
+devenait française{with}{where}{date} ¦ становится француженкой{with}{where}{date} ¦ стає француженкою{with}{where}{date}
+était baptisé{with}{where}{date} ¦ его крестят{with}{where}{date} ¦ його хрестять{with}{where}{date}
+était baptisée{with}{where}{date} ¦ её крестят{with}{where}{date} ¦ її хрестять{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ проходит конфирмацию{with}{where}{date} ¦ проходить конфірмацію{with}{where}{date}
+était à l’école{with}{where}{date} ¦ ходит в школу{with}{where}{date} ¦ ходить до школи{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ переживает событие ({label}){where}{date} ¦ переживає подію ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ становится отцом: {name}{where}{date} ¦ стає батьком: {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ становится матерью: {name}{where}{date} ¦ стає матір’ю: {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ его уже не было: он умер (возраст: {n}) ¦ його вже не було: він помер (вік: {n})
+n’était plus là : elle était morte à {n} ans ¦ её уже не было: она умерла (возраст: {n}) ¦ її вже не було: вона померла (вік: {n})
+vivait sans doute du côté de {place} en {y}{occ} ¦ живёт, видимо, где-то рядом с {place} в {y}{occ} ¦ живе, мабуть, десь поблизу {place} у {y}{occ}
+vivait sa vie en {y}{occ} ¦ живёт своей жизнью в {y}{occ} ¦ живе своїм життям у {y}{occ}
+À {n} ans… ¦ В возрасте {n}… ¦ У віці {n}…
+À {n} ans, il {facts}. ¦ Когда ему было {n}, он {facts}. ¦ Коли йому було {n}, він {facts}.
+À {n} ans, elle {facts}. ¦ Когда ей было {n}, она {facts}. ¦ Коли їй було {n}, вона {facts}.
+{who} de {name} dont on connaît la naissance. ¦ {who} ({name}) с известной датой рождения. ¦ {who} ({name}) з відомою датою народження.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} ({name}) с известной датой рождения (без даты рождения не учтено: {k}). ¦ {who} ({name}) з відомою датою народження (без дати народження не враховано: {k}).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, как {kin} {from}{fy} ¦ {who}{y}, як {kin} {from}{fy}
+C’est un homme. ¦ Это мужчина. ¦ Це чоловік.
+C’est une femme. ¦ Это женщина. ¦ Це жінка.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Это мужчина, родившийся в XVIII веке или раньше. ¦ Це чоловік, народжений у XVIII столітті або раніше.
+C’est un homme, né au XIXe siècle. ¦ Это мужчина, родившийся в XIX веке. ¦ Це чоловік, народжений у XIX столітті.
+C’est un homme, né au XXe siècle. ¦ Это мужчина, родившийся в XX веке. ¦ Це чоловік, народжений у XX столітті.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Это женщина, родившаяся в XVIII веке или раньше. ¦ Це жінка, народжена у XVIII столітті або раніше.
+C’est une femme, née au XIXe siècle. ¦ Это женщина, родившаяся в XIX веке. ¦ Це жінка, народжена в XIX столітті.
+C’est une femme, née au XXe siècle. ¦ Это женщина, родившаяся в XX веке. ¦ Це жінка, народжена в XX столітті.
+Il est né à {place}. ¦ Он родился в {place}. ¦ Він народився в {place}.
+Elle est née à {place}. ¦ Она родилась в {place}. ¦ Вона народилася в {place}.
+Son métier : {occ}. ¦ Профессия: {occ}. ¦ Професія: {occ}.
+Il a vécu {n} ans. ¦ Прожил лет: {n}. ¦ Прожив років: {n}.
+Elle a vécu {n} ans. ¦ Прожила лет: {n}. ¦ Прожила років: {n}.
+Il a eu {n} enfant. ¦ Детей у него: {n}. ¦ Дітей у нього: {n}.
+Elle a eu {n} enfant. ¦ Детей у неё: {n}. ¦ Дітей у неї: {n}.
+Il a eu {n} enfants. ¦ Детей у него: {n}. ¦ Дітей у нього: {n}.
+Elle a eu {n} enfants. ¦ Детей у неё: {n}. ¦ Дітей у неї: {n}.
+On ne lui connaît pas d’enfant. ¦ Детей у этого человека мы не знаем. ¦ Дітей у цієї людини ми не знаємо.
+Né dans les années {y}. ¦ Родился в {y}-х годах. ¦ Народився в {y}-х роках.
+Née dans les années {y}. ¦ Родилась в {y}-х годах. ¦ Народилася в {y}-х роках.
+Sa femme s’appelait {name}. ¦ Его жену звали {name}. ¦ Його дружину звали {name}.
+Son mari s’appelait {name}. ¦ Её мужа звали {name}. ¦ Її чоловіка звали {name}.
+Un de ses enfants s’appelait {name}. ¦ Одного из детей звали {name}. ¦ Одну з дітей звали {name}.
+Son nom commence par {l}… et compte {n} lettres. ¦ Имя начинается на {l}… и в нём букв: {n}. ¦ Ім’я починається на {l}… і в ньому літер: {n}.
+Ta naissance ¦ Твоё рождение ¦ Твоє народження
+Tu es {name}. ¦ Ты — {name}. ¦ Ти — {name}.
+Tu nais {when}{where}{parents}. ¦ Ты рождаешься {when}{where}{parents}. ¦ Ти народжуєшся {when}{where}{parents}.
+fils de {names} ¦ сын: {names} ¦ син: {names}
+fille de {names} ¦ дочь: {names} ¦ донька: {names}
+{a} et de {b} ¦ {a} и {b} ¦ {a} і {b}
+Ton père est {occ}. ¦ Твой отец — {occ}. ¦ Твій батько — {occ}.
+Le métier ¦ Профессия ¦ Професія
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Тебе пятнадцать, на дворе {y} год. Пора зарабатывать на жизнь. Что будешь делать? ¦ Тобі п’ятнадцять, надворі {y} рік. Час заробляти на життя. Що робитимеш?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Тебе пятнадцать. Пора зарабатывать на жизнь. Что будешь делать? ¦ Тобі п’ятнадцять. Час заробляти на життя. Що робитимеш?
+Devenir {occ} ¦ Стать: {occ} ¦ Стати: {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ В настоящей жизни {name} стал: {occ}. ¦ У справжньому житті {name} став: {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ В настоящей жизни {name} стала: {occ}. ¦ У справжньому житті {name} стала: {occ}.
+L’amour ¦ Любовь ¦ Кохання
+Tu as {n} ans. ¦ Тебе {n}. ¦ Тобі {n}.
+À {place}, deux personnes ont attiré ton regard… ¦ В {place} два человека привлекли твой взгляд… ¦ У {place} дві людини привернули твій погляд…
+deux personnes ont attiré ton regard… ¦ два человека привлекли твой взгляд… ¦ дві людини привернули твій погляд…
+Épouser {name} ¦ Вступить в брак с {name} ¦ Узяти шлюб із {name}
+Rester libre encore un peu ¦ Ещё немного побыть свободным(ой) ¦ Ще трохи побути вільним(ою)
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ В настоящей жизни {first} вступил(а) в брак с {name}{when}{where}. ¦ У справжньому житті {first} узяв(ла) шлюб із {name}{when}{where}.
+Partir ? ¦ Уехать? ¦ Поїхати?
+La vie est dure{where}. On parle de partir… ¦ Жизнь тяжела{where}. Поговаривают об отъезде… ¦ Життя важке{where}. Поговорюють про від’їзд…
+Partir pour {place} ¦ Уехать в {place} ¦ Поїхати до {place}
+Rester au pays ¦ Остаться на родине ¦ Залишитися на батьківщині
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ В настоящей жизни {name} закончил(а) свой путь в {place}. ¦ У справжньому житті {name} завершив(ла) свій шлях у {place}.
+On parle de partir pour la ville… ¦ Поговаривают о переезде в город… ¦ Поговорюють про переїзд до міста…
+Partir ¦ Уехать ¦ Поїхати
+Rester à {place} ¦ Остаться в {place} ¦ Залишитися в {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ В настоящей жизни {name} остался в {place}. ¦ У справжньому житті {name} залишився в {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ В настоящей жизни {name} осталась в {place}. ¦ У справжньому житті {name} залишилася в {place}.
+Les enfants ¦ Дети ¦ Діти
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Появляется ребёнок: {list}. Ты смотришь, как дети растут. ¦ З’являється дитина: {list}. Ти дивишся, як діти ростуть.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ Появляются дети ({n}): {list}. Ты смотришь, как они растут. ¦ З’являються діти ({n}): {list}. Ти дивишся, як вони ростуть.
+La fin du voyage ¦ Конец пути ¦ Кінець шляху
+Tu t’éteins {when}{where}{age}. ¦ Ты угасаешь {when}{where}{age}. ¦ Ти згасаєш {when}{where}{age}.
+Ton histoire continue… ¦ Твоя история продолжается… ¦ Твоя історія триває…
+{n} personnes nées un {date} : {list}. ¦ Родились {date} (людей: {n}): {list}. ¦ Народилися {date} (людей: {n}): {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} умер в свой день рождения, в возрасте {n} ({date}). ¦ {name} помер у свій день народження, у віці {n} ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} умерла в свой день рождения, в возрасте {n} ({date}). ¦ {name} померла у свій день народження, у віці {n} ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} родился {date}, в годовщину смерти: {kin} {who} ({y}). ¦ {name} народився {date}, у річницю смерті: {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} родилась {date}, в годовщину смерти: {kin} {who} ({y}). ¦ {name} народилася {date}, у річницю смерті: {kin} {who} ({y}).
+son ancêtre ¦ предок ¦ предок
+{n} mariages le même jour de l’année : {list}. ¦ Браков в один и тот же день года: {n} — {list}. ¦ Шлюбів в один і той самий день року: {n} — {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} и {b} родились день в день, с разницей ровно в {n} г. ({y1} и {y2}). ¦ {a} і {b} народилися день у день, з різницею рівно в {n} р. ({y1} і {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} родился на Рождество {y}. ¦ {name} народився на Різдво {y}.
+{name} est née le jour de Noël {y}. ¦ {name} родилась на Рождество {y}. ¦ {name} народилася на Різдво {y}.
+{name} est né le jour de l’An {y}. ¦ {name} родился в Новый год {y}. ¦ {name} народився на Новий рік {y}.
+{name} est née le jour de l’An {y}. ¦ {name} родилась в Новый год {y}. ¦ {name} народилася на Новий рік {y}.
+{name} est né un vendredi 13 ({date}). ¦ {name} родился в пятницу 13-го ({date}). ¦ {name} народився в п’ятницю 13-го ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} родилась в пятницу 13-го ({date}). ¦ {name} народилася в п’ятницю 13-го ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} вступил в брак в возрасте {n}, в том же возрасте, что и его отец {father}. ¦ {name} узяв шлюб у віці {n}, у тому самому віці, що і його батько {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} вступила в брак в возрасте {n}, в том же возрасте, что и её отец {father}. ¦ {name} узяла шлюб у віці {n}, у тому самому віці, що і її батько {father}.
+En quelle année est né {name} ? ¦ В каком году родился {name}? ¦ У якому році народився {name}?
+En quelle année est née {name} ? ¦ В каком году родилась {name}? ¦ У якому році народилася {name}?
+Où est né {name} ? ¦ Где родился {name}? ¦ Де народився {name}?
+Où est née {name} ? ¦ Где родилась {name}? ¦ Де народилася {name}?
+Quel était le métier de {name} ? ¦ Какая профессия была у {name}? ¦ Яка професія була в {name}?
+{name} était {occ}. ¦ {name} — {occ}. ¦ {name} — {occ}.
+Qui a épousé {name} ? ¦ С кем вступил(а) в брак {name}? ¦ З ким узяв(ла) шлюб {name}?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} и {b} вступили в брак{when}{where}. ¦ {a} і {b} узяли шлюб{when}{where}.
+Qui est le père de {name} ? ¦ Кто отец {name}? ¦ Хто батько {name}?
+Qui est la mère de {name} ? ¦ Кто мать {name}? ¦ Хто мати {name}?
+{name} est le fils de {parent}. ¦ {name} — сын {parent}. ¦ {name} — син {parent}.
+{name} est la fille de {parent}. ¦ {name} — дочь {parent}. ¦ {name} — донька {parent}.
+Combien d’enfants a eus {name} ? ¦ Сколько детей было у {name}? ¦ Скільки дітей було в {name}?
+À quel âge est mort {name} ? ¦ В каком возрасте умер {name}? ¦ У якому віці помер {name}?
+À quel âge est morte {name} ? ¦ В каком возрасте умерла {name}? ¦ У якому віці померла {name}?
+Qui est né le premier ? ¦ Кто родился первым? ¦ Хто народився першим?
+Ici est né {name}, {when}. ¦ Здесь родился {name}, {when}. ¦ Тут народився {name}, {when}.
+Ici est née {name}, {when}. ¦ Здесь родилась {name}, {when}. ¦ Тут народилася {name}, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Здесь же родился {name}, {when}. ¦ Тут-таки народився {name}, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Здесь же родилась {name}, {when}. ¦ Тут-таки народилася {name}, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Здесь родился {name}, {when}; он станет: {occ}. ¦ Тут народився {name}, {when}; він стане: {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Здесь родилась {name}, {when}; она станет: {occ}. ¦ Тут народилася {name}, {when}; вона стане: {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Здесь же родился {name}, {when}; он станет: {occ}. ¦ Тут-таки народився {name}, {when}; він стане: {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Здесь же родилась {name}, {when}; она станет: {occ}. ¦ Тут-таки народилася {name}, {when}; вона стане: {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Здесь, {when}, {name}: {label}{what}. ¦ Тут, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Затем, {when}, {name}: {label}{what}. ¦ Потім, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Здесь, {when}, {name} вступил(а) в брак с {other}. ¦ Тут, {when}, {name} узяв(ла) шлюб із {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Затем, {when}, {name} вступил(а) в брак с {other}. ¦ Потім, {when}, {name} узяв(ла) шлюб із {other}.
+Ici est mort {name}, {when}{age}. ¦ Здесь умер {name}, {when}{age}. ¦ Тут помер {name}, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Здесь умерла {name}, {when}{age}. ¦ Тут померла {name}, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Здесь же умер {name}, {when}{age}. ¦ Тут-таки помер {name}, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Здесь же умерла {name}, {when}{age}. ¦ Тут-таки померла {name}, {when}{age}.
+son conjoint ¦ супруг(а) ¦ чоловік / дружина
+Naissance ({date}) ¦ Рождение ({date}) ¦ Народження ({date})
+Mariage avec {name} ({date}) ¦ Брак с {name} ({date}) ¦ Шлюб із {name} ({date})
+Mariage avec {name} ¦ Брак с {name} ¦ Шлюб із {name}
+Mariage ({date}) ¦ Брак ({date}) ¦ Шлюб ({date})
+Décès ({date}) ¦ Смерть ({date}) ¦ Смерть ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ с радостью сообщают о рождении сына ¦ з радістю повідомляють про народження сина
+ont la joie de vous annoncer la naissance de leur fille ¦ с радостью сообщают о рождении дочери ¦ з радістю повідомляють про народження доньки
+a la joie de vous annoncer la naissance de son fils ¦ с радостью сообщает о рождении сына ¦ з радістю повідомляє про народження сина
+a la joie de vous annoncer la naissance de sa fille ¦ с радостью сообщает о рождении дочери ¦ з радістю повідомляє про народження доньки
+a la joie de vous annoncer la naissance de ¦ с радостью сообщает о рождении ¦ з радістю повідомляє про народження
+On nous prie d’annoncer le décès de ¦ С прискорбием сообщаем о смерти ¦ Із сумом повідомляємо про смерть
+survenu {when}{age} ¦ последовавшей {when}{age} ¦ що сталася {when}{age}
+survenue {when}{age} ¦ последовавшей {when}{age} ¦ що сталася {when}{age}
+, dans sa {n}e année ¦ , на {n}-м году жизни ¦ , на {n}-му році життя
+De la part de ¦ От имени ¦ Від імені
+Monsieur {name}, son époux ¦ Господин {name}, её супруг ¦ Пан {name}, її чоловік
+Madame {name}, son épouse ¦ Госпожа {name}, его супруга ¦ Пані {name}, його дружина
+{names}, ses enfants ¦ {names}, дети ¦ {names}, діти
+{names}, son fils ¦ {names}, сын ¦ {names}, син
+{names}, sa fille ¦ {names}, дочь ¦ {names}, донька
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ имеют честь сообщить о бракосочетании своих детей ¦ мають честь повідомити про шлюб своїх дітей
+ont la joie de vous faire part de leur mariage ¦ с радостью сообщают о своём бракосочетании ¦ з радістю повідомляють про свій шлюб
+célébré {when} ¦ состоявшемся {when} ¦ що відбувся {when}
+{names} se sont dit oui ! ¦ {names} сказали друг другу «да»! ¦ {names} сказали одне одному «так»!
+Bienvenue à {name} ! ¦ Добро пожаловать, {name}! ¦ Ласкаво просимо, {name}!
+Adieu à {name} ¦ Прощай, {name} ¦ Прощавай, {name}
+Une année tranquille ¦ Спокойный год ¦ Спокійний рік
+C’est {when} que {a} a épousé {b}. ¦ Именно {when} {a} и {b} вступили в брак. ¦ Саме {when} {a} і {b} узяли шлюб.
+{name} est le fils de {parents} ¦ {name} — сын {parents} ¦ {name} — син {parents}
+{name} est la fille de {parents} ¦ {name} — дочь {parents} ¦ {name} — донька {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Желаем молодожёнам счастья. ¦ Бажаємо молодятам щастя.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Счастливые родители, {names}, принимают поздравления от всей семьи. ¦ Щасливі батьки, {names}, приймають вітання від усієї родини.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ В этом году в семье ничего примечательного не произошло — и это тоже хорошая новость. ¦ Цього року в родині нічого вартого уваги не сталося — і це теж добра новина.
+{name} fête ses {n} ans. ¦ {name} празднует {n}-летие. ¦ {name} святкує {n}-річчя.
+{names} : {n} ans de mariage ! ¦ {names}: {n}-я годовщина свадьбы! ¦ {names}: {n}-та річниця шлюбу!
+Né il y a {n} ans, jour pour jour. ¦ Сегодня {n}-я годовщина со дня рождения. ¦ Сьогодні {n}-та річниця від дня народження.
+Née il y a {n} ans, jour pour jour. ¦ Сегодня {n}-я годовщина со дня рождения. ¦ Сьогодні {n}-та річниця від дня народження.
+Disparu il y a {n} ans, jour pour jour. ¦ Сегодня {n}-я годовщина со дня смерти. ¦ Сьогодні {n}-та річниця від дня смерті.
+Disparue il y a {n} ans, jour pour jour. ¦ Сегодня {n}-я годовщина со дня смерти. ¦ Сьогодні {n}-та річниця від дня смерті.
+Fils de {names}. ¦ Сын {names}. ¦ Син {names}.
+Fille de {names}. ¦ Дочь {names}. ¦ Донька {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, брат, родился {when}: разница меньше девяти месяцев (у близнецов была бы одна дата). ¦ {name}, брат, народився {when}: різниця менше дев’яти місяців (у близнюків була б одна дата).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, сестра, родилась {when}: разница меньше девяти месяцев (у близнецов была бы одна дата). ¦ {name}, сестра, народилася {when}: різниця менше дев’яти місяців (у близнюків була б одна дата).
+{name} est mort {when}, avant ce mariage. ¦ {name} умер {when}, ещё до этого брака. ¦ {name} помер {when}, ще до цього шлюбу.
+{name} est morte {when}, avant ce mariage. ¦ {name} умерла {when}, ещё до этого брака. ¦ {name} померла {when}, ще до цього шлюбу.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ В тот же год {label} в {place}, в {km} км: возможно, но надо проверить. ¦ Того ж року {label} у {place}, за {km} км: можливо, але треба перевірити.
+Un métier à {n} ans : c’est jeune. ¦ Профессия в возрасте {n}: это рано. ¦ Професія у віці {n}: це рано.
+🔎 À regarder aussi ¦ 🔎 Посмотри также ¦ 🔎 Подивися також
+{name} naît {when} {where}. ¦ {name} рождается {when} {where}. ¦ {name} народжується {when} {where}.
+Ses parents : {list}. ¦ Родители: {list}. ¦ Батьки: {list}.
+Parent connu : {list}. ¦ Известный родитель: {list}. ¦ Відомий із батьків: {list}.
+Ses frères et sœurs ¦ Братья и сёстры ¦ Брати й сестри
+Son frère ou sa sœur ¦ Брат или сестра ¦ Брат або сестра
+{name} reçoit le baptême {when} {where}. ¦ {name} принимает крещение {when} {where}. ¦ {name} приймає хрещення {when} {where}.
+Présents : {list}. ¦ Присутствуют: {list}. ¦ Присутні: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Церковное венчание проходит {when} {where}. ¦ Церковне вінчання відбувається {when} {where}.
+Le mariage civil est célébré {when} {where}. ¦ Гражданский брак заключается {when} {where}. ¦ Цивільний шлюб укладається {when} {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} вступает в брак с {who} {when} {where}. ¦ {name} бере шлюб із {who} {when} {where}.
+{name} se marie {when} {where}. ¦ {name} вступает в брак {when} {where}. ¦ {name} бере шлюб {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} умирает {when} {where}{age}. ¦ {name} помирає {when} {where}{age}.
+Cause notée : {cause}. ¦ Записанная причина: {cause}. ¦ Записана причина: {cause}.
+{name} repose {where} ¦ {name} покоится {where} ¦ {name} спочиває {where}
+{name} est inhumé ¦ {name} похоронен ¦ {name} похований
+{name} est inhumée ¦ {name} похоронена ¦ {name} похована
+{name} est inhumé(e) ¦ {name} похоронен(а) ¦ {name} похований(а)
+(inhumation {when}) ¦ (погребение {when}) ¦ (поховання {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} работает по профессии: {job}{where}. ¦ {name} працює за професією: {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} поселяется {where}{addr}. ¦ {name} оселяється {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} живёт {where}{addr}. ¦ {name} живе {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ По переписи {y} года {name} живёт {where}{desc}. ¦ За переписом {y} року {name} живе {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ По переписи {when} {name} живёт {where}{desc}. ¦ За переписом {when} {name} живе {where}{desc}.
+à l’adresse « {ad} » ¦ по адресу «{ad}» ¦ за адресою «{ad}»
+Métier noté : {job}. ¦ Записанная профессия: {job}. ¦ Записана професія: {job}.
+Le foyer compte {who}. ¦ В хозяйстве: {who}. ¦ У господарстві: {who}.
+{label} {when} {where}. ¦ {label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Перепись {y} года ¦ Перепис {y} року
+Déménagement ¦ Переезд ¦ Переїзд
+Domicile ¦ Место жительства ¦ Місце проживання
+Sépulture ¦ Место погребения ¦ Місце поховання
+Crémation ¦ Кремация ¦ Кремація
+Obsèques ¦ Похороны ¦ Похорон
+Ses enfants ¦ Дети ¦ Діти
+Son enfant ¦ Ребёнок ¦ Дитина
+{n} enfants connus : {list}. ¦ Известных детей: {n} — {list}. ¦ Відомих дітей: {n} — {list}.
+Un enfant connu : {list}. ¦ Один известный ребёнок: {list}. ¦ Одна відома дитина: {list}.
+Pendant sa vie ¦ При жизни ¦ За життя
+Sa vie en quelques mots ¦ Жизнь в нескольких словах ¦ Життя в кількох словах
+Ta version de la biographie (📖 sur la fiche). ¦ Твоя версия биографии (📖 на карточке). ¦ Твоя версія біографії (📖 на картці).
+Biographie écrite par l’app d’après la fiche. ¦ Биография, написанная приложением по карточке. ¦ Біографія, написана застосунком за карткою.
+Les lieux de sa vie ¦ Места жизни ¦ Місця життя
+Sa descendance ¦ Потомки ¦ Нащадки
+{list} dans la généalogie. ¦ {list} в генеалогии. ¦ {list} у генеалогії.
+Récit d’une vie — {name} ¦ История жизни — {name} ¦ Історія життя — {name}
+=petit-enfant ¦ внук|внука|внуков ¦ онук|онуки|онуків
+=arrière-petit-enfant ¦ правнук|правнука|правнуков ¦ правнук|правнуки|правнуків
+=autre descendant ¦ другой потомок|других потомка|других потомков ¦ інший нащадок|інші нащадки|інших нащадків
+=signature ¦ подпись|подписи|подписей ¦ підпис|підписи|підписів
+=visage ¦ лицо|лица|лиц ¦ обличчя|обличчя|облич
+=trésor caché ¦ спрятанное сокровище|спрятанных сокровища|спрятанных сокровищ ¦ схований скарб|сховані скарби|схованих скарбів
+Garder la mémoire ¦ Хранить память ¦ Зберігати пам’ять
+← Tous les trésors ¦ ← Все сокровища ¦ ← Усі скарби
+Trésors · {fam} ¦ Сокровища · {fam} ¦ Скарби · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Текст, звук или видео, которые откроются только в назначенный день: «к 18-летию Léa», «в 2050 году». ¦ Текст, звук або відео, які відкриються лише в призначений день: «на 18-річчя Léa», «у 2050 році».
+{n} scellée ¦ Запечатано: {n} ¦ Запечатано: {n}
+{n} ouverte ¦ Открыто: {n} ¦ Відкрито: {n}
+📬 Ouvertes ¦ 📬 Открытые ¦ 📬 Відкриті
+Aucune lettre ouverte pour l’instant ¦ Пока нет ни одного открытого письма ¦ Поки немає жодного відкритого листа
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ Запечатанное письмо откроется само в назначенный день. ¦ Запечатаний лист відкриється сам у призначений день.
+Souvenirs des sens ¦ Воспоминания чувств ¦ Спогади відчуттів
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Запах воска, шум мельницы, вкус варенья: то, чего не сохранит ни одна запись. ¦ Запах воску, шум млина, смак варення: те, чого не збереже жоден запис.
+Le sens ¦ Чувство ¦ Відчуття
+👃 Une odeur ¦ 👃 Запах ¦ 👃 Запах
+👂 Un son ¦ 👂 Звук ¦ 👂 Звук
+👅 Un goût ¦ 👅 Вкус ¦ 👅 Смак
+✋ Au toucher ¦ ✋ На ощупь ¦ ✋ На дотик
+👁 Une image ¦ 👁 Образ ¦ 👁 Образ
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Воспоминания, которые не умещаются ни в одну запись: запах, шум, вкус. Приложи запись звука или фото, если есть. ¦ Спогади, які не вміщуються в жоден запис: запах, шум, смак. Додай запис звуку або фото, якщо маєш.
+Noter un souvenir ¦ Записать воспоминание ¦ Записати спогад
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Смотреть в «Списки › Семейная память» ¦ 📋 Дивитися в «Списки › Родинна пам’ять»
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Хранится вместе с выражениями, прозвищами, традициями и рассказами ¦ Зберігається разом із висловами, прізвиськами, традиціями та свідченнями
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Пока нет ни одного воспоминания: запах воска на лестнице, шум мельницы, вкус бабушкиного варенья… ¦ Поки немає жодного спогаду: запах воску на сходах, шум млина, смак бабусиного варення…
+Le livre de recettes ¦ Книга рецептов ¦ Книга рецептів
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Семейные рецепты — кто их готовил и их история, — а потом настоящая книга для печати. ¦ Родинні рецепти — хто їх готував та їхня історія, — а потім справжня книга для друку.
+Rubrique ¦ Раздел ¦ Розділ
+Entrées et soupes ¦ Закуски и супы ¦ Закуски та супи
+Plats ¦ Основные блюда ¦ Основні страви
+Desserts et gâteaux ¦ Десерты и пироги ¦ Десерти та пироги
+Confitures et conserves ¦ Варенье и заготовки ¦ Варення та заготовки
+Boissons ¦ Напитки ¦ Напої
+Ajouter une recette ¦ Добавить рецепт ¦ Додати рецепт
+Imprimer le livre ¦ Напечатать книгу ¦ Надрукувати книгу
+{label} : couverture, sommaire, une page chacun ¦ {label}: обложка, оглавление, по странице на каждый ¦ {label}: обкладинка, зміст, по сторінці на кожен
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Пока нет ни одного рецепта: бабушкин пирог, воскресные щи… ¦ Поки немає жодного рецепта: бабусин пиріг, недільний капусняк…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ В книгу пока нечего поместить: начни с «＋ {what}». ¦ До книги поки нічого помістити: почни з «＋ {what}».
+Les chansons de la famille ¦ Семейные песни ¦ Родинні пісні
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Колыбельные, застольные, песни призывников: слова, мелодия, кто пел, запись и песенник для печати. ¦ Колискові, застільні, пісні новобранців: слова, мелодія, хто співав, запис і співаник для друку.
+Berceuses ¦ Колыбельные ¦ Колискові
+Chansons de fête et de repas ¦ Праздничные и застольные песни ¦ Святкові та застільні пісні
+Chansons de travail ¦ Рабочие песни ¦ Робітничі пісні
+Conscrits et soldats ¦ Призывники и солдаты ¦ Новобранці та солдати
+Noël ¦ Рождество ¦ Різдво
+En patois ¦ На диалекте ¦ Діалектом
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Слова, мелодия, кто её пел — и, если можешь, запись (звук, выбранный в медиафайлах). ¦ Слова, мелодія, хто її співав — і, якщо можеш, запис (звук, вибраний у медіафайлах).
+Ajouter une chanson ¦ Добавить песню ¦ Додати пісню
+Imprimer le carnet ¦ Напечатать песенник ¦ Надрукувати співаник
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Пока нет ни одной песни: бабушкина колыбельная, песня в конце застолья… ¦ Поки немає жодної пісні: бабусина колискова, пісня наприкінці застілля…
+L’entretien guidé ¦ Интервью по вопросам ¦ Інтерв’ю за запитаннями
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Хорошие вопросы для бабушки или дедушки, прочитанные вслух; запись сохраняется на его карточке, с отметкой на каждый вопрос. ¦ Добрі запитання для бабусі чи дідуся, прочитані вголос; запис зберігається на картці, з позначкою на кожне запитання.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Вопросы показываются крупно (и могут читаться вслух); интервью записывается через микрофон, каждый вопрос отмечается в записи, а затем звук сохраняется в медиафайлах карточки. ¦ Запитання показуються великими літерами (і можуть читатися вголос); інтерв’ю записується через мікрофон, кожне запитання позначається в записі, а потім звук зберігається в медіафайлах картки.
+La personne interrogée ¦ Кого расспрашиваем ¦ Кого розпитуємо
+Lire les questions à voix haute ¦ Читать вопросы вслух ¦ Читати запитання вголос
+Les thèmes ¦ Темы ¦ Теми
+🧒 L’enfance ¦ 🧒 Детство ¦ 🧒 Дитинство
+✏️ L’école ¦ ✏️ Школа ¦ ✏️ Школа
+👪 La famille ¦ 👪 Семья ¦ 👪 Родина
+🔨 Le travail ¦ 🔨 Работа ¦ 🔨 Робота
+💞 L’amour ¦ 💞 Любовь ¦ 💞 Кохання
+🪖 La guerre ¦ 🪖 Война ¦ 🪖 Війна
+🏡 La maison ¦ 🏡 Дом ¦ 🏡 Дім
+🎉 Les fêtes ¦ 🎉 Праздники ¦ 🎉 Свята
+💬 Pour plus tard ¦ 💬 На будущее ¦ 💬 На майбутнє
+Les entretiens enregistrés ¦ Записанные интервью ¦ Записані інтерв’ю
+🎙️ Commencer l’entretien ¦ 🎙️ Начать интервью ¦ 🎙️ Почати інтерв’ю
+Les questions sur papier, avec la place pour noter les réponses ¦ Вопросы на бумаге, с местом для ответов ¦ Запитання на папері, з місцем для відповідей
+Aucun entretien pour l’instant ¦ Пока нет ни одного интервью ¦ Поки немає жодного інтерв’ю
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Выбери человека и темы, затем «🎙️ Начать интервью». ¦ Вибери людину й теми, потім «🎙️ Почати інтерв’ю».
+La veillée en un clic ¦ Семейные посиделки в один клик ¦ Родинні посиденьки в один клік
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ На весь экран сменяются портреты одной ветви, каждая жизнь рассказывается вслух под тихую музыку. ¦ На весь екран змінюються портрети однієї гілки, кожне життя розповідається вголос під тиху музику.
+Autour de ¦ Вокруг ¦ Навколо
+Secondes par vie ¦ Секунд на одну жизнь ¦ Секунд на одне життя
+Raconter à voix haute ¦ Рассказывать вслух ¦ Розповідати вголос
+Musique douce ¦ Тихая музыка ¦ Тиха музика
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ На весь экран: портреты сменяются, каждая жизнь рассказывается. Пробел — пауза, стрелки — вперёд / назад, Esc — конец. ¦ На весь екран: портрети змінюються, кожне життя розповідається. Пробіл — пауза, стрілки — уперед / назад, Esc — кінець.
+La veillée de la famille {name} ¦ Посиделки семьи {name} ¦ Посиденьки родини {name}
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Сегодня вечером рассказываем истории жизни из семьи {name} (жизней: {n}). ¦ Сьогодні ввечері розповідаємо історії життя з родини {name} (життів: {n}).
+Bonne nuit ¦ Спокойной ночи ¦ На добраніч
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ А теперь пусть каждый расскажет то, что помнит. ¦ А тепер нехай кожен розповість те, що пам’ятає.
+{n} vies à raconter : {list} ¦ Жизней для рассказа: {n} — {list} ¦ Життів для розповіді: {n} — {list}
+🕯️ Lancer la veillée ¦ 🕯️ Начать посиделки ¦ 🕯️ Почати посиденьки
+Découvrir ¦ Открыть для себя ¦ Відкрити для себе
+À ton âge… ¦ В твоём возрасте… ¦ У твоєму віці…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Что делал каждый предок в том же возрасте, что и ты: вступал в брак, уезжал, становился родителем… ¦ Що робив кожен предок у тому самому віці, що й ти: брав шлюб, їхав, ставав батьком чи матір’ю…
+L’âge ¦ Возраст ¦ Вік
+Mon âge ¦ Мой возраст ¦ Мій вік
+Aperçu, A4 ou A5, ⤓ PDF ¦ Предпросмотр, A4 или A5, ⤓ PDF ¦ Попередній перегляд, A4 або A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Имена, которые перескакивают через поколение ¦ Імена, що перескакують через покоління
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Henri — как дедушка, Rose — как прабабушка: имена, переданные через голову родителей. ¦ Henri — як дідусь, Rose — як прабабуся: імена, передані через голову батьків.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Имя, которое «перескакивает» через поколение: ребёнок получает его от бабушки или дедушки (или прабабушки, прадедушки), хотя ни отец, ни мать его не носили. Популярность каждого имени во Франции (INSEE) — в разделе <b>Наследие → Имена</b>. ¦ Ім’я, що «перескакує» через покоління: дитина отримує його від бабусі чи дідуся (або прабабусі, прадідуся), хоча ні батько, ні мати його не носили. Популярність кожного імені у Франції (INSEE) — у розділі <b>Спадщина → Імена</b>.
+{n} prénom transmis par-dessus une génération ¦ Имён, переданных через поколение: {n} ¦ Імен, переданих через покоління: {n}
+{n} fois ¦ раз: {n} ¦ разів: {n}
+Les prénoms qui reviennent ¦ Имена, которые повторяются ¦ Імена, що повторюються
+Le pouvoir d’achat d’autrefois ¦ Покупательная способность в старину ¦ Купівельна спроможність у давнину
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ Приданое в 1 200 франков в 1880 году: сколько это в сегодняшних евро, в килограммах хлеба, в рабочих днях? ¦ Посаг у 1 200 франків у 1880 році: скільки це в сьогоднішніх євро, у кілограмах хліба, у робочих днях?
+La somme ¦ Сумма ¦ Сума
+livres (ou francs de l’époque) ¦ ливры (или франки того времени) ¦ ліври (або франки того часу)
+sous (1/20 de livre ou de franc) ¦ су (1/20 ливра или франка) ¦ су (1/20 ліври або франка)
+deniers (1/240 de livre) ¦ денье (1/240 ливра) ¦ дене (1/240 ліври)
+anciens francs (après 1960) ¦ старые франки (после 1960) ¦ старі франки (після 1960)
+centimes ¦ сантимы ¦ сантими
+euros ¦ евро ¦ євро
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Ориентиры: с 1901 года — индекс цен INSEE; раньше — порядок величины по ценам на продукты. Хлеб: средняя цена килограмма обычного хлеба. Дни: заработок подёнщика. Один экю = 3 ливра. ¦ Орієнтири: з 1901 року — індекс цін INSEE; раніше — порядок величини за цінами на продукти. Хліб: середня ціна кілограма звичайного хліба. Дні: заробіток поденника. Один екю = 3 ліври.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Пошаговый расчёт в «Конвертере старых денег» ↗ ¦ 🪙 Покроковий розрахунок у «Конвертері старих грошей» ↗
+Les sommes de ton arbre ¦ Суммы из твоего древа ¦ Суми з твого дерева
+{sum} en {y} ¦ {sum} в {y} году ¦ {sum} у {y} році
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} на сегодняшние деньги ¦ ≈ {eur} на сьогоднішні гроші
+{kg} kg de pain ¦ {kg} кг хлеба ¦ {kg} кг хліба
+{d} journées de travail ¦ Рабочих дней: {d} ¦ Робочих днів: {d}
+En euros d’aujourd’hui ¦ В сегодняшних евро ¦ У сьогоднішніх євро
+En pain ¦ В хлебе ¦ У хлібі
+soit {n} baguettes d’aujourd’hui ¦ то есть сегодняшних багетов: {n} ¦ тобто сьогоднішніх багетів: {n}
+En journées de travail ¦ В рабочих днях ¦ У робочих днях
+d’un journalier en {y} ¦ подёнщика в {y} году ¦ поденника в {y} році
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} по сегодняшнему МРОТ (SMIC) ¦ ≈ {eur} за сьогоднішньою мінімальною зарплатою (SMIC)
+francs ¦ франки ¦ франки
+{n} {unit} de {y}. ¦ {n} {unit} {y} года. ¦ {n} {unit} {y} року.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Эти два числа говорят о разном: хлеб в старину был относительно гораздо дороже, а труд — гораздо дешевле. ¦ Ці два числа говорять про різне: хліб у давнину був відносно набагато дорожчий, а праця — набагато дешевша.
+Les vieux mots des actes ¦ Старые слова из записей актов ¦ Старі слова з актових записів
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Вставь текст записи: старые слова будут выделены и объяснены. ¦ Laboureur, ondoyé, brumaire, douaire… Встав текст запису: старі слова буде виділено й пояснено.
+Colle ici le texte d’un acte ¦ Вставь сюда текст записи акта ¦ Встав сюди текст актового запису
+Dans ton arbre ¦ В твоём древе ¦ У твоєму дереві
+Chercher un mot ¦ Искать слово ¦ Шукати слово
+{n} mots ¦ Слов: {n} ¦ Слів: {n}
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Латынь, сокращения и старые буквы ↗ ¦ 📜 Латина, скорочення та старі літери ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Эти слова и их объяснения взяты из французских записей актов: они остаются на французском. ¦ Ці слова та їхні пояснення взято з французьких актових записів: вони лишаються французькою.
+Jouer en famille ¦ Играть всей семьёй ¦ Грати всією родиною
+Jeu des 7 familles ¦ Игра «7 семей» ¦ Гра «7 родин»
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Карты, сделанные по твоему древу: фото каждого на выбор с кадрированием, шесть стилей карт, цвета, рубашка; распечатать и вырезать. ¦ Карти, зроблені з твого дерева: фото кожного на вибір із кадруванням, шість стилів карт, кольори, сорочка; надрукувати й вирізати.
+Les familles ¦ Семьи ¦ Родини
+par nom de famille ¦ по фамилии ¦ за прізвищем
+par branche (arrière-grands-parents) ¦ по ветви (прабабушки и прадедушки) ¦ за гілкою (прабабусі й прадідусі)
+Le style ¦ Стиль ¦ Стиль
+🃏 Classique ¦ 🃏 Классический ¦ 🃏 Класичний
+📜 Ancien (papier jauni) ¦ 📜 Старинный (пожелтевшая бумага) ¦ 📜 Старовинний (пожовклий папір)
+◻️ Moderne (grande photo) ¦ ◻️ Современный (большое фото) ¦ ◻️ Сучасний (велике фото)
+🧸 Pour les petits ¦ 🧸 Для малышей ¦ 🧸 Для малечі
+🎩 Années folles ¦ 🎩 Ревущие двадцатые ¦ 🎩 Ревучі двадцяті
+🪵 Bois gravé ¦ 🪵 Гравюра на дереве ¦ 🪵 Гравюра на дереві
+Couleurs d’origine ¦ Исходные цвета ¦ Початкові кольори
+Le dos ¦ Рубашка ¦ Сорочка
+Un dos à motif (à imprimer au verso) ¦ Рубашка с узором (печатать на обороте) ¦ Сорочка з візерунком (друкувати на звороті)
+Sans dos ¦ Без рубашки ¦ Без сорочки
+Le lieu de naissance ¦ Место рождения ¦ Місце народження
+La liste de la famille ¦ Список семьи ¦ Список родини
+Les photos choisies, les couleurs et le style de départ ¦ Выбранные фото, цвета и исходный стиль ¦ Вибрані фото, кольори та початковий стиль
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 на карте: выбрать и кадрировать фото. ¦ 📷 на карті: вибрати й кадрувати фото.
+{n} familles de 6 cartes ({total} cartes). ¦ Семей по 6 карт: {n} (всего карт: {total}). ¦ Родин по 6 карт: {n} (усього карт: {total}).
+Choisir et recadrer la photo de {name} ¦ Выбрать и кадрировать фото: {name} ¦ Вибрати й кадрувати фото: {name}
+Le grand-père ¦ Дедушка ¦ Дідусь
+Le fils ¦ Сын ¦ Син
+Jeu des familles ¦ Игра «Семьи» ¦ Гра «Родини»
+La grand-mère ¦ Бабушка ¦ Бабуся
+La fille ¦ Дочь ¦ Донька
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Листы с картами (и их рубашками), с правилами игры ¦ Аркуші з картами (і їхніми сорочками), з правилами гри
+Arbre à colorier ¦ Древо-раскраска ¦ Дерево-розмальовка
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Настоящие предки ребёнка чёрными линиями: древо, цветочный сад, деревня, гербы, воздушные шары, улей, веер или розетка. ¦ Справжні предки дитини чорними лініями: дерево, квітковий сад, село, герби, повітряні кулі, вулик, віяло або розетка.
+L’enfant (ou la personne) au pied de l’arbre ¦ Ребёнок (или человек) у подножия древа ¦ Дитина (або людина) біля підніжжя дерева
+5 (petites cases) ¦ 5 (маленькие клетки) ¦ 5 (маленькі клітинки)
+Le dessin ¦ Рисунок ¦ Малюнок
+🌳 Le grand arbre ¦ 🌳 Большое древо ¦ 🌳 Велике дерево
+🌷 Le jardin de fleurs ¦ 🌷 Цветочный сад ¦ 🌷 Квітковий сад
+🏡 Le village (une maison chacun) ¦ 🏡 Деревня (у каждого свой дом) ¦ 🏡 Село (у кожного свій дім)
+🛡️ Les blasons ¦ 🛡️ Гербы ¦ 🛡️ Герби
+🎈 Les montgolfières ¦ 🎈 Воздушные шары ¦ 🎈 Повітряні кулі
+🐝 La ruche (alvéoles) ¦ 🐝 Улей (соты) ¦ 🐝 Вулик (стільники)
+🪭 L’éventail ¦ 🪭 Веер ¦ 🪭 Віяло
+🏵️ La rosace ¦ 🏵️ Розетка ¦ 🏵️ Розетка
+Le prénom seul (petits) ¦ Только имя (для малышей) ¦ Лише ім’я (для малечі)
+Prénom et nom ¦ Имя и фамилия ¦ Ім’я та прізвище
+Prénom, nom et année ¦ Имя, фамилия и год ¦ Ім’я, прізвище та рік
+L’écriture ¦ Почерк ¦ Почерк
+D’écolier ¦ Школьный ¦ Шкільний
+Bâton (lettres rondes) ¦ Печатные (круглые буквы) ¦ Друковані (круглі літери)
+Le trait ¦ Линия ¦ Лінія
+Fin (grands) ¦ Тонкая (для старших) ¦ Тонка (для старших)
+Épais (petits, gros feutres) ¦ Толстая (для малышей, толстые фломастеры) ¦ Товста (для малечі, товсті фломастери)
+Sans ¦ Без ¦ Без
+Double trait ¦ Двойная линия ¦ Подвійна лінія
+Guirlande de feuilles ¦ Гирлянда из листьев ¦ Гірлянда з листя
+Le titre ¦ Заголовок ¦ Заголовок
+L’arbre de … ¦ Древо … ¦ Дерево …
+Dessiner ¦ Нарисовать ¦ Намалювати
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Сохранить файл на компьютер или положить копию в медиафайлы ¦ Зберегти файл на комп’ютер або покласти копію в медіафайли
+L’arbre de {name} ¦ Древо: {name} ¦ Дерево: {name}
+Le quiz du repas ¦ Викторина за столом ¦ Вікторина за столом
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ На телевизоре, командами: вопросы по древу (кто на ком женился, где, какая профессия), обратный отсчёт и очки. ¦ На телевізорі, командами: запитання з дерева (хто з ким узяв шлюб, де, яка професія), зворотний відлік і очки.
+Les équipes (séparées par des virgules) ¦ Команды (через запятую) ¦ Команди (через кому)
+Les {name}, Les cousins ¦ Семья {name}, Кузены ¦ Родина {name}, Кузени
+Secondes pour répondre ¦ Секунд на ответ ¦ Секунд на відповідь
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Подключи компьютер к телевизору: вопрос и четыре ответа показываются крупно; в конце обратного отсчёта (или по <b>Enter</b>) появляется правильный ответ, затем очко получает команда, которая угадала (клавиши <b>1</b>–<b>9</b>). Отвечать с телефонов можно было бы, только если приложение доступно из всей домашней сети: пока это невозможно, играем перед экраном. ¦ Під’єднай комп’ютер до телевізора: запитання й чотири відповіді показуються великими; наприкінці зворотного відліку (або за <b>Enter</b>) з’являється правильна відповідь, потім очко отримує команда, яка вгадала (клавіші <b>1</b>–<b>9</b>). Відповідати з телефонів можна було б, лише якщо застосунок доступний з усієї домашньої мережі: поки це неможливо, граємо перед екраном.
+📺 Lancer le quiz ¦ 📺 Начать викторину ¦ 📺 Почати вікторину
+Un avant-goût ¦ Пробный образец ¦ Пробний зразок
+Créer et fabriquer ¦ Создавать и мастерить ¦ Створювати й майструвати
+Le faire-part d’un événement ¦ Извещение о событии ¦ Оголошення про подію
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Рождение, брак или смерть из древа: извещение составляется само, в стиле эпохи. ¦ Народження, шлюб або смерть із дерева: оголошення складається саме, у стилі епохи.
+L’événement ¦ Событие ¦ Подія
+Classique (1900) ¦ Классический (1900) ¦ Класичний (1900)
+Art déco (1925) ¦ Ар-деко (1925) ¦ Ар-деко (1925)
+Fleuri ¦ Цветочный ¦ Квітковий
+Deuil (liseré noir) ¦ Траурный (чёрная кайма) ¦ Жалобний (чорна облямівка)
+Romantique (dentelle, 1880) ¦ Романтический (кружево, 1880) ¦ Романтичний (мереживо, 1880)
+Art nouveau (1900) ¦ Модерн (1900) ¦ Модерн (1900)
+Champêtre (papier kraft) ¦ Деревенский (крафт-бумага) ¦ Сільський (крафт-папір)
+Bleu et or ¦ Синий с золотом ¦ Синій із золотом
+Layette (naissance) ¦ Для малыша (рождение) ¦ Для малюка (народження)
+Épuré ¦ Минималистичный ¦ Мінімалістичний
+🎨 Plus d’options ¦ 🎨 Больше настроек ¦ 🎨 Більше налаштувань
+Le format ¦ Формат ¦ Формат
+Carte A6 (portrait) ¦ Открытка A6 (книжная) ¦ Листівка A6 (книжкова)
+Marque-page ¦ Закладка ¦ Закладка
+Celle du style ¦ Как в стиле ¦ Як у стилі
+Écriture à la plume ¦ Письмо пером ¦ Письмо пером
+Élégante (Didot) ¦ Элегантный (Didot) ¦ Елегантний (Didot)
+Bâton ¦ Печатные буквы ¦ Друковані літери
+Les ornements ¦ Украшения ¦ Прикраси
+Ceux du style ¦ Как в стиле ¦ Як у стилі
+Mes couleurs ¦ Мои цвета ¦ Мої кольори
+La photo de la personne ¦ Фото человека ¦ Фото людини
+Sa forme ¦ Форма ¦ Форма
+Couleurs de la photo ¦ Цвета фото ¦ Кольори фото
+D’origine ¦ Исходные ¦ Початкові
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Текст (строка за строкой; * перед строкой = крупно) ¦ Текст (рядок за рядком; * перед рядком = великим)
+Le mur des signatures ¦ Стена подписей ¦ Стіна підписів
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Все подписи, найденные в записях актов, вырезанные и разложенные по эпохам: почерк каждого поколения. ¦ Усі підписи, знайдені в актових записах, вирізані й розкладені за епохами: почерк кожного покоління.
+La Belle Époque ¦ Прекрасная эпоха ¦ Прекрасна епоха
+L’affiche (image PNG) ¦ Плакат (изображение PNG) ¦ Плакат (зображення PNG)
+Lieux et voyages ¦ Места и путешествия ¦ Місця та подорожі
+Le film des migrations ¦ Фильм о миграциях ¦ Фільм про міграції
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Год за годом каждый перемещается по карте, от рождения до смерти; фильм записывается в видео. ¦ Рік за роком кожен переміщується мапою, від народження до смерті; фільм записується у відео.
+Durée du film ¦ Длительность фильма ¦ Тривалість фільму
+Sans carte ¦ Без карты ¦ Без мапи
+▶ Jouer ¦ ▶ Воспроизвести ¦ ▶ Відтворити
+{n} parcours, de {y0} à {y1} ¦ Маршрутов: {n}, с {y0} по {y1} ¦ Маршрутів: {n}, з {y0} по {y1}
+famille {name} ¦ семья {name} ¦ родина {name}
+Le fond de carte se charge… ¦ Подложка карты загружается… ¦ Підкладка мапи завантажується…
+{n} personne en vie ¦ Живых людей: {n} ¦ Живих людей: {n}
+Fond de carte © OpenStreetMap, Esri ¦ Подложка карты © OpenStreetMap, Esri ¦ Підкладка мапи © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Видео (WebM) ¦ Відео (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Во время записи фильм проигрывается один раз ¦ Під час запису фільм відтворюється один раз
+Cette image (PNG) ¦ Это изображение (PNG) ¦ Це зображення (PNG)
+Le film des migrations — {title} ¦ Фильм о миграциях — {title} ¦ Фільм про міграції — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Видео, записанное, пока фильм проигрывается ¦ Відео, записане, поки фільм відтворюється
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Деревня предков на карте Кассини и на современной карте, с занавесом, который можно сдвигать. ¦ Село предків на мапі Кассіні та на сучасній мапі, із завісою, яку можна посувати.
+Hier ¦ Вчера ¦ Учора
+Carte de Cassini (XVIIIe s.) ¦ Карта Кассини (XVIII в.) ¦ Мапа Кассіні (XVIII ст.)
+Cassini, exemplaire du roi ¦ Кассини, королевский экземпляр ¦ Кассіні, королівський примірник
+Carte d’État-major (1820-1866) ¦ Карта Генерального штаба (1820–1866) ¦ Мапа Генерального штабу (1820–1866)
+OpenHistoricalMap ¦ OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Сдвигай занавес (или стрелки на клавиатуре). ¦ Посувай завісу (або стрілки на клавіатурі).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Занавес между старой и современной картой ¦ Завіса між старою та сучасною мапою
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Карты: Géoplateforme IGN (Кассини, Генеральный штаб), © OpenStreetMap, Esri. На вкладке «Карта» режим «наложение» тоже сравнивает две подложки с прозрачностью. ¦ Мапи: Géoplateforme IGN (Кассіні, Генеральний штаб), © OpenStreetMap, Esri. На вкладці «Мапа» режим «накладання» теж порівнює дві підкладки з прозорістю.
+La promenade guidée ¦ Прогулка с гидом ¦ Прогулянка з гідом
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Места одной жизни по порядку, история каждого этапа читается вслух — даже без тебя, когда приходишь на место. ¦ Місця одного життя по черзі, історія кожного етапу читається вголос — навіть сама, коли приходиш на місце.
+La promenade de ¦ Прогулка по следам: ¦ Прогулянка слідами:
+Le parcours ¦ Маршрут ¦ Маршрут
+les lieux de sa vie ¦ места жизни ¦ місця життя
+les villages de ses ancêtres ¦ деревни предков ¦ села предків
+🔊 Tout le guide ¦ 🔊 Весь путеводитель ¦ 🔊 Увесь путівник
+📍 Me guider en marchant ¦ 📍 Вести меня во время прогулки ¦ 📍 Вести мене під час прогулянки
+⏹ Silence ¦ ⏹ Тишина ¦ ⏹ Тиша
+Le guide de la promenade, étape par étape ¦ Путеводитель прогулки, этап за этапом ¦ Путівник прогулянки, етап за етапом
+🔊 Écouter ¦ 🔊 Слушать ¦ 🔊 Слухати
+🧭 Itinéraire ¦ 🧭 Маршрут ¦ 🧭 Маршрут
+{km} km en tout (à vol d’oiseau) ¦ Всего {km} км (по прямой) ¦ Усього {km} км (по прямій)
+Outils malins ¦ Хитрые инструменты ¦ Кмітливі інструменти
+Dater une vieille photo ¦ Датировать старое фото ¦ Датувати старе фото
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Носитель, картон, одежда, причёски: диапазон лет и кто из древа это может быть. ¦ Носій, картон, одяг, зачіски: проміжок років і хто з дерева це може бути.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Отметь, что видишь на фото (один или несколько ответов на вопрос, или ничего, если не знаешь). Ориентиры намеренно широкие. ¦ Познач, що бачиш на фото (одна чи кілька відповідей на запитання, або нічого, якщо не знаєш). Орієнтири навмисно широкі.
+Le support ¦ Носитель ¦ Носій
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Посеребрённая металлическая пластина, как зеркало, в футляре ¦ Посріблена металева пластина, як дзеркало, у футлярі
+Image sur verre, dans un écrin (ambrotype) ¦ Изображение на стекле, в футляре (амбротипия) ¦ Зображення на склі, у футлярі (амбротипія)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Изображение на тонкой железной пластине, тёмное (ферротипия) ¦ Зображення на тонкій залізній пластині, темне (феротипія)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Маленькая карточка (6 × 10 см) на картоне: визитный портрет (carte de visite) ¦ Маленька картка (6 × 10 см) на картоні: візитний портрет (carte de visite)
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Большая карточка (11 × 16 см) на картоне: кабинетный портрет ¦ Велика картка (11 × 16 см) на картоні: кабінетний портрет
+Carte postale photo (dos imprimé « carte postale ») ¦ Фотооткрытка (на обороте напечатано «carte postale») ¦ Фотолистівка (на звороті надруковано «carte postale»)
+Tirage papier aux bords dentelés ¦ Бумажный отпечаток с фигурными краями ¦ Паперовий відбиток із фігурними краями
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Маленький чёрно-белый бумажный отпечаток без картона, с ровными белыми полями ¦ Маленький чорно-білий паперовий відбиток без картону, з рівними білими полями
+Photo couleur aux couleurs passées (orange, magenta) ¦ Цветное фото с выцветшими цветами (оранжевый, пурпурный) ¦ Кольорове фото з вицвілими кольорами (помаранчевий, пурпуровий)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Квадратный отпечаток с широкой белой рамкой (вроде Polaroid / Instamatic) ¦ Квадратний відбиток із широкою білою рамкою (на кшталт Polaroid / Instamatic)
+Le carton (carte de visite ou cabinet) ¦ Картон (визитный или кабинетный портрет) ¦ Картон (візитний або кабінетний портрет)
+Coins carrés, carton fin et clair ¦ Прямые углы, тонкий светлый картон ¦ Прямі кути, тонкий світлий картон
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Толстый цветной картон (кремовый, чёрный, бордовый), золочёный обрез ¦ Товстий кольоровий картон (кремовий, чорний, бордовий), позолочений обріз
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Имя фотографа большими узорными буквами на обороте, медали ¦ Ім’я фотографа великими візерунчастими літерами на звороті, медалі
+Bord biseauté doré ¦ Золочёный скошенный край ¦ Позолочений скошений край
+Les vêtements des femmes ¦ Женская одежда ¦ Жіночий одяг
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Очень широкая юбка колоколом (кринолин), покатые плечи ¦ Дуже широка спідниця дзвоном (кринолін), похилі плечі
+Jupe plate devant et gonflée derrière (tournure) ¦ Юбка, плоская спереди и пышная сзади (турнюр) ¦ Спідниця, пласка спереду й пишна ззаду (турнюр)
+Manches très bouffantes en haut (gigot) ¦ Рукава, очень пышные вверху («бараний окорок») ¦ Рукави, дуже пишні вгорі («баранячий окіст»)
+Silhouette en S, col montant, grand chapeau ¦ S-образный силуэт, высокий воротник, большая шляпа ¦ S-подібний силует, високий комір, великий капелюх
+Robe droite, taille basse, jupe au genou ¦ Прямое платье, заниженная талия, юбка до колена ¦ Пряма сукня, занижена талія, спідниця до коліна
+Épaules carrées, jupe sous le genou ¦ Квадратные плечи, юбка ниже колена ¦ Квадратні плечі, спідниця нижче коліна
+Jupe ample et taille fine (New Look) ¦ Пышная юбка и тонкая талия (New Look) ¦ Пишна спідниця й тонка талія (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Местный чепец или крестьянский платок ¦ Місцевий очіпок або селянська хустка
+Les coiffures ¦ Причёски ¦ Зачіски
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Прямой пробор, волосы прижаты к ушам ¦ Прямий проділ, волосся притиснуте до вух
+Frange frisée sur le front ¦ Завитая чёлка на лбу ¦ Завитий чубчик на лобі
+Chignon haut et volumineux ¦ Высокий пышный шиньон ¦ Високий пишний шиньйон
+Cheveux courts « à la garçonne » ¦ Короткая стрижка «гарсон» ¦ Коротка стрижка «гарсон»
+Mise en plis ondulée ¦ Волнистая укладка ¦ Хвиляста укладка
+Les hommes ¦ Мужчины ¦ Чоловіки
+Haut-de-forme ¦ Цилиндр ¦ Циліндр
+Canotier (chapeau de paille plat) ¦ Канотье (плоская соломенная шляпа) ¦ Канотьє (плаский солом’яний капелюх)
+Moustache fournie, sans barbe ¦ Густые усы, без бороды ¦ Густі вуса, без бороди
+Barbe entière fournie ¦ Густая окладистая борода ¦ Густа окладиста борода
+Col cassé et nœud papillon ¦ Воротник-стойка с отогнутыми уголками и галстук-бабочка ¦ Комір-стійка з відігнутими кутиками й краватка-метелик
+Uniforme bleu horizon ¦ Форма цвета «голубой горизонт» ¦ Однострій кольору «блакитний обрій»
+Costume trois-pièces large, chapeau mou ¦ Широкий костюм-тройка, мягкая шляпа ¦ Широкий костюм-трійка, м’який капелюх
+Pantalon pattes d’éléphant, cheveux longs ¦ Брюки-клёш, длинные волосы ¦ Штани-кльош, довге волосся
+Le décor ¦ Обстановка ¦ Обстановка
+Fond peint, colonne, balustrade, rideau drapé ¦ Нарисованный фон, колонна, балюстрада, драпированный занавес ¦ Намальоване тло, колона, балюстрада, драпірована завіса
+Fond uni, simple chaise ¦ Однотонный фон, простой стул ¦ Однотонне тло, простий стілець
+Dehors, photo prise sur le vif (pas en atelier) ¦ На улице, снимок с натуры (не в ателье) ¦ Надворі, знімок із натури (не в ательє)
+Et toi, que sais-tu ? ¦ А что знаешь ты? ¦ А що знаєш ти?
+Photographe ou date notée : de ¦ Фотограф или записанная дата: с ¦ Фотограф або записана дата: з
+Âge apparent de la personne ¦ Видимый возраст человека ¦ Видимий вік людини
+C’est ¦ Это ¦ Це
+un homme, un garçon ¦ мужчина, мальчик ¦ чоловік, хлопчик
+une femme, une fille ¦ женщина, девочка ¦ жінка, дівчинка
+Lieu (nom du photographe, ville) ¦ Место (имя фотографа, город) ¦ Місце (ім’я фотографа, місто)
+Coche au moins un indice ¦ Отметь хотя бы одну подсказку ¦ Познач хоча б одну підказку
+Les rappels de recherche ¦ Напоминания об исследованиях ¦ Нагадування про дослідження
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ «Ты не касался(ась) ветви FAURE уже 8 месяцев»: заснувшие ветви, чего в них не хватает, напоминание в один клик. ¦ «Ти не торкався(лася) гілки FAURE вже 8 місяців»: заснулі гілки, чого в них бракує, нагадування в один клік.
+Les branches de ¦ Ветви: ¦ Гілки:
+Endormie depuis au moins ¦ Спит не меньше ¦ Спить щонайменше
+peu importe ¦ неважно ¦ неважливо
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Это дата последнего изменения карточки в ветви. Напоминание создаётся в один клик: оно попадает в напоминания приложения (Списки → Напоминания) и в виджет «Скоро». ¦ Це дата останньої зміни картки в гілці. Нагадування створюється в один клік: воно потрапляє до нагадувань застосунку (Списки → Нагадування) і до віджета «Незабаром».
+Branche {name} ({first}) ¦ Ветвь {name} ({first}) ¦ Гілка {name} ({first})
+Reprendre la branche {name} ({first}) ¦ Вернуться к ветви {name} ({first}) ¦ Повернутися до гілки {name} ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Нет ветвей, которые спят так долго ¦ Немає гілок, які сплять так довго
+Les actes manquants ¦ Недостающие записи актов ¦ Відсутні актові записи
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Чего не хватает линии, по архивам, где искать (помощник вкладки «Исследования»). ¦ Чого бракує лінії, за архівами, де шукати (помічник вкладки «Дослідження»).
+Je regarde ce qui manque… ¦ Смотрю, чего не хватает… ¦ Дивлюся, чого бракує…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Помощник <b>«Чего не хватает?»</b> (вкладка «Исследования») перечисляет записи актов, которых не хватает линии, по архивным службам, с коммуной, годами и сериями для просмотра (акты гражданского состояния, десятилетние указатели, приходские книги, нотариусы, переписи, послужные списки), и ссылкой на FranceArchives. ¦ Помічник <b>«Чого бракує?»</b> (вкладка «Дослідження») перелічує актові записи, яких бракує лінії, за архівними службами, з комуною, роками та серіями для перегляду (акти цивільного стану, десятирічні покажчики, парафіяльні книги, нотаріуси, переписи, послужні списки), і посиланням на FranceArchives.
+{n} recherches à faire sur 6 générations ¦ Поисков на 6 поколений: {n} ¦ Пошуків на 6 поколінь: {n}
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Помощник «Чего не хватает?» на вкладке «Исследования» ¦ Помічник «Чого бракує?» на вкладці «Дослідження»
+Le thème d’époque ¦ Тема эпохи ¦ Тема епохи
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ Каждая карточка в цветах своего времени: пергамент, сепия, Прекрасная эпоха, ар-деко, Славное тридцатилетие. ¦ Кожна картка в кольорах свого часу: пергамент, сепія, Прекрасна епоха, ар-деко, Славне тридцятиріччя.
+Habiller chaque fiche aux couleurs de son époque ¦ Оформить каждую карточку в цветах её эпохи ¦ Оформити кожну картку в кольорах її епохи
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ Карточка предка принимает облик времени, когда он жил (его 25 лет): пергамент для Старого порядка, сепия для XIX века, ар-деко для ревущих двадцатых… Остальное приложение не меняется. Эта настройка хранится на этом компьютере. ¦ Картка предка набуває вигляду часу, коли він жив (його 25 років): пергамент для Старого порядку, сепія для XIX століття, ар-деко для ревучих двадцятих… Решта застосунку не змінюється. Це налаштування зберігається на цьому комп’ютері.
+📜 Ancien Régime ¦ 📜 Старый порядок ¦ 📜 Старий порядок
+avant ¦ до ¦ до
+🎖️ Révolution et Empire ¦ 🎖️ Революция и Империя ¦ 🎖️ Революція та Імперія
+🎩 Le XIXe siècle ¦ 🎩 XIX век ¦ 🎩 XIX століття
+🌿 La Belle Époque ¦ 🌿 Прекрасная эпоха ¦ 🌿 Прекрасна епоха
+🍸 Les années folles et la guerre ¦ 🍸 Ревущие двадцатые и война ¦ 🍸 Ревучі двадцяті та війна
+🚗 Les Trente Glorieuses ¦ 🚗 Славное тридцатилетие ¦ 🚗 Славне тридцятиріччя
+📻 Les années 70 et après ¦ 📻 70-е годы и позже ¦ 📻 70-ті роки й пізніше
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ Звёзды, Луна и планеты над деревней в ночь рождения: изображение, чтобы сохранить или подарить. ¦ Зорі, Місяць і планети над селом у ніч народження: зображення, щоб зберегти або подарувати.
+La naissance de ¦ Рождение: ¦ Народження:
+Vers quelle heure (heure solaire du lieu) ¦ Примерно в котором часу (солнечное время места) ¦ Приблизно о котрій годині (сонячний час місця)
+Nuit bleue ¦ Синяя ночь ¦ Синя ніч
+Affiche (fond crème) ¦ Плакат (кремовый фон) ¦ Плакат (кремове тло)
+Noir et or ¦ Чёрный с золотом ¦ Чорний із золотом
+Encre sur papier (à imprimer) ¦ Тушь на бумаге (для печати) ¦ Туш на папері (для друку)
+Aube (rose et bleu) ¦ Рассвет (розовый и синий) ¦ Світанок (рожевий і синій)
+Vert forêt ¦ Лесной зелёный ¦ Лісовий зелений
+Ronde ¦ Круглая ¦ Кругла
+Carrée ¦ Квадратная ¦ Квадратна
+Fenêtre en arc ¦ Арочное окно ¦ Аркове вікно
+Affiche ¦ Плакат ¦ Плакат
+A4 (portrait) ¦ A4 (книжная) ¦ A4 (книжкова)
+Élégante ¦ Элегантная ¦ Елегантна
+À la plume ¦ Пером ¦ Пером
+Les constellations ¦ Созвездия ¦ Сузір’я
+La Voie lactée (évocation) ¦ Млечный Путь (условно) ¦ Чумацький Шлях (умовно)
+Les repères (hauteur, directions) ¦ Ориентиры (высота, стороны света) ¦ Орієнтири (висота, сторони світу)
+✏️ Les textes ¦ ✏️ Тексты ¦ ✏️ Тексти
+(le nom) ¦ (имя) ¦ (ім’я)
+(le lieu et la date) ¦ (место и дата) ¦ (місце й дата)
+Dernière ligne ¦ Последняя строка ¦ Останній рядок
+(la lune, les planètes) ¦ (луна, планеты) ¦ (місяць, планети)
+Aussi rangée sur sa fiche ¦ Также сохранено на карточке ¦ Також збережено на картці
+{place} — {when}, vers {h} ¦ {place} — {when}, около {h} ¦ {place} — {when}, близько {h}
+pleine lune ¦ полнолуние ¦ повня
+Jupiter ¦ Юпитер ¦ Юпітер
+{list} brillait ¦ Было видно: {list} ¦ Було видно: {list}
+Grande Ourse ¦ Большая Медведица ¦ Велика Ведмедиця
+Orion ¦ Орион ¦ Оріон
+Cassiopée ¦ Кассиопея ¦ Кассіопея
+Lion ¦ Лев ¦ Лев
+Gémeaux ¦ Близнецы ¦ Близнята
+Bouvier ¦ Волопас ¦ Волопас
+Taureau ¦ Телец ¦ Телець
+Petite Ourse ¦ Малая Медведица ¦ Мала Ведмедиця
+Cocher ¦ Возничий ¦ Візничий
+Grand Chien ¦ Большой Пёс ¦ Великий Пес
+Vierge ¦ Дева ¦ Діва
+boussole|N ¦ С ¦ Пн
+boussole|E ¦ В ¦ Сх
+boussole|S ¦ Ю ¦ Пд
+boussole|O ¦ З ¦ Зх
+{n} % éclairée ¦ освещена на {n} % ¦ освітлений на {n} %
+coucher du soleil vers {h} ¦ закат около {h} ¦ захід сонця близько {h}
+lever vers {h} ¦ восход около {h} ¦ схід близько {h}
+{n} étoiles brillantes au-dessus de l’horizon ¦ Ярких звёзд над горизонтом: {n} ¦ Яскравих зір над обрієм: {n}
+Allumer une bougie ¦ Зажечь свечу ¦ Запалити свічку
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ Свеча для предка, с несколькими словами: она горит семь дней. Ближайшие годовщины рождения и смерти. ¦ Свічка для предка, з кількома словами: вона горить сім днів. Найближчі річниці народження та смерті.
+{n} bougie allumée ¦ Зажжено свечей: {n} ¦ Запалено свічок: {n}
+{n} au registre ¦ В журнале: {n} ¦ У журналі: {n}
+Aucune bougie allumée en ce moment ¦ Сейчас не горит ни одной свечи ¦ Зараз не горить жодна свічка
+📅 Dans les trente jours ¦ 📅 В ближайшие тридцать дней ¦ 📅 Протягом найближчих тридцяти днів
+{n} ans de sa naissance ({date}) ¦ {n}-я годовщина рождения ({date}) ¦ {n}-та річниця народження ({date})
+dans {n} jours ¦ через {n} дн. ¦ через {n} дн.
+{n} ans de son décès ({date}) ¦ {n}-я годовщина смерти ({date}) ¦ {n}-та річниця смерті ({date})
+L’ambiance sonore d’époque ¦ Звуки эпохи ¦ Звуки епохи
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ Огонь и часы на посиделках, воскресные колокола, кузница, вокзал, мельница: звуки времени предков. ¦ Вогонь і годинник на посиденьках, недільні дзвони, кузня, вокзал, млин: звуки часу предків.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 Посиделки у очага (около 1880) ¦ 🔥 Посиденьки біля вогнища (близько 1880)
+🔔 Le village un dimanche matin ¦ 🔔 Деревня воскресным утром ¦ 🔔 Село в неділю вранці
+⚒️ L’atelier du forgeron ¦ ⚒️ Кузница ¦ ⚒️ Кузня
+🚂 La gare (vers 1900) ¦ 🚂 Вокзал (около 1900) ¦ 🚂 Вокзал (близько 1900)
+💧 Le moulin au bord de l’eau ¦ 💧 Мельница у воды ¦ 💧 Млин біля води
+🌧️ La nuit d’orage ¦ 🌧️ Грозовая ночь ¦ 🌧️ Грозова ніч
+🌊 Le port ¦ 🌊 Порт ¦ 🌊 Порт
+🐓 La ferme au petit matin ¦ 🐓 Ферма ранним утром ¦ 🐓 Ферма раннього ранку
+🌙 Une nuit d’été à la campagne ¦ 🌙 Летняя ночь в деревне ¦ 🌙 Літня ніч у селі
+🧺 Le lavoir ¦ 🧺 Прачечная у реки ¦ 🧺 Пральня біля річки
+🧺 Le jour de marché ¦ 🧺 Базарный день ¦ 🧺 Базарний день
+🍷 Le café du village ¦ 🍷 Деревенское кафе ¦ 🍷 Сільська кав’ярня
+🪗 Le bal musette ¦ 🪗 Бал-мюзет ¦ 🪗 Бал-мюзет
+⛪ La messe à l’église ¦ ⛪ Месса в церкви ¦ ⛪ Меса в церкві
+🪡 L’atelier de couture ¦ 🪡 Швейная мастерская ¦ 🪡 Швейна майстерня
+🧵 La filature et le tissage ¦ 🧵 Прядильня и ткачество ¦ 🧵 Прядильня й ткацтво
+🧶 La veillée des fileuses ¦ 🧶 Посиделки прядильщиц ¦ 🧶 Вечорниці прядильниць
+🪚 L’atelier du menuisier ¦ 🪚 Столярная мастерская ¦ 🪚 Столярня
+🏫 La classe (vers 1900) ¦ 🏫 Класс (около 1900) ¦ 🏫 Клас (близько 1900)
+✒️ L’étude du notaire ¦ ✒️ Контора нотариуса ¦ ✒️ Контора нотаріуса
+🌾 Les moissons ¦ 🌾 Жатва ¦ 🌾 Жнива
+🐝 Le rucher ¦ 🐝 Пасека ¦ 🐝 Пасіка
+🐴 La route en diligence ¦ 🐴 Дорога в дилижансе ¦ 🐴 Дорога в диліжансі
+Ou celle du métier de ¦ Или звуки профессии: ¦ Або звуки професії:
+▶ Écouter ¦ ▶ Слушать ¦ ▶ Слухати
+🔈 Volume ¦ 🔈 Громкость ¦ 🔈 Гучність
+⏲️ S’arrêter après ¦ ⏲️ Остановить через ¦ ⏲️ Зупинити через
+Un mélange au hasard de 3 à 5 couches ¦ Случайная смесь из 3–5 слоёв ¦ Випадкова суміш із 3–5 шарів
+🎲 Au hasard ¦ 🎲 Случайно ¦ 🎲 Випадково
+Tout à zéro ¦ Всё на ноль ¦ Усе на нуль
+Durée du fichier son ¦ Длительность звукового файла ¦ Тривалість звукового файлу
+⭐ Mes ambiances ¦ ⭐ Мои атмосферы ¦ ⭐ Мої атмосфери
+💾 Garder ce mélange ¦ 💾 Сохранить эту смесь ¦ 💾 Зберегти цю суміш
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Всё создаётся компьютером из шума и чистых тонов: это образ, а не запись. Настрой каждый слой по вкусу (слоёв: {n}). ¦ Усе створюється комп’ютером із шуму й чистих тонів: це образ, а не запис. Налаштуй кожен шар до смаку (шарів: {n}).
+Chercher une couche (cloches, eau, atelier…) ¦ Искать слой (колокола, вода, мастерская…) ¦ Шукати шар (дзвони, вода, майстерня…)
+Chercher une couche ¦ Искать слой ¦ Шукати шар
+🌬️ Le vent ¦ 🌬️ Ветер ¦ 🌬️ Вітер
+🌧️ La pluie ¦ 🌧️ Дождь ¦ 🌧️ Дощ
+🔥 Le feu de cheminée ¦ 🔥 Огонь в камине ¦ 🔥 Вогонь у каміні
+🕰️ L’horloge comtoise ¦ 🕰️ Напольные часы ¦ 🕰️ Підлоговий годинник
+🔔 Les cloches du village ¦ 🔔 Деревенские колокола ¦ 🔔 Сільські дзвони
+⚒️ L’enclume du forgeron ¦ ⚒️ Наковальня кузнеца ¦ ⚒️ Ковадло коваля
+🐦 Les oiseaux ¦ 🐦 Птицы ¦ 🐦 Птахи
+💧 La rivière et le moulin ¦ 💧 Река и мельница ¦ 💧 Річка й млин
+🚂 Le train à vapeur ¦ 🚂 Паровоз ¦ 🚂 Паротяг
+🌊 La mer ¦ 🌊 Море ¦ 🌊 Море
+🦗 Les grillons ¦ 🦗 Сверчки ¦ 🦗 Цвіркуни
+🐸 Les grenouilles de la mare ¦ 🐸 Лягушки в пруду ¦ 🐸 Жаби у ставку
+🦉 La chouette ¦ 🦉 Сова ¦ 🦉 Сова
+🐓 Le coq ¦ 🐓 Петух ¦ 🐓 Півень
+🐄 Les sonnailles des vaches ¦ 🐄 Коровьи колокольчики ¦ 🐄 Коров’ячі дзвіночки
+🐴 Les sabots du cheval ¦ 🐴 Конские копыта ¦ 🐴 Кінські копита
+🛞 La charrette sur les pavés ¦ 🛞 Телега по булыжнику ¦ 🛞 Віз по бруківці
+🐝 Les abeilles du rucher ¦ 🐝 Пчёлы на пасеке ¦ 🐝 Бджоли на пасіці
+🌾 Le vent dans les blés ¦ 🌾 Ветер в пшенице ¦ 🌾 Вітер у пшениці
+⛈️ Le tonnerre au loin ¦ ⛈️ Далёкий гром ¦ ⛈️ Далекий грім
+⛲ La fontaine du lavoir ¦ ⛲ Фонтан у прачечной ¦ ⛲ Фонтан біля пральні
+🧺 Les battoirs des lavandières ¦ 🧺 Вальки прачек ¦ 🧺 Праники праль
+🧶 Le rouet qui file ¦ 🧶 Прялка за работой ¦ 🧶 Прядка за роботою
+🧵 Le métier à tisser ¦ 🧵 Ткацкий станок ¦ 🧵 Ткацький верстат
+🪡 La machine à coudre ¦ 🪡 Швейная машинка ¦ 🪡 Швейна машинка
+🪚 La scie du menuisier ¦ 🪚 Пила столяра ¦ 🪚 Пилка столяра
+✒️ La plume sur le papier ¦ ✒️ Перо по бумаге ¦ ✒️ Перо по папері
+🗣️ Le murmure de la foule ¦ 🗣️ Гул толпы ¦ 🗣️ Гомін натовпу
+🍷 Les verres du café ¦ 🍷 Бокалы в кафе ¦ 🍷 Келихи в кав’ярні
+⛪ L’orgue de l’église ¦ ⛪ Церковный орган ¦ ⛪ Церковний орган
+🪗 L’accordéon du bal musette ¦ 🪗 Аккордеон на бал-мюзете ¦ 🪗 Акордеон на бал-мюзеті
+🏫 La craie au tableau ¦ 🏫 Мел по доске ¦ 🏫 Крейда по дошці
+🪵 Le bois qui craque ¦ 🪵 Треск дерева ¦ 🪵 Тріск дерева
+👣 Des pas sur le gravier ¦ 👣 Шаги по гравию ¦ 👣 Кроки по гравію
+🕊️ Les mouettes ¦ 🕊️ Чайки ¦ 🕊️ Чайки
+🎶 Le bourdon de la vielle ¦ 🎶 Бурдон колёсной лиры ¦ 🎶 Бурдон колісної ліри
+© Crédits et droits des sons ¦ © Авторы и права на звуки ¦ © Автори та права на звуки
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Никакие записи не используются: <b>каждый звук вычисляется твоим браузером</b> в момент прослушивания (Web Audio) из шума и чистых тонов. Поэтому указывать некого, кроме LCNDA, и ничего не скачивается. ¦ Жодні записи не використовуються: <b>кожен звук обчислюється твоїм браузером</b> у момент прослуховування (Web Audio) із шуму й чистих тонів. Тож зазначати нікого, крім LCNDA, і нічого не завантажується.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Свободны от прав</b>: их можно слушать, записывать, вставлять в монтаж или презентацию, даже делиться ими, ни у кого не спрашивая (как общественное достояние, CC0). ¦ <b>Вільні від прав</b>: їх можна слухати, записувати, вставляти в монтаж або презентацію, навіть ділитися ними, нікого не питаючи (як суспільне надбання, CC0).
+bruit blanc filtré, qui ondule lentement ¦ фильтрованный белый шум, медленно колеблющийся ¦ фільтрований білий шум, що повільно коливається
+bruit aigu et milliers de petites gouttes au hasard ¦ высокий шум и тысячи случайных капелек ¦ високий шум і тисячі випадкових крапельок
+bruit grave et crépitements au hasard ¦ низкий шум и случайное потрескивание ¦ низький шум і випадкове потріскування
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ два «тика» из чистых тонов, бой каждые 40 секунд ¦ два «тіки» з чистих тонів, бій кожні 40 секунд
+sons purs aux harmoniques des cloches de bronze ¦ чистые тоны с обертонами бронзовых колоколов ¦ чисті тони з обертонами бронзових дзвонів
+coups métalliques : trois sons purs qui s’éteignent ¦ металлические удары: три затухающих чистых тона ¦ металеві удари: три чисті тони, що згасають
+petits sifflets de sons purs qui montent ¦ короткие восходящие свисты из чистых тонов ¦ короткі висхідні свисти з чистих тонів
+bruit filtré et le battement grave de la roue ¦ фильтрованный шум и низкий стук колеса ¦ фільтрований шум і низький стукіт колеса
+souffles de vapeur rythmés et un sifflet à deux notes ¦ ритмичные выдохи пара и двухтонный свисток ¦ ритмічні видихи пари й двотоновий свисток
+bruit grave qui monte et descend comme les vagues ¦ низкий шум, который нарастает и спадает, как волны ¦ низький шум, що наростає й спадає, як хвилі
+trilles de sons purs très aigus ¦ трели из очень высоких чистых тонов ¦ трелі з дуже високих чистих тонів
+sons en dents de scie qui montent ¦ восходящие пилообразные звуки ¦ висхідні пилкоподібні звуки
+trois sons purs graves qui glissent ¦ три низких скользящих чистых тона ¦ три низькі ковзні чисті тони
+trois sons qui montent puis retombent ¦ три звука, которые поднимаются и опускаются ¦ три звуки, що піднімаються й опускаються
+sons métalliques aux harmoniques de cloche ¦ металлические звуки с колокольными обертонами ¦ металеві звуки з дзвоновими обертонами
+petits chocs de bruit au rythme du pas ¦ короткие удары шума в ритме шага ¦ короткі удари шуму в ритмі кроку
+grondement grave qui tremble et cailloux de bruit ¦ низкий дрожащий гул и шумовые камешки ¦ низький тремтливий гул і шумові камінці
+trois notes graves qui vibrent ¦ три низкие вибрирующие ноты ¦ три низькі вібрівні ноти
+bruit très aigu qui ondule ¦ очень высокий колеблющийся шум ¦ дуже високий шум, що коливається
+grondements de bruit très grave ¦ раскаты очень низкого шума ¦ гуркіт дуже низького шуму
+bruit d’eau et gouttes de sons purs ¦ шум воды и капли из чистых тонов ¦ шум води й краплі з чистих тонів
+deux chocs sourds ¦ два глухих удара ¦ два глухі удари
+ronronnement et petit clic de la roue ¦ жужжание и тихий щелчок колеса ¦ дзижчання й тихе клацання колеса
+le claquement de la navette et le coup du battant ¦ стук челнока и удар батана ¦ стукіт човника й удар берда
+cliquetis rapides par séries ¦ быстрые серии щелчков ¦ швидкі серії клацань
+bruit filtré qui va et vient ¦ фильтрованный шум, который то нарастает, то стихает ¦ фільтрований шум, що то наростає, то стихає
+grattements de bruit aigu ¦ скрежет высокого шума ¦ скрегіт високого шуму
+quatre bandes de bruit qui imitent les voix ¦ четыре полосы шума, имитирующие голоса ¦ чотири смуги шуму, що імітують голоси
+tintements de sons purs ¦ звон чистых тонов ¦ дзенькіт чистих тонів
+accords tenus de sons doux ¦ протяжные аккорды мягких звуков ¦ протяжні акорди м’яких звуків
+une petite valse de sons en dents de scie, basse et accords ¦ маленький вальс из пилообразных звуков, бас и аккорды ¦ маленький вальс із пилкоподібних звуків, бас і акорди
+traits de bruit et le petit coup du point ¦ штрихи шума и лёгкий удар точки ¦ штрихи шуму й легкий удар крапки
+craquements de bruit ¦ потрескивание шума ¦ потріскування шуму
+pas de bruit filtré ¦ шаги из фильтрованного шума ¦ кроки з фільтрованого шуму
+cris en dents de scie qui descendent ¦ нисходящие пилообразные крики ¦ низхідні пилкоподібні крики
+trois notes graves tenues, qui vibrent un peu ¦ три низкие протяжные ноты с лёгкой вибрацией ¦ три низькі протяжні ноти з легкою вібрацією
+Fichier son (WebM) ¦ Звуковой файл (WebM) ¦ Звуковий файл (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ То, что слышно, в течение выбранного времени ¦ Те, що чути, протягом вибраного часу
+L’arbre qui pousse ¦ Растущее древо ¦ Дерево, що росте
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ Потомки предка появляются год за годом, ветви растут, листья желтеют. ¦ Нащадки предка з’являються рік за роком, гілки ростуть, листя жовтіє.
+▶ Faire pousser ¦ ▶ Вырастить ¦ ▶ Виростити
+lente ¦ медленно ¦ повільно
+normale ¦ обычно ¦ звичайно
+rapide ¦ быстро ¦ швидко
+La musique de l’arbre ¦ Музыка древа ¦ Музика дерева
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ Древо, сыгранное как партитура: нота на каждое рождение, аккорд на каждый брак; слушать или скачать. ¦ Дерево, зігране як партитура: нота на кожне народження, акорд на кожен шлюб; слухати або завантажити.
+tout l’arbre ¦ всё древо ¦ усе дерево
+Tempo ¦ Темп ¦ Темп
+lent ¦ медленный ¦ повільний
+normal ¦ обычный ¦ звичайний
+vif ¦ живой ¦ жвавий
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ Каждое рождение — нота: выше для близких поколений, длиннее для долгой жизни, мягче по тембру для женщин; каждый брак — аккорд; каждая смерть — низкая нота. ¦ Кожне народження — нота: вища для близьких поколінь, довша для довгого життя, м’якша за тембром для жінок; кожен шлюб — акорд; кожна смерть — низька нота.
+Fichier son (WAV) ¦ Звуковой файл (WAV) ¦ Звуковий файл (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ Рождений: {b}, браков: {m}, смертей: {d} — секунд: {s} ¦ Народжень: {b}, шлюбів: {m}, смертей: {d} — секунд: {s}
+La chasse au trésor ¦ Охота за сокровищами ¦ Полювання на скарб
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Загадки о предках, спрятанные в доме: только правильный ответ ведёт к следующему тайнику. ¦ Загадки про предків, сховані в домі: лише правильна відповідь веде до наступної схованки.
+🗝️ Préparer la chasse ¦ 🗝️ Подготовить охоту ¦ 🗝️ Підготувати полювання
+Le nom de la chasse ¦ Название охоты ¦ Назва полювання
+La chasse au trésor de la famille {name} ¦ Охота за сокровищами семьи {name} ¦ Полювання на скарб родини {name}
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ Тайники по порядку (по одному в строке; последний — тайник с сокровищем) ¦ Схованки по черзі (по одній у рядку; остання — схованка зі скарбом)
+sous le paillasson ¦ под ковриком у двери ¦ під килимком біля дверей
+dans la boîte aux lettres ¦ в почтовом ящике ¦ у поштовій скриньці
+derrière l’horloge ¦ за часами ¦ за годинником
+au fond du placard de l’entrée ¦ в глубине шкафа в прихожей ¦ у глибині шафи в передпокої
+Le trésor (ce qu’on trouve à la fin) ¦ Сокровище (что находят в конце) ¦ Скарб (що знаходять наприкінці)
+le gâteau d’anniversaire de Mamie ¦ бабушкин торт на день рождения ¦ бабусин торт на день народження
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ Каждая загадка — об одном предке; каждый ответ ведёт к тайнику: чтобы найти продолжение, нужен правильный ответ. ¦ Кожна загадка — про одного предка; кожна відповідь веде до схованки: щоб знайти продовження, потрібна правильна відповідь.
+L’ancêtre mystère ¦ Таинственный предок ¦ Таємничий предок
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ Спрятанный предок и подсказки одна за другой: каждый день один и тот же для всей семьи. Кто найдёт быстрее? ¦ Схований предок і підказки одна за одною: щодня той самий для всієї родини. Хто знайде швидше?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ Таинственный предок {date} ¦ 🕵️ Таємничий предок {date}
+Proposer ¦ Предложить ¦ Запропонувати
+Un indice de plus ({n}) ¦ Ещё одна подсказка ({n}) ¦ Ще одна підказка ({n})
+Je donne ma langue au chat ¦ Сдаюсь ¦ Здаюся
+Trouvé maintenant : {n} points. ¦ Угадаешь сейчас — очков: {n}. ¦ Вгадаєш зараз — очок: {n}.
+Le livre dont tu es le héros ¦ Книга, где ты — герой ¦ Книга, де ти — герой
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Проживи жизнь предка и сделай его выбор — профессия, брак, отъезд, — а потом узнай, что он выбрал на самом деле. ¦ Проживи життя предка й зроби його вибір — професія, шлюб, від’їзд, — а потім дізнайся, що він вибрав насправді.
+Tu seras ¦ Ты будешь ¦ Ти будеш
+📖 Commencer l’histoire ¦ 📖 Начать историю ¦ 📖 Почати історію
+Les coïncidences ¦ Совпадения ¦ Збіги
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Родились в один день, умер в свой день рождения, поженились день в день с разницей в сто лет: случайности древа. ¦ Народилися в один день, помер у свій день народження, узяли шлюб день у день із різницею в сто років: випадковості дерева.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Чем больше в древе точных дат (день и месяц), тем их больше. ¦ Що більше в дереві точних дат (день і місяць), то їх більше.
+« Et si… » ¦ «А что, если…» ¦ «А що, якби…»
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ А что, если бы эти двое не встретились? Все жизни, которых никогда бы не было, — может быть, и твоей. ¦ А що, якби ці двоє не зустрілися? Усі життя, яких ніколи б не було, — можливо, і твого.
+Et si… ¦ А что, если бы… ¦ А що, якби…
+ces deux-là ne s’étaient jamais rencontrés ¦ эти двое никогда не встретились ¦ ці двоє ніколи не зустрілися
+cette personne n’avait pas vécu ¦ этого человека не было ¦ цієї людини не було
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 Жизней, которых никогда бы не было: {n} ¦ 🦋 Життів, яких ніколи б не було: {n}
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ {pct} % древа, из них живы сегодня: {who}. ¦ {pct} % дерева, з них живі сьогодні: {who}.
+Et {name} non plus. ¦ И {name} тоже. ¦ І {name} теж.
+La broderie au point de croix ¦ Вышивка крестиком ¦ Вишивка хрестиком
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ Старинная метка: фамилия, пара, дата, древо; схема и нитки. ¦ Старовинна мітка: прізвище, пара, дата, дерево; схема й нитки.
+FAMILLE {name} ¦ СЕМЬЯ {name} ¦ РОДИНА {name}
+La date ¦ Дата ¦ Дата
+Le lieu (facultatif) ¦ Место (необязательно) ¦ Місце (необов’язково)
+La couleur du titre ¦ Цвет заголовка ¦ Колір заголовка
+Brun ¦ Коричневый ¦ Коричневий
+Bleu ciel ¦ Небесно-голубой ¦ Небесно-блакитний
+La couleur du couple ¦ Цвет пары ¦ Колір пари
+Le titre en grandes lettres (double) ¦ Заголовок крупными буквами (двойной) ¦ Заголовок великими літерами (подвійний)
+Le motif ¦ Узор ¦ Візерунок
+❤️ Le cœur ¦ ❤️ Сердце ¦ ❤️ Серце
+👑 Le cœur couronné ¦ 👑 Сердце с короной ¦ 👑 Серце з короною
+🌷 Les tulipes ¦ 🌷 Тюльпаны ¦ 🌷 Тюльпани
+⛪ L’église ¦ ⛪ Церковь ¦ ⛪ Церква
+🕊️ Les colombes ¦ 🕊️ Голуби ¦ 🕊️ Голуби
+— Aucun motif ¦ — Без узора ¦ — Без візерунка
+Ses couleurs ¦ Его цвета ¦ Його кольори
+celle du motif ¦ как у узора ¦ як у візерунка
+Deux petits cœurs de chaque côté ¦ Два маленьких сердечка по бокам ¦ Два маленькі сердечка з боків
+La bordure ¦ Кайма ¦ Облямівка
+· Les points (à l’ancienne) ¦ · Точки (по-старинному) ¦ · Крапки (по-старовинному)
+♥ La frise de cœurs ¦ ♥ Фриз из сердечек ¦ ♥ Фриз із сердечок
+⌇ La frise en zigzag ¦ ⌇ Фриз зигзагом ¦ ⌇ Фриз зигзагом
+▭ Le double trait ¦ ▭ Двойная линия ¦ ▭ Подвійна лінія
+— Sans bordure ¦ — Без каймы ¦ — Без облямівки
+La toile ¦ Канва ¦ Канва
+Aïda 11 ¦ Аида 11 ¦ Аїда 11
+Aïda 14 ¦ Аида 14 ¦ Аїда 14
+Aïda 16 ¦ Аида 16 ¦ Аїда 16
+Aïda 18 ¦ Аида 18 ¦ Аїда 18
+Lin 28 fils (un point sur 2 fils) ¦ Лён 28 нитей (крестик через 2 нити) ¦ Льон 28 ниток (хрестик через 2 нитки)
+Sa couleur (aperçu) ¦ Её цвет (предпросмотр) ¦ Її колір (попередній перегляд)
+Écru ¦ Небелёный ¦ Небілений
+Lin ¦ Лён ¦ Льон
+Bleu nuit ¦ Тёмно-синий ¦ Темно-синій
+l’aperçu brodé ¦ вышитый вид ¦ вишитий вигляд
+la grille à symboles ¦ схема с символами ¦ схема із символами
+La grille (dessin SVG) ¦ Схема (рисунок SVG) ¦ Схема (малюнок SVG)
+L’aperçu brodé (image PNG) ¦ Вышитый вид (изображение PNG) ¦ Вишитий вигляд (зображення PNG)
+La grille à symboles et la liste des fils ¦ Схема с символами и список ниток ¦ Схема із символами та список ниток
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} крестиков · на {cloth}: {cw} × {ch} см (оставь 5 см запаса со всех сторон) ¦ {w} × {h} хрестиків · на {cloth}: {cw} × {ch} см (залиш 5 см запасу з усіх боків)
+{n} points ¦ Крестиков: {n} ¦ Хрестиків: {n}
+La gravure au laser ¦ Лазерная гравировка ¦ Лазерне гравіювання
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ Веер предков в файле SVG в натуральную величину, готовый для лазерного гравёра (гравировка и резка). ¦ Віяло предків у файлі SVG у натуральну величину, готовий для лазерного гравера (гравіювання й різання).
+Les ancêtres de ¦ Предки: ¦ Предки:
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ Файл в натуральную величину, в миллиметрах: <b>чёрное = гравировка</b> (линии и имена), <b>красное = резка</b> (контур, тонкая линия). Подходит для LightBurn, Glowforge, xTool, Inkscape. Всегда проверяй размер при импорте. ¦ Файл у натуральну величину, у міліметрах: <b>чорне = гравіювання</b> (лінії та імена), <b>червоне = різання</b> (контур, тонка лінія). Підходить для LightBurn, Glowforge, xTool, Inkscape. Завжди перевіряй розмір під час імпорту.
+Dessin SVG pour la graveuse ¦ Рисунок SVG для гравёра ¦ Малюнок SVG для гравера
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ В натуральную величину: чёрное = гравировка, красное = резка ¦ У натуральну величину: чорне = гравіювання, червоне = різання
+La mosaïque de portraits ¦ Мозаика из портретов ¦ Мозаїка з портретів
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ Все лица древа на одном изображении или портрет, собранный из лиц всей семьи. ¦ Усі обличчя дерева на одному зображенні або портрет, складений з облич усієї родини.
+Je rassemble les visages… ¦ Собираю лица… ¦ Збираю обличчя…
+La mosaïque ¦ Мозаика ¦ Мозаїка
+tous les visages, en grille ¦ все лица сеткой ¦ усі обличчя сіткою
+un portrait refait avec tous les autres ¦ портрет, собранный из всех остальных ¦ портрет, складений з усіх інших
+Le portrait à refaire ¦ Портрет, который нужно собрать ¦ Портрет, який треба скласти
+Finesse ¦ Детальность ¦ Деталізація
+Le visage de la lignée ¦ Лицо рода ¦ Обличчя роду
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ От отца к отцу или от матери к матери: лица рядом, плавный переход и среднее лицо поколений. ¦ Від батька до батька або від матері до матері: обличчя поруч, плавний перехід і середнє обличчя поколінь.
+La lignée ¦ Линия ¦ Лінія
+de père en père ¦ от отца к отцу ¦ від батька до батька
+de mère en mère ¦ от матери к матери ¦ від матері до матері
+▶ Le fondu ¦ ▶ Плавный переход ¦ ▶ Плавний перехід
+Les visages (image PNG) ¦ Лица (изображение PNG) ¦ Обличчя (зображення PNG)
+Le visage moyen de {n} générations ¦ Среднее лицо поколений: {n} ¦ Середнє обличчя поколінь: {n}
+Le fondu ¦ Плавный переход ¦ Плавний перехід
+La gazette de l’année ¦ Газета года ¦ Газета року
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ Первая полоса газеты за один год семьи: браки, рождения, новости наших, цена хлеба. ¦ Перша шпальта газети за один рік родини: шлюби, народження, новини наших, ціна хліба.
+Les années les plus riches : ¦ Самые насыщенные годы: ¦ Найнасиченіші роки:
+🎨 Le style du journal ¦ 🎨 Стиль газеты ¦ 🎨 Стиль газети
+📜 Ancien (1900) ¦ 📜 Старинный (1900) ¦ 📜 Старовинний (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Иллюстрированное приложение (в цвете) ¦ 🎨 Ілюстрований додаток (у кольорі)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ Ежедневная газета (газетная бумага) ¦ 🗞️ Щоденна газета (газетний папір)
+🎩 Années 30 ¦ 🎩 30-е годы ¦ 🎩 30-ті роки
+◻️ Moderne ¦ ◻️ Современный ¦ ◻️ Сучасний
+💖 Magazine ¦ 💖 Журнал ¦ 💖 Журнал
+📣 À sensation (gros titres) ¦ 📣 Сенсационный (крупные заголовки) ¦ 📣 Сенсаційний (великі заголовки)
+🧸 Le journal des enfants ¦ 🧸 Детская газета ¦ 🧸 Дитяча газета
+Le nom du journal ¦ Название газеты ¦ Назва газети
+Le bandeau ¦ Шапка ¦ Шапка
+Édition unique ¦ Единственный выпуск ¦ Єдиний випуск
+Le papier ¦ Бумага ¦ Папір
+Celui du style ¦ Как в стиле ¦ Як у стилі
+Crème ¦ Кремовая ¦ Кремовий
+Jauni ¦ Пожелтевшая ¦ Пожовклий
+Papier journal ¦ Газетная бумага ¦ Газетний папір
+Ma couleur ¦ Мой цвет ¦ Мій колір
+Les colonnes ¦ Колонки ¦ Колонки
+L’article de une ¦ Главная статья ¦ Головна стаття
+Les nouvelles ¦ Новости ¦ Новини
+Le coin pratique ¦ Полезный уголок ¦ Корисний куточок
+5 centimes ¦ 5 сантимов ¦ 5 сантимів
+Prix : {price} ¦ Цена: {price} ¦ Ціна: {price}
+{n} membres de la famille en vie ¦ Живых членов семьи: {n} ¦ Живих членів родини: {n}
+Carnet ¦ Хроника ¦ Хроніка
+Nouvelles des nôtres ¦ Новости наших ¦ Новини наших
+Anniversaires ¦ Дни рождения ¦ Дні народження
+{n} centimes ¦ {n} сант. ¦ {n} сант.
+Le kilo de pain : environ {price}. ¦ Килограмм хлеба: около {price}. ¦ Кілограм хліба: близько {price}.
+Qui fait quoi ¦ Кто чем занят ¦ Хто чим займається
+Composée à partir de l’arbre de famille · {y} ¦ Составлено по семейному древу · {y} ¦ Складено за родинним деревом · {y}
+Le fond d’écran du jour ¦ Обои дня ¦ Шпалери дня
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ Каждый день предок на картинке размером с твой экран: цвета, узор, фото, тексты, календарь… всё настраивается. ¦ Щодня предок на картинці розміром із твій екран: кольори, візерунок, фото, тексти, календар… усе налаштовується.
+L’ANCÊTRE DU JOUR ¦ ПРЕДОК ДНЯ ¦ ПРЕДОК ДНЯ
+Ordinateur ¦ Компьютер ¦ Комп’ютер
+Grand écran (2K) ¦ Большой экран (2K) ¦ Великий екран (2K)
+Écran 4K ¦ Экран 4K ¦ Екран 4K
+Écran très large ¦ Очень широкий экран ¦ Дуже широкий екран
+Mac Retina ¦ Mac Retina ¦ Mac Retina
+Tablette ¦ Планшет ¦ Планшет
+Tablette debout ¦ Планшет вертикально ¦ Планшет вертикально
+Téléphone Android ¦ Телефон Android ¦ Телефон Android
+L’ancêtre (celui du jour par défaut) ¦ Предок (по умолчанию — предок дня) ¦ Предок (типово — предок дня)
+🎨 Couleurs et fond ¦ 🎨 Цвета и фон ¦ 🎨 Кольори та тло
+Les couleurs ¦ Цвета ¦ Кольори
+Selon l’époque de l’ancêtre ¦ По эпохе предка ¦ За епохою предка
+Crème et encre ¦ Кремовый и чернила ¦ Кремовий і чорнило
+Vert sauge ¦ Шалфейный зелёный ¦ Шавлієвий зелений
+Océan ¦ Океан ¦ Океан
+Poudre ¦ Пудровый ¦ Пудровий
+Le dégradé ¦ Градиент ¦ Градієнт
+En biais ¦ По диагонали ¦ По діагоналі
+De haut en bas ¦ Сверху вниз ¦ Згори донизу
+De gauche à droite ¦ Слева направо ¦ Зліва направо
+En rond ¦ По кругу ¦ По колу
+Aucun (uni) ¦ Нет (однотонный) ¦ Немає (однотонне)
+Rayures fines ¦ Тонкие полоски ¦ Тонкі смужки
+Un arbre en filigrane ¦ Древо водяным знаком ¦ Дерево водяним знаком
+La photo floutée en fond ¦ Размытое фото на фоне ¦ Розмите фото на тлі
+🖼️ La photo ¦ 🖼️ Фото ¦ 🖼️ Фото
+En arc ¦ Аркой ¦ Аркою
+La place ¦ Расположение ¦ Розташування
+En haut, centrée ¦ Вверху, по центру ¦ Угорі, по центру
+La taille ¦ Размер ¦ Розмір
+L’alignement ¦ Выравнивание ¦ Вирівнювання
+L’étiquette ¦ Подпись ¦ Підпис
+Sa vie en deux phrases ¦ Жизнь в двух фразах ¦ Життя у двох реченнях
+Une phrase à moi ¦ Моя фраза ¦ Моє речення
+Une devise, un souvenir… ¦ Девиз, воспоминание… ¦ Девіз, спогад…
+🧩 En plus ¦ 🧩 Дополнительно ¦ 🧩 Додатково
+Le calendrier du mois ¦ Календарь месяца ¦ Календар місяця
+Laisser la place pour ¦ Оставить место для ¦ Залишити місце для
+les icônes du bureau (à gauche) ¦ значков рабочего стола (слева) ¦ значків робочого столу (ліворуч)
+l’heure du téléphone (en haut) ¦ часов телефона (вверху) ¦ годинника телефона (угорі)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ Каждый день другой предок — в первую очередь тот, у кого годовщина рождения или смерти. Твои настройки хранятся на этом компьютере. ¦ Щодня інший предок — насамперед той, у кого річниця народження або смерті. Твої налаштування зберігаються на цьому комп’ютері.
+Le fond d’écran (image PNG) ¦ Обои (изображение PNG) ¦ Шпалери (зображення PNG)
+Fond d’écran du jour ¦ Обои дня ¦ Шпалери дня
+Les passeports ¦ Паспорта ¦ Паспорти
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Внутренний или заграничный паспорт предка-путешественника, его приметы, фоторобот и импорт опубликованных выписок (Saint-Brieuc…). ¦ Внутрішній або закордонний паспорт предка-мандрівника, його прикмети, фоторобот та імпорт опублікованих виписок (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ Добавить паспорт ¦ ＋ Додати паспорт
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ Импорт выписки (XML, CSV)… ¦ ⤒ Імпорт виписки (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ Опубликованная выписка (например, на data.gouv.fr) ¦ Опублікована виписка (наприклад, на data.gouv.fr)
+{n} passeport rattaché ¦ Связанных паспортов: {n} ¦ Пов’язаних паспортів: {n}
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ «＋ Добавить паспорт» или импортируй опубликованную выписку. ¦ «＋ Додати паспорт» або імпортуй опубліковану виписку.
+Grand-parent raconte ¦ Рассказ бабушки или дедушки ¦ Розповідь бабусі чи дідуся
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ Надиктованный или вставленный рассказ: найденные рождения, браки, профессии и места жительства сравниваются с древом и добавляются в один клик. ¦ Надиктована або вставлена розповідь: знайдені народження, шлюби, професії та місця проживання порівнюються з деревом і додаються в один клік.
+Qui raconte ¦ Кто рассказывает ¦ Хто розповідає
+🎤 Dicter ¦ 🎤 Надиктовать ¦ 🎤 Надиктувати
+🔍 Repérer les faits ¦ 🔍 Найти факты ¦ 🔍 Знайти факти
+Le repérage des faits lit les récits écrits en français. ¦ Поиск фактов читает рассказы, написанные на французском. ¦ Пошук фактів читає розповіді, написані французькою.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ Рассказ (надиктованный, вставленный или переписанный с записи) ¦ Розповідь (надиктована, вставлена або переписана із запису)
+💾 Enregistrer le récit ¦ 💾 Сохранить рассказ ¦ 💾 Зберегти розповідь
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Хранится в блоке ✨ Сокровища карточки ¦ Зберігається в блоці ✨ Скарби картки
+Partager une branche (pour un temps) ¦ Поделиться ветвью (на время) ¦ Поділитися гілкою (на певний час)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ Файл для отправки двоюродному брату или сестре: ветвь без живых, защищённая паролем, действует до выбранной даты. ¦ Файл для надсилання двоюрідному братові чи сестрі: гілка без живих, захищена паролем, діє до вибраної дати.
+La branche de ¦ Ветвь: ¦ Гілка:
+Valable jusqu’au ¦ Действует до ¦ Діє до
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Пароль (файл зашифрован, без него его не прочитать) ¦ Пароль (файл зашифровано, без нього його не прочитати)
+à donner à part, par téléphone par exemple ¦ передай отдельно, например по телефону ¦ передай окремо, наприклад телефоном
+Montrer ou cacher le mot de passe ¦ Показать или скрыть пароль ¦ Показати або приховати пароль
+Quatre mots et un nombre, faciles à dicter ¦ Четыре слова и число, их легко продиктовать ¦ Чотири слова й число, їх легко продиктувати
+🎲 En proposer un ¦ 🎲 Предложить пароль ¦ 🎲 Запропонувати пароль
+Copier le mot de passe ¦ Копировать пароль ¦ Копіювати пароль
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Без пароля (не рекомендуется: любой, кто получит файл, сможет его прочитать, а срок действия уже ничего не защищает) ¦ Без пароля (не рекомендовано: будь-хто, хто отримає файл, зможе його прочитати, а термін дії вже нічого не захищає)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Один файл HTML, который открывается в любом браузере, без приложения: отправить по почте или положить в облако. Убраны вместе с фразами, где они упоминаются: живые или, вероятно, живые люди (то же правило, что и при экспорте GEDCOM «Для обмена»), конфиденциальные карточки. Номера карточек не передаются. ¦ Один файл HTML, що відкривається в будь-якому браузері, без застосунку: надіслати поштою або покласти в хмару. Прибрано разом із реченнями, де їх згадано: живих або, ймовірно, живих людей (те саме правило, що й під час експорту GEDCOM «Для обміну»), конфіденційні картки. Номери карток не передаються.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Что защищает этот файл, а что нет ¦ 🔐 Що захищає цей файл, а що ні
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ Шифрование AES-256-GCM, ключ получен из пароля (PBKDF2, раундов: {n}): без пароля содержимое (включая имена и заголовок) не прочитать. ¦ Шифрування AES-256-GCM, ключ отримано з пароля (PBKDF2, раундів: {n}): без пароля вміст (зокрема імена й заголовок) не прочитати.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ Файл ни к чему не подключается (ни один интернет-адрес не вызывается, и браузер это обеспечивает). ¦ Файл ні до чого не під’єднується (жодна інтернет-адреса не викликається, і браузер це забезпечує).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Срок действия проверяется при открытии, но тот, у кого есть пароль, может перевести часы своего компьютера назад и обойти его или переписать то, что видит: отданное не вернёшь. Делись только тем, что готов(а) видеть в чужих руках. ¦ Термін дії перевіряється під час відкриття, але той, хто має пароль, може перевести годинник свого комп’ютера назад і обійти його або переписати те, що бачить: відданого не повернеш. Ділися лише тим, що готовий(а) бачити в чужих руках.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Отправь пароль другим путём, не так, как файл (телефон, SMS): оба в одном письме ничего не защищают. ¦ Надішли пароль іншим шляхом, ніж файл (телефон, SMS): обидва в одному листі нічого не захищають.
+{n} personnes partagées ¦ Людей в файле: {n} ¦ Людей у файлі: {n}
+{n} retirées (vivantes ou récentes) ¦ Убрано: {n} (живые или недавние) ¦ Прибрано: {n} (живі або недавні)
+🔗 Fabriquer le fichier à partager ¦ 🔗 Создать файл для обмена ¦ 🔗 Створити файл для обміну
+Le passeport des lieux ¦ Паспорт мест ¦ Паспорт місць
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ Штамп для каждой деревни из древа: когда ты там побываешь, он окрашивается. Сколько ты уже посетил(а)? ¦ Штамп для кожного села з дерева: коли ти там побуваєш, він забарвлюється. Скільки ти вже відвідав(ла)?
+Le carnet des tampons, à imprimer ¦ Книжка штампов для печати ¦ Книжечка штампів для друку
+{n} / {total} lieux visités ¦ Посещено мест: {n} / {total} ¦ Відвідано місць: {n} / {total}
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ У каждого места древа свой штамп. Когда побываешь там — в деревне, церкви, мэрии, на кладбище, — нажми на него: «Я там был(а)». ¦ Кожне місце дерева має свій штамп. Коли побуваєш там — у селі, церкві, мерії, на кладовищі, — натисни на нього: «Я там був(ла)».
+{n} pers. ¦ {n} чел. ¦ {n} ос.
+Le tour du monde des ancêtres ¦ Кругосветка предков ¦ Навколосвітня подорож предків
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ Километры, пройденные от места к месту, самое долгое путешествие, дальше всех от родных мест — век за веком. ¦ Кілометри, пройдені від місця до місця, найдовша подорож, найдалі від рідних місць — століття за століттям.
+Tous ensemble ¦ Все вместе ¦ Усі разом
+{n} % du chemin vers la Lune ¦ {n} % пути до Луны ¦ {n} % шляху до Місяця
+Le plus long voyage ¦ Самое долгое путешествие ¦ Найдовша подорож
+Le plus loin du berceau ({place}) ¦ Дальше всех от родных мест ({place}) ¦ Найдалі від рідних місць ({place})
+Les grands voyageurs ¦ Великие путешественники ¦ Великі мандрівники
+Entre le berceau des parents et celui des enfants ¦ Между родиной родителей и родиной детей ¦ Між батьківщиною батьків і батьківщиною дітей
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Среднее расстояние, век за веком, между местом рождения родителя и местом рождения его ребёнка: семья, которая отдаляется от своей деревни. ¦ Середня відстань, століття за століттям, між місцем народження батька чи матері та місцем народження їхньої дитини: родина, що віддаляється від свого села.
+Les maisons dans le temps ¦ Дома во времени ¦ Будинки в часі
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ Одна деревня, один дом: кто там жил, с какого и по какое время, поколение за поколением. ¦ Одне село, один будинок: хто там жив, з якого й по який час, покоління за поколінням.
+{n} personnes sur {y} ans ¦ Людей: {n} · лет: {y} ¦ Людей: {n} · років: {y}
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: семья здесь лет: {y}, поколений предков: {n} ¦ {place}: родина тут років: {y}, поколінь предків: {n}
+1 sou ¦ 1 су ¦ 1 су
+{n} membre de la famille en vie ¦ Живых членов семьи: {n} ¦ Живих членів родини: {n}
+Pas d’autres nouvelles. ¦ Других новостей нет. ¦ Інших новин немає.
+Rien cette année. ¦ В этом году ничего. ¦ Цього року нічого.
+1 franc ¦ 1 франк ¦ 1 франк
+5 francs ¦ 5 франков ¦ 5 франків
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ Сегодня вечером рассказываем истории жизни из семьи {name} (жизней: {n}). ¦ Сьогодні ввечері розповідаємо історії життя з родини {name} (життів: {n}).
+⏳ Ce partage a expiré. ¦ ⏳ Срок действия этого файла истёк. ¦ ⏳ Термін дії цього файлу минув.
+Parents : ¦ Родители: ¦ Батьки:
+Enfants : ¦ Дети: ¦ Діти:
+Chercher un nom… ¦ Искать имя… ¦ Шукати ім’я…
+🔒 Ce partage est protégé. ¦ 🔒 Этот файл защищён. ¦ 🔒 Цей файл захищено.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Действует до {date}. Живые люди не включены. ¦ Діє до {date}. Живих людей не включено.
+l’arbre dit {what} ¦ в древе указано: {what} ¦ у дереві зазначено: {what}
+concorde avec l’arbre ({what}) ¦ совпадает с древом ({what}) ¦ збігається з деревом ({what})
+nouvelle lune ¦ новолуние ¦ молодик
+(sous l’horizon) ¦ (под горизонтом) ¦ (під обрієм)
+astre|Mars ¦ Марс ¦ Марс
+{list} brillaient ¦ Было видно: {list} ¦ Було видно: {list}
+dernier croissant ¦ последний серп ¦ останній серп
+lune gibbeuse décroissante ¦ убывающая луна ¦ спадний місяць
+Saturne ¦ Сатурн ¦ Сатурн
+dernier quartier ¦ последняя четверть ¦ остання чверть
+{km} km depuis l’étape d’avant ¦ {km} км от предыдущего этапа ¦ {km} км від попереднього етапу
+🕯️ Garder la mémoire ¦ 🕯️ Хранить память ¦ 🕯️ Зберігати пам’ять
+🔭 Découvrir ¦ 🔭 Открыть для себя ¦ 🔭 Відкрити для себе
+Trésor ¦ Сокровище ¦ Скарб
+Récits ¦ Рассказы ¦ Розповіді
+Chasses au trésor ¦ Охоты за сокровищами ¦ Полювання на скарб
+TRÉSORS ¦ СОКРОВИЩА ¦ СКАРБИ
+trésors ¦ сокровища ¦ скарби
+Garde au moins un trésor affiché. ¦ Оставь показанным хотя бы одно сокровище. ¦ Залиш показаним хоча б один скарб.
+Dossier vide ¦ Папка пуста ¦ Тека порожня
+Les trésors n’ont pas pu être lus. ¦ Не удалось прочитать сокровища. ¦ Не вдалося прочитати скарби.
+Broderie — {title} ¦ Вышивка — {title} ¦ Вишивка — {title}
+Aucun visage connu dans cette lignée ¦ В этой линии нет ни одного известного лица ¦ У цій лінії немає жодного відомого обличчя
+La Gazette {y} ¦ Газета {y} ¦ Газета {y}
+Fond d’écran ¦ Обои ¦ Шпалери
+Pégase ¦ Пегас ¦ Пегас
+Andromède ¦ Андромеда ¦ Андромеда
+Persée ¦ Персей ¦ Персей
+sous l’horizon ¦ под горизонтом ¦ під обрієм
+date exacte inconnue ¦ точная дата неизвестна ¦ точна дата невідома
+Les deux guerres ¦ Две войны ¦ Дві війни
+(aucun événement daté) ¦ (нет датированных событий) ¦ (немає датованих подій)
+Faire-part — {name} ¦ Извещение — {name} ¦ Оголошення — {name}
+Faire-part ¦ Извещение ¦ Оголошення
+L’arbre est vide ¦ Древо пусто ¦ Дерево порожнє
+{n} prénoms transmis par-dessus une génération ¦ Имён, переданных через поколение: {n} ¦ Імен, переданих через покоління: {n}
+{n} mots expliqués ¦ Объяснено слов: {n} ¦ Пояснено слів: {n}
+{n} mot expliqué ¦ Объяснено слов: {n} ¦ Пояснено слів: {n}
+Aucun vieux mot reconnu. ¦ Старых слов не найдено. ¦ Старих слів не знайдено.
+sous l’évier ¦ под раковиной ¦ під раковиною
+Les chasses préparées ¦ Подготовленные охоты ¦ Підготовлені полювання
+{n} cachettes ¦ Тайников: {n} ¦ Схованок: {n}
+Donne au moins deux cachettes. ¦ Укажи хотя бы два тайника. ¦ Вкажи хоча б дві схованки.
+Chasse au trésor ¦ Охота за сокровищами ¦ Полювання на скарб
+La chasse sera effacée. ¦ Охота будет удалена. ¦ Полювання буде видалено.
+Carte {n} ¦ Карточка {n} ¦ Картка {n}
+(à donner au départ) ¦ (выдать в начале) ¦ (видати на початку)
+{answer} → cherchez {where} ¦ {answer} → ищи {where} ¦ {answer} → шукай {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ Нужно несколько предков с датой, местом или профессией ¦ Потрібно кілька предків із датою, місцем або професією
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ Случайный таинственный предок ¦ 🕵️ Випадковий таємничий предок
+{n} parties ¦ Игр: {n} ¦ Ігор: {n}
+{n} partie ¦ Игр: {n} ¦ Ігор: {n}
+🎉 Bravo ! ¦ 🎉 Браво! ¦ 🎉 Браво!
+😶 C’était… ¦ 😶 Это был(а)… ¦ 😶 Це був(ла)…
+🎲 Un autre, au hasard ¦ 🎲 Другой, наугад ¦ 🎲 Інший, навмання
+{n} essais ratés ¦ Неудачных попыток: {n} ¦ Невдалих спроб: {n}
+Choisis quelqu’un. ¦ Выбери кого-нибудь. ¦ Вибери когось.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ Могла бы быть и другая жизнь… но именно эта привела к тебе. ¦ Могло б бути й інше життя… але саме це привело до тебе.
+📖 Recommencer ¦ 📖 Начать заново ¦ 📖 Почати знову
+Tourner la page → ¦ Перевернуть страницу → ¦ Перегорнути сторінку →
+Aucune coïncidence trouvée ¦ Совпадений не найдено ¦ Збігів не знайдено
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 Жизней, которых никогда бы не было: {n} ¦ 🦋 Життів, яких ніколи б не було: {n}
+la fenêtre d’impression n’est pas prête. ¦ окно печати не готово. ¦ вікно друку не готове.
+🃏 7 FAMILLES ¦ 🃏 7 СЕМЕЙ ¦ 🃏 7 РОДИН
+(visage repéré) ¦ (лицо найдено) ¦ (обличчя знайдено)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Добавь их с карточки (Медиафайлы), затем вернись сюда. ¦ Додай їх із картки (Медіафайли), потім повернися сюди.
+Jeu remis comme au départ. ¦ Игра возвращена как было. ¦ Гру повернуто як було.
+Donne au moins une équipe. ¦ Укажи хотя бы одну команду. ¦ Вкажи хоча б одну команду.
+Égalité ! ¦ Ничья! ¦ Нічия!
+{n} point ¦ Очков: {n} ¦ Очок: {n}
+Question {n} / {total} ¦ Вопрос {n} / {total} ¦ Запитання {n} / {total}
+Question suivante ▶ ¦ Следующий вопрос ▶ ¦ Наступне запитання ▶
+Vidéo prête. ¦ Видео готово. ¦ Відео готове.
+Donne-lui un titre. ¦ Дай ему название. ¦ Дай йому назву.
+SOUVENIR DES SENS ¦ ВОСПОМИНАНИЕ ЧУВСТВ ¦ СПОГАД ВІДЧУТТІВ
+Chaque samedi, elle cirait les marches… ¦ Каждую субботу она натирала ступеньки воском… ¦ Щосуботи вона натирала сходинки воском…
+La préparation ¦ Приготовление ¦ Приготування
+CHANSONS DE LA FAMILLE ¦ СЕМЕЙНЫЕ ПЕСНИ ¦ РОДИННІ ПІСНІ
+Les paroles ¦ Слова ¦ Слова
+Quand on la chantait ¦ Когда её пели ¦ Коли її співали
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ Расскажи мне про обычный день, когда тебе было десять. ¦ Розкажи мені про звичайний день, коли тобі було десять.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Что учили наизусть? ¦ Що вчили напам’ять?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Были ли истории, которые в семье рассказывали всегда? ¦ Чи були історії, які в родині розповідали завжди?
+Quel outil ou quel geste te reste dans les mains ? ¦ Какой инструмент или какое движение до сих пор помнят твои руки? ¦ Який інструмент чи який рух досі пам’ятають твої руки?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Как ты познакомился(ась) с мужем, женой, своей любовью? ¦ Як ти познайомився(лася) з чоловіком, дружиною, своїм коханням?
+Où avez-vous habité au début ? ¦ Где ты жил(а) в начале семейной жизни? ¦ Де ти жив(ла) на початку подружнього життя?
+Où étais-tu pendant la guerre ? ¦ Где ты был(а) во время войны? ¦ Де ти був(ла) під час війни?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Есть ли день, который ты никогда не забудешь? ¦ Чи є день, який ти ніколи не забудеш?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Как отапливались, как освещали дом? ¦ Як опалювали, як освітлювали дім?
+Comment fêtait-on Noël ? ¦ Как праздновали Рождество? ¦ Як святкували Різдво?
+S’ouvre ¦ Откроется ¦ Відкриється
+L’anniversaire de ¦ День рождения: ¦ День народження:
+À ses ¦ В возрасте ¦ У віці
+La lettre ¦ Письмо ¦ Лист
+Écris ici… ¦ Пиши здесь… ¦ Пиши тут…
+LETTRE AUX DESCENDANTS ¦ ПИСЬМО ПОТОМКАМ ¦ ЛИСТ НАЩАДКАМ
+✉️ La lettre ¦ ✉️ Письмо ¦ ✉️ Лист
+✉️ Nouvelle lettre ¦ ✉️ Новое письмо ¦ ✉️ Новий лист
+🔒 Sceller la lettre ¦ 🔒 Запечатать письмо ¦ 🔒 Запечатати лист
+Choisis une personne dont on connaît la naissance. ¦ Выбери человека с известной датой рождения. ¦ Вибери людину з відомою датою народження.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Напиши что-нибудь или приложи звук, видео или фото. ¦ Напиши щось або додай звук, відео чи фото.
+{n} scellées ¦ Запечатано: {n} ¦ Запечатано: {n}
+{n} ouvertes ¦ Открыто: {n} ¦ Відкрито: {n}
+De {from} ¦ От {from} ¦ Від {from}
+écrite ¦ написано ¦ написано
+Sommaire ¦ Оглавление ¦ Зміст
+ça rappelle {who} ¦ напоминает {who} ¦ нагадує {who}
+{n} recettes transmises ¦ Передано рецептов: {n} ¦ Передано рецептів: {n}
+{n} recette transmise ¦ Передано рецептов: {n} ¦ Передано рецептів: {n}
+Chantée par {who} ¦ Пел(а): {who} ¦ Співав(ла): {who}
+Sans enregistrement ¦ Без записи ¦ Без запису
+(le son reste dans les médias) ¦ (звук остаётся в медиафайлах) ¦ (звук лишається в медіафайлах)
+Entretien avec {name} ¦ Интервью: {name} ¦ Інтерв’ю: {name}
+Choisis au moins un thème. ¦ Выбери хотя бы одну тему. ¦ Вибери хоча б одну тему.
+Question suivante → ¦ Следующий вопрос → ¦ Наступне запитання →
+Passer ¦ Пропустить ¦ Пропустити
+🔊 Relire ¦ 🔊 Прочитать ещё раз ¦ 🔊 Прочитати ще раз
+J’enregistre l’entretien… ¦ Записываю интервью… ¦ Записую інтерв’ю…
+Entretien gardé (sans son). ¦ Интервью сохранено (без звука). ¦ Інтерв’ю збережено (без звуку).
+{n} bougies allumées ¦ Зажжено свечей: {n} ¦ Запалено свічок: {n}
+mélange ¦ смесь ¦ суміш
+UNE BOUGIE ¦ СВЕЧА ¦ СВІЧКА
+encore {n} j ¦ ещё {n} дн. ¦ ще {n} дн.
+demain ¦ завтра ¦ завтра
+allumée ¦ зажжена ¦ запалена
+par {name} ¦ — {name} ¦ — {name}
+Bougie supprimée ¦ Свеча удалена ¦ Свічку видалено
+Bougie supprimée. ¦ Свеча удалена. ¦ Свічку видалено.
+Ambiance arrêtée (minuterie). ¦ Атмосфера остановлена (таймер). ¦ Атмосферу зупинено (таймер).
+Monte au moins une couche. ¦ Подними хотя бы один слой. ¦ Підніми хоча б один шар.
+Garder ce mélange ¦ Сохранить эту смесь ¦ Зберегти цю суміш
+Mélange gardé. ¦ Смесь сохранена. ¦ Суміш збережено.
+« {name} » supprimé. ¦ «{name}» удалено. ¦ «{name}» видалено.
+Ce navigateur ne sait pas enregistrer. ¦ Этот браузер не умеет записывать. ¦ Цей браузер не вміє записувати.
+Ambiance — {name} ¦ Атмосфера — {name} ¦ Атмосфера — {name}
+à ¦ по ¦ по
+Tous les indices s’accordent (vers {y}). ¦ Все подсказки сходятся (около {y}). ¦ Усі підказки збігаються (близько {y}).
+Qui cela peut être ¦ Кто это может быть ¦ Хто це може бути
+Avait {n} ans vers {y} ¦ Около {y} года — возраст: {n} ¦ Близько {y} року — вік: {n}
+Reprendre la branche {name} ¦ Вернуться к ветви {name} ¦ Повернутися до гілки {name}
+RAPPEL DE RECHERCHE ¦ НАПОМИНАНИЕ ОБ ИССЛЕДОВАНИИ ¦ НАГАДУВАННЯ ПРО ДОСЛІДЖЕННЯ
+Pas touchée depuis {d} ¦ Без изменений: {d} ¦ Без змін: {d}
+modifiée ¦ изменено ¦ змінено
+Jamais modifiée ¦ Никогда не изменялось ¦ Ніколи не змінювалося
