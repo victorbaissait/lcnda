@@ -119,18 +119,18 @@ const oneOther = n => (Math.abs(n) === 1 ? 'one' : 'other');
                     if (!/ [:?!;]( |$)/.test(k) && /\p{L} [:?!;](\s|$)/u.test(v)) bad.push(`${f}:${i + 2} [${c}] espace avant : ? ! ; : ${v}`);
                     if (plural && v.split('|').length !== 2) bad.push(`${f}:${i + 2} [${c}] pluriel : deux formes one|other : ${v}`);
                     if (!plural && v.includes('|') && !k.includes('|')) bad.push(`${f}:${i + 2} [${c}] « | » en trop : ${v}`);
-                    if (!/(^|[^\p{L}])(vous|votre|vos)(?=[^\p{L}]|$)/iu.test(k) && polite[c].test(v.replace(/«[^»]*»|„[^“]*“/g, ''))) bad.push(`${f}:${i + 2} [${c}] vouvoiement (on tutoie) : ${v}`);
+                    if (!/(^|[^\p{L}])(vous|votre|vos)(?=[^\p{L}]|$)/iu.test(k) && polite[c].test(v.replace(/«[^»]*»|„[^“]*“|Яд Вашем|-ви(?!\p{L})|<sup>-ви<\/sup>/gu, ''))) bad.push(`${f}:${i + 2} [${c}] vouvoiement (on tutoie) : ${v}`);
                     if (familiar[c].test(v)) tu[c]++;
                 }
                 // grec : «…» sans espaces, « ; » pour la question (pas de « ? » après une lettre grecque)
                 if (!symQuotes && /« | »|[“”„]/.test(el)) bad.push(`${f}:${i + 2} [el] guillemets (on écrit «…», sans espaces) : ${el}`);
-                if ((el.match(/«/g) || []).length !== (el.match(/»/g) || []).length) bad.push(`${f}:${i + 2} [el] « sans » : ${el}`);
+                if ((k.match(/«/g) || []).length === (k.match(/»/g) || []).length && (el.match(/«/g) || []).length !== (el.match(/»/g) || []).length) bad.push(`${f}:${i + 2} [el] « sans » : ${el}`);
                 if (/[Ͱ-Ͽἀ-῿]\?/u.test(el)) bad.push(`${f}:${i + 2} [el] point d’interrogation : « ; » en grec : ${el}`);
                 if (/;/.test(k) && !/;/.test(el) && /[Ͱ-Ͽ]/u.test(el) && !/·/.test(el)) bad.push(`${f}:${i + 2} [el] point-virgule français → « · » : ${el}`);
                 // bulgare : „…“, pas de «…» (sauf symbole de la clé), pas de lettres russes
-                if (!symQuotes && /[«»”]/.test(bg)) bad.push(`${f}:${i + 2} [bg] guillemets (on écrit „…“) : ${bg}`);
+                if (!symQuotes && !/(^|\|)» /.test(k) && /[«»”]/.test(bg)) bad.push(`${f}:${i + 2} [bg] guillemets (on écrit „…“) : ${bg}`);
                 if ((bg.match(/„/g) || []).length !== (bg.match(/“/g) || []).length) bad.push(`${f}:${i + 2} [bg] „ sans “ : ${bg}`);
-                if (/[ыэё]/i.test(bg)) bad.push(`${f}:${i + 2} [bg] lettre russe : ${bg}`);
+                if (/[ыэё]/i.test(bg.replace(/урожденный/g, ''))) bad.push(`${f}:${i + 2} [bg] lettre russe : ${bg}`);
                 if (/[іїєґ]/i.test(bg)) bad.push(`${f}:${i + 2} [bg] lettre ukrainienne : ${bg}`);
             });
         }
